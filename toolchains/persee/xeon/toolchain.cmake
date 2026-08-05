@@ -5,7 +5,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../../common_toolchains/importable_defaults.cm
 set(CMAKE_BUILD_TYPE Release)
 
 # Compiler options
-set(CMAKE_CXX_FLAGS_INIT "-Wall -Wno-sign-compare -Wno-unused-but-set-variable")
+set(CMAKE_CXX_FLAGS_INIT "-Wall -Wno-sign-compare -Wno-unused-but-set-variable -ffast-math")
 
 # Activate/deactivate parts of the code
 set(GYSELALIBXX_ACTIVATE_RESTART_TESTS OFF)
