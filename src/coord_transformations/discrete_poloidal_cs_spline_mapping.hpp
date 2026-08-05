@@ -68,13 +68,13 @@ public:
     using R_cov = typename R::Dual;
     /// @brief The covariant form of the second logical coordinate.
     using Theta_cov = typename Theta::Dual;
-    /// @brief The index range where the spline evaluator can be called.
-    using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
 
 private:
     using spline_idx_range = IdxRange<BSplineR, BSplineTheta>;
 
     using SplineType = DConstField<spline_idx_range, MemorySpace>;
+
+    using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 
