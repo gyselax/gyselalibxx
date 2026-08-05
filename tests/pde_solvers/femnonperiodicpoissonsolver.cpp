@@ -44,8 +44,7 @@ using SplineXInterpolator = SplineInterpolator<
         BSplinesX,
         GridX,
         ExtrapolationRule::Null_Null,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::GREVILLE>;
+        SplineBoundaryClosure::Greville_Greville>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 

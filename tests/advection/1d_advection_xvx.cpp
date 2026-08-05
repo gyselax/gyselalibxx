@@ -105,8 +105,7 @@ using SplineInterpolatorX = SplineInterpolator<
         BSplinesX,
         GridX,
         ExtrapolationRule::Periodic,
-        SplineXClosure,
-        SplineXClosure>;
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 
 class XVxAdvection1DTest : public ::testing::Test
