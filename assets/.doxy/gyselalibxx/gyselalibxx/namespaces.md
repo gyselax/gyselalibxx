@@ -10,6 +10,7 @@ Here is a list of all namespaces with brief descriptions:
 * **namespace** [**GrevillePointsTheta**](namespaceGrevillePointsTheta.md) 
 * **namespace** [**Kokkos**](namespaceKokkos.md)     
 * **namespace** [**PolarSplines**](namespacePolarSplines.md)     
+* **namespace** [**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md) _Predefined_ [_**SplineBoundaryClosures**_](structSplineBoundaryClosures.md) _for the common case where the same closure applies at both boundaries._    
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d102.md) 
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d235.md) 
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d237.md) 

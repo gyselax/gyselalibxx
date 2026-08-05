@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File spline_interpolation.hpp - GyselalibX</title>
+    <title>Namespace SplineBoundaryClosure - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File spline_interpolation.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/spline__interpolation_8hpp_source.md";
+        var mkdocs_page_name = "Namespace SplineBoundaryClosure";
+        var mkdocs_page_input_path = "gyselalibxx/namespaceSplineBoundaryClosure.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File spline_interpolation.hpp</li>
+      <li class="breadcrumb-item active">Namespace SplineBoundaryClosure</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/spline__interpolation_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespaceSplineBoundaryClosure.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,202 +566,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-spline_interpolationhpp">File spline_interpolation.hpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_264890e5c091f8c8d7fe1f842870c25e.html"><strong>interpolation</strong></a> <strong>&gt;</strong> <a href="spline__interpolation_8hpp.html"><strong>spline_interpolation.hpp</strong></a></p>
-<p><a href="spline__interpolation_8hpp.html">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">// SPDX-License-Identifier: MIT
-#pragma once
-#include &lt;utility&gt;
+                <div><h1 id="namespace-splineboundaryclosure">Namespace SplineBoundaryClosure</h1>
+<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespaceSplineBoundaryClosure.html"><strong>SplineBoundaryClosure</strong></a></p>
+<p><em>Predefined</em> <a href="structSplineBoundaryClosures.html"><em><strong>SplineBoundaryClosures</strong></em></a> <em>for the common case where the same closure applies at both boundaries.</em></p>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a>&lt; ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE &gt;</td>
+<td style="text-align: left;"><a href="#typedef-greville_greville"><strong>Greville_Greville</strong></a>  <br><em>Convenience pairing of ddc::SplineBuilderClosure::GREVILLE for both boundaries.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a>&lt; ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE &gt;</td>
+<td style="text-align: left;"><a href="#typedef-hermite_hermite"><strong>Hermite_Hermite</strong></a>  <br><em>Convenience pairing of ddc::SplineBuilderClosure::HERMITE for both boundaries.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a>&lt; ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE, ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE &gt;</td>
+<td style="text-align: left;"><a href="#typedef-homogeneoushermite_homogeneoushermite"><strong>HomogeneousHermite_HomogeneousHermite</strong></a>  <br><em>Convenience pairing of ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE for both boundaries.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a>&lt; ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC &gt;</td>
+<td style="text-align: left;"><a href="#typedef-periodic"><strong>Periodic</strong></a>  <br><em>Convenience pairing of ddc::SplineBuilderClosure::PERIODIC for both boundaries.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-greville_greville">typedef Greville_Greville</h3>
+<p><em>Convenience pairing of ddc::SplineBuilderClosure::GREVILLE for both boundaries.</em> </p>
+<pre><code class="language-C++">using SplineBoundaryClosure::Greville_Greville = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE&gt;;
+</code></pre>
+<hr>
 
-#include &lt;ddc/kernels/splines.hpp&gt;
+<h3 id="typedef-hermite_hermite">typedef Hermite_Hermite</h3>
+<p><em>Convenience pairing of ddc::SplineBuilderClosure::HERMITE for both boundaries.</em> </p>
+<pre><code class="language-C++">using SplineBoundaryClosure::Hermite_Hermite = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE&gt;;
+</code></pre>
+<hr>
 
-#include "ddc_aliases.hpp"
-#include "extrapolation_rule_choice.hpp"
+<h3 id="typedef-homogeneoushermite_homogeneoushermite">typedef HomogeneousHermite_HomogeneousHermite</h3>
+<p><em>Convenience pairing of ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE for both boundaries.</em> </p>
+<pre><code class="language-C++">using SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE, ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE&gt;;
+</code></pre>
+<hr>
 
-template &lt;ddc::SplineBuilderClosure MinClosure, ddc::SplineBuilderClosure MaxClosure&gt;
-struct SplineBoundaryClosures
-{
-    using min = std::integral_constant&lt;ddc::SplineBuilderClosure, MinClosure&gt;;
-    using max = std::integral_constant&lt;ddc::SplineBuilderClosure, MaxClosure&gt;;
-};
+<h3 id="typedef-periodic">typedef Periodic</h3>
+<p><em>Convenience pairing of ddc::SplineBuilderClosure::PERIODIC for both boundaries.</em> </p>
+<pre><code class="language-C++">using SplineBoundaryClosure::Periodic = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC&gt;;
+</code></pre>
+<hr>
 
-namespace SplineBoundaryClosure {
-
-using Periodic = SplineBoundaryClosures&lt;
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::PERIODIC&gt;;
-
-using Greville_Greville = SplineBoundaryClosures&lt;
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::GREVILLE&gt;;
-
-using Hermite_Hermite = SplineBoundaryClosures&lt;
-        ddc::SplineBuilderClosure::HERMITE,
-        ddc::SplineBuilderClosure::HERMITE&gt;;
-
-using HomogeneousHermite_HomogeneousHermite = SplineBoundaryClosures&lt;
-        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
-        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE&gt;;
-
-} // namespace SplineBoundaryClosure
-
-namespace detail {
-
-template &lt;
-        class ExecSpace,
-        class Basis,
-        class InterpGrid,
-        class ExtrapRules,
-        class BoundaryClosures,
-        ddc::SplineSolver Solver&gt;
-class SplineInterpolator
-{
-private:
-    using continuous_dimension_type = typename InterpGrid::continuous_dimension_type;
-
-    using MinExtrapolationRule = ddc::type_seq_element_t&lt;0, ExtrapRules&gt;;
-    using MaxExtrapolationRule = ddc::type_seq_element_t&lt;1, ExtrapRules&gt;;
-
-    static constexpr ddc::SplineBuilderClosure MinBound = BoundaryClosures::min::value;
-    static constexpr ddc::SplineBuilderClosure MaxBound = BoundaryClosures::max::value;
-
-    static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
-
-    static_assert(is_periodic == (MinBound == ddc::SplineBuilderClosure::PERIODIC));
-    static_assert(is_periodic == (MaxBound == ddc::SplineBuilderClosure::PERIODIC));
-    static_assert(
-            is_periodic
-            == std::is_same_v&lt;
-                    MinExtrapolationRule,
-                    ddc::PeriodicExtrapolationRule&lt;continuous_dimension_type&gt;&gt;);
-    static_assert(
-            is_periodic
-            == std::is_same_v&lt;
-                    MaxExtrapolationRule,
-                    ddc::PeriodicExtrapolationRule&lt;continuous_dimension_type&gt;&gt;);
-
-    static_assert(is_spline_basis_v&lt;Basis&gt;);
-
-public:
-    using BuilderType = ddc::SplineBuilder&lt;
-            ExecSpace,
-            typename ExecSpace::memory_space,
-            Basis,
-            InterpGrid,
-            MinBound,
-            MaxBound,
-            Solver&gt;;
-
-    using EvaluatorType = ddc::SplineEvaluator&lt;
-            ExecSpace,
-            typename ExecSpace::memory_space,
-            Basis,
-            InterpGrid,
-            MinExtrapolationRule,
-            MaxExtrapolationRule&gt;;
-
-    static constexpr std::size_t rank()
-    {
-        return 1;
-    }
-
-private:
-    MinExtrapolationRule m_min_extrapolation;
-    MaxExtrapolationRule m_max_extrapolation;
-    BuilderType m_builder;
-    EvaluatorType m_evaluator;
-
-public:
-    explicit SplineInterpolator(std::string const&amp; label, IdxRange&lt;InterpGrid&gt; idx_range) requires(
-            is_extrapolation_rule_auto_constructible_v&lt;
-                    MinExtrapolationRule,
-                    InterpGrid,
-                    double,
-                    Basis&gt;&amp;&amp;
-                    is_extrapolation_rule_auto_constructible_v&lt;
-                            MaxExtrapolationRule,
-                            InterpGrid,
-                            double,
-                            Basis&gt;)
-        : m_min_extrapolation(get_extrapolation&lt;MinExtrapolationRule, InterpGrid, double, Basis&gt;(
-                Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation&lt;MaxExtrapolationRule, InterpGrid, double, Basis&gt;(
-                  Extremity::BACK))
-        , m_builder(label, idx_range)
-        , m_evaluator(m_min_extrapolation, m_max_extrapolation)
-    {
-    }
-    explicit SplineInterpolator(IdxRange&lt;InterpGrid&gt; idx_range) requires(
-            is_extrapolation_rule_auto_constructible_v&lt;
-                    MinExtrapolationRule,
-                    InterpGrid,
-                    double,
-                    Basis&gt;&amp;&amp;
-                    is_extrapolation_rule_auto_constructible_v&lt;
-                            MaxExtrapolationRule,
-                            InterpGrid,
-                            double,
-                            Basis&gt;)
-        : m_min_extrapolation(get_extrapolation&lt;MinExtrapolationRule, InterpGrid, double, Basis&gt;(
-                Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation&lt;MaxExtrapolationRule, InterpGrid, double, Basis&gt;(
-                  Extremity::BACK))
-        , m_builder(idx_range)
-        , m_evaluator(m_min_extrapolation, m_max_extrapolation)
-    {
-    }
-
-    explicit SplineInterpolator(
-            std::string const&amp; label,
-            IdxRange&lt;InterpGrid&gt; idx_range,
-            MinExtrapolationRule min_extrapolation_rule,
-            MaxExtrapolationRule max_extrapolation_rule)
-        : m_min_extrapolation(std::move(min_extrapolation_rule))
-        , m_max_extrapolation(std::move(max_extrapolation_rule))
-        , m_builder(label, idx_range)
-        , m_evaluator(m_min_extrapolation, m_max_extrapolation)
-    {
-    }
-
-    explicit SplineInterpolator(
-            IdxRange&lt;InterpGrid&gt; idx_range,
-            MinExtrapolationRule min_extrapolation_rule,
-            MaxExtrapolationRule max_extrapolation_rule)
-        : m_min_extrapolation(std::move(min_extrapolation_rule))
-        , m_max_extrapolation(std::move(max_extrapolation_rule))
-        , m_builder(idx_range)
-        , m_evaluator(m_min_extrapolation, m_max_extrapolation)
-    {
-    }
-
-    BuilderType const&amp; get_builder() const
-    {
-        return m_builder;
-    }
-
-    EvaluatorType const&amp; get_evaluator() const
-    {
-        return m_evaluator;
-    }
-};
-
-} // namespace detail
-
-template &lt;
-        class ExecSpace,
-        class Basis,
-        class InterpGrid,
-        class ExtrapRules,
-        class BoundaryClosures,
-        ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK&gt;
-using SplineInterpolator = detail::SplineInterpolator&lt;
-        ExecSpace,
-        Basis,
-        InterpGrid,
-        extrapolation_rule_t&lt;ExtrapRules, InterpGrid, double, Basis&gt;,
-        BoundaryClosures,
-        Solver&gt;;
-</code></pre></div>
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</code></p></div>
               
             </div>
           </div><footer>

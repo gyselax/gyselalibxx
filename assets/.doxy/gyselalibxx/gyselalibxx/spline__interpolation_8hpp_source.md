@@ -17,6 +17,33 @@
 #include "ddc_aliases.hpp"
 #include "extrapolation_rule_choice.hpp"
 
+template <ddc::SplineBuilderClosure MinClosure, ddc::SplineBuilderClosure MaxClosure>
+struct SplineBoundaryClosures
+{
+    using min = std::integral_constant<ddc::SplineBuilderClosure, MinClosure>;
+    using max = std::integral_constant<ddc::SplineBuilderClosure, MaxClosure>;
+};
+
+namespace SplineBoundaryClosure {
+
+using Periodic = SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
+
+using Greville_Greville = SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
+
+using Hermite_Hermite = SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
+
+using HomogeneousHermite_HomogeneousHermite = SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE>;
+
+} // namespace SplineBoundaryClosure
+
 namespace detail {
 
 template <
@@ -24,8 +51,7 @@ template <
         class Basis,
         class InterpGrid,
         class ExtrapRules,
-        ddc::SplineBuilderClosure MinBound,
-        ddc::SplineBuilderClosure MaxBound,
+        class BoundaryClosures,
         ddc::SplineSolver Solver>
 class SplineInterpolator
 {
@@ -34,6 +60,9 @@ private:
 
     using MinExtrapolationRule = ddc::type_seq_element_t<0, ExtrapRules>;
     using MaxExtrapolationRule = ddc::type_seq_element_t<1, ExtrapRules>;
+
+    static constexpr ddc::SplineBuilderClosure MinBound = BoundaryClosures::min::value;
+    static constexpr ddc::SplineBuilderClosure MaxBound = BoundaryClosures::max::value;
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
@@ -162,16 +191,14 @@ template <
         class Basis,
         class InterpGrid,
         class ExtrapRules,
-        ddc::SplineBuilderClosure MinBound,
-        ddc::SplineBuilderClosure MaxBound,
+        class BoundaryClosures,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
 using SplineInterpolator = detail::SplineInterpolator<
         ExecSpace,
         Basis,
         InterpGrid,
         extrapolation_rule_t<ExtrapRules, InterpGrid, double, Basis>,
-        MinBound,
-        MaxBound,
+        BoundaryClosures,
         Solver>;
 ```
 

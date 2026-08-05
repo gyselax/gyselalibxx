@@ -3207,6 +3207,10 @@
     <member refid="classSpline2DPartialDerivativeCreator_1a4cf1a01fbdb18473fa8deb8f4d8029b1" kind="function"><name>Spline2DPartialDerivativeCreator</name></member>
     <member refid="classSpline2DPartialDerivativeCreator_1a16759105e84f15b31e3b9c74e89aefd8" kind="function"><name>create_instance</name></member>
   </compound>
+  <compound refid="structSplineBoundaryClosures" kind="struct"><name>SplineBoundaryClosures</name>
+    <member refid="structSplineBoundaryClosures_1a427420fbd7d71f563654eee1a5068e65" kind="typedef"><name>min</name></member>
+    <member refid="structSplineBoundaryClosures_1a5e2d34050566c057ab02fd2829389902" kind="typedef"><name>max</name></member>
+  </compound>
   <compound refid="classSplineBuilder2DCache" kind="class"><name>SplineBuilder2DCache</name>
     <member refid="classSplineBuilder2DCache_1aabe08bb29c81409fd29bc143ba6708d3" kind="typedef"><name>Dim1</name></member>
     <member refid="classSplineBuilder2DCache_1a075df92d676e3e0aa82904d9b139aa08" kind="typedef"><name>Dim2</name></member>
@@ -3705,6 +3709,12 @@
   </compound>
   <compound refid="namespacePolarSplines" kind="namespace"><name>PolarSplines</name>
     <member refid="polar__bsplines_8hpp_1a3ba12098f03119f39af5886324f72c94" kind="function"><name>integrals</name></member>
+  </compound>
+  <compound refid="namespaceSplineBoundaryClosure" kind="namespace"><name>SplineBoundaryClosure</name>
+    <member refid="namespaceSplineBoundaryClosure_1a1967a7e5340b57d5c529b428761b6611" kind="typedef"><name>Periodic</name></member>
+    <member refid="namespaceSplineBoundaryClosure_1a14035a231e1e52d0d9b93994004a1df3" kind="typedef"><name>Greville_Greville</name></member>
+    <member refid="namespaceSplineBoundaryClosure_1a5a301ac5ad662b23e4dde2e0f65006d8" kind="typedef"><name>Hermite_Hermite</name></member>
+    <member refid="namespaceSplineBoundaryClosure_1adf25d9efa737ba2cb8fee34460c127ef" kind="typedef"><name>HomogeneousHermite_HomogeneousHermite</name></member>
   </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
   </compound>
@@ -4446,7 +4456,7 @@
   <compound refid="polar__spline__evaluator_8hpp" kind="file"><name>polar_spline_evaluator.hpp</name>
   </compound>
   <compound refid="spline__interpolation_8hpp" kind="file"><name>spline_interpolation.hpp</name>
-    <member refid="spline__interpolation_8hpp_1a6acc1c6a28407acb3ba7e58e8ae85618" kind="typedef"><name>SplineInterpolator</name></member>
+    <member refid="spline__interpolation_8hpp_1a68fa9854a9486261d921dab41a5b5e1b" kind="typedef"><name>SplineInterpolator</name></member>
   </compound>
   <compound refid="input_8cpp" kind="file"><name>input.cpp</name>
     <member refid="input_8cpp_1a786e15d5483370d99f7bef2ce8321b58" kind="function"><name>parse_executable_arguments</name></member>

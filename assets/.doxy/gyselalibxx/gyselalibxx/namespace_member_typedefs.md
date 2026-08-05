@@ -21,9 +21,16 @@
 
 ## g
 
+* **Greville\_Greville** ([**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
 * **get\_nth\_tensor\_index\_element\_from\_map\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 * **get\_nth\_tensor\_index\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 * **get\_type\_seq\_vector\_index\_set\_t** ([**tensor\_tools**](namespacetensor__tools.md))
+
+
+## h
+
+* **Hermite\_Hermite** ([**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
+* **HomogeneousHermite\_HomogeneousHermite** ([**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
 
 
 ## i
@@ -39,7 +46,7 @@
 
 ## p
 
-* **Periodic** ([**ExtrapolationRule**](namespaceExtrapolationRule.md))
+* **Periodic** ([**ExtrapolationRule**](namespaceExtrapolationRule.md), [**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
 
 
 ## r

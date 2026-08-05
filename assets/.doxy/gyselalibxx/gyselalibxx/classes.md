@@ -478,6 +478,7 @@
 * [**Spline1DPartialDerivativeCreator**](classSpline1DPartialDerivativeCreator.md)
 * [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md)
 * [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md)
+* [**SplineBoundaryClosures**](structSplineBoundaryClosures.md)
 * [**SplineBuilder2DCache**](classSplineBuilder2DCache.md)
 * [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md)
 * [**SplinePolarFootFinder**](classSplinePolarFootFinder.md)

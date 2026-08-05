@@ -1066,6 +1066,8 @@
 * **masses** ([**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md))
 * **m\_spline\_coefs** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md))
 * **m\_builder\_cache** ([**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md), [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md))
+* **max** ([**SplineBoundaryClosures**](structSplineBoundaryClosures.md))
+* **min** ([**SplineBoundaryClosures**](structSplineBoundaryClosures.md))
 * **m\_compute\_coeffs\_dim1** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **m\_compute\_coeffs\_dim2** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **m\_spline\_coeffs** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))

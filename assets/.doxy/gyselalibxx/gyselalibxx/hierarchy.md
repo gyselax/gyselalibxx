@@ -229,6 +229,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**R\_cov**](structR__cov.md) _Define non periodic real covariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::Build\_BuilderType**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType.md) 
 * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a.md) 
+* **struct** [**SplineBoundaryClosures**](structSplineBoundaryClosures.md) _Groups the lower (min) and upper (max) ddc::SplineBuilderClosure of a spline builder into a single non-type template argument._ 
 * **struct** [**Theta**](structTheta.md) _Define periodic real contravariant_ [_**Theta**_](structTheta.md) _dimension._
 * **struct** [**Theta\_cov**](structTheta__cov.md) _Define periodic real covariant_ [_**Theta**_](structTheta.md) _dimension._
 * **struct** [**Vpar**](structVpar.md) _Define non periodic parallel velocity_ \(v_\parallel\) _._

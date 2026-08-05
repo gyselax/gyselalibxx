@@ -243,6 +243,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**Spline1DPartialDerivativeCreator**](classSpline1DPartialDerivativeCreator.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**Spline1DPartialDerivative**_](classSpline1DPartialDerivative.md) _class._    
 * **class** [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md) _A class which implements a partial derivative operator using a 2d spline interpolation._     
 * **class** [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _class._    
+* **namespace** [**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md) _Predefined_ [_**SplineBoundaryClosures**_](structSplineBoundaryClosures.md) _for the common case where the same closure applies at both boundaries._    
+* **struct** [**SplineBoundaryClosures**](structSplineBoundaryClosures.md) _Groups the lower (min) and upper (max) ddc::SplineBuilderClosure of a spline builder into a single non-type template argument._     
 * **class** [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) _A class that stores spline builder coefficients and recomputes them when required._     
 * **class** [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md) _[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md) _._    
 * **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._    

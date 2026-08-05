@@ -27,15 +27,25 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md) <br>_Predefined_ [_**SplineBoundaryClosures**_](structSplineBoundaryClosures.md) _for the common case where the same closure applies at both boundaries._ |
 
 
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| struct | [**SplineBoundaryClosures**](structSplineBoundaryClosures.md) &lt;MinClosure, MaxClosure&gt;<br>_Groups the lower (min) and upper (max) ddc::SplineBuilderClosure of a spline builder into a single non-type template argument._  |
 
 
 ## Public Types
 
 | Type | Name |
 | ---: | :--- |
-| typedef detail::SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, extrapolation\_rule\_t&lt; ExtrapRules, InterpGrid, double, Basis &gt;, MinBound, MaxBound, Solver &gt; | [**SplineInterpolator**](#typedef-splineinterpolator)  <br>_A helper alias to define an instance of detail::SplineInterpolator._  |
+| typedef detail::SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, extrapolation\_rule\_t&lt; ExtrapRules, InterpGrid, double, Basis &gt;, BoundaryClosures, Solver &gt; | [**SplineInterpolator**](#typedef-splineinterpolator)  <br>_A helper alias to define an instance of detail::SplineInterpolator._  |
 
 
 
@@ -93,7 +103,7 @@
 
 _A helper alias to define an instance of detail::SplineInterpolator._ 
 ```C++
-using SplineInterpolator =  detail::SplineInterpolator< ExecSpace, Basis, InterpGrid, extrapolation_rule_t<ExtrapRules, InterpGrid, double, Basis>, MinBound, MaxBound, Solver>;
+using SplineInterpolator =  detail::SplineInterpolator< ExecSpace, Basis, InterpGrid, extrapolation_rule_t<ExtrapRules, InterpGrid, double, Basis>, BoundaryClosures, Solver>;
 ```
 
 
