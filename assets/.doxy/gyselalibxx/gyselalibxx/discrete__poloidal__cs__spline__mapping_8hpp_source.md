@@ -49,13 +49,12 @@ public:
     using Y_cov = typename Y::Dual;
     using R_cov = typename R::Dual;
     using Theta_cov = typename Theta::Dual;
+    using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
 
 private:
     using spline_idx_range = IdxRange<BSplineR, BSplineTheta>;
 
     using SplineType = DConstField<spline_idx_range, MemorySpace>;
-
-    using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 

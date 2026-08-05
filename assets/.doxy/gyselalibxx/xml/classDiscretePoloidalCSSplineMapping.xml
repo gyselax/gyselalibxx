@@ -222,6 +222,21 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="70" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" prot="public" static="no">
+        <type>typename SplineEvaluator::evaluation_domain_type</type>
+        <definition>using DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::IdxRangeRTheta =  typename SplineEvaluator::evaluation_domain_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeRTheta</name>
+        <qualifiedname>DiscretePoloidalCSSplineMapping::IdxRangeRTheta</qualifiedname>
+        <briefdescription>
+<para>The index range where the spline evaluator can be called. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
       <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMapping_1abaea940e655bad1b86651aa5083f3cea" prot="private" static="no">
@@ -236,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="73" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMapping_1a9116804b0bfe02655238b3a9d9f895d7" prot="private" static="no">
         <type>DConstField&lt; spline_idx_range, MemorySpace &gt;</type>
@@ -244,20 +259,6 @@
         <argsstring></argsstring>
         <name>SplineType</name>
         <qualifiedname>DiscretePoloidalCSSplineMapping::SplineType</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="75" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" prot="private" static="no">
-        <type>typename SplineEvaluator::evaluation_domain_type</type>
-        <definition>using DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::IdxRangeRTheta =  typename SplineEvaluator::evaluation_domain_type</definition>
-        <argsstring></argsstring>
-        <name>IdxRangeRTheta</name>
-        <qualifiedname>DiscretePoloidalCSSplineMapping::IdxRangeRTheta</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -367,7 +368,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="87" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDiscretePoloidalCSSplineMapping_1a5a0a49fb871f8ba56329df16fb787140" prot="private" static="no" mutable="no">
-        <type>IdxRangeRTheta</type>
+        <type><ref refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" kindref="member">IdxRangeRTheta</ref></type>
         <definition>IdxRangeRTheta DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::m_idx_range_singular_point</definition>
         <argsstring></argsstring>
         <name>m_idx_range_singular_point</name>
@@ -415,7 +416,7 @@
           <declname>evaluator</declname>
         </param>
         <param>
-          <type>IdxRangeRTheta</type>
+          <type><ref refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" kindref="member">IdxRangeRTheta</ref></type>
           <declname>idx_range_singular_point</declname>
         </param>
         <briefdescription>
@@ -715,7 +716,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="335" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="335" bodyend="358"/>
       </memberdef>
       <memberdef kind="function" id="classDiscretePoloidalCSSplineMapping_1ab41d8cdd5e5597472e8c174c0a5862a3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION IdxRangeRTheta</type>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" kindref="member">IdxRangeRTheta</ref></type>
         <definition>KOKKOS_INLINE_FUNCTION IdxRangeRTheta DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::idx_range_singular_point</definition>
         <argsstring>() const</argsstring>
         <name>idx_range_singular_point</name>
@@ -853,7 +854,7 @@
       <member refid="classDiscretePoloidalCSSplineMapping_1ab9372c7b0bb0606ed79dc546984a99ae" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMapping</scope><name>DiscretePoloidalCSSplineMapping</name></member>
       <member refid="classDiscretePoloidalCSSplineMapping_1ad985df5230d0f8a29e00a6d80b56b778" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMapping</scope><name>first_order_jacobian_matrix_r_rtheta</name></member>
       <member refid="classDiscretePoloidalCSSplineMapping_1ab41d8cdd5e5597472e8c174c0a5862a3" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMapping</scope><name>idx_range_singular_point</name></member>
-      <member refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMapping</scope><name>IdxRangeRTheta</name></member>
+      <member refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMapping</scope><name>IdxRangeRTheta</name></member>
       <member refid="classDiscretePoloidalCSSplineMapping_1a2a518c42048ffe20e817aff69b8b1d29" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMapping</scope><name>IdxRangeTheta</name></member>
       <member refid="classDiscretePoloidalCSSplineMapping_1a9c5f3b04be494502180b773855af559e" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMapping</scope><name>IdxRTheta</name></member>
       <member refid="classDiscretePoloidalCSSplineMapping_1a775c9004ab1df0e67996782614d8465d" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMapping</scope><name>IdxStepRTheta</name></member>

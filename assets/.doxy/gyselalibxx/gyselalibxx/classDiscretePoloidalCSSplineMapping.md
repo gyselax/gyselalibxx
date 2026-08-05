@@ -39,6 +39,7 @@ _A class for describing discrete 2D mappings from the logical domain to the phys
 | typedef Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
 | typedef [**CoordArg**](classDiscretePoloidalCSSplineMapping.md#typedef-coordarg) | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
+| typedef typename SplineEvaluator::evaluation\_domain\_type | [**IdxRangeRTheta**](#typedef-idxrangertheta)  <br>_The index range where the spline evaluator can be called._  |
 | typedef typename [**R::Dual**](structR.md#typedef-dual) | [**R\_cov**](#typedef-r_cov)  <br>_The covariant form of the first logical coordinate._  |
 | typedef typename [**Theta::Dual**](structTheta.md#typedef-dual) | [**Theta\_cov**](#typedef-theta_cov)  <br>_The covariant form of the second logical coordinate._  |
 | typedef typename [**X::Dual**](structX.md#typedef-dual-13) | [**X\_cov**](#typedef-x_cov)  <br>_The covariant form of the first physical coordinate._  |
@@ -71,11 +72,11 @@ _A class for describing discrete 2D mappings from the logical domain to the phys
 
 | Type | Name |
 | ---: | :--- |
-|   | [**DiscretePoloidalCSSplineMapping**](#function-discretepoloidalcssplinemapping) (SplineType curvilinear\_to\_x, SplineType curvilinear\_to\_y, SplineEvaluator const & evaluator, IdxRangeRTheta idx\_range\_singular\_point) <br>_Instantiate a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _from the coefficients of 2D splines approximating the mapping._ |
+|   | [**DiscretePoloidalCSSplineMapping**](#function-discretepoloidalcssplinemapping) (SplineType curvilinear\_to\_x, SplineType curvilinear\_to\_y, SplineEvaluator const & evaluator, [**IdxRangeRTheta**](classDiscretePoloidalCSSplineMapping.md#typedef-idxrangertheta) idx\_range\_singular\_point) <br>_Instantiate a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _from the coefficients of 2D splines approximating the mapping._ |
 |  KOKKOS\_INLINE\_FUNCTION const Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**control\_point**](#function-control_point) (Idx&lt; [**BSplineR**](classDiscretePoloidalCSSplineMapping.md#typedef-bspliner), [**BSplineTheta**](classDiscretePoloidalCSSplineMapping.md#typedef-bsplinetheta) &gt; const & el) const<br>_Get a control point of the mapping on B-splines._  |
 |  void | [**control\_points**](#function-control_points) (ExecSpace exec\_space, Field&lt; Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, IdxRange&lt; [**BSplineR**](classDiscretePoloidalCSSplineMapping.md#typedef-bspliner), [**BSplineTheta**](classDiscretePoloidalCSSplineMapping.md#typedef-bsplinetheta) &gt;, MemorySpace &gt; pts) const<br>_Get a set of control points of the mapping on B-splines._  |
 |  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classDiscretePoloidalCSSplineMapping.md#typedef-r_cov), [**Theta\_cov**](classDiscretePoloidalCSSplineMapping.md#typedef-theta_cov) &gt; &gt; | [**first\_order\_jacobian\_matrix\_r\_rtheta**](#function-first_order_jacobian_matrix_r_rtheta) (Coord&lt; [**curvilinear\_tag\_r**](classDiscretePoloidalCSSplineMapping.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscretePoloidalCSSplineMapping.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around_ \(r=0\) _. The returned matrix_\(J\) _is defined as:_\(J_{00} = \frac{\partial x}{\partial r}(r, \theta)\) __\(J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta)\) __\(J_{10} = \frac{\partial y}{\partial r}(r, \theta)\) __\(J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta)\) _._ |
-|  KOKKOS\_INLINE\_FUNCTION IdxRangeRTheta | [**idx\_range\_singular\_point**](#function-idx_range_singular_point) () const<br>_Get the index range describing the points which should be used to evaluate functions at the central point._  |
+|  KOKKOS\_INLINE\_FUNCTION [**IdxRangeRTheta**](classDiscretePoloidalCSSplineMapping.md#typedef-idxrangertheta) | [**idx\_range\_singular\_point**](#function-idx_range_singular_point) () const<br>_Get the index range describing the points which should be used to evaluate functions at the central point._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) (Coord&lt; [**curvilinear\_tag\_r**](classDiscretePoloidalCSSplineMapping.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscretePoloidalCSSplineMapping.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classDiscretePoloidalCSSplineMapping.md#typedef-r_cov), [**Theta\_cov**](classDiscretePoloidalCSSplineMapping.md#typedef-theta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
@@ -196,6 +197,20 @@ using DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySp
 _The type of the result of the function described by this mapping._ 
 ```C++
 using DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySpace >::CoordResult =  Coord<X, Y>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef IdxRangeRTheta 
+
+_The index range where the spline evaluator can be called._ 
+```C++
+using DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySpace >::IdxRangeRTheta =  typename SplineEvaluator::evaluation_domain_type;
 ```
 
 
