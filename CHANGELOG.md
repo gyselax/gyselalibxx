@@ -96,6 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Make the dependency on GoogleTest dependent on the CMake option `GYSELALIBXX_BUILD_TESTING`.
 - Group extrapolation rules by dimension in `SplineInterpolator` and `LagrangeInterpolator`.
 - Group spline boundary closure rules by dimension in `SplineInterpolator`.
+- Add `-ffast-math` flag to toolchains.
 
 ### Deprecated
 
