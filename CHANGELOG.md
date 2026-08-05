@@ -39,8 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add class `GMGPolarPoissonLikeSolver` to allow the use of [GMGPolar](https://github.com/SciCompMod/GMGPolar) as a polar Poisson solver.
 - Add GMGPolar in the toolchains.
 - Allow `SplineInterpolator` and `LagrangeInterpolator` to specify custom extrapolation rules.
-- Add `SplineInterpolator2D.`
-- Add `LagrangeInterpolatorND.`
+- Made the type `IdxRangeRTheta` in class `DiscretePoloidalCSSplineMapping` public.
 
 ### Fixed
 
@@ -97,6 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Make the dependency on GoogleTest dependent on the CMake option `GYSELALIBXX_BUILD_TESTING`.
 - Group extrapolation rules by dimension in `SplineInterpolator` and `LagrangeInterpolator`.
 - Group spline boundary closure rules by dimension in `SplineInterpolator`.
+- Change the `SplineInterpolator` templates to allow 2D cases to be handled.
 
 ### Deprecated
 
