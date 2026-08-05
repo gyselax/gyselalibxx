@@ -73,12 +73,14 @@ if [ "$(hostname)" == "persee.partenaires.cea.fr" ]
 then
     CLANG_FORMAT=/data/gyselarunner/clang-format
 else
-    CLANG_FORMAT=clang-format-14
+    CLANG_FORMAT=clang-format
     set +e
-    if ! command -v ${CLANG_FORMAT} 2>&1 >/dev/null
+    VERSION=$(clang-format --version | grep -oP "version +\K[0-9]+")
+    if [ ! "${VERSION}" -eq "14" ]
     then
         CLANG_FORMAT=clang-format
-        echo "Could not find clang-format v14. Clang-formatting may not behave as expected"
+        echo "The version of clang-format is v${VERSION}."
+        echo "Formatting may not match exactly what is expected by the CI (v14)."
     fi
     set -e
 fi
