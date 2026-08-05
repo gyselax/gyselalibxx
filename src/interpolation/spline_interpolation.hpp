@@ -519,6 +519,9 @@ public:
     }
 };
 
+/**
+ * @brief A class to decide which Interpolator class is described.
+ */
 template <
         class ExecSpace,
         class IdxRangeBasis,
@@ -527,6 +530,7 @@ template <
         class... TailTags>
 struct SplineInterpolatorResolver;
 
+/// Specialisation for the 1D case
 template <
         class ExecSpace,
         class Basis,
@@ -551,6 +555,7 @@ struct SplineInterpolatorResolver<
             Solver>;
 };
 
+/// Specialisation for the 2D case
 template <
         class ExecSpace,
         class Basis1,
@@ -587,6 +592,21 @@ struct SplineInterpolatorResolver<
 
 } // namespace detail
 
+/**
+ * @brief Resolves to the 1D or 2D SplineInterpolator matching the given index
+ * ranges, using the default (LAPACK) spline solver backend.
+ *
+ * The resulting type is chosen by detail::SplineInterpolatorResolver based on the
+ * dimensionality of @c IdxRangeBasis and @c IdxRangeInterpGrid: detail::SplineInterpolator
+ * for the 1D case, detail::SplineInterpolator2D for the 2D case.
+ *
+ * @tparam ExecSpace        The Kokkos execution space used for computations.
+ * @tparam IdxRangeBasis    The index range of the B-spline basis (basis(es) for 2D).
+ * @tparam IdxRangeInterpGrid The index range of the interpolation grid(s).
+ * @tparam TailTags         The extrapolation rule(s) and boundary closure(s) describing
+ *                          the boundary conditions, as expected by
+ *                          detail::SplineInterpolatorResolver.
+ */
 template <class ExecSpace, class IdxRangeBasis, class IdxRangeInterpGrid, class... TailTags>
 using SplineInterpolator = typename detail::SplineInterpolatorResolver<
         ExecSpace,
@@ -595,6 +615,22 @@ using SplineInterpolator = typename detail::SplineInterpolatorResolver<
         ddc::SplineSolver::LAPACK,
         TailTags...>::type;
 
+/**
+ * @brief Resolves to the 1D or 2D SplineInterpolator matching the given index
+ * ranges, using an explicitly chosen spline solver backend.
+ *
+ * The resulting type is chosen by detail::SplineInterpolatorResolver based on the
+ * dimensionality of @c IdxRangeBasis and @c IdxRangeInterpGrid: detail::SplineInterpolator
+ * for the 1D case, detail::SplineInterpolator2D for the 2D case.
+ *
+ * @tparam ExecSpace        The Kokkos execution space used for computations.
+ * @tparam IdxRangeBasis    The index range of the B-spline basis (basis(es) for 2D).
+ * @tparam IdxRangeInterpGrid The index range of the interpolation grid(s).
+ * @tparam Solver           The spline solver backend to use.
+ * @tparam TailTags         The extrapolation rule(s) and boundary closure(s) describing
+ *                          the boundary conditions, as expected by
+ *                          detail::SplineInterpolatorResolver.
+ */
 template <
         class ExecSpace,
         class IdxRangeBasis,
