@@ -845,9 +845,9 @@
     <member refid="classDiscretePoloidalCSSplineMapping_1a597672f655d89e88992ff0db05aa01cf" kind="typedef"><name>Y_cov</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a64530f08f7985257806364087b9e2df3" kind="typedef"><name>R_cov</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a3f31fd91ddfa76c12df8a8f019e84360" kind="typedef"><name>Theta_cov</name></member>
-    <member refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" kind="typedef"><name>IdxRangeRTheta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1abaea940e655bad1b86651aa5083f3cea" kind="typedef"><name>spline_idx_range</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a9116804b0bfe02655238b3a9d9f895d7" kind="typedef"><name>SplineType</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" kind="typedef"><name>IdxRangeRTheta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a2a518c42048ffe20e817aff69b8b1d29" kind="typedef"><name>IdxRangeTheta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1adb996b4151c1f1802a6893564e307e57" kind="typedef"><name>IdxTheta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a9c5f3b04be494502180b773855af559e" kind="typedef"><name>IdxRTheta</name></member>
