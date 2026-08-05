@@ -77,7 +77,7 @@ template <
         class InterpGrid,
         class ExtrapRules,
         class BoundaryClosures,
-        ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
+        ddc::SplineSolver Solver>
 class SplineInterpolator
 {
 private:
@@ -310,7 +310,7 @@ template <
         class InterpGrid2,
         class ExtrapRules,
         class BoundaryClosures,
-        ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
+        ddc::SplineSolver Solver>
 class SplineInterpolator2D;
 
 template <
