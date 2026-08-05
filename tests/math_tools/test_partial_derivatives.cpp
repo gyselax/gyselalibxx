@@ -277,8 +277,7 @@ public:
             BSplinesDDim,
             GridDDim,
             SplineExtrapolation,
-            SplineClosure,
-            SplineClosure>;
+            SplineBoundaryClosures<SplineClosure, SplineClosure>>;
 
 public:
     PartialDerivativeTestSpline1D(
