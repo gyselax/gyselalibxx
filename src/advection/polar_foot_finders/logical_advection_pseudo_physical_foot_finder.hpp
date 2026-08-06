@@ -10,6 +10,7 @@
 #include "tensor.hpp"
 #include "type_seq_tools.hpp"
 #include "vector_field.hpp"
+#include "vector_field_evaluation.hpp"
 
 namespace polar_foot_finder_details {
 
@@ -121,13 +122,10 @@ public:
         IdxRTheta idx_rtheta(idx);
         // The function describing how the derivative of the evolve function is calculated.
         auto dy = [&](DVector<X_pc, Y_pc>& updated_advection_field, CoordRTheta const& foot) {
-            DVector<R, Theta> updated_advection_field_adv_space;
-            ddcHelper::get<R>(updated_advection_field_adv_space) = m_evaluator_advection_field(
+            DVector<R, Theta> updated_advection_field_adv_space = ndEval::evaluate(
+                    m_evaluator_advection_field,
                     foot,
-                    get_const_field(ddcHelper::get<R>(m_advection_field_coefs)[idx_batch]));
-            ddcHelper::get<Theta>(updated_advection_field_adv_space) = m_evaluator_advection_field(
-                    foot,
-                    get_const_field(ddcHelper::get<Theta>(m_advection_field_coefs)[idx_batch]));
+                    get_const_field(m_advection_field_coefs[idx_batch]));
             // Ensure coord is inside the domain as splines can't extrapolate
             // derivates (clamping)
             CoordRTheta advection_location_for_mapping(

@@ -4,15 +4,6 @@
 #include "i_interpolation_evaluator.hpp"
 #include "vector_field.hpp"
 
-/**
- * @file nd_evaluation.hpp
- *
- * Free functions that lift the @c concepts::InterpolationEvaluator interface to operate
- * on VectorFields.  Each function corresponds to one of the methods defined by the
- * concept and applies it component-wise, dispatching to each scalar component via
- * @c ddcHelper::get<VectorDim>.
- */
-
 namespace ndEval {
 
 /**
