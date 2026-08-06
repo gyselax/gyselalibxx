@@ -132,12 +132,6 @@ public:
         return 1;
     }
 
-    /// @brief The number of interpolation dimensions.
-    static constexpr std::size_t rank()
-    {
-        return 1;
-    }
-
 private:
     MinExtrapolationRule m_min_extrapolation;
     MaxExtrapolationRule m_max_extrapolation;
