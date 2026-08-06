@@ -67,8 +67,9 @@ public:
         ddc::init_discrete_space<BSplinesR>(r_break_points);
         ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
 
-        ddc::init_discrete_space<LagBasisR>(r_break_points);
-        ddc::init_discrete_space<LagBasisTheta>(theta_break_points);
+        ddc::init_discrete_space<LagBasisR>(ddc::discrete_space<BSplinesR>().break_point_domain());
+        ddc::init_discrete_space<LagBasisTheta>(
+                ddc::discrete_space<BSplinesTheta>().break_point_domain());
 
         ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
         ddc::init_discrete_space<GridTheta>(InterpPointsTheta::get_sampling<GridTheta>());
@@ -284,15 +285,22 @@ TEST_F(MappingMemoryAccess, HostDiscreteLagrangeCoordConverter)
     LagEvalTheta theta_evaluator(theta_extrapolation_rule, theta_extrapolation_rule);
     LagEval evaluator(r_evaluator, theta_evaluator);
 
-    VectorFieldMem<double, IdxRangeRTheta, VectorIndexSet<X, Y>> coeff_representation_alloc(
-            interpolation_idx_range_rtheta);
-    VectorField<double, IdxRangeRTheta, VectorIndexSet<X, Y>> coeff_representation(
+    IdxLagRTheta lag_idx_range_start(0, 0);
+    IdxStepLagRTheta lag_idx_range_extents(
+            interpolation_idx_range_rtheta.extent<GridR>().value(),
+            interpolation_idx_range_rtheta.extent<GridTheta>().value());
+    IdxRangeLagRTheta lag_idx_range(lag_idx_range_start, lag_idx_range_extents);
+
+    VectorFieldMem<double, IdxRangeLagRTheta, VectorIndexSet<X, Y>> coeff_representation_alloc(
+            lag_idx_range);
+    VectorField<double, IdxRangeLagRTheta, VectorIndexSet<X, Y>> coeff_representation(
             coeff_representation_alloc);
 
     ddc::host_for_each(interpolation_idx_range_rtheta, [&](IdxRTheta idx) {
+        IdxLagRTheta idx_lag(IdxR(idx).uid(), IdxTheta(idx).uid());
         CoordXY coord = analytical_mapping(ddc::coordinate(idx));
-        ddcHelper::get<X>(coeff_representation)(idx) = ddc::get<X>(coord);
-        ddcHelper::get<Y>(coeff_representation)(idx) = ddc::get<Y>(coord);
+        ddcHelper::get<X>(coeff_representation)(idx_lag) = ddc::get<X>(coord);
+        ddcHelper::get<Y>(coeff_representation)(idx_lag) = ddc::get<Y>(coord);
     });
 
     DiscreteMapping<Coord<R, Theta>, Coord<X, Y>, LagEval>

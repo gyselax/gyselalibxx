@@ -65,7 +65,7 @@ TEST(MappingStaticAsserts, DiscToCart)
 
 TEST(MappingStaticAsserts, Discrete2D)
 {
-    using Mapping = DiscreteMapping<Coord<R, Theta>, Coord<X, Y>, SplineRThetaEvaluator_host>;
+    using Mapping = DiscreteMapping<Coord<R, Theta>, Coord<X, Y>, LagrangeRThetaEvaluator_host>;
     static_assert(is_mapping_v<Mapping>);
     static_assert(has_jacobian_v<Mapping>);
     static_assert(!is_coord_transform_with_o_point_v<Mapping>);
