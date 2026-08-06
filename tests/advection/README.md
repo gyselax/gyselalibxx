@@ -76,15 +76,17 @@ on $`\Omega = [-0.5, 0.5]^2\times\{0,1\}^2`$ with
 with
 
 ```math
+
 \left\{
 \begin{aligned}
-    & G (r)  = \cos(\frac{\pi r}{2a}) * \mathbb{1}_{r<a}(r), \\
-    & r_1 (x,y) = \sqrt{x^2 + 8 y^2},  \\
-    & r_2 (x,y) = \sqrt{8 x^2 + y^2},  \\
+    & G (r)  = (\cos\left(\frac{\pi r}{2a}\right))^4 * \mathbb{1}_{|r| < a}(r), \\
+    & r_1 (x,y) = \sqrt{(x - xc)^2 + 8 (y - yc)^2},  \\
+    & r_2 (x,y) = \sqrt{8 (x - xc)^2 + (y - yc)^2},  \\
     & \omega = 2 \pi, \\
     & (x_c, y_c) = (0.25, 0). \\
 \end{aligned}
 \right.
+
 ```
 
 We test it on a grid $`N_x \times N_y \times N_{v_x} \times N_{v_y} = 60 \times 60 \times 2 \times 2`$  with $`dt = 0.05`$. The simulation runs on $`t\in[0,0.2]`$ and the relative error is expected to be below $` 7*10^{-2}`$.
