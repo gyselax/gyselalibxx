@@ -86,6 +86,8 @@ public:
     {
     }
 
+    KOKKOS_DEFAULTED_FUNCTION DiscreteMapping(DiscreteMapping const&) = default;
+
     /**
      * @brief Compute the target coordinates from the start coordinates.
      *
