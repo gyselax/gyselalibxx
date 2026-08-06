@@ -43,7 +43,8 @@ KOKKOS_FUNCTION Vector<ElementType, VectorDims...> evaluate(
                 LayoutCoeff> coeffs)
 {
     static_assert(ddc::detail::is_tagged_vector_v<CoordType>);
-    return Vector<ElementType, VectorDims...>((evaluator(coord, ddcHelper::get<VectorDims>(coeffs)), ...));
+    return Vector<ElementType, VectorDims...>(
+            evaluator(coord, ddcHelper::get<VectorDims>(coeffs))...);
 }
 
 /**
