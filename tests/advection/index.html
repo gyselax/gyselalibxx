@@ -633,17 +633,17 @@
 \right.
 \]</div>
 <p>with</p>
-<div class="arithmatex">\[
-\left\{
+<p>[</p>
+<p>\left{
 \begin{aligned}
-    &amp; G (r)  = \cos(\frac{\pi r}{2a}) * \mathbb{1}_{r&lt;a}(r), \\
-    &amp; r_1 (x,y) = \sqrt{x^2 + 8 y^2},  \\
-    &amp; r_2 (x,y) = \sqrt{8 x^2 + y^2},  \\
-    &amp; \omega = 2 \pi, \\
-    &amp; (x_c, y_c) = (0.25, 0). \\
+    &amp; G (r)  = (\cos\left(\frac{\pi r}{2a}\right))^4 * \mathbb{1}_{|r| &lt; a}(r), \
+    &amp; r_1 (x,y) = \sqrt{(x - xc)^2 + 8 (y - yc)^2},  \
+    &amp; r_2 (x,y) = \sqrt{8 (x - xc)^2 + (y - yc)^2},  \
+    &amp; \omega = 2 \pi, \
+    &amp; (x_c, y_c) = (0.25, 0). \
 \end{aligned}
-\right.
-\]</div>
+\right.</p>
+<p>]</p>
 <p>We test it on a grid <span class="arithmatex">\(N_x \times N_y \times N_{v_x} \times N_{v_y} = 60 \times 60 \times 2 \times 2\)</span>  with <span class="arithmatex">\(dt = 0.05\)</span>. The simulation runs on <span class="arithmatex">\(t\in[0,0.2]\)</span> and the relative error is expected to be below <span class="arithmatex">\( 7*10^{-2}\)</span>.</p>
 <h3 id="same-test-cases-as-for-bsladvectionspatial-and-bsladvectionvelocity">Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity</h3>
 <ul>
