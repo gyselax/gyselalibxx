@@ -664,6 +664,68 @@ public:
             typename Evaluator::template batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;;
 };
 
+template &lt;
+        class ExecSpace,
+        class MemorySpace,
+        class BSplines1,
+        class BSplines2,
+        class EvaluationDDim1,
+        class EvaluationDDim2,
+        class LowerExtrapolationRule1,
+        class UpperExtrapolationRule1,
+        class LowerExtrapolationRule2,
+        class UpperExtrapolationRule2&gt;
+struct InterpolationEvaluatorTraits&lt;ddc::SplineEvaluator2D&lt;
+        ExecSpace,
+        MemorySpace,
+        BSplines1,
+        BSplines2,
+        EvaluationDDim1,
+        EvaluationDDim2,
+        LowerExtrapolationRule1,
+        UpperExtrapolationRule1,
+        LowerExtrapolationRule2,
+        UpperExtrapolationRule2&gt;&gt;
+{
+private:
+    using Evaluator = ddc::SplineEvaluator2D&lt;
+            ExecSpace,
+            MemorySpace,
+            BSplines1,
+            BSplines2,
+            EvaluationDDim1,
+            EvaluationDDim2,
+            LowerExtrapolationRule1,
+            UpperExtrapolationRule1,
+            LowerExtrapolationRule2,
+            UpperExtrapolationRule2&gt;;
+
+public:
+    using data_type = double;
+
+    using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
+
+    using coord_type
+            = Coord&lt;typename EvaluationDDim1::continuous_dimension_type,
+                    typename EvaluationDDim2::continuous_dimension_type&gt;;
+
+    using coeff_idx_range_type = typename Evaluator::spline_domain_type;
+
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
+
+    template &lt;class BatchedInterpolationIdxRange&gt;
+    using batched_evaluation_idx_range_type =
+            typename Evaluator::template batched_evaluation_domain_type&lt;
+                    BatchedInterpolationIdxRange&gt;;
+
+    template &lt;class BatchedInterpolationIdxRange&gt;
+    using batched_coeff_idx_range_type =
+            typename Evaluator::template batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;;
+};
+
 namespace concepts {
 
 template &lt;class Evaluator&gt;

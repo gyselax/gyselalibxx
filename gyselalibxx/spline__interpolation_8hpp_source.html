@@ -745,22 +745,270 @@ public:
     }
 };
 
-} // namespace detail
+template &lt;
+        class ExecSpace,
+        class Basis1,
+        class Basis2,
+        class InterpGrid1,
+        class InterpGrid2,
+        class ExtrapRules,
+        class BoundaryClosures,
+        ddc::SplineSolver Solver&gt;
+class SplineInterpolator2D;
+
+template &lt;
+        class ExecSpace,
+        class Basis1,
+        class Basis2,
+        class InterpGrid1,
+        class InterpGrid2,
+        class ExtrapRules1,
+        class ExtrapRules2,
+        class BoundaryClosures1,
+        class BoundaryClosures2,
+        ddc::SplineSolver Solver&gt;
+class SplineInterpolator2D&lt;
+        ExecSpace,
+        Basis1,
+        Basis2,
+        InterpGrid1,
+        InterpGrid2,
+        ddc::detail::TypeSeq&lt;ExtrapRules1, ExtrapRules2&gt;,
+        ddc::detail::TypeSeq&lt;BoundaryClosures1, BoundaryClosures2&gt;,
+        Solver&gt;
+{
+private:
+    using continuous_dimension_type1 = typename InterpGrid1::continuous_dimension_type;
+    using continuous_dimension_type2 = typename InterpGrid2::continuous_dimension_type;
+
+    static constexpr bool is_periodic1 = continuous_dimension_type1::PERIODIC;
+    static constexpr bool is_periodic2 = continuous_dimension_type2::PERIODIC;
+
+    using MinExtrapolationRule1 = ddc::type_seq_element_t&lt;0, ExtrapRules1&gt;;
+    using MaxExtrapolationRule1 = ddc::type_seq_element_t&lt;1, ExtrapRules1&gt;;
+    using MinExtrapolationRule2 = ddc::type_seq_element_t&lt;0, ExtrapRules2&gt;;
+    using MaxExtrapolationRule2 = ddc::type_seq_element_t&lt;1, ExtrapRules2&gt;;
+
+    static constexpr ddc::SplineBuilderClosure MinBound1 = BoundaryClosures1::min::value;
+    static constexpr ddc::SplineBuilderClosure MaxBound1 = BoundaryClosures1::max::value;
+    static constexpr ddc::SplineBuilderClosure MinBound2 = BoundaryClosures2::min::value;
+    static constexpr ddc::SplineBuilderClosure MaxBound2 = BoundaryClosures2::max::value;
+
+    static_assert(is_periodic1 == (MinBound1 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic1 == (MaxBound1 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(
+            is_periodic1
+            == std::is_same_v&lt;
+                    MinExtrapolationRule1,
+                    ddc::PeriodicExtrapolationRule&lt;continuous_dimension_type1&gt;&gt;);
+    static_assert(
+            is_periodic1
+            == std::is_same_v&lt;
+                    MaxExtrapolationRule1,
+                    ddc::PeriodicExtrapolationRule&lt;continuous_dimension_type1&gt;&gt;);
+
+    static_assert(is_periodic2 == (MinBound2 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic2 == (MaxBound2 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(
+            is_periodic2
+            == std::is_same_v&lt;
+                    MinExtrapolationRule2,
+                    ddc::PeriodicExtrapolationRule&lt;continuous_dimension_type2&gt;&gt;);
+    static_assert(
+            is_periodic2
+            == std::is_same_v&lt;
+                    MaxExtrapolationRule2,
+                    ddc::PeriodicExtrapolationRule&lt;continuous_dimension_type2&gt;&gt;);
+
+    static_assert(is_spline_basis_v&lt;Basis1&gt;);
+    static_assert(is_spline_basis_v&lt;Basis2&gt;);
+
+public:
+    using BuilderType = ddc::SplineBuilder2D&lt;
+            ExecSpace,
+            typename ExecSpace::memory_space,
+            Basis1,
+            Basis2,
+            InterpGrid1,
+            InterpGrid2,
+            MinBound1,
+            MaxBound1,
+            MinBound2,
+            MaxBound2,
+            Solver&gt;;
+
+    using EvaluatorType = ddc::SplineEvaluator2D&lt;
+            ExecSpace,
+            typename ExecSpace::memory_space,
+            Basis1,
+            Basis2,
+            InterpGrid1,
+            InterpGrid2,
+            MinExtrapolationRule1,
+            MaxExtrapolationRule1,
+            MinExtrapolationRule2,
+            MaxExtrapolationRule2&gt;;
+
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
+
+private:
+    MinExtrapolationRule1 m_min_extrapolation1;
+    MaxExtrapolationRule1 m_max_extrapolation1;
+    MinExtrapolationRule2 m_min_extrapolation2;
+    MaxExtrapolationRule2 m_max_extrapolation2;
+    BuilderType m_builder;
+    EvaluatorType m_evaluator;
+
+public:
+    explicit SplineInterpolator2D(IdxRange&lt;InterpGrid1, InterpGrid2&gt; idx_range) requires(
+            (is_extrapolation_rule_auto_constructible_v&lt;MinExtrapolationRule1, InterpGrid1, double, Basis1&gt;)&amp;&amp;(is_extrapolation_rule_auto_constructible_v&lt;MaxExtrapolationRule1, InterpGrid1, double, Basis1&gt;)&amp;&amp;(
+                    is_extrapolation_rule_auto_constructible_v&lt;
+                            MinExtrapolationRule2,
+                            InterpGrid2,
+                            double,
+                            Basis2&gt;)&amp;&amp;(is_extrapolation_rule_auto_constructible_v&lt;MaxExtrapolationRule2, InterpGrid2, double, Basis2&gt;))
+        : m_min_extrapolation1(
+                get_extrapolation&lt;MinExtrapolationRule1, InterpGrid1, double, Basis1&gt;(
+                        Extremity::FRONT))
+        , m_max_extrapolation1(
+                  get_extrapolation&lt;MaxExtrapolationRule1, InterpGrid1, double, Basis1&gt;(
+                          Extremity::BACK))
+        , m_min_extrapolation2(
+                  get_extrapolation&lt;MinExtrapolationRule2, InterpGrid2, double, Basis2&gt;(
+                          Extremity::FRONT))
+        , m_max_extrapolation2(
+                  get_extrapolation&lt;MaxExtrapolationRule2, InterpGrid2, double, Basis2&gt;(
+                          Extremity::BACK))
+        , m_builder(idx_range)
+        , m_evaluator(
+                  m_min_extrapolation1,
+                  m_max_extrapolation1,
+                  m_min_extrapolation2,
+                  m_max_extrapolation2)
+    {
+    }
+
+    explicit SplineInterpolator2D(
+            IdxRange&lt;InterpGrid1, InterpGrid2&gt; idx_range,
+            MinExtrapolationRule1 min_extrapolation_rule1,
+            MaxExtrapolationRule1 max_extrapolation_rule1,
+            MinExtrapolationRule2 min_extrapolation_rule2,
+            MaxExtrapolationRule2 max_extrapolation_rule2)
+        : m_min_extrapolation1(std::move(min_extrapolation_rule1))
+        , m_max_extrapolation1(std::move(max_extrapolation_rule1))
+        , m_min_extrapolation2(std::move(min_extrapolation_rule2))
+        , m_max_extrapolation2(std::move(max_extrapolation_rule2))
+        , m_builder(idx_range)
+        , m_evaluator(
+                  m_min_extrapolation1,
+                  m_max_extrapolation1,
+                  m_min_extrapolation2,
+                  m_max_extrapolation2)
+    {
+    }
+
+    BuilderType const&amp; get_builder() const
+    {
+        return m_builder;
+    }
+
+    EvaluatorType const&amp; get_evaluator() const
+    {
+        return m_evaluator;
+    }
+};
+
+template &lt;
+        class ExecSpace,
+        class IdxRangeBasis,
+        class IdxRangeInterpGrid,
+        ddc::SplineSolver Solver,
+        class... TailTags&gt;
+struct SplineInterpolatorResolver;
 
 template &lt;
         class ExecSpace,
         class Basis,
         class InterpGrid,
+        ddc::SplineSolver Solver,
         class ExtrapRules,
-        class BoundaryClosures,
-        ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK&gt;
-using SplineInterpolator = detail::SplineInterpolator&lt;
+        class BoundaryClosures&gt;
+struct SplineInterpolatorResolver&lt;
         ExecSpace,
-        Basis,
-        InterpGrid,
-        extrapolation_rule_t&lt;ExtrapRules, InterpGrid, double, Basis&gt;,
-        BoundaryClosures,
-        Solver&gt;;
+        IdxRange&lt;Basis&gt;,
+        IdxRange&lt;InterpGrid&gt;,
+        Solver,
+        ExtrapRules,
+        BoundaryClosures&gt;
+{
+    using type = SplineInterpolator&lt;
+            ExecSpace,
+            Basis,
+            InterpGrid,
+            extrapolation_rule_t&lt;ExtrapRules, InterpGrid, double, Basis&gt;,
+            BoundaryClosures,
+            Solver&gt;;
+};
+
+template &lt;
+        class ExecSpace,
+        class Basis1,
+        class Basis2,
+        class InterpGrid1,
+        class InterpGrid2,
+        ddc::SplineSolver Solver,
+        class ExtrapRules1,
+        class ExtrapRules2,
+        class BoundaryClosures1,
+        class BoundaryClosures2&gt;
+struct SplineInterpolatorResolver&lt;
+        ExecSpace,
+        IdxRange&lt;Basis1, Basis2&gt;,
+        IdxRange&lt;InterpGrid1, InterpGrid2&gt;,
+        Solver,
+        ExtrapRules1,
+        ExtrapRules2,
+        BoundaryClosures1,
+        BoundaryClosures2&gt;
+{
+    using type = SplineInterpolator2D&lt;
+            ExecSpace,
+            Basis1,
+            Basis2,
+            InterpGrid1,
+            InterpGrid2,
+            ddc::detail::TypeSeq&lt;
+                    extrapolation_rule_t&lt;ExtrapRules1, InterpGrid1, double, Basis1&gt;,
+                    extrapolation_rule_t&lt;ExtrapRules2, InterpGrid2, double, Basis2&gt;&gt;,
+            ddc::detail::TypeSeq&lt;BoundaryClosures1, BoundaryClosures2&gt;,
+            Solver&gt;;
+};
+
+} // namespace detail
+
+template &lt;class ExecSpace, class IdxRangeBasis, class IdxRangeInterpGrid, class... TailTags&gt;
+using SplineInterpolator = typename detail::SplineInterpolatorResolver&lt;
+        ExecSpace,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        ddc::SplineSolver::LAPACK,
+        TailTags...&gt;::type;
+
+template &lt;
+        class ExecSpace,
+        class IdxRangeBasis,
+        class IdxRangeInterpGrid,
+        ddc::SplineSolver Solver,
+        class... TailTags&gt;
+using SplineInterpolatorWSolver = typename detail::SplineInterpolatorResolver&lt;
+        ExecSpace,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        Solver,
+        TailTags...&gt;::type;
 </code></pre></div>
               
             </div>

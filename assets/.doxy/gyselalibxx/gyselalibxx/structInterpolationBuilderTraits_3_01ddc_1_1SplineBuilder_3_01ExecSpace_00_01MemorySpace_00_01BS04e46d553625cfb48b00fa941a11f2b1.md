@@ -34,7 +34,6 @@ _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilde
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename Builder::bsplines\_type | [**basis\_domain\_type**](#typedef-basis_domain_type)  <br>_The discrete dimension for the B-spline coefficients._  |
 | typedef typename Builder::template batched\_spline\_domain\_type&lt; IdxRangeBatchedInterpolation &gt; | [**batched\_basis\_idx\_range\_type**](#typedef-batched_basis_idx_range_type)  <br>_Batched domain with InterpolationDDim replaced by BSplines._  |
 | typedef typename Builder::template batched\_derivs\_domain\_type&lt; IdxRangeBatchedInterpolation &gt; | [**batched\_derivs\_idx\_range\_type**](#typedef-batched_derivs_idx_range_type)  <br>_Batched domain with InterpolationDDim replaced by deriv\_type._  |
 | typedef IdxRange&lt; typename Builder::bsplines\_type &gt; | [**coeff\_idx\_range\_type**](#typedef-coeff_idx_range_type)  <br>_The index range for the interpolation coefficients._  |
@@ -97,7 +96,7 @@ _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilde
 ## Detailed Description
 
 
-ddc::SplineBuilder uses different alias names from the InterpolationBuilder convention. This specialisation provides the mapping so that ddc::SplineBuilder can be used directly as an InterpolationBuilder without wrapping it in SplineBuilder1D.
+ddc::SplineBuilder uses different alias names from the InterpolationBuilder convention. This specialisation provides the mapping so that ddc::SplineBuilder can be used directly as an InterpolationBuilder without wrapping it.
 
 
 Mapping: interpolation\_discrete\_dimension\_type -&gt; interpolation\_grid\_type interpolation\_domain\_type -&gt; interpolation\_idx\_range\_type bsplines\_type -&gt; basis\_domain\_type batched\_spline\_domain\_type&lt;D&gt; -&gt; batched\_basis\_idx\_range\_type&lt;D&gt; batched\_derivs\_domain\_type&lt;D&gt; -&gt; batched\_derivs\_idx\_range\_type&lt;D&gt; 
@@ -106,20 +105,6 @@ Mapping: interpolation\_discrete\_dimension\_type -&gt; interpolation\_grid\_typ
     
 ## Public Types Documentation
 
-
-
-
-### typedef basis\_domain\_type 
-
-_The discrete dimension for the B-spline coefficients._ 
-```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::basis_domain_type =  typename Builder::bsplines_type;
-```
-
-
-
-
-<hr>
 
 
 

@@ -595,11 +595,7 @@
 template &lt;class Mapping, class FootFinder, class PolarPoissonLikeSolver&gt;
 class BslPredCorrRTheta : public ITimeSolverRTheta
 {
-    using BslAdvectionRTheta = BslAdvectionPolar&lt;
-            FootFinder,
-            Mapping,
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorNullBound&gt;;
+    using BslAdvectionRTheta = BslAdvectionPolar&lt;FootFinder, Mapping, SplineInterpolatorRTheta&gt;;
 
 private:
     Mapping const&amp; m_mapping;

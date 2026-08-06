@@ -12,6 +12,7 @@
 
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
+* `#include "i_interpolation.hpp"`
 * `#include "indexed_tensor.hpp"`
 * `#include "l_norm_tools.hpp"`
 * `#include "metric_tensor_evaluator.hpp"`
@@ -36,7 +37,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslAdvectionPolar**](classBslAdvectionPolar.md) &lt;class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D&gt;<br>_Define an advection operator on 2D_ \((r, \theta)\) _domain._ |
+| class | [**BslAdvectionPolar**](classBslAdvectionPolar.md) &lt;class FootFinder, class LogicalToPhysicalMapping, Interpolator2D&gt;<br>_Define an advection operator on 2D_ \((r, \theta)\) _domain._ |
 
 
 

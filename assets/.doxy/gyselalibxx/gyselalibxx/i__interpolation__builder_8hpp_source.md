@@ -80,7 +80,68 @@ public:
         return 1;
     }
 
-    using basis_domain_type = typename Builder::bsplines_type;
+    template <class IdxRangeBatchedInterpolation>
+    using batched_basis_idx_range_type =
+            typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
+
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type =
+            typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
+};
+
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class BSpline1,
+        class BSpline2,
+        class InterpolationDDim1,
+        class InterpolationDDim2,
+        ddc::SplineBuilderClosure BcLower1,
+        ddc::SplineBuilderClosure BcUpper1,
+        ddc::SplineBuilderClosure BcLower2,
+        ddc::SplineBuilderClosure BcUpper2,
+        ddc::SplineSolver Solver>
+struct InterpolationBuilderTraits<ddc::SplineBuilder2D<
+        ExecSpace,
+        MemorySpace,
+        BSpline1,
+        BSpline2,
+        InterpolationDDim1,
+        InterpolationDDim2,
+        BcLower1,
+        BcUpper1,
+        BcLower2,
+        BcUpper2,
+        Solver>>
+{
+private:
+    using Builder = ddc::SplineBuilder2D<
+            ExecSpace,
+            MemorySpace,
+            BSpline1,
+            BSpline2,
+            InterpolationDDim1,
+            InterpolationDDim2,
+            BcLower1,
+            BcUpper1,
+            BcLower2,
+            BcUpper2,
+            Solver>;
+
+public:
+    using data_type = double;
+
+    //using interpolation_grid_type = typename Builder::interpolation_discrete_dimension_type;
+
+    using interpolation_idx_range_type = typename Builder::interpolation_domain_type;
+
+    using coeff_idx_range_type
+            = IdxRange<typename Builder::bsplines_type1, typename Builder::bsplines_type2>;
+
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
 
     template <class IdxRangeBatchedInterpolation>
     using batched_basis_idx_range_type =

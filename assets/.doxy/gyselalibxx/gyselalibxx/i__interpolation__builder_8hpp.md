@@ -38,6 +38,7 @@
 | Type | Name |
 | ---: | :--- |
 | struct | [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md) &lt;class Builder&gt;<br>_A traits struct for accessing type aliases of an interpolation builder._  |
+| struct | [**InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.md) &lt;class ExecSpace, class MemorySpace, class BSpline1, class BSpline2, class InterpolationDDim1, class InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver&gt;<br>_Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilderTraits.md) _for ddc::SplineBuilder2D._ |
 | struct | [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md) &lt;class ExecSpace, class MemorySpace, class BSplines, class InterpolationDDim, SBCLower, SBCUpper, Solver&gt;<br>_Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilderTraits.md) _for ddc::SplineBuilder._ |
 
 

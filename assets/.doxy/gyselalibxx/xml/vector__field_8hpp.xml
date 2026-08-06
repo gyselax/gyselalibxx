@@ -607,6 +607,8 @@
         <link refid="i__interpolation_8hpp_source"/>
         <childnode refid="64" relation="include">
         </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
         <childnode refid="65" relation="include">
         </childnode>
         <childnode refid="66" relation="include">
@@ -659,6 +661,8 @@
       <node id="69">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</label>
         <link refid="spline__interpolation_8hpp_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
       </node>
       <node id="43">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp</label>

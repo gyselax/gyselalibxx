@@ -583,10 +583,6 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename Builder::bsplines_type</td>
-<td style="text-align: left;"><a href="#typedef-basis_domain_type"><strong>basis_domain_type</strong></a>  <br><em>The discrete dimension for the B-spline coefficients.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">typedef typename Builder::template batched_spline_domain_type&lt; IdxRangeBatchedInterpolation &gt;</td>
 <td style="text-align: left;"><a href="#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>  <br><em>Batched domain with InterpolationDDim replaced by BSplines.</em></td>
 </tr>
@@ -628,15 +624,9 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>ddc::SplineBuilder uses different alias names from the InterpolationBuilder convention. This specialisation provides the mapping so that ddc::SplineBuilder can be used directly as an InterpolationBuilder without wrapping it in SplineBuilder1D.</p>
+<p>ddc::SplineBuilder uses different alias names from the InterpolationBuilder convention. This specialisation provides the mapping so that ddc::SplineBuilder can be used directly as an InterpolationBuilder without wrapping it.</p>
 <p>Mapping: interpolation_discrete_dimension_type -&gt; interpolation_grid_type interpolation_domain_type -&gt; interpolation_idx_range_type bsplines_type -&gt; basis_domain_type batched_spline_domain_type&lt;D&gt; -&gt; batched_basis_idx_range_type&lt;D&gt; batched_derivs_domain_type&lt;D&gt; -&gt; batched_derivs_idx_range_type&lt;D&gt; </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-basis_domain_type">typedef basis_domain_type</h3>
-<p><em>The discrete dimension for the B-spline coefficients.</em> </p>
-<pre><code class="language-C++">using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;::basis_domain_type =  typename Builder::bsplines_type;
-</code></pre>
-<hr>
-
 <h3 id="typedef-batched_basis_idx_range_type">typedef batched_basis_idx_range_type</h3>
 <p><em>Batched domain with InterpolationDDim replaced by BSplines.</em> </p>
 <pre><code class="language-C++">using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;::batched_basis_idx_range_type =  typename Builder::template batched_spline_domain_type&lt;IdxRangeBatchedInterpolation&gt;;

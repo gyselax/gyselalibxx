@@ -2,7 +2,7 @@
 
 # Class BslAdvectionPolar
 
-**template &lt;class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D&gt;**
+**template &lt;class FootFinder, class LogicalToPhysicalMapping, concepts::Interpolation Interpolator2D&gt;**
 
 
 
@@ -54,7 +54,7 @@ _Define an advection operator on 2D_ \((r, \theta)\) _domain._[More...](#detaile
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvectionPolar**](#function-bsladvectionpolar) (Builder2D const & builder\_2d, Evaluator2D const & evaluator\_2d, FootFinder & foot\_finder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, std::optional&lt; IdxRangeBatched &gt; idx\_range\_advected\_points=std::nullopt) <br>_Instantiate an advection operator._  |
+|   | [**BslAdvectionPolar**](#function-bsladvectionpolar) (Interpolator2D const & interpolator\_2d, FootFinder & foot\_finder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, std::optional&lt; IdxRangeBatched &gt; idx\_range\_advected\_points=std::nullopt) <br>_Instantiate an advection operator._  |
 |  DFieldFDistribu | [**operator()**](#function-operator) (DFieldFDistribu allfdistribu, [**DVectorConstFieldAdvection**](classVectorField.md) advection\_field, double dt) const<br>_Advect a function over a time step dt with the given advection field along the physical directions._  |
 |   | [**~BslAdvectionPolar**](#function-bsladvectionpolar) () = default<br> |
 
@@ -143,8 +143,7 @@ The interpolation of the function is always done in the logical domain, where th
 _Instantiate an advection operator._ 
 ```C++
 inline BslAdvectionPolar::BslAdvectionPolar (
-    Builder2D const & builder_2d,
-    Evaluator2D const & evaluator_2d,
+    Interpolator2D const & interpolator_2d,
     FootFinder & foot_finder,
     LogicalToPhysicalMapping const & logical_to_physical_mapping,
     std::optional< IdxRangeBatched > idx_range_advected_points=std::nullopt
@@ -158,8 +157,7 @@ inline BslAdvectionPolar::BslAdvectionPolar (
 **Parameters:**
 
 
-* `builder_2d` The 2D builder used to compute interpolations coefficients from the function values at interpolation points. 
-* `evaluator_2d` The 2D evaluator used to evaluate the interpolating function at the feet of the characteristics. 
+* `interpolator_2d` The interpolation object used to interpolate the function once at the feet of the characteristics. 
 * `foot_finder` An IFootFinder which computes the feet of the characteristics. 
 * `logical_to_physical_mapping` The mapping function from the logical domain to the physical domain. 
 * `idx_range_advected_points` The index range of the parts of the distribution function which are modified. This allows regions (e.g. boundary regions) to remain constant. 

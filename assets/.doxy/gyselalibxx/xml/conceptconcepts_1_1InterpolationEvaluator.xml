@@ -74,6 +74,6 @@ concept <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound
 <para>Type information is accessed through InterpolationEvaluatorTraits&lt;Evaluator&gt;, which has a primary template delegating to the evaluator&apos;s own aliases and can be specialised for external evaluators (e.g. ddc::SplineEvaluator).</para>
 <para>The template alias and method requirements are verified using evaluation_idx_range_type as a representative domain. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="174" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="256" column="1"/>
   </compounddef>
 </doxygen>

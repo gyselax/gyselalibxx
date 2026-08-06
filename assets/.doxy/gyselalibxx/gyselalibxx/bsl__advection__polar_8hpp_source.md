@@ -13,6 +13,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "i_interpolation.hpp"
 #include "indexed_tensor.hpp"
 #include "l_norm_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -21,7 +22,7 @@
 
 
 
-template <class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D>
+template <class FootFinder, class LogicalToPhysicalMapping, concepts::Interpolation Interpolator2D>
 class BslAdvectionPolar
 {
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
@@ -55,6 +56,9 @@ class BslAdvectionPolar
 
     using MemorySpace = typename FootFinder::memory_space;
     using ExecSpace = typename FootFinder::ExecSpace;
+
+    using Builder2D = typename Interpolator2D::BuilderType;
+    using Evaluator2D = typename Interpolator2D::EvaluatorType;
 
     using IdxRangeBSRTheta =
             typename Builder2D::template batched_spline_domain_type<IdxRangeBatched>;
@@ -98,13 +102,12 @@ private:
 
 public:
     BslAdvectionPolar(
-            Builder2D const& builder_2d,
-            Evaluator2D const& evaluator_2d,
+            Interpolator2D const& interpolator_2d,
             FootFinder& foot_finder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping,
             std::optional<IdxRangeBatched> idx_range_advected_points = std::nullopt)
-        : m_builder_2d(builder_2d)
-        , m_evaluator_2d(evaluator_2d)
+        : m_builder_2d(interpolator_2d.get_builder())
+        , m_evaluator_2d(interpolator_2d.get_evaluator())
         , m_find_feet_method(foot_finder)
         , m_logical_to_physical_mapping(logical_to_physical_mapping)
         , m_idx_range_advected_points(idx_range_advected_points)
