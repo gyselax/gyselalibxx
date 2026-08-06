@@ -7,22 +7,25 @@
 namespace ndEval {
 
 /**
- * @brief Evaluate an ND interpolation on each component of a VectorField.
+ * @brief Evaluate an ND interpolation at a single coordinate on each component of a VectorField.
  *
  * For each dimension @c VectorDim in @c VectorDims..., calls
  * @code
- *   evaluator(ddcHelper::get<VectorDim>(output), ddcHelper::get<VectorDim>(coeffs));
+ *   evaluator(coord, ddcHelper::get<VectorDim>(coeffs));
  * @endcode
+ * and packs the results into the returned Vector.
  *
- * This is the VectorField counterpart of @c evaluator.operator()(eval, coeffs).
+ * This is the VectorField counterpart of @c evaluator.operator()(coord, coeffs).
  *
  * @tparam Evaluator   A class satisfying @c concepts::InterpolationEvaluator.
  * @tparam VectorDims  The dimensions labelling the vector components (passed to
  *                     @c ddcHelper::get to extract the corresponding scalar field).
  *
  * @param[in]  evaluator  The ND interpolation evaluator.
- * @param[out] output     On output, the interpolated values for each vector component.
+ * @param[in]  coord      The coordinate at which the interpolation is evaluated.
  * @param[in]  coeffs     The interpolation coefficients for each vector component.
+ *
+ * @return The interpolated value of each vector component at @p coord.
  */
 template <
         concepts::InterpolationEvaluator Evaluator,
