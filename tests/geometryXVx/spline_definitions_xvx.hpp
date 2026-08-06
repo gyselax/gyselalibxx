@@ -84,19 +84,17 @@ using XExtrapRule = std::conditional_t<
 
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
         XExtrapRule,
-        SplineXClosure,
-        SplineXClosure>;
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesVx,
-        GridVx,
+        IdxRange<BSplinesVx>,
+        IdxRange<GridVx>,
         ExtrapolationRule::Constant_Constant,
-        SplineVxClosure,
-        SplineVxClosure>;
+        SplineBoundaryClosures<SplineVxClosure, SplineVxClosure>>;
 
 using IdxRangeBSX = IdxRange<BSplinesX>;
 

@@ -274,11 +274,10 @@ public:
 
     using SplineDDimInterpolation = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,
-            BSplinesDDim,
-            GridDDim,
+            IdxRange<BSplinesDDim>,
+            IdxRange<GridDDim>,
             SplineExtrapolation,
-            SplineClosure,
-            SplineClosure>;
+            SplineBoundaryClosures<SplineClosure, SplineClosure>>;
 
 public:
     PartialDerivativeTestSpline1D(
