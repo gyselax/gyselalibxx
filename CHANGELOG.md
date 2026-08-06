@@ -96,6 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Group extrapolation rules by dimension in `SplineInterpolator` and `LagrangeInterpolator`.
 - Group spline boundary closure rules by dimension in `SplineInterpolator`.
 - Change the `LagrangeInterpolator` templates to allow ND cases to be handled.
+- Change the `SplineInterpolator` templates to allow 2D cases to be handled.
 
 ### Deprecated
 
