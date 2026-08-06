@@ -98,7 +98,8 @@ public:
      */
     KOKKOS_FUNCTION CoordResult operator()(CoordArg const& coord) const
     {
-        return CoordResult(ddcHelper::to_coord(ndEval::evaluate(m_evaluator, coord, m_coeff_representation)));
+        return CoordResult(
+                ddcHelper::to_coord(ndEval::evaluate(m_evaluator, coord, m_coeff_representation)));
     }
 
     /**
