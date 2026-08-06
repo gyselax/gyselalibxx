@@ -118,8 +118,9 @@ struct LagBasisVx : UniformLagrangeBasis<Vx, 3, double>
 
 using LagrangeInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagBasisVx,
-        GridVx,
+        double,
+        IdxRange<LagBasisVx>,
+        IdxRange<GridVx>,
         ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>>;
 
 
