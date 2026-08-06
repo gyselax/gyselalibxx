@@ -28,7 +28,7 @@ template <
         concepts::InterpolationEvaluator Evaluator,
         class CoordType,
         class ElementType,
-        class CoeffIdxRange,
+        class IdxRangeCoeff,
         class MemorySpace,
         class LayoutCoeff,
         class... VectorDims>
@@ -37,7 +37,7 @@ KOKKOS_FUNCTION Vector<ElementType, VectorIndexSet<VectorDims...>> evaluate(
         CoordType const& coord,
         VectorField<
                 const ElementType,
-                CoeffIdxRange,
+                IdxRangeCoeff,
                 VectorIndexSet<VectorDims...>,
                 MemorySpace,
                 LayoutCoeff> coeffs)
@@ -67,8 +67,8 @@ KOKKOS_FUNCTION Vector<ElementType, VectorIndexSet<VectorDims...>> evaluate(
 template <
         concepts::InterpolationEvaluator Evaluator,
         class ElementType,
-        class EvalIdxRange,
-        class CoeffIdxRange,
+        class IdxRangeEval,
+        class IdxRangeCoeff,
         class MemorySpace,
         class LayoutOut,
         class LayoutCoeff,
@@ -77,13 +77,13 @@ void evaluate(
         Evaluator const& evaluator,
         VectorField<
                 ElementType,
-                EvalIdxRange,
+                IdxRangeEval,
                 VectorIndexSet<VectorDims...>,
                 MemorySpace,
                 LayoutOut> output,
         VectorField<
                 const ElementType,
-                CoeffIdxRange,
+                IdxRangeCoeff,
                 VectorIndexSet<VectorDims...>,
                 MemorySpace,
                 LayoutCoeff> coeffs)
@@ -113,10 +113,10 @@ void evaluate(
 template <
         concepts::InterpolationEvaluator Evaluator,
         class ElementType,
-        class EvalIdxRange,
+        class IdxRangeEval,
         class CoordType,
-        class CoordIdxRange,
-        class CoeffIdxRange,
+        class IdxRangeCoord,
+        class IdxRangeCoeff,
         class MemorySpace,
         class LayoutOut,
         class LayoutCoords,
@@ -126,14 +126,14 @@ void evaluate(
         Evaluator const& evaluator,
         VectorField<
                 ElementType,
-                EvalIdxRange,
+                IdxRangeEval,
                 VectorIndexSet<VectorDims...>,
                 MemorySpace,
                 LayoutOut> output,
-        ConstField<CoordType, CoordIdxRange, MemorySpace, LayoutCoords> coords,
+        ConstField<CoordType, IdxRangeCoord, MemorySpace, LayoutCoords> coords,
         VectorField<
                 const ElementType,
-                CoeffIdxRange,
+                IdxRangeCoeff,
                 VectorIndexSet<VectorDims...>,
                 MemorySpace,
                 LayoutCoeff> coeffs)
@@ -169,8 +169,8 @@ void evaluate(
 template <
         concepts::InterpolationEvaluator Evaluator,
         class ElementType,
-        class EvalIdxRange,
-        class CoeffIdxRange,
+        class IdxRangeEval,
+        class IdxRangeCoeff,
         class MemorySpace,
         class LayoutOut,
         class LayoutCoeff,
@@ -179,11 +179,11 @@ void deriv(
         Evaluator const& evaluator,
         VectorField<
                 ElementType,
-                EvalIdxRange,
+                IdxRangeEval,
                 VectorIndexSet<VectorDims...>,
                 MemorySpace,
                 LayoutOut> output,
-        ConstField<ElementType, CoeffIdxRange, MemorySpace, LayoutCoeff> coeffs)
+        ConstField<ElementType, IdxRangeCoeff, MemorySpace, LayoutCoeff> coeffs)
 {
     static_assert((VectorDims::IS_COVARIANT && ...));
     (evaluator
@@ -220,10 +220,10 @@ void deriv(
 template <
         concepts::InterpolationEvaluator Evaluator,
         class ElementType,
-        class EvalIdxRange,
+        class IdxRangeEval,
         class CoordType,
-        class CoordIdxRange,
-        class CoeffIdxRange,
+        class IdxRangeCoord,
+        class IdxRangeCoeff,
         class MemorySpace,
         class LayoutOut,
         class LayoutCoords,
@@ -233,12 +233,12 @@ void deriv(
         Evaluator const& evaluator,
         VectorField<
                 ElementType,
-                EvalIdxRange,
+                IdxRangeEval,
                 VectorIndexSet<VectorDims...>,
                 MemorySpace,
                 LayoutOut> output,
-        ConstField<CoordType, CoordIdxRange, MemorySpace, LayoutCoords> coords,
-        ConstField<ElementType, CoeffIdxRange, MemorySpace, LayoutCoeff> coeffs)
+        ConstField<CoordType, IdxRangeCoord, MemorySpace, LayoutCoords> coords,
+        ConstField<ElementType, IdxRangeCoeff, MemorySpace, LayoutCoeff> coeffs)
 {
     static_assert((VectorDims::IS_COVARIANT && ...));
     (evaluator
