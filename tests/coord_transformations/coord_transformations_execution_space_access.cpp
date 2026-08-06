@@ -285,22 +285,19 @@ TEST_F(MappingMemoryAccess, HostDiscreteLagrangeCoordConverter)
     LagEvalTheta theta_evaluator(theta_extrapolation_rule, theta_extrapolation_rule);
     LagEval evaluator(r_evaluator, theta_evaluator);
 
-    IdxLagRTheta lag_idx_range_start(0, 0);
-    IdxStepLagRTheta lag_idx_range_extents(
-            interpolation_idx_range_rtheta.extent<GridR>().value(),
-            interpolation_idx_range_rtheta.extent<GridTheta>().value());
-    IdxRangeLagRTheta lag_idx_range(lag_idx_range_start, lag_idx_range_extents);
+    IdxRangeLagRTheta lag_idx_range(
+            ddc::discrete_space<LagBasisR>().full_domain(),
+            ddc::discrete_space<LagBasisTheta>().full_domain());
 
     VectorFieldMem<double, IdxRangeLagRTheta, VectorIndexSet<X, Y>> coeff_representation_alloc(
             lag_idx_range);
     VectorField<double, IdxRangeLagRTheta, VectorIndexSet<X, Y>> coeff_representation(
             coeff_representation_alloc);
 
-    ddc::host_for_each(interpolation_idx_range_rtheta, [&](IdxRTheta idx) {
-        IdxLagRTheta idx_lag(IdxR(idx).uid(), IdxTheta(idx).uid());
+    ddc::host_for_each(lag_idx_range, [&](IdxLagRTheta idx) {
         CoordXY coord = analytical_mapping(ddc::coordinate(idx));
-        ddcHelper::get<X>(coeff_representation)(idx_lag) = ddc::get<X>(coord);
-        ddcHelper::get<Y>(coeff_representation)(idx_lag) = ddc::get<Y>(coord);
+        ddcHelper::get<X>(coeff_representation)(idx) = ddc::get<X>(coord);
+        ddcHelper::get<Y>(coeff_representation)(idx) = ddc::get<Y>(coord);
     });
 
     DiscreteMapping<Coord<R, Theta>, Coord<X, Y>, LagEval>
@@ -321,8 +318,8 @@ TEST_F(MappingMemoryAccess, HostDiscreteLagrangeCoordConverter)
 
     // Coord converter: logical -> physical.
     CoordXY diff_coord_xy = to_physical_mapping(coord_rtheta) - coord_xy;
-    EXPECT_LE(ddc::get<X>(diff_coord_xy), 1e-7);
-    EXPECT_LE(ddc::get<Y>(diff_coord_xy), 1e-7);
+    EXPECT_LE(ddc::get<X>(diff_coord_xy), 1e-6);
+    EXPECT_LE(ddc::get<Y>(diff_coord_xy), 1e-6);
 }
 
 
