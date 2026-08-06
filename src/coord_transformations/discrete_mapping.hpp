@@ -72,7 +72,8 @@ private:
     using CoeffField = VectorConstField<
             DataType,
             typename InterpolationEvaluatorTraits<NDEvaluator>::coeff_idx_range_type,
-            ResultBasis>;
+            ResultBasis,
+            typename NDEvaluator::memory_space>;
 
 private:
     CoeffField m_coeff_representation;
