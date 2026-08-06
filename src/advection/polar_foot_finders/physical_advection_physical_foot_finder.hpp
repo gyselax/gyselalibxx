@@ -7,7 +7,6 @@
 #include "l_norm_tools.hpp"
 #include "tensor.hpp"
 #include "vector_field.hpp"
-#include "vector_field_evaluation.hpp"
 
 namespace polar_foot_finder_details {
 
@@ -117,8 +116,12 @@ public:
         IdxRTheta idx_rtheta(idx);
         // The function describing how the derivative of the evolve function is calculated.
         auto dy = [&](DVector<AdvDim1, AdvDim2>& updated_advection_field, CoordRTheta const& foot) {
-            updated_advection_field = ndEval::
-                    evaluate(m_evaluator_advection_field, foot, m_advection_field_coefs[idx_batch]);
+            ddcHelper::get<AdvDim1>(updated_advection_field) = m_evaluator_advection_field(
+                    foot,
+                    get_const_field(ddcHelper::get<AdvDim1>(m_advection_field_coefs)[idx_batch]));
+            ddcHelper::get<AdvDim2>(updated_advection_field) = m_evaluator_advection_field(
+                    foot,
+                    get_const_field(ddcHelper::get<AdvDim2>(m_advection_field_coefs)[idx_batch]));
         };
 
         // The function describing how the value(s) are updated using the derivative.
