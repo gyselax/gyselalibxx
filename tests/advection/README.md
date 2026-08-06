@@ -79,7 +79,7 @@ with
 
 \left\{
 \begin{aligned}
-    & G (r)  = (\cos\left(\frac{\pi r}{2a}\right))^4 * \mathbb{1}_{r < a}(r), \\
+    & G (r)  = (\cos\left(\frac{\pi r}{2a}\right))^4 * \mathbb{1}_{|r| < a}(r), \\
     & r_1 (x,y) = \sqrt{(x - xc)^2 + 8 (y - yc)^2},  \\
     & r_2 (x,y) = \sqrt{8 (x - xc)^2 + (y - yc)^2},  \\
     & \omega = 2 \pi, \\
