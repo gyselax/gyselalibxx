@@ -32,7 +32,7 @@ template <
         class MemorySpace,
         class LayoutCoeff,
         class... VectorDims>
-KOKKOS_FUNCTION Vector<ElementType, VectorIndexSet<VectorDims...>> evaluate(
+KOKKOS_FUNCTION Vector<ElementType, VectorDims...> evaluate(
         Evaluator const& evaluator,
         CoordType const& coord,
         VectorField<
@@ -43,7 +43,7 @@ KOKKOS_FUNCTION Vector<ElementType, VectorIndexSet<VectorDims...>> evaluate(
                 LayoutCoeff> coeffs)
 {
     static_assert(ddc::detail::is_tagged_vector_v<CoordType>);
-    (evaluator(coord, ddcHelper::get<VectorDims>(coeffs)), ...);
+    return Vector<ElementType, VectorDims...>((evaluator(coord, ddcHelper::get<VectorDims>(coeffs)), ...));
 }
 
 /**
