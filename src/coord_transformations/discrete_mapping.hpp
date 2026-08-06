@@ -9,6 +9,7 @@
 #include "tensor.hpp"
 #include "tensor_common.hpp"
 #include "vector_field.hpp"
+#include "vector_field_evaluation.hpp"
 
 namespace details {
 
@@ -49,10 +50,10 @@ public:
     using ResultBasis = ddc::to_type_seq_t<EndCoord>;
 
 private:
-    using CoeffField = VectorField<
+    using CoeffField = VectorConstField<
             DataType,
             typename InterpolationEvaluatorTraits<NDEvaluator>::coeff_idx_range_type,
-            ddc::to_type_seq_t<CoordResult>>;
+            ResultBasis>;
 
 private:
     CoeffField m_coeff_representation;
@@ -95,7 +96,7 @@ public:
      */
     KOKKOS_FUNCTION CoordResult operator()(CoordArg const& coord) const
     {
-        return CoordResult(to_coord(evaluate(m_evaluator, coord, m_coeff_representation)));
+        return CoordResult(ddcHelper::to_coord(ndEval::evaluate(m_evaluator, coord, m_coeff_representation)));
     }
 
     /**
