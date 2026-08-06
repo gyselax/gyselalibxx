@@ -32,6 +32,22 @@ void fill_jacobian_matrix(
 
 } // namespace details
 
+/**
+ * @brief A mapping whose values are only known at the mesh points of a grid, evaluated
+ * elsewhere using an interpolating function.
+ *
+ * A discrete mapping is a mapping whose values are known only at the mesh points of the grid.
+ * To interpolate the mapping, we use an interpolation on a basis. The DiscreteMapping is
+ * initialised from the coefficients in front of the basis functions which arise when we
+ * approximate the functions @f$ E(S) @f$ (with @f$ E @f$ the coordinates in the End vector
+ * space and S the coordinates in the Start vector space). Then to interpolate the mapping,
+ * we evaluate the decomposed functions using the chosen interpolating function
+ * (see DiscreteMapping::operator()).
+ *
+ * @tparam StartCoord The type of the coordinates in the domain of definition of the mapping.
+ * @tparam EndCoord The type of the coordinates in the image of the mapping.
+ * @tparam NDEvaluator The type of the evaluator used to evaluate the interpolating function.
+ */
 template <class StartCoord, class EndCoord, concepts::InterpolationEvaluator NDEvaluator>
 class DiscreteMapping
 {
@@ -45,8 +61,11 @@ public:
     /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
     using CoordJacobian = StartCoord;
 
+    /// The data type of the coefficients and the values calculated by this mapping
     using DataType = typename InterpolationEvaluatorTraits<NDEvaluator>::data_type;
+    /// The type sequence of dimensions describing the argument of the function described by this mapping
     using ArgBasis = ddc::to_type_seq_t<StartCoord>;
+    /// The type sequence of dimensions describing the result of the function described by this mapping
     using ResultBasis = ddc::to_type_seq_t<EndCoord>;
 
 private:
@@ -86,7 +105,11 @@ public:
     {
     }
 
-    KOKKOS_DEFAULTED_FUNCTION DiscreteMapping(DiscreteMapping const&) = default;
+    /**
+     * @brief Copy-construct a DiscreteMapping.
+     * @param other The DiscreteMapping being copied.
+     */
+    KOKKOS_DEFAULTED_FUNCTION DiscreteMapping(DiscreteMapping const& other) = default;
 
     /**
      * @brief Compute the target coordinates from the start coordinates.
