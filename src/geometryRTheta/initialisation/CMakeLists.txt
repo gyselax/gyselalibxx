@@ -23,7 +23,7 @@ target_link_libraries(diocotron_init_eq
 
 add_library("gyselalibxx::diocotron_init_eq" ALIAS "diocotron_init_eq")
 
-install(TARGETS diocotron_init_eq EXPORT gyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS diocotron_init_eq EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/initialisation)
 
 
 
