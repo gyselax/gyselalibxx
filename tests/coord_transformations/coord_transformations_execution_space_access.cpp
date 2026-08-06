@@ -289,10 +289,10 @@ TEST_F(MappingMemoryAccess, HostDiscreteLagrangeCoordConverter)
             ddc::discrete_space<LagBasisR>().full_domain(),
             ddc::discrete_space<LagBasisTheta>().full_domain());
 
-    VectorFieldMem<double, IdxRangeLagRTheta, VectorIndexSet<X, Y>> coeff_representation_alloc(
-            lag_idx_range);
-    VectorField<double, IdxRangeLagRTheta, VectorIndexSet<X, Y>> coeff_representation(
-            coeff_representation_alloc);
+    VectorFieldMem<double, IdxRangeLagRTheta, VectorIndexSet<X, Y>, Kokkos::HostSpace>
+            coeff_representation_alloc(lag_idx_range);
+    VectorField<double, IdxRangeLagRTheta, VectorIndexSet<X, Y>, Kokkos::HostSpace>
+            coeff_representation(coeff_representation_alloc);
 
     ddc::host_for_each(lag_idx_range, [&](IdxLagRTheta idx) {
         CoordXY coord = analytical_mapping(ddc::coordinate(idx));
@@ -316,8 +316,12 @@ TEST_F(MappingMemoryAccess, HostDiscreteLagrangeCoordConverter)
             = e * r * std::sin(theta) / (std::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
     CoordXY const coord_xy(x, y);
 
-    // Coord converter: logical -> physical.
+// Coord converter: logical -> physical.
+// Workaround false positive
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
     CoordXY diff_coord_xy = to_physical_mapping(coord_rtheta) - coord_xy;
+#pragma GCC diagnostic pop
     EXPECT_LE(ddc::get<X>(diff_coord_xy), 1e-6);
     EXPECT_LE(ddc::get<Y>(diff_coord_xy), 1e-6);
 }
