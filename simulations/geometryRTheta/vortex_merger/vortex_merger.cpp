@@ -131,13 +131,7 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    SplineInterpolatorRTheta interpolator(grid);
 
     PolarFootFinder find_feet
             = make_polar_foot_finder<FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
@@ -147,7 +141,7 @@ int main(int argc, char** argv)
                     builder,
                     spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
 
 
@@ -159,7 +153,7 @@ int main(int argc, char** argv)
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
-    PoissonSolver poisson_solver(discrete_mapping, builder, spline_evaluator);
+    PoissonSolver poisson_solver(discrete_mapping, builder, interpolator.get_evaluator());
     poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
@@ -251,7 +245,8 @@ int main(int argc, char** argv)
     DFieldMemRTheta rho_eq_alloc(grid);
     ddc::parallel_deepcopy(rho_alloc_host, rho_eq_alloc_host);
     builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
+    PoissonLikeRHSFunction
+            poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), interpolator.get_evaluator());
     poisson_solver(get_field(phi_eq_alloc), poisson_rhs_eq);
     ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
