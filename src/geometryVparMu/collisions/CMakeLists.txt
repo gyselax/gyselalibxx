@@ -18,4 +18,4 @@ target_link_libraries("geometry_collisions_vparmu"
 
 add_library("gyselalibxx::geometry_collisions_vparmu" ALIAS "geometry_collisions_vparmu")
 
-install(TARGETS geometry_collisions_vparmu EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/collisions)
+install(TARGETS geometry_collisions_vparmu EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/collisions)

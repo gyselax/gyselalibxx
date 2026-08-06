@@ -25,4 +25,4 @@ target_link_libraries(timestepper INTERFACE
 )
 add_library(gyselalibxx::timestepper ALIAS timestepper)
 
-install(TARGETS timestepper EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS timestepper EXPORT gyselalibxxTargets FILE_SET HEADERS)

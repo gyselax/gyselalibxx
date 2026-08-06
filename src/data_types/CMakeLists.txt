@@ -33,4 +33,4 @@ target_link_libraries("data_types"
 
 add_library("gyselalibxx::data_types" ALIAS "data_types")
 
-install(TARGETS data_types EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS data_types EXPORT gyselalibxxTargets FILE_SET HEADERS)

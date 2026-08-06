@@ -26,4 +26,4 @@ target_link_libraries("multipatch_connectivity" INTERFACE
 )
 add_library("gyselalibxx::multipatch_connectivity" ALIAS "multipatch_connectivity")
 
-install(TARGETS multipatch_connectivity EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS multipatch_connectivity EXPORT gyselalibxxTargets FILE_SET HEADERS)

@@ -27,4 +27,4 @@ target_link_libraries("io"
 
 add_library("gyselalibxx::io" ALIAS "io")
 
-install(TARGETS io EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS io EXPORT gyselalibxxTargets FILE_SET HEADERS)

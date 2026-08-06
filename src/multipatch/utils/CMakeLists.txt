@@ -19,4 +19,4 @@ target_link_libraries("multipatch_utils"
 
 add_library("gyselalibxx::multipatch_utils" ALIAS "multipatch_utils")
 
-install(TARGETS multipatch_utils EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS multipatch_utils EXPORT gyselalibxxTargets FILE_SET HEADERS)

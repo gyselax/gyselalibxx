@@ -29,6 +29,6 @@ target_link_libraries("time_integration_${GEOMETRY_VARIANT}"
 
 add_library("gyselalibxx::time_integration_${GEOMETRY_VARIANT}" ALIAS "time_integration_${GEOMETRY_VARIANT}")
 
-install(TARGETS time_integration_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/time_integration)
+install(TARGETS time_integration_${GEOMETRY_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/time_integration)
 
 endforeach()

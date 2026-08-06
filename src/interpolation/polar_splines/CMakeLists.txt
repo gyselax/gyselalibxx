@@ -24,4 +24,4 @@ target_link_libraries("polar_splines"
 
 add_library("gyselalibxx::polar_splines" ALIAS "polar_splines")
 
-install(TARGETS polar_splines EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS polar_splines EXPORT gyselalibxxTargets FILE_SET HEADERS)

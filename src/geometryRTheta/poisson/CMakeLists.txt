@@ -23,4 +23,4 @@ target_link_libraries(poisson_RTheta INTERFACE
 
 add_library("gyselalibxx::poisson_RTheta" ALIAS "poisson_RTheta")
 
-install(TARGETS poisson_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/poisson)
+install(TARGETS poisson_RTheta EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/poisson)

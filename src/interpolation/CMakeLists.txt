@@ -32,6 +32,6 @@ target_link_libraries("interpolation"
 
 add_library("gyselalibxx::interpolation" ALIAS "interpolation")
 
-install(TARGETS interpolation EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS interpolation EXPORT gyselalibxxTargets FILE_SET HEADERS)
 
 add_subdirectory(polar_splines)

@@ -28,4 +28,4 @@ target_link_libraries("mpi_parallelisation"
 
 add_library("gyselalibxx::mpi_parallelisation" ALIAS "mpi_parallelisation")
 
-install(TARGETS mpi_parallelisation EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS mpi_parallelisation EXPORT gyselalibxxTargets FILE_SET HEADERS)

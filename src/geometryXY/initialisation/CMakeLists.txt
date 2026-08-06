@@ -19,4 +19,4 @@ target_link_libraries("initialisation_Kelvin_Helmholtz" INTERFACE
 )
 add_library("gyselalibxx::initialisation_Kelvin_Helmholtz" ALIAS "initialisation_Kelvin_Helmholtz")
 
-install(TARGETS initialisation_Kelvin_Helmholtz EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXY/initialisation)
+install(TARGETS initialisation_Kelvin_Helmholtz EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXY/initialisation)

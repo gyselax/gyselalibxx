@@ -41,4 +41,4 @@ target_link_libraries("coord_transformations"
 
 add_library("gyselalibxx::coord_transformations" ALIAS "coord_transformations")
 
-install(TARGETS coord_transformations EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS coord_transformations EXPORT gyselalibxxTargets FILE_SET HEADERS)

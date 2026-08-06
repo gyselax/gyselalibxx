@@ -24,4 +24,4 @@ target_link_libraries("multipatch_spline" INTERFACE
 )
 add_library("gyselalibxx::multipatch_spline" ALIAS "multipatch_spline")
 
-install(TARGETS multipatch_spline EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS multipatch_spline EXPORT gyselalibxxTargets FILE_SET HEADERS)

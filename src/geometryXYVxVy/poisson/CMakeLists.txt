@@ -39,6 +39,6 @@ target_link_libraries("poisson_xy_${PRECISION_VARIANT}"
 
 add_library("gyselalibxx::poisson_xy_${PRECISION_VARIANT}" ALIAS "poisson_xy_${PRECISION_VARIANT}")
 
-install(TARGETS poisson_xy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/poisson)
+install(TARGETS poisson_xy_${PRECISION_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/poisson)
 
 endforeach()

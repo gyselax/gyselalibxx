@@ -24,6 +24,6 @@ target_link_libraries("geometry_xyvxvy_${PRECISION_VARIANT}" INTERFACE
 target_compile_definitions(geometry_xyvxvy_${PRECISION_VARIANT} INTERFACE GYSELALIBXX_BUILD_REAL_PRECISION=${PRECISION_VARIANT})
 add_library("gyselalibxx::geometry_xyvxvy_${PRECISION_VARIANT}" ALIAS "geometry_xyvxvy_${PRECISION_VARIANT}")
 
-install(TARGETS geometry_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/geometry)
+install(TARGETS geometry_xyvxvy_${PRECISION_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/geometry)
 
 endforeach()

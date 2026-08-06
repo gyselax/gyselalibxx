@@ -27,4 +27,4 @@ target_link_libraries(quadrature PUBLIC
 
 add_library(gyselalibxx::quadrature ALIAS quadrature)
 
-install(TARGETS quadrature EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS quadrature EXPORT gyselalibxxTargets FILE_SET HEADERS)

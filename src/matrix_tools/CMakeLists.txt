@@ -40,4 +40,4 @@ target_link_libraries(matrix_tools
 )
 add_library(gyselalibxx::matrix_tools ALIAS matrix_tools)
 
-install(TARGETS matrix_tools EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS matrix_tools EXPORT gyselalibxxTargets FILE_SET HEADERS)

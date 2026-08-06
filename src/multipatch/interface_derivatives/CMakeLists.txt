@@ -20,4 +20,4 @@ target_link_libraries("multipatch_interface_derivatives" INTERFACE
 )
 add_library("gyselalibxx::multipatch_interface_derivatives" ALIAS "multipatch_interface_derivatives")
 
-install(TARGETS multipatch_interface_derivatives EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS multipatch_interface_derivatives EXPORT gyselalibxxTargets FILE_SET HEADERS)

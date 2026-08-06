@@ -30,4 +30,4 @@ target_link_libraries("pde_solvers"
 
 add_library("gyselalibxx::pde_solvers" ALIAS "pde_solvers")
 
-install(TARGETS pde_solvers EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS pde_solvers EXPORT gyselalibxxTargets FILE_SET HEADERS)

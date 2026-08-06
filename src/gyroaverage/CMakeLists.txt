@@ -19,4 +19,4 @@ target_link_libraries(gyroaverage
 
 add_library(gyselalibxx::gyroaverage ALIAS gyroaverage)
 
-install(TARGETS gyroaverage EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS gyroaverage EXPORT gyselalibxxTargets FILE_SET HEADERS)

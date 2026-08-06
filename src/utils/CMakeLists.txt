@@ -31,4 +31,4 @@ target_link_libraries("utils"
 
 add_library("gyselalibxx::utils" ALIAS "utils")
 
-install(TARGETS utils EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS utils EXPORT gyselalibxxTargets FILE_SET HEADERS)

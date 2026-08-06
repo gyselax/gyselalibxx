@@ -36,4 +36,4 @@ target_link_libraries("advection"
 
 add_library("gyselalibxx::advection" ALIAS "advection")
 
-install(TARGETS advection EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS advection EXPORT gyselalibxxTargets FILE_SET HEADERS)

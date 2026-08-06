@@ -22,4 +22,4 @@ target_link_libraries("advection_field_RTheta" INTERFACE
 )
 add_library("gyselalibxx::advection_field_RTheta" ALIAS "advection_field_RTheta")
 
-install(TARGETS advection_field_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/advection_field)
+install(TARGETS advection_field_RTheta EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/advection_field)

@@ -95,11 +95,11 @@ set(GYSELALIBXX_INSTALL_CMAKEDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
 install(FILES cmake/FindLAPACKE.cmake DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
 
-install(EXPORT GyselalibxxTargets NAMESPACE gyselalibxx:: DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
+install(EXPORT gyselalibxxTargets NAMESPACE gyselalibxx:: DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
 
 configure_package_config_file(
-    cmake/GyselalibxxConfig.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/GyselalibxxConfig.cmake
+    cmake/gyselalibxxConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfig.cmake
     INSTALL_DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR}
     NO_SET_AND_CHECK_MACRO
 )
@@ -109,14 +109,14 @@ if(PROJECT_VERSION VERSION_GREATER_EQUAL 1)
     message(FATAL_ERROR "Gyselalibxx must switch COMPATIBILITY mode to SameMajorVersion")
 endif()
 write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/GyselalibxxConfigVersion.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfigVersion.cmake
     COMPATIBILITY SameMinorVersion
 )
 
 install(
     FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/GyselalibxxConfig.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/GyselalibxxConfigVersion.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfigVersion.cmake
     DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR}
 )
 

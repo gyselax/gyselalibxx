@@ -22,7 +22,7 @@ target_link_libraries("geometry_${GEOMETRY_VARIANT}" INTERFACE
 )
 add_library("gyselalibxx::geometry_${GEOMETRY_VARIANT}" ALIAS "geometry_${GEOMETRY_VARIANT}")
 
-install(TARGETS geometry_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/geometry)
+install(TARGETS geometry_${GEOMETRY_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/geometry)
 
 endforeach()
 

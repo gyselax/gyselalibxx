@@ -22,4 +22,4 @@ target_link_libraries("multipatch_data_types" INTERFACE
 )
 add_library("gyselalibxx::multipatch_data_types" ALIAS "multipatch_data_types")
 
-install(TARGETS multipatch_data_types EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS multipatch_data_types EXPORT gyselalibxxTargets FILE_SET HEADERS)

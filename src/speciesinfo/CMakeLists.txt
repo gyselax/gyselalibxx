@@ -22,7 +22,7 @@ target_link_libraries(speciesinfo
 )
 add_library(gyselalibxx::speciesinfo ALIAS speciesinfo)
 
-install(TARGETS speciesinfo EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS speciesinfo EXPORT gyselalibxxTargets FILE_SET HEADERS)
 
 add_library(moments INTERFACE)
 
@@ -36,4 +36,4 @@ target_sources("moments"
 target_link_libraries(moments INTERFACE
     DDC::core)
 add_library(gyselalibxx::moments ALIAS moments)
-install(TARGETS moments EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS moments EXPORT gyselalibxxTargets FILE_SET HEADERS)

@@ -29,6 +29,6 @@ target_link_libraries("initialisation_xyvxvy_${PRECISION_VARIANT}"
 
 add_library("gyselalibxx::initialisation_xyvxvy_${PRECISION_VARIANT}" ALIAS "initialisation_xyvxvy_${PRECISION_VARIANT}")
 
-install(TARGETS initialisation_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/initialisation)
+install(TARGETS initialisation_xyvxvy_${PRECISION_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/initialisation)
 
 endforeach()

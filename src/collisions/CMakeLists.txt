@@ -26,4 +26,4 @@ target_link_libraries("collisions"
 
 add_library("gyselalibxx::collisions" ALIAS "collisions")
 
-install(TARGETS collisions EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS collisions EXPORT gyselalibxxTargets FILE_SET HEADERS)

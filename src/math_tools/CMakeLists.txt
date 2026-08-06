@@ -34,4 +34,4 @@ target_link_libraries("math_tools"
 
 add_library("gyselalibxx::math_tools" ALIAS "math_tools")
 
-install(TARGETS math_tools EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS math_tools EXPORT gyselalibxxTargets FILE_SET HEADERS)

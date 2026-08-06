@@ -27,4 +27,4 @@ target_link_libraries(time_integration_RTheta
 )
 add_library(gyselalibxx::time_integration_RTheta ALIAS time_integration_RTheta)
 
-install(TARGETS time_integration_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/time_solver)
+install(TARGETS time_integration_RTheta EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/time_solver)

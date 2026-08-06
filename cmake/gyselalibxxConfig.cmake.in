@@ -24,6 +24,6 @@ find_dependency(Ginkgo)
 
 find_dependency(GMGPolar)
 
-include(${CMAKE_CURRENT_LIST_DIR}/GyselalibxxTargets.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/gyselalibxxTargets.cmake)
 
-check_required_components(Gyselalibxx)
+check_required_components(gyselalibxx)
