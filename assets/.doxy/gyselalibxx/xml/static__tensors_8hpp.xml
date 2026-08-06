@@ -364,6 +364,8 @@
       <node id="44">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp</label>
         <link refid="nd__lagrange__evaluator_8hpp_source"/>
+        <childnode refid="41" relation="include">
+        </childnode>
       </node>
       <node id="45">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>

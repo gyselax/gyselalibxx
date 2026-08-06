@@ -16,6 +16,8 @@
 * `#include "lagrange_basis_non_uniform.hpp"`
 * `#include "lagrange_basis_uniform.hpp"`
 * `#include "lagrange_evaluator.hpp"`
+* `#include "nd_identity_interpolation_builder.hpp"`
+* `#include "nd_lagrange_evaluator.hpp"`
 
 
 
@@ -37,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef detail::LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, extrapolation\_rule\_t&lt; ExtrapRules, typename [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md)&lt; ExecSpace, typename ExecSpace::memory\_space, DataType, InterpGrid, Basis &gt;::basis\_domain\_type, DataType, Basis &gt;, DataType &gt; | [**LagrangeInterpolator**](#typedef-lagrangeinterpolator)  <br>_A helper alias to define an instance of detail::LagrangeInterpolator._  |
+| typedef typename detail::LagrangeInterpolatorResolver&lt; ExecSpace, DataType, IdxRangeBasis, IdxRangeInterpGrid, ExtrapRules... &gt;::type | [**LagrangeInterpolator**](#typedef-lagrangeinterpolator)  <br>_A helper alias to define an instance of detail::LagrangeInterpolator._  |
 
 
 
@@ -95,7 +97,7 @@
 
 _A helper alias to define an instance of detail::LagrangeInterpolator._ 
 ```C++
-using LagrangeInterpolator =  detail::LagrangeInterpolator< ExecSpace, Basis, InterpGrid, extrapolation_rule_t< ExtrapRules, typename IdentityInterpolationBuilder< ExecSpace, typename ExecSpace::memory_space, DataType, InterpGrid, Basis>::basis_domain_type, DataType, Basis>, DataType>;
+using LagrangeInterpolator =  typename detail::LagrangeInterpolatorResolver< ExecSpace, DataType, IdxRangeBasis, IdxRangeInterpGrid, ExtrapRules...>::type;
 ```
 
 

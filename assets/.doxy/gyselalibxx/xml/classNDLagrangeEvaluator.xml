@@ -609,7 +609,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="224" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="224" bodyend="249"/>
       </memberdef>
-      <memberdef kind="function" id="classNDLagrangeEvaluator_1a60c2e10b43141645fb6462a99d29647e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1a5624ee070bf8dbc7821fd8c0be1b3477" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class IdxDerivDims</type>
@@ -626,8 +626,8 @@
             <defname>CoordsDims</defname>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::deriv</definition>
+        <type>KOKKOS_FUNCTION <ref refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kindref="member">data_type</ref></type>
+        <definition>KOKKOS_FUNCTION data_type NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::deriv</definition>
         <argsstring>(IdxDerivDims const &amp;deriv_order, Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; data_type, BatchedLagrangeIdxRange, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
         <name>deriv</name>
         <qualifiedname>NDLagrangeEvaluator::deriv</qualifiedname>
@@ -678,7 +678,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="263" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="263" bodyend="270"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="264" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="264" bodyend="270"/>
       </memberdef>
       <memberdef kind="function" id="classNDLagrangeEvaluator_1a84858db154d6cc6a3d654d6d85ba4188" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -919,7 +919,7 @@
       <member refid="classNDLagrangeEvaluator_1a31f3ed8c37e9f62331f75e64eed9c92e" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>batched_evaluation_idx_range_type</name></member>
       <member refid="classNDLagrangeEvaluator_1ab58868beecca408992d3210df35ebfbf" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>coeff_idx_range_type</name></member>
       <member refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>data_type</name></member>
-      <member refid="classNDLagrangeEvaluator_1a60c2e10b43141645fb6462a99d29647e" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>deriv</name></member>
+      <member refid="classNDLagrangeEvaluator_1a5624ee070bf8dbc7821fd8c0be1b3477" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>deriv</name></member>
       <member refid="classNDLagrangeEvaluator_1a84858db154d6cc6a3d654d6d85ba4188" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>deriv</name></member>
       <member refid="classNDLagrangeEvaluator_1ab65ca2fd7980133f91911b6b4caad224" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>deriv</name></member>
       <member refid="classNDLagrangeEvaluator_1a2cc75c71441a6c6d4c3a6dc19a0d21c2" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>eval_no_bc</name></member>

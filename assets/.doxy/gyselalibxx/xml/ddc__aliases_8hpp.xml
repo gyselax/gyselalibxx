@@ -1194,10 +1194,14 @@
       <node id="164">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp</label>
         <link refid="nd__identity__interpolation__builder_8hpp_source"/>
+        <childnode refid="96" relation="include">
+        </childnode>
       </node>
       <node id="99">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp</label>
         <link refid="nd__lagrange__evaluator_8hpp_source"/>
+        <childnode refid="96" relation="include">
+        </childnode>
       </node>
       <node id="27">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>

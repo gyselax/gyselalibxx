@@ -176,11 +176,11 @@ public:
     }
 
     template <class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
-    KOKKOS_FUNCTION double deriv(
-            IdxDerivDims const& deriv_order,
-            Coord<CoordsDims...> const& coord_eval,
-            ConstField<data_type, BatchedLagrangeIdxRange, memory_space, Layout> const
-                    lagrange_coef) const
+    KOKKOS_FUNCTION data_type
+    deriv(IdxDerivDims const& deriv_order,
+          Coord<CoordsDims...> const& coord_eval,
+          ConstField<data_type, BatchedLagrangeIdxRange, memory_space, Layout> const lagrange_coef)
+            const
     {
         return eval_no_bc(deriv_order, coord_eval, lagrange_coef);
     }

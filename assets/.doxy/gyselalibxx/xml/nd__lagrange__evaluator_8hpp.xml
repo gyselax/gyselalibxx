@@ -7,6 +7,7 @@
     <includes local="no">type_traits</includes>
     <includes refid="lagrange__evaluator_8hpp" local="yes">lagrange_evaluator.hpp</includes>
     <includes refid="type__seq__tools_8hpp" local="yes">type_seq_tools.hpp</includes>
+    <includedby refid="lagrange__interpolation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</includedby>
     <incdepgraph>
       <node id="17">
         <label>coord_transformation_tools.hpp</label>
@@ -315,6 +316,18 @@
         <label>vector</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
+        <link refid="lagrange__interpolation_8hpp_source"/>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp</label>
+        <link refid="nd__lagrange__evaluator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
     <innerclass refid="classNDLagrangeEvaluator" prot="public">NDLagrangeEvaluator</innerclass>
     <briefdescription>
     </briefdescription>
@@ -489,11 +502,11 @@
 <codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="250"><highlight class="normal"></highlight></codeline>
 <codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxDerivDims,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Layout,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">BatchedLagrangeIdxRange,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>CoordsDims&gt;</highlight></codeline>
-<codeline lineno="263" refid="classNDLagrangeEvaluator_1a60c2e10b43141645fb6462a99d29647e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classNDLagrangeEvaluator_1a60c2e10b43141645fb6462a99d29647e" kindref="member">deriv</ref>(</highlight></codeline>
-<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxDerivDims<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>deriv_order,</highlight></codeline>
-<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;CoordsDims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord_eval,</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ConstField&lt;data_type,<sp/>BatchedLagrangeIdxRange,<sp/>memory_space,<sp/>Layout&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lagrange_coef)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kindref="member">data_type</ref></highlight></codeline>
+<codeline lineno="264" refid="classNDLagrangeEvaluator_1a5624ee070bf8dbc7821fd8c0be1b3477" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classNDLagrangeEvaluator_1a5624ee070bf8dbc7821fd8c0be1b3477" kindref="member">deriv</ref>(IdxDerivDims<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>deriv_order,</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;CoordsDims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord_eval,</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ConstField&lt;data_type,<sp/>BatchedLagrangeIdxRange,<sp/>memory_space,<sp/>Layout&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>lagrange_coef)</highlight><highlight class="keyword"></highlight></codeline>
+<codeline lineno="267"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const</highlight></codeline>
 <codeline lineno="268"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>eval_no_bc(deriv_order,<sp/>coord_eval,<sp/>lagrange_coef);</highlight></codeline>
 <codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>

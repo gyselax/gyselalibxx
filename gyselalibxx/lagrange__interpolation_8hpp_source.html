@@ -579,6 +579,8 @@
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
 #include "lagrange_evaluator.hpp"
+#include "nd_identity_interpolation_builder.hpp"
+#include "nd_lagrange_evaluator.hpp"
 
 namespace detail {
 
@@ -681,29 +683,225 @@ public:
     }
 };
 
+template &lt;
+        class ExecSpace,
+        class IdxRangeBasis,
+        class IdxRangeInterpGrid,
+        class ExtrapRulesSeq,
+        class DataType = double&gt;
+class NDLagrangeInterpolator;
+
+template &lt;class ExecSpace, class... Basis, class... Grid1D, class... ExtrapRules, class DataType&gt;
+class NDLagrangeInterpolator&lt;
+        ExecSpace,
+        IdxRange&lt;Basis...&gt;,
+        IdxRange&lt;Grid1D...&gt;,
+        ddc::detail::TypeSeq&lt;ExtrapRules...&gt;,
+        DataType&gt;
+{
+    static_assert(sizeof...(Basis) == sizeof...(Grid1D));
+    static_assert(sizeof...(Basis) == sizeof...(ExtrapRules));
+    static_assert(sizeof...(Basis) &gt; 0);
+    static_assert((is_lagrange_basis_v&lt;Basis&gt; &amp;&amp; ...));
+
+public:
+    using memory_space = typename ExecSpace::memory_space;
+
+private:
+    template &lt;class Rule&gt;
+    using MinRule = ddc::type_seq_element_t&lt;0, Rule&gt;;
+
+    template &lt;class Rule&gt;
+    using MaxRule = ddc::type_seq_element_t&lt;1, Rule&gt;;
+
+public:
+    using BuilderType = NDIdentityInterpolationBuilder&lt;
+            ExecSpace,
+            memory_space,
+            DataType,
+            IdxRange&lt;Grid1D...&gt;,
+            IdxRange&lt;Basis...&gt;&gt;;
+
+    using EvaluatorType = NDLagrangeEvaluator&lt;LagrangeEvaluator&lt;
+            ExecSpace,
+            memory_space,
+            DataType,
+            Basis,
+            Grid1D,
+            MinRule&lt;ExtrapRules&gt;,
+            MaxRule&lt;ExtrapRules&gt;&gt;...&gt;;
+
+private:
+    template &lt;class B&gt;
+    using CoeffGrid = ddc::type_seq_element_t&lt;
+            ddc::type_seq_rank_v&lt;B, ddc::detail::TypeSeq&lt;Basis...&gt;&gt;,
+            ddc::to_type_seq_t&lt;typename BuilderType::coeff_idx_range_type&gt;&gt;;
+
+    static_assert(
+            ((Basis::is_periodic()
+              == std::is_same_v&lt;
+                      MinRule&lt;ExtrapRules&gt;,
+                      ddc::PeriodicExtrapolationRule&lt;
+                              typename Basis::continuous_dimension_type&gt;&gt;)&amp;&amp;...),
+            "PeriodicExtrapolationRule has to be used if and only if the dimension is "
+            "periodic");
+    static_assert(
+            ((Basis::is_periodic()
+              == std::is_same_v&lt;
+                      MaxRule&lt;ExtrapRules&gt;,
+                      ddc::PeriodicExtrapolationRule&lt;
+                              typename Basis::continuous_dimension_type&gt;&gt;)&amp;&amp;...),
+            "PeriodicExtrapolationRule has to be used if and only if the dimension is "
+            "periodic");
+
+public:
+    static constexpr std::size_t rank()
+    {
+        return sizeof...(Grid1D);
+    }
+
+private:
+    BuilderType m_builder;
+    EvaluatorType m_evaluator;
+
+public:
+    explicit NDLagrangeInterpolator(IdxRange&lt;Grid1D...&gt; idx_range = IdxRange&lt;Grid1D...&gt; {}) requires(
+            (is_extrapolation_rule_auto_constructible_v&lt;
+                     MinRule&lt;ExtrapRules&gt;,
+                     CoeffGrid&lt;Basis&gt;,
+                     DataType,
+                     Basis&gt; &amp;&amp; ...)
+            &amp;&amp; (is_extrapolation_rule_auto_constructible_v&lt;
+                        MaxRule&lt;ExtrapRules&gt;,
+                        CoeffGrid&lt;Basis&gt;,
+                        DataType,
+                        Basis&gt; &amp;&amp; ...))
+        : m_evaluator(LagrangeEvaluator&lt;
+                      ExecSpace,
+                      memory_space,
+                      DataType,
+                      Basis,
+                      Grid1D,
+                      MinRule&lt;ExtrapRules&gt;,
+                      MaxRule&lt;ExtrapRules&gt;&gt;(
+                get_extrapolation&lt;MinRule&lt;ExtrapRules&gt;, CoeffGrid&lt;Basis&gt;, DataType, Basis&gt;(
+                        Extremity::FRONT),
+                get_extrapolation&lt;MaxRule&lt;ExtrapRules&gt;, CoeffGrid&lt;Basis&gt;, DataType, Basis&gt;(
+                        Extremity::BACK))...)
+    {
+    }
+
+    explicit NDLagrangeInterpolator(
+            IdxRange&lt;Grid1D...&gt; idx_range,
+            std::pair&lt;MinRule&lt;ExtrapRules&gt;, MaxRule&lt;ExtrapRules&gt;&gt; const&amp;... extrapolation_rules)
+        : m_evaluator(LagrangeEvaluator&lt;
+                      ExecSpace,
+                      memory_space,
+                      DataType,
+                      Basis,
+                      Grid1D,
+                      MinRule&lt;ExtrapRules&gt;,
+                      MaxRule&lt;ExtrapRules&gt;&gt;(
+                extrapolation_rules.first,
+                extrapolation_rules.second)...)
+    {
+    }
+
+    BuilderType const&amp; get_builder() const
+    {
+        return m_builder;
+    }
+
+    EvaluatorType const&amp; get_evaluator() const
+    {
+        return m_evaluator;
+    }
+};
+
+template &lt;
+        class ExecSpace,
+        class DataType,
+        class IdxRangeBasis,
+        class IdxRangeInterpGrid,
+        class... ExtrapRulesSeq&gt;
+struct LagrangeInterpolatorResolver;
+
+template &lt;class ExecSpace, class DataType, class Basis, class Grid1D, class ExtrapRules&gt;
+struct LagrangeInterpolatorResolver&lt;
+        ExecSpace,
+        DataType,
+        IdxRange&lt;Basis&gt;,
+        IdxRange&lt;Grid1D&gt;,
+        ExtrapRules&gt;
+{
+    using type = detail::LagrangeInterpolator&lt;
+            ExecSpace,
+            Basis,
+            Grid1D,
+            extrapolation_rule_t&lt;
+                    ExtrapRules,
+                    typename IdentityInterpolationBuilder&lt;
+                            ExecSpace,
+                            typename ExecSpace::memory_space,
+                            DataType,
+                            Grid1D,
+                            Basis&gt;::basis_domain_type,
+                    DataType,
+                    Basis&gt;,
+            DataType&gt;;
+};
+
+template &lt;
+        class ExecSpace,
+        class DataType,
+        class BasisHead,
+        class... Basis,
+        class Grid1DHead,
+        class... Grid1D,
+        class ExtrapRulesHead,
+        class... ExtrapRules&gt;
+struct LagrangeInterpolatorResolver&lt;
+        ExecSpace,
+        DataType,
+        IdxRange&lt;BasisHead, Basis...&gt;,
+        IdxRange&lt;Grid1DHead, Grid1D...&gt;,
+        ExtrapRulesHead,
+        ExtrapRules...&gt;
+{
+    using type = detail::NDLagrangeInterpolator&lt;
+            ExecSpace,
+            IdxRange&lt;BasisHead, Basis...&gt;,
+            IdxRange&lt;Grid1DHead, Grid1D...&gt;,
+            ddc::detail::TypeSeq&lt;
+                    extrapolation_rule_t&lt;
+                            ExtrapRulesHead,
+                            typename BasisHead::template Impl&lt;
+                                    BasisHead,
+                                    typename ExecSpace::memory_space&gt;::knot_grid,
+                            DataType,
+                            BasisHead&gt;,
+                    extrapolation_rule_t&lt;
+                            ExtrapRules,
+                            typename Basis::template Impl&lt;Basis, typename ExecSpace::memory_space&gt;::
+                                    knot_grid,
+                            DataType,
+                            Basis&gt;...&gt;,
+            DataType&gt;;
+};
 } // namespace detail
 
 template &lt;
         class ExecSpace,
-        class Basis,
-        class InterpGrid,
-        class ExtrapRules,
-        class DataType = double&gt;
-using LagrangeInterpolator = detail::LagrangeInterpolator&lt;
+        class DataType,
+        class IdxRangeBasis,
+        class IdxRangeInterpGrid,
+        class... ExtrapRules&gt;
+using LagrangeInterpolator = typename detail::LagrangeInterpolatorResolver&lt;
         ExecSpace,
-        Basis,
-        InterpGrid,
-        extrapolation_rule_t&lt;
-                ExtrapRules,
-                typename IdentityInterpolationBuilder&lt;
-                        ExecSpace,
-                        typename ExecSpace::memory_space,
-                        DataType,
-                        InterpGrid,
-                        Basis&gt;::basis_domain_type,
-                DataType,
-                Basis&gt;,
-        DataType&gt;;
+        DataType,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        ExtrapRules...&gt;::type;
 </code></pre></div>
               
             </div>

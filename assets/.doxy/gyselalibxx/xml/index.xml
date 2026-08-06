@@ -2562,7 +2562,7 @@
     <member refid="classNDLagrangeEvaluator_1a7e576bc8e8c98eb3688b5bdeb58cb48e" kind="function"><name>operator()</name></member>
     <member refid="classNDLagrangeEvaluator_1ae4d5c978b81d2eee2ccbc665f21685c0" kind="function"><name>operator()</name></member>
     <member refid="classNDLagrangeEvaluator_1a180b9a6b2ee4a00bc7a6225932da6399" kind="function"><name>operator()</name></member>
-    <member refid="classNDLagrangeEvaluator_1a60c2e10b43141645fb6462a99d29647e" kind="function"><name>deriv</name></member>
+    <member refid="classNDLagrangeEvaluator_1a5624ee070bf8dbc7821fd8c0be1b3477" kind="function"><name>deriv</name></member>
     <member refid="classNDLagrangeEvaluator_1a84858db154d6cc6a3d654d6d85ba4188" kind="function"><name>deriv</name></member>
     <member refid="classNDLagrangeEvaluator_1ab65ca2fd7980133f91911b6b4caad224" kind="function"><name>deriv</name></member>
     <member refid="classNDLagrangeEvaluator_1a2cc75c71441a6c6d4c3a6dc19a0d21c2" kind="function"><name>eval_no_bc</name></member>
@@ -4443,7 +4443,7 @@
   <compound refid="lagrange__evaluator_8hpp" kind="file"><name>lagrange_evaluator.hpp</name>
   </compound>
   <compound refid="lagrange__interpolation_8hpp" kind="file"><name>lagrange_interpolation.hpp</name>
-    <member refid="lagrange__interpolation_8hpp_1ab1bfdb2b877a9689e96ee150cd9e0037" kind="typedef"><name>LagrangeInterpolator</name></member>
+    <member refid="lagrange__interpolation_8hpp_1ac1208e33aa55305e0431947cc29d4eee" kind="typedef"><name>LagrangeInterpolator</name></member>
   </compound>
   <compound refid="nd__identity__interpolation__builder_8hpp" kind="file"><name>nd_identity_interpolation_builder.hpp</name>
   </compound>
