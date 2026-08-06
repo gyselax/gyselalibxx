@@ -15,12 +15,12 @@ target_sources("poisson_RTheta"
 
 target_link_libraries(poisson_RTheta INTERFACE
         DDC::core
-        gslx::data_types
-        gslx::geometry_RTheta
-        gslx::speciesinfo
-        gslx::utils
+        gyselalibxx::data_types
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::speciesinfo
+        gyselalibxx::utils
 )
 
-add_library("gslx::poisson_RTheta" ALIAS "poisson_RTheta")
+add_library("gyselalibxx::poisson_RTheta" ALIAS "poisson_RTheta")
 
 install(TARGETS poisson_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/poisson)

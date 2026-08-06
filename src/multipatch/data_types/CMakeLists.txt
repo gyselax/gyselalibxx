@@ -17,9 +17,9 @@ target_link_libraries("multipatch_data_types" INTERFACE
     DDC::core
     DDC::splines
 
-    gslx::data_types
-    gslx::utils
+    gyselalibxx::data_types
+    gyselalibxx::utils
 )
-add_library("gslx::multipatch_data_types" ALIAS "multipatch_data_types")
+add_library("gyselalibxx::multipatch_data_types" ALIAS "multipatch_data_types")
 
 install(TARGETS multipatch_data_types EXPORT GyselalibxxTargets FILE_SET HEADERS)

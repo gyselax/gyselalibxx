@@ -35,9 +35,9 @@ target_link_libraries(matrix_tools
         DDC::splines
         Kokkos::kokkos
         Ginkgo::ginkgo
-        gslx::utils
+        gyselalibxx::utils
         LAPACKE::LAPACKE
 )
-add_library(gslx::matrix_tools ALIAS matrix_tools)
+add_library(gyselalibxx::matrix_tools ALIAS matrix_tools)
 
 install(TARGETS matrix_tools EXPORT GyselalibxxTargets FILE_SET HEADERS)

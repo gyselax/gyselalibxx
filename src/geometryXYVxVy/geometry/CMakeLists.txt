@@ -15,14 +15,14 @@ target_sources("geometry_xyvxvy_${PRECISION_VARIANT}"
 
 target_link_libraries("geometry_xyvxvy_${PRECISION_VARIANT}" INTERFACE
     DDC::core
-    gslx::data_types
-    gslx::mpi_parallelisation
-    gslx::speciesinfo
-    gslx::utils
-    gslx::geometry_xperiod_vx
+    gyselalibxx::data_types
+    gyselalibxx::mpi_parallelisation
+    gyselalibxx::speciesinfo
+    gyselalibxx::utils
+    gyselalibxx::geometry_xperiod_vx
 )
 target_compile_definitions(geometry_xyvxvy_${PRECISION_VARIANT} INTERFACE GYSELALIBXX_BUILD_REAL_PRECISION=${PRECISION_VARIANT})
-add_library("gslx::geometry_xyvxvy_${PRECISION_VARIANT}" ALIAS "geometry_xyvxvy_${PRECISION_VARIANT}")
+add_library("gyselalibxx::geometry_xyvxvy_${PRECISION_VARIANT}" ALIAS "geometry_xyvxvy_${PRECISION_VARIANT}")
 
 install(TARGETS geometry_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/geometry)
 

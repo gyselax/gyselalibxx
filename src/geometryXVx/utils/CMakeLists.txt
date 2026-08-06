@@ -18,13 +18,13 @@ target_sources("utils_${GEOMETRY_VARIANT}"
 target_link_libraries("utils_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
-        gslx::geometry_${GEOMETRY_VARIANT}
-        gslx::quadrature
-        gslx::utils
+        gyselalibxx::geometry_${GEOMETRY_VARIANT}
+        gyselalibxx::quadrature
+        gyselalibxx::utils
 
 )
 
-add_library("gslx::utils_${GEOMETRY_VARIANT}" ALIAS "utils_${GEOMETRY_VARIANT}")
+add_library("gyselalibxx::utils_${GEOMETRY_VARIANT}" ALIAS "utils_${GEOMETRY_VARIANT}")
 
 install(TARGETS utils_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/utils)
 

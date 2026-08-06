@@ -25,15 +25,15 @@ target_link_libraries("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
         DDC::fft
-        gslx::geometry_${GEOMETRY_VARIANT}
-        gslx::pde_solvers
-        gslx::quadrature
-        gslx::speciesinfo
-        gslx::utils
+        gyselalibxx::geometry_${GEOMETRY_VARIANT}
+        gyselalibxx::pde_solvers
+        gyselalibxx::quadrature
+        gyselalibxx::speciesinfo
+        gyselalibxx::utils
 
 )
 
-add_library("gslx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT}")
+add_library("gyselalibxx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT}")
 
 install(TARGETS poisson_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/poisson)
 

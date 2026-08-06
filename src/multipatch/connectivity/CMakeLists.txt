@@ -19,11 +19,11 @@ target_sources("multipatch_connectivity"
 
 target_link_libraries("multipatch_connectivity" INTERFACE
     DDC::core
-    gslx::coord_transformations
-    gslx::data_types
-    gslx::multipatch_data_types
-    gslx::utils
+    gyselalibxx::coord_transformations
+    gyselalibxx::data_types
+    gyselalibxx::multipatch_data_types
+    gyselalibxx::utils
 )
-add_library("gslx::multipatch_connectivity" ALIAS "multipatch_connectivity")
+add_library("gyselalibxx::multipatch_connectivity" ALIAS "multipatch_connectivity")
 
 install(TARGETS multipatch_connectivity EXPORT GyselalibxxTargets FILE_SET HEADERS)

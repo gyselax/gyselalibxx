@@ -13,10 +13,10 @@ target_sources("gyroaverage"
 target_link_libraries(gyroaverage
     INTERFACE
         DDC::core
-        gslx::utils
-        gslx::coord_transformations
+        gyselalibxx::utils
+        gyselalibxx::coord_transformations
 )
 
-add_library(gslx::gyroaverage ALIAS gyroaverage)
+add_library(gyselalibxx::gyroaverage ALIAS gyroaverage)
 
 install(TARGETS gyroaverage EXPORT GyselalibxxTargets FILE_SET HEADERS)

@@ -22,7 +22,7 @@ target_link_libraries(bernstein_tests
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::polar_splines
+        gyselalibxx::polar_splines
 )
 target_include_directories(bernstein_tests
     PRIVATE
@@ -38,7 +38,7 @@ target_link_libraries(polar_bsplines_tests
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::polar_splines
+        gyselalibxx::polar_splines
 )
 target_include_directories(polar_bsplines_tests
     PRIVATE
@@ -65,7 +65,7 @@ foreach(CONTINUITY RANGE -1 1)
             PUBLIC
             GTest::gtest
             GTest::gmock
-            gslx::polar_splines
+            gyselalibxx::polar_splines
           )
           target_compile_definitions("${test_name}" PUBLIC -DDEGREE_R=${DEGREE_R} -DDEGREE_P=${DEGREE_P} -D${BSPLINES_TYPE} -DCONTINUITY=${CONTINUITY} -D${MAPPING_TYPE})
           gtest_discover_tests("${test_name}"
@@ -89,8 +89,8 @@ target_link_libraries(lagrange_tests
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::interpolation
-        gslx::math_tools
+        gyselalibxx::interpolation
+        gyselalibxx::math_tools
 )
 target_include_directories(lagrange_tests
     PRIVATE

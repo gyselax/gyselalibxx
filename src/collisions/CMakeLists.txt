@@ -17,13 +17,13 @@ target_sources("collisions"
 target_link_libraries("collisions"
     PUBLIC
         DDC::core
-        gslx::paraconfpp
-        gslx::speciesinfo
-        gslx::utils
+        gyselalibxx::paraconfpp
+        gyselalibxx::speciesinfo
+        gyselalibxx::utils
         koliop::koliop
         paraconf::paraconf
 )
 
-add_library("gslx::collisions" ALIAS "collisions")
+add_library("gyselalibxx::collisions" ALIAS "collisions")
 
 install(TARGETS collisions EXPORT GyselalibxxTargets FILE_SET HEADERS)

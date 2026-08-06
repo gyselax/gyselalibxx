@@ -14,8 +14,8 @@ target_sources("geometry_XY"
 target_link_libraries("geometry_XY" INTERFACE
     DDC::core
     DDC::splines
-    gslx::utils
+    gyselalibxx::utils
 )
-add_library("gslx::geometry_XY" ALIAS "geometry_XY")
+add_library("gyselalibxx::geometry_XY" ALIAS "geometry_XY")
 
 install(TARGETS geometry_XY EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXY/geometry)

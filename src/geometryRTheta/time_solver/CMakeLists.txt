@@ -18,13 +18,13 @@ target_sources("time_integration_RTheta"
 target_link_libraries(time_integration_RTheta
     INTERFACE
         DDC::core
-        gslx::advection
-        gslx::advection_field_RTheta
-        gslx::geometry_RTheta
-        gslx::poisson_RTheta
-        gslx::utils
-        gslx::timestepper
+        gyselalibxx::advection
+        gyselalibxx::advection_field_RTheta
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::poisson_RTheta
+        gyselalibxx::utils
+        gyselalibxx::timestepper
 )
-add_library(gslx::time_integration_RTheta ALIAS time_integration_RTheta)
+add_library(gyselalibxx::time_integration_RTheta ALIAS time_integration_RTheta)
 
 install(TARGETS time_integration_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/time_solver)

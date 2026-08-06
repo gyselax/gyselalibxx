@@ -95,7 +95,7 @@ set(GYSELALIBXX_INSTALL_CMAKEDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
 install(FILES cmake/FindLAPACKE.cmake DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
 
-install(EXPORT GyselalibxxTargets NAMESPACE gslx:: DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
+install(EXPORT GyselalibxxTargets NAMESPACE gyselalibxx:: DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
 
 configure_package_config_file(
     cmake/GyselalibxxConfig.cmake.in

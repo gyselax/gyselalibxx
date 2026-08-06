@@ -28,9 +28,9 @@ target_link_libraries("data_types"
     INTERFACE
         DDC::core
         DDC::splines
-        gslx::utils
+        gyselalibxx::utils
 )
 
-add_library("gslx::data_types" ALIAS "data_types")
+add_library("gyselalibxx::data_types" ALIAS "data_types")
 
 install(TARGETS data_types EXPORT GyselalibxxTargets FILE_SET HEADERS)

@@ -13,11 +13,11 @@ target_sources("multipatch_interface_derivatives"
 
 target_link_libraries("multipatch_interface_derivatives" INTERFACE
     DDC::core
-    gslx::multipatch_data_types
-    gslx::multipatch_connectivity
-    gslx::utils
+    gyselalibxx::multipatch_data_types
+    gyselalibxx::multipatch_connectivity
+    gyselalibxx::utils
 
 )
-add_library("gslx::multipatch_interface_derivatives" ALIAS "multipatch_interface_derivatives")
+add_library("gyselalibxx::multipatch_interface_derivatives" ALIAS "multipatch_interface_derivatives")
 
 install(TARGETS multipatch_interface_derivatives EXPORT GyselalibxxTargets FILE_SET HEADERS)

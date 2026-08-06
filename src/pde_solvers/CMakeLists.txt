@@ -22,12 +22,12 @@ target_link_libraries("pde_solvers"
         DDC::core
         DDC::fft
         GMGPolar::GMGPolarLib
-        gslx::coord_transformations
-        gslx::data_types
-        gslx::matrix_tools
-        gslx::utils
+        gyselalibxx::coord_transformations
+        gyselalibxx::data_types
+        gyselalibxx::matrix_tools
+        gyselalibxx::utils
 )
 
-add_library("gslx::pde_solvers" ALIAS "pde_solvers")
+add_library("gyselalibxx::pde_solvers" ALIAS "pde_solvers")
 
 install(TARGETS pde_solvers EXPORT GyselalibxxTargets FILE_SET HEADERS)

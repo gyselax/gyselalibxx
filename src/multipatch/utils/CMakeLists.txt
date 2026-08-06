@@ -13,10 +13,10 @@ target_sources("multipatch_utils"
 
 target_link_libraries("multipatch_utils"
     INTERFACE
-        gslx::multipatch_data_types
-        gslx::utils
+        gyselalibxx::multipatch_data_types
+        gyselalibxx::utils
 )
 
-add_library("gslx::multipatch_utils" ALIAS "multipatch_utils")
+add_library("gyselalibxx::multipatch_utils" ALIAS "multipatch_utils")
 
 install(TARGETS multipatch_utils EXPORT GyselalibxxTargets FILE_SET HEADERS)

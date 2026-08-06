@@ -21,14 +21,14 @@ target_sources("boltzmann_${GEOMETRY_VARIANT}"
 target_link_libraries("boltzmann_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
-        gslx::interpolation
-        gslx::speciesinfo
-        gslx::geometry_${GEOMETRY_VARIANT}
-        gslx::rhs_${GEOMETRY_VARIANT}
-        gslx::advection
+        gyselalibxx::interpolation
+        gyselalibxx::speciesinfo
+        gyselalibxx::geometry_${GEOMETRY_VARIANT}
+        gyselalibxx::rhs_${GEOMETRY_VARIANT}
+        gyselalibxx::advection
 )
 
-add_library("gslx::boltzmann_${GEOMETRY_VARIANT}" ALIAS "boltzmann_${GEOMETRY_VARIANT}")
+add_library("gyselalibxx::boltzmann_${GEOMETRY_VARIANT}" ALIAS "boltzmann_${GEOMETRY_VARIANT}")
 
 install(TARGETS boltzmann_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/boltzmann)
 

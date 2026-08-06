@@ -9,18 +9,18 @@ function (build_landau4d_fft_target INTERPOLATION PRECISION)
             DDC::pdi
             paraconf::paraconf
             PDI::PDI_C
-            gslx::advection
-            gslx::geometry_xyvxvy_${PRECISION}
-            gslx::initialisation_xyvxvy_${PRECISION}
-            gslx::interpolation
-            gslx::io
-            gslx::mpi_parallelisation
-            gslx::paraconfpp
-            gslx::poisson_xy_${PRECISION}
-            gslx::quadrature
-            gslx::time_integration_xyvxvy_${PRECISION}
-            gslx::utils
-            gslx::vlasov_xyvxvy_${PRECISION}
+            gyselalibxx::advection
+            gyselalibxx::geometry_xyvxvy_${PRECISION}
+            gyselalibxx::initialisation_xyvxvy_${PRECISION}
+            gyselalibxx::interpolation
+            gyselalibxx::io
+            gyselalibxx::mpi_parallelisation
+            gyselalibxx::paraconfpp
+            gyselalibxx::poisson_xy_${PRECISION}
+            gyselalibxx::quadrature
+            gyselalibxx::time_integration_xyvxvy_${PRECISION}
+            gyselalibxx::utils
+            gyselalibxx::vlasov_xyvxvy_${PRECISION}
     )
 
     install(TARGETS ${target_name})

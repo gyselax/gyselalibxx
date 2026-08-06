@@ -20,11 +20,11 @@ target_link_libraries("io"
     PUBLIC
         DDC::core
         PDI::PDI_C
-        gslx::data_types
-        gslx::paraconfpp
-        gslx::utils
+        gyselalibxx::data_types
+        gyselalibxx::paraconfpp
+        gyselalibxx::utils
 )
 
-add_library("gslx::io" ALIAS "io")
+add_library("gyselalibxx::io" ALIAS "io")
 
 install(TARGETS io EXPORT GyselalibxxTargets FILE_SET HEADERS)

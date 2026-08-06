@@ -17,11 +17,11 @@ target_sources("multipatch_spline"
 
 target_link_libraries("multipatch_spline" INTERFACE
     DDC::core
-    gslx::multipatch_data_types
-    gslx::multipatch_connectivity
-    gslx::utils
+    gyselalibxx::multipatch_data_types
+    gyselalibxx::multipatch_connectivity
+    gyselalibxx::utils
 
 )
-add_library("gslx::multipatch_spline" ALIAS "multipatch_spline")
+add_library("gyselalibxx::multipatch_spline" ALIAS "multipatch_spline")
 
 install(TARGETS multipatch_spline EXPORT GyselalibxxTargets FILE_SET HEADERS)

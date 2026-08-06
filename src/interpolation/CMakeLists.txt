@@ -26,11 +26,11 @@ target_sources("interpolation"
 target_link_libraries("interpolation"
     INTERFACE
         DDC::core
-        gslx::math_tools
-        gslx::utils
+        gyselalibxx::math_tools
+        gyselalibxx::utils
 )
 
-add_library("gslx::interpolation" ALIAS "interpolation")
+add_library("gyselalibxx::interpolation" ALIAS "interpolation")
 
 install(TARGETS interpolation EXPORT GyselalibxxTargets FILE_SET HEADERS)
 

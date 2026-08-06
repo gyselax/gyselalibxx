@@ -29,6 +29,6 @@ target_link_libraries("utils"
         DDC::splines
 )
 
-add_library("gslx::utils" ALIAS "utils")
+add_library("gyselalibxx::utils" ALIAS "utils")
 
 install(TARGETS utils EXPORT GyselalibxxTargets FILE_SET HEADERS)

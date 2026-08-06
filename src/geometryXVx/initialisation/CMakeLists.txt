@@ -28,12 +28,12 @@ target_link_libraries("initialisation_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
         DDC::pdi
-        gslx::speciesinfo
-        gslx::geometry_${GEOMETRY_VARIANT}
-        gslx::utils
+        gyselalibxx::speciesinfo
+        gyselalibxx::geometry_${GEOMETRY_VARIANT}
+        gyselalibxx::utils
 )
 
-add_library("gslx::initialisation_${GEOMETRY_VARIANT}" ALIAS "initialisation_${GEOMETRY_VARIANT}")
+add_library("gyselalibxx::initialisation_${GEOMETRY_VARIANT}" ALIAS "initialisation_${GEOMETRY_VARIANT}")
 
 install(TARGETS initialisation_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/initialisation)
 

@@ -20,11 +20,11 @@ target_sources("initialisation_vparmu"
 target_link_libraries("initialisation_vparmu"
     PUBLIC
         DDC::core
-        gslx::speciesinfo
-        gslx::geometry_vparmu
-        gslx::utils
+        gyselalibxx::speciesinfo
+        gyselalibxx::geometry_vparmu
+        gyselalibxx::utils
 )
 
-add_library("gslx::initialisation_vparmu" ALIAS "initialisation_vparmu")
+add_library("gyselalibxx::initialisation_vparmu" ALIAS "initialisation_vparmu")
 
 install(TARGETS initialisation_vparmu EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/initialisation)

@@ -34,11 +34,11 @@ target_sources("coord_transformations"
 target_link_libraries("coord_transformations"
     INTERFACE
         DDC::core
-        gslx::data_types
-        gslx::math_tools
-        gslx::utils
+        gyselalibxx::data_types
+        gyselalibxx::math_tools
+        gyselalibxx::utils
 )
 
-add_library("gslx::coord_transformations" ALIAS "coord_transformations")
+add_library("gyselalibxx::coord_transformations" ALIAS "coord_transformations")
 
 install(TARGETS coord_transformations EXPORT GyselalibxxTargets FILE_SET HEADERS)

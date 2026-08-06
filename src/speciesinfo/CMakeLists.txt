@@ -16,11 +16,11 @@ target_sources("speciesinfo"
 
 target_link_libraries(speciesinfo
     DDC::core
-    gslx::io
-    gslx::paraconfpp
-    gslx::utils
+    gyselalibxx::io
+    gyselalibxx::paraconfpp
+    gyselalibxx::utils
 )
-add_library(gslx::speciesinfo ALIAS speciesinfo)
+add_library(gyselalibxx::speciesinfo ALIAS speciesinfo)
 
 install(TARGETS speciesinfo EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
@@ -35,5 +35,5 @@ target_sources("moments"
 
 target_link_libraries(moments INTERFACE
     DDC::core)
-add_library(gslx::moments ALIAS moments)
+add_library(gyselalibxx::moments ALIAS moments)
 install(TARGETS moments EXPORT GyselalibxxTargets FILE_SET HEADERS)

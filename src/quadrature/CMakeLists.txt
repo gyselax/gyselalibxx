@@ -21,10 +21,10 @@ target_sources("quadrature"
 
 target_link_libraries(quadrature PUBLIC
     DDC::core
-    gslx::coord_transformations
-    gslx::utils
+    gyselalibxx::coord_transformations
+    gyselalibxx::utils
 )
 
-add_library(gslx::quadrature ALIAS quadrature)
+add_library(gyselalibxx::quadrature ALIAS quadrature)
 
 install(TARGETS quadrature EXPORT GyselalibxxTargets FILE_SET HEADERS)

@@ -31,17 +31,17 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
         DDC::pdi
-        gslx::geometry_${GEOMETRY_VARIANT}
-        gslx::quadrature
-        gslx::speciesinfo
-        gslx::initialisation_${GEOMETRY_VARIANT}
-        gslx::matrix_tools
-        gslx::timestepper
-        gslx::utils_${GEOMETRY_VARIANT}
-        gslx::utils
+        gyselalibxx::geometry_${GEOMETRY_VARIANT}
+        gyselalibxx::quadrature
+        gyselalibxx::speciesinfo
+        gyselalibxx::initialisation_${GEOMETRY_VARIANT}
+        gyselalibxx::matrix_tools
+        gyselalibxx::timestepper
+        gyselalibxx::utils_${GEOMETRY_VARIANT}
+        gyselalibxx::utils
 )
 
-add_library("gslx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
+add_library("gyselalibxx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
 
 install(TARGETS rhs_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/rhs)
 

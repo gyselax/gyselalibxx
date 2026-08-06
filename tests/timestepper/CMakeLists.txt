@@ -20,11 +20,11 @@ target_link_libraries(unit_tests_timestepper
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-        gslx::math_tools
-        gslx::multipatch_data_types
-        gslx::multipatch_geometries
-        gslx::timestepper
-        gslx::utils
+        gyselalibxx::math_tools
+        gyselalibxx::multipatch_data_types
+        gyselalibxx::multipatch_geometries
+        gyselalibxx::timestepper
+        gyselalibxx::utils
 )
 
 gtest_discover_tests(unit_tests_timestepper DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

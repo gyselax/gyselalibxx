@@ -13,13 +13,13 @@ target_sources("predcorr_rk2_xy"
 
 target_link_libraries("predcorr_rk2_xy" INTERFACE
     DDC::core
-    gslx::advection
-    gslx::interpolation
-    gslx::geometry_XY
-    gslx::pde_solvers
-    gslx::timestepper
-    gslx::utils
+    gyselalibxx::advection
+    gyselalibxx::interpolation
+    gyselalibxx::geometry_XY
+    gyselalibxx::pde_solvers
+    gyselalibxx::timestepper
+    gyselalibxx::utils
 )
-add_library("gslx::predcorr_rk2_xy" ALIAS "predcorr_rk2_xy")
+add_library("gyselalibxx::predcorr_rk2_xy" ALIAS "predcorr_rk2_xy")
 
 install(TARGETS predcorr_rk2_xy EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXY/time_integration)

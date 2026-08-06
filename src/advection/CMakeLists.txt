@@ -27,13 +27,13 @@ target_sources("advection"
 target_link_libraries("advection"
     INTERFACE
         DDC::core
-        gslx::interpolation
-        gslx::math_tools
-        gslx::speciesinfo
-        gslx::timestepper
-        gslx::utils
+        gyselalibxx::interpolation
+        gyselalibxx::math_tools
+        gyselalibxx::speciesinfo
+        gyselalibxx::timestepper
+        gyselalibxx::utils
 )
 
-add_library("gslx::advection" ALIAS "advection")
+add_library("gyselalibxx::advection" ALIAS "advection")
 
 install(TARGETS advection EXPORT GyselalibxxTargets FILE_SET HEADERS)

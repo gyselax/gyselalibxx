@@ -22,10 +22,10 @@ target_sources("mpi_parallelisation"
 target_link_libraries("mpi_parallelisation"
     PUBLIC
         DDC::core
-        gslx::utils
+        gyselalibxx::utils
         MPI::MPI_CXX
 )
 
-add_library("gslx::mpi_parallelisation" ALIAS "mpi_parallelisation")
+add_library("gyselalibxx::mpi_parallelisation" ALIAS "mpi_parallelisation")
 
 install(TARGETS mpi_parallelisation EXPORT GyselalibxxTargets FILE_SET HEADERS)

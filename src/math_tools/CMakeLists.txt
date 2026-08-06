@@ -26,12 +26,12 @@ target_sources("math_tools"
 target_link_libraries("math_tools"
     INTERFACE
         DDC::core
-        gslx::coord_transformations
-        gslx::data_types
-        gslx::interpolation
-        gslx::quadrature
+        gyselalibxx::coord_transformations
+        gyselalibxx::data_types
+        gyselalibxx::interpolation
+        gyselalibxx::quadrature
 )
 
-add_library("gslx::math_tools" ALIAS "math_tools")
+add_library("gyselalibxx::math_tools" ALIAS "math_tools")
 
 install(TARGETS math_tools EXPORT GyselalibxxTargets FILE_SET HEADERS)

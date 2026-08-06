@@ -11,9 +11,9 @@ target_sources("geometry_vparmu"
 )
 target_link_libraries("geometry_vparmu" INTERFACE
     DDC::core
-    gslx::speciesinfo
-    gslx::utils
+    gyselalibxx::speciesinfo
+    gyselalibxx::utils
 )
-add_library("gslx::geometry_vparmu" ALIAS "geometry_vparmu")
+add_library("gyselalibxx::geometry_vparmu" ALIAS "geometry_vparmu")
 
 install(TARGETS geometry_vparmu EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/geometry)

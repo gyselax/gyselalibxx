@@ -15,10 +15,10 @@ target_sources("geometry_RTheta"
 
 target_link_libraries("geometry_RTheta" INTERFACE
     DDC::core
-    gslx::data_types
-    gslx::polar_splines
-    gslx::utils
+    gyselalibxx::data_types
+    gyselalibxx::polar_splines
+    gyselalibxx::utils
 )
-add_library("gslx::geometry_RTheta" ALIAS "geometry_RTheta")
+add_library("gyselalibxx::geometry_RTheta" ALIAS "geometry_RTheta")
 
 install(TARGETS geometry_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/geometry)

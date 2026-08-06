@@ -14,6 +14,6 @@ target_sources("paraconfpp"
 target_link_libraries(paraconfpp INTERFACE
         paraconf::paraconf
 )
-add_library(gslx::paraconfpp ALIAS paraconfpp)
+add_library(gyselalibxx::paraconfpp ALIAS paraconfpp)
 
 install(TARGETS paraconfpp EXPORT GyselalibxxTargets FILE_SET HEADERS)

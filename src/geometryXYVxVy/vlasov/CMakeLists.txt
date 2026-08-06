@@ -21,13 +21,13 @@ target_sources("vlasov_xyvxvy_${PRECISION_VARIANT}"
 target_link_libraries("vlasov_xyvxvy_${PRECISION_VARIANT}"
     PUBLIC
         DDC::core
-        gslx::advection
-        gslx::geometry_xyvxvy_${PRECISION_VARIANT}
-        gslx::mpi_parallelisation
-        gslx::speciesinfo
+        gyselalibxx::advection
+        gyselalibxx::geometry_xyvxvy_${PRECISION_VARIANT}
+        gyselalibxx::mpi_parallelisation
+        gyselalibxx::speciesinfo
 )
 
-add_library("gslx::vlasov_xyvxvy_${PRECISION_VARIANT}" ALIAS "vlasov_xyvxvy_${PRECISION_VARIANT}")
+add_library("gyselalibxx::vlasov_xyvxvy_${PRECISION_VARIANT}" ALIAS "vlasov_xyvxvy_${PRECISION_VARIANT}")
 
 install(TARGETS vlasov_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/vlasov)
 
