@@ -296,9 +296,11 @@ private:
             LowerExtrapolationRule3,
             UpperExtrapolationRule3>
 
-public:
-    /// @brief The data type that the data is saved on.
-    using data_type = double;
+            public
+        :
+        /// @brief The data type that the data is saved on.
+        using data_type
+        = double;
 
     /// @brief The 1D index range for the evaluation mesh.
     using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
