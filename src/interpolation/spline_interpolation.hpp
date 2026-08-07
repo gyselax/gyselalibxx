@@ -520,6 +520,318 @@ public:
 };
 
 /**
+ * @brief An owning interpolation object that bundles a 3D spline builder and evaluator.
+ *
+ * SplineInterpolator3D constructs and owns a matching ddc::SplineBuilder3D and
+ * ddc::SplineEvaluator3D for two given dimensions. It is the recommended way to
+ * create a 3D spline interpolation for use with advection operators and similar
+ * algorithms.
+ *
+ * The boundary conditions (MinBound1/MaxBound1, MinBound2/MaxBound2 and MinBound3/MaxBound3) and
+ * extrapolation rules (MinExtrapRule1/MaxExtrapRule1, MinExtrapRule2/MaxExtrapRule2 and MinExtrapRule3/MaxExtrapRule3)
+ * must be consistent within each dimension: both must be PERIODIC for periodic
+ * dimensions and both must be non-PERIODIC for non-periodic dimensions.
+ *
+ * @tparam ExecSpace      The Kokkos execution space used for computations.
+ * @tparam Basis1         The B-spline basis type for the first dimension (uniform or non-uniform).
+ * @tparam Basis2         The B-spline basis type for the second dimension (uniform or non-uniform).
+ * @tparam Basis3         The B-spline basis type for the second dimension (uniform or non-uniform).
+ * @tparam InterpGrid1    The discrete grid on which function values are provided along the first dimension.
+ * @tparam InterpGrid2    The discrete grid on which function values are provided along the second dimension.
+ * @tparam InterpGrid3    The discrete grid on which function values are provided along the second dimension.
+ * @tparam MinExtrapRule1 The extrapolation rule applied below the lower boundary of the
+ *                        first dimension. This may be one of the tags in the
+ *                        ExtrapolationRule namespace (e.g. ExtrapolationRule::Periodic)
+ *                        or a custom, already-concrete extrapolation rule class.
+ * @tparam MaxExtrapRule1 The extrapolation rule applied above the upper boundary of the
+ *                        first dimension. See MinExtrapRule1 for the accepted forms.
+ * @tparam MinExtrapRule2 The extrapolation rule applied below the lower boundary of the
+ *                        second dimension. See MinExtrapRule1 for the accepted forms.
+ * @tparam MaxExtrapRule2 The extrapolation rule applied above the upper boundary of the
+ *                        second dimension. See MinExtrapRule1 for the accepted forms.
+ * @tparam MinExtrapRule3 The extrapolation rule applied below the lower boundary of the
+ *                        third dimension. See MinExtrapRule1 for the accepted forms.
+ * @tparam MaxExtrapRule3 The extrapolation rule applied above the upper boundary of the
+ *                        third dimension. See MinExtrapRule1 for the accepted forms.
+ * @tparam MinBound1      The ddc::SplineBuilderClosure at the lower boundary of the first dimension.
+ * @tparam MaxBound1      The ddc::SplineBuilderClosure at the upper boundary of the first dimension.
+ * @tparam MinBound2      The ddc::SplineBuilderClosure at the lower boundary of the second dimension.
+ * @tparam MaxBound2      The ddc::SplineBuilderClosure at the upper boundary of the second dimension.
+ * @tparam MinBound3      The ddc::SplineBuilderClosure at the lower boundary of the second dimension.
+ * @tparam MaxBound3      The ddc::SplineBuilderClosure at the upper boundary of the second dimension.
+ * @tparam Solver         The spline solver backend (default: LAPACK).
+ */
+template <
+        class ExecSpace,
+        class Basis1,
+        class Basis2,
+        class Basis3,
+        class InterpGrid1,
+        class InterpGrid2,
+        class InterpGrid3,
+        class ExtrapRules,
+        class BoundaryClosures,
+        ddc::SplineSolver Solver>
+class SplineInterpolator3D;
+
+template <
+        class ExecSpace,
+        class Basis1,
+        class Basis2,
+        class Basis3,
+        class InterpGrid1,
+        class InterpGrid2,
+        class InterpGrid3,
+        class ExtrapRules1,
+        class ExtrapRules2,
+        class ExtrapRules3,
+        class BoundaryClosures1,
+        class BoundaryClosures2,
+        class BoundaryClosures3,
+        ddc::SplineSolver Solver>
+class SplineInterpolator3D<
+        ExecSpace,
+        Basis1,
+        Basis2,
+        Basis3,
+        InterpGrid1,
+        InterpGrid2,
+        InterpGrid3,
+        ddc::detail::TypeSeq<ExtrapRules1, ExtrapRules2, ExtrapRules3>,
+        ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2, BoundaryClosures3>,
+        Solver>
+{
+private:
+    using continuous_dimension_type1 = typename InterpGrid1::continuous_dimension_type;
+    using continuous_dimension_type2 = typename InterpGrid2::continuous_dimension_type;
+    using continuous_dimension_type3 = typename InterpGrid3::continuous_dimension_type;
+
+    static constexpr bool is_periodic1 = continuous_dimension_type1::PERIODIC;
+    static constexpr bool is_periodic2 = continuous_dimension_type2::PERIODIC;
+    static constexpr bool is_periodic3 = continuous_dimension_type3::PERIODIC;
+
+    using MinExtrapolationRule1 = ddc::type_seq_element_t<0, ExtrapRules1>;
+    using MaxExtrapolationRule1 = ddc::type_seq_element_t<1, ExtrapRules1>;
+    using MinExtrapolationRule2 = ddc::type_seq_element_t<0, ExtrapRules2>;
+    using MaxExtrapolationRule2 = ddc::type_seq_element_t<1, ExtrapRules2>;
+    using MinExtrapolationRule3 = ddc::type_seq_element_t<0, ExtrapRules3>;
+    using MaxExtrapolationRule3 = ddc::type_seq_element_t<1, ExtrapRules3>;
+
+    static constexpr ddc::SplineBuilderClosure MinBound1 = BoundaryClosures1::min::value;
+    static constexpr ddc::SplineBuilderClosure MaxBound1 = BoundaryClosures1::max::value;
+    static constexpr ddc::SplineBuilderClosure MinBound2 = BoundaryClosures2::min::value;
+    static constexpr ddc::SplineBuilderClosure MaxBound2 = BoundaryClosures2::max::value;
+    static constexpr ddc::SplineBuilderClosure MinBound3 = BoundaryClosures3::min::value;
+    static constexpr ddc::SplineBuilderClosure MaxBound3 = BoundaryClosures3::max::value;
+
+    static_assert(is_periodic1 == (MinBound1 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic1 == (MaxBound1 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(
+            is_periodic1
+            == std::is_same_v<
+                    MinExtrapolationRule1,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type1>>);
+    static_assert(
+            is_periodic1
+            == std::is_same_v<
+                    MaxExtrapolationRule1,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type1>>);
+
+    static_assert(is_periodic2 == (MinBound2 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic2 == (MaxBound2 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(
+            is_periodic2
+            == std::is_same_v<
+                    MinExtrapolationRule2,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type2>>);
+    static_assert(
+            is_periodic2
+            == std::is_same_v<
+                    MaxExtrapolationRule2,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type2>>);
+
+    static_assert(is_periodic3 == (MinBound3 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic3 == (MaxBound3 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(
+            is_periodic3
+            == std::is_same_v<
+                    MinExtrapolationRule3,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type3>>);
+    static_assert(
+            is_periodic3
+            == std::is_same_v<
+                    MaxExtrapolationRule3,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type3>>);
+
+    static_assert(is_spline_basis_v<Basis1>);
+    static_assert(is_spline_basis_v<Basis2>);
+    static_assert(is_spline_basis_v<Basis3>);
+
+public:
+    /// @brief The ddc::SplineBuilder2D type built from the template parameters.
+    using BuilderType = ddc::SplineBuilder3D<
+            ExecSpace,
+            typename ExecSpace::memory_space,
+            Basis1,
+            Basis2,
+            Basis3,
+            InterpGrid1,
+            InterpGrid2,
+            InterpGrid3,
+            MinBound1,
+            MaxBound1,
+            MinBound2,
+            MaxBound2,
+            MinBound3,
+            MaxBound3,
+            Solver>;
+
+    /// @brief The ddc::SplineEvaluator2D type built from the template parameters.
+    using EvaluatorType = ddc::SplineEvaluator3D<
+            ExecSpace,
+            typename ExecSpace::memory_space,
+            Basis1,
+            Basis2,
+            Basis3,
+            InterpGrid1,
+            InterpGrid2,
+            InterpGrid3,
+            MinExtrapolationRule1,
+            MaxExtrapolationRule1,
+            MinExtrapolationRule2,
+            MaxExtrapolationRule2,
+            MinExtrapolationRule3,
+            MaxExtrapolationRule3>;
+
+    /// @brief The number of interpolation dimensions.
+    static constexpr std::size_t rank()
+    {
+        return 3;
+    }
+
+private:
+    MinExtrapolationRule1 m_min_extrapolation1;
+    MaxExtrapolationRule1 m_max_extrapolation1;
+    MinExtrapolationRule2 m_min_extrapolation2;
+    MaxExtrapolationRule2 m_max_extrapolation2;
+    MinExtrapolationRule3 m_min_extrapolation3;
+    MaxExtrapolationRule3 m_max_extrapolation3;
+    BuilderType m_builder;
+    EvaluatorType m_evaluator;
+
+public:
+    /**
+     * @brief Construct a SplineInterpolator3D on the given 3D interpolation index range.
+     *
+     * The extrapolation rules are initialised from the discrete spaces of Basis1, Basis2 and
+     * Basis3, so the corresponding ddc discrete spaces must be initialised before
+     * construction. This overload is only available when all four extrapolation rules
+     * can be built automatically (they are default-constructible, or the tag
+     * ExtrapolationRule::Constant is used) - otherwise use the overload that takes the
+     * extrapolation rules explicitly.
+     *
+     * @param idx_range The 3D interpolation index range passed to the builder.
+     */
+    explicit SplineInterpolator3D(IdxRange<
+                                  InterpGrid1,
+                                  InterpGrid2,
+                                  InterpGrid3> idx_range) requires((is_extrapolation_rule_auto_constructible_v<MinExtrapolationRule1, InterpGrid1, double, Basis1>)&&(is_extrapolation_rule_auto_constructible_v<MaxExtrapolationRule1, InterpGrid1, double, Basis1>)&&(is_extrapolation_rule_auto_constructible_v<MinExtrapolationRule2, InterpGrid2, double, Basis2>)&&(is_extrapolation_rule_auto_constructible_v<MaxExtrapolationRule2, InterpGrid2, double, Basis2>)&&(is_extrapolation_rule_auto_constructible_v<MinExtrapolationRule3, InterpGrid3, double, Basis3>)&&(is_extrapolation_rule_auto_constructible_v<MaxExtrapolationRule3, InterpGrid3, double, Basis3>))
+        : m_min_extrapolation1(
+                get_extrapolation<MinExtrapolationRule1, InterpGrid1, double, Basis1>(
+                        Extremity::FRONT))
+        , m_max_extrapolation1(
+                  get_extrapolation<MaxExtrapolationRule1, InterpGrid1, double, Basis1>(
+                          Extremity::BACK))
+        , m_min_extrapolation2(
+                  get_extrapolation<MinExtrapolationRule2, InterpGrid2, double, Basis2>(
+                          Extremity::FRONT))
+        , m_max_extrapolation2(
+                  get_extrapolation<MaxExtrapolationRule2, InterpGrid2, double, Basis2>(
+                          Extremity::BACK))
+        , m_min_extrapolation3(
+                  get_extrapolation<MinExtrapolationRule3, InterpGrid3, double, Basis3>(
+                          Extremity::FRONT))
+        , m_max_extrapolation3(
+                  get_extrapolation<MaxExtrapolationRule3, InterpGrid3, double, Basis3>(
+                          Extremity::BACK))
+        , m_builder(idx_range)
+        , m_evaluator(
+                  m_min_extrapolation1,
+                  m_max_extrapolation1,
+                  m_min_extrapolation2,
+                  m_max_extrapolation2,
+                  m_min_extrapolation3,
+                  m_max_extrapolation3)
+    {
+    }
+
+    /**
+     * @brief Construct a SplineInterpolator3D on the given 3D interpolation index range,
+     * specifying the extrapolation rules explicitly.
+     *
+     * Use this overload when a chosen extrapolation rule cannot be built automatically,
+     * e.g. a custom extrapolation rule that is not default-constructible and is not
+     * ExtrapolationRule::Constant.
+     *
+     * @param idx_range The 3D interpolation index range passed to the builder.
+     * @param min_extrapolation_rule1 The extrapolation rule to use below the lower
+     *                                boundary of the first dimension.
+     * @param max_extrapolation_rule1 The extrapolation rule to use above the upper
+     *                                boundary of the first dimension.
+     * @param min_extrapolation_rule2 The extrapolation rule to use below the lower
+     *                                boundary of the second dimension.
+     * @param max_extrapolation_rule2 The extrapolation rule to use above the upper
+     *                                boundary of the second dimension.
+     * @param min_extrapolation_rule3 The extrapolation rule to use below the lower
+     *                                boundary of the second dimension.
+     * @param max_extrapolation_rule3 The extrapolation rule to use above the upper
+     *                                boundary of the second dimension.
+     */
+    explicit SplineInterpolator3D(
+            IdxRange<InterpGrid1, InterpGrid2> idx_range,
+            MinExtrapolationRule1 min_extrapolation_rule1,
+            MaxExtrapolationRule1 max_extrapolation_rule1,
+            MinExtrapolationRule2 min_extrapolation_rule2,
+            MaxExtrapolationRule2 max_extrapolation_rule2,
+            MinExtrapolationRule3 min_extrapolation_rule3,
+            MaxExtrapolationRule3 max_extrapolation_rule3)
+        : m_min_extrapolation1(std::move(min_extrapolation_rule1))
+        , m_max_extrapolation1(std::move(max_extrapolation_rule1))
+        , m_min_extrapolation2(std::move(min_extrapolation_rule2))
+        , m_max_extrapolation2(std::move(max_extrapolation_rule2))
+        , m_min_extrapolation3(std::move(min_extrapolation_rule3))
+        , m_max_extrapolation3(std::move(max_extrapolation_rule3))
+        , m_builder(idx_range)
+        , m_evaluator(
+                  m_min_extrapolation1,
+                  m_max_extrapolation1,
+                  m_min_extrapolation2,
+                  m_max_extrapolation2,
+                  m_min_extrapolation3,
+                  m_max_extrapolation3)
+    {
+    }
+
+    /**
+     * @brief Return a const reference to the owned 3D spline builder.
+     * @return The BuilderType instance.
+     */
+    BuilderType const& get_builder() const
+    {
+        return m_builder;
+    }
+
+    /**
+     * @brief Return a const reference to the owned 3D spline evaluator.
+     * @return The EvaluatorType instance.
+     */
+    EvaluatorType const& get_evaluator() const
+    {
+        return m_evaluator;
+    }
+}
+
+/**
  * @brief A class to decide which Interpolator class is described.
  */
 template <
@@ -587,6 +899,50 @@ struct SplineInterpolatorResolver<
                     extrapolation_rule_t<ExtrapRules1, InterpGrid1, double, Basis1>,
                     extrapolation_rule_t<ExtrapRules2, InterpGrid2, double, Basis2>>,
             ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2>,
+            Solver>;
+};
+
+/// Specialisation for the 3D case
+template <
+        class ExecSpace,
+        class Basis1,
+        class Basis2,
+        class Basis3,
+        class InterpGrid1,
+        class InterpGrid2,
+        class InterpGrid3,
+        ddc::SplineSolver Solver,
+        class ExtrapRules1,
+        class ExtrapRules2,
+        class ExtrapRules3,
+        class BoundaryClosures1,
+        class BoundaryClosures2,
+        class BoundaryClosures3>
+struct SplineInterpolatorResolver<
+        ExecSpace,
+        IdxRange<Basis1, Basis2, Basis3>,
+        IdxRange<InterpGrid1, InterpGrid2, InterpGrid3>,
+        Solver,
+        ExtrapRules1,
+        ExtrapRules2,
+        ExtrapRules3,
+        BoundaryClosures1,
+        BoundaryClosures2,
+        BoundaryClosures3>
+{
+    using type = SplineInterpolator3D<
+            ExecSpace,
+            Basis1,
+            Basis2,
+            Basis3,
+            InterpGrid1,
+            InterpGrid2,
+            InterpGrid3,
+            ddc::detail::TypeSeq<
+                    extrapolation_rule_t<ExtrapRules1, InterpGrid1, double, Basis1>,
+                    extrapolation_rule_t<ExtrapRules2, InterpGrid2, double, Basis2>,
+                    extrapolation_rule_t<ExtrapRules3, InterpGrid3, double, Basis3>>,
+            ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2, BoundaryClosures3>,
             Solver>;
 };
 
