@@ -214,6 +214,104 @@ public:
 };
 
 /**
+ * @brief Specialisation of InterpolationBuilderTraits for ddc::SplineBuilder3D.
+ *
+ * ddc::SplineBuilder3D uses different alias names from the InterpolationBuilder
+ * convention. This specialisation provides the mapping so that ddc::SplineBuilder3D
+ * can be used directly as an InterpolationBuilder without wrapping it.
+ *
+ * Mapping:
+ *   interpolation_discrete_dimension_type -> interpolation_grid_type
+ *   interpolation_domain_type             -> interpolation_idx_range_type
+ *   bsplines_type                         -> basis_domain_type
+ *   batched_spline_domain_type<D>         -> batched_basis_idx_range_type<D>
+ *   batched_derivs_domain_type<D>         -> batched_derivs_idx_range_type<D>
+ */
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class BSpline1,
+        class BSpline2,
+        class BSpline3,
+        class InterpolationDDim1,
+        class InterpolationDDim2,
+        class InterpolationDDim3,
+        ddc::SplineBuilderClosure BcLower1,
+        ddc::SplineBuilderClosure BcUpper1,
+        ddc::SplineBuilderClosure BcLower2,
+        ddc::SplineBuilderClosure BcUpper2,
+        ddc::SplineBuilderClosure BcLower3,
+        ddc::SplineBuilderClosure BcUpper3,
+        ddc::SplineSolver Solver>
+struct InterpolationBuilderTraits<ddc::SplineBuilder3D<
+        ExecSpace,
+        MemorySpace,
+        BSpline1,
+        BSpline2,
+        BSpline3,
+        InterpolationDDim1,
+        InterpolationDDim2,
+        InterpolationDDim3,
+        BcLower1,
+        BcUpper1,
+        BcLower2,
+        BcUpper2,
+        BcLower3,
+        BcUpper3,
+        Solver>>
+{
+private:
+    using Builder = ddc::SplineBuilder3D<
+            ExecSpace,
+            MemorySpace,
+            BSpline1,
+            BSpline2,
+            BSpline3,
+            InterpolationDDim1,
+            InterpolationDDim2,
+            InterpolationDDim3,
+            BcLower1,
+            BcUpper1,
+            BcLower2,
+            BcUpper2,
+            BcLower3,
+            BcUpper3,
+            Solver>;
+
+public:
+    /// @brief The data type that the data is saved on.
+    using data_type = double;
+
+    /// @brief The discrete grid on which interpolation values are given.
+    //using interpolation_grid_type = typename Builder::interpolation_discrete_dimension_type;
+
+    /// @brief The 1D index range for the interpolation mesh.
+    using interpolation_idx_range_type = typename Builder::interpolation_domain_type;
+
+    /// @brief The discrete dimension for the B-spline coefficients.
+    using coeff_idx_range_type = IdxRange<
+            typename Builder::bsplines_type1,
+            typename Builder::bsplines_type2,
+            typename Builder::bsplines_type3>;
+
+    /// @brief The number of interpolation dimensions (always 1 for SplineBuilder).
+    static constexpr std::size_t rank()
+    {
+        return 3;
+    }
+
+    /// @brief Batched domain with InterpolationDDim replaced by BSplines.
+    template <class IdxRangeBatchedInterpolation>
+    using batched_basis_idx_range_type =
+            typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
+
+    /// @brief Batched domain with InterpolationDDim replaced by deriv_type.
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type =
+            typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
+};
+
+/**
  * @brief Get the batched basis index range for a builder.
  *
  * Dispatches to batched_basis_idx_range if available (e.g. IdentityInterpolationBuilder),
