@@ -397,14 +397,14 @@ struct LagrangeInterpolatorResolver<
             Grid1D,
             extrapolation_rule_t<
                     ExtrapRules,
+                    DataType,
+                    Basis,
                     typename IdentityInterpolationBuilder<
                             ExecSpace,
                             typename ExecSpace::memory_space,
                             DataType,
                             Grid1D,
-                            Basis>::basis_domain_type,
-                    DataType,
-                    Basis>,
+                            Basis>::coeff_idx_range_type>,
             DataType>;
 };
 
@@ -436,13 +436,25 @@ struct LagrangeInterpolatorResolver<
                                     BasisHead,
                                     typename ExecSpace::memory_space>::knot_grid,
                             DataType,
-                            BasisHead>,
+                            BasisHead,
+                            typename NDIdentityInterpolationBuilder<
+                                    ExecSpace,
+                                    typename ExecSpace::memory_space,
+                                    DataType,
+                                    IdxRange<Grid1DHead, Grid1D...>,
+                                    IdxRange<BasisHead, Basis...>>::coeff_idx_range_type>,
                     extrapolation_rule_t<
                             ExtrapRules,
                             typename Basis::template Impl<Basis, typename ExecSpace::memory_space>::
                                     knot_grid,
                             DataType,
-                            Basis>...>,
+                            Basis,
+                            typename NDIdentityInterpolationBuilder<
+                                    ExecSpace,
+                                    typename ExecSpace::memory_space,
+                                    DataType,
+                                    IdxRange<Grid1DHead, Grid1D...>,
+                                    IdxRange<BasisHead, Basis...>>::coeff_idx_range_type>...>,
             DataType>;
 };
 } // namespace detail

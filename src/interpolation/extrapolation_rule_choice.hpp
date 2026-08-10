@@ -7,7 +7,7 @@ namespace details {
 
 /// Primary template: Rule has no nested `type` alias template, so it is assumed to
 /// already be a concrete, usable extrapolation rule class - use it as-is.
-template <class Rule, class CoeffGrid, class DataType, class Basis, class = void>
+template <class Rule, class DataType, class Basis, class CoeffIdxRange, class = void>
 struct ExtrapolationRuleResolver
 {
     using type = Rule;
@@ -16,15 +16,15 @@ struct ExtrapolationRuleResolver
 /// Specialisation selected via SFINAE when Rule exposes `Rule::type<Basis, DataType>`
 /// (i.e. Rule is a self-describing tag such as ExtrapolationRule::Periodic) - resolve
 /// through it to obtain the concrete extrapolation rule class.
-template <class Rule, class CoeffGrid, class DataType, class Basis>
+template <class Rule, class DataType, class Basis, class CoeffIdxRange>
 struct ExtrapolationRuleResolver<
         Rule,
-        CoeffGrid,
         DataType,
         Basis,
-        std::void_t<typename Rule::template type<CoeffGrid, DataType, Basis>>>
+        CoeffIdxRange,
+        std::void_t<typename Rule::template type<DataType, Basis, CoeffIdxRange>>>
 {
-    using type = typename Rule::template type<CoeffGrid, DataType, Basis>;
+    using type = typename Rule::template type<DataType, Basis, CoeffIdxRange>;
 };
 
 } // namespace details
@@ -45,18 +45,18 @@ constexpr bool is_extrapolation_rule_auto_constructible_v
 
 /// @brief Resolve Rule (either a self-describing tag or a concrete extrapolation rule
 /// class) to the concrete extrapolation rule class to use for a given Basis/DataType.
-template <class Rule, class CoeffGrid, class DataType, class Basis>
+template <class Rule, class DataType, class Basis, class CoeffIdxRange>
 using extrapolation_rule_t = ddc::detail::TypeSeq<
         typename details::ExtrapolationRuleResolver<
                 ddc::type_seq_element_t<0, Rule>,
-                CoeffGrid,
                 DataType,
-                Basis>::type,
+                Basis,
+                CoeffIdxRange>::type,
         typename details::ExtrapolationRuleResolver<
                 ddc::type_seq_element_t<1, Rule>,
-                CoeffGrid,
                 DataType,
-                Basis>::type>;
+                Basis,
+                CoeffIdxRange>::type>;
 
 /**
  * @brief Initialise the extrapolation rule.

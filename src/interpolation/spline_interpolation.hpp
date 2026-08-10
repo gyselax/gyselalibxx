@@ -550,7 +550,7 @@ struct SplineInterpolatorResolver<
             ExecSpace,
             Basis,
             InterpGrid,
-            extrapolation_rule_t<ExtrapRules, InterpGrid, double, Basis>,
+            extrapolation_rule_t<ExtrapRules, double, Basis, IdxRange<InterpGrid>>,
             BoundaryClosures,
             Solver>;
 };
@@ -584,8 +584,16 @@ struct SplineInterpolatorResolver<
             InterpGrid1,
             InterpGrid2,
             ddc::detail::TypeSeq<
-                    extrapolation_rule_t<ExtrapRules1, InterpGrid1, double, Basis1>,
-                    extrapolation_rule_t<ExtrapRules2, InterpGrid2, double, Basis2>>,
+                    extrapolation_rule_t<
+                            ExtrapRules1,
+                            double,
+                            Basis1,
+                            IdxRange<InterpGrid1, InterpGrid2>>,
+                    extrapolation_rule_t<
+                            ExtrapRules2,
+                            double,
+                            Basis2,
+                            IdxRange<InterpGrid1, InterpGrid2>>>,
             ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2>,
             Solver>;
 };
