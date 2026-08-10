@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add class `GMGPolarPoissonLikeSolver` to allow the use of [GMGPolar](https://github.com/SciCompMod/GMGPolar) as a polar Poisson solver.
 - Add GMGPolar in the toolchains.
 - Allow `SplineInterpolator` and `LagrangeInterpolator` to specify custom extrapolation rules.
+- Allow `IdentityInterpolationBuilder` class to take a field on a strided layout.
 
 ### Fixed
 
