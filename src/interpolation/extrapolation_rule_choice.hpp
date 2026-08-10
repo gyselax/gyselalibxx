@@ -27,6 +27,13 @@ struct ExtrapolationRuleResolver<
     using type = typename Rule::template type<DataType, Basis, CoeffIdxRange>;
 };
 
+template <class Rule>
+static constexpr bool is_ddc_constant_extrapolation_rule_v = false;
+
+template <class... CDim>
+static constexpr bool
+        is_ddc_constant_extrapolation_rule_v<ddc::ConstantExtrapolationRule<CDim...>> = true;
+
 } // namespace details
 
 /// @brief True if get_extrapolation<Rule, CoeffGrid, DataType, ...> can build the rule
@@ -36,9 +43,7 @@ struct ExtrapolationRuleResolver<
 template <class Rule, class CoeffGrid, class DataType, class Basis>
 constexpr bool is_extrapolation_rule_auto_constructible_v
         = (std::is_default_constructible_v<Rule>)
-          || (std::is_same_v<
-                  Rule,
-                  ddc::ConstantExtrapolationRule<typename CoeffGrid::continuous_dimension_type>>)
+          || (details::is_ddc_constant_extrapolation_rule_v<Rule>)
           || (std::is_same_v<
                   Rule,
                   ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>);
@@ -69,10 +74,7 @@ Rule get_extrapolation(Extremity extremity)
 {
     if constexpr (std::is_default_constructible_v<Rule>) {
         return Rule();
-    } else if constexpr (std::is_same_v<
-                                 Rule,
-                                 ddc::ConstantExtrapolationRule<
-                                         typename Basis::continuous_dimension_type>>) {
+    } else if constexpr (details::is_ddc_constant_extrapolation_rule_v<Rule>) {
         if (extremity == Extremity::FRONT) {
             return Rule(ddc::discrete_space<Basis>().rmin());
         } else {
