@@ -88,7 +88,7 @@ public:
             class BatchedInterpolationIdxRange,
             class LayoutCoeffs,
             class LayoutVals,
-            class LayoutDerivs>
+            class LayoutDerivs = Kokkos::layout_right>
     void operator()(
             Field<DataType,
                   batched_basis_idx_range_type<BatchedInterpolationIdxRange>,
