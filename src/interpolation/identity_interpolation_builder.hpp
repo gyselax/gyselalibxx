@@ -84,21 +84,28 @@ public:
      * @param[in] derivs_xmax The values of the derivatives at the upper boundary
      *                  (unused in this class).
      */
-    template <class BatchedInterpolationIdxRange>
+    template <
+            class BatchedInterpolationIdxRange,
+            class LayoutCoeffs,
+            class LayoutVals,
+            class LayoutDerivs>
     void operator()(
             Field<DataType,
                   batched_basis_idx_range_type<BatchedInterpolationIdxRange>,
-                  memory_space> coeffs,
-            ConstField<DataType, BatchedInterpolationIdxRange, memory_space> vals,
+                  memory_space,
+                  LayoutCoeffs> coeffs,
+            ConstField<DataType, BatchedInterpolationIdxRange, memory_space, LayoutVals> vals,
             std::optional<ConstField<
                     DataType,
                     batched_derivs_idx_range_type<BatchedInterpolationIdxRange>,
-                    memory_space>> derivs_xmin
+                    memory_space,
+                    LayoutDerivs>> derivs_xmin
             = std::nullopt,
             std::optional<ConstField<
                     DataType,
                     batched_derivs_idx_range_type<BatchedInterpolationIdxRange>,
-                    memory_space>> derivs_xmax
+                    memory_space,
+                    LayoutDerivs>> derivs_xmax
             = std::nullopt) const
     {
         IdxRange<basis_domain_type> bp_idx_range
