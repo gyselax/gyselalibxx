@@ -132,15 +132,6 @@ struct DDCConstantExtrapolationRuleBuilder<IdxRange<NDimGrids...>, CDim>
 };
 } // namespace detail
 
-template <class Basis, class IdxRangeCoeff>
-using DDCRule = detail::DDCConstantExtrapolationRuleBuilder<
-        ddc::remove_dims_of_t<
-                IdxRangeCoeff,
-                find_grid_t<
-                        typename Basis::continuous_dimension_type,
-                        ddc::to_type_seq_t<IdxRangeCoeff>>>,
-        typename Basis::continuous_dimension_type>::type;
-
 /**
  * @brief Tag selecting constant extrapolation.
  *
@@ -152,7 +143,13 @@ struct Constant
     template <class DataType, class Basis, class IdxRangeCoeff>
     using type = std::conditional_t<
             is_spline_basis_v<Basis>,
-            DDCRule<Basis, IdxRangeCoeff>,
+            typename detail::DDCConstantExtrapolationRuleBuilder<
+                    ddc::remove_dims_of_t<
+                            IdxRangeCoeff,
+                            find_grid_t<
+                                    typename Basis::continuous_dimension_type,
+                                    ddc::to_type_seq_t<IdxRangeCoeff>>>,
+                    typename Basis::continuous_dimension_type>::type,
             ConstantIdentityInterpolationExtrapolationRule<
                     find_grid_t<
                             typename Basis::continuous_dimension_type,
