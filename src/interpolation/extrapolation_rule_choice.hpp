@@ -34,6 +34,15 @@ template <class... CDim>
 static constexpr bool
         is_ddc_constant_extrapolation_rule_v<ddc::ConstantExtrapolationRule<CDim...>> = true;
 
+template <class ExtrapRule>
+struct ConstantExtrapRuleRank;
+
+template <class... CDim>
+struct ConstantExtrapRuleRank<ddc::ConstantExtrapolationRule<CDim...>>
+{
+    static constexpr std::size_t rank = sizeof...(CDim);
+};
+
 } // namespace details
 
 /// @brief True if get_extrapolation<Rule, CoeffGrid, DataType, ...> can build the rule
@@ -69,21 +78,44 @@ using extrapolation_rule_t = ddc::detail::TypeSeq<
  * Initialise the extrapolation rule using the default constructor if available. For a
  * constant extrapolation, initialise the extrapolation from the selected extremity.
  */
-template <class Rule, class CoeffGrid, class DataType, class Basis>
+template <class Rule, class DataType, class CDim, class IdxRangeCoeff, class IdxRangeBasis>
 Rule get_extrapolation(Extremity extremity)
 {
     if constexpr (std::is_default_constructible_v<Rule>) {
         return Rule();
-    } else if constexpr (details::is_ddc_constant_extrapolation_rule_v<Rule>) {
-        if (extremity == Extremity::FRONT) {
-            return Rule(ddc::discrete_space<Basis>().rmin());
+    }
+
+    using Basis = find_grid_t<CDim, ddc::to_type_seq_t<IdxRangeBasis>>;
+    if constexpr (details::is_ddc_constant_extrapolation_rule_v<Rule>) {
+        static constexpr std::size_t rank = details::ConstantExtrapRuleRank<Rule>::rank;
+        if constexpr (rank == 1) {
+            if (extremity == Extremity::FRONT) {
+                return Rule(ddc::discrete_space<Basis>().rmin());
+            } else {
+                return Rule(ddc::discrete_space<Basis>().rmax());
+            }
         } else {
-            return Rule(ddc::discrete_space<Basis>().rmax());
+            static_assert(rank == 2);
+            using NIBasis = ddc::type_seq_element_t<
+                    0,
+                    ddc::to_type_seq_t<ddc::remove_dims_of_t<Basis, IdxRangeBasis>>>;
+            if (extremity == Extremity::FRONT) {
+                return Rule(
+                        ddc::discrete_space<Basis>().rmin(),
+                        ddc::discrete_space<NIBasis>().rmin(),
+                        ddc::discrete_space<NIBasis>().rmax());
+            } else {
+                return Rule(
+                        ddc::discrete_space<Basis>().rmax(),
+                        ddc::discrete_space<NIBasis>().rmin(),
+                        ddc::discrete_space<NIBasis>().rmax());
+            }
         }
-    } else if constexpr (
-            std::is_same_v<
-                    Rule,
-                    ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>) {
+    }
+    using CoeffGrid = find_grid_t<CDim, ddc::to_type_seq_t<IdxRangeCoeff>>;
+    if constexpr (std::is_same_v<
+                          Rule,
+                          ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>) {
         if (extremity == Extremity::FRONT) {
             return Rule(ddc::discrete_space<Basis>().full_domain().front());
         } else {

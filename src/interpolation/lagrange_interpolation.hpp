@@ -118,12 +118,18 @@ public:
                             CoeffGridType,
                             DataType,
                             Basis>))
-        : m_min_extrapolation(
-                get_extrapolation<MinExtrapolationRule, CoeffGridType, DataType, Basis>(
-                        Extremity::FRONT))
-        , m_max_extrapolation(
-                  get_extrapolation<MaxExtrapolationRule, CoeffGridType, DataType, Basis>(
-                          Extremity::BACK))
+        : m_min_extrapolation(get_extrapolation<
+                              MinExtrapolationRule,
+                              double,
+                              typename Basis::continuous_dimension_type,
+                              IdxRange<CoeffGridType>,
+                              IdxRange<Basis>>(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<
+                              MaxExtrapolationRule,
+                              double,
+                              typename Basis::continuous_dimension_type,
+                              IdxRange<CoeffGridType>,
+                              IdxRange<Basis>>(Extremity::BACK))
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
@@ -310,10 +316,18 @@ public:
                       Grid1D,
                       MinRule<ExtrapRules>,
                       MaxRule<ExtrapRules>>(
-                get_extrapolation<MinRule<ExtrapRules>, CoeffGrid<Basis>, DataType, Basis>(
-                        Extremity::FRONT),
-                get_extrapolation<MaxRule<ExtrapRules>, CoeffGrid<Basis>, DataType, Basis>(
-                        Extremity::BACK))...)
+                get_extrapolation<
+                        MinRule<ExtrapRules>,
+                        double,
+                        typename Basis::continuous_dimension_type,
+                        IdxRange<CoeffGrid<Basis>>,
+                        IdxRange<Basis>>(Extremity::FRONT),
+                get_extrapolation<
+                        MaxRule<ExtrapRules>,
+                        double,
+                        typename Basis::continuous_dimension_type,
+                        IdxRange<CoeffGrid<Basis>>,
+                        IdxRange<Basis>>(Extremity::BACK))...)
     {
     }
 
