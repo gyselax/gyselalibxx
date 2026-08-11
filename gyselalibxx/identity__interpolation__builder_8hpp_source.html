@@ -616,21 +616,28 @@ public:
 public:
     IdentityInterpolationBuilder() = default;
 
-    template &lt;class BatchedInterpolationIdxRange&gt;
+    template &lt;
+            class BatchedInterpolationIdxRange,
+            class LayoutCoeffs,
+            class LayoutVals,
+            class LayoutDerivs = Kokkos::layout_right&gt;
     void operator()(
             Field&lt;DataType,
                   batched_basis_idx_range_type&lt;BatchedInterpolationIdxRange&gt;,
-                  memory_space&gt; coeffs,
-            ConstField&lt;DataType, BatchedInterpolationIdxRange, memory_space&gt; vals,
+                  memory_space,
+                  LayoutCoeffs&gt; coeffs,
+            ConstField&lt;DataType, BatchedInterpolationIdxRange, memory_space, LayoutVals&gt; vals,
             std::optional&lt;ConstField&lt;
                     DataType,
                     batched_derivs_idx_range_type&lt;BatchedInterpolationIdxRange&gt;,
-                    memory_space&gt;&gt; derivs_xmin
+                    memory_space,
+                    LayoutDerivs&gt;&gt; derivs_xmin
             = std::nullopt,
             std::optional&lt;ConstField&lt;
                     DataType,
                     batched_derivs_idx_range_type&lt;BatchedInterpolationIdxRange&gt;,
-                    memory_space&gt;&gt; derivs_xmax
+                    memory_space,
+                    LayoutDerivs&gt;&gt; derivs_xmax
             = std::nullopt) const
     {
         IdxRange&lt;basis_domain_type&gt; bp_idx_range

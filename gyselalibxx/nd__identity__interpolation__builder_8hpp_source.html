@@ -626,12 +626,13 @@ public:
 public:
     NDIdentityInterpolationBuilder() = default;
 
-    template &lt;class BatchedInterpolationIdxRange&gt;
+    template &lt;class BatchedInterpolationIdxRange, class LayoutCoeffs, class LayoutVals&gt;
     void operator()(
             Field&lt;DataType,
                   batched_basis_idx_range_type&lt;BatchedInterpolationIdxRange&gt;,
-                  memory_space&gt; coeffs,
-            ConstField&lt;DataType, BatchedInterpolationIdxRange, memory_space&gt; vals) const
+                  memory_space,
+                  LayoutCoeffs&gt; coeffs,
+            ConstField&lt;DataType, BatchedInterpolationIdxRange, memory_space, LayoutVals&gt; vals) const
     {
         using IdxRangeFull = batched_basis_idx_range_type&lt;BatchedInterpolationIdxRange&gt;;
         using IdxRangeBatch

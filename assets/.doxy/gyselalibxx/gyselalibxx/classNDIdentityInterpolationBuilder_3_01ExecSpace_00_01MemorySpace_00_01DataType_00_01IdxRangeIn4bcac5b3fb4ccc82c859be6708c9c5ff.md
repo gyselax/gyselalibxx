@@ -67,7 +67,7 @@ _The implementation of_ [_**NDIdentityInterpolationBuilder**_](classNDIdentityIn
 | ---: | :--- |
 |   | [**NDIdentityInterpolationBuilder**](#function-ndidentityinterpolationbuilder) () = default<br> |
 |  [**batched\_basis\_idx\_range\_type**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md#typedef-batched_basis_idx_range_type)&lt; BatchedInterpolationIdxRange &gt; | [**batched\_basis\_idx\_range**](#function-batched_basis_idx_range) (BatchedInterpolationIdxRange const & batched\_interpolation\_domain) noexcept const<br>_Get the batched basis index range for a given batched interpolation domain._  |
-|  void | [**operator()**](#function-operator) (Field&lt; DataType, [**batched\_basis\_idx\_range\_type**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md#typedef-batched_basis_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md#typedef-memory_space) &gt; coeffs, ConstField&lt; DataType, BatchedInterpolationIdxRange, [**memory\_space**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md#typedef-memory_space) &gt; vals) const<br>_Compute the interpolation coefficients for a function._  |
+|  void | [**operator()**](#function-operator) (Field&lt; DataType, [**batched\_basis\_idx\_range\_type**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md#typedef-batched_basis_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md#typedef-memory_space), LayoutCoeffs &gt; coeffs, ConstField&lt; DataType, BatchedInterpolationIdxRange, [**memory\_space**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md#typedef-memory_space), LayoutVals &gt; vals) const<br>_Compute the interpolation coefficients for a function._  |
 
 
 
@@ -257,10 +257,10 @@ The batched basis index range.
 
 _Compute the interpolation coefficients for a function._ 
 ```C++
-template<class BatchedInterpolationIdxRange>
+template<class BatchedInterpolationIdxRange, class LayoutCoeffs, class LayoutVals>
 inline void NDIdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange< Basis... > >::operator() (
-    Field< DataType, batched_basis_idx_range_type < BatchedInterpolationIdxRange >, memory_space > coeffs,
-    ConstField< DataType, BatchedInterpolationIdxRange, memory_space > vals
+    Field< DataType, batched_basis_idx_range_type < BatchedInterpolationIdxRange >, memory_space , LayoutCoeffs > coeffs,
+    ConstField< DataType, BatchedInterpolationIdxRange, memory_space , LayoutVals > vals
 ) const
 ```
 

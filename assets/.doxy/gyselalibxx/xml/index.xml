@@ -1541,7 +1541,7 @@
     <member refid="classIdentityInterpolationBuilder_1a1787260395e125f5afd766e026c20511" kind="variable"><name>s_nbe_xmin</name></member>
     <member refid="classIdentityInterpolationBuilder_1ad7a730453d02850a3fe29dadf91c49b2" kind="variable"><name>s_nbe_xmax</name></member>
     <member refid="classIdentityInterpolationBuilder_1a7dd28fa0a0440a707ec7a6295d5f43e4" kind="function"><name>IdentityInterpolationBuilder</name></member>
-    <member refid="classIdentityInterpolationBuilder_1a6c2055a41e5b848229308895930d99c7" kind="function"><name>operator()</name></member>
+    <member refid="classIdentityInterpolationBuilder_1aecf395777fbf0c4f8181178ccdbc5bec" kind="function"><name>operator()</name></member>
     <member refid="classIdentityInterpolationBuilder_1a70d7e70b1683afc4ccb46525e3596e67" kind="function"><name>batched_derivs_xmin_domain</name></member>
     <member refid="classIdentityInterpolationBuilder_1a48c4b088dc35e841dc702f2ad9200d36" kind="function"><name>batched_derivs_xmax_domain</name></member>
     <member refid="classIdentityInterpolationBuilder_1a6e1cf38340ea153cf8e9f483b519c3ee" kind="function"><name>batched_basis_idx_range</name></member>
@@ -2552,7 +2552,7 @@
     <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1aa43354c77dcba6531f0f4030ff0b63ca" kind="typedef"><name>batched_basis_idx_range_type</name></member>
     <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a93b9b959219af16d32166a8bae3ae0db" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
     <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a509f795be3a1d4bf9d084c14ed0d9b90" kind="function"><name>NDIdentityInterpolationBuilder</name></member>
-    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1adb7b8b4bb9b7f5966df0577d50b60df6" kind="function"><name>operator()</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1abc5d574c8817633086c3acb1eaad7b16" kind="function"><name>operator()</name></member>
     <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ae90013b973630a93da389fdb8ab05378" kind="function"><name>batched_basis_idx_range</name></member>
     <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a6a54d2c595169c1d8c1aaa693006f837" kind="function"><name>copy_periodic_data</name></member>
     <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a1e20a0afd16e37e9a2604e7f88c4a38f" kind="function"><name>copy_periodic_data_on_dim</name></member>

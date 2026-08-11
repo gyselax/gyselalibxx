@@ -79,7 +79,7 @@ _A builder class for copying data._ [More...](#detailed-description)
 |  [**batched\_basis\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_basis_idx_range_type)&lt; BatchedInterpolationIdxRange &gt; | [**batched\_basis\_idx\_range**](#function-batched_basis_idx_range) (BatchedInterpolationIdxRange const & batched\_interpolation\_domain) noexcept const<br>_Get the whole domain on which the interpolation coefficients are defined._  |
 |  [**batched\_derivs\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_derivs_idx_range_type)&lt; BatchedInterpolationIdxRange &gt; | [**batched\_derivs\_xmax\_domain**](#function-batched_derivs_xmax_domain) (BatchedInterpolationIdxRange const & batched\_interpolation\_domain) noexcept const<br>_Get the whole domain on which derivatives on upper boundary are defined._  |
 |  [**batched\_derivs\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_derivs_idx_range_type)&lt; BatchedInterpolationIdxRange &gt; | [**batched\_derivs\_xmin\_domain**](#function-batched_derivs_xmin_domain) (BatchedInterpolationIdxRange const & batched\_interpolation\_domain) noexcept const<br>_Get the whole domain on which derivatives on lower boundary are defined._  |
-|  void | [**operator()**](#function-operator) (Field&lt; DataType, [**batched\_basis\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_basis_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classIdentityInterpolationBuilder.md#typedef-memory_space) &gt; coeffs, ConstField&lt; DataType, BatchedInterpolationIdxRange, [**memory\_space**](classIdentityInterpolationBuilder.md#typedef-memory_space) &gt; vals, std::optional&lt; ConstField&lt; DataType, [**batched\_derivs\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_derivs_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classIdentityInterpolationBuilder.md#typedef-memory_space) &gt; &gt; derivs\_xmin=std::nullopt, std::optional&lt; ConstField&lt; DataType, [**batched\_derivs\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_derivs_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classIdentityInterpolationBuilder.md#typedef-memory_space) &gt; &gt; derivs\_xmax=std::nullopt) const<br>_Compute the interpolation coefficients for a function._  |
+|  void | [**operator()**](#function-operator) (Field&lt; DataType, [**batched\_basis\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_basis_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classIdentityInterpolationBuilder.md#typedef-memory_space), LayoutCoeffs &gt; coeffs, ConstField&lt; DataType, BatchedInterpolationIdxRange, [**memory\_space**](classIdentityInterpolationBuilder.md#typedef-memory_space), LayoutVals &gt; vals, std::optional&lt; ConstField&lt; DataType, [**batched\_derivs\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_derivs_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classIdentityInterpolationBuilder.md#typedef-memory_space), LayoutDerivs &gt; &gt; derivs\_xmin=std::nullopt, std::optional&lt; ConstField&lt; DataType, [**batched\_derivs\_idx\_range\_type**](classIdentityInterpolationBuilder.md#typedef-batched_derivs_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classIdentityInterpolationBuilder.md#typedef-memory_space), LayoutDerivs &gt; &gt; derivs\_xmax=std::nullopt) const<br>_Compute the interpolation coefficients for a function._  |
 
 
 
@@ -448,12 +448,12 @@ The domain for the Derivs values.
 
 _Compute the interpolation coefficients for a function._ 
 ```C++
-template<class BatchedInterpolationIdxRange>
+template<class BatchedInterpolationIdxRange, class LayoutCoeffs, class LayoutVals, class LayoutDerivs>
 inline void IdentityInterpolationBuilder::operator() (
-    Field< DataType, batched_basis_idx_range_type < BatchedInterpolationIdxRange >, memory_space > coeffs,
-    ConstField< DataType, BatchedInterpolationIdxRange, memory_space > vals,
-    std::optional< ConstField< DataType, batched_derivs_idx_range_type < BatchedInterpolationIdxRange >, memory_space > > derivs_xmin=std::nullopt,
-    std::optional< ConstField< DataType, batched_derivs_idx_range_type < BatchedInterpolationIdxRange >, memory_space > > derivs_xmax=std::nullopt
+    Field< DataType, batched_basis_idx_range_type < BatchedInterpolationIdxRange >, memory_space , LayoutCoeffs > coeffs,
+    ConstField< DataType, BatchedInterpolationIdxRange, memory_space , LayoutVals > vals,
+    std::optional< ConstField< DataType, batched_derivs_idx_range_type < BatchedInterpolationIdxRange >, memory_space , LayoutDerivs > > derivs_xmin=std::nullopt,
+    std::optional< ConstField< DataType, batched_derivs_idx_range_type < BatchedInterpolationIdxRange >, memory_space , LayoutDerivs > > derivs_xmax=std::nullopt
 ) const
 ```
 
