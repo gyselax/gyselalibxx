@@ -98,12 +98,13 @@ public:
      * @param[out] coeffs The coefficients of the interpolation.
      * @param[in]  vals   The values of the function on the interpolation mesh.
      */
-    template <class BatchedInterpolationIdxRange>
+    template <class BatchedInterpolationIdxRange, class LayoutCoeffs, class LayoutVals>
     void operator()(
             Field<DataType,
                   batched_basis_idx_range_type<BatchedInterpolationIdxRange>,
-                  memory_space> coeffs,
-            ConstField<DataType, BatchedInterpolationIdxRange, memory_space> vals) const
+                  memory_space,
+                  LayoutCoeffs> coeffs,
+            ConstField<DataType, BatchedInterpolationIdxRange, memory_space, LayoutVals> vals) const
     {
         using IdxRangeFull = batched_basis_idx_range_type<BatchedInterpolationIdxRange>;
         using IdxRangeBatch
