@@ -17,6 +17,7 @@
 
 
 
+Inherited by the following classes: [VectorField](classVectorField.md)
 
 
 

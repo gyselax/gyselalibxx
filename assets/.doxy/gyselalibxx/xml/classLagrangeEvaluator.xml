@@ -1019,7 +1019,7 @@
 <para>Find the first stencil knot and adjust the coordinate for periodic wrap-around. </para>
         </briefdescription>
         <detaileddescription>
-<para>Assumes <computeroutput>coord</computeroutput> has already been wrapped into <formula id="319">$[\text{rmin}, \text{rmax}]$</formula> for periodic bases (the caller is responsible for that initial wrap).</para>
+<para>Assumes <computeroutput>coord</computeroutput> has already been wrapped into <formula id="321">$[\text{rmin}, \text{rmax}]$</formula> for periodic bases (the caller is responsible for that initial wrap).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>coord</parametername>

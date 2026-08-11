@@ -60,6 +60,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md) _An abstract class which holds a chunk of memory describing a field and its derivatives. This is the superclass for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _and_[_**DerivField**_](classDerivField.md) _._
 * **class** [**DerivFieldMem**](classDerivFieldMem.md) 
 * **class** [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) _The diocotron exact solution of the density_ \(\rho\) _._
+* **class** [**DiscreteMapping**](classDiscreteMapping.md) _A mapping whose values are only known at the mesh points of a grid, evaluated elsewhere using an interpolating function._ 
 * **class** [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._ 
 * **class** [**DiscretePoloidalCSSplineMappingBuilder**](classDiscretePoloidalCSSplineMappingBuilder.md) _A class to create a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**EdgeTransformation**](classEdgeTransformation.md) _Transform a coordinate or an index from one edge to the one on the other edge._ 
@@ -177,7 +178,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md) _A class which evaluates the triangular Bernstein polynomials._ 
 * **class** [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) 
 * **class** [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._ 
-* **class** [**VectorFieldCommon**](classVectorFieldCommon.md) 
+* **class** [**VectorFieldCommon**](classVectorFieldCommon.md)     
+    * **class** [**VectorField**](classVectorField.md) _A class which holds multiple (scalar) fields in order to represent a vector field._ 
 * **class** [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md) _Initial condition for the vortex merger simulation._ 
 * **class** [**VortexMergerEquilibria**](classVortexMergerEquilibria.md) _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates._ 
 * **class** [**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md) _Helper class for the initialisation of the mesh of interpolation points._ 

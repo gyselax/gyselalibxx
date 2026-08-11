@@ -16,6 +16,7 @@
     <innerfile refid="nd__identity__interpolation__builder_8hpp">nd_identity_interpolation_builder.hpp</innerfile>
     <innerfile refid="nd__lagrange__evaluator_8hpp">nd_lagrange_evaluator.hpp</innerfile>
     <innerfile refid="spline__interpolation_8hpp">spline_interpolation.hpp</innerfile>
+    <innerfile refid="vector__field__evaluation_8hpp">vector_field_evaluation.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

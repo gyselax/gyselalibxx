@@ -130,7 +130,7 @@
         </briefdescription>
         <detaileddescription>
 <para>The constructor infers the linear coordinate transformation from a reference point provided in both coordinate systems and a scaling factor.</para>
-<para>The transformation is then defined as: <formula id="159">$ x_{out} = x_{out}^* + s * (x_{in} - x_{in}^*) $</formula> where <formula id="160">$ x_{in} $</formula> and <formula id="161">$ x_{out} $</formula> denote the point expressed in the input and output coordinate system, <formula id="162">$ \cdot^* $</formula> denotes the reference point and <formula id="163">$ s $</formula> denotes the scaling factor.</para>
+<para>The transformation is then defined as: <formula id="161">$ x_{out} = x_{out}^* + s * (x_{in} - x_{in}^*) $</formula> where <formula id="162">$ x_{in} $</formula> and <formula id="163">$ x_{out} $</formula> denote the point expressed in the input and output coordinate system, <formula id="164">$ \cdot^* $</formula> denotes the reference point and <formula id="165">$ s $</formula> denotes the scaling factor.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>reference_point_on_input_dim</parametername>
@@ -431,7 +431,7 @@
 <para>A class describing a linear coordinate transformation. </para>
     </briefdescription>
     <detaileddescription>
-<para>A class describing a linear coordinate transformation of the form: <formula id="154">$ x_1 = \alpha x_2 + \beta $</formula> where <formula id="155">$ x_1 $</formula> and <formula id="156">$ x_2 $</formula> are coordinates in the input and output dimensions, and <formula id="157">$ \alpha $</formula> and <formula id="158">$ \beta $</formula> are coefficients. </para>
+<para>A class describing a linear coordinate transformation of the form: <formula id="156">$ x_1 = \alpha x_2 + \beta $</formula> where <formula id="157">$ x_1 $</formula> and <formula id="158">$ x_2 $</formula> are coordinates in the input and output dimensions, and <formula id="159">$ \alpha $</formula> and <formula id="160">$ \beta $</formula> are coefficients. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/linear_coord_transform.hpp" line="17" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/linear_coord_transform.hpp" bodystart="18" bodyend="183"/>
     <listofallmembers>

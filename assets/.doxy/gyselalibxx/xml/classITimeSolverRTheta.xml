@@ -44,7 +44,7 @@
           <defval>1</defval>
         </param>
         <briefdescription>
-<para>Solves on <formula id="282">$ T = dt*N $</formula> the equations system. </para>
+<para>Solves on <formula id="284">$ T = dt*N $</formula> the equations system. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -52,7 +52,7 @@
 <parametername direction="inout">density</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>On input: the initial condition. On output: the solution at <formula id="283">$ dt *N$</formula>. </para>
+<para>On input: the initial condition. On output: the solution at <formula id="285">$ dt *N$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -68,7 +68,7 @@
 <parametername direction="in">steps</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The number <formula id="284">$ N$</formula> of time interactions.</para>
+<para>The number <formula id="286">$ N$</formula> of time interactions.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

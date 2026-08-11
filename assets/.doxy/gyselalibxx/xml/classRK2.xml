@@ -160,12 +160,12 @@
     </briefdescription>
     <detaileddescription>
 <para>A class which provides an implementation of a second-order Runge-Kutta method in order to evolve values over time. This specialisation handles elementwise operations and can be called from GPU.</para>
-<para>For the following ODE : <formula id="400">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
-<para>the Runge-Kutta 2 method is given by : <formula id="405">$ y^{n+1} =  y^{n} + dt k_2 $</formula>,</para>
+<para>For the following ODE : <formula id="402">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
+<para>the Runge-Kutta 2 method is given by : <formula id="407">$ y^{n+1} =  y^{n} + dt k_2 $</formula>,</para>
 <para>with</para>
 <para><itemizedlist>
-<listitem><para><formula id="406">$ k_1 = f(t^{n}, y^{n}) $</formula>,</para>
-</listitem><listitem><para><formula id="407">$ k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) $</formula>, </para>
+<listitem><para><formula id="408">$ k_1 = f(t^{n}, y^{n}) $</formula>,</para>
+</listitem><listitem><para><formula id="409">$ k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) $</formula>, </para>
 </listitem></itemizedlist>
 </para>
     </detaileddescription>

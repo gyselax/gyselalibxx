@@ -31,6 +31,7 @@
 | file | [**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md) <br> |
 | file | [**cylindrical\_to\_cartesian.hpp**](cylindrical__to__cartesian_8hpp.md) <br> |
 | file | [**czarny\_to\_cartesian.hpp**](czarny__to__cartesian_8hpp.md) <br> |
+| file | [**discrete\_mapping.hpp**](discrete__mapping_8hpp.md) <br> |
 | file | [**discrete\_poloidal\_cs\_spline\_mapping.hpp**](discrete__poloidal__cs__spline__mapping_8hpp.md) <br> |
 | file | [**discrete\_poloidal\_cs\_spline\_mapping\_builder.hpp**](discrete__poloidal__cs__spline__mapping__builder_8hpp.md) <br> |
 | file | [**geometry\_pseudo\_cartesian.hpp**](geometry__pseudo__cartesian_8hpp.md) <br> |

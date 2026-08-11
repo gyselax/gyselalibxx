@@ -49,7 +49,7 @@
 | struct | [**Corner1Tag**](structPolarBSplines_1_1Impl_1_1Corner1Tag.md) <br>_The tag for the first corner of the Barycentric coordinates._  |
 | struct | [**Corner2Tag**](structPolarBSplines_1_1Impl_1_1Corner2Tag.md) <br>_The tag for the second corner of the Barycentric coordinates._  |
 | struct | [**Corner3Tag**](structPolarBSplines_1_1Impl_1_1Corner3Tag.md) <br>_The tag for the third corner of the Barycentric coordinates._  |
-| struct | [**IntermediateBernsteinBasis**](structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.md) &lt;class DiscreteMapping&gt;<br> |
+| struct | [**IntermediateBernsteinBasis**](structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.md) &lt;class [**DiscreteMapping**](classDiscreteMapping.md)&gt;<br> |
 
 
 

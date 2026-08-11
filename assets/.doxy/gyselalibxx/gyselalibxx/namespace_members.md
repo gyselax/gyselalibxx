@@ -24,11 +24,13 @@
 
 * **deepcopy** ([**ddcHelper**](namespaceddcHelper.md))
 * **dump\_coordinates** ([**ddcHelper**](namespaceddcHelper.md))
+* **deriv** ([**ndEval**](namespacendEval.md))
 
 
 ## e
 
 * **enforce\_first\_interface\_edge\_t** ([**connectivity\_details**](namespaceconnectivity__details.md))
+* **evaluate** ([**ndEval**](namespacendEval.md))
 * **enable\_indexed\_tensor** ([**tensor\_tools**](namespacetensor__tools.md))
 * **enable\_indexed\_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;** ([**tensor\_tools**](namespacetensor__tools.md))
 * **extract\_sub\_tensor\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))

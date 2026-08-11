@@ -1,0 +1,473 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classDiscreteMapping" kind="class" language="C++" prot="public">
+    <compoundname>DiscreteMapping</compoundname>
+    <includes refid="discrete__mapping_8hpp" local="no">discrete_mapping.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class StartCoord</type>
+      </param>
+      <param>
+        <type>class EndCoord</type>
+      </param>
+      <param>
+        <type><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></type>
+        <declname>NDEvaluator</declname>
+        <defname>NDEvaluator</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classDiscreteMapping_1a0770b9cd95c041fc5a8e4942ea5a62f6" prot="public" static="no">
+        <type>StartCoord</type>
+        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::CoordArg =  StartCoord</definition>
+        <argsstring></argsstring>
+        <name>CoordArg</name>
+        <qualifiedname>DiscreteMapping::CoordArg</qualifiedname>
+        <briefdescription>
+<para>The type of the argument of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteMapping_1a3b25d1195f6c9cd01842961ca0c3e4bc" prot="public" static="no">
+        <type>EndCoord</type>
+        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::CoordResult =  EndCoord</definition>
+        <argsstring></argsstring>
+        <name>CoordResult</name>
+        <qualifiedname>DiscreteMapping::CoordResult</qualifiedname>
+        <briefdescription>
+<para>The type of the result of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteMapping_1a006a0b937efbaa8e24d21999ab8805b5" prot="public" static="no">
+        <type>StartCoord</type>
+        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::CoordJacobian =  StartCoord</definition>
+        <argsstring></argsstring>
+        <name>CoordJacobian</name>
+        <qualifiedname>DiscreteMapping::CoordJacobian</qualifiedname>
+        <briefdescription>
+<para>The type of the coordinate that can be used to evaluate the Jacobian of this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteMapping_1a61eee2bf7a2e0c0112edb71269868149" prot="public" static="no">
+        <type>typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; NDEvaluator &gt;::data_type</type>
+        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::DataType =  typename InterpolationEvaluatorTraits&lt;NDEvaluator&gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>DataType</name>
+        <qualifiedname>DiscreteMapping::DataType</qualifiedname>
+        <briefdescription>
+<para>The data type of the coefficients and the values calculated by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteMapping_1ac14c59e2bfb7ee641f01e00e98ec41da" prot="public" static="no">
+        <type>ddc::to_type_seq_t&lt; StartCoord &gt;</type>
+        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::ArgBasis =  ddc::to_type_seq_t&lt;StartCoord&gt;</definition>
+        <argsstring></argsstring>
+        <name>ArgBasis</name>
+        <qualifiedname>DiscreteMapping::ArgBasis</qualifiedname>
+        <briefdescription>
+<para>The type sequence of dimensions describing the argument of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteMapping_1aca28c1bacac69d3ce652f312470ff15e" prot="public" static="no">
+        <type>ddc::to_type_seq_t&lt; EndCoord &gt;</type>
+        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::ResultBasis =  ddc::to_type_seq_t&lt;EndCoord&gt;</definition>
+        <argsstring></argsstring>
+        <name>ResultBasis</name>
+        <qualifiedname>DiscreteMapping::ResultBasis</qualifiedname>
+        <briefdescription>
+<para>The type sequence of dimensions describing the result of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classDiscreteMapping_1a759b95b7694cbe22ee515df7d330d4d6" prot="private" static="no">
+        <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; <ref refid="classDiscreteMapping_1a61eee2bf7a2e0c0112edb71269868149" kindref="member">DataType</ref>, typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; NDEvaluator &gt;::coeff_idx_range_type, <ref refid="classDiscreteMapping_1aca28c1bacac69d3ce652f312470ff15e" kindref="member">ResultBasis</ref>, typename NDEvaluator::memory_space &gt;</type>
+        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::CoeffField =  VectorConstField&lt; DataType, typename InterpolationEvaluatorTraits&lt;NDEvaluator&gt;::coeff_idx_range_type, ResultBasis, typename NDEvaluator::memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoeffField</name>
+        <qualifiedname>DiscreteMapping::CoeffField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classDiscreteMapping_1a4ae1bc5a5503271ccd161944ed8a39a8" prot="private" static="no" mutable="no">
+        <type><ref refid="classVectorField" kindref="compound">CoeffField</ref></type>
+        <definition>CoeffField DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::m_coeff_representation</definition>
+        <argsstring></argsstring>
+        <name>m_coeff_representation</name>
+        <qualifiedname>DiscreteMapping::m_coeff_representation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="79" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDiscreteMapping_1abde006e357759f39dce3cc50c58ce5e9" prot="private" static="no" mutable="no">
+        <type>NDEvaluator</type>
+        <definition>NDEvaluator DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>DiscreteMapping::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="80" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classDiscreteMapping_1a60975ab68f80e228f6cf88276bb79cf2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::DiscreteMapping</definition>
+        <argsstring>(CoeffField coeff_representation, NDEvaluator const &amp;evaluator)</argsstring>
+        <name>DiscreteMapping</name>
+        <qualifiedname>DiscreteMapping::DiscreteMapping</qualifiedname>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">CoeffField</ref></type>
+          <declname>coeff_representation</declname>
+        </param>
+        <param>
+          <type>NDEvaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classDiscreteMapping" kindref="compound">DiscreteMapping</ref> from the coefficients of an interpolating function which approximates the mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use an interpolation on a basis. The <ref refid="classDiscreteMapping" kindref="compound">DiscreteMapping</ref> is initialised from the coefficients in front of the basis functions which arise when we approximate the functions <formula id="108">$ E(S) $</formula> (with <formula id="109">$ E $</formula> the coordinates in the End vector space and S the coordinates in the Start vector space). Then to interpolate the mapping, we will evaluate the decomposed functions on the chosen interpolating function (see DiscreteMapping::operator()).</para>
+<para>Here, the evaluator is given as input.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_representation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coefficients of the interpolating function representing the coords in the target domain.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluator used to evaluate the mapping. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="103" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteMapping_1a1c2c26bb9a1d948319e08da4fbb45905" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::DiscreteMapping</definition>
+        <argsstring>(DiscreteMapping const &amp;other)=default</argsstring>
+        <name>DiscreteMapping</name>
+        <qualifiedname>DiscreteMapping::DiscreteMapping</qualifiedname>
+        <param>
+          <type><ref refid="classDiscreteMapping" kindref="compound">DiscreteMapping</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy-construct a <ref refid="classDiscreteMapping" kindref="compound">DiscreteMapping</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classDiscreteMapping" kindref="compound">DiscreteMapping</ref> being copied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="113" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteMapping_1a6c02f8e865581b812a44404bc941d290" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classDiscreteMapping_1a3b25d1195f6c9cd01842961ca0c3e4bc" kindref="member">CoordResult</ref></type>
+        <definition>KOKKOS_FUNCTION CoordResult DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::operator()</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>DiscreteMapping::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classDiscreteMapping_1a0770b9cd95c041fc5a8e4942ea5a62f6" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the target coordinates from the start coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates in the start domain.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The coordinates of the mapping in the end domain. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="123" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="123" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteMapping_1a209d58cb9397f99947edf09578cbff7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>GridType</declname>
+            <defname>GridType</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::operator()</definition>
+        <argsstring>(ExecSpace exec_space, Field&lt; CoordResult, IdxRange&lt; GridType... &gt; &gt; coords)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>DiscreteMapping::operator()</qualifiedname>
+        <param>
+          <type>ExecSpace</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type>Field&lt; <ref refid="classDiscreteMapping_1a3b25d1195f6c9cd01842961ca0c3e4bc" kindref="member">CoordResult</ref>, IdxRange&lt; GridType... &gt; &gt;</type>
+          <declname>coords</declname>
+        </param>
+        <briefdescription>
+<para>Compute the physical coordinates at the points on the logical grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It evaluates the decomposed mapping on B-splines at the coordinate point with a SplineEvaluator2D.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The execution space where the calculation should be carried out. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">coords</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates of the mapping in the physical domain at the grid points.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>SplineEvaluator2D </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="144" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="144" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteMapping_1ac399eae20fa2f3cde93b5df4e67a1c30" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref>&lt; <ref refid="classDiscreteMapping_1a61eee2bf7a2e0c0112edb71269868149" kindref="member">DataType</ref>, <ref refid="classDiscreteMapping_1aca28c1bacac69d3ce652f312470ff15e" kindref="member">ResultBasis</ref>, get_covariant_dims_t&lt; <ref refid="classDiscreteMapping_1ac14c59e2bfb7ee641f01e00e98ec41da" kindref="member">ArgBasis</ref> &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION Tensor&lt; DataType, ResultBasis, get_covariant_dims_t&lt; ArgBasis &gt; &gt; DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::jacobian_matrix</definition>
+        <argsstring>(CoordJacobian const &amp;coord) const</argsstring>
+        <name>jacobian_matrix</name>
+        <qualifiedname>DiscreteMapping::jacobian_matrix</qualifiedname>
+        <param>
+          <type><ref refid="classDiscreteMapping_1a006a0b937efbaa8e24d21999ab8805b5" kindref="member">CoordJacobian</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute full Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given independently with the function jacobian_component.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="172" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="172" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteMapping_1a53d6d17d36e21dc310b22b7c79ca761b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::jacobian_component</definition>
+        <argsstring>(CoordJacobian coord) const</argsstring>
+        <name>jacobian_component</name>
+        <qualifiedname>DiscreteMapping::jacobian_component</qualifiedname>
+        <param>
+          <type><ref refid="classDiscreteMapping_1a006a0b937efbaa8e24d21999ab8805b5" kindref="member">CoordJacobian</ref></type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (i,j) coefficient of the Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For a mapping given by <formula id="110">$ \mathcal{F} : {q_i}\mapsto {x_i} $</formula>, with <formula id="111">${q_i}$</formula> the curvilinear coordinates and <formula id="112">${x_i}$</formula> the Cartesian coordinates, the (i,j) coefficient of the Jacobian matrix is given by <formula id="113">$ J^i_j\frac{\partial x_i}{\partial q_j} $</formula>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the Jacobian matrix.</para>
+</simplesect>
+<simplesect kind="see"><para>SplineEvaluator2D </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="195" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="195" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteMapping_1a745a5e6fa66e7ed7d2be455215228134" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::jacobian</definition>
+        <argsstring>(CoordJacobian const &amp;coord) const</argsstring>
+        <name>jacobian</name>
+        <qualifiedname>DiscreteMapping::jacobian</qualifiedname>
+        <param>
+          <type><ref refid="classDiscreteMapping_1a006a0b937efbaa8e24d21999ab8805b5" kindref="member">CoordJacobian</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the determinant of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="215" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="215" bodyend="219"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A mapping whose values are only known at the mesh points of a grid, evaluated elsewhere using an interpolating function. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use an interpolation on a basis. The <ref refid="classDiscreteMapping" kindref="compound">DiscreteMapping</ref> is initialised from the coefficients in front of the basis functions which arise when we approximate the functions <formula id="108">$ E(S) $</formula> (with <formula id="109">$ E $</formula> the coordinates in the End vector space and S the coordinates in the Start vector space). Then to interpolate the mapping, we evaluate the decomposed functions using the chosen interpolating function (see DiscreteMapping::operator()).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StartCoord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the coordinates in the domain of definition of the mapping. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EndCoord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the coordinates in the image of the mapping. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>NDEvaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the evaluator used to evaluate the interpolating function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="52" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="53" bodyend="220"/>
+    <listofallmembers>
+      <member refid="classDiscreteMapping_1ac14c59e2bfb7ee641f01e00e98ec41da" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>ArgBasis</name></member>
+      <member refid="classDiscreteMapping_1a759b95b7694cbe22ee515df7d330d4d6" prot="private" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoeffField</name></member>
+      <member refid="classDiscreteMapping_1a0770b9cd95c041fc5a8e4942ea5a62f6" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoordArg</name></member>
+      <member refid="classDiscreteMapping_1a006a0b937efbaa8e24d21999ab8805b5" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoordJacobian</name></member>
+      <member refid="classDiscreteMapping_1a3b25d1195f6c9cd01842961ca0c3e4bc" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoordResult</name></member>
+      <member refid="classDiscreteMapping_1a61eee2bf7a2e0c0112edb71269868149" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>DataType</name></member>
+      <member refid="classDiscreteMapping_1a60975ab68f80e228f6cf88276bb79cf2" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>DiscreteMapping</name></member>
+      <member refid="classDiscreteMapping_1a1c2c26bb9a1d948319e08da4fbb45905" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>DiscreteMapping</name></member>
+      <member refid="classDiscreteMapping_1a745a5e6fa66e7ed7d2be455215228134" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>jacobian</name></member>
+      <member refid="classDiscreteMapping_1a53d6d17d36e21dc310b22b7c79ca761b" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>jacobian_component</name></member>
+      <member refid="classDiscreteMapping_1ac399eae20fa2f3cde93b5df4e67a1c30" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>jacobian_matrix</name></member>
+      <member refid="classDiscreteMapping_1a4ae1bc5a5503271ccd161944ed8a39a8" prot="private" virt="non-virtual"><scope>DiscreteMapping</scope><name>m_coeff_representation</name></member>
+      <member refid="classDiscreteMapping_1abde006e357759f39dce3cc50c58ce5e9" prot="private" virt="non-virtual"><scope>DiscreteMapping</scope><name>m_evaluator</name></member>
+      <member refid="classDiscreteMapping_1a6c02f8e865581b812a44404bc941d290" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>operator()</name></member>
+      <member refid="classDiscreteMapping_1a209d58cb9397f99947edf09578cbff7e" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>operator()</name></member>
+      <member refid="classDiscreteMapping_1aca28c1bacac69d3ce652f312470ff15e" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>ResultBasis</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

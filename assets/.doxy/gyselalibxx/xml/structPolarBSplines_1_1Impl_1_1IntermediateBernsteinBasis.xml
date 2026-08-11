@@ -5,7 +5,7 @@
     <basecompoundref refid="classTriangularBernsteinPolynomialBasis" prot="public" virt="non-virtual">TriangularBernsteinPolynomialBasis&lt; DiscreteMapping::cartesian_tag_x, DiscreteMapping::cartesian_tag_y, Corner1Tag, Corner2Tag, Corner3Tag, C &gt;</basecompoundref>
     <templateparamlist>
       <param>
-        <type>class DiscreteMapping</type>
+        <type>class <ref refid="classDiscreteMapping" kindref="compound">DiscreteMapping</ref></type>
       </param>
     </templateparamlist>
     <briefdescription>

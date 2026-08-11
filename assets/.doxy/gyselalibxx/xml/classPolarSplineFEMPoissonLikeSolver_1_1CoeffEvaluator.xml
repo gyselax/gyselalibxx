@@ -89,7 +89,7 @@
 <para>A wrapper that binds an evaluator with its coefficient field to present a single callable <computeroutput>double operator()(CoordRTheta)</computeroutput>. </para>
     </briefdescription>
     <detaileddescription>
-<para>This allows the <formula id="157">$ \alpha $</formula> and <formula id="158">$ \beta $</formula> coefficients to be passed to <computeroutput><ref refid="classPolarSplineFEMPoissonLikeAssembler" kindref="compound">PolarSplineFEMPoissonLikeAssembler</ref></computeroutput>, which expects a generic callable.</para>
+<para>This allows the <formula id="159">$ \alpha $</formula> and <formula id="160">$ \beta $</formula> coefficients to be passed to <computeroutput><ref refid="classPolarSplineFEMPoissonLikeAssembler" kindref="compound">PolarSplineFEMPoissonLikeAssembler</ref></computeroutput>, which expects a generic callable.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>Evaluator</parametername>

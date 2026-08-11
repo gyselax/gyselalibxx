@@ -481,7 +481,7 @@
 <parametername direction="out">phi</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The solution <formula id="206">$\phi$</formula> on the grid. </para>
+<para>The solution <formula id="208">$\phi$</formula> on the grid. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -489,7 +489,7 @@
 <parametername direction="in">rho</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The right-hand side <formula id="376">$\rho$</formula> on the grid. </para>
+<para>The right-hand side <formula id="378">$\rho$</formula> on the grid. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

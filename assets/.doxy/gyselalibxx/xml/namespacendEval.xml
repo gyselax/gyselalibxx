@@ -1,0 +1,571 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacendEval" kind="namespace" language="C++">
+    <compoundname>ndEval</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="vector__field__evaluation_8hpp_1a75b746745a54babbfe5fcc8ead376830" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></type>
+            <declname>Evaluator</declname>
+            <defname>Evaluator</defname>
+          </param>
+          <param>
+            <type>class CoordType</type>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class IdxRangeCoeff</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+          <param>
+            <type>class LayoutCoeff</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>VectorDims</declname>
+            <defname>VectorDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Vector</ref>&lt; ElementType, VectorDims... &gt;</type>
+        <definition>KOKKOS_FUNCTION Vector&lt; ElementType, VectorDims... &gt; ndEval::evaluate</definition>
+        <argsstring>(Evaluator const &amp;evaluator, CoordType const &amp;coord, VectorField&lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt; coeffs)</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>ndEval::evaluate</qualifiedname>
+        <param>
+          <type>Evaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>CoordType const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt;</type>
+          <declname>coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate an ND interpolation at a single coordinate on each component of a <ref refid="classVectorField" kindref="compound">VectorField</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each dimension <computeroutput>VectorDim</computeroutput> in <computeroutput>VectorDims</computeroutput>..., calls <programlisting><codeline><highlight class="normal">evaluator(coord,<sp/>ddcHelper::get&lt;VectorDim&gt;(coeffs));</highlight></codeline>
+</programlisting> and packs the results into the returned Vector.</para>
+<para>This is the <ref refid="classVectorField" kindref="compound">VectorField</ref> counterpart of <computeroutput>evaluator.operator()(coord, coeffs)</computeroutput>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class satisfying <computeroutput><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>VectorDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions labelling the vector components (passed to <computeroutput>ddcHelper::get</computeroutput> to extract the corresponding scalar field).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND interpolation evaluator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate at which the interpolation is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolation coefficients for each vector component.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The interpolated value of each vector component at <computeroutput>coord</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" line="38" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" bodystart="38" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="vector__field__evaluation_8hpp_1a8a992683b61bb235f3e51c2156a17f3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></type>
+            <declname>Evaluator</declname>
+            <defname>Evaluator</defname>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class IdxRangeEval</type>
+          </param>
+          <param>
+            <type>class IdxRangeCoeff</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+          <param>
+            <type>class LayoutOut</type>
+          </param>
+          <param>
+            <type>class LayoutCoeff</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>VectorDims</declname>
+            <defname>VectorDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ndEval::evaluate</definition>
+        <argsstring>(Evaluator const &amp;evaluator, VectorField&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt; output, VectorField&lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt; coeffs)</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>ndEval::evaluate</qualifiedname>
+        <param>
+          <type>Evaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt;</type>
+          <declname>coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate an ND interpolation on each component of a <ref refid="classVectorField" kindref="compound">VectorField</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each dimension <computeroutput>VectorDim</computeroutput> in <computeroutput>VectorDims</computeroutput>..., calls <programlisting><codeline><highlight class="normal">evaluator(ddcHelper::get&lt;VectorDim&gt;(output),<sp/>ddcHelper::get&lt;VectorDim&gt;(coeffs));</highlight></codeline>
+</programlisting></para>
+<para>This is the <ref refid="classVectorField" kindref="compound">VectorField</ref> counterpart of <computeroutput>evaluator.operator()(eval, coeffs)</computeroutput>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class satisfying <computeroutput><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>VectorDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions labelling the vector components (passed to <computeroutput>ddcHelper::get</computeroutput> to extract the corresponding scalar field).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND interpolation evaluator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On output, the interpolated values for each vector component. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolation coefficients for each vector component. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" line="80" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" bodystart="80" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="vector__field__evaluation_8hpp_1a3bdb5731a121215980ed70a5a04b4b97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></type>
+            <declname>Evaluator</declname>
+            <defname>Evaluator</defname>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class IdxRangeEval</type>
+          </param>
+          <param>
+            <type>class CoordType</type>
+          </param>
+          <param>
+            <type>class IdxRangeCoord</type>
+          </param>
+          <param>
+            <type>class IdxRangeCoeff</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+          <param>
+            <type>class LayoutOut</type>
+          </param>
+          <param>
+            <type>class LayoutCoords</type>
+          </param>
+          <param>
+            <type>class LayoutCoeff</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>VectorDims</declname>
+            <defname>VectorDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ndEval::evaluate</definition>
+        <argsstring>(Evaluator const &amp;evaluator, VectorField&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt; output, ConstField&lt; CoordType, IdxRangeCoord, MemorySpace, LayoutCoords &gt; coords, VectorField&lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt; coeffs)</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>ndEval::evaluate</qualifiedname>
+        <param>
+          <type>Evaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; CoordType, IdxRangeCoord, MemorySpace, LayoutCoords &gt;</type>
+          <declname>coords</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt;</type>
+          <declname>coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate an ND interpolation at explicit coordinates on each component of a <ref refid="classVectorField" kindref="compound">VectorField</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each dimension <computeroutput>VectorDim</computeroutput> in <computeroutput>VectorDims</computeroutput>..., calls <programlisting><codeline><highlight class="normal">evaluator(ddcHelper::get&lt;VectorDim&gt;(output),<sp/>coords,<sp/>ddcHelper::get&lt;VectorDim&gt;(coeffs));</highlight></codeline>
+</programlisting></para>
+<para>This is the <ref refid="classVectorField" kindref="compound">VectorField</ref> counterpart of <computeroutput>evaluator.operator()(eval, coords, coeffs)</computeroutput>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class satisfying <computeroutput><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>VectorDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions labelling the vector components (passed to <computeroutput>ddcHelper::get</computeroutput> to extract the corresponding scalar field).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND interpolation evaluator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On output, the interpolated values for each vector component. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coords</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluation coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolation coefficients for each vector component. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" line="129" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" bodystart="129" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="vector__field__evaluation_8hpp_1a818816b72818e1a3804d730515a1fb0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></type>
+            <declname>Evaluator</declname>
+            <defname>Evaluator</defname>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class IdxRangeEval</type>
+          </param>
+          <param>
+            <type>class IdxRangeCoeff</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+          <param>
+            <type>class LayoutOut</type>
+          </param>
+          <param>
+            <type>class LayoutCoeff</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>VectorDims</declname>
+            <defname>VectorDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ndEval::deriv</definition>
+        <argsstring>(Evaluator const &amp;evaluator, VectorField&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt; output, ConstField&lt; ElementType, IdxRangeCoeff, MemorySpace, LayoutCoeff &gt; coeffs)</argsstring>
+        <name>deriv</name>
+        <qualifiedname>ndEval::deriv</qualifiedname>
+        <param>
+          <type>Evaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; ElementType, IdxRangeCoeff, MemorySpace, LayoutCoeff &gt;</type>
+          <declname>coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Compute first-order partial derivatives of a scalar function as a <ref refid="classVectorField" kindref="compound">VectorField</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each dimension <computeroutput>VectorDim</computeroutput> in <computeroutput>VectorDims</computeroutput>..., evaluates the first derivative of the scalar function defined by <computeroutput>coeffs</computeroutput> in the direction <computeroutput>VectorDim::Dual</computeroutput>, storing the result in the corresponding component of <computeroutput>output:</computeroutput> <programlisting><codeline><highlight class="normal">evaluator.deriv(Idx&lt;ddc::Deriv&lt;typename<sp/>VectorDim::Dual&gt;&gt;(1),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;VectorDim&gt;(output),<sp/>coeffs);</highlight></codeline>
+</programlisting></para>
+<para>This is the <ref refid="classVectorField" kindref="compound">VectorField</ref> counterpart of <computeroutput>evaluator.deriv(deriv_order, eval, coeffs)</computeroutput>, computing partial derivatives in all directions simultaneously.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class satisfying <computeroutput><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>VectorDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions labelling the vector components. Each <computeroutput>VectorDim</computeroutput> must expose a <computeroutput>Dual</computeroutput> type identifying the continuous dimension in which the derivative is taken.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND interpolation evaluator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On output, each component holds the first partial derivative of the scalar function in the direction <computeroutput>VectorDim::Dual</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scalar interpolation coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" line="182" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" bodystart="182" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="vector__field__evaluation_8hpp_1a709a573949755e197c5d1dd5896f361e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></type>
+            <declname>Evaluator</declname>
+            <defname>Evaluator</defname>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class IdxRangeEval</type>
+          </param>
+          <param>
+            <type>class CoordType</type>
+          </param>
+          <param>
+            <type>class IdxRangeCoord</type>
+          </param>
+          <param>
+            <type>class IdxRangeCoeff</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+          <param>
+            <type>class LayoutOut</type>
+          </param>
+          <param>
+            <type>class LayoutCoords</type>
+          </param>
+          <param>
+            <type>class LayoutCoeff</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>VectorDims</declname>
+            <defname>VectorDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ndEval::deriv</definition>
+        <argsstring>(Evaluator const &amp;evaluator, VectorField&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt; output, ConstField&lt; CoordType, IdxRangeCoord, MemorySpace, LayoutCoords &gt; coords, ConstField&lt; ElementType, IdxRangeCoeff, MemorySpace, LayoutCoeff &gt; coeffs)</argsstring>
+        <name>deriv</name>
+        <qualifiedname>ndEval::deriv</qualifiedname>
+        <param>
+          <type>Evaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; CoordType, IdxRangeCoord, MemorySpace, LayoutCoords &gt;</type>
+          <declname>coords</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; ElementType, IdxRangeCoeff, MemorySpace, LayoutCoeff &gt;</type>
+          <declname>coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Compute first-order partial derivatives at explicit coordinates as a <ref refid="classVectorField" kindref="compound">VectorField</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each dimension <computeroutput>VectorDim</computeroutput> in <computeroutput>VectorDims</computeroutput>..., evaluates the first derivative of the scalar function defined by <computeroutput>coeffs</computeroutput> in the direction <computeroutput>VectorDim::Dual</computeroutput> at positions given by <computeroutput>coords</computeroutput>, storing the result in the corresponding component of <computeroutput>output:</computeroutput> <programlisting><codeline><highlight class="normal">evaluator.deriv(Idx&lt;ddc::Deriv&lt;typename<sp/>VectorDim::Dual&gt;&gt;(1),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;VectorDim&gt;(output),<sp/>coords,<sp/>coeffs);</highlight></codeline>
+</programlisting></para>
+<para>This is the <ref refid="classVectorField" kindref="compound">VectorField</ref> counterpart of <computeroutput>evaluator.deriv(deriv_order, eval, coords, coeffs)</computeroutput>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class satisfying <computeroutput><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>VectorDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions labelling the vector components. Each <computeroutput>VectorDim</computeroutput> must expose a <computeroutput>Dual</computeroutput> type identifying the continuous dimension in which the derivative is taken.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND interpolation evaluator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On output, each component holds the first partial derivative of the scalar function in the direction <computeroutput>VectorDim::Dual</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coords</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluation coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scalar interpolation coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" line="236" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" bodystart="236" bodyend="254"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp" line="7" column="1"/>
+  </compounddef>
+</doxygen>

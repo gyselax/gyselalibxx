@@ -833,6 +833,24 @@
     <member refid="classDiocotronDensitySolution_1a9615447cc5be0e3addf4f885660af89a" kind="function"><name>equilibrium</name></member>
     <member refid="classDiocotronDensitySolution_1a82887cb9488adf181e8ec74cf4b1eb1e" kind="function"><name>dispersion_relation</name></member>
   </compound>
+  <compound refid="classDiscreteMapping" kind="class"><name>DiscreteMapping</name>
+    <member refid="classDiscreteMapping_1a0770b9cd95c041fc5a8e4942ea5a62f6" kind="typedef"><name>CoordArg</name></member>
+    <member refid="classDiscreteMapping_1a3b25d1195f6c9cd01842961ca0c3e4bc" kind="typedef"><name>CoordResult</name></member>
+    <member refid="classDiscreteMapping_1a006a0b937efbaa8e24d21999ab8805b5" kind="typedef"><name>CoordJacobian</name></member>
+    <member refid="classDiscreteMapping_1a61eee2bf7a2e0c0112edb71269868149" kind="typedef"><name>DataType</name></member>
+    <member refid="classDiscreteMapping_1ac14c59e2bfb7ee641f01e00e98ec41da" kind="typedef"><name>ArgBasis</name></member>
+    <member refid="classDiscreteMapping_1aca28c1bacac69d3ce652f312470ff15e" kind="typedef"><name>ResultBasis</name></member>
+    <member refid="classDiscreteMapping_1a759b95b7694cbe22ee515df7d330d4d6" kind="typedef"><name>CoeffField</name></member>
+    <member refid="classDiscreteMapping_1a4ae1bc5a5503271ccd161944ed8a39a8" kind="variable"><name>m_coeff_representation</name></member>
+    <member refid="classDiscreteMapping_1abde006e357759f39dce3cc50c58ce5e9" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classDiscreteMapping_1a60975ab68f80e228f6cf88276bb79cf2" kind="function"><name>DiscreteMapping</name></member>
+    <member refid="classDiscreteMapping_1a1c2c26bb9a1d948319e08da4fbb45905" kind="function"><name>DiscreteMapping</name></member>
+    <member refid="classDiscreteMapping_1a6c02f8e865581b812a44404bc941d290" kind="function"><name>operator()</name></member>
+    <member refid="classDiscreteMapping_1a209d58cb9397f99947edf09578cbff7e" kind="function"><name>operator()</name></member>
+    <member refid="classDiscreteMapping_1ac399eae20fa2f3cde93b5df4e67a1c30" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classDiscreteMapping_1a53d6d17d36e21dc310b22b7c79ca761b" kind="function"><name>jacobian_component</name></member>
+    <member refid="classDiscreteMapping_1a745a5e6fa66e7ed7d2be455215228134" kind="function"><name>jacobian</name></member>
+  </compound>
   <compound refid="classDiscretePoloidalCSSplineMapping" kind="class"><name>DiscretePoloidalCSSplineMapping</name>
     <member refid="classDiscretePoloidalCSSplineMapping_1af2666886352469160d73ace3e44ea67e" kind="typedef"><name>BSplineR</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a392b5ffe5886c6d138dc56d37e1e0134" kind="typedef"><name>BSplineTheta</name></member>
@@ -3639,15 +3657,15 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d102" kind="namespace"><name>@102</name>
-  </compound>
-  <compound refid="namespace_0d235" kind="namespace"><name>@235</name>
+  <compound refid="namespace_0d103" kind="namespace"><name>@103</name>
   </compound>
   <compound refid="namespace_0d237" kind="namespace"><name>@237</name>
   </compound>
   <compound refid="namespace_0d239" kind="namespace"><name>@239</name>
   </compound>
   <compound refid="namespace_0d241" kind="namespace"><name>@241</name>
+  </compound>
+  <compound refid="namespace_0d243" kind="namespace"><name>@243</name>
   </compound>
   <compound refid="namespacebumpontail__equilibrium" kind="namespace"><name>bumpontail_equilibrium</name>
     <member refid="bumpontailequilibrium_8hpp_1a904011943d45927909831ec61a31a6da" kind="function"><name>init_from_input</name></member>
@@ -3724,6 +3742,13 @@
   </compound>
   <compound refid="namespacemaxwellian__equilibrium" kind="namespace"><name>maxwellian_equilibrium</name>
     <member refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_1a0664bbc4da7127e97a1a058b72321898" kind="function"><name>init_from_input</name></member>
+  </compound>
+  <compound refid="namespacendEval" kind="namespace"><name>ndEval</name>
+    <member refid="vector__field__evaluation_8hpp_1a75b746745a54babbfe5fcc8ead376830" kind="function"><name>evaluate</name></member>
+    <member refid="vector__field__evaluation_8hpp_1a8a992683b61bb235f3e51c2156a17f3b" kind="function"><name>evaluate</name></member>
+    <member refid="vector__field__evaluation_8hpp_1a3bdb5731a121215980ed70a5a04b4b97" kind="function"><name>evaluate</name></member>
+    <member refid="vector__field__evaluation_8hpp_1a818816b72818e1a3804d730515a1fb0a" kind="function"><name>deriv</name></member>
+    <member refid="vector__field__evaluation_8hpp_1a709a573949755e197c5d1dd5896f361e" kind="function"><name>deriv</name></member>
   </compound>
   <compound refid="namespacepolar__foot__finder__details" kind="namespace"><name>polar_foot_finder_details</name>
   </compound>
@@ -3825,6 +3850,8 @@
   <compound refid="cylindrical__to__cartesian_8hpp" kind="file"><name>cylindrical_to_cartesian.hpp</name>
   </compound>
   <compound refid="czarny__to__cartesian_8hpp" kind="file"><name>czarny_to_cartesian.hpp</name>
+  </compound>
+  <compound refid="discrete__mapping_8hpp" kind="file"><name>discrete_mapping.hpp</name>
   </compound>
   <compound refid="discrete__poloidal__cs__spline__mapping_8hpp" kind="file"><name>discrete_poloidal_cs_spline_mapping.hpp</name>
   </compound>
@@ -4479,6 +4506,8 @@
   <compound refid="spline__interpolation_8hpp" kind="file"><name>spline_interpolation.hpp</name>
     <member refid="spline__interpolation_8hpp_1a157d9a4884beda9853999545b1c0f700" kind="typedef"><name>SplineInterpolator</name></member>
     <member refid="spline__interpolation_8hpp_1a2485f3a62b25608e6158b0f02f016e24" kind="typedef"><name>SplineInterpolatorWSolver</name></member>
+  </compound>
+  <compound refid="vector__field__evaluation_8hpp" kind="file"><name>vector_field_evaluation.hpp</name>
   </compound>
   <compound refid="input_8cpp" kind="file"><name>input.cpp</name>
     <member refid="input_8cpp_1a786e15d5483370d99f7bef2ce8321b58" kind="function"><name>parse_executable_arguments</name></member>

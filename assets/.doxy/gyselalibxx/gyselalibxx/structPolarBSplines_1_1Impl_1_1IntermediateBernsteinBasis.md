@@ -2,7 +2,7 @@
 
 # Struct PolarBSplines::Impl::IntermediateBernsteinBasis
 
-**template &lt;class DiscreteMapping&gt;**
+**template &lt;class [**DiscreteMapping**](classDiscreteMapping.md)&gt;**
 
 
 

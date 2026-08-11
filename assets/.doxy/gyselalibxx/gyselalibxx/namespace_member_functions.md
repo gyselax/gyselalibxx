@@ -21,6 +21,12 @@
 
 * **deepcopy** ([**ddcHelper**](namespaceddcHelper.md))
 * **dump\_coordinates** ([**ddcHelper**](namespaceddcHelper.md))
+* **deriv** ([**ndEval**](namespacendEval.md))
+
+
+## e
+
+* **evaluate** ([**ndEval**](namespacendEval.md))
 
 
 ## g
