@@ -432,9 +432,6 @@ struct LagrangeInterpolatorResolver<
             ddc::detail::TypeSeq<
                     extrapolation_rule_t<
                             ExtrapRulesHead,
-                            typename BasisHead::template Impl<
-                                    BasisHead,
-                                    typename ExecSpace::memory_space>::knot_grid,
                             DataType,
                             BasisHead,
                             typename NDIdentityInterpolationBuilder<
@@ -445,8 +442,6 @@ struct LagrangeInterpolatorResolver<
                                     IdxRange<BasisHead, Basis...>>::coeff_idx_range_type>,
                     extrapolation_rule_t<
                             ExtrapRules,
-                            typename Basis::template Impl<Basis, typename ExecSpace::memory_space>::
-                                    knot_grid,
                             DataType,
                             Basis,
                             typename NDIdentityInterpolationBuilder<
