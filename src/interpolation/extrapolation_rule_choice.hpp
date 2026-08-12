@@ -98,7 +98,7 @@ Rule get_extrapolation(Extremity extremity)
             static_assert(rank == 2);
             using NIBasis = ddc::type_seq_element_t<
                     0,
-                    ddc::to_type_seq_t<ddc::remove_dims_of_t<Basis, IdxRangeBasis>>>;
+                    ddc::to_type_seq_t<ddc::remove_dims_of_t<IdxRangeBasis, Basis>>>;
             if (extremity == Extremity::FRONT) {
                 return Rule(
                         ddc::discrete_space<Basis>().rmin(),
