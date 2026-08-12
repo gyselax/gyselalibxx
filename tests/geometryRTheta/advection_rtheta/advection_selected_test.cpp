@@ -115,28 +115,9 @@ int main(int argc, char** argv)
 
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
-    // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder_host const builder_host(grid);
-    SplineRThetaBuilder const builder(grid);
-
     // --- Interpolator for the test function:
     SplineInterpolatorRTheta interpolator(grid);
-
-    // --- Evaluator for the test advection field:
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
-
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
+    SplineInterpolatorRThetaConst interpolator_const(grid);
 
     std::string key;
 
@@ -165,6 +146,7 @@ int main(int argc, char** argv)
 #elif not defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     static_assert(false, "No mapping macro defined");
 #else
+    SplineInterpolatorRThetaConst interpolator_const_host(grid);
     DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
@@ -173,8 +155,8 @@ int main(int argc, char** argv)
             mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
-                    builder_host,
-                    spline_evaluator_extrapol_host);
+                    interpolator_const_host.get_builder(),
+                    interpolator_const_host.get_evaluator());
     DiscretePoloidalCSSplineMapping to_physical_mapping_host = mapping_builder_host();
     DiscretePoloidalCSSplineMappingBuilder<
             X,
@@ -184,8 +166,8 @@ int main(int argc, char** argv)
             mapping_builder(
                     Kokkos::DefaultExecutionSpace(),
                     to_physical_analytical_mapping,
-                    builder,
-                    spline_evaluator_extrapol);
+                    interpolator_const.get_builder(),
+                    interpolator_const.get_evaluator());
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     std::string const mapping_name = "DISCRETE";
     key += "discrete";
@@ -253,13 +235,10 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
-    PolarFootFinder const foot_finder
-            = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
-                    time_stepper,
-                    to_physical_mapping,
-                    grid,
-                    builder,
-                    spline_evaluator_extrapol);
+    PolarFootFinder const foot_finder = make_polar_foot_finder<
+            FFSpace,
+            AdvectionFieldSpace::
+                    PHYSICAL>(time_stepper, to_physical_mapping, grid, interpolator_const);
 
     BslAdvectionPolar advection_operator(interpolator, foot_finder, to_physical_mapping);
 

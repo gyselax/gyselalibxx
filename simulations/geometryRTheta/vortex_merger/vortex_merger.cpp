@@ -103,7 +103,8 @@ int main(int argc, char** argv)
     SplineRThetaBuilder const& builder(interpolator.get_builder());
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    SplineRThetaEvaluatorConstBound const& spline_evaluator_extrapol(interpolator_const.get_evaluator());
+    SplineRThetaEvaluatorConstBound const& spline_evaluator_extrapol(
+            interpolator_const.get_evaluator());
 
     const LogicalToPhysicalMapping to_physical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
@@ -123,13 +124,10 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    PolarFootFinder find_feet
-            = make_polar_foot_finder<FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
-                    time_stepper,
-                    to_physical_mapping,
-                    grid,
-                    builder,
-                    spline_evaluator_extrapol);
+    PolarFootFinder find_feet = make_polar_foot_finder<
+            FootFindingSpace::PHYSICAL,
+            AdvectionFieldSpace::
+                    PHYSICAL>(time_stepper, to_physical_mapping, grid, interpolator_const);
 
     BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 

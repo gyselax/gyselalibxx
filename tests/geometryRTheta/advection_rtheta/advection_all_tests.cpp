@@ -82,8 +82,7 @@ struct GeneralParameters
 {
     IdxRangeRTheta grid;
     SplineInterpolatorRTheta const& interpolator;
-    SplineRThetaBuilder const& advection_builder;
-    SplineRThetaEvaluatorConstBound& advection_evaluator;
+    SplineInterpolatorRThetaConst const& advection_interpolator;
     double final_time;
     bool if_save_curves;
     bool if_save_feet;
@@ -117,8 +116,7 @@ void run_simulations_with_foot_finder_method(
             get_time_stepper_builder<TSChoice>(),
             to_physical_mapping,
             params.grid,
-            params.advection_builder,
-            params.advection_evaluator);
+            params.advection_interpolator);
 
     BslAdvectionPolar advection_operator(params.interpolator, foot_finder, to_physical_mapping);
 
@@ -264,30 +262,10 @@ int main(int argc, char** argv)
 
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
-    // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder_host const builder_host(grid);
-    SplineRThetaBuilder const builder(grid);
-
     // --- Interpolator for the test function:
     SplineInterpolatorRTheta spline_interpolator(grid);
-
-    // --- Evaluator for the test advection field:
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
-
-
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
-
+    SplineInterpolatorRThetaConst spline_interpolator_const(grid);
+    SplineInterpolatorRThetaConst_host spline_interpolator_const_host(grid);
 
     // SET THE DIFFERENT PARAMETERS OF THE TESTS ------------------------------------------------
     // Offset the centre of the circle to ensure that this is correctly handled
@@ -301,15 +279,15 @@ int main(int argc, char** argv)
     DiscreteMappingBuilderHost const discrete_czarny_map_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
             from_czarny_map,
-            builder_host,
-            spline_evaluator_extrapol_host);
+            spline_interpolator_const_host.get_builder(),
+            spline_interpolator_const_host.get_evaluator());
     DiscretePoloidalCSSplineMapping const from_discrete_czarny_map_host
             = discrete_czarny_map_builder_host();
     DiscreteMappingBuilder const discrete_czarny_map_builder(
             Kokkos::DefaultExecutionSpace(),
             from_czarny_map,
-            builder,
-            spline_evaluator_extrapol);
+            spline_interpolator_const.get_builder(),
+            spline_interpolator_const.get_evaluator());
     DiscretePoloidalCSSplineMapping const from_discrete_czarny_map = discrete_czarny_map_builder();
 
 
@@ -325,8 +303,7 @@ int main(int argc, char** argv)
     GeneralParameters params
             = {grid,
                spline_interpolator,
-               builder,
-               spline_evaluator_extrapol,
+               spline_interpolator_const,
                final_time,
                if_save_curves,
                if_save_feet};
