@@ -188,7 +188,7 @@ private:
     int m_max_iterations;
     double m_absTol;
     double m_relTol;
-    gmgpolar::PolarGrid m_grid;
+    gmgpolar::PolarGrid m_polar_grid;
     std::unique_ptr<gmgpolar::GMGPolar<DomainGeometry, DensityCoeffs>> m_solver;
 
 
@@ -322,9 +322,10 @@ public:
         Kokkos::View<double*> solution = m_solver->solution();
 
         gmgpolar::PolarGrid const& polar_grid = m_grid;
+        IdxRangeRTheta idx_range(get_idx_range(phi));
 
         ddc::parallel_for_each(
-                get_idx_range(phi),
+                idx_range,
                 KOKKOS_LAMBDA(IdxRTheta idx) {
                     IdxStepRTheta offset(idx - idx_range.front());
                     int i_r = ddc::select<GridR>(offset);
