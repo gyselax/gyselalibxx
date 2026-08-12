@@ -1418,6 +1418,10 @@
     <member refid="classGMGPolarPoissonLikeSolver_1a4859c418b40e5cfef6111d51763c893a" kind="variable"><name>m_max_iterations</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1ae43ee21bc1e07d1deb09fa04ec46170c" kind="variable"><name>m_absTol</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1a4d7dd0293e5261b94c9c8721f137fdfa" kind="variable"><name>m_relTol</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a2262f2f80936472ec79baeb6942d2673" kind="variable"><name>m_r_coords</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ae5486eec02b15dbc6fbd1b0c287578ac" kind="variable"><name>m_theta_coords</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ac1268ca800425f22c573f7c2a2713b31" kind="variable"><name>m_polar_grid</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ae3143b7aa065495ff684aa77bc00a50c" kind="variable"><name>m_solver</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1ab1d9f251e68cc5d3440a135cf2fa83b1" kind="function"><name>GMGPolarPoissonLikeSolver</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1a56cac7c4dd9d79beaa9f0f02fd5f490f" kind="function"><name>update_coefficients</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1aa80ab58a29baf81116ecd830853898db" kind="function"><name>operator()</name></member>
