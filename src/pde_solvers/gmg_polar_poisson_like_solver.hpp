@@ -188,6 +188,9 @@ private:
     int m_max_iterations;
     double m_absTol;
     double m_relTol;
+
+    DFieldMem<IdxRangeR> m_r_coords;
+    DFieldMem<IdxRangeTheta> m_theta_coords;
     gmgpolar::PolarGrid m_polar_grid;
     std::unique_ptr<gmgpolar::GMGPolar<DomainGeometry, DensityCoeffs>> m_solver;
 
@@ -232,14 +235,15 @@ public:
         IdxRangeTheta idx_range_theta_with_poloidal_point(
                 idx_range_theta.front(),
                 idx_range_theta.extents() + 1);
-        DFieldMem<IdxRangeR> r_coords(idx_range_r);
-        DFieldMem<IdxRangeTheta> theta_coords(idx_range_theta_with_poloidal_point);
-        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(r_coords));
-        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(theta_coords));
+        m_r_coords = DFieldMem<IdxRangeR>(idx_range_r);
+        m_theta_coords = DFieldMem<IdxRangeTheta>(idx_range_theta_with_poloidal_point);
+        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(m_r_coords));
+        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(m_theta_coords));
 
         // --- Create a cartesian grid representation of the polar grid for GMGPolar --- //
-        m_polar_grid = gmgpolar::
-                PolarGrid(r_coords.allocation_kokkos_view(), theta_coords.allocation_kokkos_view());
+        m_polar_grid = gmgpolar::PolarGrid(
+                m_r_coords.allocation_kokkos_view(),
+                m_theta_coords.allocation_kokkos_view());
     }
 
     /**
