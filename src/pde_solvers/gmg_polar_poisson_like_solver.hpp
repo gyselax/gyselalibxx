@@ -256,7 +256,7 @@ public:
         // --- Create GMGPolar solver for the selected geometry and coefficients --- //
         m_solver = std::make_unique<gmgpolar::GMGPolar<
                 DomainGeometry,
-                DensityCoeffs>>(m_grid, m_domain_geom, m_density_coeffs);
+                DensityCoeffs>>(m_polar_grid, m_domain_geom, m_density_coeffs);
 
         // ------------------//
         // Solver parameters //
@@ -321,7 +321,7 @@ public:
         // Copy solution back to phi
         Kokkos::View<double*> solution = m_solver->solution();
 
-        gmgpolar::PolarGrid const& polar_grid = m_grid;
+        gmgpolar::PolarGrid const& polar_grid = m_polar_grid;
         IdxRangeRTheta idx_range(get_idx_range(phi));
 
         ddc::parallel_for_each(
