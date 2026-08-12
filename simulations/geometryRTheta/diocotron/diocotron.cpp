@@ -168,8 +168,7 @@ int main(int argc, char** argv)
     BslPredCorrRTheta predcorr_operator(
             to_physical_mapping,
             advection_operator,
-            builder,
-            interpolator.get_evaluator(),
+            interpolator,
             poisson_solver);
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
