@@ -292,7 +292,7 @@ public:
         m_solver->PCG_FMG_iterations(1); // FMG iterations for PCG preconditioner
         m_solver->PCG_FMG_cycle(
                 MultigridCycleType::V_CYCLE); // FMG cycle type for PCG preconditioner
-        m_solver->PCG_MG_iterations(1); // Multigrid iterations for PCG preconditioner
+        m_solver->PCG_MG_iterations(2); // Multigrid iterations for PCG preconditioner
         m_solver->PCG_MG_cycle(
                 MultigridCycleType::V_CYCLE); // Multigrid cycle type for PCG iterations
 
