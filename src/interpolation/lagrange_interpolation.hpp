@@ -120,13 +120,13 @@ public:
                             Basis>))
         : m_min_extrapolation(get_extrapolation<
                               MinExtrapolationRule,
-                              double,
+                              DataType,
                               typename Basis::continuous_dimension_type,
                               IdxRange<CoeffGridType>,
                               IdxRange<Basis>>(Extremity::FRONT))
         , m_max_extrapolation(get_extrapolation<
                               MaxExtrapolationRule,
-                              double,
+                              DataType,
                               typename Basis::continuous_dimension_type,
                               IdxRange<CoeffGridType>,
                               IdxRange<Basis>>(Extremity::BACK))
@@ -318,13 +318,13 @@ public:
                       MaxRule<ExtrapRules>>(
                 get_extrapolation<
                         MinRule<ExtrapRules>,
-                        double,
+                        DataType,
                         typename Basis::continuous_dimension_type,
                         IdxRange<CoeffGrid<Basis>>,
                         IdxRange<Basis>>(Extremity::FRONT),
                 get_extrapolation<
                         MaxRule<ExtrapRules>,
-                        double,
+                        DataType,
                         typename Basis::continuous_dimension_type,
                         IdxRange<CoeffGrid<Basis>>,
                         IdxRange<Basis>>(Extremity::BACK))...)
