@@ -38,9 +38,7 @@ template <
         class GridR,
         class GridTheta,
         class PolarBSplinesRTheta,
-        //concepts::Interpolation Interpolation2D,
-        class BuilderType,
-        class EvaluatorType,
+        concepts::Interpolation Interpolation2D,
         class Mapping,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
@@ -55,9 +53,8 @@ class PolarSplineFEMPoissonLikeSolver
             std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
             "PolarSplineFEMPoissonLikeSolver is not yet batched");
 
-    // TODO: Uncomment with #615
-    //static_assert(
-    //        InterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
+    static_assert(
+            InterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
 
 public:
     /// The radial dimension
@@ -123,11 +120,10 @@ private:
     using IdxStepBSTheta = IdxStep<BSplinesTheta>;
     using IdxStepBSRTheta = IdxStep<BSplinesR, BSplinesTheta>;
 
-    // TODO: Uncomment with #615
-    // /// The builder type extracted from the Interpolation2D object.
-    // using BuilderType = typename Interpolation2D::BuilderType;
-    // /// The evaluator type extracted from the Interpolation2D object.
-    // using EvaluatorType = typename Interpolation2D::EvaluatorType;
+    /// The builder type extracted from the Interpolation2D object.
+    using BuilderType = typename Interpolation2D::BuilderType;
+    /// The evaluator type extracted from the Interpolation2D object.
+    using EvaluatorType = typename Interpolation2D::EvaluatorType;
 
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, IdxRange<GridR>, IdxRange<GridTheta>>;
 
@@ -164,12 +160,9 @@ private:
      */
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
-    //using FieldMemCoeffsSpline2D = DFieldMem<typename InterpolationEvaluatorTraits<
-    //        EvaluatorType>::template batched_coeff_idx_range_type<IdxRangeFull>>;
-    using ConstFieldCoeffsSpline2D = DConstField<
-            typename EvaluatorType::template batched_spline_domain_type<IdxRangeFull>>;
-    using FieldMemCoeffsSpline2D
-            = DFieldMem<typename EvaluatorType::template batched_spline_domain_type<IdxRangeFull>>;
+    using FieldMemCoeffsSpline2D = DFieldMem<typename InterpolationEvaluatorTraits<
+            EvaluatorType>::template batched_coeff_idx_range_type<IdxRangeFull>>;
+    using ConstFieldCoeffsSpline2D = typename FieldMemCoeffsSpline2D::view_type;
     using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
     using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
 
@@ -277,12 +270,9 @@ public:
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
-     * @param[in] builder
-     *      An interpolation builder to build coefficients allowing a function to be
+     * @param[in] interpolation
+     *      An interpolation builder and evaluator to build coefficients allowing a function to be
      *      evaluated anywhere on the (r,theta) domain.
-     * @param[in] evaluator
-     *      An interpolation evaluator to evaluate an interpolation function anywhere
-     *      on the (r,theta) domain.
      * @param[in] max_iter
      *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
@@ -298,9 +288,7 @@ public:
      */
     PolarSplineFEMPoissonLikeSolver(
             Mapping const& mapping,
-            //Interpolation2D const& interpolation, // TODO: Uncomment with #615
-            BuilderType const& builder, // TODO: Remove with #615
-            EvaluatorType const& evaluator, // TODO: Remove with #615
+            Interpolation2D const& interpolation,
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -327,10 +315,8 @@ public:
                   m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_mapping(mapping)
-        //, m_builder(interpolation.get_builder())
-        //, m_evaluator(interpolation.get_evaluator())
-        , m_builder(builder)
-        , m_evaluator(evaluator)
+        , m_builder(interpolation.get_builder())
+        , m_evaluator(interpolation.get_evaluator())
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef_alloc(
                   "m_phi_spline_coef "

@@ -52,8 +52,7 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorNullBound,
+        SplineInterpolatorRTheta,
         typename DiscreteMappingBuilder::MappingType>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
@@ -103,7 +102,8 @@ int main(int argc, char** argv)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder const builder(mesh_rtheta);
+    SplineInterpolatorRTheta interpolator(mesh_rtheta);
+    SplineRThetaBuilder const& builder(interpolator.get_builder());
 
 
     // --- Define the mapping. ------------------------------------------------------------------------
@@ -150,7 +150,6 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    SplineInterpolatorRTheta interpolator(mesh_rtheta);
 
     PolarFootFinder find_feet
             = make_polar_foot_finder<FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
@@ -169,7 +168,7 @@ int main(int argc, char** argv)
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
-    PoissonSolver poisson_solver(discrete_mapping, builder, interpolator.get_evaluator());
+    PoissonSolver poisson_solver(discrete_mapping, interpolator);
     poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------

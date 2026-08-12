@@ -43,8 +43,7 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorNullBound,
+        SplineInterpolatorRTheta,
         typename DiscreteMappingBuilder::MappingType>;
 
 #if defined(CURVILINEAR_SOLUTION)
@@ -106,7 +105,8 @@ int main(int argc, char** argv)
     IdxRangeTheta interpolation_idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    SplineRThetaBuilder const builder(grid);
+    SplineInterpolatorRTheta const interpolator(grid);
+    SplineRThetaBuilder const& builder(interpolator.get_builder());
     SplineRThetaBuilder_host const builder_host(grid);
 
     double major_radius = 6.1;
@@ -118,11 +118,7 @@ int main(int argc, char** argv)
     const Mapping mapping(0.3, 1.4, origin_point);
 #endif
 
-    ddc::NullExtrapolationRule bv_r_min;
-    ddc::NullExtrapolationRule bv_r_max;
-    ddc::PeriodicExtrapolationRule<Theta> bv_theta_min;
-    ddc::PeriodicExtrapolationRule<Theta> bv_theta_max;
-    SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
+    SplineRThetaEvaluatorNullBound const& evaluator(interpolator.get_evaluator());
 
 
     DiscreteMappingBuilder const
@@ -155,7 +151,7 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(discrete_mapping, builder, evaluator);
+    PoissonSolver solver(discrete_mapping, interpolator);
 
     solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
