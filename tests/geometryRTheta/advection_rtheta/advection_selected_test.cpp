@@ -150,24 +150,20 @@ int main(int argc, char** argv)
     DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluatorConstBound_host>
+            SplineInterpolatorRThetaConst_host>
             mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
-                    interpolator_const_host.get_builder(),
-                    interpolator_const_host.get_evaluator());
+                    interpolator_const_host);
     DiscretePoloidalCSSplineMapping to_physical_mapping_host = mapping_builder_host();
     DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorConstBound>
+            SplineInterpolatorRThetaConst>
             mapping_builder(
                     Kokkos::DefaultExecutionSpace(),
                     to_physical_analytical_mapping,
-                    interpolator_const.get_builder(),
-                    interpolator_const.get_evaluator());
+                    interpolator_const);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     std::string const mapping_name = "DISCRETE";
     key += "discrete";

@@ -40,11 +40,6 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorConstBound_host>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 

@@ -8,6 +8,7 @@
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_evaluator.hpp"
 #include "nd_lagrange_evaluator.hpp"
+#include "spline_interpolation.hpp"
 #include "tensor.hpp"
 
 struct X
@@ -188,33 +189,24 @@ struct GridZ : UniformGridBase<Z>
 };
 
 template <class ExecSpace>
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineInterpolatorRTheta = SplineInterpolator<
         ExecSpace,
-        typename ExecSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineSolver::LAPACK>;
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRange<GridR, GridTheta>,
+        ExtrapolationRule::Null_Null, // radial extrapolation
+        ExtrapolationRule::Periodic, // poloidal extrapolation
+        SplineBoundaryClosure::Greville_Greville, // radial closure condition
+        SplineBoundaryClosure::Periodic>;
+using SplineInterpolatorRTheta_host = SplineInterpolatorRTheta<Kokkos::DefaultHostExecutionSpace>;
+
+template <class ExecSpace>
+using SplineRThetaBuilder = SplineInterpolatorRTheta<ExecSpace>::BuilderType;
 using SplineRThetaBuilder_host = SplineRThetaBuilder<Kokkos::DefaultHostExecutionSpace>;
 
 template <class ExecSpace>
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        ExecSpace,
-        typename ExecSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+using SplineRThetaEvaluator = SplineInterpolatorRTheta<ExecSpace>::EvaluatorType;
 using SplineRThetaEvaluator_host = SplineRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
+
 
 template <class ExecSpace>
 using LagrangeRThetaEvaluator = NDLagrangeEvaluator<

@@ -216,22 +216,10 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
-    SplineRThetaBuilder<HostExecSpace> builder(interpolation_idx_range_rtheta);
+    SplineInterpolatorRTheta<DeviceExecSpace> interpolator(interpolation_idx_range_rtheta);
 
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator<HostExecSpace> evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineRThetaBuilder<HostExecSpace>,
-            SplineRThetaEvaluator<HostExecSpace>>
-            mapping_builder(HostExecSpace(), analytical_mapping, builder, evaluator);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta<DeviceExecSpace>>
+            mapping_builder(DeviceExecSpace(), analytical_mapping, interpolation_idx_range_rtheta);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(to_physical_mapping)>);
@@ -401,22 +389,10 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     static_assert(
             is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
-    SplineRThetaBuilder<DeviceExecSpace> builder(interpolation_idx_range_rtheta);
+    SplineInterpolatorRTheta<DeviceExecSpace> interpolator(interpolation_idx_range_rtheta);
 
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator<DeviceExecSpace> evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineRThetaBuilder<DeviceExecSpace>,
-            SplineRThetaEvaluator<DeviceExecSpace>>
-            mapping_builder(DeviceExecSpace(), analytical_mapping, builder, evaluator);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta<DeviceExecSpace>>
+            mapping_builder(DeviceExecSpace(), analytical_mapping, interpolation_idx_range_rtheta);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     static_assert(is_accessible_v<DeviceExecSpace, decltype(to_physical_mapping)>);
 

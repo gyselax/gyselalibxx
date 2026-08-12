@@ -30,8 +30,7 @@ using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorNullBound>;
+        SplineInterpolatorRTheta>;
 
 using DiscreteMappingBuilder_host = DiscretePoloidalCSSplineMappingBuilder<
         X,
@@ -107,7 +106,6 @@ int main(int argc, char** argv)
 
     SplineInterpolatorRTheta const interpolator(grid);
     SplineRThetaBuilder const& builder(interpolator.get_builder());
-    SplineRThetaBuilder_host const builder_host(grid);
 
     double major_radius = 6.1;
     double vertical_offset = 0.3;
@@ -122,7 +120,7 @@ int main(int argc, char** argv)
 
 
     DiscreteMappingBuilder const
-            discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, builder, evaluator);
+            discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, interpolator);
     DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);

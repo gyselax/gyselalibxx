@@ -109,31 +109,14 @@ public:
     using IdxRangeTheta = IdxRange<GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
-
-    using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
+    using SplineRThetaInterpolator_host = SplineInterpolator<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::SplineBuilderClosure::GREVILLE,
-            ddc::SplineBuilderClosure::GREVILLE,
-            ddc::SplineBuilderClosure::PERIODIC,
-            ddc::SplineBuilderClosure::PERIODIC,
-            ddc::SplineSolver::LAPACK>;
-
-    using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            IdxRange<BSplinesR, BSplinesTheta>,
+            IdxRange<GridR, GridTheta>,
+            ExtrapolationRule::Null_Null, // radial extrapolation
+            ExtrapolationRule::Periodic, // poloidal extrapolation
+            SplineBoundaryClosure::Greville_Greville, // radial closure condition
+            SplineBoundaryClosure::Periodic>;
 
 
     using spline_idx_range = IdxRange<BSplinesR, BSplinesTheta>;
@@ -203,15 +186,7 @@ public:
         IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
         // --- Define the operators. ----------------------------------------------------------------------
-        SplineRThetaBuilder_host const builder(grid);
-        ddc::NullExtrapolationRule r_extrapolation_rule;
-        ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-        SplineRThetaEvaluator spline_evaluator(
-                r_extrapolation_rule,
-                r_extrapolation_rule,
-                theta_extrapolation_rule,
-                theta_extrapolation_rule);
-
+        SplineInterpolatorRTheta_host interpolator(grid);
 
         // --- CIRCULAR MAPPING ---------------------------------------------------------------------------
         std::cout << " - Nr x Nt  = " << Nr << " x " << Nt << std::endl
@@ -223,16 +198,11 @@ public:
                 CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCircToCart
                 pseudo_cart_to_circ_to_cart(circ_to_cart, pseudo_cart_to_circ, 1e-12);
-        DiscretePoloidalCSSplineMappingBuilder<
-                X,
-                Y,
-                SplineRThetaBuilder_host,
-                SplineRThetaEvaluator>
+        DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host>
                 mapping_builder_circ(
                         Kokkos::DefaultHostExecutionSpace(),
                         circ_to_cart,
-                        builder,
-                        spline_evaluator);
+                        interpolator);
         DiscretePoloidalCSSplineMapping discrete_mapping_circ_to_cart = mapping_builder_circ();
         using DiscreteMappingCirc = CombinedMapping<
                 decltype(discrete_mapping_circ_to_cart),
@@ -262,16 +232,11 @@ public:
                 CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCzarnyToCart
                 pseudo_cart_to_czarny_to_cart(czarny_to_cart, pseudo_cart_to_circ, 1e-12);
-        DiscretePoloidalCSSplineMappingBuilder<
-                X,
-                Y,
-                SplineRThetaBuilder_host,
-                SplineRThetaEvaluator>
+        DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host>
                 mapping_builder_czarny(
                         Kokkos::DefaultHostExecutionSpace(),
                         czarny_to_cart,
-                        builder,
-                        spline_evaluator);
+                        interpolator);
         DiscretePoloidalCSSplineMapping discrete_mapping_czarny_to_cart = mapping_builder_czarny();
         using DiscreteMappingCzarny = CombinedMapping<
                 decltype(discrete_mapping_czarny_to_cart),

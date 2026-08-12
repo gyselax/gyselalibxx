@@ -46,8 +46,7 @@ namespace {
 using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorConstBound>;
+        SplineInterpolatorRThetaConst>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
@@ -103,15 +102,11 @@ int main(int argc, char** argv)
     SplineRThetaBuilder const& builder(interpolator.get_builder());
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    SplineRThetaEvaluatorConstBound const& spline_evaluator_extrapol(
-            interpolator_const.get_evaluator());
-
     const LogicalToPhysicalMapping to_physical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+            interpolator_const);
     DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);

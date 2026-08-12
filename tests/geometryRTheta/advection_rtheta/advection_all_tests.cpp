@@ -51,13 +51,11 @@ using CircularToPseudoCartMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
 using DiscreteMappingBuilderHost = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorConstBound_host>;
+        SplineInterpolatorRThetaConst_host>;
 using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorConstBound>;
+        SplineInterpolatorRThetaConst>;
 
 
 } // end namespace
@@ -279,15 +277,13 @@ int main(int argc, char** argv)
     DiscreteMappingBuilderHost const discrete_czarny_map_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
             from_czarny_map,
-            spline_interpolator_const_host.get_builder(),
-            spline_interpolator_const_host.get_evaluator());
+            spline_interpolator_const_host);
     DiscretePoloidalCSSplineMapping const from_discrete_czarny_map_host
             = discrete_czarny_map_builder_host();
     DiscreteMappingBuilder const discrete_czarny_map_builder(
             Kokkos::DefaultExecutionSpace(),
             from_czarny_map,
-            spline_interpolator_const.get_builder(),
-            spline_interpolator_const.get_evaluator());
+            spline_interpolator_const);
     DiscretePoloidalCSSplineMapping const from_discrete_czarny_map = discrete_czarny_map_builder();
 
 

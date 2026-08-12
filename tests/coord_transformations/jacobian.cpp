@@ -99,24 +99,9 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
     IdxRangeTheta interpolation_idx_range_theta(InterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    SplineRThetaBuilder_host builder(grid);
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator_host evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluator_host>
-            mapping_builder(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    analytical_mapping,
-                    builder,
-                    evaluator);
+    SplineInterpolatorRTheta_host interpolator(grid);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host>
+            mapping_builder(Kokkos::DefaultHostExecutionSpace(), analytical_mapping, interpolator);
     DiscretePoloidalCSSplineMapping mapping = mapping_builder();
 
     static_assert(has_jacobian_v<decltype(mapping)>);
@@ -172,24 +157,11 @@ TEST_P(InvJacobianMatrix3D, InverseMatrixToroidalDiscCzarMap)
             interpolation_idx_range_theta,
             interpolation_idx_range_phi);
 
-    SplineRThetaBuilder_host builder(idx_range_rtheta);
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator_host evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluator_host>
-            mapping_builder(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    analytical_mapping_2d,
-                    builder,
-                    evaluator);
+    SplineInterpolatorRTheta_host interpolator(idx_range_rtheta);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host> mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            analytical_mapping_2d,
+            interpolator);
 
     using Mapping2D = DiscretePoloidalCSSplineMapping<
             X,
