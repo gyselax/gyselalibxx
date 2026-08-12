@@ -99,19 +99,11 @@ int main(int argc, char** argv)
 
     // OPERATORS ======================================================================================
     SplineInterpolatorRTheta interpolator(grid);
+    SplineInterpolatorRThetaConst interpolator_const(grid);
     SplineRThetaBuilder const& builder(interpolator.get_builder());
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
-            ddc::coordinate(mesh_r.front()));
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(
-            ddc::coordinate(mesh_r.back()));
-
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
+    SplineRThetaEvaluatorConstBound const& spline_evaluator_extrapol(interpolator_const.get_evaluator());
 
     const LogicalToPhysicalMapping to_physical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
@@ -159,9 +151,8 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             grid,
-            builder,
             poisson_solver,
-            spline_evaluator_extrapol);
+            interpolator_const);
 
 
 
