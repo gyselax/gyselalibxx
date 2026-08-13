@@ -14,7 +14,7 @@
         <label>GrevillePointsR::interpolation_discrete_dimension_type</label>
       </node>
       <node id="1">
-        <label>RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::GridRRefined</label>
+        <label>RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator, ncells_r, ncells_theta &gt;::GridRRefined</label>
         <link refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -25,13 +25,13 @@
         <label>GrevillePointsR::interpolation_discrete_dimension_type</label>
       </node>
       <node id="1">
-        <label>RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::GridRRefined</label>
+        <label>RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator, ncells_r, ncells_theta &gt;::GridRRefined</label>
         <link refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="241" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="242" bodyend="243"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="222" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="223" bodyend="224"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

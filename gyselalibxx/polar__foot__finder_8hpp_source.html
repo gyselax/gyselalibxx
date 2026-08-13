@@ -584,6 +584,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "i_interpolation.hpp"
 #include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
 
@@ -593,8 +594,7 @@ template &lt;
         concepts::Mapping LogicalToPhysicalMapping,
         class IdxRangeBatched,
         class TimeStepperBuilder,
-        class RThetaAdvectionBuilder,
-        class RThetaAdvectionEvaluator&gt;
+        concepts::Interpolation RThetaAdvectionInterpolator&gt;
 class PolarFootFinder
 {
     static_assert(
@@ -602,6 +602,10 @@ class PolarFootFinder
                     || is_analytical_mapping_v&lt;LogicalToPhysicalMapping&gt;,
             "It is not possible to find the foot of the characteristic in Physical space as there "
             "is no way to return to Logical space once the foot is calculated.");
+
+private:
+    using RThetaAdvectionBuilder = typename RThetaAdvectionInterpolator::BuilderType;
+    using RThetaAdvectionEvaluator = typename RThetaAdvectionInterpolator::EvaluatorType;
 
 public:
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
@@ -681,14 +685,13 @@ public:
     PolarFootFinder(
             TimeStepperBuilder const&amp; time_stepper_builder,
             LogicalToPhysicalMapping const&amp; logical_to_physical,
-            RThetaAdvectionBuilder const&amp; builder_advection_field,
-            RThetaAdvectionEvaluator const&amp; evaluator_advection_field,
+            RThetaAdvectionInterpolator const&amp; interpolator_advection_field,
             Coord&lt;X_pC, Y_pC&gt; coord_centre_pc = Coord&lt;X_pC, Y_pC&gt;(0, 0),
             double epsilon = 1e-12)
         : m_time_stepper_builder(time_stepper_builder)
         , m_logical_to_physical(logical_to_physical)
-        , m_builder_advection_field(builder_advection_field)
-        , m_evaluator_advection_field(evaluator_advection_field)
+        , m_builder_advection_field(interpolator_advection_field.get_builder())
+        , m_evaluator_advection_field(interpolator_advection_field.get_evaluator())
         , m_coord_centre_pc(coord_centre_pc)
         , m_epsilon(epsilon)
     {
@@ -786,14 +789,12 @@ template &lt;
         concepts::Mapping LogicalToPhysicalMapping,
         class IdxRangeBatched,
         class TimeStepperBuilder,
-        class RThetaAdvectionBuilder,
-        class RThetaAdvectionEvaluator&gt;
+        concepts::Interpolation RThetaAdvectionInterpolator&gt;
 auto make_polar_foot_finder(
         TimeStepperBuilder const&amp; time_stepper,
         LogicalToPhysicalMapping const&amp; mapping,
         [[maybe_unused]] IdxRangeBatched const&amp; idx_range,
-        RThetaAdvectionBuilder const&amp; builder,
-        RThetaAdvectionEvaluator const&amp; evaluator,
+        RThetaAdvectionInterpolator const&amp; interpolator_advection_field,
         Coord&lt;X_pC, Y_pC&gt; coord_centre = Coord&lt;X_pC, Y_pC&gt;(0, 0),
         double epsilon = 1e-12)
 {
@@ -803,12 +804,10 @@ auto make_polar_foot_finder(
             LogicalToPhysicalMapping,
             IdxRangeBatched,
             TimeStepperBuilder,
-            RThetaAdvectionBuilder,
-            RThetaAdvectionEvaluator&gt;(
+            RThetaAdvectionInterpolator&gt;(
             time_stepper,
             mapping,
-            builder,
-            evaluator,
+            interpolator_advection_field,
             coord_centre,
             epsilon);
 }

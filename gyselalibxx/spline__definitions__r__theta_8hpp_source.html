@@ -610,31 +610,6 @@ using SplineInterpPointsTheta
         = ddc::GrevilleInterpolationPoints&lt;BSplinesTheta, SplineThetaClosure, SplineThetaClosure&gt;;
 
 // --- Operators
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D&lt;
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        SplineRClosure, // boundary at r=0
-        SplineRClosure, // boundary at rmax
-        SplineThetaClosure,
-        SplineThetaClosure,
-        ddc::SplineSolver::LAPACK&gt;;
-
-using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D&lt;
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, // boundary at r=0
-        ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, // boundary at rmax
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
-
 using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D&lt;
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
@@ -647,42 +622,27 @@ using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D&lt;
         ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
         ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
 
-using SplineRThetaBuilder = ddc::SplineBuilder2D&lt;
-        Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        SplineRClosure, // boundary at r=0
-        SplineRClosure, // boundary at rmax
-        SplineThetaClosure,
-        SplineThetaClosure,
-        ddc::SplineSolver::LAPACK&gt;;
+using SplineInterpolatorRThetaConst_host = SplineInterpolator&lt;
+        Kokkos::DefaultHostExecutionSpace,
+        IdxRange&lt;BSplinesR, BSplinesTheta&gt;,
+        IdxRangeRTheta,
+        ExtrapolationRule::Constant_Constant, // radial extrapolation
+        ExtrapolationRule::Periodic, // poloidal extrapolation
+        SplineBoundaryClosures&lt;
+                SplineRClosure, // boundary at r=0
+                SplineRClosure&gt;, // boundary at rmax
+        SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt;&gt;;
 
-using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D&lt;
+using SplineInterpolatorRThetaConst = SplineInterpolator&lt;
         Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, // boundary at r=0
-        ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, // boundary at rmax
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
-
-using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D&lt;
-        Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
+        IdxRange&lt;BSplinesR, BSplinesTheta&gt;,
+        IdxRangeRTheta,
+        ExtrapolationRule::Constant_Constant, // radial extrapolation
+        ExtrapolationRule::Periodic, // poloidal extrapolation
+        SplineBoundaryClosures&lt;
+                SplineRClosure, // boundary at r=0
+                SplineRClosure&gt;, // boundary at rmax
+        SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt;&gt;;
 
 using SplineInterpolatorRTheta = SplineInterpolator&lt;
         Kokkos::DefaultExecutionSpace,
@@ -694,6 +654,13 @@ using SplineInterpolatorRTheta = SplineInterpolator&lt;
                 SplineRClosure, // boundary at r=0
                 SplineRClosure&gt;, // boundary at rmax
         SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt;&gt;;
+
+using SplineRThetaBuilder_host = typename SplineInterpolatorRThetaConst_host::BuilderType;
+using SplineRThetaEvaluatorConstBound_host =
+        typename SplineInterpolatorRThetaConst_host::EvaluatorType;
+using SplineRThetaBuilder = typename SplineInterpolatorRThetaConst::BuilderType;
+using SplineRThetaEvaluatorConstBound = typename SplineInterpolatorRThetaConst::EvaluatorType;
+using SplineRThetaEvaluatorNullBound = typename SplineInterpolatorRTheta::EvaluatorType;
 
 using IdxRangeBSR = IdxRange&lt;BSplinesR&gt;;
 using IdxRangeBSTheta = IdxRange&lt;BSplinesTheta&gt;;

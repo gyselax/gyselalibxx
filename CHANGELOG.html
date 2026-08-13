@@ -664,6 +664,14 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Change the <code>LagrangeInterpolator</code> templates to allow ND cases to be handled.</li>
 <li>Change the <code>SplineInterpolator</code> templates to allow 2D cases to be handled.</li>
 <li>Setup <code>GMGPolar</code> in <code>GMGPolarPoissonLikeSolver::update_coefficients</code> instead of <code>GMGPolarPoissonLikeSolver::operator()</code>.</li>
+<li>Use <code>Interpolator</code> concept instead of <code>Builder</code> and <code>Evaluator</code> classes to simplify classes:</li>
+<li><code>PolarFootFinder</code></li>
+<li><code>DiscretePoloidalCSSplineMappingBuilder</code></li>
+<li><code>RefinedDiscretePoloidalCSSplineMappingBuilder</code></li>
+<li><code>BslPredCorrRTheta</code></li>
+<li><code>BslExplicitPredCorrRTheta</code></li>
+<li><code>BslImplicitPredCorrRTheta</code></li>
+<li><code>PolarSplineFEMPoissonLikeSolver</code></li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <ul>

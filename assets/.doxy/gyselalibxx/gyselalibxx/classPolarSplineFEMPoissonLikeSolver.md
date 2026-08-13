@@ -2,7 +2,7 @@
 
 # Class PolarSplineFEMPoissonLikeSolver
 
-**template &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), class BuilderType, class EvaluatorType, class Mapping, class IdxRangeFull&gt;**
+**template &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), concepts::Interpolation Interpolation2D, class Mapping, class IdxRangeFull&gt;**
 
 
 
@@ -89,7 +89,7 @@ Inherits the following classes: [IPolarPoissonLikeSolver](classIPolarPoissonLike
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (Mapping const & mapping, BuilderType const & builder, EvaluatorType const & evaluator, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
+|   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (Mapping const & mapping, Interpolation2D const & interpolation, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
 |  void | [**operator()**](#function-operator) (PolarSplineRTheta spline, RHSFunction const & rhs) const<br>_Solve the Poisson-like equation._  |
 |  void | [**operator()**](#function-operator_1) (DFieldRTheta phi, RHSFunction const & rhs) const<br>_Solve the Poisson-like equation._  |
 |  void | [**operator()**](#function-operator_2) (DFieldRTheta phi, DConstFieldRTheta rhs) override const<br>_Solve the Poisson-like equation._  |
@@ -199,7 +199,7 @@ As finite element basis functions we will use polar b-splines which are divided 
 
 _The radial dimension._ 
 ```C++
-using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull >::R =  typename GridR::continuous_dimension_type;
+using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull >::R =  typename GridR::continuous_dimension_type;
 ```
 
 
@@ -213,7 +213,7 @@ using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, Bu
 
 _The poloidal dimension._ 
 ```C++
-using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull >::Theta =  typename GridTheta::continuous_dimension_type;
+using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull >::Theta =  typename GridTheta::continuous_dimension_type;
 ```
 
 
@@ -231,8 +231,7 @@ _Instantiate a polar Poisson-like solver using FEM with B-splines._
 ```C++
 inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
     Mapping const & mapping,
-    BuilderType const & builder,
-    EvaluatorType const & evaluator,
+    Interpolation2D const & interpolation,
     std::optional< int > max_iter=std::nullopt,
     std::optional< double > res_tol=std::nullopt,
     std::optional< bool > batch_solver_logger=std::nullopt,
@@ -257,8 +256,7 @@ The equation we are studying:
 
 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `builder` An interpolation builder to build coefficients allowing a function to be evaluated anywhere on the (r,theta) domain. 
-* `evaluator` An interpolation evaluator to evaluate an interpolation function anywhere on the (r,theta) domain. 
+* `interpolation` An interpolation builder and evaluator to build coefficients allowing a function to be evaluated anywhere on the (r,theta) domain. 
 * `max_iter` The maximum number of iterations possible for the batched CSR solver. 
 * `res_tol` The residual tolerance for the batched CSR solver. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. 
 * `batch_solver_logger` Indicates whether log information such as the residual and the number of iterations should be monitored. 

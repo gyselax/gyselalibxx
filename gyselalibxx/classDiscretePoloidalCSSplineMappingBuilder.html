@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-discretepoloidalcssplinemappingbuilder">Class DiscretePoloidalCSSplineMappingBuilder</h1>
-<p><strong>template &lt;class <a href="structX.html"><strong>X</strong></a>, class <a href="structY.html"><strong>Y</strong></a>, class SplineBuilder, class SplineEvaluator&gt;</strong></p>
+<p><strong>template &lt;class <a href="structX.html"><strong>X</strong></a>, class <a href="structY.html"><strong>Y</strong></a>, concepts::Interpolation Interpolator&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a></p>
 <p><em>A class to create a</em> <a href="classDiscretePoloidalCSSplineMapping.html"><em><strong>DiscretePoloidalCSSplineMapping</strong></em></a> <em>instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data.</em><a href="#detailed-description">More...</a></p>
 <ul>
@@ -599,7 +599,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-discretepoloidalcssplinemappingbuilder"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a> (ExecSpace exec_space, Mapping const &amp; analytical_mapping, SplineBuilder const &amp; builder, SplineEvaluator const &amp; evaluator) <br><em>Create an instance of the class capable of providing a</em> <a href="classDiscretePoloidalCSSplineMapping.html"><em><strong>DiscretePoloidalCSSplineMapping</strong></em></a> <em>class instance.</em></td>
+<td style="text-align: left;"><a href="#function-discretepoloidalcssplinemappingbuilder"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a> (ExecSpace exec_space, Mapping const &amp; analytical_mapping, Interpolator const &amp; interpolator) <br><em>Create an instance of the class capable of providing a</em> <a href="classDiscretePoloidalCSSplineMapping.html"><em><strong>DiscretePoloidalCSSplineMapping</strong></em></a> <em>class instance.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classDiscretePoloidalCSSplineMapping.html"><strong>DiscretePoloidalCSSplineMapping</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a>, SplineEvaluator &gt;</td>
@@ -616,13 +616,12 @@
 <ul>
 <li><a href="structX.html"><strong>X</strong></a> The first Cartesian dimension. </li>
 <li><a href="structY.html"><strong>Y</strong></a> The second Cartesian dimension. </li>
-<li><code>SplineBuilder</code> An operator for building spline coefficients. </li>
-<li><code>SplineEvaluator</code> An operator for evaluating a spline. </li>
+<li><code>Interpolator</code> An spline interpolator for building and evaluating a spline. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-mappingtype">typedef MappingType</h3>
 <p><em>The type of the mapping that will be created.</em> </p>
-<pre><code class="language-C++">using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::MappingType =  DiscretePoloidalCSSplineMapping&lt;X, Y, SplineEvaluator&gt;;
+<pre><code class="language-C++">using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::MappingType =  DiscretePoloidalCSSplineMapping&lt;X, Y, SplineEvaluator&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -632,16 +631,14 @@
 inline DiscretePoloidalCSSplineMappingBuilder::DiscretePoloidalCSSplineMappingBuilder (
     ExecSpace exec_space,
     Mapping const &amp; analytical_mapping,
-    SplineBuilder const &amp; builder,
-    SplineEvaluator const &amp; evaluator
+    Interpolator const &amp; interpolator
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>exec_space</code> The execution space where this class runs any for loops. </li>
 <li><code>analytical_mapping</code> The analytical mapping to be described by this discrete mapping. </li>
-<li><code>builder</code> A spline builder to be used to create a spline approximating the analytical mapping. </li>
-<li><code>evaluator</code> A spline evaluator to be used to evaluate a spline approximating the analytical mapping. </li>
+<li><code>interpolator</code> A spline interpolator to be used to create a spline approximating the analytical mapping. </li>
 </ul>
 <hr>
 

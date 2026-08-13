@@ -555,32 +555,6 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="39" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a781a3cfc8647a95dacd638f7248ab83e" prot="public" static="no">
-        <type>ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK &gt;</type>
-        <definition>using SplineRThetaBuilder_host =  ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK&gt;</definition>
-        <argsstring></argsstring>
-        <name>SplineRThetaBuilder_host</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="42" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="53" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a3d657cf6ade5586976ef51aa80e1cf2d" prot="public" static="no">
-        <type>ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, ddc::ConstantExtrapolationRule&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::ConstantExtrapolationRule&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
-        <definition>using SplineRThetaEvaluatorConstBound_host =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;</definition>
-        <argsstring></argsstring>
-        <name>SplineRThetaEvaluatorConstBound_host</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="65" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a2f1ccbeb48ba80d9ab2ca6b70c9c9e68" prot="public" static="no">
         <type>ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
         <definition>using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;</definition>
@@ -592,46 +566,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="67" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="77" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="42" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a96f5479befb2d62dc76f6ba8aded8d18" prot="public" static="no">
-        <type>ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK &gt;</type>
-        <definition>using SplineRThetaBuilder =  ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK&gt;</definition>
+      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a223900ea065cb4ed293906d477820f74" prot="public" static="no">
+        <type>SplineInterpolator&lt; Kokkos::DefaultHostExecutionSpace, IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;, IdxRangeRTheta, <ref refid="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" kindref="member">ExtrapolationRule::Constant_Constant</ref>, <ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">ExtrapolationRule::Periodic</ref>, <ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; SplineRClosure, SplineRClosure &gt;, <ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; SplineThetaClosure, SplineThetaClosure &gt; &gt;</type>
+        <definition>using SplineInterpolatorRThetaConst_host =  SplineInterpolator&lt; Kokkos::DefaultHostExecutionSpace, IdxRange&lt;BSplinesR, BSplinesTheta&gt;, IdxRangeRTheta, ExtrapolationRule::Constant_Constant, ExtrapolationRule::Periodic, SplineBoundaryClosures&lt; SplineRClosure, SplineRClosure&gt;, SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt; &gt;</definition>
         <argsstring></argsstring>
-        <name>SplineRThetaBuilder</name>
+        <name>SplineInterpolatorRThetaConst_host</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="79" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="90" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1afaeb80865af49470b4dc426d5a6b7ae8" prot="public" static="no">
-        <type>ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, ddc::ConstantExtrapolationRule&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::ConstantExtrapolationRule&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
-        <definition>using SplineRThetaEvaluatorConstBound =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;</definition>
+      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a2966d37b1930bb014fd90839d7eeae5e" prot="public" static="no">
+        <type>SplineInterpolator&lt; Kokkos::DefaultExecutionSpace, IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;, IdxRangeRTheta, <ref refid="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" kindref="member">ExtrapolationRule::Constant_Constant</ref>, <ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">ExtrapolationRule::Periodic</ref>, <ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; SplineRClosure, SplineRClosure &gt;, <ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; SplineThetaClosure, SplineThetaClosure &gt; &gt;</type>
+        <definition>using SplineInterpolatorRThetaConst =  SplineInterpolator&lt; Kokkos::DefaultExecutionSpace, IdxRange&lt;BSplinesR, BSplinesTheta&gt;, IdxRangeRTheta, ExtrapolationRule::Constant_Constant, ExtrapolationRule::Periodic, SplineBoundaryClosures&lt; SplineRClosure, SplineRClosure&gt;, SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt; &gt;</definition>
         <argsstring></argsstring>
-        <name>SplineRThetaEvaluatorConstBound</name>
+        <name>SplineInterpolatorRThetaConst</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="92" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="102" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a0595dd743628583f52a3bb9ec76f0e11" prot="public" static="no">
-        <type>ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
-        <definition>using SplineRThetaEvaluatorNullBound =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;</definition>
-        <argsstring></argsstring>
-        <name>SplineRThetaEvaluatorNullBound</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="104" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="114" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="65" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a0cfcebdf5d1b12412efb901dd3eb9fbf" prot="public" static="no">
         <type>SplineInterpolator&lt; Kokkos::DefaultExecutionSpace, IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;, IdxRangeRTheta, <ref refid="namespaceExtrapolationRule_1a09227876d2442ba8cd05940b5adbd303" kindref="member">ExtrapolationRule::Null_Null</ref>, <ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">ExtrapolationRule::Periodic</ref>, <ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; SplineRClosure, SplineRClosure &gt;, <ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; SplineThetaClosure, SplineThetaClosure &gt; &gt;</type>
@@ -644,7 +605,72 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="116" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="125" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="76" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1af7303938ff4c979764369def85a99496" prot="public" static="no">
+        <type>typename SplineInterpolatorRThetaConst_host::BuilderType</type>
+        <definition>using SplineRThetaBuilder_host =  typename SplineInterpolatorRThetaConst_host::BuilderType</definition>
+        <argsstring></argsstring>
+        <name>SplineRThetaBuilder_host</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="87" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1ac77acdb49065770ced4719282820a01e" prot="public" static="no">
+        <type>typename SplineInterpolatorRThetaConst_host::EvaluatorType</type>
+        <definition>using SplineRThetaEvaluatorConstBound_host =  typename SplineInterpolatorRThetaConst_host::EvaluatorType</definition>
+        <argsstring></argsstring>
+        <name>SplineRThetaEvaluatorConstBound_host</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="88" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a161ce2bcc7fb61504be0ab56941cd434" prot="public" static="no">
+        <type>typename SplineInterpolatorRThetaConst::BuilderType</type>
+        <definition>using SplineRThetaBuilder =  typename SplineInterpolatorRThetaConst::BuilderType</definition>
+        <argsstring></argsstring>
+        <name>SplineRThetaBuilder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="90" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1ae0f1f73ddf1f53701ef3e0f745381a62" prot="public" static="no">
+        <type>typename SplineInterpolatorRThetaConst::EvaluatorType</type>
+        <definition>using SplineRThetaEvaluatorConstBound =  typename SplineInterpolatorRThetaConst::EvaluatorType</definition>
+        <argsstring></argsstring>
+        <name>SplineRThetaEvaluatorConstBound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="91" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1abf7fb48926cd9916c076daf4aad1fba1" prot="public" static="no">
+        <type>typename SplineInterpolatorRTheta::EvaluatorType</type>
+        <definition>using SplineRThetaEvaluatorNullBound =  typename SplineInterpolatorRTheta::EvaluatorType</definition>
+        <argsstring></argsstring>
+        <name>SplineRThetaEvaluatorNullBound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="92" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a6d14a50e6b51eb6ceaf1fa1cdc91301f" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;</type>
@@ -657,7 +683,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="127" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="127" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="94" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="94" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a3d636abaff92c56d7328309bb2522bff" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -670,7 +696,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="128" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="128" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="95" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a4d9f715c3682f75c075ee4b422c3d8fa" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -683,7 +709,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="129" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="129" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="96" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1af6bad0458920283d5bdd3a5bd67b169c" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
@@ -696,7 +722,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="130" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="130" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="97" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a3669c696ab20b39e7b12c815b2f4fa03" prot="public" static="no">
         <type>DFieldMem&lt; IdxRangeBSRTheta &gt;</type>
@@ -709,7 +735,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="133" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="133" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="100" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a92ec60a73f6ad7a6e592db99349f9a39" prot="public" static="no">
         <type>DField&lt; IdxRangeBSRTheta &gt;</type>
@@ -722,7 +748,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="134" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="134" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="101" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a5bb05d563f5cef181a809dc8b32fb42e" prot="public" static="no">
         <type>DConstField&lt; IdxRangeBSRTheta &gt;</type>
@@ -735,7 +761,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="135" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="135" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="102" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1ac96999697e65a1ac7c9ef8447ca8e8fa" prot="public" static="no">
         <type>DFieldMem&lt; IdxRange&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt; &gt;</type>
@@ -750,7 +776,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="142" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="142" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="109" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1aef71091f06e8e53c6435c84f000cf71c" prot="public" static="no">
         <type>DField&lt; IdxRange&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt; &gt;</type>
@@ -763,7 +789,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="143" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="143" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="110" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a1815b341dd7a60a3902c2efd150af5af" prot="public" static="no">
         <type>Idx&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
@@ -777,7 +803,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="148" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="148" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="115" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a2130c4bf1c2712d6fb3757e8d1e761f5" prot="public" static="no">
         <templateparamlist>
@@ -798,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="153" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="154" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="120" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1a0a07449f26c8206a10f7ef29414c0dda" prot="public" static="no">
         <templateparamlist>
@@ -819,7 +845,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="157" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="157" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="124" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="spline__definitions__r__theta_8hpp_1ade9f4b5efbf068a8978a4a86f0bac944" prot="public" static="no">
         <templateparamlist>
@@ -840,7 +866,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="160" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="161" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="127" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="128" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -975,118 +1001,85 @@
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::GrevilleInterpolationPoints&lt;BSplinesTheta,<sp/>SplineThetaClosure,<sp/>SplineThetaClosure&gt;;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>Operators</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaBuilder_host<sp/>=<sp/>ddc::SplineBuilder2D&lt;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaEvaluatorNullBound_host<sp/>=<sp/>ddc::SplineEvaluator2D&lt;</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultHostExecutionSpace,</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::HostSpace,</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>,</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>,</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineThetaClosure,</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineThetaClosure,</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineSolver::LAPACK&gt;;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaEvaluatorConstBound_host<sp/>=<sp/>ddc::SplineEvaluator2D&lt;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultHostExecutionSpace,</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::HostSpace,</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>,</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>,</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::ConstantExtrapolationRule&lt;R,<sp/>Theta&gt;,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::ConstantExtrapolationRule&lt;R,<sp/>Theta&gt;,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaEvaluatorNullBound_host<sp/>=<sp/>ddc::SplineEvaluator2D&lt;</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultHostExecutionSpace,</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::HostSpace,</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>,</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>,</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NullExtrapolationRule,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NullExtrapolationRule,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaBuilder<sp/>=<sp/>ddc::SplineBuilder2D&lt;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>,</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>,</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineThetaClosure,</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineThetaClosure,</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineSolver::LAPACK&gt;;</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaEvaluatorConstBound<sp/>=<sp/>ddc::SplineEvaluator2D&lt;</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>,</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>,</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::ConstantExtrapolationRule&lt;R,<sp/>Theta&gt;,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::ConstantExtrapolationRule&lt;R,<sp/>Theta&gt;,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NullExtrapolationRule,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NullExtrapolationRule,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineInterpolatorRThetaConst_host<sp/>=<sp/>SplineInterpolator&lt;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultHostExecutionSpace,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" kindref="member">ExtrapolationRule::Constant_Constant</ref>,<sp/></highlight><highlight class="comment">//<sp/>radial<sp/>extrapolation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">ExtrapolationRule::Periodic</ref>,<sp/></highlight><highlight class="comment">//<sp/>poloidal<sp/>extrapolation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure&gt;,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineInterpolatorRThetaConst<sp/>=<sp/>SplineInterpolator&lt;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta,</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" kindref="member">ExtrapolationRule::Constant_Constant</ref>,<sp/></highlight><highlight class="comment">//<sp/>radial<sp/>extrapolation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">ExtrapolationRule::Periodic</ref>,<sp/></highlight><highlight class="comment">//<sp/>poloidal<sp/>extrapolation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure&gt;,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineInterpolatorRTheta<sp/>=<sp/>SplineInterpolator&lt;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceExtrapolationRule_1a09227876d2442ba8cd05940b5adbd303" kindref="member">ExtrapolationRule::Null_Null</ref>,<sp/></highlight><highlight class="comment">//<sp/>radial<sp/>extrapolation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">ExtrapolationRule::Periodic</ref>,<sp/></highlight><highlight class="comment">//<sp/>poloidal<sp/>extrapolation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure&gt;,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaBuilder_host<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineInterpolatorRThetaConst_host::BuilderType;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaEvaluatorConstBound_host<sp/>=</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineInterpolatorRThetaConst_host::EvaluatorType;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaBuilder<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineInterpolatorRThetaConst::BuilderType;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaEvaluatorConstBound<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineInterpolatorRThetaConst::EvaluatorType;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaEvaluatorNullBound<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineInterpolatorRTheta::EvaluatorType;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSR<sp/>=<sp/>IdxRange&lt;BSplinesR&gt;;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSTheta<sp/>=<sp/>IdxRange&lt;BSplinesTheta&gt;;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSRTheta<sp/>=<sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSPolar<sp/>=<sp/>IdxRange&lt;PolarBSplinesRTheta&gt;;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>Spline<sp/>representation<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Spline2DMem<sp/>=<sp/>DFieldMem&lt;IdxRangeBSRTheta&gt;;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Spline2D<sp/>=<sp/>DField&lt;IdxRangeBSRTheta&gt;;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstSpline2D<sp/>=<sp/>DConstField&lt;IdxRangeBSRTheta&gt;;</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"></highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineRThetaEvaluatorNullBound<sp/>=<sp/>ddc::SplineEvaluator2D&lt;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>,</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>,</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NullExtrapolationRule,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NullExtrapolationRule,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineInterpolatorRTheta<sp/>=<sp/>SplineInterpolator&lt;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta,</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceExtrapolationRule_1a09227876d2442ba8cd05940b5adbd303" kindref="member">ExtrapolationRule::Null_Null</ref>,<sp/></highlight><highlight class="comment">//<sp/>radial<sp/>extrapolation</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">ExtrapolationRule::Periodic</ref>,<sp/></highlight><highlight class="comment">//<sp/>poloidal<sp/>extrapolation</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>r=0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRClosure&gt;,<sp/></highlight><highlight class="comment">//<sp/>boundary<sp/>at<sp/>rmax</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSR<sp/>=<sp/>IdxRange&lt;BSplinesR&gt;;</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSTheta<sp/>=<sp/>IdxRange&lt;BSplinesTheta&gt;;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSRTheta<sp/>=<sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;;</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSPolar<sp/>=<sp/>IdxRange&lt;PolarBSplinesRTheta&gt;;</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>Spline<sp/>representation<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Spline2DMem<sp/>=<sp/>DFieldMem&lt;IdxRangeBSRTheta&gt;;</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Spline2D<sp/>=<sp/>DField&lt;IdxRangeBSRTheta&gt;;</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstSpline2D<sp/>=<sp/>DConstField&lt;IdxRangeBSRTheta&gt;;</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PolarSplineMemRTheta<sp/>=<sp/>DFieldMem&lt;IdxRange&lt;PolarBSplinesRTheta&gt;&gt;;</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PolarSplineRTheta<sp/>=<sp/>DField&lt;IdxRange&lt;PolarBSplinesRTheta&gt;&gt;;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxPolarBspl<sp/>=<sp/>Idx&lt;PolarBSplinesRTheta&gt;;</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"></highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"></highlight></codeline>
-<codeline lineno="152"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">VectorSplineCoeffsMem2D</ref></highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"></highlight></codeline>
-<codeline lineno="156"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">VectorSplineCoeffs2D</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorField&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight></codeline>
-<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">ConstVectorSplineCoeffs2D</ref></highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorConstField&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PolarSplineMemRTheta<sp/>=<sp/>DFieldMem&lt;IdxRange&lt;PolarBSplinesRTheta&gt;&gt;;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PolarSplineRTheta<sp/>=<sp/>DField&lt;IdxRange&lt;PolarBSplinesRTheta&gt;&gt;;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxPolarBspl<sp/>=<sp/>Idx&lt;PolarBSplinesRTheta&gt;;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">VectorSplineCoeffsMem2D</ref></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">VectorSplineCoeffs2D</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorField&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">ConstVectorSplineCoeffs2D</ref></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorConstField&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp"/>
   </compounddef>

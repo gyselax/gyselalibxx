@@ -51,14 +51,13 @@ public:
     BslPredCorrRTheta(
             Mapping const& mapping,
             BslAdvectionRTheta const& advection_solver,
-            SplineRThetaBuilder const& builder,
-            SplineRThetaEvaluatorNullBound const& rhs_evaluator,
+            SplineInterpolatorRTheta const& rhs_interpolator,
             PolarPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)
-        , m_builder(builder)
-        , m_spline_evaluator(rhs_evaluator)
+        , m_builder(rhs_interpolator.get_builder())
+        , m_spline_evaluator(rhs_interpolator.get_evaluator())
     {
     }
 

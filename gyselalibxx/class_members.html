@@ -650,6 +650,7 @@
 <li><strong>BSplinesTheta_tag</strong> (<a href="classPolarBSplines.html"><strong>PolarBSplines</strong></a>)</li>
 <li><strong>build_elementwise</strong> (<a href="classPolarFootFinder.html"><strong>PolarFootFinder</strong></a>)</li>
 <li><strong>bsplines_type</strong> (<a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>BuilderType</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
 <li><strong>BSplinesROriginal</strong> (<a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a>)</li>
 <li><strong>BSplinesThetaOriginal</strong> (<a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a>)</li>
 <li><strong>BSplinesPerp1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
@@ -938,6 +939,7 @@
 <li><strong>eval_deriv_r_and_theta</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>)</li>
 <li><strong>eval_deriv_theta</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>)</li>
 <li><strong>ElementwiseOperator</strong> (<a href="classPolarFootFinder.html"><strong>PolarFootFinder</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
+<li><strong>EvaluatorType</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
 <li><strong>EdgeParGrid1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
 <li><strong>EdgeParGrid2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
 <li><strong>EdgePerpGrid1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
@@ -1761,6 +1763,8 @@
 <li><strong>replace_periodic_coord_inside</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
 <li><strong>rmax</strong> (<a href="classNonUniformLagrangeBasis_1_1Impl.html"><strong>NonUniformLagrangeBasis::Impl</strong></a>, <a href="classUniformLagrangeBasis_1_1Impl.html"><strong>UniformLagrangeBasis::Impl</strong></a>)</li>
 <li><strong>rmin</strong> (<a href="classNonUniformLagrangeBasis_1_1Impl.html"><strong>NonUniformLagrangeBasis::Impl</strong></a>, <a href="classUniformLagrangeBasis_1_1Impl.html"><strong>UniformLagrangeBasis::Impl</strong></a>)</li>
+<li><strong>RThetaAdvectionBuilder</strong> (<a href="classPolarFootFinder.html"><strong>PolarFootFinder</strong></a>)</li>
+<li><strong>RThetaAdvectionEvaluator</strong> (<a href="classPolarFootFinder.html"><strong>PolarFootFinder</strong></a>)</li>
 <li><strong>RK2</strong> (<a href="classRK2.html"><strong>RK2</strong></a>, <a href="classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.html"><strong>RK2&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</strong></a>)</li>
 <li><strong>RK3</strong> (<a href="classRK3.html"><strong>RK3</strong></a>, <a href="classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.html"><strong>RK3&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</strong></a>)</li>
 <li><strong>RK4</strong> (<a href="classRK4.html"><strong>RK4</strong></a>, <a href="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.html"><strong>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</strong></a>)</li>
@@ -1781,12 +1785,12 @@
 <li><strong>span_view</strong> (<a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>, <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>, <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>)</li>
 <li><strong>SplineType</strong> (<a href="classDiscretePoloidalCSSplineMapping.html"><strong>DiscretePoloidalCSSplineMapping</strong></a>, <a href="classSplineBuilderDerivField2D.html"><strong>SplineBuilderDerivField2D</strong></a>)</li>
 <li><strong>spline_idx_range</strong> (<a href="classDiscretePoloidalCSSplineMapping.html"><strong>DiscretePoloidalCSSplineMapping</strong></a>)</li>
+<li><strong>SplineBuilder</strong> (<a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a>, <a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>, <a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a>)</li>
 <li><strong>SplineCoeffs</strong> (<a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a>, <a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a>)</li>
 <li><strong>SplineCoeffsMem</strong> (<a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a>, <a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a>)</li>
+<li><strong>SplineEvaluator</strong> (<a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a>, <a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>, <a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a>)</li>
 <li><strong>set_curvilinear_to_cartesian_values</strong> (<a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a>, <a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a>)</li>
 <li><strong>search_for_match</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
-<li><strong>SplineBuilder</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
-<li><strong>SplineEvaluator</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>s_degree</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>s_npts_gauss</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>solve_matrix_system</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>

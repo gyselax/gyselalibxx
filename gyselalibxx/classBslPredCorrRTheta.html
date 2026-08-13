@@ -585,7 +585,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bslpredcorrrtheta"><strong>BslPredCorrRTheta</strong></a> (Mapping const &amp; mapping, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, SplineRThetaBuilder const &amp; builder, SplineRThetaEvaluatorNullBound const &amp; rhs_evaluator, PolarPoissonLikeSolver const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-bslpredcorrrtheta"><strong>BslPredCorrRTheta</strong></a> (Mapping const &amp; mapping, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, SplineInterpolatorRTheta const &amp; rhs_interpolator, PolarPoissonLikeSolver const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
@@ -659,8 +659,7 @@
 <pre><code class="language-C++">inline BslPredCorrRTheta::BslPredCorrRTheta (
     Mapping const &amp; mapping,
     BslAdvectionRTheta const &amp; advection_solver,
-    SplineRThetaBuilder const &amp; builder,
-    SplineRThetaEvaluatorNullBound const &amp; rhs_evaluator,
+    SplineInterpolatorRTheta const &amp; rhs_interpolator,
     PolarPoissonLikeSolver const &amp; poisson_solver
 ) 
 </code></pre>
@@ -668,8 +667,7 @@
 <ul>
 <li><code>mapping</code> The mapping function from the logical domain to the physical domain. </li>
 <li><code>advection_solver</code> The advection operator. </li>
-<li><code>builder</code> The spline builder for the computation of the RHS and the advection field. </li>
-<li><code>rhs_evaluator</code> The evaluator of B-splines for the RHS. </li>
+<li><code>rhs_interpolator</code> An interpolator to build and evaluate an approximation of the RHS. </li>
 <li><code>poisson_solver</code> The PDE solver which computes the electrical potential. </li>
 </ul>
 <hr>

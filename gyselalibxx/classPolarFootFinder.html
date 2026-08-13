@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-polarfootfinder">Class PolarFootFinder</h1>
-<p><strong>template &lt;FootFindingSpace FFSpace, AdvectionFieldSpace AFSpace, concepts::Mapping LogicalToPhysicalMapping, class IdxRangeBatched, class TimeStepperBuilder, class RThetaAdvectionBuilder, class RThetaAdvectionEvaluator&gt;</strong></p>
+<p><strong>template &lt;FootFindingSpace FFSpace, AdvectionFieldSpace AFSpace, concepts::Mapping LogicalToPhysicalMapping, class IdxRangeBatched, class TimeStepperBuilder, concepts::Interpolation RThetaAdvectionInterpolator&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classPolarFootFinder.html"><strong>PolarFootFinder</strong></a></p>
 <p><em>Operator for finding the feet of the characteristics on a polar slice.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -635,7 +635,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-polarfootfinder"><strong>PolarFootFinder</strong></a> (TimeStepperBuilder const &amp; time_stepper_builder, LogicalToPhysicalMapping const &amp; logical_to_physical, RThetaAdvectionBuilder const &amp; builder_advection_field, RThetaAdvectionEvaluator const &amp; evaluator_advection_field, Coord&lt; <a href="structX__pC.html"><strong>X_pC</strong></a>, <a href="structY__pC.html"><strong>Y_pC</strong></a> &gt; coord_centre_pc=Coord&lt; <a href="structX__pC.html"><strong>X_pC</strong></a>, <a href="structY__pC.html"><strong>Y_pC</strong></a> &gt;(0, 0), double epsilon=1e-12) <br><em>Construct a</em> <a href="classPolarFootFinder.html"><em><strong>PolarFootFinder</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-polarfootfinder"><strong>PolarFootFinder</strong></a> (TimeStepperBuilder const &amp; time_stepper_builder, LogicalToPhysicalMapping const &amp; logical_to_physical, RThetaAdvectionInterpolator const &amp; interpolator_advection_field, Coord&lt; <a href="structX__pC.html"><strong>X_pC</strong></a>, <a href="structY__pC.html"><strong>Y_pC</strong></a> &gt; coord_centre_pc=Coord&lt; <a href="structX__pC.html"><strong>X_pC</strong></a>, <a href="structY__pC.html"><strong>Y_pC</strong></a> &gt;(0, 0), double epsilon=1e-12) <br><em>Construct a</em> <a href="classPolarFootFinder.html"><em><strong>PolarFootFinder</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classPolarFootFinder.html#typedef-elementwiseoperator"><strong>ElementwiseOperator</strong></a></td>
@@ -656,67 +656,66 @@
 <li><code>LogicalToPhysicalMapping</code> The mapping from the logical <span class="arithmatex">\((r, \theta)\)</span> domain to the physical <span class="arithmatex">\((x, y)\)</span> domain. </li>
 <li><code>IdxRangeBatched</code> The batched index range over which the operator works. </li>
 <li><code>TimeStepperBuilder</code> The factory type for the time integration method. </li>
-<li><code>RThetaAdvectionBuilder</code> The spline builder for the advection field. </li>
-<li><code>RThetaAdvectionEvaluator</code> The spline evaluator for the advection field. </li>
+<li><code>RThetaAdvectionInterpolator</code> The interpolator for the advection field. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-advdim1">typedef AdvDim1</h3>
 <p><em>The first dimension on which the advection field is defined.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::AdvDim1 =  std::conditional_t&lt;AFSpace == AdvectionFieldSpace::PHYSICAL, X, R&gt;;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::AdvDim1 =  std::conditional_t&lt;AFSpace == AdvectionFieldSpace::PHYSICAL, X, R&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-advdim2">typedef AdvDim2</h3>
 <p><em>The second dimension on which the advection field is defined.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::AdvDim2 =  std::conditional_t&lt;AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta&gt;;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::AdvDim2 =  std::conditional_t&lt;AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-cconstfieldfeet">typedef CConstFieldFeet</h3>
 <p><em>A read-only field of</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinates over the batched operator domain.</em></p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::CConstFieldFeet =  ConstField&lt;CoordRTheta, IdxRangeBatched, memory_space&gt;;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::CConstFieldFeet =  ConstField&lt;CoordRTheta, IdxRangeBatched, memory_space&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-cfieldfeet">typedef CFieldFeet</h3>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::CFieldFeet =  Field&lt;CoordRTheta, IdxRangeBatched, memory_space&gt;;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::CFieldFeet =  Field&lt;CoordRTheta, IdxRangeBatched, memory_space&gt;;
 </code></pre>
 <p>The type of the memory space where the field is saved (CPU vs GPU). A mutable field of <span class="arithmatex">\((r, \theta)\)</span> coordinates over the batched operator domain. </p>
 <hr>
 
 <h3 id="typedef-elementwiseoperator">typedef ElementwiseOperator</h3>
 <p><em>The operator returned by operator() which calculates the feet elementwise.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::ElementwiseOperator =  typename polar_foot_finder_details::ElementwiseChoice&lt; FFSpace, AFSpace, GridR, GridTheta, IdxRangeBatched, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping&gt;::type;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::ElementwiseOperator =  typename polar_foot_finder_details::ElementwiseChoice&lt; FFSpace, AFSpace, GridR, GridTheta, IdxRangeBatched, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping&gt;::type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-execspace">typedef ExecSpace</h3>
 <p><em>The execution space where kernels are launched.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::ExecSpace =  typename RThetaAdvectionBuilder::exec_space;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::ExecSpace =  typename RThetaAdvectionBuilder::exec_space;
 </code></pre>
 <hr>
 
 <h3 id="typedef-idxrangeoperator">typedef IdxRangeOperator</h3>
 <p><em>The type of the index range over which the operator works.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxRangeOperator =  IdxRangeBatched;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::IdxRangeOperator =  IdxRangeBatched;
 </code></pre>
 <hr>
 
 <h3 id="typedef-r">typedef R</h3>
 <p><em>The continuous radial dimension.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::R =  typename LogicalToPhysicalMapping::curvilinear_tag_r;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::R =  typename LogicalToPhysicalMapping::curvilinear_tag_r;
 </code></pre>
 <hr>
 
 <h3 id="typedef-theta">typedef Theta</h3>
 <p><em>The continuous poloidal dimension.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::Theta =  typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::Theta =  typename LogicalToPhysicalMapping::curvilinear_tag_theta;
 </code></pre>
 <hr>
 
 <h3 id="typedef-memory_space">typedef memory_space</h3>
 <p><em>The memory space where fields are stored (e.g.</em> <code>Kokkos::HostSpace</code> <em>or a GPU space).</em></p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::memory_space =  typename RThetaAdvectionBuilder::memory_space;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::memory_space =  typename RThetaAdvectionBuilder::memory_space;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -725,8 +724,7 @@
 <pre><code class="language-C++">inline PolarFootFinder::PolarFootFinder (
     TimeStepperBuilder const &amp; time_stepper_builder,
     LogicalToPhysicalMapping const &amp; logical_to_physical,
-    RThetaAdvectionBuilder const &amp; builder_advection_field,
-    RThetaAdvectionEvaluator const &amp; evaluator_advection_field,
+    RThetaAdvectionInterpolator const &amp; interpolator_advection_field,
     Coord&lt; X_pC , Y_pC &gt; coord_centre_pc=Coord&lt; X_pC , Y_pC &gt;(0, 0),
     double epsilon=1e-12
 ) 
@@ -735,8 +733,7 @@
 <ul>
 <li><code>time_stepper_builder</code> A builder for the time integration method. </li>
 <li><code>logical_to_physical</code> The mapping from the logical domain to the physical domain. </li>
-<li><code>builder_advection_field</code> The spline builder for the advection field coefficients. </li>
-<li><code>evaluator_advection_field</code> The spline evaluator for the advection field. </li>
+<li><code>interpolator_advection_field</code> An interpolator to build and evaluate an approximation of the advection field. </li>
 <li><code>coord_centre_pc</code> The coordinate of the polar centre in the pseudo-Cartesian domain <span class="arithmatex">\((X_{pC}, Y_{pC})\)</span>. Ignored for <code>LOGICAL</code> foot finding. </li>
 <li><code>epsilon</code> <span class="arithmatex">\(\varepsilon\)</span> parameter for the <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a> linearisation near the O-point. Only used for <code>PHYSICAL</code> advection field. </li>
 </ul>

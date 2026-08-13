@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslExplicitPredCorrRTheta**](#function-bslexplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, PolarPoissonLikeSolver const & poisson\_solver, SplineRThetaEvaluatorConstBound const & advection\_evaluator) <br>_Instantiate a_ [_**BslExplicitPredCorrRTheta**_](classBslExplicitPredCorrRTheta.md) _._ |
+|   | [**BslExplicitPredCorrRTheta**](#function-bslexplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, PolarPoissonLikeSolver const & poisson\_solver, SplineInterpolatorRThetaConst const & advection\_interpolator) <br>_Instantiate a_ [_**BslExplicitPredCorrRTheta**_](classBslExplicitPredCorrRTheta.md) _._ |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
 
@@ -220,9 +220,8 @@ inline BslExplicitPredCorrRTheta::BslExplicitPredCorrRTheta (
     LogicalToPseudoPhysicalMapping const & logical_to_pseudo_physical,
     BslAdvectionRTheta const & advection_solver,
     IdxRangeRTheta const & grid,
-    SplineRThetaBuilder const & builder,
     PolarPoissonLikeSolver const & poisson_solver,
-    SplineRThetaEvaluatorConstBound const & advection_evaluator
+    SplineInterpolatorRThetaConst const & advection_interpolator
 ) 
 ```
 
@@ -237,9 +236,8 @@ inline BslExplicitPredCorrRTheta::BslExplicitPredCorrRTheta (
 * `logical_to_pseudo_physical` The mapping from the logical domain to the pseudo-physical domain. 
 * `advection_solver` The advection operator with an [**Euler**](classEuler.md) method. 
 * `grid` The index range on which the functions are defined. 
-* `builder` A spline builder to get the spline representation of the advection field and the RHS. 
 * `poisson_solver` The PDE solver which computes the electrical potential. 
-* `advection_evaluator` An evaluator of B-splines for the spline advection field. 
+* `advection_interpolator` An interpolator to build and evaluate an approximation of the advection field and the RHS. 
 
 
 

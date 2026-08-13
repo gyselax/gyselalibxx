@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslImplicitPredCorrRTheta**](#function-bslimplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, PolarPoissonLikeSolver const & poisson\_solver, SplineRThetaEvaluatorConstBound const & advection\_evaluator) <br>_Instantiate a_ [_**BslImplicitPredCorrRTheta**_](classBslImplicitPredCorrRTheta.md) _._ |
+|   | [**BslImplicitPredCorrRTheta**](#function-bslimplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, PolarPoissonLikeSolver const & poisson\_solver, SplineInterpolatorRThetaConst const & advection\_interpolator) <br>_Instantiate a_ [_**BslImplicitPredCorrRTheta**_](classBslImplicitPredCorrRTheta.md) _._ |
 |  void | [**implicit\_loop**](#function-implicit_loop) ([**DVectorConstFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field, [**ConstVectorSplineCoeffs2D**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field\_coefs\_k, FieldRTheta&lt; CoordRTheta &gt; feet\_coords, double const dt, double const tau) const<br>_The implicit loop which calculates the feet of the characteristicss._  |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
@@ -225,9 +225,8 @@ inline BslImplicitPredCorrRTheta::BslImplicitPredCorrRTheta (
     LogicalToPhysicalMapping const & logical_to_physical,
     BslAdvectionRTheta const & advection_solver,
     IdxRangeRTheta const & grid,
-    SplineRThetaBuilder const & builder,
     PolarPoissonLikeSolver const & poisson_solver,
-    SplineRThetaEvaluatorConstBound const & advection_evaluator
+    SplineInterpolatorRThetaConst const & advection_interpolator
 ) 
 ```
 
@@ -241,9 +240,8 @@ inline BslImplicitPredCorrRTheta::BslImplicitPredCorrRTheta (
 * `logical_to_physical` The mapping from the logical domain to the physical domain. 
 * `advection_solver` The advection operator with an [**Euler**](classEuler.md) method. 
 * `grid` The index range on which the functions are defined. 
-* `builder` A spline builder to get the spline representation of the advection field and the rhs. 
 * `poisson_solver` The PDE solver which computes the electrical potential. 
-* `advection_evaluator` An evaluator of B-splines for the spline advection field. 
+* `advection_interpolator` An interpolator to build and evaluate an approximation of the advection field and the RHS. 
 
 
 

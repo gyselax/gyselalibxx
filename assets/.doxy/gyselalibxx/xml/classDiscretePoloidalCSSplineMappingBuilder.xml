@@ -11,16 +11,227 @@
         <type>class <ref refid="structY" kindref="compound">Y</ref></type>
       </param>
       <param>
-        <type>class SplineBuilder</type>
-      </param>
-      <param>
-        <type>class SplineEvaluator</type>
+        <type><ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref></type>
+        <declname>Interpolator</declname>
+        <defname>Interpolator</defname>
       </param>
     </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ad98bcdab91f2d86db15f410776a58cc2" prot="private" static="no">
+        <type>Interpolator::BuilderType</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::SplineBuilder =  Interpolator::BuilderType</definition>
+        <argsstring></argsstring>
+        <name>SplineBuilder</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::SplineBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a3238c4884fecd9ffd32e4c914c0fb13f" prot="private" static="no">
+        <type>Interpolator::EvaluatorType</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::SplineEvaluator =  Interpolator::EvaluatorType</definition>
+        <argsstring></argsstring>
+        <name>SplineEvaluator</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::SplineEvaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ae4fc161301f936c7cfbf0be8605d939d" prot="private" static="no">
+        <type>typename SplineBuilder::exec_space</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::ExecSpace =  typename SplineBuilder::exec_space</definition>
+        <argsstring></argsstring>
+        <name>ExecSpace</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::ExecSpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ad40af85ca09c06c198fd8a7416efa119" prot="private" static="no">
+        <type>typename SplineBuilder::memory_space</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::MemorySpace =  typename SplineBuilder::memory_space</definition>
+        <argsstring></argsstring>
+        <name>MemorySpace</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::MemorySpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ae4447bd169796d821a77c4e6eb300055" prot="private" static="no">
+        <type>typename SplineBuilder::bsplines_type1</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::BSplinesR =  typename SplineBuilder::bsplines_type1</definition>
+        <argsstring></argsstring>
+        <name>BSplinesR</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::BSplinesR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ae6ed9d6412ee7fb2443445616c2a876a" prot="private" static="no">
+        <type>typename SplineBuilder::bsplines_type2</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::BSplinesTheta =  typename SplineBuilder::bsplines_type2</definition>
+        <argsstring></argsstring>
+        <name>BSplinesTheta</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::BSplinesTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1afcd808d61075510c9b6beca2e51bc155" prot="private" static="no">
+        <type>typename SplineBuilder::interpolation_domain_type1</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::GridR =  typename SplineBuilder::interpolation_domain_type1</definition>
+        <argsstring></argsstring>
+        <name>GridR</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::GridR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1aac0a5f1266ffa8eee2fb8c9d246fe937" prot="private" static="no">
+        <type>typename SplineBuilder::interpolation_domain_type2</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::GridTheta =  typename SplineBuilder::interpolation_domain_type2</definition>
+        <argsstring></argsstring>
+        <name>GridTheta</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::GridTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a17bd0813ad0d9af0aa9bdea382ed613e" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::IdxRangeSplines =  IdxRange&lt;BSplinesR, BSplinesTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSplines</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::IdxRangeSplines</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ac4d2087b9f007b616d0d9720b17c80d3" prot="private" static="no">
+        <type>typename SplineBuilder::interpolation_domain_type</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::IdxRangeInterpolationPoints =  typename SplineBuilder::interpolation_domain_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeInterpolationPoints</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::IdxRangeInterpolationPoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ae53a54f102ccebca63ef40260a42369b" prot="private" static="no">
+        <type>typename IdxRangeInterpolationPoints::discrete_element_type</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::IdxInterpolationPoints =  typename IdxRangeInterpolationPoints::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxInterpolationPoints</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::IdxInterpolationPoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a9bea30fb6961e26b7f4ab3d2c28e4041" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeSplines, MemorySpace &gt;</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::SplineCoeffsMem =  DFieldMem&lt;IdxRangeSplines, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>SplineCoeffsMem</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::SplineCoeffsMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a47507305361ac0d67d7238ff87cc68df" prot="private" static="no">
+        <type>typename SplineCoeffsMem::span_type</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::SplineCoeffs =  typename SplineCoeffsMem::span_type</definition>
+        <argsstring></argsstring>
+        <name>SplineCoeffs</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::SplineCoeffs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a2403d0f7ed808e6c5325aaa4814b1c64" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeInterpolationPoints, MemorySpace &gt;</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::InterpolationFieldMem =  DFieldMem&lt;IdxRangeInterpolationPoints, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>InterpolationFieldMem</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::InterpolationFieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a485aa370b085af21da2b92ea7277f66a" prot="private" static="no">
+        <type>typename InterpolationFieldMem::span_type</type>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::InterpolationField =  typename InterpolationFieldMem::span_type</definition>
+        <argsstring></argsstring>
+        <name>InterpolationField</name>
+        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::InterpolationField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a13b81e963bf8628062cf0ca3443ca7c7" prot="public" static="no">
+      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a7068eb81c93f9cbe5a3c93f9faf56cb5" prot="public" static="no">
         <type><ref refid="classDiscretePoloidalCSSplineMapping" kindref="compound">DiscretePoloidalCSSplineMapping</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, SplineEvaluator &gt;</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::MappingType =  DiscretePoloidalCSSplineMapping&lt;X, Y, SplineEvaluator&gt;</definition>
+        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::MappingType =  DiscretePoloidalCSSplineMapping&lt;X, Y, SplineEvaluator&gt;</definition>
         <argsstring></argsstring>
         <name>MappingType</name>
         <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::MappingType</qualifiedname>
@@ -31,197 +242,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="36" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1aac5ca73e4c4b795e98681ff97661ae84" prot="private" static="no">
-        <type>typename SplineBuilder::exec_space</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::ExecSpace =  typename SplineBuilder::exec_space</definition>
-        <argsstring></argsstring>
-        <name>ExecSpace</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::ExecSpace</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="39" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a8536c96544897c99010f83adb77f6f83" prot="private" static="no">
-        <type>typename SplineBuilder::memory_space</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::MemorySpace =  typename SplineBuilder::memory_space</definition>
-        <argsstring></argsstring>
-        <name>MemorySpace</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::MemorySpace</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="40" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a135002c677aa9b1ebbf72ed123c2f222" prot="private" static="no">
-        <type>typename SplineBuilder::bsplines_type1</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::BSplinesR =  typename SplineBuilder::bsplines_type1</definition>
-        <argsstring></argsstring>
-        <name>BSplinesR</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::BSplinesR</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="42" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a3788f84b264611ef97e8b2c2077fa938" prot="private" static="no">
-        <type>typename SplineBuilder::bsplines_type2</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::BSplinesTheta =  typename SplineBuilder::bsplines_type2</definition>
-        <argsstring></argsstring>
-        <name>BSplinesTheta</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::BSplinesTheta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="43" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a14883df7c42e11df2c85fbdf2bdcfcf9" prot="private" static="no">
-        <type>typename SplineBuilder::interpolation_domain_type1</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::GridR =  typename SplineBuilder::interpolation_domain_type1</definition>
-        <argsstring></argsstring>
-        <name>GridR</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::GridR</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="45" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ad904d6a0974a7b26070c855e0282647d" prot="private" static="no">
-        <type>typename SplineBuilder::interpolation_domain_type2</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::GridTheta =  typename SplineBuilder::interpolation_domain_type2</definition>
-        <argsstring></argsstring>
-        <name>GridTheta</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::GridTheta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="46" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a6eacfc9538b9ca41aa00348d1ed6a35d" prot="private" static="no">
-        <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::IdxRangeSplines =  IdxRange&lt;BSplinesR, BSplinesTheta&gt;</definition>
-        <argsstring></argsstring>
-        <name>IdxRangeSplines</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::IdxRangeSplines</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="48" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ae3d5b965dffc3d53e37cb35cb74a168e" prot="private" static="no">
-        <type>typename SplineBuilder::interpolation_domain_type</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::IdxRangeInterpolationPoints =  typename SplineBuilder::interpolation_domain_type</definition>
-        <argsstring></argsstring>
-        <name>IdxRangeInterpolationPoints</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::IdxRangeInterpolationPoints</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="49" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a5b3e343a08e467b25208e6a3cd5ec451" prot="private" static="no">
-        <type>typename IdxRangeInterpolationPoints::discrete_element_type</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::IdxInterpolationPoints =  typename IdxRangeInterpolationPoints::discrete_element_type</definition>
-        <argsstring></argsstring>
-        <name>IdxInterpolationPoints</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::IdxInterpolationPoints</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="50" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1ae11c6c3d46ffc7dfd2051c687d7c1d8b" prot="private" static="no">
-        <type>DFieldMem&lt; IdxRangeSplines, MemorySpace &gt;</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::SplineCoeffsMem =  DFieldMem&lt;IdxRangeSplines, MemorySpace&gt;</definition>
-        <argsstring></argsstring>
-        <name>SplineCoeffsMem</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::SplineCoeffsMem</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="52" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1af49f7d6d74d8a67442da7b313d7f1050" prot="private" static="no">
-        <type>typename SplineCoeffsMem::span_type</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::SplineCoeffs =  typename SplineCoeffsMem::span_type</definition>
-        <argsstring></argsstring>
-        <name>SplineCoeffs</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::SplineCoeffs</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="54" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a0313b2fde12b97176ec27739adca99e0" prot="private" static="no">
-        <type>DFieldMem&lt; IdxRangeInterpolationPoints, MemorySpace &gt;</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::InterpolationFieldMem =  DFieldMem&lt;IdxRangeInterpolationPoints, MemorySpace&gt;</definition>
-        <argsstring></argsstring>
-        <name>InterpolationFieldMem</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::InterpolationFieldMem</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="56" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classDiscretePoloidalCSSplineMappingBuilder_1a937a441e4269af0b54f3c49a304973bb" prot="private" static="no">
-        <type>typename InterpolationFieldMem::span_type</type>
-        <definition>using DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::InterpolationField =  typename InterpolationFieldMem::span_type</definition>
-        <argsstring></argsstring>
-        <name>InterpolationField</name>
-        <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::InterpolationField</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="58" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classDiscretePoloidalCSSplineMappingBuilder_1aff05dfc7ed59ffeb00ded6389f2ac1fc" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classDiscretePoloidalCSSplineMappingBuilder_1a66017e8e30a17f1298a7451dad546d72" prot="private" static="no" mutable="no">
         <type>SplineCoeffsMem</type>
-        <definition>SplineCoeffsMem DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::m_curvilinear_to_x_spline_alloc</definition>
+        <definition>SplineCoeffsMem DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::m_curvilinear_to_x_spline_alloc</definition>
         <argsstring></argsstring>
         <name>m_curvilinear_to_x_spline_alloc</name>
         <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::m_curvilinear_to_x_spline_alloc</qualifiedname>
@@ -231,11 +258,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="61" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="61" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="54" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classDiscretePoloidalCSSplineMappingBuilder_1a97bf0b7c22b1fc0ea38b8e9be7810b3c" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classDiscretePoloidalCSSplineMappingBuilder_1ab5abd5cb95f6c09c8087d253acff6bfe" prot="private" static="no" mutable="no">
         <type>SplineCoeffsMem</type>
-        <definition>SplineCoeffsMem DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::m_curvilinear_to_y_spline_alloc</definition>
+        <definition>SplineCoeffsMem DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::m_curvilinear_to_y_spline_alloc</definition>
         <argsstring></argsstring>
         <name>m_curvilinear_to_y_spline_alloc</name>
         <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::m_curvilinear_to_y_spline_alloc</qualifiedname>
@@ -245,11 +272,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="62" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="55" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="55" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classDiscretePoloidalCSSplineMappingBuilder_1a059964e65fa48a173034e61ae6ee867f" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classDiscretePoloidalCSSplineMappingBuilder_1a0dd01f4f31bcaf43189f4e00903dbafc" prot="private" static="no" mutable="no">
         <type>SplineEvaluator</type>
-        <definition>SplineEvaluator DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::m_evaluator</definition>
+        <definition>SplineEvaluator DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::m_evaluator</definition>
         <argsstring></argsstring>
         <name>m_evaluator</name>
         <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::m_evaluator</qualifiedname>
@@ -259,11 +286,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="63" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="63" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="56" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="56" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classDiscretePoloidalCSSplineMappingBuilder_1a4e3047f349ed1792f5a0ed5c07e596fe" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classDiscretePoloidalCSSplineMappingBuilder_1aa82088dfe5e96d19b779dd2c76dd2ef9" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>IdxRange&lt;GridR, GridTheta&gt; DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::m_idx_range_singular_point</definition>
+        <definition>IdxRange&lt;GridR, GridTheta&gt; DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::m_idx_range_singular_point</definition>
         <argsstring></argsstring>
         <name>m_idx_range_singular_point</name>
         <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::m_idx_range_singular_point</qualifiedname>
@@ -273,19 +300,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="64" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="64" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="57" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classDiscretePoloidalCSSplineMappingBuilder_1a962ce79500cc403b4b5ed4b3d1956932" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classDiscretePoloidalCSSplineMappingBuilder_1a50c201938b602cffd7cd4c471b8f323a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::DiscretePoloidalCSSplineMappingBuilder</definition>
-        <argsstring>(ExecSpace exec_space, Mapping const &amp;analytical_mapping, SplineBuilder const &amp;builder, SplineEvaluator const &amp;evaluator)</argsstring>
+        <definition>DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::DiscretePoloidalCSSplineMappingBuilder</definition>
+        <argsstring>(ExecSpace exec_space, Mapping const &amp;analytical_mapping, Interpolator const &amp;interpolator)</argsstring>
         <name>DiscretePoloidalCSSplineMappingBuilder</name>
         <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::DiscretePoloidalCSSplineMappingBuilder</qualifiedname>
         <param>
@@ -297,12 +324,8 @@
           <declname>analytical_mapping</declname>
         </param>
         <param>
-          <type>SplineBuilder const &amp;</type>
-          <declname>builder</declname>
-        </param>
-        <param>
-          <type>SplineEvaluator const &amp;</type>
-          <declname>evaluator</declname>
+          <type>Interpolator const &amp;</type>
+          <declname>interpolator</declname>
         </param>
         <briefdescription>
 <para>Create an instance of the class capable of providing a <ref refid="classDiscretePoloidalCSSplineMapping" kindref="compound">DiscretePoloidalCSSplineMapping</ref> class instance. </para>
@@ -326,18 +349,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">builder</parametername>
+<parametername direction="in">interpolator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A spline builder to be used to create a spline approximating the analytical mapping. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">evaluator</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A spline evaluator to be used to evaluate a spline approximating the analytical mapping. </para>
+<para>A spline interpolator to be used to create a spline approximating the analytical mapping. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -345,11 +360,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="76" bodyend="115"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="68" bodyend="107"/>
       </memberdef>
-      <memberdef kind="function" id="classDiscretePoloidalCSSplineMappingBuilder_1a28613591ab08736f71e054512cd21d5c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classDiscretePoloidalCSSplineMappingBuilder_1aaf7788b67803adcb257394da50f5dae6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classDiscretePoloidalCSSplineMapping" kindref="compound">DiscretePoloidalCSSplineMapping</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, SplineEvaluator &gt;</type>
-        <definition>DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator &gt; DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::operator()</definition>
+        <definition>DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator &gt; DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::operator()</definition>
         <argsstring>() const</argsstring>
         <name>operator()</name>
         <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::operator()</qualifiedname>
@@ -363,16 +378,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="122" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="122" bodyend="129"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="114" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="114" bodyend="121"/>
       </memberdef>
-      <memberdef kind="function" id="classDiscretePoloidalCSSplineMappingBuilder_1aae666b52c5faf857382f34dc03c546e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classDiscretePoloidalCSSplineMappingBuilder_1a228c128fecbe71e674ce5ae1e3caf4cc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;::set_curvilinear_to_cartesian_values</definition>
+        <definition>void DiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator &gt;::set_curvilinear_to_cartesian_values</definition>
         <argsstring>(InterpolationField const &amp;curvilinear_to_x_vals, InterpolationField const &amp;curvilinear_to_y_vals, Mapping const &amp;analytical_mapping, IdxRangeInterpolationPoints const &amp;interpolation_idx_range)</argsstring>
         <name>set_curvilinear_to_cartesian_values</name>
         <qualifiedname>DiscretePoloidalCSSplineMappingBuilder::set_curvilinear_to_cartesian_values</qualifiedname>
@@ -443,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="144" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="144" bodyend="166"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="136" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="136" bodyend="158"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -468,46 +483,40 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>SplineBuilder</parametername>
+<parametername>Interpolator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An operator for building spline coefficients. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>SplineEvaluator</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>An operator for evaluating a spline. </para>
+<para>An spline interpolator for building and evaluating a spline. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="23" bodyend="167"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="23" bodyend="159"/>
     <listofallmembers>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a135002c677aa9b1ebbf72ed123c2f222" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>BSplinesR</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a3788f84b264611ef97e8b2c2077fa938" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>BSplinesTheta</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a962ce79500cc403b4b5ed4b3d1956932" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>DiscretePoloidalCSSplineMappingBuilder</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aac5ca73e4c4b795e98681ff97661ae84" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>ExecSpace</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a14883df7c42e11df2c85fbdf2bdcfcf9" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>GridR</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ad904d6a0974a7b26070c855e0282647d" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>GridTheta</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a5b3e343a08e467b25208e6a3cd5ec451" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>IdxInterpolationPoints</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae3d5b965dffc3d53e37cb35cb74a168e" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>IdxRangeInterpolationPoints</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a6eacfc9538b9ca41aa00348d1ed6a35d" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>IdxRangeSplines</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a937a441e4269af0b54f3c49a304973bb" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>InterpolationField</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a0313b2fde12b97176ec27739adca99e0" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>InterpolationFieldMem</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aff05dfc7ed59ffeb00ded6389f2ac1fc" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>m_curvilinear_to_x_spline_alloc</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a97bf0b7c22b1fc0ea38b8e9be7810b3c" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>m_curvilinear_to_y_spline_alloc</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a059964e65fa48a173034e61ae6ee867f" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>m_evaluator</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a4e3047f349ed1792f5a0ed5c07e596fe" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>m_idx_range_singular_point</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a13b81e963bf8628062cf0ca3443ca7c7" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>MappingType</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a8536c96544897c99010f83adb77f6f83" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>MemorySpace</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a28613591ab08736f71e054512cd21d5c" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>operator()</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aae666b52c5faf857382f34dc03c546e3" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>set_curvilinear_to_cartesian_values</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1af49f7d6d74d8a67442da7b313d7f1050" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>SplineCoeffs</name></member>
-      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae11c6c3d46ffc7dfd2051c687d7c1d8b" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>SplineCoeffsMem</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae4447bd169796d821a77c4e6eb300055" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>BSplinesR</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae6ed9d6412ee7fb2443445616c2a876a" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>BSplinesTheta</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a50c201938b602cffd7cd4c471b8f323a" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>DiscretePoloidalCSSplineMappingBuilder</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae4fc161301f936c7cfbf0be8605d939d" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>ExecSpace</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1afcd808d61075510c9b6beca2e51bc155" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>GridR</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aac0a5f1266ffa8eee2fb8c9d246fe937" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>GridTheta</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae53a54f102ccebca63ef40260a42369b" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>IdxInterpolationPoints</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ac4d2087b9f007b616d0d9720b17c80d3" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>IdxRangeInterpolationPoints</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a17bd0813ad0d9af0aa9bdea382ed613e" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>IdxRangeSplines</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a485aa370b085af21da2b92ea7277f66a" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>InterpolationField</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a2403d0f7ed808e6c5325aaa4814b1c64" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>InterpolationFieldMem</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a66017e8e30a17f1298a7451dad546d72" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>m_curvilinear_to_x_spline_alloc</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ab5abd5cb95f6c09c8087d253acff6bfe" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>m_curvilinear_to_y_spline_alloc</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a0dd01f4f31bcaf43189f4e00903dbafc" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>m_evaluator</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aa82088dfe5e96d19b779dd2c76dd2ef9" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>m_idx_range_singular_point</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a7068eb81c93f9cbe5a3c93f9faf56cb5" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>MappingType</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ad40af85ca09c06c198fd8a7416efa119" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>MemorySpace</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aaf7788b67803adcb257394da50f5dae6" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>operator()</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a228c128fecbe71e674ce5ae1e3caf4cc" prot="public" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>set_curvilinear_to_cartesian_values</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ad98bcdab91f2d86db15f410776a58cc2" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>SplineBuilder</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a47507305361ac0d67d7238ff87cc68df" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>SplineCoeffs</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a9bea30fb6961e26b7f4ab3d2c28e4041" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>SplineCoeffsMem</name></member>
+      <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a3238c4884fecd9ffd32e4c914c0fb13f" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>SplineEvaluator</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

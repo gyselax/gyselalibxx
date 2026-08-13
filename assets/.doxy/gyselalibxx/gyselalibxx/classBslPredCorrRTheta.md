@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, SplineRThetaBuilder const & builder, SplineRThetaEvaluatorNullBound const & rhs\_evaluator, PolarPoissonLikeSolver const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
+|   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, SplineInterpolatorRTheta const & rhs\_interpolator, PolarPoissonLikeSolver const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) override const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
 
@@ -212,8 +212,7 @@ _Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._
 inline BslPredCorrRTheta::BslPredCorrRTheta (
     Mapping const & mapping,
     BslAdvectionRTheta const & advection_solver,
-    SplineRThetaBuilder const & builder,
-    SplineRThetaEvaluatorNullBound const & rhs_evaluator,
+    SplineInterpolatorRTheta const & rhs_interpolator,
     PolarPoissonLikeSolver const & poisson_solver
 ) 
 ```
@@ -227,8 +226,7 @@ inline BslPredCorrRTheta::BslPredCorrRTheta (
 
 * `mapping` The mapping function from the logical domain to the physical domain. 
 * `advection_solver` The advection operator. 
-* `builder` The spline builder for the computation of the RHS and the advection field. 
-* `rhs_evaluator` The evaluator of B-splines for the RHS. 
+* `rhs_interpolator` An interpolator to build and evaluate an approximation of the RHS. 
 * `poisson_solver` The PDE solver which computes the electrical potential. 
 
 

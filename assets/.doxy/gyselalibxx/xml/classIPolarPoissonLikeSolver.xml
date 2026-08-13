@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classIPolarPoissonLikeSolver" kind="class" language="C++" prot="public">
     <compoundname>IPolarPoissonLikeSolver</compoundname>
-    <derivedcompoundref refid="classPolarSplineFEMPoissonLikeSolver" prot="public" virt="non-virtual">PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classPolarSplineFEMPoissonLikeSolver" prot="public" virt="non-virtual">PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;</derivedcompoundref>
     <templateparamlist>
       <param>
         <type>class IdxRangeLaplacian</type>
@@ -29,7 +29,7 @@
         <link refid="classIPolarPoissonLikeSolver"/>
       </node>
       <node id="2">
-        <label>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;</label>
+        <label>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;</label>
         <link refid="classPolarSplineFEMPoissonLikeSolver"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>

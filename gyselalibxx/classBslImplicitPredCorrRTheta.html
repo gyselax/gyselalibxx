@@ -585,7 +585,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bslimplicitpredcorrrtheta"><strong>BslImplicitPredCorrRTheta</strong></a> (LogicalToPhysicalMapping const &amp; logical_to_physical, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder const &amp; builder, PolarPoissonLikeSolver const &amp; poisson_solver, SplineRThetaEvaluatorConstBound const &amp; advection_evaluator) <br><em>Instantiate a</em> <a href="classBslImplicitPredCorrRTheta.html"><em><strong>BslImplicitPredCorrRTheta</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-bslimplicitpredcorrrtheta"><strong>BslImplicitPredCorrRTheta</strong></a> (LogicalToPhysicalMapping const &amp; logical_to_physical, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, IdxRangeRTheta const &amp; grid, PolarPoissonLikeSolver const &amp; poisson_solver, SplineInterpolatorRThetaConst const &amp; advection_interpolator) <br><em>Instantiate a</em> <a href="classBslImplicitPredCorrRTheta.html"><em><strong>BslImplicitPredCorrRTheta</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -667,9 +667,8 @@
     LogicalToPhysicalMapping const &amp; logical_to_physical,
     BslAdvectionRTheta const &amp; advection_solver,
     IdxRangeRTheta const &amp; grid,
-    SplineRThetaBuilder const &amp; builder,
     PolarPoissonLikeSolver const &amp; poisson_solver,
-    SplineRThetaEvaluatorConstBound const &amp; advection_evaluator
+    SplineInterpolatorRThetaConst const &amp; advection_interpolator
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -677,9 +676,8 @@
 <li><code>logical_to_physical</code> The mapping from the logical domain to the physical domain. </li>
 <li><code>advection_solver</code> The advection operator with an <a href="classEuler.html"><strong>Euler</strong></a> method. </li>
 <li><code>grid</code> The index range on which the functions are defined. </li>
-<li><code>builder</code> A spline builder to get the spline representation of the advection field and the rhs. </li>
 <li><code>poisson_solver</code> The PDE solver which computes the electrical potential. </li>
-<li><code>advection_evaluator</code> An evaluator of B-splines for the spline advection field. </li>
+<li><code>advection_interpolator</code> An interpolator to build and evaluate an approximation of the advection field and the RHS. </li>
 </ul>
 <hr>
 

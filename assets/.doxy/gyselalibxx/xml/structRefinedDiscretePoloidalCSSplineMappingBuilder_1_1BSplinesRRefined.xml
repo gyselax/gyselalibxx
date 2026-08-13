@@ -11,7 +11,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
-        <label>RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesRRefined</label>
+        <label>RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator, ncells_r, ncells_theta &gt;::BSplinesRRefined</label>
         <link refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -22,7 +22,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="1">
-        <label>RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesRRefined</label>
+        <label>RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator, ncells_r, ncells_theta &gt;::BSplinesRRefined</label>
         <link refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -31,7 +31,7 @@
         <label>std::conditional_t&lt; BSplinesROriginal::is_uniform(), ddc::UniformBSplines&lt; R, BSplinesROriginal::degree()&gt;, ddc::NonUniformBSplines&lt; R, BSplinesROriginal::degree()&gt; &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="211" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="216" bodyend="217"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="192" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="197" bodyend="198"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

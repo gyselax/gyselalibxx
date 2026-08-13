@@ -14,7 +14,7 @@
         <label>NonUniformGridBase&lt; Theta &gt;</label>
       </node>
       <node id="1">
-        <label>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;::QDimThetaMesh</label>
+        <label>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::QDimThetaMesh</label>
         <link refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -25,13 +25,13 @@
         <label>NonUniformGridBase&lt; Theta &gt;</label>
       </node>
       <node id="1">
-        <label>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;::QDimThetaMesh</label>
+        <label>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::QDimThetaMesh</label>
         <link refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="89" bodyend="90"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="86" bodyend="87"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

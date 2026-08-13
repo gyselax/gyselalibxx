@@ -12,6 +12,7 @@
     <includes refid="ddc__alias__inline__functions_8hpp" local="yes">ddc_alias_inline_functions.hpp</includes>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
     <includes refid="geometry__pseudo__cartesian_8hpp" local="yes">geometry_pseudo_cartesian.hpp</includes>
+    <includes refid="i__interpolation_8hpp" local="yes">i_interpolation.hpp</includes>
     <includes refid="l__norm__tools_8hpp" local="yes">l_norm_tools.hpp</includes>
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
     <includedby refid="bsl__predcorr__second__order__explicit_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</includedby>
@@ -39,6 +40,8 @@
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -413,6 +416,82 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
+      <node id="49">
+        <label>constant_identity_interpolation_extrapolation_rule.hpp</label>
+        <link refid="constant__identity__interpolation__extrapolation__rule_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>i_interpolation.hpp</label>
+        <link refid="i__interpolation_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>i_interpolation_builder.hpp</label>
+        <link refid="i__interpolation__builder_8hpp_source"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>i_interpolation_evaluator.hpp</label>
+        <link refid="i__interpolation__evaluator_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>lagrange_basis_non_uniform.hpp</label>
+        <link refid="lagrange__basis__non__uniform_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>lagrange_basis_uniform.hpp</label>
+        <link refid="lagrange__basis__uniform_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
       <node id="24">
         <label>l_norm_tools.hpp</label>
         <link refid="l__norm__tools_8hpp"/>
@@ -497,6 +576,10 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
+      <node id="50">
+        <label>geometry_descriptors.hpp</label>
+        <link refid="geometry__descriptors_8hpp_source"/>
+      </node>
       <node id="17">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
@@ -531,6 +614,9 @@
       <node id="8">
         <label>concepts</label>
       </node>
+      <node id="55">
+        <label>cstddef</label>
+      </node>
       <node id="3">
         <label>ddc/ddc.hpp</label>
       </node>
@@ -539,6 +625,9 @@
       </node>
       <node id="40">
         <label>iostream</label>
+      </node>
+      <node id="52">
+        <label>optional</label>
       </node>
       <node id="20">
         <label>ostream</label>
@@ -551,6 +640,9 @@
       </node>
       <node id="10">
         <label>utility</label>
+      </node>
+      <node id="56">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -573,7 +665,7 @@
     </invincdepgraph>
     <innerclass refid="classPolarFootFinder" prot="public">PolarFootFinder</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="polar__foot__finder_8hpp_1a2de5d027e85573c1cc06bd4d11de55d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="polar__foot__finder_8hpp_1a11b5b9a37c37028b490c1ef78005f889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>FootFindingSpace</type>
@@ -597,15 +689,14 @@
             <type>class TimeStepperBuilder</type>
           </param>
           <param>
-            <type>class RThetaAdvectionBuilder</type>
-          </param>
-          <param>
-            <type>class RThetaAdvectionEvaluator</type>
+            <type><ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref></type>
+            <declname>RThetaAdvectionInterpolator</declname>
+            <defname>RThetaAdvectionInterpolator</defname>
           </param>
         </templateparamlist>
         <type>auto</type>
         <definition>auto make_polar_foot_finder</definition>
-        <argsstring>(TimeStepperBuilder const &amp;time_stepper, LogicalToPhysicalMapping const &amp;mapping, IdxRangeBatched const &amp;idx_range, RThetaAdvectionBuilder const &amp;builder, RThetaAdvectionEvaluator const &amp;evaluator, Coord&lt; X_pC, Y_pC &gt; coord_centre=Coord&lt; X_pC, Y_pC &gt;(0, 0), double epsilon=1e-12)</argsstring>
+        <argsstring>(TimeStepperBuilder const &amp;time_stepper, LogicalToPhysicalMapping const &amp;mapping, IdxRangeBatched const &amp;idx_range, RThetaAdvectionInterpolator const &amp;interpolator_advection_field, Coord&lt; X_pC, Y_pC &gt; coord_centre=Coord&lt; X_pC, Y_pC &gt;(0, 0), double epsilon=1e-12)</argsstring>
         <name>make_polar_foot_finder</name>
         <param>
           <type>TimeStepperBuilder const &amp;</type>
@@ -620,12 +711,8 @@
           <declname>idx_range</declname>
         </param>
         <param>
-          <type>RThetaAdvectionBuilder const &amp;</type>
-          <declname>builder</declname>
-        </param>
-        <param>
-          <type>RThetaAdvectionEvaluator const &amp;</type>
-          <declname>evaluator</declname>
+          <type>RThetaAdvectionInterpolator const &amp;</type>
+          <declname>interpolator_advection_field</declname>
         </param>
         <param>
           <type>Coord&lt; <ref refid="structX__pC" kindref="compound">X_pC</ref>, <ref refid="structY__pC" kindref="compound">Y_pC</ref> &gt;</type>
@@ -668,18 +755,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">builder</parametername>
+<parametername direction="in">interpolator_advection_field</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline builder for the advection field coefficients. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">evaluator</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The spline evaluator for the advection field. </para>
+<para>An interpolator to build and evaluate an approximation of the advection field. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -703,7 +782,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="311" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="311" bodyend="334"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="311" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="311" bodyend="331"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -726,118 +805,121 @@
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_alias_inline_functions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry_pseudo_cartesian.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="l__norm__tools_8hpp" kindref="compound">l_norm_tools.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FootFindingSpace<sp/>FFSpace,</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AdvectionFieldSpace<sp/>AFSpace,</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref><sp/>LogicalToPhysicalMapping,</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeBatched,</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TimeStepperBuilder,</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">RThetaAdvectionBuilder,</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">RThetaAdvectionEvaluator&gt;</highlight></codeline>
-<codeline lineno="49" refid="classPolarFootFinder" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder" kindref="compound">PolarFootFinder</ref></highlight></codeline>
-<codeline lineno="50"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FFSpace<sp/>!=<sp/>FootFindingSpace::PHYSICAL</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/><ref refid="conceptis__analytical__mapping__v" kindref="compound">is_analytical_mapping_v&lt;LogicalToPhysicalMapping&gt;</ref>,</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;It<sp/>is<sp/>not<sp/>possible<sp/>to<sp/>find<sp/>the<sp/>foot<sp/>of<sp/>the<sp/>characteristic<sp/>in<sp/>Physical<sp/>space<sp/>as<sp/>there<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;is<sp/>no<sp/>way<sp/>to<sp/>return<sp/>to<sp/>Logical<sp/>space<sp/>once<sp/>the<sp/>foot<sp/>is<sp/>calculated.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="59" refid="classPolarFootFinder_1aa045a61d68bdd54abd6ff616379a2eed" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR" kindref="compound">R</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>LogicalToPhysicalMapping::curvilinear_tag_r;</highlight></codeline>
-<codeline lineno="61" refid="classPolarFootFinder_1a6c33e77ecfcd4ab7952f4fd0cc232694" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta" kindref="compound">Theta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>LogicalToPhysicalMapping::curvilinear_tag_theta;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64" refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionBuilder::memory_space;</highlight></codeline>
-<codeline lineno="66" refid="classPolarFootFinder_1a8d091db9ec4de3f95464285610809f2c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a8d091db9ec4de3f95464285610809f2c" kindref="member">ExecSpace</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionBuilder::exec_space;</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">LogicalSpace<sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>LogicalToPhysicalMapping::CoordArg&gt;;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PhysicalSpace<sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>LogicalToPhysicalMapping::CoordResult&gt;;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">X</ref><sp/>=<sp/>ddc::type_seq_element_t&lt;0,<sp/>PhysicalSpace&gt;;</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref><sp/>=<sp/>ddc::type_seq_element_t&lt;1,<sp/>PhysicalSpace&gt;;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="77" refid="classPolarFootFinder_1ae0530535efea5dba0ff1608e09e00f46" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1ae0530535efea5dba0ff1608e09e00f46" kindref="member">AdvDim1</ref><sp/>=<sp/>std::conditional_t&lt;AFSpace<sp/>==<sp/>AdvectionFieldSpace::PHYSICAL,<sp/>X,<sp/>R&gt;;</highlight></codeline>
-<codeline lineno="79" refid="classPolarFootFinder_1ad46ac2f6b0652aab2893862dff877b19" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1ad46ac2f6b0652aab2893862dff877b19" kindref="member">AdvDim2</ref><sp/>=<sp/>std::conditional_t&lt;AFSpace<sp/>==<sp/>AdvectionFieldSpace::PHYSICAL,<sp/>Y,<sp/>Theta&gt;;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PolarGrid</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>RThetaAdvectionBuilder::interpolation_domain_type&gt;;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structGridR" kindref="compound">GridR</ref><sp/>=<sp/>find_grid_t&lt;R,<sp/>PolarGrid&gt;;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structGridTheta" kindref="compound">GridTheta</ref><sp/>=<sp/>find_grid_t&lt;Theta,<sp/>PolarGrid&gt;;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionBuilder::bsplines_type1;</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionBuilder::bsplines_type2;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSplineBatched</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;IdxRangeBatched&gt;,</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;GridR,<sp/>GridTheta&gt;,</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;BSplinesR,<sp/>BSplinesTheta&gt;&gt;&gt;;</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"></highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBatch<sp/>=<sp/>ddc::remove_dims_of_t&lt;IdxRangeBatched,<sp/>GridR,<sp/>GridTheta&gt;;</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeRTheta<sp/>=<sp/>IdxRange&lt;GridR,<sp/>GridTheta&gt;;</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeR<sp/>=<sp/>IdxRange&lt;GridR&gt;;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeTheta<sp/>=<sp/>IdxRange&lt;GridTheta&gt;;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxR<sp/>=<sp/>Idx&lt;GridR&gt;;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxTheta<sp/>=<sp/>Idx&lt;GridTheta&gt;;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxBatch<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeBatch::discrete_element_type;</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxOperator<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeBatched::discrete_element_type;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordRTheta<sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;i_interpolation.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="l__norm__tools_8hpp" kindref="compound">l_norm_tools.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FootFindingSpace<sp/>FFSpace,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AdvectionFieldSpace<sp/>AFSpace,</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref><sp/>LogicalToPhysicalMapping,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeBatched,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TimeStepperBuilder,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref><sp/>RThetaAdvectionInterpolator&gt;</highlight></codeline>
+<codeline lineno="47" refid="classPolarFootFinder" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder" kindref="compound">PolarFootFinder</ref></highlight></codeline>
+<codeline lineno="48"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FFSpace<sp/>!=<sp/>FootFindingSpace::PHYSICAL</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/><ref refid="conceptis__analytical__mapping__v" kindref="compound">is_analytical_mapping_v&lt;LogicalToPhysicalMapping&gt;</ref>,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;It<sp/>is<sp/>not<sp/>possible<sp/>to<sp/>find<sp/>the<sp/>foot<sp/>of<sp/>the<sp/>characteristic<sp/>in<sp/>Physical<sp/>space<sp/>as<sp/>there<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;is<sp/>no<sp/>way<sp/>to<sp/>return<sp/>to<sp/>Logical<sp/>space<sp/>once<sp/>the<sp/>foot<sp/>is<sp/>calculated.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RThetaAdvectionBuilder<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionInterpolator::BuilderType;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RThetaAdvectionEvaluator<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionInterpolator::EvaluatorType;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="61" refid="classPolarFootFinder_1a4724fc68115908f3c9cab86f60f7a133" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR" kindref="compound">R</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>LogicalToPhysicalMapping::curvilinear_tag_r;</highlight></codeline>
+<codeline lineno="63" refid="classPolarFootFinder_1ac8d2acf057879e911ae6f6dfb0c16af0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta" kindref="compound">Theta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>LogicalToPhysicalMapping::curvilinear_tag_theta;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="classPolarFootFinder_1a65203b2f9295dc0815317f0a26dbedbc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a65203b2f9295dc0815317f0a26dbedbc" kindref="member">memory_space</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionBuilder::memory_space;</highlight></codeline>
+<codeline lineno="68" refid="classPolarFootFinder_1a2b86a9f4ac6ecb3f73f7fe954a412cb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a2b86a9f4ac6ecb3f73f7fe954a412cb9" kindref="member">ExecSpace</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionBuilder::exec_space;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">LogicalSpace<sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>LogicalToPhysicalMapping::CoordArg&gt;;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PhysicalSpace<sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>LogicalToPhysicalMapping::CoordResult&gt;;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">X</ref><sp/>=<sp/>ddc::type_seq_element_t&lt;0,<sp/>PhysicalSpace&gt;;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref><sp/>=<sp/>ddc::type_seq_element_t&lt;1,<sp/>PhysicalSpace&gt;;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="79" refid="classPolarFootFinder_1a0c7180f74680bc1f6629dc966dcfdde1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a0c7180f74680bc1f6629dc966dcfdde1" kindref="member">AdvDim1</ref><sp/>=<sp/>std::conditional_t&lt;AFSpace<sp/>==<sp/>AdvectionFieldSpace::PHYSICAL,<sp/>X,<sp/>R&gt;;</highlight></codeline>
+<codeline lineno="81" refid="classPolarFootFinder_1aa1591e31c4e5e50e2d55377a5dcfd44a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1aa1591e31c4e5e50e2d55377a5dcfd44a" kindref="member">AdvDim2</ref><sp/>=<sp/>std::conditional_t&lt;AFSpace<sp/>==<sp/>AdvectionFieldSpace::PHYSICAL,<sp/>Y,<sp/>Theta&gt;;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PolarGrid</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>RThetaAdvectionBuilder::interpolation_domain_type&gt;;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structGridR" kindref="compound">GridR</ref><sp/>=<sp/>find_grid_t&lt;R,<sp/>PolarGrid&gt;;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structGridTheta" kindref="compound">GridTheta</ref><sp/>=<sp/>find_grid_t&lt;Theta,<sp/>PolarGrid&gt;;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionBuilder::bsplines_type1;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RThetaAdvectionBuilder::bsplines_type2;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSplineBatched</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;IdxRangeBatched&gt;,</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;GridR,<sp/>GridTheta&gt;,</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;BSplinesR,<sp/>BSplinesTheta&gt;&gt;&gt;;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBatch<sp/>=<sp/>ddc::remove_dims_of_t&lt;IdxRangeBatched,<sp/>GridR,<sp/>GridTheta&gt;;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeRTheta<sp/>=<sp/>IdxRange&lt;GridR,<sp/>GridTheta&gt;;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeR<sp/>=<sp/>IdxRange&lt;GridR&gt;;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeTheta<sp/>=<sp/>IdxRange&lt;GridTheta&gt;;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxR<sp/>=<sp/>Idx&lt;GridR&gt;;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxTheta<sp/>=<sp/>Idx&lt;GridTheta&gt;;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxBatch<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeBatch::discrete_element_type;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxOperator<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeBatched::discrete_element_type;</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">AdvecCoefField</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMem</ref>&lt;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSplineBatched,</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;AdvDim1,<sp/>AdvDim2&gt;,</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref>&gt;;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="114" refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">polar_foot_finder_details::ElementwiseChoice</ref>&lt;</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FFSpace,</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AFSpace,</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched,</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionEvaluator,</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorFieldMem" kindref="compound">AdvecCoefField</ref>,</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TimeStepperBuilder,</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping&gt;::type;</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="127" refid="classPolarFootFinder_1a32467c2110b8100ab4eee112c272aef2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a32467c2110b8100ab4eee112c272aef2" kindref="member">IdxRangeOperator</ref><sp/>=<sp/>IdxRangeBatched;</highlight></codeline>
-<codeline lineno="130" refid="classPolarFootFinder_1aadd1705e4e6643cbd02d6655904e11ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1aadd1705e4e6643cbd02d6655904e11ea" kindref="member">CFieldFeet</ref><sp/>=<sp/>Field&lt;CoordRTheta,<sp/>IdxRangeBatched,<sp/>memory_space&gt;;</highlight></codeline>
-<codeline lineno="132" refid="classPolarFootFinder_1aa269112d3fd1e8a52e8e7cbc4f01d8b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1aa269112d3fd1e8a52e8e7cbc4f01d8b0" kindref="member">CConstFieldFeet</ref><sp/>=<sp/>ConstField&lt;CoordRTheta,<sp/>IdxRangeBatched,<sp/>memory_space&gt;;</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>TimeStepperBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_time_stepper_builder;</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping<sp/>m_logical_to_physical;</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>RThetaAdvectionBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_builder_advection_field;</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>RThetaAdvectionEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_evaluator_advection_field;</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;<sp/>m_coord_centre_pc;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>m_epsilon;</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"></highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="161" refid="classPolarFootFinder_1aee490f440b7837b3492f5ead0d1b234c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1aee490f440b7837b3492f5ead0d1b234c" kindref="member">PolarFootFinder</ref>(</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TimeStepperBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>time_stepper_builder,</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>logical_to_physical,</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder_advection_field,</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>evaluator_advection_field,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordRTheta<sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">AdvecCoefField</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMem</ref>&lt;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSplineBatched,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;AdvDim1,<sp/>AdvDim2&gt;,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a65203b2f9295dc0815317f0a26dbedbc" kindref="member">memory_space</ref>&gt;;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="116" refid="classPolarFootFinder_1a97d4f58dc0bc56e9ac1c96f7575a7b6d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a97d4f58dc0bc56e9ac1c96f7575a7b6d" kindref="member">ElementwiseOperator</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">polar_foot_finder_details::ElementwiseChoice</ref>&lt;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FFSpace,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AFSpace,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched,</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionEvaluator,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorFieldMem" kindref="compound">AdvecCoefField</ref>,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TimeStepperBuilder,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping&gt;::type;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="129" refid="classPolarFootFinder_1a1e09dc6f209ed4eb9657ec75b7b6b1a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a1e09dc6f209ed4eb9657ec75b7b6b1a3" kindref="member">IdxRangeOperator</ref><sp/>=<sp/>IdxRangeBatched;</highlight></codeline>
+<codeline lineno="132" refid="classPolarFootFinder_1a26b58db7c2e970e0fdaad496c1571548" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a26b58db7c2e970e0fdaad496c1571548" kindref="member">CFieldFeet</ref><sp/>=<sp/>Field&lt;CoordRTheta,<sp/>IdxRangeBatched,<sp/>memory_space&gt;;</highlight></codeline>
+<codeline lineno="134" refid="classPolarFootFinder_1a6f6a3d9a406f7b067cdfa97e0576ea61" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPolarFootFinder_1a6f6a3d9a406f7b067cdfa97e0576ea61" kindref="member">CConstFieldFeet</ref><sp/>=<sp/>ConstField&lt;CoordRTheta,<sp/>IdxRangeBatched,<sp/>memory_space&gt;;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>TimeStepperBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_time_stepper_builder;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping<sp/>m_logical_to_physical;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>RThetaAdvectionBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_builder_advection_field;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>RThetaAdvectionEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_evaluator_advection_field;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;<sp/>m_coord_centre_pc;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>m_epsilon;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="162" refid="classPolarFootFinder_1af10ead7c523c1f0d1b6876e8e28a6de7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1af10ead7c523c1f0d1b6876e8e28a6de7" kindref="member">PolarFootFinder</ref>(</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TimeStepperBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>time_stepper_builder,</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>logical_to_physical,</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionInterpolator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>interpolator_advection_field,</highlight></codeline>
 <codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;<sp/>coord_centre_pc<sp/>=<sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;(0,<sp/>0),</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>epsilon<sp/>=<sp/>1e-12)</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_time_stepper_builder(time_stepper_builder)</highlight></codeline>
 <codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_logical_to_physical(logical_to_physical)</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_builder_advection_field(builder_advection_field)</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator_advection_field(evaluator_advection_field)</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_builder_advection_field(interpolator_advection_field.get_builder())</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator_advection_field(interpolator_advection_field.get_evaluator())</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_coord_centre_pc(coord_centre_pc)</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_epsilon(epsilon)</highlight></codeline>
 <codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
-<codeline lineno="188" refid="classPolarFootFinder_1a5a2256ef5116cb52a6cd64b14fed2f1b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref><sp/><ref refid="classPolarFootFinder_1a5a2256ef5116cb52a6cd64b14fed2f1b" kindref="member">operator()</ref>(</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt;IdxRangeBatched,<sp/>VectorIndexSet&lt;AdvDim1,<sp/>AdvDim2&gt;,<sp/><ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref>&gt;</highlight></codeline>
+<codeline lineno="188" refid="classPolarFootFinder_1a34b8867dce930c0bf555ff203a0512e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a97d4f58dc0bc56e9ac1c96f7575a7b6d" kindref="member">ElementwiseOperator</ref><sp/><ref refid="classPolarFootFinder_1a34b8867dce930c0bf555ff203a0512e3" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt;IdxRangeBatched,<sp/>VectorIndexSet&lt;AdvDim1,<sp/>AdvDim2&gt;,<sp/><ref refid="classPolarFootFinder_1a65203b2f9295dc0815317f0a26dbedbc" kindref="member">memory_space</ref>&gt;</highlight></codeline>
 <codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>advection_field)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="191"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorFieldMem" kindref="compound">AdvecCoefField</ref><sp/>advection_field_coefs(</highlight></codeline>
@@ -852,9 +934,9 @@
 <codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>build_elementwise(std::move(advection_field_coefs),<sp/>idx_range_theta);</highlight></codeline>
 <codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="203"><highlight class="normal"></highlight></codeline>
-<codeline lineno="217" refid="classPolarFootFinder_1ad27696bc3fa322aad6abc06e26b00c76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder_1ad27696bc3fa322aad6abc06e26b00c76" kindref="member">operator()</ref>(</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1aadd1705e4e6643cbd02d6655904e11ea" kindref="member">CFieldFeet</ref><sp/>feet,</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt;IdxRangeBatched,<sp/>VectorIndexSet&lt;AdvDim1,<sp/>AdvDim2&gt;,<sp/><ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref>&gt;</highlight></codeline>
+<codeline lineno="217" refid="classPolarFootFinder_1a0c9714584cf1e2f77c071660bc73e456" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder_1a0c9714584cf1e2f77c071660bc73e456" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a26b58db7c2e970e0fdaad496c1571548" kindref="member">CFieldFeet</ref><sp/>feet,</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt;IdxRangeBatched,<sp/>VectorIndexSet&lt;AdvDim1,<sp/>AdvDim2&gt;,<sp/><ref refid="classPolarFootFinder_1a65203b2f9295dc0815317f0a26dbedbc" kindref="member">memory_space</ref>&gt;</highlight></codeline>
 <codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>advection_field,</highlight></codeline>
 <codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="222"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
@@ -868,20 +950,20 @@
 <codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;AdvDim2&gt;(get_const_field(advection_field)));</highlight></codeline>
 <codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeTheta<sp/>idx_range_theta(get_idx_range(advection_field));</highlight></codeline>
 <codeline lineno="232"><highlight class="normal"></highlight></codeline>
-<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref><sp/>elementwise_mem</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a97d4f58dc0bc56e9ac1c96f7575a7b6d" kindref="member">ElementwiseOperator</ref><sp/>elementwise_mem</highlight></codeline>
 <codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>build_elementwise(std::move(advection_field_coefs),<sp/>idx_range_theta);</highlight></codeline>
 <codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ElementwiseOperator::GPUCompat<sp/>elementwise<sp/>=<sp/>elementwise_mem(dt);</highlight></codeline>
 <codeline lineno="236"><highlight class="normal"></highlight></codeline>
 <codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::source_location<sp/>location<sp/>=<sp/>std::source_location::current();</highlight></codeline>
 <codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_for_each(</highlight></codeline>
 <codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>location.function_name(),</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a8d091db9ec4de3f95464285610809f2c" kindref="member">ExecSpace</ref>(),</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a2b86a9f4ac6ecb3f73f7fe954a412cb9" kindref="member">ExecSpace</ref>(),</highlight></codeline>
 <codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range(feet),</highlight></codeline>
 <codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(IdxOperator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>idx)<sp/>{<sp/>feet(idx)<sp/>=<sp/>elementwise(idx);<sp/>});</highlight></codeline>
 <codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="244"><highlight class="normal"></highlight></codeline>
 <codeline lineno="245"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref><sp/>build_elementwise(</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPolarFootFinder_1a97d4f58dc0bc56e9ac1c96f7575a7b6d" kindref="member">ElementwiseOperator</ref><sp/>build_elementwise(</highlight></codeline>
 <codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AdvecCoefField&amp;&amp;<sp/>advection_field_coefs,</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeTheta<sp/>idx_range_theta)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="249"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
@@ -890,7 +972,7 @@
 <codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>AFSpace<sp/>==<sp/>AdvectionFieldSpace::PHYSICAL)<sp/>{</highlight></codeline>
 <codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>PSEUDO_PHYSICAL/PHYSICAL:<sp/>uses<sp/>global<sp/>pseudo-Cartesian<sp/>(X_pC,<sp/>Y_pC)<sp/>space.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>CombinedMapping<sp/>inside<sp/>the<sp/>Mem<sp/>class<sp/>requires<sp/>epsilon.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref>(</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder_1a97d4f58dc0bc56e9ac1c96f7575a7b6d" kindref="member">ElementwiseOperator</ref>(</highlight></codeline>
 <codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_evaluator_advection_field,</highlight></codeline>
 <codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_logical_to_physical,</highlight></codeline>
 <codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_time_stepper_builder,</highlight></codeline>
@@ -901,7 +983,7 @@
 <codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(FFSpace<sp/>==<sp/>FootFindingSpace::PHYSICAL)<sp/>{</highlight></codeline>
 <codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>PHYSICAL/LOGICAL:<sp/>foot<sp/>finding<sp/>in<sp/>physical<sp/>(X,<sp/>Y)<sp/>space.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>coord_centre<sp/>type<sp/>is<sp/>Coord&lt;X,<sp/>Y&gt;,<sp/>computed<sp/>from<sp/>the<sp/>physical<sp/>mapping.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref>(</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder_1a97d4f58dc0bc56e9ac1c96f7575a7b6d" kindref="member">ElementwiseOperator</ref>(</highlight></codeline>
 <codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_evaluator_advection_field,</highlight></codeline>
 <codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_logical_to_physical,</highlight></codeline>
 <codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_time_stepper_builder,</highlight></codeline>
@@ -911,7 +993,7 @@
 <codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>LOGICAL/LOGICAL<sp/>or<sp/>PSEUDO_PHYSICAL/LOGICAL:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>coord_centre<sp/>is<sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;<sp/>(unused<sp/>for<sp/>LOGICAL/LOGICAL).</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref>(</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder_1a97d4f58dc0bc56e9ac1c96f7575a7b6d" kindref="member">ElementwiseOperator</ref>(</highlight></codeline>
 <codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_evaluator_advection_field,</highlight></codeline>
 <codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_logical_to_physical,</highlight></codeline>
 <codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_time_stepper_builder,</highlight></codeline>
@@ -922,38 +1004,34 @@
 <codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="285"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="286"><highlight class="normal"></highlight></codeline>
-<codeline lineno="303"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FootFindingSpace<sp/>FFSpace,</highlight></codeline>
-<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AdvectionFieldSpace<sp/>AFSpace,</highlight></codeline>
-<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref><sp/>LogicalToPhysicalMapping,</highlight></codeline>
-<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeBatched,</highlight></codeline>
-<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TimeStepperBuilder,</highlight></codeline>
-<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">RThetaAdvectionBuilder,</highlight></codeline>
-<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">RThetaAdvectionEvaluator&gt;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FootFindingSpace<sp/>FFSpace,</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AdvectionFieldSpace<sp/>AFSpace,</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref><sp/>LogicalToPhysicalMapping,</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeBatched,</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TimeStepperBuilder,</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref><sp/>RThetaAdvectionInterpolator&gt;</highlight></codeline>
 <codeline lineno="311"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>make_polar_foot_finder(</highlight></codeline>
 <codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TimeStepperBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>time_stepper,</highlight></codeline>
 <codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping,</highlight></codeline>
 <codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[maybe_unused]]<sp/>IdxRangeBatched<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range,</highlight></codeline>
-<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder,</highlight></codeline>
-<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>evaluator,</highlight></codeline>
-<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;<sp/>coord_centre<sp/>=<sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;(0,<sp/>0),</highlight></codeline>
-<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>epsilon<sp/>=<sp/>1e-12)</highlight></codeline>
-<codeline lineno="319"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder" kindref="compound">PolarFootFinder</ref>&lt;</highlight></codeline>
-<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FFSpace,</highlight></codeline>
-<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AFSpace,</highlight></codeline>
-<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping,</highlight></codeline>
-<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched,</highlight></codeline>
-<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TimeStepperBuilder,</highlight></codeline>
-<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionBuilder,</highlight></codeline>
-<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionEvaluator&gt;(</highlight></codeline>
-<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>time_stepper,</highlight></codeline>
-<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mapping,</highlight></codeline>
-<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>builder,</highlight></codeline>
-<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>evaluator,</highlight></codeline>
-<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>coord_centre,</highlight></codeline>
-<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>epsilon);</highlight></codeline>
-<codeline lineno="334"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionInterpolator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>interpolator_advection_field,</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;<sp/>coord_centre<sp/>=<sp/>Coord&lt;X_pC,<sp/>Y_pC&gt;(0,<sp/>0),</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>epsilon<sp/>=<sp/>1e-12)</highlight></codeline>
+<codeline lineno="318"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classPolarFootFinder" kindref="compound">PolarFootFinder</ref>&lt;</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FFSpace,</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AFSpace,</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LogicalToPhysicalMapping,</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched,</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TimeStepperBuilder,</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RThetaAdvectionInterpolator&gt;(</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>time_stepper,</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mapping,</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>interpolator_advection_field,</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>coord_centre,</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>epsilon);</highlight></codeline>
+<codeline lineno="331"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp"/>
   </compounddef>

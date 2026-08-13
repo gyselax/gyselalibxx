@@ -20,6 +20,7 @@
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "geometry_pseudo_cartesian.hpp"`
+* `#include "i_interpolation.hpp"`
 * `#include "l_norm_tools.hpp"`
 * `#include "vector_index_tools.hpp"`
 
@@ -41,7 +42,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**PolarFootFinder**](classPolarFootFinder.md) &lt;FFSpace, AFSpace, LogicalToPhysicalMapping, class IdxRangeBatched, class TimeStepperBuilder, class RThetaAdvectionBuilder, class RThetaAdvectionEvaluator&gt;<br>_Operator for finding the feet of the characteristics on a polar slice._  |
+| class | [**PolarFootFinder**](classPolarFootFinder.md) &lt;FFSpace, AFSpace, LogicalToPhysicalMapping, class IdxRangeBatched, class TimeStepperBuilder, RThetaAdvectionInterpolator&gt;<br>_Operator for finding the feet of the characteristics on a polar slice._  |
 
 
 
@@ -68,7 +69,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  auto | [**make\_polar\_foot\_finder**](#function-make_polar_foot_finder) (TimeStepperBuilder const & time\_stepper, LogicalToPhysicalMapping const & mapping, IdxRangeBatched const & idx\_range, RThetaAdvectionBuilder const & builder, RThetaAdvectionEvaluator const & evaluator, Coord&lt; [**X\_pC**](structX__pC.md), [**Y\_pC**](structY__pC.md) &gt; coord\_centre=Coord&lt; [**X\_pC**](structX__pC.md), [**Y\_pC**](structY__pC.md) &gt;(0, 0), double epsilon=1e-12) <br>_Construct a_ [_**PolarFootFinder**_](classPolarFootFinder.md) _, deducing all type template parameters from the arguments._ |
+|  auto | [**make\_polar\_foot\_finder**](#function-make_polar_foot_finder) (TimeStepperBuilder const & time\_stepper, LogicalToPhysicalMapping const & mapping, IdxRangeBatched const & idx\_range, RThetaAdvectionInterpolator const & interpolator\_advection\_field, Coord&lt; [**X\_pC**](structX__pC.md), [**Y\_pC**](structY__pC.md) &gt; coord\_centre=Coord&lt; [**X\_pC**](structX__pC.md), [**Y\_pC**](structY__pC.md) &gt;(0, 0), double epsilon=1e-12) <br>_Construct a_ [_**PolarFootFinder**_](classPolarFootFinder.md) _, deducing all type template parameters from the arguments._ |
 
 
 
@@ -106,13 +107,12 @@
 
 _Construct a_ [_**PolarFootFinder**_](classPolarFootFinder.md) _, deducing all type template parameters from the arguments._
 ```C++
-template<FootFindingSpace FFSpace, AdvectionFieldSpace AFSpace, concepts::Mapping LogicalToPhysicalMapping, class IdxRangeBatched, class TimeStepperBuilder, class RThetaAdvectionBuilder, class RThetaAdvectionEvaluator>
+template<FootFindingSpace FFSpace, AdvectionFieldSpace AFSpace, concepts::Mapping LogicalToPhysicalMapping, class IdxRangeBatched, class TimeStepperBuilder, concepts::Interpolation RThetaAdvectionInterpolator>
 auto make_polar_foot_finder (
     TimeStepperBuilder const & time_stepper,
     LogicalToPhysicalMapping const & mapping,
     IdxRangeBatched const & idx_range,
-    RThetaAdvectionBuilder const & builder,
-    RThetaAdvectionEvaluator const & evaluator,
+    RThetaAdvectionInterpolator const & interpolator_advection_field,
     Coord< X_pC , Y_pC > coord_centre=Coord< X_pC , Y_pC >(0, 0),
     double epsilon=1e-12
 ) 
@@ -131,8 +131,7 @@ auto make_polar_foot_finder (
 * `time_stepper` A builder for the time integration method. 
 * `mapping` The mapping from the logical domain to the physical domain. 
 * `idx_range` The batched index range over which the operator works (used only for type deduction; its value is not forwarded to the constructor). 
-* `builder` The spline builder for the advection field coefficients. 
-* `evaluator` The spline evaluator for the advection field. 
+* `interpolator_advection_field` An interpolator to build and evaluate an approximation of the advection field. 
 * `coord_centre` The polar-centre coordinate in pseudo-Cartesian space. 
 * `epsilon` Linearisation parameter near the O-point. 
 

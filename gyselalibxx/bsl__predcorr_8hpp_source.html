@@ -612,14 +612,13 @@ public:
     BslPredCorrRTheta(
             Mapping const&amp; mapping,
             BslAdvectionRTheta const&amp; advection_solver,
-            SplineRThetaBuilder const&amp; builder,
-            SplineRThetaEvaluatorNullBound const&amp; rhs_evaluator,
+            SplineInterpolatorRTheta const&amp; rhs_interpolator,
             PolarPoissonLikeSolver const&amp; poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)
-        , m_builder(builder)
-        , m_spline_evaluator(rhs_evaluator)
+        , m_builder(rhs_interpolator.get_builder())
+        , m_spline_evaluator(rhs_interpolator.get_evaluator())
     {
     }
 

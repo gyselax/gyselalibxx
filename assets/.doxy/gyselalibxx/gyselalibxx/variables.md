@@ -487,6 +487,8 @@
 * **SplineInterpPointsR** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **SplineInterpPointsTheta** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **SplineInterpolatorRTheta** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
+* **SplineInterpolatorRThetaConst** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
+* **SplineInterpolatorRThetaConst\_host** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **SplineRClosure** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **SplineRThetaBuilder** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **SplineRThetaBuilder\_host** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))

@@ -90,7 +90,7 @@
 ### typedef type 
 
 ```C++
-using RefinedDiscretePoloidalCSSplineMappingBuilder< X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta >::Build_BuilderType< ddc::SplineBuilder2D< ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver > >::type =  ddc::SplineBuilder2D< ExecSpace, MemorySpace, BSplinesRRefined, BSplinesThetaRefined, GridRRefined, GridThetaRefined, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver>;
+using RefinedDiscretePoloidalCSSplineMappingBuilder< X, Y, Interpolator, ncells_r, ncells_theta >::Build_BuilderType< ddc::SplineBuilder2D< ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver > >::type =  ddc::SplineBuilder2D< ExecSpace, MemorySpace, BSplinesRRefined, BSplinesThetaRefined, GridRRefined, GridThetaRefined, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver>;
 ```
 
 

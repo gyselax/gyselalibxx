@@ -663,23 +663,31 @@
 <td style="text-align: left;"><a href="#typedef-splineinterpolatorrtheta"><strong>SplineInterpolatorRTheta</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK &gt;</td>
+<td style="text-align: right;">typedef SplineInterpolator&lt; Kokkos::DefaultExecutionSpace, IdxRange&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;, IdxRangeRTheta, <a href="namespaceExtrapolationRule.html#typedef-constant_constant"><strong>ExtrapolationRule::Constant_Constant</strong></a>, <a href="namespaceExtrapolationRule.html#typedef-periodic"><strong>ExtrapolationRule::Periodic</strong></a>, <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a>&lt; SplineRClosure, SplineRClosure &gt;, <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a>&lt; SplineThetaClosure, SplineThetaClosure &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splineinterpolatorrthetaconst"><strong>SplineInterpolatorRThetaConst</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef SplineInterpolator&lt; Kokkos::DefaultHostExecutionSpace, IdxRange&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;, IdxRangeRTheta, <a href="namespaceExtrapolationRule.html#typedef-constant_constant"><strong>ExtrapolationRule::Constant_Constant</strong></a>, <a href="namespaceExtrapolationRule.html#typedef-periodic"><strong>ExtrapolationRule::Periodic</strong></a>, <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a>&lt; SplineRClosure, SplineRClosure &gt;, <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a>&lt; SplineThetaClosure, SplineThetaClosure &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splineinterpolatorrthetaconst_host"><strong>SplineInterpolatorRThetaConst_host</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename SplineInterpolatorRThetaConst::BuilderType</td>
 <td style="text-align: left;"><a href="#typedef-splinerthetabuilder"><strong>SplineRThetaBuilder</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK &gt;</td>
+<td style="text-align: right;">typedef typename SplineInterpolatorRThetaConst_host::BuilderType</td>
 <td style="text-align: left;"><a href="#typedef-splinerthetabuilder_host"><strong>SplineRThetaBuilder_host</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef typename SplineInterpolatorRThetaConst::EvaluatorType</td>
 <td style="text-align: left;"><a href="#typedef-splinerthetaevaluatorconstbound"><strong>SplineRThetaEvaluatorConstBound</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef typename SplineInterpolatorRThetaConst_host::EvaluatorType</td>
 <td style="text-align: left;"><a href="#typedef-splinerthetaevaluatorconstbound_host"><strong>SplineRThetaEvaluatorConstBound_host</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef typename SplineInterpolatorRTheta::EvaluatorType</td>
 <td style="text-align: left;"><a href="#typedef-splinerthetaevaluatornullbound"><strong>SplineRThetaEvaluatorNullBound</strong></a>  <br></td>
 </tr>
 <tr>
@@ -805,28 +813,38 @@
 </code></pre>
 <hr>
 
+<h3 id="typedef-splineinterpolatorrthetaconst">typedef SplineInterpolatorRThetaConst</h3>
+<pre><code class="language-C++">using SplineInterpolatorRThetaConst =  SplineInterpolator&lt; Kokkos::DefaultExecutionSpace, IdxRange&lt;BSplinesR, BSplinesTheta&gt;, IdxRangeRTheta, ExtrapolationRule::Constant_Constant, ExtrapolationRule::Periodic, SplineBoundaryClosures&lt; SplineRClosure, SplineRClosure&gt;, SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splineinterpolatorrthetaconst_host">typedef SplineInterpolatorRThetaConst_host</h3>
+<pre><code class="language-C++">using SplineInterpolatorRThetaConst_host =  SplineInterpolator&lt; Kokkos::DefaultHostExecutionSpace, IdxRange&lt;BSplinesR, BSplinesTheta&gt;, IdxRangeRTheta, ExtrapolationRule::Constant_Constant, ExtrapolationRule::Periodic, SplineBoundaryClosures&lt; SplineRClosure, SplineRClosure&gt;, SplineBoundaryClosures&lt;SplineThetaClosure, SplineThetaClosure&gt; &gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-splinerthetabuilder">typedef SplineRThetaBuilder</h3>
-<pre><code class="language-C++">using SplineRThetaBuilder =  ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK&gt;;
+<pre><code class="language-C++">using SplineRThetaBuilder =  typename SplineInterpolatorRThetaConst::BuilderType;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinerthetabuilder_host">typedef SplineRThetaBuilder_host</h3>
-<pre><code class="language-C++">using SplineRThetaBuilder_host =  ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK&gt;;
+<pre><code class="language-C++">using SplineRThetaBuilder_host =  typename SplineInterpolatorRThetaConst_host::BuilderType;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinerthetaevaluatorconstbound">typedef SplineRThetaEvaluatorConstBound</h3>
-<pre><code class="language-C++">using SplineRThetaEvaluatorConstBound =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
+<pre><code class="language-C++">using SplineRThetaEvaluatorConstBound =  typename SplineInterpolatorRThetaConst::EvaluatorType;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinerthetaevaluatorconstbound_host">typedef SplineRThetaEvaluatorConstBound_host</h3>
-<pre><code class="language-C++">using SplineRThetaEvaluatorConstBound_host =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
+<pre><code class="language-C++">using SplineRThetaEvaluatorConstBound_host =  typename SplineInterpolatorRThetaConst_host::EvaluatorType;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinerthetaevaluatornullbound">typedef SplineRThetaEvaluatorNullBound</h3>
-<pre><code class="language-C++">using SplineRThetaEvaluatorNullBound =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
+<pre><code class="language-C++">using SplineRThetaEvaluatorNullBound =  typename SplineInterpolatorRTheta::EvaluatorType;
 </code></pre>
 <hr>
 

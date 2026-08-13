@@ -104,10 +104,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classBslPredCorrRTheta_1a3fe5c62dcb973b7bcdbd11b5536585f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classBslPredCorrRTheta_1a15e462d5390c9cd78dd3719723bf673b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>BslPredCorrRTheta&lt; Mapping, FootFinder, PolarPoissonLikeSolver &gt;::BslPredCorrRTheta</definition>
-        <argsstring>(Mapping const &amp;mapping, BslAdvectionRTheta const &amp;advection_solver, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, PolarPoissonLikeSolver const &amp;poisson_solver)</argsstring>
+        <argsstring>(Mapping const &amp;mapping, BslAdvectionRTheta const &amp;advection_solver, SplineInterpolatorRTheta const &amp;rhs_interpolator, PolarPoissonLikeSolver const &amp;poisson_solver)</argsstring>
         <name>BslPredCorrRTheta</name>
         <qualifiedname>BslPredCorrRTheta::BslPredCorrRTheta</qualifiedname>
         <param>
@@ -119,12 +119,8 @@
           <declname>advection_solver</declname>
         </param>
         <param>
-          <type>SplineRThetaBuilder const &amp;</type>
-          <declname>builder</declname>
-        </param>
-        <param>
-          <type>SplineRThetaEvaluatorNullBound const &amp;</type>
-          <declname>rhs_evaluator</declname>
+          <type>SplineInterpolatorRTheta const &amp;</type>
+          <declname>rhs_interpolator</declname>
         </param>
         <param>
           <type>PolarPoissonLikeSolver const &amp;</type>
@@ -152,18 +148,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">builder</parametername>
+<parametername direction="in">rhs_interpolator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline builder for the computation of the RHS and the advection field. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">rhs_evaluator</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The evaluator of B-splines for the RHS. </para>
+<para>An interpolator to build and evaluate an approximation of the RHS. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -179,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="91" bodyend="103"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="89" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classBslPredCorrRTheta_1a52597adc2bfbd8fde8394be591361291" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>host_t&lt; DFieldRTheta &gt;</type>
@@ -235,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="105" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="105" bodyend="212"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="102" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="102" bodyend="209"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -315,10 +303,10 @@
         <link refid="classITimeSolverRTheta"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="58" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="59" bodyend="213"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="58" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="59" bodyend="210"/>
     <listofallmembers>
       <member refid="classBslPredCorrRTheta_1a793f0324438b701cfee1a5ebabe7a3c5" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslAdvectionRTheta</name></member>
-      <member refid="classBslPredCorrRTheta_1a3fe5c62dcb973b7bcdbd11b5536585f1" prot="public" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslPredCorrRTheta</name></member>
+      <member refid="classBslPredCorrRTheta_1a15e462d5390c9cd78dd3719723bf673b" prot="public" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslPredCorrRTheta</name></member>
       <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" prot="protected" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>display_time_difference</name></member>
       <member refid="classBslPredCorrRTheta_1a9d6b01812cc2dd8f843130b2d2a27b20" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_advection_solver</name></member>
       <member refid="classBslPredCorrRTheta_1a27e1ce888a1798adf06fcaabd8517484" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_builder</name></member>

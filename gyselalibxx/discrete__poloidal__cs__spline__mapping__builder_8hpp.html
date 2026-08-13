@@ -575,6 +575,7 @@
 <li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "discrete_poloidal_cs_spline_mapping.hpp"</code></li>
+<li><code>#include "i_interpolation.hpp"</code></li>
 </ul>
 <h2 id="classes">Classes</h2>
 <table>
@@ -587,11 +588,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a> &lt;class <a href="structX.html"><strong>X</strong></a>, class <a href="structY.html"><strong>Y</strong></a>, class SplineBuilder, class SplineEvaluator&gt;<br><em>A class to create a</em> <a href="classDiscretePoloidalCSSplineMapping.html"><em><strong>DiscretePoloidalCSSplineMapping</strong></em></a> <em>instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data.</em></td>
+<td style="text-align: left;"><a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a> &lt;class <a href="structX.html"><strong>X</strong></a>, class <a href="structY.html"><strong>Y</strong></a>, Interpolator&gt;<br><em>A class to create a</em> <a href="classDiscretePoloidalCSSplineMapping.html"><em><strong>DiscretePoloidalCSSplineMapping</strong></em></a> <em>instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a> &lt;class <a href="structX.html"><strong>X</strong></a>, class <a href="structY.html"><strong>Y</strong></a>, class SplineBuilder, class SplineEvaluator, ncells_r, ncells_theta&gt;<br><em>A class to create a</em> <a href="classDiscretePoloidalCSSplineMapping.html"><em><strong>DiscretePoloidalCSSplineMapping</strong></em></a> <em>instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data.</em></td>
+<td style="text-align: left;"><a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a> &lt;class <a href="structX.html"><strong>X</strong></a>, class <a href="structY.html"><strong>Y</strong></a>, Interpolator, ncells_r, ncells_theta&gt;<br><em>A class to create a</em> <a href="classDiscretePoloidalCSSplineMapping.html"><em><strong>DiscretePoloidalCSSplineMapping</strong></em></a> <em>instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>

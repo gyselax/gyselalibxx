@@ -604,8 +604,7 @@ private:
             LogicalToPhysicalMapping,
             IdxRangeRTheta,
             EulerBuilder,
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorConstBound&gt;;
+            SplineInterpolatorRThetaConst&gt;;
 
     using BslAdvectionRTheta = BslAdvectionPolar&lt;
             PolarFootFinderType,
@@ -631,15 +630,14 @@ public:
             LogicalToPhysicalMapping const&amp; logical_to_physical,
             BslAdvectionRTheta const&amp; advection_solver,
             IdxRangeRTheta const&amp; grid,
-            SplineRThetaBuilder const&amp; builder,
             PolarPoissonLikeSolver const&amp; poisson_solver,
-            SplineRThetaEvaluatorConstBound const&amp; advection_evaluator)
+            SplineInterpolatorRThetaConst const&amp; advection_interpolator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
-        , m_foot_finder(m_euler, logical_to_physical, builder, advection_evaluator)
+        , m_foot_finder(m_euler, logical_to_physical, advection_interpolator)
         , m_poisson_solver(poisson_solver)
-        , m_builder(builder)
-        , m_evaluator(advection_evaluator)
+        , m_builder(advection_interpolator.get_builder())
+        , m_evaluator(advection_interpolator.get_evaluator())
 
     {
     }
