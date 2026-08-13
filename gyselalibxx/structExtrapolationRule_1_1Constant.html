@@ -582,7 +582,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef std::conditional_t&lt; is_spline_basis_v&lt; Basis &gt;, ddc::ConstantExtrapolationRule&lt; typename CoeffGrid::continuous_dimension_type &gt;, <a href="classConstantIdentityInterpolationExtrapolationRule.html"><strong>ConstantIdentityInterpolationExtrapolationRule</strong></a>&lt; CoeffGrid, DataType &gt; &gt;</td>
+<td style="text-align: right;">typedef std::conditional_t&lt; is_spline_basis_v&lt; Basis &gt;, typename detail::DDCConstantExtrapolationRuleBuilder&lt; ddc::remove_dims_of_t&lt; IdxRangeCoeff, find_grid_t&lt; typename Basis::continuous_dimension_type, ddc::to_type_seq_t&lt; IdxRangeCoeff &gt; &gt; &gt;, typename Basis::continuous_dimension_type &gt;::type, <a href="classConstantIdentityInterpolationExtrapolationRule.html"><strong>ConstantIdentityInterpolationExtrapolationRule</strong></a>&lt; find_grid_t&lt; typename Basis::continuous_dimension_type, ddc::to_type_seq_t&lt; IdxRangeCoeff &gt; &gt;, DataType &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The concrete extrapolation rule class for a given CoeffGrid/DataType.</em></td>
 </tr>
 </tbody>
@@ -592,7 +592,7 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The concrete extrapolation rule class for a given CoeffGrid/DataType.</em> </p>
-<pre><code class="language-C++">using ExtrapolationRule::Constant::type =  std::conditional_t&lt; is_spline_basis_v&lt;Basis&gt;, ddc::ConstantExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;, ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid, DataType&gt; &gt;;
+<pre><code class="language-C++">using ExtrapolationRule::Constant::type =  std::conditional_t&lt; is_spline_basis_v&lt;Basis&gt;, typename detail::DDCConstantExtrapolationRuleBuilder&lt; ddc::remove_dims_of_t&lt; IdxRangeCoeff, find_grid_t&lt; typename Basis::continuous_dimension_type, ddc::to_type_seq_t&lt;IdxRangeCoeff&gt; &gt;&gt;, typename Basis::continuous_dimension_type&gt;::type, ConstantIdentityInterpolationExtrapolationRule&lt; find_grid_t&lt; typename Basis::continuous_dimension_type, ddc::to_type_seq_t&lt;IdxRangeCoeff&gt; &gt;, DataType&gt; &gt;;
 </code></pre>
 <hr>
 

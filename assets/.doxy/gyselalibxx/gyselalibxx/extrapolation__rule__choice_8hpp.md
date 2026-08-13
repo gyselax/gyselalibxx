@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::detail::TypeSeq&lt; typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 0, Rule &gt;, CoeffGrid, DataType, Basis &gt;::type, typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 1, Rule &gt;, CoeffGrid, DataType, Basis &gt;::type &gt; | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br>_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._  |
+| typedef ddc::detail::TypeSeq&lt; typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 0, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type, typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 1, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type &gt; | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br>_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._  |
 
 
 
@@ -101,7 +101,7 @@
 
 _Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._ 
 ```C++
-using extrapolation_rule_t =  ddc::detail::TypeSeq< typename details::ExtrapolationRuleResolver< ddc::type_seq_element_t<0, Rule>, CoeffGrid, DataType, Basis>::type, typename details::ExtrapolationRuleResolver< ddc::type_seq_element_t<1, Rule>, CoeffGrid, DataType, Basis>::type>;
+using extrapolation_rule_t =  ddc::detail::TypeSeq< typename details::ExtrapolationRuleResolver< ddc::type_seq_element_t<0, Rule>, DataType, Basis, IdxRangeCoeff>::type, typename details::ExtrapolationRuleResolver< ddc::type_seq_element_t<1, Rule>, DataType, Basis, IdxRangeCoeff>::type>;
 ```
 
 
@@ -133,7 +133,7 @@ constexpr bool is_extrapolation_rule_auto_constructible_v;
 
 _Initialise the extrapolation rule._ 
 ```C++
-template<class Rule, class CoeffGrid, class DataType, class Basis>
+template<class Rule, class DataType, class CDim, class IdxRangeCoeff, class IdxRangeBasis>
 Rule get_extrapolation (
     Extremity extremity
 ) 

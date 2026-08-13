@@ -7,13 +7,13 @@
       <memberdef kind="typedef" id="structExtrapolationRule_1_1NullValue_1adbbcc6be7279aaf07e4d0d4ccd2bcafb" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type>class CoeffGrid</type>
-          </param>
-          <param>
             <type>class DataType</type>
           </param>
           <param>
             <type>class Basis</type>
+          </param>
+          <param>
+            <type>class CoeffGrid</type>
           </param>
         </templateparamlist>
         <type>ddc::NullExtrapolationRule</type>

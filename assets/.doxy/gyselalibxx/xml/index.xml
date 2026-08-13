@@ -551,7 +551,7 @@
     <member refid="classCombinedMapping_1af2a39b1a3c17e96b9ce968db9b9bccf1" kind="function"><name>non_singular_inverse_jacobian_matrix</name></member>
   </compound>
   <compound refid="structExtrapolationRule_1_1Constant" kind="struct"><name>ExtrapolationRule::Constant</name>
-    <member refid="structExtrapolationRule_1_1Constant_1a0c6c2d614521214fb94f73c9495ed269" kind="typedef"><name>type</name></member>
+    <member refid="structExtrapolationRule_1_1Constant_1aefd86241cf462e755109aa5fe315ccee" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="structConstantExtrapolationRuleOnion" kind="struct"><name>ConstantExtrapolationRuleOnion</name>
     <member refid="structConstantExtrapolationRuleOnion_1a0632822e7212fdbe203d64498c651d8f" kind="typedef"><name>PatchOrdering</name></member>
@@ -2656,7 +2656,7 @@
     <member refid="structExtrapolationRule_1_1NullValue_1adbbcc6be7279aaf07e4d0d4ccd2bcafb" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="structExtrapolationRule_1_1OneSidedPeriodic" kind="struct"><name>ExtrapolationRule::OneSidedPeriodic</name>
-    <member refid="structExtrapolationRule_1_1OneSidedPeriodic_1a93153c3dd18782fb3716223796ae279f" kind="typedef"><name>type</name></member>
+    <member refid="structExtrapolationRule_1_1OneSidedPeriodic_1ab4c5ffc7a9dba42c70adf9c3143a4b08" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classOnionPatchLocator" kind="class"><name>OnionPatchLocator</name>
   </compound>
@@ -4470,9 +4470,9 @@
   <compound refid="constant__identity__interpolation__extrapolation__rule_8hpp" kind="file"><name>constant_identity_interpolation_extrapolation_rule.hpp</name>
   </compound>
   <compound refid="extrapolation__rule__choice_8hpp" kind="file"><name>extrapolation_rule_choice.hpp</name>
-    <member refid="extrapolation__rule__choice_8hpp_1a0aa3e58f5c56f83222250d521f021c8e" kind="typedef"><name>extrapolation_rule_t</name></member>
+    <member refid="extrapolation__rule__choice_8hpp_1ad047b923507818b7a32d9786447be4a4" kind="typedef"><name>extrapolation_rule_t</name></member>
     <member refid="extrapolation__rule__choice_8hpp_1a7a940737b47959d03a768888120b92ee" kind="variable"><name>is_extrapolation_rule_auto_constructible_v</name></member>
-    <member refid="extrapolation__rule__choice_8hpp_1a05eb4d3ca9df25cf2f182b7522898bed" kind="function"><name>get_extrapolation</name></member>
+    <member refid="extrapolation__rule__choice_8hpp_1a0c993c8f16dbe77cbf88ce8d84d8756c" kind="function"><name>get_extrapolation</name></member>
   </compound>
   <compound refid="i__interpolation_8hpp" kind="file"><name>i_interpolation.hpp</name>
     <member refid="i__interpolation_8hpp_1adf428c74a6d15b30756e98a48efc01fe" kind="variable"><name>is_lagrange_basis_v</name></member>

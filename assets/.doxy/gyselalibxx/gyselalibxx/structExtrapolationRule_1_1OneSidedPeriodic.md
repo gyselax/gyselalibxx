@@ -32,7 +32,7 @@ _Tag selecting periodic extrapolation._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::PeriodicExtrapolationRule&lt; typename CoeffGrid::continuous\_dimension\_type &gt; | [**type**](#typedef-type)  <br>_The concrete extrapolation rule class for a given CoeffGrid/DataType._  |
+| typedef ddc::PeriodicExtrapolationRule&lt; typename Basis::continuous\_dimension\_type &gt; | [**type**](#typedef-type)  <br>_The concrete extrapolation rule class for a given CoeffGrid/DataType._  |
 
 
 
@@ -97,7 +97,7 @@ The value at a point outside the domain is taken as the value at the equivalent 
 
 _The concrete extrapolation rule class for a given CoeffGrid/DataType._ 
 ```C++
-using ExtrapolationRule::OneSidedPeriodic::type =  ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
+using ExtrapolationRule::OneSidedPeriodic::type =  ddc::PeriodicExtrapolationRule<typename Basis::continuous_dimension_type>;
 ```
 
 

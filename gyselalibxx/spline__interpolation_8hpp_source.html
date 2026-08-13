@@ -683,10 +683,18 @@ public:
                             InterpGrid,
                             double,
                             Basis&gt;)
-        : m_min_extrapolation(get_extrapolation&lt;MinExtrapolationRule, InterpGrid, double, Basis&gt;(
-                Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation&lt;MaxExtrapolationRule, InterpGrid, double, Basis&gt;(
-                  Extremity::BACK))
+        : m_min_extrapolation(get_extrapolation&lt;
+                              MinExtrapolationRule,
+                              double,
+                              typename Basis::continuous_dimension_type,
+                              IdxRange&lt;InterpGrid&gt;,
+                              IdxRange&lt;Basis&gt;&gt;(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation&lt;
+                              MaxExtrapolationRule,
+                              double,
+                              typename Basis::continuous_dimension_type,
+                              IdxRange&lt;InterpGrid&gt;,
+                              IdxRange&lt;Basis&gt;&gt;(Extremity::BACK))
         , m_builder(label, idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
@@ -702,10 +710,18 @@ public:
                             InterpGrid,
                             double,
                             Basis&gt;)
-        : m_min_extrapolation(get_extrapolation&lt;MinExtrapolationRule, InterpGrid, double, Basis&gt;(
-                Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation&lt;MaxExtrapolationRule, InterpGrid, double, Basis&gt;(
-                  Extremity::BACK))
+        : m_min_extrapolation(get_extrapolation&lt;
+                              MinExtrapolationRule,
+                              double,
+                              typename Basis::continuous_dimension_type,
+                              IdxRange&lt;InterpGrid&gt;,
+                              IdxRange&lt;Basis&gt;&gt;(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation&lt;
+                              MaxExtrapolationRule,
+                              double,
+                              typename Basis::continuous_dimension_type,
+                              IdxRange&lt;InterpGrid&gt;,
+                              IdxRange&lt;Basis&gt;&gt;(Extremity::BACK))
         , m_builder(idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
@@ -870,18 +886,30 @@ public:
                             InterpGrid2,
                             double,
                             Basis2&gt;)&amp;&amp;(is_extrapolation_rule_auto_constructible_v&lt;MaxExtrapolationRule2, InterpGrid2, double, Basis2&gt;))
-        : m_min_extrapolation1(
-                get_extrapolation&lt;MinExtrapolationRule1, InterpGrid1, double, Basis1&gt;(
-                        Extremity::FRONT))
-        , m_max_extrapolation1(
-                  get_extrapolation&lt;MaxExtrapolationRule1, InterpGrid1, double, Basis1&gt;(
-                          Extremity::BACK))
-        , m_min_extrapolation2(
-                  get_extrapolation&lt;MinExtrapolationRule2, InterpGrid2, double, Basis2&gt;(
-                          Extremity::FRONT))
-        , m_max_extrapolation2(
-                  get_extrapolation&lt;MaxExtrapolationRule2, InterpGrid2, double, Basis2&gt;(
-                          Extremity::BACK))
+        : m_min_extrapolation1(get_extrapolation&lt;
+                               MinExtrapolationRule1,
+                               double,
+                               typename Basis1::continuous_dimension_type,
+                               IdxRange&lt;InterpGrid1, InterpGrid2&gt;,
+                               IdxRange&lt;Basis1, Basis2&gt;&gt;(Extremity::FRONT))
+        , m_max_extrapolation1(get_extrapolation&lt;
+                               MaxExtrapolationRule1,
+                               double,
+                               typename Basis1::continuous_dimension_type,
+                               IdxRange&lt;InterpGrid1, InterpGrid2&gt;,
+                               IdxRange&lt;Basis1, Basis2&gt;&gt;(Extremity::BACK))
+        , m_min_extrapolation2(get_extrapolation&lt;
+                               MinExtrapolationRule2,
+                               double,
+                               typename Basis2::continuous_dimension_type,
+                               IdxRange&lt;InterpGrid1, InterpGrid2&gt;,
+                               IdxRange&lt;Basis1, Basis2&gt;&gt;(Extremity::FRONT))
+        , m_max_extrapolation2(get_extrapolation&lt;
+                               MaxExtrapolationRule2,
+                               double,
+                               typename Basis2::continuous_dimension_type,
+                               IdxRange&lt;InterpGrid1, InterpGrid2&gt;,
+                               IdxRange&lt;Basis1, Basis2&gt;&gt;(Extremity::BACK))
         , m_builder(idx_range)
         , m_evaluator(
                   m_min_extrapolation1,
@@ -948,7 +976,7 @@ struct SplineInterpolatorResolver&lt;
             ExecSpace,
             Basis,
             InterpGrid,
-            extrapolation_rule_t&lt;ExtrapRules, InterpGrid, double, Basis&gt;,
+            extrapolation_rule_t&lt;ExtrapRules, double, Basis, IdxRange&lt;InterpGrid&gt;&gt;,
             BoundaryClosures,
             Solver&gt;;
 };
@@ -981,8 +1009,16 @@ struct SplineInterpolatorResolver&lt;
             InterpGrid1,
             InterpGrid2,
             ddc::detail::TypeSeq&lt;
-                    extrapolation_rule_t&lt;ExtrapRules1, InterpGrid1, double, Basis1&gt;,
-                    extrapolation_rule_t&lt;ExtrapRules2, InterpGrid2, double, Basis2&gt;&gt;,
+                    extrapolation_rule_t&lt;
+                            ExtrapRules1,
+                            double,
+                            Basis1,
+                            IdxRange&lt;InterpGrid1, InterpGrid2&gt;&gt;,
+                    extrapolation_rule_t&lt;
+                            ExtrapRules2,
+                            double,
+                            Basis2,
+                            IdxRange&lt;InterpGrid1, InterpGrid2&gt;&gt;&gt;,
             ddc::detail::TypeSeq&lt;BoundaryClosures1, BoundaryClosures2&gt;,
             Solver&gt;;
 };

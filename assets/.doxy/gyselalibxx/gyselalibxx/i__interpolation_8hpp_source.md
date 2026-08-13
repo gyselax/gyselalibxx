@@ -61,27 +61,49 @@ namespace ExtrapolationRule {
 
 struct OneSidedPeriodic
 {
-    template <class CoeffGrid, class DataType, class Basis>
-    using type = ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
+    template <class DataType, class Basis, class CoeffGrid>
+    using type = ddc::PeriodicExtrapolationRule<typename Basis::continuous_dimension_type>;
 };
 
 using Periodic = ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
 
 struct NullValue
 {
-    template <class CoeffGrid, class DataType, class Basis>
+    template <class DataType, class Basis, class CoeffGrid>
     using type = ddc::NullExtrapolationRule;
 };
 
 using Null_Null = ddc::detail::TypeSeq<NullValue, NullValue>;
 
+namespace detail {
+template <class IdxRangeNDims, class CDim>
+struct DDCConstantExtrapolationRuleBuilder;
+
+template <class CDim, class... NDimGrids>
+struct DDCConstantExtrapolationRuleBuilder<IdxRange<NDimGrids...>, CDim>
+{
+    using type = ddc::
+            ConstantExtrapolationRule<CDim, typename NDimGrids::continuous_dimension_type...>;
+};
+} // namespace detail
+
 struct Constant
 {
-    template <class CoeffGrid, class DataType, class Basis>
+    template <class DataType, class Basis, class IdxRangeCoeff>
     using type = std::conditional_t<
             is_spline_basis_v<Basis>,
-            ddc::ConstantExtrapolationRule<typename CoeffGrid::continuous_dimension_type>,
-            ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>;
+            typename detail::DDCConstantExtrapolationRuleBuilder<
+                    ddc::remove_dims_of_t<
+                            IdxRangeCoeff,
+                            find_grid_t<
+                                    typename Basis::continuous_dimension_type,
+                                    ddc::to_type_seq_t<IdxRangeCoeff>>>,
+                    typename Basis::continuous_dimension_type>::type,
+            ConstantIdentityInterpolationExtrapolationRule<
+                    find_grid_t<
+                            typename Basis::continuous_dimension_type,
+                            ddc::to_type_seq_t<IdxRangeCoeff>>,
+                    DataType>>;
 };
 
 using Constant_Constant = ddc::detail::TypeSeq<Constant, Constant>;
