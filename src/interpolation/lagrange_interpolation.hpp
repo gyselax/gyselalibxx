@@ -118,12 +118,18 @@ public:
                             CoeffGridType,
                             DataType,
                             Basis>))
-        : m_min_extrapolation(
-                get_extrapolation<MinExtrapolationRule, CoeffGridType, DataType, Basis>(
-                        Extremity::FRONT))
-        , m_max_extrapolation(
-                  get_extrapolation<MaxExtrapolationRule, CoeffGridType, DataType, Basis>(
-                          Extremity::BACK))
+        : m_min_extrapolation(get_extrapolation<
+                              MinExtrapolationRule,
+                              DataType,
+                              typename Basis::continuous_dimension_type,
+                              IdxRange<CoeffGridType>,
+                              IdxRange<Basis>>(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<
+                              MaxExtrapolationRule,
+                              DataType,
+                              typename Basis::continuous_dimension_type,
+                              IdxRange<CoeffGridType>,
+                              IdxRange<Basis>>(Extremity::BACK))
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
@@ -310,10 +316,18 @@ public:
                       Grid1D,
                       MinRule<ExtrapRules>,
                       MaxRule<ExtrapRules>>(
-                get_extrapolation<MinRule<ExtrapRules>, CoeffGrid<Basis>, DataType, Basis>(
-                        Extremity::FRONT),
-                get_extrapolation<MaxRule<ExtrapRules>, CoeffGrid<Basis>, DataType, Basis>(
-                        Extremity::BACK))...)
+                get_extrapolation<
+                        MinRule<ExtrapRules>,
+                        DataType,
+                        typename Basis::continuous_dimension_type,
+                        IdxRange<CoeffGrid<Basis>>,
+                        IdxRange<Basis>>(Extremity::FRONT),
+                get_extrapolation<
+                        MaxRule<ExtrapRules>,
+                        DataType,
+                        typename Basis::continuous_dimension_type,
+                        IdxRange<CoeffGrid<Basis>>,
+                        IdxRange<Basis>>(Extremity::BACK))...)
     {
     }
 
@@ -397,14 +411,14 @@ struct LagrangeInterpolatorResolver<
             Grid1D,
             extrapolation_rule_t<
                     ExtrapRules,
+                    DataType,
+                    Basis,
                     typename IdentityInterpolationBuilder<
                             ExecSpace,
                             typename ExecSpace::memory_space,
                             DataType,
                             Grid1D,
-                            Basis>::basis_domain_type,
-                    DataType,
-                    Basis>,
+                            Basis>::coeff_idx_range_type>,
             DataType>;
 };
 
@@ -432,17 +446,24 @@ struct LagrangeInterpolatorResolver<
             ddc::detail::TypeSeq<
                     extrapolation_rule_t<
                             ExtrapRulesHead,
-                            typename BasisHead::template Impl<
-                                    BasisHead,
-                                    typename ExecSpace::memory_space>::knot_grid,
                             DataType,
-                            BasisHead>,
+                            BasisHead,
+                            typename NDIdentityInterpolationBuilder<
+                                    ExecSpace,
+                                    typename ExecSpace::memory_space,
+                                    DataType,
+                                    IdxRange<Grid1DHead, Grid1D...>,
+                                    IdxRange<BasisHead, Basis...>>::coeff_idx_range_type>,
                     extrapolation_rule_t<
                             ExtrapRules,
-                            typename Basis::template Impl<Basis, typename ExecSpace::memory_space>::
-                                    knot_grid,
                             DataType,
-                            Basis>...>,
+                            Basis,
+                            typename NDIdentityInterpolationBuilder<
+                                    ExecSpace,
+                                    typename ExecSpace::memory_space,
+                                    DataType,
+                                    IdxRange<Grid1DHead, Grid1D...>,
+                                    IdxRange<BasisHead, Basis...>>::coeff_idx_range_type>...>,
             DataType>;
 };
 } // namespace detail
