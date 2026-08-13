@@ -101,6 +101,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change the `LagrangeInterpolator` templates to allow ND cases to be handled.
 - Change the `SplineInterpolator` templates to allow 2D cases to be handled.
 - Setup `GMGPolar` in `GMGPolarPoissonLikeSolver::update_coefficients` instead of `GMGPolarPoissonLikeSolver::operator()`.
+- Use `Interpolator` concept instead of `Builder` and `Evaluator` classes to simplify classes:
+    - `PolarFootFinder`
+    - `DiscretePoloidalCSSplineMappingBuilder`
+    - `RefinedDiscretePoloidalCSSplineMappingBuilder`
+    - `BslPredCorrRTheta`
+    - `BslExplicitPredCorrRTheta`
+    - `BslImplicitPredCorrRTheta`
+    - `PolarSplineFEMPoissonLikeSolver`
 
 ### Deprecated
 
