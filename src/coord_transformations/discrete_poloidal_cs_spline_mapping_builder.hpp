@@ -174,20 +174,11 @@ public:
  * @tparam ncells_r The number of cells in the refined spline in the radial direction.
  * @tparam ncells_theta The number of cells in the refined spline in the radial direction.
  */
-template <
-        class X,
-        class Y,
-        concepts::Interpolation Interpolator,
-        int ncells_r,
-        int ncells_theta>
+template <class X, class Y, concepts::Interpolation Interpolator, int ncells_r, int ncells_theta>
 class RefinedDiscretePoloidalCSSplineMappingBuilder
 {
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::memory_space,
-                  typename SplineEvaluator::memory_space>);
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::exec_space,
-                  typename SplineEvaluator::exec_space>);
+    using SplineBuilder = typename Interpolator::BuilderType;
+    using SplineEvaluator = typename Interpolator::EvaluatorType;
 
 private:
     using ExecSpace = typename SplineBuilder::exec_space;
@@ -241,9 +232,6 @@ public:
     };
 
 private:
-    using SplineBuilder = typename Interpolator::BuilderType;
-    using SplineEvaluator = typename Interpolator::EvaluatorType;
-
     using GridROriginal = typename SplineBuilder::interpolation_domain_type1;
     using GridThetaOriginal = typename SplineBuilder::interpolation_domain_type2;
 

@@ -435,30 +435,30 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     // Operators ---
-    SplineInterpolatorRThetaConst_host interpolator(grid);
+    SplineInterpolatorRTheta_host interpolator(grid);
 
     // Tests ---
     std::array<double, 3> results;
 
-    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host>
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host>
             mapping_builder(Kokkos::DefaultHostExecutionSpace(), analytical_mapping, interpolator);
     DiscretePoloidalCSSplineMapping discrete_mapping = mapping_builder();
 
-    RefinedDiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host, 16, 32>
+    RefinedDiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host, 16, 32>
             mapping_builder_16x32(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
                     interpolator);
     DiscretePoloidalCSSplineMapping refined_mapping_16x32 = mapping_builder_16x32();
 
-    RefinedDiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host, 32, 64>
+    RefinedDiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host, 32, 64>
             mapping_builder_32x64(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
                     interpolator);
     DiscretePoloidalCSSplineMapping refined_mapping_32x64 = mapping_builder_32x64();
 
-    RefinedDiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host, 64, 128>
+    RefinedDiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host, 64, 128>
             mapping_builder_64x128(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,

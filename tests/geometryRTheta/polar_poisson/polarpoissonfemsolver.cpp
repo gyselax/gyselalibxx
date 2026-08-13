@@ -32,12 +32,6 @@ using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
         Y,
         SplineInterpolatorRTheta>;
 
-using DiscreteMappingBuilder_host = DiscretePoloidalCSSplineMappingBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorNullBound_host>;
-
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,

@@ -219,7 +219,7 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     SplineInterpolatorRTheta<DeviceExecSpace> interpolator(interpolation_idx_range_rtheta);
 
     DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta<DeviceExecSpace>>
-            mapping_builder(DeviceExecSpace(), analytical_mapping, interpolation_idx_range_rtheta);
+            mapping_builder(DeviceExecSpace(), analytical_mapping, interpolator);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(to_physical_mapping)>);
@@ -392,7 +392,7 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     SplineInterpolatorRTheta<DeviceExecSpace> interpolator(interpolation_idx_range_rtheta);
 
     DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta<DeviceExecSpace>>
-            mapping_builder(DeviceExecSpace(), analytical_mapping, interpolation_idx_range_rtheta);
+            mapping_builder(DeviceExecSpace(), analytical_mapping, interpolator);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     static_assert(is_accessible_v<DeviceExecSpace, decltype(to_physical_mapping)>);
 

@@ -10,6 +10,7 @@
 #include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "math_tools.hpp"
+#include "spline_interpolation.hpp"
 
 
 namespace {
@@ -109,7 +110,7 @@ public:
     using IdxRangeTheta = IdxRange<GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
-    using SplineRThetaInterpolator_host = SplineInterpolator<
+    using SplineInterpolatorRTheta_host = SplineInterpolator<
             Kokkos::DefaultHostExecutionSpace,
             IdxRange<BSplinesR, BSplinesTheta>,
             IdxRange<GridR, GridTheta>,
