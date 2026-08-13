@@ -200,10 +200,6 @@ using SplineInterpolatorRTheta = SplineInterpolator<
 using SplineInterpolatorRTheta_host = SplineInterpolatorRTheta<Kokkos::DefaultHostExecutionSpace>;
 
 template <class ExecSpace>
-using SplineRThetaBuilder = SplineInterpolatorRTheta<ExecSpace>::BuilderType;
-using SplineRThetaBuilder_host = SplineRThetaBuilder<Kokkos::DefaultHostExecutionSpace>;
-
-template <class ExecSpace>
 using SplineRThetaEvaluator = SplineInterpolatorRTheta<ExecSpace>::EvaluatorType;
 using SplineRThetaEvaluator_host = SplineRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
 

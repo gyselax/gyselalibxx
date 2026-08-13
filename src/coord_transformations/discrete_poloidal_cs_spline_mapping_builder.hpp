@@ -177,8 +177,7 @@ public:
 template <
         class X,
         class Y,
-        class SplineBuilder,
-        class SplineEvaluator,
+        concepts::Interpolation Interpolator,
         int ncells_r,
         int ncells_theta>
 class RefinedDiscretePoloidalCSSplineMappingBuilder
@@ -242,6 +241,9 @@ public:
     };
 
 private:
+    using SplineBuilder = typename Interpolator::BuilderType;
+    using SplineEvaluator = typename Interpolator::EvaluatorType;
+
     using GridROriginal = typename SplineBuilder::interpolation_domain_type1;
     using GridThetaOriginal = typename SplineBuilder::interpolation_domain_type2;
 
@@ -330,13 +332,12 @@ public:
     RefinedDiscretePoloidalCSSplineMappingBuilder(
             ExecSpace exec_space,
             Mapping const& analytical_mapping,
-            SplineBuilder const& builder,
-            SplineEvaluator const& evaluator)
+            Interpolator const& interpolator)
         : m_evaluator(
-                evaluator.lower_extrapolation_rule_dim_1(),
-                evaluator.upper_extrapolation_rule_dim_1(),
-                evaluator.lower_extrapolation_rule_dim_2(),
-                evaluator.upper_extrapolation_rule_dim_2())
+                interpolator.get_evaluator().lower_extrapolation_rule_dim_1(),
+                interpolator.get_evaluator().upper_extrapolation_rule_dim_1(),
+                interpolator.get_evaluator().lower_extrapolation_rule_dim_2(),
+                interpolator.get_evaluator().upper_extrapolation_rule_dim_2())
     {
         using CoordR = Coord<R>;
         using CoordTheta = Coord<Theta>;
