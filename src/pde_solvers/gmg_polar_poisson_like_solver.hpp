@@ -149,8 +149,7 @@ public:
  * @tparam GridTheta            Discrete poloidal grid.
  * @tparam BSplinesR            Radial B-spline space.
  * @tparam BSplinesTheta        Poloidal B-spline space.
- * @tparam SplineBuilder        2D spline builder for (GridR × GridTheta).
- * @tparam SplineEvaluator      2D spline evaluator for (BSplinesR × BSplinesTheta).
+ * @tparam InterpolatorType     2D interpolator for (GridR × GridTheta).
  */
 template <
         class ToPhysicalMapping,
@@ -158,8 +157,7 @@ template <
         class GridTheta,
         class BSplinesR,
         class BSplinesTheta,
-        class SplineBuilder,
-        class SplineEvaluator>
+        class InterpolatorType>
 class GMGPolarPoissonLikeSolver
     : public IPolarPoissonLikeSolver<IdxRange<GridR, GridTheta>, IdxRange<GridR, GridTheta>>
 {
@@ -176,6 +174,9 @@ class GMGPolarPoissonLikeSolver
     using DomainGeometry = GMGPolarTools::MappingToDomainGeometry<ToPhysicalMapping>;
     using DensityCoeffs = GMGPolarTools::
             PolarPoissonLikeCoefficients<SplineEvaluator, BSplinesR, BSplinesTheta>;
+
+    using SplineBuilder = typename InterpolatorType::BuilderType;
+    using SplineEvaluator = typename InterpolatorType::EvaluatorType;
 
 private:
     DomainGeometry const m_domain_geom;
@@ -200,8 +201,7 @@ public:
      * @brief Construct a GMGPolarPoissonLikeSolver.
      *
      * @param[in] to_physical The mapping from the logical to the physical domain.
-     * @param[in] builder A builder to construct the coefficients of the interpolation.
-     * @param[in] evaluator The evaluator for the interpolation.
+     * @param[in] interpolator An interpolator to construct and evaluate the coefficients of the interpolation.
      * @param[in] extrapolation_rule A parameter to pass extrapolation rule to GMGPolar, default ExtrapolationType::NONE.
      * @param[in] max_iterations The maximum number of iterations that the solver should carry out.
      * @param[in] absTol The absolute tolerance for the convergence of the solver.
@@ -209,15 +209,14 @@ public:
      */
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
-            SplineBuilder const& builder,
-            SplineEvaluator const& evaluator,
+            Interpolator const& interpolator,
             ExtrapolationType const extrapolation_rule = ExtrapolationType::NONE,
             std::optional<int> max_iterations = std::nullopt,
             std::optional<double> absTol = std::nullopt,
             std::optional<double> relTol = std::nullopt)
         : m_domain_geom(to_physical)
-        , m_builder(builder)
-        , m_evaluator(evaluator)
+        , m_builder(interpolator.get_builder())
+        , m_evaluator(interpolator.get_evaluator())
         , m_extrapolation_rule(extrapolation_rule)
         , m_coeff_alpha(get_spline_idx_range(m_builder))
         , m_coeff_beta(get_spline_idx_range(m_builder))

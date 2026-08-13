@@ -30,8 +30,7 @@ using GMGSolver = GMGPolarPoissonLikeSolver<
         GridTheta,
         BSplinesR,
         BSplinesTheta,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorNullBound>;
+        SplineInterpolatorRTheta>;
 
 namespace {
 
@@ -85,17 +84,11 @@ void test_GMGPolarIntegration__PoissonEquation()
     IdxRangeTheta const idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta const grid(idx_range_r, idx_range_theta);
 
-    ddc::NullExtrapolationRule bv_r_min;
-    ddc::NullExtrapolationRule bv_r_max;
-    ddc::PeriodicExtrapolationRule<Theta> bv_theta_min;
-    ddc::PeriodicExtrapolationRule<Theta> bv_theta_max;
-
-    SplineRThetaBuilder const builder(grid);
-    SplineRThetaEvaluatorNullBound const evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
+    SplineInterpolatorRTheta interpolator(grid);
 
     const Mapping mapping;
 
-    GMGSolver solver(mapping, builder, evaluator);
+    GMGSolver solver(mapping, interpolator);
 
     // Set alpha = 1, beta = 0 everywhere
     DFieldMemRTheta alpha(grid);
