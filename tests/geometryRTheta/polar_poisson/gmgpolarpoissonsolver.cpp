@@ -24,13 +24,7 @@
 
 using Mapping = CircularToCartesian<R, Theta, X, Y>;
 
-using GMGSolver = GMGPolarPoissonLikeSolver<
-        Mapping,
-        GridR,
-        GridTheta,
-        BSplinesR,
-        BSplinesTheta,
-        SplineInterpolatorRTheta>;
+using GMGSolver = GMGPolarPoissonLikeSolver<Mapping, GridR, GridTheta, SplineInterpolatorRTheta>;
 
 namespace {
 
