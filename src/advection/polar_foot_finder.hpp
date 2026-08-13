@@ -34,10 +34,8 @@
  *      The batched index range over which the operator works.
  * @tparam TimeStepperBuilder
  *      The factory type for the time integration method.
- * @tparam RThetaAdvectionBuilder
- *      The spline builder for the advection field.
- * @tparam RThetaAdvectionEvaluator
- *      The spline evaluator for the advection field.
+ * @tparam RThetaAdvectionInterpolator
+ *      The interpolator for the advection field.
  */
 template <
         FootFindingSpace FFSpace,
