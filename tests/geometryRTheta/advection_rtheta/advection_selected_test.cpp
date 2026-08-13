@@ -146,7 +146,7 @@ int main(int argc, char** argv)
 #elif not defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     static_assert(false, "No mapping macro defined");
 #else
-    SplineInterpolatorRThetaConst interpolator_const_host(grid);
+    SplineInterpolatorRThetaConst_host interpolator_const_host(grid);
     DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host>
             mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
