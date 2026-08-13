@@ -171,12 +171,12 @@ class GMGPolarPoissonLikeSolver
 
     using SplineRThetaMem = DFieldMem<IdxRange<BSplinesR, BSplinesTheta>>;
 
+    using SplineBuilder = typename InterpolatorType::BuilderType;
+    using SplineEvaluator = typename InterpolatorType::EvaluatorType;
+
     using DomainGeometry = GMGPolarTools::MappingToDomainGeometry<ToPhysicalMapping>;
     using DensityCoeffs = GMGPolarTools::
             PolarPoissonLikeCoefficients<SplineEvaluator, BSplinesR, BSplinesTheta>;
-
-    using SplineBuilder = typename InterpolatorType::BuilderType;
-    using SplineEvaluator = typename InterpolatorType::EvaluatorType;
 
 private:
     DomainGeometry const m_domain_geom;
