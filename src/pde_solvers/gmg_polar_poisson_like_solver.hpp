@@ -209,7 +209,7 @@ public:
      */
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
-            Interpolator const& interpolator,
+            InterpolatorType const& interpolator,
             ExtrapolationType const extrapolation_rule = ExtrapolationType::NONE,
             std::optional<int> max_iterations = std::nullopt,
             std::optional<double> absTol = std::nullopt,
@@ -228,7 +228,7 @@ public:
         , m_absTol(absTol.value_or(1e-10))
         , m_relTol(relTol.value_or(1e-6))
     {
-        IdxRangeRTheta idx_range(builder.interpolation_domain());
+        IdxRangeRTheta idx_range(m_builder.interpolation_domain());
         IdxRangeR idx_range_r(idx_range);
         IdxRangeTheta idx_range_theta(idx_range);
         IdxRangeTheta idx_range_theta_with_poloidal_point(
