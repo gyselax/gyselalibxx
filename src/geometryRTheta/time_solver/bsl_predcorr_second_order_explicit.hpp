@@ -107,14 +107,12 @@ public:
      *      The advection operator with an Euler method.
      * @param[in] grid
      *      The index range on which the functions are defined.
-     * @param[in] builder
-     *      A spline builder to get the spline representation of the
-     *      advection field and the RHS.
      * @param[in] poisson_solver
      *      The PDE solver which computes the electrical
      *      potential.
-     * @param[in] advection_evaluator
-     *      An evaluator of B-splines for the spline advection field.
+     * @param[in] advection_interpolator
+     *      An interpolator to build and evaluate an approximation of the
+     *      advection field and the RHS.
      */
     BslExplicitPredCorrRTheta(
             LogicalToPhysicalMapping const& logical_to_physical,

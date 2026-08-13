@@ -79,11 +79,9 @@ public:
      *      physical domain.
      * @param[in] advection_solver
      *      The advection operator.
-     * @param[in] builder
-     *      The spline builder for the computation of the RHS
-     *      and the advection field.
-     * @param[in] rhs_evaluator
-     *      The evaluator of B-splines for the RHS.
+     * @param[in] rhs_interpolator
+     *      An interpolator to build and evaluate an approximation of the
+     *      RHS.
      * @param[in] poisson_solver
      *      The PDE solver which computes the electrical
      *      potential.

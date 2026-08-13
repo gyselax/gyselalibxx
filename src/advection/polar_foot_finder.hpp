@@ -151,10 +151,9 @@ public:
      *      A builder for the time integration method.
      * @param[in] logical_to_physical
      *      The mapping from the logical domain to the physical domain.
-     * @param[in] builder_advection_field
-     *      The spline builder for the advection field coefficients.
-     * @param[in] evaluator_advection_field
-     *      The spline evaluator for the advection field.
+     * @param[in] interpolator_advection_field
+     *      An interpolator to build and evaluate an approximation of the
+     *      advection field.
      * @param[in] coord_centre_pc
      *      The coordinate of the polar centre in the pseudo-Cartesian domain
      *      @f$ (X_{pC}, Y_{pC}) @f$. Ignored for @c LOGICAL foot finding.
@@ -298,8 +297,9 @@ private:
  * @param[in] mapping       The mapping from the logical domain to the physical domain.
  * @param[in] idx_range     The batched index range over which the operator works (used only for
  *                          type deduction; its value is not forwarded to the constructor).
- * @param[in] builder       The spline builder for the advection field coefficients.
- * @param[in] evaluator     The spline evaluator for the advection field.
+ * @param[in] interpolator_advection_field
+ *                          An interpolator to build and evaluate an approximation of the
+ *                          advection field.
  * @param[in] coord_centre  The polar-centre coordinate in pseudo-Cartesian space.
  * @param[in] epsilon       Linearisation parameter near the O-point.
  */
