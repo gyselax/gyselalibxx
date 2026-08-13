@@ -79,11 +79,9 @@ public:
      *      physical domain.
      * @param[in] advection_solver
      *      The advection operator.
-     * @param[in] builder
-     *      The spline builder for the computation of the RHS
-     *      and the advection field.
-     * @param[in] rhs_evaluator
-     *      The evaluator of B-splines for the RHS.
+     * @param[in] rhs_interpolator
+     *      An interpolator to build and evaluate an approximation of the
+     *      RHS.
      * @param[in] poisson_solver
      *      The PDE solver which computes the electrical
      *      potential.
@@ -91,14 +89,13 @@ public:
     BslPredCorrRTheta(
             Mapping const& mapping,
             BslAdvectionRTheta const& advection_solver,
-            SplineRThetaBuilder const& builder,
-            SplineRThetaEvaluatorNullBound const& rhs_evaluator,
+            SplineInterpolatorRTheta const& rhs_interpolator,
             PolarPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)
-        , m_builder(builder)
-        , m_spline_evaluator(rhs_evaluator)
+        , m_builder(rhs_interpolator.get_builder())
+        , m_spline_evaluator(rhs_interpolator.get_evaluator())
     {
     }
 

@@ -16,6 +16,7 @@
 #include "r_theta_test_cases.hpp"
 #include "rk4.hpp"
 #include "species_info.hpp"
+#include "spline_interpolation.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
@@ -82,30 +83,16 @@ struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
 {
 };
 
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineInterpolatorRTheta = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        SplineRClosure, // boundary at r=0
-        SplineRClosure, // boundary at rmax
-        SplineThetaClosure,
-        SplineThetaClosure,
-        ddc::SplineSolver::LAPACK>;
-
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRange<GridR, GridTheta>,
+        ddc::detail::TypeSeq<ExtrapolationRule::NullValue, ExtrapolationRule::Constant>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<
+                SplineRClosure, // boundary at r=0
+                SplineRClosure>, // boundary at rmax
+        SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure>>;
 
 using SplineInterpPointsR
         = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRClosure, SplineRClosure>;
@@ -336,11 +323,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     IdxRangeRTheta idx_range(r_idx_range, theta_idx_range);
     IdxRangeSpRTheta batched_idx_range(idx_range_sp, idx_range);
 
-    ddc::NullExtrapolationRule r_min_extrap;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrap;
-    SplineRThetaBuilder builder(idx_range);
-    ddc::ConstantExtrapolationRule<R, Theta> r_max_extrap(r_max);
-    SplineRThetaEvaluator evaluator(r_min_extrap, r_max_extrap, theta_extrap, theta_extrap);
+    SplineInterpolatorRTheta interpolator(idx_range);
 
     LogicalToPhysicalMapping to_physical = init_mapping<LogicalToPhysicalMapping>();
 
@@ -349,7 +332,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
 
     PolarFootFinder const batched_foot_finder = make_polar_foot_finder<
             TestFixture::FFSpace,
-            TestFixture::AFSpace>(time_stepper, to_physical, batched_idx_range, builder, evaluator);
+            TestFixture::AFSpace>(time_stepper, to_physical, batched_idx_range, interpolator);
 
     const double t = 0.0;
     double dt = 0.001;

@@ -7,6 +7,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "i_interpolation.hpp"
 
 /**
  * @brief A class to create a DiscretePoloidalCSSplineMapping instance from an analytical mapping.
@@ -15,21 +16,13 @@
  *
  * @tparam X The first Cartesian dimension.
  * @tparam Y The second Cartesian dimension.
- * @tparam SplineBuilder An operator for building spline coefficients.
- * @tparam SplineEvaluator An operator for evaluating a spline.
+ * @tparam Interpolator An spline interpolator for building and evaluating a spline.
  */
-template <class X, class Y, class SplineBuilder, class SplineEvaluator>
+template <class X, class Y, concepts::Interpolation Interpolator>
 class DiscretePoloidalCSSplineMappingBuilder
 {
-    static_assert(
-            ddc::is_evaluator_admissible_v<SplineBuilder, SplineEvaluator>,
-            "SplineEvaluator must be admissible to SplineBuilder");
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::memory_space,
-                  typename SplineEvaluator::memory_space>);
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::exec_space,
-                  typename SplineEvaluator::exec_space>);
+    using SplineBuilder = Interpolator::BuilderType;
+    using SplineEvaluator = Interpolator::EvaluatorType;
 
 public:
     /// The type of the mapping that will be created.
@@ -69,25 +62,24 @@ public:
      *
      * @param[in] exec_space The execution space where this class runs any for loops.
      * @param[in] analytical_mapping The analytical mapping to be described by this discrete mapping.
-     * @param[in] builder A spline builder to be used to create a spline approximating the analytical mapping.
-     * @param[in] evaluator A spline evaluator to be used to evaluate a spline approximating the analytical mapping.
+     * @param[in] interpolator A spline interpolator to be used to create a spline approximating the analytical mapping.
      */
     template <class Mapping>
     DiscretePoloidalCSSplineMappingBuilder(
             ExecSpace exec_space,
             Mapping const& analytical_mapping,
-            SplineBuilder const& builder,
-            SplineEvaluator const& evaluator)
+            Interpolator const& interpolator)
         : m_curvilinear_to_x_spline_alloc(
                 "m_curvilinear_to_x_spline "
                 "(DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
-                get_spline_idx_range(builder))
+                get_spline_idx_range(interpolator.get_builder()))
         , m_curvilinear_to_y_spline_alloc(
                   "m_curvilinear_to_y_spline "
                   "(DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
-                  get_spline_idx_range(builder))
-        , m_evaluator(evaluator)
+                  get_spline_idx_range(interpolator.get_builder()))
+        , m_evaluator(interpolator.get_evaluator())
     {
+        SplineBuilder const& builder = interpolator.get_builder();
         SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
         SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
         InterpolationFieldMem curvilinear_to_x_vals_alloc(
@@ -175,26 +167,15 @@ public:
  *
  * @tparam X The first Cartesian dimension.
  * @tparam Y The second Cartesian dimension.
- * @tparam SplineBuilder An operator for building spline coefficients.
- * @tparam SplineEvaluator An operator for evaluating a spline.
+ * @tparam Interpolator An spline interpolator for building and evaluating a spline.
  * @tparam ncells_r The number of cells in the refined spline in the radial direction.
  * @tparam ncells_theta The number of cells in the refined spline in the radial direction.
  */
-template <
-        class X,
-        class Y,
-        class SplineBuilder,
-        class SplineEvaluator,
-        int ncells_r,
-        int ncells_theta>
+template <class X, class Y, concepts::Interpolation Interpolator, int ncells_r, int ncells_theta>
 class RefinedDiscretePoloidalCSSplineMappingBuilder
 {
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::memory_space,
-                  typename SplineEvaluator::memory_space>);
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::exec_space,
-                  typename SplineEvaluator::exec_space>);
+    using SplineBuilder = typename Interpolator::BuilderType;
+    using SplineEvaluator = typename Interpolator::EvaluatorType;
 
 private:
     using ExecSpace = typename SplineBuilder::exec_space;
@@ -329,20 +310,18 @@ public:
      *
      * @param[in] exec_space The execution space where this class runs any for loops.
      * @param[in] analytical_mapping The analytical mapping to be described by this discrete mapping.
-     * @param[in] builder A spline builder to be used to create a spline approximating the analytical mapping.
-     * @param[in] evaluator A spline evaluator to be used to evaluate a spline approximating the analytical mapping.
+     * @param[in] interpolator A spline interpolator to be used to create a spline approximating the analytical mapping.
      */
     template <class Mapping>
     RefinedDiscretePoloidalCSSplineMappingBuilder(
             ExecSpace exec_space,
             Mapping const& analytical_mapping,
-            SplineBuilder const& builder,
-            SplineEvaluator const& evaluator)
+            Interpolator const& interpolator)
         : m_evaluator(
-                evaluator.lower_extrapolation_rule_dim_1(),
-                evaluator.upper_extrapolation_rule_dim_1(),
-                evaluator.lower_extrapolation_rule_dim_2(),
-                evaluator.upper_extrapolation_rule_dim_2())
+                interpolator.get_evaluator().lower_extrapolation_rule_dim_1(),
+                interpolator.get_evaluator().upper_extrapolation_rule_dim_1(),
+                interpolator.get_evaluator().lower_extrapolation_rule_dim_2(),
+                interpolator.get_evaluator().upper_extrapolation_rule_dim_2())
     {
         using CoordR = Coord<R>;
         using CoordTheta = Coord<Theta>;

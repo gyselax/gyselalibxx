@@ -9,6 +9,7 @@
 #include "polar_foot_finder.hpp"
 #include "rk4.hpp"
 #include "species_info.hpp"
+#include "spline_interpolation.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
@@ -74,30 +75,16 @@ struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
 {
 };
 
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineInterpolatorRTheta = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        SplineRClosure,
-        SplineRClosure,
-        SplineThetaClosure,
-        SplineThetaClosure,
-        ddc::SplineSolver::LAPACK>;
-
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRange<GridR, GridTheta>,
+        ExtrapolationRule::Constant_Constant, // radial extrapolation
+        ExtrapolationRule::Periodic, // poloidal extrapolation
+        SplineBoundaryClosures<
+                SplineRClosure, // boundary at r=0
+                SplineRClosure>, // boundary at rmax
+        SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure>>;
 
 using SplineInterpPointsR
         = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRClosure, SplineRClosure>;
@@ -150,11 +137,7 @@ void test_LogicalFootFinder_PureRotation()
     IdxRangeRTheta idx_range(r_idx_range, theta_idx_range);
     IdxRangeSpRTheta batched_idx_range(idx_range_sp, idx_range);
 
-    ddc::ConstantExtrapolationRule<R, Theta> r_min_extrap(r_min);
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrap;
-    SplineRThetaBuilder builder(idx_range);
-    ddc::ConstantExtrapolationRule<R, Theta> r_max_extrap(r_max);
-    SplineRThetaEvaluator evaluator(r_min_extrap, r_max_extrap, theta_extrap, theta_extrap);
+    SplineInterpolatorRTheta interpolator(idx_range);
 
     RK4Builder time_stepper;
 
@@ -166,9 +149,8 @@ void test_LogicalFootFinder_PureRotation()
             CircularToCartesian<R, Theta, X, Y>,
             IdxRangeSpRTheta,
             RK4Builder,
-            decltype(builder),
-            decltype(evaluator)>
-            foot_finder(time_stepper, mapping, builder, evaluator);
+            SplineInterpolatorRTheta>
+            foot_finder(time_stepper, mapping, interpolator);
 
     const double omega = 2 * M_PI;
     const double dt = 0.001;
@@ -244,11 +226,7 @@ void test_LogicalFootFinder_OPointReflection()
     IdxRangeTheta theta_idx_range(SplineInterpPointsTheta::template get_domain<GridTheta>());
     IdxRangeRTheta idx_range(r_idx_range, theta_idx_range);
 
-    ddc::ConstantExtrapolationRule<R, Theta> r_min_extrap(r_min);
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrap;
-    SplineRThetaBuilder builder(idx_range);
-    ddc::ConstantExtrapolationRule<R, Theta> r_max_extrap(r_max);
-    SplineRThetaEvaluator evaluator(r_min_extrap, r_max_extrap, theta_extrap, theta_extrap);
+    SplineInterpolatorRTheta interpolator(idx_range);
 
     RK4Builder time_stepper;
 
@@ -260,9 +238,8 @@ void test_LogicalFootFinder_OPointReflection()
             CircularToCartesian<R, Theta, X, Y>,
             IdxRangeRTheta,
             RK4Builder,
-            decltype(builder),
-            decltype(evaluator)>
-            foot_finder(time_stepper, mapping, builder, evaluator);
+            SplineInterpolatorRTheta>
+            foot_finder(time_stepper, mapping, interpolator);
 
     // Large positive A^r: foot_r = r - dt * vr < 0 for small r.
     // With r_min = 0.1, dt = 0.1, vr = 5.0: foot_r = r - 0.5 < 0 for r < 0.5.
@@ -318,11 +295,7 @@ void test_LogicalFootFinder_PureVerticalAdvection()
     IdxRangeTheta theta_idx_range(SplineInterpPointsTheta::template get_domain<GridTheta>());
     IdxRangeRTheta idx_range(r_idx_range, theta_idx_range);
 
-    ddc::ConstantExtrapolationRule<R, Theta> r_min_extrap(r_min);
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrap;
-    SplineRThetaBuilder builder(idx_range);
-    ddc::ConstantExtrapolationRule<R, Theta> r_max_extrap(r_max);
-    SplineRThetaEvaluator evaluator(r_min_extrap, r_max_extrap, theta_extrap, theta_extrap);
+    SplineInterpolatorRTheta interpolator(idx_range);
 
     RK4Builder time_stepper;
 
@@ -331,7 +304,7 @@ void test_LogicalFootFinder_PureVerticalAdvection()
 
     PolarFootFinder foot_finder = make_polar_foot_finder<
             FootFindingSpace::LOGICAL,
-            AdvectionFieldSpace::LOGICAL>(time_stepper, mapping, idx_range, builder, evaluator);
+            AdvectionFieldSpace::LOGICAL>(time_stepper, mapping, idx_range, interpolator);
 
     // Advection coefficients (dt*a_x must be > r_min to ensure a negative value appears)
     const double a_x(0.4);

@@ -13,6 +13,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "i_interpolation.hpp"
 #include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
 
@@ -33,10 +34,8 @@
  *      The batched index range over which the operator works.
  * @tparam TimeStepperBuilder
  *      The factory type for the time integration method.
- * @tparam RThetaAdvectionBuilder
- *      The spline builder for the advection field.
- * @tparam RThetaAdvectionEvaluator
- *      The spline evaluator for the advection field.
+ * @tparam RThetaAdvectionInterpolator
+ *      The interpolator for the advection field.
  */
 template <
         FootFindingSpace FFSpace,
@@ -44,8 +43,7 @@ template <
         concepts::Mapping LogicalToPhysicalMapping,
         class IdxRangeBatched,
         class TimeStepperBuilder,
-        class RThetaAdvectionBuilder,
-        class RThetaAdvectionEvaluator>
+        concepts::Interpolation RThetaAdvectionInterpolator>
 class PolarFootFinder
 {
     static_assert(
@@ -53,6 +51,10 @@ class PolarFootFinder
                     || is_analytical_mapping_v<LogicalToPhysicalMapping>,
             "It is not possible to find the foot of the characteristic in Physical space as there "
             "is no way to return to Logical space once the foot is calculated.");
+
+private:
+    using RThetaAdvectionBuilder = typename RThetaAdvectionInterpolator::BuilderType;
+    using RThetaAdvectionEvaluator = typename RThetaAdvectionInterpolator::EvaluatorType;
 
 public:
     /// The continuous radial dimension.
@@ -147,10 +149,9 @@ public:
      *      A builder for the time integration method.
      * @param[in] logical_to_physical
      *      The mapping from the logical domain to the physical domain.
-     * @param[in] builder_advection_field
-     *      The spline builder for the advection field coefficients.
-     * @param[in] evaluator_advection_field
-     *      The spline evaluator for the advection field.
+     * @param[in] interpolator_advection_field
+     *      An interpolator to build and evaluate an approximation of the
+     *      advection field.
      * @param[in] coord_centre_pc
      *      The coordinate of the polar centre in the pseudo-Cartesian domain
      *      @f$ (X_{pC}, Y_{pC}) @f$. Ignored for @c LOGICAL foot finding.
@@ -161,14 +162,13 @@ public:
     PolarFootFinder(
             TimeStepperBuilder const& time_stepper_builder,
             LogicalToPhysicalMapping const& logical_to_physical,
-            RThetaAdvectionBuilder const& builder_advection_field,
-            RThetaAdvectionEvaluator const& evaluator_advection_field,
+            RThetaAdvectionInterpolator const& interpolator_advection_field,
             Coord<X_pC, Y_pC> coord_centre_pc = Coord<X_pC, Y_pC>(0, 0),
             double epsilon = 1e-12)
         : m_time_stepper_builder(time_stepper_builder)
         , m_logical_to_physical(logical_to_physical)
-        , m_builder_advection_field(builder_advection_field)
-        , m_evaluator_advection_field(evaluator_advection_field)
+        , m_builder_advection_field(interpolator_advection_field.get_builder())
+        , m_evaluator_advection_field(interpolator_advection_field.get_evaluator())
         , m_coord_centre_pc(coord_centre_pc)
         , m_epsilon(epsilon)
     {
@@ -295,8 +295,9 @@ private:
  * @param[in] mapping       The mapping from the logical domain to the physical domain.
  * @param[in] idx_range     The batched index range over which the operator works (used only for
  *                          type deduction; its value is not forwarded to the constructor).
- * @param[in] builder       The spline builder for the advection field coefficients.
- * @param[in] evaluator     The spline evaluator for the advection field.
+ * @param[in] interpolator_advection_field
+ *                          An interpolator to build and evaluate an approximation of the
+ *                          advection field.
  * @param[in] coord_centre  The polar-centre coordinate in pseudo-Cartesian space.
  * @param[in] epsilon       Linearisation parameter near the O-point.
  */
@@ -306,14 +307,12 @@ template <
         concepts::Mapping LogicalToPhysicalMapping,
         class IdxRangeBatched,
         class TimeStepperBuilder,
-        class RThetaAdvectionBuilder,
-        class RThetaAdvectionEvaluator>
+        concepts::Interpolation RThetaAdvectionInterpolator>
 auto make_polar_foot_finder(
         TimeStepperBuilder const& time_stepper,
         LogicalToPhysicalMapping const& mapping,
         [[maybe_unused]] IdxRangeBatched const& idx_range,
-        RThetaAdvectionBuilder const& builder,
-        RThetaAdvectionEvaluator const& evaluator,
+        RThetaAdvectionInterpolator const& interpolator_advection_field,
         Coord<X_pC, Y_pC> coord_centre = Coord<X_pC, Y_pC>(0, 0),
         double epsilon = 1e-12)
 {
@@ -323,12 +322,10 @@ auto make_polar_foot_finder(
             LogicalToPhysicalMapping,
             IdxRangeBatched,
             TimeStepperBuilder,
-            RThetaAdvectionBuilder,
-            RThetaAdvectionEvaluator>(
+            RThetaAdvectionInterpolator>(
             time_stepper,
             mapping,
-            builder,
-            evaluator,
+            interpolator_advection_field,
             coord_centre,
             epsilon);
 }
