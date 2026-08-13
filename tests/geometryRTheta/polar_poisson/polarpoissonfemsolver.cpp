@@ -27,10 +27,8 @@ using Mapping = CircularToCartesian<R, Theta, X, Y>;
 #elif defined(CZARNY_MAPPING)
 using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
-using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
-        X,
-        Y,
-        SplineInterpolatorRTheta>;
+using DiscreteMappingBuilder
+        = DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta>;
 
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,

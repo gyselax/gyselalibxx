@@ -147,23 +147,16 @@ int main(int argc, char** argv)
     static_assert(false, "No mapping macro defined");
 #else
     SplineInterpolatorRThetaConst interpolator_const_host(grid);
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineInterpolatorRThetaConst_host>
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host>
             mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
                     interpolator_const_host);
     DiscretePoloidalCSSplineMapping to_physical_mapping_host = mapping_builder_host();
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineInterpolatorRThetaConst>
-            mapping_builder(
-                    Kokkos::DefaultExecutionSpace(),
-                    to_physical_analytical_mapping,
-                    interpolator_const);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst> mapping_builder(
+            Kokkos::DefaultExecutionSpace(),
+            to_physical_analytical_mapping,
+            interpolator_const);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     std::string const mapping_name = "DISCRETE";
     key += "discrete";

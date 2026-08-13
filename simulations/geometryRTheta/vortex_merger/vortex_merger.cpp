@@ -43,10 +43,8 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
-        X,
-        Y,
-        SplineInterpolatorRThetaConst>;
+using DiscreteMappingBuilder
+        = DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
