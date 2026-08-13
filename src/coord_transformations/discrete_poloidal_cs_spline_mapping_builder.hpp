@@ -16,8 +16,7 @@
  *
  * @tparam X The first Cartesian dimension.
  * @tparam Y The second Cartesian dimension.
- * @tparam SplineBuilder An operator for building spline coefficients.
- * @tparam SplineEvaluator An operator for evaluating a spline.
+ * @tparam Interpolator An spline interpolator for building and evaluating a spline.
  */
 template <class X, class Y, concepts::Interpolation Interpolator>
 class DiscretePoloidalCSSplineMappingBuilder
@@ -63,8 +62,7 @@ public:
      *
      * @param[in] exec_space The execution space where this class runs any for loops.
      * @param[in] analytical_mapping The analytical mapping to be described by this discrete mapping.
-     * @param[in] builder A spline builder to be used to create a spline approximating the analytical mapping.
-     * @param[in] evaluator A spline evaluator to be used to evaluate a spline approximating the analytical mapping.
+     * @param[in] interpolator A spline interpolator to be used to create a spline approximating the analytical mapping.
      */
     template <class Mapping>
     DiscretePoloidalCSSplineMappingBuilder(
@@ -169,8 +167,7 @@ public:
  *
  * @tparam X The first Cartesian dimension.
  * @tparam Y The second Cartesian dimension.
- * @tparam SplineBuilder An operator for building spline coefficients.
- * @tparam SplineEvaluator An operator for evaluating a spline.
+ * @tparam Interpolator An spline interpolator for building and evaluating a spline.
  * @tparam ncells_r The number of cells in the refined spline in the radial direction.
  * @tparam ncells_theta The number of cells in the refined spline in the radial direction.
  */
@@ -313,8 +310,7 @@ public:
      *
      * @param[in] exec_space The execution space where this class runs any for loops.
      * @param[in] analytical_mapping The analytical mapping to be described by this discrete mapping.
-     * @param[in] builder A spline builder to be used to create a spline approximating the analytical mapping.
-     * @param[in] evaluator A spline evaluator to be used to evaluate a spline approximating the analytical mapping.
+     * @param[in] interpolator A spline interpolator to be used to create a spline approximating the analytical mapping.
      */
     template <class Mapping>
     RefinedDiscretePoloidalCSSplineMappingBuilder(
