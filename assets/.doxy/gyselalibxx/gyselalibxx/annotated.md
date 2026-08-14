@@ -79,7 +79,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **namespace** [**GMGPolarTools**](namespaceGMGPolarTools.md)     
     * **class** [**HomogeneousDirichletBoundaryConditions**](classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.md) _Homogeneous Dirichlet boundary conditions satisfying the GMGPolar BoundaryConditions concept._     
     * **class** [**MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md) _Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry concept._     
-    * **class** [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md) _Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._     
+    * **class** [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md) _Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._     
 * **class** [**GaussLegendre**](classGaussLegendre.md) _An operator for constructing a Gauss-Legendre quadrature._     
 * **struct** [**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md) _A structure containing the weights and positions associated with a Gauss-Legendre quadrature using NPoints points._     
 * **class** [**GeometryVxVyXY**](classGeometryVxVyXY.md) _A class providing aliases for useful subindex ranges of the geometry when the data is saved with the velocity dimensions distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections._     

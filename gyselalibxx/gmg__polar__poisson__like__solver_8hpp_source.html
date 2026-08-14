@@ -577,6 +577,7 @@
 #include &lt;GMGPolar/gmgpolar.h&gt;
 
 #include "ddc_alias_inline_functions.hpp"
+#include "i_interpolation_builder.hpp"
 #include "ipolar_poisson_like_solver.hpp"
 
 namespace GMGPolarTools {
@@ -640,24 +641,21 @@ public:
     }
 };
 
-template &lt;class SplineEvaluator, class BSplinesR, class BSplinesTheta&gt;
+template &lt;class EvaluatorType, class IdxRangeCoeff, class CoordRTheta&gt;
 class PolarPoissonLikeCoefficients
 {
-    using R = typename BSplinesR::continuous_dimension_type;
-    using Theta = typename BSplinesTheta::continuous_dimension_type;
-
-    using DConstSplineRTheta = DConstField&lt;IdxRange&lt;BSplinesR, BSplinesTheta&gt;&gt;;
+    using DConstCoeffRTheta = DConstField&lt;IdxRangeCoeff&gt;;
 
 private:
-    SplineEvaluator m_evaluator;
-    DConstSplineRTheta m_coeff_alpha;
-    DConstSplineRTheta m_coeff_beta;
+    EvaluatorType m_evaluator;
+    DConstCoeffRTheta m_coeff_alpha;
+    DConstCoeffRTheta m_coeff_beta;
 
 public:
     PolarPoissonLikeCoefficients(
-            SplineEvaluator evaluator,
-            DConstSplineRTheta coeff_alpha,
-            DConstSplineRTheta coeff_beta)
+            EvaluatorType evaluator,
+            DConstCoeffRTheta coeff_alpha,
+            DConstCoeffRTheta coeff_beta)
         : m_evaluator(evaluator)
         , m_coeff_alpha(coeff_alpha)
         , m_coeff_beta(coeff_beta)
@@ -666,11 +664,11 @@ public:
 
     KOKKOS_INLINE_FUNCTION double alpha(const double&amp; r, const double&amp; theta) const
     {
-        return m_evaluator(Coord&lt;R, Theta&gt;(r, theta), m_coeff_alpha);
+        return m_evaluator(CoordRTheta(r, theta), m_coeff_alpha);
     }
     KOKKOS_INLINE_FUNCTION double beta(const double&amp; r, const double&amp; theta) const
     {
-        return m_evaluator(Coord&lt;R, Theta&gt;(r, theta), m_coeff_beta);
+        return m_evaluator(CoordRTheta(r, theta), m_coeff_beta);
     }
 
     static double getAlphaJump()
@@ -682,17 +680,13 @@ public:
 
 } // namespace GMGPolarTools
 
-template &lt;
-        class ToPhysicalMapping,
-        class GridR,
-        class GridTheta,
-        class BSplinesR,
-        class BSplinesTheta,
-        class SplineBuilder,
-        class SplineEvaluator&gt;
+template &lt;class ToPhysicalMapping, class GridR, class GridTheta, class InterpolatorType&gt;
 class GMGPolarPoissonLikeSolver
     : public IPolarPoissonLikeSolver&lt;IdxRange&lt;GridR, GridTheta&gt;, IdxRange&lt;GridR, GridTheta&gt;&gt;
 {
+    using R = typename GridR::continuous_dimension_type;
+    using Theta = typename GridTheta::continuous_dimension_type;
+
     using IdxRangeR = IdxRange&lt;GridR&gt;;
     using IdxRangeTheta = IdxRange&lt;GridTheta&gt;;
     using IdxRangeRTheta = IdxRange&lt;GridR, GridTheta&gt;;
@@ -701,19 +695,23 @@ class GMGPolarPoissonLikeSolver
     using IdxTheta = Idx&lt;GridTheta&gt;;
     using IdxStepRTheta = IdxStep&lt;GridR, GridTheta&gt;;
 
-    using SplineRThetaMem = DFieldMem&lt;IdxRange&lt;BSplinesR, BSplinesTheta&gt;&gt;;
+    using BuilderType = typename InterpolatorType::BuilderType;
+    using EvaluatorType = typename InterpolatorType::EvaluatorType;
+
+    using IdxRangeCoeff = typename InterpolationBuilderTraits&lt;BuilderType&gt;::coeff_idx_range_type;
+    using CoeffRThetaMem = DFieldMem&lt;IdxRangeCoeff&gt;;
 
     using DomainGeometry = GMGPolarTools::MappingToDomainGeometry&lt;ToPhysicalMapping&gt;;
     using DensityCoeffs = GMGPolarTools::
-            PolarPoissonLikeCoefficients&lt;SplineEvaluator, BSplinesR, BSplinesTheta&gt;;
+            PolarPoissonLikeCoefficients&lt;EvaluatorType, IdxRangeCoeff, Coord&lt;R, Theta&gt;&gt;;
 
 private:
     DomainGeometry const m_domain_geom;
-    SplineBuilder const&amp; m_builder;
-    SplineEvaluator const&amp; m_evaluator;
+    BuilderType const&amp; m_builder;
+    EvaluatorType const&amp; m_evaluator;
     ExtrapolationType const m_extrapolation_rule;
-    SplineRThetaMem m_coeff_alpha;
-    SplineRThetaMem m_coeff_beta;
+    CoeffRThetaMem m_coeff_alpha;
+    CoeffRThetaMem m_coeff_beta;
     DensityCoeffs const m_density_coeffs;
     int m_max_iterations;
     double m_absTol;
@@ -728,15 +726,14 @@ private:
 public:
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
-            SplineBuilder const&amp; builder,
-            SplineEvaluator const&amp; evaluator,
+            InterpolatorType const&amp; interpolator,
             ExtrapolationType const extrapolation_rule = ExtrapolationType::NONE,
             std::optional&lt;int&gt; max_iterations = std::nullopt,
             std::optional&lt;double&gt; absTol = std::nullopt,
             std::optional&lt;double&gt; relTol = std::nullopt)
         : m_domain_geom(to_physical)
-        , m_builder(builder)
-        , m_evaluator(evaluator)
+        , m_builder(interpolator.get_builder())
+        , m_evaluator(interpolator.get_evaluator())
         , m_extrapolation_rule(extrapolation_rule)
         , m_coeff_alpha(get_spline_idx_range(m_builder))
         , m_coeff_beta(get_spline_idx_range(m_builder))
@@ -748,7 +745,7 @@ public:
         , m_absTol(absTol.value_or(1e-10))
         , m_relTol(relTol.value_or(1e-6))
     {
-        IdxRangeRTheta idx_range(builder.interpolation_domain());
+        IdxRangeRTheta idx_range(m_builder.interpolation_domain());
         IdxRangeR idx_range_r(idx_range);
         IdxRangeTheta idx_range_theta(idx_range);
         IdxRangeTheta idx_range_theta_with_poloidal_point(

@@ -31,7 +31,7 @@
 | ---: | :--- |
 | class | [**HomogeneousDirichletBoundaryConditions**](classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.md) <br>_Homogeneous Dirichlet boundary conditions satisfying the GMGPolar BoundaryConditions concept._  |
 | class | [**MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md) &lt;class ToPhysicalMapping&gt;<br>_Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry concept._  |
-| class | [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md) &lt;class SplineEvaluator, class [**BSplinesR**](structBSplinesR.md), class [**BSplinesTheta**](structBSplinesTheta.md)&gt;<br>_Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._  |
+| class | [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md) &lt;class EvaluatorType, class IdxRangeCoeff, class CoordRTheta&gt;<br>_Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._  |
 
 
 

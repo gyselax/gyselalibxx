@@ -574,6 +574,7 @@
 <li><code>#include &lt;vector&gt;</code></li>
 <li><code>#include &lt;GMGPolar/gmgpolar.h&gt;</code></li>
 <li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
+<li><code>#include "i_interpolation_builder.hpp"</code></li>
 <li><code>#include "ipolar_poisson_like_solver.hpp"</code></li>
 </ul>
 <h2 id="namespaces">Namespaces</h2>
@@ -602,7 +603,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classGMGPolarPoissonLikeSolver.html"><strong>GMGPolarPoissonLikeSolver</strong></a> &lt;class ToPhysicalMapping, class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, class SplineBuilder, class SplineEvaluator&gt;<br><em>A Poisson-like solver using the GMGPolar multigrid library.</em></td>
+<td style="text-align: left;"><a href="classGMGPolarPoissonLikeSolver.html"><strong>GMGPolarPoissonLikeSolver</strong></a> &lt;class ToPhysicalMapping, class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class InterpolatorType&gt;<br><em>A Poisson-like solver using the GMGPolar multigrid library.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">class</td>
@@ -614,7 +615,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classGMGPolarTools_1_1PolarPoissonLikeCoefficients.html"><strong>PolarPoissonLikeCoefficients</strong></a> &lt;class SplineEvaluator, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>&gt;<br><em>Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept.</em></td>
+<td style="text-align: left;"><a href="classGMGPolarTools_1_1PolarPoissonLikeCoefficients.html"><strong>PolarPoissonLikeCoefficients</strong></a> &lt;class EvaluatorType, class IdxRangeCoeff, class CoordRTheta&gt;<br><em>Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept.</em></td>
 </tr>
 </tbody>
 </table>

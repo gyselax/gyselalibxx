@@ -2,7 +2,7 @@
 
 # Class GMGPolarTools::PolarPoissonLikeCoefficients
 
-**template &lt;class SplineEvaluator, class [**BSplinesR**](structBSplinesR.md), class [**BSplinesTheta**](structBSplinesTheta.md)&gt;**
+**template &lt;class EvaluatorType, class IdxRangeCoeff, class CoordRTheta&gt;**
 
 
 
@@ -10,7 +10,7 @@
 
 
 
-_Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._ [More...](#detailed-description)
+_Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._ [More...](#detailed-description)
 
 * `#include <gmg_polar_poisson_like_solver.hpp>`
 
@@ -54,7 +54,7 @@ _Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar Densi
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PolarPoissonLikeCoefficients**](#function-polarpoissonlikecoefficients) (SplineEvaluator evaluator, DConstSplineRTheta coeff\_alpha, DConstSplineRTheta coeff\_beta) <br>_Build the class instance._  |
+|   | [**PolarPoissonLikeCoefficients**](#function-polarpoissonlikecoefficients) (EvaluatorType evaluator, DConstCoeffRTheta coeff\_alpha, DConstCoeffRTheta coeff\_beta) <br>_Build the class instance._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**alpha**](#function-alpha) (const double & r, const double & theta) const<br>_The coefficient alpha in the Poisson-like equation._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**beta**](#function-beta) (const double & r, const double & theta) const<br>_The coefficient beta in the Poisson-like equation._  |
 
@@ -98,9 +98,7 @@ _Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar Densi
 **Template parameters:**
 
 
-* `SplineEvaluator` A 2D spline evaluator for ([**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md)). 
-* [**BSplinesR**](structBSplinesR.md) The radial B-spline type. 
-* [**BSplinesTheta**](structBSplinesTheta.md) The poloidal B-spline type. 
+* `EvaluatorType` A 2D evaluator for the representation described by IdxRangeCoeff. 
 
 
 
@@ -116,9 +114,9 @@ _Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar Densi
 _Build the class instance._ 
 ```C++
 inline GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients (
-    SplineEvaluator evaluator,
-    DConstSplineRTheta coeff_alpha,
-    DConstSplineRTheta coeff_beta
+    EvaluatorType evaluator,
+    DConstCoeffRTheta coeff_alpha,
+    DConstCoeffRTheta coeff_beta
 ) 
 ```
 

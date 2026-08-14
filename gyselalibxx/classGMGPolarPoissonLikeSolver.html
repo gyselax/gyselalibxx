@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-gmgpolarpoissonlikesolver">Class GMGPolarPoissonLikeSolver</h1>
-<p><strong>template &lt;class ToPhysicalMapping, class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, class SplineBuilder, class SplineEvaluator&gt;</strong></p>
+<p><strong>template &lt;class ToPhysicalMapping, class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class InterpolatorType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classGMGPolarPoissonLikeSolver.html"><strong>GMGPolarPoissonLikeSolver</strong></a></p>
 <p><em>A Poisson-like solver using the GMGPolar multigrid library.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -585,7 +585,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-gmgpolarpoissonlikesolver"><strong>GMGPolarPoissonLikeSolver</strong></a> (ToPhysicalMapping to_physical, SplineBuilder const &amp; builder, SplineEvaluator const &amp; evaluator, ExtrapolationType const extrapolation_rule=ExtrapolationType::NONE, std::optional&lt; int &gt; max_iterations=std::nullopt, std::optional&lt; double &gt; absTol=std::nullopt, std::optional&lt; double &gt; relTol=std::nullopt) <br><em>Construct a</em> <a href="classGMGPolarPoissonLikeSolver.html"><em><strong>GMGPolarPoissonLikeSolver</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-gmgpolarpoissonlikesolver"><strong>GMGPolarPoissonLikeSolver</strong></a> (ToPhysicalMapping to_physical, InterpolatorType const &amp; interpolator, ExtrapolationType const extrapolation_rule=ExtrapolationType::NONE, std::optional&lt; int &gt; max_iterations=std::nullopt, std::optional&lt; double &gt; absTol=std::nullopt, std::optional&lt; double &gt; relTol=std::nullopt) <br><em>Construct a</em> <a href="classGMGPolarPoissonLikeSolver.html"><em><strong>GMGPolarPoissonLikeSolver</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -604,18 +604,14 @@
 <li><code>ToPhysicalMapping</code> Mapping from (r,θ) to (x,y). </li>
 <li><a href="structGridR.html"><strong>GridR</strong></a> Discrete radial grid. </li>
 <li><a href="structGridTheta.html"><strong>GridTheta</strong></a> Discrete poloidal grid. </li>
-<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> Radial B-spline space. </li>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> Poloidal B-spline space. </li>
-<li><code>SplineBuilder</code> 2D spline builder for (<a href="structGridR.html"><strong>GridR</strong></a> × <a href="structGridTheta.html"><strong>GridTheta</strong></a>). </li>
-<li><code>SplineEvaluator</code> 2D spline evaluator for (<a href="structBSplinesR.html"><strong>BSplinesR</strong></a> × <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>). </li>
+<li><code>InterpolatorType</code> 2D interpolator for (<a href="structGridR.html"><strong>GridR</strong></a> × <a href="structGridTheta.html"><strong>GridTheta</strong></a>). </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-gmgpolarpoissonlikesolver">function GMGPolarPoissonLikeSolver</h3>
 <p><em>Construct a</em> <a href="classGMGPolarPoissonLikeSolver.html"><em><strong>GMGPolarPoissonLikeSolver</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">inline GMGPolarPoissonLikeSolver::GMGPolarPoissonLikeSolver (
     ToPhysicalMapping to_physical,
-    SplineBuilder const &amp; builder,
-    SplineEvaluator const &amp; evaluator,
+    InterpolatorType const &amp; interpolator,
     ExtrapolationType const extrapolation_rule=ExtrapolationType::NONE,
     std::optional&lt; int &gt; max_iterations=std::nullopt,
     std::optional&lt; double &gt; absTol=std::nullopt,
@@ -625,8 +621,7 @@
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>to_physical</code> The mapping from the logical to the physical domain. </li>
-<li><code>builder</code> A builder to construct the coefficients of the interpolation. </li>
-<li><code>evaluator</code> The evaluator for the interpolation. </li>
+<li><code>interpolator</code> An interpolator to construct and evaluate the coefficients of the interpolation. </li>
 <li><code>extrapolation_rule</code> A parameter to pass extrapolation rule to GMGPolar, default ExtrapolationType::NONE. </li>
 <li><code>max_iterations</code> The maximum number of iterations that the solver should carry out. </li>
 <li><code>absTol</code> The absolute tolerance for the convergence of the solver. </li>

@@ -567,9 +567,9 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-gmgpolartoolspolarpoissonlikecoefficients">Class GMGPolarTools::PolarPoissonLikeCoefficients</h1>
-<p><strong>template &lt;class SplineEvaluator, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>&gt;</strong></p>
+<p><strong>template &lt;class EvaluatorType, class IdxRangeCoeff, class CoordRTheta&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceGMGPolarTools.html"><strong>GMGPolarTools</strong></a> <strong>&gt;</strong> <a href="classGMGPolarTools_1_1PolarPoissonLikeCoefficients.html"><strong>PolarPoissonLikeCoefficients</strong></a></p>
-<p><em>Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept.</em> <a href="#detailed-description">More...</a></p>
+<p><em>Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept.</em> <a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;gmg_polar_poisson_like_solver.hpp&gt;</code></li>
 </ul>
@@ -584,7 +584,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-polarpoissonlikecoefficients"><strong>PolarPoissonLikeCoefficients</strong></a> (SplineEvaluator evaluator, DConstSplineRTheta coeff_alpha, DConstSplineRTheta coeff_beta) <br><em>Build the class instance.</em></td>
+<td style="text-align: left;"><a href="#function-polarpoissonlikecoefficients"><strong>PolarPoissonLikeCoefficients</strong></a> (EvaluatorType evaluator, DConstCoeffRTheta coeff_alpha, DConstCoeffRTheta coeff_beta) <br><em>Build the class instance.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
@@ -614,17 +614,15 @@
 <h2 id="detailed-description">Detailed Description</h2>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>SplineEvaluator</code> A 2D spline evaluator for (<a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>). </li>
-<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> The radial B-spline type. </li>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> The poloidal B-spline type. </li>
+<li><code>EvaluatorType</code> A 2D evaluator for the representation described by IdxRangeCoeff. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-polarpoissonlikecoefficients">function PolarPoissonLikeCoefficients</h3>
 <p><em>Build the class instance.</em> </p>
 <pre><code class="language-C++">inline GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients (
-    SplineEvaluator evaluator,
-    DConstSplineRTheta coeff_alpha,
-    DConstSplineRTheta coeff_beta
+    EvaluatorType evaluator,
+    DConstCoeffRTheta coeff_alpha,
+    DConstCoeffRTheta coeff_beta
 ) 
 </code></pre>
 <hr>

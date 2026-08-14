@@ -1400,33 +1400,38 @@
   <compound refid="structCollisionsIntra_1_1GhostedVxStaggered" kind="struct"><name>CollisionsIntra::GhostedVxStaggered</name>
   </compound>
   <compound refid="classGMGPolarPoissonLikeSolver" kind="class"><name>GMGPolarPoissonLikeSolver</name>
-    <member refid="classGMGPolarPoissonLikeSolver_1a052c2a4282ed84e3d104e5e0cef8973b" kind="typedef"><name>IdxRangeR</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a3905ff21c1c159056ef6200cfda0cc75" kind="typedef"><name>IdxRangeTheta</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1afa2cecfd14886819581c7dd2f786f368" kind="typedef"><name>IdxRangeRTheta</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a3a8742b4f2aa7776a0cf09fdf1b45f6a" kind="typedef"><name>IdxRTheta</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a9368395b5c86eb23164056a88aa14e72" kind="typedef"><name>IdxR</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a0fea483ce3fcd8ecf43f8c0b3b39fda8" kind="typedef"><name>IdxTheta</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a70a97d1faea2fd6540421643906b31ee" kind="typedef"><name>IdxStepRTheta</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a00fca05890b809bf73c1b6346f2422e6" kind="typedef"><name>SplineRThetaMem</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a82cc8fe1761227ae7f0966c43d95f014" kind="typedef"><name>DomainGeometry</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a02bb87c4ec5e14a1b1d6fe15fdb28389" kind="typedef"><name>DensityCoeffs</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a73a92e8bad009795f840be6576540096" kind="variable"><name>m_domain_geom</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a66c711dd2c2a659be61ad156eb30b248" kind="variable"><name>m_builder</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a8cbd778c27deaf40c6481a3a3ec6ef72" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1aa685c6843479b2e0711d3b6f38a111cd" kind="variable"><name>m_extrapolation_rule</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1abfea96b98d0ec624cb52108f915addf0" kind="variable"><name>m_coeff_alpha</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1afcc06a38e11f5778f2b959514e6d9ebe" kind="variable"><name>m_coeff_beta</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a0e38704eeeba2c93c5614bef2e475708" kind="variable"><name>m_density_coeffs</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a4859c418b40e5cfef6111d51763c893a" kind="variable"><name>m_max_iterations</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1ae43ee21bc1e07d1deb09fa04ec46170c" kind="variable"><name>m_absTol</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a4d7dd0293e5261b94c9c8721f137fdfa" kind="variable"><name>m_relTol</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a2262f2f80936472ec79baeb6942d2673" kind="variable"><name>m_r_coords</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1ae5486eec02b15dbc6fbd1b0c287578ac" kind="variable"><name>m_theta_coords</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1ac1268ca800425f22c573f7c2a2713b31" kind="variable"><name>m_polar_grid</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1ae3143b7aa065495ff684aa77bc00a50c" kind="variable"><name>m_solver</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1ab1d9f251e68cc5d3440a135cf2fa83b1" kind="function"><name>GMGPolarPoissonLikeSolver</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a56cac7c4dd9d79beaa9f0f02fd5f490f" kind="function"><name>update_coefficients</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1aa80ab58a29baf81116ecd830853898db" kind="function"><name>operator()</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a0b2a5d0ea937aec049dc0159872c6f52" kind="typedef"><name>R</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ab94b187f7b310acbd6d8d6b770744200" kind="typedef"><name>Theta</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1abbb0d844eee1d1aa68f37ff89a9a1e8d" kind="typedef"><name>IdxRangeR</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ad099c27578a5b8e1a1de953242a21c39" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a920e7cc9a397ec09e830740db0baf074" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1aacdec78a14f8c478aa1e5a0f113ea22b" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a1df5f401e57ab0fa5aa785c0fe883513" kind="typedef"><name>IdxR</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a87931b596e01b5f9a23be579c822308c" kind="typedef"><name>IdxTheta</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a59df4943dc128f0c06f0e2e13a46e5d8" kind="typedef"><name>IdxStepRTheta</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a8daa486e8cff8ac732cde5607e335913" kind="typedef"><name>BuilderType</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1addab7f262a7d65780580b8981f11cbee" kind="typedef"><name>EvaluatorType</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a8862f74158c62522b27f9e801e3a73eb" kind="typedef"><name>IdxRangeCoeff</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1aefba5c483cbcbcda040b5ee7485745f9" kind="typedef"><name>CoeffRThetaMem</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ad298f92f351baa0711e99f678dd99b35" kind="typedef"><name>DomainGeometry</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a468f96c08a764e06fc295e8b663b8795" kind="typedef"><name>DensityCoeffs</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a341b29516699e856b3ff18c35b27fd7b" kind="variable"><name>m_domain_geom</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ace143092923f35c3f008413a318fc554" kind="variable"><name>m_builder</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a896b581c4fc21ef7dae12f85fb6592de" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a98cdd46ed525c8fd001ad1da64866475" kind="variable"><name>m_extrapolation_rule</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a98805a24259b6dc4509417a80c9d0ed2" kind="variable"><name>m_coeff_alpha</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1aed53d97c96f4125d600da248895e9264" kind="variable"><name>m_coeff_beta</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1aca709ab30f6e061c1359798547e900c7" kind="variable"><name>m_density_coeffs</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a0537ce97333a8173b46dc2dab4360299" kind="variable"><name>m_max_iterations</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a5c57978fba47f8634b8ee72532c04579" kind="variable"><name>m_absTol</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a51e793697ce0a7173ef799148dfc3200" kind="variable"><name>m_relTol</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ab2cd837250c820a015be81dd8c5956b2" kind="variable"><name>m_r_coords</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a2bc2f8a4d5c12b11522eb917621308c8" kind="variable"><name>m_theta_coords</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1aaf42102fd0be15ea54c603c9e50809e6" kind="variable"><name>m_polar_grid</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a35ffc1d238cd81fdaa3663299e029ae9" kind="variable"><name>m_solver</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a269ec7b32063ca934e3367ce0898dc65" kind="function"><name>GMGPolarPoissonLikeSolver</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1aaec5587323f33ba65b5c98306d956405" kind="function"><name>update_coefficients</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1a8e427487c840bf9f5b043fbd1ce16774" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classGradient" kind="class"><name>Gradient</name>
     <member refid="classGradient_1a64e4e9fca6da517e2146ac091ed82fdc" kind="typedef"><name>CoordArg</name></member>
@@ -2813,16 +2818,14 @@
     <member refid="classPolarFootFinder_1af0114b414c6f2fc1115aa49d03afb9e6" kind="function"><name>build_elementwise</name></member>
   </compound>
   <compound refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients" kind="class"><name>GMGPolarTools::PolarPoissonLikeCoefficients</name>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ae91b3a53c82f0b3353f84e0d4b7ac3fc" kind="typedef"><name>R</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a3721349faae6f81bc7d4ba7d0c9de481" kind="typedef"><name>Theta</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1aebf6b2b772fd69e98550099343691771" kind="typedef"><name>DConstSplineRTheta</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a5bd8168356bc824baebf933304c54447" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a3a3398fe981bfd6a390508bfe482375a" kind="variable"><name>m_coeff_alpha</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1abacb0369f025f4b016133ac17c533c00" kind="variable"><name>m_coeff_beta</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a63e76f61a3d1b38dbb6b7ee8d7ae6d3a" kind="function"><name>PolarPoissonLikeCoefficients</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a88ff440d1fa1c1e884d313fa9feae28c" kind="function"><name>alpha</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a648ee6175857862138687a920a008a56" kind="function"><name>beta</name></member>
-    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a1516c90168d08b7021dd960dae8d0ce4" kind="function"><name>getAlphaJump</name></member>
+    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a37c0f4607677f7ca5e7821b07af09a43" kind="typedef"><name>DConstCoeffRTheta</name></member>
+    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a86441ebfd234a0b9ef55c20d515f0072" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1aaa0598e31eddfda207a5254b4c4cb969" kind="variable"><name>m_coeff_alpha</name></member>
+    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a6a0233ea6d7ea6b2286229bd277b5830" kind="variable"><name>m_coeff_beta</name></member>
+    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a1cfbec82259268fb109bc5d93095751c" kind="function"><name>PolarPoissonLikeCoefficients</name></member>
+    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a58499d1570d08099280af540130fac18" kind="function"><name>alpha</name></member>
+    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a8e7a346970719f8647867d7d0f4c88fe" kind="function"><name>beta</name></member>
+    <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a94e8e258844038a7129205f55fca6920" kind="function"><name>getAlphaJump</name></member>
   </compound>
   <compound refid="classPolarSplineEvaluator" kind="class"><name>PolarSplineEvaluator</name>
     <member refid="classPolarSplineEvaluator_1aa25e933b4a8eddf839133cd51f871eb2" kind="typedef"><name>bsplines_type</name></member>
