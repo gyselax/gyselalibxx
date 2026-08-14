@@ -304,6 +304,8 @@ public:
             return r
                    * (-m_e * m_epsilon * r * sin_theta * sin_theta * xi / (tmp2 * tmp2 * tmp1)
                       + m_e * cos_theta * xi / tmp2);
+        } else {
+            static_assert(false, "Unexpected tags provided");
         }
     }
 
