@@ -20,7 +20,7 @@
 /**
  * @brief Operator for finding the feet of the characteristics on a polar slice.
  *
- * Calculates the interplation representation of the advection field and uses it together
+ * Calculates the interpolation representation of the advection field and uses it together
  * with a time-stepping method to solve the characteristic equation. The space in
  * which the advection field is expressed and the space in which foot-finding is
  * performed are selected at compile time via @p FFSpace and @p AFSpace.
