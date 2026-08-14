@@ -20,7 +20,7 @@
 /**
  * @brief Operator for finding the feet of the characteristics on a polar slice.
  *
- * Calculates the spline representation of the advection field and uses it together
+ * Calculates the interplation representation of the advection field and uses it together
  * with a time-stepping method to solve the characteristic equation. The space in
  * which the advection field is expressed and the space in which foot-finding is
  * performed are selected at compile time via @p FFSpace and @p AFSpace.
@@ -169,7 +169,7 @@ public:
     /**
      * @brief Get an elementwise operator capable of calculating the feet of the characteristics.
      *
-     * Computes the spline coefficients of the advection field, then packages them together
+     * Computes the interpolation coefficients of the advection field, then packages them together
      * with the mappings and time stepper into an @ref ElementwiseOperator. Calling
      * @c operator()(dt) on the returned object yields a GPU-copyable functor.
      *
@@ -182,7 +182,7 @@ public:
                     advection_field) const
     {
         AdvecCoefField advection_field_coefs(
-                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
+                batched_basis_idx_range(m_builder_advection_field, get_idx_range(advection_field)));
         m_builder_advection_field(
                 ddcHelper::get<AdvDim1>(advection_field_coefs),
                 ddcHelper::get<AdvDim1>(get_const_field(advection_field)));
@@ -196,7 +196,7 @@ public:
     /**
      * @brief Advect the feet over @f$ dt @f$.
      *
-     * Computes the spline coefficients of the advection field, solves the characteristic
+     * Computes the coefficients of the advection field, solves the characteristic
      * equation over @f$ dt @f$ at every grid point, and writes the resulting feet in-place.
      *
      * @param[in, out] feet
@@ -213,7 +213,7 @@ public:
             double dt) const
     {
         AdvecCoefField advection_field_coefs(
-                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
+                batched_basis_idx_range(m_builder_advection_field, get_idx_range(advection_field)));
         m_builder_advection_field(
                 ddcHelper::get<AdvDim1>(advection_field_coefs),
                 ddcHelper::get<AdvDim1>(get_const_field(advection_field)));
