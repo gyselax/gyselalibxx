@@ -180,7 +180,7 @@ class GMGPolarPoissonLikeSolver
 
 private:
     DomainGeometry const m_domain_geom;
-    ExtrapolationType const m_extrapolation_rule;
+    gmgpolar::ExtrapolationType const m_extrapolation_rule;
     DensityCoeffs m_density_coeffs;
     int m_max_iterations;
     double m_absTol;
@@ -198,7 +198,7 @@ public:
      *
      * @param[in] to_physical The mapping from the logical to the physical domain.
      * @param[in] interpolator An interpolator to construct and evaluate the coefficients of the interpolation.
-     * @param[in] extrapolation_rule A parameter to pass extrapolation rule to GMGPolar, default ExtrapolationType::NONE.
+     * @param[in] extrapolation_rule A parameter to pass extrapolation rule to GMGPolar, default gmgpolar::ExtrapolationType::NONE.
      * @param[in] max_iterations The maximum number of iterations that the solver should carry out.
      * @param[in] absTol The absolute tolerance for the convergence of the solver.
      * @param[in] relTol The relative tolerance for the convergence of the solver.
@@ -206,7 +206,7 @@ public:
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
             InterpolatorType const& interpolator,
-            ExtrapolationType const extrapolation_rule = ExtrapolationType::NONE,
+            gmgpolar::ExtrapolationType const extrapolation_rule = gmgpolar::ExtrapolationType::NONE,
             std::optional<int> max_iterations = std::nullopt,
             std::optional<double> absTol = std::nullopt,
             std::optional<double> relTol = std::nullopt)
