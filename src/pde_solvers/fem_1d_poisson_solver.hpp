@@ -23,11 +23,12 @@
  */
 template <
         class SplineInterpolatorType,
-        class IdxRangeBatched =
-                typename SplineInterpolatorType::BuilderType::interpolation_domain_type>
+        class IdxRangeBatched = typename InterpolationBuilderTraits<
+                typename SplineInterpolatorType::BuilderType>::interpolation_idx_range_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
-              typename SplineInterpolatorType::EvaluatorType::evaluation_domain_type,
+              typename InterpolationEvaluatorTraits<
+                      typename SplineInterpolatorType::EvaluatorType>::evaluation_idx_range_type,
               IdxRangeBatched,
               double,
               typename SplineInterpolatorType::EvaluatorType::memory_space,
@@ -46,9 +47,9 @@ private:
 
 private:
     /// The interpolation mesh type
-    using GridPDEDim = typename SplineBuilder::interpolation_discrete_dimension_type;
+    using GridPDEDim = typename InterpolationBuilderTraits<SplineBuilder>::interpolation_grid_type;
 
-    using InputBSplines = typename SplineBuilder::bsplines_type;
+    using InputBSplines = typename InterpolationBuilderTraits<SplineBuilder>::basis_domain_type;
 
     using PDEDim = typename GridPDEDim::continuous_dimension_type;
 

@@ -81,8 +81,8 @@ public:
     using AdvDim2 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta>;
 
 private:
-    using PolarGrid
-            = ddc::to_type_seq_t<typename RThetaAdvectionBuilder::interpolation_domain_type>;
+    using PolarGrid = ddc::to_type_seq_t<typename InterpolationBuilderTraits<
+            RThetaAdvectionBuilder>::interpolation_idx_range_type>;
     using GridR = find_grid_t<R, PolarGrid>;
     using GridTheta = find_grid_t<Theta, PolarGrid>;
 
