@@ -36,8 +36,8 @@ private:
     using R_cov = typename R::Dual;
     using Z = std::conditional_t<
             CurvilinearDim1::IS_COVARIANT && CurvilinearDim1::IS_CONTRAVARIANT,
-            CurvilinearDim2,
-            CurvilinearDim1>;
+            CurvilinearDim1,
+            CurvilinearDim2>;
     using Z_cov = typename Z::Dual;
     using Zeta_cov = typename Zeta::Dual;
     using Rho = typename CoordWithOPoint<

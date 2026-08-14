@@ -142,6 +142,8 @@ struct CoordWithOPoint<Coord<Dim1, Dim2>>
     using curvilinear_tag_r = std::conditional_t<Dim1::PERIODIC, Dim2, Dim1>;
     /// Poloidal tag
     using curvilinear_tag_theta = std::conditional_t<Dim1::PERIODIC, Dim1, Dim2>;
+    static_assert(!curvilinear_tag_r::PERIODIC);
+    static_assert(curvilinear_tag_theta::PERIODIC);
 };
 
 template <class ExecSpace, class Type>
