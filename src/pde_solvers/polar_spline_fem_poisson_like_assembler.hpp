@@ -507,17 +507,17 @@ public:
      *
      * @param[out] gko_matrix The pointer to the assembled matrix.
      * @param[in] coeff_alpha
-     *      A callable object with signature `double operator()(CoordRTheta)` returning the
-     *      value of @f$ \alpha @f$ at the given coordinate.
+     *      A callable object with signature `double operator()(IdxBatch, CoordRTheta)`
+     *      returning the value of @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable object with signature `double operator()(CoordRTheta)` returning the
-     *      value of @f$ \beta @f$ at the given coordinate.
+     *      A callable object with signature `double operator()(IdxBatch, CoordRTheta)`
+     *      returning the value of @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      *
-     * @tparam CoeffAlpha A callable type for evaluating @f$ \alpha @f$ at a coordinate.
-     * @tparam CoeffBeta A callable type for evaluating @f$ \beta @f$ at a coordinate.
+     * @tparam CoeffAlpha A callable type for evaluating @f$ \alpha @f$ at a batch and coordinate.
+     * @tparam CoeffBeta A callable type for evaluating @f$ \beta @f$ at a batch and coordinate.
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
     template <class CoeffAlpha, class CoeffBeta, class Mapping>
@@ -525,14 +525,12 @@ public:
             std::unique_ptr<
                     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>> const&
                     gko_matrix,
-            ConstSplineBatched2D coeff_alpha,
-            ConstSplineBatched2D coeff_beta,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping)
     {
         //CSR data storage
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
-
-        assert(get_idx_range<detail_poisson::BatchDDim>(coeff_alpha).size() == values.extent(0));
 
         compute_singular_singular_elements(
                 coeff_alpha,
@@ -775,9 +773,11 @@ public:
      * basis functions and singular basis functions.
      *
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -790,8 +790,8 @@ public:
      */
     template <class CoeffAlpha, class CoeffBeta, class Mapping>
     void compute_singular_singular_elements(
-            ConstSplineBatched2D coeff_alpha,
-            ConstSplineBatched2D coeff_beta,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
@@ -844,8 +844,9 @@ public:
                                         idx_test,
                                         idx_trial,
                                         idx_quad,
-                                        coeff_alpha[IdxBatch {idx_batch}],
-                                        coeff_beta[IdxBatch {idx_batch}],
+                                        IdxBatch {idx_batch},
+                                        coeff_alpha,
+                                        coeff_beta,
                                         mapping,
                                         int_volume_proxy);
                             },
@@ -861,9 +862,11 @@ public:
      * basis functions and tensor basis functions.
      *
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -876,8 +879,8 @@ public:
      */
     template <class CoeffAlpha, class CoeffBeta, class Mapping>
     void compute_singular_tensor_elements(
-            ConstSplineBatched2D coeff_alpha,
-            ConstSplineBatched2D coeff_beta,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
@@ -982,8 +985,9 @@ public:
                                         idx_test,
                                         idx_trial_polar,
                                         idx_quad,
-                                        coeff_alpha[IdxBatch {idx_batch}],
-                                        coeff_beta[IdxBatch {idx_batch}],
+                                        IdxBatch {idx_batch},
+                                        coeff_alpha,
+                                        coeff_beta,
                                         mapping,
                                         int_volume_proxy);
                             },
@@ -1004,9 +1008,11 @@ public:
      * basis functions and tensor basis functions.
      *
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -1019,8 +1025,8 @@ public:
      */
     template <class CoeffAlpha, class CoeffBeta, class Mapping>
     void compute_tensor_tensor_elements(
-            ConstSplineBatched2D coeff_alpha,
-            ConstSplineBatched2D coeff_beta,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
@@ -1082,8 +1088,9 @@ public:
                                 team,
                                 idx_test,
                                 idx_trial,
-                                coeff_alpha[IdxBatch {idx_batch}],
-                                coeff_beta[IdxBatch {idx_batch}],
+                                IdxBatch {idx_batch},
+                                coeff_alpha,
+                                coeff_beta,
                                 mapping,
                                 full_quad_idx_range,
                                 int_volume_proxy);
@@ -1108,10 +1115,14 @@ public:
      *      The index of the trial basis spline.
      * @param[in] idx_quad
      *      The index for the point in the quadrature scheme.
+     * @param[in] idx_batch
+     *      The index of the batch for which the element is being calculated.
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -1124,6 +1135,7 @@ public:
             IdxBSPolar idx_test,
             IdxBSPolar idx_trial,
             IdxQuadratureRTheta idx_quad,
+            IdxBatch idx_batch,
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
             Mapping const& mapping,
@@ -1131,8 +1143,8 @@ public:
     {
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
-        const double alpha = coeff_alpha(coord);
-        const double beta = coeff_beta(coord);
+        const double alpha = coeff_alpha(idx_batch, coord);
+        const double beta = coeff_beta(idx_batch, coord);
 
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
@@ -1172,10 +1184,14 @@ public:
      *      The index for polar B-spline in the test space.
      * @param[in] idx_trial
      *      The index for polar B-spline in the trial space.
+     * @param[in] idx_batch
+     *      The index of the batch for which the element is being calculated.
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -1193,6 +1209,7 @@ public:
             const Kokkos::TeamPolicy<>::member_type& team,
             IdxBSRTheta idx_test,
             IdxBSRTheta idx_trial,
+            IdxBatch idx_batch,
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
             Mapping const& mapping,
@@ -1274,6 +1291,7 @@ public:
                             idx_test_polar,
                             idx_trial_polar,
                             idx_quad,
+                            idx_batch,
                             coeff_alpha,
                             coeff_beta,
                             mapping,
