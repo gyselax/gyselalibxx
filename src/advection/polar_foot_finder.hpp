@@ -86,14 +86,8 @@ private:
     using GridR = find_grid_t<R, PolarGrid>;
     using GridTheta = find_grid_t<Theta, PolarGrid>;
 
-    using BSplinesR = typename RThetaAdvectionBuilder::bsplines_type1;
-    using BSplinesTheta = typename RThetaAdvectionBuilder::bsplines_type2;
-
-    using IdxRangeSplineBatched
-            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
-                    ddc::to_type_seq_t<IdxRangeBatched>,
-                    ddc::detail::TypeSeq<GridR, GridTheta>,
-                    ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
+    using IdxRangeCoeffBatched = typename InterpolationBuilderTraits<
+            RThetaAdvectionBuilder>::batched_basis_idx_range_type<IdxRangeBatched>;
 
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatched, GridR, GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
@@ -106,10 +100,8 @@ private:
 
     using CoordRTheta = Coord<R, Theta>;
 
-    using AdvecCoefField = DVectorFieldMem<
-            IdxRangeSplineBatched,
-            VectorIndexSet<AdvDim1, AdvDim2>,
-            memory_space>;
+    using AdvecCoefField
+            = DVectorFieldMem<IdxRangeCoeffBatched, VectorIndexSet<AdvDim1, AdvDim2>, memory_space>;
 
 public:
     /// The operator returned by operator() which calculates the feet elementwise.
