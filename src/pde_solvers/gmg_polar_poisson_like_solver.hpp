@@ -92,40 +92,45 @@ public:
  * @tparam BSplinesR The radial B-spline type.
  * @tparam BSplinesTheta The poloidal B-spline type.
  */
-template <class SplineEvaluator, class BSplinesR, class BSplinesTheta>
 class PolarPoissonLikeCoefficients
 {
-    using R = typename BSplinesR::continuous_dimension_type;
-    using Theta = typename BSplinesTheta::continuous_dimension_type;
-
-    using DConstSplineRTheta = DConstField<IdxRange<BSplinesR, BSplinesTheta>>;
+    using SpanType = Kokkos::
+            View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space>;
+    using ViewType = Kokkos::
+            View<const double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space>;
 
 private:
-    SplineEvaluator m_evaluator;
-    DConstSplineRTheta m_coeff_alpha;
-    DConstSplineRTheta m_coeff_beta;
+    SpanType m_alpha;
+    SpanType m_beta;
 
 public:
     /// Build the class instance
-    PolarPoissonLikeCoefficients(
-            SplineEvaluator evaluator,
-            DConstSplineRTheta coeff_alpha,
-            DConstSplineRTheta coeff_beta)
-        : m_evaluator(evaluator)
-        , m_coeff_alpha(coeff_alpha)
-        , m_coeff_beta(coeff_beta)
+    PolarPoissonLikeCoefficients(int nr, int ntheta)
+        : m_alpha("alpha", nr, ntheta)
+        , m_beta("beta", nr, ntheta)
     {
     }
 
-    /// The coefficient alpha in the Poisson-like equation
-    KOKKOS_INLINE_FUNCTION double alpha(const double& r, const double& theta) const
+    /**
+     * @brief Rebuild the internal representations of α and β from grid values.
+     * @param[in] alpha Values of α at the grid interpolation points.
+     * @param[in] beta  Values of β at the grid interpolation points.
+     */
+    void update_coefficients(ViewType alpha, ViewType beta)
     {
-        return m_evaluator(Coord<R, Theta>(r, theta), m_coeff_alpha);
+        Kokkos::deep_copy(m_alpha, alpha);
+        Kokkos::deep_copy(m_beta, beta);
+    }
+
+    /// The coefficient alpha in the Poisson-like equation
+    KOKKOS_INLINE_FUNCTION double alpha(int i_r, int i_theta) const
+    {
+        return m_alpha(i_r, i_theta);
     }
     /// The coefficient beta in the Poisson-like equation
-    KOKKOS_INLINE_FUNCTION double beta(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double beta(int i_r, int i_theta) const
     {
-        return m_evaluator(Coord<R, Theta>(r, theta), m_coeff_beta);
+        return m_beta(i_r, i_theta);
     }
 
     /// Required for the concept, only used in custom mesh generation (refinement_radius); not needed here.
@@ -135,6 +140,7 @@ public:
         return 0.0;
     }
 };
+
 
 } // namespace GMGPolarTools
 
@@ -174,17 +180,12 @@ class GMGPolarPoissonLikeSolver
     using SplineRThetaMem = DFieldMem<IdxRange<BSplinesR, BSplinesTheta>>;
 
     using DomainGeometry = GMGPolarTools::MappingToDomainGeometry<ToPhysicalMapping>;
-    using DensityCoeffs = GMGPolarTools::
-            PolarPoissonLikeCoefficients<SplineEvaluator, BSplinesR, BSplinesTheta>;
+    using DensityCoeffs = GMGPolarTools::PolarPoissonLikeCoefficients;
 
 private:
     DomainGeometry const m_domain_geom;
-    SplineBuilder const& m_builder;
-    SplineEvaluator const& m_evaluator;
     ExtrapolationType const m_extrapolation_rule;
-    SplineRThetaMem m_coeff_alpha;
-    SplineRThetaMem m_coeff_beta;
-    DensityCoeffs const m_density_coeffs;
+    DensityCoeffs m_density_coeffs;
     int m_max_iterations;
     double m_absTol;
     double m_relTol;
@@ -216,15 +217,10 @@ public:
             std::optional<double> absTol = std::nullopt,
             std::optional<double> relTol = std::nullopt)
         : m_domain_geom(to_physical)
-        , m_builder(builder)
-        , m_evaluator(evaluator)
         , m_extrapolation_rule(extrapolation_rule)
-        , m_coeff_alpha(get_spline_idx_range(m_builder))
-        , m_coeff_beta(get_spline_idx_range(m_builder))
         , m_density_coeffs(
-                  m_evaluator,
-                  get_const_field(m_coeff_alpha),
-                  get_const_field(m_coeff_beta))
+                  IdxRangeR(builder.interpolation_domain()).size(),
+                  IdxRangeTheta(builder.interpolation_domain()).size())
         , m_max_iterations(max_iterations.value_or(100))
         , m_absTol(absTol.value_or(1e-10))
         , m_relTol(relTol.value_or(1e-6))
@@ -247,15 +243,15 @@ public:
     }
 
     /**
-     * @brief Rebuild the internal spline representations of α and β from grid values.
+     * @brief Rebuild the internal representations of α and β from grid values.
      * @param[in] alpha Values of α at the grid interpolation points.
      * @param[in] beta  Values of β at the grid interpolation points.
      */
     void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
             override
     {
-        m_builder(get_field(m_coeff_alpha), get_const_field(alpha));
-        m_builder(get_field(m_coeff_beta), get_const_field(beta));
+        m_density_coeffs
+                .update_coefficients(alpha.allocation_kokkos_view(), beta.allocation_kokkos_view());
 
         // --- Create GMGPolar solver for the selected geometry and coefficients --- //
         m_solver = std::make_unique<gmgpolar::GMGPolar<
