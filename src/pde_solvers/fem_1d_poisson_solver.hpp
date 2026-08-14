@@ -8,6 +8,7 @@
 #include "ddc_helper.hpp"
 #include "gauss_legendre_integration.hpp"
 #include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "ipoisson_solver.hpp"
 #include "matrix.hpp"
 
@@ -40,7 +41,8 @@ private:
     using SplineEvaluator = typename SplineInterpolatorType::EvaluatorType;
 
     using base_type = IPoissonSolver<
-            typename SplineEvaluator::evaluation_domain_type,
+            typename InterpolationEvaluatorTraits<
+                    typename SplineInterpolatorType::EvaluatorType>::evaluation_idx_range_type,
             IdxRangeBatched,
             double,
             typename SplineEvaluator::memory_space,
@@ -50,7 +52,10 @@ private:
     /// The interpolation mesh type
     using GridPDEDim = typename InterpolationBuilderTraits<SplineBuilder>::interpolation_grid_type;
 
-    using InputBSplines = typename InterpolationBuilderTraits<SplineBuilder>::basis_domain_type;
+    using InputBSplines = ddc::type_seq_element_t<
+            0,
+            ddc::to_type_seq_t<
+                    typename InterpolationBuilderTraits<SplineBuilder>::coeff_idx_range_type>>;
 
     using PDEDim = typename GridPDEDim::continuous_dimension_type;
 
