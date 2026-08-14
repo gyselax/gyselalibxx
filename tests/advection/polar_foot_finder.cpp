@@ -170,8 +170,12 @@ struct PolarAdvectionFixture<std::tuple<TimeStepperBuilderType, Mappings, Advect
 template <class LogicalToOtherMapping>
 LogicalToOtherMapping init_mapping()
 {
-    using OtherX = typename LogicalToOtherMapping::cartesian_tag_x;
-    using OtherY = typename LogicalToOtherMapping::cartesian_tag_y;
+    using OtherX = ddc::type_seq_element_t<
+            0,
+            ddc::to_type_seq_t<typename LogicalToOtherMapping::CoordResult>>;
+    using OtherY = ddc::type_seq_element_t<
+            1,
+            ddc::to_type_seq_t<typename LogicalToOtherMapping::CoordResult>>;
     // At x0,y0 to match rotation centre
     Coord<OtherX, OtherY> origin_point(0.0, 0.0);
     if constexpr (std::is_same_v<

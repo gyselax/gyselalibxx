@@ -30,8 +30,12 @@ public:
     static_assert(is_coord_transform_with_o_point_v<CurvilinearToCartesian>);
 
 private:
-    using X = typename CurvilinearToCartesian::cartesian_tag_x;
-    using Y = typename CurvilinearToCartesian::cartesian_tag_y;
+    using X = ddc::type_seq_element_t<
+            0,
+            ddc::to_type_seq_t<typename CurvilinearToCartesian::CoordResult>>;
+    using Y = ddc::type_seq_element_t<
+            1,
+            ddc::to_type_seq_t<typename CurvilinearToCartesian::CoordResult>>;
     using R = typename CurvilinearToCartesian::curvilinear_tag_r;
     using Theta = typename CurvilinearToCartesian::curvilinear_tag_theta;
 
