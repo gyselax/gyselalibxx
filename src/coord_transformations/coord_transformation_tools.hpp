@@ -134,10 +134,13 @@ struct SingularOPointInvJacobian : std::false_type
 template <class CoordType>
 struct CurvilinearCoord;
 
+/// A class to identify the radial and poloidal components of a 2D cuvilinear coordinate.
 template <class Dim1, class Dim2>
 struct CurvilinearCoord<Coord<Dim1, Dim2>>
 {
+    /// Radial tag
     using curvilinear_tag_r = std::conditional_t<Dim1::PERIODIC, Dim2, Dim1>;
+    /// Poloidal tag
     using curvilinear_tag_theta = std::conditional_t<Dim1::PERIODIC, Dim1, Dim2>;
 };
 
