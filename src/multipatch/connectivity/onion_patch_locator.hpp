@@ -70,8 +70,7 @@ class OnionPatchLocator<
 {
     static_assert(is_coord_transform_with_o_point_v<LogicalToPhysicalMapping>);
 
-    using X = typename LogicalToPhysicalMapping::cartesian_tag_x;
-    using Y = typename LogicalToPhysicalMapping::cartesian_tag_y;
+    using CoordXY = typename PhysicalToLogicalMapping::CoordArg;
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
     using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
 
@@ -99,7 +98,7 @@ private:
     static constexpr std::size_t n_patches = ddc::type_seq_size_v<PatchOrdering>;
 
     static_assert(
-            std::is_invocable_r_v<Coord<R, Theta>, PhysicalToLogicalMapping, Coord<X, Y>>,
+            std::is_invocable_r_v<Coord<R, Theta>, PhysicalToLogicalMapping, CoordXY>,
             "The mapping has to contain an operator from the physical domain to the logical "
             "domain.");
     static_assert(
@@ -154,7 +153,7 @@ public:
      * @return [int] The patch index where the physical coordinate. If the coordinate
      *              is outside of the domain, it returns a negative value.
      */
-    KOKKOS_INLINE_FUNCTION int operator()(Coord<X, Y> const coord) const
+    KOKKOS_INLINE_FUNCTION int operator()(CoordXY const coord) const
     {
         int patch_index_min = 0;
         int patch_index_max = n_patches - 1;
