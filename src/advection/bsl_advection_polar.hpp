@@ -4,6 +4,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "i_interpolation.hpp"
+#include "i_interpolation_builder.hpp"
 #include "indexed_tensor.hpp"
 #include "l_norm_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
