@@ -41,7 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `SplineInterpolator` and `LagrangeInterpolator` to specify custom extrapolation rules.
 - Allow `IdentityInterpolationBuilder` class to take a field on a strided layout.
 - Add a `DiscreteMapping` class to handle ND mappings whose values are only known at the mesh points of a grid.
-- Add a `CurvilinearCoord` class to recognise radial and poloidal components of a 2D coordinate.
+- Add a `CoordWithOPoint` class to recognise radial and poloidal components of a 2D coordinate.
 
 ### Fixed
 

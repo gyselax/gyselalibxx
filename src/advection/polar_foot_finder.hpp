@@ -59,10 +59,10 @@ private:
 
 public:
     /// The continuous radial dimension.
-    using R = CurvilinearCoord<typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
+    using R = CoordWithOPoint<typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
     /// The continuous poloidal dimension.
     using Theta
-            = CurvilinearCoord<typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
+            = CoordWithOPoint<typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
 
     /// The memory space where fields are stored (e.g. @c Kokkos::HostSpace or a GPU space).
     using memory_space = typename RThetaAdvectionBuilder::memory_space;

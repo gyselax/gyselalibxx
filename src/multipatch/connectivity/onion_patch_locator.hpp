@@ -71,8 +71,8 @@ class OnionPatchLocator<
     static_assert(is_coord_transform_with_o_point_v<LogicalToPhysicalMapping>);
 
     using CoordXY = typename PhysicalToLogicalMapping::CoordArg;
-    using R = CurvilinearCoord<typename PhysicalToLogicalMapping::CoordResult>::curvilinear_tag_r;
-    using Theta = CurvilinearCoord<
+    using R = CoordWithOPoint<typename PhysicalToLogicalMapping::CoordResult>::curvilinear_tag_r;
+    using Theta = CoordWithOPoint<
             typename PhysicalToLogicalMapping::CoordResult>::curvilinear_tag_theta;
 
     static_assert(Theta::PERIODIC, "Theta dimension must be periodic.");
