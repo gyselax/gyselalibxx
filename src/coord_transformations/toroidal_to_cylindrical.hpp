@@ -22,25 +22,22 @@ class ToroidalToCylindrical
     static_assert(Zeta::IS_CONTRAVARIANT);
     static_assert(Phi::IS_CONTRAVARIANT);
 
-public:
-    /// @brief Indicate the first physical coordinate.
-    using cylindrical_tag_R = typename Curvilinear2DToCartesian::cartesian_tag_x;
-    /// @brief Indicate the second physical coordinate.
-    using cylindrical_tag_Z = typename Curvilinear2DToCartesian::cartesian_tag_y;
-    /// @brief Indicate the third physical coordinate.
-    using cylindrical_tag_Zeta = Zeta;
-
-    /// @brief Indicate the first logical coordinate.
-    using toroidal_tag_rho = typename Curvilinear2DToCartesian::curvilinear_tag_r;
-    /// @brief Indicate the second logical coordinate.
-    using toroidal_tag_theta = typename Curvilinear2DToCartesian::curvilinear_tag_theta;
-    /// @brief Indicate the third logical coordinate.
-    using toroidal_tag_phi = Phi;
-
 private:
-    using R = cylindrical_tag_R;
+    using CurvilinearDim1 = ddc::type_seq_element_t<
+            0,
+            ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordResult>>;
+    using CurvilinearDim2 = ddc::type_seq_element_t<
+            1,
+            ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordResult>>;
+    using R = std::conditional_t<
+            CurvilinearDim1::IS_COVARIANT && CurvilinearDim1::IS_CONTRAVARIANT,
+            CurvilinearDim2,
+            CurvilinearDim1>;
     using R_cov = typename R::Dual;
-    using Z = cylindrical_tag_Z;
+    using Z = std::conditional_t<
+            CurvilinearDim1::IS_COVARIANT && CurvilinearDim1::IS_CONTRAVARIANT,
+            CurvilinearDim2,
+            CurvilinearDim1>;
     using Z_cov = typename Z::Dual;
     using Zeta_cov = typename Zeta::Dual;
     using Rho = toroidal_tag_rho;

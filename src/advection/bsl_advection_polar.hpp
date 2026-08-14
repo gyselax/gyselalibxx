@@ -54,9 +54,6 @@ class BslAdvectionPolar
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
     using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
 
-    using DimX = typename LogicalToPhysicalMapping::cartesian_tag_x;
-    using DimY = typename LogicalToPhysicalMapping::cartesian_tag_y;
-
     using CoordRTheta = typename LogicalToPhysicalMapping::CoordArg;
     using CoordXY = typename LogicalToPhysicalMapping::CoordResult;
 
