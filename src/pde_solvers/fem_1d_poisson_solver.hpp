@@ -491,7 +491,6 @@ public:
             IdxFEMBSplines first_repeat_bspline(ddc::discrete_space<FEMBSplines>().nbasis());
             // Copy the first d coefficients into the last d coefficients
             // These coefficients refer to the same InputBSplines which cross the boundaries
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     exec_space(),
