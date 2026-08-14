@@ -234,7 +234,7 @@ public:
             std::enable_if_t<
                     ddc::type_seq_contains_v<
                             PseudoCartBasis,
-                            ddc::to_type_seq_t<typename Mapping::CoordResult>>,
+                            ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>>,
                     bool> = true>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
@@ -280,7 +280,7 @@ public:
             std::enable_if_t<
                     !(ddc::type_seq_contains_v<
                             PseudoCartBasis,
-                            ddc::to_type_seq_t<typename Mapping::CoordResult>>),
+                            ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>>),
                     bool> = false>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
