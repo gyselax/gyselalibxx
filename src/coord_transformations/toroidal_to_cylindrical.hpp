@@ -40,9 +40,11 @@ private:
             CurvilinearDim1>;
     using Z_cov = typename Z::Dual;
     using Zeta_cov = typename Zeta::Dual;
-    using Rho = toroidal_tag_rho;
+    using Rho = typename CoordWithOPoint<
+            typename Curvilinear2DToCartesian::CoordArg>::curvilinear_tag_r;
     using Rho_cov = typename Rho::Dual;
-    using Theta = toroidal_tag_theta;
+    using Theta = typename CoordWithOPoint<
+            typename Curvilinear2DToCartesian::CoordArg>::curvilinear_tag_theta;
     using Theta_cov = typename Theta::Dual;
     using Phi_cov = typename Phi::Dual;
 
