@@ -23,21 +23,15 @@ class ToroidalToCylindrical
     static_assert(Phi::IS_CONTRAVARIANT);
 
 private:
-    using CurvilinearDim1 = ddc::type_seq_element_t<
-            0,
-            ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordResult>>;
-    using CurvilinearDim2 = ddc::type_seq_element_t<
-            1,
-            ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordResult>>;
-    using R = std::conditional_t<
-            CurvilinearDim1::IS_COVARIANT && CurvilinearDim1::IS_CONTRAVARIANT,
-            CurvilinearDim2,
-            CurvilinearDim1>;
+    using RZBasis = ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordResult>;
+    using RhoThetaBasis = ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordArg>;
+    using RZBasis_cov = get_covariant_dims_t<RZBasis>;
+    using RhoThetaBasis_cov = get_covariant_dims_t<RhoThetaBasis>;
+    using RZDim1 = ddc::type_seq_element_t<0, RZBasis>;
+    using RZDim2 = ddc::type_seq_element_t<1, RZBasis>;
+    using R = std::conditional_t<RZDim1::IS_COVARIANT && RZDim1::IS_CONTRAVARIANT, RZDim2, RZDim1>;
     using R_cov = typename R::Dual;
-    using Z = std::conditional_t<
-            CurvilinearDim1::IS_COVARIANT && CurvilinearDim1::IS_CONTRAVARIANT,
-            CurvilinearDim1,
-            CurvilinearDim2>;
+    using Z = std::conditional_t<RZDim1::IS_COVARIANT && RZDim1::IS_CONTRAVARIANT, RZDim1, RZDim2>;
     using Z_cov = typename Z::Dual;
     using Zeta_cov = typename Zeta::Dual;
     using Rho = typename CoordWithOPoint<
@@ -115,8 +109,7 @@ public:
     jacobian_matrix(CoordArg const& coord) const
     {
         DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Phi_cov>> J_3d;
-        DTensor<VectorIndexSet<R, Z>, VectorIndexSet<Rho_cov, Theta_cov>> J_2d
-                = m_mapping_2d.jacobian_matrix(CoordArg2D(coord));
+        DTensor<RZBasis, RhoThetaBasis_cov> J_2d = m_mapping_2d.jacobian_matrix(CoordArg2D(coord));
         ddcHelper::get<R, Rho_cov>(J_3d) = ddcHelper::get<R, Rho_cov>(J_2d);
         ddcHelper::get<R, Theta_cov>(J_3d) = ddcHelper::get<R, Theta_cov>(J_2d);
         ddcHelper::get<R, Phi_cov>(J_3d) = 0;
@@ -173,8 +166,7 @@ public:
     {
         InverseJacobianMatrix inv_jacobian_matrix_2d(m_mapping_2d);
         DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> inv_J_3d;
-        DTensor<VectorIndexSet<Rho, Theta>, VectorIndexSet<R_cov, Z_cov>> inv_J_2d
-                = inv_jacobian_matrix_2d(CoordArg2D(coord));
+        DTensor<RhoThetaBasis, RZBasis_cov> inv_J_2d = inv_jacobian_matrix_2d(CoordArg2D(coord));
         ddcHelper::get<Rho, R_cov>(inv_J_3d) = ddcHelper::get<Rho, R_cov>(inv_J_2d);
         ddcHelper::get<Rho, Z_cov>(inv_J_3d) = ddcHelper::get<Rho, Z_cov>(inv_J_2d);
         ddcHelper::get<Rho, Zeta_cov>(inv_J_3d) = 0;
