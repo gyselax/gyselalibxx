@@ -131,6 +131,16 @@ struct SingularOPointInvJacobian : std::false_type
 
 } // namespace mapping_detail
 
+template <class CoordType>
+struct CurvilinearCoord;
+
+template <class Dim1, class Dim2>
+struct CurvilinearCoord<Coord<Dim1, Dim2>>
+{
+    using curvilinear_tag_r = std::conditional_t<Dim1::PERIODIC, Dim2, Dim1>;
+    using curvilinear_tag_theta = std::conditional_t<Dim1::PERIODIC, Dim1, Dim2>;
+};
+
 template <class ExecSpace, class Type>
 static constexpr bool is_accessible_v = mapping_detail::
         MappingAccessibility<ExecSpace, std::remove_const_t<std::remove_reference_t<Type>>>::value;

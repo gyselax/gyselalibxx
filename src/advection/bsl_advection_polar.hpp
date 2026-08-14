@@ -51,8 +51,9 @@
 template <class FootFinder, class LogicalToPhysicalMapping, concepts::Interpolation Interpolator2D>
 class BslAdvectionPolar
 {
-    using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
-    using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+    using R = CurvilinearCoord<typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
+    using Theta
+            = CurvilinearCoord<typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
 
     using CoordRTheta = typename LogicalToPhysicalMapping::CoordArg;
     using CoordXY = typename LogicalToPhysicalMapping::CoordResult;
