@@ -71,7 +71,8 @@ class OnionPatchLocator<
     static_assert(is_coord_transform_with_o_point_v<LogicalToPhysicalMapping>);
 
     using CoordXY = typename PhysicalToLogicalMapping::CoordArg;
-    using R = typename CoordWithOPoint<typename PhysicalToLogicalMapping::CoordResult>::curvilinear_tag_r;
+    using R = typename CoordWithOPoint<
+            typename PhysicalToLogicalMapping::CoordResult>::curvilinear_tag_r;
     using Theta = typename CoordWithOPoint<
             typename PhysicalToLogicalMapping::CoordResult>::curvilinear_tag_theta;
 
