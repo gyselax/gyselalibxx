@@ -206,7 +206,8 @@ public:
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
             InterpolatorType const& interpolator,
-            gmgpolar::ExtrapolationType const extrapolation_rule = gmgpolar::ExtrapolationType::NONE,
+            gmgpolar::ExtrapolationType const extrapolation_rule
+            = gmgpolar::ExtrapolationType::NONE,
             std::optional<int> max_iterations = std::nullopt,
             std::optional<double> absTol = std::nullopt,
             std::optional<double> relTol = std::nullopt)
