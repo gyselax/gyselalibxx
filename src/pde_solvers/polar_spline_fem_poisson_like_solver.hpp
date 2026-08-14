@@ -413,7 +413,11 @@ public:
         Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonRHS");
 
         static_assert(
-                std::is_invocable_r_v<double, RHSFunction, IdxRangeBatch::discrete_element_type, CoordRTheta>,
+                std::is_invocable_r_v<
+                        double,
+                        RHSFunction,
+                        IdxRangeBatch::discrete_element_type,
+                        CoordRTheta>,
                 "RHSFunction must have an operator() which takes a batch index and a "
                 "coordinate and returns a double");
         assert(IdxRangeBSPolar(get_idx_range(spline))
@@ -583,7 +587,11 @@ public:
     void operator()(DFieldRTheta phi, RHSFunction const& rhs) const
     {
         static_assert(
-                std::is_invocable_r_v<double, RHSFunction, IdxRangeBatch::discrete_element_type, CoordRTheta>,
+                std::is_invocable_r_v<
+                        double,
+                        RHSFunction,
+                        IdxRangeBatch::discrete_element_type,
+                        CoordRTheta>,
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
 
