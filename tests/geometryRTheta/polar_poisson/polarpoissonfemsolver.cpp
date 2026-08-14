@@ -141,7 +141,7 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(discrete_mapping, interpolator);
+    PoissonSolver solver(discrete_mapping, interpolator, grid);
 
     solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
