@@ -88,7 +88,7 @@ private:
     using GridTheta = find_grid_t<Theta, PolarGrid>;
 
     using IdxRangeCoeffBatched = typename InterpolationBuilderTraits<
-            RThetaAdvectionBuilder>::batched_basis_idx_range_type<IdxRangeBatched>;
+            RThetaAdvectionBuilder>::template batched_basis_idx_range_type<IdxRangeBatched>;
 
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatched, GridR, GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
