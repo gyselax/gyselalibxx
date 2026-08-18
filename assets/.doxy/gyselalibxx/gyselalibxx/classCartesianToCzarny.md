@@ -36,8 +36,6 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 | ---: | :--- |
 | typedef Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
 | typedef Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
-| typedef [**X**](structX.md) | [**cartesian\_tag\_x**](#typedef-cartesian_tag_x)  <br>_Indicate the first physical coordinate._  |
-| typedef [**Y**](structY.md) | [**cartesian\_tag\_y**](#typedef-cartesian_tag_y)  <br>_Indicate the second physical coordinate._  |
 | typedef [**R**](structR.md) | [**curvilinear\_tag\_r**](#typedef-curvilinear_tag_r)  <br>_Indicate the first logical coordinate._  |
 | typedef [**Theta**](structTheta.md) | [**curvilinear\_tag\_theta**](#typedef-curvilinear_tag_theta)  <br>_Indicate the second logical coordinate._  |
 
@@ -149,34 +147,6 @@ using CartesianToCzarny< X, Y, R, Theta >::CoordArg =  Coord<X, Y>;
 _The type of the result of the function described by this mapping._ 
 ```C++
 using CartesianToCzarny< X, Y, R, Theta >::CoordResult =  Coord<R, Theta>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cartesian\_tag\_x 
-
-_Indicate the first physical coordinate._ 
-```C++
-using CartesianToCzarny< X, Y, R, Theta >::cartesian_tag_x =  X;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cartesian\_tag\_y 
-
-_Indicate the second physical coordinate._ 
-```C++
-using CartesianToCzarny< X, Y, R, Theta >::cartesian_tag_y =  Y;
 ```
 
 

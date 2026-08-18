@@ -28,8 +28,6 @@ template <class R, class Theta, class X, class Y>
 class CzarnyToCartesian
 {
 public:
-    using cartesian_tag_x = X;
-    using cartesian_tag_y = Y;
     using curvilinear_tag_r = R;
     using curvilinear_tag_theta = Theta;
 
@@ -175,6 +173,14 @@ public:
             return r
                    * (-m_e * m_epsilon * r * sin_theta * sin_theta * xi / (tmp2 * tmp2 * tmp1)
                       + m_e * cos_theta * xi / tmp2);
+        } else {
+            static_assert(
+                    ddc::in_tags_v<
+                            IndexTag1,
+                            ddc::detail::TypeSeq<
+                                    X,
+                                    Y>> && ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<R_cov, Theta_cov>>,
+                    "Unexpected tags provided");
         }
     }
 

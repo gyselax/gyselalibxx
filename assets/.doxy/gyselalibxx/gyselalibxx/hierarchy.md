@@ -194,6 +194,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) _A class to capture the description of a tensor indexed at a specific component. This class should not be explicitly declared in user code. It is the output of a call to the index&lt;...&gt; function and is an input to the tensor\_mul function._ 
 * **class** [**tensor\_tools::TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) _A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_ \(g_{xx}\) _would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;._
 * **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __
+* **struct** [**CoordWithOPoint**](structCoordWithOPoint.md) 
+* **struct** [**CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;**](structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4.md) _A class to identify the radial and poloidal components of a 2D cuvilinear coordinate._ 
 * **struct** [**Edge**](structEdge.md) _Define an edge of a given patch._ 
 * **struct** [**ExtrapolationRule::Constant**](structExtrapolationRule_1_1Constant.md) _Tag selecting constant extrapolation._ 
 * **struct** [**ExtrapolationRule::NullValue**](structExtrapolationRule_1_1NullValue.md) _Tag selecting null extrapolation: the function evaluates to zero outside the domain._ 

@@ -36,8 +36,6 @@ public:
     using BSplineR = typename SplineEvaluator::bsplines_type1;
     using BSplineTheta = typename SplineEvaluator::bsplines_type2;
 
-    using cartesian_tag_x = X;
-    using cartesian_tag_y = Y;
     using curvilinear_tag_r = R;
     using curvilinear_tag_theta = Theta;
 

@@ -41,8 +41,8 @@ _Operator for finding the feet of the characteristics on a polar slice._ [More..
 | typedef typename [**polar\_foot\_finder\_details::ElementwiseChoice**](structpolar__foot__finder__details_1_1ElementwiseChoice.md)&lt; FFSpace, AFSpace, [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), IdxRangeBatched, RThetaAdvectionEvaluator, [**AdvecCoefField**](classVectorFieldMem.md), TimeStepperBuilder, LogicalToPhysicalMapping &gt;::type | [**ElementwiseOperator**](#typedef-elementwiseoperator)  <br>_The operator returned by operator() which calculates the feet elementwise._  |
 | typedef typename RThetaAdvectionBuilder::exec\_space | [**ExecSpace**](#typedef-execspace)  <br>_The execution space where kernels are launched._  |
 | typedef IdxRangeBatched | [**IdxRangeOperator**](#typedef-idxrangeoperator)  <br>_The type of the index range over which the operator works._  |
-| typedef typename LogicalToPhysicalMapping::curvilinear\_tag\_r | [**R**](#typedef-r)  <br>_The continuous radial dimension._  |
-| typedef typename LogicalToPhysicalMapping::curvilinear\_tag\_theta | [**Theta**](#typedef-theta)  <br>_The continuous poloidal dimension._  |
+| typedef typename [**CoordWithOPoint**](structCoordWithOPoint.md)&lt; typename LogicalToPhysicalMapping::CoordArg &gt;::curvilinear\_tag\_r | [**R**](#typedef-r)  <br>_The continuous radial dimension._  |
+| typedef typename [**CoordWithOPoint**](structCoordWithOPoint.md)&lt; typename LogicalToPhysicalMapping::CoordArg &gt;::curvilinear\_tag\_theta | [**Theta**](#typedef-theta)  <br>_The continuous poloidal dimension._  |
 | typedef typename RThetaAdvectionBuilder::memory\_space | [**memory\_space**](#typedef-memory_space)  <br>_The memory space where fields are stored (e.g._ `Kokkos::HostSpace` _or a GPU space)._ |
 
 
@@ -231,7 +231,7 @@ using PolarFootFinder< FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatch
 
 _The continuous radial dimension._ 
 ```C++
-using PolarFootFinder< FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator >::R =  typename LogicalToPhysicalMapping::curvilinear_tag_r;
+using PolarFootFinder< FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator >::R =  typename CoordWithOPoint< typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
 ```
 
 
@@ -245,7 +245,7 @@ using PolarFootFinder< FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatch
 
 _The continuous poloidal dimension._ 
 ```C++
-using PolarFootFinder< FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator >::Theta =  typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+using PolarFootFinder< FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator >::Theta =  typename CoordWithOPoint< typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
 ```
 
 

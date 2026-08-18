@@ -611,11 +611,11 @@
 <td style="text-align: left;"><a href="#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>  <br><em>The type of the index range over which the operator works.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename LogicalToPhysicalMapping::curvilinear_tag_r</td>
+<td style="text-align: right;">typedef typename <a href="structCoordWithOPoint.html"><strong>CoordWithOPoint</strong></a>&lt; typename LogicalToPhysicalMapping::CoordArg &gt;::curvilinear_tag_r</td>
 <td style="text-align: left;"><a href="#typedef-r"><strong>R</strong></a>  <br><em>The continuous radial dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename LogicalToPhysicalMapping::curvilinear_tag_theta</td>
+<td style="text-align: right;">typedef typename <a href="structCoordWithOPoint.html"><strong>CoordWithOPoint</strong></a>&lt; typename LogicalToPhysicalMapping::CoordArg &gt;::curvilinear_tag_theta</td>
 <td style="text-align: left;"><a href="#typedef-theta"><strong>Theta</strong></a>  <br><em>The continuous poloidal dimension.</em></td>
 </tr>
 <tr>
@@ -703,13 +703,13 @@
 
 <h3 id="typedef-r">typedef R</h3>
 <p><em>The continuous radial dimension.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::R =  typename LogicalToPhysicalMapping::curvilinear_tag_r;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::R =  typename CoordWithOPoint&lt; typename LogicalToPhysicalMapping::CoordArg&gt;::curvilinear_tag_r;
 </code></pre>
 <hr>
 
 <h3 id="typedef-theta">typedef Theta</h3>
 <p><em>The continuous poloidal dimension.</em> </p>
-<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::Theta =  typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionInterpolator &gt;::Theta =  typename CoordWithOPoint&lt; typename LogicalToPhysicalMapping::CoordArg&gt;::curvilinear_tag_theta;
 </code></pre>
 <hr>
 

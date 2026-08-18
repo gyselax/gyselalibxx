@@ -41,8 +41,6 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 | typedef typename [**Theta::Dual**](structTheta.md#typedef-dual) | [**Theta\_cov**](#typedef-theta_cov)  <br>_The covariant form of the second logical coordinate._  |
 | typedef typename [**X::Dual**](structX.md#typedef-dual-13) | [**X\_cov**](#typedef-x_cov)  <br>_The covariant form of the first physical coordinate._  |
 | typedef typename [**Y::Dual**](structY.md#typedef-dual-13) | [**Y\_cov**](#typedef-y_cov)  <br>_The covariant form of the second physical coordinate._  |
-| typedef [**X**](structX.md) | [**cartesian\_tag\_x**](#typedef-cartesian_tag_x)  <br>_Indicate the first physical coordinate._  |
-| typedef [**Y**](structY.md) | [**cartesian\_tag\_y**](#typedef-cartesian_tag_y)  <br>_Indicate the second physical coordinate._  |
 | typedef [**R**](structR.md) | [**curvilinear\_tag\_r**](#typedef-curvilinear_tag_r)  <br>_Indicate the first logical coordinate._  |
 | typedef [**Theta**](structTheta.md) | [**curvilinear\_tag\_theta**](#typedef-curvilinear_tag_theta)  <br>_Indicate the second logical coordinate._  |
 
@@ -248,34 +246,6 @@ using CartesianToCircular< X, Y, R, Theta >::X_cov =  typename X::Dual;
 _The covariant form of the second physical coordinate._ 
 ```C++
 using CartesianToCircular< X, Y, R, Theta >::Y_cov =  typename Y::Dual;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cartesian\_tag\_x 
-
-_Indicate the first physical coordinate._ 
-```C++
-using CartesianToCircular< X, Y, R, Theta >::cartesian_tag_x =  X;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cartesian\_tag\_y 
-
-_Indicate the second physical coordinate._ 
-```C++
-using CartesianToCircular< X, Y, R, Theta >::cartesian_tag_y =  Y;
 ```
 
 

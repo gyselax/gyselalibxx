@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="136" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="136" bodyend="158"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="136" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="136" bodyend="156"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -492,7 +492,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="23" bodyend="159"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="23" bodyend="157"/>
     <listofallmembers>
       <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae4447bd169796d821a77c4e6eb300055" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>BSplinesR</name></member>
       <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae6ed9d6412ee7fb2443445616c2a876a" prot="private" virt="non-virtual"><scope>DiscretePoloidalCSSplineMappingBuilder</scope><name>BSplinesTheta</name></member>

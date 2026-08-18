@@ -108,23 +108,20 @@
 * **CFieldMemFeetRTheta** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **CartesianBasis** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **CoordRTheta** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**ElementwiseSplinePolarFootFinder**](classElementwiseSplinePolarFootFinder.md), [**ElementwiseSplinePolarFootFinderMem**](classElementwiseSplinePolarFootFinderMem.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7.md), [**PolarFootFinder**](classPolarFootFinder.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvLogicalFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvLogicalFootFinderMem**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md), [**polar\_foot\_finder\_details::ElementwisePhysicalAdvPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder.md), [**polar\_foot\_finder\_details::ElementwisePhysicalAdvPhysicalFootFinderMem**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem.md), [**polar\_foot\_finder\_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md), [**polar\_foot\_finder\_details::ElementwisePhysicalAdvPseudoPhysicalFootFinderMem**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem.md))
-* **CoordXY** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
-* **CurvilinearBasis** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
+* **CoordXY** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
+* **CurvilinearBasis** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**PolarFootFinder**](classPolarFootFinder.md))
 * **compute\_twomaxwellian** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **CartesianLeviCivitaTensor** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md))
 * **compute\_size** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md))
 * **CartesianToBarycentric** ([**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **CartesianToCircular** ([**CartesianToCircular**](classCartesianToCircular.md))
 * **CoordJacobian** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscreteMapping**](classDiscreteMapping.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md), [**LinearCoordTransform**](classLinearCoordTransform.md), [**OrthogonalCoordTransforms**](classOrthogonalCoordTransforms.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **cartesian\_tag\_x** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
-* **cartesian\_tag\_y** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
-* **curvilinear\_tag\_r** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
-* **curvilinear\_tag\_theta** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
+* **curvilinear\_tag\_r** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;**](structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
+* **curvilinear\_tag\_theta** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;**](structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
 * **CartesianToCylindrical** ([**CartesianToCylindrical**](classCartesianToCylindrical.md))
-* **cartesian\_tag\_z** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md))
-* **cylindrical\_tag\_R** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **cylindrical\_tag\_Z** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **cylindrical\_tag\_Zeta** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **cylindrical\_tag\_R** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md))
+* **cylindrical\_tag\_Z** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md))
+* **cylindrical\_tag\_Zeta** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md))
 * **CartesianToCzarny** ([**CartesianToCzarny**](classCartesianToCzarny.md))
 * **CentralFDMPartialDerivative** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md))
 * **CentralFDMPartialDerivativeCreator** ([**CentralFDMPartialDerivativeCreator**](classCentralFDMPartialDerivativeCreator.md))
@@ -160,6 +157,7 @@
 * **CoeffField** ([**DiscreteMapping**](classDiscreteMapping.md))
 * **control\_point** ([**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
 * **control\_points** ([**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
+* **CoordX\_pcY\_pc** ([**ElementwiseSplinePolarFootFinder**](classElementwiseSplinePolarFootFinder.md), [**ElementwiseSplinePolarFootFinderMem**](classElementwiseSplinePolarFootFinderMem.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md), [**polar\_foot\_finder\_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md))
 * **CoordField** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **CoordFieldMem** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **CoordPDEDim** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
@@ -235,9 +233,8 @@
 * **DVectorFieldAdvectionXYOnBatch** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **DVectorFieldMemAdvectionXY** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **DVectorFieldMemAdvectionXYOnBatch** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
-* **DimX** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md))
-* **DimY** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **DimV** ([**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
+* **DimX** ([**BslAdvectionSpatial**](classBslAdvectionSpatial.md))
 * **DConstFieldType** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md), [**CentralFDMPartialDerivativeCreator**](classCentralFDMPartialDerivativeCreator.md), [**CentralFDMPartialDerivativeWithBValue**](classCentralFDMPartialDerivativeWithBValue.md), [**CentralFDMPartialDerivativeWithBValueCreator**](classCentralFDMPartialDerivativeWithBValueCreator.md), [**IPartialDerivative**](classIPartialDerivative.md), [**Spline1DPartialDerivativeCreator**](classSpline1DPartialDerivativeCreator.md), [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md))
 * **DFieldMemType** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md), [**CentralFDMPartialDerivativeWithBValue**](classCentralFDMPartialDerivativeWithBValue.md))
 * **DFieldType** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md), [**CentralFDMPartialDerivativeWithBValue**](classCentralFDMPartialDerivativeWithBValue.md), [**ConstantPartialDerivative**](classConstantPartialDerivative.md), [**IPartialDerivative**](classIPartialDerivative.md))
@@ -1158,6 +1155,7 @@
 * **perpendicular\_grid** ([**Edge**](structEdge.md))
 * **Patch1** ([**EdgeTransformation**](classEdgeTransformation.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **Patch2** ([**EdgeTransformation**](classEdgeTransformation.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **PseudoCartBasis** ([**ElementwiseSplinePolarFootFinder**](classElementwiseSplinePolarFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md), [**polar\_foot\_finder\_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md))
 * **PDEDim** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **PolarPoissonLikeCoefficients** ([**GMGPolarTools::PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md))
 * **pos** ([**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md))
@@ -1211,7 +1209,8 @@
 * **RHSQuadTags** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **RHSSplineCoeff** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **RHSSplineCoeffMem** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
-* **Rmajor** ([**GyroAverageOperator**](classGyroAverageOperator.md))
+* **RZ\_1** ([**GyroAverageOperator**](classGyroAverageOperator.md))
+* **RZ\_2** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **Rminor** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **real\_laplacian\_tags** ([**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md), [**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md))
 * **recursive\_dispatch\_patch\_function** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
@@ -1228,7 +1227,13 @@
 * **RefinedSplineEvaluator** ([**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md))
 * **RestartInitialisation** ([**RestartInitialisation**](classRestartInitialisation.md))
 * **recursion** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **RZBasis** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **RZBasis\_cov** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **RZDim1** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **RZDim2** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **Rho** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **RhoThetaBasis** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **RhoThetaBasis\_cov** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **Rho\_cov** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **rectify\_coord\_o\_point** ([**polar\_foot\_finder\_details::ElementwiseLogicalAdvLogicalFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder.md))
 
@@ -1331,9 +1336,6 @@
 * **Tensor** ([**Tensor**](classTensor.md))
 * **TensorCommon** ([**TensorCommon**](classTensorCommon.md))
 * **ToroidalToCylindrical** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **toroidal\_tag\_phi** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **toroidal\_tag\_rho** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **toroidal\_tag\_theta** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **tensor\_type** ([**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md))
 
 
@@ -1382,16 +1384,14 @@
 ## x
 
 * **X\_cov** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7.md))
-* **X\_pc** ([**ElementwiseSplinePolarFootFinder**](classElementwiseSplinePolarFootFinder.md), [**ElementwiseSplinePolarFootFinderMem**](classElementwiseSplinePolarFootFinderMem.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md), [**polar\_foot\_finder\_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md))
-* **X** ([**GMGPolarTools::MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**PolarFootFinder**](classPolarFootFinder.md))
+* **X** ([**GMGPolarTools::MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md), [**PolarFootFinder**](classPolarFootFinder.md))
 * **Xpc\_cov** ([**InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7.md))
 
 
 ## y
 
 * **Y\_cov** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7.md))
-* **Y\_pc** ([**ElementwiseSplinePolarFootFinder**](classElementwiseSplinePolarFootFinder.md), [**ElementwiseSplinePolarFootFinderMem**](classElementwiseSplinePolarFootFinderMem.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder.md), [**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md), [**polar\_foot\_finder\_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md))
-* **Y** ([**GMGPolarTools::MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**PolarFootFinder**](classPolarFootFinder.md))
+* **Y** ([**GMGPolarTools::MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md), [**PolarFootFinder**](classPolarFootFinder.md))
 * **Ypc\_cov** ([**InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7.md))
 
 
@@ -1399,7 +1399,7 @@
 
 * **Z\_cov** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **Zeta\_cov** ([**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **Z** ([**GyroAverageOperator**](classGyroAverageOperator.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **Z** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 
 
 ## ~

@@ -44,8 +44,8 @@ class ElementwiseLogicalAdvPseudoPhysFootFinder
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
     using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using CoordRTheta = Coord<R, Theta>;
-    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using CoordX_pcY_pc = typename PseudoPhysicalToLogicalMapping::CoordArg;
+    using PseudoCartBasis = ddc::to_type_seq_t<CoordX_pcY_pc>;
 
 private:
     RThetaAdvectionEvaluator m_evaluator_advection_field;
@@ -56,7 +56,7 @@ private:
     TimeStepper m_time_stepper;
 
     AdvecCoefField m_advection_field_coefs;
-    Coord<X_pc, Y_pc> m_coord_centre;
+    CoordX_pcY_pc m_coord_centre;
     IdxRange<GridTheta> m_idx_range_theta;
     double m_dt;
 
@@ -67,7 +67,7 @@ public:
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             TimeStepper const& time_stepper,
             AdvecCoefField const& advection_field_coefs,
-            Coord<X_pc, Y_pc> coord_centre,
+            CoordX_pcY_pc coord_centre,
             IdxRange<GridTheta> idx_range_theta,
             double dt)
         : m_evaluator_advection_field(evaluator_advection_field)
@@ -86,7 +86,7 @@ public:
         IdxBatch idx_batch(idx);
         IdxRTheta idx_rtheta(idx);
         // The function describing how the derivative of the evolve function is calculated.
-        auto dy = [&](DVector<X_pc, Y_pc>& updated_advection_field, CoordRTheta const& foot) {
+        auto dy = [&](DTensor<PseudoCartBasis>& updated_advection_field, CoordRTheta const& foot) {
             DVector<R, Theta> updated_advection_field_adv_space;
             ddcHelper::get<R>(updated_advection_field_adv_space) = m_evaluator_advection_field(
                     foot,
@@ -99,7 +99,7 @@ public:
             CoordRTheta advection_location_for_mapping(
                     Kokkos::min(ddc::select<R>(foot), ddc::discrete_space<BSplinesR>().rmax()),
                     ddc::select<Theta>(foot));
-            updated_advection_field = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+            updated_advection_field = to_vector_space<PseudoCartBasis>(
                     m_logical_to_pseudo_physical,
                     advection_location_for_mapping,
                     updated_advection_field_adv_space);
@@ -107,10 +107,10 @@ public:
 
         // The function describing how the value(s) are updated using the derivative.
         auto update_function = [&](CoordRTheta& foot_rtheta,
-                                   DVector<X_pc, Y_pc> const& advection_field,
+                                   DTensor<PseudoCartBasis> const& advection_field,
                                    double dt) {
-            Coord<X_pc, Y_pc> const coord_xy = m_logical_to_pseudo_physical(foot_rtheta);
-            Coord<X_pc, Y_pc> const foot_xy = coord_xy - dt * advection_field;
+            CoordX_pcY_pc const coord_xy = m_logical_to_pseudo_physical(foot_rtheta);
+            CoordX_pcY_pc const foot_xy = coord_xy - dt * advection_field;
 
             if (norm_inf(foot_xy - m_coord_centre) < 1e-15) {
                 foot_rtheta = CoordRTheta(0, 0);
@@ -142,11 +142,11 @@ class ElementwiseLogicalAdvPseudoPhysFootFinderMem
     using Theta = typename GridTheta::continuous_dimension_type;
     using CoordRTheta = Coord<R, Theta>;
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
-    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using CoordX_pcY_pc = typename PseudoPhysicalToLogicalMapping::CoordArg;
+    using PseudoCartBasis = ddc::to_type_seq_t<CoordX_pcY_pc>;
 
-    using TimeStepper =
-            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
+    using TimeStepper = typename TimeStepperBuilder::
+            template time_stepper_t<CoordRTheta, DTensor<PseudoCartBasis>>;
 
 public:
     using GPUCompat = ElementwiseLogicalAdvPseudoPhysFootFinder<
@@ -164,24 +164,23 @@ private:
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     TimeStepper m_time_stepper;
     AdvecCoefFieldMem m_advection_field_coefs_alloc;
-    Coord<X_pc, Y_pc> m_coord_centre;
+    CoordX_pcY_pc m_coord_centre;
     IdxRange<GridTheta> m_idx_range_theta;
 
 public:
     template <
             class LogicalToPhysicalMapping,
             std::enable_if_t<
-                    (std::is_same_v<X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x>)&&(
-                            std::is_same_v<
-                                    Y_pc,
-                                    typename LogicalToPhysicalMapping::cartesian_tag_y>),
+                    ddc::type_seq_contains_v<
+                            PseudoCartBasis,
+                            ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>>,
                     bool> = true>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             LogicalToPhysicalMapping const& logical_to_physical,
             TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
-            Coord<X_pc, Y_pc> coord_centre,
+            CoordX_pcY_pc coord_centre,
             IdxRange<GridTheta> idx_range_theta)
         : m_evaluator_advection_field(evaluator_advection_field)
         , m_logical_to_pseudo_physical(logical_to_physical)
@@ -195,17 +194,16 @@ public:
     template <
             class LogicalToPhysicalMapping,
             std::enable_if_t<
-                    !((std::is_same_v<X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x>)&&(
-                            std::is_same_v<
-                                    Y_pc,
-                                    typename LogicalToPhysicalMapping::cartesian_tag_y>)),
+                    !(ddc::type_seq_contains_v<
+                            PseudoCartBasis,
+                            ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>>),
                     bool> = false>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             [[maybe_unused]] LogicalToPhysicalMapping const& logical_to_physical,
             TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
-            Coord<X_pc, Y_pc> coord_centre,
+            CoordX_pcY_pc coord_centre,
             IdxRange<GridTheta> idx_range_theta)
         : m_evaluator_advection_field(evaluator_advection_field)
         , m_logical_to_pseudo_physical(coord_centre)

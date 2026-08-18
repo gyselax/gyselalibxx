@@ -459,13 +459,11 @@ private:
 
             static_assert(is_coord_transform_with_o_point_v<CurrentMapping>);
             static_assert((std::is_same_v<
-                           Coord<typename CurrentMapping::curvilinear_tag_r,
-                                 typename CurrentMapping::curvilinear_tag_theta>,
+                           typename CurrentMapping::CoordArg,
                            Coord<CurrentDim1, CurrentDim2>>));
             static_assert(is_coord_transform_with_o_point_v<TargetMapping>);
             static_assert((std::is_same_v<
-                           Coord<typename TargetMapping::curvilinear_tag_r,
-                                 typename TargetMapping::curvilinear_tag_theta>,
+                           typename TargetMapping::CoordArg,
                            Coord<TargetDim1, TargetDim2>>));
 
             CurrentMapping const current_mapping(

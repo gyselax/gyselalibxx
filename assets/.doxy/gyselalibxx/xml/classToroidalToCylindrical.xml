@@ -14,15 +14,28 @@
         <type>class Phi</type>
       </param>
     </templateparamlist>
-    <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a2ba3550e813d634fe3906772d7ae4123" prot="public" static="no">
-        <type>typename Curvilinear2DToCartesian::cartesian_tag_x</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::cylindrical_tag_R =  typename Curvilinear2DToCartesian::cartesian_tag_x</definition>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a95fe2209876482394d4fbf65db9d283a" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename Curvilinear2DToCartesian::CoordResult &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::RZBasis =  ddc::to_type_seq_t&lt;typename Curvilinear2DToCartesian::CoordResult&gt;</definition>
         <argsstring></argsstring>
-        <name>cylindrical_tag_R</name>
-        <qualifiedname>ToroidalToCylindrical::cylindrical_tag_R</qualifiedname>
+        <name>RZBasis</name>
+        <qualifiedname>ToroidalToCylindrical::RZBasis</qualifiedname>
         <briefdescription>
-<para>Indicate the first physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="26" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a0d67dd1b9026e33a80853025bfa2a3da" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename Curvilinear2DToCartesian::CoordArg &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::RhoThetaBasis =  ddc::to_type_seq_t&lt;typename Curvilinear2DToCartesian::CoordArg&gt;</definition>
+        <argsstring></argsstring>
+        <name>RhoThetaBasis</name>
+        <qualifiedname>ToroidalToCylindrical::RhoThetaBasis</qualifiedname>
+        <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -30,14 +43,27 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="27" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1aa349487d3ca8a2d9b27bbd514d4a7ef1" prot="public" static="no">
-        <type>typename Curvilinear2DToCartesian::cartesian_tag_y</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::cylindrical_tag_Z =  typename Curvilinear2DToCartesian::cartesian_tag_y</definition>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a313f9c9a42a5fb76bded577eb29db687" prot="private" static="no">
+        <type>get_covariant_dims_t&lt; RZBasis &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::RZBasis_cov =  get_covariant_dims_t&lt;RZBasis&gt;</definition>
         <argsstring></argsstring>
-        <name>cylindrical_tag_Z</name>
-        <qualifiedname>ToroidalToCylindrical::cylindrical_tag_Z</qualifiedname>
+        <name>RZBasis_cov</name>
+        <qualifiedname>ToroidalToCylindrical::RZBasis_cov</qualifiedname>
         <briefdescription>
-<para>Indicate the second physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a59743e0477178b2320854a64b7a0c91e" prot="private" static="no">
+        <type>get_covariant_dims_t&lt; RhoThetaBasis &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::RhoThetaBasis_cov =  get_covariant_dims_t&lt;RhoThetaBasis&gt;</definition>
+        <argsstring></argsstring>
+        <name>RhoThetaBasis_cov</name>
+        <qualifiedname>ToroidalToCylindrical::RhoThetaBasis_cov</qualifiedname>
+        <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -45,14 +71,27 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a6d68f9f6d0c199982bc689102d60aedb" prot="public" static="no">
-        <type>Zeta</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::cylindrical_tag_Zeta =  Zeta</definition>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a9c87a6a77c2a28ca3877eaf0c32fda7e" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, RZBasis &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::RZDim1 =  ddc::type_seq_element_t&lt;0, RZBasis&gt;</definition>
         <argsstring></argsstring>
-        <name>cylindrical_tag_Zeta</name>
-        <qualifiedname>ToroidalToCylindrical::cylindrical_tag_Zeta</qualifiedname>
+        <name>RZDim1</name>
+        <qualifiedname>ToroidalToCylindrical::RZDim1</qualifiedname>
         <briefdescription>
-<para>Indicate the third physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a1edc6f955caf610fcd9160a7b8e5c013" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 1, RZBasis &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::RZDim2 =  ddc::type_seq_element_t&lt;1, RZBasis&gt;</definition>
+        <argsstring></argsstring>
+        <name>RZDim2</name>
+        <qualifiedname>ToroidalToCylindrical::RZDim2</qualifiedname>
+        <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -60,14 +99,41 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="31" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a9b335bee1c6524190b5618445423f947" prot="public" static="no">
-        <type>typename Curvilinear2DToCartesian::curvilinear_tag_r</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::toroidal_tag_rho =  typename Curvilinear2DToCartesian::curvilinear_tag_r</definition>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1aff821a80e15ddb94aea93ec30db9db8a" prot="private" static="no">
+        <type>std::conditional_t&lt; RZDim1::IS_COVARIANT &amp;&amp;RZDim1::IS_CONTRAVARIANT, RZDim2, RZDim1 &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::R =  std::conditional_t&lt;RZDim1::IS_COVARIANT &amp;&amp; RZDim1::IS_CONTRAVARIANT, RZDim2, RZDim1&gt;</definition>
         <argsstring></argsstring>
-        <name>toroidal_tag_rho</name>
-        <qualifiedname>ToroidalToCylindrical::toroidal_tag_rho</qualifiedname>
+        <name>R</name>
+        <qualifiedname>ToroidalToCylindrical::R</qualifiedname>
         <briefdescription>
-<para>Indicate the first logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a5aee53516c1125323be46ba11c9b028b" prot="private" static="no">
+        <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::R_cov =  typename R::Dual</definition>
+        <argsstring></argsstring>
+        <name>R_cov</name>
+        <qualifiedname>ToroidalToCylindrical::R_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a2572138f1e900fdf011a5a0e4a0352a9" prot="private" static="no">
+        <type>std::conditional_t&lt; RZDim1::IS_COVARIANT &amp;&amp;RZDim1::IS_CONTRAVARIANT, RZDim1, RZDim2 &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Z =  std::conditional_t&lt;RZDim1::IS_COVARIANT &amp;&amp; RZDim1::IS_CONTRAVARIANT, RZDim1, RZDim2&gt;</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <qualifiedname>ToroidalToCylindrical::Z</qualifiedname>
+        <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -75,14 +141,27 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a9ff2dd518c6e78208661c7e7efa2e6f7" prot="public" static="no">
-        <type>typename Curvilinear2DToCartesian::curvilinear_tag_theta</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::toroidal_tag_theta =  typename Curvilinear2DToCartesian::curvilinear_tag_theta</definition>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a41b99eb3d84106da6a25dd4c5177b3c8" prot="private" static="no">
+        <type>typename Z::Dual</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Z_cov =  typename Z::Dual</definition>
         <argsstring></argsstring>
-        <name>toroidal_tag_theta</name>
-        <qualifiedname>ToroidalToCylindrical::toroidal_tag_theta</qualifiedname>
+        <name>Z_cov</name>
+        <qualifiedname>ToroidalToCylindrical::Z_cov</qualifiedname>
         <briefdescription>
-<para>Indicate the second logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a1a1f09b42df640f983b769c84c3c3bf9" prot="private" static="no">
+        <type>typename Zeta::Dual</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Zeta_cov =  typename Zeta::Dual</definition>
+        <argsstring></argsstring>
+        <name>Zeta_cov</name>
+        <qualifiedname>ToroidalToCylindrical::Zeta_cov</qualifiedname>
+        <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -90,21 +169,92 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1aa3b5d507e4d1fd654579609d361fd0b1" prot="public" static="no">
-        <type>Phi</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::toroidal_tag_phi =  Phi</definition>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1ad9cb91111410d423345b7b84f93e67f6" prot="private" static="no">
+        <type>typename <ref refid="structCoordWithOPoint" kindref="compound">CoordWithOPoint</ref>&lt; typename Curvilinear2DToCartesian::CoordArg &gt;::curvilinear_tag_r</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Rho =  typename CoordWithOPoint&lt; typename Curvilinear2DToCartesian::CoordArg&gt;::curvilinear_tag_r</definition>
         <argsstring></argsstring>
-        <name>toroidal_tag_phi</name>
-        <qualifiedname>ToroidalToCylindrical::toroidal_tag_phi</qualifiedname>
+        <name>Rho</name>
+        <qualifiedname>ToroidalToCylindrical::Rho</qualifiedname>
         <briefdescription>
-<para>Indicate the third logical coordinate. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1ac8c8888e02aaa8a4720a5a584052f047" prot="private" static="no">
+        <type>typename Rho::Dual</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Rho_cov =  typename Rho::Dual</definition>
+        <argsstring></argsstring>
+        <name>Rho_cov</name>
+        <qualifiedname>ToroidalToCylindrical::Rho_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1a3770167ca6f56ec32e61736da5992ff2" prot="private" static="no">
+        <type>typename <ref refid="structCoordWithOPoint" kindref="compound">CoordWithOPoint</ref>&lt; typename Curvilinear2DToCartesian::CoordArg &gt;::curvilinear_tag_theta</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Theta =  typename CoordWithOPoint&lt; typename Curvilinear2DToCartesian::CoordArg&gt;::curvilinear_tag_theta</definition>
+        <argsstring></argsstring>
+        <name>Theta</name>
+        <qualifiedname>ToroidalToCylindrical::Theta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1ab08e9d4d0348f8e793f721d5804301b8" prot="private" static="no">
+        <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Theta_cov =  typename Theta::Dual</definition>
+        <argsstring></argsstring>
+        <name>Theta_cov</name>
+        <qualifiedname>ToroidalToCylindrical::Theta_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1ada4ba2354b0ccaabbd90f9767055c1ec" prot="private" static="no">
+        <type>typename Phi::Dual</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Phi_cov =  typename Phi::Dual</definition>
+        <argsstring></argsstring>
+        <name>Phi_cov</name>
+        <qualifiedname>ToroidalToCylindrical::Phi_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classToroidalToCylindrical_1ae7e27026cc649d0abd5ebd8f7ea4a9c6" prot="private" static="no">
+        <type>Coord&lt; Rho, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
+        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::CoordArg2D =  Coord&lt;Rho, Theta&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordArg2D</name>
+        <qualifiedname>ToroidalToCylindrical::CoordArg2D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classToroidalToCylindrical_1a447e9e5af69a413ae8b49f1e1d5f0121" prot="public" static="no">
         <type>Coord&lt; Rho, <ref refid="structTheta" kindref="compound">Theta</ref>, Phi &gt;</type>
         <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::CoordArg =  Coord&lt;Rho, Theta, Phi&gt;</definition>
@@ -118,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="56" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classToroidalToCylindrical_1aaa80750ea092a63a11fab80d5e0054fa" prot="public" static="no">
         <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta &gt;</type>
@@ -133,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="58" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classToroidalToCylindrical_1aabe05a27dc39247ce0a651f11e60afb4" prot="public" static="no">
         <type><ref refid="classToroidalToCylindrical_1a447e9e5af69a413ae8b49f1e1d5f0121" kindref="member">CoordArg</ref></type>
@@ -148,163 +298,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="60" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a749485e7afd76637d92fae197443cdf4" prot="private" static="no">
-        <type><ref refid="classToroidalToCylindrical_1a2ba3550e813d634fe3906772d7ae4123" kindref="member">cylindrical_tag_R</ref></type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::R =  cylindrical_tag_R</definition>
-        <argsstring></argsstring>
-        <name>R</name>
-        <qualifiedname>ToroidalToCylindrical::R</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="41" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a5aee53516c1125323be46ba11c9b028b" prot="private" static="no">
-        <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::R_cov =  typename R::Dual</definition>
-        <argsstring></argsstring>
-        <name>R_cov</name>
-        <qualifiedname>ToroidalToCylindrical::R_cov</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="42" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a0541d74eb00f079baaa4831f31dfcee7" prot="private" static="no">
-        <type><ref refid="classToroidalToCylindrical_1aa349487d3ca8a2d9b27bbd514d4a7ef1" kindref="member">cylindrical_tag_Z</ref></type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Z =  cylindrical_tag_Z</definition>
-        <argsstring></argsstring>
-        <name>Z</name>
-        <qualifiedname>ToroidalToCylindrical::Z</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="43" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a41b99eb3d84106da6a25dd4c5177b3c8" prot="private" static="no">
-        <type>typename Z::Dual</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Z_cov =  typename Z::Dual</definition>
-        <argsstring></argsstring>
-        <name>Z_cov</name>
-        <qualifiedname>ToroidalToCylindrical::Z_cov</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="44" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1a1a1f09b42df640f983b769c84c3c3bf9" prot="private" static="no">
-        <type>typename Zeta::Dual</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Zeta_cov =  typename Zeta::Dual</definition>
-        <argsstring></argsstring>
-        <name>Zeta_cov</name>
-        <qualifiedname>ToroidalToCylindrical::Zeta_cov</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="45" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1af4ee537db3687038ea1f3739f83ff55d" prot="private" static="no">
-        <type><ref refid="classToroidalToCylindrical_1a9b335bee1c6524190b5618445423f947" kindref="member">toroidal_tag_rho</ref></type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Rho =  toroidal_tag_rho</definition>
-        <argsstring></argsstring>
-        <name>Rho</name>
-        <qualifiedname>ToroidalToCylindrical::Rho</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="46" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1ac8c8888e02aaa8a4720a5a584052f047" prot="private" static="no">
-        <type>typename Rho::Dual</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Rho_cov =  typename Rho::Dual</definition>
-        <argsstring></argsstring>
-        <name>Rho_cov</name>
-        <qualifiedname>ToroidalToCylindrical::Rho_cov</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="47" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1aca1530a99965a521773816579ac9f1fb" prot="private" static="no">
-        <type><ref refid="classToroidalToCylindrical_1a9ff2dd518c6e78208661c7e7efa2e6f7" kindref="member">toroidal_tag_theta</ref></type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Theta =  toroidal_tag_theta</definition>
-        <argsstring></argsstring>
-        <name>Theta</name>
-        <qualifiedname>ToroidalToCylindrical::Theta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="48" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1ab08e9d4d0348f8e793f721d5804301b8" prot="private" static="no">
-        <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Theta_cov =  typename Theta::Dual</definition>
-        <argsstring></argsstring>
-        <name>Theta_cov</name>
-        <qualifiedname>ToroidalToCylindrical::Theta_cov</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="49" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1ada4ba2354b0ccaabbd90f9767055c1ec" prot="private" static="no">
-        <type>typename Phi::Dual</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::Phi_cov =  typename Phi::Dual</definition>
-        <argsstring></argsstring>
-        <name>Phi_cov</name>
-        <qualifiedname>ToroidalToCylindrical::Phi_cov</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="50" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classToroidalToCylindrical_1ae7e27026cc649d0abd5ebd8f7ea4a9c6" prot="private" static="no">
-        <type>Coord&lt; Rho, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
-        <definition>using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::CoordArg2D =  Coord&lt;Rho, Theta&gt;</definition>
-        <argsstring></argsstring>
-        <name>CoordArg2D</name>
-        <qualifiedname>ToroidalToCylindrical::CoordArg2D</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="52" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -320,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="63" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="63" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="56" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -351,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="73" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="73" bodyend="76"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="66" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="66" bodyend="69"/>
       </memberdef>
       <memberdef kind="function" id="classToroidalToCylindrical_1a7e837689121979e49c6bee7f816072b1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classToroidalToCylindrical_1aaa80750ea092a63a11fab80d5e0054fa" kindref="member">CoordResult</ref></type>
@@ -382,7 +376,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="86" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="86" bodyend="89"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="79" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="79" bodyend="82"/>
       </memberdef>
       <memberdef kind="function" id="classToroidalToCylindrical_1a1f210df30c7fec0889f55b07a0227cba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
@@ -413,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="99" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="99" bodyend="102"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="92" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="92" bodyend="95"/>
       </memberdef>
       <memberdef kind="function" id="classToroidalToCylindrical_1a705d91d857d3586ada5086670cb812fb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta &gt;, VectorIndexSet&lt; Rho_cov, <ref refid="structTheta__cov" kindref="compound">Theta_cov</ref>, Phi_cov &gt; &gt;</type>
@@ -445,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="116" bodyend="131"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="109" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="classToroidalToCylindrical_1a69d3910660fac6d49270c25b10d59f4b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -501,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="145" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="145" bodyend="159"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="137" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="137" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="classToroidalToCylindrical_1aef3f106f64f51d2b6706c8eb34e5c054" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; Rho, <ref refid="structTheta" kindref="compound">Theta</ref>, Phi &gt;, VectorIndexSet&lt; <ref refid="structR__cov" kindref="compound">R_cov</ref>, Z_cov, Zeta_cov &gt; &gt;</type>
@@ -533,7 +527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="173" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="173" bodyend="189"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="165" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="165" bodyend="180"/>
       </memberdef>
       <memberdef kind="function" id="classToroidalToCylindrical_1a1e3dcf7af3561dbeb9262c578c9e8e40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -589,7 +583,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="203" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="203" bodyend="218"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="194" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="194" bodyend="209"/>
       </memberdef>
       <memberdef kind="function" id="classToroidalToCylindrical_1adaa7338c681257be7aac6f83998e30fe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>Curvilinear2DToCartesian</type>
@@ -607,7 +601,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="225" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="225" bodyend="228"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="216" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="216" bodyend="219"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -641,15 +635,12 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="21" bodyend="229"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp" bodystart="21" bodyend="220"/>
     <listofallmembers>
       <member refid="classToroidalToCylindrical_1a447e9e5af69a413ae8b49f1e1d5f0121" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>CoordArg</name></member>
       <member refid="classToroidalToCylindrical_1ae7e27026cc649d0abd5ebd8f7ea4a9c6" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>CoordArg2D</name></member>
       <member refid="classToroidalToCylindrical_1aabe05a27dc39247ce0a651f11e60afb4" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>CoordJacobian</name></member>
       <member refid="classToroidalToCylindrical_1aaa80750ea092a63a11fab80d5e0054fa" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>CoordResult</name></member>
-      <member refid="classToroidalToCylindrical_1a2ba3550e813d634fe3906772d7ae4123" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>cylindrical_tag_R</name></member>
-      <member refid="classToroidalToCylindrical_1aa349487d3ca8a2d9b27bbd514d4a7ef1" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>cylindrical_tag_Z</name></member>
-      <member refid="classToroidalToCylindrical_1a6d68f9f6d0c199982bc689102d60aedb" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>cylindrical_tag_Zeta</name></member>
       <member refid="classToroidalToCylindrical_1adaa7338c681257be7aac6f83998e30fe" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>get_2d_polar_mapping</name></member>
       <member refid="classToroidalToCylindrical_1a1e3dcf7af3561dbeb9262c578c9e8e40" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>inv_jacobian_component</name></member>
       <member refid="classToroidalToCylindrical_1aef3f106f64f51d2b6706c8eb34e5c054" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>inv_jacobian_matrix</name></member>
@@ -659,17 +650,20 @@
       <member refid="classToroidalToCylindrical_1a7c658672c0f3cbe1d814db5415f165a8" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>m_mapping_2d</name></member>
       <member refid="classToroidalToCylindrical_1a7e837689121979e49c6bee7f816072b1" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>operator()</name></member>
       <member refid="classToroidalToCylindrical_1ada4ba2354b0ccaabbd90f9767055c1ec" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Phi_cov</name></member>
-      <member refid="classToroidalToCylindrical_1a749485e7afd76637d92fae197443cdf4" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>R</name></member>
+      <member refid="classToroidalToCylindrical_1aff821a80e15ddb94aea93ec30db9db8a" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>R</name></member>
       <member refid="classToroidalToCylindrical_1a5aee53516c1125323be46ba11c9b028b" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>R_cov</name></member>
-      <member refid="classToroidalToCylindrical_1af4ee537db3687038ea1f3739f83ff55d" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Rho</name></member>
+      <member refid="classToroidalToCylindrical_1ad9cb91111410d423345b7b84f93e67f6" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Rho</name></member>
       <member refid="classToroidalToCylindrical_1ac8c8888e02aaa8a4720a5a584052f047" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Rho_cov</name></member>
-      <member refid="classToroidalToCylindrical_1aca1530a99965a521773816579ac9f1fb" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Theta</name></member>
+      <member refid="classToroidalToCylindrical_1a0d67dd1b9026e33a80853025bfa2a3da" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>RhoThetaBasis</name></member>
+      <member refid="classToroidalToCylindrical_1a59743e0477178b2320854a64b7a0c91e" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>RhoThetaBasis_cov</name></member>
+      <member refid="classToroidalToCylindrical_1a95fe2209876482394d4fbf65db9d283a" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>RZBasis</name></member>
+      <member refid="classToroidalToCylindrical_1a313f9c9a42a5fb76bded577eb29db687" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>RZBasis_cov</name></member>
+      <member refid="classToroidalToCylindrical_1a9c87a6a77c2a28ca3877eaf0c32fda7e" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>RZDim1</name></member>
+      <member refid="classToroidalToCylindrical_1a1edc6f955caf610fcd9160a7b8e5c013" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>RZDim2</name></member>
+      <member refid="classToroidalToCylindrical_1a3770167ca6f56ec32e61736da5992ff2" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Theta</name></member>
       <member refid="classToroidalToCylindrical_1ab08e9d4d0348f8e793f721d5804301b8" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Theta_cov</name></member>
-      <member refid="classToroidalToCylindrical_1aa3b5d507e4d1fd654579609d361fd0b1" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>toroidal_tag_phi</name></member>
-      <member refid="classToroidalToCylindrical_1a9b335bee1c6524190b5618445423f947" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>toroidal_tag_rho</name></member>
-      <member refid="classToroidalToCylindrical_1a9ff2dd518c6e78208661c7e7efa2e6f7" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>toroidal_tag_theta</name></member>
       <member refid="classToroidalToCylindrical_1a7e23755b2802d0cc40a4aa5ff986132b" prot="public" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>ToroidalToCylindrical</name></member>
-      <member refid="classToroidalToCylindrical_1a0541d74eb00f079baaa4831f31dfcee7" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Z</name></member>
+      <member refid="classToroidalToCylindrical_1a2572138f1e900fdf011a5a0e4a0352a9" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Z</name></member>
       <member refid="classToroidalToCylindrical_1a41b99eb3d84106da6a25dd4c5177b3c8" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Z_cov</name></member>
       <member refid="classToroidalToCylindrical_1a1a1f09b42df640f983b769c84c3c3bf9" prot="private" virt="non-virtual"><scope>ToroidalToCylindrical</scope><name>Zeta_cov</name></member>
     </listofallmembers>

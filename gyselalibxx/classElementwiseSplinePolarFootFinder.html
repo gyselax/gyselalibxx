@@ -584,7 +584,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-elementwisesplinepolarfootfinder"><strong>ElementwiseSplinePolarFootFinder</strong></a> (SplineRThetaEvaluatorAdvection const &amp; evaluator_advection_field, PseudoPhysicalToAdvectionMapping const &amp; pseudo_physical_to_advection, PseudoPhysicalToLogicalMapping const &amp; pseudo_physical_to_logical, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical, TimeStepper const &amp; time_stepper, AdvecCoefField const &amp; advection_field_coefs, Coord&lt; X_pc, Y_pc &gt; coord_centre, IdxRange&lt; <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt; idx_range_theta, double dt) <br><em>Construct an</em> <a href="classElementwiseSplinePolarFootFinder.html"><em><strong>ElementwiseSplinePolarFootFinder</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-elementwisesplinepolarfootfinder"><strong>ElementwiseSplinePolarFootFinder</strong></a> (SplineRThetaEvaluatorAdvection const &amp; evaluator_advection_field, PseudoPhysicalToAdvectionMapping const &amp; pseudo_physical_to_advection, PseudoPhysicalToLogicalMapping const &amp; pseudo_physical_to_logical, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical, TimeStepper const &amp; time_stepper, AdvecCoefField const &amp; advection_field_coefs, CoordX_pcY_pc coord_centre, IdxRange&lt; <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt; idx_range_theta, double dt) <br><em>Construct an</em> <a href="classElementwiseSplinePolarFootFinder.html"><em><strong>ElementwiseSplinePolarFootFinder</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION CoordRTheta</td>
@@ -620,7 +620,7 @@
     LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical,
     TimeStepper const &amp; time_stepper,
     AdvecCoefField const &amp; advection_field_coefs,
-    Coord&lt; X_pc, Y_pc &gt; coord_centre,
+    CoordX_pcY_pc coord_centre,
     IdxRange&lt; GridTheta &gt; idx_range_theta,
     double dt
 ) 

@@ -611,14 +611,6 @@
 <td style="text-align: left;"><a href="#typedef-y_cov"><strong>Y_cov</strong></a>  <br><em>The covariant form of the second physical coordinate.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="structX.html"><strong>X</strong></a></td>
-<td style="text-align: left;"><a href="#typedef-cartesian_tag_x"><strong>cartesian_tag_x</strong></a>  <br><em>Indicate the first physical coordinate.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef <a href="structY.html"><strong>Y</strong></a></td>
-<td style="text-align: left;"><a href="#typedef-cartesian_tag_y"><strong>cartesian_tag_y</strong></a>  <br><em>Indicate the second physical coordinate.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">typedef <a href="structR.html"><strong>R</strong></a></td>
 <td style="text-align: left;"><a href="#typedef-curvilinear_tag_r"><strong>curvilinear_tag_r</strong></a>  <br><em>Indicate the first logical coordinate.</em></td>
 </tr>
@@ -761,18 +753,6 @@
 <h3 id="typedef-y_cov">typedef Y_cov</h3>
 <p><em>The covariant form of the second physical coordinate.</em> </p>
 <pre><code class="language-C++">using CzarnyToCartesian&lt; R, Theta, X, Y &gt;::Y_cov =  typename Y::Dual;
-</code></pre>
-<hr>
-
-<h3 id="typedef-cartesian_tag_x">typedef cartesian_tag_x</h3>
-<p><em>Indicate the first physical coordinate.</em> </p>
-<pre><code class="language-C++">using CzarnyToCartesian&lt; R, Theta, X, Y &gt;::cartesian_tag_x =  X;
-</code></pre>
-<hr>
-
-<h3 id="typedef-cartesian_tag_y">typedef cartesian_tag_y</h3>
-<p><em>Indicate the second physical coordinate.</em> </p>
-<pre><code class="language-C++">using CzarnyToCartesian&lt; R, Theta, X, Y &gt;::cartesian_tag_y =  Y;
 </code></pre>
 <hr>
 

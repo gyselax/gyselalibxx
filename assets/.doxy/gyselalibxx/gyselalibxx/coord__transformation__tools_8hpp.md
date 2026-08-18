@@ -37,6 +37,11 @@
 | namespace | [**concepts**](namespaceconcepts.md) <br> |
 
 
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| struct | [**CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;**](structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4.md) &lt;class Dim1, class Dim2&gt;<br>_A class to identify the radial and poloidal components of a 2D cuvilinear coordinate._  |
 
 
 ## Public Types

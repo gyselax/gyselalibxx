@@ -9,9 +9,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a87ae6fc1becf7bc787165afd77c6aeff" prot="private" static="no">
-        <type>typename ToPhysicalMapping::curvilinear_tag_r</type>
-        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::R =  typename ToPhysicalMapping::curvilinear_tag_r</definition>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1ab78e0efabe110fca95054c5b72b8335c" prot="private" static="no">
+        <type>typename <ref refid="structCoordWithOPoint" kindref="compound">CoordWithOPoint</ref>&lt; typename ToPhysicalMapping::CoordArg &gt;::curvilinear_tag_r</type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::R =  typename CoordWithOPoint&lt;typename ToPhysicalMapping::CoordArg&gt;::curvilinear_tag_r</definition>
         <argsstring></argsstring>
         <name>R</name>
         <qualifiedname>GMGPolarTools::MappingToDomainGeometry::R</qualifiedname>
@@ -23,9 +23,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="21" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a842620593fdc3c940e0750ec25aa1fe4" prot="private" static="no">
-        <type>typename ToPhysicalMapping::curvilinear_tag_theta</type>
-        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Theta =  typename ToPhysicalMapping::curvilinear_tag_theta</definition>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1aaa28d1a00898d37f8d2fcb08508f23f8" prot="private" static="no">
+        <type>typename <ref refid="structCoordWithOPoint" kindref="compound">CoordWithOPoint</ref>&lt; typename ToPhysicalMapping::CoordArg &gt;::curvilinear_tag_theta</type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Theta =  typename CoordWithOPoint&lt;typename ToPhysicalMapping::CoordArg&gt;::curvilinear_tag_theta</definition>
         <argsstring></argsstring>
         <name>Theta</name>
         <qualifiedname>GMGPolarTools::MappingToDomainGeometry::Theta</qualifiedname>
@@ -35,11 +35,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="22" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="22" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="22" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="23" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a608a1cb204b521c3a494735ff41818a7" prot="private" static="no">
-        <type>typename ToPhysicalMapping::cartesian_tag_x</type>
-        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::X =  typename ToPhysicalMapping::cartesian_tag_x</definition>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a6bd3dad0feb8b456291e4c79e38c0aac" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename ToPhysicalMapping::CoordResult &gt; &gt;</type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::X =  ddc:: type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;typename ToPhysicalMapping::CoordResult&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>X</name>
         <qualifiedname>GMGPolarTools::MappingToDomainGeometry::X</qualifiedname>
@@ -49,11 +49,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="24" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="26" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a509c5d01bde07d317776f7d55497d811" prot="private" static="no">
-        <type>typename ToPhysicalMapping::cartesian_tag_y</type>
-        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Y =  typename ToPhysicalMapping::cartesian_tag_y</definition>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1aead526d2bd10b22ab5b0045b9d5b5fae" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; typename ToPhysicalMapping::CoordResult &gt; &gt;</type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Y =  ddc:: type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;typename ToPhysicalMapping::CoordResult&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>Y</name>
         <qualifiedname>GMGPolarTools::MappingToDomainGeometry::Y</qualifiedname>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="25" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a90c0ce15a510761e72d7e1a5f16964fe" prot="private" static="no">
         <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a46cd2dc3b2371863a449cafa3046be0e" prot="private" static="no">
         <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="28" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="31" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="31" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="34" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="35" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="35" bodyend="35"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="38" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1ad8f75388f0ff5006f7417e81f9b918f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="38" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="38" bodyend="41"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="41" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="41" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a26744413afee2739a75030d9aa70232c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="43" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="43" bodyend="46"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="46" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="46" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a517a0c0437897439c499337513d999a6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="48" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="48" bodyend="51"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="51" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="51" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1aa4e3bbcb8a040b3835d95ac4af80cb98" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="53" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="53" bodyend="56"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="56" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="56" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1adacb9eef0d1ee274384ab738277607ea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="58" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="58" bodyend="61"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="61" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="61" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1aa5d64b42c29f7756f9c816f16bec1f7b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="63" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="63" bodyend="66"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="66" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="66" bodyend="69"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -284,7 +284,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="20" bodyend="67"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="20" bodyend="70"/>
     <listofallmembers>
       <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a517a0c0437897439c499337513d999a6" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>dFx_dr</name></member>
       <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1adacb9eef0d1ee274384ab738277607ea" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>dFx_dtheta</name></member>
@@ -294,12 +294,12 @@
       <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a26744413afee2739a75030d9aa70232c" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Fy</name></member>
       <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a7e47bd7600945c0ce9f827cf091ca4d9" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>m_to_physical</name></member>
       <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1ad614e6c9e47785710969f043e5359693" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>MappingToDomainGeometry</name></member>
-      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a87ae6fc1becf7bc787165afd77c6aeff" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>R</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1ab78e0efabe110fca95054c5b72b8335c" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>R</name></member>
       <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a90c0ce15a510761e72d7e1a5f16964fe" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>R_cov</name></member>
-      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a842620593fdc3c940e0750ec25aa1fe4" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Theta</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1aaa28d1a00898d37f8d2fcb08508f23f8" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Theta</name></member>
       <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a46cd2dc3b2371863a449cafa3046be0e" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Theta_cov</name></member>
-      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a608a1cb204b521c3a494735ff41818a7" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>X</name></member>
-      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a509c5d01bde07d317776f7d55497d811" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Y</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a6bd3dad0feb8b456291e4c79e38c0aac" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>X</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1aead526d2bd10b22ab5b0045b9d5b5fae" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Y</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

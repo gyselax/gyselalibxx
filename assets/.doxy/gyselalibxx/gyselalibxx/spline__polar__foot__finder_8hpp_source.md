@@ -45,8 +45,8 @@ class ElementwiseSplinePolarFootFinder
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
     using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using CoordRTheta = Coord<R, Theta>;
-    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using CoordX_pcY_pc = typename PseudoPhysicalToLogicalMapping::CoordArg;
+    using PseudoCartBasis = ddc::to_type_seq_t<CoordX_pcY_pc>;
     using VectorIndexSetAdvectionDims
             = ddc::to_type_seq_t<typename PseudoPhysicalToAdvectionMapping::CoordResult>;
     using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
@@ -62,7 +62,7 @@ private:
     TimeStepper m_time_stepper;
 
     AdvecCoefField m_advection_field_coefs;
-    Coord<X_pc, Y_pc> m_coord_centre;
+    CoordX_pcY_pc m_coord_centre;
     IdxRange<GridTheta> m_idx_range_theta;
     double m_dt;
 
@@ -74,7 +74,7 @@ public:
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             TimeStepper const& time_stepper,
             AdvecCoefField const& advection_field_coefs,
-            Coord<X_pc, Y_pc> coord_centre,
+            CoordX_pcY_pc coord_centre,
             IdxRange<GridTheta> idx_range_theta,
             double dt)
         : m_evaluator_advection_field(evaluator_advection_field)
@@ -93,7 +93,7 @@ public:
         IdxBatch idx_batch(idx);
         IdxRTheta idx_rtheta(idx);
         // The function describing how the derivative of the evolve function is calculated.
-        auto dy = [&](DVector<X_pc, Y_pc>& updated_advection_field, CoordRTheta const& foot) {
+        auto dy = [&](DTensor<PseudoCartBasis>& updated_advection_field, CoordRTheta const& foot) {
             DVector<AdvDim1, AdvDim2> updated_advection_field_adv_space;
             ddcHelper::get<AdvDim1>(updated_advection_field_adv_space)
                     = m_evaluator_advection_field(
@@ -110,7 +110,7 @@ public:
             CoordRTheta advection_location_for_mapping(
                     Kokkos::min(ddc::select<R>(foot), ddc::discrete_space<BSplinesR>().rmax()),
                     ddc::select<Theta>(foot));
-            updated_advection_field = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+            updated_advection_field = to_vector_space<PseudoCartBasis>(
                     m_pseudo_physical_to_advection,
                     advection_location_for_mapping,
                     updated_advection_field_adv_space);
@@ -118,10 +118,10 @@ public:
 
         // The function describing how the value(s) are updated using the derivative.
         auto update_function = [&](CoordRTheta& foot_rtheta,
-                                   DVector<X_pc, Y_pc> const& advection_field,
+                                   DTensor<PseudoCartBasis> const& advection_field,
                                    double dt) {
-            Coord<X_pc, Y_pc> const coord_xy = m_logical_to_pseudo_physical(foot_rtheta);
-            Coord<X_pc, Y_pc> const foot_xy = coord_xy - dt * advection_field;
+            CoordX_pcY_pc const coord_xy = m_logical_to_pseudo_physical(foot_rtheta);
+            CoordX_pcY_pc const foot_xy = coord_xy - dt * advection_field;
 
             if (norm_inf(foot_xy - m_coord_centre) < 1e-15) {
                 foot_rtheta = CoordRTheta(0, 0);
@@ -153,8 +153,7 @@ class ElementwiseSplinePolarFootFinderMem
 {
     using R = typename GridR::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
-    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using CoordX_pcY_pc = typename PseudoPhysicalToLogicalMapping::CoordArg;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
@@ -183,7 +182,7 @@ private:
     TimeStepper m_time_stepper;
 
     AdvecCoefFieldMem m_advection_field_coefs_alloc;
-    Coord<X_pc, Y_pc> m_coord_centre;
+    CoordX_pcY_pc m_coord_centre;
     IdxRange<GridTheta> m_idx_range_theta;
 
 public:
@@ -194,7 +193,7 @@ public:
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             TimeStepper const& time_stepper,
             AdvecCoefFieldMem&& advection_field_coefs,
-            Coord<X_pc, Y_pc> coord_centre,
+            CoordX_pcY_pc coord_centre,
             IdxRange<GridTheta> idx_range_theta)
         : m_evaluator_advection_field(evaluator_advection_field)
         , m_pseudo_physical_to_advection(pseudo_physical_to_advection)
@@ -295,8 +294,6 @@ public:
 
 private:
     using MemSpace = typename ExecSpace::memory_space;
-    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
     using CoordXY_pc = typename LogicalToPseudoPhysicalMapping::CoordResult;
 
     using PseudoCartesianBasis = ddc::to_type_seq_t<CoordXY_pc>;
@@ -313,7 +310,11 @@ private:
     using IdxTheta = Idx<GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
 
-    using PseudoCartesianToCircular = CartesianToCircular<X_pc, Y_pc, R, Theta>;
+    using PseudoCartesianToCircular = CartesianToCircular<
+            ddc::type_seq_element_t<0, PseudoCartesianBasis>,
+            ddc::type_seq_element_t<1, PseudoCartesianBasis>,
+            R,
+            Theta>;
     using PseudoPhysicalToAdvectionMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
@@ -326,8 +327,8 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    using TimeStepper =
-            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
+    using TimeStepper = typename TimeStepperBuilder::
+            template time_stepper_t<CoordRTheta, DTensor<PseudoCartesianBasis>>;
 
     TimeStepperBuilder const& m_time_stepper_builder;
 

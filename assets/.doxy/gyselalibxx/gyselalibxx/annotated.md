@@ -38,6 +38,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**ConstantIdentityInterpolationExtrapolationRule**](classConstantIdentityInterpolationExtrapolationRule.md) _A constant extrapolation rule for identity-based (Lagrange) interpolation._     
 * **class** [**ConstantPartialDerivative**](classConstantPartialDerivative.md) _A class to get the derivative of a constant function. When the derivative of a function is known to be 0 but the dimension is still needed this class can be used to avoid unnecessary calculations._     
 * **class** [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md) _A class to create a_ [_**ConstantPartialDerivative**_](classConstantPartialDerivative.md) _via a create\_instance function._    
+* **struct** [**CoordWithOPoint**](structCoordWithOPoint.md) 
+* **struct** [**CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;**](structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4.md) _A class to identify the radial and poloidal components of a 2D cuvilinear coordinate._     
 * **class** [**CrankNicolson**](classCrankNicolson.md) _A class which provides an implementation of a Crank-Nicolson method._     
 * **class** [**CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) _A class which provides an implementation of a Crank-Nicolson method._     
 * **class** [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md) _A class to indicate that a Crank-Nicolson time stepper should be constructed for use in other operators._     

@@ -72,7 +72,7 @@
 |   | [**OnionPatchLocator**](#function-onionpatchlocator) ([**MultipatchIdxRanges**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md#typedef-multipatchidxranges) const & all\_idx\_ranges, LogicalToPhysicalMapping const & to\_physical\_mapping, PhysicalToLogicalMapping const & to\_logical\_mapping) <br>_Instantiante the operator with_ [_**MultipatchType**_](classMultipatchType.md) _of index ranges and a mapping on all the patches._ |
 |  KOKKOS\_FUNCTION LogicalToPhysicalMapping | [**get\_mapping\_on\_logical\_dim**](#function-get_mapping_on_logical_dim) () const<br>_Get the mapping from given logical continuous dimensions. The function can run on device and host._  |
 |  KOKKOS\_FUNCTION LogicalToPhysicalMapping | [**get\_mapping\_on\_patch**](#function-get_mapping_on_patch) () const<br>_Get the mapping on the given_ [_**Patch**_](structPatch.md) _. The function can run on device and host._ |
-|  KOKKOS\_INLINE\_FUNCTION int | [**operator()**](#function-operator) (Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const coord) const<br>_Get the patch where the given physical coordinate is._  |
+|  KOKKOS\_INLINE\_FUNCTION int | [**operator()**](#function-operator) (CoordXY const coord) const<br>_Get the patch where the given physical coordinate is._  |
 |   | [**~OnionPatchLocator**](#function-onionpatchlocator) () = default<br> |
 
 
@@ -333,7 +333,7 @@ The mapping on the given [**Patch**](structPatch.md).
 _Get the patch where the given physical coordinate is._ 
 ```C++
 inline KOKKOS_INLINE_FUNCTION int OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::operator() (
-    Coord< X , Y > const coord
+    CoordXY const coord
 ) const
 ```
 

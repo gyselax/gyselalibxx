@@ -59,8 +59,8 @@ _Owning manager for_ [_**ElementwiseLogicalAdvPseudoPhysFootFinder**_](classpola
 
 | Type | Name |
 | ---: | :--- |
-|   | [**ElementwiseLogicalAdvPseudoPhysFootFinderMem**](#function-elementwiselogicaladvpseudophysfootfindermem-12) (RThetaAdvectionEvaluator const & evaluator\_advection\_field, LogicalToPhysicalMapping const & logical\_to\_physical, TimeStepperBuilder const & time\_stepper\_builder, AdvecCoefFieldMem && advection\_field\_coefs, Coord&lt; X\_pc, Y\_pc &gt; coord\_centre, IdxRange&lt; [**GridTheta**](structGridTheta.md) &gt; idx\_range\_theta) <br>_Construct an_ [_**ElementwiseLogicalAdvPseudoPhysFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md) _._ |
-|   | [**ElementwiseLogicalAdvPseudoPhysFootFinderMem**](#function-elementwiselogicaladvpseudophysfootfindermem-12) (RThetaAdvectionEvaluator const & evaluator\_advection\_field, LogicalToPhysicalMapping const & logical\_to\_physical, TimeStepperBuilder const & time\_stepper\_builder, AdvecCoefFieldMem && advection\_field\_coefs, Coord&lt; X\_pc, Y\_pc &gt; coord\_centre, IdxRange&lt; [**GridTheta**](structGridTheta.md) &gt; idx\_range\_theta) <br>_Construct an_ [_**ElementwiseLogicalAdvPseudoPhysFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md) _when the logical-to-physical mapping does not share the pseudo-physical Cartesian tags._ |
+|   | [**ElementwiseLogicalAdvPseudoPhysFootFinderMem**](#function-elementwiselogicaladvpseudophysfootfindermem-12) (RThetaAdvectionEvaluator const & evaluator\_advection\_field, LogicalToPhysicalMapping const & logical\_to\_physical, TimeStepperBuilder const & time\_stepper\_builder, AdvecCoefFieldMem && advection\_field\_coefs, CoordX\_pcY\_pc coord\_centre, IdxRange&lt; [**GridTheta**](structGridTheta.md) &gt; idx\_range\_theta) <br>_Construct an_ [_**ElementwiseLogicalAdvPseudoPhysFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md) _._ |
+|   | [**ElementwiseLogicalAdvPseudoPhysFootFinderMem**](#function-elementwiselogicaladvpseudophysfootfindermem-12) (RThetaAdvectionEvaluator const & evaluator\_advection\_field, LogicalToPhysicalMapping const & logical\_to\_physical, TimeStepperBuilder const & time\_stepper\_builder, AdvecCoefFieldMem && advection\_field\_coefs, CoordX\_pcY\_pc coord\_centre, IdxRange&lt; [**GridTheta**](structGridTheta.md) &gt; idx\_range\_theta) <br>_Construct an_ [_**ElementwiseLogicalAdvPseudoPhysFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md) _when the logical-to-physical mapping does not share the pseudo-physical Cartesian tags._ |
 |  [**GPUCompat**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md#typedef-gpucompat) | [**operator()**](#function-operator) (double dt) <br>_Create an_ [_**ElementwiseLogicalAdvPseudoPhysFootFinder**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder.md) _for the given time step._ |
 
 
@@ -122,13 +122,13 @@ using polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem< G
 
 _Construct an_ [_**ElementwiseLogicalAdvPseudoPhysFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md) _._
 ```C++
-template<class LogicalToPhysicalMapping, std::enable_if_t<(std::is_same_v< X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x >)&&(std::is_same_v< Y_pc, typename LogicalToPhysicalMapping::cartesian_tag_y >), bool >>
+template<class LogicalToPhysicalMapping, std::enable_if_t< ddc::type_seq_contains_v< PseudoCartBasis, ddc::to_type_seq_t< typename LogicalToPhysicalMapping::CoordResult > >, bool >>
 inline polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem::ElementwiseLogicalAdvPseudoPhysFootFinderMem (
     RThetaAdvectionEvaluator const & evaluator_advection_field,
     LogicalToPhysicalMapping const & logical_to_physical,
     TimeStepperBuilder const & time_stepper_builder,
     AdvecCoefFieldMem && advection_field_coefs,
-    Coord< X_pc, Y_pc > coord_centre,
+    CoordX_pcY_pc coord_centre,
     IdxRange< GridTheta > idx_range_theta
 ) 
 ```
@@ -160,13 +160,13 @@ inline polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem::
 
 _Construct an_ [_**ElementwiseLogicalAdvPseudoPhysFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md) _when the logical-to-physical mapping does not share the pseudo-physical Cartesian tags._
 ```C++
-template<class LogicalToPhysicalMapping, std::enable_if_t< !((std::is_same_v< X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x >)&&(std::is_same_v< Y_pc, typename LogicalToPhysicalMapping::cartesian_tag_y >)), bool >>
+template<class LogicalToPhysicalMapping, std::enable_if_t< !(ddc::type_seq_contains_v< PseudoCartBasis, ddc::to_type_seq_t< typename LogicalToPhysicalMapping::CoordResult > >), bool >>
 inline polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem::ElementwiseLogicalAdvPseudoPhysFootFinderMem (
     RThetaAdvectionEvaluator const & evaluator_advection_field,
     LogicalToPhysicalMapping const & logical_to_physical,
     TimeStepperBuilder const & time_stepper_builder,
     AdvecCoefFieldMem && advection_field_coefs,
-    Coord< X_pc, Y_pc > coord_centre,
+    CoordX_pcY_pc coord_centre,
     IdxRange< GridTheta > idx_range_theta
 ) 
 ```

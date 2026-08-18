@@ -640,9 +640,11 @@ class GyroAverageOperator
 
     using CoordRminorTheta = Coord&lt;Rminor, Theta&gt;;
     using CoordR_gyroTheta_gyro = Coord&lt;R_gyro, Theta_gyro&gt;;
-    using Rmajor = typename ToLogicalCoordTransform::cartesian_tag_x;
-    using Z = typename ToLogicalCoordTransform::cartesian_tag_y;
-    using CoordRZ = Coord&lt;Rmajor, Z&gt;;
+    using RZ_1 = ddc::
+            type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;typename ToLogicalCoordTransform::CoordArg&gt;&gt;;
+    using RZ_2 = ddc::
+            type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;typename ToLogicalCoordTransform::CoordArg&gt;&gt;;
+    using CoordRZ = typename ToLogicalCoordTransform::CoordArg;
 
     // FIXME
     // Need to add a static assert to check evaluator is addmissible to builder
@@ -733,7 +735,7 @@ public:
                             inverse_mapping_t&lt;ToLogicalCoordTransform&gt; inv_coordinate_transform
                                     = coordinate_transform.get_inverse_mapping();
                             CoordRZ gyrocentre = inv_coordinate_transform(ddc::coordinate(irtheta));
-                            CircularToCartesian&lt;R_gyro, Theta_gyro, Rmajor, Z&gt; circ_to_cart(
+                            CircularToCartesian&lt;R_gyro, Theta_gyro, RZ_1, RZ_2&gt; circ_to_cart(
                                     gyrocentre);
                             CoordRZ particle_position = circ_to_cart(
                                     CoordR_gyroTheta_gyro {rho_L(ir, itheta), alpha});

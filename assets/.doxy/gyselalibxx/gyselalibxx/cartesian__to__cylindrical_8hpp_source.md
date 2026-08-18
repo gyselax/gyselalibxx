@@ -29,9 +29,6 @@ template <class X, class Y, class Z, class R, class Zeta>
 class CartesianToCylindrical
 {
 public:
-    using cartesian_tag_x = X;
-    using cartesian_tag_y = Y;
-    using cartesian_tag_z = Z;
     using cylindrical_tag_R = R;
     using cylindrical_tag_Z = Z;
     using cylindrical_tag_Zeta = Zeta;

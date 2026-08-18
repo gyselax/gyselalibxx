@@ -155,12 +155,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="47" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1abaf4628acc5815e7487d96c6b170ebd2" prot="private" static="no">
-        <type>typename LogicalToPseudoPhysicalMapping::cartesian_tag_x</type>
-        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::X_pc =  typename LogicalToPseudoPhysicalMapping::cartesian_tag_x</definition>
+      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a56e6cf5e9c131c1a0acb8c9410024c8c" prot="private" static="no">
+        <type>typename PseudoPhysicalToLogicalMapping::CoordArg</type>
+        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::CoordX_pcY_pc =  typename PseudoPhysicalToLogicalMapping::CoordArg</definition>
         <argsstring></argsstring>
-        <name>X_pc</name>
-        <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder::X_pc</qualifiedname>
+        <name>CoordX_pcY_pc</name>
+        <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder::CoordX_pcY_pc</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -169,12 +169,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a12355536b2206f9f6a0d0ad20ca9bf43" prot="private" static="no">
-        <type>typename LogicalToPseudoPhysicalMapping::cartesian_tag_y</type>
-        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::Y_pc =  typename LogicalToPseudoPhysicalMapping::cartesian_tag_y</definition>
+      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1ab5beabbe0a9f5c24bb8b9598389335e0" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; CoordX_pcY_pc &gt;</type>
+        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::PseudoCartBasis =  ddc::to_type_seq_t&lt;CoordX_pcY_pc&gt;</definition>
         <argsstring></argsstring>
-        <name>Y_pc</name>
-        <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder::Y_pc</qualifiedname>
+        <name>PseudoCartBasis</name>
+        <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder::PseudoCartBasis</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -255,9 +255,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="59" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="59" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a1cf304dca78ec576ac822a8be68ece7f" prot="private" static="no" mutable="no">
-        <type>Coord&lt; X_pc, Y_pc &gt;</type>
-        <definition>Coord&lt;X_pc, Y_pc&gt; polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::m_coord_centre</definition>
+      <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a594ea56f3dae33e7f4b99bcb1d0f84b9" prot="private" static="no" mutable="no">
+        <type>CoordX_pcY_pc</type>
+        <definition>CoordX_pcY_pc polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::m_coord_centre</definition>
         <argsstring></argsstring>
         <name>m_coord_centre</name>
         <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder::m_coord_centre</qualifiedname>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="60" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="60" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a593bb054792b3b96f406a904124bc57b" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -299,10 +299,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a7c3faf0853fdf5f7418a23cf6ba74b34" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a6870b7fe45d85510f9b83ce2d75f2f8f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::ElementwiseLogicalAdvPseudoPhysFootFinder</definition>
-        <argsstring>(RThetaAdvectionEvaluator const &amp;evaluator_advection_field, PseudoPhysicalToLogicalMapping const &amp;pseudo_physical_to_logical, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical, TimeStepper const &amp;time_stepper, AdvecCoefField const &amp;advection_field_coefs, Coord&lt; X_pc, Y_pc &gt; coord_centre, IdxRange&lt; GridTheta &gt; idx_range_theta, double dt)</argsstring>
+        <argsstring>(RThetaAdvectionEvaluator const &amp;evaluator_advection_field, PseudoPhysicalToLogicalMapping const &amp;pseudo_physical_to_logical, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical, TimeStepper const &amp;time_stepper, AdvecCoefField const &amp;advection_field_coefs, CoordX_pcY_pc coord_centre, IdxRange&lt; GridTheta &gt; idx_range_theta, double dt)</argsstring>
         <name>ElementwiseLogicalAdvPseudoPhysFootFinder</name>
         <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder::ElementwiseLogicalAdvPseudoPhysFootFinder</qualifiedname>
         <param>
@@ -326,7 +326,7 @@
           <declname>advection_field_coefs</declname>
         </param>
         <param>
-          <type>Coord&lt; X_pc, Y_pc &gt;</type>
+          <type>CoordX_pcY_pc</type>
           <declname>coord_centre</declname>
         </param>
         <param>
@@ -455,13 +455,14 @@
     <listofallmembers>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a02659782cc25c4e85e724f4d44c86e9f" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>BSplinesR</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1af60172a862fb0669aeab744dff74b80e" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>CoordRTheta</name></member>
-      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a7c3faf0853fdf5f7418a23cf6ba74b34" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>ElementwiseLogicalAdvPseudoPhysFootFinder</name></member>
+      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a56e6cf5e9c131c1a0acb8c9410024c8c" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>CoordX_pcY_pc</name></member>
+      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a6870b7fe45d85510f9b83ce2d75f2f8f" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>ElementwiseLogicalAdvPseudoPhysFootFinder</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a6cecfa0bb8e7c20380436275efdabb19" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>IdxBatch</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a304b69fcf09c23091feeb45eedaab9c4" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>IdxOperator</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a1024a27cd9d37fd4e5686ceb07fa5c53" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>IdxRangeBatch</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1aa967c47b7018e58b0a927bab9411a95d" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>IdxRTheta</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1abac20e684226055b1d62f0922538b9ad" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>m_advection_field_coefs</name></member>
-      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a1cf304dca78ec576ac822a8be68ece7f" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>m_coord_centre</name></member>
+      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a594ea56f3dae33e7f4b99bcb1d0f84b9" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>m_coord_centre</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a48e2307d38a4641f82f2ef29f74d067f" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>m_dt</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a0711e2c5a28efcb57142278248bbe46c" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>m_evaluator_advection_field</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a593bb054792b3b96f406a904124bc57b" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>m_idx_range_theta</name></member>
@@ -469,11 +470,10 @@
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a6c1fdbd7b5a0a161fb0890626ae77027" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>m_pseudo_physical_to_logical</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1ab0786bd6d960b1e8ac01abaedf259069" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>m_time_stepper</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1ab9a750e4551a868cf91620d7f83a9766" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>operator()</name></member>
+      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1ab5beabbe0a9f5c24bb8b9598389335e0" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>PseudoCartBasis</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a56ea19d2d2e80459a2dc95ab480858fa" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>PseudoPhysicalToLogicalMapping</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a02dcb91df39a3fb0143b9aeeb712f9f3" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>R</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a794de43f6b8cb316dc43af0723b07f56" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>Theta</name></member>
-      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1abaf4628acc5815e7487d96c6b170ebd2" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>X_pc</name></member>
-      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a12355536b2206f9f6a0d0ad20ca9bf43" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>Y_pc</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

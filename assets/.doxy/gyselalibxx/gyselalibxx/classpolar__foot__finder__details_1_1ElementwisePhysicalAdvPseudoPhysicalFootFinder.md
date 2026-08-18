@@ -54,7 +54,7 @@ _GPU-callable functor that finds characteristic feet for physical-space advectio
 
 | Type | Name |
 | ---: | :--- |
-|   | [**ElementwisePhysicalAdvPseudoPhysicalFootFinder**](#function-elementwisephysicaladvpseudophysicalfootfinder) (RThetaAdvectionEvaluator const & evaluator\_advection\_field, PseudoPhysicalToAdvectionMapping const & pseudo\_physical\_to\_advection, PseudoPhysicalToLogicalMapping const & pseudo\_physical\_to\_logical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, TimeStepper const & time\_stepper, AdvecCoefField const & advection\_field\_coefs, Coord&lt; X\_pc, Y\_pc &gt; coord\_centre, IdxRange&lt; [**GridTheta**](structGridTheta.md) &gt; idx\_range\_theta, double dt) <br>_Construct an_ [_**ElementwisePhysicalAdvPseudoPhysicalFootFinder**_](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md) _._ |
+|   | [**ElementwisePhysicalAdvPseudoPhysicalFootFinder**](#function-elementwisephysicaladvpseudophysicalfootfinder) (RThetaAdvectionEvaluator const & evaluator\_advection\_field, PseudoPhysicalToAdvectionMapping const & pseudo\_physical\_to\_advection, PseudoPhysicalToLogicalMapping const & pseudo\_physical\_to\_logical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, TimeStepper const & time\_stepper, AdvecCoefField const & advection\_field\_coefs, CoordX\_pcY\_pc coord\_centre, IdxRange&lt; [**GridTheta**](structGridTheta.md) &gt; idx\_range\_theta, double dt) <br>_Construct an_ [_**ElementwisePhysicalAdvPseudoPhysicalFootFinder**_](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md) _._ |
 |  KOKKOS\_FUNCTION CoordRTheta | [**operator()**](#function-operator) (IdxOperator const idx) const<br>_Find the foot of the characteristic at a single grid index._  |
 
 
@@ -107,7 +107,7 @@ inline polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder
     LogicalToPseudoPhysicalMapping const & logical_to_pseudo_physical,
     TimeStepper const & time_stepper,
     AdvecCoefField const & advection_field_coefs,
-    Coord< X_pc, Y_pc > coord_centre,
+    CoordX_pcY_pc coord_centre,
     IdxRange< GridTheta > idx_range_theta,
     double dt
 ) 

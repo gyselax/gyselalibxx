@@ -29,8 +29,6 @@ template <class R, class Theta, class X, class Y>
 class CircularToCartesian
 {
 public:
-    using cartesian_tag_x = X;
-    using cartesian_tag_y = Y;
     using curvilinear_tag_r = R;
     using curvilinear_tag_theta = Theta;
 

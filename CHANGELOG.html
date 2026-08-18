@@ -604,6 +604,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Allow <code>SplineInterpolator</code> and <code>LagrangeInterpolator</code> to specify custom extrapolation rules.</li>
 <li>Allow <code>IdentityInterpolationBuilder</code> class to take a field on a strided layout.</li>
 <li>Add a <code>DiscreteMapping</code> class to handle ND mappings whose values are only known at the mesh points of a grid.</li>
+<li>Add a <code>CoordWithOPoint</code> class to recognise radial and poloidal components of a 2D coordinate.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -621,6 +622,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Fix H100 toolchain on Jean-Zay.</li>
 <li>Fix Lagrange basis non-uniform initialisation for a sub-domain.</li>
 <li>Fix use of <code>ExtrapolationRule::Constant</code> for 2D splines.</li>
+<li>Fix use of polar advection with <code>DiscreteMapping</code> class.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>
@@ -691,6 +693,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Remove unuseful defaulted template parameters <code>MinBound</code> and <code>MaxBound</code> from <code>LagrangeInterpolator</code>.</li>
 <li>Remove unused superclass <code>IPolarFootFinder</code>.</li>
 <li>Remove BslAdvectionPolar::operator() taking <code>advection_field_xy_centre</code>.</li>
+<li>Remove <code>cartesian_tag_*</code> aliases in mappings.</li>
+<li>Remove <code>cylindrical_tag_*</code> and <code>toroidal_tag_*</code> aliases in <code>ToroidalToCylindrical</code>.</li>
 </ul>
 <h2 id="v070-2026-03-18">[v0.7.0] - 2026-03-18</h2>
 <h3 id="added_1">Added</h3>

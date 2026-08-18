@@ -25,8 +25,6 @@ template <class X, class Y, class R, class Theta>
 class CartesianToCzarny
 {
 public:
-    using cartesian_tag_x = X;
-    using cartesian_tag_y = Y;
     using curvilinear_tag_r = R;
     using curvilinear_tag_theta = Theta;
 

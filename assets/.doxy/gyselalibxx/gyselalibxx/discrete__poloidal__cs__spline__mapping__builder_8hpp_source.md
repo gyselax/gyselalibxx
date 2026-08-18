@@ -115,10 +115,8 @@ public:
             Mapping const& analytical_mapping,
             IdxRangeInterpolationPoints const& interpolation_idx_range)
     {
-        using CurvilinearCoeff
-                = Coord<typename Mapping::curvilinear_tag_r,
-                        typename Mapping::curvilinear_tag_theta>;
-        using CartesianCoeff = Coord<X, Y>;
+        using CurvilinearCoeff = typename Mapping::CoordArg;
+        using CartesianCoeff = typename Mapping::CoordResult;
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -373,10 +371,8 @@ public:
             Mapping const& analytical_mapping,
             IdxRangeInterpolationPoints const& interpolation_idx_range)
     {
-        using CurvilinearCoeff
-                = Coord<typename Mapping::curvilinear_tag_r,
-                        typename Mapping::curvilinear_tag_theta>;
-        using CartesianCoeff = Coord<X, Y>;
+        using CurvilinearCoeff = typename Mapping::CoordArg;
+        using CartesianCoeff = typename Mapping::CoordResult;
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(

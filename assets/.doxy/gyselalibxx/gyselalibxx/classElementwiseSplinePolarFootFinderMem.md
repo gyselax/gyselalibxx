@@ -59,7 +59,7 @@ _The owning counterpart to_ [_**ElementwiseSplinePolarFootFinder**_](classElemen
 
 | Type | Name |
 | ---: | :--- |
-|   | [**ElementwiseSplinePolarFootFinderMem**](#function-elementwisesplinepolarfootfindermem) (SplineRThetaEvaluatorAdvection const & evaluator\_advection\_field, PseudoPhysicalToAdvectionMapping const & pseudo\_physical\_to\_advection, PseudoPhysicalToLogicalMapping const & pseudo\_physical\_to\_logical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, TimeStepper const & time\_stepper, AdvecCoefFieldMem && advection\_field\_coefs, Coord&lt; X\_pc, Y\_pc &gt; coord\_centre, IdxRange&lt; [**GridTheta**](structGridTheta.md) &gt; idx\_range\_theta) <br>_Construct an_ [_**ElementwiseSplinePolarFootFinderMem**_](classElementwiseSplinePolarFootFinderMem.md) _._ |
+|   | [**ElementwiseSplinePolarFootFinderMem**](#function-elementwisesplinepolarfootfindermem) (SplineRThetaEvaluatorAdvection const & evaluator\_advection\_field, PseudoPhysicalToAdvectionMapping const & pseudo\_physical\_to\_advection, PseudoPhysicalToLogicalMapping const & pseudo\_physical\_to\_logical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, TimeStepper const & time\_stepper, AdvecCoefFieldMem && advection\_field\_coefs, CoordX\_pcY\_pc coord\_centre, IdxRange&lt; [**GridTheta**](structGridTheta.md) &gt; idx\_range\_theta) <br>_Construct an_ [_**ElementwiseSplinePolarFootFinderMem**_](classElementwiseSplinePolarFootFinderMem.md) _._ |
 |  [**GPUCompat**](classElementwiseSplinePolarFootFinderMem.md#typedef-gpucompat) | [**operator()**](#function-operator) (double dt) <br>_Create an_ [_**ElementwiseSplinePolarFootFinder**_](classElementwiseSplinePolarFootFinder.md) _for the given time step._ |
 
 
@@ -152,7 +152,7 @@ inline ElementwiseSplinePolarFootFinderMem::ElementwiseSplinePolarFootFinderMem 
     LogicalToPseudoPhysicalMapping const & logical_to_pseudo_physical,
     TimeStepper const & time_stepper,
     AdvecCoefFieldMem && advection_field_coefs,
-    Coord< X_pc, Y_pc > coord_centre,
+    CoordX_pcY_pc coord_centre,
     IdxRange< GridTheta > idx_range_theta
 ) 
 ```

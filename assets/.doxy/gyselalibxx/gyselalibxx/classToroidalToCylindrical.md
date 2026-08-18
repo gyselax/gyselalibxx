@@ -37,12 +37,6 @@ _A class describing a coordinate change from a toroidal system of coordinates to
 | typedef Coord&lt; Rho, [**Theta**](structTheta.md), Phi &gt; | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
 | typedef [**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef Coord&lt; [**R**](structR.md), Z, Zeta &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
-| typedef typename Curvilinear2DToCartesian::cartesian\_tag\_x | [**cylindrical\_tag\_R**](#typedef-cylindrical_tag_r)  <br>_Indicate the first physical coordinate._  |
-| typedef typename Curvilinear2DToCartesian::cartesian\_tag\_y | [**cylindrical\_tag\_Z**](#typedef-cylindrical_tag_z)  <br>_Indicate the second physical coordinate._  |
-| typedef Zeta | [**cylindrical\_tag\_Zeta**](#typedef-cylindrical_tag_zeta)  <br>_Indicate the third physical coordinate._  |
-| typedef Phi | [**toroidal\_tag\_phi**](#typedef-toroidal_tag_phi)  <br>_Indicate the third logical coordinate._  |
-| typedef typename Curvilinear2DToCartesian::curvilinear\_tag\_r | [**toroidal\_tag\_rho**](#typedef-toroidal_tag_rho)  <br>_Indicate the first logical coordinate._  |
-| typedef typename Curvilinear2DToCartesian::curvilinear\_tag\_theta | [**toroidal\_tag\_theta**](#typedef-toroidal_tag_theta)  <br>_Indicate the second logical coordinate._  |
 
 
 
@@ -157,90 +151,6 @@ using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::CoordJacobia
 _The type of the result of the function described by this mapping._ 
 ```C++
 using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::CoordResult =  Coord<R, Z, Zeta>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cylindrical\_tag\_R 
-
-_Indicate the first physical coordinate._ 
-```C++
-using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::cylindrical_tag_R =  typename Curvilinear2DToCartesian::cartesian_tag_x;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cylindrical\_tag\_Z 
-
-_Indicate the second physical coordinate._ 
-```C++
-using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::cylindrical_tag_Z =  typename Curvilinear2DToCartesian::cartesian_tag_y;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cylindrical\_tag\_Zeta 
-
-_Indicate the third physical coordinate._ 
-```C++
-using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::cylindrical_tag_Zeta =  Zeta;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef toroidal\_tag\_phi 
-
-_Indicate the third logical coordinate._ 
-```C++
-using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::toroidal_tag_phi =  Phi;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef toroidal\_tag\_rho 
-
-_Indicate the first logical coordinate._ 
-```C++
-using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::toroidal_tag_rho =  typename Curvilinear2DToCartesian::curvilinear_tag_r;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef toroidal\_tag\_theta 
-
-_Indicate the second logical coordinate._ 
-```C++
-using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::toroidal_tag_theta =  typename Curvilinear2DToCartesian::curvilinear_tag_theta;
 ```
 
 

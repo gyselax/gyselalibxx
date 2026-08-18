@@ -45,10 +45,13 @@ class PolarFootFinder
 private:
     using RThetaAdvectionBuilder = typename RThetaAdvectionInterpolator::BuilderType;
     using RThetaAdvectionEvaluator = typename RThetaAdvectionInterpolator::EvaluatorType;
+    using CurvilinearBasis = typename LogicalToPhysicalMapping::CoordArg;
 
 public:
-    using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
-    using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+    using R = typename CoordWithOPoint<
+            typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
+    using Theta = typename CoordWithOPoint<
+            typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
 
     using memory_space = typename RThetaAdvectionBuilder::memory_space;
     using ExecSpace = typename RThetaAdvectionBuilder::exec_space;

@@ -594,30 +594,6 @@
 <td style="text-align: right;">typedef Coord&lt; <a href="structR.html"><strong>R</strong></a>, Z, Zeta &gt;</td>
 <td style="text-align: left;"><a href="#typedef-coordresult"><strong>CoordResult</strong></a>  <br><em>The type of the result of the function described by this mapping.</em></td>
 </tr>
-<tr>
-<td style="text-align: right;">typedef typename Curvilinear2DToCartesian::cartesian_tag_x</td>
-<td style="text-align: left;"><a href="#typedef-cylindrical_tag_r"><strong>cylindrical_tag_R</strong></a>  <br><em>Indicate the first physical coordinate.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename Curvilinear2DToCartesian::cartesian_tag_y</td>
-<td style="text-align: left;"><a href="#typedef-cylindrical_tag_z"><strong>cylindrical_tag_Z</strong></a>  <br><em>Indicate the second physical coordinate.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef Zeta</td>
-<td style="text-align: left;"><a href="#typedef-cylindrical_tag_zeta"><strong>cylindrical_tag_Zeta</strong></a>  <br><em>Indicate the third physical coordinate.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef Phi</td>
-<td style="text-align: left;"><a href="#typedef-toroidal_tag_phi"><strong>toroidal_tag_phi</strong></a>  <br><em>Indicate the third logical coordinate.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename Curvilinear2DToCartesian::curvilinear_tag_r</td>
-<td style="text-align: left;"><a href="#typedef-toroidal_tag_rho"><strong>toroidal_tag_rho</strong></a>  <br><em>Indicate the first logical coordinate.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename Curvilinear2DToCartesian::curvilinear_tag_theta</td>
-<td style="text-align: left;"><a href="#typedef-toroidal_tag_theta"><strong>toroidal_tag_theta</strong></a>  <br><em>Indicate the second logical coordinate.</em></td>
-</tr>
 </tbody>
 </table>
 <h2 id="public-functions">Public Functions</h2>
@@ -686,42 +662,6 @@
 <h3 id="typedef-coordresult">typedef CoordResult</h3>
 <p><em>The type of the result of the function described by this mapping.</em> </p>
 <pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::CoordResult =  Coord&lt;R, Z, Zeta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-cylindrical_tag_r">typedef cylindrical_tag_R</h3>
-<p><em>Indicate the first physical coordinate.</em> </p>
-<pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::cylindrical_tag_R =  typename Curvilinear2DToCartesian::cartesian_tag_x;
-</code></pre>
-<hr>
-
-<h3 id="typedef-cylindrical_tag_z">typedef cylindrical_tag_Z</h3>
-<p><em>Indicate the second physical coordinate.</em> </p>
-<pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::cylindrical_tag_Z =  typename Curvilinear2DToCartesian::cartesian_tag_y;
-</code></pre>
-<hr>
-
-<h3 id="typedef-cylindrical_tag_zeta">typedef cylindrical_tag_Zeta</h3>
-<p><em>Indicate the third physical coordinate.</em> </p>
-<pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::cylindrical_tag_Zeta =  Zeta;
-</code></pre>
-<hr>
-
-<h3 id="typedef-toroidal_tag_phi">typedef toroidal_tag_phi</h3>
-<p><em>Indicate the third logical coordinate.</em> </p>
-<pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::toroidal_tag_phi =  Phi;
-</code></pre>
-<hr>
-
-<h3 id="typedef-toroidal_tag_rho">typedef toroidal_tag_rho</h3>
-<p><em>Indicate the first logical coordinate.</em> </p>
-<pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::toroidal_tag_rho =  typename Curvilinear2DToCartesian::curvilinear_tag_r;
-</code></pre>
-<hr>
-
-<h3 id="typedef-toroidal_tag_theta">typedef toroidal_tag_theta</h3>
-<p><em>Indicate the second logical coordinate.</em> </p>
-<pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::toroidal_tag_theta =  typename Curvilinear2DToCartesian::curvilinear_tag_theta;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

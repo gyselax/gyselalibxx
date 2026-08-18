@@ -604,10 +604,11 @@ class OnionPatchLocator&lt;
 {
     static_assert(is_coord_transform_with_o_point_v&lt;LogicalToPhysicalMapping&gt;);
 
-    using X = typename LogicalToPhysicalMapping::cartesian_tag_x;
-    using Y = typename LogicalToPhysicalMapping::cartesian_tag_y;
-    using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
-    using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+    using CoordXY = typename PhysicalToLogicalMapping::CoordArg;
+    using R = typename CoordWithOPoint&lt;
+            typename PhysicalToLogicalMapping::CoordResult&gt;::curvilinear_tag_r;
+    using Theta = typename CoordWithOPoint&lt;
+            typename PhysicalToLogicalMapping::CoordResult&gt;::curvilinear_tag_theta;
 
     static_assert(Theta::PERIODIC, "Theta dimension must be periodic.");
 
@@ -626,7 +627,7 @@ private:
     static constexpr std::size_t n_patches = ddc::type_seq_size_v&lt;PatchOrdering&gt;;
 
     static_assert(
-            std::is_invocable_r_v&lt;Coord&lt;R, Theta&gt;, PhysicalToLogicalMapping, Coord&lt;X, Y&gt;&gt;,
+            std::is_invocable_r_v&lt;Coord&lt;R, Theta&gt;, PhysicalToLogicalMapping, CoordXY&gt;,
             "The mapping has to contain an operator from the physical domain to the logical "
             "domain.");
     static_assert(
@@ -658,7 +659,7 @@ public:
 
     ~OnionPatchLocator() = default;
 
-    KOKKOS_INLINE_FUNCTION int operator()(Coord&lt;X, Y&gt; const coord) const
+    KOKKOS_INLINE_FUNCTION int operator()(CoordXY const coord) const
     {
         int patch_index_min = 0;
         int patch_index_max = n_patches - 1;

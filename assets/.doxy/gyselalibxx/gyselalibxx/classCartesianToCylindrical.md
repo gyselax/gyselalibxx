@@ -42,9 +42,6 @@ _A class for describing the cylindrical 3D mapping._ [More...](#detailed-descrip
 | typedef typename [**Y::Dual**](structY.md#typedef-dual-13) | [**Y\_cov**](#typedef-y_cov)  <br>_The covariant form of the second Cartesian coordinate._  |
 | typedef typename Z::Dual | [**Z\_cov**](#typedef-z_cov)  <br>_The covariant form of the third Cartesian coordinate._  |
 | typedef typename Zeta::Dual | [**Zeta\_cov**](#typedef-zeta_cov)  <br>_The covariant form of the angular cylindrical coordinate._  |
-| typedef [**X**](structX.md) | [**cartesian\_tag\_x**](#typedef-cartesian_tag_x)  <br>_Indicate the first Cartesian coordinate._  |
-| typedef [**Y**](structY.md) | [**cartesian\_tag\_y**](#typedef-cartesian_tag_y)  <br>_Indicate the second Cartesian coordinate._  |
-| typedef Z | [**cartesian\_tag\_z**](#typedef-cartesian_tag_z)  <br>_Indicate the second Cartesian coordinate._  |
 | typedef [**R**](structR.md) | [**cylindrical\_tag\_R**](#typedef-cylindrical_tag_r)  <br>_Indicate the radial cylindrical coordinate._  |
 | typedef Z | [**cylindrical\_tag\_Z**](#typedef-cylindrical_tag_z)  <br>_Indicate the longitudinal cylindrical coordinate._  |
 | typedef Zeta | [**cylindrical\_tag\_Zeta**](#typedef-cylindrical_tag_zeta)  <br>_Indicate the angular cylindrical coordinate._  |
@@ -295,48 +292,6 @@ using CartesianToCylindrical< X, Y, Z, R, Zeta >::Z_cov =  typename Z::Dual;
 _The covariant form of the angular cylindrical coordinate._ 
 ```C++
 using CartesianToCylindrical< X, Y, Z, R, Zeta >::Zeta_cov =  typename Zeta::Dual;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cartesian\_tag\_x 
-
-_Indicate the first Cartesian coordinate._ 
-```C++
-using CartesianToCylindrical< X, Y, Z, R, Zeta >::cartesian_tag_x =  X;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cartesian\_tag\_y 
-
-_Indicate the second Cartesian coordinate._ 
-```C++
-using CartesianToCylindrical< X, Y, Z, R, Zeta >::cartesian_tag_y =  Y;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef cartesian\_tag\_z 
-
-_Indicate the second Cartesian coordinate._ 
-```C++
-using CartesianToCylindrical< X, Y, Z, R, Zeta >::cartesian_tag_z =  Z;
 ```
 
 

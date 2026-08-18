@@ -83,6 +83,8 @@
 * [**ConstantIdentityInterpolationExtrapolationRule**](classConstantIdentityInterpolationExtrapolationRule.md)
 * [**ConstantPartialDerivative**](classConstantPartialDerivative.md)
 * [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md)
+* [**CoordWithOPoint**](structCoordWithOPoint.md)
+* [**CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;**](structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4.md)
 * [**Corner1Tag**](structPolarBSplines_1_1Impl_1_1Corner1Tag.md)
 ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * [**Corner2Tag**](structPolarBSplines_1_1Impl_1_1Corner2Tag.md)

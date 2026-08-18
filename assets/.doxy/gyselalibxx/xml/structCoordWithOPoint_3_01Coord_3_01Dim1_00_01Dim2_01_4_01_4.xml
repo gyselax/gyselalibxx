@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;</compoundname>
+    <includes refid="coord__transformation__tools_8hpp" local="no">coord_transformation_tools.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Dim1</type>
+      </param>
+      <param>
+        <type>class Dim2</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4_1a43462322284c3ab79fbdeaef2c3559aa" prot="public" static="no">
+        <type>std::conditional_t&lt; Dim1::PERIODIC, Dim2, Dim1 &gt;</type>
+        <definition>using CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;::curvilinear_tag_r =  std::conditional_t&lt;Dim1::PERIODIC, Dim2, Dim1&gt;</definition>
+        <argsstring></argsstring>
+        <name>curvilinear_tag_r</name>
+        <qualifiedname>CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;::curvilinear_tag_r</qualifiedname>
+        <briefdescription>
+<para>Radial tag. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="142" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4_1a5b50ea84926e156fd174a5100fa98a7f" prot="public" static="no">
+        <type>std::conditional_t&lt; Dim1::PERIODIC, Dim1, Dim2 &gt;</type>
+        <definition>using CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;::curvilinear_tag_theta =  std::conditional_t&lt;Dim1::PERIODIC, Dim1, Dim2&gt;</definition>
+        <argsstring></argsstring>
+        <name>curvilinear_tag_theta</name>
+        <qualifiedname>CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;::curvilinear_tag_theta</qualifiedname>
+        <briefdescription>
+<para>Poloidal tag. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="144" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to identify the radial and poloidal components of a 2D cuvilinear coordinate. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="139" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="140" bodyend="147"/>
+    <listofallmembers>
+      <member refid="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4_1a43462322284c3ab79fbdeaef2c3559aa" prot="public" virt="non-virtual"><scope>CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;</scope><name>curvilinear_tag_r</name></member>
+      <member refid="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4_1a5b50ea84926e156fd174a5100fa98a7f" prot="public" virt="non-virtual"><scope>CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;</scope><name>curvilinear_tag_theta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
