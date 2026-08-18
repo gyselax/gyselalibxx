@@ -18,11 +18,14 @@ namespace GMGPolarTools {
 template <class ToPhysicalMapping>
 class MappingToDomainGeometry
 {
-    using R = typename ToPhysicalMapping::curvilinear_tag_r;
-    using Theta = typename ToPhysicalMapping::curvilinear_tag_theta;
+    using R = typename CoordWithOPoint<typename ToPhysicalMapping::CoordArg>::curvilinear_tag_r;
+    using Theta =
+            typename CoordWithOPoint<typename ToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
 
-    using X = typename ToPhysicalMapping::cartesian_tag_x;
-    using Y = typename ToPhysicalMapping::cartesian_tag_y;
+    using X = ddc::
+            type_seq_element_t<0, ddc::to_type_seq_t<typename ToPhysicalMapping::CoordResult>>;
+    using Y = ddc::
+            type_seq_element_t<1, ddc::to_type_seq_t<typename ToPhysicalMapping::CoordResult>>;
 
     using R_cov = typename R::Dual;
     using Theta_cov = typename Theta::Dual;
