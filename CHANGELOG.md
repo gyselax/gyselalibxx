@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `SplineInterpolator` and `LagrangeInterpolator` to specify custom extrapolation rules.
 - Allow `IdentityInterpolationBuilder` class to take a field on a strided layout.
 - Add a `DiscreteMapping` class to handle ND mappings whose values are only known at the mesh points of a grid.
+- Add a `CoordWithOPoint` class to recognise radial and poloidal components of a 2D coordinate.
 
 ### Fixed
 
@@ -58,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix H100 toolchain on Jean-Zay.
 - Fix Lagrange basis non-uniform initialisation for a sub-domain.
 - Fix use of `ExtrapolationRule::Constant` for 2D splines.
+- Fix use of polar advection with `DiscreteMapping` class.
 
 ### Changed
 
@@ -128,6 +130,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove unuseful defaulted template parameters `MinBound` and `MaxBound` from `LagrangeInterpolator`.
 - Remove unused superclass `IPolarFootFinder`.
 - Remove BslAdvectionPolar::operator() taking `advection_field_xy_centre`.
+- Remove `cartesian_tag_*` aliases in mappings.
+- Remove `cylindrical_tag_*` and `toroidal_tag_*` aliases in `ToroidalToCylindrical`.
 
 ## [v0.7.0] - 2026-03-18
 

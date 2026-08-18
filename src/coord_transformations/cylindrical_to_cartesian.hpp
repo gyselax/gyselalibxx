@@ -55,12 +55,6 @@ template <class R, class Z, class Zeta, class X, class Y>
 class CylindricalToCartesian
 {
 public:
-    /// @brief Indicate the first Cartesian coordinate.
-    using cartesian_tag_x = X;
-    /// @brief Indicate the second Cartesian coordinate.
-    using cartesian_tag_y = Y;
-    /// @brief Indicate the second Cartesian coordinate.
-    using cartesian_tag_z = Z;
     /// @brief Indicate the radial cylindrical coordinate.
     using cylindrical_tag_R = R;
     /// @brief Indicate the longitudinal cylindrical coordinate.
