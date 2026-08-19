@@ -648,7 +648,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>Calculates the spline representation of the advection field and uses it together with a time-stepping method to solve the characteristic equation. The space in which the advection field is expressed and the space in which foot-finding is performed are selected at compile time via <code>FFSpace</code> and <code>AFSpace</code>.</p>
+<p>Calculates the interpolation representation of the advection field and uses it together with a time-stepping method to solve the characteristic equation. The space in which the advection field is expressed and the space in which foot-finding is performed are selected at compile time via <code>FFSpace</code> and <code>AFSpace</code>.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>FFSpace</code> The space in which the foot of the characteristic is found. </li>
@@ -745,7 +745,7 @@
     DVectorConstField &lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1 , AdvDim2 &gt;, memory_space &gt; advection_field
 ) const
 </code></pre>
-<p>Computes the spline coefficients of the advection field, then packages them together with the mappings and time stepper into an <a href="classPolarFootFinder.html#typedef-elementwiseoperator"><strong>ElementwiseOperator</strong></a>. Calling <code>operator()(dt)</code> on the returned object yields a GPU-copyable functor.</p>
+<p>Computes the interpolation coefficients of the advection field, then packages them together with the mappings and time stepper into an <a href="classPolarFootFinder.html#typedef-elementwiseoperator"><strong>ElementwiseOperator</strong></a>. Calling <code>operator()(dt)</code> on the returned object yields a GPU-copyable functor.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>advection_field</code> The advection field in the domain selected by <code>AFSpace</code>. </li>
@@ -762,7 +762,7 @@
     double dt
 ) const
 </code></pre>
-<p>Computes the spline coefficients of the advection field, solves the characteristic equation over <span class="arithmatex">\(dt\)</span> at every grid point, and writes the resulting feet in-place.</p>
+<p>Computes the coefficients of the advection field, solves the characteristic equation over <span class="arithmatex">\(dt\)</span> at every grid point, and writes the resulting feet in-place.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>feet</code> On input: the mesh points. On output: the characteristic feet. </li>

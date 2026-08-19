@@ -16,6 +16,8 @@
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
 * `#include "gauss_legendre_integration.hpp"`
+* `#include "i_interpolation_builder.hpp"`
+* `#include "i_interpolation_evaluator.hpp"`
 * `#include "ipoisson_solver.hpp"`
 * `#include "matrix.hpp"`
 

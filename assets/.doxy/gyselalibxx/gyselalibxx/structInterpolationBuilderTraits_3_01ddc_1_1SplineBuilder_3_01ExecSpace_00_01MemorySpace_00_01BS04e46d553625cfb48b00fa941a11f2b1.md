@@ -99,7 +99,7 @@ _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilde
 ddc::SplineBuilder uses different alias names from the InterpolationBuilder convention. This specialisation provides the mapping so that ddc::SplineBuilder can be used directly as an InterpolationBuilder without wrapping it.
 
 
-Mapping: interpolation\_discrete\_dimension\_type -&gt; interpolation\_grid\_type interpolation\_domain\_type -&gt; interpolation\_idx\_range\_type bsplines\_type -&gt; basis\_domain\_type batched\_spline\_domain\_type&lt;D&gt; -&gt; batched\_basis\_idx\_range\_type&lt;D&gt; batched\_derivs\_domain\_type&lt;D&gt; -&gt; batched\_derivs\_idx\_range\_type&lt;D&gt; 
+Mapping: interpolation\_discrete\_dimension\_type -&gt; interpolation\_grid\_type interpolation\_domain\_type -&gt; interpolation\_idx\_range\_type batched\_spline\_domain\_type&lt;D&gt; -&gt; batched\_basis\_idx\_range\_type&lt;D&gt; batched\_derivs\_domain\_type&lt;D&gt; -&gt; batched\_derivs\_idx\_range\_type&lt;D&gt; 
 
 
     

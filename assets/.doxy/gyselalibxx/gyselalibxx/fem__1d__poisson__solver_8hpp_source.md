@@ -17,17 +17,20 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "gauss_legendre_integration.hpp"
+#include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "ipoisson_solver.hpp"
 #include "matrix.hpp"
 
 
 template <
         class SplineInterpolatorType,
-        class IdxRangeBatched =
-                typename SplineInterpolatorType::BuilderType::interpolation_domain_type>
+        class IdxRangeBatched = typename InterpolationBuilderTraits<
+                typename SplineInterpolatorType::BuilderType>::interpolation_idx_range_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
-              typename SplineInterpolatorType::EvaluatorType::evaluation_domain_type,
+              typename InterpolationEvaluatorTraits<
+                      typename SplineInterpolatorType::EvaluatorType>::evaluation_idx_range_type,
               IdxRangeBatched,
               double,
               typename SplineInterpolatorType::EvaluatorType::memory_space,
@@ -38,16 +41,20 @@ private:
     using SplineEvaluator = typename SplineInterpolatorType::EvaluatorType;
 
     using base_type = IPoissonSolver<
-            typename SplineEvaluator::evaluation_domain_type,
+            typename InterpolationEvaluatorTraits<
+                    typename SplineInterpolatorType::EvaluatorType>::evaluation_idx_range_type,
             IdxRangeBatched,
             double,
             typename SplineEvaluator::memory_space,
             Kokkos::layout_right>;
 
 private:
-    using GridPDEDim = typename SplineBuilder::interpolation_discrete_dimension_type;
+    using GridPDEDim = typename InterpolationBuilderTraits<SplineBuilder>::interpolation_grid_type;
 
-    using InputBSplines = typename SplineBuilder::bsplines_type;
+    using InputBSplines = ddc::type_seq_element_t<
+            0,
+            ddc::to_type_seq_t<
+                    typename InterpolationBuilderTraits<SplineBuilder>::coeff_idx_range_type>>;
 
     using PDEDim = typename GridPDEDim::continuous_dimension_type;
 
@@ -427,7 +434,6 @@ public:
             IdxFEMBSplines first_repeat_bspline(ddc::discrete_space<FEMBSplines>().nbasis());
             // Copy the first d coefficients into the last d coefficients
             // These coefficients refer to the same InputBSplines which cross the boundaries
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     exec_space(),

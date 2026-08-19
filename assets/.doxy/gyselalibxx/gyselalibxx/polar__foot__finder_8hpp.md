@@ -21,6 +21,7 @@
 * `#include "ddc_aliases.hpp"`
 * `#include "geometry_pseudo_cartesian.hpp"`
 * `#include "i_interpolation.hpp"`
+* `#include "i_interpolation_builder.hpp"`
 * `#include "l_norm_tools.hpp"`
 * `#include "vector_index_tools.hpp"`
 

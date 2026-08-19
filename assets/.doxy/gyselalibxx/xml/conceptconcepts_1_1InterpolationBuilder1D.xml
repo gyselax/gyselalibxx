@@ -52,10 +52,10 @@ concept <ref refid="conceptconcepts_1_1InterpolationBuilder1D" kindref="compound
     <detaileddescription>
 <para>Refines InterpolationBuilder with the additional requirements that:<itemizedlist>
 <listitem><para>The builder operates over exactly one interpolation dimension (rank() == 1).</para>
-</listitem><listitem><para>InterpolationBuilderTraits&lt;Builder&gt;::basis_domain_type is defined, i.e. the builder exposes a discrete dimension for its basis coefficients. </para>
+</listitem><listitem><para>The builder has an appropriate operator() </para>
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="287" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="284" column="1"/>
   </compounddef>
 </doxygen>

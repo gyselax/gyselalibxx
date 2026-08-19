@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classFEM1DPoissonSolver" kind="class" language="C++" prot="public">
     <compoundname>FEM1DPoissonSolver</compoundname>
-    <basecompoundref refid="classIPoissonSolver" prot="public" virt="non-virtual">IPoissonSolver&lt; SplineInterpolatorType::EvaluatorType::evaluation_domain_type, typename SplineInterpolatorType::BuilderType::interpolation_domain_type, double, SplineInterpolatorType::EvaluatorType::memory_space, Kokkos::layout_right &gt;</basecompoundref>
+    <basecompoundref refid="classIPoissonSolver" prot="public" virt="non-virtual">IPoissonSolver&lt; InterpolationEvaluatorTraits&lt; SplineInterpolatorType::EvaluatorType &gt;::evaluation_idx_range_type, typename InterpolationBuilderTraits&lt; typename SplineInterpolatorType::BuilderType &gt;::interpolation_idx_range_type, double, SplineInterpolatorType::EvaluatorType::memory_space, Kokkos::layout_right &gt;</basecompoundref>
     <includes refid="fem__1d__poisson__solver_8hpp" local="no">fem_1d_poisson_solver.hpp</includes>
     <innerclass refid="structFEM1DPoissonSolver_1_1GridPDEDimQ" prot="public">FEM1DPoissonSolver::GridPDEDimQ</innerclass>
     <innerclass refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" prot="public">FEM1DPoissonSolver::HiddenFEMBSplines</innerclass>
@@ -12,7 +12,7 @@
       </param>
       <param>
         <type>class IdxRangeBatched</type>
-        <defval>typename SplineInterpolatorType::BuilderType::interpolation_domain_type</defval>
+        <defval>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;                typename SplineInterpolatorType::BuilderType&gt;::interpolation_idx_range_type</defval>
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a2af34d4f9486849c9155c2d76475d45e" prot="private" static="no">
         <type>typename SplineInterpolatorType::EvaluatorType</type>
@@ -42,11 +42,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="41" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1adee35d6916605d8d34bd1f05f3eb23eb" prot="private" static="no">
-        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; typename SplineEvaluator::evaluation_domain_type, IdxRangeBatched, double, typename SplineEvaluator::memory_space, Kokkos::layout_right &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::base_type =  IPoissonSolver&lt; typename SplineEvaluator::evaluation_domain_type, IdxRangeBatched, double, typename SplineEvaluator::memory_space, Kokkos::layout_right&gt;</definition>
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ad76e33ee106cb4e6c9b78f4b73f1bd77" prot="private" static="no">
+        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; typename SplineInterpolatorType::EvaluatorType &gt;::evaluation_idx_range_type, IdxRangeBatched, double, typename SplineEvaluator::memory_space, Kokkos::layout_right &gt;</type>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::base_type =  IPoissonSolver&lt; typename InterpolationEvaluatorTraits&lt; typename SplineInterpolatorType::EvaluatorType&gt;::evaluation_idx_range_type, IdxRangeBatched, double, typename SplineEvaluator::memory_space, Kokkos::layout_right&gt;</definition>
         <argsstring></argsstring>
         <name>base_type</name>
         <qualifiedname>FEM1DPoissonSolver::base_type</qualifiedname>
@@ -56,11 +56,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="45" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a8f3f4313913121d8814d99684c6566e9" prot="private" static="no">
-        <type>typename SplineBuilder::interpolation_discrete_dimension_type</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::GridPDEDim =  typename SplineBuilder::interpolation_discrete_dimension_type</definition>
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aae1c75f832e2a412146b3198e31449ab" prot="private" static="no">
+        <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; SplineBuilder &gt;::interpolation_grid_type</type>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::GridPDEDim =  typename InterpolationBuilderTraits&lt;SplineBuilder&gt;::interpolation_grid_type</definition>
         <argsstring></argsstring>
         <name>GridPDEDim</name>
         <qualifiedname>FEM1DPoissonSolver::GridPDEDim</qualifiedname>
@@ -71,11 +71,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="49" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a1149facdce4a831210595a0005a34368" prot="private" static="no">
-        <type>typename SplineBuilder::bsplines_type</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::InputBSplines =  typename SplineBuilder::bsplines_type</definition>
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a72702c398079a91dfc19acb90e9816e9" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; SplineBuilder &gt;::coeff_idx_range_type &gt; &gt;</type>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::InputBSplines =  ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename InterpolationBuilderTraits&lt;SplineBuilder&gt;::coeff_idx_range_type&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>InputBSplines</name>
         <qualifiedname>FEM1DPoissonSolver::InputBSplines</qualifiedname>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="51" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ae75a22c24a4c2d470ff37be288949d38" prot="private" static="no">
         <type>typename GridPDEDim::continuous_dimension_type</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ace201e5226bc9f0e13339a57187f37fe" prot="private" static="no">
         <type>Coord&lt; PDEDim &gt;</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="55" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ae6238b80f7aca65c851c9343af25aaa7" prot="private" static="no">
         <type>Idx&lt; GridPDEDim &gt;</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="57" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a9364041483f169650e1512c53ce87c31" prot="private" static="no">
         <type>typename base_type::field_type</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a6b48472b6827f4270fa16f3382bbd43f" prot="private" static="no">
         <type>typename base_type::vector_field_type</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aed42b273c3543c0f10aac7d54751b99f" prot="private" static="no">
         <type>typename base_type::laplacian_idx_range_type</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="64" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1adbd27a6b7fec56a46646ffce6a284e3b" prot="private" static="no">
         <type>typename base_type::batch_idx_range_type</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="66" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a13485bf502a688f47f08b2269e0794c0" prot="private" static="no">
         <type>typename base_type::batch_index_type</type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="68" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a0a30942568c033d1f38a531e15ee1cb0" prot="private" static="no">
         <type>typename base_type::memory_space</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="70" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a15885dea045bff33c619468b33916e96" prot="private" static="no">
         <type>typename SplineEvaluator::exec_space</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="72" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a6c1ddf68b69b92499c768d7a679c400c" prot="private" static="no">
         <type>Idx&lt; <ref refid="structFEM1DPoissonSolver_1_1GridPDEDimQ" kindref="compound">GridPDEDimQ</ref> &gt;</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="82" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aac5ff908a046b5292cae9bad26ab4829" prot="private" static="no">
         <type>IdxStep&lt; <ref refid="structFEM1DPoissonSolver_1_1GridPDEDimQ" kindref="compound">GridPDEDimQ</ref> &gt;</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="85" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a87f0bf876e03eea6667f9307dec9e687" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structFEM1DPoissonSolver_1_1GridPDEDimQ" kindref="compound">GridPDEDimQ</ref> &gt;</type>
@@ -270,7 +270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="88" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a045b87b315e02f5d16150a6aa85658f0" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeQ, memory_space &gt;</type>
@@ -295,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="95" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a780ad1c1c260c2ee80afca602b4a0896" prot="private" static="no">
         <type>DConstField&lt; IdxRangeQ, memory_space &gt;</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="97" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ab1d92a03dbe8bd55a9718d0016e49b34" prot="private" static="no">
         <type>Field&lt; CoordPDEDim, IdxRangeQ, memory_space &gt;</type>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="104" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="111" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a350f45b6412e8845f913cc8e6cf65ae7" prot="private" static="no">
         <type>std::conditional_t&lt; ddc::is_uniform_bsplines_v&lt; InputBSplines &gt; &amp;&amp;!InputBSplines::is_periodic(), <ref refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" kindref="compound">HiddenFEMBSplines</ref>, InputBSplines &gt;</type>
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="121" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="125" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a0a7e3ed220e6b509d09bb81ae95b055b" prot="private" static="no">
         <type>std::conditional_t&lt; FEMBSplines::is_periodic(), ddc::PeriodicExtrapolationRule&lt; PDEDim &gt;, ddc::NullExtrapolationRule &gt;</type>
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="123" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="126" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="130" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="133" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1af55cf30c1a7262361ff0ad592975cb6f" prot="private" static="no">
         <type>ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, FEMBSplines, GridPDEDim, FEMEvalExtrapolationRule, FEMEvalExtrapolationRule &gt;</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="128" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="134" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="135" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="141" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a87ccd16b3135d9527fde0d7b7c28b344" prot="private" static="no">
         <type>Idx&lt; FEMBSplines &gt;</type>
@@ -391,7 +391,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="136" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="136" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="143" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aa469d9d29110e93d5d76beb230b881ec" prot="private" static="no">
         <type>IdxRange&lt; FEMBSplines &gt;</type>
@@ -405,7 +405,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="138" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="138" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="145" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ae2ac8b8e3da8247f78e80d51e6435b07" prot="private" static="no">
         <type>typename FEMSplineEvaluator::template batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
@@ -419,7 +419,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="140" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="141" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="147" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ab1e001e85760c3e5f3699f9ddc25f2cc" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeFEMBSplines, memory_space &gt;</type>
@@ -433,7 +433,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="143" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="143" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="150" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a2053600b2b2541223ce8649e75d69105" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeBatchedFEMBSplines, memory_space &gt;</type>
@@ -447,7 +447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="145" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="145" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="152" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ace3dcc307aaa5f0f13bbd4c7ffddd862" prot="private" static="no">
         <type>typename BatchedFEMBSplinesCoeffMem::span_type</type>
@@ -461,7 +461,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="147" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="147" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="154" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a65ec690dc581a1198070cc40bca0b1f8" prot="private" static="no">
         <type>IdxRange&lt; InputBSplines &gt;</type>
@@ -475,7 +475,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="150" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="150" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="157" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="157" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1abc797720ee069734b21772362a1ef2a8" prot="private" static="no">
         <type>Idx&lt; InputBSplines &gt;</type>
@@ -489,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="151" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="151" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="158" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="158" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1acaae2da1c6b619232e9957cf38e4438f" prot="private" static="no">
         <type>typename SplineEvaluator::template batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
@@ -503,7 +503,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="153" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="154" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="160" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="161" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a09cca76db4bef3f44905ae18168fdcb9" prot="private" static="no">
         <type>typename IdxRangeBatched::discrete_element_type</type>
@@ -517,7 +517,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="156" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="156" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="163" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="163" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a050533d969dbc8b893ca205c223ab463" prot="private" static="no">
         <type>FieldMem&lt; CoordPDEDim, IdxRangeBatched, memory_space &gt;</type>
@@ -531,7 +531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="158" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="158" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="165" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="165" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ac46b027cbb3a45b2377473ccccacf3d1" prot="private" static="no">
         <type>Field&lt; CoordPDEDim, IdxRangeBatched, memory_space &gt;</type>
@@ -545,7 +545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="160" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="160" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="167" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="167" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a7c5178a09f017728adeb932d70264945" prot="private" static="no">
         <type>InputBSplines</type>
@@ -559,7 +559,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="163" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="163" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="170" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="170" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a30dc566bd4d1b24ba1b0994870c8bc5e" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeBatchedBSplines, memory_space &gt;</type>
@@ -573,7 +573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="165" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="165" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="172" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="172" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a16d5d9413c2f0555ace584b17cd5920f" prot="private" static="no">
         <type>typename RHSSplineCoeffMem::span_type</type>
@@ -587,7 +587,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="166" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="166" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="173" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="173" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a8b21832dcb4c1dd3581155a3e5f2bbbe" prot="private" static="no">
         <type>ddc::type_seq_merge_t&lt; typename base_type::batch_tags, ddc::detail::TypeSeq&lt; <ref refid="structFEM1DPoissonSolver_1_1GridPDEDimQ" kindref="compound">GridPDEDimQ</ref> &gt; &gt;</type>
@@ -601,7 +601,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="168" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="169" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="175" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="176" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aaf1a35e3acaa1435336fa9189a4877a5" prot="private" static="no">
         <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; RHSQuadTags &gt;</type>
@@ -615,7 +615,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="171" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="171" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="178" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="178" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a5ac943de53161b431446819e6bd5e9fd" prot="private" static="no">
         <type>typename IdxRangeRHSQuadrature::discrete_element_type</type>
@@ -629,7 +629,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="173" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="173" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="180" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="180" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -646,7 +646,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="177" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="177" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="184" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="184" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classFEM1DPoissonSolver_1a11a6cd24e13cefedeb128380abeb8329" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>int constexpr</type>
@@ -661,7 +661,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="180" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="180" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="187" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="187" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -677,7 +677,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="183" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="183" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="190" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="190" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classFEM1DPoissonSolver_1ae4bed42e55e30bf704be4f40fc813aed" prot="private" static="no" mutable="no">
         <type>SplineEvaluator</type>
@@ -691,7 +691,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="185" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="185" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="192" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="192" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classFEM1DPoissonSolver_1a7e3dd7bb50e4ddff9923d157c0fbcd1a" prot="private" static="no" mutable="no">
         <type>FEMSplineEvaluator</type>
@@ -705,7 +705,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="187" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="187" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="194" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="194" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classFEM1DPoissonSolver_1a79de4a6fc2131a2ded0bcc0ff35182ba" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -719,7 +719,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="189" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="189" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="196" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="196" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classFEM1DPoissonSolver_1a053532683e9aaf8fe65754bd52c547bb" prot="private" static="no" mutable="no">
         <type>DQFieldMem</type>
@@ -733,7 +733,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="191" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="191" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="198" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="198" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classFEM1DPoissonSolver_1a91fa77e580f8564cfaa146573e120bb0" prot="private" static="no" mutable="no">
         <type>std::unique_ptr&lt; <ref refid="classMatrix" kindref="compound">Matrix</ref> &gt;</type>
@@ -747,7 +747,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="193" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="193" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="200" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="200" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -778,7 +778,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="204" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="204" bodyend="210"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="211" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="211" bodyend="217"/>
       </memberdef>
       <memberdef kind="function" id="classFEM1DPoissonSolver_1a46b0dfc97427d5afb058dadbc21c325f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -819,7 +819,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="218" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="218" bodyend="226"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="225" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="225" bodyend="233"/>
       </memberdef>
       <memberdef kind="function" id="classFEM1DPoissonSolver_1a24228ce288ddcf30a053309d14755829" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>field_type</type>
@@ -862,7 +862,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="237" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="237" bodyend="251"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="244" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="244" bodyend="258"/>
       </memberdef>
       <memberdef kind="function" id="classFEM1DPoissonSolver_1aa4181c1a3adda2261c737d545e3fe8f2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>field_type</type>
@@ -917,7 +917,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="265" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="265" bodyend="286"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="272" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="272" bodyend="293"/>
       </memberdef>
       <memberdef kind="function" id="classFEM1DPoissonSolver_1a636075be3a39b643fc97a9c61760791d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -958,7 +958,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="409" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="409" bodyend="505"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="416" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="416" bodyend="511"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -974,7 +974,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="289" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="289" bodyend="348"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="296" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="296" bodyend="355"/>
       </memberdef>
       <memberdef kind="function" id="classFEM1DPoissonSolver_1a4d7b58a1715367b2e5923da9aaee4e6b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -988,7 +988,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="350" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="350" bodyend="399"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="357" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="357" bodyend="406"/>
       </memberdef>
       <memberdef kind="function" id="classFEM1DPoissonSolver_1a4013c8e5dcf67c27b18a99cbec587c1b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1002,7 +1002,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="536" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="536" bodyend="558"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="542" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="542" bodyend="564"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -1022,7 +1022,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="511" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="511" bodyend="534"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="517" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="517" bodyend="540"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1080,9 +1080,9 @@
         <link refid="classIPoissonSolver"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="28" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="35" bodyend="559"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="30" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="38" bodyend="565"/>
     <listofallmembers>
-      <member refid="classFEM1DPoissonSolver_1adee35d6916605d8d34bd1f05f3eb23eb" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>base_type</name></member>
+      <member refid="classFEM1DPoissonSolver_1ad76e33ee106cb4e6c9b78f4b73f1bd77" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>base_type</name></member>
       <member refid="classFEM1DPoissonSolver_1adbd27a6b7fec56a46646ffce6a284e3b" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>batch_idx_range_type</name></member>
       <member refid="classFEM1DPoissonSolver_1a13485bf502a688f47f08b2269e0794c0" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>batch_index_type</name></member>
       <member refid="classFEM1DPoissonSolver_1ace3dcc307aaa5f0f13bbd4c7ffddd862" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>BatchedFEMBSplinesCoeff</name></member>
@@ -1106,7 +1106,7 @@
       <member refid="classFEM1DPoissonSolver_1af55cf30c1a7262361ff0ad592975cb6f" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEMSplineEvaluator</name></member>
       <member refid="classFEM1DPoissonSolver_1a9364041483f169650e1512c53ce87c31" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>field_type</name></member>
       <member refid="classFEM1DPoissonSolver_1a09cca76db4bef3f44905ae18168fdcb9" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>full_index</name></member>
-      <member refid="classFEM1DPoissonSolver_1a8f3f4313913121d8814d99684c6566e9" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>GridPDEDim</name></member>
+      <member refid="classFEM1DPoissonSolver_1aae1c75f832e2a412146b3198e31449ab" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>GridPDEDim</name></member>
       <member refid="classFEM1DPoissonSolver_1abc797720ee069734b21772362a1ef2a8" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1a87ccd16b3135d9527fde0d7b7c28b344" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxFEMBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1ae6238b80f7aca65c851c9343af25aaa7" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxPDEDim</name></member>
@@ -1119,7 +1119,7 @@
       <member refid="classFEM1DPoissonSolver_1aaf1a35e3acaa1435336fa9189a4877a5" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeRHSQuadrature</name></member>
       <member refid="classFEM1DPoissonSolver_1a5ac943de53161b431446819e6bd5e9fd" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRHSQuadrature</name></member>
       <member refid="classFEM1DPoissonSolver_1aac5ff908a046b5292cae9bad26ab4829" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxStepQ</name></member>
-      <member refid="classFEM1DPoissonSolver_1a1149facdce4a831210595a0005a34368" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>InputBSplines</name></member>
+      <member refid="classFEM1DPoissonSolver_1a72702c398079a91dfc19acb90e9816e9" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>InputBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1ac9c65305eddf5e4c83269bf5e1847b5a" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>jit_build_nubsplinesx</name></member>
       <member refid="classFEM1DPoissonSolver_1a91fa77e580f8564cfaa146573e120bb0" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>m_fem_matrix</name></member>
       <member refid="classFEM1DPoissonSolver_1a79de4a6fc2131a2ded0bcc0ff35182ba" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>m_matrix_size</name></member>

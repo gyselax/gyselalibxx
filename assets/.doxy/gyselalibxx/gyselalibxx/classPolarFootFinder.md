@@ -102,7 +102,7 @@ _Operator for finding the feet of the characteristics on a polar slice._ [More..
 ## Detailed Description
 
 
-Calculates the spline representation of the advection field and uses it together with a time-stepping method to solve the characteristic equation. The space in which the advection field is expressed and the space in which foot-finding is performed are selected at compile time via `FFSpace` and `AFSpace`.
+Calculates the interpolation representation of the advection field and uses it together with a time-stepping method to solve the characteristic equation. The space in which the advection field is expressed and the space in which foot-finding is performed are selected at compile time via `FFSpace` and `AFSpace`.
 
 
 
@@ -317,7 +317,7 @@ inline ElementwiseOperator PolarFootFinder::operator() (
 
 
 
-Computes the spline coefficients of the advection field, then packages them together with the mappings and time stepper into an [**ElementwiseOperator**](classPolarFootFinder.md#typedef-elementwiseoperator). Calling `operator()(dt)` on the returned object yields a GPU-copyable functor.
+Computes the interpolation coefficients of the advection field, then packages them together with the mappings and time stepper into an [**ElementwiseOperator**](classPolarFootFinder.md#typedef-elementwiseoperator). Calling `operator()(dt)` on the returned object yields a GPU-copyable functor.
 
 
 
@@ -356,7 +356,7 @@ inline void PolarFootFinder::operator() (
 
 
 
-Computes the spline coefficients of the advection field, solves the characteristic equation over \(dt\) at every grid point, and writes the resulting feet in-place.
+Computes the coefficients of the advection field, solves the characteristic equation over \(dt\) at every grid point, and writes the resulting feet in-place.
 
 
 

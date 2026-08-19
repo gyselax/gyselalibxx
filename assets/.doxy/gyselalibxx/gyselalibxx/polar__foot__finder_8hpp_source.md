@@ -24,6 +24,7 @@
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "i_interpolation.hpp"
+#include "i_interpolation_builder.hpp"
 #include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
 
@@ -68,19 +69,13 @@ public:
     using AdvDim2 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta>;
 
 private:
-    using PolarGrid
-            = ddc::to_type_seq_t<typename RThetaAdvectionBuilder::interpolation_domain_type>;
+    using PolarGrid = ddc::to_type_seq_t<typename InterpolationBuilderTraits<
+            RThetaAdvectionBuilder>::interpolation_idx_range_type>;
     using GridR = find_grid_t<R, PolarGrid>;
     using GridTheta = find_grid_t<Theta, PolarGrid>;
 
-    using BSplinesR = typename RThetaAdvectionBuilder::bsplines_type1;
-    using BSplinesTheta = typename RThetaAdvectionBuilder::bsplines_type2;
-
-    using IdxRangeSplineBatched
-            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
-                    ddc::to_type_seq_t<IdxRangeBatched>,
-                    ddc::detail::TypeSeq<GridR, GridTheta>,
-                    ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
+    using IdxRangeCoeffBatched = typename InterpolationBuilderTraits<
+            RThetaAdvectionBuilder>::template batched_basis_idx_range_type<IdxRangeBatched>;
 
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatched, GridR, GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
@@ -93,10 +88,8 @@ private:
 
     using CoordRTheta = Coord<R, Theta>;
 
-    using AdvecCoefField = DVectorFieldMem<
-            IdxRangeSplineBatched,
-            VectorIndexSet<AdvDim1, AdvDim2>,
-            memory_space>;
+    using AdvecCoefField
+            = DVectorFieldMem<IdxRangeCoeffBatched, VectorIndexSet<AdvDim1, AdvDim2>, memory_space>;
 
 public:
     using ElementwiseOperator = typename polar_foot_finder_details::ElementwiseChoice<
@@ -144,7 +137,7 @@ public:
                     advection_field) const
     {
         AdvecCoefField advection_field_coefs(
-                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
+                batched_basis_idx_range(m_builder_advection_field, get_idx_range(advection_field)));
         m_builder_advection_field(
                 ddcHelper::get<AdvDim1>(advection_field_coefs),
                 ddcHelper::get<AdvDim1>(get_const_field(advection_field)));
@@ -162,7 +155,7 @@ public:
             double dt) const
     {
         AdvecCoefField advection_field_coefs(
-                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
+                batched_basis_idx_range(m_builder_advection_field, get_idx_range(advection_field)));
         m_builder_advection_field(
                 ddcHelper::get<AdvDim1>(advection_field_coefs),
                 ddcHelper::get<AdvDim1>(get_const_field(advection_field)));

@@ -123,7 +123,7 @@ Different time integration methods are implemented to solve the equation of the 
 The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the [**PolarFootFinder**](classPolarFootFinder.md) operator.
 
 
-The interpolation of the function is always done in the logical domain, where the B-splines are defined.
+The interpolation of the function is always done in the logical domain, where the interpolation is defined.
 
 
 

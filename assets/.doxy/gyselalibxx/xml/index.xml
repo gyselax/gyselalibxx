@@ -100,7 +100,7 @@
     <member refid="classBslAdvectionPolar_1a3aeb02aa5a19fb31464e21be8859b89e" kind="typedef"><name>ExecSpace</name></member>
     <member refid="classBslAdvectionPolar_1ac1d2d3320cd236a593f081d61c3dd009" kind="typedef"><name>Builder2D</name></member>
     <member refid="classBslAdvectionPolar_1a0c85f2fb69993bc756723bced5744e5b" kind="typedef"><name>Evaluator2D</name></member>
-    <member refid="classBslAdvectionPolar_1abf38920efa6ea31a4b711cdb4dacd0a6" kind="typedef"><name>IdxRangeBSRTheta</name></member>
+    <member refid="classBslAdvectionPolar_1ac4c4fb6653bf570876b5ec51c1a409a9" kind="typedef"><name>IdxRangeCoeffBatchedRTheta</name></member>
     <member refid="classBslAdvectionPolar_1aa94e91a323a1ade20d5bfd1ce6d8380d" kind="typedef"><name>DFieldFDistribu</name></member>
     <member refid="classBslAdvectionPolar_1a6fd94bf681b4d640cd4b323491bc17a3" kind="typedef"><name>CFieldMemFeetRTheta</name></member>
     <member refid="classBslAdvectionPolar_1a4f66d1a1daea865bad14be89157ea1c4" kind="typedef"><name>CFieldFeetRTheta</name></member>
@@ -1196,9 +1196,9 @@
   <compound refid="classFEM1DPoissonSolver" kind="class"><name>FEM1DPoissonSolver</name>
     <member refid="classFEM1DPoissonSolver_1a13ceef7f47dab320a76f9109fdf0731d" kind="typedef"><name>SplineBuilder</name></member>
     <member refid="classFEM1DPoissonSolver_1a2af34d4f9486849c9155c2d76475d45e" kind="typedef"><name>SplineEvaluator</name></member>
-    <member refid="classFEM1DPoissonSolver_1adee35d6916605d8d34bd1f05f3eb23eb" kind="typedef"><name>base_type</name></member>
-    <member refid="classFEM1DPoissonSolver_1a8f3f4313913121d8814d99684c6566e9" kind="typedef"><name>GridPDEDim</name></member>
-    <member refid="classFEM1DPoissonSolver_1a1149facdce4a831210595a0005a34368" kind="typedef"><name>InputBSplines</name></member>
+    <member refid="classFEM1DPoissonSolver_1ad76e33ee106cb4e6c9b78f4b73f1bd77" kind="typedef"><name>base_type</name></member>
+    <member refid="classFEM1DPoissonSolver_1aae1c75f832e2a412146b3198e31449ab" kind="typedef"><name>GridPDEDim</name></member>
+    <member refid="classFEM1DPoissonSolver_1a72702c398079a91dfc19acb90e9816e9" kind="typedef"><name>InputBSplines</name></member>
     <member refid="classFEM1DPoissonSolver_1ae75a22c24a4c2d470ff37be288949d38" kind="typedef"><name>PDEDim</name></member>
     <member refid="classFEM1DPoissonSolver_1ace201e5226bc9f0e13339a57187f37fe" kind="typedef"><name>CoordPDEDim</name></member>
     <member refid="classFEM1DPoissonSolver_1ae6238b80f7aca65c851c9343af25aaa7" kind="typedef"><name>IdxPDEDim</name></member>
@@ -2767,12 +2767,10 @@
     <member refid="classPolarFootFinder_1a4ba6102f04faad7d3283d59f826d0006" kind="typedef"><name>PhysicalSpace</name></member>
     <member refid="classPolarFootFinder_1aad46b649f8f14ec9d6041e259a825753" kind="typedef"><name>X</name></member>
     <member refid="classPolarFootFinder_1ae25543d4fad74fb085e8bf87b136685b" kind="typedef"><name>Y</name></member>
-    <member refid="classPolarFootFinder_1a7a31c507ac10ee087125ff05fe41c1a8" kind="typedef"><name>PolarGrid</name></member>
+    <member refid="classPolarFootFinder_1a1d48e647bf75bc74ed1528ab5350f5a2" kind="typedef"><name>PolarGrid</name></member>
     <member refid="classPolarFootFinder_1a3956e860a8e63a7bcb0e5a789986e3aa" kind="typedef"><name>GridR</name></member>
     <member refid="classPolarFootFinder_1afc431a13d282429c9d1a5072a8acefeb" kind="typedef"><name>GridTheta</name></member>
-    <member refid="classPolarFootFinder_1a3e21f6ac0dfdd07693d365d0ba46d3d8" kind="typedef"><name>BSplinesR</name></member>
-    <member refid="classPolarFootFinder_1ab576d03ef4b6eb8d7133dde909d94827" kind="typedef"><name>BSplinesTheta</name></member>
-    <member refid="classPolarFootFinder_1a4347cd7560cfcc2de981d9ca7dd6be11" kind="typedef"><name>IdxRangeSplineBatched</name></member>
+    <member refid="classPolarFootFinder_1a8a1b814af8ec07384396e0d6aac94527" kind="typedef"><name>IdxRangeCoeffBatched</name></member>
     <member refid="classPolarFootFinder_1aa6a7a516873a733913b417261506c01d" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classPolarFootFinder_1a39bdd43a21a04f063d5065569ff9fbc0" kind="typedef"><name>IdxRangeRTheta</name></member>
     <member refid="classPolarFootFinder_1a109ca1630f02689aa76e80dad29f2223" kind="typedef"><name>IdxRangeR</name></member>
@@ -2782,7 +2780,7 @@
     <member refid="classPolarFootFinder_1a5293337e1d9f3f6a7ab30705946d7638" kind="typedef"><name>IdxBatch</name></member>
     <member refid="classPolarFootFinder_1a89ddb584a6caca6d766831266116abdd" kind="typedef"><name>IdxOperator</name></member>
     <member refid="classPolarFootFinder_1a0b0407e713c42cf1126235e0c1fa9399" kind="typedef"><name>CoordRTheta</name></member>
-    <member refid="classPolarFootFinder_1a0a4fc79a7bf578c3b475ed5b8f286580" kind="typedef"><name>AdvecCoefField</name></member>
+    <member refid="classPolarFootFinder_1ae2dc543248abef7612452a541f67b58c" kind="typedef"><name>AdvecCoefField</name></member>
     <member refid="classPolarFootFinder_1a48cbc6da7a5b3af455dba96f4620cc78" kind="typedef"><name>R</name></member>
     <member refid="classPolarFootFinder_1a46f2fae66c41cd57178c83f748e72552" kind="typedef"><name>Theta</name></member>
     <member refid="classPolarFootFinder_1a65203b2f9295dc0815317f0a26dbedbc" kind="typedef"><name>memory_space</name></member>
