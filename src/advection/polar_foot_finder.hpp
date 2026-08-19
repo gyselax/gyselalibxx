@@ -14,13 +14,14 @@
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "i_interpolation.hpp"
+#include "i_interpolation_builder.hpp"
 #include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
 
 /**
  * @brief Operator for finding the feet of the characteristics on a polar slice.
  *
- * Calculates the spline representation of the advection field and uses it together
+ * Calculates the interpolation representation of the advection field and uses it together
  * with a time-stepping method to solve the characteristic equation. The space in
  * which the advection field is expressed and the space in which foot-finding is
  * performed are selected at compile time via @p FFSpace and @p AFSpace.
@@ -55,12 +56,15 @@ class PolarFootFinder
 private:
     using RThetaAdvectionBuilder = typename RThetaAdvectionInterpolator::BuilderType;
     using RThetaAdvectionEvaluator = typename RThetaAdvectionInterpolator::EvaluatorType;
+    using CurvilinearBasis = typename LogicalToPhysicalMapping::CoordArg;
 
 public:
     /// The continuous radial dimension.
-    using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
+    using R = typename CoordWithOPoint<
+            typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
     /// The continuous poloidal dimension.
-    using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+    using Theta = typename CoordWithOPoint<
+            typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
 
     /// The memory space where fields are stored (e.g. @c Kokkos::HostSpace or a GPU space).
     using memory_space = typename RThetaAdvectionBuilder::memory_space;
@@ -81,19 +85,13 @@ public:
     using AdvDim2 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta>;
 
 private:
-    using PolarGrid
-            = ddc::to_type_seq_t<typename RThetaAdvectionBuilder::interpolation_domain_type>;
+    using PolarGrid = ddc::to_type_seq_t<typename InterpolationBuilderTraits<
+            RThetaAdvectionBuilder>::interpolation_idx_range_type>;
     using GridR = find_grid_t<R, PolarGrid>;
     using GridTheta = find_grid_t<Theta, PolarGrid>;
 
-    using BSplinesR = typename RThetaAdvectionBuilder::bsplines_type1;
-    using BSplinesTheta = typename RThetaAdvectionBuilder::bsplines_type2;
-
-    using IdxRangeSplineBatched
-            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
-                    ddc::to_type_seq_t<IdxRangeBatched>,
-                    ddc::detail::TypeSeq<GridR, GridTheta>,
-                    ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
+    using IdxRangeCoeffBatched = typename InterpolationBuilderTraits<
+            RThetaAdvectionBuilder>::template batched_basis_idx_range_type<IdxRangeBatched>;
 
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatched, GridR, GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
@@ -106,10 +104,8 @@ private:
 
     using CoordRTheta = Coord<R, Theta>;
 
-    using AdvecCoefField = DVectorFieldMem<
-            IdxRangeSplineBatched,
-            VectorIndexSet<AdvDim1, AdvDim2>,
-            memory_space>;
+    using AdvecCoefField
+            = DVectorFieldMem<IdxRangeCoeffBatched, VectorIndexSet<AdvDim1, AdvDim2>, memory_space>;
 
 public:
     /// The operator returned by operator() which calculates the feet elementwise.
@@ -177,7 +173,7 @@ public:
     /**
      * @brief Get an elementwise operator capable of calculating the feet of the characteristics.
      *
-     * Computes the spline coefficients of the advection field, then packages them together
+     * Computes the interpolation coefficients of the advection field, then packages them together
      * with the mappings and time stepper into an @ref ElementwiseOperator. Calling
      * @c operator()(dt) on the returned object yields a GPU-copyable functor.
      *
@@ -190,7 +186,7 @@ public:
                     advection_field) const
     {
         AdvecCoefField advection_field_coefs(
-                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
+                batched_basis_idx_range(m_builder_advection_field, get_idx_range(advection_field)));
         m_builder_advection_field(
                 ddcHelper::get<AdvDim1>(advection_field_coefs),
                 ddcHelper::get<AdvDim1>(get_const_field(advection_field)));
@@ -204,7 +200,7 @@ public:
     /**
      * @brief Advect the feet over @f$ dt @f$.
      *
-     * Computes the spline coefficients of the advection field, solves the characteristic
+     * Computes the coefficients of the advection field, solves the characteristic
      * equation over @f$ dt @f$ at every grid point, and writes the resulting feet in-place.
      *
      * @param[in, out] feet
@@ -221,7 +217,7 @@ public:
             double dt) const
     {
         AdvecCoefField advection_field_coefs(
-                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
+                batched_basis_idx_range(m_builder_advection_field, get_idx_range(advection_field)));
         m_builder_advection_field(
                 ddcHelper::get<AdvDim1>(advection_field_coefs),
                 ddcHelper::get<AdvDim1>(get_const_field(advection_field)));
