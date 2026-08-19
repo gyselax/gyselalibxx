@@ -68,7 +68,6 @@ struct InterpolationBuilderTraits
  * Mapping:
  *   interpolation_discrete_dimension_type -> interpolation_grid_type
  *   interpolation_domain_type             -> interpolation_idx_range_type
- *   bsplines_type                         -> basis_domain_type
  *   batched_spline_domain_type<D>         -> batched_basis_idx_range_type<D>
  *   batched_derivs_domain_type<D>         -> batched_derivs_idx_range_type<D>
  */
@@ -139,7 +138,6 @@ public:
  * Mapping:
  *   interpolation_discrete_dimension_type -> interpolation_grid_type
  *   interpolation_domain_type             -> interpolation_idx_range_type
- *   bsplines_type                         -> basis_domain_type
  *   batched_spline_domain_type<D>         -> batched_basis_idx_range_type<D>
  *   batched_derivs_domain_type<D>         -> batched_derivs_idx_range_type<D>
  */
@@ -280,8 +278,7 @@ concept InterpolationBuilder = requires
  *
  * Refines InterpolationBuilder with the additional requirements that:
  *   - The builder operates over exactly one interpolation dimension (rank() == 1).
- *   - InterpolationBuilderTraits<Builder>::basis_domain_type is defined, i.e. the
- *     builder exposes a discrete dimension for its basis coefficients.
+ *   - The builder has an appropriate operator()
  */
 template <class Builder>
 concept InterpolationBuilder1D
