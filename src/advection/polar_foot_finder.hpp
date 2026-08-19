@@ -56,12 +56,15 @@ class PolarFootFinder
 private:
     using RThetaAdvectionBuilder = typename RThetaAdvectionInterpolator::BuilderType;
     using RThetaAdvectionEvaluator = typename RThetaAdvectionInterpolator::EvaluatorType;
+    using CurvilinearBasis = typename LogicalToPhysicalMapping::CoordArg;
 
 public:
     /// The continuous radial dimension.
-    using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
+    using R = typename CoordWithOPoint<
+            typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
     /// The continuous poloidal dimension.
-    using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+    using Theta = typename CoordWithOPoint<
+            typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
 
     /// The memory space where fields are stored (e.g. @c Kokkos::HostSpace or a GPU space).
     using memory_space = typename RThetaAdvectionBuilder::memory_space;

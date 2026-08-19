@@ -44,10 +44,6 @@ public:
      */
     using BSplineTheta = typename SplineEvaluator::bsplines_type2;
 
-    /// @brief Indicate the first physical coordinate.
-    using cartesian_tag_x = X;
-    /// @brief Indicate the second physical coordinate.
-    using cartesian_tag_y = Y;
     /// @brief Indicate the first logical coordinate.
     using curvilinear_tag_r = R;
     /// @brief Indicate the second logical coordinate.
