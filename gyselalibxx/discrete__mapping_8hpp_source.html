@@ -584,21 +584,30 @@
 
 namespace details {
 
-template &lt;class RowDim, class DataType, class... RDim, class... ADim, class Mapping&gt;
+template &lt;
+        class RowDim,
+        class DataType,
+        class... RDim,
+        class... ADim,
+        class Mapping,
+        class CoordJacobian&gt;
 void fill_jacobian_matrix_row(
         Tensor&lt;DataType, VectorIndexSet&lt;RDim...&gt;, VectorIndexSet&lt;ADim...&gt;&gt; jacobian_matrix,
-        Mapping mapping)
+        Mapping const&amp; mapping,
+        CoordJacobian const&amp; coord)
 {
-    ((ddc::get&lt;RowDim, ADim&gt;(jacobian_matrix) = mapping.template jacobian_component&lt;RowDim, ADim&gt;),
+    ((ddcHelper::get&lt;RowDim, ADim&gt;(jacobian_matrix)
+      = mapping.template jacobian_component&lt;RowDim, ADim&gt;(coord)),
      ...);
 }
 
-template &lt;class DataType, class... RDim, class... ADim, class Mapping&gt;
+template &lt;class DataType, class... RDim, class... ADim, class Mapping, class CoordJacobian&gt;
 void fill_jacobian_matrix(
         Tensor&lt;DataType, VectorIndexSet&lt;RDim...&gt;, VectorIndexSet&lt;ADim...&gt;&gt; jacobian_matrix,
-        Mapping mapping)
+        Mapping const&amp; mapping,
+        CoordJacobian const&amp; coord)
 {
-    ((fill_jacobian_matrix_row&lt;RDim&gt;(jacobian_matrix, mapping)), ...);
+    ((fill_jacobian_matrix_row&lt;RDim&gt;(jacobian_matrix, mapping, coord)), ...);
 }
 
 } // namespace details
@@ -665,7 +674,7 @@ public:
             CoordJacobian const&amp; coord) const
     {
         Tensor&lt;DataType, ResultBasis, get_covariant_dims_t&lt;ArgBasis&gt;&gt; jacobian_matrix;
-        details::fill_jacobian_matrix(jacobian_matrix, *this);
+        details::fill_jacobian_matrix(jacobian_matrix, *this, coord);
         return jacobian_matrix;
     }
 
@@ -679,7 +688,7 @@ public:
         return m_evaluator
                 .deriv(Idx&lt;ddc::Deriv&lt;typename IndexTag2::Dual&gt;&gt;(1),
                        coord,
-                       get_const_field(ddc::get&lt;IndexTag1&gt;(m_coeff_representation)));
+                       get_const_field(ddcHelper::get&lt;IndexTag1&gt;(m_coeff_representation)));
     }
 
     KOKKOS_FUNCTION double jacobian(CoordJacobian const&amp; coord) const

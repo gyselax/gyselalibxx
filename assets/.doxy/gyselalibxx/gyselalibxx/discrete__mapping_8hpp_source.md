@@ -23,21 +23,30 @@
 
 namespace details {
 
-template <class RowDim, class DataType, class... RDim, class... ADim, class Mapping>
+template <
+        class RowDim,
+        class DataType,
+        class... RDim,
+        class... ADim,
+        class Mapping,
+        class CoordJacobian>
 void fill_jacobian_matrix_row(
         Tensor<DataType, VectorIndexSet<RDim...>, VectorIndexSet<ADim...>> jacobian_matrix,
-        Mapping mapping)
+        Mapping const& mapping,
+        CoordJacobian const& coord)
 {
-    ((ddc::get<RowDim, ADim>(jacobian_matrix) = mapping.template jacobian_component<RowDim, ADim>),
+    ((ddcHelper::get<RowDim, ADim>(jacobian_matrix)
+      = mapping.template jacobian_component<RowDim, ADim>(coord)),
      ...);
 }
 
-template <class DataType, class... RDim, class... ADim, class Mapping>
+template <class DataType, class... RDim, class... ADim, class Mapping, class CoordJacobian>
 void fill_jacobian_matrix(
         Tensor<DataType, VectorIndexSet<RDim...>, VectorIndexSet<ADim...>> jacobian_matrix,
-        Mapping mapping)
+        Mapping const& mapping,
+        CoordJacobian const& coord)
 {
-    ((fill_jacobian_matrix_row<RDim>(jacobian_matrix, mapping)), ...);
+    ((fill_jacobian_matrix_row<RDim>(jacobian_matrix, mapping, coord)), ...);
 }
 
 } // namespace details
@@ -104,7 +113,7 @@ public:
             CoordJacobian const& coord) const
     {
         Tensor<DataType, ResultBasis, get_covariant_dims_t<ArgBasis>> jacobian_matrix;
-        details::fill_jacobian_matrix(jacobian_matrix, *this);
+        details::fill_jacobian_matrix(jacobian_matrix, *this, coord);
         return jacobian_matrix;
     }
 
@@ -118,7 +127,7 @@ public:
         return m_evaluator
                 .deriv(Idx<ddc::Deriv<typename IndexTag2::Dual>>(1),
                        coord,
-                       get_const_field(ddc::get<IndexTag1>(m_coeff_representation)));
+                       get_const_field(ddcHelper::get<IndexTag1>(m_coeff_representation)));
     }
 
     KOKKOS_FUNCTION double jacobian(CoordJacobian const& coord) const
