@@ -133,6 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove BslAdvectionPolar::operator() taking `advection_field_xy_centre`.
 - Remove `cartesian_tag_*` aliases in mappings.
 - Remove `cylindrical_tag_*` and `toroidal_tag_*` aliases in `ToroidalToCylindrical`.
+- Remove `LAPACK` dependency (`LAPACKE` remains).
 
 ## [v0.7.0] - 2026-03-18
 
