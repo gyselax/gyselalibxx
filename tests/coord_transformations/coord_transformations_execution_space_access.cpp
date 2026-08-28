@@ -306,10 +306,14 @@ TEST_F(MappingMemoryAccess, HostDiscreteLagrangeCoordConverter)
 
 // Coord converter: logical -> physical.
 // Workaround false positive
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
     CoordXY diff_coord_xy = to_physical_mapping(coord_rtheta) - coord_xy;
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic pop
+#endif
     EXPECT_LE(ddc::get<X>(diff_coord_xy), 1e-6);
     EXPECT_LE(ddc::get<Y>(diff_coord_xy), 1e-6);
 }
