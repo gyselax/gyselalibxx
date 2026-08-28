@@ -48,13 +48,15 @@ class PolarSplineFEMPoissonLikeSolver
               Kokkos::DefaultExecutionSpace::memory_space,
               Kokkos::layout_right>
 {
-    // TODO: Add a batch loop to operator()
-    static_assert(
-            std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
-            "PolarSplineFEMPoissonLikeSolver is not yet batched");
-
     static_assert(
             InterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
+
+    /// The base class defining the field types used at the (possibly batched) solver interface.
+    using Base = IPolarPoissonLikeSolver<
+            IdxRange<GridR, GridTheta>,
+            IdxRangeFull,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            Kokkos::layout_right>;
 
 public:
     /// The radial dimension
@@ -83,11 +85,6 @@ public:
      * @brief Tag the second dimension for the quadrature mesh.
      */
     struct QDimThetaMesh : NonUniformGridBase<Theta>
-    {
-    };
-
-    /// The tag for the batch dimension for the equation. This is public due to Cuda.
-    struct InternalBatchDim
     {
     };
 
@@ -125,7 +122,8 @@ private:
     /// The evaluator type extracted from the Interpolation2D object.
     using EvaluatorType = typename Interpolation2D::EvaluatorType;
 
-    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, IdxRange<GridR>, IdxRange<GridTheta>>;
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridR, GridTheta>;
+    using IdxBatch = Idx<detail_poisson::BatchDDim>;
 
     /**
      * @brief Tag the quadrature index range in the first dimension.
@@ -160,16 +158,20 @@ private:
      */
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
-    using FieldMemCoeffsSpline2D = DFieldMem<typename InterpolationEvaluatorTraits<
+    using FieldMemBatchedCoeffsSpline2D = DFieldMem<typename InterpolationEvaluatorTraits<
             EvaluatorType>::template batched_coeff_idx_range_type<IdxRangeFull>>;
-    using ConstFieldCoeffsSpline2D = typename FieldMemCoeffsSpline2D::view_type;
-    using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
-    using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
+    using ConstFieldBatchedCoeffsSpline2D = typename FieldMemBatchedCoeffsSpline2D::view_type;
+    using ConstFieldAssemblerBatchedCoeffsSpline2D
+            = DConstField<IdxRange<detail_poisson::BatchDDim, BSplinesR, BSplinesTheta>>;
+    using PolarSplineMemRTheta
+            = DFieldMem<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>>;
+    using PolarSplineRTheta = DField<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>>;
 
     using CoordFieldMemRTheta = FieldMem<CoordRTheta, IdxRangeRTheta>;
     using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
     using DFieldRTheta = DField<IdxRangeRTheta>;
-    using DConstFieldRTheta = DConstField<IdxRangeRTheta>;
+    using DConstFieldBatchedRTheta = typename Base::const_field_type;
+    using DFieldBatchedRTheta = typename Base::field_type;
 
     using PoissonAssembler = PolarSplineFEMPoissonLikeAssembler<
             GridR,
@@ -186,14 +188,16 @@ private:
 
 public:
     /**
-     * @brief A wrapper that binds an evaluator with its coefficient field to
-     * present a single callable `double operator()(CoordRTheta)`.
+     * @brief A wrapper that binds an evaluator with its batched coefficient field to
+     * present a single callable `double operator()(Idx<detail_poisson::BatchDDim>, CoordRTheta)`.
      *
      * This allows the @f$ \alpha @f$ and @f$ \beta @f$ coefficients to be
-     * passed to `PolarSplineFEMPoissonLikeAssembler`, which expects a generic callable.
+     * passed to `PolarSplineFEMPoissonLikeAssembler`, which expects a generic,
+     * batch-index-aware callable.
      *
      * @tparam Evaluator The type of the 2D evaluator.
-     * @tparam Coeff The type of the spline coefficient field.
+     * @tparam Coeff The type of the spline coefficient field, collapsed to a single leading
+     *          `detail_poisson::BatchDDim` dimension (see `detail_poisson::to_batch_access`).
      */
     template <class Evaluator, class Coeff>
     class CoeffEvaluator
@@ -210,10 +214,12 @@ public:
         {
         }
 
-        /// Evaluate the interpolation at the specified coordinate
-        KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const& coord) const
+        /// Evaluate the interpolation at the specified batch and coordinate
+        KOKKOS_INLINE_FUNCTION double operator()(
+                Idx<detail_poisson::BatchDDim> idx_batch,
+                CoordRTheta const& coord) const
         {
-            return m_evaluator(coord, m_coeff);
+            return m_evaluator(coord, m_coeff[idx_batch]);
         }
     };
 
@@ -246,13 +252,15 @@ private:
     BuilderType const& m_builder;
     EvaluatorType const& m_evaluator;
 
+    // The number of batched systems to be solved, derived from the batch dimensions of
+    // IdxRangeFull (i.e. everything but GridR and GridTheta).
+    const int m_n_batch;
+
     PolarSplineEval m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
     mutable PolarSplineMemRTheta m_phi_spline_coef_alloc;
-    mutable DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> m_x_init_alloc;
-
-    const int m_batch_idx {0}; // TODO: Remove when batching is supported
+    mutable DFieldMem<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>> m_x_init_alloc;
 
     FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume_alloc;
     PoissonAssembler m_assembler;
@@ -273,6 +281,10 @@ public:
      * @param[in] interpolation
      *      An interpolation builder and evaluator to build coefficients allowing a function to be
      *      evaluated anywhere on the (r,theta) domain.
+     * @param[in] idx_range_full
+     *      The full index range on which @f$ \phi @f$ is defined, including any batch
+     *      dimensions ahead of GridR and GridTheta. For the unbatched instantiation
+     *      (IdxRangeFull == IdxRange<GridR, GridTheta>) this is simply the (r,theta) grid.
      * @param[in] max_iter
      *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
@@ -289,6 +301,7 @@ public:
     PolarSplineFEMPoissonLikeSolver(
             Mapping const& mapping,
             Interpolation2D const& interpolation,
+            IdxRangeFull idx_range_full,
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -317,17 +330,22 @@ public:
         , m_mapping(mapping)
         , m_builder(interpolation.get_builder())
         , m_evaluator(interpolation.get_evaluator())
+        , m_n_batch(IdxRangeBatch(idx_range_full).size())
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef_alloc(
                   "m_phi_spline_coef "
                   "(PolarSplineFEMPoisonLikeSolver::PolarSplineFEMPoissonLikeSolver)",
-                  ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
+                  IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>(
+                          Idx<detail_poisson::BatchDDim, PolarBSplinesRTheta>(0, 0),
+                          IdxStep<detail_poisson::BatchDDim, PolarBSplinesRTheta>(
+                                  m_n_batch,
+                                  ddc::discrete_space<PolarBSplinesRTheta>().nbasis())))
         , m_x_init_alloc(
                   "m_x_init (PolarSplineFEMPoisonLikeSolver::PolarSplineFEMPoissonLikeSolver)",
-                  IdxRange<InternalBatchDim, PolarBSplinesRTheta>(
-                          Idx<InternalBatchDim, PolarBSplinesRTheta>(0, 0),
-                          IdxStep<InternalBatchDim, PolarBSplinesRTheta>(
-                                  1,
+                  IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>(
+                          Idx<detail_poisson::BatchDDim, PolarBSplinesRTheta>(0, 0),
+                          IdxStep<detail_poisson::BatchDDim, PolarBSplinesRTheta>(
+                                  m_n_batch,
                                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                                           - ddc::discrete_space<BSplinesTheta>().nbasis())))
         , m_int_volume_alloc(calculate_int_volume(mapping))
@@ -339,6 +357,7 @@ public:
 
         m_assembler.setup_sparse_matrix(
                 m_gko_matrix,
+                m_n_batch,
                 max_iter,
                 res_tol,
                 batch_solver_logger,
@@ -354,19 +373,23 @@ public:
      *      The @f$ \beta @f$ function in the definition of the Poisson-like equation defined
      *      at the grid points.
      */
-    void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
-            override
+    void update_coefficients(DConstFieldBatchedRTheta alpha, DConstFieldBatchedRTheta beta) override
     {
-        FieldMemCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
-        FieldMemCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
+        FieldMemBatchedCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
+        FieldMemBatchedCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
 
         m_builder(get_field(coeff_alpha_alloc), alpha);
         m_builder(get_field(coeff_beta_alloc), beta);
 
-        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
-                alpha_func(m_evaluator, get_const_field(coeff_alpha_alloc));
-        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
-                beta_func(m_evaluator, get_const_field(coeff_beta_alloc));
+        ConstFieldAssemblerBatchedCoeffsSpline2D coeff_alpha_batched
+                = detail_poisson::to_batch_access(get_const_field(coeff_alpha_alloc));
+        ConstFieldAssemblerBatchedCoeffsSpline2D coeff_beta_batched
+                = detail_poisson::to_batch_access(get_const_field(coeff_beta_alloc));
+
+        CoeffEvaluator<EvaluatorType, ConstFieldAssemblerBatchedCoeffsSpline2D>
+                alpha_func(m_evaluator, coeff_alpha_batched);
+        CoeffEvaluator<EvaluatorType, ConstFieldAssemblerBatchedCoeffsSpline2D>
+                beta_func(m_evaluator, coeff_beta_batched);
         m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
     }
 
@@ -390,42 +413,51 @@ public:
         Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonRHS");
 
         static_assert(
-                std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
-                "RHSFunction must have an operator() which takes a coordinate and returns a "
-                "double");
-        assert(get_idx_range(spline) == ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
-        IdxRange<InternalBatchDim> batch_idx_range(get_idx_range(m_x_init_alloc));
-
-        assert(batch_idx_range.size() == 1);
-
-        Idx<InternalBatchDim> batch_idx = batch_idx_range.front();
+                std::is_invocable_r_v<
+                        double,
+                        RHSFunction,
+                        IdxRangeBatch::discrete_element_type,
+                        CoordRTheta>,
+                "RHSFunction must have an operator() which takes a batch index and a "
+                "coordinate and returns a double");
+        assert(IdxRangeBSPolar(get_idx_range(spline))
+               == ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
+        IdxRange<detail_poisson::BatchDDim> batch_idx_range(get_idx_range(m_x_init_alloc));
+        assert(IdxRange<detail_poisson::BatchDDim>(get_idx_range(spline)).size()
+               == batch_idx_range.size());
+        assert(m_n_batch == batch_idx_range.size());
 
         // Create b for rhs
-        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>
+        DFieldMem<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>>
                 b_alloc("b (PolarSplineFEMPoisonLikeSolver::operator())",
                         get_idx_range(m_x_init_alloc));
-        DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
+        DField<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
 
         // Get initial guess
-        DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> x_init = get_field(m_x_init_alloc);
+        DField<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>> x_init
+                = get_field(m_x_init_alloc);
+
+        const int n_batch = m_n_batch;
 
         DConstField<IdxRangeQuadratureRTheta> int_volume = get_const_field(m_int_volume_alloc);
 
         IdxRangeBSPolar idx_range_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
+        const int n_singular = idx_range_singular.size();
 
         IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
 
-        // Fill b
+        // Fill b for the singular basis functions, for every batch.
         // Multi-level parallelism is needed as idx_range_singular.size() ~= 3 but b is on GPU
         Kokkos::parallel_for(
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        idx_range_singular.size(),
+                        n_batch * n_singular,
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    IdxBSPolar idx
-                            = idx_range_singular.front() + IdxStepBSPolar(team.league_rank());
+                    IdxBatch const batch_idx(team.league_rank() / n_singular);
+                    IdxBSPolar const idx = idx_range_singular.front()
+                                           + IdxStepBSPolar(team.league_rank() % n_singular);
                     double teamSum = 0;
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadMDRange(
@@ -438,8 +470,8 @@ public:
                                                                        r_thread_index,
                                                                        theta_thread_index);
                                 const CoordRTheta coord(ddc::coordinate(idx_quad));
-                                sum += rhs(coord) * get_polar_bspline_vals(coord, idx)
-                                       * int_volume(idx_quad);
+                                sum += rhs_func(batch_idx, coord)
+                                       * get_polar_bspline_vals(coord, idx) * int_volume(idx_quad);
                             },
                             teamSum);
 
@@ -449,11 +481,16 @@ public:
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
         IdxRangeQuadratureTheta full_quad_idx_range_theta(full_quad_idx_range);
 
+        IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>
+                batched_fem_non_singular(batch_idx_range, m_idxrange_fem_non_singular);
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
-                m_idxrange_fem_non_singular,
-                KOKKOS_LAMBDA(IdxBSPolar const idx) {
+                batched_fem_non_singular,
+                KOKKOS_LAMBDA(Idx<detail_poisson::BatchDDim, PolarBSplinesRTheta> const idx_full) {
+                    IdxBatch const batch_idx(idx_full);
+                    IdxBSPolar const idx(idx_full);
                     const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
                     const IdxBSR idx_r(idx_2d);
                     const IdxBSTheta idx_theta(idx_2d);
@@ -498,7 +535,8 @@ public:
                         for (IdxQuadratureR idx_quad_r : ddc::select<QDimRMesh>(quad_range)) {
                             IdxQuadratureRTheta idx_quad(idx_quad_r, idx_quad_theta);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
-                            b(batch_idx, idx) += rhs(coord) * get_polar_bspline_vals(coord, idx)
+                            b(batch_idx, idx) += rhs_func(batch_idx, coord)
+                                                 * get_polar_bspline_vals(coord, idx)
                                                  * int_volume(idx_quad);
                         }
                     }
@@ -506,10 +544,10 @@ public:
 
         Kokkos::Profiling::popRegion();
 
-        // Solve the matrix equation
+        // Solve the matrix equation for every batch in a single call
         Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonSolve");
         m_gko_matrix->solve(x_init.allocation_kokkos_view(), b.allocation_kokkos_view());
-        //-----------------
+
         IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
         IdxRangeBSPolar polar_bspl_idx_range
                 = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().remove_last(
@@ -518,12 +556,16 @@ public:
                 = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().take_last(
                         radial_boundary_splines);
 
-        // Fill the spline
-        ddc::parallel_for_each(
-                location.function_name(),
-                polar_bspl_idx_range,
-                KOKKOS_LAMBDA(IdxBSPolar const idx) { spline(idx) = x_init(batch_idx, idx); });
-        ddc::parallel_fill(spline[bc_polar_bspl_idx_range], 0.0);
+        IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>
+                batched_polar_bspl_idx_range(batch_idx_range, polar_bspl_idx_range);
+        IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>
+                batched_bc_polar_bspl_idx_range(batch_idx_range, bc_polar_bspl_idx_range);
+
+        // Fill the spline, for every batch
+        ddc::parallel_deepcopy(
+                spline[batched_polar_bspl_idx_range],
+                x_init[batched_polar_bspl_idx_range]);
+        ddc::parallel_fill(spline[batched_bc_polar_bspl_idx_range], 0.0);
         Kokkos::Profiling::popRegion();
     }
 
@@ -545,15 +587,20 @@ public:
     void operator()(DFieldRTheta phi, RHSFunction const& rhs) const
     {
         static_assert(
-                std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
+                std::is_invocable_r_v<
+                        double,
+                        RHSFunction,
+                        IdxRangeBatch::discrete_element_type,
+                        CoordRTheta>,
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
 
-        (*this)(get_field(m_phi_spline_coef_alloc), rhs);
-        CoordFieldMemRTheta coords_eval_alloc(
-                "coords_eval (PolarSplineFEMPoisonLikeSolver::operator())",
-                get_idx_range(phi));
-        m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc));
+        IdxRange<detail_poisson::BatchDDim> batch_idx_range(get_idx_range(m_phi_spline_coef_alloc));
+
+        (*this)(
+                get_field(m_phi_spline_coef_alloc),
+                KOKKOS_LAMBDA(IdxBatch ib, CoordRTheta const& coord) { return rhs(coord); });
+        m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc)[only_batch]);
     }
 
     /**
@@ -563,18 +610,31 @@ public:
      * the grid of the solution @f$\phi@f$.
      *
      * @param[inout] phi
-     *      The values of the solution @f$\phi@f$ on the grid.
-     * @param[in] rhs
-     *      The rhs @f$ \rho@f$ of the Poisson-like equation on the grid.
+     *      The values of the solution @f$\phi@f$ on the grid, for every batch.
+     * @param[in] rho
+     *      The rhs @f$ \rho@f$ of the Poisson-like equation on the grid, for every batch.
      */
-    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const override
+    void operator()(DFieldBatchedRTheta phi, DConstFieldBatchedRTheta rho) const override
     {
-        FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
-        m_builder(get_field(rhs_alloc), rhs);
-        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
-                rhs_func(m_evaluator, get_const_field(rhs_alloc));
+        FieldMemBatchedCoeffsSpline2D rho_coeff_alloc(get_spline_idx_range(m_builder));
+        m_builder(get_field(rho_coeff_alloc), rho);
+        ConstFieldAssemblerBatchedCoeffsSpline2D rho_coeff_batched
+                = detail_poisson::to_batch_access(get_const_field(rho_coeff_alloc));
+        CoeffEvaluator<EvaluatorType, ConstFieldAssemblerBatchedCoeffsSpline2D>
+                rho_func(m_evaluator, rho_coeff_batched);
 
-        (*this)(phi, rhs_func);
+        // Delegate the fill+solve for every batch to the spline-coefficient overload.
+        (*this)(get_field(m_phi_spline_coef_alloc), rho_func);
+
+        // PolarSplineEval only evaluates from a single (unbatched) coefficient field, so the
+        // evaluation onto the grid is performed once per batch.
+        auto phi_batched = detail_poisson::to_batch_access(phi);
+        IdxRange<detail_poisson::BatchDDim> batch_idx_range(get_idx_range(m_x_init_alloc));
+        for (IdxBatch idx_batch : batch_idx_range) {
+            m_polar_spline_evaluator(
+                    phi_batched[idx_batch],
+                    get_const_field(m_phi_spline_coef_alloc)[idx_batch]);
+        }
     }
 
     /**
