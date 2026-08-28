@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-FROM ubuntu:noble
+FROM ubuntu:resolute
 
 COPY bash_run /bin/
 ENV BASH_ENV=/etc/profile
@@ -19,15 +19,14 @@ RUN chmod +x /bin/bash_run \
     apt-utils \
     ca-certificates \
     wget \
- && echo "deb [ arch=amd64 ] https://repo.pdi.dev/ubuntu noble main" > /etc/apt/sources.list.d/pdi.list \
+ && echo "deb [ arch=amd64 ] https://repo.pdi.dev/ubuntu resolute main" > /etc/apt/sources.list.d/pdi.list \
  && wget -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://repo.pdi.dev/ubuntu/pdidev-archive-keyring.gpg \
  && chmod a+r /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
-    clang-18 \
-    libomp-dev \
-    clang-format-14 \
+    clang-22 \
+    libomp-22-dev \
     doxygen \
     pkg-config \
     git \
@@ -44,8 +43,10 @@ RUN chmod +x /bin/bash_run \
     python3-venv \
     libpdi-dev \
     cmake \
- && ln -sf /usr/bin/clang-18 /usr/bin/clang \
- && ln -sf /usr/bin/clang++-18 /usr/bin/clang++ \
+ && ln -sf /usr/bin/clang-22 /usr/bin/clang \
+ && ln -sf /usr/bin/clang++-22 /usr/bin/clang++ \
+ && export CC=clang \
+ && export CXX=clang++ \
  && git clone --branch v1.11.0 --depth 1 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
@@ -161,6 +162,7 @@ RUN chmod +x /bin/bash_run \
     scipy \
     xarray \
     'pylint==3.3.9' \
+    'clang-format==14.0.6' \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
