@@ -1,21 +1,25 @@
 # SPDX-License-Identifier: MIT
 
 add_library("predcorr_rk2_xy" INTERFACE)
-target_include_directories("predcorr_rk2_xy"
+
+target_compile_features("predcorr_rk2_xy" INTERFACE cxx_std_20)
+
+target_sources("predcorr_rk2_xy"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                predcorr_RK2.hpp
 )
+
 target_link_libraries("predcorr_rk2_xy" INTERFACE
     DDC::core
-    
-    gslx::advection
-    gslx::interpolation
-    gslx::geometry_XY
-    gslx::pde_solvers
-    gslx::timestepper
-    gslx::utils
-
-
-
+    gyselalibxx::advection
+    gyselalibxx::interpolation
+    gyselalibxx::geometry_XY
+    gyselalibxx::pde_solvers
+    gyselalibxx::timestepper
+    gyselalibxx::utils
 )
-add_library("gslx::predcorr_rk2_xy" ALIAS "predcorr_rk2_xy")
+add_library("gyselalibxx::predcorr_rk2_xy" ALIAS "predcorr_rk2_xy")
+
+install(TARGETS predcorr_rk2_xy EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXY/time_integration)

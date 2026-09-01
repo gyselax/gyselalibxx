@@ -6,14 +6,14 @@ target_link_libraries(test_collSpVparMu
   DDC::core
   DDC::pdi
   PDI::PDI_C
-  gslx::collisions
-  gslx::geometry_vparmu
-  gslx::geometry_collisions_vparmu
-  gslx::initialisation_vparmu
-  gslx::io
-  gslx::quadrature
-  gslx::speciesinfo
-  gslx::utils
+  gyselalibxx::collisions
+  gyselalibxx::geometry_vparmu
+  gyselalibxx::geometry_collisions_vparmu
+  gyselalibxx::initialisation_vparmu
+  gyselalibxx::io
+  gyselalibxx::quadrature
+  gyselalibxx::speciesinfo
+  gyselalibxx::utils
 
   paraconf::paraconf
   )

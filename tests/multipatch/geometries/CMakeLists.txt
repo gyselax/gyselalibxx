@@ -6,8 +6,8 @@ target_include_directories("multipatch_geometries"
 )
 target_link_libraries("multipatch_geometries" INTERFACE
     DDC::core
-    gslx::multipatch_connectivity
-    gslx::utils
+    gyselalibxx::multipatch_connectivity
+    gyselalibxx::utils
 
 )
-add_library("gslx::multipatch_geometries" ALIAS "multipatch_geometries")
+add_library("gyselalibxx::multipatch_geometries" ALIAS "multipatch_geometries")

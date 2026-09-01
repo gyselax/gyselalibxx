@@ -1,11 +1,19 @@
 # SPDX-License-Identifier: MIT
 
 add_library(paraconfpp INTERFACE)
-target_include_directories(paraconfpp
+
+target_compile_features("paraconfpp" INTERFACE cxx_std_20)
+
+target_sources("paraconfpp"
     INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        FILE_SET HEADERS
+            FILES
+                paraconfpp.hpp
 )
+
 target_link_libraries(paraconfpp INTERFACE
         paraconf::paraconf
 )
-add_library(gslx::paraconfpp ALIAS paraconfpp)
+add_library(gyselalibxx::paraconfpp ALIAS paraconfpp)
+
+install(TARGETS paraconfpp EXPORT gyselalibxxTargets FILE_SET HEADERS)

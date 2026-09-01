@@ -12,16 +12,16 @@ target_link_libraries(vortex_merger
 
         PDI::PDI_C
 
-        gslx::advection
-        gslx::geometry_RTheta
-        gslx::io
-        gslx::interpolation
-        gslx::paraconfpp
-        gslx::poisson_RTheta
-        gslx::quadrature
-        gslx::simulation_utils
-        gslx::time_integration_RTheta
-        gslx::utils
-        gslx::vortex_merger_init_eq
+        gyselalibxx::advection
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::io
+        gyselalibxx::interpolation
+        gyselalibxx::paraconfpp
+        gyselalibxx::poisson_RTheta
+        gyselalibxx::quadrature
+        gyselalibxx::simulation_utils
+        gyselalibxx::time_integration_RTheta
+        gyselalibxx::utils
+        gyselalibxx::vortex_merger_init_eq
 )
 

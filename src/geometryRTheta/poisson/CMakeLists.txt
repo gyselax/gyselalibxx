@@ -2,16 +2,25 @@
 
 
 add_library(poisson_RTheta INTERFACE)
-target_include_directories(poisson_RTheta
+
+target_compile_features("poisson_RTheta" INTERFACE cxx_std_20)
+
+target_sources("poisson_RTheta"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
-)
-target_link_libraries(poisson_RTheta INTERFACE
-        DDC::core
-        gslx::data_types
-        gslx::geometry_RTheta
-        gslx::speciesinfo
-        gslx::utils
+        FILE_SET HEADERS
+            FILES
+                iqnsolver.hpp
+                poisson_like_rhs_function.hpp
 )
 
-add_library("gslx::poisson_RTheta" ALIAS "poisson_RTheta")
+target_link_libraries(poisson_RTheta INTERFACE
+        DDC::core
+        gyselalibxx::data_types
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::speciesinfo
+        gyselalibxx::utils
+)
+
+add_library("gyselalibxx::poisson_RTheta" ALIAS "poisson_RTheta")
+
+install(TARGETS poisson_RTheta EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/poisson)
