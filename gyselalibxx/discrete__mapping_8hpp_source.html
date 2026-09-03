@@ -591,8 +591,8 @@ template &lt;
         class... ADim,
         class Mapping,
         class CoordJacobian&gt;
-void fill_jacobian_matrix_row(
-        Tensor&lt;DataType, VectorIndexSet&lt;RDim...&gt;, VectorIndexSet&lt;ADim...&gt;&gt; jacobian_matrix,
+KOKKOS_INLINE_FUNCTION void fill_jacobian_matrix_row(
+        Tensor&lt;DataType, VectorIndexSet&lt;RDim...&gt;, VectorIndexSet&lt;ADim...&gt;&gt;&amp; jacobian_matrix,
         Mapping const&amp; mapping,
         CoordJacobian const&amp; coord)
 {
@@ -602,8 +602,8 @@ void fill_jacobian_matrix_row(
 }
 
 template &lt;class DataType, class... RDim, class... ADim, class Mapping, class CoordJacobian&gt;
-void fill_jacobian_matrix(
-        Tensor&lt;DataType, VectorIndexSet&lt;RDim...&gt;, VectorIndexSet&lt;ADim...&gt;&gt; jacobian_matrix,
+KOKKOS_INLINE_FUNCTION void fill_jacobian_matrix(
+        Tensor&lt;DataType, VectorIndexSet&lt;RDim...&gt;, VectorIndexSet&lt;ADim...&gt;&gt;&amp; jacobian_matrix,
         Mapping const&amp; mapping,
         CoordJacobian const&amp; coord)
 {
