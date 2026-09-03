@@ -154,7 +154,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixGeneralDiscCzarMap)
     host_t<DVectorField<IdxRangeRTheta, VectorIndexSet<X, Y>>> anal_vals
             = get_field(anal_vals_alloc);
 
-    ddc::parallel_for_each(grid, [&](IdxRTheta idx) {
+    ddc::host_for_each(grid, [&](IdxRTheta idx) {
         CoordXY coord = analytical_mapping(ddc::coordinate(idx));
         ddcHelper::get<X>(anal_vals)(idx) = ddc::get<X>(coord);
         ddcHelper::get<Y>(anal_vals)(idx) = ddc::get<Y>(coord);
