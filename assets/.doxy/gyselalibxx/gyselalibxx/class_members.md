@@ -1231,8 +1231,6 @@
 * **recursion** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **RZBasis** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **RZBasis\_cov** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **RZDim1** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
-* **RZDim2** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **Rho** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **RhoThetaBasis** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **RhoThetaBasis\_cov** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))

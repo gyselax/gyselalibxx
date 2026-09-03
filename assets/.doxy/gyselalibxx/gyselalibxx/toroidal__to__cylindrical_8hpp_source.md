@@ -23,11 +23,12 @@ private:
     using RhoThetaBasis = ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordArg>;
     using RZBasis_cov = get_covariant_dims_t<RZBasis>;
     using RhoThetaBasis_cov = get_covariant_dims_t<RhoThetaBasis>;
-    using RZDim1 = ddc::type_seq_element_t<0, RZBasis>;
-    using RZDim2 = ddc::type_seq_element_t<1, RZBasis>;
-    using R = std::conditional_t<RZDim1::IS_COVARIANT && RZDim1::IS_CONTRAVARIANT, RZDim2, RZDim1>;
+
+    // Extract the R and Z dimensions. As they describe a Cartesian slice and are private
+    // attributes, the order is not important.
+    using R = ddc::type_seq_element_t<0, RZBasis>;
     using R_cov = typename R::Dual;
-    using Z = std::conditional_t<RZDim1::IS_COVARIANT && RZDim1::IS_CONTRAVARIANT, RZDim1, RZDim2>;
+    using Z = ddc::type_seq_element_t<1, RZBasis>;
     using Z_cov = typename Z::Dual;
     using Zeta_cov = typename Zeta::Dual;
     using Rho = typename CoordWithOPoint<

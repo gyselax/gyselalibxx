@@ -3435,11 +3435,9 @@
     <member refid="classToroidalToCylindrical_1a0d67dd1b9026e33a80853025bfa2a3da" kind="typedef"><name>RhoThetaBasis</name></member>
     <member refid="classToroidalToCylindrical_1a313f9c9a42a5fb76bded577eb29db687" kind="typedef"><name>RZBasis_cov</name></member>
     <member refid="classToroidalToCylindrical_1a59743e0477178b2320854a64b7a0c91e" kind="typedef"><name>RhoThetaBasis_cov</name></member>
-    <member refid="classToroidalToCylindrical_1a9c87a6a77c2a28ca3877eaf0c32fda7e" kind="typedef"><name>RZDim1</name></member>
-    <member refid="classToroidalToCylindrical_1a1edc6f955caf610fcd9160a7b8e5c013" kind="typedef"><name>RZDim2</name></member>
-    <member refid="classToroidalToCylindrical_1aff821a80e15ddb94aea93ec30db9db8a" kind="typedef"><name>R</name></member>
+    <member refid="classToroidalToCylindrical_1aace80e002799c81113bea246886bc964" kind="typedef"><name>R</name></member>
     <member refid="classToroidalToCylindrical_1a5aee53516c1125323be46ba11c9b028b" kind="typedef"><name>R_cov</name></member>
-    <member refid="classToroidalToCylindrical_1a2572138f1e900fdf011a5a0e4a0352a9" kind="typedef"><name>Z</name></member>
+    <member refid="classToroidalToCylindrical_1a2513fe95c334fc07f8583fd79d73ccae" kind="typedef"><name>Z</name></member>
     <member refid="classToroidalToCylindrical_1a41b99eb3d84106da6a25dd4c5177b3c8" kind="typedef"><name>Z_cov</name></member>
     <member refid="classToroidalToCylindrical_1a1a1f09b42df640f983b769c84c3c3bf9" kind="typedef"><name>Zeta_cov</name></member>
     <member refid="classToroidalToCylindrical_1ad9cb91111410d423345b7b84f93e67f6" kind="typedef"><name>Rho</name></member>
