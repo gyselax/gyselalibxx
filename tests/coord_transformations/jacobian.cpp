@@ -150,19 +150,19 @@ TEST_P(InvJacobianMatrix, InverseMatrixGeneralDiscCzarMap)
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     SplineInterpolatorRTheta_host interpolator(grid);
-    DVectorFieldMem<IdxRangeRTheta, VectorIndexSet<X, Y>> anal_vals_alloc(grid);
-    DVectorField<IdxRangeRTheta, VectorIndexSet<X, Y>> anal_vals = get_field(anal_vals_alloc);
+    host_t<DVectorFieldMem<IdxRangeRTheta, VectorIndexSet<X, Y>>> anal_vals_alloc(grid);
+    host_t<DVectorField<IdxRangeRTheta, VectorIndexSet<X, Y>>> anal_vals
+            = get_field(anal_vals_alloc);
 
     ddc::parallel_for_each(grid, [&](IdxRTheta idx) {
         CoordXY coord = analytical_mapping(ddc::coordinate(idx));
-        std::cout << coord << std::endl;
         ddcHelper::get<X>(anal_vals)(idx) = ddc::get<X>(coord);
         ddcHelper::get<Y>(anal_vals)(idx) = ddc::get<Y>(coord);
     });
 
-    DVectorFieldMem<IdxRange<BSplinesR, BSplinesTheta>, VectorIndexSet<X, Y>> coeffs_alloc(
+    host_t<DVectorFieldMem<IdxRange<BSplinesR, BSplinesTheta>, VectorIndexSet<X, Y>>> coeffs_alloc(
             get_spline_idx_range(interpolator.get_builder()));
-    DVectorField<IdxRange<BSplinesR, BSplinesTheta>, VectorIndexSet<X, Y>> coeffs
+    host_t<DVectorField<IdxRange<BSplinesR, BSplinesTheta>, VectorIndexSet<X, Y>>> coeffs
             = get_field(coeffs_alloc);
     interpolator.get_builder()(
             ddcHelper::get<X>(coeffs),
