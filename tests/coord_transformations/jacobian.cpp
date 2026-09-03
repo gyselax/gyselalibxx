@@ -8,6 +8,7 @@
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
+#include "discrete_mapping.hpp"
 #include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
@@ -103,6 +104,75 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
     DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host>
             mapping_builder(Kokkos::DefaultHostExecutionSpace(), analytical_mapping, interpolator);
     DiscretePoloidalCSSplineMapping mapping = mapping_builder();
+
+    static_assert(has_jacobian_v<decltype(mapping)>);
+    InverseJacobianMatrix inv_jacobian(mapping);
+
+    // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
+        const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
+        const double r = ddc::get<R>(coord_rtheta);
+        if (fabs(r) > 1e-15) {
+            check_inverse_tensor(
+                    mapping.jacobian_matrix(coord_rtheta),
+                    inv_jacobian(coord_rtheta),
+                    5e-14);
+        }
+    });
+}
+
+
+TEST_P(InvJacobianMatrix, InverseMatrixGeneralDiscCzarMap)
+{
+    auto const [Nr, Nt] = GetParam();
+    const CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(0.3, 1.4);
+
+    CoordR const r_min(0.1);
+    CoordR const r_max(1.0);
+    IdxStepR const r_size(Nr);
+
+    CoordTheta const theta_min(0.0);
+    CoordTheta const theta_max(2.0 * M_PI);
+    IdxStepTheta const theta_size(Nt);
+
+    std::vector<CoordR> r_break_points = build_uniform_break_points(r_min, r_max, r_size);
+    std::vector<CoordTheta> theta_break_points
+            = build_uniform_break_points(theta_min, theta_max, theta_size);
+
+    ddc::init_discrete_space<BSplinesR>(r_break_points);
+    ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
+
+    ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(InterpPointsTheta::get_sampling<GridTheta>());
+
+    IdxRangeR interpolation_idx_range_r(InterpPointsR::get_domain<GridR>());
+    IdxRangeTheta interpolation_idx_range_theta(InterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
+
+    SplineInterpolatorRTheta_host interpolator(grid);
+    host_t<DVectorFieldMem<IdxRangeRTheta, VectorIndexSet<X, Y>>> anal_vals_alloc(grid);
+    host_t<DVectorField<IdxRangeRTheta, VectorIndexSet<X, Y>>> anal_vals
+            = get_field(anal_vals_alloc);
+
+    ddc::host_for_each(grid, [&](IdxRTheta idx) {
+        CoordXY coord = analytical_mapping(ddc::coordinate(idx));
+        ddcHelper::get<X>(anal_vals)(idx) = ddc::get<X>(coord);
+        ddcHelper::get<Y>(anal_vals)(idx) = ddc::get<Y>(coord);
+    });
+
+    host_t<DVectorFieldMem<IdxRange<BSplinesR, BSplinesTheta>, VectorIndexSet<X, Y>>> coeffs_alloc(
+            get_spline_idx_range(interpolator.get_builder()));
+    host_t<DVectorField<IdxRange<BSplinesR, BSplinesTheta>, VectorIndexSet<X, Y>>> coeffs
+            = get_field(coeffs_alloc);
+    interpolator.get_builder()(
+            ddcHelper::get<X>(coeffs),
+            get_const_field(ddcHelper::get<X>(anal_vals)));
+    interpolator.get_builder()(
+            ddcHelper::get<Y>(coeffs),
+            get_const_field(ddcHelper::get<Y>(anal_vals)));
+
+    DiscreteMapping<CoordRTheta, CoordXY, typename SplineInterpolatorRTheta_host::EvaluatorType>
+            mapping(coeffs, interpolator.get_evaluator());
 
     static_assert(has_jacobian_v<decltype(mapping)>);
     InverseJacobianMatrix inv_jacobian(mapping);
