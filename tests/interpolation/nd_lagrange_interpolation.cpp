@@ -267,6 +267,8 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
                 static_cast<double>(expected),
                 TOL * expected);
     });
+
+    EXPECT_DOUBLE_NEAR(eval2d(Coord<X, Y>(3.0, 4.0), 0.0));
 }
 
 /**
