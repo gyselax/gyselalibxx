@@ -450,6 +450,22 @@ public:
 
 private:
     template <class Layout, class... CoordsDims>
+    bool check_extrapolation(data_type& result, Coord<CoordsDims...> const& coord,
+         ConstField<data_type, coeff_idx_range_type, memory_space, Layout> const lagrange_coef)
+            const
+    {
+        if constexpr (!lagrange_basis_type::is_periodic()) {
+            if (coord_eval_interest < ddc::discrete_space<lagrange_basis_type>().rmin()) {
+                return m_lower_extrap_rule(coord_eval_interest, lagrange_coef);
+            }
+            if (coord_eval_interest > ddc::discrete_space<lagrange_basis_type>().rmax()) {
+                return m_upper_extrap_rule(coord_eval_interest, lagrange_coef);
+            }
+        }
+        return false;
+    }
+
+    template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType
     eval(Coord<CoordsDims...> const& coord_eval,
          ConstField<DataType, coeff_idx_range_type, memory_space, Layout> const lagrange_coef) const
@@ -465,13 +481,10 @@ private:
                                    / ddc::discrete_space<lagrange_basis_type>().length())
                            * ddc::discrete_space<lagrange_basis_type>().length();
             }
-        } else {
-            if (coord_eval_interest < ddc::discrete_space<lagrange_basis_type>().rmin()) {
-                return m_lower_extrap_rule(coord_eval_interest, lagrange_coef);
-            }
-            if (coord_eval_interest > ddc::discrete_space<lagrange_basis_type>().rmax()) {
-                return m_upper_extrap_rule(coord_eval_interest, lagrange_coef);
-            }
+        }
+        data_type result(0);
+        if (check_extrapolation(result, coord_eval_interest, lagrange_coef)) {
+            return result;
         }
         return eval_no_bc(Idx<>(), coord_eval_interest, lagrange_coef);
     }
