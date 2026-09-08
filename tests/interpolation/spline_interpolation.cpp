@@ -78,11 +78,11 @@ using Interp2D = detail::SplineInterpolator2D<
         GridY,
         ddc::detail::TypeSeq<
                 ddc::detail::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>,
-                ddc::detail::
-                        TypeSeq<ddc::PeriodicExtrapolationRule<Y>, ddc::PeriodicExtrapolationRule<Y>>>,
-        ddc::detail::TypeSeq<
-                SplineBoundaryClosure::Greville_Greville,
-                SplineBoundaryClosure::Periodic>,
+                ddc::detail::TypeSeq<
+                        ddc::PeriodicExtrapolationRule<Y>,
+                        ddc::PeriodicExtrapolationRule<Y>>>,
+        ddc::detail::
+                TypeSeq<SplineBoundaryClosure::Greville_Greville, SplineBoundaryClosure::Periodic>,
         ddc::SplineSolver::LAPACK>;
 
 using Interp3D = detail::SplineInterpolator3D<
@@ -95,8 +95,9 @@ using Interp3D = detail::SplineInterpolator3D<
         GridZ,
         ddc::detail::TypeSeq<
                 ddc::detail::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>,
-                ddc::detail::
-                        TypeSeq<ddc::PeriodicExtrapolationRule<Y>, ddc::PeriodicExtrapolationRule<Y>>,
+                ddc::detail::TypeSeq<
+                        ddc::PeriodicExtrapolationRule<Y>,
+                        ddc::PeriodicExtrapolationRule<Y>>,
                 ddc::detail::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>>,
         ddc::detail::TypeSeq<
                 SplineBoundaryClosure::Greville_Greville,
@@ -115,15 +116,15 @@ TEST(SplineInterpolatorAPI, OneD)
     static_assert(concepts::InterpolationEvaluator<Interp1D::EvaluatorType>);
     static_assert(Interp1D::rank() == 1);
     static_assert(std::is_same_v<
-                   Interp1D::BuilderType,
-                   ddc::SplineBuilder<
-                           ExecSpace,
-                           ExecSpace::memory_space,
-                           BSplinesX,
-                           GridX,
-                           ddc::SplineBuilderClosure::GREVILLE,
-                           ddc::SplineBuilderClosure::GREVILLE,
-                           ddc::SplineSolver::LAPACK>>);
+                  Interp1D::BuilderType,
+                  ddc::SplineBuilder<
+                          ExecSpace,
+                          ExecSpace::memory_space,
+                          BSplinesX,
+                          GridX,
+                          ddc::SplineBuilderClosure::GREVILLE,
+                          ddc::SplineBuilderClosure::GREVILLE,
+                          ddc::SplineSolver::LAPACK>>);
 }
 
 TEST(SplineInterpolatorAPI, TwoD)
@@ -153,8 +154,8 @@ TEST(SplineInterpolatorTraits, RankAndCoeffIdxRangeShape)
     static_assert(InterpolationEvaluatorTraits<Interp3D::EvaluatorType>::rank() == 3);
 
     static_assert(std::is_same_v<
-                   InterpolationBuilderTraits<Interp3D::BuilderType>::coeff_idx_range_type,
-                   IdxRange<BSplinesX, BSplinesY, BSplinesZ>>);
+                  InterpolationBuilderTraits<Interp3D::BuilderType>::coeff_idx_range_type,
+                  IdxRange<BSplinesX, BSplinesY, BSplinesZ>>);
 }
 
 TEST(SplineInterpolatorResolver, OneD)
