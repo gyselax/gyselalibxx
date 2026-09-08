@@ -368,9 +368,10 @@ public:
     }
 
 private:
-    Coord<CDim> apply_periodic_bcs(Coord<CDim> coord)
+    template <class CDim>
+    static Coord<CDim> apply_periodic_bcs(Coord<CDim> coord)
     {
-        if constexpr (CDim::is_periodic()) {
+        if constexpr (CDim::PERIODIC) {
             using BasisTypes = ddc::detail::
                     TypeSeq<HeadBasis, typename Evaluators1D::lagrange_basis_type...>;
             using Basis = find_grid_t<CDim, BasisTypes>;
@@ -386,20 +387,21 @@ private:
         return coord;
     }
 
-    template <class Layout, class... CoordsDims>
-    bool check_extrapolation(data_type& result, Coord<CoordsDims...> const& coord,
-         ConstField<data_type, coeff_idx_range_type, memory_space, Layout> const lagrange_coef)
-            const
+    template <class Layout, class... CoordsDims, class IdxRangeType>
+    bool check_extrapolation(
+            data_type& result,
+            Coord<CoordsDims...> const& coord,
+            ConstField<data_type, IdxRangeType, memory_space, Layout> const lagrange_coef) const
     {
         using CDim = typename HeadEvaluator::continuous_dimension_type;
         using Basis = typename HeadEvaluator::lagrange_basis_type;
-        if constexpr (!CDim::is_periodic()) {
-            if (ddc::get<CDim>(coord_eval) < ddc::discrete_space<Basis>().rmin()) {
-                result = m_head_evaluator.lower_extrapolation_rule()(coord_eval, spline_coef);
+        if constexpr (!CDim::PERIODIC) {
+            if (ddc::get<CDim>(coord) < ddc::discrete_space<Basis>().rmin()) {
+                result = m_head_evaluator.lower_extrapolation_rule()(coord, lagrange_coef);
                 return true;
             }
-            if (ddc::get<CDim>(coord_eval) > ddc::discrete_space<Basis>().rmax()) {
-                result = m_head_evaluator.upper_extrapolation_rule()(coord_eval, spline_coef);
+            if (ddc::get<CDim>(coord) > ddc::discrete_space<Basis>().rmax()) {
+                result = m_head_evaluator.upper_extrapolation_rule()(coord, lagrange_coef);
                 return true;
             }
         }
@@ -413,12 +415,13 @@ private:
          ConstField<data_type, coeff_idx_range_type, memory_space, Layout> const lagrange_coef)
             const
     {
-        Coord<CoordsDims...> const& coord_periodic(apply_periodic_bcs(ddc::get<CoordsDim>(coord)));
+        Coord<CoordsDims...> const coord_periodic(
+                apply_periodic_bcs(ddc::select<CoordsDims>(coord))...);
         data_type result(0);
         if (check_extrapolation(result, coord_periodic, lagrange_coef)) {
             return result;
         }
-        return eval_no_bc(Idx<>(), coord, lagrange_coef);
+        return eval_no_bc(Idx<>(), coord_periodic, lagrange_coef);
     }
 
     template <class... DerivDims, class Layout, class... CoordsDims>

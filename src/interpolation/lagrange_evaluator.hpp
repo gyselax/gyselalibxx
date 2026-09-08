@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+
 #include "i_interpolation_evaluator.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
@@ -449,17 +450,21 @@ public:
     }
 
 private:
-    template <class Layout, class... CoordsDims>
-    bool check_extrapolation(data_type& result, Coord<CoordsDims...> const& coord,
-         ConstField<data_type, coeff_idx_range_type, memory_space, Layout> const lagrange_coef)
-            const
+    template <class Layout, class... CoordsDims, class IdxRangeType>
+    bool check_extrapolation(
+            data_type& result,
+            Coord<CoordsDims...> const& coord,
+            ConstField<data_type, IdxRangeType, memory_space, Layout> const lagrange_coef) const
     {
+        Coord<continuous_dimension_type> const coord_eval_interest(coord);
         if constexpr (!lagrange_basis_type::is_periodic()) {
             if (coord_eval_interest < ddc::discrete_space<lagrange_basis_type>().rmin()) {
-                return m_lower_extrap_rule(coord_eval_interest, lagrange_coef);
+                result = m_lower_extrap_rule(coord, lagrange_coef);
+                return true;
             }
             if (coord_eval_interest > ddc::discrete_space<lagrange_basis_type>().rmax()) {
-                return m_upper_extrap_rule(coord_eval_interest, lagrange_coef);
+                result = m_upper_extrap_rule(coord, lagrange_coef);
+                return true;
             }
         }
         return false;
