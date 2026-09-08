@@ -857,7 +857,7 @@ public:
     {
         return m_evaluator;
     }
-}
+};
 
 /**
  * @brief A class to decide which Interpolator class is described.
@@ -975,9 +975,21 @@ struct SplineInterpolatorResolver<
             InterpGrid2,
             InterpGrid3,
             ddc::detail::TypeSeq<
-                    extrapolation_rule_t<ExtrapRules1, InterpGrid1, double, Basis1>,
-                    extrapolation_rule_t<ExtrapRules2, InterpGrid2, double, Basis2>,
-                    extrapolation_rule_t<ExtrapRules3, InterpGrid3, double, Basis3>>,
+                    extrapolation_rule_t<
+                            ExtrapRules1,
+                            double,
+                            Basis1,
+                            IdxRange<InterpGrid1, InterpGrid2, InterpGrid3>>,
+                    extrapolation_rule_t<
+                            ExtrapRules2,
+                            double,
+                            Basis2,
+                            IdxRange<InterpGrid1, InterpGrid2, InterpGrid3>>,
+                    extrapolation_rule_t<
+                            ExtrapRules3,
+                            double,
+                            Basis3,
+                            IdxRange<InterpGrid1, InterpGrid2, InterpGrid3>>>,
             ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2, BoundaryClosures3>,
             Solver>;
 };
