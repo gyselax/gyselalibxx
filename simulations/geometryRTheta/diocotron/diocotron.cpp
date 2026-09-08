@@ -43,17 +43,13 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder
+        = DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorNullBound,
+        SplineInterpolatorRTheta,
         typename DiscreteMappingBuilder::MappingType>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
@@ -103,29 +99,18 @@ int main(int argc, char** argv)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder const builder(mesh_rtheta);
+    SplineInterpolatorRTheta interpolator(mesh_rtheta);
+    SplineInterpolatorRThetaConst interpolator_const(mesh_rtheta);
+    SplineRThetaBuilder const& builder(interpolator.get_builder());
 
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
-            ddc::coordinate(mesh_r.front()));
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(
-            ddc::coordinate(mesh_r.back()));
-
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
     const LogicalToPhysicalMapping to_physical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+            interpolator_const);
     DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
-
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
@@ -150,15 +135,11 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    SplineInterpolatorRTheta interpolator(mesh_rtheta);
 
-    PolarFootFinder find_feet
-            = make_polar_foot_finder<FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
-                    time_stepper,
-                    to_physical_mapping,
-                    mesh_rtheta,
-                    builder,
-                    spline_evaluator_extrapol);
+    PolarFootFinder find_feet = make_polar_foot_finder<
+            FootFindingSpace::PHYSICAL,
+            AdvectionFieldSpace::
+                    PHYSICAL>(time_stepper, to_physical_mapping, mesh_rtheta, interpolator_const);
 
     BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
@@ -169,7 +150,7 @@ int main(int argc, char** argv)
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
-    PoissonSolver poisson_solver(discrete_mapping, builder, interpolator.get_evaluator());
+    PoissonSolver poisson_solver(discrete_mapping, interpolator);
     poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
@@ -177,8 +158,7 @@ int main(int argc, char** argv)
     BslPredCorrRTheta predcorr_operator(
             to_physical_mapping,
             advection_operator,
-            builder,
-            interpolator.get_evaluator(),
+            interpolator,
             poisson_solver);
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
@@ -186,17 +166,15 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             mesh_rtheta,
-            builder,
             poisson_solver,
-            spline_evaluator_extrapol);
+            interpolator_const);
 #elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRTheta predcorr_operator(
             to_physical_mapping,
             advection_operator,
             mesh_rtheta,
-            builder,
             poisson_solver,
-            spline_evaluator_extrapol);
+            interpolator_const);
 #endif
 
     // ================================================================================================

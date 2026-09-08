@@ -9,10 +9,10 @@ target_link_libraries(Li_norms_spline_quadrature_tests
         GTest::gtest
         GTest::gmock
         DDC::core
-        gslx::geometry_RTheta
-        gslx::quadrature
-        gslx::math_tools
-        gslx::utils
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::quadrature
+        gyselalibxx::math_tools
+        gyselalibxx::utils
 
 )
 gtest_discover_tests(Li_norms_spline_quadrature_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

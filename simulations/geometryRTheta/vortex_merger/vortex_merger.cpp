@@ -43,17 +43,13 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder
+        = DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorNullBound,
+        SplineInterpolatorRTheta,
         typename DiscreteMappingBuilder::MappingType>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
@@ -99,26 +95,16 @@ int main(int argc, char** argv)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder const builder(grid);
+    SplineInterpolatorRTheta interpolator(grid);
+    SplineInterpolatorRThetaConst interpolator_const(grid);
+    SplineRThetaBuilder const& builder(interpolator.get_builder());
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
-            ddc::coordinate(mesh_r.front()));
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(
-            ddc::coordinate(mesh_r.back()));
-
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
     const LogicalToPhysicalMapping to_physical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+            interpolator_const);
     DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
@@ -131,15 +117,10 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    SplineInterpolatorRTheta interpolator(grid);
-
-    PolarFootFinder find_feet
-            = make_polar_foot_finder<FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
-                    time_stepper,
-                    to_physical_mapping,
-                    grid,
-                    builder,
-                    spline_evaluator_extrapol);
+    PolarFootFinder find_feet = make_polar_foot_finder<
+            FootFindingSpace::PHYSICAL,
+            AdvectionFieldSpace::
+                    PHYSICAL>(time_stepper, to_physical_mapping, grid, interpolator_const);
 
     BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
@@ -153,7 +134,7 @@ int main(int argc, char** argv)
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
-    PoissonSolver poisson_solver(discrete_mapping, builder, interpolator.get_evaluator());
+    PoissonSolver poisson_solver(discrete_mapping, interpolator);
     poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
@@ -161,9 +142,8 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             grid,
-            builder,
             poisson_solver,
-            spline_evaluator_extrapol);
+            interpolator_const);
 
 
 
