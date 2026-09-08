@@ -369,7 +369,7 @@ public:
 
 private:
     template <class CDim>
-    static Coord<CDim> apply_periodic_bcs(Coord<CDim> coord)
+    static KOKKOS_INLINE_FUNCTION Coord<CDim> apply_periodic_bcs(Coord<CDim> coord)
     {
         if constexpr (CDim::PERIODIC) {
             using BasisTypes = ddc::detail::
@@ -388,7 +388,7 @@ private:
     }
 
     template <class Layout, class... CoordsDims, class IdxRangeType>
-    bool check_extrapolation(
+    KOKKOS_INLINE_FUNCTION bool check_extrapolation(
             data_type& result,
             Coord<CoordsDims...> const& coord,
             ConstField<data_type, IdxRangeType, memory_space, Layout> const lagrange_coef) const

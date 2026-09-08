@@ -188,7 +188,7 @@ public:
      *
      * @see NullExtrapolationRule ConstantExtrapolationRule PeriodicExtrapolationRule
      */
-    lower_extrapolation_rule_type lower_extrapolation_rule() const
+    KOKKOS_INLINE_FUNCTION lower_extrapolation_rule_type lower_extrapolation_rule() const
     {
         return m_lower_extrap_rule;
     }
@@ -203,7 +203,7 @@ public:
      *
      * @see NullExtrapolationRule ConstantExtrapolationRule PeriodicExtrapolationRule
      */
-    upper_extrapolation_rule_type upper_extrapolation_rule() const
+    KOKKOS_INLINE_FUNCTION upper_extrapolation_rule_type upper_extrapolation_rule() const
     {
         return m_upper_extrap_rule;
     }
@@ -451,7 +451,7 @@ public:
 
 private:
     template <class Layout, class... CoordsDims, class IdxRangeType>
-    bool check_extrapolation(
+    KOKKOS_INLINE_FUNCTION bool check_extrapolation(
             data_type& result,
             Coord<CoordsDims...> const& coord,
             ConstField<data_type, IdxRangeType, memory_space, Layout> const lagrange_coef) const
