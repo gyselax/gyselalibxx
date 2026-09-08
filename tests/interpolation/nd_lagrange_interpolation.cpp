@@ -155,7 +155,9 @@ DataType get_pointwise_eval(
         Coord<Dims...> coord,
         ConstField<DataType, IdxRangeCoeff> coeffs)
 {
-    static_assert(Kokkos::SpaceAccessibility<Kokkos::DefaultExecutionSpace, typename EvalType::memory_space>::accessible);
+    static_assert(Kokkos::SpaceAccessibility<
+                  Kokkos::DefaultExecutionSpace,
+                  typename EvalType::memory_space>::accessible);
     double val = 0.0;
     Kokkos::parallel_reduce(
             "NDLagrange pointwise",
