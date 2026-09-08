@@ -24,19 +24,20 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-        gslx::advection
-        gslx::boltzmann_${GEOMETRY_VARIANT}
-        gslx::moments
-        gslx::poisson_${GEOMETRY_VARIANT}
-        gslx::quadrature
-        gslx::speciesinfo
-        gslx::time_integration_${GEOMETRY_VARIANT}
-        gslx::utils_${GEOMETRY_VARIANT}
+        gyselalibxx::advection
+        gyselalibxx::boltzmann_${GEOMETRY_VARIANT}
+        gyselalibxx::moments
+        gyselalibxx::poisson_${GEOMETRY_VARIANT}
+        gyselalibxx::quadrature
+        gyselalibxx::speciesinfo
+        gyselalibxx::time_integration_${GEOMETRY_VARIANT}
+        gyselalibxx::utils_${GEOMETRY_VARIANT}
 )
 
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
     TEST_SUFFIX "_${GEOMETRY_VARIANT}"
-    PROPERTIES TIMEOUT 20
+    PROPERTIES TIMEOUT 200
+    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
     DISCOVERY_MODE PRE_TEST
 )
 
@@ -49,17 +50,18 @@ target_link_libraries(unit_tests_maxwellian_${GEOMETRY_VARIANT}
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::geometry_${GEOMETRY_VARIANT}
-        gslx::initialisation_${GEOMETRY_VARIANT}
-        gslx::quadrature
-        gslx::speciesinfo
-        gslx::time_integration_${GEOMETRY_VARIANT}
-        gslx::utils
+        gyselalibxx::geometry_${GEOMETRY_VARIANT}
+        gyselalibxx::initialisation_${GEOMETRY_VARIANT}
+        gyselalibxx::quadrature
+        gyselalibxx::speciesinfo
+        gyselalibxx::time_integration_${GEOMETRY_VARIANT}
+        gyselalibxx::utils
 )
 
 gtest_discover_tests(unit_tests_maxwellian_${GEOMETRY_VARIANT}
     TEST_SUFFIX "_${GEOMETRY_VARIANT}"
-    PROPERTIES TIMEOUT 10
+    PROPERTIES TIMEOUT 100
+    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
     DISCOVERY_MODE PRE_TEST
 )
 
@@ -75,15 +77,16 @@ target_link_libraries(unit_tests_advection_1d
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::interpolation
-	gslx::advection
-	gslx::geometry_xperiod_vx
-	gslx::utils
+        gyselalibxx::interpolation
+	gyselalibxx::advection
+	gyselalibxx::geometry_xperiod_vx
+	gyselalibxx::utils
 
 
 )
 gtest_discover_tests(unit_tests_advection 
     TEST_SUFFIX "_${advection}"
+    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
     DISCOVERY_MODE PRE_TEST)
 
 

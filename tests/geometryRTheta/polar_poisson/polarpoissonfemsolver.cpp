@@ -12,22 +12,15 @@
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_r_theta.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
 #include "test_cases.hpp"
-
-
-using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
-        GridR,
-        GridTheta,
-        PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound>;
 
 #if defined(CIRCULAR_MAPPING)
 using Mapping = CircularToCartesian<R, Theta, X, Y>;
@@ -35,13 +28,14 @@ using Mapping = CircularToCartesian<R, Theta, X, Y>;
 using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
 using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
+        = DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta>;
 
-using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorNullBound_host>;
+using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
+        GridR,
+        GridTheta,
+        PolarBSplinesRTheta,
+        SplineInterpolatorRTheta,
+        typename DiscreteMappingBuilder::MappingType>;
 
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
@@ -102,8 +96,8 @@ int main(int argc, char** argv)
     IdxRangeTheta interpolation_idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    SplineRThetaBuilder const builder(grid);
-    SplineRThetaBuilder_host const builder_host(grid);
+    SplineInterpolatorRTheta const interpolator(grid);
+    SplineRThetaBuilder const& builder(interpolator.get_builder());
 
     double major_radius = 6.1;
     double vertical_offset = 0.3;
@@ -114,16 +108,12 @@ int main(int argc, char** argv)
     const Mapping mapping(0.3, 1.4, origin_point);
 #endif
 
-    ddc::NullExtrapolationRule bv_r_min;
-    ddc::NullExtrapolationRule bv_r_max;
-    ddc::PeriodicExtrapolationRule<Theta> bv_theta_min;
-    ddc::PeriodicExtrapolationRule<Theta> bv_theta_max;
-    SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
+    SplineRThetaEvaluatorNullBound const& evaluator(interpolator.get_evaluator());
 
 
     DiscreteMappingBuilder const
-            discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, builder, evaluator);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+            discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, interpolator);
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
@@ -131,13 +121,9 @@ int main(int argc, char** argv)
 
     DFieldMemRTheta coeff_alpha_alloc(grid); // values of the coefficient alpha
     DFieldMemRTheta coeff_beta_alloc(grid);
-    DFieldMemRTheta x_alloc(grid);
-    DFieldMemRTheta y_alloc(grid);
 
     DFieldRTheta coeff_alpha = get_field(coeff_alpha_alloc); // values of the coefficient alpha
     DFieldRTheta coeff_beta = get_field(coeff_beta_alloc);
-    DFieldRTheta x = get_field(x_alloc);
-    DFieldRTheta y = get_field(y_alloc);
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
@@ -146,27 +132,7 @@ int main(int argc, char** argv)
                 coeff_alpha(irtheta) = Kokkos::exp(
                         -Kokkos::tanh((ddc::coordinate(ddc::select<GridR>(irtheta)) - 0.7) / 0.05));
                 coeff_beta(irtheta) = 1.0 / coeff_alpha(irtheta);
-                Coord<R, Theta>
-                        coord(ddc::coordinate(ddc::select<GridR>(irtheta)),
-                              ddc::coordinate(ddc::select<GridTheta>(irtheta)));
-                Coord<X, Y> cartesian_coord = mapping(coord);
-                x(irtheta) = ddc::get<X>(cartesian_coord);
-                y(irtheta) = ddc::get<Y>(cartesian_coord);
             });
-
-    Spline2DMem coeff_alpha_spline(idx_range_bsplinesRTheta);
-    Spline2DMem coeff_beta_spline(idx_range_bsplinesRTheta);
-
-    builder(get_field(coeff_alpha_spline),
-            get_const_field(coeff_alpha)); // coeff_alpha_spline are the coefficients
-    // of the spline representation of the values given by coeff_alpha.
-    builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
-
-    Spline2DMem x_spline_representation(idx_range_bsplinesRTheta);
-    Spline2DMem y_spline_representation(idx_range_bsplinesRTheta);
-
-    builder(get_field(x_spline_representation), get_const_field(x));
-    builder(get_field(y_spline_representation), get_const_field(y));
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Setup time : "
@@ -175,11 +141,9 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver
-            solver(get_const_field(coeff_alpha_spline),
-                   get_const_field(coeff_beta_spline),
-                   discrete_mapping,
-                   evaluator);
+    PoissonSolver solver(discrete_mapping, interpolator);
+
+    solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Poisson initialisation time : "
@@ -214,14 +178,14 @@ int main(int argc, char** argv)
         ConstSpline2D rhs_spline_field = get_const_field(rhs_spline);
         start_time = std::chrono::system_clock::now();
         solver(
+                get_field(result),
                 KOKKOS_LAMBDA(CoordRTheta const& coord) {
                     return evaluator(coord, rhs_spline_field);
-                },
-                get_field(result));
+                });
         end_time = std::chrono::system_clock::now();
     } else {
         start_time = std::chrono::system_clock::now();
-        solver(rhs, get_field(result));
+        solver(get_field(result), rhs);
         end_time = std::chrono::system_clock::now();
     }
     auto result_alloc_host = ddc::create_mirror_view_and_copy(result);

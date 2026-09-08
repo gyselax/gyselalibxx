@@ -18,12 +18,12 @@ class CoordinateTransformationPeriodicTest : public ::testing::Test
 private:
     using SplineInterpPointsTheta1 = ddc::KnotsAsInterpolationPoints<
             BSplinesTheta<1>,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC>;
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC>;
     using SplineInterpPointsTheta2 = ddc::KnotsAsInterpolationPoints<
             BSplinesTheta<2>,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC>;
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC>;
 
     static constexpr Patch1::IdxStep1 r1_npoints = Patch1::IdxStep1(10);
     static constexpr Patch1::IdxStep2 theta1_npoints = Patch1::IdxStep2(10);

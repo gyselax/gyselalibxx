@@ -1,14 +1,24 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#define STRINGIFY(s) #s
+#define STRING(s) STRINGIFY(s)
 
-constexpr char const* const PDI_CFG = R"PDI_CFG(
-metadata:
+constexpr char const* const PDI_CFG
+        = "types:\n"
+          "  real_type: &real_type\n"
+          "    type: " STRING(GYSELALIBXX_BUILD_REAL_PRECISION) "\n"
+                                                                "metadata:\n"
+#ifdef SPLINE
+                                                                R"PDI_CFG(
   Nx_spline_cells : int
   Ny_spline_cells : int
   Nvx_spline_cells : int
   Nvy_spline_cells : int
+)PDI_CFG"
+#endif
+                                                                R"PDI_CFG(
   iter : int
-  time_saved : double
+  time_saved : real_type
   nbstep_diag: int
   iter_saved : int
   MeshX_extents: { type: array, subtype: int64, size: 1 }
@@ -42,11 +52,6 @@ metadata:
     type: array
     subtype: double
     size: [ '$fdistribu_masses_extents[0]' ]
-  fdistribu_eq_extents : { type: array, subtype: int64, size: 3 }
-  fdistribu_eq:
-    type: array
-    subtype: double
-    size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]', '$fdistribu_eq_extents[2]' ]
 
   #-- Parallel data
   local_fdistribu_starts: { type: array, subtype: size_t, size: 5 }
@@ -54,14 +59,19 @@ metadata:
 
 
 data:
+  fdistribu_eq_extents : { type: array, subtype: int64, size: 3 }
+  fdistribu_eq:
+    type: array
+    subtype: real_type
+    size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]', '$fdistribu_eq_extents[2]' ]
   fdistribu:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
   electrostatic_potential_extents: { type: array, subtype: int64, size: 2 }
   electrostatic_potential:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$electrostatic_potential_extents[0]', '$electrostatic_potential_extents[1]' ]
 
 plugins:
@@ -80,7 +90,17 @@ plugins:
     - file: 'GYSELALIBXX_initstate.h5'
       on_event: [initial_state]
       collision_policy: replace_and_warn
+)PDI_CFG"
+#ifdef SPLINE
+                                                                R"PDI_CFG(
       write: [Nx_spline_cells, Nvx_spline_cells, MeshX, MeshY, MeshVx, MeshVy, nbstep_diag, Nkinspecies, fdistribu_charges, fdistribu_masses, fdistribu_eq]
+)PDI_CFG"
+#else
+                                                                R"PDI_CFG(
+      write: [MeshX, MeshY, MeshVx, MeshVy, nbstep_diag, Nkinspecies, fdistribu_charges, fdistribu_masses, fdistribu_eq]
+)PDI_CFG"
+#endif
+                                                                R"PDI_CFG(
     - file: 'GYSELALIBXX_${iter_saved:05}.h5'
       communicator: $MPI_COMM_WORLD
       on_event: [iteration, last_iteration]
@@ -89,7 +109,7 @@ plugins:
       datasets:
         fdistribu:
           type: array
-          subtype: double
+          subtype: real_type
           size: [ '$Nkinspecies', '$MeshX_extents[0]', '$MeshY_extents[0]', '$MeshVx_extents[0]', '$MeshVy_extents[0]' ]
       write:
         time_saved: ~

@@ -3,10 +3,10 @@
 #include "mpisplitvlasovsolver.hpp"
 
 MpiSplitVlasovSolver::MpiSplitVlasovSolver(
-        IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,
-        IAdvectionSpatial<GeometryVxVyXY, GridY> const& advec_y,
-        IAdvectionVelocity<GeometryXYVxVy, GridVx> const& advec_vx,
-        IAdvectionVelocity<GeometryXYVxVy, GridVy> const& advec_vy,
+        IAdvectionSpatial<GeometryVxVyXY, GridX, Real> const& advec_x,
+        IAdvectionSpatial<GeometryVxVyXY, GridY, Real> const& advec_y,
+        IAdvectionVelocity<GeometryXYVxVy, GridVx, Real> const& advec_vx,
+        IAdvectionVelocity<GeometryXYVxVy, GridVy, Real> const& advec_vy,
         MPITransposeAllToAll<X2DSplit, V2DSplit> const& transpose)
     : m_advec_x(advec_x)
     , m_advec_y(advec_y)
@@ -19,12 +19,14 @@ MpiSplitVlasovSolver::MpiSplitVlasovSolver(
 DFieldSpVxVyXY MpiSplitVlasovSolver::operator()(
         DFieldSpVxVyXY const allfdistribu_v2Dsplit,
         DVectorConstFieldXY const electric_field,
-        double const dt) const
+        Real const dt) const
 {
     IdxRangeSpVxVyXY idxrange_v2Dsplit(m_transpose.get_local_idx_range<V2DSplit>());
     IdxRangeSpXYVxVy idxrange_x2Dsplit(m_transpose.get_local_idx_range<X2DSplit>());
     IdxRangeXY idx_range_xy_v2Dsplit(idxrange_v2Dsplit);
-    DFieldMemSpXYVxVy allfdistribu_x2Dsplit_alloc(idxrange_x2Dsplit);
+    DFieldMemSpXYVxVy allfdistribu_x2Dsplit_alloc(
+            "allfdistribu_x2Dsplit (MpiSplitVlasovSolver::operator())",
+            idxrange_x2Dsplit);
     DFieldSpXYVxVy allfdistribu_x2Dsplit = get_field(allfdistribu_x2Dsplit_alloc);
 
     // Create contiguous memory space to contain the relevant section of the electric field

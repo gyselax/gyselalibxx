@@ -75,9 +75,16 @@ public:
     /**
      * Instantiate the MultipatchFieldMem class from an arbitrary number of objects.
      *
+     * @param label A label used to tag parallel regions and memory allocations for profiling.
      * @param args The objects to be stored in the class.
      */
-    explicit MultipatchFieldMem(T<Patches>... args) : base_type(args...) {}
+    explicit MultipatchFieldMem(std::string const& label, T<Patches>... args)
+        : base_type(label, args...)
+    {
+    }
+
+    /// Version without a label
+    explicit MultipatchFieldMem(T<Patches>... args) : MultipatchFieldMem("no-label", args...) {}
 
     /**
      * Create a MultipatchFieldMem class by copying an instance of another compatible MultipatchFieldMem.
@@ -87,13 +94,20 @@ public:
      * MultipatchFieldMem must store objects of the correct type (the type template may be different
      * but return the same type depending on how it is designed.
      *
+     * @param label A label used to tag parallel regions and memory allocations for profiling.
      * @param other The equivalent MultipatchFieldMem being copied.
      */
     template <class MultipatchObj>
-    explicit MultipatchFieldMem(MultipatchObj& other)
-        : base_type(T<Patches>(other.template get<Patches>())...)
+    explicit MultipatchFieldMem(std::string const& label, MultipatchObj& other)
+        : base_type(T<Patches>(label, other.template get<Patches>())...)
     {
         static_assert(is_multipatch_type_v<MultipatchObj>);
+    }
+
+    /// Version without a label
+    template <class MultipatchObj>
+    explicit MultipatchFieldMem(MultipatchObj& other) : MultipatchFieldMem("no-label", other)
+    {
     }
 
     /**

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 
 foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
   foreach(SOLUTION "CURVILINEAR_SOLUTION" "CARTESIAN_SOLUTION")
@@ -12,11 +13,11 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             DDC::pdi
             paraconf::paraconf
             PDI::PDI_C
-            gslx::geometry_RTheta
-            gslx::paraconfpp
-            gslx::pde_solvers
-            gslx::poisson_RTheta
-            gslx::utils
+            gyselalibxx::geometry_RTheta
+            gyselalibxx::paraconfpp
+            gyselalibxx::pde_solvers
+            gyselalibxx::poisson_RTheta
+            gyselalibxx::utils
     )
     target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${SOLUTION})
 
@@ -32,3 +33,21 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
     endif()
   endforeach()
 endforeach()
+
+add_executable(gmg_polar_poisson_like_solver_test
+    gmgpolarpoissonsolver.cpp
+    ../../main.cpp
+)
+target_link_libraries(gmg_polar_poisson_like_solver_test
+    PUBLIC
+        GTest::gtest
+	    GTest::gmock
+        DDC::core
+        DDC::splines
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::pde_solvers
+)
+
+gtest_discover_tests(gmg_polar_poisson_like_solver_test
+    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
+    DISCOVERY_MODE PRE_TEST)

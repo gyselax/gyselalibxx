@@ -84,9 +84,11 @@ class GyroAverageOperator
 
     using CoordRminorTheta = Coord<Rminor, Theta>;
     using CoordR_gyroTheta_gyro = Coord<R_gyro, Theta_gyro>;
-    using Rmajor = typename ToLogicalCoordTransform::cartesian_tag_x;
-    using Z = typename ToLogicalCoordTransform::cartesian_tag_y;
-    using CoordRZ = Coord<Rmajor, Z>;
+    using RZ_1 = ddc::
+            type_seq_element_t<0, ddc::to_type_seq_t<typename ToLogicalCoordTransform::CoordArg>>;
+    using RZ_2 = ddc::
+            type_seq_element_t<1, ddc::to_type_seq_t<typename ToLogicalCoordTransform::CoordArg>>;
+    using CoordRZ = typename ToLogicalCoordTransform::CoordArg;
 
     // FIXME
     // Need to add a static assert to check evaluator is addmissible to builder
@@ -165,7 +167,9 @@ public:
         IdxRangeRminorTheta const rtheta_idx_range(rthetabatch_idx_range);
 
         // Instantiate chunk of spline coefs to receive output of spline_builder (r, theta)
-        DFieldMemBSRminorTheta coef_alloc(get_spline_idx_range(m_spline_builder));
+        DFieldMemBSRminorTheta coef_alloc(
+                "coef (GyroAvrageOperator::operator())",
+                get_spline_idx_range(m_spline_builder));
         DFieldBSRminorTheta const coef = get_field(coef_alloc);
         DConstFieldRminorTheta const rho_L = get_const_field(m_rho_L);
 
@@ -181,7 +185,8 @@ public:
         ddc::host_for_each(batch_idx_range, [&](IdxBatch const ib) {
             SubConstDFieldRminorTheta const sub_A = A[ib];
             SubDFieldRminorTheta sub_A_bar = A_bar[ib];
-            DFieldMemRminorTheta sub_A_alloc(rtheta_idx_range);
+            DFieldMemRminorTheta
+                    sub_A_alloc("sub_A (GyroAvrageOperator::operator())", rtheta_idx_range);
             ddc::parallel_deepcopy(sub_A_alloc, sub_A);
             m_spline_builder(coef, get_const_field(sub_A_alloc));
             SplineRThetaEvaluator spline_evaluator = m_spline_evaluator;
@@ -207,7 +212,7 @@ public:
                             inverse_mapping_t<ToLogicalCoordTransform> inv_coordinate_transform
                                     = coordinate_transform.get_inverse_mapping();
                             CoordRZ gyrocentre = inv_coordinate_transform(ddc::coordinate(irtheta));
-                            CircularToCartesian<R_gyro, Theta_gyro, Rmajor, Z> circ_to_cart(
+                            CircularToCartesian<R_gyro, Theta_gyro, RZ_1, RZ_2> circ_to_cart(
                                     gyrocentre);
                             CoordRZ particle_position = circ_to_cart(
                                     CoordR_gyroTheta_gyro {rho_L(ir, itheta), alpha});

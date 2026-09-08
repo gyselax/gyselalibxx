@@ -12,11 +12,11 @@ target_link_libraries(unit_tests_parallelisation_layout
         DDC::core
         GTest::gtest
         GTest::gmock
-        gslx::mpi_parallelisation
-        gslx::utils
+        gyselalibxx::mpi_parallelisation
+        gyselalibxx::utils
 )
 
-gtest_discover_tests(unit_tests_parallelisation_layout DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_parallelisation_layout DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 
 add_executable(unit_tests_parallelisation
     alltoall.cpp
@@ -27,8 +27,8 @@ target_link_libraries(unit_tests_parallelisation
         DDC::core
         GTest::gtest
         GTest::gmock
-        gslx::mpi_parallelisation
-        gslx::utils
+        gyselalibxx::mpi_parallelisation
+        gyselalibxx::utils
 )
 
 function(make_mpi_test test_name)

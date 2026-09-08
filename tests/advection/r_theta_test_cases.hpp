@@ -38,13 +38,13 @@ template <class Mapping>
 class FunctionToBeAdvected_cos_4_ellipse
 {
     static_assert(is_coord_transform_with_o_point_v<Mapping>);
-    using X = typename Mapping::cartesian_tag_x;
-    using Y = typename Mapping::cartesian_tag_y;
+    using X = ddc::type_seq_element_t<0, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
+    using Y = ddc::type_seq_element_t<1, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
     using R = typename Mapping::curvilinear_tag_r;
     using Theta = typename Mapping::curvilinear_tag_theta;
 
 private:
-    Mapping const& m_mapping;
+    Mapping m_mapping;
 
 public:
     /**
@@ -101,13 +101,13 @@ template <class Mapping>
 class FunctionToBeAdvected_gaussian
 {
     static_assert(is_coord_transform_with_o_point_v<Mapping>);
-    using X = typename Mapping::cartesian_tag_x;
-    using Y = typename Mapping::cartesian_tag_y;
+    using X = ddc::type_seq_element_t<0, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
+    using Y = ddc::type_seq_element_t<1, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
     using R = typename Mapping::curvilinear_tag_r;
     using Theta = typename Mapping::curvilinear_tag_theta;
 
 private:
-    Mapping const& m_mapping;
+    Mapping m_mapping;
     double const m_constant;
     Coord<X> const m_x0;
     Coord<Y> const m_y0;
@@ -180,8 +180,8 @@ public:
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
                    * Kokkos::exp(
-                           -ipow(deviation_x, 2) / (2 * m_sig_x * m_sig_x)
-                           - ipow(deviation_y, 2) / (2 * m_sig_y * m_sig_y));
+                           -(deviation_x * deviation_x) / (2 * m_sig_x * m_sig_x)
+                           - (deviation_y * deviation_y) / (2 * m_sig_y * m_sig_y));
         } else {
             return 0.0;
         }
@@ -472,8 +472,8 @@ struct AdvectionSimulation
 template <class Mapping>
 auto get_translation_simulation(Mapping const& mapping, double const rmin, double const rmax)
 {
-    using X = typename Mapping::cartesian_tag_x;
-    using Y = typename Mapping::cartesian_tag_y;
+    using X = ddc::type_seq_element_t<0, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
+    using Y = ddc::type_seq_element_t<1, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
     return AdvectionSimulation<
             AdvectionField_translation<X, Y>,
             FunctionToBeAdvected_gaussian<Mapping>>(
@@ -510,8 +510,8 @@ auto get_translation_simulation(Mapping const& mapping, double const rmin, doubl
 template <class Mapping>
 auto get_rotation_simulation(Mapping const& mapping, double const rmin, double const rmax)
 {
-    using X = typename Mapping::cartesian_tag_x;
-    using Y = typename Mapping::cartesian_tag_y;
+    using X = ddc::type_seq_element_t<0, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
+    using Y = ddc::type_seq_element_t<1, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
     using R = typename Mapping::curvilinear_tag_r;
     using Theta = typename Mapping::curvilinear_tag_theta;
     return AdvectionSimulation<
@@ -550,8 +550,8 @@ auto get_rotation_simulation(Mapping const& mapping, double const rmin, double c
 template <class Mapping>
 auto get_decentred_rotation_simulation(Mapping const& mapping)
 {
-    using X = typename Mapping::cartesian_tag_x;
-    using Y = typename Mapping::cartesian_tag_y;
+    using X = ddc::type_seq_element_t<0, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
+    using Y = ddc::type_seq_element_t<1, ddc::to_type_seq_t<typename Mapping::CoordResult>>;
     return AdvectionSimulation<
             AdvectionField_decentred_rotation<X, Y>,
             FunctionToBeAdvected_cos_4_ellipse<Mapping>>(

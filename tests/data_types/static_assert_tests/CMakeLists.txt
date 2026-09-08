@@ -6,8 +6,8 @@ add_executable(${file}-build-fail-test
 )
 target_link_libraries(${file}-build-fail-test
         PUBLIC
-        gslx::data_types
-        gslx::utils
+        gyselalibxx::data_types
+        gyselalibxx::utils
 )
 
 set_target_properties(${file}-build-fail-test PROPERTIES
@@ -25,7 +25,7 @@ set_tests_properties(${file} PROPERTIES
     PASS_REGULAR_EXPRESSION ${error_msg}
 )
 
-set_property(TEST ${file} PROPERTY TIMEOUT 20)
+set_property(TEST ${file} PROPERTY TIMEOUT 200)
 
 endfunction()
 

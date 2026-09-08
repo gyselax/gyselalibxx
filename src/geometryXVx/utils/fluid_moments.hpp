@@ -59,7 +59,7 @@ public:
      *
      * @param[in] integrate_v A quadrature method which integrates over the velocity space.
      */
-    FluidMoments(Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate_v);
+    explicit FluidMoments(Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate_v);
 
     ~FluidMoments() = default;
 

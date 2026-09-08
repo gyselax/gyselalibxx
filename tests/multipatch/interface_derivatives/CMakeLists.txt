@@ -11,12 +11,12 @@ function (multipatch_single_interface_derivatives_executable MESH_TYPE)
         GTest::gtest
         GTest::gmock
 
-        gslx::multipatch_geometries
-        gslx::multipatch_spline
-        gslx::multipatch_interface_derivatives
+        gyselalibxx::multipatch_geometries
+        gyselalibxx::multipatch_spline
+        gyselalibxx::multipatch_interface_derivatives
     )
     target_compile_definitions("${test_name_gtest}" PUBLIC -D${MESH_TYPE})
-    gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
+    gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 endfunction()
 
 foreach(MESH_TYPE "UNIFORM_MESH" "NON_UNIFORM_MESH")
@@ -35,10 +35,10 @@ PUBLIC
     GTest::gtest
     GTest::gmock
 
-    gslx::multipatch_geometries
-    gslx::multipatch_spline
-    gslx::multipatch_interface_derivatives
+    gyselalibxx::multipatch_geometries
+    gyselalibxx::multipatch_spline
+    gyselalibxx::multipatch_interface_derivatives
 )
 target_compile_definitions("${test_name_gtest}" PUBLIC)
-gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 

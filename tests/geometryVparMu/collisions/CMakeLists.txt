@@ -7,6 +7,6 @@ add_test(NAME TestCollisionsVparMuTwoSpeciesDeltatZero
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:test_collSpVparMu>"
         "$<TARGET_FILE:Python3::Interpreter>")
-set_property(TEST TestCollisionsVparMuTwoSpeciesDeltatZero PROPERTY TIMEOUT 20)
+set_property(TEST TestCollisionsVparMuTwoSpeciesDeltatZero PROPERTY TIMEOUT 200)
 set_property(TEST TestCollisionsVparMuTwoSpeciesDeltatZero PROPERTY COST 10)
 

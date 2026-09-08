@@ -9,7 +9,7 @@
 #include "metric_tensor_evaluator.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polar_spline_evaluator.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -82,8 +82,6 @@
  *
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
- *
- * @see PolarSplineFEMPoissonLikeSolver
  */
 template <class Mapping>
 class AdvectionFieldFinder

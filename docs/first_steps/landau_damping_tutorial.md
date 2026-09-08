@@ -260,13 +260,13 @@ The function `ddc::init_discrete_space` calls the [constructor of `ddc::UniformB
 The grid is constructed from the Greville abscissae of the b-splines using DDC as follows:
 
 ```cpp
-auto constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+auto constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
+auto constexpr SplineVxClosure = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
@@ -335,8 +335,8 @@ using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
-        SplineXBoundary,
-        SplineXBoundary,
+        SplineXClosure,
+        SplineXClosure,
         ddc::SplineSolver::LAPACK>;
 
 using SplineVxBuilder = ddc::SplineBuilder<
@@ -344,8 +344,8 @@ using SplineVxBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
         GridVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
+        SplineVxClosure,
+        SplineVxClosure,
         ddc::SplineSolver::LAPACK>;
 ```
 

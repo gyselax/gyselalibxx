@@ -1,7 +1,7 @@
 
 
 #########################################################################################################
-# All possiibilities for TIME_METHOD:                                                                   #
+# All possibilities for TIME_METHOD:                                                                    #
 # "EULER_METHOD" "CRANK_NICOLSON_METHOD" "RK3_METHOD" "RK4_METHOD"                                      #
 #                                                                                                       #
 # All possibilities for PREDCORR:                                                                       #
@@ -25,17 +25,17 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
 
             PDI::PDI_C
 
-            gslx::advection
-            gslx::diocotron_init_eq
-            gslx::geometry_RTheta
-            gslx::interpolation
-            gslx::io
-            gslx::paraconfpp
-            gslx::poisson_RTheta
-            gslx::quadrature
-            gslx::simulation_utils
-            gslx::time_integration_RTheta
-            gslx::utils
+            gyselalibxx::advection
+            gyselalibxx::diocotron_init_eq
+            gyselalibxx::geometry_RTheta
+            gyselalibxx::interpolation
+            gyselalibxx::io
+            gyselalibxx::paraconfpp
+            gyselalibxx::poisson_RTheta
+            gyselalibxx::quadrature
+            gyselalibxx::simulation_utils
+            gyselalibxx::time_integration_RTheta
+            gyselalibxx::utils
     )
     target_compile_definitions("${test_name}" PUBLIC -D${TIME_METHOD} -D${PREDCORR_METHOD})
 endfunction()

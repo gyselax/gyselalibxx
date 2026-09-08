@@ -2,7 +2,7 @@
 
 Collision operator in $`(v_\parallel,\mu)`$ applied to all against all species at the same time. As such, the operator is $O(N^2)$ in number of species.
 
-It was rewritten from Fortran into C++. The operator's name is KOkkos coLIsion OPerator (KOLIOP) and is provided as a submodule (see `/vendor`).
+It was rewritten from Fortran into C++. The operator's name is KOkkos coLIsion OPerator (KOLIOP).
 
 While the operator is in C++, the interface with Fortran and other C++ code is made through a C layer. This is also known as the hourglass pattern (conceptually, the narrow neck of the device represent the lowering to C).
 

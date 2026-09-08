@@ -32,7 +32,7 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
 
 
 // Discrete dimension
@@ -41,7 +41,7 @@ struct GridX : UniformGridBase<X>
 };
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 
 using IdxRangeX = IdxRange<GridX>;
 using IdxX = Idx<GridX>;
@@ -59,12 +59,10 @@ using FieldX = Field<ElementType, IdxRangeX>;
 // Operators
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
-        PERIODIC,
-        PERIODIC,
-        SplineXBoundary,
-        SplineXBoundary>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 // Lagrange basis for the advection field interpolation
 struct LagBasisX : UniformLagrangeBasis<X, 3, double>
@@ -77,22 +75,17 @@ struct LagBasisFloatX : UniformLagrangeBasis<X, 3, float>
 
 using LagrangeInterpolatorX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagBasisX,
-        GridX,
-        PERIODIC,
-        PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        double,
+        IdxRange<LagBasisX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic>;
 
 using LagrangeInterpolatorFloatX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagBasisFloatX,
-        GridX,
-        PERIODIC,
-        PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        float>;
+        float,
+        IdxRange<LagBasisFloatX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic>;
 
 
 template <class DataType>

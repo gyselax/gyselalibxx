@@ -26,7 +26,8 @@ DFieldSpVparMu MaxwellianEquilibrium::operator()(DFieldSpVparMu const allfequili
     IdxRangeVparMu const idxrange_vparmu = get_idx_range<GridVpar, GridMu>(allfequilibrium);
 
     // Initialisation of the maxwellian
-    DFieldMemVparMu maxwellian_alloc(idxrange_vparmu);
+    DFieldMemVparMu
+            maxwellian_alloc("maxwellian (MaxwellianEquilibrium::operator())", idxrange_vparmu);
     DFieldVparMu maxwellian = get_field(maxwellian_alloc);
     ddc::host_for_each(idxrange_sp, [&](IdxSp const isp) {
         compute_maxwellian(
