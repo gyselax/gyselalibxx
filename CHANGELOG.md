@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a `DiscreteMapping` class to handle ND mappings whose values are only known at the mesh points of a grid.
 - Add a `CoordWithOPoint` class to recognise radial and poloidal components of a 2D coordinate.
 - Add MI300 toolchain for Adastra.
+- Add CMake installation commands and call the package `gyselalibxx`.
 
 ### Fixed
 
@@ -114,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `BslImplicitPredCorrRTheta`
   - `PolarSplineFEMPoissonLikeSolver`
   - `GMGPolarPoissonLikeSolver`
+- The CMake namespace `gslx` has been renamed `gyselalibxx`.
 
 ### Deprecated
 
