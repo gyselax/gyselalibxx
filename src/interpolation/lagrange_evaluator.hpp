@@ -616,8 +616,14 @@ private:
             }
         } else {
             Idx<knot_grid> last = ddc::discrete_space<LagrangeBasis>().break_point_domain().back();
-            KOKKOS_ASSERT(x_interp >= ddc::discrete_space<LagrangeBasis>().rmin());
-            KOKKOS_ASSERT(x_interp <= ddc::discrete_space<LagrangeBasis>().rmax());
+            KOKKOS_ASSERT(
+                    x_interp - ddc::discrete_space<LagrangeBasis>().rmin()
+                    >= -ddc::discrete_space<LagrangeBasis>().length() * 100
+                               * std::numeric_limits<DataType>::epsilon());
+            KOKKOS_ASSERT(
+                    ddc::discrete_space<LagrangeBasis>().rmax() - x_interp
+                    >= -ddc::discrete_space<LagrangeBasis>().length() * 100
+                               * std::numeric_limits<DataType>::epsilon());
             Idx<knot_grid> elm_cell = first + (last - first) / 2;
             while (x_interp < ddc::coordinate(elm_cell)
                    || x_interp > ddc::coordinate(elm_cell + IdxStep<knot_grid>(1))) {
