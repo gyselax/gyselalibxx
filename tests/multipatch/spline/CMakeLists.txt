@@ -16,9 +16,9 @@ PUBLIC
         GTest::gtest
         GTest::gmock
 
-        gslx::multipatch_geometries
-        gslx::multipatch_spline
-        gslx::utils
+        gyselalibxx::multipatch_geometries
+        gyselalibxx::multipatch_spline
+        gyselalibxx::utils
 )
 target_compile_definitions("${test_name_gtest}" PUBLIC)
 gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

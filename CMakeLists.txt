@@ -66,6 +66,9 @@ find_package(GMGPolar 2.3.1 REQUIRED)
 ###############################################################################################
 # Our project code
 
+## Provides CMAKE_INSTALL_<dir> variables
+include(GNUInstallDirs)
+
 set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_grid xnonperiod_vx_user_defined_grid)
 set(PRECISION_VARIANTS_LIST float double)
 
@@ -83,5 +86,38 @@ if("${GYSELALIBXX_BUILD_TESTING}")
 
     add_subdirectory(tests/)
 endif()
+
+include(CMakePackageConfigHelpers)
+
+## Installation of Config and ConfigVersion files
+
+set(GYSELALIBXX_INSTALL_CMAKEDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+
+install(FILES cmake/FindLAPACKE.cmake DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
+
+install(EXPORT gyselalibxxTargets NAMESPACE gyselalibxx:: DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
+
+configure_package_config_file(
+    cmake/gyselalibxxConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfig.cmake
+    INSTALL_DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR}
+    NO_SET_AND_CHECK_MACRO
+)
+
+# We use SameMinorVersion until major version 1
+if(PROJECT_VERSION VERSION_GREATER_EQUAL 1)
+    message(FATAL_ERROR "Gyselalibxx must switch COMPATIBILITY mode to SameMajorVersion")
+endif()
+write_basic_package_version_file(
+    ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfigVersion.cmake
+    COMPATIBILITY SameMinorVersion
+)
+
+install(
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfigVersion.cmake
+    DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR}
+)
 
 endif() # GYSELALIBXX_COMPILE_SOURCE

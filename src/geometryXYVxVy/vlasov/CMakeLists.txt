@@ -7,19 +7,28 @@ add_library("vlasov_xyvxvy_${PRECISION_VARIANT}" STATIC
     splitvlasovsolver.cpp
 )
 
-target_include_directories("vlasov_xyvxvy_${PRECISION_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("vlasov_xyvxvy_${PRECISION_VARIANT}" PUBLIC cxx_std_20)
+
+target_sources("vlasov_xyvxvy_${PRECISION_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                ivlasovsolver.hpp
+                mpisplitvlasovsolver.hpp
+                splitvlasovsolver.hpp
 )
 
 target_link_libraries("vlasov_xyvxvy_${PRECISION_VARIANT}"
     PUBLIC
         DDC::core
-        gslx::advection
-        gslx::geometry_xyvxvy_${PRECISION_VARIANT}
-        gslx::mpi_parallelisation
-        gslx::speciesinfo
+        gyselalibxx::advection
+        gyselalibxx::geometry_xyvxvy_${PRECISION_VARIANT}
+        gyselalibxx::mpi_parallelisation
+        gyselalibxx::speciesinfo
 )
 
-add_library("gslx::vlasov_xyvxvy_${PRECISION_VARIANT}" ALIAS "vlasov_xyvxvy_${PRECISION_VARIANT}")
+add_library("gyselalibxx::vlasov_xyvxvy_${PRECISION_VARIANT}" ALIAS "vlasov_xyvxvy_${PRECISION_VARIANT}")
+
+install(TARGETS vlasov_xyvxvy_${PRECISION_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/vlasov)
 
 endforeach()

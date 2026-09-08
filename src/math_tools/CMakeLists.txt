@@ -2,18 +2,36 @@
 
 add_library("math_tools" INTERFACE)
 
-target_include_directories("math_tools"
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("math_tools" INTERFACE cxx_std_20)
+
+target_sources("math_tools"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                central_fdm_partial_derivatives.hpp
+                central_fdm_partial_derivatives_with_boundary_values.hpp
+                constant_partial_derivatives.hpp
+                curl.hpp
+                gradient.hpp
+                gradient_creator.hpp
+                ipartial_derivative.hpp
+                l_norm_tools.hpp
+                lie_poisson_bracket.hpp
+                math_tools.hpp
+                spline_1d_partial_derivative.hpp
+                spline_2d_partial_derivative.hpp
+                spline_builder_2d_cache.hpp
 )
 
 target_link_libraries("math_tools"
     INTERFACE
         DDC::core
-        gslx::coord_transformations
-        gslx::data_types
-        gslx::interpolation
-        gslx::quadrature
+        gyselalibxx::coord_transformations
+        gyselalibxx::data_types
+        gyselalibxx::interpolation
+        gyselalibxx::quadrature
 )
 
-add_library("gslx::math_tools" ALIAS "math_tools")
+add_library("gyselalibxx::math_tools" ALIAS "math_tools")
 
+install(TARGETS math_tools EXPORT gyselalibxxTargets FILE_SET HEADERS)

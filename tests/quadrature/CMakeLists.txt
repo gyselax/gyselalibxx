@@ -15,8 +15,8 @@ target_link_libraries(unit_tests_quadrature
         GTest::gmock
 
 
-        gslx::quadrature
-        gslx::utils
+        gyselalibxx::quadrature
+        gyselalibxx::utils
 )
 target_include_directories(unit_tests_quadrature PRIVATE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/..")
 gtest_discover_tests(unit_tests_quadrature
@@ -35,8 +35,8 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	        GTest::gtest
 	        GTest::gmock
 	        paraconf::paraconf
-	        gslx::quadrature
-            gslx::utils
+	        gyselalibxx::quadrature
+            gyselalibxx::utils
 	)
 
 	gtest_discover_tests(spline_quadrature_tests_${GEOMETRY_VARIANT}

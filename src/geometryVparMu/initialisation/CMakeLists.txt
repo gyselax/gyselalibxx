@@ -5,16 +5,26 @@ add_library("initialisation_vparmu" STATIC
     noperturbinitialisation.cpp
 )
 
-target_include_directories("initialisation_vparmu"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("initialisation_vparmu" PUBLIC cxx_std_20)
+
+target_sources("initialisation_vparmu"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                iequilibrium.hpp
+                iinitialisation.hpp
+                maxwellianequilibrium.hpp
+                noperturbinitialisation.hpp
 )
 
 target_link_libraries("initialisation_vparmu"
     PUBLIC
         DDC::core
-        gslx::speciesinfo
-        gslx::geometry_vparmu
-        gslx::utils
+        gyselalibxx::speciesinfo
+        gyselalibxx::geometry_vparmu
+        gyselalibxx::utils
 )
 
-add_library("gslx::initialisation_vparmu" ALIAS "initialisation_vparmu")
+add_library("gyselalibxx::initialisation_vparmu" ALIAS "initialisation_vparmu")
+
+install(TARGETS initialisation_vparmu EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/initialisation)

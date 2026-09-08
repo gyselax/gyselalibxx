@@ -2,17 +2,36 @@
 
 add_library("interpolation" INTERFACE)
 
-target_include_directories("interpolation"
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("interpolation" INTERFACE cxx_std_20)
+
+target_sources("interpolation"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                constant_identity_interpolation_extrapolation_rule.hpp
+                extrapolation_rule_choice.hpp
+                i_interpolation.hpp
+                i_interpolation_builder.hpp
+                i_interpolation_evaluator.hpp
+                identity_interpolation_builder.hpp
+                lagrange_basis_non_uniform.hpp
+                lagrange_basis_uniform.hpp
+                lagrange_evaluator.hpp
+                lagrange_interpolation.hpp
+                nd_identity_interpolation_builder.hpp
+                nd_lagrange_evaluator.hpp
+                spline_interpolation.hpp
 )
 
 target_link_libraries("interpolation"
     INTERFACE
         DDC::core
-        gslx::math_tools
-        gslx::utils
+        gyselalibxx::math_tools
+        gyselalibxx::utils
 )
 
-add_library("gslx::interpolation" ALIAS "interpolation")
+add_library("gyselalibxx::interpolation" ALIAS "interpolation")
+
+install(TARGETS interpolation EXPORT gyselalibxxTargets FILE_SET HEADERS)
 
 add_subdirectory(polar_splines)

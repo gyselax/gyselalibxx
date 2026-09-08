@@ -1,14 +1,23 @@
 
 add_library("multipatch_interface_derivatives" INTERFACE)
-target_include_directories("multipatch_interface_derivatives"
+
+target_compile_features("multipatch_interface_derivatives" INTERFACE cxx_std_20)
+
+target_sources("multipatch_interface_derivatives"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                single_interface_derivatives_calculator.hpp
+                single_interface_derivatives_calculator_collection.hpp
 )
+
 target_link_libraries("multipatch_interface_derivatives" INTERFACE
     DDC::core
-    gslx::multipatch_data_types
-    gslx::multipatch_connectivity
-    gslx::utils
+    gyselalibxx::multipatch_data_types
+    gyselalibxx::multipatch_connectivity
+    gyselalibxx::utils
 
 )
-add_library("gslx::multipatch_interface_derivatives" ALIAS "multipatch_interface_derivatives")
+add_library("gyselalibxx::multipatch_interface_derivatives" ALIAS "multipatch_interface_derivatives")
+
+install(TARGETS multipatch_interface_derivatives EXPORT gyselalibxxTargets FILE_SET HEADERS)
