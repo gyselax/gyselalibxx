@@ -619,11 +619,11 @@ private:
             KOKKOS_ASSERT(
                     x_interp - ddc::discrete_space<LagrangeBasis>().rmin()
                     >= -ddc::discrete_space<LagrangeBasis>().length() * 100
-                               * Kokkos::epsilon_v<DataType>);
+                               * Kokkos::Experimental::epsilon_v<DataType>);
             KOKKOS_ASSERT(
                     ddc::discrete_space<LagrangeBasis>().rmax() - x_interp
                     >= -ddc::discrete_space<LagrangeBasis>().length() * 100
-                               * Kokkos::epsilon_v<DataType>);
+                               * Kokkos::Experimental::epsilon_v<DataType>);
             Idx<knot_grid> elm_cell = first + (last - first) / 2;
             while (x_interp < ddc::coordinate(elm_cell)
                    || x_interp > ddc::coordinate(elm_cell + IdxStep<knot_grid>(1))) {
