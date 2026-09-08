@@ -16,8 +16,8 @@ target_link_libraries(unit_tests_coord_transformations
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::coord_transformations
-        gslx::speciesinfo
-        gslx::utils
+        gyselalibxx::coord_transformations
+        gyselalibxx::speciesinfo
+        gyselalibxx::utils
 )
 gtest_discover_tests(unit_tests_coord_transformations DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
