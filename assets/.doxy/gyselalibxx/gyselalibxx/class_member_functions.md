@@ -10,6 +10,7 @@
 * **adjust\_indexes** ([**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md))
 * **apply\_evaluator** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **apply\_integrate** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
+* **apply\_periodic\_bcs** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
 
 
 ## b
@@ -75,6 +76,7 @@
 * **control\_points** ([**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
 * **check\_distributed\_idx\_ranges\_are\_first** ([**IMPILayout**](classIMPILayout.md))
 * **connected\_to\_patch** ([**Interface**](structInterface.md))
+* **check\_extrapolation** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
 * **call\_all\_to\_all** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **check\_stability** ([**MatrixBatchTridiag**](classMatrixBatchTridiag.md))
 * **calculate\_delta\_to\_factorise** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))
@@ -140,7 +142,7 @@
 * **ElementwiseSplinePolarFootFinderMem** ([**ElementwiseSplinePolarFootFinderMem**](classElementwiseSplinePolarFootFinderMem.md))
 * **Euler** ([**Euler**](classEuler.md), [**Euler&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md))
 * **ExplicitTimeStepperBuilder** ([**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md))
-* **eval** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
+* **eval** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **eval\_no\_bc** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **eval\_basis** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **eval\_basis\_and\_n\_derivs** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))

@@ -2032,14 +2032,15 @@
     <member refid="classLagrangeEvaluator_1aec9870e4eb313c44640755e6e768ea29" kind="function"><name>~LagrangeEvaluator</name></member>
     <member refid="classLagrangeEvaluator_1afb3a7522913bfcf752f858f32c49fa12" kind="function"><name>operator=</name></member>
     <member refid="classLagrangeEvaluator_1a30c1a66e29d7a43ea028c38415ee3694" kind="function"><name>operator=</name></member>
-    <member refid="classLagrangeEvaluator_1a181cf7541c084c467d3a856d25b65152" kind="function"><name>lower_extrapolation_rule</name></member>
-    <member refid="classLagrangeEvaluator_1af95b50680e42b7727fcdf439a87bd016" kind="function"><name>upper_extrapolation_rule</name></member>
+    <member refid="classLagrangeEvaluator_1a4231458753151453934ea058d048b51a" kind="function"><name>lower_extrapolation_rule</name></member>
+    <member refid="classLagrangeEvaluator_1aa99e8ecbff2a1667429861416c467e38" kind="function"><name>upper_extrapolation_rule</name></member>
     <member refid="classLagrangeEvaluator_1a84a9e487a0487108b83726a130fa8f14" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1a940bc8a12231b0dc1d82dd5b60f0ea75" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1ad4bb1d5d33263f705594b4a999eec9dd" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1af32bdc604af164d7e5b5bcecb35e9e0c" kind="function"><name>deriv</name></member>
     <member refid="classLagrangeEvaluator_1a26528549f3a1bc381121bc390752fc91" kind="function"><name>deriv</name></member>
     <member refid="classLagrangeEvaluator_1a746eed33d7a8255c093475e9fbdc2f27" kind="function"><name>deriv</name></member>
+    <member refid="classLagrangeEvaluator_1ac38fa79ced986553ff6c211ec3f07bde" kind="function"><name>check_extrapolation</name></member>
     <member refid="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" kind="function"><name>eval</name></member>
     <member refid="classLagrangeEvaluator_1ab6bb89e95f3a481282e212ac1a76d006" kind="function"><name>find_stencil</name></member>
     <member refid="classLagrangeEvaluator_1a5dd80d5c33512b83f508a62bc3657093" kind="function"><name>eval_no_bc</name></member>
@@ -2601,6 +2602,9 @@
     <member refid="classNDLagrangeEvaluator_1a5624ee070bf8dbc7821fd8c0be1b3477" kind="function"><name>deriv</name></member>
     <member refid="classNDLagrangeEvaluator_1a84858db154d6cc6a3d654d6d85ba4188" kind="function"><name>deriv</name></member>
     <member refid="classNDLagrangeEvaluator_1ab65ca2fd7980133f91911b6b4caad224" kind="function"><name>deriv</name></member>
+    <member refid="classNDLagrangeEvaluator_1a051a4e40f8583bf9598ad752c47f7de3" kind="function"><name>apply_periodic_bcs</name></member>
+    <member refid="classNDLagrangeEvaluator_1a66da1ec19d9499630922e55070d4cf78" kind="function"><name>check_extrapolation</name></member>
+    <member refid="classNDLagrangeEvaluator_1a40da0204f155e1249f02333ef8547046" kind="function"><name>eval</name></member>
     <member refid="classNDLagrangeEvaluator_1a2cc75c71441a6c6d4c3a6dc19a0d21c2" kind="function"><name>eval_no_bc</name></member>
   </compound>
   <compound refid="classddcHelper_1_1NonUniformInterpolationPoints" kind="class"><name>ddcHelper::NonUniformInterpolationPoints</name>

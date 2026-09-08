@@ -10,6 +10,7 @@
 ```C++
 // SPDX-License-Identifier: MIT
 #pragma once
+
 #include "i_interpolation_evaluator.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
@@ -115,12 +116,12 @@ public:
 
     LagrangeEvaluator& operator=(LagrangeEvaluator&& x) = default;
 
-    lower_extrapolation_rule_type lower_extrapolation_rule() const
+    KOKKOS_INLINE_FUNCTION lower_extrapolation_rule_type lower_extrapolation_rule() const
     {
         return m_lower_extrap_rule;
     }
 
-    upper_extrapolation_rule_type upper_extrapolation_rule() const
+    KOKKOS_INLINE_FUNCTION upper_extrapolation_rule_type upper_extrapolation_rule() const
     {
         return m_upper_extrap_rule;
     }
@@ -285,6 +286,26 @@ public:
     }
 
 private:
+    template <class Layout, class... CoordsDims, class IdxRangeType>
+    KOKKOS_INLINE_FUNCTION bool check_extrapolation(
+            data_type& result,
+            Coord<CoordsDims...> const& coord,
+            ConstField<data_type, IdxRangeType, memory_space, Layout> const lagrange_coef) const
+    {
+        Coord<continuous_dimension_type> const coord_eval_interest(coord);
+        if constexpr (!lagrange_basis_type::is_periodic()) {
+            if (coord_eval_interest < ddc::discrete_space<lagrange_basis_type>().rmin()) {
+                result = m_lower_extrap_rule(coord, lagrange_coef);
+                return true;
+            }
+            if (coord_eval_interest > ddc::discrete_space<lagrange_basis_type>().rmax()) {
+                result = m_upper_extrap_rule(coord, lagrange_coef);
+                return true;
+            }
+        }
+        return false;
+    }
+
     template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType
     eval(Coord<CoordsDims...> const& coord_eval,
@@ -301,13 +322,10 @@ private:
                                    / ddc::discrete_space<lagrange_basis_type>().length())
                            * ddc::discrete_space<lagrange_basis_type>().length();
             }
-        } else {
-            if (coord_eval_interest < ddc::discrete_space<lagrange_basis_type>().rmin()) {
-                return m_lower_extrap_rule(coord_eval_interest, lagrange_coef);
-            }
-            if (coord_eval_interest > ddc::discrete_space<lagrange_basis_type>().rmax()) {
-                return m_upper_extrap_rule(coord_eval_interest, lagrange_coef);
-            }
+        }
+        data_type result(0);
+        if (check_extrapolation(result, coord_eval_interest, lagrange_coef)) {
+            return result;
         }
         return eval_no_bc(Idx<>(), coord_eval_interest, lagrange_coef);
     }
@@ -423,8 +441,14 @@ private:
             }
         } else {
             Idx<knot_grid> last = ddc::discrete_space<LagrangeBasis>().break_point_domain().back();
-            KOKKOS_ASSERT(x_interp >= ddc::discrete_space<LagrangeBasis>().rmin());
-            KOKKOS_ASSERT(x_interp <= ddc::discrete_space<LagrangeBasis>().rmax());
+            KOKKOS_ASSERT(
+                    x_interp - ddc::discrete_space<LagrangeBasis>().rmin()
+                    >= -ddc::discrete_space<LagrangeBasis>().length() * 100
+                               * Kokkos::Experimental::epsilon_v<DataType>);
+            KOKKOS_ASSERT(
+                    ddc::discrete_space<LagrangeBasis>().rmax() - x_interp
+                    >= -ddc::discrete_space<LagrangeBasis>().length() * 100
+                               * Kokkos::Experimental::epsilon_v<DataType>);
             Idx<knot_grid> elm_cell = first + (last - first) / 2;
             while (x_interp < ddc::coordinate(elm_cell)
                    || x_interp > ddc::coordinate(elm_cell + IdxStep<knot_grid>(1))) {

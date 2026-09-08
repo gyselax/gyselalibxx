@@ -675,7 +675,7 @@ public:
             Coord&lt;CoordsDims...&gt; const&amp; coord,
             ConstField&lt;data_type, NdCoeffIdxRange, memory_space, Layout&gt; const&amp; coeff) const
     {
-        return eval_no_bc(Idx&lt;&gt;(), coord, coeff);
+        return eval(coord, coeff);
     }
 
     template &lt;
@@ -703,8 +703,7 @@ public:
                 get_idx_range(lagrange_eval),
                 KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
                     IdxBatch const batch_idx(full_idx);
-                    lagrange_eval(full_idx)
-                            = eval_no_bc(Idx&lt;&gt;(), coords_eval(full_idx), lagrange_coef[batch_idx]);
+                    lagrange_eval(full_idx) = eval(coords_eval(full_idx), lagrange_coef[batch_idx]);
                 });
     }
 
@@ -729,10 +728,8 @@ public:
                 KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
                     IdxBatch const batch_idx(full_idx);
                     IdxEval const eval_idx(full_idx);
-                    lagrange_eval(full_idx) = eval_no_bc(
-                            Idx&lt;&gt;(),
-                            ddc::coordinate(eval_idx),
-                            lagrange_coef[batch_idx]);
+                    lagrange_eval(full_idx)
+                            = eval(ddc::coordinate(eval_idx), lagrange_coef[batch_idx]);
                 });
     }
 
@@ -818,6 +815,62 @@ public:
     }
 
 private:
+    template &lt;class CDim&gt;
+    static KOKKOS_INLINE_FUNCTION Coord&lt;CDim&gt; apply_periodic_bcs(Coord&lt;CDim&gt; coord)
+    {
+        if constexpr (CDim::PERIODIC) {
+            using BasisTypes = ddc::detail::
+                    TypeSeq&lt;HeadBasis, typename Evaluators1D::lagrange_basis_type...&gt;;
+            using Basis = find_grid_t&lt;CDim, BasisTypes&gt;;
+            if (coord &lt; ddc::discrete_space&lt;Basis&gt;().rmin()
+                || coord &gt; ddc::discrete_space&lt;Basis&gt;().rmax()) {
+                return coord
+                       - Kokkos::floor(
+                                 (coord - ddc::discrete_space&lt;Basis&gt;().rmin())
+                                 / ddc::discrete_space&lt;Basis&gt;().length())
+                                 * ddc::discrete_space&lt;Basis&gt;().length();
+            }
+        }
+        return coord;
+    }
+
+    template &lt;class Layout, class... CoordsDims, class IdxRangeType&gt;
+    KOKKOS_INLINE_FUNCTION bool check_extrapolation(
+            data_type&amp; result,
+            Coord&lt;CoordsDims...&gt; const&amp; coord,
+            ConstField&lt;data_type, IdxRangeType, memory_space, Layout&gt; const lagrange_coef) const
+    {
+        using CDim = typename HeadEvaluator::continuous_dimension_type;
+        using Basis = typename HeadEvaluator::lagrange_basis_type;
+        if constexpr (!CDim::PERIODIC) {
+            if (ddc::get&lt;CDim&gt;(coord) &lt; ddc::discrete_space&lt;Basis&gt;().rmin()) {
+                result = m_head_evaluator.lower_extrapolation_rule()(coord, lagrange_coef);
+                return true;
+            }
+            if (ddc::get&lt;CDim&gt;(coord) &gt; ddc::discrete_space&lt;Basis&gt;().rmax()) {
+                result = m_head_evaluator.upper_extrapolation_rule()(coord, lagrange_coef);
+                return true;
+            }
+        }
+        return m_tail_evaluator.check_extrapolation(result, coord, lagrange_coef);
+    }
+
+
+    template &lt;class Layout, class... CoordsDims&gt;
+    KOKKOS_INLINE_FUNCTION data_type
+    eval(Coord&lt;CoordsDims...&gt; const&amp; coord,
+         ConstField&lt;data_type, coeff_idx_range_type, memory_space, Layout&gt; const lagrange_coef)
+            const
+    {
+        Coord&lt;CoordsDims...&gt; const coord_periodic(
+                apply_periodic_bcs(ddc::select&lt;CoordsDims&gt;(coord))...);
+        data_type result(0);
+        if (check_extrapolation(result, coord_periodic, lagrange_coef)) {
+            return result;
+        }
+        return eval_no_bc(Idx&lt;&gt;(), coord_periodic, lagrange_coef);
+    }
+
     template &lt;class... DerivDims, class Layout, class... CoordsDims&gt;
     KOKKOS_INLINE_FUNCTION data_type eval_no_bc(
             Idx&lt;DerivDims...&gt; const&amp; deriv_order,

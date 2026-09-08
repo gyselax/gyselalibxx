@@ -670,7 +670,7 @@
 <td style="text-align: left;"><a href="#function-deriv-33"><strong>deriv</strong></a> (IdxDerivDims const &amp; deriv_order, Field&lt; DataType, IdxRangeBatchedInterpolation, <a href="classLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout1 &gt; const lagrange_eval, ConstField&lt; DataType, <a href="classLagrangeEvaluator.html#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>&lt; IdxRangeBatchedInterpolation &gt;, <a href="classLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout2 &gt; const lagrange_coef) const<br><em>Differentiate 1D Lagrange function on a mesh.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="classLagrangeEvaluator.html#typedef-lower_extrapolation_rule_type"><strong>lower_extrapolation_rule_type</strong></a></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classLagrangeEvaluator.html#typedef-lower_extrapolation_rule_type"><strong>lower_extrapolation_rule_type</strong></a></td>
 <td style="text-align: left;"><a href="#function-lower_extrapolation_rule"><strong>lower_extrapolation_rule</strong></a> () const<br><em>Get the lower extrapolation rule.</em></td>
 </tr>
 <tr>
@@ -694,7 +694,7 @@
 <td style="text-align: left;"><a href="#function-operator_4"><strong>operator=</strong></a> (<a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> &amp;&amp; x) = default<br><em>Move-assigns.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="classLagrangeEvaluator.html#typedef-upper_extrapolation_rule_type"><strong>upper_extrapolation_rule_type</strong></a></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classLagrangeEvaluator.html#typedef-upper_extrapolation_rule_type"><strong>upper_extrapolation_rule_type</strong></a></td>
 <td style="text-align: left;"><a href="#function-upper_extrapolation_rule"><strong>upper_extrapolation_rule</strong></a> () const<br><em>Get the upper extrapolation rule.</em></td>
 </tr>
 <tr>
@@ -905,7 +905,7 @@ inline void LagrangeEvaluator::deriv (
 
 <h3 id="function-lower_extrapolation_rule">function lower_extrapolation_rule</h3>
 <p><em>Get the lower extrapolation rule.</em> </p>
-<pre><code class="language-C++">inline lower_extrapolation_rule_type LagrangeEvaluator::lower_extrapolation_rule () const
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION lower_extrapolation_rule_type LagrangeEvaluator::lower_extrapolation_rule () const
 </code></pre>
 <p>Extrapolation rules are functors used to define the behaviour of the <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> outside the domain where the break points of the Lagrange basis are defined.</p>
 <p><strong>Returns:</strong></p>
@@ -997,7 +997,7 @@ inline void LagrangeEvaluator::operator() (
 
 <h3 id="function-upper_extrapolation_rule">function upper_extrapolation_rule</h3>
 <p><em>Get the upper extrapolation rule.</em> </p>
-<pre><code class="language-C++">inline upper_extrapolation_rule_type LagrangeEvaluator::upper_extrapolation_rule () const
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION upper_extrapolation_rule_type LagrangeEvaluator::upper_extrapolation_rule () const
 </code></pre>
 <p>Extrapolation rules are functors used to define the behaviour of the <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> outside the domain where the break points of the Lagrange basis are defined.</p>
 <p><strong>Returns:</strong></p>

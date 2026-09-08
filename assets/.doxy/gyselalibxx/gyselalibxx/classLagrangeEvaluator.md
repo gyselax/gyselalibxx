@@ -77,13 +77,13 @@ _A class to evaluate, differentiate or integrate a Lagrange function._ [More...]
 |  KOKKOS\_FUNCTION DataType | [**deriv**](#function-deriv-13) (IdxDerivDims const & deriv\_order, Coord&lt; CoordsDims... &gt; const & coord\_eval, ConstField&lt; DataType, BatchedLagrangeIdxRange, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout &gt; const lagrange\_coef) const<br>_Differentiate 1D Lagrange function at a given coordinate._  |
 |  void | [**deriv**](#function-deriv-23) (IdxDerivDims const & deriv\_order, Field&lt; DataType, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const coords\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; IdxRangeBatchedInterpolation &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout3 &gt; const lagrange\_coef) const<br>_Differentiate 1D spline function (described by its spline coefficients) on a mesh._  |
 |  void | [**deriv**](#function-deriv-33) (IdxDerivDims const & deriv\_order, Field&lt; DataType, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; IdxRangeBatchedInterpolation &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const lagrange\_coef) const<br>_Differentiate 1D Lagrange function on a mesh._  |
-|  [**lower\_extrapolation\_rule\_type**](classLagrangeEvaluator.md#typedef-lower_extrapolation_rule_type) | [**lower\_extrapolation\_rule**](#function-lower_extrapolation_rule) () const<br>_Get the lower extrapolation rule._  |
+|  KOKKOS\_INLINE\_FUNCTION [**lower\_extrapolation\_rule\_type**](classLagrangeEvaluator.md#typedef-lower_extrapolation_rule_type) | [**lower\_extrapolation\_rule**](#function-lower_extrapolation_rule) () const<br>_Get the lower extrapolation rule._  |
 |  KOKKOS\_FUNCTION DataType | [**operator()**](#function-operator) (Coord&lt; CoordsDims... &gt; const & coord\_eval, ConstField&lt; DataType, BatchedLagrangeIdxRange, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout &gt; const lagrange\_coef) const<br>_Evaluate 1D Lagrange polynomial (described by its Lagrange coefficients) at a given coordinate._  |
 |  void | [**operator()**](#function-operator_1) (Field&lt; DataType, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const coords\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; IdxRangeBatchedInterpolation &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout3 &gt; const lagrange\_coef) const<br>_Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh._  |
 |  void | [**operator()**](#function-operator_2) (Field&lt; DataType, BatchedInterpolationIdxRange, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const lagrange\_coef) const<br>_Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh._  |
 |  [**LagrangeEvaluator**](classLagrangeEvaluator.md) & | [**operator=**](#function-operator_3) ([**LagrangeEvaluator**](classLagrangeEvaluator.md) const & x) = default<br>_Copy-assigns._  |
 |  [**LagrangeEvaluator**](classLagrangeEvaluator.md) & | [**operator=**](#function-operator_4) ([**LagrangeEvaluator**](classLagrangeEvaluator.md) && x) = default<br>_Move-assigns._  |
-|  [**upper\_extrapolation\_rule\_type**](classLagrangeEvaluator.md#typedef-upper_extrapolation_rule_type) | [**upper\_extrapolation\_rule**](#function-upper_extrapolation_rule) () const<br>_Get the upper extrapolation rule._  |
+|  KOKKOS\_INLINE\_FUNCTION [**upper\_extrapolation\_rule\_type**](classLagrangeEvaluator.md#typedef-upper_extrapolation_rule_type) | [**upper\_extrapolation\_rule**](#function-upper_extrapolation_rule) () const<br>_Get the upper extrapolation rule._  |
 |   | [**~LagrangeEvaluator**](#function-lagrangeevaluator) () = default<br>_Destructs._  |
 
 
@@ -562,7 +562,7 @@ The differentiation is not performed in a multidimensional way (in any sense). T
 
 _Get the lower extrapolation rule._ 
 ```C++
-inline lower_extrapolation_rule_type LagrangeEvaluator::lower_extrapolation_rule () const
+inline KOKKOS_INLINE_FUNCTION lower_extrapolation_rule_type LagrangeEvaluator::lower_extrapolation_rule () const
 ```
 
 
@@ -775,7 +775,7 @@ A reference to this object.
 
 _Get the upper extrapolation rule._ 
 ```C++
-inline upper_extrapolation_rule_type LagrangeEvaluator::upper_extrapolation_rule () const
+inline KOKKOS_INLINE_FUNCTION upper_extrapolation_rule_type LagrangeEvaluator::upper_extrapolation_rule () const
 ```
 
 
