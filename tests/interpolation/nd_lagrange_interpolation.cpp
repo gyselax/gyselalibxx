@@ -268,7 +268,7 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
                 TOL * expected);
     });
 
-    EXPECT_DOUBLE_NEAR(eval2d(Coord<X, Y>(3.0, 4.0), 0.0));
+    EXPECT_DOUBLE_EQ(eval2d(Coord<X, Y>(3.0, 4.0), get_const_field(poly_coeffs_alloc)), 0.0);
 }
 
 /**
@@ -543,6 +543,13 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
         double const expected = std::cos(x) * (1.0 + y);
         EXPECT_NEAR(result_host(idx), expected, tol);
     });
+
+    Idx<TestGridX, TestGridY> test_idx(test_range.front() + IdxStep<TestGridX, TestGridY>(1, 2));
+    Idx<TestGridX, TestGridY> test_periodic_idx(test_idx + IdxStep<TestGridX>(ntest - 1));
+    EXPECT_NEAR(
+            eval2d(ddc::coordinate(test_periodic_idx), get_const_field(coeffs_alloc)),
+            result_alloc(test_idx),
+            tol);
 }
 
 /**
