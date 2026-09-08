@@ -548,7 +548,7 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
     Idx<TestGridX, TestGridY> test_periodic_idx(test_idx + IdxStep<TestGridX>(ntest - 1));
     EXPECT_NEAR(
             eval2d(ddc::coordinate(test_periodic_idx), get_const_field(coeffs_alloc)),
-            result_alloc(test_idx),
+            result_host(test_idx),
             tol);
 }
 
