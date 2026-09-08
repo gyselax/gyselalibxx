@@ -13,11 +13,11 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             DDC::pdi
             paraconf::paraconf
             PDI::PDI_C
-            gslx::geometry_RTheta
-            gslx::paraconfpp
-            gslx::pde_solvers
-            gslx::poisson_RTheta
-            gslx::utils
+            gyselalibxx::geometry_RTheta
+            gyselalibxx::paraconfpp
+            gyselalibxx::pde_solvers
+            gyselalibxx::poisson_RTheta
+            gyselalibxx::utils
     )
     target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${SOLUTION})
 
@@ -44,8 +44,8 @@ target_link_libraries(gmg_polar_poisson_like_solver_test
 	    GTest::gmock
         DDC::core
         DDC::splines
-        gslx::geometry_RTheta
-        gslx::pde_solvers
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::pde_solvers
 )
 
 gtest_discover_tests(gmg_polar_poisson_like_solver_test
