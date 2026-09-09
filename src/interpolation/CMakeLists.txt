@@ -21,6 +21,7 @@ target_sources("interpolation"
                 nd_identity_interpolation_builder.hpp
                 nd_lagrange_evaluator.hpp
                 spline_interpolation.hpp
+                vector_field_evaluation.hpp
 )
 
 target_link_libraries("interpolation"
