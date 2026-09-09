@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File i_interpolation_evaluator.hpp - GyselalibX</title>
+    <title>Struct InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt; - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File i_interpolation_evaluator.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/i__interpolation__evaluator_8hpp_source.md";
+        var mkdocs_page_name = "Struct InterpolationEvaluatorTraits\u0026lt; ddc::SplineEvaluator3D\u0026lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 \u0026gt; \u0026gt;";
+        var mkdocs_page_input_path = "gyselalibxx/structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File i_interpolation_evaluator.hpp</li>
+      <li class="breadcrumb-item active">Struct InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/i__interpolation__evaluator_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,304 +566,111 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-i_interpolation_evaluatorhpp">File i_interpolation_evaluator.hpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_264890e5c091f8c8d7fe1f842870c25e.html"><strong>interpolation</strong></a> <strong>&gt;</strong> <a href="i__interpolation__evaluator_8hpp.html"><strong>i_interpolation_evaluator.hpp</strong></a></p>
-<p><a href="i__interpolation__evaluator_8hpp.html">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">// SPDX-License-Identifier: MIT
-#pragma once
+                <div><h1 id="struct-interpolationevaluatortraits-ddcsplineevaluator3d-execspace-memoryspace-bsplines1-bsplines2-bsplines3-evaluationddim1-evaluationddim2-evaluationddim3-lowerextrapolationrule1-upperextrapolationrule1-lowerextrapolationrule2-upperextrapolationrule2-lowerextrapolationrule3-upperextrapolationrule3">Struct InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</h1>
+<p><strong>template &lt;class ExecSpace, class MemorySpace, class BSplines1, class BSplines2, class BSplines3, class EvaluationDDim1, class EvaluationDDim2, class EvaluationDDim3, class LowerExtrapolationRule1, class UpperExtrapolationRule1, class LowerExtrapolationRule2, class UpperExtrapolationRule2, class LowerExtrapolationRule3, class UpperExtrapolationRule3&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523.html"><strong>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</strong></a></p>
+<p><em>Specialisation of</em> <a href="structInterpolationEvaluatorTraits.html"><em><strong>InterpolationEvaluatorTraits</strong></em></a> <em>for ddc::SplineEvaluator3D.</em><a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;i_interpolation_evaluator.hpp&gt;</code></li>
+</ul>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::template batched_spline_domain_type&lt; BatchedInterpolationIdxRange &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>  <br><em>Batched domain with the evaluation grid replaced by BSplines.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::template batched_evaluation_domain_type&lt; BatchedInterpolationIdxRange &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batched_evaluation_idx_range_type"><strong>batched_evaluation_idx_range_type</strong></a>  <br><em>Batched index range for the evaluation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::spline_domain_type</td>
+<td style="text-align: left;"><a href="#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a>  <br><em>The type of the ND index range on which the interpolation coefficients are defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; typename EvaluationDDim1::continuous_dimension_type, typename EvaluationDDim2::continuous_dimension_type, typename EvaluationDDim3::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coord_type"><strong>coord_type</strong></a>  <br><em>The 1D coordinate type corresponding to the evaluation mesh.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef double</td>
+<td style="text-align: left;"><a href="#typedef-data_type"><strong>data_type</strong></a>  <br><em>The data type that the data is saved on.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::evaluation_domain_type</td>
+<td style="text-align: left;"><a href="#typedef-evaluation_idx_range_type"><strong>evaluation_idx_range_type</strong></a>  <br><em>The 1D index range for the evaluation mesh.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions (always 1 for SplineEvaluator).</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>ddc::SplineEvaluator3D uses different alias names from the InterpolationEvaluator convention. This specialisation provides the mapping so that ddc::SplineEvaluator3D can be used directly as an InterpolationEvaluator.</p>
+<p>Mapping: evaluation_discrete_dimension_type -&gt; (defines evaluation_idx_range_type) evaluation_domain_type -&gt; evaluation_idx_range_type spline_domain_type -&gt; coeff_idx_range_type batched_spline_domain_type&lt;D&gt; -&gt; batched_coeff_idx_range_type&lt;D&gt; </p>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-batched_coeff_idx_range_type">typedef batched_coeff_idx_range_type</h3>
+<p><em>Batched domain with the evaluation grid replaced by BSplines.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::batched_coeff_idx_range_type =  typename Evaluator::template batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;;
+</code></pre>
+<hr>
 
-#include &lt;type_traits&gt;
+<h3 id="typedef-batched_evaluation_idx_range_type">typedef batched_evaluation_idx_range_type</h3>
+<p><em>Batched index range for the evaluation.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::batched_evaluation_idx_range_type =  typename Evaluator::template batched_evaluation_domain_type&lt; BatchedInterpolationIdxRange&gt;;
+</code></pre>
+<hr>
 
-#include "ddc_aliases.hpp"
+<h3 id="typedef-coeff_idx_range_type">typedef coeff_idx_range_type</h3>
+<p><em>The type of the ND index range on which the interpolation coefficients are defined.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::coeff_idx_range_type =  typename Evaluator::spline_domain_type;
+</code></pre>
+<hr>
 
-namespace detail {
+<h3 id="typedef-coord_type">typedef coord_type</h3>
+<p><em>The 1D coordinate type corresponding to the evaluation mesh.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::coord_type =  Coord&lt;typename EvaluationDDim1::continuous_dimension_type, typename EvaluationDDim2::continuous_dimension_type, typename EvaluationDDim3::continuous_dimension_type&gt;;
+</code></pre>
+<hr>
 
-template &lt;class IdxElem&gt;
-struct ToDerivIdx;
+<h3 id="typedef-data_type">typedef data_type</h3>
+<p><em>The data type that the data is saved on.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::data_type =  double;
+</code></pre>
+<hr>
 
-template &lt;class... Grids&gt;
-struct ToDerivIdx&lt;Idx&lt;Grids...&gt;&gt;
-{
-    using type = Idx&lt;ddc::Deriv&lt;typename Grids::continuous_dimension_type&gt;...&gt;;
-};
+<h3 id="typedef-evaluation_idx_range_type">typedef evaluation_idx_range_type</h3>
+<p><em>The 1D index range for the evaluation mesh.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::evaluation_idx_range_type =  typename Evaluator::evaluation_domain_type;
+</code></pre>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-rank">function rank</h3>
+<p><em>The number of interpolation dimensions (always 1 for SplineEvaluator).</em> </p>
+<pre><code class="language-C++">static inline constexpr std::size_t InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::rank () 
+</code></pre>
+<hr>
 
-} // namespace detail
-
-template &lt;class Evaluator&gt;
-struct InterpolationEvaluatorTraits
-{
-    using data_type = typename Evaluator::data_type;
-
-    using evaluation_idx_range_type = typename Evaluator::evaluation_idx_range_type;
-
-    using coord_type
-            = ddc::coordinate_of_t&lt;typename evaluation_idx_range_type::discrete_element_type&gt;;
-
-    using coeff_idx_range_type = typename Evaluator::coeff_idx_range_type;
-
-    static constexpr std::size_t rank()
-    {
-        return evaluation_idx_range_type::rank();
-    }
-
-    template &lt;class BatchedInterpolationIdxRange&gt;
-    using batched_evaluation_idx_range_type =
-            typename Evaluator::template batched_evaluation_idx_range_type&lt;
-                    BatchedInterpolationIdxRange&gt;;
-
-    template &lt;class D&gt;
-    using batched_coeff_idx_range_type =
-            typename Evaluator::template batched_coeff_idx_range_type&lt;D&gt;;
-};
-
-template &lt;
-        class ExecSpace,
-        class MemorySpace,
-        class BSplines,
-        class EvaluationDDim,
-        class LowerExtrapolationRule,
-        class UpperExtrapolationRule&gt;
-struct InterpolationEvaluatorTraits&lt;ddc::SplineEvaluator&lt;
-        ExecSpace,
-        MemorySpace,
-        BSplines,
-        EvaluationDDim,
-        LowerExtrapolationRule,
-        UpperExtrapolationRule&gt;&gt;
-{
-private:
-    using Evaluator = ddc::SplineEvaluator&lt;
-            ExecSpace,
-            MemorySpace,
-            BSplines,
-            EvaluationDDim,
-            LowerExtrapolationRule,
-            UpperExtrapolationRule&gt;;
-
-public:
-    using data_type = double;
-
-    using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
-
-    using coord_type = Coord&lt;typename EvaluationDDim::continuous_dimension_type&gt;;
-
-    using coeff_idx_range_type = typename Evaluator::spline_domain_type;
-
-    static constexpr std::size_t rank()
-    {
-        return 1;
-    }
-
-    template &lt;class BatchedInterpolationIdxRange&gt;
-    using batched_evaluation_idx_range_type =
-            typename Evaluator::template batched_evaluation_domain_type&lt;
-                    BatchedInterpolationIdxRange&gt;;
-
-    template &lt;class BatchedInterpolationIdxRange&gt;
-    using batched_coeff_idx_range_type =
-            typename Evaluator::template batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;;
-};
-
-template &lt;
-        class ExecSpace,
-        class MemorySpace,
-        class BSplines1,
-        class BSplines2,
-        class EvaluationDDim1,
-        class EvaluationDDim2,
-        class LowerExtrapolationRule1,
-        class UpperExtrapolationRule1,
-        class LowerExtrapolationRule2,
-        class UpperExtrapolationRule2&gt;
-struct InterpolationEvaluatorTraits&lt;ddc::SplineEvaluator2D&lt;
-        ExecSpace,
-        MemorySpace,
-        BSplines1,
-        BSplines2,
-        EvaluationDDim1,
-        EvaluationDDim2,
-        LowerExtrapolationRule1,
-        UpperExtrapolationRule1,
-        LowerExtrapolationRule2,
-        UpperExtrapolationRule2&gt;&gt;
-{
-private:
-    using Evaluator = ddc::SplineEvaluator2D&lt;
-            ExecSpace,
-            MemorySpace,
-            BSplines1,
-            BSplines2,
-            EvaluationDDim1,
-            EvaluationDDim2,
-            LowerExtrapolationRule1,
-            UpperExtrapolationRule1,
-            LowerExtrapolationRule2,
-            UpperExtrapolationRule2&gt;;
-
-public:
-    using data_type = double;
-
-    using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
-
-    using coord_type
-            = Coord&lt;typename EvaluationDDim1::continuous_dimension_type,
-                    typename EvaluationDDim2::continuous_dimension_type&gt;;
-
-    using coeff_idx_range_type = typename Evaluator::spline_domain_type;
-
-    static constexpr std::size_t rank()
-    {
-        return 2;
-    }
-
-    template &lt;class BatchedInterpolationIdxRange&gt;
-    using batched_evaluation_idx_range_type =
-            typename Evaluator::template batched_evaluation_domain_type&lt;
-                    BatchedInterpolationIdxRange&gt;;
-
-    template &lt;class BatchedInterpolationIdxRange&gt;
-    using batched_coeff_idx_range_type =
-            typename Evaluator::template batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;;
-};
-
-template &lt;
-        class ExecSpace,
-        class MemorySpace,
-        class BSplines1,
-        class BSplines2,
-        class BSplines3,
-        class EvaluationDDim1,
-        class EvaluationDDim2,
-        class EvaluationDDim3,
-        class LowerExtrapolationRule1,
-        class UpperExtrapolationRule1,
-        class LowerExtrapolationRule2,
-        class UpperExtrapolationRule2,
-        class LowerExtrapolationRule3,
-        class UpperExtrapolationRule3&gt;
-struct InterpolationEvaluatorTraits&lt;ddc::SplineEvaluator3D&lt;
-        ExecSpace,
-        MemorySpace,
-        BSplines1,
-        BSplines2,
-        BSplines3,
-        EvaluationDDim1,
-        EvaluationDDim2,
-        EvaluationDDim3,
-        LowerExtrapolationRule1,
-        UpperExtrapolationRule1,
-        LowerExtrapolationRule2,
-        UpperExtrapolationRule2,
-        LowerExtrapolationRule3,
-        UpperExtrapolationRule3&gt;&gt;
-{
-private:
-    using Evaluator = ddc::SplineEvaluator3D&lt;
-            ExecSpace,
-            MemorySpace,
-            BSplines1,
-            BSplines2,
-            BSplines3,
-            EvaluationDDim1,
-            EvaluationDDim2,
-            EvaluationDDim3,
-            LowerExtrapolationRule1,
-            UpperExtrapolationRule1,
-            LowerExtrapolationRule2,
-            UpperExtrapolationRule2,
-            LowerExtrapolationRule3,
-            UpperExtrapolationRule3&gt;;
-
-public:
-    using data_type = double;
-
-    using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
-
-    using coord_type
-            = Coord&lt;typename EvaluationDDim1::continuous_dimension_type,
-                    typename EvaluationDDim2::continuous_dimension_type,
-                    typename EvaluationDDim3::continuous_dimension_type&gt;;
-
-    using coeff_idx_range_type = typename Evaluator::spline_domain_type;
-
-    static constexpr std::size_t rank()
-    {
-        return 3;
-    }
-
-    template &lt;class BatchedInterpolationIdxRange&gt;
-    using batched_evaluation_idx_range_type =
-            typename Evaluator::template batched_evaluation_domain_type&lt;
-                    BatchedInterpolationIdxRange&gt;;
-
-    template &lt;class BatchedInterpolationIdxRange&gt;
-    using batched_coeff_idx_range_type =
-            typename Evaluator::template batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;;
-};
-
-namespace concepts {
-
-template &lt;class Evaluator&gt;
-concept InterpolationEvaluator = requires
-{
-    typename Evaluator::exec_space;
-    typename Evaluator::memory_space;
-    typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type;
-    typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type;
-    typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type;
-    typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coeff_idx_range_type;
-}
-&amp;&amp;requires()
-{
-    {
-        InterpolationEvaluatorTraits&lt;Evaluator&gt;::rank()
-        } -&gt; std::same_as&lt;std::size_t&gt;;
-}
-&amp;&amp;requires(
-        Evaluator const&amp; e,
-        Field&lt;typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type,
-              typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type,
-              typename Evaluator::memory_space&gt; eval,
-        ConstField&lt;
-                typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type,
-                typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::
-                        template batched_coeff_idx_range_type&lt;typename InterpolationEvaluatorTraits&lt;
-                                Evaluator&gt;::evaluation_idx_range_type&gt;,
-                typename Evaluator::memory_space&gt; coeffs,
-        ConstField&lt;
-                typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type,
-                typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type,
-                typename Evaluator::memory_space&gt; coords,
-        typename detail::ToDerivIdx&lt;typename InterpolationEvaluatorTraits&lt;
-                Evaluator&gt;::evaluation_idx_range_type::discrete_element_type&gt;::type deriv_order)
-{
-    {e(eval, coeffs)};
-    {e(eval, coords, coeffs)};
-    {e.deriv(deriv_order, eval, coeffs)};
-    {e.deriv(deriv_order, eval, coords, coeffs)};
-}
-&amp;&amp;requires(
-        Evaluator const&amp; e,
-        ConstField&lt;
-                typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type,
-                typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::
-                        template batched_coeff_idx_range_type&lt;typename InterpolationEvaluatorTraits&lt;
-                                Evaluator&gt;::evaluation_idx_range_type&gt;,
-                typename Evaluator::memory_space&gt; coeffs,
-        typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type coord,
-        typename detail::ToDerivIdx&lt;typename InterpolationEvaluatorTraits&lt;
-                Evaluator&gt;::evaluation_idx_range_type::discrete_element_type&gt;::type deriv_order)
-{
-    {
-        e(coord, coeffs)
-        } -&gt; std::same_as&lt;typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type&gt;;
-    {
-        e.deriv(deriv_order, coord, coeffs)
-        } -&gt; std::same_as&lt;typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type&gt;;
-};
-
-} // namespace concepts
-</code></pre></div>
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp</code></p></div>
               
             </div>
           </div><footer>

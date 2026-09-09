@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523" kind="struct" language="C++" prot="public">
+    <compoundname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</compoundname>
+    <includes refid="i__interpolation__evaluator_8hpp" local="no">i_interpolation_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+      </param>
+      <param>
+        <type>class BSplines1</type>
+      </param>
+      <param>
+        <type>class BSplines2</type>
+      </param>
+      <param>
+        <type>class BSplines3</type>
+      </param>
+      <param>
+        <type>class EvaluationDDim1</type>
+      </param>
+      <param>
+        <type>class EvaluationDDim2</type>
+      </param>
+      <param>
+        <type>class EvaluationDDim3</type>
+      </param>
+      <param>
+        <type>class LowerExtrapolationRule1</type>
+      </param>
+      <param>
+        <type>class UpperExtrapolationRule1</type>
+      </param>
+      <param>
+        <type>class LowerExtrapolationRule2</type>
+      </param>
+      <param>
+        <type>class UpperExtrapolationRule2</type>
+      </param>
+      <param>
+        <type>class LowerExtrapolationRule3</type>
+      </param>
+      <param>
+        <type>class UpperExtrapolationRule3</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a5552a3a4d45c16452b6a8bc1b58aee9b" prot="private" static="no">
+        <type>ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::Evaluator =  ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3&gt;</definition>
+        <argsstring></argsstring>
+        <name>Evaluator</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::Evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="283" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="297" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a197cd3de2fc3bba5ee50e6e6698abd2d" prot="public" static="no">
+        <type>double</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::data_type =  double</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type that the data is saved on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="301" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="301" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1ac4fb4b1658b39fc700687d641c6767cf" prot="public" static="no">
+        <type>typename Evaluator::evaluation_domain_type</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::evaluation_idx_range_type =  typename Evaluator::evaluation_domain_type</definition>
+        <argsstring></argsstring>
+        <name>evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The 1D index range for the evaluation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="304" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="304" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1af135c70ff58892fcbb6ef25956a32d74" prot="public" static="no">
+        <type>Coord&lt; typename EvaluationDDim1::continuous_dimension_type, typename EvaluationDDim2::continuous_dimension_type, typename EvaluationDDim3::continuous_dimension_type &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::coord_type =  Coord&lt;typename EvaluationDDim1::continuous_dimension_type, typename EvaluationDDim2::continuous_dimension_type, typename EvaluationDDim3::continuous_dimension_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>coord_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::coord_type</qualifiedname>
+        <briefdescription>
+<para>The 1D coordinate type corresponding to the evaluation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="307" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="310" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a6b4c31b907840901306e35410da2026f" prot="public" static="no">
+        <type>typename Evaluator::spline_domain_type</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::coeff_idx_range_type =  typename Evaluator::spline_domain_type</definition>
+        <argsstring></argsstring>
+        <name>coeff_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the ND index range on which the interpolation coefficients are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="313" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="313" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1ad02a57d18c4eedcd4f667a20b258e19a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationIdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>typename Evaluator::template batched_evaluation_domain_type&lt; BatchedInterpolationIdxRange &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::batched_evaluation_idx_range_type =  typename Evaluator::template batched_evaluation_domain_type&lt; BatchedInterpolationIdxRange&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::batched_evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Batched index range for the evaluation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="323" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="325" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1aa42b7087912004046281d4c350b462fd" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationIdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>typename Evaluator::template batched_spline_domain_type&lt; BatchedInterpolationIdxRange &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::batched_coeff_idx_range_type =  typename Evaluator::template batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_coeff_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::batched_coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Batched domain with the evaluation grid replaced by BSplines. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="329" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="330" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a2ba58100cf5295d8168f6daa22cfbd47" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;::rank</qualifiedname>
+        <briefdescription>
+<para>The number of interpolation dimensions (always 1 for SplineEvaluator). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="316" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="316" bodyend="319"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Specialisation of <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref> for ddc::SplineEvaluator3D. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>ddc::SplineEvaluator3D uses different alias names from the InterpolationEvaluator convention. This specialisation provides the mapping so that ddc::SplineEvaluator3D can be used directly as an InterpolationEvaluator.</para>
+<para>Mapping: evaluation_discrete_dimension_type -&gt; (defines evaluation_idx_range_type) evaluation_domain_type -&gt; evaluation_idx_range_type spline_domain_type -&gt; coeff_idx_range_type batched_spline_domain_type&lt;D&gt; -&gt; batched_coeff_idx_range_type&lt;D&gt; </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="266" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="281" bodyend="331"/>
+    <listofallmembers>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1aa42b7087912004046281d4c350b462fd" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</scope><name>batched_coeff_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1ad02a57d18c4eedcd4f667a20b258e19a" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</scope><name>batched_evaluation_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a6b4c31b907840901306e35410da2026f" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</scope><name>coeff_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1af135c70ff58892fcbb6ef25956a32d74" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</scope><name>coord_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a197cd3de2fc3bba5ee50e6e6698abd2d" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1ac4fb4b1658b39fc700687d641c6767cf" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</scope><name>evaluation_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a5552a3a4d45c16452b6a8bc1b58aee9b" prot="private" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</scope><name>Evaluator</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a2ba58100cf5295d8168f6daa22cfbd47" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</scope><name>rank</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

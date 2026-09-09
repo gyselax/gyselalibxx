@@ -152,6 +152,83 @@ public:
             typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
 };
 
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class BSpline1,
+        class BSpline2,
+        class BSpline3,
+        class InterpolationDDim1,
+        class InterpolationDDim2,
+        class InterpolationDDim3,
+        ddc::SplineBuilderClosure BcLower1,
+        ddc::SplineBuilderClosure BcUpper1,
+        ddc::SplineBuilderClosure BcLower2,
+        ddc::SplineBuilderClosure BcUpper2,
+        ddc::SplineBuilderClosure BcLower3,
+        ddc::SplineBuilderClosure BcUpper3,
+        ddc::SplineSolver Solver>
+struct InterpolationBuilderTraits<ddc::SplineBuilder3D<
+        ExecSpace,
+        MemorySpace,
+        BSpline1,
+        BSpline2,
+        BSpline3,
+        InterpolationDDim1,
+        InterpolationDDim2,
+        InterpolationDDim3,
+        BcLower1,
+        BcUpper1,
+        BcLower2,
+        BcUpper2,
+        BcLower3,
+        BcUpper3,
+        Solver>>
+{
+private:
+    using Builder = ddc::SplineBuilder3D<
+            ExecSpace,
+            MemorySpace,
+            BSpline1,
+            BSpline2,
+            BSpline3,
+            InterpolationDDim1,
+            InterpolationDDim2,
+            InterpolationDDim3,
+            BcLower1,
+            BcUpper1,
+            BcLower2,
+            BcUpper2,
+            BcLower3,
+            BcUpper3,
+            Solver>;
+
+public:
+    using data_type = double;
+
+    //using interpolation_grid_type = typename Builder::interpolation_discrete_dimension_type;
+
+    using interpolation_idx_range_type = typename Builder::interpolation_domain_type;
+
+    using coeff_idx_range_type = IdxRange<
+            typename Builder::bsplines_type1,
+            typename Builder::bsplines_type2,
+            typename Builder::bsplines_type3>;
+
+    static constexpr std::size_t rank()
+    {
+        return 3;
+    }
+
+    template <class IdxRangeBatchedInterpolation>
+    using batched_basis_idx_range_type =
+            typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
+
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type =
+            typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
+};
+
 template <class Builder, class IdxRangeBatchedInterpolation>
 auto batched_basis_idx_range(
         Builder const& builder,

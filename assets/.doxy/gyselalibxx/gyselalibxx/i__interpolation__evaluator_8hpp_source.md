@@ -165,6 +165,81 @@ public:
             typename Evaluator::template batched_spline_domain_type<BatchedInterpolationIdxRange>;
 };
 
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class BSplines1,
+        class BSplines2,
+        class BSplines3,
+        class EvaluationDDim1,
+        class EvaluationDDim2,
+        class EvaluationDDim3,
+        class LowerExtrapolationRule1,
+        class UpperExtrapolationRule1,
+        class LowerExtrapolationRule2,
+        class UpperExtrapolationRule2,
+        class LowerExtrapolationRule3,
+        class UpperExtrapolationRule3>
+struct InterpolationEvaluatorTraits<ddc::SplineEvaluator3D<
+        ExecSpace,
+        MemorySpace,
+        BSplines1,
+        BSplines2,
+        BSplines3,
+        EvaluationDDim1,
+        EvaluationDDim2,
+        EvaluationDDim3,
+        LowerExtrapolationRule1,
+        UpperExtrapolationRule1,
+        LowerExtrapolationRule2,
+        UpperExtrapolationRule2,
+        LowerExtrapolationRule3,
+        UpperExtrapolationRule3>>
+{
+private:
+    using Evaluator = ddc::SplineEvaluator3D<
+            ExecSpace,
+            MemorySpace,
+            BSplines1,
+            BSplines2,
+            BSplines3,
+            EvaluationDDim1,
+            EvaluationDDim2,
+            EvaluationDDim3,
+            LowerExtrapolationRule1,
+            UpperExtrapolationRule1,
+            LowerExtrapolationRule2,
+            UpperExtrapolationRule2,
+            LowerExtrapolationRule3,
+            UpperExtrapolationRule3>;
+
+public:
+    using data_type = double;
+
+    using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
+
+    using coord_type
+            = Coord<typename EvaluationDDim1::continuous_dimension_type,
+                    typename EvaluationDDim2::continuous_dimension_type,
+                    typename EvaluationDDim3::continuous_dimension_type>;
+
+    using coeff_idx_range_type = typename Evaluator::spline_domain_type;
+
+    static constexpr std::size_t rank()
+    {
+        return 3;
+    }
+
+    template <class BatchedInterpolationIdxRange>
+    using batched_evaluation_idx_range_type =
+            typename Evaluator::template batched_evaluation_domain_type<
+                    BatchedInterpolationIdxRange>;
+
+    template <class BatchedInterpolationIdxRange>
+    using batched_coeff_idx_range_type =
+            typename Evaluator::template batched_spline_domain_type<BatchedInterpolationIdxRange>;
+};
+
 namespace concepts {
 
 template <class Evaluator>
