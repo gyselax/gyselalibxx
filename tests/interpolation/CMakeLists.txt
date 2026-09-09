@@ -99,3 +99,16 @@ target_include_directories(lagrange_tests
 
 gtest_discover_tests(lagrange_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 
+add_executable(spline_interpolation_tests
+    ../main.cpp
+    spline_interpolation.cpp
+)
+target_link_libraries(spline_interpolation_tests
+    PUBLIC
+        GTest::gtest
+        GTest::gmock
+        gyselalibxx::interpolation
+)
+
+gtest_discover_tests(spline_interpolation_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
+
