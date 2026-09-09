@@ -109,10 +109,6 @@ target_link_libraries(spline_interpolation_tests
         GTest::gmock
         gyselalibxx::interpolation
 )
-target_include_directories(spline_interpolation_tests
-    PRIVATE
-        "${CMAKE_CURRENT_SOURCE_DIR}/.."
-)
 
 gtest_discover_tests(spline_interpolation_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 
