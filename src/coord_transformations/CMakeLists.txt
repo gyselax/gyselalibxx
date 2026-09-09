@@ -18,6 +18,7 @@ target_sources("coord_transformations"
                 coord_transformation_tools.hpp
                 cylindrical_to_cartesian.hpp
                 czarny_to_cartesian.hpp
+                discrete_mapping.hpp
                 discrete_poloidal_cs_spline_mapping.hpp
                 discrete_poloidal_cs_spline_mapping_builder.hpp
                 geometry_pseudo_cartesian.hpp
