@@ -20,10 +20,10 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-auto constexpr SplineXBoundary = ddc::BoundCond::HERMITE;
+auto constexpr SplineXClosure = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsX
-        = ddc::KnotsAsInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::KnotsAsInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
@@ -34,8 +34,8 @@ using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
-        SplineXBoundary,
-        SplineXBoundary,
+        SplineXClosure,
+        SplineXClosure,
         ddc::SplineSolver::LAPACK>;
 
 using IdxStepX = IdxStep<GridX>;
@@ -106,8 +106,10 @@ struct ComputeErrorTraits
     struct BSplinesY : ddc::UniformBSplines<Y, 3>
     {
     };
-    using GrevillePointsY = ddc::
-            KnotsAsInterpolationPoints<BSplinesY, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
+    using GrevillePointsY = ddc::KnotsAsInterpolationPoints<
+            BSplinesY,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE>;
     struct GridY : GrevillePointsY::interpolation_discrete_dimension_type
     {
     };
@@ -125,8 +127,8 @@ double compute_error(int n_elems)
             Kokkos::HostSpace,
             BSplinesY,
             GridY,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineSolver::LAPACK>;
     using IdxRangeY = IdxRange<GridY>;
     using DFieldMemY = DFieldMem<IdxRangeY>;

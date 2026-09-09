@@ -8,10 +8,11 @@
 
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "polar_bsplines.hpp"
 #include "polar_spline_evaluator.hpp"
+#include "spline_interpolation.hpp"
 #include "view.hpp"
 
 namespace {
@@ -62,12 +63,14 @@ struct BSplinesTheta : ddc::NonUniformBSplines<Theta, spline_theta_degree>
 };
 #endif
 
-using GrevillePointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
+using GrevillePointsR = ddc::GrevilleInterpolationPoints<
+        BSplinesR,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 using GrevillePointsTheta = ddc::GrevilleInterpolationPoints<
         BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 struct GridR : GrevillePointsR::interpolation_discrete_dimension_type
 {
@@ -96,30 +99,14 @@ TEST(PolarSplineTest, ConstantEval)
             Kokkos::HostSpace,
             BSplines,
             ddc::NullExtrapolationRule>;
-    using BuilderRTheta = ddc::SplineBuilder2D<
+    using InterpolatorRTheta = SplineInterpolator<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::HostSpace,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK>;
-
-    using EvaluatorRTheta = ddc::SplineEvaluator2D<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::HostSpace,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            IdxRange<BSplinesR, BSplinesTheta>,
+            IdxRange<GridR, GridTheta>,
+            ExtrapolationRule::Null_Null, // radial extrapolation
+            ExtrapolationRule::Periodic, // poloidal extrapolation
+            SplineBoundaryClosure::Greville_Greville, // radial closure condition
+            SplineBoundaryClosure::Periodic>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -156,27 +143,16 @@ TEST(PolarSplineTest, ConstantEval)
     IdxRange<GridR, GridTheta>
             interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    BuilderRTheta builder_rtheta(interpolation_idx_range);
-
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    EvaluatorRTheta evaluator_rtheta(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    InterpolatorRTheta interpolator(interpolation_idx_range);
 
 #if defined(CIRCULAR_MAPPING)
     CircToCart const coord_changer;
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
-            Kokkos::DefaultHostExecutionSpace(),
-            coord_changer,
-            builder_rtheta,
-            evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, InterpolatorRTheta>
+            mapping_builder(Kokkos::DefaultHostExecutionSpace(), coord_changer, interpolator);
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem coef(ddc::discrete_space<BSplines>().full_domain());
@@ -217,30 +193,14 @@ void test_polar_spline_eval_gpu()
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplines,
             ddc::NullExtrapolationRule>;
-    using BuilderRTheta = ddc::SplineBuilder2D<
+    using InterpolatorRTheta = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK>;
-
-    using EvaluatorRTheta = ddc::SplineEvaluator2D<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            IdxRange<BSplinesR, BSplinesTheta>,
+            IdxRange<GridR, GridTheta>,
+            ExtrapolationRule::Null_Null, // radial extrapolation
+            ExtrapolationRule::Periodic, // poloidal extrapolation
+            SplineBoundaryClosure::Greville_Greville, // radial closure condition
+            SplineBoundaryClosure::Periodic>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -277,27 +237,16 @@ void test_polar_spline_eval_gpu()
     IdxRange<GridR, GridTheta>
             interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    BuilderRTheta builder_rtheta(interpolation_idx_range);
-
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    EvaluatorRTheta evaluator_rtheta(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    InterpolatorRTheta interpolator(interpolation_idx_range);
 
 #if defined(CIRCULAR_MAPPING)
     CircToCart const coord_changer;
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
-            Kokkos::DefaultExecutionSpace(),
-            coord_changer,
-            builder_rtheta,
-            evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, InterpolatorRTheta>
+            mapping_builder(Kokkos::DefaultExecutionSpace(), coord_changer, interpolator);
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem coef(ddc::discrete_space<BSplines>().full_domain());
@@ -336,30 +285,14 @@ void test_polar_integrals()
     using CoordTheta = Coord<Theta>;
     using SplineMem = DFieldMem<IdxRange<BSplines>>;
     using Spline = DField<IdxRange<BSplines>>;
-    using BuilderRTheta = ddc::SplineBuilder2D<
+    using InterpolatorRTheta = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK>;
-
-    using EvaluatorRTheta = ddc::SplineEvaluator2D<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            IdxRange<BSplinesR, BSplinesTheta>,
+            IdxRange<GridR, GridTheta>,
+            ExtrapolationRule::Null_Null, // radial extrapolation
+            ExtrapolationRule::Periodic, // poloidal extrapolation
+            SplineBoundaryClosure::Greville_Greville, // radial closure condition
+            SplineBoundaryClosure::Periodic>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -396,27 +329,16 @@ void test_polar_integrals()
     IdxRange<GridR, GridTheta>
             interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    BuilderRTheta builder_rtheta(interpolation_idx_range);
-
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    EvaluatorRTheta evaluator_rtheta(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    InterpolatorRTheta interpolator(interpolation_idx_range);
 
 #if defined(CIRCULAR_MAPPING)
     CircToCart const coord_changer;
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
-            Kokkos::DefaultExecutionSpace(),
-            coord_changer,
-            builder_rtheta,
-            evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, InterpolatorRTheta>
+            mapping_builder(Kokkos::DefaultExecutionSpace(), coord_changer, interpolator);
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem bspline_integrals_alloc(ddc::discrete_space<BSplines>().full_domain());

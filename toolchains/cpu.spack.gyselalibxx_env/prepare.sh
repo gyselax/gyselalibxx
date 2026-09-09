@@ -8,7 +8,7 @@ fi
 
 # set paths for spack to not use home ~/.spack folder
 CURRENT_DIR=$(pwd)
-export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
+export SPACK_PATH=${CURRENT_DIR}/spack-1.2.2/
 export SPACK_USER_CONFIG_PATH="${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="${SPACK_PATH}/user_cache"
@@ -26,9 +26,9 @@ if [ -d "${SPACK_PATH}" ]; then
     fi
 else
     # Download spack
-    wget https://github.com/spack/spack/releases/download/v1.1.0/spack-1.1.0.tar.gz
-    tar -xf spack-1.1.0.tar.gz
-    rm spack-1.1.0.tar.gz
+    wget https://github.com/spack/spack/releases/download/v1.2.2/spack-1.2.2.tar.gz
+    tar -xf spack-1.2.2.tar.gz
+    rm spack-1.2.2.tar.gz
 fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -36,14 +36,9 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # Activate spack
 . ${SPACK_PATH}/share/spack/setup-env.sh
 
-# Increase the time out that is by default too short for some packages (like PDI)
-spack config --scope site add 'config:connect_timeout:60'
-
 spack compiler find
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  COMPILER='apple-clang@14:'
-else
+if [[ "$OSTYPE" == "linux" ]]; then
   AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
 
   if [ -z "${AVAILABLE_COMPILERS}" ]
@@ -54,14 +49,18 @@ else
       spack compiler find
       spack unload gcc@11
   fi
-
-  COMPILER='gcc@11:'
 fi
 
-spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.1.0.yaml
-spack --env gyselalibxx-env config --scope env:gyselalibxx-env add packages:all:target:[$(spack arch --family --target)]
-spack --env gyselalibxx-env install --jobs 2
-spack env activate -p gyselalibxx-env
+spack env create gyselalibxx-spack-environment ${SCRIPT_DIR}/gyselalibxx-spack-environment.yaml
+spack --env gyselalibxx-spack-environment config --scope env:gyselalibxx-spack-environment add packages:all:target:[$(spack arch --family --target)]
+spack --env gyselalibxx-spack-environment mirror add \
+  --oci-password-variable GITHUB_TOKEN \
+  --oci-username-variable GITHUB_TOKEN \
+  --unsigned \
+  --type binary \
+  local-buildcache oci://ghcr.io/gyselax/gyselalibxx-spack-$(spack arch --operating-system)-buildcache
+spack --env gyselalibxx-spack-environment install
+spack env activate -p gyselalibxx-spack-environment
 PYTHON_EXECUTABLE=$(which python3)
 spack env deactivate
 
@@ -73,16 +72,12 @@ then
     exit 1
 fi
 
-export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
+export SPACK_PATH=${CURRENT_DIR}/spack-1.2.2/
 export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"
-# The hdf5 package is injecting the environment view \`lib\` path to \`LD_LIBRARY_PATH\`
-# which causes spurious segfaults for system executables, we manually remove it.
-LD_LIBRARY_PATH_TMP="$LD_LIBRARY_PATH"
 . \${SPACK_PATH}/share/spack/setup-env.sh
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_TMP"
-unset LD_LIBRARY_PATH_TMP
-spack env activate -p gyselalibxx-env
+spack --env gyselalibxx-spack-environment repo update
+spack env activate -p gyselalibxx-spack-environment
 export PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
 EOL

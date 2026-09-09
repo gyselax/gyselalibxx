@@ -16,24 +16,24 @@
 
 namespace {
 using namespace non_periodic_non_uniform_2d_2patches;
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::GREVILLE;
-ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::GREVILLE;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::GREVILLE;
+ddc::SplineBuilderClosure constexpr SplineYClosure = ddc::SplineBuilderClosure::GREVILLE;
 
-ddc::BoundCond constexpr SplineX1Boundary = SplineXBoundary;
-ddc::BoundCond constexpr SplineY1Boundary = SplineYBoundary;
+ddc::SplineBuilderClosure constexpr SplineX1Closure = SplineXClosure;
+ddc::SplineBuilderClosure constexpr SplineY1Closure = SplineYClosure;
 
-ddc::BoundCond constexpr SplineX2Boundary = SplineXBoundary;
-ddc::BoundCond constexpr SplineY2Boundary = SplineYBoundary;
+ddc::SplineBuilderClosure constexpr SplineX2Closure = SplineXClosure;
+ddc::SplineBuilderClosure constexpr SplineY2Closure = SplineYClosure;
 
 using SplineInterpPointsX1
-        = ddc::GrevilleInterpolationPoints<BSplinesX<1>, SplineX1Boundary, SplineX1Boundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX<1>, SplineX1Closure, SplineX1Closure>;
 using SplineInterpPointsY1
-        = ddc::GrevilleInterpolationPoints<BSplinesY<1>, SplineY1Boundary, SplineY1Boundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesY<1>, SplineY1Closure, SplineY1Closure>;
 using SplineInterpPointsX2
 
-        = ddc::GrevilleInterpolationPoints<BSplinesX<2>, SplineX2Boundary, SplineX2Boundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX<2>, SplineX2Closure, SplineX2Closure>;
 using SplineInterpPointsY2
-        = ddc::GrevilleInterpolationPoints<BSplinesY<2>, SplineY2Boundary, SplineY2Boundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesY<2>, SplineY2Closure, SplineY2Closure>;
 
 // Operators
 using SplineX1Builder = ddc::SplineBuilder<
@@ -41,8 +41,8 @@ using SplineX1Builder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX<1>,
         GridX<1>,
-        SplineX1Boundary,
-        SplineX1Boundary,
+        SplineX1Closure,
+        SplineX1Closure,
         ddc::SplineSolver::LAPACK>;
 
 using SplineX2Builder = ddc::SplineBuilder<
@@ -50,8 +50,8 @@ using SplineX2Builder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX<2>,
         GridX<2>,
-        SplineX2Boundary,
-        SplineX2Boundary,
+        SplineX2Closure,
+        SplineX2Closure,
         ddc::SplineSolver::LAPACK>;
 
 
@@ -60,9 +60,9 @@ using MultipatchSplineBuilderX_1d = MultipatchSplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
         Grid1OnPatch,
-        SplineXBoundary,
-        SplineXBoundary,
-        SplineXBoundary,
+        SplineXClosure,
+        SplineXClosure,
+        SplineXClosure,
         Connectivity,
         ddc::SplineSolver::LAPACK,
         DConstField1OnPatch,
@@ -75,9 +75,9 @@ using MultipatchSplineBuilderX_2d = MultipatchSplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
         Grid1OnPatch,
-        SplineXBoundary,
-        SplineXBoundary,
-        SplineXBoundary,
+        SplineXClosure,
+        SplineXClosure,
+        SplineXClosure,
         Connectivity,
         ddc::SplineSolver::LAPACK,
         DConstFieldOnPatch,

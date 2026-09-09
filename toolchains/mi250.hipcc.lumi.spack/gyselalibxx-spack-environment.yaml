@@ -1,0 +1,81 @@
+spack:
+  definitions:
+  - packages:
+    - cmake@3.31
+    - 'ddc@0.15 +fft +pdi +splines'
+    - ginkgo@1.11 ~openmp +rocm amdgpu_target=gfx90a
+    - gmgpolar@2.3
+    - googletest@1.17 +gmock
+    - kokkos@5.1 ~openmp +rocm amdgpu_target=gfx90a
+    - kokkos-kernels@5.1 ~shared
+    - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
+    - 'koliop@0.2'
+    - lapack
+    - mpi
+    - ninja@1.13
+    - paraconf@1.0
+    - pdi@1.11
+    - pdiplugin-decl-hdf5@1.11 +mpi
+    - pdiplugin-decl-netcdf@1.11 +mpi
+    - pdiplugin-mpi@1.11
+    - pdiplugin-pycall@1.11
+    - pdiplugin-set-value@1.11
+    - pdiplugin-trace@1.11
+    - 'python@3.14'
+
+    - py-dask@2026.3
+    - py-h5py@3.16
+    - py-imageio@2.37
+    - py-matplotlib@3.11 ^freetype@2.14.1
+    - py-netcdf4@1.7 +mpi
+    - py-numpy@2.4
+    - py-pyyaml@6.0
+    - py-scipy@1.17
+    - py-sympy@1.14
+    - py-xarray@2026.4
+  - architectures:
+    - target=x86_64_v3
+  specs:
+  - gcc # NOTE: not in the matrix to avoid unification issues when the packages target arch is not the arch the compiler was compiled for.
+  - matrix:
+    - [$packages]
+    - [$architectures]
+  repos:
+    patches:
+      git: https://github.com/gyselax/spack.git
+      branch: releases/v2026.06
+      paths:
+        - spack_repo/patches_lumi
+        - spack_repo/patches_common
+    builtin:
+      branch: releases/v2026.06
+  concretizer:
+    reuse: false
+    unify: true
+    duplicates:
+      strategy: none
+  packages:
+    all:
+      permissions:
+        read: world
+        write: group
+      variants: ~fortran ~mpi
+    c:
+      require: gcc@14.2
+    cxx:
+      require: gcc@14.2
+    kokkos-fft:
+      require: 'host_backend=fftw-serial'
+    lapack:
+      require: openblas@0.3
+    mpi:
+      require: cray-mpich
+    py-dask:
+      prefer: ['~dataframe']
+    py-pandas:
+      prefer: ['~performance']
+  modules:
+    default:
+      roots: {}
+      enable: []
+  view: false

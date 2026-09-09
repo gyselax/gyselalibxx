@@ -4,8 +4,8 @@
 
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_r_theta.hpp"
 #include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"
@@ -102,7 +102,6 @@ void check_norms(
 template <class Mapping>
 void launch_tests(
         Mapping const& mapping,
-        SplineRThetaBuilder_host const& builder,
         IdxRangeRTheta const& grid,
         std::array<std::array<double, 2>, 5> const& expected_norms,
         std::array<std::array<double, 2>, 5> const& TOLs)
@@ -112,16 +111,16 @@ void launch_tests(
             Kokkos::HostSpace,
             BSplinesR,
             GridR,
-            ddc::BoundCond::GREVILLE, // boundary at r=0
-            ddc::BoundCond::GREVILLE, // boundary at rmax
+            ddc::SplineBuilderClosure::GREVILLE, // boundary at r=0
+            ddc::SplineBuilderClosure::GREVILLE, // boundary at rmax
             ddc::SplineSolver::LAPACK>;
     using SplinePBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::HostSpace,
             BSplinesTheta,
             GridTheta,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
     SplineRBuilder r_builder(ddc::select<GridR>(grid));
@@ -219,7 +218,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     IdxRangeTheta interpolation_idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    SplineRThetaBuilder_host builder(grid);
+    SplineInterpolatorRThetaConst_host interpolator(grid);
 
 
     // ------------------------------------------------------------------------------------------------
@@ -250,30 +249,16 @@ TEST_P(SplineQuadrature, TestFunctions)
     TOLs[4][0] = 5e-2;
     TOLs[4][1] = 5e-6;
 
-    launch_tests(mapping_1, builder, grid, expected_norms, TOLs);
+    launch_tests(mapping_1, grid, expected_norms, TOLs);
 
 
     std::cout << std::endl
               << "DISCRETE MAPPING ---------------------------------------------------"
               << std::endl;
-    ddc::ConstantExtrapolationRule<R, Theta> bv_r_min(r_min);
-    ddc::ConstantExtrapolationRule<R, Theta> bv_r_max(r_max);
-    ddc::PeriodicExtrapolationRule<Theta> bv_knots_min;
-    ddc::PeriodicExtrapolationRule<Theta> bv_knots_max;
-    SplineRThetaEvaluatorConstBound_host
-            spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_knots_min, bv_knots_max);
 
-    DiscreteToCartesianBuilder<
-            X,
-            Y,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluatorConstBound_host> const
-            discrete_mapping_builder(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    mapping_1,
-                    builder,
-                    spline_evaluator_extrapol);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host> const
+            discrete_mapping_builder(Kokkos::DefaultHostExecutionSpace(), mapping_1, interpolator);
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
     TOLs[0][0] = 5e-6;
     TOLs[0][1] = 5e-7;
     TOLs[1][0] = 5e-3;
@@ -285,7 +270,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     TOLs[4][0] = 5e-2;
     TOLs[4][1] = 5e-6;
 
-    launch_tests(discrete_mapping, builder, grid, expected_norms, TOLs);
+    launch_tests(discrete_mapping, grid, expected_norms, TOLs);
 }
 
 

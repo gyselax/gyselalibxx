@@ -10,7 +10,8 @@
 #include "coord_transformation_tools.hpp"
 #include "cylindrical_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "identity_coordinate_change.hpp"
 #include "linear_coord_transform.hpp"
@@ -54,12 +55,32 @@ TEST(MappingStaticAsserts, CartToCzarny)
 
 TEST(MappingStaticAsserts, DiscToCart)
 {
-    using Mapping = DiscreteToCartesian<X, Y, SplineRThetaEvaluator_host>;
+    using Mapping = DiscretePoloidalCSSplineMapping<X, Y, SplineRThetaEvaluator_host>;
     static_assert(is_mapping_v<Mapping>);
     static_assert(has_jacobian_v<Mapping>);
     static_assert(is_coord_transform_with_o_point_v<Mapping>);
     static_assert(!is_analytical_mapping_v<Mapping>);
     static_assert(has_singular_o_point_inv_jacobian_v<Mapping>);
+}
+
+TEST(MappingStaticAsserts, Discrete2DSpline)
+{
+    using Mapping = DiscreteMapping<Coord<R, Theta>, Coord<X, Y>, SplineRThetaEvaluator_host>;
+    static_assert(is_mapping_v<Mapping>);
+    static_assert(has_jacobian_v<Mapping>);
+    static_assert(!is_coord_transform_with_o_point_v<Mapping>);
+    static_assert(!is_analytical_mapping_v<Mapping>);
+    static_assert(!has_singular_o_point_inv_jacobian_v<Mapping>);
+}
+
+TEST(MappingStaticAsserts, Discrete2DLagrange)
+{
+    using Mapping = DiscreteMapping<Coord<R, Theta>, Coord<X, Y>, LagrangeRThetaEvaluator_host>;
+    static_assert(is_mapping_v<Mapping>);
+    static_assert(has_jacobian_v<Mapping>);
+    static_assert(!is_coord_transform_with_o_point_v<Mapping>);
+    static_assert(!is_analytical_mapping_v<Mapping>);
+    static_assert(!has_singular_o_point_inv_jacobian_v<Mapping>);
 }
 
 TEST(MappingStaticAsserts, CombinedMapping)

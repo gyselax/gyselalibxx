@@ -10,8 +10,8 @@
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "linear_coord_transform.hpp"
@@ -199,21 +199,10 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
     IdxRangeTheta interpolation_idx_range_theta(InterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    SplineRThetaBuilder_host builder(grid);
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator_host evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
-            mapping_builder(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    analytical_mapping,
-                    builder,
-                    evaluator);
-    DiscreteToCartesian mapping = mapping_builder();
+    SplineInterpolatorRTheta_host interpolator(grid);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host>
+            mapping_builder(Kokkos::DefaultHostExecutionSpace(), analytical_mapping, interpolator);
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
 
     static_assert(has_jacobian_v<decltype(mapping)>);
     InverseJacobianMatrix inv_jacobian(mapping);

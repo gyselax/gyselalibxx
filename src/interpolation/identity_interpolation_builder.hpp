@@ -43,6 +43,9 @@ public:
     /// @brief The grid on which the interpolation coefficients should be provided.
     using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
 
+    /// @brief The index range for the interpolation coefficients.
+    using coeff_idx_range_type = IdxRange<basis_domain_type>;
+
     /// @brief The type of the Deriv dimension at the boundaries.
     using deriv_type = ddc::Deriv<continuous_dimension_type>;
 
@@ -81,21 +84,28 @@ public:
      * @param[in] derivs_xmax The values of the derivatives at the upper boundary
      *                  (unused in this class).
      */
-    template <class BatchedInterpolationIdxRange>
+    template <
+            class BatchedInterpolationIdxRange,
+            class LayoutCoeffs,
+            class LayoutVals,
+            class LayoutDerivs = Kokkos::layout_right>
     void operator()(
             Field<DataType,
                   batched_basis_idx_range_type<BatchedInterpolationIdxRange>,
-                  memory_space> coeffs,
-            ConstField<DataType, BatchedInterpolationIdxRange, memory_space> vals,
+                  memory_space,
+                  LayoutCoeffs> coeffs,
+            ConstField<DataType, BatchedInterpolationIdxRange, memory_space, LayoutVals> vals,
             std::optional<ConstField<
                     DataType,
                     batched_derivs_idx_range_type<BatchedInterpolationIdxRange>,
-                    memory_space>> derivs_xmin
+                    memory_space,
+                    LayoutDerivs>> derivs_xmin
             = std::nullopt,
             std::optional<ConstField<
                     DataType,
                     batched_derivs_idx_range_type<BatchedInterpolationIdxRange>,
-                    memory_space>> derivs_xmax
+                    memory_space,
+                    LayoutDerivs>> derivs_xmax
             = std::nullopt) const
     {
         IdxRange<basis_domain_type> bp_idx_range
@@ -108,9 +118,9 @@ public:
             IdxRange<basis_domain_type> extended_domain(
                     ddc::discrete_space<Basis>().full_domain().remove_first(
                             bp_idx_range.extents()));
-            typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(
-                    extended_domain.size());
-            BatchedInterpolationIdxRange repeat_domain(get_idx_range(vals).take_first(nrepeat));
+            IdxStep<InterpolationGrid> nrepeat(extended_domain.size());
+            IdxRange<InterpolationGrid> repeat_domain(
+                    get_idx_range<InterpolationGrid>(vals).take_first(nrepeat));
             Kokkos::deep_copy(
                     coeffs[extended_domain].allocation_kokkos_view(),
                     vals[repeat_domain].allocation_kokkos_view());
@@ -120,7 +130,7 @@ public:
     /**
      * @brief Get the whole domain on which derivatives on lower boundary are defined.
      *
-     * This is only used with BoundCond::HERMITE boundary conditions.
+     * This is only used with SplineBuilderClosure::HERMITE boundary conditions.
      *
      * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
      *
@@ -138,7 +148,7 @@ public:
     /**
      * @brief Get the whole domain on which derivatives on upper boundary are defined.
      *
-     * This is only used with BoundCond::HERMITE boundary conditions.
+     * This is only used with SplineBuilderClosure::HERMITE boundary conditions.
      *
      * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
      *

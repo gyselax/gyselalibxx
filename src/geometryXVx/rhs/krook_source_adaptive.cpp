@@ -118,7 +118,7 @@ void KrookSourceAdaptive::get_derivative(
 {
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
 
-    DFieldMemSpX amplitudes_alloc(grid_sp_x);
+    DFieldMemSpX amplitudes_alloc("amplitudes (KrookSourceAdaptive::get_derivative)", grid_sp_x);
     auto amplitudes = get_field(amplitudes_alloc);
     get_amplitudes(amplitudes, allfdistribu);
 
@@ -141,7 +141,7 @@ void KrookSourceAdaptive::get_derivative(
 
 DFieldSpXVx KrookSourceAdaptive::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
-    Kokkos::Profiling::pushRegion("KrookSource");
+    Kokkos::Profiling::pushRegion("(GSLX) KrookSource");
     RK2<DFieldMemSpXVx> timestepper(get_idx_range(allfdistribu));
 
     timestepper.update(allfdistribu, dt, [&](DFieldSpXVx df, DConstFieldSpXVx f) {

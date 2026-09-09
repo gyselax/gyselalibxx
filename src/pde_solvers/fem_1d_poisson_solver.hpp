@@ -7,6 +7,8 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "gauss_legendre_integration.hpp"
+#include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "ipoisson_solver.hpp"
 #include "matrix.hpp"
 
@@ -23,11 +25,12 @@
  */
 template <
         class SplineInterpolatorType,
-        class IdxRangeBatched =
-                typename SplineInterpolatorType::BuilderType::interpolation_domain_type>
+        class IdxRangeBatched = typename InterpolationBuilderTraits<
+                typename SplineInterpolatorType::BuilderType>::interpolation_idx_range_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
-              typename SplineInterpolatorType::EvaluatorType::evaluation_domain_type,
+              typename InterpolationEvaluatorTraits<
+                      typename SplineInterpolatorType::EvaluatorType>::evaluation_idx_range_type,
               IdxRangeBatched,
               double,
               typename SplineInterpolatorType::EvaluatorType::memory_space,
@@ -38,7 +41,8 @@ private:
     using SplineEvaluator = typename SplineInterpolatorType::EvaluatorType;
 
     using base_type = IPoissonSolver<
-            typename SplineEvaluator::evaluation_domain_type,
+            typename InterpolationEvaluatorTraits<
+                    typename SplineInterpolatorType::EvaluatorType>::evaluation_idx_range_type,
             IdxRangeBatched,
             double,
             typename SplineEvaluator::memory_space,
@@ -46,9 +50,12 @@ private:
 
 private:
     /// The interpolation mesh type
-    using GridPDEDim = typename SplineBuilder::interpolation_discrete_dimension_type;
+    using GridPDEDim = typename InterpolationBuilderTraits<SplineBuilder>::interpolation_grid_type;
 
-    using InputBSplines = typename SplineBuilder::bsplines_type;
+    using InputBSplines = ddc::type_seq_element_t<
+            0,
+            ddc::to_type_seq_t<
+                    typename InterpolationBuilderTraits<SplineBuilder>::coeff_idx_range_type>>;
 
     using PDEDim = typename GridPDEDim::continuous_dimension_type;
 
@@ -240,7 +247,8 @@ public:
         IdxRangeBatchedFEMBSplines phi_coefs_idx_range(
                 idx_range_batch,
                 ddc::discrete_space<FEMBSplines>().full_domain());
-        BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
+        BatchedFEMBSplinesCoeffMem
+                phi_coefs_alloc("phi_coefs (FEM1DPoissonSolver::operator())", phi_coefs_idx_range);
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
@@ -267,7 +275,8 @@ public:
         IdxRangeBatchedFEMBSplines phi_coefs_idx_range(
                 idx_range_batch,
                 ddc::discrete_space<FEMBSplines>().full_domain());
-        BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
+        BatchedFEMBSplinesCoeffMem
+                phi_coefs_alloc("phi_coefs (FEM1DPoissonSolver::operator())", phi_coefs_idx_range);
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
@@ -410,7 +419,9 @@ public:
         IdxRangeBatchedBSplines rho_spline_coef_idx_range(
                 batch_idx_range_type(get_idx_range(rho)),
                 get_spline_idx_range(m_spline_builder));
-        RHSSplineCoeffMem rho_spline_coef_alloc(rho_spline_coef_idx_range);
+        RHSSplineCoeffMem rho_spline_coef_alloc(
+                "phi_coefs (FEM1DPoissonSolver::solve_matrix_system)",
+                rho_spline_coef_idx_range);
         RHSSplineCoeff rho_spline_coef(rho_spline_coef_alloc);
         m_spline_builder(rho_spline_coef, get_const_field(rho));
 
@@ -486,7 +497,6 @@ public:
             IdxFEMBSplines first_repeat_bspline(ddc::discrete_space<FEMBSplines>().nbasis());
             // Copy the first d coefficients into the last d coefficients
             // These coefficients refer to the same InputBSplines which cross the boundaries
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     exec_space(),
@@ -535,6 +545,7 @@ private:
         IdxRange<break_point_grid> break_point_idx_range
                 = ddc::discrete_space<InputBSplines>().break_point_domain();
         host_t<FieldMem<CoordPDEDim, IdxRange<break_point_grid>>> break_points_alloc(
+                "break_points (FEM1DPoissonSolver::build_matrix)",
                 break_point_idx_range);
         ddcHelper::dump_coordinates(
                 Kokkos::DefaultHostExecutionSpace(),

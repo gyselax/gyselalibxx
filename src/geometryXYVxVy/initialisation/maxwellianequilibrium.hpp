@@ -13,13 +13,13 @@
 class MaxwellianEquilibrium : public IEquilibrium
 {
     // equilibrium density of all kinetic species
-    host_t<DFieldMemSp> m_density_eq;
+    host_t<FieldMemSp<Real>> m_density_eq;
 
     // equilibrium temperature of all kinetic species
-    host_t<DFieldMemSp> m_temperature_eq;
+    host_t<FieldMemSp<Real>> m_temperature_eq;
 
     // equilibrium mean velocity of all kinetic species
-    host_t<DFieldMemSp> m_mean_velocity_eq;
+    host_t<FieldMemSp<Real>> m_mean_velocity_eq;
 
 public:
     /**
@@ -29,9 +29,9 @@ public:
      * @param[in] mean_velocity_eq The mean velocity of the Maxwellian
      */
     MaxwellianEquilibrium(
-            host_t<DFieldMemSp> density_eq,
-            host_t<DFieldMemSp> temperature_eq,
-            host_t<DFieldMemSp> mean_velocity_eq);
+            host_t<FieldMemSp<Real>> density_eq,
+            host_t<FieldMemSp<Real>> temperature_eq,
+            host_t<FieldMemSp<Real>> mean_velocity_eq);
 
     ~MaxwellianEquilibrium() override = default;
 
@@ -66,15 +66,15 @@ public:
      */
     static void compute_maxwellian(
             DFieldVxVy const fMaxwellian,
-            double const density,
-            double const temperature,
-            double const mean_velocity);
+            Real const density,
+            Real const temperature,
+            Real const mean_velocity);
 
     /**
      * @brief A method for accessing the m_density_eq member variable of the class.
      * @return A field containing the m_density_eq value. 
      */
-    host_t<ConstFieldSp<double>> density_eq() const
+    host_t<ConstFieldSp<Real>> density_eq() const
     {
         return get_const_field(m_density_eq);
     }
@@ -83,7 +83,7 @@ public:
      * @brief A method for accessing the m_temperature_eq member variable of the class.
      * @return A field containing the m_temperature_eq value. 
      */
-    host_t<ConstFieldSp<double>> temperature_eq() const
+    host_t<ConstFieldSp<Real>> temperature_eq() const
     {
         return get_const_field(m_temperature_eq);
     }
@@ -92,7 +92,7 @@ public:
      * @brief A method for accessing the m_mean_velocity_eq member variable of the class.
      * @return A field containing the m_velocity_eq value. 
      */
-    host_t<ConstFieldSp<double>> mean_velocity_eq() const
+    host_t<ConstFieldSp<Real>> mean_velocity_eq() const
     {
         return get_const_field(m_mean_velocity_eq);
     }

@@ -42,8 +42,8 @@ struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineVxClosure = ddc::SplineBuilderClosure::HERMITE;
 
 
 // Discrete dimensions
@@ -56,9 +56,9 @@ struct GridVx : UniformGridBase<Vx>
 
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
 
 using IdxRangeX = IdxRange<GridX>;
@@ -103,12 +103,10 @@ using FieldXVx = Field<ElementType, IdxRangeXVx>;
 // Operators
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
-        PERIODIC,
-        PERIODIC,
-        SplineXBoundary,
-        SplineXBoundary>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 
 class Spatial1DAdvectionTest : public ::testing::Test

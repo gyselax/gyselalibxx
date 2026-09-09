@@ -26,8 +26,10 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-using SplineInterpPointsX = ddc::
-        GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
+using SplineInterpPointsX = ddc::GrevilleInterpolationPoints<
+        BSplinesX,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
@@ -39,12 +41,10 @@ using IdxRangeX = IdxRange<GridX>;
 
 using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
-        ExtrapolationRule::NULL_VALUE,
-        ExtrapolationRule::NULL_VALUE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Null_Null,
+        SplineBoundaryClosure::Greville_Greville>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 

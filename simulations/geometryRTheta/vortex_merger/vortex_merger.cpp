@@ -19,8 +19,8 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
@@ -29,14 +29,13 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_foot_finder.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "quadrature.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_interpolator_2d.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vortex_merger_equilibrium.hpp"
@@ -44,13 +43,14 @@
 
 
 namespace {
+using DiscreteMappingBuilder
+        = DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound>;
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+        SplineInterpolatorRTheta,
+        typename DiscreteMappingBuilder::MappingType>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
 } // end namespace
@@ -95,27 +95,17 @@ int main(int argc, char** argv)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder const builder(grid);
+    SplineInterpolatorRTheta interpolator(grid);
+    SplineInterpolatorRThetaConst interpolator_const(grid);
+    SplineRThetaBuilder const& builder(interpolator.get_builder());
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
-            ddc::coordinate(mesh_r.front()));
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(
-            ddc::coordinate(mesh_r.back()));
-
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
     const LogicalToPhysicalMapping to_physical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+            interpolator_const);
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
@@ -127,23 +117,10 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
-    SplinePolarFootFinder find_feet(
-            grid,
-            time_stepper,
-            to_physical_mapping,
-            to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+    PolarFootFinder find_feet = make_polar_foot_finder<
+            FootFindingSpace::PHYSICAL,
+            AdvectionFieldSpace::
+                    PHYSICAL>(time_stepper, to_physical_mapping, grid, interpolator_const);
 
     BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
@@ -157,27 +134,16 @@ int main(int argc, char** argv)
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
-    Spline2DMem coeff_alpha_spline(idx_range_bsplinesRTheta);
-    Spline2DMem coeff_beta_spline(idx_range_bsplinesRTheta);
-
-    builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
-    builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
-
-    PoissonSolver poisson_solver(
-            get_const_field(coeff_alpha_spline),
-            get_const_field(coeff_beta_spline),
-            discrete_mapping,
-            spline_evaluator);
+    PoissonSolver poisson_solver(discrete_mapping, interpolator);
+    poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
     BslImplicitPredCorrRTheta predcorr_operator(
             to_physical_mapping,
-            to_physical_mapping,
             advection_operator,
             grid,
-            builder,
             poisson_solver,
-            spline_evaluator_extrapol);
+            interpolator_const);
 
 
 
@@ -233,8 +199,7 @@ int main(int argc, char** argv)
     double const phi_max(1.);
 
 
-    VortexMergerEquilibria
-            equilibrium(to_physical_mapping, grid, builder, spline_evaluator, poisson_solver);
+    VortexMergerEquilibria equilibrium(to_physical_mapping, grid, poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
     host_t<DFieldMemRTheta> rho_eq_alloc_host(grid);
     equilibrium.set_equilibrium(get_field(rho_eq_alloc_host), function, phi_max, tau);
@@ -260,8 +225,9 @@ int main(int argc, char** argv)
     DFieldMemRTheta rho_eq_alloc(grid);
     ddc::parallel_deepcopy(rho_alloc_host, rho_eq_alloc_host);
     builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
-    poisson_solver(poisson_rhs_eq, get_field(phi_eq_alloc));
+    PoissonLikeRHSFunction
+            poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), interpolator.get_evaluator());
+    poisson_solver(get_field(phi_eq_alloc), poisson_rhs_eq);
     ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
 

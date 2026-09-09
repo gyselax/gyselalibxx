@@ -82,7 +82,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
  * @return The equivalent coordinate inside the domain.
  */
 template <class IDim>
-constexpr std::enable_if_t<
+KOKKOS_INLINE_FUNCTION std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC,
         Coord<typename IDim::continuous_dimension_type>>
 restrict_to_idx_range(
@@ -92,22 +92,13 @@ restrict_to_idx_range(
     using Coord1D = Coord<typename IDim::continuous_dimension_type>;
     double const x_min = ddc::rmin(idx_range);
     double const length = total_interval_length(idx_range);
-    double const x_max = x_min + length;
 
     assert(length > 0);
     coord -= x_min;
-    if (fabs(coord) > 10 * length) {
-        double periodic_factor = 2 * M_PI / length;
-        double coord_2pi = double(coord) * periodic_factor;
-        coord_2pi = std::copysign(std::acos(std::cos(coord_2pi)), std::sin(coord_2pi));
-        coord = coord_2pi < 0 ? Coord1D((coord_2pi + 2 * M_PI) / periodic_factor)
-                              : Coord1D((coord_2pi) / periodic_factor);
-    }
+    coord = Coord1D(Kokkos::fmod((double)coord, length));
     coord += x_min;
-    while (coord < x_min)
+    if (coord < x_min)
         coord += length;
-    while (coord >= x_max)
-        coord -= length;
     return coord;
 }
 
@@ -345,4 +336,7 @@ using type_seq_intersection_t =
 /// Get a coordinate from a TypeSeq
 template <class ValidIndexSet>
 using to_coord_t = typename detail::ToCoord<ValidIndexSet>::type;
+
+template <class T>
+bool constexpr is_coordinate_v = ddc::detail::is_tagged_vector_v<T>;
 } // namespace ddcHelper
