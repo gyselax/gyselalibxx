@@ -551,7 +551,7 @@ public:
  * @brief An owning interpolation object that bundles a 3D spline builder and evaluator.
  *
  * SplineInterpolator3D constructs and owns a matching ddc::SplineBuilder3D and
- * ddc::SplineEvaluator3D for two given dimensions. It is the recommended way to
+ * ddc::SplineEvaluator3D for three given dimensions. It is the recommended way to
  * create a 3D spline interpolation for use with advection operators and similar
  * algorithms.
  *
@@ -563,10 +563,10 @@ public:
  * @tparam ExecSpace      The Kokkos execution space used for computations.
  * @tparam Basis1         The B-spline basis type for the first dimension (uniform or non-uniform).
  * @tparam Basis2         The B-spline basis type for the second dimension (uniform or non-uniform).
- * @tparam Basis3         The B-spline basis type for the second dimension (uniform or non-uniform).
+ * @tparam Basis3         The B-spline basis type for the third dimension (uniform or non-uniform).
  * @tparam InterpGrid1    The discrete grid on which function values are provided along the first dimension.
  * @tparam InterpGrid2    The discrete grid on which function values are provided along the second dimension.
- * @tparam InterpGrid3    The discrete grid on which function values are provided along the second dimension.
+ * @tparam InterpGrid3    The discrete grid on which function values are provided along the third dimension.
  * @tparam MinExtrapRule1 The extrapolation rule applied below the lower boundary of the
  *                        first dimension. This may be one of the tags in the
  *                        ExtrapolationRule namespace (e.g. ExtrapolationRule::Periodic)
@@ -585,8 +585,8 @@ public:
  * @tparam MaxBound1      The ddc::SplineBuilderClosure at the upper boundary of the first dimension.
  * @tparam MinBound2      The ddc::SplineBuilderClosure at the lower boundary of the second dimension.
  * @tparam MaxBound2      The ddc::SplineBuilderClosure at the upper boundary of the second dimension.
- * @tparam MinBound3      The ddc::SplineBuilderClosure at the lower boundary of the second dimension.
- * @tparam MaxBound3      The ddc::SplineBuilderClosure at the upper boundary of the second dimension.
+ * @tparam MinBound3      The ddc::SplineBuilderClosure at the lower boundary of the third dimension.
+ * @tparam MaxBound3      The ddc::SplineBuilderClosure at the upper boundary of the third dimension.
  * @tparam Solver         The spline solver backend (default: LAPACK).
  */
 template <
@@ -753,7 +753,7 @@ public:
      *
      * The extrapolation rules are initialised from the discrete spaces of Basis1, Basis2 and
      * Basis3, so the corresponding ddc discrete spaces must be initialised before
-     * construction. This overload is only available when all four extrapolation rules
+     * construction. This overload is only available when all six extrapolation rules
      * can be built automatically (they are default-constructible, or the tag
      * ExtrapolationRule::Constant is used) - otherwise use the overload that takes the
      * extrapolation rules explicitly.
@@ -811,9 +811,9 @@ public:
      * @param max_extrapolation_rule2 The extrapolation rule to use above the upper
      *                                boundary of the second dimension.
      * @param min_extrapolation_rule3 The extrapolation rule to use below the lower
-     *                                boundary of the second dimension.
+     *                                boundary of the third dimension.
      * @param max_extrapolation_rule3 The extrapolation rule to use above the upper
-     *                                boundary of the second dimension.
+     *                                boundary of the third dimension.
      */
     explicit SplineInterpolator3D(
             IdxRange<InterpGrid1, InterpGrid2> idx_range,
