@@ -57,8 +57,8 @@ using IdxRangeBatchX = IdxRange<GridBatch, GridX>;
 
 using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRangeX,
         ExtrapolationRule::Periodic,
         SplineBoundaryClosure::Periodic>;
 

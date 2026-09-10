@@ -5,6 +5,10 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "indexed_tensor.hpp"
+#include "lagrange_basis_non_uniform.hpp"
+#include "lagrange_evaluator.hpp"
+#include "nd_lagrange_evaluator.hpp"
+#include "spline_interpolation.hpp"
 #include "tensor.hpp"
 
 struct X
@@ -149,6 +153,13 @@ struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
 {
 };
 
+struct LagBasisR : NonUniformLagrangeBasis<R, BSDegree>
+{
+};
+struct LagBasisTheta : NonUniformLagrangeBasis<Theta, BSDegree>
+{
+};
+
 using InterpPointsR = ddc::GrevilleInterpolationPoints<
         BSplinesR,
         ddc::SplineBuilderClosure::GREVILLE,
@@ -178,37 +189,49 @@ struct GridZ : UniformGridBase<Z>
 };
 
 template <class ExecSpace>
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineInterpolatorRTheta = SplineInterpolator<
         ExecSpace,
-        typename ExecSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineSolver::LAPACK>;
-using SplineRThetaBuilder_host = SplineRThetaBuilder<Kokkos::DefaultHostExecutionSpace>;
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRange<GridR, GridTheta>,
+        ExtrapolationRule::Null_Null, // radial extrapolation
+        ExtrapolationRule::Periodic, // poloidal extrapolation
+        SplineBoundaryClosure::Greville_Greville, // radial closure condition
+        SplineBoundaryClosure::Periodic>;
+using SplineInterpolatorRTheta_host = SplineInterpolatorRTheta<Kokkos::DefaultHostExecutionSpace>;
 
 template <class ExecSpace>
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        ExecSpace,
-        typename ExecSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+using SplineRThetaEvaluator = SplineInterpolatorRTheta<ExecSpace>::EvaluatorType;
 using SplineRThetaEvaluator_host = SplineRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
+
+
+template <class ExecSpace>
+using LagrangeRThetaEvaluator = NDLagrangeEvaluator<
+        LagrangeEvaluator<
+                ExecSpace,
+                typename ExecSpace::memory_space,
+                double,
+                LagBasisR,
+                GridR,
+                ddc::NullExtrapolationRule,
+                ddc::NullExtrapolationRule>,
+        LagrangeEvaluator<
+                ExecSpace,
+                typename ExecSpace::memory_space,
+                double,
+                LagBasisTheta,
+                GridTheta,
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
+using LagrangeRThetaEvaluator_host = LagrangeRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
 
 using IdxRangeBSR = IdxRange<BSplinesR>;
 using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
 using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
+
+using IdxRangeLagR = IdxRange<NonUniformLagrangeKnots<LagBasisR>>;
+using IdxRangeLagTheta = IdxRange<NonUniformLagrangeKnots<LagBasisTheta>>;
+using IdxRangeLagRTheta
+        = IdxRange<NonUniformLagrangeKnots<LagBasisR>, NonUniformLagrangeKnots<LagBasisTheta>>;
 
 using IdxRangeRho = IdxRange<GridRho>;
 using IdxRangeR = IdxRange<GridR>;
@@ -220,6 +243,11 @@ using IdxRangeRhoThetaPhi = IdxRange<GridRho, GridTheta, GridPhi>;
 using IdxRangeRZZeta = IdxRange<GridR, GridZ, GridZeta>;
 using IdxRangeRhoThetaPhi = IdxRange<GridRho, GridTheta, GridPhi>;
 
+using IdxLagR = Idx<NonUniformLagrangeKnots<LagBasisR>>;
+using IdxLagTheta = Idx<NonUniformLagrangeKnots<LagBasisTheta>>;
+using IdxLagRTheta
+        = Idx<NonUniformLagrangeKnots<LagBasisR>, NonUniformLagrangeKnots<LagBasisTheta>>;
+
 using IdxRho = Idx<GridRho>;
 using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
@@ -228,6 +256,11 @@ using IdxRTheta = Idx<GridR, GridTheta>;
 using IdxRThetaPhi = Idx<GridR, GridTheta, GridPhi>;
 using IdxRZZeta = Idx<GridR, GridZ, GridZeta>;
 using IdxRhoThetaPhi = Idx<GridRho, GridTheta, GridPhi>;
+
+using IdxStepLagR = IdxStep<NonUniformLagrangeKnots<LagBasisR>>;
+using IdxStepLagTheta = IdxStep<NonUniformLagrangeKnots<LagBasisTheta>>;
+using IdxStepLagRTheta
+        = IdxStep<NonUniformLagrangeKnots<LagBasisR>, NonUniformLagrangeKnots<LagBasisTheta>>;
 
 using IdxStepRho = IdxStep<GridRho>;
 using IdxStepR = IdxStep<GridR>;

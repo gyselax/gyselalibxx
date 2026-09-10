@@ -102,8 +102,8 @@ using DFieldXVx = FieldXVx<double>;
 // Operators
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
         ExtrapolationRule::Periodic,
         SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 

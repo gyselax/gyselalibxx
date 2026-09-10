@@ -59,8 +59,8 @@ using FieldX = Field<ElementType, IdxRangeX>;
 // Operators
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
         ExtrapolationRule::Periodic,
         SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
@@ -75,16 +75,17 @@ struct LagBasisFloatX : UniformLagrangeBasis<X, 3, float>
 
 using LagrangeInterpolatorX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagBasisX,
-        GridX,
+        double,
+        IdxRange<LagBasisX>,
+        IdxRange<GridX>,
         ExtrapolationRule::Periodic>;
 
 using LagrangeInterpolatorFloatX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagBasisFloatX,
-        GridX,
-        ExtrapolationRule::Periodic,
-        float>;
+        float,
+        IdxRange<LagBasisFloatX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic>;
 
 
 template <class DataType>

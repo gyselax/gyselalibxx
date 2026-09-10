@@ -11,6 +11,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add `-ffast-math` flag to toolchains.
+
+### Fixed
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+## [v0.8.0] - 2026-09-09
+
+### Added
+
 - Add an `extrapolation_rule` argument to `GMGPolarPoissonLikeSolver`. Default no extrapolation.
 - Add a new constructor for `GaussLegendre` from an index range describing the cell edges.
 - Add a `GradientCreator` operator to group derivative calculations.
@@ -39,7 +53,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add class `GMGPolarPoissonLikeSolver` to allow the use of [GMGPolar](https://github.com/SciCompMod/GMGPolar) as a polar Poisson solver.
 - Add GMGPolar in the toolchains.
 - Allow `SplineInterpolator` and `LagrangeInterpolator` to specify custom extrapolation rules.
-- Made the type `IdxRangeRTheta` in class `DiscretePoloidalCSSplineMapping` public.
+- Allow `IdentityInterpolationBuilder` class to take a field on a strided layout.
+- Add a `DiscreteMapping` class to handle ND mappings whose values are only known at the mesh points of a grid.
+- Add a `CoordWithOPoint` class to recognise radial and poloidal components of a 2D coordinate.
+- Add MI300 toolchain for Adastra.
+- Add CMake installation commands and call the package `gyselalibxx`.
 
 ### Fixed
 
@@ -56,6 +74,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix use of `BslAdvectionSpatial` and `BslAdvectionVelocity` with non-double precision.
 - Fix H100 toolchain on Jean-Zay.
 - Fix Lagrange basis non-uniform initialisation for a sub-domain.
+- Fix use of `ExtrapolationRule::Constant` for 2D splines.
+- Fix use of a generic interpolator in `FEM1DPoissonSolver`, `PolarFootFinder` and `BslAdvectionPolar`.
+- Fix use of polar advection with `DiscreteMapping` class.
 
 ### Changed
 
@@ -96,7 +117,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Make the dependency on GoogleTest dependent on the CMake option `GYSELALIBXX_BUILD_TESTING`.
 - Group extrapolation rules by dimension in `SplineInterpolator` and `LagrangeInterpolator`.
 - Group spline boundary closure rules by dimension in `SplineInterpolator`.
-- Add `-ffast-math` flag to toolchains.
+- Change the `LagrangeInterpolator` templates to allow ND cases to be handled.
+- Change the `SplineInterpolator` templates to allow 2D cases to be handled.
+- Setup `GMGPolar` in `GMGPolarPoissonLikeSolver::update_coefficients` instead of `GMGPolarPoissonLikeSolver::operator()`.
+- Use `Interpolator` concept instead of `Builder` and `Evaluator` classes to simplify classes:
+  - `PolarFootFinder`
+  - `DiscretePoloidalCSSplineMappingBuilder`
+  - `RefinedDiscretePoloidalCSSplineMappingBuilder`
+  - `BslPredCorrRTheta`
+  - `BslExplicitPredCorrRTheta`
+  - `BslImplicitPredCorrRTheta`
+  - `PolarSplineFEMPoissonLikeSolver`
+  - `GMGPolarPoissonLikeSolver`
+- The CMake namespace `gslx` has been renamed `gyselalibxx`.
 
 ### Deprecated
 
@@ -115,6 +148,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove unuseful defaulted template parameters `MinBound` and `MaxBound` from `LagrangeInterpolator`.
 - Remove unused superclass `IPolarFootFinder`.
 - Remove BslAdvectionPolar::operator() taking `advection_field_xy_centre`.
+- Remove `cartesian_tag_*` aliases in mappings.
+- Remove `cylindrical_tag_*` and `toroidal_tag_*` aliases in `ToroidalToCylindrical`.
+- Remove `LAPACK` dependency (`LAPACKE` remains).
 
 ## [v0.7.0] - 2026-03-18
 

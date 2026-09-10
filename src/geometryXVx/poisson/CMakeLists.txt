@@ -8,22 +8,33 @@ add_library("poisson_${GEOMETRY_VARIANT}" STATIC
     qnsolver.cpp
 )
 
-target_include_directories("poisson_${GEOMETRY_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("poisson_${GEOMETRY_VARIANT}" PUBLIC cxx_std_20)
+
+target_sources("poisson_${GEOMETRY_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                chargedensitycalculator.hpp
+                ichargedensitycalculator.hpp
+                iqnsolver.hpp
+                nullqnsolver.hpp
+                qnsolver.hpp
 )
 
 target_link_libraries("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
         DDC::fft
-        gslx::geometry_${GEOMETRY_VARIANT}
-        gslx::pde_solvers
-        gslx::quadrature
-        gslx::speciesinfo
-        gslx::utils
+        gyselalibxx::geometry_${GEOMETRY_VARIANT}
+        gyselalibxx::pde_solvers
+        gyselalibxx::quadrature
+        gyselalibxx::speciesinfo
+        gyselalibxx::utils
 
 )
 
-add_library("gslx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT}")
+add_library("gyselalibxx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT}")
+
+install(TARGETS poisson_${GEOMETRY_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/poisson)
 
 endforeach()

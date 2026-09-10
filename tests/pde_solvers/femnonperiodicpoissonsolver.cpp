@@ -41,8 +41,8 @@ using IdxRangeX = IdxRange<GridX>;
 
 using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
         ExtrapolationRule::Null_Null,
         SplineBoundaryClosure::Greville_Greville>;
 
