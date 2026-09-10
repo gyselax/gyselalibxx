@@ -11,6 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Fixed
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+## [v0.8.0] - 2026-09-09
+
+### Added
+
 - Add an `extrapolation_rule` argument to `GMGPolarPoissonLikeSolver`. Default no extrapolation.
 - Add a new constructor for `GaussLegendre` from an index range describing the cell edges.
 - Add a `GradientCreator` operator to group derivative calculations.
