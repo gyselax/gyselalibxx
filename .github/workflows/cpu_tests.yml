@@ -146,6 +146,22 @@ jobs:
         uses: ./.github/actions/build_code
         with:
           toolchain: toolchains/common_toolchains/${{ matrix.toolchain }}.cmake
+      - name: Check header file counts
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        run: |
+          cmake --install build --prefix opt
+          install_tree_count=$(find opt -name "*.hpp" | wc -l)
+          src_tree_count=$(find src -name "*.hpp" | wc -l)
+
+          echo "opt: $install_tree_count"
+          echo "src: $src_tree_count"
+
+          if [ "$install_tree_count" -ne "$src_tree_count" ]; then
+            echo "::error::Header file counts differ: opt=$install_tree_count, src=$src_tree_count"
+            exit 1
+          fi
+
+          echo "Header file counts match."
       - name: Run tests
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
