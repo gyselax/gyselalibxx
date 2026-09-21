@@ -342,10 +342,7 @@ struct RevPatch3
 struct ChangeBound1
 {
     using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using WestInterface3 = Interface<OutsideEdge, WestEdge<3>, true>;
-
     using EastInterface1 = Interface<OutsideEdge, EastEdge<1>, true>;
-    using EastInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using Interface_1_2 = Interface<SouthEdge<1>, WestEdge<2>, true>;
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
@@ -372,6 +369,9 @@ struct ChangeBound1
 
 struct ChangeBound3
 {
+    using EastInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
+    using WestInterface3 = Interface<OutsideEdge, WestEdge<3>, true>;
+
     using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
     using Interface_2_3 = Interface<EastEdge<2>, SouthEdge<3>, false>;
 
@@ -685,6 +685,7 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
     Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_min_max(idx_dxg_min, idx_dyg_max);
     Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_max_max(idx_dxg_max, idx_dyg_max);
 
+    // Test function: f(x, y) = sin(a*x + b) * sin(y)
     double const coef_a = 2. / 3 * M_PI;
     double const coef_b = 0.25;
 
