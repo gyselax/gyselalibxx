@@ -164,16 +164,11 @@ using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
 using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
 using SouthInterface3 = Interface<OutsideEdge, SouthEdge<3>, true>;
 
-using EastInterface1 = Interface<OutsideEdge, EastEdge<1>, true>;
-using EastInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
-
-using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-using WestInterface3 = Interface<OutsideEdge, WestEdge<3>, true>;
-
 using AllGrids = ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>, GridY<1>, GridY<2>, GridY<3>>;
 using AllBSpls = ddc::detail::
         TypeSeq<BSplinesX<1>, BSplinesX<2>, BSplinesX<3>, BSplinesY<1>, BSplinesY<2>, BSplinesY<3>>;
 
+// Coordinate transformation for local (X,Y) matching with global (X,Y).
 template <int I>
 struct MatchingBoundPatchTransform
 {
@@ -196,6 +191,7 @@ struct MatchingBoundPatchTransform
     }
 };
 
+// Coordinate transformation for local (X,Y) and global (X,Y) in the same direction.
 template <int I>
 struct AlignedPatchTransform : public MatchingBoundPatchTransform<I>
 {
@@ -207,6 +203,7 @@ struct AlignedPatchTransform : public MatchingBoundPatchTransform<I>
     }
 };
 
+// Coordinate transformation for local (X,Y) and global (X,Y) with a rotation of 180°.
 template <int I>
 struct ReversePatchTransform : public MatchingBoundPatchTransform<I>
 {
@@ -218,6 +215,7 @@ struct ReversePatchTransform : public MatchingBoundPatchTransform<I>
     }
 };
 
+// Coordinate transformation for local (X,Y) not matching with global (X,Y).
 template <int I>
 struct ChangeBoundPatchTransform
 {
@@ -246,6 +244,7 @@ struct ChangeBoundPatchTransform
     }
 };
 
+// Coordinate transformation for local (X,Y) and global (X,Y) with a rotation of +90°.
 struct ChangeBound1Transform : ChangeBoundPatchTransform<1>
 {
     ChangeBound1Transform(Coord<Xg> left, Coord<Xg> right, Coord<Yg> bottom, Coord<Yg> top)
@@ -254,6 +253,7 @@ struct ChangeBound1Transform : ChangeBoundPatchTransform<1>
     }
 };
 
+// Coordinate transformation for local (X,Y) and global (X,Y) with a rotation of -90°.
 struct ChangeBound3Transform : ChangeBoundPatchTransform<3>
 {
     ChangeBound3Transform(Coord<Xg> left, Coord<Xg> right, Coord<Yg> bottom, Coord<Yg> top)
@@ -341,6 +341,12 @@ struct RevPatch3
 
 struct ChangeBound1
 {
+    using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
+    using WestInterface3 = Interface<OutsideEdge, WestEdge<3>, true>;
+
+    using EastInterface1 = Interface<OutsideEdge, EastEdge<1>, true>;
+    using EastInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
+
     using Interface_1_2 = Interface<SouthEdge<1>, WestEdge<2>, true>;
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 
