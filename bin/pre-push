@@ -33,8 +33,7 @@ then
   fi
   ${CLANG_FORMAT} ${CHANGED_CPP_FILES} --dry-run --Werror
   
-  # FAILURE=$?
-  FAILURE=0
+  FAILURE=$?
   
   if [ ${FAILURE} -ne 0 ]
   then
