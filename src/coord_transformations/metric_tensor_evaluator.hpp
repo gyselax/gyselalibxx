@@ -63,6 +63,11 @@ public:
      * @f$ G = (J_{\mathcal{F}})^T J_{\mathcal{F}} @f$.
      * with @f$ J_{\mathcal{F}} @f$ the Jacobian matrix.
      *
+     * If the mapping provides a specialised expression for the metric tensor (see
+     * concepts::MappingWithMetricTensor) then this is used instead of calculating the
+     * metric tensor from the Jacobian matrix. This avoids unnecessary calculations for
+     * mappings whose metric tensor has a simple analytical expression.
+     *
      * @param[in] coord
      * 				The coordinate where we evaluate the metric tensor.
      * @return metric_tensor
@@ -70,12 +75,20 @@ public:
      */
     KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> operator()(CoordArg const& coord) const
     {
-        Tensor J = m_mapping.jacobian_matrix(coord);
-        return tensor_mul(index<'j', 'i'>(J), index<'j', 'k'>(J));
+        if constexpr (has_metric_tensor_v<Mapping>) {
+            return m_mapping.metric_tensor(coord);
+        } else {
+            Tensor J = m_mapping.jacobian_matrix(coord);
+            return tensor_mul(index<'j', 'i'>(J), index<'j', 'k'>(J));
+        }
     }
 
     /**
      * @brief Compute the inverse metric tensor associated with the mapping at a given position in space.
+     *
+     * If the mapping provides a specialised expression for the inverse metric tensor (see
+     * concepts::MappingWithMetricTensor) then this is used instead of calculating the inverse
+     * metric tensor from the inverse Jacobian matrix.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the metric tensor.
@@ -84,9 +97,13 @@ public:
      */
     KOKKOS_FUNCTION DTensor<Dims, Dims> inverse(CoordArg const& coord) const
     {
-        InverseJacobianMatrix get_inverse_jacobian(m_mapping);
-        Tensor inv_J = get_inverse_jacobian(coord);
-        return tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
+        if constexpr (has_metric_tensor_v<Mapping>) {
+            return m_mapping.inv_metric_tensor(coord);
+        } else {
+            InverseJacobianMatrix get_inverse_jacobian(m_mapping);
+            Tensor inv_J = get_inverse_jacobian(coord);
+            return tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
+        }
     }
 };
 
