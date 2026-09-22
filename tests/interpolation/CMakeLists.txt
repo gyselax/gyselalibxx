@@ -112,3 +112,32 @@ target_link_libraries(spline_interpolation_tests
 
 gtest_discover_tests(spline_interpolation_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 
+# MPISplineBuilderLocalCrouseilles needs multiple MPI ranks, so (unlike the executables above)
+# it is not registered with gtest_discover_tests but with individual mpirun-wrapped ctest
+# entries, following the pattern in tests/mpi_parallelisation/CMakeLists.txt.
+add_executable(mpi_spline_builder_local_crouseilles_tests
+    mpi_spline_builder_local_crouseilles.cpp
+)
+target_link_libraries(mpi_spline_builder_local_crouseilles_tests
+    PUBLIC
+        DDC::core
+        GTest::gtest
+        GTest::gmock
+        gyselalibxx::interpolation
+        gyselalibxx::mpi_parallelisation
+)
+
+function(make_mpi_spline_builder_local_crouseilles_test test_name)
+    add_test(NAME ${test_name}
+        COMMAND
+        "${MPIEXEC_EXECUTABLE}"
+        "-n"
+        "2"
+        "$<TARGET_FILE:mpi_spline_builder_local_crouseilles_tests>"
+        "--gtest_filter=${test_name}"
+    )
+endfunction()
+
+make_mpi_spline_builder_local_crouseilles_test(MPISplineBuilderLocalCrouseilles.ReproducesLinearFunction)
+make_mpi_spline_builder_local_crouseilles_test(MPISplineBuilderLocalCrouseilles.ConvergesForCosine)
+

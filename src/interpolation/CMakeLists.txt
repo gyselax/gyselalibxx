@@ -18,6 +18,7 @@ target_sources("interpolation"
                 lagrange_basis_uniform.hpp
                 lagrange_evaluator.hpp
                 lagrange_interpolation.hpp
+                mpi_spline_builder_local_crouseilles.hpp
                 nd_identity_interpolation_builder.hpp
                 nd_lagrange_evaluator.hpp
                 spline_interpolation.hpp
@@ -28,6 +29,7 @@ target_link_libraries("interpolation"
     INTERFACE
         DDC::core
         gyselalibxx::math_tools
+        gyselalibxx::mpi_parallelisation
         gyselalibxx::utils
 )
 
