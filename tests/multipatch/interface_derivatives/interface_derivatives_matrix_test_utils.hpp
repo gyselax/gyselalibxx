@@ -425,13 +425,13 @@ void check_xy_derivatives(
             = get_cross_derivatives<
                     Patch>(idx_range, evaluator_g, function_g_coef, coord_transform);
 
-    // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
+    // For Patches in PatchSeqMin, we defined ddc::SplineBuilderClosure::GREVILLE the local lower Y-boundary,
     // we don't need the cross-derivatives for y = ymin. Their value is not checked.
     if constexpr (!ddc::in_tags_v<Patch, PatchSeqMin>) {
         EXPECT_NEAR(function_and_derivs(idx_dx_dy, idx_xmin, idx_ymin), global_deriv_min_min, TOL);
         EXPECT_NEAR(function_and_derivs(idx_dx_dy, idx_xmax, idx_ymin), global_deriv_max_min, TOL);
     }
-    // For Patches in PatchSeqMax, we defined ddc::BoundCond::GREVILLE the local upper Y-boundary,
+    // For Patches in PatchSeqMax, we defined ddc::SplineBuilderClosure::GREVILLE the local upper Y-boundary,
     // we don't need the cross-derivatives for y = ymax. Their value is not checked.
     if constexpr (!ddc::in_tags_v<Patch, PatchSeqMax>) {
         EXPECT_NEAR(function_and_derivs(idx_dx_dy, idx_xmin, idx_ymax), global_deriv_min_max, TOL);
@@ -498,17 +498,17 @@ void check_spline_representation_agreement(
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    const ddc::BoundCond BoundCondXmin = ddc::BoundCond::HERMITE;
-    const ddc::BoundCond BoundCondXmax = ddc::BoundCond::HERMITE;
+    const ddc::SplineBuilderClosure SplineBuilderClosureXmin = ddc::SplineBuilderClosure::HERMITE;
+    const ddc::SplineBuilderClosure SplineBuilderClosureXmax = ddc::SplineBuilderClosure::HERMITE;
 
     // For Patches in PatchSeqMin, the local lower Y-boundary is with the outside.
-    const ddc::BoundCond BoundCondYmin = ddc::in_tags_v<Patch, PatchSeqMin>
-                                                 ? ddc::BoundCond::GREVILLE
-                                                 : ddc::BoundCond::HERMITE;
+    const ddc::SplineBuilderClosure SplineBuilderClosureYmin = ddc::in_tags_v<Patch, PatchSeqMin>
+                                                 ? ddc::SplineBuilderClosure::GREVILLE
+                                                 : ddc::SplineBuilderClosure::HERMITE;
     // For Patches in PatchSeqMax, the local upper Y-boundary is with the outside.
-    const ddc::BoundCond BoundCondYmax = ddc::in_tags_v<Patch, PatchSeqMax>
-                                                 ? ddc::BoundCond::GREVILLE
-                                                 : ddc::BoundCond::HERMITE;
+    const ddc::SplineBuilderClosure SplineBuilderClosureYmax = ddc::in_tags_v<Patch, PatchSeqMax>
+                                                 ? ddc::SplineBuilderClosure::GREVILLE
+                                                 : ddc::SplineBuilderClosure::HERMITE;
 
     IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function_and_derivs);
 
@@ -520,23 +520,23 @@ void check_spline_representation_agreement(
             typename Patch::BSplines2,
             typename Patch::Grid1,
             typename Patch::Grid2,
-            BoundCondXmin,
-            BoundCondXmax,
-            BoundCondYmin,
-            BoundCondYmax,
+            SplineBuilderClosureXmin,
+            SplineBuilderClosureXmax,
+            SplineBuilderClosureYmin,
+            SplineBuilderClosureYmax,
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    SplineBuliderDerivField2D<
+    SplineBuilderDerivField2D<
             HostExecSpace,
             typename Patch::BSplines1,
             typename Patch::BSplines2,
             typename Patch::Grid1,
             typename Patch::Grid2,
-            BoundCondXmin,
-            BoundCondXmax,
-            BoundCondYmin,
-            BoundCondYmax>
+            SplineBuilderClosureXmin,
+            SplineBuilderClosureXmax,
+            SplineBuilderClosureYmin,
+            SplineBuilderClosureYmax>
             apply_builder(builder);
 
     SplineCoeffMemOnPatch_2D_host<Patch> function_coef_alloc(

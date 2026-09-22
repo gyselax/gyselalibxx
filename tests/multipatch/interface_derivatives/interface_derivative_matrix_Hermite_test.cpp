@@ -49,9 +49,9 @@
 
         with the global X dimension with Hermite boundary conditions 
         and the global Y spline with additional points as closure condition 
-        (ddc::BoundCond::GREVILLE).
+        (ddc::SplineBuilderClosure::GREVILLE).
 
-    > test ddc::BoundCond::HERMITE boundary conditions. 
+    > test ddc::SplineBuilderClosure::HERMITE boundary conditions. 
     > test application on the X direction. 
     > test application to compute first derivatives and cross-derivatives. 
     > test on a non-uniform patches. 
@@ -103,20 +103,20 @@ using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
 template <std::size_t PatchIdx>
 using SplineInterpPointsX = ddcHelper::NonUniformInterpolationPoints<
         BSplinesX<PatchIdx>,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE>;
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
 
 template <std::size_t PatchIdx>
 using SplineInterpPointsY = ddcHelper::NonUniformInterpolationPoints<
         BSplinesY<PatchIdx>,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE>;
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
 
 // Interpolation points type for the equivalent global spline.
 using SplineInterpPointsXg = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesXg, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
+        NonUniformInterpolationPoints<BSplinesXg, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE>;
 using SplineInterpPointsYg = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesYg, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
+        NonUniformInterpolationPoints<BSplinesYg, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE>;
 
 // Operators on the equivalent global spline.
 using SplineRThetagBuilder = ddc::SplineBuilder2D<
@@ -126,22 +126,22 @@ using SplineRThetagBuilder = ddc::SplineBuilder2D<
         BSplinesYg,
         GridXg,
         GridYg,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE,
         ddc::SplineSolver::LAPACK>;
 
-using SplineRThetagBuilderDerivField = SplineBuliderDerivField2D<
+using SplineRThetagBuilderDerivField = SplineBuilderDerivField2D<
         HostExecSpace,
         BSplinesXg,
         BSplinesYg,
         GridXg,
         GridYg,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE>;
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
 
 using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         HostExecSpace,

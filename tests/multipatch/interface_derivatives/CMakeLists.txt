@@ -56,10 +56,10 @@ PUBLIC
     GTest::gtest
     GTest::gmock
 
-    gslx::multipatch_geometries
-    gslx::multipatch_spline
-    gslx::multipatch_interface_derivatives
-    gslx::utils
+    gyselalibxx::multipatch_geometries
+    gyselalibxx::multipatch_spline
+    gyselalibxx::multipatch_interface_derivatives
+    gyselalibxx::utils
 )
 target_compile_definitions("${test_name_gtest}" PUBLIC -D${TEST_CASE})
 gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)

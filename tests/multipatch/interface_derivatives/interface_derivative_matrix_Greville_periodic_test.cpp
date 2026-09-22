@@ -34,10 +34,10 @@
         |  7  |  8  |  9  |  7 ... 
 
         with the global X dimension periodic and the global Y spline
-        with additional points as closure condition (ddc::BoundCond::GREVILLE).
+        with additional points as closure condition (ddc::SplineBuilderClosure::GREVILLE).
 
-    > test ddc::BoundCond::PERIODIC boundary conditions. 
-    > test ddc::BoundCond::GREVILLE boundary conditions. 
+    > test ddc::SplineBuilderClosure::PERIODIC boundary conditions. 
+    > test ddc::SplineBuilderClosure::GREVILLE boundary conditions. 
     > test application on the X and Y directions. 
     > test application to compute first derivatives and cross-derivatives. 
     > test on a non-uniform patches. 
@@ -84,22 +84,22 @@ using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
 template <std::size_t PatchIdx>
 using SplineInterpPointsX = ddcHelper::NonUniformInterpolationPoints<
         BSplinesX<PatchIdx>,
-        ddc::BoundCond::HERMITE,
-        ddc::BoundCond::HERMITE>;
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
 
-template <std::size_t PatchIdx, ddc::BoundCond BoundCondMin, ddc::BoundCond BoundCondMax>
+template <std::size_t PatchIdx, ddc::SplineBuilderClosure SplineBuilderClosureMin, ddc::SplineBuilderClosure SplineBuilderClosureMax>
 using SplineInterpPointsY
-        = ddcHelper::NonUniformInterpolationPoints<BSplinesY<PatchIdx>, BoundCondMin, BoundCondMax>;
+        = ddcHelper::NonUniformInterpolationPoints<BSplinesY<PatchIdx>, SplineBuilderClosureMin, SplineBuilderClosureMax>;
 
 // Interpolation points type for the equivalent global spline.
 using SplineInterpPointsXg = ddcHelper::NonUniformInterpolationPoints<
         BSplinesXg,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 using SplineInterpPointsYg = ddcHelper::NonUniformInterpolationPoints<
         BSplinesYg,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE>;
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 
 // Operators on the equivalent global spline.
 using SplineRThetagBuilder = ddc::SplineBuilder2D<
@@ -109,10 +109,10 @@ using SplineRThetagBuilder = ddc::SplineBuilder2D<
         BSplinesYg,
         GridXg,
         GridYg,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE,
         ddc::SplineSolver::LAPACK>;
 
 using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
@@ -187,8 +187,8 @@ struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
     static constexpr Coord<Yg> yg_min = convert_dim<Yg, Y<7>>(y7_min);
     static constexpr Coord<Yg> yg_max = convert_dim<Yg, Y<1>>(y1_max);
 
-    static constexpr ddc::BoundCond BcH = ddc::BoundCond::HERMITE;
-    static constexpr ddc::BoundCond BcG = ddc::BoundCond::GREVILLE;
+    static constexpr ddc::SplineBuilderClosure BcH = ddc::SplineBuilderClosure::HERMITE;
+    static constexpr ddc::SplineBuilderClosure BcG = ddc::SplineBuilderClosure::GREVILLE;
 
 protected:
     const IdxRange<GridX<1>> idx_range_x1;
