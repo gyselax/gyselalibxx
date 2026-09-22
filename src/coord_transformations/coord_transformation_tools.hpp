@@ -89,6 +89,51 @@ concept MappingWithInvJacobian
 };
 
 /**
+ * @brief A concept describing the type of the metric tensor of a coordinate transformation.
+ */
+template <typename T, typename CoordTransform>
+concept MetricTensorMatrix
+        = is_tensor_type_v<T> && std::is_floating_point_v<typename T::element_type> && std::same_as<
+                T,
+                Tensor<typename T::element_type,
+                       get_covariant_dims_t<ddc::to_type_seq_t<typename CoordTransform::CoordArg>>,
+                       get_covariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordArg>>>>;
+
+/**
+ * @brief A concept describing the type of the inverse of the metric tensor of a coordinate transformation.
+ */
+template <typename T, typename CoordTransform>
+concept InverseMetricTensorMatrix
+        = is_tensor_type_v<T> && std::is_floating_point_v<typename T::element_type> && std::same_as<
+                T,
+                Tensor<typename T::element_type,
+                       get_contravariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordArg>>,
+                       get_contravariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordArg>>>>;
+
+/**
+ * @brief A helper concept to determine if a type is a mapping with a specialised definition of
+ * the metric tensor and its inverse.
+ *
+ * Mappings which satisfy this concept provide explicit formulae for the metric tensor instead of
+ * relying on the generic calculation from the Jacobian matrix (@f$ G = J^T J @f$). This is useful
+ * to avoid unnecessary calculations for mappings whose metric tensor has a simple analytical
+ * expression (e.g. mappings which are locally orthogonal).
+ */
+template <typename T>
+concept MappingWithMetricTensor = Mapping<T> && requires(T const& t, typename T::CoordArg const& x)
+{
+    {
+        t.metric_tensor(x)
+        } -> MetricTensorMatrix<T>;
+    {
+        t.inv_metric_tensor(x)
+        } -> InverseMetricTensorMatrix<T>;
+};
+
+/**
  * @brief A helper concept to determine if a coordinate transformation provides a jacobian method that can be used for integration.
  */
 template <typename T, class IntegrationCoord>
@@ -158,6 +203,10 @@ concept has_jacobian_v = concepts::MappingWithJacobian<Mapping>;
 
 template <class Mapping>
 concept has_inv_jacobian_v = concepts::MappingWithInvJacobian<Mapping>;
+
+/// Indicates that a mapping provides a specialised expression for the metric tensor and its inverse.
+template <class Mapping>
+concept has_metric_tensor_v = concepts::MappingWithMetricTensor<Mapping>;
 
 /// Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point.
 template <class Mapping>
