@@ -57,13 +57,6 @@ int get_rank()
     return rank;
 }
 
-int get_comm_size()
-{
-    int comm_size;
-    MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
-    return comm_size;
-}
-
 } // namespace
 
 struct X
@@ -86,8 +79,8 @@ TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
             MemorySpace,
             BSplinesX,
             IdxRange<GridX>,
-            ddc::SplineBuilderClosure::PERIODIC,
-            ddc::SplineBuilderClosure::PERIODIC>;
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE>;
 
     double constexpr dx = 0.05;
     std::size_t constexpr n_cells = 20;
@@ -98,11 +91,22 @@ TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
     IdxRange<GridX> const idx_range_x
             = init_local_mesh<X, GridX, BSplinesX>(local_x_min, dx, n_cells);
 
+    IdxRange<BSplinesX> const coeff_idx_range(ddc::discrete_space<BSplinesX>().full_domain());
+    DFieldMem<IdxRange<BSplinesX>> coeffs_alloc(coeff_idx_range);
+    DField<IdxRange<BSplinesX>> coeffs(coeffs_alloc);
+
+    Builder builder(idx_range_x, MPI_COMM_WORLD);
+
     double constexpr slope = 1.3;
     double constexpr intercept = 0.7;
 
     DFieldMem<IdxRange<GridX>> vals_alloc(idx_range_x);
     DField<IdxRange<GridX>> vals(vals_alloc);
+
+    IdxRange<ddc::Deriv<X>> const deriv_idx_range(builder.batched_derivs_xmin_domain(idx_range_x));
+    DFieldMem<IdxRange<ddc::Deriv<X>>> derivs_alloc(deriv_idx_range);
+    DField<IdxRange<ddc::Deriv<X>>> derivs(derivs_alloc);
+
     ddc::parallel_for_each(
             ExecSpace(),
             idx_range_x,
@@ -110,13 +114,17 @@ TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
                 double const x = ddc::coordinate(idx);
                 vals(idx) = slope * x + intercept;
             });
+    Idx<ddc::Deriv<X>> first_deriv(1);
+    derivs(first_deriv) = slope;
 
-    IdxRange<BSplinesX> const coeff_idx_range(ddc::discrete_space<BSplinesX>().full_domain());
-    DFieldMem<IdxRange<BSplinesX>> coeffs_alloc(coeff_idx_range);
-    DField<IdxRange<BSplinesX>> coeffs(coeffs_alloc);
+    std::cout << "Ready to build" << std::endl;
 
-    Builder builder(idx_range_x, MPI_COMM_WORLD);
-    builder(coeffs, get_const_field(vals));
+    builder(coeffs,
+            get_const_field(vals),
+            std::optional(get_const_field(derivs)),
+            std::optional(get_const_field(derivs)));
+
+    std::cout << "Built" << std::endl;
 
     ddc::NullExtrapolationRule extrapolation;
     ddc::SplineEvaluator<
