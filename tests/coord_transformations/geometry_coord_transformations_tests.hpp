@@ -149,12 +149,14 @@ struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
 {
 };
 
-using InterpPointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
+using InterpPointsR = ddc::GrevilleInterpolationPoints<
+        BSplinesR,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
         BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 struct GridR : InterpPointsR::interpolation_discrete_dimension_type
 {
@@ -183,10 +185,10 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         BSplinesTheta,
         GridR,
         GridTheta,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineSolver::LAPACK>;
 using SplineRThetaBuilder_host = SplineRThetaBuilder<Kokkos::DefaultHostExecutionSpace>;
 

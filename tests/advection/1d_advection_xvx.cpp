@@ -43,8 +43,8 @@ struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineVxClosure = ddc::SplineBuilderClosure::HERMITE;
 
 
 // Discrete dimension
@@ -57,9 +57,9 @@ struct GridVx : UniformGridBase<Vx>
 
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
 
 using IdxRangeX = IdxRange<GridX>;
@@ -106,8 +106,8 @@ using SplineInterpolatorX = SplineInterpolator<
         GridX,
         PERIODIC,
         PERIODIC,
-        SplineXBoundary,
-        SplineXBoundary>;
+        SplineXClosure,
+        SplineXClosure>;
 
 
 class XVxAdvection1DTest : public ::testing::Test

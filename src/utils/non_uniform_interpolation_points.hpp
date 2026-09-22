@@ -12,7 +12,7 @@
 
 namespace ddcHelper {
 
-template <class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax>
+template <class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax>
 class NonUniformInterpolationPoints;
 
 template <class T>
@@ -20,7 +20,7 @@ struct is_non_uniform_interpolation_points : std::false_type
 {
 };
 
-template <class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax>
+template <class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax>
 struct is_non_uniform_interpolation_points<NonUniformInterpolationPoints<BSplines, BcXmin, BcXmax>>
     : std::true_type
 {
@@ -39,7 +39,7 @@ inline constexpr bool is_non_uniform_interpolation_points_v
  * boundary conditions, the second and second to last interpolation points 
  * should be the Greville points. 
  */
-template <class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax>
+template <class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax>
 class NonUniformInterpolationPoints
 {
     using Dim = typename BSplines::continuous_dimension_type;

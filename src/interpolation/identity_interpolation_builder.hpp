@@ -123,7 +123,7 @@ public:
     /**
      * @brief Get the whole domain on which derivatives on lower boundary are defined.
      *
-     * This is only used with BoundCond::HERMITE boundary conditions.
+     * This is only used with SplineBuilderClosure::HERMITE boundary conditions.
      *
      * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
      *
@@ -141,7 +141,7 @@ public:
     /**
      * @brief Get the whole domain on which derivatives on upper boundary are defined.
      *
-     * This is only used with BoundCond::HERMITE boundary conditions.
+     * This is only used with SplineBuilderClosure::HERMITE boundary conditions.
      *
      * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
      *

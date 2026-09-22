@@ -79,12 +79,12 @@ public:
 
     using InterpPointsR = ddc::GrevilleInterpolationPoints<
             BSplinesR,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE>;
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE>;
     using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
             BSplinesTheta,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC>;
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC>;
 
 
     struct GridR : InterpPointsR::interpolation_discrete_dimension_type
@@ -117,10 +117,10 @@ public:
             BSplinesTheta,
             GridR,
             GridTheta,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
     using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
