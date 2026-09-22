@@ -343,9 +343,10 @@ public:
                     count,
                     MPI_DOUBLE,
                     m_lower_rank,
-                    s_tag_lower,
+                    s_tag_upper,
                     m_comm,
                     MPI_STATUS_IGNORE);
+            MPI_Wait(&lower_request, MPI_STATUS_IGNORE);
             ddc::parallel_for_each(
                     exec_space(),
                     idx_range_batch,
@@ -361,10 +362,10 @@ public:
                     count,
                     MPI_DOUBLE,
                     m_upper_rank,
-                    s_tag_upper,
+                    s_tag_lower,
                     m_comm,
                     MPI_STATUS_IGNORE);
-            double const dx = m_dx;
+            MPI_Wait(&upper_request, MPI_STATUS_IGNORE);
             ddc::parallel_for_each(
                     exec_space(),
                     idx_range_batch,
@@ -374,8 +375,6 @@ public:
                         local_derivs_xmax(first_deriv, idx_b) = total / dx;
                     });
         }
-        MPI_Wait(&lower_request, MPI_STATUS_IGNORE);
-        MPI_Wait(&upper_request, MPI_STATUS_IGNORE);
 
         m_spline_builder(
                 coeffs,
@@ -476,7 +475,7 @@ private:
                 exec_space(),
                 get_idx_range(local_derivs),
                 KOKKOS_LAMBDA(IdxDerivBatch const idx_db) {
-                IdxBatch idx_b(idx_db);
+                    IdxBatch idx_b(idx_db);
                     double sum = 0.0;
                     for (std::size_t k = 0; k < s_n_neighbours; ++k) {
                         IdxStepInterpGrid const offset(direction * (k + 1));
