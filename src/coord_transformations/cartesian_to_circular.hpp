@@ -205,6 +205,71 @@ public:
     }
 
     /**
+     * @brief Compute full inverse Jacobian matrix.
+     *
+     * The inverse Jacobian matrix of this mapping is the Jacobian matrix of the analytically
+     * known inverse mapping (CircularToCartesian), so it is calculated directly instead of
+     * inverting the Jacobian matrix of this mapping.
+     *
+     * @param[in] coord
+     * 				The coordinate where we evaluate the Jacobian matrix.
+     * @return The inverse Jacobian matrix.
+     */
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>>
+    inv_jacobian_matrix(Coord<X, Y> const& coord) const
+    {
+        const double x = ddc::get<X>(coord) - ddc::get<X>(m_o_point);
+        const double y = ddc::get<Y>(coord) - ddc::get<Y>(m_o_point);
+        const double r = Kokkos::sqrt(x * x + y * y);
+        KOKKOS_ASSERT(fabs(r) >= 1e-15);
+
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> matrix;
+        ddcHelper::get<X, R_cov>(matrix) = x / r;
+        ddcHelper::get<X, Theta_cov>(matrix) = -y;
+        ddcHelper::get<Y, R_cov>(matrix) = y / r;
+        ddcHelper::get<Y, Theta_cov>(matrix) = x;
+        return matrix;
+    }
+
+    /**
+     * @brief Compute the (i,j) coefficient of the inverse Jacobian matrix.
+     *
+     * Be careful because not all mappings are invertible, especially at the centre point.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the inverse Jacobian matrix.
+     *
+     * @return A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
+     */
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_FUNCTION double inv_jacobian_component(Coord<X, Y> const& coord) const
+    {
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<X, Y>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<R_cov, Theta_cov>>);
+
+        const double x = ddc::get<X>(coord) - ddc::get<X>(m_o_point);
+        const double y = ddc::get<Y>(coord) - ddc::get<Y>(m_o_point);
+
+        if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
+            //Compute the (1,1) coefficient of the inverse Jacobian matrix.
+            const double r = Kokkos::sqrt(x * x + y * y);
+            KOKKOS_ASSERT(fabs(r) >= 1e-15);
+            return x / r;
+        } else if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, Theta_cov>) {
+            //Compute the (1,2) coefficient of the inverse Jacobian matrix.
+            return -y;
+        } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
+            //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+            const double r = Kokkos::sqrt(x * x + y * y);
+            KOKKOS_ASSERT(fabs(r) >= 1e-15);
+            return y / r;
+        } else {
+            //Compute the (2,2) coefficient of the inverse Jacobian matrix.
+            return x;
+        }
+    }
+
+    /**
      * @brief Get the inverse mapping.
      *
      * @return The inverse mapping.

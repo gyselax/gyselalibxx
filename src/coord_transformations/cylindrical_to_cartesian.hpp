@@ -247,7 +247,7 @@ public:
     {
         const double r = ddc::get<R>(coord);
         const double zeta = ddc::get<Zeta>(coord);
-        assert(fabs(r) >= 1e-15);
+        KOKKOS_ASSERT(fabs(r) >= 1e-15);
 
         DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<X_cov, Y_cov, Z_cov>> matrix(0);
         ddcHelper::get<R, X_cov>(matrix) = Kokkos::cos(zeta);
@@ -289,7 +289,7 @@ public:
             return 0;
         } else {
             const double r = ddc::get<R>(coord);
-            assert(fabs(r) >= 1e-15);
+            KOKKOS_ASSERT(fabs(r) >= 1e-15);
             if constexpr (std::is_same_v<IndexTag2, X_cov>) {
                 //Compute the (2,1) coefficient of the inverse Jacobian matrix.
                 return -1 / r * Kokkos::sin(zeta);
@@ -300,6 +300,52 @@ public:
         }
     }
 
+
+    /**
+     * @brief Compute the metric tensor associated with the mapping at a given position in space.
+     *
+     * As the mapping is orthogonal the metric tensor is diagonal. It is given by
+     * @f$ G(R,Z,\zeta) = \text{diag}(1, 1, R^2) @f$.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the metric tensor.
+     * @return The metric tensor matrix.
+     */
+    KOKKOS_FUNCTION
+    DTensor<VectorIndexSet<R_cov, Z_cov, Zeta_cov>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
+    metric_tensor(CoordArg const& coord) const
+    {
+        const double r = ddc::get<R>(coord);
+        DTensor<VectorIndexSet<R_cov, Z_cov, Zeta_cov>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
+                tensor(0.0);
+        ddcHelper::get<R_cov, R_cov>(tensor) = 1.0;
+        ddcHelper::get<Z_cov, Z_cov>(tensor) = 1.0;
+        ddcHelper::get<Zeta_cov, Zeta_cov>(tensor) = r * r;
+        return tensor;
+    }
+
+    /**
+     * @brief Compute the inverse metric tensor associated with the mapping at a given position
+     * in space.
+     *
+     * As the mapping is orthogonal the inverse metric tensor is diagonal. It is given by
+     * @f$ G^{-1}(R,Z,\zeta) = \text{diag}(1, 1, 1/R^2) @f$.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the metric tensor.
+     * @return The inverse metric tensor matrix.
+     */
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<R, Z, Zeta>>
+    inv_metric_tensor(CoordArg const& coord) const
+    {
+        const double r = ddc::get<R>(coord);
+        KOKKOS_ASSERT(fabs(r) >= 1e-15);
+        DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<R, Z, Zeta>> tensor(0.0);
+        ddcHelper::get<R, R>(tensor) = 1.0;
+        ddcHelper::get<Z, Z>(tensor) = 1.0;
+        ddcHelper::get<Zeta, Zeta>(tensor) = 1.0 / (r * r);
+        return tensor;
+    }
 
     /**
      * @brief Get the inverse mapping.

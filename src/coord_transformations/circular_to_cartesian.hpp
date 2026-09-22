@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <cassert>
-#include <cmath>
-
 #include <ddc/ddc.hpp>
 
 #include "coord_transformation_tools.hpp"
@@ -247,7 +244,7 @@ public:
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-        assert(fabs(r) >= 1e-15);
+        KOKKOS_ASSERT(fabs(r) >= 1e-15);
 
         DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> matrix;
         ddcHelper::get<R, X_cov>(matrix) = Kokkos::cos(theta);
@@ -284,7 +281,7 @@ public:
             return Kokkos::sin(theta);
         } else {
             const double r = ddc::get<R>(coord);
-            assert(fabs(r) >= 1e-15);
+            KOKKOS_ASSERT(fabs(r) >= 1e-15);
             if constexpr (std::is_same_v<IndexTag2, X_cov>) {
                 //Compute the (2,1) coefficient of the inverse Jacobian matrix.
                 return -1 / r * Kokkos::sin(theta);
@@ -295,6 +292,48 @@ public:
         }
     }
 
+
+    /**
+     * @brief Compute the metric tensor associated with the mapping at a given position in space.
+     *
+     * As the mapping is orthogonal the metric tensor is diagonal. It is given by
+     * @f$ G(r,\theta) = \text{diag}(1, r^2) @f$.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the metric tensor.
+     * @return The metric tensor matrix.
+     */
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>>
+    metric_tensor(Coord<R, Theta> const& coord) const
+    {
+        const double r = ddc::get<R>(coord);
+        DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> tensor(0.0);
+        ddcHelper::get<R_cov, R_cov>(tensor) = 1.0;
+        ddcHelper::get<Theta_cov, Theta_cov>(tensor) = r * r;
+        return tensor;
+    }
+
+    /**
+     * @brief Compute the inverse metric tensor associated with the mapping at a given position
+     * in space.
+     *
+     * As the mapping is orthogonal the inverse metric tensor is diagonal. It is given by
+     * @f$ G^{-1}(r,\theta) = \text{diag}(1, 1/r^2) @f$.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the metric tensor.
+     * @return The inverse metric tensor matrix.
+     */
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_metric_tensor(
+            Coord<R, Theta> const& coord) const
+    {
+        const double r = ddc::get<R>(coord);
+        KOKKOS_ASSERT(fabs(r) >= 1e-15);
+        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> tensor(0.0);
+        ddcHelper::get<R, R>(tensor) = 1.0;
+        ddcHelper::get<Theta, Theta>(tensor) = 1.0 / (r * r);
+        return tensor;
+    }
 
     /**
      * @brief Get the inverse mapping.

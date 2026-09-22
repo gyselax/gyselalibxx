@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <cassert>
-#include <cmath>
-
 #include <ddc/ddc.hpp>
 
 #include "coord_transformation_tools.hpp"
@@ -189,6 +186,69 @@ public:
     /**
      * @brief Compute the (i,j) coefficient of the Jacobian matrix.
      *
+     * @param[in] coord
+     *              The coordinate where we evaluate the Jacobian matrix.
+     *
+     * @return A double with the value of the (i,j) coefficient of the Jacobian matrix.
+     */
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_FUNCTION double jacobian_component(CoordArg const& coord) const
+    {
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<R, Z, Zeta>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<X_cov, Y_cov, Z_cov>>);
+
+        const double x = ddc::get<X>(coord);
+        const double y = ddc::get<Y>(coord);
+        if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, X_cov>) {
+            // Component (1,1), i.e dR/dx
+            return x / Kokkos::sqrt(x * x + y * y);
+        } else if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, Y_cov>) {
+            // Component (1,2), i.e dR/dy
+            return y / Kokkos::sqrt(x * x + y * y);
+        } else if constexpr (std::is_same_v<IndexTag1, Zeta> && std::is_same_v<IndexTag2, X_cov>) {
+            // Component (3,1), i.e dzeta/dx
+            return -y / (x * x + y * y);
+        } else if constexpr (std::is_same_v<IndexTag1, Zeta> && std::is_same_v<IndexTag2, Y_cov>) {
+            // Component (3,2), i.e dzeta/dy
+            return x / (x * x + y * y);
+        } else if constexpr (std::is_same_v<IndexTag1, Z> && std::is_same_v<IndexTag2, Z_cov>) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * @brief Compute full inverse Jacobian matrix.
+     *
+     * The inverse Jacobian matrix of this mapping is the Jacobian matrix of the analytically
+     * known inverse mapping (CylindricalToCartesian), so it is calculated directly instead of
+     * inverting the Jacobian matrix of this mapping.
+     *
+     * @param[in] coord
+     * 				The coordinate where we evaluate the Jacobian matrix.
+     * @return The inverse Jacobian matrix.
+     */
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y, Z>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
+    inv_jacobian_matrix(CoordArg const& coord) const
+    {
+        const double x = ddc::get<X>(coord);
+        const double y = ddc::get<Y>(coord);
+        const double r = Kokkos::sqrt(x * x + y * y);
+        KOKKOS_ASSERT(fabs(r) >= 1e-15);
+
+        DTensor<VectorIndexSet<X, Y, Z>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> matrix(0);
+        ddcHelper::get<X, R_cov>(matrix) = x / r;
+        ddcHelper::get<X, Zeta_cov>(matrix) = -y;
+        ddcHelper::get<Y, R_cov>(matrix) = y / r;
+        ddcHelper::get<Y, Zeta_cov>(matrix) = x;
+        ddcHelper::get<Z, Z_cov>(matrix) = 1;
+        return matrix;
+    }
+
+    /**
+     * @brief Compute the (i,j) coefficient of the inverse Jacobian matrix.
+     *
      * Be careful because not all mappings are invertible, especially at the centre point.
      *
      * @param[in] coord
@@ -197,27 +257,30 @@ public:
      * @return A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
      */
     template <class IndexTag1, class IndexTag2>
-    KOKKOS_FUNCTION double jacobian_component(CoordArg const& coord) const
+    KOKKOS_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
-        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<X, Y>>);
-        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<R_cov, Zeta_cov>>);
-        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<R, Z, Zeta>>);
-        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<X_cov, Y_cov, Z_cov>>);
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<X, Y, Z>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>);
 
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
+
         if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
-            // Component (1,1), i.e dx/dr
-            return x / Kokkos::sqrt(x * x + y * y);
+            //Compute the (1,1) coefficient of the inverse Jacobian matrix.
+            const double r = Kokkos::sqrt(x * x + y * y);
+            KOKKOS_ASSERT(fabs(r) >= 1e-15);
+            return x / r;
         } else if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, Zeta_cov>) {
-            // Component (1,2), i.e dx/dzeta
-            return y / Kokkos::sqrt(x * x + y * y);
+            //Compute the (1,3) coefficient of the inverse Jacobian matrix.
+            return -y;
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
-            // Component (2,1), i.e dy/dr
-            return -y / (x * x + y * y);
+            //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+            const double r = Kokkos::sqrt(x * x + y * y);
+            KOKKOS_ASSERT(fabs(r) >= 1e-15);
+            return y / r;
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, Zeta_cov>) {
-            // Component (2,2), i.e dy/dzeta
-            return x / (x * x + y * y);
+            //Compute the (2,3) coefficient of the inverse Jacobian matrix.
+            return x;
         } else if constexpr (std::is_same_v<IndexTag1, Z> && std::is_same_v<IndexTag2, Z_cov>) {
             return 1;
         } else {
