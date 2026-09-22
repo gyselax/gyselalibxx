@@ -87,9 +87,14 @@ using SplineInterpPointsX = ddcHelper::NonUniformInterpolationPoints<
         ddc::SplineBuilderClosure::HERMITE,
         ddc::SplineBuilderClosure::HERMITE>;
 
-template <std::size_t PatchIdx, ddc::SplineBuilderClosure SplineBuilderClosureMin, ddc::SplineBuilderClosure SplineBuilderClosureMax>
-using SplineInterpPointsY
-        = ddcHelper::NonUniformInterpolationPoints<BSplinesY<PatchIdx>, SplineBuilderClosureMin, SplineBuilderClosureMax>;
+template <
+        std::size_t PatchIdx,
+        ddc::SplineBuilderClosure SplineBuilderClosureMin,
+        ddc::SplineBuilderClosure SplineBuilderClosureMax>
+using SplineInterpPointsY = ddcHelper::NonUniformInterpolationPoints<
+        BSplinesY<PatchIdx>,
+        SplineBuilderClosureMin,
+        SplineBuilderClosureMax>;
 
 // Interpolation points type for the equivalent global spline.
 using SplineInterpPointsXg = ddcHelper::NonUniformInterpolationPoints<

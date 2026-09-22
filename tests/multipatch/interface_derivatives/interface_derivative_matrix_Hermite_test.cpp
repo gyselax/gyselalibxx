@@ -113,10 +113,14 @@ using SplineInterpPointsY = ddcHelper::NonUniformInterpolationPoints<
         ddc::SplineBuilderClosure::HERMITE>;
 
 // Interpolation points type for the equivalent global spline.
-using SplineInterpPointsXg = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesXg, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE>;
-using SplineInterpPointsYg = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesYg, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE>;
+using SplineInterpPointsXg = ddcHelper::NonUniformInterpolationPoints<
+        BSplinesXg,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
+using SplineInterpPointsYg = ddcHelper::NonUniformInterpolationPoints<
+        BSplinesYg,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
 
 // Operators on the equivalent global spline.
 using SplineRThetagBuilder = ddc::SplineBuilder2D<

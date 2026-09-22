@@ -502,12 +502,12 @@ void check_spline_representation_agreement(
     const ddc::SplineBuilderClosure SplineBuilderClosureXmax = ddc::SplineBuilderClosure::HERMITE;
 
     // For Patches in PatchSeqMin, the local lower Y-boundary is with the outside.
-    const ddc::SplineBuilderClosure SplineBuilderClosureYmin = ddc::in_tags_v<Patch, PatchSeqMin>
-                                                 ? ddc::SplineBuilderClosure::GREVILLE
+    const ddc::SplineBuilderClosure SplineBuilderClosureYmin
+            = ddc::in_tags_v<Patch, PatchSeqMin> ? ddc::SplineBuilderClosure::GREVILLE
                                                  : ddc::SplineBuilderClosure::HERMITE;
     // For Patches in PatchSeqMax, the local upper Y-boundary is with the outside.
-    const ddc::SplineBuilderClosure SplineBuilderClosureYmax = ddc::in_tags_v<Patch, PatchSeqMax>
-                                                 ? ddc::SplineBuilderClosure::GREVILLE
+    const ddc::SplineBuilderClosure SplineBuilderClosureYmax
+            = ddc::in_tags_v<Patch, PatchSeqMax> ? ddc::SplineBuilderClosure::GREVILLE
                                                  : ddc::SplineBuilderClosure::HERMITE;
 
     IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function_and_derivs);
