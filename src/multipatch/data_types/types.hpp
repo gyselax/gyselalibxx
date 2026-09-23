@@ -142,6 +142,19 @@ using CoordConstFieldOnPatch = ConstField<typename Patch::Coord12, typename Patc
 template <class Patch>
 using Coord1Field1OnPatch_1D = Field<typename Patch::Coord1, typename Patch::IdxRange1>;
 
+// --- ON HOST ---
+/// @brief FieldMem of 2D coordinates defined on the 2D Patch's logical domain on host.
+template <class Patch>
+using CoordFieldMemOnPatch_host = host_t<CoordFieldMemOnPatch<Patch>>;
+
+/// @brief Field of 2D coordinates defined on the 2D Patch's logical domain on host.
+template <class Patch>
+using CoordFieldOnPatch_host = host_t<CoordFieldOnPatch<Patch>>;
+
+/// @brief ConstField of 2D coordinates defined on the 2D Patch's logical domain on host.
+template <class Patch>
+using CoordConstFieldOnPatch_host = host_t<CoordConstFieldOnPatch<Patch>>;
+
 
 // SPLINES ---------------------------------------------------------------------------------------
 
