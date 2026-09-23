@@ -284,6 +284,7 @@ public:
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
+                ExecSpace(),
                 get_idx_range(cross_deriv),
                 KOKKOS_LAMBDA(Idx<Deriv1, Deriv2> idx_derivs) {
                     cross_deriv(idx_derivs)
