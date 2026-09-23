@@ -363,6 +363,341 @@ public:
         ddc::init_discrete_space<GridX<I>>(convert_dim<X<I>, X<XI>>(break_points_x));
         ddc::init_discrete_space<GridY<I>>(convert_dim<Y<I>, Y<YI>>(interpolation_points_y));
     }
+
+
+
+    void test()
+    {
+        std::tuple coord_transforms {
+                CoordTransformGroup<1>(),
+                CoordTransformGroup<2>(),
+                CoordTransformGroup<3>(),
+                CoordTransformGroup<4>(),
+                CoordTransformGroup<5>(),
+                CoordTransformGroup<6>(),
+                CoordTransformGroup<7>(),
+                CoordTransformGroup<8>(),
+                CoordTransformGroup<9>()};
+
+        // Instantiate the derivatives calculators ---------------------------------------------------
+        constexpr std::size_t nb_chosen_cells = 9;
+
+        // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
+        SingleInterfaceDerivativesCalculator<Interface_1_2> const
+                derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_2_3> const
+                derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_3_1> const
+                derivatives_calculator_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
+
+        SingleInterfaceDerivativesCalculator<Interface_4_5> const
+                derivatives_calculator_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_5_6> const
+                derivatives_calculator_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_6_4> const
+                derivatives_calculator_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
+
+        SingleInterfaceDerivativesCalculator<Interface_7_8> const
+                derivatives_calculator_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_8_9> const
+                derivatives_calculator_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_9_7> const
+                derivatives_calculator_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
+
+        // SingleInterfaceDerivativesCalculators for interfaces along x.
+        SingleInterfaceDerivativesCalculator<Interface_1_4> const
+                derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_4_7> const
+                derivatives_calculator_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
+
+        SingleInterfaceDerivativesCalculator<Interface_2_5> const
+                derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_5_8> const
+                derivatives_calculator_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
+
+        SingleInterfaceDerivativesCalculator<Interface_3_6> const
+                derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
+        SingleInterfaceDerivativesCalculator<Interface_6_9> const
+                derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
+
+        // Collect the derivative calculators --------------------------------------------------------
+        SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
+                derivatives_calculator_1_2,
+                derivatives_calculator_2_3,
+                derivatives_calculator_3_1);
+
+        SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_456(
+                derivatives_calculator_4_5,
+                derivatives_calculator_5_6,
+                derivatives_calculator_6_4);
+
+        SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_789(
+                derivatives_calculator_7_8,
+                derivatives_calculator_8_9,
+                derivatives_calculator_9_7);
+
+        SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_147(
+                derivatives_calculator_1_4,
+                derivatives_calculator_4_7);
+
+        SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_258(
+                derivatives_calculator_2_5,
+                derivatives_calculator_5_8);
+
+        SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_369(
+                derivatives_calculator_3_6,
+                derivatives_calculator_6_9);
+
+        // Collect the index ranges ------------------------------------------------------------------
+        MultipatchType<
+                IdxRangeOnPatch,
+                Patch1,
+                Patch2,
+                Patch3,
+                Patch4,
+                Patch5,
+                Patch6,
+                Patch7,
+                Patch8,
+                Patch9>
+                idx_ranges(
+                        idx_range_xy1,
+                        idx_range_xy2,
+                        idx_range_xy3,
+                        idx_range_xy4,
+                        idx_range_xy5,
+                        idx_range_xy6,
+                        idx_range_xy7,
+                        idx_range_xy8,
+                        idx_range_xy9);
+
+        MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3> idx_ranges_123(idx_ranges);
+        MultipatchType<IdxRangeOnPatch, Patch4, Patch5, Patch6> idx_ranges_456(idx_ranges);
+        MultipatchType<IdxRangeOnPatch, Patch7, Patch8, Patch9> idx_ranges_789(idx_ranges);
+
+        // For 1|4|7, we artificially add another patch to test if the method will modify the correct patches.
+        MultipatchType<IdxRangeOnPatch, Patch1, Patch4, Patch7, Patch2> idx_ranges_147(idx_ranges);
+        MultipatchType<IdxRangeOnPatch, Patch2, Patch5, Patch8> idx_ranges_258(idx_ranges);
+        MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9> idx_ranges_369(idx_ranges);
+
+        // Instantiate the matrix calculators --------------------------------------------------------
+        InterfaceDerivativeMatrix<
+                Connectivity,
+                GridX<1>,
+                ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
+                SingleInterfaceDerivativesCalculatorCollection<
+                        Interface_1_2,
+                        Interface_2_3,
+                        Interface_3_1>>
+                matrix_123(idx_ranges_123, deriv_calculators_collect_123);
+
+        InterfaceDerivativeMatrix<
+                Connectivity,
+                GridX<4>,
+                ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
+                SingleInterfaceDerivativesCalculatorCollection<
+                        Interface_4_5,
+                        Interface_5_6,
+                        Interface_6_4>>
+                matrix_456(idx_ranges_456, deriv_calculators_collect_456);
+
+        InterfaceDerivativeMatrix<
+                Connectivity,
+                GridX<7>,
+                ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
+                SingleInterfaceDerivativesCalculatorCollection<
+                        Interface_7_8,
+                        Interface_8_9,
+                        Interface_9_7>>
+                matrix_789(idx_ranges_789, deriv_calculators_collect_789);
+
+        // Test with an extra patch (Patch2) to check it will only take the needed patches.
+        InterfaceDerivativeMatrix<
+                Connectivity,
+                GridY<1>,
+                ddc::detail::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
+                SingleInterfaceDerivativesCalculatorCollection<Interface_1_4, Interface_4_7>>
+                matrix_147(idx_ranges_147, deriv_calculators_collect_147);
+
+        InterfaceDerivativeMatrix<
+                Connectivity,
+                GridY<2>,
+                ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
+                SingleInterfaceDerivativesCalculatorCollection<Interface_2_5, Interface_5_8>>
+                matrix_258(idx_ranges_258, deriv_calculators_collect_258);
+
+        InterfaceDerivativeMatrix<
+                Connectivity,
+                GridY<3>,
+                ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
+                SingleInterfaceDerivativesCalculatorCollection<Interface_3_6, Interface_6_9>>
+                matrix_369(idx_ranges_369, deriv_calculators_collect_369);
+
+        // Instantiate DerivField ====================================================================
+        // Instantiate index range slices ------------------------------------------------------------
+        IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(idx_range_x1);
+        IdxRangeSlice<GridX<2>> idx_range_slice_dx2 = get_bound_idx_range_slice(idx_range_x2);
+        IdxRangeSlice<GridX<3>> idx_range_slice_dx3 = get_bound_idx_range_slice(idx_range_x3);
+        IdxRangeSlice<GridX<4>> idx_range_slice_dx4 = get_bound_idx_range_slice(idx_range_x4);
+        IdxRangeSlice<GridX<5>> idx_range_slice_dx5 = get_bound_idx_range_slice(idx_range_x5);
+        IdxRangeSlice<GridX<6>> idx_range_slice_dx6 = get_bound_idx_range_slice(idx_range_x6);
+        IdxRangeSlice<GridX<7>> idx_range_slice_dx7 = get_bound_idx_range_slice(idx_range_x7);
+        IdxRangeSlice<GridX<8>> idx_range_slice_dx8 = get_bound_idx_range_slice(idx_range_x8);
+        IdxRangeSlice<GridX<9>> idx_range_slice_dx9 = get_bound_idx_range_slice(idx_range_x9);
+
+        IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(idx_range_y1);
+        IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(idx_range_y2);
+        IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(idx_range_y3);
+        IdxRangeSlice<GridY<4>> idx_range_slice_dy4 = get_bound_idx_range_slice(idx_range_y4);
+        IdxRangeSlice<GridY<5>> idx_range_slice_dy5 = get_bound_idx_range_slice(idx_range_y5);
+        IdxRangeSlice<GridY<6>> idx_range_slice_dy6 = get_bound_idx_range_slice(idx_range_y6);
+        IdxRangeSlice<GridY<7>> idx_range_slice_dy7 = get_bound_idx_range_slice(idx_range_y7);
+        IdxRangeSlice<GridY<8>> idx_range_slice_dy8 = get_bound_idx_range_slice(idx_range_y8);
+        IdxRangeSlice<GridY<9>> idx_range_slice_dy9 = get_bound_idx_range_slice(idx_range_y9);
+
+        // Instantiate DerivField --------------------------------------------------------------------
+        DerivFieldMemOnPatch_host<Patch1> function_and_derivs_1_alloc(
+                idx_range_xy1,
+                idx_range_slice_dx1,
+                idx_range_slice_dy1);
+        DerivFieldMemOnPatch_host<Patch2> function_and_derivs_2_alloc(
+                idx_range_xy2,
+                idx_range_slice_dx2,
+                idx_range_slice_dy2);
+        DerivFieldMemOnPatch_host<Patch3> function_and_derivs_3_alloc(
+                idx_range_xy3,
+                idx_range_slice_dx3,
+                idx_range_slice_dy3);
+        DerivFieldMemOnPatch_host<Patch4> function_and_derivs_4_alloc(
+                idx_range_xy4,
+                idx_range_slice_dx4,
+                idx_range_slice_dy4);
+        DerivFieldMemOnPatch_host<Patch5> function_and_derivs_5_alloc(
+                idx_range_xy5,
+                idx_range_slice_dx5,
+                idx_range_slice_dy5);
+        DerivFieldMemOnPatch_host<Patch6> function_and_derivs_6_alloc(
+                idx_range_xy6,
+                idx_range_slice_dx6,
+                idx_range_slice_dy6);
+        DerivFieldMemOnPatch_host<Patch7> function_and_derivs_7_alloc(
+                idx_range_xy7,
+                idx_range_slice_dx7,
+                idx_range_slice_dy7);
+        DerivFieldMemOnPatch_host<Patch8> function_and_derivs_8_alloc(
+                idx_range_xy8,
+                idx_range_slice_dx8,
+                idx_range_slice_dy8);
+        DerivFieldMemOnPatch_host<Patch9> function_and_derivs_9_alloc(
+                idx_range_xy9,
+                idx_range_slice_dx9,
+                idx_range_slice_dy9);
+
+        DerivFieldOnPatch_host<Patch1> function_and_derivs_1(function_and_derivs_1_alloc);
+        DerivFieldOnPatch_host<Patch2> function_and_derivs_2(function_and_derivs_2_alloc);
+        DerivFieldOnPatch_host<Patch3> function_and_derivs_3(function_and_derivs_3_alloc);
+        DerivFieldOnPatch_host<Patch4> function_and_derivs_4(function_and_derivs_4_alloc);
+        DerivFieldOnPatch_host<Patch5> function_and_derivs_5(function_and_derivs_5_alloc);
+        DerivFieldOnPatch_host<Patch6> function_and_derivs_6(function_and_derivs_6_alloc);
+        DerivFieldOnPatch_host<Patch7> function_and_derivs_7(function_and_derivs_7_alloc);
+        DerivFieldOnPatch_host<Patch8> function_and_derivs_8(function_and_derivs_8_alloc);
+        DerivFieldOnPatch_host<Patch9> function_and_derivs_9(function_and_derivs_9_alloc);
+
+        // Collect the fields with derivatives.
+        MultipatchField<
+                DerivFieldOnPatch_host,
+                Patch1,
+                Patch2,
+                Patch3,
+                Patch4,
+                Patch5,
+                Patch6,
+                Patch7,
+                Patch8,
+                Patch9>
+                functions_and_derivs(
+                        function_and_derivs_1,
+                        function_and_derivs_2,
+                        function_and_derivs_3,
+                        function_and_derivs_4,
+                        function_and_derivs_5,
+                        function_and_derivs_6,
+                        function_and_derivs_7,
+                        function_and_derivs_8,
+                        function_and_derivs_9);
+
+        // Instantiate the field of global function values. No derivatives needed.
+        host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
+        host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
+
+        // Initialise the data =======================================================================
+        // --- the function values.
+        initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
+        initialise_2D_function(function_g);
+
+        // --- the first derivatives computed from the function values.
+        matrix_123.solve_deriv(functions_and_derivs);
+        matrix_456.solve_deriv(functions_and_derivs);
+        matrix_789.solve_deriv(functions_and_derivs);
+
+        matrix_147.solve_deriv(functions_and_derivs);
+        matrix_258.solve_deriv(functions_and_derivs);
+        matrix_369.solve_deriv(functions_and_derivs);
+
+        // --- the cross-derivatives computed from the first derivatives.
+        matrix_147.solve_cross_deriv(functions_and_derivs);
+        matrix_258.solve_cross_deriv(functions_and_derivs);
+        matrix_369.solve_cross_deriv(functions_and_derivs);
+
+        // Test the values of the derivatives ========================================================
+        // --- Define an equivalent global spline.
+        // Build global spline representation ---
+        SplineRThetagBuilder builder_g(idx_range_xy_g);
+
+        host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
+                builder_g.batched_spline_domain(idx_range_xy_g));
+        host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
+                = get_field(function_g_coef_alloc);
+
+        builder_g(function_g_coef, get_const_field(function_g));
+
+        // Global spline evaluator ---
+        ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
+        ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
+        ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
+        SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
+
+        // Check each derivatives ---
+        using PatchSeqLowerBound = ddc::detail::TypeSeq<Patch7, Patch8, Patch9>;
+        using PatchSeqUpperBound = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
+
+        check_all_x_derivatives(
+                functions_and_derivs,
+                evaluator_g,
+                get_const_field(function_g_coef),
+                coord_transforms,
+                1e-4);
+        check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
+                functions_and_derivs,
+                evaluator_g,
+                get_const_field(function_g_coef),
+                coord_transforms,
+                1e-4);
+        check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
+                functions_and_derivs,
+                evaluator_g,
+                get_const_field(function_g_coef),
+                coord_transforms,
+                1e-4);
+
+        // Check the whole spline representations ---
+        check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
+                functions_and_derivs,
+                evaluator_g,
+                get_const_field(function_g_coef),
+                coord_transforms,
+                1e-7);
+    }
 };
 
 } // end namespace
@@ -371,312 +706,6 @@ public:
 
 TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
-    std::tuple coord_transforms {
-            CoordTransformGroup<1>(),
-            CoordTransformGroup<2>(),
-            CoordTransformGroup<3>(),
-            CoordTransformGroup<4>(),
-            CoordTransformGroup<5>(),
-            CoordTransformGroup<6>(),
-            CoordTransformGroup<7>(),
-            CoordTransformGroup<8>(),
-            CoordTransformGroup<9>()};
-
-    // Instantiate the derivatives calculators ---------------------------------------------------
-    constexpr std::size_t nb_chosen_cells = 9;
-
-    // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
-    SingleInterfaceDerivativesCalculator<Interface_1_2> const
-            derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_2_3> const
-            derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_3_1> const
-            derivatives_calculator_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
-
-    SingleInterfaceDerivativesCalculator<Interface_4_5> const
-            derivatives_calculator_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_5_6> const
-            derivatives_calculator_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_6_4> const
-            derivatives_calculator_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
-
-    SingleInterfaceDerivativesCalculator<Interface_7_8> const
-            derivatives_calculator_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_8_9> const
-            derivatives_calculator_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_9_7> const
-            derivatives_calculator_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
-
-    // SingleInterfaceDerivativesCalculators for interfaces along x.
-    SingleInterfaceDerivativesCalculator<Interface_1_4> const
-            derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_4_7> const
-            derivatives_calculator_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
-
-    SingleInterfaceDerivativesCalculator<Interface_2_5> const
-            derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_5_8> const
-            derivatives_calculator_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
-
-    SingleInterfaceDerivativesCalculator<Interface_3_6> const
-            derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_6_9> const
-            derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
-
-    // Collect the derivative calculators --------------------------------------------------------
-    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
-            derivatives_calculator_1_2,
-            derivatives_calculator_2_3,
-            derivatives_calculator_3_1);
-
-    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_456(
-            derivatives_calculator_4_5,
-            derivatives_calculator_5_6,
-            derivatives_calculator_6_4);
-
-    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_789(
-            derivatives_calculator_7_8,
-            derivatives_calculator_8_9,
-            derivatives_calculator_9_7);
-
-    SingleInterfaceDerivativesCalculatorCollection
-            deriv_calculators_collect_147(derivatives_calculator_1_4, derivatives_calculator_4_7);
-
-    SingleInterfaceDerivativesCalculatorCollection
-            deriv_calculators_collect_258(derivatives_calculator_2_5, derivatives_calculator_5_8);
-
-    SingleInterfaceDerivativesCalculatorCollection
-            deriv_calculators_collect_369(derivatives_calculator_3_6, derivatives_calculator_6_9);
-
-    // Collect the index ranges ------------------------------------------------------------------
-    MultipatchType<
-            IdxRangeOnPatch,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            idx_ranges(
-                    idx_range_xy1,
-                    idx_range_xy2,
-                    idx_range_xy3,
-                    idx_range_xy4,
-                    idx_range_xy5,
-                    idx_range_xy6,
-                    idx_range_xy7,
-                    idx_range_xy8,
-                    idx_range_xy9);
-
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3> idx_ranges_123(idx_ranges);
-    MultipatchType<IdxRangeOnPatch, Patch4, Patch5, Patch6> idx_ranges_456(idx_ranges);
-    MultipatchType<IdxRangeOnPatch, Patch7, Patch8, Patch9> idx_ranges_789(idx_ranges);
-
-    // For 1|4|7, we artificially add another patch to test if the method will modify the correct patches.
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch4, Patch7, Patch2> idx_ranges_147(idx_ranges);
-    MultipatchType<IdxRangeOnPatch, Patch2, Patch5, Patch8> idx_ranges_258(idx_ranges);
-    MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9> idx_ranges_369(idx_ranges);
-
-    // Instantiate the matrix calculators --------------------------------------------------------
-    InterfaceDerivativeMatrix<
-            Connectivity,
-            GridX<1>,
-            ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
-            SingleInterfaceDerivativesCalculatorCollection<
-                    Interface_1_2,
-                    Interface_2_3,
-                    Interface_3_1>>
-            matrix_123(idx_ranges_123, deriv_calculators_collect_123);
-
-    InterfaceDerivativeMatrix<
-            Connectivity,
-            GridX<4>,
-            ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
-            SingleInterfaceDerivativesCalculatorCollection<
-                    Interface_4_5,
-                    Interface_5_6,
-                    Interface_6_4>>
-            matrix_456(idx_ranges_456, deriv_calculators_collect_456);
-
-    InterfaceDerivativeMatrix<
-            Connectivity,
-            GridX<7>,
-            ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
-            SingleInterfaceDerivativesCalculatorCollection<
-                    Interface_7_8,
-                    Interface_8_9,
-                    Interface_9_7>>
-            matrix_789(idx_ranges_789, deriv_calculators_collect_789);
-
-    // Test with an extra patch (Patch2) to check it will only take the needed patches.
-    InterfaceDerivativeMatrix<
-            Connectivity,
-            GridY<1>,
-            ddc::detail::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
-            SingleInterfaceDerivativesCalculatorCollection<Interface_1_4, Interface_4_7>>
-            matrix_147(idx_ranges_147, deriv_calculators_collect_147);
-
-    InterfaceDerivativeMatrix<
-            Connectivity,
-            GridY<2>,
-            ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
-            SingleInterfaceDerivativesCalculatorCollection<Interface_2_5, Interface_5_8>>
-            matrix_258(idx_ranges_258, deriv_calculators_collect_258);
-
-    InterfaceDerivativeMatrix<
-            Connectivity,
-            GridY<3>,
-            ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
-            SingleInterfaceDerivativesCalculatorCollection<Interface_3_6, Interface_6_9>>
-            matrix_369(idx_ranges_369, deriv_calculators_collect_369);
-
-    // Instantiate DerivField ====================================================================
-    // Instantiate index range slices ------------------------------------------------------------
-    IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(idx_range_x1);
-    IdxRangeSlice<GridX<2>> idx_range_slice_dx2 = get_bound_idx_range_slice(idx_range_x2);
-    IdxRangeSlice<GridX<3>> idx_range_slice_dx3 = get_bound_idx_range_slice(idx_range_x3);
-    IdxRangeSlice<GridX<4>> idx_range_slice_dx4 = get_bound_idx_range_slice(idx_range_x4);
-    IdxRangeSlice<GridX<5>> idx_range_slice_dx5 = get_bound_idx_range_slice(idx_range_x5);
-    IdxRangeSlice<GridX<6>> idx_range_slice_dx6 = get_bound_idx_range_slice(idx_range_x6);
-    IdxRangeSlice<GridX<7>> idx_range_slice_dx7 = get_bound_idx_range_slice(idx_range_x7);
-    IdxRangeSlice<GridX<8>> idx_range_slice_dx8 = get_bound_idx_range_slice(idx_range_x8);
-    IdxRangeSlice<GridX<9>> idx_range_slice_dx9 = get_bound_idx_range_slice(idx_range_x9);
-
-    IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(idx_range_y1);
-    IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(idx_range_y2);
-    IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(idx_range_y3);
-    IdxRangeSlice<GridY<4>> idx_range_slice_dy4 = get_bound_idx_range_slice(idx_range_y4);
-    IdxRangeSlice<GridY<5>> idx_range_slice_dy5 = get_bound_idx_range_slice(idx_range_y5);
-    IdxRangeSlice<GridY<6>> idx_range_slice_dy6 = get_bound_idx_range_slice(idx_range_y6);
-    IdxRangeSlice<GridY<7>> idx_range_slice_dy7 = get_bound_idx_range_slice(idx_range_y7);
-    IdxRangeSlice<GridY<8>> idx_range_slice_dy8 = get_bound_idx_range_slice(idx_range_y8);
-    IdxRangeSlice<GridY<9>> idx_range_slice_dy9 = get_bound_idx_range_slice(idx_range_y9);
-
-    // Instantiate DerivField --------------------------------------------------------------------
-    DerivFieldMemOnPatch_host<Patch1>
-            function_and_derivs_1_alloc(idx_range_xy1, idx_range_slice_dx1, idx_range_slice_dy1);
-    DerivFieldMemOnPatch_host<Patch2>
-            function_and_derivs_2_alloc(idx_range_xy2, idx_range_slice_dx2, idx_range_slice_dy2);
-    DerivFieldMemOnPatch_host<Patch3>
-            function_and_derivs_3_alloc(idx_range_xy3, idx_range_slice_dx3, idx_range_slice_dy3);
-    DerivFieldMemOnPatch_host<Patch4>
-            function_and_derivs_4_alloc(idx_range_xy4, idx_range_slice_dx4, idx_range_slice_dy4);
-    DerivFieldMemOnPatch_host<Patch5>
-            function_and_derivs_5_alloc(idx_range_xy5, idx_range_slice_dx5, idx_range_slice_dy5);
-    DerivFieldMemOnPatch_host<Patch6>
-            function_and_derivs_6_alloc(idx_range_xy6, idx_range_slice_dx6, idx_range_slice_dy6);
-    DerivFieldMemOnPatch_host<Patch7>
-            function_and_derivs_7_alloc(idx_range_xy7, idx_range_slice_dx7, idx_range_slice_dy7);
-    DerivFieldMemOnPatch_host<Patch8>
-            function_and_derivs_8_alloc(idx_range_xy8, idx_range_slice_dx8, idx_range_slice_dy8);
-    DerivFieldMemOnPatch_host<Patch9>
-            function_and_derivs_9_alloc(idx_range_xy9, idx_range_slice_dx9, idx_range_slice_dy9);
-
-    DerivFieldOnPatch_host<Patch1> function_and_derivs_1(function_and_derivs_1_alloc);
-    DerivFieldOnPatch_host<Patch2> function_and_derivs_2(function_and_derivs_2_alloc);
-    DerivFieldOnPatch_host<Patch3> function_and_derivs_3(function_and_derivs_3_alloc);
-    DerivFieldOnPatch_host<Patch4> function_and_derivs_4(function_and_derivs_4_alloc);
-    DerivFieldOnPatch_host<Patch5> function_and_derivs_5(function_and_derivs_5_alloc);
-    DerivFieldOnPatch_host<Patch6> function_and_derivs_6(function_and_derivs_6_alloc);
-    DerivFieldOnPatch_host<Patch7> function_and_derivs_7(function_and_derivs_7_alloc);
-    DerivFieldOnPatch_host<Patch8> function_and_derivs_8(function_and_derivs_8_alloc);
-    DerivFieldOnPatch_host<Patch9> function_and_derivs_9(function_and_derivs_9_alloc);
-
-    // Collect the fields with derivatives.
-    MultipatchField<
-            DerivFieldOnPatch_host,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            functions_and_derivs(
-                    function_and_derivs_1,
-                    function_and_derivs_2,
-                    function_and_derivs_3,
-                    function_and_derivs_4,
-                    function_and_derivs_5,
-                    function_and_derivs_6,
-                    function_and_derivs_7,
-                    function_and_derivs_8,
-                    function_and_derivs_9);
-
-    // Instantiate the field of global function values. No derivatives needed.
-    host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
-    host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
-
-    // Initialise the data =======================================================================
-    // --- the function values.
-    initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
-    initialise_2D_function(function_g);
-
-    // --- the first derivatives computed from the function values.
-    matrix_123.solve_deriv(functions_and_derivs);
-    matrix_456.solve_deriv(functions_and_derivs);
-    matrix_789.solve_deriv(functions_and_derivs);
-
-    matrix_147.solve_deriv(functions_and_derivs);
-    matrix_258.solve_deriv(functions_and_derivs);
-    matrix_369.solve_deriv(functions_and_derivs);
-
-    // --- the cross-derivatives computed from the first derivatives.
-    matrix_147.solve_cross_deriv(functions_and_derivs);
-    matrix_258.solve_cross_deriv(functions_and_derivs);
-    matrix_369.solve_cross_deriv(functions_and_derivs);
-
-    // Test the values of the derivatives ========================================================
-    // --- Define an equivalent global spline.
-    // Build global spline representation ---
-    SplineRThetagBuilder builder_g(idx_range_xy_g);
-
-    host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
-            builder_g.batched_spline_domain(idx_range_xy_g));
-    host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
-            = get_field(function_g_coef_alloc);
-
-    builder_g(function_g_coef, get_const_field(function_g));
-
-    // Global spline evaluator ---
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
-    ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
-    SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
-
-    // Check each derivatives ---
-    using PatchSeqLowerBound = ddc::detail::TypeSeq<Patch7, Patch8, Patch9>;
-    using PatchSeqUpperBound = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
-
-    check_all_x_derivatives(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            1e-4);
-    check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            1e-4);
-    check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            1e-4);
-
-    // Check the whole spline representations ---
-    check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            1e-7);
+    // The test is in a separated function to be called from host. 
+    test();
 }
