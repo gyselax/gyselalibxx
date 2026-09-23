@@ -158,7 +158,7 @@ jobs:
 
           if [ "$install_tree_count" -ne "$src_tree_count" ]; then
             echo "::error::Header file counts differ between src folder and installed files: installed=$install_tree_count, src=$src_tree_count"
-            echo "::error::Please update the CMakeLists.txt to reflect any added/removed header files.
+            echo "::error::Please update the CMakeLists.txt to reflect any added/removed header files."
             exit 1
           fi
 
