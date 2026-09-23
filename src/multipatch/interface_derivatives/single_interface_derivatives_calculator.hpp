@@ -1190,13 +1190,13 @@ private:
     }
 
     /// @brief Compute the coefficient alpha_i.
-    double get_alpha(double const cell_length_left, double const cell_length_right) const
+    static double get_alpha(double const cell_length_left, double const cell_length_right) const
     {
         return -0.5 * cell_length_left / (cell_length_right + cell_length_left);
     }
 
     /// @brief Compute the coefficient beta_i.
-    double get_beta(double const cell_length_left, double const cell_length_right) const
+    static double get_beta(double const cell_length_left, double const cell_length_right) const
     {
         return -0.5 * cell_length_right / (cell_length_right + cell_length_left);
     }
