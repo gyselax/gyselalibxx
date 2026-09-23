@@ -213,7 +213,7 @@ double run_cosine_case(std::size_t n_cells, IdxRange<TestGridX> idx_range_test)
             ddc::reducer::max<double>(),
             KOKKOS_LAMBDA(Idx<TestGridX> const idx) {
                 Coord<X> const coord(ddc::coordinate(idx));
-                double const expected = std::cos(double(coord));
+                double const expected = Kokkos::cos(double(coord));
                 if (coord >= local_x_min && coord <= local_x_max) {
                     double const actual = evaluator(coord, get_const_field(coeffs));
                     return Kokkos::abs(actual - expected);
