@@ -706,6 +706,6 @@ public:
 
 TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
-    // The test is in a separated function to be called from host. 
+    // The test is in a separated function to be called from host.
     test();
 }
