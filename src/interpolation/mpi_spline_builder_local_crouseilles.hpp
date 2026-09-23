@@ -95,8 +95,7 @@ public:
     using data_type = double;
 
     /// @brief The discrete dimension on which interpolation points are defined.
-    using interpolation_grid_type
-            = InterpolationGrid1D;
+    using interpolation_grid_type = InterpolationGrid1D;
 
     /// @brief The continuous dimension of interest.
     using continuous_dimension_type = typename interpolation_grid_type::continuous_dimension_type;
@@ -285,22 +284,22 @@ public:
         // the result of the calculation to the neighbouring ranks.
         compute_local_deriv_component(
                 local_derivs_xmin,
+                lower_request,
+                s_tag_lower,
                 local_vals,
                 m_local_idx_range.front(),
                 m_rank_below,
                 BCLower,
-                global_derivs_xmin,
-                lower_request,
-                s_tag_lower);
+                global_derivs_xmin);
         compute_local_deriv_component(
                 local_derivs_xmax,
+                upper_request,
+                s_tag_upper,
                 local_vals,
                 m_local_idx_range.back(),
                 m_rank_above,
                 BCUpper,
-                global_derivs_xmax,
-                upper_request,
-                s_tag_upper);
+                global_derivs_xmax);
 
         // Collect calculation from neighbouring ranks and complete the linear combination to obtain the
         // approximations of the derivatives.
@@ -386,6 +385,8 @@ public:
      * This method should be private but cannot be due to cuda restrictions.
      *
      * @param[out] local_derivs The field to fill.
+     * @param[out] request The MPI request resulting from the MPI_Isend call.
+     * @param[in] send_tag The MPI tag used to send this boundary's local sum to @p neighbour_rank.
      * @param[in] local_vals The local function values.
      * @param[in] boundary_idx The local index of the boundary point (front() or back() of
      * the local interpolation index range).
@@ -395,8 +396,6 @@ public:
      * (only actually used when @p neighbour_rank == -1).
      * @param[in] global_derivs The physical derivative supplied by the caller for this end of
      * the *global* domain (only used when @p neighbour_rank == -1 and @p bc == HERMITE).
-     * @param[out] request The MPI request resulting from the MPI_Isend call.
-     * @param[in] send_tag The MPI tag used to send this boundary's local sum to @p neighbour_rank.
      */
     template <
             class IdxRangeBatchedDerivInterpolation,
@@ -405,6 +404,8 @@ public:
             class LayoutDerivs>
     void compute_local_deriv_component(
             DField<IdxRangeBatchedDerivInterpolation, memory_space> local_derivs,
+            MPI_Request& request,
+            int send_tag,
             DConstField<IdxRangeBatchedInterpolation, memory_space, LayoutVals> local_vals,
             Idx<interpolation_grid_type> const& boundary_idx,
             int neighbour_rank,
@@ -412,9 +413,7 @@ public:
             std::optional<DConstField<
                     IdxRangeBatchedDerivInterpolation,
                     memory_space,
-                    LayoutDerivs>> const& global_derivs,
-            MPI_Request& request,
-            int send_tag) const
+                    LayoutDerivs>> const& global_derivs) const
     {
         using IdxDerivBatch = typename IdxRangeBatchedDerivInterpolation::discrete_element_type;
         using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatchedDerivInterpolation, deriv_type>;
