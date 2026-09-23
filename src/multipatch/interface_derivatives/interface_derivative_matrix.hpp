@@ -539,8 +539,9 @@ private:
      * extremity at the interface of the 1D grid. 
      */
     template <class Grid1Or2>
-    static Idx<Grid1Or2> get_idx_interface(IdxRange<Grid1Or2> const idx_range_slice, Extremity extremity)
-            const
+    static Idx<Grid1Or2> get_idx_interface(
+            IdxRange<Grid1Or2> const idx_range_slice,
+            Extremity extremity) const
     {
         return (extremity == Extremity::FRONT) ? idx_range_slice.front() : idx_range_slice.back();
     }
