@@ -16,20 +16,6 @@
 #include "mpi_scope_guard.hpp"
 #include "mpi_spline_builder_local_crouseilles.hpp"
 
-// These tests are run with 2 MPI ranks (see tests/interpolation/CMakeLists.txt), each rank
-// owning one half of a globally periodic domain. Every dimension tag below is used to build a
-// *local*, non-periodic B-spline basis for a single rank (X::PERIODIC = false): the wrapped
-// internal ddc::SplineBuilder inside MPISplineBuilderLocalCrouseilles always uses HERMITE
-// closure. "PERIODIC" as a MPISplineBuilderLocalCrouseilles template argument only selects the
-// wrap-around MPI rank topology (rank 0's lower neighbour is the last rank), independent of the
-// (always non-periodic) local B-spline basis.
-
-// Run entirely on the host execution space: this keeps the test focused on the algorithm
-// (index/MPI logic) rather than device-memory plumbing, and matches the host-only
-// SplineRThetaBuilder_host precedent in spline_interpolation_centre.cpp.
-using ExecSpace = Kokkos::DefaultHostExecutionSpace;
-using MemorySpace = Kokkos::HostSpace;
-
 namespace {
 
 /// @brief Build a rank-local, non-periodic uniform cubic B-spline basis + interpolation grid
@@ -81,11 +67,11 @@ struct TestGridX : UniformGridBase<X>
 {
 };
 
-TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
+void test_MPISplineBuilderLocalCrouseilles_ReproducesLinearFunction()
 {
     using Builder = MPISplineBuilderLocalCrouseilles<
-            ExecSpace,
-            MemorySpace,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesX,
             IdxRange<GridX>,
             ddc::SplineBuilderClosure::HERMITE,
@@ -123,14 +109,17 @@ TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
     DField<IdxRange<ddc::Deriv<X>>> derivs(derivs_alloc);
 
     ddc::parallel_for_each(
-            ExecSpace(),
+            Kokkos::DefaultExecutionSpace(),
             idx_range_x,
             KOKKOS_LAMBDA(Idx<GridX> const idx) {
                 double const x = ddc::coordinate(idx);
                 vals(idx) = slope * x + intercept;
             });
     Idx<ddc::Deriv<X>> first_deriv(1);
-    derivs(first_deriv) = slope;
+    Kokkos::parallel_for(
+            "Fill deriv",
+            Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(0, 1),
+            KOKKOS_LAMBDA(const int) { derivs(first_deriv) = slope; });
 
     builder(coeffs,
             get_const_field(vals),
@@ -139,8 +128,8 @@ TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
 
     ddc::NullExtrapolationRule extrapolation;
     ddc::SplineEvaluator<
-            ExecSpace,
-            MemorySpace,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesX,
             GridX,
             ddc::NullExtrapolationRule,
@@ -155,14 +144,19 @@ TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
     });
 }
 
+TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
+{
+    test_MPISplineBuilderLocalCrouseilles_ReproducesLinearFunction();
+}
+
 namespace {
 
 template <class Grid, class BSplines>
 double run_cosine_case(std::size_t n_cells, IdxRange<TestGridX> idx_range_test)
 {
     using Builder = MPISplineBuilderLocalCrouseilles<
-            ExecSpace,
-            MemorySpace,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplines,
             IdxRange<Grid>,
             ddc::SplineBuilderClosure::PERIODIC,
@@ -180,7 +174,7 @@ double run_cosine_case(std::size_t n_cells, IdxRange<TestGridX> idx_range_test)
     DFieldMem<IdxRange<Grid>> vals_alloc(idx_range_x);
     DField<IdxRange<Grid>> vals(vals_alloc);
     ddc::parallel_for_each(
-            ExecSpace(),
+            Kokkos::DefaultExecutionSpace(),
             idx_range_x,
             KOKKOS_LAMBDA(Idx<Grid> const idx) {
                 double const x = ddc::coordinate(idx);
@@ -196,8 +190,8 @@ double run_cosine_case(std::size_t n_cells, IdxRange<TestGridX> idx_range_test)
 
     ddc::NullExtrapolationRule extrapolation;
     ddc::SplineEvaluator<
-            ExecSpace,
-            MemorySpace,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplines,
             Grid,
             ddc::NullExtrapolationRule,

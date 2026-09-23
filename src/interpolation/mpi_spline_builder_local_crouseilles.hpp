@@ -411,10 +411,10 @@ public:
                 IdxRangeBatchedInterpolation>(deriv_idx_range, batched_interpolation_domain);
     }
 
-private:
     /**
      * @brief Compute the derivative estimate at one boundary (lower or upper) of the local
      * domain, for every batch index, and store it (with @c ddc::Deriv order 1) into @p out.
+     * This method should be private but cannot be due to cuda restrictions.
      *
      * @param[out] out The field (indexed by deriv_type x batch dims) to fill.
      * @param[in] idx_range_batch The batch index range (everything except the interpolation grid).
@@ -470,7 +470,7 @@ private:
 
         int direction(boundary_idx == m_local_idx_range.front() ? 1 : -1);
 
-        std::array<double, s_n_neighbours> const& weights = s_weights;
+        std::array<double, s_n_neighbours> const weights = s_weights;
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(local_derivs),
