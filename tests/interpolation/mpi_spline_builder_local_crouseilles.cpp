@@ -73,7 +73,7 @@ void test_MPISplineBuilderLocalCrouseilles_ReproducesLinearFunction()
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesX,
-            IdxRange<GridX>,
+            GridX,
             ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineBuilderClosure::HERMITE>;
 
@@ -158,7 +158,7 @@ double run_cosine_case(std::size_t n_cells, IdxRange<TestGridX> idx_range_test)
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplines,
-            IdxRange<Grid>,
+            Grid,
             ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineBuilderClosure::PERIODIC>;
 
