@@ -179,16 +179,16 @@ private:
     /// only sets |w_1|, reproducing a plain central-difference estimate
     /// (f(x_i + dx) - f(x_i - dx)) / (2 dx), which is exact for linear functions.
     static constexpr std::array<double, s_n_neighbours> s_weights
-            = {-0.2214309755e-5,
-               1.771447804e-5,
-               -7.971515119e-5,
-               3.011461267e-4,
-               -1.113797807e-3,
-               4.145187862e-3,
-               -0.01546473933,
-               0.05771376946,
+            = {0.8038475846,
                -0.2153903385,
-               0.8038475846};
+               0.05771376946,
+               -0.01546473933,
+               4.145187862e-3,
+               -1.113797807e-3,
+               3.011461267e-4,
+               -7.971515119e-5,
+               1.771447804e-5,
+               -0.2214309755e-5};
 
     /// @brief MPI tags identifying the two logical exchange channels (a rank's lower-boundary
     /// local sum, and a rank's upper-boundary local sum). Needed because with only 2 MPI ranks
