@@ -136,12 +136,20 @@ void test_MPISplineBuilderLocalCrouseilles_ReproducesLinearFunction()
             ddc::NullExtrapolationRule>
             evaluator(extrapolation, extrapolation);
 
-    ddc::host_for_each(idx_range_test_x, [&](Idx<TestGridX> const idx) {
-        Coord<X> const coord(ddc::coordinate(idx));
-        double const expected = slope * double(coord) + intercept;
-        double const actual = evaluator(coord, get_const_field(coeffs));
-        EXPECT_NEAR(actual, expected, 1e-8);
-    });
+    double max_error = ddc::parallel_transform_reduce(
+            Kokkos::DefaultExecutionSpace(),
+            idx_range_test_x,
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(Idx<TestGridX> const idx) {
+                Coord<X> const coord(ddc::coordinate(idx));
+                double const expected = slope * double(coord) + intercept;
+                double const actual = evaluator(coord, get_const_field(coeffs));
+                return Kokkos::abs(expected - actual);
+            });
+
+    std::cout << "Max err:" << max_error << std::endl;
+    EXPECT_LT(max_error, 1e-8);
 }
 
 TEST(MPISplineBuilderLocalCrouseilles, ReproducesLinearFunction)
@@ -198,15 +206,21 @@ double run_cosine_case(std::size_t n_cells, IdxRange<TestGridX> idx_range_test)
             ddc::NullExtrapolationRule>
             evaluator(extrapolation, extrapolation);
 
-    double max_error = 0.0;
-    ddc::host_for_each(idx_range_test, [&](Idx<TestGridX> const idx) {
-        Coord<X> const coord(ddc::coordinate(idx));
-        double const expected = std::cos(double(coord));
-        if (coord >= local_x_min && coord <= local_x_max) {
-            double const actual = evaluator(coord, get_const_field(coeffs));
-            max_error = std::max(max_error, std::abs(actual - expected));
-        }
-    });
+    double max_error = ddc::parallel_transform_reduce(
+            Kokkos::DefaultExecutionSpace(),
+            idx_range_test,
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(Idx<TestGridX> const idx) {
+                Coord<X> const coord(ddc::coordinate(idx));
+                double const expected = std::cos(double(coord));
+                if (coord >= local_x_min && coord <= local_x_max) {
+                    double const actual = evaluator(coord, get_const_field(coeffs));
+                    return Kokkos::abs(actual - expected);
+                } else {
+                    return 0.0;
+                }
+            });
     return max_error;
 }
 
