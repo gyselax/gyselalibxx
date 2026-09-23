@@ -60,10 +60,7 @@ public:
      * 
      * @param args The objects to be stored in the class.
      */
-    explicit KOKKOS_FUNCTION MultipatchType(T<Patches>... args)
-        : m_tuple(std::make_tuple(std::move(args)...))
-    {
-    }
+    explicit KOKKOS_FUNCTION MultipatchType(T<Patches>... args) : m_tuple(std::move(args)...) {}
 
     /**
      * Create a MultipatchType class by copying an instance of another compatible MultipatchType.
@@ -81,7 +78,7 @@ public:
      */
     template <template <typename P> typename OtherType, class... OPatches>
     KOKKOS_FUNCTION MultipatchType(MultipatchType<OtherType, OPatches...> const& other)
-        : m_tuple(std::make_tuple(other.template get<Patches>()...))
+        : m_tuple(other.template get<Patches>()...)
     {
         static_assert(
                 ddc::type_seq_contains_v<PatchOrdering, ddc::detail::TypeSeq<OPatches...>>,
@@ -99,7 +96,7 @@ public:
      */
     template <template <typename P> typename OtherType, class... OPatches>
     MultipatchType(MultipatchType<OtherType, OPatches...>&& other)
-        : m_tuple(std::make_tuple(std::move(other.template get<Patches>())...))
+        : m_tuple(std::move(other.template get<Patches>())...)
     {
         static_assert(
                 std::is_same_v<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<OPatches...>>,

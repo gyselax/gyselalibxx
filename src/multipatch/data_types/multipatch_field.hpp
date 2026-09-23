@@ -129,7 +129,7 @@ public:
      */
     template <template <typename P> typename OtherType, class... OPatches>
     MultipatchField(MultipatchField<OtherType, OPatches...>&& other)
-        : base_type(std::make_tuple(other.template get<Patches>()...))
+        : base_type(other.template get<Patches>()...)
     {
         static_assert(
                 std::is_same_v<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<OPatches...>>,
