@@ -434,8 +434,10 @@ public:
 
         int direction(boundary_idx == m_local_idx_range.front() ? 1 : -1);
 
+        const std::source_location location = std::source_location::current();
         std::array<double, s_n_neighbours> const weights = s_weights;
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(local_derivs),
                 KOKKOS_LAMBDA(IdxDerivBatch const idx_db) {
@@ -451,6 +453,7 @@ public:
 
         int const count = static_cast<int>(local_derivs.size());
 
+        Kokkos::fence("Ensure derivative is calculated before sending data");
         MPI_Isend(
                 local_derivs.data_handle(),
                 count,
