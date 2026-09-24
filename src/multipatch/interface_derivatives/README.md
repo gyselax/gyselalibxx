@@ -3,7 +3,7 @@
 On multi-patch geometries, we can impose a $`\mathcal{C}^1`$ regularity on the whole domain by fixing identical derivatives and function values on the interface.
 The operators implemented in this folder propose methods to compute the derivatives at the patch interfaces.
 
-The method applied here is detailed in Vidal et al. (2025)[^2].
+The method applied here is detailed in Vidal et al. (2026)[^2].
 
 **Assumptions:**
 
@@ -150,7 +150,7 @@ double const deriv_interface =
 
 ### Formulae
 
-We use a method inspired by Crouseille et al. (2009)[^1], and detailed in Vidal et al.(2025)[^2].
+We use a method inspired by Crouseille et al. (2009)[^1], and detailed in Vidal et al.(2026)[^2].
 To establish the formulae, we use the following relation between each consecutive interpolation point,
 
 ```math
@@ -483,4 +483,4 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
-Journal of Scientific Computing, (2025) [ACCEPTED]
+J Sci Comput 106, 58 (2026). https://doi.org/10.1007/s10915-025-03161-z
