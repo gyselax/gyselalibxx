@@ -17,9 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Rename `SingleInterfaceDerivativesCalculator` into `InterfaceDerivCoeffs`,
-as well as `SingleInterfaceDerivativesCalculator::get_function_coefficients()` into `InterfaceDerivCoeffs::get_approx_deriv()`
-for clarity purpose. The names of the files also changed into `interface_derivative_coefficients[_collection].hpp`.
+- Rename `SingleInterfaceDerivativesCalculator` into `InterfaceDerivCoeffs`.
+- Rename `SingleInterfaceDerivativesCalculatorCollection` into `InterfaceDerivCoeffsCollection`.
+- Rename `SingleInterfaceDerivativesCalculator::get_function_coefficients()` into `InterfaceDerivCoeffs::get_approx_deriv()`. 
+- Rename `single_interface_derivatives_calculator.hpp` into `interface_derivative_coefficients.hpp`.
+- Rename `single_interface_derivatives_calculator_collection.hpp` into `interface_derivative_coefficients_collection.hpp`.
 
 ### Deprecated
 
