@@ -11,13 +11,13 @@
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "non_uniform_interpolation_points.hpp"
-#include "single_interface_derivatives_calculator.hpp"
-#include "single_interface_derivatives_calculator_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
+#include "interface_derivative_coefficients_collection.hpp"
 #include "view.hpp"
 
 
 /*
-    Test SingleInterfaceDerivativesCalculatorCollection on the following geometry:
+    Test InterfaceDerivCoeffsCollection on the following geometry:
 
         |  1  |  2  |  3  |
 
@@ -73,7 +73,7 @@ void initialise_all_functions(MultipatchField<DFieldOnPatch_host, Patches...> co
 }
 
 
-struct SingleInterfaceDerivativesCalculatorCollectionTest : public ::testing::Test
+struct InterfaceDerivCoeffsCollectionTest : public ::testing::Test
 {
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
     // patches 1 ---------------------------------
@@ -118,12 +118,12 @@ protected:
     const IdxRange<GridX<3>, GridY<3>> idx_range_xy3;
 
 
-    // SingleInterfaceDerivativesCalculators for interfaces along y.
-    SingleInterfaceDerivativesCalculator<Interface_12> const derivatives_calculator_1_2;
-    SingleInterfaceDerivativesCalculator<Interface_23> const derivatives_calculator_2_3;
+    // InterfaceDerivCoeffss for interfaces along y.
+    InterfaceDerivCoeffs<Interface_12> const derivatives_calculator_1_2;
+    InterfaceDerivCoeffs<Interface_23> const derivatives_calculator_2_3;
 
 public:
-    SingleInterfaceDerivativesCalculatorCollectionTest()
+    InterfaceDerivCoeffsCollectionTest()
         : idx_range_x1(SplineInterpPointsX<1, BCG, BCH>::template get_domain<GridX<1>>())
         , idx_range_x2(SplineInterpPointsX<2, BCH, BCH>::template get_domain<GridX<2>>())
         , idx_range_x3(SplineInterpPointsX<3, BCH, BCG>::template get_domain<GridX<3>>())
@@ -273,10 +273,10 @@ public:
 } // end namespace
 
 
-TEST_F(SingleInterfaceDerivativesCalculatorCollectionTest, CheckCallToOperators)
+TEST_F(InterfaceDerivCoeffsCollectionTest, CheckCallToOperators)
 {
     // Order in sequences ------------------------------------------------------------------------
-    SingleInterfaceDerivativesCalculatorCollection
+    InterfaceDerivCoeffsCollection
             deriv_calculators_collect(derivatives_calculator_1_2, derivatives_calculator_2_3);
 
     // Instantiate test function values ==========================================================
@@ -295,7 +295,7 @@ TEST_F(SingleInterfaceDerivativesCalculatorCollectionTest, CheckCallToOperators)
     // Initialise the function values
     initialise_all_functions(functions);
 
-    // Test SingleInterfaceDerivativesCalculatorCollection =======================================
+    // Test InterfaceDerivCoeffsCollection =======================================
     check_function_call(
             functions,
             deriv_calculators_collect,

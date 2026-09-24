@@ -64,7 +64,7 @@ inline constexpr bool is_single_derivative_calculator_v
  * (especially in the non-uniform case). 
  */
 template <class InterfaceType>
-class SingleInterfaceDerivativesCalculator
+class InterfaceDerivCoeffs
 {
     static_assert(
             (!std::is_same_v<typename InterfaceType::Edge1, OutsideEdge>)&&(
@@ -136,9 +136,9 @@ private:
 
 public:
     /**
-     * @brief Instantiate SingleInterfaceDerivativesCalculator. 
+     * @brief Instantiate InterfaceDerivCoeffs. 
      * 
-     * @anchor SingleInterfaceDerivativesCalculatorInstantiator
+     * @anchor InterfaceDerivCoeffsInstantiator
      * 
      * It computes the coefficients a and b, and the weights @f$\omega_k@f$
      * and stores the values in the class. 
@@ -164,7 +164,7 @@ public:
      * ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the 
      * additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense.  
      */
-    SingleInterfaceDerivativesCalculator(
+    InterfaceDerivCoeffs(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
             ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
@@ -175,11 +175,11 @@ public:
         , m_idx_range_perp_2(idx_range_1d_2)
         , m_weights_patch_1_alloc(
                   "m_weights_patch_1 "
-                  "(SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator)",
+                  "(InterfaceDerivCoeffs::InterfaceDerivCoeffs)",
                   m_idx_range_perp_1)
         , m_weights_patch_2_alloc(
                   "m_weights_patch_2 "
-                  "(SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator)",
+                  "(InterfaceDerivCoeffs::InterfaceDerivCoeffs)",
                   m_idx_range_perp_2)
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
@@ -232,8 +232,8 @@ public:
 
 
     /**
-     * @brief Instantiate SingleInterfaceDerivativesCalculator. 
-     * See @ref SingleInterfaceDerivativesCalculatorInstantiator.
+     * @brief Instantiate InterfaceDerivCoeffs. 
+     * See @ref InterfaceDerivCoeffsInstantiator.
      * @param idx_range_a Index range on one patch. 
      * @param idx_range_b Index range on the other patch. 
      * @param Closure1 The spline closure type on the opposite edge of the interface on 
@@ -242,12 +242,12 @@ public:
      * the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. 
      */
     template <class IdxRangeA, class IdxRangeB>
-    SingleInterfaceDerivativesCalculator(
+    InterfaceDerivCoeffs(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
             ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineBuilderClosure const& Closure2 = ddc::SplineBuilderClosure::HERMITE)
-        : SingleInterfaceDerivativesCalculator(
+        : InterfaceDerivCoeffs(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
                 Closure1,
@@ -258,8 +258,8 @@ public:
     }
 
     /**
-     * @brief Instantiate SingleInterfaceDerivativesCalculator. 
-     * See @ref SingleInterfaceDerivativesCalculatorInstantiator.
+     * @brief Instantiate InterfaceDerivCoeffs. 
+     * See @ref InterfaceDerivCoeffsInstantiator.
      * This constructor calculates an approximation of the formula. 
      * @param idx_range_1d_1 1D index range perpendicular to the Interface, 
      * on the patch 1. 
@@ -270,11 +270,11 @@ public:
      * @warning If the mesh has additional interpolation points, please be sure to
      * not take these points. 
      */
-    SingleInterfaceDerivativesCalculator(
+    InterfaceDerivCoeffs(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
             std::size_t const number_chosen_cells)
-        : SingleInterfaceDerivativesCalculator(
+        : InterfaceDerivCoeffs(
                 (m_extremity_1 == Extremity::FRONT)
                         ? idx_range_1d_1.take_first(IdxStep<EdgePerpGrid1>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size())))
@@ -291,8 +291,8 @@ public:
     }
 
     /**
-     * @brief Instantiate SingleInterfaceDerivativesCalculator. 
-     * See @ref SingleInterfaceDerivativesCalculatorInstantiator.
+     * @brief Instantiate InterfaceDerivCoeffs. 
+     * See @ref InterfaceDerivCoeffsInstantiator.
      * This constructor calculates an approximation of the formula. 
      * @param idx_range_a Index range on one patch. 
      * @param idx_range_b Index range on the other patch. 
@@ -302,11 +302,11 @@ public:
      * not take these points. 
      */
     template <class IdxRangeA, class IdxRangeB>
-    SingleInterfaceDerivativesCalculator(
+    InterfaceDerivCoeffs(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
             std::size_t const number_chosen_cells)
-        : SingleInterfaceDerivativesCalculator(
+        : InterfaceDerivCoeffs(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
                 number_chosen_cells)
@@ -373,7 +373,7 @@ public:
      * will return the same value. 
      */
     template <class Layout1, class Layout2>
-    double get_function_coefficients(
+    inline double get_function_coefficients(
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
     {
@@ -1134,13 +1134,13 @@ private:
     }
 
     /// @brief Compute the coefficient alpha_i.
-    double get_alpha(double const cell_length_left, double const cell_length_right) const
+    static double get_alpha(double const cell_length_left, double const cell_length_right)
     {
         return -0.5 * cell_length_left / (cell_length_right + cell_length_left);
     }
 
     /// @brief Compute the coefficient beta_i.
-    double get_beta(double const cell_length_left, double const cell_length_right) const
+    static double get_beta(double const cell_length_left, double const cell_length_right)
     {
         return -0.5 * cell_length_right / (cell_length_right + cell_length_left);
     }
@@ -1158,5 +1158,5 @@ private:
 
 
 template <class InterfaceType>
-inline constexpr bool enable_single_derivative_calculator<
-        SingleInterfaceDerivativesCalculator<InterfaceType>> = true;
+inline constexpr bool
+        enable_single_derivative_calculator<InterfaceDerivCoeffs<InterfaceType>> = true;

@@ -18,7 +18,7 @@
 #include "interface_derivatives_test_utils.hpp"
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
-#include "single_interface_derivatives_calculator.hpp"
+#include "interface_derivative_coefficients.hpp"
 
 
 /*
@@ -153,11 +153,11 @@ void initialise_2D_function(host_t<DField<IdxRange<Grid1, Grid2>>> function)
 
 
 template <class T>
-struct SingleInterfaceDerivativesCalculatorFixture;
+struct InterfaceDerivCoeffsFixture;
 
 template <class InterpolationType, class Edge_Patch1, class Edge_Patch2>
-struct SingleInterfaceDerivativesCalculatorFixture<
-        std::tuple<InterpolationType, Edge_Patch1, Edge_Patch2>> : public ::testing::Test
+struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Edge_Patch2>>
+    : public ::testing::Test
 {
     // Get the parameters of the test: patch connection and interpolation type.
     using Interpolation = InterpolationType;
@@ -423,7 +423,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
         }
 
         // Instantiation with the reduced index range.
-        SingleInterfaceDerivativesCalculator<Interface_1_2> const
+        InterfaceDerivCoeffs<Interface_1_2> const
                 derivatives_calculator(reduced_idx_range_perp1, reduced_idx_range_perp2);
 
 
@@ -434,11 +434,11 @@ struct SingleInterfaceDerivativesCalculatorFixture<
             idx_range_perp2 = idx_range_eta2;
         }
         // Instantiation with the indicated number of chosen cells.
-        SingleInterfaceDerivativesCalculator<Interface_1_2> const
+        InterfaceDerivCoeffs<Interface_1_2> const
                 derivatives_calculator_approx(idx_range_r1, idx_range_perp2, n_cells);
 
         // Instantiation with the indicated number of chosen cells and 2D index ranges.
-        SingleInterfaceDerivativesCalculator<Interface_1_2> const
+        InterfaceDerivCoeffs<Interface_1_2> const
                 derivatives_calculator_approx_2D(idx_range_etaxi2, idx_range_rtheta1, n_cells);
 
         // Coefficients a and b
@@ -597,12 +597,12 @@ using Cases = tuple_to_types_t<tuple_cat_t<
                 SouthEdge2>>>>;
 
 
-TYPED_TEST_SUITE(SingleInterfaceDerivativesCalculatorFixture, Cases);
+TYPED_TEST_SUITE(InterfaceDerivCoeffsFixture, Cases);
 
 
 
 // Check that the local grids and the equivalent global grid match together.
-TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck)
+TYPED_TEST(InterfaceDerivCoeffsFixture, InterpolationPointsCheck)
 {
     // Get parameters of the test.
     constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
@@ -739,9 +739,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
 
 
 // Check the values of the computed interface derivatives.
-TYPED_TEST(
-        SingleInterfaceDerivativesCalculatorFixture,
-        InterfaceDerivativesExactAndApproximationFormulae)
+TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximationFormulae)
 {
     // Get parameters of the test.
     constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
@@ -877,7 +875,7 @@ TYPED_TEST(
     if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
         // We test if the boundaries are well treated => only work with 5 cells to better identify an error.
         // 5 cells -------------------------------------------------------------------------------
-        SingleInterfaceDerivativesCalculator<Interface_1_2> const derivatives_calculator(
+        InterfaceDerivCoeffs<Interface_1_2> const derivatives_calculator(
                 TestFixture::idx_range_rtheta1,
                 TestFixture::idx_range_etaxi2,
                 ddc::SplineBuilderClosure::GREVILLE,

@@ -18,8 +18,8 @@ the boundary cells.
 
 ## Contents
 
-- [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `SingleInterfaceDerivativesCalculator` operator.
-  - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code.
+- [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `InterfaceDerivCoeffs` operator.
+  - [How to use the `InterfaceDerivCoeffs` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
 
 ## Relation between derivatives on the boundaries of two connected patches
@@ -70,17 +70,17 @@ There are different ways to compute the coefficients $`a^i_{N^L,N^R}`$,
 $`b^i_{N^L,N^R}`$, and $`c^i_{N^L,N^R}`$. There are described in the section
 [Formulae](#formulae).
 
-Firstly, we describe how to use the `SingleInterfaceDerivativesCalculator` operator.
+Firstly, we describe how to use the `InterfaceDerivCoeffs` operator.
 
-### How to use the SingleInterfaceDerivativesCalculator operator?
+### How to use the InterfaceDerivCoeffs operator?
 
-When `SingleInterfaceDerivativesCalculator` is instantiated, it computes and stores the coefficients
+When `InterfaceDerivCoeffs` is instantiated, it computes and stores the coefficients
 $`a^i_{N^L,N^R}`$ and $`b^i_{N^L,N^R}`$ and the weights $`\{\omega_{k, N^L,N^R}^i\}_{k = - N^L}^{N^R}`$.
 To instantiate it, we need the index ranges of the interpolation points. If we want to use the exact formula,
 we need to provide the index ranges with all the points,
 
 ```cpp
-SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 ```
 
 If we want to use an approximation, we provide the index ranges with the interpolation points on the selected cells,
@@ -88,13 +88,13 @@ If we want to use an approximation, we provide the index ranges with the interpo
 ```cpp
 Patch1::IdxRange1D idx_range_patch_1_reduced (idx_range_patch_1.take_first(N_L_reduc +1));
 Patch2::IdxRange1D idx_range_patch_2_reduced (idx_range_patch_2.take_last(N_R_reduc +1));
-SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
+InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
 ```
 
 or we can directly call, for $`N_{reduc} = N^L = N^R`$,
 
 ```cpp
-SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
+InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
 ```
 
 > **Remark:** For interpolation with interpolation points as closure condition, a special treatment has to be carried out on the boundary cells
@@ -103,11 +103,11 @@ SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_r
 
 ```cpp
 // If we want to apply the treatment on Patch 1 and Patch 2
-SingleInterfaceDerivativesCalculator<Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 // or if we want to apply the treatment only on Patch 1
-SingleInterfaceDerivativesCalculator<Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 // or if we want to apply the treatment only on Patch 2
-SingleInterfaceDerivativesCalculator<Interface_12, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 ```
 
 > If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
