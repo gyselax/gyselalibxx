@@ -12,11 +12,11 @@
 
 
 template <class T>
-inline constexpr bool enable_single_derivative_calculator = false;
+inline constexpr bool enable_interface_derivative_coefficients = false;
 
 template <class T>
 inline constexpr bool is_single_derivative_calculator_v
-        = enable_single_derivative_calculator<std::remove_const_t<std::remove_reference_t<T>>>;
+        = enable_interface_derivative_coefficients<std::remove_const_t<std::remove_reference_t<T>>>;
 
 /**
  * @brief Compute the derivative of an equivalent global spline 
@@ -1159,4 +1159,4 @@ private:
 
 template <class InterfaceType>
 inline constexpr bool
-        enable_single_derivative_calculator<InterfaceDerivCoeffs<InterfaceType>> = true;
+        enable_interface_derivative_coefficients<InterfaceDerivCoeffs<InterfaceType>> = true;
