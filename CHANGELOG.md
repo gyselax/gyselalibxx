@@ -25,6 +25,10 @@ for clarity purpose. The names of the files also changed into `interface_derivat
 
 ### Removed
 
+### Dependency requirements
+
+- Remove Dask dependency in the tests.
+
 ## [v0.8.0] - 2026-09-09
 
 ### Added
