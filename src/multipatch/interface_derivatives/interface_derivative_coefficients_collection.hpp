@@ -32,13 +32,11 @@ inline constexpr bool is_single_derivative_calculator_collection_v
 template <class... Interfaces>
 class InterfaceDerivCoeffsCollection
 {
-    using DerivCalculatorTypeSeq
-            = ddc::detail::TypeSeq<InterfaceDerivCoeffs<Interfaces>...>;
+    using DerivCalculatorTypeSeq = ddc::detail::TypeSeq<InterfaceDerivCoeffs<Interfaces>...>;
 
     using InterfaceTypeSeq = ddc::detail::TypeSeq<Interfaces...>;
 
-    std::tuple<InterfaceDerivCoeffs<Interfaces> const&...>
-            m_derivative_calculator_collection;
+    std::tuple<InterfaceDerivCoeffs<Interfaces> const&...> m_derivative_calculator_collection;
 
 public:
     /**
@@ -72,8 +70,7 @@ public:
                 ddc::in_tags_v<Interface, InterfaceTypeSeq>,
                 "No element defined on this Interface in this collection.");
 
-        return std::get<InterfaceDerivCoeffs<Interface> const&>(
-                m_derivative_calculator_collection);
+        return std::get<InterfaceDerivCoeffs<Interface> const&>(m_derivative_calculator_collection);
     }
 };
 
@@ -81,8 +78,7 @@ public:
 // To help the template deduction.
 template <class... DerivCalculatorType>
 InterfaceDerivCoeffsCollection(DerivCalculatorType const&... derivative_calculators)
-        -> InterfaceDerivCoeffsCollection<
-                typename DerivCalculatorType::associated_interface...>;
+        -> InterfaceDerivCoeffsCollection<typename DerivCalculatorType::associated_interface...>;
 
 
 template <class... DerivCalculatorType>
