@@ -201,7 +201,7 @@ public:
 
     // TEST OPERATORS ============================================================================
     template <class DerivativesCalculatorType>
-    void check_get_coeff_deriv_patch_1_2_call_single(
+    static void check_get_coeff_deriv_patch_1_2_call_single(
             DerivativesCalculatorType const& deriv_calculators_tested,
             DerivativesCalculatorType const& deriv_calculators_expected)
     {
