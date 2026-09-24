@@ -156,7 +156,7 @@ double const deriv_interface =
 
 ### Formulae
 
-We use a method inspired by Crouseille et al. (2009)[^1], and detailed in Vidal et al.(2025)[^2].
+We use a method inspired by Crouseille et al. (2009)[^1], and detailed in Vidal et al.(2026)[^2].
 To establish the formulae, we use the following relation between each consecutive interpolation point,
 
 ```math
@@ -575,7 +575,7 @@ We simply refer to it as
 
 #### Approximation
 
-In Vidal et al. (2025)[^2], we see that if the number of chosen cells in `SingleInterfaceDerivatorCalculator` is large, then the system can be approximated by
+In Vidal et al. (2026)[^2], we see that if the number of chosen cells in `SingleInterfaceDerivatorCalculator` is large, then the system can be approximated by
 
 ```math
 \begin{bmatrix}
