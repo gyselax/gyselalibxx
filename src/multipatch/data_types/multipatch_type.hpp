@@ -95,7 +95,7 @@ public:
      * @param other The equivalent MultipatchType being copied.
      */
     template <template <typename P> typename OtherType, class... OPatches>
-    MultipatchType(MultipatchType<OtherType, OPatches...>&& other)
+    explicit MultipatchType(MultipatchType<OtherType, OPatches...>&& other)
         : m_tuple(std::move(other.template get<Patches>())...)
     {
         static_assert(
