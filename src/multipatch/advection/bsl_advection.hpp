@@ -11,13 +11,15 @@
 #include "vector_field.hpp"
 
 
-/** @brief Advection operator with a backward semi-Lagrangian method for multi-patch domains.
-    @tparam MultipatchInterpolator Multi-patch interpolator operator.
-    @tparam FootFinder Operator computing the feet of the characteristics of the advection.
-                       It has to be adapated for multi-patch domain.
-    @tparam X First continuous dimension of the physical domain.
-    @tparam Y Second continuous dimension of the physical domain.
-    @tparam ...Patches  Tags for each patch of the multi-patch domain.
+/** @brief Advection operator with a backward semi-Lagrangian method 
+ *         for multi-patch two-dimensional domains. 
+ * 
+ *  @tparam MultipatchInterpolator Multi-patch interpolator operator.
+ *  @tparam FootFinder Operator computing the feet of the characteristics of the advection.
+ *                     It has to be adapated for multi-patch domain.
+ *  @tparam X First continuous dimension of the physical domain.
+ *  @tparam Y Second continuous dimension of the physical domain.
+ *  @tparam ...Patches Tags for each patch of the multi-patch domain.
 */
 template <class MultipatchInterpolator, class FootFinder, class X, class Y, class... Patches>
 class MultipatchBslAdvection
@@ -34,9 +36,9 @@ private:
 
 public:
     /** @brief Instantiate the MultipatchBslAdvection.
-        @param interpolator Reference to a interpolator on multi-patch domain.
-        @param foot_finder Reference to an operator computing the feet of
-        the characteristics of the advection on a multi-patch domain.
+     *  @param interpolator Reference to a interpolator on multi-patch domain.
+     *  @param foot_finder Reference to an operator computing the feet of
+     *  the characteristics of the advection on a multi-patch domain.
     */
     MultipatchBslAdvection(MultipatchInterpolator& interpolator, FootFinder& foot_finder)
         : m_interpolator(interpolator)
@@ -47,10 +49,10 @@ public:
     ~MultipatchBslAdvection() = default;
 
     /** @brief Advect the givem function on dt along the given advection field. 
-        @param[in,out] allfdistribus Given function we want to advect.
-        @param[in] advection_fields_xy Given advection field corresponding to a vector along the physical axes X and Y. 
-        @param[in] dt Time step. 
-        @return Advected function given in allfdistribus. 
+     *  @param[in,out] allfdistribus Given function we want to advect.
+     *  @param[in] advection_fields_xy Given advection field corresponding to a vector along the physical axes X and Y. 
+     *  @param[in] dt Time step. 
+     *  @return Advected function given in allfdistribus. 
     */
     MultipatchField<DFieldOnPatch_host, Patches...> operator()(
             MultipatchField<DFieldOnPatch_host, Patches...> allfdistribus,
