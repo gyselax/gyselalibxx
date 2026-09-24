@@ -517,14 +517,14 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
                         coord_theta);
             }
 
-            // Coefficient c
-            double sum_values = derivatives_calculator.get_approx_deriv(
+            // Coefficient c (or the approximation of the interface derivative)
+            double deriv_interface_approx = derivatives_calculator.get_approx_deriv(
                     get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
                     get_const_field(function_2[idx_par_2][reduced_idx_range_perp2]));
 
             // Compare derivatives_calculator and derivatives_calculator_approx.
             EXPECT_NEAR(
-                    sum_values,
+                    deriv_interface_approx,
                     derivatives_calculator_approx.get_approx_deriv(
                             get_const_field(function_1[idx_par_1]),
                             get_const_field(function_2[idx_par_2])),
@@ -532,7 +532,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
 
             // Compare derivatives_calculator and derivatives_calculator_approx_2D.
             EXPECT_NEAR(
-                    sum_values,
+                    deriv_interface_approx,
                     derivatives_calculator_approx_2D.get_approx_deriv(
                             get_const_field(function_1[idx_par_1]),
                             get_const_field(function_2[idx_par_2])),
@@ -543,20 +543,24 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
                     = evaluator_g.deriv(idx_dr, interface_coord, get_const_field(function_g_coef));
 
             // Exact formula ---------------------------------------------------------------------
-            double const deriv_patch_1 = evaluator_g
-                                                 .deriv(idx_dr,
-                                                        interface_minus_coord,
-                                                        get_const_field(function_g_coef));
-            double const deriv_patch_2 = evaluator_g
-                                                 .deriv(idx_dr,
-                                                        interface_plus_coord,
-                                                        get_const_field(function_g_coef));
-            double const local_deriv = sum_values + coeff_deriv_patch_1 * deriv_patch_1
-                                       + coeff_deriv_patch_2 * deriv_patch_2;
+            /* The exact interface derivative is the approximated derivative + the contributions
+               of the derivatives on the other boundaries of the patches. 
+            */
+            double const deriv_bound_patch_1 = evaluator_g
+                                                       .deriv(idx_dr,
+                                                              interface_minus_coord,
+                                                              get_const_field(function_g_coef));
+            double const deriv_bound_patch_2 = evaluator_g
+                                                       .deriv(idx_dr,
+                                                              interface_plus_coord,
+                                                              get_const_field(function_g_coef));
+            double const local_deriv = deriv_interface_approx
+                                       + coeff_deriv_patch_1 * deriv_bound_patch_1
+                                       + coeff_deriv_patch_2 * deriv_bound_patch_2;
             EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
 
             // Approximation ---------------------------------------------------------------------
-            EXPECT_NEAR(sum_values, global_deriv, approximation_error_bound);
+            EXPECT_NEAR(deriv_interface_approx, global_deriv, approximation_error_bound);
         });
     };
 };
@@ -897,8 +901,8 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
                         double(TestFixture::theta1_max - ddc::coordinate(idx2_1)));
             }
 
-            // Coefficient c.
-            double const sum_values = derivatives_calculator.get_approx_deriv(
+            // Coefficient c (or the approximation of the interface derivative).
+            double const deriv_interface_approx = derivatives_calculator.get_approx_deriv(
                     get_const_field(function_2[idx2_2]),
                     get_const_field(function_1[idx2_1]));
 
@@ -908,7 +912,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
                                                        get_const_field(function_g_coef));
 
             // Exact formula ---------------------------------------------------------------------
-            double const local_deriv = sum_values;
+            double const local_deriv = deriv_interface_approx;
             EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
         });
     } else {

@@ -19,11 +19,11 @@ inline constexpr bool is_single_derivative_calculator_v
         = enable_interface_derivative_coefficients<std::remove_const_t<std::remove_reference_t<T>>>;
 
 /**
- * @brief Compute the derivative of an equivalent global spline 
- * at the interface between two patches. 
+ * @brief Compute the coefficients a, b and c of the interface derivative reconstruction method. 
  * 
  * For a given Interface, this operator computes the coefficients 
- * a, b and c of the following relation: 
+ * a, b and c of the following relation between the interface derivative and the derivatives 
+ * at the other boundaries of the two patches:
  * @f$ s'(X_I) = c + a s'(X_{I+1}) + b s'(X_{I+1})@f$, 
  * 
  * with 
@@ -41,6 +41,7 @@ inline constexpr bool is_single_derivative_calculator_v
  *          @f$ N1 @f$ the number of cells in patch 1, and
  *          @f$ N2 @f$ the number of cells in patch 2. 
  * 
+ * 
  * Scheme of the two patches: 
  *   X_{I-1}  X_I   X_{I+1}
  *      _______ _______
@@ -53,7 +54,7 @@ inline constexpr bool is_single_derivative_calculator_v
  * 
  * All the formulae and more details are given in the README.md. 
  * 
- * @tparam Interface The interface between two patches where we want 
+ * @tparam InterfaceType The interface between two patches where we want 
  * to compute the derivatives.  
  * 
  * @warning The applied method only works for interpolation points located on 
@@ -260,7 +261,7 @@ public:
     /**
      * @brief Instantiate InterfaceDerivCoeffs. 
      * See @ref InterfaceDerivCoeffsInstantiator.
-     * This constructor calculates an approximation of the formula. 
+     * This constructor calculates an *approximation* of the formula. 
      * @param idx_range_1d_1 1D index range perpendicular to the Interface, 
      * on the patch 1. 
      * @param idx_range_1d_2 1D index range perpendicular to the Interface, 
@@ -355,6 +356,8 @@ public:
      * @brief Get the linear combination of the function values (c).
      * 
      * @anchor get_approx_deriv
+     * This linear combination corresponds to an approximation of the 
+     * interface derivative. 
      * 
      * @param function_1 Function values at the interpolation points on patch 1. 
      * @param function_2 Function values at the interpolation points on patch 2. 
