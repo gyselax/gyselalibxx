@@ -22,7 +22,8 @@ template <
         // class SplineRThetaBuilder3,
         class MultipatchSplineEvaluator,
         // class MultipatchSplineEvaluatorType,
-        class Mapping,
+        class Mappings,
+        // class Mapping,
         class... Patches>
 // class Patch1,
 // class Patch2,
@@ -30,8 +31,11 @@ template <
 class MultipatchSplineFootFinder
 {
 private:
-    using X = typename Mapping::cartesian_tag_x;
-    using Y = typename Mapping::cartesian_tag_y;
+    using X = typename std::tuple_element<0, Mappings>::type::cartesian_tag_x;
+    using Y = typename std::tuple_element<0, Mappings>::type::cartesian_tag_y;
+
+    // using X = typename Mapping::cartesian_tag_x;
+    // using Y = typename Mapping::cartesian_tag_y;
 
     // using R = typename Patch1::Dim1;
     // using Theta = typename Patch1::Dim2;
@@ -71,7 +75,8 @@ private:
     MultipatchSplineBuilder& m_builders;
     MultipatchSplineEvaluator const& m_evaluators_advection_field;
 
-    Mapping const& m_mapping;
+    // Mapping const& m_mapping;
+    Mappings const& m_mappings;
 
 
 public:
@@ -83,7 +88,8 @@ public:
             // SplineRThetaBuilder2 const& builder_2,
             // SplineRThetaBuilder3 const& builder_3,
             MultipatchSplineEvaluator const& evaluators_advection_field,
-            Mapping const& mapping)
+            // Mapping const& mapping)
+            Mappings const& mappings)
         : m_time_steppers(time_steppers)
         , m_matrices_derivatives_interfaces(matrices_derivatives_interfaces)
         , m_builders(builders)
@@ -91,7 +97,8 @@ public:
         // , m_builder_2(builder_2)
         // , m_builder_3(builder_3)
         , m_evaluators_advection_field(evaluators_advection_field)
-        , m_mapping(mapping)
+        // , m_mapping(mapping)
+        , m_mappings(mappings)
     {
     }
 
@@ -465,104 +472,128 @@ private:
 
     template <class Patch>
     void advect_feet_on_patch(
+            CoordFieldOnPatch_host<Patch> const& feet_log,
+            DConstVectorField_XY_OnPatch_host<Patch> const& advection_field,
+            double const dt) const
+    {
+        using CoordLog = typename Patch::Coord12;
+        using Dim2 = typename Patch::Dim2;
+
+        IdxRangeOnPatch<Patch> const idx_range
+                = get_idx_range<typename Patch::Grid1, typename Patch::Grid2>(feet_log);
+
+        ddc::for_each(idx_range_rp, [&](typename Patch::Idx12 const idx) {
+            CoordLog const coord_log(feet_log(idx));
+            Coord<X, Y> const coord_xy = m_mapping(coord_log);
+
+            Coord<X, Y> const feet_xy = coord_xy - dt * advection_field(idx);
+        });
+
+        // Correction for the periodicity.
+        ddc::for_each(idx_range, [&](typename Patch::Idx12 const idx) {
+            feet_log(idx) = m_mapping(feet_xy);
+            ddc::select<Dim2>(feet_log(idx)) = ddcHelper::restrict_to_idx_range(
+                    ddc::select<Dim2>(feet_log(idx)),
+                    typename Patch::IdxRange2(idx_range));
+        });
+    }
+
+
+    template <class Patch>
+    void advect_feet_on_patch_with_Opoint(
             CoordFieldOnPatch_host<Patch> const& feet_rp,
             DConstVectorField_XY_OnPatch_host<Patch> const& advection_field,
             double const dt) const
     {
-        using CoordRTheta = typename Patch::Coord12;
-        using Theta = typename Patch::Dim2;
+        using Coord12 = typename Patch::Coord12;
+        using Dim2 = typename Patch::Dim2;
 
         IdxRangeOnPatch<Patch> const idx_range_rp
                 = get_idx_range<typename Patch::Grid1, typename Patch::Grid2>(feet_rp);
         // auto mapping = m_mappings.template get<Patch>();
-        Coord<X, Y> coord_Opoint(m_mapping(CoordRTheta(0, 0)));
+        Coord<X, Y> coord_Opoint(m_mapping(Coord12(0, 0)));
 
         ddc::for_each(idx_range_rp, [&](typename Patch::Idx12 const irp) {
-            CoordRTheta const coord_rp(feet_rp(irp));
+            Coord12 const coord_rp(feet_rp(irp));
             Coord<X, Y> const coord_xy = m_mapping(coord_rp);
 
             Coord<X, Y> const feet_xy = coord_xy - dt * advection_field(irp);
 
             // Correction on theta.
             if (norm_inf(feet_xy - coord_Opoint) < 1e-15) {
-                feet_rp(irp) = CoordRTheta(0, 0);
+                feet_rp(irp) = Coord12(0, 0);
             } else {
                 feet_rp(irp) = m_mapping(feet_xy);
-                ddc::select<Theta>(feet_rp(irp)) = ddcHelper::restrict_to_idx_range(
-                        ddc::select<Theta>(feet_rp(irp)),
+                ddc::select<Dim2>(feet_rp(irp)) = ddcHelper::restrict_to_idx_range(
+                        ddc::select<Dim2>(feet_rp(irp)),
                         typename Patch::IdxRange2(idx_range_rp));
             }
         });
 
 
-        // Treatment to conserve the C0 property of the advected function:
-        unify_value_at_center_pt<Patch>(feet_rp);
-        // Test if the values are the same at the center point
-        is_unified<Patch>(feet_rp);
-    }
 
+        template <class Patch, class T>
+        void is_unified(
+                Field<T,
+                      typename Patch::IdxRange12,
 
-
-    template <class Patch, class T>
-    void is_unified(
-            Field<T,
-                  typename Patch::IdxRange12,
-
-                  Kokkos::HostSpace> const& values) const
-    {
-        typename Patch::IdxRange1 const r_idx_range = get_idx_range<typename Patch::Grid1>(values);
-        typename Patch::IdxRange2 const theta_idx_range
-                = get_idx_range<typename Patch::Grid2>(values);
-        if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
-            ddc::for_each(theta_idx_range, [&](const typename Patch::Idx2 ip) {
-                if (norm_inf(
-                            values(r_idx_range.front(), ip)
-                            - values(r_idx_range.front(), theta_idx_range.front()))
-                    > 1e-15) {
-                    std::cout << "WARNING ! -> Discontinous at the center point." << std::endl;
-                }
-                assert(values(r_idx_range.front(), ip)
-                       == values(r_idx_range.front(), theta_idx_range.front()));
-            });
+                      Kokkos::HostSpace> const& values) const
+        {
+            typename Patch::IdxRange1 const r_idx_range
+                    = get_idx_range<typename Patch::Grid1>(values);
+            typename Patch::IdxRange2 const theta_idx_range
+                    = get_idx_range<typename Patch::Grid2>(values);
+            if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
+                ddc::for_each(theta_idx_range, [&](const typename Patch::Idx2 ip) {
+                    if (norm_inf(
+                                values(r_idx_range.front(), ip)
+                                - values(r_idx_range.front(), theta_idx_range.front()))
+                        > 1e-15) {
+                        std::cout << "WARNING ! -> Discontinous at the center point." << std::endl;
+                    }
+                    assert(values(r_idx_range.front(), ip)
+                           == values(r_idx_range.front(), theta_idx_range.front()));
+                });
+            }
         }
-    }
 
 
 
-    template <class Patch, class T>
-    void unify_value_at_center_pt(Field<T, typename Patch::IdxRange12> values) const
-    {
-        typename Patch::IdxRange1 const r_idx_range = get_idx_range<typename Patch::Grid1>(values);
-        typename Patch::IdxRange2 const theta_idx_range
-                = get_idx_range<typename Patch::Grid2>(values);
-        if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
-            ddc::for_each(theta_idx_range, [&](const typename Patch::Idx2 ip) {
-                values(r_idx_range.front(), ip)
-                        = values(r_idx_range.front(), theta_idx_range.front());
-            });
+        template <class Patch, class T>
+        void unify_value_at_center_pt(Field<T, typename Patch::IdxRange12> values) const
+        {
+            typename Patch::IdxRange1 const r_idx_range
+                    = get_idx_range<typename Patch::Grid1>(values);
+            typename Patch::IdxRange2 const theta_idx_range
+                    = get_idx_range<typename Patch::Grid2>(values);
+            if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
+                ddc::for_each(theta_idx_range, [&](const typename Patch::Idx2 ip) {
+                    values(r_idx_range.front(), ip)
+                            = values(r_idx_range.front(), theta_idx_range.front());
+                });
+            }
         }
-    }
 
-    template <class... PatchesP>
-    void copy(
-            MultipatchField<ConstSplineCoeffOnPatch_2D_host, PatchesP...> field_x,
-            MultipatchField<ConstSplineCoeffOnPatch_2D_host, PatchesP...> field_y,
-            MultipatchField<VectorSplineCoeffs2D_XY_OnPatch_host, PatchesP...> field_xy)
-    {
-        (copy_on_patch<PatchesP>(
-                 field_x.template get<PatchesP>(),
-                 field_y.template get<PatchesP>(),
-                 field_xy.template get<PatchesP>()),
-         ...);
-    }
+        template <class... PatchesP>
+        void
+        copy(MultipatchField<ConstSplineCoeffOnPatch_2D_host, PatchesP...> field_x,
+             MultipatchField<ConstSplineCoeffOnPatch_2D_host, PatchesP...> field_y,
+             MultipatchField<VectorSplineCoeffs2D_XY_OnPatch_host, PatchesP...> field_xy)
+        {
+            (copy_on_patch<PatchesP>(
+                     field_x.template get<PatchesP>(),
+                     field_y.template get<PatchesP>(),
+                     field_xy.template get<PatchesP>()),
+             ...);
+        }
 
-    template <class PatchP>
-    void copy_on_patch(
-            ConstSplineCoeffOnPatch_2D_host<PatchP> field_x,
-            ConstSplineCoeffOnPatch_2D_host<PatchP> field_y,
-            VectorSplineCoeffs2D_XY_OnPatch_host<PatchP> field_xy)
-    {
-        deep_copy(field_x, ddcHelper::get<X>(field_xy));
-        deep_copy(field_y, ddcHelper::get<Y>(field_xy));
-    }
-};
+        template <class PatchP>
+        void copy_on_patch(
+                ConstSplineCoeffOnPatch_2D_host<PatchP> field_x,
+                ConstSplineCoeffOnPatch_2D_host<PatchP> field_y,
+                VectorSplineCoeffs2D_XY_OnPatch_host<PatchP> field_xy)
+        {
+            deep_copy(field_x, ddcHelper::get<X>(field_xy));
+            deep_copy(field_y, ddcHelper::get<Y>(field_xy));
+        }
+    };
