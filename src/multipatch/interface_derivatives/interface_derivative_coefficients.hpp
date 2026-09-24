@@ -38,14 +38,14 @@ inline constexpr bool is_single_derivative_calculator_v
  *      It can be written as a sum: @f$ c = \sum_{k = -N2}^{N1} \omega_k f_k@f$, 
  *      with @f$ \omega_k @f$ the weights, 
  *          @f$ f_k @f$ the function values, 
+ * 
+ * By default, 
  *          @f$ N1 @f$ the number of cells in patch 1, and
  *          @f$ N2 @f$ the number of cells in patch 2. 
  * 
- * This operator also allows the computation of the coefficient c with an approximation 
- * as follows: 
- * @f$ s'(X_I) \simeq c_{trunc} = \sum_{k = -N_{trunc}}^{N_{trunc}} \omega_k f_k @f$, 
- * with 
- *      @f$ N_{trunc} @f$ the truncated number of cells for patch 1 and patch 2 around the interface. 
+ * But a constructor is also provided to choose $N_{trunc}=N1=N2$ in order to calculate
+ * an approximation of the derivative: 
+ * @f$ s'(X_I) \simeq c_{trunc} = \sum_{k = -N_{trunc}}^{N_{trunc}} \omega_k f_k @f$.
  *
  * Scheme of the two patches: 
  *   X_{I-1}  X_I   X_{I+1}
