@@ -381,7 +381,7 @@ public:
      * will return the same value. 
      */
     template <class Layout1, class Layout2>
-    inline double get_approx_deriv(
+    double get_approx_deriv(
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
     {
