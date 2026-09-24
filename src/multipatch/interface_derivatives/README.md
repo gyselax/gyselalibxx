@@ -483,4 +483,4 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
-*J Sci Comput* 106, 58 (2026). <https://doi.org/10.1007/s10915-025-03161-z>
+Journal of Scientific Computing 106, 58 (2026). <https://doi.org/10.1007/s10915-025-03161-z>
