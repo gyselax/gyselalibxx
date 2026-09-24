@@ -62,6 +62,10 @@ using DConstField1OnPatch = DConstField<typename Patch::IdxRange1>;
 
 
 // --- ON HOST ---
+/// @brief A FieldMem of doubles defined on the Patch's 2D logical domain on host.
+template <class Patch>
+using DFieldMemOnPatch_host = host_t<DFieldMemOnPatch<Patch>>;
+
 /// @brief A Field of doubles defined on host on the Patch's 2D logical domain.
 template <class Patch>
 using DFieldOnPatch_host = host_t<DFieldOnPatch<Patch>>;

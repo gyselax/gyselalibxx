@@ -7,6 +7,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "multipatch_field.hpp"
+#include "multipatch_field_mem.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 #include "utils_tools.hpp"
@@ -389,54 +390,33 @@ private:
         std::function<void(DVectorField_XY_OnPatch_host<Patch>, CoordConstFieldOnPatch_host<Patch>)>
                 dy = [&](DVectorField_XY_OnPatch_host<Patch> updated_advection_field,
                          CoordConstFieldOnPatch_host<Patch> feet_on_patch) {
-                            
                     ddc::parallel_deepcopy(feet.template get<Patch>(), feet_on_patch);
                     MultipatchField<CoordConstFieldOnPatch_host, Patches...> const_feet
                             = get_const_field(feet);
 
                     // Split into two: for X and for Y projections.
-                    DVectorFieldMem_XY_OnPatch_host<Patch1> advection_field_1_alloc(
-                            get_idx_range(feet.template get<Patch1>()));
-                    DVectorFieldMem_XY_OnPatch_host<Patch2> advection_field_2_alloc(
-                            get_idx_range(feet.template get<Patch2>()));
-                    DVectorFieldMem_XY_OnPatch_host<Patch3> advection_field_3_alloc(
-                            get_idx_range(feet.template get<Patch3>()));
-
-                    DVectorField_XY_OnPatch_host<Patch1> advection_field_1(
-                            get_field(advection_field_1_alloc));
-                    DVectorField_XY_OnPatch_host<Patch2> advection_field_2(
-                            get_field(advection_field_2_alloc));
-                    DVectorField_XY_OnPatch_host<Patch3> advection_field_3(
-                            get_field(advection_field_3_alloc));
-
-                    VectorSplineCoeffs2D_XY_OnPatch_host<Patch1> advection_field_splines_1
-                            = advection_field_splines.template get<Patch1>();
-                    VectorSplineCoeffs2D_XY_OnPatch_host<Patch2> advection_field_splines_2
-                            = advection_field_splines.template get<Patch2>();
-                    VectorSplineCoeffs2D_XY_OnPatch_host<Patch3> advection_field_splines_3
-                            = advection_field_splines.template get<Patch3>();
-
+                    // TODO: maybe implement a MultipatchVectorField to be able to easily split?
+                    MultipatchFieldMem<DFieldMemOnPatch_host, Patches...> advection_fields_x_alloc(
+                            feet.idx_range());
+                    MultipatchFieldMem<DFieldMemOnPatch_host, Patches...> advection_fields_y_alloc(
+                            feet.idx_range());
                     MultipatchField<DFieldOnPatch_host, Patches...> advection_fields_x(
-                            ddcHelper::get<X>(advection_field_1),
-                            ddcHelper::get<X>(advection_field_2),
-                            ddcHelper::get<X>(advection_field_3));
-
+                            advection_fields_x_alloc);
                     MultipatchField<DFieldOnPatch_host, Patches...> advection_fields_y(
-                            ddcHelper::get<Y>(advection_field_1),
-                            ddcHelper::get<Y>(advection_field_2),
-                            ddcHelper::get<Y>(advection_field_3));
+                            advection_fields_y_alloc);
 
+                    MultipatchFieldMem<SplineCoeffMemOnPatch_2D_host, Patches...>
+                            advection_field_splines_x_alloc(m_builders.spline_idx_ranges());
+                    MultipatchFieldMem<SplineCoeffMemOnPatch_2D_host, Patches...>
+                            advection_field_splines_y_alloc(m_builders.spline_idx_ranges());
                     MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patches...>
-                            advection_field_splines_x(
-                                    ddcHelper::get<X>(advection_field_splines_1),
-                                    ddcHelper::get<X>(advection_field_splines_2),
-                                    ddcHelper::get<X>(advection_field_splines_3));
+                            advection_field_splines_x(advection_field_splines_x_alloc);
+                    MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patches...>
+                            advection_field_splines_y(advection_field_splines_y_alloc);
 
-                    MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patches...>
-                            advection_field_splines_y(
-                                    ddcHelper::get<Y>(advection_field_splines_1),
-                                    ddcHelper::get<Y>(advection_field_splines_2),
-                                    ddcHelper::get<Y>(advection_field_splines_3));
+                    copy(advection_field_splines_x,
+                         advection_field_splines_y,
+                         advection_field_splines);
 
                     m_evaluators_advection_field(
                             advection_fields_x,
@@ -503,6 +483,7 @@ private:
 
             Coord<X, Y> const feet_xy = coord_xy - dt * advection_field(irp);
 
+            // Correction on theta.
             if (norm_inf(feet_xy - coord_Opoint) < 1e-15) {
                 feet_rp(irp) = CoordRTheta(0, 0);
             } else {
@@ -560,5 +541,28 @@ private:
                         = values(r_idx_range.front(), theta_idx_range.front());
             });
         }
+    }
+
+    template <class... PatchesP>
+    void copy(
+            MultipatchField<ConstSplineCoeffOnPatch_2D_host, PatchesP...> field_x,
+            MultipatchField<ConstSplineCoeffOnPatch_2D_host, PatchesP...> field_y,
+            MultipatchField<VectorSplineCoeffs2D_XY_OnPatch_host, PatchesP...> field_xy)
+    {
+        (copy_on_patch<PatchesP>(
+                 field_x.template get<PatchesP>(),
+                 field_y.template get<PatchesP>(),
+                 field_xy.template get<PatchesP>()),
+         ...);
+    }
+
+    template <class PatchP>
+    void copy_on_patch(
+            ConstSplineCoeffOnPatch_2D_host<PatchP> field_x,
+            ConstSplineCoeffOnPatch_2D_host<PatchP> field_y,
+            VectorSplineCoeffs2D_XY_OnPatch_host<PatchP> field_xy)
+    {
+        deep_copy(field_x, ddcHelper::get<X>(field_xy));
+        deep_copy(field_y, ddcHelper::get<Y>(field_xy));
     }
 };
