@@ -15,10 +15,10 @@
 #include "ddc_helper.hpp"
 #include "global_2d_onion_shape_non_uniform.hpp"
 #include "interface.hpp"
+#include "interface_derivative_coefficients.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
-#include "interface_derivative_coefficients.hpp"
 
 
 /*
@@ -518,14 +518,14 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
             }
 
             // Coefficient c
-            double sum_values = derivatives_calculator.get_function_coefficients(
+            double sum_values = derivatives_calculator.get_approx_deriv(
                     get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
                     get_const_field(function_2[idx_par_2][reduced_idx_range_perp2]));
 
             // Compare derivatives_calculator and derivatives_calculator_approx.
             EXPECT_NEAR(
                     sum_values,
-                    derivatives_calculator_approx.get_function_coefficients(
+                    derivatives_calculator_approx.get_approx_deriv(
                             get_const_field(function_1[idx_par_1]),
                             get_const_field(function_2[idx_par_2])),
                     1e-12);
@@ -533,7 +533,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
             // Compare derivatives_calculator and derivatives_calculator_approx_2D.
             EXPECT_NEAR(
                     sum_values,
-                    derivatives_calculator_approx_2D.get_function_coefficients(
+                    derivatives_calculator_approx_2D.get_approx_deriv(
                             get_const_field(function_1[idx_par_1]),
                             get_const_field(function_2[idx_par_2])),
                     1e-12);
@@ -898,7 +898,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
             }
 
             // Coefficient c.
-            double const sum_values = derivatives_calculator.get_function_coefficients(
+            double const sum_values = derivatives_calculator.get_approx_deriv(
                     get_const_field(function_2[idx2_2]),
                     get_const_field(function_1[idx2_1]));
 

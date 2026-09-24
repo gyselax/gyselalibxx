@@ -7,12 +7,12 @@
 
 #include "3patches_2d_non_periodic_non_uniform.hpp"
 #include "interface.hpp"
+#include "interface_derivative_coefficients.hpp"
+#include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "non_uniform_interpolation_points.hpp"
-#include "interface_derivative_coefficients.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
 #include "view.hpp"
 
 
@@ -215,7 +215,7 @@ public:
 
 
     template <class DerivativesCalculatorType, class... Patches>
-    void check_get_function_coefficients_call_single(
+    void check_get_approx_deriv_call_single(
             DerivativesCalculatorType const& deriv_calculators_tested,
             DerivativesCalculatorType const& deriv_calculators_expected,
             MultipatchField<DFieldOnPatch_host, Patches...> const& functions)
@@ -235,10 +235,10 @@ public:
         Idx<GridParR> idx_slice_R(3);
 
         EXPECT_EQ(
-                deriv_calculators_tested.get_function_coefficients(
+                deriv_calculators_tested.get_approx_deriv(
                         get_const_field(function_L[idx_slice_L]),
                         get_const_field(function_R[idx_slice_R])),
-                deriv_calculators_expected.get_function_coefficients(
+                deriv_calculators_expected.get_approx_deriv(
                         get_const_field(function_L[idx_slice_L]),
                         get_const_field(function_R[idx_slice_R])));
     }
@@ -261,7 +261,7 @@ public:
          ...);
 
 
-        (check_get_function_coefficients_call_single(
+        (check_get_approx_deriv_call_single(
                  deriv_calculators_collection
                          .template get<typename DerivativesCalculatorType::associated_interface>(),
                  std::get<DerivativesCalculatorType const&>(deriv_calculators_tuple),

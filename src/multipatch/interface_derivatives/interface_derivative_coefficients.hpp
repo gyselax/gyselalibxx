@@ -354,7 +354,7 @@ public:
     /**
      * @brief Get the linear combination of the function values (c).
      * 
-     * @anchor get_function_coefficients
+     * @anchor get_approx_deriv
      * 
      * @param function_1 Function values at the interpolation points on patch 1. 
      * @param function_2 Function values at the interpolation points on patch 2. 
@@ -365,15 +365,15 @@ public:
      * whole domain and the operator will select the correct values. But, it could 
      * be more optimised to directly give a slice on the selected cells. 
      * E.g.
-     * get_function_coefficients(function_1[idx_interface_1][selected_cells_idx_range_1], 
-     *                           function_2[idx_interface_2][selected_cells_idx_range_2]); 
+     * get_approx_deriv(function_1[idx_interface_1][selected_cells_idx_range_1], 
+     *                  function_2[idx_interface_2][selected_cells_idx_range_2]); 
      * and
-     * get_function_coefficients(function_1[idx_interface_1], 
-     *                           function_2[idx_interface_2]); 
+     * get_approx_deriv(function_1[idx_interface_1], 
+     *                  function_2[idx_interface_2]); 
      * will return the same value. 
      */
     template <class Layout1, class Layout2>
-    inline double get_function_coefficients(
+    inline double get_approx_deriv(
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
     {
@@ -403,17 +403,17 @@ public:
 
     /**
      * @brief Get the linear combination of the function values (c).
-     * See @ref get_function_coefficients.
+     * See @ref get_approx_deriv.
      * @param function_1 Function values at the interpolation points on patch 1. 
      * @param function_2 Function values at the interpolation points on patch 2. 
      * @return the linear combination of the function values (c).
      */
     template <class Layout1, class Layout2>
-    inline double get_function_coefficients(
+    inline double get_approx_deriv(
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
     {
-        return get_function_coefficients(function_1, function_2);
+        return get_approx_deriv(function_1, function_2);
     }
 
 
