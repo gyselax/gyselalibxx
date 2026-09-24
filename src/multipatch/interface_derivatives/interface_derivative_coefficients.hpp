@@ -266,7 +266,7 @@ public:
     /**
      * @brief Instantiate InterfaceDerivCoeffs. 
      * See @ref InterfaceDerivCoeffsInstantiator.
-     * This constructor calculates an *approximation* of the formula. 
+     * This constructor calculates an approximation of the formula.
      * @param idx_range_1d_1 1D index range perpendicular to the Interface, 
      * on the patch 1. 
      * @param idx_range_1d_2 1D index range perpendicular to the Interface, 
