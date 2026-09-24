@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classInterfaceDerivCoeffsCollection" kind="class" language="C++" prot="public">
+    <compoundname>InterfaceDerivCoeffsCollection</compoundname>
+    <includes refid="interface__derivative__coefficients__collection_8hpp" local="no">interface_derivative_coefficients_collection.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>Interfaces</declname>
+        <defname>Interfaces</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffsCollection_1a65c5516332f15d4d13f0d8ed25d5a720" prot="private" static="no">
+        <type>ddc::detail::TypeSeq&lt; <ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>&lt; Interfaces &gt;... &gt;</type>
+        <definition>using InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::DerivCalculatorTypeSeq =  ddc::detail::TypeSeq&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivCalculatorTypeSeq</name>
+        <qualifiedname>InterfaceDerivCoeffsCollection::DerivCalculatorTypeSeq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffsCollection_1a582df5767159e0a94e94bce484e359b3" prot="private" static="no">
+        <type>ddc::detail::TypeSeq&lt; Interfaces... &gt;</type>
+        <definition>using InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::InterfaceTypeSeq =  ddc::detail::TypeSeq&lt;Interfaces...&gt;</definition>
+        <argsstring></argsstring>
+        <name>InterfaceTypeSeq</name>
+        <qualifiedname>InterfaceDerivCoeffsCollection::InterfaceTypeSeq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classInterfaceDerivCoeffsCollection_1a0ee0f6d2497a1f620946cf958a054440" prot="private" static="no" mutable="no">
+        <type>std::tuple&lt; <ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>&lt; Interfaces &gt; const  &amp;... &gt;</type>
+        <definition>std::tuple&lt;InterfaceDerivCoeffs&lt;Interfaces&gt; const&amp;...&gt; InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::m_derivative_calculator_collection</definition>
+        <argsstring></argsstring>
+        <name>m_derivative_calculator_collection</name>
+        <qualifiedname>InterfaceDerivCoeffsCollection::m_derivative_calculator_collection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="39" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classInterfaceDerivCoeffsCollection_1a265b1dbda08d0b66bd847d2e587ad5be" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::InterfaceDerivCoeffsCollection</definition>
+        <argsstring>(InterfaceDerivCoeffs&lt; Interfaces &gt; const &amp;... derivative_calculators)</argsstring>
+        <name>InterfaceDerivCoeffsCollection</name>
+        <qualifiedname>InterfaceDerivCoeffsCollection::InterfaceDerivCoeffsCollection</qualifiedname>
+        <param>
+          <type><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>&lt; Interfaces &gt; const &amp;...</type>
+          <declname>derivative_calculators</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref> from a list of interface derivative calculators. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>derivative_calculators</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structInterface" kindref="compound">Interface</ref> derivative calculators. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="48" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="48" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterfaceDerivCoeffsCollection_1aea94f2f2abf2745e9c458f593cb3cc5c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structInterface" kindref="compound">Interface</ref></type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>&lt; <ref refid="structInterface" kindref="compound">Interface</ref> &gt; const &amp;</type>
+        <definition>InterfaceDerivCoeffs&lt; Interface &gt; const  &amp; InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>InterfaceDerivCoeffsCollection::get</qualifiedname>
+        <briefdescription>
+<para>Get a derivative calculator of the collection. The output cannot be copied. This operator only allows to get a temporary reference to call one of the operators of the <ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structInterface" kindref="compound">Interface</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interface where the required interface derivative calculator is defined.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The required interface derivative calculator as a constant reference. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="67" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="67" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to store a collection of interface derivative calculators templated on the interfaces. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The class stores a constant reference of interface derivative calculators. It should not be use to copy the elements outside of the class but it should be use to access the operators of the stored interface derivative calculators.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Interfaces</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Types of interface that defined the interface derivative calculators.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>For each interface, only one interface derivative calculator should be defined.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="34" bodyend="75"/>
+    <listofallmembers>
+      <member refid="classInterfaceDerivCoeffsCollection_1a65c5516332f15d4d13f0d8ed25d5a720" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>DerivCalculatorTypeSeq</name></member>
+      <member refid="classInterfaceDerivCoeffsCollection_1aea94f2f2abf2745e9c458f593cb3cc5c" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>get</name></member>
+      <member refid="classInterfaceDerivCoeffsCollection_1a265b1dbda08d0b66bd847d2e587ad5be" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>InterfaceDerivCoeffsCollection</name></member>
+      <member refid="classInterfaceDerivCoeffsCollection_1a582df5767159e0a94e94bce484e359b3" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>InterfaceTypeSeq</name></member>
+      <member refid="classInterfaceDerivCoeffsCollection_1a0ee0f6d2497a1f620946cf958a054440" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>m_derivative_calculator_collection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

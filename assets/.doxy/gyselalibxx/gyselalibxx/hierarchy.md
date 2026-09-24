@@ -112,6 +112,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**IdentityCoordinateChange**](classIdentityCoordinateChange.md) _A class describing an identity transformation._ 
 * **class** [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md) _A builder class for copying data._ 
 * **class** [**IdentityTensor**](classIdentityTensor.md) 
+* **class** [**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md) _Compute the coefficients a, b and c of the interface derivative reconstruction method._ 
+* **class** [**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md) _A class to store a collection of interface derivative calculators templated on the interfaces._ 
 * **class** [**InvJacobianOPoint**](classInvJacobianOPoint.md) _An operator for calculating the inverse of the Jacobian at an O-point. This class is used in_ [_**CombinedMapping**_](classCombinedMapping.md) _to calculate the inverse of the Jacobian at an O-point when one of the mappings does not allow the evaluation of its Jacobian/inverse Jacobian at the O-point._
 * **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md) 
 * **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md) 
@@ -165,8 +167,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**RK3**](classRK3.md) _A class which provides an implementation of a third-order Runge-Kutta method._ 
 * **class** [**RK4**](classRK4.md) _A class which provides an implementation of a fourth-order Runge-Kutta method._ 
 * **class** [**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md) _A class to create a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
-* **class** [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md) _Compute the derivative of an equivalent global spline at the interface between two patches._ 
-* **class** [**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md) _A class to store a collection of interface derivative calculators templated on the interfaces._ 
 * **class** [**SpeciesInformation**](classSpeciesInformation.md) [_**Species**_](structSpecies.md) _discrete dimension to access constant attributes related to species._    
     * **struct** [**Species**](structSpecies.md) 
 * **class** [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md) [_**Impl**_](classSpeciesInformation_1_1Impl.md) _object storing attributes in_`MemorySpace` _._

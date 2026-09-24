@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File single_interface_derivatives_calculator_collection.hpp - GyselalibX</title>
+    <title>File interface_derivative_coefficients_collection.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File single_interface_derivatives_calculator_collection.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/single__interface__derivatives__calculator__collection_8hpp_source.md";
+        var mkdocs_page_name = "File interface_derivative_coefficients_collection.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/interface__derivative__coefficients__collection_8hpp.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File single_interface_derivatives_calculator_collection.hpp</li>
+      <li class="breadcrumb-item active">File interface_derivative_coefficients_collection.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/single__interface__derivatives__calculator__collection_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/interface__derivative__coefficients__collection_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,69 +566,92 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-single_interface_derivatives_calculator_collectionhpp">File single_interface_derivatives_calculator_collection.hpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_d1bd52a3e76a422151eefdcc4e15c189.html"><strong>interface_derivatives</strong></a> <strong>&gt;</strong> <a href="single__interface__derivatives__calculator__collection_8hpp.html"><strong>single_interface_derivatives_calculator_collection.hpp</strong></a></p>
-<p><a href="single__interface__derivatives__calculator__collection_8hpp.html">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+                <div><h1 id="file-interface_derivative_coefficients_collectionhpp">File interface_derivative_coefficients_collection.hpp</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_d1bd52a3e76a422151eefdcc4e15c189.html"><strong>interface_derivatives</strong></a> <strong>&gt;</strong> <a href="interface__derivative__coefficients__collection_8hpp.html"><strong>interface_derivative_coefficients_collection.hpp</strong></a></p>
+<p><a href="interface__derivative__coefficients__collection_8hpp_source.html">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
+<li><code>#include "interface_derivative_coefficients.hpp"</code></li>
+</ul>
+<h2 id="classes">Classes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a> &lt;Interfaces&gt;<br><em>A class to store a collection of interface derivative calculators templated on the interfaces.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes">Public Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-enable_interface_derivative_coefficients_collection"><strong>enable_interface_derivative_coefficients_collection</strong></a>   = <code>false</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-enable_interface_derivative_coefficients_collection-interfacederivcoeffscollection-derivcalculatortype"><strong>enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;</strong></a>   = <code>true</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-is_single_derivative_calculator_collection_v"><strong>is_single_derivative_calculator_collection_v</strong></a>   = <code>/* multi line expression */</code><br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-interfacederivcoeffscollection"><strong>InterfaceDerivCoeffsCollection</strong></a> (DerivCalculatorType const &amp;... derivative_calculators) <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
+<h3 id="variable-enable_interface_derivative_coefficients_collection">variable enable_interface_derivative_coefficients_collection</h3>
+<pre><code class="language-C++">constexpr bool enable_interface_derivative_coefficients_collection;
+</code></pre>
+<hr>
 
-#pragma once
+<h3 id="variable-enable_interface_derivative_coefficients_collection-interfacederivcoeffscollection-derivcalculatortype">variable enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;</h3>
+<pre><code class="language-C++">constexpr bool enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;;
+</code></pre>
+<hr>
 
-#include &lt;ddc/ddc.hpp&gt;
+<h3 id="variable-is_single_derivative_calculator_collection_v">variable is_single_derivative_calculator_collection_v</h3>
+<pre><code class="language-C++">constexpr bool is_single_derivative_calculator_collection_v;
+</code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-interfacederivcoeffscollection">function InterfaceDerivCoeffsCollection</h3>
+<pre><code class="language-C++">template&lt;class... DerivCalculatorType&gt;
+InterfaceDerivCoeffsCollection (
+    DerivCalculatorType const &amp;... derivative_calculators
+) 
+</code></pre>
+<hr>
 
-#include "single_interface_derivatives_calculator.hpp"
-
-template &lt;class T&gt;
-inline constexpr bool enable_single_derivative_calculator_collection = false;
-
-template &lt;class T&gt;
-inline constexpr bool is_single_derivative_calculator_collection_v
-        = enable_single_derivative_calculator_collection&lt;
-                std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;;
-
-
-template &lt;class... Interfaces&gt;
-class SingleInterfaceDerivativesCalculatorCollection
-{
-    using DerivCalculatorTypeSeq
-            = ddc::detail::TypeSeq&lt;SingleInterfaceDerivativesCalculator&lt;Interfaces&gt;...&gt;;
-
-    using InterfaceTypeSeq = ddc::detail::TypeSeq&lt;Interfaces...&gt;;
-
-    std::tuple&lt;SingleInterfaceDerivativesCalculator&lt;Interfaces&gt; const&amp;...&gt;
-            m_derivative_calculator_collection;
-
-public:
-    explicit SingleInterfaceDerivativesCalculatorCollection(
-            SingleInterfaceDerivativesCalculator&lt;Interfaces&gt; const&amp;... derivative_calculators)
-        : m_derivative_calculator_collection(derivative_calculators...)
-    {
-    }
-
-
-    template &lt;class Interface&gt;
-    SingleInterfaceDerivativesCalculator&lt;Interface&gt; const&amp; get() const
-    {
-        static_assert(
-                ddc::in_tags_v&lt;Interface, InterfaceTypeSeq&gt;,
-                "No element defined on this Interface in this collection.");
-
-        return std::get&lt;SingleInterfaceDerivativesCalculator&lt;Interface&gt; const&amp;&gt;(
-                m_derivative_calculator_collection);
-    }
-};
-
-
-// To help the template deduction.
-template &lt;class... DerivCalculatorType&gt;
-SingleInterfaceDerivativesCalculatorCollection(DerivCalculatorType const&amp;... derivative_calculators)
-        -&gt; SingleInterfaceDerivativesCalculatorCollection&lt;
-                typename DerivCalculatorType::associated_interface...&gt;;
-
-
-template &lt;class... DerivCalculatorType&gt;
-inline constexpr bool enable_single_derivative_calculator_collection&lt;
-        SingleInterfaceDerivativesCalculatorCollection&lt;DerivCalculatorType...&gt;&gt; = true;
-</code></pre></div>
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</code></p></div>
               
             </div>
           </div><footer>

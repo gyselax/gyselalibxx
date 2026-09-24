@@ -573,7 +573,7 @@
                 <div><h1 id="interface-derivatives">Interface derivatives</h1>
 <p>On multi-patch geometries, we can impose a <span class="arithmatex">\(\mathcal{C}^1\)</span> regularity on the whole domain by fixing identical derivatives and function values on the interface.
 The operators implemented in this folder propose methods to compute the derivatives at the patch interfaces.</p>
-<p>The method applied here is detailed in Vidal et al. (2025)<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<p>The method applied here is detailed in Vidal et al. (2026)<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
 <p><strong>Assumptions:</strong></p>
 <ul>
 <li>the splines are cubic;</li>
@@ -586,8 +586,8 @@ If you do not use derivatives as closure condition, two additional interpolation
 the boundary cells.</p>
 <h2 id="contents">Contents</h2>
 <ul>
-<li><a href="#relation-between-derivatives-on-the-boundaries-of-two-connected-patches">Relation between derivatives on the boundaries of two connected patches</a>: It documents the <code>SingleInterfaceDerivativesCalculator</code> operator.</li>
-<li><a href="#how-to-use-the-singleinterfacederivativescalculator-operator">How to use the <code>SingleInterfaceDerivativesCalculator</code> operator?</a>: It documents how to use the operator in the code.</li>
+<li><a href="#relation-between-derivatives-on-the-boundaries-of-two-connected-patches">Relation between derivatives on the boundaries of two connected patches</a>: It documents the <code>InterfaceDerivCoeffs</code> operator.</li>
+<li><a href="#how-to-use-the-interfacederivcoeffs-operator">How to use the <code>InterfaceDerivCoeffs</code> operator?</a>: It documents how to use the operator in the code.</li>
 <li><a href="#formulae">Formulae</a>: It details the formulae applies in the operator.</li>
 </ul>
 <h2 id="relation-between-derivatives-on-the-boundaries-of-two-connected-patches">Relation between derivatives on the boundaries of two connected patches</h2>
@@ -626,21 +626,21 @@ The approximation is then given by</p>
 <p>There are different ways to compute the coefficients <span class="arithmatex">\(a^i_{N^L,N^R}\)</span>,
 <span class="arithmatex">\(b^i_{N^L,N^R}\)</span>, and <span class="arithmatex">\(c^i_{N^L,N^R}\)</span>. There are described in the section
 <a href="#formulae">Formulae</a>.</p>
-<p>Firstly, we describe how to use the <code>SingleInterfaceDerivativesCalculator</code> operator.</p>
-<h3 id="how-to-use-the-singleinterfacederivativescalculator-operator">How to use the SingleInterfaceDerivativesCalculator operator?</h3>
-<p>When <code>SingleInterfaceDerivativesCalculator</code> is instantiated, it computes and stores the coefficients
+<p>Firstly, we describe how to use the <code>InterfaceDerivCoeffs</code> operator.</p>
+<h3 id="how-to-use-the-interfacederivcoeffs-operator">How to use the InterfaceDerivCoeffs operator?</h3>
+<p>When <code>InterfaceDerivCoeffs</code> is instantiated, it computes and stores the coefficients
 <span class="arithmatex">\(a^i_{N^L,N^R}\)</span> and <span class="arithmatex">\(b^i_{N^L,N^R}\)</span> and the weights <span class="arithmatex">\(\{\omega_{k, N^L,N^R}^i\}_{k = - N^L}^{N^R}\)</span>.
 To instantiate it, we need the index ranges of the interpolation points. If we want to use the exact formula,
 we need to provide the index ranges with all the points,</p>
-<pre><code class="language-cpp">SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+<pre><code class="language-cpp">InterfaceDerivCoeffs&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 </code></pre>
 <p>If we want to use an approximation, we provide the index ranges with the interpolation points on the selected cells,</p>
 <pre><code class="language-cpp">Patch1::IdxRange1D idx_range_patch_1_reduced (idx_range_patch_1.take_first(N_L_reduc +1));
 Patch2::IdxRange1D idx_range_patch_2_reduced (idx_range_patch_2.take_last(N_R_reduc +1));
-SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
+InterfaceDerivCoeffs&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
 </code></pre>
 <p>or we can directly call, for <span class="arithmatex">\(N_{reduc} = N^L = N^R\)</span>,</p>
-<pre><code class="language-cpp">SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
+<pre><code class="language-cpp">InterfaceDerivCoeffs&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
 </code></pre>
 <blockquote>
 <p><strong>Remark:</strong> For interpolation with interpolation points as closure condition, a special treatment has to be carried out on the boundary cells
@@ -648,11 +648,11 @@ SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator 
 To apply this treatment, we specify it in the template parameter as follows.</p>
 </blockquote>
 <pre><code class="language-cpp">// If we want to apply the treatment on Patch 1 and Patch 2
-SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs&lt;Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 // or if we want to apply the treatment only on Patch 1
-SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs&lt;Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 // or if we want to apply the treatment only on Patch 2
-SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs&lt;Interface_12, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 </code></pre>
 <blockquote>
 <p>If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
@@ -662,13 +662,13 @@ the default template parameter can be used to avoid applying the treatment on in
 <ul>
 <li><code>derivatives_calculator.get_coeff_deriv_patch_1()</code> returns the coefficient <span class="arithmatex">\(b^i_{N^L,N^R}\)</span>;</li>
 <li><code>derivatives_calculator.get_coeff_deriv_patch_2()</code> returns the coefficient <span class="arithmatex">\(a^i_{N^L,N^R}\)</span>;</li>
-<li><code>derivatives_calculator.get_function_coefficients(function_1, function_2)</code> returns the coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span>
+<li><code>derivatives_calculator.get_approx_deriv(function_1, function_2)</code> returns the coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span>
  (or <span class="arithmatex">\(c^i_{N^L_{reduc},N^R_{reduc}}\)</span> for approximation).</li>
 </ul>
 <p>If we want to apply the exact formula, we need to sum these coefficients,</p>
 <pre><code class="language-cpp">double const coeff_deriv_left = derivatives_calculator.get_coeff_deriv_patch_1(); // coeff b
 double const coeff_deriv_right = derivatives_calculator.get_coeff_deriv_patch_2(); // coeff a
-double const sum_values = derivatives_calculator.get_function_coefficients(function_1, function_2); // coeff c
+double const sum_values = derivatives_calculator.get_approx_deriv(function_1, function_2); // coeff c
 
 double const deriv_interface_right = 1e1; // a given value
 double const deriv_interface_left = 1e1; // a given value
@@ -676,16 +676,16 @@ double const deriv_interface_left = 1e1; // a given value
 double const deriv_interface = sum_values + coeff_deriv_left * deriv_interface_left + coeff_deriv_right * deriv_interface_right;
 </code></pre>
 <p>If we want to apply an approximation of the formula, we only need <span class="arithmatex">\(c^i_{N^L_{reduc},N^R_{reduc}}\)</span>,</p>
-<pre><code class="language-cpp">double const deriv_interface = derivatives_calculator.get_function_coefficients(function_1, function_2); // coeff c
+<pre><code class="language-cpp">double const deriv_interface = derivatives_calculator.get_approx_deriv(function_1, function_2); // coeff c
 </code></pre>
 <p><strong>Remark:</strong> It is also possible to use slices for the functions values,</p>
 <pre><code class="language-cpp">double const deriv_interface =
-    derivatives_calculator.get_function_coefficients(
+    derivatives_calculator.get_approx_deriv(
             function_1[idx_range_patch_1_reduced],
             function_2[idx_range_patch_2_reduced]); // coeff c
 </code></pre>
 <h3 id="formulae">Formulae</h3>
-<p>We use a method inspired by Crouseille et al. (2009)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, and detailed in Vidal et al.(2025)<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.
+<p>We use a method inspired by Crouseille et al. (2009)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, and detailed in Vidal et al.(2026)<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.
 To establish the formulae, we use the following relation between each consecutive interpolation point,</p>
 <div class="arithmatex">\[
     s'(x_i) = \gamma_i + \alpha_i  s'(x_{i+1}) + \beta_i  s'(x_{i-1})
@@ -969,7 +969,7 @@ Journal of Computational Physics 228(5), 1429–1446 (2009) <a class="footnote-
 <li id="fn:2">
 <p>Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 <em>Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.</em>
-Journal of Scientific Computing, (2025) [ACCEPTED] <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">↩</a></p>
+Journal of Scientific Computing 106, 58 (2026). <a href="https://doi.org/10.1007/s10915-025-03161-z">https://doi.org/10.1007/s10915-025-03161-z</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div></div>

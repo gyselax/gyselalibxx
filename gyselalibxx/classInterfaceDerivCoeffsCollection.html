@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File single_interface_derivatives_calculator.hpp - GyselalibX</title>
+    <title>Class InterfaceDerivCoeffsCollection - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File single_interface_derivatives_calculator.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/single__interface__derivatives__calculator_8hpp.md";
+        var mkdocs_page_name = "Class InterfaceDerivCoeffsCollection";
+        var mkdocs_page_input_path = "gyselalibxx/classInterfaceDerivCoeffsCollection.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File single_interface_derivatives_calculator.hpp</li>
+      <li class="breadcrumb-item active">Class InterfaceDerivCoeffsCollection</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/single__interface__derivatives__calculator_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classInterfaceDerivCoeffsCollection.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,18 +566,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-single_interface_derivatives_calculatorhpp">File single_interface_derivatives_calculator.hpp</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_d1bd52a3e76a422151eefdcc4e15c189.html"><strong>interface_derivatives</strong></a> <strong>&gt;</strong> <a href="single__interface__derivatives__calculator_8hpp.html"><strong>single_interface_derivatives_calculator.hpp</strong></a></p>
-<p><a href="single__interface__derivatives__calculator_8hpp_source.html">Go to the source code of this file</a></p>
+                <div><h1 id="class-interfacederivcoeffscollection">Class InterfaceDerivCoeffsCollection</h1>
+<p><strong>template &lt;class... Interfaces&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a></p>
+<p><em>A class to store a collection of interface derivative calculators templated on the interfaces.</em> <a href="#detailed-description">More...</a></p>
 <ul>
-<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
-<li><code>#include "ddc_aliases.hpp"</code></li>
-<li><code>#include "edge.hpp"</code></li>
-<li><code>#include "edge_transformation.hpp"</code></li>
-<li><code>#include "geometry_descriptors.hpp"</code></li>
-<li><code>#include "types.hpp"</code></li>
+<li><code>#include &lt;interface_derivative_coefficients_collection.hpp&gt;</code></li>
 </ul>
-<h2 id="classes">Classes</h2>
+<h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
 <tr>
@@ -587,52 +583,52 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a> &lt;class InterfaceType&gt;<br><em>Compute the derivative of an equivalent global spline at the interface between two patches.</em></td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-interfacederivcoeffscollection"><strong>InterfaceDerivCoeffsCollection</strong></a> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>&lt; Interfaces &gt; const &amp;... derivative_calculators) <br><em>Instantiate a</em> <a href="classInterfaceDerivCoeffsCollection.html"><em><strong>InterfaceDerivCoeffsCollection</strong></em></a> <em>from a list of interface derivative calculators.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>&lt; <a href="structInterface.html"><strong>Interface</strong></a> &gt; const &amp;</td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () const<br><em>Get a derivative calculator of the collection. The output cannot be copied. This operator only allows to get a temporary reference to call one of the operators of the</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>class.</em></td>
 </tr>
 </tbody>
 </table>
-<h2 id="public-attributes">Public Attributes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-enable_single_derivative_calculator"><strong>enable_single_derivative_calculator</strong></a>   = <code>false</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-enable_single_derivative_calculator-singleinterfacederivativescalculator-interfacetype"><strong>enable_single_derivative_calculator&lt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt; &gt;</strong></a>   = <code>true</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_single_derivative_calculator_v"><strong>is_single_derivative_calculator_v</strong></a>   = <code>enable\_single\_derivative\_calculator&amp;lt;std::remove\_const\_t&amp;lt;std::remove\_reference\_t&amp;lt;T&amp;gt;&amp;gt;&amp;gt;</code><br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
-<h3 id="variable-enable_single_derivative_calculator">variable enable_single_derivative_calculator</h3>
-<pre><code class="language-C++">constexpr bool enable_single_derivative_calculator;
+<h2 id="detailed-description">Detailed Description</h2>
+<p>The class stores a constant reference of interface derivative calculators. It should not be use to copy the elements outside of the class but it should be use to access the operators of the stored interface derivative calculators.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Interfaces</code> Types of interface that defined the interface derivative calculators.</li>
+</ul>
+<p><strong>Warning:</strong></p>
+<p>For each interface, only one interface derivative calculator should be defined.</p>
+<p><strong>See also:</strong> <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>. </p>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-interfacederivcoeffscollection">function InterfaceDerivCoeffsCollection</h3>
+<p><em>Instantiate a</em> <a href="classInterfaceDerivCoeffsCollection.html"><em><strong>InterfaceDerivCoeffsCollection</strong></em></a> <em>from a list of interface derivative calculators.</em></p>
+<pre><code class="language-C++">inline explicit InterfaceDerivCoeffsCollection::InterfaceDerivCoeffsCollection (
+    InterfaceDerivCoeffs &lt; Interfaces &gt; const &amp;... derivative_calculators
+) 
 </code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>derivative_calculators</code> <a href="structInterface.html"><strong>Interface</strong></a> derivative calculators. </li>
+</ul>
 <hr>
 
-<h3 id="variable-enable_single_derivative_calculator-singleinterfacederivativescalculator-interfacetype">variable enable_single_derivative_calculator&lt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt; &gt;</h3>
-<pre><code class="language-C++">constexpr bool enable_single_derivative_calculator&lt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt; &gt;;
+<h3 id="function-get">function get</h3>
+<p><em>Get a derivative calculator of the collection. The output cannot be copied. This operator only allows to get a temporary reference to call one of the operators of the</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>class.</em></p>
+<pre><code class="language-C++">template&lt;class Interface&gt;
+inline InterfaceDerivCoeffs &lt; Interface &gt; const &amp; InterfaceDerivCoeffsCollection::get () const
 </code></pre>
-<hr>
-
-<h3 id="variable-is_single_derivative_calculator_v">variable is_single_derivative_calculator_v</h3>
-<pre><code class="language-C++">constexpr bool is_single_derivative_calculator_v;
-</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><a href="structInterface.html"><strong>Interface</strong></a> The interface where the required interface derivative calculator is defined.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The required interface derivative calculator as a constant reference. </p>
 <hr>
 
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</code></p></div>
               
             </div>
           </div><footer>

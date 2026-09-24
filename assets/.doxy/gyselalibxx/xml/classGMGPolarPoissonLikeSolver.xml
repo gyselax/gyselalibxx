@@ -594,7 +594,7 @@
 <parametername direction="in">rho</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The right-hand side <formula id="378">$\rho$</formula> on the grid. </para>
+<para>The right-hand side <formula id="379">$\rho$</formula> on the grid. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

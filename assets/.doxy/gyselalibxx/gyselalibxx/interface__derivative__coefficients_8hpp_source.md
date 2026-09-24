@@ -1,10 +1,10 @@
 
 
-# File single\_interface\_derivatives\_calculator.hpp
+# File interface\_derivative\_coefficients.hpp
 
-[**File List**](files.md) **>** [**interface\_derivatives**](dir_d1bd52a3e76a422151eefdcc4e15c189.md) **>** [**single\_interface\_derivatives\_calculator.hpp**](single__interface__derivatives__calculator_8hpp.md)
+[**File List**](files.md) **>** [**interface\_derivatives**](dir_d1bd52a3e76a422151eefdcc4e15c189.md) **>** [**interface\_derivative\_coefficients.hpp**](interface__derivative__coefficients_8hpp.md)
 
-[Go to the documentation of this file](single__interface__derivatives__calculator_8hpp.md)
+[Go to the documentation of this file](interface__derivative__coefficients_8hpp.md)
 
 
 ```C++
@@ -22,14 +22,14 @@
 
 
 template <class T>
-inline constexpr bool enable_single_derivative_calculator = false;
+inline constexpr bool enable_interface_derivative_coefficients = false;
 
 template <class T>
 inline constexpr bool is_single_derivative_calculator_v
-        = enable_single_derivative_calculator<std::remove_const_t<std::remove_reference_t<T>>>;
+        = enable_interface_derivative_coefficients<std::remove_const_t<std::remove_reference_t<T>>>;
 
 template <class InterfaceType>
-class SingleInterfaceDerivativesCalculator
+class InterfaceDerivCoeffs
 {
     static_assert(
             (!std::is_same_v<typename InterfaceType::Edge1, OutsideEdge>)&&(
@@ -99,7 +99,7 @@ private:
     host_t<DField<IdxRange1DPerp_2>> m_weights_patch_2;
 
 public:
-    SingleInterfaceDerivativesCalculator(
+    InterfaceDerivCoeffs(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
             ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
@@ -110,11 +110,11 @@ public:
         , m_idx_range_perp_2(idx_range_1d_2)
         , m_weights_patch_1_alloc(
                   "m_weights_patch_1 "
-                  "(SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator)",
+                  "(InterfaceDerivCoeffs::InterfaceDerivCoeffs)",
                   m_idx_range_perp_1)
         , m_weights_patch_2_alloc(
                   "m_weights_patch_2 "
-                  "(SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator)",
+                  "(InterfaceDerivCoeffs::InterfaceDerivCoeffs)",
                   m_idx_range_perp_2)
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
@@ -167,12 +167,12 @@ public:
 
 
     template <class IdxRangeA, class IdxRangeB>
-    SingleInterfaceDerivativesCalculator(
+    InterfaceDerivCoeffs(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
             ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineBuilderClosure const& Closure2 = ddc::SplineBuilderClosure::HERMITE)
-        : SingleInterfaceDerivativesCalculator(
+        : InterfaceDerivCoeffs(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
                 Closure1,
@@ -182,11 +182,11 @@ public:
         static_assert(ddc::is_discrete_domain_v<IdxRangeB>);
     }
 
-    SingleInterfaceDerivativesCalculator(
+    InterfaceDerivCoeffs(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
             std::size_t const number_chosen_cells)
-        : SingleInterfaceDerivativesCalculator(
+        : InterfaceDerivCoeffs(
                 (m_extremity_1 == Extremity::FRONT)
                         ? idx_range_1d_1.take_first(IdxStep<EdgePerpGrid1>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size())))
@@ -203,11 +203,11 @@ public:
     }
 
     template <class IdxRangeA, class IdxRangeB>
-    SingleInterfaceDerivativesCalculator(
+    InterfaceDerivCoeffs(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
             std::size_t const number_chosen_cells)
-        : SingleInterfaceDerivativesCalculator(
+        : InterfaceDerivCoeffs(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
                 number_chosen_cells)
@@ -241,7 +241,7 @@ public:
     }
 
     template <class Layout1, class Layout2>
-    double get_function_coefficients(
+    double get_approx_deriv(
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
     {
@@ -270,11 +270,11 @@ public:
     }
 
     template <class Layout1, class Layout2>
-    inline double get_function_coefficients(
+    inline double get_approx_deriv(
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
     {
-        return get_function_coefficients(function_1, function_2);
+        return get_approx_deriv(function_1, function_2);
     }
 
 
@@ -951,12 +951,12 @@ private:
         return std::array<double, 3>({gamma_i_minus, gamma_i, gamma_i_plus});
     }
 
-    double get_alpha(double const cell_length_left, double const cell_length_right) const
+    static double get_alpha(double const cell_length_left, double const cell_length_right)
     {
         return -0.5 * cell_length_left / (cell_length_right + cell_length_left);
     }
 
-    double get_beta(double const cell_length_left, double const cell_length_right) const
+    static double get_beta(double const cell_length_left, double const cell_length_right)
     {
         return -0.5 * cell_length_right / (cell_length_right + cell_length_left);
     }
@@ -974,8 +974,8 @@ private:
 
 
 template <class InterfaceType>
-inline constexpr bool enable_single_derivative_calculator<
-        SingleInterfaceDerivativesCalculator<InterfaceType>> = true;
+inline constexpr bool
+        enable_interface_derivative_coefficients<InterfaceDerivCoeffs<InterfaceType>> = true;
 ```
 
 

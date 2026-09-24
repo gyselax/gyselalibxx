@@ -101,7 +101,7 @@
     <includedby refid="patch_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp</includedby>
     <includedby refid="multipatch__type_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp</includedby>
     <includedby refid="types_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</includedby>
-    <includedby refid="single__interface__derivatives__calculator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp</includedby>
+    <includedby refid="interface__derivative__coefficients_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</includedby>
     <includedby refid="constant__extrapolation__rules__onion_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</includedby>
     <includedby refid="multipatch__spline__builder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp</includedby>
     <includedby refid="multipatch__spline__builder__2d_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</includedby>
@@ -1535,14 +1535,14 @@
         </childnode>
       </node>
       <node id="85">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp</label>
-        <link refid="single__interface__derivatives__calculator_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</label>
+        <link refid="interface__derivative__coefficients_8hpp_source"/>
         <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="86">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp</label>
-        <link refid="single__interface__derivatives__calculator__collection_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</label>
+        <link refid="interface__derivative__coefficients__collection_8hpp_source"/>
       </node>
       <node id="69">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
@@ -2428,7 +2428,7 @@
         <argsstring></argsstring>
         <name>Field</name>
         <briefdescription>
-<para>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid <formula id="415">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid <formula id="416">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2455,7 +2455,7 @@
         <argsstring></argsstring>
         <name>DField</name>
         <briefdescription>
-<para>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="415">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="416">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2485,7 +2485,7 @@
         <argsstring></argsstring>
         <name>ConstField</name>
         <briefdescription>
-<para>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid <formula id="415">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid <formula id="416">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2512,7 +2512,7 @@
         <argsstring></argsstring>
         <name>DConstField</name>
         <briefdescription>
-<para>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="415">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="416">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

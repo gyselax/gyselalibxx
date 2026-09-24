@@ -9,7 +9,7 @@
     <includes refid="edge_8hpp" local="yes">edge.hpp</includes>
     <includes refid="interface_8hpp" local="yes">interface.hpp</includes>
     <includedby refid="matching__idx__slice_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp</includedby>
-    <includedby refid="single__interface__derivatives__calculator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp</includedby>
+    <includedby refid="interface__derivative__coefficients_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</includedby>
     <incdepgraph>
       <node id="10">
         <label>edge.hpp</label>
@@ -104,14 +104,14 @@
         <link refid="matching__idx__slice_8hpp_source"/>
       </node>
       <node id="3">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp</label>
-        <link refid="single__interface__derivatives__calculator_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</label>
+        <link refid="interface__derivative__coefficients_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp</label>
-        <link refid="single__interface__derivatives__calculator__collection_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</label>
+        <link refid="interface__derivative__coefficients__collection_8hpp_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classEdgeTransformation" prot="public">EdgeTransformation</innerclass>

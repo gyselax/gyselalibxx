@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Class SingleInterfaceDerivativesCalculator - GyselalibX</title>
+    <title>Class InterfaceDerivCoeffs - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Class SingleInterfaceDerivativesCalculator";
-        var mkdocs_page_input_path = "gyselalibxx/classSingleInterfaceDerivativesCalculator.md";
+        var mkdocs_page_name = "Class InterfaceDerivCoeffs";
+        var mkdocs_page_input_path = "gyselalibxx/classInterfaceDerivCoeffs.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Class SingleInterfaceDerivativesCalculator</li>
+      <li class="breadcrumb-item active">Class InterfaceDerivCoeffs</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classSingleInterfaceDerivativesCalculator.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classInterfaceDerivCoeffs.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,12 +566,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="class-singleinterfacederivativescalculator">Class SingleInterfaceDerivativesCalculator</h1>
+                <div><h1 id="class-interfacederivcoeffs">Class InterfaceDerivCoeffs</h1>
 <p><strong>template &lt;class InterfaceType&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a></p>
-<p><em>Compute the derivative of an equivalent global spline at the interface between two patches.</em> <a href="#detailed-description">More...</a></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a></p>
+<p><em>Compute the coefficients a, b and c of the interface derivative reconstruction method.</em> <a href="#detailed-description">More...</a></p>
 <ul>
-<li><code>#include &lt;single_interface_derivatives_calculator.hpp&gt;</code></li>
+<li><code>#include &lt;interface_derivative_coefficients.hpp&gt;</code></li>
 </ul>
 <h2 id="public-types">Public Types</h2>
 <table>
@@ -599,19 +599,27 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-14"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-interfacederivcoeffs-14"><strong>InterfaceDerivCoeffs</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE) <br><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-24"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>._</td>
+<td style="text-align: left;"><a href="#function-interfacederivcoeffs-24"><strong>InterfaceDerivCoeffs</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE) <br><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>. See_InterfaceDerivCoeffsInstantiator </em>._</td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-34"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>. This constructor calculates an approximation of the formula._</td>
+<td style="text-align: left;"><a href="#function-interfacederivcoeffs-34"><strong>InterfaceDerivCoeffs</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>. See_InterfaceDerivCoeffsInstantiator </em>. This constructor calculates an approximation of the formula._</td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-44"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>. This constructor calculates an approximation of the formula._</td>
+<td style="text-align: left;"><a href="#function-interfacederivcoeffs-44"><strong>InterfaceDerivCoeffs</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>. See_InterfaceDerivCoeffsInstantiator </em>. This constructor calculates an approximation of the formula._</td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#function-get_approx_deriv-12"><strong>get_approx_deriv</strong></a> (DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2) const<br><em>Get the linear combination of the function values (c).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#function-get_approx_deriv-22"><strong>get_approx_deriv</strong></a> (DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2, DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1) const<br><em>Get the linear combination of the function values (c). See</em> get_approx_deriv <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
@@ -625,24 +633,18 @@
 <td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="#function-get_coeff_deriv_patch_2"><strong>get_coeff_deriv_patch_2</strong></a> () const<br><em>Get the coefficient (b) in front of the derivative on the patch 2 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></td>
 </tr>
-<tr>
-<td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-get_function_coefficients-12"><strong>get_function_coefficients</strong></a> (DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2) const<br><em>Get the linear combination of the function values (c).</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-get_function_coefficients-22"><strong>get_function_coefficients</strong></a> (DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2, DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1) const<br><em>Get the linear combination of the function values (c). See</em> get_function_coefficients <em>.</em></td>
-</tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>For a given <a href="structInterface.html"><strong>Interface</strong></a>, this operator computes the coefficients a, b and c of the following relation: <span class="arithmatex">\(s'(X_I) = c + a s'(X_{I+1}) + b s'(X_{I+1})\)</span>,</p>
+<p>For a given <a href="structInterface.html"><strong>Interface</strong></a>, this operator computes the coefficients a, b and c of the following relation between the interface derivative and the derivatives at the other boundaries of the two patches: <span class="arithmatex">\(s'(X_I) = c + a s'(X_{I+1}) + b s'(X_{I+1})\)</span>,</p>
 <p>with
 * s'(X_I) the derivative at the <a href="structInterface.html"><strong>Interface</strong></a> of the two local splines on the patches.
 * s'(X_{I+1}) the derivative at the next (or right) <a href="structInterface.html"><strong>Interface</strong></a> of the local splines on patch 1.
 * s'(X_{I-1}) the derivative at the previous (or left) <a href="structInterface.html"><strong>Interface</strong></a> of the local splines on patch 2.
 * a,b scalars depending on the meshes of the two patches.
-* c a linear combination of the function values on the two patches. The weights in the linear combination depend on the meshes of the two patches. It can be written as a sum: <span class="arithmatex">\(c = \sum_{k = -N2}^{N1} \omega_k f_k\)</span>, with <span class="arithmatex">\(\omega_k\)</span> the weights, <span class="arithmatex">\(f_k\)</span> the function values, <span class="arithmatex">\(N1\)</span> the number of cells in patch 1, and <span class="arithmatex">\(N2\)</span> the number of cells in patch 2.</p>
+* c a linear combination of the function values on the two patches. The weights in the linear combination depend on the meshes of the two patches. It can be written as a sum: <span class="arithmatex">\(c = \sum_{k = -N2}^{N1} \omega_k f_k\)</span>, with <span class="arithmatex">\(\omega_k\)</span> the weights, <span class="arithmatex">\(f_k\)</span> the function values,</p>
+<p>By default, <span class="arithmatex">\(N1\)</span> the number of cells in patch 1, and <span class="arithmatex">\(N2\)</span> the number of cells in patch 2.</p>
+<p>But a constructor is also provided to choose <span class="arithmatex">\(N\_{trunc}=N1=N2\)</span> in order to calculate an approximation of the derivative: <span class="arithmatex">\(s'(X_I) \simeq c_{trunc} = \sum_{k = -N_{trunc}}^{N_{trunc}} \omega_k f_k\)</span>.</p>
 <p>Scheme of the two patches: X_{I-1} X_I X_{I+1} 
  | | | | 1 | 2 | |_______|_______|
 * ← → +
@@ -650,20 +652,20 @@
 <p>All the formulae and more details are given in the README.md.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><a href="structInterface.html"><strong>Interface</strong></a> The interface between two patches where we want to compute the derivatives. </li>
+<li><code>InterfaceType</code> The interface between two patches where we want to compute the derivatives. </li>
 </ul>
 <p><strong>Warning:</strong></p>
 <p>The applied method only works for interpolation points located on the break points. In the case where "ddc::SplineBuilderClosure::GREVILLE" is specified, additional interpolation points are also placed in the first or last cell of the patch. Please be sure to initialise the discrete space of your Grid on the break points (especially in the non-uniform case). </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-associated_interface">typedef associated_interface</h3>
 <p><a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>between the two involved patches.</em></p>
-<pre><code class="language-C++">using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::associated_interface =  InterfaceType;
+<pre><code class="language-C++">using InterfaceDerivCoeffs&lt; InterfaceType &gt;::associated_interface =  InterfaceType;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-singleinterfacederivativescalculator-14">function SingleInterfaceDerivativesCalculator [1/4]</h3>
-<p><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
+<h3 id="function-interfacederivcoeffs-14">function InterfaceDerivCoeffs [1/4]</h3>
+<p><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
     IdxRange1DPerp_1 const &amp; idx_range_1d_1,
     IdxRange1DPerp_2 const &amp; idx_range_1d_2,
     ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE,
@@ -681,10 +683,10 @@
 </ul>
 <hr>
 
-<h3 id="function-singleinterfacederivativescalculator-24">function SingleInterfaceDerivativesCalculator [2/4]</h3>
-<p><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>._</p>
+<h3 id="function-interfacederivcoeffs-24">function InterfaceDerivCoeffs [2/4]</h3>
+<p><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>. See_InterfaceDerivCoeffsInstantiator </em>._</p>
 <pre><code class="language-C++">template&lt;class IdxRangeA, class IdxRangeB&gt;
-inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
+inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
     IdxRangeA const &amp; idx_range_a,
     IdxRangeB const &amp; idx_range_b,
     ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE,
@@ -700,9 +702,9 @@ inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculato
 </ul>
 <hr>
 
-<h3 id="function-singleinterfacederivativescalculator-34">function SingleInterfaceDerivativesCalculator [3/4]</h3>
-<p><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>. This constructor calculates an approximation of the formula._</p>
-<pre><code class="language-C++">inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
+<h3 id="function-interfacederivcoeffs-34">function InterfaceDerivCoeffs [3/4]</h3>
+<p><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>. See_InterfaceDerivCoeffsInstantiator </em>. This constructor calculates an approximation of the formula._</p>
+<pre><code class="language-C++">inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
     IdxRange1DPerp_1 const &amp; idx_range_1d_1,
     IdxRange1DPerp_2 const &amp; idx_range_1d_2,
     std::size_t const number_chosen_cells
@@ -718,10 +720,10 @@ inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculato
 <p>If the mesh has additional interpolation points, please be sure to not take these points. </p>
 <hr>
 
-<h3 id="function-singleinterfacederivativescalculator-44">function SingleInterfaceDerivativesCalculator [4/4]</h3>
-<p><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>. This constructor calculates an approximation of the formula._</p>
+<h3 id="function-interfacederivcoeffs-44">function InterfaceDerivCoeffs [4/4]</h3>
+<p><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>. See_InterfaceDerivCoeffsInstantiator </em>. This constructor calculates an approximation of the formula._</p>
 <pre><code class="language-C++">template&lt;class IdxRangeA, class IdxRangeB&gt;
-inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
+inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
     IdxRangeA const &amp; idx_range_a,
     IdxRangeB const &amp; idx_range_b,
     std::size_t const number_chosen_cells
@@ -737,39 +739,15 @@ inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculato
 <p>If the mesh has additional interpolation points, please be sure to not take these points. </p>
 <hr>
 
-<h3 id="function-get_coeff_deriv_on_patch">function get_coeff_deriv_on_patch</h3>
-<p><em>Get the coefficient (a) or (b) in front of the derivative on the given patch of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">template&lt;class Patch&gt;
-inline double SingleInterfaceDerivativesCalculator::get_coeff_deriv_on_patch () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>The value of the coefficient (a) or (b). </p>
-<hr>
-
-<h3 id="function-get_coeff_deriv_patch_1">function get_coeff_deriv_patch_1</h3>
-<p><em>Get the coefficient (a) in front of the derivative on the patch 1 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">inline double SingleInterfaceDerivativesCalculator::get_coeff_deriv_patch_1 () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>The value of the coefficient a. </p>
-<hr>
-
-<h3 id="function-get_coeff_deriv_patch_2">function get_coeff_deriv_patch_2</h3>
-<p><em>Get the coefficient (b) in front of the derivative on the patch 2 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">inline double SingleInterfaceDerivativesCalculator::get_coeff_deriv_patch_2 () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>The value of the coefficient b. </p>
-<hr>
-
-<h3 id="function-get_function_coefficients-12">function get_function_coefficients [1/2]</h3>
+<h3 id="function-get_approx_deriv-12">function get_approx_deriv [1/2]</h3>
 <p><em>Get the linear combination of the function values (c).</em> </p>
 <pre><code class="language-C++">template&lt;class Layout1, class Layout2&gt;
-inline double SingleInterfaceDerivativesCalculator::get_function_coefficients (
+inline double InterfaceDerivCoeffs::get_approx_deriv (
     DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1,
     DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2
 ) const
 </code></pre>
+<p>This linear combination corresponds to an approximation of the interface derivative.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>function_1</code> Function values at the interpolation points on patch 1. </li>
@@ -777,15 +755,15 @@ inline double SingleInterfaceDerivativesCalculator::get_function_coefficients (
 </ul>
 <p><strong>Returns:</strong></p>
 <p>the linear combination of the function values (c).</p>
-<p>Remark: for the approximation case, the cells were selected by the given index ranges in the instantiation. Here, function_1 and function_2 can be given on the whole domain and the operator will select the correct values. But, it could be more optimised to directly give a slice on the selected cells. E.g. get_function_coefficients(function_1[idx_interface_1][selected_cells_idx_range_1], 
-                          function_2[idx_interface_2][selected_cells_idx_range_2]); and get_function_coefficients(function_1[idx_interface_1], 
-                          function_2[idx_interface_2]); will return the same value. </p>
+<p>Remark: for the approximation case, the cells were selected by the given index ranges in the instantiation. Here, function_1 and function_2 can be given on the whole domain and the operator will select the correct values. But, it could be more optimised to directly give a slice on the selected cells. E.g. get_approx_deriv(function_1[idx_interface_1][selected_cells_idx_range_1], 
+                 function_2[idx_interface_2][selected_cells_idx_range_2]); and get_approx_deriv(function_1[idx_interface_1], 
+                 function_2[idx_interface_2]); will return the same value. </p>
 <hr>
 
-<h3 id="function-get_function_coefficients-22">function get_function_coefficients [2/2]</h3>
-<p><em>Get the linear combination of the function values (c). See</em> get_function_coefficients <em>.</em></p>
+<h3 id="function-get_approx_deriv-22">function get_approx_deriv [2/2]</h3>
+<p><em>Get the linear combination of the function values (c). See</em> get_approx_deriv <em>.</em></p>
 <pre><code class="language-C++">template&lt;class Layout1, class Layout2&gt;
-inline double SingleInterfaceDerivativesCalculator::get_function_coefficients (
+inline double InterfaceDerivCoeffs::get_approx_deriv (
     DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2,
     DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1
 ) const
@@ -799,8 +777,33 @@ inline double SingleInterfaceDerivativesCalculator::get_function_coefficients (
 <p>the linear combination of the function values (c). </p>
 <hr>
 
+<h3 id="function-get_coeff_deriv_on_patch">function get_coeff_deriv_on_patch</h3>
+<p><em>Get the coefficient (a) or (b) in front of the derivative on the given patch of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">template&lt;class Patch&gt;
+inline double InterfaceDerivCoeffs::get_coeff_deriv_on_patch () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The value of the coefficient (a) or (b). </p>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp</code></p></div>
+
+<h3 id="function-get_coeff_deriv_patch_1">function get_coeff_deriv_patch_1</h3>
+<p><em>Get the coefficient (a) in front of the derivative on the patch 1 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">inline double InterfaceDerivCoeffs::get_coeff_deriv_patch_1 () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The value of the coefficient a. </p>
+<hr>
+
+<h3 id="function-get_coeff_deriv_patch_2">function get_coeff_deriv_patch_2</h3>
+<p><em>Get the coefficient (b) in front of the derivative on the patch 2 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">inline double InterfaceDerivCoeffs::get_coeff_deriv_patch_2 () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The value of the coefficient b. </p>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</code></p></div>
               
             </div>
           </div><footer>
