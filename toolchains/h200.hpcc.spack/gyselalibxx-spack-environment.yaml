@@ -23,6 +23,7 @@ spack:
     - pdiplugin-trace@1.11
     - python@3.14
     - py-dask@2026.3
+    - py-gvec@1.4
     - py-h5py@3.16
     - py-imageio@2.37
     - py-matplotlib@3.11 ^freetype@2.14.1
