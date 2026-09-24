@@ -19,7 +19,7 @@ the boundary cells.
 ## Contents
 
 - [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `InterfaceDerivCoeffs` operator.
-  - [How to use the `InterfaceDerivCoeffs` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code.
+  - [How to use the `InterfaceDerivCoeffs` operator?](#how-to-use-the-interfacederivcoeffs-operator): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
 
 ## Relation between derivatives on the boundaries of two connected patches
@@ -483,4 +483,4 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
-J Sci Comput 106, 58 (2026). https://doi.org/10.1007/s10915-025-03161-z
+*J Sci Comput* 106, 58 (2026). <https://doi.org/10.1007/s10915-025-03161-z>
