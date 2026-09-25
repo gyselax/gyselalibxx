@@ -338,7 +338,7 @@ and for $`m = 2, ..., N^L-1`$,
                 \omega_{k, m,N^R}^i
                 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}} \omega_{k, m-1,N^R}^i
             \right]
-    \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}} b^{i}_{m,N^R}  \gamma_{i-m, k}.
+    + \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}} b^{i}_{m,N^R}  \gamma_{i-m, k}.
     \\
 \end{aligned}
 ```
