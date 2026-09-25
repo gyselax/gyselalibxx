@@ -8,8 +8,8 @@ target_sources("multipatch_interface_derivatives"
         FILE_SET HEADERS
             FILES
                 interface_derivative_matrix.hpp
-                single_interface_derivatives_calculator.hpp
-                single_interface_derivatives_calculator_collection.hpp
+                interface_derivative_coefficients.hpp
+                interface_derivative_coefficients_collection.hpp
 )
 
 target_link_libraries("multipatch_interface_derivatives" INTERFACE

@@ -3,7 +3,7 @@
 On multi-patch geometries, we can impose a $`\mathcal{C}^1`$ regularity on the whole domain by fixing identical derivatives and function values on the interface.
 The operators implemented in this folder propose methods to compute the derivatives at the patch interfaces.
 
-The method applied here is detailed in Vidal et al. (2025)[^2].
+The method applied here is detailed in Vidal et al. (2026)[^2].
 
 **Assumptions:**
 
@@ -18,8 +18,8 @@ the boundary cells.
 
 ## Contents
 
-- [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `SingleInterfaceDerivativesCalculator` operator.
-  - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code.
+- [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `InterfaceDerivCoeffs` operator.
+  - [How to use the `InterfaceDerivCoeffs` operator?](#how-to-use-the-interfacederivcoeffs-operator): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
 - [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfaceDerivativeMatrix` operator.
   - [How to use the `InterfaceDerivativeMatrix` operator?](#how-to-use-the-interfacederivativematrix-operator): It documents how to use the operator in the code.
@@ -72,17 +72,17 @@ There are different ways to compute the coefficients $`a^i_{N^L,N^R}`$,
 $`b^i_{N^L,N^R}`$, and $`c^i_{N^L,N^R}`$. There are described in the section
 [Formulae](#formulae).
 
-Firstly, we describe how to use the `SingleInterfaceDerivativesCalculator` operator.
+Firstly, we describe how to use the `InterfaceDerivCoeffs` operator.
 
-### How to use the SingleInterfaceDerivativesCalculator operator?
+### How to use the InterfaceDerivCoeffs operator?
 
-When `SingleInterfaceDerivativesCalculator` is instantiated, it computes and stores the coefficients
+When `InterfaceDerivCoeffs` is instantiated, it computes and stores the coefficients
 $`a^i_{N^L,N^R}`$ and $`b^i_{N^L,N^R}`$ and the weights $`\{\omega_{k, N^L,N^R}^i\}_{k = - N^L}^{N^R}`$.
 To instantiate it, we need the index ranges of the interpolation points. If we want to use the exact formula,
 we need to provide the index ranges with all the points,
 
 ```cpp
-SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 ```
 
 If we want to use an approximation, we provide the index ranges with the interpolation points on the selected cells,
@@ -90,13 +90,13 @@ If we want to use an approximation, we provide the index ranges with the interpo
 ```cpp
 Patch1::IdxRange1D idx_range_patch_1_reduced (idx_range_patch_1.take_first(N_L_reduc +1));
 Patch2::IdxRange1D idx_range_patch_2_reduced (idx_range_patch_2.take_last(N_R_reduc +1));
-SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
+InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
 ```
 
 or we can directly call, for $`N_{reduc} = N^L = N^R`$,
 
 ```cpp
-SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
+InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
 ```
 
 > **Remark:** For interpolation with interpolation points as closure condition, a special treatment has to be carried out on the boundary cells
@@ -105,13 +105,13 @@ SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_r
 
 ```cpp
 // If we want to apply the treatment on Patch 1 and Patch 2
-SingleInterfaceDerivativesCalculator<Interface_12> 
+InterfaceDerivCoeffs<Interface_12> 
     derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE);
 // or if we want to apply the treatment only on Patch 1
-SingleInterfaceDerivativesCalculator<Interface_12> 
+InterfaceDerivCoeffs<Interface_12> 
     derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE);
 // or if we want to apply the treatment only on Patch 2
-SingleInterfaceDerivativesCalculator<Interface_12> 
+InterfaceDerivCoeffs<Interface_12> 
     derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE);
 ```
 
@@ -122,7 +122,7 @@ The coefficients can be collected with the following functions:
 
 - `derivatives_calculator.get_coeff_deriv_patch_1()` returns the coefficient $`b^i_{N^L,N^R}`$;
 - `derivatives_calculator.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
-- `derivatives_calculator.get_function_coefficients(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
+- `derivatives_calculator.get_approx_deriv(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
  (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
 - `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case.  We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.
 
@@ -131,7 +131,7 @@ If we want to apply the exact formula, we need to sum these coefficients,
 ```cpp
 double const coeff_deriv_left = derivatives_calculator.get_coeff_deriv_patch_1(); // coeff b
 double const coeff_deriv_right = derivatives_calculator.get_coeff_deriv_patch_2(); // coeff a
-double const sum_values = derivatives_calculator.get_function_coefficients(function_1, function_2); // coeff c
+double const sum_values = derivatives_calculator.get_approx_deriv(function_1, function_2); // coeff c
 
 double const deriv_interface_right = 1e1; // a given value
 double const deriv_interface_left = 1e1; // a given value
@@ -142,14 +142,14 @@ double const deriv_interface = sum_values + coeff_deriv_left * deriv_interface_l
 If we want to apply an approximation of the formula, we only need $`c^i_{N^L_{reduc},N^R_{reduc}}`$,
 
 ```cpp
-double const deriv_interface = derivatives_calculator.get_function_coefficients(function_1, function_2); // coeff c
+double const deriv_interface = derivatives_calculator.get_approx_deriv(function_1, function_2); // coeff c
 ```
 
 **Remark:** It is also possible to use slices for the functions values,
 
 ```cpp
 double const deriv_interface =
-    derivatives_calculator.get_function_coefficients(
+    derivatives_calculator.get_approx_deriv(
             function_1[idx_range_patch_1_reduced],
             function_2[idx_range_patch_2_reduced]); // coeff c
 ```
@@ -738,4 +738,4 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
-Journal of Scientific Computing, (2026)
+Journal of Scientific Computing 106, 58 (2026). <https://doi.org/10.1007/s10915-025-03161-z>

@@ -4,14 +4,14 @@
 
 #include <ddc/ddc.hpp>
 
-#include "single_interface_derivatives_calculator.hpp"
+#include "interface_derivative_coefficients.hpp"
 
 template <class T>
-inline constexpr bool enable_single_derivative_calculator_collection = false;
+inline constexpr bool enable_interface_derivative_coefficients_collection = false;
 
 template <class T>
 inline constexpr bool is_single_derivative_calculator_collection_v
-        = enable_single_derivative_calculator_collection<
+        = enable_interface_derivative_coefficients_collection<
                 std::remove_const_t<std::remove_reference_t<T>>>;
 
 
@@ -27,28 +27,26 @@ inline constexpr bool is_single_derivative_calculator_collection_v
  * 
  * @warning For each interface, only one interface derivative calculator should be defined.
  * 
- * @see SingleInterfaceDerivativesCalculator. 
+ * @see InterfaceDerivCoeffs. 
  */
 template <class... Interfaces>
-class SingleInterfaceDerivativesCalculatorCollection
+class InterfaceDerivCoeffsCollection
 {
-    using DerivCalculatorTypeSeq
-            = ddc::detail::TypeSeq<SingleInterfaceDerivativesCalculator<Interfaces>...>;
+    using DerivCalculatorTypeSeq = ddc::detail::TypeSeq<InterfaceDerivCoeffs<Interfaces>...>;
 
     using InterfaceTypeSeq = ddc::detail::TypeSeq<Interfaces...>;
 
-    std::tuple<SingleInterfaceDerivativesCalculator<Interfaces> const&...>
-            m_derivative_calculator_collection;
+    std::tuple<InterfaceDerivCoeffs<Interfaces> const&...> m_derivative_calculator_collection;
 
 public:
     /**
-     * @brief Instantiate a SingleInterfaceDerivativesCalculatorCollection 
+     * @brief Instantiate a InterfaceDerivCoeffsCollection 
      * from a list of interface derivative calculators. 
      *  
      * @param derivative_calculators Interface derivative calculators. 
      */
-    explicit SingleInterfaceDerivativesCalculatorCollection(
-            SingleInterfaceDerivativesCalculator<Interfaces> const&... derivative_calculators)
+    explicit InterfaceDerivCoeffsCollection(
+            InterfaceDerivCoeffs<Interfaces> const&... derivative_calculators)
         : m_derivative_calculator_collection(derivative_calculators...)
     {
     }
@@ -58,7 +56,7 @@ public:
      * @brief Get a derivative calculator of the collection. 
      * The output cannot be copied. This operator only allows to 
      * get a temporary reference to call one of the operators of the 
-     * SingleInterfaceDerivativesCalculator class. 
+     * InterfaceDerivCoeffs class. 
      * 
      * @tparam Interface The interface where the required interface derivative 
      * calculator is defined. 
@@ -66,25 +64,23 @@ public:
      * @return The required interface derivative calculator as a constant reference. 
      */
     template <class Interface>
-    SingleInterfaceDerivativesCalculator<Interface> const& get() const
+    InterfaceDerivCoeffs<Interface> const& get() const
     {
         static_assert(
                 ddc::in_tags_v<Interface, InterfaceTypeSeq>,
                 "No element defined on this Interface in this collection.");
 
-        return std::get<SingleInterfaceDerivativesCalculator<Interface> const&>(
-                m_derivative_calculator_collection);
+        return std::get<InterfaceDerivCoeffs<Interface> const&>(m_derivative_calculator_collection);
     }
 };
 
 
 // To help the template deduction.
 template <class... DerivCalculatorType>
-SingleInterfaceDerivativesCalculatorCollection(DerivCalculatorType const&... derivative_calculators)
-        -> SingleInterfaceDerivativesCalculatorCollection<
-                typename DerivCalculatorType::associated_interface...>;
+InterfaceDerivCoeffsCollection(DerivCalculatorType const&... derivative_calculators)
+        -> InterfaceDerivCoeffsCollection<typename DerivCalculatorType::associated_interface...>;
 
 
 template <class... DerivCalculatorType>
-inline constexpr bool enable_single_derivative_calculator_collection<
-        SingleInterfaceDerivativesCalculatorCollection<DerivCalculatorType...>> = true;
+inline constexpr bool enable_interface_derivative_coefficients_collection<
+        InterfaceDerivCoeffsCollection<DerivCalculatorType...>> = true;

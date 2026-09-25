@@ -2,7 +2,7 @@
 function (multipatch_single_interface_derivatives_executable MESH_TYPE)
     set(test_name_gtest "multipatch_single_interface_derivatives_${MESH_TYPE}_test")
     add_executable("${test_name_gtest}"
-        single_interface_derivatives_calculator_test.cpp
+        interface_derivative_coefficients_test.cpp
         ../../main.cpp
     )
     target_link_libraries("${test_name_gtest}"
@@ -26,7 +26,7 @@ endforeach()
 # SingleInterfaceDerivativeCalculatorCollection test =============================================
 set(test_name_gtest "interface_derivatives_test")
 add_executable("${test_name_gtest}"
-    single_interface_derivatives_calculator_collection_test.cpp
+    interface_derivative_coefficients_collection_test.cpp
     ../../main.cpp
 )
 target_link_libraries("${test_name_gtest}"

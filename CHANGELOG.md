@@ -17,9 +17,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Rename `SingleInterfaceDerivativesCalculator` to `InterfaceDerivCoeffs`.
+- Rename `SingleInterfaceDerivativesCalculatorCollection` to `InterfaceDerivCoeffsCollection`.
+- Rename `SingleInterfaceDerivativesCalculator::get_function_coefficients()` to `InterfaceDerivCoeffs::get_approx_deriv()`.
+- Rename file `single_interface_derivatives_calculator.hpp` to `interface_derivative_coefficients.hpp`.
+- Rename file `single_interface_derivatives_calculator_collection.hpp` to `interface_derivative_coefficients_collection.hpp`.
+
 ### Deprecated
 
 ### Removed
+
+### Dependency requirements
+
+- Remove Dask dependency in the tests.
 
 ## [v0.8.0] - 2026-09-09
 
