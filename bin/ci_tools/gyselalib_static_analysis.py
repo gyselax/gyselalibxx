@@ -352,7 +352,7 @@ def search_for_bad_memory(file):
             if func_idx is None:
                 continue
             func_use_id = line[func_idx]['id']
-            if config.root.find(f"./scopes//function[@tokenDef='{func_use_id}']"):
+            if config.root.find(f"./scopes//function[@tokenDef='{func_use_id}']") is not None:
                 # Function definition
                 continue
             first_var_idx = next((i for i,v in enumerate(line) if 'variable' in v), None)
