@@ -219,12 +219,7 @@ public:
                     BSplinesPerp2>(m_idx_range_perp_2, m_extremity_2);
         }
 
-        if constexpr ((ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)&&(
-                              ddc::is_uniform_point_sampling_v<EdgePerpGrid2>)) {
-            set_coefficients_uniform_per_patch_case();
-        } else {
-            set_coefficients_non_uniform_case();
-        }
+        set_coefficients();
     }
 
 
@@ -499,7 +494,9 @@ private:
      * @brief Compute the coefficients a, b and the weights omega applying the recursive
      * formula. 
      */
-    void set_coefficients_non_uniform_case()
+    void set_coefficients() requires(
+            (!ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)
+            || (!ddc::is_uniform_point_sampling_v<EdgePerpGrid2>))
     {
         // Memory allocation ---------------------------------------------------------------------
         // Define weight fields for number of cells equal to n, n-1 and n-2 in the recursion.
@@ -955,7 +952,8 @@ private:
      * @brief Compute the coefficients a, b and the weights omega applying the explicit
      * formula for the uniform case. 
      */
-    void set_coefficients_uniform_per_patch_case()
+    void set_coefficients() requires((ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)&&(
+            ddc::is_uniform_point_sampling_v<EdgePerpGrid2>))
     {
         int const n_cells_1 = m_idx_range_perp_1.size() - 1;
         int const n_cells_2 = m_idx_range_perp_2.size() - 1;
