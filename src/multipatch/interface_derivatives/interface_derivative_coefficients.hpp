@@ -390,12 +390,8 @@ public:
                 [&](Idx1D_1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
 
         // To avoid counting twice the value at the interface.
-        IdxRange1DPerp_2 idx_range_perp_2_without_interface
-                = (m_extremity_2 == FRONT)
-                          ? m_idx_range_perp_2.remove_first(IdxStep<EdgePerpGrid2>(1))
-                          : m_idx_range_perp_2.remove_last(IdxStep<EdgePerpGrid2>(1));
         coeff_values += ddc::host_transform_reduce(
-                idx_range_perp_2_without_interface,
+                m_idx_range_perp_2,
                 0.0,
                 ddc::reducer::sum<double>(),
                 [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
@@ -719,6 +715,8 @@ private:
         m_coeff_deriv_patch_2 = coeff_deriv_patch2[2];
         ddc::parallel_deepcopy(m_weights_patch_1, get_const_field(weights_patch1[2]));
         ddc::parallel_deepcopy(m_weights_patch_2, get_const_field(weights_patch2[2]));
+        m_weights_patch_1(interface_idx_1) *= 0.5;
+        m_weights_patch_2(interface_idx_2) *= 0.5;
     }
 
 
