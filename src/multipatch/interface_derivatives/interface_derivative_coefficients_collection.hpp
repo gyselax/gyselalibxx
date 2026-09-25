@@ -10,7 +10,7 @@ template <class T>
 inline constexpr bool enable_interface_derivative_coefficients_collection = false;
 
 template <class T>
-inline constexpr bool is_single_derivative_calculator_collection_v
+inline constexpr bool is_interface_derivative_coefficients_collection_v
         = enable_interface_derivative_coefficients_collection<
                 std::remove_const_t<std::remove_reference_t<T>>>;
 

@@ -65,7 +65,7 @@ class InterfacesDerivativeCalculator<
     using all_patches = typename Connectivity::all_patches;
 
     static_assert(
-            is_single_derivative_calculator_collection_v<DerivCoeffCollection>,
+            is_interface_derivative_coefficients_collection_v<DerivCoeffCollection>,
             "Please provide a InterfaceDerivCoeffsCollection type.");
 
     static constexpr std::size_t number_of_interfaces
@@ -151,21 +151,21 @@ public:
 private:
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
-    DerivCoeffCollection const& m_derivative_coefficients;
+    DerivCoeffCollection const& m_deriv_coeffs_collect;
 
 public:
     /**
      * @brief Instantiate InterfacesDerivativeCalculator. 
      *  
      * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
-     * @param derivatives_calculators InterfaceDerivCoeffsCollection containing all the 
+     * @param deriv_coeffs_collect InterfaceDerivCoeffsCollection containing all the 
      *          interface derivative calculator for each interface in the given Grid1D direction. 
      */
     InterfacesDerivativeCalculator(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            DerivCoeffCollection const& derivatives_calculators)
+            DerivCoeffCollection const& deriv_coeffs_collect)
         : m_idx_ranges(idx_ranges)
-        , m_derivative_coefficients(derivatives_calculators)
+        , m_deriv_coeffs_collect(deriv_coeffs_collect)
     {
     }
 
@@ -355,7 +355,7 @@ private:
 
         // Compute the coefficient c_I for the interface I.
         double const interface_deriv
-                = m_derivative_coefficients.template get<EquivalentInterfaceI>().get_approx_deriv(
+                = m_deriv_coeffs_collect.template get<EquivalentInterfaceI>().get_approx_deriv(
                         get_const_field(function_1[idx_slice_1]),
                         get_const_field(function_2[idx_slice_2]));
 
@@ -456,11 +456,10 @@ private:
                 = function_and_derivs_2[idx_slice_deriv_2];
 
         // Compute the coefficient c_I for the interface I.
-        double const corner_derivative
-                = m_derivative_coefficients.template get<EquivalentInterfaceI>()
-                          .get_approx_cross_deriv(
-                                  get_const_field(derivs_1),
-                                  get_const_field(derivs_2));
+        double const corner_derivative = m_deriv_coeffs_collect.template get<EquivalentInterfaceI>()
+                                                 .get_approx_cross_deriv(
+                                                         get_const_field(derivs_1),
+                                                         get_const_field(derivs_2));
 
         // Get the correct indices for the slices.
         Idx<GridPerp1> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1);

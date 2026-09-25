@@ -595,8 +595,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
 
     // Collect the derivative calculators --------------------------------------------------------
     // We do not follow the physical order to test the operator.
-    InterfaceDerivCoeffsCollection
-            deriv_calculators_collect(deriv_coeffs_2_3, deriv_coeffs_1_2);
+    InterfaceDerivCoeffsCollection deriv_coeffs_collect(deriv_coeffs_2_3, deriv_coeffs_1_2);
 
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
@@ -617,7 +616,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             Grid1AlongXg,
             ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
             InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
-            matrix(idx_ranges, deriv_calculators_collect);
+            matrix(idx_ranges, deriv_coeffs_collect);
 
     // Instantiate DerivField ====================================================================
     // Instantiate index range slices ------------------------------------------------------------
