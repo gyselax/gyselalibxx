@@ -671,6 +671,14 @@
 <td style="text-align: left;"><a href="#function-deepcopy-22"><strong>deepcopy</strong></a> (ExecSpace const &amp; execution_space, <a href="classDerivField.html"><strong>DerivField</strong></a>&lt; OElementType, <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html#typedef-index_range_type"><strong>index_range_type</strong></a>, OMemorySpace, OLayoutStridedPolicy &gt; src) <br><em>Copy the source</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>into this</em><a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>using Kokkos::deep_copy.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_FUNCTION constexpr <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html#typedef-view_type"><strong>view_type</strong></a></td>
+<td style="text-align: left;"><a href="#function-get_const_field"><strong>get_const_field</strong></a> () const<br><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION constexpr <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html#typedef-span_type"><strong>span_type</strong></a></td>
+<td style="text-align: left;"><a href="#function-get_field"><strong>get_field</strong></a> () const<br><em>Get a modifiable</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION constexpr reference</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DElem... elems) noexcept const<br><em>Get an element from a constant field. An Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</em></td>
 </tr>
@@ -689,14 +697,6 @@
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION constexpr auto</td>
 <td style="text-align: left;"><a href="#function-operator_4"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) const<br><em>Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_FUNCTION constexpr <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html#typedef-view_type"><strong>view_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-span_cview"><strong>span_cview</strong></a> () const<br><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_FUNCTION constexpr <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html#typedef-span_type"><strong>span_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-span_view"><strong>span_view</strong></a> () const<br><em>Get a modifiable</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
@@ -880,6 +880,24 @@ inline void DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace,
 </ul>
 <hr>
 
+<h3 id="function-get_const_field">function get_const_field</h3>
+<p><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION constexpr view_type DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::get_const_field () const
+</code></pre>
+<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_const_field should be used.</p>
+<p><strong>Returns:</strong></p>
+<p>A constant span of this field. </p>
+<hr>
+
+<h3 id="function-get_field">function get_field</h3>
+<p><em>Get a modifiable</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION constexpr span_type DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::get_field () const
+</code></pre>
+<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</p>
+<p><strong>Returns:</strong></p>
+<p>A span of this field. </p>
+<hr>
+
 <h3 id="function-operator">function operator()</h3>
 <p><em>Get an element from a constant field. An Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</em> </p>
 <pre><code class="language-C++">template&lt;class... DElem&gt;
@@ -951,24 +969,6 @@ inline KOKKOS_FUNCTION constexpr auto DerivField&lt; ElementType, IdxRange&lt; D
 </ul>
 <p><strong>Returns:</strong></p>
 <p>ConstField A subset of the data. </p>
-<hr>
-
-<h3 id="function-span_cview">function span_cview</h3>
-<p><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION constexpr view_type DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::span_cview () const
-</code></pre>
-<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_const_field should be used.</p>
-<p><strong>Returns:</strong></p>
-<p>A constant span of this field. </p>
-<hr>
-
-<h3 id="function-span_view">function span_view</h3>
-<p><em>Get a modifiable</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION constexpr span_type DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::span_view () const
-</code></pre>
-<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</p>
-<p><strong>Returns:</strong></p>
-<p>A span of this field. </p>
 <hr>
 
 <h3 id="function-derivfield">function ~DerivField</h3>

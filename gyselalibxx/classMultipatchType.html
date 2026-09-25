@@ -735,7 +735,7 @@ inline MultipatchType::MultipatchType (
 <hr>
 
 <h3 id="function-get">function get</h3>
-<pre><code class="language-C++">template&lt;class Patch, std::enable_if_t&lt;!has_data_access_methods_v&lt; T&lt; Patch &gt; &gt;, bool &gt;&gt;
+<pre><code class="language-C++">template&lt;class Patch&gt;
 inline KOKKOS_FUNCTION T&lt; Patch &gt; MultipatchType::get () const
 </code></pre>
 <p>Retrieve an object from the patch that it is defined on.</p>

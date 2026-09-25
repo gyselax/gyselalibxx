@@ -691,14 +691,6 @@
 <td style="text-align: left;"><a href="#function-idx_range"><strong>idx_range</strong></a> () const<br><em>Get a</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>containing the index ranges on which the fields are defined.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-span_cview"><strong>span_cview</strong></a> () const<br><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get_const_field to be defined.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-span_view"><strong>span_view</strong></a> () <br><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing modifiable fields. This function matches the DDC name to allow the global get_const_field to be defined.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;"></td>
 <td style="text-align: left;"><a href="#function-multipatchfieldmem"><strong>~MultipatchFieldMem</strong></a> () noexcept<br></td>
 </tr>
@@ -960,22 +952,6 @@ inline auto MultipatchFieldMem::get ()
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The set of index ranges on which the set of fields stored in this class are defined. </p>
-<hr>
-
-<h3 id="function-span_cview">function span_cview</h3>
-<p><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get_const_field to be defined.</em></p>
-<pre><code class="language-C++">inline auto MultipatchFieldMem::span_cview () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>A set of constant fields providing access to the fields stored in this class. </p>
-<hr>
-
-<h3 id="function-span_view">function span_view</h3>
-<p><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing modifiable fields. This function matches the DDC name to allow the global get_const_field to be defined.</em></p>
-<pre><code class="language-C++">inline auto MultipatchFieldMem::span_view () 
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>A set of modifiable fields providing access to the fields stored in this class. </p>
 <hr>
 
 <h3 id="function-multipatchfieldmem">function ~MultipatchFieldMem</h3>

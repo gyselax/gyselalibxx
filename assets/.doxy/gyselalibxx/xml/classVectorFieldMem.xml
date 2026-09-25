@@ -486,12 +486,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="206" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classVectorFieldMem_1a13245a7aa41f076008d0e5f391a1af9c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classVectorFieldMem_1afeb8583634f557056ad970a2500769fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">view_type</ref></type>
-        <definition>view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_cview</definition>
+        <definition>view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get_const_field</definition>
         <argsstring>() const</argsstring>
-        <name>span_cview</name>
-        <qualifiedname>VectorFieldMem::span_cview</qualifiedname>
+        <name>get_const_field</name>
+        <qualifiedname>VectorFieldMem::get_const_field</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -505,12 +505,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="216" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="216" bodyend="219"/>
       </memberdef>
-      <memberdef kind="function" id="classVectorFieldMem_1a5c5366a96f56e4422e59e8dec1e9c850" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classVectorFieldMem_1acf40e163c1ae01c5034b46c3e8e74b9a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">view_type</ref></type>
-        <definition>view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_view</definition>
+        <definition>view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get_field</definition>
         <argsstring>() const</argsstring>
-        <name>span_view</name>
-        <qualifiedname>VectorFieldMem::span_view</qualifiedname>
+        <name>get_field</name>
+        <qualifiedname>VectorFieldMem::get_field</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -524,12 +524,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="229" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="229" bodyend="232"/>
       </memberdef>
-      <memberdef kind="function" id="classVectorFieldMem_1a94522577e4477ec70867222321b1c6ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classVectorFieldMem_1ac8c29526c973804e753b15c4e4ef6eec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">span_type</ref></type>
-        <definition>span_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_view</definition>
+        <definition>span_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get_field</definition>
         <argsstring>()</argsstring>
-        <name>span_view</name>
-        <qualifiedname>VectorFieldMem::span_view</qualifiedname>
+        <name>get_field</name>
+        <qualifiedname>VectorFieldMem::get_field</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -897,6 +897,9 @@
       <member refid="classVectorFieldMem_1ae89a87415f8842ac65d868a3534005fa" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>discrete_domain_type</name></member>
       <member refid="classVectorFieldMem_1a7c254b8e4de647c26d5961ed7976f573" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>get</name></member>
       <member refid="classVectorFieldMem_1ac34d633f44e6b30ac0500b7262bf6b7c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>get</name></member>
+      <member refid="classVectorFieldMem_1afeb8583634f557056ad970a2500769fa" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>get_const_field</name></member>
+      <member refid="classVectorFieldMem_1acf40e163c1ae01c5034b46c3e8e74b9a" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>get_field</name></member>
+      <member refid="classVectorFieldMem_1ac8c29526c973804e753b15c4e4ef6eec" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>get_field</name></member>
       <member refid="classVectorFieldMem_1a9b16375d74b5200bcd8fed9c55e57c92" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>index_range_type</name></member>
       <member refid="classVectorFieldMem_1a4399b76b097cfac6b274dae5204a548c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>memory_space</name></member>
       <member refid="classVectorFieldMem_1a73403b839e5a86b3e4fbfb067def3173" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
@@ -908,10 +911,7 @@
       <member refid="classVectorFieldMem_1a803238e91bdec84b861d8e7eb11cc8af" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
       <member refid="classVectorFieldMem_1a8f37de8cfbcb2dd9bc3b5a82acf98dc4" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
       <member refid="classVectorFieldMem_1a5770ccc15ea62e4105e65aab707837e7" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
-      <member refid="classVectorFieldMem_1a13245a7aa41f076008d0e5f391a1af9c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_cview</name></member>
       <member refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_type</name></member>
-      <member refid="classVectorFieldMem_1a5c5366a96f56e4422e59e8dec1e9c850" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_view</name></member>
-      <member refid="classVectorFieldMem_1a94522577e4477ec70867222321b1c6ae" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_view</name></member>
       <member refid="classVectorFieldMem_1a69b83be2aa9a2e350191b76b4dde1b0e" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1abe439e1867e7ac8d564e77ba3c78e621" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a044e87b9de9db522db0e3d2aaac2545d" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>

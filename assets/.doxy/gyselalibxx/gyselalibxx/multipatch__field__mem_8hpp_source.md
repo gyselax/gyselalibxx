@@ -116,20 +116,10 @@ public:
                 ::get_field(std::get<T<Patches>>(base_type::m_tuple))...);
     }
 
-    auto span_view()
-    {
-        return get_field();
-    }
-
     auto get_const_field() const
     {
         return MultipatchField<InternalConstFieldOnPatch, Patches...>(
                 ::get_const_field(std::get<T<Patches>>(base_type::m_tuple))...);
-    }
-
-    auto span_cview() const
-    {
-        return get_const_field();
     }
 };
 

@@ -97,14 +97,14 @@ Inherits the following classes: [VectorFieldCommon](classVectorFieldCommon.md)
 |  KOKKOS\_FUNCTION | [**VectorField**](#function-vectorfield-1213) ([**index\_range\_type**](classVectorField.md#typedef-index_range_type) const & idx\_range, OElementType \*... ptr) <br> |
 |  KOKKOS\_FUNCTION constexpr | [**VectorField**](#function-vectorfield-1313) (FieldType... fields) <br> |
 |  constexpr chunk\_span\_type | [**get**](#function-get) () noexcept const<br>_Get the Field describing the component in the QueryTag direction._  |
+|  constexpr [**view\_type**](classVectorField.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br> |
+|  constexpr [**span\_type**](classVectorField.md#typedef-span_type) | [**get\_field**](#function-get_field) () const<br> |
 |  KOKKOS\_FUNCTION [**element\_type**](classVectorField.md#typedef-element_type) const | [**operator()**](#function-operator) (ddc::DiscreteElement&lt; ODDims &gt; const &... delems) noexcept const<br> |
 |  KOKKOS\_FUNCTION [**element\_type**](classVectorField.md#typedef-element_type) const | [**operator()**](#function-operator_1) (Idx&lt; ODDims... &gt; const & delems) noexcept const<br> |
 |  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**VectorField**](classVectorField.md) & | [**operator=**](#function-operator_2) ([**VectorField**](classVectorField.md) const & other) = default<br> |
 |  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**VectorField**](classVectorField.md) & | [**operator=**](#function-operator_3) ([**VectorField**](classVectorField.md) && other) = default<br> |
 |  constexpr auto | [**operator[]**](#function-operator_4) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Slice out some dimensions._  |
 |  constexpr auto | [**operator[]**](#function-operator_5) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Slice out some dimensions._  |
-|  constexpr [**view\_type**](classVectorField.md#typedef-view_type) | [**span\_cview**](#function-span_cview) () const<br> |
-|  constexpr [**span\_type**](classVectorField.md#typedef-span_type) | [**span\_view**](#function-span_view) () const<br> |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~VectorField**](#function-vectorfield) () = default<br>[_**VectorField**_](classVectorField.md) _destructor._ |
 
 
@@ -555,6 +555,66 @@ The field in the specified direction.
 
 
 
+### function get\_const\_field 
+
+```C++
+inline constexpr view_type VectorField::get_const_field () const
+```
+
+
+
+Get a constant reference to the vector field referred to by this vector field span.
+
+
+This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_const\_field should be used.
+
+
+
+
+**Returns:**
+
+A constant reference to the vector field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_field 
+
+```C++
+inline constexpr span_type VectorField::get_field () const
+```
+
+
+
+Get a modifiable reference to the vector field referred to by this vector field span.
+
+
+This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
+
+
+
+
+**Returns:**
+
+A constant reference to the vector field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
 ### function operator() 
 
 ```C++
@@ -754,66 +814,6 @@ Get the [**VectorFieldMem**](classVectorFieldMem.md) on the reduced index range 
 **Returns:**
 
 A reference to the vector field on the sliced index range. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_cview 
-
-```C++
-inline constexpr view_type VectorField::span_cview () const
-```
-
-
-
-Get a constant reference to the vector field referred to by this vector field span.
-
-
-This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_const\_field should be used.
-
-
-
-
-**Returns:**
-
-A constant reference to the vector field. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_view 
-
-```C++
-inline constexpr span_type VectorField::span_view () const
-```
-
-
-
-Get a modifiable reference to the vector field referred to by this vector field span.
-
-
-This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
-
-
-
-
-**Returns:**
-
-A constant reference to the vector field. 
 
 
 

@@ -720,14 +720,14 @@ private:
                     &amp; (1 &lt;&lt; ddc::type_seq_rank_v&lt;
                                ddc::Deriv&lt;typename QueryDDim::continuous_dimension_type&gt;,
                                deriv_tags&gt;)) {
-                IdxRangeSlice&lt;QueryDDim&gt; idx_range_local(base_type::m_cross_derivative_idx_range);
+                IdxRangeSlice&lt;QueryDDim&gt; idx_range_local(this-&gt;m_cross_derivative_idx_range);
                 return idx_range_local.extents().value();
             } else {
-                IdxRange&lt;QueryDDim&gt; idx_range_local(base_type::m_physical_idx_range);
+                IdxRange&lt;QueryDDim&gt; idx_range_local(this-&gt;m_physical_idx_range);
                 return idx_range_local.extents().value();
             }
         } else {
-            IdxRange&lt;QueryDDim&gt; idx_range_local(base_type::m_physical_idx_range);
+            IdxRange&lt;QueryDDim&gt; idx_range_local(this-&gt;m_physical_idx_range);
             return idx_range_local.extents().value();
         }
     }
@@ -751,22 +751,20 @@ private:
     template &lt;std::size_t... ArrayIndex&gt;
     void initialise_chunks(allocator_type allocator, std::index_sequence&lt;ArrayIndex...&gt;)
     {
-        ((base_type::internal_fields[ArrayIndex] = make_internal_mdspan&lt;ArrayIndex&gt;(allocator)),
-         ...);
+        ((this-&gt;internal_fields[ArrayIndex] = make_internal_mdspan&lt;ArrayIndex&gt;(allocator)), ...);
     }
 
     template &lt;std::size_t ArrayIndex&gt;
     void free_ptr(ElementType* const ptr, allocator_type allocator)
     {
-        std::size_t alloc_size(((get_mdspan_size&lt;DDims, ArrayIndex&gt;()) * ...));
+        std::size_t alloc_size(((this-&gt;get_mdspan_size&lt;DDims, ArrayIndex&gt;()) * ...));
         allocator.deallocate(ptr, alloc_size);
     }
 
     template &lt;std::size_t... ArrayIndex&gt;
     void free_chunks(allocator_type allocator, std::index_sequence&lt;ArrayIndex...&gt;)
     {
-        (free_ptr&lt;ArrayIndex&gt;(base_type::internal_fields[ArrayIndex].data_handle(), allocator),
-         ...);
+        (free_ptr&lt;ArrayIndex&gt;(this-&gt;internal_fields[ArrayIndex].data_handle(), allocator), ...);
     }
 
 public:
@@ -812,7 +810,7 @@ public:
         static_assert((ddc::is_discrete_element_v&lt;DElem&gt; &amp;&amp; ...));
         using full_index_type = detail::combine_t&lt;DElem...&gt;;
         full_index_type elem(elems...);
-        return base_type::get_internal_field(elem)();
+        return this-&gt;get_internal_field(elem)();
     }
 
     template &lt;class... DElem&gt;
@@ -821,44 +819,44 @@ public:
         static_assert((ddc::is_discrete_element_v&lt;DElem&gt; &amp;&amp; ...));
         using full_index_type = detail::combine_t&lt;DElem...&gt;;
         full_index_type elem(elems...);
-        return base_type::get_internal_field(elem)();
+        return this-&gt;get_internal_field(elem)();
     }
 
     template &lt;class... QueryDDims&gt;
     constexpr auto operator[](Idx&lt;QueryDDims...&gt; const&amp; slice_spec) const
     {
-        return base_type::get_internal_field(slice_spec).span_cview();
+        return get_const_field(this-&gt;get_internal_field(slice_spec));
     }
 
     template &lt;class... QueryDDims&gt;
     constexpr auto operator[](Idx&lt;QueryDDims...&gt; const&amp; slice_spec)
     {
-        return base_type::get_internal_field(slice_spec);
+        return this-&gt;get_internal_field(slice_spec);
     }
 
     template &lt;class... QueryDDims&gt;
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange&lt;QueryDDims...&gt; const&amp; oidx_range)
     {
-        return base_type::get_internal_field(oidx_range);
+        return this-&gt;get_internal_field(oidx_range);
     }
 
     template &lt;class... QueryDDims&gt;
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange&lt;QueryDDims...&gt; const&amp; oidx_range) const
     {
-        return base_type::get_internal_field(oidx_range).span_cview();
+        return get_const_field(this-&gt;get_internal_field(oidx_range));
     }
 
-    view_type span_cview() const
+    view_type get_const_field() const
     {
         return view_type(*this);
     }
 
-    view_type span_view() const
+    view_type get_field() const
     {
         return view_type(*this);
     }
 
-    span_type span_view()
+    span_type get_field()
     {
         return span_type(*this);
     }

@@ -267,7 +267,7 @@ Create a [**MultipatchType**](classMultipatchType.md) class from an r-value (tem
 ### function get 
 
 ```C++
-template<class Patch, std::enable_if_t<!has_data_access_methods_v< T< Patch > >, bool >>
+template<class Patch>
 inline KOKKOS_FUNCTION T< Patch > MultipatchType::get () const
 ```
 

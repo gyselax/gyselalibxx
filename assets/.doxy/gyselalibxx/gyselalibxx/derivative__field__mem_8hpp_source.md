@@ -159,14 +159,14 @@ private:
                     & (1 << ddc::type_seq_rank_v<
                                ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
                                deriv_tags>)) {
-                IdxRangeSlice<QueryDDim> idx_range_local(base_type::m_cross_derivative_idx_range);
+                IdxRangeSlice<QueryDDim> idx_range_local(this->m_cross_derivative_idx_range);
                 return idx_range_local.extents().value();
             } else {
-                IdxRange<QueryDDim> idx_range_local(base_type::m_physical_idx_range);
+                IdxRange<QueryDDim> idx_range_local(this->m_physical_idx_range);
                 return idx_range_local.extents().value();
             }
         } else {
-            IdxRange<QueryDDim> idx_range_local(base_type::m_physical_idx_range);
+            IdxRange<QueryDDim> idx_range_local(this->m_physical_idx_range);
             return idx_range_local.extents().value();
         }
     }
@@ -190,22 +190,20 @@ private:
     template <std::size_t... ArrayIndex>
     void initialise_chunks(allocator_type allocator, std::index_sequence<ArrayIndex...>)
     {
-        ((base_type::internal_fields[ArrayIndex] = make_internal_mdspan<ArrayIndex>(allocator)),
-         ...);
+        ((this->internal_fields[ArrayIndex] = make_internal_mdspan<ArrayIndex>(allocator)), ...);
     }
 
     template <std::size_t ArrayIndex>
     void free_ptr(ElementType* const ptr, allocator_type allocator)
     {
-        std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
+        std::size_t alloc_size(((this->get_mdspan_size<DDims, ArrayIndex>()) * ...));
         allocator.deallocate(ptr, alloc_size);
     }
 
     template <std::size_t... ArrayIndex>
     void free_chunks(allocator_type allocator, std::index_sequence<ArrayIndex...>)
     {
-        (free_ptr<ArrayIndex>(base_type::internal_fields[ArrayIndex].data_handle(), allocator),
-         ...);
+        (free_ptr<ArrayIndex>(this->internal_fields[ArrayIndex].data_handle(), allocator), ...);
     }
 
 public:
@@ -251,7 +249,7 @@ public:
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
         using full_index_type = detail::combine_t<DElem...>;
         full_index_type elem(elems...);
-        return base_type::get_internal_field(elem)();
+        return this->get_internal_field(elem)();
     }
 
     template <class... DElem>
@@ -260,44 +258,44 @@ public:
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
         using full_index_type = detail::combine_t<DElem...>;
         full_index_type elem(elems...);
-        return base_type::get_internal_field(elem)();
+        return this->get_internal_field(elem)();
     }
 
     template <class... QueryDDims>
     constexpr auto operator[](Idx<QueryDDims...> const& slice_spec) const
     {
-        return base_type::get_internal_field(slice_spec).span_cview();
+        return get_const_field(this->get_internal_field(slice_spec));
     }
 
     template <class... QueryDDims>
     constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)
     {
-        return base_type::get_internal_field(slice_spec);
+        return this->get_internal_field(slice_spec);
     }
 
     template <class... QueryDDims>
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
     {
-        return base_type::get_internal_field(oidx_range);
+        return this->get_internal_field(oidx_range);
     }
 
     template <class... QueryDDims>
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
     {
-        return base_type::get_internal_field(oidx_range).span_cview();
+        return get_const_field(this->get_internal_field(oidx_range));
     }
 
-    view_type span_cview() const
+    view_type get_const_field() const
     {
         return view_type(*this);
     }
 
-    view_type span_view() const
+    view_type get_field() const
     {
         return view_type(*this);
     }
 
-    span_type span_view()
+    span_type get_field()
     {
         return span_type(*this);
     }

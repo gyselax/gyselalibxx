@@ -697,7 +697,11 @@ KOKKOS_INLINE_FUNCTION auto get_field(FieldType&amp;&amp; field)
     static_assert(
             has_data_access_methods_v&lt;FieldType&gt;,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
-    return field.span_view();
+    if constexpr (ddc::is_chunk_v&lt;FieldType&gt;) {
+        return field.span_view();
+    } else {
+        return field.get_field();
+    }
 }
 
 template &lt;class FieldType, std::enable_if_t&lt;is_mem_type_v&lt;FieldType&gt;, bool&gt; = true&gt;
@@ -706,7 +710,11 @@ inline auto get_field(FieldType&amp;&amp; field)
     static_assert(
             has_data_access_methods_v&lt;FieldType&gt;,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
-    return field.span_view();
+    if constexpr (ddc::is_chunk_v&lt;FieldType&gt;) {
+        return field.span_view();
+    } else {
+        return field.get_field();
+    }
 }
 
 template &lt;class FieldType, std::enable_if_t&lt;!is_mem_type_v&lt;FieldType&gt;, bool&gt; = true&gt;
@@ -715,7 +723,11 @@ KOKKOS_INLINE_FUNCTION auto get_const_field(FieldType&amp;&amp; field)
     static_assert(
             has_data_access_methods_v&lt;FieldType&gt;,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
-    return field.span_cview();
+    if constexpr (ddc::is_chunk_v&lt;FieldType&gt;) {
+        return field.span_cview();
+    } else {
+        return field.get_const_field();
+    }
 }
 
 template &lt;class FieldType, std::enable_if_t&lt;is_mem_type_v&lt;FieldType&gt;, bool&gt; = true&gt;
@@ -724,7 +736,11 @@ inline auto get_const_field(FieldType&amp;&amp; field)
     static_assert(
             has_data_access_methods_v&lt;FieldType&gt;,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
-    return field.span_cview();
+    if constexpr (ddc::is_chunk_v&lt;FieldType&gt;) {
+        return field.span_cview();
+    } else {
+        return field.get_const_field();
+    }
 }
 </code></pre></div>
               

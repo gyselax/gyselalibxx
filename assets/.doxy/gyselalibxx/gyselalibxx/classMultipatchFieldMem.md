@@ -106,8 +106,6 @@ See [MultipatchType](classMultipatchType.md)
 |  auto | [**get\_const\_field**](#function-get_const_field) () const<br>_Get a MultipatchConstField containing constant fields so the values cannot be modified._  |
 |  auto | [**get\_field**](#function-get_field) () <br>_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing modifiable fields._ |
 |  auto | [**idx\_range**](#function-idx_range) () const<br>_Get a_ [_**MultipatchType**_](classMultipatchType.md) _containing the index ranges on which the fields are defined._ |
-|  auto | [**span\_cview**](#function-span_cview) () const<br>_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get\_const\_field to be defined._ |
-|  auto | [**span\_view**](#function-span_view) () <br>_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing modifiable fields. This function matches the DDC name to allow the global get\_const\_field to be defined._ |
 |   | [**~MultipatchFieldMem**](#function-multipatchfieldmem) () noexcept<br> |
 
 
@@ -619,56 +617,6 @@ inline auto MultipatchFieldMem::idx_range () const
 **Returns:**
 
 The set of index ranges on which the set of fields stored in this class are defined. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_cview 
-
-_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get\_const\_field to be defined._
-```C++
-inline auto MultipatchFieldMem::span_cview () const
-```
-
-
-
-
-
-**Returns:**
-
-A set of constant fields providing access to the fields stored in this class. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_view 
-
-_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing modifiable fields. This function matches the DDC name to allow the global get\_const\_field to be defined._
-```C++
-inline auto MultipatchFieldMem::span_view () 
-```
-
-
-
-
-
-**Returns:**
-
-A set of modifiable fields providing access to the fields stored in this class. 
 
 
 

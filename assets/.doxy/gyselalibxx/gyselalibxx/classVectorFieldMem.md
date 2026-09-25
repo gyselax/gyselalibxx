@@ -93,6 +93,9 @@ Inherits the following classes: [VectorFieldCommon](classVectorFieldCommon.md)
 |   | [**VectorFieldMem**](#function-vectorfieldmem-77) ([**VectorFieldMem**](classVectorFieldMem.md) && other) = default<br> |
 |  constexpr chunk\_span\_type | [**get**](#function-get-12) () noexcept<br>_Get the Field describing the component in the QueryTag direction._  |
 |  constexpr chunk\_view\_type | [**get**](#function-get-22) () noexcept const<br>_Get the Field describing the component in the QueryTag direction._  |
+|  [**view\_type**](classVectorFieldMem.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br> |
+|  [**view\_type**](classVectorFieldMem.md#typedef-view_type) | [**get\_field**](#function-get_field-12) () const<br> |
+|  [**span\_type**](classVectorFieldMem.md#typedef-span_type) | [**get\_field**](#function-get_field-22) () <br> |
 |  element\_type const | [**operator()**](#function-operator) (ddc::DiscreteElement&lt; ODDims &gt; const &... delems) noexcept const<br> |
 |  element\_type const | [**operator()**](#function-operator_1) (Idx&lt; ODDims... &gt; const & delems) noexcept const<br> |
 |  [**VectorFieldMem**](classVectorFieldMem.md) & | [**operator=**](#function-operator_2) ([**VectorFieldMem**](classVectorFieldMem.md) const & other) = delete<br>_Deleted: use deepcopy instead._  |
@@ -101,9 +104,6 @@ Inherits the following classes: [VectorFieldCommon](classVectorFieldCommon.md)
 |  auto | [**operator[]**](#function-operator_5) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Slice out some dimensions._  |
 |  auto | [**operator[]**](#function-operator_6) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) const<br>_Slice out some dimensions._  |
 |  auto | [**operator[]**](#function-operator_7) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Slice out some dimensions._  |
-|  [**view\_type**](classVectorFieldMem.md#typedef-view_type) | [**span\_cview**](#function-span_cview) () const<br> |
-|  [**view\_type**](classVectorFieldMem.md#typedef-view_type) | [**span\_view**](#function-span_view-12) () const<br> |
-|  [**span\_type**](classVectorFieldMem.md#typedef-span_type) | [**span\_view**](#function-span_view-22) () <br> |
 |   | [**~VectorFieldMem**](#function-vectorfieldmem) () = default<br> |
 
 
@@ -473,6 +473,96 @@ The constant field in the specified direction.
 
 
 
+### function get\_const\_field 
+
+```C++
+inline view_type VectorFieldMem::get_const_field () const
+```
+
+
+
+Get a constant reference to this vector field.
+
+
+This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_const\_field should be used.
+
+
+
+
+**Returns:**
+
+A constant reference to this vector field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_field [1/2]
+
+```C++
+inline view_type VectorFieldMem::get_field () const
+```
+
+
+
+Get a constant reference to this vector field.
+
+
+This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
+
+
+
+
+**Returns:**
+
+A constant reference to this vector field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_field [2/2]
+
+```C++
+inline span_type VectorFieldMem::get_field () 
+```
+
+
+
+Get a modifiable reference to this vector field.
+
+
+This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
+
+
+
+
+**Returns:**
+
+A modifiable reference to this vector field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
 ### function operator() 
 
 ```C++
@@ -731,96 +821,6 @@ Get the [**VectorFieldMem**](classVectorFieldMem.md) on the reduced index range 
 **Returns:**
 
 A modifiable reference to the vector field on the sliced index range. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_cview 
-
-```C++
-inline view_type VectorFieldMem::span_cview () const
-```
-
-
-
-Get a constant reference to this vector field.
-
-
-This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_const\_field should be used.
-
-
-
-
-**Returns:**
-
-A constant reference to this vector field. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_view [1/2]
-
-```C++
-inline view_type VectorFieldMem::span_view () const
-```
-
-
-
-Get a constant reference to this vector field.
-
-
-This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
-
-
-
-
-**Returns:**
-
-A constant reference to this vector field. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_view [2/2]
-
-```C++
-inline span_type VectorFieldMem::span_view () 
-```
-
-
-
-Get a modifiable reference to this vector field.
-
-
-This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
-
-
-
-
-**Returns:**
-
-A modifiable reference to this vector field. 
 
 
 

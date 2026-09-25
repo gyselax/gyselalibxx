@@ -842,12 +842,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="405" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="405" bodyend="408"/>
       </memberdef>
-      <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a224a54ac31ccb912b93b7c9fdddda745" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a4d3b959c2d379435393f5587ac5b55bc" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION constexpr <ref refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a695e683f3937dbfc72c277b00347274a" kindref="member">view_type</ref></type>
-        <definition>KOKKOS_FUNCTION constexpr view_type DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::span_cview</definition>
+        <definition>KOKKOS_FUNCTION constexpr view_type DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::get_const_field</definition>
         <argsstring>() const</argsstring>
-        <name>span_cview</name>
-        <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::span_cview</qualifiedname>
+        <name>get_const_field</name>
+        <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::get_const_field</qualifiedname>
         <briefdescription>
 <para>Get a constant <ref refid="classDerivField" kindref="compound">DerivField</ref> of this field. </para>
         </briefdescription>
@@ -861,12 +861,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="418" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="418" bodyend="421"/>
       </memberdef>
-      <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a81ddb73448316e11b70fab4feb0c6350" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a6e684ac2b3f507136855b704b532bddb" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION constexpr <ref refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ad4c88b591e1de7d100a400f9fd0203ad" kindref="member">span_type</ref></type>
-        <definition>KOKKOS_FUNCTION constexpr span_type DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::span_view</definition>
+        <definition>KOKKOS_FUNCTION constexpr span_type DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::get_field</definition>
         <argsstring>() const</argsstring>
-        <name>span_view</name>
-        <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::span_view</qualifiedname>
+        <name>get_field</name>
+        <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::get_field</qualifiedname>
         <briefdescription>
 <para>Get a modifiable <ref refid="classDerivField" kindref="compound">DerivField</ref> of this field. </para>
         </briefdescription>
@@ -964,6 +964,8 @@
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a11cfbe470116c190df197c7ded0ac20b" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>element_type</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a55eb05690ea5d86bfd6fe4256b4e6dad" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>get_chunk_subidx_range_1d_idx</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a5715833cb4d3a008b509a5760f272094" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>get_chunk_subidx_range_idx</name></member>
+      <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a4d3b959c2d379435393f5587ac5b55bc" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>get_const_field</name></member>
+      <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a6e684ac2b3f507136855b704b532bddb" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>get_field</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aea01e036a1639d070d35df387ec85b34" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>get_kokkos_view_from_internal_chunk</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a8976a7b20051721b99a646045565c0bb" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>index_range_type</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ab026f2f41036bfda6c6e6c06c8223670" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>initialise_fields</name></member>
@@ -977,9 +979,7 @@
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ac66f4fa6a6631822097cc8109f763589" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>physical_grids</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ab114b0980a48e579fc99134b40c9f22d" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>physical_idx_range_type</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ad4ddc3aa0d58b7298246fd58c3d800ec" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>reference</name></member>
-      <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a224a54ac31ccb912b93b7c9fdddda745" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>span_cview</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ad4c88b591e1de7d100a400f9fd0203ad" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>span_type</name></member>
-      <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a81ddb73448316e11b70fab4feb0c6350" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>span_view</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a695e683f3937dbfc72c277b00347274a" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>view_type</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aff344a2cabdff7ca3284427c7757f5ee" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>~DerivField</name></member>
     </listofallmembers>

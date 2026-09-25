@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="102" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="102" bodyend="106"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="102" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="102" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchField_1a733d459c789fa5df78b5a7f2863f537e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -326,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="118" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="118" bodyend="122"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="119" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="119" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchField_1a5d0139029c4d048c9433fa7d81098578" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -367,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="131" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="131" bodyend="141"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="132" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="132" bodyend="142"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchField_1a56cfbacfcac49a2a205e1aa5ff6ffeeb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -381,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="143" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="144" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="152" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="152" bodyend="155"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="153" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="153" bodyend="156"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchField_1a81a0d66702494385f6aa986398cac4a8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION auto</type>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="162" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="162" bodyend="166"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="163" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="163" bodyend="167"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION auto</type>
@@ -449,25 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="173" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="173" bodyend="177"/>
-      </memberdef>
-      <memberdef kind="function" id="classMultipatchField_1aad6d9590fbc8731d5e25885da11ed142" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION auto</type>
-        <definition>KOKKOS_FUNCTION auto MultipatchField&lt; T, Patches &gt;::span_view</definition>
-        <argsstring>()</argsstring>
-        <name>span_view</name>
-        <qualifiedname>MultipatchField::span_view</qualifiedname>
-        <briefdescription>
-<para>Get a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> containing modifiable fields. This function matches the DDC name to allow the global get_const_field to be defined. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>A set of modifiable fields providing access to the fields stored in this class. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="185" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="185" bodyend="188"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="174" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="174" bodyend="178"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION auto</type>
@@ -485,25 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="195" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="195" bodyend="199"/>
-      </memberdef>
-      <memberdef kind="function" id="classMultipatchField_1a6f9e5cd86edb626f778aef311c3a92d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION auto</type>
-        <definition>KOKKOS_FUNCTION auto MultipatchField&lt; T, Patches &gt;::span_cview</definition>
-        <argsstring>()</argsstring>
-        <name>span_cview</name>
-        <qualifiedname>MultipatchField::span_cview</qualifiedname>
-        <briefdescription>
-<para>Get a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get_const_field to be defined. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>A set of constant fields providing access to the fields stored in this class. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="207" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="207" bodyend="210"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="185" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="185" bodyend="189"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -556,7 +520,7 @@
         <link refid="classMultipatchType"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="30" bodyend="211"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="30" bodyend="190"/>
     <listofallmembers>
       <member refid="classMultipatchField_1aa166acf6255535cc17a77462f916bc24" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>base_type</name></member>
       <member refid="classMultipatchField_1a5b3babc9be1e8e6c0c87ab4a89d87fc2" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>discrete_domain_type</name></member>
@@ -584,9 +548,7 @@
       <member refid="classMultipatchType_1a69f9f3da2bb51cac35b2c609c9fda284" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchType</name></member>
       <member refid="classMultipatchType_1ac09ed5edaf7d35c564ef78fe31620631" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>PatchOrdering</name></member>
       <member refid="classMultipatchType_1a8bd7585483ea579822748d6100ae3edb" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>size</name></member>
-      <member refid="classMultipatchField_1a6f9e5cd86edb626f778aef311c3a92d6" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>span_cview</name></member>
       <member refid="classMultipatchField_1abd59fa1d9f2605c57ea59eeca005b079" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>span_type</name></member>
-      <member refid="classMultipatchField_1aad6d9590fbc8731d5e25885da11ed142" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>span_view</name></member>
       <member refid="classMultipatchField_1a5cbbad0f201452b8682476434d69eae3" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>view_type</name></member>
       <member refid="classMultipatchField_1a56cfbacfcac49a2a205e1aa5ff6ffeeb" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>~MultipatchField</name></member>
       <member refid="classMultipatchType_1a9b09b8b98e05fea159a80bbca8367a77" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>~MultipatchType</name></member>

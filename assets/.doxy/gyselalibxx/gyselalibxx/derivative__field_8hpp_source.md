@@ -271,12 +271,12 @@ public:
         return base_type::get_internal_field(oidx_range);
     }
 
-    KOKKOS_FUNCTION constexpr view_type span_cview() const
+    KOKKOS_FUNCTION constexpr view_type get_const_field() const
     {
         return view_type(*this);
     }
 
-    KOKKOS_FUNCTION constexpr span_type span_view() const
+    KOKKOS_FUNCTION constexpr span_type get_field() const
     {
         return *this;
     }

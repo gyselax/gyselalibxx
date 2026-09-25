@@ -632,12 +632,13 @@ private:
     template &lt;class RelevantGrids, class IdxRangeTuple, std::size_t... PatchIndex&gt;
     static auto get_idx_range(IdxRangeTuple all_idx_ranges, std::index_sequence&lt;PatchIndex...&gt;)
     {
-        return std::make_tuple(
+        return std::tuple&lt;IdxRange&lt;ddc::type_seq_element_t&lt;PatchIndex, RelevantGrids&gt;&gt;...&gt;(
                 get_idx_range&lt;PatchIndex, RelevantGrids, IdxRangeTuple&gt;(all_idx_ranges)...);
     }
 
     template &lt;std::size_t PatchIndex, class RelevantGrids, class IdxRangeTuple&gt;
-    static auto get_idx_range(IdxRangeTuple all_idx_ranges)
+    static IdxRange&lt;ddc::type_seq_element_t&lt;PatchIndex, RelevantGrids&gt;&gt; get_idx_range(
+            IdxRangeTuple all_idx_ranges)
     {
         using GridToLocate = ddc::type_seq_element_t&lt;PatchIndex, RelevantGrids&gt;;
         using GridLocation = find_relevant_idx_range_t&lt;GridToLocate, IdxRangeTuple&gt;;

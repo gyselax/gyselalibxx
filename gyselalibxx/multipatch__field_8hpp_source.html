@@ -629,6 +629,7 @@ public:
     KOKKOS_FUNCTION MultipatchField(MultipatchObj&amp; other)
         : base_type(T&lt;Patches&gt;(other.template get&lt;Patches&gt;())...)
     {
+        // This function is not explicit as T is occasionally different even if T&lt;Patch&gt; resolves to the same type
         static_assert(is_multipatch_type_v&lt;MultipatchObj&gt;);
     }
 
@@ -641,7 +642,7 @@ public:
 
     template &lt;template &lt;typename P&gt; typename OtherType, class... OPatches&gt;
     MultipatchField(MultipatchField&lt;OtherType, OPatches...&gt;&amp;&amp; other)
-        : base_type(std::make_tuple(other.template get&lt;Patches&gt;()...))
+        : base_type(other.template get&lt;Patches&gt;()...)
     {
         static_assert(
                 std::is_same_v&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;OPatches...&gt;&gt;,
@@ -672,20 +673,10 @@ public:
                 ::get_field(std::get&lt;T&lt;Patches&gt;&gt;(base_type::m_tuple))...);
     }
 
-    KOKKOS_FUNCTION auto span_view()
-    {
-        return get_field();
-    }
-
     KOKKOS_FUNCTION auto get_const_field() const
     {
         return MultipatchField&lt;InternalConstFieldOnPatch, Patches...&gt;(
                 ::get_const_field(std::get&lt;T&lt;Patches&gt;&gt;(base_type::m_tuple))...);
-    }
-
-    KOKKOS_FUNCTION auto span_cview()
-    {
-        return get_const_field();
     }
 };
 

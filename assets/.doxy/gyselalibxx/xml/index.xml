@@ -711,8 +711,8 @@
     <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a11d7a0ef77df2e057a0f56d2555fe582" kind="function"><name>operator()</name></member>
     <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a1629f76c7845f8077707e2e63ce4279f" kind="function"><name>operator[]</name></member>
     <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1acfb3e5f4e43f2cbe04e8c4edc5f0fb5c" kind="function"><name>operator[]</name></member>
-    <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a224a54ac31ccb912b93b7c9fdddda745" kind="function"><name>span_cview</name></member>
-    <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a81ddb73448316e11b70fab4feb0c6350" kind="function"><name>span_view</name></member>
+    <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a4d3b959c2d379435393f5587ac5b55bc" kind="function"><name>get_const_field</name></member>
+    <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a6e684ac2b3f507136855b704b532bddb" kind="function"><name>get_field</name></member>
   </compound>
   <compound refid="classDerivFieldCommon" kind="class"><name>DerivFieldCommon</name>
   </compound>
@@ -799,9 +799,9 @@
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa167edd566d4f03d7bd737f603dd038f" kind="function"><name>operator[]</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abe2ed79b3ce82f3b36f75d09f3e7055b" kind="function"><name>operator[]</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a245529dd6cb7d56c85a71e2b1d58e8f3" kind="function"><name>operator[]</name></member>
-    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6e0d2b4d800e11d4787cf8a1291558d7" kind="function"><name>span_cview</name></member>
-    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a99a11d6c6c4a56b0d05415ec51146eef" kind="function"><name>span_view</name></member>
-    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a5bd780143c64dad90a6ed01c9380fc90" kind="function"><name>span_view</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a12ea055587d4012dd9b0f0bc14328874" kind="function"><name>get_const_field</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a11d168f4f11313b987be6ec73f401d49" kind="function"><name>get_field</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a5bb13340e39af0088d3c6597274b4e1c" kind="function"><name>get_field</name></member>
   </compound>
   <compound refid="classDiocotronDensitySolution" kind="class"><name>DiocotronDensitySolution</name>
     <member refid="classDiocotronDensitySolution_1a3b7f61f099cebe7de300b01f3b0f23d1" kind="variable"><name>m_W1</name></member>
@@ -2493,7 +2493,7 @@
     <member refid="classMultipatchConnectivity_1ad753daab879bb2cdfe04c25c05fc394c" kind="function"><name>get_all_idx_ranges_along_direction</name></member>
     <member refid="classMultipatchConnectivity_1aa2078dc56dde3bf073f16158404c1735" kind="function"><name>get_all_idx_ranges_along_direction</name></member>
     <member refid="classMultipatchConnectivity_1a5561b4f768aea2b45d51fc122d947d65" kind="function"><name>get_idx_range</name></member>
-    <member refid="classMultipatchConnectivity_1a8524498ec3f041f2e5bac0b0bb47c93f" kind="function"><name>get_idx_range</name></member>
+    <member refid="classMultipatchConnectivity_1a016fa7a0e3d7805b438b607d748831f1" kind="function"><name>get_idx_range</name></member>
   </compound>
   <compound refid="classMultipatchField" kind="class"><name>MultipatchField</name>
     <member refid="classMultipatchField_1aa166acf6255535cc17a77462f916bc24" kind="typedef"><name>base_type</name></member>
@@ -2515,9 +2515,7 @@
     <member refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" kind="function"><name>get</name></member>
     <member refid="classMultipatchField_1a81a0d66702494385f6aa986398cac4a8" kind="function"><name>idx_range</name></member>
     <member refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" kind="function"><name>get_field</name></member>
-    <member refid="classMultipatchField_1aad6d9590fbc8731d5e25885da11ed142" kind="function"><name>span_view</name></member>
     <member refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" kind="function"><name>get_const_field</name></member>
-    <member refid="classMultipatchField_1a6f9e5cd86edb626f778aef311c3a92d6" kind="function"><name>span_cview</name></member>
   </compound>
   <compound refid="classMultipatchFieldMem" kind="class"><name>MultipatchFieldMem</name>
     <member refid="classMultipatchFieldMem_1a4e749f2597001907dbe8cf077ca2da9e" kind="typedef"><name>base_type</name></member>
@@ -2540,9 +2538,7 @@
     <member refid="classMultipatchFieldMem_1a6dab5b5b8e1583e5693c5dd9e9c768a7" kind="function"><name>get</name></member>
     <member refid="classMultipatchFieldMem_1a32fdf886aeabdd36febe191309a0ad43" kind="function"><name>idx_range</name></member>
     <member refid="classMultipatchFieldMem_1ad662f26d4aab330dae6a7403c2db0b98" kind="function"><name>get_field</name></member>
-    <member refid="classMultipatchFieldMem_1ad38e389296ed3e9548bc17079c8b0d3a" kind="function"><name>span_view</name></member>
     <member refid="classMultipatchFieldMem_1a2133a1adff7511566108aa2c8a38d7f5" kind="function"><name>get_const_field</name></member>
-    <member refid="classMultipatchFieldMem_1adc226c7e5d20ea6fa028f1054de505e4" kind="function"><name>span_cview</name></member>
   </compound>
   <compound refid="classMultipatchSplineBuilder" kind="class"><name>MultipatchSplineBuilder</name>
     <member refid="classMultipatchSplineBuilder_1a65e4f20add6aaf012822f0b7641e0f57" kind="typedef"><name>PatchOrdering</name></member>
@@ -2635,7 +2631,7 @@
     <member refid="classMultipatchType_1ac456d01f07ff6b9ae5fb08ca646f4ff7" kind="function"><name>MultipatchType</name></member>
     <member refid="classMultipatchType_1a69f9f3da2bb51cac35b2c609c9fda284" kind="function"><name>MultipatchType</name></member>
     <member refid="classMultipatchType_1a9b09b8b98e05fea159a80bbca8367a77" kind="function"><name>~MultipatchType</name></member>
-    <member refid="classMultipatchType_1a4257d5324630c6b8326d8601b5fa1d86" kind="function"><name>get</name></member>
+    <member refid="classMultipatchType_1a1f207a9aa111fb6b38025769f6b75688" kind="function"><name>get</name></member>
     <member refid="classMultipatchType_1a6a44d19ff0704be6f0b4e1d476cefbcc" kind="function"><name>get_tuple</name></member>
     <member refid="classMultipatchType_1a8bd7585483ea579822748d6100ae3edb" kind="function"><name>size</name></member>
   </compound>
@@ -3536,8 +3532,8 @@
     <member refid="classVectorField_1ad64ff813a3b5d71388b2f27f1be99e30" kind="function"><name>VectorField</name></member>
     <member refid="classVectorField_1a9c798891c4ee5f16d899e61e5353e30e" kind="function"><name>operator=</name></member>
     <member refid="classVectorField_1ab3ccb08f4e0e126273e19f8a25fe5d3a" kind="function"><name>operator=</name></member>
-    <member refid="classVectorField_1a7d1c98d30d0a835f4cb2638fd71f90f0" kind="function"><name>span_cview</name></member>
-    <member refid="classVectorField_1a6fc01406c2f71d080a0b2fc04810af33" kind="function"><name>span_view</name></member>
+    <member refid="classVectorField_1aeb7f486875c7d07daae82b75f5ec86df" kind="function"><name>get_const_field</name></member>
+    <member refid="classVectorField_1a59275acbcdd09c92c188790ac2bfca3e" kind="function"><name>get_field</name></member>
     <member refid="classVectorField_1a20a0cf6842e82d0c5ac04da69ac984e7" kind="function"><name>operator()</name></member>
     <member refid="classVectorField_1a5f40f7ef7598f56d57be677682224530" kind="function"><name>operator()</name></member>
     <member refid="classVectorField_1a91884e95ae7f44dccbd595274f470426" kind="function"><name>operator[]</name></member>
@@ -3566,9 +3562,9 @@
     <member refid="classVectorFieldMem_1a13e8628ef73113e5c9d09c63eb6d159d" kind="function"><name>operator=</name></member>
     <member refid="classVectorFieldMem_1ac813597853877e75100199b476a73828" kind="function"><name>operator=</name></member>
     <member refid="classVectorFieldMem_1ae0c51ded5f7792cba8913a70036e49f3" kind="function"><name>~VectorFieldMem</name></member>
-    <member refid="classVectorFieldMem_1a13245a7aa41f076008d0e5f391a1af9c" kind="function"><name>span_cview</name></member>
-    <member refid="classVectorFieldMem_1a5c5366a96f56e4422e59e8dec1e9c850" kind="function"><name>span_view</name></member>
-    <member refid="classVectorFieldMem_1a94522577e4477ec70867222321b1c6ae" kind="function"><name>span_view</name></member>
+    <member refid="classVectorFieldMem_1afeb8583634f557056ad970a2500769fa" kind="function"><name>get_const_field</name></member>
+    <member refid="classVectorFieldMem_1acf40e163c1ae01c5034b46c3e8e74b9a" kind="function"><name>get_field</name></member>
+    <member refid="classVectorFieldMem_1ac8c29526c973804e753b15c4e4ef6eec" kind="function"><name>get_field</name></member>
     <member refid="classVectorFieldMem_1a5b66c7eca07a6ec79a9963fc13e2b6cc" kind="function"><name>operator()</name></member>
     <member refid="classVectorFieldMem_1a4a5b0921086127d5a1e57ee4d587c5d5" kind="function"><name>operator()</name></member>
     <member refid="classVectorFieldMem_1a7a81a04ae5a72fd9236b3a3886dded3b" kind="function"><name>operator[]</name></member>

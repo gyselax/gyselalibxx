@@ -647,6 +647,18 @@
 <td style="text-align: left;"><a href="#function-derivfieldmem-22"><strong>DerivFieldMem</strong></a> (allocator_type allocator, <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a> val_idx_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m_deriv_idx_range) <br><em>The constructor for</em> <a href="classDerivFieldMem.html"><em><strong>DerivFieldMem</strong></em></a> <em>. The constructor initialises the chunks using the provided index ranges.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;"><a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-view_type"><strong>view_type</strong></a></td>
+<td style="text-align: left;"><a href="#function-get_const_field"><strong>get_const_field</strong></a> () const<br><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-view_type"><strong>view_type</strong></a></td>
+<td style="text-align: left;"><a href="#function-get_field-12"><strong>get_field</strong></a> () const<br><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-span_type"><strong>span_type</strong></a></td>
+<td style="text-align: left;"><a href="#function-get_field-22"><strong>get_field</strong></a> () <br><em>Get a modifiable</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;"><a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-element_type"><strong>element_type</strong></a> &amp;</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DElem... elems) noexcept<br><em>Get a modifiable reference to an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</em></td>
 </tr>
@@ -677,18 +689,6 @@
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION constexpr auto</td>
 <td style="text-align: left;"><a href="#function-operator_7"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) const<br><em>Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"><a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-view_type"><strong>view_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-span_cview"><strong>span_cview</strong></a> () const<br><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"><a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-view_type"><strong>view_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-span_view-12"><strong>span_view</strong></a> () const<br><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"><a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-span_type"><strong>span_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-span_view-22"><strong>span_view</strong></a> () <br><em>Get a modifiable</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -807,6 +807,33 @@ inline DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSp
 </ul>
 <hr>
 
+<h3 id="function-get_const_field">function get_const_field</h3>
+<p><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
+<pre><code class="language-C++">inline view_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_const_field () const
+</code></pre>
+<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_const_field should be used.</p>
+<p><strong>Returns:</strong></p>
+<p>A constant span of this field. </p>
+<hr>
+
+<h3 id="function-get_field-12">function get_field [1/2]</h3>
+<p><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
+<pre><code class="language-C++">inline view_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_field () const
+</code></pre>
+<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</p>
+<p><strong>Returns:</strong></p>
+<p>A constant span of this field. </p>
+<hr>
+
+<h3 id="function-get_field-22">function get_field [2/2]</h3>
+<p><em>Get a modifiable</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
+<pre><code class="language-C++">inline span_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_field () 
+</code></pre>
+<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</p>
+<p><strong>Returns:</strong></p>
+<p>A span of this field. </p>
+<hr>
+
 <h3 id="function-operator">function operator()</h3>
 <p><em>Get a modifiable reference to an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</em> </p>
 <pre><code class="language-C++">template&lt;class... DElem&gt;
@@ -917,33 +944,6 @@ inline KOKKOS_FUNCTION constexpr auto DerivFieldMem&lt; ElementType, IdxRange&lt
 </ul>
 <p><strong>Returns:</strong></p>
 <p>ConstField A subset of the data. </p>
-<hr>
-
-<h3 id="function-span_cview">function span_cview</h3>
-<p><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
-<pre><code class="language-C++">inline view_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_cview () const
-</code></pre>
-<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_const_field should be used.</p>
-<p><strong>Returns:</strong></p>
-<p>A constant span of this field. </p>
-<hr>
-
-<h3 id="function-span_view-12">function span_view [1/2]</h3>
-<p><em>Get a constant</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
-<pre><code class="language-C++">inline view_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_view () const
-</code></pre>
-<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</p>
-<p><strong>Returns:</strong></p>
-<p>A constant span of this field. </p>
-<hr>
-
-<h3 id="function-span_view-22">function span_view [2/2]</h3>
-<p><em>Get a modifiable</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>of this field.</em></p>
-<pre><code class="language-C++">inline span_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_view () 
-</code></pre>
-<p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</p>
-<p><strong>Returns:</strong></p>
-<p>A span of this field. </p>
 <hr>
 
 <h3 id="function-derivfieldmem">function ~DerivFieldMem</h3>

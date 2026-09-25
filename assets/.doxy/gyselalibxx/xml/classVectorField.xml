@@ -785,12 +785,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="315" column="53"/>
       </memberdef>
-      <memberdef kind="function" id="classVectorField_1a7d1c98d30d0a835f4cb2638fd71f90f0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classVectorField_1aeb7f486875c7d07daae82b75f5ec86df" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>constexpr <ref refid="classVectorField_1a30f93eebda677a7328532e3bfd1464cb" kindref="member">view_type</ref></type>
-        <definition>constexpr view_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_cview</definition>
+        <definition>constexpr view_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get_const_field</definition>
         <argsstring>() const</argsstring>
-        <name>span_cview</name>
-        <qualifiedname>VectorField::span_cview</qualifiedname>
+        <name>get_const_field</name>
+        <qualifiedname>VectorField::get_const_field</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -804,12 +804,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="325" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="325" bodyend="328"/>
       </memberdef>
-      <memberdef kind="function" id="classVectorField_1a6fc01406c2f71d080a0b2fc04810af33" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classVectorField_1a59275acbcdd09c92c188790ac2bfca3e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>constexpr <ref refid="classVectorField_1a26a5aba14a99a5d32086df8e34c89131" kindref="member">span_type</ref></type>
-        <definition>constexpr span_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_view</definition>
+        <definition>constexpr span_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get_field</definition>
         <argsstring>() const</argsstring>
-        <name>span_view</name>
-        <qualifiedname>VectorField::span_view</qualifiedname>
+        <name>get_field</name>
+        <qualifiedname>VectorField::get_field</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1082,6 +1082,8 @@
       <member refid="classVectorField_1a558d1a564902f587f2be70fa119bedf5" prot="public" virt="non-virtual"><scope>VectorField</scope><name>element_type</name></member>
       <member refid="classVectorField_1a01f8bd0c5d7057416efd5bbade551210" prot="public" virt="non-virtual"><scope>VectorField</scope><name>field_type</name></member>
       <member refid="classVectorField_1a32ae690f71304ab13847d8f80e42e576" prot="public" virt="non-virtual"><scope>VectorField</scope><name>get</name></member>
+      <member refid="classVectorField_1aeb7f486875c7d07daae82b75f5ec86df" prot="public" virt="non-virtual"><scope>VectorField</scope><name>get_const_field</name></member>
+      <member refid="classVectorField_1a59275acbcdd09c92c188790ac2bfca3e" prot="public" virt="non-virtual"><scope>VectorField</scope><name>get_field</name></member>
       <member refid="classVectorField_1ae13cea18185c70ae4b1ee8ecd967c7a6" prot="private" virt="non-virtual"><scope>VectorField</scope><name>get_slice</name></member>
       <member refid="classVectorField_1a9539aca5b29cc5ffac9e20897e131d95" prot="public" virt="non-virtual"><scope>VectorField</scope><name>index_range_type</name></member>
       <member refid="classVectorField_1ae49ce7f9b3a24a4b22f7b247ae0da5bc" prot="public" virt="non-virtual"><scope>VectorField</scope><name>layout_type</name></member>
@@ -1093,9 +1095,7 @@
       <member refid="classVectorField_1ab3ccb08f4e0e126273e19f8a25fe5d3a" prot="public" virt="non-virtual"><scope>VectorField</scope><name>operator=</name></member>
       <member refid="classVectorField_1a91884e95ae7f44dccbd595274f470426" prot="public" virt="non-virtual"><scope>VectorField</scope><name>operator[]</name></member>
       <member refid="classVectorField_1ad28c3e424b784451e334e370aee4568c" prot="public" virt="non-virtual"><scope>VectorField</scope><name>operator[]</name></member>
-      <member refid="classVectorField_1a7d1c98d30d0a835f4cb2638fd71f90f0" prot="public" virt="non-virtual"><scope>VectorField</scope><name>span_cview</name></member>
       <member refid="classVectorField_1a26a5aba14a99a5d32086df8e34c89131" prot="public" virt="non-virtual"><scope>VectorField</scope><name>span_type</name></member>
-      <member refid="classVectorField_1a6fc01406c2f71d080a0b2fc04810af33" prot="public" virt="non-virtual"><scope>VectorField</scope><name>span_view</name></member>
       <member refid="classVectorField_1a1eb942e92bf62a37ba2acc657cfb12f6" prot="private" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>
       <member refid="classVectorField_1a41ca335a210ce90086745e968e0fb999" prot="private" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>
       <member refid="classVectorField_1a5a8f0b8e0054c95e55fb0750a80a043b" prot="private" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>

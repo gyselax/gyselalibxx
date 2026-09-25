@@ -577,6 +577,9 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add GVEC in the toolchains.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fix compilation errors due to use of <code>std::make_tuple</code> in functions that are GPU compatible.</li>
+</ul>
 <h3 id="changed">Changed</h3>
 <ul>
 <li>Rename <code>SingleInterfaceDerivativesCalculator</code> to <code>InterfaceDerivCoeffs</code>.</li>
@@ -587,6 +590,9 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>
+<ul>
+<li>Removed <code>.span_view</code> and <code>.span_cview</code> from Gyselalib++ objects.</li>
+</ul>
 <h3 id="dependency-requirements">Dependency requirements</h3>
 <ul>
 <li>Remove Dask dependency in the tests.</li>

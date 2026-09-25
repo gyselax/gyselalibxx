@@ -174,7 +174,7 @@ private:
             Idx<ODDims...> const& delems,
             std::integer_sequence<T, ints...>) const noexcept
     {
-        return element_type((base_type::m_values[ints](delems))...);
+        return element_type((this->m_values[ints](delems))...);
     }
 
 public:
@@ -243,12 +243,12 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION constexpr VectorField& operator=(VectorField&& other) = default;
 
-    constexpr view_type span_cview() const
+    constexpr view_type get_const_field() const
     {
         return view_type(*this);
     }
 
-    constexpr span_type span_view() const
+    constexpr span_type get_field() const
     {
         return *this;
     }
@@ -285,7 +285,7 @@ public:
     inline constexpr chunk_span_type get() const noexcept
     {
         static_assert(ddc::in_tags_v<QueryTag, NDTypeTag>, "requested Tag absent from Vector");
-        return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_view();
+        return ::get_field(this->m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>]);
     }
 };
 

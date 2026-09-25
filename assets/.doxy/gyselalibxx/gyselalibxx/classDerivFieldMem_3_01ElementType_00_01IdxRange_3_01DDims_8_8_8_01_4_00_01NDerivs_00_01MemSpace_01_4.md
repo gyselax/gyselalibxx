@@ -92,6 +92,9 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 | ---: | :--- |
 |   | [**DerivFieldMem**](#function-derivfieldmem-12) ([**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
 |   | [**DerivFieldMem**](#function-derivfieldmem-22) (allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
+|  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
+|  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**get\_field**](#function-get_field-12) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
+|  [**span\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-span_type) | [**get\_field**](#function-get_field-22) () <br>_Get a modifiable_ [_**DerivField**_](classDerivField.md) _of this field._ |
 |  [**element\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-element_type) & | [**operator()**](#function-operator) (DElem... elems) noexcept<br>_Get a modifiable reference to an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  [**element\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-element_type) const & | [**operator()**](#function-operator_1) (DElem... elems) noexcept const<br>_Get an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  [**DerivFieldMem**](classDerivFieldMem.md) & | [**operator=**](#function-operator_2) ([**DerivFieldMem**](classDerivFieldMem.md) const & other) = delete<br>_Deleted copy operator._  |
@@ -100,9 +103,6 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 |  constexpr auto | [**operator[]**](#function-operator_5) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Get a Field describing a subset of the data._  |
 |  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_6) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
 |  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_7) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) const<br>_Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
-|  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**span\_cview**](#function-span_cview) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
-|  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**span\_view**](#function-span_view-12) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
-|  [**span\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-span_type) | [**span\_view**](#function-span_view-22) () <br>_Get a modifiable_ [_**DerivField**_](classDerivField.md) _of this field._ |
 |   | [**~DerivFieldMem**](#function-derivfieldmem) () <br>_Destructor, responsible to deallocate memory._  |
 
 
@@ -415,6 +415,90 @@ inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::De
 
 
 
+### function get\_const\_field 
+
+_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._
+```C++
+inline view_type DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::get_const_field () const
+```
+
+
+
+This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_const\_field should be used.
+
+
+
+
+**Returns:**
+
+A constant span of this field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_field [1/2]
+
+_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._
+```C++
+inline view_type DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::get_field () const
+```
+
+
+
+This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
+
+
+
+
+**Returns:**
+
+A constant span of this field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_field [2/2]
+
+_Get a modifiable_ [_**DerivField**_](classDerivField.md) _of this field._
+```C++
+inline span_type DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::get_field () 
+```
+
+
+
+This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
+
+
+
+
+**Returns:**
+
+A span of this field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
 ### function operator() 
 
 _Get a modifiable reference to an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._ 
@@ -663,90 +747,6 @@ inline KOKKOS_FUNCTION constexpr auto DerivFieldMem< ElementType, IdxRange< DDim
 **Returns:**
 
 ConstField A subset of the data. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_cview 
-
-_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._
-```C++
-inline view_type DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::span_cview () const
-```
-
-
-
-This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_const\_field should be used.
-
-
-
-
-**Returns:**
-
-A constant span of this field. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_view [1/2]
-
-_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._
-```C++
-inline view_type DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::span_view () const
-```
-
-
-
-This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
-
-
-
-
-**Returns:**
-
-A constant span of this field. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function span\_view [2/2]
-
-_Get a modifiable_ [_**DerivField**_](classDerivField.md) _of this field._
-```C++
-inline span_type DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::span_view () 
-```
-
-
-
-This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get\_field should be used.
-
-
-
-
-**Returns:**
-
-A span of this field. 
 
 
 

@@ -109,7 +109,7 @@ private:
     element_type const operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>)
             const noexcept
     {
-        return element_type((base_type::m_values[ints](delems))...);
+        return element_type((this->m_values[ints](delems))...);
     }
 
 public:
@@ -138,17 +138,17 @@ public:
 
     ~VectorFieldMem() = default;
 
-    view_type span_cview() const
+    view_type get_const_field() const
     {
         return view_type(*this);
     }
 
-    view_type span_view() const
+    view_type get_field() const
     {
         return view_type(*this);
     }
 
-    span_type span_view()
+    span_type get_field()
     {
         return span_type(*this);
     }
@@ -171,39 +171,39 @@ public:
     template <class... QueryDDims>
     auto operator[](Idx<QueryDDims...> const& slice_spec) const
     {
-        return span_cview()[slice_spec];
+        return get_const_field()[slice_spec];
     }
 
     template <class... QueryDDims>
     auto operator[](Idx<QueryDDims...> const& slice_spec)
     {
-        return span_view()[slice_spec];
+        return get_field()[slice_spec];
     }
 
     template <class... QueryDDims>
     auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
     {
-        return span_cview()[oidx_range];
+        return get_const_field()[oidx_range];
     }
 
     template <class... QueryDDims>
     auto operator[](IdxRange<QueryDDims...> const& oidx_range)
     {
-        return span_view()[oidx_range];
+        return get_field()[oidx_range];
     }
 
     template <class QueryTag>
     inline constexpr chunk_span_type get() noexcept
     {
         static_assert(ddc::in_tags_v<QueryTag, NDTypeTag>, "requested Tag absent from Vector");
-        return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_view();
+        return ::get_field(this->m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>]);
     }
 
     template <class QueryTag>
     inline constexpr chunk_view_type get() const noexcept
     {
         static_assert(ddc::in_tags_v<QueryTag, NDTypeTag>, "requested Tag absent from Vector");
-        return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_cview();
+        return ::get_const_field(this->m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>]);
     }
 };
 

@@ -486,24 +486,6 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="174" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="174" bodyend="178"/>
       </memberdef>
-      <memberdef kind="function" id="classMultipatchFieldMem_1ad38e389296ed3e9548bc17079c8b0d3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>auto</type>
-        <definition>auto MultipatchFieldMem&lt; T, Patches &gt;::span_view</definition>
-        <argsstring>()</argsstring>
-        <name>span_view</name>
-        <qualifiedname>MultipatchFieldMem::span_view</qualifiedname>
-        <briefdescription>
-<para>Get a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> containing modifiable fields. This function matches the DDC name to allow the global get_const_field to be defined. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>A set of modifiable fields providing access to the fields stored in this class. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="186" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="186" bodyend="189"/>
-      </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1a2133a1adff7511566108aa2c8a38d7f5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
         <definition>auto MultipatchFieldMem&lt; T, Patches &gt;::get_const_field</definition>
@@ -520,25 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="196" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="196" bodyend="200"/>
-      </memberdef>
-      <memberdef kind="function" id="classMultipatchFieldMem_1adc226c7e5d20ea6fa028f1054de505e4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>auto</type>
-        <definition>auto MultipatchFieldMem&lt; T, Patches &gt;::span_cview</definition>
-        <argsstring>() const</argsstring>
-        <name>span_cview</name>
-        <qualifiedname>MultipatchFieldMem::span_cview</qualifiedname>
-        <briefdescription>
-<para>Get a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get_const_field to be defined. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>A set of constant fields providing access to the fields stored in this class. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="208" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="208" bodyend="211"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="185" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="185" bodyend="189"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -591,7 +555,7 @@
         <link refid="classMultipatchType"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="30" bodyend="212"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="30" bodyend="190"/>
     <listofallmembers>
       <member refid="classMultipatchFieldMem_1a4e749f2597001907dbe8cf077ca2da9e" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>base_type</name></member>
       <member refid="classMultipatchFieldMem_1abbd97d1ad7dfdd97b1721d08de4b4c3c" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>discrete_domain_type</name></member>
@@ -620,9 +584,7 @@
       <member refid="classMultipatchType_1a69f9f3da2bb51cac35b2c609c9fda284" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>MultipatchType</name></member>
       <member refid="classMultipatchType_1ac09ed5edaf7d35c564ef78fe31620631" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>PatchOrdering</name></member>
       <member refid="classMultipatchType_1a8bd7585483ea579822748d6100ae3edb" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>size</name></member>
-      <member refid="classMultipatchFieldMem_1adc226c7e5d20ea6fa028f1054de505e4" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>span_cview</name></member>
       <member refid="classMultipatchFieldMem_1a5dbf8c8141b899d8f283676228c1d0ee" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>span_type</name></member>
-      <member refid="classMultipatchFieldMem_1ad38e389296ed3e9548bc17079c8b0d3a" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>span_view</name></member>
       <member refid="classMultipatchFieldMem_1a27fbfd50d0ab158776d8dc9476d18498" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>view_type</name></member>
       <member refid="classMultipatchFieldMem_1a2a8cae51129016feca06ea2ef0aeb91b" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>~MultipatchFieldMem</name></member>
       <member refid="classMultipatchType_1a9b09b8b98e05fea159a80bbca8367a77" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>~MultipatchType</name></member>

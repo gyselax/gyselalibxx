@@ -601,14 +601,11 @@ protected:
     KOKKOS_FUNCTION explicit MultipatchType(std::tuple&lt;T&lt;Patches&gt;...&gt;&amp;&amp; tuple) : m_tuple(tuple) {}
 
 public:
-    explicit KOKKOS_FUNCTION MultipatchType(T&lt;Patches&gt;... args)
-        : m_tuple(std::make_tuple(std::move(args)...))
-    {
-    }
+    explicit KOKKOS_FUNCTION MultipatchType(T&lt;Patches&gt;... args) : m_tuple(std::move(args)...) {}
 
     template &lt;template &lt;typename P&gt; typename OtherType, class... OPatches&gt;
     KOKKOS_FUNCTION MultipatchType(MultipatchType&lt;OtherType, OPatches...&gt; const&amp; other)
-        : m_tuple(std::make_tuple(other.template get&lt;Patches&gt;()...))
+        : m_tuple(other.template get&lt;Patches&gt;()...)
     {
         static_assert(
                 ddc::type_seq_contains_v&lt;PatchOrdering, ddc::detail::TypeSeq&lt;OPatches...&gt;&gt;,
@@ -620,7 +617,7 @@ public:
 
     template &lt;template &lt;typename P&gt; typename OtherType, class... OPatches&gt;
     MultipatchType(MultipatchType&lt;OtherType, OPatches...&gt;&amp;&amp; other)
-        : m_tuple(std::make_tuple(std::move(other.template get&lt;Patches&gt;())...))
+        : m_tuple(std::move(other.template get&lt;Patches&gt;())...)
     {
         static_assert(
                 std::is_same_v&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;OPatches...&gt;&gt;,
@@ -633,8 +630,8 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION ~MultipatchType() noexcept = default;
 
-    template &lt;class Patch, std::enable_if_t&lt;!has_data_access_methods_v&lt;T&lt;Patch&gt;&gt;, bool&gt; = true&gt;
-    KOKKOS_FUNCTION T&lt;Patch&gt; get() const
+    template &lt;class Patch&gt;
+    KOKKOS_FUNCTION T&lt;Patch&gt; get() const requires(!has_data_access_methods_v&lt;T&lt;Patch&gt;&gt;)
     {
         return std::get&lt;T&lt;Patch&gt;&gt;(m_tuple);
     }
