@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Dependency requirements
 
 - Remove Dask dependency in the tests.
+- Update DDC to [v0.16.0](https://github.com/CExA-project/ddc/releases/tag/v0.16.0).
 
 ## [v0.8.0] - 2026-09-09
 
