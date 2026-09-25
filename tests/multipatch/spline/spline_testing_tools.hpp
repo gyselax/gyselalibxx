@@ -60,8 +60,8 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         BSplinesTheta<PatchIdx>,
         GridR<PatchIdx>,
         GridTheta<PatchIdx>,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::ConstantExtrapolationRule<R, Theta>,
+        ddc::ConstantExtrapolationRule<R>,
+        ddc::ConstantExtrapolationRule<R>,
         ddc::PeriodicExtrapolationRule<Theta>,
         ddc::PeriodicExtrapolationRule<Theta>>;
 

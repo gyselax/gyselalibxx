@@ -131,8 +131,8 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         BSplinesThetag,
         GridRg,
         GridThetag,
-        ddc::ConstantExtrapolationRule<Rg, Thetag>,
-        ddc::ConstantExtrapolationRule<Rg, Thetag>,
+        ddc::ConstantExtrapolationRule<Rg>,
+        ddc::ConstantExtrapolationRule<Rg>,
         ddc::PeriodicExtrapolationRule<Thetag>,
         ddc::PeriodicExtrapolationRule<Thetag>>;
 
@@ -869,8 +869,8 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
                 std::optional(get_const_field(derivs_rgmax)));
     }
 
-    ddc::ConstantExtrapolationRule<Rg, Thetag> bc_rmin_g(TestFixture::rg_min);
-    ddc::ConstantExtrapolationRule<Rg, Thetag> bc_rmax_g(TestFixture::rg_max);
+    ddc::ConstantExtrapolationRule<Rg> bc_rmin_g(TestFixture::rg_min);
+    ddc::ConstantExtrapolationRule<Rg> bc_rmax_g(TestFixture::rg_max);
     ddc::PeriodicExtrapolationRule<Thetag> bc_theta_g;
     SplineRThetagEvaluator evaluator_g(bc_rmin_g, bc_rmax_g, bc_theta_g, bc_theta_g);
 
