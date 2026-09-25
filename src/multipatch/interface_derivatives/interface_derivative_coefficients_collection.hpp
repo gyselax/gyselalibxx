@@ -36,18 +36,18 @@ class InterfaceDerivCoeffsCollection
 
     using InterfaceTypeSeq = ddc::detail::TypeSeq<Interfaces...>;
 
-    std::tuple<InterfaceDerivCoeffs<Interfaces> const&...> m_derivative_calculator_collection;
+    std::tuple<InterfaceDerivCoeffs<Interfaces> const&...> m_deriv_coeffs_collection;
 
 public:
     /**
      * @brief Instantiate a InterfaceDerivCoeffsCollection 
      * from a list of interface derivative calculators. 
      *  
-     * @param derivative_calculators Interface derivative calculators. 
+     * @param deriv_coeffs Interface derivative calculators. 
      */
     explicit InterfaceDerivCoeffsCollection(
-            InterfaceDerivCoeffs<Interfaces> const&... derivative_calculators)
-        : m_derivative_calculator_collection(derivative_calculators...)
+            InterfaceDerivCoeffs<Interfaces> const&... deriv_coeffs)
+        : m_deriv_coeffs_collection(deriv_coeffs...)
     {
     }
 
@@ -70,14 +70,14 @@ public:
                 ddc::in_tags_v<Interface, InterfaceTypeSeq>,
                 "No element defined on this Interface in this collection.");
 
-        return std::get<InterfaceDerivCoeffs<Interface> const&>(m_derivative_calculator_collection);
+        return std::get<InterfaceDerivCoeffs<Interface> const&>(m_deriv_coeffs_collection);
     }
 };
 
 
 // To help the template deduction.
 template <class... DerivCalculatorType>
-InterfaceDerivCoeffsCollection(DerivCalculatorType const&... derivative_calculators)
+InterfaceDerivCoeffsCollection(DerivCalculatorType const&... deriv_coeffs)
         -> InterfaceDerivCoeffsCollection<typename DerivCalculatorType::associated_interface...>;
 
 
