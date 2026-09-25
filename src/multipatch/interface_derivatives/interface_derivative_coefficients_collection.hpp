@@ -45,8 +45,7 @@ public:
      *  
      * @param deriv_coeffs Interface derivative calculators. 
      */
-    explicit InterfaceDerivCoeffsCollection(
-            InterfaceDerivCoeffs<Interfaces> const&... deriv_coeffs)
+    explicit InterfaceDerivCoeffsCollection(InterfaceDerivCoeffs<Interfaces> const&... deriv_coeffs)
         : m_deriv_coeffs_collection(deriv_coeffs...)
     {
     }

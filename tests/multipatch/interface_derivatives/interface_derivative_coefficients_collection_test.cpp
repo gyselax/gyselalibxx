@@ -273,7 +273,8 @@ public:
 TEST_F(InterfaceDerivCoeffsCollectionTest, CheckCallToOperators)
 {
     // Order in sequences ------------------------------------------------------------------------
-    InterfaceDerivCoeffsCollection deriv_calculators_collect(deriv_coeffs_P1_P2, deriv_coeffs_P2_P3);
+    InterfaceDerivCoeffsCollection
+            deriv_calculators_collect(deriv_coeffs_P1_P2, deriv_coeffs_P2_P3);
 
     // Instantiate test function values ==========================================================
     host_t<DFieldMemOnPatch<Patch1>> function_1_alloc(idx_range_xy1);
@@ -292,5 +293,9 @@ TEST_F(InterfaceDerivCoeffsCollectionTest, CheckCallToOperators)
     initialise_all_functions(functions);
 
     // Test InterfaceDerivCoeffsCollection =======================================
-    check_function_call(functions, deriv_calculators_collect, deriv_coeffs_P1_P2, deriv_coeffs_P2_P3);
+    check_function_call(
+            functions,
+            deriv_calculators_collect,
+            deriv_coeffs_P1_P2,
+            deriv_coeffs_P2_P3);
 }
