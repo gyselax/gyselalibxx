@@ -303,12 +303,12 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
             // orientation global: ↑→  | local: ↑→
             break_points_r1.pop_back();
             interpolation_points_r1.pop_back();
-            fill_in(break_points_rg, break_points_r1);
-            fill_in(interpolation_points_rg, interpolation_points_r1);
+            append(break_points_rg, break_points_r1);
+            append(interpolation_points_rg, interpolation_points_r1);
         } else if (std::is_same_v<Edge1, WestEdge1>) {
             // orientation global: ↑→  | local: ←↓
-            fill_in_reverse(break_points_rg, break_points_r1);
-            fill_in_reverse(interpolation_points_rg, interpolation_points_r1);
+            append_reverse(break_points_rg, break_points_r1);
+            append_reverse(interpolation_points_rg, interpolation_points_r1);
             break_points_rg.pop_back();
             interpolation_points_rg.pop_back();
         }
@@ -316,12 +316,12 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
         // --- fill in with points from patch 2
         if constexpr (std::is_same_v<Edge2, EastEdge2>) {
             // orientation global: ↑→  | local: ←↓
-            fill_in_reverse(break_points_rg, break_points_eta2);
-            fill_in_reverse(interpolation_points_rg, interpolation_points_eta2);
+            append_reverse(break_points_rg, break_points_eta2);
+            append_reverse(interpolation_points_rg, interpolation_points_eta2);
         } else if (std::is_same_v<Edge2, WestEdge2>) {
             // orientation global: ↑→  | local: ↑→
-            fill_in(break_points_rg, break_points_eta2);
-            fill_in(interpolation_points_rg, interpolation_points_eta2);
+            append(break_points_rg, break_points_eta2);
+            append(interpolation_points_rg, interpolation_points_eta2);
         } else if (std::is_same_v<Edge2, SouthEdge2>) {
             // orientation global: ↑→  | local: ↓→
             for (typename Patch2::Coord2 xi : break_points_xi2) {

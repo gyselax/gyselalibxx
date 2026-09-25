@@ -314,31 +314,31 @@ public:
         std::vector<Coord<Xg>> interpolation_points_xg;
 
         break_points_x147.pop_back();
-        fill_in(break_points_xg, break_points_x147);
-        fill_in(interpolation_points_xg, interpolation_points_x147);
+        append(break_points_xg, break_points_x147);
+        append(interpolation_points_xg, interpolation_points_x147);
 
         break_points_x258.pop_back();
-        fill_in(break_points_xg, break_points_x258);
-        fill_in(interpolation_points_xg, interpolation_points_x258);
+        append(break_points_xg, break_points_x258);
+        append(interpolation_points_xg, interpolation_points_x258);
 
-        fill_in(break_points_xg, break_points_x369);
-        fill_in(interpolation_points_xg, interpolation_points_x369);
+        append(break_points_xg, break_points_x369);
+        append(interpolation_points_xg, interpolation_points_x369);
 
         std::vector<Coord<Yg>> break_points_yg;
         std::vector<Coord<Yg>> interpolation_points_yg;
 
         break_points_y789.pop_back();
         interpolation_points_y789.pop_back();
-        fill_in(break_points_yg, break_points_y789);
-        fill_in(interpolation_points_yg, interpolation_points_y789);
+        append(break_points_yg, break_points_y789);
+        append(interpolation_points_yg, interpolation_points_y789);
 
         break_points_y456.pop_back();
         interpolation_points_y456.pop_back();
-        fill_in(break_points_yg, break_points_y456);
-        fill_in(interpolation_points_yg, interpolation_points_y456);
+        append(break_points_yg, break_points_y456);
+        append(interpolation_points_yg, interpolation_points_y456);
 
-        fill_in(break_points_yg, break_points_y123);
-        fill_in(interpolation_points_yg, interpolation_points_y123);
+        append(break_points_yg, break_points_y123);
+        append(interpolation_points_yg, interpolation_points_y123);
 
         ddc::init_discrete_space<BSplinesXg>(break_points_xg);
         ddc::init_discrete_space<BSplinesYg>(break_points_yg);
