@@ -970,31 +970,32 @@ private:
         IdxStep<EdgePerpGrid2> idx_step_2
                 = m_extremity_2 == FRONT ? IdxStep<EdgePerpGrid2>(1) : IdxStep<EdgePerpGrid2>(-1);
 
-        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx_1);
+        double cell_length_left = ddc::discrete_space<EdgePerpGrid1>().step();
+        double cell_length_right = ddc::discrete_space<EdgePerpGrid2>().step();
 
         double const a_11 = -0.5 * cell_length_left / (cell_length_left + cell_length_right);
         double const b_11 = -0.5 * cell_length_right / (cell_length_left + cell_length_right);
 
         double const u1 = 2 * Kokkos::sqrt(3);
+        double const u_plus = 2 + Kokkos::sqrt(3);
+        double const u_minus = 2 - Kokkos::sqrt(3);
 
-        double const un1 = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_1)
-                           - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_1);
-        double const un1_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_1 - 1)
-                                 - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_1 - 1);
+        // Calculate the values u_k that are needed for the coefficients
+        double const un1 = Kokkos::pow(u_plus, n_cells_1) - Kokkos::pow(u_minus, n_cells_1);
+        double const un1_minus
+                = Kokkos::pow(u_plus, n_cells_1 - 1) - Kokkos::pow(u_minus, n_cells_1 - 1);
 
-        double const un2 = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_2)
-                           - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_2);
-        double const un2_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_2 - 1)
-                                 - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_2 - 1);
+        double const un2 = Kokkos::pow(u_plus, n_cells_2) - Kokkos::pow(u_minus, n_cells_2);
+        double const un2_minus
+                = Kokkos::pow(u_plus, n_cells_2 - 1) - Kokkos::pow(u_minus, n_cells_2 - 1);
 
+        // Calculate denominator used for all coefficients
         double const denominator = un1 * un2 + un1 * un2_minus * a_11 + un1_minus * un2 * b_11;
 
 
         // Compute the coefficients a and b.
-        m_coeff_deriv_patch_1
-                = Kokkos::pow(-1, (n_cells_1 - 1) % 2) * u1 * b_11 * un2 / denominator;
-        m_coeff_deriv_patch_2
-                = Kokkos::pow(-1, (n_cells_2 - 1) % 2) * u1 * a_11 * un1 / denominator;
+        m_coeff_deriv_patch_1 = neg_1_to_the_power(n_cells_1 - 1) * u1 * b_11 * un2 / denominator;
+        m_coeff_deriv_patch_2 = neg_1_to_the_power(n_cells_2 - 1) * u1 * a_11 * un1 / denominator;
 
 
         // Compute the weights {omega_k}_{k = -NL, ..., NR} in c.
@@ -1010,35 +1011,35 @@ private:
         for (int k(1); k < n_cells_2; ++k) {
             idx_2 = idx_2 + idx_step_2;
             const int n2_minus_k = n_cells_2 - k;
-            double const vk_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n2_minus_k - 1)
-                                    - Kokkos::pow(2 - Kokkos::sqrt(3), n2_minus_k - 1);
-            double const vk_plus = Kokkos::pow(2 + Kokkos::sqrt(3), n2_minus_k + 1)
-                                   - Kokkos::pow(2 - Kokkos::sqrt(3), n2_minus_k + 1);
+            double const vk_minus
+                    = Kokkos::pow(u_plus, n2_minus_k - 1) - Kokkos::pow(u_minus, n2_minus_k - 1);
+            double const vk_plus
+                    = Kokkos::pow(u_plus, n2_minus_k + 1) - Kokkos::pow(u_minus, n2_minus_k + 1);
 
             m_weights_patch_2(idx_2)
-                    = Kokkos::pow(-1, k % 2) * factor_a * un1 * (vk_plus - vk_minus);
+                    = neg_1_to_the_power(k) * factor_a * un1 * (vk_plus - vk_minus);
         }
 
         // --- for k = NR
         idx_2 = idx_2 + idx_step_2;
-        m_weights_patch_2(idx_2) = Kokkos::pow(-1, n_cells_2 % 2) * factor_a * un1 * u1;
+        m_weights_patch_2(idx_2) = neg_1_to_the_power(n_cells_2) * factor_a * un1 * u1;
 
         // --- for k = -1, ..., -(NL-1)
         for (int k(1); k < n_cells_1; ++k) {
             idx_1 = idx_1 + idx_step_1;
             const int n1_minus_k = n_cells_1 - k;
-            double const vk_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n1_minus_k - 1)
-                                    - Kokkos::pow(2 - Kokkos::sqrt(3), n1_minus_k - 1);
-            double const vk_plus = Kokkos::pow(2 + Kokkos::sqrt(3), n1_minus_k + 1)
-                                   - Kokkos::pow(2 - Kokkos::sqrt(3), n1_minus_k + 1);
+            double const vk_minus
+                    = Kokkos::pow(u_plus, n1_minus_k - 1) - Kokkos::pow(u_minus, n1_minus_k - 1);
+            double const vk_plus
+                    = Kokkos::pow(u_plus, n1_minus_k + 1) - Kokkos::pow(u_minus, n1_minus_k + 1);
 
             m_weights_patch_1(idx_1)
-                    = Kokkos::pow(-1, (k + 1) % 2) * factor_b * un2 * (vk_plus - vk_minus);
+                    = neg_1_to_the_power(k + 1) * factor_b * un2 * (vk_plus - vk_minus);
         }
 
         // --- for k = -NL
         idx_1 = idx_1 + idx_step_1;
-        m_weights_patch_1(idx_1) = Kokkos::pow(-1, (n_cells_1 + 1) % 2) * factor_b * un2 * u1;
+        m_weights_patch_1(idx_1) = neg_1_to_the_power(n_cells_1 + 1) * factor_b * un2 * u1;
     };
 
 
@@ -1154,5 +1155,10 @@ private:
             IdxRange<Grid1D> const& idx_range) const
     {
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
+    }
+
+    static inline double neg_1_to_the_power(int k)
+    {
+        return 1.0 - 2.0 * (k & 1);
     }
 };
