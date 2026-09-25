@@ -458,7 +458,7 @@ with the weights given by,
         , &k = 1, ..., n_2-1, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^k
         \frac{\frac{a^I_{1,1}}{\Delta x^R}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^L}u_{n_2}(u_{n_1} - u_{n_1-1})}
-        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
+        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = 0, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
         \frac{\frac{b^I_{1,1}}{\Delta x^L} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
