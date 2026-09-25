@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add GVEC in the toolchains.
-- Add `InterfacesDerivativeMatrix`.
+- Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
 
 ### Fixed
 
@@ -294,7 +294,6 @@ in a `DerivField`.
 - Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
 - Add a new coordinate transformation `LinearCoordTransform`.
 - Add a new coordinate transformation `OrthogonalCoordTransforms`.
-- Add `InterfaceDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
 
 ### Fixed
 
