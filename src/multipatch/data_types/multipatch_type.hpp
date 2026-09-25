@@ -95,7 +95,7 @@ public:
      * @param other The equivalent MultipatchType being copied.
      */
     template <template <typename P> typename OtherType, class... OPatches>
-    explicit MultipatchType(MultipatchType<OtherType, OPatches...>&& other)
+    MultipatchType(MultipatchType<OtherType, OPatches...>&& other)
         : m_tuple(std::move(other.template get<Patches>())...)
     {
         static_assert(
@@ -115,8 +115,8 @@ public:
      * @tparam Patch The patch of the object to be returned.
      * @return The object on the given patch.
      */
-    template <class Patch, std::enable_if_t<!has_data_access_methods_v<T<Patch>>, bool> = true>
-    KOKKOS_FUNCTION T<Patch> get() const
+    template <class Patch>
+    KOKKOS_FUNCTION T<Patch> get() const requires(!has_data_access_methods_v<T<Patch>>)
     {
         return std::get<T<Patch>>(m_tuple);
     }

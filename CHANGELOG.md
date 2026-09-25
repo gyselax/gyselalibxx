@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix compilation errors due to use of `std::make_tuple` in functions that are GPU compatible.
+
 ### Changed
 
 - Rename `SingleInterfaceDerivativesCalculator` to `InterfaceDerivCoeffs`.
@@ -27,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 
 ### Removed
+
+- Removed `.span_view` and `.span_cview` from Gyselalib++ objects.
 
 ### Dependency requirements
 

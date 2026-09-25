@@ -110,13 +110,14 @@ private:
     template <class RelevantGrids, class IdxRangeTuple, std::size_t... PatchIndex>
     static auto get_idx_range(IdxRangeTuple all_idx_ranges, std::index_sequence<PatchIndex...>)
     {
-        return std::make_tuple(
+        return std::tuple<IdxRange<ddc::type_seq_element_t<PatchIndex, RelevantGrids>>...>(
                 get_idx_range<PatchIndex, RelevantGrids, IdxRangeTuple>(all_idx_ranges)...);
     }
 
     /// Get the relevant index range from the input index ranges using the grid to identify it.
     template <std::size_t PatchIndex, class RelevantGrids, class IdxRangeTuple>
-    static auto get_idx_range(IdxRangeTuple all_idx_ranges)
+    static IdxRange<ddc::type_seq_element_t<PatchIndex, RelevantGrids>> get_idx_range(
+            IdxRangeTuple all_idx_ranges)
     {
         using GridToLocate = ddc::type_seq_element_t<PatchIndex, RelevantGrids>;
         using GridLocation = find_relevant_idx_range_t<GridToLocate, IdxRangeTuple>;

@@ -1180,7 +1180,7 @@ private:
             throw std::runtime_error(
                     "[abort] Ill-defined: the length of the cells must be not zero.");
         }
-        return std::make_tuple(length_left, length_right);
+        return std::tuple<double, double>(length_left, length_right);
     }
 
 
