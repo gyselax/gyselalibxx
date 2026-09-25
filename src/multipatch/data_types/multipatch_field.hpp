@@ -99,9 +99,10 @@ public:
      * @param other The equivalent MultipatchField being copied.
      */
     template <class MultipatchObj, std::enable_if_t<!is_mem_type_v<MultipatchObj>, bool> = true>
-    explicit KOKKOS_FUNCTION MultipatchField(MultipatchObj& other)
+    KOKKOS_FUNCTION MultipatchField(MultipatchObj& other)
         : base_type(T<Patches>(other.template get<Patches>())...)
     {
+        // This function is not explicit as T is occasionally different even if T<Patch> resolves to the same type
         static_assert(is_multipatch_type_v<MultipatchObj>);
     }
 
