@@ -133,10 +133,7 @@ public:
         , idx_range_xy1(idx_range_x1, idx_range_y1)
         , idx_range_xy2(idx_range_x2, idx_range_y2)
         , idx_range_xy3(idx_range_x3, idx_range_y3)
-        , deriv_coeffs_1_2(
-                  idx_range_xy1,
-                  idx_range_xy2,
-                  ddc::SplineBuilderClosure::GREVILLE)
+        , deriv_coeffs_1_2(idx_range_xy1, idx_range_xy2, ddc::SplineBuilderClosure::GREVILLE)
         , deriv_coeffs_2_3(
                   idx_range_xy2,
                   idx_range_xy3,
@@ -276,8 +273,7 @@ public:
 TEST_F(InterfaceDerivCoeffsCollectionTest, CheckCallToOperators)
 {
     // Order in sequences ------------------------------------------------------------------------
-    InterfaceDerivCoeffsCollection
-            deriv_calculators_collect(deriv_coeffs_1_2, deriv_coeffs_2_3);
+    InterfaceDerivCoeffsCollection deriv_calculators_collect(deriv_coeffs_1_2, deriv_coeffs_2_3);
 
     // Instantiate test function values ==========================================================
     host_t<DFieldMemOnPatch<Patch1>> function_1_alloc(idx_range_xy1);
@@ -296,9 +292,5 @@ TEST_F(InterfaceDerivCoeffsCollectionTest, CheckCallToOperators)
     initialise_all_functions(functions);
 
     // Test InterfaceDerivCoeffsCollection =======================================
-    check_function_call(
-            functions,
-            deriv_calculators_collect,
-            deriv_coeffs_1_2,
-            deriv_coeffs_2_3);
+    check_function_call(functions, deriv_calculators_collect, deriv_coeffs_1_2, deriv_coeffs_2_3);
 }

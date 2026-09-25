@@ -446,12 +446,8 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
         double const coeff_deriv_patch_2 = deriv_coeffs.get_coeff_deriv_patch_2();
 
         // Compare get_coeff_deriv_patch_1/2 and get_coeff_deriv_on_patch<Patch1/2>.
-        EXPECT_EQ(
-                coeff_deriv_patch_1,
-                deriv_coeffs.template get_coeff_deriv_on_patch<Patch1>());
-        EXPECT_EQ(
-                coeff_deriv_patch_2,
-                deriv_coeffs.template get_coeff_deriv_on_patch<Patch2>());
+        EXPECT_EQ(coeff_deriv_patch_1, deriv_coeffs.template get_coeff_deriv_on_patch<Patch1>());
+        EXPECT_EQ(coeff_deriv_patch_2, deriv_coeffs.template get_coeff_deriv_on_patch<Patch2>());
 
         // Compare deriv_coeffs and deriv_coeffs_approx.
         EXPECT_NEAR(
