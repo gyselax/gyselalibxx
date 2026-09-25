@@ -212,13 +212,11 @@ public:
         // The additional interpolation points have to be in the boundary cells.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
             check_additional_interpolation_points_location<
-                    BSplinesPerp1,
-                    GridBreakPt1>(m_idx_range_perp_1, m_extremity_1);
+                    BSplinesPerp1>(m_idx_range_perp_1, m_extremity_1);
         }
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
             check_additional_interpolation_points_location<
-                    BSplinesPerp2,
-                    GridBreakPt2>(m_idx_range_perp_2, m_extremity_2);
+                    BSplinesPerp2>(m_idx_range_perp_2, m_extremity_2);
         }
 
         if constexpr ((ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)&&(
@@ -458,11 +456,12 @@ private:
         });
     }
 
-    template <typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid>
+    template <typename BSplinesPerp, typename EdgePerpGrid>
     void check_additional_interpolation_points_location(
             IdxRange<EdgePerpGrid> const& idx_range_perp,
             Extremity const extremity)
     {
+        using GridBreakPt = ddc::knot_discrete_dimension_t<BSplinesPerp>;
         IdxRange<GridBreakPt> idx_range_full_break_points
                 = ddc::discrete_space<BSplinesPerp>().break_point_domain();
 
