@@ -462,34 +462,31 @@ private:
             Extremity const extremity)
     {
         using GridBreakPt = ddc::knot_discrete_dimension_t<BSplinesPerp>;
-        IdxRange<GridBreakPt> idx_range_full_break_points
+        IdxRange<GridBreakPt> idx_range_break_points
                 = ddc::discrete_space<BSplinesPerp>().break_point_domain();
 
-        double added_interpolation_pt;
-        double break_coord_min;
-        double break_coord_max;
+        using Dim = typename EdgePerpGrid::continuous_dimension_type;
+
+        Coord<Dim> additional_interpolation_pt;
+        Idx<GridBreakPt> idx_expected_cell_start;
         if (extremity == Extremity::FRONT) {
-            Idx<EdgePerpGrid> idx = idx_range_perp.back() - IdxStep<EdgePerpGrid>(1);
-            Idx<GridBreakPt> idx_break
-                    = idx_range_full_break_points.back() - IdxStep<GridBreakPt>(1);
-            added_interpolation_pt = double(ddc::coordinate(idx));
-            break_coord_min = double(ddc::coordinate(idx_break));
-            break_coord_max = double(ddc::coordinate(idx_range_full_break_points.back()));
+            additional_interpolation_pt
+                    = ddc::coordinate(idx_range_perp.back() - IdxStep<EdgePerpGrid>(1));
+            idx_expected_cell_start = idx_range_break_points.back() - IdxStep<GridBreakPt>(1);
         } else {
-            Idx<EdgePerpGrid> idx = idx_range_perp.front() + IdxStep<EdgePerpGrid>(1);
-            Idx<GridBreakPt> idx_break
-                    = idx_range_full_break_points.front() + IdxStep<GridBreakPt>(1);
-            added_interpolation_pt = double(ddc::coordinate(idx));
-            break_coord_min = double(ddc::coordinate(idx_range_full_break_points.front()));
-            break_coord_max = double(ddc::coordinate(idx_break));
+            additional_interpolation_pt
+                    = ddc::coordinate(idx_range_perp.front() + IdxStep<EdgePerpGrid>(1));
+            idx_expected_cell_start = idx_range_break_points.front();
         }
 
-        if (!((break_coord_min < added_interpolation_pt)
-              && (added_interpolation_pt < break_coord_max))) {
+        Coord<Dim> break_coord_min = ddc::coordinate(idx_expected_cell_start);
+        Coord<Dim> break_coord_max = ddc::coordinate(idx_expected_cell_start + 1);
+        if (!((break_coord_min < additional_interpolation_pt)
+              && (additional_interpolation_pt < break_coord_max))) {
             throw std::runtime_error(
                     "[abort] The additional interpolation points have to be placed in the "
                     "first or last cell of the patch. The point "
-                    + std::to_string(added_interpolation_pt) + " is not placed between "
+                    + std::to_string(additional_interpolation_pt) + " is not placed between "
                     + std::to_string(break_coord_min) + " and " + std::to_string(break_coord_max)
                     + ".");
         }
