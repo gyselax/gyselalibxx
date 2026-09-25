@@ -589,14 +589,14 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     // Instantiate the derivatives calculators ---------------------------------------------------
     // InterfaceDerivCoeffs for interfaces along y (periodic).
     InterfaceDerivCoeffs<Interface_1_2> const
-            derivatives_calculator_1_2(this->idx_range_xy1, this->idx_range_xy2);
+            deriv_coeffs_1_2(this->idx_range_xy1, this->idx_range_xy2);
     InterfaceDerivCoeffs<Interface_2_3> const
-            derivatives_calculator_2_3(this->idx_range_xy2, this->idx_range_xy3);
+            deriv_coeffs_2_3(this->idx_range_xy2, this->idx_range_xy3);
 
     // Collect the derivative calculators --------------------------------------------------------
     // We do not follow the physical order to test the operator.
     InterfaceDerivCoeffsCollection
-            deriv_calculators_collect(derivatives_calculator_2_3, derivatives_calculator_1_2);
+            deriv_calculators_collect(deriv_coeffs_2_3, deriv_coeffs_1_2);
 
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>

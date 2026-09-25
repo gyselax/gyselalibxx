@@ -151,7 +151,7 @@ public:
 private:
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
-    DerivCoeffCollection const& m_derivatives_calculators;
+    DerivCoeffCollection const& m_derivative_coefficients;
 
 public:
     /**
@@ -165,7 +165,7 @@ public:
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
             DerivCoeffCollection const& derivatives_calculators)
         : m_idx_ranges(idx_ranges)
-        , m_derivatives_calculators(derivatives_calculators)
+        , m_derivative_coefficients(derivatives_calculators)
     {
     }
 
@@ -355,7 +355,7 @@ private:
 
         // Compute the coefficient c_I for the interface I.
         double const interface_deriv
-                = m_derivatives_calculators.template get<EquivalentInterfaceI>().get_approx_deriv(
+                = m_derivative_coefficients.template get<EquivalentInterfaceI>().get_approx_deriv(
                         get_const_field(function_1[idx_slice_1]),
                         get_const_field(function_2[idx_slice_2]));
 
@@ -457,7 +457,7 @@ private:
 
         // Compute the coefficient c_I for the interface I.
         double const corner_derivative
-                = m_derivatives_calculators.template get<EquivalentInterfaceI>()
+                = m_derivative_coefficients.template get<EquivalentInterfaceI>()
                           .get_approx_cross_deriv(
                                   get_const_field(derivs_1),
                                   get_const_field(derivs_2));

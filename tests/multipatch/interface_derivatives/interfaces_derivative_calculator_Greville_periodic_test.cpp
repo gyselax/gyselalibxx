@@ -387,66 +387,60 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
 
     // InterfaceDerivCoeffs for interfaces along y (periodic).
     InterfaceDerivCoeffs<Interface_1_2> const
-            derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
+            deriv_coeffs_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_2_3> const
-            derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
+            deriv_coeffs_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_3_1> const
-            derivatives_calculator_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
+            deriv_coeffs_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
 
     InterfaceDerivCoeffs<Interface_4_5> const
-            derivatives_calculator_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
+            deriv_coeffs_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_5_6> const
-            derivatives_calculator_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
+            deriv_coeffs_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_6_4> const
-            derivatives_calculator_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
+            deriv_coeffs_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
 
     InterfaceDerivCoeffs<Interface_7_8> const
-            derivatives_calculator_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
+            deriv_coeffs_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_8_9> const
-            derivatives_calculator_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
+            deriv_coeffs_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_9_7> const
-            derivatives_calculator_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
+            deriv_coeffs_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
 
     // InterfaceDerivCoeffs for interfaces along x.
     InterfaceDerivCoeffs<Interface_1_4> const
-            derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
+            deriv_coeffs_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_4_7> const
-            derivatives_calculator_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
+            deriv_coeffs_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
 
     InterfaceDerivCoeffs<Interface_2_5> const
-            derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
+            deriv_coeffs_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_5_8> const
-            derivatives_calculator_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
+            deriv_coeffs_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
 
     InterfaceDerivCoeffs<Interface_3_6> const
-            derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
+            deriv_coeffs_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
     InterfaceDerivCoeffs<Interface_6_9> const
-            derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
+            deriv_coeffs_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
 
     // Collect the derivative calculators --------------------------------------------------------
-    InterfaceDerivCoeffsCollection deriv_calculators_collect_123(
-            derivatives_calculator_1_2,
-            derivatives_calculator_2_3,
-            derivatives_calculator_3_1);
-
-    InterfaceDerivCoeffsCollection deriv_calculators_collect_456(
-            derivatives_calculator_4_5,
-            derivatives_calculator_5_6,
-            derivatives_calculator_6_4);
-
-    InterfaceDerivCoeffsCollection deriv_calculators_collect_789(
-            derivatives_calculator_7_8,
-            derivatives_calculator_8_9,
-            derivatives_calculator_9_7);
+    InterfaceDerivCoeffsCollection
+            deriv_calculators_collect_123(deriv_coeffs_1_2, deriv_coeffs_2_3, deriv_coeffs_3_1);
 
     InterfaceDerivCoeffsCollection
-            deriv_calculators_collect_147(derivatives_calculator_1_4, derivatives_calculator_4_7);
+            deriv_calculators_collect_456(deriv_coeffs_4_5, deriv_coeffs_5_6, deriv_coeffs_6_4);
 
     InterfaceDerivCoeffsCollection
-            deriv_calculators_collect_258(derivatives_calculator_2_5, derivatives_calculator_5_8);
+            deriv_calculators_collect_789(deriv_coeffs_7_8, deriv_coeffs_8_9, deriv_coeffs_9_7);
 
     InterfaceDerivCoeffsCollection
-            deriv_calculators_collect_369(derivatives_calculator_3_6, derivatives_calculator_6_9);
+            deriv_calculators_collect_147(deriv_coeffs_1_4, deriv_coeffs_4_7);
+
+    InterfaceDerivCoeffsCollection
+            deriv_calculators_collect_258(deriv_coeffs_2_5, deriv_coeffs_5_8);
+
+    InterfaceDerivCoeffsCollection
+            deriv_calculators_collect_369(deriv_coeffs_3_6, deriv_coeffs_6_9);
 
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<
