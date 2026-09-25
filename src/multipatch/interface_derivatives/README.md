@@ -21,8 +21,8 @@ the boundary cells.
 - [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `InterfaceDerivCoeffs` operator.
   - [How to use the `InterfaceDerivCoeffs` operator?](#how-to-use-the-interfacederivcoeffs-operator): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
-- [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfaceDerivativeMatrix` operator.
-  - [How to use the `InterfaceDerivativeMatrix` operator?](#how-to-use-the-interfacederivativematrix-operator): It documents how to use the operator in the code.
+- [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfacesDerivativeCalculator` operator.
+  - [How to use the `InterfacesDerivativeCalculator` operator?](#how-to-use-the-interfacesderivativecalculator-operator): It documents how to use the operator in the code.
 
 ## Relation between derivatives on the boundaries of two connected patches
 
@@ -523,7 +523,7 @@ All these relations can be stored in a matrix system as follows,
 
 with
 
-- $`a^I, b^I \text{ and } c^I`$ the coefficients computed with `SingleInterfaceDerivativeCalculator`
+- $`a^I, b^I \text{ and } c^I`$ the coefficients computed with `InterfaceDerivCoeffs`
 for a given interface *I* (and given number of cells on the right and the left patches that we do not
 specify here to simplify the notation).
 - $`\{\mathcal{X}_I\}_I`$ a set of parallel interfaces.
@@ -575,7 +575,7 @@ We simply refer to it as
 
 #### Approximation
 
-In Vidal et al. (2026)[^2], we see that if the number of chosen cells in `SingleInterfaceDerivatorCalculator` is large, then the system can be approximated by
+In Vidal et al. (2026)[^2], we see that if the number of chosen cells in `InterfaceDerivCoeffs` is large, then the system can be approximated by
 
 ```math
 \begin{bmatrix}
@@ -598,32 +598,32 @@ C_{trunc} =
 \end{bmatrix},
 ```
 
-where the values of the vector $`C_{trunc}`$ correspond to coefficients in $`\{c^k\}_k`$ computed in `SingleInterfaceDerivatorCalculator` for $`N_{reduc}`$ cells next to the interface chosen on its two patches.
+where the values of the vector $`C_{trunc}`$ correspond to coefficients in $`\{c^k\}_k`$ computed in `InterfaceDerivCoeffs` for $`N_{reduc}`$ cells next to the interface chosen on its two patches.
 
-### How to use the InterfaceDerivativeMatrix operator?
+### How to use the InterfacesDerivativeCalculator operator?
 
-`InterfaceDerivativeMatrix` computes the interface derivatives using the approximation.
+`InterfacesDerivativeCalculator` computes the interface derivatives using the approximation.
 
-First, for each interface in the geometry, we instantiate a `SingleInterfaceDerivatorCalculator`
-(see [How to use the SingleInterfaceDerivatorCalculator operator?](#how-to-use-the-singleinterfacederivativescalculator-operator)).
-We store a constant reference to all the derivative calculators in a `SingleInterfaceDerivatorCalculatorCollection`.
+First, for each interface in the geometry, we instantiate a `InterfaceDerivCoeffs`
+(see [How to use the InterfaceDerivCoeffs operator?](#how-to-use-the-interfacederivcoeffs-operator)).
+We store a constant reference to all the derivative calculators in a `InterfaceDerivCoeffsCollection`.
 
 ```cpp
-SingleInterfaceDerivatorCalculator<Interface_1> derivative_calculator_1(...);
-SingleInterfaceDerivatorCalculator<Interface_2> derivative_calculator_2(...);
+InterfaceDerivCoeffs<Interface_1> derivative_calculator_1(...);
+InterfaceDerivCoeffs<Interface_2> derivative_calculator_2(...);
 ...
 
-SingleInterfaceDerivatorCalculatorCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
+InterfaceDerivCoeffsCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
 ```
 
-We can then instantiate `InterfaceDerivativeMatrix` with the tuple of derivative calculators.
+We can then instantiate `InterfacesDerivativeCalculator` with the tuple of derivative calculators.
 
 ```cpp
-InterfaceDerivativeMatrix<
+InterfacesDerivativeCalculator<
         Connectivity,                               // MultipatchConnectivity class
         Grid1D,                                     // the given direction.
         ddc::detail::TypeSeq<Patch1, Patch2, ...>   // list of patches containing all the needed ones
-        SingleInterfaceDerivatorCalculatorCollection<Interface_1, Interface_2, ...>>
+        InterfaceDerivCoeffsCollection<Interface_1, Interface_2, ...>>
         matrix(idx_ranges, derivative_calculators);
 ```
 
@@ -657,34 +657,34 @@ This geometry is composed of 9 patches forming periodic strips in the *x* direct
 We use additional interpolation points as closure condition for the equivalent global splines in
 the *y* direction (i.e. `ddc::BoundCond::GREVILLE`).
 
-So, we start by defining the `InterfaceDerivativeMatrix` matrices for each periodic directions
+So, we start by defining the `InterfacesDerivativeCalculator` matrices for each periodic directions
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7`).
 
 ```cpp
-InterfaceDerivativeMatrix<Connectivity, GridX1, 
+InterfacesDerivativeCalculator<Connectivity, GridX1, 
         ddc::detail::TypeSeq<Patch1, Patch2, Patch3>, 
-        SingleInterfaceDerivatorCalculatorCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
+        InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
         matrix_123(idx_ranges_123, derivative_calculators_123);
 
-InterfaceDerivativeMatrix<Connectivity, GridX4, 
+InterfacesDerivativeCalculator<Connectivity, GridX4, 
         ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
-        SingleInterfaceDerivatorCalculatorCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
+        InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
         matrix_456(idx_ranges_456, derivative_calculators_456);
 // ...
 ```
 
-We also define `InterfaceDerivativeMatrix` matrices for each non-periodic directions
+We also define `InterfacesDerivativeCalculator` matrices for each non-periodic directions
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3`).
 
 ```cpp
-InterfaceDerivativeMatrix<Connectivity, GridY1, 
+InterfacesDerivativeCalculator<Connectivity, GridY1, 
         ddc::detail::TypeSeq<Patch1, Patch4, Patch7>,
-        SingleInterfaceDerivatorCalculatorCollection<Interface_1_4, Interface_4_7>>
+        InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
         matrix_147(idx_ranges_147, derivative_calculators_147);
 
-InterfaceDerivativeMatrix<Connectivity, GridY2, 
+InterfacesDerivativeCalculator<Connectivity, GridY2, 
         ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
-        SingleInterfaceDerivatorCalculatorCollection<Interface_2_5, Interface_5_8>>
+        InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
         matrix_258(idx_ranges_258, derivative_calculators_258);
 // ...
 ```
