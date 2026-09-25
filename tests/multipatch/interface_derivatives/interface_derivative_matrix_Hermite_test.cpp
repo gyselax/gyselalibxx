@@ -18,8 +18,8 @@
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "orthogonal_coord_transforms.hpp"
-#include "single_interface_derivatives_calculator.hpp"
-#include "single_interface_derivatives_calculator_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
+#include "interface_derivative_coefficients_collection.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
@@ -587,15 +587,15 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
             this->coord_transform_3);
 
     // Instantiate the derivatives calculators ---------------------------------------------------
-    // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
-    SingleInterfaceDerivativesCalculator<Interface_1_2> const
+    // InterfaceDerivCoeffs for interfaces along y (periodic).
+    InterfaceDerivCoeffs<Interface_1_2> const
             derivatives_calculator_1_2(this->idx_range_xy1, this->idx_range_xy2);
-    SingleInterfaceDerivativesCalculator<Interface_2_3> const
+    InterfaceDerivCoeffs<Interface_2_3> const
             derivatives_calculator_2_3(this->idx_range_xy2, this->idx_range_xy3);
 
     // Collect the derivative calculators --------------------------------------------------------
     // We do not follow the physical order to test the operator.
-    SingleInterfaceDerivativesCalculatorCollection
+    InterfaceDerivCoeffsCollection
             deriv_calculators_collect(derivatives_calculator_2_3, derivatives_calculator_1_2);
 
     // Collect the index ranges ------------------------------------------------------------------
@@ -616,7 +616,7 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
             Connectivity,
             Grid1AlongXg,
             ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
-            SingleInterfaceDerivativesCalculatorCollection<Interface_2_3, Interface_1_2>>
+            InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
             matrix(idx_ranges, deriv_calculators_collect);
 
     // Instantiate DerivField ====================================================================

@@ -18,8 +18,8 @@
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "orthogonal_coord_transforms.hpp"
-#include "single_interface_derivatives_calculator.hpp"
-#include "single_interface_derivatives_calculator_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
+#include "interface_derivative_coefficients_collection.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
@@ -385,67 +385,67 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     // Instantiate the derivatives calculators ---------------------------------------------------
     constexpr std::size_t nb_chosen_cells = 9;
 
-    // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
-    SingleInterfaceDerivativesCalculator<Interface_1_2> const
+    // InterfaceDerivCoeffs for interfaces along y (periodic).
+    InterfaceDerivCoeffs<Interface_1_2> const
             derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_2_3> const
+    InterfaceDerivCoeffs<Interface_2_3> const
             derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_3_1> const
+    InterfaceDerivCoeffs<Interface_3_1> const
             derivatives_calculator_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
 
-    SingleInterfaceDerivativesCalculator<Interface_4_5> const
+    InterfaceDerivCoeffs<Interface_4_5> const
             derivatives_calculator_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_5_6> const
+    InterfaceDerivCoeffs<Interface_5_6> const
             derivatives_calculator_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_6_4> const
+    InterfaceDerivCoeffs<Interface_6_4> const
             derivatives_calculator_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
 
-    SingleInterfaceDerivativesCalculator<Interface_7_8> const
+    InterfaceDerivCoeffs<Interface_7_8> const
             derivatives_calculator_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_8_9> const
+    InterfaceDerivCoeffs<Interface_8_9> const
             derivatives_calculator_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_9_7> const
+    InterfaceDerivCoeffs<Interface_9_7> const
             derivatives_calculator_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
 
-    // SingleInterfaceDerivativesCalculators for interfaces along x.
-    SingleInterfaceDerivativesCalculator<Interface_1_4> const
+    // InterfaceDerivCoeffs for interfaces along x.
+    InterfaceDerivCoeffs<Interface_1_4> const
             derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_4_7> const
+    InterfaceDerivCoeffs<Interface_4_7> const
             derivatives_calculator_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
 
-    SingleInterfaceDerivativesCalculator<Interface_2_5> const
+    InterfaceDerivCoeffs<Interface_2_5> const
             derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_5_8> const
+    InterfaceDerivCoeffs<Interface_5_8> const
             derivatives_calculator_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
 
-    SingleInterfaceDerivativesCalculator<Interface_3_6> const
+    InterfaceDerivCoeffs<Interface_3_6> const
             derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
-    SingleInterfaceDerivativesCalculator<Interface_6_9> const
+    InterfaceDerivCoeffs<Interface_6_9> const
             derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
 
     // Collect the derivative calculators --------------------------------------------------------
-    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
+    InterfaceDerivCoeffsCollection deriv_calculators_collect_123(
             derivatives_calculator_1_2,
             derivatives_calculator_2_3,
             derivatives_calculator_3_1);
 
-    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_456(
+    InterfaceDerivCoeffsCollection deriv_calculators_collect_456(
             derivatives_calculator_4_5,
             derivatives_calculator_5_6,
             derivatives_calculator_6_4);
 
-    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_789(
+    InterfaceDerivCoeffsCollection deriv_calculators_collect_789(
             derivatives_calculator_7_8,
             derivatives_calculator_8_9,
             derivatives_calculator_9_7);
 
-    SingleInterfaceDerivativesCalculatorCollection
+    InterfaceDerivCoeffsCollection
             deriv_calculators_collect_147(derivatives_calculator_1_4, derivatives_calculator_4_7);
 
-    SingleInterfaceDerivativesCalculatorCollection
+    InterfaceDerivCoeffsCollection
             deriv_calculators_collect_258(derivatives_calculator_2_5, derivatives_calculator_5_8);
 
-    SingleInterfaceDerivativesCalculatorCollection
+    InterfaceDerivCoeffsCollection
             deriv_calculators_collect_369(derivatives_calculator_3_6, derivatives_calculator_6_9);
 
     // Collect the index ranges ------------------------------------------------------------------
@@ -485,30 +485,21 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             Connectivity,
             GridX<1>,
             ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
-            SingleInterfaceDerivativesCalculatorCollection<
-                    Interface_1_2,
-                    Interface_2_3,
-                    Interface_3_1>>
+            InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
             matrix_123(idx_ranges_123, deriv_calculators_collect_123);
 
     InterfaceDerivativeMatrix<
             Connectivity,
             GridX<4>,
             ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
-            SingleInterfaceDerivativesCalculatorCollection<
-                    Interface_4_5,
-                    Interface_5_6,
-                    Interface_6_4>>
+            InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
             matrix_456(idx_ranges_456, deriv_calculators_collect_456);
 
     InterfaceDerivativeMatrix<
             Connectivity,
             GridX<7>,
             ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
-            SingleInterfaceDerivativesCalculatorCollection<
-                    Interface_7_8,
-                    Interface_8_9,
-                    Interface_9_7>>
+            InterfaceDerivCoeffsCollection<Interface_7_8, Interface_8_9, Interface_9_7>>
             matrix_789(idx_ranges_789, deriv_calculators_collect_789);
 
     // Test with an extra patch (Patch2) to check it will only take the needed patches.
@@ -516,21 +507,21 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             Connectivity,
             GridY<1>,
             ddc::detail::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
-            SingleInterfaceDerivativesCalculatorCollection<Interface_1_4, Interface_4_7>>
+            InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
             matrix_147(idx_ranges_147, deriv_calculators_collect_147);
 
     InterfaceDerivativeMatrix<
             Connectivity,
             GridY<2>,
             ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
-            SingleInterfaceDerivativesCalculatorCollection<Interface_2_5, Interface_5_8>>
+            InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
             matrix_258(idx_ranges_258, deriv_calculators_collect_258);
 
     InterfaceDerivativeMatrix<
             Connectivity,
             GridY<3>,
             ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
-            SingleInterfaceDerivativesCalculatorCollection<Interface_3_6, Interface_6_9>>
+            InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>
             matrix_369(idx_ranges_369, deriv_calculators_collect_369);
 
     // Instantiate DerivField ====================================================================

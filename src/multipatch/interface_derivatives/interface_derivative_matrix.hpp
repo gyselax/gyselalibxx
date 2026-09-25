@@ -13,11 +13,11 @@
 #include "interface.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
-#include "single_interface_derivatives_calculator_collection.hpp"
+#include "interface_derivative_coefficients_collection.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
-template <class Connectivity, class Grid1D, class PatchSeq, class DerivativesCalculatorCollection>
+template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
 class InterfaceDerivativeMatrix;
 
 /**
@@ -42,15 +42,15 @@ class InterfaceDerivativeMatrix;
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
   * @tparam Patches List of patches containing all the involved patches in the given direction. 
-  * @tparam DerivativesCalculatorCollection A SingleInterfaceDerivativesCalculatorCollection
-  * that stores the SingleInterfaceDerivativesCalculator needed to compute the interface derivatives. 
+  * @tparam DerivCoeffCollection A InterfaceDerivCoeffsCollection
+  * that stores the InterfaceDerivCoeffs needed to compute the interface derivatives. 
   */
-template <class Connectivity, class Grid1D, class... Patches, class DerivativesCalculatorCollection>
+template <class Connectivity, class Grid1D, class... Patches, class DerivCoeffCollection>
 class InterfaceDerivativeMatrix<
         Connectivity,
         Grid1D,
         ddc::detail::TypeSeq<Patches...>,
-        DerivativesCalculatorCollection>
+        DerivCoeffCollection>
 {
     /*
         All the interfaces given as input to the MultipatchConnectivity class.
@@ -65,8 +65,8 @@ class InterfaceDerivativeMatrix<
     using all_patches = typename Connectivity::all_patches;
 
     static_assert(
-            is_single_derivative_calculator_collection_v<DerivativesCalculatorCollection>,
-            "Please provide a SingleInterfaceDerivativesCalculatorCollection type.");
+            is_single_derivative_calculator_collection_v<DerivCoeffCollection>,
+            "Please provide a InterfaceDerivCoeffsCollection type.");
 
     static constexpr std::size_t number_of_interfaces
             = ddc::type_seq_size_v<interface_sorted_collection>;
@@ -151,19 +151,19 @@ public:
 private:
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
-    DerivativesCalculatorCollection const& m_derivatives_calculators;
+    DerivCoeffCollection const& m_derivatives_calculators;
 
 public:
     /**
      * @brief Instantiate InterfaceDerivativeMatrix. 
      *  
      * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
-     * @param derivatives_calculators SingleInterfaceDerivativesCalculatorCollection containing all the 
+     * @param derivatives_calculators InterfaceDerivCoeffsCollection containing all the 
      *          interface derivative calculator for each interface in the given Grid1D direction. 
      */
     InterfaceDerivativeMatrix(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            DerivativesCalculatorCollection const& derivatives_calculators)
+            DerivCoeffCollection const& derivatives_calculators)
         : m_idx_ranges(idx_ranges)
         , m_derivatives_calculators(derivatives_calculators)
     {
@@ -355,10 +355,9 @@ private:
 
         // Compute the coefficient c_I for the interface I.
         double const interface_deriv
-                = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-                          .get_function_coefficients(
-                                  get_const_field(function_1[idx_slice_1]),
-                                  get_const_field(function_2[idx_slice_2]));
+                = m_derivatives_calculators.template get<EquivalentInterfaceI>().get_approx_deriv(
+                        get_const_field(function_1[idx_slice_1]),
+                        get_const_field(function_2[idx_slice_2]));
 
         // Get the correct index ranges and indices for the slices.
         IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
@@ -459,7 +458,7 @@ private:
         // Compute the coefficient c_I for the interface I.
         double const corner_derivative
                 = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-                          .get_derivatives_coefficients(
+                          .get_approx_cross_deriv(
                                   get_const_field(derivs_1),
                                   get_const_field(derivs_2));
 

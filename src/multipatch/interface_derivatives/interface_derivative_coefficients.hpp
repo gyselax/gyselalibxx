@@ -390,7 +390,7 @@ public:
 
     /**
      * @brief Get the linear combination of the function values (c).
-     * See @ref get_function_coefficients.
+     * See @ref get_approx_deriv.
      * @param function_1 Function values at the interpolation points on patch 1. 
      * @param function_2 Function values at the interpolation points on patch 2. 
      * @return the linear combination of the function values (c).
@@ -407,8 +407,10 @@ public:
      * @brief Get the linear combination of the derivatives values (c).
      *
      * @anchor get_approx_cross_deriv
+     * This linear combination corresponds to an approximation of the 
+     * interface cross-derivative. 
      * 
-     * It is more appropriate than get_function_coefficients to compute the 
+     * It is more appropriate than get_approx_deriv to compute the 
      * cross-derivatives. The computation is the same.
      * However, in addition, the sign of the derivatives on the patch 2 is 
      * changed in the case where the orientations of the two patches do not 
