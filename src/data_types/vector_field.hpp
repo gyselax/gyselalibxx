@@ -213,7 +213,7 @@ private:
             Idx<ODDims...> const& delems,
             std::integer_sequence<T, ints...>) const noexcept
     {
-        return element_type((base_type::m_values[ints](delems))...);
+        return element_type((this->m_values[ints](delems))...);
     }
 
 public:
@@ -404,7 +404,7 @@ public:
     inline constexpr chunk_span_type get() const noexcept
     {
         static_assert(ddc::in_tags_v<QueryTag, NDTypeTag>, "requested Tag absent from Vector");
-        return ::get_field(base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>]);
+        return ::get_field(this->m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>]);
     }
 };
 
