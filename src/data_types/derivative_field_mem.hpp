@@ -251,7 +251,7 @@ private:
     template <std::size_t ArrayIndex>
     void free_ptr(ElementType* const ptr, allocator_type allocator)
     {
-        std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
+        std::size_t alloc_size(((this->get_mdspan_size<DDims, ArrayIndex>()) * ...));
         allocator.deallocate(ptr, alloc_size);
     }
 
