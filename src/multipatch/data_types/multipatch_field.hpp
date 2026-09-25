@@ -178,17 +178,6 @@ public:
     }
 
     /**
-     * @brief Get a MultipatchField containing modifiable fields.
-     * This function matches the DDC name to allow the global get_const_field to be defined.
-     *
-     * @returns A set of modifiable fields providing access to the fields stored in this class.
-     */
-    KOKKOS_FUNCTION auto span_view()
-    {
-        return get_field();
-    }
-
-    /**
      * @brief Get a MultipatchField containing constant fields so the values cannot be modified.
      *
      * @returns A set of constant fields providing access to the fields stored in this class.
@@ -197,17 +186,6 @@ public:
     {
         return MultipatchField<InternalConstFieldOnPatch, Patches...>(
                 ::get_const_field(std::get<T<Patches>>(base_type::m_tuple))...);
-    }
-
-    /**
-     * @brief Get a MultipatchField containing constant fields so the values cannot be modified.
-     * This function matches the DDC name to allow the global get_const_field to be defined.
-     *
-     * @returns A set of constant fields providing access to the fields stored in this class.
-     */
-    KOKKOS_FUNCTION auto span_cview()
-    {
-        return get_const_field();
     }
 };
 

@@ -370,7 +370,7 @@ public:
     template <class... QueryDDims>
     constexpr auto operator[](Idx<QueryDDims...> const& slice_spec) const
     {
-        return base_type::get_internal_field(slice_spec).span_cview();
+        return get_const_field(base_type::get_internal_field(slice_spec));
     }
 
     /**
@@ -419,7 +419,7 @@ public:
     template <class... QueryDDims>
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
     {
-        return base_type::get_internal_field(oidx_range).span_cview();
+        return get_const_field(base_type::get_internal_field(oidx_range));
     }
 
     /**
@@ -430,7 +430,7 @@ public:
      *
      * @returns A constant span of this field.
      */
-    view_type span_cview() const
+    view_type get_const_field() const
     {
         return view_type(*this);
     }
@@ -443,7 +443,7 @@ public:
      *
      * @returns A constant span of this field.
      */
-    view_type span_view() const
+    view_type get_field() const
     {
         return view_type(*this);
     }
@@ -456,7 +456,7 @@ public:
      *
      * @returns A span of this field.
      */
-    span_type span_view()
+    span_type get_field()
     {
         return span_type(*this);
     }
