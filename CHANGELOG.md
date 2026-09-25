@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Removed `.span_view` and `.span_cview` from Gyselalib++ objects.
+
 ### Dependency requirements
 
 - Remove Dask dependency in the tests.
