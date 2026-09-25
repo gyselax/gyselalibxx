@@ -34,6 +34,8 @@
  * 
  * @warning This operator does not work on batched domain. 
  * 
+ * @warning This operator only works for patches defined on the same continuous dimensions!
+ * 
  * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
  * @tparam MemorySpace The space (CPU/GPU) where the coefficients and values are stored.
  * @tparam BSpline1OnPatch A type alias which provides the first BSpline type along which the splines are built template on the Patch.
@@ -302,6 +304,22 @@ public:
      */
     template <class Coord>
     KOKKOS_FUNCTION double deriv_dim_1(
+            Coord const& coord_eval,
+            MultipatchSplineCoeff const& patches_splines) const
+    {
+        int const patch_idx = get_patch_idx(coord_eval);
+        if (patch_idx < 0) {
+            Kokkos::abort("The evaluation coordinate has to be on a patch."
+                          "No extrapolation rule for derivatives. \n");
+        }
+        return recursive_dispatch_patch_function<
+                eval_deriv_type,
+                eval_type>(coord_eval, patches_splines, patch_idx);
+    }
+
+    template <class Coord, class IdxDeriv>
+    KOKKOS_FUNCTION double deriv(
+            IdxDeriv const& deriv_order,
             Coord const& coord_eval,
             MultipatchSplineCoeff const& patches_splines) const
     {
@@ -719,8 +737,9 @@ private:
 
     /// @brief Evaluate the given spline at the given coordinate without carrying of the boundary
     /// conditions.
-    template <class EvalType1, class EvalType2, class Patch, class Layout>
+    template <class... DerivDims,class EvalType1, class EvalType2, class Patch, class Layout>
     KOKKOS_INLINE_FUNCTION double eval_no_bc(
+            Idx<DerivDims...> const& deriv_order,
             CoordOnPatch<Patch> const& coord_eval,
             DConstField<spline_idx_range_type<Patch>, memory_space, Layout> const& spline_coef)
             const
