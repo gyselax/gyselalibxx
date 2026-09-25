@@ -11,9 +11,9 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
+#include "interface_derivative_coefficients_collection.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
