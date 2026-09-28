@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix compilation errors due to use of `std::make_tuple` in functions that are GPU compatible.
+- Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$. 
 
 ### Changed
 
