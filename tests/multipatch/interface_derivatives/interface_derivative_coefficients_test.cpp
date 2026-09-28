@@ -168,7 +168,8 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
 
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
     // patch 1 -----------------------------------
-    static constexpr Coord<R> r1_min = Coord<R>(0.0);
+    static constexpr Coord<R> r1_min
+            = (std::is_same_v<Edge1, EastEdge1>) ? Coord<R>(-1.0) : Coord<R>(0.0);
     static constexpr Coord<R> r1_max = Coord<R>(1.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
     static constexpr IdxStep<GridR<1>> r1_ncells
