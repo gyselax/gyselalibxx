@@ -558,6 +558,8 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
                                        + coeff_deriv_patch_1 * deriv_bound_patch_1
                                        + coeff_deriv_patch_2 * deriv_bound_patch_2;
             EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
+            std::cout << "Error on derivative: " << abs(local_deriv - global_deriv)
+                      << "    local_deriv=" << local_deriv << std::endl;
 
             // Approximation ---------------------------------------------------------------------
             EXPECT_NEAR(deriv_interface_approx, global_deriv, approximation_error_bound);
