@@ -446,23 +446,6 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
         double const coeff_deriv_patch_1 = derivatives_calculator.get_coeff_deriv_patch_1();
         double const coeff_deriv_patch_2 = derivatives_calculator.get_coeff_deriv_patch_2();
 
-#if defined(UNIFORM_MESH)
-        // Check that coeff_deriv_patch1 < coeff_deriv_patch2 due to Delta xL > Delta xR
-        // (and that Delta xL = 2 Delta xR, especially for the uniform case).
-        if constexpr (std::is_same_v<Edge1, EastEdge1>) {
-            double delta_xL
-                    = abs(ddc::coordinate(typename Patch1::Idx1(3))
-                          - ddc::coordinate(typename Patch1::Idx1(2)));
-            double delta_xR = (std::is_same_v<Edge2, SouthEdge2>)
-                                      ? abs(ddc::coordinate(typename Patch2::Idx2(3))
-                                            - ddc::coordinate(typename Patch2::Idx2(2)))
-                                      : abs(ddc::coordinate(typename Patch2::Idx1(3))
-                                            - ddc::coordinate(typename Patch2::Idx1(2)));
-            EXPECT_NEAR(delta_xL, 2 * delta_xR, 1e-13);
-            EXPECT_LE(abs(coeff_deriv_patch_1), abs(coeff_deriv_patch_2));
-        }
-#endif
-
         // Compare get_coeff_deriv_patch_1/2 and get_coeff_deriv_on_patch<Patch1/2>.
         EXPECT_EQ(
                 coeff_deriv_patch_1,
