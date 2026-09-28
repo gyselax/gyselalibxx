@@ -168,7 +168,8 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
 
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
     // patch 1 -----------------------------------
-    static constexpr Coord<R> r1_min = Coord<R>(0.0);
+    static constexpr Coord<R> r1_min
+            = (std::is_same_v<Edge1, EastEdge1>) ? Coord<R>(-1.0) : Coord<R>(0.0);
     static constexpr Coord<R> r1_max = Coord<R>(1.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
     static constexpr IdxStep<GridR<1>> r1_ncells
@@ -445,6 +446,9 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
         double const coeff_deriv_patch_1 = derivatives_calculator.get_coeff_deriv_patch_1();
         double const coeff_deriv_patch_2 = derivatives_calculator.get_coeff_deriv_patch_2();
 
+        // Check that Delta xL != Delta xR (especially for the uniform case).
+        EXPECT_NE(abs(coeff_deriv_patch_1), abs(coeff_deriv_patch_2));
+
         // Compare get_coeff_deriv_patch_1/2 and get_coeff_deriv_on_patch<Patch1/2>.
         EXPECT_EQ(
                 coeff_deriv_patch_1,
@@ -558,8 +562,6 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
                                        + coeff_deriv_patch_1 * deriv_bound_patch_1
                                        + coeff_deriv_patch_2 * deriv_bound_patch_2;
             EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
-            std::cout << "Error on derivative: " << abs(local_deriv - global_deriv)
-                      << "    local_deriv=" << local_deriv << std::endl;
 
             // Approximation ---------------------------------------------------------------------
             EXPECT_NEAR(deriv_interface_approx, global_deriv, approximation_error_bound);
