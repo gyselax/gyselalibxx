@@ -1155,4 +1155,3 @@ private:
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
     }
 };
-
