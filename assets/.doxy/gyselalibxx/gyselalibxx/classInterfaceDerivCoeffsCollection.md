@@ -54,7 +54,7 @@ _A class to store a collection of interface derivative calculators templated on 
 
 | Type | Name |
 | ---: | :--- |
-|   | [**InterfaceDerivCoeffsCollection**](#function-interfacederivcoeffscollection) ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md)&lt; Interfaces &gt; const &... derivative\_calculators) <br>_Instantiate a_ [_**InterfaceDerivCoeffsCollection**_](classInterfaceDerivCoeffsCollection.md) _from a list of interface derivative calculators._ |
+|   | [**InterfaceDerivCoeffsCollection**](#function-interfacederivcoeffscollection) ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md)&lt; Interfaces &gt; const &... deriv\_coeffs) <br>_Instantiate a_ [_**InterfaceDerivCoeffsCollection**_](classInterfaceDerivCoeffsCollection.md) _from a list of interface derivative calculators._ |
 |  [**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md)&lt; [**Interface**](structInterface.md) &gt; const & | [**get**](#function-get) () const<br>_Get a derivative calculator of the collection. The output cannot be copied. This operator only allows to get a temporary reference to call one of the operators of the_ [_**InterfaceDerivCoeffs**_](classInterfaceDerivCoeffs.md) _class._ |
 
 
@@ -121,7 +121,7 @@ For each interface, only one interface derivative calculator should be defined.
 _Instantiate a_ [_**InterfaceDerivCoeffsCollection**_](classInterfaceDerivCoeffsCollection.md) _from a list of interface derivative calculators._
 ```C++
 inline explicit InterfaceDerivCoeffsCollection::InterfaceDerivCoeffsCollection (
-    InterfaceDerivCoeffs < Interfaces > const &... derivative_calculators
+    InterfaceDerivCoeffs < Interfaces > const &... deriv_coeffs
 ) 
 ```
 
@@ -132,7 +132,7 @@ inline explicit InterfaceDerivCoeffsCollection::InterfaceDerivCoeffsCollection (
 **Parameters:**
 
 
-* `derivative_calculators` [**Interface**](structInterface.md) derivative calculators. 
+* `deriv_coeffs` [**Interface**](structInterface.md) derivative calculators. 
 
 
 

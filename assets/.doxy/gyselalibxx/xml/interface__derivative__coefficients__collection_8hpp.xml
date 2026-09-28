@@ -320,16 +320,16 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="10" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="10" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="interface__derivative__coefficients__collection_8hpp_1a99218bfdec59d48b543cf6ea63973c16" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="interface__derivative__coefficients__collection_8hpp_1a2169e2adfe9ddb50cbca36dcf24385be" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
-        <definition>constexpr bool is_single_derivative_calculator_collection_v</definition>
+        <definition>constexpr bool is_interface_derivative_coefficients_collection_v</definition>
         <argsstring></argsstring>
-        <name>is_single_derivative_calculator_collection_v</name>
+        <name>is_interface_derivative_coefficients_collection_v</name>
         <initializer>= enable_interface_derivative_coefficients_collection&lt;
                 std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;</initializer>
         <briefdescription>
@@ -359,11 +359,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="85" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="86" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="84" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="85" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="interface__derivative__coefficients__collection_8hpp_1ad0ce9d85612f49b4423999414c909800" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="interface__derivative__coefficients__collection_8hpp_1ac800e91282df73a8c948f498a1a3a4a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -373,11 +373,11 @@
         </templateparamlist>
         <type></type>
         <definition>InterfaceDerivCoeffsCollection</definition>
-        <argsstring>(DerivCalculatorType const &amp;... derivative_calculators) -&gt; InterfaceDerivCoeffsCollection&lt; typename DerivCalculatorType::associated_interface... &gt;</argsstring>
+        <argsstring>(DerivCalculatorType const &amp;... deriv_coeffs) -&gt; InterfaceDerivCoeffsCollection&lt; typename DerivCalculatorType::associated_interface... &gt;</argsstring>
         <name>InterfaceDerivCoeffsCollection</name>
         <param>
           <type>DerivCalculatorType const &amp;...</type>
-          <declname>derivative_calculators</declname>
+          <declname>deriv_coeffs</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -385,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="80" column="1" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" declline="80" declcolumn="1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="79" column="1" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" declline="79" declcolumn="1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -405,7 +405,7 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_interface_derivative_coefficients_collection<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_single_derivative_calculator_collection_v</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_interface_derivative_coefficients_collection_v</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>enable_interface_derivative_coefficients_collection&lt;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
@@ -417,37 +417,36 @@
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">InterfaceTypeSeq<sp/>=<sp/>ddc::detail::TypeSeq&lt;Interfaces...&gt;;</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>std::tuple&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...&gt;<sp/>m_derivative_calculator_collection;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>std::tuple&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...&gt;<sp/>m_deriv_coeffs_collection;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="48" refid="classInterfaceDerivCoeffsCollection_1a265b1dbda08d0b66bd847d2e587ad5be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInterfaceDerivCoeffsCollection_1a265b1dbda08d0b66bd847d2e587ad5be" kindref="member">InterfaceDerivCoeffsCollection</ref>(</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs&lt;Interfaces&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>derivative_calculators)</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_derivative_calculator_collection(derivative_calculators...)</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="48" refid="classInterfaceDerivCoeffsCollection_1a712d41c51e79f3a7d160fac8e3d5ad73" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInterfaceDerivCoeffsCollection_1a712d41c51e79f3a7d160fac8e3d5ad73" kindref="member">InterfaceDerivCoeffsCollection</ref>(<ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs&lt;Interfaces&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>deriv_coeffs)</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_deriv_coeffs_collection(deriv_coeffs...)</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Interface&gt;</highlight></codeline>
-<codeline lineno="67" refid="classInterfaceDerivCoeffsCollection_1aea94f2f2abf2745e9c458f593cb3cc5c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs&lt;Interface&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classInterfaceDerivCoeffsCollection_1aea94f2f2abf2745e9c458f593cb3cc5c" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="68"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::in_tags_v&lt;Interface,<sp/>InterfaceTypeSeq&gt;,</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;No<sp/>element<sp/>defined<sp/>on<sp/>this<sp/>Interface<sp/>in<sp/>this<sp/>collection.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::get&lt;InterfaceDerivCoeffs&lt;Interface&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;&gt;(m_derivative_calculator_collection);</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="75"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Interface&gt;</highlight></codeline>
+<codeline lineno="66" refid="classInterfaceDerivCoeffsCollection_1aea94f2f2abf2745e9c458f593cb3cc5c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs&lt;Interface&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classInterfaceDerivCoeffsCollection_1aea94f2f2abf2745e9c458f593cb3cc5c" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="67"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::in_tags_v&lt;Interface,<sp/>InterfaceTypeSeq&gt;,</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;No<sp/>element<sp/>defined<sp/>on<sp/>this<sp/>Interface<sp/>in<sp/>this<sp/>collection.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::get&lt;InterfaceDerivCoeffs&lt;Interface&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;&gt;(m_deriv_coeffs_collection);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="77"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight><highlight class="comment">//<sp/>To<sp/>help<sp/>the<sp/>template<sp/>deduction.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>DerivCalculatorType&gt;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref>(DerivCalculatorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>derivative_calculators)</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;<sp/><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DerivCalculatorType::associated_interface...&gt;;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment">//<sp/>To<sp/>help<sp/>the<sp/>template<sp/>deduction.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>DerivCalculatorType&gt;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref>(DerivCalculatorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>deriv_coeffs)</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;<sp/><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DerivCalculatorType::associated_interface...&gt;;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>DerivCalculatorType&gt;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_interface_derivative_coefficients_collection&lt;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref>&lt;DerivCalculatorType...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>DerivCalculatorType&gt;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_interface_derivative_coefficients_collection&lt;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref>&lt;DerivCalculatorType...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp"/>
   </compounddef>

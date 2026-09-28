@@ -42,13 +42,7 @@
 
 
 
-## Public Attributes
 
-| Type | Name |
-| ---: | :--- |
-|  constexpr bool | [**enable\_interface\_derivative\_coefficients**](#variable-enable_interface_derivative_coefficients)   = `false`<br> |
-|  constexpr bool | [**enable\_interface\_derivative\_coefficients&lt; InterfaceDerivCoeffs&lt; InterfaceType &gt; &gt;**](#variable-enable_interface_derivative_coefficients-interfacederivcoeffs-interfacetype)   = `true`<br> |
-|  constexpr bool | [**is\_single\_derivative\_calculator\_v**](#variable-is_single_derivative_calculator_v)   = `enable\_interface\_derivative\_coefficients&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 
@@ -92,48 +86,6 @@
 
 
 
-
-## Public Attributes Documentation
-
-
-
-
-### variable enable\_interface\_derivative\_coefficients 
-
-```C++
-constexpr bool enable_interface_derivative_coefficients;
-```
-
-
-
-
-<hr>
-
-
-
-### variable enable\_interface\_derivative\_coefficients&lt; InterfaceDerivCoeffs&lt; InterfaceType &gt; &gt; 
-
-```C++
-constexpr bool enable_interface_derivative_coefficients< InterfaceDerivCoeffs< InterfaceType > >;
-```
-
-
-
-
-<hr>
-
-
-
-### variable is\_single\_derivative\_calculator\_v 
-
-```C++
-constexpr bool is_single_derivative_calculator_v;
-```
-
-
-
-
-<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp`

@@ -607,7 +607,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_single_derivative_calculator_collection_v"><strong>is_single_derivative_calculator_collection_v</strong></a>   = <code>/* multi line expression */</code><br></td>
+<td style="text-align: left;"><a href="#variable-is_interface_derivative_coefficients_collection_v"><strong>is_interface_derivative_coefficients_collection_v</strong></a>   = <code>/* multi line expression */</code><br></td>
 </tr>
 </tbody>
 </table>
@@ -622,7 +622,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-interfacederivcoeffscollection"><strong>InterfaceDerivCoeffsCollection</strong></a> (DerivCalculatorType const &amp;... derivative_calculators) <br></td>
+<td style="text-align: left;"><a href="#function-interfacederivcoeffscollection"><strong>InterfaceDerivCoeffsCollection</strong></a> (DerivCalculatorType const &amp;... deriv_coeffs) <br></td>
 </tr>
 </tbody>
 </table>
@@ -637,15 +637,15 @@
 </code></pre>
 <hr>
 
-<h3 id="variable-is_single_derivative_calculator_collection_v">variable is_single_derivative_calculator_collection_v</h3>
-<pre><code class="language-C++">constexpr bool is_single_derivative_calculator_collection_v;
+<h3 id="variable-is_interface_derivative_coefficients_collection_v">variable is_interface_derivative_coefficients_collection_v</h3>
+<pre><code class="language-C++">constexpr bool is_interface_derivative_coefficients_collection_v;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-interfacederivcoeffscollection">function InterfaceDerivCoeffsCollection</h3>
 <pre><code class="language-C++">template&lt;class... DerivCalculatorType&gt;
 InterfaceDerivCoeffsCollection (
-    DerivCalculatorType const &amp;... derivative_calculators
+    DerivCalculatorType const &amp;... deriv_coeffs
 ) 
 </code></pre>
 <hr>

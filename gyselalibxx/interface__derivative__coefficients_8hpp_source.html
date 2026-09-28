@@ -582,13 +582,6 @@
 #include "types.hpp"
 
 
-template &lt;class T&gt;
-inline constexpr bool enable_interface_derivative_coefficients = false;
-
-template &lt;class T&gt;
-inline constexpr bool is_single_derivative_calculator_v
-        = enable_interface_derivative_coefficients&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;;
-
 template &lt;class InterfaceType&gt;
 class InterfaceDerivCoeffs
 {
@@ -1531,12 +1524,6 @@ private:
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
     }
 };
-
-
-
-template &lt;class InterfaceType&gt;
-inline constexpr bool
-        enable_interface_derivative_coefficients&lt;InterfaceDerivCoeffs&lt;InterfaceType&gt;&gt; = true;
 </code></pre></div>
               
             </div>

@@ -1791,8 +1791,8 @@
   <compound refid="classInterfaceDerivCoeffsCollection" kind="class"><name>InterfaceDerivCoeffsCollection</name>
     <member refid="classInterfaceDerivCoeffsCollection_1a65c5516332f15d4d13f0d8ed25d5a720" kind="typedef"><name>DerivCalculatorTypeSeq</name></member>
     <member refid="classInterfaceDerivCoeffsCollection_1a582df5767159e0a94e94bce484e359b3" kind="typedef"><name>InterfaceTypeSeq</name></member>
-    <member refid="classInterfaceDerivCoeffsCollection_1a0ee0f6d2497a1f620946cf958a054440" kind="variable"><name>m_derivative_calculator_collection</name></member>
-    <member refid="classInterfaceDerivCoeffsCollection_1a265b1dbda08d0b66bd847d2e587ad5be" kind="function"><name>InterfaceDerivCoeffsCollection</name></member>
+    <member refid="classInterfaceDerivCoeffsCollection_1afa66ce0ffe30d8b33e922a11ec920614" kind="variable"><name>m_deriv_coeffs_collection</name></member>
+    <member refid="classInterfaceDerivCoeffsCollection_1a712d41c51e79f3a7d160fac8e3d5ad73" kind="function"><name>InterfaceDerivCoeffsCollection</name></member>
     <member refid="classInterfaceDerivCoeffsCollection_1aea94f2f2abf2745e9c458f593cb3cc5c" kind="function"><name>get</name></member>
   </compound>
   <compound refid="structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis" kind="struct"><name>PolarBSplines::Impl::IntermediateBernsteinBasis</name>
@@ -4769,15 +4769,12 @@
     <member refid="types_8hpp_1ae9b4dd49e86776b834dada3f2218f283" kind="typedef"><name>DerivFieldOnPatch_host</name></member>
   </compound>
   <compound refid="interface__derivative__coefficients_8hpp" kind="file"><name>interface_derivative_coefficients.hpp</name>
-    <member refid="interface__derivative__coefficients_8hpp_1a2c7419634357e6120dd27c56ff6cdbd8" kind="variable"><name>enable_interface_derivative_coefficients</name></member>
-    <member refid="interface__derivative__coefficients_8hpp_1a76edab491f6cc56ca4a46f017ab73332" kind="variable"><name>is_single_derivative_calculator_v</name></member>
-    <member refid="interface__derivative__coefficients_8hpp_1a4ce2eda0363a489c74826fb9f4d612ee" kind="variable"><name>enable_interface_derivative_coefficients&lt; InterfaceDerivCoeffs&lt; InterfaceType &gt; &gt;</name></member>
   </compound>
   <compound refid="interface__derivative__coefficients__collection_8hpp" kind="file"><name>interface_derivative_coefficients_collection.hpp</name>
     <member refid="interface__derivative__coefficients__collection_8hpp_1aca05881a0fb9166944e496ae7d2b2a29" kind="variable"><name>enable_interface_derivative_coefficients_collection</name></member>
-    <member refid="interface__derivative__coefficients__collection_8hpp_1a99218bfdec59d48b543cf6ea63973c16" kind="variable"><name>is_single_derivative_calculator_collection_v</name></member>
+    <member refid="interface__derivative__coefficients__collection_8hpp_1a2169e2adfe9ddb50cbca36dcf24385be" kind="variable"><name>is_interface_derivative_coefficients_collection_v</name></member>
     <member refid="interface__derivative__coefficients__collection_8hpp_1a5163ac60cd2f58f3181b32a9bb185e2b" kind="variable"><name>enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;</name></member>
-    <member refid="interface__derivative__coefficients__collection_8hpp_1ad0ce9d85612f49b4423999414c909800" kind="function"><name>InterfaceDerivCoeffsCollection</name></member>
+    <member refid="interface__derivative__coefficients__collection_8hpp_1ac800e91282df73a8c948f498a1a3a4a8" kind="function"><name>InterfaceDerivCoeffsCollection</name></member>
   </compound>
   <compound refid="constant__extrapolation__rules__onion_8hpp" kind="file"><name>constant_extrapolation_rules_onion.hpp</name>
   </compound>

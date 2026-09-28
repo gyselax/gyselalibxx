@@ -187,7 +187,7 @@
 * **m\_weights\_patch\_1\_alloc** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
 * **m\_weights\_patch\_2** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
 * **m\_weights\_patch\_2\_alloc** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
-* **m\_derivative\_calculator\_collection** ([**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md))
+* **m\_deriv\_coeffs\_collection** ([**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md))
 * **m\_mode\_k** ([**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md))
 * **m\_amplitude** ([**KineticSource**](classKineticSource.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md), [**KrookSourceConstant**](classKrookSourceConstant.md))
 * **m\_density** ([**KineticSource**](classKineticSource.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md), [**KrookSourceConstant**](classKrookSourceConstant.md))

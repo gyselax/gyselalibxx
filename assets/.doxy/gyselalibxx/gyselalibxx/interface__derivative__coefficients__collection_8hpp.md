@@ -44,7 +44,7 @@
 | ---: | :--- |
 |  constexpr bool | [**enable\_interface\_derivative\_coefficients\_collection**](#variable-enable_interface_derivative_coefficients_collection)   = `false`<br> |
 |  constexpr bool | [**enable\_interface\_derivative\_coefficients\_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;**](#variable-enable_interface_derivative_coefficients_collection-interfacederivcoeffscollection-derivcalculatortype)   = `true`<br> |
-|  constexpr bool | [**is\_single\_derivative\_calculator\_collection\_v**](#variable-is_single_derivative_calculator_collection_v)   = `/* multi line expression */`<br> |
+|  constexpr bool | [**is\_interface\_derivative\_coefficients\_collection\_v**](#variable-is_interface_derivative_coefficients_collection_v)   = `/* multi line expression */`<br> |
 
 
 
@@ -65,7 +65,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**InterfaceDerivCoeffsCollection**](#function-interfacederivcoeffscollection) (DerivCalculatorType const &... derivative\_calculators) <br> |
+|   | [**InterfaceDerivCoeffsCollection**](#function-interfacederivcoeffscollection) (DerivCalculatorType const &... deriv\_coeffs) <br> |
 
 
 
@@ -125,10 +125,10 @@ constexpr bool enable_interface_derivative_coefficients_collection< InterfaceDer
 
 
 
-### variable is\_single\_derivative\_calculator\_collection\_v 
+### variable is\_interface\_derivative\_coefficients\_collection\_v 
 
 ```C++
-constexpr bool is_single_derivative_calculator_collection_v;
+constexpr bool is_interface_derivative_coefficients_collection_v;
 ```
 
 
@@ -145,7 +145,7 @@ constexpr bool is_single_derivative_calculator_collection_v;
 ```C++
 template<class... DerivCalculatorType>
 InterfaceDerivCoeffsCollection (
-    DerivCalculatorType const &... derivative_calculators
+    DerivCalculatorType const &... deriv_coeffs
 ) 
 ```
 
