@@ -1469,8 +1469,15 @@ private:
             Idx&lt;OGrid1D&gt; const other_idx = get_extremity_idx(other_extremity, other_idx_range_1d);
             Idx&lt;OGrid1D&gt; const other_idx_incremented = other_idx + other_idx_step;
 
-            length_left = abs(ddc::coordinate(other_idx_incremented) - ddc::coordinate(other_idx));
-            length_right = abs(ddc::coordinate(idx_incremented) - ddc::coordinate(idx));
+            if constexpr (std::is_same_v&lt;Grid1D, EdgePerpGrid2&gt;) {
+                length_left
+                        = abs(ddc::coordinate(other_idx_incremented) - ddc::coordinate(other_idx));
+                length_right = abs(ddc::coordinate(idx_incremented) - ddc::coordinate(idx));
+            } else {
+                length_left = abs(ddc::coordinate(idx_incremented) - ddc::coordinate(idx));
+                length_right
+                        = abs(ddc::coordinate(other_idx_incremented) - ddc::coordinate(other_idx));
+            }
         }
         // If given index is on the patch 1 or on the patch 2,
         else if (is_same_orientation_as_global) {
