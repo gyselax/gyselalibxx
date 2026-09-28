@@ -971,8 +971,8 @@ private:
         double cell_length_left = ddc::discrete_space<EdgePerpGrid1>().step();
         double cell_length_right = ddc::discrete_space<EdgePerpGrid2>().step();
 
-        double const a_11 = -0.5 * cell_length_left / (cell_length_left + cell_length_right);
-        double const b_11 = -0.5 * cell_length_right / (cell_length_left + cell_length_right);
+        double const a_11 = get_alpha(cell_length_left, cell_length_right);
+        double const b_11 = get_beta(cell_length_left, cell_length_right);
 
         double const u1 = 2 * Kokkos::sqrt(3);
         double const u_plus = 2 + Kokkos::sqrt(3);
