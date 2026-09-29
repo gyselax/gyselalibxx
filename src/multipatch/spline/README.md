@@ -62,7 +62,7 @@ And we build the spline representation on every patch using,
 builder(patches_splines, patches_values); 
 ```
 
-## Multi-patch spline evaluator
+## Multipatch spline evaluator
 
 The `MultipatchSplineEvaluator2D` allows all the spline evaluators to be called in one single line.
 
@@ -92,9 +92,9 @@ The methods implemented are
 
 **Warning:** The current version of `MultipatchSplineEvaluator2D` does not work on batched domain.
 
-**Warning:** `MultipatchSplineEvaluator2D` applies to patches defined on the same continuous dimensions. 
+**Warning:** `MultipatchSplineEvaluator2D` applies to patches defined on the same continuous dimensions.
 
-## Multi-patch extrapolation rules
+## Multipatch extrapolation rules
 
 To evaluate at a given coordinate outside the domain, extrapolation rules have been implemented. They are declined according to the geometry:
 
