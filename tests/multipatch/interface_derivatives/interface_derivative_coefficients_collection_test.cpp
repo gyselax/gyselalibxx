@@ -119,8 +119,8 @@ protected:
 
 
     // InterfaceDerivCoeffss for interfaces along y.
-    InterfaceDerivCoeffs<Interface_12> const derivatives_calculator_1_2;
-    InterfaceDerivCoeffs<Interface_23> const derivatives_calculator_2_3;
+    InterfaceDerivCoeffs<Interface_12> const deriv_coeffs_P1_P2;
+    InterfaceDerivCoeffs<Interface_23> const deriv_coeffs_P2_P3;
 
 public:
     InterfaceDerivCoeffsCollectionTest()
@@ -133,11 +133,8 @@ public:
         , idx_range_xy1(idx_range_x1, idx_range_y1)
         , idx_range_xy2(idx_range_x2, idx_range_y2)
         , idx_range_xy3(idx_range_x3, idx_range_y3)
-        , derivatives_calculator_1_2(
-                  idx_range_xy1,
-                  idx_range_xy2,
-                  ddc::SplineBuilderClosure::GREVILLE)
-        , derivatives_calculator_2_3(
+        , deriv_coeffs_P1_P2(idx_range_xy1, idx_range_xy2, ddc::SplineBuilderClosure::GREVILLE)
+        , deriv_coeffs_P2_P3(
                   idx_range_xy2,
                   idx_range_xy3,
                   ddc::SplineBuilderClosure::HERMITE,
@@ -277,7 +274,7 @@ TEST_F(InterfaceDerivCoeffsCollectionTest, CheckCallToOperators)
 {
     // Order in sequences ------------------------------------------------------------------------
     InterfaceDerivCoeffsCollection
-            deriv_calculators_collect(derivatives_calculator_1_2, derivatives_calculator_2_3);
+            deriv_calculators_collect(deriv_coeffs_P1_P2, deriv_coeffs_P2_P3);
 
     // Instantiate test function values ==========================================================
     host_t<DFieldMemOnPatch<Patch1>> function_1_alloc(idx_range_xy1);
@@ -299,6 +296,6 @@ TEST_F(InterfaceDerivCoeffsCollectionTest, CheckCallToOperators)
     check_function_call(
             functions,
             deriv_calculators_collect,
-            derivatives_calculator_1_2,
-            derivatives_calculator_2_3);
+            deriv_coeffs_P1_P2,
+            deriv_coeffs_P2_P3);
 }
