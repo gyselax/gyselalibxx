@@ -2,16 +2,21 @@
 
 add_library("multipatch_utils" INTERFACE)
 
-target_include_directories("multipatch_utils"
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("multipatch_utils" INTERFACE cxx_std_20)
+
+target_sources("multipatch_utils"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                multipatch_math_tools.hpp
 )
 
 target_link_libraries("multipatch_utils"
     INTERFACE
-        gslx::multipatch_data_types
-        gslx::utils
+        gyselalibxx::multipatch_data_types
+        gyselalibxx::utils
 )
 
-add_library("gslx::multipatch_utils" ALIAS "multipatch_utils")
+add_library("gyselalibxx::multipatch_utils" ALIAS "multipatch_utils")
 
-
+install(TARGETS multipatch_utils EXPORT gyselalibxxTargets FILE_SET HEADERS)

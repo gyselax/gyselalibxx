@@ -273,8 +273,12 @@ public:
         template <class DiscreteMapping>
         struct IntermediateBernsteinBasis
             : TriangularBernsteinPolynomialBasis<
-                      typename DiscreteMapping::cartesian_tag_x,
-                      typename DiscreteMapping::cartesian_tag_y,
+                      ddc::type_seq_element_t<
+                              0,
+                              ddc::to_type_seq_t<typename DiscreteMapping::CoordResult>>,
+                      ddc::type_seq_element_t<
+                              1,
+                              ddc::to_type_seq_t<typename DiscreteMapping::CoordResult>>,
                       Corner1Tag,
                       Corner2Tag,
                       Corner3Tag,

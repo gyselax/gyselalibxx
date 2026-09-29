@@ -40,11 +40,6 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorConstBound_host>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 
@@ -164,25 +159,8 @@ TYPED_TEST(AdvectionFieldRThetaComputationFixture, TestAdvectionFieldFinder)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder_host const builder_host(grid);
-    SplineRThetaBuilder const builder(grid);
-
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
-
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
-
-    ddc::NullExtrapolationRule r_extrapolation_rule;
+    SplineInterpolatorRTheta interpolator(grid);
+    SplineInterpolatorRThetaConst interpolator_const(grid);
 
     // --- Define the to_physical_mapping. ------------------------------------------------------------------------
     const LogicalToPhysicalMapping to_physical_mapping;
@@ -190,22 +168,13 @@ TYPED_TEST(AdvectionFieldRThetaComputationFixture, TestAdvectionFieldFinder)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
 
     RK3Builder const time_stepper;
-    PolarFootFinder find_feet = make_polar_foot_finder<TestFixture::FFSpace, TestFixture::AFSpace>(
-            time_stepper,
-            to_physical_mapping,
-            grid,
-            builder,
-            spline_evaluator_extrapol);
+    PolarFootFinder find_feet = make_polar_foot_finder<
+            TestFixture::FFSpace,
+            TestFixture::AFSpace>(time_stepper, to_physical_mapping, grid, interpolator_const);
 
-    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
     AdvectionFieldFinder advection_field_computer(to_physical_mapping);

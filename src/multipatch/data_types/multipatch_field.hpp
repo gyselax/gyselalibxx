@@ -102,6 +102,7 @@ public:
     KOKKOS_FUNCTION MultipatchField(MultipatchObj& other)
         : base_type(T<Patches>(other.template get<Patches>())...)
     {
+        // This function is not explicit as T is occasionally different even if T<Patch> resolves to the same type
         static_assert(is_multipatch_type_v<MultipatchObj>);
     }
 
@@ -129,7 +130,7 @@ public:
      */
     template <template <typename P> typename OtherType, class... OPatches>
     MultipatchField(MultipatchField<OtherType, OPatches...>&& other)
-        : base_type(std::make_tuple(other.template get<Patches>()...))
+        : base_type(other.template get<Patches>()...)
     {
         static_assert(
                 std::is_same_v<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<OPatches...>>,
@@ -177,17 +178,6 @@ public:
     }
 
     /**
-     * @brief Get a MultipatchField containing modifiable fields.
-     * This function matches the DDC name to allow the global get_const_field to be defined.
-     *
-     * @returns A set of modifiable fields providing access to the fields stored in this class.
-     */
-    KOKKOS_FUNCTION auto span_view()
-    {
-        return get_field();
-    }
-
-    /**
      * @brief Get a MultipatchField containing constant fields so the values cannot be modified.
      *
      * @returns A set of constant fields providing access to the fields stored in this class.
@@ -196,17 +186,6 @@ public:
     {
         return MultipatchField<InternalConstFieldOnPatch, Patches...>(
                 ::get_const_field(std::get<T<Patches>>(base_type::m_tuple))...);
-    }
-
-    /**
-     * @brief Get a MultipatchField containing constant fields so the values cannot be modified.
-     * This function matches the DDC name to allow the global get_const_field to be defined.
-     *
-     * @returns A set of constant fields providing access to the fields stored in this class.
-     */
-    KOKKOS_FUNCTION auto span_cview()
-    {
-        return get_const_field();
     }
 };
 

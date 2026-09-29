@@ -1,15 +1,27 @@
 
 
 add_library("multipatch_spline" INTERFACE)
-target_include_directories("multipatch_spline"
+
+target_compile_features("multipatch_spline" INTERFACE cxx_std_20)
+
+target_sources("multipatch_spline"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                constant_extrapolation_rules_onion.hpp
+                multipatch_spline_builder.hpp
+                multipatch_spline_builder_2d.hpp
+                multipatch_spline_evaluator_2d.hpp
+                null_extrapolation_rules.hpp
 )
+
 target_link_libraries("multipatch_spline" INTERFACE
     DDC::core
-    gslx::multipatch_data_types
-    gslx::multipatch_connectivity
-    gslx::utils
+    gyselalibxx::multipatch_data_types
+    gyselalibxx::multipatch_connectivity
+    gyselalibxx::utils
 
 )
-add_library("gslx::multipatch_spline" ALIAS "multipatch_spline")
+add_library("gyselalibxx::multipatch_spline" ALIAS "multipatch_spline")
+
+install(TARGETS multipatch_spline EXPORT gyselalibxxTargets FILE_SET HEADERS)

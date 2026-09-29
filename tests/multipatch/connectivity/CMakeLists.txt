@@ -19,10 +19,10 @@ PUBLIC
         GTest::gtest
         GTest::gmock
 
-        gslx::multipatch_connectivity
-        gslx::multipatch_data_types
-        gslx::multipatch_geometries
-        gslx::utils
+        gyselalibxx::multipatch_connectivity
+        gyselalibxx::multipatch_data_types
+        gyselalibxx::multipatch_geometries
+        gyselalibxx::utils
 )
 target_compile_definitions("unit_tests_connectivity" PUBLIC)
 gtest_discover_tests("unit_tests_connectivity" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

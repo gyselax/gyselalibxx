@@ -41,11 +41,10 @@ using IdxRangeX = IdxRange<GridX>;
 
 using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
         ExtrapolationRule::Null_Null,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::GREVILLE>;
+        SplineBoundaryClosure::Greville_Greville>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 
