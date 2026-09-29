@@ -317,7 +317,7 @@ public:
         static_assert(
                 ddc::in_tags_v<IdxDeriv, authorised_idx_deriv>,
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
-                "(common dimensions for all the patches).");
+                "(same dimensions for all the patches).");
         int const patch_idx = get_patch_idx(coord_eval);
         if (patch_idx < 0) {
             Kokkos::abort("The evaluation coordinate has to be on a patch."
@@ -358,7 +358,7 @@ public:
         static_assert(
                 ddc::in_tags_v<IdxDeriv, authorised_idx_deriv>,
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
-                "(common dimensions for all the patches).");
+                "(same dimensions for all the patches).");
         (apply_evaluator<Patches>(
                  deriv_order,
                  patches_deriv.template get<Patches>(),
