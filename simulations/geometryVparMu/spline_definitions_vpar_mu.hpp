@@ -64,6 +64,5 @@ using SplineMuEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace::memory_space,
         ddc::detail::TypeSeq<BSplinesMu>,
         ddc::detail::TypeSeq<GridMu>,
-        ddc::detail::TypeSeq<
-                ddc::ConstantExtrapolationRule<Mu>,
-                ddc::ConstantExtrapolationRule<Mu>>>;
+        ddc::detail::
+                TypeSeq<ddc::ConstantExtrapolationRule<Mu>, ddc::ConstantExtrapolationRule<Mu>>>;

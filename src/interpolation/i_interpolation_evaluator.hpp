@@ -139,8 +139,8 @@ public:
     using coord_type = Coord<typename EvaluationDDim::continuous_dimension_type...>;
 
     /// @brief The type of the ND index range on which the interpolation coefficients are defined.
-    using coeff_idx_range_type = decltype(make_coeff_idx_range_type(
-            std::make_index_sequence<sizeof...(BSplines)>()));
+    using coeff_idx_range_type
+            = decltype(make_coeff_idx_range_type(std::make_index_sequence<sizeof...(BSplines)>()));
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()

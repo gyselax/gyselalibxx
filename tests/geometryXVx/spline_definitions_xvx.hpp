@@ -75,9 +75,8 @@ using SplineVxEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace::memory_space,
         ddc::detail::TypeSeq<BSplinesVx>,
         ddc::detail::TypeSeq<GridVx>,
-        ddc::detail::TypeSeq<
-                ddc::ConstantExtrapolationRule<Vx>,
-                ddc::ConstantExtrapolationRule<Vx>>>;
+        ddc::detail::
+                TypeSeq<ddc::ConstantExtrapolationRule<Vx>, ddc::ConstantExtrapolationRule<Vx>>>;
 
 using XExtrapRule = std::conditional_t<
         X::PERIODIC,
