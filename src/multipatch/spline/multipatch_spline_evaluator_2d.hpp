@@ -312,12 +312,12 @@ public:
             Coord<CDim1, CDim2> const& coord_eval,
             MultipatchSplineCoeff const& patches_splines) const
     {
-        using authorized_idx_deriv
+        using authorised_idx_deriv
                 = ddc::detail::TypeSeq<Idx<DerivDim1>, Idx<DerivDim2>, Idx<DerivDim1, DerivDim2>>;
         static_assert(
-                ddc::in_tags_v<IdxDeriv, authorized_idx_deriv>,
+                ddc::in_tags_v<IdxDeriv, authorised_idx_deriv>,
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
-                "(commun dimensions for all the patches).");
+                "(common dimensions for all the patches).");
         int const patch_idx = get_patch_idx(coord_eval);
         if (patch_idx < 0) {
             Kokkos::abort("The evaluation coordinate has to be on a patch."
@@ -353,12 +353,12 @@ public:
             MultipatchCoordField const& patches_coords,
             MultipatchSplineCoeff const& patches_splines) const
     {
-        using authorized_idx_deriv
+        using authorised_idx_deriv
                 = ddc::detail::TypeSeq<Idx<DerivDim1>, Idx<DerivDim2>, Idx<DerivDim1, DerivDim2>>;
         static_assert(
-                ddc::in_tags_v<IdxDeriv, authorized_idx_deriv>,
+                ddc::in_tags_v<IdxDeriv, authorised_idx_deriv>,
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
-                "(commun dimensions for all the patches).");
+                "(common dimensions for all the patches).");
         (apply_evaluator<Patches>(
                  deriv_order,
                  patches_deriv.template get<Patches>(),
