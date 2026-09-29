@@ -146,12 +146,6 @@ public:
     template <class Patch>
     using spline_idx_range_type = IdxRange<bsplines_type1<Patch>, bsplines_type2<Patch>>;
 
-private:
-    // Fields
-    template <class Patch>
-    using CoordConstFieldOnPatch
-            = ConstField<Coord<CDim1, CDim2>, evaluation_idx_range_type<Patch>, MemorySpace>;
-
 public:
     /**
      * @brief Type for MultipatchType: A field of 2D spline coefficients for a non-batched spline defined
@@ -181,6 +175,17 @@ private:
     using DerivDim1 = ddc::Deriv<CDim1>;
     // Dimension for the derivatives along the second dimension.
     using DerivDim2 = ddc::Deriv<CDim2>;
+
+    // Dimension to indicate that we want to evaluate the function, not its derivative.
+    struct NotDerivDim
+    {
+    };
+
+private:
+    // Fields
+    template <class Patch>
+    using CoordConstFieldOnPatch
+            = ConstField<Coord<CDim1, CDim2>, evaluation_idx_range_type<Patch>, MemorySpace>;
 
 public:
     /// @brief The number of patches.
@@ -243,8 +248,8 @@ public:
      * 
      * @tparam StoringPatch Patch type where the given coordinate is stored. It does not mean that 
      *      the coordinate is physically located on the patch. 
-     * @param coord_eval The coordinate where the spline is evaluated. 
-     * @param patches_splines A MultipatchType of DField storing the 2D spline coefficients.
+     * @param[in] coord_eval The coordinate where the spline is evaluated. 
+     * @param[in] patches_splines A MultipatchType of DField storing the 2D spline coefficients.
      * @return The value of the spline at the desired coordinate on the right patch.
      */
     template <class Coord>
@@ -254,7 +259,7 @@ public:
     {
         int const patch_idx = get_patch_idx(coord_eval);
         return recursive_dispatch_patch_function(
-                Idx<DerivDim1, DerivDim2>(),
+                Idx<NotDerivDim>(),
                 coord_eval,
                 patches_splines,
                 patch_idx);
@@ -276,7 +281,7 @@ public:
             MultipatchSplineCoeff const& patches_splines) const
     {
         (apply_evaluator<Patches>(
-                 Idx<DerivDim1, DerivDim2>(),
+                 Idx<NotDerivDim>(),
                  patches_values.template get<Patches>(),
                  patches_coords.template get<Patches>(),
                  patches_splines),
@@ -293,11 +298,11 @@ public:
      * 
      * @warning The derivative cannot be computed outside of the domain. 
      *
-     * @tparam InterestDim Dimension of StoringPatch along which differentiation is performed.
-     * @tparam StoringPatch Patch type where the given coordinate is stored. It does not mean that 
-     *      the coordinate is physically located on the patch. 
-     * @param coord_eval The coordinate where the spline is differentiated.
-     * @param patches_splines A MultipatchType of DField storing the 2D spline coefficients.
+     * @tparam IdxDeriv Index type of the derivative order, it can be on the first dimension, the second
+     * or both.
+     * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
+     * @param[in] coord_eval The coordinate where the spline is differentiated.
+     * @param[in] patches_splines A MultipatchType of DField storing the 2D spline coefficients.
      * 
      * @return The derivative of the spline at the desired coordinate on the right patch.
      */
@@ -307,6 +312,12 @@ public:
             Coord<CDim1, CDim2> const& coord_eval,
             MultipatchSplineCoeff const& patches_splines) const
     {
+        using authorized_idx_deriv
+                = ddc::detail::TypeSeq<Idx<DerivDim1>, Idx<DerivDim2>, Idx<DerivDim1, DerivDim2>>;
+        static_assert(
+                ddc::in_tags_v<IdxDeriv, authorized_idx_deriv>,
+                "Please provide a deriv_order indexed on the derivative dimensions of the patches "
+                "(commun dimensions for all the patches).");
         int const patch_idx = get_patch_idx(coord_eval);
         if (patch_idx < 0) {
             Kokkos::abort("The evaluation coordinate has to be on a patch."
@@ -327,7 +338,10 @@ public:
      * 
      * @warning The derivatives cannot be computed outside of the domain. 
      *
-     * @param[out] patches_deriv_1 A MultipatchType of DField to store the derivatives of the splines 
+     * @tparam IdxDeriv Index type of the derivative order, it can be on the first dimension, the second
+     * or both.
+     * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
+     * @param[out] patches_deriv A MultipatchType of DField to store the derivatives of the splines 
      *          at the given coordinates. 
      * @param[in] patches_coords A MultipatchType of Field of Coordinate storing the coordinates of the meshes.
      * @param[in] patches_splines A MultipatchType of DField storing the 2D spline coefficients.
@@ -335,13 +349,19 @@ public:
     template <class IdxDeriv>
     void deriv(
             IdxDeriv const& deriv_order,
-            MultipatchValues const& patches_deriv_1,
+            MultipatchValues const& patches_deriv,
             MultipatchCoordField const& patches_coords,
             MultipatchSplineCoeff const& patches_splines) const
     {
+        using authorized_idx_deriv
+                = ddc::detail::TypeSeq<Idx<DerivDim1>, Idx<DerivDim2>, Idx<DerivDim1, DerivDim2>>;
+        static_assert(
+                ddc::in_tags_v<IdxDeriv, authorized_idx_deriv>,
+                "Please provide a deriv_order indexed on the derivative dimensions of the patches "
+                "(commun dimensions for all the patches).");
         (apply_evaluator<Patches>(
                  deriv_order,
-                 patches_deriv_1.template get<Patches>(),
+                 patches_deriv.template get<Patches>(),
                  patches_coords.template get<Patches>(),
                  patches_splines),
          ...);
@@ -374,15 +394,18 @@ public:
      * Needed public for functions on GPU. 
      * @tparam StoringPatch Patch type where the given coordinates are stored. 
      *      They are not especially physically located on this patch.
+     * @tparam IdxDeriv Index type of the derivative order, it can be on the first dimension, the second
+     *      or both.
+     * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
      * @param[out] patch_values Field of values of the function or derivative. 
      * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and 
      *          where we want to evaluate the function or derivative. 
      * @param[in] patches_splines MultipatchType of spline coefficients of the splines 
      *          on every patches. 
      */
-    template <class StoringPatch, class... DerivDims>
+    template <class StoringPatch, class IdxDeriv>
     void apply_evaluator(
-            Idx<DerivDims...> const& deriv_order,
+            IdxDeriv const& deriv_order,
             ValuesOnPatch<StoringPatch> const& patch_values,
             CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
             MultipatchSplineCoeff const patches_splines) const
@@ -401,7 +424,7 @@ public:
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {
                     Coord<CDim1, CDim2> const coord = patch_coords(idx);
                     int const patch_idx = get_patch_idx(coord);
-                    if (patch_idx < 0 && !(deriv_order == Idx<DerivDims...>())) {
+                    if (patch_idx < 0 && !(std::is_same_v<IdxDeriv, Idx<NotDerivDim>>)) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
                                       "No extrapolation rule for derivatives. \n");
                     }
@@ -462,22 +485,20 @@ private:
     // Recursive method to dispatch the coordinates on the right patch ---------------------------
 
     /// @brief Dispatch the given coordinate on the right patch to evaluate the right spline.
-    template <class... DerivDims, int TestPatchIdx = 0>
+    template <class IdxDeriv, int TestPatchIdx = 0>
     KOKKOS_INLINE_FUNCTION double recursive_dispatch_patch_function(
-            Idx<DerivDims...> const& deriv_order,
+            IdxDeriv const& deriv_order,
             Coord<CDim1, CDim2> coord,
             MultipatchSplineCoeff const& patches_splines,
             int const patch_idx) const
     {
-        using deriv_dims_seq = ddc::detail::TypeSeq<DerivDims...>;
         if constexpr (TestPatchIdx == ddc::type_seq_size_v<PatchOrdering>) {
             if (patch_idx >= 0) {
                 Kokkos::abort("The recursion has reached the end without finding where "
                               "the coordinate is physically located.");
             }
             // Coord not on patch. Stop recursing.
-            if constexpr (
-                    in_tags_v<DerivDim1, deriv_dims_seq> || in_tags_v<DerivDim2, deriv_dims_seq>) {
+            if constexpr (std::is_same_v<IdxDeriv, Idx<NotDerivDim>>) {
                 /* The operator currently works only for the case where the continuous 
                    dimensions of all the patches are the same. So the equivalent coordinates
                    are the same on any patches. 
@@ -499,10 +520,10 @@ private:
 
                 SplineCoeffOnPatch<TestPatch> const test_spline
                         = patches_splines.template get<TestPatch>();
-                return eval_no_bc<TestPatch>(deriv_order, test_coord, test_spline);
+                return eval_no_bc<TestPatch>(deriv_order, coord, test_spline);
             } else {
                 return recursive_dispatch_patch_function<
-                        DerivDims...,
+                        IdxDeriv,
                         TestPatchIdx + 1>(deriv_order, coord, patches_splines, patch_idx);
             }
         }
@@ -564,7 +585,7 @@ private:
         Coord<CDim1> coord_eval_interest1 = ddc::select<CDim1>(coord_eval);
         Coord<CDim2> coord_eval_interest2 = ddc::select<CDim2>(coord_eval);
 
-        if constexpr (!in_tags_v<DerivDim1, deriv_dims_seq>) {
+        if constexpr (!ddc::in_tags_v<DerivDim1, deriv_dims_seq>) {
             jmin1 = ddc::discrete_space<bsplines_1>().eval_basis(vals1, coord_eval_interest1);
         } else {
             const std::size_t order1 = (Idx<DerivDim1>(deriv_order) - Idx<DerivDim1>(0)).value();
@@ -586,10 +607,9 @@ private:
             }
         }
 
-        if constexpr (!in_tags_v<DerivDim2, deriv_dims_seq>) {
+        if constexpr (!ddc::in_tags_v<DerivDim2, deriv_dims_seq>) {
             jmin2 = ddc::discrete_space<bsplines_2>().eval_basis(vals2, coord_eval_interest2);
         } else {
-            // auto const order2 = deriv_order.template uid<DerivDim2>();
             const std::size_t order2 = (Idx<DerivDim2>(deriv_order) - Idx<DerivDim2>(0)).value();
             KOKKOS_ASSERT(order2 > 0 && order2 <= bsplines_2::degree())
 
