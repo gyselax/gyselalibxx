@@ -207,7 +207,7 @@ KOKKOS_FUNCTION double call_correct_operator(
         }
     }
     Kokkos::abort( // cppcheck-suppress missingReturn
-            "deriv_order "+std::to_string(deriv_order)+" is not on the correct dimension.");
+            "deriv_order " + std::to_string(deriv_order) + " is not on the correct dimension.");
     // return evaluator(eval_coord, spline);
 }
 
