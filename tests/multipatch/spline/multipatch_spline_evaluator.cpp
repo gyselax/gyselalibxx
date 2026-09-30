@@ -161,7 +161,7 @@ void test_operator_assignment(
                 err = 0;
             },
             Kokkos::Max<double>(max_error));
-    EXPECT_LE(max_error, 1e-14);
+    cte EXPECT_LE(max_error, 1e-14);
 }
 
 // Test deriv() on device and on host ............................................................
@@ -207,8 +207,8 @@ KOKKOS_FUNCTION double call_correct_operator(
         }
     }
     Kokkos::abort( // cppcheck-suppress missingReturn
-            "deriv_order is not on the correct dimension.");
-    return evaluator(eval_coord, spline);
+            "deriv_order "+std::to_string(deriv_order)+" is not on the correct dimension.");
+    // return evaluatcompor(eval_coord, spline);
 }
 
 template <template <typename P> class SplineTypeOnPatch, class IdxDeriv, class ExecSpace>
@@ -224,7 +224,7 @@ void test_deriv_at_order(
 {
     double max_error = 0;
     Kokkos::parallel_reduce(
-            eval_coords.extent(0),
+            Kokkos::RangePolicy<ExecSpace>(0, eval_coords.extent(0)),
             KOKKOS_LAMBDA(int i, double& err) {
                 double const eval_function = evaluators.deriv(deriv_order, eval_coords(i), splines);
                 double expected_function;
