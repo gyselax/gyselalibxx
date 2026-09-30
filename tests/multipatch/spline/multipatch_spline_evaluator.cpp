@@ -176,7 +176,7 @@ double call_correct_operator(
     Idx<ddc::Deriv<Theta>> dtheta_order(deriv_order);
 
     // return evaluator(eval_coord, spline);
-    return evaluator.deriv(deriv_order, eval_coords(i), spline_patch_1);
+    return evaluator.deriv(deriv_order, eval_coord, spline);
 }
 template <template <typename P> class SplineTypeOnPatch, class IdxDeriv, class ExecSpace>
 void test_deriv_at_order(
