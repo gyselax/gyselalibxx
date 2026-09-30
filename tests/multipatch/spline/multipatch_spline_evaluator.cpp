@@ -165,13 +165,18 @@ void test_operator_assignment(
 }
 
 // Test deriv() on device and on host ............................................................
-template <class IdxDeriv, class Evaluator, class SplineField>
+template <class... DerivDims, class Evaluator, class SplineField>
 KOKKOS_FUNCTION double call_correct_operator(
-        IdxDeriv deriv_order,
+        Idx<DerivDims...> deriv_order,
         Evaluator const& evaluator,
         Coord<R, Theta> const& eval_coord,
         SplineField const& spline)
 {
+    static_assert(
+            (ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<DerivDim1, DerivDim2>> && ...),
+            "Please provide a deriv_order indexed on the derivative dimensions of the patches "
+            "(same dimensions for all the patches).");
+    using IdxDeriv = Idx<DerivDims...>;
     const Idx<ddc::Deriv<R>> dr_order0(0);
     const Idx<ddc::Deriv<Theta>> dtheta_order0(0);
     if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>>) {
@@ -199,8 +204,8 @@ KOKKOS_FUNCTION double call_correct_operator(
             return evaluator.deriv(deriv_order, eval_coord, spline);
         }
     } else {
-        Kokkos::abort( // cppcheck-suppress missingReturn
-                "deriv_order is not on the correct dimension.");
+        // Kokkos::abort( // cppcheck-suppress missingReturn
+        //         "deriv_order is not on the correct dimension.");
         return evaluator(eval_coord, spline);
     }
 }
