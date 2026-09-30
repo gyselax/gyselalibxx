@@ -71,8 +71,8 @@ compute the evaluation inside the class. The template parameters and aliases are
 class in DDC.
 
 To instantiate a `MultipatchSplineEvaluator2D`, we need a patch locator operator to be able to determine on which patch the given (see [Connectivity](./../connectivity/README.md))
-coordinates will be physically located. We also need extrapolation rules to know what type of value returning if case of the
-coordinates are outside the domain. Multipatch extrapolation rules are implemented and defined below [Multipatch extrapolation rules](#multipatch-extrapolation-rules).
+coordinates will be physically located. We also need extrapolation rules to know what value is returned if the
+coordinates are outside the domain. Multi-patch extrapolation rules are implemented and defined below [Multipatch extrapolation rules](#multipatch-extrapolation-rules).
 
 The coordinates are stored in fields stored in `MultipatchType` objects.
 They are stored on patches. Each field corresponds to the coordinates stored on a given patch.
