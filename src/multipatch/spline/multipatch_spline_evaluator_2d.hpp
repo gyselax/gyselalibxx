@@ -576,7 +576,7 @@ private:
             jmin1 = ddc::discrete_space<bsplines_1>().eval_basis(vals1, coord_eval_interest1);
         } else {
             const std::size_t order1 = (Idx<DerivDim1>(deriv_order) - Idx<DerivDim1>(0)).value();
-            KOKKOS_ASSERT(order1 > 0 && order1 <= bsplines_1::degree())
+            KOKKOS_ASSERT(order1 >= 0 && order1 <= bsplines_1::degree())
 
             std::array<double, (bsplines_1::degree() + 1) * (bsplines_1::degree() + 1)> derivs1_ptr;
             Kokkos::mdspan<
@@ -598,7 +598,7 @@ private:
             jmin2 = ddc::discrete_space<bsplines_2>().eval_basis(vals2, coord_eval_interest2);
         } else {
             const std::size_t order2 = (Idx<DerivDim2>(deriv_order) - Idx<DerivDim2>(0)).value();
-            KOKKOS_ASSERT(order2 > 0 && order2 <= bsplines_2::degree())
+            KOKKOS_ASSERT(order2 >= 0 && order2 <= bsplines_2::degree())
 
             std::array<double, (bsplines_2::degree() + 1) * (bsplines_2::degree() + 1)> derivs2_ptr;
             Kokkos::mdspan<

@@ -172,12 +172,37 @@ double call_correct_operator(
         Coord<R, Theta> const& eval_coord,
         SplineField const& spline)
 {
-    Idx<ddc::Deriv<R>> dr_order(deriv_order);
-    Idx<ddc::Deriv<Theta>> dtheta_order(deriv_order);
-
-    // return evaluator(eval_coord, spline);
-    return evaluator.deriv(deriv_order, eval_coord, spline);
+    const Idx<ddc::Deriv<R>> dr_order0(0);
+    const Idx<ddc::Deriv<Theta>> dtheta_order0(0);
+    if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>>) {
+        Idx<ddc::Deriv<R>> dr_order(deriv_order);
+        Idx<ddc::Deriv<Theta>> dtheta_order(deriv_order);
+        if ((dr_order == dr_order0) && (dtheta_order == dtheta_order0)) {
+            return evaluator(eval_coord, spline);
+        } else if (dr_order == dr_order0) {
+            return evaluator.deriv(dtheta_order, eval_coord, spline);
+        } else if (dtheta_order == dtheta_order0) {
+            return evaluator.deriv(dr_order, eval_coord, spline);
+        } else {
+            evaluator.deriv(deriv_order, eval_coord, spline);
+        }
+    } else if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>>>) {
+        if (deriv_order == dr_order0) {
+            return evaluator(eval_coord, spline);
+        } else {
+            return evaluator.deriv(deriv_order, eval_coord, spline);
+        }
+    } else if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>) {
+        if (deriv_order == dtheta_order0) {
+            return evaluator(eval_coord, spline);
+        } else {
+            return evaluator.deriv(deriv_order, eval_coord, spline);
+        }
+    } else {
+        Kokkos::abort("deriv_order is not on the correct dimension.");
+    }
 }
+
 template <template <typename P> class SplineTypeOnPatch, class IdxDeriv, class ExecSpace>
 void test_deriv_at_order(
         IdxDeriv deriv_order,
