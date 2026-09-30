@@ -289,7 +289,7 @@ public:
      * 
      * @warning The derivative cannot be computed outside of the domain. 
      *
-     * @tparam IdxDeriv Index type of the derivative order, it can be on the first dimension, the second
+     * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
      * or both.
      * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
      * @param[in] coord_eval The coordinate where the spline is differentiated.
@@ -297,16 +297,14 @@ public:
      * 
      * @return The derivative of the spline at the desired coordinate on the right patch.
      */
-    template <class IdxDeriv>
+    template <class... DerivDims>
     KOKKOS_FUNCTION double deriv(
-            IdxDeriv const& deriv_order,
+            Idx<DerivDims...> const& deriv_order,
             Coord<CDim1, CDim2> const& coord_eval,
             MultipatchSplineCoeff const& patches_splines) const
     {
-        using authorised_idx_deriv
-                = ddc::detail::TypeSeq<Idx<DerivDim1>, Idx<DerivDim2>, Idx<DerivDim1, DerivDim2>>;
         static_assert(
-                ddc::in_tags_v<IdxDeriv, authorised_idx_deriv>,
+                (ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<DerivDim1, DerivDim2>> && ...),
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
                 "(same dimensions for all the patches).");
         int const patch_idx = get_patch_idx(coord_eval);
@@ -329,7 +327,7 @@ public:
      * 
      * @warning The derivatives cannot be computed outside of the domain. 
      *
-     * @tparam IdxDeriv Index type of the derivative order, it can be on the first dimension, the second
+     * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
      * or both.
      * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
      * @param[out] patches_deriv A MultipatchType of DField to store the derivatives of the splines 
@@ -337,17 +335,15 @@ public:
      * @param[in] patches_coords A MultipatchType of Field of Coordinate storing the coordinates of the meshes.
      * @param[in] patches_splines A MultipatchType of DField storing the 2D spline coefficients.
      */
-    template <class IdxDeriv>
+    template <class... DerivDims>
     void deriv(
-            IdxDeriv const& deriv_order,
+            Idx<DerivDims...> const& deriv_order,
             MultipatchValues const& patches_deriv,
             MultipatchCoordField const& patches_coords,
             MultipatchSplineCoeff const& patches_splines) const
     {
-        using authorised_idx_deriv
-                = ddc::detail::TypeSeq<Idx<DerivDim1>, Idx<DerivDim2>, Idx<DerivDim1, DerivDim2>>;
         static_assert(
-                ddc::in_tags_v<IdxDeriv, authorised_idx_deriv>,
+                (ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<DerivDim1, DerivDim2>> && ...),
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
                 "(same dimensions for all the patches).");
         (apply_evaluator<Patches>(
