@@ -287,7 +287,7 @@ public:
  * @brief An owning interpolation object that bundles a 2D spline builder and evaluator.
  *
  * SplineInterpolator2D constructs and owns a matching ddc::SplineBuilder2D and
- * ddc::SplineEvaluator2D for two given dimensions. It is the recommended way to
+ * ddc::SplineEvaluatorND for two given dimensions. It is the recommended way to
  * create a 2D spline interpolation for use with advection operators and similar
  * algorithms.
  *
@@ -410,18 +410,17 @@ public:
             MaxBound2,
             Solver>;
 
-    /// @brief The ddc::SplineEvaluator2D type built from the template parameters.
-    using EvaluatorType = ddc::SplineEvaluator2D<
+    /// @brief The ddc::SplineEvaluatorND type built from the template parameters.
+    using EvaluatorType = ddc::SplineEvaluatorND<
             ExecSpace,
             typename ExecSpace::memory_space,
-            Basis1,
-            Basis2,
-            InterpGrid1,
-            InterpGrid2,
-            MinExtrapolationRule1,
-            MaxExtrapolationRule1,
-            MinExtrapolationRule2,
-            MaxExtrapolationRule2>;
+            ddc::detail::TypeSeq<Basis1, Basis2>,
+            ddc::detail::TypeSeq<InterpGrid1, InterpGrid2>,
+            ddc::detail::TypeSeq<
+                    MinExtrapolationRule1,
+                    MaxExtrapolationRule1,
+                    MinExtrapolationRule2,
+                    MaxExtrapolationRule2>>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -550,7 +549,7 @@ public:
  * @brief An owning interpolation object that bundles a 3D spline builder and evaluator.
  *
  * SplineInterpolator3D constructs and owns a matching ddc::SplineBuilder3D and
- * ddc::SplineEvaluator3D for three given dimensions. It is the recommended way to
+ * ddc::SplineEvaluatorND for three given dimensions. It is the recommended way to
  * create a 3D spline interpolation for use with advection operators and similar
  * algorithms.
  *
@@ -713,22 +712,19 @@ public:
             MaxBound3,
             Solver>;
 
-    /// @brief The ddc::SplineEvaluator2D type built from the template parameters.
-    using EvaluatorType = ddc::SplineEvaluator3D<
+    /// @brief The ddc::SplineEvaluatorND type built from the template parameters.
+    using EvaluatorType = ddc::SplineEvaluatorND<
             ExecSpace,
             typename ExecSpace::memory_space,
-            Basis1,
-            Basis2,
-            Basis3,
-            InterpGrid1,
-            InterpGrid2,
-            InterpGrid3,
-            MinExtrapolationRule1,
-            MaxExtrapolationRule1,
-            MinExtrapolationRule2,
-            MaxExtrapolationRule2,
-            MinExtrapolationRule3,
-            MaxExtrapolationRule3>;
+            ddc::detail::TypeSeq<Basis1, Basis2, Basis3>,
+            ddc::detail::TypeSeq<InterpGrid1, InterpGrid2, InterpGrid3>,
+            ddc::detail::TypeSeq<
+                    MinExtrapolationRule1,
+                    MaxExtrapolationRule1,
+                    MinExtrapolationRule2,
+                    MaxExtrapolationRule2,
+                    MinExtrapolationRule3,
+                    MaxExtrapolationRule3>>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
