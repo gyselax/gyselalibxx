@@ -207,8 +207,8 @@ KOKKOS_FUNCTION double call_correct_operator(
         }
     }
     Kokkos::abort( // cppcheck-suppress missingReturn
-            "deriv_order "+std::to_string(deriv_order)+" is not on the correct dimension.");
-    // return evaluatcompor(eval_coord, spline);
+            "deriv_order " + std::to_string(deriv_order) + " is not on the correct dimension.");
+    // return evaluator(eval_coord, spline);
 }
 
 template <template <typename P> class SplineTypeOnPatch, class IdxDeriv, class ExecSpace>
