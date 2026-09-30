@@ -176,11 +176,6 @@ private:
     // Dimension for the derivatives along the second dimension.
     using DerivDim2 = ddc::Deriv<CDim2>;
 
-    // Dimension to indicate that we want to evaluate the function, not its derivative.
-    struct NotDerivDim
-    {
-    };
-
 private:
     // Fields
     template <class Patch>
@@ -258,11 +253,7 @@ public:
             MultipatchSplineCoeff const& patches_splines) const
     {
         int const patch_idx = get_patch_idx(coord_eval);
-        return recursive_dispatch_patch_function(
-                Idx<NotDerivDim>(),
-                coord_eval,
-                patches_splines,
-                patch_idx);
+        return recursive_dispatch_patch_function(Idx<>(), coord_eval, patches_splines, patch_idx);
     }
 
     /**
@@ -281,7 +272,7 @@ public:
             MultipatchSplineCoeff const& patches_splines) const
     {
         (apply_evaluator<Patches>(
-                 Idx<NotDerivDim>(),
+                 Idx<>(),
                  patches_values.template get<Patches>(),
                  patches_coords.template get<Patches>(),
                  patches_splines),
@@ -424,7 +415,7 @@ public:
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {
                     Coord<CDim1, CDim2> const coord = patch_coords(idx);
                     int const patch_idx = get_patch_idx(coord);
-                    if (patch_idx < 0 && !(std::is_same_v<IdxDeriv, Idx<NotDerivDim>>)) {
+                    if (patch_idx < 0 && !(std::is_same_v<IdxDeriv, Idx<>>)) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
                                       "No extrapolation rule for derivatives. \n");
                     }
@@ -498,7 +489,7 @@ private:
                               "the coordinate is physically located.");
             }
             // Coord not on patch. Stop recursing.
-            if constexpr (std::is_same_v<IdxDeriv, Idx<NotDerivDim>>) {
+            if constexpr (std::is_same_v<IdxDeriv, Idx<>>) {
                 /* The operator currently works only for the case where the continuous 
                    dimensions of all the patches are the same. So the equivalent coordinates
                    are the same on any patches. 
