@@ -540,7 +540,7 @@
     <member refid="classCombinedMapping_1af2a39b1a3c17e96b9ce968db9b9bccf1" kind="function"><name>non_singular_inverse_jacobian_matrix</name></member>
   </compound>
   <compound refid="structExtrapolationRule_1_1Constant" kind="struct"><name>ExtrapolationRule::Constant</name>
-    <member refid="structExtrapolationRule_1_1Constant_1aefd86241cf462e755109aa5fe315ccee" kind="typedef"><name>type</name></member>
+    <member refid="structExtrapolationRule_1_1Constant_1a101806315769a6363937197fa084d51b" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="structConstantExtrapolationRuleOnion" kind="struct"><name>ConstantExtrapolationRuleOnion</name>
     <member refid="structConstantExtrapolationRuleOnion_1a0632822e7212fdbe203d64498c651d8f" kind="typedef"><name>PatchOrdering</name></member>
@@ -551,8 +551,8 @@
     <member refid="structConstantExtrapolationRuleOnion_1aaca5835469ed1e87ae3be6070afac2e8" kind="typedef"><name>R_max</name></member>
     <member refid="structConstantExtrapolationRuleOnion_1a6ff41d9154ab85f2ef32ee5f633b7fbb" kind="typedef"><name>Theta_max</name></member>
     <member refid="structConstantExtrapolationRuleOnion_1a1b04e79eca395d01360d12c669c31cc5" kind="variable"><name>n_patches</name></member>
-    <member refid="structConstantExtrapolationRuleOnion_1a1521903d899c1e8312926cf1a7fbd28d" kind="variable"><name>bc_r_min</name></member>
-    <member refid="structConstantExtrapolationRuleOnion_1a08cebeb3f458a011b4f02d4d4b654ad0" kind="variable"><name>bc_r_max</name></member>
+    <member refid="structConstantExtrapolationRuleOnion_1a7646e8d4ea6db0f0273dd909521781e3" kind="variable"><name>bc_r_min</name></member>
+    <member refid="structConstantExtrapolationRuleOnion_1ad0e0220903f478231d959766dea1821e" kind="variable"><name>bc_r_max</name></member>
     <member refid="structConstantExtrapolationRuleOnion_1af9e46e05ba3bc87e5df2f8d1f7a6393d" kind="function"><name>ConstantExtrapolationRuleOnion</name></member>
     <member refid="structConstantExtrapolationRuleOnion_1a2fc1ed58f951dd2d5ae6878853524664" kind="function"><name>operator()</name></member>
   </compound>

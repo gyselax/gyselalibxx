@@ -636,30 +636,12 @@ struct NullValue
 
 using Null_Null = ddc::detail::TypeSeq&lt;NullValue, NullValue&gt;;
 
-namespace detail {
-template &lt;class IdxRangeNDims, class CDim&gt;
-struct DDCConstantExtrapolationRuleBuilder;
-
-template &lt;class CDim, class... NDimGrids&gt;
-struct DDCConstantExtrapolationRuleBuilder&lt;IdxRange&lt;NDimGrids...&gt;, CDim&gt;
-{
-    using type = ddc::
-            ConstantExtrapolationRule&lt;CDim, typename NDimGrids::continuous_dimension_type...&gt;;
-};
-} // namespace detail
-
 struct Constant
 {
     template &lt;class DataType, class Basis, class IdxRangeCoeff&gt;
     using type = std::conditional_t&lt;
             is_spline_basis_v&lt;Basis&gt;,
-            typename detail::DDCConstantExtrapolationRuleBuilder&lt;
-                    ddc::remove_dims_of_t&lt;
-                            IdxRangeCoeff,
-                            find_grid_t&lt;
-                                    typename Basis::continuous_dimension_type,
-                                    ddc::to_type_seq_t&lt;IdxRangeCoeff&gt;&gt;&gt;,
-                    typename Basis::continuous_dimension_type&gt;::type,
+            ddc::ConstantExtrapolationRule&lt;typename Basis::continuous_dimension_type&gt;,
             ConstantIdentityInterpolationExtrapolationRule&lt;
                     find_grid_t&lt;
                             typename Basis::continuous_dimension_type,

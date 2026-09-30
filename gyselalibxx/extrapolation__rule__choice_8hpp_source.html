@@ -596,18 +596,9 @@ struct ExtrapolationRuleResolver&lt;
 template &lt;class Rule&gt;
 static constexpr bool is_ddc_constant_extrapolation_rule_v = false;
 
-template &lt;class... CDim&gt;
+template &lt;class CDim&gt;
 static constexpr bool
-        is_ddc_constant_extrapolation_rule_v&lt;ddc::ConstantExtrapolationRule&lt;CDim...&gt;&gt; = true;
-
-template &lt;class ExtrapRule&gt;
-struct ConstantExtrapRuleRank;
-
-template &lt;class... CDim&gt;
-struct ConstantExtrapRuleRank&lt;ddc::ConstantExtrapolationRule&lt;CDim...&gt;&gt;
-{
-    static constexpr std::size_t rank = sizeof...(CDim);
-};
+        is_ddc_constant_extrapolation_rule_v&lt;ddc::ConstantExtrapolationRule&lt;CDim&gt;&gt; = true;
 
 } // namespace details
 
@@ -641,29 +632,10 @@ Rule get_extrapolation(Extremity extremity)
 
     using Basis = find_grid_t&lt;CDim, ddc::to_type_seq_t&lt;IdxRangeBasis&gt;&gt;;
     if constexpr (details::is_ddc_constant_extrapolation_rule_v&lt;Rule&gt;) {
-        static constexpr std::size_t rank = details::ConstantExtrapRuleRank&lt;Rule&gt;::rank;
-        if constexpr (rank == 1) {
-            if (extremity == Extremity::FRONT) {
-                return Rule(ddc::discrete_space&lt;Basis&gt;().rmin());
-            } else {
-                return Rule(ddc::discrete_space&lt;Basis&gt;().rmax());
-            }
+        if (extremity == Extremity::FRONT) {
+            return Rule(ddc::discrete_space&lt;Basis&gt;().rmin());
         } else {
-            static_assert(rank == 2);
-            using NIBasis = ddc::type_seq_element_t&lt;
-                    0,
-                    ddc::to_type_seq_t&lt;ddc::remove_dims_of_t&lt;IdxRangeBasis, Basis&gt;&gt;&gt;;
-            if (extremity == Extremity::FRONT) {
-                return Rule(
-                        ddc::discrete_space&lt;Basis&gt;().rmin(),
-                        ddc::discrete_space&lt;NIBasis&gt;().rmin(),
-                        ddc::discrete_space&lt;NIBasis&gt;().rmax());
-            } else {
-                return Rule(
-                        ddc::discrete_space&lt;Basis&gt;().rmax(),
-                        ddc::discrete_space&lt;NIBasis&gt;().rmin(),
-                        ddc::discrete_space&lt;NIBasis&gt;().rmax());
-            }
+            return Rule(ddc::discrete_space&lt;Basis&gt;().rmax());
         }
     }
     using CoeffGrid = find_grid_t&lt;CDim, ddc::to_type_seq_t&lt;IdxRangeCoeff&gt;&gt;;

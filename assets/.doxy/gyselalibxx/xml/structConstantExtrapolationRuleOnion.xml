@@ -126,9 +126,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="structConstantExtrapolationRuleOnion_1a1521903d899c1e8312926cf1a7fbd28d" prot="private" static="no" mutable="no">
-        <type>ddc::ConstantExtrapolationRule&lt; R_min, Theta_min &gt; const</type>
-        <definition>ddc::ConstantExtrapolationRule&lt;R_min, Theta_min&gt; const ConstantExtrapolationRuleOnion&lt; PatchLocator &gt;::bc_r_min</definition>
+      <memberdef kind="variable" id="structConstantExtrapolationRuleOnion_1a7646e8d4ea6db0f0273dd909521781e3" prot="private" static="no" mutable="no">
+        <type>ddc::ConstantExtrapolationRule&lt; R_min &gt; const</type>
+        <definition>ddc::ConstantExtrapolationRule&lt;R_min&gt; const ConstantExtrapolationRuleOnion&lt; PatchLocator &gt;::bc_r_min</definition>
         <argsstring></argsstring>
         <name>bc_r_min</name>
         <qualifiedname>ConstantExtrapolationRuleOnion::bc_r_min</qualifiedname>
@@ -140,9 +140,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" line="40" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structConstantExtrapolationRuleOnion_1a08cebeb3f458a011b4f02d4d4b654ad0" prot="private" static="no" mutable="no">
-        <type>ddc::ConstantExtrapolationRule&lt; R_max, Theta_max &gt; const</type>
-        <definition>ddc::ConstantExtrapolationRule&lt;R_max, Theta_max&gt; const ConstantExtrapolationRuleOnion&lt; PatchLocator &gt;::bc_r_max</definition>
+      <memberdef kind="variable" id="structConstantExtrapolationRuleOnion_1ad0e0220903f478231d959766dea1821e" prot="private" static="no" mutable="no">
+        <type>ddc::ConstantExtrapolationRule&lt; R_max &gt; const</type>
+        <definition>ddc::ConstantExtrapolationRule&lt;R_max&gt; const ConstantExtrapolationRuleOnion&lt; PatchLocator &gt;::bc_r_max</definition>
         <argsstring></argsstring>
         <name>bc_r_max</name>
         <qualifiedname>ConstantExtrapolationRuleOnion::bc_r_max</qualifiedname>
@@ -330,8 +330,8 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" bodystart="21" bodyend="88"/>
     <listofallmembers>
-      <member refid="structConstantExtrapolationRuleOnion_1a08cebeb3f458a011b4f02d4d4b654ad0" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>bc_r_max</name></member>
-      <member refid="structConstantExtrapolationRuleOnion_1a1521903d899c1e8312926cf1a7fbd28d" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>bc_r_min</name></member>
+      <member refid="structConstantExtrapolationRuleOnion_1ad0e0220903f478231d959766dea1821e" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>bc_r_max</name></member>
+      <member refid="structConstantExtrapolationRuleOnion_1a7646e8d4ea6db0f0273dd909521781e3" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>bc_r_min</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1af9e46e05ba3bc87e5df2f8d1f7a6393d" prot="public" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>ConstantExtrapolationRuleOnion</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1a703c45a722a454316bfd231e8ffb9652" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>MaxRadiusPatch</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1a06c0684b7f8c3bbdc89a01fe9cb50987" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>MinRadiusPatch</name></member>

@@ -603,8 +603,8 @@ private:
     using R_max = typename MaxRadiusPatch::Dim1;
     using Theta_max = typename MaxRadiusPatch::Dim2;
 
-    ddc::ConstantExtrapolationRule&lt;R_min, Theta_min&gt; const bc_r_min;
-    ddc::ConstantExtrapolationRule&lt;R_max, Theta_max&gt; const bc_r_max;
+    ddc::ConstantExtrapolationRule&lt;R_min&gt; const bc_r_min;
+    ddc::ConstantExtrapolationRule&lt;R_max&gt; const bc_r_max;
 
 public:
     explicit ConstantExtrapolationRuleOnion(Coord&lt;R_min&gt; const&amp; r_min, Coord&lt;R_max&gt; const&amp; r_max)
