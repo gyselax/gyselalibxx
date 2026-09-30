@@ -165,6 +165,19 @@ void test_operator_assignment(
 }
 
 // Test deriv() on device and on host ............................................................
+template <class IdxDeriv, class Evaluator, class SplineField>
+double call_correct_operator(
+        IdxDeriv deriv_order,
+        Evaluator const& evaluator,
+        Coord<R, Theta> const& eval_coord,
+        SplineField const& spline)
+{
+    Idx<ddc::Deriv<R>> dr_order(deriv_order);
+    Idx<ddc::Deriv<Theta>> dtheta_order(deriv_order);
+
+    // return evaluator(eval_coord, spline);
+    return evaluator.deriv(deriv_order, eval_coords(i), spline_patch_1);
+}
 template <template <typename P> class SplineTypeOnPatch, class IdxDeriv, class ExecSpace>
 void test_deriv_at_order(
         IdxDeriv deriv_order,
@@ -183,11 +196,17 @@ void test_deriv_at_order(
                 double const eval_function = evaluators.deriv(deriv_order, eval_coords(i), splines);
                 double expected_function;
                 if (Coord<R>(eval_coords(i)) < ddc::discrete_space<BSplinesR<1>>().rmax()) {
-                    expected_function
-                            = single_evaluator_1.deriv(deriv_order, eval_coords(i), spline_patch_1);
+                    expected_function = call_correct_operator(
+                            deriv_order,
+                            single_evaluator_1,
+                            eval_coords(i),
+                            spline_patch_1);
                 } else {
-                    expected_function
-                            = single_evaluator_2.deriv(deriv_order, eval_coords(i), spline_patch_2);
+                    expected_function = call_correct_operator(
+                            deriv_order,
+                            single_evaluator_2,
+                            eval_coords(i),
+                            spline_patch_2);
                 }
                 err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
