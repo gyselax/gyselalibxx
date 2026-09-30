@@ -166,7 +166,7 @@ void test_operator_assignment(
 
 // Test deriv() on device and on host ............................................................
 template <class IdxDeriv, class Evaluator, class SplineField>
-double call_correct_operator(
+KOKKOS_FUNCTION double call_correct_operator(
         IdxDeriv deriv_order,
         Evaluator const& evaluator,
         Coord<R, Theta> const& eval_coord,
@@ -199,7 +199,7 @@ double call_correct_operator(
             return evaluator.deriv(deriv_order, eval_coord, spline);
         }
     } else {
-        Kokkos::abort("deriv_order is not on the correct dimension.");
+        Kokkos::abort("deriv_order is not on the correct dimension."); // -diag-suppress <warning-number>
     }
 }
 
