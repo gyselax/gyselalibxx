@@ -55,10 +55,10 @@ protected:
     Patch2::IdxRange2 const idx_range_theta2;
 
     // Single extrapolation rules
-    ddc::ConstantExtrapolationRule<R, Theta> const bc_r_min_1;
-    ddc::ConstantExtrapolationRule<R, Theta> const bc_r_max_1;
-    ddc::ConstantExtrapolationRule<R, Theta> const bc_r_min_2;
-    ddc::ConstantExtrapolationRule<R, Theta> const bc_r_max_2;
+    ddc::ConstantExtrapolationRule<R> const bc_r_min_1;
+    ddc::ConstantExtrapolationRule<R> const bc_r_max_1;
+    ddc::ConstantExtrapolationRule<R> const bc_r_min_2;
+    ddc::ConstantExtrapolationRule<R> const bc_r_max_2;
     ddc::PeriodicExtrapolationRule<Theta> const bc_theta;
 
     // Evaluators on single patch
