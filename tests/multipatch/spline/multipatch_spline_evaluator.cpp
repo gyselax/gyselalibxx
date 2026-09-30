@@ -173,7 +173,7 @@ KOKKOS_FUNCTION double call_correct_operator(
         SplineField const& spline)
 {
     static_assert(
-            (ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<DerivDim1, DerivDim2>> && ...),
+            (ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<ddc::Deriv<R>, ddc::Deriv<Theta>>> && ...),
             "Please provide a deriv_order indexed on the derivative dimensions of the patches "
             "(same dimensions for all the patches).");
     using IdxDeriv = Idx<DerivDims...>;
