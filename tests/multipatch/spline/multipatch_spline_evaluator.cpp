@@ -179,6 +179,10 @@ KOKKOS_FUNCTION double call_correct_operator(
             "Please provide a deriv_order indexed on the derivative dimensions of the patches "
             "(same dimensions for all the patches).");
     using IdxDeriv = Idx<DerivDims...>;
+    static_assert(
+            (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>>)
+            || (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>>>)
+            || (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>));
     const Idx<ddc::Deriv<R>> dr_order0(0);
     const Idx<ddc::Deriv<Theta>> dtheta_order0(0);
     if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>>) {
