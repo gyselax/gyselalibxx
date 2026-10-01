@@ -177,7 +177,7 @@ class MultipatchSplineBuilder2D
                     typename ValuesOnPatch<Patch>::discrete_domain_type>,
             MemorySpace>;
 
-    /// A type alias to get the DerivField type on a speficic patch.
+    /// A type alias to get the DerivField type on a specific patch.
     template <class Patch>
     using DerivFieldOnPatch = DerivField<
             double,
@@ -316,6 +316,14 @@ public:
          ...);
     };
 
+    /**
+     * @brief Get a MultipatchType collecting the index ranges typed on the B-splines dimensions
+     * of the patches. 
+     * These index ranges are adpated to allocate splines on the multi-patch domain. 
+     * @param[in] idx_ranges MultipatchType collecting the index ranges on the grids of the patches. 
+     * @return a MultipatchType collecting the index ranges typed on the B-splines dimensions
+     * of the patches. 
+     */
     MultipatchSplineIdxRange const spline_idx_ranges(MultipatchIdxRange idx_ranges) const
     {
         return MultipatchSplineIdxRange(
@@ -325,10 +333,10 @@ public:
 
 private:
     template <class PatchP>
-    void apply_builder(
+    static void apply_builder(
             BuilderOnPatch<PatchP> const& builder,
             SplineOnPatch<PatchP> spline,
-            DerivFieldOnPatch<PatchP> function_and_deriv) const
+            DerivFieldOnPatch<PatchP> function_and_deriv) 
     {
         SplineBuilderDerivField2D<
                 ExecSpace,
