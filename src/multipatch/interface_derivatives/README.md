@@ -609,11 +609,11 @@ First, for each interface in the geometry, we instantiate a `InterfaceDerivCoeff
 We store a constant reference to all the derivative calculators in a `InterfaceDerivCoeffsCollection`.
 
 ```cpp
-InterfaceDerivCoeffs<Interface_1> derivative_calculator_1(...);
-InterfaceDerivCoeffs<Interface_2> derivative_calculator_2(...);
+InterfaceDerivCoeffs<Interface_1> deriv_coeffs_1(...);
+InterfaceDerivCoeffs<Interface_2> deriv_coeffs_2(...);
 ...
 
-InterfaceDerivCoeffsCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
+InterfaceDerivCoeffsCollection deriv_coeffs_collect (deriv_coeffs_1, deriv_coeffs_2, ...);
 ```
 
 We can then instantiate `InterfacesDerivativeCalculator` with the tuple of derivative calculators.
@@ -624,7 +624,7 @@ InterfacesDerivativeCalculator<
         Grid1D,                                     // the given direction.
         ddc::detail::TypeSeq<Patch1, Patch2, ...>   // list of patches containing all the needed ones
         InterfaceDerivCoeffsCollection<Interface_1, Interface_2, ...>>
-        matrix(idx_ranges, derivative_calculators);
+        matrix(idx_ranges, deriv_coeffs_collect);
 ```
 
 with `idx_ranges` a `MultipatchType<IdxRangeonPatch, Patch1, Patch2, ...>` object.
@@ -664,12 +664,12 @@ $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7
 InterfacesDerivativeCalculator<Connectivity, GridX1, 
         ddc::detail::TypeSeq<Patch1, Patch2, Patch3>, 
         InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
-        matrix_123(idx_ranges_123, derivative_calculators_123);
+        matrix_123(idx_ranges_123, deriv_coeffs_collect_123);
 
 InterfacesDerivativeCalculator<Connectivity, GridX4, 
         ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
         InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
-        matrix_456(idx_ranges_456, derivative_calculators_456);
+        matrix_456(idx_ranges_456, deriv_coeffs_collect_456);
 // ...
 ```
 
@@ -680,12 +680,12 @@ $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3
 InterfacesDerivativeCalculator<Connectivity, GridY1, 
         ddc::detail::TypeSeq<Patch1, Patch4, Patch7>,
         InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
-        matrix_147(idx_ranges_147, derivative_calculators_147);
+        matrix_147(idx_ranges_147, deriv_coeffs_collect_147);
 
 InterfacesDerivativeCalculator<Connectivity, GridY2, 
         ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
         InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
-        matrix_258(idx_ranges_258, derivative_calculators_258);
+        matrix_258(idx_ranges_258, deriv_coeffs_collect_258);
 // ...
 ```
 
