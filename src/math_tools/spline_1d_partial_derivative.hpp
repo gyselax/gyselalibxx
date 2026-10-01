@@ -22,7 +22,7 @@ class Spline1DPartialDerivative
 {
     static_assert(std::is_same_v<
                   typename Spline1DBuilder::interpolation_discrete_dimension_type,
-                  typename Spline1DEvaluator::evaluation_discrete_dimension_type>);
+                  typename Spline1DEvaluator::evaluation_discrete_dimension_type<0>>);
     static_assert(ddc::in_tags_v<
                   typename Spline1DBuilder::interpolation_discrete_dimension_type,
                   ddc::to_type_seq_t<IdxRangeBatched>>);
