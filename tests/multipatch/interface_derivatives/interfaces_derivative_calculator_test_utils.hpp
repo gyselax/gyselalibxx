@@ -550,10 +550,10 @@ void check_spline_representation_agreement(
     Coord<DimX> const x_max(ddc::discrete_space<typename Patch::BSplines1>().rmax());
     Coord<DimY> const y_min(ddc::discrete_space<typename Patch::BSplines2>().rmin());
     Coord<DimY> const y_max(ddc::discrete_space<typename Patch::BSplines2>().rmax());
-    ddc::ConstantExtrapolationRule<DimX, DimY> bc_xmin(x_min, y_min, y_max);
-    ddc::ConstantExtrapolationRule<DimX, DimY> bc_xmax(x_max, y_min, y_max);
-    ddc::ConstantExtrapolationRule<DimY, DimX> bc_ymin(y_min, x_min, x_max);
-    ddc::ConstantExtrapolationRule<DimY, DimX> bc_ymax(y_max, x_min, x_max);
+    ddc::ConstantExtrapolationRule<DimX, DimY> bc_xmin(x_min);
+    ddc::ConstantExtrapolationRule<DimX, DimY> bc_xmax(x_max);
+    ddc::ConstantExtrapolationRule<DimY, DimX> bc_ymin(y_min);
+    ddc::ConstantExtrapolationRule<DimY, DimX> bc_ymax(y_max);
     ddc::SplineEvaluator2D<
             HostExecSpace,
             typename HostExecSpace::memory_space,

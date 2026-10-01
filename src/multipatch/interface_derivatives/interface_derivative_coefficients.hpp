@@ -11,13 +11,6 @@
 #include "types.hpp"
 
 
-template <class T>
-inline constexpr bool enable_interface_derivative_coefficients = false;
-
-template <class T>
-inline constexpr bool is_interface_derivative_coefficients_v
-        = enable_interface_derivative_coefficients<std::remove_const_t<std::remove_reference_t<T>>>;
-
 /**
  * @brief Compute the coefficients a, b and c of the interface derivative reconstruction method. 
  * 

@@ -735,10 +735,10 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             = get_const_field(function_g_coef);
 
     // ------ global spline evaluator
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(this->yg_min, this->xg_min, this->xg_max);
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(this->yg_max, this->xg_min, this->xg_max);
-    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmin_g(this->xg_min, this->yg_min, this->yg_max);
-    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(this->xg_max, this->yg_min, this->yg_max);
+    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(this->yg_min);
+    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(this->yg_max);
+    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmin_g(this->xg_min);
+    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(this->xg_max);
     SplineRThetagEvaluator evaluator_g(bc_xmin_g, bc_xmax_g, bc_ymin_g, bc_ymax_g);
 
     // ------ initialise the boundary first derivatives from the global spline
