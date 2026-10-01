@@ -190,11 +190,11 @@ class MultipatchSplineBuilder2D
 
     /// A type alias to get the index range on the grids on a specific patch.
     template <class Patch>
-    using IdxRangeOnPatch = IdxRange<typename Patch::Grid1, typename Patch::Grid2>;
+    using IdxRangeOnPatch = typename Patch::IdxRang12;
 
     /// A type alias to get the index range on the B-splines on a specific patch.
     template <class Patch>
-    using IdxRangeBSOnPatch = IdxRange<typename Patch::BSplines1, typename Patch::BSplines2>;
+    using IdxRangeBSOnPatch = typename Patch::IdxRangBS12;
 
     /// The type of the batched spline coefficients.
     using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
@@ -212,7 +212,7 @@ class MultipatchSplineBuilder2D
 
     using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patches...>;
 
-    using MultipatchSplineIdxRange = MultipatchType<IdxRangeBSOnPatch, Patches...>;
+    using MultipatchIdxRangeBS = MultipatchType<IdxRangeBSOnPatch, Patches...>;
 
     /// The type of the internal storage of the SplineBuilders.
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
@@ -319,14 +319,14 @@ public:
     /**
      * @brief Get a MultipatchType collecting the index ranges typed on the B-splines dimensions
      * of the patches. 
-     * These index ranges are adpated to allocate splines on the multi-patch domain. 
+     * These index ranges are adapted to allocate splines on the multi-patch domain. 
      * @param[in] idx_ranges MultipatchType collecting the index ranges on the grids of the patches. 
      * @return a MultipatchType collecting the index ranges typed on the B-splines dimensions
      * of the patches. 
      */
-    MultipatchSplineIdxRange const spline_idx_ranges(MultipatchIdxRange idx_ranges) const
+    MultipatchIdxRangeBS const spline_idx_ranges(MultipatchIdxRange idx_ranges) const
     {
-        return MultipatchSplineIdxRange(
+        return MultipatchIdxRangeBS(
                 std::get<BuilderOnPatch<Patches> const&>(m_builders)
                         .batched_spline_domain(idx_ranges.template get<Patches>())...);
     };
