@@ -194,7 +194,7 @@ class MultipatchSplineBuilder2D
 
     /// A type alias to get the index range on the B-splines on a specific patch.
     template <class Patch>
-    using IdxRangeBSOnPatch = typename Patch::IdxRangBS12;
+    using IdxRangeBSOnPatch = typename Patch::IdxRangeBS12;
 
     /// The type of the batched spline coefficients.
     using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
