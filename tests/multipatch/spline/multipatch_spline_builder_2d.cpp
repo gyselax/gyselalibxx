@@ -161,7 +161,7 @@ public:
                 = derivs_ymax2[Idx<ddc::Deriv<Y<2>>>(1)];
         initialise_2D_derivatives_2(
                 derivs_xmin2_span,
-                derivs_xmin2_span,
+                derivs_xmax2_span,
                 derivs_ymin2_span,
                 derivs_ymax2_span);
     }
