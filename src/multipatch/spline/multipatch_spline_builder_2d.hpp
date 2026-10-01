@@ -190,7 +190,7 @@ class MultipatchSplineBuilder2D
 
     /// A type alias to get the index range on the grids on a specific patch.
     template <class Patch>
-    using IdxRangeOnPatch = typename Patch::IdxRang12;
+    using IdxRangeOnPatch = typename Patch::IdxRange12;
 
     /// A type alias to get the index range on the B-splines on a specific patch.
     template <class Patch>
