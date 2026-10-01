@@ -200,7 +200,7 @@ KOKKOS_FUNCTION double call_correct_operator(
             return evaluator.deriv(deriv_order, eval_coord, spline);
         }
     } else { // if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>) {
-        static_assert(std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>); 
+        static_assert(std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>);
         if (deriv_order == dtheta_order0) {
             return evaluator(eval_coord, spline);
         } else {
