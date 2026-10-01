@@ -50,7 +50,7 @@ find_package(Kokkos 4.4.1...<6 REQUIRED)
 
 find_package(KokkosKernels 4.5.1...<6 REQUIRED)
 
-find_package(DDC 0.15.0 REQUIRED COMPONENTS fft pdi splines)
+find_package(DDC 0.16.0 REQUIRED COMPONENTS fft pdi splines)
 
 find_package(koliop 0.2.0 REQUIRED)
 

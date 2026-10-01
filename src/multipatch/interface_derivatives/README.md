@@ -82,7 +82,7 @@ To instantiate it, we need the index ranges of the interpolation points. If we w
 we need to provide the index ranges with all the points,
 
 ```cpp
-InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs (idx_range_patch_1, idx_range_patch_2);
 ```
 
 If we want to use an approximation, we provide the index ranges with the interpolation points on the selected cells,
@@ -90,13 +90,13 @@ If we want to use an approximation, we provide the index ranges with the interpo
 ```cpp
 Patch1::IdxRange1D idx_range_patch_1_reduced (idx_range_patch_1.take_first(N_L_reduc +1));
 Patch2::IdxRange1D idx_range_patch_2_reduced (idx_range_patch_2.take_last(N_R_reduc +1));
-InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
 ```
 
 or we can directly call, for $`N_{reduc} = N^L = N^R`$,
 
 ```cpp
-InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs (idx_range_patch_1, idx_range_patch_2, N_reduc);
 ```
 
 > **Remark:** For interpolation with interpolation points as closure condition, a special treatment has to be carried out on the boundary cells
@@ -106,13 +106,13 @@ InterfaceDerivCoeffs<Interface_12> derivatives_calculator (idx_range_patch_1, id
 ```cpp
 // If we want to apply the treatment on Patch 1 and Patch 2
 InterfaceDerivCoeffs<Interface_12> 
-    derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE);
+    deriv_coeffs (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE);
 // or if we want to apply the treatment only on Patch 1
 InterfaceDerivCoeffs<Interface_12> 
-    derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE);
+    deriv_coeffs (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE);
 // or if we want to apply the treatment only on Patch 2
 InterfaceDerivCoeffs<Interface_12> 
-    derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE);
+    deriv_coeffs (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE);
 ```
 
 > If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
@@ -120,18 +120,18 @@ InterfaceDerivCoeffs<Interface_12>
 
 The coefficients can be collected with the following functions:
 
-- `derivatives_calculator.get_coeff_deriv_patch_1()` returns the coefficient $`b^i_{N^L,N^R}`$;
-- `derivatives_calculator.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
-- `derivatives_calculator.get_approx_deriv(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
+- `deriv_coeffs.get_coeff_deriv_patch_1()` returns the coefficient $`b^i_{N^L,N^R}`$;
+- `deriv_coeffs.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
+- `deriv_coeffs.get_approx_deriv(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
  (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
 - `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case.  We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.
 
 If we want to apply the exact formula, we need to sum these coefficients,
 
 ```cpp
-double const coeff_deriv_left = derivatives_calculator.get_coeff_deriv_patch_1(); // coeff b
-double const coeff_deriv_right = derivatives_calculator.get_coeff_deriv_patch_2(); // coeff a
-double const sum_values = derivatives_calculator.get_approx_deriv(function_1, function_2); // coeff c
+double const coeff_deriv_left = deriv_coeffs.get_coeff_deriv_patch_1(); // coeff b
+double const coeff_deriv_right = deriv_coeffs.get_coeff_deriv_patch_2(); // coeff a
+double const sum_values = deriv_coeffs.get_approx_deriv(function_1, function_2); // coeff c
 
 double const deriv_interface_right = 1e1; // a given value
 double const deriv_interface_left = 1e1; // a given value
@@ -142,14 +142,14 @@ double const deriv_interface = sum_values + coeff_deriv_left * deriv_interface_l
 If we want to apply an approximation of the formula, we only need $`c^i_{N^L_{reduc},N^R_{reduc}}`$,
 
 ```cpp
-double const deriv_interface = derivatives_calculator.get_approx_deriv(function_1, function_2); // coeff c
+double const deriv_interface = deriv_coeffs.get_approx_deriv(function_1, function_2); // coeff c
 ```
 
 **Remark:** It is also possible to use slices for the functions values,
 
 ```cpp
 double const deriv_interface =
-    derivatives_calculator.get_approx_deriv(
+    deriv_coeffs.get_approx_deriv(
             function_1[idx_range_patch_1_reduced],
             function_2[idx_range_patch_2_reduced]); // coeff c
 ```
@@ -464,7 +464,7 @@ with the weights given by,
         , &k = 1, ..., n_2-1, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^k
         \frac{\frac{a^I_{1,1}}{\Delta x^R}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^L}u_{n_2}(u_{n_1} - u_{n_1-1})}
-        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
+        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = 0, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
         \frac{\frac{b^I_{1,1}}{\Delta x^L} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
