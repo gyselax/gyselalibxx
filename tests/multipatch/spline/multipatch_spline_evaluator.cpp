@@ -179,10 +179,6 @@ KOKKOS_FUNCTION double call_correct_operator(
             "Please provide a deriv_order indexed on the derivative dimensions of the patches "
             "(same dimensions for all the patches).");
     using IdxDeriv = Idx<DerivDims...>;
-    static_assert(
-            (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>>)
-            || (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>>>)
-            || (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>));
     const Idx<ddc::Deriv<R>> dr_order0(0);
     const Idx<ddc::Deriv<Theta>> dtheta_order0(0);
     if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>>) {
@@ -195,7 +191,7 @@ KOKKOS_FUNCTION double call_correct_operator(
         } else if (dtheta_order == dtheta_order0) {
             return evaluator.deriv(dr_order, eval_coord, spline);
         } else {
-            evaluator.deriv(deriv_order, eval_coord, spline);
+            return evaluator.deriv(deriv_order, eval_coord, spline);
         }
     } else if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<R>>>) {
         if (deriv_order == dr_order0) {
@@ -204,6 +200,7 @@ KOKKOS_FUNCTION double call_correct_operator(
             return evaluator.deriv(deriv_order, eval_coord, spline);
         }
     } else { // if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>) {
+        static_assert(std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>); 
         if (deriv_order == dtheta_order0) {
             return evaluator(eval_coord, spline);
         } else {
@@ -212,7 +209,6 @@ KOKKOS_FUNCTION double call_correct_operator(
     }
     Kokkos::abort( // cppcheck-suppress missingReturn
             "In test: deriv_order is not on the correct dimension.");
-    // return evaluator(eval_coord, spline);
 }
 
 template <template <typename P> class SplineTypeOnPatch, class IdxDeriv, class ExecSpace>
