@@ -336,7 +336,7 @@ private:
     static void apply_builder(
             BuilderOnPatch<PatchP> const& builder,
             SplineOnPatch<PatchP> spline,
-            DerivFieldOnPatch<PatchP> function_and_deriv) 
+            DerivFieldOnPatch<PatchP> function_and_deriv)
     {
         SplineBuilderDerivField2D<
                 ExecSpace,
