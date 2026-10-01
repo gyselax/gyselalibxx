@@ -80,17 +80,16 @@ using SplineRThetaBuilderType = ddc::SplineBuilder2D<
         ddc::SplineSolver::LAPACK>;
 
 template <class ExecutionSpace>
-using SplineRThetaEvaluatorNullBoundType = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorNullBoundType = ddc::SplineEvaluatorND<
         ExecutionSpace,
         typename ExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::NullExtrapolationRule, // boundary at r=0
+                ddc::NullExtrapolationRule, // boundary at rmax
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
 using CoordR = Coord<R>;
 using CoordTheta = Coord<Theta>;
