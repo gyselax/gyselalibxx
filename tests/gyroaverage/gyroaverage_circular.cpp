@@ -253,10 +253,8 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
     IdxRangeRTheta const rtheta_idx_range = get_idx_range<GridR, GridTheta>(A_bar);
     SplineRThetaInterpolator const spline_interpolator(rtheta_idx_range);
 
-    using GyroAverageOperatorType = GyroAverageOperator<
-            SplineRThetaInterpolator,
-            IdxRangeRThetaBatch,
-            CartesianToPolar>;
+    using GyroAverageOperatorType
+            = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeRThetaBatch, CartesianToPolar>;
     GyroAverageOperatorType gyroaverage(
             get_const_field(m_rho_L_alloc),
             spline_interpolator,
@@ -292,10 +290,8 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     IdxRangeRTheta const rtheta_idx_range(rthetabatch_idx_range);
     SplineRThetaInterpolator const spline_interpolator(rtheta_idx_range);
 
-    using GyroAverageOperatorType = GyroAverageOperator<
-            SplineRThetaInterpolator,
-            IdxRangeRThetaBatch,
-            CartesianToPolar>;
+    using GyroAverageOperatorType
+            = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeRThetaBatch, CartesianToPolar>;
     GyroAverageOperatorType gyroaverage(
             get_const_field(m_rho_L_alloc),
             spline_interpolator,
