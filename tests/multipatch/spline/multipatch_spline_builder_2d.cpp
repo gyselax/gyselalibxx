@@ -501,7 +501,8 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
 
 
     // Build the spline representations on each patch
-    builder.build_from_fields(function_coef,
+    builder.build_from_fields(
+            function_coef,
             function_values,
             derivs_xmin,
             derivs_xmax,
