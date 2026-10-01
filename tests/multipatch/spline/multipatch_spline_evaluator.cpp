@@ -199,7 +199,7 @@ KOKKOS_FUNCTION double call_correct_operator(
         } else {
             return evaluator.deriv(deriv_order, eval_coord, spline);
         }
-    } else { // if constexpr (std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>) {
+    } else {
         static_assert(std::is_same_v<IdxDeriv, Idx<ddc::Deriv<Theta>>>);
         if (deriv_order == dtheta_order0) {
             return evaluator(eval_coord, spline);
@@ -207,8 +207,7 @@ KOKKOS_FUNCTION double call_correct_operator(
             return evaluator.deriv(deriv_order, eval_coord, spline);
         }
     }
-    Kokkos::abort( // cppcheck-suppress missingReturn
-            "In test: deriv_order is not on the correct dimension.");
+    return evaluator(eval_coord, spline);
 }
 
 template <template <typename P> class SplineTypeOnPatch, class IdxDeriv, class ExecSpace>
@@ -222,7 +221,6 @@ void test_deriv_at_order(
         SplineTypeOnPatch<Patch1> spline_patch_1,
         SplineTypeOnPatch<Patch2> spline_patch_2)
 {
-    std::cout << "deriv_order = " << deriv_order << std::endl;
     double max_error = 0;
     Kokkos::parallel_reduce(
             Kokkos::RangePolicy<ExecSpace>(0, eval_coords.extent(0)),
@@ -258,8 +256,8 @@ void test_deriv(
         SplineTypeOnPatch<Patch1> const& spline_patch_1,
         SplineTypeOnPatch<Patch2> const& spline_patch_2)
 {
-    // Test deriv along R.
-    for (int i_dr(1); i_dr <= 3; i_dr++) {
+    // Test deriv on dimension R.
+    for (int i_dr(0); i_dr <= 3; i_dr++) {
         Idx<ddc::Deriv<R>> deriv_order(i_dr);
         test_deriv_at_order<SplineTypeOnPatch>(
                 deriv_order,
@@ -271,8 +269,8 @@ void test_deriv(
                 spline_patch_1,
                 spline_patch_2);
     }
-    // Test deriv along Theta.
-    for (int i_dtheta(1); i_dtheta <= 3; i_dtheta++) {
+    // Test deriv on dimension Theta.
+    for (int i_dtheta(0); i_dtheta <= 3; i_dtheta++) {
         Idx<ddc::Deriv<Theta>> deriv_order(i_dtheta);
         test_deriv_at_order<SplineTypeOnPatch>(
                 deriv_order,
@@ -284,9 +282,9 @@ void test_deriv(
                 spline_patch_1,
                 spline_patch_2);
     }
-    // Test deriv along (R, Theta).
-    for (int i_dr(1); i_dr <= 3; i_dr++) {
-        for (int i_dtheta(1); i_dtheta <= 3; i_dtheta++) {
+    // Test deriv on dimensions (R, Theta).
+    for (int i_dr(0); i_dr <= 3; i_dr++) {
+        for (int i_dtheta(0); i_dtheta <= 3; i_dtheta++) {
             Idx<ddc::Deriv<R>, ddc::Deriv<Theta>> deriv_order(i_dr, i_dtheta);
             test_deriv_at_order<SplineTypeOnPatch>(
                     deriv_order,
