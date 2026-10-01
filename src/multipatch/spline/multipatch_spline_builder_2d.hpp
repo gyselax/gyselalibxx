@@ -99,6 +99,10 @@ class MultipatchSplineBuilder2D
                     typename Grid2OnPatch<Patches>::continuous_dimension_type>)&&...),
             "The BSpline2OnPatch argument does not define B-splines on the dimension where the "
             "grids defined by Grid2OnPatch are defined.");
+    static_assert(
+            !(is_deriv_field_v<ValuesOnPatch<Patches>> && ...),
+            "ValuesOnPatch represents the field, not the field with derivatives.");
+
     /**
      * A small structure allowing the multiple grids to be unpacked from a field and repacked into
      * a SplineBuilder type.
@@ -195,7 +199,6 @@ class MultipatchSplineBuilder2D
     /// The type of the batched spline coefficients.
     using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
 
-    // For PERIODIC or GREVILLE boundary conditions
     /// The type of the values at the batched interpolation points.
     using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
 
@@ -270,11 +273,10 @@ public:
      * @param[in] cross_derivs_max1_max2
      *      The values of the the cross-derivatives at the upper boundary in the first dimension
      *      and the upper boundary in the second dimension.
-
      */
-    void operator()(
+    void build_from_fields(
             MultipatchSplineCoeffs splines,
-            MultipatchValues const& values,
+            MultipatchValues values,
             std::optional<MultipatchDerivs1> derivs_min1 = std::nullopt,
             std::optional<MultipatchDerivs1> derivs_max1 = std::nullopt,
             std::optional<MultipatchDerivs2> derivs_min2 = std::nullopt,
@@ -314,13 +316,12 @@ public:
          ...);
     };
 
-    MultipatchSplineIdxRange spline_domain(MultipatchIdxRange idx_ranges) const
+    MultipatchSplineIdxRange const spline_idx_ranges(MultipatchIdxRange idx_ranges) const
     {
         return MultipatchSplineIdxRange(
                 std::get<BuilderOnPatch<Patches> const&>(m_builders)
                         .batched_spline_domain(idx_ranges.template get<Patches>())...);
     };
-
 
 private:
     template <class PatchP>
@@ -331,14 +332,15 @@ private:
     {
         SplineBuilderDerivField2D<
                 ExecSpace,
-                BSpline1OnPatch<Patch>,
-                BSpline2OnPatch<Patch>,
-                Grid1OnPatch<Patch>,
-                Grid2OnPatch<Patch>,
-                BuilderOnPatch<PatchP>::builder_type1::s_bc_xmin,
-                BuilderOnPatch<PatchP>::builder_type1::s_bc_xmax,
-                BuilderOnPatch<PatchP>::builder_type2::s_bc_xmin,
-                BuilderOnPatch<PatchP>::builder_type2::s_bc_xmax>
+                BSpline1OnPatch<PatchP>,
+                BSpline2OnPatch<PatchP>,
+                Grid1OnPatch<PatchP>,
+                Grid2OnPatch<PatchP>,
+                BuilderOnPatch<PatchP>::builder_type1::s_sbc_xmin,
+                BuilderOnPatch<PatchP>::builder_type1::s_sbc_xmax,
+                BuilderOnPatch<PatchP>::builder_type2::s_sbc_xmin,
+                BuilderOnPatch<PatchP>::builder_type2::s_sbc_xmax>
                 builder_applier(builder);
         builder_applier(spline, function_and_deriv);
     };
+};
