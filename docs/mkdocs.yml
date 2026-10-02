@@ -8,32 +8,35 @@ use_directory_urls: false   # Keeps file extensions in URLs (e.g., docs/index.ht
 edit_uri: edit/main/
 
 # Navigation Structure
+# Sections are organised by topic so that reference pages remain easy to find after onboarding.
+# Pages which must be read by new users should be placed in their topical section and linked
+# from the "Getting Started" pages rather than being placed in the "Getting Started" section.
 nav:
-  - General:                    # General project information
-      - Home: README.md                         # Main landing page
-      - First Steps:
-        - Getting Started: docs/first_steps/getting_started.md
-        - Installation: toolchains/README.md
-        - DDC in Gyselalib++: docs/first_steps/DDC_in_gyselalibxx.md
-      - Contributing: docs/CONTRIBUTING.md
-      - Tutorials:
-        - docs/first_steps/landau_damping_tutorial.md
-        - docs/first_steps/profiling.md
-  - Standards:
-      - Coding Standard: docs/standards/CODING_STANDARD.md
-      - Maths and Physics: docs/standards/mathematical_and_physical_conventions.md
-      - Coding Covariant and Contravariant Tensors: docs/standards/coding_covariant_and_contravariant_tensors.md
-  - Gyselalib++ Overview:
+  - Home: README.md
+  - Getting Started:            # Onboarding path for new users
+      - Getting Started: docs/first_steps/getting_started.md
+      - Installation: toolchains/README.md
+      - Your First Simulation: docs/first_steps/landau_damping_tutorial.md
+  - Core Concepts:              # Explanations of how the code works, used as a long-term reference
+      - DDC in Gyselalib++: docs/first_steps/DDC_in_gyselalibxx.md
+      - Mathematical and Physical Conventions: docs/standards/mathematical_and_physical_conventions.md
+      - Covariant and Contravariant Tensors: docs/standards/coding_covariant_and_contravariant_tensors.md
+  - Library:                    # Documentation of the code itself
       - Building Blocks: src
       - Simulations: simulations
       - Tests: tests
-  - Development:
-      - Adding Docs: docs/development/Adding_docs.md
-      - Using Git: docs/development/Using_git.md
-      - Developer FAQ: docs/development/developer_FAQ.md
-  - Troubleshooting:
-      - Compilation Issues: docs/troubleshooting/Common_compilation_problems.md
+  - How-to Guides:              # Instructions for specific tasks
+      - Measuring Performance: docs/first_steps/profiling.md
       - Debugging: docs/troubleshooting/Debugging_workflow.md
+      - Running Static Analysis: docs/development/Development_tips.md
+      - Using Git: docs/development/Using_git.md
+  - Troubleshooting:
+      - Compilation Problems: docs/troubleshooting/Common_compilation_problems.md
+      - Developer FAQ: docs/development/developer_FAQ.md
+  - Contributing:
+      - How to Contribute: docs/CONTRIBUTING.md
+      - Coding Standard: docs/standards/CODING_STANDARD.md
+      - Writing Documentation: docs/development/Adding_docs.md
 
   - API:  # API reference documentation
       - Gyselalib++:
@@ -52,6 +55,7 @@ nav:
           - 'Variables': 'gyselalibxx/variables.md'  # Global variables
           - 'Macros': 'gyselalibxx/macros.md'  # Macro definitions
           - 'Files': 'gyselalibxx/files.md'  # File-level documentation
+  - Changelog: CHANGELOG.md
 
 # Recommended for strict MkDocs diagnostics
 validation:
@@ -109,7 +113,6 @@ markdown_extensions:
 # Additional JavaScript for Enhanced Functionality
 extra_javascript:
   - docs/jscript/mathjax.js                               # Custom script for MathJax integration
-  - https://polyfill.io/v3/polyfill.min.js?features=es6   # Ensures compatibility with older browsers
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js     # Loads MathJax for rendering mathematical equations
 
 extra_css:
