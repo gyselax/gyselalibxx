@@ -30,4 +30,4 @@ Please do not open large pull requests without prior discussion, as they may be 
 
 All pull requests will be automatically tested. Please review the test results and ensure your changes do not introduce regressions. In addition, any new functionality or bug fix must be accompanied by appropriate tests. Test coverage is monitored, and submissions that reduce coverage without justification may not be accepted.
 
-Please also make sure your code adheres to our [coding standards](https://gyselax.github.io/gyselalibxx/docs/standards/CODING_STANDARD.html), which are detailed in the project documentation.
+Please also make sure your code adheres to our [coding standards](https://gyselax.github.io/gyselalibxx/docs/contributing/CODING_STANDARD.html), which are detailed in the project documentation.
