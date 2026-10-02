@@ -5,18 +5,16 @@ If your problem is not listed here, please check the [issues](https://github.com
 
 ## Compilation errors
 
-Search this table for a part of the error message reported by your compiler.
+Search this list for a part of the error message reported by your compiler.
 Compiler errors refer to types by their DDC names (e.g. `ddc::ChunkSpan` instead of `Field`). The [DDC and Gyselalib++ names](../core_concepts/ddc_names.md) page can be used to translate them.
 
-| The error message contains | Solution |
-| --- | --- |
-| `The closure type for a lambda ... cannot be used in the template argument type of a __global__ function` | [Lambdas must capture by copy](Common_compilation_problems.md#the-closure-type-for-a-lambda-cannot-be-used-in-the-template-argument-type-of-a-__global__-function) |
-| `Implicit capture of 'this' in extended lambda expression` (a warning which may lead to wrong results) | [Avoid capturing class members](Common_compilation_problems.md#implicit-capture-of-this-in-extended-lambda-expression) |
-| `expression must be a modifiable lvalue` or `cannot be referenced -- it is a deleted function` | [Do not copy objects which own memory](Common_compilation_problems.md#accessing-allocated-data) |
-| `The enclosing parent function ... for an extended __host__ __device__ lambda cannot have private or protected access within its class` | Parallel loops cannot be placed in [private or protected methods](Common_compilation_problems.md#the-enclosing-parent-function-for-an-extended-__host__-__device__-lambda-cannot-have-private-or-protected-access-within-its-class) (including GoogleTest `TEST` blocks) or in [constructors](Common_compilation_problems.md#the-enclosing-parent-function-for-an-extended-__host__-__device__-lambda-must-allow-its-address-to-be-taken) |
-| `a nonstatic member reference must be relative to a specific object` | [Class members cannot be used in static functions](Common_compilation_problems.md#a-nonstatic-member-reference-must-be-relative-to-a-specific-object) |
-| `X is not defined` | [Check your includes](Common_compilation_problems.md#x-is-not-defined) |
-| `incomplete type is not allowed` (mentioning `IS_COVARIANT`, `IS_CONTRAVARIANT`, `Dual` or `PERIODIC`) | [Dimensions are missing required attributes](Common_compilation_problems.md#incomplete-type-is-not-allowed) |
+- `The closure type for a lambda ... cannot be used in the template argument type of a __global__ function` → [Lambdas must capture by copy](Common_compilation_problems.md#the-closure-type-for-a-lambda-cannot-be-used-in-the-template-argument-type-of-a-__global__-function)
+- `Implicit capture of 'this' in extended lambda expression` (only a warning, but it may lead to wrong results) → [Avoid capturing class members](Common_compilation_problems.md#implicit-capture-of-this-in-extended-lambda-expression)
+- `expression must be a modifiable lvalue` or `cannot be referenced -- it is a deleted function` → [Do not copy objects which own memory](Common_compilation_problems.md#accessing-allocated-data)
+- `The enclosing parent function ... for an extended __host__ __device__ lambda cannot have private or protected access within its class` → Move the parallel loop out of the [private or protected method](Common_compilation_problems.md#the-enclosing-parent-function-for-an-extended-__host__-__device__-lambda-cannot-have-private-or-protected-access-within-its-class) (including a GoogleTest `TEST` block) or the [constructor](Common_compilation_problems.md#the-enclosing-parent-function-for-an-extended-__host__-__device__-lambda-must-allow-its-address-to-be-taken)
+- `a nonstatic member reference must be relative to a specific object` → [Class members cannot be used in static functions](Common_compilation_problems.md#a-nonstatic-member-reference-must-be-relative-to-a-specific-object)
+- `X is not defined` → [Check your includes](Common_compilation_problems.md#x-is-not-defined)
+- `incomplete type is not allowed` (mentioning `IS_COVARIANT`, `IS_CONTRAVARIANT`, `Dual` or `PERIODIC`) → [Dimensions are missing required attributes](Common_compilation_problems.md#incomplete-type-is-not-allowed)
 
 ## Problems when running the code
 

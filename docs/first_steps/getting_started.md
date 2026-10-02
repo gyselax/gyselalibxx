@@ -19,14 +19,14 @@ There are multiple coding paradigms possible when writing code in C++. Two of th
 When using functional programming classes fit into one of two groups:
 
 - **Data Structures**:
-  - Serve as containers for data, often passed into operators for processing.
-  - Avoid embedding behaviour directly into data structures; instead, let operators handle transformations.
+    - Serve as containers for data, often passed into operators for processing.
+    - Avoid embedding behaviour directly into data structures; instead, let operators handle transformations.
 
 - **Operators**:
-  - Should implement an `operator()` method, allowing them to be used as callable objects.
-  - Their internal variables should remain constant to align with functional programming principles.
-  - Break problems into small, composable functions. Avoid the temptation to design large, monolithic classes.
-  - Can be thought of as a function. Classes are used instead so the functions called by this function can be decided at compile time.
+    - Should implement an `operator()` method, allowing them to be used as callable objects.
+    - Their internal variables should remain constant to align with functional programming principles.
+    - Break problems into small, composable functions. Avoid the temptation to design large, monolithic classes.
+    - Can be thought of as a function. Classes are used instead so the functions called by this function can be decided at compile time.
 
 By separating operators (behaviour) from data structures (data), you ensure clarity, reusability, and better adherence to the functional programming style.
 
@@ -39,7 +39,7 @@ For example consider the case of a semi-Lagrangian advection. The operator is si
 The Gyselalib++ codebase is organised into several folders. The main folders of interest are:
 
 - **src/** : This folder contains the source code for the library. It contains folders grouping the code by subject. The `src/` folder and each sub-folder contains a `README.md` detailing its contents. It is simple to navigate within this documentation : [src](../../src/README.md)
-  - **geometry...** : The `src/` folder contains sub-folders whose names begin with `geometry`. These sub-folders contain code which is specific to a given geometry. Each geometry is defined by the dimensions on which its equations are defined. In these folders you will also find sub-folders grouping the code by subject. Each `geometry...` folder will contain a folder called `geometry` containing a file `geometry.hpp`. This file contains type aliases which are useful for this geometry. This includes the definition of the classes representing the dimensions. If a `geometry.hpp` is included in a file then this file can only be used for that specific geometry. Therefore files in a `geometry...` folder cannot be used for other geometries even if the two appear to be compatible at first glance (e.g. files from the `geometryRTheta` folder cannot be used for the `geometryAxi` simulations, files from the `geometryXVx` folder cannot be used for the `geometryXYVxVy` simulations).
+    - **geometry...** : The `src/` folder contains sub-folders whose names begin with `geometry`. These sub-folders contain code which is specific to a given geometry. Each geometry is defined by the dimensions on which its equations are defined. In these folders you will also find sub-folders grouping the code by subject. Each `geometry...` folder will contain a folder called `geometry` containing a file `geometry.hpp`. This file contains type aliases which are useful for this geometry. This includes the definition of the classes representing the dimensions. If a `geometry.hpp` is included in a file then this file can only be used for that specific geometry. Therefore files in a `geometry...` folder cannot be used for other geometries even if the two appear to be compatible at first glance (e.g. files from the `geometryRTheta` folder cannot be used for the `geometryAxi` simulations, files from the `geometryXVx` folder cannot be used for the `geometryXYVxVy` simulations).
 
 - **tests/** : This folder contains the unit tests for the library. The folder structure is similar to that found in the `src/` folder.
 
@@ -51,17 +51,17 @@ The Gyselalib++ codebase is organised into several folders. The main folders of 
 
 1. **Familiarise yourself with DDC:**
 
-   - Gyselalib++ relies heavily on [DDC (Discrete Domain Decomposition Library)](https://ddc.mdls.fr/) for data management. Understanding its usage is key to contributing effectively.
-   - See our detailed guide on DDC integration: [Using DDC in Gyselalib++](../core_concepts/DDC_in_gyselalibxx.md).
+    - Gyselalib++ relies heavily on [DDC (Discrete Domain Decomposition Library)](https://ddc.mdls.fr/) for data management. Understanding its usage is key to contributing effectively.
+    - See our detailed guide on DDC integration: [Using DDC in Gyselalib++](../core_concepts/DDC_in_gyselalibxx.md).
 
 2. **Build the project:**
 
-   - Follow the build instructions in the repository's README.
-   - More detailed instructions especially instructions for specific systems like the CEA's persee can be found in the toolchain documentation: [Pre-made build settings](../../toolchains/README.md).
+    - Follow the build instructions in the repository's README.
+    - More detailed instructions especially instructions for specific systems like the CEA's persee can be found in the toolchain documentation: [Pre-made build settings](../../toolchains/README.md).
 
 3. **Identify a simple task:**
 
-   - Start with a small, well-scoped issue to familiarise yourself with the contribution process and code review workflow.
+    - Start with a small, well-scoped issue to familiarise yourself with the contribution process and code review workflow.
 
 ---
 

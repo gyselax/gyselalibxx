@@ -11,11 +11,11 @@ Test the interpolator on mesh points where the errors are supposed to be exact (
 ## Python scripts
 
 - `test_convergence.py` : compute the convergence order in space for the tests where the errors are not supposed to be exact.
-  - launch the executable for a 64x64 grid and for a 128x128 grid to compare the errors.
-  - possibility of changing the default sizes by adding the two new sizes (N for NxN grid) at this end of the command (see `--help`).
+    - launch the executable for a 64x64 grid and for a 128x128 grid to compare the errors.
+    - possibility of changing the default sizes by adding the two new sizes (N for NxN grid) at this end of the command (see `--help`).
 
-  - Command to launch the test in this folder: `python3 test_convergence.py ../../../build/tests/geometryRTheta/spline_interpolator_rtheta/spline_interpolator_rtheta_tests` (`N0`) (`N1`)
+    - Command to launch the test in this folder: `python3 test_convergence.py ../../../build/tests/geometryRTheta/spline_interpolator_rtheta/spline_interpolator_rtheta_tests` (`N0`) (`N1`)
 
 - `display_curves.py` : display errors for several grid sizes and compute the slope of the errors for each function.
 
-  - Command to launch the test in this folder: `python3 display_curves.py ./../../build/tests/geometryRTheta/spline_interpolator_rtheta/spline_interpolator_rtheta_tests`
+    - Command to launch the test in this folder: `python3 display_curves.py ./../../build/tests/geometryRTheta/spline_interpolator_rtheta/spline_interpolator_rtheta_tests`

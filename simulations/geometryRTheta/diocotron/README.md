@@ -102,11 +102,11 @@ or
 with $`l\in\mathbb{N}`$ the selected mode, $`\omega \in \mathbb{C}`$ a pulsation to be determined, and
 
 - if  $`W_1 \leq r\lt R_1`$ then,
-   $`\widehat{\phi_{1,l}} (r) = \phi_{1,I}(r) = \frac{R_1^l}{r^l} \left( B R_1^l + C R_1^{-l}\right) \frac{r^{2l} - W_1^{2l}}{R_1^{2l} - W_1^{2l}}`$
+     $`\widehat{\phi_{1,l}} (r) = \phi_{1,I}(r) = \frac{R_1^l}{r^l} \left( B R_1^l + C R_1^{-l}\right) \frac{r^{2l} - W_1^{2l}}{R_1^{2l} - W_1^{2l}}`$
 - if  $`R_1 \leq r\lt R_2`$ then,
-   $`\widehat{\phi_{1,l}} (r) = \phi_{1,II}(r) =  B r^l + C r^{-l}`$
+     $`\widehat{\phi_{1,l}} (r) = \phi_{1,II}(r) =  B r^l + C r^{-l}`$
 - if  $`R_2 \leq r\lt W_2`$ then,
-   $`\widehat{\phi_{1,l}} (r) = \phi_{1,III}(r) = \frac{R_2^l}{r^l} \left( B R_2^l + C R_2^{-l}\right) \frac{r^{2l} - W_2^{2l}}{ R_2^{2l} - W_2^{2l}}`$.
+     $`\widehat{\phi_{1,l}} (r) = \phi_{1,III}(r) = \frac{R_2^l}{r^l} \left( B R_2^l + C R_2^{-l}\right) \frac{r^{2l} - W_2^{2l}}{ R_2^{2l} - W_2^{2l}}`$.
 
 for $B$ and $C$ constants stastifying continuity conditions such that $`A[B,C]^t = 0`$
 
@@ -177,24 +177,24 @@ method of characteristics and spline finite elements", <https://doi.org/10.1016/
 ### Recommended parameters
 
 - `Mesh:`
-  - `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
-  - `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
-  - `r_min: 0.0`  : position of the inner wall $`W_1`$. (Tests in Edoardo Zoni's article.)
-  - `r_minus: 0.45` : position of the inner boundary of the initial density $`R_1`$. (Tests in Edoardo Zoni's article.)
-  - `r_plus: 0.50`: position of the outer boundary of the initial density $`R_2`$. (Tests in Edoardo Zoni's article.)
-  - `r_max: 1.0` : position of the outer wall $`W_2`$. (Tests in Edoardo Zoni's article.)
+    - `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
+    - `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
+    - `r_min: 0.0`  : position of the inner wall $`W_1`$. (Tests in Edoardo Zoni's article.)
+    - `r_minus: 0.45` : position of the inner boundary of the initial density $`R_1`$. (Tests in Edoardo Zoni's article.)
+    - `r_plus: 0.50`: position of the outer boundary of the initial density $`R_2`$. (Tests in Edoardo Zoni's article.)
+    - `r_max: 1.0` : position of the outer wall $`W_2`$. (Tests in Edoardo Zoni's article.)
 
 - `Time:`
-  - `delta_t: 0.1` : time step. (Tests in Edoardo Zoni's article.)
-  - `final_T: 70.0`: final time of the simulation (end of the linear phase at $T = 50s$). (Tests in Edoardo Zoni's article.)
+    - `delta_t: 0.1` : time step. (Tests in Edoardo Zoni's article.)
+    - `final_T: 70.0`: final time of the simulation (end of the linear phase at $T = 50s$). (Tests in Edoardo Zoni's article.)
   
 - `Perturbation:`
-  - `charge_Q: 0.` : charge carried by the inner conductor at $`r = W_1`$.
-  - `l_mode: 9` : mode of the perturbation $\varepsilon \cos(lx)$.
-  - `eps: 0.0001` : amplitude of the perturbation $\varepsilon \cos(lx)$.
+    - `charge_Q: 0.` : charge carried by the inner conductor at $`r = W_1`$.
+    - `l_mode: 9` : mode of the perturbation $\varepsilon \cos(lx)$.
+    - `eps: 0.0001` : amplitude of the perturbation $\varepsilon \cos(lx)$.
   
 - `Output:`
-  - `time_step_diag: 10` : number of time steps between two recordings of the data.
+    - `time_step_diag: 10` : number of time steps between two recordings of the data.
 
 ### Executables
 
