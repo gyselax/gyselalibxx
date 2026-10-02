@@ -12,12 +12,15 @@ edit_uri: edit/main/
 # Pages which must be read by new users should be placed in their topical section and linked
 # from the "Getting Started" pages rather than being placed in the "Getting Started" section.
 nav:
-  - Home: README.md
+  - Home: docs/home.md
+  - About Gyselalib++: README.md
   - Getting Started:            # Onboarding path for new users
-      - Getting Started: docs/first_steps/getting_started.md
+      - Start Here: docs/first_steps/index.md
+      - Code Design and Layout: docs/first_steps/getting_started.md
       - Installation: toolchains/README.md
       - Your First Simulation: docs/first_steps/landau_damping_tutorial.md
   - Core Concepts:              # Explanations of how the code works, used as a long-term reference
+      - Overview: docs/core_concepts/index.md
       - DDC in Gyselalib++: docs/core_concepts/DDC_in_gyselalibxx.md
       - Mathematical and Physical Conventions: docs/core_concepts/mathematical_and_physical_conventions.md
       - Covariant and Contravariant Tensors: docs/core_concepts/coding_covariant_and_contravariant_tensors.md
@@ -26,14 +29,17 @@ nav:
       - Simulations: simulations
       - Tests: tests
   - How-to Guides:              # Instructions for specific tasks
+      - Overview: docs/how_to/index.md
       - Measuring Performance: docs/how_to/profiling.md
       - Debugging: docs/how_to/Debugging_workflow.md
       - Running Static Analysis: docs/how_to/Development_tips.md
       - Using Git: docs/how_to/Using_git.md
   - Troubleshooting:
+      - Find Your Problem: docs/troubleshooting/index.md
       - Compilation Problems: docs/troubleshooting/Common_compilation_problems.md
       - Developer FAQ: docs/troubleshooting/developer_FAQ.md
   - Contributing:
+      - Overview: docs/contributing/index.md
       - How to Contribute: docs/CONTRIBUTING.md
       - Coding Standard: docs/contributing/CODING_STANDARD.md
       - Writing Documentation: docs/contributing/Adding_docs.md
