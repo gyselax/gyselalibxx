@@ -36,9 +36,9 @@ $x^{n+1} = x^{k+1}$ once converged.
 
 - Scheme:
 $`x^{n+1} = x^{n} + dt k_2`$
-  - with
-    - $`k_1 =  f(x^{n})`$,
-    - $`k_2 =  f(x^{n} + \frac{dt}{2} k_1)`$,
+    - with
+        - $`k_1 =  f(x^{n})`$,
+        - $`k_2 =  f(x^{n} + \frac{dt}{2} k_1)`$,
 
 - Convergence order : 3.
 
@@ -46,10 +46,10 @@ $`x^{n+1} = x^{n} + dt k_2`$
 
 - Scheme:
 $`x^n = x^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
-  - with
-    - $`k_1 =  f(x^{n})`$,
-    - $`k_2 =  f(x^{n} + \frac{dt}{2} k_1)`$,
-    - $`k_3 =  f(x^{n} + dt( 2k_2 - k_1))`$.
+    - with
+        - $`k_1 =  f(x^{n})`$,
+        - $`k_2 =  f(x^{n} + \frac{dt}{2} k_1)`$,
+        - $`k_3 =  f(x^{n} + dt( 2k_2 - k_1))`$.
 
 - Convergence order : 3.
 
@@ -57,10 +57,10 @@ $`x^n = x^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
 
 - Scheme:
 $`x^{n+1} = x^{n} + \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)`$
-  - with
-    - $`k_1 =  f(x^{n+1})`$,
-    - $`k_2 =  f(x^{n+1} + \frac{dt}{2} k_1)`$,
-    - $`k_3 =  f(x^{n+1} + \frac{dt}{2} k_2)`$,
-    - $`k_4 =  f(x^{n+1} + dt k_3)`$.
+    - with
+        - $`k_1 =  f(x^{n+1})`$,
+        - $`k_2 =  f(x^{n+1} + \frac{dt}{2} k_1)`$,
+        - $`k_3 =  f(x^{n+1} + \frac{dt}{2} k_2)`$,
+        - $`k_4 =  f(x^{n+1} + dt k_3)`$.
 
 - Convergence order : 4.

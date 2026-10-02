@@ -11,18 +11,27 @@
 
 Gyselalib++ is a library that provides functionality for solving kinetic and gyrokinetic problems on exascale computing architectures.
 
-The theoretical approach and implementation details builds on the following paper:
+The theoretical approach and implementation details build on the following paper:
 
 - V. Grandgirard et al. (2016). A 5D gyrokinetic full-f global semi-lagrangian code for flux-driven ion turbulence simulations. [*Computer Physics Communications*](https://doi.org/10.1016/j.cpc.2016.05.007)
 [[PDF]](https://www.sciencedirect.com/science/article/pii/S0010465516301230/pdfft?casa\_token=0aLVJvOU6QQAAAAA:UneLQCHIYkJRk6F42an3hTNCuDZzMYZcppUKK\_nRRXWdMaQYgm6PlyqN08ZGFm8ZXhw2qDy1pQ&md5=fd256637e0ef6f45653879c233b579ff&pid=1-s2.0-S0010465516301230-main.pdf)
 
-A list of Gysela related publications can be found here: [Publications](
-https://gyselax.github.io/publication/)
+A list of Gysela related publications can be found here: [Publications](https://gyselax.github.io/publication/)
 
-## First steps
+## Documentation
 
-- If you want to install Gyselalib++ follow: [installation](toolchains/README.md).
-- [Getting Started with Gyselalib++](docs/first_steps/getting_started.md).
+The full documentation is available at [gyselax.github.io/gyselalibxx](https://gyselax.github.io/gyselalibxx/). If you are new to Gyselalib++, start with the [Getting Started](docs/first_steps/index.md) reading list.
+
+The documentation is organised into the following sections:
+
+- [Getting Started](docs/first_steps/index.md) : A reading list for new users and developers, ending with a tutorial which builds a complete simulation.
+- [Core Concepts](docs/core_concepts/index.md) : Explanations of the ideas used throughout the code. These pages are worth returning to whenever you are unsure how something works.
+- [Library](src/README.md) : A description of each component of the library, the [simulations](simulations/README.md) and the [tests](tests/README.md).
+- [How-to Guides](docs/how_to/index.md) : Instructions for specific tasks such as profiling, debugging or using git.
+- [Troubleshooting](docs/troubleshooting/index.md) : Solutions to common errors, organised by the error message you see.
+- [Contributing](docs/contributing/index.md) : How to propose changes, the coding standard and how to write documentation.
+- [API Reference](https://gyselax.github.io/gyselalibxx/gyselalibxx/annotated.html) : Documentation generated from the code for every class and function.
+- [Changelog](CHANGELOG.md) : The changes made in each version.
 
 ## Questions?
 
