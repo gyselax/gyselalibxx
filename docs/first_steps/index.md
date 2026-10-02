@@ -1,4 +1,4 @@
-# Start Here
+# Overview
 
 Welcome to Gyselalib++! This page lists the documentation that new users and developers should read, in the order in which we recommend reading it.
 Most of these pages are not specific to new users, so they are found in other sections of the documentation. You will probably come back to them regularly as you work with the code.
