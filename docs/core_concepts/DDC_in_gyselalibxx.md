@@ -335,18 +335,18 @@ $$
 This code can be written simply using `Idx` and `IdxStep`:
 
 ```cpp
-double get_laplacian_at_position(DFieldXY function_values, IndexXY position)
+double get_laplacian_at_position(DFieldXY function_values, IdxXY position)
 {
     IdxStepX x_step(1);
     IdxStepY y_step(1);
 
-    // Get the uniform grid in the appropriate direction and use it to
+    // Use the uniform grid in the appropriate direction to
     // extract the distance h.
-    double h_x = ddc::discrete_space<X>().step();
-    double h_y = ddc::discrete_space<Y>().step();
+    double h_x = ddc::step<GridX>();
+    double h_y = ddc::step<GridY>();
 
     return (function_values(position - x_step) + function_values(position + x_step)
-            + function_values(position - y_step) function_values(position + y_step)
+            + function_values(position - y_step) + function_values(position + y_step)
             - 4 * function_values(position))
            / (h_x * h_y);
 }
