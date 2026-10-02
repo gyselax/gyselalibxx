@@ -3,6 +3,10 @@
 The pages in this section explain the ideas that are used throughout Gyselalib++.
 Some of them are essential reading for new users, but they are also intended as a reference to return to whenever you are unsure how something works.
 
+## [Code Design and Layout](code_design.md)
+
+Read this when you want to understand why Gyselalib++ separates data structures from the operators which act on them (a functional programming style), or how the repository is organised (`src/`, `tests/`, `simulations/` and the `geometry...` folders).
+
 ## [DDC in Gyselalib++](DDC_in_gyselalibxx.md)
 
 Read this when you need to understand how data is indexed and stored. It describes:
@@ -14,9 +18,12 @@ Read this when you need to understand how data is indexed and stored. It describ
 - [Data storage](DDC_in_gyselalibxx.md#data-storage) (`FieldMem`, `Field`, `ConstField`) : how memory is allocated and accessed.
 - [Pitfalls](DDC_in_gyselalibxx.md#pitfalls) : common mistakes, such as forgetting to synchronise CPU and GPU operations.
 
-## [DDC and Gyselalib++ Names](ddc_names.md)
+## [DDC Quick Reference](ddc_quick_reference.md)
 
-Read this when you need to translate between the names used in DDC (which appear in compiler error messages and in the DDC documentation) and the names used in Gyselalib++, e.g. `ddc::DiscreteElement` and `Idx`.
+Read this when you need to look something up while writing code. It contains:
+
+- [A table of DDC and Gyselalib++ names](ddc_quick_reference.md#ddc-and-gyselalib-names) : translate between the names used in DDC (which appear in compiler error messages and in the DDC documentation) and the names used in Gyselalib++, e.g. `ddc::DiscreteElement` and `Idx`.
+- [Common operations](ddc_quick_reference.md#common-operations) : short examples of how to access coordinates, use index ranges, allocate data, write loops and copy data.
 
 ## [Mathematical and Physical Conventions](mathematical_and_physical_conventions.md)
 

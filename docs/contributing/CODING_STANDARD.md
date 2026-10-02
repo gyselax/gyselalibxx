@@ -67,7 +67,19 @@
 
 - GPU code is the default.
 - When calling methods beginning with the prefix `parallel_` we always specify the execution space.
+- When calling `ddc::parallel_for_each` or `ddc::parallel_transform_reduce` we always pass the name of the enclosing function as the first argument (see the example below). This name identifies the loop in the output of profiling tools.
 - When calling mirror functions, the host execution space is never passed as an argument.
+
+The name of the enclosing function is obtained from a `std::source_location` declared at the start of the function:
+
+```cpp
+std::source_location const location = std::source_location::current();
+ddc::parallel_for_each(
+        location.function_name(),
+        Kokkos::DefaultExecutionSpace(),
+        idx_range,
+        KOKKOS_LAMBDA(Idx<Grid1D> idx) { ... });
+```
 
 ## Operators
 

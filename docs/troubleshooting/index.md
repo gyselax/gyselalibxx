@@ -6,7 +6,7 @@ If your problem is not listed here, please check the [issues](https://github.com
 ## Compilation errors
 
 Search this list for a part of the error message reported by your compiler.
-Compiler errors refer to types by their DDC names (e.g. `ddc::ChunkSpan` instead of `Field`). The [DDC and Gyselalib++ names](../core_concepts/ddc_names.md) page can be used to translate them.
+Compiler errors refer to types by their DDC names (e.g. `ddc::ChunkSpan` instead of `Field`). The [table of DDC and Gyselalib++ names](../core_concepts/ddc_quick_reference.md#ddc-and-gyselalib-names) can be used to translate them.
 
 - `The closure type for a lambda ... cannot be used in the template argument type of a __global__ function`
     - [Lambdas must capture by copy](Common_compilation_problems.md#the-closure-type-for-a-lambda-cannot-be-used-in-the-template-argument-type-of-a-__global__-function)
@@ -46,6 +46,6 @@ Compiler errors refer to types by their DDC names (e.g. `ddc::ChunkSpan` instead
 
 ## Frequently asked questions
 
-- [Should I create a branch on GitHub or in a private repository?](developer_FAQ.md#should-i-create-a-branch-in-the-library-on-github-or-in-a-private-repository-eg-on-gitlab)
+- [Should I create a branch on GitHub or in a private repository?](../contributing/github_or_gitlab.md)
 - [What is the difference between Debug and Release mode?](developer_FAQ.md#what-is-the-difference-between-debug-and-release-mode)
 - [Should I use abort, assert, or static\_assert to raise an error?](developer_FAQ.md#should-i-use-abort-assert-or-static_assert-to-raise-an-error)

@@ -3,9 +3,11 @@
 Welcome to Gyselalib++! This page lists the documentation that new users and developers should read, in the order in which we recommend reading it.
 Most of these pages are not specific to new users, so they are found in other sections of the documentation. You will probably come back to them regularly as you work with the code.
 
+Please bear in mind that this documentation is not a replacement for foundational C++ knowledge. It focuses on the specific challenges and paradigms relevant to Gyselalib++. If you encounter unfamiliar keywords or concepts in the code, we recommend looking them up online as a first step.
+
 1. **Install Gyselalib++** : Follow the [installation instructions](../../toolchains/README.md) to clone the repository, set up your environment, compile the code and run the tests.
 
-2. **Understand how the code is designed** : Read [Getting Started with Gyselalib++](getting_started.md) to learn why Gyselalib++ uses a functional programming style and how the repository is organised.
+2. **Understand how the code is designed** : Read [Code Design and Layout](../core_concepts/code_design.md) to learn why Gyselalib++ uses a functional programming style and how the repository is organised.
 
 3. **Learn how data is represented** : Read [DDC in Gyselalib++](../core_concepts/DDC_in_gyselalibxx.md). Almost every line of Gyselalib++ uses the types described on this page (`Coord`, `Idx`, `IdxStep`, `IdxRange`, `Field`, ...) so it is essential reading before working on the code. You will find it in the [Core Concepts](../core_concepts/index.md) section when you need to refer back to it.
 
