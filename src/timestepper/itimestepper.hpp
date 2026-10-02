@@ -285,13 +285,14 @@ private:
             FuncType func,
             KType... k)
     {
-        timestepper_detail::
-                assemble_helper<ExecSpace, typename DerivFieldMemType::TypeOnPatch<Patch>>::
-                        assemble_k_total(
-                                exec_space,
-                                k_total.template get<Patch>(),
-                                func,
-                                k.template get<Patch>()...);
+        timestepper_detail::assemble_helper<
+                ExecSpace,
+                typename DerivFieldMemType::template TypeOnPatch<Patch>>::
+                assemble_k_total(
+                        exec_space,
+                        k_total.template get<Patch>(),
+                        func,
+                        k.template get<Patch>()...);
     }
 };
 
