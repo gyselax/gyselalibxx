@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add GVEC in the toolchains.
+- Add `TypeOnPatch` to `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` to get the type stored on a given patch.
 
 ### Fixed
 
@@ -25,12 +26,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `SingleInterfaceDerivativesCalculator::get_function_coefficients()` to `InterfaceDerivCoeffs::get_approx_deriv()`.
 - Rename file `single_interface_derivatives_calculator.hpp` to `interface_derivative_coefficients.hpp`.
 - Rename file `single_interface_derivatives_calculator_collection.hpp` to `interface_derivative_coefficients_collection.hpp`.
+- `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` are now aliases for `detail::` classes templated on `ddc::detail::TypeSeq`s of the patches and of the stored types. Type templates which give the same type on each patch now lead to the same class.
+- The constructor of `MultipatchField` from another multipatch object is now explicit.
 
 ### Deprecated
 
 ### Removed
 
 - Removed `.span_view` and `.span_cview` from Gyselalib++ objects.
+- Remove the r-value converting constructors of `MultipatchType`, `MultipatchField` and `MultipatchFieldMem`.
+- Remove `MultipatchField::idx_type`.
 
 ### Dependency requirements
 
