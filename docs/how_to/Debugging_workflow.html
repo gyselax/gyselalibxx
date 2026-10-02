@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Adding Docs - GyselalibX</title>
+    <title>Debugging - GyselalibX</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Adding Docs";
-        var mkdocs_page_input_path = "docs/development/Adding_docs.md";
+        var mkdocs_page_name = "Debugging";
+        var mkdocs_page_input_path = "docs/how_to/Debugging_workflow.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> GyselalibX
+          <a href="../../index.html" class="icon icon-home"> GyselalibX
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,41 +40,29 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">General</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" >Tutorials</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/profiling.html">Measuring Performance in Gyselalib++</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">Your First Simulation</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Standards</span></p>
+              <p class="caption"><span class="caption-text">Core Concepts</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/CODING_STANDARD.html">Coding Standard</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/mathematical_and_physical_conventions.html">Mathematical and Physical Conventions</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/coding_covariant_and_contravariant_tensors.html">Coding Covariant and Contravariant Tensors</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/coding_covariant_and_contravariant_tensors.html">Covariant and Contravariant Tensors</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Gyselalib++ Overview</span></p>
+              <p class="caption"><span class="caption-text">Library</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
     <ul>
@@ -485,46 +473,51 @@
     </ul>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Development</span></p>
+              <p class="caption"><span class="caption-text">How-to Guides</span></p>
               <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Adding Docs</a>
+                  <li class="toctree-l1"><a class="reference internal" href="profiling.html">Measuring Performance</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Debugging</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#building-documentation-locally">Building documentation locally</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#documentation-describing-code-structures">Documentation describing code structures</a>
+    <li class="toctree-l2"><a class="reference internal" href="#cpu-debug-build">CPU Debug Build</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#short-summary">Short summary</a>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-debug-build">Creating a debug build</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#extended-summary">Extended summary</a>
+    <li class="toctree-l3"><a class="reference internal" href="#finding-the-crashing-line">Finding the crashing line</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#argument-annotation">Argument annotation</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#result-annotation">Result annotation</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#references-to-other-relevant-parts-of-the-code">References to other relevant parts of the code</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l3"><a class="reference internal" href="#segmentation-fault-or-other-memory-issues">Segmentation fault or other memory issues</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#documentation-describing-general-methods">Documentation describing general methods</a>
+    <li class="toctree-l2"><a class="reference internal" href="#gpu-debug-build">GPU Debug Build</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#finding-the-crashing-line_1">Finding the crashing line</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#documenting-functions">Documenting functions</a>
+    <li class="toctree-l3"><a class="reference internal" href="#memory-issues">Memory issues</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#mathematical-notation-in-documentation">Mathematical notation in documentation</a>
+        </ul>
     </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="Using_git.html">Using Git</a>
+                  <li class="toctree-l1"><a class="reference internal" href="Development_tips.html">Running Static Analysis</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="developer_FAQ.html">Developer FAQ</a>
+                  <li class="toctree-l1"><a class="reference internal" href="Using_git.html">Using Git</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Troubleshooting</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Problems</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Debugging_workflow.html">Debugging</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contributing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">How to Contribute</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/Adding_docs.html">Writing Documentation</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API</span></p>
@@ -568,6 +561,10 @@
     </ul>
                   </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -575,17 +572,17 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">GyselalibX</a>
+          <a href="../../index.html">GyselalibX</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Development</li>
-      <li class="breadcrumb-item active">Adding Docs</li>
+    <li><a href="../../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">How-to Guides</li>
+      <li class="breadcrumb-item active">Debugging</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/development/Adding_docs.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/how_to/Debugging_workflow.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -593,127 +590,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="adding-documentation">Adding Documentation</h1>
-<p>There are two types of documentation which are described in detail below:</p>
-<ol>
-<li>Documentation describing code structures</li>
-<li>Documentation describing general methods</li>
-</ol>
-<h2 id="building-documentation-locally">Building documentation locally</h2>
-<p>For building our documentation we use <a href="https://www.mkdocs.org/">MkDocs</a>.
-Make sure you have installed <code>mkdocs</code> with its requirements:</p>
-<pre><code class="language-bash">pip install -r docs/requirements.txt
+                <div><h1 id="how-to-debug-problems-in-gyselalib-code">How to debug problems in Gyselalib++ code</h1>
+<p>This is a quick guide for approaching and fixing simple bugs in Gyselalib++.
+Gyselalib++ runs on both CPU and GPU, debugging works best if you first confirm whether a bug appears on CPU (where bugs are easier to diagnose) before diving into GPU-specific issues.
+Tools specific to CPU or GPU can be used to help debugging. The use of these tools is not described here but some tools are recommended. More detailed information about their usage can be found online.</p>
+<h2 id="cpu-debug-build">CPU Debug Build</h2>
+<p>Always Start with a CPU Debug build.</p>
+<p>The Debug build turns off compiler optimisations that can hide bugs or make backtraces confusing.
+It also activates assertions that other devs have added to ensure you are using their tools as intended.</p>
+<p>CPU builds tend to give clearer error messages than GPU builds which makes debugging simpler. Further standard debugging tools can be used for CPU builds.</p>
+<p>In the case of an assertion failure, the line where the error is located should be indicated. Inspecting the code here should give you an idea of the cause of the error. Often there will be a comment next to the assertion in the code. If the function is being misused a backtrace can help locate the calling functions to track back to the code that you have added.</p>
+<h3 id="creating-a-debug-build">Creating a debug build</h3>
+<p>It is important to note that simply adding <code>-DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-O0 -g"</code> to the cmake command is usually <strong>not</strong> sufficient to create a debug build. If you are following the normal installation/compilation procedure as described in <a href="../../toolchains/index.html">Gyselalib++ Installation</a> then the toolchain will override the build type. Please ensure that you are using a toolchain which has <code>debug</code> in the name. If this is not the case and you do not see a suitable toolchain then you should modify one of the existing toolchains by changing the line <code>set(CMAKE_BUILD_TYPE Release)</code> to <code>set(CMAKE_BUILD_TYPE Debug)</code>.</p>
+<h3 id="finding-the-crashing-line">Finding the crashing line</h3>
+<p>If you want to identify the line which crashes <code>gdb</code> is a common interactive tool which can be used for this purpose.</p>
+<pre><code class="language-bash">gdb --args ./gysela_exe config_file.yml
+run
+backtrace
 </code></pre>
-<p>The documentation can be built locally by running the following commands from the root directory:</p>
-<pre><code class="language-bash">python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc build/
-cd docs
-mkdocs build
+<p>Many tutorials exist for a more involved use of <code>gdb</code> which allows the use of break points and printing of variables and their contents.</p>
+<h3 id="segmentation-fault-or-other-memory-issues">Segmentation fault or other memory issues</h3>
+<p>A segmentation fault is usually an indication of memory misuse. Most cases of memory misuse should raise an assertion in a debug build. For those that don't <code>valgrind</code> is a common tool for analysing this kind of problem.</p>
+<pre><code class="language-bash">valgrind ./gysela_exe config_file.yml
 </code></pre>
-<p>In order to view the docs the file <code>docs/site/index.html</code> should be opened in a browser (e.g. Firefox). To change the documentation layout or add new navigation panels see <a href="../index.html">Gyselas MkDocs documentation</a>.</p>
-<h2 id="documentation-describing-code-structures">Documentation describing code structures</h2>
-<p>This documentation should be added next to the code it is describing.</p>
-<p>Each section of code is annotated with a selection of the following:</p>
-<ol>
-<li>A short summary</li>
-<li>An extended summary</li>
-<li>Argument annotations</li>
-<li>Result annotations</li>
-<li>References to other relevant parts of the code</li>
-</ol>
-<p>Class comments should contain a short summary and an extended summary.</p>
-<p>Function comments should contain a short summary, an extended summary where appropriate, argument annotations, and result annotations.</p>
-<p>Where it is helpful references to other parts of the code may also be added.</p>
-<p>Code documentation blocks must be notated in a multi-line comment beginning with <code>/**</code>. For example:</p>
-<pre><code class="language-cpp">/**
- * Here is a multi-line comment which will be noticed by Doxygen.
- */
+<p>One thing to bear in mind is that memory misuse does not always lead to an immediate crash. Instead it can simply corrupt the memory leading to a crash later in the execution. The valgrind errors should therefore be examined in order.</p>
+<h2 id="gpu-debug-build">GPU Debug Build</h2>
+<p>If the code runs as expected on CPU but crashes on GPU then you can already disregard the sections of the code which always run on CPU. This can help narrow down the problem.</p>
+<p>Before analysing the code ensure that there are no compilation warnings.
+The GPU compiler is less verbose than the CPU compiler but the majority of the warnings that it manages to raise are critical so make sure all warnings are eliminated before trying to run the program.</p>
+<p>The most common cause of GPU errors comes from trying to access an object saved on CPU from the GPU or from trying to access an object saved on GPU from the CPU.
+This is important when handling a Kokkos object or anything containing a Kokkos object. Particular care should be taken when accessing a <code>Field</code> or using a <strong>coordinate transformation operator</strong>.
+In both cases static assertions are available to let you check at compile time if you are allowed to use a particular object.</p>
+<p>For example if you want to access a <code>DFieldX</code> from GPU you can use:</p>
+<pre><code class="language-cpp">static_assert(Kokkos::SpaceAccessibility&lt;Kokkos::DefaultExecutionSpace, typename DFieldX::memory_space&gt;::accessible);
 </code></pre>
-<p>The basic syntax is described below. For more complicated cases see the Doxygen documentation.</p>
-<h3 id="short-summary">Short summary</h3>
-<p>Short summaries should begin with the <code>@brief</code> tag. They should be about one sentence long.</p>
-<h3 id="extended-summary">Extended summary</h3>
-<p>An extended summary does not need a tag. It should begin after the short summary with an empty line left between the two differentiate them.</p>
-<h3 id="argument-annotation">Argument annotation</h3>
-<p>Each argument to a function must be described. The description must begin with the <code>@param</code> tag followed by one of <code>[in]</code>, <code>[out]</code>, <code>[in,out]</code> to indicate whether the argument is constant inside the function (<code>[in]</code>), initialised by the function <code>[out]</code>, or whether the value is used by the function but the contents are then modified (<code>[in, out]</code>). This information is followed by the name of the argument and a short description separated by spaces.</p>
-<h3 id="result-annotation">Result annotation</h3>
-<p>The result of a function must be described. The description must begin with the <code>@return</code> tag followed by a short description of what the function returns.</p>
-<h3 id="references-to-other-relevant-parts-of-the-code">References to other relevant parts of the code</h3>
-<p>If other parts of the code are relevant to your description or may be relevant in places where the code is used you can signal this with the <code>@see</code> tag which must be followed by the full name of the relevant class or function.</p>
-<h3 id="example">Example</h3>
-<pre><code class="language-cpp">/**
- * @brief A class which provides an interpolating function.
- *
- * An abstract class which implements a function allowing
- * the value of a function to be approximated at a set of
- * coordinates from a set of known values of the function.
- */
-template &lt;class DDim&gt;
-class IInterpolator
-{
-    using CDim = typename DDim::continuous_dimension_type;
-
-public:
-    virtual ~IInterpolator() = default;
-
-    /**
-     * @brief Approximate the value of a function at a set of coordinates using the
-     * current values at a known set of interpolation points.
-     *
-     * @param[in, out] inout_data On input: an array containing the value of the function at the interpolation points.
-     *                   On output: an array containing the value of the function at the coordinates.
-     * @param[in] coordinates The coordinates where the function should be evaluated.
-     *
-     * @return A reference to the inout_data array containing the value of the function at the coordinates.
-     *
-     * @see InterpolatorProxy::operator()
-     */
-    virtual ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim&gt;&gt; operator()(
-            ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim&gt;&gt; inout_data,
-            ddc::ChunkSpan&lt;const ddc::Coordinate&lt;CDim&gt;, ddc::DiscreteDomain&lt;DDim&gt;&gt; coordinates)
-            const = 0;
-};
+<p>Remember a <code>Field</code> is defined on the GPU by default and a <code>Field</code> defined on the CPU should have a type like <code>host_t&lt;Field&gt;</code>.</p>
+<p>For a coordinate transformation operator it is harder to deduce the accessibility directly from the type as analytical transformations such as <code>CircularToCartesian</code> can be used from both the CPU and the GPU.
+To check if a coordinate transformation operator whose type is denoted <code>Mapping</code> is accessible from GPU you can use:</p>
+<pre><code class="language-cpp">static_assert(is_accessible_v&lt;Kokkos::DefaultExecutionSpace, Mapping&gt;);
 </code></pre>
-<h2 id="documentation-describing-general-methods">Documentation describing general methods</h2>
-<p>Each folder containing code should also contain a <code>README.md</code> file providing an overview of the contents of the folder and any general information and references which may be helpful for understanding this code.</p>
-<p>The <code>README.md</code> file should begin with a title:</p>
-<pre><code class="language-markdown"># &lt;title&gt;
+<p>Similarly to check if it is accessible from CPU you can use:</p>
+<pre><code class="language-cpp">static_assert(is_accessible_v&lt;Kokkos::DefaultHostExecutionSpace, Mapping&gt;);
 </code></pre>
-<p>If the folder doesn't contain a <code>.private</code> file (indicating that the folder is not yet ready to be shared publicly), the new page can be referenced from any enclosing page that may exist. For example if you create a new folder in <code>src/</code>, you should add the following line to the list of folders in <code>src/README.md</code>:</p>
-<pre><code class="language-markdown">- [my_new_folder](./my_new_folder/README.md) : Short description of contents.
-</code></pre>
-<h2 id="documenting-functions">Documenting functions</h2>
-<p>By default Doxygen only documents classes and class methods. In order to also document the functions in a file an additional descriptor must be added to the top of that file.
-The following is an example:</p>
-<pre><code class="language-cpp">/**
- * @file my_file.hpp
- * Description of file.
- */
-</code></pre>
-<p>This can be seen in action in the files in the folder <code>src/quadrature/</code>.</p>
-<h2 id="mathematical-notation-in-documentation">Mathematical notation in documentation</h2>
-<p>Mathematical notation can be used in Doxygen output.</p>
-<p>In Markdown files it should be blocked with <code>$</code> commands. E.g:</p>
-<pre><code class="language-markdown">$a \ne b$
-</code></pre>
-<p>However if the equation includes characters which are used for markdown highlighting it is safer to use the following syntax:</p>
-<pre><code class="language-markdown">$`a \ne b`$
-</code></pre>
-<p>An equation can also be printed on its own line using <code>$$</code> commands. The syntax must be one of the following:</p>
-<pre><code class="language-markdown">$$a \ne b$$
-</code></pre>
-<p>or</p>
-<pre><code class="language-markdown">$$
-a \ne b
-$$
-</code></pre>
-<p>The first syntax can be used when the expression fits in one line and doesn't use markdown special characters. The second syntax can be used in all contexts.</p>
-<p>In C++ header files it should be blocked with Doxygen syntax, i.e. <code>@f$</code> instead of <code>$</code>, and <code>@f[</code> and <code>@f]</code> instead of <code>$$</code>.</p></div>
+<p>An object is being accessed from the GPU if you are inside a function tagged with <code>KOKKOS_FUNCTION</code> or <code>KOKKOS_INLINE_FUNCTION</code>, or if you are inside a lambda function tagged with <code>KOKKOS_LAMBDA</code> or <code>KOKKOS_CLASS_LAMBDA</code>.</p>
+<h3 id="finding-the-crashing-line_1">Finding the crashing line</h3>
+<p><code>gdb</code> is a CPU only tool but on a Nvidia system the tool <code>cuda-gdb</code> is a drop-in replacement that works on GPU.</p>
+<h3 id="memory-issues">Memory issues</h3>
+<p>On a Nvidia system the tool <code>compute-sanitizer</code> can be used similarly to valgrind to weed out memory issues.</p></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../tests/multipatch/interface_derivatives/index.html" class="btn btn-neutral float-left" title="Interface derivatives test"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="Using_git.html" class="btn btn-neutral float-right" title="Using Git">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="profiling.html" class="btn btn-neutral float-left" title="Measuring Performance"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="Development_tips.html" class="btn btn-neutral float-right" title="Running Static Analysis">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -740,10 +669,10 @@ $$
         </span>
     
     
-      <span><a href="../../tests/multipatch/interface_derivatives/index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="profiling.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="Using_git.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="Development_tips.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -752,7 +681,6 @@ $$
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
       <script src="../jscript/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>

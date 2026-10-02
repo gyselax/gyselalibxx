@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Using Git - GyselalibX</title>
+    <title>Developer FAQ - GyselalibX</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Using Git";
-        var mkdocs_page_input_path = "docs/development/Using_git.md";
+        var mkdocs_page_name = "Developer FAQ";
+        var mkdocs_page_input_path = "docs/troubleshooting/developer_FAQ.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> GyselalibX
+          <a href="../../index.html" class="icon icon-home"> GyselalibX
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,41 +40,29 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">General</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" >Tutorials</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/profiling.html">Measuring Performance in Gyselalib++</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">Your First Simulation</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Standards</span></p>
+              <p class="caption"><span class="caption-text">Core Concepts</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/CODING_STANDARD.html">Coding Standard</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/mathematical_and_physical_conventions.html">Mathematical and Physical Conventions</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/coding_covariant_and_contravariant_tensors.html">Coding Covariant and Contravariant Tensors</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/coding_covariant_and_contravariant_tensors.html">Covariant and Contravariant Tensors</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Gyselalib++ Overview</span></p>
+              <p class="caption"><span class="caption-text">Library</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
     <ul>
@@ -485,34 +473,41 @@
     </ul>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Development</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="Adding_docs.html">Adding Docs</a>
+              <p class="caption"><span class="caption-text">How-to Guides</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/profiling.html">Measuring Performance</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Using Git</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#branches">Branches</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#q-i-cloned-the-repository-but-the-submodules-were-not-cloned">Q: I cloned the repository but the submodules were not cloned</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#q-git-reports-changes-in-the-submodule-but-i-didnt-change-this-code">Q: Git reports changes in the submodule but I didn't change this code</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#q-i-accidentally-committed-a-different-version-of-a-submodule-how-do-i-get-back-to-the-version-in-the-devel-branch">Q: I accidentally committed a different version of a submodule how do I get back to the version in the devel branch?</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Debugging_workflow.html">Debugging</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="developer_FAQ.html">Developer FAQ</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Development_tips.html">Running Static Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Using_git.html">Using Git</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Troubleshooting</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="Common_compilation_problems.html">Compilation Problems</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Debugging_workflow.html">Debugging</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Developer FAQ</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#should-i-create-a-branch-in-the-library-on-github-or-in-a-private-repository-eg-on-gitlab">Should I create a branch in the library (on GitHub) or in a private repository (e.g. on GitLab)?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-the-difference-between-debug-and-release-mode">What is the difference between Debug and Release mode?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#should-i-use-abort-assert-or-static_assert-to-raise-an-error">Should I use abort, assert, or static_assert to raise an error?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#i-have-problems-with-git-submodules">I have problems with git submodules</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contributing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">How to Contribute</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/Adding_docs.html">Writing Documentation</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API</span></p>
@@ -556,6 +551,10 @@
     </ul>
                   </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -563,17 +562,17 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">GyselalibX</a>
+          <a href="../../index.html">GyselalibX</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Development</li>
-      <li class="breadcrumb-item active">Using Git</li>
+    <li><a href="../../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Troubleshooting</li>
+      <li class="breadcrumb-item active">Developer FAQ</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/development/Using_git.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/troubleshooting/developer_FAQ.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -581,46 +580,60 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="using-git">Using Git</h1>
-<p>Git is an extremely important tool for handling versioning and concurrent developments on the same code. There are many resources available online to help you get to grips with this tool. Here we summarise a few key concepts which will be helpful when working with git and Gyselalib++. It is designed to be a jumping-off point and a reference for reoccurring git questions, not a complete git reference or tutorial.</p>
-<h2 id="branches">Branches</h2>
-<p>Branches are an important tool for handling concurrent development. The <code>devel</code> branch is the starting point for all developments. It contains all major developments which are considered sufficiently mature for other developers to also use them.</p>
-<p>Whenever you wish to add something new to Gyselalib++ or fix an issue you should create a new branch from the <code>devel</code> branch. The branch name should have the following format:</p>
-<pre><code class="language-none">&lt;user_name&gt;_&lt;description_of_development&gt;
+                <div><h1 id="developers-faq">Developer's FAQ</h1>
+<h2 id="should-i-create-a-branch-in-the-library-on-github-or-in-a-private-repository-eg-on-gitlab">Should I create a branch in the library (on GitHub) or in a private repository (e.g. on GitLab)?</h2>
+<p><img alt="Decision tree for GitHub vs GitLab. Publishable work should be private, as should work specific to 1 specific physical simulation, or urgent work." src="../images/gitlab_or_github.png"></p>
+<h2 id="what-is-the-difference-between-debug-and-release-mode">What is the difference between Debug and Release mode?</h2>
+<p>A Release execution is supposed to be the fastest execution possible based on the assumption that the code is bug-free.
+A Debug execution is there to make it possible to catch bugs, potentially at the cost of some more execution time.</p>
+<h2 id="should-i-use-abort-assert-or-static_assert-to-raise-an-error">Should I use abort, assert, or static_assert to raise an error?</h2>
+<p><code>static_assert</code> ensures that an error is raised during the compilation. If it is possible to use <code>static_assert</code> then this option should always be preferred as it prevents bad code from being generated and incurs no costs in the resulting code. In reality it is not always possible to use <code>static_assert</code>. In this case either <code>assert</code> or <code>abort</code> must be used depending on the condition being tested.</p>
+<p>A <code>static_assert</code> statement is written as:</p>
+<pre><code class="language-cpp">   static_assert(condition, "This is an explanation of what went wrong. "+
+                    "It will be displayed in the compilation output.");
 </code></pre>
-<p>this allows us to quickly and easily identify the branch owner and the contents of the branch.</p>
-<p>It is important to keep your branch up to date with the devel branch so that your changes can one day be merged into devel and used by other people. If this is not done on a regular basis then changes can accumulate making it exponentially harder to determine which changes are still relevant. As an <strong>absolute minimum</strong> you should update your branch <strong>once a month</strong>. You can do this using either a <a href="https://git-scm.com/docs/git-merge">merge</a> command:</p>
-<pre><code class="language-sh">git fetch
-git merge origin/devel
+<p><code>assert</code> ensures that an error is raised in Debug mode while <code>abort</code> ensures that an error is raised in Release mode.
+In order to choose which of the two should be used it is therefore important to ask yourself the following questions:</p>
+<ol>
+<li>Can the condition be true in a bug-free code?</li>
+<li>Is the condition dependent on user input?</li>
+</ol>
+<p>If the answer to either of these questions is yes then it may be better to use <code>abort</code>, otherwise <code>assert</code> should be preferred to avoid incurring an unnecessary cost in Release mode.</p>
+<p>On CPU an assertion is written as:</p>
+<pre><code class="language-cpp">#include &lt;cassert&gt;
+
+...
+
+   // An explanation can be added here
+   assert(condition);
 </code></pre>
-<p>or a <a href="https://git-scm.com/docs/git-rebase">rebase</a> command:</p>
-<pre><code class="language-sh">git fetch
-git rebase origin/devel
+<p>On GPU an assertion is written as:</p>
+<pre><code class="language-cpp">   // An explanation can be added here
+   KOKKOS_ASSERT(condition);
 </code></pre>
-<p>After this command conflicts may appear between your branch and the devel branch. For a <code>git merge</code> command all conflicts will appear at the same time. For a <code>git rebase</code> command conflicts may appear for each commit in your branch since the last rebase command (or its creation from the devel branch). Conflicts should each be examined individually to ensure no new developments are lost. There are many resources (e.g. <a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts">bitbucket</a>) online which describe how to fix these conflicts.</p>
-<h2 id="submodules">Submodules</h2>
-<p>Gyselalib++ depends on other external libraries to compile. These libraries are included in the repository via <a href="https://git-scm.com/docs/gitsubmodules">submodules</a>. In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:</p>
-<h3 id="q-i-cloned-the-repository-but-the-submodules-were-not-cloned">Q: I cloned the repository but the submodules were not cloned</h3>
-<p><strong>A:</strong> If you accidentally cloned the repository without the <code>--recurse-submodules</code> option you can collect the submodules by running the following command:</p>
-<pre><code class="language-sh">git submodule update --init
+<p>On CPU an abort statement is written as:</p>
+<pre><code class="language-cpp">if (condition) {
+    throw std::runtime_error("This is an explanation of what went wrong. "+
+                "Ideally it also explains how the user input can be changed to avoid this problem.");
+}
 </code></pre>
-<h3 id="q-git-reports-changes-in-the-submodule-but-i-didnt-change-this-code">Q: Git reports changes in the submodule but I didn't change this code</h3>
-<p><strong>A:</strong> It is likely that you previously checked out a branch where the submodule was pinned to a different version. When you changed to your current branch the submodule was not updated, hence the reported changes. You can revert the changes to return to the version in your branch using:</p>
-<pre><code class="language-sh">git submodule update --init
+<p>On GPU an abort statement is written as:</p>
+<pre><code class="language-cpp">if (condition) {
+    Kokkos::abort("This is an explanation of what went wrong. "+
+                "Ideally it also explains how the user input can be changed to avoid this problem.");
+}
 </code></pre>
-<h3 id="q-i-accidentally-committed-a-different-version-of-a-submodule-how-do-i-get-back-to-the-version-in-the-devel-branch">Q: I accidentally committed a different version of a submodule how do I get back to the version in the devel branch?</h3>
-<p><strong>A:</strong> Inside git, a submodule is viewed as a file containing the SHA of the commit that the submodule is pinned to. This object can be manipulated in git like any other file. Therefore to get the version of the submodule that appears on the <code>devel</code> branch you simply run:</p>
-<pre><code class="language-sh">git fetch origin # Make sure that you have an up-to-date version of the branch
-git checkout origin/devel -- &lt;submodule&gt; # Revert to the expected version of the submodule
-git commit -m "Revert accidental change to submodule" &lt;submodule&gt; # Save the version change
-git submodule update &lt;submodule&gt; # Update your local copy of the submodule to the new version
-</code></pre></div>
+<p>Note also that the way of annotating such errors depends on how they are raised. This reflects the fact that <code>assert</code> errors should only be seen by developers while <code>abort</code> errors will also be seen by users.
+Assertions indicate the line and file where they originated so it is easy for developers to locate any associated comments. This also gives them  starting point for how to debug the error.
+In contrast <code>abort</code> errors are written into the line that raises the error. This means that the error is printed to the command line when the executable fails. The message should include enough information for the user to understand what is happening so they have an idea of how to change their input to fix this problem.</p>
+<h2 id="i-have-problems-with-git-submodules">I have problems with git submodules</h2>
+<p>See the dedicated documentation about <a href="../how_to/Using_git.html#submodules">git submodules</a>.</p></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="Adding_docs.html" class="btn btn-neutral float-left" title="Adding Docs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="developer_FAQ.html" class="btn btn-neutral float-right" title="Developer FAQ">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="Common_compilation_problems.html" class="btn btn-neutral float-left" title="Compilation Problems"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../CONTRIBUTING.html" class="btn btn-neutral float-right" title="How to Contribute">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -647,10 +660,10 @@ git submodule update &lt;submodule&gt; # Update your local copy of the submodule
         </span>
     
     
-      <span><a href="Adding_docs.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="Common_compilation_problems.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="developer_FAQ.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../CONTRIBUTING.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -659,7 +672,6 @@ git submodule update &lt;submodule&gt; # Update your local copy of the submodule
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
       <script src="../jscript/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>

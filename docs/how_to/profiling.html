@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Coding Standard - GyselalibX</title>
+    <title>Measuring Performance - GyselalibX</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Coding Standard";
-        var mkdocs_page_input_path = "docs/standards/CODING_STANDARD.md";
+        var mkdocs_page_name = "Measuring Performance";
+        var mkdocs_page_input_path = "docs/how_to/profiling.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> GyselalibX
+          <a href="../../index.html" class="icon icon-home"> GyselalibX
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,75 +40,29 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">General</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" >Tutorials</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/profiling.html">Measuring Performance in Gyselalib++</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">Your First Simulation</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Standards</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Coding Standard</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#c-features">C++ Features</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#parameter-passing">Parameter passing</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#naming">Naming</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#style">Style</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#gpu-management">GPU management</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#interfaces">Interfaces</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#code-organisation">Code Organisation</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#object-oriented-vs-functional-programming">Object-Oriented vs. Functional Programming</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#operators_1">Operators</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#data-storage">Data Storage</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#template-strategy">Template Strategy</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+              <p class="caption"><span class="caption-text">Core Concepts</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/mathematical_and_physical_conventions.html">Mathematical and Physical Conventions</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="coding_covariant_and_contravariant_tensors.html">Coding Covariant and Contravariant Tensors</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/coding_covariant_and_contravariant_tensors.html">Covariant and Contravariant Tensors</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Gyselalib++ Overview</span></p>
+              <p class="caption"><span class="caption-text">Library</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
     <ul>
@@ -519,20 +473,41 @@
     </ul>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Development</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/Adding_docs.html">Adding Docs</a>
+              <p class="caption"><span class="caption-text">How-to Guides</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Measuring Performance</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#general-profiling-with-kokkos-tools">General Profiling with Kokkos Tools</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-simplekerneltimer">Using SimpleKernelTimer</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#kokkos-profiling-regions">Kokkos Profiling Regions</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/Using_git.html">Using Git</a>
+                  <li class="toctree-l1"><a class="reference internal" href="Debugging_workflow.html">Debugging</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/developer_FAQ.html">Developer FAQ</a>
+                  <li class="toctree-l1"><a class="reference internal" href="Development_tips.html">Running Static Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Using_git.html">Using Git</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Troubleshooting</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Problems</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Debugging_workflow.html">Debugging</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contributing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">How to Contribute</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/Adding_docs.html">Writing Documentation</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API</span></p>
@@ -576,6 +551,10 @@
     </ul>
                   </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -583,17 +562,17 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">GyselalibX</a>
+          <a href="../../index.html">GyselalibX</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Standards</li>
-      <li class="breadcrumb-item active">Coding Standard</li>
+    <li><a href="../../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">How-to Guides</li>
+      <li class="breadcrumb-item active">Measuring Performance</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/standards/CODING_STANDARD.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/how_to/profiling.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -601,121 +580,57 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="coding-standards">Coding Standards</h1>
-<h2 id="c-features">C++ Features</h2>
+                <div><h1 id="measuring-performance-in-gyselalib">Measuring Performance in Gyselalib++</h1>
+<p>Gyselalib++ is built on DDC which is in turn built on <a href="https://kokkos.org/kokkos-core-wiki/">Kokkos</a>. Kokkos provides integrated tooling for performance measurement which makes it simple to profile applications build with Gyselalib++.</p>
+<h2 id="general-profiling-with-kokkos-tools">General Profiling with Kokkos Tools</h2>
+<p>Kokkos Tools must be compiled before they can be used. If you have a system installation or an instance of Kokkos Tools elsewhere on you system then this can be used.</p>
+<p>Kokkos Tools provide hooks to measure and annotate performance data. You can enable a tool by setting the <code>KOKKOS_PROFILE_LIBRARY</code> environment variable to point to the shared library implementing the tool.</p>
+<p>For example:</p>
+<pre><code class="language-bash">export KOKKOS_TOOLS_LIBS=libkp_kernel_timer.so
+</code></pre>
+<p>Gyselalib++ will then automatically invoke the tool for all Kokkos kernels.</p>
+<p>There are several tools available which are documented by Kokkos Tools. The tools that are particularly useful are:</p>
 <ul>
-<li>We use C++17</li>
-<li>We don't use raw pointers</li>
-<li>We don't use plain C arrays</li>
-<li>We try not to use macros</li>
-<li>We try to <code>static_assert</code> all assumed information that can be known at compile-time</li>
-<li>We use <code>std::runtime_error</code> on CPU and <code>Kokkos::abort</code> on GPU to enforce suppositions which are dependent on user input. These checks should appear in constructors</li>
-<li>We use <code>assert</code> on CPU and <code>KOKKOS_ASSERT</code> on GPU to enforce suppositions which are independent of user input.</li>
-<li>The <code>auto</code> keyword should be avoided where possible. It is permitted in one of the following cases:</li>
-<li>to store objects that can not be typed otherwise (e.g. lambdas)</li>
-<li>to store the result of an expression specifically specifying the type of the generated value</li>
+<li><a href="https://github.com/kokkos/kokkos-tools/wiki/SimpleKernelTimer"><code>SimpleKernelTimer</code></a> for lightweight kernel-level timing.</li>
+<li><a href="https://github.com/kokkos/kokkos-tools/wiki/NVTXConnector"><code>NVTXConnector</code></a> for profiling with NVIDIA Nsight Systems.</li>
+<li><a href="https://github.com/kokkos/kokkos-tools/wiki/VTuneConnector"><code>VTuneConnector</code></a> for profiling with Intel VTune.</li>
 </ul>
-<h2 id="parameter-passing">Parameter passing</h2>
+<p>Details of how to use these tools can be found in the documentation of Kokkos Tools but we describe how to use <code>SimpleKernelTimer</code> which can be used on any system.</p>
+<h2 id="using-simplekerneltimer">Using SimpleKernelTimer</h2>
+<p><code>SimpleKernelTimer</code> records execution time for each Kokkos kernel launch, providing a quick overview of where runtime is spent.
+The results are saved to a <code>.dat</code> file. The name of this file is printed to the terminal.</p>
+<p>The <code>.dat</code> file cannot be read as is but executables in Kokkos Tools allow the file to be read. The possible executables are:</p>
 <ul>
-<li>We take out/inout-parameters (those we modify) first</li>
-<li>For in-parameters (those we use but don't modify)</li>
-<li>if it's a scalar native type (int, double, ...) we take it by copy</li>
-<li>if it's a const view type (<code>ConstField&lt;...&gt;</code>, <code>DVectorConstField&lt;...&gt;</code>, ...) we take it by copy</li>
-<li>otherwise, we take a const-ref: <code>Type const&amp;</code></li>
-<li>For inout-parameters</li>
-<li>if it's a modifiable view type (<code>Field&lt;...&gt;</code>, <code>DVectorField&lt;...&gt;</code>, ...) we take it by copy</li>
-<li>otherwise, we take a ref: <code>Type&amp;</code></li>
+<li><code>kp_reader</code> to output the data in human-readable format.</li>
+<li><code>kp_json_writer</code> to output the data in json format.</li>
 </ul>
-<h2 id="naming">Naming</h2>
-<ul>
-<li>Files, functions and variables use <code>snake_case</code>.</li>
-<li>Types use <code>CamelCase</code>.</li>
-<li>Macros use <code>ALL_CAPS</code>.</li>
-<li>Concepts use <code>CamelCase</code> when found in a <code>concepts::</code> namespace, and <code>snake_case</code> outside (e.g. <code>concepts::Mapping</code> and <code>is_mapping_v</code>).</li>
-<li>Non-static member variables names begin with an <code>m_</code> prefix.</li>
-<li>Static member variables names begin with an <code>s_</code> prefix.</li>
-<li>We don't use single letter variables.</li>
-<li>We don't rely on case to distinguish between variables.</li>
-<li>There are two types of DDC objects representing a multidimensional array : <code>FieldMem</code> (which possesses the data) and <code>Field</code> (which does not own the data but can be captured by <code>KOKKOS_LAMBDA</code>). We suffix <code>FieldMem</code> objects with <code>_alloc</code> if both variables are needed locally.</li>
-<li>If a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is <code>_host</code> suffixed.</li>
-<li>Capturing classes members through <code>KOKKOS_LAMBDA</code> or <code>KOKKOS_CLASS_LAMBDA</code> may be complicated, we often need to copy-by-reference the member to a local variable, which must be <code>_proxy</code> suffixed.</li>
-<li>Types representing continuous dimensions (<span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, <span class="arithmatex">\(r\)</span>, <span class="arithmatex">\(\theta\)</span>, etc) are named similarly to the mathematical dimension (<code>X</code>, <code>Y</code>, <code>R</code>, <code>Theta</code>, etc).</li>
-<li>Types representing a discretised grid along a continuous dimension are named <code>GridDim</code> where <code>Dim</code> is the continuous dimension.</li>
-<li>Types representing B-splines along a continuous dimension are named <code>BSplinesDim</code> where <code>Dim</code> is the continuous dimension.</li>
-<li>Grids on an unknown dimension are named <code>Grid1D</code>.</li>
-<li>Aliases for <code>Idx&lt;..&gt;</code>, <code>IdxStep&lt;..&gt;</code>, <code>IdxRange&lt;..&gt;</code> should begin with the name of the template (e.g. <code>IdxX</code>).</li>
-</ul>
-<h2 id="style">Style</h2>
-<ul>
-<li>We use the style specified by the <code>.clang-format</code> file using clang-format 10.</li>
-<li>we do not use numerical values in the code except to initialise a named constexpr documenting
-  the semantic of the value.</li>
-<li>In a class</li>
-<li>we put all member types first (public, then protected, then private),</li>
-<li>followed by static member variables (public, then protected, then private),</li>
-<li>followed by non-static member variables (public, then protected, then private),</li>
-<li>followed by static member functions (public, then protected, then private),</li>
-<li>followed by non-static member functions (public, then protected, then private),<ul>
-<li>the constructors first</li>
-<li>then the destructor</li>
-<li>then the various operators</li>
-<li>then the accessors</li>
-<li>then the more complex functions</li>
-</ul>
-</li>
-<li>We comment our code with Doxygen.</li>
-<li>We use at @@keywords in Doxygen.</li>
-<li>we use east-const: <code>int const</code> rather than <code>const int</code>.</li>
-</ul>
-<h2 id="gpu-management">GPU management</h2>
-<ul>
-<li>GPU code is the default.</li>
-<li>When calling methods beginning with the prefix <code>parallel_</code> we always specify the execution space.</li>
-<li>When calling mirror functions, the host execution space is never passed as an argument.</li>
-</ul>
-<h2 id="operators">Operators</h2>
-<h3 id="interfaces">Interfaces</h3>
-<p>We define an <em>interface</em> to be an empty class (i.e. without any member
-variable) offering a pure virtual call operator: <code>operator()</code> and can
-offer various overloads of this operator with different parameters but
-similar behaviour.</p>
-<p>Interfaces should:</p>
-<ul>
-<li>be prefixed by <code>I</code> as in <code>IVlasovSolver</code>,</li>
-<li>explicitly define a virtual destructor,</li>
-<li>implicitly define constructors and assignment operators.</li>
-</ul>
-<h3 id="implementation">Implementation</h3>
-<p>Implementation classes should implement at least one interface.
-When relying on other operations, these classes should use the dependency
-injection pattern.
-Each implementation class should take <code>const</code> references to the used operations
-interfaces as parameters of the constructor and store them so as to call them in
-the <code>operator()</code> implementation.</p>
-<h2 id="code-organisation">Code Organisation</h2>
-<h3 id="object-oriented-vs-functional-programming">Object-Oriented vs. Functional Programming</h3>
-<p>There are multiple coding paradigms possible when writing code in C++. Two of the most common are object-oriented programming and functional programming. In object-oriented programming the aim is to make code more readable by grouping concepts within a class. Therefore functions are saved with the data on which they operate. On the other hand, in functional programming the aim is to make code more readable by making it more obvious where data is modified. This is done by separating data storage from operators. This way, data can never be modified inside its class without passing through an operator. In our code the functional programming paradigm was chosen as it allows us to write the code in a way which more closely resembles the equations.</p>
-<p>The code is therefore generally split into two types of classes: Operators and Data Storage.
-In order to ensure that you are following the functional programming paradigm when writing your code you should try to respect this separation.</p>
-<h4 id="operators_1">Operators</h4>
-<p>An operator is an object which can be described by an equation. For example a Poisson solver, an advection operator or a spline interpolation.</p>
-<p>Classes describing operators should contain as little data as possible. Data should only be stored in the operator if it is not relevant anywhere else in the code. If removing this operator to replace it with a new method would result in this data also being removed then it may be relevant to store it in the class.</p>
-<p>All operators should implement the function <code>operator()</code>. Usually this is the only function in the operator other than the constructor.</p>
-<p>If the operator relies on other operators (e.g. a semi-Lagrangian advection which requires an interpolation operator) then this dependency should be passed to the operator's constructor. It should be stored as a reference inside the function.</p>
-<h4 id="data-storage">Data Storage</h4>
-<p>It is rare to need to actually write a data storage class. In most cases they can be defined with a "using-declaration" using DDC types. This ensures that the data is defined on the relevant dimensions which in turn reduces the chance of errors arising from operating on the wrong dimensions of an array. For more information see <a href="https://github.com/CExA-project/ddc">DDC</a>.</p>
-<h3 id="template-strategy">Template Strategy</h3>
-<p>Templating is a very useful tool to improve performance, however it increases compilation overhead and reduces code readability, especially for developers less familiar with C++. We therefore try to strike a balance with the use of templates. Templates are therefore recommended in the following cases:</p>
-<ul>
-<li>In performance bottlenecks to improve results.</li>
-<li>Where they significantly decrease code duplication (~2 additional copies avoided).</li>
-</ul></div>
+<p>Example usage:</p>
+<pre><code class="language-bash">mkdir wk
+cd wk
+$GYSELALIB_BUILD/simulations/geometryXVx/landau/landau_fft --dump-config config_file.yml
+$GYSELALIB_BUILD/simulations/geometryXVx/landau/landau_fft config_file.yml
+$KOKKOS_TOOLS_BUILD_FOLDER/profiling/simple-kernel-timer/kp_json_writer my_data_file.dat &gt; landau_fft.json
+$KOKKOS_TOOLS_BUILD_FOLDER/profiling/simple-kernel-timer/kp_reader my_data_file.dat &gt; landau_fft.txt
+</code></pre>
+<p>The timings in the output come from 2 sources:</p>
+<ol>
+<li>Regions : Added manually.</li>
+<li>Kernels : Generated by calls to Kokkos parallel methods.</li>
+</ol>
+<h3 id="kokkos-profiling-regions">Kokkos Profiling Regions</h3>
+<p>The code already contains some Kokkos regions for timing the code, however more can be added manually to investigate the performance more precisely.</p>
+<p>In order to start a region the following line should be used:</p>
+<pre><code class="language-cpp">Kokkos::Profiling::pushRegion("MyProfilingRegion");
+</code></pre>
+<p>where <code>MyProfilingRegion</code> is a string identifying the region. To exit the region the following line should be used:</p>
+<pre><code class="language-cpp">Kokkos::Profiling::popRegion();
+</code></pre></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../first_steps/profiling.html" class="btn btn-neutral float-left" title="Measuring Performance in Gyselalib++"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="mathematical_and_physical_conventions.html" class="btn btn-neutral float-right" title="Maths and Physics">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../tests/multipatch/interface_derivatives/index.html" class="btn btn-neutral float-left" title="Interface derivatives test"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="Debugging_workflow.html" class="btn btn-neutral float-right" title="Debugging">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -742,10 +657,10 @@ In order to ensure that you are following the functional programming paradigm wh
         </span>
     
     
-      <span><a href="../first_steps/profiling.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../tests/multipatch/interface_derivatives/index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="mathematical_and_physical_conventions.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="Debugging_workflow.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -754,7 +669,6 @@ In order to ensure that you are following the functional programming paradigm wh
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
       <script src="../jscript/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>

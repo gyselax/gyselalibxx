@@ -2268,7 +2268,7 @@
 <para>An alias describing the type of a coordinate (e.g. a coordinate in phase-space (x, vx)). </para>
         </briefdescription>
         <detaileddescription>
-<para>This file contains aliases for DDC. The documentation for DDC can be found at <ulink url="https://ddc.mdls.fr/">https://ddc.mdls.fr/</ulink>. The names used in the DDC project are not always intuitive for mathematicians/physicists therefore Gysela has chosen to introduce this file to provide names that are hopefully more intuitive. The documentation for these concepts can be found in the Gysela documentation at: <ulink url="https://gyselax.github.io/gyselalibxx/docs_DDC_in_gyselalibxx.html">https://gyselax.github.io/gyselalibxx/docs_DDC_in_gyselalibxx.html</ulink> </para>
+<para>This file contains aliases for DDC. The documentation for DDC can be found at <ulink url="https://ddc.mdls.fr/">https://ddc.mdls.fr/</ulink>. The names used in the DDC project are not always intuitive for mathematicians/physicists therefore Gysela has chosen to introduce this file to provide names that are hopefully more intuitive. The documentation for these concepts can be found in the Gysela documentation at: <ulink url="https://gyselax.github.io/gyselalibxx/docs/core_concepts/DDC_in_gyselalibxx.html">https://gyselax.github.io/gyselalibxx/docs/core_concepts/DDC_in_gyselalibxx.html</ulink> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>

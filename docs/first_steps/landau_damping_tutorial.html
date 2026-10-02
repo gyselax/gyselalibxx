@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>1D-1V Landau Damping Simulation with Gyselalib++ - GyselalibX</title>
+    <title>Your First Simulation - GyselalibX</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "1D-1V Landau Damping Simulation with Gyselalib++";
+        var mkdocs_page_name = "Your First Simulation";
         var mkdocs_page_input_path = "docs/first_steps/landau_damping_tutorial.md";
         var mkdocs_page_url = null;
       </script>
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> GyselalibX
+          <a href="../../index.html" class="icon icon-home"> GyselalibX
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,101 +40,99 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">General</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
-                </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" >Tutorials</a>
-    <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">1D-1V Landau Damping Simulation with Gyselalib++</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#problem-setup-vlasovpoisson-in-1d-1v">Problem Setup: Vlasov–Poisson in 1D-1V</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#continuous-geometry">Continuous Geometry</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#numerical-methods">Numerical Methods</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#predictorcorrector-scheme">Predictor–Corrector Scheme</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#poisson-solver">Poisson Solver</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#charge-density-via-quadrature">Charge Density via Quadrature</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#operator-splitting">Operator Splitting</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#semi-lagrangian-advection">Semi-Lagrangian Advection</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#spline-representation">Spline Representation</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#constructing-the-simulation">Constructing the Simulation</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#defining-the-spline-basis">Defining the Spline Basis</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#generating-the-grid-from-the-spline-space">Generating the Grid from the Spline Space</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#defining-the-grid-of-species">Defining the Grid of Species</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#defining-the-spline-interpolation">Defining the Spline Interpolation</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#leveraging-common-geometries">Leveraging Common Geometries</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#constructing-the-semi-lagrangian-advection-operators">Constructing the Semi-Lagrangian Advection Operators</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#implementing-the-operator-splitting-strategy">Implementing the Operator Splitting Strategy</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#solving-the-poisson-equation">Solving the Poisson Equation</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#assembling-the-time-stepping-scheme">Assembling the Time-Stepping Scheme</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#specifying-initial-conditions">Specifying Initial Conditions</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#analytical-form">Analytical Form</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#implementation-in-the-code">Implementation in the code</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#output-and-postprocessing">Output and Postprocessing</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#running-the-simulation">Running the Simulation</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
-    </li>
-    </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="profiling.html">Measuring Performance in Gyselalib++</a>
-                </li>
-    </ul>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Standards</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/CODING_STANDARD.html">Coding Standard</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/coding_covariant_and_contravariant_tensors.html">Coding Covariant and Contravariant Tensors</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Your First Simulation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#problem-setup-vlasovpoisson-in-1d-1v">Problem Setup: Vlasov–Poisson in 1D-1V</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#continuous-geometry">Continuous Geometry</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#numerical-methods">Numerical Methods</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#predictorcorrector-scheme">Predictor–Corrector Scheme</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#poisson-solver">Poisson Solver</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#charge-density-via-quadrature">Charge Density via Quadrature</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#operator-splitting">Operator Splitting</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#semi-lagrangian-advection">Semi-Lagrangian Advection</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#spline-representation">Spline Representation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constructing-the-simulation">Constructing the Simulation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#defining-the-spline-basis">Defining the Spline Basis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generating-the-grid-from-the-spline-space">Generating the Grid from the Spline Space</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#spline-dependent-grids-with-input">Spline Dependent Grids with Input</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#defining-the-grid-of-species">Defining the Grid of Species</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#defining-the-spline-interpolation">Defining the Spline Interpolation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#leveraging-common-geometries">Leveraging Common Geometries</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#constructing-the-semi-lagrangian-advection-operators">Constructing the Semi-Lagrangian Advection Operators</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#implementing-the-operator-splitting-strategy">Implementing the Operator Splitting Strategy</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#solving-the-poisson-equation">Solving the Poisson Equation</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#evaluating-the-charge-density">Evaluating the Charge Density</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#solving-the-equation-with-an-fft-solver">Solving the Equation with an FFT Solver</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#assembling-the-time-stepping-scheme">Assembling the Time-Stepping Scheme</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#specifying-initial-conditions">Specifying Initial Conditions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#analytical-form">Analytical Form</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#implementation-in-the-code">Implementation in the code</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#output-and-postprocessing">Output and Postprocessing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running-the-simulation">Running the Simulation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a>
+    </li>
+    </ul>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Gyselalib++ Overview</span></p>
+              <p class="caption"><span class="caption-text">Core Concepts</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/mathematical_and_physical_conventions.html">Mathematical and Physical Conventions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/coding_covariant_and_contravariant_tensors.html">Covariant and Contravariant Tensors</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Library</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
     <ul>
@@ -545,20 +543,31 @@
     </ul>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Development</span></p>
+              <p class="caption"><span class="caption-text">How-to Guides</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/Adding_docs.html">Adding Docs</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/profiling.html">Measuring Performance</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/Using_git.html">Using Git</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Debugging_workflow.html">Debugging</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/developer_FAQ.html">Developer FAQ</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Development_tips.html">Running Static Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Using_git.html">Using Git</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Troubleshooting</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Problems</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Debugging_workflow.html">Debugging</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contributing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">How to Contribute</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/Adding_docs.html">Writing Documentation</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API</span></p>
@@ -602,6 +611,10 @@
     </ul>
                   </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -609,16 +622,15 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">GyselalibX</a>
+          <a href="../../index.html">GyselalibX</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">General</li>
-          <li class="breadcrumb-item">Tutorials</li>
-      <li class="breadcrumb-item active">1D-1V Landau Damping Simulation with Gyselalib++</li>
+    <li><a href="../../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Getting Started</li>
+      <li class="breadcrumb-item active">Your First Simulation</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/first_steps/landau_damping_tutorial.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -952,7 +964,7 @@ BslAdvectionVelocity&lt;GeometryXVx, GridVx&gt; const advection_vx(spline_vx_int
 <pre><code class="language-cpp">DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients&lt;
                                     Kokkos::DefaultExecutionSpace&gt;(mesh_vx, builder_vx));
 </code></pre>
-<p>Here <code>DFieldMemVx</code> is a field of doubles defined along the Vx dimension. The keyword <code>Mem</code> indicates that this object allocates memory on instantiation. It should not be used directly, the field must always be extracted. For more explanations see <a href="DDC_in_gyselalibxx.html">Using DDC in Gyselalib++</a>.</p>
+<p>Here <code>DFieldMemVx</code> is a field of doubles defined along the Vx dimension. The keyword <code>Mem</code> indicates that this object allocates memory on instantiation. It should not be used directly, the field must always be extracted. For more explanations see <a href="../core_concepts/DDC_in_gyselalibxx.html">Using DDC in Gyselalib++</a>.</p>
 <p>The charge density calculator can be expressed simply using the <code>Quadrature</code> class. Gyselalib++ provides an operator for the XVx case which can be used as an example for other geometries.
 This operator is assembled from this field of quadrature coefficients as follows:</p>
 <pre><code class="language-cpp">ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
@@ -1051,8 +1063,8 @@ ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../CONTRIBUTING.html" class="btn btn-neutral float-left" title="Contributing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="profiling.html" class="btn btn-neutral float-right" title="Measuring Performance in Gyselalib++">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../toolchains/index.html" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../core_concepts/DDC_in_gyselalibxx.html" class="btn btn-neutral float-right" title="DDC in Gyselalib++">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -1079,10 +1091,10 @@ ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
         </span>
     
     
-      <span><a href="../CONTRIBUTING.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../toolchains/index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="profiling.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../core_concepts/DDC_in_gyselalibxx.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -1091,7 +1103,6 @@ ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
       <script src="../jscript/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>

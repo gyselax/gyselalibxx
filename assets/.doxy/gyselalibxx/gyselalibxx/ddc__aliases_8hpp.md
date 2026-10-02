@@ -123,7 +123,7 @@ using Coord =  ddc::Coordinate<Dims...>;
 
 
 
-This file contains aliases for DDC. The documentation for DDC can be found at [https://ddc.mdls.fr/](https://ddc.mdls.fr/). The names used in the DDC project are not always intuitive for mathematicians/physicists therefore Gysela has chosen to introduce this file to provide names that are hopefully more intuitive. The documentation for these concepts can be found in the Gysela documentation at: [https://gyselax.github.io/gyselalibxx/docs\_DDC\_in\_gyselalibxx.html](https://gyselax.github.io/gyselalibxx/docs_DDC_in_gyselalibxx.html) 
+This file contains aliases for DDC. The documentation for DDC can be found at [https://ddc.mdls.fr/](https://ddc.mdls.fr/). The names used in the DDC project are not always intuitive for mathematicians/physicists therefore Gysela has chosen to introduce this file to provide names that are hopefully more intuitive. The documentation for these concepts can be found in the Gysela documentation at: [https://gyselax.github.io/gyselalibxx/docs/core\_concepts/DDC\_in\_gyselalibxx.html](https://gyselax.github.io/gyselalibxx/docs/core_concepts/DDC_in_gyselalibxx.html) 
 
 
         

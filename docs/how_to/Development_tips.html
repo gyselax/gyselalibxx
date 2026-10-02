@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Measuring Performance in Gyselalib++ - GyselalibX</title>
+    <title>Running Static Analysis - GyselalibX</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Measuring Performance in Gyselalib++";
-        var mkdocs_page_input_path = "docs/first_steps/profiling.md";
+        var mkdocs_page_name = "Running Static Analysis";
+        var mkdocs_page_input_path = "docs/how_to/Development_tips.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> GyselalibX
+          <a href="../../index.html" class="icon icon-home"> GyselalibX
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,51 +40,29 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">General</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
-                </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" >Tutorials</a>
-    <ul class="current">
-                <li class="toctree-l2"><a class="reference internal" href="landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
-                </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">Measuring Performance in Gyselalib++</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#general-profiling-with-kokkos-tools">General Profiling with Kokkos Tools</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#using-simplekerneltimer">Using SimpleKernelTimer</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#kokkos-profiling-regions">Kokkos Profiling Regions</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                </li>
-    </ul>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Standards</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/CODING_STANDARD.html">Coding Standard</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/coding_covariant_and_contravariant_tensors.html">Coding Covariant and Contravariant Tensors</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">Your First Simulation</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Gyselalib++ Overview</span></p>
+              <p class="caption"><span class="caption-text">Core Concepts</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/mathematical_and_physical_conventions.html">Mathematical and Physical Conventions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core_concepts/coding_covariant_and_contravariant_tensors.html">Covariant and Contravariant Tensors</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Library</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
     <ul>
@@ -495,20 +473,35 @@
     </ul>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Development</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/Adding_docs.html">Adding Docs</a>
+              <p class="caption"><span class="caption-text">How-to Guides</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="profiling.html">Measuring Performance</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/Using_git.html">Using Git</a>
+                  <li class="toctree-l1"><a class="reference internal" href="Debugging_workflow.html">Debugging</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/developer_FAQ.html">Developer FAQ</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Running Static Analysis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#cppcheck">Cppcheck</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Using_git.html">Using Git</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Troubleshooting</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Problems</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Debugging_workflow.html">Debugging</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contributing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">How to Contribute</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/Adding_docs.html">Writing Documentation</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API</span></p>
@@ -552,6 +545,10 @@
     </ul>
                   </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -559,18 +556,17 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">GyselalibX</a>
+          <a href="../../index.html">GyselalibX</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">General</li>
-          <li class="breadcrumb-item">Tutorials</li>
-      <li class="breadcrumb-item active">Measuring Performance in Gyselalib++</li>
+    <li><a href="../../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">How-to Guides</li>
+      <li class="breadcrumb-item active">Running Static Analysis</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/first_steps/profiling.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/how_to/Development_tips.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -578,57 +574,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="measuring-performance-in-gyselalib">Measuring Performance in Gyselalib++</h1>
-<p>Gyselalib++ is built on DDC which is in turn built on <a href="https://kokkos.org/kokkos-core-wiki/">Kokkos</a>. Kokkos provides integrated tooling for performance measurement which makes it simple to profile applications build with Gyselalib++.</p>
-<h2 id="general-profiling-with-kokkos-tools">General Profiling with Kokkos Tools</h2>
-<p>Kokkos Tools must be compiled before they can be used. If you have a system installation or an instance of Kokkos Tools elsewhere on you system then this can be used.</p>
-<p>Kokkos Tools provide hooks to measure and annotate performance data. You can enable a tool by setting the <code>KOKKOS_PROFILE_LIBRARY</code> environment variable to point to the shared library implementing the tool.</p>
-<p>For example:</p>
-<pre><code class="language-bash">export KOKKOS_TOOLS_LIBS=libkp_kernel_timer.so
-</code></pre>
-<p>Gyselalib++ will then automatically invoke the tool for all Kokkos kernels.</p>
-<p>There are several tools available which are documented by Kokkos Tools. The tools that are particularly useful are:</p>
-<ul>
-<li><a href="https://github.com/kokkos/kokkos-tools/wiki/SimpleKernelTimer"><code>SimpleKernelTimer</code></a> for lightweight kernel-level timing.</li>
-<li><a href="https://github.com/kokkos/kokkos-tools/wiki/NVTXConnector"><code>NVTXConnector</code></a> for profiling with NVIDIA Nsight Systems.</li>
-<li><a href="https://github.com/kokkos/kokkos-tools/wiki/VTuneConnector"><code>VTuneConnector</code></a> for profiling with Intel VTune.</li>
-</ul>
-<p>Details of how to use these tools can be found in the documentation of Kokkos Tools but we describe how to use <code>SimpleKernelTimer</code> which can be used on any system.</p>
-<h2 id="using-simplekerneltimer">Using SimpleKernelTimer</h2>
-<p><code>SimpleKernelTimer</code> records execution time for each Kokkos kernel launch, providing a quick overview of where runtime is spent.
-The results are saved to a <code>.dat</code> file. The name of this file is printed to the terminal.</p>
-<p>The <code>.dat</code> file cannot be read as is but executables in Kokkos Tools allow the file to be read. The possible executables are:</p>
-<ul>
-<li><code>kp_reader</code> to output the data in human-readable format.</li>
-<li><code>kp_json_writer</code> to output the data in json format.</li>
-</ul>
-<p>Example usage:</p>
-<pre><code class="language-bash">mkdir wk
-cd wk
-$GYSELALIB_BUILD/simulations/geometryXVx/landau/landau_fft --dump-config config_file.yml
-$GYSELALIB_BUILD/simulations/geometryXVx/landau/landau_fft config_file.yml
-$KOKKOS_TOOLS_BUILD_FOLDER/profiling/simple-kernel-timer/kp_json_writer my_data_file.dat &gt; landau_fft.json
-$KOKKOS_TOOLS_BUILD_FOLDER/profiling/simple-kernel-timer/kp_reader my_data_file.dat &gt; landau_fft.txt
-</code></pre>
-<p>The timings in the output come from 2 sources:</p>
-<ol>
-<li>Regions : Added manually.</li>
-<li>Kernels : Generated by calls to Kokkos parallel methods.</li>
-</ol>
-<h3 id="kokkos-profiling-regions">Kokkos Profiling Regions</h3>
-<p>The code already contains some Kokkos regions for timing the code, however more can be added manually to investigate the performance more precisely.</p>
-<p>In order to start a region the following line should be used:</p>
-<pre><code class="language-cpp">Kokkos::Profiling::pushRegion("MyProfilingRegion");
-</code></pre>
-<p>where <code>MyProfilingRegion</code> is a string identifying the region. To exit the region the following line should be used:</p>
-<pre><code class="language-cpp">Kokkos::Profiling::popRegion();
-</code></pre></div>
+                <div><h1 id="development-tips">Development tips</h1>
+<p>This page describes any tips we have for developers.</p>
+<h2 id="cppcheck">Cppcheck</h2>
+<p>Our CI uses <a href="https://cppcheck.sourceforge.io/">cppcheck</a> to verify that best practices for C++ are followed. In addition we have some addons that have been written to catch common coding errors. To run these tests for Gyselalib++ or for a project which has Gyselalib++ as a submodule, simply use the script <code>${GYSELALIB_ROOT}/bin/run_cppcheck</code>.</p></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="landau_damping_tutorial.html" class="btn btn-neutral float-left" title="1D-1V Landau Damping Simulation with Gyselalib++"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../standards/CODING_STANDARD.html" class="btn btn-neutral float-right" title="Coding Standard">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="Debugging_workflow.html" class="btn btn-neutral float-left" title="Debugging"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="Using_git.html" class="btn btn-neutral float-right" title="Using Git">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -655,10 +610,10 @@ $KOKKOS_TOOLS_BUILD_FOLDER/profiling/simple-kernel-timer/kp_reader my_data_file.
         </span>
     
     
-      <span><a href="landau_damping_tutorial.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="Debugging_workflow.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../standards/CODING_STANDARD.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="Using_git.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -667,7 +622,6 @@ $KOKKOS_TOOLS_BUILD_FOLDER/profiling/simple-kernel-timer/kp_reader my_data_file.
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
       <script src="../jscript/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>

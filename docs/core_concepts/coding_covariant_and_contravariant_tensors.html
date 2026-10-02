@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Coding Covariant and Contravariant Tensors - GyselalibX</title>
+    <title>Covariant and Contravariant Tensors - GyselalibX</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Coding Covariant and Contravariant Tensors";
-        var mkdocs_page_input_path = "docs/standards/coding_covariant_and_contravariant_tensors.md";
+        var mkdocs_page_name = "Covariant and Contravariant Tensors";
+        var mkdocs_page_input_path = "docs/core_concepts/coding_covariant_and_contravariant_tensors.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> GyselalibX
+          <a href="../../index.html" class="icon icon-home"> GyselalibX
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,38 +40,26 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">General</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" >Tutorials</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../first_steps/profiling.html">Measuring Performance in Gyselalib++</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">Your First Simulation</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Standards</span></p>
+              <p class="caption"><span class="caption-text">Core Concepts</span></p>
               <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="CODING_STANDARD.html">Coding Standard</a>
+                  <li class="toctree-l1"><a class="reference internal" href="DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="mathematical_and_physical_conventions.html">Mathematical and Physical Conventions</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Coding Covariant and Contravariant Tensors</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Covariant and Contravariant Tensors</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
     </li>
@@ -136,7 +124,7 @@
     </ul>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Gyselalib++ Overview</span></p>
+              <p class="caption"><span class="caption-text">Library</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
     <ul>
@@ -547,20 +535,31 @@
     </ul>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Development</span></p>
+              <p class="caption"><span class="caption-text">How-to Guides</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/Adding_docs.html">Adding Docs</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/profiling.html">Measuring Performance</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/Using_git.html">Using Git</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Debugging_workflow.html">Debugging</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../development/developer_FAQ.html">Developer FAQ</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Development_tips.html">Running Static Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../how_to/Using_git.html">Using Git</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Troubleshooting</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Problems</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Debugging_workflow.html">Debugging</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contributing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">How to Contribute</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/Adding_docs.html">Writing Documentation</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API</span></p>
@@ -604,6 +603,10 @@
     </ul>
                   </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -611,17 +614,17 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">GyselalibX</a>
+          <a href="../../index.html">GyselalibX</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Standards</li>
-      <li class="breadcrumb-item active">Coding Covariant and Contravariant Tensors</li>
+    <li><a href="../../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Core Concepts</li>
+      <li class="breadcrumb-item active">Covariant and Contravariant Tensors</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/standards/coding_covariant_and_contravariant_tensors.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/core_concepts/coding_covariant_and_contravariant_tensors.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -844,7 +847,7 @@ DTensor&lt;EtaBasis_cov, EtaBasis&gt; P = tensor_mul(index&lt;'i','j'&gt;(M), in
 <p>In many physical applications (including plasma physics) fields are not just scalar quantities, but vector-valued functions defined over a spatial domain. For example, the electric field <span class="arithmatex">\(\mathbf{E}(\mathbf{x})\)</span> associates a vector to each point in space.</p>
 <p>In Gyselalib++, this is represented using <code>VectorField</code>, a field whose values are vectors, defined at each point on a discretised grid.</p>
 <p>You can think of a DVectorField as a Field where each element is a DVector.</p>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> If you’re not yet familiar with scalar <code>Field&lt;T, Idx&gt;</code> types, refer to the documentation about <a href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a> for an introduction.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> If you’re not yet familiar with scalar <code>Field&lt;T, Idx&gt;</code> types, refer to the documentation about <a href="DDC_in_gyselalibxx.html">DDC in Gyselalib++</a> for an introduction.</p>
 <h3 id="syntax">Syntax</h3>
 <pre><code class="language-cpp">DVectorField&lt;
     IdxRange&lt;GridR, GridTheta&gt;, // Discretised grid as for a scalar field
@@ -935,7 +938,7 @@ ddcHelper::get&lt;Z&gt;(z) = ...;
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="mathematical_and_physical_conventions.html" class="btn btn-neutral float-left" title="Maths and Physics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="mathematical_and_physical_conventions.html" class="btn btn-neutral float-left" title="Mathematical and Physical Conventions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../../src/index.html" class="btn btn-neutral float-right" title="Gyselalib++ contents">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -975,7 +978,6 @@ ddcHelper::get&lt;Z&gt;(z) = ...;
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
       <script src="../jscript/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>
