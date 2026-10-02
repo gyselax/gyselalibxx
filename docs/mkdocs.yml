@@ -12,7 +12,6 @@ edit_uri: edit/main/
 # Pages which must be read by new users should be placed in their topical section and linked
 # from the "Getting Started" pages rather than being placed in the "Getting Started" section.
 nav:
-  - Home: docs/home.md
   - About Gyselalib++: README.md
   - Getting Started:            # Onboarding path for new users
       - Start Here: docs/first_steps/index.md

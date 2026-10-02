@@ -19,10 +19,18 @@ The theoretical approach and implementation details builds on the following pape
 A list of Gysela related publications can be found here: [Publications](
 https://gyselax.github.io/publication/)
 
-## First steps
+## Documentation
 
-- If you want to install Gyselalib++ follow: [installation](toolchains/README.md).
-- [Getting Started with Gyselalib++](docs/first_steps/getting_started.md).
+More information about the library can be found in the [documentation](https://gyselax.github.io/gyselalibxx/). The documentation contains the following sections:
+
+- [Getting Started](first_steps/index.md) : A reading list for new users and developers, ending with a tutorial which builds a complete simulation.
+- [Core Concepts](core_concepts/index.md) : Explanations of the ideas used throughout the code. These pages are worth returning to whenever you are unsure how something works.
+- [Library](../src/README.md) : A description of each component of the library, the simulations and the tests.
+- [How-to Guides](how_to/index.md) : Instructions for specific tasks such as profiling, debugging or using git.
+- [Troubleshooting](troubleshooting/index.md) : Solutions to common errors, organised by the error message you see.
+- [Contributing](contributing/index.md) : How to propose changes, the coding standard and how to write documentation.
+- [API Reference](../gyselalibxx/annotated.md) : Documentation generated from the code for every class and function.
+- [Changelog](../CHANGELOG.md) : The changes made in each version.
 
 ## Questions?
 
