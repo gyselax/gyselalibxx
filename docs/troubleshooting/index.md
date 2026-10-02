@@ -6,7 +6,7 @@ If your problem is not listed here, please check the [issues](https://github.com
 ## Compilation errors
 
 Search this table for a part of the error message reported by your compiler.
-Compiler errors refer to types by their DDC names (e.g. `ddc::ChunkSpan` instead of `Field`). The [DDC and Gyselalib++ names](../core_concepts/index.md#ddc-and-gyselalib-names) table can be used to translate them.
+Compiler errors refer to types by their DDC names (e.g. `ddc::ChunkSpan` instead of `Field`). The [DDC and Gyselalib++ names](../core_concepts/ddc_names.md) page can be used to translate them.
 
 | The error message contains | Solution |
 | --- | --- |

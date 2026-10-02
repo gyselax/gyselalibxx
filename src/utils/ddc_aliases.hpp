@@ -12,6 +12,9 @@
  * Gysela has chosen to introduce this file to provide names that are hopefully more intuitive.
  * The documentation for these concepts can be found in the Gysela documentation at:
  * <https://gyselax.github.io/gyselalibxx/docs/core_concepts/DDC_in_gyselalibxx.html>
+ * A table mapping each alias to the corresponding DDC name can be found at:
+ * <https://gyselax.github.io/gyselalibxx/docs/core_concepts/ddc_names.html>
+ * Please update this table when adding a new alias.
  */
 
 /// An alias describing the type of a coordinate (e.g. a coordinate in phase-space (x, vx)).
