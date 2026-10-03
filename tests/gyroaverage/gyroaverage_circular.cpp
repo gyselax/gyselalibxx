@@ -13,6 +13,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "gyroaverage_operator.hpp"
+#include "spline_interpolation.hpp"
 #include "test_math_utils.hpp"
 
 namespace {
@@ -66,31 +67,16 @@ struct GridBatch : UniformGridBase<Batch>
 };
 
 template <class ExecutionSpace>
-using SplineRThetaBuilderType = ddc::SplineBuilder2D<
+using SplineRThetaInterpolatorType = SplineInterpolator<
         ExecutionSpace,
-        typename ExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        SplineRClosure, // boundary at r=0
-        SplineRClosure, // boundary at rmax
-        SplineThetaClosure,
-        SplineThetaClosure,
-        ddc::SplineSolver::LAPACK>;
-
-template <class ExecutionSpace>
-using SplineRThetaEvaluatorNullBoundType = ddc::SplineEvaluator2D<
-        ExecutionSpace,
-        typename ExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRange<GridR, GridTheta>,
+        ExtrapolationRule::Null_Null, // radial extrapolation
+        ExtrapolationRule::Periodic, // poloidal extrapolation
+        SplineBoundaryClosures<
+                SplineRClosure, // boundary at r=0
+                SplineRClosure>, // boundary at rmax
+        SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure>>;
 
 using CoordR = Coord<R>;
 using CoordTheta = Coord<Theta>;
@@ -262,29 +248,16 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
     DConstFieldRThetaBatch A = get_const_field(m_A_alloc);
     DFieldRThetaBatch A_bar = get_field(m_A_bar_alloc);
 
-    using SplineRThetaBuilder = SplineRThetaBuilderType<Kokkos::DefaultExecutionSpace>;
-    using SplineRThetaEvaluatorNullBound
-            = SplineRThetaEvaluatorNullBoundType<Kokkos::DefaultExecutionSpace>;
+    using SplineRThetaInterpolator = SplineRThetaInterpolatorType<Kokkos::DefaultExecutionSpace>;
 
     IdxRangeRTheta const rtheta_idx_range = get_idx_range<GridR, GridTheta>(A_bar);
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaBuilder const spline_builder(rtheta_idx_range);
-    SplineRThetaEvaluatorNullBound const spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    SplineRThetaInterpolator const spline_interpolator(rtheta_idx_range);
 
-    using GyroAverageOperatorType = GyroAverageOperator<
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorNullBound,
-            IdxRangeRThetaBatch,
-            CartesianToPolar>;
+    using GyroAverageOperatorType
+            = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeRThetaBatch, CartesianToPolar>;
     GyroAverageOperatorType gyroaverage(
             get_const_field(m_rho_L_alloc),
-            spline_builder,
-            spline_evaluator,
+            spline_interpolator,
             CartesianToPolar(),
             m_nb_gyro_points);
     gyroaverage(A_bar, A);
@@ -311,30 +284,17 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     DConstFieldRThetaBatch A = get_const_field(m_A_alloc);
     DFieldRThetaBatch A_bar = get_field(m_A_bar_alloc);
 
-    using SplineRThetaBuilder = SplineRThetaBuilderType<Kokkos::DefaultExecutionSpace>;
-    using SplineRThetaEvaluatorNullBound
-            = SplineRThetaEvaluatorNullBoundType<Kokkos::DefaultExecutionSpace>;
+    using SplineRThetaInterpolator = SplineRThetaInterpolatorType<Kokkos::DefaultExecutionSpace>;
 
     IdxRangeRThetaBatch const rthetabatch_idx_range = get_idx_range(A_bar);
     IdxRangeRTheta const rtheta_idx_range(rthetabatch_idx_range);
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaBuilder const spline_builder(rtheta_idx_range);
-    SplineRThetaEvaluatorNullBound const spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    SplineRThetaInterpolator const spline_interpolator(rtheta_idx_range);
 
-    using GyroAverageOperatorType = GyroAverageOperator<
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorNullBound,
-            IdxRangeRThetaBatch,
-            CartesianToPolar>;
+    using GyroAverageOperatorType
+            = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeRThetaBatch, CartesianToPolar>;
     GyroAverageOperatorType gyroaverage(
             get_const_field(m_rho_L_alloc),
-            spline_builder,
-            spline_evaluator,
+            spline_interpolator,
             CartesianToPolar(),
             m_nb_gyro_points);
     gyroaverage(A_bar, A);

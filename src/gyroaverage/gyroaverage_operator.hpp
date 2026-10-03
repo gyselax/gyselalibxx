@@ -8,6 +8,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "i_interpolation.hpp"
 
 /**
  * @brief Operator to compute the gyroaverage of a field in (r, theta) coordinates.
@@ -16,34 +17,34 @@
  * The gyroaverage is computed by integrating the field over a set of points along a circle (the Larmor orbit)
  * centred at each grid point, with radius given by the local Larmor radius field (rho_L).
  *
- * The class uses 2D B-spline interpolation to evaluate the field at off-grid points along the orbit.
+ * The class uses 2D interpolation to evaluate the field at off-grid points along the orbit.
  * The operation is performed in parallel over the (r, theta) grid.
  *
- * @tparam SplineRThetaBuilder      The type of the spline builder for the rtheta interpolation
- * @tparam SplineRThetaEvaluator    The type of the spline evaluator for the rtheta interpolation
+ * @tparam RThetaInterpolator       The type of a rtheta interpolation scheme.
  * @tparam IdxRangeRminorThetaBatch The index range over R, Theta and Batch directions.
  * @tparam ToLogicalCoordTransform  Function to convert (R, Z) to (r, theta).
  */
 template <
-        class SplineRThetaBuilder,
-        class SplineRThetaEvaluator,
+        concepts::Interpolation RThetaInterpolator,
         class IdxRangeRminorThetaBatch,
         class ToLogicalCoordTransform>
 class GyroAverageOperator
 {
-    static_assert(
-            ddc::is_evaluator_admissible_v<SplineRThetaBuilder, SplineRThetaEvaluator>,
-            "SplineRThetaEvaluator must be admissible to SplineRThetaBuilder");
-    using ExecutionSpace = typename SplineRThetaBuilder::exec_space;
+    using RThetaBuilder = typename RThetaInterpolator::BuilderType;
+    using RThetaEvaluator = typename RThetaInterpolator::EvaluatorType;
 
-    using GridRminor = typename SplineRThetaBuilder::interpolation_discrete_dimension_type1;
-    using GridTheta = typename SplineRThetaBuilder::interpolation_discrete_dimension_type2;
+    using ExecutionSpace = typename RThetaBuilder::exec_space;
 
-    using Rminor = typename GridRminor::continuous_dimension_type;
-    using Theta = typename GridTheta::continuous_dimension_type;
+    using Rminor = typename CoordWithOPoint<
+            typename ToLogicalCoordTransform::CoordResult>::curvilinear_tag_r;
+    using Theta = typename CoordWithOPoint<
+            typename ToLogicalCoordTransform::CoordResult>::curvilinear_tag_theta;
 
-    using BSplinesRminor = typename SplineRThetaBuilder::bsplines_type1;
-    using BSplinesTheta = typename SplineRThetaBuilder::bsplines_type2;
+    using IdxRangeRminorTheta
+            = InterpolationBuilderTraits<RThetaBuilder>::interpolation_idx_range_type;
+
+    using GridRminor = find_grid_t<Rminor, ddc::to_type_seq_t<IdxRangeRminorTheta>>;
+    using GridTheta = find_grid_t<Theta, ddc::to_type_seq_t<IdxRangeRminorTheta>>;
 
     struct R_gyro_cov;
     struct Theta_gyro_cov;
@@ -64,9 +65,8 @@ class GyroAverageOperator
 
     using IdxRangeRminor = IdxRange<GridRminor>;
     using IdxRangeTheta = IdxRange<GridTheta>;
-    using IdxRangeRminorTheta = IdxRange<GridRminor, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeRminorThetaBatch, GridRminor, GridTheta>;
-    using IdxRangeBSRminorTheta = IdxRange<BSplinesRminor, BSplinesTheta>;
+    using IdxRangeBSRminorTheta = InterpolationBuilderTraits<RThetaBuilder>::coeff_idx_range_type;
 
     using IdxRminor = Idx<GridRminor>;
     using IdxTheta = Idx<GridTheta>;
@@ -107,14 +107,14 @@ class GyroAverageOperator
     DConstFieldRminorTheta m_rho_L;
 
     /**
-     * @brief The spline builder for the rtheta interpolation
+     * @brief The builder for the rtheta interpolation
      */
-    SplineRThetaBuilder const& m_spline_builder;
+    RThetaBuilder const& m_builder;
 
     /**
-     * @brief The spline evaluator for the rtheta interpolation
+     * @brief The evaluator for the rtheta interpolation
      */
-    SplineRThetaEvaluator const& m_spline_evaluator;
+    RThetaEvaluator const& m_evaluator;
 
     /**
      * @brief coordinate_transform Function to convert (R, Z) to (r, theta).
@@ -130,20 +130,18 @@ public:
     /**
      * @brief Constructor.
      * @param[in] rho_L Field of Larmor radii on the (r, theta) grid.
-     * @param[in] spline_builder The spline builder for the rtheta interpolation
-     * @param[in] spline_evaluator The spline evaluator for the rtheta interpolation
+     * @param[in] interpolator The interpolator for the rtheta interpolation
      * @param[in] coordinate_transform Function to convert (R, Z) to (r, theta).
      * @param[in] nb_gyro_points Number of points to use in the gyroaverage integration (default: 8).
      */
     explicit GyroAverageOperator(
             DConstFieldRminorTheta const& rho_L,
-            SplineRThetaBuilder const& spline_builder,
-            SplineRThetaEvaluator const& spline_evaluator,
+            RThetaInterpolator const& interpolator,
             ToLogicalCoordTransform coordinate_transform,
             std::size_t const nb_gyro_points = 8)
         : m_rho_L(rho_L)
-        , m_spline_builder(spline_builder)
-        , m_spline_evaluator(spline_evaluator)
+        , m_builder(interpolator.get_builder())
+        , m_evaluator(interpolator.get_evaluator())
         , m_coordinate_transform(coordinate_transform)
         , m_nb_gyro_points(nb_gyro_points)
     {
@@ -154,7 +152,7 @@ public:
      *
      * For each batch, and for each (r, theta) grid point, computes the gyroaverage by
      * integrating the field along a circle of radius rho_L centred at (r, theta).
-     * The field is interpolated at off-grid points using 2D B-splines.
+     * The field is interpolated at off-grid points using a 2D interpolation.
      *
      * @param[out] A_bar Output field to store the gyroaveraged result (batched).
      * @param[in] A Input field to be gyroaveraged (batched).
@@ -166,10 +164,10 @@ public:
         IdxRangeBatch const batch_idx_range(rthetabatch_idx_range);
         IdxRangeRminorTheta const rtheta_idx_range(rthetabatch_idx_range);
 
-        // Instantiate chunk of spline coefs to receive output of spline_builder (r, theta)
+        // Instantiate chunk of interpolation coefs to receive output of builder (r, theta)
         DFieldMemBSRminorTheta coef_alloc(
                 "coef (GyroAvrageOperator::operator())",
-                get_spline_idx_range(m_spline_builder));
+                batched_basis_idx_range(m_builder, rtheta_idx_range));
         DFieldBSRminorTheta const coef = get_field(coef_alloc);
         DConstFieldRminorTheta const rho_L = get_const_field(m_rho_L);
 
@@ -188,8 +186,8 @@ public:
             DFieldMemRminorTheta
                     sub_A_alloc("sub_A (GyroAvrageOperator::operator())", rtheta_idx_range);
             ddc::parallel_deepcopy(sub_A_alloc, sub_A);
-            m_spline_builder(coef, get_const_field(sub_A_alloc));
-            SplineRThetaEvaluator spline_evaluator = m_spline_evaluator;
+            m_builder(coef, get_const_field(sub_A_alloc));
+            RThetaEvaluator evaluator = m_evaluator;
 
             ToLogicalCoordTransform coordinate_transform = m_coordinate_transform;
             std::size_t nb_gyro_points = m_nb_gyro_points;
@@ -220,8 +218,8 @@ public:
                             // Convert from (R, Z) into (r, theta) coordinate
                             CoordRminorTheta p = coordinate_transform(particle_position);
 
-                            // Spline interpolation in (r, theta) coordinate
-                            sum_over_gyro_points += spline_evaluator(p, get_const_field(coef));
+                            // Interpolation in (r, theta) coordinate
+                            sum_over_gyro_points += evaluator(p, get_const_field(coef));
                         }
                         sub_A_bar(ir, itheta)
                                 = sum_over_gyro_points / static_cast<double>(nb_gyro_points);
