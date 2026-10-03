@@ -12,55 +12,76 @@ template <class T>
 inline constexpr bool is_multipatch_type_v
         = enable_multipatch_type<std::remove_const_t<std::remove_reference_t<T>>>;
 
+namespace detail {
+
+template <class TypeSeqPatches, class TypeSeqInternalTypes>
+class MultipatchType;
 
 /**
  * @brief A class to store several objects that are of a type which is templated by the patch.
- * 
+ *
  * On a multipatch domain when we have objects and types defined on different patches, e.g. fields.
  * They can be stored in this class and then be accessed by the patch they are defined
  * on.
- * 
- * @tparam T The type of the objects that are stored on the given patches.
- * @tparam Patches The patches of the objects in the same order of the patches 
- *                 that the given objects are defined on. 
- *         
- * @warning The objects have to be defined on different patches. Otherwise retrieving 
+ *
+ * This class should not be used directly for instantiation. Instead the global alias MultipatchType
+ * should be used. This alias packs the patches and the types into TypeSeqs. This ensures that
+ * equivalent type templates (which return the same type for each patch) lead to the same class.
+ *
+ * @tparam Patches The patches on which the objects are defined.
+ * @tparam InternalTypes The types of the objects that are stored on the given patches.
+ *                 The order must match that of the patches.
+ *
+ * @warning The objects have to be defined on different patches. Otherwise retrieving
  *          them by their patch is ill-defined.
  */
-template <template <typename P> typename T, class... Patches>
-class MultipatchType
+template <class... Patches, class... InternalTypes>
+class MultipatchType<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<InternalTypes...>>
 {
+    static_assert(
+            sizeof...(Patches) == sizeof...(InternalTypes),
+            "There must be one internal type per patch");
+
 public:
     /// @brief A tag storing the order of Patches in this MultipatchType
     using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
+
+private:
+    /// @brief A tag storing the order of the internal types in this MultipatchType
+    using InternalTypeOrdering = ddc::detail::TypeSeq<InternalTypes...>;
+
+public:
+    /// @brief The type of the object stored on the given patch.
+    template <class Patch>
+    using TypeOnPatch = ddc::
+            type_seq_element_t<ddc::type_seq_rank_v<Patch, PatchOrdering>, InternalTypeOrdering>;
 
     /**
      * @brief The type of one of the elements of the MultipatchType. This can be used to check that
      * types are as expected using functions such as ddc::is_chunk_v.
      */
-    using example_element = T<ddc::type_seq_element_t<0, PatchOrdering>>;
+    using example_element = ddc::type_seq_element_t<0, InternalTypeOrdering>;
 
 protected:
     /// The internal tuple containing the data
-    std::tuple<T<Patches>...> m_tuple;
-
-    template <template <typename P> typename OtherType, class... OPatches>
-    friend class MultipatchType;
+    std::tuple<InternalTypes...> m_tuple;
 
     /**
      * A constructor for sub-classes which can build the necessary tuple directly following their own rules.
      *
      * @param tuple The internal tuple.
      */
-    KOKKOS_FUNCTION explicit MultipatchType(std::tuple<T<Patches>...>&& tuple) : m_tuple(tuple) {}
+    KOKKOS_FUNCTION explicit MultipatchType(std::tuple<InternalTypes...>&& tuple) : m_tuple(tuple)
+    {
+    }
 
 public:
     /**
      * Instantiate the MultipatchType class from an arbitrary number of objects.
-     * 
+     *
      * @param args The objects to be stored in the class.
      */
-    explicit KOKKOS_FUNCTION MultipatchType(T<Patches>... args) : m_tuple(std::move(args)...) {}
+    explicit KOKKOS_FUNCTION MultipatchType(InternalTypes... args) : m_tuple(std::move(args)...) {}
 
     /**
      * Create a MultipatchType class by copying an instance of another compatible MultipatchType.
@@ -73,37 +94,20 @@ public:
      * This function is not explicit as it is helpful to be able to change between equivalent multipatch
      * definitions if the internal type is the same but the definition comes from different locations in
      * the code.
-     * 
+     *
      * @param other The equivalent MultipatchType being copied.
      */
-    template <template <typename P> typename OtherType, class... OPatches>
-    KOKKOS_FUNCTION MultipatchType(MultipatchType<OtherType, OPatches...> const& other)
+    template <class OPatchSeq, class OTypeSeq>
+    KOKKOS_FUNCTION MultipatchType(MultipatchType<OPatchSeq, OTypeSeq> const& other)
         : m_tuple(other.template get<Patches>()...)
     {
         static_assert(
-                ddc::type_seq_contains_v<PatchOrdering, ddc::detail::TypeSeq<OPatches...>>,
+                ddc::type_seq_contains_v<PatchOrdering, OPatchSeq>,
                 "The type being copied does not contain all the required patches");
         static_assert(
-                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OtherType<Patches>...>>,
-                "MultipatchTypes are not equivalent");
-    }
-
-    /**
-     * Create a MultipatchType class from an r-value (temporary) instance of another MultipatchType which
-     * uses the same type for the internal tuple.
-     * 
-     * @param other The equivalent MultipatchType being copied.
-     */
-    template <template <typename P> typename OtherType, class... OPatches>
-    MultipatchType(MultipatchType<OtherType, OPatches...>&& other)
-        : m_tuple(std::move(other.template get<Patches>())...)
-    {
-        static_assert(
-                std::is_same_v<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<OPatches...>>,
-                "Cannot create a MultipatchType from a temporary MultipatchType with a different "
-                "ordering");
-        static_assert(
-                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OtherType<OPatches>...>>,
+                std::is_same_v<
+                        InternalTypeOrdering,
+                        ddc::detail::TypeSeq<decltype(other.template get<Patches>())...>>,
                 "MultipatchTypes are not equivalent");
     }
 
@@ -111,14 +115,15 @@ public:
 
     /**
      * Retrieve an object from the patch that it is defined on.
-     * 
+     *
      * @tparam Patch The patch of the object to be returned.
      * @return The object on the given patch.
      */
     template <class Patch>
-    KOKKOS_FUNCTION T<Patch> get() const requires(!has_data_access_methods_v<T<Patch>>)
+    KOKKOS_FUNCTION TypeOnPatch<Patch> get() const
+            requires(!has_data_access_methods_v<TypeOnPatch<Patch>>)
     {
-        return std::get<T<Patch>>(m_tuple);
+        return std::get<TypeOnPatch<Patch>>(m_tuple);
     }
 
     /**
@@ -135,11 +140,29 @@ public:
      *
      * @returns A constant reference to the tuple of objects stored inside this MultipatchType.
      */
-    KOKKOS_FUNCTION std::tuple<T<Patches>...> const& get_tuple() const
+    KOKKOS_FUNCTION std::tuple<InternalTypes...> const& get_tuple() const
     {
         return m_tuple;
     }
 };
 
+} // namespace detail
+
+template <class TypeSeqPatches, class TypeSeqInternalTypes>
+inline constexpr bool
+        enable_multipatch_type<detail::MultipatchType<TypeSeqPatches, TypeSeqInternalTypes>> = true;
+
+/**
+ * @brief A class to store several objects that are of a type which is templated by the patch.
+ *
+ * See detail::MultipatchType for more details. This alias creates the type T<Patch> for each of
+ * the patches. Two type templates which return the same type for each patch therefore lead to the
+ * same MultipatchType.
+ *
+ * @tparam T The type of the objects that are stored on the given patches.
+ * @tparam Patches The patches of the objects in the same order of the patches
+ *                 that the given objects are defined on.
+ */
 template <template <typename P> typename T, class... Patches>
-inline constexpr bool enable_multipatch_type<MultipatchType<T, Patches...>> = true;
+using MultipatchType = detail::
+        MultipatchType<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
