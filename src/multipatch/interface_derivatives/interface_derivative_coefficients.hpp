@@ -600,8 +600,6 @@ private:
         // Set (a_{n},b_{n},c_{n}) ---
         coeff_deriv_patch1[2] = coeff_deriv_patch1[1];
         coeff_deriv_patch2[2] = coeff_deriv_patch2[1];
-        ddc::parallel_deepcopy(weights_patch1[2], get_const_field(weights_patch1[1]));
-        ddc::parallel_deepcopy(weights_patch2[2], get_const_field(weights_patch2[1]));
 
 
         // Computing coefficients (c, a, b) on patch 2 -------------------------------------------
