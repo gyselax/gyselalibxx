@@ -4,6 +4,35 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+/** 
+ * @brief Convert a coordinate on a dimension to another coordinate
+ * on another dimension. The scalar value does not change. 
+ */
+template <class DimOut, class DimIn>
+inline Coord<DimOut> constexpr convert_dim(Coord<DimIn> const& input_coord)
+{
+    return Coord<DimOut> {double(input_coord)};
+}
+
+/** 
+ * @brief Convert a vector on coordinate on a dimension to a vector on a coordinate
+ * on another dimension. The scalar values do not change. 
+ */
+template <class DimOut, class DimIn>
+auto const convert_dim(std::vector<Coord<DimIn>> const& input_vec)
+{
+    if constexpr (std::is_same_v<DimOut, DimIn>) {
+        return input_vec;
+    } else {
+        std::vector<Coord<DimOut>> output_vec;
+        for (double pt : input_vec) {
+            output_vec.push_back(Coord<DimOut>(pt));
+        }
+        return output_vec;
+    }
+}
+
+
 /**
  *  @brief Get interpolation points from the break points by placing 
  * the interpolation points on the break points and adding one on the
@@ -51,11 +80,11 @@ std::vector<CoordType> get_interpolation_points_add_one_on_left_and_one_on_right
 }
 
 /**
- * @brief Fill in a vector of points for the equivalent global mesh 
+ * @brief Append to a given vector another vector of points for the equivalent global mesh 
  * by conserving the same order of the given points.
  */
 template <class CoordTypeG, class CoordTypeP>
-void fill_in(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> const& points_patch)
+void append(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> const& points_patch)
 {
     for (CoordTypeP pt : points_patch) {
         points_global.push_back(CoordTypeG {double(pt)});
@@ -63,11 +92,11 @@ void fill_in(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> con
 }
 
 /**
- * @brief Fill in a vector of points for the equivalent global mesh
+ * @brief Append to a given vector another vector of points for the equivalent global mesh
  *  by reversing the order of the given points.
  */
 template <class CoordTypeG, class CoordTypeP>
-void fill_in_reverse(
+void append_reverse(
         std::vector<CoordTypeG>& points_global,
         std::vector<CoordTypeP> const& points_patch)
 {
@@ -77,4 +106,15 @@ void fill_in_reverse(
     for (int i(0); i < n_pt; ++i) {
         points_global.push_back(CoordTypeG {double(min + max - points_patch[n_pt - 1 - i])});
     }
+}
+
+/**
+ * @brief Get an index range slice containing two indices: 
+ *   * the first index of the given index range, 
+ *   * another index at first index + number of elements in the given index range.
+ */
+template <class Grid1D>
+IdxRangeSlice<Grid1D> get_bound_idx_range_slice(IdxRange<Grid1D> const idx_range)
+{
+    return IdxRangeSlice<Grid1D>(idx_range.front(), IdxStep<Grid1D>(2), idx_range.extents() - 1);
 }
