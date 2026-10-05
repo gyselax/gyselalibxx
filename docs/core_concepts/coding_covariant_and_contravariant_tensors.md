@@ -265,7 +265,7 @@ In Gyselalib++, this is represented using `VectorField`, a field whose values ar
 
 You can think of a DVectorField as a Field where each element is a DVector.
 
-:warning: If you’re not yet familiar with scalar `Field<T, Idx>` types, refer to the documentation about [DDC in Gyselalib++](../first_steps/DDC_in_gyselalibxx.md) for an introduction.
+:warning: If you’re not yet familiar with scalar `Field<T, Idx>` types, refer to the documentation about [DDC in Gyselalib++](./DDC_in_gyselalibxx.md) for an introduction.
 
 ### Syntax
 

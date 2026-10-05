@@ -446,7 +446,7 @@ DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
                                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx));
 ```
 
-Here `DFieldMemVx` is a field of doubles defined along the Vx dimension. The keyword `Mem` indicates that this object allocates memory on instantiation. It should not be used directly, the field must always be extracted. For more explanations see [Using DDC in Gyselalib++](./DDC_in_gyselalibxx.md).
+Here `DFieldMemVx` is a field of doubles defined along the Vx dimension. The keyword `Mem` indicates that this object allocates memory on instantiation. It should not be used directly, the field must always be extracted. For more explanations see [Using DDC in Gyselalib++](../core_concepts/DDC_in_gyselalibxx.md).
 
 The charge density calculator can be expressed simply using the `Quadrature` class. Gyselalib++ provides an operator for the XVx case which can be used as an example for other geometries.
 This operator is assembled from this field of quadrature coefficients as follows:
