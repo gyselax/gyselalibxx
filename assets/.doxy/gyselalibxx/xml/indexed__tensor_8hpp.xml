@@ -340,11 +340,15 @@
         <link refid="predcorr__RK2_8hpp_source"/>
       </node>
       <node id="41">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp</label>
+        <link refid="gyroaverage__operator_8hpp_source"/>
+      </node>
+      <node id="42">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/extrapolation_rule_choice.hpp</label>
         <link refid="extrapolation__rule__choice_8hpp_source"/>
-        <childnode refid="42" relation="include">
-        </childnode>
         <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
         </childnode>
       </node>
       <node id="36">
@@ -364,6 +368,8 @@
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
         <childnode refid="19" relation="include">
         </childnode>
       </node>
@@ -372,30 +378,30 @@
         <link refid="lagrange__basis__non__uniform_8hpp_source"/>
         <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
-      </node>
-      <node id="44">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
-        <link refid="lagrange__evaluator_8hpp_source"/>
-        <childnode refid="42" relation="include">
-        </childnode>
         <childnode refid="45" relation="include">
         </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
       </node>
-      <node id="42">
+      <node id="45">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
+        <link refid="lagrange__evaluator_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
         <link refid="lagrange__interpolation_8hpp_source"/>
       </node>
-      <node id="45">
+      <node id="46">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp</label>
         <link refid="nd__lagrange__evaluator_8hpp_source"/>
-        <childnode refid="42" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
         <childnode refid="26" relation="include">
@@ -407,7 +413,7 @@
         <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</label>
         <link refid="spline__interpolation_8hpp_source"/>
         <childnode refid="28" relation="include">
@@ -446,7 +452,7 @@
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>

@@ -2,7 +2,7 @@
 
 # Class GyroAverageOperator
 
-**template &lt;class SplineRThetaBuilder, class SplineRThetaEvaluator, class IdxRangeRminorThetaBatch, class ToLogicalCoordTransform&gt;**
+**template &lt;concepts::Interpolation RThetaInterpolator, class IdxRangeRminorThetaBatch, class ToLogicalCoordTransform&gt;**
 
 
 
@@ -54,7 +54,7 @@ _Operator to compute the gyroaverage of a field in (r, theta) coordinates._ [Mor
 
 | Type | Name |
 | ---: | :--- |
-|   | [**GyroAverageOperator**](#function-gyroaverageoperator) (DConstFieldRminorTheta const & rho\_L, SplineRThetaBuilder const & spline\_builder, SplineRThetaEvaluator const & spline\_evaluator, ToLogicalCoordTransform coordinate\_transform, std::size\_t const nb\_gyro\_points=8) <br>_Constructor._  |
+|   | [**GyroAverageOperator**](#function-gyroaverageoperator) (DConstFieldRminorTheta const & rho\_L, RThetaInterpolator const & interpolator, ToLogicalCoordTransform coordinate\_transform, std::size\_t const nb\_gyro\_points=8) <br>_Constructor._  |
 |  void | [**operator()**](#function-operator) (DFieldRminorThetaBatch const & A\_bar, DConstFieldRminorThetaBatch const & A) const<br>_Applies the gyroaverage operator to a batched field._  |
 
 
@@ -90,7 +90,7 @@ _Operator to compute the gyroaverage of a field in (r, theta) coordinates._ [Mor
 This class performs the gyroaveraging operation on a batched field defined on a polar grid (r, theta). The gyroaverage is computed by integrating the field over a set of points along a circle (the Larmor orbit) centred at each grid point, with radius given by the local Larmor radius field (rho\_L).
 
 
-The class uses 2D B-spline interpolation to evaluate the field at off-grid points along the orbit. The operation is performed in parallel over the (r, theta) grid.
+The class uses 2D interpolation to evaluate the field at off-grid points along the orbit. The operation is performed in parallel over the (r, theta) grid.
 
 
 
@@ -98,8 +98,7 @@ The class uses 2D B-spline interpolation to evaluate the field at off-grid point
 **Template parameters:**
 
 
-* `SplineRThetaBuilder` The type of the spline builder for the rtheta interpolation 
-* `SplineRThetaEvaluator` The type of the spline evaluator for the rtheta interpolation 
+* `RThetaInterpolator` The type of a rtheta interpolation scheme. 
 * `IdxRangeRminorThetaBatch` The index range over [**R**](structR.md), [**Theta**](structTheta.md) and Batch directions. 
 * `ToLogicalCoordTransform` Function to convert ([**R**](structR.md), Z) to (r, theta). 
 
@@ -118,8 +117,7 @@ _Constructor._
 ```C++
 inline explicit GyroAverageOperator::GyroAverageOperator (
     DConstFieldRminorTheta const & rho_L,
-    SplineRThetaBuilder const & spline_builder,
-    SplineRThetaEvaluator const & spline_evaluator,
+    RThetaInterpolator const & interpolator,
     ToLogicalCoordTransform coordinate_transform,
     std::size_t const nb_gyro_points=8
 ) 
@@ -133,8 +131,7 @@ inline explicit GyroAverageOperator::GyroAverageOperator (
 
 
 * `rho_L` Field of Larmor radii on the (r, theta) grid. 
-* `spline_builder` The spline builder for the rtheta interpolation 
-* `spline_evaluator` The spline evaluator for the rtheta interpolation 
+* `interpolator` The interpolator for the rtheta interpolation 
 * `coordinate_transform` Function to convert ([**R**](structR.md), Z) to (r, theta). 
 * `nb_gyro_points` Number of points to use in the gyroaverage integration (default: 8). 
 
@@ -159,7 +156,7 @@ inline void GyroAverageOperator::operator() (
 
 
 
-For each batch, and for each (r, theta) grid point, computes the gyroaverage by integrating the field along a circle of radius rho\_L centred at (r, theta). The field is interpolated at off-grid points using 2D B-splines.
+For each batch, and for each (r, theta) grid point, computes the gyroaverage by integrating the field along a circle of radius rho\_L centred at (r, theta). The field is interpolated at off-grid points using a 2D interpolation.
 
 
 

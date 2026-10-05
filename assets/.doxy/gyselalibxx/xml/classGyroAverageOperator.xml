@@ -7,10 +7,9 @@
     <innerclass refid="structGyroAverageOperator_1_1Theta__gyro" prot="private">GyroAverageOperator::Theta_gyro</innerclass>
     <templateparamlist>
       <param>
-        <type>class SplineRThetaBuilder</type>
-      </param>
-      <param>
-        <type>class SplineRThetaEvaluator</type>
+        <type><ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref></type>
+        <declname>RThetaInterpolator</declname>
+        <defname>RThetaInterpolator</defname>
       </param>
       <param>
         <type>class IdxRangeRminorThetaBatch</type>
@@ -20,9 +19,37 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classGyroAverageOperator_1ae4091e1bfd6cdb27a90a42108fba2d95" prot="private" static="no">
-        <type>typename SplineRThetaBuilder::exec_space</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::ExecutionSpace =  typename SplineRThetaBuilder::exec_space</definition>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a6fff57d87121d5e127b19d83c234b27e" prot="private" static="no">
+        <type>typename RThetaInterpolator::BuilderType</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::RThetaBuilder =  typename RThetaInterpolator::BuilderType</definition>
+        <argsstring></argsstring>
+        <name>RThetaBuilder</name>
+        <qualifiedname>GyroAverageOperator::RThetaBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a7ac14924652899b70a060ce6a1108450" prot="private" static="no">
+        <type>typename RThetaInterpolator::EvaluatorType</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::RThetaEvaluator =  typename RThetaInterpolator::EvaluatorType</definition>
+        <argsstring></argsstring>
+        <name>RThetaEvaluator</name>
+        <qualifiedname>GyroAverageOperator::RThetaEvaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1affe3cbeae6edadaee084b206b2fd7704" prot="private" static="no">
+        <type>typename RThetaBuilder::exec_space</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::ExecutionSpace =  typename RThetaBuilder::exec_space</definition>
         <argsstring></argsstring>
         <name>ExecutionSpace</name>
         <qualifiedname>GyroAverageOperator::ExecutionSpace</qualifiedname>
@@ -32,39 +59,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a7323dc58a4039a56c126128b3f47e112" prot="private" static="no">
-        <type>typename SplineRThetaBuilder::interpolation_discrete_dimension_type1</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::GridRminor =  typename SplineRThetaBuilder::interpolation_discrete_dimension_type1</definition>
-        <argsstring></argsstring>
-        <name>GridRminor</name>
-        <qualifiedname>GyroAverageOperator::GridRminor</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="39" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a2e2eef134c74739c77d1137db16b56e3" prot="private" static="no">
-        <type>typename SplineRThetaBuilder::interpolation_discrete_dimension_type2</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::GridTheta =  typename SplineRThetaBuilder::interpolation_discrete_dimension_type2</definition>
-        <argsstring></argsstring>
-        <name>GridTheta</name>
-        <qualifiedname>GyroAverageOperator::GridTheta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="40" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a5691dae9d1f6fff811a9093f1c8dc05f" prot="private" static="no">
-        <type>typename GridRminor::continuous_dimension_type</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::Rminor =  typename GridRminor::continuous_dimension_type</definition>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ad0654abf5b4f0544fb0f6ccfbdd66702" prot="private" static="no">
+        <type>typename <ref refid="structCoordWithOPoint" kindref="compound">CoordWithOPoint</ref>&lt; typename ToLogicalCoordTransform::CoordResult &gt;::curvilinear_tag_r</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::Rminor =  typename CoordWithOPoint&lt; typename ToLogicalCoordTransform::CoordResult&gt;::curvilinear_tag_r</definition>
         <argsstring></argsstring>
         <name>Rminor</name>
         <qualifiedname>GyroAverageOperator::Rminor</qualifiedname>
@@ -74,11 +73,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="42" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="39" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1ab738971ec6cabcbcd7eb4d6a9a0ecb9c" prot="private" static="no">
-        <type>typename GridTheta::continuous_dimension_type</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::Theta =  typename GridTheta::continuous_dimension_type</definition>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a55f575131d4cfee8468f0937568c3856" prot="private" static="no">
+        <type>typename <ref refid="structCoordWithOPoint" kindref="compound">CoordWithOPoint</ref>&lt; typename ToLogicalCoordTransform::CoordResult &gt;::curvilinear_tag_theta</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::Theta =  typename CoordWithOPoint&lt; typename ToLogicalCoordTransform::CoordResult&gt;::curvilinear_tag_theta</definition>
         <argsstring></argsstring>
         <name>Theta</name>
         <qualifiedname>GyroAverageOperator::Theta</qualifiedname>
@@ -88,67 +87,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="43" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="41" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a2333d3c4f4327fdaf60d19c0be7b4659" prot="private" static="no">
-        <type>typename SplineRThetaBuilder::bsplines_type1</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::BSplinesRminor =  typename SplineRThetaBuilder::bsplines_type1</definition>
-        <argsstring></argsstring>
-        <name>BSplinesRminor</name>
-        <qualifiedname>GyroAverageOperator::BSplinesRminor</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="45" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a1648e1bbc9cf1b44f6314480a2f22c4e" prot="private" static="no">
-        <type>typename SplineRThetaBuilder::bsplines_type2</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::BSplinesTheta =  typename SplineRThetaBuilder::bsplines_type2</definition>
-        <argsstring></argsstring>
-        <name>BSplinesTheta</name>
-        <qualifiedname>GyroAverageOperator::BSplinesTheta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="46" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a738bfdfe201c7b4c6ce700a6266e016d" prot="private" static="no">
-        <type>IdxRange&lt; GridRminor &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeRminor =  IdxRange&lt;GridRminor&gt;</definition>
-        <argsstring></argsstring>
-        <name>IdxRangeRminor</name>
-        <qualifiedname>GyroAverageOperator::IdxRangeRminor</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="65" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1aec0a5e18c8c1358f0b5fca02d9b49a26" prot="private" static="no">
-        <type>IdxRange&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeTheta =  IdxRange&lt;GridTheta&gt;</definition>
-        <argsstring></argsstring>
-        <name>IdxRangeTheta</name>
-        <qualifiedname>GyroAverageOperator::IdxRangeTheta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="66" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a1affefe8ff2204b52dd5f05a2ac1d040" prot="private" static="no">
-        <type>IdxRange&lt; GridRminor, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeRminorTheta =  IdxRange&lt;GridRminor, GridTheta&gt;</definition>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ae360c2d7dd6d533050ce6e729d7dbb82" prot="private" static="no">
+        <type><ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; RThetaBuilder &gt;::interpolation_idx_range_type</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeRminorTheta =  InterpolationBuilderTraits&lt;RThetaBuilder&gt;::interpolation_idx_range_type</definition>
         <argsstring></argsstring>
         <name>IdxRangeRminorTheta</name>
         <qualifiedname>GyroAverageOperator::IdxRangeRminorTheta</qualifiedname>
@@ -158,11 +101,67 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ae244c7c5fab8139a1c128e5649b217f3" prot="private" static="no">
+        <type>find_grid_t&lt; Rminor, ddc::to_type_seq_t&lt; IdxRangeRminorTheta &gt; &gt;</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::GridRminor =  find_grid_t&lt;Rminor, ddc::to_type_seq_t&lt;IdxRangeRminorTheta&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>GridRminor</name>
+        <qualifiedname>GyroAverageOperator::GridRminor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ace699df2a5470b88d040cd72f6efd0ba" prot="private" static="no">
+        <type>find_grid_t&lt; <ref refid="structTheta" kindref="compound">Theta</ref>, ddc::to_type_seq_t&lt; IdxRangeRminorTheta &gt; &gt;</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::GridTheta =  find_grid_t&lt;Theta, ddc::to_type_seq_t&lt;IdxRangeRminorTheta&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>GridTheta</name>
+        <qualifiedname>GyroAverageOperator::GridTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a102c25e92336f50140a1c63eb40694a3" prot="private" static="no">
+        <type>IdxRange&lt; GridRminor &gt;</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeRminor =  IdxRange&lt;GridRminor&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeRminor</name>
+        <qualifiedname>GyroAverageOperator::IdxRangeRminor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ab4da1853ca12538f124bfa98b980f281" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeTheta =  IdxRange&lt;GridTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeTheta</name>
+        <qualifiedname>GyroAverageOperator::IdxRangeTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a93240dac66de1c00e551d92142de1080" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a63838aab1da569390da90671d3ad0eba" prot="private" static="no">
         <type>ddc::remove_dims_of_t&lt; IdxRangeRminorThetaBatch, GridRminor, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeRminorThetaBatch, GridRminor, GridTheta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeRminorThetaBatch, GridRminor, GridTheta&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatch</name>
         <qualifiedname>GyroAverageOperator::IdxRangeBatch</qualifiedname>
@@ -174,9 +173,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="68" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a51360dcf94a0de5e52d5878d332c0246" prot="private" static="no">
-        <type>IdxRange&lt; BSplinesRminor, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeBSRminorTheta =  IdxRange&lt;BSplinesRminor, BSplinesTheta&gt;</definition>
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ae3c9eeb8857ffa63ed937cdfe62be615" prot="private" static="no">
+        <type><ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; RThetaBuilder &gt;::coeff_idx_range_type</type>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRangeBSRminorTheta =  InterpolationBuilderTraits&lt;RThetaBuilder&gt;::coeff_idx_range_type</definition>
         <argsstring></argsstring>
         <name>IdxRangeBSRminorTheta</name>
         <qualifiedname>GyroAverageOperator::IdxRangeBSRminorTheta</qualifiedname>
@@ -188,9 +187,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a29387299bd61457ac1db794ac9e77ae6" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a6f356674c07fc2cea4df20db2bbd3203" prot="private" static="no">
         <type>Idx&lt; GridRminor &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRminor =  Idx&lt;GridRminor&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRminor =  Idx&lt;GridRminor&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRminor</name>
         <qualifiedname>GyroAverageOperator::IdxRminor</qualifiedname>
@@ -202,9 +201,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="71" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1ab0637f6a4af7bea68390fefd2bcb3bb7" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1acc654648f4aec0549189272421fa06e4" prot="private" static="no">
         <type>Idx&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxTheta =  Idx&lt;GridTheta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxTheta =  Idx&lt;GridTheta&gt;</definition>
         <argsstring></argsstring>
         <name>IdxTheta</name>
         <qualifiedname>GyroAverageOperator::IdxTheta</qualifiedname>
@@ -216,9 +215,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="72" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a5a479ad640010a9486a4c05ef1e9f1b5" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a740d949806a38be23c2afd110ac0ce1d" prot="private" static="no">
         <type>typename IdxRangeBatch::discrete_element_type</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxBatch =  typename IdxRangeBatch::discrete_element_type</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxBatch =  typename IdxRangeBatch::discrete_element_type</definition>
         <argsstring></argsstring>
         <name>IdxBatch</name>
         <qualifiedname>GyroAverageOperator::IdxBatch</qualifiedname>
@@ -230,9 +229,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1ae089f81b3cec545fe4f52504211b334e" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a1fd91fa87ed95e6b015e6dbd2a4c2304" prot="private" static="no">
         <type>Idx&lt; GridRminor, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRminorTheta =  Idx&lt;GridRminor, GridTheta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::IdxRminorTheta =  Idx&lt;GridRminor, GridTheta&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRminorTheta</name>
         <qualifiedname>GyroAverageOperator::IdxRminorTheta</qualifiedname>
@@ -244,9 +243,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a14f0f968efdb9647e7ced796adc51f80" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ad9fe4fdacc9a01001d2b34a88d853148" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeRminorTheta &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldMemRminorTheta =  DFieldMem&lt;IdxRangeRminorTheta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldMemRminorTheta =  DFieldMem&lt;IdxRangeRminorTheta&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemRminorTheta</name>
         <qualifiedname>GyroAverageOperator::DFieldMemRminorTheta</qualifiedname>
@@ -258,9 +257,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="76" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a1ca8e7dcc9faa75874043a247c15c096" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a691cc50bf58eb07e96134bbfa21a6884" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeRminorThetaBatch &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldMemRminorThetaBatch =  DFieldMem&lt;IdxRangeRminorThetaBatch&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldMemRminorThetaBatch =  DFieldMem&lt;IdxRangeRminorThetaBatch&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemRminorThetaBatch</name>
         <qualifiedname>GyroAverageOperator::DFieldMemRminorThetaBatch</qualifiedname>
@@ -272,9 +271,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="77" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1acf5f8bfb70998bcb91baa6cf65b0bd4f" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1af1d8dd737baa01387eee96d2473bde6c" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeBSRminorTheta &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldMemBSRminorTheta =  DFieldMem&lt;IdxRangeBSRminorTheta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldMemBSRminorTheta =  DFieldMem&lt;IdxRangeBSRminorTheta&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemBSRminorTheta</name>
         <qualifiedname>GyroAverageOperator::DFieldMemBSRminorTheta</qualifiedname>
@@ -286,9 +285,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="78" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1af3b1b9ddf00b77f093e0e07b3bdf9a05" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ab6309a8ede9517ff3f8f5dcdbefd7591" prot="private" static="no">
         <type>DField&lt; IdxRangeRminorTheta &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldRminorTheta =  DField&lt;IdxRangeRminorTheta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldRminorTheta =  DField&lt;IdxRangeRminorTheta&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldRminorTheta</name>
         <qualifiedname>GyroAverageOperator::DFieldRminorTheta</qualifiedname>
@@ -300,9 +299,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="79" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1af83b28c0f65d41f073748378e9f25cda" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a003d5fd49b71d27809e5f378c65ceea7" prot="private" static="no">
         <type>DField&lt; IdxRangeRminorThetaBatch &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldRminorThetaBatch =  DField&lt;IdxRangeRminorThetaBatch&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldRminorThetaBatch =  DField&lt;IdxRangeRminorThetaBatch&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldRminorThetaBatch</name>
         <qualifiedname>GyroAverageOperator::DFieldRminorThetaBatch</qualifiedname>
@@ -314,9 +313,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="80" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1acb777238e7aae46eed6b7f01b09596ef" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a2bc03b9ddc65d717b5d75a6478ded036" prot="private" static="no">
         <type>DField&lt; IdxRangeBSRminorTheta &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldBSRminorTheta =  DField&lt;IdxRangeBSRminorTheta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DFieldBSRminorTheta =  DField&lt;IdxRangeBSRminorTheta&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldBSRminorTheta</name>
         <qualifiedname>GyroAverageOperator::DFieldBSRminorTheta</qualifiedname>
@@ -328,9 +327,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a1fe1a3ef952448393b859b1efb78010c" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a9e3c305f83782f8b69877115d609fb5d" prot="private" static="no">
         <type>DConstField&lt; IdxRangeRminorTheta &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DConstFieldRminorTheta =  DConstField&lt;IdxRangeRminorTheta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DConstFieldRminorTheta =  DConstField&lt;IdxRangeRminorTheta&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldRminorTheta</name>
         <qualifiedname>GyroAverageOperator::DConstFieldRminorTheta</qualifiedname>
@@ -342,9 +341,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="82" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a6a45b7de3af3124be844eff81403cfad" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1afeac978b78c51bac7e99c803328421b6" prot="private" static="no">
         <type>DConstField&lt; IdxRangeRminorThetaBatch &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DConstFieldRminorThetaBatch =  DConstField&lt;IdxRangeRminorThetaBatch&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::DConstFieldRminorThetaBatch =  DConstField&lt;IdxRangeRminorThetaBatch&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldRminorThetaBatch</name>
         <qualifiedname>GyroAverageOperator::DConstFieldRminorThetaBatch</qualifiedname>
@@ -356,9 +355,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a8649c36b35f754be220bd88420b521fa" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1a1aa24a505a5367374e9b3a8c7878aa66" prot="private" static="no">
         <type>Coord&lt; Rminor, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::CoordRminorTheta =  Coord&lt;Rminor, Theta&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::CoordRminorTheta =  Coord&lt;Rminor, Theta&gt;</definition>
         <argsstring></argsstring>
         <name>CoordRminorTheta</name>
         <qualifiedname>GyroAverageOperator::CoordRminorTheta</qualifiedname>
@@ -370,9 +369,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="85" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1ac84680201de98fe36f76f124edc55676" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ad8837e63b75899270e1499d1389c49ea" prot="private" static="no">
         <type>Coord&lt; R_gyro, Theta_gyro &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::CoordR_gyroTheta_gyro =  Coord&lt;R_gyro, Theta_gyro&gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::CoordR_gyroTheta_gyro =  Coord&lt;R_gyro, Theta_gyro&gt;</definition>
         <argsstring></argsstring>
         <name>CoordR_gyroTheta_gyro</name>
         <qualifiedname>GyroAverageOperator::CoordR_gyroTheta_gyro</qualifiedname>
@@ -384,9 +383,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="86" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1adb5256ba3e397ce1af11c8a82114a41e" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1af25afbd1dfb4e80af17c44383dba55c0" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename ToLogicalCoordTransform::CoordArg &gt; &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::RZ_1 =  ddc:: type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;typename ToLogicalCoordTransform::CoordArg&gt; &gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::RZ_1 =  ddc:: type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;typename ToLogicalCoordTransform::CoordArg&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>RZ_1</name>
         <qualifiedname>GyroAverageOperator::RZ_1</qualifiedname>
@@ -398,9 +397,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="87" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a72f2da4bfe722c4948131fe066dfe224" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ab7b9650e7cce5321e3641ff80d975999" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; typename ToLogicalCoordTransform::CoordArg &gt; &gt;</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::RZ_2 =  ddc:: type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;typename ToLogicalCoordTransform::CoordArg&gt; &gt;</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::RZ_2 =  ddc:: type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;typename ToLogicalCoordTransform::CoordArg&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>RZ_2</name>
         <qualifiedname>GyroAverageOperator::RZ_2</qualifiedname>
@@ -412,9 +411,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="90" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classGyroAverageOperator_1a5c5dbc6160a2181ff7ce86a18cee28e5" prot="private" static="no">
+      <memberdef kind="typedef" id="classGyroAverageOperator_1ada8439920a9df8a7bd98c950cfbcb244" prot="private" static="no">
         <type>typename ToLogicalCoordTransform::CoordArg</type>
-        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::CoordRZ =  typename ToLogicalCoordTransform::CoordArg</definition>
+        <definition>using GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::CoordRZ =  typename ToLogicalCoordTransform::CoordArg</definition>
         <argsstring></argsstring>
         <name>CoordRZ</name>
         <qualifiedname>GyroAverageOperator::CoordRZ</qualifiedname>
@@ -428,9 +427,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classGyroAverageOperator_1a5ba2d676cd885a029ccdb85e63adcabc" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classGyroAverageOperator_1a104a4a49afa4d2d57367618dc9c8117c" prot="private" static="no" mutable="no">
         <type>DConstFieldRminorTheta</type>
-        <definition>DConstFieldRminorTheta GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_rho_L</definition>
+        <definition>DConstFieldRminorTheta GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_rho_L</definition>
         <argsstring></argsstring>
         <name>m_rho_L</name>
         <qualifiedname>GyroAverageOperator::m_rho_L</qualifiedname>
@@ -443,39 +442,39 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="107" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="107" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGyroAverageOperator_1af6a5f0d747a5a00678f4103b20ae2bf2" prot="private" static="no" mutable="no">
-        <type>SplineRThetaBuilder const  &amp;</type>
-        <definition>SplineRThetaBuilder const&amp; GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_spline_builder</definition>
+      <memberdef kind="variable" id="classGyroAverageOperator_1a395fecee74c05f34ba5556b6477a5fdb" prot="private" static="no" mutable="no">
+        <type>RThetaBuilder const  &amp;</type>
+        <definition>RThetaBuilder const&amp; GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_builder</definition>
         <argsstring></argsstring>
-        <name>m_spline_builder</name>
-        <qualifiedname>GyroAverageOperator::m_spline_builder</qualifiedname>
+        <name>m_builder</name>
+        <qualifiedname>GyroAverageOperator::m_builder</qualifiedname>
         <briefdescription>
-<para>The spline builder for the rtheta interpolation. </para>
+<para>The builder for the rtheta interpolation. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="112" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="112" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="112" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="112" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGyroAverageOperator_1afd19acac1d6c0bac6bb5db25c202de5a" prot="private" static="no" mutable="no">
-        <type>SplineRThetaEvaluator const  &amp;</type>
-        <definition>SplineRThetaEvaluator const&amp; GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_spline_evaluator</definition>
+      <memberdef kind="variable" id="classGyroAverageOperator_1a313a338a7472c5b8c868757fff658c68" prot="private" static="no" mutable="no">
+        <type>RThetaEvaluator const  &amp;</type>
+        <definition>RThetaEvaluator const&amp; GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_evaluator</definition>
         <argsstring></argsstring>
-        <name>m_spline_evaluator</name>
-        <qualifiedname>GyroAverageOperator::m_spline_evaluator</qualifiedname>
+        <name>m_evaluator</name>
+        <qualifiedname>GyroAverageOperator::m_evaluator</qualifiedname>
         <briefdescription>
-<para>The spline evaluator for the rtheta interpolation. </para>
+<para>The evaluator for the rtheta interpolation. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="117" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="117" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="117" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="117" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGyroAverageOperator_1ac611016af8d1d7f9d3bb26a88b78c465" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classGyroAverageOperator_1a365ca08e94429bd964962e66b2595fbe" prot="private" static="no" mutable="no">
         <type>ToLogicalCoordTransform</type>
-        <definition>ToLogicalCoordTransform GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_coordinate_transform</definition>
+        <definition>ToLogicalCoordTransform GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_coordinate_transform</definition>
         <argsstring></argsstring>
         <name>m_coordinate_transform</name>
         <qualifiedname>GyroAverageOperator::m_coordinate_transform</qualifiedname>
@@ -488,9 +487,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="122" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="122" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGyroAverageOperator_1a1b5375004b8b7ccd5d435b92c65bd7e4" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classGyroAverageOperator_1a696584fe80c8ce7bf2185af8c608836c" prot="private" static="no" mutable="no">
         <type>std::size_t const</type>
-        <definition>std::size_t const GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_nb_gyro_points</definition>
+        <definition>std::size_t const GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::m_nb_gyro_points</definition>
         <argsstring></argsstring>
         <name>m_nb_gyro_points</name>
         <qualifiedname>GyroAverageOperator::m_nb_gyro_points</qualifiedname>
@@ -505,10 +504,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classGyroAverageOperator_1ab80567574cba4d5616c6ec3463656b6c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGyroAverageOperator_1a4799dbc8ad54b00ff4500a6946f7146e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::GyroAverageOperator</definition>
-        <argsstring>(DConstFieldRminorTheta const &amp;rho_L, SplineRThetaBuilder const &amp;spline_builder, SplineRThetaEvaluator const &amp;spline_evaluator, ToLogicalCoordTransform coordinate_transform, std::size_t const nb_gyro_points=8)</argsstring>
+        <definition>GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::GyroAverageOperator</definition>
+        <argsstring>(DConstFieldRminorTheta const &amp;rho_L, RThetaInterpolator const &amp;interpolator, ToLogicalCoordTransform coordinate_transform, std::size_t const nb_gyro_points=8)</argsstring>
         <name>GyroAverageOperator</name>
         <qualifiedname>GyroAverageOperator::GyroAverageOperator</qualifiedname>
         <param>
@@ -516,12 +515,8 @@
           <declname>rho_L</declname>
         </param>
         <param>
-          <type>SplineRThetaBuilder const &amp;</type>
-          <declname>spline_builder</declname>
-        </param>
-        <param>
-          <type>SplineRThetaEvaluator const &amp;</type>
-          <declname>spline_evaluator</declname>
+          <type>RThetaInterpolator const &amp;</type>
+          <declname>interpolator</declname>
         </param>
         <param>
           <type>ToLogicalCoordTransform</type>
@@ -546,18 +541,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">spline_builder</parametername>
+<parametername direction="in">interpolator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline builder for the rtheta interpolation </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">spline_evaluator</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The spline evaluator for the rtheta interpolation </para>
+<para>The interpolator for the rtheta interpolation </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -581,11 +568,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="138" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="138" bodyend="150"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="137" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="137" bodyend="148"/>
       </memberdef>
-      <memberdef kind="function" id="classGyroAverageOperator_1a0b895f8c55a7673871e5d2b155a7495a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGyroAverageOperator_1a60450db4faead632164d62da641027a6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::operator()</definition>
+        <definition>void GyroAverageOperator&lt; RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::operator()</definition>
         <argsstring>(DFieldRminorThetaBatch const &amp;A_bar, DConstFieldRminorThetaBatch const &amp;A) const</argsstring>
         <name>operator()</name>
         <qualifiedname>GyroAverageOperator::operator()</qualifiedname>
@@ -601,7 +588,7 @@
 <para>Applies the gyroaverage operator to a batched field. </para>
         </briefdescription>
         <detaileddescription>
-<para>For each batch, and for each (r, theta) grid point, computes the gyroaverage by integrating the field along a circle of radius rho_L centred at (r, theta). The field is interpolated at off-grid points using 2D B-splines.</para>
+<para>For each batch, and for each (r, theta) grid point, computes the gyroaverage by integrating the field along a circle of radius rho_L centred at (r, theta). The field is interpolated at off-grid points using a 2D interpolation.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">A_bar</parametername>
@@ -623,7 +610,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="162" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="162" bodyend="235"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="160" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="160" bodyend="233"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -631,21 +618,13 @@
     </briefdescription>
     <detaileddescription>
 <para>This class performs the gyroaveraging operation on a batched field defined on a polar grid (r, theta). The gyroaverage is computed by integrating the field over a set of points along a circle (the Larmor orbit) centred at each grid point, with radius given by the local Larmor radius field (rho_L).</para>
-<para>The class uses 2D B-spline interpolation to evaluate the field at off-grid points along the orbit. The operation is performed in parallel over the (r, theta) grid.</para>
+<para>The class uses 2D interpolation to evaluate the field at off-grid points along the orbit. The operation is performed in parallel over the (r, theta) grid.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>SplineRThetaBuilder</parametername>
+<parametername>RThetaInterpolator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The type of the spline builder for the rtheta interpolation </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>SplineRThetaEvaluator</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The type of the spline evaluator for the rtheta interpolation </para>
+<para>The type of a rtheta interpolation scheme. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -667,44 +646,44 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="32" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="33" bodyend="236"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="31" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="32" bodyend="234"/>
     <listofallmembers>
-      <member refid="classGyroAverageOperator_1a2333d3c4f4327fdaf60d19c0be7b4659" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>BSplinesRminor</name></member>
-      <member refid="classGyroAverageOperator_1a1648e1bbc9cf1b44f6314480a2f22c4e" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>BSplinesTheta</name></member>
-      <member refid="classGyroAverageOperator_1ac84680201de98fe36f76f124edc55676" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>CoordR_gyroTheta_gyro</name></member>
-      <member refid="classGyroAverageOperator_1a8649c36b35f754be220bd88420b521fa" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>CoordRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1a5c5dbc6160a2181ff7ce86a18cee28e5" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>CoordRZ</name></member>
-      <member refid="classGyroAverageOperator_1a1fe1a3ef952448393b859b1efb78010c" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DConstFieldRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1a6a45b7de3af3124be844eff81403cfad" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DConstFieldRminorThetaBatch</name></member>
-      <member refid="classGyroAverageOperator_1acb777238e7aae46eed6b7f01b09596ef" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldBSRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1acf5f8bfb70998bcb91baa6cf65b0bd4f" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldMemBSRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1a14f0f968efdb9647e7ced796adc51f80" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldMemRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1a1ca8e7dcc9faa75874043a247c15c096" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldMemRminorThetaBatch</name></member>
-      <member refid="classGyroAverageOperator_1af3b1b9ddf00b77f093e0e07b3bdf9a05" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1af83b28c0f65d41f073748378e9f25cda" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldRminorThetaBatch</name></member>
-      <member refid="classGyroAverageOperator_1ae4091e1bfd6cdb27a90a42108fba2d95" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>ExecutionSpace</name></member>
-      <member refid="classGyroAverageOperator_1a7323dc58a4039a56c126128b3f47e112" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>GridRminor</name></member>
-      <member refid="classGyroAverageOperator_1a2e2eef134c74739c77d1137db16b56e3" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>GridTheta</name></member>
-      <member refid="classGyroAverageOperator_1ab80567574cba4d5616c6ec3463656b6c" prot="public" virt="non-virtual"><scope>GyroAverageOperator</scope><name>GyroAverageOperator</name></member>
-      <member refid="classGyroAverageOperator_1a5a479ad640010a9486a4c05ef1e9f1b5" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxBatch</name></member>
-      <member refid="classGyroAverageOperator_1a93240dac66de1c00e551d92142de1080" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeBatch</name></member>
-      <member refid="classGyroAverageOperator_1a51360dcf94a0de5e52d5878d332c0246" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeBSRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1a738bfdfe201c7b4c6ce700a6266e016d" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeRminor</name></member>
-      <member refid="classGyroAverageOperator_1a1affefe8ff2204b52dd5f05a2ac1d040" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1aec0a5e18c8c1358f0b5fca02d9b49a26" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeTheta</name></member>
-      <member refid="classGyroAverageOperator_1a29387299bd61457ac1db794ac9e77ae6" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRminor</name></member>
-      <member refid="classGyroAverageOperator_1ae089f81b3cec545fe4f52504211b334e" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRminorTheta</name></member>
-      <member refid="classGyroAverageOperator_1ab0637f6a4af7bea68390fefd2bcb3bb7" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxTheta</name></member>
-      <member refid="classGyroAverageOperator_1ac611016af8d1d7f9d3bb26a88b78c465" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_coordinate_transform</name></member>
-      <member refid="classGyroAverageOperator_1a1b5375004b8b7ccd5d435b92c65bd7e4" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_nb_gyro_points</name></member>
-      <member refid="classGyroAverageOperator_1a5ba2d676cd885a029ccdb85e63adcabc" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_rho_L</name></member>
-      <member refid="classGyroAverageOperator_1af6a5f0d747a5a00678f4103b20ae2bf2" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_spline_builder</name></member>
-      <member refid="classGyroAverageOperator_1afd19acac1d6c0bac6bb5db25c202de5a" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_spline_evaluator</name></member>
-      <member refid="classGyroAverageOperator_1a0b895f8c55a7673871e5d2b155a7495a" prot="public" virt="non-virtual"><scope>GyroAverageOperator</scope><name>operator()</name></member>
-      <member refid="classGyroAverageOperator_1a5691dae9d1f6fff811a9093f1c8dc05f" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>Rminor</name></member>
-      <member refid="classGyroAverageOperator_1adb5256ba3e397ce1af11c8a82114a41e" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>RZ_1</name></member>
-      <member refid="classGyroAverageOperator_1a72f2da4bfe722c4948131fe066dfe224" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>RZ_2</name></member>
-      <member refid="classGyroAverageOperator_1ab738971ec6cabcbcd7eb4d6a9a0ecb9c" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>Theta</name></member>
+      <member refid="classGyroAverageOperator_1ad8837e63b75899270e1499d1389c49ea" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>CoordR_gyroTheta_gyro</name></member>
+      <member refid="classGyroAverageOperator_1a1aa24a505a5367374e9b3a8c7878aa66" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>CoordRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1ada8439920a9df8a7bd98c950cfbcb244" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>CoordRZ</name></member>
+      <member refid="classGyroAverageOperator_1a9e3c305f83782f8b69877115d609fb5d" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DConstFieldRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1afeac978b78c51bac7e99c803328421b6" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DConstFieldRminorThetaBatch</name></member>
+      <member refid="classGyroAverageOperator_1a2bc03b9ddc65d717b5d75a6478ded036" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldBSRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1af1d8dd737baa01387eee96d2473bde6c" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldMemBSRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1ad9fe4fdacc9a01001d2b34a88d853148" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldMemRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1a691cc50bf58eb07e96134bbfa21a6884" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldMemRminorThetaBatch</name></member>
+      <member refid="classGyroAverageOperator_1ab6309a8ede9517ff3f8f5dcdbefd7591" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1a003d5fd49b71d27809e5f378c65ceea7" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>DFieldRminorThetaBatch</name></member>
+      <member refid="classGyroAverageOperator_1affe3cbeae6edadaee084b206b2fd7704" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>ExecutionSpace</name></member>
+      <member refid="classGyroAverageOperator_1ae244c7c5fab8139a1c128e5649b217f3" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>GridRminor</name></member>
+      <member refid="classGyroAverageOperator_1ace699df2a5470b88d040cd72f6efd0ba" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>GridTheta</name></member>
+      <member refid="classGyroAverageOperator_1a4799dbc8ad54b00ff4500a6946f7146e" prot="public" virt="non-virtual"><scope>GyroAverageOperator</scope><name>GyroAverageOperator</name></member>
+      <member refid="classGyroAverageOperator_1a740d949806a38be23c2afd110ac0ce1d" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxBatch</name></member>
+      <member refid="classGyroAverageOperator_1a63838aab1da569390da90671d3ad0eba" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeBatch</name></member>
+      <member refid="classGyroAverageOperator_1ae3c9eeb8857ffa63ed937cdfe62be615" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeBSRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1a102c25e92336f50140a1c63eb40694a3" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeRminor</name></member>
+      <member refid="classGyroAverageOperator_1ae360c2d7dd6d533050ce6e729d7dbb82" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1ab4da1853ca12538f124bfa98b980f281" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRangeTheta</name></member>
+      <member refid="classGyroAverageOperator_1a6f356674c07fc2cea4df20db2bbd3203" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRminor</name></member>
+      <member refid="classGyroAverageOperator_1a1fd91fa87ed95e6b015e6dbd2a4c2304" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxRminorTheta</name></member>
+      <member refid="classGyroAverageOperator_1acc654648f4aec0549189272421fa06e4" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>IdxTheta</name></member>
+      <member refid="classGyroAverageOperator_1a395fecee74c05f34ba5556b6477a5fdb" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_builder</name></member>
+      <member refid="classGyroAverageOperator_1a365ca08e94429bd964962e66b2595fbe" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_coordinate_transform</name></member>
+      <member refid="classGyroAverageOperator_1a313a338a7472c5b8c868757fff658c68" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_evaluator</name></member>
+      <member refid="classGyroAverageOperator_1a696584fe80c8ce7bf2185af8c608836c" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_nb_gyro_points</name></member>
+      <member refid="classGyroAverageOperator_1a104a4a49afa4d2d57367618dc9c8117c" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>m_rho_L</name></member>
+      <member refid="classGyroAverageOperator_1a60450db4faead632164d62da641027a6" prot="public" virt="non-virtual"><scope>GyroAverageOperator</scope><name>operator()</name></member>
+      <member refid="classGyroAverageOperator_1ad0654abf5b4f0544fb0f6ccfbdd66702" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>Rminor</name></member>
+      <member refid="classGyroAverageOperator_1a6fff57d87121d5e127b19d83c234b27e" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>RThetaBuilder</name></member>
+      <member refid="classGyroAverageOperator_1a7ac14924652899b70a060ce6a1108450" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>RThetaEvaluator</name></member>
+      <member refid="classGyroAverageOperator_1af25afbd1dfb4e80af17c44383dba55c0" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>RZ_1</name></member>
+      <member refid="classGyroAverageOperator_1ab7b9650e7cce5321e3641ff80d975999" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>RZ_2</name></member>
+      <member refid="classGyroAverageOperator_1a55f575131d4cfee8468f0937568c3856" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>Theta</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

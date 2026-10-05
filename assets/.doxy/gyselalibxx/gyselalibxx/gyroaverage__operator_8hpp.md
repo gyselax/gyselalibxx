@@ -16,6 +16,7 @@
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "geometry_pseudo_cartesian.hpp"`
+* `#include "i_interpolation.hpp"`
 
 
 
@@ -35,7 +36,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**GyroAverageOperator**](classGyroAverageOperator.md) &lt;class SplineRThetaBuilder, class SplineRThetaEvaluator, class IdxRangeRminorThetaBatch, class ToLogicalCoordTransform&gt;<br>_Operator to compute the gyroaverage of a field in (r, theta) coordinates._  |
+| class | [**GyroAverageOperator**](classGyroAverageOperator.md) &lt;RThetaInterpolator, class IdxRangeRminorThetaBatch, class ToLogicalCoordTransform&gt;<br>_Operator to compute the gyroaverage of a field in (r, theta) coordinates._  |
 
 
 

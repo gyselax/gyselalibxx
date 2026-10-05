@@ -93,7 +93,7 @@
 ### typedef Dual 
 
 ```C++
-using GyroAverageOperator< SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform >::Theta_gyro::Dual =  Theta_gyro_cov;
+using GyroAverageOperator< RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform >::Theta_gyro::Dual =  Theta_gyro_cov;
 ```
 
 
@@ -108,7 +108,7 @@ using GyroAverageOperator< SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeR
 ### variable PERIODIC 
 
 ```C++
-constexpr bool GyroAverageOperator< SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform >::Theta_gyro::PERIODIC;
+constexpr bool GyroAverageOperator< RThetaInterpolator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform >::Theta_gyro::PERIODIC;
 ```
 
 

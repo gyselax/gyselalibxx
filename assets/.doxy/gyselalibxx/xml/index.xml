@@ -1468,42 +1468,42 @@
   <compound refid="structGridY" kind="struct"><name>GridY</name>
   </compound>
   <compound refid="classGyroAverageOperator" kind="class"><name>GyroAverageOperator</name>
-    <member refid="classGyroAverageOperator_1ae4091e1bfd6cdb27a90a42108fba2d95" kind="typedef"><name>ExecutionSpace</name></member>
-    <member refid="classGyroAverageOperator_1a7323dc58a4039a56c126128b3f47e112" kind="typedef"><name>GridRminor</name></member>
-    <member refid="classGyroAverageOperator_1a2e2eef134c74739c77d1137db16b56e3" kind="typedef"><name>GridTheta</name></member>
-    <member refid="classGyroAverageOperator_1a5691dae9d1f6fff811a9093f1c8dc05f" kind="typedef"><name>Rminor</name></member>
-    <member refid="classGyroAverageOperator_1ab738971ec6cabcbcd7eb4d6a9a0ecb9c" kind="typedef"><name>Theta</name></member>
-    <member refid="classGyroAverageOperator_1a2333d3c4f4327fdaf60d19c0be7b4659" kind="typedef"><name>BSplinesRminor</name></member>
-    <member refid="classGyroAverageOperator_1a1648e1bbc9cf1b44f6314480a2f22c4e" kind="typedef"><name>BSplinesTheta</name></member>
-    <member refid="classGyroAverageOperator_1a738bfdfe201c7b4c6ce700a6266e016d" kind="typedef"><name>IdxRangeRminor</name></member>
-    <member refid="classGyroAverageOperator_1aec0a5e18c8c1358f0b5fca02d9b49a26" kind="typedef"><name>IdxRangeTheta</name></member>
-    <member refid="classGyroAverageOperator_1a1affefe8ff2204b52dd5f05a2ac1d040" kind="typedef"><name>IdxRangeRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1a93240dac66de1c00e551d92142de1080" kind="typedef"><name>IdxRangeBatch</name></member>
-    <member refid="classGyroAverageOperator_1a51360dcf94a0de5e52d5878d332c0246" kind="typedef"><name>IdxRangeBSRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1a29387299bd61457ac1db794ac9e77ae6" kind="typedef"><name>IdxRminor</name></member>
-    <member refid="classGyroAverageOperator_1ab0637f6a4af7bea68390fefd2bcb3bb7" kind="typedef"><name>IdxTheta</name></member>
-    <member refid="classGyroAverageOperator_1a5a479ad640010a9486a4c05ef1e9f1b5" kind="typedef"><name>IdxBatch</name></member>
-    <member refid="classGyroAverageOperator_1ae089f81b3cec545fe4f52504211b334e" kind="typedef"><name>IdxRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1a14f0f968efdb9647e7ced796adc51f80" kind="typedef"><name>DFieldMemRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1a1ca8e7dcc9faa75874043a247c15c096" kind="typedef"><name>DFieldMemRminorThetaBatch</name></member>
-    <member refid="classGyroAverageOperator_1acf5f8bfb70998bcb91baa6cf65b0bd4f" kind="typedef"><name>DFieldMemBSRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1af3b1b9ddf00b77f093e0e07b3bdf9a05" kind="typedef"><name>DFieldRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1af83b28c0f65d41f073748378e9f25cda" kind="typedef"><name>DFieldRminorThetaBatch</name></member>
-    <member refid="classGyroAverageOperator_1acb777238e7aae46eed6b7f01b09596ef" kind="typedef"><name>DFieldBSRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1a1fe1a3ef952448393b859b1efb78010c" kind="typedef"><name>DConstFieldRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1a6a45b7de3af3124be844eff81403cfad" kind="typedef"><name>DConstFieldRminorThetaBatch</name></member>
-    <member refid="classGyroAverageOperator_1a8649c36b35f754be220bd88420b521fa" kind="typedef"><name>CoordRminorTheta</name></member>
-    <member refid="classGyroAverageOperator_1ac84680201de98fe36f76f124edc55676" kind="typedef"><name>CoordR_gyroTheta_gyro</name></member>
-    <member refid="classGyroAverageOperator_1adb5256ba3e397ce1af11c8a82114a41e" kind="typedef"><name>RZ_1</name></member>
-    <member refid="classGyroAverageOperator_1a72f2da4bfe722c4948131fe066dfe224" kind="typedef"><name>RZ_2</name></member>
-    <member refid="classGyroAverageOperator_1a5c5dbc6160a2181ff7ce86a18cee28e5" kind="typedef"><name>CoordRZ</name></member>
-    <member refid="classGyroAverageOperator_1a5ba2d676cd885a029ccdb85e63adcabc" kind="variable"><name>m_rho_L</name></member>
-    <member refid="classGyroAverageOperator_1af6a5f0d747a5a00678f4103b20ae2bf2" kind="variable"><name>m_spline_builder</name></member>
-    <member refid="classGyroAverageOperator_1afd19acac1d6c0bac6bb5db25c202de5a" kind="variable"><name>m_spline_evaluator</name></member>
-    <member refid="classGyroAverageOperator_1ac611016af8d1d7f9d3bb26a88b78c465" kind="variable"><name>m_coordinate_transform</name></member>
-    <member refid="classGyroAverageOperator_1a1b5375004b8b7ccd5d435b92c65bd7e4" kind="variable"><name>m_nb_gyro_points</name></member>
-    <member refid="classGyroAverageOperator_1ab80567574cba4d5616c6ec3463656b6c" kind="function"><name>GyroAverageOperator</name></member>
-    <member refid="classGyroAverageOperator_1a0b895f8c55a7673871e5d2b155a7495a" kind="function"><name>operator()</name></member>
+    <member refid="classGyroAverageOperator_1a6fff57d87121d5e127b19d83c234b27e" kind="typedef"><name>RThetaBuilder</name></member>
+    <member refid="classGyroAverageOperator_1a7ac14924652899b70a060ce6a1108450" kind="typedef"><name>RThetaEvaluator</name></member>
+    <member refid="classGyroAverageOperator_1affe3cbeae6edadaee084b206b2fd7704" kind="typedef"><name>ExecutionSpace</name></member>
+    <member refid="classGyroAverageOperator_1ad0654abf5b4f0544fb0f6ccfbdd66702" kind="typedef"><name>Rminor</name></member>
+    <member refid="classGyroAverageOperator_1a55f575131d4cfee8468f0937568c3856" kind="typedef"><name>Theta</name></member>
+    <member refid="classGyroAverageOperator_1ae360c2d7dd6d533050ce6e729d7dbb82" kind="typedef"><name>IdxRangeRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1ae244c7c5fab8139a1c128e5649b217f3" kind="typedef"><name>GridRminor</name></member>
+    <member refid="classGyroAverageOperator_1ace699df2a5470b88d040cd72f6efd0ba" kind="typedef"><name>GridTheta</name></member>
+    <member refid="classGyroAverageOperator_1a102c25e92336f50140a1c63eb40694a3" kind="typedef"><name>IdxRangeRminor</name></member>
+    <member refid="classGyroAverageOperator_1ab4da1853ca12538f124bfa98b980f281" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classGyroAverageOperator_1a63838aab1da569390da90671d3ad0eba" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classGyroAverageOperator_1ae3c9eeb8857ffa63ed937cdfe62be615" kind="typedef"><name>IdxRangeBSRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a6f356674c07fc2cea4df20db2bbd3203" kind="typedef"><name>IdxRminor</name></member>
+    <member refid="classGyroAverageOperator_1acc654648f4aec0549189272421fa06e4" kind="typedef"><name>IdxTheta</name></member>
+    <member refid="classGyroAverageOperator_1a740d949806a38be23c2afd110ac0ce1d" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classGyroAverageOperator_1a1fd91fa87ed95e6b015e6dbd2a4c2304" kind="typedef"><name>IdxRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1ad9fe4fdacc9a01001d2b34a88d853148" kind="typedef"><name>DFieldMemRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a691cc50bf58eb07e96134bbfa21a6884" kind="typedef"><name>DFieldMemRminorThetaBatch</name></member>
+    <member refid="classGyroAverageOperator_1af1d8dd737baa01387eee96d2473bde6c" kind="typedef"><name>DFieldMemBSRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1ab6309a8ede9517ff3f8f5dcdbefd7591" kind="typedef"><name>DFieldRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a003d5fd49b71d27809e5f378c65ceea7" kind="typedef"><name>DFieldRminorThetaBatch</name></member>
+    <member refid="classGyroAverageOperator_1a2bc03b9ddc65d717b5d75a6478ded036" kind="typedef"><name>DFieldBSRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a9e3c305f83782f8b69877115d609fb5d" kind="typedef"><name>DConstFieldRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1afeac978b78c51bac7e99c803328421b6" kind="typedef"><name>DConstFieldRminorThetaBatch</name></member>
+    <member refid="classGyroAverageOperator_1a1aa24a505a5367374e9b3a8c7878aa66" kind="typedef"><name>CoordRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1ad8837e63b75899270e1499d1389c49ea" kind="typedef"><name>CoordR_gyroTheta_gyro</name></member>
+    <member refid="classGyroAverageOperator_1af25afbd1dfb4e80af17c44383dba55c0" kind="typedef"><name>RZ_1</name></member>
+    <member refid="classGyroAverageOperator_1ab7b9650e7cce5321e3641ff80d975999" kind="typedef"><name>RZ_2</name></member>
+    <member refid="classGyroAverageOperator_1ada8439920a9df8a7bd98c950cfbcb244" kind="typedef"><name>CoordRZ</name></member>
+    <member refid="classGyroAverageOperator_1a104a4a49afa4d2d57367618dc9c8117c" kind="variable"><name>m_rho_L</name></member>
+    <member refid="classGyroAverageOperator_1a395fecee74c05f34ba5556b6477a5fdb" kind="variable"><name>m_builder</name></member>
+    <member refid="classGyroAverageOperator_1a313a338a7472c5b8c868757fff658c68" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classGyroAverageOperator_1a365ca08e94429bd964962e66b2595fbe" kind="variable"><name>m_coordinate_transform</name></member>
+    <member refid="classGyroAverageOperator_1a696584fe80c8ce7bf2185af8c608836c" kind="variable"><name>m_nb_gyro_points</name></member>
+    <member refid="classGyroAverageOperator_1a4799dbc8ad54b00ff4500a6946f7146e" kind="function"><name>GyroAverageOperator</name></member>
+    <member refid="classGyroAverageOperator_1a60450db4faead632164d62da641027a6" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" kind="struct"><name>FEM1DPoissonSolver::HiddenFEMBSplines</name>
   </compound>
@@ -3120,8 +3120,8 @@
     <member refid="structR__cov_1ad33bfa8d84633a654f6d895b62e55bd3" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
   <compound refid="structGyroAverageOperator_1_1R__gyro" kind="struct"><name>GyroAverageOperator::R_gyro</name>
-    <member refid="structGyroAverageOperator_1_1R__gyro_1a84e24cedd3763682987663a5d278d671" kind="typedef"><name>Dual</name></member>
-    <member refid="structGyroAverageOperator_1_1R__gyro_1a3a43c0c95a9a15f4bec1265f1e9944f0" kind="variable"><name>PERIODIC</name></member>
+    <member refid="structGyroAverageOperator_1_1R__gyro_1a3b66ab58182904d39539292b0efb5a23" kind="typedef"><name>Dual</name></member>
+    <member refid="structGyroAverageOperator_1_1R__gyro_1a05f3313a5cca3123510eab2342fb847e" kind="variable"><name>PERIODIC</name></member>
   </compound>
   <compound refid="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4" kind="struct"><name>Kokkos::reduction_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;</name>
     <member refid="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4_1a3e01e7ef0596f16ac75a51320906180e" kind="function"><name>sum</name></member>
@@ -3446,8 +3446,8 @@
     <member refid="structTheta__cov_1aa8fa7e714a2fd9fc2de39f95d97e6e4a" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
   <compound refid="structGyroAverageOperator_1_1Theta__gyro" kind="struct"><name>GyroAverageOperator::Theta_gyro</name>
-    <member refid="structGyroAverageOperator_1_1Theta__gyro_1a105db279a28a9fad8855ee3e3ed53243" kind="typedef"><name>Dual</name></member>
-    <member refid="structGyroAverageOperator_1_1Theta__gyro_1a9ce4edde9d0f283479639957d7dd472f" kind="variable"><name>PERIODIC</name></member>
+    <member refid="structGyroAverageOperator_1_1Theta__gyro_1a0a6980e92dd098f073cc0ba0af8e7fe6" kind="typedef"><name>Dual</name></member>
+    <member refid="structGyroAverageOperator_1_1Theta__gyro_1aaa832ac8b9c45c905c6a53f373ef7af9" kind="variable"><name>PERIODIC</name></member>
   </compound>
   <compound refid="classToroidalToCylindrical" kind="class"><name>ToroidalToCylindrical</name>
     <member refid="classToroidalToCylindrical_1a95fe2209876482394d4fbf65db9d283a" kind="typedef"><name>RZBasis</name></member>
