@@ -1013,7 +1013,7 @@ private:
      * @brief Apply the explicit formula for the uniform case to weights on one side of the interface
      */
     template <class EdgePerpGrid>
-    void set_local_uniform_weights(
+    static void set_local_uniform_weights(
             host_t<DField<IdxRange<EdgePerpGrid>>> weights,
             double factor,
             double un_other_patch,
