@@ -791,17 +791,16 @@ private:
 
     using RefinedSplineBuilder = typename Build_BuilderType&lt;SplineBuilder&gt;::type;
 
-    using RefinedSplineEvaluator = ddc::SplineEvaluator2D&lt;
+    using RefinedSplineEvaluator = ddc::SplineEvaluatorND&lt;
             ExecSpace,
             MemorySpace,
-            BSplinesRRefined,
-            BSplinesThetaRefined,
-            GridRRefined,
-            GridThetaRefined,
-            typename SplineEvaluator::lower_extrapolation_rule_1_type,
-            typename SplineEvaluator::upper_extrapolation_rule_1_type,
-            typename SplineEvaluator::lower_extrapolation_rule_2_type,
-            typename SplineEvaluator::upper_extrapolation_rule_2_type&gt;;
+            ddc::detail::TypeSeq&lt;BSplinesRRefined, BSplinesThetaRefined&gt;,
+            ddc::detail::TypeSeq&lt;GridRRefined, GridThetaRefined&gt;,
+            ddc::detail::TypeSeq&lt;
+                    typename SplineEvaluator::template lower_extrapolation_rule_type&lt;0&gt;,
+                    typename SplineEvaluator::template upper_extrapolation_rule_type&lt;0&gt;,
+                    typename SplineEvaluator::template lower_extrapolation_rule_type&lt;1&gt;,
+                    typename SplineEvaluator::template upper_extrapolation_rule_type&lt;1&gt;&gt;&gt;;
 
     using IdxRangeSplines = IdxRange&lt;BSplinesRRefined, BSplinesThetaRefined&gt;;
     using IdxRangeInterpolationPoints = IdxRange&lt;GridRRefined, GridThetaRefined&gt;;
@@ -831,10 +830,10 @@ public:
             Mapping const&amp; analytical_mapping,
             Interpolator const&amp; interpolator)
         : m_evaluator(
-                interpolator.get_evaluator().lower_extrapolation_rule_dim_1(),
-                interpolator.get_evaluator().upper_extrapolation_rule_dim_1(),
-                interpolator.get_evaluator().lower_extrapolation_rule_dim_2(),
-                interpolator.get_evaluator().upper_extrapolation_rule_dim_2())
+                interpolator.get_evaluator().template lower_extrapolation_rule&lt;0&gt;(),
+                interpolator.get_evaluator().template upper_extrapolation_rule&lt;0&gt;(),
+                interpolator.get_evaluator().template lower_extrapolation_rule&lt;1&gt;(),
+                interpolator.get_evaluator().template upper_extrapolation_rule&lt;1&gt;())
     {
         using CoordR = Coord&lt;R&gt;;
         using CoordTheta = Coord&lt;Theta&gt;;

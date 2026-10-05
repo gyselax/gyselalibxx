@@ -63,9 +63,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="41" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a7282a77535661812f6b4d445cceb2967" prot="private" static="no">
-        <type>find_grid_t&lt; <ref refid="structR" kindref="compound">R</ref>, ddc::to_type_seq_t&lt; typename RThetaAdvectionEvaluator::spline_domain_type &gt; &gt;</type>
-        <definition>using polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::BSplinesR =  find_grid_t&lt; R, ddc::to_type_seq_t&lt;typename RThetaAdvectionEvaluator::spline_domain_type&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1aeb78cf1781531d036eb0a748f4edb4f8" prot="private" static="no">
+        <type>find_grid_t&lt; <ref refid="structR" kindref="compound">R</ref>, ddc::to_type_seq_t&lt; typename RThetaAdvectionEvaluator::template spline_domain_type&lt; 0, 1 &gt; &gt; &gt;</type>
+        <definition>using polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::BSplinesR =  find_grid_t&lt; R, ddc::to_type_seq_t&lt; typename RThetaAdvectionEvaluator::template spline_domain_type&lt;0, 1&gt; &gt;&gt;</definition>
         <argsstring></argsstring>
         <name>BSplinesR</name>
         <qualifiedname>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder::BSplinesR</qualifiedname>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ac552edb5cda1fbc008cc7299bed0991b" prot="private" static="no">
         <type>Idx&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="45" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a1e35063af50711afd607f8b689c30cc2" prot="private" static="no">
         <type>ddc::remove_dims_of_t&lt; IdxRangeOperator, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="46" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a569a553b9e0702a7a900693b75c8e2b7" prot="private" static="no">
         <type>typename IdxRangeOperator::discrete_element_type</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a3b66b5a13edf0858304b737c93835587" prot="private" static="no">
         <type>typename IdxRangeBatch::discrete_element_type</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="48" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a8d1aeeac3f4ab95dd9082096bc868162" prot="private" static="no">
         <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="49" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1af1656eb357b61b40d29f2874d960c7e3" prot="private" static="no">
         <type>typename PseudoPhysicalToLogicalMapping::CoordArg</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="50" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ae93897711a07180a8c03641c85a848ba" prot="private" static="no">
         <type>ddc::to_type_seq_t&lt; CoordX_pcY_pc &gt;</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="51" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a5165d61b4feae8897ae36af1e57ca3fb" prot="private" static="no">
         <type>ddc::to_type_seq_t&lt; typename PseudoPhysicalToAdvectionMapping::CoordResult &gt;</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ab04f3ca9783ea255384ca4f35987d6fc" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 0, VectorIndexSetAdvectionDims &gt;</type>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="55" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1aa4029f4d2d7cfab650980c975acd23c8" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 1, VectorIndexSetAdvectionDims &gt;</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="57" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="58" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="60" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="61" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a2715558c788a55778d532c87909a405d" prot="private" static="no" mutable="no">
         <type>PseudoPhysicalToAdvectionMapping</type>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="62" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="63" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a4a0a1fc21303c87ee4bdf39a1bfb9c3e" prot="private" static="no" mutable="no">
         <type>PseudoPhysicalToLogicalMapping</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="63" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="63" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="64" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a0be3905c08f88b532bd92894db4254b7" prot="private" static="no" mutable="no">
         <type>LogicalToPseudoPhysicalMapping</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="64" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="64" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="65" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a59865e006558442c86b2ba4e22111c1c" prot="private" static="no" mutable="no">
         <type>TimeStepper</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="66" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="66" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="67" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a9c4bd97261b6203e1f313c8d19279ae0" prot="private" static="no" mutable="no">
         <type>AdvecCoefField</type>
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="68" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="68" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="69" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a7adaa595695d79b7f936486c241f102e" prot="private" static="no" mutable="no">
         <type>CoordX_pcY_pc</type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="69" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="69" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="70" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ac138e50b8ad17e425197484d270a521b" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -331,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="70" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="70" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="71" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ad3b6fe799a802e9f80b7a63b6fc7dc18" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="71" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="71" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="72" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="72" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -472,7 +472,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="98" bodyend="118"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="99" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="99" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ae0edadd538a873a24ec97025ed4e46a9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION CoordRTheta</type>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="131" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="131" bodyend="179"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="132" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="132" bodyend="180"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -513,11 +513,11 @@
     <detaileddescription>
 <para>The advection field is expressed in physical Cartesian coordinates and converted to pseudo-physical space. Foot-finding integrates the characteristic equation in pseudo-physical space. Constructed by <ref refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem" kindref="compound">ElementwisePhysicalAdvPseudoPhysicalFootFinderMem</ref>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="37" bodyend="180"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp" bodystart="37" bodyend="181"/>
     <listofallmembers>
       <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ab04f3ca9783ea255384ca4f35987d6fc" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</scope><name>AdvDim1</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1aa4029f4d2d7cfab650980c975acd23c8" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</scope><name>AdvDim2</name></member>
-      <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a7282a77535661812f6b4d445cceb2967" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</scope><name>BSplinesR</name></member>
+      <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1aeb78cf1781531d036eb0a748f4edb4f8" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</scope><name>BSplinesR</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a8d1aeeac3f4ab95dd9082096bc868162" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</scope><name>CoordRTheta</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1af1656eb357b61b40d29f2874d960c7e3" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</scope><name>CoordX_pcY_pc</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ac738e13ccfefeca1100a34c5e381ce3f" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</scope><name>ElementwisePhysicalAdvPseudoPhysicalFootFinder</name></member>

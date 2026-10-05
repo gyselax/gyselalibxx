@@ -591,10 +591,10 @@ class Spline2DPartialDerivative : public IPartialDerivative&lt;IdxRangeBatched, 
 {
     static_assert(
             (std::is_same_v&lt;
-                    typename SplineEvaluator2D::continuous_dimension_type1,
+                    typename SplineEvaluator2D::template continuous_dimension_type&lt;0&gt;,
                     DerivativeDimension&gt;)
             || (std::is_same_v&lt;
-                    typename SplineEvaluator2D::continuous_dimension_type2,
+                    typename SplineEvaluator2D::template continuous_dimension_type&lt;1&gt;,
                     DerivativeDimension&gt;));
 
 private:

@@ -215,9 +215,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="269" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="269" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a2d45b91da04e26ce48e7cfb667132684" prot="private" static="no">
-        <type>ddc::SplineEvaluator2D&lt; ExecSpace, MemorySpace, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined" kindref="compound">BSplinesRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined" kindref="compound">BSplinesThetaRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref>, typename SplineEvaluator::lower_extrapolation_rule_1_type, typename SplineEvaluator::upper_extrapolation_rule_1_type, typename SplineEvaluator::lower_extrapolation_rule_2_type, typename SplineEvaluator::upper_extrapolation_rule_2_type &gt;</type>
-        <definition>using RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator, ncells_r, ncells_theta &gt;::RefinedSplineEvaluator =  ddc::SplineEvaluator2D&lt; ExecSpace, MemorySpace, BSplinesRRefined, BSplinesThetaRefined, GridRRefined, GridThetaRefined, typename SplineEvaluator::lower_extrapolation_rule_1_type, typename SplineEvaluator::upper_extrapolation_rule_1_type, typename SplineEvaluator::lower_extrapolation_rule_2_type, typename SplineEvaluator::upper_extrapolation_rule_2_type&gt;</definition>
+      <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a63574c89fbe29c68529869a918288c05" prot="private" static="no">
+        <type>ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::detail::TypeSeq&lt; <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined" kindref="compound">BSplinesRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined" kindref="compound">BSplinesThetaRefined</ref> &gt;, ddc::detail::TypeSeq&lt; <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref> &gt;, ddc::detail::TypeSeq&lt; typename SplineEvaluator::template lower_extrapolation_rule_type&lt; 0 &gt;, typename SplineEvaluator::template upper_extrapolation_rule_type&lt; 0 &gt;, typename SplineEvaluator::template lower_extrapolation_rule_type&lt; 1 &gt;, typename SplineEvaluator::template upper_extrapolation_rule_type&lt; 1 &gt; &gt; &gt;</type>
+        <definition>using RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator, ncells_r, ncells_theta &gt;::RefinedSplineEvaluator =  ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::detail::TypeSeq&lt;BSplinesRRefined, BSplinesThetaRefined&gt;, ddc::detail::TypeSeq&lt;GridRRefined, GridThetaRefined&gt;, ddc::detail::TypeSeq&lt; typename SplineEvaluator::template lower_extrapolation_rule_type&lt;0&gt;, typename SplineEvaluator::template upper_extrapolation_rule_type&lt;0&gt;, typename SplineEvaluator::template lower_extrapolation_rule_type&lt;1&gt;, typename SplineEvaluator::template upper_extrapolation_rule_type&lt;1&gt; &gt;&gt;</definition>
         <argsstring></argsstring>
         <name>RefinedSplineEvaluator</name>
         <qualifiedname>RefinedDiscretePoloidalCSSplineMappingBuilder::RefinedSplineEvaluator</qualifiedname>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="271" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="281" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="271" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="280" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1affdf55e8820602a7213e24dda6b7e83f" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined" kindref="compound">BSplinesRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined" kindref="compound">BSplinesThetaRefined</ref> &gt;</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="283" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="283" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="282" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="282" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a32c39a180a0e0e6532255e2413fd50cf" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref> &gt;</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="284" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="284" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="283" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="283" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1aae16be78e87fdeb411c62756c7ce6c4a" prot="private" static="no">
         <type>typename IdxRangeInterpolationPoints::discrete_element_type</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="285" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="285" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="284" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="284" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a98621d4fbe0bd50180dacc633acfdb5a" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeSplines, MemorySpace &gt;</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="287" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="287" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="286" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="286" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a267f67a7e473bdb9182c4249b13e3cd9" prot="private" static="no">
         <type>typename SplineCoeffsMem::span_type</type>
@@ -297,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="289" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="289" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="288" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="288" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a0a1370499d2457ef647fc180ec96bd56" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeInterpolationPoints, MemorySpace &gt;</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="291" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="291" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="290" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="290" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a3f2d873877ab37a5b3b9e171551b803b" prot="private" static="no">
         <type>typename InterpolationFieldMem::span_type</type>
@@ -325,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="293" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="293" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="292" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="292" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -342,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="297" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="297" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="296" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="296" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -358,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="300" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="300" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="299" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="299" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a4f6d597dedcdae5720e0ab33c543d937" prot="private" static="no" mutable="no">
         <type>SplineCoeffsMem</type>
@@ -372,7 +372,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="301" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="301" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="300" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="300" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a553745e400fb18c48d2325e571319824" prot="private" static="no" mutable="no">
         <type>RefinedSplineEvaluator</type>
@@ -386,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="302" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="302" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="301" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="301" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a837f5a485439e3b75426bd1b59f228c7" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref> &gt;</type>
@@ -400,7 +400,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="303" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="303" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="302" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="302" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -460,7 +460,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="314" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="314" bodyend="405"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="313" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="313" bodyend="404"/>
       </memberdef>
       <memberdef kind="function" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a72edd2395b160951eaeed4ff1a9ea5c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classDiscretePoloidalCSSplineMapping" kindref="compound">DiscretePoloidalCSSplineMapping</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, RefinedSplineEvaluator &gt;</type>
@@ -478,7 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="412" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="412" bodyend="419"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="411" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="411" bodyend="418"/>
       </memberdef>
       <memberdef kind="function" id="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a78eb7c889a0864e03706920b4cd81d1e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -558,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="434" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="434" bodyend="454"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="433" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="433" bodyend="453"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -608,7 +608,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="173" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="174" bodyend="455"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="173" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="174" bodyend="454"/>
     <listofallmembers>
       <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1afe2d7d3190cb37d92e2e68f8b6a69cff" prot="private" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>BSplinesROriginal</name></member>
       <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a40262cf6ca7b77685ba508d37dd2ee63" prot="private" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>BSplinesThetaOriginal</name></member>
@@ -632,7 +632,7 @@
       <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1ae8d498c901b21d43b9ac365e4f1d6328" prot="private" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>R</name></member>
       <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a59270eeab866f8b7eaea566f7ffc1292" prot="public" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>RefinedDiscretePoloidalCSSplineMappingBuilder</name></member>
       <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a2510c39dfcdb4454d75dea7023eaf54a" prot="private" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>RefinedSplineBuilder</name></member>
-      <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a2d45b91da04e26ce48e7cfb667132684" prot="private" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>RefinedSplineEvaluator</name></member>
+      <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a63574c89fbe29c68529869a918288c05" prot="private" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>RefinedSplineEvaluator</name></member>
       <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a78eb7c889a0864e03706920b4cd81d1e" prot="public" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>set_curvilinear_to_cartesian_values</name></member>
       <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a72cdeb094fed2095d6cabc90b3e9ea92" prot="private" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>SplineBuilder</name></member>
       <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a267f67a7e473bdb9182c4249b13e3cd9" prot="private" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder</scope><name>SplineCoeffs</name></member>

@@ -99,7 +99,7 @@ _A traits struct for accessing type aliases of an interpolation evaluator._ [Mor
 The primary template delegates to the evaluator's own type aliases. It handles the common case where an evaluator already uses the convention names (e.g. [**LagrangeEvaluator**](classLagrangeEvaluator.md) exposes `evaluation_idx_range_type` and `batched_coeff_idx_range_type` directly).
 
 
-Specialise this struct to adapt external evaluators whose alias names differ (e.g. ddc::SplineEvaluator).
+Specialise this struct to adapt external evaluators whose alias names differ (e.g. ddc::SplineEvaluatorND).
 
 
 Defines: Type aliases:

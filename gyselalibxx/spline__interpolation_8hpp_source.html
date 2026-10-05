@@ -655,13 +655,12 @@ public:
             MaxBound,
             Solver&gt;;
 
-    using EvaluatorType = ddc::SplineEvaluator&lt;
+    using EvaluatorType = ddc::SplineEvaluatorND&lt;
             ExecSpace,
             typename ExecSpace::memory_space,
-            Basis,
-            InterpGrid,
-            MinExtrapolationRule,
-            MaxExtrapolationRule&gt;;
+            ddc::detail::TypeSeq&lt;Basis&gt;,
+            ddc::detail::TypeSeq&lt;InterpGrid&gt;,
+            ddc::detail::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt;&gt;;
 
     static constexpr std::size_t rank()
     {
@@ -856,17 +855,16 @@ public:
             MaxBound2,
             Solver&gt;;
 
-    using EvaluatorType = ddc::SplineEvaluator2D&lt;
+    using EvaluatorType = ddc::SplineEvaluatorND&lt;
             ExecSpace,
             typename ExecSpace::memory_space,
-            Basis1,
-            Basis2,
-            InterpGrid1,
-            InterpGrid2,
-            MinExtrapolationRule1,
-            MaxExtrapolationRule1,
-            MinExtrapolationRule2,
-            MaxExtrapolationRule2&gt;;
+            ddc::detail::TypeSeq&lt;Basis1, Basis2&gt;,
+            ddc::detail::TypeSeq&lt;InterpGrid1, InterpGrid2&gt;,
+            ddc::detail::TypeSeq&lt;
+                    MinExtrapolationRule1,
+                    MaxExtrapolationRule1,
+                    MinExtrapolationRule2,
+                    MaxExtrapolationRule2&gt;&gt;;
 
     static constexpr std::size_t rank()
     {
@@ -1076,21 +1074,18 @@ public:
             MaxBound3,
             Solver&gt;;
 
-    using EvaluatorType = ddc::SplineEvaluator3D&lt;
+    using EvaluatorType = ddc::SplineEvaluatorND&lt;
             ExecSpace,
             typename ExecSpace::memory_space,
-            Basis1,
-            Basis2,
-            Basis3,
-            InterpGrid1,
-            InterpGrid2,
-            InterpGrid3,
-            MinExtrapolationRule1,
-            MaxExtrapolationRule1,
-            MinExtrapolationRule2,
-            MaxExtrapolationRule2,
-            MinExtrapolationRule3,
-            MaxExtrapolationRule3&gt;;
+            ddc::detail::TypeSeq&lt;Basis1, Basis2, Basis3&gt;,
+            ddc::detail::TypeSeq&lt;InterpGrid1, InterpGrid2, InterpGrid3&gt;,
+            ddc::detail::TypeSeq&lt;
+                    MinExtrapolationRule1,
+                    MaxExtrapolationRule1,
+                    MinExtrapolationRule2,
+                    MaxExtrapolationRule2,
+                    MinExtrapolationRule3,
+                    MaxExtrapolationRule3&gt;&gt;;
 
     static constexpr std::size_t rank()
     {

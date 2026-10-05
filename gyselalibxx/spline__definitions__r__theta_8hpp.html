@@ -694,7 +694,7 @@
 <td style="text-align: left;"><a href="#typedef-splinerthetaevaluatornullbound"><strong>SplineRThetaEvaluatorNullBound</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineEvaluatorND&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, ddc::detail::TypeSeq&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;, ddc::detail::TypeSeq&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt;, ddc::detail::TypeSeq&lt; ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splinerthetaevaluatornullbound_host"><strong>SplineRThetaEvaluatorNullBound_host</strong></a>  <br></td>
 </tr>
 <tr>
@@ -852,7 +852,7 @@
 <hr>
 
 <h3 id="typedef-splinerthetaevaluatornullbound_host">typedef SplineRThetaEvaluatorNullBound_host</h3>
-<pre><code class="language-C++">using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
+<pre><code class="language-C++">using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluatorND&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;, ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;, ddc::detail::TypeSeq&lt; ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;&gt;;
 </code></pre>
 <hr>
 

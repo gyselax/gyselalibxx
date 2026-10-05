@@ -49,17 +49,16 @@ using SplineInterpPointsTheta
         = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaClosure, SplineThetaClosure>;
 
 // --- Operators
-using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluatorND<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::NullExtrapolationRule, // boundary at r=0
+                ddc::NullExtrapolationRule, // boundary at rmax
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
 using SplineInterpolatorRThetaConst_host = SplineInterpolator<
         Kokkos::DefaultHostExecutionSpace,

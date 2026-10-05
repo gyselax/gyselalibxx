@@ -34,8 +34,8 @@ _A class for describing discrete 2D mappings from the logical domain to the phys
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename SplineEvaluator::bsplines\_type1 | [**BSplineR**](#typedef-bspliner)  <br>_Indicate the bspline type of the first logical dimension._  |
-| typedef typename SplineEvaluator::bsplines\_type2 | [**BSplineTheta**](#typedef-bsplinetheta)  <br>_Indicate the bspline type of the second logical dimension._  |
+| typedef typename SplineEvaluator::template bsplines\_type&lt; 0 &gt; | [**BSplineR**](#typedef-bspliner)  <br>_Indicate the bspline type of the first logical dimension._  |
+| typedef typename SplineEvaluator::template bsplines\_type&lt; 1 &gt; | [**BSplineTheta**](#typedef-bsplinetheta)  <br>_Indicate the bspline type of the second logical dimension._  |
 | typedef Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
 | typedef [**CoordArg**](classDiscretePoloidalCSSplineMapping.md#typedef-coordarg) | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
@@ -137,7 +137,7 @@ This mapping could be costly to inverse.
 
 _Indicate the bspline type of the first logical dimension._ 
 ```C++
-using DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySpace >::BSplineR =  typename SplineEvaluator::bsplines_type1;
+using DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySpace >::BSplineR =  typename SplineEvaluator::template bsplines_type<0>;
 ```
 
 
@@ -151,7 +151,7 @@ using DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySp
 
 _Indicate the bspline type of the second logical dimension._ 
 ```C++
-using DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySpace >::BSplineTheta =  typename SplineEvaluator::bsplines_type2;
+using DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySpace >::BSplineTheta =  typename SplineEvaluator::template bsplines_type<1>;
 ```
 
 

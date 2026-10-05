@@ -586,11 +586,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename SplineEvaluator::bsplines_type1</td>
+<td style="text-align: right;">typedef typename SplineEvaluator::template bsplines_type&lt; 0 &gt;</td>
 <td style="text-align: left;"><a href="#typedef-bspliner"><strong>BSplineR</strong></a>  <br><em>Indicate the bspline type of the first logical dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename SplineEvaluator::bsplines_type2</td>
+<td style="text-align: right;">typedef typename SplineEvaluator::template bsplines_type&lt; 1 &gt;</td>
 <td style="text-align: left;"><a href="#typedef-bsplinetheta"><strong>BSplineTheta</strong></a>  <br><em>Indicate the bspline type of the second logical dimension.</em></td>
 </tr>
 <tr>
@@ -694,13 +694,13 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-bspliner">typedef BSplineR</h3>
 <p><em>Indicate the bspline type of the first logical dimension.</em> </p>
-<pre><code class="language-C++">using DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::BSplineR =  typename SplineEvaluator::bsplines_type1;
+<pre><code class="language-C++">using DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::BSplineR =  typename SplineEvaluator::template bsplines_type&lt;0&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-bsplinetheta">typedef BSplineTheta</h3>
 <p><em>Indicate the bspline type of the second logical dimension.</em> </p>
-<pre><code class="language-C++">using DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::BSplineTheta =  typename SplineEvaluator::bsplines_type2;
+<pre><code class="language-C++">using DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::BSplineTheta =  typename SplineEvaluator::template bsplines_type&lt;1&gt;;
 </code></pre>
 <hr>
 

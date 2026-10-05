@@ -62,7 +62,7 @@
 | typedef typename SplineInterpolatorRThetaConst::EvaluatorType | [**SplineRThetaEvaluatorConstBound**](#typedef-splinerthetaevaluatorconstbound)  <br> |
 | typedef typename SplineInterpolatorRThetaConst\_host::EvaluatorType | [**SplineRThetaEvaluatorConstBound\_host**](#typedef-splinerthetaevaluatorconstbound_host)  <br> |
 | typedef typename SplineInterpolatorRTheta::EvaluatorType | [**SplineRThetaEvaluatorNullBound**](#typedef-splinerthetaevaluatornullbound)  <br> |
-| typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md), [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt; &gt; | [**SplineRThetaEvaluatorNullBound\_host**](#typedef-splinerthetaevaluatornullbound_host)  <br> |
+| typedef ddc::SplineEvaluatorND&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, ddc::detail::TypeSeq&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt;, ddc::detail::TypeSeq&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md) &gt;, ddc::detail::TypeSeq&lt; ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt; &gt; &gt; | [**SplineRThetaEvaluatorNullBound\_host**](#typedef-splinerthetaevaluatornullbound_host)  <br> |
 | typedef [**VectorField**](classVectorField.md)&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**VectorSplineCoeffs2D**](#typedef-vectorsplinecoeffs2d)  <br> |
 | typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**VectorSplineCoeffsMem2D**](#typedef-vectorsplinecoeffsmem2d)  <br> |
 
@@ -410,7 +410,7 @@ using SplineRThetaEvaluatorNullBound =  typename SplineInterpolatorRTheta::Evalu
 ### typedef SplineRThetaEvaluatorNullBound\_host 
 
 ```C++
-using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluator2D< Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule<Theta>, ddc::PeriodicExtrapolationRule<Theta> >;
+using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluatorND< Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>, ddc::detail::TypeSeq<GridR, GridTheta>, ddc::detail::TypeSeq< ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule<Theta>, ddc::PeriodicExtrapolationRule<Theta> >>;
 ```
 
 

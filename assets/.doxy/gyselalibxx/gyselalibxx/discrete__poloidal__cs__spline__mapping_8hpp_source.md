@@ -25,16 +25,16 @@ template <
         class X,
         class Y,
         class SplineEvaluator,
-        class R = typename SplineEvaluator::continuous_dimension_type1,
-        class Theta = typename SplineEvaluator::continuous_dimension_type2,
+        class R = typename SplineEvaluator::template continuous_dimension_type<0>,
+        class Theta = typename SplineEvaluator::template continuous_dimension_type<1>,
         class MemorySpace = typename SplineEvaluator::memory_space>
 class DiscretePoloidalCSSplineMapping
 {
     static_assert(std::is_same_v<MemorySpace, typename SplineEvaluator::memory_space>);
 
 public:
-    using BSplineR = typename SplineEvaluator::bsplines_type1;
-    using BSplineTheta = typename SplineEvaluator::bsplines_type2;
+    using BSplineR = typename SplineEvaluator::template bsplines_type<0>;
+    using BSplineTheta = typename SplineEvaluator::template bsplines_type<1>;
 
     using curvilinear_tag_r = R;
     using curvilinear_tag_theta = Theta;
@@ -53,8 +53,8 @@ private:
 
     using SplineType = DConstField<spline_idx_range, MemorySpace>;
 
-    using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
-    using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
+    using IdxRangeRTheta = typename SplineEvaluator::template evaluation_domain_type<0, 1>;
+    using IdxRangeTheta = typename SplineEvaluator::template evaluation_domain_type<1>;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 
     using IdxRTheta = typename IdxRangeRTheta::discrete_element_type;

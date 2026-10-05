@@ -842,8 +842,8 @@
     <member refid="classDiscreteMapping_1a745a5e6fa66e7ed7d2be455215228134" kind="function"><name>jacobian</name></member>
   </compound>
   <compound refid="classDiscretePoloidalCSSplineMapping" kind="class"><name>DiscretePoloidalCSSplineMapping</name>
-    <member refid="classDiscretePoloidalCSSplineMapping_1af2666886352469160d73ace3e44ea67e" kind="typedef"><name>BSplineR</name></member>
-    <member refid="classDiscretePoloidalCSSplineMapping_1a392b5ffe5886c6d138dc56d37e1e0134" kind="typedef"><name>BSplineTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a3d4fe8f60525f8306f7fde79d1214c19" kind="typedef"><name>BSplineR</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1ae8becc229fd8cd7387fabe3b037e8882" kind="typedef"><name>BSplineTheta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1aeb67760d9547fa8f3a53f5947f08cdf6" kind="typedef"><name>curvilinear_tag_r</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a2b78f9a8f0341223d452120fefde75e6" kind="typedef"><name>curvilinear_tag_theta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a4d9ab128689ed5eeaf37281e34bd140e" kind="typedef"><name>CoordArg</name></member>
@@ -855,8 +855,8 @@
     <member refid="classDiscretePoloidalCSSplineMapping_1a3f31fd91ddfa76c12df8a8f019e84360" kind="typedef"><name>Theta_cov</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1abaea940e655bad1b86651aa5083f3cea" kind="typedef"><name>spline_idx_range</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a9116804b0bfe02655238b3a9d9f895d7" kind="typedef"><name>SplineType</name></member>
-    <member refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" kind="typedef"><name>IdxRangeRTheta</name></member>
-    <member refid="classDiscretePoloidalCSSplineMapping_1a2a518c42048ffe20e817aff69b8b1d29" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a5af345604d723c169940aeaf4315eb51" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a387382bc70bcb2883fc1e74888e46786" kind="typedef"><name>IdxRangeTheta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1adb996b4151c1f1802a6893564e307e57" kind="typedef"><name>IdxTheta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a9c5f3b04be494502180b773855af559e" kind="typedef"><name>IdxRTheta</name></member>
     <member refid="classDiscretePoloidalCSSplineMapping_1a775c9004ab1df0e67996782614d8465d" kind="typedef"><name>IdxStepRTheta</name></member>
@@ -981,7 +981,7 @@
     <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a56ea19d2d2e80459a2dc95ab480858fa" kind="typedef"><name>PseudoPhysicalToLogicalMapping</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a02dcb91df39a3fb0143b9aeeb712f9f3" kind="typedef"><name>R</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a794de43f6b8cb316dc43af0723b07f56" kind="typedef"><name>Theta</name></member>
-    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a02659782cc25c4e85e724f4d44c86e9f" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1aa8367f9bed2f941088cd3d6c14da5843" kind="typedef"><name>BSplinesR</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1aa967c47b7018e58b0a927bab9411a95d" kind="typedef"><name>IdxRTheta</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a1024a27cd9d37fd4e5686ceb07fa5c53" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a304b69fcf09c23091feeb45eedaab9c4" kind="typedef"><name>IdxOperator</name></member>
@@ -1064,7 +1064,7 @@
   <compound refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder" kind="class"><name>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</name>
     <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ade452015c3d2feb463da2812d720abbd" kind="typedef"><name>R</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a2066028942fff8c3e2e1f17e7f83c453" kind="typedef"><name>Theta</name></member>
-    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a7282a77535661812f6b4d445cceb2967" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1aeb78cf1781531d036eb0a748f4edb4f8" kind="typedef"><name>BSplinesR</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ac552edb5cda1fbc008cc7299bed0991b" kind="typedef"><name>IdxRTheta</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a1e35063af50711afd607f8b689c30cc2" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a569a553b9e0702a7a900693b75c8e2b7" kind="typedef"><name>IdxOperator</name></member>
@@ -1110,7 +1110,7 @@
   <compound refid="classElementwiseSplinePolarFootFinder" kind="class"><name>ElementwiseSplinePolarFootFinder</name>
     <member refid="classElementwiseSplinePolarFootFinder_1a102be4f076bafdecb20e32ccee52429c" kind="typedef"><name>R</name></member>
     <member refid="classElementwiseSplinePolarFootFinder_1a34e0981b2c029d791f2df6df26d1b20d" kind="typedef"><name>Theta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a4e12af90082843e956d973f0ec5ee080" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a6a699e6dbeb3dd1656a2fbd3c7562ec0" kind="typedef"><name>BSplinesR</name></member>
     <member refid="classElementwiseSplinePolarFootFinder_1a42bcb41931bde06ec5ce409c5e2774c8" kind="typedef"><name>IdxRTheta</name></member>
     <member refid="classElementwiseSplinePolarFootFinder_1a65ecd84a7951fb475941d897eff871ec" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classElementwiseSplinePolarFootFinder_1a434229f3c4eaa7c96e1b7e09ea0a41bc" kind="typedef"><name>IdxOperator</name></member>
@@ -1196,7 +1196,7 @@
   <compound refid="classFEM1DPoissonSolver" kind="class"><name>FEM1DPoissonSolver</name>
     <member refid="classFEM1DPoissonSolver_1a13ceef7f47dab320a76f9109fdf0731d" kind="typedef"><name>SplineBuilder</name></member>
     <member refid="classFEM1DPoissonSolver_1a2af34d4f9486849c9155c2d76475d45e" kind="typedef"><name>SplineEvaluator</name></member>
-    <member refid="classFEM1DPoissonSolver_1ad76e33ee106cb4e6c9b78f4b73f1bd77" kind="typedef"><name>base_type</name></member>
+    <member refid="classFEM1DPoissonSolver_1a32dc988b610f63320750b54a6d2c1593" kind="typedef"><name>base_type</name></member>
     <member refid="classFEM1DPoissonSolver_1aae1c75f832e2a412146b3198e31449ab" kind="typedef"><name>GridPDEDim</name></member>
     <member refid="classFEM1DPoissonSolver_1a72702c398079a91dfc19acb90e9816e9" kind="typedef"><name>InputBSplines</name></member>
     <member refid="classFEM1DPoissonSolver_1ae75a22c24a4c2d470ff37be288949d38" kind="typedef"><name>PDEDim</name></member>
@@ -1217,7 +1217,7 @@
     <member refid="classFEM1DPoissonSolver_1ab1d92a03dbe8bd55a9718d0016e49b34" kind="typedef"><name>CoordQField</name></member>
     <member refid="classFEM1DPoissonSolver_1a350f45b6412e8845f913cc8e6cf65ae7" kind="typedef"><name>FEMBSplines</name></member>
     <member refid="classFEM1DPoissonSolver_1a0a7e3ed220e6b509d09bb81ae95b055b" kind="typedef"><name>FEMEvalExtrapolationRule</name></member>
-    <member refid="classFEM1DPoissonSolver_1af55cf30c1a7262361ff0ad592975cb6f" kind="typedef"><name>FEMSplineEvaluator</name></member>
+    <member refid="classFEM1DPoissonSolver_1a69c3de26159eedf806d8e6681178c0be" kind="typedef"><name>FEMSplineEvaluator</name></member>
     <member refid="classFEM1DPoissonSolver_1a87ccd16b3135d9527fde0d7b7c28b344" kind="typedef"><name>IdxFEMBSplines</name></member>
     <member refid="classFEM1DPoissonSolver_1aa469d9d29110e93d5d76beb230b881ec" kind="typedef"><name>IdxRangeFEMBSplines</name></member>
     <member refid="classFEM1DPoissonSolver_1ae2ac8b8e3da8247f78e80d51e6435b07" kind="typedef"><name>IdxRangeBatchedFEMBSplines</name></member>
@@ -1846,36 +1846,6 @@
     <member refid="structInterpolationEvaluatorTraits_1aa3307759834c89348e6b133d7eaf86e9" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
     <member refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kind="function"><name>rank</name></member>
   </compound>
-  <compound refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce" kind="struct"><name>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator2D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, EvaluationDDim1, EvaluationDDim2, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2 &gt; &gt;</name>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce_1a80e02705e8706a5081f6ccce89747cd6" kind="typedef"><name>Evaluator</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce_1aae2f9cc27349a26877768fc8c152c750" kind="typedef"><name>data_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce_1a4d79a1dae0935efc36ea4c3435eddc98" kind="typedef"><name>evaluation_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce_1ac8a2d758f03f4521c9fa147309edc3d6" kind="typedef"><name>coord_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce_1a4047a99cb13e133517766e69360b18b5" kind="typedef"><name>coeff_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce_1af83cb68ed7ce48eb68eed6203118d8dc" kind="typedef"><name>batched_evaluation_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce_1a5c5bb655a09f86f74c0ab5415b9ceb48" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator2D_3_01ExecSpace_00_01MemorySpace_089e774cda211a35c1faf77d4c007b0ce_1ab58d3fc1573d7ecf3c74253bcdbb735a" kind="function"><name>rank</name></member>
-  </compound>
-  <compound refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523" kind="struct"><name>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator3D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, BSplines3, EvaluationDDim1, EvaluationDDim2, EvaluationDDim3, LowerExtrapolationRule1, UpperExtrapolationRule1, LowerExtrapolationRule2, UpperExtrapolationRule2, LowerExtrapolationRule3, UpperExtrapolationRule3 &gt; &gt;</name>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a5552a3a4d45c16452b6a8bc1b58aee9b" kind="typedef"><name>Evaluator</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a197cd3de2fc3bba5ee50e6e6698abd2d" kind="typedef"><name>data_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1ac4fb4b1658b39fc700687d641c6767cf" kind="typedef"><name>evaluation_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1af135c70ff58892fcbb6ef25956a32d74" kind="typedef"><name>coord_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a6b4c31b907840901306e35410da2026f" kind="typedef"><name>coeff_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1ad02a57d18c4eedcd4f667a20b258e19a" kind="typedef"><name>batched_evaluation_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1aa42b7087912004046281d4c350b462fd" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator3D_3_01ExecSpace_00_01MemorySpace_01ed042c950d329285a3627c108a9b523_1a2ba58100cf5295d8168f6daa22cfbd47" kind="function"><name>rank</name></member>
-  </compound>
-  <compound refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c" kind="struct"><name>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;</name>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a328f4ad6b728a1c68bbfde69d9886aa3" kind="typedef"><name>Evaluator</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a36b30301f8bf4518ad1f409673dbf8f4" kind="typedef"><name>data_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1ae9dcac4e52df684fce626f79d68da013" kind="typedef"><name>evaluation_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a04edf2088a8171da4c9d183671abd54d" kind="typedef"><name>coord_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a9ebca70fefcbc9b9b40ad684784a0b99" kind="typedef"><name>coeff_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1ab2a5f148bf40c77728bd8c376534bcad" kind="typedef"><name>batched_evaluation_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a04def3c71792a9479779645966462f24" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1ad8f7297ea959275df8412c906bb6179f" kind="function"><name>rank</name></member>
-  </compound>
   <compound refid="classInverseJacobianMatrix" kind="class"><name>InverseJacobianMatrix</name>
     <member refid="classInverseJacobianMatrix_1a7988d90c0e9ad18cff9a1e635943428b" kind="typedef"><name>ValidArgIndices</name></member>
     <member refid="classInverseJacobianMatrix_1ad1067073595d216dd797c33f776213f1" kind="typedef"><name>ValidResultIndices</name></member>
@@ -1916,9 +1886,9 @@
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a5e482a99e07b40206c4314f84ed5164b" kind="typedef"><name>R_cov</name></member>
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a9f37eb2fdc2f95483d1fdff291ae9748" kind="typedef"><name>Theta_cov</name></member>
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a1820d1a8d511b6b34ed8c47bc0505a21" kind="typedef"><name>Mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1ad441bccb55f0f21adcc1f016df0f2a4d" kind="typedef"><name>IdxRangeR</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a7a509b3e4ad4f121d081c1fab827735a" kind="typedef"><name>IdxRangeTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1abd2aef7b39f835da470443f4cd657abf" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aa1a87de7730b291a71bc9f4d95419431" kind="typedef"><name>IdxRangeR</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aec4d421c3256f93e98a54b45fa229a76" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a2b72a4e3e866fbfee96c80176dde5023" kind="typedef"><name>IdxRangeRTheta</name></member>
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1ac1c6618e249c61c032bdbaf0affca6ec" kind="typedef"><name>IdxR</name></member>
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aec05d7d132f7d6c8dbe9729671902ff1" kind="typedef"><name>IdxTheta</name></member>
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1abf97c4126e35ccf34c4d79a5a88c3fb0" kind="variable"><name>m_mapping</name></member>
@@ -2811,7 +2781,7 @@
     <member refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4_1a29d56e6980c8c4f084dbeadd8b217794" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classPoissonLikeRHSFunction" kind="class"><name>PoissonLikeRHSFunction</name>
-    <member refid="classPoissonLikeRHSFunction_1a3b5a32dcc6fb06f49fffec5f8dedd2d7" kind="typedef"><name>evaluator_type</name></member>
+    <member refid="classPoissonLikeRHSFunction_1abc37563d57e207c80bc3cf8ea093c16f" kind="typedef"><name>evaluator_type</name></member>
     <member refid="classPoissonLikeRHSFunction_1a502d08244bdecb5e6a567564d174112d" kind="variable"><name>m_coefs</name></member>
     <member refid="classPoissonLikeRHSFunction_1a5570e47ffc7fce005392e3835a6faebd" kind="variable"><name>m_evaluator</name></member>
     <member refid="classPoissonLikeRHSFunction_1a47c654a189131d6361f9fdeb3fc5818c" kind="function"><name>PoissonLikeRHSFunction</name></member>
@@ -3140,7 +3110,7 @@
     <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1abedad6075eda2c6f97f0e8c3a2e06339" kind="typedef"><name>GridROriginal</name></member>
     <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1af85bac0c00c8f120f5b8115dddd7fc8e" kind="typedef"><name>GridThetaOriginal</name></member>
     <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a2510c39dfcdb4454d75dea7023eaf54a" kind="typedef"><name>RefinedSplineBuilder</name></member>
-    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a2d45b91da04e26ce48e7cfb667132684" kind="typedef"><name>RefinedSplineEvaluator</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a63574c89fbe29c68529869a918288c05" kind="typedef"><name>RefinedSplineEvaluator</name></member>
     <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1affdf55e8820602a7213e24dda6b7e83f" kind="typedef"><name>IdxRangeSplines</name></member>
     <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a32c39a180a0e0e6532255e2413fd50cf" kind="typedef"><name>IdxRangeInterpolationPoints</name></member>
     <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1aae16be78e87fdeb411c62756c7ce6c4a" kind="typedef"><name>IdxInterpolationPoints</name></member>
@@ -4025,7 +3995,7 @@
   <compound refid="spline__definitions__r__theta_8hpp" kind="file"><name>spline_definitions_r_theta.hpp</name>
     <member refid="spline__definitions__r__theta_8hpp_1ae8667605861070e692184a2b5dc75b67" kind="typedef"><name>SplineInterpPointsR</name></member>
     <member refid="spline__definitions__r__theta_8hpp_1a8f91daf5332d7a71b5b74545f13b8833" kind="typedef"><name>SplineInterpPointsTheta</name></member>
-    <member refid="spline__definitions__r__theta_8hpp_1a2f1ccbeb48ba80d9ab2ca6b70c9c9e68" kind="typedef"><name>SplineRThetaEvaluatorNullBound_host</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a3fdfb8c937ab964f3356d64119c2c44e" kind="typedef"><name>SplineRThetaEvaluatorNullBound_host</name></member>
     <member refid="spline__definitions__r__theta_8hpp_1a223900ea065cb4ed293906d477820f74" kind="typedef"><name>SplineInterpolatorRThetaConst_host</name></member>
     <member refid="spline__definitions__r__theta_8hpp_1a2966d37b1930bb014fd90839d7eeae5e" kind="typedef"><name>SplineInterpolatorRThetaConst</name></member>
     <member refid="spline__definitions__r__theta_8hpp_1a0cfcebdf5d1b12412efb901dd3eb9fbf" kind="typedef"><name>SplineInterpolatorRTheta</name></member>

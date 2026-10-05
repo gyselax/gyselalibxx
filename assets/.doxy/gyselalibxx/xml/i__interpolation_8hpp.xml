@@ -20,16 +20,16 @@
     <includedby refid="extrapolation__rule__choice_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/extrapolation_rule_choice.hpp</includedby>
     <includedby refid="polar__spline__fem__poisson__like__solver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</includedby>
     <incdepgraph>
-      <node id="20">
+      <node id="21">
         <label>coord_transformation_tools.hpp</label>
         <link refid="coord__transformation__tools_8hpp_source"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
@@ -63,7 +63,7 @@
       <node id="23">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -81,7 +81,7 @@
       <node id="25">
         <label>tensor_common.hpp</label>
         <link refid="tensor__common_8hpp_source"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -167,7 +167,7 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -189,23 +189,25 @@
         <link refid="i__interpolation__evaluator_8hpp_source"/>
         <childnode refid="10" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>lagrange_basis_non_uniform.hpp</label>
         <link refid="lagrange__basis__non__uniform_8hpp_source"/>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -213,9 +215,9 @@
       <node id="38">
         <label>lagrange_basis_uniform.hpp</label>
         <link refid="lagrange__basis__uniform_8hpp_source"/>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -224,18 +226,18 @@
         <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>math_tools.hpp</label>
         <link refid="math__tools_8hpp_source"/>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
@@ -251,7 +253,7 @@
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -273,7 +275,7 @@
         <link refid="ddc__helper_8hpp_source"/>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -291,34 +293,34 @@
       <node id="29">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>Kokkos_Core.hpp</label>
       </node>
-      <node id="17">
+      <node id="18">
         <label>algorithm</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>array</label>
       </node>
       <node id="24">
         <label>cassert</label>
       </node>
-      <node id="18">
+      <node id="19">
         <label>cmath</label>
       </node>
-      <node id="21">
+      <node id="22">
         <label>concepts</label>
       </node>
-      <node id="14">
+      <node id="15">
         <label>cstddef</label>
       </node>
       <node id="6">
@@ -339,10 +341,10 @@
       <node id="10">
         <label>type_traits</label>
       </node>
-      <node id="22">
+      <node id="12">
         <label>utility</label>
       </node>
-      <node id="15">
+      <node id="16">
         <label>vector</label>
       </node>
     </incdepgraph>

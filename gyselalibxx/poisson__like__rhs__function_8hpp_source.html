@@ -587,17 +587,16 @@ template &lt;class RadialExtrapolationRule&gt;
 class PoissonLikeRHSFunction
 {
 public:
-    using evaluator_type = ddc::SplineEvaluator2D&lt;
+    using evaluator_type = ddc::SplineEvaluatorND&lt;
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            RadialExtrapolationRule,
-            RadialExtrapolationRule,
-            ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-            ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
+            ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;,
+            ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;,
+            ddc::detail::TypeSeq&lt;
+                    RadialExtrapolationRule,
+                    RadialExtrapolationRule,
+                    ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
+                    ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;&gt;;
 
 private:
     ConstSpline2D const m_coefs;
