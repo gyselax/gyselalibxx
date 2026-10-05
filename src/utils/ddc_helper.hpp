@@ -202,10 +202,10 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
     return max_dist;
 }
 
-template <typename GridSuperSet, typename GridSubSet>
-bool points_are_subset(
-        IdxRange<GridSuperSet> const& idx_range_superset,
+template <typename GridSubSet, typename GridSuperSet>
+Idx<GridSubSet> find_point_missing_from_superset(
         IdxRange<GridSubSet> const& idx_range_subset,
+        IdxRange<GridSuperSet> const& idx_range_superset,
         ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
 {
     // Grids are ordered so a serial loop allows iterating over both sets simultaneously
@@ -221,11 +221,21 @@ bool points_are_subset(
                 idx_superset++;
             }
         // If point was not found in superset then points are not a subset
-        if (idx_superset <= idx_range_superset.back()) {
-            return false;
+        if (idx_superset > idx_range_superset.back()) {
+            return idx_subset;
         }
     }
-    return true;
+    return idx_range_subset.back() + 1;
+}
+
+template <typename GridSubSet, typename GridSuperSet>
+bool points_are_subset(
+        IdxRange<GridSubSet> const& idx_range_subset,
+        IdxRange<GridSuperSet> const& idx_range_superset,
+        ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
+{
+    return find_point_missing_from_superset(idx_range_superset, idx_range_subset, tol)
+           == (idx_range_subset.back() + 1);
 }
 
 
