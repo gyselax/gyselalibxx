@@ -414,37 +414,24 @@ private:
             IdxRange<EdgePerpGrid> const& idx_range_perp,
             Extremity const extremity) const
     {
-        // Get the index range for all the break points on the patch.
-        IdxRange<GridBreakPt> idx_range_full_break_points
+        // Select the subset of break points where the interpolation points must be defined.
+        IdxRange<GridBreakPt> idx_range_break_points
                 = ddc::discrete_space<BSplinesPerp>().break_point_domain();
-        IdxRange<GridBreakPt> idx_range_break_points = idx_range_full_break_points;
-        // Select the break points where the interpolation points are defined.
-        if (!is_cell_bound_with_extra_interpol_pt) {
-            IdxStep<GridBreakPt> idx_step(idx_range_perp.size());
-            if (extremity == Extremity::FRONT) {
-                idx_range_break_points = idx_range_full_break_points.take_first(idx_step);
-            } else {
-                idx_range_break_points = idx_range_full_break_points.take_last(idx_step);
-            }
+        IdxStep<GridBreakPt> idx_step(idx_range_perp.size() - is_cell_bound_with_extra_interpol_pt);
+        if (extremity == Extremity::FRONT) {
+            idx_range_break_points = idx_range_break_points.take_first(idx_step);
+        } else {
+            idx_range_break_points = idx_range_break_points.take_last(idx_step);
         }
-        // Each break point should be an interpolation point.
-        ddc::host_for_each(idx_range_break_points, [&](Idx<GridBreakPt> const idx_break) {
-            double const break_point = ddc::coordinate(idx_break);
-            bool is_an_interpolation_pt = false;
-            ddc::host_for_each(idx_range_perp, [&](Idx<EdgePerpGrid> const idx_interpol) {
-                double const interpolation_point = ddc::coordinate(idx_interpol);
-                if (abs(break_point - interpolation_point) < 1e-15) {
-                    is_an_interpolation_pt = true;
-                }
-            });
-            if (!is_an_interpolation_pt) {
-                throw std::runtime_error(
-                        "[abort] The break points have to be interpolation points. The break point "
-                        + std::to_string(break_point) + " at the "
-                        + std::to_string((idx_break - idx_range_break_points.front()).value())
-                        + "th index was not found in the interpolation point grid given.");
-            }
-        });
+        Idx<GridBreakPt> missing_breakpoint = ddcHelper::
+                find_point_missing_from_superset(idx_range_break_points, idx_range_perp);
+        if (missing_breakpoint != (idx_range_break_points.back() + 1)) {
+            throw std::runtime_error(
+                    "[abort] The break points have to be interpolation points. The break point "
+                    + std::to_string(ddc::coordinate(missing_breakpoint)) + " at the "
+                    + std::to_string((missing_breakpoint - idx_range_break_points.front()).value())
+                    + "th index was not found in the interpolation point grid given.");
+        }
     }
 
     template <typename BSplinesPerp, typename EdgePerpGrid>
