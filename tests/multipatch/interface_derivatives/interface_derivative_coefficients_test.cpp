@@ -124,17 +124,16 @@ using SplineRThetagBuilder = ddc::SplineBuilder2D<
         ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineSolver::LAPACK>;
 
-using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
+using SplineRThetagEvaluator = ddc::SplineEvaluatorND<
         HostExecSpace,
         typename HostExecSpace::memory_space,
-        BSplinesRg,
-        BSplinesThetag,
-        GridRg,
-        GridThetag,
-        ddc::ConstantExtrapolationRule<Rg>,
-        ddc::ConstantExtrapolationRule<Rg>,
-        ddc::PeriodicExtrapolationRule<Thetag>,
-        ddc::PeriodicExtrapolationRule<Thetag>>;
+        ddc::detail::TypeSeq<BSplinesRg, BSplinesThetag>,
+        ddc::detail::TypeSeq<GridRg, GridThetag>,
+        ddc::detail::TypeSeq<
+                ddc::ConstantExtrapolationRule<Rg>,
+                ddc::ConstantExtrapolationRule<Rg>,
+                ddc::PeriodicExtrapolationRule<Thetag>,
+                ddc::PeriodicExtrapolationRule<Thetag>>>;
 
 
 
