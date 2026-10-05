@@ -1159,4 +1159,9 @@ private:
     {
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
     }
+
+    static inline double neg_1_to_the_power(int k)
+    {
+        return 1.0 - 2.0 * (k & 1);
+    }
 };
