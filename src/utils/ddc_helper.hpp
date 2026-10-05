@@ -202,37 +202,30 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
     return max_dist;
 }
 
-template <typename BSpline, typename GridInterpPt>
-void enforce_all_break_points_are_interpolation_points(
-        IdxRange<GridInterpPt> const& idx_range_interpolation_points,
+template <typename GridSuperSet, typename GridSubSet>
+bool points_are_subset(
+        IdxRange<GridSuperSet> const& idx_range_superset,
+        IdxRange<GridSubSet> const& idx_range_subset,
         ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
 {
-    using GridBreakPt = ddc::knot_discrete_dimension_t<BSpline>;
-    // Get the index range for all the break points on the patch.
-    IdxRange<GridBreakPt> idx_range_break_points
-            = ddc::discrete_space<BSpline>().break_point_domain();
-
-    // Each break point should be an interpolation point.
-    // Grids are ordered so a serial loop allows iterating over interpolation points and break points simultaneously
-    Idx<GridInterpPt> idx_interp_pt = idx_range_interpolation_points.front();
-    for (Idx<GridBreakPt> idx_break = idx_range_break_points.front();
-         idx_break <= idx_range_break_points.back();
-         idx_break++, idx_interp_pt++) {
-        while (std::abs(ddc::coordinate(idx_break) - ddc::coordinate(idx_interp_pt)) > tol
-               && idx_interp_pt <= idx_range_interpolation_points.back())
+    // Grids are ordered so a serial loop allows iterating over both sets simultaneously
+    Idx<GridSuperSet> idx_superset = idx_range_superset.front();
+    for (Idx<GridSubSet> idx_subset = idx_range_subset.front();
+         idx_subset <= idx_range_subset.back();
+         idx_subset++, idx_superset++) {
+        // If points don't match check next point
+        while (std::abs(ddc::coordinate(idx_subset) - ddc::coordinate(idx_superset)) > tol
+               && idx_superset <= idx_range_superset.back())
             [[unlikely]]
             {
-                idx_interp_pt++;
+                idx_superset++;
             }
-        if (idx_interp_pt <= idx_range_interpolation_points.back()) {
-            throw std::runtime_error(
-                    "[abort] There are break points which are not found amongst the interpolation "
-                    "points. The break point "
-                    + std::to_string(ddc::coordinate(idx_break)) + " at the "
-                    + std::to_string((idx_break - idx_range_break_points.front()).value())
-                    + "-th index was not found in the interpolation point grid given.");
+        // If point was not found in superset then points are not a subset
+        if (idx_superset <= idx_range_superset.back()) {
+            return false;
         }
     }
+    return true;
 }
 
 
