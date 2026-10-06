@@ -276,7 +276,7 @@ public:
      */
     void build_from_fields(
             MultipatchSplineCoeffs splines,
-            MultipatchValues values,
+            MultipatchValues const& values,
             std::optional<MultipatchDerivs1> derivs_min1 = std::nullopt,
             std::optional<MultipatchDerivs1> derivs_max1 = std::nullopt,
             std::optional<MultipatchDerivs2> derivs_min2 = std::nullopt,
