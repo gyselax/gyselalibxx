@@ -106,6 +106,8 @@ public:
         static_assert(is_multipatch_type_v<MultipatchObj>);
     }
 
+    KOKKOS_DEFAULTED_FUNCTION MultipatchField(MultipatchField const&) noexcept = default;
+
     KOKKOS_DEFAULTED_FUNCTION MultipatchField(MultipatchField&&) noexcept = default;
 
     KOKKOS_DEFAULTED_FUNCTION ~MultipatchField() noexcept = default;
