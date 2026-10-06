@@ -228,10 +228,10 @@ The spline basis as defined [above](#spline-representation) is described using D
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;
 
-struct BSplinesX : ddc::UniformBSplines<X, BSDegreeX>
+struct BSplinesX : ddc::UniformBSplines<X, BSDegreeX, X::PERIODIC>
 {
 };
-struct BSplinesVx : ddc::UniformBSplines<Vx, BSDegreeVx>
+struct BSplinesVx : ddc::UniformBSplines<Vx, BSDegreeVx, Vx::PERIODIC>
 {
 };
 ```
@@ -251,7 +251,7 @@ ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_ncells);
 ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
 ```
 
-The function `ddc::init_discrete_space` calls the [constructor of `ddc::UniformBSplines<CDim, Degree>::Impl`](https://ddc.mdls.fr/classddc_1_1UniformBSplines_1_1Impl.html) with arguments describing the uniform cells on which the splines are defined.
+The function `ddc::init_discrete_space` calls the [constructor of `ddc::UniformBSplines<CDim, Degree, CDim::PERIODIC>::Impl`](https://ddc.mdls.fr/classddc_1_1UniformBSplines_1_1Impl.html) with arguments describing the uniform cells on which the splines are defined.
 
 ---
 

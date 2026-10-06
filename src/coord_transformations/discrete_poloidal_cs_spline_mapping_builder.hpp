@@ -190,8 +190,8 @@ public:
     struct BSplinesRRefined
         : std::conditional_t<
                   BSplinesROriginal::is_uniform(),
-                  ddc::UniformBSplines<R, BSplinesROriginal::degree()>,
-                  ddc::NonUniformBSplines<R, BSplinesROriginal::degree()>>
+                  ddc::UniformBSplines<R, BSplinesROriginal::degree(), R::PERIODIC>,
+                  ddc::NonUniformBSplines<R, BSplinesROriginal::degree(), R::PERIODIC>>
     {
     };
 
@@ -199,8 +199,8 @@ public:
     struct BSplinesThetaRefined
         : std::conditional_t<
                   BSplinesThetaOriginal::is_uniform(),
-                  ddc::UniformBSplines<Theta, BSplinesThetaOriginal::degree()>,
-                  ddc::NonUniformBSplines<Theta, BSplinesThetaOriginal::degree()>>
+                  ddc::UniformBSplines<Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC>,
+                  ddc::NonUniformBSplines<Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC>>
     {
     };
 

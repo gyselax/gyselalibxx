@@ -15,15 +15,15 @@ bool constexpr BsplineOnUniformCellsTheta = false;
 struct BSplinesR
     : std::conditional_t<
               BsplineOnUniformCellsR,
-              ddc::UniformBSplines<R, BSDegreeR>,
-              ddc::NonUniformBSplines<R, BSDegreeR>>
+              ddc::UniformBSplines<R, BSDegreeR, R::PERIODIC>,
+              ddc::NonUniformBSplines<R, BSDegreeR, R::PERIODIC>>
 {
 };
 struct BSplinesTheta
     : std::conditional_t<
               BsplineOnUniformCellsTheta,
-              ddc::UniformBSplines<Theta, BSDegreeTheta>,
-              ddc::NonUniformBSplines<Theta, BSDegreeTheta>>
+              ddc::UniformBSplines<Theta, BSDegreeTheta, Theta::PERIODIC>,
+              ddc::NonUniformBSplines<Theta, BSDegreeTheta, Theta::PERIODIC>>
 {
 };
 struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>

@@ -49,10 +49,10 @@ using CoordVx = Coord<Vx>;
 using CoordVy = Coord<Vy>;
 
 // Splines
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesY : ddc::UniformBSplines<Y, 3>
+struct BSplinesY : ddc::UniformBSplines<Y, 3, Y::PERIODIC>
 {
 };
 

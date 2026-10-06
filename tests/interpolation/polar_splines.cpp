@@ -50,15 +50,15 @@ static constexpr std::size_t spline_r_degree = DEGREE_R;
 static constexpr std::size_t spline_theta_degree = DEGREE_P;
 static constexpr int continuity = CONTINUITY;
 
-struct BSplinesR : ddc::NonUniformBSplines<R, spline_r_degree>
+struct BSplinesR : ddc::NonUniformBSplines<R, spline_r_degree, R::PERIODIC>
 {
 };
 #if defined(BSPLINES_TYPE_UNIFORM)
-struct BSplinesTheta : ddc::UniformBSplines<Theta, spline_theta_degree>
+struct BSplinesTheta : ddc::UniformBSplines<Theta, spline_theta_degree, Theta::PERIODIC>
 {
 };
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, spline_theta_degree>
+struct BSplinesTheta : ddc::NonUniformBSplines<Theta, spline_theta_degree, Theta::PERIODIC>
 {
 };
 #endif

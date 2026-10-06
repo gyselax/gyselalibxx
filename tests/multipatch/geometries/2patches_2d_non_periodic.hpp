@@ -98,8 +98,8 @@ template <int PatchIdx>
 struct BSplinesX
     : std::conditional_t<
               is_uniform,
-              ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>,
-              ddc::NonUniformBSplines<X<PatchIdx>, BSplineDegree>>
+              ddc::UniformBSplines<X<PatchIdx>, BSplineDegree, X<PatchIdx>::PERIODIC>,
+              ddc::NonUniformBSplines<X<PatchIdx>, BSplineDegree, X<PatchIdx>::PERIODIC>>
 {
 };
 
@@ -111,8 +111,8 @@ template <int PatchIdx>
 struct BSplinesY
     : std::conditional_t<
               is_uniform,
-              ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree>,
-              ddc::NonUniformBSplines<Y<PatchIdx>, BSplineDegree>>
+              ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree, Y<PatchIdx>::PERIODIC>,
+              ddc::NonUniformBSplines<Y<PatchIdx>, BSplineDegree, Y<PatchIdx>::PERIODIC>>
 {
 };
 

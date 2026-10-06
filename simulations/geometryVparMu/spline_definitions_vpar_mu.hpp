@@ -15,15 +15,15 @@ bool constexpr BsplineOnUniformCellsMu = true;
 struct BSplinesVpar
     : std::conditional_t<
               BsplineOnUniformCellsVpar,
-              ddc::UniformBSplines<Vpar, BSDegreeVpar>,
-              ddc::NonUniformBSplines<Vpar, BSDegreeVpar>>
+              ddc::UniformBSplines<Vpar, BSDegreeVpar, Vpar::PERIODIC>,
+              ddc::NonUniformBSplines<Vpar, BSDegreeVpar, Vpar::PERIODIC>>
 {
 };
 struct BSplinesMu
     : std::conditional_t<
               BsplineOnUniformCellsMu,
-              ddc::UniformBSplines<Mu, BSDegreeMu>,
-              ddc::NonUniformBSplines<Mu, BSDegreeMu>>
+              ddc::UniformBSplines<Mu, BSDegreeMu, Mu::PERIODIC>,
+              ddc::NonUniformBSplines<Mu, BSDegreeMu, Mu::PERIODIC>>
 {
 };
 ddc::SplineBuilderClosure constexpr SplineVparClosure = ddc::SplineBuilderClosure::HERMITE;
