@@ -182,10 +182,10 @@ public:
             (is_vector_field_v<InternalTypes> && ...)
             && (ddc::in_tags_v<QueryTag, typename InternalTypes::NDTypeTag> && ...))
     {
-        return MultipatchField<
+        using FieldType = MultipatchField<
                 PatchOrdering,
-                ddc::detail::TypeSeq<typename InternalTypes::chunk_span_type...>>(
-                ddcHelper::get<QueryTag>(std::get<InternalTypes>(base_type::m_tuple))...);
+                ddc::detail::TypeSeq<typename InternalTypes::chunk_span_type...>>;
+        return FieldType(ddcHelper::get<QueryTag>(std::get<InternalTypes>(base_type::m_tuple))...);
     }
 };
 
