@@ -95,33 +95,16 @@ public:
      * being copied may include more patches than this MultipatchField. Further the original
      * MultipatchField must store objects which can be converted to the correct type.
      *
-     * This function is not explicit as it is helpful to be able to convert between compatible
-     * multipatch objects (e.g. MultipatchField of fields to MultipatchField of constant fields).
-     *
      * @param other The equivalent MultipatchField being copied.
      */
-    template <class MultipatchObj, std::enable_if_t<!is_mem_type_v<MultipatchObj>, bool> = true>
+    template <class MultipatchObj>
     explicit KOKKOS_FUNCTION MultipatchField(MultipatchObj& other)
         : base_type(InternalTypes(other.template get<Patches>())...)
     {
         static_assert(is_multipatch_type_v<MultipatchObj>);
     }
 
-    /**
-     * Create a MultipatchField class from a compatible MultipatchFieldMem.
-     *
-     * A compatible MultipatchField is one which uses all the patches used by this class. The object
-     * being copied may include more patches than this MultipatchField. Further the original
-     * MultipatchField must store objects of the correct type.
-     *
-     * @param other The MultipatchFieldMem being accessed.
-     */
-    template <class MultipatchObj, std::enable_if_t<is_mem_type_v<MultipatchObj>, bool> = true>
-    explicit MultipatchField(MultipatchObj& other)
-        : base_type(InternalTypes(other.template get<Patches>())...)
-    {
-        static_assert(is_multipatch_type_v<MultipatchObj>);
-    }
+    KOKKOS_DEFAULTED_FUNCTION MultipatchField(MultipatchField&&) noexcept = default;
 
     KOKKOS_DEFAULTED_FUNCTION ~MultipatchField() noexcept = default;
 
