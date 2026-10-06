@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add GVEC in the toolchains.
-- Add `MultipatchSplineBuilder2D::operator()` working with `DerivField`.
+- Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
 - Add `MultipatchSplineBuilder2D::spline_idx_ranges()`.
 
 ### Fixed
