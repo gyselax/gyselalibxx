@@ -99,8 +99,24 @@ public:
      *
      * @param other The equivalent MultipatchField being copied.
      */
-    template <class MultipatchObj>
+    template <class MultipatchObj, std::enable_if_t<!is_mem_type_v<MultipatchObj>, bool> = true>
     explicit KOKKOS_FUNCTION MultipatchField(MultipatchObj& other)
+        : base_type(InternalTypes(other.template get<Patches>())...)
+    {
+        static_assert(is_multipatch_type_v<MultipatchObj>);
+    }
+
+    /**
+     * Create a MultipatchField class from a compatible MultipatchFieldMem.
+     *
+     * A compatible MultipatchField is one which uses all the patches used by this class. The object
+     * being copied may include more patches than this MultipatchField. Further the original
+     * MultipatchField must store objects of the correct type.
+     *
+     * @param other The MultipatchFieldMem being accessed.
+     */
+    template <class MultipatchObj, std::enable_if_t<is_mem_type_v<MultipatchObj>, bool> = true>
+    explicit MultipatchField(MultipatchObj& other)
         : base_type(InternalTypes(other.template get<Patches>())...)
     {
         static_assert(is_multipatch_type_v<MultipatchObj>);
