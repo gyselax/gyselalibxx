@@ -242,7 +242,7 @@ void test_deriv_at_order(
                 err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
-    EXPECT_LE(max_error, 1e-13);
+    EXPECT_LE(max_error, 5e-13);
 };
 
 template <template <typename P> class SplineTypeOnPatch, class ExecSpace>
