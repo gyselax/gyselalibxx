@@ -28,7 +28,7 @@ struct Batch
 using CoordX = Coord<X>;
 using CoordBatch = Coord<Batch>;
 
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
 
