@@ -1175,10 +1175,6 @@
     <member refid="classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1af50845d5ab16f17f2008250aee1bacb0" kind="function"><name>Euler</name></member>
     <member refid="classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1acf769dde50a76d24b37794eb4bfc812f" kind="function"><name>update</name></member>
   </compound>
-  <compound refid="structMultipatchSplineEvaluator2D_1_1eval__deriv__type" kind="struct"><name>MultipatchSplineEvaluator2D::eval_deriv_type</name>
-  </compound>
-  <compound refid="structMultipatchSplineEvaluator2D_1_1eval__type" kind="struct"><name>MultipatchSplineEvaluator2D::eval_type</name>
-  </compound>
   <compound refid="classExplicitTimeStepperBuilder" kind="class"><name>ExplicitTimeStepperBuilder</name>
     <member refid="classExplicitTimeStepperBuilder_1a37ec04e4a03c1080891a68fb27395573" kind="typedef"><name>time_stepper_t</name></member>
     <member refid="classExplicitTimeStepperBuilder_1a7878f402b4b32ffd49b5dbb23ecd75c2" kind="function"><name>ExplicitTimeStepperBuilder</name></member>
@@ -2561,12 +2557,15 @@
     <member refid="classMultipatchSplineEvaluator2D_1acf8c87496d43c9d876e4e41d78db178c" kind="typedef"><name>spline_idx_range_type2</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a1b17cff3afde8b9caf66f2fcfacce553" kind="typedef"><name>spline_idx_range_type</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1aad2106e82884ea55e8fa063b0d425e0b" kind="typedef"><name>SplineCoeffOnPatch</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1aa16e0c1b0103b11d57111b6c39f439d2" kind="typedef"><name>CoordOnPatch</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1ae37c82c7704389c940a72693b905bb1a" kind="typedef"><name>CoordConstFieldOnPatch</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1aa1616be1c2d379ec0b6891ae626055ac" kind="typedef"><name>MultipatchValues</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a629a9720acf4c00fd4c5155e91fa7d5e" kind="typedef"><name>MultipatchCoordField</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1ac4050ed8eb94c466aeb1121030d5a831" kind="typedef"><name>MultipatchSplineCoeff</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1aa191e7090a05e52eba9356e16fb83fa6" kind="typedef"><name>PatchOrdering</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1a727ff5bd08f64c60650991fe549f219c" kind="typedef"><name>CDim1</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1a68bb487652b76258c8315be02b6eea8f" kind="typedef"><name>CDim2</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1af58ace64510ef93c06c506d4dda55010" kind="typedef"><name>DerivDim1</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1aac646ca92d8e5a5d437363efd3d6d50a" kind="typedef"><name>DerivDim2</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1af9d14ed172fe26b0fc1699eedcb22172" kind="typedef"><name>CoordConstFieldOnPatch</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1af1908eecf950a49dcee5c0606cf4659e" kind="variable"><name>n_patches</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a77936c150c2f85fd87075cbc5ab031ed" kind="variable"><name>same_evaluation_idx_range_types</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a204570b08d5477a3b14cd372d38bafb5" kind="variable"><name>m_patch_locator</name></member>
@@ -2575,21 +2574,15 @@
     <member refid="classMultipatchSplineEvaluator2D_1a16584f9a052914273a461b38af76ec03" kind="function"><name>MultipatchSplineEvaluator2D</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a6d3f057e123cd847109fae5a4e190149" kind="function"><name>operator()</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1aaecde8a4cb5fccb1f10dadf7a09b4300" kind="function"><name>operator()</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a03fe2c8e638a98513a2e57931520d044" kind="function"><name>deriv_dim_1</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a5c19deb5ecf7a6464f0871757e10c18d" kind="function"><name>deriv_dim_2</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a47b26d7c4400750a9e950157ff44d540" kind="function"><name>deriv_1_and_2</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a1f83ca0c8784e76fa76ec3dc60ce4161" kind="function"><name>deriv</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a3f90611f8cfca4f7985edfeaa0e7f2d9" kind="function"><name>deriv_dim_1</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a17da56fe74bdd58ab448464cc1ebcc02" kind="function"><name>deriv_dim_2</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a1a6da1694a2b2b060886141d76309cda" kind="function"><name>deriv_1_and_2</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1a75d3dd3d7f672b555662d2d2e95b0e69" kind="function"><name>deriv</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1af00990ffe5c487cb0ba452bea8534153" kind="function"><name>deriv</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a6cea2a836a1df080f509a16ce5802688" kind="function"><name>integrate</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a3def2c5f1369f1aea6b42fbea68e2147" kind="function"><name>apply_evaluator</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1a2943c0eeb2071422f89fd05dd8007e16" kind="function"><name>apply_evaluator</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a053be081cbf738651cad0794dce5e579" kind="function"><name>apply_integrate</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1acabf8f1d3e395df35d291ca8a6e5dd39" kind="function"><name>recursive_dispatch_patch_function</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1ad0c54326b7437a40b4e946dd37c04fc8" kind="function"><name>get_patch_idx</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1aefb57ed207ab069f55605bce79b6613d" kind="function"><name>get_equivalent_coord</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1a40967e01f791f7af41e882c32e91d430" kind="function"><name>replace_periodic_coord_inside</name></member>
-    <member refid="classMultipatchSplineEvaluator2D_1af653a1a3b6d8a342bff0198f2152eb7d" kind="function"><name>eval_no_bc</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1a3bcd50970e9d3c90d2d3c06f507dae6e" kind="function"><name>recursive_dispatch_patch_function</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1aea82ea7e1fdc1cea7b38d5726c45e621" kind="function"><name>get_patch_idx</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1a6a66ac0eab058439ee54e16581353932" kind="function"><name>replace_periodic_coord_inside</name></member>
+    <member refid="classMultipatchSplineEvaluator2D_1a19cb998e1d766fa8836f4556a2893034" kind="function"><name>eval_no_bc</name></member>
   </compound>
   <compound refid="classMultipatchType" kind="class"><name>MultipatchType</name>
     <member refid="classMultipatchType_1ac09ed5edaf7d35c564ef78fe31620631" kind="typedef"><name>PatchOrdering</name></member>

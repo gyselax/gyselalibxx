@@ -124,11 +124,11 @@
 * **deriv** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **distribute\_idx\_range** ([**MPILayout**](classMPILayout.md))
 * **density\_eq** ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md))
-* **deriv\_1\_and\_2** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
-* **deriv\_dim\_1** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
-* **deriv\_dim\_2** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **degree** ([**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md), [**UniformLagrangeBasis**](classUniformLagrangeBasis.md))
+* **deriv\_1\_and\_2** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
+* **deriv\_dim\_1** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **deriv\_dim\_1\_and\_2** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
+* **deriv\_dim\_2** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 
 
 ## e
@@ -247,7 +247,6 @@
 * **get\_ell\_element** ([**MatrixBatchEll**](classMatrixBatchEll.md))
 * **get\_all\_idx\_ranges\_along\_direction** ([**MultipatchConnectivity**](classMultipatchConnectivity.md))
 * **get\_deriv\_value** ([**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md), [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
-* **get\_equivalent\_coord** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **get\_patch\_idx** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **get\_tuple** ([**MultipatchType**](classMultipatchType.md))
 * **get\_weights** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md))

@@ -39,8 +39,6 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) &lt;class ExecSpace, class MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, class ExtrapolationRule, ValuesOnPatch, class PatchLocator, Patches&gt;<br>_A class to evaluate all the splines of all the patches at once._  |
-| struct | [**eval\_deriv\_type**](structMultipatchSplineEvaluator2D_1_1eval__deriv__type.md) <br>_Tag to indicate that derivative of the spline should be evaluated._  |
-| struct | [**eval\_type**](structMultipatchSplineEvaluator2D_1_1eval__type.md) <br>_Tag to indicate that the value of the spline should be evaluated._  |
 
 
 

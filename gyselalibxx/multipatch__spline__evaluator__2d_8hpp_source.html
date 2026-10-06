@@ -607,14 +607,6 @@ template &lt;
 class MultipatchSplineEvaluator2D
 {
 public:
-    struct eval_type
-    {
-    };
-
-    struct eval_deriv_type
-    {
-    };
-
     template &lt;class Patch&gt;
     using continuous_dimension_type1 = typename BSpline1OnPatch&lt;Patch&gt;::continuous_dimension_type;
 
@@ -665,18 +657,6 @@ public:
     template &lt;class Patch&gt;
     using spline_idx_range_type = IdxRange&lt;bsplines_type1&lt;Patch&gt;, bsplines_type2&lt;Patch&gt;&gt;;
 
-
-private:
-    template &lt;class Patch&gt;
-    using CoordOnPatch
-            = Coord&lt;typename Grid1OnPatch&lt;Patch&gt;::continuous_dimension_type,
-                    typename Grid2OnPatch&lt;Patch&gt;::continuous_dimension_type&gt;;
-
-    // Fields
-    template &lt;class Patch&gt;
-    using CoordConstFieldOnPatch
-            = ConstField&lt;CoordOnPatch&lt;Patch&gt;, evaluation_idx_range_type&lt;Patch&gt;, MemorySpace&gt;;
-
 public:
     template &lt;class Patch&gt;
     using SplineCoeffOnPatch = DConstField&lt;spline_idx_range_type&lt;Patch&gt;, MemorySpace&gt;;
@@ -689,6 +669,24 @@ private:
 
     // Patches
     using PatchOrdering = ddc::detail::TypeSeq&lt;Patches...&gt;;
+
+
+    // As we work with the same continuous dimensions --------------------------------------------
+    // Continuous first dimension of the patches.
+    using CDim1 = continuous_dimension_type1&lt;ddc::type_seq_element_t&lt;0, PatchOrdering&gt;&gt;;
+    // Continuous second dimension of the patches.
+    using CDim2 = continuous_dimension_type2&lt;ddc::type_seq_element_t&lt;0, PatchOrdering&gt;&gt;;
+
+    // Dimension for the derivatives along the first dimension.
+    using DerivDim1 = ddc::Deriv&lt;CDim1&gt;;
+    // Dimension for the derivatives along the second dimension.
+    using DerivDim2 = ddc::Deriv&lt;CDim2&gt;;
+
+private:
+    // Fields
+    template &lt;class Patch&gt;
+    using CoordConstFieldOnPatch
+            = ConstField&lt;Coord&lt;CDim1, CDim2&gt;, evaluation_idx_range_type&lt;Patch&gt;, MemorySpace&gt;;
 
 public:
     static constexpr std::size_t n_patches = ddc::type_seq_size_v&lt;PatchOrdering&gt;;
@@ -738,9 +736,7 @@ public:
             MultipatchSplineCoeff const&amp; patches_splines) const
     {
         int const patch_idx = get_patch_idx(coord_eval);
-        return recursive_dispatch_patch_function&lt;
-                eval_type,
-                eval_type&gt;(coord_eval, patches_splines, patch_idx);
+        return recursive_dispatch_patch_function(Idx&lt;&gt;(), coord_eval, patches_splines, patch_idx);
     }
 
     void operator()(
@@ -748,7 +744,8 @@ public:
             MultipatchCoordField const&amp; patches_coords,
             MultipatchSplineCoeff const&amp; patches_splines) const
     {
-        (apply_evaluator&lt;eval_type, eval_type, Patches&gt;(
+        (apply_evaluator&lt;Patches&gt;(
+                 Idx&lt;&gt;(),
                  patches_values.template get&lt;Patches&gt;(),
                  patches_coords.template get&lt;Patches&gt;(),
                  patches_splines),
@@ -757,102 +754,46 @@ public:
 
 
     // Derivatives operators ---------------------------------------------------------------------
-    template &lt;class Coord&gt;
-    KOKKOS_FUNCTION double deriv_dim_1(
-            Coord const&amp; coord_eval,
-            MultipatchSplineCoeff const&amp; patches_splines) const
-    {
-        int const patch_idx = get_patch_idx(coord_eval);
-        if (patch_idx &lt; 0) {
-            Kokkos::abort("The evaluation coordinate has to be on a patch."
-                          "No extrapolation rule for derivatives. \n");
-        }
-        return recursive_dispatch_patch_function&lt;
-                eval_deriv_type,
-                eval_type&gt;(coord_eval, patches_splines, patch_idx);
-    }
-
-    template &lt;class Coord&gt;
-    KOKKOS_FUNCTION double deriv_dim_2(
-            Coord const&amp; coord_eval,
-            MultipatchSplineCoeff const&amp; patches_splines) const
-    {
-        int const patch_idx = get_patch_idx(coord_eval);
-        if (patch_idx &lt; 0) {
-            Kokkos::abort("The evaluation coordinate has to be on a patch."
-                          "No extrapolation rule for derivatives. \n");
-        }
-        return recursive_dispatch_patch_function&lt;
-                eval_type,
-                eval_deriv_type&gt;(coord_eval, patches_splines, patch_idx);
-    }
-
-    template &lt;class Coord&gt;
-    KOKKOS_FUNCTION double deriv_1_and_2(
-            Coord const&amp; coord_eval,
-            MultipatchSplineCoeff const&amp; patches_splines) const
-    {
-        int const patch_idx = get_patch_idx(coord_eval);
-        if (patch_idx &lt; 0) {
-            Kokkos::abort("The evaluation coordinate has to be on a patch."
-                          "No extrapolation rule for derivatives. \n");
-        }
-        return recursive_dispatch_patch_function&lt;
-                eval_deriv_type,
-                eval_deriv_type&gt;(coord_eval, patches_splines, patch_idx);
-        ;
-    }
-
-
-    template &lt;class InterestDim, class Dim1, class Dim2&gt;
+    template &lt;class... DerivDims&gt;
     KOKKOS_FUNCTION double deriv(
-            Coord&lt;Dim1, Dim2&gt; const&amp; coord_eval,
+            Idx&lt;DerivDims...&gt; const&amp; deriv_order,
+            Coord&lt;CDim1, CDim2&gt; const&amp; coord_eval,
             MultipatchSplineCoeff const&amp; patches_splines) const
     {
-        static_assert((std::is_same_v&lt;InterestDim, Dim1&gt;) || (std::is_same_v&lt;InterestDim, Dim2&gt;));
-        if constexpr (std::is_same_v&lt;InterestDim, Dim1&gt;) {
-            return deriv_dim_1(coord_eval, patches_splines);
-        } else {
-            return deriv_dim_2(coord_eval, patches_splines);
+        static_assert(
+                (ddc::in_tags_v&lt;DerivDims, ddc::detail::TypeSeq&lt;DerivDim1, DerivDim2&gt;&gt; &amp;&amp; ...),
+                "Please provide a deriv_order indexed on the derivative dimensions of the patches "
+                "(same dimensions for all the patches).");
+        int const patch_idx = get_patch_idx(coord_eval);
+        if (patch_idx &lt; 0) {
+            Kokkos::abort("The evaluation coordinate has to be on a patch."
+                          "No extrapolation rule for derivatives. \n");
         }
+        return recursive_dispatch_patch_function(
+                deriv_order,
+                coord_eval,
+                patches_splines,
+                patch_idx);
     }
 
-    void deriv_dim_1(
-            MultipatchValues const&amp; patches_deriv_1,
+    template &lt;class... DerivDims&gt;
+    void deriv(
+            Idx&lt;DerivDims...&gt; const&amp; deriv_order,
+            MultipatchValues const&amp; patches_deriv,
             MultipatchCoordField const&amp; patches_coords,
             MultipatchSplineCoeff const&amp; patches_splines) const
     {
-        (apply_evaluator&lt;eval_deriv_type, eval_type, Patches&gt;(
-                 patches_deriv_1.template get&lt;Patches&gt;(),
+        static_assert(
+                (ddc::in_tags_v&lt;DerivDims, ddc::detail::TypeSeq&lt;DerivDim1, DerivDim2&gt;&gt; &amp;&amp; ...),
+                "Please provide a deriv_order indexed on the derivative dimensions of the patches "
+                "(same dimensions for all the patches).");
+        (apply_evaluator&lt;Patches&gt;(
+                 deriv_order,
+                 patches_deriv.template get&lt;Patches&gt;(),
                  patches_coords.template get&lt;Patches&gt;(),
                  patches_splines),
          ...);
     }
-
-    void deriv_dim_2(
-            MultipatchValues const&amp; patches_deriv_2,
-            MultipatchCoordField const&amp; patches_coords,
-            MultipatchSplineCoeff const&amp; patches_splines) const
-    {
-        (apply_evaluator&lt;eval_type, eval_deriv_type, Patches&gt;(
-                 patches_deriv_2.template get&lt;Patches&gt;(),
-                 patches_coords.template get&lt;Patches&gt;(),
-                 patches_splines),
-         ...);
-    }
-
-    void deriv_1_and_2(
-            MultipatchValues const&amp; patches_deriv_12,
-            MultipatchCoordField const&amp; patches_coords,
-            MultipatchSplineCoeff const&amp; patches_splines) const
-    {
-        (apply_evaluator&lt;eval_deriv_type, eval_deriv_type, Patches&gt;(
-                 patches_deriv_12.template get&lt;Patches&gt;(),
-                 patches_coords.template get&lt;Patches&gt;(),
-                 patches_splines),
-         ...);
-    }
-
 
     // Integrate operator ------------------------------------------------------------------------
     void integrate(
@@ -869,8 +810,9 @@ public:
 public:
     // Apply functions to manage the values on each patch. ---------------------------------------
 
-    template &lt;class EvalType1, class EvalType2, class StoringPatch&gt;
+    template &lt;class StoringPatch, class IdxDeriv&gt;
     void apply_evaluator(
+            IdxDeriv const&amp; deriv_order,
             ValuesOnPatch&lt;StoringPatch&gt; const&amp; patch_values,
             CoordConstFieldOnPatch&lt;StoringPatch&gt; const&amp; patch_coords,
             MultipatchSplineCoeff const patches_splines) const
@@ -887,17 +829,17 @@ public:
                 exec_space(),
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Index const&amp; idx) {
-                    CoordOnPatch&lt;StoringPatch&gt; const coord = patch_coords(idx);
+                    Coord&lt;CDim1, CDim2&gt; const coord = patch_coords(idx);
                     int const patch_idx = get_patch_idx(coord);
-                    if (patch_idx &lt; 0
-                        &amp;&amp; !((std::is_same_v&lt;EvalType1, eval_type&gt;)&amp;&amp;(
-                                std::is_same_v&lt;EvalType2, eval_type&gt;))) {
+                    if (patch_idx &lt; 0 &amp;&amp; !(std::is_same_v&lt;IdxDeriv, Idx&lt;&gt;&gt;)) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
                                       "No extrapolation rule for derivatives. \n");
                     }
-                    patch_values(idx) = recursive_dispatch_patch_function&lt;
-                            EvalType1,
-                            EvalType2&gt;(coord, patches_splines, patch_idx);
+                    patch_values(idx) = recursive_dispatch_patch_function(
+                            deriv_order,
+                            coord,
+                            patches_splines,
+                            patch_idx);
                 });
     }
 
@@ -944,9 +886,10 @@ public:
 private:
     // Recursive method to dispatch the coordinates on the right patch ---------------------------
 
-    template &lt;class EvalType1, class EvalType2, class Dim1, class Dim2, int TestPatchIdx = 0&gt;
+    template &lt;class IdxDeriv, int TestPatchIdx = 0&gt;
     KOKKOS_INLINE_FUNCTION double recursive_dispatch_patch_function(
-            Coord&lt;Dim1, Dim2&gt; coord,
+            IdxDeriv const&amp; deriv_order,
+            Coord&lt;CDim1, CDim2&gt; coord,
             MultipatchSplineCoeff const&amp; patches_splines,
             int const patch_idx) const
     {
@@ -956,8 +899,7 @@ private:
                               "the coordinate is physically located.");
             }
             // Coord not on patch. Stop recursing.
-            if constexpr (
-                    std::is_same_v&lt;EvalType1, eval_type&gt; &amp;&amp; std::is_same_v&lt;EvalType2, eval_type&gt;) {
+            if constexpr (std::is_same_v&lt;IdxDeriv, Idx&lt;&gt;&gt;) {
                 /* The operator currently works only for the case where the continuous 
                    dimensions of all the patches are the same. So the equivalent coordinates
                    are the same on any patches. 
@@ -975,23 +917,15 @@ private:
         } else {
             if (patch_idx == TestPatchIdx) {
                 using TestPatch = ddc::type_seq_element_t&lt;TestPatchIdx, PatchOrdering&gt;;
-                CoordOnPatch&lt;TestPatch&gt; test_coord = get_equivalent_coord&lt;
-                        typename TestPatch::Dim1,
-                        typename TestPatch::Dim2,
-                        Dim1,
-                        Dim2&gt;(coord);
-                replace_periodic_coord_inside&lt;TestPatch&gt;(test_coord);
+                replace_periodic_coord_inside&lt;TestPatch&gt;(coord);
 
                 SplineCoeffOnPatch&lt;TestPatch&gt; const test_spline
                         = patches_splines.template get&lt;TestPatch&gt;();
-                return eval_no_bc&lt;EvalType1, EvalType2, TestPatch&gt;(test_coord, test_spline);
+                return eval_no_bc&lt;TestPatch&gt;(deriv_order, coord, test_spline);
             } else {
                 return recursive_dispatch_patch_function&lt;
-                        EvalType1,
-                        EvalType2,
-                        Dim1,
-                        Dim2,
-                        TestPatchIdx + 1&gt;(coord, patches_splines, patch_idx);
+                        IdxDeriv,
+                        TestPatchIdx + 1&gt;(deriv_order, coord, patches_splines, patch_idx);
             }
         }
     }
@@ -999,78 +933,39 @@ private:
 
     // Useful functions --------------------------------------------------------------------------
 
-    template &lt;class Dim1, class Dim2&gt;
-    KOKKOS_INLINE_FUNCTION int get_patch_idx(Coord&lt;Dim1, Dim2&gt; const coord) const
+    KOKKOS_INLINE_FUNCTION int get_patch_idx(Coord&lt;CDim1, CDim2&gt; const coord) const
     {
-        using Mapping = typename PatchLocator::template get_mapping_on_logical_dim_t&lt;Dim1, Dim2&gt;;
-        Mapping const mapping(m_patch_locator.template get_mapping_on_logical_dim&lt;Dim1, Dim2&gt;());
+        using Mapping = typename PatchLocator::template get_mapping_on_logical_dim_t&lt;CDim1, CDim2&gt;;
+        Mapping const mapping(m_patch_locator.template get_mapping_on_logical_dim&lt;CDim1, CDim2&gt;());
         return m_patch_locator(mapping(coord));
     }
 
-    template &lt;class TargetDim1, class TargetDim2, class CurrentDim1, class CurrentDim2&gt;
-    KOKKOS_INLINE_FUNCTION Coord&lt;TargetDim1, TargetDim2&gt; get_equivalent_coord(
-            Coord&lt;CurrentDim1, CurrentDim2&gt; const&amp; current_coord) const
-    {
-        if constexpr (std::is_same_v&lt;
-                              Coord&lt;TargetDim1, TargetDim2&gt;,
-                              Coord&lt;CurrentDim1, CurrentDim2&gt;&gt;) {
-            return current_coord;
-        } else {
-            using CurrentMapping = typename PatchLocator::
-                    template get_mapping_on_logical_dim_t&lt;CurrentDim1, CurrentDim2&gt;;
-            using TargetMapping = typename PatchLocator::
-                    template get_mapping_on_logical_dim_t&lt;TargetDim1, TargetDim2&gt;;
-
-            static_assert(is_coord_transform_with_o_point_v&lt;CurrentMapping&gt;);
-            static_assert((std::is_same_v&lt;
-                           typename CurrentMapping::CoordArg,
-                           Coord&lt;CurrentDim1, CurrentDim2&gt;&gt;));
-            static_assert(is_coord_transform_with_o_point_v&lt;TargetMapping&gt;);
-            static_assert((std::is_same_v&lt;
-                           typename TargetMapping::CoordArg,
-                           Coord&lt;TargetDim1, TargetDim2&gt;&gt;));
-
-            CurrentMapping const current_mapping(
-                    m_patch_locator
-                            .template get_mapping_on_logical_dim&lt;CurrentDim1, CurrentDim2&gt;());
-            TargetMapping const target_mapping(
-                    m_patch_locator.template get_mapping_on_logical_dim&lt;TargetDim1, TargetDim2&gt;());
-
-            return target_mapping(current_mapping(current_coord));
-        }
-    }
-
     template &lt;class Patch&gt;
-    KOKKOS_INLINE_FUNCTION void replace_periodic_coord_inside(CoordOnPatch&lt;Patch&gt;&amp; coord) const
+    KOKKOS_INLINE_FUNCTION void replace_periodic_coord_inside(Coord&lt;CDim1, CDim2&gt;&amp; coord) const
     {
         using bsplines_1 = bsplines_type1&lt;Patch&gt;;
         using bsplines_2 = bsplines_type2&lt;Patch&gt;;
 
-        using Dim1 = continuous_dimension_type1&lt;Patch&gt;;
-        using Dim2 = continuous_dimension_type2&lt;Patch&gt;;
-
-        Coord&lt;Dim1&gt; coord_1(coord);
-        Coord&lt;Dim2&gt; coord_2(coord);
+        Coord&lt;CDim1&gt; coord_1(coord);
+        Coord&lt;CDim2&gt; coord_2(coord);
 
         ddcHelper::restrict_to_bspline_domain&lt;bsplines_1&gt;(coord_1);
         ddcHelper::restrict_to_bspline_domain&lt;bsplines_2&gt;(coord_2);
 
-        coord = CoordOnPatch&lt;Patch&gt;(coord_1, coord_2);
+        coord = Coord&lt;CDim1, CDim2&gt;(coord_1, coord_2);
     }
 
 
     // Evaluation functions ----------------------------------------------------------------------
 
-    template &lt;class EvalType1, class EvalType2, class Patch, class Layout&gt;
+    template &lt;class Patch, class Layout, class... DerivDims&gt;
     KOKKOS_INLINE_FUNCTION double eval_no_bc(
-            CoordOnPatch&lt;Patch&gt; const&amp; coord_eval,
+            Idx&lt;DerivDims...&gt; const&amp; deriv_order,
+            Coord&lt;CDim1, CDim2&gt; const&amp; coord_eval,
             DConstField&lt;spline_idx_range_type&lt;Patch&gt;, memory_space, Layout&gt; const&amp; spline_coef)
             const
     {
-        static_assert(
-                std::is_same_v&lt;EvalType1, eval_type&gt; || std::is_same_v&lt;EvalType1, eval_deriv_type&gt;);
-        static_assert(
-                std::is_same_v&lt;EvalType2, eval_type&gt; || std::is_same_v&lt;EvalType2, eval_deriv_type&gt;);
+        using deriv_dims_seq = ddc::detail::TypeSeq&lt;DerivDims...&gt;;
 
         using bsplines_1 = bsplines_type1&lt;Patch&gt;;
         using bsplines_2 = bsplines_type2&lt;Patch&gt;;
@@ -1083,27 +978,59 @@ private:
         std::array&lt;double, bsplines_2::degree() + 1&gt; vals2_ptr;
         DSpan1D const vals2(vals2_ptr.data(), bsplines_2::degree() + 1);
 
-        Coord&lt;continuous_dimension_type1&lt;Patch&gt;&gt; coord_eval_interest1
-                = ddc::select&lt;continuous_dimension_type1&lt;Patch&gt;&gt;(coord_eval);
-        Coord&lt;continuous_dimension_type2&lt;Patch&gt;&gt; coord_eval_interest2
-                = ddc::select&lt;continuous_dimension_type2&lt;Patch&gt;&gt;(coord_eval);
+        Coord&lt;CDim1&gt; coord_eval_interest1 = ddc::select&lt;CDim1&gt;(coord_eval);
+        Coord&lt;CDim2&gt; coord_eval_interest2 = ddc::select&lt;CDim2&gt;(coord_eval);
 
-        if constexpr (std::is_same_v&lt;EvalType1, eval_type&gt;) {
+        if constexpr (!ddc::in_tags_v&lt;DerivDim1, deriv_dims_seq&gt;) {
             jmin1 = ddc::discrete_space&lt;bsplines_1&gt;().eval_basis(vals1, coord_eval_interest1);
-        } else if constexpr (std::is_same_v&lt;EvalType1, eval_deriv_type&gt;) {
-            jmin1 = ddc::discrete_space&lt;bsplines_1&gt;().eval_deriv(vals1, coord_eval_interest1);
+        } else {
+            const std::size_t order1 = (Idx&lt;DerivDim1&gt;(deriv_order) - Idx&lt;DerivDim1&gt;(0)).value();
+            KOKKOS_ASSERT(order1 &lt;= bsplines_1::degree())
+
+            std::array&lt;double, (bsplines_1::degree() + 1) * (bsplines_1::degree() + 1)&gt; derivs1_ptr;
+            Kokkos::mdspan&lt;
+                    double,
+                    Kokkos::extents&lt;
+                            std::size_t,
+                            bsplines_1::degree() + 1,
+                            Kokkos::dynamic_extent&gt;&gt; const derivs1(derivs1_ptr.data(), order1 + 1);
+
+            jmin1 = ddc::discrete_space&lt;bsplines_1&gt;()
+                            .eval_basis_and_n_derivs(derivs1, coord_eval_interest1, order1);
+
+            for (std::size_t i = 0; i &lt; bsplines_1::degree() + 1; ++i) {
+                vals1[i] = derivs1(i, order1);
+            }
         }
 
-        if constexpr (std::is_same_v&lt;EvalType2, eval_type&gt;) {
+        if constexpr (!ddc::in_tags_v&lt;DerivDim2, deriv_dims_seq&gt;) {
             jmin2 = ddc::discrete_space&lt;bsplines_2&gt;().eval_basis(vals2, coord_eval_interest2);
-        } else if constexpr (std::is_same_v&lt;EvalType2, eval_deriv_type&gt;) {
-            jmin2 = ddc::discrete_space&lt;bsplines_2&gt;().eval_deriv(vals2, coord_eval_interest2);
+        } else {
+            const std::size_t order2 = (Idx&lt;DerivDim2&gt;(deriv_order) - Idx&lt;DerivDim2&gt;(0)).value();
+            KOKKOS_ASSERT(order2 &lt;= bsplines_2::degree())
+
+            std::array&lt;double, (bsplines_2::degree() + 1) * (bsplines_2::degree() + 1)&gt; derivs2_ptr;
+            Kokkos::mdspan&lt;
+                    double,
+                    Kokkos::extents&lt;
+                            std::size_t,
+                            bsplines_2::degree() + 1,
+                            Kokkos::dynamic_extent&gt;&gt; const derivs2(derivs2_ptr.data(), order2 + 1);
+
+            jmin2 = ddc::discrete_space&lt;bsplines_2&gt;()
+                            .eval_basis_and_n_derivs(derivs2, coord_eval_interest2, order2);
+
+            for (std::size_t i = 0; i &lt; bsplines_2::degree() + 1; ++i) {
+                vals2[i] = derivs2(i, order2);
+            }
         }
+
 
         double y = 0.0;
         for (std::size_t i = 0; i &lt; bsplines_1::degree() + 1; ++i) {
             for (std::size_t j = 0; j &lt; bsplines_2::degree() + 1; ++j) {
-                y += spline_coef(jmin1 + i, jmin2 + j) * vals1[i] * vals2[j];
+                Idx&lt;bsplines_1, bsplines_2&gt; idx_spline(jmin1 + i, jmin2 + j);
+                y += spline_coef(idx_spline) * vals1[i] * vals2[j];
             }
         }
         return y;

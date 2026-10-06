@@ -219,8 +219,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**MultipatchSplineBuilder2D::Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md) 
 * **struct** [**MultipatchSplineBuilder2D::Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md) 
 * **struct** [**MultipatchSplineBuilder::Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md) 
-* **struct** [**MultipatchSplineEvaluator2D::eval\_deriv\_type**](structMultipatchSplineEvaluator2D_1_1eval__deriv__type.md) _Tag to indicate that derivative of the spline should be evaluated._ 
-* **struct** [**MultipatchSplineEvaluator2D::eval\_type**](structMultipatchSplineEvaluator2D_1_1eval__type.md) _Tag to indicate that the value of the spline should be evaluated._ 
 * **struct** [**NullExtrapolationRule**](structNullExtrapolationRule.md) _Define null extrapolation rule common to all geometries._ 
 * **struct** [**OutsideEdge**](structOutsideEdge.md) _Define an edge for the outside index range._ [_**OutsideEdge**_](structOutsideEdge.md) _is a pseudo-edge outside the index range used to define interfaces between patches and the outside index range._
 * **struct** [**Patch**](structPatch.md) _Base tag for a patch._ 

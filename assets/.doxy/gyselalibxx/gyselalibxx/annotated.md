@@ -182,8 +182,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md)     
 * **struct** [**Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md)     
 * **class** [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) _A class to evaluate all the splines of all the patches at once._     
-    * **struct** [**eval\_deriv\_type**](structMultipatchSplineEvaluator2D_1_1eval__deriv__type.md) _Tag to indicate that derivative of the spline should be evaluated._ 
-    * **struct** [**eval\_type**](structMultipatchSplineEvaluator2D_1_1eval__type.md) _Tag to indicate that the value of the spline should be evaluated._ 
 * **class** [**MultipatchType**](classMultipatchType.md) _A class to store several objects that are of a type which is templated by the patch._     
 * **class** [**NDIdentityInterpolationBuilder**](classNDIdentityInterpolationBuilder.md) _An ND builder that copies function values directly as interpolation coefficients._ 
 * **class** [**NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md) _The implementation of_ [_**NDIdentityInterpolationBuilder**_](classNDIdentityInterpolationBuilder.md) _. This is separate to allow a variadic Basis._    
