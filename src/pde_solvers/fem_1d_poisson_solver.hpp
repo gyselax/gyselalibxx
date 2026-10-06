@@ -116,7 +116,8 @@ public:
      *
      * This type should be private but is public due to Kokkos restrictions.
      */
-    struct HiddenFEMBSplines : ddc::NonUniformBSplines<PDEDim, InputBSplines::degree()>
+    struct HiddenFEMBSplines
+        : ddc::NonUniformBSplines<PDEDim, InputBSplines::degree(), PDEDim::PERIODIC>
     {
     };
 

@@ -41,10 +41,10 @@ struct Batch;
 int constexpr BSDegreeR = 3;
 int constexpr BSDegreeTheta = 3;
 
-struct BSplinesR : ddc::UniformBSplines<R, BSDegreeR>
+struct BSplinesR : ddc::UniformBSplines<R, BSDegreeR, R::PERIODIC>
 {
 };
-struct BSplinesTheta : ddc::UniformBSplines<Theta, BSDegreeTheta>
+struct BSplinesTheta : ddc::UniformBSplines<Theta, BSDegreeTheta, Theta::PERIODIC>
 {
 };
 
