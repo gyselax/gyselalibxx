@@ -190,8 +190,8 @@ public:
     struct BSplinesRRefined
         : std::conditional_t<
                   BSplinesROriginal::is_uniform(),
-                  ddc::UniformBSplines<R, BSplinesROriginal::degree()>,
-                  ddc::NonUniformBSplines<R, BSplinesROriginal::degree()>>
+                  ddc::UniformBSplines<R, BSplinesROriginal::degree(), R::PERIODIC>,
+                  ddc::NonUniformBSplines<R, BSplinesROriginal::degree(), R::PERIODIC>>
     {
     };
 
@@ -199,8 +199,8 @@ public:
     struct BSplinesThetaRefined
         : std::conditional_t<
                   BSplinesThetaOriginal::is_uniform(),
-                  ddc::UniformBSplines<Theta, BSplinesThetaOriginal::degree()>,
-                  ddc::NonUniformBSplines<Theta, BSplinesThetaOriginal::degree()>>
+                  ddc::UniformBSplines<Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC>,
+                  ddc::NonUniformBSplines<Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC>>
     {
     };
 
@@ -268,17 +268,16 @@ private:
 
     using RefinedSplineBuilder = typename Build_BuilderType<SplineBuilder>::type;
 
-    using RefinedSplineEvaluator = ddc::SplineEvaluator2D<
+    using RefinedSplineEvaluator = ddc::SplineEvaluatorND<
             ExecSpace,
             MemorySpace,
-            BSplinesRRefined,
-            BSplinesThetaRefined,
-            GridRRefined,
-            GridThetaRefined,
-            typename SplineEvaluator::lower_extrapolation_rule_1_type,
-            typename SplineEvaluator::upper_extrapolation_rule_1_type,
-            typename SplineEvaluator::lower_extrapolation_rule_2_type,
-            typename SplineEvaluator::upper_extrapolation_rule_2_type>;
+            ddc::detail::TypeSeq<BSplinesRRefined, BSplinesThetaRefined>,
+            ddc::detail::TypeSeq<GridRRefined, GridThetaRefined>,
+            ddc::detail::TypeSeq<
+                    typename SplineEvaluator::template lower_extrapolation_rule_type<0>,
+                    typename SplineEvaluator::template upper_extrapolation_rule_type<0>,
+                    typename SplineEvaluator::template lower_extrapolation_rule_type<1>,
+                    typename SplineEvaluator::template upper_extrapolation_rule_type<1>>>;
 
     using IdxRangeSplines = IdxRange<BSplinesRRefined, BSplinesThetaRefined>;
     using IdxRangeInterpolationPoints = IdxRange<GridRRefined, GridThetaRefined>;
@@ -316,10 +315,10 @@ public:
             Mapping const& analytical_mapping,
             Interpolator const& interpolator)
         : m_evaluator(
-                interpolator.get_evaluator().lower_extrapolation_rule_dim_1(),
-                interpolator.get_evaluator().upper_extrapolation_rule_dim_1(),
-                interpolator.get_evaluator().lower_extrapolation_rule_dim_2(),
-                interpolator.get_evaluator().upper_extrapolation_rule_dim_2())
+                interpolator.get_evaluator().template lower_extrapolation_rule<0>(),
+                interpolator.get_evaluator().template upper_extrapolation_rule<0>(),
+                interpolator.get_evaluator().template lower_extrapolation_rule<1>(),
+                interpolator.get_evaluator().template upper_extrapolation_rule<1>())
     {
         using CoordR = Coord<R>;
         using CoordTheta = Coord<Theta>;

@@ -146,10 +146,10 @@ using CoordXY = Coord<X, Y>;
 
 int constexpr BSDegree = 3;
 
-struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
+struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree, R::PERIODIC>
 {
 };
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
+struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree, Theta::PERIODIC>
 {
 };
 
