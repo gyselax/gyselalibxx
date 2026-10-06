@@ -2,6 +2,7 @@
 
 #pragma once
 #include "multipatch_type.hpp"
+#include "patch.hpp"
 
 
 template <class T>
@@ -134,10 +135,10 @@ public:
      * @tparam Patch The patch of the object to be returned.
      * @return The object on the given patch.
      */
-    template <class Patch>
-    KOKKOS_FUNCTION TypeOnPatch<Patch> get() const
+    template <class PatchType>
+    KOKKOS_FUNCTION TypeOnPatch<PatchType> get() const requires(is_patch_v<PatchType>)
     {
-        return ::get_field(std::get<TypeOnPatch<Patch>>(base_type::m_tuple));
+        return ::get_field(std::get<TypeOnPatch<PatchType>>(base_type::m_tuple));
     }
 
     /**
@@ -170,6 +171,22 @@ public:
     {
         return view_type(::get_const_field(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
     }
+
+    /**
+     * @brief Get the Field describing the component in the QueryTag direction.
+     *
+     * @return The field in the specified direction.
+     */
+    template <class QueryTag>
+    inline constexpr auto get() const noexcept requires(
+            (is_vector_field_v<InternalTypes> && ...)
+            && (ddc::in_tags_v<QueryTag, typename InternalTypes::NDTypeTag> && ...))
+    {
+        return MultipatchField<
+                PatchOrdering,
+                ddc::detail::TypeSeq<typename InternalTypes::chunk_span_type...>>(
+                ddcHelper::get<QueryTag>(std::get<InternalTypes>(base_type::m_tuple))...);
+    }
 };
 
 } // namespace detail
@@ -200,6 +217,11 @@ inline constexpr bool enable_multipatch_field<
 template <template <typename P> typename T, class... Patches>
 using MultipatchField = detail::
         MultipatchField<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
+
+template <class... VectorFieldType, class PatchTypeSeq>
+inline constexpr bool enable_vector_field<detail::MultipatchField<
+        PatchTypeSeq,
+        ddc::detail::TypeSeq<VectorFieldType...>>> = (is_vector_field_v<VectorFieldType> && ...);
 
 namespace ddcHelper {
 

@@ -18,6 +18,7 @@ target_link_libraries("multipatch_data_types" INTERFACE
     DDC::splines
 
     gyselalibxx::data_types
+    gyselalibxx::multipatch_connectivity
     gyselalibxx::utils
 )
 add_library("gyselalibxx::multipatch_data_types" ALIAS "multipatch_data_types")
