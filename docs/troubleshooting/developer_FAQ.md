@@ -70,4 +70,4 @@ In contrast `abort` errors are written into the line that raises the error. This
 
 ## I have problems with git submodules
 
-See the dedicated documentation about [git submodules](./Using_git.md#submodules).
+See the dedicated documentation about [git submodules](../how_to/Using_git.md#submodules).

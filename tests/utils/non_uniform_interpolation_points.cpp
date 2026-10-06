@@ -25,7 +25,7 @@ struct NonUniformInterpolationPointsFixture<std::tuple<
     struct GridX : NonUniformGridBase<X>
     {
     };
-    struct BSplinesX : ddc::NonUniformBSplines<X, 3>
+    struct BSplinesX : ddc::NonUniformBSplines<X, 3, X::PERIODIC>
     {
     };
 
