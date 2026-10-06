@@ -179,8 +179,8 @@ class MultipatchSplineBuilder2D
 
     /// A type alias to get the DerivField type on a specific patch.
     template <class Patch>
-    using DerivFieldOnPatch = DerivField<
-            double,
+    using ConstDerivFieldOnPatch = DerivField<
+            const double,
             IdxRange<
                     ddc::Deriv<typename Patch::Dim1>,
                     typename Patch::Grid1,
@@ -208,7 +208,7 @@ class MultipatchSplineBuilder2D
 
     using MultipatchDerivs12 = MultipatchField<Derivs12OnPatch, Patches...>;
 
-    using MultipatchDerivField = MultipatchField<DerivFieldOnPatch, Patches...>;
+    using MultipatchDerivField = MultipatchField<ConstDerivFieldOnPatch, Patches...>;
 
     using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patches...>;
 
@@ -336,7 +336,7 @@ private:
     static void apply_builder(
             BuilderOnPatch<PatchP> const& builder,
             SplineOnPatch<PatchP> spline,
-            DerivFieldOnPatch<PatchP> function_and_deriv)
+            ConstDerivFieldOnPatch<PatchP> function_and_deriv)
     {
         SplineBuilderDerivField2D<
                 ExecSpace,

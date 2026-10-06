@@ -723,7 +723,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
 
 
     // Build the spline representations on each patch
-    builder(function_coef, functions_and_derivs);
+    builder(function_coef, get_const_field(functions_and_derivs));
 
     // Check the results are the same than with one by one spline building
     SplineBuilderDerivField2D<
