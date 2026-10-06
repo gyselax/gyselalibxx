@@ -25,6 +25,8 @@ class MultipatchField;
  *
  * This class should not be used directly to instantiate objects. Instead the global alias
  * MultipatchField should be used.
+ * I.e. use `MultipatchField<TypeOnPatch, Patches...>` instead of
+ * `detail::MultipatchField<TypeSeqPatches, TypeSeqInternalTypes>`.
  *
  * @tparam Patches The patches on which the objects are defined.
  * @tparam InternalTypes The types of the field objects that are stored on the given patches.

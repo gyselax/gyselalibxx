@@ -28,6 +28,9 @@ class MultipatchType;
  * should be used. This alias packs the patches and the types into TypeSeqs. This ensures that
  * equivalent type templates (which return the same type for each patch) lead to the same class.
  *
+ * I.e. use `MultipatchType<TypeOnPatch, Patches...>` instead of
+ * `detail::MultipatchType<TypeSeqPatches, TypeSeqInternalTypes>`.
+ *
  * @tparam Patches The patches on which the objects are defined.
  * @tparam InternalTypes The types of the objects that are stored on the given patches.
  *                 The order must match that of the patches.

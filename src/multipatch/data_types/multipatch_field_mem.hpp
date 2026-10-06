@@ -25,6 +25,8 @@ class MultipatchFieldMem;
  *
  * This class should not be used directly to instantiate objects. Instead the global alias
  * MultipatchFieldMem should be used.
+ * I.e. use `MultipatchFieldMem<TypeOnPatch, Patches...>` instead of
+ * `detail::MultipatchFieldMem<TypeSeqPatches, TypeSeqInternalTypes>`.
  *
  * @tparam Patches The patches on which the objects are defined.
  * @tparam InternalTypes The types of the memory allocating field objects that are stored on the given patches.
