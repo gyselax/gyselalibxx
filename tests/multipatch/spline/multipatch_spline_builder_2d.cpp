@@ -609,24 +609,28 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
             function_and_derivs_2.get_values_field());
 
     // Initialise first derivatives on Patch1
-    Idx<ddc::Deriv<X<1>>> i_dx1(1);
-    Idx<ddc::Deriv<Y<1>>> i_dy1(1);
+    const Idx<ddc::Deriv<X<1>>> i_dx1(1);
+    const Idx<ddc::Deriv<Y<1>>> i_dy1(1);
     const Idx<GridX<1>> idx_xmin1 = idx_range_x1.front();
     const Idx<GridX<1>> idx_xmax1 = idx_range_x1.back();
     const Idx<GridY<1>> idx_ymin1 = idx_range_y1.front();
     const Idx<GridY<1>> idx_ymax1 = idx_range_y1.back();
+    const Idx<ddc::Deriv<X<1>>, GridX<1>> idx_slice_dx1_min(i_dx1, idx_xmin1);
+    const Idx<ddc::Deriv<X<1>>, GridX<1>> idx_slice_dx1_max(i_dx1, idx_xmax1);
+    const Idx<GridY<1>, ddc::Deriv<Y<1>>> idx_slice_dy1_min(idx_ymin1, i_dy1);
+    const Idx<GridY<1>, ddc::Deriv<Y<1>>> idx_slice_dy1_max(idx_ymax1, i_dy1);
     double const xmin1 = ddc::coordinate(idx_xmin1);
     double const xmax1 = ddc::coordinate(idx_xmax1);
     double const ymin1 = ddc::coordinate(idx_ymin1);
     double const ymax1 = ddc::coordinate(idx_ymax1);
     DField<IdxRange<GridY<1>>, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_stride>
-            deriv_xmin1 = function_and_derivs_1[i_dx1, idx_xmin1];
+            deriv_xmin1 = function_and_derivs_1[idx_slice_dx1_min];
     DField<IdxRange<GridY<1>>, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_stride>
-            deriv_xmax1 = function_and_derivs_1[i_dx1, idx_xmax1];
+            deriv_xmax1 = function_and_derivs_1[idx_slice_dx1_max];
     DField<IdxRange<GridX<1>>, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_stride>
-            deriv_ymin1 = function_and_derivs_1[i_dy1, idx_ymin1];
+            deriv_ymin1 = function_and_derivs_1[idx_slice_dy1_min];
     DField<IdxRange<GridX<1>>, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_stride>
-            deriv_ymax1 = function_and_derivs_1[i_dy1, idx_ymax1];
+            deriv_ymax1 = function_and_derivs_1[idx_slice_dy1_max];
 
     ddc::parallel_fill(deriv_xmin1, Kokkos::cos(xmin1));
     ddc::parallel_fill(deriv_xmax1, Kokkos::cos(xmax1));
@@ -640,46 +644,56 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
     const Idx<GridX<2>> idx_xmax2 = idx_range_x2.back();
     const Idx<GridY<2>> idx_ymin2 = idx_range_y2.front();
     const Idx<GridY<2>> idx_ymax2 = idx_range_y2.back();
+    const Idx<ddc::Deriv<X<2>>, GridX<2>> idx_slice_dx2_min(i_dx2, idx_xmin2);
+    const Idx<ddc::Deriv<X<2>>, GridX<2>> idx_slice_dx2_max(i_dx2, idx_xmax2);
+    const Idx<GridY<2>, ddc::Deriv<Y<2>>> idx_slice_dy2_min(idx_ymin2, i_dy2);
+    const Idx<GridY<2>, ddc::Deriv<Y<2>>> idx_slice_dy2_max(idx_ymax2, i_dy2);
     DField<IdxRange<GridY<2>>, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_stride>
-            deriv_xmin2 = function_and_derivs_2[i_dx2, idx_xmin2];
+            deriv_xmin2 = function_and_derivs_2[idx_slice_dx2_min];
     DField<IdxRange<GridY<2>>, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_stride>
-            deriv_xmax2 = function_and_derivs_2[i_dx2, idx_xmax2];
+            deriv_xmax2 = function_and_derivs_2[idx_slice_dx2_max];
     DField<IdxRange<GridX<2>>, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_stride>
-            deriv_ymin2 = function_and_derivs_2[i_dy2, idx_ymin2];
+            deriv_ymin2 = function_and_derivs_2[idx_slice_dy2_min];
     DField<IdxRange<GridX<2>>, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_stride>
-            deriv_ymax2 = function_and_derivs_2[i_dy2, idx_ymax2];
+            deriv_ymax2 = function_and_derivs_2[idx_slice_dy2_max];
     initialise_2D_derivatives_2(deriv_xmin2, deriv_xmax2, deriv_ymin2, deriv_ymax2);
 
     // Initialise cross-derivatives on Patch1
-    Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>> i_dxy1(1, 1);
-    ddc::parallel_fill(function_and_derivs_1[i_dxy1, idx_xmin1, idx_ymin1], 0.0);
-    ddc::parallel_fill(function_and_derivs_1[i_dxy1, idx_xmax1, idx_ymin1], 0.0);
-    ddc::parallel_fill(function_and_derivs_1[i_dxy1, idx_xmin1, idx_ymax1], 0.0);
-    ddc::parallel_fill(function_and_derivs_1[i_dxy1, idx_xmax1, idx_ymax1], 0.0);
+    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>> idx_slice_dxy1_min_min(i_dx1, i_dy1, idx_xmin1, idx_ymin1);
+    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>> idx_slice_dxy1_min_max(i_dx1, i_dy1, idx_xmin1, idx_ymax1);
+    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>> idx_slice_dxy1_max_min(i_dx1, i_dy1, idx_xmax1, idx_ymin1);
+    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>> idx_slice_dxy1_max_max(i_dx1, i_dy1, idx_xmax1, idx_ymax1);
+    ddc::parallel_fill(function_and_derivs_1[idx_slice_dxy1_min_min], 0.0);
+    ddc::parallel_fill(function_and_derivs_1[idx_slice_dxy1_min_max], 0.0);
+    ddc::parallel_fill(function_and_derivs_1[idx_slice_dxy1_max_min], 0.0);
+    ddc::parallel_fill(function_and_derivs_1[idx_slice_dxy1_max_max], 0.0);
 
     // Initialise cross-derivatives on Patch12
-    Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>> i_dxy2(1, 1);
+    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>> idx_slice_dxy2_min_min(i_dx2, i_dy2, idx_xmin2, idx_ymin2);
+    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>> idx_slice_dxy2_min_max(i_dx2, i_dy2, idx_xmin2, idx_ymax2);
+    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>> idx_slice_dxy2_max_min(i_dx2, i_dy2, idx_xmax2, idx_ymin2);
+    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>> idx_slice_dxy2_max_max(i_dx2, i_dy2, idx_xmax2, idx_ymax2);
     double const xmin2 = ddc::coordinate(idx_range_x2.front());
     double const xmax2 = ddc::coordinate(idx_range_x2.back());
     double const ymin2 = ddc::coordinate(idx_range_y2.front());
     double const ymax2 = ddc::coordinate(idx_range_y2.back());
     ddc::parallel_fill(
-            function_and_derivs_2[i_dxy2, idx_xmin2, idx_ymin2],
+            function_and_derivs_2[idx_slice_dxy2_min_min],
             2.
                     * (Kokkos::cos(2. * xmin2 * ymin2)
                        - 2. * xmin2 * ymin2 * Kokkos::sin(2. * xmin2 * ymin2)));
     ddc::parallel_fill(
-            function_and_derivs_2[i_dxy2, idx_xmax2, idx_ymin2],
+            function_and_derivs_2[idx_slice_dxy2_max_min],
             2.
                     * (Kokkos::cos(2. * xmax2 * ymin2)
                        - 2. * xmax2 * ymin2 * Kokkos::sin(2. * xmax2 * ymin2)));
     ddc::parallel_fill(
-            function_and_derivs_2[i_dxy2, idx_xmin2, idx_ymax2],
+            function_and_derivs_2[idx_slice_dxy2_min_max],
             2.
                     * (Kokkos::cos(2. * xmin2 * ymax2)
                        - 2. * xmin2 * ymax2 * Kokkos::sin(2. * xmin2 * ymax2)));
     ddc::parallel_fill(
-            function_and_derivs_2[i_dxy2, idx_xmax2, idx_ymax2],
+            function_and_derivs_2[idx_slice_dxy2_max_max],
             2.
                     * (Kokkos::cos(2. * xmax2 * ymax2)
                        - 2. * xmax2 * ymax2 * Kokkos::sin(2. * xmax2 * ymax2)));
