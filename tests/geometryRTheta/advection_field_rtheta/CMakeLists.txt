@@ -19,16 +19,16 @@ PUBLIC
         GTest::gtest
         GTest::gmock
         
-        gslx::advection
-        gslx::diocotron_init_eq
-        gslx::geometry_RTheta
-        gslx::interpolation
-        gslx::paraconfpp
-        gslx::poisson_RTheta
-        gslx::quadrature
-        gslx::simulation_utils
-        gslx::time_integration_RTheta
-        gslx::utils
+        gyselalibxx::advection
+        gyselalibxx::diocotron_init_eq
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::interpolation
+        gyselalibxx::paraconfpp
+        gyselalibxx::poisson_RTheta
+        gyselalibxx::quadrature
+        gyselalibxx::simulation_utils
+        gyselalibxx::time_integration_RTheta
+        gyselalibxx::utils
 )
 gtest_discover_tests("${test_name_gtest}"
     DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}

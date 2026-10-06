@@ -2,7 +2,7 @@
 function (multipatch_single_interface_derivatives_executable MESH_TYPE)
     set(test_name_gtest "multipatch_single_interface_derivatives_${MESH_TYPE}_test")
     add_executable("${test_name_gtest}"
-        single_interface_derivatives_calculator_test.cpp
+        interface_derivative_coefficients_test.cpp
         ../../main.cpp
     )
     target_link_libraries("${test_name_gtest}"
@@ -11,12 +11,12 @@ function (multipatch_single_interface_derivatives_executable MESH_TYPE)
         GTest::gtest
         GTest::gmock
 
-        gslx::multipatch_geometries
-        gslx::multipatch_spline
-        gslx::multipatch_interface_derivatives
+        gyselalibxx::multipatch_geometries
+        gyselalibxx::multipatch_spline
+        gyselalibxx::multipatch_interface_derivatives
     )
     target_compile_definitions("${test_name_gtest}" PUBLIC -D${MESH_TYPE})
-    gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
+    gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST TEST_PREFIX "${MESH_TYPE}_")
 endfunction()
 
 foreach(MESH_TYPE "UNIFORM_MESH" "NON_UNIFORM_MESH")
@@ -26,7 +26,7 @@ endforeach()
 # SingleInterfaceDerivativeCalculatorCollection test =============================================
 set(test_name_gtest "interface_derivatives_test")
 add_executable("${test_name_gtest}"
-    single_interface_derivatives_calculator_collection_test.cpp
+    interface_derivative_coefficients_collection_test.cpp
     ../../main.cpp
 )
 target_link_libraries("${test_name_gtest}"
@@ -35,9 +35,9 @@ PUBLIC
     GTest::gtest
     GTest::gmock
 
-    gslx::multipatch_geometries
-    gslx::multipatch_spline
-    gslx::multipatch_interface_derivatives
+    gyselalibxx::multipatch_geometries
+    gyselalibxx::multipatch_spline
+    gyselalibxx::multipatch_interface_derivatives
 )
 target_compile_definitions("${test_name_gtest}" PUBLIC)
 gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

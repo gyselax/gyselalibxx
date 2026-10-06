@@ -7,18 +7,28 @@ add_library("initialisation_xyvxvy_${PRECISION_VARIANT}" STATIC
     singlemodeperturbinitialisation.cpp
 )
 
-target_include_directories("initialisation_xyvxvy_${PRECISION_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("initialisation_xyvxvy_${PRECISION_VARIANT}" PUBLIC cxx_std_20)
+
+target_sources("initialisation_xyvxvy_${PRECISION_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                iequilibrium.hpp
+                iinitialisation.hpp
+                maxwellianequilibrium.hpp
+                singlemodeperturbinitialisation.hpp
 )
 
 target_link_libraries("initialisation_xyvxvy_${PRECISION_VARIANT}"
     PUBLIC
         DDC::core
-        gslx::speciesinfo
-        gslx::geometry_xyvxvy_${PRECISION_VARIANT}
-        gslx::utils
+        gyselalibxx::speciesinfo
+        gyselalibxx::geometry_xyvxvy_${PRECISION_VARIANT}
+        gyselalibxx::utils
 )
 
-add_library("gslx::initialisation_xyvxvy_${PRECISION_VARIANT}" ALIAS "initialisation_xyvxvy_${PRECISION_VARIANT}")
+add_library("gyselalibxx::initialisation_xyvxvy_${PRECISION_VARIANT}" ALIAS "initialisation_xyvxvy_${PRECISION_VARIANT}")
+
+install(TARGETS initialisation_xyvxvy_${PRECISION_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/initialisation)
 
 endforeach()

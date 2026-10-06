@@ -61,14 +61,14 @@ struct GridThetag : NonUniformGridBase<Thetag>
 /**
  * @brief First spline dimension of patch PatchIdx.
  */
-struct BSplinesRg : ddc::NonUniformBSplines<Rg, BSplineDegree>
+struct BSplinesRg : ddc::NonUniformBSplines<Rg, BSplineDegree, Rg::PERIODIC>
 {
 };
 
 /**
  * @brief Second spline dimension of patch PatchIdx.
  */
-struct BSplinesThetag : ddc::NonUniformBSplines<Thetag, BSplineDegree>
+struct BSplinesThetag : ddc::NonUniformBSplines<Thetag, BSplineDegree, Thetag::PERIODIC>
 {
 };
 

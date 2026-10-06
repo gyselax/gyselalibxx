@@ -4,6 +4,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "i_interpolation.hpp"
+#include "i_interpolation_builder.hpp"
 #include "indexed_tensor.hpp"
 #include "l_norm_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -43,7 +44,7 @@
  * which are determined in the PolarFootFinder operator.
  *
  * The interpolation of the function is always done in the logical domain,
- * where the B-splines are defined. 
+ * where the interpolation is defined.
  *
  *
  * @see IPolarFootFinder
@@ -51,11 +52,10 @@
 template <class FootFinder, class LogicalToPhysicalMapping, concepts::Interpolation Interpolator2D>
 class BslAdvectionPolar
 {
-    using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
-    using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
-
-    using DimX = typename LogicalToPhysicalMapping::cartesian_tag_x;
-    using DimY = typename LogicalToPhysicalMapping::cartesian_tag_y;
+    using R = typename CoordWithOPoint<
+            typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
+    using Theta = typename CoordWithOPoint<
+            typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_theta;
 
     using CoordRTheta = typename LogicalToPhysicalMapping::CoordArg;
     using CoordXY = typename LogicalToPhysicalMapping::CoordResult;
@@ -86,8 +86,8 @@ class BslAdvectionPolar
     using Builder2D = typename Interpolator2D::BuilderType;
     using Evaluator2D = typename Interpolator2D::EvaluatorType;
 
-    using IdxRangeBSRTheta =
-            typename Builder2D::template batched_spline_domain_type<IdxRangeBatched>;
+    using IdxRangeCoeffBatchedRTheta = typename InterpolationBuilderTraits<
+            Builder2D>::template batched_basis_idx_range_type<IdxRangeBatched>;
 
     using DFieldFDistribu = DField<IdxRangeBatched, MemorySpace>;
 
@@ -177,9 +177,9 @@ public:
             DVectorConstFieldAdvection advection_field,
             double dt) const
     {
-        // Pre-allocate spline coefficient storage
-        DFieldMem<IdxRangeBSRTheta, MemorySpace> coefs_alloc(
-                m_builder_2d.batched_spline_domain(get_idx_range(allfdistribu)));
+        // Pre-allocate coefficient storage
+        DFieldMem<IdxRangeCoeffBatchedRTheta, MemorySpace> coefs_alloc(
+                batched_basis_idx_range(m_builder_2d, get_idx_range(allfdistribu)));
 
         // Compute the feet of the characteristics at tn -----------------------------------------
         typename FootFinder::ElementwiseOperator find_foot_alloc
@@ -192,7 +192,7 @@ public:
 
         Evaluator2D const& evaluator_2d_proxy = m_evaluator_2d;
 
-        DConstField<IdxRangeBSRTheta, MemorySpace> coefs = get_const_field(coefs_alloc);
+        DConstField<IdxRangeCoeffBatchedRTheta, MemorySpace> coefs = get_const_field(coefs_alloc);
 
         IdxRangeBatched idx_range_advected_points;
         if (m_idx_range_advected_points) {

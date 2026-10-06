@@ -19,15 +19,15 @@ bool constexpr BsplineOnUniformCellsVx = true;
 struct BSplinesX
     : std::conditional_t<
               BsplineOnUniformCellsX,
-              ddc::UniformBSplines<X, BSDegreeX>,
-              ddc::NonUniformBSplines<X, BSDegreeX>>
+              ddc::UniformBSplines<X, BSDegreeX, X::PERIODIC>,
+              ddc::NonUniformBSplines<X, BSDegreeX, X::PERIODIC>>
 {
 };
 struct BSplinesVx
     : std::conditional_t<
               BsplineOnUniformCellsVx,
-              ddc::UniformBSplines<Vx, BSDegreeVx>,
-              ddc::NonUniformBSplines<Vx, BSDegreeVx>>
+              ddc::UniformBSplines<Vx, BSDegreeVx, Vx::PERIODIC>,
+              ddc::NonUniformBSplines<Vx, BSDegreeVx, Vx::PERIODIC>>
 {
 };
 
@@ -48,19 +48,20 @@ using SplineXBuilder = ddc::SplineBuilder<
         SplineXClosure,
         SplineXClosure,
         ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
+using SplineXEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        std::conditional_t<
-                X::PERIODIC,
-                ddc::PeriodicExtrapolationRule<X>,
-                ddc::ConstantExtrapolationRule<X>>,
-        std::conditional_t<
-                X::PERIODIC,
-                ddc::PeriodicExtrapolationRule<X>,
-                ddc::ConstantExtrapolationRule<X>>>;
+        ddc::detail::TypeSeq<BSplinesX>,
+        ddc::detail::TypeSeq<GridX>,
+        ddc::detail::TypeSeq<
+                std::conditional_t<
+                        X::PERIODIC,
+                        ddc::PeriodicExtrapolationRule<X>,
+                        ddc::ConstantExtrapolationRule<X>>,
+                std::conditional_t<
+                        X::PERIODIC,
+                        ddc::PeriodicExtrapolationRule<X>,
+                        ddc::ConstantExtrapolationRule<X>>>>;
 using SplineVxBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -69,13 +70,13 @@ using SplineVxBuilder = ddc::SplineBuilder<
         SplineVxClosure,
         SplineVxClosure,
         ddc::SplineSolver::LAPACK>;
-using SplineVxEvaluator = ddc::SplineEvaluator<
+using SplineVxEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVx,
-        GridVx,
-        ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>>;
+        ddc::detail::TypeSeq<BSplinesVx>,
+        ddc::detail::TypeSeq<GridVx>,
+        ddc::detail::
+                TypeSeq<ddc::ConstantExtrapolationRule<Vx>, ddc::ConstantExtrapolationRule<Vx>>>;
 
 using XExtrapRule = std::conditional_t<
         X::PERIODIC,

@@ -149,6 +149,24 @@ void fill_cos_2d(Field<DataType, IdxRange<GridX, GridY>> vals)
             });
 }
 
+template <class EvalType, class DataType, class IdxRangeCoeff, class... Dims>
+DataType get_pointwise_eval(
+        EvalType eval,
+        Coord<Dims...> coord,
+        ConstField<DataType, IdxRangeCoeff> coeffs)
+{
+    static_assert(Kokkos::SpaceAccessibility<
+                  Kokkos::DefaultExecutionSpace,
+                  typename EvalType::memory_space>::accessible);
+    double val = 0.0;
+    Kokkos::parallel_reduce(
+            "NDLagrange pointwise",
+            1,
+            KOKKOS_LAMBDA(const int& i, double& val_loc) { val_loc += eval(coord, coeffs); },
+            val);
+    return val;
+}
+
 } // namespace
 
 TYPED_TEST_SUITE(NDLagrangeNonPeriodicFixture, Cases);
@@ -267,6 +285,8 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
                 static_cast<double>(expected),
                 TOL * expected);
     });
+
+    EXPECT_DOUBLE_EQ(eval2d(Coord<X, Y>(3.0, 4.0), get_const_field(poly_coeffs_alloc)), 0.0);
 }
 
 /**
@@ -541,6 +561,16 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
         double const expected = std::cos(x) * (1.0 + y);
         EXPECT_NEAR(result_host(idx), expected, tol);
     });
+
+    Idx<TestGridX, TestGridY> test_idx(test_range.front() + IdxStep<TestGridX, TestGridY>(1, 2));
+    Idx<TestGridX, TestGridY> test_periodic_idx(test_idx + IdxStep<TestGridX>(ntest - 1));
+
+    double out_of_bounds_val = get_pointwise_eval(
+            eval2d,
+            ddc::coordinate(test_periodic_idx),
+            get_const_field(coeffs_alloc));
+
+    EXPECT_NEAR(out_of_bounds_val, result_host(test_idx), tol);
 }
 
 /**

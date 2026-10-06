@@ -11,6 +11,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add GVEC in the toolchains.
+- Allow `GyroAverageOperator` to work with any interpolation scheme.
+
+### Fixed
+
+- Fix compilation errors due to use of `std::make_tuple` in functions that are GPU compatible.
+- Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
+
+### Changed
+
+- Rename `SingleInterfaceDerivativesCalculator` to `InterfaceDerivCoeffs`.
+- Rename `SingleInterfaceDerivativesCalculatorCollection` to `InterfaceDerivCoeffsCollection`.
+- Rename `SingleInterfaceDerivativesCalculator::get_function_coefficients()` to `InterfaceDerivCoeffs::get_approx_deriv()`.
+- Rename file `single_interface_derivatives_calculator.hpp` to `interface_derivative_coefficients.hpp`.
+- Rename file `single_interface_derivatives_calculator_collection.hpp` to `interface_derivative_coefficients_collection.hpp`.
+- Use `ddc::SplineEvaluatorND` instead of explicitly ranked DDC classes.
+- Replace `MultipatchSplineEvaluator::deriv_dim_1()`, `MultipatchSplineEvaluator::deriv_dim_2()`, `MultipatchSplineEvaluator::deriv_1_and_2()`, `MultipatchSplineEvaluator::deriv<InterestDim>()` by `MultipatchSplineEvaluator::deriv()` taking as input the derivative order (similar as `ddc::SplineEvaluator2D`).
+
+### Deprecated
+
+### Removed
+
+- Removed `.span_view` and `.span_cview` from Gyselalib++ objects.
+
+### Dependency requirements
+
+- Remove Dask dependency in the tests.
+- Update DDC to [v0.16.0](https://github.com/CExA-project/ddc/releases/tag/v0.16.0).
+
+## [v0.8.0] - 2026-09-09
+
+### Added
+
 - Add an `extrapolation_rule` argument to `GMGPolarPoissonLikeSolver`. Default no extrapolation.
 - Add a new constructor for `GaussLegendre` from an index range describing the cell edges.
 - Add a `GradientCreator` operator to group derivative calculations.
@@ -41,6 +74,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `SplineInterpolator` and `LagrangeInterpolator` to specify custom extrapolation rules.
 - Allow `IdentityInterpolationBuilder` class to take a field on a strided layout.
 - Add a `DiscreteMapping` class to handle ND mappings whose values are only known at the mesh points of a grid.
+- Add a `CoordWithOPoint` class to recognise radial and poloidal components of a 2D coordinate.
+- Add MI300 toolchain for Adastra.
+- Add CMake installation commands and call the package `gyselalibxx`.
 
 ### Fixed
 
@@ -58,6 +94,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix H100 toolchain on Jean-Zay.
 - Fix Lagrange basis non-uniform initialisation for a sub-domain.
 - Fix use of `ExtrapolationRule::Constant` for 2D splines.
+- Fix use of a generic interpolator in `FEM1DPoissonSolver`, `PolarFootFinder` and `BslAdvectionPolar`.
+- Fix use of polar advection with `DiscreteMapping` class.
 
 ### Changed
 
@@ -110,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `BslImplicitPredCorrRTheta`
   - `PolarSplineFEMPoissonLikeSolver`
   - `GMGPolarPoissonLikeSolver`
+- The CMake namespace `gslx` has been renamed `gyselalibxx`.
 
 ### Deprecated
 
@@ -128,6 +167,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove unuseful defaulted template parameters `MinBound` and `MaxBound` from `LagrangeInterpolator`.
 - Remove unused superclass `IPolarFootFinder`.
 - Remove BslAdvectionPolar::operator() taking `advection_field_xy_centre`.
+- Remove `cartesian_tag_*` aliases in mappings.
+- Remove `cylindrical_tag_*` and `toroidal_tag_*` aliases in `ToroidalToCylindrical`.
+- Remove `LAPACK` dependency (`LAPACKE` remains).
 
 ## [v0.7.0] - 2026-03-18
 
