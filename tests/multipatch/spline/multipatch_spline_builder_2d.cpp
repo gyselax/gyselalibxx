@@ -659,20 +659,28 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
     initialise_2D_derivatives_2(deriv_xmin2, deriv_xmax2, deriv_ymin2, deriv_ymax2);
 
     // Initialise cross-derivatives on Patch1
-    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>> idx_slice_dxy1_min_min(i_dx1, i_dy1, idx_xmin1, idx_ymin1);
-    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>> idx_slice_dxy1_min_max(i_dx1, i_dy1, idx_xmin1, idx_ymax1);
-    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>> idx_slice_dxy1_max_min(i_dx1, i_dy1, idx_xmax1, idx_ymin1);
-    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>> idx_slice_dxy1_max_max(i_dx1, i_dy1, idx_xmax1, idx_ymax1);
+    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>>
+            idx_slice_dxy1_min_min(i_dx1, i_dy1, idx_xmin1, idx_ymin1);
+    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>>
+            idx_slice_dxy1_min_max(i_dx1, i_dy1, idx_xmin1, idx_ymax1);
+    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>>
+            idx_slice_dxy1_max_min(i_dx1, i_dy1, idx_xmax1, idx_ymin1);
+    const Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>, GridX<1>, GridY<1>>
+            idx_slice_dxy1_max_max(i_dx1, i_dy1, idx_xmax1, idx_ymax1);
     ddc::parallel_fill(function_and_derivs_1[idx_slice_dxy1_min_min], 0.0);
     ddc::parallel_fill(function_and_derivs_1[idx_slice_dxy1_min_max], 0.0);
     ddc::parallel_fill(function_and_derivs_1[idx_slice_dxy1_max_min], 0.0);
     ddc::parallel_fill(function_and_derivs_1[idx_slice_dxy1_max_max], 0.0);
 
     // Initialise cross-derivatives on Patch12
-    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>> idx_slice_dxy2_min_min(i_dx2, i_dy2, idx_xmin2, idx_ymin2);
-    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>> idx_slice_dxy2_min_max(i_dx2, i_dy2, idx_xmin2, idx_ymax2);
-    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>> idx_slice_dxy2_max_min(i_dx2, i_dy2, idx_xmax2, idx_ymin2);
-    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>> idx_slice_dxy2_max_max(i_dx2, i_dy2, idx_xmax2, idx_ymax2);
+    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>>
+            idx_slice_dxy2_min_min(i_dx2, i_dy2, idx_xmin2, idx_ymin2);
+    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>>
+            idx_slice_dxy2_min_max(i_dx2, i_dy2, idx_xmin2, idx_ymax2);
+    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>>
+            idx_slice_dxy2_max_min(i_dx2, i_dy2, idx_xmax2, idx_ymin2);
+    const Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>, GridX<2>, GridY<2>>
+            idx_slice_dxy2_max_max(i_dx2, i_dy2, idx_xmax2, idx_ymax2);
     double const xmin2 = ddc::coordinate(idx_range_x2.front());
     double const xmax2 = ddc::coordinate(idx_range_x2.back());
     double const ymin2 = ddc::coordinate(idx_range_y2.front());
