@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" kind="struct" language="C++" prot="public">
     <compoundname>FEM1DPoissonSolver::HiddenFEMBSplines</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree()&gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree(), PDEDim::PERIODIC &gt;</basecompoundref>
     <includes refid="fem__1d__poisson__solver_8hpp" local="no">fem_1d_poisson_solver.hpp</includes>
     <briefdescription>
     </briefdescription>
@@ -18,7 +18,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree()&gt;</label>
+        <label>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree(), PDEDim::PERIODIC &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -29,10 +29,10 @@
         </childnode>
       </node>
       <node id="2">
-        <label>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree()&gt;</label>
+        <label>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree(), PDEDim::PERIODIC &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="119" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="120" bodyend="121"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="119" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="121" bodyend="122"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

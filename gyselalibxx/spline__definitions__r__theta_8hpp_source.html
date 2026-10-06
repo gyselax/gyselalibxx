@@ -589,15 +589,15 @@ bool constexpr BsplineOnUniformCellsTheta = false;
 struct BSplinesR
     : std::conditional_t&lt;
               BsplineOnUniformCellsR,
-              ddc::UniformBSplines&lt;R, BSDegreeR&gt;,
-              ddc::NonUniformBSplines&lt;R, BSDegreeR&gt;&gt;
+              ddc::UniformBSplines&lt;R, BSDegreeR, R::PERIODIC&gt;,
+              ddc::NonUniformBSplines&lt;R, BSDegreeR, R::PERIODIC&gt;&gt;
 {
 };
 struct BSplinesTheta
     : std::conditional_t&lt;
               BsplineOnUniformCellsTheta,
-              ddc::UniformBSplines&lt;Theta, BSDegreeTheta&gt;,
-              ddc::NonUniformBSplines&lt;Theta, BSDegreeTheta&gt;&gt;
+              ddc::UniformBSplines&lt;Theta, BSDegreeTheta, Theta::PERIODIC&gt;,
+              ddc::NonUniformBSplines&lt;Theta, BSDegreeTheta, Theta::PERIODIC&gt;&gt;
 {
 };
 struct PolarBSplinesRTheta : PolarBSplines&lt;BSplinesR, BSplinesTheta, 1&gt;

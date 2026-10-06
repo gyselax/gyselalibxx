@@ -315,16 +315,16 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**NullAdvectionVelocity**](classNullAdvectionVelocity.md) _This is a class which imitates a velocity advection. It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes._ 
 * **class** **detail::UniformLagrangeBasisBase**    
     * **class** [**UniformLagrangeBasis**](classUniformLagrangeBasis.md) _Class describing Lagrange polynomials on a uniform grid._ 
-* **class** **std::conditional_t< BsplineOnUniformCellsR, ddc::UniformBSplines< R, BSDegreeR >, ddc::NonUniformBSplines< R, BSDegreeR > >**    
+* **class** **std::conditional_t< BsplineOnUniformCellsR, ddc::UniformBSplines< R, BSDegreeR, R::PERIODIC >, ddc::NonUniformBSplines< R, BSDegreeR, R::PERIODIC > >**    
     * **struct** [**BSplinesR**](structBSplinesR.md) 
-* **class** **std::conditional_t< BsplineOnUniformCellsTheta, ddc::UniformBSplines< Theta, BSDegreeTheta >, ddc::NonUniformBSplines< Theta, BSDegreeTheta > >**    
+* **class** **std::conditional_t< BsplineOnUniformCellsTheta, ddc::UniformBSplines< Theta, BSDegreeTheta, Theta::PERIODIC >, ddc::NonUniformBSplines< Theta, BSDegreeTheta, Theta::PERIODIC > >**    
     * **struct** [**BSplinesTheta**](structBSplinesTheta.md) 
 * **class** **std::conditional_t< uniform_edge_v, UniformGridBase< Vx >, NonUniformGridBase< Vx > >**    
     * **struct** [**CollisionsIntra::GhostedVx**](structCollisionsIntra_1_1GhostedVx.md) 
     * **struct** [**CollisionsIntra::GhostedVxStaggered**](structCollisionsIntra_1_1GhostedVxStaggered.md) 
 * **class** **NonUniformGridBase< PDEDim >**    
     * **struct** [**FEM1DPoissonSolver::GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) _The grid of quadrature points along the PDEDim direction._ 
-* **class** **ddc::NonUniformBSplines< PDEDim, InputBSplines::degree()>**    
+* **class** **ddc::NonUniformBSplines< PDEDim, InputBSplines::degree(), PDEDim::PERIODIC >**    
     * **struct** [**FEM1DPoissonSolver::HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) 
 * **class** **ddc::PeriodicSampling< ddc::Fourier< Dim > >**    
     * **struct** [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8.md) 
@@ -351,9 +351,9 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **struct** [**GridY**](structGridY.md) 
 * **class** **NonUniformGridBase< T::continuous_dimension_type >**    
     * **struct** [**NonUniformLagrangeKnots**](structNonUniformLagrangeKnots.md) 
-* **class** **std::conditional_t< BSplinesROriginal::is_uniform(), ddc::UniformBSplines< R, BSplinesROriginal::degree()>, ddc::NonUniformBSplines< R, BSplinesROriginal::degree()> >**    
+* **class** **std::conditional_t< BSplinesROriginal::is_uniform(), ddc::UniformBSplines< R, BSplinesROriginal::degree(), R::PERIODIC >, ddc::NonUniformBSplines< R, BSplinesROriginal::degree(), R::PERIODIC > >**    
     * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesRRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined.md) _The type of the radial B-splines on which the new mapping will be defined._ 
-* **class** **std::conditional_t< BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines< Theta, BSplinesThetaOriginal::degree()>, ddc::NonUniformBSplines< Theta, BSplinesThetaOriginal::degree()> >**    
+* **class** **std::conditional_t< BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines< Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC >, ddc::NonUniformBSplines< Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC > >**    
     * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesThetaRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined.md) _The type of the poloidal B-splines on which the new mapping will be defined._ 
 * **class** **GrevillePointsR::interpolation_discrete_dimension_type**    
     * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::GridRRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined.md) _The type of the grid of radial points on which the new mapping will be defined._ 

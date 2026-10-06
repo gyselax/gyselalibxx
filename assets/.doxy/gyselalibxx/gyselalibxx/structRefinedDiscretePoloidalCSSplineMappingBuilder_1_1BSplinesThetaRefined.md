@@ -14,7 +14,7 @@ _The type of the poloidal B-splines on which the new mapping will be defined._
 
 
 
-Inherits the following classes: std::conditional_t< BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines< Theta, BSplinesThetaOriginal::degree()>, ddc::NonUniformBSplines< Theta, BSplinesThetaOriginal::degree()> >
+Inherits the following classes: std::conditional_t< BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines< Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC >, ddc::NonUniformBSplines< Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC > >
 
 
 

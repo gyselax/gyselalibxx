@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: std::conditional_t< BsplineOnUniformCellsTheta, ddc::UniformBSplines< Theta, BSDegreeTheta >, ddc::NonUniformBSplines< Theta, BSDegreeTheta > >
+Inherits the following classes: std::conditional_t< BsplineOnUniformCellsTheta, ddc::UniformBSplines< Theta, BSDegreeTheta, Theta::PERIODIC >, ddc::NonUniformBSplines< Theta, BSDegreeTheta, Theta::PERIODIC > >
 
 
 

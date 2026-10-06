@@ -716,16 +716,16 @@ public:
     struct BSplinesRRefined
         : std::conditional_t&lt;
                   BSplinesROriginal::is_uniform(),
-                  ddc::UniformBSplines&lt;R, BSplinesROriginal::degree()&gt;,
-                  ddc::NonUniformBSplines&lt;R, BSplinesROriginal::degree()&gt;&gt;
+                  ddc::UniformBSplines&lt;R, BSplinesROriginal::degree(), R::PERIODIC&gt;,
+                  ddc::NonUniformBSplines&lt;R, BSplinesROriginal::degree(), R::PERIODIC&gt;&gt;
     {
     };
 
     struct BSplinesThetaRefined
         : std::conditional_t&lt;
                   BSplinesThetaOriginal::is_uniform(),
-                  ddc::UniformBSplines&lt;Theta, BSplinesThetaOriginal::degree()&gt;,
-                  ddc::NonUniformBSplines&lt;Theta, BSplinesThetaOriginal::degree()&gt;&gt;
+                  ddc::UniformBSplines&lt;Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC&gt;,
+                  ddc::NonUniformBSplines&lt;Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC&gt;&gt;
     {
     };
 

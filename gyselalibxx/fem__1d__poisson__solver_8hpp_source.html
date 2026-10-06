@@ -658,7 +658,8 @@ private:
     using CoordQField = Field&lt;CoordPDEDim, IdxRangeQ, memory_space&gt;;
 
 public:
-    struct HiddenFEMBSplines : ddc::NonUniformBSplines&lt;PDEDim, InputBSplines::degree()&gt;
+    struct HiddenFEMBSplines
+        : ddc::NonUniformBSplines&lt;PDEDim, InputBSplines::degree(), PDEDim::PERIODIC&gt;
     {
     };
 

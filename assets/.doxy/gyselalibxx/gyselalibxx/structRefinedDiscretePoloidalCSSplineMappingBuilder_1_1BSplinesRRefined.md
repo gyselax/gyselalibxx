@@ -14,7 +14,7 @@ _The type of the radial B-splines on which the new mapping will be defined._
 
 
 
-Inherits the following classes: std::conditional_t< BSplinesROriginal::is_uniform(), ddc::UniformBSplines< R, BSplinesROriginal::degree()>, ddc::NonUniformBSplines< R, BSplinesROriginal::degree()> >
+Inherits the following classes: std::conditional_t< BSplinesROriginal::is_uniform(), ddc::UniformBSplines< R, BSplinesROriginal::degree(), R::PERIODIC >, ddc::NonUniformBSplines< R, BSplinesROriginal::degree(), R::PERIODIC > >
 
 
 

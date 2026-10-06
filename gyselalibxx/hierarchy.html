@@ -938,11 +938,11 @@
 <li><strong>class</strong> <a href="classUniformLagrangeBasis.html"><strong>UniformLagrangeBasis</strong></a> <em>Class describing Lagrange polynomials on a uniform grid.</em> </li>
 </ul>
 </li>
-<li><strong>class</strong> <strong>std::conditional_t&lt; BsplineOnUniformCellsR, ddc::UniformBSplines&lt; R, BSDegreeR &gt;, ddc::NonUniformBSplines&lt; R, BSDegreeR &gt; &gt;</strong>    <ul>
+<li><strong>class</strong> <strong>std::conditional_t&lt; BsplineOnUniformCellsR, ddc::UniformBSplines&lt; R, BSDegreeR, R::PERIODIC &gt;, ddc::NonUniformBSplines&lt; R, BSDegreeR, R::PERIODIC &gt; &gt;</strong>    <ul>
 <li><strong>struct</strong> <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> </li>
 </ul>
 </li>
-<li><strong>class</strong> <strong>std::conditional_t&lt; BsplineOnUniformCellsTheta, ddc::UniformBSplines&lt; Theta, BSDegreeTheta &gt;, ddc::NonUniformBSplines&lt; Theta, BSDegreeTheta &gt; &gt;</strong>    <ul>
+<li><strong>class</strong> <strong>std::conditional_t&lt; BsplineOnUniformCellsTheta, ddc::UniformBSplines&lt; Theta, BSDegreeTheta, Theta::PERIODIC &gt;, ddc::NonUniformBSplines&lt; Theta, BSDegreeTheta, Theta::PERIODIC &gt; &gt;</strong>    <ul>
 <li><strong>struct</strong> <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> </li>
 </ul>
 </li>
@@ -955,7 +955,7 @@
 <li><strong>struct</strong> <a href="structFEM1DPoissonSolver_1_1GridPDEDimQ.html"><strong>FEM1DPoissonSolver::GridPDEDimQ</strong></a> <em>The grid of quadrature points along the PDEDim direction.</em> </li>
 </ul>
 </li>
-<li><strong>class</strong> <strong>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree()&gt;</strong>    <ul>
+<li><strong>class</strong> <strong>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree(), PDEDim::PERIODIC &gt;</strong>    <ul>
 <li><strong>struct</strong> <a href="structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html"><strong>FEM1DPoissonSolver::HiddenFEMBSplines</strong></a> </li>
 </ul>
 </li>
@@ -1006,11 +1006,11 @@
 <li><strong>struct</strong> <a href="structNonUniformLagrangeKnots.html"><strong>NonUniformLagrangeKnots</strong></a> </li>
 </ul>
 </li>
-<li><strong>class</strong> <strong>std::conditional_t&lt; BSplinesROriginal::is_uniform(), ddc::UniformBSplines&lt; R, BSplinesROriginal::degree()&gt;, ddc::NonUniformBSplines&lt; R, BSplinesROriginal::degree()&gt; &gt;</strong>    <ul>
+<li><strong>class</strong> <strong>std::conditional_t&lt; BSplinesROriginal::is_uniform(), ddc::UniformBSplines&lt; R, BSplinesROriginal::degree(), R::PERIODIC &gt;, ddc::NonUniformBSplines&lt; R, BSplinesROriginal::degree(), R::PERIODIC &gt; &gt;</strong>    <ul>
 <li><strong>struct</strong> <a href="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesRRefined</strong></a> <em>The type of the radial B-splines on which the new mapping will be defined.</em> </li>
 </ul>
 </li>
-<li><strong>class</strong> <strong>std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt; &gt;</strong>    <ul>
+<li><strong>class</strong> <strong>std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC &gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC &gt; &gt;</strong>    <ul>
 <li><strong>struct</strong> <a href="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesThetaRefined</strong></a> <em>The type of the poloidal B-splines on which the new mapping will be defined.</em> </li>
 </ul>
 </li>

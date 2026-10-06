@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined" kind="struct" language="C++" prot="public">
     <compoundname>RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesThetaRefined</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt; &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC &gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC &gt; &gt;</basecompoundref>
     <includes refid="discrete__poloidal__cs__spline__mapping__builder_8hpp" local="no">discrete_poloidal_cs_spline_mapping_builder.hpp</includes>
     <briefdescription>
 <para>The type of the poloidal B-splines on which the new mapping will be defined. </para>
@@ -17,7 +17,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt; &gt;</label>
+        <label>std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC &gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC &gt; &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -28,7 +28,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt; &gt;</label>
+        <label>std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC &gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree(), Theta::PERIODIC &gt; &gt;</label>
       </node>
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="199" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="204" bodyend="205"/>

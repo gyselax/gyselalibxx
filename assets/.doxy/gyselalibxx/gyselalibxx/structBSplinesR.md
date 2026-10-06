@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: std::conditional_t< BsplineOnUniformCellsR, ddc::UniformBSplines< R, BSDegreeR >, ddc::NonUniformBSplines< R, BSDegreeR > >
+Inherits the following classes: std::conditional_t< BsplineOnUniformCellsR, ddc::UniformBSplines< R, BSDegreeR, R::PERIODIC >, ddc::NonUniformBSplines< R, BSDegreeR, R::PERIODIC > >
 
 
 

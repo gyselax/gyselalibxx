@@ -14,7 +14,7 @@
 
 
 
-Inherits the following classes: ddc::NonUniformBSplines< PDEDim, InputBSplines::degree()>
+Inherits the following classes: ddc::NonUniformBSplines< PDEDim, InputBSplines::degree(), PDEDim::PERIODIC >
 
 
 

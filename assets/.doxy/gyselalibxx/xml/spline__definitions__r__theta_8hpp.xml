@@ -979,15 +979,15 @@
 <codeline lineno="15" refid="structBSplinesR" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>std::conditional_t&lt;</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BsplineOnUniformCellsR,</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::UniformBSplines&lt;R,<sp/>BSDegreeR&gt;,</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NonUniformBSplines&lt;R,<sp/>BSDegreeR&gt;&gt;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::UniformBSplines&lt;R,<sp/>BSDegreeR,<sp/>R::PERIODIC&gt;,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NonUniformBSplines&lt;R,<sp/>BSDegreeR,<sp/>R::PERIODIC&gt;&gt;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="21"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="22" refid="structBSplinesTheta" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>std::conditional_t&lt;</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BsplineOnUniformCellsTheta,</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::UniformBSplines&lt;Theta,<sp/>BSDegreeTheta&gt;,</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NonUniformBSplines&lt;Theta,<sp/>BSDegreeTheta&gt;&gt;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::UniformBSplines&lt;Theta,<sp/>BSDegreeTheta,<sp/>Theta::PERIODIC&gt;,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::NonUniformBSplines&lt;Theta,<sp/>BSDegreeTheta,<sp/>Theta::PERIODIC&gt;&gt;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="28"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="29" refid="structPolarBSplinesRTheta" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref><sp/>:<sp/><ref refid="classPolarBSplines" kindref="compound">PolarBSplines</ref>&lt;BSplinesR,<sp/>BSplinesTheta,<sp/>1&gt;</highlight></codeline>
