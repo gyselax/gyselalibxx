@@ -220,4 +220,13 @@ struct Combine<Container<Tags...>, Container<OTags...>, TailContainers...>
 template <class... Containers>
 using combine_t = typename detail::Combine<Containers...>::type;
 
+template <class... Dims>
+IdxRangeSlice<Dims...> edge_idx_range(IdxRange<Dims...> v)
+{
+    return IdxRangeSlice<Dims...>(IdxRangeSlice<Dims> {
+            ddc::select<Dims>(v.front()),
+            IdxStep<Dims> {2},
+            ddc::select<Dims>(v.extents()) - 1}...);
+}
+
 } // namespace detail
