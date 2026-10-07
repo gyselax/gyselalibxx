@@ -165,13 +165,23 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
+      <node id="29">
+        <label>patch.hpp</label>
+        <link refid="patch_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
       <node id="8">
         <label>multipatch_field.hpp</label>
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
       </node>
-      <node id="29">
+      <node id="30">
         <label>multipatch_field_mem.hpp</label>
         <link refid="multipatch__field__mem_8hpp_source"/>
         <childnode refid="8" relation="include">
@@ -222,7 +232,7 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>

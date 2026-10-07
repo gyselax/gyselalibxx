@@ -616,6 +616,19 @@ struct Patch&lt;grid1, grid2, bsplines_dim1, bsplines_dim2&gt;
     using IdxRangeBS2 = IdxRange&lt;BSplines2&gt;;
     using IdxRangeBS12 = IdxRange&lt;BSplines1, BSplines2&gt;;
 };
+
+template &lt;class PatchType&gt;
+struct is_patch : std::false_type
+{
+};
+
+template &lt;class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2&gt;
+struct is_patch&lt;Patch&lt;Grid1, Grid2, BsplinesDim1, BsplinesDim2&gt;&gt; : std::true_type
+{
+};
+
+template &lt;class PatchType&gt;
+bool constexpr is_patch_v = is_patch&lt;PatchType&gt;::value;
 </code></pre></div>
               
             </div>

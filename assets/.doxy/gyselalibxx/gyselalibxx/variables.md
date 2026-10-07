@@ -404,6 +404,7 @@
 * **insert\_into\_type\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **insert\_mpi\_tags\_into\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **interfaces\_of\_patch\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
+* **is\_patch\_v** ([**patch.hpp**](patch_8hpp.md))
 * **is\_onion\_patch\_locator\_v** ([**utils\_patch\_locators.hpp**](utils__patch__locators_8hpp.md))
 * **is\_multipatch\_field\_v** ([**multipatch\_field.hpp**](multipatch__field_8hpp.md))
 * **is\_multipatch\_field\_mem\_v** ([**multipatch\_field\_mem.hpp**](multipatch__field__mem_8hpp.md))

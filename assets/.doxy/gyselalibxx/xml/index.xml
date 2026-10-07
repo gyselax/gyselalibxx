@@ -1974,6 +1974,10 @@
   </compound>
   <compound refid="structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f" kind="struct"><name>is_onion_patch_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;</name>
   </compound>
+  <compound refid="structis__patch" kind="struct"><name>is_patch</name>
+  </compound>
+  <compound refid="structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4" kind="struct"><name>is_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;</name>
+  </compound>
   <compound refid="structis__uniform__lagrange__basis" kind="struct"><name>is_uniform_lagrange_basis</name>
   </compound>
   <compound refid="structtensor__tools_1_1is__vector__index__set" kind="struct"><name>tensor_tools::is_vector_index_set</name>
@@ -4604,6 +4608,7 @@
     <member refid="onion__patch__locator_8hpp_1aa4ba8f0fb0e77fe44f1f025dce63b6f5" kind="function"><name>OnionPatchLocator</name></member>
   </compound>
   <compound refid="patch_8hpp" kind="file"><name>patch.hpp</name>
+    <member refid="patch_8hpp_1aba96e414d3acbd82c21305d14978a39d" kind="variable"><name>is_patch_v</name></member>
   </compound>
   <compound refid="utils__patch__locators_8hpp" kind="file"><name>utils_patch_locators.hpp</name>
     <member refid="utils__patch__locators_8hpp_1a07432a82cd197305e54dba1131b3d0f0" kind="variable"><name>is_onion_patch_locator_v</name></member>

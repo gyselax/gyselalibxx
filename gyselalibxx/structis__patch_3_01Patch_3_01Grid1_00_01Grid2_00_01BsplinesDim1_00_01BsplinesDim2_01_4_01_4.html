@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File multipatch_field.hpp - GyselalibX</title>
+    <title>Struct is_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt; - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File multipatch_field.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/multipatch__field_8hpp_source.md";
+        var mkdocs_page_name = "Struct is_patch\u0026lt; Patch\u0026lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 \u0026gt; \u0026gt;";
+        var mkdocs_page_input_path = "gyselalibxx/structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -559,9 +559,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File multipatch_field.hpp</li>
+      <li class="breadcrumb-item active">Struct is_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/multipatch__field_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -569,165 +569,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-multipatch_fieldhpp">File multipatch_field.hpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_2cbcac1ff0802c0a6551cceb4db325f2.html"><strong>data_types</strong></a> <strong>&gt;</strong> <a href="multipatch__field_8hpp.html"><strong>multipatch_field.hpp</strong></a></p>
-<p><a href="multipatch__field_8hpp.html">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">// SPDX-License-Identifier: MIT
-
-#pragma once
-#include "multipatch_type.hpp"
-#include "patch.hpp"
-
-
-template &lt;class T&gt;
-inline constexpr bool enable_multipatch_field = false;
-
-template &lt;class T&gt;
-inline constexpr bool is_multipatch_field_v
-        = enable_multipatch_field&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;;
-
-namespace detail {
-
-template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
-class MultipatchField;
-
-template &lt;class... Patches, class... InternalTypes&gt;
-class MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;
-    : public MultipatchType&lt;
-              ddc::detail::TypeSeq&lt;Patches...&gt;,
-              ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;
-{
-    static_assert(
-            (has_data_access_methods_v&lt;InternalTypes&gt; &amp;&amp; ...),
-            "The MultipatchField type should only contain instances of objects that can be "
-            "manipulated like fields.");
-
-public:
-    using base_type = MultipatchType&lt;
-            ddc::detail::TypeSeq&lt;Patches...&gt;,
-            ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;;
-
-    using typename base_type::PatchOrdering;
-
-    template &lt;class Patch&gt;
-    using TypeOnPatch = typename base_type::template TypeOnPatch&lt;Patch&gt;;
-
-    static_assert(
-            !is_mem_type_v&lt;typename base_type::example_element&gt;,
-            "For correct GPU handling a FieldMem object must be saved in a MultipatchFieldMem "
-            "type.");
-
-public:
-    using span_type = MultipatchField&lt;
-            PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::span_type...&gt;&gt;;
-    using view_type = MultipatchField&lt;
-            PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::view_type...&gt;&gt;;
-    using discrete_domain_type = MultipatchType&lt;
-            PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::discrete_domain_type...&gt;&gt;;
-    using memory_space = typename base_type::example_element::memory_space;
-    using element_type = typename base_type::example_element::element_type;
-
-public:
-    explicit KOKKOS_FUNCTION MultipatchField(InternalTypes... args) : base_type(args...) {}
-
-    template &lt;class MultipatchObj, std::enable_if_t&lt;!is_mem_type_v&lt;MultipatchObj&gt;, bool&gt; = true&gt;
-    explicit KOKKOS_FUNCTION MultipatchField(MultipatchObj&amp; other)
-        : base_type(InternalTypes(other.template get&lt;Patches&gt;())...)
-    {
-        static_assert(is_multipatch_type_v&lt;MultipatchObj&gt;);
-    }
-
-    template &lt;class MultipatchObj, std::enable_if_t&lt;is_mem_type_v&lt;MultipatchObj&gt;, bool&gt; = true&gt;
-    explicit MultipatchField(MultipatchObj&amp; other)
-        : base_type(InternalTypes(other.template get&lt;Patches&gt;())...)
-    {
-        static_assert(is_multipatch_type_v&lt;MultipatchObj&gt;);
-    }
-
-    KOKKOS_DEFAULTED_FUNCTION MultipatchField(MultipatchField const&amp;) noexcept = default;
-
-    KOKKOS_DEFAULTED_FUNCTION MultipatchField(MultipatchField&amp;&amp;) noexcept = default;
-
-    KOKKOS_DEFAULTED_FUNCTION ~MultipatchField() noexcept = default;
-
-    template &lt;class PatchType&gt;
-    KOKKOS_FUNCTION auto get() const requires(is_patch_v&lt;PatchType&gt;)
-    {
-        return std::get&lt;TypeOnPatch&lt;PatchType&gt;&gt;(base_type::m_tuple);
-    }
-
-    KOKKOS_FUNCTION discrete_domain_type idx_range() const
-    {
-        return discrete_domain_type(
-                get_idx_range(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
-    }
-
-    KOKKOS_FUNCTION span_type get_field()
-    {
-        return span_type(::get_field(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
-    }
-
-    KOKKOS_FUNCTION view_type get_const_field() const
-    {
-        return view_type(::get_const_field(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
-    }
-
-    template &lt;class QueryTag&gt;
-    inline constexpr auto get() const noexcept requires(
-            (is_vector_field_v&lt;InternalTypes&gt; &amp;&amp; ...)
-            &amp;&amp; (ddc::in_tags_v&lt;QueryTag, typename InternalTypes::NDTypeTag&gt; &amp;&amp; ...))
-    {
-        using FieldType = MultipatchField&lt;
-                PatchOrdering,
-                ddc::detail::TypeSeq&lt;typename InternalTypes::chunk_span_type...&gt;&gt;;
-        return FieldType(ddcHelper::get&lt;QueryTag&gt;(std::get&lt;InternalTypes&gt;(base_type::m_tuple))...);
-    }
-};
-
-} // namespace detail
-
-template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
-inline constexpr bool enable_multipatch_type&lt;
-        detail::MultipatchField&lt;TypeSeqPatches, TypeSeqInternalTypes&gt;&gt; = true;
-
-template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
-inline constexpr bool enable_data_access_methods&lt;
-        detail::MultipatchField&lt;TypeSeqPatches, TypeSeqInternalTypes&gt;&gt; = true;
-
-template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
-inline constexpr bool enable_multipatch_field&lt;
-        detail::MultipatchField&lt;TypeSeqPatches, TypeSeqInternalTypes&gt;&gt; = true;
-
-template &lt;template &lt;typename P&gt; typename T, class... Patches&gt;
-using MultipatchField = detail::
-        MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
-
-template &lt;class... VectorFieldType, class PatchTypeSeq&gt;
-inline constexpr bool enable_vector_field&lt;detail::MultipatchField&lt;
-        PatchTypeSeq,
-        ddc::detail::TypeSeq&lt;VectorFieldType...&gt;&gt;&gt; = (is_vector_field_v&lt;VectorFieldType&gt; &amp;&amp; ...);
-
-namespace ddcHelper {
-
-template &lt;class... Patches, class TypeSeqInternalTypes1, class TypeSeqInternalTypes2&gt;
-void deepcopy(
-        detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes1&gt; dst,
-        detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes2&gt; src)
-{
-    using DstType
-            = detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes1&gt;;
-    if constexpr (ddc::is_chunk_v&lt;typename DstType::example_element&gt;) {
-        (ddc::parallel_deepcopy(dst.template get&lt;Patches&gt;(), src.template get&lt;Patches&gt;()), ...);
-    } else {
-        (ddcHelper::deepcopy(dst.template get&lt;Patches&gt;(), src.template get&lt;Patches&gt;()), ...);
-    }
-}
-
-} // namespace ddcHelper
-</code></pre></div>
+                <div><h1 id="struct-is_patch-patch-grid1-grid2-bsplinesdim1-bsplinesdim2">Struct is_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;</h1>
+<p><strong>template &lt;class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4.html"><strong>is_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;</strong></a></p>
+<p>Inherits the following classes: std::true_type</p>
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp</code></p></div>
               
             </div>
           </div><footer>

@@ -318,6 +318,8 @@
 * [**is\_non\_uniform\_lagrange\_basis**](structis__non__uniform__lagrange__basis.md)
 * [**is\_onion\_patch\_locator**](structis__onion__patch__locator.md)
 * [**is\_onion\_patch\_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;**](structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.md)
+* [**is\_patch**](structis__patch.md)
+* [**is\_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;**](structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4.md)
 * [**is\_uniform\_lagrange\_basis**](structis__uniform__lagrange__basis.md)
 * [**is\_vector\_index\_set**](structtensor__tools_1_1is__vector__index__set.md)
 ([**tensor\_tools**](namespacetensor__tools.md))

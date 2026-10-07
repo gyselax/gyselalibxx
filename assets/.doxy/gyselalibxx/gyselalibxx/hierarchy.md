@@ -361,10 +361,12 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** **std::false_type**    
     * **struct** [**ddcHelper::is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md) 
     * **struct** [**is\_onion\_patch\_locator**](structis__onion__patch__locator.md) _Struct to identify if the patch locator is adapted to onion geometry._ 
+    * **struct** [**is\_patch**](structis__patch.md) 
     * **struct** [**tensor\_tools::is\_vector\_index\_set**](structtensor__tools_1_1is__vector__index__set.md) _A helper structure to recognise a VectorIndexSet type._ 
 * **class** **std::true_type**    
     * **struct** [**ddcHelper::is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md) 
     * **struct** [**is\_onion\_patch\_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;**](structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.md) 
+    * **struct** [**is\_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;**](structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4.md) 
     * **struct** [**tensor\_tools::is\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) 
 * **class** **std::is_base_of::type**    
     * **struct** [**is\_non\_uniform\_lagrange\_basis**](structis__non__uniform__lagrange__basis.md) 

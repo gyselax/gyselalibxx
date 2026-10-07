@@ -11,6 +11,7 @@
 
 
 * `#include "multipatch_type.hpp"`
+* `#include "patch.hpp"`
 
 
 

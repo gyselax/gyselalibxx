@@ -42,28 +42,28 @@
         <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="85">
+      <node id="86">
         <label>polar_foot_finder.hpp</label>
         <link refid="polar__foot__finder_8hpp_source"/>
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
-        </childnode>
         <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
-        <childnode refid="91" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
         <childnode refid="50" relation="include">
         </childnode>
@@ -74,11 +74,11 @@
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="87">
         <label>polar_foot_finders/elementwise_choice.hpp</label>
         <link refid="elementwise__choice_8hpp_source"/>
       </node>
-      <node id="87">
+      <node id="88">
         <label>polar_foot_finders/logical_advection_logical_foot_finder.hpp</label>
         <link refid="logical__advection__logical__foot__finder_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -89,7 +89,7 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
@@ -98,18 +98,18 @@
         <childnode refid="38" relation="include">
         </childnode>
       </node>
-      <node id="88">
+      <node id="89">
         <label>polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp</label>
         <link refid="logical__advection__pseudo__physical__foot__finder_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
@@ -120,7 +120,7 @@
         <childnode refid="38" relation="include">
         </childnode>
       </node>
-      <node id="91">
+      <node id="92">
         <label>polar_foot_finders/physical_advection_physical_foot_finder.hpp</label>
         <link refid="physical__advection__physical__foot__finder_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -136,18 +136,18 @@
         <childnode refid="38" relation="include">
         </childnode>
       </node>
-      <node id="92">
+      <node id="93">
         <label>polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp</label>
         <link refid="physical__advection__pseudo__physical__foot__finder_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="93" relation="include">
+        <childnode refid="94" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
@@ -157,7 +157,7 @@
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
       <node id="23">
@@ -170,7 +170,7 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="95">
+      <node id="96">
         <label>cartesian_to_circular.hpp</label>
         <link refid="cartesian__to__circular_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -184,7 +184,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="89">
+      <node id="90">
         <label>circular_to_cartesian.hpp</label>
         <link refid="circular__to__cartesian_8hpp_source"/>
         <childnode refid="17" relation="include">
@@ -202,12 +202,12 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="93">
+      <node id="94">
         <label>combined_mapping.hpp</label>
         <link refid="combined__mapping_8hpp_source"/>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
@@ -232,7 +232,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="96">
+      <node id="97">
         <label>czarny_to_cartesian.hpp</label>
         <link refid="czarny__to__cartesian_8hpp_source"/>
         <childnode refid="18" relation="include">
@@ -268,7 +268,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="90">
+      <node id="91">
         <label>geometry_pseudo_cartesian.hpp</label>
         <link refid="geometry__pseudo__cartesian_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -276,16 +276,16 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="94">
+      <node id="95">
         <label>inv_jacobian_o_point.hpp</label>
         <link refid="inv__jacobian__o__point_8hpp_source"/>
-        <childnode refid="95" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
@@ -326,7 +326,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="97">
+      <node id="98">
         <label>vector_mapper.hpp</label>
         <link refid="vector__mapper_8hpp_source"/>
         <childnode refid="44" relation="include">
@@ -609,18 +609,18 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="59" relation="include">
         </childnode>
         <childnode refid="46" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="85">
         <label>itimesolver.hpp</label>
         <link refid="geometryRTheta_2time__solver_2itimesolver_8hpp_source"/>
         <childnode refid="15" relation="include">
@@ -834,13 +834,23 @@
         <childnode refid="33" relation="include">
         </childnode>
       </node>
+      <node id="83">
+        <label>patch.hpp</label>
+        <link refid="patch_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
       <node id="75">
         <label>multipatch_field.hpp</label>
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="76" relation="include">
         </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
       </node>
-      <node id="83">
+      <node id="84">
         <label>multipatch_field_mem.hpp</label>
         <link refid="multipatch__field__mem_8hpp_source"/>
         <childnode refid="75" relation="include">
@@ -1005,7 +1015,7 @@
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>

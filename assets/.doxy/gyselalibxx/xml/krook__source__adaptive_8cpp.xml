@@ -210,7 +210,7 @@
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
       </node>
       <node id="7">
@@ -229,13 +229,23 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
+      <node id="44">
+        <label>patch.hpp</label>
+        <link refid="patch_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
       <node id="28">
         <label>multipatch_field.hpp</label>
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="29" relation="include">
         </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>multipatch_field_mem.hpp</label>
         <link refid="multipatch__field__mem_8hpp_source"/>
         <childnode refid="28" relation="include">
@@ -289,7 +299,7 @@
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="5" relation="include">
@@ -297,14 +307,14 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>trapezoid_quadrature.hpp</label>
         <link refid="trapezoid__quadrature_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
       <node id="17">
@@ -336,7 +346,7 @@
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
