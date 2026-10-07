@@ -591,7 +591,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; Dim... &gt; const &amp; coord_extrap, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; SplinesOnPatch, Patches... &gt; const &amp; patches_splines, int const out_of_bounds_idx) const<br><em>Evaluate at a given outside coordinate.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; Dim... &gt; const &amp; coord_extrap, detail::MultipatchField&lt; TypeSeqPatches, TypeSeqInternalTypes &gt; const &amp; patches_splines, int const out_of_bounds_idx) const<br><em>Evaluate at a given outside coordinate.</em></td>
 </tr>
 </tbody>
 </table>
@@ -622,23 +622,23 @@
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Evaluate at a given outside coordinate.</em> </p>
-<pre><code class="language-C++">template&lt;class... Dim, template&lt; typename P &gt; typename SplinesOnPatch, class... Patches&gt;
+<pre><code class="language-C++">template&lt;class... Dim, class TypeSeqPatches, class TypeSeqInternalTypes&gt;
 inline KOKKOS_FUNCTION double ConstantExtrapolationRuleOnion::operator() (
     Coord&lt; Dim... &gt; const &amp; coord_extrap,
-    MultipatchField &lt; SplinesOnPatch, Patches... &gt; const &amp; patches_splines,
+    detail::MultipatchField&lt; TypeSeqPatches, TypeSeqInternalTypes &gt; const &amp; patches_splines,
     int const out_of_bounds_idx
 ) const
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>Dim</code> Continuous dimensions where the given coordinate is defined. </li>
-<li><code>SplinesOnPatch</code> Field of spline coefficients template on the <a href="structPatch.html"><strong>Patch</strong></a>. </li>
-<li><code>Patches</code> <a href="structPatch.html"><strong>Patch</strong></a> types. </li>
+<li><code>TypeSeqPatches</code> A TypeSeq of the patch types. </li>
+<li><code>TypeSeqInternalTypes</code> A TypeSeq of the types of the fields of spline coefficients on each patch. </li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord_extrap</code> Coordinate where we want to evaluate. </li>
-<li><code>patches_splines</code> Splines stored in a <a href="classMultipatchType.html"><strong>MultipatchType</strong></a>. </li>
+<li><code>patches_splines</code> Splines stored in a MultipatchType. </li>
 <li><code>out_of_bounds_idx</code> Index of the localisation of the coordinate. It is supposed to be negative to be considered as outside of the domain. </li>
 </ul>
 <p><strong>Returns:</strong></p>

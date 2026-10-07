@@ -52,7 +52,7 @@ _Define null extrapolation rule common to all geometries._ [More...](#detailed-d
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION double | [**operator()**](#function-operator) (Coord&lt; Dim... &gt; const & coord\_extrap, [**MultipatchType**](classMultipatchType.md)&lt; SplinesOnPatch, Patches... &gt; const & patches\_splines, int const out\_of\_bounds\_idx) const<br>_Evaluate to zero the splines at a given coordinate outside of the splines domain._  |
+|  KOKKOS\_FUNCTION double | [**operator()**](#function-operator) (Coord&lt; Dim... &gt; const & coord\_extrap, detail::MultipatchType&lt; TypeSeqPatches, TypeSeqInternalTypes &gt; const & patches\_splines, int const out\_of\_bounds\_idx) const<br>_Evaluate to zero the splines at a given coordinate outside of the splines domain._  |
 
 
 
@@ -100,10 +100,10 @@ _Define null extrapolation rule common to all geometries._ [More...](#detailed-d
 
 _Evaluate to zero the splines at a given coordinate outside of the splines domain._ 
 ```C++
-template<class... Dim, template< typename P > typename SplinesOnPatch, class... Patches>
+template<class... Dim, class TypeSeqPatches, class TypeSeqInternalTypes>
 inline KOKKOS_FUNCTION double NullExtrapolationRule::operator() (
     Coord< Dim... > const & coord_extrap,
-    MultipatchType < SplinesOnPatch, Patches... > const & patches_splines,
+    detail::MultipatchType< TypeSeqPatches, TypeSeqInternalTypes > const & patches_splines,
     int const out_of_bounds_idx
 ) const
 ```
@@ -116,7 +116,7 @@ inline KOKKOS_FUNCTION double NullExtrapolationRule::operator() (
 
 
 * `coord_extrap` Coordinate where we want to evaluate. 
-* `patches_splines` Splines stored in a [**MultipatchType**](classMultipatchType.md). 
+* `patches_splines` Splines stored in a MultipatchType. 
 * `out_of_bounds_idx` Index of the localisation of the coordinate. It is supposed to be negative to be considered as outside of the domain. 
 
 

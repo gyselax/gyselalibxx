@@ -65,13 +65,13 @@
     </sectiondef>
     <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a23f026d06831aa14723f6b02051f9bda" prot="public" static="no">
-        <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; IdxRangeOnPatch, Patches... &gt;</type>
+        <type>MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;</type>
         <definition>using OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;::MultipatchIdxRanges =  MultipatchType&lt;IdxRangeOnPatch, Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchIdxRanges</name>
         <qualifiedname>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;::MultipatchIdxRanges</qualifiedname>
         <briefdescription>
-<para><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> storing the index range. </para>
+<para>MultipatchType storing the index range. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -282,16 +282,16 @@
           <declname>to_logical_mapping</declname>
         </param>
         <briefdescription>
-<para>Instantiante the operator with <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of index ranges and a mapping on all the patches. </para>
+<para>Instantiante the operator with MultipatchType of index ranges and a mapping on all the patches. </para>
         </briefdescription>
         <detaileddescription>
-<para>The order of the elements in the tuple or the <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> doesn&apos;t matter.</para>
+<para>The order of the elements in the tuple or the MultipatchType doesn&apos;t matter.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>all_idx_ranges</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of index ranges defined on the logical domain of each patch. </para>
+<para>A MultipatchType of index ranges defined on the logical domain of each patch. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

@@ -480,7 +480,7 @@
         <name>SplineCoeffOnPatch</name>
         <qualifiedname>MultipatchSplineEvaluator2D::SplineCoeffOnPatch</qualifiedname>
         <briefdescription>
-<para>Type for <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>: A field of 2D spline coefficients for a non-batched spline defined on both of the <ref refid="structPatch" kindref="compound">Patch</ref>&apos;s logical dimensions. Needed public for functions on GPU. </para>
+<para>Type for MultipatchType: A field of 2D spline coefficients for a non-batched spline defined on both of the <ref refid="structPatch" kindref="compound">Patch</ref>&apos;s logical dimensions. Needed public for functions on GPU. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -491,7 +491,7 @@
     </sectiondef>
     <sectiondef kind="private-type">
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aa1616be1c2d379ec0b6891ae626055ac" prot="private" static="no">
-        <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; ValuesOnPatch, Patches... &gt;</type>
+        <type>MultipatchField&lt; ValuesOnPatch, Patches... &gt;</type>
         <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::MultipatchValues =  MultipatchField&lt;ValuesOnPatch, Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchValues</name>
@@ -505,7 +505,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="160" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a629a9720acf4c00fd4c5155e91fa7d5e" prot="private" static="no">
-        <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; CoordConstFieldOnPatch, Patches... &gt;</type>
+        <type>MultipatchField&lt; CoordConstFieldOnPatch, Patches... &gt;</type>
         <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::MultipatchCoordField =  MultipatchField&lt;CoordConstFieldOnPatch, Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchCoordField</name>
@@ -519,7 +519,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="161" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="161" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1ac4050ed8eb94c466aeb1121030d5a831" prot="private" static="no">
-        <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; <ref refid="classMultipatchSplineEvaluator2D_1aad2106e82884ea55e8fa063b0d425e0b" kindref="member">SplineCoeffOnPatch</ref>, Patches... &gt;</type>
+        <type>MultipatchField&lt; <ref refid="classMultipatchSplineEvaluator2D_1aad2106e82884ea55e8fa063b0d425e0b" kindref="member">SplineCoeffOnPatch</ref>, Patches... &gt;</type>
         <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::MultipatchSplineCoeff =  MultipatchField&lt;SplineCoeffOnPatch, Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchSplineCoeff</name>
@@ -765,7 +765,7 @@
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchSplineCoeff</ref> const &amp;</type>
+          <type>MultipatchSplineCoeff const &amp;</type>
           <declname>patches_splines</declname>
         </param>
         <briefdescription>
@@ -795,7 +795,7 @@
 <parametername direction="in">patches_splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of DField storing the 2D spline coefficients. </para>
+<para>A MultipatchType of DField storing the 2D spline coefficients. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -814,15 +814,15 @@
         <name>operator()</name>
         <qualifiedname>MultipatchSplineEvaluator2D::operator()</qualifiedname>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchValues</ref> const &amp;</type>
+          <type>MultipatchValues const &amp;</type>
           <declname>patches_values</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchCoordField</ref> const &amp;</type>
+          <type>MultipatchCoordField const &amp;</type>
           <declname>patches_coords</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchSplineCoeff</ref> const &amp;</type>
+          <type>MultipatchSplineCoeff const &amp;</type>
           <declname>patches_splines</declname>
         </param>
         <briefdescription>
@@ -835,7 +835,7 @@
 <parametername direction="out">patches_values</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of DField to store the values of the splines at the given coordinates. </para>
+<para>A MultipatchType of DField to store the values of the splines at the given coordinates. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -843,7 +843,7 @@
 <parametername direction="in">patches_coords</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of Field of Coordinate storing the coordinates of the meshes. </para>
+<para>A MultipatchType of Field of Coordinate storing the coordinates of the meshes. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -851,7 +851,7 @@
 <parametername direction="in">patches_splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of DField storing the 2D spline coefficients. </para>
+<para>A MultipatchType of DField storing the 2D spline coefficients. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -883,7 +883,7 @@
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchSplineCoeff</ref> const &amp;</type>
+          <type>MultipatchSplineCoeff const &amp;</type>
           <declname>patches_splines</declname>
         </param>
         <briefdescription>
@@ -923,7 +923,7 @@
 <parametername direction="in">patches_splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of DField storing the 2D spline coefficients.</para>
+<para>A MultipatchType of DField storing the 2D spline coefficients.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -953,15 +953,15 @@
           <declname>deriv_order</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchValues</ref> const &amp;</type>
+          <type>MultipatchValues const &amp;</type>
           <declname>patches_deriv</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchCoordField</ref> const &amp;</type>
+          <type>MultipatchCoordField const &amp;</type>
           <declname>patches_coords</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchSplineCoeff</ref> const &amp;</type>
+          <type>MultipatchSplineCoeff const &amp;</type>
           <declname>patches_splines</declname>
         </param>
         <briefdescription>
@@ -993,7 +993,7 @@
 <parametername direction="out">patches_deriv</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of DField to store the derivatives of the splines at the given coordinates. </para>
+<para>A MultipatchType of DField to store the derivatives of the splines at the given coordinates. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1001,7 +1001,7 @@
 <parametername direction="in">patches_coords</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of Field of Coordinate storing the coordinates of the meshes. </para>
+<para>A MultipatchType of Field of Coordinate storing the coordinates of the meshes. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1009,7 +1009,7 @@
 <parametername direction="in">patches_splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of DField storing the 2D spline coefficients. </para>
+<para>A MultipatchType of DField storing the 2D spline coefficients. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1030,7 +1030,7 @@
           <declname>integrals</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchSplineCoeff</ref> const &amp;</type>
+          <type>MultipatchSplineCoeff const &amp;</type>
           <declname>patches_splines</declname>
         </param>
         <briefdescription>
@@ -1051,7 +1051,7 @@
 <parametername direction="in">patches_splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of DField storing the 2D spline coefficients. </para>
+<para>A MultipatchType of DField storing the 2D spline coefficients. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1088,7 +1088,7 @@
           <declname>patch_coords</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchSplineCoeff</ref> const</type>
+          <type>MultipatchSplineCoeff const</type>
           <declname>patches_splines</declname>
         </param>
         <briefdescription>
@@ -1141,7 +1141,7 @@
 <parametername direction="in">patches_splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> of spline coefficients of the splines on every patches. </para>
+<para>MultipatchType of spline coefficients of the splines on every patches. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1234,7 +1234,7 @@
           <declname>coord</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchSplineCoeff</ref> const &amp;</type>
+          <type>MultipatchSplineCoeff const &amp;</type>
           <declname>patches_splines</declname>
         </param>
         <param>

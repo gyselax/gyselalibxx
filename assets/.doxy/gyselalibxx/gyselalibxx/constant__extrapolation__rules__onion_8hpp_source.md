@@ -52,21 +52,22 @@ public:
     {
     }
 
-    template <class... Dim, template <typename P> typename SplinesOnPatch, class... Patches>
+    template <class... Dim, class TypeSeqPatches, class TypeSeqInternalTypes>
     KOKKOS_FUNCTION double operator()(
             Coord<Dim...> const& coord_extrap,
-            MultipatchField<SplinesOnPatch, Patches...> const& patches_splines,
+            detail::MultipatchField<TypeSeqPatches, TypeSeqInternalTypes> const& patches_splines,
             int const out_of_bounds_idx) const
     {
+        using MultipatchSplines = detail::MultipatchField<TypeSeqPatches, TypeSeqInternalTypes>;
         assert((out_of_bounds_idx == PatchLocator::outside_rmin_domain)
                || (out_of_bounds_idx == PatchLocator::outside_rmax_domain));
 
         if (out_of_bounds_idx == PatchLocator::outside_rmin_domain) {
-            SplinesOnPatch<MinRadiusPatch> const min_spline
+            typename MultipatchSplines::template TypeOnPatch<MinRadiusPatch> const min_spline
                     = patches_splines.template get<MinRadiusPatch>();
             return bc_r_min(coord_extrap, min_spline);
         } else {
-            SplinesOnPatch<MaxRadiusPatch> const max_spline
+            typename MultipatchSplines::template TypeOnPatch<MaxRadiusPatch> const max_spline
                     = patches_splines.template get<MaxRadiusPatch>();
             return bc_r_max(coord_extrap, max_spline);
         }

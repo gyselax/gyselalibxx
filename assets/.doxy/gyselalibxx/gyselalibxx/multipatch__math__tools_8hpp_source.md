@@ -13,10 +13,14 @@
 #include "l_norm_tools.hpp"
 #include "multipatch_field.hpp"
 
-template <class ExecSpace, template <typename P> typename T, class... Patches>
-double norm_inf(ExecSpace exec_space, MultipatchField<T, Patches...> multipatch_function)
+template <class ExecSpace, class... Patches, class TypeSeqInternalTypes>
+double norm_inf(
+        ExecSpace exec_space,
+        detail::MultipatchField<ddc::detail::TypeSeq<Patches...>, TypeSeqInternalTypes>
+                multipatch_function)
 {
-    using FuncType = MultipatchField<T, Patches...>;
+    using FuncType
+            = detail::MultipatchField<ddc::detail::TypeSeq<Patches...>, TypeSeqInternalTypes>;
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
     constexpr std::size_t NPatches = multipatch_function.size();
@@ -29,13 +33,16 @@ double norm_inf(ExecSpace exec_space, MultipatchField<T, Patches...> multipatch_
     return result;
 }
 
-template <class ExecSpace, template <typename P> typename T, class... Patches>
+template <class ExecSpace, class... Patches, class TypeSeqInternalTypes>
 double error_norm_inf(
         ExecSpace exec_space,
-        MultipatchField<T, Patches...> multipatch_function,
-        MultipatchField<T, Patches...> multipatch_exact_function)
+        detail::MultipatchField<ddc::detail::TypeSeq<Patches...>, TypeSeqInternalTypes>
+                multipatch_function,
+        detail::MultipatchField<ddc::detail::TypeSeq<Patches...>, TypeSeqInternalTypes>
+                multipatch_exact_function)
 {
-    using FuncType = MultipatchField<T, Patches...>;
+    using FuncType
+            = detail::MultipatchField<ddc::detail::TypeSeq<Patches...>, TypeSeqInternalTypes>;
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
     constexpr std::size_t NPatches = multipatch_function.size();

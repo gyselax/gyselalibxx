@@ -665,7 +665,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>A class which provides an implementation of a Crank-Nicolson method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. This specialisation handles Field-like objects (Field, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>). The values which evolve are defined on an index range.</p>
+<p>A class which provides an implementation of a Crank-Nicolson method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. This specialisation handles Field-like objects (Field, <a href="classVectorField.html"><strong>VectorField</strong></a>, MultipatchField). The values which evolve are defined on an index range.</p>
 <p>For the following ODE : <span class="arithmatex">\(\partial_t y(t) = f(t, y(t))\)</span>,</p>
 <p>the Crank-Nicolson method is given by : <span class="arithmatex">\(y^{k} =  y^{n} + \frac{dt}{2} \left(f(t^{n}, y^{n}) + f(t^{k}, y^{k}) \right)\)</span>.</p>
 <p>The method is an implicit method. If <span class="arithmatex">\(|y^{k+1} -  y^{k}| &lt; \varepsilon\)</span>, then we set <span class="arithmatex">\(y^{n+1} = y^{k+1}\)</span>.</p>

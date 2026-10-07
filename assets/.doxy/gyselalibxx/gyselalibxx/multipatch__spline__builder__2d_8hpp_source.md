@@ -158,9 +158,9 @@ class MultipatchSplineBuilder2D
     BuilderTuple const m_builders;
 
 private:
-    template <class Patch, template <typename P> typename DerivTypeOnPatch>
-    std::optional<DerivTypeOnPatch<Patch>> get_deriv_value(
-            std::optional<MultipatchField<DerivTypeOnPatch, Patches...>> derivs) const
+    template <class Patch, class MultipatchDerivs>
+    std::optional<typename MultipatchDerivs::template TypeOnPatch<Patch>> get_deriv_value(
+            std::optional<MultipatchDerivs> derivs) const
     {
         if (derivs.has_value()) {
             return derivs->template get<Patch>();
@@ -191,14 +191,14 @@ public:
         ((std::get<BuilderOnPatch<Patches> const&>(m_builders)(
                  splines.template get<Patches>(),
                  get_const_field(values.template get<Patches>()),
-                 get_deriv_value<Patches, Derivs1OnPatch>(derivs_min1),
-                 get_deriv_value<Patches, Derivs1OnPatch>(derivs_max1),
-                 get_deriv_value<Patches, Derivs2OnPatch>(derivs_min2),
-                 get_deriv_value<Patches, Derivs2OnPatch>(derivs_max2),
-                 get_deriv_value<Patches, Derivs12OnPatch>(mixed_derivs_min1_min2),
-                 get_deriv_value<Patches, Derivs12OnPatch>(mixed_derivs_max1_min2),
-                 get_deriv_value<Patches, Derivs12OnPatch>(mixed_derivs_min1_max2),
-                 get_deriv_value<Patches, Derivs12OnPatch>(mixed_derivs_max1_max2))),
+                 get_deriv_value<Patches>(derivs_min1),
+                 get_deriv_value<Patches>(derivs_max1),
+                 get_deriv_value<Patches>(derivs_min2),
+                 get_deriv_value<Patches>(derivs_max2),
+                 get_deriv_value<Patches>(mixed_derivs_min1_min2),
+                 get_deriv_value<Patches>(mixed_derivs_max1_min2),
+                 get_deriv_value<Patches>(mixed_derivs_min1_max2),
+                 get_deriv_value<Patches>(mixed_derivs_max1_max2))),
          ...);
     };
 };

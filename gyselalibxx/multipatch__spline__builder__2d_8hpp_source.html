@@ -722,9 +722,9 @@ class MultipatchSplineBuilder2D
     BuilderTuple const m_builders;
 
 private:
-    template &lt;class Patch, template &lt;typename P&gt; typename DerivTypeOnPatch&gt;
-    std::optional&lt;DerivTypeOnPatch&lt;Patch&gt;&gt; get_deriv_value(
-            std::optional&lt;MultipatchField&lt;DerivTypeOnPatch, Patches...&gt;&gt; derivs) const
+    template &lt;class Patch, class MultipatchDerivs&gt;
+    std::optional&lt;typename MultipatchDerivs::template TypeOnPatch&lt;Patch&gt;&gt; get_deriv_value(
+            std::optional&lt;MultipatchDerivs&gt; derivs) const
     {
         if (derivs.has_value()) {
             return derivs-&gt;template get&lt;Patch&gt;();
@@ -755,14 +755,14 @@ public:
         ((std::get&lt;BuilderOnPatch&lt;Patches&gt; const&amp;&gt;(m_builders)(
                  splines.template get&lt;Patches&gt;(),
                  get_const_field(values.template get&lt;Patches&gt;()),
-                 get_deriv_value&lt;Patches, Derivs1OnPatch&gt;(derivs_min1),
-                 get_deriv_value&lt;Patches, Derivs1OnPatch&gt;(derivs_max1),
-                 get_deriv_value&lt;Patches, Derivs2OnPatch&gt;(derivs_min2),
-                 get_deriv_value&lt;Patches, Derivs2OnPatch&gt;(derivs_max2),
-                 get_deriv_value&lt;Patches, Derivs12OnPatch&gt;(mixed_derivs_min1_min2),
-                 get_deriv_value&lt;Patches, Derivs12OnPatch&gt;(mixed_derivs_max1_min2),
-                 get_deriv_value&lt;Patches, Derivs12OnPatch&gt;(mixed_derivs_min1_max2),
-                 get_deriv_value&lt;Patches, Derivs12OnPatch&gt;(mixed_derivs_max1_max2))),
+                 get_deriv_value&lt;Patches&gt;(derivs_min1),
+                 get_deriv_value&lt;Patches&gt;(derivs_max1),
+                 get_deriv_value&lt;Patches&gt;(derivs_min2),
+                 get_deriv_value&lt;Patches&gt;(derivs_max2),
+                 get_deriv_value&lt;Patches&gt;(mixed_derivs_min1_min2),
+                 get_deriv_value&lt;Patches&gt;(mixed_derivs_max1_min2),
+                 get_deriv_value&lt;Patches&gt;(mixed_derivs_min1_max2),
+                 get_deriv_value&lt;Patches&gt;(mixed_derivs_max1_max2))),
          ...);
     };
 };

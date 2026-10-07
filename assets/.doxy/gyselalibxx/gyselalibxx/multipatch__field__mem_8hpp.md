@@ -27,13 +27,13 @@
 
 
 
-## Classes
+
+
+## Public Types
 
 | Type | Name |
 | ---: | :--- |
-| class | [**MultipatchFieldMem**](classMultipatchFieldMem.md) &lt;T, Patches&gt;<br>_A class to store field memory block objects on patches._  |
-
-
+| typedef detail::MultipatchFieldMem&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchFieldMem**](#typedef-multipatchfieldmem)  <br>_A class to store field memory block objects on patches._  |
 
 
 
@@ -42,11 +42,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_data\_access\_methods&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;**](#variable-enable_data_access_methods-multipatchfieldmem-t-patches)   = `true`<br> |
-|  constexpr bool | [**enable\_mem\_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;**](#variable-enable_mem_type-multipatchfieldmem-t-patches)   = `true`<br> |
 |  constexpr bool | [**enable\_multipatch\_field\_mem**](#variable-enable_multipatch_field_mem)   = `false`<br> |
-|  constexpr bool | [**enable\_multipatch\_field\_mem&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;**](#variable-enable_multipatch_field_mem-multipatchfieldmem-t-patches)   = `true`<br> |
-|  constexpr bool | [**enable\_multipatch\_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;**](#variable-enable_multipatch_type-multipatchfieldmem-t-patches)   = `true`<br> |
 |  constexpr bool | [**is\_multipatch\_field\_mem\_v**](#variable-is_multipatch_field_mem_v)   = `enable\_multipatch\_field\_mem&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
@@ -92,34 +88,39 @@
 
 
 
+## Public Types Documentation
+
+
+
+
+### typedef MultipatchFieldMem 
+
+_A class to store field memory block objects on patches._ 
+```C++
+using MultipatchFieldMem =  detail:: MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...> >;
+```
+
+
+
+See detail::MultipatchFieldMem for more details. This alias creates the type T&lt;Patch&gt; for each of the patches. Two type templates which return the same type for each patch therefore lead to the same MultipatchFieldMem.
+
+
+
+
+**Template parameters:**
+
+
+* `T` The type of the FieldMem/DerivMem/VectorFieldMem that are stored on the given patches. 
+* `Patches` The patches of the objects in the same order of the patches that the given objects are defined on. 
+
+
+
+
+        
+
+<hr>
 ## Public Attributes Documentation
 
-
-
-
-### variable enable\_data\_access\_methods&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt; 
-
-```C++
-constexpr bool enable_data_access_methods< MultipatchFieldMem< T, Patches... > >;
-```
-
-
-
-
-<hr>
-
-
-
-### variable enable\_mem\_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt; 
-
-```C++
-constexpr bool enable_mem_type< MultipatchFieldMem< T, Patches... > >;
-```
-
-
-
-
-<hr>
 
 
 
@@ -127,32 +128,6 @@ constexpr bool enable_mem_type< MultipatchFieldMem< T, Patches... > >;
 
 ```C++
 constexpr bool enable_multipatch_field_mem;
-```
-
-
-
-
-<hr>
-
-
-
-### variable enable\_multipatch\_field\_mem&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt; 
-
-```C++
-constexpr bool enable_multipatch_field_mem< MultipatchFieldMem< T, Patches... > >;
-```
-
-
-
-
-<hr>
-
-
-
-### variable enable\_multipatch\_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt; 
-
-```C++
-constexpr bool enable_multipatch_type< MultipatchFieldMem< T, Patches... > >;
 ```
 
 

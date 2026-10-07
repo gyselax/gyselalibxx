@@ -577,10 +577,14 @@
 #include "l_norm_tools.hpp"
 #include "multipatch_field.hpp"
 
-template &lt;class ExecSpace, template &lt;typename P&gt; typename T, class... Patches&gt;
-double norm_inf(ExecSpace exec_space, MultipatchField&lt;T, Patches...&gt; multipatch_function)
+template &lt;class ExecSpace, class... Patches, class TypeSeqInternalTypes&gt;
+double norm_inf(
+        ExecSpace exec_space,
+        detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;
+                multipatch_function)
 {
-    using FuncType = MultipatchField&lt;T, Patches...&gt;;
+    using FuncType
+            = detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;;
     static_assert(
             Kokkos::SpaceAccessibility&lt;ExecSpace, typename FuncType::memory_space&gt;::accessible);
     constexpr std::size_t NPatches = multipatch_function.size();
@@ -593,13 +597,16 @@ double norm_inf(ExecSpace exec_space, MultipatchField&lt;T, Patches...&gt; multi
     return result;
 }
 
-template &lt;class ExecSpace, template &lt;typename P&gt; typename T, class... Patches&gt;
+template &lt;class ExecSpace, class... Patches, class TypeSeqInternalTypes&gt;
 double error_norm_inf(
         ExecSpace exec_space,
-        MultipatchField&lt;T, Patches...&gt; multipatch_function,
-        MultipatchField&lt;T, Patches...&gt; multipatch_exact_function)
+        detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;
+                multipatch_function,
+        detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;
+                multipatch_exact_function)
 {
-    using FuncType = MultipatchField&lt;T, Patches...&gt;;
+    using FuncType
+            = detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;;
     static_assert(
             Kokkos::SpaceAccessibility&lt;ExecSpace, typename FuncType::memory_space&gt;::accessible);
     constexpr std::size_t NPatches = multipatch_function.size();

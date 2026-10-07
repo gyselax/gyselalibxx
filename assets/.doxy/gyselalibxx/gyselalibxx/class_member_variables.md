@@ -242,7 +242,6 @@
 * **m\_transpose** ([**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md))
 * **m\_builders** ([**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md), [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **m\_patch\_locator** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
-* **m\_tuple** ([**MultipatchType**](classMultipatchType.md))
 * **m\_head\_evaluator** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
 * **m\_tail\_evaluator** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
 * **m\_fequilibrium** ([**NoPerturbInitialisation**](classNoPerturbInitialisation.md), [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))

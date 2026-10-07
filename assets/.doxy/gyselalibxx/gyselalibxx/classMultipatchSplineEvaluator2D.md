@@ -34,7 +34,7 @@ _A class to evaluate all the splines of all the patches at once._ [More...](#det
 
 | Type | Name |
 | ---: | :--- |
-| typedef DConstField&lt; [**spline\_idx\_range\_type**](classMultipatchSplineEvaluator2D.md#typedef-spline_idx_range_type)&lt; [**Patch**](structPatch.md) &gt;, MemorySpace &gt; | [**SplineCoeffOnPatch**](#typedef-splinecoeffonpatch)  <br>_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A field of 2D spline coefficients for a non-batched spline defined on both of the_[_**Patch**_](structPatch.md) _'s logical dimensions. Needed public for functions on GPU._ |
+| typedef DConstField&lt; [**spline\_idx\_range\_type**](classMultipatchSplineEvaluator2D.md#typedef-spline_idx_range_type)&lt; [**Patch**](structPatch.md) &gt;, MemorySpace &gt; | [**SplineCoeffOnPatch**](#typedef-splinecoeffonpatch)  <br>_Type for MultipatchType: A field of 2D spline coefficients for a non-batched spline defined on both of the_ [_**Patch**_](structPatch.md) _'s logical dimensions. Needed public for functions on GPU._ |
 | typedef typename ValuesOnPatch&lt; [**Patch**](structPatch.md) &gt;::discrete\_domain\_type | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_The type of the whole domain representing evaluation points._  |
 | typedef BSpline1OnPatch&lt; [**Patch**](structPatch.md) &gt; | [**bsplines\_type1**](#typedef-bsplines_type1)  <br>_The discrete dimension representing the B-splines along first dimension._  |
 | typedef BSpline2OnPatch&lt; [**Patch**](structPatch.md) &gt; | [**bsplines\_type2**](#typedef-bsplines_type2)  <br>_The discrete dimension representing the B-splines along second dimension._  |
@@ -80,13 +80,13 @@ _A class to evaluate all the splines of all the patches at once._ [More...](#det
 | Type | Name |
 | ---: | :--- |
 |   | [**MultipatchSplineEvaluator2D**](#function-multipatchsplineevaluator2d) (PatchLocator const & patch\_locator, ExtrapolationRule const & extrapolation\_rule) <br>_Instantiate a_ [_**MultipatchSplineEvaluator2D**_](classMultipatchSplineEvaluator2D.md) _._ |
-|  void | [**apply\_evaluator**](#function-apply_evaluator) (IdxDeriv const & deriv\_order, ValuesOnPatch&lt; StoringPatch &gt; const & patch\_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const & patch\_coords, [**MultipatchSplineCoeff**](classMultipatchField.md) const patches\_splines) const<br>_Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Needed public for functions on GPU._  |
+|  void | [**apply\_evaluator**](#function-apply_evaluator) (IdxDeriv const & deriv\_order, ValuesOnPatch&lt; StoringPatch &gt; const & patch\_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const & patch\_coords, MultipatchSplineCoeff const patches\_splines) const<br>_Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Needed public for functions on GPU._  |
 |  void | [**apply\_integrate**](#function-apply_integrate) (double & integral, [**SplineCoeffOnPatch**](classMultipatchSplineEvaluator2D.md#typedef-splinecoeffonpatch)&lt; [**Patch**](structPatch.md) &gt; const & spline\_coef) const<br>_Integrate the spline defined on the given patch._  |
-|  KOKKOS\_FUNCTION double | [**deriv**](#function-deriv-12) (Idx&lt; DerivDims... &gt; const & deriv\_order, Coord&lt; CDim1, CDim2 &gt; const & coord\_eval, [**MultipatchSplineCoeff**](classMultipatchField.md) const & patches\_splines) const<br>_Differentiate 2D splines (described by their spline coefficients) at a given coordinate along a specified dimension of interest._  |
-|  void | [**deriv**](#function-deriv-22) (Idx&lt; DerivDims... &gt; const & deriv\_order, [**MultipatchValues**](classMultipatchField.md) const & patches\_deriv, [**MultipatchCoordField**](classMultipatchField.md) const & patches\_coords, [**MultipatchSplineCoeff**](classMultipatchField.md) const & patches\_splines) const<br>_Differentiate 2D splines (described by their spline coefficients) on a meshes along first dimension of interest._  |
-|  void | [**integrate**](#function-integrate) (DKokkosView\_h&lt; [**n\_patches**](classMultipatchSplineEvaluator2D.md#variable-n_patches) &gt; const & integrals, [**MultipatchSplineCoeff**](classMultipatchField.md) const & patches\_splines) const<br>_Integration of splines (described by their spline coefficients)._  |
-|  KOKKOS\_FUNCTION double | [**operator()**](#function-operator) (Coord const coord\_eval, [**MultipatchSplineCoeff**](classMultipatchField.md) const & patches\_splines) const<br>_Evaluate the 2D splines (described by their spline coefficients) at a given coordinate._  |
-|  void | [**operator()**](#function-operator_1) ([**MultipatchValues**](classMultipatchField.md) const & patches\_values, [**MultipatchCoordField**](classMultipatchField.md) const & patches\_coords, [**MultipatchSplineCoeff**](classMultipatchField.md) const & patches\_splines) const<br>_Evaluate 2D splines (described by their spline coefficients) on meshes._  |
+|  KOKKOS\_FUNCTION double | [**deriv**](#function-deriv-12) (Idx&lt; DerivDims... &gt; const & deriv\_order, Coord&lt; CDim1, CDim2 &gt; const & coord\_eval, MultipatchSplineCoeff const & patches\_splines) const<br>_Differentiate 2D splines (described by their spline coefficients) at a given coordinate along a specified dimension of interest._  |
+|  void | [**deriv**](#function-deriv-22) (Idx&lt; DerivDims... &gt; const & deriv\_order, MultipatchValues const & patches\_deriv, MultipatchCoordField const & patches\_coords, MultipatchSplineCoeff const & patches\_splines) const<br>_Differentiate 2D splines (described by their spline coefficients) on a meshes along first dimension of interest._  |
+|  void | [**integrate**](#function-integrate) (DKokkosView\_h&lt; [**n\_patches**](classMultipatchSplineEvaluator2D.md#variable-n_patches) &gt; const & integrals, MultipatchSplineCoeff const & patches\_splines) const<br>_Integration of splines (described by their spline coefficients)._  |
+|  KOKKOS\_FUNCTION double | [**operator()**](#function-operator) (Coord const coord\_eval, MultipatchSplineCoeff const & patches\_splines) const<br>_Evaluate the 2D splines (described by their spline coefficients) at a given coordinate._  |
+|  void | [**operator()**](#function-operator_1) (MultipatchValues const & patches\_values, MultipatchCoordField const & patches\_coords, MultipatchSplineCoeff const & patches\_splines) const<br>_Evaluate 2D splines (described by their spline coefficients) on meshes._  |
 |   | [**~MultipatchSplineEvaluator2D**](#function-multipatchsplineevaluator2d) () = default<br> |
 
 
@@ -169,7 +169,7 @@ This operator only works for patches defined on the same continuous dimensions!
 
 ### typedef SplineCoeffOnPatch 
 
-_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A field of 2D spline coefficients for a non-batched spline defined on both of the_[_**Patch**_](structPatch.md) _'s logical dimensions. Needed public for functions on GPU._
+_Type for MultipatchType: A field of 2D spline coefficients for a non-batched spline defined on both of the_ [_**Patch**_](structPatch.md) _'s logical dimensions. Needed public for functions on GPU._
 ```C++
 using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::SplineCoeffOnPatch =  DConstField<spline_idx_range_type<Patch>, MemorySpace>;
 ```
@@ -612,7 +612,7 @@ inline void MultipatchSplineEvaluator2D::apply_evaluator (
 * `deriv_order` Order (k,l) of the derivatives (e.g. d\_x^k d\_y^l f). 
 * `patch_values` Field of values of the function or derivative. 
 * `patch_coords` ConstField of coordinates defined on the StoringPatch and where we want to evaluate the function or derivative. 
-* `patches_splines` [**MultipatchType**](classMultipatchType.md) of spline coefficients of the splines on every patches. 
+* `patches_splines` MultipatchType of spline coefficients of the splines on every patches. 
 
 
 
@@ -698,7 +698,7 @@ The derivative cannot be computed outside of the domain.
 
 * `deriv_order` Order (k,l) of the derivatives (e.g. d\_x^k d\_y^l f). 
 * `coord_eval` The coordinate where the spline is differentiated. 
-* `patches_splines` A [**MultipatchType**](classMultipatchType.md) of DField storing the 2D spline coefficients.
+* `patches_splines` A MultipatchType of DField storing the 2D spline coefficients.
 
 
 
@@ -754,9 +754,9 @@ The derivatives cannot be computed outside of the domain.
 
 
 * `deriv_order` Order (k,l) of the derivatives (e.g. d\_x^k d\_y^l f). 
-* `patches_deriv` A [**MultipatchType**](classMultipatchType.md) of DField to store the derivatives of the splines at the given coordinates. 
-* `patches_coords` A [**MultipatchType**](classMultipatchType.md) of Field of Coordinate storing the coordinates of the meshes. 
-* `patches_splines` A [**MultipatchType**](classMultipatchType.md) of DField storing the 2D spline coefficients. 
+* `patches_deriv` A MultipatchType of DField to store the derivatives of the splines at the given coordinates. 
+* `patches_coords` A MultipatchType of Field of Coordinate storing the coordinates of the meshes. 
+* `patches_splines` A MultipatchType of DField storing the 2D spline coefficients. 
 
 
 
@@ -788,7 +788,7 @@ See MultipatchSplineEvaluatorOperator.
 
 
 * `integrals` An Kokkos::View on host containing the integrals of each spline on each patch. 
-* `patches_splines` A [**MultipatchType**](classMultipatchType.md) of DField storing the 2D spline coefficients. 
+* `patches_splines` A MultipatchType of DField storing the 2D spline coefficients. 
 
 
 
@@ -828,7 +828,7 @@ The spline coefficients represent a 2D spline function defined on a B-splines (b
 
 
 * `coord_eval` The coordinate where the spline is evaluated. 
-* `patches_splines` A [**MultipatchType**](classMultipatchType.md) of DField storing the 2D spline coefficients. 
+* `patches_splines` A MultipatchType of DField storing the 2D spline coefficients. 
 
 
 
@@ -867,9 +867,9 @@ See MultipatchSplineEvaluatorOperator.
 **Parameters:**
 
 
-* `patches_values` A [**MultipatchType**](classMultipatchType.md) of DField to store the values of the splines at the given coordinates. 
-* `patches_coords` A [**MultipatchType**](classMultipatchType.md) of Field of Coordinate storing the coordinates of the meshes. 
-* `patches_splines` A [**MultipatchType**](classMultipatchType.md) of DField storing the 2D spline coefficients. 
+* `patches_values` A MultipatchType of DField to store the values of the splines at the given coordinates. 
+* `patches_coords` A MultipatchType of Field of Coordinate storing the coordinates of the meshes. 
+* `patches_splines` A MultipatchType of DField storing the 2D spline coefficients. 
 
 
 

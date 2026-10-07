@@ -554,7 +554,7 @@
     <member refid="structConstantExtrapolationRuleOnion_1a7646e8d4ea6db0f0273dd909521781e3" kind="variable"><name>bc_r_min</name></member>
     <member refid="structConstantExtrapolationRuleOnion_1ad0e0220903f478231d959766dea1821e" kind="variable"><name>bc_r_max</name></member>
     <member refid="structConstantExtrapolationRuleOnion_1af9e46e05ba3bc87e5df2f8d1f7a6393d" kind="function"><name>ConstantExtrapolationRuleOnion</name></member>
-    <member refid="structConstantExtrapolationRuleOnion_1a2fc1ed58f951dd2d5ae6878853524664" kind="function"><name>operator()</name></member>
+    <member refid="structConstantExtrapolationRuleOnion_1a0f3ca54cff1d26b247179e591c60b783" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classConstantIdentityInterpolationExtrapolationRule" kind="class"><name>ConstantIdentityInterpolationExtrapolationRule</name>
     <member refid="classConstantIdentityInterpolationExtrapolationRule_1ac5eda8d67bb280de45c80085cc6312d5" kind="variable"><name>m_coeff_idx</name></member>
@@ -2457,54 +2457,9 @@
     <member refid="classMultipatchConnectivity_1a2e53e4b857d0861bfe271be891c60f50" kind="typedef"><name>find_connections_t</name></member>
     <member refid="classMultipatchConnectivity_1a9e3ca501f45f19a8e38724147f4b0b97" kind="typedef"><name>get_all_interfaces_along_direction_t</name></member>
     <member refid="classMultipatchConnectivity_1ad753daab879bb2cdfe04c25c05fc394c" kind="function"><name>get_all_idx_ranges_along_direction</name></member>
-    <member refid="classMultipatchConnectivity_1aa2078dc56dde3bf073f16158404c1735" kind="function"><name>get_all_idx_ranges_along_direction</name></member>
+    <member refid="classMultipatchConnectivity_1ad1743e85f5674068845e53643321abd1" kind="function"><name>get_all_idx_ranges_along_direction</name></member>
     <member refid="classMultipatchConnectivity_1a5561b4f768aea2b45d51fc122d947d65" kind="function"><name>get_idx_range</name></member>
     <member refid="classMultipatchConnectivity_1a016fa7a0e3d7805b438b607d748831f1" kind="function"><name>get_idx_range</name></member>
-  </compound>
-  <compound refid="classMultipatchField" kind="class"><name>MultipatchField</name>
-    <member refid="classMultipatchField_1aa166acf6255535cc17a77462f916bc24" kind="typedef"><name>base_type</name></member>
-    <member refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" kind="typedef"><name>InternalIdxRangeOnPatch</name></member>
-    <member refid="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" kind="typedef"><name>InternalFieldOnPatch</name></member>
-    <member refid="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" kind="typedef"><name>InternalConstFieldOnPatch</name></member>
-    <member refid="classMultipatchField_1abd59fa1d9f2605c57ea59eeca005b079" kind="typedef"><name>span_type</name></member>
-    <member refid="classMultipatchField_1a5cbbad0f201452b8682476434d69eae3" kind="typedef"><name>view_type</name></member>
-    <member refid="classMultipatchField_1a5b3babc9be1e8e6c0c87ab4a89d87fc2" kind="typedef"><name>discrete_domain_type</name></member>
-    <member refid="classMultipatchField_1a8b5f2a92ee8624fbade15581c7276036" kind="typedef"><name>memory_space</name></member>
-    <member refid="classMultipatchField_1a22720108209413ba6d27300ed253adf6" kind="typedef"><name>element_type</name></member>
-    <member refid="classMultipatchField_1a5a2a447cf52dda49f36c1089372e4e42" kind="typedef"><name>idx_type</name></member>
-    <member refid="classMultipatchField_1affc748ee952450daee6dddc1a2020a9e" kind="friend"><name>MultipatchField</name></member>
-    <member refid="classMultipatchField_1a888426c528c86a5049c9636d73232c2d" kind="function"><name>MultipatchField</name></member>
-    <member refid="classMultipatchField_1a243a3e0121a1f9d6fd081a0bc117b1ec" kind="function"><name>MultipatchField</name></member>
-    <member refid="classMultipatchField_1a733d459c789fa5df78b5a7f2863f537e" kind="function"><name>MultipatchField</name></member>
-    <member refid="classMultipatchField_1a5d0139029c4d048c9433fa7d81098578" kind="function"><name>MultipatchField</name></member>
-    <member refid="classMultipatchField_1a56cfbacfcac49a2a205e1aa5ff6ffeeb" kind="function"><name>~MultipatchField</name></member>
-    <member refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" kind="function"><name>get</name></member>
-    <member refid="classMultipatchField_1a81a0d66702494385f6aa986398cac4a8" kind="function"><name>idx_range</name></member>
-    <member refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" kind="function"><name>get_field</name></member>
-    <member refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" kind="function"><name>get_const_field</name></member>
-  </compound>
-  <compound refid="classMultipatchFieldMem" kind="class"><name>MultipatchFieldMem</name>
-    <member refid="classMultipatchFieldMem_1a4e749f2597001907dbe8cf077ca2da9e" kind="typedef"><name>base_type</name></member>
-    <member refid="classMultipatchFieldMem_1affec2555dc86033cbcb5e80113cd91ac" kind="typedef"><name>InternalIdxRangeOnPatch</name></member>
-    <member refid="classMultipatchFieldMem_1a0619dafdf75c12736c49816b0d928f6a" kind="typedef"><name>InternalFieldOnPatch</name></member>
-    <member refid="classMultipatchFieldMem_1a3c244af591bf82d81c2bcbc05d614f7c" kind="typedef"><name>InternalConstFieldOnPatch</name></member>
-    <member refid="classMultipatchFieldMem_1a5dbf8c8141b899d8f283676228c1d0ee" kind="typedef"><name>span_type</name></member>
-    <member refid="classMultipatchFieldMem_1a27fbfd50d0ab158776d8dc9476d18498" kind="typedef"><name>view_type</name></member>
-    <member refid="classMultipatchFieldMem_1abbd97d1ad7dfdd97b1721d08de4b4c3c" kind="typedef"><name>discrete_domain_type</name></member>
-    <member refid="classMultipatchFieldMem_1ad7c866614c915394b926d867e3b80e6f" kind="typedef"><name>memory_space</name></member>
-    <member refid="classMultipatchFieldMem_1a841face1ddf0be7541b620046ab3fd93" kind="typedef"><name>element_type</name></member>
-    <member refid="classMultipatchFieldMem_1ab86aa4be4fafa0f8bb60670ce33ffa08" kind="friend"><name>MultipatchFieldMem</name></member>
-    <member refid="classMultipatchFieldMem_1a77f63c56f7f710c3baf278a928332767" kind="function"><name>MultipatchFieldMem</name></member>
-    <member refid="classMultipatchFieldMem_1a4519292b25b58d022ead047fae3c5178" kind="function"><name>MultipatchFieldMem</name></member>
-    <member refid="classMultipatchFieldMem_1a1fe8e745555e7a2467831524455c41ea" kind="function"><name>MultipatchFieldMem</name></member>
-    <member refid="classMultipatchFieldMem_1a37eae3b00efc46c87e14e1eae48fecf5" kind="function"><name>MultipatchFieldMem</name></member>
-    <member refid="classMultipatchFieldMem_1ae39abf1d81ca63a0aa65345a79a638fd" kind="function"><name>MultipatchFieldMem</name></member>
-    <member refid="classMultipatchFieldMem_1a2a8cae51129016feca06ea2ef0aeb91b" kind="function"><name>~MultipatchFieldMem</name></member>
-    <member refid="classMultipatchFieldMem_1a579cfff022a37682e4677b6298559d4f" kind="function"><name>get</name></member>
-    <member refid="classMultipatchFieldMem_1a6dab5b5b8e1583e5693c5dd9e9c768a7" kind="function"><name>get</name></member>
-    <member refid="classMultipatchFieldMem_1a32fdf886aeabdd36febe191309a0ad43" kind="function"><name>idx_range</name></member>
-    <member refid="classMultipatchFieldMem_1ad662f26d4aab330dae6a7403c2db0b98" kind="function"><name>get_field</name></member>
-    <member refid="classMultipatchFieldMem_1a2133a1adff7511566108aa2c8a38d7f5" kind="function"><name>get_const_field</name></member>
   </compound>
   <compound refid="classMultipatchSplineBuilder" kind="class"><name>MultipatchSplineBuilder</name>
     <member refid="classMultipatchSplineBuilder_1a65e4f20add6aaf012822f0b7641e0f57" kind="typedef"><name>PatchOrdering</name></member>
@@ -2535,7 +2490,7 @@
     <member refid="classMultipatchSplineBuilder2D_1aa9dbc2cb8407455f76d87b757f361f6c" kind="typedef"><name>MultipatchDerivs12</name></member>
     <member refid="classMultipatchSplineBuilder2D_1afddcdc3dcc0a0090101f96f4a2abd05d" kind="typedef"><name>BuilderTuple</name></member>
     <member refid="classMultipatchSplineBuilder2D_1af98d02daef19299137f8e14075e1e8dd" kind="variable"><name>m_builders</name></member>
-    <member refid="classMultipatchSplineBuilder2D_1a45b4aaf128c4bfdfbb800ff167a8852d" kind="function"><name>get_deriv_value</name></member>
+    <member refid="classMultipatchSplineBuilder2D_1a988cdc4518031dfdd588196134fc679b" kind="function"><name>get_deriv_value</name></member>
     <member refid="classMultipatchSplineBuilder2D_1a8e1c693d015b942fb6929c1b0d86400a" kind="function"><name>MultipatchSplineBuilder2D</name></member>
     <member refid="classMultipatchSplineBuilder2D_1a95a749c9277cc9e2b2c4b71a3dc7128c" kind="function"><name>~MultipatchSplineBuilder2D</name></member>
     <member refid="classMultipatchSplineBuilder2D_1a9d6aa895344fe4d2e79c57583dc572cb" kind="function"><name>operator()</name></member>
@@ -2583,20 +2538,6 @@
     <member refid="classMultipatchSplineEvaluator2D_1aea82ea7e1fdc1cea7b38d5726c45e621" kind="function"><name>get_patch_idx</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a6a66ac0eab058439ee54e16581353932" kind="function"><name>replace_periodic_coord_inside</name></member>
     <member refid="classMultipatchSplineEvaluator2D_1a19cb998e1d766fa8836f4556a2893034" kind="function"><name>eval_no_bc</name></member>
-  </compound>
-  <compound refid="classMultipatchType" kind="class"><name>MultipatchType</name>
-    <member refid="classMultipatchType_1ac09ed5edaf7d35c564ef78fe31620631" kind="typedef"><name>PatchOrdering</name></member>
-    <member refid="classMultipatchType_1afba13bfc8d2a69be4c8760228c4a8414" kind="typedef"><name>example_element</name></member>
-    <member refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kind="variable"><name>m_tuple</name></member>
-    <member refid="classMultipatchType_1a6cf24fdcb53f66e89cab44921a551e1d" kind="friend"><name>MultipatchType</name></member>
-    <member refid="classMultipatchType_1ae1ab2f08d00d74b0fd692ed0269af5c6" kind="function"><name>MultipatchType</name></member>
-    <member refid="classMultipatchType_1a7a63de3f7e30ad01b0a2634abacba57d" kind="function"><name>MultipatchType</name></member>
-    <member refid="classMultipatchType_1ac456d01f07ff6b9ae5fb08ca646f4ff7" kind="function"><name>MultipatchType</name></member>
-    <member refid="classMultipatchType_1a69f9f3da2bb51cac35b2c609c9fda284" kind="function"><name>MultipatchType</name></member>
-    <member refid="classMultipatchType_1a9b09b8b98e05fea159a80bbca8367a77" kind="function"><name>~MultipatchType</name></member>
-    <member refid="classMultipatchType_1a1f207a9aa111fb6b38025769f6b75688" kind="function"><name>get</name></member>
-    <member refid="classMultipatchType_1a6a44d19ff0704be6f0b4e1d476cefbcc" kind="function"><name>get_tuple</name></member>
-    <member refid="classMultipatchType_1a8bd7585483ea579822748d6100ae3edb" kind="function"><name>size</name></member>
   </compound>
   <compound refid="classNDIdentityInterpolationBuilder" kind="class"><name>NDIdentityInterpolationBuilder</name>
   </compound>
@@ -2680,7 +2621,7 @@
     <member refid="classNullAdvectionVelocity_1a006ed56c49d2f95f5b95f78ed574f72e" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structNullExtrapolationRule" kind="struct"><name>NullExtrapolationRule</name>
-    <member refid="structNullExtrapolationRule_1afff2dfac58dbcfcc760da499bb23b953" kind="function"><name>operator()</name></member>
+    <member refid="structNullExtrapolationRule_1adcbc2d5bebf56f87b90fb55fd3e6c973" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classNullQNSolver" kind="class"><name>NullQNSolver</name>
     <member refid="classNullQNSolver_1aa191a148e484d4c9a3fda39a37ede2f7" kind="function"><name>NullQNSolver</name></member>
@@ -3677,7 +3618,7 @@
     <member refid="vector__field_8hpp_1a0a990d73f5440550ebb60058ea19544c" kind="function"><name>assign_vector_field_element</name></member>
     <member refid="vector__field__common_8hpp_1a3073ccd7095e44121805d560d53db101" kind="function"><name>get</name></member>
     <member refid="vector__field__common_8hpp_1a7e96ce78fa06b6f47073469aeeb550a4" kind="function"><name>get</name></member>
-    <member refid="multipatch__field_8hpp_1a1c7e7fe53e09d748ce27fe0421a2ef34" kind="function"><name>deepcopy</name></member>
+    <member refid="multipatch__field_8hpp_1a9aea59138796f480705d5bd006d67d02" kind="function"><name>deepcopy</name></member>
     <member refid="ddc__helper_8hpp_1ab85a32309a76aeb021f849ea7bfd2773" kind="function"><name>total_interval_length</name></member>
     <member refid="ddc__helper_8hpp_1a4d5446b992979ca3b2382c0277626048" kind="function"><name>total_interval_length</name></member>
     <member refid="ddc__helper_8hpp_1a342954bb0c44d8d86ceadb9d9fbea79c" kind="function"><name>total_interval_length</name></member>
@@ -4668,24 +4609,19 @@
     <member refid="utils__patch__locators_8hpp_1a07432a82cd197305e54dba1131b3d0f0" kind="variable"><name>is_onion_patch_locator_v</name></member>
   </compound>
   <compound refid="multipatch__field_8hpp" kind="file"><name>multipatch_field.hpp</name>
+    <member refid="multipatch__field_8hpp_1a1d4d765fa0bc28a1c3fa7418f86f8786" kind="typedef"><name>MultipatchField</name></member>
     <member refid="multipatch__field_8hpp_1a077b099d6f85e6518ca7c27eb4b7aeca" kind="variable"><name>enable_multipatch_field</name></member>
     <member refid="multipatch__field_8hpp_1a554c41d0cdd6196870eef050bf92992a" kind="variable"><name>is_multipatch_field_v</name></member>
-    <member refid="multipatch__field_8hpp_1a98938c377f6bc9563511e285034c6219" kind="variable"><name>enable_multipatch_type&lt; MultipatchField&lt; T, Patches... &gt; &gt;</name></member>
-    <member refid="multipatch__field_8hpp_1a7e6234ec2716312916c433ea23a4f3e4" kind="variable"><name>enable_data_access_methods&lt; MultipatchField&lt; T, Patches... &gt; &gt;</name></member>
-    <member refid="multipatch__field_8hpp_1a08d41755d9a8db55bd06acc58e34f376" kind="variable"><name>enable_multipatch_field&lt; MultipatchField&lt; T, Patches... &gt; &gt;</name></member>
   </compound>
   <compound refid="multipatch__field__mem_8hpp" kind="file"><name>multipatch_field_mem.hpp</name>
+    <member refid="multipatch__field__mem_8hpp_1a4144d0dd3ad41b46087fa4dd9ce05fa2" kind="typedef"><name>MultipatchFieldMem</name></member>
     <member refid="multipatch__field__mem_8hpp_1ad352ad1819417d87cfbc9f0f0c8d3a16" kind="variable"><name>enable_multipatch_field_mem</name></member>
     <member refid="multipatch__field__mem_8hpp_1ab0d2fc20ded29a0b113e6cc2676211a6" kind="variable"><name>is_multipatch_field_mem_v</name></member>
-    <member refid="multipatch__field__mem_8hpp_1a0dd33cf752866d669c5ddb5f62a43fb4" kind="variable"><name>enable_multipatch_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</name></member>
-    <member refid="multipatch__field__mem_8hpp_1afc44c6145738b001911d7a5e57c997a3" kind="variable"><name>enable_multipatch_field_mem&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</name></member>
-    <member refid="multipatch__field__mem_8hpp_1ab3e1449fe59b875cf4b7bf50485bd5b9" kind="variable"><name>enable_mem_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</name></member>
-    <member refid="multipatch__field__mem_8hpp_1a8e50a92128b7ed8915caf7baf6629ecd" kind="variable"><name>enable_data_access_methods&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</name></member>
   </compound>
   <compound refid="multipatch__type_8hpp" kind="file"><name>multipatch_type.hpp</name>
+    <member refid="multipatch__type_8hpp_1ab58334a5afab5999ed8b749d9512d58b" kind="typedef"><name>MultipatchType</name></member>
     <member refid="multipatch__type_8hpp_1a59ab731c02d44c4ec5ad863df0858c5a" kind="variable"><name>enable_multipatch_type</name></member>
     <member refid="multipatch__type_8hpp_1a65e97c3c36f361003c0e4603a8e314cd" kind="variable"><name>is_multipatch_type_v</name></member>
-    <member refid="multipatch__type_8hpp_1a104909e1ad6ee4f553fca7dd14b144ef" kind="variable"><name>enable_multipatch_type&lt; MultipatchType&lt; T, Patches... &gt; &gt;</name></member>
   </compound>
   <compound refid="types_8hpp" kind="file"><name>types.hpp</name>
     <member refid="types_8hpp_1a97c1a351acb6b8bf479ffe86f272c2c3" kind="typedef"><name>Grid1OnPatch</name></member>
@@ -4750,8 +4686,8 @@
   <compound refid="null__extrapolation__rules_8hpp" kind="file"><name>null_extrapolation_rules.hpp</name>
   </compound>
   <compound refid="multipatch__math__tools_8hpp" kind="file"><name>multipatch_math_tools.hpp</name>
-    <member refid="multipatch__math__tools_8hpp_1a01176104c141d158dbc06852c61f92e7" kind="function"><name>norm_inf</name></member>
-    <member refid="multipatch__math__tools_8hpp_1a9059243e073f9f203c03bbd400f1e71c" kind="function"><name>error_norm_inf</name></member>
+    <member refid="multipatch__math__tools_8hpp_1a23226e2bb654e773c34c5f2bc71ef934" kind="function"><name>norm_inf</name></member>
+    <member refid="multipatch__math__tools_8hpp_1ace3f295cabc87fb55b680e3177bfae32" kind="function"><name>error_norm_inf</name></member>
   </compound>
   <compound refid="paraconfpp_8hpp" kind="file"><name>paraconfpp.hpp</name>
     <member refid="paraconfpp_8hpp_1a9d1729c1645f91a80866cb880a16697f" kind="function"><name>PCpp_double</name></member>

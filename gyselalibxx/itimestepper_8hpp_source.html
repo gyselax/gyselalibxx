@@ -782,10 +782,15 @@ struct assemble_helper&lt;
     }
 };
 
-template &lt;class ExecSpace, template &lt;typename P&gt; typename T, class... Patches&gt;
-struct assemble_helper&lt;ExecSpace, MultipatchFieldMem&lt;T, Patches...&gt;&gt;
+template &lt;class ExecSpace, class TypeSeqInternalTypes, class... Patches&gt;
+struct assemble_helper&lt;
+        ExecSpace,
+        detail::MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;&gt;
 {
-    using DerivFieldType = MultipatchFieldMem&lt;T, Patches...&gt;::span_type;
+    using DerivFieldMemType = typename detail::
+            MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;;
+    using DerivFieldType = typename detail::
+            MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;::span_type;
 
     template &lt;class FuncType, class... KType&gt;
     static void assemble_k_total(
@@ -806,11 +811,14 @@ private:
             FuncType func,
             KType... k)
     {
-        timestepper_detail::assemble_helper&lt;ExecSpace, T&lt;Patch&gt;&gt;::assemble_k_total(
-                exec_space,
-                k_total.template get&lt;Patch&gt;(),
-                func,
-                k.template get&lt;Patch&gt;()...);
+        timestepper_detail::assemble_helper&lt;
+                ExecSpace,
+                typename DerivFieldMemType::template TypeOnPatch&lt;Patch&gt;&gt;::
+                assemble_k_total(
+                        exec_space,
+                        k_total.template get&lt;Patch&gt;(),
+                        func,
+                        k.template get&lt;Patch&gt;()...);
     }
 };
 

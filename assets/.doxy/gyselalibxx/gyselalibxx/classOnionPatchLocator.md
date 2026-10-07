@@ -101,7 +101,7 @@ The operator can works on GPU or CPU according to the given execution space Exec
 **Template parameters:**
 
 
-* `MultipatchIdxRanges` A [**MultipatchType**](classMultipatchType.md) type containing the 2D index ranges on each patch. 
+* `MultipatchIdxRanges` A MultipatchType type containing the 2D index ranges on each patch. 
 * `LogicalToPhysicalMapping` A mapping type for all the patches. 
 * `ExecSpace` The space (CPU/GPU) where the calculations are carried out. By default it is on device. 
 

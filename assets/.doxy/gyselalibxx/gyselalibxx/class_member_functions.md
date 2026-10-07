@@ -187,7 +187,7 @@
 ## g
 
 * **get\_inverse\_mapping** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md), [**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md), [**LinearCoordTransform**](classLinearCoordTransform.md), [**OrthogonalCoordTransforms**](classOrthogonalCoordTransforms.md))
-* **get** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**CombinedMapping**](classCombinedMapping.md), [**IdentityTensor**](classIdentityTensor.md), [**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**MultipatchType**](classMultipatchType.md), [**TensorCommon**](classTensorCommon.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
+* **get** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**CombinedMapping**](classCombinedMapping.md), [**IdentityTensor**](classIdentityTensor.md), [**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**TensorCommon**](classTensorCommon.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **get\_derivative** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md), [**CollisionsInter**](classCollisionsInter.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md))
 * **get\_nustar0** ([**CollisionsInter**](classCollisionsInter.md), [**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_gridvx\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))
@@ -195,8 +195,8 @@
 * **get\_mesh\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_chunk\_subidx\_range\_1d\_idx** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
 * **get\_chunk\_subidx\_range\_idx** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
-* **get\_const\_field** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
-* **get\_field** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
+* **get\_const\_field** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
+* **get\_field** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **get\_kokkos\_view\_from\_internal\_chunk** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
 * **get\_array\_index** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **get\_index** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
@@ -248,7 +248,6 @@
 * **get\_all\_idx\_ranges\_along\_direction** ([**MultipatchConnectivity**](classMultipatchConnectivity.md))
 * **get\_deriv\_value** ([**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md), [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **get\_patch\_idx** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
-* **get\_tuple** ([**MultipatchType**](classMultipatchType.md))
 * **get\_weights** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md))
 * **get\_mapping\_on\_logical\_dim** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **get\_mapping\_on\_patch** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
@@ -270,7 +269,7 @@
 * **inv\_jacobian\_matrix** ([**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md), [**LinearCoordTransform**](classLinearCoordTransform.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **inv\_jacobian** ([**CombinedMapping**](classCombinedMapping.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md))
 * **initialise\_fields** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
-* **idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md))
+* **idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **idx\_range\_for\_deriv** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **initialise\_chunks** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **initialisation** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
@@ -351,12 +350,9 @@
 * **MpiChargeDensityCalculator** ([**MpiChargeDensityCalculator**](classMpiChargeDensityCalculator.md))
 * **MpiScopeGuard** ([**MpiScopeGuard**](classMpiScopeGuard.md))
 * **MpiSplitVlasovSolver** ([**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md))
-* **MultipatchField** ([**MultipatchField**](classMultipatchField.md))
-* **MultipatchFieldMem** ([**MultipatchFieldMem**](classMultipatchFieldMem.md))
 * **MultipatchSplineBuilder** ([**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md))
 * **MultipatchSplineBuilder2D** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **MultipatchSplineEvaluator2D** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
-* **MultipatchType** ([**MultipatchType**](classMultipatchType.md))
 * **masses** ([**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md))
 
 
@@ -430,7 +426,7 @@
 
 ## s
 
-* **size** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatrixBatch**](classMatrixBatch.md), [**MultipatchType**](classMultipatchType.md), [**TensorCommon**](classTensorCommon.md))
+* **size** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatrixBatch**](classMatrixBatch.md), [**TensorCommon**](classTensorCommon.md))
 * **set\_curvilinear\_to\_cartesian\_values** ([**DiscretePoloidalCSSplineMappingBuilder**](classDiscretePoloidalCSSplineMappingBuilder.md), [**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md))
 * **search\_for\_match** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **solve\_matrix\_system** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
@@ -552,12 +548,9 @@
 * **~MaxwellianEquilibrium** ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md))
 * **~MpiScopeGuard** ([**MpiScopeGuard**](classMpiScopeGuard.md))
 * **~MpiSplitVlasovSolver** ([**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md))
-* **~MultipatchField** ([**MultipatchField**](classMultipatchField.md))
-* **~MultipatchFieldMem** ([**MultipatchFieldMem**](classMultipatchFieldMem.md))
 * **~MultipatchSplineBuilder** ([**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md))
 * **~MultipatchSplineBuilder2D** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **~MultipatchSplineEvaluator2D** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
-* **~MultipatchType** ([**MultipatchType**](classMultipatchType.md))
 * **~NDLagrangeEvaluator** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
 * **~NoPerturbInitialisation** ([**NoPerturbInitialisation**](classNoPerturbInitialisation.md))
 * **~NullAdvectionVelocity** ([**NullAdvectionVelocity**](classNullAdvectionVelocity.md))

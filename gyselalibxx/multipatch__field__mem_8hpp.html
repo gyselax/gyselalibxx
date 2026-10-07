@@ -576,7 +576,7 @@
 <li><code>#include "multipatch_field.hpp"</code></li>
 <li><code>#include "multipatch_type.hpp"</code></li>
 </ul>
-<h2 id="classes">Classes</h2>
+<h2 id="public-types">Public Types</h2>
 <table>
 <thead>
 <tr>
@@ -586,8 +586,8 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a> &lt;T, Patches&gt;<br><em>A class to store field memory block objects on patches.</em></td>
+<td style="text-align: right;">typedef detail::MultipatchFieldMem&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-multipatchfieldmem"><strong>MultipatchFieldMem</strong></a>  <br><em>A class to store field memory block objects on patches.</em></td>
 </tr>
 </tbody>
 </table>
@@ -602,23 +602,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-enable_data_access_methods-multipatchfieldmem-t-patches"><strong>enable_data_access_methods&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</strong></a>   = <code>true</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-enable_mem_type-multipatchfieldmem-t-patches"><strong>enable_mem_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</strong></a>   = <code>true</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
 <td style="text-align: left;"><a href="#variable-enable_multipatch_field_mem"><strong>enable_multipatch_field_mem</strong></a>   = <code>false</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-enable_multipatch_field_mem-multipatchfieldmem-t-patches"><strong>enable_multipatch_field_mem&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</strong></a>   = <code>true</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-enable_multipatch_type-multipatchfieldmem-t-patches"><strong>enable_multipatch_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</strong></a>   = <code>true</code><br></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
@@ -626,29 +610,21 @@
 </tr>
 </tbody>
 </table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-multipatchfieldmem">typedef MultipatchFieldMem</h3>
+<p><em>A class to store field memory block objects on patches.</em> </p>
+<pre><code class="language-C++">using MultipatchFieldMem =  detail:: MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt; &gt;;
+</code></pre>
+<p>See detail::MultipatchFieldMem for more details. This alias creates the type T&lt;Patch&gt; for each of the patches. Two type templates which return the same type for each patch therefore lead to the same MultipatchFieldMem.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>T</code> The type of the FieldMem/DerivMem/VectorFieldMem that are stored on the given patches. </li>
+<li><code>Patches</code> The patches of the objects in the same order of the patches that the given objects are defined on. </li>
+</ul>
+<hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
-<h3 id="variable-enable_data_access_methods-multipatchfieldmem-t-patches">variable enable_data_access_methods&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</h3>
-<pre><code class="language-C++">constexpr bool enable_data_access_methods&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="variable-enable_mem_type-multipatchfieldmem-t-patches">variable enable_mem_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</h3>
-<pre><code class="language-C++">constexpr bool enable_mem_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;;
-</code></pre>
-<hr>
-
 <h3 id="variable-enable_multipatch_field_mem">variable enable_multipatch_field_mem</h3>
 <pre><code class="language-C++">constexpr bool enable_multipatch_field_mem;
-</code></pre>
-<hr>
-
-<h3 id="variable-enable_multipatch_field_mem-multipatchfieldmem-t-patches">variable enable_multipatch_field_mem&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</h3>
-<pre><code class="language-C++">constexpr bool enable_multipatch_field_mem&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="variable-enable_multipatch_type-multipatchfieldmem-t-patches">variable enable_multipatch_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</h3>
-<pre><code class="language-C++">constexpr bool enable_multipatch_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;;
 </code></pre>
 <hr>
 

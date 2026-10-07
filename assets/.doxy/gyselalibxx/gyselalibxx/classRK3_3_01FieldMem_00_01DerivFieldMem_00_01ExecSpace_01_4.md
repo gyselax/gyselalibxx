@@ -159,7 +159,7 @@ See [ITimeStepper](classITimeStepper.md)
 ## Detailed Description
 
 
-A class which provides an implementation of a third-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. This specialisation handles Field-like objects (Field, [**VectorField**](classVectorField.md), [**MultipatchField**](classMultipatchField.md)). The values which evolve are defined on an index range.
+A class which provides an implementation of a third-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. This specialisation handles Field-like objects (Field, [**VectorField**](classVectorField.md), MultipatchField). The values which evolve are defined on an index range.
 
 
 For the following ODE : \(\partial_t y(t) = f(t, y(t))\),

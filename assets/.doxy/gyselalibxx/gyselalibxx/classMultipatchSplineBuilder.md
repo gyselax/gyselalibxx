@@ -55,7 +55,7 @@ _A class to call all the builders of all the patches once._ [More...](#detailed-
 | Type | Name |
 | ---: | :--- |
 |   | [**MultipatchSplineBuilder**](#function-multipatchsplinebuilder) (BuilderOnPatch&lt; Patches &gt; const &... builders) <br>_Instantiate the_ [_**MultipatchSplineBuilder**_](classMultipatchSplineBuilder.md) _from a std::tuple of all the builder on each patch._ |
-|  void | [**operator()**](#function-operator) ([**MultipatchSplineCoeffs**](classMultipatchField.md) splines, [**MultipatchValues**](classMultipatchField.md) const & values, std::optional&lt; [**MultipatchDerivs**](classMultipatchField.md) &gt; derivs\_xmin=std::nullopt, std::optional&lt; [**MultipatchDerivs**](classMultipatchField.md) &gt; derivs\_xmax=std::nullopt) const<br>_Build the spline representation of each given function._  |
+|  void | [**operator()**](#function-operator) (MultipatchSplineCoeffs splines, MultipatchValues const & values, std::optional&lt; MultipatchDerivs &gt; derivs\_xmin=std::nullopt, std::optional&lt; MultipatchDerivs &gt; derivs\_xmax=std::nullopt) const<br>_Build the spline representation of each given function._  |
 |   | [**~MultipatchSplineBuilder**](#function-multipatchsplinebuilder) () = default<br> |
 
 
@@ -88,7 +88,7 @@ _A class to call all the builders of all the patches once._ [More...](#detailed-
 ## Detailed Description
 
 
-We need to instantiate all the builders for all the patches in the main code. We process the same way for the Fields containing the spline coefficients and the values of the function on each patch. The Fields are stored in [**MultipatchField**](classMultipatchField.md) objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.
+We need to instantiate all the builders for all the patches in the main code. We process the same way for the Fields containing the spline coefficients and the values of the function on each patch. The Fields are stored in MultipatchField objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.
 
 
 This function is useful to avoid calling all the builders individually, especially in a multipatch geometry with several patches.
@@ -172,10 +172,10 @@ inline void MultipatchSplineBuilder::operator() (
 **Parameters:**
 
 
-* `splines` [**MultipatchField**](classMultipatchField.md) of all the Fields pointing to the spline representations. 
-* `values` [**MultipatchField**](classMultipatchField.md) of all the Fields pointing to the function values. 
-* `derivs_xmin` [**MultipatchField**](classMultipatchField.md) of all the ConstFields describing the function derivatives at the lower bound. 
-* `derivs_xmax` [**MultipatchField**](classMultipatchField.md) of all the ConstFields describing the function derivatives at the upper bound. 
+* `splines` MultipatchField of all the Fields pointing to the spline representations. 
+* `values` MultipatchField of all the Fields pointing to the function values. 
+* `derivs_xmin` MultipatchField of all the ConstFields describing the function derivatives at the lower bound. 
+* `derivs_xmax` MultipatchField of all the ConstFields describing the function derivatives at the upper bound. 
 
 
 

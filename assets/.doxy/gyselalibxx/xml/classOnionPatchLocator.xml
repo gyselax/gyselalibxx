@@ -31,7 +31,7 @@
 <parametername>MultipatchIdxRanges</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> type containing the 2D index ranges on each patch. </para>
+<para>A MultipatchType type containing the 2D index ranges on each patch. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

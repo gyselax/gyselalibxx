@@ -577,7 +577,7 @@
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "types.hpp"</code></li>
 </ul>
-<h2 id="classes">Classes</h2>
+<h2 id="public-types">Public Types</h2>
 <table>
 <thead>
 <tr>
@@ -587,8 +587,8 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classMultipatchType.html"><strong>MultipatchType</strong></a> &lt;T, Patches&gt;<br><em>A class to store several objects that are of a type which is templated by the patch.</em></td>
+<td style="text-align: right;">typedef detail::MultipatchType&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-multipatchtype"><strong>MultipatchType</strong></a>  <br><em>A class to store several objects that are of a type which is templated by the patch.</em></td>
 </tr>
 </tbody>
 </table>
@@ -607,22 +607,25 @@
 </tr>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-enable_multipatch_type-multipatchtype-t-patches"><strong>enable_multipatch_type&lt; MultipatchType&lt; T, Patches... &gt; &gt;</strong></a>   = <code>true</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
 <td style="text-align: left;"><a href="#variable-is_multipatch_type_v"><strong>is_multipatch_type_v</strong></a>   = <code>enable\_multipatch\_type&amp;lt;std::remove\_const\_t&amp;lt;std::remove\_reference\_t&amp;lt;T&amp;gt;&amp;gt;&amp;gt;</code><br></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-multipatchtype">typedef MultipatchType</h3>
+<p><em>A class to store several objects that are of a type which is templated by the patch.</em> </p>
+<pre><code class="language-C++">using MultipatchType =  detail:: MultipatchType&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt; &gt;;
+</code></pre>
+<p>See detail::MultipatchType for more details. This alias creates the type T&lt;Patch&gt; for each of the patches. Two type templates which return the same type for each patch therefore lead to the same MultipatchType.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>T</code> The type of the objects that are stored on the given patches. </li>
+<li><code>Patches</code> The patches of the objects in the same order of the patches that the given objects are defined on. </li>
+</ul>
+<hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-enable_multipatch_type">variable enable_multipatch_type</h3>
 <pre><code class="language-C++">constexpr bool enable_multipatch_type;
-</code></pre>
-<hr>
-
-<h3 id="variable-enable_multipatch_type-multipatchtype-t-patches">variable enable_multipatch_type&lt; MultipatchType&lt; T, Patches... &gt; &gt;</h3>
-<pre><code class="language-C++">constexpr bool enable_multipatch_type&lt; MultipatchType&lt; T, Patches... &gt; &gt;;
 </code></pre>
 <hr>
 

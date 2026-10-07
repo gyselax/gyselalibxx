@@ -78,7 +78,7 @@
 |  auto | [**create\_transpose\_mirror\_view\_and\_copy**](#function-create_transpose_mirror_view_and_copy) (ExecSpace const & execution\_space, Field&lt; ElementType, Domain, MemSpace, FieldLayoutType &gt; src) <br>_If necessary transpose data into the requested dimension ordering._  |
 |  auto | [**deepcopy**](#function-deepcopy) (FieldDst && dst, FieldSrc && src) <br>_Copy the contents of one_ [_**DerivField**_](classDerivField.md) _into another._ |
 |  auto | [**deepcopy**](#function-deepcopy) (ExecSpace const & execution\_space, FieldDst && dst, FieldSrc && src) <br>_Copy the contents of one_ [_**DerivField**_](classDerivField.md) _into another._ |
-|  void | [**deepcopy**](#function-deepcopy) ([**MultipatchField**](classMultipatchField.md)&lt; T1, Patches... &gt; dst, [**MultipatchField**](classMultipatchField.md)&lt; T2, Patches... &gt; src) <br>_Copy the data from one_ [_**MultipatchField**_](classMultipatchField.md) _into another._ |
+|  void | [**deepcopy**](#function-deepcopy) (detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes1 &gt; dst, detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes2 &gt; src) <br>_Copy the data from one MultipatchField into another._  |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, DField&lt; IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, Field&lt; Coord&lt; typename Grid1D::continuous\_dimension\_type &gt;, IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**IdentityTensor**](classIdentityTensor.md)&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const & tensor) <br>_A helper function to get the value of an element of the tensor._  |
@@ -420,12 +420,12 @@ auto ddcHelper::deepcopy (
 
 ### function deepcopy 
 
-_Copy the data from one_ [_**MultipatchField**_](classMultipatchField.md) _into another._
+_Copy the data from one MultipatchField into another._ 
 ```C++
-template<template< typename P > typename T1, template< typename P > typename T2, class... Patches>
+template<class... Patches, class TypeSeqInternalTypes1, class TypeSeqInternalTypes2>
 void ddcHelper::deepcopy (
-    MultipatchField < T1, Patches... > dst,
-    MultipatchField < T2, Patches... > src
+    detail::MultipatchField< ddc::detail::TypeSeq< Patches... >, TypeSeqInternalTypes1 > dst,
+    detail::MultipatchField< ddc::detail::TypeSeq< Patches... >, TypeSeqInternalTypes2 > src
 ) 
 ```
 
@@ -436,8 +436,8 @@ void ddcHelper::deepcopy (
 **Parameters:**
 
 
-* `dst` The [**MultipatchField**](classMultipatchField.md) that the data will be copied to. 
-* `src` The [**MultipatchField**](classMultipatchField.md) that the data will be copied from. 
+* `dst` The MultipatchField that the data will be copied to. 
+* `src` The MultipatchField that the data will be copied from. 
 
 
 

@@ -624,10 +624,11 @@ public:
                 std::make_index_sequence&lt;ddc::type_seq_size_v&lt;RelevantGrids&gt;&gt; {});
     }
 
-    template &lt;class Grid1D, template &lt;typename P&gt; typename T, class... Patches&gt;
-    static auto get_all_idx_ranges_along_direction(MultipatchType&lt;T, Patches...&gt; all_idx_ranges)
+    template &lt;class Grid1D, class TypeSeqPatches, class TypeSeqInternalTypes&gt;
+    static auto get_all_idx_ranges_along_direction(
+            detail::MultipatchType&lt;TypeSeqPatches, TypeSeqInternalTypes&gt; all_idx_ranges)
     {
-        static_assert(ddc::type_seq_same_v&lt;all_patches, ddc::detail::TypeSeq&lt;Patches...&gt;&gt;);
+        static_assert(ddc::type_seq_same_v&lt;all_patches, TypeSeqPatches&gt;);
         return get_all_idx_ranges_along_direction&lt;Grid1D&gt;(all_idx_ranges.get_tuple());
     }
 

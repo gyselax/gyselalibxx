@@ -616,21 +616,22 @@ public:
     {
     }
 
-    template &lt;class... Dim, template &lt;typename P&gt; typename SplinesOnPatch, class... Patches&gt;
+    template &lt;class... Dim, class TypeSeqPatches, class TypeSeqInternalTypes&gt;
     KOKKOS_FUNCTION double operator()(
             Coord&lt;Dim...&gt; const&amp; coord_extrap,
-            MultipatchField&lt;SplinesOnPatch, Patches...&gt; const&amp; patches_splines,
+            detail::MultipatchField&lt;TypeSeqPatches, TypeSeqInternalTypes&gt; const&amp; patches_splines,
             int const out_of_bounds_idx) const
     {
+        using MultipatchSplines = detail::MultipatchField&lt;TypeSeqPatches, TypeSeqInternalTypes&gt;;
         assert((out_of_bounds_idx == PatchLocator::outside_rmin_domain)
                || (out_of_bounds_idx == PatchLocator::outside_rmax_domain));
 
         if (out_of_bounds_idx == PatchLocator::outside_rmin_domain) {
-            SplinesOnPatch&lt;MinRadiusPatch&gt; const min_spline
+            typename MultipatchSplines::template TypeOnPatch&lt;MinRadiusPatch&gt; const min_spline
                     = patches_splines.template get&lt;MinRadiusPatch&gt;();
             return bc_r_min(coord_extrap, min_spline);
         } else {
-            SplinesOnPatch&lt;MaxRadiusPatch&gt; const max_spline
+            typename MultipatchSplines::template TypeOnPatch&lt;MaxRadiusPatch&gt; const max_spline
                     = patches_splines.template get&lt;MaxRadiusPatch&gt;();
             return bc_r_max(coord_extrap, max_spline);
         }

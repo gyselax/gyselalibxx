@@ -60,10 +60,11 @@ public:
                 std::make_index_sequence<ddc::type_seq_size_v<RelevantGrids>> {});
     }
 
-    template <class Grid1D, template <typename P> typename T, class... Patches>
-    static auto get_all_idx_ranges_along_direction(MultipatchType<T, Patches...> all_idx_ranges)
+    template <class Grid1D, class TypeSeqPatches, class TypeSeqInternalTypes>
+    static auto get_all_idx_ranges_along_direction(
+            detail::MultipatchType<TypeSeqPatches, TypeSeqInternalTypes> all_idx_ranges)
     {
-        static_assert(ddc::type_seq_same_v<all_patches, ddc::detail::TypeSeq<Patches...>>);
+        static_assert(ddc::type_seq_same_v<all_patches, TypeSeqPatches>);
         return get_all_idx_ranges_along_direction<Grid1D>(all_idx_ranges.get_tuple());
     }
 

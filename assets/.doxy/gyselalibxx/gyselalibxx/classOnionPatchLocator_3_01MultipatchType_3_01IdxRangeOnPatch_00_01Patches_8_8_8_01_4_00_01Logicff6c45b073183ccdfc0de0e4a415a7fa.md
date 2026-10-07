@@ -34,7 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef [**MultipatchType**](classMultipatchType.md)&lt; IdxRangeOnPatch, Patches... &gt; | [**MultipatchIdxRanges**](#typedef-multipatchidxranges)  <br>[_**MultipatchType**_](classMultipatchType.md) _storing the index range._ |
+| typedef MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; | [**MultipatchIdxRanges**](#typedef-multipatchidxranges)  <br>_MultipatchType storing the index range._  |
 | typedef ddc::detail::TypeSeq&lt; Patches... &gt; | [**PatchOrdering**](#typedef-patchordering)  <br>_Sequence ddc::detail::TypeSeq of patch tags._  |
 | typedef ExecSpace | [**exec\_space**](#typedef-exec_space)  <br>_The space (CPU/GPU) where the calculations are carried out._  |
 | typedef LogicalToPhysicalMapping | [**get\_mapping\_on\_logical\_dim\_t**](#typedef-get_mapping_on_logical_dim_t)  <br>_Get the type of the mapping from given logical continuous dimensions._  |
@@ -69,7 +69,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**OnionPatchLocator**](#function-onionpatchlocator) ([**MultipatchIdxRanges**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md#typedef-multipatchidxranges) const & all\_idx\_ranges, LogicalToPhysicalMapping const & to\_physical\_mapping, PhysicalToLogicalMapping const & to\_logical\_mapping) <br>_Instantiante the operator with_ [_**MultipatchType**_](classMultipatchType.md) _of index ranges and a mapping on all the patches._ |
+|   | [**OnionPatchLocator**](#function-onionpatchlocator) ([**MultipatchIdxRanges**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md#typedef-multipatchidxranges) const & all\_idx\_ranges, LogicalToPhysicalMapping const & to\_physical\_mapping, PhysicalToLogicalMapping const & to\_logical\_mapping) <br>_Instantiante the operator with MultipatchType of index ranges and a mapping on all the patches._  |
 |  KOKKOS\_FUNCTION LogicalToPhysicalMapping | [**get\_mapping\_on\_logical\_dim**](#function-get_mapping_on_logical_dim) () const<br>_Get the mapping from given logical continuous dimensions. The function can run on device and host._  |
 |  KOKKOS\_FUNCTION LogicalToPhysicalMapping | [**get\_mapping\_on\_patch**](#function-get_mapping_on_patch) () const<br>_Get the mapping on the given_ [_**Patch**_](structPatch.md) _. The function can run on device and host._ |
 |  KOKKOS\_INLINE\_FUNCTION int | [**operator()**](#function-operator) (CoordXY const coord) const<br>_Get the patch where the given physical coordinate is._  |
@@ -128,7 +128,7 @@ See OnionPatchLocatorImplementation
 
 ### typedef MultipatchIdxRanges 
 
-[_**MultipatchType**_](classMultipatchType.md) _storing the index range._
+_MultipatchType storing the index range._ 
 ```C++
 using OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::MultipatchIdxRanges =  MultipatchType<IdxRangeOnPatch, Patches...>;
 ```
@@ -230,7 +230,7 @@ constexpr int OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, 
 
 ### function OnionPatchLocator 
 
-_Instantiante the operator with_ [_**MultipatchType**_](classMultipatchType.md) _of index ranges and a mapping on all the patches._
+_Instantiante the operator with MultipatchType of index ranges and a mapping on all the patches._ 
 ```C++
 inline OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::OnionPatchLocator (
     MultipatchIdxRanges const & all_idx_ranges,
@@ -241,7 +241,7 @@ inline OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, Logical
 
 
 
-The order of the elements in the tuple or the [**MultipatchType**](classMultipatchType.md) doesn't matter.
+The order of the elements in the tuple or the MultipatchType doesn't matter.
 
 
 
@@ -249,7 +249,7 @@ The order of the elements in the tuple or the [**MultipatchType**](classMultipat
 **Parameters:**
 
 
-* `all_idx_ranges` A [**MultipatchType**](classMultipatchType.md) of index ranges defined on the logical domain of each patch. 
+* `all_idx_ranges` A MultipatchType of index ranges defined on the logical domain of each patch. 
 * `to_physical_mapping` Mapping from the logical domains of every patch to the global physical domain. 
 * `to_logical_mapping` Mapping from the global physical domain to the logical domain of every patch. 
 

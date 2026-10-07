@@ -239,29 +239,25 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="82" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="82" bodyend="90"/>
       </memberdef>
-      <memberdef kind="function" id="classMultipatchConnectivity_1aa2078dc56dde3bf073f16158404c1735" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classMultipatchConnectivity_1ad1743e85f5674068845e53643321abd1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Grid1D</type>
           </param>
           <param>
-            <type>template&lt; typename P &gt; typename</type>
-            <declname>T</declname>
-            <defname>T</defname>
+            <type>class TypeSeqPatches</type>
           </param>
           <param>
-            <type>class...</type>
-            <declname>Patches</declname>
-            <defname>Patches</defname>
+            <type>class TypeSeqInternalTypes</type>
           </param>
         </templateparamlist>
         <type>auto</type>
         <definition>static auto MultipatchConnectivity&lt; Interfaces &gt;::get_all_idx_ranges_along_direction</definition>
-        <argsstring>(MultipatchType&lt; T, Patches... &gt; all_idx_ranges)</argsstring>
+        <argsstring>(detail::MultipatchType&lt; TypeSeqPatches, TypeSeqInternalTypes &gt; all_idx_ranges)</argsstring>
         <name>get_all_idx_ranges_along_direction</name>
         <qualifiedname>MultipatchConnectivity::get_all_idx_ranges_along_direction</qualifiedname>
         <param>
-          <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; T, Patches... &gt;</type>
+          <type>detail::MultipatchType&lt; TypeSeqPatches, TypeSeqInternalTypes &gt;</type>
           <declname>all_idx_ranges</declname>
         </param>
         <briefdescription>
@@ -282,7 +278,7 @@
 <parametername>all_idx_ranges</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> containing all available index ranges.</para>
+<para>A MultipatchType containing all available index ranges.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -292,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="102" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="102" bodyend="106"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="102" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="102" bodyend="107"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -329,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="111" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="111" bodyend="115"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="112" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="112" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchConnectivity_1a016fa7a0e3d7805b438b607d748831f1" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -361,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="119" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="119" bodyend="125"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="120" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="120" bodyend="126"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -379,12 +375,12 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="17" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="18" bodyend="126"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" line="17" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp" bodystart="18" bodyend="127"/>
     <listofallmembers>
       <member refid="classMultipatchConnectivity_1a0683fbe5d61d4239ea8586a70a1305e7" prot="public" virt="non-virtual"><scope>MultipatchConnectivity</scope><name>all_patches</name></member>
       <member refid="classMultipatchConnectivity_1a2e53e4b857d0861bfe271be891c60f50" prot="public" virt="non-virtual"><scope>MultipatchConnectivity</scope><name>find_connections_t</name></member>
       <member refid="classMultipatchConnectivity_1ad753daab879bb2cdfe04c25c05fc394c" prot="public" virt="non-virtual"><scope>MultipatchConnectivity</scope><name>get_all_idx_ranges_along_direction</name></member>
-      <member refid="classMultipatchConnectivity_1aa2078dc56dde3bf073f16158404c1735" prot="public" virt="non-virtual"><scope>MultipatchConnectivity</scope><name>get_all_idx_ranges_along_direction</name></member>
+      <member refid="classMultipatchConnectivity_1ad1743e85f5674068845e53643321abd1" prot="public" virt="non-virtual"><scope>MultipatchConnectivity</scope><name>get_all_idx_ranges_along_direction</name></member>
       <member refid="classMultipatchConnectivity_1a9e3ca501f45f19a8e38724147f4b0b97" prot="public" virt="non-virtual"><scope>MultipatchConnectivity</scope><name>get_all_interfaces_along_direction_t</name></member>
       <member refid="classMultipatchConnectivity_1a05d649704740c74f67f952a129f9daab" prot="public" virt="non-virtual"><scope>MultipatchConnectivity</scope><name>get_connections_t</name></member>
       <member refid="classMultipatchConnectivity_1a5561b4f768aea2b45d51fc122d947d65" prot="private" virt="non-virtual"><scope>MultipatchConnectivity</scope><name>get_idx_range</name></member>

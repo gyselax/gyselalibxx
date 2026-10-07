@@ -378,12 +378,9 @@
 * [**MPITransposeAllToAll**](classMPITransposeAllToAll.md)
 * [**Mu**](structMu.md)
 * [**MultipatchConnectivity**](classMultipatchConnectivity.md)
-* [**MultipatchField**](classMultipatchField.md)
-* [**MultipatchFieldMem**](classMultipatchFieldMem.md)
 * [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md)
 * [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md)
 * [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md)
-* [**MultipatchType**](classMultipatchType.md)
 
 
 ## n

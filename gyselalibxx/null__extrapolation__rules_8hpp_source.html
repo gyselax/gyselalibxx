@@ -585,10 +585,10 @@
 
 struct NullExtrapolationRule
 {
-    template &lt;class... Dim, template &lt;typename P&gt; typename SplinesOnPatch, class... Patches&gt;
+    template &lt;class... Dim, class TypeSeqPatches, class TypeSeqInternalTypes&gt;
     KOKKOS_FUNCTION double operator()(
             Coord&lt;Dim...&gt; const&amp; coord_extrap,
-            MultipatchType&lt;SplinesOnPatch, Patches...&gt; const&amp; patches_splines,
+            detail::MultipatchType&lt;TypeSeqPatches, TypeSeqInternalTypes&gt; const&amp; patches_splines,
             int const out_of_bounds_idx) const
     {
         assert(out_of_bounds_idx &lt; 0);

@@ -4,7 +4,7 @@
     <compoundname>NullExtrapolationRule</compoundname>
     <includes refid="null__extrapolation__rules_8hpp" local="no">null_extrapolation_rules.hpp</includes>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structNullExtrapolationRule_1afff2dfac58dbcfcc760da499bb23b953" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structNullExtrapolationRule_1adcbc2d5bebf56f87b90fb55fd3e6c973" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -12,19 +12,15 @@
             <defname>Dim</defname>
           </param>
           <param>
-            <type>template&lt; typename P &gt; typename</type>
-            <declname>SplinesOnPatch</declname>
-            <defname>SplinesOnPatch</defname>
+            <type>class TypeSeqPatches</type>
           </param>
           <param>
-            <type>class...</type>
-            <declname>Patches</declname>
-            <defname>Patches</defname>
+            <type>class TypeSeqInternalTypes</type>
           </param>
         </templateparamlist>
         <type>KOKKOS_FUNCTION double</type>
         <definition>KOKKOS_FUNCTION double NullExtrapolationRule::operator()</definition>
-        <argsstring>(Coord&lt; Dim... &gt; const &amp;coord_extrap, MultipatchType&lt; SplinesOnPatch, Patches... &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</argsstring>
+        <argsstring>(Coord&lt; Dim... &gt; const &amp;coord_extrap, detail::MultipatchType&lt; TypeSeqPatches, TypeSeqInternalTypes &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</argsstring>
         <name>operator()</name>
         <qualifiedname>NullExtrapolationRule::operator()</qualifiedname>
         <param>
@@ -32,7 +28,7 @@
           <declname>coord_extrap</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; SplinesOnPatch, Patches... &gt; const &amp;</type>
+          <type>detail::MultipatchType&lt; TypeSeqPatches, TypeSeqInternalTypes &gt; const &amp;</type>
           <declname>patches_splines</declname>
         </param>
         <param>
@@ -56,7 +52,7 @@
 <parametername direction="in">patches_splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Splines stored in a <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>. </para>
+<para>Splines stored in a MultipatchType. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -87,7 +83,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp" bodystart="17" bodyend="35"/>
     <listofallmembers>
-      <member refid="structNullExtrapolationRule_1afff2dfac58dbcfcc760da499bb23b953" prot="public" virt="non-virtual"><scope>NullExtrapolationRule</scope><name>operator()</name></member>
+      <member refid="structNullExtrapolationRule_1adcbc2d5bebf56f87b90fb55fd3e6c973" prot="public" virt="non-virtual"><scope>NullExtrapolationRule</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

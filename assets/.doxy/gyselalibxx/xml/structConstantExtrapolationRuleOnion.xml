@@ -214,7 +214,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" line="52" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" bodystart="52" bodyend="56"/>
       </memberdef>
-      <memberdef kind="function" id="structConstantExtrapolationRuleOnion_1a2fc1ed58f951dd2d5ae6878853524664" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structConstantExtrapolationRuleOnion_1a0f3ca54cff1d26b247179e591c60b783" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -222,19 +222,15 @@
             <defname>Dim</defname>
           </param>
           <param>
-            <type>template&lt; typename P &gt; typename</type>
-            <declname>SplinesOnPatch</declname>
-            <defname>SplinesOnPatch</defname>
+            <type>class TypeSeqPatches</type>
           </param>
           <param>
-            <type>class...</type>
-            <declname>Patches</declname>
-            <defname>Patches</defname>
+            <type>class TypeSeqInternalTypes</type>
           </param>
         </templateparamlist>
         <type>KOKKOS_FUNCTION double</type>
         <definition>KOKKOS_FUNCTION double ConstantExtrapolationRuleOnion&lt; PatchLocator &gt;::operator()</definition>
-        <argsstring>(Coord&lt; Dim... &gt; const &amp;coord_extrap, MultipatchField&lt; SplinesOnPatch, Patches... &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</argsstring>
+        <argsstring>(Coord&lt; Dim... &gt; const &amp;coord_extrap, detail::MultipatchField&lt; TypeSeqPatches, TypeSeqInternalTypes &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</argsstring>
         <name>operator()</name>
         <qualifiedname>ConstantExtrapolationRuleOnion::operator()</qualifiedname>
         <param>
@@ -242,7 +238,7 @@
           <declname>coord_extrap</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; SplinesOnPatch, Patches... &gt; const &amp;</type>
+          <type>detail::MultipatchField&lt; TypeSeqPatches, TypeSeqInternalTypes &gt; const &amp;</type>
           <declname>patches_splines</declname>
         </param>
         <param>
@@ -263,18 +259,18 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>SplinesOnPatch</parametername>
+<parametername>TypeSeqPatches</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Field of spline coefficients template on the <ref refid="structPatch" kindref="compound">Patch</ref>. </para>
+<para>A TypeSeq of the patch types. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>Patches</parametername>
+<parametername>TypeSeqInternalTypes</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="structPatch" kindref="compound">Patch</ref> types. </para>
+<para>A TypeSeq of the types of the fields of spline coefficients on each patch. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -291,7 +287,7 @@
 <parametername direction="in">patches_splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Splines stored in a <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>. </para>
+<para>Splines stored in a MultipatchType. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -309,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" line="70" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" bodystart="70" bodyend="87"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" line="70" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" bodystart="70" bodyend="88"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -328,7 +324,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" bodystart="21" bodyend="88"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp" bodystart="21" bodyend="89"/>
     <listofallmembers>
       <member refid="structConstantExtrapolationRuleOnion_1ad0e0220903f478231d959766dea1821e" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>bc_r_max</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1a7646e8d4ea6db0f0273dd909521781e3" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>bc_r_min</name></member>
@@ -336,7 +332,7 @@
       <member refid="structConstantExtrapolationRuleOnion_1a703c45a722a454316bfd231e8ffb9652" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>MaxRadiusPatch</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1a06c0684b7f8c3bbdc89a01fe9cb50987" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>MinRadiusPatch</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1a1b04e79eca395d01360d12c669c31cc5" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>n_patches</name></member>
-      <member refid="structConstantExtrapolationRuleOnion_1a2fc1ed58f951dd2d5ae6878853524664" prot="public" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>operator()</name></member>
+      <member refid="structConstantExtrapolationRuleOnion_1a0f3ca54cff1d26b247179e591c60b783" prot="public" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>operator()</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1a0632822e7212fdbe203d64498c651d8f" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>PatchOrdering</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1aaca5835469ed1e87ae3be6070afac2e8" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>R_max</name></member>
       <member refid="structConstantExtrapolationRuleOnion_1a049fe6a7bd8aa060cdbea5fa0c4e3423" prot="private" virt="non-virtual"><scope>ConstantExtrapolationRuleOnion</scope><name>R_min</name></member>

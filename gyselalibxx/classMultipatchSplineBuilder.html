@@ -591,7 +591,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classMultipatchField.html"><strong>MultipatchSplineCoeffs</strong></a> splines, <a href="classMultipatchField.html"><strong>MultipatchValues</strong></a> const &amp; values, std::optional&lt; <a href="classMultipatchField.html"><strong>MultipatchDerivs</strong></a> &gt; derivs_xmin=std::nullopt, std::optional&lt; <a href="classMultipatchField.html"><strong>MultipatchDerivs</strong></a> &gt; derivs_xmax=std::nullopt) const<br><em>Build the spline representation of each given function.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (MultipatchSplineCoeffs splines, MultipatchValues const &amp; values, std::optional&lt; MultipatchDerivs &gt; derivs_xmin=std::nullopt, std::optional&lt; MultipatchDerivs &gt; derivs_xmax=std::nullopt) const<br><em>Build the spline representation of each given function.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -600,7 +600,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>We need to instantiate all the builders for all the patches in the main code. We process the same way for the Fields containing the spline coefficients and the values of the function on each patch. The Fields are stored in <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
+<p>We need to instantiate all the builders for all the patches in the main code. We process the same way for the Fields containing the spline coefficients and the values of the function on each patch. The Fields are stored in MultipatchField objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
 <p>This function is useful to avoid calling all the builders individually, especially in a multipatch geometry with several patches.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -641,10 +641,10 @@
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>splines</code> <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> of all the Fields pointing to the spline representations. </li>
-<li><code>values</code> <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> of all the Fields pointing to the function values. </li>
-<li><code>derivs_xmin</code> <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> of all the ConstFields describing the function derivatives at the lower bound. </li>
-<li><code>derivs_xmax</code> <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> of all the ConstFields describing the function derivatives at the upper bound. </li>
+<li><code>splines</code> MultipatchField of all the Fields pointing to the spline representations. </li>
+<li><code>values</code> MultipatchField of all the Fields pointing to the function values. </li>
+<li><code>derivs_xmin</code> MultipatchField of all the ConstFields describing the function derivatives at the lower bound. </li>
+<li><code>derivs_xmax</code> MultipatchField of all the ConstFields describing the function derivatives at the upper bound. </li>
 </ul>
 <hr>
 

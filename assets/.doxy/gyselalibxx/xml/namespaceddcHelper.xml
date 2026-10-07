@@ -784,39 +784,35 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" line="61" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" bodystart="61" bodyend="65"/>
       </memberdef>
-      <memberdef kind="function" id="multipatch__field_8hpp_1a1c7e7fe53e09d748ce27fe0421a2ef34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="multipatch__field_8hpp_1a9aea59138796f480705d5bd006d67d02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
-          <param>
-            <type>template&lt; typename P &gt; typename</type>
-            <declname>T1</declname>
-            <defname>T1</defname>
-          </param>
-          <param>
-            <type>template&lt; typename P &gt; typename</type>
-            <declname>T2</declname>
-            <defname>T2</defname>
-          </param>
           <param>
             <type>class...</type>
             <declname>Patches</declname>
             <defname>Patches</defname>
           </param>
+          <param>
+            <type>class TypeSeqInternalTypes1</type>
+          </param>
+          <param>
+            <type>class TypeSeqInternalTypes2</type>
+          </param>
         </templateparamlist>
         <type>void</type>
         <definition>void ddcHelper::deepcopy</definition>
-        <argsstring>(MultipatchField&lt; T1, Patches... &gt; dst, MultipatchField&lt; T2, Patches... &gt; src)</argsstring>
+        <argsstring>(detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes1 &gt; dst, detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes2 &gt; src)</argsstring>
         <name>deepcopy</name>
         <qualifiedname>ddcHelper::deepcopy</qualifiedname>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; T1, Patches... &gt;</type>
+          <type>detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes1 &gt;</type>
           <declname>dst</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; T2, Patches... &gt;</type>
+          <type>detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes2 &gt;</type>
           <declname>src</declname>
         </param>
         <briefdescription>
-<para>Copy the data from one <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> into another. </para>
+<para>Copy the data from one MultipatchField into another. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -824,7 +820,7 @@
 <parametername>dst</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> that the data will be copied to. </para>
+<para>The MultipatchField that the data will be copied to. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -832,7 +828,7 @@
 <parametername>src</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> that the data will be copied from. </para>
+<para>The MultipatchField that the data will be copied from. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -840,7 +836,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="209" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="209" bodyend="216"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="212" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="212" bodyend="223"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1ab85a32309a76aeb021f849ea7bfd2773" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

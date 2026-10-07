@@ -131,7 +131,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="108" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineBuilder_1af07bfdd0d12aa1083b2774a318ff6469" prot="private" static="no">
-        <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; SplineOnPatch, Patches... &gt;</type>
+        <type>MultipatchField&lt; SplineOnPatch, Patches... &gt;</type>
         <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::MultipatchSplineCoeffs =  MultipatchField&lt;SplineOnPatch, Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchSplineCoeffs</name>
@@ -146,7 +146,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="114" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineBuilder_1ad568d53faac2b7ddd46d6207758af1cc" prot="private" static="no">
-        <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; ValuesOnPatch, Patches... &gt;</type>
+        <type>MultipatchField&lt; ValuesOnPatch, Patches... &gt;</type>
         <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::MultipatchValues =  MultipatchField&lt;ValuesOnPatch, Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchValues</name>
@@ -161,7 +161,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="118" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineBuilder_1ad75b327b529bd5d52ade33d40be56b84" prot="private" static="no">
-        <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; DerivsOnPatch, Patches... &gt;</type>
+        <type>MultipatchField&lt; DerivsOnPatch, Patches... &gt;</type>
         <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::MultipatchDerivs =  MultipatchField&lt;DerivsOnPatch, Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchDerivs</name>
@@ -236,7 +236,7 @@
         <name>get_deriv_value</name>
         <qualifiedname>MultipatchSplineBuilder::get_deriv_value</qualifiedname>
         <param>
-          <type>std::optional&lt; <ref refid="classMultipatchField" kindref="compound">MultipatchDerivs</ref> &gt;</type>
+          <type>std::optional&lt; MultipatchDerivs &gt;</type>
           <declname>derivs</declname>
         </param>
         <briefdescription>
@@ -301,20 +301,20 @@
         <name>operator()</name>
         <qualifiedname>MultipatchSplineBuilder::operator()</qualifiedname>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchSplineCoeffs</ref></type>
+          <type>MultipatchSplineCoeffs</type>
           <declname>splines</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchValues</ref> const &amp;</type>
+          <type>MultipatchValues const &amp;</type>
           <declname>values</declname>
         </param>
         <param>
-          <type>std::optional&lt; <ref refid="classMultipatchField" kindref="compound">MultipatchDerivs</ref> &gt;</type>
+          <type>std::optional&lt; MultipatchDerivs &gt;</type>
           <declname>derivs_xmin</declname>
           <defval>std::nullopt</defval>
         </param>
         <param>
-          <type>std::optional&lt; <ref refid="classMultipatchField" kindref="compound">MultipatchDerivs</ref> &gt;</type>
+          <type>std::optional&lt; MultipatchDerivs &gt;</type>
           <declname>derivs_xmax</declname>
           <defval>std::nullopt</defval>
         </param>
@@ -327,7 +327,7 @@
 <parametername>splines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> of all the Fields pointing to the spline representations. </para>
+<para>MultipatchField of all the Fields pointing to the spline representations. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -335,7 +335,7 @@
 <parametername>values</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> of all the Fields pointing to the function values. </para>
+<para>MultipatchField of all the Fields pointing to the function values. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -343,7 +343,7 @@
 <parametername>derivs_xmin</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> of all the ConstFields describing the function derivatives at the lower bound. </para>
+<para>MultipatchField of all the ConstFields describing the function derivatives at the lower bound. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -351,7 +351,7 @@
 <parametername>derivs_xmax</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> of all the ConstFields describing the function derivatives at the upper bound. </para>
+<para>MultipatchField of all the ConstFields describing the function derivatives at the upper bound. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -366,7 +366,7 @@
 <para>A class to call all the builders of all the patches once. </para>
     </briefdescription>
     <detaileddescription>
-<para>We need to instantiate all the builders for all the patches in the main code. We process the same way for the Fields containing the spline coefficients and the values of the function on each patch. The Fields are stored in <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</para>
+<para>We need to instantiate all the builders for all the patches in the main code. We process the same way for the Fields containing the spline coefficients and the values of the function on each patch. The Fields are stored in MultipatchField objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</para>
 <para>This function is useful to avoid calling all the builders individually, especially in a multipatch geometry with several patches.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>

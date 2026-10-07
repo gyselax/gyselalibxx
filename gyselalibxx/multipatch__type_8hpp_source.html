@@ -586,57 +586,62 @@ template &lt;class T&gt;
 inline constexpr bool is_multipatch_type_v
         = enable_multipatch_type&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;;
 
+namespace detail {
 
-template &lt;template &lt;typename P&gt; typename T, class... Patches&gt;
-class MultipatchType
+template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
+class MultipatchType;
+
+template &lt;class... Patches, class... InternalTypes&gt;
+class MultipatchType&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;
 {
+    static_assert(
+            sizeof...(Patches) == sizeof...(InternalTypes),
+            "There must be one internal type per patch");
+
 public:
     using PatchOrdering = ddc::detail::TypeSeq&lt;Patches...&gt;;
 
-    using example_element = T&lt;ddc::type_seq_element_t&lt;0, PatchOrdering&gt;&gt;;
-
-protected:
-    std::tuple&lt;T&lt;Patches&gt;...&gt; m_tuple;
-
-    template &lt;template &lt;typename P&gt; typename OtherType, class... OPatches&gt;
-    friend class MultipatchType;
-
-    KOKKOS_FUNCTION explicit MultipatchType(std::tuple&lt;T&lt;Patches&gt;...&gt;&amp;&amp; tuple) : m_tuple(tuple) {}
+private:
+    using InternalTypeOrdering = ddc::detail::TypeSeq&lt;InternalTypes...&gt;;
 
 public:
-    explicit KOKKOS_FUNCTION MultipatchType(T&lt;Patches&gt;... args) : m_tuple(std::move(args)...) {}
+    template &lt;class Patch&gt;
+    using TypeOnPatch = ddc::
+            type_seq_element_t&lt;ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;, InternalTypeOrdering&gt;;
 
-    template &lt;template &lt;typename P&gt; typename OtherType, class... OPatches&gt;
-    KOKKOS_FUNCTION MultipatchType(MultipatchType&lt;OtherType, OPatches...&gt; const&amp; other)
+    using example_element = ddc::type_seq_element_t&lt;0, InternalTypeOrdering&gt;;
+
+protected:
+    std::tuple&lt;InternalTypes...&gt; m_tuple;
+
+    KOKKOS_FUNCTION explicit MultipatchType(std::tuple&lt;InternalTypes...&gt;&amp;&amp; tuple) : m_tuple(tuple)
+    {
+    }
+
+public:
+    explicit KOKKOS_FUNCTION MultipatchType(InternalTypes... args) : m_tuple(std::move(args)...) {}
+
+    template &lt;class OPatchSeq, class OTypeSeq&gt;
+    KOKKOS_FUNCTION MultipatchType(MultipatchType&lt;OPatchSeq, OTypeSeq&gt; const&amp; other)
         : m_tuple(other.template get&lt;Patches&gt;()...)
     {
         static_assert(
-                ddc::type_seq_contains_v&lt;PatchOrdering, ddc::detail::TypeSeq&lt;OPatches...&gt;&gt;,
+                ddc::type_seq_contains_v&lt;PatchOrdering, OPatchSeq&gt;,
                 "The type being copied does not contain all the required patches");
         static_assert(
-                std::is_same_v&lt;std::tuple&lt;T&lt;Patches&gt;...&gt;, std::tuple&lt;OtherType&lt;Patches&gt;...&gt;&gt;,
-                "MultipatchTypes are not equivalent");
-    }
-
-    template &lt;template &lt;typename P&gt; typename OtherType, class... OPatches&gt;
-    MultipatchType(MultipatchType&lt;OtherType, OPatches...&gt;&amp;&amp; other)
-        : m_tuple(std::move(other.template get&lt;Patches&gt;())...)
-    {
-        static_assert(
-                std::is_same_v&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;OPatches...&gt;&gt;,
-                "Cannot create a MultipatchType from a temporary MultipatchType with a different "
-                "ordering");
-        static_assert(
-                std::is_same_v&lt;std::tuple&lt;T&lt;Patches&gt;...&gt;, std::tuple&lt;OtherType&lt;OPatches&gt;...&gt;&gt;,
+                std::is_same_v&lt;
+                        InternalTypeOrdering,
+                        ddc::detail::TypeSeq&lt;decltype(other.template get&lt;Patches&gt;())...&gt;&gt;,
                 "MultipatchTypes are not equivalent");
     }
 
     KOKKOS_DEFAULTED_FUNCTION ~MultipatchType() noexcept = default;
 
     template &lt;class Patch&gt;
-    KOKKOS_FUNCTION T&lt;Patch&gt; get() const requires(!has_data_access_methods_v&lt;T&lt;Patch&gt;&gt;)
+    KOKKOS_FUNCTION TypeOnPatch&lt;Patch&gt; get() const
+            requires(!has_data_access_methods_v&lt;TypeOnPatch&lt;Patch&gt;&gt;)
     {
-        return std::get&lt;T&lt;Patch&gt;&gt;(m_tuple);
+        return std::get&lt;TypeOnPatch&lt;Patch&gt;&gt;(m_tuple);
     }
 
     static constexpr std::size_t size()
@@ -644,14 +649,21 @@ public:
         return sizeof...(Patches);
     }
 
-    KOKKOS_FUNCTION std::tuple&lt;T&lt;Patches&gt;...&gt; const&amp; get_tuple() const
+    KOKKOS_FUNCTION std::tuple&lt;InternalTypes...&gt; const&amp; get_tuple() const
     {
         return m_tuple;
     }
 };
 
+} // namespace detail
+
+template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
+inline constexpr bool
+        enable_multipatch_type&lt;detail::MultipatchType&lt;TypeSeqPatches, TypeSeqInternalTypes&gt;&gt; = true;
+
 template &lt;template &lt;typename P&gt; typename T, class... Patches&gt;
-inline constexpr bool enable_multipatch_type&lt;MultipatchType&lt;T, Patches...&gt;&gt; = true;
+using MultipatchType = detail::
+        MultipatchType&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
 </code></pre></div>
               
             </div>

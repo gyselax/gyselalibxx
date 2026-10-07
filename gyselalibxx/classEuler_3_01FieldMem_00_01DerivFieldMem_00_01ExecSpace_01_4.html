@@ -665,7 +665,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>A class which provides an implementation of an explicit <a href="classEuler.html"><strong>Euler</strong></a> method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. This specialisation handles Field-like objects (Field, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>). The values which evolve are defined on an index range.</p>
+<p>A class which provides an implementation of an explicit <a href="classEuler.html"><strong>Euler</strong></a> method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. This specialisation handles Field-like objects (Field, <a href="classVectorField.html"><strong>VectorField</strong></a>, MultipatchField). The values which evolve are defined on an index range.</p>
 <p>For the following ODE : <span class="arithmatex">\(\partial_t y(t) = f(t, y(t))\)</span>,</p>
 <p>the explicit <a href="classEuler.html"><strong>Euler</strong></a> method is given by : <span class="arithmatex">\(y^{n+1} =  y^{n} + dt f(t^{n}, y^{n})\)</span>.</p>
 <p>The method is order 1. </p>
