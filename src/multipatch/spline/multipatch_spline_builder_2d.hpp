@@ -274,7 +274,7 @@ public:
      *      The values of the the cross-derivatives at the upper boundary in the first dimension
      *      and the upper boundary in the second dimension.
      */
-    void build_from_fields(
+    void operator()(
             MultipatchSplineCoeffs splines,
             MultipatchValues const& values,
             std::optional<MultipatchDerivs1> derivs_min1 = std::nullopt,
@@ -293,10 +293,10 @@ public:
                  get_deriv_value<Patches>(derivs_max1),
                  get_deriv_value<Patches>(derivs_min2),
                  get_deriv_value<Patches>(derivs_max2),
-                 get_deriv_value<Patches>(mixed_derivs_min1_min2),
-                 get_deriv_value<Patches>(mixed_derivs_max1_min2),
-                 get_deriv_value<Patches>(mixed_derivs_min1_max2),
-                 get_deriv_value<Patches>(mixed_derivs_max1_max2))),
+                 get_deriv_value<Patches>(cross_derivs_min1_min2),
+                 get_deriv_value<Patches>(cross_derivs_max1_min2),
+                 get_deriv_value<Patches>(cross_derivs_min1_max2),
+                 get_deriv_value<Patches>(cross_derivs_max1_max2))),
          ...);
     };
 

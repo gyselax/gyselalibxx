@@ -286,7 +286,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
 
 
     // Build the spline representations on each patch
-    builder.build_from_fields(function_coef, function_values);
+    builder(function_coef, function_values);
 
     // Check the results are the same than with one by one spline building
     builder1(function_1_coef_expected, get_const_field(function_1));
@@ -501,8 +501,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
 
 
     // Build the spline representations on each patch
-    builder.build_from_fields(
-            function_coef,
+    builder(function_coef,
             function_values,
             derivs_xmin,
             derivs_xmax,
