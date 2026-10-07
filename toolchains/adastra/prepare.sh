@@ -17,6 +17,9 @@ export SPACK_PREFIX=${ALL_CCFRSCRATCH}/gysela-spack/spack-${SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=true
 export PYTHONDONTWRITEBYTECODE=True
 
+mkdir --parents "${SPACK_PREFIX}"
+chmod g+s "${SPACK_PREFIX}"
+setfacl --modify d:g::rwX "${SPACK_PREFIX}"
 git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git "${SPACK_PREFIX}" || true
 
 . ${SPACK_PREFIX}/share/spack/setup-env.sh
