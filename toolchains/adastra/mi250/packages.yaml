@@ -1,20 +1,5 @@
 ---
 packages:
-  all:
-    require:
-      # GPU parameter propagation:
-      # - Avoids handling cray-mpich special case in each MPI package
-      # - Uses package constraint to automatically propagate GPU variants
-      # For MI250X:
-      - one_of: [amdgpu_target=gfx90a, amdgpu_target=gfx942]
-        when: +rocm
-      - spec: +rocm amdgpu_target=gfx90a ^cray-mpich+rocm amdgpu_target=gfx90a
-        when: +rocm amdgpu_target=gfx90a ^cray-mpich
-      # For MI300A:
-      - spec: +rocm amdgpu_target=gfx942 ^cray-mpich+rocm amdgpu_target=gfx942
-        when: +rocm amdgpu_target=gfx942 ^cray-mpich
-      # TODO(Etienne M): Fix all packages requiring MPICH + rocm to effectively
-      # propagate the variant.
   cray-mpich:
     buildable: false
     externals:
