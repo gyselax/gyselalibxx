@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add GVEC in the toolchains.
 - Allow `GyroAverageOperator` to work with any interpolation scheme.
 - Add `TypeOnPatch` to `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` to get the type stored on a given patch.
+- Allow `ddcHelper::get<Dim>(..)` to be used on a multipatch argument.
 - Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
 - Add `MultipatchSplineBuilder2D::spline_idx_ranges()`.
 
