@@ -58,7 +58,7 @@ find_package(LAPACKE REQUIRED)
 
 find_package(Ginkgo 1.8 REQUIRED)
 
-find_package(GMGPolar 2.4.1 REQUIRED)
+find_package(GMGPolar 2.4.0 REQUIRED)
 
 
 ###############################################################################################
