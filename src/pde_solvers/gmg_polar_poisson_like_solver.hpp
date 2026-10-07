@@ -217,13 +217,13 @@ public:
         : m_domain_geom(to_physical)
         , m_extrapolation_rule(extrapolation_rule)
         , m_density_coeffs(
-                  IdxRangeR(builder.interpolation_domain()).size(),
-                  IdxRangeTheta(builder.interpolation_domain()).size())
+                  IdxRangeR(interpolator.get_builder().interpolation_domain()).size(),
+                  IdxRangeTheta(interpolator.get_builder().interpolation_domain()).size())
         , m_max_iterations(max_iterations.value_or(100))
         , m_absTol(absTol.value_or(1e-10))
         , m_relTol(relTol.value_or(1e-6))
     {
-        IdxRangeRTheta idx_range(m_builder.interpolation_domain());
+        IdxRangeRTheta idx_range(interpolator.get_builder().interpolation_domain());
         IdxRangeR idx_range_r(idx_range);
         IdxRangeTheta idx_range_theta(idx_range);
         IdxRangeTheta idx_range_theta_with_poloidal_point(
@@ -268,7 +268,7 @@ public:
         // Are boundary conditions provided on the interior. False = Use Across-the-origin discretisation
         m_solver->DirBC_Interior(false);
         // Stencil distribution strategy: Take, Give
-        m_solver->stencilDistributionMethod(StencilDistributionMethod::TAKE);
+        m_solver->stencilDistributionMethod(gmgpolar::StencilDistributionMethod::TAKE);
         // Cache density profile coefficients: alpha, beta
         m_solver->cacheDensityProfileCoefficients(true);
         // Cache domain geometry data: arr, att, art, detDF
@@ -279,24 +279,25 @@ public:
         m_solver->maxLevels(-1); // Max multigrid levels (-1 = use deepest possible)
         m_solver->preSmoothingSteps(1); // Smoothing before coarse-grid correction
         m_solver->postSmoothingSteps(1); // Smoothing after coarse-grid correction
-        m_solver->multigridCycle(MultigridCycleType::V_CYCLE); // Multigrid cycle type
+        m_solver->multigridCycle(gmgpolar::MultigridCycleType::V_CYCLE); // Multigrid cycle type
         m_solver->FMG(true); // Full Multigrid mode on/off
         m_solver->FMG_iterations(2); // FMG iteration count
-        m_solver->FMG_cycle(MultigridCycleType::F_CYCLE); // FMG cycle type
+        m_solver->FMG_cycle(gmgpolar::MultigridCycleType::F_CYCLE); // FMG cycle type
 
         // --- Preconditioned Conjugate Gradient settings --- //
         m_solver->PCG(false); // Preconditioned Conjugate Gradient mode on/off
         m_solver->PCG_FMG(true); // Use FMG as preconditioner for PCG
         m_solver->PCG_FMG_iterations(1); // FMG iterations for PCG preconditioner
         m_solver->PCG_FMG_cycle(
-                MultigridCycleType::V_CYCLE); // FMG cycle type for PCG preconditioner
+                gmgpolar::MultigridCycleType::V_CYCLE); // FMG cycle type for PCG preconditioner
         m_solver->PCG_MG_iterations(2); // Multigrid iterations for PCG preconditioner
         m_solver->PCG_MG_cycle(
-                MultigridCycleType::V_CYCLE); // Multigrid cycle type for PCG iterations
+                gmgpolar::MultigridCycleType::V_CYCLE); // Multigrid cycle type for PCG iterations
 
         // --- Iterative solver controls --- //
         m_solver->maxIterations(m_max_iterations); // Max number of iterations
-        m_solver->residualNormType(ResidualNormType::WEIGHTED_EUCLIDEAN); // Residual norm type
+        m_solver->residualNormType(
+                gmgpolar::ResidualNormType::WEIGHTED_EUCLIDEAN); // Residual norm type
         m_solver->absoluteTolerance(m_absTol); // Absolute residual tolerance
         m_solver->relativeTolerance(m_relTol); // Relative residual tolerance
 
