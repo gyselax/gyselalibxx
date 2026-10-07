@@ -326,7 +326,7 @@ public:
      *
      * @param val_idx_range The index range on which the values of the field are defined.
      */
-    DerivFieldMem(physical_idx_range_type val_idx_range)
+    explicit DerivFieldMem(physical_idx_range_type val_idx_range)
         : DerivFieldMem(allocator_type(), val_idx_range)
     {
     }
