@@ -13,9 +13,9 @@ The feet of the characteristic curves are used to interpolate the updated distri
 - [Velocity advection](#velocity-advection)
 - [1D advection with a given advection field](#1d-advection-with-a-given-advection-field)
 - [2D advection on a polar slice with a given advection field](#2d-advection-on-a-polar-slice-with-a-given-advection-field)
-  - [Advection Field](#advection-field)
-  - [Polar Foot Finder](#polar-foot-finder)
-  - [Advection Domain](#advection-domain)
+    - [Advection Field](#advection-field)
+    - [Polar Foot Finder](#polar-foot-finder)
+    - [Advection Domain](#advection-domain)
 
 ## Studied equation
 
@@ -54,9 +54,9 @@ of the solution passing by each mesh point $`\overrightarrow{x}_{\star}`$ at the
 So to compute the advected function at the next time step,
 
 - we compute the feet of the characteristics $`\overrightarrow{X}(t^n; t^{n+1}, \overrightarrow{x}_{\star})`$
- for each mesh point $`\overrightarrow{x}_{\star}`$;
+    for each mesh point $`\overrightarrow{x}_{\star}`$;
 - we interpolate the function $f(t = t^n)$ on the feet of the characteristics.
- The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
+    The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
 
 ## Spatial advection
 
@@ -247,10 +247,10 @@ compute the mesh points in the physical domain using a mapping function $\mathca
 
 This adds some steps to the advection operator, we now have to compute
 
- 1. the mesh points in the physical domain using $\mathcal{F}$;
- 2. the feet of the characteristics in the physical domain;
- 3. the feet of the characteristics in the logical domain (polar grid) using $\mathcal{F}^{-1}$;
- 4. then interpolate the advection function at the feet of the characteristics in the logical domain.
+1. the mesh points in the physical domain using $\mathcal{F}$;
+2. the feet of the characteristics in the physical domain;
+3. the feet of the characteristics in the logical domain (polar grid) using $\mathcal{F}^{-1}$;
+4. then interpolate the advection function at the feet of the characteristics in the logical domain.
 
 The third step can be difficult especially if the mapping function $\mathcal{F}$ is not analytically invertible.
 It is not impossible but the computations can be costly.
@@ -264,10 +264,10 @@ We use another mapping function $\mathcal{G}$ such that:
 
 Then the four previous steps become
 
- 1. calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$;
- 2. calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$;
- 3. calculate the feet of the characteristics in the pseudo-Cartesian domain;
- 4. calculate the feet of the characteristics in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
+1. calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$;
+2. calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$;
+3. calculate the feet of the characteristics in the pseudo-Cartesian domain;
+4. calculate the feet of the characteristics in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
 
 Here, $\mathcal{G}$ is analytically invertible (we can fix  $`\mathcal{G}^{-1}(x = x_0, y = y_0) = (r = 0, \theta = 0)`$)
 and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Edoardo Zoni's article [^1].

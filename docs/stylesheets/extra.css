@@ -1,6 +1,24 @@
-
 /* Normalize emoji image size */
 img.twemoji {
     height: 1em;
     vertical-align: middle;
+}
+
+/* Widen the content area (the readthedocs theme limits it to 800px) */
+.wy-nav-content {
+    max-width: 1100px;
+}
+
+/* Allow text in table cells to wrap so that tables fit on the page
+   (the readthedocs theme prevents wrapping which requires horizontal scrolling) */
+.wy-table-responsive table td,
+.wy-table-responsive table th {
+    white-space: normal;
+}
+
+/* Allow long inline code (e.g. error messages) to wrap instead of overflowing into the next column
+   or beyond the edge of the page. Code blocks are not affected. */
+.rst-content :not(pre) > code {
+    white-space: normal;
+    overflow-wrap: anywhere;
 }

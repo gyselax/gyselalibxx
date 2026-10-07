@@ -14,10 +14,10 @@ The following sections describe some of the DDC types used in Gyselalib++.
 
 - [Coordinates](#coordinates)
 - [Indexing and associated concepts](#indexing-and-associated-concepts)
-  - [Grid](#grid)
-  - [Index](#index)
-  - [Index Step](#index-step)
-  - [Index Range](#index-range)
+    - [Grid](#grid)
+    - [Index](#index)
+    - [Index Step](#index-step)
+    - [Index Range](#index-range)
 - [Data Storage](#data-storage)
 - [Example](#example)
 - [Pitfalls](#pitfalls)
@@ -30,11 +30,11 @@ Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a
 
 If the value of the coordinate needs to be used in a mathematical expression, the scalar (`double`) quantity stored in one of the dimensions of a coordinate can be extracted using `ddc::get<DimOfInterest>(my_coord)`.
 
-It is also possible to extract a coordinate on a subset of the original dimensions using `ddc::select<DimOfInterest>(my_coord)`. For example if we want to get the position of an object on a radial slice $(r,\theta)$, but we are given the coordinate in the full vector space $`(r, \theta, \varphi, v_\parallel, \mu)`$ then we can do:
+It is also possible to extract a coordinate on a subset of the original dimensions by passing it to the constructor of the lower-dimensional coordinate (e.g. `Coord<DimOfInterest>(my_coord)`). This is preferred to the equivalent but more verbose `ddc::select<DimOfInterest>(my_coord)`. For example if we want to get the position of an object on a radial slice $(r,\theta)$, but we are given the coordinate in the full vector space $`(r, \theta, \varphi, v_\parallel, \mu)`$ then we can do:
 
 ```cpp
 Coord<R, Theta, Phi, Vpar, Mu> full_coord(...);
-Coord<R, Theta> slice_coord = ddc::select<R, Theta>(full_coord);
+Coord<R, Theta> slice_coord(full_coord);
 ```
 
 Coordinates can be combined using operators. For example, let us consider three vectors $P$, $Q$, and $R$ defined on a cartesian space $(x,y)$:
@@ -92,7 +92,7 @@ In Gyselalib++ the alias `IndexX` is usually defined in `geometry.hpp` to descri
 
 We can also create multi-dimensional indices. E.g. the point `(x_i, y_j)` can be indexed using the object `Idx<GridX, GridY>(i, j)`
 
-It is also possible to extract an index on a subset of the original dimensions using `ddc::select<GridOfInterest>(my_nd_index)`.
+It is also possible to extract an index on a subset of the original dimensions using the constructor of the lower-dimensional index (e.g. `Idx<GridOfInterest>(my_nd_index)`).
 
 Once a grid has been initialised using the function `ddc::init_discrete_space`, an `Idx` defined on that grid can be used to obtain the coordinates of the points in the grid. This is done using the function `ddc::coordinate`.
 
@@ -130,7 +130,7 @@ i += k;
 
 In Gyselalib++ the alias `IdxStepX` is usually defined in `geometry.hpp` to describe the step from one element of a grid along the dimension X to another.
 
-As with `Idx`s, an `IdxStep` can be multi-dimensional and lower dimension `IdxStep` objects can be extracted using `ddc::select<GridOfInterest>(my_nd_vector)`.
+As with `Idx`s, an `IdxStep` can be multi-dimensional and lower dimension `IdxStep` objects can be extracted using the constructor of the lower-dimensional index step (e.g. `IdxStep<GridOfInterest>(my_nd_vector)`).
 
 For a more concrete example of how this type is useful see [Example](#example).
 
@@ -189,7 +189,7 @@ It is also common to need to iterate over a subset of grid points. Such a subset
 - `remove_last(IdxStep<..> n)` : Returns an index range containing all but the last n indices of the original range.
 - `remove(IdxStep<..> n_first, IdxStep<..> n_last)` : Returns an index range containing all indices of the original range except the first n\_first indices and the last n\_last indices.
 
-It is also possible to extract a lower-dimensional index range from an ND index range using `ddc::select<GridOfInterest>(my_nd_idx_range)`.
+It is also possible to extract a lower-dimensional index range from an ND index range using the constructor of the lower-dimensional index range (e.g. `IdxRange<GridOfInterest>(my_nd_idx_range)`).
 
 Finally it may not be possible to express the elements you want to iterate over as an index range. This is notably the case if you want to iterate over every j-th element. In this case it is necessary to fall back on `IdxRangeIterator`. The syntax in this case is:
 
@@ -314,7 +314,7 @@ DFieldMemSpXVx distribution_function_alloc(idx_range);
 DFieldSpXVx distribution_function(distribution_function_alloc);
 
 ddc::host_for_each(idx_range, [&](IdxSpXVx index) {
-    CoordXVx coord = ddc::coordinate(ddc::select<GridX, GridVx>(index));
+    CoordXVx coord = ddc::coordinate(Idx<GridX, GridVx>(index));
     double v_pos = ddc::get<Vx>(coord);
     double x_pos = ddc::get<X>(coord);
     distribution_function(index) = n0 / (2 * M_PI * T0) * exp(-v_pos * v_pos / T0) * cos(kx * x_pos);
@@ -335,18 +335,18 @@ $$
 This code can be written simply using `Idx` and `IdxStep`:
 
 ```cpp
-double get_laplacian_at_position(DFieldXY function_values, IndexXY position)
+double get_laplacian_at_position(DFieldXY function_values, IdxXY position)
 {
     IdxStepX x_step(1);
     IdxStepY y_step(1);
 
-    // Get the uniform grid in the appropriate direction and use it to
+    // Use the uniform grid in the appropriate direction to
     // extract the distance h.
-    double h_x = ddc::discrete_space<X>().step();
-    double h_y = ddc::discrete_space<Y>().step();
+    double h_x = ddc::step<GridX>();
+    double h_y = ddc::step<GridY>();
 
     return (function_values(position - x_step) + function_values(position + x_step)
-            + function_values(position - y_step) function_values(position + y_step)
+            + function_values(position - y_step) + function_values(position + y_step)
             - 4 * function_values(position))
            / (h_x * h_y);
 }
