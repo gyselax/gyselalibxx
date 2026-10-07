@@ -298,7 +298,8 @@ public:
                                 Idx<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(1),
                                 IdxStep<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
                                         NDerivs))...),
-                to_subidx_range_collection<physical_deriv_grids>(m_deriv_idx_range...))
+                ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>(
+                        m_deriv_idx_range...))
     {
         static_assert(
                 ddc::type_seq_same_v<ddc::detail::TypeSeq<DerivDoms...>, physical_deriv_grids>);
