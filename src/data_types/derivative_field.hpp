@@ -415,7 +415,7 @@ public:
      *
      * @returns A constant span of this field.
      */
-    KOKKOS_FUNCTION constexpr view_type span_cview() const
+    KOKKOS_FUNCTION constexpr view_type get_const_field() const
     {
         return view_type(*this);
     }
@@ -428,7 +428,7 @@ public:
      *
      * @returns A span of this field.
      */
-    KOKKOS_FUNCTION constexpr span_type span_view() const
+    KOKKOS_FUNCTION constexpr span_type get_field() const
     {
         return *this;
     }

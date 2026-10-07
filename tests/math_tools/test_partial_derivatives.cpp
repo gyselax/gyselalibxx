@@ -247,14 +247,14 @@ public:
             = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC
                           : ddc::SplineBuilderClosure::GREVILLE;
 
-    struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree>
+    struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree, X::PERIODIC>
     {
     };
     using SplineInterpPointsX
             = ddc::GrevilleInterpolationPoints<BSplinesX, SplineClosure, SplineClosure>;
 
 
-    struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree>
+    struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree, Y::PERIODIC>
     {
     };
     using SplineInterpPointsY
@@ -365,7 +365,7 @@ public:
             SplineBoundaryClosure::Periodic,
             SplineBoundaryClosure::Greville_Greville>;
 
-    struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree>
+    struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree, X::PERIODIC>
     {
     };
     using SplineInterpPointsX = ddc::GrevilleInterpolationPoints<
@@ -373,7 +373,7 @@ public:
             SplineClosureX::min::value,
             SplineClosureX::max::value>;
 
-    struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree>
+    struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree, Y::PERIODIC>
     {
     };
     using SplineInterpPointsY = ddc::GrevilleInterpolationPoints<

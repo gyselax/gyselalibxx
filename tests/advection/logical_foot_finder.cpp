@@ -68,10 +68,10 @@ static constexpr int BSDegree = 3;
 static constexpr ddc::SplineBuilderClosure SplineRClosure = ddc::SplineBuilderClosure::GREVILLE;
 static constexpr ddc::SplineBuilderClosure SplineThetaClosure = ddc::SplineBuilderClosure::PERIODIC;
 
-struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
+struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree, R::PERIODIC>
 {
 };
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
+struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree, Theta::PERIODIC>
 {
 };
 

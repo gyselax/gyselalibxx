@@ -22,7 +22,7 @@ struct X
 
 using CoordX = Coord<X>;
 
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
 

@@ -27,13 +27,13 @@ struct Z
 
 int constexpr Degree = 3;
 
-struct BSplinesX : ddc::UniformBSplines<X, Degree>
+struct BSplinesX : ddc::UniformBSplines<X, Degree, X::PERIODIC>
 {
 };
-struct BSplinesY : ddc::UniformBSplines<Y, Degree>
+struct BSplinesY : ddc::UniformBSplines<Y, Degree, Y::PERIODIC>
 {
 };
-struct BSplinesZ : ddc::UniformBSplines<Z, Degree>
+struct BSplinesZ : ddc::UniformBSplines<Z, Degree, Z::PERIODIC>
 {
 };
 
