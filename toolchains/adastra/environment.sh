@@ -16,7 +16,7 @@ environment_name="$1"
 module purge
 
 SPACK_VERSION="1.2.2"
-export SPACK_PREFIX=${ALL_CCFRSCRATCH}/gysela-spack/spack-${SPACK_VERSION}
+export SPACK_PREFIX=${ALL_CCFRSCRATCH}/gysela-spack-${SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=true
 
 # Avoid too many temporary files in the Spack installation tree
