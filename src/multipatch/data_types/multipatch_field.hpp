@@ -136,9 +136,9 @@ public:
      * @return The object on the given patch.
      */
     template <class PatchType>
-    KOKKOS_FUNCTION TypeOnPatch<PatchType> get() const requires(is_patch_v<PatchType>)
+    KOKKOS_FUNCTION auto get() const requires(is_patch_v<PatchType>)
     {
-        return ::get_field(std::get<TypeOnPatch<PatchType>>(base_type::m_tuple));
+        return std::get<TypeOnPatch<PatchType>>(base_type::m_tuple);
     }
 
     /**
