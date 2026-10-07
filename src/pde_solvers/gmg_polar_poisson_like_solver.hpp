@@ -96,14 +96,14 @@ public:
  */
 class PolarPoissonLikeCoefficients
 {
-    using SpanType = Kokkos::
+    using KokkosView2D = Kokkos::
             View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space>;
-    using ViewType = Kokkos::
+    using KokkosConstView2D = Kokkos::
             View<const double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space>;
 
 private:
-    SpanType m_alpha;
-    SpanType m_beta;
+    KokkosView2D m_alpha;
+    KokkosView2D m_beta;
 
 public:
     /// Build the class instance
@@ -118,7 +118,7 @@ public:
      * @param[in] alpha Values of α at the grid interpolation points.
      * @param[in] beta  Values of β at the grid interpolation points.
      */
-    void update_coefficients(ViewType alpha, ViewType beta)
+    void update_coefficients(KokkosConstView2D alpha, KokkosConstView2D beta)
     {
         Kokkos::deep_copy(m_alpha, alpha);
         Kokkos::deep_copy(m_beta, beta);
