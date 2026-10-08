@@ -51,7 +51,8 @@ double inf_norm(gko::matrix::Dense<double> const* vec)
 {
     // Ensure there is only 1 column
     assert(vec->get_size()[1] == 1);
-    Kokkos::View<double const**> const vec_view = gko::ext::kokkos::map_data(vec);
+    Kokkos::View<double const**, Kokkos::LayoutRight> const vec_view
+            = gko::ext::kokkos::map_data(vec);
     double result = 0.;
     const std::source_location location = std::source_location::current();
     Kokkos::parallel_reduce(
