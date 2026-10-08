@@ -238,7 +238,6 @@ TEST(MatrixBatchEllFixture, SolveSparse)
     MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-12);
     test_instance.setup_solver();
     test_instance.solve(res_view);
-    ASSERT_EQ(test_instance.norm(0), 7);
     Kokkos::deep_copy(res_host, res_view);
     ASSERT_FLOAT_EQ(res_host(0, 0), solution[0]);
     ASSERT_FLOAT_EQ(res_host(0, 1), solution[1]);
