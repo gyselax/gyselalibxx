@@ -3,95 +3,80 @@
   <compounddef id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients" kind="class" language="C++" prot="public">
     <compoundname>GMGPolarTools::PolarPoissonLikeCoefficients</compoundname>
     <includes refid="gmg__polar__poisson__like__solver_8hpp" local="no">gmg_polar_poisson_like_solver.hpp</includes>
-    <templateparamlist>
-      <param>
-        <type>class EvaluatorType</type>
-      </param>
-      <param>
-        <type>class IdxRangeCoeff</type>
-      </param>
-      <param>
-        <type>class CoordRTheta</type>
-      </param>
-    </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a37c0f4607677f7ca5e7821b07af09a43" prot="private" static="no">
-        <type>DConstField&lt; IdxRangeCoeff &gt;</type>
-        <definition>using GMGPolarTools::PolarPoissonLikeCoefficients&lt; EvaluatorType, IdxRangeCoeff, CoordRTheta &gt;::DConstCoeffRTheta =  DConstField&lt;IdxRangeCoeff&gt;</definition>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ae261bfffcfac87e9f6984572dde62e10" prot="private" static="no">
+        <type>Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space &gt;</type>
+        <definition>using GMGPolarTools::PolarPoissonLikeCoefficients::KokkosView2D =  Kokkos:: View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space&gt;</definition>
         <argsstring></argsstring>
-        <name>DConstCoeffRTheta</name>
-        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::DConstCoeffRTheta</qualifiedname>
+        <name>KokkosView2D</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::KokkosView2D</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="100" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="99" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ab5820f406cb4a89dcf53d41dbd401313" prot="private" static="no">
+        <type>Kokkos::View&lt; const double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space &gt;</type>
+        <definition>using GMGPolarTools::PolarPoissonLikeCoefficients::KokkosConstView2D =  Kokkos:: View&lt;const double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>KokkosConstView2D</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::KokkosConstView2D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="101" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a86441ebfd234a0b9ef55c20d515f0072" prot="private" static="no" mutable="no">
-        <type>EvaluatorType</type>
-        <definition>EvaluatorType GMGPolarTools::PolarPoissonLikeCoefficients&lt; EvaluatorType, IdxRangeCoeff, CoordRTheta &gt;::m_evaluator</definition>
+      <memberdef kind="variable" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ab86ca07e23dddecb52231a17865ff1a5" prot="private" static="no" mutable="no">
+        <type>KokkosView2D</type>
+        <definition>KokkosView2D GMGPolarTools::PolarPoissonLikeCoefficients::m_alpha</definition>
         <argsstring></argsstring>
-        <name>m_evaluator</name>
-        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::m_evaluator</qualifiedname>
+        <name>m_alpha</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::m_alpha</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="103" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="103" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="105" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="105" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1aaa0598e31eddfda207a5254b4c4cb969" prot="private" static="no" mutable="no">
-        <type>DConstCoeffRTheta</type>
-        <definition>DConstCoeffRTheta GMGPolarTools::PolarPoissonLikeCoefficients&lt; EvaluatorType, IdxRangeCoeff, CoordRTheta &gt;::m_coeff_alpha</definition>
+      <memberdef kind="variable" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a7bdb50d5709e37c4dd38bd391207e021" prot="private" static="no" mutable="no">
+        <type>KokkosView2D</type>
+        <definition>KokkosView2D GMGPolarTools::PolarPoissonLikeCoefficients::m_beta</definition>
         <argsstring></argsstring>
-        <name>m_coeff_alpha</name>
-        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::m_coeff_alpha</qualifiedname>
+        <name>m_beta</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::m_beta</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="104" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="104" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a6a0233ea6d7ea6b2286229bd277b5830" prot="private" static="no" mutable="no">
-        <type>DConstCoeffRTheta</type>
-        <definition>DConstCoeffRTheta GMGPolarTools::PolarPoissonLikeCoefficients&lt; EvaluatorType, IdxRangeCoeff, CoordRTheta &gt;::m_coeff_beta</definition>
-        <argsstring></argsstring>
-        <name>m_coeff_beta</name>
-        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::m_coeff_beta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="105" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="105" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="106" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a1cfbec82259268fb109bc5d93095751c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a3a5fc2ad78bcf87045d6c43dd4bc4d08" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>GMGPolarTools::PolarPoissonLikeCoefficients&lt; EvaluatorType, IdxRangeCoeff, CoordRTheta &gt;::PolarPoissonLikeCoefficients</definition>
-        <argsstring>(EvaluatorType evaluator, DConstCoeffRTheta coeff_alpha, DConstCoeffRTheta coeff_beta)</argsstring>
+        <definition>GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients</definition>
+        <argsstring>(int nr, int ntheta)</argsstring>
         <name>PolarPoissonLikeCoefficients</name>
         <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients</qualifiedname>
         <param>
-          <type>EvaluatorType</type>
-          <declname>evaluator</declname>
+          <type>int</type>
+          <declname>nr</declname>
         </param>
         <param>
-          <type>DConstCoeffRTheta</type>
-          <declname>coeff_alpha</declname>
-        </param>
-        <param>
-          <type>DConstCoeffRTheta</type>
-          <declname>coeff_beta</declname>
+          <type>int</type>
+          <declname>ntheta</declname>
         </param>
         <briefdescription>
 <para>Build the class instance. </para>
@@ -100,21 +85,62 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="109" bodyend="117"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="110" bodyend="114"/>
       </memberdef>
-      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a58499d1570d08099280af540130fac18" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1af93f08bcced18af15e9c0e45ba242386" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GMGPolarTools::PolarPoissonLikeCoefficients::update_coefficients</definition>
+        <argsstring>(KokkosConstView2D alpha, KokkosConstView2D beta)</argsstring>
+        <name>update_coefficients</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::update_coefficients</qualifiedname>
+        <param>
+          <type>KokkosConstView2D</type>
+          <declname>alpha</declname>
+        </param>
+        <param>
+          <type>KokkosConstView2D</type>
+          <declname>beta</declname>
+        </param>
+        <briefdescription>
+<para>Rebuild the internal representations of α and β from grid values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">alpha</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Values of α at the grid interpolation points. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">beta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Values of β at the grid interpolation points. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="121" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="121" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1aaa4a3a5ead5bf982e3a36ae50ba35a0b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients&lt; EvaluatorType, IdxRangeCoeff, CoordRTheta &gt;::alpha</definition>
-        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients::alpha</definition>
+        <argsstring>(int i_r, int i_theta) const</argsstring>
         <name>alpha</name>
         <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::alpha</qualifiedname>
         <param>
-          <type>const double &amp;</type>
-          <declname>r</declname>
+          <type>int</type>
+          <declname>i_r</declname>
         </param>
         <param>
-          <type>const double &amp;</type>
-          <declname>theta</declname>
+          <type>int</type>
+          <declname>i_theta</declname>
         </param>
         <briefdescription>
 <para>The coefficient alpha in the Poisson-like equation. </para>
@@ -123,21 +149,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="120" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="120" bodyend="123"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="128" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="128" bodyend="131"/>
       </memberdef>
-      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a8e7a346970719f8647867d7d0f4c88fe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a7cd2f832dffd8a6ace89573f076a1c48" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients&lt; EvaluatorType, IdxRangeCoeff, CoordRTheta &gt;::beta</definition>
-        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients::beta</definition>
+        <argsstring>(int i_r, int i_theta) const</argsstring>
         <name>beta</name>
         <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::beta</qualifiedname>
         <param>
-          <type>const double &amp;</type>
-          <declname>r</declname>
+          <type>int</type>
+          <declname>i_r</declname>
         </param>
         <param>
-          <type>const double &amp;</type>
-          <declname>theta</declname>
+          <type>int</type>
+          <declname>i_theta</declname>
         </param>
         <briefdescription>
 <para>The coefficient beta in the Poisson-like equation. </para>
@@ -146,13 +172,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="125" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="125" bodyend="128"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="133" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="133" bodyend="136"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a94e8e258844038a7129205f55fca6920" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a27b59d5cc5053cbbf9bece2bf605164a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
-        <definition>static double GMGPolarTools::PolarPoissonLikeCoefficients&lt; EvaluatorType, IdxRangeCoeff, CoordRTheta &gt;::getAlphaJump</definition>
+        <definition>static double GMGPolarTools::PolarPoissonLikeCoefficients::getAlphaJump</definition>
         <argsstring>()</argsstring>
         <name>getAlphaJump</name>
         <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::getAlphaJump</qualifiedname>
@@ -163,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="131" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="131" bodyend="135"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="139" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="139" bodyend="143"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -181,16 +207,17 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="98" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="99" bodyend="136"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="97" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="98" bodyend="144"/>
     <listofallmembers>
-      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a58499d1570d08099280af540130fac18" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>alpha</name></member>
-      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a8e7a346970719f8647867d7d0f4c88fe" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>beta</name></member>
-      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a37c0f4607677f7ca5e7821b07af09a43" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>DConstCoeffRTheta</name></member>
-      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a94e8e258844038a7129205f55fca6920" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>getAlphaJump</name></member>
-      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1aaa0598e31eddfda207a5254b4c4cb969" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>m_coeff_alpha</name></member>
-      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a6a0233ea6d7ea6b2286229bd277b5830" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>m_coeff_beta</name></member>
-      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a86441ebfd234a0b9ef55c20d515f0072" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>m_evaluator</name></member>
-      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a1cfbec82259268fb109bc5d93095751c" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>PolarPoissonLikeCoefficients</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1aaa4a3a5ead5bf982e3a36ae50ba35a0b" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>alpha</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a7cd2f832dffd8a6ace89573f076a1c48" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>beta</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a27b59d5cc5053cbbf9bece2bf605164a" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>getAlphaJump</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ab5820f406cb4a89dcf53d41dbd401313" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>KokkosConstView2D</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ae261bfffcfac87e9f6984572dde62e10" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>KokkosView2D</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ab86ca07e23dddecb52231a17865ff1a5" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>m_alpha</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a7bdb50d5709e37c4dd38bd391207e021" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>m_beta</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a3a5fc2ad78bcf87045d6c43dd4bc4d08" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>PolarPoissonLikeCoefficients</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1af93f08bcced18af15e9c0e45ba242386" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>update_coefficients</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

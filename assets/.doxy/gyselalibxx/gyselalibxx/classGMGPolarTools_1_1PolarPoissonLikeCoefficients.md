@@ -2,8 +2,6 @@
 
 # Class GMGPolarTools::PolarPoissonLikeCoefficients
 
-**template &lt;class EvaluatorType, class IdxRangeCoeff, class CoordRTheta&gt;**
-
 
 
 [**ClassList**](annotated.md) **>** [**GMGPolarTools**](namespaceGMGPolarTools.md) **>** [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md)
@@ -54,9 +52,10 @@ _Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPola
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PolarPoissonLikeCoefficients**](#function-polarpoissonlikecoefficients) (EvaluatorType evaluator, DConstCoeffRTheta coeff\_alpha, DConstCoeffRTheta coeff\_beta) <br>_Build the class instance._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**alpha**](#function-alpha) (const double & r, const double & theta) const<br>_The coefficient alpha in the Poisson-like equation._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**beta**](#function-beta) (const double & r, const double & theta) const<br>_The coefficient beta in the Poisson-like equation._  |
+|   | [**PolarPoissonLikeCoefficients**](#function-polarpoissonlikecoefficients) (int nr, int ntheta) <br>_Build the class instance._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**alpha**](#function-alpha) (int i\_r, int i\_theta) const<br>_The coefficient alpha in the Poisson-like equation._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**beta**](#function-beta) (int i\_r, int i\_theta) const<br>_The coefficient beta in the Poisson-like equation._  |
+|  void | [**update\_coefficients**](#function-update_coefficients) (KokkosConstView2D alpha, KokkosConstView2D beta) <br>_Rebuild the internal representations of α and β from grid values._  |
 
 
 ## Public Static Functions
@@ -114,9 +113,8 @@ _Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPola
 _Build the class instance._ 
 ```C++
 inline GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients (
-    EvaluatorType evaluator,
-    DConstCoeffRTheta coeff_alpha,
-    DConstCoeffRTheta coeff_beta
+    int nr,
+    int ntheta
 ) 
 ```
 
@@ -132,8 +130,8 @@ inline GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients
 _The coefficient alpha in the Poisson-like equation._ 
 ```C++
 inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients::alpha (
-    const double & r,
-    const double & theta
+    int i_r,
+    int i_theta
 ) const
 ```
 
@@ -149,13 +147,42 @@ inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients
 _The coefficient beta in the Poisson-like equation._ 
 ```C++
 inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients::beta (
-    const double & r,
-    const double & theta
+    int i_r,
+    int i_theta
 ) const
 ```
 
 
 
+
+<hr>
+
+
+
+### function update\_coefficients 
+
+_Rebuild the internal representations of α and β from grid values._ 
+```C++
+inline void GMGPolarTools::PolarPoissonLikeCoefficients::update_coefficients (
+    KokkosConstView2D alpha,
+    KokkosConstView2D beta
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `alpha` Values of α at the grid interpolation points. 
+* `beta` Values of β at the grid interpolation points. 
+
+
+
+
+        
 
 <hr>
 ## Public Static Functions Documentation

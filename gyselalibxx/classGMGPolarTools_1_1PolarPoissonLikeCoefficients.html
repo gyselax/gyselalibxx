@@ -570,7 +570,6 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-gmgpolartoolspolarpoissonlikecoefficients">Class GMGPolarTools::PolarPoissonLikeCoefficients</h1>
-<p><strong>template &lt;class EvaluatorType, class IdxRangeCoeff, class CoordRTheta&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceGMGPolarTools.html"><strong>GMGPolarTools</strong></a> <strong>&gt;</strong> <a href="classGMGPolarTools_1_1PolarPoissonLikeCoefficients.html"><strong>PolarPoissonLikeCoefficients</strong></a></p>
 <p><em>Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -587,15 +586,19 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-polarpoissonlikecoefficients"><strong>PolarPoissonLikeCoefficients</strong></a> (EvaluatorType evaluator, DConstCoeffRTheta coeff_alpha, DConstCoeffRTheta coeff_beta) <br><em>Build the class instance.</em></td>
+<td style="text-align: left;"><a href="#function-polarpoissonlikecoefficients"><strong>PolarPoissonLikeCoefficients</strong></a> (int nr, int ntheta) <br><em>Build the class instance.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-alpha"><strong>alpha</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>The coefficient alpha in the Poisson-like equation.</em></td>
+<td style="text-align: left;"><a href="#function-alpha"><strong>alpha</strong></a> (int i_r, int i_theta) const<br><em>The coefficient alpha in the Poisson-like equation.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-beta"><strong>beta</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>The coefficient beta in the Poisson-like equation.</em></td>
+<td style="text-align: left;"><a href="#function-beta"><strong>beta</strong></a> (int i_r, int i_theta) const<br><em>The coefficient beta in the Poisson-like equation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-update_coefficients"><strong>update_coefficients</strong></a> (KokkosConstView2D alpha, KokkosConstView2D beta) <br><em>Rebuild the internal representations of α and β from grid values.</em></td>
 </tr>
 </tbody>
 </table>
@@ -623,9 +626,8 @@
 <h3 id="function-polarpoissonlikecoefficients">function PolarPoissonLikeCoefficients</h3>
 <p><em>Build the class instance.</em> </p>
 <pre><code class="language-C++">inline GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients (
-    EvaluatorType evaluator,
-    DConstCoeffRTheta coeff_alpha,
-    DConstCoeffRTheta coeff_beta
+    int nr,
+    int ntheta
 ) 
 </code></pre>
 <hr>
@@ -633,8 +635,8 @@
 <h3 id="function-alpha">function alpha</h3>
 <p><em>The coefficient alpha in the Poisson-like equation.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients::alpha (
-    const double &amp; r,
-    const double &amp; theta
+    int i_r,
+    int i_theta
 ) const
 </code></pre>
 <hr>
@@ -642,10 +644,24 @@
 <h3 id="function-beta">function beta</h3>
 <p><em>The coefficient beta in the Poisson-like equation.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients::beta (
-    const double &amp; r,
-    const double &amp; theta
+    int i_r,
+    int i_theta
 ) const
 </code></pre>
+<hr>
+
+<h3 id="function-update_coefficients">function update_coefficients</h3>
+<p><em>Rebuild the internal representations of α and β from grid values.</em> </p>
+<pre><code class="language-C++">inline void GMGPolarTools::PolarPoissonLikeCoefficients::update_coefficients (
+    KokkosConstView2D alpha,
+    KokkosConstView2D beta
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>alpha</code> Values of α at the grid interpolation points. </li>
+<li><code>beta</code> Values of β at the grid interpolation points. </li>
+</ul>
 <hr>
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
 <h3 id="function-getalphajump">function getAlphaJump</h3>

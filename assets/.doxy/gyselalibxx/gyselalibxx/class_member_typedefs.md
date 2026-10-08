@@ -159,7 +159,6 @@
 * **DQFieldMem** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **DensityCoeffs** ([**GMGPolarPoissonLikeSolver**](classGMGPolarPoissonLikeSolver.md))
 * **DomainGeometry** ([**GMGPolarPoissonLikeSolver**](classGMGPolarPoissonLikeSolver.md))
-* **DConstCoeffRTheta** ([**GMGPolarTools::PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md))
 * **Dim** ([**GaussLegendre**](classGaussLegendre.md), [**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
 * **DVectorConstFieldCovType** ([**Gradient**](classGradient.md))
 * **DVectorCov** ([**Gradient**](classGradient.md))
@@ -467,6 +466,8 @@
 
 ## k
 
+* **KokkosConstView2D** ([**GMGPolarTools::PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md))
+* **KokkosView2D** ([**GMGPolarTools::PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md))
 * **knot\_grid** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **KnotsR** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **KnotsTheta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))

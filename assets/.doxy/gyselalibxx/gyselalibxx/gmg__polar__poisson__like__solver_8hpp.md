@@ -43,7 +43,7 @@
 | class | [**GMGPolarPoissonLikeSolver**](classGMGPolarPoissonLikeSolver.md) &lt;class ToPhysicalMapping, class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class InterpolatorType&gt;<br>_A Poisson-like solver using the GMGPolar multigrid library._  |
 | class | [**HomogeneousDirichletBoundaryConditions**](classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.md) <br>_Homogeneous Dirichlet boundary conditions satisfying the GMGPolar BoundaryConditions concept._  |
 | class | [**MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md) &lt;class ToPhysicalMapping&gt;<br>_Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry concept._  |
-| class | [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md) &lt;class EvaluatorType, class IdxRangeCoeff, class CoordRTheta&gt;<br>_Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._  |
+| class | [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md) <br>_Wraps gyselalibxx interpolation-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._  |
 
 
 

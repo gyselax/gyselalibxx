@@ -75,9 +75,9 @@ Inherits the following classes: [IPolarPoissonLikeSolver](classIPolarPoissonLike
 
 | Type | Name |
 | ---: | :--- |
-|   | [**GMGPolarPoissonLikeSolver**](#function-gmgpolarpoissonlikesolver) (ToPhysicalMapping to\_physical, InterpolatorType const & interpolator, ExtrapolationType const extrapolation\_rule=ExtrapolationType::NONE, std::optional&lt; int &gt; max\_iterations=std::nullopt, std::optional&lt; double &gt; absTol=std::nullopt, std::optional&lt; double &gt; relTol=std::nullopt) <br>_Construct a_ [_**GMGPolarPoissonLikeSolver**_](classGMGPolarPoissonLikeSolver.md) _._ |
+|   | [**GMGPolarPoissonLikeSolver**](#function-gmgpolarpoissonlikesolver) (ToPhysicalMapping to\_physical, InterpolatorType const & interpolator, gmgpolar::ExtrapolationType const extrapolation\_rule=gmgpolar::ExtrapolationType::NONE, std::optional&lt; int &gt; max\_iterations=std::nullopt, std::optional&lt; double &gt; absTol=std::nullopt, std::optional&lt; double &gt; relTol=std::nullopt) <br>_Construct a_ [_**GMGPolarPoissonLikeSolver**_](classGMGPolarPoissonLikeSolver.md) _._ |
 |  void | [**operator()**](#function-operator) (DField&lt; IdxRangeRTheta &gt; phi, DConstField&lt; IdxRangeRTheta &gt; rho) override const<br>_Solve the Poisson-like equation._  |
-|  void | [**update\_coefficients**](#function-update_coefficients) (DConstField&lt; IdxRangeRTheta &gt; alpha, DConstField&lt; IdxRangeRTheta &gt; beta) override<br>_Rebuild the internal spline representations of α and β from grid values._  |
+|  void | [**update\_coefficients**](#function-update_coefficients) (DConstField&lt; IdxRangeRTheta &gt; alpha, DConstField&lt; IdxRangeRTheta &gt; beta) override<br>_Rebuild the internal representations of α and β from grid values._  |
 
 
 
@@ -166,7 +166,7 @@ _Construct a_ [_**GMGPolarPoissonLikeSolver**_](classGMGPolarPoissonLikeSolver.m
 inline GMGPolarPoissonLikeSolver::GMGPolarPoissonLikeSolver (
     ToPhysicalMapping to_physical,
     InterpolatorType const & interpolator,
-    ExtrapolationType const extrapolation_rule=ExtrapolationType::NONE,
+    gmgpolar::ExtrapolationType const extrapolation_rule=gmgpolar::ExtrapolationType::NONE,
     std::optional< int > max_iterations=std::nullopt,
     std::optional< double > absTol=std::nullopt,
     std::optional< double > relTol=std::nullopt
@@ -182,7 +182,7 @@ inline GMGPolarPoissonLikeSolver::GMGPolarPoissonLikeSolver (
 
 * `to_physical` The mapping from the logical to the physical domain. 
 * `interpolator` An interpolator to construct and evaluate the coefficients of the interpolation. 
-* `extrapolation_rule` A parameter to pass extrapolation rule to GMGPolar, default ExtrapolationType::NONE. 
+* `extrapolation_rule` A parameter to pass extrapolation rule to GMGPolar, default gmgpolar::ExtrapolationType::NONE. 
 * `max_iterations` The maximum number of iterations that the solver should carry out. 
 * `absTol` The absolute tolerance for the convergence of the solver. 
 * `relTol` The relative tolerance for the convergence of the solver. 
@@ -227,7 +227,7 @@ inline void GMGPolarPoissonLikeSolver::operator() (
 
 ### function update\_coefficients 
 
-_Rebuild the internal spline representations of α and β from grid values._ 
+_Rebuild the internal representations of α and β from grid values._ 
 ```C++
 inline void GMGPolarPoissonLikeSolver::update_coefficients (
     DConstField< IdxRangeRTheta > alpha,
