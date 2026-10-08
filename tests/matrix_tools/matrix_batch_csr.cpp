@@ -135,7 +135,7 @@ TEST(MatrixBatchCsrFixture, Coo_to_Csr)
 }
 
 template <MatrixBatchCsrSolver Solver>
-void solve_diagonal_system(std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
+void solve_diagonal_system(std::optional<GkoMatrixResidualNorm> residual_norm)
 {
     int const batch_size = 2;
     int const mat_size = 4;
@@ -167,7 +167,7 @@ void solve_diagonal_system(std::optional<GkoMatrixResidualNorm> residual_norm = 
 }
 
 template <MatrixBatchCsrSolver Solver>
-void solve_sparse_system(std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
+void solve_sparse_system(std::optional<GkoMatrixResidualNorm> residual_norm)
 {
     int const batch_size = 2;
     int const mat_size = 5;
@@ -228,7 +228,7 @@ void solve_sparse_system(std::optional<GkoMatrixResidualNorm> residual_norm = st
 }
 
 template <MatrixBatchCsrSolver Solver>
-void solve_pds_system(std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
+void solve_pds_system(std::optional<GkoMatrixResidualNorm> residual_norm)
 {
     {
         int const batch_size = 2;
@@ -293,12 +293,12 @@ void solve_pds_system(std::optional<GkoMatrixResidualNorm> residual_norm = std::
 
 TEST(MatrixBatchCsrFixture, SolveDiagonalCg)
 {
-    solve_diagonal_system<MatrixBatchCsrSolver::CG>();
+    solve_diagonal_system<MatrixBatchCsrSolver::CG>(GkoMatrixResidualNorm::INF);
 }
 
 TEST(MatrixBatchCsrFixture, SolveDiagonalBatchCg)
 {
-    solve_diagonal_system<MatrixBatchCsrSolver::BATCH_CG>();
+    solve_diagonal_system<MatrixBatchCsrSolver::BATCH_CG>(GkoMatrixResidualNorm::TWO);
 }
 
 /* Disabled because of Ginkgo issue #1563 (OpenMP-specific)
@@ -310,27 +310,27 @@ TEST(MatrixBatchCsrFixture, SolveDiagonalBicgstab)
 
 TEST(MatrixBatchCsrFixture, SolveDiagonalBatchBicgstab)
 {
-    solve_diagonal_system<MatrixBatchCsrSolver::BATCH_BICGSTAB>();
+    solve_diagonal_system<MatrixBatchCsrSolver::BATCH_BICGSTAB>(GkoMatrixResidualNorm::TWO);
 }
 
 TEST(MatrixBatchCsrFixture, SolvePDSCg)
 {
-    solve_pds_system<MatrixBatchCsrSolver::CG>();
+    solve_pds_system<MatrixBatchCsrSolver::CG>(GkoMatrixResidualNorm::INF);
 }
 
 TEST(MatrixBatchCsrFixture, SolvePDSBatchCg)
 {
-    solve_pds_system<MatrixBatchCsrSolver::BATCH_CG>();
+    solve_pds_system<MatrixBatchCsrSolver::BATCH_CG>(GkoMatrixResidualNorm::TWO);
 }
 
 TEST(MatrixBatchCsrFixture, SolveSparseBicgstab)
 {
-    solve_sparse_system<MatrixBatchCsrSolver::BICGSTAB>();
+    solve_sparse_system<MatrixBatchCsrSolver::BICGSTAB>(GkoMatrixResidualNorm::INF);
 }
 
 TEST(MatrixBatchCsrFixture, SolveSparseBatchBicgstab)
 {
-    solve_sparse_system<MatrixBatchCsrSolver::BATCH_BICGSTAB>();
+    solve_sparse_system<MatrixBatchCsrSolver::BATCH_BICGSTAB>(GkoMatrixResidualNorm::TWO);
 }
 
 TEST(MatrixBatchCsrFixture, SolveDiagonalCgTwoNorm)
