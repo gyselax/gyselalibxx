@@ -42,7 +42,7 @@ public:
      * Note: This function should be private but it is public due to CUDA restrictions.
      *
      * @param[in] stopping_id The id of the stopping criterion, saved in the stopping status.
-     * @param[in] set_finalized Controls if the current version should count as finalized.
+     * @param[in] set_finalised Controls if the current version should count as finalised.
      * @param[inout] stop_status The status of each right-hand side.
      * @param[out] one_changed Indicates if the status of a right-hand side was modified.
      * @param[in] updater The object containing the solver's current state.
@@ -51,7 +51,7 @@ public:
      */
     bool check_impl(
             gko::uint8 stopping_id,
-            bool set_finalized,
+            bool set_finalised,
             gko::array<gko::stopping_status>* stop_status,
             bool* one_changed,
             gko::stop::Criterion::Updater const& updater) override
@@ -71,7 +71,7 @@ public:
             Kokkos::parallel_for(
                     location.function_name(),
                     Kokkos::RangePolicy<ExecSpace>(0, stop_status->get_size()),
-                    KOKKOS_LAMBDA(int const i) { status[i].converge(stopping_id, set_finalized); });
+                    KOKKOS_LAMBDA(int const i) { status[i].converge(stopping_id, set_finalised); });
             Kokkos::fence();
             *one_changed = true;
             return true;
