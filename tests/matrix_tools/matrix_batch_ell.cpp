@@ -67,7 +67,6 @@ TEST(MatrixBatchEllFixture, SetGetElement)
     Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::DefaultExecutionSpace>
             idx_view(col_idx, mat_size, non_zero_per_col);
     MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-8);
-    auto [idx, vals] = test_instance.get_batch_ell();
 
     test_instance.set_ell_element(0, 3, 0, 42);
     ASSERT_EQ(test_instance.get_ell_element(0, 3, 0), 42);
@@ -209,10 +208,9 @@ TEST(MatrixBatchEllFixture, SolveSparse)
             values_host("test_vals", values_layout);
     Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::DefaultHostExecutionSpace>
             idx_host("col_idx", mat_size, non_zero_per_col);
-    int cpt;
     for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
         for (int i = 0; i < mat_size; i++) {
-            cpt = 0;
+            int cpt = 0;
             for (int j = 0; j < mat_size; j++) {
                 if (std::abs(matvalues[batch_idx][i][j]) > 1e-16 && cpt < non_zero_per_col) {
                     idx_host(i, cpt) = j;
