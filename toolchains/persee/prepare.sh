@@ -6,44 +6,39 @@ if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
     return 1
 fi
 
-if [[ "$(id -gn)" != "gysela" ]]; then
-    echo "Primary group must be 'gysela'!" >&2
-    exit 1
-fi
-
 set -eu
 
 module purge
 
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 
-SPACK_VERSION="1.2.2"
+GYSELA_SPACK_GROUP="gysela"
+GYSELA_SPACK_VERSION="1.2.2"
+export SPACK_PREFIX=/data/gyselarunner/gysela-spack-${GYSELA_SPACK_VERSION}
+export SPACK_DISABLE_LOCAL_CONFIG=true
+export PYTHONDONTWRITEBYTECODE=True
 
-export SPACK_PREFIX=/data/gyselarunner/spack-${SPACK_VERSION}
-
-cd /tmp
-wget https://github.com/spack/spack/releases/download/v${SPACK_VERSION}/spack-${SPACK_VERSION}.tar.gz
-tar -xvf spack-${SPACK_VERSION}.tar.gz
-rm spack-${SPACK_VERSION}.tar.gz
-mv /tmp/spack-${SPACK_VERSION} ${SPACK_PREFIX}
+mkdir --parents "${SPACK_PREFIX}"
+chgrp "${GYSELA_SPACK_GROUP}" "${SPACK_PREFIX}"
+chmod g+s "${SPACK_PREFIX}"
+setfacl --modify d:g::rwX "${SPACK_PREFIX}"
+git clone --branch v${GYSELA_SPACK_VERSION} --depth 1 https://github.com/spack/spack.git "${SPACK_PREFIX}" || true
 
 . ${SPACK_PREFIX}/share/spack/setup-env.sh
 
-module load gcc/13
-spack compiler find --scope site ${GCC_HOME}
-module purge
+for arch in v100 xeon; do
+    env="gyselalibxx-${arch}"
+    env_file="${TOOLCHAIN_ROOT_DIRECTORY}/${arch}/gyselalibxx-spack-environment.yaml"
 
-spack env remove --yes-to-all gyselalibxx-env-omp-cuda
-spack env create gyselalibxx-env-omp-cuda "${TOOLCHAIN_ROOT_DIRECTORY}/v100/gyselalibxx-spack-environment.yaml"
+    echo "Preparing the Spack environment ${env}"
 
-echo "Preparing the Spack environment..."
+    spack env remove --yes-to-all "${env}"
+    spack env create "${env}" "${env_file}"
 
-spack --env gyselalibxx-env-omp-cuda external find cuda
-spack --env gyselalibxx-env-omp-cuda concretize --force
-spack --env gyselalibxx-env-omp-cuda install --jobs 32
-
-spack env remove --yes-to-all gyselalibxx-env-omp
-spack env create gyselalibxx-env-omp "${TOOLCHAIN_ROOT_DIRECTORY}/xeon/gyselalibxx-spack-environment.yaml"
-
-spack --env gyselalibxx-env-omp concretize --force
-spack --env gyselalibxx-env-omp install --jobs 32
+    spack env activate "${env}"
+    spack repo update
+    spack concretize --quiet
+    spack spec --install-status --namespaces
+    spack install --jobs 32
+    spack env deactivate
+done
