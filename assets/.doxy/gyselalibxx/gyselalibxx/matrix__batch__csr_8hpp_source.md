@@ -246,37 +246,6 @@ public:
             check_conv(batch_size(), m_tol, gko_exec, logger);
         }
     }
-
-    double norm(int batch_idx) const
-    {
-        int const tmp_mat_size = size();
-        int const tmp_batch_size = batch_size();
-        double result = 0.;
-        double* vals_proxy = m_batch_matrix_csr->get_values();
-        int* row_ptr_proxy = m_batch_matrix_csr->get_row_ptrs();
-        Kokkos::View<double**, Kokkos::LayoutRight, typename ExecSpace::memory_space> vals_view(
-                vals_proxy,
-                tmp_batch_size,
-                m_batch_matrix_csr->get_num_elements_per_item());
-        Kokkos::View<int*, Kokkos::LayoutRight, typename ExecSpace::memory_space>
-                row_ptr_view(row_ptr_proxy, tmp_mat_size + 1);
-
-        Kokkos::parallel_reduce(
-                "L-infinity norm",
-                Kokkos::RangePolicy<ExecSpace>(0, tmp_mat_size),
-                KOKKOS_LAMBDA(int const i, double& res) {
-                    double row_sum = 0.;
-                    for (int k = row_ptr_view[i]; k < row_ptr_view[i + 1]; k++) {
-                        row_sum += Kokkos::abs(vals_view(batch_idx, k));
-                    }
-                    if (row_sum > res) {
-                        res = row_sum;
-                    }
-                },
-                Kokkos::Max<double>(result));
-
-        return result;
-    }
 };
 
 template <MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB>

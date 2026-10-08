@@ -86,7 +86,6 @@ See [MatrixBatch](classMatrixBatch.md)
 |   | [**MatrixBatchEll**](#function-matrixbatchell-22) (Kokkos::View&lt; int \*\*, Kokkos::LayoutLeft, ExecSpace &gt; cols\_idx, Kokkos::View&lt; double \*\*\*, Kokkos::LayoutStride, ExecSpace &gt; batch\_values, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt) <br>_Constructor for_ [_**MatrixBatchEll**_](classMatrixBatchEll.md) _class._ |
 |  std::pair&lt; Kokkos::View&lt; int \*\*, Kokkos::LayoutLeft, ExecSpace &gt;, Kokkos::View&lt; double \*\*\*, Kokkos::LayoutStride, ExecSpace &gt; &gt; | [**get\_batch\_ell**](#function-get_batch_ell) () <br>_A function to get information about values and indices for the whole batch. Data is managed by two Kokkos Views stored on the host._  |
 |  double | [**get\_ell\_element**](#function-get_ell_element) (int batch\_idx, int line\_idx, int non\_zero\_col\_idx) const<br>_A getter function for a value located at a specified place._  |
-|  double | [**norm**](#function-norm) (int batch\_idx) const<br>_A function returns the norm of a matrix located at batch\_idx._  |
 |  void | [**set\_ell\_element**](#function-set_ell_element) (int batch\_idx, int line\_idx, int non\_zero\_col\_idx, double aij) <br>_A setter function to modify a value located at a specified place._  |
 | virtual void | [**setup\_solver**](#function-setup_solver) () <br>_Perform a pre-process operation on the solver. Must be called after filling the matrix._  |
 | virtual void | [**solve**](#function-solve) ([**BatchedRHS**](classMatrixBatch.md#typedef-batchedrhs) const b) const<br>_Solve the batched linear problem Ax=b._  |
@@ -314,40 +313,6 @@ inline double MatrixBatchEll::get_ell_element (
 **Returns:**
 
 value of the component. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function norm 
-
-_A function returns the norm of a matrix located at batch\_idx._ 
-```C++
-inline double MatrixBatchEll::norm (
-    int batch_idx
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `batch_idx` integer, index of the matrix in the batch. 
-
-
-
-**Returns:**
-
-value of the matrix infinite-norm. 
 
 
 

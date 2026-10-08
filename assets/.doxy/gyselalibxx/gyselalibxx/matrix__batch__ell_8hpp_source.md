@@ -164,39 +164,6 @@ public:
 
         Kokkos::deep_copy(b, x_view);
     }
-
-    double norm(int batch_idx) const
-    {
-        int const tmp_mat_size = size();
-        int const tmp_batch_size = batch_size();
-        int const non_zeros = m_batch_matrix_ell->get_num_stored_elements_per_row();
-        double* vals_proxy = m_batch_matrix_ell->get_values();
-        Kokkos::LayoutStride values_layout(
-                tmp_batch_size,
-                non_zeros * tmp_mat_size,
-                tmp_mat_size,
-                1,
-                non_zeros,
-                tmp_mat_size);
-        Kokkos::View<double***, Kokkos::LayoutStride, typename ExecSpace::memory_space>
-                vals_view(vals_proxy, values_layout);
-
-        double result = 0;
-        Kokkos::parallel_reduce(
-                "L-infinitty norm",
-                Kokkos::RangePolicy<ExecSpace>(0, tmp_mat_size),
-                KOKKOS_LAMBDA(int i, double& res) {
-                    double row_sum = 0.;
-                    for (int k = 0; k < non_zeros; k++) {
-                        row_sum += Kokkos::abs(vals_view(batch_idx, i, k));
-                    }
-                    if (row_sum > res) {
-                        res = row_sum;
-                    }
-                },
-                Kokkos::Max<double>(result));
-        return result;
-    }
 };
 ```
 

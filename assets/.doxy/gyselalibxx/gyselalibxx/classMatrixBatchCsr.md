@@ -85,7 +85,6 @@ See [MatrixBatch](classMatrixBatch.md)
 |   | [**MatrixBatchCsr**](#function-matrixbatchcsr-12) (const int batch\_size, const int mat\_size, const int nnz\_per\_system, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_The constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
 |   | [**MatrixBatchCsr**](#function-matrixbatchcsr-22) (Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, ExecSpace &gt; batch\_values, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; cols\_idx, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; nnz\_per\_row, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
 |  std::tuple&lt; Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; &gt; | [**get\_batch\_csr**](#function-get_batch_csr) () <br>_A function to update information about values,indices and the number of non-zero per row for the whole batch. Data is managed by Kokkos Views stored on the host._  |
-|  double | [**norm**](#function-norm) (int batch\_idx) const<br>_A function returning the norm of a matrix located at batch\_idx._  |
 | virtual void | [**setup\_solver**](#function-setup_solver) () <br>_Perform a pre-process operation on the solver. Must be called after filling the matrix._  |
 | virtual void | [**solve**](#function-solve-12) ([**BatchedRHS**](classMatrixBatch.md#typedef-batchedrhs) const b) const<br>_Solve the batched linear problem Ax=b._  |
 |  void | [**solve**](#function-solve-22) ([**BatchedRHS**](classMatrixBatch.md#typedef-batchedrhs) const x, [**BatchedRHS**](classMatrixBatch.md#typedef-batchedrhs) const b) const<br>_Solve the batched linear problem Ax=b._  |
@@ -289,40 +288,6 @@ col\_idx\_view A 1D Kokkos view which stores the column indices for each non-zer
 **Returns:**
 
 nnz\_per\_row\_view A 1D Kokkos view which stores the count of non-zero per line, in an additive way. see nnz\_per\_row parameter in constructor. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function norm 
-
-_A function returning the norm of a matrix located at batch\_idx._ 
-```C++
-inline double MatrixBatchCsr::norm (
-    int batch_idx
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `batch_idx` The index of the matrix in the batch. 
-
-
-
-**Returns:**
-
-The value of the matrix infinite-norm. 
 
 
 

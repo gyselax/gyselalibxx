@@ -2301,7 +2301,6 @@
     <member refid="classMatrixBatchCsr_1ad037e66bbdfdfa674e678f49d36f78df" kind="function"><name>setup_solver</name></member>
     <member refid="classMatrixBatchCsr_1a5d7f76fc2c25fb4867b50181779b4c3c" kind="function"><name>solve</name></member>
     <member refid="classMatrixBatchCsr_1a5d3b37df4fa1caf358a4f08a7ae08865" kind="function"><name>solve</name></member>
-    <member refid="classMatrixBatchCsr_1a6eca63a806974a62a376ae271d6fb14d" kind="function"><name>norm</name></member>
   </compound>
   <compound refid="classMatrixBatchEll" kind="class"><name>MatrixBatchEll</name>
     <member refid="classMatrixBatchEll_1a30c88e7189252194c871907eaa2cc452" kind="typedef"><name>batch_sparse_type</name></member>
@@ -2318,7 +2317,6 @@
     <member refid="classMatrixBatchEll_1aa3d7d4b0603c631839070708ff574ba6" kind="function"><name>set_ell_element</name></member>
     <member refid="classMatrixBatchEll_1a85a10595895f36e45701697a6b3d2c59" kind="function"><name>setup_solver</name></member>
     <member refid="classMatrixBatchEll_1a899ef38788cbc5cb077519b6f71d51dd" kind="function"><name>solve</name></member>
-    <member refid="classMatrixBatchEll_1a972e124276cf81e393a6590d53986a41" kind="function"><name>norm</name></member>
   </compound>
   <compound refid="classMatrixBatchTridiag" kind="class"><name>MatrixBatchTridiag</name>
     <member refid="classMatrixBatchTridiag_1aab71460ae64a636cae01c99dcb1ef7e0" kind="typedef"><name>DKokkosView2D</name></member>

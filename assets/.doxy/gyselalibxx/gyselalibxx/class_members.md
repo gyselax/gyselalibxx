@@ -1098,7 +1098,6 @@
 * **negative\_differentiate\_equation** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05.md))
 * **n\_distributed\_dimensions** ([**IMPILayout**](classIMPILayout.md))
 * **n** ([**Matrix**](classMatrix.md))
-* **norm** ([**MatrixBatchCsr**](classMatrixBatchCsr.md), [**MatrixBatchEll**](classMatrixBatchEll.md))
 * **nb** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **NDIdentityInterpolationBuilder** ([**NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md))
 * **NDLagrangeEvaluator** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
