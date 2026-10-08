@@ -12,7 +12,8 @@ void solve_system(
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> idx_view_host,
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
                 nnz_per_row_view_host,
-        Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> solution)
+        Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> solution,
+        std::optional<GkoMatrixResidualNorm> residual_norm)
 {
     int const mat_size = nnz_per_row_view_host.size() - 1;
     int const batch_size = values_view_host.extent(0);
@@ -34,8 +35,15 @@ void solve_system(
     Kokkos::deep_copy(nnz_per_row_view, nnz_per_row_view_host);
     Kokkos::deep_copy(res_view, 1.);
 
-    MatrixBatchCsr<Kokkos::DefaultExecutionSpace, Solver>
-            test_instance(values_view, idx_view, nnz_per_row_view);
+    MatrixBatchCsr<Kokkos::DefaultExecutionSpace, Solver> test_instance(
+            values_view,
+            idx_view,
+            nnz_per_row_view,
+            std::nullopt,
+            std::nullopt,
+            std::nullopt,
+            std::nullopt,
+            residual_norm);
 
     test_instance.setup_solver();
     test_instance.solve(res_view);
@@ -127,7 +135,7 @@ TEST(MatrixBatchCsrFixture, Coo_to_Csr)
 }
 
 template <MatrixBatchCsrSolver Solver>
-void solve_diagonal_system()
+void solve_diagonal_system(std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
 {
     int const batch_size = 2;
     int const mat_size = 4;
@@ -150,12 +158,16 @@ void solve_diagonal_system()
     Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             solution_view_host(solution, batch_size * mat_size);
 
-    solve_system<
-            Solver>(values_view_host, idx_view_host, nnz_per_row_view_host, solution_view_host);
+    solve_system<Solver>(
+            values_view_host,
+            idx_view_host,
+            nnz_per_row_view_host,
+            solution_view_host,
+            residual_norm);
 }
 
 template <MatrixBatchCsrSolver Solver>
-void solve_sparse_system()
+void solve_sparse_system(std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
 {
     int const batch_size = 2;
     int const mat_size = 5;
@@ -207,12 +219,16 @@ void solve_sparse_system()
             }
         }
     }
-    solve_system<
-            Solver>(values_view_host, idx_view_host, nnz_per_row_view_host, solution_view_host);
+    solve_system<Solver>(
+            values_view_host,
+            idx_view_host,
+            nnz_per_row_view_host,
+            solution_view_host,
+            residual_norm);
 }
 
 template <MatrixBatchCsrSolver Solver>
-void solve_pds_system()
+void solve_pds_system(std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
 {
     {
         int const batch_size = 2;
@@ -266,8 +282,12 @@ void solve_pds_system()
                 }
             }
         }
-        solve_system<
-                Solver>(values_view_host, idx_view_host, nnz_per_row_view_host, solution_view_host);
+        solve_system<Solver>(
+                values_view_host,
+                idx_view_host,
+                nnz_per_row_view_host,
+                solution_view_host,
+                residual_norm);
     }
 }
 
@@ -311,4 +331,36 @@ TEST(MatrixBatchCsrFixture, SolveSparseBicgstab)
 TEST(MatrixBatchCsrFixture, SolveSparseBatchBicgstab)
 {
     solve_sparse_system<MatrixBatchCsrSolver::BATCH_BICGSTAB>();
+}
+
+TEST(MatrixBatchCsrFixture, SolveDiagonalCgTwoNorm)
+{
+    solve_diagonal_system<MatrixBatchCsrSolver::CG>(GkoMatrixResidualNorm::TWO);
+}
+
+TEST(MatrixBatchCsrFixture, SolvePDSCgTwoNorm)
+{
+    solve_pds_system<MatrixBatchCsrSolver::CG>(GkoMatrixResidualNorm::TWO);
+}
+
+TEST(MatrixBatchCsrFixture, SolveSparseBicgstabTwoNorm)
+{
+    solve_sparse_system<MatrixBatchCsrSolver::BICGSTAB>(GkoMatrixResidualNorm::TWO);
+}
+
+TEST(MatrixBatchCsrFixture, BatchSolverRejectsInfNorm)
+{
+    using MatrixType
+            = MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::BATCH_CG>;
+    EXPECT_THROW(
+            MatrixType(
+                    2,
+                    4,
+                    4,
+                    std::nullopt,
+                    std::nullopt,
+                    std::nullopt,
+                    std::nullopt,
+                    GkoMatrixResidualNorm::INF),
+            std::invalid_argument);
 }
