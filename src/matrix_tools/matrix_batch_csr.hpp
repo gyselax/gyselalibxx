@@ -80,8 +80,7 @@ public:
      * @param[in] logger boolean parameter for saving log information such residual and interactions count.
      * @param[in] preconditioner_max_block_size An optional parameter used to define the maximum size of a block
      * @param[in] residual_norm The norm used to evaluate the residual in the stopping criterion. Default is the
-     * infinite norm for the CG and BICGSTAB solvers and the 2-norm for the batched solvers (which only
-     * support the 2-norm).
+     * 2-norm (batched solvers only support the 2-norm).
      */
     explicit MatrixBatchCsr(
             const int batch_size,
@@ -127,8 +126,7 @@ public:
      * @param[in] logger boolean parameter to save logger information. Default value false.
      * @param[in] preconditioner_max_block_size An optional parameter used to define the maximum size of a block
      * @param[in] residual_norm The norm used to evaluate the residual in the stopping criterion. Default is the
-     * infinite norm for the CG and BICGSTAB solvers and the 2-norm for the batched solvers (which only
-     * support the 2-norm).
+     * 2-norm (batched solvers only support the 2-norm).
      */
     explicit MatrixBatchCsr(
             Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace> batch_values,

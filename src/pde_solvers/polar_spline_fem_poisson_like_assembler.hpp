@@ -431,7 +431,7 @@ public:
      * @param[in] preconditioner_max_block_size
      *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
      * @param[in] residual_norm
-     *      The norm used to evaluate the residual in the stopping criterion (default: infinite norm).
+     *      The norm used to evaluate the residual in the stopping criterion.
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
