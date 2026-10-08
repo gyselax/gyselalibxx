@@ -40,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed `.span_view` and `.span_cview` from Gyselalib++ objects.
 - Remove the r-value converting constructors of `MultipatchType`, `MultipatchField` and `MultipatchFieldMem`.
 - Remove `MultipatchField::idx_type`.
+- Remove `MatrixBatchCsr::norm`.
+- Remove `MatrixBatchEll::norm`.
 
 ### Dependency requirements
 
