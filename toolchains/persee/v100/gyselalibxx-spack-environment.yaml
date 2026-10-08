@@ -1,4 +1,6 @@
 spack:
+  include:
+    - packages.yaml
   definitions:
   - packages:
     - 'cmake@3.31'
@@ -35,6 +37,7 @@ spack:
     - 'py-sympy@1.14'
     - 'py-xarray@2026.4'
   specs:
+  - gcc
   - matrix:
     - [$packages]
   repos:
