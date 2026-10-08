@@ -18,11 +18,13 @@ export SPACK_PREFIX=/data/gyselarunner/gysela-spack-${GYSELA_SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=true
 export PYTHONDONTWRITEBYTECODE=True
 
-mkdir --parents "${SPACK_PREFIX}"
-chgrp "${GYSELA_SPACK_GROUP}" "${SPACK_PREFIX}"
-chmod g+s "${SPACK_PREFIX}"
-setfacl --modify d:g::rwX "${SPACK_PREFIX}"
-git clone --branch v${GYSELA_SPACK_VERSION} --depth 1 https://github.com/spack/spack.git "${SPACK_PREFIX}" || true
+if [ ! -d "${SPACK_PREFIX}" ]; then
+    mkdir --parents "${SPACK_PREFIX}"
+    chgrp "${GYSELA_SPACK_GROUP}" "${SPACK_PREFIX}"
+    chmod g+s "${SPACK_PREFIX}"
+    setfacl --modify d:g::rwX "${SPACK_PREFIX}"
+    git clone --branch v${GYSELA_SPACK_VERSION} --depth 1 https://github.com/spack/spack.git "${SPACK_PREFIX}"
+fi
 
 . ${SPACK_PREFIX}/share/spack/setup-env.sh
 
