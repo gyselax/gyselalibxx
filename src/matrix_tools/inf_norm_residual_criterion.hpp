@@ -31,9 +31,9 @@ public:
     {
         // Residual norm reduction factor, relative to the infinite norm of the right-hand side.
         // This defaults to 1e-8 but can be modified with .with_reduction_factor(m_tol)
-        double GKO_FACTORY_PARAMETER_SCALAR(
+        double GKO_FACTORY_PARAMETER_SCALAR( // cppcheck-suppress unreadVariable
                 reduction_factor,
-                1e-8); // cppcheck-suppress unreadVariable
+                1e-8);
     };
     /// Define the Factory class which creates the criterion, and the get_parameters() accessor.
     GKO_ENABLE_CRITERION_FACTORY(InfNormResidual<ExecSpace>, parameters, Factory);
