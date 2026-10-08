@@ -1,4 +1,6 @@
 spack:
+  include:
+    - packages.yaml
   definitions:
   - packages:
     - 'cmake@3.31'
@@ -35,14 +37,17 @@ spack:
     - 'py-sympy@1.14'
     - 'py-xarray@2026.4'
   specs:
+  - gcc
   - matrix:
     - [$packages]
   repos:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2026.06
+      destination: $spack/var/spack/repos/patches-v2026.06
     builtin:
       branch: releases/v2026.06
+      destination: $spack/var/spack/repos/builtin-v2026.06
   concretizer:
     reuse: false
     unify: true
