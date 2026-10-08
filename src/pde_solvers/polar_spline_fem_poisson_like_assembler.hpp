@@ -423,13 +423,15 @@ public:
      * @param[in] max_iter
      *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
-     *      The residual tolerance for the batched CSR solver. Be careful! the relative residual
-     *      provided here, will be used as "implicit residual" in ginkgo solver.
+     *      The residual tolerance for the batched CSR solver. The solver stops when
+     *      ||r||/||b|| <= res_tol where r is the residual computed by the CG recurrence.
      * @param[in] batch_solver_logger
      *      Indicates whether log information such as the residual and the number of iterations
      *      should be monitored.
      * @param[in] preconditioner_max_block_size
      *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
+     * @param[in] residual_norm
+     *      The norm used to evaluate the residual in the stopping criterion (default: infinite norm).
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
@@ -440,7 +442,8 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = std::nullopt)
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
     {
         // Number of elements in the matrix that correspond to the splines
         // that cover the singular point
@@ -470,7 +473,8 @@ public:
                 max_iter,
                 res_tol,
                 batch_solver_logger,
-                preconditioner_max_block_size);
+                preconditioner_max_block_size,
+                residual_norm);
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
         compute_singular_singular_col_idx(col_idx, nnz_per_row);
