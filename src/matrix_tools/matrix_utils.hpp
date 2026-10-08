@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <source_location>
+
 #include <ginkgo/ginkgo.hpp>
+#include <ginkgo/extensions/kokkos/spaces.hpp>
+#include <ginkgo/extensions/kokkos/types.hpp>
 
 #include <Kokkos_Core.hpp>
 
@@ -25,6 +29,30 @@ auto to_gko_multivector(
                     create(gko_exec,
                            gko::batch_dim<2>(view.extent(0), gko::dim<2>(view.extent(1), 1)),
                            gko::array<value_type>::view(gko_exec, view.span(), view.data())));
+}
+
+/**
+ * @brief A function to compute the infinite norm of a single-column Ginkgo Dense vector.
+ * @param[in] vec A Ginkgo Dense vector with one column, whose data is accessible from ExecSpace.
+ * @tparam ExecSpace The Kokkos execution space in which the reduction is carried out.
+ * @return The infinite norm, i.e. the maximum absolute value of the vector components.
+ */
+template <class ExecSpace = Kokkos::DefaultExecutionSpace>
+double inf_norm(gko::matrix::Dense<double> const* vec)
+{
+    // Ensure there is only 1 column
+    assert(vec->get_size()[1] == 1);
+    Kokkos::View<double const**> const vec_view = gko::ext::kokkos::map_data(vec);
+    double result = 0.;
+    const std::source_location location = std::source_location::current();
+    Kokkos::parallel_reduce(
+            location.function_name(),
+            Kokkos::RangePolicy<ExecSpace>(0, vec_view.extent(0)),
+            KOKKOS_LAMBDA(int const i, double& local_max) {
+                local_max = Kokkos::max(local_max, Kokkos::abs(vec_view(i, 0)));
+            },
+            Kokkos::Max<double>(result));
+    return result;
 }
 
 /**
