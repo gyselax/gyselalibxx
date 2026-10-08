@@ -10,6 +10,7 @@ GYSELA_SPACK_GROUP="gen2224"
 
 if [[ "$(id -gn)" != "${GYSELA_SPACK_GROUP}" ]]; then
     echo "Primary group must be '${GYSELA_SPACK_GROUP}'!" >&2
+    echo "First run 'newgrp ${GYSELA_SPACK_GROUP}'" >&2
     exit 1
 fi
 
