@@ -6,7 +6,7 @@ if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
     return 1
 fi
 
-GYSELA_SPACK_GROUP="gysela"
+GYSELA_SPACK_GROUP="project_465002992"
 
 if [[ "$(id -gn)" != "${GYSELA_SPACK_GROUP}" ]]; then
     echo "Primary group must be '${GYSELA_SPACK_GROUP}'!" >&2
@@ -21,7 +21,7 @@ module purge
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 
 GYSELA_SPACK_VERSION="1.2.2"
-export SPACK_PREFIX=/data/gyselarunner/gysela-spack-${GYSELA_SPACK_VERSION}
+export SPACK_PREFIX=/scratch/project_465002992/gysela-spack-${GYSELA_SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=true
 export PYTHONDONTWRITEBYTECODE=True
 
@@ -34,7 +34,7 @@ fi
 
 . ${SPACK_PREFIX}/share/spack/setup-env.sh
 
-for arch in v100 xeon; do
+for arch in mi250; do
     env="gyselalibxx-${arch}"
     env_file="${TOOLCHAIN_ROOT_DIRECTORY}/${arch}/gyselalibxx-spack-environment.yaml"
 
@@ -47,6 +47,6 @@ for arch in v100 xeon; do
     spack repo update
     spack concretize --quiet
     spack spec --install-status --namespaces
-    spack install --jobs 32
+    spack install --jobs 128
     spack env deactivate
 done

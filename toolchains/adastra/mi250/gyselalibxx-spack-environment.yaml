@@ -1,13 +1,15 @@
 spack:
+  include:
+    - packages.yaml
   definitions:
   - packages:
     - cmake@3.31
     - 'ddc@0.16 +fft +pdi +splines'
-    - ginkgo@1.11 +openmp
+    - ginkgo@1.11 ~openmp +rocm amdgpu_target=gfx90a
     - gmgpolar@2.4
     - googletest@1.17 +gmock
-    - kokkos@5.1 +openmp
-    - kokkos-kernels@5.1
+    - kokkos@5.1 ~openmp +rocm amdgpu_target=gfx90a
+    - kokkos-kernels@5.1 ~shared
     - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
     - 'koliop@0.2'
     - lapack
@@ -35,8 +37,9 @@ spack:
     - py-sympy@1.14
     - py-xarray@2026.4
   - architectures:
-    - arch=linux-rhel8-zen4
+    - arch=linux-rhel8-zen3
   specs:
+  - gcc
   - matrix:
     - [$packages]
     - [$architectures]
@@ -44,13 +47,16 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2026.06
+      paths:
+        - spack_repo/patches_adastra
+        - spack_repo/patches_common
+      destination: $spack/var/spack/repos/patches-v2026.06
     builtin:
-      tag: v2026.06.0
+      branch: releases/v2026.06
+      destination: $spack/var/spack/repos/builtin-v2026.06
   concretizer:
     reuse: false
     unify: true
-    duplicates:
-      strategy: none
   packages:
     all:
       permissions:
@@ -62,7 +68,7 @@ spack:
     cxx:
       require: gcc@13.3.1
     kokkos-fft:
-      require: 'host_backend=fftw-openmp'
+      require: 'host_backend=fftw-serial'
     lapack:
       require: openblas@0.3
     mpi:
@@ -71,8 +77,3 @@ spack:
       prefer: ['~dataframe']
     py-pandas:
       prefer: ['~performance']
-  modules:
-    default:
-      roots: {}
-      enable: []
-  view: false

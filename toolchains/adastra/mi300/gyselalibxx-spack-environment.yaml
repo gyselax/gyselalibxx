@@ -1,4 +1,6 @@
 spack:
+  include:
+    - packages.yaml
   definitions:
   - packages:
     - cmake@3.31
@@ -37,6 +39,7 @@ spack:
   - architectures:
     - arch=linux-rhel8-zen3
   specs:
+  - gcc
   - matrix:
     - [$packages]
     - [$architectures]
@@ -47,13 +50,13 @@ spack:
       paths:
         - spack_repo/patches_adastra
         - spack_repo/patches_common
+      destination: $spack/var/spack/repos/patches-v2026.06
     builtin:
-      tag: v2026.06.0
+      branch: releases/v2026.06
+      destination: $spack/var/spack/repos/builtin-v2026.06
   concretizer:
     reuse: false
     unify: true
-    duplicates:
-      strategy: none
   packages:
     all:
       permissions:
@@ -74,8 +77,3 @@ spack:
       prefer: ['~dataframe']
     py-pandas:
       prefer: ['~performance']
-  modules:
-    default:
-      roots: {}
-      enable: []
-  view: false
