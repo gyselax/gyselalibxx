@@ -50,6 +50,14 @@ class PolarSplineFEMPoissonLikeSolver
 {
     static_assert(
             InterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
+    using FullDims = ddc::to_type_seq_t<IdxRangeFull>;
+    // The batch dimensions must come first so that slices of the batched fields are contiguous.
+    static_assert(
+            std::is_same_v<ddc::type_seq_element_t<IdxRangeFull::rank() - 2, FullDims>, GridR>,
+            "IdxRangeFull must have the form IdxRange<Batch..., GridR, GridTheta>");
+    static_assert(
+            std::is_same_v<ddc::type_seq_element_t<IdxRangeFull::rank() - 1, FullDims>, GridTheta>,
+            "IdxRangeFull must have the form IdxRange<Batch..., GridR, GridTheta>");
 
     /// The base class defining the field types used at the (possibly batched) solver interface.
     using Base = IPolarPoissonLikeSolver<
