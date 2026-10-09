@@ -6,6 +6,7 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "inf_norm_residual_criterion.hpp"
 #include "matrix_batch.hpp"
 #include "matrix_utils.hpp"
 
@@ -63,6 +64,7 @@ private:
     double m_tol;
     bool m_with_logger;
     unsigned int m_preconditioner_max_block_size; // Maximum size of Jacobi-block preconditioner
+    GkoMatrixResidualNorm m_residual_norm;
 
 public:
     /**
@@ -72,10 +74,13 @@ public:
      * @param[in] mat_size Common matrix size for all the systems.
      * @param[in] nnz_per_system Number of non-zero components per matrix.
      * @param[in] max_iter maximal number of iterations for the solver, default 1000.
-     * @param[in] res_tol residual tolerance parameter, to ensure convergence. Be careful! the relative residual 
-     * provided here, will be used as "implicit residual" in ginkgo solver.
+     * @param[in] res_tol residual tolerance parameter, to ensure convergence. The stopping criterion is
+     * ||r||/||b|| <= res_tol where r is the residual computed by the solver's recurrence and the norm is
+     * chosen with residual_norm.
      * @param[in] logger boolean parameter for saving log information such residual and interactions count.
      * @param[in] preconditioner_max_block_size An optional parameter used to define the maximum size of a block
+     * @param[in] residual_norm The norm used to evaluate the residual in the stopping criterion. Default is the
+     * 2-norm (batched solvers only support the 2-norm).
      */
     explicit MatrixBatchCsr(
             const int batch_size,
@@ -84,14 +89,17 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = std::nullopt)
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_size, mat_size)
         , m_max_iter(max_iter.value_or(mat_size))
-        , m_tol(res_tol.value_or(1e-15))
+        , m_tol(res_tol.value_or(1e-8))
         , m_with_logger(logger.value_or(false))
         , m_preconditioner_max_block_size(preconditioner_max_block_size.value_or(
                   default_preconditioner_max_block_size<ExecSpace>()))
+        , m_residual_norm(residual_norm.value_or(GkoMatrixResidualNorm::TWO))
     {
+        check_residual_norm();
         std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_csr = gko::share(
                 batch_sparse_type::
@@ -111,11 +119,14 @@ public:
      * nnz_per_row[matrix_size] = total_number_of_nonzero.
      * To get the number of non-zero for a line i,one have to compute : n_non_zeros_at_line_in = nnz_per_row[i+1]-nnz_per_row[i].
      * @param[in] max_iter maximal number of iterations for the solver, default 1000.
-     * @param[in] res_tol residual tolerance parameter, to ensure convergence. Be careful! The residual 
-     * provided here, set as relative residual, will be used as "implicit residual" in ginkgo solver.
-     * Default value is set to 1e-15.
+     * @param[in] res_tol residual tolerance parameter, to ensure convergence. The stopping criterion is
+     * ||r||/||b|| <= res_tol where r is the residual computed by the solver's recurrence and the norm is
+     * chosen with residual_norm.
+     * Default value is set to 1e-8.
      * @param[in] logger boolean parameter to save logger information. Default value false.
      * @param[in] preconditioner_max_block_size An optional parameter used to define the maximum size of a block
+     * @param[in] residual_norm The norm used to evaluate the residual in the stopping criterion. Default is the
+     * 2-norm (batched solvers only support the 2-norm).
      */
     explicit MatrixBatchCsr(
             Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace> batch_values,
@@ -124,14 +135,17 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = std::nullopt)
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_values.extent(0), nnz_per_row.size() - 1)
         , m_max_iter(max_iter.value_or(1000))
-        , m_tol(res_tol.value_or(1e-15))
+        , m_tol(res_tol.value_or(1e-8))
         , m_with_logger(logger.value_or(false))
         , m_preconditioner_max_block_size(preconditioner_max_block_size.value_or(
                   default_preconditioner_max_block_size<ExecSpace>()))
+        , m_residual_norm(residual_norm.value_or(GkoMatrixResidualNorm::TWO))
     {
+        check_residual_norm();
         std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_csr = gko::share(
                 batch_sparse_type::
@@ -180,7 +194,9 @@ public:
      * It uses the batch of matrices to generate a batched Jacobi preconditioner. Other parameters like maximum number
      * of iterations and tolerance are also used to instantiate a Ginkgo solver.
      *
-     * The stopping criterion is a reduction factor ||Ax-b||/||b||<tol with max_iter maximum iterations.
+     * The stopping criterion is a reduction factor ||r||/||b||<tol with max_iter maximum iterations.
+     * The norm is chosen with the residual_norm constructor argument (the infinite norm is evaluated
+     * with InfNormResidual, the 2-norm with gko::stop::ResidualNorm).
      */
     void setup_solver() final
     {
@@ -197,9 +213,16 @@ public:
         if constexpr (
                 Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {
             // Create the solver factory
-            std::shared_ptr const residual_criterion
-                    = gko::stop::ResidualNorm<double>::build().with_reduction_factor(m_tol).on(
-                            gko_exec);
+            std::shared_ptr<gko::stop::CriterionFactory const> residual_criterion;
+            if (m_residual_norm == GkoMatrixResidualNorm::INF) {
+                residual_criterion
+                        = InfNormResidual<ExecSpace>::build().with_reduction_factor(m_tol).on(
+                                gko_exec);
+            } else {
+                residual_criterion
+                        = gko::stop::ResidualNorm<double>::build().with_reduction_factor(m_tol).on(
+                                gko_exec);
+            }
 
             std::shared_ptr const iterations_criterion
                     = gko::stop::Iteration::build().with_max_iters(m_max_iter).on(gko_exec);
@@ -285,7 +308,8 @@ public:
                             Kokkos::subview(x, i, Kokkos::ALL),
                             Kokkos::subview(b, i, Kokkos::ALL),
                             logger,
-                            m_tol);
+                            m_tol,
+                            m_residual_norm);
                     log_file.close();
                 }
                 // Check convergency
@@ -312,6 +336,17 @@ public:
             }
             // Check convergence
             check_conv(batch_size(), m_tol, gko_exec, logger);
+        }
+    }
+
+private:
+    void check_residual_norm() const
+    {
+        if ((Solver == MatrixBatchCsrSolver::BATCH_CG
+             || Solver == MatrixBatchCsrSolver::BATCH_BICGSTAB)
+            && m_residual_norm == GkoMatrixResidualNorm::INF) {
+            throw std::invalid_argument(
+                    "The batched Ginkgo solvers only support the 2-norm residual");
         }
     }
 };

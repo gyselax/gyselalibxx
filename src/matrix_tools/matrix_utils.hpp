@@ -1,8 +1,21 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <source_location>
+
+#include <ginkgo/extensions/kokkos/spaces.hpp>
+#include <ginkgo/extensions/kokkos/types.hpp>
 #include <ginkgo/ginkgo.hpp>
 
 #include <Kokkos_Core.hpp>
+
+
+/**
+ * @brief A tag to choose the norm used to evaluate the residual in the stopping criterion of a Ginkgo solver.
+ *
+ * TWO The relative 2-norm of the residual ||r||_2/||b||_2 (Ginkgo's gko::stop::ResidualNorm).
+ * INF The relative infinite norm of the residual ||r||_inf/||b||_inf (see InfNormResidual).
+ */
+enum class GkoMatrixResidualNorm { TWO, INF };
 
 /**
  * @brief A function to convert a 2D Kokkos view into a ginkgo multivector structure.
@@ -28,7 +41,51 @@ auto to_gko_multivector(
 }
 
 /**
- * @brief A function for checking convergence. It loops over the batch and checks 
+ * @brief A function to compute the infinite norm of a single-column Ginkgo Dense vector.
+ * @param[in] vec A Ginkgo Dense vector with one column, whose data is accessible from ExecSpace.
+ * @tparam ExecSpace The Kokkos execution space in which the reduction is carried out.
+ * @return The infinite norm, i.e. the maximum absolute value of the vector components.
+ */
+template <class ExecSpace = Kokkos::DefaultExecutionSpace>
+double inf_norm(gko::matrix::Dense<double> const* vec)
+{
+    // Ensure there is only 1 column
+    assert(vec->get_size()[1] == 1);
+    Kokkos::View<double const**, Kokkos::LayoutRight> const vec_view
+            = gko::ext::kokkos::map_data(vec);
+    double result = 0.;
+    const std::source_location location = std::source_location::current();
+    Kokkos::parallel_reduce(
+            location.function_name(),
+            Kokkos::RangePolicy<ExecSpace>(0, vec_view.extent(0)),
+            KOKKOS_LAMBDA(int const i, double& local_max) {
+                local_max = Kokkos::max(local_max, Kokkos::abs(vec_view(i, 0)));
+            },
+            Kokkos::Max<double>(result));
+    return result;
+}
+
+/**
+ * @brief A function to compute the norm of a single-column Ginkgo Dense vector.
+ * @param[in] vec A Ginkgo Dense vector with one column.
+ * @param[in] norm The norm which should be computed.
+ * @return The requested norm of the vector.
+ */
+inline double vector_norm(gko::matrix::Dense<double> const* vec, GkoMatrixResidualNorm const norm)
+{
+    if (norm == GkoMatrixResidualNorm::INF) {
+        return inf_norm(vec);
+    } else {
+        // norm == GkoMatrixResidualNorm::TWO
+        auto norm_host = gko::matrix::Dense<
+                double>::create(vec->get_executor()->get_master(), gko::dim<2>(1, 1));
+        vec->compute_norm2(norm_host);
+        return norm_host->at(0, 0);
+    }
+}
+
+/**
+ * @brief A function for checking convergence. It loops over the batch and checks
  *        the if residual is lower or equal to the prescribed tolerance.
  * @param[in] batch_size the size of the batch , ie number of linears problems.
  * @param[in] tol The tolerancy on residual norm above which a non-convergency is reported.
@@ -89,13 +146,15 @@ inline void write_log(
 
 /**
  * @brief A function to save convergence data using the logger.
+ * All norms written to the log are computed with the norm used by the stopping criterion.
  * @param[inout] log_file The file in which the logs will be saved.
  * @param[in] batch_index The index of the relevant matrix in the batch of matrices.
  * @param[in] matrix Batch of matrices.
  * @param[in] x_view 2d Kokkos view containing the batch of computed solutions.
- * @param[in] b_view 2d Kokkos view containing the batch of rhs. 
+ * @param[in] b_view 2d Kokkos view containing the batch of rhs.
  * @param[in] logger Ginkgo logger which stores residual and numbers of iterations for the whole batch.
- * @param[in] tol tolerance 
+ * @param[in] tol tolerance
+ * @param[in] norm The norm used by the stopping criterion.
  */
 template <class sparse_type>
 void save_logger(
@@ -105,7 +164,8 @@ void save_logger(
         Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const x_view,
         Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const b_view,
         std::shared_ptr<const gko::log::Convergence<double>> logger,
-        double const tol)
+        double const tol,
+        GkoMatrixResidualNorm const norm)
 {
     std::shared_ptr const gko_exec = matrix->get_executor();
 
@@ -125,14 +185,6 @@ void save_logger(
     res->copy_from(b);
 
     gko::dim<2> norm_dim(1, 1);
-    // allocate rhs norm on host.
-    auto b_norm_host = gko::matrix::Dense<double>::create(gko_exec->get_master(), norm_dim);
-    b_norm_host->fill(0.0);
-    // allocate the residual norm on host.
-    auto res_norm_host = gko::matrix::Dense<double>::create(gko_exec->get_master(), norm_dim);
-    res_norm_host->fill(0.0);
-    // compute rhs norm.
-    b->compute_norm2(b_norm_host);
     // we need constants on the device
     auto one = gko::matrix::Dense<double>::create(gko_exec, norm_dim);
     one->fill(1.0);
@@ -140,23 +192,19 @@ void save_logger(
     neg_one->fill(-1.0);
     //to estimate the "true" residual, the apply function below computes Ax-res, and stores the result in res.
     matrix->apply(one, x, neg_one, res);
-    //compute residual norm.
-    res->compute_norm2(res_norm_host);
 
     int const log_iters_host = logger->get_num_iterations();
+    // The norm of the residual used by the solver.
     double const log_resid_host
-            = gko::make_temporary_clone(
-                      gko_exec->get_master(),
-                      gko::as<gko::matrix::Dense<double>>(logger->get_residual_norm()))
-                      ->at(0, 0);
+            = vector_norm(gko::as<gko::matrix::Dense<double>>(logger->get_residual()), norm);
 
     write_log(
             log_file,
             batch_index,
             log_iters_host,
             log_resid_host,
-            res_norm_host->at(0, 0),
-            b_norm_host->at(0, 0),
+            vector_norm(res.get(), norm),
+            vector_norm(b.get(), norm),
             tol);
 }
 
