@@ -238,7 +238,7 @@ TEST(DDCHelper, IdxFromLinearIndex)
     IdxRange<GridA, GridB, GridC>
             idx_range(Idx<GridA, GridB, GridC>(2, 0, 5), IdxStep<GridA, GridB, GridC>(3, 4, 2));
     std::size_t linear_idx = 0;
-    ddc::host_for_each(Kokkos::Serial(), idx_range, [&](Idx<GridA, GridB, GridC> idx) {
+    ddc::host_for_each(idx_range, [&](Idx<GridA, GridB, GridC> idx) {
         EXPECT_EQ(ddcHelper::get_idx_from_linear_index(idx_range, linear_idx), idx);
         linear_idx++;
     });
