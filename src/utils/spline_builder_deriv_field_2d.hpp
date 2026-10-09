@@ -53,7 +53,8 @@ class SplineBuilderDerivField2D
             ddc::SplineSolver::LAPACK>;
 
     using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace>;
-    using DerivFieldType = DerivField<double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
+    using DerivConstFieldType
+            = DerivField<const double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
 
     using FunctFieldMem = DFieldMem<IdxRange<Grid1, Grid2>, MemorySpace>;
     using FunctField = DField<IdxRange<Grid1, Grid2>, MemorySpace>;
@@ -90,7 +91,7 @@ public:
      * @param[out] spline Spline coefficients on a 2D grid. 
      * @param[in] function_and_derivs Data defining the function on a 2D grid. 
      */
-    void operator()(SplineType spline, DerivFieldType function_and_derivs) const
+    void operator()(SplineType spline, DerivConstFieldType function_and_derivs) const
     {
         // Check that the DerivField contains the necessary derivatives for the builder.
         IdxRange<Deriv1> idx_range_d1_min(
@@ -208,7 +209,7 @@ public:
      * @param[out] function Field with layout_right where we copy the function values.
      * @param[in] function_and_derivs DerivField from where the function values are copied.
      */
-    void fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
+    static void fill_in_function(FunctField function, DerivConstFieldType function_and_derivs)
     {
         // Fill the field with correct layout.
         const std::source_location location = std::source_location::current();
@@ -228,10 +229,10 @@ public:
      * @param[in] function_and_derivs DerivField from where the derivatives are copied.
      * @param[in] idx_slice Index to determine which bound (mon/max) we select for the derivative field. 
      */
-    void fill_in_deriv1(
+    static void fill_in_deriv1(
             Deriv1Field deriv1,
-            DerivFieldType function_and_derivs,
-            Idx<Grid1> idx_slice) const
+            DerivConstFieldType function_and_derivs,
+            Idx<Grid1> idx_slice)
     {
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -250,10 +251,10 @@ public:
      * @param[in] function_and_derivs DerivField from where the derivatives are copied.
      * @param[in] idx_slice Index to determine which bound (mon/max) we select for the derivative field. 
      */
-    void fill_in_deriv2(
+    static void fill_in_deriv2(
             Deriv2Field deriv2,
-            DerivFieldType function_and_derivs,
-            Idx<Grid2> idx_slice) const
+            DerivConstFieldType function_and_derivs,
+            Idx<Grid2> idx_slice)
     {
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -275,11 +276,11 @@ public:
      * @param[in] idx_slice_2 Index to determine which bound (mon/max) we select for the derivative field
      * on the second dimension. 
      */
-    void fill_in_cross_deriv(
+    static void fill_in_cross_deriv(
             CrossDerivField cross_deriv,
-            DerivFieldType function_and_derivs,
+            DerivConstFieldType function_and_derivs,
             Idx<Grid1> idx_slice_1,
-            Idx<Grid2> idx_slice_2) const
+            Idx<Grid2> idx_slice_2)
     {
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(

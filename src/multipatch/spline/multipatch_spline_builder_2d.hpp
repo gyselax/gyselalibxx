@@ -10,6 +10,8 @@
 
 #include "ddc_aliases.hpp"
 #include "multipatch_type.hpp"
+#include "spline_builder_deriv_field_2d.hpp"
+#include "types.hpp"
 
 /**
  * @brief A class to call all the builders of all the patches once.
@@ -24,6 +26,8 @@
  *
  * This function is useful to avoid calling all the builders individually, especially in
  * a multipatch geometry with several patches.
+ * 
+ * @warning MultipatchSplineBuilder2D is implemented for tensor-product multi-patch decompositions. 
  *
  * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
  * @tparam MemorySpace The space (CPU/GPU) where the coefficients and values are stored.
@@ -96,6 +100,10 @@ class MultipatchSplineBuilder2D
                     typename Grid2OnPatch<Patches>::continuous_dimension_type>)&&...),
             "The BSpline2OnPatch argument does not define B-splines on the dimension where the "
             "grids defined by Grid2OnPatch are defined.");
+    static_assert(
+            !(is_deriv_field_v<ValuesOnPatch<Patches>> && ...),
+            "ValuesOnPatch represents the field, not the field with derivatives.");
+
     /**
      * A small structure allowing the multiple grids to be unpacked from a field and repacked into
      * a SplineBuilder type.
@@ -170,10 +178,20 @@ class MultipatchSplineBuilder2D
                     typename ValuesOnPatch<Patch>::discrete_domain_type>,
             MemorySpace>;
 
+    /// A type alias to get the DerivField type on a specific patch.
+    template <class Patch>
+    using DerivConstFieldOnPatch = DerivField<
+            const double,
+            IdxRange<
+                    ddc::Deriv<typename Patch::Dim1>,
+                    typename Patch::Grid1,
+                    ddc::Deriv<typename Patch::Dim2>,
+                    typename Patch::Grid2>,
+            MemorySpace>;
+
     /// The type of the batched spline coefficients.
     using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
 
-    // For PERIODIC or GREVILLE boundary conditions
     /// The type of the values at the batched interpolation points.
     using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
 
@@ -182,6 +200,12 @@ class MultipatchSplineBuilder2D
     using MultipatchDerivs2 = MultipatchField<Derivs2OnPatch, Patches...>;
 
     using MultipatchDerivs12 = MultipatchField<Derivs12OnPatch, Patches...>;
+
+    using MultipatchDerivField = MultipatchField<DerivConstFieldOnPatch, Patches...>;
+
+    using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patches...>;
+
+    using MultipatchIdxRangeBS = MultipatchType<IdxRangeBSOnPatch, Patches...>;
 
     /// The type of the internal storage of the SplineBuilders.
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
@@ -230,16 +254,16 @@ public:
      *                      in the second dimension at the lower bound of the first dimension.
      * @param[in] derivs_max2 MultipatchField of all the ConstFields describing the function derivatives
      *                      in the second dimension at the upper bound of the first dimension.
-     * @param[in] mixed_derivs_min1_min2
+     * @param[in] cross_derivs_min1_min2
      *      The values of the the cross-derivatives at the lower boundary in the first dimension
      *      and the lower boundary in the second dimension.
-     * @param[in] mixed_derivs_max1_min2
+     * @param[in] cross_derivs_max1_min2
      *      The values of the the cross-derivatives at the upper boundary in the first dimension
      *      and the lower boundary in the second dimension.
-     * @param[in] mixed_derivs_min1_max2
+     * @param[in] cross_derivs_min1_max2
      *      The values of the the cross-derivatives at the lower boundary in the first dimension
      *      and the upper boundary in the second dimension.
-     * @param[in] mixed_derivs_max1_max2
+     * @param[in] cross_derivs_max1_max2
      *      The values of the the cross-derivatives at the upper boundary in the first dimension
      *      and the upper boundary in the second dimension.
      */
@@ -250,10 +274,10 @@ public:
             std::optional<MultipatchDerivs1> derivs_max1 = std::nullopt,
             std::optional<MultipatchDerivs2> derivs_min2 = std::nullopt,
             std::optional<MultipatchDerivs2> derivs_max2 = std::nullopt,
-            std::optional<MultipatchDerivs12> mixed_derivs_min1_min2 = std::nullopt,
-            std::optional<MultipatchDerivs12> mixed_derivs_max1_min2 = std::nullopt,
-            std::optional<MultipatchDerivs12> mixed_derivs_min1_max2 = std::nullopt,
-            std::optional<MultipatchDerivs12> mixed_derivs_max1_max2 = std::nullopt) const
+            std::optional<MultipatchDerivs12> cross_derivs_min1_min2 = std::nullopt,
+            std::optional<MultipatchDerivs12> cross_derivs_max1_min2 = std::nullopt,
+            std::optional<MultipatchDerivs12> cross_derivs_min1_max2 = std::nullopt,
+            std::optional<MultipatchDerivs12> cross_derivs_max1_max2 = std::nullopt) const
     {
         ((std::get<BuilderOnPatch<Patches> const&>(m_builders)(
                  splines.template get<Patches>(),
@@ -262,10 +286,62 @@ public:
                  get_deriv_value<Patches>(derivs_max1),
                  get_deriv_value<Patches>(derivs_min2),
                  get_deriv_value<Patches>(derivs_max2),
-                 get_deriv_value<Patches>(mixed_derivs_min1_min2),
-                 get_deriv_value<Patches>(mixed_derivs_max1_min2),
-                 get_deriv_value<Patches>(mixed_derivs_min1_max2),
-                 get_deriv_value<Patches>(mixed_derivs_max1_max2))),
+                 get_deriv_value<Patches>(cross_derivs_min1_min2),
+                 get_deriv_value<Patches>(cross_derivs_max1_min2),
+                 get_deriv_value<Patches>(cross_derivs_min1_max2),
+                 get_deriv_value<Patches>(cross_derivs_max1_max2))),
          ...);
+    };
+
+    /**
+     * @brief Build the spline representation of each given function.
+     * 
+     * @param[out] splines MultipatchField of all the Fields pointing to the spline representations. 
+     * @param[in] functions_and_derivs MultipatchField of all the DerivFields pointing to the function values
+     * and their derivatives. 
+     */
+    void operator()(MultipatchSplineCoeffs splines, MultipatchDerivField functions_and_derivs) const
+    {
+        (apply_builder<Patches>(
+                 std::get<BuilderOnPatch<Patches> const&>(m_builders),
+                 splines.template get<Patches>(),
+                 functions_and_derivs.template get<Patches>()),
+         ...);
+    };
+
+    /**
+     * @brief Get a MultipatchType collecting the index ranges typed on the B-splines dimensions
+     * of the patches. 
+     * These index ranges are adapted to allocate splines on the multi-patch domain. 
+     * @param[in] idx_ranges MultipatchType collecting the index ranges on the grids of the patches. 
+     * @return a MultipatchType collecting the index ranges typed on the B-splines dimensions
+     * of the patches. 
+     */
+    MultipatchIdxRangeBS const spline_idx_ranges(MultipatchIdxRange idx_ranges) const
+    {
+        return MultipatchIdxRangeBS(
+                std::get<BuilderOnPatch<Patches> const&>(m_builders)
+                        .batched_spline_domain(idx_ranges.template get<Patches>())...);
+    };
+
+private:
+    template <class PatchP>
+    static void apply_builder(
+            BuilderOnPatch<PatchP> const& builder,
+            SplineOnPatch<PatchP> spline,
+            DerivConstFieldOnPatch<PatchP> function_and_deriv)
+    {
+        SplineBuilderDerivField2D<
+                ExecSpace,
+                BSpline1OnPatch<PatchP>,
+                BSpline2OnPatch<PatchP>,
+                Grid1OnPatch<PatchP>,
+                Grid2OnPatch<PatchP>,
+                BuilderOnPatch<PatchP>::builder_type1::s_sbc_xmin,
+                BuilderOnPatch<PatchP>::builder_type1::s_sbc_xmax,
+                BuilderOnPatch<PatchP>::builder_type2::s_sbc_xmin,
+                BuilderOnPatch<PatchP>::builder_type2::s_sbc_xmax>
+                builder_applier(builder);
+        builder_applier(spline, function_and_deriv);
     };
 };
