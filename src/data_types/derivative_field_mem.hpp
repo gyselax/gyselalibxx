@@ -273,7 +273,8 @@ public:
     template <class... DerivDoms>
     DerivFieldMem(
             physical_idx_range_type val_idx_range,
-            ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
+            ddc::StridedDiscreteDomain<
+                    DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
         : DerivFieldMem(allocator_type(), val_idx_range, m_deriv_idx_range...)
     {
     }
@@ -290,19 +291,44 @@ public:
     DerivFieldMem(
             allocator_type allocator,
             physical_idx_range_type val_idx_range,
-            ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
+            ddc::StridedDiscreteDomain<
+                    DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
         : base_type(
                 val_idx_range,
-                discrete_deriv_idx_range_type(
-                        IdxRange<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
-                                Idx<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(1),
-                                IdxStep<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
-                                        NDerivs))...),
-                to_subidx_range_collection<physical_deriv_grids>(m_deriv_idx_range...))
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>(
+                        m_deriv_idx_range...))
     {
         static_assert(
                 ddc::type_seq_same_v<ddc::detail::TypeSeq<DerivDoms...>, physical_deriv_grids>);
         initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
+    }
+
+    /**
+     * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
+     * the provided index ranges. The derivatives are assumed to be found at the boundaries.
+     *
+     * @param allocator The object which allocates the memory on the CPU or GPU.
+     * @param val_idx_range The index range on which the values of the field are defined.
+     */
+    DerivFieldMem(allocator_type allocator, physical_idx_range_type val_idx_range)
+        : base_type(
+                val_idx_range,
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
+    {
+        initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
+    }
+
+    /**
+     * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
+     * the provided index ranges. The derivatives are assumed to be found at the boundaries.
+     *
+     * @param val_idx_range The index range on which the values of the field are defined.
+     */
+    explicit DerivFieldMem(physical_idx_range_type val_idx_range)
+        : DerivFieldMem(allocator_type(), val_idx_range)
+    {
     }
 
     /// Destructor, responsible to deallocate memory.
@@ -457,6 +483,25 @@ public:
     span_type get_field()
     {
         return span_type(*this);
+    }
+
+private:
+    /// Get the index range for all the ddc::Deriv<Dim> dimensions. Unpacking is handled by
+    /// passing an index range of type physical_deriv_idx_range_type.
+    template <class... DerivDims>
+    static discrete_deriv_idx_range_type get_deriv_range(IdxRange<DerivDims...>)
+    {
+        static_assert(std::is_same_v<IdxRange<DerivDims...>, physical_deriv_idx_range_type>);
+        return discrete_deriv_idx_range_type(
+                get_deriv_range<typename DerivDims::continuous_dimension_type>()...);
+    }
+
+    /// Get the index range for ddc::Deriv<Dim>
+    template <class Dim>
+    static IdxRange<ddc::Deriv<Dim>> get_deriv_range()
+    {
+        return IdxRange<
+                ddc::Deriv<Dim>>(Idx<ddc::Deriv<Dim>>(1), IdxStep<ddc::Deriv<Dim>>(NDerivs));
     }
 };
 

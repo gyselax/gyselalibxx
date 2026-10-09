@@ -8,7 +8,6 @@
 
 #include "ddc_aliases.hpp"
 #include "deriv_details.hpp"
-#include "idx_range_slice.hpp"
 #include "type_seq_tools.hpp"
 
 template <class T>
@@ -155,7 +154,8 @@ protected:
     discrete_deriv_idx_range_type m_deriv_idx_range;
 
     /// @brief The physical index ranges on which the derivatives are defined.
-    to_subidx_range_collection<physical_deriv_grids> m_cross_derivative_idx_range;
+    ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
+            m_cross_derivative_idx_range;
 
 protected:
     /**
@@ -448,7 +448,8 @@ protected:
     KOKKOS_FUNCTION DerivFieldCommon(
             physical_idx_range_type physical_idx_range,
             discrete_deriv_idx_range_type deriv_idx_range,
-            to_subidx_range_collection<physical_deriv_grids> cross_derivative_idx_range)
+            ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
+                    cross_derivative_idx_range)
         : m_physical_idx_range(physical_idx_range)
         , m_deriv_idx_range(deriv_idx_range)
         , m_cross_derivative_idx_range(cross_derivative_idx_range)

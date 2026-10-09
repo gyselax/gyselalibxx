@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `GyroAverageOperator` to work with any interpolation scheme.
 - Add `TypeOnPatch` to `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` to get the type stored on a given patch.
 - Allow `ddcHelper::get<Dim>(..)` to be used on a multipatch argument.
+- Add new constructors to `DerivFieldMem` where the idx range slices for the derivatives default to the edge of the physical domain.
 
 ### Fixed
 
