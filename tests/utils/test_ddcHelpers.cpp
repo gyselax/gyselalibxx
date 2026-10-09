@@ -216,3 +216,33 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridLast)
 
     EXPECT_NEAR(max_dx, max_dx_ddchelper, 1e-12);
 }
+
+namespace {
+struct GridA
+{
+};
+struct GridB
+{
+};
+struct GridC
+{
+};
+} // namespace
+
+/**
+ * A test for the get_idx_from_linear_index function. Check that it
+ * returns the indices in the order in which they are iterated over.
+ */
+TEST(DDCHelper, IdxFromLinearIndex)
+{
+    IdxRange<GridA, GridB, GridC>
+            idx_range(Idx<GridA, GridB, GridC>(2, 0, 5), IdxStep<GridA, GridB, GridC>(3, 4, 2));
+    std::size_t linear_idx = 0;
+    ddc::host_for_each(idx_range, [&](Idx<GridA, GridB, GridC> idx) {
+        EXPECT_EQ(ddcHelper::get_idx_from_linear_index(idx_range, linear_idx), idx);
+        linear_idx++;
+    });
+    EXPECT_EQ(linear_idx, idx_range.size());
+
+    EXPECT_EQ(ddcHelper::get_idx_from_linear_index(IdxRange<>(), 0), Idx<>());
+}

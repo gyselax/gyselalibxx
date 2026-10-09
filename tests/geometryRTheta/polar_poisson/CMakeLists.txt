@@ -34,11 +34,12 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
   endforeach()
 endforeach()
 
-add_executable(gmg_polar_poisson_like_solver_test
+add_executable(polar_poisson_like_solver_test
     gmgpolarpoissonsolver.cpp
+    polarpoissonfemsolver_batched.cpp
     ../../main.cpp
 )
-target_link_libraries(gmg_polar_poisson_like_solver_test
+target_link_libraries(polar_poisson_like_solver_test
     PUBLIC
         GTest::gtest
 	    GTest::gmock
@@ -48,6 +49,8 @@ target_link_libraries(gmg_polar_poisson_like_solver_test
         gyselalibxx::pde_solvers
 )
 
-gtest_discover_tests(gmg_polar_poisson_like_solver_test
+gtest_discover_tests(polar_poisson_like_solver_test
     DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
     DISCOVERY_MODE PRE_TEST)
+set_property(TEST polar_poisson_like_solver_test PROPERTY TIMEOUT 30)
+set_property(TEST polar_poisson_like_solver_test PROPERTY COST 10)

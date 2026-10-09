@@ -6,6 +6,7 @@
 #include "coord_transformation_tools.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "gauss_legendre_integration.hpp"
 #include "math_tools.hpp"
 #include "matrix_batch_csr.hpp"
@@ -17,6 +18,34 @@
 
 
 namespace detail_poisson {
+
+/**
+ * @brief Get a 2D Kokkos view of a 1D field with N batch dimensions.
+ *
+ * The returned view shares the memory of the field. The first dimension of the view
+ * iterates over all the batch dimensions (in layout_right order), the second dimension
+ * iterates over the last dimension of the field.
+ *
+ * @param[in] field A contiguous layout_right field whose last dimension is the dimension
+ *          of the matrix equation and whose other dimensions are batch dimensions.
+ *
+ * @return A 2D Kokkos view of shape (number of batches, matrix size).
+ */
+template <class... Dims>
+Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> as_batched_vector_view(
+        DField<IdxRange<Dims...>> field)
+{
+    static_assert(sizeof...(Dims) > 0);
+    using LastDim = ddc::type_seq_element_t<sizeof...(Dims) - 1, ddc::detail::TypeSeq<Dims...>>;
+    IdxRange<Dims...> idx_range = get_idx_range(field);
+    std::size_t const matrix_size = idx_range.template extent<LastDim>();
+    assert(field.size() == idx_range.size());
+    return Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>(
+            field.data_handle(),
+            idx_range.size() / matrix_size,
+            matrix_size);
+}
+
 
 /**
     * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction.
@@ -253,6 +282,7 @@ KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_quadrature_between_knots(
  * @tparam QDimRMesh The radial quadrature grid type.
  * @tparam QDimThetaMesh The poloidal quadrature grid type.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
+ *          One matrix is assembled for each index in the batch dimensions.
  */
 
 template <
@@ -261,14 +291,9 @@ template <
         typename PolarBSplinesRTheta,
         typename QDimRMesh,
         typename QDimThetaMesh,
-        class IdxRangeFull = IdxRange<GridR, GridTheta>>
+        typename IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler
 {
-    // TODO: Add a batch loop to operator()
-    static_assert(
-            std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
-            "PolarSplineFEMPoissonLikeAssembler is not yet batched");
-
 public:
     /// The radial dimension
     using R = typename GridR::continuous_dimension_type;
@@ -277,11 +302,6 @@ public:
 
     static_assert(R::IS_CONTRAVARIANT);
     static_assert(Theta::IS_CONTRAVARIANT);
-
-    /// The tag for the batch dimension for the equation. This is public due to Cuda.
-    struct InternalBatchDim
-    {
-    };
 
 private:
     /// The radial dimension
@@ -315,11 +335,8 @@ private:
     using IdxStepBSTheta = IdxStep<BSplinesTheta>;
     using IdxStepBSRTheta = IdxStep<BSplinesR, BSplinesTheta>;
 
-    using IdxRangeBatchedBSRTheta
-            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
-                    ddc::to_type_seq_t<IdxRangeFull>,
-                    ddc::detail::TypeSeq<GridR, GridTheta>,
-                    ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridR, GridTheta>;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
     /**
      * @brief Tag the quadrature index range in the first dimension.
@@ -382,7 +399,7 @@ private:
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
-    const int m_batch_idx {0}; // TODO: Remove when batching is supported
+    IdxRangeBatch m_idx_range_batch;
 
     DField<IdxRangeQuadratureRTheta> m_int_volume;
 
@@ -391,8 +408,11 @@ public:
      * @brief Instantiate the assembler operator.
      *
      * @param int_volume The initialised field of Jacobian values of the mapping. 
+     * @param idx_range_full The full index range of @f$ \phi @f$ including any batch dimensions.
      */
-    explicit PolarSplineFEMPoissonLikeAssembler(Field<double, IdxRangeQuadratureRTheta> int_volume)
+    explicit PolarSplineFEMPoissonLikeAssembler(
+            Field<double, IdxRangeQuadratureRTheta> int_volume,
+            IdxRangeFull idx_range_full)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
@@ -412,6 +432,7 @@ public:
                   IdxStep<QDimThetaMesh>(
                           s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
+        , m_idx_range_batch(idx_range_full)
         , m_int_volume(int_volume)
     {
     }
@@ -464,7 +485,7 @@ public:
         //CSR data storage
         gko_matrix = std::make_unique<
                 MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>(
-                1,
+                m_idx_range_batch.size(),
                 m_matrix_size,
                 n_matrix_elements,
                 max_iter,
@@ -483,17 +504,17 @@ public:
      *
      * @param[out] gko_matrix The pointer to the assembled matrix.
      * @param[in] coeff_alpha
-     *      A callable object with signature `double operator()(CoordRTheta)` returning the
-     *      value of @f$ \alpha @f$ at the given coordinate.
+     *      A callable object with signature `double operator()(IdxBatch, CoordRTheta)`
+     *      returning the value of @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable object with signature `double operator()(CoordRTheta)` returning the
-     *      value of @f$ \beta @f$ at the given coordinate.
+     *      A callable object with signature `double operator()(IdxBatch, CoordRTheta)`
+     *      returning the value of @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      *
-     * @tparam CoeffAlpha A callable type for evaluating @f$ \alpha @f$ at a coordinate.
-     * @tparam CoeffBeta A callable type for evaluating @f$ \beta @f$ at a coordinate.
+     * @tparam CoeffAlpha A callable type for evaluating @f$ \alpha @f$ at a batch and coordinate.
+     * @tparam CoeffBeta A callable type for evaluating @f$ \beta @f$ at a batch and coordinate.
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
     template <class CoeffAlpha, class CoeffBeta, class Mapping>
@@ -749,9 +770,11 @@ public:
      * basis functions and singular basis functions.
      *
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -783,7 +806,8 @@ public:
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
-        const int batch_idx = m_batch_idx;
+        IdxRangeBatch idx_range_batch = m_idx_range_batch;
+        const int n_batch = idx_range_batch.size();
         const int n_singular = idxrange_singular.size();
 
         Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonFillFemMatrix");
@@ -793,11 +817,15 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        n_singular * n_singular,
+                        n_batch * n_singular * n_singular,
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const int row_idx = team.league_rank() / n_singular;
-                    const int col_idx = team.league_rank() % n_singular;
+                    const int batch_linear_idx = team.league_rank() / (n_singular * n_singular);
+                    const IdxBatch idx_batch = ddcHelper::
+                            get_idx_from_linear_index(idx_range_batch, batch_linear_idx);
+                    const int row_col_idx = team.league_rank() % (n_singular * n_singular);
+                    const int row_idx = row_col_idx / n_singular;
+                    const int col_idx = row_col_idx % n_singular;
                     IdxBSPolar idx_test = idxrange_singular.front() + IdxStepBSPolar(row_idx);
                     IdxBSPolar idx_trial = idxrange_singular.front() + IdxStepBSPolar(col_idx);
                     double element = 0;
@@ -816,6 +844,7 @@ public:
                                         idx_test,
                                         idx_trial,
                                         idx_quad,
+                                        idx_batch,
                                         coeff_alpha,
                                         coeff_beta,
                                         mapping,
@@ -824,7 +853,7 @@ public:
                             element);
                     const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
                     //Fill the dense matrix corresponding to the b-splines on the singular point
-                    values_csr(batch_idx, csr_idx_singular_area) = element;
+                    values_csr(batch_linear_idx, csr_idx_singular_area) = element;
                 });
     }
 
@@ -833,9 +862,11 @@ public:
      * basis functions and tensor basis functions.
      *
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -873,7 +904,8 @@ public:
 
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
 
-        const int batch_idx = m_batch_idx;
+        IdxRangeBatch idx_range_batch = m_idx_range_batch;
+        const int n_batch = idx_range_batch.size();
         // Number of polar bsplines which traverse the singular point
         const int n_singular = idxrange_singular.size();
         // Number of tensor product polar bsplines which overlap with polar bsplines which
@@ -887,12 +919,17 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        n_singular * n_overlapping_singular,
+                        n_batch * n_singular * n_overlapping_singular,
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const IdxStepBSPolar idx_step_test(team.league_rank() / n_overlapping_singular);
-                    const IdxStepBSPolar idx_step_trial(
-                            team.league_rank() % n_overlapping_singular);
+                    const int batch_linear_idx(
+                            team.league_rank() / (n_singular * n_overlapping_singular));
+                    const IdxBatch idx_batch = ddcHelper::
+                            get_idx_from_linear_index(idx_range_batch, batch_linear_idx);
+                    const int idx_test_trial(
+                            team.league_rank() % (n_singular * n_overlapping_singular));
+                    const IdxStepBSPolar idx_step_test(idx_test_trial / n_overlapping_singular);
+                    const IdxStepBSPolar idx_step_trial(idx_test_trial % n_overlapping_singular);
                     IdxBSPolar idx_test = idxrange_singular.front() + idx_step_test;
                     const IdxBSPolar idx_trial_polar(idxrange_singular.back() + 1 + idx_step_trial);
                     IdxBSRTheta idx_trial = PolarBSplinesRTheta::get_2d_index(idx_trial_polar);
@@ -951,6 +988,7 @@ public:
                                         idx_test,
                                         idx_trial_polar,
                                         idx_quad,
+                                        idx_batch,
                                         coeff_alpha,
                                         coeff_beta,
                                         mapping,
@@ -962,9 +1000,9 @@ public:
                     const int col_idx = idx_step_trial.value() + n_singular;
 
                     //a_ij
-                    values_csr(batch_idx, nnz_per_row_csr(row_idx) + col_idx) = element;
+                    values_csr(batch_linear_idx, nnz_per_row_csr(row_idx) + col_idx) = element;
                     //a_ji
-                    values_csr(batch_idx, nnz_per_row_csr(col_idx) + row_idx) = element;
+                    values_csr(batch_linear_idx, nnz_per_row_csr(col_idx) + row_idx) = element;
                 });
     }
 
@@ -973,9 +1011,11 @@ public:
      * basis functions and tensor basis functions.
      *
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -1010,8 +1050,10 @@ public:
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
-        const int batch_idx = m_batch_idx;
+        IdxRangeBatch idx_range_batch = m_idx_range_batch;
+        const int n_batch = idx_range_batch.size();
         const int n_singular = idxrange_singular.size();
+        const int n_tensor_basis = m_idxrange_fem_tensor_basis.size();
         const std::source_location location = std::source_location::current();
 
         // Calculate the matrix elements following a stencil
@@ -1020,12 +1062,16 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_tensor_basis.size(),
+                        n_batch * n_tensor_basis,
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    const int batch_linear_idx = team.league_rank() / n_tensor_basis;
+                    const IdxBatch idx_batch = ddcHelper::
+                            get_idx_from_linear_index(idx_range_batch, batch_linear_idx);
                     // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
-                            idxrange_fem_non_singular_front + IdxStepBSPolar {team.league_rank()});
+                            idxrange_fem_non_singular_front
+                            + IdxStepBSPolar {team.league_rank() % n_tensor_basis});
 
                     // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
@@ -1048,12 +1094,13 @@ public:
                                 team,
                                 idx_test,
                                 idx_trial,
+                                idx_batch,
                                 coeff_alpha,
                                 coeff_beta,
                                 mapping,
                                 full_quad_idx_range,
                                 int_volume_proxy);
-                        values_csr(batch_idx, csr_idx) = element;
+                        values_csr(batch_linear_idx, csr_idx) = element;
                     }
                 });
 
@@ -1074,10 +1121,14 @@ public:
      *      The index of the trial basis spline.
      * @param[in] idx_quad
      *      The index for the point in the quadrature scheme.
+     * @param[in] idx_batch
+     *      The index of the batch for which the element is being calculated.
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -1090,6 +1141,7 @@ public:
             IdxBSPolar idx_test,
             IdxBSPolar idx_trial,
             IdxQuadratureRTheta idx_quad,
+            IdxBatch idx_batch,
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
             Mapping const& mapping,
@@ -1097,8 +1149,8 @@ public:
     {
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
-        const double alpha = coeff_alpha(coord);
-        const double beta = coeff_beta(coord);
+        const double alpha = coeff_alpha(idx_batch, coord);
+        const double beta = coeff_beta(idx_batch, coord);
 
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
@@ -1138,10 +1190,14 @@ public:
      *      The index for polar B-spline in the test space.
      * @param[in] idx_trial
      *      The index for polar B-spline in the trial space.
+     * @param[in] idx_batch
+     *      The index of the batch for which the element is being calculated.
      * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
      * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -1159,6 +1215,7 @@ public:
             const Kokkos::TeamPolicy<>::member_type& team,
             IdxBSRTheta idx_test,
             IdxBSRTheta idx_trial,
+            IdxBatch idx_batch,
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
             Mapping const& mapping,
@@ -1240,6 +1297,7 @@ public:
                             idx_test_polar,
                             idx_trial_polar,
                             idx_quad,
+                            idx_batch,
                             coeff_alpha,
                             coeff_beta,
                             mapping,
