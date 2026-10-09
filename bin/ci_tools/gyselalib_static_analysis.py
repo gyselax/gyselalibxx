@@ -829,7 +829,7 @@ if __name__ == '__main__':
     multipatch_geom = list(relevant_files.pop('multipatch'))
 
     cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style',
-                        '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
+                        '--std=c++20', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
                         '--error-exitcode=1', '--suppress=knownConditionTrueFalse', '--suppress=ctuOneDefinitionRuleViolation',
                         '--inline-suppr']
     for f in multipatch_geom:
