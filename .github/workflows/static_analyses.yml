@@ -153,6 +153,7 @@ jobs:
       - uses: ./.github/actions/python-static-analysis-setup
       - uses: ./.github/actions/test_filter
       - run: |
+          cppcheck --version
           python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
 
   cmake_static_analysis:
