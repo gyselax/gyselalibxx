@@ -134,7 +134,7 @@ void test_PolarPoissonFEMBatched__MatchesUnbatched()
     IdxRangeTheta const idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta const idx_range(idx_range_r, idx_range_theta);
 
-    IdxRangeBatch const idx_range_batch(IdxBatch(0, 0), IdxStep<GridA, GridB>(2, 3));
+    IdxRangeBatch const idx_range_batch(IdxBatch(0, 0), IdxStep<GridA, GridB>(2, 2));
     IdxRangeBatched const idx_range_batched(idx_range_batch, idx_range);
 
     SplineInterpolatorRTheta const interpolator(idx_range);
