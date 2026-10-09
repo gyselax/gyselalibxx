@@ -375,8 +375,10 @@ public:
      */
     void update_coefficients(DConstFieldBatchedRTheta alpha, DConstFieldBatchedRTheta beta) override
     {
-        FieldMemBatchedCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
-        FieldMemBatchedCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
+        FieldMemBatchedCoeffsSpline2D coeff_alpha_alloc(
+                batched_basis_idx_range(m_builder, get_idx_range(alpha)));
+        FieldMemBatchedCoeffsSpline2D coeff_beta_alloc(
+                batched_basis_idx_range(m_builder, get_idx_range(beta)));
 
         m_builder(get_field(coeff_alpha_alloc), alpha);
         m_builder(get_field(coeff_beta_alloc), beta);
@@ -600,7 +602,8 @@ public:
      */
     void operator()(DFieldBatchedRTheta phi, DConstFieldBatchedRTheta rho) const override
     {
-        FieldMemBatchedCoeffsSpline2D rho_coeff_alloc(get_spline_idx_range(m_builder));
+        FieldMemBatchedCoeffsSpline2D rho_coeff_alloc(
+                batched_basis_idx_range(m_builder, get_idx_range(rho)));
         m_builder(get_field(rho_coeff_alloc), rho);
         CoeffEvaluator<EvaluatorType, ConstFieldBatchedCoeffsSpline2D>
                 rho_func(m_evaluator, get_const_field(rho_coeff_alloc));
