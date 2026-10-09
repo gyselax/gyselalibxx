@@ -11,6 +11,7 @@
 #include "ddc_aliases.hpp"
 #include "multipatch_type.hpp"
 #include "spline_builder_deriv_field_2d.hpp"
+#include "types.hpp"
 
 /**
  * @brief A class to call all the builders of all the patches once.
@@ -187,14 +188,6 @@ class MultipatchSplineBuilder2D
                     ddc::Deriv<typename Patch::Dim2>,
                     typename Patch::Grid2>,
             MemorySpace>;
-
-    /// A type alias to get the index range on the grids on a specific patch.
-    template <class Patch>
-    using IdxRangeOnPatch = typename Patch::IdxRange12;
-
-    /// A type alias to get the index range on the B-splines on a specific patch.
-    template <class Patch>
-    using IdxRangeBSOnPatch = typename Patch::IdxRangeBS12;
 
     /// The type of the batched spline coefficients.
     using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
