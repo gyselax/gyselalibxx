@@ -32,11 +32,6 @@
 template <class SplineInterpSpaceBuilder, class SplineInterpSpaceEvaluator, class IdxRangeParams>
 class GyroAverageOperator
 {
-    //static_assert(
-    //ddc::is_evaluator_admissible_v<SplineInterpSpaceBuilder, SplineInterpSpaceEvaluator>,
-    //"SplineInterpSpaceEvaluator must be admissible to SplineInterpSpaceBuilder");
-
-public:
     using IdxRangeInterpSpace
             = InterpolationBuilderTraits<SplineInterpSpaceBuilder>::interpolation_idx_range_type;
     using IdxInterpSpace = typename IdxRangeInterpSpace::discrete_element_type;
@@ -52,16 +47,16 @@ public:
     using DFieldSplines = DField<IdxRangeSplines>;
 
     // Types for the arrays storing the coefficients
-    struct DimList;
-    using IdxRangeList = IdxRange<DimList>;
+    struct CoeffList;
+    using IdxRangeList = IdxRange<CoeffList>;
     using IdxList = typename IdxRangeList::discrete_element_type;
     using IdxRangeGyroCoeffs = detail::combine_t<IdxRangeGyroSpace, IdxRangeList>;
 
+public:
     using GyroCoeffsCoordsMem = FieldMem<CoordsInterpSpace, IdxRangeGyroCoeffs>;
     using GyroCoeffsWeightsMem = DFieldMem<IdxRangeGyroCoeffs>;
     using GyroCoeffsCoords = Field<CoordsInterpSpace, IdxRangeGyroCoeffs>;
     using GyroCoeffsWeights = DField<IdxRangeGyroCoeffs>;
-
 
 private:
     /**
@@ -81,7 +76,7 @@ private:
     GyroCoeffsWeights const m_gyrocoeffs_weights;
 
     /**
-     * @brief Number of points (size of the coefficients in the `DimList` dimension)
+     * @brief Number of points (size of the coefficients in the `CoeffList` dimension)
      */
     size_t const m_nb_gyro_points;
 
@@ -102,7 +97,7 @@ public:
     {
         IdxRangeGyroSpace idx_range_gyrospace(idx_range_params, idx_range_space);
 
-        IdxRange<DimList> idx_range_gyrolist(IdxList(0), IdxStep<DimList>(nb_gyro_points));
+        IdxRange<CoeffList> idx_range_gyrolist(IdxList(0), IdxStep<CoeffList>(nb_gyro_points));
         IdxRangeGyroCoeffs idx_range_gyrocoeffs(idx_range_gyrospace, idx_range_gyrolist);
         GyroCoeffsCoordsMem gyrocoeffs_coords_alloc(
                 "gyrocoeffs_coords (GyroAverageOperator::build_coefficients_circular)",
@@ -197,7 +192,7 @@ public:
         , m_spline_evaluator(spline_evaluator)
         , m_gyrocoeffs_coords(gyrocoeffs_coords)
         , m_gyrocoeffs_weights(gyrocoeffs_weights)
-        , m_nb_gyro_points(get_idx_range(gyrocoeffs_coords).template extent<DimList>())
+        , m_nb_gyro_points(get_idx_range(gyrocoeffs_coords).template extent<CoeffList>())
     {
     }
 
@@ -270,7 +265,8 @@ public:
                         double const value = spline_evaluator(
                                 gyrocoeffs_coords_proxy(idx_param, idx_interpspace, idx_gyro),
                                 get_const_field(scoef));
-                        gavg += gyrocoeffs_weights_proxy(idx_param, idx_interpspace, idx_gyro) * value;
+                        gavg += gyrocoeffs_weights_proxy(idx_param, idx_interpspace, idx_gyro)
+                                * value;
                     }
                     func_gavg(idx_interpspace) = gavg;
                 });
