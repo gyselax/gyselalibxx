@@ -120,7 +120,7 @@ public:
      *
      * The Larmor radii are of the form `larmor_factor_params * larmor_factor_space`.
      *
-     * @param[in] transform_from_cartesian Transformation from Cartesian to mesh cordinates.
+     * @param[in] transform_from_cartesian Transformation from Cartesian to mesh coordinates.
      * @param[in] larmor_factor_params Factor of the Larmor radius depending on the parameter sets.
      * @param[in] larmor_factor_space Factor of the Larmor radius depending on space.
      * @param[in] nb_gyro_points Number of sample points in the gyro-trajectory.
