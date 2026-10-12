@@ -661,11 +661,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-deriv-23"><strong>deriv</strong></a> (Idx&lt; DerivDims... &gt; const deriv_order, DField&lt; Domain, MemorySpace &gt; const spline_eval, ConstField&lt; Coord&lt; <a href="classPolarSplineEvaluator.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineEvaluator.html#typedef-theta"><strong>Theta</strong></a> &gt;, Domain, MemorySpace &gt; const coords_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const<br><em>Get the values of the derivative of the spline function on the first dimension.</em></td>
+<td style="text-align: left;"><a href="#function-deriv-23"><strong>deriv</strong></a> (Idx&lt; DerivDims... &gt; const deriv_order, DField&lt; Domain, MemorySpace &gt; const spline_eval, ConstField&lt; Coord&lt; <a href="classPolarSplineEvaluator.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineEvaluator.html#typedef-theta"><strong>Theta</strong></a> &gt;, Domain, MemorySpace &gt; const coords_eval, DConstField&lt; IdxRangeBatchCoefs, MemorySpace &gt; const spline_coef) const<br><em>Get the values of the derivative of the spline function on the first dimension.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-deriv-33"><strong>deriv</strong></a> (Idx&lt; DerivDims... &gt; const deriv_order, DField&lt; Domain, MemorySpace &gt; const spline_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const<br><em>Get the values of the derivative of the spline function on the first dimension.</em></td>
+<td style="text-align: left;"><a href="#function-deriv-33"><strong>deriv</strong></a> (Idx&lt; DerivDims... &gt; const deriv_order, DField&lt; Domain, MemorySpace &gt; const spline_eval, DConstField&lt; IdxRangeBatchCoefs, MemorySpace &gt; const spline_coef) const<br><em>Get the values of the derivative of the spline function on the first dimension.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
@@ -709,11 +709,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DField&lt; Domain, MemorySpace &gt; const spline_eval, ConstField&lt; Coord&lt; <a href="classPolarSplineEvaluator.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineEvaluator.html#typedef-theta"><strong>Theta</strong></a> &gt;, Domain, MemorySpace &gt; const coords_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const<br><em>Get the values of the spline function on a domain.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DField&lt; Domain, MemorySpace &gt; const spline_eval, ConstField&lt; Coord&lt; <a href="classPolarSplineEvaluator.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineEvaluator.html#typedef-theta"><strong>Theta</strong></a> &gt;, Domain, MemorySpace &gt; const coords_eval, DConstField&lt; IdxRangeBatchCoefs, MemorySpace &gt; const spline_coef) const<br><em>Get the values of the spline function on a domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (DField&lt; Domain, MemorySpace &gt; const spline_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const<br><em>Get the values of the spline function on a domain.</em></td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (DField&lt; Domain, MemorySpace &gt; const spline_eval, DConstField&lt; IdxRangeBatchCoefs, MemorySpace &gt; const spline_coef) const<br><em>Get the values of the spline function on a domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a> &amp;</td>
@@ -843,12 +843,12 @@ inline KOKKOS_FUNCTION double PolarSplineEvaluator::deriv (
 
 <h3 id="function-deriv-23">function deriv [2/3]</h3>
 <p><em>Get the values of the derivative of the spline function on the first dimension.</em> </p>
-<pre><code class="language-C++">template&lt;class Domain, class... DerivDims&gt;
+<pre><code class="language-C++">template&lt;class Domain, class IdxRangeBatchCoefs, class... DerivDims&gt;
 inline void PolarSplineEvaluator::deriv (
     Idx&lt; DerivDims... &gt; const deriv_order,
     DField&lt; Domain, MemorySpace &gt; const spline_eval,
     ConstField&lt; Coord&lt; R , Theta &gt;, Domain, MemorySpace &gt; const coords_eval,
-    DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef
+    DConstField&lt; IdxRangeBatchCoefs, MemorySpace &gt; const spline_coef
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -862,11 +862,11 @@ inline void PolarSplineEvaluator::deriv (
 
 <h3 id="function-deriv-33">function deriv [3/3]</h3>
 <p><em>Get the values of the derivative of the spline function on the first dimension.</em> </p>
-<pre><code class="language-C++">template&lt;class Domain, class... DerivDims&gt;
+<pre><code class="language-C++">template&lt;class Domain, class IdxRangeBatchCoefs, class... DerivDims&gt;
 inline void PolarSplineEvaluator::deriv (
     Idx&lt; DerivDims... &gt; const deriv_order,
     DField&lt; Domain, MemorySpace &gt; const spline_eval,
-    DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef
+    DConstField&lt; IdxRangeBatchCoefs, MemorySpace &gt; const spline_coef
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -1039,11 +1039,11 @@ inline void PolarSplineEvaluator::deriv_dim_2 (
 
 <h3 id="function-operator_1">function operator()</h3>
 <p><em>Get the values of the spline function on a domain.</em> </p>
-<pre><code class="language-C++">template&lt;class Domain&gt;
+<pre><code class="language-C++">template&lt;class Domain, class IdxRangeBatchCoefs&gt;
 inline void PolarSplineEvaluator::operator() (
     DField&lt; Domain, MemorySpace &gt; const spline_eval,
     ConstField&lt; Coord&lt; R , Theta &gt;, Domain, MemorySpace &gt; const coords_eval,
-    DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef
+    DConstField&lt; IdxRangeBatchCoefs, MemorySpace &gt; const spline_coef
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -1056,10 +1056,10 @@ inline void PolarSplineEvaluator::operator() (
 
 <h3 id="function-operator_2">function operator()</h3>
 <p><em>Get the values of the spline function on a domain.</em> </p>
-<pre><code class="language-C++">template&lt;class Domain&gt;
+<pre><code class="language-C++">template&lt;class Domain, class IdxRangeBatchCoefs&gt;
 inline void PolarSplineEvaluator::operator() (
     DField&lt; Domain, MemorySpace &gt; const spline_eval,
-    DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef
+    DConstField&lt; IdxRangeBatchCoefs, MemorySpace &gt; const spline_coef
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>

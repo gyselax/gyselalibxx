@@ -55,36 +55,62 @@ public:
         return eval(coord_eval, spline_coef);
     }
 
-    template <class Domain>
+    template <class Domain, class IdxRangeBatchCoefs>
     void operator()(
             DField<Domain, MemorySpace> const spline_eval,
             ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+            DConstField<IdxRangeBatchCoefs, MemorySpace> const spline_coef) const
+            requires(std::is_same_v<
+                     ddc::type_seq_element_t<
+                             IdxRangeBatchCoefs::rank() - 1,
+                             ddc::to_type_seq_t<IdxRangeBatchCoefs>>,
+                     PolarBSplinesType>)
     {
+        using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatchCoefs, PolarBSplinesType>;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+        using BatchDims = ddc::to_type_seq_t<IdxRangeBatch>;
+        static_assert(ddc::type_seq_contains_v<BatchDims, ddc::to_type_seq_t<Domain>>);
+
         using IdxEval = typename Domain::discrete_element_type;
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 exec_space(),
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
-                    spline_eval(i) = eval(coords_eval(i), spline_coef);
+                    spline_eval(i) = eval(coords_eval(i), spline_coef[IdxBatch(i)]);
                 });
     }
 
-    template <class Domain>
+    template <class Domain, class IdxRangeBatchCoefs>
     void operator()(
             DField<Domain, MemorySpace> const spline_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+            DConstField<IdxRangeBatchCoefs, MemorySpace> const spline_coef) const
+            requires(std::is_same_v<
+                     ddc::type_seq_element_t<
+                             IdxRangeBatchCoefs::rank() - 1,
+                             ddc::to_type_seq_t<IdxRangeBatchCoefs>>,
+                     PolarBSplinesType>)
     {
+        using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatchCoefs, PolarBSplinesType>;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+        using BatchDims = ddc::to_type_seq_t<IdxRangeBatch>;
+        static_assert(ddc::type_seq_contains_v<BatchDims, ddc::to_type_seq_t<Domain>>);
+
         using IdxEval = typename Domain::discrete_element_type;
+        using IdxEvalPoint = ddc::detail::convert_type_seq_to_discrete_domain_t<
+                ddc::type_seq_remove_t<ddc::to_type_seq_t<Domain>, BatchDims>>::
+                discrete_element_type;
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 exec_space(),
                 get_idx_range(spline_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
-                    spline_eval(i) = eval(ddc::coordinate(i), spline_coef);
+                    spline_eval(i)
+                            = eval(ddc::coordinate(IdxEvalPoint(i)), spline_coef[IdxBatch(i)]);
                 });
     }
 
@@ -122,38 +148,57 @@ public:
         return eval_no_bc(coord_eval, spline_coef, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1));
     }
 
-    template <class Domain, class... DerivDims>
+    template <class Domain, class IdxRangeBatchCoefs, class... DerivDims>
     void deriv(
             Idx<DerivDims...> const deriv_order,
             DField<Domain, MemorySpace> const spline_eval,
             ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+            DConstField<IdxRangeBatchCoefs, MemorySpace> const spline_coef) const
     {
+        using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatchCoefs, PolarBSplinesType>;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+        using BatchDims = ddc::to_type_seq_t<IdxRangeBatch>;
+        static_assert(ddc::type_seq_contains_v<BatchDims, ddc::to_type_seq_t<Domain>>);
+
         using IdxEval = typename Domain::discrete_element_type;
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 exec_space(),
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
-                    spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, deriv_order);
+                    spline_eval(i)
+                            = eval_no_bc(coords_eval(i), spline_coef[IdxBatch(i)], deriv_order);
                 });
     }
 
-    template <class Domain, class... DerivDims>
+    template <class Domain, class IdxRangeBatchCoefs, class... DerivDims>
     void deriv(
             Idx<DerivDims...> const deriv_order,
             DField<Domain, MemorySpace> const spline_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+            DConstField<IdxRangeBatchCoefs, MemorySpace> const spline_coef) const
     {
+        using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeBatchCoefs, PolarBSplinesType>;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+        using BatchDims = ddc::to_type_seq_t<IdxRangeBatch>;
+        static_assert(ddc::type_seq_contains_v<BatchDims, ddc::to_type_seq_t<Domain>>);
+
         using IdxEval = typename Domain::discrete_element_type;
+        using IdxEvalPoint = ddc::detail::convert_type_seq_to_discrete_domain_t<
+                ddc::type_seq_remove_t<ddc::to_type_seq_t<Domain>, BatchDims>>::
+                discrete_element_type;
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 exec_space(),
                 get_idx_range(spline_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
-                    spline_eval(i) = eval_no_bc(ddc::coordinate(i), spline_coef, deriv_order);
+                    spline_eval(i) = eval_no_bc(
+                            ddc::coordinate(IdxEvalPoint(i)),
+                            spline_coef[IdxBatch(i)],
+                            deriv_order);
                 });
     }
 
