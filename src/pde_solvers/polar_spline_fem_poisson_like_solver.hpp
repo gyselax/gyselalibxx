@@ -52,6 +52,7 @@ class PolarSplineFEMPoissonLikeSolver
             InterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
     using FullDims = ddc::to_type_seq_t<IdxRangeFull>;
     // The batch dimensions must come first so that slices of the batched fields are contiguous.
+    // The final 2 dimensions are expected to be stored in the order (r, theta)
     static_assert(
             std::is_same_v<ddc::type_seq_element_t<IdxRangeFull::rank() - 2, FullDims>, GridR>,
             "IdxRangeFull must have the form IdxRange<Batch..., GridR, GridTheta>");
