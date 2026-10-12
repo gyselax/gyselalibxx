@@ -40,22 +40,27 @@ class GyroAverageOperator
     using IdxRangeGyroSpace = detail::combine_t<IdxRangeParams, IdxRangeInterpSpace>;
     using IdxGyroSpace = typename IdxRangeGyroSpace::discrete_element_type;
 
-    // Splines
+    /// Splines
     using IdxRangeSplines
             = InterpolationBuilderTraits<SplineInterpSpaceBuilder>::coeff_idx_range_type;
     using DFieldMemSplines = DFieldMem<IdxRangeSplines>;
     using DFieldSplines = DField<IdxRangeSplines>;
 
-    // Types for the arrays storing the coefficients
+    /// Types for the arrays storing the coefficients
     struct CoeffList;
     using IdxRangeList = IdxRange<CoeffList>;
     using IdxList = typename IdxRangeList::discrete_element_type;
     using IdxRangeGyroCoeffs = detail::combine_t<IdxRangeGyroSpace, IdxRangeList>;
 
 public:
+    /// @brief A FieldMem of point coordinates for the sample points.
     using GyroCoeffsCoordsMem = FieldMem<CoordsInterpSpace, IdxRangeGyroCoeffs>;
+    /// @brief A FieldMem of doubles containing the sample points' weights.
     using GyroCoeffsWeightsMem = DFieldMem<IdxRangeGyroCoeffs>;
+
+    /// @brief A Field of point coordinates for the sample points.
     using GyroCoeffsCoords = Field<CoordsInterpSpace, IdxRangeGyroCoeffs>;
+    /// @brief A Field of doubles containing the sample points' weights.
     using GyroCoeffsWeights = DField<IdxRangeGyroCoeffs>;
 
 private:
