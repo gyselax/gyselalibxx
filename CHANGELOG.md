@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `GyroAverageOperator` to work with any interpolation scheme.
 - Add `TypeOnPatch` to `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` to get the type stored on a given patch.
 - Allow `ddcHelper::get<Dim>(..)` to be used on a multipatch argument.
+- Allow `PolarSplineEvaluator::operator()` and `PolarSplineEvaluator::deriv` to evaluate a batch of polar splines on a grid.
 - Add new constructors to `DerivFieldMem` where the idx range slices for the derivatives default to the edge of the physical domain.
 
 ### Fixed
@@ -41,11 +42,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed `.span_view` and `.span_cview` from Gyselalib++ objects.
 - Remove the r-value converting constructors of `MultipatchType`, `MultipatchField` and `MultipatchFieldMem`.
 - Remove `MultipatchField::idx_type`.
+- Remove `MatrixBatchCsr::norm`.
+- Remove `MatrixBatchEll::norm`.
 
 ### Dependency requirements
 
 - Remove Dask dependency in the tests.
 - Update DDC to [v0.16.0](https://github.com/CExA-project/ddc/releases/tag/v0.16.0).
+- Update GMGPolar dependency to [v2.4.0](https://github.com/SciCompMod/GMGPolar/releases/tag/v2.4.1).
 
 ## [v0.8.0] - 2026-09-09
 

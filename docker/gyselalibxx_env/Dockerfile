@@ -59,7 +59,7 @@ RUN chmod +x /bin/bash_run \
  && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
  && git clone --branch v0.2.0 --depth 1 https://gitlab.com/cines/code.gysela/libkoliop \
  && git clone --branch v0.16.0 --depth 1 https://github.com/CExA-project/ddc.git \
- && git clone --branch v2.3.1 --depth 1 https://github.com/SciCompMod/GMGPolar.git \
+ && git clone --branch v2.4.1 --depth 1 https://github.com/SciCompMod/GMGPolar.git \
  && export Kokkos_ROOT=/opt/serial/Kokkos \
  && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/serial/KokkosKernels \
@@ -135,7 +135,7 @@ RUN chmod +x /bin/bash_run \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
  && cmake --build build \
  && cmake --install build --prefix /opt/googletest \
- && git clone --branch 2.14.2 --depth 1 https://github.com/danmar/cppcheck.git \
+ && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build \
  && cmake --build build \
