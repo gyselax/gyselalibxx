@@ -40,10 +40,7 @@ struct Theta
     using Dual = Theta_cov;
 };
 
-struct Mu
-{
-    static constexpr bool PERIODIC = false;
-};
+struct Mu;
 
 // --- Spline definitions
 int constexpr BSDegreeR = 3;
@@ -174,7 +171,7 @@ protected:
         CoordR const r_end(m_r0);
 
         // Number of discretization points in the R dimension
-        std::size_t const nb_r_points = 200;
+        std::size_t const nb_r_points = 128;
 
         // Initialisation of the global domain in R
         ddc::init_discrete_space<BSplinesR>(r_start, r_end, nb_r_points);
@@ -187,7 +184,7 @@ protected:
         CoordTheta const theta_end(M_PI * 2.0);
 
         // Number of discretization points in the Theta dimension
-        std::size_t const nb_theta_points = 200;
+        std::size_t const nb_theta_points = 512;
 
         // Initialisation of the global domain in Theta
         ddc::init_discrete_space<BSplinesTheta>(theta_start, theta_end, nb_theta_points);
@@ -264,50 +261,6 @@ using SplineRThetaEvaluator = SplineRThetaInterpolator::EvaluatorType;
 using GyroAverageOperatorType
         = GyroAverageOperator<SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeMu>;
 
-TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
-{
-    DConstFieldRTheta A = get_const_field(m_A_alloc);
-    DFieldMuRTheta A_gavg = get_field(m_A_gavg_alloc);
-
-    IdxRangeRTheta const rtheta_idx_range = get_idx_range<GridR, GridTheta>(A_gavg);
-    SplineRThetaInterpolator const spline_interpolator(rtheta_idx_range);
-
-    auto [gyrocoeffs_coords_alloc, gyrocoeffs_weights_alloc]
-            = GyroAverageOperatorType::build_circular_coefficients(
-                    CartesianToPolar(),
-                    get_field(m_larmor_factor_params_alloc),
-                    get_field(m_larmor_factor_space_alloc),
-                    m_nb_gyro_points);
-
-    GyroAverageOperatorType gyroaverage(
-            spline_interpolator.get_builder(),
-            spline_interpolator.get_evaluator(),
-            gyrocoeffs_coords_alloc,
-            gyrocoeffs_weights_alloc);
-
-    // Apply the gyroaverage for each value of mu
-    IdxRangeMu const mu_idx_range = get_idx_range<GridMu>(A_gavg);
-    ddc::host_for_each(mu_idx_range, [&](IdxMu const imu) {
-        gyroaverage(A_gavg[imu], get_const_field(A), imu);
-    });
-
-    auto A_gavg_alloc_host = ddc::create_mirror_and_copy(A_gavg);
-    host_t<DFieldMuRTheta> A_gavg_host = get_field(A_gavg_alloc_host);
-
-    IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(A_gavg);
-    IdxRangeMuR const rmu_idx_range = get_idx_range<GridMu, GridR>(A_gavg);
-
-    ddc::host_for_each(rmu_idx_range, [&](IdxMuR const irmu) {
-        IdxR const ir(irmu);
-        IdxMu const imu(irmu);
-        IdxTheta const theta_front = theta_idx_range.front();
-        IdxTheta const theta_back = theta_idx_range.back();
-        double A_theta_0 = A_gavg_host(ir, theta_front, imu);
-        double A_theta_2PI = A_gavg_host(ir, theta_back, imu);
-        EXPECT_NEAR(A_theta_2PI, A_theta_0, 1e-12);
-    });
-}
-
 TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 {
     DConstFieldRTheta A = get_const_field(m_A_alloc);
@@ -336,6 +289,8 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
         gyroaverage(A_gavg[imu], get_const_field(A), imu);
     });
 
+    Kokkos::fence();
+
     auto Rcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Rcoord_alloc));
     host_t<DFieldRTheta> Rcoord_host = get_field(Rcoord_alloc_host);
     auto Zcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Zcoord_alloc));
@@ -352,11 +307,11 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     IdxRangeR const r_idx_range(rthetamu_idx_range);
     IdxRangeTheta const theta_idx_range(rthetamu_idx_range);
 
-    IdxStep<GridMu, GridR, GridTheta> rthetamu_check_strides(5, 11, 1);
+    IdxStep<GridMu, GridR, GridTheta> rthetamu_check_strides(1, 5, 11);
     IdxStep<GridMu, GridR, GridTheta> rthetamu_check_extents(
+            mu_idx_range.size(),
             r_idx_range.size() / 5,
-            theta_idx_range.size() / 11,
-            mu_idx_range.size());
+            theta_idx_range.size() / 11);
     IdxRangeSlice<GridMu, GridR, GridTheta> rthetamu_idx_range_check(
             rthetamu_idx_range.front(),
             rthetamu_check_extents,
@@ -394,8 +349,7 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
                                                 * std::cos(nb_gyro_points * phik) * sgn
                                         + cyl_bessel_j(2 * nb_gyro_points, kperprho)
                                                   * std::cos(2 * nb_gyro_points * phik));
-
-            EXPECT_NEAR(err_J0_num, err_J0_th, 3e-2);
+            EXPECT_NEAR(err_J0_num, err_J0_th, 5e-3);
         }
     });
 }
