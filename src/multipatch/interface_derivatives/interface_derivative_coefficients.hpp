@@ -73,19 +73,11 @@ class InterfaceDerivCoeffs
     using EdgePerpGrid1 = typename InterfaceType::Edge1::perpendicular_grid;
     using EdgePerpGrid2 = typename InterfaceType::Edge2::perpendicular_grid;
 
-    using EdgeParGrid1 = typename InterfaceType::Edge1::parallel_grid;
-    using EdgeParGrid2 = typename InterfaceType::Edge2::parallel_grid;
-
     using Patch1 = typename InterfaceType::Edge1::associated_patch;
     using Patch2 = typename InterfaceType::Edge2::associated_patch;
 
-    using IdxRange2D_1 = typename Patch1::IdxRange12;
-    using IdxRange2D_2 = typename Patch2::IdxRange12;
-
     using IdxRange1DPerp_1 = IdxRange<EdgePerpGrid1>;
     using IdxRange1DPerp_2 = IdxRange<EdgePerpGrid2>;
-    using IdxRange1DPar_1 = IdxRange<EdgeParGrid1>;
-    using IdxRange1DPar_2 = IdxRange<EdgeParGrid2>;
 
     using Idx1D_1 = Idx<EdgePerpGrid1>;
     using Idx1D_2 = Idx<EdgePerpGrid2>;
@@ -99,16 +91,8 @@ class InterfaceDerivCoeffs
             typename Patch2::BSplines1,
             typename Patch2::BSplines2>;
 
-    using GridBreakPt1 = std::conditional_t<
-            BSplinesPerp1::is_uniform(),
-            ddc::UniformBsplinesKnots<BSplinesPerp1>,
-            ddc::NonUniformBsplinesKnots<BSplinesPerp1>>;
-    using GridBreakPt2 = std::conditional_t<
-            BSplinesPerp2::is_uniform(),
-            ddc::UniformBsplinesKnots<BSplinesPerp2>,
-            ddc::NonUniformBsplinesKnots<BSplinesPerp2>>;
-    using IdxRangeBreakPt1 = IdxRange<GridBreakPt1>;
-    using IdxRangeBreakPt2 = IdxRange<GridBreakPt2>;
+    using GridBreakPt1 = ddc::knot_discrete_dimension_t<BSplinesPerp1>;
+    using GridBreakPt2 = ddc::knot_discrete_dimension_t<BSplinesPerp2>;
 
 public:
     /// @brief Interface between the two involved patches.
