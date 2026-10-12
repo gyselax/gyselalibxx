@@ -317,12 +317,12 @@ protected:
      * If information about a derivative is missing then it is assumed that the 0-th order derivative
      * is requested.
      *
-     * @param idx_range The index range used to slice the mdspan.
+     * @param idx_range_to_slice The index range used to slice the mdspan.
      *
      * @returns Field The subset of the internal mdspan.
      */
     template <class... ODims>
-    KOKKOS_FUNCTION auto get_internal_field(IdxRange<ODims...> idx_range) const
+    KOKKOS_FUNCTION auto get_internal_field(IdxRange<ODims...> idx_range_to_slice) const
     {
         // Get the types related to the provided information
         using provided_tags = ddc::detail::TypeSeq<ODims...>;
@@ -336,11 +336,11 @@ protected:
         // Find the index range of the derivatives (either provided or an index range containing only the 0-th derivative)
         remaining_deriv_idx_range_type no_deriv_idx_range = detail::get_idx_range_from_element(
                 detail::no_derivative_element<remaining_deriv_tags>());
-        discrete_deriv_idx_range_type deriv_idx_range(idx_range, no_deriv_idx_range);
+        discrete_deriv_idx_range_type deriv_idx_range(idx_range_to_slice, no_deriv_idx_range);
 
         // Find the physical index range of the field
         physical_idx_range_type local_physical_idx_range(
-                detail::select_default(idx_range, m_physical_idx_range));
+                detail::select_default(idx_range_to_slice, m_physical_idx_range));
 
         // Find the discrete index range of the field
         index_range_type full_idx_range(local_physical_idx_range, deriv_idx_range);
