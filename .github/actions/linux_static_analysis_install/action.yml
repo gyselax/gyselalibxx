@@ -15,7 +15,7 @@ runs:
         path: |
           /usr/local/share/Cppcheck/
           /usr/local/bin/cppcheck
-        key: cppcheck-2-20-0
+        key: cppcheck-2-22-0
     - name: Install cppcheck
       if: steps.cache-cppcheck-restore.outputs.cache-hit != 'true'
       run: |
