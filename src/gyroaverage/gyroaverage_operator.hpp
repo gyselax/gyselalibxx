@@ -3,232 +3,272 @@
 
 #include <ddc/ddc.hpp>
 
-#include "cartesian_to_circular.hpp"
-#include "circular_to_cartesian.hpp"
-#include "ddc_alias_inline_functions.hpp"
-#include "ddc_aliases.hpp"
-#include "geometry_pseudo_cartesian.hpp"
+#include "deriv_details.hpp"
 #include "i_interpolation.hpp"
 
+
 /**
- * @brief Operator to compute the gyroaverage of a field in (r, theta) coordinates.
+ * @brief Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre-
+ * determined sample points along the gyro-motion.
  *
- * This class performs the gyroaveraging operation on a batched field defined on a polar grid (r, theta).
- * The gyroaverage is computed by integrating the field over a set of points along a circle (the Larmor orbit)
- * centred at each grid point, with radius given by the local Larmor radius field (rho_L).
+ * Spline interpolation is used to evaluate the field at points which are not on the grid. The
+ * choice of treatment for points outside the domain (Dirichlet, constant outside, etc) is determined
+ * by the interpolation class itself.
  *
- * The class uses 2D interpolation to evaluate the field at off-grid points along the orbit.
- * The operation is performed in parallel over the (r, theta) grid.
+ * We distinguish 2 types of dimensions:
+ *  - "Params" refers to the dimensions which parametrise the gyroaverage of a given field; this is
+ * usually corresponds to species and mu.
+ *  - "InterpSpace" refers to the space dimensions along which the interpolations is performed, e.g.
+ * poloidal cross-sections when the approximation B // e_phi is assumed.
+ *  - "BatchSpace" refers to the remaining dimensions, if any (not yet implemented).
  *
- * @tparam RThetaInterpolator       The type of a rtheta interpolation scheme.
- * @tparam IdxRangeRminorThetaBatch The index range over R, Theta and Batch directions.
- * @tparam ToLogicalCoordTransform  Function to convert (R, Z) to (r, theta).
+ * @tparam SplineInterpSpaceBuilder
+ *     Type of the spline builder for the interpolations.
+ * @tparam SplineInterpSpaceEvaluator
+ *     Type of the spline evaluator for the interpolations.
+ * @tparam IdxRangeParams
+ *     The additional dimensions parametrising the gyroaverage (usually species and mu).
  */
-template <
-        concepts::Interpolation RThetaInterpolator,
-        class IdxRangeRminorThetaBatch,
-        class ToLogicalCoordTransform>
+template <class SplineInterpSpaceBuilder, class SplineInterpSpaceEvaluator, class IdxRangeParams>
 class GyroAverageOperator
 {
-    using RThetaBuilder = typename RThetaInterpolator::BuilderType;
-    using RThetaEvaluator = typename RThetaInterpolator::EvaluatorType;
+    //static_assert(
+    //ddc::is_evaluator_admissible_v<SplineInterpSpaceBuilder, SplineInterpSpaceEvaluator>,
+    //"SplineInterpSpaceEvaluator must be admissible to SplineInterpSpaceBuilder");
 
-    using ExecutionSpace = typename RThetaBuilder::exec_space;
+public:
+    using IdxRangeInterpSpace
+            = InterpolationBuilderTraits<SplineInterpSpaceBuilder>::interpolation_idx_range_type;
+    using IdxInterpSpace = typename IdxRangeInterpSpace::discrete_element_type;
+    using CoordsInterpSpace = ddc::coordinate_of_t<IdxInterpSpace>;
+    using IdxParams = typename IdxRangeParams::discrete_element_type;
+    using IdxRangeGyroSpace = detail::combine_t<IdxRangeParams, IdxRangeInterpSpace>;
+    using IdxGyroSpace = typename IdxRangeGyroSpace::discrete_element_type;
 
-    using Rminor = typename CoordWithOPoint<
-            typename ToLogicalCoordTransform::CoordResult>::curvilinear_tag_r;
-    using Theta = typename CoordWithOPoint<
-            typename ToLogicalCoordTransform::CoordResult>::curvilinear_tag_theta;
+    // Splines
+    using IdxRangeSplines
+            = InterpolationBuilderTraits<SplineInterpSpaceBuilder>::coeff_idx_range_type;
+    using DFieldMemSplines = DFieldMem<IdxRangeSplines>;
+    using DFieldSplines = DField<IdxRangeSplines>;
 
-    using IdxRangeRminorTheta
-            = InterpolationBuilderTraits<RThetaBuilder>::interpolation_idx_range_type;
+    // Types for the arrays storing the coefficients
+    struct DimList;
+    using IdxRangeList = IdxRange<DimList>;
+    using IdxList = typename IdxRangeList::discrete_element_type;
+    using IdxRangeGyroCoeffs = detail::combine_t<IdxRangeGyroSpace, IdxRangeList>;
 
-    using GridRminor = find_grid_t<Rminor, ddc::to_type_seq_t<IdxRangeRminorTheta>>;
-    using GridTheta = find_grid_t<Theta, ddc::to_type_seq_t<IdxRangeRminorTheta>>;
+    using GyroCoeffsCoordsMem = FieldMem<CoordsInterpSpace, IdxRangeGyroCoeffs>;
+    using GyroCoeffsWeightsMem = FieldMem<double, IdxRangeGyroCoeffs>;
+    using GyroCoeffsCoords = Field<CoordsInterpSpace, IdxRangeGyroCoeffs>;
+    using GyroCoeffsWeights = Field<double, IdxRangeGyroCoeffs>;
 
-    struct R_gyro_cov;
-    struct Theta_gyro_cov;
 
-    struct R_gyro
-    {
-        static constexpr bool PERIODIC = false;
-        // The corresponding type in the dual space.
-        using Dual = R_gyro_cov;
-    };
-
-    struct Theta_gyro
-    {
-        static constexpr bool PERIODIC = true;
-        // The corresponding type in the dual space.
-        using Dual = Theta_gyro_cov;
-    };
-
-    using IdxRangeRminor = IdxRange<GridRminor>;
-    using IdxRangeTheta = IdxRange<GridTheta>;
-    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeRminorThetaBatch, GridRminor, GridTheta>;
-    using IdxRangeBSRminorTheta = InterpolationBuilderTraits<RThetaBuilder>::coeff_idx_range_type;
-
-    using IdxRminor = Idx<GridRminor>;
-    using IdxTheta = Idx<GridTheta>;
-    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
-    using IdxRminorTheta = Idx<GridRminor, GridTheta>;
-
-    using DFieldMemRminorTheta = DFieldMem<IdxRangeRminorTheta>;
-    using DFieldMemRminorThetaBatch = DFieldMem<IdxRangeRminorThetaBatch>;
-    using DFieldMemBSRminorTheta = DFieldMem<IdxRangeBSRminorTheta>;
-    using DFieldRminorTheta = DField<IdxRangeRminorTheta>;
-    using DFieldRminorThetaBatch = DField<IdxRangeRminorThetaBatch>;
-    using DFieldBSRminorTheta = DField<IdxRangeBSRminorTheta>;
-    using DConstFieldRminorTheta = DConstField<IdxRangeRminorTheta>;
-    using DConstFieldRminorThetaBatch = DConstField<IdxRangeRminorThetaBatch>;
-
-    using CoordRminorTheta = Coord<Rminor, Theta>;
-    using CoordR_gyroTheta_gyro = Coord<R_gyro, Theta_gyro>;
-    using RZ_1 = ddc::
-            type_seq_element_t<0, ddc::to_type_seq_t<typename ToLogicalCoordTransform::CoordArg>>;
-    using RZ_2 = ddc::
-            type_seq_element_t<1, ddc::to_type_seq_t<typename ToLogicalCoordTransform::CoordArg>>;
-    using CoordRZ = typename ToLogicalCoordTransform::CoordArg;
-
-    // FIXME
-    // Need to add a static assert to check evaluator is addmissible to builder
-    // using ddc::is_evaluator_admissible
-    // This will be available from DDC 0.9.0
-    static_assert(
-            is_mapping_v<ToLogicalCoordTransform>,
-            "CoordinateTransformFunction must be a mapping");
-    static_assert(std::is_same_v<typename ToLogicalCoordTransform::CoordArg, CoordRZ>);
-    static_assert(std::is_same_v<typename ToLogicalCoordTransform::CoordResult, CoordRminorTheta>);
-    static_assert(is_accessible_v<ExecutionSpace, ToLogicalCoordTransform>);
+private:
+    /**
+     * @brief The spline builder for the interpolation
+     */
+    SplineInterpSpaceBuilder const& m_spline_builder;
 
     /**
-     * @brief Field of local Larmor radii (rho_L) on the (r, theta) grid.
+     * @brief The spline evaluator for the interpolation
      */
-    DConstFieldRminorTheta m_rho_L;
+    SplineInterpSpaceEvaluator const& m_spline_evaluator;
 
     /**
-     * @brief The builder for the rtheta interpolation
+     * @brief Coordinates and weights of the sample points
      */
-    RThetaBuilder const& m_builder;
+    GyroCoeffsCoords const m_gyrocoeffs_coords;
+    GyroCoeffsWeights const m_gyrocoeffs_weights;
 
     /**
-     * @brief The evaluator for the rtheta interpolation
+     * @brief Number of points (size of the coefficients in the `DimList` dimension)
      */
-    RThetaEvaluator const& m_evaluator;
-
-    /**
-     * @brief coordinate_transform Function to convert (R, Z) to (r, theta).
-     */
-    ToLogicalCoordTransform m_coordinate_transform;
-
-    /**
-     * @brief Number of points to use in the gyroaverage integration (default: 8)
-     */
-    std::size_t const m_nb_gyro_points;
+    size_t const m_nb_gyro_points;
 
 public:
     /**
-     * @brief Constructor.
-     * @param[in] rho_L Field of Larmor radii on the (r, theta) grid.
-     * @param[in] interpolator The interpolator for the rtheta interpolation
-     * @param[in] coordinate_transform Function to convert (R, Z) to (r, theta).
-     * @param[in] nb_gyro_points Number of points to use in the gyroaverage integration (default: 8).
+     * @brief Helper function allocating empty coefficients of the right size and type.
+     *
+     * @param[in] idx_range_params The index range for the parameter sets.
+     * @param[in] idx_range_space The index range for the interpolation space.
+     * @param[in] nb_gyro_points The number of sample points in the gyro-trajectory.
+     *
+     * @return A tuple containing fields for the coordinates and their weights.
+     */
+    static std::tuple<GyroCoeffsCoordsMem, GyroCoeffsWeightsMem> build_empty_coefficients(
+            IdxRangeParams idx_range_params,
+            IdxRangeInterpSpace idx_range_space,
+            size_t const nb_gyro_points)
+    {
+        IdxRangeGyroSpace idx_range_gyrospace(idx_range_params, idx_range_space);
+
+        IdxRange<DimList> idx_range_gyrolist(IdxList(0), IdxStep<DimList>(nb_gyro_points));
+        IdxRangeGyroCoeffs idx_range_gyrocoeffs(idx_range_gyrospace, idx_range_gyrolist);
+        GyroCoeffsCoordsMem gyrocoeffs_coords_alloc(
+                "gyrocoeffs_coords (GyroAverageOperator::build_coefficients_circular)",
+                idx_range_gyrocoeffs);
+        GyroCoeffsWeightsMem gyrocoeffs_weights_alloc(
+                "gyrocoeffs_weights (GyroAverageOperator::build_coefficients_circular)",
+                idx_range_gyrocoeffs);
+
+        return {std::move(gyrocoeffs_coords_alloc), std::move(gyrocoeffs_weights_alloc)};
+    }
+
+    /**
+     * @brief Helper function building coefficients for a given set of Larmor radii, in geometries
+     * where an inverse mapping to Cartesian coordinates is available.
+     *
+     * The Larmor radii are of the form `larmor_factor_params * larmor_factor_space`.
+     *
+     * @param[in] transform_from_cartesian Transformation from Cartesian to mesh cordinates.
+     * @param[in] larmor_factor_params Factor of the Larmor radius depending on the parameter sets.
+     * @param[in] larmor_factor_space Factor of the Larmor radius depending on space.
+     * @param[in] nb_gyro_points Number of sample points in the gyro-trajectory.
+     *
+     * @return A tuple containing the point coordinates and their weights that were computed.
+     */
+    template <class TransformToCartesian>
+    static std::tuple<GyroCoeffsCoordsMem, GyroCoeffsWeightsMem> build_circular_coefficients(
+            TransformToCartesian transform_from_cartesian,
+            DField<IdxRangeParams> const larmor_factor_params,
+            DField<IdxRangeInterpSpace> const larmor_factor_space,
+            size_t const nb_gyro_points)
+    {
+        using CoordCartesian = typename TransformToCartesian::CoordArg;
+
+        IdxRangeParams idx_range_params = get_idx_range(larmor_factor_params);
+        IdxRangeInterpSpace idx_range_space = get_idx_range(larmor_factor_space);
+
+        auto [gyrocoeffs_coords_alloc, gyrocoeffs_weights_alloc]
+                = build_empty_coefficients(idx_range_params, idx_range_space, 8);
+        GyroCoeffsCoords gyrocoeffs_coords = get_field(gyrocoeffs_coords_alloc);
+        GyroCoeffsWeights gyrocoeffs_weights = get_field(gyrocoeffs_weights_alloc);
+
+        IdxRangeGyroSpace idx_range_gyrospace(idx_range_params, idx_range_space);
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                Kokkos::DefaultExecutionSpace(),
+                idx_range_gyrospace,
+                KOKKOS_LAMBDA(IdxGyroSpace const idx_gyrospace) {
+                    IdxInterpSpace const idx_space(idx_gyrospace);
+                    IdxParams const idx_params(idx_gyrospace);
+
+                    inverse_mapping_t<TransformToCartesian> transform_to_cartesian
+                            = transform_from_cartesian.get_inverse_mapping();
+
+                    CoordCartesian const gyrocentre
+                            = transform_to_cartesian(ddc::coordinate(idx_space));
+                    double const rho
+                            = larmor_factor_params(idx_params) * larmor_factor_space(idx_space);
+
+                    for (std::size_t igyro = 0; igyro < nb_gyro_points; igyro++) {
+                        double const alpha = 2 * M_PI * igyro / static_cast<double>(nb_gyro_points);
+                        CoordCartesian const sample_point = gyrocentre
+                                                            + CoordCartesian(
+                                                                    rho * Kokkos::cos(alpha),
+                                                                    rho * Kokkos::sin(alpha));
+
+                        IdxList idx_gyro(igyro);
+                        gyrocoeffs_coords(idx_gyrospace, idx_gyro)
+                                = transform_from_cartesian(sample_point);
+                        gyrocoeffs_weights(idx_gyrospace, idx_gyro) = 1. / nb_gyro_points;
+                    }
+                });
+
+        return {std::move(gyrocoeffs_coords_alloc), std::move(gyrocoeffs_weights_alloc)};
+    }
+
+    /**
+     * @brief Constructor for the general case where coefficients are computed by the caller.
+     *
+     * @param[in] spline_builder Spline builder for the interpolation.
+     * @param[in] spline_evaluator Spline evaluator for the interpolation.
+     * @param[in] gyrocoeffs_coords Coordinates of the sample points.
+     * @param[in] gyrocoeffs_weights Weights associated with the sample points.
      */
     explicit GyroAverageOperator(
-            DConstFieldRminorTheta const& rho_L,
-            RThetaInterpolator const& interpolator,
-            ToLogicalCoordTransform coordinate_transform,
-            std::size_t const nb_gyro_points = 8)
-        : m_rho_L(rho_L)
-        , m_builder(interpolator.get_builder())
-        , m_evaluator(interpolator.get_evaluator())
-        , m_coordinate_transform(coordinate_transform)
-        , m_nb_gyro_points(nb_gyro_points)
+            SplineInterpSpaceBuilder const& spline_builder,
+            SplineInterpSpaceEvaluator const& spline_evaluator,
+            GyroCoeffsCoordsMem& gyrocoeffs_coords,
+            GyroCoeffsWeightsMem& gyrocoeffs_weights)
+        : m_spline_builder(spline_builder)
+        , m_spline_evaluator(spline_evaluator)
+        , m_gyrocoeffs_coords(gyrocoeffs_coords)
+        , m_gyrocoeffs_weights(gyrocoeffs_weights)
+        , m_nb_gyro_points(get_idx_range(gyrocoeffs_coords).template extent<DimList>())
     {
     }
 
     /**
-     * @brief Applies the gyroaverage operator to a batched field.
+     * @brief Compute the gyroaverage of a field which depends both on space and parameter sets.
      *
-     * For each batch, and for each (r, theta) grid point, computes the gyroaverage by
-     * integrating the field along a circle of radius rho_L centred at (r, theta).
-     * The field is interpolated at off-grid points using a 2D interpolation.
+     * The computation is done in-place for each parameter set.
      *
-     * @param[out] A_bar Output field to store the gyroaveraged result (batched).
-     * @param[in] A Input field to be gyroaveraged (batched).
+     * @param[in, out] func Field to process on input and its gyroaverage on output.
      */
-    void operator()(DFieldRminorThetaBatch const& A_bar, DConstFieldRminorThetaBatch const& A) const
+    void operator()(DField<IdxRangeGyroSpace> const& func) const
     {
-        IdxRangeRminorThetaBatch const rthetabatch_idx_range = get_idx_range(A);
-        IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
-        IdxRangeBatch const batch_idx_range(rthetabatch_idx_range);
-        IdxRangeRminorTheta const rtheta_idx_range(rthetabatch_idx_range);
+        IdxRangeParams idx_range_params(get_idx_range(func));
 
-        // Instantiate chunk of interpolation coefs to receive output of builder (r, theta)
-        DFieldMemBSRminorTheta coef_alloc(
-                "coef (GyroAvrageOperator::operator())",
-                batched_basis_idx_range(m_builder, rtheta_idx_range));
-        DFieldBSRminorTheta const coef = get_field(coef_alloc);
-        DConstFieldRminorTheta const rho_L = get_const_field(m_rho_L);
-
-        using SubConstDFieldRminorTheta = DConstField<
-                IdxRangeRminorTheta,
-                typename ExecutionSpace::memory_space,
-                Kokkos::layout_stride>;
-        using SubDFieldRminorTheta = DField<
-                IdxRangeRminorTheta,
-                typename ExecutionSpace::memory_space,
-                Kokkos::layout_stride>;
-
-        ddc::host_for_each(batch_idx_range, [&](IdxBatch const ib) {
-            SubConstDFieldRminorTheta const sub_A = A[ib];
-            SubDFieldRminorTheta sub_A_bar = A_bar[ib];
-            DFieldMemRminorTheta
-                    sub_A_alloc("sub_A (GyroAvrageOperator::operator())", rtheta_idx_range);
-            ddc::parallel_deepcopy(sub_A_alloc, sub_A);
-            m_builder(coef, get_const_field(sub_A_alloc));
-            RThetaEvaluator evaluator = m_evaluator;
-
-            ToLogicalCoordTransform coordinate_transform = m_coordinate_transform;
-            std::size_t nb_gyro_points = m_nb_gyro_points;
-            // Loop over r, theta
-            const std::source_location location = std::source_location::current();
-            ddc::parallel_for_each(
-                    location.function_name(),
-                    ExecutionSpace(),
-                    rtheta_idx_range,
-                    KOKKOS_LAMBDA(IdxRminorTheta const irtheta) {
-                        IdxRminor const ir(irtheta);
-                        IdxTheta const itheta(irtheta);
-
-                        // Average over gyro points
-                        double sum_over_gyro_points = 0.0;
-                        for (std::size_t igyro = 0; igyro < nb_gyro_points; igyro++) {
-                            // Compute the particle position in (R, Z) coordinate
-                            double const alpha = M_PI * 2.0 / static_cast<double>(nb_gyro_points)
-                                                 * static_cast<double>(igyro);
-                            inverse_mapping_t<ToLogicalCoordTransform> inv_coordinate_transform
-                                    = coordinate_transform.get_inverse_mapping();
-                            CoordRZ gyrocentre = inv_coordinate_transform(ddc::coordinate(irtheta));
-                            CircularToCartesian<R_gyro, Theta_gyro, RZ_1, RZ_2> circ_to_cart(
-                                    gyrocentre);
-                            CoordRZ particle_position = circ_to_cart(
-                                    CoordR_gyroTheta_gyro {rho_L(ir, itheta), alpha});
-
-                            // Convert from (R, Z) into (r, theta) coordinate
-                            CoordRminorTheta p = coordinate_transform(particle_position);
-
-                            // Interpolation in (r, theta) coordinate
-                            sum_over_gyro_points += evaluator(p, get_const_field(coef));
-                        }
-                        sub_A_bar(ir, itheta)
-                                = sum_over_gyro_points / static_cast<double>(nb_gyro_points);
-                    });
-
-            // Apply periodic boundary condition in theta direction
-            ddc::parallel_deepcopy(
-                    sub_A_bar[theta_idx_range.back()],
-                    sub_A_bar[theta_idx_range.front()]);
+        ddc::host_for_each(idx_range_params, [&](IdxParams const idx_params) {
+            (*this)(func[idx_params], get_const_field(func[idx_params]), idx_params);
         });
+    }
+
+    /**
+     * @brief For a given parameter set, compute the gyroaverage of a field which only depends on
+     * space.
+     *
+     * The same field can be passed as both input and output to work in-place, as the spline
+     * coefficients represent the input field during the computation.
+     *
+     * @param[out] func_gavg Gyroaverage of the input field.
+     * @param[in] func The field to process.
+     * @param[in] idx_param Parameter set whose coefficients will be used.
+     */
+    void operator()(
+            DField<IdxRangeInterpSpace> const& func_gavg,
+            DConstField<IdxRangeInterpSpace> const& func,
+            IdxParams idx_param) const
+    {
+        // Ensure that the input and output have the same index ranges
+        assert(get_idx_range(func).extents() == get_idx_range(func_gavg).extents());
+        // Ensure that there are coefficients for the points in the input data
+        assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
+                       .contains(get_idx_range(func).front()));
+        assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
+                       .contains(get_idx_range(func).back()));
+        // Ensure that there are coefficients for the requested parameter set
+        assert(IdxRangeParams(get_idx_range(m_gyrocoeffs_weights)).contains(idx_param));
+
+        // Initialise the splines
+        DFieldMemSplines scoef_alloc(
+                "scoef (GyroAvrageOperator::operator())",
+                get_spline_idx_range(m_spline_builder));
+        DFieldSplines scoef = get_field(scoef_alloc);
+        m_spline_builder(scoef, get_const_field(func));
+        SplineInterpSpaceEvaluator spline_evaluator = m_spline_evaluator;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                Kokkos::DefaultExecutionSpace(),
+                get_idx_range(func_gavg),
+                KOKKOS_CLASS_LAMBDA(IdxInterpSpace const idx_interpspace) {
+                    IdxList const idx_gyro0(get_idx_range(m_gyrocoeffs_coords).front());
+
+                    // Average over gyro points
+                    double gavg = 0.0;
+                    for (std::size_t igyro = 0; igyro < m_nb_gyro_points; igyro++) {
+                        IdxList const idx_gyro = idx_gyro0 + igyro;
+                        double const value = spline_evaluator(
+                                m_gyrocoeffs_coords(idx_param, idx_interpspace, idx_gyro),
+                                get_const_field(scoef));
+                        gavg += m_gyrocoeffs_weights(idx_param, idx_interpspace, idx_gyro) * value;
+                    }
+                    func_gavg(idx_interpspace) = gavg;
+                });
     }
 };

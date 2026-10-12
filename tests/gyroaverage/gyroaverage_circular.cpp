@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 #include <cmath>
+#include <vector>
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
@@ -9,12 +10,16 @@
 #include <Kokkos_Core.hpp>
 
 #include "cartesian_to_circular.hpp"
+#include "circular_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "geometry_pseudo_cartesian.hpp"
 #include "gyroaverage_operator.hpp"
 #include "spline_interpolation.hpp"
 #include "test_math_utils.hpp"
+
+
 
 namespace {
 
@@ -35,7 +40,10 @@ struct Theta
     using Dual = Theta_cov;
 };
 
-struct Batch;
+struct Mu
+{
+    static constexpr bool PERIODIC = false;
+};
 
 // --- Spline definitions
 int constexpr BSDegreeR = 3;
@@ -62,7 +70,7 @@ struct GridR : SplineInterpPointsR::interpolation_discrete_dimension_type
 struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_type
 {
 };
-struct GridBatch : UniformGridBase<Batch>
+struct GridMu : NonUniformGridBase<Mu>
 {
 };
 
@@ -81,43 +89,44 @@ using SplineRThetaInterpolatorType = SplineInterpolator<
 using CoordR = Coord<R>;
 using CoordTheta = Coord<Theta>;
 using CoordRTheta = Coord<R, Theta>;
-using CoordBatch = Coord<Batch>;
+using CoordMu = Coord<Mu>;
 
 using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
-using IdxBatch = Idx<GridBatch>;
+using IdxMu = Idx<GridMu>;
 using IdxRTheta = Idx<GridR, GridTheta>;
-using IdxRBatch = Idx<GridR, GridBatch>;
-using IdxRThetaBatch = Idx<GridR, GridTheta, GridBatch>;
+using IdxMuR = Idx<GridMu, GridR>;
+using IdxMuRTheta = Idx<GridMu, GridR, GridTheta>;
 
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
-using IdxRangeBatch = IdxRange<GridBatch>;
+using IdxRangeMu = IdxRange<GridMu>;
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-using IdxRangeRBatch = IdxRange<GridR, GridBatch>;
-using IdxRangeRThetaBatch = IdxRange<GridR, GridTheta, GridBatch>;
+using IdxRangeMuR = IdxRange<GridMu, GridR>;
+using IdxRangeMuRTheta = IdxRange<GridMu, GridR, GridTheta>;
 
+using DFieldMemMu = DFieldMem<IdxRangeMu>;
 using DFieldMemRTheta = DFieldMem<IdxRangeRTheta>;
-using DFieldMemRThetaBatch = DFieldMem<IdxRangeRThetaBatch>;
+using DFieldMemMuRTheta = DFieldMem<IdxRangeMuRTheta>;
+using DFieldMu = DField<IdxRangeMu>;
 using DFieldRTheta = DField<IdxRangeRTheta>;
-using DFieldRThetaBatch = DField<IdxRangeRThetaBatch>;
-using DConstFieldRThetaBatch = ConstField<double, IdxRangeRThetaBatch>;
+using DFieldMuRTheta = DField<IdxRangeMuRTheta>;
+using DConstFieldRTheta = ConstField<double, IdxRangeRTheta>;
 
-template <typename Field2DType, typename Field3DType>
+template <typename Field2DType>
 void initialise(
         Field2DType const& Rcoord,
         Field2DType const& Zcoord,
-        Field2DType const& rho_L,
-        Field3DType const& A,
+        Field2DType const& larmor_factor_space,
+        Field2DType const& A,
         double const B0,
         double const R0,
-        double const gyroradius,
         double const kx,
         double const ky)
 {
-    IdxRangeRTheta const rtheta_idx_range = get_idx_range<GridR, GridTheta>(A);
+    IdxRangeRTheta const rtheta_idx_range = get_idx_range(A);
 
-    // Initialise R, Z and rho_L
+    // Initialise R, Z and the spatial part of the Larmor radius
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             rtheta_idx_range,
@@ -131,36 +140,34 @@ void initialise(
                 double const B = B0 * R0 / R;
                 Rcoord(ir, itheta) = R;
                 Zcoord(ir, itheta) = Z;
-                rho_L(ir, itheta) = gyroradius / Kokkos::sqrt(B / B0);
+                larmor_factor_space(ir, itheta) = Kokkos::sqrt(B0 / B);
             });
 
     // Initialise A with Fourier mode
-    IdxRangeRThetaBatch const rthetabatch_idx_range = get_idx_range(A);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            rthetabatch_idx_range,
-            KOKKOS_LAMBDA(IdxRThetaBatch const irthetabatch) {
-                IdxR const ir(irthetabatch);
-                IdxTheta const itheta(irthetabatch);
-                IdxBatch const ibatch(irthetabatch);
+            rtheta_idx_range,
+            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                IdxR const ir(irtheta);
+                IdxTheta const itheta(irtheta);
 
-                // In non-circular case, R0 effective should be computed by
+                // In non-circular case, R0 effective should be computed as
                 // R0eff = (Rcoord(0,Ntheta/2) + Rcoord(0,0)) / 2
                 double const R0eff = R0;
-                A(ir, itheta, ibatch)
+                A(ir, itheta)
                         = Kokkos::cos(kx * (Rcoord(ir, itheta) - R0eff) + ky * Zcoord(ir, itheta));
             });
 }
 
 } // namespace
 
-class GyroAverageCircularParamTests : public ::testing::TestWithParam<double>
+class GyroAverageCircularParamTests : public ::testing::TestWithParam<std::vector<double>>
 {
 protected:
     void SetUp() override
     {
-        // Get reference gyroradius
-        m_gyroradius = GetParam();
+        // Get the values of the magnetic moment
+        std::vector<double> const mu_values = GetParam();
 
         // Start of the domain of interest in the R dimension
         CoordR const r_start(0.);
@@ -188,43 +195,48 @@ protected:
 
         IdxRangeTheta const theta_domain = SplineInterpPointsTheta::get_domain<GridTheta>();
 
-        // Start of the domain of interest in the batch dimension (likely a mixture of
-        // phi and vpar)
-        CoordBatch const batch_start(0.);
-        CoordBatch const batch_end(M_PI * 2.0);
-
-        // Number of discretization points in the batch dimension
-        std::size_t const nb_batch_points = 2;
-
-        // Initialisation of the global domain in batch
-        IdxRangeBatch const batch_domain = ddc::init_discrete_space<GridBatch>(
-                GridBatch::init<
-                        GridBatch>(batch_start, batch_end, IdxStep<GridBatch>(nb_batch_points)));
+        // Initialisation of the global domain in mu
+        std::vector<CoordMu> mu_coords(mu_values.begin(), mu_values.end());
+        ddc::init_discrete_space<GridMu>(GridMu::init<GridMu>(mu_coords));
+        IdxRangeMu const mu_domain(IdxMu(0), IdxStep<GridMu>(mu_coords.size()));
 
         // Allocate members with move assign operator
         IdxRangeRTheta const rtheta_mesh = IdxRangeRTheta(r_domain, theta_domain);
-        IdxRangeRThetaBatch const rthetabatch_mesh
-                = IdxRangeRThetaBatch(r_domain, theta_domain, batch_domain);
+        IdxRangeMuRTheta const rthetamu_mesh = IdxRangeMuRTheta(r_domain, theta_domain, mu_domain);
         m_Rcoord_alloc = DFieldMemRTheta(rtheta_mesh);
         m_Zcoord_alloc = DFieldMemRTheta(rtheta_mesh);
-        m_rho_L_alloc = DFieldMemRTheta(rtheta_mesh);
+        m_larmor_factor_space_alloc = DFieldMemRTheta(rtheta_mesh);
+        m_larmor_factor_params_alloc = DFieldMemMu(mu_domain);
 
-        m_A_alloc = DFieldMemRThetaBatch(rthetabatch_mesh);
-        m_A_bar_alloc = DFieldMemRThetaBatch(rthetabatch_mesh);
+        m_A_alloc = DFieldMemRTheta(rtheta_mesh);
+        m_A_gavg_alloc = DFieldMemMuRTheta(rthetamu_mesh);
 
-        // Initialise R, Z and rho_L
+        // Initialise R, Z and the spatial part of the Larmor radius
         DFieldRTheta Rcoord = get_field(m_Rcoord_alloc);
         DFieldRTheta Zcoord = get_field(m_Zcoord_alloc);
-        DFieldRTheta rho_L = get_field(m_rho_L_alloc);
+        DFieldRTheta larmor_factor_space = get_field(m_larmor_factor_space_alloc);
 
         m_kx = m_kperp * 1.0 / Kokkos::sqrt(2.0);
         m_ky = m_kx;
-        DFieldRThetaBatch A = get_field(m_A_alloc);
-        initialise(Rcoord, Zcoord, rho_L, A, m_B0, m_R0, m_gyroradius, m_kx, m_ky);
+        DFieldRTheta A = get_field(m_A_alloc);
+        initialise(Rcoord, Zcoord, larmor_factor_space, A, m_B0, m_R0, m_kx, m_ky);
+
+        // Initialise the mu part of the Larmor radius
+        DFieldMu larmor_factor_params = get_field(m_larmor_factor_params_alloc);
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                mu_domain,
+                KOKKOS_LAMBDA(IdxMu const imu) {
+                    double const mu = ddc::coordinate(imu);
+                    // Single species with mass and charge equal to 1
+                    double const mass = 1.0;
+                    double const charge = 1.0;
+                    // rho = sqrt(2 mu / m_s) / q_s
+                    larmor_factor_params(imu) = Kokkos::sqrt(2 * mu * mass) / Kokkos::fabs(charge);
+                });
     }
 
 protected:
-    double m_gyroradius;
     std::size_t const m_nb_gyro_points = 6; // Must be even for the error estimate below to apply
     double const m_B0 = 1.0;
     double const m_R0 = 300.0;
@@ -235,92 +247,120 @@ protected:
 
     DFieldMemRTheta m_Rcoord_alloc;
     DFieldMemRTheta m_Zcoord_alloc;
-    DFieldMemRTheta m_rho_L_alloc;
+    DFieldMemRTheta m_larmor_factor_space_alloc;
+    DFieldMemMu m_larmor_factor_params_alloc;
 
-    DFieldMemRThetaBatch m_A_alloc;
-    DFieldMemRThetaBatch m_A_bar_alloc;
+    DFieldMemRTheta m_A_alloc;
+    DFieldMemMuRTheta m_A_gavg_alloc;
 };
 
 using CartesianToPolar = CartesianToCircular<X_pC, Y_pC, R, Theta>;
 
+using SplineRThetaInterpolator = SplineRThetaInterpolatorType<Kokkos::DefaultExecutionSpace>;
+using SplineRThetaBuilder = SplineRThetaInterpolator::BuilderType;
+using SplineRThetaEvaluator = SplineRThetaInterpolator::EvaluatorType;
+
+// FIXME: adapt the template parameters to the signature of the new operator
+using GyroAverageOperatorType
+        = GyroAverageOperator<SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeMu>;
+
 TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
 {
-    DConstFieldRThetaBatch A = get_const_field(m_A_alloc);
-    DFieldRThetaBatch A_bar = get_field(m_A_bar_alloc);
+    DConstFieldRTheta A = get_const_field(m_A_alloc);
+    DFieldMuRTheta A_gavg = get_field(m_A_gavg_alloc);
 
-    using SplineRThetaInterpolator = SplineRThetaInterpolatorType<Kokkos::DefaultExecutionSpace>;
-
-    IdxRangeRTheta const rtheta_idx_range = get_idx_range<GridR, GridTheta>(A_bar);
+    IdxRangeRTheta const rtheta_idx_range = get_idx_range<GridR, GridTheta>(A_gavg);
     SplineRThetaInterpolator const spline_interpolator(rtheta_idx_range);
 
-    using GyroAverageOperatorType
-            = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeRThetaBatch, CartesianToPolar>;
+    auto [gyrocoeffs_coords_alloc, gyrocoeffs_weights_alloc]
+            = GyroAverageOperatorType::build_circular_coefficients(
+                    CartesianToPolar(),
+                    get_field(m_larmor_factor_params_alloc),
+                    get_field(m_larmor_factor_space_alloc),
+                    m_nb_gyro_points);
+
     GyroAverageOperatorType gyroaverage(
-            get_const_field(m_rho_L_alloc),
-            spline_interpolator,
-            CartesianToPolar(),
-            m_nb_gyro_points);
-    gyroaverage(A_bar, A);
+            spline_interpolator.get_builder(),
+            spline_interpolator.get_evaluator(),
+            gyrocoeffs_coords_alloc,
+            gyrocoeffs_weights_alloc);
 
-    auto A_bar_alloc_host = ddc::create_mirror_and_copy(A_bar);
-    host_t<DFieldRThetaBatch> A_bar_host = get_field(A_bar_alloc_host);
+    // Apply the gyroaverage for each value of mu
+    IdxRangeMu const mu_idx_range = get_idx_range<GridMu>(A_gavg);
+    ddc::host_for_each(mu_idx_range, [&](IdxMu const imu) {
+        gyroaverage(A_gavg[imu], get_const_field(A), imu);
+    });
 
-    IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(A_bar);
-    IdxRangeRBatch const rbatch_idx_range = get_idx_range<GridR, GridBatch>(A_bar);
+    auto A_gavg_alloc_host = ddc::create_mirror_and_copy(A_gavg);
+    host_t<DFieldMuRTheta> A_gavg_host = get_field(A_gavg_alloc_host);
 
-    ddc::host_for_each(rbatch_idx_range, [&](IdxRBatch const irbatch) {
-        IdxR const ir(irbatch);
-        IdxBatch const ibatch(irbatch);
+    IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(A_gavg);
+    IdxRangeMuR const rmu_idx_range = get_idx_range<GridMu, GridR>(A_gavg);
+
+    ddc::host_for_each(rmu_idx_range, [&](IdxMuR const irmu) {
+        IdxR const ir(irmu);
+        IdxMu const imu(irmu);
         IdxTheta const theta_front = theta_idx_range.front();
         IdxTheta const theta_back = theta_idx_range.back();
-        double A_theta_0 = A_bar_host(ir, theta_front, ibatch);
-        double A_theta_2PI = A_bar_host(ir, theta_back, ibatch);
+        double A_theta_0 = A_gavg_host(ir, theta_front, imu);
+        double A_theta_2PI = A_gavg_host(ir, theta_back, imu);
         EXPECT_NEAR(A_theta_2PI, A_theta_0, 1e-12);
     });
 }
 
 TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 {
-    DConstFieldRThetaBatch A = get_const_field(m_A_alloc);
-    DFieldRThetaBatch A_bar = get_field(m_A_bar_alloc);
+    DConstFieldRTheta A = get_const_field(m_A_alloc);
+    DFieldMuRTheta A_gavg = get_field(m_A_gavg_alloc);
 
-    using SplineRThetaInterpolator = SplineRThetaInterpolatorType<Kokkos::DefaultExecutionSpace>;
-
-    IdxRangeRThetaBatch const rthetabatch_idx_range = get_idx_range(A_bar);
-    IdxRangeRTheta const rtheta_idx_range(rthetabatch_idx_range);
+    IdxRangeMuRTheta const rthetamu_idx_range = get_idx_range(A_gavg);
+    IdxRangeRTheta const rtheta_idx_range(rthetamu_idx_range);
     SplineRThetaInterpolator const spline_interpolator(rtheta_idx_range);
 
-    using GyroAverageOperatorType
-            = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeRThetaBatch, CartesianToPolar>;
+    auto [gyrocoeffs_coords_alloc, gyrocoeffs_weights_alloc]
+            = GyroAverageOperatorType::build_circular_coefficients(
+                    CartesianToPolar(),
+                    get_field(m_larmor_factor_params_alloc),
+                    get_field(m_larmor_factor_space_alloc),
+                    m_nb_gyro_points);
+
     GyroAverageOperatorType gyroaverage(
-            get_const_field(m_rho_L_alloc),
-            spline_interpolator,
-            CartesianToPolar(),
-            m_nb_gyro_points);
-    gyroaverage(A_bar, A);
+            spline_interpolator.get_builder(),
+            spline_interpolator.get_evaluator(),
+            gyrocoeffs_coords_alloc,
+            gyrocoeffs_weights_alloc);
+
+    // Apply the gyroaverage for each value of mu
+    IdxRangeMu const mu_idx_range = get_idx_range<GridMu>(A_gavg);
+    ddc::host_for_each(mu_idx_range, [&](IdxMu const imu) {
+        gyroaverage(A_gavg[imu], get_const_field(A), imu);
+    });
 
     auto Rcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Rcoord_alloc));
     host_t<DFieldRTheta> Rcoord_host = get_field(Rcoord_alloc_host);
     auto Zcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Zcoord_alloc));
     host_t<DFieldRTheta> Zcoord_host = get_field(Zcoord_alloc_host);
-    auto rho_L_alloc_host = ddc::create_mirror_and_copy(get_field(m_rho_L_alloc));
-    host_t<DFieldRTheta> rho_L_host = get_field(rho_L_alloc_host);
-    auto A_bar_alloc_host = ddc::create_mirror_and_copy(A_bar);
-    host_t<DFieldRThetaBatch> A_bar_host = get_field(A_bar_alloc_host);
+    auto larmor_factor_space_alloc_host
+            = ddc::create_mirror_and_copy(get_field(m_larmor_factor_space_alloc));
+    host_t<DFieldRTheta> larmor_factor_space_host = get_field(larmor_factor_space_alloc_host);
+    auto larmor_factor_params_alloc_host
+            = ddc::create_mirror_and_copy(get_field(m_larmor_factor_params_alloc));
+    host_t<DFieldMu> larmor_factor_params_host = get_field(larmor_factor_params_alloc_host);
+    auto A_gavg_alloc_host = ddc::create_mirror_and_copy(A_gavg);
+    host_t<DFieldMuRTheta> A_gavg_host = get_field(A_gavg_alloc_host);
 
-    IdxRangeR const r_idx_range(rthetabatch_idx_range);
-    IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
-    IdxRangeBatch const batch_idx_range(rthetabatch_idx_range);
+    IdxRangeR const r_idx_range(rthetamu_idx_range);
+    IdxRangeTheta const theta_idx_range(rthetamu_idx_range);
 
-    IdxStep<GridR, GridTheta, GridBatch> rthetabatch_check_strides(5, 11, 1);
-    IdxStep<GridR, GridTheta, GridBatch> rthetabatch_check_extents(
+    IdxStep<GridMu, GridR, GridTheta> rthetamu_check_strides(5, 11, 1);
+    IdxStep<GridMu, GridR, GridTheta> rthetamu_check_extents(
             r_idx_range.size() / 5,
             theta_idx_range.size() / 11,
-            batch_idx_range.size());
-    IdxRangeSlice<GridR, GridTheta, GridBatch> rthetabatch_idx_range_check(
-            rthetabatch_idx_range.front(),
-            rthetabatch_check_extents,
-            rthetabatch_check_strides);
+            mu_idx_range.size());
+    IdxRangeSlice<GridMu, GridR, GridTheta> rthetamu_idx_range_check(
+            rthetamu_idx_range.front(),
+            rthetamu_check_extents,
+            rthetamu_check_strides);
 
     double const r0 = m_r0;
     double const R0 = m_R0;
@@ -328,22 +368,23 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     double const kx = m_kx;
     double const ky = m_ky;
     int const nb_gyro_points = m_nb_gyro_points;
-    ddc::host_for_each(rthetabatch_idx_range_check, [&](IdxRThetaBatch const irthetabatch) {
-        IdxR const ir(irthetabatch);
-        IdxTheta const itheta(irthetabatch);
-        IdxBatch const ibatch(irthetabatch);
+    ddc::host_for_each(rthetamu_idx_range_check, [&](IdxMuRTheta const irthetamu) {
+        IdxR const ir(irthetamu);
+        IdxTheta const itheta(irthetamu);
+        IdxMu const imu(irthetamu);
         double const r = ddc::coordinate(ir);
         // In the outer region, the particle position can be out of small radius (r), where the values are considered to be zero.
         // Also the gyroaveraged value has the periodicity along theta direction (tested separately above)
         // These conditions are not taken into account in the analytical formula, so we do not test these cases.
         if (r < r0 * 0.8) {
             double const R0eff = R0;
-            double const gyroradius = rho_L_host(ir, itheta);
+            double const gyroradius
+                    = larmor_factor_params_host(imu) * larmor_factor_space_host(ir, itheta);
             double const kperprho = kperp * gyroradius;
             double const phase
                     = kx * (Rcoord_host(ir, itheta) - R0eff) + ky * Zcoord_host(ir, itheta);
             double const res_th = cyl_bessel_j(0, kperprho) * std::cos(phase);
-            double const err_J0_num = A_bar_host(ir, itheta, ibatch) - res_th;
+            double const err_J0_num = A_gavg_host(ir, itheta, imu) - res_th;
 
             double const phik = M_PI / 4;
             std::size_t nb_gyro_points_half = m_nb_gyro_points / 2;
@@ -359,8 +400,8 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     });
 }
 
-// Parameterisation over Larmor radius
+// Parameterisation over the magnetic moment (Larmor radius = sqrt(2 mu) for m = q = 1, B = B0)
 INSTANTIATE_TEST_SUITE_P(
         GyroAverageCircular,
         GyroAverageCircularParamTests,
-        ::testing::Values(1.1, 3.3, 8.8));
+        ::testing::Values(std::vector<double> {0.4, 10.0, 30.0}));
