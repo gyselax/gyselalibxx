@@ -356,7 +356,7 @@ void check_deriv_match(
         // Expected functions.
         DFieldMemOnPatch<Patch> expected_deriv_alloc(idx_range_deriv);
         DFieldOnPatch<Patch> expected_deriv(expected_deriv_alloc);
-        
+
         if (deriv_order == Idx<ddc::Deriv<typename GridDeriv::continuous_dimension_type>>(0)) {
             evaluator(expected_deriv, get_const_field(eval_points_deriv), spline);
         } else {
