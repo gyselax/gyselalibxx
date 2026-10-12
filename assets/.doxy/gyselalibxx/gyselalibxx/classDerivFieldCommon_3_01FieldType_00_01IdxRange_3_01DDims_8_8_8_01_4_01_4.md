@@ -101,7 +101,7 @@ _An abstract class which holds a chunk of memory describing a field and its deri
 | Type | Name |
 | ---: | :--- |
 |  std::array&lt; [**internal\_mdspan\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-internal_mdspan_type), [**n\_fields**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#variable-n_fields) &gt; | [**internal\_fields**](#variable-internal_fields)  <br>_The internal fields describing the values and derivatives._  |
-|  to\_subidx\_range\_collection&lt; [**physical\_deriv\_grids**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_deriv_grids) &gt; | [**m\_cross\_derivative\_idx\_range**](#variable-m_cross_derivative_idx_range)  <br>_The physical index ranges on which the derivatives are defined._  |
+|  ddc::detail::convert\_type\_seq\_to\_strided\_discrete\_domain\_t&lt; [**physical\_deriv\_grids**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_deriv_grids) &gt; | [**m\_cross\_derivative\_idx\_range**](#variable-m_cross_derivative_idx_range)  <br>_The physical index ranges on which the derivatives are defined._  |
 |  [**discrete\_deriv\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-discrete_deriv_idx_range_type) | [**m\_deriv\_idx\_range**](#variable-m_deriv_idx_range)  <br>_The index range of available derivatives._  |
 |  [**physical\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_idx_range_type) | [**m\_physical\_idx\_range**](#variable-m_physical_idx_range)  <br>_The physical index range on which the values are defined._  |
 
@@ -129,10 +129,10 @@ _An abstract class which holds a chunk of memory describing a field and its deri
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**DerivFieldCommon**](#function-derivfieldcommon) ([**physical\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_idx_range_type) physical\_idx\_range, [**discrete\_deriv\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-discrete_deriv_idx_range_type) deriv\_idx\_range, to\_subidx\_range\_collection&lt; [**physical\_deriv\_grids**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_deriv_grids) &gt; cross\_derivative\_idx\_range) <br>_Protected constructor to be used by subclasses to initialise index ranges._  |
+|  KOKKOS\_FUNCTION | [**DerivFieldCommon**](#function-derivfieldcommon) ([**physical\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_idx_range_type) physical\_idx\_range, [**discrete\_deriv\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-discrete_deriv_idx_range_type) deriv\_idx\_range, ddc::detail::convert\_type\_seq\_to\_strided\_discrete\_domain\_t&lt; [**physical\_deriv\_grids**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_deriv_grids) &gt; cross\_derivative\_idx\_range) <br>_Protected constructor to be used by subclasses to initialise index ranges._  |
 |  KOKKOS\_FUNCTION int | [**get\_array\_index**](#function-get_array_index) (Idx&lt; Tag... &gt; idx) const<br>_An internal function which provides the index of a field inside the internal\_fields array. An Idx describes the derivatives of interest. n-th order derivatives are stored in the same field for all n!=0 so it is sufficient to provide any valid element from the derivatives._  |
 |  KOKKOS\_FUNCTION std::size\_t | [**get\_index**](#function-get_index) (Idx&lt; QueryDim &gt; elem) noexcept const<br>_Get the index of the Idx within m\_cross\_derivative\_idx\_range. This function is particularly useful to index an mdspan over an index range slice._  |
-|  KOKKOS\_FUNCTION auto | [**get\_internal\_field**](#function-get_internal_field-12) (IdxRange&lt; ODims... &gt; idx\_range) const<br> |
+|  KOKKOS\_FUNCTION auto | [**get\_internal\_field**](#function-get_internal_field-12) (IdxRange&lt; ODims... &gt; idx\_range\_to\_slice) const<br> |
 |  KOKKOS\_FUNCTION auto | [**get\_internal\_field**](#function-get_internal_field-22) (Idx&lt; ODims... &gt; elem) const<br> |
 |  KOKKOS\_FUNCTION constexpr auto | [**get\_slicer\_for**](#function-get_slicer_for-12) (Idx&lt; ODDims... &gt; const & slice\_idx, int array\_idx) const<br>_Get an object which can be used to slice an mdspan._  |
 |  KOKKOS\_FUNCTION constexpr auto | [**get\_slicer\_for**](#function-get_slicer_for-22) (IdxRange&lt; ODDims... &gt; const & slice\_idx\_range, int array\_idx) const<br>_Get an object which can be used to slice an mdspan._  |
@@ -632,7 +632,7 @@ The fields which contain the values have different index ranges to the fields co
 
 _The physical index ranges on which the derivatives are defined._ 
 ```C++
-to_subidx_range_collection<physical_deriv_grids> DerivFieldCommon< FieldType, IdxRange< DDims... > >::m_cross_derivative_idx_range;
+ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids> DerivFieldCommon< FieldType, IdxRange< DDims... > >::m_cross_derivative_idx_range;
 ```
 
 
@@ -695,7 +695,7 @@ _Protected constructor to be used by subclasses to initialise index ranges._
 inline KOKKOS_FUNCTION DerivFieldCommon< FieldType, IdxRange< DDims... > >::DerivFieldCommon (
     physical_idx_range_type physical_idx_range,
     discrete_deriv_idx_range_type deriv_idx_range,
-    to_subidx_range_collection< physical_deriv_grids > cross_derivative_idx_range
+    ddc::detail::convert_type_seq_to_strided_discrete_domain_t< physical_deriv_grids > cross_derivative_idx_range
 ) 
 ```
 
@@ -804,7 +804,7 @@ The index of the element.
 ```C++
 template<class... ODims>
 inline KOKKOS_FUNCTION auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_internal_field (
-    IdxRange< ODims... > idx_range
+    IdxRange< ODims... > idx_range_to_slice
 ) const
 ```
 
@@ -818,7 +818,7 @@ Get a Field from a subset of one of the mdspans in internal\_fields. The provide
 **Parameters:**
 
 
-* `idx_range` The index range used to slice the mdspan.
+* `idx_range_to_slice` The index range used to slice the mdspan.
 
 
 

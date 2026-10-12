@@ -257,7 +257,6 @@
 * [**IdentityCoordinateChange**](classIdentityCoordinateChange.md)
 * [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md)
 * [**IdentityTensor**](classIdentityTensor.md)
-* [**IdxRangeToSlice**](structIdxRangeToSlice.md)
 * [**IEquilibrium**](classIEquilibrium.md)
 * [**IInitialisation**](classIInitialisation.md)
 * [**IMPILayout**](classIMPILayout.md)

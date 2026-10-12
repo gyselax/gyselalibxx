@@ -153,12 +153,10 @@
         </childnode>
         <childnode refid="81" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="82">
         <label>derivative_field_mem.hpp</label>
         <link refid="derivative__field__mem_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -170,14 +168,6 @@
         <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
-        </childnode>
-      </node>
-      <node id="82">
-        <label>idx_range_slice.hpp</label>
-        <link refid="idx__range__slice_8hpp_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="36">
@@ -614,7 +604,7 @@
         <childnode refid="33" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="83">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -627,10 +617,10 @@
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
-      <node id="85">
+      <node id="84">
         <label>multipatch_field_mem.hpp</label>
         <link refid="multipatch__field__mem_8hpp_source"/>
         <childnode refid="76" relation="include">
@@ -659,7 +649,7 @@
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -779,7 +769,7 @@
         </childnode>
         <childnode refid="76" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>

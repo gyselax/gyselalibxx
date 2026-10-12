@@ -722,6 +722,15 @@ struct Combine&lt;Container&lt;Tags...&gt;, Container&lt;OTags...&gt;, TailConta
 template &lt;class... Containers&gt;
 using combine_t = typename detail::Combine&lt;Containers...&gt;::type;
 
+template &lt;class... Dims&gt;
+IdxRangeSlice&lt;Dims...&gt; edge_idx_range(IdxRange&lt;Dims...&gt; v)
+{
+    return IdxRangeSlice&lt;Dims...&gt;(IdxRangeSlice&lt;Dims&gt; {
+            ddc::select&lt;Dims&gt;(v.front()),
+            IdxStep&lt;Dims&gt; {2},
+            ddc::select&lt;Dims&gt;(v.extents()) - 1}...);
+}
+
 } // namespace detail
 </code></pre></div>
               

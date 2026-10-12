@@ -60,12 +60,10 @@
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="29">
         <label>derivative_field_mem.hpp</label>
         <link refid="derivative__field__mem_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -77,14 +75,6 @@
         <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>idx_range_slice.hpp</label>
-        <link refid="idx__range__slice_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="9">
@@ -129,7 +119,7 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="30">
         <label>vector_field.hpp</label>
         <link refid="vector__field_8hpp_source"/>
         <childnode refid="22" relation="include">
@@ -138,12 +128,12 @@
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="32">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -153,7 +143,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="31">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -164,7 +154,7 @@
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
@@ -212,11 +202,11 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>

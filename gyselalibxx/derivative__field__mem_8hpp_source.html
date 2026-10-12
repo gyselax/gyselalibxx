@@ -774,7 +774,8 @@ public:
     template &lt;class... DerivDoms&gt;
     DerivFieldMem(
             physical_idx_range_type val_idx_range,
-            ddc::StridedDiscreteDomain&lt;DerivDoms&gt;... m_deriv_idx_range)
+            ddc::StridedDiscreteDomain&lt;
+                    DerivDoms&gt;... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v&lt;deriv_tags&gt;)
         : DerivFieldMem(allocator_type(), val_idx_range, m_deriv_idx_range...)
     {
     }
@@ -783,19 +784,31 @@ public:
     DerivFieldMem(
             allocator_type allocator,
             physical_idx_range_type val_idx_range,
-            ddc::StridedDiscreteDomain&lt;DerivDoms&gt;... m_deriv_idx_range)
+            ddc::StridedDiscreteDomain&lt;
+                    DerivDoms&gt;... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v&lt;deriv_tags&gt;)
         : base_type(
                 val_idx_range,
-                discrete_deriv_idx_range_type(
-                        IdxRange&lt;ddc::Deriv&lt;typename DerivDoms::continuous_dimension_type&gt;&gt;(
-                                Idx&lt;ddc::Deriv&lt;typename DerivDoms::continuous_dimension_type&gt;&gt;(1),
-                                IdxStep&lt;ddc::Deriv&lt;typename DerivDoms::continuous_dimension_type&gt;&gt;(
-                                        NDerivs))...),
-                to_subidx_range_collection&lt;physical_deriv_grids&gt;(m_deriv_idx_range...))
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt;physical_deriv_grids&gt;(
+                        m_deriv_idx_range...))
     {
         static_assert(
                 ddc::type_seq_same_v&lt;ddc::detail::TypeSeq&lt;DerivDoms...&gt;, physical_deriv_grids&gt;);
         initialise_chunks(allocator, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
+    }
+
+    DerivFieldMem(allocator_type allocator, physical_idx_range_type val_idx_range)
+        : base_type(
+                val_idx_range,
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
+    {
+        initialise_chunks(allocator, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
+    }
+
+    explicit DerivFieldMem(physical_idx_range_type val_idx_range)
+        : DerivFieldMem(allocator_type(), val_idx_range)
+    {
     }
 
     ~DerivFieldMem()
@@ -862,6 +875,22 @@ public:
     span_type get_field()
     {
         return span_type(*this);
+    }
+
+private:
+    template &lt;class... DerivDims&gt;
+    static discrete_deriv_idx_range_type get_deriv_range(IdxRange&lt;DerivDims...&gt;)
+    {
+        static_assert(std::is_same_v&lt;IdxRange&lt;DerivDims...&gt;, physical_deriv_idx_range_type&gt;);
+        return discrete_deriv_idx_range_type(
+                get_deriv_range&lt;typename DerivDims::continuous_dimension_type&gt;()...);
+    }
+
+    template &lt;class Dim&gt;
+    static IdxRange&lt;ddc::Deriv&lt;Dim&gt;&gt; get_deriv_range()
+    {
+        return IdxRange&lt;
+                ddc::Deriv&lt;Dim&gt;&gt;(Idx&lt;ddc::Deriv&lt;Dim&gt;&gt;(1), IdxStep&lt;ddc::Deriv&lt;Dim&gt;&gt;(NDerivs));
     }
 };
 

@@ -506,7 +506,6 @@
 
 ## t
 
-* **to\_subidx\_range\_collection** ([**idx\_range\_slice.hpp**](idx__range__slice_8hpp.md))
 * **to\_tensor\_t** ([**tensor.hpp**](tensor_8hpp.md))
 * **to\_tuple\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **type\_seq\_cat\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))

@@ -391,8 +391,8 @@
 <codeline lineno="359"><highlight class="normal"></highlight></codeline>
 <codeline lineno="360"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxType&gt;</highlight></codeline>
-<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>get_mid(IdxType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_1,<sp/>IdxType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_2)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="364"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>IdxType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>get_mid(IdxType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_1,<sp/>IdxType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_2)</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idx_1<sp/>+<sp/>(idx_2<sp/>-<sp/>idx_1)<sp/>/<sp/>2;</highlight></codeline>
 <codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="367"><highlight class="normal"></highlight></codeline>

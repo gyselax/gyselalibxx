@@ -457,16 +457,16 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="245" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="245" bodyend="356"/>
       </memberdef>
     </sectiondef>
-    <sectiondef kind="private-func">
-      <memberdef kind="function" id="classEdgeTransformation_1a7e6652f22cea94a7db8afea03ee7fef7" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classEdgeTransformation_1a3a56892b735a17d57b345265fa88c6cf" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class IdxType</type>
           </param>
         </templateparamlist>
         <type>IdxType const</type>
-        <definition>IdxType const EdgeTransformation&lt; Interface &gt;::get_mid</definition>
-        <argsstring>(IdxType const &amp;idx_1, IdxType const &amp;idx_2) const</argsstring>
+        <definition>static IdxType const EdgeTransformation&lt; Interface &gt;::get_mid</definition>
+        <argsstring>(IdxType const &amp;idx_1, IdxType const &amp;idx_2)</argsstring>
         <name>get_mid</name>
         <qualifiedname>EdgeTransformation::get_mid</qualifiedname>
         <param>
@@ -484,8 +484,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="363" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="363" bodyend="366"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="363" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="363" bodyend="366"/>
       </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
       <memberdef kind="function" id="classEdgeTransformation_1a74f683e93642ada4263db04cd877f36d" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
@@ -547,7 +549,7 @@
       <member refid="classEdgeTransformation_1a4f8c155fc9e9be29152777d01b6e3a9b" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>EdgeGrid1</name></member>
       <member refid="classEdgeTransformation_1a6a7396b3e9d1192d06304f26c008e9e2" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>EdgeGrid2</name></member>
       <member refid="classEdgeTransformation_1a11c84fec5577a58b0addfd13bd744117" prot="public" virt="non-virtual"><scope>EdgeTransformation</scope><name>EdgeTransformation</name></member>
-      <member refid="classEdgeTransformation_1a7e6652f22cea94a7db8afea03ee7fef7" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>get_mid</name></member>
+      <member refid="classEdgeTransformation_1a3a56892b735a17d57b345265fa88c6cf" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>get_mid</name></member>
       <member refid="classEdgeTransformation_1a74f683e93642ada4263db04cd877f36d" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>get_target_idx</name></member>
       <member refid="classEdgeTransformation_1a8860a81bb83b653171a6eb7391435229" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>IdxRangeEdge1</name></member>
       <member refid="classEdgeTransformation_1a82235425b928260db776024489d79494" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>IdxRangeEdge2</name></member>

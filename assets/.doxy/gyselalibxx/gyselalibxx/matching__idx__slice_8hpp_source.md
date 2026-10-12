@@ -21,7 +21,6 @@
 #include "ddc_helper.hpp"
 #include "edge.hpp"
 #include "edge_transformation.hpp"
-#include "idx_range_slice.hpp"
 
 template <class Interface>
 class MatchingIdxSlice

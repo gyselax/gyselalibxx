@@ -741,14 +741,14 @@
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a31fae5a5f7a6d504fcca1299b6b9eedd" kind="variable"><name>internal_fields</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a7ec2324db04ca9d7820072ce06b6d23d" kind="variable"><name>m_physical_idx_range</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a6116f365fe51e5a8f6c5915195c2ce1a" kind="variable"><name>m_deriv_idx_range</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a4a048b0b6feed6a33b0c7a78257438d4" kind="variable"><name>m_cross_derivative_idx_range</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3e704b4787fcc908e07ce666608dd478" kind="variable"><name>m_cross_derivative_idx_range</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a1544c678e280360ddde4876dbd957b9f" kind="function"><name>get_index</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a58c249fa7954db05b6d6bedbdab15823" kind="function"><name>get_array_index</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a868ed39fa484e90af6985b22c78df50c" kind="function"><name>get_slicer_for</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a87810847a0ebdc91930bdb5d861396c9" kind="function"><name>get_slicer_for</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ab37c3af17859ce88bd4842eb614c75ce" kind="function"><name>get_internal_field</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a360e1ae29e2807eeb933c3d7873b5356" kind="function"><name>get_internal_field</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ac7bdb7d57cf9d0ba344724a0a9797457" kind="function"><name>get_internal_field</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ad087ff1dba182ec21ce44b6b80b8fd5f" kind="function"><name>DerivFieldCommon</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a23b4739bca7fcde3a9dc200b937e329a" kind="function"><name>DerivFieldCommon</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3094a24cf98615b32b93e382c7a0fb74" kind="function"><name>~DerivFieldCommon</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1afb79eb00f2eb1a1b757d190663c085d1" kind="function"><name>get_mdspan</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3515c17c41fab7daaf8842344473acb5" kind="function"><name>get_mdspan</name></member>
@@ -788,8 +788,10 @@
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa15a282ff001c56164f83e2437ddee69" kind="function"><name>initialise_chunks</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a19bc44519c173ede5c709afae85ba0f2" kind="function"><name>free_ptr</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a663c5393bae37235e5f196631011896b" kind="function"><name>free_chunks</name></member>
-    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a11a38217dc28cf66cada14781ce30b43" kind="function"><name>DerivFieldMem</name></member>
-    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a09a41faf825170dbedd7a225db47bc45" kind="function"><name>DerivFieldMem</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a66e31df69d87f3070505bf3a087dedd9" kind="function"><name>DerivFieldMem</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1adeba0ca2a67e421bd304a84487466449" kind="function"><name>DerivFieldMem</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa597fa2eb87d01ff52b9eb3d4577295e" kind="function"><name>DerivFieldMem</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1afa394fc42ea426070c765eb9ce02dc92" kind="function"><name>DerivFieldMem</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a33693e6637197882ee691b6c1d24ee29" kind="function"><name>~DerivFieldMem</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac897e84a086c7cf6b4577833a8093e69" kind="function"><name>operator=</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a031703d7536e1b06d4f9dedfad0448fd" kind="function"><name>operator=</name></member>
@@ -802,6 +804,8 @@
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a12ea055587d4012dd9b0f0bc14328874" kind="function"><name>get_const_field</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a11d168f4f11313b987be6ec73f401d49" kind="function"><name>get_field</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a5bb13340e39af0088d3c6597274b4e1c" kind="function"><name>get_field</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6ccfb3b014129b59cc7f6ab351e6740d" kind="function"><name>get_deriv_range</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aeaf31a49114948727061c31416922675" kind="function"><name>get_deriv_range</name></member>
   </compound>
   <compound refid="classDiocotronDensitySolution" kind="class"><name>DiocotronDensitySolution</name>
     <member refid="classDiocotronDensitySolution_1a3b7f61f099cebe7de300b01f3b0f23d1" kind="variable"><name>m_W1</name></member>
@@ -926,7 +930,7 @@
     <member refid="classEdgeTransformation_1a953cea3a043308fbce6a55438daf7376" kind="function"><name>operator()</name></member>
     <member refid="classEdgeTransformation_1a608a25e1800da17a87d13fa7f8a5cfc7" kind="function"><name>is_match_available</name></member>
     <member refid="classEdgeTransformation_1a9018bd15e276d01c9d8d2a680be8d2ef" kind="function"><name>search_for_match</name></member>
-    <member refid="classEdgeTransformation_1a7e6652f22cea94a7db8afea03ee7fef7" kind="function"><name>get_mid</name></member>
+    <member refid="classEdgeTransformation_1a3a56892b735a17d57b345265fa88c6cf" kind="function"><name>get_mid</name></member>
     <member refid="classEdgeTransformation_1a74f683e93642ada4263db04cd877f36d" kind="function"><name>get_target_idx</name></member>
   </compound>
   <compound refid="structpolar__foot__finder__details_1_1ElementwiseChoice" kind="struct"><name>polar_foot_finder_details::ElementwiseChoice</name>
@@ -1562,8 +1566,6 @@
     <member refid="classIdentityTensor_1a8226c063830730770e62aee983ccbc7f" kind="function"><name>size</name></member>
     <member refid="classIdentityTensor_1ac03c37d10bf94bfcea328f4d4822a13d" kind="function"><name>get</name></member>
     <member refid="classIdentityTensor_1a831d9f57e21b2848a6e30a8db4a7d809" kind="function"><name>IdentityTensor</name></member>
-  </compound>
-  <compound refid="structIdxRangeToSlice" kind="struct"><name>IdxRangeToSlice</name>
   </compound>
   <compound refid="classIEquilibrium" kind="class"><name>IEquilibrium</name>
     <member refid="classIEquilibrium_1a7244af05e0e1176c0c02212cee0cfb43" kind="function"><name>~IEquilibrium</name></member>
@@ -3575,15 +3577,15 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d103" kind="namespace"><name>@103</name>
+  <compound refid="namespace_0d102" kind="namespace"><name>@102</name>
   </compound>
-  <compound refid="namespace_0d237" kind="namespace"><name>@237</name>
+  <compound refid="namespace_0d236" kind="namespace"><name>@236</name>
   </compound>
-  <compound refid="namespace_0d239" kind="namespace"><name>@239</name>
+  <compound refid="namespace_0d238" kind="namespace"><name>@238</name>
   </compound>
-  <compound refid="namespace_0d241" kind="namespace"><name>@241</name>
+  <compound refid="namespace_0d240" kind="namespace"><name>@240</name>
   </compound>
-  <compound refid="namespace_0d243" kind="namespace"><name>@243</name>
+  <compound refid="namespace_0d242" kind="namespace"><name>@242</name>
   </compound>
   <compound refid="namespacebumpontail__equilibrium" kind="namespace"><name>bumpontail_equilibrium</name>
     <member refid="bumpontailequilibrium_8hpp_1a904011943d45927909831ec61a31a6da" kind="function"><name>init_from_input</name></member>
@@ -3818,9 +3820,6 @@
     <member refid="derivative__field__mem_8hpp_1a9c530031bac7c81aa42fc0277f28cd99" kind="variable"><name>enable_deriv_field&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, MemSpace &gt; &gt;</name></member>
     <member refid="derivative__field__mem_8hpp_1a9465de6e60331a96d450fe3cf9673572" kind="variable"><name>enable_data_access_methods&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt;</name></member>
     <member refid="derivative__field__mem_8hpp_1a5a4dec0cabc62e9de6879d536f46de7a" kind="variable"><name>enable_mem_type&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt;</name></member>
-  </compound>
-  <compound refid="idx__range__slice_8hpp" kind="file"><name>idx_range_slice.hpp</name>
-    <member refid="idx__range__slice_8hpp_1a0a449d9bc3f57dff7ffc206773fff1f6" kind="typedef"><name>to_subidx_range_collection</name></member>
   </compound>
   <compound refid="indexed__tensor_8hpp" kind="file"><name>indexed_tensor.hpp</name>
     <member refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kind="function"><name>index</name></member>

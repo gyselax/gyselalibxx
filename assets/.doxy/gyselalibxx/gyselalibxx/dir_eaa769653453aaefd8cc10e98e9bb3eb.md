@@ -25,7 +25,6 @@
 | file | [**derivative\_field.hpp**](derivative__field_8hpp.md) <br> |
 | file | [**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md) <br> |
 | file | [**derivative\_field\_mem.hpp**](derivative__field__mem_8hpp.md) <br> |
-| file | [**idx\_range\_slice.hpp**](idx__range__slice_8hpp.md) <br> |
 | file | [**indexed\_tensor.hpp**](indexed__tensor_8hpp.md) <br> |
 | file | [**static\_tensors.hpp**](static__tensors_8hpp.md) <br> |
 | file | [**tensor.hpp**](tensor_8hpp.md) <br> |
