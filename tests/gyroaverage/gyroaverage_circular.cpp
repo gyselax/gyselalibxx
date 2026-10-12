@@ -254,16 +254,14 @@ protected:
 using CartesianToPolar = CartesianToCircular<X_pC, Y_pC, R, Theta>;
 
 using SplineRThetaInterpolator = SplineRThetaInterpolatorType<Kokkos::DefaultExecutionSpace>;
-using SplineRThetaBuilder = SplineRThetaInterpolator::BuilderType;
-using SplineRThetaEvaluator = SplineRThetaInterpolator::EvaluatorType;
 
 // FIXME: adapt the template parameters to the signature of the new operator
 using GyroAverageOperatorType
-        = GyroAverageOperator<SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeMu>;
+        = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeMu>;
 
 TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 {
-    DConstFieldRTheta A = get_const_field(m_A_alloc);
+    DFieldRTheta A = get_field(m_A_alloc);
     DFieldMuRTheta A_gavg = get_field(m_A_gavg_alloc);
 
     IdxRangeMuRTheta const rthetamu_idx_range = get_idx_range(A_gavg);
@@ -286,7 +284,7 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     // Apply the gyroaverage for each value of mu
     IdxRangeMu const mu_idx_range = get_idx_range<GridMu>(A_gavg);
     ddc::host_for_each(mu_idx_range, [&](IdxMu const imu) {
-        gyroaverage(A_gavg[imu], get_const_field(A), imu);
+        gyroaverage(A_gavg[imu], A, imu);
     });
 
     Kokkos::fence();

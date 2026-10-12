@@ -11,40 +11,42 @@
  * @brief Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre-
  * determined sample points along the gyro-motion.
  *
- * Spline interpolation is used to evaluate the field at points which are not on the grid. The
- * choice of treatment for points outside the domain (Dirichlet, constant outside, etc) is determined
- * by the interpolation class itself.
+ * Interpolation is used to evaluate the field at points which are not on the grid. The choice of
+ * treatment for points outside the domain (Dirichlet, constant outside, etc) is determined by the
+ * interpolation class itself.
  *
- * We distinguish 2 types of dimensions:
- *  - "Params" refers to the dimensions which parametrise the gyroaverage of a given field; this is
- * usually corresponds to species and mu.
- *  - "InterpSpace" refers to the space dimensions along which the interpolations is performed, e.g.
- * poloidal cross-sections when the approximation B // e_phi is assumed.
+ * We distinguish 3 types of dimensions:
+ *  - "Params" refers to the dimensions which parametrise the gyroaverage of a given field; this
+ *    usually corresponds to species and mu.
+ *  - "InterpSpace" refers to the space dimensions along which the interpolation is performed, e.g.
+ *    poloidal cross-sections when the approximation B // e_phi is assumed.
  *  - "BatchSpace" refers to the remaining dimensions, if any (not yet implemented).
  *
- * @tparam SplineInterpSpaceBuilder
- *     Type of the spline builder for the interpolations.
- * @tparam SplineInterpSpaceEvaluator
- *     Type of the spline evaluator for the interpolations.
+ * @tparam InterpolatorType
+ *     Type of the interpolator.
  * @tparam IdxRangeParams
  *     The additional dimensions parametrising the gyroaverage (usually species and mu).
  */
-template <class SplineInterpSpaceBuilder, class SplineInterpSpaceEvaluator, class IdxRangeParams>
+template <concepts::Interpolation InterpolatorType, class IdxRangeParams>
 class GyroAverageOperator
 {
+    using InterpSpaceBuilderType = typename InterpolatorType::BuilderType;
+    using InterpSpaceEvaluatorType = typename InterpolatorType::EvaluatorType;
+    using ExecutionSpace = typename InterpSpaceBuilderType::exec_space;
+
     using IdxRangeInterpSpace
-            = InterpolationBuilderTraits<SplineInterpSpaceBuilder>::interpolation_idx_range_type;
+            = InterpolationBuilderTraits<InterpSpaceBuilderType>::interpolation_idx_range_type;
     using IdxInterpSpace = typename IdxRangeInterpSpace::discrete_element_type;
     using CoordsInterpSpace = ddc::coordinate_of_t<IdxInterpSpace>;
     using IdxParams = typename IdxRangeParams::discrete_element_type;
     using IdxRangeGyroSpace = detail::combine_t<IdxRangeParams, IdxRangeInterpSpace>;
     using IdxGyroSpace = typename IdxRangeGyroSpace::discrete_element_type;
 
-    /// Splines
-    using IdxRangeSplines
-            = InterpolationBuilderTraits<SplineInterpSpaceBuilder>::coeff_idx_range_type;
-    using DFieldMemSplines = DFieldMem<IdxRangeSplines>;
-    using DFieldSplines = DField<IdxRangeSplines>;
+    /// Interpolation coefficients
+    using IdxRangeInterpCoeffs
+            = InterpolationBuilderTraits<InterpSpaceBuilderType>::coeff_idx_range_type;
+    using DFieldMemInterpCoeffs = DFieldMem<IdxRangeInterpCoeffs>;
+    using DFieldInterpCoeffs = DField<IdxRangeInterpCoeffs>;
 
     /// Types for the arrays storing the coefficients
     struct CoeffList;
@@ -65,14 +67,14 @@ public:
 
 private:
     /**
-     * @brief The spline builder for the interpolation
+     * @brief The builder for the interpolation
      */
-    SplineInterpSpaceBuilder const& m_spline_builder;
+    InterpSpaceBuilderType const& m_builder;
 
     /**
-     * @brief The spline evaluator for the interpolation
+     * @brief The evaluator for the interpolation
      */
-    SplineInterpSpaceEvaluator const& m_spline_evaluator;
+    InterpSpaceEvaluatorType const& m_evaluator;
 
     /**
      * @brief Coordinates and weights of the sample points
@@ -127,14 +129,14 @@ public:
      *
      * @return A tuple containing the point coordinates and their weights that were computed.
      */
-    template <class TransformToCartesian>
+    template <concepts::AnalyticalMapping TransformFromCartesian>
     static std::tuple<GyroCoeffsCoordsMem, GyroCoeffsWeightsMem> build_circular_coefficients(
-            TransformToCartesian transform_from_cartesian,
+            TransformFromCartesian transform_from_cartesian,
             DField<IdxRangeParams> const larmor_factor_params,
             DField<IdxRangeInterpSpace> const larmor_factor_space,
             size_t const nb_gyro_points)
     {
-        using CoordCartesian = typename TransformToCartesian::CoordArg;
+        using CoordCartesian = typename TransformFromCartesian::CoordArg;
 
         IdxRangeParams idx_range_params = get_idx_range(larmor_factor_params);
         IdxRangeInterpSpace idx_range_space = get_idx_range(larmor_factor_space);
@@ -143,6 +145,9 @@ public:
                 = build_empty_coefficients(idx_range_params, idx_range_space, 8);
         GyroCoeffsCoords gyrocoeffs_coords = get_field(gyrocoeffs_coords_alloc);
         GyroCoeffsWeights gyrocoeffs_weights = get_field(gyrocoeffs_weights_alloc);
+
+        inverse_mapping_t<TransformFromCartesian> transform_to_cartesian
+                = transform_from_cartesian.get_inverse_mapping();
 
         IdxRangeGyroSpace idx_range_gyrospace(idx_range_params, idx_range_space);
 
@@ -154,9 +159,6 @@ public:
                 KOKKOS_LAMBDA(IdxGyroSpace const idx_gyrospace) {
                     IdxInterpSpace const idx_space(idx_gyrospace);
                     IdxParams const idx_params(idx_gyrospace);
-
-                    inverse_mapping_t<TransformToCartesian> transform_to_cartesian
-                            = transform_from_cartesian.get_inverse_mapping();
 
                     CoordCartesian const gyrocentre
                             = transform_to_cartesian(ddc::coordinate(idx_space));
@@ -183,18 +185,18 @@ public:
     /**
      * @brief Constructor for the general case where coefficients are computed by the caller.
      *
-     * @param[in] spline_builder Spline builder for the interpolation.
-     * @param[in] spline_evaluator Spline evaluator for the interpolation.
+     * @param[in] builder Builder for the interpolation.
+     * @param[in] evaluator Evaluator for the interpolation.
      * @param[in] gyrocoeffs_coords Coordinates of the sample points.
      * @param[in] gyrocoeffs_weights Weights associated with the sample points.
      */
     explicit GyroAverageOperator(
-            SplineInterpSpaceBuilder const& spline_builder,
-            SplineInterpSpaceEvaluator const& spline_evaluator,
+            InterpSpaceBuilderType const& builder,
+            InterpSpaceEvaluatorType const& evaluator,
             GyroCoeffsCoordsMem& gyrocoeffs_coords,
             GyroCoeffsWeightsMem& gyrocoeffs_weights)
-        : m_spline_builder(spline_builder)
-        , m_spline_evaluator(spline_evaluator)
+        : m_builder(builder)
+        , m_evaluator(evaluator)
         , m_gyrocoeffs_coords(gyrocoeffs_coords)
         , m_gyrocoeffs_weights(gyrocoeffs_weights)
         , m_nb_gyro_points(get_idx_range(gyrocoeffs_coords).template extent<CoeffList>())
@@ -213,7 +215,7 @@ public:
         IdxRangeParams idx_range_params(get_idx_range(func));
 
         ddc::host_for_each(idx_range_params, [&](IdxParams const idx_params) {
-            (*this)(func[idx_params], get_const_field(func[idx_params]), idx_params);
+            (*this)(func[idx_params], func[idx_params], idx_params);
         });
     }
 
@@ -221,7 +223,7 @@ public:
      * @brief For a given parameter set, compute the gyroaverage of a field which only depends on
      * space.
      *
-     * The same field can be passed as both input and output to work in-place, as the spline
+     * The same field can be passed as both input and output to work in-place, as the interpolator
      * coefficients represent the input field during the computation.
      *
      * @param[out] func_gavg Gyroaverage of the input field.
@@ -230,7 +232,7 @@ public:
      */
     void operator()(
             DField<IdxRangeInterpSpace> const& func_gavg,
-            DConstField<IdxRangeInterpSpace> const& func,
+            DField<IdxRangeInterpSpace> const& func,
             IdxParams idx_param) const
     {
         // Ensure that the input and output have the same index ranges
@@ -243,13 +245,13 @@ public:
         // Ensure that there are coefficients for the requested parameter set
         assert(IdxRangeParams(get_idx_range(m_gyrocoeffs_weights)).contains(idx_param));
 
-        // Initialise the splines
-        DFieldMemSplines scoef_alloc(
+        // Initialise the interpolator
+        DFieldMemInterpCoeffs scoef_alloc(
                 "scoef (GyroAvrageOperator::operator())",
-                get_spline_idx_range(m_spline_builder));
-        DFieldSplines scoef = get_field(scoef_alloc);
-        m_spline_builder(scoef, get_const_field(func));
-        SplineInterpSpaceEvaluator spline_evaluator = m_spline_evaluator;
+                batched_basis_idx_range(m_builder, get_idx_range(func)));
+        DFieldInterpCoeffs scoef = get_field(scoef_alloc);
+        m_builder(scoef, get_const_field(func));
+        InterpSpaceEvaluatorType evaluator = m_evaluator;
 
         double const nb_gyro_points_proxy = m_nb_gyro_points;
         GyroCoeffsCoords const gyrocoeffs_coords_proxy = m_gyrocoeffs_coords;
@@ -267,7 +269,7 @@ public:
                     double gavg = 0.0;
                     for (std::size_t igyro = 0; igyro < nb_gyro_points_proxy; igyro++) {
                         IdxList const idx_gyro = idx_gyro0 + igyro;
-                        double const value = spline_evaluator(
+                        double const value = evaluator(
                                 gyrocoeffs_coords_proxy(idx_param, idx_interpspace, idx_gyro),
                                 get_const_field(scoef));
                         gavg += gyrocoeffs_weights_proxy(idx_param, idx_interpspace, idx_gyro)
