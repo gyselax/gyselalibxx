@@ -18,8 +18,6 @@
 #include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
 
-namespace {
-
 struct A
 {
 };
@@ -34,6 +32,8 @@ struct GridA : UniformGridBase<A>
 struct GridB : UniformGridBase<B>
 {
 };
+
+namespace {
 
 using Mapping = CircularToCartesian<R, Theta, X, Y>;
 using DiscreteMappingBuilder
