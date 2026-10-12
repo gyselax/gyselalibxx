@@ -726,7 +726,8 @@ private:
         constexpr bool is_on_patch1 = std::is_same_v<Idx1D, Idx1D_1>;
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
-        IdxStep<Grid1D> idx_step = extremity == FRONT ? IdxStep<Grid1D>(1) : IdxStep<Grid1D>(-1);
+        IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
+
 
         for (int n(2); n < n_cells; n++) {
             Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
