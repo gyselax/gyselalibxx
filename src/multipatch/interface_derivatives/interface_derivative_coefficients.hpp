@@ -591,7 +591,7 @@ private:
         int const n2_cells
                 = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
 
-        recursion(
+        recursion<false>(
                 n2_cells,
                 interface_idx_2,
                 coeff_deriv_patch2,
@@ -601,7 +601,7 @@ private:
 
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
-            correction_boundary(
+            correction_boundary<false>(
                     n_points_2,
                     interface_idx_2,
                     coeff_deriv_patch2,
@@ -653,7 +653,7 @@ private:
         int const n1_cells
                 = m_is_cell_bound_1_with_extra_interpol_pt ? n_points_1 - 3 : n_points_1 - 1;
 
-        recursion(
+        recursion<true>(
                 n1_cells,
                 interface_idx_1,
                 coeff_deriv_patch1,
@@ -663,7 +663,7 @@ private:
 
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
-            correction_boundary(
+            correction_boundary<true>(
                     n_points_1,
                     interface_idx_1,
                     coeff_deriv_patch1,
@@ -697,17 +697,17 @@ private:
      * @param[in,out] weights_patch1 Weights in front of the function values on patch 1. 
      * @param[in,out] weights_patch2 Weights in front of the function values on patch 2. 
      */
-    template <class Grid1D>
+    template <bool is_on_patch1>
     void recursion(
             int const n_cells,
-            Idx<Grid1D> const interface_idx,
+            std::conditional_t<is_on_patch1, Idx1D_1, Idx1D_2> const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
             std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
             std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
     {
+        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
         using Idx1D = Idx<Grid1D>;
-        constexpr bool is_on_patch1 = std::is_same_v<Idx1D, Idx1D_1>;
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
         IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
@@ -809,20 +809,20 @@ private:
      * @param[in,out] weights_patch1 Weights in front of the function values on patch 1. 
      * @param[in,out] weights_patch2 Weights in front of the function values on patch 2. 
      */
-    template <class Grid1D>
+    template <bool is_on_patch1>
     void correction_boundary(
             int const n_points,
-            Idx<Grid1D> const interface_idx,
+            std::conditional_t<is_on_patch1, Idx1D_1, Idx1D_2> const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
             std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
             std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
     {
+        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
         using Idx1D = Idx<Grid1D>;
-        constexpr bool is_on_patch1 = std::is_same_v<Idx1D, Idx1D_1>;
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
-        IdxStep<Grid1D> idx_step = extremity == FRONT ? IdxStep<Grid1D>(1) : IdxStep<Grid1D>(-1);
+        IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
 
         int const n = n_points - 3;
         Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
@@ -1084,12 +1084,12 @@ private:
         // If given index is on the patch 1 or on the patch 2,
         else if (is_same_orientation_as_global) {
             // . | →   or  → | .
-            length_left = abs(ddc::coordinate(idx) - ddc::coordinate(idx_minus));
-            length_right = abs(ddc::coordinate(idx_plus) - ddc::coordinate(idx));
+            length_left = ddc::distance_at_left(idx);
+            length_right = ddc::distance_at_right(idx);
         } else {
             //  . | ←  or  ← | .
-            length_left = abs(ddc::coordinate(idx_plus) - ddc::coordinate(idx));
-            length_right = abs(ddc::coordinate(idx) - ddc::coordinate(idx_minus));
+            length_left = ddc::distance_at_right(idx);
+            length_right = ddc::distance_at_left(idx);
         }
 
         if ((length_left == 0) || (length_right == 0)) {
