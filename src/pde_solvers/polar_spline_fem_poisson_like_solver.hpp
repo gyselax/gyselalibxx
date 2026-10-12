@@ -448,7 +448,9 @@ public:
 
         IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
 
-        // Fill b for the singular basis functions, for every batch.
+        // Fill b
+
+        // Fill b for the basis functions around the O-point
         // Multi-level parallelism is needed as idx_range_singular.size() ~= 3 but b is on GPU
         Kokkos::parallel_for(
                 Kokkos::TeamPolicy<>(
@@ -487,6 +489,7 @@ public:
         IdxRangeBatchedBSPolar
                 batched_fem_non_singular(idx_range_batch, m_idxrange_fem_non_singular);
 
+        // Fill b for the remaining basis functions
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
