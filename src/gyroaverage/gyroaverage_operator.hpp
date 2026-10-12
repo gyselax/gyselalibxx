@@ -58,9 +58,9 @@ public:
     using IdxRangeGyroCoeffs = detail::combine_t<IdxRangeGyroSpace, IdxRangeList>;
 
     using GyroCoeffsCoordsMem = FieldMem<CoordsInterpSpace, IdxRangeGyroCoeffs>;
-    using GyroCoeffsWeightsMem = FieldMem<double, IdxRangeGyroCoeffs>;
+    using GyroCoeffsWeightsMem = DFieldMem<IdxRangeGyroCoeffs>;
     using GyroCoeffsCoords = Field<CoordsInterpSpace, IdxRangeGyroCoeffs>;
-    using GyroCoeffsWeights = Field<double, IdxRangeGyroCoeffs>;
+    using GyroCoeffsWeights = DField<IdxRangeGyroCoeffs>;
 
 
 private:
@@ -251,22 +251,26 @@ public:
         m_spline_builder(scoef, get_const_field(func));
         SplineInterpSpaceEvaluator spline_evaluator = m_spline_evaluator;
 
+        double const nb_gyro_points_proxy = m_nb_gyro_points;
+        GyroCoeffsCoords const gyrocoeffs_coords_proxy = m_gyrocoeffs_coords;
+        GyroCoeffsWeights const gyrocoeffs_weights_proxy = m_gyrocoeffs_weights;
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(func_gavg),
-                KOKKOS_CLASS_LAMBDA(IdxInterpSpace const idx_interpspace) {
-                    IdxList const idx_gyro0(get_idx_range(m_gyrocoeffs_coords).front());
+                KOKKOS_LAMBDA(IdxInterpSpace const idx_interpspace) {
+                    IdxList const idx_gyro0(get_idx_range(gyrocoeffs_coords_proxy).front());
 
                     // Average over gyro points
                     double gavg = 0.0;
-                    for (std::size_t igyro = 0; igyro < m_nb_gyro_points; igyro++) {
+                    for (std::size_t igyro = 0; igyro < nb_gyro_points_proxy; igyro++) {
                         IdxList const idx_gyro = idx_gyro0 + igyro;
                         double const value = spline_evaluator(
-                                m_gyrocoeffs_coords(idx_param, idx_interpspace, idx_gyro),
+                                gyrocoeffs_coords_proxy(idx_param, idx_interpspace, idx_gyro),
                                 get_const_field(scoef));
-                        gavg += m_gyrocoeffs_weights(idx_param, idx_interpspace, idx_gyro) * value;
+                        gavg += gyrocoeffs_weights_proxy(idx_param, idx_interpspace, idx_gyro) * value;
                     }
                     func_gavg(idx_interpspace) = gavg;
                 });
