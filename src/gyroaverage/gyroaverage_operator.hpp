@@ -256,6 +256,7 @@ public:
         double const nb_gyro_points_proxy = m_nb_gyro_points;
         GyroCoeffsCoords const gyrocoeffs_coords_proxy = m_gyrocoeffs_coords;
         GyroCoeffsWeights const gyrocoeffs_weights_proxy = m_gyrocoeffs_weights;
+        IdxList const idx_gyro0(get_idx_range(gyrocoeffs_coords_proxy).front());
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -263,7 +264,6 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(func_gavg),
                 KOKKOS_LAMBDA(IdxInterpSpace const idx_interpspace) {
-                    IdxList const idx_gyro0(get_idx_range(gyrocoeffs_coords_proxy).front());
 
                     // Average over gyro points
                     double gavg = 0.0;
