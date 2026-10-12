@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `TypeOnPatch` to `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` to get the type stored on a given patch.
 - Allow `ddcHelper::get<Dim>(..)` to be used on a multipatch argument.
 - Allow `PolarSplineEvaluator::operator()` and `PolarSplineEvaluator::deriv` to evaluate a batch of polar splines on a grid.
+- Add new constructors to `DerivFieldMem` where the idx range slices for the derivatives default to the edge of the physical domain.
 
 ### Fixed
 
