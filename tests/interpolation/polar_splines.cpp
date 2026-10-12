@@ -279,6 +279,128 @@ TEST(PolarSplineTest, ConstantEvalGPU)
     test_polar_spline_eval_gpu();
 }
 
+struct GridBatch
+{
+};
+
+void test_batched_polar_spline_eval()
+{
+    using CoordR = Coord<R>;
+    using CoordTheta = Coord<Theta>;
+    using IdxRangeBatch = IdxRange<GridBatch>;
+    using IdxRangeBatchedBS = IdxRange<GridBatch, BSplines>;
+    using IdxRangeBatchedRTheta = IdxRange<GridBatch, GridR, GridTheta>;
+    using Evaluator = PolarSplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplines,
+            ddc::NullExtrapolationRule>;
+    using InterpolatorRTheta = SplineInterpolator<
+            Kokkos::DefaultExecutionSpace,
+            IdxRange<BSplinesR, BSplinesTheta>,
+            IdxRange<GridR, GridTheta>,
+            ExtrapolationRule::Null_Null, // radial extrapolation
+            ExtrapolationRule::Periodic, // poloidal extrapolation
+            SplineBoundaryClosure::Greville_Greville, // radial closure condition
+            SplineBoundaryClosure::Periodic>;
+
+    CoordR constexpr r0(0.);
+    CoordR constexpr rN(1.);
+    CoordTheta constexpr theta0(0.);
+    CoordTheta constexpr thetaN(2. * M_PI);
+    std::size_t constexpr ncells = 20;
+
+    // 1. Create BSplines
+    {
+        IdxStep<GridR> constexpr npoints_r(ncells + 1);
+        std::vector<CoordR> breaks_r(npoints_r);
+        const double dr = (rN - r0) / ncells;
+        for (int i(0); i < npoints_r; ++i) {
+            breaks_r[i] = CoordR(r0 + i * dr);
+        }
+        ddc::init_discrete_space<BSplinesR>(breaks_r);
+#if defined(BSPLINES_TYPE_UNIFORM)
+        ddc::init_discrete_space<BSplinesTheta>(theta0, thetaN, ncells);
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
+        IdxStep<GridTheta> constexpr npoints_theta(ncells + 1);
+        std::vector<CoordTheta> breaks_theta(npoints_theta);
+        const double dp = (thetaN - theta0) / ncells;
+        for (int i(0); i < npoints_r; ++i) {
+            breaks_theta[i] = CoordTheta(theta0 + i * dp);
+        }
+        ddc::init_discrete_space<BSplinesTheta>(breaks_theta);
+#endif
+    }
+
+    ddc::init_discrete_space<GridR>(GrevillePointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(GrevillePointsTheta::get_sampling<GridTheta>());
+    IdxRange<GridR> interpolation_idx_range_r(GrevillePointsR::get_domain<GridR>());
+    IdxRange<GridTheta> interpolation_idx_range_theta(GrevillePointsTheta::get_domain<GridTheta>());
+    IdxRange<GridR, GridTheta>
+            interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
+
+    InterpolatorRTheta interpolator(interpolation_idx_range);
+
+#if defined(CIRCULAR_MAPPING)
+    CircToCart const coord_changer;
+#elif defined(CZARNY_MAPPING)
+    CircToCart const coord_changer(0.3, 1.4);
+#endif
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, InterpolatorRTheta>
+            mapping_builder(Kokkos::DefaultExecutionSpace(), coord_changer, interpolator);
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
+    ddc::init_discrete_space<BSplines>(mapping);
+
+    IdxRangeBatch batch_idx_range(Idx<GridBatch>(0), IdxStep<GridBatch>(3));
+    IdxRangeBatchedBS
+            batched_coef_idx_range(batch_idx_range, ddc::discrete_space<BSplines>().full_domain());
+    IdxRangeBatchedRTheta batched_idx_range(batch_idx_range, interpolation_idx_range);
+
+    // Fill each batch with different random coefficients
+    host_t<DFieldMem<IdxRangeBatchedBS>> coef_host(batched_coef_idx_range);
+    std::mt19937 gen(42);
+    std::uniform_real_distribution<double> dist(-1.0, 1.0);
+    ddc::host_for_each(batched_coef_idx_range, [&](Idx<GridBatch, BSplines> idx) {
+        coef_host(idx) = dist(gen);
+    });
+    auto coef = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(coef_host));
+
+    ddc::NullExtrapolationRule extrapolation_rule;
+    Evaluator const spline_evaluator(extrapolation_rule);
+
+    DFieldMem<IdxRangeBatchedRTheta> vals(batched_idx_range);
+    DFieldMem<IdxRangeBatchedRTheta> derivs_r(batched_idx_range);
+    spline_evaluator(get_field(vals), get_const_field(coef));
+    spline_evaluator.deriv(Idx<ddc::Deriv<R>>(1), get_field(derivs_r), get_const_field(coef));
+
+    // Evaluate each batch separately with the unbatched operators
+    DFieldMem<IdxRangeBatchedRTheta> vals_ref(batched_idx_range);
+    DFieldMem<IdxRangeBatchedRTheta> derivs_r_ref(batched_idx_range);
+    for (Idx<GridBatch> ib : batch_idx_range) {
+        spline_evaluator(get_field(vals_ref)[ib], get_const_field(coef)[ib]);
+        spline_evaluator
+                .deriv(Idx<ddc::Deriv<R>>(1),
+                       get_field(derivs_r_ref)[ib],
+                       get_const_field(coef)[ib]);
+    }
+
+    auto vals_host = ddc::create_mirror_view_and_copy(get_field(vals));
+    auto derivs_r_host = ddc::create_mirror_view_and_copy(get_field(derivs_r));
+    auto vals_ref_host = ddc::create_mirror_view_and_copy(get_field(vals_ref));
+    auto derivs_r_ref_host = ddc::create_mirror_view_and_copy(get_field(derivs_r_ref));
+
+    ddc::host_for_each(batched_idx_range, [&](Idx<GridBatch, GridR, GridTheta> idx) {
+        EXPECT_DOUBLE_EQ(vals_host(idx), vals_ref_host(idx));
+        EXPECT_DOUBLE_EQ(derivs_r_host(idx), derivs_r_ref_host(idx));
+    });
+}
+
+TEST(PolarSplineTest, BatchedEval)
+{
+    test_batched_polar_spline_eval();
+}
+
 void test_polar_integrals()
 {
     using CoordR = Coord<R>;
