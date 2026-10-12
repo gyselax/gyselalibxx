@@ -264,7 +264,6 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(func_gavg),
                 KOKKOS_LAMBDA(IdxInterpSpace const idx_interpspace) {
-
                     // Average over gyro points
                     double gavg = 0.0;
                     for (std::size_t igyro = 0; igyro < nb_gyro_points_proxy; igyro++) {
