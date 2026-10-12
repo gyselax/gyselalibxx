@@ -242,8 +242,8 @@ protected:
     double const m_R0 = 300.0;
     double const m_r0 = 150.0;
     double const m_kperp = M_PI / 6.0;
-    double m_kx;
-    double m_ky;
+    double m_kx = 0.0;
+    double m_ky = 0.0;
 
     DFieldMemRTheta m_Rcoord_alloc;
     DFieldMemRTheta m_Zcoord_alloc;
