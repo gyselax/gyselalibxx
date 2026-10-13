@@ -8,7 +8,7 @@ spack:
     - googletest@1.17 +gmock
     - kokkos@5.1 ~openmp +cuda +cuda_constexpr cuda_arch=90
     - kokkos-kernels@5.1 ~shared
-    - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
+    - kokkos-tools@5.2
     - koliop@0.2
     - lapack
     - mpi
@@ -26,7 +26,7 @@ spack:
     - py-gvec@1.4
     - py-h5py@3.16
     - py-imageio@2.37
-    - py-matplotlib@3.11 ^freetype@2.14.1
+    - py-matplotlib@3.11
     - py-netcdf4@1.7 +mpi
     - py-numpy@2.4
     - py-pyyaml@6.0
@@ -42,9 +42,9 @@ spack:
   repos:
     patches:
       git: https://github.com/gyselax/spack.git
-      branch: releases/v2026.06
+      branch: releases/v2026.10
     builtin:
-      branch: releases/v2026.06
+      branch: releases/v2026.10
   concretizer:
     reuse: false
     unify: true
@@ -54,6 +54,9 @@ spack:
         read: group
         write: group
       variants: ~fortran ~mpi
+    arrow:
+      prefer:
+        - '~mimalloc'
     cuda:
       buildable: false
       externals:
@@ -84,7 +87,9 @@ spack:
       - spec: openmpi@4.1.5+cuda+cxx~cxx_exceptions~java~memchecker+pmi~rocm+static~wrapper-rpath fabrics=ucx schedulers=none
         prefix: /usr/local/openmpi-4.1.5/gpu-ext
     py-dask:
-      prefer: ['~dataframe']
+      prefer:
+        - '~dataframe'
     py-pandas:
-      prefer: ['~performance']
+      prefer:
+        - '~performance'
   view: false
