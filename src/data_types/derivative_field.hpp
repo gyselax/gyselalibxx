@@ -299,7 +299,8 @@ public:
      */
     template <class OElementType>
     KOKKOS_FUNCTION constexpr DerivField(
-            DerivField<OElementType, index_range_type, MemorySpace, LayoutStridedPolicy> const& field)
+            DerivField<OElementType, index_range_type, MemorySpace, LayoutStridedPolicy> const&
+                    field)
         : base_type(
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
