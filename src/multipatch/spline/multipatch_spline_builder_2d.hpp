@@ -317,11 +317,29 @@ public:
      * @return a MultipatchType collecting the index ranges typed on the B-splines dimensions
      * of the patches. 
      */
-    MultipatchIdxRangeBS const spline_idx_ranges(MultipatchIdxRange idx_ranges) const
+    MultipatchIdxRangeBS const spline_idx_ranges() const
     {
         return MultipatchIdxRangeBS(
+                std::get<BuilderOnPatch<Patches> const&>(m_builders).spline_domain()...);
+    };
+
+    /**
+     * @brief Get a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
+     * These index ranges are adapted to allocate splines on the multi-patch domain. 
+     * @param[in] idx_ranges MultipatchType collecting the index ranges on the grids of the patches. 
+     * @return a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
+     */
+    template <
+            template <typename P>
+            class BatchedIdxRangeBSOnPatch,
+            template <typename P>
+            class BatchedIdxRangeOnPatch>
+    MultipatchType<BatchedIdxRangeBSOnPatch, Patches...> const batched_spline_idx_ranges(
+            MultipatchType<BatchedIdxRangeOnPatch, Patches...> idx_ranges) const
+    {
+        return MultipatchType<BatchedIdxRangeBSOnPatch, Patches...>(
                 std::get<BuilderOnPatch<Patches> const&>(m_builders)
-                        .spline_domain(idx_ranges.template get<Patches>())...);
+                        .batched_spline_domain(idx_ranges.template get<Patches>())...);
     };
 
 private:
