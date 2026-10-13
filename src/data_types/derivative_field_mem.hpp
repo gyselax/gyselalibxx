@@ -253,7 +253,7 @@ private:
 
     /// @brief Free the internal pointer that is saved in internal_fields at the index ArrayIndex.
     template <std::size_t ArrayIndex>
-    static void free_ptr(ElementType* const ptr, allocator_type allocator)
+    void free_ptr(ElementType* const ptr, allocator_type allocator)
     {
         std::size_t alloc_size(((this->get_mdspan_size<DDims, ArrayIndex>()) * ...));
         allocator.deallocate(ptr, alloc_size);
@@ -280,8 +280,8 @@ public:
             std::string const& label,
             physical_idx_range_type val_idx_range,
             ddc::StridedDiscreteDomain<
-                    DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
-        : DerivFieldMem(label, allocator_type(), val_idx_range, m_deriv_idx_range...)
+                    DerivDoms>... deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
+        : DerivFieldMem(label, allocator_type(), val_idx_range, deriv_idx_range...)
     {
     }
 
@@ -290,8 +290,8 @@ public:
     DerivFieldMem(
             physical_idx_range_type val_idx_range,
             ddc::StridedDiscreteDomain<
-                    DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
-        : DerivFieldMem("no-label", val_idx_range, m_deriv_idx_range...)
+                    DerivDoms>... deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
+        : DerivFieldMem("no-label", val_idx_range, deriv_idx_range...)
     {
     }
 
