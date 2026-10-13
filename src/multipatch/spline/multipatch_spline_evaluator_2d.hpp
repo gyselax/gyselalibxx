@@ -758,7 +758,8 @@ private:
         } else if constexpr (NDims == 2) {
             return Idx<DerivDims...>(0, 0);
         } else {
-            Kokkos::abort("Derivative order must only be on the dimensions the patches.");
+            Kokkos::abort( // cppcheck-suppress missingReturn
+                    "Derivative order must only be on the dimensions the patches.");
         }
     }
 };
