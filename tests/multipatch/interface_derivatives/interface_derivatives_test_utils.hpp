@@ -78,4 +78,3 @@ void append_reverse(
         points_global.push_back(CoordTypeG {double(min + max - points_patch[n_pt - 1 - i])});
     }
 }
-
