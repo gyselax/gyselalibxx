@@ -819,11 +819,13 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
             = ddc::discrete_space<BSplinesTheta>()
                       .eval_basis_and_n_derivs(derivs_theta, ddc::select<Theta>(x), n_derivs_theta);
 
-    Idx<BSplinesR, BSplinesTheta> idx_front(jmin_r, jmin_theta);
+    // The index of the first b-spline element in the values array. This is not (jmin_r, jmin_theta)
+    // near the singular point so it must be obtained from eval_from_1d_values.
+    Idx<BSplinesR, BSplinesTheta> idx_front;
 
     for (int i_deriv_r(0); i_deriv_r <= n_derivs_r; ++i_deriv_r) {
         for (int i_deriv_theta(0); i_deriv_theta <= n_derivs_theta; ++i_deriv_theta) {
-            eval_from_1d_values(
+            idx_front = eval_from_1d_values(
                     Kokkos::submdspan(
                             singular_values_and_derivs,
                             Kokkos::full_extent,
