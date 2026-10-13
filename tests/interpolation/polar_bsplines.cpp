@@ -208,3 +208,84 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     }
 }
 
+TYPED_TEST(PolarBsplineFixture, BasisAndNDerivs)
+{
+    using R = typename TestFixture::R;
+    using Theta = typename TestFixture::Theta;
+    using PolarCoord = Coord<R, Theta>;
+    using BSplinesR = typename TestFixture::BSplinesR;
+    using BSplinesTheta = typename TestFixture::BSplinesTheta;
+    using BSplines = typename TestFixture::BSplines;
+
+    Coord<R> const r0 = TestFixture::r0;
+    Coord<R> const rN = TestFixture::rN;
+    Coord<Theta> const p0 = TestFixture::p0;
+    Coord<Theta> const pN = TestFixture::pN;
+
+    std::size_t constexpr nr = BSplinesR::degree() + 1;
+    std::size_t constexpr ntheta = BSplinesTheta::degree() + 1;
+    std::size_t constexpr n_singular = BSplines::n_singular_basis();
+    int constexpr n_derivs_r = BSplinesR::degree();
+    int constexpr n_derivs_theta = BSplinesTheta::degree();
+
+    std::size_t const n_test_points = 20;
+    double const dr = (rN - r0) / n_test_points;
+    double const dp = (pN - p0) / n_test_points;
+
+    for (std::size_t i(0); i < n_test_points; ++i) {
+        for (std::size_t j(0); j < n_test_points; ++j) {
+            PolarCoord const test_point(r0 + i * dr, p0 + j * dp);
+
+            std::array<double, n_singular * nr * ntheta> singular_data;
+            DSpan3D singular_vals_and_derivs(
+                    singular_data.data(),
+                    n_singular,
+                    n_derivs_r + 1,
+                    n_derivs_theta + 1);
+            std::array<double, nr * ntheta * nr * ntheta> data;
+            DSpan4D vals_and_derivs(data.data(), nr, ntheta, n_derivs_r + 1, n_derivs_theta + 1);
+            Idx<BSplinesR, BSplinesTheta> idx_front
+                    = ddc::discrete_space<BSplines>().eval_basis_and_n_derivs(
+                            singular_vals_and_derivs,
+                            vals_and_derivs,
+                            test_point,
+                            n_derivs_r,
+                            n_derivs_theta);
+
+            for (int a(0); a <= n_derivs_r; ++a) {
+                for (int b(0); b <= n_derivs_theta; ++b) {
+                    std::array<double, n_singular> singular_ref_data;
+                    DSpan1D singular_ref(singular_ref_data.data(), n_singular);
+                    std::array<double, nr * ntheta> ref_data;
+                    DSpan2D ref(ref_data.data(), nr, ntheta);
+                    Idx<BSplinesR, BSplinesTheta> idx_front_ref;
+                    if (a == 0 && b == 0) {
+                        idx_front_ref = ddc::discrete_space<BSplines>()
+                                                .eval_basis(singular_ref, ref, test_point);
+                    } else {
+                        idx_front_ref = ddc::discrete_space<BSplines>().eval_deriv(
+                                singular_ref,
+                                ref,
+                                test_point,
+                                Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(a, b));
+                    }
+                    EXPECT_EQ(idx_front, idx_front_ref);
+                    for (std::size_t k(0); k < n_singular; ++k) {
+                        EXPECT_NEAR(
+                                singular_vals_and_derivs(k, a, b),
+                                singular_ref(k),
+                                1e-12 * (1.0 + std::fabs(singular_ref(k))));
+                    }
+                    for (std::size_t k(0); k < nr; ++k) {
+                        for (std::size_t l(0); l < ntheta; ++l) {
+                            EXPECT_NEAR(
+                                    vals_and_derivs(k, l, a, b),
+                                    ref(k, l),
+                                    1e-12 * (1.0 + std::fabs(ref(k, l))));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
