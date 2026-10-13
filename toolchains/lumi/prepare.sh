@@ -6,20 +6,13 @@ if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
     return 1
 fi
 
-GYSELA_SPACK_GROUP="project_465002992"
-
-if [[ "$(id -gn)" != "${GYSELA_SPACK_GROUP}" ]]; then
-    echo "Primary group must be '${GYSELA_SPACK_GROUP}'!" >&2
-    echo "First run 'newgrp ${GYSELA_SPACK_GROUP}'" >&2
-    exit 1
-fi
-
 set -eu
 
 module purge
 
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 
+GYSELA_SPACK_GROUP="project_465002992"
 GYSELA_SPACK_VERSION="1.2.2"
 export SPACK_PREFIX=/scratch/project_465002992/gysela-spack-${GYSELA_SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=true
@@ -28,7 +21,6 @@ export PYTHONDONTWRITEBYTECODE=True
 if [ ! -d "${SPACK_PREFIX}" ]; then
     mkdir --parents "${SPACK_PREFIX}"
     chmod g+s "${SPACK_PREFIX}"
-    setfacl --modify d:g::rwX "${SPACK_PREFIX}"
     git clone --branch v${GYSELA_SPACK_VERSION} --depth 1 https://github.com/spack/spack.git "${SPACK_PREFIX}"
 fi
 
@@ -50,3 +42,7 @@ for arch in mi250; do
     spack install --jobs 128
     spack env deactivate
 done
+
+find "${SPACK_PREFIX}" -user "${USER}" \
+    -exec chgrp "${GYSELA_SPACK_GROUP}" {} + \
+    -exec chmod g+rwX {} +
