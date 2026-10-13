@@ -10,7 +10,7 @@ spack:
     - 'googletest@1.17 +gmock'
     - 'kokkos@5.1 +openmp'
     - 'kokkos-kernels@5.1'
-    - 'kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop'
+    - 'kokkos-tools@5.2'
     - 'koliop@0.2'
     - 'lapack'
     - 'mpi'
@@ -29,7 +29,7 @@ spack:
     - 'py-gvec@1.4'
     - 'py-h5py@3.16'
     - 'py-imageio@2.37'
-    - 'py-matplotlib@3.11 ^freetype@2.14.1'
+    - 'py-matplotlib@3.11'
     - 'py-netcdf4@1.7 +mpi'
     - 'py-numpy@2.4'
     - 'py-pyyaml@6.0'
@@ -43,11 +43,11 @@ spack:
   repos:
     patches:
       git: https://github.com/gyselax/spack.git
-      branch: releases/v2026.06
-      destination: $spack/var/spack/repos/patches-v2026.06
+      branch: releases/v2026.10
+      destination: $spack/var/spack/repos/patches-v2026.10
     builtin:
-      branch: releases/v2026.06
-      destination: $spack/var/spack/repos/builtin-v2026.06
+      branch: releases/v2026.10
+      destination: $spack/var/spack/repos/builtin-v2026.10
   concretizer:
     reuse: false
     unify: true
@@ -62,6 +62,9 @@ spack:
         write: group
       require: ~cuda
       variants: ~fortran ~mpi +openmp
+    arrow:
+      prefer:
+        - '~mimalloc'
     c:
       require: gcc@13
     cxx:
@@ -73,6 +76,8 @@ spack:
     mpi:
       require: openmpi@5.0 ~cuda
     py-dask:
-      prefer: ['~dataframe']
+      prefer:
+        - '~dataframe'
     py-pandas:
-      prefer: ['~performance']
+      prefer:
+        - '~performance'
