@@ -313,7 +313,6 @@ public:
      * @brief Get a MultipatchType collecting the index ranges typed on the B-splines dimensions
      * of the patches. 
      * These index ranges are adapted to allocate splines on the multi-patch domain. 
-     * @param[in] idx_ranges MultipatchType collecting the index ranges on the grids of the patches. 
      * @return a MultipatchType collecting the index ranges typed on the B-splines dimensions
      * of the patches. 
      */
