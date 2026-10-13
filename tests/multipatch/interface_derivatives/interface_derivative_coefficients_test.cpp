@@ -963,3 +963,136 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
                 idx_convertor_12);
     }
 }
+
+
+// Check get_approx_cross_deriv().
+TYPED_TEST(InterfaceDerivCoeffsFixture, GetAppoxCrossDeriv)
+{
+    // Get parameters of the test.
+    constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
+    using Edge1 = typename TestFixture::Edge1;
+    using Edge2 = typename TestFixture::Edge2;
+    using Interface_1_2 = typename TestFixture::Interface_1_2;
+
+    // Define EdgeTransformation operator.
+    using GridPar2 = std::conditional_t<
+            (std::is_same_v<Edge2, SouthEdge2>),
+            typename Patch2::Grid1,
+            typename Patch2::Grid2>;
+    IdxRange<GridPar2> idx_range_par2;
+    if constexpr (std::is_same_v<Edge2, SouthEdge2>) {
+        idx_range_par2 = TestFixture::idx_range_eta2;
+    } else {
+        idx_range_par2 = TestFixture::idx_range_xi2;
+    }
+
+    EdgeTransformation<Interface_1_2>
+            idx_convertor_12(TestFixture::idx_range_theta1, idx_range_par2);
+
+    // Initialise functions values ===============================================================
+    // --- patch 1
+    host_t<DFieldMem<Patch1::IdxRange12>> deriv_theta_1_alloc(TestFixture::idx_range_rtheta1);
+    host_t<DField<Patch1::IdxRange12>> deriv_theta_1 = get_field(deriv_theta_1_alloc);
+
+    // --- patch 2
+    host_t<DFieldMem<Patch2::IdxRange12>> deriv_theta_2_alloc(TestFixture::idx_range_etaxi2);
+    host_t<DField<Patch2::IdxRange12>> deriv_theta_2 = get_field(deriv_theta_2_alloc);
+
+    host_t<DFieldMem<Patch2::IdxRange12>> deriv_theta_2_changed_sign_alloc(
+            TestFixture::idx_range_etaxi2);
+    host_t<DField<Patch2::IdxRange12>> deriv_theta_2_changed_sign
+            = get_field(deriv_theta_2_changed_sign_alloc);
+
+    // Fill in with the correct value.
+    // --- patch 1
+    if constexpr (std::is_same_v<Edge1, EastEdge1>) {
+        // Same orientation than the equivalent global domain.
+        initialise_2D_function<Patch1::Grid1, Patch1::Grid2>(deriv_theta_1);
+    } else {
+        // Different orientation: global: ↑→ | local: ←↓
+        ddc::host_for_each(
+                get_idx_range(deriv_theta_1),
+                [&](Idx<Patch1::Grid1, Patch1::Grid2> idx) {
+                    // Get the coordinate on the equivalent global domain.
+                    double const rg
+                            = TestFixture::r1_max - ddc::coordinate(Idx<Patch1::Grid1>(idx));
+                    double const thetag
+                            = TestFixture::theta1_max - ddc::coordinate(Idx<Patch1::Grid2>(idx));
+                    deriv_theta_1(idx) = -rg * (3. - rg) * Kokkos::sin(thetag);
+                });
+    }
+
+    // --- patch 2
+    if constexpr (std::is_same_v<Edge2, WestEdge2>) {
+        // Same orientation than the equivalent global domain.
+        initialise_2D_function<Patch2::Grid1, Patch2::Grid2>(deriv_theta_2);
+    } else if (std::is_same_v<Edge2, EastEdge2>) {
+        // Different orientation: global: ↑→ | local: ←↓
+        ddc::host_for_each(
+                get_idx_range(deriv_theta_2),
+                [&](Idx<Patch2::Grid1, Patch2::Grid2> idx) {
+                    // Get the coordinate on the equivalent global domain.
+                    double const rg = TestFixture::eta2_max
+                                      - ddc::coordinate(Idx<Patch2::Grid1>(idx))
+                                      + TestFixture::r1_max;
+                    double const thetag
+                            = TestFixture::xi2_max - ddc::coordinate(Idx<Patch2::Grid2>(idx));
+                    deriv_theta_2(idx) = -rg * (3. - rg) * Kokkos::sin(thetag);
+                });
+    } else if (std::is_same_v<Edge2, SouthEdge2>) {
+        // Different orientation: global: ↑→ | local: ↓→
+        ddc::host_for_each(
+                get_idx_range(deriv_theta_2),
+                [&](Idx<Patch2::Grid1, Patch2::Grid2> idx) {
+                    // Get the coordinate on the equivalent global domain.
+                    double const rg = double(ddc::coordinate(Idx<Patch2::Grid2>(idx)))
+                                      + TestFixture::r1_max;
+                    double const thetag = double(
+                            (TestFixture::eta2_max - ddc::coordinate(Idx<Patch2::Grid1>(idx))));
+                    deriv_theta_2(idx) = -rg * (3. - rg) * Kokkos::sin(thetag);
+                });
+    }
+
+    ddc::host_for_each(get_idx_range(deriv_theta_2), [&](Patch2::Idx12 idx) {
+        deriv_theta_2_changed_sign(idx) = -deriv_theta_2(idx);
+    });
+
+    // Check get_approx_cross_deriv() ============================================================
+    InterfaceDerivCoeffs<Interface_1_2> const deriv_coeffs(
+            TestFixture::idx_range_rtheta1,
+            TestFixture::idx_range_etaxi2,
+            Interpolation_v,
+            Interpolation_v);
+
+    constexpr bool has_matching_deriv_orientation = Interface_1_2::orientations_agree;
+
+    ddc::host_for_each(TestFixture::idx_range_theta1, [&](Patch1::Idx2 const& idx2_1) {
+        Idx<GridPar2> idx2_2 = idx_convertor_12(idx2_1);
+
+        double const cross_deriv_interface_approx = deriv_coeffs.get_approx_cross_deriv(
+                get_const_field(deriv_theta_1[idx2_1]),
+                get_const_field(deriv_theta_2[idx2_2]));
+
+        double const cross_deriv_interface_approx_21 = deriv_coeffs.get_approx_cross_deriv(
+                get_const_field(deriv_theta_2[idx2_2]),
+                get_const_field(deriv_theta_1[idx2_1]));
+
+        // Check that the input order does not affect the result.
+        EXPECT_NEAR(cross_deriv_interface_approx, cross_deriv_interface_approx_21, 1e-15);
+
+        // Cross-derivatives computed with get_approx_deriv().
+        double deriv_interface_approx;
+        if constexpr (has_matching_deriv_orientation) {
+            deriv_interface_approx = deriv_coeffs.get_approx_deriv(
+                    get_const_field(deriv_theta_1[idx2_1]),
+                    get_const_field(deriv_theta_2[idx2_2]));
+        } else {
+            deriv_interface_approx = deriv_coeffs.get_approx_deriv(
+                    get_const_field(deriv_theta_1[idx2_1]),
+                    get_const_field(deriv_theta_2_changed_sign[idx2_2]));
+        }
+
+        // Check that get_approx_cross_deriv() agrees with get_approx_deriv() when the correct sign is given.
+        EXPECT_NEAR(cross_deriv_interface_approx, deriv_interface_approx, 1e-15);
+    });
+}
