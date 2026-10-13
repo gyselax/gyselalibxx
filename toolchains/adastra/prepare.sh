@@ -44,6 +44,18 @@ for arch in genoa mi250 mi300; do
     spack env deactivate
 done
 
+env="ariel"
+env_file="${TOOLCHAIN_ROOT_DIRECTORY}/mi250/ariel.yaml"
+spack env remove --yes-to-all "${env}"
+spack env create "${env}" "${env_file}"
+
+spack env activate "${env}"
+spack repo update
+spack concretize --quiet
+spack spec --install-status --namespaces
+spack install --jobs "${GYSELA_SPACK_JOBS}"
+spack env deactivate
+
 find "${GYSELA_SPACK_PREFIX}" -user "${USER}" \
     -exec chgrp "${GYSELA_SPACK_GROUP}" {} + \
     -exec chmod g+rwX {} +
