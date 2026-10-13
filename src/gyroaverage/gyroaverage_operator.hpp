@@ -48,8 +48,12 @@ class GyroAverageOperator
     using DFieldMemInterpCoeffs = DFieldMem<IdxRangeInterpCoeffs>;
     using DFieldInterpCoeffs = DField<IdxRangeInterpCoeffs>;
 
-    /// Types for the arrays storing the coefficients
+public:
+    /// @brief Dimension indexing the sample points (must be public to comply with nvcc rules).
     struct CoeffList;
+
+private:
+    /// Types for the arrays storing the coefficients
     using IdxRangeList = IdxRange<CoeffList>;
     using IdxList = typename IdxRangeList::discrete_element_type;
     using IdxRangeGyroCoeffs = detail::combine_t<IdxRangeGyroSpace, IdxRangeList>;
@@ -93,14 +97,14 @@ public:
      *
      * @param[in] idx_range_params The index range for the parameter sets.
      * @param[in] idx_range_space The index range for the interpolation space.
-     * @param[in] nb_gyro_points The number of sample points in the gyro-trajectory.
+     * @param[in] nb_gyro_points The number of sample points on the gyro-trajectory (default: 8).
      *
      * @return A tuple containing fields for the coordinates and their weights.
      */
     static std::tuple<GyroCoeffsCoordsMem, GyroCoeffsWeightsMem> build_empty_coefficients(
             IdxRangeParams idx_range_params,
             IdxRangeInterpSpace idx_range_space,
-            size_t const nb_gyro_points)
+            size_t const nb_gyro_points = 8)
     {
         IdxRangeGyroSpace idx_range_gyrospace(idx_range_params, idx_range_space);
 
@@ -125,7 +129,7 @@ public:
      * @param[in] transform_from_cartesian Transformation from Cartesian to mesh coordinates.
      * @param[in] larmor_factor_params Factor of the Larmor radius depending on the parameter sets.
      * @param[in] larmor_factor_space Factor of the Larmor radius depending on space.
-     * @param[in] nb_gyro_points Number of sample points in the gyro-trajectory.
+     * @param[in] nb_gyro_points Number of sample points on the gyro-trajectory (default: 8).
      *
      * @return A tuple containing the point coordinates and their weights that were computed.
      */
@@ -134,7 +138,7 @@ public:
             TransformFromCartesian transform_from_cartesian,
             DField<IdxRangeParams> const larmor_factor_params,
             DField<IdxRangeInterpSpace> const larmor_factor_space,
-            size_t const nb_gyro_points)
+            size_t const nb_gyro_points = 8)
     {
         using CoordCartesian = typename TransformFromCartesian::CoordArg;
 
@@ -142,7 +146,7 @@ public:
         IdxRangeInterpSpace idx_range_space = get_idx_range(larmor_factor_space);
 
         auto [gyrocoeffs_coords_alloc, gyrocoeffs_weights_alloc]
-                = build_empty_coefficients(idx_range_params, idx_range_space, 8);
+                = build_empty_coefficients(idx_range_params, idx_range_space, nb_gyro_points);
         GyroCoeffsCoords gyrocoeffs_coords = get_field(gyrocoeffs_coords_alloc);
         GyroCoeffsWeights gyrocoeffs_weights = get_field(gyrocoeffs_weights_alloc);
 
@@ -244,7 +248,7 @@ public:
         m_builder(scoef, get_const_field(func));
         InterpSpaceEvaluatorType evaluator = m_evaluator;
 
-        double const nb_gyro_points_proxy = m_nb_gyro_points;
+        std::size_t const nb_gyro_points_proxy = m_nb_gyro_points;
         GyroCoeffsCoords const gyrocoeffs_coords_proxy = m_gyrocoeffs_coords;
         GyroCoeffsWeights const gyrocoeffs_weights_proxy = m_gyrocoeffs_weights;
         IdxList const idx_gyro0(get_idx_range(gyrocoeffs_coords_proxy).front());
