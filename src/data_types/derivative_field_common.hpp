@@ -133,7 +133,7 @@ protected:
     friend class DerivField;
 
 protected:
-    /// @brief  Label of the object. 
+    /// @brief  Label of the object.
     std::string m_label;
 
     /** @brief The internal fields describing the values and derivatives.
