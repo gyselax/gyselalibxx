@@ -136,6 +136,11 @@ packages:
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocprofiler@6.3.3
+  rocprofiler-sdk:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocprofiler-sdk@6.3.3
   rocrand:
     buildable: false
     externals:
