@@ -274,7 +274,7 @@ public:
      *
      * @param label The label of the object. 
      * @param val_idx_range The index range on which the values of the field are defined.
-     * @param m_deriv_idx_range The 1D sub-index ranges on which the derivatives of the field are defined.
+     * @param deriv_idx_range The 1D sub-index ranges on which the derivatives of the field are defined.
      */
     template <class... DerivDoms>
     DerivFieldMem(
