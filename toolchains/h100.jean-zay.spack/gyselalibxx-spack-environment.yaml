@@ -4,7 +4,7 @@ spack:
     - cmake@3.31
     - 'ddc@0.16 +fft +pdi +splines'
     - ginkgo@1.11 ~openmp +cuda cuda_arch=90
-    - gmgpolar@2.3
+    - gmgpolar@2.4
     - googletest@1.17 +gmock
     - kokkos@5.1 ~openmp +cuda +cuda_constexpr cuda_arch=90
     - kokkos-kernels@5.1 ~shared
