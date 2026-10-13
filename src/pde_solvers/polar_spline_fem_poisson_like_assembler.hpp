@@ -106,39 +106,45 @@ get_polar_bspline_vals_and_derivs(
 {
     using R = PolarBSplinesRTheta::R;
     using Theta = PolarBSplinesRTheta::Theta;
-    std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
     using BSplinesR = PolarBSplinesRTheta::BSplinesR_tag;
     using BSplinesTheta = PolarBSplinesRTheta::BSplinesTheta_tag;
+    constexpr std::size_t n_singular = PolarBSplinesRTheta::n_singular_basis();
     constexpr int n_non_zero_bases_r = BSplinesR::degree() + 1;
-    constexpr int n_non_zero_bases_theta = BSplinesR::degree() + 1;
-    std::array<double, n_non_zero_bases_r * n_non_zero_bases_theta> data;
-    // Values of the polar basis splines around the singular point
+    constexpr int n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
+    // The maximum derivative order in each direction
+    constexpr std::size_t n_derivs = calculate_derivs ? 1 : 0;
+    constexpr std::size_t n_deriv_combinations = (n_derivs + 1) * (n_derivs + 1);
+    std::array<double, n_singular * n_deriv_combinations> singular_data;
+    std::array<double, n_non_zero_bases_r * n_non_zero_bases_theta * n_deriv_combinations> data;
+    // Values and derivatives of the polar basis splines around the singular point
     // at a given coordinate
-    DSpan1D singular_vals(singular_data.data(), PolarBSplinesRTheta::n_singular_basis());
-    // Values of the polar basis splines, that do not cover the singular point,
+    DSpan3D singular_vals(singular_data.data(), n_singular, n_derivs + 1, n_derivs + 1);
+    // Values and derivatives of the polar basis splines, that do not cover the singular point,
     // at a given coordinate
-    DSpan2D vals(data.data(), n_non_zero_bases_r, n_non_zero_bases_theta);
+    DSpan4D
+            vals(data.data(),
+                 n_non_zero_bases_r,
+                 n_non_zero_bases_theta,
+                 n_derivs + 1,
+                 n_derivs + 1);
 
-    auto& polar_bspl = ddc::discrete_space<PolarBSplinesRTheta>();
+    Idx<BSplinesR, BSplinesTheta> idx_front
+            = ddc::discrete_space<PolarBSplinesRTheta>()
+                      .eval_basis_and_n_derivs(singular_vals, vals, coord, n_derivs, n_derivs);
 
-    if (idx < Idx<PolarBSplinesRTheta>(PolarBSplinesRTheta::n_singular_basis())) {
+    if (idx < Idx<PolarBSplinesRTheta>(n_singular)) {
         IdxStep<PolarBSplinesRTheta> offset
                 = idx
                   - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>().front();
-        polar_bspl.eval_basis(singular_vals, vals, coord);
-        val = singular_vals[offset.value()];
+        val = singular_vals(offset.value(), 0, 0);
         if constexpr (calculate_derivs) {
-            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
-            double r_deriv = singular_vals[offset.value()];
-            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
-            double theta_deriv = singular_vals[offset.value()];
-            DVector<typename R::Dual, typename Theta::Dual> derivs(r_deriv, theta_deriv);
-            return derivs;
+            return DVector<typename R::Dual, typename Theta::Dual>(
+                    singular_vals(offset.value(), 1, 0),
+                    singular_vals(offset.value(), 0, 1));
         } else {
             return;
         }
     } else {
-        Idx<BSplinesR, BSplinesTheta> idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
         IdxStep<BSplinesR, BSplinesTheta> offset
                 = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
         IdxStep<BSplinesR> ir(offset);
@@ -150,14 +156,11 @@ get_polar_bspline_vals_and_derivs(
         assert(0 <= itheta);
         assert(itheta < n_non_zero_bases_theta);
 
-        val = vals(ir, itheta);
+        val = vals(ir.value(), itheta.value(), 0, 0);
         if constexpr (calculate_derivs) {
-            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
-            double r_deriv = vals(ir, itheta);
-            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
-            double theta_deriv = vals(ir, itheta);
-            DVector<typename R::Dual, typename Theta::Dual> derivs(r_deriv, theta_deriv);
-            return derivs;
+            return DVector<typename R::Dual, typename Theta::Dual>(
+                    vals(ir.value(), itheta.value(), 1, 0),
+                    vals(ir.value(), itheta.value(), 0, 1));
         } else {
             return;
         }
