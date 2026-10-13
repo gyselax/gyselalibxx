@@ -133,6 +133,8 @@ protected:
     friend class DerivField;
 
 protected:
+    std::string m_label;
+
     /** @brief The internal fields describing the values and derivatives.
      *
      * The fields which contain the values have different index ranges to the fields containing derivatives
@@ -446,15 +448,32 @@ protected:
      *              of the function are defined.
      */
     KOKKOS_FUNCTION DerivFieldCommon(
+            std::string const& label,
             physical_idx_range_type physical_idx_range,
             discrete_deriv_idx_range_type deriv_idx_range,
             ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
                     cross_derivative_idx_range)
-        : m_physical_idx_range(physical_idx_range)
+        : m_label(label)
+        , m_physical_idx_range(physical_idx_range)
         , m_deriv_idx_range(deriv_idx_range)
         , m_cross_derivative_idx_range(cross_derivative_idx_range)
     {
     }
+
+    /// Version without a label
+    KOKKOS_FUNCTION DerivFieldCommon(
+            physical_idx_range_type physical_idx_range,
+            discrete_deriv_idx_range_type deriv_idx_range,
+            ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
+                    cross_derivative_idx_range)
+        : DerivFieldCommon(
+                "no-label",
+                physical_idx_range,
+                deriv_idx_range,
+                cross_derivative_idx_range)
+    {
+    }
+
 
 public:
     KOKKOS_DEFAULTED_FUNCTION ~DerivFieldCommon() = default;

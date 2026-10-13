@@ -272,10 +272,21 @@ public:
      */
     template <class... DerivDoms>
     DerivFieldMem(
+            std::string const& label,
             physical_idx_range_type val_idx_range,
             ddc::StridedDiscreteDomain<
                     DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
-        : DerivFieldMem(allocator_type(), val_idx_range, m_deriv_idx_range...)
+        : DerivFieldMem(label, allocator_type(), val_idx_range, m_deriv_idx_range...)
+    {
+    }
+
+    /// Version without a label
+    template <class... DerivDoms>
+    DerivFieldMem(
+            physical_idx_range_type val_idx_range,
+            ddc::StridedDiscreteDomain<
+                    DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
+        : DerivFieldMem("no-label", val_idx_range, m_deriv_idx_range...)
     {
     }
 
@@ -289,11 +300,13 @@ public:
      */
     template <class... DerivDoms>
     DerivFieldMem(
+            std::string const& label,
             allocator_type allocator,
             physical_idx_range_type val_idx_range,
             ddc::StridedDiscreteDomain<
                     DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
         : base_type(
+                label,
                 val_idx_range,
                 get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
                 ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>(
@@ -304,6 +317,17 @@ public:
         initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
 
+    /// Version without a label
+    template <class... DerivDoms>
+    DerivFieldMem(
+            allocator_type allocator,
+            physical_idx_range_type val_idx_range,
+            ddc::StridedDiscreteDomain<
+                    DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
+        : DerivFieldMem("no-label", allocator, val_idx_range, m_deriv_idx_range...)
+    {
+    }
+
     /**
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
      * the provided index ranges. The derivatives are assumed to be found at the boundaries.
@@ -311,13 +335,23 @@ public:
      * @param allocator The object which allocates the memory on the CPU or GPU.
      * @param val_idx_range The index range on which the values of the field are defined.
      */
-    DerivFieldMem(allocator_type allocator, physical_idx_range_type val_idx_range)
+    DerivFieldMem(
+            std::string const& label,
+            allocator_type allocator,
+            physical_idx_range_type val_idx_range)
         : base_type(
+                label,
                 val_idx_range,
                 get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
                 detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
     {
         initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
+    }
+
+    /// Version without a label
+    DerivFieldMem(allocator_type allocator, physical_idx_range_type val_idx_range)
+        : DerivFieldMem("no-label", allocator, val_idx_range)
+    {
     }
 
     /**
@@ -326,10 +360,32 @@ public:
      *
      * @param val_idx_range The index range on which the values of the field are defined.
      */
-    explicit DerivFieldMem(physical_idx_range_type val_idx_range)
-        : DerivFieldMem(allocator_type(), val_idx_range)
+    explicit DerivFieldMem(std::string const& label, physical_idx_range_type val_idx_range)
+        : DerivFieldMem(label, allocator_type(), val_idx_range)
     {
     }
+
+    /// Version without a label
+    explicit DerivFieldMem(physical_idx_range_type val_idx_range)
+        : DerivFieldMem("no-label", val_idx_range)
+    {
+    }
+
+
+    /** Constructs a new DerivFieldMem by move.
+     * @param other the DerivFieldMem to move.
+     */
+    DerivFieldMem(DerivFieldMem&& other) noexcept
+        : base_type(std::move(static_cast<base_type&>(other)))
+        // : base_type(std::move(other))
+        // , m_allocator(std::move(other.m_allocator))
+        // , m_label(std::move(other.m_label))
+    {
+        // initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
+        // other.internal_fields.m_allocation_mdspan
+        //         = allocation_mdspan_type(nullptr, other.internal_fields.m_allocation_mdspan.mapping());
+    }
+
 
     /// Destructor, responsible to deallocate memory.
     ~DerivFieldMem()
@@ -483,6 +539,14 @@ public:
     span_type get_field()
     {
         return span_type(*this);
+    }
+
+    /** Returns the label of the DerivFieldMem.
+     * @return c-string
+     */
+    char const* label() const
+    {
+        return this->m_label.c_str();
     }
 
 private:
