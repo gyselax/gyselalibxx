@@ -14,17 +14,17 @@ TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}
 
 GYSELA_SPACK_GROUP="gysela"
 GYSELA_SPACK_VERSION="1.2.2"
-export SPACK_PREFIX=/data/gyselarunner/gysela-spack-${GYSELA_SPACK_VERSION}
+export GYSELA_SPACK_PREFIX=/data/gyselarunner/gysela-spack-${GYSELA_SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=true
 export PYTHONDONTWRITEBYTECODE=True
 
-if [ ! -d "${SPACK_PREFIX}" ]; then
-    mkdir --parents "${SPACK_PREFIX}"
-    chmod g+s "${SPACK_PREFIX}"
-    git clone --branch v${GYSELA_SPACK_VERSION} --depth 1 https://github.com/spack/spack.git "${SPACK_PREFIX}"
+if [ ! -d "${GYSELA_SPACK_PREFIX}" ]; then
+    mkdir --parents "${GYSELA_SPACK_PREFIX}"
+    chmod g+s "${GYSELA_SPACK_PREFIX}"
+    git clone --branch v${GYSELA_SPACK_VERSION} --depth 1 https://github.com/spack/spack.git "${GYSELA_SPACK_PREFIX}"
 fi
 
-. ${SPACK_PREFIX}/share/spack/setup-env.sh
+. ${GYSELA_SPACK_PREFIX}/share/spack/setup-env.sh
 
 for arch in v100 xeon; do
     env="gyselalibxx-${arch}"
@@ -43,6 +43,6 @@ for arch in v100 xeon; do
     spack env deactivate
 done
 
-find "${SPACK_PREFIX}" -user "${USER}" \
+find "${GYSELA_SPACK_PREFIX}" -user "${USER}" \
     -exec chgrp "${GYSELA_SPACK_GROUP}" {} + \
     -exec chmod g+rwX {} +
