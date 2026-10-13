@@ -97,6 +97,11 @@ packages:
     externals:
       - spec: rocfft@6.4.3
         prefix: /appl/lumi/SW/LUMI-25.09/G/EB/rocm/6.4.4
+  rocprofiler-sdk:
+    buildable: false
+    externals:
+      - spec: rocprofiler-sdk@6.4.3
+        prefix: /appl/lumi/SW/LUMI-25.09/G/EB/rocm/6.4.4
   hipsparse:
     buildable: false
     externals:
