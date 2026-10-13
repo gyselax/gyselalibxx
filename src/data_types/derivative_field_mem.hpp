@@ -226,10 +226,10 @@ private:
     /// @brief Make the internal mdspan that will be saved in internal_fields at the index ArrayIndex.
     template <std::size_t ArrayIndex>
     std::enable_if_t<std::is_constructible_v<mapping_type, extents_type>, internal_mdspan_type>
-    make_internal_mdspan(std::string const& label, allocator_type allocator)
+    make_internal_mdspan(std::string const& label_str, allocator_type allocator)
     {
         std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
-        element_type* ptr = allocator.allocate(label, alloc_size);
+        element_type* ptr = allocator.allocate(label_str, alloc_size);
 
         extents_type extents_r(get_mdspan_size<DDims, ArrayIndex>()...);
         mapping_type mapping_r(extents_r);
@@ -253,7 +253,7 @@ private:
 
     /// @brief Free the internal pointer that is saved in internal_fields at the index ArrayIndex.
     template <std::size_t ArrayIndex>
-    void free_ptr(ElementType* const ptr, allocator_type allocator)
+    static void free_ptr(ElementType* const ptr, allocator_type allocator)
     {
         std::size_t alloc_size(((this->get_mdspan_size<DDims, ArrayIndex>()) * ...));
         allocator.deallocate(ptr, alloc_size);
@@ -271,6 +271,7 @@ public:
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
      * the provided index ranges.
      *
+     * @param label The label of the object. 
      * @param val_idx_range The index range on which the values of the field are defined.
      * @param m_deriv_idx_range The 1D sub-index ranges on which the derivatives of the field are defined.
      */
@@ -298,6 +299,7 @@ public:
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
      * the provided index ranges.
      *
+     * @param label The label of the object. 
      * @param allocator The object which allocates the memory on the CPU or GPU.
      * @param val_idx_range The index range on which the values of the field are defined.
      * @param m_deriv_idx_range The 1D sub-index ranges on which the derivatives of the field are defined.
@@ -336,6 +338,7 @@ public:
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
      * the provided index ranges. The derivatives are assumed to be found at the boundaries.
      *
+     * @param label The label of the object. 
      * @param allocator The object which allocates the memory on the CPU or GPU.
      * @param val_idx_range The index range on which the values of the field are defined.
      */
@@ -362,6 +365,7 @@ public:
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
      * the provided index ranges. The derivatives are assumed to be found at the boundaries.
      *
+     * @param label The label of the object. 
      * @param val_idx_range The index range on which the values of the field are defined.
      */
     explicit DerivFieldMem(std::string const& label, physical_idx_range_type val_idx_range)
@@ -546,7 +550,7 @@ public:
     }
 
     /** Returns the label of the DerivFieldMem.
-     * @return c-string
+     * @return c-string.
      */
     char const* label() const
     {

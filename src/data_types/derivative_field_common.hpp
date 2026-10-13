@@ -133,6 +133,7 @@ protected:
     friend class DerivField;
 
 protected:
+    /// @brief  Label of the object. 
     std::string m_label;
 
     /** @brief The internal fields describing the values and derivatives.
@@ -442,6 +443,7 @@ protected:
     /**
      * @brief Protected constructor to be used by subclasses to initialise index ranges.
      *
+     * @param label Label of the object. 
      * @param physical_idx_range The index range on which the values of the function are defined.
      * @param deriv_idx_range The index range of the provided derivatives.
      * @param cross_derivative_idx_range The cross product of the index ranges on which the derivatives
