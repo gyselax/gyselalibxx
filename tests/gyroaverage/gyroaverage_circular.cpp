@@ -110,18 +110,19 @@ using DFieldRTheta = DField<IdxRangeRTheta>;
 using DFieldMuRTheta = DField<IdxRangeMuRTheta>;
 using DConstFieldRTheta = ConstField<double, IdxRangeRTheta>;
 
-template <typename Field2DType>
 void initialise(
-        Field2DType const& Rcoord,
-        Field2DType const& Zcoord,
-        Field2DType const& larmor_factor_space,
-        Field2DType const& A,
+        DFieldRTheta const& Rcoord,
+        DFieldRTheta const& Zcoord,
+        DFieldRTheta const& larmor_factor_space,
+        DFieldMu const& larmor_factor_params,
+        DFieldRTheta const& A,
         double const B0,
         double const R0,
         double const kx,
         double const ky)
 {
-    IdxRangeRTheta const rtheta_idx_range = get_idx_range(A);
+    IdxRangeRTheta const rtheta_idx_range = get_idx_range(larmor_factor_space);
+    IdxRangeMu const mu_idx_range = get_idx_range(larmor_factor_params);
 
     // Initialise R, Z and the spatial part of the Larmor radius
     ddc::parallel_for_each(
@@ -139,6 +140,20 @@ void initialise(
                 Zcoord(ir, itheta) = Z;
                 larmor_factor_space(ir, itheta) = Kokkos::sqrt(B0 / B);
             });
+
+    // Initialise the mu part of the Larmor radius
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            mu_idx_range,
+            KOKKOS_LAMBDA(IdxMu const imu) {
+                double const mu = ddc::coordinate(imu);
+                // Single species with mass and charge equal to 1
+                double const mass = 1.0;
+                double const charge = 1.0;
+                // rho = sqrt(2 mu / m_s) / q_s
+                larmor_factor_params(imu) = Kokkos::sqrt(2 * mu * mass) / Kokkos::fabs(charge);
+            });
+
 
     // Initialise A with Fourier mode
     ddc::parallel_for_each(
@@ -208,29 +223,26 @@ protected:
         m_A_alloc = DFieldMemRTheta(rtheta_mesh);
         m_A_gavg_alloc = DFieldMemMuRTheta(rthetamu_mesh);
 
-        // Initialise R, Z and the spatial part of the Larmor radius
+        // Corresponding fields
         DFieldRTheta Rcoord = get_field(m_Rcoord_alloc);
         DFieldRTheta Zcoord = get_field(m_Zcoord_alloc);
         DFieldRTheta larmor_factor_space = get_field(m_larmor_factor_space_alloc);
+        DFieldMu larmor_factor_params = get_field(m_larmor_factor_params_alloc);
+        DFieldRTheta A = get_field(m_A_alloc);
 
+        // Initialise data using kernels on the device
         m_kx = m_kperp * 1.0 / Kokkos::sqrt(2.0);
         m_ky = m_kx;
-        DFieldRTheta A = get_field(m_A_alloc);
-        initialise(Rcoord, Zcoord, larmor_factor_space, A, m_B0, m_R0, m_kx, m_ky);
-
-        // Initialise the mu part of the Larmor radius
-        DFieldMu larmor_factor_params = get_field(m_larmor_factor_params_alloc);
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                mu_domain,
-                KOKKOS_LAMBDA(IdxMu const imu) {
-                    double const mu = ddc::coordinate(imu);
-                    // Single species with mass and charge equal to 1
-                    double const mass = 1.0;
-                    double const charge = 1.0;
-                    // rho = sqrt(2 mu / m_s) / q_s
-                    larmor_factor_params(imu) = Kokkos::sqrt(2 * mu * mass) / Kokkos::fabs(charge);
-                });
+        initialise(
+                Rcoord,
+                Zcoord,
+                larmor_factor_space,
+                larmor_factor_params,
+                A,
+                m_B0,
+                m_R0,
+                m_kx,
+                m_ky);
     }
 
 protected:
@@ -347,7 +359,7 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
                                                 * std::cos(nb_gyro_points * phik) * sgn
                                         + cyl_bessel_j(2 * nb_gyro_points, kperprho)
                                                   * std::cos(2 * nb_gyro_points * phik));
-            EXPECT_NEAR(err_J0_num, err_J0_th, 5e-3);
+            EXPECT_NEAR(err_J0_num, err_J0_th, 1e-3);
         }
     });
 }
