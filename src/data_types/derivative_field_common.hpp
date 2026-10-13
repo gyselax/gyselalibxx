@@ -476,6 +476,17 @@ protected:
 
 
 public:
+    /** Constructs a new DerivFieldCommon by copy, yields a new view to the same data.
+     * @param other the DerivFieldCommon to copy.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(DerivFieldCommon const& other) = default;
+
+    /** Constructs a new DerivFieldCommon by move.
+     * @param other the DerivFieldCommon to move.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(
+            DerivFieldCommon&& other) noexcept = default;
+
     KOKKOS_DEFAULTED_FUNCTION ~DerivFieldCommon() = default;
 
     /**

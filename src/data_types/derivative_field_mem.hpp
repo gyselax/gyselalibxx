@@ -226,10 +226,10 @@ private:
     /// @brief Make the internal mdspan that will be saved in internal_fields at the index ArrayIndex.
     template <std::size_t ArrayIndex>
     std::enable_if_t<std::is_constructible_v<mapping_type, extents_type>, internal_mdspan_type>
-    make_internal_mdspan(allocator_type allocator)
+    make_internal_mdspan(std::string const& label, allocator_type allocator)
     {
         std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
-        element_type* ptr = allocator.allocate("", alloc_size);
+        element_type* ptr = allocator.allocate(label, alloc_size);
 
         extents_type extents_r(get_mdspan_size<DDims, ArrayIndex>()...);
         mapping_type mapping_r(extents_r);
@@ -242,9 +242,13 @@ private:
 
     /// @brief Initialise the chunks inside internal_fields.
     template <std::size_t... ArrayIndex>
-    void initialise_chunks(allocator_type allocator, std::index_sequence<ArrayIndex...>)
+    void initialise_chunks(
+            std::string const& label,
+            allocator_type allocator,
+            std::index_sequence<ArrayIndex...>)
     {
-        ((this->internal_fields[ArrayIndex] = make_internal_mdspan<ArrayIndex>(allocator)), ...);
+        ((this->internal_fields[ArrayIndex] = make_internal_mdspan<ArrayIndex>(label, allocator)),
+         ...);
     }
 
     /// @brief Free the internal pointer that is saved in internal_fields at the index ArrayIndex.
@@ -314,7 +318,7 @@ public:
     {
         static_assert(
                 ddc::type_seq_same_v<ddc::detail::TypeSeq<DerivDoms...>, physical_deriv_grids>);
-        initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
+        initialise_chunks(label, allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
 
     /// Version without a label
@@ -345,7 +349,7 @@ public:
                 get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
                 detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
     {
-        initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
+        initialise_chunks(label, allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
 
     /// Version without a label
@@ -377,11 +381,7 @@ public:
      */
     DerivFieldMem(DerivFieldMem&& other) noexcept
         : base_type(std::move(static_cast<base_type&>(other)))
-    // : base_type(std::move(other))
-    // , m_allocator(std::move(other.m_allocator))
-    // , m_label(std::move(other.m_label))
     {
-        // initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
         // other.internal_fields.m_allocation_mdspan
         //         = allocation_mdspan_type(nullptr, other.internal_fields.m_allocation_mdspan.mapping());
     }
