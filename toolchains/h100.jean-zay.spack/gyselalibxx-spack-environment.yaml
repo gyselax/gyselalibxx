@@ -76,6 +76,8 @@ spack:
               c: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/gcc
               cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/g++
               fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/gfortran
+    hdf5:
+      require: '+subfiling'
     kokkos-fft:
       require: 'host_backend=fftw-serial'
     lapack:

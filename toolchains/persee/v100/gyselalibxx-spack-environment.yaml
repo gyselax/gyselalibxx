@@ -68,6 +68,8 @@ spack:
       require: gcc@13
     cxx:
       require: gcc@13
+    hdf5:
+      require: '+subfiling'
     kokkos-fft:
       require: 'host_backend=fftw-openmp'
     lapack:
