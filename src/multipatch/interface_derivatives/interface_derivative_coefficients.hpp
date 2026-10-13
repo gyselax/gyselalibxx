@@ -549,8 +549,8 @@ private:
                 interface_idx_2,
                 coeff_deriv_patch2,
                 coeff_deriv_patch1,
-                weights_patch1,
-                weights_patch2);
+                weights_patch2,
+                weights_patch1);
 
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
@@ -651,6 +651,21 @@ private:
         weights_other_patch[2](idx_other_patch) += factor * gammas_i[2];
     }
 
+    template <class Grid1D>
+    void update_weights(
+            std::array<DField<IdxRange<Grid1D>, Kokkos::HostSpace>, 3>& weights,
+            double denom,
+            double coeff)
+    {
+        // c_n = (c_{n-1} - coeff * c_{n-2}) / denom
+        // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
+        // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
+        ddc::host_for_each(get_idx_range(weights[2]), [&](Idx<Grid1D> const& idx_perp) {
+            weights[2](idx_perp)
+                    = 1. / denom * (weights[1](idx_perp) - coeff * weights[0](idx_perp));
+        });
+    }
+
     /**
      * @brief Recursion to compute the coefficients a, b and the weights omega. 
      * 
@@ -666,16 +681,18 @@ private:
      * @param[in,out] weights_patch1 Weights in front of the function values on patch 1. 
      * @param[in,out] weights_patch2 Weights in front of the function values on patch 2. 
      */
-    template <bool is_on_patch1>
+    template <bool is_on_patch1, class Grid1D, class OGrid1D>
     void recursion(
             int const n_cells,
-            std::conditional_t<is_on_patch1, Idx1D_1, Idx1D_2> const interface_idx,
+            Idx<Grid1D> const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
-            std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
-            std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
+            std::array<DField<IdxRange<Grid1D>, Kokkos::HostSpace>, 3>& weights_patch,
+            std::array<DField<IdxRange<OGrid1D>, Kokkos::HostSpace>, 3>& weights_other_patch)
     {
-        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
+        static_assert(std::is_same_v<
+                      Grid1D,
+                      std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>>);
         using Idx1D = Idx<Grid1D>;
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
@@ -686,8 +703,8 @@ private:
             // Update coefficients.
             cycle_buffers(coeff_deriv_patch);
             cycle_buffers(coeff_deriv_other_patch);
-            cycle_buffers(weights_patch1);
-            cycle_buffers(weights_patch2);
+            cycle_buffers(weights_patch);
+            cycle_buffers(weights_other_patch);
 
             Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
             Idx1D const idx = interface_idx + n * idx_step;
@@ -703,7 +720,6 @@ private:
             double const coeff_closest = is_on_patch1
                                                  ? get_alpha(cell_length_left, cell_length_right)
                                                  : get_beta(cell_length_left, cell_length_right);
-            std::array<double, 3> const gammas_i = get_gammas(cell_length_left, cell_length_right);
 
             double const denom = 1 - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
 
@@ -718,28 +734,17 @@ private:
             // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
             // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
             double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
-            ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
-                weights_patch1[2](idx_perp)
-                        = 1. / denom
-                          * (weights_patch1[1](idx_perp)
-                             - coeff_closer_deriv * weights_patch1[0](idx_perp));
-            });
-            ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
-                weights_patch2[2](idx_perp)
-                        = 1. / denom
-                          * (weights_patch2[1](idx_perp)
-                             - coeff_closer_deriv * weights_patch2[0](idx_perp));
-            });
-            double const factor = 1. / denom * coeff_deriv_patch[1];
-            if constexpr (is_on_patch1) {
-                weights_patch1[2](idx_plus) += factor * gammas_i[0];
-                weights_patch1[2](idx) += factor * gammas_i[1];
-                weights_patch1[2](idx_minus) += factor * gammas_i[2];
-            } else {
-                weights_patch2[2](idx_plus) += factor * gammas_i[2];
-                weights_patch2[2](idx) += factor * gammas_i[1];
-                weights_patch2[2](idx_minus) += factor * gammas_i[0];
-            }
+            update_weights(weights_patch, denom, coeff_closer_deriv);
+            update_weights(weights_other_patch, denom, coeff_closer_deriv);
+            double factor = 1. / denom * coeff_deriv_patch[1];
+            if (!is_on_patch1)
+                factor *= -1;
+            std::array<double, 3> const gammas_i
+                    = is_on_patch1 ? get_gammas(cell_length_left, cell_length_right)
+                                   : get_gammas(cell_length_right, cell_length_left);
+            weights_patch[2](idx_plus) += factor * gammas_i[0];
+            weights_patch[2](idx) += factor * gammas_i[1];
+            weights_patch[2](idx_minus) += factor * gammas_i[2];
         }
 
         // Update coefficients.
