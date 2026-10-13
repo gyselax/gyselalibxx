@@ -182,9 +182,6 @@ void test_PolarPoissonFEMBatched__MatchesUnbatched()
 
     // Compare with unbatched solves
     PoissonSolver solver(discrete_mapping, interpolator, idx_range, 1000, res_tol);
-    DFieldMemRTheta alpha_ref(idx_range);
-    DFieldMemRTheta beta_ref(idx_range);
-    DFieldMemRTheta rho_ref(idx_range);
     DFieldMemRTheta phi_from_field_ref(idx_range);
     DFieldMemRTheta phi_from_func_ref(idx_range);
 
@@ -192,12 +189,10 @@ void test_PolarPoissonFEMBatched__MatchesUnbatched()
         double const a = ddc::coordinate(Idx<GridA>(idx_batch));
         double const b = ddc::coordinate(Idx<GridB>(idx_batch));
 
-        ddc::parallel_deepcopy(get_field(alpha_ref), alpha[idx_batch]);
-        ddc::parallel_deepcopy(get_field(beta_ref), beta[idx_batch]);
-        ddc::parallel_deepcopy(get_field(rho_ref), rho[idx_batch]);
-
-        solver.update_coefficients(get_const_field(alpha_ref), get_const_field(beta_ref));
-        solver(get_field(phi_from_field_ref), get_const_field(rho_ref));
+        solver.update_coefficients(
+                get_const_field(alpha[idx_batch]),
+                get_const_field(beta[idx_batch]));
+        solver(get_field(phi_from_field_ref), get_const_field(rho[idx_batch]));
         solver(get_field(phi_from_func_ref), UnbatchedRHS(a, b));
 
         auto phi_from_field_ref_host
@@ -205,10 +200,7 @@ void test_PolarPoissonFEMBatched__MatchesUnbatched()
         auto phi_from_func_ref_host
                 = ddc::create_mirror_view_and_copy(get_field(phi_from_func_ref));
 
-        double max_phi = 0.0;
-        ddc::host_for_each(idx_range, [&](IdxRTheta idx) {
-            max_phi = std::max(max_phi, std::abs(phi_from_func_ref_host(idx)));
-        });
+        double max_phi = norm_inf(phi_from_func_ref);
         // Check that the batches are not trivial
         EXPECT_GT(max_phi, 1e-3);
 
