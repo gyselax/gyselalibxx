@@ -321,7 +321,7 @@ public:
     {
         return MultipatchIdxRangeBS(
                 std::get<BuilderOnPatch<Patches> const&>(m_builders)
-                        .batched_spline_domain(idx_ranges.template get<Patches>())...);
+                        .spline_domain(idx_ranges.template get<Patches>())...);
     };
 
 private:
