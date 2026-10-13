@@ -382,15 +382,19 @@ public:
     DerivFieldMem(DerivFieldMem&& other) noexcept
         : base_type(std::move(static_cast<base_type&>(other)))
     {
-        // other.internal_fields.m_allocation_mdspan
-        //         = allocation_mdspan_type(nullptr, other.internal_fields.m_allocation_mdspan.mapping());
+        // Set the first internal field to store a nullptr, this prevents the memory being deallocated
+        other.internal_fields[0]
+                = internal_mdspan_type(nullptr, other.internal_fields[0].mapping());
     }
 
 
     /// Destructor, responsible to deallocate memory.
     ~DerivFieldMem()
     {
-        free_chunks(allocator_type {}, std::make_integer_sequence<std::size_t, n_fields> {});
+        // Deallocate the memory, but only if it was not moved to a new DerivFieldMem via an r-value constructor
+        if (this->internal_fields[0].data_handle()) {
+            free_chunks(allocator_type {}, std::make_integer_sequence<std::size_t, n_fields> {});
+        }
     }
 
     /// Deleted copy operator
