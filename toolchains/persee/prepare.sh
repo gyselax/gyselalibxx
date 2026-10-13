@@ -13,8 +13,9 @@ module purge
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 
 GYSELA_SPACK_GROUP="gysela"
+GYSELA_SPACK_JOBS=32
 GYSELA_SPACK_VERSION="1.2.2"
-export GYSELA_SPACK_PREFIX=/data/gyselarunner/gysela-spack-${GYSELA_SPACK_VERSION}
+GYSELA_SPACK_PREFIX=/data/gyselarunner/gysela-spack-${GYSELA_SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=true
 export PYTHONDONTWRITEBYTECODE=True
 
@@ -39,7 +40,7 @@ for arch in v100 xeon; do
     spack repo update
     spack concretize --quiet
     spack spec --install-status --namespaces
-    spack install --jobs 32
+    spack install --jobs "${GYSELA_SPACK_JOBS}"
     spack env deactivate
 done
 
