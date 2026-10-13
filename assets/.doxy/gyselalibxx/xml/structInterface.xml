@@ -81,13 +81,13 @@
         <qualifiedname>Interface::orientations_agree</qualifiedname>
         <initializer>= orientations_agree_bool</initializer>
         <briefdescription>
+<para>Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See <ref refid="classEdgeTransformation" kindref="compound">EdgeTransformation</ref>). </para>
         </briefdescription>
         <detaileddescription>
-<para>If True, the parametrisations of the physical edge have the same orientation. If False, the parametrisations of the physical edge have the opposite orientation. (See <ref refid="classEdgeTransformation" kindref="compound">EdgeTransformation</ref>). </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="45" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="45" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="46" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="53" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="53" bodyend="63"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="54" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="54" bodyend="64"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -149,7 +149,7 @@
 <parametername>orientations_agree_bool</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Boolean, if true, the parametrisations of the physical edge have the same orientation; else, the parametrisations of the physical edge have the opposite orientation. </para>
+<para>Boolean, if true, the parametrisations of the physical edge along the interface have the same orientation; else, the parametrisations of the physical edge along the interface have the opposite orientation. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -157,7 +157,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="21" bodyend="64"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="21" bodyend="65"/>
     <listofallmembers>
       <member refid="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" prot="public" virt="non-virtual"><scope>Interface</scope><name>connected_to_patch</name></member>
       <member refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" prot="public" virt="non-virtual"><scope>Interface</scope><name>Edge1</name></member>

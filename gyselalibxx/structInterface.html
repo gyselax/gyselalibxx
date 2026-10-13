@@ -610,7 +610,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-orientations_agree"><strong>orientations_agree</strong></a>   = <code>orientations\_agree\_bool</code><br></td>
+<td style="text-align: left;"><a href="#variable-orientations_agree"><strong>orientations_agree</strong></a>   = <code>orientations\_agree\_bool</code><br><em>Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See</em> <a href="classEdgeTransformation.html"><em><strong>EdgeTransformation</strong></em></a> <em>).</em></td>
 </tr>
 </tbody>
 </table>
@@ -634,7 +634,7 @@
 <ul>
 <li><code>Edge1Type</code> <a href="structEdge.html"><strong>Edge</strong></a> type defined on first patch. </li>
 <li><code>Edge2Type</code> <a href="structEdge.html"><strong>Edge</strong></a> type defined on second patch. </li>
-<li><code>orientations_agree_bool</code> Boolean, if true, the parametrisations of the physical edge have the same orientation; else, the parametrisations of the physical edge have the opposite orientation. </li>
+<li><code>orientations_agree_bool</code> Boolean, if true, the parametrisations of the physical edge along the interface have the same orientation; else, the parametrisations of the physical edge along the interface have the opposite orientation. </li>
 </ul>
 <p><strong>See also:</strong> <a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a> </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
@@ -657,9 +657,9 @@
 <hr>
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
 <h3 id="variable-orientations_agree">variable orientations_agree</h3>
+<p><em>Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See</em> <a href="classEdgeTransformation.html"><em><strong>EdgeTransformation</strong></em></a> <em>).</em></p>
 <pre><code class="language-C++">constexpr bool Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::orientations_agree;
 </code></pre>
-<p>If True, the parametrisations of the physical edge have the same orientation. If False, the parametrisations of the physical edge have the opposite orientation. (See <a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>). </p>
 <hr>
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
 <h3 id="function-connected_to_patch">function connected_to_patch</h3>

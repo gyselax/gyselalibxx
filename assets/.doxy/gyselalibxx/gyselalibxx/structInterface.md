@@ -47,7 +47,7 @@ _Represent a simple interface where two edges intersect._ [More...](#detailed-de
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**orientations\_agree**](#variable-orientations_agree)   = `orientations\_agree\_bool`<br> |
+|  constexpr bool | [**orientations\_agree**](#variable-orientations_agree)   = `orientations\_agree\_bool`<br>_Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See_ [_**EdgeTransformation**_](classEdgeTransformation.md) _)._ |
 
 
 
@@ -105,7 +105,7 @@ _Represent a simple interface where two edges intersect._ [More...](#detailed-de
 
 * `Edge1Type` [**Edge**](structEdge.md) type defined on first patch. 
 * `Edge2Type` [**Edge**](structEdge.md) type defined on second patch. 
-* `orientations_agree_bool` Boolean, if true, the parametrisations of the physical edge have the same orientation; else, the parametrisations of the physical edge have the opposite orientation. 
+* `orientations_agree_bool` Boolean, if true, the parametrisations of the physical edge along the interface have the same orientation; else, the parametrisations of the physical edge along the interface have the opposite orientation. 
 
 
 
@@ -165,16 +165,13 @@ using Interface< Edge1Type, Edge2Type, orientations_agree_bool >::OtherEdge =  s
 
 ### variable orientations\_agree 
 
+_Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See_ [_**EdgeTransformation**_](classEdgeTransformation.md) _)._
 ```C++
 constexpr bool Interface< Edge1Type, Edge2Type, orientations_agree_bool >::orientations_agree;
 ```
 
 
 
-If True, the parametrisations of the physical edge have the same orientation. If False, the parametrisations of the physical edge have the opposite orientation. (See [**EdgeTransformation**](classEdgeTransformation.md)). 
-
-
-        
 
 <hr>
 ## Public Static Functions Documentation
