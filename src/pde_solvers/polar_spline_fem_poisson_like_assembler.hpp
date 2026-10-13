@@ -358,14 +358,14 @@ private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
     static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
     // The number of cells (in the radial direction) in which both types of basis splines can be found
-    static constexpr int m_n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
+    static constexpr int s_n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
 
     // Number of cells over which a radial B-splines has its support
     // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
-    static constexpr int m_n_non_zero_bases_r = BSplinesR::degree() + 1;
+    static constexpr int s_n_non_zero_bases_r = BSplinesR::degree() + 1;
 
     // Number of cells over which a poloidal B-splines has its support
-    static constexpr int m_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
+    static constexpr int s_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
 
     const int m_nbasis_r;
     const int m_nbasis_theta;
@@ -393,14 +393,14 @@ public:
      * @param int_volume The initialised field of Jacobian values of the mapping. 
      */
     explicit PolarSplineFEMPoissonLikeAssembler(Field<double, IdxRangeQuadratureRTheta> int_volume)
-        : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
+        : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - s_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
         , m_idxrange_fem_tensor_basis(
                   ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
                           IdxStepBSPolar {m_nbasis_theta}))
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                  IdxStepBSR {m_n_overlap_cells}))
+                  IdxStepBSR {s_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                   IdxStepBSTheta {m_nbasis_theta}))
         , m_idxrange_quadrature_r(
@@ -782,7 +782,7 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
         IdxRangeQuadratureRTheta idx_range_quad_singular(
                 m_idxrange_quadrature_r.take_first(
-                        IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
+                        IdxStep<QDimRMesh> {s_n_overlap_cells * s_n_gauss_legendre_r}),
                 m_idxrange_quadrature_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
