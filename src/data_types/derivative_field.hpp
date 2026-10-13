@@ -212,7 +212,7 @@ private:
     /// @brief Initialise fields inside internal_fields.
     template <class Field, std::size_t... ArrayIndex>
     KOKKOS_FUNCTION constexpr void initialise_fields(
-            Field& chunks,
+            Field const& chunks,
             std::index_sequence<ArrayIndex...>)
     {
         ((base_type::internal_fields[ArrayIndex] = chunks.internal_fields[chunks.get_array_index(
@@ -299,7 +299,8 @@ public:
      */
     template <class OElementType>
     KOKKOS_FUNCTION constexpr DerivField(
-            DerivField<OElementType, index_range_type, MemorySpace, LayoutStridedPolicy>& field)
+            DerivField<OElementType, index_range_type, MemorySpace, LayoutStridedPolicy> const&
+                    field)
         : base_type(
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
