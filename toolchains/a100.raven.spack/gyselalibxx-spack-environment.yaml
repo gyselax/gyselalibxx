@@ -76,6 +76,8 @@ spack:
             c: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/gcc
             cxx: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/g++
             fortran: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/gfortran
+    hdf5:
+      require: '+subfiling'
     kokkos-fft:
       require: 'host_backend=fftw-serial'
     lapack:

@@ -73,6 +73,8 @@ spack:
           when: platform=linux
     fortran:
       require: 'gcc@11:'
+    hdf5:
+      require: '+subfiling'
     kokkos-fft:
       require: 'host_backend=fftw-serial'
     lapack:

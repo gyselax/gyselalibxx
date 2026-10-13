@@ -75,6 +75,8 @@ spack:
             c: /usr/local/gcc-12.3/bin/gcc
             cxx: /usr/local/gcc-12.3/bin/g++
             fortran: /usr/local/gcc-12.3/bin/gfortran
+    hdf5:
+      require: '+subfiling'
     kokkos-fft:
       require: 'host_backend=fftw-serial'
     lapack:

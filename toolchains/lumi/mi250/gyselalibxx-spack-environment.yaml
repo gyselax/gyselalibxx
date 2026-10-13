@@ -70,6 +70,8 @@ spack:
       require: gcc@14.2
     cxx:
       require: gcc@14.2
+    hdf5:
+      require: '+subfiling'
     kokkos-fft:
       require: 'host_backend=fftw-serial'
     lapack:
