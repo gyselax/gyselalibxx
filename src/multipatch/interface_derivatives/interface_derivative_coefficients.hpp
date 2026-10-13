@@ -507,11 +507,6 @@ private:
         std::array<double, 3> coeff_deriv_patch1;
         std::array<double, 3> coeff_deriv_patch2;
 
-        // For the local coefficients
-        double alpha_i;
-        double beta_i;
-        std::array<double, 3> gammas_i;
-
         // Define a step to increment the indices to move away from the interface.
         IdxStep<EdgePerpGrid1> idx_step_1(m_extremity_1 == FRONT ? 1 : -1);
         IdxStep<EdgePerpGrid2> idx_step_2(m_extremity_2 == FRONT ? 1 : -1);
@@ -526,14 +521,11 @@ private:
 
         auto [cell_length_left, cell_length_right] = get_cell_lengths(idx_2);
 
-        alpha_i = get_alpha(cell_length_left, cell_length_right);
-        beta_i = get_beta(cell_length_left, cell_length_right);
-        gammas_i = get_gammas(cell_length_left, cell_length_right);
-
-        coeff_deriv_patch1[1] = beta_i; // b_{n-2}
-        coeff_deriv_patch2[1] = alpha_i; // a_{n-2}
+        coeff_deriv_patch1[1] = get_beta(cell_length_left, cell_length_right); // b_{n-2}
+        coeff_deriv_patch2[1] = get_alpha(cell_length_left, cell_length_right); // a_{n-2}
 
         // c_{n-2}
+        std::array<double, 3> gammas_i = get_gammas(cell_length_left, cell_length_right);
         weights_patch1[1](idx_1 + idx_step_1) = gammas_i[0];
         weights_patch1[1](idx_1) = gammas_i[1];
         weights_patch2[1](idx_2) = gammas_i[1];
