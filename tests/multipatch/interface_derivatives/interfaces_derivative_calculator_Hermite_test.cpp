@@ -619,28 +619,9 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             matrix(idx_ranges, deriv_coeffs_collect);
 
     // Instantiate DerivField ====================================================================
-    // Instantiate index range slices ------------------------------------------------------------
-    IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(this->idx_range_x1);
-    IdxRangeSlice<GridX<2>> idx_range_slice_dx2 = get_bound_idx_range_slice(this->idx_range_x2);
-    IdxRangeSlice<GridX<3>> idx_range_slice_dx3 = get_bound_idx_range_slice(this->idx_range_x3);
-
-    IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(this->idx_range_y1);
-    IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(this->idx_range_y2);
-    IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(this->idx_range_y3);
-
-    // Instantiate DerivField --------------------------------------------------------------------
-    DerivFieldMemOnPatch_host<Patch1> function_and_derivs_1_alloc(
-            this->idx_range_xy1,
-            idx_range_slice_dx1,
-            idx_range_slice_dy1);
-    DerivFieldMemOnPatch_host<Patch2> function_and_derivs_2_alloc(
-            this->idx_range_xy2,
-            idx_range_slice_dx2,
-            idx_range_slice_dy2);
-    DerivFieldMemOnPatch_host<Patch3> function_and_derivs_3_alloc(
-            this->idx_range_xy3,
-            idx_range_slice_dx3,
-            idx_range_slice_dy3);
+    DerivFieldMemOnPatch_host<Patch1> function_and_derivs_1_alloc(this->idx_range_xy1);
+    DerivFieldMemOnPatch_host<Patch2> function_and_derivs_2_alloc(this->idx_range_xy2);
+    DerivFieldMemOnPatch_host<Patch3> function_and_derivs_3_alloc(this->idx_range_xy3);
 
     DerivFieldOnPatch_host<Patch1> function_and_derivs_1(function_and_derivs_1_alloc);
     DerivFieldOnPatch_host<Patch2> function_and_derivs_2(function_and_derivs_2_alloc);

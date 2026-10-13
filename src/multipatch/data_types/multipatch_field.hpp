@@ -244,4 +244,27 @@ void deepcopy(
     }
 }
 
+/**
+ * Retrieve a subset of objects from the patches that they are defined on.
+ *
+ * @tparam Patches The patches of the object subset to be returned.
+ * @tparam MultipatchFieldType The MultipatchField storing the set of objects. 
+ * @return The subset of objects on the given patches.
+ */
+template <typename... Patches, class MultipatchFieldType>
+detail::MultipatchField<
+        ddc::detail::TypeSeq<Patches...>,
+        ddc::detail::TypeSeq<typename MultipatchFieldType::TypeOnPatch<Patches>...>>
+get(MultipatchFieldType const& multipatch_field)
+{
+    static_assert(ddc::type_seq_contains_v<
+                  ddc::detail::TypeSeq<Patches...>,
+                  typename MultipatchFieldType::PatchOrdering>);
+    return detail::MultipatchField<
+            ddc::detail::TypeSeq<Patches...>,
+            ddc::detail::TypeSeq<typename MultipatchFieldType::TypeOnPatch<Patches>...>>(
+            multipatch_field.template get<Patches>()...);
+}
+
+
 } // namespace ddcHelper

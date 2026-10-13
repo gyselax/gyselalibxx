@@ -511,46 +511,16 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             matrix_369(idx_ranges_369, deriv_coeffs_collect_369);
 
     // Instantiate DerivField ====================================================================
-    // Instantiate index range slices ------------------------------------------------------------
-    IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(idx_range_x1);
-    IdxRangeSlice<GridX<2>> idx_range_slice_dx2 = get_bound_idx_range_slice(idx_range_x2);
-    IdxRangeSlice<GridX<3>> idx_range_slice_dx3 = get_bound_idx_range_slice(idx_range_x3);
-    IdxRangeSlice<GridX<4>> idx_range_slice_dx4 = get_bound_idx_range_slice(idx_range_x4);
-    IdxRangeSlice<GridX<5>> idx_range_slice_dx5 = get_bound_idx_range_slice(idx_range_x5);
-    IdxRangeSlice<GridX<6>> idx_range_slice_dx6 = get_bound_idx_range_slice(idx_range_x6);
-    IdxRangeSlice<GridX<7>> idx_range_slice_dx7 = get_bound_idx_range_slice(idx_range_x7);
-    IdxRangeSlice<GridX<8>> idx_range_slice_dx8 = get_bound_idx_range_slice(idx_range_x8);
-    IdxRangeSlice<GridX<9>> idx_range_slice_dx9 = get_bound_idx_range_slice(idx_range_x9);
-
-    IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(idx_range_y1);
-    IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(idx_range_y2);
-    IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(idx_range_y3);
-    IdxRangeSlice<GridY<4>> idx_range_slice_dy4 = get_bound_idx_range_slice(idx_range_y4);
-    IdxRangeSlice<GridY<5>> idx_range_slice_dy5 = get_bound_idx_range_slice(idx_range_y5);
-    IdxRangeSlice<GridY<6>> idx_range_slice_dy6 = get_bound_idx_range_slice(idx_range_y6);
-    IdxRangeSlice<GridY<7>> idx_range_slice_dy7 = get_bound_idx_range_slice(idx_range_y7);
-    IdxRangeSlice<GridY<8>> idx_range_slice_dy8 = get_bound_idx_range_slice(idx_range_y8);
-    IdxRangeSlice<GridY<9>> idx_range_slice_dy9 = get_bound_idx_range_slice(idx_range_y9);
-
-    // Instantiate DerivField --------------------------------------------------------------------
-    DerivFieldMemOnPatch_host<Patch1>
-            function_and_derivs_1_alloc(idx_range_xy1, idx_range_slice_dx1, idx_range_slice_dy1);
-    DerivFieldMemOnPatch_host<Patch2>
-            function_and_derivs_2_alloc(idx_range_xy2, idx_range_slice_dx2, idx_range_slice_dy2);
-    DerivFieldMemOnPatch_host<Patch3>
-            function_and_derivs_3_alloc(idx_range_xy3, idx_range_slice_dx3, idx_range_slice_dy3);
-    DerivFieldMemOnPatch_host<Patch4>
-            function_and_derivs_4_alloc(idx_range_xy4, idx_range_slice_dx4, idx_range_slice_dy4);
-    DerivFieldMemOnPatch_host<Patch5>
-            function_and_derivs_5_alloc(idx_range_xy5, idx_range_slice_dx5, idx_range_slice_dy5);
-    DerivFieldMemOnPatch_host<Patch6>
-            function_and_derivs_6_alloc(idx_range_xy6, idx_range_slice_dx6, idx_range_slice_dy6);
-    DerivFieldMemOnPatch_host<Patch7>
-            function_and_derivs_7_alloc(idx_range_xy7, idx_range_slice_dx7, idx_range_slice_dy7);
-    DerivFieldMemOnPatch_host<Patch8>
-            function_and_derivs_8_alloc(idx_range_xy8, idx_range_slice_dx8, idx_range_slice_dy8);
-    DerivFieldMemOnPatch_host<Patch9>
-            function_and_derivs_9_alloc(idx_range_xy9, idx_range_slice_dx9, idx_range_slice_dy9);
+    // tmp ---
+    DerivFieldMemOnPatch_host<Patch1> function_and_derivs_1_alloc(idx_range_xy1);
+    DerivFieldMemOnPatch_host<Patch2> function_and_derivs_2_alloc(idx_range_xy2);
+    DerivFieldMemOnPatch_host<Patch3> function_and_derivs_3_alloc(idx_range_xy3);
+    DerivFieldMemOnPatch_host<Patch4> function_and_derivs_4_alloc(idx_range_xy4);
+    DerivFieldMemOnPatch_host<Patch5> function_and_derivs_5_alloc(idx_range_xy5);
+    DerivFieldMemOnPatch_host<Patch6> function_and_derivs_6_alloc(idx_range_xy6);
+    DerivFieldMemOnPatch_host<Patch7> function_and_derivs_7_alloc(idx_range_xy7);
+    DerivFieldMemOnPatch_host<Patch8> function_and_derivs_8_alloc(idx_range_xy8);
+    DerivFieldMemOnPatch_host<Patch9> function_and_derivs_9_alloc(idx_range_xy9);
 
     DerivFieldOnPatch_host<Patch1> function_and_derivs_1(function_and_derivs_1_alloc);
     DerivFieldOnPatch_host<Patch2> function_and_derivs_2(function_and_derivs_2_alloc);
@@ -584,6 +554,37 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
                     function_and_derivs_7,
                     function_and_derivs_8,
                     function_and_derivs_9);
+    // --- tmp
+
+    // MultipatchField<
+    //         DerivFieldMemOnPatch_host,
+    //         Patch1,
+    //         Patch2,
+    //         Patch3,
+    //         Patch4,
+    //         Patch5,
+    //         Patch6,
+    //         Patch7,
+    //         Patch8,
+    //         Patch9>
+    //         functions_and_derivs_alloc(idx_ranges);
+    // MultipatchField<
+    //         DerivFieldOnPatch_host,
+    //         Patch1,
+    //         Patch2,
+    //         Patch3,
+    //         Patch4,
+    //         Patch5,
+    //         Patch6,
+    //         Patch7,
+    //         Patch8,
+    //         Patch9>
+    //         functions_and_derivs(functions_and_derivs_alloc);
+
+    // MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs_123(
+    //         function_and_derivs_1,
+    //         function_and_derivs_2,
+    //         function_and_derivs_3);
 
     // Instantiate the field of global function values. No derivatives needed.
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
@@ -595,18 +596,18 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     initialise_2D_function(function_g);
 
     // --- the first derivatives computed from the function values.
-    matrix_123.solve_deriv(functions_and_derivs);
-    matrix_456.solve_deriv(functions_and_derivs);
+    matrix_123.solve_deriv(ddcHelper::get<Patch1, Patch2, Patch3>(functions_and_derivs));
+    matrix_456.solve_deriv(ddcHelper::get<Patch4, Patch5, Patch6>(functions_and_derivs));
     matrix_789.solve_deriv(functions_and_derivs);
 
-    matrix_147.solve_deriv(functions_and_derivs);
+    matrix_147.solve_deriv(ddcHelper::get<Patch1, Patch4, Patch7, Patch2>(functions_and_derivs));
     matrix_258.solve_deriv(functions_and_derivs);
-    matrix_369.solve_deriv(functions_and_derivs);
+    matrix_369.solve_deriv(ddcHelper::get<Patch3, Patch6, Patch9>(functions_and_derivs));
 
     // --- the cross-derivatives computed from the first derivatives.
     matrix_147.solve_cross_deriv(functions_and_derivs);
-    matrix_258.solve_cross_deriv(functions_and_derivs);
-    matrix_369.solve_cross_deriv(functions_and_derivs);
+    matrix_258.solve_cross_deriv(ddcHelper::get<Patch2, Patch5, Patch8>(functions_and_derivs));
+    matrix_369.solve_cross_deriv(ddcHelper::get<Patch3, Patch6, Patch9>(functions_and_derivs));
 
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.
