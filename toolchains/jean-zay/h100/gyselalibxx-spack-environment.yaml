@@ -1,4 +1,6 @@
 spack:
+  include:
+    - packages.yaml
   definitions:
   - packages:
     - cmake@3.31
@@ -37,6 +39,7 @@ spack:
   - architectures:
     - arch=linux-rhel9-sapphirerapids
   specs:
+  - gcc
   - matrix:
     - [$packages]
     - [$architectures]
@@ -44,8 +47,10 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2026.10
+      destination: $spack/var/spack/repos/patches-v2026.10
     builtin:
       branch: releases/v2026.10
+      destination: $spack/var/spack/repos/builtin-v2026.10
   concretizer:
     reuse: false
     unify: true
@@ -58,24 +63,10 @@ spack:
     arrow:
       prefer:
         - '~mimalloc'
-    cuda:
-      buildable: false
-      externals:
-      - spec: cuda@12.8.61
-        prefix: /lustre/fshomisc/sys/common/nvidia/cuda/12.8
     c:
       require: gcc@14.2.0
     cxx:
       require: gcc@14.2.0
-    gcc:
-      externals:
-      - spec: gcc@14.2.0 languages:='c,c++,fortran'
-        prefix: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o
-        extra_attributes:
-            compilers:
-              c: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/gcc
-              cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/g++
-              fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/gfortran
     hdf5:
       require: '+subfiling'
     kokkos-fft:
@@ -84,16 +75,9 @@ spack:
       require: openblas@0.3 ~dynamic_dispatch
     mpi:
       require: openmpi@4.1
-    openmpi:
-      buildable: false
-      externals:
-      - spec: openmpi@4.1.6+cuda~cxx~cxx_exceptions~java+lustre~memchecker+pmi~static~wrapper-rpath
-          fabrics=ucx schedulers=slurm
-        prefix: /lustre/fshomisc/sup/spack_soft/openmpi/4.1.6/gcc-11.4.1-hbuwwfts4cctbzqir427u56mkk6zu3qr
     py-dask:
       prefer:
         - '~dataframe'
     py-pandas:
       prefer:
         - '~performance'
-  view: false
