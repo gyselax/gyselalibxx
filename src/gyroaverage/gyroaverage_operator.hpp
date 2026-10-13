@@ -223,20 +223,11 @@ public:
      * @brief For a given parameter set, compute the gyroaverage of a field which only depends on
      * space.
      *
-     * The same field can be passed as both input and output to work in-place, as the interpolator
-     * coefficients represent the input field during the computation.
-     *
-     * @param[out] func_gavg Gyroaverage of the input field.
-     * @param[in] func The field to process.
+     * @param[in, out] func Field to process on input and its gyroaverage on output.
      * @param[in] idx_param Parameter set whose coefficients will be used.
      */
-    void operator()(
-            DField<IdxRangeInterpSpace> const& func_gavg,
-            DField<IdxRangeInterpSpace> const& func,
-            IdxParams idx_param) const
+    void operator()(DField<IdxRangeInterpSpace> const& func, IdxParams idx_param) const
     {
-        // Ensure that the input and output have the same index ranges
-        assert(get_idx_range(func).extents() == get_idx_range(func_gavg).extents());
         // Ensure that there are coefficients for the points in the input data
         assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
                        .contains(get_idx_range(func).front()));
@@ -262,7 +253,7 @@ public:
         ddc::parallel_for_each(
                 location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
-                get_idx_range(func_gavg),
+                get_idx_range(func),
                 KOKKOS_LAMBDA(IdxInterpSpace const idx_interpspace) {
                     // Average over gyro points
                     double gavg = 0.0;
@@ -274,7 +265,7 @@ public:
                         gavg += gyrocoeffs_weights_proxy(idx_param, idx_interpspace, idx_gyro)
                                 * value;
                     }
-                    func_gavg(idx_interpspace) = gavg;
+                    func(idx_interpspace) = gavg;
                 });
     }
 };

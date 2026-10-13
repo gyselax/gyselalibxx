@@ -282,7 +282,10 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 
     // Apply the gyroaverage for each value of mu
     IdxRangeMu const mu_idx_range = get_idx_range<GridMu>(A_gavg);
-    ddc::host_for_each(mu_idx_range, [&](IdxMu const imu) { gyroaverage(A_gavg[imu], A, imu); });
+    ddc::host_for_each(mu_idx_range, [&](IdxMu const imu) {
+        ddc::parallel_deepcopy(A_gavg[imu], A);
+        gyroaverage(A_gavg[imu], imu);
+    });
 
     Kokkos::fence();
 
