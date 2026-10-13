@@ -51,11 +51,11 @@ std::vector<CoordType> get_interpolation_points_add_one_on_left_and_one_on_right
 }
 
 /**
- * @brief Fill in a vector of points for the equivalent global mesh 
+ * @brief Append to a given vector another vector of points for the equivalent global mesh 
  * by conserving the same order of the given points.
  */
 template <class CoordTypeG, class CoordTypeP>
-void fill_in(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> const& points_patch)
+void append(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> const& points_patch)
 {
     for (CoordTypeP pt : points_patch) {
         points_global.push_back(CoordTypeG {double(pt)});
@@ -63,11 +63,11 @@ void fill_in(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> con
 }
 
 /**
- * @brief Fill in a vector of points for the equivalent global mesh
+ * @brief Append to a given vector another vector of points for the equivalent global mesh
  *  by reversing the order of the given points.
  */
 template <class CoordTypeG, class CoordTypeP>
-void fill_in_reverse(
+void append_reverse(
         std::vector<CoordTypeG>& points_global,
         std::vector<CoordTypeP> const& points_patch)
 {
@@ -78,3 +78,4 @@ void fill_in_reverse(
         points_global.push_back(CoordTypeG {double(min + max - points_patch[n_pt - 1 - i])});
     }
 }
+
