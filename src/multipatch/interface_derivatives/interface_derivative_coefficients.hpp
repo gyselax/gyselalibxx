@@ -516,32 +516,23 @@ private:
         Idx1D_2 const interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
 
         // Set (a_{n-2},b_{n-2},c_{n-2}) ---
-        Idx1D_1 idx_1 = interface_idx_1;
-        Idx1D_2 idx_2 = interface_idx_2;
+        auto [cell_length_left, cell_length_right] = get_cell_lengths(interface_idx_2);
 
-        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx_2);
-
-        coeff_deriv_patch1[1] = get_beta(cell_length_left, cell_length_right); // b_{n-2}
-        coeff_deriv_patch2[1] = get_alpha(cell_length_left, cell_length_right); // a_{n-2}
+        coeff_deriv_patch1[2] = get_beta(cell_length_left, cell_length_right); // b_{n-2}
+        coeff_deriv_patch2[2] = get_alpha(cell_length_left, cell_length_right); // a_{n-2}
 
         // c_{n-2}
         std::array<double, 3> gammas_i = get_gammas(cell_length_left, cell_length_right);
-        weights_patch1[1](idx_1 + idx_step_1) = gammas_i[0];
-        weights_patch1[1](idx_1) = gammas_i[1];
-        weights_patch2[1](idx_2) = gammas_i[1];
-        weights_patch2[1](idx_2 + idx_step_2) = gammas_i[2];
+        weights_patch1[2](interface_idx_1 + idx_step_1) = gammas_i[0];
+        weights_patch1[2](interface_idx_1) = gammas_i[1];
+        weights_patch2[2](interface_idx_2) = gammas_i[1];
+        weights_patch2[2](interface_idx_2 + idx_step_2) = gammas_i[2];
 
         // Set (a_{n-1},b_{n-1},c_{n-1}) ---
-        idx_2 = interface_idx_2 + idx_step_2;
-
-        std::tie(cell_length_left, cell_length_right) = get_cell_lengths(idx_2);
-
         update_n_1<false>(
-                idx_2,
-                idx_1,
+                interface_idx_2 + idx_step_2,
+                interface_idx_1,
                 idx_step_2,
-                cell_length_left,
-                cell_length_right,
                 coeff_deriv_patch2,
                 coeff_deriv_patch1,
                 weights_patch2,
@@ -574,21 +565,10 @@ private:
 
         // Initialisation second recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) ----------------------
         // Set (a_{n-2},b_{n-2},c_{n-2}) ---
-        idx_1 = interface_idx_1 + idx_step_1;
-
-        std::tie(cell_length_left, cell_length_right) = get_cell_lengths(idx_1);
-
-        cycle_buffers(coeff_deriv_patch1);
-        cycle_buffers(coeff_deriv_patch2);
-        cycle_buffers(weights_patch1);
-        cycle_buffers(weights_patch2);
-
         update_n_1<true>(
-                idx_1,
+                interface_idx_1 + idx_step_1,
                 interface_idx_2,
                 idx_step_1,
-                cell_length_left,
-                cell_length_right,
                 coeff_deriv_patch1,
                 coeff_deriv_patch2,
                 weights_patch1,
@@ -632,24 +612,23 @@ private:
             Idx<Grid1D> idx_patch,
             Idx<Grid1DOther> idx_other_patch,
             IdxStep<Grid1D> idx_step_patch,
-            double cell_length_left,
-            double cell_length_right,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
             std::array<DField<IdxRange<Grid1D>, Kokkos::HostSpace>, 3>& weights_patch,
             std::array<DField<IdxRange<Grid1DOther>, Kokkos::HostSpace>, 3>& weights_other_patch)
     {
-        double alpha_i, beta_i;
-        std::array<double, 3> gammas_i;
-        if (is_on_patch1) {
-            alpha_i = get_alpha(cell_length_left, cell_length_right);
-            beta_i = get_beta(cell_length_left, cell_length_right);
-            gammas_i = get_gammas(cell_length_left, cell_length_right);
-        } else {
-            alpha_i = get_alpha(cell_length_right, cell_length_left);
-            beta_i = get_beta(cell_length_right, cell_length_left);
-            gammas_i = get_gammas(cell_length_right, cell_length_left);
-        }
+        cycle_buffers(coeff_deriv_patch);
+        cycle_buffers(coeff_deriv_other_patch);
+        cycle_buffers(weights_patch);
+        cycle_buffers(weights_other_patch);
+
+        auto [cell_length_patch1, cell_length_patch2] = get_cell_lengths(idx_patch);
+        double cell_length_patch = is_on_patch1 ? cell_length_patch1 : cell_length_patch2;
+        double cell_length_other_patch = is_on_patch1 ? cell_length_patch2 : cell_length_patch1;
+
+        double alpha_i = get_alpha(cell_length_patch, cell_length_other_patch);
+        double beta_i = get_beta(cell_length_patch, cell_length_other_patch);
+        std::array<double, 3> gammas_i = get_gammas(cell_length_patch, cell_length_other_patch);
 
         double denom = 1 - coeff_deriv_patch[1] * alpha_i;
         // Set (a_{n-1},b_{n-1},c_{n-1}) ---
