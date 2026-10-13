@@ -12,8 +12,8 @@
  * @tparam Edge1Type Edge type defined on first patch.
  * @tparam Edge2Type Edge type defined on second patch.
  * @tparam orientations_agree_bool Boolean, 
- *      if true, the parametrisations of the physical edge have the same orientation; 
- *      else, the parametrisations of the physical edge have the opposite orientation.
+ *      if true, the parametrisations of the physical edge along the interface have the same orientation; 
+ *      else, the parametrisations of the physical edge along the interface have the opposite orientation.
  * @see EdgeTransformation
 */
 template <class Edge1Type, class Edge2Type, bool orientations_agree_bool>
@@ -40,7 +40,7 @@ struct Interface
     /**
      * @brief Orientation of the parallel grids to the interface. 
      * If True, the physical grids of the two patches parallel to the interface have the same orientation. 
-     * If False,  the physical grids of the two patches parallel to the interface have the opposite orientation. 
+     * If False, the physical grids of the two patches parallel to the interface have the opposite orientation. 
      * (See EdgeTransformation).
     */
     static constexpr bool orientations_agree = orientations_agree_bool;
