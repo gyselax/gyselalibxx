@@ -243,11 +243,12 @@ private:
     /// @brief Initialise the chunks inside internal_fields.
     template <std::size_t... ArrayIndex>
     void initialise_chunks(
-            std::string const& label,
+            std::string const& label_str,
             allocator_type allocator,
             std::index_sequence<ArrayIndex...>)
     {
-        ((this->internal_fields[ArrayIndex] = make_internal_mdspan<ArrayIndex>(label, allocator)),
+        ((this->internal_fields[ArrayIndex]
+          = make_internal_mdspan<ArrayIndex>(label_str, allocator)),
          ...);
     }
 
