@@ -81,10 +81,12 @@ public:
     /// Fill field1 with function x^2 + y^2 and field2 with x^2 - y^2
     template <class Layout1, class Layout2>
     void initialise_non_const_fields(
-            DField<typename Patch1::IdxRange12, Kokkos::DefaultExecutionSpace::memory_space, Layout1>
-                    field1,
-            DField<typename Patch2::IdxRange12, Kokkos::DefaultExecutionSpace::memory_space, Layout2>
-                    field2)
+            DField<typename Patch1::IdxRange12,
+                   Kokkos::DefaultExecutionSpace::memory_space,
+                   Layout1> field1,
+            DField<typename Patch2::IdxRange12,
+                   Kokkos::DefaultExecutionSpace::memory_space,
+                   Layout2> field2)
     {
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
