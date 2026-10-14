@@ -227,14 +227,14 @@ class MultipatchSplineBuilder2D
             typename MultipatchIdxRangeBatched::PatchOrdering,
             ddc::detail::TypeSeq<batched_spline_domain_type_on_patch<
                     Patches,
-                    typename MultipatchIdxRangeBatched::TypeOnPatch<Patches>>...>>;
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
 
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType<
             typename MultipatchIdxRangeBatched::PatchOrdering,
             ddc::detail::TypeSeq<batched_derivs_domain_type_on_patch<
                     Patches,
-                    typename MultipatchIdxRangeBatched::TypeOnPatch<Patches>>...>>;
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
 
     /// The type of the internal storage of the SplineBuilders.
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
