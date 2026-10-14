@@ -18,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `PolarSplineEvaluator::operator()` and `PolarSplineEvaluator::deriv` to evaluate a batch of polar splines on a grid.
 - Add new constructors to `DerivFieldMem` where the idx range slices for the derivatives default to the edge of the physical domain.
 - Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
-- Add `ddcHelper::get<SubsetPatches...>(MultipatchField<TypeOnPatch, SetPatches...>)` to get a subset of the objects stored in a `MultipatchField`. 
 
 ### Fixed
 

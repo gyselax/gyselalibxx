@@ -581,11 +581,6 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     //         Patch9>
     //         functions_and_derivs(functions_and_derivs_alloc);
 
-    // MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs_123(
-    //         function_and_derivs_1,
-    //         function_and_derivs_2,
-    //         function_and_derivs_3);
-
     // Instantiate the field of global function values. No derivatives needed.
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
     host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
@@ -596,18 +591,18 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     initialise_2D_function(function_g);
 
     // --- the first derivatives computed from the function values.
-    matrix_123.solve_deriv(ddcHelper::get<Patch1, Patch2, Patch3>(functions_and_derivs));
-    matrix_456.solve_deriv(ddcHelper::get<Patch4, Patch5, Patch6>(functions_and_derivs));
+    matrix_123.solve_deriv(functions_and_derivs);
+    matrix_456.solve_deriv(functions_and_derivs);
     matrix_789.solve_deriv(functions_and_derivs);
 
-    matrix_147.solve_deriv(ddcHelper::get<Patch1, Patch4, Patch7, Patch2>(functions_and_derivs));
+    matrix_147.solve_deriv(functions_and_derivs);
     matrix_258.solve_deriv(functions_and_derivs);
-    matrix_369.solve_deriv(ddcHelper::get<Patch3, Patch6, Patch9>(functions_and_derivs));
+    matrix_369.solve_deriv(functions_and_derivs);
 
     // --- the cross-derivatives computed from the first derivatives.
     matrix_147.solve_cross_deriv(functions_and_derivs);
-    matrix_258.solve_cross_deriv(ddcHelper::get<Patch2, Patch5, Patch8>(functions_and_derivs));
-    matrix_369.solve_cross_deriv(ddcHelper::get<Patch3, Patch6, Patch9>(functions_and_derivs));
+    matrix_258.solve_cross_deriv(functions_and_derivs);
+    matrix_369.solve_cross_deriv(functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.

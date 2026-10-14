@@ -71,21 +71,21 @@ class InterfacesDerivativeCalculator<
     static constexpr std::size_t number_of_interfaces
             = ddc::type_seq_size_v<interface_sorted_collection>;
 
-    using Interface0 = ddc::type_seq_element_t<0, interface_sorted_collection>;
-    using InterfaceN
+    using InterfaceBoundFirst = ddc::type_seq_element_t<0, interface_sorted_collection>;
+    using InterfaceBoundLast
             = ddc::type_seq_element_t<number_of_interfaces - 1, interface_sorted_collection>;
 
     static_assert(
-            (((!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)
-              || (!std::is_same_v<typename Interface0::Edge2, OutsideEdge>))
-             == ((!std::is_same_v<typename InterfaceN::Edge1, OutsideEdge>)
-                 || (!std::is_same_v<typename InterfaceN::Edge2, OutsideEdge>))),
+            (((!std::is_same_v<typename InterfaceBoundFirst::Edge1, OutsideEdge>)
+              || (!std::is_same_v<typename InterfaceBoundFirst::Edge2, OutsideEdge>))
+             == ((!std::is_same_v<typename InterfaceBoundLast::Edge1, OutsideEdge>)
+                 || (!std::is_same_v<typename InterfaceBoundLast::Edge2, OutsideEdge>))),
             "If one global boundary has an outside edge, the other global boundary should have "
             "too.");
 
     static constexpr bool is_periodic
-            = (!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)&&(
-                    !std::is_same_v<typename Interface0::Edge2, OutsideEdge>);
+            = (!std::is_same_v<typename InterfaceBoundFirst::Edge1, OutsideEdge>)&&(
+                    !std::is_same_v<typename InterfaceBoundFirst::Edge2, OutsideEdge>);
     /*
         Remove all the interfaces with an OutsideEdge.
         Rely on get_all_interfaces_along_direction_t to order the interfaces.
@@ -93,7 +93,7 @@ class InterfacesDerivativeCalculator<
     using outer_interface_collection = std::conditional_t<
             is_periodic,
             ddc::detail::TypeSeq<>,
-            ddc::detail::TypeSeq<Interface0, InterfaceN>>;
+            ddc::detail::TypeSeq<InterfaceBoundFirst, InterfaceBoundLast>>;
 
     // All the interfaces in the Grid1D direction without the interfaces with OutsideEdge.
     using inner_interface_collection
@@ -103,13 +103,13 @@ class InterfacesDerivativeCalculator<
     static constexpr std::size_t n_inner_interfaces
             = ddc::type_seq_size_v<inner_interface_collection>;
 
-    using FirstInterface = ddc::type_seq_element_t<0, inner_interface_collection>;
+    using InterfaceInnerFirst = ddc::type_seq_element_t<0, inner_interface_collection>;
 
     // First patch of the sorted interfaces.
-    using FirstPatch = std::conditional_t<
+    using PatchFirst = std::conditional_t<
             is_periodic,
             find_patch_t<Grid1D, all_patches>,
-            typename FirstInterface::Edge2::associated_patch>;
+            typename InterfaceInnerFirst::Edge2::associated_patch>;
 
     // Sequence of 1D grids in the direction of Grid1D over the patches.
     using Grid1DSeq = collect_grids_on_dim_t<
@@ -146,7 +146,7 @@ class InterfacesDerivativeCalculator<
 
 public:
     /// @brief First patch of the collection of patches in the direction of the given Grid1D.
-    using first_patch = FirstPatch;
+    using first_patch = PatchFirst;
 
 private:
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
@@ -188,14 +188,14 @@ public:
     }
 
 
-    /// Version with a whole patch set and take the correct subset of patches.
-    template <class IdxPar, class... PatchTypes>
-    void solve_deriv(
-            MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs,
-            IdxPar const& idx_par)
-    {
-        solve_deriv(ddcHelper::get<Patches...>(functions_and_derivs), idx_par);
-    }
+    // /// Version with a whole patch set and take the correct subset of patches.
+    // template <class IdxPar, class... PatchTypes>
+    // void solve_deriv(
+    //         MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs,
+    //         IdxPar const& idx_par)
+    // {
+    //     solve_deriv(ddcHelper::get<Patches...>(functions_and_derivs), idx_par);
+    // }
 
     /**
     * @brief Compute the vector C_trunc to determine all the interface derivatives in the Grid1D
@@ -210,13 +210,13 @@ public:
     void solve_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
         constexpr bool is_first_idx_range_perp_on_dim1
-                = ddc::in_tags_v<typename FirstPatch::Grid1, Grid1DSeq>;
+                = ddc::in_tags_v<typename PatchFirst::Grid1, Grid1DSeq>;
         using IdxRangeParFirstType = std::conditional_t<
                 is_first_idx_range_perp_on_dim1,
-                typename FirstPatch::IdxRange2,
-                typename FirstPatch::IdxRange1>;
+                typename PatchFirst::IdxRange2,
+                typename PatchFirst::IdxRange1>;
 
-        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<FirstPatch>());
+        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<PatchFirst>());
 
         ddc::host_for_each(
                 idx_range_par_first,
@@ -225,12 +225,12 @@ public:
                 });
     }
 
-    /// Version with a whole patch set and take the correct subset of patches.
-    template <class... PatchTypes>
-    void solve_deriv(MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs)
-    {
-        solve_deriv(ddcHelper::get<Patches...>(functions_and_derivs));
-    }
+    // /// Version with a whole patch set and take the correct subset of patches.
+    // template <class... PatchTypes>
+    // void solve_deriv(MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs)
+    // {
+    //     solve_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...>(functions_and_derivs));
+    // }
 
     /**
      * @brief Compute the vector C_trunc to determine all the interface cross-derivatives in the Grid1D
@@ -250,14 +250,14 @@ public:
         solve<eval_cross_deriv>(functions_and_derivs, idx_par);
     }
 
-    /// Version with a whole patch set and take the correct subset of patches.
-    template <class IdxPar, class... PatchTypes>
-    void solve_cross_deriv(
-            MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs,
-            IdxPar const& idx_par)
-    {
-        solve_cross_deriv(ddcHelper::get<Patches...>(functions_and_derivs), idx_par);
-    }
+    // /// Version with a whole patch set and take the correct subset of patches.
+    // template <class IdxPar, class... PatchTypes>
+    // void solve_cross_deriv(
+    //         MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs,
+    //         IdxPar const& idx_par)
+    // {
+    //     solve_cross_deriv(ddcHelper::get<Patches...>(functions_and_derivs), idx_par);
+    // }
 
     /**
      * @brief Compute the vector C_trunc to determine all the corner cross-derivatives in the Grid1D
@@ -271,25 +271,25 @@ public:
     void solve_cross_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
         constexpr bool is_first_idx_range_perp_on_dim1
-                = ddc::in_tags_v<typename FirstPatch::Grid1, Grid1DSeq>;
+                = ddc::in_tags_v<typename PatchFirst::Grid1, Grid1DSeq>;
         using IdxRangeParFirstType = std::conditional_t<
                 is_first_idx_range_perp_on_dim1,
-                typename FirstPatch::IdxRange2,
-                typename FirstPatch::IdxRange1>;
+                typename PatchFirst::IdxRange2,
+                typename PatchFirst::IdxRange1>;
 
-        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<FirstPatch>());
+        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<PatchFirst>());
 
         solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.front());
         solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.back());
     }
 
-    /// Version with a whole patch set and take the correct subset of patches.
-    template <class... PatchTypes>
-    void solve_cross_deriv(
-            MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs)
-    {
-        solve_cross_deriv(ddcHelper::get<Patches...>(functions_and_derivs));
-    }
+    // /// Version with a whole patch set and take the correct subset of patches.
+    // template <class... PatchTypes>
+    // void solve_cross_deriv(
+    //         MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs)
+    // {
+    //     solve_cross_deriv(ddcHelper::get<Patches...>(functions_and_derivs));
+    // }
 
 
 private:
@@ -300,8 +300,8 @@ private:
     {
         // Check the input types.
         static_assert(
-                (std::is_same_v<IdxPar, typename FirstPatch::Idx1>)
-                        || (std::is_same_v<IdxPar, typename FirstPatch::Idx2>),
+                (std::is_same_v<IdxPar, typename PatchFirst::Idx1>)
+                        || (std::is_same_v<IdxPar, typename PatchFirst::Idx2>),
                 "The given index has to be a 1D index defined on the first patch. See "
                 "InterfacesDerivativeCalculator<...>::first_patch.");
 
@@ -321,13 +321,13 @@ private:
             std::integer_sequence<std::size_t, I...>)
     {
         static_assert(
-                (std::is_same_v<GridPar1D, typename FirstPatch::Grid1>)
-                || (std::is_same_v<GridPar1D, typename FirstPatch::Grid2>)
-                || (std::is_same_v<GridPar1D, ddc::Deriv<typename FirstPatch::Dim1>>)
-                || (std::is_same_v<GridPar1D, ddc::Deriv<typename FirstPatch::Dim2>>));
+                (std::is_same_v<GridPar1D, typename PatchFirst::Grid1>)
+                || (std::is_same_v<GridPar1D, typename PatchFirst::Grid2>)
+                || (std::is_same_v<GridPar1D, ddc::Deriv<typename PatchFirst::Dim1>>)
+                || (std::is_same_v<GridPar1D, ddc::Deriv<typename PatchFirst::Dim2>>));
 
         // Locally transform the index into an integer to avoid type issues.
-        IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<FirstPatch>());
+        IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<PatchFirst>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
         (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, slice_idx_value), ...);
     }
