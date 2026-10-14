@@ -178,10 +178,10 @@ public:
      * @return The field in the specified direction.
      */
     template <class QueryTag>
-    inline constexpr auto get() const noexcept
-            requires((is_vector_field_v<InternalTypes> && ...) && !is_patch_v<QueryTag>)
+    inline constexpr auto get() const noexcept requires(
+            (is_vector_field_v<InternalTypes> && ...)
+            && (ddc::in_tags_v<QueryTag, typename InternalTypes::NDTypeTag> && ...))
     {
-        static_assert((ddc::in_tags_v<QueryTag, typename InternalTypes::NDTypeTag> && ...));
         using FieldType = MultipatchField<
                 PatchOrdering,
                 ddc::detail::TypeSeq<typename InternalTypes::chunk_span_type...>>;
@@ -242,6 +242,28 @@ void deepcopy(
     } else {
         (ddcHelper::deepcopy(dst.template get<Patches>(), src.template get<Patches>()), ...);
     }
+}
+
+/**
+ * Retrieve a subset of objects from the patches that they are defined on.
+ *
+ * @tparam Patches The patches of the object subset to be returned.
+ * @tparam MultipatchFieldType The MultipatchField storing the set of objects. 
+ * @return The subset of objects on the given patches.
+ */
+template <typename... Patches, class MultipatchFieldType>
+detail::MultipatchField<
+        ddc::detail::TypeSeq<Patches...>,
+        ddc::detail::TypeSeq<typename MultipatchFieldType::TypeOnPatch<Patches>...>>
+get(MultipatchFieldType const& multipatch_field)
+{
+    static_assert(ddc::type_seq_contains_v<
+                  ddc::detail::TypeSeq<Patches...>,
+                  typename MultipatchFieldType::PatchOrdering>);
+    return detail::MultipatchField<
+            ddc::detail::TypeSeq<Patches...>,
+            ddc::detail::TypeSeq<typename MultipatchFieldType::TypeOnPatch<Patches>...>>(
+            multipatch_field.template get<Patches>()...);
 }
 
 } // namespace ddcHelper
