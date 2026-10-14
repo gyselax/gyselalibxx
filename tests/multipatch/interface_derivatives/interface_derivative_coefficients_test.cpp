@@ -160,7 +160,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
 {
     // Get the parameters of the test: patch connection and interpolation type.
     using Interpolation = InterpolationType;
-    static constexpr ddc::SplineBuilderClosure Interpolation_v = InterpolationType::value;
+    static constexpr ddc::SplineBuilderClosure closure = InterpolationType::value;
     using Edge1 = Edge_Patch1;
     using Edge2 = Edge_Patch2;
 
@@ -172,7 +172,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
     static constexpr Coord<R> r1_max = Coord<R>(1.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
     static constexpr IdxStep<GridR<1>> r1_ncells
-            = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<1>>(5)
+            = (closure == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<1>>(5)
                                                                        : IdxStep<GridR<1>>(30);
 
     static constexpr Coord<Theta> theta1_min = Coord<Theta>(0.0);
@@ -187,7 +187,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
             = (std::is_same_v<Edge2, SouthEdge2>) ? Coord<Eta>(2.0 * 2 * M_PI) : Coord<Eta>(2.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
     static constexpr IdxStep<GridR<2>> eta2_ncells
-            = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<2>>(5)
+            = (closure == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<2>>(5)
                                                                        : IdxStep<GridR<2>>(30);
 
     // Exchange R and Theta values for a connection with SouthEdge2.
@@ -224,7 +224,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
 #endif
 
         std::vector<Coord<R>> interpolation_points_r1;
-        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+        if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
             // Add an interpolation point in the cell on the boundary of the equivalent global domain.
             // The other interpolation points are the break points.
             if constexpr (std::is_same_v<Edge1, EastEdge1>) {
@@ -233,12 +233,12 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
                 interpolation_points_r1
                         = get_interpolation_points_add_one_on_right(break_points_r1);
             }
-        } else if (Interpolation_v == ddc::SplineBuilderClosure::HERMITE) {
+        } else if (closure == ddc::SplineBuilderClosure::HERMITE) {
             // Use the break points as interpolation points.
             interpolation_points_r1 = break_points_r1;
         }
         ddc::init_discrete_space<GridR<1>>(
-                SplineInterpPointsR1<Interpolation_v>::template get_sampling<GridR<1>>(
+                SplineInterpPointsR1<closure>::template get_sampling<GridR<1>>(
                         interpolation_points_r1));
         ddc::init_discrete_space<GridTheta<1>>(
                 SplineInterpPointsTheta1::get_sampling<GridTheta<1>>());
@@ -268,7 +268,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
 
         std::vector<Coord<R>> interpolation_points_eta2;
         std::vector<Coord<Theta>> interpolation_points_xi2;
-        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+        if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
             // Add an interpolation point in the cell on the boundary of the equivalent global domain.
             // The other interpolation points are the break points.
             if constexpr (std::is_same_v<Edge2, EastEdge2>) {
@@ -284,13 +284,13 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
                         = get_interpolation_points_add_one_on_right(break_points_xi2);
                 interpolation_points_eta2 = break_points_eta2;
             }
-        } else if (Interpolation_v == ddc::SplineBuilderClosure::HERMITE) {
+        } else if (closure == ddc::SplineBuilderClosure::HERMITE) {
             // Use the break points as interpolation points.
             interpolation_points_eta2 = break_points_eta2;
             interpolation_points_xi2 = break_points_xi2;
         }
         ddc::init_discrete_space<GridR<2>>(
-                SplineInterpPointsEta2<Interpolation_v>::template get_sampling<GridR<2>>(
+                SplineInterpPointsEta2<closure>::template get_sampling<GridR<2>>(
                         interpolation_points_eta2));
         ddc::init_discrete_space<GridTheta<2>>(SplineInterpPointsXi2::get_sampling<GridTheta<2>>());
 
@@ -341,7 +341,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
         ddc::init_discrete_space<BSplinesThetag>(break_points_thetag);
 
         ddc::init_discrete_space<GridRg>(
-                SplineInterpPointsRg<Interpolation_v>::template get_sampling<GridRg>(
+                SplineInterpPointsRg<closure>::template get_sampling<GridRg>(
                         interpolation_points_rg));
         ddc::init_discrete_space<GridThetag>(
                 SplineInterpPointsThetag::get_sampling<GridThetag>(interpolation_points_thetag));
@@ -349,7 +349,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
 
 
     // DEFINE INDEX RANGES -----------------------------------------------------------------------
-    using SplineInterpPoints_R1 = SplineInterpPointsR1<Interpolation_v>;
+    using SplineInterpPoints_R1 = SplineInterpPointsR1<closure>;
     const typename Patch1::IdxRange1 idx_range_r1 =
             typename Patch1::IdxRange1(SplineInterpPoints_R1::template get_domain<GridR<1>>());
     const typename Patch1::IdxRange2 idx_range_theta1 =
@@ -357,7 +357,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
     const typename Patch1::IdxRange12 idx_range_rtheta1 =
             typename Patch1::IdxRange12(idx_range_r1, idx_range_theta1);
 
-    using SplineInterpPoints_R2 = SplineInterpPointsEta2<Interpolation_v>;
+    using SplineInterpPoints_R2 = SplineInterpPointsEta2<closure>;
     const typename Patch2::IdxRange1 idx_range_eta2 =
             typename Patch2::IdxRange1(SplineInterpPoints_R2::template get_domain<GridR<2>>());
     const typename Patch2::IdxRange2 idx_range_xi2 =
@@ -365,7 +365,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
     const typename Patch2::IdxRange12 idx_range_etaxi2 =
             typename Patch2::IdxRange12(idx_range_eta2, idx_range_xi2);
 
-    using SplineInterpPoints_Rg = SplineInterpPointsRg<Interpolation_v>;
+    using SplineInterpPoints_Rg = SplineInterpPointsRg<closure>;
     const IdxRange<GridRg> idx_range_r_g
             = IdxRange<GridRg>(SplineInterpPoints_Rg::template get_domain<GridRg>());
     const IdxRange<GridThetag> idx_range_theta_g
@@ -605,7 +605,7 @@ TYPED_TEST_SUITE(InterfaceDerivCoeffsFixture, Cases);
 TYPED_TEST(InterfaceDerivCoeffsFixture, InterpolationPointsCheck)
 {
     // Get parameters of the test.
-    constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
+    constexpr ddc::SplineBuilderClosure closure = TestFixture::closure;
     using Edge1 = typename TestFixture::Edge1;
     using Edge2 = typename TestFixture::Edge2;
 
@@ -633,7 +633,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterpolationPointsCheck)
             Patch1::IdxStep1 idx_r(Patch1::Idx1(idx) - TestFixture::idx_range_r1.front());
             Patch1::IdxStep2 idx_theta(Patch1::Idx2(idx) - TestFixture::idx_range_theta1.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+            if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         TestFixture::r1_ncells.value() + 1 - idx_r.value(),
                         TestFixture::theta1_ncells.value() - 1 - idx_theta.value());
@@ -662,7 +662,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterpolationPointsCheck)
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+            if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         TestFixture::eta2_ncells.value() - idx_eta.value()
                                 + TestFixture::r1_ncells.value() + 2,
@@ -690,7 +690,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterpolationPointsCheck)
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+            if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         idx_eta.value() + TestFixture::r1_ncells.value() + 1,
                         idx_xi.value());
@@ -711,7 +711,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterpolationPointsCheck)
     } else if (std ::is_same_v<Edge2, SouthEdge2>) {
         // Orientation second patch:  ↓→
         // Orientation global domain: ↑→
-        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+        if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
             Kokkos::abort("Test case not implemented."
                           "We cannot make the Edge1 on Theta with N points to match with the "
                           "Edge2 on R with N+1 points.");
@@ -742,7 +742,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterpolationPointsCheck)
 TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximationFormulae)
 {
     // Get parameters of the test.
-    constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
+    constexpr ddc::SplineBuilderClosure closure = TestFixture::closure;
     using Edge1 = typename TestFixture::Edge1;
     using Edge2 = typename TestFixture::Edge2;
     using Interface_1_2 = typename TestFixture::Interface_1_2;
@@ -822,14 +822,14 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
 
 
     // Build an equivalent global spline =========================================================
-    SplineRThetagBuilder<Interpolation_v> builder_g(TestFixture::idx_range_rtheta_g);
+    SplineRThetagBuilder<closure> builder_g(TestFixture::idx_range_rtheta_g);
 
     host_t<DFieldMem<IdxRange<BSplinesRg, BSplinesThetag>>> function_g_coef_alloc(
             builder_g.batched_spline_domain(TestFixture::idx_range_rtheta_g));
     host_t<DField<IdxRange<BSplinesRg, BSplinesThetag>>> function_g_coef
             = get_field(function_g_coef_alloc);
 
-    if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+    if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
         // --- Spline builder
         builder_g(function_g_coef, get_const_field(function_g));
     } else {
@@ -872,7 +872,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
 
 
     // Check the local derivatives with the global ones at the interfaces ========================
-    if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+    if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
         // We test if the boundaries are well treated => only work with 5 cells to better identify an error.
         // 5 cells -------------------------------------------------------------------------------
         InterfaceDerivCoeffs<Interface_1_2> const deriv_coeffs(
@@ -969,7 +969,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
 TYPED_TEST(InterfaceDerivCoeffsFixture, GetAppoxCrossDeriv)
 {
     // Get parameters of the test.
-    constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
+    constexpr ddc::SplineBuilderClosure closure = TestFixture::closure;
     using Edge1 = typename TestFixture::Edge1;
     using Edge2 = typename TestFixture::Edge2;
     using Interface_1_2 = typename TestFixture::Interface_1_2;
@@ -1061,8 +1061,8 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, GetAppoxCrossDeriv)
     InterfaceDerivCoeffs<Interface_1_2> const deriv_coeffs(
             TestFixture::idx_range_rtheta1,
             TestFixture::idx_range_etaxi2,
-            Interpolation_v,
-            Interpolation_v);
+            closure,
+            closure);
 
     constexpr bool has_matching_deriv_orientation = Interface_1_2::orientations_agree;
 
