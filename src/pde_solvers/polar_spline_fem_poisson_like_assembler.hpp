@@ -1384,22 +1384,22 @@ public:
                         idx_quad,
                         idx_trial);
 
-        MetricTensorEvaluator<Mapping, Coord<R, Theta>> get_metric_tensor(mapping);
-
         using Spatial2DVectorSpace = VectorIndexSet<R, Theta>;
 
+        MetricTensorEvaluator<Mapping, Coord<R, Theta>> get_metric_tensor(mapping);
         Tensor inv_metric_tensor = get_metric_tensor.inverse(coord);
         DTensor<Spatial2DVectorSpace, Spatial2DVectorSpace> inv_metric_tensor_2d;
         ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
+        double test_mass_weight = int_volume(idx_quad) * beta * basis_val_test_space;
+        DVector<R, Theta> test_stiffness_weight = int_volume(idx_quad) * alpha
+                                                  * tensor_mul(
+                                                          index<'i'>(basis_derivs_test_space),
+                                                          index<'i', 'j'>(inv_metric_tensor_2d));
+
         // Assemble the weak integral element
-        return int_volume(idx_quad)
-               * (alpha
-                          * tensor_mul(
-                                  index<'i'>(basis_derivs_test_space),
-                                  index<'i', 'j'>(inv_metric_tensor_2d),
-                                  index<'j'>(basis_derivs_trial_space))
-                  + beta * basis_val_test_space * basis_val_trial_space);
+        return scalar_product(test_stiffness_weight, basis_derivs_trial_space)
+               + test_mass_weight * basis_val_trial_space;
     }
 
     /**
