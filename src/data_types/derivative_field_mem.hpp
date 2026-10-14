@@ -427,7 +427,7 @@ public:
     element_type& operator()(DElem... elems) noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_index_type = ddcHelper::combine_t<DElem...>;
+        using full_index_type = ddc::combine_t<DElem...>;
         full_index_type elem(elems...);
         return this->get_internal_field(elem)();
     }
@@ -445,7 +445,7 @@ public:
     element_type const& operator()(DElem... elems) const noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_index_type = ddcHelper::combine_t<DElem...>;
+        using full_index_type = ddc::combine_t<DElem...>;
         full_index_type elem(elems...);
         return this->get_internal_field(elem)();
     }
