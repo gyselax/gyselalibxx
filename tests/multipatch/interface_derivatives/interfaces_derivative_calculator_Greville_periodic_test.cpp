@@ -18,6 +18,7 @@
 #include "interfaces_derivative_calculator_test_utils.hpp"
 #include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
+#include "multipatch_field_mem.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "orthogonal_coord_transforms.hpp"
 #include "types.hpp"
@@ -511,28 +512,18 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             matrix_369(idx_ranges_369, deriv_coeffs_collect_369);
 
     // Instantiate DerivField ====================================================================
-    // tmp ---
-    DerivFieldMemOnPatch_host<Patch1> function_and_derivs_1_alloc(idx_range_xy1);
-    DerivFieldMemOnPatch_host<Patch2> function_and_derivs_2_alloc(idx_range_xy2);
-    DerivFieldMemOnPatch_host<Patch3> function_and_derivs_3_alloc(idx_range_xy3);
-    DerivFieldMemOnPatch_host<Patch4> function_and_derivs_4_alloc(idx_range_xy4);
-    DerivFieldMemOnPatch_host<Patch5> function_and_derivs_5_alloc(idx_range_xy5);
-    DerivFieldMemOnPatch_host<Patch6> function_and_derivs_6_alloc(idx_range_xy6);
-    DerivFieldMemOnPatch_host<Patch7> function_and_derivs_7_alloc(idx_range_xy7);
-    DerivFieldMemOnPatch_host<Patch8> function_and_derivs_8_alloc(idx_range_xy8);
-    DerivFieldMemOnPatch_host<Patch9> function_and_derivs_9_alloc(idx_range_xy9);
-
-    DerivFieldOnPatch_host<Patch1> function_and_derivs_1(function_and_derivs_1_alloc);
-    DerivFieldOnPatch_host<Patch2> function_and_derivs_2(function_and_derivs_2_alloc);
-    DerivFieldOnPatch_host<Patch3> function_and_derivs_3(function_and_derivs_3_alloc);
-    DerivFieldOnPatch_host<Patch4> function_and_derivs_4(function_and_derivs_4_alloc);
-    DerivFieldOnPatch_host<Patch5> function_and_derivs_5(function_and_derivs_5_alloc);
-    DerivFieldOnPatch_host<Patch6> function_and_derivs_6(function_and_derivs_6_alloc);
-    DerivFieldOnPatch_host<Patch7> function_and_derivs_7(function_and_derivs_7_alloc);
-    DerivFieldOnPatch_host<Patch8> function_and_derivs_8(function_and_derivs_8_alloc);
-    DerivFieldOnPatch_host<Patch9> function_and_derivs_9(function_and_derivs_9_alloc);
-
-    // Collect the fields with derivatives.
+    MultipatchFieldMem<
+            DerivFieldMemOnPatch_host,
+            Patch1,
+            Patch2,
+            Patch3,
+            Patch4,
+            Patch5,
+            Patch6,
+            Patch7,
+            Patch8,
+            Patch9>
+            functions_and_derivs_alloc(idx_ranges);
     MultipatchField<
             DerivFieldOnPatch_host,
             Patch1,
@@ -544,42 +535,7 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             Patch7,
             Patch8,
             Patch9>
-            functions_and_derivs(
-                    function_and_derivs_1,
-                    function_and_derivs_2,
-                    function_and_derivs_3,
-                    function_and_derivs_4,
-                    function_and_derivs_5,
-                    function_and_derivs_6,
-                    function_and_derivs_7,
-                    function_and_derivs_8,
-                    function_and_derivs_9);
-    // --- tmp
-
-    // MultipatchField<
-    //         DerivFieldMemOnPatch_host,
-    //         Patch1,
-    //         Patch2,
-    //         Patch3,
-    //         Patch4,
-    //         Patch5,
-    //         Patch6,
-    //         Patch7,
-    //         Patch8,
-    //         Patch9>
-    //         functions_and_derivs_alloc(idx_ranges);
-    // MultipatchField<
-    //         DerivFieldOnPatch_host,
-    //         Patch1,
-    //         Patch2,
-    //         Patch3,
-    //         Patch4,
-    //         Patch5,
-    //         Patch6,
-    //         Patch7,
-    //         Patch8,
-    //         Patch9>
-    //         functions_and_derivs(functions_and_derivs_alloc);
+            functions_and_derivs(functions_and_derivs_alloc);
 
     // Instantiate the field of global function values. No derivatives needed.
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
