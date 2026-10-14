@@ -645,7 +645,7 @@ It fills in the derivatives in the `functions_and_derivs` collection with the co
 
 #### A 2D case operator
 
-This operator is actually implemented for 2D patches.
+This operator is implemented for 2D patches.
 For 2D local splines with Hermite boundary conditions, we need the first derivatives along the first dimension,
 first derivatives along the second dimension, and the cross-derivatives.
 
