@@ -130,8 +130,8 @@ TEST(MultipatchFieldMorePatches, SubpatchesField)
     static constexpr Patch3::IdxStep1 x3_size = Patch3::IdxStep1(5);
     static constexpr Patch3::IdxStep2 y3_size = Patch3::IdxStep2(7);
 
-    static constexpr Patch5::IdxStep1 x5_size = Patch5::IdxStep1(1);
-    static constexpr Patch5::IdxStep2 y5_size = Patch5::IdxStep2(1);
+    static constexpr Patch5::IdxStep1 x5_size = Patch5::IdxStep1(2);
+    static constexpr Patch5::IdxStep2 y5_size = Patch5::IdxStep2(2);
 
     static constexpr Patch7::IdxStep1 x7_size = Patch7::IdxStep1(4);
     static constexpr Patch7::IdxStep2 y7_size = Patch7::IdxStep2(8);
