@@ -112,10 +112,16 @@ jobs:
           - name: 'clang'
             c_compiler: 'clang'
             cxx_compiler: 'clang++'
+          - name: 'intel'
+            c_compiler: 'icx'
+            cxx_compiler: 'icpx'
         exclude:
           - toolchain: 'ci_coverage_toolchain'
             compiler:
               name: 'clang'
+          - toolchain: 'ci_coverage_toolchain'
+            compiler:
+              name: 'intel'
           - backend: 'openmp'
             toolchain: 'ci_coverage_toolchain'
           - backend: 'openmp'

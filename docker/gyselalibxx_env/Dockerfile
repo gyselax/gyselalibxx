@@ -18,10 +18,13 @@ RUN chmod +x /bin/bash_run \
     apt-transport-https \
     apt-utils \
     ca-certificates \
+    gnupg \
     wget \
  && echo "deb [ arch=amd64 ] https://repo.pdi.dev/ubuntu noble main" > /etc/apt/sources.list.d/pdi.list \
  && wget -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://repo.pdi.dev/ubuntu/pdidev-archive-keyring.gpg \
  && chmod a+r /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg \
+ && wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null \
+ && echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" > /etc/apt/sources.list.d/oneAPI.list \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
@@ -44,6 +47,7 @@ RUN chmod +x /bin/bash_run \
     python3-venv \
     libpdi-dev \
     cmake \
+    intel-oneapi-compiler-dpcpp-cpp \
  && ln -sf /usr/bin/clang-18 /usr/bin/clang \
  && ln -sf /usr/bin/clang++-18 /usr/bin/clang++ \
  && git clone --branch v1.11.0 --depth 1 https://github.com/ginkgo-project/ginkgo.git \
@@ -165,6 +169,9 @@ RUN chmod +x /bin/bash_run \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
  && chown -R ci:ci /ci /data /opt/venv
+
+ENV PATH="/opt/intel/oneapi/compiler/latest/bin:${PATH}"
+ENV LD_LIBRARY_PATH="/opt/intel/oneapi/compiler/latest/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 
 USER ci:ci
 WORKDIR /ci
