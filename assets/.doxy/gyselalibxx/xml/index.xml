@@ -1788,8 +1788,10 @@
     <member refid="classInterfaceDerivCoeffs_1aa91e3f6edaa49e28297573f42304c52f" kind="function"><name>get_cell_lengths</name></member>
     <member refid="classInterfaceDerivCoeffs_1a862f05575170ac9c8f314d5effa6ca7d" kind="function"><name>get_gammas</name></member>
     <member refid="classInterfaceDerivCoeffs_1ab9653aabab2507a12ed73dd0109bf52a" kind="function"><name>get_extremity_idx</name></member>
+    <member refid="classInterfaceDerivCoeffs_1afde8e64000fd26156c82731df8e00971" kind="function"><name>set_local_uniform_weights</name></member>
     <member refid="classInterfaceDerivCoeffs_1a8660c8d287b9c0aff8187e90f664fa59" kind="function"><name>get_alpha</name></member>
     <member refid="classInterfaceDerivCoeffs_1a69672c0dc822be693252fd852393dc65" kind="function"><name>get_beta</name></member>
+    <member refid="classInterfaceDerivCoeffs_1a1b29b4e765fd498df3074ceb307118d8" kind="function"><name>neg_1_to_the_power</name></member>
   </compound>
   <compound refid="classInterfaceDerivCoeffsCollection" kind="class"><name>InterfaceDerivCoeffsCollection</name>
     <member refid="classInterfaceDerivCoeffsCollection_1a65c5516332f15d4d13f0d8ed25d5a720" kind="typedef"><name>DerivCalculatorTypeSeq</name></member>

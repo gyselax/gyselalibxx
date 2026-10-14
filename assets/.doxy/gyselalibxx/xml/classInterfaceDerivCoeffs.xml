@@ -856,7 +856,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="377" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="377" bodyend="403"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="377" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="377" bodyend="399"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1aca0e10fed842d4b82dc9f5b3152fff93" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -907,7 +907,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="413" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="413" bodyend="418"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="409" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="409" bodyend="414"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -946,7 +946,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="423" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="423" bodyend="459"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="419" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="419" bodyend="455"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1a6031b7019c0e2f70a917bd0e2356f3ad" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -979,7 +979,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="462" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="462" bodyend="497"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="458" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="458" bodyend="493"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1a8ea934772b749e34e46de0840ce68653" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -994,7 +994,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="506" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="506" bodyend="722"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="502" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="502" bodyend="720"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1a121d67e775bf06a49fae54659b67ceea" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1089,7 +1089,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="741" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="741" bodyend="820"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="739" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="739" bodyend="818"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1a5911adc78297a3d2c2db0c719d49662a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1185,7 +1185,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="839" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="839" bodyend="952"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="837" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="837" bodyend="950"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1ac74750306f8c6cd1c076039969ae712b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1200,7 +1200,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="962" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="962" bodyend="1048"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="960" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="960" bodyend="1008"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1aa91e3f6edaa49e28297573f42304c52f" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1224,7 +1224,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1055" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1055" bodyend="1126"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1051" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1051" bodyend="1122"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1a862f05575170ac9c8f314d5effa6ca7d" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::array&lt; double, 3 &gt;</type>
@@ -1247,7 +1247,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1130" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1130" bodyend="1142"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1126" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1126" bodyend="1138"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1ab9653aabab2507a12ed73dd0109bf52a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1274,10 +1274,45 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1158" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1158" bodyend="1163"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1154" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1154" bodyend="1159"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classInterfaceDerivCoeffs_1afde8e64000fd26156c82731df8e00971" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class EdgePerpGrid</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void InterfaceDerivCoeffs&lt; InterfaceType &gt;::set_local_uniform_weights</definition>
+        <argsstring>(host_t&lt; DField&lt; IdxRange&lt; EdgePerpGrid &gt; &gt; &gt; weights, double factor, double un_other_patch, Idx&lt; EdgePerpGrid &gt; idx_interface)</argsstring>
+        <name>set_local_uniform_weights</name>
+        <qualifiedname>InterfaceDerivCoeffs::set_local_uniform_weights</qualifiedname>
+        <param>
+          <type>host_t&lt; DField&lt; IdxRange&lt; EdgePerpGrid &gt; &gt; &gt;</type>
+          <declname>weights</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>factor</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>un_other_patch</declname>
+        </param>
+        <param>
+          <type>Idx&lt; EdgePerpGrid &gt;</type>
+          <declname>idx_interface</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1014" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1014" bodyend="1045"/>
+      </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1a8660c8d287b9c0aff8187e90f664fa59" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
         <definition>static double InterfaceDerivCoeffs&lt; InterfaceType &gt;::get_alpha</definition>
@@ -1299,7 +1334,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1145" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1145" bodyend="1148"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1141" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1141" bodyend="1144"/>
       </memberdef>
       <memberdef kind="function" id="classInterfaceDerivCoeffs_1a69672c0dc822be693252fd852393dc65" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -1322,7 +1357,25 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1151" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1151" bodyend="1154"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1147" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1147" bodyend="1150"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterfaceDerivCoeffs_1a1b29b4e765fd498df3074ceb307118d8" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double InterfaceDerivCoeffs&lt; InterfaceType &gt;::neg_1_to_the_power</definition>
+        <argsstring>(int k)</argsstring>
+        <name>neg_1_to_the_power</name>
+        <qualifiedname>InterfaceDerivCoeffs::neg_1_to_the_power</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="1161" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="1161" bodyend="1164"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1361,7 +1414,7 @@ The following parameters are array with three elements corresponding to the valu
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="66" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="67" bodyend="1164"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="66" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="67" bodyend="1165"/>
     <listofallmembers>
       <member refid="classInterfaceDerivCoeffs_1a61d1ec3aee1fcc9b526b832ba9536f1b" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>associated_interface</name></member>
       <member refid="classInterfaceDerivCoeffs_1aeaf5344e9bfe7ff77e104c73cb39c0a0" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>BSplinesPerp1</name></member>
@@ -1411,11 +1464,13 @@ The following parameters are array with three elements corresponding to the valu
       <member refid="classInterfaceDerivCoeffs_1adfbfcd6fbdcf281afb7a37437bd10ea6" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_weights_patch_1_alloc</name></member>
       <member refid="classInterfaceDerivCoeffs_1a8a1b9e9fa396c1926556557ff2cc1957" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_weights_patch_2</name></member>
       <member refid="classInterfaceDerivCoeffs_1ae2bef47b696b0ef0402807aa6de1e915" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_weights_patch_2_alloc</name></member>
+      <member refid="classInterfaceDerivCoeffs_1a1b29b4e765fd498df3074ceb307118d8" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>neg_1_to_the_power</name></member>
       <member refid="classInterfaceDerivCoeffs_1a09ab28344ad5f0e7751add630d9f799a" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>Patch1</name></member>
       <member refid="classInterfaceDerivCoeffs_1a43330f146f3f2d3b1fa059092510eccc" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>Patch2</name></member>
       <member refid="classInterfaceDerivCoeffs_1a121d67e775bf06a49fae54659b67ceea" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>recursion</name></member>
       <member refid="classInterfaceDerivCoeffs_1a8ea934772b749e34e46de0840ce68653" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>set_coefficients_non_uniform_case</name></member>
       <member refid="classInterfaceDerivCoeffs_1ac74750306f8c6cd1c076039969ae712b" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>set_coefficients_uniform_per_patch_case</name></member>
+      <member refid="classInterfaceDerivCoeffs_1afde8e64000fd26156c82731df8e00971" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>set_local_uniform_weights</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>
