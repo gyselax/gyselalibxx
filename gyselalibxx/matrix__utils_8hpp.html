@@ -573,9 +573,27 @@
 <p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_8cedd1260cc2f2819c8df2fc66ad98b5.html"><strong>matrix_tools</strong></a> <strong>&gt;</strong> <a href="matrix__utils_8hpp.html"><strong>matrix_utils.hpp</strong></a></p>
 <p><a href="matrix__utils_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
+<li><code>#include &lt;source_location&gt;</code></li>
+<li><code>#include &lt;ginkgo/extensions/kokkos/spaces.hpp&gt;</code></li>
+<li><code>#include &lt;ginkgo/extensions/kokkos/types.hpp&gt;</code></li>
 <li><code>#include &lt;ginkgo/ginkgo.hpp&gt;</code></li>
 <li><code>#include &lt;Kokkos_Core.hpp&gt;</code></li>
 </ul>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">enum</td>
+<td style="text-align: left;"><a href="#enum-gkomatrixresidualnorm"><strong>GkoMatrixResidualNorm</strong></a>  <br><em>A tag to choose the norm used to evaluate the residual in the stopping criterion of a Ginkgo solver.</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
@@ -594,8 +612,12 @@
 <td style="text-align: left;"><a href="#function-default_preconditioner_max_block_size"><strong>default_preconditioner_max_block_size</strong></a> () noexcept<br></td>
 </tr>
 <tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#function-inf_norm"><strong>inf_norm</strong></a> (gko::matrix::Dense&lt; double &gt; const * vec) <br><em>A function to compute the infinite norm of a single-column Ginkgo Dense vector.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-save_logger"><strong>save_logger</strong></a> (std::fstream &amp; log_file, int const batch_index, std::unique_ptr&lt; sparse_type &gt; matrix, Kokkos::View&lt; double *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const x_view, Kokkos::View&lt; double *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const b_view, std::shared_ptr&lt; const gko::log::Convergence&lt; double &gt; &gt; logger, double const tol) <br><em>A function to save convergence data using the logger.</em></td>
+<td style="text-align: left;"><a href="#function-save_logger"><strong>save_logger</strong></a> (std::fstream &amp; log_file, int const batch_index, std::unique_ptr&lt; sparse_type &gt; matrix, Kokkos::View&lt; double *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const x_view, Kokkos::View&lt; double *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const b_view, std::shared_ptr&lt; const gko::log::Convergence&lt; double &gt; &gt; logger, double const tol, GkoMatrixResidualNorm const norm) <br><em>A function to save convergence data using the logger. All norms written to the log are computed with the norm used by the stopping criterion.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -606,11 +628,25 @@
 <td style="text-align: left;"><a href="#function-to_gko_multivector"><strong>to_gko_multivector</strong></a> (std::shared_ptr&lt; const gko::Executor &gt; const &amp; gko_exec, KokkosViewType const &amp; view) <br><em>A function to convert a 2D Kokkos view into a ginkgo multivector structure.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#function-vector_norm"><strong>vector_norm</strong></a> (gko::matrix::Dense&lt; double &gt; const * vec, GkoMatrixResidualNorm const norm) <br><em>A function to compute the norm of a single-column Ginkgo Dense vector.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-write_log"><strong>write_log</strong></a> (std::fstream &amp; log_file, int const batch_index, int const num_iterations, double const implicit_res_norm, double const true_res_norm, double const b_norm, double const tol) <br><em>A helper to write the log corresponding to a single batch.</em></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="enum-gkomatrixresidualnorm">enum GkoMatrixResidualNorm</h3>
+<p><em>A tag to choose the norm used to evaluate the residual in the stopping criterion of a Ginkgo solver.</em> </p>
+<pre><code class="language-C++">enum GkoMatrixResidualNorm {
+    TWO,
+    INF
+};
+</code></pre>
+<p>TWO The relative 2-norm of the residual ||r||_2/||b||_2 (Ginkgo's gko::stop::ResidualNorm). INF The relative infinite norm of the residual ||r||_inf/||b||_inf (see <a href="classInfNormResidual.html"><strong>InfNormResidual</strong></a>). </p>
+<hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-check_conv">function check_conv</h3>
 <p><em>A function for checking convergence. It loops over the batch and checks the if residual is lower or equal to the prescribed tolerance.</em> </p>
@@ -636,8 +672,27 @@ unsigned int default_preconditioner_max_block_size () noexcept
 </code></pre>
 <hr>
 
+<h3 id="function-inf_norm">function inf_norm</h3>
+<p><em>A function to compute the infinite norm of a single-column Ginkgo Dense vector.</em> </p>
+<pre><code class="language-C++">template&lt;class ExecSpace&gt;
+double inf_norm (
+    gko::matrix::Dense&lt; double &gt; const * vec
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>vec</code> A Ginkgo Dense vector with one column, whose data is accessible from ExecSpace. </li>
+</ul>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>ExecSpace</code> The Kokkos execution space in which the reduction is carried out. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The infinite norm, i.e. the maximum absolute value of the vector components. </p>
+<hr>
+
 <h3 id="function-save_logger">function save_logger</h3>
-<p><em>A function to save convergence data using the logger.</em> </p>
+<p><em>A function to save convergence data using the logger. All norms written to the log are computed with the norm used by the stopping criterion.</em> </p>
 <pre><code class="language-C++">template&lt;class sparse_type&gt;
 void save_logger (
     std::fstream &amp; log_file,
@@ -646,7 +701,8 @@ void save_logger (
     Kokkos::View&lt; double *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const x_view,
     Kokkos::View&lt; double *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const b_view,
     std::shared_ptr&lt; const gko::log::Convergence&lt; double &gt; &gt; logger,
-    double const tol
+    double const tol,
+    GkoMatrixResidualNorm const norm
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -658,6 +714,7 @@ void save_logger (
 <li><code>b_view</code> 2d Kokkos view containing the batch of rhs. </li>
 <li><code>logger</code> Ginkgo logger which stores residual and numbers of iterations for the whole batch. </li>
 <li><code>tol</code> tolerance </li>
+<li><code>norm</code> The norm used by the stopping criterion. </li>
 </ul>
 <hr>
 
@@ -699,6 +756,22 @@ auto to_gko_multivector (
 </ul>
 <p><strong>Returns:</strong></p>
 <p>A Ginkgo Multivector view over the Kokkos::View data </p>
+<hr>
+
+<h3 id="function-vector_norm">function vector_norm</h3>
+<p><em>A function to compute the norm of a single-column Ginkgo Dense vector.</em> </p>
+<pre><code class="language-C++">inline double vector_norm (
+    gko::matrix::Dense&lt; double &gt; const * vec,
+    GkoMatrixResidualNorm const norm
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>vec</code> A Ginkgo Dense vector with one column. </li>
+<li><code>norm</code> The norm which should be computed. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The requested norm of the vector. </p>
 <hr>
 
 <h3 id="function-write_log">function write_log</h3>

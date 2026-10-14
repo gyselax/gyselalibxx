@@ -303,6 +303,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _A helper structure to check if all the dimensions in a VectorIndexSet can represent covariant indices._ 
 * **struct** [**tensor\_tools::vector\_index\_set\_dual**](structtensor__tools_1_1vector__index__set__dual.md) _A helper structure to find a VectorIndexSet describing the covariant indices from a VectorIndexSet describing contravariant indices or to find a VectorIndexSet describing the contravariant indices from a VectorIndexSet describing covariant indices._ 
 * **struct** [**tensor\_tools::vector\_index\_set\_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _The implementation of_ [_**vector\_index\_set\_dual**_](structtensor__tools_1_1vector__index__set__dual.md) _for a VectorIndexSet._
+* **class** **gko::EnablePolymorphicObject< InfNormResidual< Kokkos::DefaultExecutionSpace >, gko::stop::Criterion >**    
+    * **class** [**InfNormResidual**](classInfNormResidual.md) _A Ginkgo stopping criterion based on the infinite norm of the residual._ 
 * **class** **detail::NonUniformLagrangeBasisBase**    
     * **class** [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) _Class describing Lagrange polynomials on a uniform grid._ 
 * **class** **IAdvectionV< IdxRangeFdistribu, IdxRangeSpatial >**    

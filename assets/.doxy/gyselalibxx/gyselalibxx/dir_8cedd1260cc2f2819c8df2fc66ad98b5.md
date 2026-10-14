@@ -21,6 +21,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| file | [**inf\_norm\_residual\_criterion.hpp**](inf__norm__residual__criterion_8hpp.md) <br> |
 | file | [**matrix.cpp**](matrix_8cpp.md) <br> |
 | file | [**matrix.hpp**](matrix_8hpp.md) <br> |
 | file | [**matrix\_banded.cpp**](matrix__banded_8cpp.md) <br> |

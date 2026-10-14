@@ -16,6 +16,7 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "inf_norm_residual_criterion.hpp"
 #include "matrix_batch.hpp"
 #include "matrix_utils.hpp"
 
@@ -52,6 +53,7 @@ private:
     double m_tol;
     bool m_with_logger;
     unsigned int m_preconditioner_max_block_size; // Maximum size of Jacobi-block preconditioner
+    GkoMatrixResidualNorm m_residual_norm;
 
 public:
     explicit MatrixBatchCsr(
@@ -61,14 +63,17 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = std::nullopt)
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_size, mat_size)
         , m_max_iter(max_iter.value_or(mat_size))
-        , m_tol(res_tol.value_or(1e-15))
+        , m_tol(res_tol.value_or(1e-8))
         , m_with_logger(logger.value_or(false))
         , m_preconditioner_max_block_size(preconditioner_max_block_size.value_or(
                   default_preconditioner_max_block_size<ExecSpace>()))
+        , m_residual_norm(residual_norm.value_or(GkoMatrixResidualNorm::TWO))
     {
+        check_residual_norm();
         std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_csr = gko::share(
                 batch_sparse_type::
@@ -84,14 +89,17 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = std::nullopt)
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_values.extent(0), nnz_per_row.size() - 1)
         , m_max_iter(max_iter.value_or(1000))
-        , m_tol(res_tol.value_or(1e-15))
+        , m_tol(res_tol.value_or(1e-8))
         , m_with_logger(logger.value_or(false))
         , m_preconditioner_max_block_size(preconditioner_max_block_size.value_or(
                   default_preconditioner_max_block_size<ExecSpace>()))
+        , m_residual_norm(residual_norm.value_or(GkoMatrixResidualNorm::TWO))
     {
+        check_residual_norm();
         std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_csr = gko::share(
                 batch_sparse_type::
@@ -141,9 +149,16 @@ public:
         if constexpr (
                 Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {
             // Create the solver factory
-            std::shared_ptr const residual_criterion
-                    = gko::stop::ResidualNorm<double>::build().with_reduction_factor(m_tol).on(
-                            gko_exec);
+            std::shared_ptr<gko::stop::CriterionFactory const> residual_criterion;
+            if (m_residual_norm == GkoMatrixResidualNorm::INF) {
+                residual_criterion
+                        = InfNormResidual<ExecSpace>::build().with_reduction_factor(m_tol).on(
+                                gko_exec);
+            } else {
+                residual_criterion
+                        = gko::stop::ResidualNorm<double>::build().with_reduction_factor(m_tol).on(
+                                gko_exec);
+            }
 
             std::shared_ptr const iterations_criterion
                     = gko::stop::Iteration::build().with_max_iters(m_max_iter).on(gko_exec);
@@ -217,7 +232,8 @@ public:
                             Kokkos::subview(x, i, Kokkos::ALL),
                             Kokkos::subview(b, i, Kokkos::ALL),
                             logger,
-                            m_tol);
+                            m_tol,
+                            m_residual_norm);
                     log_file.close();
                 }
                 // Check convergency
@@ -244,6 +260,17 @@ public:
             }
             // Check convergence
             check_conv(batch_size(), m_tol, gko_exec, logger);
+        }
+    }
+
+private:
+    void check_residual_norm() const
+    {
+        if ((Solver == MatrixBatchCsrSolver::BATCH_CG
+             || Solver == MatrixBatchCsrSolver::BATCH_BICGSTAB)
+            && m_residual_norm == GkoMatrixResidualNorm::INF) {
+            throw std::invalid_argument(
+                    "The batched Ginkgo solvers only support the 2-norm residual");
         }
     }
 };

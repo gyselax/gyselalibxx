@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp} - GyselalibX</title>
+    <title>Class InfNormResidual - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d238.md";
+        var mkdocs_page_name = "Class InfNormResidual";
+        var mkdocs_page_input_path = "gyselalibxx/classInfNormResidual.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -559,9 +559,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</li>
+      <li class="breadcrumb-item active">Class InfNormResidual</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d238.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classInfNormResidual.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -569,10 +569,152 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadratureneumann_spline_quadraturehpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d238.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</strong></a></p>
+                <div><h1 id="class-infnormresidual">Class InfNormResidual</h1>
+<p><strong>template &lt;class ExecSpace&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classInfNormResidual.html"><strong>InfNormResidual</strong></a></p>
+<p><em>A Ginkgo stopping criterion based on the infinite norm of the residual.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;inf_norm_residual_criterion.hpp&gt;</code></li>
+</ul>
+<p>Inherits the following classes: gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace &gt;, gko::stop::Criterion &gt;</p>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-gko_create_factory_parameters"><strong>GKO_CREATE_FACTORY_PARAMETERS</strong></a> (parameters, Factory) <br><em>The parameters which can be passed to the factory.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-gko_enable_build_method"><strong>GKO_ENABLE_BUILD_METHOD</strong></a> (Factory) <br><em>Define the static build() method which returns the parameters used to create a Factory.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-gko_enable_criterion_factory"><strong>GKO_ENABLE_CRITERION_FACTORY</strong></a> (<a href="classInfNormResidual.html"><strong>InfNormResidual</strong></a>&lt; ExecSpace &gt;, parameters, Factory) <br><em>Define the Factory class which creates the criterion, and the get_parameters() accessor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a href="#function-check_impl"><strong>check_impl</strong></a> (gko::uint8 stopping_id, bool set_finalised, gko::array&lt; gko::stopping_status &gt; * stop_status, bool * one_changed, gko::stop::Criterion::Updater const &amp; updater) override<br><em>Check if the infinite norm of the residual is below the threshold.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-functions">Protected Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-infnormresidual-12"><strong>InfNormResidual</strong></a> (std::shared_ptr&lt; gko::Executor const &gt; exec) <br><em>Constructor used by gko::EnablePolymorphicObject.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-infnormresidual-22"><strong>InfNormResidual</strong></a> (Factory const * factory, gko::stop::CriterionArgs const &amp; args) <br><em>Constructor used by the factory. Computes the convergence threshold from the right-hand side.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>The criterion is satisfied when ||r||_inf &lt;= reduction_factor * ||b||_inf, where r is the residual vector provided by the solver at each iteration (for CG/BiCGSTAB this is the residual computed by the recurrence of the method, not an explicitly re-computed b - Ax). Only single right-hand sides are supported.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>ExecSpace</code> The Kokkos execution space which has access to the Ginkgo executor memory. </li>
+</ul>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-gko_create_factory_parameters">function GKO_CREATE_FACTORY_PARAMETERS</h3>
+<p><em>The parameters which can be passed to the factory.</em> </p>
+<pre><code class="language-C++">inline InfNormResidual::GKO_CREATE_FACTORY_PARAMETERS (
+    parameters,
+    Factory
+) 
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp</code></p></div>
+
+<h3 id="function-gko_enable_build_method">function GKO_ENABLE_BUILD_METHOD</h3>
+<p><em>Define the static build() method which returns the parameters used to create a Factory.</em> </p>
+<pre><code class="language-C++">InfNormResidual::GKO_ENABLE_BUILD_METHOD (
+    Factory
+) 
+</code></pre>
+<hr>
+
+<h3 id="function-gko_enable_criterion_factory">function GKO_ENABLE_CRITERION_FACTORY</h3>
+<p><em>Define the Factory class which creates the criterion, and the get_parameters() accessor.</em> </p>
+<pre><code class="language-C++">InfNormResidual::GKO_ENABLE_CRITERION_FACTORY (
+    InfNormResidual &lt; ExecSpace &gt;,
+    parameters,
+    Factory
+) 
+</code></pre>
+<hr>
+
+<h3 id="function-check_impl">function check_impl</h3>
+<p><em>Check if the infinite norm of the residual is below the threshold.</em> </p>
+<pre><code class="language-C++">inline bool InfNormResidual::check_impl (
+    gko::uint8 stopping_id,
+    bool set_finalised,
+    gko::array&lt; gko::stopping_status &gt; * stop_status,
+    bool * one_changed,
+    gko::stop::Criterion::Updater const &amp; updater
+) override
+</code></pre>
+<p>Note: This function should be private but it is public due to CUDA restrictions.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>stopping_id</code> The id of the stopping criterion, saved in the stopping status. </li>
+<li><code>set_finalised</code> Controls if the current version should count as finalised. </li>
+<li><code>stop_status</code> The status of each right-hand side. </li>
+<li><code>one_changed</code> Indicates if the status of a right-hand side was modified. </li>
+<li><code>updater</code> The object containing the solver's current state.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>True if the criterion is satisfied. </p>
+<hr>
+<h2 id="protected-functions-documentation">Protected Functions Documentation</h2>
+<h3 id="function-infnormresidual-12">function InfNormResidual [1/2]</h3>
+<p><em>Constructor used by gko::EnablePolymorphicObject.</em> </p>
+<pre><code class="language-C++">inline explicit InfNormResidual::InfNormResidual (
+    std::shared_ptr&lt; gko::Executor const &gt; exec
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec</code> The Ginkgo executor. </li>
+</ul>
+<hr>
+
+<h3 id="function-infnormresidual-22">function InfNormResidual [2/2]</h3>
+<p><em>Constructor used by the factory. Computes the convergence threshold from the right-hand side.</em> </p>
+<pre><code class="language-C++">inline explicit InfNormResidual::InfNormResidual (
+    Factory const * factory,
+    gko::stop::CriterionArgs const &amp; args
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>factory</code> The factory holding the parameters. </li>
+<li><code>args</code> The arguments of the solver (system matrix, right-hand side, ...). </li>
+</ul>
+<hr>
+<h2 id="friends-documentation">Friends Documentation</h2>
+<h3 id="friend-enablepolymorphicobject-infnormresidual-execspace-gkostopcriterion">friend EnablePolymorphicObject&lt; InfNormResidual&lt; ExecSpace &gt;, gko::stop::Criterion &gt;</h3>
+<pre><code class="language-C++">class InfNormResidual::EnablePolymorphicObject&lt; InfNormResidual&lt; ExecSpace &gt;, gko::stop::Criterion &gt; (
+    gko::EnablePolymorphicObject&lt; InfNormResidual &lt; ExecSpace &gt;, gko::stop::Criterion &gt;
+) 
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp</code></p></div>
               
             </div>
           </div><footer>

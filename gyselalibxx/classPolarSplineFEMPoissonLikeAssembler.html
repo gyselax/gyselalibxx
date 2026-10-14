@@ -657,7 +657,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-setup_sparse_matrix"><strong>setup_sparse_matrix</strong></a> (std::unique_ptr&lt; <a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; &amp; gko_matrix, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt) <br><em>Compute the sparsity pattern for the stiffness matrix.</em></td>
+<td style="text-align: left;"><a href="#function-setup_sparse_matrix"><strong>setup_sparse_matrix</strong></a> (std::unique_ptr&lt; <a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; &amp; gko_matrix, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual_norm=std::nullopt) <br><em>Compute the sparsity pattern for the stiffness matrix.</em></td>
 </tr>
 </tbody>
 </table>
@@ -877,16 +877,18 @@ inline void PolarSplineFEMPoissonLikeAssembler::operator() (
     std::optional&lt; int &gt; max_iter=std::nullopt,
     std::optional&lt; double &gt; res_tol=std::nullopt,
     std::optional&lt; bool &gt; batch_solver_logger=std::nullopt,
-    std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt
+    std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt,
+    std::optional&lt; GkoMatrixResidualNorm &gt; residual_norm=std::nullopt
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>gko_matrix</code> The pointer to the assembled matrix. </li>
 <li><code>max_iter</code> The maximum number of iterations possible for the batched CSR solver. </li>
-<li><code>res_tol</code> The residual tolerance for the batched CSR solver. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. </li>
+<li><code>res_tol</code> The residual tolerance for the batched CSR solver. The solver stops when ||r||/||b|| &lt;= res_tol where r is the residual computed by the CG recurrence. </li>
 <li><code>batch_solver_logger</code> Indicates whether log information such as the residual and the number of iterations should be monitored. </li>
-<li><code>preconditioner_max_block_size</code> The maximum size of the Jacobi preconditioner used by the batched CSR solver.</li>
+<li><code>preconditioner_max_block_size</code> The maximum size of the Jacobi preconditioner used by the batched CSR solver. </li>
+<li><code>residual_norm</code> The norm used to evaluate the residual in the stopping criterion.</li>
 </ul>
 <p><strong>Template parameters:</strong></p>
 <ul>

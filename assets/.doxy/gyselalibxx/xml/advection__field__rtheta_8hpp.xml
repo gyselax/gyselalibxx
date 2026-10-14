@@ -448,6 +448,18 @@
         </childnode>
       </node>
       <node id="61">
+        <label>inf_norm_residual_criterion.hpp</label>
+        <link refid="inf__norm__residual__criterion_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
         <label>matrix_batch.hpp</label>
         <link refid="matrix__batch_8hpp_source"/>
         <childnode refid="27" relation="include">
@@ -466,12 +478,20 @@
         </childnode>
         <childnode refid="61" relation="include">
         </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
         <childnode refid="62" relation="include">
         </childnode>
       </node>
       <node id="62">
         <label>matrix_utils.hpp</label>
         <link refid="matrix__utils_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
         <childnode refid="60" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
@@ -504,11 +524,11 @@
         </childnode>
         <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="64" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
       </node>
       <node id="54">
@@ -537,7 +557,7 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="65">
+      <node id="68">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="11" relation="include">
@@ -553,7 +573,7 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="63">
+      <node id="66">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="2" relation="include">
@@ -561,7 +581,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="64">
+      <node id="67">
         <label>volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="2" relation="include">
@@ -572,7 +592,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -658,6 +678,12 @@
       </node>
       <node id="59">
         <label>ginkgo/extensions/kokkos.hpp</label>
+      </node>
+      <node id="63">
+        <label>ginkgo/extensions/kokkos/spaces.hpp</label>
+      </node>
+      <node id="64">
+        <label>ginkgo/extensions/kokkos/types.hpp</label>
       </node>
       <node id="60">
         <label>ginkgo/ginkgo.hpp</label>

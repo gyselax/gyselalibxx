@@ -308,7 +308,8 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = std::nullopt)
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
     {
         // Number of elements in the matrix that correspond to the splines
         // that cover the singular point
@@ -338,7 +339,8 @@ public:
                 max_iter,
                 res_tol,
                 batch_solver_logger,
-                preconditioner_max_block_size);
+                preconditioner_max_block_size,
+                residual_norm);
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
         compute_singular_singular_col_idx(col_idx, nnz_per_row);

@@ -292,6 +292,7 @@
 * **get\_covariant\_dims\_t** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))
 * **GRID\_VX\_UNIFORM** ([**geometry\_xvx.hpp**](geometry__xvx_8hpp.md))
 * **GRID\_X\_UNIFORM** ([**geometry\_xvx.hpp**](geometry__xvx_8hpp.md))
+* **GkoMatrixResidualNorm** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 * **Grid1OnPatch** ([**types.hpp**](types_8hpp.md))
 * **Grid2OnPatch** ([**types.hpp**](types_8hpp.md))
 * **get\_first\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))

@@ -13,6 +13,7 @@
 * `#include <ginkgo/extensions/kokkos.hpp>`
 * `#include <ginkgo/ginkgo.hpp>`
 * `#include <Kokkos_Core.hpp>`
+* `#include "inf_norm_residual_criterion.hpp"`
 * `#include "matrix_batch.hpp"`
 * `#include "matrix_utils.hpp"`
 

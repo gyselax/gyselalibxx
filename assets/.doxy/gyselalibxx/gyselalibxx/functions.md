@@ -71,6 +71,7 @@
 * **init\_spline\_dependent\_idx\_range** ([**input.hpp**](input_8hpp.md))
 * **inverse** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **ipow** ([**math\_tools.hpp**](math__tools_8hpp.md))
+* **inf\_norm** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 * **InterfaceDerivCoeffsCollection** ([**interface\_derivative\_coefficients\_collection.hpp**](interface__derivative__coefficients__collection_8hpp.md))
 * **ielec** ([**species\_info.hpp**](species__info_8hpp.md))
 * **init\_all\_species** ([**species\_init.cpp**](species__init_8cpp.md), [**species\_init.hpp**](species__init_8hpp.md))
@@ -150,6 +151,11 @@
 * **trapezoid\_quadrature\_coefficients** ([**trapezoid\_quadrature.hpp**](trapezoid__quadrature_8hpp.md))
 * **trapezoid\_quadrature\_coefficients\_1d** ([**trapezoid\_quadrature.hpp**](trapezoid__quadrature_8hpp.md))
 * **transpose\_layout** ([**transpose.hpp**](transpose_8hpp.md))
+
+
+## v
+
+* **vector\_norm** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 
 
 ## w

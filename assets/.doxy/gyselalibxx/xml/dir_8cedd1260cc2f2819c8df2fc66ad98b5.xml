@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_8cedd1260cc2f2819c8df2fc66ad98b5" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools</compoundname>
+    <innerfile refid="inf__norm__residual__criterion_8hpp">inf_norm_residual_criterion.hpp</innerfile>
     <innerfile refid="matrix_8cpp">matrix.cpp</innerfile>
     <innerfile refid="matrix_8hpp">matrix.hpp</innerfile>
     <innerfile refid="matrix__banded_8cpp">matrix_banded.cpp</innerfile>

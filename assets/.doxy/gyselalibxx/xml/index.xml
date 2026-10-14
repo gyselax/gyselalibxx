@@ -1722,6 +1722,16 @@
     <member refid="classtensor__tools_1_1IndexedTensor_1a3de570a42eca6f3872f3817a1a6f3ac4" kind="function"><name>operator()</name></member>
     <member refid="classtensor__tools_1_1IndexedTensor_1aa64e4beab28845e03a3f7fe9fcd50f88" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="classInfNormResidual" kind="class"><name>InfNormResidual</name>
+    <member refid="classInfNormResidual_1aa6cbde611c8651fcdecbfbab027c4942" kind="friend"><name>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; ExecSpace &gt;, gko::stop::Criterion &gt;</name></member>
+    <member refid="classInfNormResidual_1a40de97306cd1df0c6b14ec005c14e281" kind="variable"><name>m_threshold</name></member>
+    <member refid="classInfNormResidual_1a497f62e5573832be0b0d356128406508" kind="function"><name>GKO_CREATE_FACTORY_PARAMETERS</name></member>
+    <member refid="classInfNormResidual_1ac0d186fdae7eddae94eedf100900e1ec" kind="function"><name>GKO_ENABLE_CRITERION_FACTORY</name></member>
+    <member refid="classInfNormResidual_1a4980d3176eda697b1b02ef8a9e77bb4c" kind="function"><name>GKO_ENABLE_BUILD_METHOD</name></member>
+    <member refid="classInfNormResidual_1a7f70f6633a9b98e2ad5671afbe8c4233" kind="function"><name>check_impl</name></member>
+    <member refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" kind="function"><name>InfNormResidual</name></member>
+    <member refid="classInfNormResidual_1a54e6c1d29ecb14474c0cca25945efb83" kind="function"><name>InfNormResidual</name></member>
+  </compound>
   <compound refid="structInterface" kind="struct"><name>Interface</name>
     <member refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kind="typedef"><name>Edge1</name></member>
     <member refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kind="typedef"><name>Edge2</name></member>
@@ -2304,12 +2314,14 @@
     <member refid="classMatrixBatchCsr_1aece8c7cc2b4f3c1356c0710ba2e17fcd" kind="variable"><name>m_tol</name></member>
     <member refid="classMatrixBatchCsr_1aaf56ee0a630adb9cd49228eafec731cb" kind="variable"><name>m_with_logger</name></member>
     <member refid="classMatrixBatchCsr_1a7e58087bc1606a197db7a0ff1da9f166" kind="variable"><name>m_preconditioner_max_block_size</name></member>
-    <member refid="classMatrixBatchCsr_1a175fff48ad63f6f78891560e41ec9722" kind="function"><name>MatrixBatchCsr</name></member>
-    <member refid="classMatrixBatchCsr_1a9809f1cc5790fb48d953aafccaf2f261" kind="function"><name>MatrixBatchCsr</name></member>
+    <member refid="classMatrixBatchCsr_1a5706058292cb41261cdc88220c61219b" kind="variable"><name>m_residual_norm</name></member>
+    <member refid="classMatrixBatchCsr_1a367b47a7767d2db8376685d70df88891" kind="function"><name>MatrixBatchCsr</name></member>
+    <member refid="classMatrixBatchCsr_1a715ee68b41ff2d6d92eabe1da576f228" kind="function"><name>MatrixBatchCsr</name></member>
     <member refid="classMatrixBatchCsr_1a06d8671618226f37e29927733d416b7b" kind="function"><name>get_batch_csr</name></member>
     <member refid="classMatrixBatchCsr_1ad037e66bbdfdfa674e678f49d36f78df" kind="function"><name>setup_solver</name></member>
     <member refid="classMatrixBatchCsr_1a5d7f76fc2c25fb4867b50181779b4c3c" kind="function"><name>solve</name></member>
     <member refid="classMatrixBatchCsr_1a5d3b37df4fa1caf358a4f08a7ae08865" kind="function"><name>solve</name></member>
+    <member refid="classMatrixBatchCsr_1a69e026c1232fd3143ca6fca0656c1be6" kind="function"><name>check_residual_norm</name></member>
   </compound>
   <compound refid="classMatrixBatchEll" kind="class"><name>MatrixBatchEll</name>
     <member refid="classMatrixBatchEll_1a30c88e7189252194c871907eaa2cc452" kind="typedef"><name>batch_sparse_type</name></member>
@@ -2887,7 +2899,7 @@
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a3ee632058e92f495c0e2564d234ef7bd" kind="variable"><name>m_batch_idx</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a49bec37f05cc3209512eb682b3ebf17f" kind="variable"><name>m_int_volume</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a9c8ccc8965f376b8217ac9d20bae44f7" kind="function"><name>PolarSplineFEMPoissonLikeAssembler</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeAssembler_1ae2c11df79a064f0318a6060c0e54bd56" kind="function"><name>setup_sparse_matrix</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1ae9478b72b15c15534a5372f5073e393e" kind="function"><name>setup_sparse_matrix</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1ae98a84474e7e373f7e4a2f9da2835d85" kind="function"><name>operator()</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a772bf6ae22ebb22e7d9c7f18e0fd86e4" kind="function"><name>compute_singular_singular_col_idx</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1ab1580c24bb0aebf1ab72705c062beb08" kind="function"><name>compute_singular_tensor_col_idx</name></member>
@@ -2967,7 +2979,7 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a2fc64bf4d9b810e351c63c74e7c3a9e3" kind="variable"><name>m_batch_idx</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1aaa9dfdb907754d51cdd6c7e28322c6c4" kind="variable"><name>m_int_volume_alloc</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a76505084cfb28648123aede4ba5f9e85" kind="variable"><name>m_assembler</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a39259857fd5e5da123ce4b2bc3c567ea" kind="function"><name>PolarSplineFEMPoissonLikeSolver</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1afd2ad1d54a948fbd3d4475181769c99a" kind="function"><name>PolarSplineFEMPoissonLikeSolver</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a395bd7a5a8238f6a44e3d92f7d12e696" kind="function"><name>update_coefficients</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1aa63ffec323ca2c89a57d1291894a2267" kind="function"><name>operator()</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a86dc8be1e0ee4d59bc64635ee9633c9a" kind="function"><name>operator()</name></member>
@@ -3578,13 +3590,13 @@
   </compound>
   <compound refid="namespace_0d102" kind="namespace"><name>@102</name>
   </compound>
-  <compound refid="namespace_0d236" kind="namespace"><name>@236</name>
+  <compound refid="namespace_0d237" kind="namespace"><name>@237</name>
   </compound>
-  <compound refid="namespace_0d238" kind="namespace"><name>@238</name>
+  <compound refid="namespace_0d239" kind="namespace"><name>@239</name>
   </compound>
-  <compound refid="namespace_0d240" kind="namespace"><name>@240</name>
+  <compound refid="namespace_0d241" kind="namespace"><name>@241</name>
   </compound>
-  <compound refid="namespace_0d242" kind="namespace"><name>@242</name>
+  <compound refid="namespace_0d243" kind="namespace"><name>@243</name>
   </compound>
   <compound refid="namespacebumpontail__equilibrium" kind="namespace"><name>bumpontail_equilibrium</name>
     <member refid="bumpontailequilibrium_8hpp_1a904011943d45927909831ec61a31a6da" kind="function"><name>init_from_input</name></member>
@@ -3644,6 +3656,8 @@
     <member refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kind="typedef"><name>Periodic</name></member>
     <member refid="namespaceExtrapolationRule_1a09227876d2442ba8cd05940b5adbd303" kind="typedef"><name>Null_Null</name></member>
     <member refid="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" kind="typedef"><name>Constant_Constant</name></member>
+  </compound>
+  <compound refid="namespacegko" kind="namespace"><name>gko</name>
   </compound>
   <compound refid="namespaceGMGPolarTools" kind="namespace"><name>GMGPolarTools</name>
   </compound>
@@ -4503,6 +4517,8 @@
   </compound>
   <compound refid="spline__builder__2d__cache_8hpp" kind="file"><name>spline_builder_2d_cache.hpp</name>
   </compound>
+  <compound refid="inf__norm__residual__criterion_8hpp" kind="file"><name>inf_norm_residual_criterion.hpp</name>
+  </compound>
   <compound refid="matrix_8cpp" kind="file"><name>matrix.cpp</name>
     <member refid="matrix_8cpp_1a9106cd9acd5d816342d25ce90ba4f465" kind="function"><name>operator&lt;&lt;</name></member>
   </compound>
@@ -4548,10 +4564,15 @@
   <compound refid="matrix__periodic__banded_8hpp" kind="file"><name>matrix_periodic_banded.hpp</name>
   </compound>
   <compound refid="matrix__utils_8hpp" kind="file"><name>matrix_utils.hpp</name>
+    <member refid="matrix__utils_8hpp_1ac8a9d7c20b6eadb6459a9962b8d23705" kind="enum"><name>GkoMatrixResidualNorm</name></member>
+    <member refid="matrix__utils_8hpp_1ac8a9d7c20b6eadb6459a9962b8d23705a0f82d86afa0f5dc965c5c15aca58dcfb" kind="enumvalue"><name>TWO</name></member>
+    <member refid="matrix__utils_8hpp_1ac8a9d7c20b6eadb6459a9962b8d23705a9517fd0bf8faa655990a4dffe358e13e" kind="enumvalue"><name>INF</name></member>
     <member refid="matrix__utils_8hpp_1abae1ad8014ae804eb50e231c6506eb68" kind="function"><name>to_gko_multivector</name></member>
+    <member refid="matrix__utils_8hpp_1a5161a337ee238e359446d59ea241788a" kind="function"><name>inf_norm</name></member>
+    <member refid="matrix__utils_8hpp_1ae998d0d882d13fdb4d627b50843741e9" kind="function"><name>vector_norm</name></member>
     <member refid="matrix__utils_8hpp_1ac4767e01960b3de0d124da197028e657" kind="function"><name>check_conv</name></member>
     <member refid="matrix__utils_8hpp_1a0c50800ce61fde0cd5a6fa04cdd73052" kind="function"><name>write_log</name></member>
-    <member refid="matrix__utils_8hpp_1ab585ada0b7a692fe0815972a0645df56" kind="function"><name>save_logger</name></member>
+    <member refid="matrix__utils_8hpp_1a439a74f066a763b1d183ae187de44e46" kind="function"><name>save_logger</name></member>
     <member refid="matrix__utils_8hpp_1ad3d9ddb187638669541fea7bec43dbe9" kind="function"><name>save_logger</name></member>
     <member refid="matrix__utils_8hpp_1ab2f162a409cd3fb05e84086be0eed934" kind="function"><name>default_preconditioner_max_block_size</name></member>
   </compound>

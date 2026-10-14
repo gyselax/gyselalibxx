@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classInfNormResidual" kind="class" language="C++" prot="public">
+    <compoundname>InfNormResidual</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace &gt;, gko::stop::Criterion &gt;</basecompoundref>
+    <includes refid="inf__norm__residual__criterion_8hpp" local="no">inf_norm_residual_criterion.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ExecSpace</type>
+        <defval>Kokkos::DefaultExecutionSpace</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classInfNormResidual_1aa6cbde611c8651fcdecbfbab027c4942" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class gko::EnablePolymorphicObject&lt; InfNormResidual&lt; ExecSpace &gt;, gko::stop::Criterion &gt;</definition>
+        <argsstring></argsstring>
+        <name>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; ExecSpace &gt;, gko::stop::Criterion &gt;</name>
+        <qualifiedname>InfNormResidual::EnablePolymorphicObject&lt; InfNormResidual&lt; ExecSpace &gt;, gko::stop::Criterion &gt;</qualifiedname>
+        <param>
+          <type>gko::EnablePolymorphicObject&lt; <ref refid="classInfNormResidual" kindref="compound">InfNormResidual</ref>&lt; ExecSpace &gt;, gko::stop::Criterion &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="1" column="0" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classInfNormResidual_1a40de97306cd1df0c6b14ec005c14e281" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double InfNormResidual&lt; ExecSpace &gt;::m_threshold</definition>
+        <argsstring></argsstring>
+        <name>m_threshold</name>
+        <qualifiedname>InfNormResidual::m_threshold</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="115" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classInfNormResidual_1a497f62e5573832be0b0d356128406508" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>InfNormResidual&lt; ExecSpace &gt;::GKO_CREATE_FACTORY_PARAMETERS</definition>
+        <argsstring>(parameters, Factory)</argsstring>
+        <name>GKO_CREATE_FACTORY_PARAMETERS</name>
+        <qualifiedname>InfNormResidual::GKO_CREATE_FACTORY_PARAMETERS</qualifiedname>
+        <param>
+          <type>parameters</type>
+        </param>
+        <param>
+          <type>Factory</type>
+        </param>
+        <briefdescription>
+<para>The parameters which can be passed to the factory. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" bodystart="30" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classInfNormResidual_1ac0d186fdae7eddae94eedf100900e1ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>InfNormResidual&lt; ExecSpace &gt;::GKO_ENABLE_CRITERION_FACTORY</definition>
+        <argsstring>(InfNormResidual&lt; ExecSpace &gt;, parameters, Factory)</argsstring>
+        <name>GKO_ENABLE_CRITERION_FACTORY</name>
+        <qualifiedname>InfNormResidual::GKO_ENABLE_CRITERION_FACTORY</qualifiedname>
+        <param>
+          <type><ref refid="classInfNormResidual" kindref="compound">InfNormResidual</ref>&lt; ExecSpace &gt;</type>
+        </param>
+        <param>
+          <type>parameters</type>
+        </param>
+        <param>
+          <type>Factory</type>
+        </param>
+        <briefdescription>
+<para>Define the Factory class which creates the criterion, and the get_parameters() accessor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classInfNormResidual_1a4980d3176eda697b1b02ef8a9e77bb4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>InfNormResidual&lt; ExecSpace &gt;::GKO_ENABLE_BUILD_METHOD</definition>
+        <argsstring>(Factory)</argsstring>
+        <name>GKO_ENABLE_BUILD_METHOD</name>
+        <qualifiedname>InfNormResidual::GKO_ENABLE_BUILD_METHOD</qualifiedname>
+        <param>
+          <type>Factory</type>
+        </param>
+        <briefdescription>
+<para>Define the static build() method which returns the parameters used to create a Factory. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classInfNormResidual_1a7f70f6633a9b98e2ad5671afbe8c4233" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool InfNormResidual&lt; ExecSpace &gt;::check_impl</definition>
+        <argsstring>(gko::uint8 stopping_id, bool set_finalised, gko::array&lt; gko::stopping_status &gt; *stop_status, bool *one_changed, gko::stop::Criterion::Updater const &amp;updater) override</argsstring>
+        <name>check_impl</name>
+        <qualifiedname>InfNormResidual::check_impl</qualifiedname>
+        <param>
+          <type>gko::uint8</type>
+          <declname>stopping_id</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>set_finalised</declname>
+        </param>
+        <param>
+          <type>gko::array&lt; gko::stopping_status &gt; *</type>
+          <declname>stop_status</declname>
+        </param>
+        <param>
+          <type>bool *</type>
+          <declname>one_changed</declname>
+        </param>
+        <param>
+          <type>gko::stop::Criterion::Updater const &amp;</type>
+          <declname>updater</declname>
+        </param>
+        <briefdescription>
+<para>Check if the infinite norm of the residual is below the threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note: This function should be private but it is public due to CUDA restrictions.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">stopping_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The id of the stopping criterion, saved in the stopping status. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">set_finalised</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Controls if the current version should count as finalised. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">stop_status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The status of each right-hand side. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">one_changed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indicates if the status of a right-hand side was modified. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">updater</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object containing the solver&apos;s current state.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the criterion is satisfied. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="56" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" bodystart="56" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" prot="protected" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>InfNormResidual&lt; ExecSpace &gt;::InfNormResidual</definition>
+        <argsstring>(std::shared_ptr&lt; gko::Executor const &gt; exec)</argsstring>
+        <name>InfNormResidual</name>
+        <qualifiedname>InfNormResidual::InfNormResidual</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; gko::Executor const &gt;</type>
+          <declname>exec</declname>
+        </param>
+        <briefdescription>
+<para>Constructor used by gko::EnablePolymorphicObject. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Ginkgo executor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="91" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" bodystart="91" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classInfNormResidual_1a54e6c1d29ecb14474c0cca25945efb83" prot="protected" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>InfNormResidual&lt; ExecSpace &gt;::InfNormResidual</definition>
+        <argsstring>(Factory const *factory, gko::stop::CriterionArgs const &amp;args)</argsstring>
+        <name>InfNormResidual</name>
+        <qualifiedname>InfNormResidual::InfNormResidual</qualifiedname>
+        <param>
+          <type>Factory const *</type>
+          <declname>factory</declname>
+        </param>
+        <param>
+          <type>gko::stop::CriterionArgs const &amp;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Constructor used by the factory. Computes the convergence threshold from the right-hand side. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">factory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The factory holding the parameters. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The arguments of the solver (system matrix, right-hand side, ...). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="103" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" bodystart="103" bodyend="111"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A Ginkgo stopping criterion based on the infinite norm of the residual. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The criterion is satisfied when ||r||_inf &lt;= reduction_factor * ||b||_inf, where r is the residual vector provided by the solver at each iteration (for CG/BiCGSTAB this is the residual computed by the recurrence of the method, not an explicitly re-computed b - Ax). Only single right-hand sides are supported.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ExecSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Kokkos execution space which has access to the Ginkgo executor memory. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>InfNormResidual&lt; ExecSpace &gt;</label>
+        <link refid="classInfNormResidual"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace  &gt;, gko::stop::Criterion &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>InfNormResidual&lt; ExecSpace &gt;</label>
+        <link refid="classInfNormResidual"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace  &gt;, gko::stop::Criterion &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" bodystart="25" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classInfNormResidual_1a7f70f6633a9b98e2ad5671afbe8c4233" prot="public" virt="non-virtual"><scope>InfNormResidual</scope><name>check_impl</name></member>
+      <member refid="classInfNormResidual_1aa6cbde611c8651fcdecbfbab027c4942" prot="public" virt="non-virtual"><scope>InfNormResidual</scope><name>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; ExecSpace &gt;, gko::stop::Criterion &gt;</name></member>
+      <member refid="classInfNormResidual_1a497f62e5573832be0b0d356128406508" prot="public" virt="non-virtual"><scope>InfNormResidual</scope><name>GKO_CREATE_FACTORY_PARAMETERS</name></member>
+      <member refid="classInfNormResidual_1a4980d3176eda697b1b02ef8a9e77bb4c" prot="public" virt="non-virtual"><scope>InfNormResidual</scope><name>GKO_ENABLE_BUILD_METHOD</name></member>
+      <member refid="classInfNormResidual_1ac0d186fdae7eddae94eedf100900e1ec" prot="public" virt="non-virtual"><scope>InfNormResidual</scope><name>GKO_ENABLE_CRITERION_FACTORY</name></member>
+      <member refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" prot="protected" virt="non-virtual"><scope>InfNormResidual</scope><name>InfNormResidual</name></member>
+      <member refid="classInfNormResidual_1a54e6c1d29ecb14474c0cca25945efb83" prot="protected" virt="non-virtual"><scope>InfNormResidual</scope><name>InfNormResidual</name></member>
+      <member refid="classInfNormResidual_1a40de97306cd1df0c6b14ec005c14e281" prot="private" virt="non-virtual"><scope>InfNormResidual</scope><name>m_threshold</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

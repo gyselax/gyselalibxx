@@ -757,7 +757,8 @@ public:
             std::optional&lt;int&gt; max_iter = std::nullopt,
             std::optional&lt;double&gt; res_tol = std::nullopt,
             std::optional&lt;bool&gt; batch_solver_logger = std::nullopt,
-            std::optional&lt;int&gt; preconditioner_max_block_size = std::nullopt)
+            std::optional&lt;int&gt; preconditioner_max_block_size = std::nullopt,
+            std::optional&lt;GkoMatrixResidualNorm&gt; residual_norm = std::nullopt)
         : m_nbasis_theta(ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis())
         , m_idxrange_fem_non_singular(
                   ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().tensor_bspline_idx_range().remove_last(
@@ -807,7 +808,8 @@ public:
                 max_iter,
                 res_tol,
                 batch_solver_logger,
-                preconditioner_max_block_size);
+                preconditioner_max_block_size,
+                residual_norm);
     }
 
     void update_coefficients(DConstField&lt;IdxRangeRTheta&gt; alpha, DConstField&lt;IdxRangeRTheta&gt; beta)

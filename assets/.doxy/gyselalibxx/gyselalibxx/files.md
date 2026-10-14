@@ -225,6 +225,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**spline\_2d\_partial\_derivative.hpp**](spline__2d__partial__derivative_8hpp.md)     
         * **file** [**spline\_builder\_2d\_cache.hpp**](spline__builder__2d__cache_8hpp.md)     
     * **dir** [**matrix\_tools**](dir_8cedd1260cc2f2819c8df2fc66ad98b5.md)     
+        * **file** [**inf\_norm\_residual\_criterion.hpp**](inf__norm__residual__criterion_8hpp.md)     
         * **file** [**matrix.cpp**](matrix_8cpp.md)     
         * **file** [**matrix.hpp**](matrix_8hpp.md)     
         * **file** [**matrix\_banded.cpp**](matrix__banded_8cpp.md) 

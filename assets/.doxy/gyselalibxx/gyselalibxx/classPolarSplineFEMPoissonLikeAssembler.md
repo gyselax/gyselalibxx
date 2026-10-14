@@ -74,7 +74,7 @@ _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._
 |  void | [**compute\_tensor\_tensor\_elements**](#function-compute_tensor_tensor_elements) (CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, Mapping const & mapping, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix elements corresponding to the inner products of tensor basis functions and tensor basis functions._  |
 |  void | [**init\_nnz\_per\_line**](#function-init_nnz_per_line) (Kokkos::View&lt; int \*, Kokkos::LayoutRight &gt; nnz\_per\_row) const<br>_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz\_per\_row[0] = 0. nnz\_per\_row[1] = 0. nnz\_per\_row[2] = number of non-zero elements in line 0. nnz\_per\_row[3] = number of non-zero elements in lines 0-1. ...\_per\_row nnz\_per\_row[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._ |
 |  void | [**operator()**](#function-operator) (std::unique\_ptr&lt; [**MatrixBatchCsr**](classMatrixBatchCsr.md)&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; const & gko\_matrix, CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, Mapping const & mapping) <br>_Assemble the stiffness matrix._  |
-|  void | [**setup\_sparse\_matrix**](#function-setup_sparse_matrix) (std::unique\_ptr&lt; [**MatrixBatchCsr**](classMatrixBatchCsr.md)&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; & gko\_matrix, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Compute the sparsity pattern for the stiffness matrix._  |
+|  void | [**setup\_sparse\_matrix**](#function-setup_sparse_matrix) (std::unique\_ptr&lt; [**MatrixBatchCsr**](classMatrixBatchCsr.md)&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; & gko\_matrix, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual\_norm=std::nullopt) <br>_Compute the sparsity pattern for the stiffness matrix._  |
 
 
 ## Public Static Functions
@@ -475,7 +475,8 @@ inline void PolarSplineFEMPoissonLikeAssembler::setup_sparse_matrix (
     std::optional< int > max_iter=std::nullopt,
     std::optional< double > res_tol=std::nullopt,
     std::optional< bool > batch_solver_logger=std::nullopt,
-    std::optional< int > preconditioner_max_block_size=std::nullopt
+    std::optional< int > preconditioner_max_block_size=std::nullopt,
+    std::optional< GkoMatrixResidualNorm > residual_norm=std::nullopt
 ) 
 ```
 
@@ -488,9 +489,10 @@ inline void PolarSplineFEMPoissonLikeAssembler::setup_sparse_matrix (
 
 * `gko_matrix` The pointer to the assembled matrix. 
 * `max_iter` The maximum number of iterations possible for the batched CSR solver. 
-* `res_tol` The residual tolerance for the batched CSR solver. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. 
+* `res_tol` The residual tolerance for the batched CSR solver. The solver stops when \|\|r\|\|/\|\|b\|\| &lt;= res\_tol where r is the residual computed by the CG recurrence. 
 * `batch_solver_logger` Indicates whether log information such as the residual and the number of iterations should be monitored. 
-* `preconditioner_max_block_size` The maximum size of the Jacobi preconditioner used by the batched CSR solver.
+* `preconditioner_max_block_size` The maximum size of the Jacobi preconditioner used by the batched CSR solver. 
+* `residual_norm` The norm used to evaluate the residual in the stopping criterion.
 
 
 

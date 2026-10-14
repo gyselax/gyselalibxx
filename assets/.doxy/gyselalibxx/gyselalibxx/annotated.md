@@ -124,6 +124,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**IdentityCoordinateChange**](classIdentityCoordinateChange.md) _A class describing an identity transformation._     
 * **class** [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md) _A builder class for copying data._     
 * **class** [**IdentityTensor**](classIdentityTensor.md)     
+* **class** [**InfNormResidual**](classInfNormResidual.md) _A Ginkgo stopping criterion based on the infinite norm of the residual._     
 * **struct** [**Interface**](structInterface.md) _Represent a simple interface where two edges intersect._     
 * **class** [**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md) _Compute the coefficients a, b and c of the interface derivative reconstruction method._     
 * **class** [**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md) _A class to store a collection of interface derivative calculators templated on the interfaces._     
@@ -271,10 +272,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d102.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d236.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d238.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d240.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d242.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d237.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d239.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d241.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d243.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
@@ -331,6 +332,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md) 
 * **namespace** [**detail\_poisson**](namespacedetail__poisson.md)     
 * **namespace** [**equilibrium**](namespaceequilibrium.md)     
+* **namespace** [**gko**](namespacegko.md) 
 * **namespace** [**gslx**](namespacegslx.md)     
     * **namespace** [**error**](namespacegslx_1_1error.md)     
 * **struct** [**is\_non\_uniform\_lagrange\_basis**](structis__non__uniform__lagrange__basis.md) 

@@ -82,8 +82,8 @@ See [MatrixBatch](classMatrixBatch.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MatrixBatchCsr**](#function-matrixbatchcsr-12) (const int batch\_size, const int mat\_size, const int nnz\_per\_system, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_The constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
-|   | [**MatrixBatchCsr**](#function-matrixbatchcsr-22) (Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, ExecSpace &gt; batch\_values, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; cols\_idx, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; nnz\_per\_row, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
+|   | [**MatrixBatchCsr**](#function-matrixbatchcsr-12) (const int batch\_size, const int mat\_size, const int nnz\_per\_system, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual\_norm=std::nullopt) <br>_The constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
+|   | [**MatrixBatchCsr**](#function-matrixbatchcsr-22) (Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, ExecSpace &gt; batch\_values, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; cols\_idx, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; nnz\_per\_row, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual\_norm=std::nullopt) <br>_Constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
 |  std::tuple&lt; Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; &gt; | [**get\_batch\_csr**](#function-get_batch_csr) () <br>_A function to update information about values,indices and the number of non-zero per row for the whole batch. Data is managed by Kokkos Views stored on the host._  |
 | virtual void | [**setup\_solver**](#function-setup_solver) () <br>_Perform a pre-process operation on the solver. Must be called after filling the matrix._  |
 | virtual void | [**solve**](#function-solve-12) ([**BatchedRHS**](classMatrixBatch.md#typedef-batchedrhs) const b) const<br>_Solve the batched linear problem Ax=b._  |
@@ -193,7 +193,8 @@ inline explicit MatrixBatchCsr::MatrixBatchCsr (
     std::optional< int > max_iter=std::nullopt,
     std::optional< double > res_tol=std::nullopt,
     std::optional< bool > logger=std::nullopt,
-    std::optional< int > preconditioner_max_block_size=std::nullopt
+    std::optional< int > preconditioner_max_block_size=std::nullopt,
+    std::optional< GkoMatrixResidualNorm > residual_norm=std::nullopt
 ) 
 ```
 
@@ -208,9 +209,10 @@ inline explicit MatrixBatchCsr::MatrixBatchCsr (
 * `mat_size` Common matrix size for all the systems. 
 * `nnz_per_system` Number of non-zero components per matrix. 
 * `max_iter` maximal number of iterations for the solver, default 1000. 
-* `res_tol` residual tolerance parameter, to ensure convergence. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. 
+* `res_tol` residual tolerance parameter, to ensure convergence. The stopping criterion is \|\|r\|\|/\|\|b\|\| &lt;= res\_tol where r is the residual computed by the solver's recurrence and the norm is chosen with residual\_norm. 
 * `logger` boolean parameter for saving log information such residual and interactions count. 
 * `preconditioner_max_block_size` An optional parameter used to define the maximum size of a block 
+* `residual_norm` The norm used to evaluate the residual in the stopping criterion. Default is the 2-norm (batched solvers only support the 2-norm). 
 
 
 
@@ -232,7 +234,8 @@ inline explicit MatrixBatchCsr::MatrixBatchCsr (
     std::optional< int > max_iter=std::nullopt,
     std::optional< double > res_tol=std::nullopt,
     std::optional< bool > logger=std::nullopt,
-    std::optional< int > preconditioner_max_block_size=std::nullopt
+    std::optional< int > preconditioner_max_block_size=std::nullopt,
+    std::optional< GkoMatrixResidualNorm > residual_norm=std::nullopt
 ) 
 ```
 
@@ -247,9 +250,10 @@ inline explicit MatrixBatchCsr::MatrixBatchCsr (
 * `cols_idx` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
 * `nnz_per_row` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. It is defined as: nnz\_per\_row[0] = 0. nnz\_per\_row[matrix\_size] = total\_number\_of\_nonzero. To get the number of non-zero for a line i,one have to compute : n\_non\_zeros\_at\_line\_in = nnz\_per\_row[i+1]-nnz\_per\_row[i]. 
 * `max_iter` maximal number of iterations for the solver, default 1000. 
-* `res_tol` residual tolerance parameter, to ensure convergence. Be careful! The residual provided here, set as relative residual, will be used as "implicit residual" in ginkgo solver. Default value is set to 1e-15. 
+* `res_tol` residual tolerance parameter, to ensure convergence. The stopping criterion is \|\|r\|\|/\|\|b\|\| &lt;= res\_tol where r is the residual computed by the solver's recurrence and the norm is chosen with residual\_norm. Default value is set to 1e-8. 
 * `logger` boolean parameter to save logger information. Default value false. 
 * `preconditioner_max_block_size` An optional parameter used to define the maximum size of a block 
+* `residual_norm` The norm used to evaluate the residual in the stopping criterion. Default is the 2-norm (batched solvers only support the 2-norm). 
 
 
 
@@ -311,7 +315,7 @@ inline virtual void MatrixBatchCsr::setup_solver ()
 It uses the batch of matrices to generate a batched Jacobi preconditioner. Other parameters like maximum number of iterations and tolerance are also used to instantiate a Ginkgo solver.
 
 
-The stopping criterion is a reduction factor \|\|Ax-b\|\|/\|\|b\|\|&lt;tol with max\_iter maximum iterations. 
+The stopping criterion is a reduction factor \|\|r\|\|/\|\|b\|\|&lt;tol with max\_iter maximum iterations. The norm is chosen with the residual\_norm constructor argument (the infinite norm is evaluated with [**InfNormResidual**](classInfNormResidual.md), the 2-norm with gko::stop::ResidualNorm). 
 
 
         
