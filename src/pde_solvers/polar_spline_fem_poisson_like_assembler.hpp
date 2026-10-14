@@ -181,15 +181,12 @@ public:
  *      The polar bspline of interest.
  * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
  */
-template <bool calculate_derivs = true, typename PolarBSplinesRTheta>
+template <bool calculate_derivs = true, class PolarBSplinesRTheta, class IdxQuad>
 KOKKOS_FUNCTION std::conditional_t<
         calculate_derivs,
         DVector<typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual>,
         void>
-get_polar_bspline_vals_and_derivs(
-        double& val,
-        Coord<typename PolarBSplinesRTheta::R, typename PolarBSplinesRTheta::Theta> coord,
-        Idx<PolarBSplinesRTheta> idx)
+get_polar_bspline_vals_and_derivs(double& val, IdxQuad idx_quad, Idx<PolarBSplinesRTheta> idx)
 {
     using R = PolarBSplinesRTheta::R;
     using Theta = PolarBSplinesRTheta::Theta;
@@ -215,6 +212,7 @@ get_polar_bspline_vals_and_derivs(
                  n_derivs + 1,
                  n_derivs + 1);
 
+    Coord<R, Theta> coord = ddc::coordinate(idx_quad);
     Idx<BSplinesR, BSplinesTheta> idx_front
             = ddc::discrete_space<PolarBSplinesRTheta>()
                       .eval_basis_and_n_derivs(singular_vals, vals, coord, n_derivs, n_derivs);
@@ -1289,10 +1287,10 @@ public:
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
         DVector<R_cov, Theta_cov> basis_derivs_test_space = detail_poisson::
-                get_polar_bspline_vals_and_derivs(basis_val_test_space, coord, idx_test);
+                get_polar_bspline_vals_and_derivs(basis_val_test_space, idx_quad, idx_test);
         double basis_val_trial_space;
         DVector<R_cov, Theta_cov> basis_derivs_trial_space = detail_poisson::
-                get_polar_bspline_vals_and_derivs(basis_val_trial_space, coord, idx_trial);
+                get_polar_bspline_vals_and_derivs(basis_val_trial_space, idx_quad, idx_trial);
 
         MetricTensorEvaluator<Mapping, Coord<R, Theta>> get_metric_tensor(mapping);
 

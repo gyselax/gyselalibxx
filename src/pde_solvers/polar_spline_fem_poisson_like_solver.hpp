@@ -441,8 +441,8 @@ public:
                                                                + IdxStep<QDimRMesh, QDimThetaMesh>(
                                                                        r_thread_index,
                                                                        theta_thread_index);
-                                const CoordRTheta coord(ddc::coordinate(idx_quad));
-                                sum += rhs(coord) * get_polar_bspline_vals(coord, idx)
+                                sum += rhs(ddc::coordinate(idx_quad))
+                                       * get_polar_bspline_vals(idx_quad, idx)
                                        * int_volume(idx_quad);
                             },
                             teamSum);
@@ -593,10 +593,12 @@ public:
      *      The polar bspline of interest.
      * @return The value of the polar bspline at the coordinate.
      */
-    static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(CoordRTheta coord, IdxBSPolar idx)
+    static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(
+            IdxQuadratureRTheta idx_quad,
+            IdxBSPolar idx)
     {
         double val;
-        detail_poisson::get_polar_bspline_vals_and_derivs<false>(val, coord, idx);
+        detail_poisson::get_polar_bspline_vals_and_derivs<false>(val, idx_quad, idx);
         return val;
     }
 
