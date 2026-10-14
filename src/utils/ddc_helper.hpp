@@ -297,6 +297,32 @@ struct ToCoord<ddc::detail::TypeSeq<Dims...>>
     using type = Coord<Dims...>;
 };
 
+/**
+ * @brief A helper structure to determine the type when combining tags across containers.
+ *
+ * E.g. Combine<Idx<Tag1>, Idx<Tag2>>::type == Idx<Tag1, Tag2>
+ *
+ * @tparam Containers The containers that should be combined. They should differ only in the tags.
+ */
+template <class... Containers>
+struct Combine;
+
+template <class Container>
+struct Combine<Container>
+{
+    using type = Container;
+};
+
+template <
+        template <typename...>
+        class Container,
+        class... Tags,
+        class... OTags,
+        class... TailContainers>
+struct Combine<Container<Tags...>, Container<OTags...>, TailContainers...>
+{
+    using type = typename Combine<Container<Tags..., OTags...>, TailContainers...>::type;
+};
 
 } // namespace detail
 
@@ -339,4 +365,14 @@ using to_coord_t = typename detail::ToCoord<ValidIndexSet>::type;
 
 template <class T>
 bool constexpr is_coordinate_v = ddc::detail::is_tagged_vector_v<T>;
+
+/**
+ * @brief A helper to determine the type when combining tags across containers.
+ *
+ * E.g. combine_t<Idx<Tag1>, Idx<Tag2>> == Idx<Tag1, Tag2>
+ *
+ * @tparam Containers The containers that should be combined. They should differ only in the tags.
+ */
+template <class... Containers>
+using combine_t = typename detail::Combine<Containers...>::type;
 } // namespace ddcHelper
