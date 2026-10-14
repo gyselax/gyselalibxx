@@ -13,7 +13,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include "deriv_details.hpp"
 #include "i_interpolation.hpp"
 
 
@@ -29,7 +28,7 @@ class GyroAverageOperator
     using IdxInterpSpace = typename IdxRangeInterpSpace::discrete_element_type;
     using CoordsInterpSpace = ddc::coordinate_of_t<IdxInterpSpace>;
     using IdxParams = typename IdxRangeParams::discrete_element_type;
-    using IdxRangeGyroSpace = detail::combine_t<IdxRangeParams, IdxRangeInterpSpace>;
+    using IdxRangeGyroSpace = ddc::combine_t<IdxRangeParams, IdxRangeInterpSpace>;
     using IdxGyroSpace = typename IdxRangeGyroSpace::discrete_element_type;
 
     using IdxRangeInterpCoeffs
@@ -43,7 +42,7 @@ public:
 private:
     using IdxRangeList = IdxRange<CoeffList>;
     using IdxList = typename IdxRangeList::discrete_element_type;
-    using IdxRangeGyroCoeffs = detail::combine_t<IdxRangeGyroSpace, IdxRangeList>;
+    using IdxRangeGyroCoeffs = ddc::combine_t<IdxRangeGyroSpace, IdxRangeList>;
 
 public:
     using GyroCoeffsCoordsMem = FieldMem<CoordsInterpSpace, IdxRangeGyroCoeffs>;

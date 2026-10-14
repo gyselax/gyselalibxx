@@ -11,7 +11,6 @@
 
 
 * `#include <ddc/ddc.hpp>`
-* `#include "deriv_details.hpp"`
 * `#include "i_interpolation.hpp"`
 
 

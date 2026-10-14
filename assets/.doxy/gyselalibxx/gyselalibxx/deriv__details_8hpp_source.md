@@ -133,31 +133,6 @@ KOKKOS_FUNCTION IdxRange<Tag...> get_idx_range_from_element(Idx<Tag...> idx)
     return IdxRange<Tag...>(IdxRange<Tag> {ddc::select<Tag>(idx), IdxStep<Tag> {1}}...);
 }
 
-//-----------------------------------------------------------------------------
-
-template <class... Containers>
-struct Combine;
-
-template <class Container>
-struct Combine<Container>
-{
-    using type = Container;
-};
-
-template <
-        template <typename...>
-        class Container,
-        class... Tags,
-        class... OTags,
-        class... TailContainers>
-struct Combine<Container<Tags...>, Container<OTags...>, TailContainers...>
-{
-    using type = typename Combine<Container<Tags..., OTags...>, TailContainers...>::type;
-};
-
-template <class... Containers>
-using combine_t = typename detail::Combine<Containers...>::type;
-
 template <class... Dims>
 IdxRangeSlice<Dims...> edge_idx_range(IdxRange<Dims...> v)
 {

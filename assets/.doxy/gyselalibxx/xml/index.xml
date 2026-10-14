@@ -1480,14 +1480,14 @@
     <member refid="classGyroAverageOperator_1a480c245f6757fd0b29ae6600631bf4e4" kind="typedef"><name>IdxInterpSpace</name></member>
     <member refid="classGyroAverageOperator_1a4aff84a35fb0a3c86651125eb24c5ac2" kind="typedef"><name>CoordsInterpSpace</name></member>
     <member refid="classGyroAverageOperator_1ac96b33dc37da2d9dc5858c97a0e59410" kind="typedef"><name>IdxParams</name></member>
-    <member refid="classGyroAverageOperator_1adf5cdd7e97209c92dbde57e758d717c0" kind="typedef"><name>IdxRangeGyroSpace</name></member>
+    <member refid="classGyroAverageOperator_1a1de37b9077748ef27500daa573bcdf91" kind="typedef"><name>IdxRangeGyroSpace</name></member>
     <member refid="classGyroAverageOperator_1aefc529a160a6edfd39f0afeeeae56aff" kind="typedef"><name>IdxGyroSpace</name></member>
     <member refid="classGyroAverageOperator_1a5948d6802727821de58ed85c8273fde4" kind="typedef"><name>IdxRangeInterpCoeffs</name></member>
     <member refid="classGyroAverageOperator_1aa50f8658a7fb351c32ea5a5742a334a9" kind="typedef"><name>DFieldMemInterpCoeffs</name></member>
     <member refid="classGyroAverageOperator_1a08c0c963043a637dc3cfcc5f7c2e2e21" kind="typedef"><name>DFieldInterpCoeffs</name></member>
     <member refid="classGyroAverageOperator_1a775dc0dac6cc568597c64f104ac184e2" kind="typedef"><name>IdxRangeList</name></member>
     <member refid="classGyroAverageOperator_1a3b9f2e50ef43eb342e89bb253e344d7e" kind="typedef"><name>IdxList</name></member>
-    <member refid="classGyroAverageOperator_1a1a0d67c87017e3340d12acfb136874cb" kind="typedef"><name>IdxRangeGyroCoeffs</name></member>
+    <member refid="classGyroAverageOperator_1ae3f02103f4420287839f7973853ae09f" kind="typedef"><name>IdxRangeGyroCoeffs</name></member>
     <member refid="classGyroAverageOperator_1aaafaf7bd91762519a140ad877c9bc9cb" kind="typedef"><name>GyroCoeffsCoordsMem</name></member>
     <member refid="classGyroAverageOperator_1a09e13c1159fc131073a2e9be464977a8" kind="typedef"><name>GyroCoeffsWeightsMem</name></member>
     <member refid="classGyroAverageOperator_1a88d48e883f96e9d8809607fd0c98f904" kind="typedef"><name>GyroCoeffsCoords</name></member>

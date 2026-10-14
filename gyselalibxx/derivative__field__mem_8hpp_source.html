@@ -763,7 +763,9 @@ private:
     }
 
     template &lt;std::size_t ArrayIndex&gt;
-    void free_ptr(ElementType* const ptr, allocator_type allocator)
+    void free_ptr( // cppcheck-suppress functionStatic
+            ElementType* const ptr,
+            allocator_type allocator)
     {
         std::size_t alloc_size(((this-&gt;get_mdspan_size&lt;DDims, ArrayIndex&gt;()) * ...));
         allocator.deallocate(ptr, alloc_size);
@@ -878,7 +880,7 @@ public:
     element_type&amp; operator()(DElem... elems) noexcept
     {
         static_assert((ddc::is_discrete_element_v&lt;DElem&gt; &amp;&amp; ...));
-        using full_index_type = detail::combine_t&lt;DElem...&gt;;
+        using full_index_type = ddc::combine_t&lt;DElem...&gt;;
         full_index_type elem(elems...);
         return this-&gt;get_internal_field(elem)();
     }
@@ -887,7 +889,7 @@ public:
     element_type const&amp; operator()(DElem... elems) const noexcept
     {
         static_assert((ddc::is_discrete_element_v&lt;DElem&gt; &amp;&amp; ...));
-        using full_index_type = detail::combine_t&lt;DElem...&gt;;
+        using full_index_type = ddc::combine_t&lt;DElem...&gt;;
         full_index_type elem(elems...);
         return this-&gt;get_internal_field(elem)();
     }
