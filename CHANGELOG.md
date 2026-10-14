@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new constructors to `DerivFieldMem` where the idx range slices for the derivatives default to the edge of the physical domain.
 - Add constructor `MultipatchField<TypeOnPatch, SubsetPatches...>` to get a subset of the objects stored in a `MultipatchField`.
 - Add `InterfaceDerivCoeffs::get_approx_cross_deriv()`.
+- Add an `InfNormResidual` Ginkgo stopping criterion based on the infinite norm of the residual.
+- Add `GkoMatrixResidualNorm` to choose the norm (2-norm or infinite norm) used in the stopping criterion of the `MatrixBatchCsr` CG and BiCGSTAB solvers. It can be passed to the constructors of `MatrixBatchCsr` and `PolarSplineFEMPoissonLikeSolver`.
 
 ### Fixed
 
@@ -37,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` are now aliases for `detail::` classes templated on `ddc::detail::TypeSeq`s of the patches and of the stored types. Type templates which give the same type on each patch now lead to the same class.
 - The constructor of `MultipatchField` from another multipatch object is now explicit.
 - Rewrite of the `GyroAverageOperator` to enable importing external coefficients for geometries where no inverse mapping is available.
+- The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
 
 ### Deprecated
 
