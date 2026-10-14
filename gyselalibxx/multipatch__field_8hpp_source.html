@@ -676,10 +676,10 @@ public:
     }
 
     template &lt;class QueryTag&gt;
-    inline constexpr auto get() const noexcept requires(
-            (is_vector_field_v&lt;InternalTypes&gt; &amp;&amp; ...)
-            &amp;&amp; (ddc::in_tags_v&lt;QueryTag, typename InternalTypes::NDTypeTag&gt; &amp;&amp; ...))
+    inline constexpr auto get() const noexcept
+            requires((is_vector_field_v&lt;InternalTypes&gt; &amp;&amp; ...) &amp;&amp; !is_patch_v&lt;QueryTag&gt;)
     {
+        static_assert((ddc::in_tags_v&lt;QueryTag, typename InternalTypes::NDTypeTag&gt; &amp;&amp; ...));
         using FieldType = MultipatchField&lt;
                 PatchOrdering,
                 ddc::detail::TypeSeq&lt;typename InternalTypes::chunk_span_type...&gt;&gt;;
