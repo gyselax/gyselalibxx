@@ -830,6 +830,9 @@ protected:
     template &lt;class... ODims&gt;
     KOKKOS_FUNCTION auto get_internal_field(Idx&lt;ODims...&gt; elem) const
     {
+        using AllValidDims = ddc::detail::TypeSeq&lt;DDims...&gt;;
+        static_assert(((ddc::in_tags_v&lt;ODims, AllValidDims&gt;)&amp;&amp;...));
+
         // Get the types related to the provided information
         using provided_tags = ddc::detail::TypeSeq&lt;ODims...&gt;;
         using provided_deriv_tags = detail::deriv_sub_set_t&lt;provided_tags&gt;;

@@ -618,6 +618,14 @@
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#function-get_approx_cross_deriv-12"><strong>get_approx_cross_deriv</strong></a> (DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; derivs_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; derivs_2) const<br><em>Get the linear combination of the derivatives values (c).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#function-get_approx_cross_deriv-22"><strong>get_approx_cross_deriv</strong></a> (DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; derivs_2, DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; derivs_1) const<br><em>Get the linear combination of the derivatives values (c). See</em> get_approx_cross_deriv <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="#function-get_approx_deriv-12"><strong>get_approx_deriv</strong></a> (DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2) const<br><em>Get the linear combination of the function values (c).</em></td>
 </tr>
 <tr>
@@ -740,6 +748,42 @@ inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
 </ul>
 <p><strong>Warning:</strong></p>
 <p>If the mesh has additional interpolation points, please be sure to not take these points. </p>
+<hr>
+
+<h3 id="function-get_approx_cross_deriv-12">function get_approx_cross_deriv [1/2]</h3>
+<p><em>Get the linear combination of the derivatives values (c).</em> </p>
+<pre><code class="language-C++">template&lt;class Layout1, class Layout2&gt;
+inline double InterfaceDerivCoeffs::get_approx_cross_deriv (
+    DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; derivs_1,
+    DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; derivs_2
+) const
+</code></pre>
+<p>This linear combination corresponds to an approximation of the interface cross-derivative.</p>
+<p>It is more appropriate than get_approx_deriv to compute the cross-derivatives. The computation is the same. However, in addition, the sign of the derivatives on the patch 2 is changed in the case where the orientations of the two patches do not match. E.g. dx(f(-x)) = - dxf(-x)</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>derivs_1</code> Derivatives at the interpolation points on patch 1. </li>
+<li><code>derivs_2</code> Derivatives at the interpolation points on patch 2. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>the linear combination of the function values (c). </p>
+<hr>
+
+<h3 id="function-get_approx_cross_deriv-22">function get_approx_cross_deriv [2/2]</h3>
+<p><em>Get the linear combination of the derivatives values (c). See</em> get_approx_cross_deriv <em>.</em></p>
+<pre><code class="language-C++">template&lt;class Layout1, class Layout2&gt;
+inline double InterfaceDerivCoeffs::get_approx_cross_deriv (
+    DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; derivs_2,
+    DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; derivs_1
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>derivs_1</code> Derivatives at the interpolation points on patch 1. </li>
+<li><code>derivs_2</code> Derivatives at the interpolation points on patch 2. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>the linear combination of the function values (c). </p>
 <hr>
 
 <h3 id="function-get_approx_deriv-12">function get_approx_deriv [1/2]</h3>

@@ -395,10 +395,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="93" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="93" bodyend="203"/>
       </memberdef>
-      <memberdef kind="function" id="classSplineBuilderDerivField2D_1a3945517bf3eaef80022288ae63cab049" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSplineBuilderDerivField2D_1acf6829832655a36412fcd3ef6224a9a6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::fill_in_function</definition>
-        <argsstring>(FunctField function, DerivFieldType function_and_derivs) const</argsstring>
+        <definition>static void SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::fill_in_function</definition>
+        <argsstring>(FunctField function, DerivFieldType function_and_derivs)</argsstring>
         <name>fill_in_function</name>
         <qualifiedname>SplineBuilderDerivField2D::fill_in_function</qualifiedname>
         <param>
@@ -434,12 +436,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="211" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="211" bodyend="222"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="211" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="211" bodyend="222"/>
       </memberdef>
-      <memberdef kind="function" id="classSplineBuilderDerivField2D_1aa0937967e9dbc87a3367f01604c2f238" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSplineBuilderDerivField2D_1abc4b77ad43c92bb0e410ccd126e5b5b4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::fill_in_deriv1</definition>
-        <argsstring>(Deriv1Field deriv1, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice) const</argsstring>
+        <definition>static void SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::fill_in_deriv1</definition>
+        <argsstring>(Deriv1Field deriv1, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice)</argsstring>
         <name>fill_in_deriv1</name>
         <qualifiedname>SplineBuilderDerivField2D::fill_in_deriv1</qualifiedname>
         <param>
@@ -487,12 +489,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="231" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="231" bodyend="244"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="231" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="231" bodyend="244"/>
       </memberdef>
-      <memberdef kind="function" id="classSplineBuilderDerivField2D_1a75db866af19edf22181b911b38417261" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSplineBuilderDerivField2D_1a592d5ec017b776081f0918e924ef3172" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::fill_in_deriv2</definition>
-        <argsstring>(Deriv2Field deriv2, DerivFieldType function_and_derivs, Idx&lt; Grid2 &gt; idx_slice) const</argsstring>
+        <definition>static void SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::fill_in_deriv2</definition>
+        <argsstring>(Deriv2Field deriv2, DerivFieldType function_and_derivs, Idx&lt; Grid2 &gt; idx_slice)</argsstring>
         <name>fill_in_deriv2</name>
         <qualifiedname>SplineBuilderDerivField2D::fill_in_deriv2</qualifiedname>
         <param>
@@ -540,12 +542,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="253" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="253" bodyend="266"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="253" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="253" bodyend="266"/>
       </memberdef>
-      <memberdef kind="function" id="classSplineBuilderDerivField2D_1a9f4c191a3e17b53db179845df47ded9c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSplineBuilderDerivField2D_1ae855342c0e4b1f5754fb0c63c1ead80a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::fill_in_cross_deriv</definition>
-        <argsstring>(CrossDerivField cross_deriv, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice_1, Idx&lt; Grid2 &gt; idx_slice_2) const</argsstring>
+        <definition>static void SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::fill_in_cross_deriv</definition>
+        <argsstring>(CrossDerivField cross_deriv, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice_1, Idx&lt; Grid2 &gt; idx_slice_2)</argsstring>
         <name>fill_in_cross_deriv</name>
         <qualifiedname>SplineBuilderDerivField2D::fill_in_cross_deriv</qualifiedname>
         <param>
@@ -605,7 +607,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="278" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="278" bodyend="292"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="278" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="278" bodyend="293"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -615,7 +617,7 @@
 <para><ref refid="classDerivField" kindref="compound">DerivField</ref> stores the values and the derivatives of a function. The inputs of the SplineBuilder2D are on different layouts than the fields we can get from the <ref refid="classDerivField" kindref="compound">DerivField</ref>. <ref refid="classSplineBuilderDerivField2D" kindref="compound">SplineBuilderDerivField2D</ref> allows to directly apply a stored SplineBuilder2D to a <ref refid="classDerivField" kindref="compound">DerivField</ref> by copying data in fields with correct layout.</para>
 <para>Implemented only for 2D case. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="34" bodyend="293"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="34" bodyend="294"/>
     <listofallmembers>
       <member refid="classSplineBuilderDerivField2D_1aa7836fe12b8be3ff941f6a6743093b2c" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>Builder2D</name></member>
       <member refid="classSplineBuilderDerivField2D_1a4f740cd442d3591df7818e41e5d03eba" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>CrossDerivConstField</name></member>
@@ -632,10 +634,10 @@
       <member refid="classSplineBuilderDerivField2D_1ab7602f3689562d4f169ba163dc46e002" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>DerivFieldType</name></member>
       <member refid="classSplineBuilderDerivField2D_1a18b53d1e48455ed6df47409a1aac1c6a" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>Dim1</name></member>
       <member refid="classSplineBuilderDerivField2D_1a982101ea54051aaec92220ae71131e00" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>Dim2</name></member>
-      <member refid="classSplineBuilderDerivField2D_1a9f4c191a3e17b53db179845df47ded9c" prot="public" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>fill_in_cross_deriv</name></member>
-      <member refid="classSplineBuilderDerivField2D_1aa0937967e9dbc87a3367f01604c2f238" prot="public" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>fill_in_deriv1</name></member>
-      <member refid="classSplineBuilderDerivField2D_1a75db866af19edf22181b911b38417261" prot="public" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>fill_in_deriv2</name></member>
-      <member refid="classSplineBuilderDerivField2D_1a3945517bf3eaef80022288ae63cab049" prot="public" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>fill_in_function</name></member>
+      <member refid="classSplineBuilderDerivField2D_1ae855342c0e4b1f5754fb0c63c1ead80a" prot="public" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>fill_in_cross_deriv</name></member>
+      <member refid="classSplineBuilderDerivField2D_1abc4b77ad43c92bb0e410ccd126e5b5b4" prot="public" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>fill_in_deriv1</name></member>
+      <member refid="classSplineBuilderDerivField2D_1a592d5ec017b776081f0918e924ef3172" prot="public" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>fill_in_deriv2</name></member>
+      <member refid="classSplineBuilderDerivField2D_1acf6829832655a36412fcd3ef6224a9a6" prot="public" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>fill_in_function</name></member>
       <member refid="classSplineBuilderDerivField2D_1acc72a5138327899859b691e319422781" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>FunctField</name></member>
       <member refid="classSplineBuilderDerivField2D_1af0a3eb18df58dc9c03479b0361375f19" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>FunctFieldMem</name></member>
       <member refid="classSplineBuilderDerivField2D_1ab80a072ccad8e6737d485ca75823d0e7" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>m_builder</name></member>

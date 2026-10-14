@@ -234,13 +234,54 @@ public:
     }
 
     template <class Layout1, class Layout2>
-    double get_approx_deriv(
+    inline double get_approx_deriv(
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
     {
+        return get_approx_with_change_of_sign(function_1, function_2, 1);
+    }
+
+    template <class Layout1, class Layout2>
+    inline double get_approx_deriv(
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
+    {
+        return get_approx_with_change_of_sign(function_1, function_2, 1);
+    }
+
+    template <class Layout1, class Layout2>
+    inline double get_approx_cross_deriv(
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1,
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2) const
+    {
+        int const sign_deriv_2
+                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
+        return get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
+    }
+
+    template <class Layout1, class Layout2>
+    inline double get_approx_cross_deriv(
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2,
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1) const
+    {
+        int const sign_deriv_2
+                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
+        return get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
+    }
+
+
+
+private:
+    template <class Layout1, class Layout2>
+    double get_approx_with_change_of_sign(
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
+            int const sign_function_2) const
+    {
         // The function needs to be continuous at the interface.
         assert(abs(function_1(get_extremity_idx(m_extremity_1, m_idx_range_perp_1))
-                   - function_2(get_extremity_idx(m_extremity_2, m_idx_range_perp_2)))
+                   - sign_function_2
+                             * function_2(get_extremity_idx(m_extremity_2, m_idx_range_perp_2)))
                < 1e-13);
 
         double coeff_values = ddc::host_transform_reduce(
@@ -254,20 +295,12 @@ public:
                 m_idx_range_perp_2,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
+                [&](Idx1D_2 const& idx) {
+                    return sign_function_2 * function_2(idx) * m_weights_patch_2(idx);
+                });
         return coeff_values;
     }
 
-    template <class Layout1, class Layout2>
-    inline double get_approx_deriv(
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
-    {
-        return get_approx_deriv(function_1, function_2);
-    }
-
-
-private:
     template <typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid>
     void check_break_points_are_interpolation_points(
             bool const is_cell_bound_with_extra_interpol_pt,

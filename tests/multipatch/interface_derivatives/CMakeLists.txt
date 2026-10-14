@@ -1,4 +1,4 @@
-# SingleInterfaceDerivativeCalculator test =======================================================
+# InterfaceDerivCoeffs test ======================================================================
 function (multipatch_single_interface_derivatives_executable MESH_TYPE)
     set(test_name_gtest "multipatch_single_interface_derivatives_${MESH_TYPE}_test")
     add_executable("${test_name_gtest}"
@@ -23,7 +23,7 @@ foreach(MESH_TYPE "UNIFORM_MESH" "NON_UNIFORM_MESH")
     multipatch_single_interface_derivatives_executable(${MESH_TYPE}) 
 endforeach()
 
-# SingleInterfaceDerivativeCalculatorCollection test =============================================
+# InterfaceDerivCoeffsCollection test ============================================================
 set(test_name_gtest "interface_derivatives_test")
 add_executable("${test_name_gtest}"
     interface_derivative_coefficients_collection_test.cpp

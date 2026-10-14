@@ -651,11 +651,23 @@ InterfaceDerivCoeffs&lt;Interface_12&gt; deriv_coeffs (idx_range_patch_1_reduced
 To apply this treatment, we specify it in the template parameter as follows.</p>
 </blockquote>
 <pre><code class="language-cpp">// If we want to apply the treatment on Patch 1 and Patch 2
-InterfaceDerivCoeffs&lt;Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE&gt; deriv_coeffs (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs&lt;Interface_12&gt; deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE);
 // or if we want to apply the treatment only on Patch 1
-InterfaceDerivCoeffs&lt;Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE&gt; deriv_coeffs (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs&lt;Interface_12&gt; deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::HERMITE);
 // or if we want to apply the treatment only on Patch 2
-InterfaceDerivCoeffs&lt;Interface_12, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE&gt; deriv_coeffs (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs&lt;Interface_12&gt; deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::GREVILLE);
 </code></pre>
 <blockquote>
 <p>If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
@@ -667,6 +679,7 @@ the default template parameter can be used to avoid applying the treatment on in
 <li><code>deriv_coeffs.get_coeff_deriv_patch_2()</code> returns the coefficient <span class="arithmatex">\(a^i_{N^L,N^R}\)</span>;</li>
 <li><code>deriv_coeffs.get_approx_deriv(function_1, function_2)</code> returns the coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span>
  (or <span class="arithmatex">\(c^i_{N^L_{reduc},N^R_{reduc}}\)</span> for approximation).</li>
+<li><code>derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)</code> is similar to <code>derivatives_calculator.get_function_coefficients(function_1, function_2)</code> but is recommended to compute the cross-derivatives in a 2D case.  We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.</li>
 </ul>
 <p>If we want to apply the exact formula, we need to sum these coefficients,</p>
 <pre><code class="language-cpp">double const coeff_deriv_left = deriv_coeffs.get_coeff_deriv_patch_1(); // coeff b
@@ -842,7 +855,7 @@ and null for different <em>k</em>.)</p>
                 \omega_{k, m,N^R}^i
                 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}} \omega_{k, m-1,N^R}^i
             \right]
-    \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}} b^{i}_{m,N^R}  \gamma_{i-m, k}.
+    + \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}} b^{i}_{m,N^R}  \gamma_{i-m, k}.
     \\
 \end{aligned}
 \]</div>
