@@ -462,21 +462,6 @@ protected:
     {
     }
 
-    /// Version without a label
-    KOKKOS_FUNCTION DerivFieldCommon(
-            physical_idx_range_type physical_idx_range,
-            discrete_deriv_idx_range_type deriv_idx_range,
-            ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
-                    cross_derivative_idx_range)
-        : DerivFieldCommon(
-                "no-label",
-                physical_idx_range,
-                deriv_idx_range,
-                cross_derivative_idx_range)
-    {
-    }
-
-
 public:
     /** Constructs a new DerivFieldCommon by copy, yields a new view to the same data.
      * @param other the DerivFieldCommon to copy.
