@@ -115,6 +115,7 @@
 * **m\_coordinate\_origin** ([**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **m\_cross\_derivative\_idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **m\_deriv\_idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
+* **m\_label** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **m\_physical\_idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **m\_Q** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
 * **m\_R1** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))

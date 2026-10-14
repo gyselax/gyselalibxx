@@ -90,13 +90,19 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**DerivFieldMem**](#function-derivfieldmem-14) ([**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
-|   | [**DerivFieldMem**](#function-derivfieldmem-24) (allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
-|   | [**DerivFieldMem**](#function-derivfieldmem-34) (allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges. The derivatives are assumed to be found at the boundaries._ |
-|   | [**DerivFieldMem**](#function-derivfieldmem-44) ([**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges. The derivatives are assumed to be found at the boundaries._ |
+|   | [**DerivFieldMem**](#function-derivfieldmem-19) (std::string const & label, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
+|   | [**DerivFieldMem**](#function-derivfieldmem-29) ([**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... deriv\_idx\_range) <br>_Version without a label._  |
+|   | [**DerivFieldMem**](#function-derivfieldmem-39) (std::string const & label, allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
+|   | [**DerivFieldMem**](#function-derivfieldmem-49) (allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_Version without a label._  |
+|   | [**DerivFieldMem**](#function-derivfieldmem-59) (std::string const & label, allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges. The derivatives are assumed to be found at the boundaries._ |
+|   | [**DerivFieldMem**](#function-derivfieldmem-69) (allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range) <br>_Version without a label._  |
+|   | [**DerivFieldMem**](#function-derivfieldmem-79) (std::string const & label, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges. The derivatives are assumed to be found at the boundaries._ |
+|   | [**DerivFieldMem**](#function-derivfieldmem-89) ([**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range) <br>_Version without a label._  |
+|   | [**DerivFieldMem**](#function-derivfieldmem-99) ([**DerivFieldMem**](classDerivFieldMem.md) && other) noexcept<br> |
 |  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
 |  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**get\_field**](#function-get_field-12) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
 |  [**span\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-span_type) | [**get\_field**](#function-get_field-22) () <br>_Get a modifiable_ [_**DerivField**_](classDerivField.md) _of this field._ |
+|  char const \* | [**label**](#function-label) () const<br> |
 |  [**element\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-element_type) & | [**operator()**](#function-operator) (DElem... elems) noexcept<br>_Get a modifiable reference to an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  [**element\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-element_type) const & | [**operator()**](#function-operator_1) (DElem... elems) noexcept const<br>_Get an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  [**DerivFieldMem**](classDerivFieldMem.md) & | [**operator=**](#function-operator_2) ([**DerivFieldMem**](classDerivFieldMem.md) const & other) = delete<br>_Deleted copy operator._  |
@@ -355,14 +361,15 @@ using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::vie
 
 
 
-### function DerivFieldMem [1/4]
+### function DerivFieldMem [1/9]
 
 _The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._
 ```C++
 template<class... DerivDoms>
 inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
+    std::string const & label,
     physical_idx_range_type val_idx_range,
-    ddc::StridedDiscreteDomain< DerivDoms >... m_deriv_idx_range
+    ddc::StridedDiscreteDomain< DerivDoms >... deriv_idx_range
 ) 
 ```
 
@@ -373,8 +380,9 @@ inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::De
 **Parameters:**
 
 
+* `label` The label of the object. 
 * `val_idx_range` The index range on which the values of the field are defined. 
-* `m_deriv_idx_range` The 1D sub-index ranges on which the derivatives of the field are defined. 
+* `deriv_idx_range` The 1D sub-index ranges on which the derivatives of the field are defined. 
 
 
 
@@ -385,12 +393,31 @@ inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::De
 
 
 
-### function DerivFieldMem [2/4]
+### function DerivFieldMem [2/9]
+
+_Version without a label._ 
+```C++
+template<class... DerivDoms>
+inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
+    physical_idx_range_type val_idx_range,
+    ddc::StridedDiscreteDomain< DerivDoms >... deriv_idx_range
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function DerivFieldMem [3/9]
 
 _The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._
 ```C++
 template<class... DerivDoms>
 inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
+    std::string const & label,
     allocator_type allocator,
     physical_idx_range_type val_idx_range,
     ddc::StridedDiscreteDomain< DerivDoms >... m_deriv_idx_range
@@ -404,6 +431,7 @@ inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::De
 **Parameters:**
 
 
+* `label` The label of the object. 
 * `allocator` The object which allocates the memory on the CPU or GPU. 
 * `val_idx_range` The index range on which the values of the field are defined. 
 * `m_deriv_idx_range` The 1D sub-index ranges on which the derivatives of the field are defined. 
@@ -417,11 +445,31 @@ inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::De
 
 
 
-### function DerivFieldMem [3/4]
+### function DerivFieldMem [4/9]
+
+_Version without a label._ 
+```C++
+template<class... DerivDoms>
+inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
+    allocator_type allocator,
+    physical_idx_range_type val_idx_range,
+    ddc::StridedDiscreteDomain< DerivDoms >... m_deriv_idx_range
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function DerivFieldMem [5/9]
 
 _The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges. The derivatives are assumed to be found at the boundaries._
 ```C++
 inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
+    std::string const & label,
     allocator_type allocator,
     physical_idx_range_type val_idx_range
 ) 
@@ -434,6 +482,7 @@ inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::De
 **Parameters:**
 
 
+* `label` The label of the object. 
 * `allocator` The object which allocates the memory on the CPU or GPU. 
 * `val_idx_range` The index range on which the values of the field are defined. 
 
@@ -446,9 +495,55 @@ inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::De
 
 
 
-### function DerivFieldMem [4/4]
+### function DerivFieldMem [6/9]
+
+_Version without a label._ 
+```C++
+inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
+    allocator_type allocator,
+    physical_idx_range_type val_idx_range
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function DerivFieldMem [7/9]
 
 _The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges. The derivatives are assumed to be found at the boundaries._
+```C++
+inline explicit DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
+    std::string const & label,
+    physical_idx_range_type val_idx_range
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `label` The label of the object. 
+* `val_idx_range` The index range on which the values of the field are defined. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function DerivFieldMem [8/9]
+
+_Version without a label._ 
 ```C++
 inline explicit DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
     physical_idx_range_type val_idx_range
@@ -458,11 +553,26 @@ inline explicit DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSp
 
 
 
+<hr>
+
+
+
+### function DerivFieldMem [9/9]
+
+```C++
+inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
+    DerivFieldMem && other
+) noexcept
+```
+
+
+
+Constructs a new [**DerivFieldMem**](classDerivFieldMem.md) by move. 
 
 **Parameters:**
 
 
-* `val_idx_range` The index range on which the values of the field are defined. 
+* `other` the [**DerivFieldMem**](classDerivFieldMem.md) to move. 
 
 
 
@@ -546,6 +656,30 @@ This function is designed to match the equivalent function in DDC. In Gysela it 
 **Returns:**
 
 A span of this field. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function label 
+
+```C++
+inline char const * DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::label () const
+```
+
+
+
+Returns the label of the [**DerivFieldMem**](classDerivFieldMem.md). 
+
+**Returns:**
+
+c-string. 
 
 
 

@@ -737,10 +737,10 @@ private:
 
     template &lt;std::size_t ArrayIndex&gt;
     std::enable_if_t&lt;std::is_constructible_v&lt;mapping_type, extents_type&gt;, internal_mdspan_type&gt;
-    make_internal_mdspan(allocator_type allocator)
+    make_internal_mdspan(std::string const&amp; label_str, allocator_type allocator)
     {
         std::size_t alloc_size(((get_mdspan_size&lt;DDims, ArrayIndex&gt;()) * ...));
-        element_type* ptr = allocator.allocate("", alloc_size);
+        element_type* ptr = allocator.allocate(label_str, alloc_size);
 
         extents_type extents_r(get_mdspan_size&lt;DDims, ArrayIndex&gt;()...);
         mapping_type mapping_r(extents_r);
@@ -752,9 +752,14 @@ private:
     }
 
     template &lt;std::size_t... ArrayIndex&gt;
-    void initialise_chunks(allocator_type allocator, std::index_sequence&lt;ArrayIndex...&gt;)
+    void initialise_chunks(
+            std::string const&amp; label_str,
+            allocator_type allocator,
+            std::index_sequence&lt;ArrayIndex...&gt;)
     {
-        ((this-&gt;internal_fields[ArrayIndex] = make_internal_mdspan&lt;ArrayIndex&gt;(allocator)), ...);
+        ((this-&gt;internal_fields[ArrayIndex]
+          = make_internal_mdspan&lt;ArrayIndex&gt;(label_str, allocator)),
+         ...);
     }
 
     template &lt;std::size_t ArrayIndex&gt;
@@ -773,11 +778,40 @@ private:
 public:
     template &lt;class... DerivDoms&gt;
     DerivFieldMem(
+            std::string const&amp; label,
+            physical_idx_range_type val_idx_range,
+            ddc::StridedDiscreteDomain&lt;
+                    DerivDoms&gt;... deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v&lt;deriv_tags&gt;)
+        : DerivFieldMem(label, allocator_type(), val_idx_range, deriv_idx_range...)
+    {
+    }
+
+    template &lt;class... DerivDoms&gt;
+    DerivFieldMem(
+            physical_idx_range_type val_idx_range,
+            ddc::StridedDiscreteDomain&lt;
+                    DerivDoms&gt;... deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v&lt;deriv_tags&gt;)
+        : DerivFieldMem("no-label", val_idx_range, deriv_idx_range...)
+    {
+    }
+
+    template &lt;class... DerivDoms&gt;
+    DerivFieldMem(
+            std::string const&amp; label,
+            allocator_type allocator,
             physical_idx_range_type val_idx_range,
             ddc::StridedDiscreteDomain&lt;
                     DerivDoms&gt;... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v&lt;deriv_tags&gt;)
-        : DerivFieldMem(allocator_type(), val_idx_range, m_deriv_idx_range...)
+        : base_type(
+                label,
+                val_idx_range,
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt;physical_deriv_grids&gt;(
+                        m_deriv_idx_range...))
     {
+        static_assert(
+                ddc::type_seq_same_v&lt;ddc::detail::TypeSeq&lt;DerivDoms...&gt;, physical_deriv_grids&gt;);
+        initialise_chunks(label, allocator, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
     }
 
     template &lt;class... DerivDoms&gt;
@@ -786,34 +820,54 @@ public:
             physical_idx_range_type val_idx_range,
             ddc::StridedDiscreteDomain&lt;
                     DerivDoms&gt;... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v&lt;deriv_tags&gt;)
-        : base_type(
-                val_idx_range,
-                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
-                ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt;physical_deriv_grids&gt;(
-                        m_deriv_idx_range...))
+        : DerivFieldMem("no-label", allocator, val_idx_range, m_deriv_idx_range...)
     {
-        static_assert(
-                ddc::type_seq_same_v&lt;ddc::detail::TypeSeq&lt;DerivDoms...&gt;, physical_deriv_grids&gt;);
-        initialise_chunks(allocator, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
     }
 
-    DerivFieldMem(allocator_type allocator, physical_idx_range_type val_idx_range)
+    DerivFieldMem(
+            std::string const&amp; label,
+            allocator_type allocator,
+            physical_idx_range_type val_idx_range)
         : base_type(
+                label,
                 val_idx_range,
                 get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
                 detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
     {
-        initialise_chunks(allocator, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
+        initialise_chunks(label, allocator, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
+    }
+
+    DerivFieldMem(allocator_type allocator, physical_idx_range_type val_idx_range)
+        : DerivFieldMem("no-label", allocator, val_idx_range)
+    {
+    }
+
+    explicit DerivFieldMem(std::string const&amp; label, physical_idx_range_type val_idx_range)
+        : DerivFieldMem(label, allocator_type(), val_idx_range)
+    {
     }
 
     explicit DerivFieldMem(physical_idx_range_type val_idx_range)
-        : DerivFieldMem(allocator_type(), val_idx_range)
+        : DerivFieldMem("no-label", val_idx_range)
     {
     }
 
+
+    DerivFieldMem(DerivFieldMem&amp;&amp; other) noexcept
+        : base_type(std::move(static_cast&lt;base_type&amp;&gt;(other)))
+    {
+        // Set the first internal field to store a nullptr, this prevents the memory being deallocated
+        other.internal_fields[0]
+                = internal_mdspan_type(nullptr, other.internal_fields[0].mapping());
+    }
+
+
     ~DerivFieldMem()
     {
-        free_chunks(allocator_type {}, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
+        // Deallocate the memory, but only if it was not moved to a new DerivFieldMem via an r-value constructor
+        if (this-&gt;internal_fields[0].data_handle()) {
+            free_chunks(allocator_type {}, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
+        }
     }
 
     DerivFieldMem&amp; operator=(DerivFieldMem const&amp; other) = delete;
@@ -875,6 +929,11 @@ public:
     span_type get_field()
     {
         return span_type(*this);
+    }
+
+    char const* label() const
+    {
+        return this-&gt;m_label.c_str();
     }
 
 private:

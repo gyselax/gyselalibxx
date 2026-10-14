@@ -659,6 +659,8 @@ protected:
     friend class DerivField;
 
 protected:
+    std::string m_label;
+
     std::array&lt;internal_mdspan_type, n_fields&gt; internal_fields;
 
     physical_idx_range_type m_physical_idx_range;
@@ -884,17 +886,24 @@ protected:
     }
 
     KOKKOS_FUNCTION DerivFieldCommon(
+            std::string const&amp; label,
             physical_idx_range_type physical_idx_range,
             discrete_deriv_idx_range_type deriv_idx_range,
             ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt;physical_deriv_grids&gt;
                     cross_derivative_idx_range)
-        : m_physical_idx_range(physical_idx_range)
+        : m_label(label)
+        , m_physical_idx_range(physical_idx_range)
         , m_deriv_idx_range(deriv_idx_range)
         , m_cross_derivative_idx_range(cross_derivative_idx_range)
     {
     }
 
 public:
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(DerivFieldCommon const&amp; other) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(
+            DerivFieldCommon&amp;&amp; other) noexcept = default;
+
     KOKKOS_DEFAULTED_FUNCTION ~DerivFieldCommon() = default;
 
     template &lt;class... ODims&gt;
