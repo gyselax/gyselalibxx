@@ -15,14 +15,14 @@ environment_name="$1"
 
 module purge
 
-SPACK_VERSION="1.2.2"
-export SPACK_PREFIX=${ALL_CCFRSCRATCH}/gysela-spack-${SPACK_VERSION}
+GYSELA_SPACK_VERSION="1.2.2"
+GYSELA_SPACK_PREFIX=${ALL_CCFRSCRATCH}/gysela-spack-${GYSELA_SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=true
 
 # Avoid too many temporary files in the Spack installation tree
 export PYTHONPYCACHEPREFIX="${ALL_CCFRSCRATCH}/pycache"
 
-. ${SPACK_PREFIX}/share/spack/setup-env.sh
+. ${GYSELA_SPACK_PREFIX}/share/spack/setup-env.sh
 spack env activate ${environment_name}
 
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
