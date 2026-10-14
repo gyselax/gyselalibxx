@@ -450,7 +450,6 @@
 
 * [**R**](structR.md)
 * [**R\_cov**](structR__cov.md)
-* [**R\_gyro**](structGyroAverageOperator_1_1R__gyro.md)
 * [**reduction\_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;**](structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4.md)
 ([**Kokkos**](namespaceKokkos.md))
 * [**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md)
@@ -504,7 +503,6 @@
 ([**tensor\_tools**](namespacetensor__tools.md))
 * [**Theta**](structTheta.md)
 * [**Theta\_cov**](structTheta__cov.md)
-* [**Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md)
 * [**ToroidalToCylindrical**](classToroidalToCylindrical.md)
 * [**ToTuple**](structconnectivity__details_1_1ToTuple.md)
 ([**connectivity\_details**](namespaceconnectivity__details.md))

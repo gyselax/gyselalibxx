@@ -29,6 +29,8 @@
 * **build\_non\_periodic\_matrix** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **build\_periodic\_matrix** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **beta** ([**GMGPolarTools::PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md))
+* **build\_circular\_coefficients** ([**GyroAverageOperator**](classGyroAverageOperator.md))
+* **build\_empty\_coefficients** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **batched\_basis\_idx\_range** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md), [**NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md))
 * **batched\_derivs\_xmax\_domain** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
 * **batched\_derivs\_xmin\_domain** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))

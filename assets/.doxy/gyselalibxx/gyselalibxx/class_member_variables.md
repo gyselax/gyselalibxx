@@ -172,9 +172,9 @@
 * **m\_nbcells** ([**GaussLegendre**](classGaussLegendre.md))
 * **m\_valid\_idx\_range** ([**GaussLegendre**](classGaussLegendre.md))
 * **m\_derivative\_creators** ([**GradientCreator**](classGradientCreator.md))
-* **m\_coordinate\_transform** ([**GyroAverageOperator**](classGyroAverageOperator.md))
+* **m\_gyrocoeffs\_coords** ([**GyroAverageOperator**](classGyroAverageOperator.md))
+* **m\_gyrocoeffs\_weights** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **m\_nb\_gyro\_points** ([**GyroAverageOperator**](classGyroAverageOperator.md))
-* **m\_rho\_L** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **m\_comm** ([**IMPITranspose**](classIMPITranspose.md), [**MpiChargeDensityCalculator**](classMpiChargeDensityCalculator.md))
 * **m\_coeff\_deriv\_patch\_1** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
 * **m\_coeff\_deriv\_patch\_2** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
@@ -332,7 +332,7 @@
 ## p
 
 * **pos** ([**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md))
-* **PERIODIC** ([**GyroAverageOperator::R\_gyro**](structGyroAverageOperator_1_1R__gyro.md), [**GyroAverageOperator::Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md), [**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
+* **PERIODIC** ([**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
 * **patch\_id** ([**MultipatchSplineBuilder::Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md))
 
 

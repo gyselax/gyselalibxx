@@ -11,11 +11,7 @@
 
 
 * `#include <ddc/ddc.hpp>`
-* `#include "cartesian_to_circular.hpp"`
-* `#include "circular_to_cartesian.hpp"`
-* `#include "ddc_alias_inline_functions.hpp"`
-* `#include "ddc_aliases.hpp"`
-* `#include "geometry_pseudo_cartesian.hpp"`
+* `#include "deriv_details.hpp"`
 * `#include "i_interpolation.hpp"`
 
 
@@ -36,7 +32,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**GyroAverageOperator**](classGyroAverageOperator.md) &lt;RThetaInterpolator, class IdxRangeRminorThetaBatch, class ToLogicalCoordTransform&gt;<br>_Operator to compute the gyroaverage of a field in (r, theta) coordinates._  |
+| class | [**GyroAverageOperator**](classGyroAverageOperator.md) &lt;InterpolatorType, class IdxRangeParams&gt;<br>_Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre- determined sample points along the gyro-motion._  |
 
 
 

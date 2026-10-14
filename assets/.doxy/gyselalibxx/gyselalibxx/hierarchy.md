@@ -83,7 +83,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**GeometryXYVxVy**](classGeometryXYVxVy.md) _A class providing aliases for useful subindex ranges of the geometry when the data is saved with the spatial dimensions distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections._ 
 * **class** [**Gradient**](classGradient.md) _A class which implements a gradient operator._ 
 * **class** [**GradientCreator**](classGradientCreator.md) _Operator to calculate the gradient of a function._ 
-* **class** [**GyroAverageOperator**](classGyroAverageOperator.md) _Operator to compute the gyroaverage of a field in (r, theta) coordinates._ 
+* **class** [**GyroAverageOperator**](classGyroAverageOperator.md) _Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre- determined sample points along the gyro-motion._ 
 * **class** [**IBoltzmannSolver**](classIBoltzmannSolver.md) _An abstract class for solving a Boltzmann equation._     
     * **class** [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md) _A class that solves a Boltzmann equation using Strang's splitting._ 
     * **class** [**SplitVlasovSolver**](classSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting._ 
@@ -203,8 +203,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**FluidMoments::MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) 
 * **struct** [**FluidMoments::MomentVelocity**](structFluidMoments_1_1MomentVelocity.md) 
 * **struct** [**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md) _A structure containing the weights and positions associated with a Gauss-Legendre quadrature using NPoints points._ 
-* **struct** [**GyroAverageOperator::R\_gyro**](structGyroAverageOperator_1_1R__gyro.md) 
-* **struct** [**GyroAverageOperator::Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md) 
 * **struct** [**Interface**](structInterface.md) _Represent a simple interface where two edges intersect._ 
 * **struct** [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md) _A traits struct for accessing type aliases of an interpolation builder._ 
 * **struct** [**InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.md) _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilderTraits.md) _for ddc::SplineBuilder2D._

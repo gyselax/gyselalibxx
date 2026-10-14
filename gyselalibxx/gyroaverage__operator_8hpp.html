@@ -574,11 +574,7 @@
 <p><a href="gyroaverage__operator_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
 <li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
-<li><code>#include "cartesian_to_circular.hpp"</code></li>
-<li><code>#include "circular_to_cartesian.hpp"</code></li>
-<li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
-<li><code>#include "ddc_aliases.hpp"</code></li>
-<li><code>#include "geometry_pseudo_cartesian.hpp"</code></li>
+<li><code>#include "deriv_details.hpp"</code></li>
 <li><code>#include "i_interpolation.hpp"</code></li>
 </ul>
 <h2 id="classes">Classes</h2>
@@ -592,7 +588,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classGyroAverageOperator.html"><strong>GyroAverageOperator</strong></a> &lt;RThetaInterpolator, class IdxRangeRminorThetaBatch, class ToLogicalCoordTransform&gt;<br><em>Operator to compute the gyroaverage of a field in (r, theta) coordinates.</em></td>
+<td style="text-align: left;"><a href="classGyroAverageOperator.html"><strong>GyroAverageOperator</strong></a> &lt;InterpolatorType, class IdxRangeParams&gt;<br><em>Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre- determined sample points along the gyro-motion.</em></td>
 </tr>
 </tbody>
 </table>

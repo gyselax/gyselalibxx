@@ -100,9 +100,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**GridVy**](structGridVy.md) 
 * **struct** [**GridX**](structGridX.md) 
 * **struct** [**GridY**](structGridY.md) 
-* **class** [**GyroAverageOperator**](classGyroAverageOperator.md) _Operator to compute the gyroaverage of a field in (r, theta) coordinates._     
-* **struct** [**R\_gyro**](structGyroAverageOperator_1_1R__gyro.md)     
-* **struct** [**Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md)     
+* **class** [**GyroAverageOperator**](classGyroAverageOperator.md) _Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre- determined sample points along the gyro-motion._     
 * **class** [**IAdvectionSpatial**](classIAdvectionSpatial.md) _A class which provides an advection operator._     
 * **class** [**IAdvectionVelocity**](classIAdvectionVelocity.md) _A class which provides an advection operator._     
 * **class** [**IBoltzmannSolver**](classIBoltzmannSolver.md) _An abstract class for solving a Boltzmann equation._     
