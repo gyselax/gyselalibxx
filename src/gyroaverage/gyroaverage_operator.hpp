@@ -219,7 +219,7 @@ public:
         IdxRangeParams idx_range_params(get_idx_range(func));
 
         ddc::host_for_each(idx_range_params, [&](IdxParams const idx_params) {
-            (*this)(func[idx_params], func[idx_params], idx_params);
+            (*this)(func[idx_params], idx_params);
         });
     }
 
