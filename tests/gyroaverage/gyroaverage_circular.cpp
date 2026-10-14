@@ -124,6 +124,19 @@ void initialise(
     IdxRangeRTheta const rtheta_idx_range = get_idx_range(larmor_factor_space);
     IdxRangeMu const mu_idx_range = get_idx_range(larmor_factor_params);
 
+    // Initialise the mu part of the Larmor radius
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            mu_idx_range,
+            KOKKOS_LAMBDA(IdxMu const imu) {
+                double const mu = ddc::coordinate(imu);
+                // Single species with mass and charge equal to 1
+                double const mass = 1.0;
+                double const charge = 1.0;
+                // rho = sqrt(2 m_s mu / B) / q_s (space dependence through B handled below)
+                larmor_factor_params(imu) = Kokkos::sqrt(2 * mu * mass) / Kokkos::fabs(charge);
+            });
+
     // Initialise R, Z and the spatial part of the Larmor radius
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
@@ -140,20 +153,6 @@ void initialise(
                 Zcoord(ir, itheta) = Z;
                 larmor_factor_space(ir, itheta) = Kokkos::sqrt(B0 / B);
             });
-
-    // Initialise the mu part of the Larmor radius
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            mu_idx_range,
-            KOKKOS_LAMBDA(IdxMu const imu) {
-                double const mu = ddc::coordinate(imu);
-                // Single species with mass and charge equal to 1
-                double const mass = 1.0;
-                double const charge = 1.0;
-                // rho = sqrt(2 mu / m_s) / q_s
-                larmor_factor_params(imu) = Kokkos::sqrt(2 * mu * mass) / Kokkos::fabs(charge);
-            });
-
 
     // Initialise A with Fourier mode
     ddc::parallel_for_each(
@@ -173,6 +172,14 @@ void initialise(
 
 } // namespace
 
+/**
+ * @brief Evaluate the accuracy of GyroAverageOperator on a polar mesh.
+ *
+ * The test considers a single species (not indexed) with m_s = q_s = 1 a multiple values of mu.
+ * The analytical formula used for validation takes into account the number of sample points and
+ * is an extension of the one in [K. Obrejan, PFR 10 (2015)]. The remaining error mainly comes from
+ * the interpolation at the sampling points.
+ */
 class GyroAverageCircularParamTests : public ::testing::TestWithParam<std::vector<double>>
 {
 protected:
@@ -267,7 +274,6 @@ using CartesianToPolar = CartesianToCircular<X_pC, Y_pC, R, Theta>;
 
 using SplineRThetaInterpolator = SplineRThetaInterpolatorType<Kokkos::DefaultExecutionSpace>;
 
-// FIXME: adapt the template parameters to the signature of the new operator
 using GyroAverageOperatorType = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeMu>;
 
 TEST_P(GyroAverageCircularParamTests, TestAnalytical)
@@ -286,11 +292,8 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
                     get_field(m_larmor_factor_space_alloc),
                     m_nb_gyro_points);
 
-    GyroAverageOperatorType gyroaverage(
-            spline_interpolator.get_builder(),
-            spline_interpolator.get_evaluator(),
-            gyrocoeffs_coords_alloc,
-            gyrocoeffs_weights_alloc);
+    GyroAverageOperatorType
+            gyroaverage(spline_interpolator, gyrocoeffs_coords_alloc, gyrocoeffs_weights_alloc);
 
     // Apply the gyroaverage for each value of mu
     IdxRangeMu const mu_idx_range = get_idx_range<GridMu>(A_gavg);
@@ -338,9 +341,9 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
         IdxTheta const itheta(irthetamu);
         IdxMu const imu(irthetamu);
         double const r = ddc::coordinate(ir);
-        // In the outer region, the particle position can be out of small radius (r), where the values are considered to be zero.
-        // Also the gyroaveraged value has the periodicity along theta direction (tested separately above)
-        // These conditions are not taken into account in the analytical formula, so we do not test these cases.
+        // In the outer region, the sample points will be outside of the domain, where the boundary
+        // conditions depend on the interpolator.
+        // This is not taken into account in the analytical formula, so we do not test these cases.
         if (r < r0 * 0.8) {
             double const R0eff = R0;
             double const gyroradius
@@ -364,7 +367,6 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     });
 }
 
-// Parameterisation over the magnetic moment (Larmor radius = sqrt(2 mu) for m = q = 1, B = B0)
 INSTANTIATE_TEST_SUITE_P(
         GyroAverageCircular,
         GyroAverageCircularParamTests,

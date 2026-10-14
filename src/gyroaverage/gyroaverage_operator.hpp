@@ -189,18 +189,16 @@ public:
     /**
      * @brief Constructor for the general case where coefficients are computed by the caller.
      *
-     * @param[in] builder Builder for the interpolation.
-     * @param[in] evaluator Evaluator for the interpolation.
+     * @param[in] interpolator Interpolator for the evaluation at the sample points.
      * @param[in] gyrocoeffs_coords Coordinates of the sample points.
      * @param[in] gyrocoeffs_weights Weights associated with the sample points.
      */
     explicit GyroAverageOperator(
-            InterpSpaceBuilderType const& builder,
-            InterpSpaceEvaluatorType const& evaluator,
+            InterpolatorType const& interpolator,
             GyroCoeffsCoordsMem& gyrocoeffs_coords,
             GyroCoeffsWeightsMem& gyrocoeffs_weights)
-        : m_builder(builder)
-        , m_evaluator(evaluator)
+        : m_builder(interpolator.get_builder())
+        , m_evaluator(interpolator.get_evaluator())
         , m_gyrocoeffs_coords(gyrocoeffs_coords)
         , m_gyrocoeffs_weights(gyrocoeffs_weights)
         , m_nb_gyro_points(get_idx_range(gyrocoeffs_coords).template extent<CoeffList>())
