@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `PolarSplineEvaluator::operator()` and `PolarSplineEvaluator::deriv` to evaluate a batch of polar splines on a grid.
 - Add new constructors to `DerivFieldMem` where the idx range slices for the derivatives default to the edge of the physical domain.
 - Add constructor `MultipatchField<TypeOnPatch, SubsetPatches...>` to get a subset of the objects stored in a `MultipatchField`.
+- Add `InterfaceDerivCoeffs::get_approx_cross_deriv()`.
 
 ### Fixed
 
