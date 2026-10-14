@@ -261,6 +261,7 @@ public:
     explicit constexpr DerivField(
             DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator>& field)
         : base_type(
+                field.m_label,
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
                 field.m_cross_derivative_idx_range)
@@ -284,6 +285,7 @@ public:
     explicit constexpr DerivField(
             DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator> const& field)
         : base_type(
+                field.m_label,
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
                 field.m_cross_derivative_idx_range)
@@ -302,6 +304,7 @@ public:
             DerivField<OElementType, index_range_type, MemorySpace, LayoutStridedPolicy> const&
                     field)
         : base_type(
+                field.m_label,
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
                 field.m_cross_derivative_idx_range)
@@ -370,7 +373,7 @@ public:
     KOKKOS_FUNCTION constexpr reference operator()(DElem... elems) const noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_index_type = detail::combine_t<DElem...>;
+        using full_index_type = ddc::combine_t<DElem...>;
         full_index_type elem(elems...);
         return base_type::get_internal_field(elem)();
     }

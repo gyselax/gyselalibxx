@@ -135,7 +135,7 @@ RUN chmod +x /bin/bash_run \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
  && cmake --build build \
  && cmake --install build --prefix /opt/googletest \
- && git clone --branch 2.14.2 --depth 1 https://github.com/danmar/cppcheck.git \
+ && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build \
  && cmake --build build \
