@@ -98,9 +98,6 @@ private:
     /// The 1D B-splines in the poloidal direction
     using BSplinesTheta = typename PolarBSplinesRTheta::BSplinesTheta_tag;
 
-    using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
-    using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
-
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
     /// The type of an index range over the polar B-splines
@@ -462,37 +459,9 @@ public:
                 m_idxrange_fem_non_singular,
                 KOKKOS_LAMBDA(IdxBSPolar const idx) {
                     const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-                    const IdxBSR idx_r(idx_2d);
-                    const IdxBSTheta idx_theta(idx_2d);
-
-                    auto& bspl_r = ddc::discrete_space<BSplinesR>();
-                    auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
-
-                    // Find the cells on which the bspline is non-zero
-                    const Idx<KnotsR> start_non_zero_r(
-                            Kokkos::
-                                    max(bspl_r.break_point_domain().front(),
-                                        bspl_r.get_first_support_knot(idx_r)));
-                    const Idx<KnotsR> end_non_zero_r(
-                            Kokkos::
-                                    min(bspl_r.break_point_domain().back(),
-                                        bspl_r.get_last_support_knot(idx_r)));
-
-                    const Idx<KnotsTheta> start_non_zero_theta(
-                            bspl_theta.get_first_support_knot(idx_theta));
-                    const Idx<KnotsTheta> end_non_zero_theta(
-                            bspl_theta.get_last_support_knot(idx_theta));
-                    const IdxRangeQuadratureRTheta quad_range
-                            = detail_poisson::get_quadrature_between_knots<
-                                    QDimRMesh,
-                                    QDimThetaMesh,
-                                    BSplinesR,
-                                    BSplinesTheta>(
-                                    start_non_zero_r,
-                                    end_non_zero_r,
-                                    start_non_zero_theta,
-                                    end_non_zero_theta,
-                                    full_quad_idx_range.front());
+                    // Find the quadrature points on which the bspline is non-zero
+                    const IdxRangeQuadratureRTheta quad_range = detail_poisson::
+                            get_support_quadrature(idx_2d, full_quad_idx_range.front());
 
                     // Calculate the weak integral
                     b(batch_idx, idx) = 0.0;

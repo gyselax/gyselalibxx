@@ -323,6 +323,54 @@ KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_quadrature_between_knots(
     return IdxRange<QDimRMesh, QDimThetaMesh>(q_range_r, q_range_theta);
 }
 
+/**
+ * @brief Compute the range of quadrature points in the support of a tensor product B-spline.
+ *
+ * In order to return a contiguous range the result may include poloidal indices which are
+ * outside the domain. A modulo operator should be applied before using the indices.
+ *
+ * @tparam QDimRMesh Quadrature mesh in radial direction.
+ * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
+ * @tparam BSplinesR Splines in radial direction.
+ * @tparam BSplinesTheta Splines in poloidal direction.
+ *
+ * @param[in] idx
+ *      The 2D index of the tensor product B-spline.
+ * @param[in] idx_quad_front
+ *      The first index of the index range of the quadrature points.
+ * @return
+ *      The range of quadrature points in the support of the B-spline.
+ */
+template <typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta>
+KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_support_quadrature(
+        Idx<BSplinesR, BSplinesTheta> idx,
+        Idx<QDimRMesh, QDimThetaMesh> idx_quad_front)
+{
+    using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
+    using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
+
+    const Idx<BSplinesR> idx_r(idx);
+    const Idx<BSplinesTheta> idx_theta(idx);
+
+    auto& bspl_r = ddc::discrete_space<BSplinesR>();
+    auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
+
+    // Find the cells on which the bspline is non-zero
+    const Idx<KnotsR> start_non_zero_r(
+            Kokkos::max(bspl_r.break_point_domain().front(), bspl_r.get_first_support_knot(idx_r)));
+    const Idx<KnotsR> end_non_zero_r(
+            Kokkos::min(bspl_r.break_point_domain().back(), bspl_r.get_last_support_knot(idx_r)));
+
+    const Idx<KnotsTheta> start_non_zero_theta(bspl_theta.get_first_support_knot(idx_theta));
+    const Idx<KnotsTheta> end_non_zero_theta(bspl_theta.get_last_support_knot(idx_theta));
+    return get_quadrature_between_knots<QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta>(
+            start_non_zero_r,
+            end_non_zero_r,
+            start_non_zero_theta,
+            end_non_zero_theta,
+            idx_quad_front);
+}
+
 } // namespace detail_poisson
 
 
