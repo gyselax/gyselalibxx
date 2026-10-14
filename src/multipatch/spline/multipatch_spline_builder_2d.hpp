@@ -222,19 +222,19 @@ class MultipatchSplineBuilder2D
 
     using MultipatchIdxRangeBS = MultipatchType<IdxRangeBSOnPatch, Patches...>;
 
-    template <class MultipatchBatchedIdxRange>
-    using MultipatchBatchedIdxRangeBS = detail::MultipatchType<
-            typename MultipatchBatchedIdxRange::PatchOrdering,
+    template <class MultipatchIdxRangeBatched>
+    using MultipatchIdxRangeBatchedBS = detail::MultipatchType<
+            typename MultipatchIdxRangeBatched::PatchOrdering,
             ddc::detail::TypeSeq<batched_spline_domain_type_on_patch<
                     Patches,
-                    typename MultipatchBatchedIdxRange::TypeOnPatch<Patches>>...>>;
+                    typename MultipatchIdxRangeBatched::TypeOnPatch<Patches>>...>>;
 
-    template <class MultipatchBatchedIdxRange>
-    using MultipatchBatchedIdxRangeDeriv = detail::MultipatchType<
-            typename MultipatchBatchedIdxRange::PatchOrdering,
+    template <class MultipatchIdxRangeBatched>
+    using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType<
+            typename MultipatchIdxRangeBatched::PatchOrdering,
             ddc::detail::TypeSeq<batched_derivs_domain_type_on_patch<
                     Patches,
-                    typename MultipatchBatchedIdxRange::TypeOnPatch<Patches>>...>>;
+                    typename MultipatchIdxRangeBatched::TypeOnPatch<Patches>>...>>;
 
     /// The type of the internal storage of the SplineBuilders.
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
@@ -259,12 +259,12 @@ public:
     }
 
     /// @brief Multi-patch batched domain with InterpolationDDim replaced by BSplines.
-    template <class MultipatchBatchedIdxRange>
-    using batched_basis_idx_range_type = MultipatchBatchedIdxRangeBS<MultipatchBatchedIdxRange>;
+    template <class MultipatchIdxRangeBatched>
+    using batched_basis_idx_range_type = MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched>;
 
     /// @brief Multi-patch batched domain with InterpolationDDim replaced by deriv_type.
-    template <class MultipatchBatchedIdxRange>
-    using batched_derivs_idx_range_type = MultipatchBatchedIdxRangeDeriv<MultipatchBatchedIdxRange>;
+    template <class MultipatchIdxRangeBatched>
+    using batched_derivs_idx_range_type = MultipatchIdxRangeBatchedDeriv<MultipatchIdxRangeBatched>;
 
 private:
     template <class Patch, class MultipatchDerivs>
@@ -381,11 +381,11 @@ public:
      * @param[in] idx_ranges MultipatchType collecting the index ranges on the grids of the patches. 
      * @return a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
      */
-    template <class MultipatchBatchedIdxRange>
-    MultipatchBatchedIdxRangeBS<MultipatchBatchedIdxRange> const batched_spline_idx_ranges(
-            MultipatchBatchedIdxRange idx_ranges) const
+    template <class MultipatchIdxRangeBatched>
+    MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched> const batched_spline_idx_ranges(
+            MultipatchIdxRangeBatched idx_ranges) const
     {
-        return MultipatchBatchedIdxRangeBS<MultipatchBatchedIdxRange>(
+        return MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched>(
                 std::get<BuilderOnPatch<Patches> const&>(m_builders)
                         .batched_spline_domain(idx_ranges.template get<Patches>())...);
     };
