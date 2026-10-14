@@ -29,7 +29,8 @@ fi
 
 for arch in v100 xeon; do
     env="gyselalibxx-${arch}"
-    env_file="${TOOLCHAIN_ROOT_DIRECTORY}/${arch}/gyselalibxx-spack-environment.yaml"
+    export GYSELA_SPACK_ARCH=persee/${arch}
+    env_file="${TOOLCHAIN_ROOT_DIRECTORY}/../gyselalibxx-spack-environment.yaml"
 
     echo "Preparing the Spack environment ${env}"
 
