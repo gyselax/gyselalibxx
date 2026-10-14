@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <tuple>
+
 #include <ddc/ddc.hpp>
 
 #include "coord_transformation_tools.hpp"
@@ -173,8 +175,6 @@ public:
  * @tparam calculate_derivs Returns the derivatives at the coordinate if true. If false, 
  *     only the value is calculated.
  *
- * @param[out] val
- *      The value of the specified polar bspline at the specified point.
  * @param[in] bspline_stash
  *      The values and derivatives of the 1D B-splines at the quadrature points. These are
  *      used to evaluate the polar bsplines which can be expressed as a tensor product of
@@ -183,7 +183,8 @@ public:
  *      The quadrature point where the value of the polar bspline should be calculated.
  * @param[in] idx
  *      The polar bspline of interest.
- * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
+ * @return The value of the polar bspline if calculate_derivs is false. Otherwise a tuple
+ *      containing the value and the derivatives of the polar bspline.
  */
 template <
         bool calculate_derivs = true,
@@ -192,10 +193,12 @@ template <
         class TensorBSplineStashType>
 KOKKOS_FUNCTION std::conditional_t<
         calculate_derivs,
-        DVector<typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual>,
-        void>
+        std::tuple<
+                double,
+                DVector<typename PolarBSplinesRTheta::R::Dual,
+                        typename PolarBSplinesRTheta::Theta::Dual>>,
+        double>
 get_polar_bspline_vals_and_derivs(
-        double& val,
         TensorBSplineStashType const& bspline_stash,
         IdxQuad idx_quad,
         Idx<PolarBSplinesRTheta> idx)
@@ -233,13 +236,15 @@ get_polar_bspline_vals_and_derivs(
 
     IdxStep<PolarBSplinesRTheta> offset
             = idx - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>().front();
-    val = singular_vals(offset.value(), 0, 0);
+    const double val = singular_vals(offset.value(), 0, 0);
     if constexpr (calculate_derivs) {
-        return DVector<typename R::Dual, typename Theta::Dual>(
-                singular_vals(offset.value(), 1, 0),
-                singular_vals(offset.value(), 0, 1));
+        return std::
+                tuple(val,
+                      DVector<typename R::Dual, typename Theta::Dual>(
+                              singular_vals(offset.value(), 1, 0),
+                              singular_vals(offset.value(), 0, 1)));
     } else {
-        return;
+        return val;
     }
 }
 
@@ -251,11 +256,12 @@ template <
         class TensorBSplineStashType>
 KOKKOS_FUNCTION std::conditional_t<
         calculate_derivs,
-        DVector<typename BSplinesR::continuous_dimension_type::Dual,
-                typename BSplinesTheta::continuous_dimension_type::Dual>,
-        void>
+        std::tuple<
+                double,
+                DVector<typename BSplinesR::continuous_dimension_type::Dual,
+                        typename BSplinesTheta::continuous_dimension_type::Dual>>,
+        double>
 get_polar_bspline_vals_and_derivs(
-        double& val,
         TensorBSplineStashType const& bspline_stash,
         IdxQuad idx_quad,
         Idx<BSplinesR, BSplinesTheta> idx)
@@ -266,11 +272,10 @@ get_polar_bspline_vals_and_derivs(
     // The polar bspline is a tensor product of 1D B-splines
     if constexpr (calculate_derivs) {
         DVector<typename R::Dual, typename Theta::Dual> derivs;
-        val = bspline_stash.vals_and_derivs(derivs, idx, idx_quad);
-        return derivs;
+        const double val = bspline_stash.vals_and_derivs(derivs, idx, idx_quad);
+        return std::tuple(val, derivs);
     } else {
-        val = bspline_stash.vals(idx, idx_quad);
-        return;
+        return bspline_stash.vals(idx, idx_quad);
     }
 }
 
@@ -1369,20 +1374,10 @@ public:
         const double beta = coeff_beta(coord);
 
         // Define the value and gradient of the test and trial basis functions
-        double basis_val_test_space;
-        DVector<R_cov, Theta_cov> basis_derivs_test_space
-                = detail_poisson::get_polar_bspline_vals_and_derivs(
-                        basis_val_test_space,
-                        bspline_stash,
-                        idx_quad,
-                        idx_test);
-        double basis_val_trial_space;
-        DVector<R_cov, Theta_cov> basis_derivs_trial_space
-                = detail_poisson::get_polar_bspline_vals_and_derivs(
-                        basis_val_trial_space,
-                        bspline_stash,
-                        idx_quad,
-                        idx_trial);
+        auto [basis_val_test_space, basis_derivs_test_space] = detail_poisson::
+                get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_test);
+        auto [basis_val_trial_space, basis_derivs_trial_space] = detail_poisson::
+                get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_trial);
 
         using Spatial2DVectorSpace = VectorIndexSet<R, Theta>;
 
