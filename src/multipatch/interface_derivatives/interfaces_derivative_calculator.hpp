@@ -187,16 +187,6 @@ public:
         solve<eval_deriv>(functions_and_derivs, idx_par);
     }
 
-
-    // /// Version with a whole patch set and take the correct subset of patches.
-    // template <class IdxPar, class... PatchTypes>
-    // void solve_deriv(
-    //         MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs,
-    //         IdxPar const& idx_par)
-    // {
-    //     solve_deriv(ddcHelper::get<Patches...>(functions_and_derivs), idx_par);
-    // }
-
     /**
     * @brief Compute the vector C_trunc to determine all the interface derivatives in the Grid1D
      * direction at all the indices of the first patch.
@@ -225,13 +215,6 @@ public:
                 });
     }
 
-    // /// Version with a whole patch set and take the correct subset of patches.
-    // template <class... PatchTypes>
-    // void solve_deriv(MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs)
-    // {
-    //     solve_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...>(functions_and_derivs));
-    // }
-
     /**
      * @brief Compute the vector C_trunc to determine all the interface cross-derivatives in the Grid1D
      * direction at a given index.
@@ -249,15 +232,6 @@ public:
     {
         solve<eval_cross_deriv>(functions_and_derivs, idx_par);
     }
-
-    // /// Version with a whole patch set and take the correct subset of patches.
-    // template <class IdxPar, class... PatchTypes>
-    // void solve_cross_deriv(
-    //         MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs,
-    //         IdxPar const& idx_par)
-    // {
-    //     solve_cross_deriv(ddcHelper::get<Patches...>(functions_and_derivs), idx_par);
-    // }
 
     /**
      * @brief Compute the vector C_trunc to determine all the corner cross-derivatives in the Grid1D
@@ -282,15 +256,6 @@ public:
         solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.front());
         solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.back());
     }
-
-    // /// Version with a whole patch set and take the correct subset of patches.
-    // template <class... PatchTypes>
-    // void solve_cross_deriv(
-    //         MultipatchField<DerivFieldOnPatch_host, PatchTypes...> functions_and_derivs)
-    // {
-    //     solve_cross_deriv(ddcHelper::get<Patches...>(functions_and_derivs));
-    // }
-
 
 private:
     template <typename eval_type, class IdxPar>
