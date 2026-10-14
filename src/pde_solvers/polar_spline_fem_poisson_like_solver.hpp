@@ -453,6 +453,9 @@ public:
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
         IdxRangeQuadratureTheta full_quad_idx_range_theta(full_quad_idx_range);
 
+        typename PoissonAssembler::TensorBSplineStash bspline_stash
+                = m_assembler.get_tensor_bspline_stash();
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
@@ -502,7 +505,7 @@ public:
                         for (IdxQuadratureR idx_quad_r : ddc::select<QDimRMesh>(quad_range)) {
                             IdxQuadratureRTheta idx_quad(idx_quad_r, idx_quad_theta);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
-                            b(batch_idx, idx) += rhs(coord) * get_polar_bspline_vals(coord, idx)
+                            b(batch_idx, idx) += rhs(coord) * bspline_stash.vals(idx_2d, idx_quad)
                                                  * int_volume(idx_quad);
                         }
                     }
