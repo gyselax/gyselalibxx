@@ -18,11 +18,11 @@
 #include "interfaces_derivative_calculator_test_utils.hpp"
 #include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
+#include "multipatch_field_mem.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "orthogonal_coord_transforms.hpp"
 #include "types.hpp"
 #include "view.hpp"
-#include"multipatch_field_mem.hpp"
 
 /*
     Test InterfacesDerivativeCalculator on the following geometry:
