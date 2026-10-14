@@ -29,13 +29,17 @@ fi
 
 for arch in v100 xeon; do
     env="gyselalibxx-${arch}"
-    export GYSELA_SPACK_ARCH=persee/${arch}
-    env_file="${TOOLCHAIN_ROOT_DIRECTORY}/../gyselalibxx-spack-environment.yaml"
-
     echo "Preparing the Spack environment ${env}"
 
     spack env remove --yes-to-all "${env}"
-    spack env create "${env}" "${env_file}"
+    spack env create "${env}"
+
+    env_dir="$(spack location --env ${env})"
+    cp "${TOOLCHAIN_ROOT_DIRECTORY}/../gyselalibxx-spack-environment.yaml" "${env_dir}/spack.yaml"
+    mkdir --parents "${env_dir}/gysela"
+    cp "${TOOLCHAIN_ROOT_DIRECTORY}/${arch}/externals.yaml" "${env_dir}/"
+    cp "${TOOLCHAIN_ROOT_DIRECTORY}/${arch}/packages.yaml" "${env_dir}/gysela"
+    cp "${TOOLCHAIN_ROOT_DIRECTORY}/${arch}/repos.yaml" "${env_dir}/gysela"
 
     spack env activate "${env}"
     spack repo update

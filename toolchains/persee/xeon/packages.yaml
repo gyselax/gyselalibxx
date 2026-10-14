@@ -1,17 +1,16 @@
 ---
 packages:
-  gcc:
-    externals:
-    - spec: gcc@13.2.0 languages:='c,c++,fortran'
-      prefix: /Applications/compilers/gcc/13.2.0
-      extra_attributes:
-        compilers:
-          c: /Applications/compilers/gcc/13.2.0/bin/gcc
-          cxx: /Applications/compilers/gcc/13.2.0/bin/g++
-          fortran: /Applications/compilers/gcc/13.2.0/bin/gfortran
-        environment:
-          prepend_path:
-            LD_LIBRARY_PATH: /Applications/compilers/gcc/13.2.0/lib64:/Applications/compilers/gcc/13.2.0/lib
+  all:
+    permissions:
+      read: group
+      write: group
+    prefer:
+      - '~fortran ~mpi +openmp'
+      - 'target=cascadelake'
+  c:
+    require: gcc@13.2.0
+  cxx:
+    require: gcc@13.2.0
   ginkgo:
     require: '+openmp'
   kokkos:

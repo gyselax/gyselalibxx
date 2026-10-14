@@ -1,6 +1,9 @@
 spack:
   include:
-    - $GYSELA_SPACK_ARCH
+    - path: externals.yaml
+      optional: true
+    - path: gysela
+      optional: true
   specs:
     - cxx
     - cmake@3.31

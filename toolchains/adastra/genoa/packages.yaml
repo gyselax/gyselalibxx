@@ -6,28 +6,10 @@ packages:
       write: group
     prefer:
       - 'target=zen4'
-  cray-mpich:
-    buildable: false
-    externals:
-      - spec: cray-mpich@8.1.30 %gcc@13.3
-        prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/11.2
-        extra_attributes:
-          environment:
-            prepend_path:
-              LD_LIBRARY_PATH: /opt/cray/libfabric/1.20.1/lib64/
   c:
     require: gcc@13.3.1
   cxx:
     require: gcc@13.3.1
-  gcc:
-    externals:
-      - spec: gcc@13.3.1 languages:='c,c++,fortran'
-        prefix: /opt/rh/gcc-toolset-13/root/usr
-        extra_attributes:
-          compilers:
-            c: /opt/rh/gcc-toolset-13/root/usr/bin/gcc
-            cxx: /opt/rh/gcc-toolset-13/root/usr/bin/g++
-            fortran: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
   ginkgo:
     require: '+openmp'
   kokkos:
