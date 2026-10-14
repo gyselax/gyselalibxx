@@ -592,13 +592,15 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
 {
     // Evaluation points
     // --- patch 1
-        Patch1::IdxRange12 const half_reduced_idx_range_rtheta1(reduced_idx_range_r1, idx_range_theta1);
-    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(half_reduced_idx_range_rtheta1);
+    Patch1::IdxRange12 const half_reduced_idx_range_rtheta1(reduced_idx_range_r1, idx_range_theta1);
+    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(
+            half_reduced_idx_range_rtheta1);
     Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = get_field(eval_points_1_alloc);
 
     // --- patch 2
-        Patch2::IdxRange12 const half_reduced_idx_range_rtheta2(reduced_idx_range_r2, idx_range_theta2);
-    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(half_reduced_idx_range_rtheta2);
+    Patch2::IdxRange12 const half_reduced_idx_range_rtheta2(reduced_idx_range_r2, idx_range_theta2);
+    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(
+            half_reduced_idx_range_rtheta2);
     Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = get_field(eval_points_2_alloc);
 
     set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(eval_points_1);
