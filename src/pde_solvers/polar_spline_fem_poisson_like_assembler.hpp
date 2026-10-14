@@ -1334,16 +1334,16 @@ public:
         const int n_singular = idxrange_singular.size();
         const std::source_location location = std::source_location::current();
 
+        // Number of quadrature points in the support of a tensor product B-spline
+        constexpr int n_quad_support = s_n_quad_support_r * s_n_quad_support_theta;
+
         // Each team needs scratch memory to store the test weights at the quadrature points
         // in the support of the test function.
         Kokkos::TeamPolicy<>
                 policy(Kokkos::DefaultExecutionSpace(),
                        m_idxrange_fem_tensor_basis.size(),
                        Kokkos::AUTO);
-        policy.set_scratch_size(
-                0,
-                Kokkos::PerTeam(
-                        ScratchView::shmem_size(3 * s_n_quad_support_r * s_n_quad_support_theta)));
+        policy.set_scratch_size(0, Kokkos::PerTeam(ScratchView::shmem_size(3 * n_quad_support)));
 
         // Calculate the matrix elements following a stencil
         // Teams loop over rows
@@ -1367,7 +1367,6 @@ public:
                     // Calculate the test weights once for all trial b-splines
                     const IdxRangeQuadratureRTheta idx_range_quad = detail_poisson::
                             get_support_quadrature(idx_test, full_quad_idx_range.front());
-                    const int n_quad_support = s_n_quad_support_r * s_n_quad_support_theta;
                     ScratchView test_weights(team.team_scratch(0), 3 * n_quad_support);
                     QuadField test_mass(test_weights.data(), idx_range_quad);
                     DVectorField<IdxRangeQuadratureRTheta, VectorIndexSet<R, Theta>> test_stiffness(
