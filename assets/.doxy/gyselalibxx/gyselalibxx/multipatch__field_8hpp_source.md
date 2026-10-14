@@ -83,6 +83,19 @@ public:
         static_assert(is_multipatch_type_v<MultipatchObj>);
     }
 
+    template <class OPatchSeq, class OTypeSeq>
+    KOKKOS_FUNCTION MultipatchField(MultipatchField<OPatchSeq, OTypeSeq> const& other)
+        : base_type(InternalTypes(other.template get<Patches>())...)
+    {
+        static_assert(
+                ddc::type_seq_contains_v<PatchOrdering, OPatchSeq>,
+                "The type being copied does not contain all the required patches");
+        static_assert(
+                ddc::type_seq_contains_v<typename base_type::InternalTypeOrdering, OTypeSeq>,
+                "MultipatchFields are not equivalent");
+    }
+
+
     KOKKOS_DEFAULTED_FUNCTION MultipatchField(MultipatchField const&) noexcept = default;
 
     KOKKOS_DEFAULTED_FUNCTION MultipatchField(MultipatchField&&) noexcept = default;
