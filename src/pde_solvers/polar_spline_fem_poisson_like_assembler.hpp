@@ -166,24 +166,24 @@ public:
 };
 
 /**
- * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
+ * @brief Get the value and derivatives of a polar bspline which covers the singular point
+ *      at the specified quadrature point.
  *
- * This method calculates the value and the derivatives of polar bsplines. It is templated by
- * calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and
- * get_polar_bspline_vals. The calling method should not need to use the template parameter.
- * 
- * @tparam PolarBSplinesRTheta The Polar B-Splines to be used.
- * @tparam calculate_derivs Returns the derivatives at the coordinate if true. If false, 
+ * The polar bsplines which cover the singular point are linear combinations of tensor product
+ * bsplines so they are evaluated using PolarBSplines::eval_basis_and_n_derivs. The polar
+ * bsplines which do not cover the singular point should be passed as a 2D index (see the
+ * overload below).
+ *
+ * @tparam calculate_derivs If true, the value and the derivatives are calculated. If false,
  *     only the value is calculated.
  *
  * @param[in] bspline_stash
- *      The values and derivatives of the 1D B-splines at the quadrature points. These are
- *      used to evaluate the polar bsplines which can be expressed as a tensor product of
- *      1D B-splines.
+ *      The values and derivatives of the 1D B-splines at the quadrature points. This argument
+ *      is unused but is present so that both overloads have the same signature.
  * @param[in] idx_quad
- *      The quadrature point where the value of the polar bspline should be calculated.
+ *      The quadrature point where the polar bspline should be evaluated.
  * @param[in] idx
- *      The polar bspline of interest.
+ *      The index of a polar bspline which covers the singular point.
  * @return The value of the polar bspline if calculate_derivs is false. Otherwise a tuple
  *      containing the value and the derivatives of the polar bspline.
  */
@@ -249,6 +249,24 @@ get_polar_bspline_vals_and_derivs(
     }
 }
 
+/**
+ * @brief Get the value and derivatives of a tensor product bspline at the specified
+ *      quadrature point.
+ *
+ * The values are calculated from the values of the 1D B-splines saved in the stash.
+ *
+ * @tparam calculate_derivs If true, the value and the derivatives are calculated. If false,
+ *     only the value is calculated.
+ *
+ * @param[in] bspline_stash
+ *      The values and derivatives of the 1D B-splines at the quadrature points.
+ * @param[in] idx_quad
+ *      The quadrature point where the bspline should be evaluated.
+ * @param[in] idx
+ *      The 2D index of the tensor product bspline.
+ * @return The value of the bspline if calculate_derivs is false. Otherwise a tuple
+ *      containing the value and the derivatives of the bspline.
+ */
 template <
         bool calculate_derivs = true,
         class BSplinesR,
@@ -284,9 +302,10 @@ get_polar_bspline_vals_and_derivs(
  * @brief Compute the quadrature range between a provided set of knots.
  *
  * Compute the range of quadrature points which are found between a set of knots
- * in both the radial and poloidal directions. In order to return a contiguous range
- * the result may include indices which are outside the domain. A modulo operator
- * should be applied before using the indices.
+ * in both the radial and poloidal directions. The poloidal index of the front of the
+ * returned range is always inside the domain. However, in order to return a contiguous
+ * range, the result may include poloidal indices beyond the end of the domain. A modulo
+ * operator should be applied before using the indices.
  * 
  * @tparam QDimRMesh Quadrature mesh in radial direction.
  * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
@@ -648,7 +667,7 @@ public:
     }
 
     /**
-     * @brief Stash with the values and derivatives of the non-zero 1D B-splines at
+     * @brief Fill the stash with the values and derivatives of the non-zero 1D B-splines at
      * the 1D quadrature points.
      *
      * @param[out] basis_vals The values and derivatives of the non-zero 1D B-splines. The
@@ -1415,8 +1434,11 @@ public:
      *      The integral volume associated with each point used in the quadrature scheme.
      * @param[in] bspline_stash
      *      The values and derivatives of the 1D B-splines at the quadrature points.
-     * @return test_mass_weight The quantity @f$ w \beta B_i @f$ which multiplies the value of the trial function.
-     * @return test_stiffness_weight The quantity @f$ w \alpha G^{-1} \nabla B_i @f$ which multiplies the gradient of the trial function.
+     * @return A tuple containing
+     *          - test_mass_weight, the quantity @f$ w \beta B_i @f$ which
+     *            multiplies the value of the trial function,
+     *          - test_stiffness_weight, the quantity @f$ w \alpha G^{-1} \nabla B_i @f$ which
+     *            multiplies the gradient of the trial function.
      */
     template <class CoeffAlpha, class CoeffBeta, class Mapping, class IdxTestType>
     static KOKKOS_FUNCTION std::tuple<double, DVector<R, Theta>> get_test_weights(
@@ -1428,7 +1450,7 @@ public:
             DField<IdxRangeQuadratureRTheta> int_volume,
             TensorBSplineStash const& bspline_stash)
     {
-        // Define the value and gradient of the test and trial basis functions
+        // Define the value and gradient of the test basis function
         auto [basis_val_test_space, basis_derivs_test_space] = detail_poisson::
                 get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_test);
 
@@ -1460,14 +1482,15 @@ public:
      * @param[in] team
      *      The team of threads from which this function is called.
      * @param[in] idx_test
-     *      The index for polar B-spline in the test space.
+     *      The 2D index of the tensor product B-spline in the test space.
      * @param[in] idx_trial
-     *      The index for polar B-spline in the trial space.
-     * @param[in] test_support
-     *      The range of quadrature points in the support of the test basis spline
-     *      (see detail_poisson::get_support_quadrature).
-     * @param[in] test_weights
-     *      The test weights at the quadrature points in test_support (see fill_test_weights).
+     *      The 2D index of the tensor product B-spline in the trial space.
+     * @param[in] test_mass
+     *      The test_mass_weight at the quadrature points in the support of the test B-spline
+     *      (see fill_test_weights).
+     * @param[in] test_stiffness
+     *      The test_stiffness_weight at the quadrature points in the support of the test
+     *      B-spline (see fill_test_weights).
      * @param[in] full_quad_idx_range
      *      The index range of all the quadrature points.
      * @param[in] bspline_stash
@@ -1579,16 +1602,15 @@ public:
      *
      * @param[in] team
      *      The team of threads from which this function is called.
-     * @param[out] test_weights
-     *      The scratch memory where the weights are saved. The first two indices are the
-     *      offsets of the quadrature point from the front of test_support. The last index is 0
-     *      for test_mass_weight and 1 and 2 for the radial and poloidal components of
-     *      test_stiffness_weight.
-     * @param[in] idx_test
-     *      The index of the test basis spline.
-     * @param[in] test_support
-     *      The range of quadrature points in the support of the test basis spline
+     * @param[out] test_mass
+     *      The field where test_mass_weight is saved. Its index range is the range of
+     *      quadrature points in the support of the test B-spline
      *      (see detail_poisson::get_support_quadrature).
+     * @param[out] test_stiffness
+     *      The field where test_stiffness_weight is saved. It is defined on the same index
+     *      range as test_mass.
+     * @param[in] idx_test
+     *      The 2D index of the test B-spline.
      * @param[in] coeff_alpha
      *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
      * @param[in] coeff_beta
