@@ -97,25 +97,25 @@ method of characteristics and spline finite elements", <https://doi.org/10.1016/
 ### Recommended parameters
 
 - `Mesh:`
-  - `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
-  - `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
-  - `r_min: 0.0`  : start of $`r`$ domain. (Tests in Edoardo Zoni's article.)
-  - `r_max: 1.0` : end of $`r`$ domain. (Tests in Edoardo Zoni's article.)
+    - `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
+    - `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
+    - `r_min: 0.0`  : start of $`r`$ domain. (Tests in Edoardo Zoni's article.)
+    - `r_max: 1.0` : end of $`r`$ domain. (Tests in Edoardo Zoni's article.)
 
 - `Time:`
-  - `delta_t: 0.1` : time step. (Tests in Edoardo Zoni's article.)
-  - `final_T: 10.0`: final time of the simulation. (Tests in Edoardo Zoni's article.)
+    - `delta_t: 0.1` : time step. (Tests in Edoardo Zoni's article.)
+    - `final_T: 10.0`: final time of the simulation. (Tests in Edoardo Zoni's article.)
   
 - `Perturbation:`
-  - `eps: 0.0001` : amplitude of the perturbation.
-  - `x_star_1: 0.08` : $`x`$ coordinate of the centre of the initial first vortex.
-  - `y_star_1: -0.14` : $`y`$ coordinate of the centre of the initial first vortex.
-  - `x_star_2: -0.08` : $`x`$ coordinate of the centre of the initial second vortex.
-  - `y_star_2: 0.14` : $`y`$ coordinate of the centre of the initial second vortex.
-  - `sigma: 0.08` : the standard deviation of the initial Gaussian function.
+    - `eps: 0.0001` : amplitude of the perturbation.
+    - `x_star_1: 0.08` : $`x`$ coordinate of the centre of the initial first vortex.
+    - `y_star_1: -0.14` : $`y`$ coordinate of the centre of the initial first vortex.
+    - `x_star_2: -0.08` : $`x`$ coordinate of the centre of the initial second vortex.
+    - `y_star_2: 0.14` : $`y`$ coordinate of the centre of the initial second vortex.
+    - `sigma: 0.08` : the standard deviation of the initial Gaussian function.
   
 - `Output:`
-  - `time_step_diag: 5` : number of time steps between two recordings of the data.
+    - `time_step_diag: 5` : number of time steps between two recordings of the data.
 
 ### Executables
 

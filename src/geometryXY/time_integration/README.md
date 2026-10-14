@@ -19,16 +19,16 @@ For $n\geq 0$,
 
 - Advect on a half time step:
 
- 1. From $f^n$, we compute $\phi^n$ with the Poisson-like equation (FFTPoissonSolver);
+1. From $f^n$, we compute $\phi^n$ with the Poisson-like equation (FFTPoissonSolver);
 
- 2. From $\phi^n$, we compute $E^n$ by deriving (FFTPoissonSolver);
+2. From $\phi^n$, we compute $E^n$ by deriving (FFTPoissonSolver);
 
- 3. From $f^n \text{ and } E^n$, we compute $f^{n+1/2}$ by advecting (BslAdvection1D) on $\frac{dt}{2}$;
+3. From $f^n \text{ and } E^n$, we compute $f^{n+1/2}$ by advecting (BslAdvection1D) on $\frac{dt}{2}$;
 
 - Advect on a full time step:
 
- 4. From $f^{n+1/2}$, we compute $\phi^{n+1/2}$ with the Poisson-like equation (FFTPoissonSolver);
+4. From $f^{n+1/2}$, we compute $\phi^{n+1/2}$ with the Poisson-like equation (FFTPoissonSolver);
 
- 5. From $\phi^{n+1/2}$, we compute $E^{n+1/2}$ by deriving (FFTPoissonSolver);
+5. From $\phi^{n+1/2}$, we compute $E^{n+1/2}$ by deriving (FFTPoissonSolver);
 
- 6. From $f^n \text{ and } E^{n+1/2}$, we compute $f^{n+1}$ by advecting (BslAdvection1D) on $dt$.
+6. From $f^n \text{ and } E^{n+1/2}$, we compute $f^{n+1}$ by advecting (BslAdvection1D) on $dt$.

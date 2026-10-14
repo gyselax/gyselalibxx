@@ -10,19 +10,19 @@
 - We use `std::runtime_error` on CPU and `Kokkos::abort` on GPU to enforce suppositions which are dependent on user input. These checks should appear in constructors
 - We use `assert` on CPU and `KOKKOS_ASSERT` on GPU to enforce suppositions which are independent of user input.
 - The `auto` keyword should be avoided where possible. It is permitted in one of the following cases:
-  - to store objects that can not be typed otherwise (e.g. lambdas)
-  - to store the result of an expression specifically specifying the type of the generated value
+    - to store objects that can not be typed otherwise (e.g. lambdas)
+    - to store the result of an expression specifically specifying the type of the generated value
 
 ## Parameter passing
 
 - We take out/inout-parameters (those we modify) first
 - For in-parameters (those we use but don't modify)
-  - if it's a scalar native type (int, double, ...) we take it by copy
-  - if it's a const view type (`ConstField<...>`, `DVectorConstField<...>`, ...) we take it by copy
-  - otherwise, we take a const-ref: `Type const&`
+    - if it's a scalar native type (int, double, ...) we take it by copy
+    - if it's a const view type (`ConstField<...>`, `DVectorConstField<...>`, ...) we take it by copy
+    - otherwise, we take a const-ref: `Type const&`
 - For inout-parameters
-  - if it's a modifiable view type (`Field<...>`, `DVectorField<...>`, ...) we take it by copy
-  - otherwise, we take a ref: `Type&`
+    - if it's a modifiable view type (`Field<...>`, `DVectorField<...>`, ...) we take it by copy
+    - otherwise, we take a ref: `Type&`
 
 ## Naming
 
@@ -47,18 +47,18 @@
 
 - We use the style specified by the `.clang-format` file using clang-format 10.
 - we do not use numerical values in the code except to initialise a named constexpr documenting
-  the semantic of the value.
+    the semantic of the value.
 - In a class
-  - we put all member types first (public, then protected, then private),
-  - followed by static member variables (public, then protected, then private),
-  - followed by non-static member variables (public, then protected, then private),
-  - followed by static member functions (public, then protected, then private),
-  - followed by non-static member functions (public, then protected, then private),
-    - the constructors first
-    - then the destructor
-    - then the various operators
-    - then the accessors
-    - then the more complex functions
+    - we put all member types first (public, then protected, then private),
+    - followed by static member variables (public, then protected, then private),
+    - followed by non-static member variables (public, then protected, then private),
+    - followed by static member functions (public, then protected, then private),
+    - followed by non-static member functions (public, then protected, then private),
+        - the constructors first
+        - then the destructor
+        - then the various operators
+        - then the accessors
+        - then the more complex functions
 - We comment our code with Doxygen.
 - We use at @@keywords in Doxygen.
 - we use east-const: `int const` rather than `const int`.
@@ -67,7 +67,19 @@
 
 - GPU code is the default.
 - When calling methods beginning with the prefix `parallel_` we always specify the execution space.
+- When calling `ddc::parallel_for_each` or `ddc::parallel_transform_reduce` we always pass the name of the enclosing function as the first argument (see the example below). This name identifies the loop in the output of profiling tools.
 - When calling mirror functions, the host execution space is never passed as an argument.
+
+The name of the enclosing function is obtained from a `std::source_location` declared at the start of the function:
+
+```cpp
+std::source_location const location = std::source_location::current();
+ddc::parallel_for_each(
+        location.function_name(),
+        Kokkos::DefaultExecutionSpace(),
+        idx_range,
+        KOKKOS_LAMBDA(Idx<Grid1D> idx) { ... });
+```
 
 ## Operators
 

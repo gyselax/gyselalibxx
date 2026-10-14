@@ -57,7 +57,7 @@ with
 
 - the mass matrix, $`M_{i,j} =  \int_{\Omega} \beta(r,\theta) \hat{B}_i(r,\theta)\hat{B}_j(r,\theta) |det(J_{\mathcal{F}}(r,\theta))| dr d\theta`$,
 - the stiffness matrix, $`S_{i,j} =  \int_{\Omega} \alpha(r) \left[\sum_{\xi_1\in[r,\theta]} \sum_{\xi_2\in[r,\theta]} \partial_{\xi_1}\hat{B}_i(r,\theta) \partial_{\xi_2}\hat{B}_j(r,\theta) g^{\xi_1, \xi_2}\right] |det(J_{\mathcal{F}}(r,\theta))| dr d\theta`$
-  - with $`g^{\xi_1, \xi_2}`$, the scalar product between the unit vector in $`\xi_1`$ and the unit vector in $`\xi_2`$.
+    - with $`g^{\xi_1, \xi_2}`$, the scalar product between the unit vector in $`\xi_1`$ and the unit vector in $`\xi_2`$.
 - the solution vector, $`\hat{\phi}_i = \sum_{l = 0}^{n_{b,\theta}(n_{b,r} -2) +3} \phi_l \hat{B}_l(r_i,\theta_i)`$,
 - and the rhs vector,  $`\hat{\rho}_j = \sum_{l = 0}^{n_{b,\theta}(n_{b,r} -2) +3} \rho_l \hat{B}_l(r_j,\theta_j)`$.
 
@@ -72,13 +72,13 @@ The PolarSplineFEMPoissonLikeSolver is tested on a circular mapping (CircularToC
 (the test cases are given in Emily Bourne's thesis [1])
 
 - the Poisson coefficients:
-  - $`\alpha(r) = \exp\left( - \tanh\left( \frac{r - r_p}{\delta_r} \right) \right)`$, with $`r_p = 0.7`$ and $`\delta_r = 0.05`$,
-  - $\beta(r) = \frac{1}{\alpha(r)}$.
+    - $`\alpha(r) = \exp\left( - \tanh\left( \frac{r - r_p}{\delta_r} \right) \right)`$, with $`r_p = 0.7`$ and $`\delta_r = 0.05`$,
+    - $\beta(r) = \frac{1}{\alpha(r)}$.
 - for the following test functions:
-  - polar solution: $\phi(x, y) = C r(x,y)^6 (r(x,y) -1)^6 \cos(m\theta)$,
-    - with $C = 2^{12}1e-4$ and $m = 11$;
-  - Cartesian solution: $\phi(x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y)$,
-    - with  $C = 2^{12}1e-4$.
+    - polar solution: $\phi(x, y) = C r(x,y)^6 (r(x,y) -1)^6 \cos(m\theta)$,
+        - with $C = 2^{12}1e-4$ and $m = 11$;
+    - Cartesian solution: $\phi(x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y)$,
+        - with  $C = 2^{12}1e-4$.
 
 ## References
 

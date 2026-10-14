@@ -77,7 +77,7 @@ The algorithm for given initial data $(\sigma^0, \phi^0)$ is the following:
 - compute the density: $\rho^{i} = \sigma^{i-1} f(\phi^{i-1})$,
 - compute a temporary electrical potential: $`- \nabla\cdot\nabla \phi_*^{i} = \rho^i`$,
 - compute the coefficient:
-  - if the maximum value $`\phi_{\text{max}}`$ is given: $`c^i = \frac{\phi_{\text{max}}}{\Vert\phi_*^i\Vert_{\mathcal{L}^\infty}}`$,
+    - if the maximum value $`\phi_{\text{max}}`$ is given: $`c^i = \frac{\phi_{\text{max}}}{\Vert\phi_*^i\Vert_{\mathcal{L}^\infty}}`$,
 - update the data: $`(\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i)`$.
 
 Then, we repeat all the steps until $|\sigma^i - \sigma^{i-1}| \leq \tau$ for a given tolerance.

@@ -6,14 +6,14 @@ The following sections describe the structures and methods implemented:
 
 - [Patch](#patch) - Definition of Patch tag.
 - [Interfaces](#interfaces)
-  - [Overlapping Two Edges](#overlapping-two-edges)
-    - [Multi-patch domain](#multi-patch-domain) - Mathematical definition of multi-patch domain.
-    - [Edges](#edges) - Mathematical definition of edges.
-    - [Connections and Coordinate Transformation](#connections-and-coordinate-transformation) - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation).
-    - [Index transformation](#index-transformation) - Algorithm of the index transformation in EdgeTransformation.
-    - [Conformity of the meshes](#conformity-of-the-meshes) - Definition of `UniformGridIdxMatching`.
+    - [Overlapping Two Edges](#overlapping-two-edges)
+        - [Multi-patch domain](#multi-patch-domain) - Mathematical definition of multi-patch domain.
+        - [Edges](#edges) - Mathematical definition of edges.
+        - [Connections and Coordinate Transformation](#connections-and-coordinate-transformation) - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation).
+        - [Index transformation](#index-transformation) - Algorithm of the index transformation in EdgeTransformation.
+        - [Conformity of the meshes](#conformity-of-the-meshes) - Definition of `UniformGridIdxMatching`.
 - [Patch locator](#patch-locator) - Definition of patch locator operators to identify the patch where a given physical coordinate is.
-  - [Onion shaped geometry](#onion-shaped-geometry) - Definition of `OnionPatchLocator`, a specialisation of `IPatchLocator` for "onion" shape geometries.  
+    - [Onion shaped geometry](#onion-shaped-geometry) - Definition of `OnionPatchLocator`, a specialisation of `IPatchLocator` for "onion" shape geometries.  
 - [References](#references) - References.
 - [Contents](#contents) - List of files in the folder.
 
@@ -258,6 +258,6 @@ Volume 272, Part 1
 - `edge.hpp`: Define the `Edge` structure.
 - `interface.hpp`: Define the `Interface` structure.
 - `ipatch_locator.hpp`: Define the base class `IPatchLocator` for the operators identifying the patch where a physical coordinate is.
-  - `onion_patch_locator.hpp`: Define a child class `OnionPatchLocator` specialised for "onion" type geometries.
+    - `onion_patch_locator.hpp`: Define a child class `OnionPatchLocator` specialised for "onion" type geometries.
 - `matching_idx_slice.hpp` : Define `MatchingIdxSlice` storing the conforming indices of both patch at a given interface.
 - `patch.hpp`: Define the `Patch` tag.

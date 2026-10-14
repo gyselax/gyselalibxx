@@ -20,9 +20,9 @@ with
 The defined test functions are:
 
 - Polar solution: $\phi(x, y) = C r(x,y)^6 (r(x,y) -1)^6 \cos(m\theta)$,
-  - with $C = 2^{12}1e-4$ and $m = 11$;
+    - with $C = 2^{12}1e-4$ and $m = 11$;
 - Cartesian solution: $\phi(x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y)$,
-  - with  $C = 2^{12}1e-4$.
+    - with  $C = 2^{12}1e-4$.
   
 The VlasovPoissonSolver is also tested on a circular mapping (CircularToCartesian) and on a Czarny mapping (CzarnyToCartesian)
 for the same Poisson equation with the Cartesian solution.

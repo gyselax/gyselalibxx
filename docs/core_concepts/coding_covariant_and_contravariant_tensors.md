@@ -199,10 +199,10 @@ DVector<Eta1, Eta2> w = tensor_mul(index<'i','j'>(M), index<'j'>(v));
 Explanation:
 
 - `M` is a `DTensor<EtaBasis, EtaBasis_cov>`, we are interested in the elements $`M^i_{\;j}`$
-  - 'i' in the first dimension, i.e. the dimension associated with the contravariant basis $`\{\boldsymbol{\eta}_i\}`$
-  - 'j' in the second dimension, i.e. the dimension associated with the covariant basis $`\{\boldsymbol{\eta}^i\}`$
+    - 'i' in the first dimension, i.e. the dimension associated with the contravariant basis $`\{\boldsymbol{\eta}_i\}`$
+    - 'j' in the second dimension, i.e. the dimension associated with the covariant basis $`\{\boldsymbol{\eta}^i\}`$
 - `v` is a `DVector<EtaBasis>`, we are interested in the elements $v^j$
-  - 'j' in the first (only) dimension, i.e. the dimension associated with the contravariant basis $`\{\boldsymbol{\eta}_i\}`$
+    - 'j' in the first (only) dimension, i.e. the dimension associated with the contravariant basis $`\{\boldsymbol{\eta}_i\}`$
 - The result is a contravariant vector (`DVector<Eta1, Eta2>`) thanks to the Einstein summation we know that we are interested in the elements $w^i$.
 
 The indices used in `index<'i','j'>` are **compile-time labels** that identify how dimensions are mapped and contracted.

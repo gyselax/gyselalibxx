@@ -19,8 +19,8 @@ the boundary cells.
 ## Contents
 
 - [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `InterfaceDerivCoeffs` operator.
-  - [How to use the `InterfaceDerivCoeffs` operator?](#how-to-use-the-interfacederivcoeffs-operator): It documents how to use the operator in the code.
-  - [Formulae](#formulae): It details the formulae applies in the operator.
+    - [How to use the `InterfaceDerivCoeffs` operator?](#how-to-use-the-interfacederivcoeffs-operator): It documents how to use the operator in the code.
+    - [Formulae](#formulae): It details the formulae applies in the operator.
 
 ## Relation between derivatives on the boundaries of two connected patches
 
@@ -118,7 +118,7 @@ The coefficients can be collected with the following functions:
 - `deriv_coeffs.get_coeff_deriv_patch_1()` returns the coefficient $`b^i_{N^L,N^R}`$;
 - `deriv_coeffs.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
 - `deriv_coeffs.get_approx_deriv(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
- (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
+    (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
 
 If we want to apply the exact formula, we need to sum these coefficients,
 
