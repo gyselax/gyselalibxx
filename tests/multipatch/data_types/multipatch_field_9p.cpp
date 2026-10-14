@@ -13,6 +13,7 @@
 #include "9patches_2d_periodic_strips_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "multipatch_field_mem.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
@@ -121,4 +122,79 @@ TEST(MultipatchFieldMorePatches, Subpatches)
     EXPECT_EQ(sub_idx_list.get<Patch1>(), idx1);
     EXPECT_EQ(sub_idx_list.get<Patch2>(), idx2);
     EXPECT_EQ(sub_idx_list.get<Patch3>(), idx3);
+}
+
+TEST(MultipatchFieldMorePatches, SubpatchesField)
+{
+    // Grid sizes of the three patches where we define fields
+    static constexpr Patch3::IdxStep1 x3_size = Patch3::IdxStep1(5);
+    static constexpr Patch3::IdxStep2 y3_size = Patch3::IdxStep2(7);
+
+    static constexpr Patch5::IdxStep1 x5_size = Patch5::IdxStep1(9);
+    static constexpr Patch5::IdxStep2 y5_size = Patch5::IdxStep2(11);
+
+    static constexpr Patch7::IdxStep1 x7_size = Patch7::IdxStep1(4);
+    static constexpr Patch7::IdxStep2 y7_size = Patch7::IdxStep2(8);
+    Patch3::Coord1 const x3_min(0.0);
+    Patch3::Coord1 const x3_max(1.0);
+    Patch3::Coord2 const y3_min(0.0);
+    Patch3::Coord2 const y3_max(1.0);
+
+    Patch5::Coord1 const x5_min(0.0);
+    Patch5::Coord1 const x5_max(1.0);
+    Patch5::Coord2 y5_min(0.0);
+    Patch5::Coord2 y5_max(1.0);
+
+    Patch7::Coord1 const x7_min(0.0);
+    Patch7::Coord1 const x7_max(1.0);
+    Patch7::Coord2 y7_min(0.0);
+    Patch7::Coord2 y7_max(1.0);
+
+    ddc::init_discrete_space<Patch3::Grid1>(Patch3::Grid1::init(x3_min, x3_max, x3_size));
+    ddc::init_discrete_space<Patch3::Grid2>(Patch3::Grid2::init(y3_min, y3_max, y3_size));
+    ddc::init_discrete_space<Patch5::Grid1>(Patch5::Grid1::init(x5_min, x5_max, x5_size));
+    ddc::init_discrete_space<Patch5::Grid2>(Patch5::Grid2::init(y5_min, y5_max, y5_size));
+    ddc::init_discrete_space<Patch7::Grid1>(Patch7::Grid1::init(x7_min, x7_max, x7_size));
+    ddc::init_discrete_space<Patch7::Grid2>(Patch7::Grid2::init(y7_min, y7_max, y7_size));
+
+    Patch3::IdxRange12 const index_range_xy3(
+            Patch3::IdxRange1(Patch3::Idx1(0), x3_size),
+            Patch3::IdxRange2(Patch3::Idx2(0), y3_size));
+    Patch5::IdxRange12 const index_range_xy5(
+            Patch5::IdxRange1(Patch5::Idx1(0), x5_size),
+            Patch5::IdxRange2(Patch5::Idx2(0), y5_size));
+    Patch7::IdxRange12 const index_range_xy7(
+            Patch7::IdxRange1(Patch7::Idx1(0), x7_size),
+            Patch7::IdxRange2(Patch7::Idx2(0), y7_size));
+
+    MultipatchType<IdxRangeOnPatch, Patch3, Patch5, Patch7>
+            idx_ranges(index_range_xy3, index_range_xy5, index_range_xy7);
+    MultipatchFieldMem<DFieldMemOnPatch, Patch3, Patch5, Patch7> fields_alloc(idx_ranges);
+    MultipatchField<DFieldOnPatch, Patch3, Patch5, Patch7> fields(fields_alloc);
+
+    MultipatchField<DFieldOnPatch, Patch3, Patch7> subset_fields(fields);
+
+    // Set the value of field on patch k to constant k.
+    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), fields.template get<Patch3>(), 3.0);
+    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), fields.template get<Patch5>(), 5.0);
+    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), fields.template get<Patch7>(), 7.0);
+
+    auto field3_from_multipatch_host = ddc::create_mirror_and_copy(fields.template get<Patch3>());
+    auto field7_from_multipatch_host = ddc::create_mirror_and_copy(fields.template get<Patch7>());
+    auto field3_from_subset_multipatch_host
+            = ddc::create_mirror_and_copy(subset_fields.template get<Patch3>());
+    auto field7_from_subset_multipatch_host
+            = ddc::create_mirror_and_copy(subset_fields.template get<Patch7>());
+
+    Patch3::Idx12 idx_3(4, 5);
+    Patch7::Idx12 idx_7(2, 6);
+
+    EXPECT_NEAR(
+            field3_from_multipatch_host(idx_3),
+            field3_from_subset_multipatch_host(idx_3),
+            1e-14);
+    EXPECT_NEAR(
+            field7_from_multipatch_host(idx_7),
+            field7_from_subset_multipatch_host(idx_7),
+            1e-14);
 }
