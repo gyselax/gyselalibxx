@@ -1072,15 +1072,26 @@ public:
                                                                + IdxStep<QDimRMesh, QDimThetaMesh>(
                                                                        r_thread_index,
                                                                        theta_thread_index);
-                                sum += weak_integral_element(
+                                auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
                                         idx_test,
-                                        idx_trial,
                                         idx_quad,
                                         coeff_alpha,
                                         coeff_beta,
                                         mapping,
                                         int_volume_proxy,
                                         bspline_stash);
+
+                                auto [basis_val_trial_space, basis_derivs_trial_space]
+                                        = detail_poisson::get_polar_bspline_vals_and_derivs(
+                                                bspline_stash,
+                                                idx_quad,
+                                                idx_trial);
+
+                                // Assemble the weak integral element
+                                sum += scalar_product(
+                                               test_stiffness_weight,
+                                               basis_derivs_trial_space)
+                                       + test_mass_weight * basis_val_trial_space;
                             },
                             element);
                     const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
@@ -1209,15 +1220,26 @@ public:
                                             -= full_quad_idx_range.template extent<QDimThetaMesh>();
                                 }
 
-                                sum += weak_integral_element(
+                                auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
                                         idx_test,
-                                        idx_trial,
                                         idx_quad,
                                         coeff_alpha,
                                         coeff_beta,
                                         mapping,
                                         int_volume_proxy,
                                         bspline_stash);
+
+                                auto [basis_val_trial_space, basis_derivs_trial_space]
+                                        = detail_poisson::get_polar_bspline_vals_and_derivs(
+                                                bspline_stash,
+                                                idx_quad,
+                                                idx_trial);
+
+                                // Assemble the weak integral element
+                                sum += scalar_product(
+                                               test_stiffness_weight,
+                                               basis_derivs_trial_space)
+                                       + test_mass_weight * basis_val_trial_space;
                             },
                             element);
 
@@ -1326,17 +1348,17 @@ public:
     }
 
     /**
-     * @brief Computes a quadrature summand for computing the integral
-     *      corresponding to the inner product.
+     * @brief Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.
      *
-     * Inner product of the test and trial spline is computed using a 
-     * quadrature. This function returns one summand of the quadrature for 
-     * the quadrature point given by the indices.
+     * The weak integral element is
+     * @f$ w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j) @f$
+     * where @f$ w @f$ is the integral volume, @f$ B_i @f$ is the test function and @f$ B_j @f$ is
+     * the trial function. This function computes @f$ w \alpha G^{-1} \nabla B_i @f$ and
+     * @f$ w \beta B_i @f$ so that the weak integral element can be computed from the values and
+     * derivatives of the trial function alone.
      *
      * @param[in] idx_test
      *      The index of the test basis spline.
-     * @param[in] idx_trial
-     *      The index of the trial basis spline.
      * @param[in] idx_quad
      *      The index for the point in the quadrature scheme.
      * @param[in] coeff_alpha
@@ -1350,17 +1372,12 @@ public:
      *      The integral volume associated with each point used in the quadrature scheme.
      * @param[in] bspline_stash
      *      The values and derivatives of the 1D B-splines at the quadrature points.
-     * @return Value of the quadrature summand
+     * @return test_mass_weight The quantity @f$ w \beta B_i @f$ which multiplies the value of the trial function.
+     * @return test_stiffness_weight The quantity @f$ w \alpha G^{-1} \nabla B_i @f$ which multiplies the gradient of the trial function.
      */
-    template <
-            class CoeffAlpha,
-            class CoeffBeta,
-            class Mapping,
-            class IdxTestType,
-            class IdxTrialType>
-    static KOKKOS_FUNCTION double weak_integral_element(
+    template <class CoeffAlpha, class CoeffBeta, class Mapping, class IdxTestType>
+    static KOKKOS_FUNCTION std::tuple<double, DVector<R, Theta>> get_test_weights(
             IdxTestType idx_test,
-            IdxTrialType idx_trial,
             IdxQuadratureRTheta idx_quad,
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
@@ -1368,16 +1385,14 @@ public:
             DField<IdxRangeQuadratureRTheta> int_volume,
             TensorBSplineStash const& bspline_stash)
     {
+        // Define the value and gradient of the test and trial basis functions
+        auto [basis_val_test_space, basis_derivs_test_space] = detail_poisson::
+                get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_test);
+
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
         const double alpha = coeff_alpha(coord);
         const double beta = coeff_beta(coord);
-
-        // Define the value and gradient of the test and trial basis functions
-        auto [basis_val_test_space, basis_derivs_test_space] = detail_poisson::
-                get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_test);
-        auto [basis_val_trial_space, basis_derivs_trial_space] = detail_poisson::
-                get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_trial);
 
         using Spatial2DVectorSpace = VectorIndexSet<R, Theta>;
 
@@ -1391,10 +1406,7 @@ public:
                                                   * tensor_mul(
                                                           index<'i'>(basis_derivs_test_space),
                                                           index<'i', 'j'>(inv_metric_tensor_2d));
-
-        // Assemble the weak integral element
-        return scalar_product(test_stiffness_weight, basis_derivs_trial_space)
-               + test_mass_weight * basis_val_trial_space;
+        return std::tuple(test_mass_weight, test_stiffness_weight);
     }
 
     /**
@@ -1505,15 +1517,21 @@ public:
                         idx_quad -= full_quad_idx_range.template extent<QDimThetaMesh>();
                     }
                     assert(full_quad_idx_range.contains(idx_quad));
-                    sum += weak_integral_element(
+                    auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
                             idx_test,
-                            idx_trial,
                             idx_quad,
                             coeff_alpha,
                             coeff_beta,
                             mapping,
                             int_volume,
                             bspline_stash);
+
+                    auto [basis_val_trial_space, basis_derivs_trial_space] = detail_poisson::
+                            get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_trial);
+
+                    // Assemble the weak integral element
+                    sum += scalar_product(test_stiffness_weight, basis_derivs_trial_space)
+                           + test_mass_weight * basis_val_trial_space;
                 },
                 result);
         return result;
