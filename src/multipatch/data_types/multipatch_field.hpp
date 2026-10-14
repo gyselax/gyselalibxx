@@ -111,7 +111,7 @@ public:
      * Create a MultipatchField class from a compatible MultipatchFieldMem.
      *
      * A compatible MultipatchField is one which uses all the patches used by this class. The object
-     * being copied may include more patches than this MultipatchField. Further the original
+     * being copied may include more patches than this MultipatchFielsd. Further the original
      * MultipatchField must store objects of the correct type.
      *
      * @param other The MultipatchFieldMem being accessed.

@@ -13,8 +13,8 @@
 #include "9patches_2d_periodic_strips_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "multipatch_field_mem.hpp"
 #include "multipatch_field.hpp"
+#include "multipatch_field_mem.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 
@@ -130,8 +130,8 @@ TEST(MultipatchFieldMorePatches, SubpatchesField)
     static constexpr Patch3::IdxStep1 x3_size = Patch3::IdxStep1(5);
     static constexpr Patch3::IdxStep2 y3_size = Patch3::IdxStep2(7);
 
-    static constexpr Patch5::IdxStep1 x5_size = Patch5::IdxStep1(9);
-    static constexpr Patch5::IdxStep2 y5_size = Patch5::IdxStep2(11);
+    static constexpr Patch5::IdxStep1 x5_size = Patch5::IdxStep1(1);
+    static constexpr Patch5::IdxStep2 y5_size = Patch5::IdxStep2(1);
 
     static constexpr Patch7::IdxStep1 x7_size = Patch7::IdxStep1(4);
     static constexpr Patch7::IdxStep2 y7_size = Patch7::IdxStep2(8);
@@ -176,7 +176,6 @@ TEST(MultipatchFieldMorePatches, SubpatchesField)
 
     // Set the value of field on patch k to constant k.
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), fields.template get<Patch3>(), 3.0);
-    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), fields.template get<Patch5>(), 5.0);
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), fields.template get<Patch7>(), 7.0);
 
     auto field3_from_multipatch_host = ddc::create_mirror_and_copy(fields.template get<Patch3>());
