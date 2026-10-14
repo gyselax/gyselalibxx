@@ -255,9 +255,9 @@ private:
 
     /// @brief Free the internal pointer that is saved in internal_fields at the index ArrayIndex.
     template <std::size_t ArrayIndex>
-    void free_ptr(
+    void free_ptr( // cppcheck-suppress functionStatic
             ElementType* const ptr,
-            allocator_type allocator) // cppcheck-suppress functionStatic
+            allocator_type allocator)
     {
         std::size_t alloc_size(((this->get_mdspan_size<DDims, ArrayIndex>()) * ...));
         allocator.deallocate(ptr, alloc_size);
