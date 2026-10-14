@@ -372,7 +372,7 @@ public:
     MultipatchIdxRangeBS const spline_idx_ranges() const
     {
         return MultipatchIdxRangeBS(
-                std::get<BuilderOnPatch<Patches> const&>(m_builders).spline_domain()...);
+                get_spline_idx_range(std::get<BuilderOnPatch<Patches> const&>(m_builders))...);
     };
 
     /**
