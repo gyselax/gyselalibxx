@@ -14,6 +14,7 @@
 #include "metric_tensor_evaluator.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature_coeffs_nd.hpp"
+#include "vector_field.hpp"
 #include "view.hpp"
 #include "volume_quadrature_nd.hpp"
 
@@ -548,6 +549,20 @@ private:
     // Number of cells over which a poloidal B-splines has its support
     static constexpr int s_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
 
+    // Maximum number of quadrature points in the support of a tensor product B-spline
+    static constexpr int s_n_quad_support_r = s_n_gauss_legendre_r * s_n_non_zero_bases_r;
+    static constexpr int s_n_quad_support_theta
+            = s_n_gauss_legendre_theta * s_n_non_zero_bases_theta;
+
+    using QuadField = DField<IdxRangeQuadratureRTheta>;
+
+    // A view on team scratch memory
+    using ScratchView = Kokkos::View<
+            double*,
+            Kokkos::LayoutRight,
+            Kokkos::DefaultExecutionSpace::scratch_memory_space,
+            Kokkos::MemoryTraits<Kokkos::Unmanaged>>;
+
     const int m_nbasis_r;
     const int m_nbasis_theta;
 
@@ -565,7 +580,7 @@ private:
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
-    DField<IdxRangeQuadratureRTheta> m_int_volume;
+    QuadField m_int_volume;
 
     // Values and derivatives of the non-zero 1D B-splines at the 1D quadrature points
     DFieldMem<IdxRangeBasisStashR> m_basis_vals_r;
@@ -1300,14 +1315,22 @@ public:
         const int n_singular = idxrange_singular.size();
         const std::source_location location = std::source_location::current();
 
+        // Each team needs scratch memory to store the test weights at the quadrature points
+        // in the support of the test function.
+        Kokkos::TeamPolicy<>
+                policy(Kokkos::DefaultExecutionSpace(),
+                       m_idxrange_fem_tensor_basis.size(),
+                       Kokkos::AUTO);
+        policy.set_scratch_size(
+                0,
+                Kokkos::PerTeam(
+                        ScratchView::shmem_size(3 * s_n_quad_support_r * s_n_quad_support_theta)));
+
         // Calculate the matrix elements following a stencil
         // Teams loop over rows
         Kokkos::parallel_for(
                 location.function_name(),
-                Kokkos::TeamPolicy<>(
-                        Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_tensor_basis.size(),
-                        Kokkos::AUTO),
+                policy,
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
@@ -1322,6 +1345,28 @@ public:
                     int const csr_idx_first_stencil_element
                             = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
 
+                    // Calculate the test weights once for all trial b-splines
+                    const IdxRangeQuadratureRTheta idx_range_quad = detail_poisson::
+                            get_support_quadrature(idx_test, full_quad_idx_range.front());
+                    const int n_quad_support = s_n_quad_support_r * s_n_quad_support_theta;
+                    ScratchView test_weights(team.team_scratch(0), 3 * n_quad_support);
+                    QuadField test_mass(test_weights.data(), idx_range_quad);
+                    DVectorField<IdxRangeQuadratureRTheta, VectorIndexSet<R, Theta>> test_stiffness(
+                            idx_range_quad,
+                            test_weights.data() + n_quad_support,
+                            test_weights.data() + 2 * n_quad_support);
+                    fill_test_weights(
+                            team,
+                            test_mass,
+                            test_stiffness,
+                            idx_test,
+                            coeff_alpha,
+                            coeff_beta,
+                            mapping,
+                            full_quad_idx_range,
+                            int_volume_proxy,
+                            bspline_stash);
+
                     // Loop over the poloidal offset to a trial b-spline
                     for (int csr_idx = nnz_per_row_csr[row_idx] + csr_idx_first_stencil_element;
                          csr_idx < nnz_per_row_csr[row_idx + 1];
@@ -1334,11 +1379,9 @@ public:
                                 team,
                                 idx_test,
                                 idx_trial,
-                                coeff_alpha,
-                                coeff_beta,
-                                mapping,
+                                test_mass,
+                                test_stiffness,
                                 full_quad_idx_range,
-                                int_volume_proxy,
                                 bspline_stash);
                         values_csr(batch_idx, csr_idx) = element;
                     }
@@ -1409,6 +1452,7 @@ public:
         return std::tuple(test_mass_weight, test_stiffness_weight);
     }
 
+
     /**
      * @brief Computes the matrix element corresponding to two tensor product splines
      *        with index idx_test and idx_trial
@@ -1419,34 +1463,25 @@ public:
      *      The index for polar B-spline in the test space.
      * @param[in] idx_trial
      *      The index for polar B-spline in the trial space.
-     * @param[in] coeff_alpha
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
-     * @param[in] coeff_beta
-     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
+     * @param[in] test_support
+     *      The range of quadrature points in the support of the test basis spline
+     *      (see detail_poisson::get_support_quadrature).
+     * @param[in] test_weights
+     *      The test weights at the quadrature points in test_support (see fill_test_weights).
      * @param[in] full_quad_idx_range
      *      The index range of all the quadrature points.
-     * @param[in] int_volume
-     *      The field describing the quadrature coefficients including the
-     *      Jacobian multiplication factor responsible for ensuring the correct
-     *      volume for the integral.
      * @param[in] bspline_stash
      *      The values and derivatives of the 1D B-splines at the quadrature points.
      * @return
      *      The value of the matrix element.
      */
-    template <class CoeffAlpha, class CoeffBeta, class Mapping>
     static KOKKOS_FUNCTION double get_matrix_stencil_element(
             const Kokkos::TeamPolicy<>::member_type& team,
             IdxBSRTheta idx_test,
             IdxBSRTheta idx_trial,
-            CoeffAlpha const& coeff_alpha,
-            CoeffBeta const& coeff_beta,
-            Mapping const& mapping,
+            QuadField test_mass,
+            DVectorField<IdxRangeQuadratureRTheta, VectorIndexSet<R, Theta>> test_stiffness,
             IdxRangeQuadratureRTheta const& full_quad_idx_range,
-            DField<IdxRangeQuadratureRTheta> int_volume,
             TensorBSplineStash const& bspline_stash)
     {
         const IdxBSR idx_test_r(idx_test);
@@ -1500,6 +1535,8 @@ public:
                         end_non_zero_theta,
                         full_quad_idx_range.front());
 
+        IdxRangeQuadratureRTheta test_support = get_idx_range(test_mass);
+
         double result = 0;
         Kokkos::parallel_reduce(
                 Kokkos::TeamThreadMDRange(
@@ -1517,26 +1554,102 @@ public:
                         idx_quad -= full_quad_idx_range.template extent<QDimThetaMesh>();
                     }
                     assert(full_quad_idx_range.contains(idx_quad));
-                    auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
-                            idx_test,
-                            idx_quad,
-                            coeff_alpha,
-                            coeff_beta,
-                            mapping,
-                            int_volume,
-                            bspline_stash);
 
                     auto [basis_val_trial_space, basis_derivs_trial_space] = detail_poisson::
                             get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_trial);
 
+                    // The test support may extend past the end of the poloidal domain
+                    IdxQuadratureRTheta idx_quad_test = idx_quad;
+                    if (!test_support.contains(idx_quad_test)) {
+                        idx_quad_test += full_quad_idx_range.template extent<QDimThetaMesh>();
+                    }
+                    assert(test_support.contains(idx_quad_test));
+
                     // Assemble the weak integral element
-                    sum += scalar_product(test_stiffness_weight, basis_derivs_trial_space)
-                           + test_mass_weight * basis_val_trial_space;
+                    sum += scalar_product(test_stiffness(idx_quad_test), basis_derivs_trial_space)
+                           + test_mass(idx_quad_test) * basis_val_trial_space;
                 },
                 result);
         return result;
     }
 
+    /**
+     * @brief Computes the test_mass_weight and test_stiffness_weight at every quadrature point
+     *        in the support of a test function and saves them in team scratch memory.
+     *
+     * @param[in] team
+     *      The team of threads from which this function is called.
+     * @param[out] test_weights
+     *      The scratch memory where the weights are saved. The first two indices are the
+     *      offsets of the quadrature point from the front of test_support. The last index is 0
+     *      for test_mass_weight and 1 and 2 for the radial and poloidal components of
+     *      test_stiffness_weight.
+     * @param[in] idx_test
+     *      The index of the test basis spline.
+     * @param[in] test_support
+     *      The range of quadrature points in the support of the test basis spline
+     *      (see detail_poisson::get_support_quadrature).
+     * @param[in] coeff_alpha
+     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
+     * @param[in] coeff_beta
+     *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
+     * @param[in] mapping
+     *      The mapping from the logical domain to the physical domain where
+     *      the equation is defined.
+     * @param[in] full_quad_idx_range
+     *      The index range of all the quadrature points.
+     * @param[in] int_volume
+     *      The integral volume associated with each point used in the quadrature scheme.
+     * @param[in] bspline_stash
+     *      The values and derivatives of the 1D B-splines at the quadrature points.
+     */
+    template <class CoeffAlpha, class CoeffBeta, class Mapping>
+    static KOKKOS_FUNCTION void fill_test_weights(
+            const Kokkos::TeamPolicy<>::member_type& team,
+            QuadField test_mass,
+            DVectorField<IdxRangeQuadratureRTheta, VectorIndexSet<R, Theta>> test_stiffness,
+            IdxBSRTheta idx_test,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
+            Mapping const& mapping,
+            IdxRangeQuadratureRTheta const& full_quad_idx_range,
+            DField<IdxRangeQuadratureRTheta> int_volume,
+            TensorBSplineStash const& bspline_stash)
+    {
+        IdxRangeQuadratureRTheta test_support = get_idx_range(test_mass);
+        assert(test_support.template extent<QDimRMesh>().value() <= s_n_quad_support_r);
+        assert(test_support.template extent<QDimThetaMesh>().value() <= s_n_quad_support_theta);
+        Kokkos::parallel_for(
+                Kokkos::TeamThreadMDRange(
+                        team,
+                        test_support.template extent<QDimRMesh>(),
+                        test_support.template extent<QDimThetaMesh>()),
+                [&](int r_thread_index, int theta_thread_index) {
+                    IdxStep<QDimRMesh, QDimThetaMesh>
+                            quad_offset(r_thread_index, theta_thread_index);
+                    IdxQuadratureRTheta idx_quad = test_support.front() + quad_offset;
+                    IdxQuadratureRTheta idx_quad_in_domain = idx_quad;
+                    // Manage periodicity
+                    if (!full_quad_idx_range.contains(idx_quad_in_domain)) {
+                        idx_quad_in_domain -= full_quad_idx_range.template extent<QDimThetaMesh>();
+                    }
+                    assert(full_quad_idx_range.contains(idx_quad_in_domain));
+                    auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
+                            idx_test,
+                            idx_quad_in_domain,
+                            coeff_alpha,
+                            coeff_beta,
+                            mapping,
+                            int_volume,
+                            bspline_stash);
+                    test_mass(quad_offset) = test_mass_weight;
+                    ddcHelper::assign_vector_field_element(
+                            test_stiffness,
+                            idx_quad,
+                            test_stiffness_weight);
+                });
+        team.team_barrier();
+    }
 
     /**
      * @brief Fills the nnz data structure by computing the number of non-zero per line.
@@ -1685,6 +1798,7 @@ public:
 
         Kokkos::Profiling::popRegion();
     }
+
     /**
      * @brief Convert a 2D (r,theta) bspline index into a polar bspline index.
      *
