@@ -169,26 +169,16 @@ TEST_F(MultiPatchField2Patches, Polynomials)
     auto field1_from_multipatch_host = ddc::create_mirror_and_copy(field1_from_multipatch);
     auto field2_from_multipatch_host = ddc::create_mirror_and_copy(field2_from_multipatch);
 
-    std::size_t const idx_x1 = 3, idx_y1 = 5, idx_x2 = 7, idx_y2 = 2;
-    double x1_length = ddc::get<Patch1::Dim1>(x1_max) - ddc::get<Patch1::Dim1>(x1_min);
-    double y1_length = ddc::get<Patch1::Dim2>(y1_max) - ddc::get<Patch1::Dim2>(y1_min);
-    double x2_length = ddc::get<Patch2::Dim1>(x2_max) - ddc::get<Patch2::Dim1>(x2_min);
-    double y2_length = ddc::get<Patch2::Dim2>(y2_max) - ddc::get<Patch2::Dim2>(y2_min);
+    Patch1::Idx12 idx_1(3, 5);
+    Patch2::Idx12 idx_2(7, 2);
 
-    EXPECT_NEAR(
-            field1_from_multipatch_host(Patch1::Idx12(idx_x1, idx_y1)),
-            (idx_x1 * x1_length / (x1_size.value() - 1))
-                            * (idx_x1 * x1_length / (x1_size.value() - 1))
-                    + (idx_y1 * y1_length / (y1_size.value() - 1))
-                              * (idx_y1 * y1_length / (y1_size.value() - 1)),
-            1e-14);
-    EXPECT_NEAR(
-            field2_from_multipatch_host(Patch2::Idx12(idx_x2, idx_y2)),
-            (idx_x2 * x2_length / (x2_size.value() - 1))
-                            * (idx_x2 * x2_length / (x2_size.value() - 1))
-                    - (idx_y2 * y2_length / (y2_size.value() - 1))
-                              * (idx_y2 * y2_length / (y2_size.value() - 1)),
-            1e-14);
+    const double x1 = ddc::get<Patch1::Dim1>(ddc::coordinate(idx_1));
+    const double y1 = ddc::get<Patch1::Dim2>(ddc::coordinate(idx_1));
+    const double x2 = ddc::get<Patch2::Dim1>(ddc::coordinate(idx_2));
+    const double y2 = ddc::get<Patch2::Dim2>(ddc::coordinate(idx_2));
+
+    EXPECT_NEAR(field1_from_multipatch_host(idx_1), x1 * x1 + y1 * y1, 1e-14);
+    EXPECT_NEAR(field2_from_multipatch_host(idx_2), x2 * x2 - y2 * y2, 1e-14);
 }
 
 TEST_F(MultiPatchField2Patches, GetIdxRange)
@@ -228,26 +218,16 @@ TEST_F(MultiPatchField2Patches, ConstField)
     auto field1_from_multipatch_host = ddc::create_mirror_and_copy(field1_from_multipatch);
     auto field2_from_multipatch_host = ddc::create_mirror_and_copy(field2_from_multipatch);
 
-    std::size_t const idx_x1 = 3, idx_y1 = 5, idx_x2 = 7, idx_y2 = 2;
-    double x1_length = ddc::get<Patch1::Dim1>(x1_max) - ddc::get<Patch1::Dim1>(x1_min);
-    double y1_length = ddc::get<Patch1::Dim2>(y1_max) - ddc::get<Patch1::Dim2>(y1_min);
-    double x2_length = ddc::get<Patch2::Dim1>(x2_max) - ddc::get<Patch2::Dim1>(x2_min);
-    double y2_length = ddc::get<Patch2::Dim2>(y2_max) - ddc::get<Patch2::Dim2>(y2_min);
+    Patch1::Idx12 idx_1(3, 5);
+    Patch2::Idx12 idx_2(7, 2);
 
-    EXPECT_NEAR(
-            field1_from_multipatch_host(Patch1::Idx12(idx_x1, idx_y1)),
-            (idx_x1 * x1_length / (x1_size.value() - 1))
-                            * (idx_x1 * x1_length / (x1_size.value() - 1))
-                    + (idx_y1 * y1_length / (y1_size.value() - 1))
-                              * (idx_y1 * y1_length / (y1_size.value() - 1)),
-            1e-14);
-    EXPECT_NEAR(
-            field2_from_multipatch_host(Patch2::Idx12(idx_x2, idx_y2)),
-            (idx_x2 * x2_length / (x2_size.value() - 1))
-                            * (idx_x2 * x2_length / (x2_size.value() - 1))
-                    - (idx_y2 * y2_length / (y2_size.value() - 1))
-                              * (idx_y2 * y2_length / (y2_size.value() - 1)),
-            1e-14);
+    const double x1 = ddc::get<Patch1::Dim1>(ddc::coordinate(idx_1));
+    const double y1 = ddc::get<Patch1::Dim2>(ddc::coordinate(idx_1));
+    const double x2 = ddc::get<Patch2::Dim1>(ddc::coordinate(idx_2));
+    const double y2 = ddc::get<Patch2::Dim2>(ddc::coordinate(idx_2));
+
+    EXPECT_NEAR(field1_from_multipatch_host(idx_1), x1 * x1 + y1 * y1, 1e-14);
+    EXPECT_NEAR(field2_from_multipatch_host(idx_2), x2 * x2 - y2 * y2, 1e-14);
 }
 
 TEST_F(MultiPatchField2Patches, DerivField)
@@ -258,7 +238,7 @@ TEST_F(MultiPatchField2Patches, DerivField)
     MultipatchField<DerivFieldOnPatch, Patch1, Patch2> functions_and_derivs(
             functions_and_derivs_alloc);
 
-    // f1(x,y) = x^2 + y^2, f2(x,y) = x^2 - y^2
+    // f1(x,y) = x^2 + y^2; f2(x,y) = x^2 - y^2;
     initialise_non_const_fields(
             functions_and_derivs.template get<Patch1>().get_values_field(),
             functions_and_derivs.template get<Patch2>().get_values_field());
@@ -275,7 +255,6 @@ TEST_F(MultiPatchField2Patches, DerivField)
             field2_from_multipatch,
             functions_and_derivs.template get<Patch2>().get_values_field());
 
-    // Assert
     auto field1_from_multipatch_host = ddc::create_mirror_and_copy(field1_from_multipatch);
     auto field2_from_multipatch_host = ddc::create_mirror_and_copy(field2_from_multipatch);
 
