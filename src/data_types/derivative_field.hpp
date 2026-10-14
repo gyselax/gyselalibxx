@@ -4,6 +4,7 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "derivative_field_common.hpp"
 
 template <class, class, int, class>
@@ -373,7 +374,7 @@ public:
     KOKKOS_FUNCTION constexpr reference operator()(DElem... elems) const noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_index_type = detail::combine_t<DElem...>;
+        using full_index_type = ddcHelper::combine_t<DElem...>;
         full_index_type elem(elems...);
         return base_type::get_internal_field(elem)();
     }
