@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MultipatchField::idx_type`.
 - Remove `MatrixBatchCsr::norm`.
 - Remove `MatrixBatchEll::norm`.
+- Remove `detail::combine_t` (prefer `ddc::combine_t`).
 
 ### Dependency requirements
 
