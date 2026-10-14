@@ -74,6 +74,14 @@ protected:
     Patch2::IdxRange1 const idx_range_r2;
     Patch2::IdxRange2 const idx_range_theta2;
 
+    Patch1::IdxRange1 const reduced_idx_range_r1;
+    Patch1::IdxRange2 const reduced_idx_range_theta1;
+    Patch1::IdxRange12 const reduced_idx_range_rtheta1;
+
+    Patch2::IdxRange1 const reduced_idx_range_r2;
+    Patch2::IdxRange2 const reduced_idx_range_theta2;
+    Patch2::IdxRange12 const reduced_idx_range_rtheta2;
+
     // Single extrapolation rules
     ddc::ConstantExtrapolationRule<R> const bc_r_min_1;
     ddc::ConstantExtrapolationRule<R> const bc_r_max_1;
@@ -102,6 +110,12 @@ public:
         , idx_range_theta1(SplineInterpPointsTheta<1>::get_domain<GridTheta<1>>())
         , idx_range_r2(SplineInterpPointsR<2>::get_domain<GridR<2>>())
         , idx_range_theta2(SplineInterpPointsTheta<2>::get_domain<GridTheta<2>>())
+        , reduced_idx_range_r1(idx_range_r1.remove_last(Patch1::IdxStep1(1)))
+        , reduced_idx_range_theta1(idx_range_theta1.remove_last(Patch1::IdxStep2(1)))
+        , reduced_idx_range_rtheta1(reduced_idx_range_r1, reduced_idx_range_theta1)
+        , reduced_idx_range_r2(idx_range_r2.remove_last(Patch2::IdxStep1(1)))
+        , reduced_idx_range_theta2(idx_range_theta2.remove_last(Patch2::IdxStep2(1)))
+        , reduced_idx_range_rtheta2(reduced_idx_range_r2, reduced_idx_range_theta2)
         , bc_r_min_1(ddc::coordinate(idx_range_r1.front()))
         , bc_r_max_1(ddc::coordinate(idx_range_r1.back()))
         , bc_r_min_2(ddc::coordinate(idx_range_r2.front()))
@@ -578,17 +592,13 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
 {
     // Evaluation points
     // --- patch 1
-    Patch1::IdxRange1 const reduced_idx_range_r1(
-            Patch1::IdxRange1(Patch1::Idx1(0), Patch1::IdxStep1(idx_range_r1.size() - 1)));
-    Patch1::IdxRange12 const reduced_idx_range_rtheta1(reduced_idx_range_r1, idx_range_theta1);
-    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(reduced_idx_range_rtheta1);
+        Patch1::IdxRange12 const half_reduced_idx_range_rtheta1(reduced_idx_range_r1, idx_range_theta1);
+    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(half_reduced_idx_range_rtheta1);
     Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = get_field(eval_points_1_alloc);
 
-    // --- patch 1
-    Patch2::IdxRange1 const reduced_idx_range_r2(
-            Patch2::IdxRange1(Patch2::Idx1(0), Patch2::IdxStep1(idx_range_r2.size() - 1)));
-    Patch2::IdxRange12 const reduced_idx_range_rtheta2(reduced_idx_range_r2, idx_range_theta2);
-    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(reduced_idx_range_rtheta2);
+    // --- patch 2
+        Patch2::IdxRange12 const half_reduced_idx_range_rtheta2(reduced_idx_range_r2, idx_range_theta2);
+    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(half_reduced_idx_range_rtheta2);
     Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = get_field(eval_points_2_alloc);
 
     set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(eval_points_1);
@@ -601,11 +611,11 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
 
     // Evaluated functions
     // --- patch 1
-    DFieldMem<Patch1::IdxRange12> eval_function_1_alloc(reduced_idx_range_rtheta1);
+    DFieldMem<Patch1::IdxRange12> eval_function_1_alloc(half_reduced_idx_range_rtheta1);
     DField<Patch1::IdxRange12> eval_function_1 = get_field(eval_function_1_alloc);
 
     // --- patch 2
-    DFieldMem<Patch2::IdxRange12> eval_function_2_alloc(reduced_idx_range_rtheta2);
+    DFieldMem<Patch2::IdxRange12> eval_function_2_alloc(half_reduced_idx_range_rtheta2);
     DField<Patch2::IdxRange12> eval_function_2 = get_field(eval_function_2_alloc);
 
     // --- collection
@@ -626,11 +636,11 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
 
     // Expected functions
     // --- patch 1
-    DFieldMem<Patch1::IdxRange12> expected_function_1_alloc(reduced_idx_range_rtheta1);
+    DFieldMem<Patch1::IdxRange12> expected_function_1_alloc(half_reduced_idx_range_rtheta1);
     DField<Patch1::IdxRange12> expected_function_1 = get_field(expected_function_1_alloc);
 
     // --- patch 2
-    DFieldMem<Patch2::IdxRange12> expected_function_2_alloc(reduced_idx_range_rtheta2);
+    DFieldMem<Patch2::IdxRange12> expected_function_2_alloc(half_reduced_idx_range_rtheta2);
     DField<Patch2::IdxRange12> expected_function_2 = get_field(expected_function_2_alloc);
 
     evaluator_1(
@@ -651,10 +661,10 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
     auto const eval_function_2_host = ddc::create_mirror_and_copy(eval_function_2);
 
     // --- check errors
-    ddc::host_for_each(reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
+    ddc::host_for_each(half_reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
         EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-14);
     });
-    ddc::host_for_each(reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
+    ddc::host_for_each(half_reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
         EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-14);
     });
 }
@@ -826,22 +836,10 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnCoordField)
 {
     // Evaluation points
     // --- patch 1
-    Patch1::IdxRange1 const reduced_idx_range_r1(
-            Patch1::IdxRange1(Patch1::Idx1(0), Patch1::IdxStep1(idx_range_r1.size() - 1)));
-    Patch1::IdxRange2 const reduced_idx_range_theta1(
-            Patch1::IdxRange2(Patch1::Idx2(0), Patch1::IdxStep2(idx_range_theta1.size() - 1)));
-    Patch1::IdxRange12 const
-            reduced_idx_range_rtheta1(reduced_idx_range_r1, reduced_idx_range_theta1);
     FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(reduced_idx_range_rtheta1);
     Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = get_field(eval_points_1_alloc);
 
     // --- patch 1
-    Patch2::IdxRange1 const reduced_idx_range_r2(
-            Patch2::IdxRange1(Patch2::Idx1(0), Patch2::IdxStep1(idx_range_r2.size() - 1)));
-    Patch2::IdxRange2 const reduced_idx_range_theta2(
-            Patch2::IdxRange2(Patch2::Idx2(0), Patch2::IdxStep2(idx_range_theta2.size() - 1)));
-    Patch2::IdxRange12 const
-            reduced_idx_range_rtheta2(reduced_idx_range_r2, reduced_idx_range_theta2);
     FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(reduced_idx_range_rtheta2);
     Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = get_field(eval_points_2_alloc);
 
@@ -1044,17 +1042,15 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
 {
     // Evaluation points
     // --- patch 1
-    Patch1::IdxRange1 const reduced_idx_range_r1(
-            Patch1::IdxRange1(Patch1::Idx1(0), Patch1::IdxStep1(idx_range_r1.size() - 1)));
-    Patch1::IdxRange12 const reduced_idx_range_rtheta1(reduced_idx_range_r1, idx_range_theta1);
-    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(reduced_idx_range_rtheta1);
+    Patch1::IdxRange12 const half_reduced_idx_range_rtheta1(reduced_idx_range_r1, idx_range_theta1);
+    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(
+            half_reduced_idx_range_rtheta1);
     Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = get_field(eval_points_1_alloc);
 
     // --- patch 1
-    Patch2::IdxRange1 const reduced_idx_range_r2(
-            Patch2::IdxRange1(Patch2::Idx1(0), Patch2::IdxStep1(idx_range_r2.size() - 1)));
-    Patch2::IdxRange12 const reduced_idx_range_rtheta2(reduced_idx_range_r2, idx_range_theta2);
-    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(reduced_idx_range_rtheta2);
+    Patch2::IdxRange12 const half_reduced_idx_range_rtheta2(reduced_idx_range_r2, idx_range_theta2);
+    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(
+            half_reduced_idx_range_rtheta2);
     Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = get_field(eval_points_2_alloc);
 
     set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(eval_points_1);
@@ -1067,48 +1063,12 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
 
     // Evaluated functions
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
-            reduced_idx_ranges(reduced_idx_range_rtheta1, reduced_idx_range_rtheta2);
+            reduced_idx_ranges(half_reduced_idx_range_rtheta1, half_reduced_idx_range_rtheta2);
 
-    MultipatchFieldMem<DerivFieldMemOnPatch, Patch1, Patch2> const eval_functions_and_derivs_alloc(
+    MultipatchFieldMem<DerivFieldMemOnPatch, Patch1, Patch2> eval_functions_and_derivs_alloc(
             reduced_idx_ranges);
-    MultipatchField<DerivFieldOnPatch, Patch1, Patch2> const eval_functions_and_derivs(
+    MultipatchField<DerivFieldOnPatch, Patch1, Patch2> eval_functions_and_derivs(
             eval_functions_and_derivs_alloc);
-
-    // // tmp ---
-    // IdxRangeSlice<typename Patch1::Grid1> idx_range_dr1(
-    //         reduced_idx_range_r1.front(),
-    //         IdxStep<typename Patch1::Grid1>(2),
-    //         reduced_idx_range_r1.extents() - 1);
-    // IdxRangeSlice<typename Patch2::Grid1> idx_range_dr2(
-    //         reduced_idx_range_r2.front(),
-    //         IdxStep<typename Patch2::Grid1>(2),
-    //         reduced_idx_range_r2.extents() - 1);
-
-    // IdxRangeSlice<typename Patch1::Grid2> idx_range_dtheta1(
-    //         idx_range_theta1.front(),
-    //         IdxStep<typename Patch1::Grid2>(2),
-    //         idx_range_theta1.extents() - 1);
-    // IdxRangeSlice<typename Patch2::Grid2> idx_range_dtheta2(
-    //         idx_range_theta2.front(),
-    //         IdxStep<typename Patch2::Grid2>(2),
-    //         idx_range_theta2.extents() - 1);
-
-    // DerivFieldMemOnPatch<Patch1> eval_functions_and_derivs_1_alloc(
-    //         reduced_idx_range_rtheta1,
-    //         idx_range_dr1,
-    //         idx_range_dtheta1);
-    // DerivFieldMemOnPatch<Patch2> eval_functions_and_derivs_2_alloc(
-    //         reduced_idx_range_rtheta2,
-    //         idx_range_dr2,
-    //         idx_range_dtheta2);
-
-    // DerivFieldOnPatch<Patch1> eval_functions_and_derivs_1(eval_functions_and_derivs_1_alloc);
-    // DerivFieldOnPatch<Patch2> eval_functions_and_derivs_2(eval_functions_and_derivs_2_alloc);
-
-    // MultipatchField<DerivFieldOnPatch, Patch1, Patch2> const
-    //         eval_functions_and_derivs(eval_functions_and_derivs_1, eval_functions_and_derivs_2);
-    // // --- tmp
-
 
     // Definition of MultipatchSplineEvaluator2D
     PatchLocator<DeviceExecSpace> const
@@ -1122,11 +1082,11 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
 
     // Expected functions
     // --- patch 1
-    DFieldMem<Patch1::IdxRange12> expected_function_1_alloc(reduced_idx_range_rtheta1);
+    DFieldMem<Patch1::IdxRange12> expected_function_1_alloc(half_reduced_idx_range_rtheta1);
     DField<Patch1::IdxRange12> expected_function_1 = get_field(expected_function_1_alloc);
 
     // --- patch 2
-    DFieldMem<Patch2::IdxRange12> expected_function_2_alloc(reduced_idx_range_rtheta2);
+    DFieldMem<Patch2::IdxRange12> expected_function_2_alloc(half_reduced_idx_range_rtheta2);
     DField<Patch2::IdxRange12> expected_function_2 = get_field(expected_function_2_alloc);
 
     evaluator_1(
@@ -1146,11 +1106,11 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
 
     // --- define DField for ddc::create_mirror_and_copy().
     // --- patch 1
-    DFieldMem<Patch1::IdxRange12> eval_function_1_alloc(reduced_idx_range_rtheta1);
+    DFieldMem<Patch1::IdxRange12> eval_function_1_alloc(half_reduced_idx_range_rtheta1);
     DField<Patch1::IdxRange12> eval_function_1 = get_field(eval_function_1_alloc);
 
     // --- patch 2
-    DFieldMem<Patch2::IdxRange12> eval_function_2_alloc(reduced_idx_range_rtheta2);
+    DFieldMem<Patch2::IdxRange12> eval_function_2_alloc(half_reduced_idx_range_rtheta2);
     DField<Patch2::IdxRange12> eval_function_2 = get_field(eval_function_2_alloc);
 
     ddc::parallel_deepcopy(
@@ -1164,10 +1124,10 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
     auto const eval_function_2_host = ddc::create_mirror_and_copy(eval_function_2);
 
     // --- check errors
-    ddc::host_for_each(reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
+    ddc::host_for_each(half_reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
         EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-14);
     });
-    ddc::host_for_each(reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
+    ddc::host_for_each(half_reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
         EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-14);
     });
 }
@@ -1180,16 +1140,10 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesDerivFieldOnCoordField)
 {
     // Evaluation points
     // --- patch 1
-    Patch1::IdxRange1 reduced_idx_range_r1 = idx_range_r1.remove_last(Patch1::IdxStep1(1));
-    Patch1::IdxRange2 reduced_idx_range_theta1 = idx_range_theta1.remove_last(Patch1::IdxStep2(1));
-    Patch1::IdxRange12 reduced_idx_range_rtheta1(reduced_idx_range_r1, reduced_idx_range_theta1);
     FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(reduced_idx_range_rtheta1);
     Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = get_field(eval_points_1_alloc);
 
     // --- patch 1
-    Patch2::IdxRange1 reduced_idx_range_r2 = idx_range_r2.remove_last(Patch2::IdxStep1(1));
-    Patch2::IdxRange2 reduced_idx_range_theta2 = idx_range_theta2.remove_last(Patch2::IdxStep2(1));
-    Patch2::IdxRange12 reduced_idx_range_rtheta2(reduced_idx_range_r2, reduced_idx_range_theta2);
     FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(reduced_idx_range_rtheta2);
     Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = get_field(eval_points_2_alloc);
 
@@ -1205,45 +1159,10 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesDerivFieldOnCoordField)
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
             reduced_idx_ranges(reduced_idx_range_rtheta1, reduced_idx_range_rtheta2);
 
-    MultipatchFieldMem<DerivFieldMemOnPatch, Patch1, Patch2> const eval_functions_and_derivs_alloc(
+    MultipatchFieldMem<DerivFieldMemOnPatch, Patch1, Patch2> eval_functions_and_derivs_alloc(
             reduced_idx_ranges);
-    MultipatchField<DerivFieldOnPatch, Patch1, Patch2> const eval_functions_and_derivs(
+    MultipatchField<DerivFieldOnPatch, Patch1, Patch2> eval_functions_and_derivs(
             eval_functions_and_derivs_alloc);
-
-    // tmp ---
-    // IdxRangeSlice<typename Patch1::Grid1> idx_range_dr1(
-    //         reduced_idx_range_r1.front(),
-    //         IdxStep<typename Patch1::Grid1>(2),
-    //         reduced_idx_range_r1.extents() - 1);
-    // IdxRangeSlice<typename Patch2::Grid1> idx_range_dr2(
-    //         reduced_idx_range_r2.front(),
-    //         IdxStep<typename Patch2::Grid1>(2),
-    //         reduced_idx_range_r2.extents() - 1);
-
-    // IdxRangeSlice<typename Patch1::Grid2> idx_range_dtheta1(
-    //         reduced_idx_range_theta1.front(),
-    //         IdxStep<typename Patch1::Grid2>(2),
-    //         reduced_idx_range_theta1.extents() - 1);
-    // IdxRangeSlice<typename Patch2::Grid2> idx_range_dtheta2(
-    //         reduced_idx_range_theta2.front(),
-    //         IdxStep<typename Patch2::Grid2>(2),
-    //         reduced_idx_range_theta2.extents() - 1);
-
-    // DerivFieldMemOnPatch<Patch1> eval_functions_and_derivs_1_alloc(
-    //         reduced_idx_range_rtheta1,
-    //         idx_range_dr1,
-    //         idx_range_dtheta1);
-    // DerivFieldMemOnPatch<Patch2> eval_functions_and_derivs_2_alloc(
-    //         reduced_idx_range_rtheta2,
-    //         idx_range_dr2,
-    //         idx_range_dtheta2);
-
-    // DerivFieldOnPatch<Patch1> eval_functions_and_derivs_1(eval_functions_and_derivs_1_alloc);
-    // DerivFieldOnPatch<Patch2> eval_functions_and_derivs_2(eval_functions_and_derivs_2_alloc);
-
-    // MultipatchField<DerivFieldOnPatch, Patch1, Patch2> const
-    //         eval_functions_and_derivs(eval_functions_and_derivs_1, eval_functions_and_derivs_2);
-    // // --- tmp
 
     // Definition of MultipatchSplineEvaluator2D
     PatchLocator<DeviceExecSpace> const
