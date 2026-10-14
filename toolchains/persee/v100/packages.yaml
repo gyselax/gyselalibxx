@@ -1,5 +1,13 @@
 ---
 packages:
+  all:
+    permissions:
+      read: group
+      write: group
+  c:
+    require: gcc@13.2.0
+  cxx:
+    require: gcc@13.2.0
   cuda:
     externals:
     - spec: cuda@12.9.86
@@ -16,3 +24,15 @@ packages:
         environment:
           prepend_path:
             LD_LIBRARY_PATH: /Applications/compilers/gcc/13.2.0/lib64:/Applications/compilers/gcc/13.2.0/lib
+  ginkgo:
+    require: '+openmp +cuda cuda_arch=70'
+  kokkos:
+    require: '+openmp +wrapper +cuda cuda_arch=70'
+  kokkos-fft:
+    require: 'host_backend=fftw-openmp'
+  kokkos-kernels:
+    require: '~shared'
+  lapack:
+    require: openblas@0.3
+  mpi:
+    require: openmpi@5.0 +cuda

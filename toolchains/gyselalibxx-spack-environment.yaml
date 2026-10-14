@@ -1,17 +1,17 @@
 spack:
   include:
-    - packages.yaml
-  definitions:
-  - packages:
+    - $GYSELA_SPACK_ARCH
+  specs:
+    - cxx
     - cmake@3.31
-    - 'ddc@0.16 +fft +pdi +splines'
-    - ginkgo@1.11 +openmp
+    - ddc@0.16 +fft +pdi +splines
+    - ginkgo@1.11
     - gmgpolar@2.4
     - googletest@1.17 +gmock
-    - kokkos@5.1 +openmp
+    - kokkos@5.1
     - kokkos-kernels@5.1
     - kokkos-tools@5.2
-    - 'koliop@0.2'
+    - koliop@0.2
     - lapack
     - mpi
     - ninja@1.13
@@ -23,7 +23,7 @@ spack:
     - pdiplugin-pycall@1.11
     - pdiplugin-set-value@1.11
     - pdiplugin-trace@1.11
-    - 'python@3.14'
+    - python@3.14
 
     - py-dask@2026.3
     - py-gvec@1.4
@@ -36,45 +36,15 @@ spack:
     - py-scipy@1.17
     - py-sympy@1.14
     - py-xarray@2026.4
-  - architectures:
-    - arch=linux-rhel8-zen4
-  specs:
-  - gcc
-  - matrix:
-    - [$packages]
-    - [$architectures]
-  repos:
-    patches:
-      git: https://github.com/gyselax/spack.git
-      branch: releases/v2026.10
-      destination: $spack/var/spack/repos/patches-v2026.10
-    builtin:
-      branch: releases/v2026.10
-      destination: $spack/var/spack/repos/builtin-v2026.10
   concretizer:
     reuse: false
     unify: true
   packages:
-    all:
-      permissions:
-        read: world
-        write: group
-      variants: ~fortran ~mpi
     arrow:
       prefer:
         - '~mimalloc'
-    c:
-      require: gcc@13.3.1
-    cxx:
-      require: gcc@13.3.1
     hdf5:
       require: '+subfiling'
-    kokkos-fft:
-      require: 'host_backend=fftw-openmp'
-    lapack:
-      require: openblas@0.3
-    mpi:
-      require: cray-mpich
     py-dask:
       prefer:
         - '~dataframe'

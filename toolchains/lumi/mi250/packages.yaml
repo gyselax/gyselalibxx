@@ -1,5 +1,11 @@
 ---
 packages:
+  all:
+    permissions:
+      read: world
+      write: group
+    prefer:
+      - 'target=zen3'
   cray-mpich:
     buildable: false
     externals:
@@ -15,6 +21,10 @@ packages:
           environment:
             prepend_path:
               LD_LIBRARY_PATH: /opt/cray/libfabric/1.22.0/lib64
+  c:
+    require: gcc@14.2
+  cxx:
+    require: gcc@14.2
   gcc:
     externals:
       - spec: gcc@14.2 languages:='c,c++,fortran'
@@ -24,6 +34,18 @@ packages:
             c: /opt/cray/pe/gcc-native/14/bin/gcc
             cxx: /opt/cray/pe/gcc-native/14/bin/g++
             fortran: /opt/cray/pe/gcc-native/14/bin/gfortran
+  ginkgo:
+    require: '~openmp +rocm amdgpu_target=gfx90a'
+  kokkos:
+    require: '~openmp +rocm amdgpu_target=gfx90a'
+  kokkos-fft:
+    require: 'host_backend=fftw-serial'
+  kokkos-kernels:
+    require: '~shared'
+  mpi:
+    require: cray-mpich
+  lapack:
+    require: openblas
   hip:
     buildable: false
     externals:

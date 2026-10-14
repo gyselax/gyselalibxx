@@ -1,9 +1,5 @@
 ---
 packages:
-  cuda:
-    externals:
-    - spec: cuda@12.9.86
-      prefix: /usr/local/cuda
   gcc:
     externals:
     - spec: gcc@13.2.0 languages:='c,c++,fortran'
@@ -16,3 +12,15 @@ packages:
         environment:
           prepend_path:
             LD_LIBRARY_PATH: /Applications/compilers/gcc/13.2.0/lib64:/Applications/compilers/gcc/13.2.0/lib
+  ginkgo:
+    require: '+openmp'
+  kokkos:
+    require: '+openmp'
+  kokkos-fft:
+    require: 'host_backend=fftw-openmp'
+  kokkos-kernels:
+    require: '~shared'
+  lapack:
+    require: openblas@0.3
+  mpi:
+    require: openmpi@5.0
