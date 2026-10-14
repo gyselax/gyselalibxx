@@ -339,3 +339,4 @@ using to_coord_t = typename detail::ToCoord<ValidIndexSet>::type;
 
 template <class T>
 bool constexpr is_coordinate_v = ddc::detail::is_tagged_vector_v<T>;
+} // namespace ddcHelper
