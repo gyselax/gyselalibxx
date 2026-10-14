@@ -35,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` are now aliases for `detail::` classes templated on `ddc::detail::TypeSeq`s of the patches and of the stored types. Type templates which give the same type on each patch now lead to the same class.
 - The constructor of `MultipatchField` from another multipatch object is now explicit.
 - Rewrite of the `GyroAverageOperator` to enable importing external coefficients for geometries where no inverse mapping is available.
-- Move `detail::combine_t` from `deriv_details.hpp` to `ddc_helper.hpp` and rename it to `ddcHelper::combine_t`.
 
 ### Deprecated
 
@@ -46,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MultipatchField::idx_type`.
 - Remove `MatrixBatchCsr::norm`.
 - Remove `MatrixBatchEll::norm`.
+- Remove `detail::combine_t` (prefer `ddc::combine_t`).
 
 ### Dependency requirements
 
