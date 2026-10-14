@@ -206,52 +206,71 @@ get_polar_bspline_vals_and_derivs(
     using BSplinesTheta = PolarBSplinesRTheta::BSplinesTheta_tag;
     constexpr std::size_t n_singular = PolarBSplinesRTheta::n_singular_basis();
 
-    if (idx >= Idx<PolarBSplinesRTheta>(n_singular)) {
-        // The polar bspline is a tensor product of 1D B-splines
-        Idx<BSplinesR, BSplinesTheta> idx_2d = PolarBSplinesRTheta::get_2d_index(idx);
-        if constexpr (calculate_derivs) {
-            DVector<typename R::Dual, typename Theta::Dual> derivs;
-            val = bspline_stash.vals_and_derivs(derivs, idx_2d, idx_quad);
-            return derivs;
-        } else {
-            val = bspline_stash.vals(idx_2d, idx_quad);
-            return;
-        }
+    KOKKOS_ASSERT(idx < Idx<PolarBSplinesRTheta>(n_singular));
+
+    constexpr int n_non_zero_bases_r = BSplinesR::degree() + 1;
+    constexpr int n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
+    // The maximum derivative order in each direction
+    constexpr std::size_t n_derivs = calculate_derivs ? 1 : 0;
+    constexpr std::size_t n_deriv_combinations = (n_derivs + 1) * (n_derivs + 1);
+    std::array<double, n_singular * n_deriv_combinations> singular_data;
+    std::array<double, n_non_zero_bases_r * n_non_zero_bases_theta * n_deriv_combinations> data;
+    // Values and derivatives of the polar basis splines around the singular point
+    // at a given coordinate
+    DSpan3D singular_vals(singular_data.data(), n_singular, n_derivs + 1, n_derivs + 1);
+    // Values and derivatives of the polar basis splines, that do not cover the singular point,
+    // at a given coordinate
+    DSpan4D
+            vals(data.data(),
+                 n_non_zero_bases_r,
+                 n_non_zero_bases_theta,
+                 n_derivs + 1,
+                 n_derivs + 1);
+
+    Coord<R, Theta> coord = ddc::coordinate(idx_quad);
+    ddc::discrete_space<PolarBSplinesRTheta>()
+            .eval_basis_and_n_derivs(singular_vals, vals, coord, n_derivs, n_derivs);
+
+    IdxStep<PolarBSplinesRTheta> offset
+            = idx - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>().front();
+    val = singular_vals(offset.value(), 0, 0);
+    if constexpr (calculate_derivs) {
+        return DVector<typename R::Dual, typename Theta::Dual>(
+                singular_vals(offset.value(), 1, 0),
+                singular_vals(offset.value(), 0, 1));
     } else {
-        constexpr int n_non_zero_bases_r = BSplinesR::degree() + 1;
-        constexpr int n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
-        // The maximum derivative order in each direction
-        constexpr std::size_t n_derivs = calculate_derivs ? 1 : 0;
-        constexpr std::size_t n_deriv_combinations = (n_derivs + 1) * (n_derivs + 1);
-        std::array<double, n_singular * n_deriv_combinations> singular_data;
-        std::array<double, n_non_zero_bases_r * n_non_zero_bases_theta * n_deriv_combinations> data;
-        // Values and derivatives of the polar basis splines around the singular point
-        // at a given coordinate
-        DSpan3D singular_vals(singular_data.data(), n_singular, n_derivs + 1, n_derivs + 1);
-        // Values and derivatives of the polar basis splines, that do not cover the singular point,
-        // at a given coordinate
-        DSpan4D
-                vals(data.data(),
-                     n_non_zero_bases_r,
-                     n_non_zero_bases_theta,
-                     n_derivs + 1,
-                     n_derivs + 1);
+        return;
+    }
+}
 
-        Coord<R, Theta> coord = ddc::coordinate(idx_quad);
-        ddc::discrete_space<PolarBSplinesRTheta>()
-                .eval_basis_and_n_derivs(singular_vals, vals, coord, n_derivs, n_derivs);
+template <
+        bool calculate_derivs = true,
+        class BSplinesR,
+        class BSplinesTheta,
+        class IdxQuad,
+        class TensorBSplineStashType>
+KOKKOS_FUNCTION std::conditional_t<
+        calculate_derivs,
+        DVector<typename BSplinesR::continuous_dimension_type::Dual,
+                typename BSplinesTheta::continuous_dimension_type::Dual>,
+        void>
+get_polar_bspline_vals_and_derivs(
+        double& val,
+        TensorBSplineStashType const& bspline_stash,
+        IdxQuad idx_quad,
+        Idx<BSplinesR, BSplinesTheta> idx)
+{
+    using R = typename BSplinesR::continuous_dimension_type;
+    using Theta = typename BSplinesTheta::continuous_dimension_type;
 
-        IdxStep<PolarBSplinesRTheta> offset
-                = idx
-                  - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>().front();
-        val = singular_vals(offset.value(), 0, 0);
-        if constexpr (calculate_derivs) {
-            return DVector<typename R::Dual, typename Theta::Dual>(
-                    singular_vals(offset.value(), 1, 0),
-                    singular_vals(offset.value(), 0, 1));
-        } else {
-            return;
-        }
+    // The polar bspline is a tensor product of 1D B-splines
+    if constexpr (calculate_derivs) {
+        DVector<typename R::Dual, typename Theta::Dual> derivs;
+        val = bspline_stash.vals_and_derivs(derivs, idx, idx_quad);
+        return derivs;
+    } else {
+        val = bspline_stash.vals(idx, idx_quad);
+        return;
     }
 }
 
@@ -1187,7 +1206,7 @@ public:
 
                                 sum += weak_integral_element(
                                         idx_test,
-                                        idx_trial_polar,
+                                        idx_trial,
                                         idx_quad,
                                         coeff_alpha,
                                         coeff_beta,
@@ -1328,10 +1347,15 @@ public:
      *      The values and derivatives of the 1D B-splines at the quadrature points.
      * @return Value of the quadrature summand
      */
-    template <class CoeffAlpha, class CoeffBeta, class Mapping>
+    template <
+            class CoeffAlpha,
+            class CoeffBeta,
+            class Mapping,
+            class IdxTestType,
+            class IdxTrialType>
     static KOKKOS_FUNCTION double weak_integral_element(
-            IdxBSPolar idx_test,
-            IdxBSPolar idx_trial,
+            IdxTestType idx_test,
+            IdxTrialType idx_trial,
             IdxQuadratureRTheta idx_quad,
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
@@ -1469,9 +1493,6 @@ public:
                         end_non_zero_theta,
                         full_quad_idx_range.front());
 
-        const IdxBSPolar idx_test_polar(to_polar(idx_test));
-        const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
-
         double result = 0;
         Kokkos::parallel_reduce(
                 Kokkos::TeamThreadMDRange(
@@ -1490,8 +1511,8 @@ public:
                     }
                     assert(full_quad_idx_range.contains(idx_quad));
                     sum += weak_integral_element(
-                            idx_test_polar,
-                            idx_trial_polar,
+                            idx_test,
+                            idx_trial,
                             idx_quad,
                             coeff_alpha,
                             coeff_beta,
