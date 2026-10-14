@@ -22,7 +22,7 @@
 #include "orthogonal_coord_transforms.hpp"
 #include "types.hpp"
 #include "view.hpp"
-
+#include"multipatch_field_mem.hpp"
 
 /*
     Test InterfacesDerivativeCalculator on the following geometry:
@@ -619,29 +619,14 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             matrix(idx_ranges, deriv_coeffs_collect);
 
     // Instantiate DerivField ====================================================================
-    DerivFieldMemOnPatch_host<Patch1> function_and_derivs_1_alloc(this->idx_range_xy1);
-    DerivFieldMemOnPatch_host<Patch2> function_and_derivs_2_alloc(this->idx_range_xy2);
-    DerivFieldMemOnPatch_host<Patch3> function_and_derivs_3_alloc(this->idx_range_xy3);
-
-    DerivFieldOnPatch_host<Patch1> function_and_derivs_1(function_and_derivs_1_alloc);
-    DerivFieldOnPatch_host<Patch2> function_and_derivs_2(function_and_derivs_2_alloc);
-    DerivFieldOnPatch_host<Patch3> function_and_derivs_3(function_and_derivs_3_alloc);
-
-    // Collect the fields with derivatives.
+    MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
+            functions_and_derivs_alloc(idx_ranges);
     MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs(
-            function_and_derivs_1,
-            function_and_derivs_2,
-            function_and_derivs_3);
+            functions_and_derivs_alloc);
 
     // Instantiate the global function.
-    IdxRangeSlice<GridXg> idx_range_slice_dxg = get_bound_idx_range_slice(this->idx_range_xg);
-    IdxRangeSlice<GridYg> idx_range_slice_dyg = get_bound_idx_range_slice(this->idx_range_yg);
-
     host_t<DerivFieldMem<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>, 1>>
-            function_and_derivs_g_alloc(
-                    this->idx_range_xy_g,
-                    idx_range_slice_dxg,
-                    idx_range_slice_dyg);
+            function_and_derivs_g_alloc(this->idx_range_xy_g);
     host_t<DerivField<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>>> function_and_derivs_g(
             function_and_derivs_g_alloc);
 
@@ -726,7 +711,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     // Left X bound ---
     initialise_derivatives<Patch1>(
             this->idx_range_xg.front(),
-            function_and_derivs_1,
+            functions_and_derivs.template get<Patch1>(),
             evaluator_g,
             const_function_g_coef,
             this->coord_transform_1);
@@ -734,19 +719,19 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     // lower Y bound ---
     initialise_derivatives<Patch1>(
             this->idx_range_yg.front(),
-            function_and_derivs_1,
+            functions_and_derivs.template get<Patch1>(),
             evaluator_g,
             const_function_g_coef,
             this->coord_transform_1);
     initialise_derivatives<Patch2>(
             this->idx_range_yg.front(),
-            function_and_derivs_2,
+            functions_and_derivs.template get<Patch2>(),
             evaluator_g,
             const_function_g_coef,
             this->coord_transform_2);
     initialise_derivatives<Patch3>(
             this->idx_range_yg.front(),
-            function_and_derivs_3,
+            functions_and_derivs.template get<Patch3>(),
             evaluator_g,
             const_function_g_coef,
             this->coord_transform_3);
@@ -754,7 +739,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     // Right X bound ---
     initialise_derivatives<Patch3>(
             this->idx_range_xg.back(),
-            function_and_derivs_3,
+            functions_and_derivs.template get<Patch3>(),
             evaluator_g,
             const_function_g_coef,
             this->coord_transform_3);
@@ -762,19 +747,19 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     // upper Y bound ---
     initialise_derivatives<Patch1>(
             this->idx_range_yg.back(),
-            function_and_derivs_1,
+            functions_and_derivs.template get<Patch1>(),
             evaluator_g,
             const_function_g_coef,
             this->coord_transform_1);
     initialise_derivatives<Patch2>(
             this->idx_range_yg.back(),
-            function_and_derivs_2,
+            functions_and_derivs.template get<Patch2>(),
             evaluator_g,
             const_function_g_coef,
             this->coord_transform_2);
     initialise_derivatives<Patch3>(
             this->idx_range_yg.back(),
-            function_and_derivs_3,
+            functions_and_derivs.template get<Patch3>(),
             evaluator_g,
             const_function_g_coef,
             this->coord_transform_3);
