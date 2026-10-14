@@ -171,9 +171,9 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
             = (std::is_same_v<Edge1, EastEdge1>) ? Coord<R>(-1.0) : Coord<R>(0.0);
     static constexpr Coord<R> r1_max = Coord<R>(1.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
-    static constexpr IdxStep<GridR<1>> r1_ncells
-            = (closure == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<1>>(5)
-                                                                       : IdxStep<GridR<1>>(30);
+    static constexpr IdxStep<GridR<1>> r1_ncells = (closure == ddc::SplineBuilderClosure::GREVILLE)
+                                                           ? IdxStep<GridR<1>>(5)
+                                                           : IdxStep<GridR<1>>(30);
 
     static constexpr Coord<Theta> theta1_min = Coord<Theta>(0.0);
     static constexpr Coord<Theta> theta1_max = Coord<Theta>(2 * M_PI);
@@ -188,7 +188,7 @@ struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Ed
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
     static constexpr IdxStep<GridR<2>> eta2_ncells
             = (closure == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<2>>(5)
-                                                                       : IdxStep<GridR<2>>(30);
+                                                               : IdxStep<GridR<2>>(30);
 
     // Exchange R and Theta values for a connection with SouthEdge2.
     static constexpr Coord<Theta> xi2_min = Coord<Xi>(0.0);
