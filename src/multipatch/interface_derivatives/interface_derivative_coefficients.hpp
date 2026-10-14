@@ -998,6 +998,42 @@ private:
                 = neg_1_to_the_power(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
     }
 
+    /*
+     * @brief Apply the explicit formula for the uniform case to weights on one side of the interface
+     */
+    template <class EdgePerpGrid>
+    static void set_local_uniform_weights(
+            host_t<DField<IdxRange<EdgePerpGrid>>> weights,
+            double factor,
+            double un_other_patch,
+            Idx<EdgePerpGrid> idx_interface)
+    {
+        double const u_plus = 2 + Kokkos::sqrt(3);
+        double const u_minus = 2 - Kokkos::sqrt(3);
+
+        IdxRange<EdgePerpGrid> idx_range = get_idx_range(weights);
+        Idx<EdgePerpGrid> idx_outside
+                = (idx_interface != idx_range.front()) ? idx_range.front() : idx_range.back();
+
+        int n_cells = idx_range.size() - 1;
+
+        IdxStep<EdgePerpGrid> edge_pt(1);
+        IdxRange<EdgePerpGrid> central_idx_range = idx_range.remove(edge_pt, edge_pt);
+
+        ddc::host_for_each(central_idx_range, [&](Idx<EdgePerpGrid> idx) {
+            const int k = abs(idx - idx_interface);
+            const int n_minus_k = n_cells - k;
+            double const vk_minus
+                    = Kokkos::pow(u_plus, n_minus_k - 1) - Kokkos::pow(u_minus, n_minus_k - 1);
+            double const vk_plus
+                    = Kokkos::pow(u_plus, n_minus_k + 1) - Kokkos::pow(u_minus, n_minus_k + 1);
+
+            weights(idx) = neg_1_to_the_power(k) * factor * un_other_patch * (vk_plus - vk_minus);
+        });
+
+        weights(idx_outside)
+                = neg_1_to_the_power(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
+    }
 
     /**
      * @brief Get the lengths of the cell on the right side and the left side of the given index.

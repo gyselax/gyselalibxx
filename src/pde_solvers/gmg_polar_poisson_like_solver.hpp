@@ -94,37 +94,45 @@ public:
  *        DensityProfileCoefficients concept.
  * @tparam EvaluatorType A 2D evaluator for the representation described by IdxRangeCoeff.
  */
-template <class EvaluatorType, class IdxRangeCoeff, class CoordRTheta>
 class PolarPoissonLikeCoefficients
 {
-    using DConstCoeffRTheta = DConstField<IdxRangeCoeff>;
+    using KokkosView2D = Kokkos::
+            View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space>;
+    using KokkosConstView2D = Kokkos::
+            View<const double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::memory_space>;
 
 private:
-    EvaluatorType m_evaluator;
-    DConstCoeffRTheta m_coeff_alpha;
-    DConstCoeffRTheta m_coeff_beta;
+    KokkosView2D m_alpha;
+    KokkosView2D m_beta;
 
 public:
     /// Build the class instance
-    PolarPoissonLikeCoefficients(
-            EvaluatorType evaluator,
-            DConstCoeffRTheta coeff_alpha,
-            DConstCoeffRTheta coeff_beta)
-        : m_evaluator(evaluator)
-        , m_coeff_alpha(coeff_alpha)
-        , m_coeff_beta(coeff_beta)
+    PolarPoissonLikeCoefficients(int nr, int ntheta)
+        : m_alpha("alpha", nr, ntheta)
+        , m_beta("beta", nr, ntheta)
     {
     }
 
-    /// The coefficient alpha in the Poisson-like equation
-    KOKKOS_INLINE_FUNCTION double alpha(const double& r, const double& theta) const
+    /**
+     * @brief Rebuild the internal representations of α and β from grid values.
+     * @param[in] alpha Values of α at the grid interpolation points.
+     * @param[in] beta  Values of β at the grid interpolation points.
+     */
+    void update_coefficients(KokkosConstView2D alpha, KokkosConstView2D beta)
     {
-        return m_evaluator(CoordRTheta(r, theta), m_coeff_alpha);
+        Kokkos::deep_copy(m_alpha, alpha);
+        Kokkos::deep_copy(m_beta, beta);
+    }
+
+    /// The coefficient alpha in the Poisson-like equation
+    KOKKOS_INLINE_FUNCTION double alpha(int i_r, int i_theta) const
+    {
+        return m_alpha(i_r, i_theta);
     }
     /// The coefficient beta in the Poisson-like equation
-    KOKKOS_INLINE_FUNCTION double beta(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double beta(int i_r, int i_theta) const
     {
-        return m_evaluator(CoordRTheta(r, theta), m_coeff_beta);
+        return m_beta(i_r, i_theta);
     }
 
     /// Required for the concept, only used in custom mesh generation (refinement_radius); not needed here.
@@ -134,6 +142,7 @@ public:
         return 0.0;
     }
 };
+
 
 } // namespace GMGPolarTools
 
@@ -170,17 +179,12 @@ class GMGPolarPoissonLikeSolver
     using CoeffRThetaMem = DFieldMem<IdxRangeCoeff>;
 
     using DomainGeometry = GMGPolarTools::MappingToDomainGeometry<ToPhysicalMapping>;
-    using DensityCoeffs = GMGPolarTools::
-            PolarPoissonLikeCoefficients<EvaluatorType, IdxRangeCoeff, Coord<R, Theta>>;
+    using DensityCoeffs = GMGPolarTools::PolarPoissonLikeCoefficients;
 
 private:
     DomainGeometry const m_domain_geom;
-    BuilderType const& m_builder;
-    EvaluatorType const& m_evaluator;
-    ExtrapolationType const m_extrapolation_rule;
-    CoeffRThetaMem m_coeff_alpha;
-    CoeffRThetaMem m_coeff_beta;
-    DensityCoeffs const m_density_coeffs;
+    gmgpolar::ExtrapolationType const m_extrapolation_rule;
+    DensityCoeffs m_density_coeffs;
     int m_max_iterations;
     double m_absTol;
     double m_relTol;
@@ -197,7 +201,7 @@ public:
      *
      * @param[in] to_physical The mapping from the logical to the physical domain.
      * @param[in] interpolator An interpolator to construct and evaluate the coefficients of the interpolation.
-     * @param[in] extrapolation_rule A parameter to pass extrapolation rule to GMGPolar, default ExtrapolationType::NONE.
+     * @param[in] extrapolation_rule A parameter to pass extrapolation rule to GMGPolar, default gmgpolar::ExtrapolationType::NONE.
      * @param[in] max_iterations The maximum number of iterations that the solver should carry out.
      * @param[in] absTol The absolute tolerance for the convergence of the solver.
      * @param[in] relTol The relative tolerance for the convergence of the solver.
@@ -205,25 +209,21 @@ public:
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
             InterpolatorType const& interpolator,
-            ExtrapolationType const extrapolation_rule = ExtrapolationType::NONE,
+            gmgpolar::ExtrapolationType const extrapolation_rule
+            = gmgpolar::ExtrapolationType::NONE,
             std::optional<int> max_iterations = std::nullopt,
             std::optional<double> absTol = std::nullopt,
             std::optional<double> relTol = std::nullopt)
         : m_domain_geom(to_physical)
-        , m_builder(interpolator.get_builder())
-        , m_evaluator(interpolator.get_evaluator())
         , m_extrapolation_rule(extrapolation_rule)
-        , m_coeff_alpha(get_spline_idx_range(m_builder))
-        , m_coeff_beta(get_spline_idx_range(m_builder))
         , m_density_coeffs(
-                  m_evaluator,
-                  get_const_field(m_coeff_alpha),
-                  get_const_field(m_coeff_beta))
+                  IdxRangeR(interpolator.get_builder().interpolation_domain()).size(),
+                  IdxRangeTheta(interpolator.get_builder().interpolation_domain()).size())
         , m_max_iterations(max_iterations.value_or(100))
         , m_absTol(absTol.value_or(1e-10))
         , m_relTol(relTol.value_or(1e-6))
     {
-        IdxRangeRTheta idx_range(m_builder.interpolation_domain());
+        IdxRangeRTheta idx_range(interpolator.get_builder().interpolation_domain());
         IdxRangeR idx_range_r(idx_range);
         IdxRangeTheta idx_range_theta(idx_range);
         IdxRangeTheta idx_range_theta_with_poloidal_point(
@@ -241,15 +241,15 @@ public:
     }
 
     /**
-     * @brief Rebuild the internal spline representations of α and β from grid values.
+     * @brief Rebuild the internal representations of α and β from grid values.
      * @param[in] alpha Values of α at the grid interpolation points.
      * @param[in] beta  Values of β at the grid interpolation points.
      */
     void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
             override
     {
-        m_builder(get_field(m_coeff_alpha), get_const_field(alpha));
-        m_builder(get_field(m_coeff_beta), get_const_field(beta));
+        m_density_coeffs
+                .update_coefficients(alpha.allocation_kokkos_view(), beta.allocation_kokkos_view());
 
         // --- Create GMGPolar solver for the selected geometry and coefficients --- //
         m_solver = std::make_unique<gmgpolar::GMGPolar<
@@ -268,7 +268,7 @@ public:
         // Are boundary conditions provided on the interior. False = Use Across-the-origin discretisation
         m_solver->DirBC_Interior(false);
         // Stencil distribution strategy: Take, Give
-        m_solver->stencilDistributionMethod(StencilDistributionMethod::TAKE);
+        m_solver->stencilDistributionMethod(gmgpolar::StencilDistributionMethod::TAKE);
         // Cache density profile coefficients: alpha, beta
         m_solver->cacheDensityProfileCoefficients(true);
         // Cache domain geometry data: arr, att, art, detDF
@@ -279,24 +279,25 @@ public:
         m_solver->maxLevels(-1); // Max multigrid levels (-1 = use deepest possible)
         m_solver->preSmoothingSteps(1); // Smoothing before coarse-grid correction
         m_solver->postSmoothingSteps(1); // Smoothing after coarse-grid correction
-        m_solver->multigridCycle(MultigridCycleType::V_CYCLE); // Multigrid cycle type
+        m_solver->multigridCycle(gmgpolar::MultigridCycleType::V_CYCLE); // Multigrid cycle type
         m_solver->FMG(true); // Full Multigrid mode on/off
         m_solver->FMG_iterations(2); // FMG iteration count
-        m_solver->FMG_cycle(MultigridCycleType::F_CYCLE); // FMG cycle type
+        m_solver->FMG_cycle(gmgpolar::MultigridCycleType::F_CYCLE); // FMG cycle type
 
         // --- Preconditioned Conjugate Gradient settings --- //
         m_solver->PCG(false); // Preconditioned Conjugate Gradient mode on/off
         m_solver->PCG_FMG(true); // Use FMG as preconditioner for PCG
         m_solver->PCG_FMG_iterations(1); // FMG iterations for PCG preconditioner
         m_solver->PCG_FMG_cycle(
-                MultigridCycleType::V_CYCLE); // FMG cycle type for PCG preconditioner
+                gmgpolar::MultigridCycleType::V_CYCLE); // FMG cycle type for PCG preconditioner
         m_solver->PCG_MG_iterations(2); // Multigrid iterations for PCG preconditioner
         m_solver->PCG_MG_cycle(
-                MultigridCycleType::V_CYCLE); // Multigrid cycle type for PCG iterations
+                gmgpolar::MultigridCycleType::V_CYCLE); // Multigrid cycle type for PCG iterations
 
         // --- Iterative solver controls --- //
         m_solver->maxIterations(m_max_iterations); // Max number of iterations
-        m_solver->residualNormType(ResidualNormType::WEIGHTED_EUCLIDEAN); // Residual norm type
+        m_solver->residualNormType(
+                gmgpolar::ResidualNormType::WEIGHTED_EUCLIDEAN); // Residual norm type
         m_solver->absoluteTolerance(m_absTol); // Absolute residual tolerance
         m_solver->relativeTolerance(m_relTol); // Relative residual tolerance
 

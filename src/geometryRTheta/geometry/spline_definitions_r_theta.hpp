@@ -15,15 +15,15 @@ bool constexpr BsplineOnUniformCellsTheta = false;
 struct BSplinesR
     : std::conditional_t<
               BsplineOnUniformCellsR,
-              ddc::UniformBSplines<R, BSDegreeR>,
-              ddc::NonUniformBSplines<R, BSDegreeR>>
+              ddc::UniformBSplines<R, BSDegreeR, R::PERIODIC>,
+              ddc::NonUniformBSplines<R, BSDegreeR, R::PERIODIC>>
 {
 };
 struct BSplinesTheta
     : std::conditional_t<
               BsplineOnUniformCellsTheta,
-              ddc::UniformBSplines<Theta, BSDegreeTheta>,
-              ddc::NonUniformBSplines<Theta, BSDegreeTheta>>
+              ddc::UniformBSplines<Theta, BSDegreeTheta, Theta::PERIODIC>,
+              ddc::NonUniformBSplines<Theta, BSDegreeTheta, Theta::PERIODIC>>
 {
 };
 struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>
@@ -39,17 +39,16 @@ using SplineInterpPointsTheta
         = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaClosure, SplineThetaClosure>;
 
 // --- Operators
-using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluatorND<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::NullExtrapolationRule, // boundary at r=0
+                ddc::NullExtrapolationRule, // boundary at rmax
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
 using SplineInterpolatorRThetaConst_host = SplineInterpolator<
         Kokkos::DefaultHostExecutionSpace,
