@@ -75,6 +75,93 @@ KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
     assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
     return idx;
 }
+
+/**
+ * @brief The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points.
+ *
+ * The tensor product B-splines and the quadrature grid both have a tensor product structure.
+ * The value of a tensor product B-spline at a quadrature point can therefore be computed
+ * from the values of the 1D B-splines at the 1D quadrature points. The memory required
+ * to store these values is O(N_r + N_theta).
+ *
+ * The B-spline index stored in the stash is the offset from the first non-zero B-spline at the
+ * quadrature point.
+ *
+ * @tparam QDimRMesh Quadrature mesh in radial direction.
+ * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
+ * @tparam BSplinesR Splines in radial direction.
+ * @tparam BSplinesTheta Splines in poloidal direction.
+ */
+template <typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta>
+struct TensorBSplineStash
+{
+private:
+    using R = typename BSplinesR::continuous_dimension_type;
+    using Theta = typename BSplinesTheta::continuous_dimension_type;
+    using R_cov = typename R::Dual;
+    using Theta_cov = typename Theta::Dual;
+
+public:
+    /// The values (derivative order 0) and derivatives (derivative order 1) of the radial B-splines.
+    DConstField<IdxRange<QDimRMesh, BSplinesR, ddc::Deriv<R>>> vals_r;
+    /// The values (derivative order 0) and derivatives (derivative order 1) of the poloidal B-splines.
+    DConstField<IdxRange<QDimThetaMesh, BSplinesTheta, ddc::Deriv<Theta>>> vals_theta;
+    /// The first non-zero radial B-spline at each radial quadrature point.
+    ConstField<Idx<BSplinesR>, IdxRange<QDimRMesh>> first_basis_r;
+    /// The first non-zero poloidal B-spline at each poloidal quadrature point.
+    ConstField<Idx<BSplinesTheta>, IdxRange<QDimThetaMesh>> first_basis_theta;
+
+    /**
+     * @brief Get the value and the derivatives of a tensor product B-spline at a quadrature point.
+     *
+     * @param[out] derivs The derivatives of the B-spline at the quadrature point.
+     * @param[in] idx The 2D index of the tensor product B-spline.
+     * @param[in] idx_quad The index of the quadrature point.
+     * @return The value of the B-spline at the quadrature point.
+     */
+    KOKKOS_FUNCTION double vals_and_derivs(
+            DVector<R_cov, Theta_cov>& derivs,
+            Idx<BSplinesR, BSplinesTheta> idx,
+            Idx<QDimRMesh, QDimThetaMesh> idx_quad) const
+    {
+        Idx<QDimRMesh> idx_quad_r(idx_quad);
+        Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
+        IdxStep<BSplinesR> offset_r = Idx<BSplinesR>(idx) - first_basis_r(idx_quad_r);
+        IdxStep<BSplinesTheta> offset_theta
+                = Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta);
+        DConstField<IdxRange<BSplinesR, ddc::Deriv<R>>> vals_r_at_quad = vals_r[idx_quad_r];
+        DConstField<IdxRange<BSplinesTheta, ddc::Deriv<Theta>>> vals_theta_at_quad
+                = vals_theta[idx_quad_theta];
+        const double val_r = vals_r_at_quad(offset_r, IdxStep<ddc::Deriv<R>>(0));
+        const double val_theta = vals_theta_at_quad(offset_theta, IdxStep<ddc::Deriv<Theta>>(0));
+        ddcHelper::get<R_cov>(derivs)
+                = vals_r_at_quad(offset_r, IdxStep<ddc::Deriv<R>>(1)) * val_theta;
+        ddcHelper::get<Theta_cov>(derivs)
+                = val_r * vals_theta_at_quad(offset_theta, IdxStep<ddc::Deriv<Theta>>(1));
+        return val_r * val_theta;
+    }
+
+    /**
+     * @brief Get the value of a tensor product B-spline at a quadrature point.
+     *
+     * @param[in] idx The 2D index of the tensor product B-spline.
+     * @param[in] idx_quad The index of the quadrature point.
+     * @return The value of the B-spline at the quadrature point.
+     */
+    KOKKOS_FUNCTION double vals(
+            Idx<BSplinesR, BSplinesTheta> idx,
+            Idx<QDimRMesh, QDimThetaMesh> idx_quad) const
+    {
+        Idx<QDimRMesh> idx_quad_r(idx_quad);
+        Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
+        IdxStep<BSplinesR> offset_r = Idx<BSplinesR>(idx) - first_basis_r(idx_quad_r);
+        IdxStep<BSplinesTheta> offset_theta
+                = Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta);
+        return vals_r[idx_quad_r](offset_r, IdxStep<ddc::Deriv<R>>(0))
+               * vals_theta[idx_quad_theta](offset_theta, IdxStep<ddc::Deriv<Theta>>(0));
+    }
+};
+
 /**
  * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
  *
@@ -357,6 +444,24 @@ private:
      */
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
+    /**
+     * @brief The index range of the stash of the non-zero radial B-splines at the radial
+     * quadrature points. The B-spline index is the offset from the first non-zero B-spline
+     * at the quadrature point.
+     */
+    using IdxRangeBasisStashR = IdxRange<QDimRMesh, BSplinesR, ddc::Deriv<R>>;
+    /**
+     * @brief The index range of the stash of the non-zero poloidal B-splines at the poloidal
+     * quadrature points. The B-spline index is the offset from the first non-zero B-spline
+     * at the quadrature point.
+     */
+    using IdxRangeBasisStashTheta = IdxRange<QDimThetaMesh, BSplinesTheta, ddc::Deriv<Theta>>;
+
+public:
+    /// The values and derivatives of the 1D B-splines at the quadrature points.
+    using TensorBSplineStash = detail_poisson::
+            TensorBSplineStash<QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta>;
+
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
     static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
@@ -389,6 +494,12 @@ private:
 
     DField<IdxRangeQuadratureRTheta> m_int_volume;
 
+    // Values and derivatives of the non-zero 1D B-splines at the 1D quadrature points
+    DFieldMem<IdxRangeBasisStashR> m_basis_vals_r;
+    DFieldMem<IdxRangeBasisStashTheta> m_basis_vals_theta;
+    FieldMem<IdxBSR, IdxRangeQuadratureR> m_first_basis_r;
+    FieldMem<IdxBSTheta, IdxRangeQuadratureTheta> m_first_basis_theta;
+
 public:
     /**
      * @brief Instantiate the assembler operator.
@@ -416,7 +527,75 @@ public:
                           s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_int_volume(int_volume)
+        , m_basis_vals_r(IdxRangeBasisStashR(
+                  m_idxrange_quadrature_r,
+                  ddc::discrete_space<BSplinesR>().full_domain().take_first(
+                          IdxStepBSR(s_n_non_zero_bases_r)),
+                  IdxRange<ddc::Deriv<R>>(Idx<ddc::Deriv<R>>(0), IdxStep<ddc::Deriv<R>>(2))))
+        , m_basis_vals_theta(IdxRangeBasisStashTheta(
+                  m_idxrange_quadrature_theta,
+                  ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
+                          IdxStepBSTheta(s_n_non_zero_bases_theta)),
+                  IdxRange<ddc::Deriv<
+                          Theta>>(Idx<ddc::Deriv<Theta>>(0), IdxStep<ddc::Deriv<Theta>>(2))))
+        , m_first_basis_r(m_idxrange_quadrature_r)
+        , m_first_basis_theta(m_idxrange_quadrature_theta)
     {
+        stash_basis_eval(get_field(m_basis_vals_r), get_field(m_first_basis_r));
+        stash_basis_eval(get_field(m_basis_vals_theta), get_field(m_first_basis_theta));
+    }
+
+    /**
+     * @brief Get the TensorBSplineStash of the values and derivatives of the 1D B-splines at the quadrature points.
+     *
+     * @return The stashed values of the 1D B-splines.
+     */
+    TensorBSplineStash get_tensor_bspline_stash() const
+    {
+        return TensorBSplineStash {
+                get_const_field(m_basis_vals_r),
+                get_const_field(m_basis_vals_theta),
+                get_const_field(m_first_basis_r),
+                get_const_field(m_first_basis_theta)};
+    }
+
+    /**
+     * @brief Stash with the values and derivatives of the non-zero 1D B-splines at
+     * the 1D quadrature points.
+     *
+     * @param[out] basis_vals The values and derivatives of the non-zero 1D B-splines. The
+     *                  B-spline index is the offset from the first non-zero B-spline.
+     * @param[out] first_basis The first non-zero B-spline at each quadrature point.
+     *
+     * @tparam QDimMesh The 1D quadrature grid.
+     * @tparam BSplines The 1D B-splines.
+     * @tparam DerivDim The derivative dimension.
+     */
+    template <class QDimMesh, class BSplines, class DerivDim>
+    static void stash_basis_eval(
+            DField<IdxRange<QDimMesh, BSplines, DerivDim>> basis_vals,
+            Field<Idx<BSplines>, IdxRange<QDimMesh>> first_basis)
+    {
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                get_idx_range(first_basis),
+                KOKKOS_LAMBDA(Idx<QDimMesh> idx_quad) {
+                    constexpr std::size_t n_non_zero = BSplines::degree() + 1;
+                    std::array<double, n_non_zero * 2> data;
+                    DSpan2D derivs(data.data(), n_non_zero, 2);
+                    first_basis(idx_quad) = ddc::discrete_space<BSplines>().eval_basis_and_n_derivs(
+                            derivs,
+                            ddc::coordinate(idx_quad),
+                            1);
+                    DField<IdxRange<BSplines, DerivDim>> basis_vals_at_quad = basis_vals[idx_quad];
+                    for (std::size_t i(0); i < n_non_zero; ++i) {
+                        for (std::size_t k(0); k < 2; ++k) {
+                            basis_vals_at_quad(IdxStep<BSplines>(i), IdxStep<DerivDim>(k))
+                                    = derivs(i, k);
+                        }
+                    }
+                });
     }
 
     /**
