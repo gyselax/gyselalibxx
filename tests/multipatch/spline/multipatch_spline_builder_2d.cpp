@@ -567,23 +567,6 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
     IdxRange<GridX<1>, GridY<1>> const idx_range_xy1(idx_range_x1, idx_range_y1);
     IdxRange<GridX<2>, GridY<2>> const idx_range_xy2(idx_range_x2, idx_range_y2);
 
-    IdxRangeSlice<GridX<1>> const idx_range_slice_x1(
-            idx_range_x1.front(),
-            IdxStep<GridX<1>>(2),
-            idx_range_x1.extents() - 1);
-    IdxRangeSlice<GridY<1>> const idx_range_slice_y1(
-            idx_range_y1.front(),
-            IdxStep<GridY<1>>(2),
-            idx_range_y1.extents() - 1);
-    IdxRangeSlice<GridX<2>> const idx_range_slice_x2(
-            idx_range_x2.front(),
-            IdxStep<GridX<2>>(2),
-            idx_range_x2.extents() - 1);
-    IdxRangeSlice<GridY<2>> const idx_range_slice_y2(
-            idx_range_y2.front(),
-            IdxStep<GridY<2>>(2),
-            idx_range_y2.extents() - 1);
-
     // List of spline builders
     SplineXYBuilder<1, ddc::SplineBuilderClosure::HERMITE> builder1(idx_range_xy1);
     SplineXYBuilder<2, ddc::SplineBuilderClosure::HERMITE> builder2(idx_range_xy2);
@@ -594,13 +577,11 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
 
     // Function tests
     // --- patch 1
-    DerivFieldMemOnPatch<Patch1>
-            function_and_derivs_1_alloc(idx_range_xy1, idx_range_slice_x1, idx_range_slice_y1);
+    DerivFieldMemOnPatch<Patch1> function_and_derivs_1_alloc(idx_range_xy1);
     DerivFieldOnPatch<Patch1> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
 
     // --- patch 2
-    DerivFieldMemOnPatch<Patch2>
-            function_and_derivs_2_alloc(idx_range_xy2, idx_range_slice_x2, idx_range_slice_y2);
+    DerivFieldMemOnPatch<Patch2> function_and_derivs_2_alloc(idx_range_xy2);
     DerivFieldOnPatch<Patch2> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
 
     initialise_2D_functions(
@@ -710,7 +691,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_xy1, idx_range_xy2); 
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_xy1, idx_range_xy2);
     MultipatchFieldMem<SplineCoeffMemOnPatch_2D, Patch1, Patch2> function_coef_alloc(
             builder.batched_spline_idx_ranges(idx_ranges));
     MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2> function_coef(function_coef_alloc);
