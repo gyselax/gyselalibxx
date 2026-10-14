@@ -596,8 +596,7 @@ public:
     static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(CoordRTheta coord, IdxBSPolar idx)
     {
         double val;
-        detail_poisson::
-                get_polar_bspline_vals_and_derivs<PolarBSplinesRTheta, false>(val, coord, idx);
+        detail_poisson::get_polar_bspline_vals_and_derivs<false>(val, coord, idx);
         return val;
     }
 

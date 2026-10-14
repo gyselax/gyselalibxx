@@ -181,7 +181,7 @@ public:
  *      The polar bspline of interest.
  * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
  */
-template <typename PolarBSplinesRTheta, bool calculate_derivs = true>
+template <bool calculate_derivs = true, typename PolarBSplinesRTheta>
 KOKKOS_FUNCTION std::conditional_t<
         calculate_derivs,
         DVector<typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual>,
@@ -1288,13 +1288,11 @@ public:
 
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
-        DVector<R_cov, Theta_cov> basis_derivs_test_space
-                = detail_poisson::get_polar_bspline_vals_and_derivs<
-                        PolarBSplinesRTheta>(basis_val_test_space, coord, idx_test);
+        DVector<R_cov, Theta_cov> basis_derivs_test_space = detail_poisson::
+                get_polar_bspline_vals_and_derivs(basis_val_test_space, coord, idx_test);
         double basis_val_trial_space;
-        DVector<R_cov, Theta_cov> basis_derivs_trial_space
-                = detail_poisson::get_polar_bspline_vals_and_derivs<
-                        PolarBSplinesRTheta>(basis_val_trial_space, coord, idx_trial);
+        DVector<R_cov, Theta_cov> basis_derivs_trial_space = detail_poisson::
+                get_polar_bspline_vals_and_derivs(basis_val_trial_space, coord, idx_trial);
 
         MetricTensorEvaluator<Mapping, Coord<R, Theta>> get_metric_tensor(mapping);
 
