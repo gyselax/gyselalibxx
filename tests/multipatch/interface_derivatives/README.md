@@ -1,8 +1,8 @@
 # Interface derivatives test
 
-## Single interface derivatives calculator
+## Interface derivative coefficients
 
-Test `SingleInterfaceDerivativesCalculator` with
+Test `InterfaceDerivCoeffs` with
 
 - Hermite boundary conditions and additional interpolation points as closure condition.
 - Uniform and non-uniform meshes.

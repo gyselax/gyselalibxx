@@ -67,7 +67,8 @@ class ElementwiseSplinePolarFootFinder
     using Theta = typename GridTheta::continuous_dimension_type;
     using BSplinesR = find_grid_t<
             R,
-            ddc::to_type_seq_t<typename SplineRThetaEvaluatorAdvection::spline_domain_type>>;
+            ddc::to_type_seq_t<
+                    typename SplineRThetaEvaluatorAdvection::template spline_domain_type<0, 1>>>;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;

@@ -11,6 +11,11 @@ template <class T>
 inline constexpr bool is_multipatch_field_mem_v
         = enable_multipatch_field_mem<std::remove_const_t<std::remove_reference_t<T>>>;
 
+namespace detail {
+
+template <class TypeSeqPatches, class TypeSeqInternalTypes>
+class MultipatchFieldMem;
+
 /**
  * @brief A class to store field memory block objects on patches.
  *
@@ -18,54 +23,59 @@ inline constexpr bool is_multipatch_field_mem_v
  * They can be stored in this class and then be accessed by the patch they are defined
  * on.
  *
- * @tparam T The type of the FieldMem/DerivMem/VectorFieldMem that are stored on the given patches.
- * @tparam Patches The patches of the objects in the same order of the patches
- *                 that the given objects are defined on.
+ * This class should not be used directly to instantiate objects. Instead the global alias
+ * MultipatchFieldMem should be used.
+ * I.e. use `MultipatchFieldMem<TypeOnPatch, Patches...>` instead of
+ * `detail::MultipatchFieldMem<TypeSeqPatches, TypeSeqInternalTypes>`.
+ *
+ * @tparam Patches The patches on which the objects are defined.
+ * @tparam InternalTypes The types of the memory allocating field objects that are stored on the given patches.
+ *                 The order must match that of the patches.
  *
  * @warning The objects have to be defined on different patches. Otherwise retrieving
  *          them by their patch is ill-defined.
  */
-template <template <typename P> typename T, class... Patches>
-class MultipatchFieldMem : public MultipatchType<T, Patches...>
+template <class... Patches, class... InternalTypes>
+class MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<InternalTypes...>>
+    : public MultipatchType<
+              ddc::detail::TypeSeq<Patches...>,
+              ddc::detail::TypeSeq<InternalTypes...>>
 {
     static_assert(
-            (has_data_access_methods_v<T<Patches>> && ...),
+            (has_data_access_methods_v<InternalTypes> && ...),
             "The MultipatchFieldMem type should only contain instances of objects that can be "
             "manipulated like fields.");
     static_assert(
-            (is_mem_type_v<T<Patches>> && ...),
+            (is_mem_type_v<InternalTypes> && ...),
             "The MultipatchFieldMem type should only contain instances of objects that allocate "
             "memory.");
 
 public:
     /// @brief The MultipatchType from which this class inherits
-    using base_type = MultipatchType<T, Patches...>;
+    using base_type = MultipatchType<
+            ddc::detail::TypeSeq<Patches...>,
+            ddc::detail::TypeSeq<InternalTypes...>>;
 
     /// @brief A tag storing the order of Patches in this MultipatchFieldMem
     using typename base_type::PatchOrdering;
 
-    /// An internal type alias that is only instantiated if the idx_range method is called.
+    /// @brief The type of the object stored on the given patch.
     template <class Patch>
-    using InternalIdxRangeOnPatch = typename T<Patch>::discrete_domain_type;
-
-    /// An internal type alias that is only instantiated if the get_const_field method is called.
-    template <class Patch>
-    using InternalFieldOnPatch = typename T<Patch>::span_type;
-
-    /// An internal type alias that is only instantiated if the get_const_field method is called.
-    template <class Patch>
-    using InternalConstFieldOnPatch = typename T<Patch>::view_type;
-
-    template <template <typename P> typename OtherType, class... OPatches>
-    friend class MultipatchFieldMem;
+    using TypeOnPatch = typename base_type::template TypeOnPatch<Patch>;
 
 public:
     /// The type of a modifiable reference to this multipatch field
-    using span_type = MultipatchField<InternalFieldOnPatch, Patches...>;
+    using span_type = MultipatchField<
+            PatchOrdering,
+            ddc::detail::TypeSeq<typename InternalTypes::span_type...>>;
     /// The type of a constant reference to this multipatch field
-    using view_type = MultipatchField<InternalConstFieldOnPatch, Patches...>;
+    using view_type = MultipatchField<
+            PatchOrdering,
+            ddc::detail::TypeSeq<typename InternalTypes::view_type...>>;
     /// The type of the index ranges that can be used to access this field.
-    using discrete_domain_type = MultipatchType<InternalIdxRangeOnPatch, Patches...>;
+    using discrete_domain_type = MultipatchType<
+            PatchOrdering,
+            ddc::detail::TypeSeq<typename InternalTypes::discrete_domain_type...>>;
     /// The memory space (CPU/GPU) where the data is saved.
     using memory_space = typename base_type::example_element::memory_space;
     /// The type of the elements inside the field.
@@ -78,28 +88,26 @@ public:
      * @param label A label used to tag parallel regions and memory allocations for profiling.
      * @param args The objects to be stored in the class.
      */
-    explicit MultipatchFieldMem(std::string const& label, T<Patches>... args)
+    explicit MultipatchFieldMem(std::string const& label, InternalTypes... args)
         : base_type(label, args...)
     {
     }
 
     /// Version without a label
-    explicit MultipatchFieldMem(T<Patches>... args) : MultipatchFieldMem("no-label", args...) {}
+    explicit MultipatchFieldMem(InternalTypes... args) : MultipatchFieldMem("no-label", args...) {}
 
     /**
      * Create a MultipatchFieldMem class by copying an instance of another compatible MultipatchFieldMem.
      *
      * A compatible MultipatchFieldMem is one which uses all the patches used by this class. The object
-     * being copied may include more patches than this MultipatchFieldMem. Further the original
-     * MultipatchFieldMem must store objects of the correct type (the type template may be different
-     * but return the same type depending on how it is designed.
+     * being copied may include more patches than this MultipatchFieldMem.
      *
      * @param label A label used to tag parallel regions and memory allocations for profiling.
      * @param other The equivalent MultipatchFieldMem being copied.
      */
     template <class MultipatchObj>
     explicit MultipatchFieldMem(std::string const& label, MultipatchObj& other)
-        : base_type(T<Patches>(label, other.template get<Patches>())...)
+        : base_type(InternalTypes(label, other.template get<Patches>())...)
     {
         static_assert(is_multipatch_type_v<MultipatchObj>);
     }
@@ -108,25 +116,6 @@ public:
     template <class MultipatchObj>
     explicit MultipatchFieldMem(MultipatchObj& other) : MultipatchFieldMem("no-label", other)
     {
-    }
-
-    /**
-     * Create a MultipatchFieldMem class from an r-value (temporary) instance of another MultipatchFieldMem which
-     * uses the same type for the internal tuple.
-     *
-     * @param other The equivalent MultipatchFieldMem being copied.
-     */
-    template <template <typename P> typename OtherType, class... OPatches>
-    MultipatchFieldMem(MultipatchFieldMem<OtherType, OPatches...>&& other) : base_type(other)
-    {
-        static_assert(
-                std::is_same_v<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<OPatches...>>,
-                "Cannot create a MultipatchFieldMem from a temporary MultipatchFieldMem with a "
-                "different "
-                "ordering");
-        static_assert(
-                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OtherType<OPatches>...>>,
-                "MultipatchFieldMems are not equivalent");
     }
 
     ~MultipatchFieldMem() noexcept = default;
@@ -138,9 +127,9 @@ public:
      * @return The object on the given patch.
      */
     template <class Patch>
-    auto get() const
+    typename TypeOnPatch<Patch>::view_type get() const
     {
-        return ::get_const_field(std::get<T<Patch>>(base_type::m_tuple));
+        return ::get_const_field(std::get<TypeOnPatch<Patch>>(base_type::m_tuple));
     }
 
     /**
@@ -150,9 +139,9 @@ public:
      * @return The object on the given patch.
      */
     template <class Patch>
-    auto get()
+    typename TypeOnPatch<Patch>::span_type get()
     {
-        return ::get_field(std::get<T<Patch>>(base_type::m_tuple));
+        return ::get_field(std::get<TypeOnPatch<Patch>>(base_type::m_tuple));
     }
 
     /**
@@ -160,10 +149,10 @@ public:
      *
      * @returns The set of index ranges on which the set of fields stored in this class are defined.
      */
-    auto idx_range() const
+    discrete_domain_type idx_range() const
     {
-        return MultipatchType<InternalIdxRangeOnPatch, Patches...>(
-                get_idx_range(std::get<T<Patches>>(base_type::m_tuple))...);
+        return discrete_domain_type(
+                get_idx_range(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
     }
 
     /**
@@ -171,21 +160,9 @@ public:
      *
      * @returns A set of modifiable fields providing access to the fields stored in this class.
      */
-    auto get_field()
+    span_type get_field()
     {
-        return MultipatchField<InternalFieldOnPatch, Patches...>(
-                ::get_field(std::get<T<Patches>>(base_type::m_tuple))...);
-    }
-
-    /**
-     * @brief Get a MultipatchField containing modifiable fields.
-     * This function matches the DDC name to allow the global get_const_field to be defined.
-     *
-     * @returns A set of modifiable fields providing access to the fields stored in this class.
-     */
-    auto span_view()
-    {
-        return get_field();
+        return span_type(::get_field(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
     }
 
     /**
@@ -193,32 +170,41 @@ public:
      *
      * @returns A set of constant fields providing access to the fields stored in this class.
      */
-    auto get_const_field() const
+    view_type get_const_field() const
     {
-        return MultipatchField<InternalConstFieldOnPatch, Patches...>(
-                ::get_const_field(std::get<T<Patches>>(base_type::m_tuple))...);
-    }
-
-    /**
-     * @brief Get a MultipatchField containing constant fields so the values cannot be modified.
-     * This function matches the DDC name to allow the global get_const_field to be defined.
-     *
-     * @returns A set of constant fields providing access to the fields stored in this class.
-     */
-    auto span_cview() const
-    {
-        return get_const_field();
+        return view_type(::get_const_field(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
     }
 };
 
-template <template <typename P> typename T, class... Patches>
-inline constexpr bool enable_multipatch_type<MultipatchFieldMem<T, Patches...>> = true;
+} // namespace detail
 
-template <template <typename P> typename T, class... Patches>
-inline constexpr bool enable_multipatch_field_mem<MultipatchFieldMem<T, Patches...>> = true;
+template <class TypeSeqPatches, class TypeSeqInternalTypes>
+inline constexpr bool enable_multipatch_type<
+        detail::MultipatchFieldMem<TypeSeqPatches, TypeSeqInternalTypes>> = true;
 
-template <template <typename P> typename T, class... Patches>
-inline constexpr bool enable_mem_type<MultipatchFieldMem<T, Patches...>> = true;
+template <class TypeSeqPatches, class TypeSeqInternalTypes>
+inline constexpr bool enable_multipatch_field_mem<
+        detail::MultipatchFieldMem<TypeSeqPatches, TypeSeqInternalTypes>> = true;
 
+template <class TypeSeqPatches, class TypeSeqInternalTypes>
+inline constexpr bool
+        enable_mem_type<detail::MultipatchFieldMem<TypeSeqPatches, TypeSeqInternalTypes>> = true;
+
+template <class TypeSeqPatches, class TypeSeqInternalTypes>
+inline constexpr bool enable_data_access_methods<
+        detail::MultipatchFieldMem<TypeSeqPatches, TypeSeqInternalTypes>> = true;
+
+/**
+ * @brief A class to store field memory block objects on patches.
+ *
+ * See detail::MultipatchFieldMem for more details. This alias creates the type T<Patch> for each
+ * of the patches. Two type templates which return the same type for each patch therefore lead to
+ * the same MultipatchFieldMem.
+ *
+ * @tparam T The type of the FieldMem/DerivMem/VectorFieldMem that are stored on the given patches.
+ * @tparam Patches The patches of the objects in the same order of the patches
+ *                 that the given objects are defined on.
+ */
 template <template <typename P> typename T, class... Patches>
-inline constexpr bool enable_data_access_methods<MultipatchFieldMem<T, Patches...>> = true;
+using MultipatchFieldMem = detail::
+        MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;

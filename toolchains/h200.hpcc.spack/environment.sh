@@ -43,6 +43,7 @@ eval -- "$(
         pdiplugin-trace \
         python \
         py-dask \
+        py-gvec \
         py-h5py \
         py-imageio \
         py-matplotlib \

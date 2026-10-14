@@ -50,7 +50,7 @@ find_package(Kokkos 4.4.1...<6 REQUIRED)
 
 find_package(KokkosKernels 4.5.1...<6 REQUIRED)
 
-find_package(DDC 0.15.0 REQUIRED COMPONENTS fft pdi splines)
+find_package(DDC 0.16.0 REQUIRED COMPONENTS fft pdi splines)
 
 find_package(koliop 0.2.0 REQUIRED)
 
@@ -58,7 +58,7 @@ find_package(LAPACKE REQUIRED)
 
 find_package(Ginkgo 1.8 REQUIRED)
 
-find_package(GMGPolar 2.3.1 REQUIRED)
+find_package(GMGPolar 2.4.0 REQUIRED)
 
 
 ###############################################################################################

@@ -120,18 +120,6 @@ struct NullValue
 /// @brief Convenience pairing of ExtrapolationRule::NullValue for both boundaries.
 using Null_Null = ddc::detail::TypeSeq<NullValue, NullValue>;
 
-namespace detail {
-template <class IdxRangeNDims, class CDim>
-struct DDCConstantExtrapolationRuleBuilder;
-
-template <class CDim, class... NDimGrids>
-struct DDCConstantExtrapolationRuleBuilder<IdxRange<NDimGrids...>, CDim>
-{
-    using type = ddc::
-            ConstantExtrapolationRule<CDim, typename NDimGrids::continuous_dimension_type...>;
-};
-} // namespace detail
-
 /**
  * @brief Tag selecting constant extrapolation.
  *
@@ -143,13 +131,7 @@ struct Constant
     template <class DataType, class Basis, class IdxRangeCoeff>
     using type = std::conditional_t<
             is_spline_basis_v<Basis>,
-            typename detail::DDCConstantExtrapolationRuleBuilder<
-                    ddc::remove_dims_of_t<
-                            IdxRangeCoeff,
-                            find_grid_t<
-                                    typename Basis::continuous_dimension_type,
-                                    ddc::to_type_seq_t<IdxRangeCoeff>>>,
-                    typename Basis::continuous_dimension_type>::type,
+            ddc::ConstantExtrapolationRule<typename Basis::continuous_dimension_type>,
             ConstantIdentityInterpolationExtrapolationRule<
                     find_grid_t<
                             typename Basis::continuous_dimension_type,

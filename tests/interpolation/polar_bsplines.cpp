@@ -69,14 +69,14 @@ struct PolarBsplineFixture<std::tuple<
     };
     static constexpr std::size_t spline_degree = D;
     static constexpr int continuity = C;
-    struct BSplinesR : ddc::NonUniformBSplines<R, D>
+    struct BSplinesR : ddc::NonUniformBSplines<R, D, R::PERIODIC>
     {
     };
     struct BSplinesTheta
         : std::conditional_t<
                   Uniform,
-                  ddc::UniformBSplines<Theta, D>,
-                  ddc::NonUniformBSplines<Theta, D>>
+                  ddc::UniformBSplines<Theta, D, Theta::PERIODIC>,
+                  ddc::NonUniformBSplines<Theta, D, Theta::PERIODIC>>
     {
     };
 
