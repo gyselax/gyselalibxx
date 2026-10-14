@@ -133,6 +133,9 @@ protected:
     friend class DerivField;
 
 protected:
+    /// @brief  Label of the object.
+    std::string m_label;
+
     /** @brief The internal fields describing the values and derivatives.
      *
      * The fields which contain the values have different index ranges to the fields containing derivatives
@@ -443,23 +446,37 @@ protected:
     /**
      * @brief Protected constructor to be used by subclasses to initialise index ranges.
      *
+     * @param label Label of the object. 
      * @param physical_idx_range The index range on which the values of the function are defined.
      * @param deriv_idx_range The index range of the provided derivatives.
      * @param cross_derivative_idx_range The cross product of the index ranges on which the derivatives
      *              of the function are defined.
      */
     KOKKOS_FUNCTION DerivFieldCommon(
+            std::string const& label,
             physical_idx_range_type physical_idx_range,
             discrete_deriv_idx_range_type deriv_idx_range,
             ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
                     cross_derivative_idx_range)
-        : m_physical_idx_range(physical_idx_range)
+        : m_label(label)
+        , m_physical_idx_range(physical_idx_range)
         , m_deriv_idx_range(deriv_idx_range)
         , m_cross_derivative_idx_range(cross_derivative_idx_range)
     {
     }
 
 public:
+    /** Constructs a new DerivFieldCommon by copy, yields a new view to the same data.
+     * @param other the DerivFieldCommon to copy.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(DerivFieldCommon const& other) = default;
+
+    /** Constructs a new DerivFieldCommon by move.
+     * @param other the DerivFieldCommon to move.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(
+            DerivFieldCommon&& other) noexcept = default;
+
     KOKKOS_DEFAULTED_FUNCTION ~DerivFieldCommon() = default;
 
     /**
