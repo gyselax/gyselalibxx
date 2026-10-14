@@ -420,6 +420,9 @@ public:
 
         IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
 
+        typename PoissonAssembler::TensorBSplineStash bspline_stash
+                = m_assembler.get_tensor_bspline_stash();
+
         // Fill b
         // Multi-level parallelism is needed as idx_range_singular.size() ~= 3 but b is on GPU
         Kokkos::parallel_for(
@@ -442,7 +445,7 @@ public:
                                                                        r_thread_index,
                                                                        theta_thread_index);
                                 sum += rhs(ddc::coordinate(idx_quad))
-                                       * get_polar_bspline_vals(idx_quad, idx)
+                                       * get_polar_bspline_vals(bspline_stash, idx_quad, idx)
                                        * int_volume(idx_quad);
                             },
                             teamSum);
@@ -452,9 +455,6 @@ public:
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
         IdxRangeQuadratureTheta full_quad_idx_range_theta(full_quad_idx_range);
-
-        typename PoissonAssembler::TensorBSplineStash bspline_stash
-                = m_assembler.get_tensor_bspline_stash();
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -585,20 +585,23 @@ public:
     }
 
     /**
-     * @brief Get the value of the specified polar bspline at the specified point.
+     * @brief Get the value of the specified polar bspline at the specified quadrature point.
      *
-     * @param[in] coord
-     *      The coordinate where the value of the polar bspline should be calculated.
+     * @param[in] bspline_stash
+     *      The values and derivatives of the 1D B-splines at the quadrature points.
+     * @param[in] idx_quad
+     *      The quadrature point where the value of the polar bspline should be calculated.
      * @param[in] idx
      *      The polar bspline of interest.
-     * @return The value of the polar bspline at the coordinate.
+     * @return The value of the polar bspline at the quadrature point.
      */
     static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(
+            typename PoissonAssembler::TensorBSplineStash const& bspline_stash,
             IdxQuadratureRTheta idx_quad,
             IdxBSPolar idx)
     {
         double val;
-        detail_poisson::get_polar_bspline_vals_and_derivs<false>(val, idx_quad, idx);
+        detail_poisson::get_polar_bspline_vals_and_derivs<false>(val, bspline_stash, idx_quad, idx);
         return val;
     }
 

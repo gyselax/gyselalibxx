@@ -175,49 +175,72 @@ public:
  *
  * @param[out] val
  *      The value of the specified polar bspline at the specified point.
- * @param[in] coord
- *      The coordinate where the value of the polar bspline should be calculated.
+ * @param[in] bspline_stash
+ *      The values and derivatives of the 1D B-splines at the quadrature points. These are
+ *      used to evaluate the polar bsplines which can be expressed as a tensor product of
+ *      1D B-splines.
+ * @param[in] idx_quad
+ *      The quadrature point where the value of the polar bspline should be calculated.
  * @param[in] idx
  *      The polar bspline of interest.
  * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
  */
-template <bool calculate_derivs = true, class PolarBSplinesRTheta, class IdxQuad>
+template <
+        bool calculate_derivs = true,
+        class PolarBSplinesRTheta,
+        class IdxQuad,
+        class TensorBSplineStashType>
 KOKKOS_FUNCTION std::conditional_t<
         calculate_derivs,
         DVector<typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual>,
         void>
-get_polar_bspline_vals_and_derivs(double& val, IdxQuad idx_quad, Idx<PolarBSplinesRTheta> idx)
+get_polar_bspline_vals_and_derivs(
+        double& val,
+        TensorBSplineStashType const& bspline_stash,
+        IdxQuad idx_quad,
+        Idx<PolarBSplinesRTheta> idx)
 {
     using R = PolarBSplinesRTheta::R;
     using Theta = PolarBSplinesRTheta::Theta;
     using BSplinesR = PolarBSplinesRTheta::BSplinesR_tag;
     using BSplinesTheta = PolarBSplinesRTheta::BSplinesTheta_tag;
     constexpr std::size_t n_singular = PolarBSplinesRTheta::n_singular_basis();
-    constexpr int n_non_zero_bases_r = BSplinesR::degree() + 1;
-    constexpr int n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
-    // The maximum derivative order in each direction
-    constexpr std::size_t n_derivs = calculate_derivs ? 1 : 0;
-    constexpr std::size_t n_deriv_combinations = (n_derivs + 1) * (n_derivs + 1);
-    std::array<double, n_singular * n_deriv_combinations> singular_data;
-    std::array<double, n_non_zero_bases_r * n_non_zero_bases_theta * n_deriv_combinations> data;
-    // Values and derivatives of the polar basis splines around the singular point
-    // at a given coordinate
-    DSpan3D singular_vals(singular_data.data(), n_singular, n_derivs + 1, n_derivs + 1);
-    // Values and derivatives of the polar basis splines, that do not cover the singular point,
-    // at a given coordinate
-    DSpan4D
-            vals(data.data(),
-                 n_non_zero_bases_r,
-                 n_non_zero_bases_theta,
-                 n_derivs + 1,
-                 n_derivs + 1);
 
-    Coord<R, Theta> coord = ddc::coordinate(idx_quad);
-    Idx<BSplinesR, BSplinesTheta> idx_front
-            = ddc::discrete_space<PolarBSplinesRTheta>()
-                      .eval_basis_and_n_derivs(singular_vals, vals, coord, n_derivs, n_derivs);
+    if (idx >= Idx<PolarBSplinesRTheta>(n_singular)) {
+        // The polar bspline is a tensor product of 1D B-splines
+        Idx<BSplinesR, BSplinesTheta> idx_2d = PolarBSplinesRTheta::get_2d_index(idx);
+        if constexpr (calculate_derivs) {
+            DVector<typename R::Dual, typename Theta::Dual> derivs;
+            val = bspline_stash.vals_and_derivs(derivs, idx_2d, idx_quad);
+            return derivs;
+        } else {
+            val = bspline_stash.vals(idx_2d, idx_quad);
+            return;
+        }
+    } else {
+        constexpr int n_non_zero_bases_r = BSplinesR::degree() + 1;
+        constexpr int n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
+        // The maximum derivative order in each direction
+        constexpr std::size_t n_derivs = calculate_derivs ? 1 : 0;
+        constexpr std::size_t n_deriv_combinations = (n_derivs + 1) * (n_derivs + 1);
+        std::array<double, n_singular * n_deriv_combinations> singular_data;
+        std::array<double, n_non_zero_bases_r * n_non_zero_bases_theta * n_deriv_combinations> data;
+        // Values and derivatives of the polar basis splines around the singular point
+        // at a given coordinate
+        DSpan3D singular_vals(singular_data.data(), n_singular, n_derivs + 1, n_derivs + 1);
+        // Values and derivatives of the polar basis splines, that do not cover the singular point,
+        // at a given coordinate
+        DSpan4D
+                vals(data.data(),
+                     n_non_zero_bases_r,
+                     n_non_zero_bases_theta,
+                     n_derivs + 1,
+                     n_derivs + 1);
 
-    if (idx < Idx<PolarBSplinesRTheta>(n_singular)) {
+        Coord<R, Theta> coord = ddc::coordinate(idx_quad);
+        ddc::discrete_space<PolarBSplinesRTheta>()
+                .eval_basis_and_n_derivs(singular_vals, vals, coord, n_derivs, n_derivs);
+
         IdxStep<PolarBSplinesRTheta> offset
                 = idx
                   - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>().front();
@@ -226,26 +249,6 @@ get_polar_bspline_vals_and_derivs(double& val, IdxQuad idx_quad, Idx<PolarBSplin
             return DVector<typename R::Dual, typename Theta::Dual>(
                     singular_vals(offset.value(), 1, 0),
                     singular_vals(offset.value(), 0, 1));
-        } else {
-            return;
-        }
-    } else {
-        IdxStep<BSplinesR, BSplinesTheta> offset
-                = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
-        IdxStep<BSplinesR> ir(offset);
-        IdxStep<BSplinesTheta> itheta(
-                detail_poisson::theta_mod<BSplinesTheta>(IdxStep<BSplinesTheta>(offset)));
-
-        assert(0 <= ir);
-        assert(ir < n_non_zero_bases_r);
-        assert(0 <= itheta);
-        assert(itheta < n_non_zero_bases_theta);
-
-        val = vals(ir.value(), itheta.value(), 0, 0);
-        if constexpr (calculate_derivs) {
-            return DVector<typename R::Dual, typename Theta::Dual>(
-                    vals(ir.value(), itheta.value(), 1, 0),
-                    vals(ir.value(), itheta.value(), 0, 1));
         } else {
             return;
         }
@@ -966,6 +969,7 @@ public:
                 m_idxrange_quadrature_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
 
         const int batch_idx = m_batch_idx;
         const int n_singular = idxrange_singular.size();
@@ -1003,7 +1007,8 @@ public:
                                         coeff_alpha,
                                         coeff_beta,
                                         mapping,
-                                        int_volume_proxy);
+                                        int_volume_proxy,
+                                        bspline_stash);
                             },
                             element);
                     const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
@@ -1053,6 +1058,7 @@ public:
                 m_idxrange_bsplines_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
@@ -1138,7 +1144,8 @@ public:
                                         coeff_alpha,
                                         coeff_beta,
                                         mapping,
-                                        int_volume_proxy);
+                                        int_volume_proxy,
+                                        bspline_stash);
                             },
                             element);
 
@@ -1191,6 +1198,7 @@ public:
         IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
@@ -1236,7 +1244,8 @@ public:
                                 coeff_beta,
                                 mapping,
                                 full_quad_idx_range,
-                                int_volume_proxy);
+                                int_volume_proxy,
+                                bspline_stash);
                         values_csr(batch_idx, csr_idx) = element;
                     }
                 });
@@ -1267,6 +1276,8 @@ public:
      *      the equation is defined.
      * @param[in] int_volume
      *      The integral volume associated with each point used in the quadrature scheme.
+     * @param[in] bspline_stash
+     *      The values and derivatives of the 1D B-splines at the quadrature points.
      * @return Value of the quadrature summand
      */
     template <class CoeffAlpha, class CoeffBeta, class Mapping>
@@ -1277,7 +1288,8 @@ public:
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
             Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume)
+            DField<IdxRangeQuadratureRTheta> int_volume,
+            TensorBSplineStash const& bspline_stash)
     {
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
@@ -1286,11 +1298,19 @@ public:
 
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
-        DVector<R_cov, Theta_cov> basis_derivs_test_space = detail_poisson::
-                get_polar_bspline_vals_and_derivs(basis_val_test_space, idx_quad, idx_test);
+        DVector<R_cov, Theta_cov> basis_derivs_test_space
+                = detail_poisson::get_polar_bspline_vals_and_derivs(
+                        basis_val_test_space,
+                        bspline_stash,
+                        idx_quad,
+                        idx_test);
         double basis_val_trial_space;
-        DVector<R_cov, Theta_cov> basis_derivs_trial_space = detail_poisson::
-                get_polar_bspline_vals_and_derivs(basis_val_trial_space, idx_quad, idx_trial);
+        DVector<R_cov, Theta_cov> basis_derivs_trial_space
+                = detail_poisson::get_polar_bspline_vals_and_derivs(
+                        basis_val_trial_space,
+                        bspline_stash,
+                        idx_quad,
+                        idx_trial);
 
         MetricTensorEvaluator<Mapping, Coord<R, Theta>> get_metric_tensor(mapping);
 
@@ -1333,6 +1353,8 @@ public:
      *      The field describing the quadrature coefficients including the
      *      Jacobian multiplication factor responsible for ensuring the correct
      *      volume for the integral.
+     * @param[in] bspline_stash
+     *      The values and derivatives of the 1D B-splines at the quadrature points.
      * @return
      *      The value of the matrix element.
      */
@@ -1345,7 +1367,8 @@ public:
             CoeffBeta const& coeff_beta,
             Mapping const& mapping,
             IdxRangeQuadratureRTheta const& full_quad_idx_range,
-            DField<IdxRangeQuadratureRTheta> int_volume)
+            DField<IdxRangeQuadratureRTheta> int_volume,
+            TensorBSplineStash const& bspline_stash)
     {
         const IdxBSR idx_test_r(idx_test);
         const IdxBSR idx_trial_r(idx_trial);
@@ -1425,7 +1448,8 @@ public:
                             coeff_alpha,
                             coeff_beta,
                             mapping,
-                            int_volume);
+                            int_volume,
+                            bspline_stash);
                 },
                 result);
         return result;
