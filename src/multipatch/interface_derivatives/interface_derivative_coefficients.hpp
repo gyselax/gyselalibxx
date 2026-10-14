@@ -390,12 +390,8 @@ public:
                 [&](Idx1D_1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
 
         // To avoid counting twice the value at the interface.
-        IdxRange1DPerp_2 idx_range_perp_2_without_interface
-                = (m_extremity_2 == FRONT)
-                          ? m_idx_range_perp_2.remove_first(IdxStep<EdgePerpGrid2>(1))
-                          : m_idx_range_perp_2.remove_last(IdxStep<EdgePerpGrid2>(1));
         coeff_values += ddc::host_transform_reduce(
-                idx_range_perp_2_without_interface,
+                m_idx_range_perp_2,
                 0.0,
                 ddc::reducer::sum<double>(),
                 [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
@@ -719,6 +715,8 @@ private:
         m_coeff_deriv_patch_2 = coeff_deriv_patch2[2];
         ddc::parallel_deepcopy(m_weights_patch_1, get_const_field(weights_patch1[2]));
         ddc::parallel_deepcopy(m_weights_patch_2, get_const_field(weights_patch2[2]));
+        m_weights_patch_1(interface_idx_1) *= 0.5;
+        m_weights_patch_2(interface_idx_2) *= 0.5;
     }
 
 
@@ -967,40 +965,32 @@ private:
         Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
         Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
 
-        Idx1D_1 idx_1 = interface_idx_1;
-        Idx1D_2 idx_2 = interface_idx_2;
+        double cell_length_left = ddc::discrete_space<EdgePerpGrid1>().step();
+        double cell_length_right = ddc::discrete_space<EdgePerpGrid2>().step();
 
-        // Index increment to move away from the interface.
-        IdxStep<EdgePerpGrid1> idx_step_1
-                = m_extremity_1 == FRONT ? IdxStep<EdgePerpGrid1>(1) : IdxStep<EdgePerpGrid1>(-1);
-        IdxStep<EdgePerpGrid2> idx_step_2
-                = m_extremity_2 == FRONT ? IdxStep<EdgePerpGrid2>(1) : IdxStep<EdgePerpGrid2>(-1);
+        double const a_11 = get_alpha(cell_length_left, cell_length_right);
+        double const b_11 = get_beta(cell_length_left, cell_length_right);
 
-        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx_1);
+        double const u_plus = 2 + Kokkos::sqrt(3);
+        double const u_minus = 2 - Kokkos::sqrt(3);
 
-        double const a_11 = -0.5 * cell_length_left / (cell_length_left + cell_length_right);
-        double const b_11 = -0.5 * cell_length_right / (cell_length_left + cell_length_right);
+        // Calculate the values u_k that are needed for the coefficients
+        double const un1 = Kokkos::pow(u_plus, n_cells_1) - Kokkos::pow(u_minus, n_cells_1);
+        double const un1_minus
+                = Kokkos::pow(u_plus, n_cells_1 - 1) - Kokkos::pow(u_minus, n_cells_1 - 1);
 
-        double const u1 = 2 * Kokkos::sqrt(3);
+        double const un2 = Kokkos::pow(u_plus, n_cells_2) - Kokkos::pow(u_minus, n_cells_2);
+        double const un2_minus
+                = Kokkos::pow(u_plus, n_cells_2 - 1) - Kokkos::pow(u_minus, n_cells_2 - 1);
 
-        double const un1 = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_1)
-                           - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_1);
-        double const un1_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_1 - 1)
-                                 - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_1 - 1);
-
-        double const un2 = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_2)
-                           - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_2);
-        double const un2_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_2 - 1)
-                                 - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_2 - 1);
-
+        // Calculate denominator used for all coefficients
         double const denominator = un1 * un2 + un1 * un2_minus * a_11 + un1_minus * un2 * b_11;
 
 
         // Compute the coefficients a and b.
-        m_coeff_deriv_patch_1
-                = Kokkos::pow(-1, (n_cells_1 - 1) % 2) * u1 * b_11 * un2 / denominator;
-        m_coeff_deriv_patch_2
-                = Kokkos::pow(-1, (n_cells_2 - 1) % 2) * u1 * a_11 * un1 / denominator;
+        double const u1 = 2 * Kokkos::sqrt(3);
+        m_coeff_deriv_patch_1 = neg_1_to_the_power(n_cells_1 - 1) * u1 * b_11 * un2 / denominator;
+        m_coeff_deriv_patch_2 = neg_1_to_the_power(n_cells_2 - 1) * u1 * a_11 * un1 / denominator;
 
 
         // Compute the weights {omega_k}_{k = -NL, ..., NR} in c.
@@ -1008,45 +998,51 @@ private:
         double const factor_b = 3 * b_11 / cell_length_left / denominator;
 
         // --- for k = 0
-        m_weights_patch_1(idx_1)
-                = factor_a * un1 * (un2 - un2_minus) - factor_b * un2 * (un1 - un1_minus);
-        m_weights_patch_2(idx_2) = m_weights_patch_1(idx_1);
+        m_weights_patch_2(interface_idx_2) = -factor_b * un2 * (un1 - un1_minus);
 
-        // --- for k = 1, ..., NR-1
-        for (int k(1); k < n_cells_2; ++k) {
-            idx_2 = idx_2 + idx_step_2;
-            const int n2_minus_k = n_cells_2 - k;
-            double const vk_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n2_minus_k - 1)
-                                    - Kokkos::pow(2 - Kokkos::sqrt(3), n2_minus_k - 1);
-            double const vk_plus = Kokkos::pow(2 + Kokkos::sqrt(3), n2_minus_k + 1)
-                                   - Kokkos::pow(2 - Kokkos::sqrt(3), n2_minus_k + 1);
+        // --- for k = 1, ..., NR
+        set_local_uniform_weights(m_weights_patch_2, factor_a, un1, interface_idx_2);
 
-            m_weights_patch_2(idx_2)
-                    = Kokkos::pow(-1, k % 2) * factor_a * un1 * (vk_plus - vk_minus);
-        }
-
-        // --- for k = NR
-        idx_2 = idx_2 + idx_step_2;
-        m_weights_patch_2(idx_2) = Kokkos::pow(-1, n_cells_2 % 2) * factor_a * un1 * u1;
-
-        // --- for k = -1, ..., -(NL-1)
-        for (int k(1); k < n_cells_1; ++k) {
-            idx_1 = idx_1 + idx_step_1;
-            const int n1_minus_k = n_cells_1 - k;
-            double const vk_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n1_minus_k - 1)
-                                    - Kokkos::pow(2 - Kokkos::sqrt(3), n1_minus_k - 1);
-            double const vk_plus = Kokkos::pow(2 + Kokkos::sqrt(3), n1_minus_k + 1)
-                                   - Kokkos::pow(2 - Kokkos::sqrt(3), n1_minus_k + 1);
-
-            m_weights_patch_1(idx_1)
-                    = Kokkos::pow(-1, (k + 1) % 2) * factor_b * un2 * (vk_plus - vk_minus);
-        }
-
-        // --- for k = -NL
-        idx_1 = idx_1 + idx_step_1;
-        m_weights_patch_1(idx_1) = Kokkos::pow(-1, (n_cells_1 + 1) % 2) * factor_b * un2 * u1;
+        m_weights_patch_1(interface_idx_1) = factor_a * un1 * (un2 - un2_minus);
+        set_local_uniform_weights(m_weights_patch_1, -factor_b, un2, interface_idx_1);
     };
 
+    /*
+     * @brief Apply the explicit formula for the uniform case to weights on one side of the interface
+     */
+    template <class EdgePerpGrid>
+    static void set_local_uniform_weights(
+            host_t<DField<IdxRange<EdgePerpGrid>>> weights,
+            double factor,
+            double un_other_patch,
+            Idx<EdgePerpGrid> idx_interface)
+    {
+        double const u_plus = 2 + Kokkos::sqrt(3);
+        double const u_minus = 2 - Kokkos::sqrt(3);
+
+        IdxRange<EdgePerpGrid> idx_range = get_idx_range(weights);
+        Idx<EdgePerpGrid> idx_outside
+                = (idx_interface != idx_range.front()) ? idx_range.front() : idx_range.back();
+
+        int n_cells = idx_range.size() - 1;
+
+        IdxStep<EdgePerpGrid> edge_pt(1);
+        IdxRange<EdgePerpGrid> central_idx_range = idx_range.remove(edge_pt, edge_pt);
+
+        ddc::host_for_each(central_idx_range, [&](Idx<EdgePerpGrid> idx) {
+            const int k = abs(idx - idx_interface);
+            const int n_minus_k = n_cells - k;
+            double const vk_minus
+                    = Kokkos::pow(u_plus, n_minus_k - 1) - Kokkos::pow(u_minus, n_minus_k - 1);
+            double const vk_plus
+                    = Kokkos::pow(u_plus, n_minus_k + 1) - Kokkos::pow(u_minus, n_minus_k + 1);
+
+            weights(idx) = neg_1_to_the_power(k) * factor * un_other_patch * (vk_plus - vk_minus);
+        });
+
+        weights(idx_outside)
+                = neg_1_to_the_power(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
+    }
 
     /**
      * @brief Get the lengths of the cell on the right side and the left side of the given index.
@@ -1160,5 +1156,10 @@ private:
             IdxRange<Grid1D> const& idx_range) const
     {
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
+    }
+
+    static inline double neg_1_to_the_power(int k)
+    {
+        return 1.0 - 2.0 * (k & 1);
     }
 };
