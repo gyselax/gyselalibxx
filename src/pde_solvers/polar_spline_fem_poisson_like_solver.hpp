@@ -98,9 +98,6 @@ private:
     /// The 1D B-splines in the poloidal direction
     using BSplinesTheta = typename PolarBSplinesRTheta::BSplinesTheta_tag;
 
-    using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
-    using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
-
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
     /// The type of an index range over the polar B-splines
@@ -420,6 +417,9 @@ public:
 
         IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
 
+        typename PoissonAssembler::TensorBSplineStash bspline_stash
+                = m_assembler.get_tensor_bspline_stash();
+
         // Fill b
         // Multi-level parallelism is needed as idx_range_singular.size() ~= 3 but b is on GPU
         Kokkos::parallel_for(
@@ -441,8 +441,9 @@ public:
                                                                + IdxStep<QDimRMesh, QDimThetaMesh>(
                                                                        r_thread_index,
                                                                        theta_thread_index);
-                                const CoordRTheta coord(ddc::coordinate(idx_quad));
-                                sum += rhs(coord) * get_polar_bspline_vals(coord, idx)
+                                sum += rhs(ddc::coordinate(idx_quad))
+                                       * detail_poisson::get_polar_bspline_vals_and_derivs<
+                                               false>(idx_quad, idx)
                                        * int_volume(idx_quad);
                             },
                             teamSum);
@@ -459,37 +460,9 @@ public:
                 m_idxrange_fem_non_singular,
                 KOKKOS_LAMBDA(IdxBSPolar const idx) {
                     const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-                    const IdxBSR idx_r(idx_2d);
-                    const IdxBSTheta idx_theta(idx_2d);
-
-                    auto& bspl_r = ddc::discrete_space<BSplinesR>();
-                    auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
-
-                    // Find the cells on which the bspline is non-zero
-                    const Idx<KnotsR> start_non_zero_r(
-                            Kokkos::
-                                    max(bspl_r.break_point_domain().front(),
-                                        bspl_r.get_first_support_knot(idx_r)));
-                    const Idx<KnotsR> end_non_zero_r(
-                            Kokkos::
-                                    min(bspl_r.break_point_domain().back(),
-                                        bspl_r.get_last_support_knot(idx_r)));
-
-                    const Idx<KnotsTheta> start_non_zero_theta(
-                            bspl_theta.get_first_support_knot(idx_theta));
-                    const Idx<KnotsTheta> end_non_zero_theta(
-                            bspl_theta.get_last_support_knot(idx_theta));
-                    const IdxRangeQuadratureRTheta quad_range
-                            = detail_poisson::get_quadrature_between_knots<
-                                    QDimRMesh,
-                                    QDimThetaMesh,
-                                    BSplinesR,
-                                    BSplinesTheta>(
-                                    start_non_zero_r,
-                                    end_non_zero_r,
-                                    start_non_zero_theta,
-                                    end_non_zero_theta,
-                                    full_quad_idx_range.front());
+                    // Find the quadrature points on which the bspline is non-zero
+                    const IdxRangeQuadratureRTheta quad_range = detail_poisson::
+                            get_support_quadrature(idx_2d, full_quad_idx_range.front());
 
                     // Calculate the weak integral
                     b(batch_idx, idx) = 0.0;
@@ -502,7 +475,7 @@ public:
                         for (IdxQuadratureR idx_quad_r : ddc::select<QDimRMesh>(quad_range)) {
                             IdxQuadratureRTheta idx_quad(idx_quad_r, idx_quad_theta);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
-                            b(batch_idx, idx) += rhs(coord) * get_polar_bspline_vals(coord, idx)
+                            b(batch_idx, idx) += rhs(coord) * bspline_stash.vals(idx_quad, idx_2d)
                                                  * int_volume(idx_quad);
                         }
                     }
@@ -579,23 +552,6 @@ public:
                 rhs_func(m_evaluator, get_const_field(rhs_alloc));
 
         (*this)(phi, rhs_func);
-    }
-
-    /**
-     * @brief Get the value of the specified polar bspline at the specified point.
-     *
-     * @param[in] coord
-     *      The coordinate where the value of the polar bspline should be calculated.
-     * @param[in] idx
-     *      The polar bspline of interest.
-     * @return The value of the polar bspline at the coordinate.
-     */
-    static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(CoordRTheta coord, IdxBSPolar idx)
-    {
-        double val;
-        detail_poisson::
-                get_polar_bspline_vals_and_derivs<PolarBSplinesRTheta, false>(val, coord, idx);
-        return val;
     }
 
 private:
