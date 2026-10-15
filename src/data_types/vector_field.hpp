@@ -343,7 +343,7 @@ public:
 
     /**
      * Element access using a multi-dimensional Idx or IdxStep.
-     * @param idx the Tndex or index step which accesses the element.
+     * @param idx_dim The index or index step which accesses the element.
      * @return Copy of the element accessed.
      */
     template <class... IdxType>
