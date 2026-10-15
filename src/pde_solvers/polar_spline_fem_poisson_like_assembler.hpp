@@ -1603,6 +1603,8 @@ public:
      *      range as test_mass.
      * @param[in] idx_test
      *      The 2D index of the test B-spline.
+     * @param[in] idx_batch
+     *      The index of the batch for which the element is being calculated.
      * @param[in] coeff_alpha
      *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
      * @param[in] coeff_beta
