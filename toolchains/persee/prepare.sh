@@ -44,6 +44,6 @@ for arch in v100 xeon; do
     spack env deactivate
 done
 
-find "${GYSELA_SPACK_PREFIX}" -user "${USER}" \
+find "${GYSELA_SPACK_PREFIX}" \( -type d -type f \) -user "${USER}" \
     -exec chgrp "${GYSELA_SPACK_GROUP}" {} + \
     -exec chmod g+rwX {} +
