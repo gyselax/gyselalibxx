@@ -341,9 +341,10 @@ public:
         return *this;
     }
 
-    /** Element access using a list of Idxs
-     * @param delems 1D discrete coordinates
-     * @return copy of this element
+    /**
+     * Element access using a multi-dimensional Idx or IdxStep.
+     * @param idx the Tndex or index step which accesses the element.
+     * @return Copy of the element accessed.
      */
     template <class... IdxType>
     KOKKOS_FUNCTION element_type const operator()(IdxType const&... idx_dim) const noexcept
@@ -355,8 +356,8 @@ public:
             return this->
             operator()(Idx<> {}, std::make_integer_sequence<int, element_type::size()> {});
         } else {
-            using GroupedIdxType = ddc::combine_t<IdxType...>;
-            GroupedIdxType idx(idx_dim...);
+            using IdxTypeGrouped = ddc::combine_t<IdxType...>;
+            IdxTypeGrouped idx(idx_dim...);
             return this->operator()(idx, std::make_integer_sequence<int, element_type::size()> {});
         }
     }
