@@ -563,23 +563,27 @@ public:
          * tensor product of 1D B-splines. The index (a, b) = (0, 0) contains the values of the
          * basis splines.
          *
-         * @param[out] singular_values_and_derivs  The derivatives of the b-spline elements near the
-         *                              singular point which cannot be expressed as a tensor product
-         *                              of 1D B-splines, evaluated at the coordinate p. The indices
-         *                              are (singular b-spline, a, b).
-         * @param[out] values_and_derivs  The derivatives of the non-zero b-spline elements which can
-         *                              be expressed as a tensor product of 1D B-splines. The indices
-         *                              are (radial b-spline, poloidal b-spline, a, b).
-         * @param[in] p                 The coordinate where the basis functions are evaluated.
-         * @param[in] n_derivs_r        The maximum order of the radial derivatives.
-         * @param[in] n_derivs_theta    The maximum order of the poloidal derivatives.
+         * @param[out] singular_values_and_derivs
+         *              The derivatives of the b-spline elements near the singular point which
+         *              cannot be expressed as a tensor product of 1D B-splines, evaluated at
+         *              the coordinate p. The indices are (singular b-spline, a, b).
+         * @param[out] values_and_derivs
+         *              The derivatives of the non-zero b-spline elements which can be expressed
+         *              as a tensor product of 1D B-splines. The indices are (radial b-spline,
+         *              poloidal b-spline, a, b).
+         * @param[in] x
+         *              The coordinate where the basis functions are evaluated.
+         * @param[in] n_derivs_r
+         *              The maximum order of the radial derivatives.
+         * @param[in] n_derivs_theta
+         *              The maximum order of the poloidal derivatives.
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
          */
         KOKKOS_FUNCTION tensor_product_index_type eval_basis_and_n_derivs(
                 DSpan3D singular_values_and_derivs,
                 DSpan4D values_and_derivs,
-                Coord<R, Theta> p,
+                Coord<R, Theta> x,
                 std::size_t n_derivs_r,
                 std::size_t n_derivs_theta) const;
 
