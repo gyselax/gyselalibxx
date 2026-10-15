@@ -177,9 +177,6 @@ public:
  * @tparam calculate_derivs If true, the value and the derivatives are calculated. If false,
  *     only the value is calculated.
  *
- * @param[in] bspline_stash
- *      The values and derivatives of the 1D B-splines at the quadrature points. This argument
- *      is unused but is present so that both overloads have the same signature.
  * @param[in] idx_quad
  *      The quadrature point where the polar bspline should be evaluated.
  * @param[in] idx
@@ -187,11 +184,7 @@ public:
  * @return The value of the polar bspline if calculate_derivs is false. Otherwise a tuple
  *      containing the value and the derivatives of the polar bspline.
  */
-template <
-        bool calculate_derivs = true,
-        class PolarBSplinesRTheta,
-        class IdxQuad,
-        class TensorBSplineStashType>
+template <bool calculate_derivs = true, class PolarBSplinesRTheta, class IdxQuad>
 KOKKOS_FUNCTION std::conditional_t<
         calculate_derivs,
         std::tuple<
@@ -199,10 +192,7 @@ KOKKOS_FUNCTION std::conditional_t<
                 DVector<typename PolarBSplinesRTheta::R::Dual,
                         typename PolarBSplinesRTheta::Theta::Dual>>,
         double>
-get_polar_bspline_vals_and_derivs(
-        TensorBSplineStashType const& bspline_stash,
-        IdxQuad idx_quad,
-        Idx<PolarBSplinesRTheta> idx)
+get_polar_bspline_vals_and_derivs(IdxQuad idx_quad, Idx<PolarBSplinesRTheta> idx)
 {
     using R = PolarBSplinesRTheta::R;
     using Theta = PolarBSplinesRTheta::Theta;
@@ -246,50 +236,6 @@ get_polar_bspline_vals_and_derivs(
                               singular_vals(offset.value(), 0, 1)));
     } else {
         return val;
-    }
-}
-
-/**
- * @brief Get the value and derivatives of a tensor product bspline at the specified
- *      quadrature point.
- *
- * The values are calculated from the values of the 1D B-splines saved in the stash.
- *
- * @tparam calculate_derivs If true, the value and the derivatives are calculated. If false,
- *     only the value is calculated.
- *
- * @param[in] bspline_stash
- *      The values and derivatives of the 1D B-splines at the quadrature points.
- * @param[in] idx_quad
- *      The quadrature point where the bspline should be evaluated.
- * @param[in] idx
- *      The 2D index of the tensor product bspline.
- * @return The value of the bspline if calculate_derivs is false. Otherwise a tuple
- *      containing the value and the derivatives of the bspline.
- */
-template <
-        bool calculate_derivs = true,
-        class BSplinesR,
-        class BSplinesTheta,
-        class IdxQuad,
-        class TensorBSplineStashType>
-KOKKOS_FUNCTION std::conditional_t<
-        calculate_derivs,
-        std::tuple<
-                double,
-                DVector<typename BSplinesR::continuous_dimension_type::Dual,
-                        typename BSplinesTheta::continuous_dimension_type::Dual>>,
-        double>
-get_polar_bspline_vals_and_derivs(
-        TensorBSplineStashType const& bspline_stash,
-        IdxQuad idx_quad,
-        Idx<BSplinesR, BSplinesTheta> idx)
-{
-    // The polar bspline is a tensor product of 1D B-splines
-    if constexpr (calculate_derivs) {
-        return bspline_stash.vals_and_derivs(idx_quad, idx);
-    } else {
-        return bspline_stash.vals(idx_quad, idx);
     }
 }
 
@@ -1112,7 +1058,6 @@ public:
 
                                 auto [basis_val_trial_space, basis_derivs_trial_space]
                                         = detail_poisson::get_polar_bspline_vals_and_derivs(
-                                                bspline_stash,
                                                 idx_quad,
                                                 idx_trial);
 
@@ -1259,10 +1204,7 @@ public:
                                         bspline_stash);
 
                                 auto [basis_val_trial_space, basis_derivs_trial_space]
-                                        = detail_poisson::get_polar_bspline_vals_and_derivs(
-                                                bspline_stash,
-                                                idx_quad,
-                                                idx_trial);
+                                        = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
 
                                 // Assemble the weak integral element
                                 sum += scalar_product(
@@ -1444,9 +1386,17 @@ public:
             DField<IdxRangeQuadratureRTheta> int_volume,
             TensorBSplineStash const& bspline_stash)
     {
-        // Define the value and gradient of the test basis function
-        auto [basis_val_test_space, basis_derivs_test_space] = detail_poisson::
-                get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_test);
+        double basis_val_test_space;
+        DVector<R_cov, Theta_cov> basis_derivs_test_space;
+        if constexpr (std::is_same_v<IdxTestType, Idx<PolarBSplinesRTheta>>) {
+            // Define the value and gradient of the test basis function
+            std::tie(basis_val_test_space, basis_derivs_test_space)
+                    = detail_poisson::get_polar_bspline_vals_and_derivs(idx_quad, idx_test);
+        } else {
+            static_assert(std::is_same_v<IdxTestType, Idx<BSplinesR, BSplinesTheta>>);
+            std::tie(basis_val_test_space, basis_derivs_test_space)
+                    = bspline_stash.vals_and_derivs(idx_quad, idx_test);
+        }
 
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
@@ -1572,8 +1522,8 @@ public:
                     }
                     assert(full_quad_idx_range.contains(idx_quad));
 
-                    auto [basis_val_trial_space, basis_derivs_trial_space] = detail_poisson::
-                            get_polar_bspline_vals_and_derivs(bspline_stash, idx_quad, idx_trial);
+                    auto [basis_val_trial_space, basis_derivs_trial_space]
+                            = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
 
                     // The test support may extend past the end of the poloidal domain
                     IdxQuadratureRTheta idx_quad_test = idx_quad;

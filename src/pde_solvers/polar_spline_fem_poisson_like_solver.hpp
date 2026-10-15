@@ -443,7 +443,7 @@ public:
                                                                        theta_thread_index);
                                 sum += rhs(ddc::coordinate(idx_quad))
                                        * detail_poisson::get_polar_bspline_vals_and_derivs<
-                                               false>(bspline_stash, idx_quad, idx)
+                                               false>(idx_quad, idx)
                                        * int_volume(idx_quad);
                             },
                             teamSum);
