@@ -25,6 +25,11 @@
 
 
 
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| struct | [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md) &lt;typename QDimRMesh, typename QDimThetaMesh, typename [**BSplinesR**](structBSplinesR.md), typename [**BSplinesTheta**](structBSplinesTheta.md)&gt;<br>_The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._  |
 
 
 
@@ -51,8 +56,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, [**DVector**](classTensor.md)&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (double & val, Coord&lt; typename [**PolarBSplinesRTheta::R**](classPolarBSplines.md#typedef-r), typename [**PolarBSplinesRTheta::Theta**](classPolarBSplines.md#typedef-theta) &gt; coord, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivative of the specified polar bspline at the specified quadrature point._  |
+|  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, std::tuple&lt; double, [**DVector**](classTensor.md)&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (IdxQuad idx\_quad, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; start\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; end\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; start\_knot\_theta, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; end\_knot\_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the quadrature range between a provided set of knots._  |
+|  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_support\_quadrature**](#function-get_support_quadrature) (Idx&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the range of quadrature points in the support of a tensor product B-spline._  |
 |  KOKKOS\_FUNCTION Idx&lt; DDom &gt; | [**mod\_add**](#function-mod_add) (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx\_step, IdxRange&lt; DDom &gt; idx\_range) <br> |
 |  KOKKOS\_FUNCTION IdxStep&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; | [**theta\_mod**](#function-theta_mod) (IdxStep&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxType | [**theta\_mod**](#function-theta_mod) (IdxType idx) <br>_Calculates the index which is inside the poloidal domain using the periodicity properties._  |
@@ -91,19 +97,18 @@
 
 ### function get\_polar\_bspline\_vals\_and\_derivs 
 
-_Get the value and derivative of the specified polar bspline at the specified quadrature point._ 
+_Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point._ 
 ```C++
-template<typename PolarBSplinesRTheta, bool calculate_derivs>
-KOKKOS_FUNCTION std::conditional_t< calculate_derivs, DVector < typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual >, void > detail_poisson::get_polar_bspline_vals_and_derivs (
-    double & val,
-    Coord< typename PolarBSplinesRTheta::R , typename PolarBSplinesRTheta::Theta > coord,
+template<bool calculate_derivs, class PolarBSplinesRTheta, class IdxQuad>
+KOKKOS_FUNCTION std::conditional_t< calculate_derivs, std::tuple< double, DVector < typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual > >, double > detail_poisson::get_polar_bspline_vals_and_derivs (
+    IdxQuad idx_quad,
     Idx< PolarBSplinesRTheta > idx
 ) 
 ```
 
 
 
-This method calculates the value and the derivatives of polar bsplines. It is templated by calculate\_derivs to avoid code duplication between get\_polar\_bspline\_vals\_and\_derivs and get\_polar\_bspline\_vals. The calling method should not need to use the template parameter.
+The polar bsplines which cover the singular point are linear combinations of tensor product bsplines so they are evaluated using PolarBSplines::eval\_basis\_and\_n\_derivs. The polar bsplines which do not cover the singular point should be passed as a 2D index (see the overload below).
 
 
 
@@ -111,23 +116,21 @@ This method calculates the value and the derivatives of polar bsplines. It is te
 **Template parameters:**
 
 
-* [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) The Polar B-Splines to be used. 
-* `calculate_derivs` Returns the derivatives at the coordinate if true. If false, only the value is calculated.
+* `calculate_derivs` If true, the value and the derivatives are calculated. If false, only the value is calculated.
 
 
 
 **Parameters:**
 
 
-* `val` The value of the specified polar bspline at the specified point. 
-* `coord` The coordinate where the value of the polar bspline should be calculated. 
-* `idx` The polar bspline of interest. 
+* `idx_quad` The quadrature point where the polar bspline should be evaluated. 
+* `idx` The index of a polar bspline which covers the singular point. 
 
 
 
 **Returns:**
 
-The derivative of the polar bspline (only returned if calculate\_derivs is true). 
+The value of the polar bspline if calculate\_derivs is false. Otherwise a tuple containing the value and the derivatives of the polar bspline. 
 
 
 
@@ -155,7 +158,7 @@ KOKKOS_FUNCTION IdxRange< QDimRMesh, QDimThetaMesh > detail_poisson::get_quadrat
 
 
 
-Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.
+Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. The poloidal index of the front of the returned range is always inside the domain. However, in order to return a contiguous range, the result may include poloidal indices beyond the end of the domain. A modulo operator should be applied before using the indices.
 
 
 
@@ -184,6 +187,56 @@ Compute the range of quadrature points which are found between a set of knots in
 **Returns:**
 
 The range of quadrature points in the specified domain. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_support\_quadrature 
+
+_Compute the range of quadrature points in the support of a tensor product B-spline._ 
+```C++
+template<typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta>
+KOKKOS_FUNCTION IdxRange< QDimRMesh, QDimThetaMesh > detail_poisson::get_support_quadrature (
+    Idx< BSplinesR , BSplinesTheta > idx,
+    Idx< QDimRMesh, QDimThetaMesh > idx_quad_front
+) 
+```
+
+
+
+In order to return a contiguous range the result may include poloidal indices which are outside the domain. A modulo operator should be applied before using the indices.
+
+
+
+
+**Template parameters:**
+
+
+* `QDimRMesh` [**Quadrature**](classQuadrature.md) mesh in radial direction. 
+* `QDimThetaMesh` [**Quadrature**](classQuadrature.md) mesh in poloidal direction. 
+* [**BSplinesR**](structBSplinesR.md) Splines in radial direction. 
+* [**BSplinesTheta**](structBSplinesTheta.md) Splines in poloidal direction.
+
+
+
+**Parameters:**
+
+
+* `idx` The 2D index of the tensor product B-spline. 
+* `idx_quad_front` The first index of the index range of the quadrature points. 
+
+
+
+**Returns:**
+
+The range of quadrature points in the support of the B-spline. 
 
 
 

@@ -573,6 +573,7 @@
 <p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a> <strong>&gt;</strong> <a href="polar__spline__fem__poisson__like__assembler_8hpp.html"><strong>polar_spline_fem_poisson_like_assembler.hpp</strong></a></p>
 <p><a href="polar__spline__fem__poisson__like__assembler_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
+<li><code>#include &lt;tuple&gt;</code></li>
 <li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
 <li><code>#include "coord_transformation_tools.hpp"</code></li>
 <li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
@@ -583,6 +584,7 @@
 <li><code>#include "metric_tensor_evaluator.hpp"</code></li>
 <li><code>#include "polar_spline_evaluator.hpp"</code></li>
 <li><code>#include "quadrature_coeffs_nd.hpp"</code></li>
+<li><code>#include "vector_field.hpp"</code></li>
 <li><code>#include "view.hpp"</code></li>
 <li><code>#include "volume_quadrature_nd.hpp"</code></li>
 </ul>
@@ -617,6 +619,10 @@
 <tr>
 <td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.html"><strong>InternalBatchDim</strong></a> <br><em>The tag for the batch dimension for the equation. This is public due to Cuda.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>TensorBSplineStash</strong></a> &lt;typename QDimRMesh, typename QDimThetaMesh, typename <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, typename <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>&gt;<br><em>The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points.</em></td>
 </tr>
 </tbody>
 </table>

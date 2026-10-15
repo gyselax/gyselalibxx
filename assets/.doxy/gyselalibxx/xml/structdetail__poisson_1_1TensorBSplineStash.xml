@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structdetail__poisson_1_1TensorBSplineStash" kind="struct" language="C++" prot="public">
+    <compoundname>detail_poisson::TensorBSplineStash</compoundname>
+    <includes refid="polar__spline__fem__poisson__like__assembler_8hpp" local="no">polar_spline_fem_poisson_like_assembler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename QDimRMesh</type>
+      </param>
+      <param>
+        <type>typename QDimThetaMesh</type>
+      </param>
+      <param>
+        <type>typename <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></type>
+      </param>
+      <param>
+        <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structdetail__poisson_1_1TensorBSplineStash_1af50f8643368afa0c1565bd33d90497a3" prot="private" static="no">
+        <type>typename BSplinesR::continuous_dimension_type</type>
+        <definition>using detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::R =  typename BSplinesR::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>R</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::R</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail__poisson_1_1TensorBSplineStash_1a67d3b2ab4632c17f6b5222d578b8c414" prot="private" static="no">
+        <type>typename BSplinesTheta::continuous_dimension_type</type>
+        <definition>using detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::Theta =  typename BSplinesTheta::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>Theta</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::Theta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail__poisson_1_1TensorBSplineStash_1a0e25aec87d3bf8bebd7c7f52a7194cc2" prot="private" static="no">
+        <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
+        <definition>using detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::R_cov =  typename R::Dual</definition>
+        <argsstring></argsstring>
+        <name>R_cov</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::R_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail__poisson_1_1TensorBSplineStash_1a1bd482d6486356dd0ab4f89fc9c5e9d0" prot="private" static="no">
+        <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
+        <definition>using detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::Theta_cov =  typename Theta::Dual</definition>
+        <argsstring></argsstring>
+        <name>Theta_cov</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::Theta_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="105" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structdetail__poisson_1_1TensorBSplineStash_1a53bda5764c8d1a0e57051147a8babeae" prot="public" static="no" mutable="no">
+        <type>DConstField&lt; IdxRange&lt; QDimRMesh, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, ddc::Deriv&lt; <ref refid="structR" kindref="compound">R</ref> &gt; &gt; &gt;</type>
+        <definition>DConstField&lt;IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt; &gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::vals_r</definition>
+        <argsstring></argsstring>
+        <name>vals_r</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::vals_r</qualifiedname>
+        <briefdescription>
+<para>The values (derivative order 0) and derivatives (derivative order 1) of the radial B-splines. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="109" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdetail__poisson_1_1TensorBSplineStash_1a4c088cdc6107c92620086fd733a65919" prot="public" static="no" mutable="no">
+        <type>DConstField&lt; IdxRange&lt; QDimThetaMesh, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, ddc::Deriv&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt; &gt;</type>
+        <definition>DConstField&lt;IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt; &gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::vals_theta</definition>
+        <argsstring></argsstring>
+        <name>vals_theta</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::vals_theta</qualifiedname>
+        <briefdescription>
+<para>The values (derivative order 0) and derivatives (derivative order 1) of the poloidal B-splines. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="111" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdetail__poisson_1_1TensorBSplineStash_1a6286e08bae74605db0a844c0cb1bc094" prot="public" static="no" mutable="no">
+        <type>ConstField&lt; Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;, IdxRange&lt; QDimRMesh &gt; &gt;</type>
+        <definition>ConstField&lt;Idx&lt;BSplinesR&gt;, IdxRange&lt;QDimRMesh&gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::first_basis_r</definition>
+        <argsstring></argsstring>
+        <name>first_basis_r</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::first_basis_r</qualifiedname>
+        <briefdescription>
+<para>The first non-zero radial B-spline at each radial quadrature point. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="113" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdetail__poisson_1_1TensorBSplineStash_1a1e97744c832726d50832560e289e5502" prot="public" static="no" mutable="no">
+        <type>ConstField&lt; Idx&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;, IdxRange&lt; QDimThetaMesh &gt; &gt;</type>
+        <definition>ConstField&lt;Idx&lt;BSplinesTheta&gt;, IdxRange&lt;QDimThetaMesh&gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::first_basis_theta</definition>
+        <argsstring></argsstring>
+        <name>first_basis_theta</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::first_basis_theta</qualifiedname>
+        <briefdescription>
+<para>The first non-zero poloidal B-spline at each poloidal quadrature point. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="115" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structdetail__poisson_1_1TensorBSplineStash_1a48e9525db4964af372c7bd20f09a6b0b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION std::tuple&lt; double, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="structTheta__cov" kindref="compound">Theta_cov</ref> &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R_cov, Theta_cov &gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::vals_and_derivs</definition>
+        <argsstring>(Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, Idx&lt; BSplinesR, BSplinesTheta &gt; idx) const</argsstring>
+        <name>vals_and_derivs</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::vals_and_derivs</qualifiedname>
+        <param>
+          <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+          <declname>idx_quad</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the value and the derivatives of a tensor product B-spline at a quadrature point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the quadrature point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 2D index of the tensor product B-spline. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value and derivatives of the B-spline at the quadrature point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="124" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="124" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="structdetail__poisson_1_1TensorBSplineStash_1a22db8c1da1c6c1f71d5b527c14c385af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::vals</definition>
+        <argsstring>(Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, Idx&lt; BSplinesR, BSplinesTheta &gt; idx) const</argsstring>
+        <name>vals</name>
+        <qualifiedname>detail_poisson::TensorBSplineStash::vals</qualifiedname>
+        <param>
+          <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+          <declname>idx_quad</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the value of a tensor product B-spline at a quadrature point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 2D index of the tensor product B-spline. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the quadrature point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of the B-spline at the quadrature point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="153" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="153" bodyend="164"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The tensor product B-splines and the quadrature grid both have a tensor product structure. The value of a tensor product B-spline at a quadrature point can therefore be computed from the values of the 1D B-splines at the 1D quadrature points. The memory required to store these values is O(N_r + N_theta).</para>
+<para>The B-spline index stored in the stash is the offset from the first non-zero B-spline at the quadrature point.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QDimRMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QDimThetaMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in poloidal direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in poloidal direction. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="99" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="100" bodyend="165"/>
+    <listofallmembers>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a6286e08bae74605db0a844c0cb1bc094" prot="public" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>first_basis_r</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a1e97744c832726d50832560e289e5502" prot="public" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>first_basis_theta</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1af50f8643368afa0c1565bd33d90497a3" prot="private" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>R</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a0e25aec87d3bf8bebd7c7f52a7194cc2" prot="private" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>R_cov</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a67d3b2ab4632c17f6b5222d578b8c414" prot="private" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>Theta</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a1bd482d6486356dd0ab4f89fc9c5e9d0" prot="private" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>Theta_cov</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a22db8c1da1c6c1f71d5b527c14c385af" prot="public" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>vals</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a48e9525db4964af372c7bd20f09a6b0b" prot="public" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>vals_and_derivs</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a53bda5764c8d1a0e57051147a8babeae" prot="public" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>vals_r</name></member>
+      <member refid="structdetail__poisson_1_1TensorBSplineStash_1a4c088cdc6107c92620086fd733a65919" prot="public" virt="non-virtual"><scope>detail_poisson::TensorBSplineStash</scope><name>vals_theta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

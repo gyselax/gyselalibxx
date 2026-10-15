@@ -182,6 +182,7 @@
 * **factorise** ([**Matrix**](classMatrix.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **factorise\_method** ([**Matrix**](classMatrix.md), [**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Dense**](classMatrix__Dense.md), [**Matrix\_PDS\_Tridiag**](classMatrix__PDS__Tridiag.md))
 * **full\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
+* **fill\_test\_weights** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **fill\_in\_cross\_deriv** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
 * **fill\_in\_deriv1** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
 * **fill\_in\_deriv2** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
@@ -267,7 +268,8 @@
 * **get\_singular\_subset** ([**PolarBSplines**](classPolarBSplines.md))
 * **get\_tensor\_product\_subset** ([**PolarBSplines**](classPolarBSplines.md))
 * **get\_matrix\_stencil\_element** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
-* **get\_polar\_bspline\_vals** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **get\_tensor\_bspline\_stash** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **get\_test\_weights** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **get\_2d\_polar\_mapping** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **get\_slice** ([**VectorField**](classVectorField.md))
 * **get\_domain** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
@@ -465,6 +467,7 @@
 * **set\_and\_check\_radii** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **singular\_idx\_range** ([**PolarBSplines**](classPolarBSplines.md))
 * **setup\_sparse\_matrix** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **stash\_basis\_eval** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **SingleModePerturbInitialisation** ([**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))
 * **Spline1DPartialDerivative** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md))
 * **Spline1DPartialDerivativeCreator** ([**Spline1DPartialDerivativeCreator**](classSpline1DPartialDerivativeCreator.md))
@@ -510,11 +513,8 @@
 * **VectorFieldMem** ([**VectorFieldMem**](classVectorFieldMem.md))
 * **VortexMergerDensitySolution** ([**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md))
 * **VortexMergerEquilibria** ([**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
-
-
-## w
-
-* **weak\_integral\_element** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **vals** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+* **vals\_and\_derivs** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
 
 
 ## ~

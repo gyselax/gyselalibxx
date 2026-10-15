@@ -331,6 +331,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md) 
     * **struct** [**is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md) 
 * **namespace** [**detail\_poisson**](namespacedetail__poisson.md)     
+    * **struct** [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md) _The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._     
 * **namespace** [**equilibrium**](namespaceequilibrium.md)     
 * **namespace** [**gko**](namespacegko.md) 
 * **namespace** [**gslx**](namespacegslx.md)     

@@ -605,6 +605,10 @@
 <td style="text-align: left;"><a href="#typedef-r"><strong>R</strong></a>  <br><em>The radial dimension.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef <a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>detail_poisson::TensorBSplineStash</strong></a>&lt; QDimRMesh, QDimThetaMesh, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a>  <br><em>The values and derivatives of the 1D B-splines at the quadrature points.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename GridTheta::continuous_dimension_type</td>
 <td style="text-align: left;"><a href="#typedef-theta"><strong>Theta</strong></a>  <br><em>The poloidal dimension.</em></td>
 </tr>
@@ -648,6 +652,10 @@
 <td style="text-align: left;"><a href="#function-compute_tensor_tensor_elements"><strong>compute_tensor_tensor_elements</strong></a> (CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, Mapping const &amp; mapping, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr) <br><em>Computes the matrix elements corresponding to the inner products of tensor basis functions and tensor basis functions.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;"><a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a></td>
+<td style="text-align: left;"><a href="#function-get_tensor_bspline_stash"><strong>get_tensor_bspline_stash</strong></a> () const<br><em>Get the TensorBSplineStash of the values and derivatives of the 1D B-splines at the quadrature points.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-init_nnz_per_line"><strong>init_nnz_per_line</strong></a> (Kokkos::View&lt; int *, Kokkos::LayoutRight &gt; nnz_per_row) const<br><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></td>
 </tr>
@@ -671,16 +679,24 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">KOKKOS_FUNCTION void</td>
+<td style="text-align: left;"><a href="#function-fill_test_weights"><strong>fill_test_weights</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, QuadField test_mass, <a href="classVectorField.html"><strong>DVectorField</strong></a>&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a> &gt; &gt; test_stiffness, IdxBSRTheta idx_test, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, Mapping const &amp; mapping, IdxRangeQuadratureRTheta const &amp; full_quad_idx_range, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_mass_weight and test_stiffness_weight at every quadrature point in the support of a test function and saves them in team scratch memory.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-get_matrix_stencil_element"><strong>get_matrix_stencil_element</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, IdxBSRTheta idx_test, IdxBSRTheta idx_trial, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, Mapping const &amp; mapping, IdxRangeQuadratureRTheta const &amp; full_quad_idx_range, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume) <br><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em></td>
+<td style="text-align: left;"><a href="#function-get_matrix_stencil_element"><strong>get_matrix_stencil_element</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, IdxBSRTheta idx_test, IdxBSRTheta idx_trial, QuadField test_mass, <a href="classVectorField.html"><strong>DVectorField</strong></a>&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a> &gt; &gt; test_stiffness, IdxRangeQuadratureRTheta const &amp; full_quad_idx_range, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-get_test_weights"><strong>get_test_weights</strong></a> (IdxTestType idx_test, IdxQuadratureRTheta idx_quad, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, Mapping const &amp; mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-stash_basis_eval"><strong>stash_basis_eval</strong></a> (DField&lt; IdxRange&lt; QDimMesh, BSplines, DerivDim &gt; &gt; basis_vals, Field&lt; Idx&lt; BSplines &gt;, IdxRange&lt; QDimMesh &gt; &gt; first_basis) <br><em>Fill the stash with the values and derivatives of the non-zero 1D B-splines at the 1D quadrature points.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION IdxBSPolar</td>
 <td style="text-align: left;"><a href="#function-to_polar"><strong>to_polar</strong></a> (IdxBSRTheta idx) <br><em>Convert a 2D (r,theta) bspline index into a polar bspline index.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-weak_integral_element"><strong>weak_integral_element</strong></a> (IdxBSPolar idx_test, IdxBSPolar idx_trial, IdxQuadratureRTheta idx_quad, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, Mapping const &amp; mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume) <br><em>Computes a quadrature summand for computing the integral corresponding to the inner product.</em></td>
 </tr>
 </tbody>
 </table>
@@ -701,6 +717,12 @@ in the 5D GYSELA Code". December 2022.) </p>
 <h3 id="typedef-r">typedef R</h3>
 <p><em>The radial dimension.</em> </p>
 <pre><code class="language-C++">using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::R =  typename GridR::continuous_dimension_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-tensorbsplinestash">typedef TensorBSplineStash</h3>
+<p><em>The values and derivatives of the 1D B-splines at the quadrature points.</em> </p>
+<pre><code class="language-C++">using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson:: TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;;
 </code></pre>
 <hr>
 
@@ -833,6 +855,14 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_tensor_tensor_elements (
 </ul>
 <hr>
 
+<h3 id="function-get_tensor_bspline_stash">function get_tensor_bspline_stash</h3>
+<p><em>Get the TensorBSplineStash of the values and derivatives of the 1D B-splines at the quadrature points.</em> </p>
+<pre><code class="language-C++">inline TensorBSplineStash PolarSplineFEMPoissonLikeAssembler::get_tensor_bspline_stash () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The stashed values of the 1D B-splines. </p>
+<hr>
+
 <h3 id="function-init_nnz_per_line">function init_nnz_per_line</h3>
 <p><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></p>
 <pre><code class="language-C++">inline void PolarSplineFEMPoissonLikeAssembler::init_nnz_per_line (
@@ -896,33 +926,112 @@ inline void PolarSplineFEMPoissonLikeAssembler::operator() (
 </ul>
 <hr>
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
-<h3 id="function-get_matrix_stencil_element">function get_matrix_stencil_element</h3>
-<p><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em> </p>
+<h3 id="function-fill_test_weights">function fill_test_weights</h3>
+<p><em>Computes the test_mass_weight and test_stiffness_weight at every quadrature point in the support of a test function and saves them in team scratch memory.</em> </p>
 <pre><code class="language-C++">template&lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
-static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeAssembler::get_matrix_stencil_element (
+static inline KOKKOS_FUNCTION void PolarSplineFEMPoissonLikeAssembler::fill_test_weights (
     const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team,
+    QuadField test_mass,
+    DVectorField &lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; R , Theta &gt; &gt; test_stiffness,
     IdxBSRTheta idx_test,
-    IdxBSRTheta idx_trial,
     CoeffAlpha const &amp; coeff_alpha,
     CoeffBeta const &amp; coeff_beta,
     Mapping const &amp; mapping,
     IdxRangeQuadratureRTheta const &amp; full_quad_idx_range,
-    DField&lt; IdxRangeQuadratureRTheta &gt; int_volume
+    DField&lt; IdxRangeQuadratureRTheta &gt; int_volume,
+    TensorBSplineStash const &amp; bspline_stash
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>team</code> The team of threads from which this function is called. </li>
-<li><code>idx_test</code> The index for polar B-spline in the test space. </li>
-<li><code>idx_trial</code> The index for polar B-spline in the trial space. </li>
+<li><code>test_mass</code> The field where test_mass_weight is saved. Its index range is the range of quadrature points in the support of the test B-spline (see detail_poisson::get_support_quadrature). </li>
+<li><code>test_stiffness</code> The field where test_stiffness_weight is saved. It is defined on the same index range as test_mass. </li>
+<li><code>idx_test</code> The 2D index of the test B-spline. </li>
 <li><code>coeff_alpha</code> A callable with signature <code>double operator()(CoordRTheta)</code> returning <span class="arithmatex">\(\alpha\)</span>. </li>
 <li><code>coeff_beta</code> A callable with signature <code>double operator()(CoordRTheta)</code> returning <span class="arithmatex">\(\beta\)</span>. </li>
 <li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>full_quad_idx_range</code> The index range of all the quadrature points. </li>
-<li><code>int_volume</code> The field describing the quadrature coefficients including the Jacobian multiplication factor responsible for ensuring the correct volume for the integral. </li>
+<li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
+<li><code>bspline_stash</code> The values and derivatives of the 1D B-splines at the quadrature points. </li>
+</ul>
+<hr>
+
+<h3 id="function-get_matrix_stencil_element">function get_matrix_stencil_element</h3>
+<p><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em> </p>
+<pre><code class="language-C++">static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeAssembler::get_matrix_stencil_element (
+    const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team,
+    IdxBSRTheta idx_test,
+    IdxBSRTheta idx_trial,
+    QuadField test_mass,
+    DVectorField &lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; R , Theta &gt; &gt; test_stiffness,
+    IdxRangeQuadratureRTheta const &amp; full_quad_idx_range,
+    TensorBSplineStash const &amp; bspline_stash
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>team</code> The team of threads from which this function is called. </li>
+<li><code>idx_test</code> The 2D index of the tensor product B-spline in the test space. </li>
+<li><code>idx_trial</code> The 2D index of the tensor product B-spline in the trial space. </li>
+<li><code>test_mass</code> The test_mass_weight at the quadrature points in the support of the test B-spline (see fill_test_weights). </li>
+<li><code>test_stiffness</code> The test_stiffness_weight at the quadrature points in the support of the test B-spline (see fill_test_weights). </li>
+<li><code>full_quad_idx_range</code> The index range of all the quadrature points. </li>
+<li><code>bspline_stash</code> The values and derivatives of the 1D B-splines at the quadrature points. </li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The value of the matrix element. </p>
+<hr>
+
+<h3 id="function-get_test_weights">function get_test_weights</h3>
+<p><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em> </p>
+<pre><code class="language-C++">template&lt;class CoeffAlpha, class CoeffBeta, class Mapping, class IdxTestType&gt;
+static inline KOKKOS_FUNCTION std::tuple&lt; double, DVector &lt; R , Theta &gt; &gt; PolarSplineFEMPoissonLikeAssembler::get_test_weights (
+    IdxTestType idx_test,
+    IdxQuadratureRTheta idx_quad,
+    CoeffAlpha const &amp; coeff_alpha,
+    CoeffBeta const &amp; coeff_beta,
+    Mapping const &amp; mapping,
+    DField&lt; IdxRangeQuadratureRTheta &gt; int_volume,
+    TensorBSplineStash const &amp; bspline_stash
+) 
+</code></pre>
+<p>The weak integral element is <span class="arithmatex">\(w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j)\)</span> where <span class="arithmatex">\(w\)</span> is the integral volume, <span class="arithmatex">\(B_i\)</span> is the test function and <span class="arithmatex">\(B_j\)</span> is the trial function. This function computes <span class="arithmatex">\(w \alpha G^{-1} \nabla B_i\)</span> and <span class="arithmatex">\(w \beta B_i\)</span> so that the weak integral element can be computed from the values and derivatives of the trial function alone.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_test</code> The index of the test basis spline. </li>
+<li><code>idx_quad</code> The index for the point in the quadrature scheme. </li>
+<li><code>coeff_alpha</code> A callable with signature <code>double operator()(CoordRTheta)</code> returning <span class="arithmatex">\(\alpha\)</span>. </li>
+<li><code>coeff_beta</code> A callable with signature <code>double operator()(CoordRTheta)</code> returning <span class="arithmatex">\(\beta\)</span>. </li>
+<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
+<li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
+<li><code>bspline_stash</code> The values and derivatives of the 1D B-splines at the quadrature points. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A tuple containing
+* test_mass_weight, the quantity <span class="arithmatex">\(w \beta B_i\)</span> which multiplies the value of the trial function,
+* test_stiffness_weight, the quantity <span class="arithmatex">\(w \alpha G^{-1} \nabla B_i\)</span> which multiplies the gradient of the trial function. </p>
+<hr>
+
+<h3 id="function-stash_basis_eval">function stash_basis_eval</h3>
+<p><em>Fill the stash with the values and derivatives of the non-zero 1D B-splines at the 1D quadrature points.</em> </p>
+<pre><code class="language-C++">template&lt;class QDimMesh, class BSplines, class DerivDim&gt;
+static inline void PolarSplineFEMPoissonLikeAssembler::stash_basis_eval (
+    DField&lt; IdxRange&lt; QDimMesh, BSplines, DerivDim &gt; &gt; basis_vals,
+    Field&lt; Idx&lt; BSplines &gt;, IdxRange&lt; QDimMesh &gt; &gt; first_basis
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>basis_vals</code> The values and derivatives of the non-zero 1D B-splines. The B-spline index is the offset from the first non-zero B-spline. </li>
+<li><code>first_basis</code> The first non-zero B-spline at each quadrature point.</li>
+</ul>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>QDimMesh</code> The 1D quadrature grid. </li>
+<li><code>BSplines</code> The 1D B-splines. </li>
+<li><code>DerivDim</code> The derivative dimension. </li>
+</ul>
 <hr>
 
 <h3 id="function-to_polar">function to_polar</h3>
@@ -937,34 +1046,6 @@ static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeAssembler::get_mat
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The polar bspline index. </p>
-<hr>
-
-<h3 id="function-weak_integral_element">function weak_integral_element</h3>
-<p><em>Computes a quadrature summand for computing the integral corresponding to the inner product.</em> </p>
-<pre><code class="language-C++">template&lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
-static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeAssembler::weak_integral_element (
-    IdxBSPolar idx_test,
-    IdxBSPolar idx_trial,
-    IdxQuadratureRTheta idx_quad,
-    CoeffAlpha const &amp; coeff_alpha,
-    CoeffBeta const &amp; coeff_beta,
-    Mapping const &amp; mapping,
-    DField&lt; IdxRangeQuadratureRTheta &gt; int_volume
-) 
-</code></pre>
-<p>Inner product of the test and trial spline is computed using a quadrature. This function returns one summand of the quadrature for the quadrature point given by the indices.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_test</code> The index of the test basis spline. </li>
-<li><code>idx_trial</code> The index of the trial basis spline. </li>
-<li><code>idx_quad</code> The index for the point in the quadrature scheme. </li>
-<li><code>coeff_alpha</code> A callable with signature <code>double operator()(CoordRTheta)</code> returning <span class="arithmatex">\(\alpha\)</span>. </li>
-<li><code>coeff_beta</code> A callable with signature <code>double operator()(CoordRTheta)</code> returning <span class="arithmatex">\(\beta\)</span>. </li>
-<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
-<li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>Value of the quadrature summand </p>
 <hr>
 
 <hr>

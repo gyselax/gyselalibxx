@@ -571,6 +571,21 @@
               
                 <div><h1 id="namespace-detail_poisson">Namespace detail_poisson</h1>
 <p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespacedetail__poisson.html"><strong>detail_poisson</strong></a></p>
+<h2 id="classes">Classes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>TensorBSplineStash</strong></a> &lt;typename QDimRMesh, typename QDimThetaMesh, typename <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, typename <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>&gt;<br><em>The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points.</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
@@ -581,12 +596,16 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, <a href="classTensor.html"><strong>DVector</strong></a>&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt;</td>
-<td style="text-align: left;"><a href="#function-get_polar_bspline_vals_and_derivs"><strong>get_polar_bspline_vals_and_derivs</strong></a> (double &amp; val, Coord&lt; typename <a href="classPolarBSplines.html#typedef-r"><strong>PolarBSplinesRTheta::R</strong></a>, typename <a href="classPolarBSplines.html#typedef-theta"><strong>PolarBSplinesRTheta::Theta</strong></a> &gt; coord, Idx&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt; idx) <br><em>Get the value and derivative of the specified polar bspline at the specified quadrature point.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, <a href="classTensor.html"><strong>DVector</strong></a>&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt;</td>
+<td style="text-align: left;"><a href="#function-get_polar_bspline_vals_and_derivs"><strong>get_polar_bspline_vals_and_derivs</strong></a> (IdxQuad idx_quad, Idx&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt; idx) <br><em>Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</td>
 <td style="text-align: left;"><a href="#function-get_quadrature_between_knots"><strong>get_quadrature_between_knots</strong></a> (Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> &gt; &gt; start_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> &gt; &gt; end_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; &gt; start_knot_theta, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; &gt; end_knot_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front) <br><em>Compute the quadrature range between a provided set of knots.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</td>
+<td style="text-align: left;"><a href="#function-get_support_quadrature"><strong>get_support_quadrature</strong></a> (Idx&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front) <br><em>Compute the range of quadrature points in the support of a tensor product B-spline.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION Idx&lt; DDom &gt;</td>
@@ -604,28 +623,25 @@
 </table>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-get_polar_bspline_vals_and_derivs">function get_polar_bspline_vals_and_derivs</h3>
-<p><em>Get the value and derivative of the specified polar bspline at the specified quadrature point.</em> </p>
-<pre><code class="language-C++">template&lt;typename PolarBSplinesRTheta, bool calculate_derivs&gt;
-KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, DVector &lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt; detail_poisson::get_polar_bspline_vals_and_derivs (
-    double &amp; val,
-    Coord&lt; typename PolarBSplinesRTheta::R , typename PolarBSplinesRTheta::Theta &gt; coord,
+<p><em>Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point.</em> </p>
+<pre><code class="language-C++">template&lt;bool calculate_derivs, class PolarBSplinesRTheta, class IdxQuad&gt;
+KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector &lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; detail_poisson::get_polar_bspline_vals_and_derivs (
+    IdxQuad idx_quad,
     Idx&lt; PolarBSplinesRTheta &gt; idx
 ) 
 </code></pre>
-<p>This method calculates the value and the derivatives of polar bsplines. It is templated by calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and get_polar_bspline_vals. The calling method should not need to use the template parameter.</p>
+<p>The polar bsplines which cover the singular point are linear combinations of tensor product bsplines so they are evaluated using PolarBSplines::eval_basis_and_n_derivs. The polar bsplines which do not cover the singular point should be passed as a 2D index (see the overload below).</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> The Polar B-Splines to be used. </li>
-<li><code>calculate_derivs</code> Returns the derivatives at the coordinate if true. If false, only the value is calculated.</li>
+<li><code>calculate_derivs</code> If true, the value and the derivatives are calculated. If false, only the value is calculated.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>val</code> The value of the specified polar bspline at the specified point. </li>
-<li><code>coord</code> The coordinate where the value of the polar bspline should be calculated. </li>
-<li><code>idx</code> The polar bspline of interest. </li>
+<li><code>idx_quad</code> The quadrature point where the polar bspline should be evaluated. </li>
+<li><code>idx</code> The index of a polar bspline which covers the singular point. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The derivative of the polar bspline (only returned if calculate_derivs is true). </p>
+<p>The value of the polar bspline if calculate_derivs is false. Otherwise a tuple containing the value and the derivatives of the polar bspline. </p>
 <hr>
 
 <h3 id="function-get_quadrature_between_knots">function get_quadrature_between_knots</h3>
@@ -639,7 +655,7 @@ KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_q
     Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front
 ) 
 </code></pre>
-<p>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.</p>
+<p>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. The poloidal index of the front of the returned range is always inside the domain. However, in order to return a contiguous range, the result may include poloidal indices beyond the end of the domain. A modulo operator should be applied before using the indices.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>QDimRMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in radial direction. </li>
@@ -657,6 +673,31 @@ KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_q
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The range of quadrature points in the specified domain. </p>
+<hr>
+
+<h3 id="function-get_support_quadrature">function get_support_quadrature</h3>
+<p><em>Compute the range of quadrature points in the support of a tensor product B-spline.</em> </p>
+<pre><code class="language-C++">template&lt;typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta&gt;
+KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_support_quadrature (
+    Idx&lt; BSplinesR , BSplinesTheta &gt; idx,
+    Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front
+) 
+</code></pre>
+<p>In order to return a contiguous range the result may include poloidal indices which are outside the domain. A modulo operator should be applied before using the indices.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>QDimRMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in radial direction. </li>
+<li><code>QDimThetaMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in poloidal direction. </li>
+<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> Splines in radial direction. </li>
+<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> Splines in poloidal direction.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx</code> The 2D index of the tensor product B-spline. </li>
+<li><code>idx_quad_front</code> The first index of the index range of the quadrature points. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The range of quadrature points in the support of the B-spline. </p>
 <hr>
 
 <h3 id="function-mod_add">function mod_add</h3>

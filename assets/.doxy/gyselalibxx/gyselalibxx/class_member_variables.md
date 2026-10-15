@@ -37,6 +37,12 @@
 * **extremity** ([**Edge**](structEdge.md))
 
 
+## f
+
+* **first\_basis\_r** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+* **first\_basis\_theta** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+
+
 ## i
 
 * **internal\_fields** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
@@ -262,7 +268,11 @@
 * **m\_builder\_advection\_field** ([**PolarFootFinder**](classPolarFootFinder.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **m\_coord\_centre\_pc** ([**PolarFootFinder**](classPolarFootFinder.md))
 * **m\_outer\_bc** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
+* **m\_basis\_vals\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **m\_basis\_vals\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **m\_batch\_idx** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_first\_basis\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **m\_first\_basis\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **m\_idxrange\_bsplines\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_bsplines\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_fem\_tensor\_basis** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
@@ -270,9 +280,6 @@
 * **m\_idxrange\_quadrature\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_quadrature\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_int\_volume** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
-* **m\_n\_non\_zero\_bases\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **m\_n\_non\_zero\_bases\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **m\_n\_overlap\_cells** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_nbasis\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **m\_nbasis\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_assembler** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
@@ -280,6 +287,9 @@
 * **m\_idxrange\_fem\_non\_singular** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_quadrature\_singular** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_int\_volume\_alloc** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_n\_non\_zero\_bases\_r** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_n\_non\_zero\_bases\_theta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_n\_overlap\_cells** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_phi\_spline\_coef\_alloc** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_x\_init\_alloc** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_boltzmann\_solver** ([**PredCorr**](classPredCorr.md), [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md))
@@ -357,6 +367,11 @@
 * **same\_evaluation\_idx\_range\_types** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **s\_n\_gauss\_legendre\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **s\_n\_gauss\_legendre\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **s\_n\_non\_zero\_bases\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **s\_n\_non\_zero\_bases\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **s\_n\_overlap\_cells** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **s\_n\_quad\_support\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **s\_n\_quad\_support\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **s\_n\_elements** ([**TensorCommon**](classTensorCommon.md))
 
 
@@ -373,6 +388,8 @@
 
 ## v
 
+* **vals\_r** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+* **vals\_theta** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
 * **value** ([**tensor\_tools::is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md), [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md))
 
 

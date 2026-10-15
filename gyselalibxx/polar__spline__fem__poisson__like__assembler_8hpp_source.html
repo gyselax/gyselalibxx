@@ -575,6 +575,8 @@
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
 
+#include &lt;tuple&gt;
+
 #include &lt;ddc/ddc.hpp&gt;
 
 #include "coord_transformation_tools.hpp"
@@ -586,6 +588,7 @@
 #include "metric_tensor_evaluator.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature_coeffs_nd.hpp"
+#include "vector_field.hpp"
 #include "view.hpp"
 #include "volume_quadrature_nd.hpp"
 
@@ -630,73 +633,110 @@ KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
     assert(idx_range_theta.contains(ddc::select&lt;BSplinesTheta&gt;(idx)));
     return idx;
 }
-template &lt;typename PolarBSplinesRTheta, bool calculate_derivs = true&gt;
+
+template &lt;typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta&gt;
+struct TensorBSplineStash
+{
+private:
+    using R = typename BSplinesR::continuous_dimension_type;
+    using Theta = typename BSplinesTheta::continuous_dimension_type;
+    using R_cov = typename R::Dual;
+    using Theta_cov = typename Theta::Dual;
+
+public:
+    DConstField&lt;IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt;&gt;&gt; vals_r;
+    DConstField&lt;IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;&gt; vals_theta;
+    ConstField&lt;Idx&lt;BSplinesR&gt;, IdxRange&lt;QDimRMesh&gt;&gt; first_basis_r;
+    ConstField&lt;Idx&lt;BSplinesTheta&gt;, IdxRange&lt;QDimThetaMesh&gt;&gt; first_basis_theta;
+
+    KOKKOS_FUNCTION std::tuple&lt;double, DVector&lt;R_cov, Theta_cov&gt;&gt; vals_and_derivs(
+            Idx&lt;QDimRMesh, QDimThetaMesh&gt; idx_quad,
+            Idx&lt;BSplinesR, BSplinesTheta&gt; idx) const
+    {
+        Idx&lt;QDimRMesh&gt; idx_quad_r(idx_quad);
+        Idx&lt;QDimThetaMesh&gt; idx_quad_theta(idx_quad);
+        IdxStep&lt;BSplinesR&gt; offset_r = Idx&lt;BSplinesR&gt;(idx) - first_basis_r(idx_quad_r);
+        IdxStep&lt;BSplinesTheta&gt; offset_theta
+                = Idx&lt;BSplinesTheta&gt;(idx) - first_basis_theta(idx_quad_theta);
+        DConstField&lt;IdxRange&lt;BSplinesR, ddc::Deriv&lt;R&gt;&gt;&gt; vals_r_at_quad = vals_r[idx_quad_r];
+        DConstField&lt;IdxRange&lt;BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;&gt; vals_theta_at_quad
+                = vals_theta[idx_quad_theta];
+        const double val_r = vals_r_at_quad(offset_r, IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(0));
+        const double val_theta = vals_theta_at_quad(offset_theta, IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(0));
+        DVector&lt;R_cov, Theta_cov&gt; derivs;
+        ddcHelper::get&lt;R_cov&gt;(derivs)
+                = vals_r_at_quad(offset_r, IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(1)) * val_theta;
+        ddcHelper::get&lt;Theta_cov&gt;(derivs)
+                = val_r * vals_theta_at_quad(offset_theta, IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(1));
+        return std::tuple(val_r * val_theta, derivs);
+    }
+
+    KOKKOS_FUNCTION double vals(
+            Idx&lt;QDimRMesh, QDimThetaMesh&gt; idx_quad,
+            Idx&lt;BSplinesR, BSplinesTheta&gt; idx) const
+    {
+        Idx&lt;QDimRMesh&gt; idx_quad_r(idx_quad);
+        Idx&lt;QDimThetaMesh&gt; idx_quad_theta(idx_quad);
+        IdxStep&lt;BSplinesR&gt; offset_r = Idx&lt;BSplinesR&gt;(idx) - first_basis_r(idx_quad_r);
+        IdxStep&lt;BSplinesTheta&gt; offset_theta
+                = Idx&lt;BSplinesTheta&gt;(idx) - first_basis_theta(idx_quad_theta);
+        return vals_r[idx_quad_r](offset_r, IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(0))
+               * vals_theta[idx_quad_theta](offset_theta, IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(0));
+    }
+};
+
+template &lt;bool calculate_derivs = true, class PolarBSplinesRTheta, class IdxQuad&gt;
 KOKKOS_FUNCTION std::conditional_t&lt;
         calculate_derivs,
-        DVector&lt;typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual&gt;,
-        void&gt;
-get_polar_bspline_vals_and_derivs(
-        double&amp; val,
-        Coord&lt;typename PolarBSplinesRTheta::R, typename PolarBSplinesRTheta::Theta&gt; coord,
-        Idx&lt;PolarBSplinesRTheta&gt; idx)
+        std::tuple&lt;
+                double,
+                DVector&lt;typename PolarBSplinesRTheta::R::Dual,
+                        typename PolarBSplinesRTheta::Theta::Dual&gt;&gt;,
+        double&gt;
+get_polar_bspline_vals_and_derivs(IdxQuad idx_quad, Idx&lt;PolarBSplinesRTheta&gt; idx)
 {
     using R = PolarBSplinesRTheta::R;
     using Theta = PolarBSplinesRTheta::Theta;
-    std::array&lt;double, PolarBSplinesRTheta::n_singular_basis()&gt; singular_data;
     using BSplinesR = PolarBSplinesRTheta::BSplinesR_tag;
     using BSplinesTheta = PolarBSplinesRTheta::BSplinesTheta_tag;
+    constexpr std::size_t n_singular = PolarBSplinesRTheta::n_singular_basis();
+
+    KOKKOS_ASSERT(idx &lt; Idx&lt;PolarBSplinesRTheta&gt;(n_singular));
+
     constexpr int n_non_zero_bases_r = BSplinesR::degree() + 1;
-    constexpr int n_non_zero_bases_theta = BSplinesR::degree() + 1;
-    std::array&lt;double, n_non_zero_bases_r * n_non_zero_bases_theta&gt; data;
-    // Values of the polar basis splines around the singular point
+    constexpr int n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
+    // The maximum derivative order in each direction
+    constexpr std::size_t n_derivs = calculate_derivs ? 1 : 0;
+    constexpr std::size_t n_deriv_combinations = (n_derivs + 1) * (n_derivs + 1);
+    std::array&lt;double, n_singular * n_deriv_combinations&gt; singular_data;
+    std::array&lt;double, n_non_zero_bases_r * n_non_zero_bases_theta * n_deriv_combinations&gt; data;
+    // Values and derivatives of the polar basis splines around the singular point
     // at a given coordinate
-    DSpan1D singular_vals(singular_data.data(), PolarBSplinesRTheta::n_singular_basis());
-    // Values of the polar basis splines, that do not cover the singular point,
+    DSpan3D singular_vals(singular_data.data(), n_singular, n_derivs + 1, n_derivs + 1);
+    // Values and derivatives of the polar basis splines, that do not cover the singular point,
     // at a given coordinate
-    DSpan2D vals(data.data(), n_non_zero_bases_r, n_non_zero_bases_theta);
+    DSpan4D
+            vals(data.data(),
+                 n_non_zero_bases_r,
+                 n_non_zero_bases_theta,
+                 n_derivs + 1,
+                 n_derivs + 1);
 
-    auto&amp; polar_bspl = ddc::discrete_space&lt;PolarBSplinesRTheta&gt;();
+    Coord&lt;R, Theta&gt; coord = ddc::coordinate(idx_quad);
+    ddc::discrete_space&lt;PolarBSplinesRTheta&gt;()
+            .eval_basis_and_n_derivs(singular_vals, vals, coord, n_derivs, n_derivs);
 
-    if (idx &lt; Idx&lt;PolarBSplinesRTheta&gt;(PolarBSplinesRTheta::n_singular_basis())) {
-        IdxStep&lt;PolarBSplinesRTheta&gt; offset
-                = idx
-                  - PolarBSplinesRTheta::template singular_idx_range&lt;PolarBSplinesRTheta&gt;().front();
-        polar_bspl.eval_basis(singular_vals, vals, coord);
-        val = singular_vals[offset.value()];
-        if constexpr (calculate_derivs) {
-            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1));
-            double r_deriv = singular_vals[offset.value()];
-            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx&lt;ddc::Deriv&lt;Theta&gt;&gt;(1));
-            double theta_deriv = singular_vals[offset.value()];
-            DVector&lt;typename R::Dual, typename Theta::Dual&gt; derivs(r_deriv, theta_deriv);
-            return derivs;
-        } else {
-            return;
-        }
+    IdxStep&lt;PolarBSplinesRTheta&gt; offset
+            = idx - PolarBSplinesRTheta::template singular_idx_range&lt;PolarBSplinesRTheta&gt;().front();
+    const double val = singular_vals(offset.value(), 0, 0);
+    if constexpr (calculate_derivs) {
+        return std::
+                tuple(val,
+                      DVector&lt;typename R::Dual, typename Theta::Dual&gt;(
+                              singular_vals(offset.value(), 1, 0),
+                              singular_vals(offset.value(), 0, 1)));
     } else {
-        Idx&lt;BSplinesR, BSplinesTheta&gt; idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
-        IdxStep&lt;BSplinesR, BSplinesTheta&gt; offset
-                = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
-        IdxStep&lt;BSplinesR&gt; ir(offset);
-        IdxStep&lt;BSplinesTheta&gt; itheta(
-                detail_poisson::theta_mod&lt;BSplinesTheta&gt;(IdxStep&lt;BSplinesTheta&gt;(offset)));
-
-        assert(0 &lt;= ir);
-        assert(ir &lt; n_non_zero_bases_r);
-        assert(0 &lt;= itheta);
-        assert(itheta &lt; n_non_zero_bases_theta);
-
-        val = vals(ir, itheta);
-        if constexpr (calculate_derivs) {
-            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1));
-            double r_deriv = vals(ir, itheta);
-            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx&lt;ddc::Deriv&lt;Theta&gt;&gt;(1));
-            double theta_deriv = vals(ir, itheta);
-            DVector&lt;typename R::Dual, typename Theta::Dual&gt; derivs(r_deriv, theta_deriv);
-            return derivs;
-        } else {
-            return;
-        }
+        return val;
     }
 }
 
@@ -736,6 +776,36 @@ KOKKOS_FUNCTION IdxRange&lt;QDimRMesh, QDimThetaMesh&gt; get_quadrature_between_
     assert(q_range_theta.extents() &gt; 0);
 
     return IdxRange&lt;QDimRMesh, QDimThetaMesh&gt;(q_range_r, q_range_theta);
+}
+
+template &lt;typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta&gt;
+KOKKOS_FUNCTION IdxRange&lt;QDimRMesh, QDimThetaMesh&gt; get_support_quadrature(
+        Idx&lt;BSplinesR, BSplinesTheta&gt; idx,
+        Idx&lt;QDimRMesh, QDimThetaMesh&gt; idx_quad_front)
+{
+    using KnotsR = ddc::knot_discrete_dimension_t&lt;BSplinesR&gt;;
+    using KnotsTheta = ddc::knot_discrete_dimension_t&lt;BSplinesTheta&gt;;
+
+    const Idx&lt;BSplinesR&gt; idx_r(idx);
+    const Idx&lt;BSplinesTheta&gt; idx_theta(idx);
+
+    auto&amp; bspl_r = ddc::discrete_space&lt;BSplinesR&gt;();
+    auto&amp; bspl_theta = ddc::discrete_space&lt;BSplinesTheta&gt;();
+
+    // Find the cells on which the bspline is non-zero
+    const Idx&lt;KnotsR&gt; start_non_zero_r(
+            Kokkos::max(bspl_r.break_point_domain().front(), bspl_r.get_first_support_knot(idx_r)));
+    const Idx&lt;KnotsR&gt; end_non_zero_r(
+            Kokkos::min(bspl_r.break_point_domain().back(), bspl_r.get_last_support_knot(idx_r)));
+
+    const Idx&lt;KnotsTheta&gt; start_non_zero_theta(bspl_theta.get_first_support_knot(idx_theta));
+    const Idx&lt;KnotsTheta&gt; end_non_zero_theta(bspl_theta.get_last_support_knot(idx_theta));
+    return get_quadrature_between_knots&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;(
+            start_non_zero_r,
+            end_non_zero_r,
+            start_non_zero_theta,
+            end_non_zero_theta,
+            idx_quad_front);
 }
 
 } // namespace detail_poisson
@@ -808,18 +878,39 @@ private:
     using IdxStepQuadratureR = IdxStep&lt;QDimRMesh&gt;;
     using IdxStepQuadratureTheta = IdxStep&lt;QDimThetaMesh&gt;;
 
+    using IdxRangeBasisStashR = IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt;&gt;;
+    using IdxRangeBasisStashTheta = IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;;
+
+public:
+    using TensorBSplineStash = detail_poisson::
+            TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;;
+
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
     static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
     // The number of cells (in the radial direction) in which both types of basis splines can be found
-    static constexpr int m_n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
+    static constexpr int s_n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
 
     // Number of cells over which a radial B-splines has its support
     // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
-    static constexpr int m_n_non_zero_bases_r = BSplinesR::degree() + 1;
+    static constexpr int s_n_non_zero_bases_r = BSplinesR::degree() + 1;
 
     // Number of cells over which a poloidal B-splines has its support
-    static constexpr int m_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
+    static constexpr int s_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
+
+    // Maximum number of quadrature points in the support of a tensor product B-spline
+    static constexpr int s_n_quad_support_r = s_n_gauss_legendre_r * s_n_non_zero_bases_r;
+    static constexpr int s_n_quad_support_theta
+            = s_n_gauss_legendre_theta * s_n_non_zero_bases_theta;
+
+    using QuadField = DField&lt;IdxRangeQuadratureRTheta&gt;;
+
+    // A view on team scratch memory
+    using ScratchView = Kokkos::View&lt;
+            double*,
+            Kokkos::LayoutRight,
+            Kokkos::DefaultExecutionSpace::scratch_memory_space,
+            Kokkos::MemoryTraits&lt;Kokkos::Unmanaged&gt;&gt;;
 
     const int m_nbasis_r;
     const int m_nbasis_theta;
@@ -838,18 +929,24 @@ private:
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
-    DField&lt;IdxRangeQuadratureRTheta&gt; m_int_volume;
+    QuadField m_int_volume;
+
+    // Values and derivatives of the non-zero 1D B-splines at the 1D quadrature points
+    DFieldMem&lt;IdxRangeBasisStashR&gt; m_basis_vals_r;
+    DFieldMem&lt;IdxRangeBasisStashTheta&gt; m_basis_vals_theta;
+    FieldMem&lt;IdxBSR, IdxRangeQuadratureR&gt; m_first_basis_r;
+    FieldMem&lt;IdxBSTheta, IdxRangeQuadratureTheta&gt; m_first_basis_theta;
 
 public:
     explicit PolarSplineFEMPoissonLikeAssembler(Field&lt;double, IdxRangeQuadratureRTheta&gt; int_volume)
-        : m_nbasis_r(ddc::discrete_space&lt;BSplinesR&gt;().nbasis() - m_n_overlap_cells - 1)
+        : m_nbasis_r(ddc::discrete_space&lt;BSplinesR&gt;().nbasis() - s_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis())
         , m_matrix_size(ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().nbasis() - m_nbasis_theta)
         , m_idxrange_fem_tensor_basis(
                   ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().tensor_bspline_idx_range().remove_last(
                           IdxStepBSPolar {m_nbasis_theta}))
         , m_idxrange_bsplines_r(ddc::discrete_space&lt;BSplinesR&gt;().full_domain().remove_first(
-                  IdxStepBSR {m_n_overlap_cells}))
+                  IdxStepBSR {s_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain().take_first(
                   IdxStepBSTheta {m_nbasis_theta}))
         , m_idxrange_quadrature_r(
@@ -862,7 +959,58 @@ public:
                           s_n_gauss_legendre_theta * ddc::discrete_space&lt;BSplinesTheta&gt;().ncells()))
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_int_volume(int_volume)
+        , m_basis_vals_r(IdxRangeBasisStashR(
+                  m_idxrange_quadrature_r,
+                  ddc::discrete_space&lt;BSplinesR&gt;().full_domain().take_first(
+                          IdxStepBSR(s_n_non_zero_bases_r)),
+                  IdxRange&lt;ddc::Deriv&lt;R&gt;&gt;(Idx&lt;ddc::Deriv&lt;R&gt;&gt;(0), IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(2))))
+        , m_basis_vals_theta(IdxRangeBasisStashTheta(
+                  m_idxrange_quadrature_theta,
+                  ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain().take_first(
+                          IdxStepBSTheta(s_n_non_zero_bases_theta)),
+                  IdxRange&lt;ddc::Deriv&lt;
+                          Theta&gt;&gt;(Idx&lt;ddc::Deriv&lt;Theta&gt;&gt;(0), IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(2))))
+        , m_first_basis_r(m_idxrange_quadrature_r)
+        , m_first_basis_theta(m_idxrange_quadrature_theta)
     {
+        stash_basis_eval(get_field(m_basis_vals_r), get_field(m_first_basis_r));
+        stash_basis_eval(get_field(m_basis_vals_theta), get_field(m_first_basis_theta));
+    }
+
+    TensorBSplineStash get_tensor_bspline_stash() const
+    {
+        return TensorBSplineStash {
+                get_const_field(m_basis_vals_r),
+                get_const_field(m_basis_vals_theta),
+                get_const_field(m_first_basis_r),
+                get_const_field(m_first_basis_theta)};
+    }
+
+    template &lt;class QDimMesh, class BSplines, class DerivDim&gt;
+    static void stash_basis_eval(
+            DField&lt;IdxRange&lt;QDimMesh, BSplines, DerivDim&gt;&gt; basis_vals,
+            Field&lt;Idx&lt;BSplines&gt;, IdxRange&lt;QDimMesh&gt;&gt; first_basis)
+    {
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                get_idx_range(first_basis),
+                KOKKOS_LAMBDA(Idx&lt;QDimMesh&gt; idx_quad) {
+                    constexpr std::size_t n_non_zero = BSplines::degree() + 1;
+                    std::array&lt;double, n_non_zero * 2&gt; data;
+                    DSpan2D derivs(data.data(), n_non_zero, 2);
+                    first_basis(idx_quad) = ddc::discrete_space&lt;BSplines&gt;().eval_basis_and_n_derivs(
+                            derivs,
+                            ddc::coordinate(idx_quad),
+                            1);
+                    DField&lt;IdxRange&lt;BSplines, DerivDim&gt;&gt; basis_vals_at_quad = basis_vals[idx_quad];
+                    for (std::size_t i(0); i &lt; n_non_zero; ++i) {
+                        for (std::size_t k(0); k &lt; 2; ++k) {
+                            basis_vals_at_quad(IdxStep&lt;BSplines&gt;(i), IdxStep&lt;DerivDim&gt;(k))
+                                    = derivs(i, k);
+                        }
+                    }
+                });
     }
 
     void setup_sparse_matrix(
@@ -1149,10 +1297,11 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range&lt;PolarBSplinesRTheta&gt;();
         IdxRangeQuadratureRTheta idx_range_quad_singular(
                 m_idxrange_quadrature_r.take_first(
-                        IdxStep&lt;QDimRMesh&gt; {m_n_overlap_cells * s_n_gauss_legendre_r}),
+                        IdxStep&lt;QDimRMesh&gt; {s_n_overlap_cells * s_n_gauss_legendre_r}),
                 m_idxrange_quadrature_theta);
 
         DField&lt;IdxRangeQuadratureRTheta&gt; int_volume_proxy = m_int_volume;
+        TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
 
         const int batch_idx = m_batch_idx;
         const int n_singular = idxrange_singular.size();
@@ -1183,14 +1332,25 @@ public:
                                                                + IdxStep&lt;QDimRMesh, QDimThetaMesh&gt;(
                                                                        r_thread_index,
                                                                        theta_thread_index);
-                                sum += weak_integral_element(
+                                auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
                                         idx_test,
-                                        idx_trial,
                                         idx_quad,
                                         coeff_alpha,
                                         coeff_beta,
                                         mapping,
-                                        int_volume_proxy);
+                                        int_volume_proxy,
+                                        bspline_stash);
+
+                                auto [basis_val_trial_space, basis_derivs_trial_space]
+                                        = detail_poisson::get_polar_bspline_vals_and_derivs(
+                                                idx_quad,
+                                                idx_trial);
+
+                                // Assemble the weak integral element
+                                sum += scalar_product(
+                                               test_stiffness_weight,
+                                               basis_derivs_trial_space)
+                                       + test_mass_weight * basis_val_trial_space;
                             },
                             element);
                     const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
@@ -1222,6 +1382,7 @@ public:
                 m_idxrange_bsplines_theta);
 
         DField&lt;IdxRangeQuadratureRTheta&gt; int_volume_proxy = m_int_volume;
+        TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
@@ -1300,14 +1461,23 @@ public:
                                             -= full_quad_idx_range.template extent&lt;QDimThetaMesh&gt;();
                                 }
 
-                                sum += weak_integral_element(
+                                auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
                                         idx_test,
-                                        idx_trial_polar,
                                         idx_quad,
                                         coeff_alpha,
                                         coeff_beta,
                                         mapping,
-                                        int_volume_proxy);
+                                        int_volume_proxy,
+                                        bspline_stash);
+
+                                auto [basis_val_trial_space, basis_derivs_trial_space]
+                                        = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
+
+                                // Assemble the weak integral element
+                                sum += scalar_product(
+                                               test_stiffness_weight,
+                                               basis_derivs_trial_space)
+                                       + test_mass_weight * basis_val_trial_space;
                             },
                             element);
 
@@ -1342,6 +1512,7 @@ public:
         IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
         DField&lt;IdxRangeQuadratureRTheta&gt; int_volume_proxy = m_int_volume;
+        TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
@@ -1349,14 +1520,22 @@ public:
         const int n_singular = idxrange_singular.size();
         const std::source_location location = std::source_location::current();
 
+        // Number of quadrature points in the support of a tensor product B-spline
+        constexpr int n_quad_support = s_n_quad_support_r * s_n_quad_support_theta;
+
+        // Each team needs scratch memory to store the test weights at the quadrature points
+        // in the support of the test function.
+        Kokkos::TeamPolicy&lt;&gt;
+                policy(Kokkos::DefaultExecutionSpace(),
+                       m_idxrange_fem_tensor_basis.size(),
+                       Kokkos::AUTO);
+        policy.set_scratch_size(0, Kokkos::PerTeam(ScratchView::shmem_size(3 * n_quad_support)));
+
         // Calculate the matrix elements following a stencil
         // Teams loop over rows
         Kokkos::parallel_for(
                 location.function_name(),
-                Kokkos::TeamPolicy&lt;&gt;(
-                        Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_tensor_basis.size(),
-                        Kokkos::AUTO),
+                policy,
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team) {
                     // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
@@ -1371,6 +1550,27 @@ public:
                     int const csr_idx_first_stencil_element
                             = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
 
+                    // Calculate the test weights once for all trial b-splines
+                    const IdxRangeQuadratureRTheta idx_range_quad = detail_poisson::
+                            get_support_quadrature(idx_test, full_quad_idx_range.front());
+                    ScratchView test_weights(team.team_scratch(0), 3 * n_quad_support);
+                    QuadField test_mass(test_weights.data(), idx_range_quad);
+                    DVectorField&lt;IdxRangeQuadratureRTheta, VectorIndexSet&lt;R, Theta&gt;&gt; test_stiffness(
+                            idx_range_quad,
+                            test_weights.data() + n_quad_support,
+                            test_weights.data() + 2 * n_quad_support);
+                    fill_test_weights(
+                            team,
+                            test_mass,
+                            test_stiffness,
+                            idx_test,
+                            coeff_alpha,
+                            coeff_beta,
+                            mapping,
+                            full_quad_idx_range,
+                            int_volume_proxy,
+                            bspline_stash);
+
                     // Loop over the poloidal offset to a trial b-spline
                     for (int csr_idx = nnz_per_row_csr[row_idx] + csr_idx_first_stencil_element;
                          csr_idx &lt; nnz_per_row_csr[row_idx + 1];
@@ -1383,11 +1583,10 @@ public:
                                 team,
                                 idx_test,
                                 idx_trial,
-                                coeff_alpha,
-                                coeff_beta,
-                                mapping,
+                                test_mass,
+                                test_stiffness,
                                 full_quad_idx_range,
-                                int_volume_proxy);
+                                bspline_stash);
                         values_csr(batch_idx, csr_idx) = element;
                     }
                 });
@@ -1395,59 +1594,56 @@ public:
         Kokkos::Profiling::popRegion();
     }
 
-    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
-    static KOKKOS_FUNCTION double weak_integral_element(
-            IdxBSPolar idx_test,
-            IdxBSPolar idx_trial,
+    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping, class IdxTestType&gt;
+    static KOKKOS_FUNCTION std::tuple&lt;double, DVector&lt;R, Theta&gt;&gt; get_test_weights(
+            IdxTestType idx_test,
             IdxQuadratureRTheta idx_quad,
             CoeffAlpha const&amp; coeff_alpha,
             CoeffBeta const&amp; coeff_beta,
             Mapping const&amp; mapping,
-            DField&lt;IdxRangeQuadratureRTheta&gt; int_volume)
+            DField&lt;IdxRangeQuadratureRTheta&gt; int_volume,
+            TensorBSplineStash const&amp; bspline_stash)
     {
+        // Define the value and gradient of the test basis function
+        auto [basis_val_test_space, basis_derivs_test_space] = [&amp;]() {
+            if constexpr (std::is_same_v&lt;IdxTestType, Idx&lt;PolarBSplinesRTheta&gt;&gt;) {
+                return detail_poisson::get_polar_bspline_vals_and_derivs(idx_quad, idx_test);
+            } else {
+                static_assert(std::is_same_v&lt;IdxTestType, Idx&lt;BSplinesR, BSplinesTheta&gt;&gt;);
+                return bspline_stash.vals_and_derivs(idx_quad, idx_test);
+            }
+        }();
+
+
         // Calculate coefficients at quadrature point
         Coord&lt;R, Theta&gt; coord(ddc::coordinate(idx_quad));
         const double alpha = coeff_alpha(coord);
         const double beta = coeff_beta(coord);
 
-        // Define the value and gradient of the test and trial basis functions
-        double basis_val_test_space;
-        DVector&lt;R_cov, Theta_cov&gt; basis_derivs_test_space
-                = detail_poisson::get_polar_bspline_vals_and_derivs&lt;
-                        PolarBSplinesRTheta&gt;(basis_val_test_space, coord, idx_test);
-        double basis_val_trial_space;
-        DVector&lt;R_cov, Theta_cov&gt; basis_derivs_trial_space
-                = detail_poisson::get_polar_bspline_vals_and_derivs&lt;
-                        PolarBSplinesRTheta&gt;(basis_val_trial_space, coord, idx_trial);
-
-        MetricTensorEvaluator&lt;Mapping, Coord&lt;R, Theta&gt;&gt; get_metric_tensor(mapping);
-
         using Spatial2DVectorSpace = VectorIndexSet&lt;R, Theta&gt;;
 
+        MetricTensorEvaluator&lt;Mapping, Coord&lt;R, Theta&gt;&gt; get_metric_tensor(mapping);
         Tensor inv_metric_tensor = get_metric_tensor.inverse(coord);
         DTensor&lt;Spatial2DVectorSpace, Spatial2DVectorSpace&gt; inv_metric_tensor_2d;
         ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
-        // Assemble the weak integral element
-        return int_volume(idx_quad)
-               * (alpha
-                          * tensor_mul(
-                                  index&lt;'i'&gt;(basis_derivs_test_space),
-                                  index&lt;'i', 'j'&gt;(inv_metric_tensor_2d),
-                                  index&lt;'j'&gt;(basis_derivs_trial_space))
-                  + beta * basis_val_test_space * basis_val_trial_space);
+        double test_mass_weight = int_volume(idx_quad) * beta * basis_val_test_space;
+        DVector&lt;R, Theta&gt; test_stiffness_weight = int_volume(idx_quad) * alpha
+                                                  * tensor_mul(
+                                                          index&lt;'i'&gt;(basis_derivs_test_space),
+                                                          index&lt;'i', 'j'&gt;(inv_metric_tensor_2d));
+        return std::tuple(test_mass_weight, test_stiffness_weight);
     }
 
-    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
+
     static KOKKOS_FUNCTION double get_matrix_stencil_element(
             const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team,
             IdxBSRTheta idx_test,
             IdxBSRTheta idx_trial,
-            CoeffAlpha const&amp; coeff_alpha,
-            CoeffBeta const&amp; coeff_beta,
-            Mapping const&amp; mapping,
+            QuadField test_mass,
+            DVectorField&lt;IdxRangeQuadratureRTheta, VectorIndexSet&lt;R, Theta&gt;&gt; test_stiffness,
             IdxRangeQuadratureRTheta const&amp; full_quad_idx_range,
-            DField&lt;IdxRangeQuadratureRTheta&gt; int_volume)
+            TensorBSplineStash const&amp; bspline_stash)
     {
         const IdxBSR idx_test_r(idx_test);
         const IdxBSR idx_trial_r(idx_trial);
@@ -1500,8 +1696,7 @@ public:
                         end_non_zero_theta,
                         full_quad_idx_range.front());
 
-        const IdxBSPolar idx_test_polar(to_polar(idx_test));
-        const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
+        IdxRangeQuadratureRTheta test_support = get_idx_range(test_mass);
 
         double result = 0;
         Kokkos::parallel_reduce(
@@ -1520,19 +1715,72 @@ public:
                         idx_quad -= full_quad_idx_range.template extent&lt;QDimThetaMesh&gt;();
                     }
                     assert(full_quad_idx_range.contains(idx_quad));
-                    sum += weak_integral_element(
-                            idx_test_polar,
-                            idx_trial_polar,
-                            idx_quad,
-                            coeff_alpha,
-                            coeff_beta,
-                            mapping,
-                            int_volume);
+
+                    auto [basis_val_trial_space, basis_derivs_trial_space]
+                            = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
+
+                    // The test support may extend past the end of the poloidal domain
+                    IdxQuadratureRTheta idx_quad_test = idx_quad;
+                    if (!test_support.contains(idx_quad_test)) {
+                        idx_quad_test += full_quad_idx_range.template extent&lt;QDimThetaMesh&gt;();
+                    }
+                    assert(test_support.contains(idx_quad_test));
+
+                    // Assemble the weak integral element
+                    sum += scalar_product(test_stiffness(idx_quad_test), basis_derivs_trial_space)
+                           + test_mass(idx_quad_test) * basis_val_trial_space;
                 },
                 result);
         return result;
     }
 
+    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
+    static KOKKOS_FUNCTION void fill_test_weights(
+            const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team,
+            QuadField test_mass,
+            DVectorField&lt;IdxRangeQuadratureRTheta, VectorIndexSet&lt;R, Theta&gt;&gt; test_stiffness,
+            IdxBSRTheta idx_test,
+            CoeffAlpha const&amp; coeff_alpha,
+            CoeffBeta const&amp; coeff_beta,
+            Mapping const&amp; mapping,
+            IdxRangeQuadratureRTheta const&amp; full_quad_idx_range,
+            DField&lt;IdxRangeQuadratureRTheta&gt; int_volume,
+            TensorBSplineStash const&amp; bspline_stash)
+    {
+        IdxRangeQuadratureRTheta test_support = get_idx_range(test_mass);
+        assert(test_support.template extent&lt;QDimRMesh&gt;().value() &lt;= s_n_quad_support_r);
+        assert(test_support.template extent&lt;QDimThetaMesh&gt;().value() &lt;= s_n_quad_support_theta);
+        Kokkos::parallel_for(
+                Kokkos::TeamThreadMDRange(
+                        team,
+                        test_support.template extent&lt;QDimRMesh&gt;(),
+                        test_support.template extent&lt;QDimThetaMesh&gt;()),
+                [&amp;](int r_thread_index, int theta_thread_index) {
+                    IdxStep&lt;QDimRMesh, QDimThetaMesh&gt;
+                            quad_offset(r_thread_index, theta_thread_index);
+                    IdxQuadratureRTheta idx_quad = test_support.front() + quad_offset;
+                    IdxQuadratureRTheta idx_quad_in_domain = idx_quad;
+                    // Manage periodicity
+                    if (!full_quad_idx_range.contains(idx_quad_in_domain)) {
+                        idx_quad_in_domain -= full_quad_idx_range.template extent&lt;QDimThetaMesh&gt;();
+                    }
+                    assert(full_quad_idx_range.contains(idx_quad_in_domain));
+                    auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
+                            idx_test,
+                            idx_quad_in_domain,
+                            coeff_alpha,
+                            coeff_beta,
+                            mapping,
+                            int_volume,
+                            bspline_stash);
+                    test_mass(quad_offset) = test_mass_weight;
+                    ddcHelper::assign_vector_field_element(
+                            test_stiffness,
+                            idx_quad,
+                            test_stiffness_weight);
+                });
+        team.team_barrier();
+    }
 
     void init_nnz_per_line(Kokkos::View&lt;int*, Kokkos::LayoutRight&gt; nnz_per_row) const
     {
@@ -1667,6 +1915,7 @@ public:
 
         Kokkos::Profiling::popRegion();
     }
+
     static KOKKOS_INLINE_FUNCTION IdxBSPolar to_polar(IdxBSRTheta idx)
     {
         return PolarBSplinesRTheta::template get_polar_index&lt;PolarBSplinesRTheta&gt;(idx);

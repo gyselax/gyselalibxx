@@ -499,6 +499,8 @@
 ## t
 
 * [**Tensor**](classTensor.md)
+* [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md)
+([**detail\_poisson**](namespacedetail__poisson.md))
 * [**TensorCommon**](classTensorCommon.md)
 * [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md)
 ([**tensor\_tools**](namespacetensor__tools.md))

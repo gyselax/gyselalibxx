@@ -98,11 +98,6 @@ Inherits the following classes: [IPolarPoissonLikeSolver](classIPolarPoissonLike
 
 
 
-## Public Static Functions
-
-| Type | Name |
-| ---: | :--- |
-|  KOKKOS\_INLINE\_FUNCTION double | [**get\_polar\_bspline\_vals**](#function-get_polar_bspline_vals) (CoordRTheta coord, IdxBSPolar idx) <br>_Get the value of the specified polar bspline at the specified point._  |
 
 
 
@@ -397,44 +392,6 @@ inline void PolarSplineFEMPoissonLikeSolver::update_coefficients (
 
 * `alpha` The \(\alpha\) function in the definition of the Poisson-like equation defined at the grid points. 
 * `beta` The \(\beta\) function in the definition of the Poisson-like equation defined at the grid points. 
-
-
-
-
-        
-
-<hr>
-## Public Static Functions Documentation
-
-
-
-
-### function get\_polar\_bspline\_vals 
-
-_Get the value of the specified polar bspline at the specified point._ 
-```C++
-static inline KOKKOS_INLINE_FUNCTION double PolarSplineFEMPoissonLikeSolver::get_polar_bspline_vals (
-    CoordRTheta coord,
-    IdxBSPolar idx
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `coord` The coordinate where the value of the polar bspline should be calculated. 
-* `idx` The polar bspline of interest. 
-
-
-
-**Returns:**
-
-The value of the polar bspline at the coordinate. 
-
 
 
 

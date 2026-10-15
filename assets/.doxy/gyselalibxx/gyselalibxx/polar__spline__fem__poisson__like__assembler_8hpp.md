@@ -10,6 +10,7 @@
 
 
 
+* `#include <tuple>`
 * `#include <ddc/ddc.hpp>`
 * `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_alias_inline_functions.hpp"`
@@ -20,6 +21,7 @@
 * `#include "metric_tensor_evaluator.hpp"`
 * `#include "polar_spline_evaluator.hpp"`
 * `#include "quadrature_coeffs_nd.hpp"`
+* `#include "vector_field.hpp"`
 * `#include "view.hpp"`
 * `#include "volume_quadrature_nd.hpp"`
 
@@ -48,6 +50,7 @@
 | ---: | :--- |
 | class | [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), typename QDimRMesh, typename QDimThetaMesh, class IdxRangeFull&gt;<br>_An operator to assemble a Poisson-like stiffness matrix using polar B-splines._  |
 | struct | [**InternalBatchDim**](structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.md) <br>_The tag for the batch dimension for the equation. This is public due to Cuda._  |
+| struct | [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md) &lt;typename QDimRMesh, typename QDimThetaMesh, typename [**BSplinesR**](structBSplinesR.md), typename [**BSplinesTheta**](structBSplinesTheta.md)&gt;<br>_The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._  |
 
 
 

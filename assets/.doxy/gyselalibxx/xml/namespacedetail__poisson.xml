@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespacedetail__poisson" kind="namespace" language="C++">
     <compoundname>detail_poisson</compoundname>
+    <innerclass refid="structdetail__poisson_1_1TensorBSplineStash" prot="public">detail_poisson::TensorBSplineStash</innerclass>
     <sectiondef kind="func">
       <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a65137404e884acc2dcaee94b2b25c073" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -46,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="31" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="31" bodyend="39"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="34" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="34" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a247dc6ba30ff36eeea601bff9becfe7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -81,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="42" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="42" bodyend="51"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="45" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="45" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -137,73 +138,56 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="64" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="64" bodyend="77"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="67" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="67" bodyend="80"/>
       </memberdef>
-      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a3f94a5d4864782525d1774e4ea602cf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1ac16a6aa98a88e1172c1f60b4ad7a168a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
-          <param>
-            <type>typename <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></type>
-          </param>
           <param>
             <type>bool</type>
             <declname>calculate_derivs</declname>
             <defname>calculate_derivs</defname>
             <defval>true</defval>
           </param>
+          <param>
+            <type>class <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></type>
+          </param>
+          <param>
+            <type>class IdxQuad</type>
+          </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt;</type>
-        <definition>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt; detail_poisson::get_polar_bspline_vals_and_derivs</definition>
-        <argsstring>(double &amp;val, Coord&lt; typename PolarBSplinesRTheta::R, typename PolarBSplinesRTheta::Theta &gt; coord, Idx&lt; PolarBSplinesRTheta &gt; idx)</argsstring>
+        <type>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt;</type>
+        <definition>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; detail_poisson::get_polar_bspline_vals_and_derivs</definition>
+        <argsstring>(IdxQuad idx_quad, Idx&lt; PolarBSplinesRTheta &gt; idx)</argsstring>
         <name>get_polar_bspline_vals_and_derivs</name>
         <qualifiedname>detail_poisson::get_polar_bspline_vals_and_derivs</qualifiedname>
         <param>
-          <type>double &amp;</type>
-          <declname>val</declname>
-        </param>
-        <param>
-          <type>Coord&lt; typename <ref refid="classPolarBSplines_1a648dc9ce69b7875ee05df11ca91ca831" kindref="member">PolarBSplinesRTheta::R</ref>, typename <ref refid="classPolarBSplines_1ac4cbfc152e798720dd2615390e96d894" kindref="member">PolarBSplinesRTheta::Theta</ref> &gt;</type>
-          <declname>coord</declname>
+          <type>IdxQuad</type>
+          <declname>idx_quad</declname>
         </param>
         <param>
           <type>Idx&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
           <declname>idx</declname>
         </param>
         <briefdescription>
-<para>Get the value and derivative of the specified polar bspline at the specified quadrature point. </para>
+<para>Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method calculates the value and the derivatives of polar bsplines. It is templated by calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and get_polar_bspline_vals. The calling method should not need to use the template parameter.</para>
+<para>The polar bsplines which cover the singular point are linear combinations of tensor product bsplines so they are evaluated using PolarBSplines::eval_basis_and_n_derivs. The polar bsplines which do not cover the singular point should be passed as a 2D index (see the overload below).</para>
 <para><parameterlist kind="templateparam"><parameteritem>
-<parameternamelist>
-<parametername><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The Polar B-Splines to be used. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
 <parameternamelist>
 <parametername>calculate_derivs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Returns the derivatives at the coordinate if true. If false, only the value is calculated.</para>
+<para>If true, the value and the derivatives are calculated. If false, only the value is calculated.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
 <parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="out">val</parametername>
+<parametername direction="in">idx_quad</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The value of the specified polar bspline at the specified point. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where the value of the polar bspline should be calculated. </para>
+<para>The quadrature point where the polar bspline should be evaluated. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -211,17 +195,17 @@
 <parametername direction="in">idx</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The polar bspline of interest. </para>
+<para>The index of a polar bspline which covers the singular point. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The derivative of the polar bspline (only returned if calculate_derivs is true). </para>
+<simplesect kind="return"><para>The value of the polar bspline if calculate_derivs is false. Otherwise a tuple containing the value and the derivatives of the polar bspline. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="102" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="102" bodyend="165"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="194" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="194" bodyend="239"/>
       </memberdef>
       <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -267,7 +251,7 @@
 <para>Compute the quadrature range between a provided set of knots. </para>
         </briefdescription>
         <detaileddescription>
-<para>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.</para>
+<para>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. The poloidal index of the front of the returned range is always inside the domain. However, in order to return a contiguous range, the result may include poloidal indices beyond the end of the domain. A modulo operator should be applied before using the indices.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>QDimRMesh</parametername>
@@ -348,13 +332,104 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="198" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="198" bodyend="233"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="273" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="273" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a00794e48e29df9ffdedf8449e806c1f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename QDimRMesh</type>
+          </param>
+          <param>
+            <type>typename QDimThetaMesh</type>
+          </param>
+          <param>
+            <type>typename <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></type>
+          </param>
+          <param>
+            <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+        <definition>KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_support_quadrature</definition>
+        <argsstring>(Idx&lt; BSplinesR, BSplinesTheta &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front)</argsstring>
+        <name>get_support_quadrature</name>
+        <qualifiedname>detail_poisson::get_support_quadrature</qualifiedname>
+        <param>
+          <type>Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+          <declname>idx_quad_front</declname>
+        </param>
+        <briefdescription>
+<para>Compute the range of quadrature points in the support of a tensor product B-spline. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In order to return a contiguous range the result may include poloidal indices which are outside the domain. A modulo operator should be applied before using the indices.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QDimRMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QDimThetaMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in poloidal direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in poloidal direction.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 2D index of the tensor product B-spline. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad_front</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first index of the index range of the quadrature points. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The range of quadrature points in the support of the B-spline. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="329" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="329" bodyend="356"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="19" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="22" column="1"/>
   </compounddef>
 </doxygen>
