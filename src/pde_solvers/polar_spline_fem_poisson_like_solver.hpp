@@ -547,6 +547,7 @@ public:
 
         // Fill the spline, for every batch
         ddc::parallel_deepcopy(spline[batched_polar_bspl_idx_range], x_init);
+        // Apply the Dirichlet boundary conditions
         ddc::parallel_fill(spline[batched_bc_polar_bspl_idx_range], 0.0);
         Kokkos::Profiling::popRegion();
     }
