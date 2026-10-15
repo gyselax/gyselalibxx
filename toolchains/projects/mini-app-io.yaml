@@ -1,0 +1,29 @@
+spack:
+  include:
+    - path: externals.yaml
+      optional: true
+    - path: gysela
+      optional: true
+  specs:
+    - cxx
+    - cmake@3.31
+    - ddc@0.16 +pdi
+    - gyselalibxx@0.8
+    - mpi
+    - paraconf@1.0
+    - pdi@1.11
+  concretizer:
+    reuse: false
+    unify: true
+  packages:
+    arrow:
+      prefer:
+        - '~mimalloc'
+    hdf5:
+      require: '+subfiling'
+    py-dask:
+      prefer:
+        - '~dataframe'
+    py-pandas:
+      prefer:
+        - '~performance'
