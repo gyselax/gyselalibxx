@@ -103,11 +103,23 @@ InterfaceDerivCoeffs<Interface_12> deriv_coeffs (idx_range_patch_1, idx_range_pa
 
 ```cpp
 // If we want to apply the treatment on Patch 1 and Patch 2
-InterfaceDerivCoeffs<Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE> deriv_coeffs (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE);
 // or if we want to apply the treatment only on Patch 1
-InterfaceDerivCoeffs<Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE> deriv_coeffs (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::HERMITE);
 // or if we want to apply the treatment only on Patch 2
-InterfaceDerivCoeffs<Interface_12, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE> deriv_coeffs (idx_range_patch_1, idx_range_patch_2);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::GREVILLE);
 ```
 
 > If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
@@ -119,6 +131,7 @@ The coefficients can be collected with the following functions:
 - `deriv_coeffs.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
 - `deriv_coeffs.get_approx_deriv(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
  (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
+- `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case.  We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.
 
 If we want to apply the exact formula, we need to sum these coefficients,
 
@@ -332,7 +345,7 @@ and for $`m = 2, ..., N^L-1`$,
                 \omega_{k, m,N^R}^i
                 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}} \omega_{k, m-1,N^R}^i
             \right]
-    \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}} b^{i}_{m,N^R}  \gamma_{i-m, k}.
+    + \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}} b^{i}_{m,N^R}  \gamma_{i-m, k}.
     \\
 \end{aligned}
 ```

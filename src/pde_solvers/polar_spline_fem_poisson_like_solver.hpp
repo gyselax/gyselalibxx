@@ -276,13 +276,15 @@ public:
      * @param[in] max_iter
      *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
-     *      The residual tolerance for the batched CSR solver. Be careful! the relative residual
-     *      provided here, will be used as "implicit residual" in ginkgo solver.
+     *      The residual tolerance for the batched CSR solver. The solver stops when
+     *      ||r||/||b|| <= res_tol where r is the residual computed by the CG recurrence.
      * @param[in] batch_solver_logger
      *      Indicates whether log information such as the residual and the number of iterations
      *      should be monitored.
      * @param[in] preconditioner_max_block_size
      *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
+     * @param[in] residual_norm
+     *      The norm used to evaluate the residual in the stopping criterion.
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
@@ -292,7 +294,8 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = std::nullopt)
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
         : m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_idxrange_fem_non_singular(
                   ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
@@ -342,7 +345,8 @@ public:
                 max_iter,
                 res_tol,
                 batch_solver_logger,
-                preconditioner_max_block_size);
+                preconditioner_max_block_size,
+                residual_norm);
     }
 
     /**
