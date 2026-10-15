@@ -362,15 +362,6 @@ public:
         }
     }
 
-    /** Empty access for 0D objects
-     * @return copy of this element
-     */
-    template <class... IdxType>
-    KOKKOS_FUNCTION element_type const operator()() const noexcept
-            requires(index_range_type::rank() == 0)
-    {
-    }
-
     /**
      * @brief Slice out some dimensions.
      *
