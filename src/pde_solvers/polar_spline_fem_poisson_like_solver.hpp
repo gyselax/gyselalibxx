@@ -475,7 +475,7 @@ public:
                         for (IdxQuadratureR idx_quad_r : ddc::select<QDimRMesh>(quad_range)) {
                             IdxQuadratureRTheta idx_quad(idx_quad_r, idx_quad_theta);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
-                            b(batch_idx, idx) += rhs(coord) * bspline_stash.vals(idx_2d, idx_quad)
+                            b(batch_idx, idx) += rhs(coord) * bspline_stash.vals(idx_quad, idx_2d)
                                                  * int_volume(idx_quad);
                         }
                     }

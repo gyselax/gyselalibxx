@@ -123,8 +123,8 @@ public:
      * @return The value of the B-spline at the quadrature point.
      */
     KOKKOS_FUNCTION std::tuple<double, DVector<R_cov, Theta_cov>> vals_and_derivs(
-            Idx<BSplinesR, BSplinesTheta> idx,
-            Idx<QDimRMesh, QDimThetaMesh> idx_quad) const
+            Idx<QDimRMesh, QDimThetaMesh> idx_quad,
+            Idx<BSplinesR, BSplinesTheta> idx) const
     {
         Idx<QDimRMesh> idx_quad_r(idx_quad);
         Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
@@ -152,8 +152,8 @@ public:
      * @return The value of the B-spline at the quadrature point.
      */
     KOKKOS_FUNCTION double vals(
-            Idx<BSplinesR, BSplinesTheta> idx,
-            Idx<QDimRMesh, QDimThetaMesh> idx_quad) const
+            Idx<QDimRMesh, QDimThetaMesh> idx_quad,
+            Idx<BSplinesR, BSplinesTheta> idx) const
     {
         Idx<QDimRMesh> idx_quad_r(idx_quad);
         Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
@@ -285,14 +285,11 @@ get_polar_bspline_vals_and_derivs(
         IdxQuad idx_quad,
         Idx<BSplinesR, BSplinesTheta> idx)
 {
-    using R = typename BSplinesR::continuous_dimension_type;
-    using Theta = typename BSplinesTheta::continuous_dimension_type;
-
     // The polar bspline is a tensor product of 1D B-splines
     if constexpr (calculate_derivs) {
-        return bspline_stash.vals_and_derivs(derivs, idx, idx_quad);
+        return bspline_stash.vals_and_derivs(idx_quad, idx);
     } else {
-        return bspline_stash.vals(idx, idx_quad);
+        return bspline_stash.vals(idx_quad, idx);
     }
 }
 
