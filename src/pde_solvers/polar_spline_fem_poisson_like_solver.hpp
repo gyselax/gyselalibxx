@@ -586,18 +586,18 @@ public:
      *
      * @param[out] phi
      *      The values of the solution @f$\phi@f$ on the grid, for every batch.
-     * @param[in] rho
+     * @param[in] rhs
      *      The rhs @f$ \rho@f$ of the Poisson-like equation on the grid, for every batch.
      */
-    void operator()(DFieldBatchedRTheta phi, DConstFieldBatchedRTheta rho) const override
+    void operator()(DFieldBatchedRTheta phi, DConstFieldBatchedRTheta rhs) const override
     {
-        FieldMemBatchedCoeffsSpline2D rho_coeff_alloc(
-                batched_basis_idx_range(m_builder, get_idx_range(rho)));
-        m_builder(get_field(rho_coeff_alloc), rho);
+        FieldMemBatchedCoeffsSpline2D rhs_coeff_alloc(
+                batched_basis_idx_range(m_builder, get_idx_range(rhs)));
+        m_builder(get_field(rhs_coeff_alloc), rhs);
         CoeffEvaluator<EvaluatorType, ConstFieldBatchedCoeffsSpline2D>
-                rho_func(m_evaluator, get_const_field(rho_coeff_alloc));
+                rhs_func(m_evaluator, get_const_field(rhs_coeff_alloc));
 
-        (*this)(phi, rho_func);
+        (*this)(phi, rhs_func);
     }
 
 private:
