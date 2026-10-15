@@ -341,17 +341,6 @@ public:
         return *this;
     }
 
-    /** Element access using a multi-dimensional Idx
-     * @param delems discrete coordinates
-     * @return copy of this element
-     */
-    template <class IdxType>
-    KOKKOS_FUNCTION element_type const operator()(IdxType const& delems) const noexcept
-            requires(ddc::is_discrete_element_v<IdxType> || ddc::is_discrete_vector_v<IdxType>)
-    {
-        return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
-    }
-
     /** Element access using a list of Idxs
      * @param delems 1D discrete coordinates
      * @return copy of this element
@@ -359,12 +348,17 @@ public:
     template <class... IdxType>
     KOKKOS_FUNCTION element_type const operator()(IdxType const&... idx_dim) const noexcept
             requires(
-                    sizeof...(IdxType) > 1 && (ddc::is_discrete_element_v<IdxType> && ...)
+                    (ddc::is_discrete_element_v<IdxType> && ...)
                     || (ddc::is_discrete_vector_v<IdxType> && ...))
     {
-        using GroupedIdxType = ddc::combine_t<IdxType...>;
-        GroupedIdxType idx(idx_dim...);
-        return this->operator()(idx, std::make_integer_sequence<int, element_type::size()> {});
+        if constexpr (sizeof...(IdxType) == 0) {
+            return this->
+            operator()(Idx<> {}, std::make_integer_sequence<int, element_type::size()> {});
+        } else {
+            using GroupedIdxType = ddc::combine_t<IdxType...>;
+            GroupedIdxType idx(idx_dim...);
+            return this->operator()(idx, std::make_integer_sequence<int, element_type::size()> {});
+        }
     }
 
     /** Empty access for 0D objects
@@ -374,7 +368,6 @@ public:
     KOKKOS_FUNCTION element_type const operator()() const noexcept
             requires(index_range_type::rank() == 0)
     {
-        return this->operator()(Idx<> {}, std::make_integer_sequence<int, element_type::size()> {});
     }
 
     /**
