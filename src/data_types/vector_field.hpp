@@ -371,9 +371,10 @@ public:
      * @return copy of this element
      */
     template <class... IdxType>
-    KOKKOS_FUNCTION element_type const operator()() const noexcept requires(index_range_type::rank() == 0)
+    KOKKOS_FUNCTION element_type const operator()() const noexcept
+            requires(index_range_type::rank() == 0)
     {
-        return this->operator()(Idx<>{}, std::make_integer_sequence<int, element_type::size()> {});
+        return this->operator()(Idx<> {}, std::make_integer_sequence<int, element_type::size()> {});
     }
 
     /**

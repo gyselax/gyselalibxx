@@ -273,7 +273,7 @@ TEST(VectorField1DTest, StepAccessConst)
     Coord2D constexpr factor(1.391, 2.444);
     DVectorFieldMemX field(idx_range_x);
     DVectorFieldMemX const& field_cref = field;
-    for (IdxStepX ix(0); ix < idx_range_x.size(); ++ ix) {
+    for (IdxStepX ix(0); ix < idx_range_x.size(); ++ix) {
         Coord2D val = double(ix.value()) * factor;
         ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
         ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
@@ -287,7 +287,7 @@ TEST(VectorField1DTest, StepAccess)
 {
     Coord2D constexpr factor(1.391, 2.444);
     DVectorFieldMemX field(idx_range_x);
-    for (IdxStepX ix(0); ix < idx_range_x.size(); ++ ix) {
+    for (IdxStepX ix(0); ix < idx_range_x.size(); ++ix) {
         Coord2D val = double(ix.value()) * factor;
         ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
         ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
