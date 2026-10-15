@@ -255,6 +255,15 @@ public:
         return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
     }
 
+    /** Empty access for 0D objects
+     * @return copy of this element
+     */
+    template <class... IdxType>
+    element_type const operator()() const noexcept requires(index_range_type::rank() == 0)
+    {
+        return this->operator()(Idx<> {}, std::make_integer_sequence<int, element_type::size()> {});
+    }
+
     /** Element access using a list of Idxs
      * @param delems 1D discrete coordinates
      * @return copy of this element
