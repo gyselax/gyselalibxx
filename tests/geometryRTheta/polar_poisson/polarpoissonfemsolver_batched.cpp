@@ -201,7 +201,8 @@ void test_PolarPoissonFEMBatched__MatchesUnbatched()
         auto phi_from_func_ref_host
                 = ddc::create_mirror_view_and_copy(get_field(phi_from_func_ref));
 
-        double max_phi = norm_inf(Kokkos::DefaultExecutionSpace(), get_const_field(phi_from_func_ref));
+        double max_phi
+                = norm_inf(Kokkos::DefaultExecutionSpace(), get_const_field(phi_from_func_ref));
         // Check that the batches are not trivial
         EXPECT_GT(max_phi, 1e-3);
 
