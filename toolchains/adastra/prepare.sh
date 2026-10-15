@@ -56,6 +56,6 @@ spack spec --install-status --namespaces
 spack install --jobs "${GYSELA_SPACK_JOBS}"
 spack env deactivate
 
-find "${GYSELA_SPACK_PREFIX}" -user "${USER}" \
+find "${GYSELA_SPACK_PREFIX}" \( -type d -type f \) -user "${USER}" \
     -exec chgrp "${GYSELA_SPACK_GROUP}" {} + \
     -exec chmod g+rwX {} +
