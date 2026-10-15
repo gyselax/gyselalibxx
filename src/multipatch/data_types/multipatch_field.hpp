@@ -145,9 +145,7 @@ public:
                 ddc::type_seq_contains_v<PatchOrdering, OPatchSeq>,
                 "The type being copied does not contain all the required patches");
         static_assert(
-                std::is_same_v<
-                        ddc::detail::TypeSeq<InternalTypes...>,
-                        ddc::detail::TypeSeq<decltype(other.template get<Patches>())...>>,
+                ddc::type_seq_contains_v<typename base_type::InternalTypeOrdering, OTypeSeq>,
                 "MultipatchFields are not equivalent");
     }
 

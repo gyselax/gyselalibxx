@@ -105,14 +105,23 @@ InterfaceDerivCoeffs<Interface_12> deriv_coeffs (idx_range_patch_1, idx_range_pa
 
 ```cpp
 // If we want to apply the treatment on Patch 1 and Patch 2
-InterfaceDerivCoeffs<Interface_12> 
-    deriv_coeffs (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE);
 // or if we want to apply the treatment only on Patch 1
-InterfaceDerivCoeffs<Interface_12> 
-    deriv_coeffs (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::HERMITE);
 // or if we want to apply the treatment only on Patch 2
-InterfaceDerivCoeffs<Interface_12> 
-    deriv_coeffs (idx_range_patch_1, idx_range_patch_2, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE);
+InterfaceDerivCoeffs<Interface_12> deriv_coeffs(
+        idx_range_patch_1,
+        idx_range_patch_2,
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::GREVILLE);
 ```
 
 > If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
