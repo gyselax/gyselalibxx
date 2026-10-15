@@ -1238,4 +1238,5 @@ TEST_F(MultipatchSplineEvaluatorTest, StaticAssertions)
 {
     static_assert(concepts::InterpolationEvaluator<DeviceMultipatchSplineRThetaEvaluator>);
     static_assert(concepts::InterpolationEvaluator<HostMultipatchSplineRThetaEvaluator>);
+    static_assert(concepts::InterpolationEvaluator<MultipatchSplineEvaluatorDerivField>);
 }
