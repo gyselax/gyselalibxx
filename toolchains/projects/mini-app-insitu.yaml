@@ -12,6 +12,29 @@ spack:
     - mpi
     - paraconf@1.0
     - pdi@1.11
+
+    - py-dask
+    - py-dask-ml@2025.1.0
+    - py-deisa-dask@0.6.3 +mpi
+    - py-deisa-ray
+    - py-equinox@0.1.3:0.1
+    - py-flax@0.12.7:0.12
+    - py-h5netcdf
+    - py-h5py +mpi
+    - py-imageio
+    - py-iops-benchmark +bayesian
+    - py-jax@0.4.28:0.4
+    - py-matplotlib
+    - py-numpy
+    - py-netcdf4 +mpi
+    - py-optax@0.2.8:0.2
+    - py-pyyaml
+    - py-scikit-learn
+    - py-scimba
+    - py-scipy
+    - py-sympy
+    - py-tqdm
+    - py-xarray
   concretizer:
     reuse: false
     unify: true
