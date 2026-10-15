@@ -40,10 +40,10 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>discrete_poloidal_cs_spline_mapping.hpp</label>
         <link refid="discrete__poloidal__cs__spline__mapping_8hpp_source"/>
-        <childnode refid="36" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -58,6 +58,14 @@
         <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>deriv_details.hpp</label>
+        <link refid="deriv__details_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="30">
@@ -135,10 +143,12 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -148,7 +158,7 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -159,7 +169,7 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -185,19 +195,19 @@
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="37">
+      <node id="38">
         <label>spline_definitions_r_theta.hpp</label>
         <link refid="spline__definitions__r__theta_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="38" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -209,54 +219,54 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="38" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>constant_identity_interpolation_extrapolation_rule.hpp</label>
         <link refid="constant__identity__interpolation__extrapolation__rule_8hpp_source"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="40">
         <label>extrapolation_rule_choice.hpp</label>
         <link refid="extrapolation__rule__choice_8hpp_source"/>
-        <childnode refid="40" relation="include">
-        </childnode>
         <childnode refid="41" relation="include">
         </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>i_interpolation.hpp</label>
         <link refid="i__interpolation_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
         <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>i_interpolation_builder.hpp</label>
         <link refid="i__interpolation__builder_8hpp_source"/>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>i_interpolation_evaluator.hpp</label>
         <link refid="i__interpolation__evaluator_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -266,12 +276,12 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>lagrange_basis_non_uniform.hpp</label>
         <link refid="lagrange__basis__non__uniform_8hpp_source"/>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -284,12 +294,12 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="49">
         <label>lagrange_basis_uniform.hpp</label>
         <link refid="lagrange__basis__uniform_8hpp_source"/>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -333,12 +343,12 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="38">
+      <node id="39">
         <label>spline_interpolation.hpp</label>
         <link refid="spline__interpolation_8hpp_source"/>
         <childnode refid="7" relation="include">
@@ -347,7 +357,7 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
       </node>
       <node id="28">
@@ -406,7 +416,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>geometry_descriptors.hpp</label>
         <link refid="geometry__descriptors_8hpp_source"/>
       </node>
@@ -444,7 +454,7 @@
       <node id="19">
         <label>concepts</label>
       </node>
-      <node id="47">
+      <node id="48">
         <label>cstddef</label>
       </node>
       <node id="2">
@@ -453,10 +463,10 @@
       <node id="3">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="36">
+      <node id="37">
         <label>iostream</label>
       </node>
-      <node id="44">
+      <node id="45">
         <label>optional</label>
       </node>
       <node id="26">

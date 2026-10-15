@@ -14,6 +14,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "deriv_details.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
 
@@ -169,12 +170,12 @@ private:
                 typename FieldType::layout_type>(std::move(std::get<Is>(chunk_slices))...);
     }
 
-    template <class... ODDims, typename T, T... ints>
+    template <class IdxType, typename T, T... ints>
     KOKKOS_FUNCTION element_type const operator()(
-            Idx<ODDims...> const& delems,
+            IdxType const& idx,
             std::integer_sequence<T, ints...>) const noexcept
     {
-        return element_type((this->m_values[ints](delems))...);
+        return element_type((this->m_values[ints](idx))...);
     }
 
 public:
@@ -253,21 +254,21 @@ public:
         return *this;
     }
 
-    template <class... ODDims>
-    KOKKOS_FUNCTION element_type const operator()(
-            ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    template <class... IdxType>
+    KOKKOS_FUNCTION element_type const operator()(IdxType const&... idx_dim) const noexcept
+            requires(
+                    (ddc::is_discrete_element_v<IdxType> && ...)
+                    || (ddc::is_discrete_vector_v<IdxType> && ...))
     {
-        Idx<ODDims...> delem_idx(delems...);
-        return this->
-        operator()(delem_idx, std::make_integer_sequence<int, element_type::size()> {});
+        if constexpr (sizeof...(IdxType) == 0) {
+            return this->
+            operator()(Idx<> {}, std::make_integer_sequence<int, element_type::size()> {});
+        } else {
+            using IdxTypeGrouped = ddc::combine_t<IdxType...>;
+            IdxTypeGrouped idx(idx_dim...);
+            return this->operator()(idx, std::make_integer_sequence<int, element_type::size()> {});
+        }
     }
-
-    template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    KOKKOS_FUNCTION element_type const operator()(Idx<ODDims...> const& delems) const noexcept
-    {
-        return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
-    }
-
 
     template <class... QueryDDims>
     constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)

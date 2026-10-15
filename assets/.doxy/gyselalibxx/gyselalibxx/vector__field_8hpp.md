@@ -13,6 +13,7 @@
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
+* `#include "deriv_details.hpp"`
 * `#include "vector_field_mem.hpp"`
 * `#include "vector_index_tools.hpp"`
 

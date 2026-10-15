@@ -667,35 +667,31 @@
 </tr>
 <tr>
 <td style="text-align: right;">element_type const</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) noexcept const<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">element_type const</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (Idx&lt; ODDims... &gt; const &amp; delems) noexcept const<br></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (IdxType const &amp;... idx_dim) noexcept const<br></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> &amp;</td>
-<td style="text-align: left;"><a href="#function-operator_2"><strong>operator=</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> const &amp; other) = delete<br><em>Deleted: use deepcopy instead.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator=</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> const &amp; other) = delete<br><em>Deleted: use deepcopy instead.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> &amp;</td>
-<td style="text-align: left;"><a href="#function-operator_3"><strong>operator=</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> &amp;&amp; other) = default<br></td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator=</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> &amp;&amp; other) = default<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-operator_4"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) const<br><em>Slice out some dimensions.</em></td>
+<td style="text-align: left;"><a href="#function-operator_3"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) const<br><em>Slice out some dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-operator_5"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) <br><em>Slice out some dimensions.</em></td>
+<td style="text-align: left;"><a href="#function-operator_4"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) <br><em>Slice out some dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-operator_6"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) const<br><em>Slice out some dimensions.</em></td>
+<td style="text-align: left;"><a href="#function-operator_5"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) const<br><em>Slice out some dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-operator_7"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) <br><em>Slice out some dimensions.</em></td>
+<td style="text-align: left;"><a href="#function-operator_6"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) <br><em>Slice out some dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -861,36 +857,21 @@ inline constexpr chunk_view_type VectorFieldMem::get () noexcept const
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<pre><code class="language-C++">template&lt;class... ODDims&gt;
+<pre><code class="language-C++">template&lt;class... IdxType&gt;
 inline element_type const VectorFieldMem::operator() (
-    ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems
+    IdxType const &amp;... idx_dim
 ) noexcept const
 </code></pre>
-<p>Element access using a list of Idxs </p>
+<p>Element access using a multi-dimensional Idx or IdxStep. </p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>delems</code> 1D discrete coordinates </li>
+<li><code>idx_dim</code> The index or index step which accesses the element. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>copy of this element </p>
+<p>Copy of the element accessed. </p>
 <hr>
 
-<h3 id="function-operator_1">function operator()</h3>
-<pre><code class="language-C++">template&lt;class... ODDims, class&gt;
-inline element_type const VectorFieldMem::operator() (
-    Idx&lt; ODDims... &gt; const &amp; delems
-) noexcept const
-</code></pre>
-<p>Element access using a multi-dimensional Idx </p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>delems</code> discrete coordinates </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>copy of this element </p>
-<hr>
-
-<h3 id="function-operator_2">function operator=</h3>
+<h3 id="function-operator_1">function operator=</h3>
 <p><em>Deleted: use deepcopy instead.</em> </p>
 <pre><code class="language-C++">VectorFieldMem &amp; VectorFieldMem::operator= (
     VectorFieldMem const &amp; other
@@ -898,7 +879,7 @@ inline element_type const VectorFieldMem::operator() (
 </code></pre>
 <hr>
 
-<h3 id="function-operator_3">function operator=</h3>
+<h3 id="function-operator_2">function operator=</h3>
 <pre><code class="language-C++">VectorFieldMem &amp; VectorFieldMem::operator= (
     VectorFieldMem &amp;&amp; other
 ) = default
@@ -912,7 +893,7 @@ inline element_type const VectorFieldMem::operator() (
 <p>*this </p>
 <hr>
 
-<h3 id="function-operator_4">function operator[]</h3>
+<h3 id="function-operator_3">function operator[]</h3>
 <p><em>Slice out some dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryDDims&gt;
 inline auto VectorFieldMem::operator[] (
@@ -928,7 +909,7 @@ inline auto VectorFieldMem::operator[] (
 <p>A constant reference to the vector field on the sliced index range. </p>
 <hr>
 
-<h3 id="function-operator_5">function operator[]</h3>
+<h3 id="function-operator_4">function operator[]</h3>
 <p><em>Slice out some dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryDDims&gt;
 inline auto VectorFieldMem::operator[] (
@@ -944,7 +925,7 @@ inline auto VectorFieldMem::operator[] (
 <p>A modifiable reference to the vector field on the sliced index range. </p>
 <hr>
 
-<h3 id="function-operator_6">function operator[]</h3>
+<h3 id="function-operator_5">function operator[]</h3>
 <p><em>Slice out some dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryDDims&gt;
 inline auto VectorFieldMem::operator[] (
@@ -960,7 +941,7 @@ inline auto VectorFieldMem::operator[] (
 <p>A modifiable reference to the vector field on the sliced index range. </p>
 <hr>
 
-<h3 id="function-operator_7">function operator[]</h3>
+<h3 id="function-operator_6">function operator[]</h3>
 <p><em>Slice out some dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryDDims&gt;
 inline auto VectorFieldMem::operator[] (

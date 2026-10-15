@@ -99,12 +99,11 @@ Inherits the following classes: [VectorFieldCommon](classVectorFieldCommon.md)
 |  constexpr chunk\_span\_type | [**get**](#function-get) () noexcept const<br>_Get the Field describing the component in the QueryTag direction._  |
 |  constexpr [**view\_type**](classVectorField.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br> |
 |  constexpr [**span\_type**](classVectorField.md#typedef-span_type) | [**get\_field**](#function-get_field) () const<br> |
-|  KOKKOS\_FUNCTION [**element\_type**](classVectorField.md#typedef-element_type) const | [**operator()**](#function-operator) (ddc::DiscreteElement&lt; ODDims &gt; const &... delems) noexcept const<br> |
-|  KOKKOS\_FUNCTION [**element\_type**](classVectorField.md#typedef-element_type) const | [**operator()**](#function-operator_1) (Idx&lt; ODDims... &gt; const & delems) noexcept const<br> |
-|  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**VectorField**](classVectorField.md) & | [**operator=**](#function-operator_2) ([**VectorField**](classVectorField.md) const & other) = default<br> |
-|  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**VectorField**](classVectorField.md) & | [**operator=**](#function-operator_3) ([**VectorField**](classVectorField.md) && other) = default<br> |
-|  constexpr auto | [**operator[]**](#function-operator_4) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Slice out some dimensions._  |
-|  constexpr auto | [**operator[]**](#function-operator_5) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Slice out some dimensions._  |
+|  KOKKOS\_FUNCTION [**element\_type**](classVectorField.md#typedef-element_type) const | [**operator()**](#function-operator) (IdxType const &... idx\_dim) noexcept const<br> |
+|  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**VectorField**](classVectorField.md) & | [**operator=**](#function-operator_1) ([**VectorField**](classVectorField.md) const & other) = default<br> |
+|  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**VectorField**](classVectorField.md) & | [**operator=**](#function-operator_2) ([**VectorField**](classVectorField.md) && other) = default<br> |
+|  constexpr auto | [**operator[]**](#function-operator_3) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Slice out some dimensions._  |
+|  constexpr auto | [**operator[]**](#function-operator_4) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Slice out some dimensions._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~VectorField**](#function-vectorfield) () = default<br>[_**VectorField**_](classVectorField.md) _destructor._ |
 
 
@@ -618,60 +617,26 @@ A constant reference to the vector field.
 ### function operator() 
 
 ```C++
-template<class... ODDims>
+template<class... IdxType>
 inline KOKKOS_FUNCTION element_type const VectorField::operator() (
-    ddc::DiscreteElement< ODDims > const &... delems
+    IdxType const &... idx_dim
 ) noexcept const
 ```
 
 
 
-Element access using a list of Idxs 
+Element access using a multi-dimensional Idx or IdxStep. 
 
 **Parameters:**
 
 
-* `delems` 1D discrete coordinates 
+* `idx_dim` The index or index step which accesses the element. 
 
 
 
 **Returns:**
 
-copy of this element 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator() 
-
-```C++
-template<class... ODDims, class>
-inline KOKKOS_FUNCTION element_type const VectorField::operator() (
-    Idx< ODDims... > const & delems
-) noexcept const
-```
-
-
-
-Element access using a multi-dimensional Idx 
-
-**Parameters:**
-
-
-* `delems` discrete coordinates 
-
-
-
-**Returns:**
-
-copy of this element 
+Copy of the element accessed. 
 
 
 

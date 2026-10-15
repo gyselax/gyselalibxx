@@ -96,14 +96,13 @@ Inherits the following classes: [VectorFieldCommon](classVectorFieldCommon.md)
 |  [**view\_type**](classVectorFieldMem.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br> |
 |  [**view\_type**](classVectorFieldMem.md#typedef-view_type) | [**get\_field**](#function-get_field-12) () const<br> |
 |  [**span\_type**](classVectorFieldMem.md#typedef-span_type) | [**get\_field**](#function-get_field-22) () <br> |
-|  element\_type const | [**operator()**](#function-operator) (ddc::DiscreteElement&lt; ODDims &gt; const &... delems) noexcept const<br> |
-|  element\_type const | [**operator()**](#function-operator_1) (Idx&lt; ODDims... &gt; const & delems) noexcept const<br> |
-|  [**VectorFieldMem**](classVectorFieldMem.md) & | [**operator=**](#function-operator_2) ([**VectorFieldMem**](classVectorFieldMem.md) const & other) = delete<br>_Deleted: use deepcopy instead._  |
-|  [**VectorFieldMem**](classVectorFieldMem.md) & | [**operator=**](#function-operator_3) ([**VectorFieldMem**](classVectorFieldMem.md) && other) = default<br> |
-|  auto | [**operator[]**](#function-operator_4) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Slice out some dimensions._  |
-|  auto | [**operator[]**](#function-operator_5) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Slice out some dimensions._  |
-|  auto | [**operator[]**](#function-operator_6) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) const<br>_Slice out some dimensions._  |
-|  auto | [**operator[]**](#function-operator_7) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Slice out some dimensions._  |
+|  element\_type const | [**operator()**](#function-operator) (IdxType const &... idx\_dim) noexcept const<br> |
+|  [**VectorFieldMem**](classVectorFieldMem.md) & | [**operator=**](#function-operator_1) ([**VectorFieldMem**](classVectorFieldMem.md) const & other) = delete<br>_Deleted: use deepcopy instead._  |
+|  [**VectorFieldMem**](classVectorFieldMem.md) & | [**operator=**](#function-operator_2) ([**VectorFieldMem**](classVectorFieldMem.md) && other) = default<br> |
+|  auto | [**operator[]**](#function-operator_3) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Slice out some dimensions._  |
+|  auto | [**operator[]**](#function-operator_4) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Slice out some dimensions._  |
+|  auto | [**operator[]**](#function-operator_5) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) const<br>_Slice out some dimensions._  |
+|  auto | [**operator[]**](#function-operator_6) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Slice out some dimensions._  |
 |   | [**~VectorFieldMem**](#function-vectorfieldmem) () = default<br> |
 
 
@@ -566,60 +565,26 @@ A modifiable reference to this vector field.
 ### function operator() 
 
 ```C++
-template<class... ODDims>
+template<class... IdxType>
 inline element_type const VectorFieldMem::operator() (
-    ddc::DiscreteElement< ODDims > const &... delems
+    IdxType const &... idx_dim
 ) noexcept const
 ```
 
 
 
-Element access using a list of Idxs 
+Element access using a multi-dimensional Idx or IdxStep. 
 
 **Parameters:**
 
 
-* `delems` 1D discrete coordinates 
+* `idx_dim` The index or index step which accesses the element. 
 
 
 
 **Returns:**
 
-copy of this element 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator() 
-
-```C++
-template<class... ODDims, class>
-inline element_type const VectorFieldMem::operator() (
-    Idx< ODDims... > const & delems
-) noexcept const
-```
-
-
-
-Element access using a multi-dimensional Idx 
-
-**Parameters:**
-
-
-* `delems` discrete coordinates 
-
-
-
-**Returns:**
-
-copy of this element 
+Copy of the element accessed. 
 
 
 

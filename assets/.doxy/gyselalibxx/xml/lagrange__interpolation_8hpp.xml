@@ -29,6 +29,14 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
+      <node id="38">
+        <label>deriv_details.hpp</label>
+        <link refid="deriv__details_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
       <node id="33">
         <label>indexed_tensor.hpp</label>
         <link refid="indexed__tensor_8hpp"/>
@@ -104,10 +112,12 @@
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="40">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="7" relation="include">
@@ -117,7 +127,7 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="38">
+      <node id="39">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="7" relation="include">
@@ -128,7 +138,7 @@
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
@@ -168,7 +178,7 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -193,7 +203,7 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>identity_interpolation_builder.hpp</label>
         <link refid="identity__interpolation__builder_8hpp_source"/>
         <childnode refid="5" relation="include">
@@ -219,7 +229,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>lagrange_basis_uniform.hpp</label>
         <link refid="lagrange__basis__uniform_8hpp_source"/>
         <childnode refid="16" relation="include">
@@ -233,14 +243,14 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>lagrange_evaluator.hpp</label>
         <link refid="lagrange__evaluator_8hpp_source"/>
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -250,20 +260,20 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>nd_identity_interpolation_builder.hpp</label>
         <link refid="nd__identity__interpolation__builder_8hpp_source"/>
         <childnode refid="5" relation="include">
@@ -271,7 +281,7 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>nd_lagrange_evaluator.hpp</label>
         <link refid="nd__lagrange__evaluator_8hpp_source"/>
         <childnode refid="16" relation="include">
@@ -280,7 +290,7 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>

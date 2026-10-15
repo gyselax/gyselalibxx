@@ -26,12 +26,12 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
         <childnode refid="41" relation="include">
         </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>iadvectionvx.hpp</label>
         <link refid="iadvectionvx_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -57,6 +57,14 @@
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>deriv_details.hpp</label>
+        <link refid="deriv__details_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="34">
@@ -134,10 +142,12 @@
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="38">
+      <node id="39">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -147,7 +157,7 @@
         <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="37">
+      <node id="38">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -158,7 +168,7 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="38" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
@@ -190,7 +200,7 @@
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
@@ -233,7 +243,7 @@
         <childnode refid="32" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="40">
         <label>lagrange_basis_uniform.hpp</label>
         <link refid="lagrange__basis__uniform_8hpp_source"/>
         <childnode refid="19" relation="include">
@@ -269,7 +279,7 @@
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>species_info.hpp</label>
         <link refid="species__info_8hpp_source"/>
         <childnode refid="3" relation="include">

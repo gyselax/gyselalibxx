@@ -34,7 +34,7 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>inverse_jacobian_matrix.hpp</label>
         <link refid="inverse__jacobian__matrix_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -46,7 +46,7 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>metric_tensor_evaluator.hpp</label>
         <link refid="metric__tensor__evaluator_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -57,13 +57,21 @@
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>deriv_details.hpp</label>
+        <link refid="deriv__details_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="27">
@@ -141,10 +149,12 @@
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -154,7 +164,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="31">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -165,7 +175,7 @@
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
@@ -176,7 +186,7 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>polar_spline_evaluator.hpp</label>
         <link refid="polar__spline__evaluator_8hpp_source"/>
         <childnode refid="17" relation="include">
@@ -204,19 +214,19 @@
         <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>inf_norm_residual_criterion.hpp</label>
         <link refid="inf__norm__residual__criterion_8hpp_source"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="36" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="40">
         <label>matrix_batch.hpp</label>
         <link refid="matrix__batch_8hpp_source"/>
         <childnode refid="19" relation="include">
@@ -224,32 +234,32 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>matrix_batch_csr.hpp</label>
         <link refid="matrix__batch__csr_8hpp_source"/>
-        <childnode refid="33" relation="include">
-        </childnode>
         <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
       </node>
-      <node id="36">
+      <node id="37">
         <label>matrix_utils.hpp</label>
         <link refid="matrix__utils_8hpp_source"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
@@ -269,17 +279,17 @@
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
         <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
       <node id="21">
@@ -298,7 +308,7 @@
         <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="9" relation="include">
@@ -314,7 +324,7 @@
         <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="2" relation="include">
@@ -322,7 +332,7 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="2" relation="include">
@@ -333,7 +343,7 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
       </node>
       <node id="20">
@@ -410,16 +420,16 @@
       <node id="12">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="33">
+      <node id="34">
         <label>ginkgo/extensions/kokkos.hpp</label>
       </node>
-      <node id="37">
+      <node id="38">
         <label>ginkgo/extensions/kokkos/spaces.hpp</label>
       </node>
-      <node id="38">
+      <node id="39">
         <label>ginkgo/extensions/kokkos/types.hpp</label>
       </node>
-      <node id="34">
+      <node id="35">
         <label>ginkgo/ginkgo.hpp</label>
       </node>
       <node id="18">

@@ -578,6 +578,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "deriv_details.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
 
@@ -733,12 +734,12 @@ private:
                 typename FieldType::layout_type&gt;(std::move(std::get&lt;Is&gt;(chunk_slices))...);
     }
 
-    template &lt;class... ODDims, typename T, T... ints&gt;
+    template &lt;class IdxType, typename T, T... ints&gt;
     KOKKOS_FUNCTION element_type const operator()(
-            Idx&lt;ODDims...&gt; const&amp; delems,
+            IdxType const&amp; idx,
             std::integer_sequence&lt;T, ints...&gt;) const noexcept
     {
-        return element_type((this-&gt;m_values[ints](delems))...);
+        return element_type((this-&gt;m_values[ints](idx))...);
     }
 
 public:
@@ -817,21 +818,21 @@ public:
         return *this;
     }
 
-    template &lt;class... ODDims&gt;
-    KOKKOS_FUNCTION element_type const operator()(
-            ddc::DiscreteElement&lt;ODDims&gt; const&amp;... delems) const noexcept
+    template &lt;class... IdxType&gt;
+    KOKKOS_FUNCTION element_type const operator()(IdxType const&amp;... idx_dim) const noexcept
+            requires(
+                    (ddc::is_discrete_element_v&lt;IdxType&gt; &amp;&amp; ...)
+                    || (ddc::is_discrete_vector_v&lt;IdxType&gt; &amp;&amp; ...))
     {
-        Idx&lt;ODDims...&gt; delem_idx(delems...);
-        return this-&gt;
-        operator()(delem_idx, std::make_integer_sequence&lt;int, element_type::size()&gt; {});
+        if constexpr (sizeof...(IdxType) == 0) {
+            return this-&gt;
+            operator()(Idx&lt;&gt; {}, std::make_integer_sequence&lt;int, element_type::size()&gt; {});
+        } else {
+            using IdxTypeGrouped = ddc::combine_t&lt;IdxType...&gt;;
+            IdxTypeGrouped idx(idx_dim...);
+            return this-&gt;operator()(idx, std::make_integer_sequence&lt;int, element_type::size()&gt; {});
+        }
     }
-
-    template &lt;class... ODDims, class = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt;
-    KOKKOS_FUNCTION element_type const operator()(Idx&lt;ODDims...&gt; const&amp; delems) const noexcept
-    {
-        return this-&gt;operator()(delems, std::make_integer_sequence&lt;int, element_type::size()&gt; {});
-    }
-
 
     template &lt;class... QueryDDims&gt;
     constexpr auto operator[](Idx&lt;QueryDDims...&gt; const&amp; slice_spec)

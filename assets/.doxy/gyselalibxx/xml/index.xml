@@ -3437,7 +3437,7 @@
     <member refid="classVectorField_1a5a8f0b8e0054c95e55fb0750a80a043b" kind="function"><name>VectorField</name></member>
     <member refid="classVectorField_1a760da7060fd373be34d0f3e68be5b17e" kind="function"><name>VectorField</name></member>
     <member refid="classVectorField_1ae13cea18185c70ae4b1ee8ecd967c7a6" kind="function"><name>get_slice</name></member>
-    <member refid="classVectorField_1ab0bbdf046698b01aff1e966d75c789e6" kind="function"><name>operator()</name></member>
+    <member refid="classVectorField_1a972310c848d3b5705005dab92b836253" kind="function"><name>operator()</name></member>
     <member refid="classVectorField_1a59017a80e0e8dd2617f45938848fdcfa" kind="function"><name>VectorField</name></member>
     <member refid="classVectorField_1a2b36131fbfab447bcdc402fc91cf1131" kind="function"><name>~VectorField</name></member>
     <member refid="classVectorField_1aa8eec4895a4014560afa7dda745c2dda" kind="function"><name>VectorField</name></member>
@@ -3452,8 +3452,7 @@
     <member refid="classVectorField_1ab3ccb08f4e0e126273e19f8a25fe5d3a" kind="function"><name>operator=</name></member>
     <member refid="classVectorField_1aeb7f486875c7d07daae82b75f5ec86df" kind="function"><name>get_const_field</name></member>
     <member refid="classVectorField_1a59275acbcdd09c92c188790ac2bfca3e" kind="function"><name>get_field</name></member>
-    <member refid="classVectorField_1a20a0cf6842e82d0c5ac04da69ac984e7" kind="function"><name>operator()</name></member>
-    <member refid="classVectorField_1a5f40f7ef7598f56d57be677682224530" kind="function"><name>operator()</name></member>
+    <member refid="classVectorField_1a437df4f3145120b38367b5890b45a05d" kind="function"><name>operator()</name></member>
     <member refid="classVectorField_1a91884e95ae7f44dccbd595274f470426" kind="function"><name>operator[]</name></member>
     <member refid="classVectorField_1ad28c3e424b784451e334e370aee4568c" kind="function"><name>operator[]</name></member>
     <member refid="classVectorField_1a32ae690f71304ab13847d8f80e42e576" kind="function"><name>get</name></member>
@@ -3471,7 +3470,7 @@
     <member refid="classVectorFieldMem_1a6f62b5396ee5c34d3aa9abbfdb3ae30b" kind="typedef"><name>base_type</name></member>
     <member refid="classVectorFieldMem_1a69b83be2aa9a2e350191b76b4dde1b0e" kind="function"><name>VectorFieldMem</name></member>
     <member refid="classVectorFieldMem_1abe439e1867e7ac8d564e77ba3c78e621" kind="function"><name>VectorFieldMem</name></member>
-    <member refid="classVectorFieldMem_1a73403b839e5a86b3e4fbfb067def3173" kind="function"><name>operator()</name></member>
+    <member refid="classVectorFieldMem_1ae9bd0c63bc4368883052087040af27ca" kind="function"><name>operator()</name></member>
     <member refid="classVectorFieldMem_1a044e87b9de9db522db0e3d2aaac2545d" kind="function"><name>VectorFieldMem</name></member>
     <member refid="classVectorFieldMem_1a81b4258a4747f9c97202980c7218a438" kind="function"><name>VectorFieldMem</name></member>
     <member refid="classVectorFieldMem_1aff256d9dfc07862551c5f232334d8c50" kind="function"><name>VectorFieldMem</name></member>
@@ -3483,8 +3482,7 @@
     <member refid="classVectorFieldMem_1afeb8583634f557056ad970a2500769fa" kind="function"><name>get_const_field</name></member>
     <member refid="classVectorFieldMem_1acf40e163c1ae01c5034b46c3e8e74b9a" kind="function"><name>get_field</name></member>
     <member refid="classVectorFieldMem_1ac8c29526c973804e753b15c4e4ef6eec" kind="function"><name>get_field</name></member>
-    <member refid="classVectorFieldMem_1a5b66c7eca07a6ec79a9963fc13e2b6cc" kind="function"><name>operator()</name></member>
-    <member refid="classVectorFieldMem_1a4a5b0921086127d5a1e57ee4d587c5d5" kind="function"><name>operator()</name></member>
+    <member refid="classVectorFieldMem_1a95cd484d2608444fa7ec27e6aea4b8b7" kind="function"><name>operator()</name></member>
     <member refid="classVectorFieldMem_1a7a81a04ae5a72fd9236b3a3886dded3b" kind="function"><name>operator[]</name></member>
     <member refid="classVectorFieldMem_1a803238e91bdec84b861d8e7eb11cc8af" kind="function"><name>operator[]</name></member>
     <member refid="classVectorFieldMem_1a8f37de8cfbcb2dd9bc3b5a82acf98dc4" kind="function"><name>operator[]</name></member>

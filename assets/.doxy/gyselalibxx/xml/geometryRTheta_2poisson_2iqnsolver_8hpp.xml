@@ -33,10 +33,10 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>discrete_poloidal_cs_spline_mapping.hpp</label>
         <link refid="discrete__poloidal__cs__spline__mapping_8hpp_source"/>
-        <childnode refid="36" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -51,6 +51,14 @@
         <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>deriv_details.hpp</label>
+        <link refid="deriv__details_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="30">
@@ -128,10 +136,12 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -141,7 +151,7 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -152,7 +162,7 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -178,7 +188,7 @@
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -226,7 +236,7 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
@@ -327,7 +337,7 @@
       <node id="9">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="36">
+      <node id="37">
         <label>iostream</label>
       </node>
       <node id="26">

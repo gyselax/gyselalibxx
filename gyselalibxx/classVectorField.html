@@ -679,27 +679,23 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classVectorField.html#typedef-element_type"><strong>element_type</strong></a> const</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) noexcept const<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classVectorField.html#typedef-element_type"><strong>element_type</strong></a> const</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (Idx&lt; ODDims... &gt; const &amp; delems) noexcept const<br></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (IdxType const &amp;... idx_dim) noexcept const<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION constexpr <a href="classVectorField.html"><strong>VectorField</strong></a> &amp;</td>
-<td style="text-align: left;"><a href="#function-operator_2"><strong>operator=</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a> const &amp; other) = default<br></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator=</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a> const &amp; other) = default<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION constexpr <a href="classVectorField.html"><strong>VectorField</strong></a> &amp;</td>
-<td style="text-align: left;"><a href="#function-operator_3"><strong>operator=</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a> &amp;&amp; other) = default<br></td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator=</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a> &amp;&amp; other) = default<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr auto</td>
-<td style="text-align: left;"><a href="#function-operator_4"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) <br><em>Slice out some dimensions.</em></td>
+<td style="text-align: left;"><a href="#function-operator_3"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) <br><em>Slice out some dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr auto</td>
-<td style="text-align: left;"><a href="#function-operator_5"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) <br><em>Slice out some dimensions.</em></td>
+<td style="text-align: left;"><a href="#function-operator_4"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) <br><em>Slice out some dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
@@ -901,36 +897,21 @@ inline constexpr chunk_span_type VectorField::get () noexcept const
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<pre><code class="language-C++">template&lt;class... ODDims&gt;
+<pre><code class="language-C++">template&lt;class... IdxType&gt;
 inline KOKKOS_FUNCTION element_type const VectorField::operator() (
-    ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems
+    IdxType const &amp;... idx_dim
 ) noexcept const
 </code></pre>
-<p>Element access using a list of Idxs </p>
+<p>Element access using a multi-dimensional Idx or IdxStep. </p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>delems</code> 1D discrete coordinates </li>
+<li><code>idx_dim</code> The index or index step which accesses the element. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>copy of this element </p>
+<p>Copy of the element accessed. </p>
 <hr>
 
-<h3 id="function-operator_1">function operator()</h3>
-<pre><code class="language-C++">template&lt;class... ODDims, class&gt;
-inline KOKKOS_FUNCTION element_type const VectorField::operator() (
-    Idx&lt; ODDims... &gt; const &amp; delems
-) noexcept const
-</code></pre>
-<p>Element access using a multi-dimensional Idx </p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>delems</code> discrete coordinates </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>copy of this element </p>
-<hr>
-
-<h3 id="function-operator_2">function operator=</h3>
+<h3 id="function-operator_1">function operator=</h3>
 <pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION constexpr VectorField &amp; VectorField::operator= (
     VectorField const &amp; other
 ) = default
@@ -944,7 +925,7 @@ inline KOKKOS_FUNCTION element_type const VectorField::operator() (
 <p>*this </p>
 <hr>
 
-<h3 id="function-operator_3">function operator=</h3>
+<h3 id="function-operator_2">function operator=</h3>
 <pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION constexpr VectorField &amp; VectorField::operator= (
     VectorField &amp;&amp; other
 ) = default
@@ -958,7 +939,7 @@ inline KOKKOS_FUNCTION element_type const VectorField::operator() (
 <p>*this </p>
 <hr>
 
-<h3 id="function-operator_4">function operator[]</h3>
+<h3 id="function-operator_3">function operator[]</h3>
 <p><em>Slice out some dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryDDims&gt;
 inline constexpr auto VectorField::operator[] (
@@ -974,7 +955,7 @@ inline constexpr auto VectorField::operator[] (
 <p>A reference to the vector field on the sliced index range. </p>
 <hr>
 
-<h3 id="function-operator_5">function operator[]</h3>
+<h3 id="function-operator_4">function operator[]</h3>
 <p><em>Slice out some dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryDDims&gt;
 inline constexpr auto VectorField::operator[] (

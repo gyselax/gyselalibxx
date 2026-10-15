@@ -215,12 +215,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="134" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="134" bodyend="144"/>
       </memberdef>
-      <memberdef kind="function" id="classVectorFieldMem_1a73403b839e5a86b3e4fbfb067def3173" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classVectorFieldMem_1ae9bd0c63bc4368883052087040af27ca" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class...</type>
-            <declname>ODDims</declname>
-            <defname>ODDims</defname>
+            <type>class IdxType</type>
           </param>
           <param>
             <type>typename T</type>
@@ -233,12 +231,12 @@
         </templateparamlist>
         <type>element_type const</type>
         <definition>element_type const VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator()</definition>
-        <argsstring>(Idx&lt; ODDims... &gt; const &amp;delems, std::integer_sequence&lt; T, ints... &gt;) const noexcept</argsstring>
+        <argsstring>(IdxType const &amp;idx, std::integer_sequence&lt; T, ints... &gt;) const noexcept</argsstring>
         <name>operator()</name>
         <qualifiedname>VectorFieldMem::operator()</qualifiedname>
         <param>
-          <type>Idx&lt; ODDims... &gt; const &amp;</type>
-          <declname>delems</declname>
+          <type>IdxType const &amp;</type>
+          <declname>idx</declname>
         </param>
         <param>
           <type>std::integer_sequence&lt; T, ints... &gt;</type>
@@ -246,12 +244,12 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Element access using a multi-dimensional Idx <parameterlist kind="param"><parameteritem>
+<para>Element access using a multi-dimensional Idx or IdxStep <parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>delems</parametername>
+<parametername>idx</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>discrete coordinates </para>
+<para>the index or index step which accesses the element </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -543,83 +541,43 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="242" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="242" bodyend="245"/>
       </memberdef>
-      <memberdef kind="function" id="classVectorFieldMem_1a5b66c7eca07a6ec79a9963fc13e2b6cc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classVectorFieldMem_1a95cd484d2608444fa7ec27e6aea4b8b7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
-            <declname>ODDims</declname>
-            <defname>ODDims</defname>
+            <declname>IdxType</declname>
+            <defname>IdxType</defname>
           </param>
         </templateparamlist>
         <type>element_type const</type>
         <definition>element_type const VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator()</definition>
-        <argsstring>(ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</argsstring>
+        <argsstring>(IdxType const &amp;... idx_dim) const noexcept</argsstring>
         <name>operator()</name>
         <qualifiedname>VectorFieldMem::operator()</qualifiedname>
         <param>
-          <type>ddc::DiscreteElement&lt; ODDims &gt; const &amp;...</type>
-          <declname>delems</declname>
+          <type>IdxType const &amp;...</type>
+          <declname>idx_dim</declname>
         </param>
+    <requiresclause>( (ddc::is_discrete_element_v&lt;IdxType&gt; &amp;&amp; ...) || (ddc::is_discrete_vector_v&lt;IdxType&gt; &amp;&amp; ...))    </requiresclause>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Element access using a list of Idxs <parameterlist kind="param"><parameteritem>
+<para>Element access using a multi-dimensional Idx or IdxStep. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>delems</parametername>
+<parametername>idx_dim</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>1D discrete coordinates </para>
+<para>The index or index step which accesses the element. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>copy of this element </para>
+<simplesect kind="return"><para>Copy of the element accessed. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="252" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="252" bodyend="257"/>
-      </memberdef>
-      <memberdef kind="function" id="classVectorFieldMem_1a4a5b0921086127d5a1e57ee4d587c5d5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class...</type>
-            <declname>ODDims</declname>
-            <defname>ODDims</defname>
-          </param>
-          <param>
-            <type>class</type>
-            <defval>std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;</defval>
-          </param>
-        </templateparamlist>
-        <type>element_type const</type>
-        <definition>element_type const VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator()</definition>
-        <argsstring>(Idx&lt; ODDims... &gt; const &amp;delems) const noexcept</argsstring>
-        <name>operator()</name>
-        <qualifiedname>VectorFieldMem::operator()</qualifiedname>
-        <param>
-          <type>Idx&lt; ODDims... &gt; const &amp;</type>
-          <declname>delems</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Element access using a multi-dimensional Idx <parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>delems</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>discrete coordinates </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>copy of this element </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="264" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="264" bodyend="267"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="253" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="253" bodyend="265"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a7a81a04ae5a72fd9236b3a3886dded3b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -658,7 +616,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="281" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="281" bodyend="284"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="278" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="278" bodyend="281"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a803238e91bdec84b861d8e7eb11cc8af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -697,7 +655,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="297" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="297" bodyend="300"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="294" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="294" bodyend="297"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a8f37de8cfbcb2dd9bc3b5a82acf98dc4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -736,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="312" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="312" bodyend="315"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="309" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="309" bodyend="312"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a5770ccc15ea62e4105e65aab707837e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -775,7 +733,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="327" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="327" bodyend="330"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="324" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="324" bodyend="327"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a7c254b8e4de647c26d5961ed7976f573" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -798,7 +756,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="338" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="338" bodyend="342"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="335" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="335" bodyend="339"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1ac34d633f44e6b30ac0500b7262bf6b7c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -821,7 +779,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="350" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="350" bodyend="354"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="347" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="347" bodyend="351"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -889,7 +847,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="56" bodyend="355"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="56" bodyend="352"/>
     <listofallmembers>
       <member refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>Allocator</name></member>
       <member refid="classVectorFieldMem_1a6f62b5396ee5c34d3aa9abbfdb3ae30b" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>base_type</name></member>
@@ -902,9 +860,8 @@
       <member refid="classVectorFieldMem_1ac8c29526c973804e753b15c4e4ef6eec" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>get_field</name></member>
       <member refid="classVectorFieldMem_1a9b16375d74b5200bcd8fed9c55e57c92" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>index_range_type</name></member>
       <member refid="classVectorFieldMem_1a4399b76b097cfac6b274dae5204a548c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>memory_space</name></member>
-      <member refid="classVectorFieldMem_1a73403b839e5a86b3e4fbfb067def3173" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
-      <member refid="classVectorFieldMem_1a5b66c7eca07a6ec79a9963fc13e2b6cc" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
-      <member refid="classVectorFieldMem_1a4a5b0921086127d5a1e57ee4d587c5d5" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
+      <member refid="classVectorFieldMem_1ae9bd0c63bc4368883052087040af27ca" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
+      <member refid="classVectorFieldMem_1a95cd484d2608444fa7ec27e6aea4b8b7" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
       <member refid="classVectorFieldMem_1a13e8628ef73113e5c9d09c63eb6d159d" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator=</name></member>
       <member refid="classVectorFieldMem_1ac813597853877e75100199b476a73828" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator=</name></member>
       <member refid="classVectorFieldMem_1a7a81a04ae5a72fd9236b3a3886dded3b" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
