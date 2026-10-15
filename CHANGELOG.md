@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `InterfaceDerivCoeffs::get_approx_cross_deriv()`.
 - Add an `InfNormResidual` Ginkgo stopping criterion based on the infinite norm of the residual.
 - Add `GkoMatrixResidualNorm` to choose the norm (2-norm or infinite norm) used in the stopping criterion of the `MatrixBatchCsr` CG and BiCGSTAB solvers. It can be passed to the constructors of `MatrixBatchCsr` and `PolarSplineFEMPoissonLikeSolver`.
+- Add `Span3D`, `Span4D`, `DSpan3D` and `DSpan4D` aliases.
+- Add `PolarBSplines::eval_basis_and_n_derivs` to evaluate the polar basis splines and their mixed derivatives at once.
 - Allow `IdxStep` indexing for `VectorField` objects.
 
 ### Fixed
