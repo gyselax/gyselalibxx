@@ -6,6 +6,7 @@
 
 #include "2patches_2d_onion_shape_non_uniform.hpp"
 #include "constant_extrapolation_rules_onion.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
@@ -1231,4 +1232,10 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesDerivFieldOnCoordField)
             eval_functions_and_derivs.template get<Patch2>(),
             evaluator_2,
             const_spline_2);
+}
+
+TEST_F(MultipatchSplineEvaluatorTest, StaticAssertions)
+{
+    static_assert(concepts::InterpolationEvaluator<DeviceMultipatchSplineRThetaEvaluator>);
+    static_assert(concepts::InterpolationEvaluator<HostMultipatchSplineRThetaEvaluator>);
 }
