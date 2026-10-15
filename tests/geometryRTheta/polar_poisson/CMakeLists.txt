@@ -49,6 +49,4 @@ target_link_libraries(polar_poisson_like_solver_test
 
 gtest_discover_tests(polar_poisson_like_solver_test
     DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
-    DISCOVERY_MODE PRE_TEST
-    PROPERTIES TIMEOUT 60
-    PROPERTIES COST 20)
+    DISCOVERY_MODE PRE_TEST)
