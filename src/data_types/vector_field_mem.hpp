@@ -148,10 +148,10 @@ private:
      * @return copy of this element
      */
     template <class IdxType, typename T, T... ints>
-    element_type const operator()(IdxType const& delems, std::integer_sequence<T, ints...>)
+    element_type const operator()(IdxType const& idx, std::integer_sequence<T, ints...>)
             const noexcept
     {
-        return element_type((this->m_values[ints](delems))...);
+        return element_type((this->m_values[ints](idx))...);
     }
 
 public:
