@@ -7,6 +7,7 @@
 #include "2patches_2d_non_periodic_non_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
+#include "i_interpolation_builder.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
@@ -728,4 +729,10 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
     apply_builder_2(function_2_coef_expected, function_and_derivs_2);
 
     check_if_equal_to_expected(function_coef, function_1_coef_expected, function_2_coef_expected);
+}
+
+TEST_F(MultipatchSplineBuilder2DTest, StaticAssertions)
+{
+    static_assert(concepts::InterpolationBuilder<
+                  MultipatchSplineBuilderXY<ddc::SplineBuilderClosure::GREVILLE>>);
 }
