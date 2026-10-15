@@ -117,10 +117,9 @@ public:
     /**
      * @brief Get the value and the derivatives of a tensor product B-spline at a quadrature point.
      *
-     * @param[out] derivs The derivatives of the B-spline at the quadrature point.
-     * @param[in] idx The 2D index of the tensor product B-spline.
      * @param[in] idx_quad The index of the quadrature point.
-     * @return The value of the B-spline at the quadrature point.
+     * @param[in] idx The 2D index of the tensor product B-spline.
+     * @return The value and derivatives of the B-spline at the quadrature point.
      */
     KOKKOS_FUNCTION std::tuple<double, DVector<R_cov, Theta_cov>> vals_and_derivs(
             Idx<QDimRMesh, QDimThetaMesh> idx_quad,
