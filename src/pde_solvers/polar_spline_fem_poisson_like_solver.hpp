@@ -104,9 +104,6 @@ private:
     /// The 1D B-splines in the poloidal direction
     using BSplinesTheta = typename PolarBSplinesRTheta::BSplinesTheta_tag;
 
-    using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
-    using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
-
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
     /// The type of an index range over the polar B-splines
@@ -296,13 +293,15 @@ public:
      * @param[in] max_iter
      *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
-     *      The residual tolerance for the batched CSR solver. Be careful! the relative residual
-     *      provided here, will be used as "implicit residual" in ginkgo solver.
+     *      The residual tolerance for the batched CSR solver. The solver stops when
+     *      ||r||/||b|| <= res_tol where r is the residual computed by the CG recurrence.
      * @param[in] batch_solver_logger
      *      Indicates whether log information such as the residual and the number of iterations
      *      should be monitored.
      * @param[in] preconditioner_max_block_size
      *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
+     * @param[in] residual_norm
+     *      The norm used to evaluate the residual in the stopping criterion.
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
@@ -313,7 +312,8 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = std::nullopt)
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
         : m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_idxrange_fem_non_singular(
                   ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
@@ -370,7 +370,8 @@ public:
                 max_iter,
                 res_tol,
                 batch_solver_logger,
-                preconditioner_max_block_size);
+                preconditioner_max_block_size,
+                residual_norm);
     }
 
     /**
@@ -448,6 +449,9 @@ public:
 
         IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
 
+        typename PoissonAssembler::TensorBSplineStash bspline_stash
+                = m_assembler.get_tensor_bspline_stash();
+
         // Fill b
 
         // Fill b for the basis functions around the O-point
@@ -474,9 +478,10 @@ public:
                                                                + IdxStep<QDimRMesh, QDimThetaMesh>(
                                                                        r_thread_index,
                                                                        theta_thread_index);
-                                const CoordRTheta coord(ddc::coordinate(idx_quad));
-                                sum += eval_rhs(rhs, batch_idx, coord)
-                                       * get_polar_bspline_vals(coord, idx) * int_volume(idx_quad);
+                                sum += eval_rhs(rhs, batch_idx, ddc::coordinate(idx_quad))
+                                       * detail_poisson::get_polar_bspline_vals_and_derivs<
+                                               false>(idx_quad, idx)
+                                       * int_volume(idx_quad);
                             },
                             teamSum);
 
@@ -498,37 +503,9 @@ public:
                     IdxBatch const batch_idx(idx_full);
                     IdxBSPolar const idx(idx_full);
                     const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-                    const IdxBSR idx_r(idx_2d);
-                    const IdxBSTheta idx_theta(idx_2d);
-
-                    auto& bspl_r = ddc::discrete_space<BSplinesR>();
-                    auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
-
-                    // Find the cells on which the bspline is non-zero
-                    const Idx<KnotsR> start_non_zero_r(
-                            Kokkos::
-                                    max(bspl_r.break_point_domain().front(),
-                                        bspl_r.get_first_support_knot(idx_r)));
-                    const Idx<KnotsR> end_non_zero_r(
-                            Kokkos::
-                                    min(bspl_r.break_point_domain().back(),
-                                        bspl_r.get_last_support_knot(idx_r)));
-
-                    const Idx<KnotsTheta> start_non_zero_theta(
-                            bspl_theta.get_first_support_knot(idx_theta));
-                    const Idx<KnotsTheta> end_non_zero_theta(
-                            bspl_theta.get_last_support_knot(idx_theta));
-                    const IdxRangeQuadratureRTheta quad_range
-                            = detail_poisson::get_quadrature_between_knots<
-                                    QDimRMesh,
-                                    QDimThetaMesh,
-                                    BSplinesR,
-                                    BSplinesTheta>(
-                                    start_non_zero_r,
-                                    end_non_zero_r,
-                                    start_non_zero_theta,
-                                    end_non_zero_theta,
-                                    full_quad_idx_range.front());
+                    // Find the quadrature points on which the bspline is non-zero
+                    const IdxRangeQuadratureRTheta quad_range = detail_poisson::
+                            get_support_quadrature(idx_2d, full_quad_idx_range.front());
 
                     // Calculate the weak integral
                     b(batch_idx, idx) = 0.0;
@@ -542,7 +519,7 @@ public:
                             IdxQuadratureRTheta idx_quad(idx_quad_r, idx_quad_theta);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
                             b(batch_idx, idx) += eval_rhs(rhs, batch_idx, coord)
-                                                 * get_polar_bspline_vals(coord, idx)
+                                                 * bspline_stash.vals(idx_quad, idx_2d)
                                                  * int_volume(idx_quad);
                         }
                     }
@@ -621,23 +598,6 @@ public:
                 rho_func(m_evaluator, get_const_field(rho_coeff_alloc));
 
         (*this)(phi, rho_func);
-    }
-
-    /**
-     * @brief Get the value of the specified polar bspline at the specified point.
-     *
-     * @param[in] coord
-     *      The coordinate where the value of the polar bspline should be calculated.
-     * @param[in] idx
-     *      The polar bspline of interest.
-     * @return The value of the polar bspline at the coordinate.
-     */
-    static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(CoordRTheta coord, IdxBSPolar idx)
-    {
-        double val;
-        detail_poisson::
-                get_polar_bspline_vals_and_derivs<PolarBSplinesRTheta, false>(val, coord, idx);
-        return val;
     }
 
 private:
