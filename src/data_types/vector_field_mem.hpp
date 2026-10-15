@@ -260,12 +260,11 @@ public:
      * @return copy of this element
      */
     template <class... IdxType>
-    element_type const operator()(IdxType const&... idx_dim) const noexcept
-            requires(
-                    sizeof...(IdxType) > 1 && (ddc::is_discrete_element_v<IdxType> && ...)
-                    || (ddc::is_discrete_vector_v<IdxType> && ...))
+    element_type const operator()(IdxType const&... idx_dim) const noexcept requires(
+            sizeof...(IdxType) > 1 && (ddc::is_discrete_element_v<IdxType> && ...)
+            || (ddc::is_discrete_vector_v<IdxType> && ...))
     {
-        using GroupedIdxType = detail::combine_t<IdxType...>;
+        using GroupedIdxType = ddc::combine_t<IdxType...>;
         GroupedIdxType idx(idx_dim...);
         return this->operator()(idx, std::make_integer_sequence<int, element_type::size()> {});
     }
