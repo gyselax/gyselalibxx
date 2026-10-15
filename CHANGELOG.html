@@ -733,6 +733,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add <code>InterfaceDerivCoeffs::get_approx_cross_deriv()</code>.</li>
 <li>Add an <code>InfNormResidual</code> Ginkgo stopping criterion based on the infinite norm of the residual.</li>
 <li>Add <code>GkoMatrixResidualNorm</code> to choose the norm (2-norm or infinite norm) used in the stopping criterion of the <code>MatrixBatchCsr</code> CG and BiCGSTAB solvers. It can be passed to the constructors of <code>MatrixBatchCsr</code> and <code>PolarSplineFEMPoissonLikeSolver</code>.</li>
+<li>Add <code>Span3D</code>, <code>Span4D</code>, <code>DSpan3D</code> and <code>DSpan4D</code> aliases.</li>
+<li>Add <code>PolarBSplines::eval_basis_and_n_derivs</code> to evaluate the polar basis splines and their mixed derivatives at once.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>

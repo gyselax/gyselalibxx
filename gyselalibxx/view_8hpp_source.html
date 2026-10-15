@@ -666,6 +666,12 @@ template &lt;class ElementType&gt;
 using Span2D = SpanND&lt;2, ElementType&gt;;
 
 template &lt;class ElementType&gt;
+using Span3D = SpanND&lt;3, ElementType&gt;;
+
+template &lt;class ElementType&gt;
+using Span4D = SpanND&lt;4, ElementType&gt;;
+
+template &lt;class ElementType&gt;
 using View1D = ViewND&lt;1, ElementType&gt;;
 
 template &lt;class ElementType&gt;
@@ -692,6 +698,10 @@ KOKKOS_FUNCTION Span1D&lt;const ElementType&gt; as_span(std::array&lt;ElementTyp
 using DSpan1D = Span1D&lt;double&gt;;
 
 using DSpan2D = Span2D&lt;double&gt;;
+
+using DSpan3D = Span3D&lt;double&gt;;
+
+using DSpan4D = Span4D&lt;double&gt;;
 
 using CDSpan1D = Span1D&lt;double const&gt;;
 

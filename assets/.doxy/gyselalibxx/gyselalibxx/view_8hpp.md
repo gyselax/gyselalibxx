@@ -41,11 +41,15 @@
 | typedef Kokkos::View&lt; double[N], Kokkos::HostSpace &gt; | [**DKokkosView\_h**](#typedef-dkokkosview_h)  <br> |
 | typedef Span1D&lt; double &gt; | [**DSpan1D**](#typedef-dspan1d)  <br> |
 | typedef Span2D&lt; double &gt; | [**DSpan2D**](#typedef-dspan2d)  <br> |
+| typedef Span3D&lt; double &gt; | [**DSpan3D**](#typedef-dspan3d)  <br> |
+| typedef Span4D&lt; double &gt; | [**DSpan4D**](#typedef-dspan4d)  <br> |
 | typedef View1D&lt; double &gt; | [**DView1D**](#typedef-dview1d)  <br> |
 | typedef View2D&lt; double &gt; | [**DView2D**](#typedef-dview2d)  <br> |
 | typedef std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt; | [**Matrix\_2x2**](#typedef-matrix_2x2)  <br>_The type of the Jacobian matrix and its inverse._  |
 | typedef SpanND&lt; 1, ElementType &gt; | [**Span1D**](#typedef-span1d)  <br> |
 | typedef SpanND&lt; 2, ElementType &gt; | [**Span2D**](#typedef-span2d)  <br> |
+| typedef SpanND&lt; 3, ElementType &gt; | [**Span3D**](#typedef-span3d)  <br> |
+| typedef SpanND&lt; 4, ElementType &gt; | [**Span4D**](#typedef-span4d)  <br> |
 | typedef Kokkos::mdspan&lt; ElementType, Kokkos::dextents&lt; std::size\_t, N &gt; &gt; | [**SpanND**](#typedef-spannd)  <br> |
 | typedef ViewND&lt; 1, ElementType &gt; | [**View1D**](#typedef-view1d)  <br> |
 | typedef ViewND&lt; 2, ElementType &gt; | [**View2D**](#typedef-view2d)  <br> |
@@ -188,6 +192,32 @@ using DSpan2D =  Span2D<double>;
 
 
 
+### typedef DSpan3D 
+
+```C++
+using DSpan3D =  Span3D<double>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DSpan4D 
+
+```C++
+using DSpan4D =  Span4D<double>;
+```
+
+
+
+
+<hr>
+
+
+
 ### typedef DView1D 
 
 ```C++
@@ -245,6 +275,32 @@ using Span1D =  SpanND<1, ElementType>;
 
 ```C++
 using Span2D =  SpanND<2, ElementType>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef Span3D 
+
+```C++
+using Span3D =  SpanND<3, ElementType>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef Span4D 
+
+```C++
+using Span4D =  SpanND<4, ElementType>;
 ```
 
 

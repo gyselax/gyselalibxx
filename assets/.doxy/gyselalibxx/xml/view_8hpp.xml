@@ -796,6 +796,42 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="97" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="97" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="view_8hpp_1a2ae23e5943ab220e110a1a5ced4d2bb2" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>SpanND&lt; 3, ElementType &gt;</type>
+        <definition>using Span3D =  SpanND&lt;3, ElementType&gt;</definition>
+        <argsstring></argsstring>
+        <name>Span3D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="100" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="view_8hpp_1a67e8ce0b79b064a6440abfb35a3bcb98" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>SpanND&lt; 4, ElementType &gt;</type>
+        <definition>using Span4D =  SpanND&lt;4, ElementType&gt;</definition>
+        <argsstring></argsstring>
+        <name>Span4D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="103" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a31d6afc58d540e31ebf64c6f678dace7" prot="public" static="no">
         <templateparamlist>
           <param>
@@ -812,7 +848,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="100" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="100" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="106" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a2baa278049013f1fefb4a8461042e826" prot="public" static="no">
         <templateparamlist>
@@ -830,7 +866,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="103" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="103" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="109" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a4bb7ce4c528a7c1e92770688e6442bc1" prot="public" static="no">
         <templateparamlist>
@@ -850,7 +886,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="106" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="106" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="112" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a1335532dfe880a4f588e7bb66ec5f1c7" prot="public" static="no">
         <templateparamlist>
@@ -870,7 +906,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="109" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="109" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="115" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1aef81bc6aa6da1fa32c3d26155fa5c4da" prot="public" static="no">
         <type>Span1D&lt; double &gt;</type>
@@ -883,7 +919,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="123" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="123" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="129" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="129" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a1900949dea2593220c77fe150bf15f65" prot="public" static="no">
         <type>Span2D&lt; double &gt;</type>
@@ -896,7 +932,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="125" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="125" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="131" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="view_8hpp_1af7ecc2f8393c625192a530f9483b159d" prot="public" static="no">
+        <type>Span3D&lt; double &gt;</type>
+        <definition>using DSpan3D =  Span3D&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DSpan3D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="133" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="view_8hpp_1a6680f634a43f826dcb81d619612d82d8" prot="public" static="no">
+        <type>Span4D&lt; double &gt;</type>
+        <definition>using DSpan4D =  Span4D&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DSpan4D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="135" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a084108b66ceeccd1568ccda15cc29b06" prot="public" static="no">
         <type>Span1D&lt; double const  &gt;</type>
@@ -909,7 +971,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="127" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="127" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="137" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a5d7d63c4b1456b0e34f137c142f4e446" prot="public" static="no">
         <type>Span2D&lt; double const  &gt;</type>
@@ -922,7 +984,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="129" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="129" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="139" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a56734050bb01604213e77d2d1bd25293" prot="public" static="no">
         <type>View1D&lt; double &gt;</type>
@@ -935,7 +997,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="131" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="131" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="141" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="141" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a36cf55eaa8ec8adf07706ae728fabe9e" prot="public" static="no">
         <type>View2D&lt; double &gt;</type>
@@ -948,7 +1010,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="133" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="133" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="143" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="view_8hpp_1a0c85471b608cc2ade52693f86fec7e24" prot="public" static="no">
         <type>std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</type>
@@ -962,7 +1024,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="136" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="136" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="146" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="146" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -991,7 +1053,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="112" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="112" bodyend="115"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="118" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="118" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="view_8hpp_1a7a32ce7702bf3db9462fc7f3d163cd3d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -1018,7 +1080,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="118" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="118" bodyend="121"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="124" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="124" bodyend="127"/>
       </memberdef>
       <memberdef kind="function" id="view_8hpp_1a37a4dac77b0399ec68529d6eaf58003a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1054,7 +1116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="144" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="144" bodyend="149"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" line="154" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp" bodystart="154" bodyend="159"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1156,53 +1218,63 @@
 <codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Span2D<sp/>=<sp/>SpanND&lt;2,<sp/>ElementType&gt;;</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"></highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">View1D<sp/>=<sp/>ViewND&lt;1,<sp/>ElementType&gt;;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Span3D<sp/>=<sp/>SpanND&lt;3,<sp/>ElementType&gt;;</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
 <codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">View2D<sp/>=<sp/>ViewND&lt;2,<sp/>ElementType&gt;;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Span4D<sp/>=<sp/>SpanND&lt;4,<sp/>ElementType&gt;;</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>N&gt;</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DKokkosView<sp/>=<sp/>Kokkos::View&lt;double[N]&gt;;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">View1D<sp/>=<sp/>ViewND&lt;1,<sp/>ElementType&gt;;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>N&gt;</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DKokkosView_h<sp/>=<sp/>Kokkos::View&lt;double[N],<sp/>Kokkos::HostSpace&gt;;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">View2D<sp/>=<sp/>ViewND&lt;2,<sp/>ElementType&gt;;</highlight></codeline>
 <codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>N&gt;</highlight></codeline>
-<codeline lineno="112"><highlight class="normal">KOKKOS_FUNCTION<sp/>Span1D&lt;ElementType&gt;<sp/>as_span(std::array&lt;ElementType,<sp/>N&gt;&amp;<sp/>arr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="113"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Span1D&lt;ElementType&gt;(arr.data(),<sp/>N);</highlight></codeline>
-<codeline lineno="115"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>N&gt;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DKokkosView<sp/>=<sp/>Kokkos::View&lt;double[N]&gt;;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>N&gt;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DKokkosView_h<sp/>=<sp/>Kokkos::View&lt;double[N],<sp/>Kokkos::HostSpace&gt;;</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight></codeline>
 <codeline lineno="117"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>N&gt;</highlight></codeline>
-<codeline lineno="118"><highlight class="normal">KOKKOS_FUNCTION<sp/>Span1D&lt;const<sp/>ElementType&gt;<sp/>as_span(std::array&lt;ElementType,<sp/>N&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>arr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal">KOKKOS_FUNCTION<sp/>Span1D&lt;ElementType&gt;<sp/>as_span(std::array&lt;ElementType,<sp/>N&gt;&amp;<sp/>arr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="119"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Span1D&lt;const<sp/>ElementType&gt;(arr.data(),<sp/>N);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Span1D&lt;ElementType&gt;(arr.data(),<sp/>N);</highlight></codeline>
 <codeline lineno="121"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DSpan1D<sp/>=<sp/>Span1D&lt;double&gt;;</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DSpan2D<sp/>=<sp/>Span2D&lt;double&gt;;</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CDSpan1D<sp/>=<sp/>Span1D&lt;double<sp/>const&gt;;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>N&gt;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">KOKKOS_FUNCTION<sp/>Span1D&lt;const<sp/>ElementType&gt;<sp/>as_span(std::array&lt;ElementType,<sp/>N&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>arr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Span1D&lt;const<sp/>ElementType&gt;(arr.data(),<sp/>N);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"></highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CDSpan2D<sp/>=<sp/>Span2D&lt;double<sp/>const&gt;;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DSpan1D<sp/>=<sp/>Span1D&lt;double&gt;;</highlight></codeline>
 <codeline lineno="130"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DView1D<sp/>=<sp/>View1D&lt;double&gt;;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DSpan2D<sp/>=<sp/>Span2D&lt;double&gt;;</highlight></codeline>
 <codeline lineno="132"><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DView2D<sp/>=<sp/>View2D&lt;double&gt;;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DSpan3D<sp/>=<sp/>Span3D&lt;double&gt;;</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="136"><highlight class="keyword">using<sp/></highlight><highlight class="normal">Matrix_2x2<sp/>=<sp/>std::array&lt;std::array&lt;double,<sp/>2&gt;,<sp/>2&gt;;</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight></codeline>
-<codeline lineno="138"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>C&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight><highlight class="comment">//<sp/>constexpr<sp/>bool<sp/>is_contiguous_v<sp/>=<sp/>detail::IsContiguous&lt;C&gt;::val;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DSpan4D<sp/>=<sp/>Span4D&lt;double&gt;;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CDSpan1D<sp/>=<sp/>Span1D&lt;double<sp/>const&gt;;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CDSpan2D<sp/>=<sp/>Span2D&lt;double<sp/>const&gt;;</highlight></codeline>
 <codeline lineno="140"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Extents,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Layout,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Accessor&gt;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal">std::ostream&amp;<sp/>operator&lt;&lt;(</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ostream&amp;<sp/>os,</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::mdspan&lt;ElementType,<sp/>Extents,<sp/>Layout,<sp/>Accessor&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>s)</highlight></codeline>
-<codeline lineno="147"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>detail::stream_impl(os,<sp/>s,<sp/>std::make_index_sequence&lt;Extents::rank()&gt;());</highlight></codeline>
-<codeline lineno="149"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DView1D<sp/>=<sp/>View1D&lt;double&gt;;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DView2D<sp/>=<sp/>View2D&lt;double&gt;;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="keyword">using<sp/></highlight><highlight class="normal">Matrix_2x2<sp/>=<sp/>std::array&lt;std::array&lt;double,<sp/>2&gt;,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>C&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="comment">//<sp/>constexpr<sp/>bool<sp/>is_contiguous_v<sp/>=<sp/>detail::IsContiguous&lt;C&gt;::val;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Extents,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Layout,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Accessor&gt;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">std::ostream&amp;<sp/>operator&lt;&lt;(</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ostream&amp;<sp/>os,</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::mdspan&lt;ElementType,<sp/>Extents,<sp/>Layout,<sp/>Accessor&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>s)</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>detail::stream_impl(os,<sp/>s,<sp/>std::make_index_sequence&lt;Extents::rank()&gt;());</highlight></codeline>
+<codeline lineno="159"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp"/>
   </compounddef>

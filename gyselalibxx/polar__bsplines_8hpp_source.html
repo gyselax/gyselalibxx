@@ -950,6 +950,13 @@ public:
             return eval(singular_derivs, derivs, p, deriv_order);
         }
 
+        KOKKOS_FUNCTION tensor_product_index_type eval_basis_and_n_derivs(
+                DSpan3D singular_values_and_derivs,
+                DSpan4D values_and_derivs,
+                Coord&lt;R, Theta&gt; x,
+                std::size_t n_derivs_r,
+                std::size_t n_derivs_theta) const;
+
         [[deprecated("Use eval_deriv(..., Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1)) instead")]] KOKKOS_FUNCTION
                 tensor_product_index_type
                 eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord&lt;R, Theta&gt; p) const
@@ -995,6 +1002,15 @@ public:
                 DSpan2D values,
                 Coord&lt;R, Theta&gt; coord_eval,
                 Idx&lt;DerivDims...&gt; deriv_order) const;
+
+        template &lt;class SingularValues, class Values, class ValuesR, class ValuesTheta&gt;
+        KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; eval_from_1d_values(
+                SingularValues singular_values,
+                Values values,
+                ValuesR vals_r,
+                ValuesTheta vals_theta,
+                Idx&lt;BSplinesR&gt; jmin_r,
+                Idx&lt;BSplinesTheta&gt; jmin_theta) const;
     };
 };
 
@@ -1059,6 +1075,86 @@ KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, 
         }
     }
 
+    return eval_from_1d_values(singular_values, values, vals_r, vals_theta, jmin_r, jmin_theta);
+}
+
+template &lt;class BSplinesR, class BSplinesTheta, int C&gt;
+template &lt;class DDim, class MemorySpace&gt;
+KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::
+        Impl&lt;DDim, MemorySpace&gt;::eval_basis_and_n_derivs(
+                DSpan3D singular_values_and_derivs,
+                DSpan4D values_and_derivs,
+                Coord&lt;R, Theta&gt; x,
+                std::size_t n_derivs_r,
+                std::size_t n_derivs_theta) const
+{
+    std::size_t constexpr nr = BSplinesR::degree() + 1;
+    std::size_t constexpr ntheta = BSplinesTheta::degree() + 1;
+
+    KOKKOS_ASSERT(n_derivs_r &lt; nr);
+    KOKKOS_ASSERT(n_derivs_theta &lt; ntheta);
+    KOKKOS_ASSERT(singular_values_and_derivs.extent(0) == n_singular_basis());
+    KOKKOS_ASSERT(singular_values_and_derivs.extent(1) == std::size_t(n_derivs_r + 1));
+    KOKKOS_ASSERT(singular_values_and_derivs.extent(2) == std::size_t(n_derivs_theta + 1));
+    KOKKOS_ASSERT(values_and_derivs.extent(0) == nr);
+    KOKKOS_ASSERT(values_and_derivs.extent(1) == ntheta);
+    KOKKOS_ASSERT(values_and_derivs.extent(2) == std::size_t(n_derivs_r + 1));
+    KOKKOS_ASSERT(values_and_derivs.extent(3) == std::size_t(n_derivs_theta + 1));
+
+    std::array&lt;double, nr * nr&gt; derivs_r_ptr;
+    DSpan2D const derivs_r(derivs_r_ptr.data(), nr, n_derivs_r + 1);
+    Idx&lt;BSplinesR&gt; const jmin_r
+            = ddc::discrete_space&lt;BSplinesR&gt;()
+                      .eval_basis_and_n_derivs(derivs_r, ddc::select&lt;R&gt;(x), n_derivs_r);
+
+    std::array&lt;double, ntheta * ntheta&gt; derivs_theta_ptr;
+    DSpan2D const derivs_theta(derivs_theta_ptr.data(), ntheta, n_derivs_theta + 1);
+    Idx&lt;BSplinesTheta&gt; const jmin_theta
+            = ddc::discrete_space&lt;BSplinesTheta&gt;()
+                      .eval_basis_and_n_derivs(derivs_theta, ddc::select&lt;Theta&gt;(x), n_derivs_theta);
+
+    // The index of the first b-spline element in the values array. This is not (jmin_r, jmin_theta)
+    // near the singular point so it must be obtained from eval_from_1d_values.
+    Idx&lt;BSplinesR, BSplinesTheta&gt; idx_front;
+
+    for (int i_deriv_r(0); i_deriv_r &lt;= n_derivs_r; ++i_deriv_r) {
+        for (int i_deriv_theta(0); i_deriv_theta &lt;= n_derivs_theta; ++i_deriv_theta) {
+            idx_front = eval_from_1d_values(
+                    Kokkos::submdspan(
+                            singular_values_and_derivs,
+                            Kokkos::full_extent,
+                            i_deriv_r,
+                            i_deriv_theta),
+                    Kokkos::submdspan(
+                            values_and_derivs,
+                            Kokkos::full_extent,
+                            Kokkos::full_extent,
+                            i_deriv_r,
+                            i_deriv_theta),
+                    Kokkos::submdspan(derivs_r, Kokkos::full_extent, i_deriv_r),
+                    Kokkos::submdspan(derivs_theta, Kokkos::full_extent, i_deriv_theta),
+                    jmin_r,
+                    jmin_theta);
+        }
+    }
+    return idx_front;
+}
+
+template &lt;class BSplinesR, class BSplinesTheta, int C&gt;
+template &lt;class DDim, class MemorySpace&gt;
+template &lt;class SingularValues, class Values, class ValuesR, class ValuesTheta&gt;
+KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::
+        Impl&lt;DDim, MemorySpace&gt;::eval_from_1d_values(
+                SingularValues singular_values,
+                Values values,
+                ValuesR vals_r,
+                ValuesTheta vals_theta,
+                Idx&lt;BSplinesR&gt; jmin_r,
+                Idx&lt;BSplinesTheta&gt; jmin_theta) const
+{
+    std::size_t constexpr nr = BSplinesR::degree() + 1;
+    std::size_t constexpr ntheta = BSplinesTheta::degree() + 1;
+
     std::size_t nr_done = 0;
 
     Idx&lt;BSplinesR&gt; first_tensor_product_radial_spline(C + 1);
@@ -1070,11 +1166,14 @@ KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, 
             for (std::size_t i(0); i &lt; nr_done; ++i) {
                 for (std::size_t j(0); j &lt; ntheta; ++j) {
                     singular_values(k - discrete_element_type(0))
-                            += m_singular_basis_elements(k, jmin_r + i, jmin_theta + j) * vals_r[i]
-                               * vals_theta[j];
+                            += m_singular_basis_elements(k, jmin_r + i, jmin_theta + j) * vals_r(i)
+                               * vals_theta(j);
                 }
             }
         }
+        // The first nr_done radial B-splines are included in the singular basis splines so
+        // the values array starts at the first tensor product radial B-spline. The modified
+        // jmin_r must be returned so the caller knows where the values array starts.
         jmin_r = first_tensor_product_radial_spline;
     } else if constexpr (n_singular_basis() &gt; 0) {
         for (std::size_t k(0); k &lt; n_singular_basis(); ++k) {
@@ -1084,7 +1183,7 @@ KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, 
 
     for (std::size_t i(0); i &lt; nr - nr_done; ++i) {
         for (std::size_t j(0); j &lt; ntheta; ++j) {
-            values(i, j) = vals_r[i + nr_done] * vals_theta[j];
+            values(i, j) = vals_r(i + nr_done) * vals_theta(j);
         }
     }
     for (std::size_t i(nr - nr_done); i &lt; nr; ++i) {

@@ -1645,6 +1645,7 @@
     <member refid="classPolarBSplines_1_1Impl_1a44b135ad2f6adec16d22471819ed98c1" kind="function"><name>operator=</name></member>
     <member refid="classPolarBSplines_1_1Impl_1adec6c6cf4f627326407640a8894fd3e9" kind="function"><name>eval_basis</name></member>
     <member refid="classPolarBSplines_1_1Impl_1aa92ffeccf0abc11aff9948eefc108941" kind="function"><name>eval_deriv</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1a88b42cdabfaf1de27581fe65bc78faa7" kind="function"><name>eval_basis_and_n_derivs</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a048bd64b848a231da48e25a5ec826234" kind="function"><name>eval_deriv_r</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a5e27aec07cc21c6c2e4308ee231dc0d4" kind="function"><name>eval_deriv_theta</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a592d956b5cc0db73b20d29c2d750b84f" kind="function"><name>eval_deriv_r_and_theta</name></member>
@@ -1652,6 +1653,7 @@
     <member refid="classPolarBSplines_1_1Impl_1a244d6ebb4a31d96e25c1844614979cc7" kind="function"><name>full_domain</name></member>
     <member refid="classPolarBSplines_1_1Impl_1af3133a4ea7b7cc4796da428de9bba352" kind="function"><name>tensor_bspline_idx_range</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a62b211b386ab2a4769821f33d6c90336" kind="function"><name>eval</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1a43139d782fe6137859c9f57f3530c0ea" kind="function"><name>eval_from_1d_values</name></member>
   </compound>
   <compound refid="classSpeciesInformation_1_1Impl" kind="class"><name>SpeciesInformation::Impl</name>
     <member refid="classSpeciesInformation_1_1Impl_1aa6c24a482e96e93bc60948619fe4a8da" kind="typedef"><name>discrete_element_type</name></member>
@@ -4890,12 +4892,16 @@
     <member refid="view_8hpp_1ad964f36e893413015550eb7242d62fba" kind="typedef"><name>ViewND</name></member>
     <member refid="view_8hpp_1a83249f6fdbfcb4f802b55a0a76c7b76c" kind="typedef"><name>Span1D</name></member>
     <member refid="view_8hpp_1a07511d511693de3f988f8ad54a32749d" kind="typedef"><name>Span2D</name></member>
+    <member refid="view_8hpp_1a2ae23e5943ab220e110a1a5ced4d2bb2" kind="typedef"><name>Span3D</name></member>
+    <member refid="view_8hpp_1a67e8ce0b79b064a6440abfb35a3bcb98" kind="typedef"><name>Span4D</name></member>
     <member refid="view_8hpp_1a31d6afc58d540e31ebf64c6f678dace7" kind="typedef"><name>View1D</name></member>
     <member refid="view_8hpp_1a2baa278049013f1fefb4a8461042e826" kind="typedef"><name>View2D</name></member>
     <member refid="view_8hpp_1a4bb7ce4c528a7c1e92770688e6442bc1" kind="typedef"><name>DKokkosView</name></member>
     <member refid="view_8hpp_1a1335532dfe880a4f588e7bb66ec5f1c7" kind="typedef"><name>DKokkosView_h</name></member>
     <member refid="view_8hpp_1aef81bc6aa6da1fa32c3d26155fa5c4da" kind="typedef"><name>DSpan1D</name></member>
     <member refid="view_8hpp_1a1900949dea2593220c77fe150bf15f65" kind="typedef"><name>DSpan2D</name></member>
+    <member refid="view_8hpp_1af7ecc2f8393c625192a530f9483b159d" kind="typedef"><name>DSpan3D</name></member>
+    <member refid="view_8hpp_1a6680f634a43f826dcb81d619612d82d8" kind="typedef"><name>DSpan4D</name></member>
     <member refid="view_8hpp_1a084108b66ceeccd1568ccda15cc29b06" kind="typedef"><name>CDSpan1D</name></member>
     <member refid="view_8hpp_1a5d7d63c4b1456b0e34f137c142f4e446" kind="typedef"><name>CDSpan2D</name></member>
     <member refid="view_8hpp_1a56734050bb01604213e77d2d1bd25293" kind="typedef"><name>DView1D</name></member>

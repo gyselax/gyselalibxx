@@ -75,6 +75,7 @@
 |   | [**Impl**](#function-impl-45) ([**Impl**](classPolarBSplines_1_1Impl.md) const & x) = default<br> |
 |   | [**Impl**](#function-impl-55) ([**Impl**](classPolarBSplines_1_1Impl.md) && x) = default<br> |
 |  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_basis**](#function-eval_basis) (DSpan1D singular\_values, DSpan2D values, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the polar basis splines at the coordinate p._  |
+|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_basis\_and\_n\_derivs**](#function-eval_basis_and_n_derivs) (DSpan3D singular\_values\_and\_derivs, DSpan4D values\_and\_derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; x, std::size\_t n\_derivs\_r, std::size\_t n\_derivs\_theta) const<br>_Evaluate the polar basis splines and their derivatives at the coordinate p._  |
 |  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv**](#function-eval_deriv) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p, Idx&lt; DerivDims... &gt; deriv\_order) const<br>_Evaluate the derivative of the polar basis splines at the coordinate p._  |
 |  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_r**](#function-eval_deriv_r) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the radial derivative of the polar basis splines at the coordinate p._  |
 |  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_r\_and\_theta**](#function-eval_deriv_r_and_theta) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p._  |
@@ -335,6 +336,51 @@ Evaluate all the b-spline elements near the singular point which cannot be expre
 * `singular_values` The value of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines, evaluated at the coordinate p. 
 * `values` The value of the non-zero b-spline elements which can be expressed as a tensor product of 1D B-splines. 
 * `p` The coordinate where the basis functions are evaluated.
+
+
+
+**Returns:**
+
+The 2D tensor product index of the first b-spline element in the values array. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function eval\_basis\_and\_n\_derivs 
+
+_Evaluate the polar basis splines and their derivatives at the coordinate p._ 
+```C++
+KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_basis_and_n_derivs (
+    DSpan3D singular_values_and_derivs,
+    DSpan4D values_and_derivs,
+    Coord< R , Theta > x,
+    std::size_t n_derivs_r,
+    std::size_t n_derivs_theta
+) const
+```
+
+
+
+Evaluate the derivatives \(\partial_r^a \partial_\theta^b\) for all \(0 \leq a \leq\) n\_derivs\_r and \(0 \leq b \leq\) n\_derivs\_theta of all the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline elements which can be expressed as a tensor product of 1D B-splines. The index (a, b) = (0, 0) contains the values of the basis splines.
+
+
+
+
+**Parameters:**
+
+
+* `singular_values_and_derivs` The derivatives of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines, evaluated at the coordinate p. The indices are (singular b-spline, a, b). 
+* `values_and_derivs` The derivatives of the non-zero b-spline elements which can be expressed as a tensor product of 1D B-splines. The indices are (radial b-spline, poloidal b-spline, a, b). 
+* `x` The coordinate where the basis functions are evaluated. 
+* `n_derivs_r` The maximum order of the radial derivatives. 
+* `n_derivs_theta` The maximum order of the poloidal derivatives.
 
 
 

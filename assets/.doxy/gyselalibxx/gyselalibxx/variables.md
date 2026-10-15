@@ -187,6 +187,8 @@
 * **DKokkosView\_h** ([**view.hpp**](view_8hpp.md))
 * **DSpan1D** ([**view.hpp**](view_8hpp.md))
 * **DSpan2D** ([**view.hpp**](view_8hpp.md))
+* **DSpan3D** ([**view.hpp**](view_8hpp.md))
+* **DSpan4D** ([**view.hpp**](view_8hpp.md))
 * **DView1D** ([**view.hpp**](view_8hpp.md))
 * **DView2D** ([**view.hpp**](view_8hpp.md))
 
@@ -502,6 +504,8 @@
 * **SplineCoeffOnPatch\_2D\_host** ([**types.hpp**](types_8hpp.md))
 * **Span1D** ([**view.hpp**](view_8hpp.md))
 * **Span2D** ([**view.hpp**](view_8hpp.md))
+* **Span3D** ([**view.hpp**](view_8hpp.md))
+* **Span4D** ([**view.hpp**](view_8hpp.md))
 * **SpanND** ([**view.hpp**](view_8hpp.md))
 
 

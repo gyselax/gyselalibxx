@@ -612,6 +612,14 @@
 <td style="text-align: left;"><a href="#typedef-dspan2d"><strong>DSpan2D</strong></a>  <br></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef Span3D&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dspan3d"><strong>DSpan3D</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Span4D&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dspan4d"><strong>DSpan4D</strong></a>  <br></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef View1D&lt; double &gt;</td>
 <td style="text-align: left;"><a href="#typedef-dview1d"><strong>DView1D</strong></a>  <br></td>
 </tr>
@@ -630,6 +638,14 @@
 <tr>
 <td style="text-align: right;">typedef SpanND&lt; 2, ElementType &gt;</td>
 <td style="text-align: left;"><a href="#typedef-span2d"><strong>Span2D</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef SpanND&lt; 3, ElementType &gt;</td>
+<td style="text-align: left;"><a href="#typedef-span3d"><strong>Span3D</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef SpanND&lt; 4, ElementType &gt;</td>
+<td style="text-align: left;"><a href="#typedef-span4d"><strong>Span4D</strong></a>  <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef Kokkos::mdspan&lt; ElementType, Kokkos::dextents&lt; std::size_t, N &gt; &gt;</td>
@@ -703,6 +719,16 @@
 </code></pre>
 <hr>
 
+<h3 id="typedef-dspan3d">typedef DSpan3D</h3>
+<pre><code class="language-C++">using DSpan3D =  Span3D&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dspan4d">typedef DSpan4D</h3>
+<pre><code class="language-C++">using DSpan4D =  Span4D&lt;double&gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-dview1d">typedef DView1D</h3>
 <pre><code class="language-C++">using DView1D =  View1D&lt;double&gt;;
 </code></pre>
@@ -726,6 +752,16 @@
 
 <h3 id="typedef-span2d">typedef Span2D</h3>
 <pre><code class="language-C++">using Span2D =  SpanND&lt;2, ElementType&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-span3d">typedef Span3D</h3>
+<pre><code class="language-C++">using Span3D =  SpanND&lt;3, ElementType&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-span4d">typedef Span4D</h3>
+<pre><code class="language-C++">using Span4D =  SpanND&lt;4, ElementType&gt;;
 </code></pre>
 <hr>
 
