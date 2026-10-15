@@ -181,45 +181,6 @@ KOKKOS_FUNCTION IdxRange<Tag...> get_idx_range_from_element(Idx<Tag...> idx)
     return IdxRange<Tag...>(IdxRange<Tag> {ddc::select<Tag>(idx), IdxStep<Tag> {1}}...);
 }
 
-//-----------------------------------------------------------------------------
-
-/**
- * @brief A helper structure to determine the type when combining tags across containers.
- *
- * E.g. Combine<Idx<Tag1>, Idx<Tag2>>::type == Idx<Tag1, Tag2>
- *
- * @tparam Containers The containers that should be combined. They should differ only in the tags.
- */
-template <class... Containers>
-struct Combine;
-
-template <class Container>
-struct Combine<Container>
-{
-    using type = Container;
-};
-
-template <
-        template <typename...>
-        class Container,
-        class... Tags,
-        class... OTags,
-        class... TailContainers>
-struct Combine<Container<Tags...>, Container<OTags...>, TailContainers...>
-{
-    using type = typename Combine<Container<Tags..., OTags...>, TailContainers...>::type;
-};
-
-/**
- * @brief A helper structure to determine the type when combining tags across containers.
- *
- * E.g. combine_t<Idx<Tag1>, Idx<Tag2>> == Idx<Tag1, Tag2>
- *
- * @tparam Containers The containers that should be combined. They should differ only in the tags.
- */
-template <class... Containers>
-using combine_t = typename detail::Combine<Containers...>::type;
-
 template <class... Dims>
 IdxRangeSlice<Dims...> edge_idx_range(IdxRange<Dims...> v)
 {
