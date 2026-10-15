@@ -1385,17 +1385,16 @@ public:
             DField<IdxRangeQuadratureRTheta> int_volume,
             TensorBSplineStash const& bspline_stash)
     {
-        double basis_val_test_space;
-        DVector<R_cov, Theta_cov> basis_derivs_test_space;
-        if constexpr (std::is_same_v<IdxTestType, Idx<PolarBSplinesRTheta>>) {
-            // Define the value and gradient of the test basis function
-            std::tie(basis_val_test_space, basis_derivs_test_space)
-                    = detail_poisson::get_polar_bspline_vals_and_derivs(idx_quad, idx_test);
-        } else {
-            static_assert(std::is_same_v<IdxTestType, Idx<BSplinesR, BSplinesTheta>>);
-            std::tie(basis_val_test_space, basis_derivs_test_space)
-                    = bspline_stash.vals_and_derivs(idx_quad, idx_test);
-        }
+        // Define the value and gradient of the test basis function
+        auto [basis_val_test_space, basis_derivs_test_space] = [&]() {
+            if constexpr (std::is_same_v<IdxTestType, Idx<PolarBSplinesRTheta>>) {
+                return detail_poisson::get_polar_bspline_vals_and_derivs(idx_quad, idx_test);
+            } else {
+                static_assert(std::is_same_v<IdxTestType, Idx<BSplinesR, BSplinesTheta>>);
+                return bspline_stash.vals_and_derivs(idx_quad, idx_test);
+            }
+        }();
+
 
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
