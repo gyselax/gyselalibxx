@@ -615,7 +615,7 @@ private:
         Idx1D_2 idx_2 = interface_idx_2;
         Idx1D_2 idx_2_plus = interface_idx_2 + idx_step_2;
 
-        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx_2);
+        auto [cell_length_left, cell_length_right] = get_cell_lengths<false>(idx_2);
 
         alpha_i = get_alpha(cell_length_left, cell_length_right);
         beta_i = get_beta(cell_length_left, cell_length_right);
@@ -635,7 +635,7 @@ private:
         idx_2 = interface_idx_2 + idx_step_2;
         idx_2_plus = interface_idx_2 + 2 * idx_step_2;
 
-        std::tie(cell_length_left, cell_length_right) = get_cell_lengths(idx_2);
+        std::tie(cell_length_left, cell_length_right) = get_cell_lengths<false>(idx_2);
 
         alpha_i = get_alpha(cell_length_left, cell_length_right);
         beta_i = get_beta(cell_length_left, cell_length_right);
@@ -673,7 +673,7 @@ private:
         int const n2_cells
                 = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
 
-        recursion(
+        recursion<false>(
                 n2_cells,
                 interface_idx_2,
                 coeff_deriv_patch2,
@@ -683,7 +683,7 @@ private:
 
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
-            correction_boundary(
+            correction_boundary<false>(
                     n_points_2,
                     interface_idx_2,
                     coeff_deriv_patch2,
@@ -698,7 +698,7 @@ private:
         idx_1 = interface_idx_1 + idx_step_1;
         idx_1_plus = interface_idx_1 + 2 * idx_step_1;
 
-        std::tie(cell_length_left, cell_length_right) = get_cell_lengths(idx_1);
+        std::tie(cell_length_left, cell_length_right) = get_cell_lengths<true>(idx_1);
 
         alpha_i = get_alpha(cell_length_left, cell_length_right);
         beta_i = get_beta(cell_length_left, cell_length_right);
@@ -735,7 +735,7 @@ private:
         int const n1_cells
                 = m_is_cell_bound_1_with_extra_interpol_pt ? n_points_1 - 3 : n_points_1 - 1;
 
-        recursion(
+        recursion<true>(
                 n1_cells,
                 interface_idx_1,
                 coeff_deriv_patch1,
@@ -745,7 +745,7 @@ private:
 
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
-            correction_boundary(
+            correction_boundary<true>(
                     n_points_1,
                     interface_idx_1,
                     coeff_deriv_patch1,
@@ -779,27 +779,27 @@ private:
      * @param[in,out] weights_patch1 Weights in front of the function values on patch 1. 
      * @param[in,out] weights_patch2 Weights in front of the function values on patch 2. 
      */
-    template <class Grid1D>
+    template <bool is_on_patch1, class Idx1D>
     void recursion(
             int const n_cells,
-            Idx<Grid1D> const interface_idx,
+            Idx1D const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
             std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
             std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
     {
-        using Idx1D = Idx<Grid1D>;
-        constexpr bool is_on_patch1 = std::is_same_v<Idx1D, Idx1D_1>;
+        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
+        static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
-        IdxStep<Grid1D> idx_step = extremity == FRONT ? IdxStep<Grid1D>(1) : IdxStep<Grid1D>(-1);
+        IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
 
         for (int n(2); n < n_cells; n++) {
             Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
             Idx1D const idx = interface_idx + n * idx_step;
             Idx1D const idx_plus = interface_idx + (n + 1) * idx_step;
 
-            auto [cell_length_left, cell_length_right] = get_cell_lengths(idx);
+            auto [cell_length_left, cell_length_right] = get_cell_lengths<is_on_patch1>(idx);
 
             // Local coefficient (alpha_i/beta_i) furthest from the interface
             double const coeff_furthest = is_on_patch1
@@ -877,20 +877,20 @@ private:
      * @param[in,out] weights_patch1 Weights in front of the function values on patch 1. 
      * @param[in,out] weights_patch2 Weights in front of the function values on patch 2. 
      */
-    template <class Grid1D>
+    template <bool is_on_patch1, class Idx1D>
     void correction_boundary(
             int const n_points,
-            Idx<Grid1D> const interface_idx,
+            Idx1D const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
             std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
             std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
     {
-        using Idx1D = Idx<Grid1D>;
-        constexpr bool is_on_patch1 = std::is_same_v<Idx1D, Idx1D_1>;
+        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
+        static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
-        IdxStep<Grid1D> idx_step = extremity == FRONT ? IdxStep<Grid1D>(1) : IdxStep<Grid1D>(-1);
+        IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
 
         int const n = n_points - 3;
         Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
@@ -899,8 +899,8 @@ private:
         // Additional interpolation point.
         Idx1D const idx_star = interface_idx + (n + 1) * idx_step;
 
-        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx);
-        auto [cell_length_left_star, cell_length_right_star] = get_cell_lengths(idx_star);
+        auto [cell_length_left, cell_length_right] = get_cell_lengths<is_on_patch1>(idx);
+        auto [cell_length_left_star, cell_length_right_star] = get_cell_lengths<is_on_patch1>(idx_star);
 
         if constexpr (is_on_patch1) {
             cell_length_left += cell_length_left_star;
@@ -1091,26 +1091,26 @@ private:
     /**
      * @brief Get the lengths of the cell on the right side and the left side of the given index.
      */
-    template <class Grid1D>
-    std::tuple<double, double> get_cell_lengths(Idx<Grid1D> const& idx) const
+    template <bool is_on_patch1, class Idx1D>
+    std::tuple<double, double> get_cell_lengths(Idx1D const& idx) const
     {
-        static_assert(
-                std::is_same_v<Grid1D, EdgePerpGrid1> || std::is_same_v<Grid1D, EdgePerpGrid2>,
-                "Wrong type of index given.");
-
-        bool constexpr is_on_patch1 = std::is_same_v<Grid1D, EdgePerpGrid1>;
-
-        // Tag for the grid on the other patch.
+        // Tag for the grid on this and the other patch.
+        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
         using OGrid1D = std::conditional_t<is_on_patch1, EdgePerpGrid2, EdgePerpGrid1>;
-
-        using IdxRangeGlobal = IdxRange<EdgePerpGrid1, EdgePerpGrid2>;
+        static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
         Extremity constexpr other_extremity = is_on_patch1 ? m_extremity_2 : m_extremity_1;
 
-        IdxRange<Grid1D> idx_range_1d(IdxRangeGlobal(m_idx_range_perp_1, m_idx_range_perp_2));
-        IdxRange<OGrid1D> other_idx_range_1d(
-                IdxRangeGlobal(m_idx_range_perp_1, m_idx_range_perp_2));
+        IdxRange<Grid1D> idx_range_1d;
+        IdxRange<OGrid1D> other_idx_range_1d;
+        if constexpr (is_on_patch1) {
+            idx_range_1d = m_idx_range_perp_1;
+            other_idx_range_1d = m_idx_range_perp_2;
+        } else {
+            idx_range_1d = m_idx_range_perp_2;
+            other_idx_range_1d = m_idx_range_perp_1;
+        }
 
         // Please, do not provide a index on the boundary except for the interface.
         assert(!(idx == idx_range_1d.front() && extremity == BACK));
@@ -1128,12 +1128,10 @@ private:
         // If the given index corresponds to the index at the interface,
         Idx<Grid1D> const idx_interface = get_extremity_idx(extremity, idx_range_1d);
         if (idx == idx_interface) {
-            IdxStep<Grid1D> idx_step
-                    = extremity == FRONT ? IdxStep<Grid1D>(1) : IdxStep<Grid1D>(-1);
+            IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
             Idx<Grid1D> const idx_incremented = idx + idx_step;
 
-            IdxStep<OGrid1D> other_idx_step
-                    = other_extremity == FRONT ? IdxStep<OGrid1D>(1) : IdxStep<OGrid1D>(-1);
+            IdxStep<OGrid1D> other_idx_step(other_extremity == FRONT ? 1 : -1);
             Idx<OGrid1D> const other_idx = get_extremity_idx(other_extremity, other_idx_range_1d);
             Idx<OGrid1D> const other_idx_incremented = other_idx + other_idx_step;
 
