@@ -33,7 +33,9 @@ export SPACK_DISABLE_LOCAL_CONFIG=True
 export PYTHONDONTWRITEBYTECODE=True
 . ${GYSELA_SPACK_PREFIX}/share/spack/setup-env.sh
 
-env="${GYSELA_PROJECT_NAME}-${GYSELA_ARCH_NAME}"
+VERSION=$(cat ${TOOLCHAIN_ROOT_DIRECTORY}/version.txt)
+
+env="${GYSELA_PROJECT_NAME}--${GYSELA_ARCH_NAME}--${VERSION}"
 echo "Preparing the Spack environment ${env}"
 
 spack env remove --yes-to-all "${env}"
