@@ -27,7 +27,7 @@ RUN chmod +x /bin/bash_run \
     build-essential \
     clang-22 \
     libomp-22-dev \
-    libstdc++-12-dev \
+    libstdc++-15-dev \
     doxygen \
     pkg-config \
     git \
