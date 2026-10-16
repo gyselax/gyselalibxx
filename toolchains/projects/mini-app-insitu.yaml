@@ -52,3 +52,5 @@ spack:
     py-torch:
       prefer:
         - '~valgrind'
+    npm:
+      require: '@10.9.8'
