@@ -352,6 +352,33 @@ public:
         return get_approx_with_change_of_sign(function_1, function_2, 1);
     }
 
+    /**
+     * @brief Get the linear combination of the derivatives values (c).
+     *
+     * @anchor get_approx_cross_deriv
+     * This linear combination corresponds to an approximation of the
+     * interface cross-derivative.
+     *
+     * It is more appropriate than get_approx_deriv to compute the
+     * cross-derivatives. The computation is the same.
+     * However, in addition, the sign of the derivatives on the patch 2 is
+     * changed in the case where the orientations of the two patches do not
+     * match.
+     * E.g. dx(f(-x)) = - dxf(-x)
+     *
+     * @param derivs_1 Derivatives at the interpolation points on patch 1.
+     * @param derivs_2 Derivatives at the interpolation points on patch 2.
+     * @return the linear combination of the function values (c).
+     */
+    template <class Layout1, class Layout2>
+    inline double get_approx_cross_deriv(
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1,
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2,
+            int const sign_deriv_2) const
+    {
+        return this->get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
+    }
+
 protected:
     template <class Layout1, class Layout2>
     double get_approx_with_change_of_sign(

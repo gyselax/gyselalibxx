@@ -95,9 +95,10 @@ public:
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2) const
     {
-        int const sign_deriv_2
-                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
-        return this->get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
+        return this->get_approx_cross_deriv(
+                derivs_1,
+                derivs_2,
+                (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree));
     }
 
     /**
@@ -113,8 +114,9 @@ public:
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1) const
             requires(!std::is_same_v<IdxRange1DPerp_2, IdxRange1DPerp_1>)
     {
-        int const sign_deriv_2
-                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
-        return this->get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
+        return this->get_approx_cross_deriv(
+                derivs_1,
+                derivs_2,
+                (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree));
     }
 };
