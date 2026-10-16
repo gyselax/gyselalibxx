@@ -46,6 +46,8 @@ spack:
     py-dask:
       prefer:
         - '~dataframe'
+    py-h5py:
+      require: '+mpi'
     py-pandas:
       prefer:
         - '~performance'
