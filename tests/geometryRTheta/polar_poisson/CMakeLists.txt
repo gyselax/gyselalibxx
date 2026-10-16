@@ -47,8 +47,9 @@ target_link_libraries(polar_poisson_like_solver_test
         gyselalibxx::pde_solvers
 )
 
-gtest_discover_tests(polar_poisson_like_solver_test
-    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
-    DISCOVERY_MODE PRE_TEST
-    PROPERTIES TIMEOUT 60
-    PROPERTIES COST 20)
+if (NOT "${CMAKE_CXX_FLAGS}" MATCHES "--coverage")
+    # Test is much too slow with coverage activated
+    gtest_discover_tests(polar_poisson_like_solver_test
+        DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
+        DISCOVERY_MODE PRE_TEST)
+endif()
