@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `Span3D`, `Span4D`, `DSpan3D` and `DSpan4D` aliases.
 - Add `PolarBSplines::eval_basis_and_n_derivs` to evaluate the polar basis splines and their mixed derivatives at once.
 - Allow `IdxStep` indexing for `VectorField` objects.
+- Allow `PolarSplineFEMPoissonLikeSolver` to solve a batch of equations (batch dimensions in `IdxRangeFull`).
+- Add `ddcHelper::get_idx_from_linear_index` to get the multi-dimensional index at a given position in an index range.
 
 ### Fixed
 
@@ -43,6 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The constructor of `MultipatchField` from another multipatch object is now explicit.
 - Rewrite of the `GyroAverageOperator` to enable importing external coefficients for geometries where no inverse mapping is available.
 - The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
+- Speed up the matrix assembly and RHS computation of `PolarSplineFEMPoissonLikeSolver`.
+- The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the full index range on which $\phi$ is defined (including any batch dimensions).
 
 ### Deprecated
 

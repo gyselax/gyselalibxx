@@ -45,6 +45,11 @@ mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_vi
                     'create_transpose_mirror', 'create_transpose_mirror_view_and_copy', 'create_mirror_view_and_copy_on_vector_space'}
 
 parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_reduce']
+# Execution policies for nested (thread) parallelism. Lambdas passed with these policies run
+# inside a team and must not use KOKKOS_LAMBDA.
+nested_parallel_policies = {'TeamThreadRange', 'TeamThreadMDRange',
+                            'TeamVectorRange', 'TeamVectorMDRange',
+                            'ThreadVectorRange', 'ThreadVectorMDRange'}
 
 HOME_DIR = Path(__file__).parent.parent.parent.absolute()
 global_folders = [HOME_DIR / f for f in ('src', 'simulations', 'tests')]
@@ -557,7 +562,7 @@ def check_kokkos_lambda_use(file):
                     else:
                         i+=1
 
-                is_thread_parallelism = any('TeamThreadRange' == a['str'] for a in config.data[idx+1:arg_splitters[-1]])
+                is_thread_parallelism = any(a['str'] in nested_parallel_policies for a in config.data[idx+1:arg_splitters[-1]])
                 if config.data[arg_splitters[-1]+1]['str'] == '[' and not is_thread_parallelism:
                     last_arg = ' '.join(a['str'] for a in config.data[arg_splitters[-1]+1:end_idx])
                     correct_last_arg = 'KOKKOS_LAMBDA '+last_arg[last_arg.find(']')+1:]
@@ -565,7 +570,7 @@ def check_kokkos_lambda_use(file):
                 elif config.data[arg_splitters[-1]+1]['str'].startswith('KOKKOS') and is_thread_parallelism:
                     last_arg = ' '.join(a['str'] for a in config.data[arg_splitters[-1]+1:end_idx])
                     correct_last_arg = '[&]'+last_arg[last_arg.find(']')+1:]
-                    report_error(FATAL, file, elem.attrib['linenr'], f'The lambda function passed as thread parallelism to the function ddc::{p} must be a KOKKOS_LAMBDA\n{last_arg}\nShould be:\n{correct_last_arg}')
+                    report_error(FATAL, file, elem.attrib['linenr'], f'The lambda function passed as thread parallelism to the function ddc::{p} must not be a KOKKOS_LAMBDA\n{last_arg}\nShould be:\n{correct_last_arg}')
 
                 lambda_body_start = next(i for i,a in enumerate(config.data[arg_splitters[-1]+1:], arg_splitters[-1]+1) if a['str'] == '{')
                 lambda_body_end_id = config.data[lambda_body_start]['link']
@@ -791,7 +796,7 @@ def check_exec_space_usage(file):
                               'integer_sequence', 'pair', 'declval', 'tuple_cat', 'integral_constant', 'size_t', 'move',
                               'make_integer_sequence', 'make_index_sequence', 'index_sequence',
                               'experimental::full_extent', 'experimental::submdspan', 'conjunction_v', 'disjunction_v',
-                              'conjunction', 'disjunction', 'is_invocable_v')
+                              'conjunction', 'disjunction', 'is_invocable_v', 'is_invocable_r_v')
             if 'std' in code_keys:
                 idx = code_keys.index('std')
                 func = None
