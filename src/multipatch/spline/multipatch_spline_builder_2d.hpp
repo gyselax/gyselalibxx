@@ -243,6 +243,12 @@ class MultipatchSplineBuilder2D
     BuilderTuple const m_builders;
 
 public:
+    /// @brief Execution space.
+    using exec_space = ExecSpace;
+
+    /// @brief Memory space.
+    using memory_space = MemorySpace;
+
     /// @brief The data type that the data is saved on.
     using data_type = double;
 
