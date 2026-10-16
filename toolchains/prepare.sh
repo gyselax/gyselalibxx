@@ -49,7 +49,7 @@ cp "${TOOLCHAIN_ROOT_DIRECTORY}/platforms/${GYSELA_PLATFORM_NAME}/${GYSELA_ARCH_
 spack env activate "${env}"
 spack repo update
 spack concretize --quiet
-spack spec --install-status --namespaces
+spack spec --install-status --long --namespaces --types
 spack install --jobs "${GYSELA_SPACK_JOBS}"
 spack env deactivate
 
