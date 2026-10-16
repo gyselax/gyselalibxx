@@ -113,7 +113,9 @@ void test_AllToAll2D_CPU(size_t test_y_size)
     IdxStepXY idx_range_size(x_size, y_size);
     IdxRangeXY full_idx_range(idx_range_start, idx_range_size);
 
-    MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_idx_range, MPI_COMM_WORLD);
+    // Rk: allow_inactive_ranks=true is used
+    MPITransposeAllToAll<XDistribLayout, YDistribLayout>
+            transpose(full_idx_range, MPI_COMM_WORLD, true);
 
     IFieldMemXY recv_buffer(transpose.get_local_idx_range<XDistribLayout>());
     IFieldMemYX send_buffer(transpose.get_local_idx_range<YDistribLayout>());
@@ -143,7 +145,9 @@ void test_AllToAll2D_GPU(size_t test_y_size)
     IdxStepXY idx_range_size(x_size, y_size);
     IdxRangeXY full_idx_range(idx_range_start, idx_range_size);
 
-    MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_idx_range, MPI_COMM_WORLD);
+    // Rk: allow_inactive_ranks=true is used
+    MPITransposeAllToAll<XDistribLayout, YDistribLayout>
+            transpose(full_idx_range, MPI_COMM_WORLD, true);
 
     host_t<IFieldMemXY> recv_buffer_host(transpose.get_local_idx_range<XDistribLayout>());
     device_t<IFieldMemXY> recv_buffer(transpose.get_local_idx_range<XDistribLayout>());

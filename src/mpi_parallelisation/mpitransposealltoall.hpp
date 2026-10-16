@@ -17,10 +17,13 @@
  * @brief A class describing an operator for converting from/to different MPI layouts using AlltoAll.
  *
  * This class implements a basic AlltoAll operator and currently only works with a basic MPILayout.
- * There may be more MPI processes than points in the distributed dimensions of one (or both)
- * of the layouts, in which case some processes are inactive (they hold no data). Such processes
- * must still call the transpose operator (it is collective) but they send/receive no data
- * in the corresponding layout.
+ *
+ * If the optional argument allow_inactive_ranks=true is passed to the class constructor, it is
+ * possible to use more MPI processes than points in the distributed dimensions of one (or both) of
+ * the layouts. In that case, some processes are inactive (they hold no data) although they are
+ * still part of the transpose operator (it is collective) but they send/receive no data in that
+ * layout. When using this option, the caller is responsible for the proper handling of the empty
+ * fields on the inactive processes.
  *
  * @tparam Layout1 One of the MPI layouts.
  * @tparam Layout2 The other MPI layouts.
@@ -66,9 +69,13 @@ public:
      *
      * @param global_idx_range The global index range of the data across processes provided in either layout.
      * @param comm The MPI communicator.
+     * @param allow_inactive_ranks Flag allowing inactive MPI ranks (deactivated by default).
      */
     template <class IdxRange>
-    MPITransposeAllToAll(IdxRange global_idx_range, MPI_Comm comm)
+    MPITransposeAllToAll(
+            IdxRange global_idx_range,
+            MPI_Comm comm,
+            bool allow_inactive_ranks = false)
         : IMPITranspose<Layout1, Layout2>(comm)
     {
         static_assert(
@@ -86,6 +93,15 @@ public:
                 = m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, rank);
         m_local_idx_range_2
                 = m_layout_2.distribute_idx_range(global_idx_range_layout_2, m_comm_size, rank);
+
+        if (!allow_inactive_ranks
+            && (m_layout_1.n_active_ranks() < m_comm_size
+                || m_layout_2.n_active_ranks() < m_comm_size)) {
+            throw std::runtime_error("The number of MPI ranks is greater than the number that "
+                                     "would be used when maximumly distributing the data which "
+                                     "is only allowed when allow_inactive_ranks=true");
+        }
+
         // Reference, non-empty index ranges, based on rank 0
         m_nonempty_distributed_idx_range_1 = distributed_idx_range_type1(
                 m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, 0));
