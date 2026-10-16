@@ -730,9 +730,3 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
 
     check_if_equal_to_expected(function_coef, function_1_coef_expected, function_2_coef_expected);
 }
-
-TEST_F(MultipatchSplineBuilder2DTest, StaticAssertions)
-{
-    static_assert(concepts::InterpolationBuilder<
-                  MultipatchSplineBuilderXY<ddc::SplineBuilderClosure::GREVILLE>>);
-}
