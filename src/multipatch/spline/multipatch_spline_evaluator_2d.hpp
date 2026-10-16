@@ -79,14 +79,6 @@ public:
     template <class Patch>
     using continuous_dimension_type2 = typename BSpline2OnPatch<Patch>::continuous_dimension_type;
 
-
-    /// @brief The type of the Kokkos execution space used by this class.
-    using exec_space = ExecSpace;
-
-    /// @brief The type of the Kokkos memory space used by this class.
-    using memory_space = MemorySpace;
-
-
     /// @brief The type of the first discrete dimension of interest used by this class.
     /// @tparam Patch Patch type.
     template <class Patch>
@@ -201,6 +193,25 @@ private:
 public:
     /// @brief The number of patches.
     static constexpr std::size_t n_patches = ddc::type_seq_size_v<PatchOrdering>;
+
+public:
+    /// @brief The type of the Kokkos execution space used by this class.
+    using exec_space = ExecSpace;
+
+    /// @brief The type of the Kokkos memory space used by this class.
+    using memory_space = MemorySpace;
+
+    /// @brief The data type that the data is saved on.
+    using data_type = double;
+
+    /// @brief The ND coordinate type corresponding to the evaluation mesh.
+    using coord_type = Coord<CDim1, CDim2>;
+
+    /// @brief The number of interpolation dimensions.
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
 
 private:
     // Asserts -----------------------------------------------------------------------------------
