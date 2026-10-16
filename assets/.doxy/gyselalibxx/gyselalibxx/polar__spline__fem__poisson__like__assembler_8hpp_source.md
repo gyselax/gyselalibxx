@@ -121,7 +121,7 @@ public:
                 = vals_r_at_quad(offset_r, IdxStep<ddc::Deriv<R>>(1)) * val_theta;
         ddcHelper::get<Theta_cov>(derivs)
                 = val_r * vals_theta_at_quad(offset_theta, IdxStep<ddc::Deriv<Theta>>(1));
-        return std::tuple(val_r * val_theta, derivs);
+        return {val_r * val_theta, derivs};
     }
 
     KOKKOS_FUNCTION double vals(
@@ -183,11 +183,10 @@ get_polar_bspline_vals_and_derivs(IdxQuad idx_quad, Idx<PolarBSplinesRTheta> idx
             = idx - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>().front();
     const double val = singular_vals(offset.value(), 0, 0);
     if constexpr (calculate_derivs) {
-        return std::
-                tuple(val,
-                      DVector<typename R::Dual, typename Theta::Dual>(
-                              singular_vals(offset.value(), 1, 0),
-                              singular_vals(offset.value(), 0, 1)));
+        return {val,
+                DVector<typename R::Dual, typename Theta::Dual>(
+                        singular_vals(offset.value(), 1, 0),
+                        singular_vals(offset.value(), 0, 1))};
     } else {
         return val;
     }
@@ -1095,7 +1094,7 @@ public:
                                                   * tensor_mul(
                                                           index<'i'>(basis_derivs_test_space),
                                                           index<'i', 'j'>(inv_metric_tensor_2d));
-        return std::tuple(test_mass_weight, test_stiffness_weight);
+        return {test_mass_weight, test_stiffness_weight};
     }
 
 
