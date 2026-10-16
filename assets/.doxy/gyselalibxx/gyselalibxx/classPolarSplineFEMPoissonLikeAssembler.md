@@ -2,7 +2,7 @@
 
 # Class PolarSplineFEMPoissonLikeAssembler
 
-**template &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), typename QDimRMesh, typename QDimThetaMesh, class IdxRangeFull&gt;**
+**template &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), typename QDimRMesh, typename QDimThetaMesh, typename IdxRangeFull&gt;**
 
 
 
@@ -28,11 +28,6 @@ _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._
 
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| struct | [**InternalBatchDim**](structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.md) <br>_The tag for the batch dimension for the equation. This is public due to Cuda._  |
 
 
 ## Public Types
@@ -66,7 +61,7 @@ _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PolarSplineFEMPoissonLikeAssembler**](#function-polarsplinefempoissonlikeassembler) (Field&lt; double, IdxRangeQuadratureRTheta &gt; int\_volume) <br>_Instantiate the assembler operator._  |
+|   | [**PolarSplineFEMPoissonLikeAssembler**](#function-polarsplinefempoissonlikeassembler) (Field&lt; double, IdxRangeQuadratureRTheta &gt; int\_volume, IdxRangeFull idx\_range\_full) <br>_Instantiate the assembler operator._  |
 |  void | [**compute\_singular\_singular\_col\_idx**](#function-compute_singular_singular_col_idx) (Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and singular basis functions._  |
 |  void | [**compute\_singular\_singular\_elements**](#function-compute_singular_singular_elements) (CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, Mapping const & mapping, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix elements corresponding to the inner products of singular basis functions and singular basis functions._  |
 |  void | [**compute\_singular\_tensor\_col\_idx**](#function-compute_singular_tensor_col_idx) (Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and tensor basis functions._  |
@@ -83,9 +78,9 @@ _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION void | [**fill\_test\_weights**](#function-fill_test_weights) (const Kokkos::TeamPolicy&lt;&gt;::member\_type & team, QuadField test\_mass, [**DVectorField**](classVectorField.md)&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; [**R**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-r), [**Theta**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-theta) &gt; &gt; test\_stiffness, IdxBSRTheta idx\_test, CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, Mapping const & mapping, IdxRangeQuadratureRTheta const & full\_quad\_idx\_range, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume, [**TensorBSplineStash**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-tensorbsplinestash) const & bspline\_stash) <br>_Computes the test\_mass\_weight and test\_stiffness\_weight at every quadrature point in the support of a test function and saves them in team scratch memory._  |
+|  KOKKOS\_FUNCTION void | [**fill\_test\_weights**](#function-fill_test_weights) (const Kokkos::TeamPolicy&lt;&gt;::member\_type & team, QuadField test\_mass, [**DVectorField**](classVectorField.md)&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; [**R**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-r), [**Theta**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-theta) &gt; &gt; test\_stiffness, IdxBSRTheta idx\_test, IdxBatch idx\_batch, CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, Mapping const & mapping, IdxRangeQuadratureRTheta const & full\_quad\_idx\_range, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume, [**TensorBSplineStash**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-tensorbsplinestash) const & bspline\_stash) <br>_Computes the test\_mass\_weight and test\_stiffness\_weight at every quadrature point in the support of a test function and saves them in team scratch memory._  |
 |  KOKKOS\_FUNCTION double | [**get\_matrix\_stencil\_element**](#function-get_matrix_stencil_element) (const Kokkos::TeamPolicy&lt;&gt;::member\_type & team, IdxBSRTheta idx\_test, IdxBSRTheta idx\_trial, QuadField test\_mass, [**DVectorField**](classVectorField.md)&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; [**R**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-r), [**Theta**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-theta) &gt; &gt; test\_stiffness, IdxRangeQuadratureRTheta const & full\_quad\_idx\_range, [**TensorBSplineStash**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-tensorbsplinestash) const & bspline\_stash) <br>_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._  |
-|  KOKKOS\_FUNCTION std::tuple&lt; double, [**DVector**](classTensor.md)&lt; [**R**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-r), [**Theta**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-theta) &gt; &gt; | [**get\_test\_weights**](#function-get_test_weights) (IdxTestType idx\_test, IdxQuadratureRTheta idx\_quad, CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, Mapping const & mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume, [**TensorBSplineStash**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-tensorbsplinestash) const & bspline\_stash) <br>_Computes the test\_stiffness\_weight and test\_mass\_weight for a given quadrature point._  |
+|  KOKKOS\_FUNCTION std::tuple&lt; double, [**DVector**](classTensor.md)&lt; [**R**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-r), [**Theta**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-theta) &gt; &gt; | [**get\_test\_weights**](#function-get_test_weights) (IdxTestType idx\_test, IdxQuadratureRTheta idx\_quad, IdxBatch idx\_batch, CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, Mapping const & mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume, [**TensorBSplineStash**](classPolarSplineFEMPoissonLikeAssembler.md#typedef-tensorbsplinestash) const & bspline\_stash) <br>_Computes the test\_stiffness\_weight and test\_mass\_weight for a given quadrature point._  |
 |  void | [**stash\_basis\_eval**](#function-stash_basis_eval) (DField&lt; IdxRange&lt; QDimMesh, BSplines, DerivDim &gt; &gt; basis\_vals, Field&lt; Idx&lt; BSplines &gt;, IdxRange&lt; QDimMesh &gt; &gt; first\_basis) <br>_Fill the stash with the values and derivatives of the non-zero 1D B-splines at the 1D quadrature points._  |
 |  KOKKOS\_INLINE\_FUNCTION IdxBSPolar | [**to\_polar**](#function-to_polar) (IdxBSRTheta idx) <br>_Convert a 2D (r,theta) bspline index into a polar bspline index._  |
 
@@ -131,7 +126,7 @@ in the 5D GYSELA Code". December 2022.)
 * [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) The type of the 2D polar B-splines (on the coordinate system \((r,\theta)\) including B-splines which traverse the O point). 
 * `QDimRMesh` The radial quadrature grid type. 
 * `QDimThetaMesh` The poloidal quadrature grid type. 
-* `IdxRangeFull` The full index range of \(\phi\) including any batch dimensions. 
+* `IdxRangeFull` The full index range of \(\phi\) including any batch dimensions. One matrix is assembled for each index in the batch dimensions. 
 
 
 
@@ -191,7 +186,8 @@ using PolarSplineFEMPoissonLikeAssembler< GridR, GridTheta, PolarBSplinesRTheta,
 _Instantiate the assembler operator._ 
 ```C++
 inline explicit PolarSplineFEMPoissonLikeAssembler::PolarSplineFEMPoissonLikeAssembler (
-    Field< double, IdxRangeQuadratureRTheta > int_volume
+    Field< double, IdxRangeQuadratureRTheta > int_volume,
+    IdxRangeFull idx_range_full
 ) 
 ```
 
@@ -203,6 +199,7 @@ inline explicit PolarSplineFEMPoissonLikeAssembler::PolarSplineFEMPoissonLikeAss
 
 
 * `int_volume` The initialised field of Jacobian values of the mapping. 
+* `idx_range_full` The full index range of \(\phi\) including any batch dimensions. 
 
 
 
@@ -264,8 +261,8 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_singular_elemen
 **Parameters:**
 
 
-* `coeff_alpha` A callable with signature `double operator()(CoordRTheta)` returning \(\alpha\). 
-* `coeff_beta` A callable with signature `double operator()(CoordRTheta)` returning \(\beta\). 
+* `coeff_alpha` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\alpha\) at the given batch and coordinate. 
+* `coeff_beta` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\beta\) at the given batch and coordinate. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `values_csr` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix). 
@@ -331,8 +328,8 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_tensor_elements
 **Parameters:**
 
 
-* `coeff_alpha` A callable with signature `double operator()(CoordRTheta)` returning \(\alpha\). 
-* `coeff_beta` A callable with signature `double operator()(CoordRTheta)` returning \(\beta\). 
+* `coeff_alpha` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\alpha\) at the given batch and coordinate. 
+* `coeff_beta` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\beta\) at the given batch and coordinate. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `values_csr` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
@@ -398,8 +395,8 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_tensor_tensor_elements (
 **Parameters:**
 
 
-* `coeff_alpha` A callable with signature `double operator()(CoordRTheta)` returning \(\alpha\). 
-* `coeff_beta` A callable with signature `double operator()(CoordRTheta)` returning \(\beta\). 
+* `coeff_alpha` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\alpha\) at the given batch and coordinate. 
+* `coeff_beta` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\beta\) at the given batch and coordinate. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `values_csr` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
@@ -487,8 +484,8 @@ inline void PolarSplineFEMPoissonLikeAssembler::operator() (
 
 
 * `gko_matrix` The pointer to the assembled matrix. 
-* `coeff_alpha` A callable object with signature `double operator()(CoordRTheta)` returning the value of \(\alpha\) at the given coordinate. 
-* `coeff_beta` A callable object with signature `double operator()(CoordRTheta)` returning the value of \(\beta\) at the given coordinate. 
+* `coeff_alpha` A callable object with signature `double operator()(IdxBatch, CoordRTheta)` returning the value of \(\alpha\) at the given batch and coordinate. 
+* `coeff_beta` A callable object with signature `double operator()(IdxBatch, CoordRTheta)` returning the value of \(\beta\) at the given batch and coordinate. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined.
 
 
@@ -496,8 +493,8 @@ inline void PolarSplineFEMPoissonLikeAssembler::operator() (
 **Template parameters:**
 
 
-* `CoeffAlpha` A callable type for evaluating \(\alpha\) at a coordinate. 
-* `CoeffBeta` A callable type for evaluating \(\beta\) at a coordinate. 
+* `CoeffAlpha` A callable type for evaluating \(\alpha\) at a batch and coordinate. 
+* `CoeffBeta` A callable type for evaluating \(\beta\) at a batch and coordinate. 
 * `Mapping` A class describing a mapping from curvilinear coordinates to Cartesian coordinates. 
 
 
@@ -565,6 +562,7 @@ static inline KOKKOS_FUNCTION void PolarSplineFEMPoissonLikeAssembler::fill_test
     QuadField test_mass,
     DVectorField < IdxRangeQuadratureRTheta, VectorIndexSet< R , Theta > > test_stiffness,
     IdxBSRTheta idx_test,
+    IdxBatch idx_batch,
     CoeffAlpha const & coeff_alpha,
     CoeffBeta const & coeff_beta,
     Mapping const & mapping,
@@ -585,6 +583,7 @@ static inline KOKKOS_FUNCTION void PolarSplineFEMPoissonLikeAssembler::fill_test
 * `test_mass` The field where test\_mass\_weight is saved. Its index range is the range of quadrature points in the support of the test B-spline (see detail\_poisson::get\_support\_quadrature). 
 * `test_stiffness` The field where test\_stiffness\_weight is saved. It is defined on the same index range as test\_mass. 
 * `idx_test` The 2D index of the test B-spline. 
+* `idx_batch` The index of the batch for which the element is being calculated. 
 * `coeff_alpha` A callable with signature `double operator()(CoordRTheta)` returning \(\alpha\). 
 * `coeff_beta` A callable with signature `double operator()(CoordRTheta)` returning \(\beta\). 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
@@ -655,6 +654,7 @@ template<class CoeffAlpha, class CoeffBeta, class Mapping, class IdxTestType>
 static inline KOKKOS_FUNCTION std::tuple< double, DVector < R , Theta > > PolarSplineFEMPoissonLikeAssembler::get_test_weights (
     IdxTestType idx_test,
     IdxQuadratureRTheta idx_quad,
+    IdxBatch idx_batch,
     CoeffAlpha const & coeff_alpha,
     CoeffBeta const & coeff_beta,
     Mapping const & mapping,
@@ -675,8 +675,9 @@ The weak integral element is \(w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \b
 
 * `idx_test` The index of the test basis spline. 
 * `idx_quad` The index for the point in the quadrature scheme. 
-* `coeff_alpha` A callable with signature `double operator()(CoordRTheta)` returning \(\alpha\). 
-* `coeff_beta` A callable with signature `double operator()(CoordRTheta)` returning \(\beta\). 
+* `idx_batch` The index of the batch for which the element is being calculated. 
+* `coeff_alpha` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\alpha\) at the given batch and coordinate. 
+* `coeff_beta` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\beta\) at the given batch and coordinate. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `int_volume` The integral volume associated with each point used in the quadrature scheme. 
 * `bspline_stash` The values and derivatives of the 1D B-splines at the quadrature points. 

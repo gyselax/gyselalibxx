@@ -10,8 +10,10 @@
 
 
 
+* `#include <array>`
 * `#include <cassert>`
 * `#include <cmath>`
+* `#include <utility>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_aliases.hpp"`
 

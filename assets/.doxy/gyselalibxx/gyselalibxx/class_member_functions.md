@@ -155,6 +155,7 @@
 * **eval\_deriv\_r\_and\_theta** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **eval\_deriv\_theta** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **eval\_from\_1d\_values** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
+* **eval\_rhs** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **ElementwiseLogicalAdvLogicalFootFinder** ([**polar\_foot\_finder\_details::ElementwiseLogicalAdvLogicalFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder.md))
 * **ElementwiseLogicalAdvLogicalFootFinderMem** ([**polar\_foot\_finder\_details::ElementwiseLogicalAdvLogicalFootFinderMem**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem.md))
 * **ElementwiseLogicalAdvPseudoPhysFootFinder** ([**polar\_foot\_finder\_details::ElementwiseLogicalAdvPseudoPhysFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder.md))

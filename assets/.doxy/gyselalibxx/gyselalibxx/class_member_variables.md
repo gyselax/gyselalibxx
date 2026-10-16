@@ -47,6 +47,7 @@
 
 * **internal\_fields** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **ipiv** ([**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Dense**](classMatrix__Dense.md))
+* **is\_valid\_rhs\_function\_v** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **IS\_CONTRAVARIANT** ([**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
 * **IS\_COVARIANT** ([**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
 * **id** ([**tensor\_tools::VectorIndexIdMap**](structtensor__tools_1_1VectorIndexIdMap.md))
@@ -270,9 +271,9 @@
 * **m\_outer\_bc** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **m\_basis\_vals\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **m\_basis\_vals\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
-* **m\_batch\_idx** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_first\_basis\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **m\_first\_basis\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **m\_idx\_range\_batch** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_bsplines\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_bsplines\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_fem\_tensor\_basis** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))

@@ -596,6 +596,10 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt;</td>
+<td style="text-align: left;"><a href="#function-as_batched_vector_view"><strong>as_batched_vector_view</strong></a> (DField&lt; IdxRange&lt; Dims... &gt; &gt; field) <br><em>Get a 2D Kokkos view of a 1D field with N batch dimensions.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, <a href="classTensor.html"><strong>DVector</strong></a>&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt;</td>
 <td style="text-align: left;"><a href="#function-get_polar_bspline_vals_and_derivs"><strong>get_polar_bspline_vals_and_derivs</strong></a> (IdxQuad idx_quad, Idx&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt; idx) <br><em>Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point.</em></td>
 </tr>
@@ -622,6 +626,22 @@
 </tbody>
 </table>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-as_batched_vector_view">function as_batched_vector_view</h3>
+<p><em>Get a 2D Kokkos view of a 1D field with N batch dimensions.</em> </p>
+<pre><code class="language-C++">template&lt;class... Dims&gt;
+Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; detail_poisson::as_batched_vector_view (
+    DField&lt; IdxRange&lt; Dims... &gt; &gt; field
+) 
+</code></pre>
+<p>The returned view shares the memory of the field. The first dimension of the view iterates over all the batch dimensions (in layout_right order), the second dimension iterates over the last dimension of the field.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>field</code> A contiguous layout_right field whose last dimension is the dimension of the matrix equation and whose other dimensions are batch dimensions.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A 2D Kokkos view of shape (number of batches, matrix size). </p>
+<hr>
+
 <h3 id="function-get_polar_bspline_vals_and_derivs">function get_polar_bspline_vals_and_derivs</h3>
 <p><em>Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point.</em> </p>
 <pre><code class="language-C++">template&lt;bool calculate_derivs, class PolarBSplinesRTheta, class IdxQuad&gt;

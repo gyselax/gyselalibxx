@@ -12,7 +12,7 @@
     <includedby refid="initialisation__Kelvin__Helmholtz_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp</includedby>
     <includedby refid="predcorr__RK2_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</includedby>
     <incdepgraph>
-      <node id="13">
+      <node id="14">
         <label>deriv_details.hpp</label>
         <link refid="deriv__details_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -20,12 +20,12 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -41,9 +41,9 @@
       <node id="18">
         <label>tensor_common.hpp</label>
         <link refid="tensor__common_8hpp_source"/>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -62,7 +62,7 @@
         <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>vector_field.hpp</label>
         <link refid="vector__field_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -71,24 +71,24 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -99,7 +99,7 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
@@ -121,9 +121,9 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
@@ -157,6 +157,10 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
@@ -166,13 +170,13 @@
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="17">
+      <node id="10">
         <label>array</label>
       </node>
-      <node id="10">
+      <node id="11">
         <label>cassert</label>
       </node>
-      <node id="11">
+      <node id="12">
         <label>cmath</label>
       </node>
       <node id="2">

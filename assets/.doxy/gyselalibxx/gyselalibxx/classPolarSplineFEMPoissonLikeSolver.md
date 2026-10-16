@@ -33,8 +33,7 @@ Inherits the following classes: [IPolarPoissonLikeSolver](classIPolarPoissonLike
 
 | Type | Name |
 | ---: | :--- |
-| class | [**CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) &lt;class Evaluator, class Coeff&gt;<br>_A wrapper that binds an evaluator with its coefficient field to present a single callable_ `double operator()(CoordRTheta)` _._ |
-| struct | [**InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) <br>_The tag for the batch dimension for the equation. This is public due to Cuda._  |
+| class | [**CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) &lt;class Evaluator, class Coeff&gt;<br>_A wrapper that binds an evaluator with its batched coefficient field to present a single callable_ `double operator()(IdxBatch, CoordRTheta)` _._ |
 | struct | [**QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) <br>_Tag the first dimension for the quadrature mesh._  |
 | struct | [**QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) <br>_Tag the second dimension for the quadrature mesh._  |
 
@@ -89,11 +88,11 @@ Inherits the following classes: [IPolarPoissonLikeSolver](classIPolarPoissonLike
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (Mapping const & mapping, Interpolation2D const & interpolation, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual\_norm=std::nullopt) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
+|   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (Mapping const & mapping, Interpolation2D const & interpolation, IdxRangeFull idx\_range\_full, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual\_norm=std::nullopt) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
 |  void | [**operator()**](#function-operator) (PolarSplineRTheta spline, RHSFunction const & rhs) const<br>_Solve the Poisson-like equation._  |
-|  void | [**operator()**](#function-operator_1) (DFieldRTheta phi, RHSFunction const & rhs) const<br>_Solve the Poisson-like equation._  |
-|  void | [**operator()**](#function-operator_2) (DFieldRTheta phi, DConstFieldRTheta rhs) override const<br>_Solve the Poisson-like equation._  |
-|  void | [**update\_coefficients**](#function-update_coefficients) (DConstField&lt; IdxRangeRTheta &gt; alpha, DConstField&lt; IdxRangeRTheta &gt; beta) override<br>_Update the coefficients_ \(alpha\) _and_\(beta\) _that define the equation._ |
+|  void | [**operator()**](#function-operator_1) (DFieldBatchedRTheta phi, RHSFunction const & rhs) const<br>_Solve the Poisson-like equation._  |
+|  void | [**operator()**](#function-operator_2) (DFieldBatchedRTheta phi, DConstFieldBatchedRTheta rhs) override const<br>_Solve the Poisson-like equation._  |
+|  void | [**update\_coefficients**](#function-update_coefficients) (DConstFieldBatchedRTheta alpha, DConstFieldBatchedRTheta beta) override<br>_Update the coefficients_ \(alpha\) _and_\(beta\) _that define the equation._ |
 
 
 
@@ -227,6 +226,7 @@ _Instantiate a polar Poisson-like solver using FEM with B-splines._
 inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
     Mapping const & mapping,
     Interpolation2D const & interpolation,
+    IdxRangeFull idx_range_full,
     std::optional< int > max_iter=std::nullopt,
     std::optional< double > res_tol=std::nullopt,
     std::optional< bool > batch_solver_logger=std::nullopt,
@@ -253,6 +253,7 @@ The equation we are studying:
 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `interpolation` An interpolation builder and evaluator to build coefficients allowing a function to be evaluated anywhere on the (r,theta) domain. 
+* `idx_range_full` The full index range on which \(\phi\) is defined, including any batch dimensions ahead of [**GridR**](structGridR.md) and [**GridTheta**](structGridTheta.md). For the unbatched instantiation (IdxRangeFull == IdxRange&lt;GridR, GridTheta&gt;) this is simply the (r,theta) grid. 
 * `max_iter` The maximum number of iterations possible for the batched CSR solver. 
 * `res_tol` The residual tolerance for the batched CSR solver. The solver stops when \|\|r\|\|/\|\|b\|\| &lt;= res\_tol where r is the residual computed by the CG recurrence. 
 * `batch_solver_logger` Indicates whether log information such as the residual and the number of iterations should be monitored. 
@@ -296,8 +297,8 @@ This operator returns the coefficients associated with the B-Splines of the solu
 **Parameters:**
 
 
-* `spline` The spline representation of the solution \(\phi\). 
-* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. 
+* `spline` The spline representation of the solution \(\phi\), for every batch. 
+* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object which can be called from GPU with an operator() which takes a batch index and a CoordRTheta. If there are no batch dimensions the operator() may take only a CoordRTheta. 
 
 
 
@@ -314,7 +315,7 @@ _Solve the Poisson-like equation._
 ```C++
 template<class RHSFunction>
 inline void PolarSplineFEMPoissonLikeSolver::operator() (
-    DFieldRTheta phi,
+    DFieldBatchedRTheta phi,
     RHSFunction const & rhs
 ) const
 ```
@@ -329,8 +330,8 @@ This operator uses the other operator () and returns the values on the grid of t
 **Parameters:**
 
 
-* `phi` The values of the solution \(\phi\) on the given coords\_eval. 
-* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. 
+* `phi` The values of the solution \(\phi\) on the grid, for every batch. 
+* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object which can be called from GPU with an operator() which takes a batch index and a CoordRTheta. If there are no batch dimensions the operator() may take only a CoordRTheta. 
 
 
 
@@ -346,8 +347,8 @@ This operator uses the other operator () and returns the values on the grid of t
 _Solve the Poisson-like equation._ 
 ```C++
 inline void PolarSplineFEMPoissonLikeSolver::operator() (
-    DFieldRTheta phi,
-    DConstFieldRTheta rhs
+    DFieldBatchedRTheta phi,
+    DConstFieldBatchedRTheta rhs
 ) override const
 ```
 
@@ -361,8 +362,8 @@ This operator uses the other operator () and returns the values on the grid of t
 **Parameters:**
 
 
-* `phi` The values of the solution \(\phi\) on the grid. 
-* `rhs` The rhs \(\rho\) of the Poisson-like equation on the grid. 
+* `phi` The values of the solution \(\phi\) on the grid, for every batch. 
+* `rhs` The rhs \(\rho\) of the Poisson-like equation on the grid, for every batch. 
 
 
 
@@ -378,8 +379,8 @@ This operator uses the other operator () and returns the values on the grid of t
 _Update the coefficients_ \(alpha\) _and_\(beta\) _that define the equation._
 ```C++
 inline void PolarSplineFEMPoissonLikeSolver::update_coefficients (
-    DConstField< IdxRangeRTheta > alpha,
-    DConstField< IdxRangeRTheta > beta
+    DConstFieldBatchedRTheta alpha,
+    DConstFieldBatchedRTheta beta
 ) override
 ```
 

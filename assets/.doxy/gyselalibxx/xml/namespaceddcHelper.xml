@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="329" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="329" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="366" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="366" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1aa238a8fb325126a81a31cd8fc6a436cc" prot="public" static="no">
         <templateparamlist>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="333" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="334" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="370" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="371" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1a8fe773985cd825fa9ddac001aef03324" prot="public" static="no">
         <templateparamlist>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="338" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="338" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="375" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="375" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="341" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="341" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="378" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="378" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="non__uniform__interpolation__points_8hpp_1a6ba00773b16df1063519790796f9c1dd" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -872,7 +872,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="25" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="25" bodyend="28"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="27" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="27" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1a4d5446b992979ca3b2382c0277626048" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -908,7 +908,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="43" bodyend="46"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="45" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="45" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1a342954bb0c44d8d86ceadb9d9fbea79c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -944,7 +944,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="61" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="61" bodyend="65"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="63" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="63" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1acadd8514e782d274e29345ae70a9c465" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -993,7 +993,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="88" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="88" bodyend="103"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="90" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="90" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1ae8ba6761a82dae62be403afdfe82b46b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1030,7 +1030,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="119" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="119" bodyend="131"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="121" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="121" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1afc83fef0fd54c18053bb973ee156fa49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1085,7 +1085,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="140" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="140" bodyend="150"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="142" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="142" bodyend="152"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1a3b54b16fd66648bf6dd0376da991f596" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1140,7 +1140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="159" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="159" bodyend="172"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="161" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="161" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1a9e2ce2d2ae35d41cf6d260b465560976" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1176,7 +1176,58 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="183" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="183" bodyend="203"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="185" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="185" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="ddc__helper_8hpp_1a3358c1523f03d9b67cbfb45dc70eba59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Dims</declname>
+            <defname>Dims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION Idx&lt; Dims... &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Idx&lt; Dims... &gt; ddcHelper::get_idx_from_linear_index</definition>
+        <argsstring>(IdxRange&lt; Dims... &gt; const &amp;idx_range, std::size_t linear_idx)</argsstring>
+        <name>get_idx_from_linear_index</name>
+        <qualifiedname>ddcHelper::get_idx_from_linear_index</qualifiedname>
+        <param>
+          <type>IdxRange&lt; Dims... &gt; const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>linear_idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the multi-dimensional index found at a given position in an index range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The index range is traversed in layout_right order (the last dimension varies fastest). This is the inverse of the linearisation used to store a contiguous layout_right Field defined on the index range.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>linear_idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position of the index in the index range (0 &lt;= linear_idx &lt; idx_range.size()).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The index found at the position linear_idx. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="220" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="220" bodyend="240"/>
       </memberdef>
       <memberdef kind="function" id="transpose_8hpp_1a427b2ef16466ccf26ea2f81563bbedb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

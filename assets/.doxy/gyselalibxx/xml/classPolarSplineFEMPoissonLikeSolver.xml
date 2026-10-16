@@ -5,7 +5,6 @@
     <basecompoundref refid="classIPolarPoissonLikeSolver" prot="public" virt="non-virtual">IPolarPoissonLikeSolver&lt; IdxRange&lt; GridR, GridTheta &gt;, IdxRange&lt; GridR, GridTheta &gt;, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</basecompoundref>
     <includes refid="polar__spline__fem__poisson__like__solver_8hpp" local="no">polar_spline_fem_poisson_like_solver.hpp</includes>
     <innerclass refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator" prot="public">PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</innerclass>
-    <innerclass refid="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim" prot="public">PolarSplineFEMPoissonLikeSolver::InternalBatchDim</innerclass>
     <innerclass refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" prot="public">PolarSplineFEMPoissonLikeSolver::QDimRMesh</innerclass>
     <innerclass refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" prot="public">PolarSplineFEMPoissonLikeSolver::QDimThetaMesh</innerclass>
     <templateparamlist>
@@ -31,39 +30,36 @@
         <defval>IdxRange&lt;<ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>&gt;</defval>
       </param>
     </templateparamlist>
-    <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1ac0498f4ed23f0fda8490ced1c32bb025" prot="public" static="no">
-        <type>typename GridR::continuous_dimension_type</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::R =  typename GridR::continuous_dimension_type</definition>
-        <argsstring></argsstring>
-        <name>R</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::R</qualifiedname>
-        <briefdescription>
-<para>The radial dimension. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="61" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a0a23b832349163d8437292399de3cb33" prot="public" static="no">
-        <type>typename GridTheta::continuous_dimension_type</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::Theta =  typename GridTheta::continuous_dimension_type</definition>
-        <argsstring></argsstring>
-        <name>Theta</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::Theta</qualifiedname>
-        <briefdescription>
-<para>The poloidal dimension. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="63" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1ad601ccf35c7f44e2ec98145773a4c833" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; IdxRangeFull &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::FullDims =  ddc::to_type_seq_t&lt;IdxRangeFull&gt;</definition>
+        <argsstring></argsstring>
+        <name>FullDims</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::FullDims</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a89f843107422403f336efb5a63df28ae" prot="private" static="no">
+        <type><ref refid="classIPolarPoissonLikeSolver" kindref="compound">IPolarPoissonLikeSolver</ref>&lt; IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;, IdxRangeFull, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::Base =  IPolarPoissonLikeSolver&lt; IdxRange&lt;GridR, GridTheta&gt;, IdxRangeFull, Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
+        <argsstring></argsstring>
+        <name>Base</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::Base</qualifiedname>
+        <briefdescription>
+<para>The base class defining the field types used at the (possibly batched) solver interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a366d71ab7956cb512fa4eedfa8543397" prot="private" static="no">
         <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
         <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::R_cov =  typename R::Dual</definition>
@@ -77,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="70" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1abd6bc001325c21766d0febea4f9baf02" prot="private" static="no">
         <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
@@ -92,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="72" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a69566e53b62cae9b1e66e24747d37c6d" prot="private" static="no">
         <type>Coord&lt; <ref refid="classPolarSplineFEMPoissonLikeSolver_1ac0498f4ed23f0fda8490ced1c32bb025" kindref="member">R</ref>, <ref refid="classPolarSplineFEMPoissonLikeSolver_1a0a23b832349163d8437292399de3cb33" kindref="member">Theta</ref> &gt;</type>
@@ -106,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="95" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="101" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a52897fe3be01832c25d59840d5b73e7d" prot="private" static="no">
         <type>typename <ref refid="classPolarBSplines_1af53c68e9827efcffeee27e353ac3ef7e" kindref="member">PolarBSplinesRTheta::BSplinesR_tag</ref></type>
@@ -121,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="97" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a6fcc8c1cc67e78b31b4ce5eddc877b1a" prot="private" static="no">
         <type>typename <ref refid="classPolarBSplines_1a7c93c1bedcf655bff666950a59eff9ea" kindref="member">PolarBSplinesRTheta::BSplinesTheta_tag</ref></type>
@@ -136,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="99" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="99" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="105" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a6a7da18f872b580efbd11cc7fa14d421" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -150,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="101" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="101" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="107" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1addb5f8c792964b16c2dc5f65d68b0df6" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
@@ -165,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="104" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a6611c23a6a68d93a5df147f0a9a1cddc" prot="private" static="no">
         <type>Idx&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
@@ -179,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="105" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="105" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="111" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1ad2a9480922d64251b14587ea9a5235fc" prot="private" static="no">
         <type>IdxStep&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
@@ -193,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="106" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="112" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1ab6939fae0d544d82eea7ae3ffb6fcedc" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;</type>
@@ -207,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="108" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="108" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="114" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a5d4b4542710f68fd657993373972d5a7" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -221,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="109" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="115" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1af6843084b5a4d4d4456a1b6163a53fb7" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -235,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="110" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1afc1336fd7dfcae31eb01c1c174cfb4d9" prot="private" static="no">
         <type>Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;</type>
@@ -249,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="112" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="112" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="118" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a96c428f9c95c9cea66043406f0c0dd80" prot="private" static="no">
         <type>Idx&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -263,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="113" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="113" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="119" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a825ef53b5a1dd2236c6f7274a6832d91" prot="private" static="no">
         <type>Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -277,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="114" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="114" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="120" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="120" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a68a05a716f27eb5a7090787e7f774212" prot="private" static="no">
         <type>IdxStep&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;</type>
@@ -291,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="116" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="122" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a338661893eb72cfeb7d7467cf13cb2fd" prot="private" static="no">
         <type>IdxStep&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -305,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="117" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="117" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="123" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1ab735c183743e91c952ce52f2319e2c01" prot="private" static="no">
         <type>IdxStep&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -319,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="118" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="124" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a4e4f072e5b99b2383ae3736c63a25e97" prot="private" static="no">
         <type>typename Interpolation2D::BuilderType</type>
@@ -334,7 +330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="121" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="121" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="127" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1aea3ae3c67a172a9a27423154585e1ef2" prot="private" static="no">
         <type>typename Interpolation2D::EvaluatorType</type>
@@ -349,11 +345,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="123" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="123" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="129" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="129" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1aba8fbf8973668365f20d6aaba51f0adf" prot="private" static="no">
-        <type>ddc::remove_dims_of_t&lt; IdxRangeFull, IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref> &gt;, IdxRange&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt; &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, IdxRange&lt;GridR&gt;, IdxRange&lt;GridTheta&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a3dacd4effe53afa00d3cadcf7f23d504" prot="private" static="no">
+        <type>typename Base::batch_idx_range_type</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::IdxRangeBatch =  typename Base::batch_idx_range_type</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatch</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::IdxRangeBatch</qualifiedname>
@@ -363,7 +359,50 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="125" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="125" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="131" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a47ceb71da7e945ef8a17f255d4a4fb11" prot="private" static="no">
+        <type>typename Base::batch_index_type</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::IdxBatch =  typename Base::batch_index_type</definition>
+        <argsstring></argsstring>
+        <name>IdxBatch</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::IdxBatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="132" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1addb6b2989c77c7513c4968deaf8f8b89" prot="private" static="no">
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_cat_t&lt; ddc::to_type_seq_t&lt; IdxRangeBatch &gt;, ddc::detail::TypeSeq&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt; &gt; &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::IdxRangeBatchedBSPolar =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_cat_t&lt; ddc::to_type_seq_t&lt;IdxRangeBatch&gt;, ddc::detail::TypeSeq&lt;PolarBSplinesRTheta&gt; &gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeBatchedBSPolar</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::IdxRangeBatchedBSPolar</qualifiedname>
+        <briefdescription>
+<para>The type of an index range over the polar B-splines and the batch dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="135" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a2ab63bafe5c1c08101986ef588c0e897" prot="private" static="no">
+        <type>typename IdxRangeBatchedBSPolar::discrete_element_type</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::IdxBatchedBSPolar =  typename IdxRangeBatchedBSPolar::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxBatchedBSPolar</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::IdxBatchedBSPolar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="139" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1aba970edaa6feec4f34155cd979797a4f" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" kindref="compound">QDimRMesh</ref> &gt;</type>
@@ -378,7 +417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="130" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="130" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="144" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a13341b9e94f67d0e8f5cc0b15ad9b5b4" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" kindref="compound">QDimThetaMesh</ref> &gt;</type>
@@ -393,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="134" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="134" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="148" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a8c0784627f82ab014a7d2e76816739a7" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" kindref="compound">QDimRMesh</ref>, <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" kindref="compound">QDimThetaMesh</ref> &gt;</type>
@@ -408,7 +447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="138" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="138" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="152" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a20d9bf5fc27f82059d0ef7b0fc3681df" prot="private" static="no">
         <type>Idx&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" kindref="compound">QDimRMesh</ref> &gt;</type>
@@ -423,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="142" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="142" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="156" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="156" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a1e6ce3a589c6ad96b7502a4a7dd92bf6" prot="private" static="no">
         <type>Idx&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" kindref="compound">QDimThetaMesh</ref> &gt;</type>
@@ -438,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="146" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="146" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="160" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a3536b574f99f05ec0e6730f428200ea8" prot="private" static="no">
         <type>Idx&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" kindref="compound">QDimRMesh</ref>, <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" kindref="compound">QDimThetaMesh</ref> &gt;</type>
@@ -453,7 +492,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="150" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="150" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="164" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="164" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a1eb133a116303092bda3821594ddc3be" prot="private" static="no">
         <type>IdxStep&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" kindref="compound">QDimRMesh</ref> &gt;</type>
@@ -468,7 +507,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="154" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="154" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="168" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="168" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a92b400b25367fa391192bfb9a3df77ba" prot="private" static="no">
         <type>IdxStep&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" kindref="compound">QDimThetaMesh</ref> &gt;</type>
@@ -483,39 +522,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="158" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="158" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="172" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="172" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1aca5b77c38693525502aea6fb80d676e3" prot="private" static="no">
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a0355c4a90be89003319eaf498312978d" prot="private" static="no">
         <type>DFieldMem&lt; typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; EvaluatorType &gt;::template batched_coeff_idx_range_type&lt; IdxRangeFull &gt; &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::FieldMemCoeffsSpline2D =  DFieldMem&lt;typename InterpolationEvaluatorTraits&lt; EvaluatorType&gt;::template batched_coeff_idx_range_type&lt;IdxRangeFull&gt; &gt;</definition>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::FieldMemBatchedCoeffsSpline2D =  DFieldMem&lt;typename InterpolationEvaluatorTraits&lt; EvaluatorType&gt;::template batched_coeff_idx_range_type&lt;IdxRangeFull&gt; &gt;</definition>
         <argsstring></argsstring>
-        <name>FieldMemCoeffsSpline2D</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::FieldMemCoeffsSpline2D</qualifiedname>
+        <name>FieldMemBatchedCoeffsSpline2D</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::FieldMemBatchedCoeffsSpline2D</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="160" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="161" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="174" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="175" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1aa149dd212d0eeb0532447980ef59cd3c" prot="private" static="no">
-        <type>typename FieldMemCoeffsSpline2D::view_type</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::ConstFieldCoeffsSpline2D =  typename FieldMemCoeffsSpline2D::view_type</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a62d4f324c621739f60cc45884a4f998c" prot="private" static="no">
+        <type>typename FieldMemBatchedCoeffsSpline2D::view_type</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::ConstFieldBatchedCoeffsSpline2D =  typename FieldMemBatchedCoeffsSpline2D::view_type</definition>
         <argsstring></argsstring>
-        <name>ConstFieldCoeffsSpline2D</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::ConstFieldCoeffsSpline2D</qualifiedname>
+        <name>ConstFieldBatchedCoeffsSpline2D</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::ConstFieldBatchedCoeffsSpline2D</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="162" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="162" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="176" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="176" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1aba0f1af072e12c139b4189426049d68c" prot="private" static="no">
-        <type>DFieldMem&lt; IdxRange&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt; &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::PolarSplineMemRTheta =  DFieldMem&lt;IdxRange&lt;PolarBSplinesRTheta&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1abf374398d18b1bb59d68778274b6d064" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeBatchedBSPolar &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::PolarSplineMemRTheta =  DFieldMem&lt;IdxRangeBatchedBSPolar&gt;</definition>
         <argsstring></argsstring>
         <name>PolarSplineMemRTheta</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::PolarSplineMemRTheta</qualifiedname>
@@ -525,11 +564,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="163" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="163" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="177" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="177" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1aa9e0945eeba1c16f913e5efe77ec8768" prot="private" static="no">
-        <type>DField&lt; IdxRange&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt; &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::PolarSplineRTheta =  DField&lt;IdxRange&lt;PolarBSplinesRTheta&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1ae27bc7cf90fdc1d6a262ea40ea288596" prot="private" static="no">
+        <type>DField&lt; IdxRangeBatchedBSPolar &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::PolarSplineRTheta =  DField&lt;IdxRangeBatchedBSPolar&gt;</definition>
         <argsstring></argsstring>
         <name>PolarSplineRTheta</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::PolarSplineRTheta</qualifiedname>
@@ -539,67 +578,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="164" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="164" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="178" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="178" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a2b3f68399c46d79643b5e9220c50903c" prot="private" static="no">
-        <type>FieldMem&lt; CoordRTheta, IdxRangeRTheta &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::CoordFieldMemRTheta =  FieldMem&lt;CoordRTheta, IdxRangeRTheta&gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1aeda2e46819edc9d4c86ea1acfc31ccdc" prot="private" static="no">
+        <type>typename Base::const_field_type</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::DConstFieldBatchedRTheta =  typename Base::const_field_type</definition>
         <argsstring></argsstring>
-        <name>CoordFieldMemRTheta</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::CoordFieldMemRTheta</qualifiedname>
+        <name>DConstFieldBatchedRTheta</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::DConstFieldBatchedRTheta</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="166" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="166" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="180" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="180" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1afcd24fd440458f54a7afa307d25eee6e" prot="private" static="no">
-        <type>Field&lt; CoordRTheta, IdxRangeRTheta &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::CoordFieldRTheta =  Field&lt;CoordRTheta, IdxRangeRTheta&gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1abd9dfa2b528f5fcd7f6512054144ad24" prot="private" static="no">
+        <type>typename Base::field_type</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::DFieldBatchedRTheta =  typename Base::field_type</definition>
         <argsstring></argsstring>
-        <name>CoordFieldRTheta</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::CoordFieldRTheta</qualifiedname>
+        <name>DFieldBatchedRTheta</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::DFieldBatchedRTheta</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="167" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="167" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="181" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="181" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1af3aecfac540dd23653e659ede7bdd0ac" prot="private" static="no">
-        <type>DField&lt; IdxRangeRTheta &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::DFieldRTheta =  DField&lt;IdxRangeRTheta&gt;</definition>
-        <argsstring></argsstring>
-        <name>DFieldRTheta</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::DFieldRTheta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="168" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="168" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1afd0be06300c28bc136d7f40667e6c59a" prot="private" static="no">
-        <type>DConstField&lt; IdxRangeRTheta &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::DConstFieldRTheta =  DConstField&lt;IdxRangeRTheta&gt;</definition>
-        <argsstring></argsstring>
-        <name>DConstFieldRTheta</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::DConstFieldRTheta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="169" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="169" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1adaa61a4375cb4d7e50b6ca7d2856c5ae" prot="private" static="no">
-        <type><ref refid="classPolarSplineFEMPoissonLikeAssembler" kindref="compound">PolarSplineFEMPoissonLikeAssembler</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" kindref="compound">QDimRMesh</ref>, <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" kindref="compound">QDimThetaMesh</ref> &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::PoissonAssembler =  PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh&gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1af5638d0a0cbc1157c88e032a07a52b47" prot="private" static="no">
+        <type><ref refid="classPolarSplineFEMPoissonLikeAssembler" kindref="compound">PolarSplineFEMPoissonLikeAssembler</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" kindref="compound">QDimRMesh</ref>, <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" kindref="compound">QDimThetaMesh</ref>, IdxRangeFull &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::PoissonAssembler =  PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, IdxRangeFull&gt;</definition>
         <argsstring></argsstring>
         <name>PoissonAssembler</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::PoissonAssembler</qualifiedname>
@@ -609,7 +620,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="171" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="176" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="183" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="189" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a4d6489cbc8f2b00f3504db3a27bd2029" prot="private" static="no">
         <type><ref refid="classPolarSplineEvaluator" kindref="compound">PolarSplineEvaluator</ref>&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, ddc::NullExtrapolationRule &gt;</type>
@@ -623,7 +634,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="178" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="182" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="191" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1ac0498f4ed23f0fda8490ced1c32bb025" prot="public" static="no">
+        <type>typename GridR::continuous_dimension_type</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::R =  typename GridR::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>R</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::R</qualifiedname>
+        <briefdescription>
+<para>The radial dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeSolver_1a0a23b832349163d8437292399de3cb33" prot="public" static="no">
+        <type>typename GridTheta::continuous_dimension_type</type>
+        <definition>using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::Theta =  typename GridTheta::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>Theta</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::Theta</qualifiedname>
+        <briefdescription>
+<para>The poloidal dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -640,7 +683,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="218" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="218" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="232" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="232" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a473fe007d31cc3693199e8aa77552e6f" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>constexpr int</type>
@@ -655,7 +698,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="219" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="219" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="233" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="233" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1ae01090a1fcd37d64d3d19abb6dcd7e96" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>constexpr int</type>
@@ -670,7 +713,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="221" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="221" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="235" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="235" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1aac73735854820fea92071544357140eb" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>constexpr int</type>
@@ -685,7 +728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="225" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="225" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="239" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="239" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1aa94c859198a3f106c7aa0e802ef115fd" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>constexpr int</type>
@@ -700,7 +743,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="228" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="228" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="242" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1ac74021ba131fd78037471a3571c555ff" prot="private" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class RHSFunction</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::is_valid_rhs_function_v</definition>
+        <argsstring></argsstring>
+        <name>is_valid_rhs_function_v</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::is_valid_rhs_function_v</qualifiedname>
+        <initializer>= std::is_invocable_r_v&lt;
+                      double,
+                      RHSFunction,
+                      IdxBatch,
+                      CoordRTheta&gt; || (IdxRangeBatch::rank() == 0 &amp;&amp; std::is_invocable_r_v&lt;double, RHSFunction, CoordRTheta&gt;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if RHSFunction can be called with a batch index and a coordinate, or only a coordinate if there are no batch dimensions. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="608" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="609" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -716,7 +784,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="230" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="230" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="244" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="244" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a1c973aec2d49b79eabdbdcf8dd4f8a22" prot="private" static="no" mutable="no">
         <type>IdxRangeBSPolar</type>
@@ -730,7 +798,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="233" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="233" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="247" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="247" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a36b7ca4c528dc1a3e6d7835e3c49bde6" prot="private" static="no" mutable="no">
         <type>IdxRangeBSR</type>
@@ -744,7 +812,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="234" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="234" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="248" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="248" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1abadd0deca0b534824385fce7962255b8" prot="private" static="no" mutable="no">
         <type>IdxRangeBSTheta</type>
@@ -758,7 +826,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="235" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="235" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="249" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="249" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a0c59289c3d61badcb347bbf2bda6fb73" prot="private" static="no" mutable="no">
         <type>IdxRangeQuadratureR</type>
@@ -772,7 +840,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="237" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="237" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="251" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="251" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a264f356a05214ea5fc0b8db05f312965" prot="private" static="no" mutable="no">
         <type>IdxRangeQuadratureTheta</type>
@@ -786,7 +854,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="238" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="238" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="252" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="252" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a0d4c1ac1e23a98a758ffd2ed2fe7b5f1" prot="private" static="no" mutable="no">
         <type>IdxRangeQuadratureRTheta</type>
@@ -800,7 +868,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="239" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="239" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="253" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="253" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1ab7d3caacc36592ecb2db16520785e1e7" prot="private" static="no" mutable="no">
         <type>IdxRangeQuadratureRTheta</type>
@@ -814,7 +882,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="240" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="240" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="254" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="254" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1ac81dd1a1923dacb448314220f4af2737" prot="private" static="no" mutable="no">
         <type>Mapping</type>
@@ -828,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="242" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="242" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="256" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="256" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a8717631478c6726c828493c6291d7a78" prot="private" static="no" mutable="no">
         <type>BuilderType const  &amp;</type>
@@ -842,7 +910,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="243" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="243" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="257" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="257" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a264c1330d27bf23cb903d8d1c33664c6" prot="private" static="no" mutable="no">
         <type>EvaluatorType const  &amp;</type>
@@ -856,7 +924,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="244" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="244" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="258" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a0b56be623d6718689377e46184a290cc" prot="private" static="no" mutable="no">
+        <type>IdxRangeBatch</type>
+        <definition>IdxRangeBatch PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::m_idx_range_batch</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_batch</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::m_idx_range_batch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="262" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="262" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1aaeef24f3d793feb51126850febcad4d2" prot="private" static="no" mutable="no">
         <type><ref refid="classPolarSplineEvaluator" kindref="compound">PolarSplineEval</ref></type>
@@ -870,7 +952,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="246" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="246" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="264" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="264" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a7f9e757b2a2da54d5ff59b47a7444721" prot="private" static="no" mutable="no">
         <type>std::unique_ptr&lt; <ref refid="classMatrixBatchCsr" kindref="compound">MatrixBatchCsr</ref>&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt;</type>
@@ -884,7 +966,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="248" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="248" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="266" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="266" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a7570c2c508a7b143243590ba99859c76" prot="private" static="no" mutable="yes">
         <type>PolarSplineMemRTheta</type>
@@ -898,11 +980,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="249" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="249" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="267" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="267" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a2eda3482e4bd5151d1117c438909125a" prot="private" static="no" mutable="yes">
-        <type>DFieldMem&lt; IdxRange&lt; <ref refid="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim" kindref="compound">InternalBatchDim</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt; &gt;</type>
-        <definition>DFieldMem&lt;IdxRange&lt;InternalBatchDim, PolarBSplinesRTheta&gt; &gt; PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::m_x_init_alloc</definition>
+      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a2bb5e86447ec96ea81b9d5b61680059a" prot="private" static="no" mutable="yes">
+        <type>DFieldMem&lt; IdxRangeBatchedBSPolar &gt;</type>
+        <definition>DFieldMem&lt;IdxRangeBatchedBSPolar&gt; PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::m_x_init_alloc</definition>
         <argsstring></argsstring>
         <name>m_x_init_alloc</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::m_x_init_alloc</qualifiedname>
@@ -912,22 +994,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="250" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="250" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a2fc64bf4d9b810e351c63c74e7c3a9e3" prot="private" static="no" mutable="no">
-        <type>const int</type>
-        <definition>const int PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::m_batch_idx</definition>
-        <argsstring></argsstring>
-        <name>m_batch_idx</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeSolver::m_batch_idx</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="252" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="252" bodyend="252"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="268" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="268" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1aaa9dfdb907754d51cdd6c7e28322c6c4" prot="private" static="no" mutable="no">
         <type>FieldMem&lt; double, IdxRangeQuadratureRTheta &gt;</type>
@@ -941,7 +1008,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="254" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="254" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="270" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="270" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a76505084cfb28648123aede4ba5f9e85" prot="private" static="no" mutable="no">
         <type><ref refid="classPolarSplineFEMPoissonLikeAssembler" kindref="compound">PoissonAssembler</ref></type>
@@ -955,14 +1022,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="255" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="255" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="271" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="271" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1afd2ad1d54a948fbd3d4475181769c99a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a7562757af519aa9d3a60da9fe4a36786" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::PolarSplineFEMPoissonLikeSolver</definition>
-        <argsstring>(Mapping const &amp;mapping, Interpolation2D const &amp;interpolation, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual_norm=std::nullopt)</argsstring>
+        <argsstring>(Mapping const &amp;mapping, Interpolation2D const &amp;interpolation, IdxRangeFull idx_range_full, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual_norm=std::nullopt)</argsstring>
         <name>PolarSplineFEMPoissonLikeSolver</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver</qualifiedname>
         <param>
@@ -972,6 +1039,10 @@
         <param>
           <type>Interpolation2D const &amp;</type>
           <declname>interpolation</declname>
+        </param>
+        <param>
+          <type>IdxRangeFull</type>
+          <declname>idx_range_full</declname>
         </param>
         <param>
           <type>std::optional&lt; int &gt;</type>
@@ -1019,6 +1090,14 @@
 </parameternamelist>
 <parameterdescription>
 <para>An interpolation builder and evaluator to build coefficients allowing a function to be evaluated anywhere on the (r,theta) domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_full</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The full index range on which <formula id="172">$ \phi $</formula> is defined, including any batch dimensions ahead of <ref refid="structGridR" kindref="compound">GridR</ref> and <ref refid="structGridTheta" kindref="compound">GridTheta</ref>. For the unbatched instantiation (IdxRangeFull == IdxRange&lt;GridR, GridTheta&gt;) this is simply the (r,theta) grid. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1075,20 +1154,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="288" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="288" bodyend="347"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="308" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="308" bodyend="375"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a395bd7a5a8238f6a44e3d92f7d12e696" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1ac8fe1f1cb9a153025debc69b0afe1073" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::update_coefficients</definition>
-        <argsstring>(DConstField&lt; IdxRangeRTheta &gt; alpha, DConstField&lt; IdxRangeRTheta &gt; beta) override</argsstring>
+        <argsstring>(DConstFieldBatchedRTheta alpha, DConstFieldBatchedRTheta beta) override</argsstring>
         <name>update_coefficients</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::update_coefficients</qualifiedname>
         <param>
-          <type>DConstField&lt; IdxRangeRTheta &gt;</type>
+          <type>DConstFieldBatchedRTheta</type>
           <declname>alpha</declname>
         </param>
         <param>
-          <type>DConstField&lt; IdxRangeRTheta &gt;</type>
+          <type>DConstFieldBatchedRTheta</type>
           <declname>beta</declname>
         </param>
         <briefdescription>
@@ -1116,7 +1195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="358" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="358" bodyend="372"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="386" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="386" bodyend="401"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1aa63ffec323ca2c89a57d1291894a2267" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1147,7 +1226,7 @@
 <parametername direction="out">spline</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the solution <formula id="208">$\phi$</formula>. </para>
+<para>The spline representation of the solution <formula id="208">$\phi$</formula>, for every batch. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1155,7 +1234,7 @@
 <parametername direction="in">rhs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The rhs <formula id="400">$ \rho$</formula> of the Poisson-like equation. The type is templated but we can use the <ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. </para>
+<para>The rhs <formula id="400">$ \rho$</formula> of the Poisson-like equation. The type is templated but we can use the <ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref> class. It must be an object which can be called from GPU with an operator() which takes a batch index and a CoordRTheta. If there are no batch dimensions the operator() may take only a CoordRTheta. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1163,9 +1242,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="389" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="389" bodyend="505"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="419" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="419" bodyend="553"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a86dc8be1e0ee4d59bc64635ee9633c9a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a09d7866dd5f26885822d79ef39aeac6d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class RHSFunction</type>
@@ -1173,11 +1252,11 @@
         </templateparamlist>
         <type>void</type>
         <definition>void PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::operator()</definition>
-        <argsstring>(DFieldRTheta phi, RHSFunction const &amp;rhs) const</argsstring>
+        <argsstring>(DFieldBatchedRTheta phi, RHSFunction const &amp;rhs) const</argsstring>
         <name>operator()</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::operator()</qualifiedname>
         <param>
-          <type>DFieldRTheta</type>
+          <type>DFieldBatchedRTheta</type>
           <declname>phi</declname>
         </param>
         <param>
@@ -1191,10 +1270,10 @@
 <para>This operator uses the other operator () and returns the values on the grid of the solution <formula id="208">$\phi$</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="inout">phi</parametername>
+<parametername direction="out">phi</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The values of the solution <formula id="208">$\phi$</formula> on the given coords_eval. </para>
+<para>The values of the solution <formula id="208">$\phi$</formula> on the grid, for every batch. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1202,7 +1281,7 @@
 <parametername direction="in">rhs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The rhs <formula id="400">$ \rho$</formula> of the Poisson-like equation. The type is templated but we can use the <ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. </para>
+<para>The rhs <formula id="400">$ \rho$</formula> of the Poisson-like equation. The type is templated but we can use the <ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref> class. It must be an object which can be called from GPU with an operator() which takes a batch index and a CoordRTheta. If there are no batch dimensions the operator() may take only a CoordRTheta. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1210,20 +1289,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="522" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="522" bodyend="534"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="571" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="571" bodyend="580"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a054fb69ed0ada13d3ed7f7ea286ff1e9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1aafdbb881ae92c54396911aaba1e8d193" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::operator()</definition>
-        <argsstring>(DFieldRTheta phi, DConstFieldRTheta rhs) const override</argsstring>
+        <argsstring>(DFieldBatchedRTheta phi, DConstFieldBatchedRTheta rhs) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::operator()</qualifiedname>
         <param>
-          <type>DFieldRTheta</type>
+          <type>DFieldBatchedRTheta</type>
           <declname>phi</declname>
         </param>
         <param>
-          <type>DConstFieldRTheta</type>
+          <type>DConstFieldBatchedRTheta</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -1233,10 +1312,10 @@
 <para>This operator uses the other operator () and returns the values on the grid of the solution <formula id="208">$\phi$</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="inout">phi</parametername>
+<parametername direction="out">phi</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The values of the solution <formula id="208">$\phi$</formula> on the grid. </para>
+<para>The values of the solution <formula id="208">$\phi$</formula> on the grid, for every batch. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1244,7 +1323,7 @@
 <parametername direction="in">rhs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The rhs <formula id="400">$ \rho$</formula> of the Poisson-like equation on the grid. </para>
+<para>The rhs <formula id="400">$ \rho$</formula> of the Poisson-like equation on the grid, for every batch. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1252,7 +1331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="547" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="547" bodyend="555"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="593" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="593" bodyend="602"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -1272,7 +1351,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="558" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="558" bodyend="571"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="615" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="615" bodyend="628"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a098b0b58a88ddb06c378b30487cf6e93" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class RHSFunction</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>static KOKKOS_INLINE_FUNCTION double PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::eval_rhs</definition>
+        <argsstring>(RHSFunction const &amp;rhs, IdxBatch idx_batch, CoordRTheta const &amp;coord)</argsstring>
+        <name>eval_rhs</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::eval_rhs</qualifiedname>
+        <param>
+          <type>RHSFunction const &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>IdxBatch</type>
+          <declname>idx_batch</declname>
+        </param>
+        <param>
+          <type>CoordRTheta const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the rhs function at a coordinate for the specified batch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="632" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="632" bodyend="643"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1360,20 +1471,23 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="44" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="50" bodyend="572"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="44" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="50" bodyend="644"/>
     <listofallmembers>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a89f843107422403f336efb5a63df28ae" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>Base</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a52897fe3be01832c25d59840d5b73e7d" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>BSplinesR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a6fcc8c1cc67e78b31b4ce5eddc877b1a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>BSplinesTheta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a4e4f072e5b99b2383ae3736c63a25e97" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>BuilderType</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a55be9d3ae0905fbeae42b431c2736b4b" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>calculate_int_volume</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1aa149dd212d0eeb0532447980ef59cd3c" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>ConstFieldCoeffsSpline2D</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1a2b3f68399c46d79643b5e9220c50903c" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>CoordFieldMemRTheta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1afcd24fd440458f54a7afa307d25eee6e" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>CoordFieldRTheta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a62d4f324c621739f60cc45884a4f998c" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>ConstFieldBatchedCoeffsSpline2D</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a69566e53b62cae9b1e66e24747d37c6d" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>CoordRTheta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1afd0be06300c28bc136d7f40667e6c59a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>DConstFieldRTheta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1af3aecfac540dd23653e659ede7bdd0ac" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>DFieldRTheta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1aeda2e46819edc9d4c86ea1acfc31ccdc" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>DConstFieldBatchedRTheta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1abd9dfa2b528f5fcd7f6512054144ad24" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>DFieldBatchedRTheta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a098b0b58a88ddb06c378b30487cf6e93" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>eval_rhs</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1aea3ae3c67a172a9a27423154585e1ef2" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>EvaluatorType</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1aca5b77c38693525502aea6fb80d676e3" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>FieldMemCoeffsSpline2D</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a0355c4a90be89003319eaf498312978d" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>FieldMemBatchedCoeffsSpline2D</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1ad601ccf35c7f44e2ec98145773a4c833" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>FullDims</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a47ceb71da7e945ef8a17f255d4a4fb11" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxBatch</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a2ab63bafe5c1c08101986ef588c0e897" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxBatchedBSPolar</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a6611c23a6a68d93a5df147f0a9a1cddc" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxBSPolar</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1afc1336fd7dfcae31eb01c1c174cfb4d9" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxBSR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a825ef53b5a1dd2236c6f7274a6832d91" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxBSRTheta</name></member>
@@ -1381,7 +1495,8 @@
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a20d9bf5fc27f82059d0ef7b0fc3681df" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxQuadratureR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a3536b574f99f05ec0e6730f428200ea8" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxQuadratureRTheta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a1e6ce3a589c6ad96b7502a4a7dd92bf6" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxQuadratureTheta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1aba8fbf8973668365f20d6aaba51f0adf" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxRangeBatch</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a3dacd4effe53afa00d3cadcf7f23d504" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxRangeBatch</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1addb6b2989c77c7513c4968deaf8f8b89" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxRangeBatchedBSPolar</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1addb5f8c792964b16c2dc5f65d68b0df6" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxRangeBSPolar</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1ab6939fae0d544d82eea7ae3ffb6fcedc" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxRangeBSR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1af6843084b5a4d4d4456a1b6163a53fb7" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxRangeBSRTheta</name></member>
@@ -1396,11 +1511,12 @@
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a338661893eb72cfeb7d7467cf13cb2fd" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxStepBSTheta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a1eb133a116303092bda3821594ddc3be" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxStepQuadratureR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a92b400b25367fa391192bfb9a3df77ba" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>IdxStepQuadratureTheta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1ac74021ba131fd78037471a3571c555ff" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>is_valid_rhs_function_v</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a76505084cfb28648123aede4ba5f9e85" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_assembler</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1a2fc64bf4d9b810e351c63c74e7c3a9e3" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_batch_idx</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a8717631478c6726c828493c6291d7a78" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_builder</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a264c1330d27bf23cb903d8d1c33664c6" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_evaluator</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a7f9e757b2a2da54d5ff59b47a7444721" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_gko_matrix</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a0b56be623d6718689377e46184a290cc" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_idx_range_batch</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a36b7ca4c528dc1a3e6d7835e3c49bde6" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_idxrange_bsplines_r</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1abadd0deca0b534824385fce7962255b8" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_idxrange_bsplines_theta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a1c973aec2d49b79eabdbdcf8dd4f8a22" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_idxrange_fem_non_singular</name></member>
@@ -1416,22 +1532,22 @@
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a7f8db68f200278d6b85b5e103f9bc357" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_nbasis_theta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a7570c2c508a7b143243590ba99859c76" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_phi_spline_coef_alloc</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1aaeef24f3d793feb51126850febcad4d2" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_polar_spline_evaluator</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1a2eda3482e4bd5151d1117c438909125a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_x_init_alloc</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a2bb5e86447ec96ea81b9d5b61680059a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_x_init_alloc</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1aa63ffec323ca2c89a57d1291894a2267" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>operator()</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1a86dc8be1e0ee4d59bc64635ee9633c9a" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>operator()</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1a054fb69ed0ada13d3ed7f7ea286ff1e9" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>operator()</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1adaa61a4375cb4d7e50b6ca7d2856c5ae" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PoissonAssembler</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a09d7866dd5f26885822d79ef39aeac6d" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>operator()</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1aafdbb881ae92c54396911aaba1e8d193" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>operator()</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1af5638d0a0cbc1157c88e032a07a52b47" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PoissonAssembler</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a4d6489cbc8f2b00f3504db3a27bd2029" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PolarSplineEval</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1afd2ad1d54a948fbd3d4475181769c99a" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PolarSplineFEMPoissonLikeSolver</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1aba0f1af072e12c139b4189426049d68c" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PolarSplineMemRTheta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1aa9e0945eeba1c16f913e5efe77ec8768" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PolarSplineRTheta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1a7562757af519aa9d3a60da9fe4a36786" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PolarSplineFEMPoissonLikeSolver</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1abf374398d18b1bb59d68778274b6d064" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PolarSplineMemRTheta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1ae27bc7cf90fdc1d6a262ea40ea288596" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>PolarSplineRTheta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1ac0498f4ed23f0fda8490ced1c32bb025" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>R</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a366d71ab7956cb512fa4eedfa8543397" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>R_cov</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a3f68268de95b76225dc459740db9ef04" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>s_n_gauss_legendre_r</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a473fe007d31cc3693199e8aa77552e6f" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>s_n_gauss_legendre_theta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a0a23b832349163d8437292399de3cb33" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>Theta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1abd6bc001325c21766d0febea4f9baf02" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>Theta_cov</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1a395bd7a5a8238f6a44e3d92f7d12e696" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>update_coefficients</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1ac8fe1f1cb9a153025debc69b0afe1073" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>update_coefficients</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -56,6 +56,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; | [**as\_batched\_vector\_view**](#function-as_batched_vector_view) (DField&lt; IdxRange&lt; Dims... &gt; &gt; field) <br>_Get a 2D Kokkos view of a 1D field with N batch dimensions._  |
 |  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, std::tuple&lt; double, [**DVector**](classTensor.md)&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (IdxQuad idx\_quad, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; start\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; end\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; start\_knot\_theta, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; end\_knot\_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the quadrature range between a provided set of knots._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_support\_quadrature**](#function-get_support_quadrature) (Idx&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the range of quadrature points in the support of a tensor product B-spline._  |
@@ -92,6 +93,44 @@
 
 ## Public Functions Documentation
 
+
+
+
+### function as\_batched\_vector\_view 
+
+_Get a 2D Kokkos view of a 1D field with N batch dimensions._ 
+```C++
+template<class... Dims>
+Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > detail_poisson::as_batched_vector_view (
+    DField< IdxRange< Dims... > > field
+) 
+```
+
+
+
+The returned view shares the memory of the field. The first dimension of the view iterates over all the batch dimensions (in layout\_right order), the second dimension iterates over the last dimension of the field.
+
+
+
+
+**Parameters:**
+
+
+* `field` A contiguous layout\_right field whose last dimension is the dimension of the matrix equation and whose other dimensions are batch dimensions.
+
+
+
+**Returns:**
+
+A 2D Kokkos view of shape (number of batches, matrix size). 
+
+
+
+
+
+        
+
+<hr>
 
 
 

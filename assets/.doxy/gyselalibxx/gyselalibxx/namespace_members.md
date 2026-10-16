@@ -8,6 +8,7 @@
 * **apply\_template\_to\_type\_seq\_t** ([**ddcHelper**](namespaceddcHelper.md))
 * **assign\_elements** ([**ddcHelper**](namespaceddcHelper.md))
 * **assign\_vector\_field\_element** ([**ddcHelper**](namespaceddcHelper.md))
+* **as\_batched\_vector\_view** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **AssertionFailure** ([**gslx::error**](namespacegslx_1_1error.md))
 
 
@@ -40,6 +41,7 @@
 
 * **Greville\_Greville** ([**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
 * **get** ([**ddcHelper**](namespaceddcHelper.md))
+* **get\_idx\_from\_linear\_index** ([**ddcHelper**](namespaceddcHelper.md))
 * **get\_polar\_bspline\_vals\_and\_derivs** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_quadrature\_between\_knots** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_support\_quadrature** ([**detail\_poisson**](namespacedetail__poisson.md))

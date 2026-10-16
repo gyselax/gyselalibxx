@@ -799,13 +799,9 @@
 <li><strong>struct</strong> <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> </li>
 <li><strong>class</strong> <a href="classPolarFootFinder.html"><strong>PolarFootFinder</strong></a> <em>Operator for finding the feet of the characteristics on a polar slice.</em>     </li>
 <li><strong>class</strong> <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a> <em>Define an evaluator on polar B-splines.</em>     </li>
-<li><strong>class</strong> <a href="classPolarSplineFEMPoissonLikeAssembler.html"><strong>PolarSplineFEMPoissonLikeAssembler</strong></a> <em>An operator to assemble a Poisson-like stiffness matrix using polar B-splines.</em>     <ul>
-<li><strong>struct</strong> <a href="structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.html"><strong>InternalBatchDim</strong></a> <em>The tag for the batch dimension for the equation. This is public due to Cuda.</em> </li>
-</ul>
-</li>
+<li><strong>class</strong> <a href="classPolarSplineFEMPoissonLikeAssembler.html"><strong>PolarSplineFEMPoissonLikeAssembler</strong></a> <em>An operator to assemble a Poisson-like stiffness matrix using polar B-splines.</em>     </li>
 <li><strong>class</strong> <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> <em>Define a polar PDE solver for a Poisson-like equation.</em>     <ul>
-<li><strong>class</strong> <a href="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.html"><strong>CoeffEvaluator</strong></a> <em>A wrapper that binds an evaluator with its coefficient field to present a single callable</em> <code>double operator()(CoordRTheta)</code> <em>.</em>    </li>
-<li><strong>struct</strong> <a href="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.html"><strong>InternalBatchDim</strong></a> <em>The tag for the batch dimension for the equation. This is public due to Cuda.</em> </li>
+<li><strong>class</strong> <a href="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.html"><strong>CoeffEvaluator</strong></a> <em>A wrapper that binds an evaluator with its batched coefficient field to present a single callable</em> <code>double operator()(IdxBatch, CoordRTheta)</code> <em>.</em>    </li>
 <li><strong>struct</strong> <a href="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html"><strong>QDimRMesh</strong></a> <em>Tag the first dimension for the quadrature mesh.</em> </li>
 <li><strong>struct</strong> <a href="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.html"><strong>QDimThetaMesh</strong></a> <em>Tag the second dimension for the quadrature mesh.</em> </li>
 </ul>

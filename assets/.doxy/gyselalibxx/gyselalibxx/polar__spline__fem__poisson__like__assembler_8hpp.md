@@ -15,6 +15,7 @@
 * `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
+* `#include "ddc_helper.hpp"`
 * `#include "gauss_legendre_integration.hpp"`
 * `#include "math_tools.hpp"`
 * `#include "matrix_batch_csr.hpp"`
@@ -48,8 +49,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), typename QDimRMesh, typename QDimThetaMesh, class IdxRangeFull&gt;<br>_An operator to assemble a Poisson-like stiffness matrix using polar B-splines._  |
-| struct | [**InternalBatchDim**](structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.md) <br>_The tag for the batch dimension for the equation. This is public due to Cuda._  |
+| class | [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), typename QDimRMesh, typename QDimThetaMesh, typename IdxRangeFull&gt;<br>_An operator to assemble a Poisson-like stiffness matrix using polar B-splines._  |
 | struct | [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md) &lt;typename QDimRMesh, typename QDimThetaMesh, typename [**BSplinesR**](structBSplinesR.md), typename [**BSplinesTheta**](structBSplinesTheta.md)&gt;<br>_The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._  |
 
 

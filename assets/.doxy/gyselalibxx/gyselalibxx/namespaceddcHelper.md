@@ -88,6 +88,7 @@
 |  KOKKOS\_INLINE\_FUNCTION storage\_type::element\_type const & | [**get**](#function-get) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ValidIndexSet... &gt; const & tensor) <br>_A helper function to get an element of the tensor._  |
 |  constexpr auto | [**get**](#function-get) (VectorFieldType const & field) noexcept<br> |
 |  constexpr auto | [**get**](#function-get) (VectorFieldType & field) noexcept<br> |
+|  KOKKOS\_INLINE\_FUNCTION Idx&lt; Dims... &gt; | [**get\_idx\_from\_linear\_index**](#function-get_idx_from_linear_index) (IdxRange&lt; Dims... &gt; const & idx\_range, std::size\_t linear\_idx) <br>_Get the multi-dimensional index found at a given position in an index range._  |
 |  double | [**maximum\_distance\_between\_adjacent\_points**](#function-maximum_distance_between_adjacent_points) (IdxRange&lt; GridDim &gt; const & idx\_range) <br>_Computes the maximum distance between two adjacent points within an IdxRange._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**restrict\_to\_bspline\_domain**](#function-restrict_to_bspline_domain) (Coord&lt; typename BSpline::continuous\_dimension\_type &gt; & coord) <br>_Calculate the Coordinate inside the domain._  |
 |  KOKKOS\_INLINE\_FUNCTION std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC, Coord&lt; typename IDim::continuous\_dimension\_type &gt; &gt; | [**restrict\_to\_idx\_range**](#function-restrict_to_idx_range) (Coord&lt; typename IDim::continuous\_dimension\_type &gt; coord, IdxRange&lt; IDim &gt; const & idx\_range) <br>_Calculate the Coordinate inside the domain._  |
@@ -745,6 +746,46 @@ inline constexpr auto ddcHelper::get (
 
 
 
+
+<hr>
+
+
+
+### function get\_idx\_from\_linear\_index 
+
+_Get the multi-dimensional index found at a given position in an index range._ 
+```C++
+template<class... Dims>
+KOKKOS_INLINE_FUNCTION Idx< Dims... > ddcHelper::get_idx_from_linear_index (
+    IdxRange< Dims... > const & idx_range,
+    std::size_t linear_idx
+) 
+```
+
+
+
+The index range is traversed in layout\_right order (the last dimension varies fastest). This is the inverse of the linearisation used to store a contiguous layout\_right Field defined on the index range.
+
+
+
+
+**Parameters:**
+
+
+* `idx_range` The index range. 
+* `linear_idx` The position of the index in the index range (0 &lt;= linear\_idx &lt; idx\_range.size()).
+
+
+
+**Returns:**
+
+The index found at the position linear\_idx. 
+
+
+
+
+
+        
 
 <hr>
 

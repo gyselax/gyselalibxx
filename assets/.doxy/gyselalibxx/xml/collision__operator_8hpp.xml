@@ -24,12 +24,12 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
         </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>species_info.hpp</label>
         <link refid="species__info_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -78,6 +78,10 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
@@ -87,13 +91,16 @@
         <label>preprocessor.hpp</label>
         <link refid="preprocessor_8hpp_source"/>
       </node>
-      <node id="16">
+      <node id="17">
         <label>KOLIOP/koliop.h</label>
       </node>
       <node id="13">
-        <label>cassert</label>
+        <label>array</label>
       </node>
       <node id="14">
+        <label>cassert</label>
+      </node>
+      <node id="15">
         <label>cmath</label>
       </node>
       <node id="5">

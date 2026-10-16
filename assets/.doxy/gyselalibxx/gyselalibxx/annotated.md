@@ -205,10 +205,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**PolarFootFinder**](classPolarFootFinder.md) _Operator for finding the feet of the characteristics on a polar slice._     
 * **class** [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) _Define an evaluator on polar B-splines._     
 * **class** [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._     
-    * **struct** [**InternalBatchDim**](structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 
 * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._     
-    * **class** [**CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) _A wrapper that binds an evaluator with its coefficient field to present a single callable_ `double operator()(CoordRTheta)` _._    
-    * **struct** [**InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 
+    * **class** [**CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) _A wrapper that binds an evaluator with its batched coefficient field to present a single callable_ `double operator()(IdxBatch, CoordRTheta)` _._    
     * **struct** [**QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) _Tag the first dimension for the quadrature mesh._ 
     * **struct** [**QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) _Tag the second dimension for the quadrature mesh._ 
 * **namespace** [**PolarSplines**](namespacePolarSplines.md)     

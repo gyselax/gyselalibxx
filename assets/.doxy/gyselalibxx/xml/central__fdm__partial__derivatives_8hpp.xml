@@ -19,10 +19,10 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>ipartial_derivative.hpp</label>
         <link refid="ipartial__derivative_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -31,7 +31,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -63,19 +63,26 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
       <node id="10">
-        <label>cassert</label>
+        <label>array</label>
       </node>
       <node id="11">
+        <label>cassert</label>
+      </node>
+      <node id="12">
         <label>cmath</label>
       </node>
       <node id="2">

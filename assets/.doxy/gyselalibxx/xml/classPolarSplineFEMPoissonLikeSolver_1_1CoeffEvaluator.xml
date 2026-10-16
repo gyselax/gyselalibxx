@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="199" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="199" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="213" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="213" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a0d135fdcc4533fd057971bce6b39281d" prot="private" static="no" mutable="no">
         <type>Coeff</type>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="200" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="200" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="214" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="214" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -63,33 +63,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="204" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="204" bodyend="208"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="218" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="218" bodyend="222"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a846562972c9f806c76c374fef6016637" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1ae1658c31cdf79b214526ae9978921652" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
         <definition>KOKKOS_INLINE_FUNCTION double PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, Interpolation2D, Mapping, IdxRangeFull &gt;::CoeffEvaluator&lt; Evaluator, Coeff &gt;::operator()</definition>
-        <argsstring>(CoordRTheta const &amp;coord) const</argsstring>
+        <argsstring>(IdxBatch idx_batch, CoordRTheta const &amp;coord) const</argsstring>
         <name>operator()</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator::operator()</qualifiedname>
+        <param>
+          <type>IdxBatch</type>
+          <declname>idx_batch</declname>
+        </param>
         <param>
           <type>CoordRTheta const &amp;</type>
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Evaluate the interpolation at the specified coordinate. </para>
+<para>Evaluate the interpolation at the specified batch and coordinate. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="211" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="211" bodyend="214"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="225" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="225" bodyend="228"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A wrapper that binds an evaluator with its coefficient field to present a single callable <computeroutput>double operator()(CoordRTheta)</computeroutput>. </para>
+<para>A wrapper that binds an evaluator with its batched coefficient field to present a single callable <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput>. </para>
     </briefdescription>
     <detaileddescription>
-<para>This allows the <formula id="159">$ \alpha $</formula> and <formula id="160">$ \beta $</formula> coefficients to be passed to <computeroutput><ref refid="classPolarSplineFEMPoissonLikeAssembler" kindref="compound">PolarSplineFEMPoissonLikeAssembler</ref></computeroutput>, which expects a generic callable.</para>
+<para>This allows the <formula id="159">$ \alpha $</formula> and <formula id="160">$ \beta $</formula> coefficients to be passed to <computeroutput><ref refid="classPolarSplineFEMPoissonLikeAssembler" kindref="compound">PolarSplineFEMPoissonLikeAssembler</ref></computeroutput>, which expects a generic, batch-index-aware callable.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>Evaluator</parametername>
@@ -103,18 +107,18 @@
 <parametername>Coeff</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The type of the spline coefficient field. </para>
+<para>The type of the batched spline coefficient field. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="196" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="197" bodyend="215"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="210" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="211" bodyend="229"/>
     <listofallmembers>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a873fae8d045f3461c5b05b2c6f473b18" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>CoeffEvaluator</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a0d135fdcc4533fd057971bce6b39281d" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>m_coeff</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a581e9c907fb17b4a935d9e8062d8401b" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>m_evaluator</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a846562972c9f806c76c374fef6016637" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>operator()</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1ae1658c31cdf79b214526ae9978921652" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

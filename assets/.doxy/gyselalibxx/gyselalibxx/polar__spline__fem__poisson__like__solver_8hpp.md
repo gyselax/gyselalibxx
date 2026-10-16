@@ -33,8 +33,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), Interpolation2D, class Mapping, class IdxRangeFull&gt;<br>_Define a polar PDE solver for a Poisson-like equation._  |
-| class | [**CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) &lt;class Evaluator, class Coeff&gt;<br>_A wrapper that binds an evaluator with its coefficient field to present a single callable_ `double operator()(CoordRTheta)` _._ |
-| struct | [**InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) <br>_The tag for the batch dimension for the equation. This is public due to Cuda._  |
+| class | [**CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) &lt;class Evaluator, class Coeff&gt;<br>_A wrapper that binds an evaluator with its batched coefficient field to present a single callable_ `double operator()(IdxBatch, CoordRTheta)` _._ |
 | struct | [**QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) <br>_Tag the first dimension for the quadrature mesh._  |
 | struct | [**QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) <br>_Tag the second dimension for the quadrature mesh._  |
 

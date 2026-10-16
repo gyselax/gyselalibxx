@@ -63,9 +63,13 @@
       <node id="11">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -75,10 +79,13 @@
       <node id="4">
         <label>Kokkos_Core.hpp</label>
       </node>
+      <node id="12">
+        <label>array</label>
+      </node>
       <node id="2">
         <label>cassert</label>
       </node>
-      <node id="12">
+      <node id="13">
         <label>cmath</label>
       </node>
       <node id="3">

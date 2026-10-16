@@ -572,7 +572,7 @@
                 <div><h1 id="class-polarsplinefempoissonlikesolvercoeffevaluator">Class PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</h1>
 <p><strong>template &lt;class Evaluator, class Coeff&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> <strong>&gt;</strong> <a href="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.html"><strong>CoeffEvaluator</strong></a></p>
-<p><em>A wrapper that binds an evaluator with its coefficient field to present a single callable</em> <code>double operator()(CoordRTheta)</code> <em>.</em><a href="#detailed-description">More...</a></p>
+<p><em>A wrapper that binds an evaluator with its batched coefficient field to present a single callable</em> <code>double operator()(IdxBatch, CoordRTheta)</code> <em>.</em><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;polar_spline_fem_poisson_like_solver.hpp&gt;</code></li>
 </ul>
@@ -591,16 +591,16 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (CoordRTheta const &amp; coord) const<br><em>Evaluate the interpolation at the specified coordinate.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (IdxBatch idx_batch, CoordRTheta const &amp; coord) const<br><em>Evaluate the interpolation at the specified batch and coordinate.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>This allows the <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span> coefficients to be passed to <code>PolarSplineFEMPoissonLikeAssembler</code>, which expects a generic callable.</p>
+<p>This allows the <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span> coefficients to be passed to <code>PolarSplineFEMPoissonLikeAssembler</code>, which expects a generic, batch-index-aware callable.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>Evaluator</code> The type of the 2D evaluator. </li>
-<li><code>Coeff</code> The type of the spline coefficient field. </li>
+<li><code>Coeff</code> The type of the batched spline coefficient field. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-coeffevaluator">function CoeffEvaluator</h3>
@@ -613,8 +613,9 @@
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>Evaluate the interpolation at the specified coordinate.</em> </p>
+<p><em>Evaluate the interpolation at the specified batch and coordinate.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double PolarSplineFEMPoissonLikeSolver::CoeffEvaluator::operator() (
+    IdxBatch idx_batch,
     CoordRTheta const &amp; coord
 ) const
 </code></pre>

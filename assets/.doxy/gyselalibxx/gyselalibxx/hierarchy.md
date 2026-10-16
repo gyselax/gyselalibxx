@@ -159,7 +159,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**PolarFootFinder**](classPolarFootFinder.md) _Operator for finding the feet of the characteristics on a polar slice._ 
 * **class** [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) _Define an evaluator on polar B-splines._ 
 * **class** [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._ 
-* **class** [**PolarSplineFEMPoissonLikeSolver::CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) _A wrapper that binds an evaluator with its coefficient field to present a single callable_ `double operator()(CoordRTheta)` _._
+* **class** [**PolarSplineFEMPoissonLikeSolver::CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) _A wrapper that binds an evaluator with its batched coefficient field to present a single callable_ `double operator()(IdxBatch, CoordRTheta)` _._
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._
 * **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._ 
 * **class** [**RK2**](classRK2.md) _A class which provides an implementation of a second-order Runge-Kutta method._ 
@@ -222,8 +222,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**PolarBSplines::Impl::Corner1Tag**](structPolarBSplines_1_1Impl_1_1Corner1Tag.md) _The tag for the first corner of the Barycentric coordinates._ 
 * **struct** [**PolarBSplines::Impl::Corner2Tag**](structPolarBSplines_1_1Impl_1_1Corner2Tag.md) _The tag for the second corner of the Barycentric coordinates._ 
 * **struct** [**PolarBSplines::Impl::Corner3Tag**](structPolarBSplines_1_1Impl_1_1Corner3Tag.md) _The tag for the third corner of the Barycentric coordinates._ 
-* **struct** [**PolarSplineFEMPoissonLikeAssembler::InternalBatchDim**](structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 
-* **struct** [**PolarSplineFEMPoissonLikeSolver::InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 
 * **struct** [**R**](structR.md) _Define non periodic real contravariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**R\_cov**](structR__cov.md) _Define non periodic real covariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::Build\_BuilderType**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType.md) 

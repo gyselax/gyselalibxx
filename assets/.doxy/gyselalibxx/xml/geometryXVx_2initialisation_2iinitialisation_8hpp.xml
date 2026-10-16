@@ -17,11 +17,11 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -30,11 +30,11 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>moments.hpp</label>
         <link refid="moments_8hpp_source"/>
       </node>
-      <node id="15">
+      <node id="16">
         <label>species_info.hpp</label>
         <link refid="species__info_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -75,17 +75,21 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>non_uniform_interpolation_points.hpp</label>
         <link refid="non__uniform__interpolation__points_8hpp_source"/>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -95,9 +99,12 @@
         </childnode>
       </node>
       <node id="11">
-        <label>cassert</label>
+        <label>array</label>
       </node>
       <node id="12">
+        <label>cassert</label>
+      </node>
+      <node id="13">
         <label>cmath</label>
       </node>
       <node id="3">

@@ -15,14 +15,14 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>iqnsolver.hpp</label>
         <link refid="geometryXVx_2poisson_2iqnsolver_8hpp_source"/>
         <childnode refid="4" relation="include">
@@ -41,14 +41,14 @@
         <link refid="geometryXVx_2poisson_2nullqnsolver_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>moments.hpp</label>
         <link refid="moments_8hpp_source"/>
       </node>
-      <node id="16">
+      <node id="17">
         <label>species_info.hpp</label>
         <link refid="species__info_8hpp_source"/>
         <childnode refid="4" relation="include">
@@ -89,17 +89,21 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>non_uniform_interpolation_points.hpp</label>
         <link refid="non__uniform__interpolation__points_8hpp_source"/>
-        <childnode refid="12" relation="include">
-        </childnode>
         <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -109,9 +113,12 @@
         </childnode>
       </node>
       <node id="12">
-        <label>cassert</label>
+        <label>array</label>
       </node>
       <node id="13">
+        <label>cassert</label>
+      </node>
+      <node id="14">
         <label>cmath</label>
       </node>
       <node id="4">

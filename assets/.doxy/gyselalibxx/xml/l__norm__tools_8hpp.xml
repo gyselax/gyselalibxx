@@ -19,7 +19,7 @@
     <includedby refid="multipatch__math__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</includedby>
     <includedby refid="crank__nicolson_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp</includedby>
     <incdepgraph>
-      <node id="15">
+      <node id="16">
         <label>deriv_details.hpp</label>
         <link refid="deriv__details_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -27,10 +27,10 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -48,7 +48,7 @@
       <node id="20">
         <label>tensor_common.hpp</label>
         <link refid="tensor__common_8hpp_source"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -69,7 +69,7 @@
         <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>vector_field.hpp</label>
         <link refid="vector__field_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -78,24 +78,24 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -106,7 +106,7 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
@@ -124,7 +124,7 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
@@ -170,9 +170,13 @@
       <node id="12">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -186,13 +190,13 @@
       <node id="5">
         <label>Kokkos_Core.hpp</label>
       </node>
-      <node id="19">
+      <node id="13">
         <label>array</label>
       </node>
       <node id="4">
         <label>cassert</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>cmath</label>
       </node>
       <node id="2">

@@ -308,9 +308,13 @@
       <node id="29">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>

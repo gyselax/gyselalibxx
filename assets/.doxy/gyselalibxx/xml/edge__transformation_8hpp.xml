@@ -11,14 +11,14 @@
     <includedby refid="matching__idx__slice_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp</includedby>
     <includedby refid="interface__derivative__coefficients_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</includedby>
     <incdepgraph>
-      <node id="10">
+      <node id="12">
         <label>edge.hpp</label>
         <link refid="edge_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -32,17 +32,17 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
       </node>
-      <node id="12">
+      <node id="14">
         <label>interface.hpp</label>
         <link refid="interface_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -62,19 +62,26 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="13">
         <label>geometry_descriptors.hpp</label>
         <link refid="geometry__descriptors_8hpp_source"/>
       </node>
       <node id="8">
-        <label>cassert</label>
+        <label>array</label>
       </node>
       <node id="9">
+        <label>cassert</label>
+      </node>
+      <node id="10">
         <label>cmath</label>
       </node>
       <node id="3">
@@ -88,6 +95,9 @@
       </node>
       <node id="5">
         <label>source_location</label>
+      </node>
+      <node id="11">
+        <label>utility</label>
       </node>
     </incdepgraph>
     <invincdepgraph>

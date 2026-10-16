@@ -588,11 +588,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.html"><strong>CoeffEvaluator</strong></a> &lt;class Evaluator, class Coeff&gt;<br><em>A wrapper that binds an evaluator with its coefficient field to present a single callable</em> <code>double operator()(CoordRTheta)</code> <em>.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.html"><strong>InternalBatchDim</strong></a> <br><em>The tag for the batch dimension for the equation. This is public due to Cuda.</em></td>
+<td style="text-align: left;"><a href="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.html"><strong>CoeffEvaluator</strong></a> &lt;class Evaluator, class Coeff&gt;<br><em>A wrapper that binds an evaluator with its batched coefficient field to present a single callable</em> <code>double operator()(IdxBatch, CoordRTheta)</code> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
@@ -634,7 +630,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-polarsplinefempoissonlikesolver"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> (Mapping const &amp; mapping, Interpolation2D const &amp; interpolation, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual_norm=std::nullopt) <br><em>Instantiate a polar Poisson-like solver using FEM with B-splines.</em></td>
+<td style="text-align: left;"><a href="#function-polarsplinefempoissonlikesolver"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> (Mapping const &amp; mapping, Interpolation2D const &amp; interpolation, IdxRangeFull idx_range_full, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual_norm=std::nullopt) <br><em>Instantiate a polar Poisson-like solver using FEM with B-splines.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -642,15 +638,15 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DFieldRTheta phi, RHSFunction const &amp; rhs) const<br><em>Solve the Poisson-like equation.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DFieldBatchedRTheta phi, RHSFunction const &amp; rhs) const<br><em>Solve the Poisson-like equation.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (DFieldRTheta phi, DConstFieldRTheta rhs) override const<br><em>Solve the Poisson-like equation.</em></td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (DFieldBatchedRTheta phi, DConstFieldBatchedRTheta rhs) override const<br><em>Solve the Poisson-like equation.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-update_coefficients"><strong>update_coefficients</strong></a> (DConstField&lt; IdxRangeRTheta &gt; alpha, DConstField&lt; IdxRangeRTheta &gt; beta) override<br><em>Update the coefficients</em> <span class="arithmatex">\(alpha\)</span> <em>and</em><span class="arithmatex">\(beta\)</span> <em>that define the equation.</em></td>
+<td style="text-align: left;"><a href="#function-update_coefficients"><strong>update_coefficients</strong></a> (DConstFieldBatchedRTheta alpha, DConstFieldBatchedRTheta beta) override<br><em>Update the coefficients</em> <span class="arithmatex">\(alpha\)</span> <em>and</em><span class="arithmatex">\(beta\)</span> <em>that define the equation.</em></td>
 </tr>
 </tbody>
 </table>
@@ -688,6 +684,7 @@
 <pre><code class="language-C++">inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
     Mapping const &amp; mapping,
     Interpolation2D const &amp; interpolation,
+    IdxRangeFull idx_range_full,
     std::optional&lt; int &gt; max_iter=std::nullopt,
     std::optional&lt; double &gt; res_tol=std::nullopt,
     std::optional&lt; bool &gt; batch_solver_logger=std::nullopt,
@@ -702,6 +699,7 @@
 <ul>
 <li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>interpolation</code> An interpolation builder and evaluator to build coefficients allowing a function to be evaluated anywhere on the (r,theta) domain. </li>
+<li><code>idx_range_full</code> The full index range on which <span class="arithmatex">\(\phi\)</span> is defined, including any batch dimensions ahead of <a href="structGridR.html"><strong>GridR</strong></a> and <a href="structGridTheta.html"><strong>GridTheta</strong></a>. For the unbatched instantiation (IdxRangeFull == IdxRange&lt;GridR, GridTheta&gt;) this is simply the (r,theta) grid. </li>
 <li><code>max_iter</code> The maximum number of iterations possible for the batched CSR solver. </li>
 <li><code>res_tol</code> The residual tolerance for the batched CSR solver. The solver stops when ||r||/||b|| &lt;= res_tol where r is the residual computed by the CG recurrence. </li>
 <li><code>batch_solver_logger</code> Indicates whether log information such as the residual and the number of iterations should be monitored. </li>
@@ -725,8 +723,8 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 <p>This operator returns the coefficients associated with the B-Splines of the solution <span class="arithmatex">\(\phi\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>spline</code> The spline representation of the solution <span class="arithmatex">\(\phi\)</span>. </li>
-<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. </li>
+<li><code>spline</code> The spline representation of the solution <span class="arithmatex">\(\phi\)</span>, for every batch. </li>
+<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object which can be called from GPU with an operator() which takes a batch index and a CoordRTheta. If there are no batch dimensions the operator() may take only a CoordRTheta. </li>
 </ul>
 <hr>
 
@@ -734,38 +732,38 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 <p><em>Solve the Poisson-like equation.</em> </p>
 <pre><code class="language-C++">template&lt;class RHSFunction&gt;
 inline void PolarSplineFEMPoissonLikeSolver::operator() (
-    DFieldRTheta phi,
+    DFieldBatchedRTheta phi,
     RHSFunction const &amp; rhs
 ) const
 </code></pre>
 <p>This operator uses the other operator () and returns the values on the grid of the solution <span class="arithmatex">\(\phi\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>phi</code> The values of the solution <span class="arithmatex">\(\phi\)</span> on the given coords_eval. </li>
-<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. </li>
+<li><code>phi</code> The values of the solution <span class="arithmatex">\(\phi\)</span> on the grid, for every batch. </li>
+<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object which can be called from GPU with an operator() which takes a batch index and a CoordRTheta. If there are no batch dimensions the operator() may take only a CoordRTheta. </li>
 </ul>
 <hr>
 
 <h3 id="function-operator_2">function operator()</h3>
 <p><em>Solve the Poisson-like equation.</em> </p>
 <pre><code class="language-C++">inline void PolarSplineFEMPoissonLikeSolver::operator() (
-    DFieldRTheta phi,
-    DConstFieldRTheta rhs
+    DFieldBatchedRTheta phi,
+    DConstFieldBatchedRTheta rhs
 ) override const
 </code></pre>
 <p>This operator uses the other operator () and returns the values on the grid of the solution <span class="arithmatex">\(\phi\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>phi</code> The values of the solution <span class="arithmatex">\(\phi\)</span> on the grid. </li>
-<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation on the grid. </li>
+<li><code>phi</code> The values of the solution <span class="arithmatex">\(\phi\)</span> on the grid, for every batch. </li>
+<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation on the grid, for every batch. </li>
 </ul>
 <hr>
 
 <h3 id="function-update_coefficients">function update_coefficients</h3>
 <p><em>Update the coefficients</em> <span class="arithmatex">\(alpha\)</span> <em>and</em><span class="arithmatex">\(beta\)</span> <em>that define the equation.</em></p>
 <pre><code class="language-C++">inline void PolarSplineFEMPoissonLikeSolver::update_coefficients (
-    DConstField&lt; IdxRangeRTheta &gt; alpha,
-    DConstField&lt; IdxRangeRTheta &gt; beta
+    DConstFieldBatchedRTheta alpha,
+    DConstFieldBatchedRTheta beta
 ) override
 </code></pre>
 <p><strong>Parameters:</strong></p>
