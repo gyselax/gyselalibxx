@@ -93,6 +93,7 @@ class InterfaceDerivCoeffs
 
     using GridBreakPt1 = ddc::knot_discrete_dimension_t<BSplinesPerp1>;
     using GridBreakPt2 = ddc::knot_discrete_dimension_t<BSplinesPerp2>;
+
 public:
     /// @brief Interface between the two involved patches.
     using associated_interface = InterfaceType;
@@ -375,6 +376,7 @@ public:
     inline double get_approx_deriv(
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
+            requires(!std::is_same_v<IdxRange1DPerp_2, IdxRange1DPerp_1>)
     {
         return get_approx_with_change_of_sign(function_1, function_2, 1);
     }
@@ -418,6 +420,7 @@ public:
     inline double get_approx_cross_deriv(
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2,
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1) const
+            requires(!std::is_same_v<IdxRange1DPerp_2, IdxRange1DPerp_1>)
     {
         int const sign_deriv_2
                 = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
