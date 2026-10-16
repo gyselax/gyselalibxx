@@ -62,19 +62,18 @@
  * Please be sure to initialise the discrete space of your Grid on the break points
  * (especially in the non-uniform case). 
  */
-template <class InterfaceType>
-class InterfaceDerivCoeffs
+template <
+        class EdgePerpGrid1Type,
+        class EdgePerpGrid2Type,
+        class BSplinesPerp1Type,
+        class BSplinesPerp2Type,
+        Extremity extremity_1,
+        Extremity extremity_2>
+class DerivReconstructionCoeffs
 {
-    static_assert(
-            (!std::is_same_v<typename InterfaceType::Edge1, OutsideEdge>)&&(
-                    !std::is_same_v<typename InterfaceType::Edge2, OutsideEdge>),
-            "The interface cannot be an interface with the outside domain.");
-
-    using EdgePerpGrid1 = typename InterfaceType::Edge1::perpendicular_grid;
-    using EdgePerpGrid2 = typename InterfaceType::Edge2::perpendicular_grid;
-
-    using Patch1 = typename InterfaceType::Edge1::associated_patch;
-    using Patch2 = typename InterfaceType::Edge2::associated_patch;
+protected:
+    using EdgePerpGrid1 = EdgePerpGrid1Type;
+    using EdgePerpGrid2 = EdgePerpGrid2Type;
 
     using IdxRange1DPerp_1 = IdxRange<EdgePerpGrid1>;
     using IdxRange1DPerp_2 = IdxRange<EdgePerpGrid2>;
@@ -82,31 +81,21 @@ class InterfaceDerivCoeffs
     using Idx1D_1 = Idx<EdgePerpGrid1>;
     using Idx1D_2 = Idx<EdgePerpGrid2>;
 
-    using BSplinesPerp1 = std::conditional_t<
-            std::is_same_v<EdgePerpGrid1, typename Patch1::Grid1>,
-            typename Patch1::BSplines1,
-            typename Patch1::BSplines2>;
-    using BSplinesPerp2 = std::conditional_t<
-            std::is_same_v<EdgePerpGrid2, typename Patch2::Grid1>,
-            typename Patch2::BSplines1,
-            typename Patch2::BSplines2>;
+    using BSplinesPerp1 = BSplinesPerp1Type;
+    using BSplinesPerp2 = BSplinesPerp2Type;
 
     using GridBreakPt1 = ddc::knot_discrete_dimension_t<BSplinesPerp1>;
     using GridBreakPt2 = ddc::knot_discrete_dimension_t<BSplinesPerp2>;
 
-public:
-    /// @brief Interface between the two involved patches.
-    using associated_interface = InterfaceType;
-
-private:
+protected:
     const bool m_is_cell_bound_1_with_extra_interpol_pt;
     const bool m_is_cell_bound_2_with_extra_interpol_pt;
 
     IdxRange1DPerp_1 const m_idx_range_perp_1;
     IdxRange1DPerp_2 const m_idx_range_perp_2;
 
-    static Extremity constexpr m_extremity_1 = InterfaceType::Edge1::extremity;
-    static Extremity constexpr m_extremity_2 = InterfaceType::Edge2::extremity;
+    static Extremity constexpr m_extremity_1 = extremity_1;
+    static Extremity constexpr m_extremity_2 = extremity_2;
 
     double m_coeff_deriv_patch_2;
     double m_coeff_deriv_patch_1;
@@ -119,7 +108,7 @@ private:
 
 public:
     /**
-     * @brief Instantiate InterfaceDerivCoeffs. 
+     * @brief Instantiate DerivReconstructionCoeffs.
      * 
      * @anchor InterfaceDerivCoeffsInstantiator
      * 
@@ -147,7 +136,7 @@ public:
      * ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the 
      * additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense.  
      */
-    InterfaceDerivCoeffs(
+    DerivReconstructionCoeffs(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
             ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
@@ -158,11 +147,11 @@ public:
         , m_idx_range_perp_2(idx_range_1d_2)
         , m_weights_patch_1_alloc(
                   "m_weights_patch_1 "
-                  "(InterfaceDerivCoeffs::InterfaceDerivCoeffs)",
+                  "(DerivReconstructionCoeffs::DerivReconstructionCoeffs)",
                   m_idx_range_perp_1)
         , m_weights_patch_2_alloc(
                   "m_weights_patch_2 "
-                  "(InterfaceDerivCoeffs::InterfaceDerivCoeffs)",
+                  "(DerivReconstructionCoeffs::DerivReconstructionCoeffs)",
                   m_idx_range_perp_2)
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
@@ -215,7 +204,7 @@ public:
 
 
     /**
-     * @brief Instantiate InterfaceDerivCoeffs. 
+     * @brief Instantiate DerivReconstructionCoeffs.
      * See @ref InterfaceDerivCoeffsInstantiator.
      * @param idx_range_a Index range on one patch. 
      * @param idx_range_b Index range on the other patch. 
@@ -225,12 +214,12 @@ public:
      * the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. 
      */
     template <class IdxRangeA, class IdxRangeB>
-    InterfaceDerivCoeffs(
+    DerivReconstructionCoeffs(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
             ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineBuilderClosure const& Closure2 = ddc::SplineBuilderClosure::HERMITE)
-        : InterfaceDerivCoeffs(
+        : DerivReconstructionCoeffs(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
                 Closure1,
@@ -241,7 +230,7 @@ public:
     }
 
     /**
-     * @brief Instantiate InterfaceDerivCoeffs. 
+     * @brief Instantiate DerivReconstructionCoeffs.
      * See @ref InterfaceDerivCoeffsInstantiator.
      * This constructor calculates an approximation of the formula.
      * @param idx_range_1d_1 1D index range perpendicular to the Interface, 
@@ -253,11 +242,11 @@ public:
      * @warning If the mesh has additional interpolation points, please be sure to
      * not take these points. 
      */
-    InterfaceDerivCoeffs(
+    DerivReconstructionCoeffs(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
             std::size_t const number_chosen_cells)
-        : InterfaceDerivCoeffs(
+        : DerivReconstructionCoeffs(
                 (m_extremity_1 == Extremity::FRONT)
                         ? idx_range_1d_1.take_first(IdxStep<EdgePerpGrid1>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size())))
@@ -274,7 +263,7 @@ public:
     }
 
     /**
-     * @brief Instantiate InterfaceDerivCoeffs. 
+     * @brief Instantiate DerivReconstructionCoeffs.
      * See @ref InterfaceDerivCoeffsInstantiator.
      * This constructor calculates an approximation of the formula. 
      * @param idx_range_a Index range on one patch. 
@@ -285,11 +274,14 @@ public:
      * not take these points. 
      */
     template <class IdxRangeA, class IdxRangeB>
-    InterfaceDerivCoeffs(
+    DerivReconstructionCoeffs(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
-            std::size_t const number_chosen_cells)
-        : InterfaceDerivCoeffs(
+            std::size_t const number_chosen_cells) requires(!std::
+                                                                    is_same_v<
+                                                                            IdxRange1DPerp_1,
+                                                                            IdxRange1DPerp_2>)
+        : DerivReconstructionCoeffs(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
                 number_chosen_cells)
@@ -314,24 +306,6 @@ public:
     double get_coeff_deriv_patch_2() const
     {
         return m_coeff_deriv_patch_2;
-    }
-
-    /**
-     * @brief Get the coefficient (a) or (b) in front of the derivative on the given patch of the given Interface.
-     * @return The value of the coefficient (a) or (b). 
-     */
-    template <class Patch>
-    double get_coeff_deriv_on_patch() const
-    {
-        static_assert(
-                (std::is_same_v<Patch, Patch1>) || (std::is_same_v<Patch, Patch2>),
-                "The given Patch template parameter is not one of the Patch of the given "
-                "Interface.");
-        if constexpr (std::is_same_v<Patch, Patch1>) {
-            return m_coeff_deriv_patch_1;
-        } else {
-            return m_coeff_deriv_patch_2;
-        }
     }
 
     /**
@@ -381,55 +355,7 @@ public:
         return get_approx_with_change_of_sign(function_1, function_2, 1);
     }
 
-    /**
-     * @brief Get the linear combination of the derivatives values (c).
-     *
-     * @anchor get_approx_cross_deriv
-     * This linear combination corresponds to an approximation of the 
-     * interface cross-derivative. 
-     * 
-     * It is more appropriate than get_approx_deriv to compute the 
-     * cross-derivatives. The computation is the same.
-     * However, in addition, the sign of the derivatives on the patch 2 is 
-     * changed in the case where the orientations of the two patches do not 
-     * match. 
-     * E.g. dx(f(-x)) = - dxf(-x)
-     * 
-     * @param derivs_1 Derivatives at the interpolation points on patch 1. 
-     * @param derivs_2 Derivatives at the interpolation points on patch 2. 
-     * @return the linear combination of the function values (c).
-     */
-    template <class Layout1, class Layout2>
-    inline double get_approx_cross_deriv(
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1,
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2) const
-    {
-        int const sign_deriv_2
-                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
-        return get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
-    }
-
-    /**
-     * @brief Get the linear combination of the derivatives values (c).
-     * See @ref get_approx_cross_deriv.
-     * @param derivs_1 Derivatives at the interpolation points on patch 1. 
-     * @param derivs_2 Derivatives at the interpolation points on patch 2. 
-     * @return the linear combination of the function values (c).
-     */
-    template <class Layout1, class Layout2>
-    inline double get_approx_cross_deriv(
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2,
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1) const
-            requires(!std::is_same_v<IdxRange1DPerp_2, IdxRange1DPerp_1>)
-    {
-        int const sign_deriv_2
-                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
-        return get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
-    }
-
-
-
-private:
+protected:
     template <class Layout1, class Layout2>
     double get_approx_with_change_of_sign(
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
@@ -900,7 +826,8 @@ private:
         Idx1D const idx_star = interface_idx + (n + 1) * idx_step;
 
         auto [cell_length_left, cell_length_right] = get_cell_lengths<is_on_patch1>(idx);
-        auto [cell_length_left_star, cell_length_right_star] = get_cell_lengths<is_on_patch1>(idx_star);
+        auto [cell_length_left_star, cell_length_right_star]
+                = get_cell_lengths<is_on_patch1>(idx_star);
 
         if constexpr (is_on_patch1) {
             cell_length_left += cell_length_left_star;
@@ -1203,5 +1130,117 @@ private:
     static inline double neg_1_to_the_power(int k)
     {
         return 1.0 - 2.0 * (k & 1);
+    }
+};
+
+template <class InterfaceType>
+class InterfaceDerivCoeffs
+    : public DerivReconstructionCoeffs<
+              typename InterfaceType::Edge1::perpendicular_grid,
+              typename InterfaceType::Edge2::perpendicular_grid,
+              find_grid_t<
+                      typename InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type,
+                      ddc::detail::TypeSeq<
+                              typename InterfaceType::Edge1::associated_patch::BSplines1,
+                              typename InterfaceType::Edge1::associated_patch::BSplines2>>,
+              find_grid_t<
+                      typename InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type,
+                      ddc::detail::TypeSeq<
+                              typename InterfaceType::Edge2::associated_patch::BSplines1,
+                              typename InterfaceType::Edge2::associated_patch::BSplines2>>,
+              InterfaceType::Edge1::extremity,
+              InterfaceType::Edge2::extremity>
+{
+    using base_type = DerivReconstructionCoeffs<
+            typename InterfaceType::Edge1::perpendicular_grid,
+            typename InterfaceType::Edge2::perpendicular_grid,
+            find_grid_t<
+                    typename InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type,
+                    ddc::detail::TypeSeq<
+                            typename InterfaceType::Edge1::associated_patch::BSplines1,
+                            typename InterfaceType::Edge1::associated_patch::BSplines2>>,
+            find_grid_t<
+                    typename InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type,
+                    ddc::detail::TypeSeq<
+                            typename InterfaceType::Edge2::associated_patch::BSplines1,
+                            typename InterfaceType::Edge2::associated_patch::BSplines2>>,
+            InterfaceType::Edge1::extremity,
+            InterfaceType::Edge2::extremity>;
+
+    using Patch1 = typename InterfaceType::Edge1::associated_patch;
+    using Patch2 = typename InterfaceType::Edge2::associated_patch;
+
+    using IdxRange1DPerp_1 = typename base_type::IdxRange1DPerp_1;
+    using IdxRange1DPerp_2 = typename base_type::IdxRange1DPerp_2;
+
+public:
+    /// @brief Interface between the two involved patches.
+    using associated_interface = InterfaceType;
+
+public:
+    using base_type::base_type;
+
+    /**
+     * @brief Get the coefficient (a) or (b) in front of the derivative on the given patch of the given Interface.
+     * @return The value of the coefficient (a) or (b).
+     */
+    template <class Patch>
+    double get_coeff_deriv_on_patch() const requires(is_patch_v<Patch>)
+    {
+        static_assert(
+                (std::is_same_v<Patch, Patch1>) || (std::is_same_v<Patch, Patch2>),
+                "The given Patch template parameter is not one of the Patch of the given "
+                "Interface.");
+        if constexpr (std::is_same_v<Patch, Patch1>) {
+            return this->m_coeff_deriv_patch_1;
+        } else {
+            return this->m_coeff_deriv_patch_2;
+        }
+    }
+
+    /**
+     * @brief Get the linear combination of the derivatives values (c).
+     *
+     * @anchor get_approx_cross_deriv
+     * This linear combination corresponds to an approximation of the
+     * interface cross-derivative.
+     *
+     * It is more appropriate than get_approx_deriv to compute the
+     * cross-derivatives. The computation is the same.
+     * However, in addition, the sign of the derivatives on the patch 2 is
+     * changed in the case where the orientations of the two patches do not
+     * match.
+     * E.g. dx(f(-x)) = - dxf(-x)
+     *
+     * @param derivs_1 Derivatives at the interpolation points on patch 1.
+     * @param derivs_2 Derivatives at the interpolation points on patch 2.
+     * @return the linear combination of the function values (c).
+     */
+    template <class Layout1, class Layout2>
+    inline double get_approx_cross_deriv(
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1,
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2) const
+    {
+        int const sign_deriv_2
+                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
+        return this->get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
+    }
+
+    /**
+     * @brief Get the linear combination of the derivatives values (c).
+     * See @ref get_approx_cross_deriv.
+     * @param derivs_1 Derivatives at the interpolation points on patch 1.
+     * @param derivs_2 Derivatives at the interpolation points on patch 2.
+     * @return the linear combination of the function values (c).
+     */
+    template <class Layout1, class Layout2>
+    inline double get_approx_cross_deriv(
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2,
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1) const
+            requires(!std::is_same_v<IdxRange1DPerp_2, IdxRange1DPerp_1>)
+    {
+        int const sign_deriv_2
+                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
+        return this->get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
     }
 };
