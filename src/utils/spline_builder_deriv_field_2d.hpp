@@ -54,7 +54,7 @@ class SplineBuilderDerivField2D
 
     using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace>;
     using DerivConstFieldType
-            = DerivField<const double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
+            = DerivConstField<double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
 
     using FunctFieldMem = DFieldMem<IdxRange<Grid1, Grid2>, MemorySpace>;
     using FunctField = DField<IdxRange<Grid1, Grid2>, MemorySpace>;

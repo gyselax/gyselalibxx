@@ -180,8 +180,8 @@ class MultipatchSplineBuilder2D
 
     /// A type alias to get the DerivField type on a specific patch.
     template <class Patch>
-    using DerivConstFieldOnPatch = DerivField<
-            const double,
+    using DerivConstFieldOnPatch = DerivConstField<
+            double,
             IdxRange<
                     ddc::Deriv<typename Patch::Dim1>,
                     typename Patch::Grid1,
@@ -201,7 +201,9 @@ class MultipatchSplineBuilder2D
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedIdxRange>,
                     ddc::detail::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
-                    ddc::detail::TypeSeq<typename Patch::BSplines1, typename Patch::BSplines2>>>;
+                    ddc::detail::TypeSeq<
+                            ddc::Deriv<typename Patch::Dim1>,
+                            ddc::Deriv<typename Patch::Dim2>>>>;
 
 
     /// The type of the batched spline coefficients.

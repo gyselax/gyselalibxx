@@ -151,19 +151,11 @@ public:
             DField<IdxRange<GridX<2>, ddc::Deriv<Y<2>>>, ExecSpace, Layout> derivs_ymin2,
             DField<IdxRange<GridX<2>, ddc::Deriv<Y<2>>>, ExecSpace, Layout> derivs_ymax2)
     {
-        DField<IdxRange<GridY<2>>, ExecSpace, Kokkos::layout_right> derivs_xmin2_span
-                = derivs_xmin2[Idx<ddc::Deriv<X<2>>>(1)];
-        DField<IdxRange<GridY<2>>, ExecSpace, Kokkos::layout_right> derivs_xmax2_span
-                = derivs_xmax2[Idx<ddc::Deriv<X<2>>>(1)];
-        DField<IdxRange<GridX<2>>, ExecSpace, Kokkos::layout_stride> derivs_ymin2_span
-                = derivs_ymin2[Idx<ddc::Deriv<Y<2>>>(1)];
-        DField<IdxRange<GridX<2>>, ExecSpace, Kokkos::layout_stride> derivs_ymax2_span
-                = derivs_ymax2[Idx<ddc::Deriv<Y<2>>>(1)];
         initialise_2D_derivatives_2(
-                derivs_xmin2_span,
-                derivs_xmax2_span,
-                derivs_ymin2_span,
-                derivs_ymax2_span);
+                derivs_xmin2[Idx<ddc::Deriv<X<2>>>(1)],
+                derivs_xmax2[Idx<ddc::Deriv<X<2>>>(1)],
+                derivs_ymin2[Idx<ddc::Deriv<Y<2>>>(1)],
+                derivs_ymax2[Idx<ddc::Deriv<Y<2>>>(1)]);
     }
 
     // Test method -------------------------------------------------------------------------------
