@@ -90,7 +90,7 @@ class MultipatchInterpolator<
         ddc::detail::TypeSeq<InterfacesDerivCaculators...>>
 {
     // TODO: check InterfacesDerivCaculatorCollection contains InterfacesDerivCaculator.
-    // TODO: assert that all the grids are covered. 
+    // TODO: assert that all the grids are covered.
 
     using MultipatchSplineBuilder = MultipatchSplineBuilder2D<
             ExecSpace,
@@ -181,7 +181,7 @@ private:
             MultipatchValues& functions_and_derivs,
             InterfacesDerivCaculatorType const& interfaces_deriv_calculator)
     {
-        interfaces_deriv_calculator.solve_deriv(functions_and_derivs); 
+        interfaces_deriv_calculator.solve_deriv(functions_and_derivs);
     }
 
     template <class InterfacesDerivCaculatorType>
@@ -189,7 +189,7 @@ private:
             MultipatchValues& functions_and_derivs,
             InterfacesDerivCaculatorType const& interfaces_deriv_calculator)
     {
-        // TODO: Select when it is needed to avoid duplication. 
-        interfaces_deriv_calculator.solve_cross_deriv(functions_and_derivs); 
+        // TODO: Select when it is needed to avoid duplication.
+        interfaces_deriv_calculator.solve_cross_deriv(functions_and_derivs);
     }
 }
