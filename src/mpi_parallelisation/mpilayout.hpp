@@ -94,7 +94,7 @@ public:
     {
         return m_n_active_ranks;
     }
- 
+
 private:
     /**
      * @brief Get an index range with size 0 along the distributed dimensions.

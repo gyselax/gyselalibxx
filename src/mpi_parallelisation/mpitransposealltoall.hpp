@@ -98,7 +98,7 @@ public:
         m_layout_2_mpi_idx_range = get_distribution(
                 m_nonempty_distributed_idx_range_2,
                 distributed_idx_range_type2(global_idx_range_layout_2));
-        
+
         assert(m_layout_1_mpi_idx_range.size() == m_layout_1.n_active_ranks());
         assert(m_layout_2_mpi_idx_range.size() == m_layout_2.n_active_ranks());
     }
@@ -382,11 +382,11 @@ private:
             std::vector<int> send_displs(m_comm_size, 0);
             std::vector<int> recv_counts(m_comm_size, 0);
             std::vector<int> recv_displs(m_comm_size, 0);
-            for (int i=0; i < n_send_ranks; ++i) {
+            for (int i = 0; i < n_send_ranks; ++i) {
                 send_counts[i] = send_block;
                 send_displs[i] = i * send_block;
             }
-            for (int i=0; i < n_recv_ranks; ++i) {
+            for (int i = 0; i < n_recv_ranks; ++i) {
                 recv_counts[i] = recv_block;
                 recv_displs[i] = i * recv_block;
             }
