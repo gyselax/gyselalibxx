@@ -94,8 +94,8 @@ protected:
     IdxRange1DPerp_1 const m_idx_range_perp_1;
     IdxRange1DPerp_2 const m_idx_range_perp_2;
 
-    static Extremity constexpr m_extremity_1 = extremity_1;
-    static Extremity constexpr m_extremity_2 = extremity_2;
+    static Extremity constexpr s_extremity_1 = extremity_1;
+    static Extremity constexpr s_extremity_2 = extremity_2;
 
     double m_coeff_deriv_patch_2;
     double m_coeff_deriv_patch_1;
@@ -175,23 +175,23 @@ public:
         check_break_points_are_interpolation_points<BSplinesPerp1, GridBreakPt1>(
                 m_is_cell_bound_1_with_extra_interpol_pt,
                 m_idx_range_perp_1,
-                m_extremity_1);
+                s_extremity_1);
         check_break_points_are_interpolation_points<BSplinesPerp2, GridBreakPt2>(
                 m_is_cell_bound_2_with_extra_interpol_pt,
                 m_idx_range_perp_2,
-                m_extremity_2);
+                s_extremity_2);
 
 
         // The additional interpolation points have to be in the boundary cells.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
             check_additional_interpolation_points_location<
                     BSplinesPerp1,
-                    GridBreakPt1>(m_idx_range_perp_1, m_extremity_1);
+                    GridBreakPt1>(m_idx_range_perp_1, s_extremity_1);
         }
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
             check_additional_interpolation_points_location<
                     BSplinesPerp2,
-                    GridBreakPt2>(m_idx_range_perp_2, m_extremity_2);
+                    GridBreakPt2>(m_idx_range_perp_2, s_extremity_2);
         }
 
         if constexpr ((ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)&&(
@@ -247,12 +247,12 @@ public:
             IdxRange1DPerp_2 const& idx_range_1d_2,
             std::size_t const number_chosen_cells)
         : DerivReconstructionCoeffs(
-                (m_extremity_1 == Extremity::FRONT)
+                (s_extremity_1 == Extremity::FRONT)
                         ? idx_range_1d_1.take_first(IdxStep<EdgePerpGrid1>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size())))
                         : idx_range_1d_1.take_last(IdxStep<EdgePerpGrid1>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size()))),
-                (m_extremity_2 == Extremity::FRONT)
+                (s_extremity_2 == Extremity::FRONT)
                         ? idx_range_1d_2.take_first(IdxStep<EdgePerpGrid2>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size())))
                         : idx_range_1d_2.take_last(IdxStep<EdgePerpGrid2>(
@@ -363,9 +363,9 @@ protected:
             int const sign_function_2) const
     {
         // The function needs to be continuous at the interface.
-        assert(abs(function_1(get_extremity_idx(m_extremity_1, m_idx_range_perp_1))
+        assert(abs(function_1(get_extremity_idx(s_extremity_1, m_idx_range_perp_1))
                    - sign_function_2
-                             * function_2(get_extremity_idx(m_extremity_2, m_idx_range_perp_2)))
+                             * function_2(get_extremity_idx(s_extremity_2, m_idx_range_perp_2)))
                < 1e-13);
 
         double coeff_values = ddc::host_transform_reduce(
@@ -524,13 +524,13 @@ protected:
 
         // Define a step to increment the indices to move away from the interface.
         IdxStep<EdgePerpGrid1> idx_step_1
-                = m_extremity_1 == FRONT ? IdxStep<EdgePerpGrid1>(1) : IdxStep<EdgePerpGrid1>(-1);
+                = s_extremity_1 == FRONT ? IdxStep<EdgePerpGrid1>(1) : IdxStep<EdgePerpGrid1>(-1);
         IdxStep<EdgePerpGrid2> idx_step_2
-                = m_extremity_2 == FRONT ? IdxStep<EdgePerpGrid2>(1) : IdxStep<EdgePerpGrid2>(-1);
+                = s_extremity_2 == FRONT ? IdxStep<EdgePerpGrid2>(1) : IdxStep<EdgePerpGrid2>(-1);
 
         // Initialisation recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) -----------------------------
-        Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
-        Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
+        Idx1D_1 interface_idx_1 = get_extremity_idx(s_extremity_1, m_idx_range_perp_1);
+        Idx1D_2 interface_idx_2 = get_extremity_idx(s_extremity_2, m_idx_range_perp_2);
 
         // Set (a_{n-2},b_{n-2},c_{n-2}) ---
         Idx1D_1 idx_1_minus;
@@ -717,7 +717,7 @@ protected:
         using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
-        Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
+        Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
         IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
 
         for (int n(2); n < n_cells; n++) {
@@ -815,7 +815,7 @@ protected:
         using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
-        Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
+        Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
         IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
 
         int const n = n_points - 3;
@@ -933,8 +933,8 @@ protected:
         int const n_cells_1 = m_idx_range_perp_1.size() - 1;
         int const n_cells_2 = m_idx_range_perp_2.size() - 1;
 
-        Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
-        Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
+        Idx1D_1 interface_idx_1 = get_extremity_idx(s_extremity_1, m_idx_range_perp_1);
+        Idx1D_2 interface_idx_2 = get_extremity_idx(s_extremity_2, m_idx_range_perp_2);
 
         double cell_length_left = ddc::discrete_space<EdgePerpGrid1>().step();
         double cell_length_right = ddc::discrete_space<EdgePerpGrid2>().step();
@@ -1026,8 +1026,8 @@ protected:
         using OGrid1D = std::conditional_t<is_on_patch1, EdgePerpGrid2, EdgePerpGrid1>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
-        Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
-        Extremity constexpr other_extremity = is_on_patch1 ? m_extremity_2 : m_extremity_1;
+        Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
+        Extremity constexpr other_extremity = is_on_patch1 ? s_extremity_2 : s_extremity_1;
 
         IdxRange<Grid1D> idx_range_1d;
         IdxRange<OGrid1D> other_idx_range_1d;
@@ -1049,8 +1049,8 @@ protected:
         Idx<Grid1D> const idx_minus = idx - IdxStep<Grid1D>(1);
         Idx<Grid1D> const idx_plus = idx + IdxStep<Grid1D>(1);
 
-        bool constexpr is_same_orientation_as_global = (is_on_patch1 && m_extremity_1 == BACK)
-                                                       || (!is_on_patch1 && m_extremity_2 == FRONT);
+        bool constexpr is_same_orientation_as_global = (is_on_patch1 && s_extremity_1 == BACK)
+                                                       || (!is_on_patch1 && s_extremity_2 == FRONT);
 
         // If the given index corresponds to the index at the interface,
         Idx<Grid1D> const idx_interface = get_extremity_idx(extremity, idx_range_1d);
