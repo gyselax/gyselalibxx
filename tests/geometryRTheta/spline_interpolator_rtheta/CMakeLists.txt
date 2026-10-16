@@ -10,10 +10,10 @@ add_executable("${test_name}"
 target_link_libraries("${test_name}"
     PUBLIC
         DDC::core
-        gslx::geometry_RTheta
-        gslx::interpolation
-        gslx::paraconfpp
-        gslx::utils
+        gyselalibxx::geometry_RTheta
+        gyselalibxx::interpolation
+        gyselalibxx::paraconfpp
+        gyselalibxx::utils
 
 )
 

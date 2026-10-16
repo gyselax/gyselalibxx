@@ -19,15 +19,15 @@ bool constexpr BsplineOnUniformCellsVx = true;
 struct BSplinesX
     : std::conditional_t<
               BsplineOnUniformCellsX,
-              ddc::UniformBSplines<X, BSDegreeX>,
-              ddc::NonUniformBSplines<X, BSDegreeX>>
+              ddc::UniformBSplines<X, BSDegreeX, X::PERIODIC>,
+              ddc::NonUniformBSplines<X, BSDegreeX, X::PERIODIC>>
 {
 };
 struct BSplinesVx
     : std::conditional_t<
               BsplineOnUniformCellsVx,
-              ddc::UniformBSplines<Vx, BSDegreeVx>,
-              ddc::NonUniformBSplines<Vx, BSDegreeVx>>
+              ddc::UniformBSplines<Vx, BSDegreeVx, Vx::PERIODIC>,
+              ddc::NonUniformBSplines<Vx, BSDegreeVx, Vx::PERIODIC>>
 {
 };
 
@@ -40,26 +40,24 @@ using SplineInterpPointsX
 using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
-using XExtrapRule
-        = std::conditional_t<X::PERIODIC, ExtrapolationRule::Periodic, ExtrapolationRule::Constant>;
+using XExtrapRule = std::conditional_t<
+        X::PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Constant_Constant>;
 
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRangeX,
         XExtrapRule,
-        XExtrapRule,
-        SplineXClosure,
-        SplineXClosure>;
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesVx,
-        GridVx,
-        ExtrapolationRule::Constant,
-        ExtrapolationRule::Constant,
-        SplineVxClosure,
-        SplineVxClosure>;
+        IdxRange<BSplinesVx>,
+        IdxRangeVx,
+        ExtrapolationRule::Constant_Constant,
+        SplineBoundaryClosures<SplineVxClosure, SplineVxClosure>>;
 
 using IdxRangeBSX = IdxRange<BSplinesX>;
 

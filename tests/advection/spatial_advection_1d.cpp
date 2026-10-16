@@ -35,10 +35,10 @@ using CoordX = Coord<X>;
 using CoordVx = Coord<Vx>;
 
 // Splines
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
+struct BSplinesVx : ddc::UniformBSplines<Vx, 3, Vx::PERIODIC>
 {
 };
 
@@ -103,12 +103,10 @@ using FieldXVx = Field<ElementType, IdxRangeXVx>;
 // Operators
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
         ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
-        SplineXClosure,
-        SplineXClosure>;
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 
 class Spatial1DAdvectionTest : public ::testing::Test

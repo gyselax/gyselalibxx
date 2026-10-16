@@ -38,10 +38,10 @@ using CoordX = Coord<X>;
 using CoordVx = Coord<Vx>;
 
 // Splines
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
+struct BSplinesVx : ddc::UniformBSplines<Vx, 3, Vx::PERIODIC>
 {
 };
 
@@ -118,21 +118,19 @@ struct LagBasisVx : UniformLagrangeBasis<Vx, 3, double>
 
 using LagrangeInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagBasisVx,
-        GridVx,
-        ExtrapolationRule::Constant,
-        ExtrapolationRule::Constant>;
+        double,
+        IdxRange<LagBasisVx>,
+        IdxRange<GridVx>,
+        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>>;
 
 
 // Operators
 using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesVx,
-        GridVx,
-        ExtrapolationRule::Constant,
-        ExtrapolationRule::Constant,
-        SplineVxClosure,
-        SplineVxClosure>;
+        IdxRange<BSplinesVx>,
+        IdxRange<GridVx>,
+        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
+        SplineBoundaryClosures<SplineVxClosure, SplineVxClosure>>;
 
 
 class Velocity1DAdvectionTest : public ::testing::Test

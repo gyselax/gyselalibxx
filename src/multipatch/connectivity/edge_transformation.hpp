@@ -360,7 +360,7 @@ public:
 private:
     /// @brief Get index corresponding to the middle of two indexes.
     template <class IdxType>
-    IdxType const get_mid(IdxType const& idx_1, IdxType const& idx_2) const
+    static IdxType const get_mid(IdxType const& idx_1, IdxType const& idx_2)
     {
         return idx_1 + (idx_2 - idx_1) / 2;
     }

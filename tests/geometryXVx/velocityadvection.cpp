@@ -25,10 +25,10 @@ struct LagBasisVx : UniformLagrangeBasis<Vx, 3, double>
 
 using LagInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagBasisVx,
-        GridVx,
-        ExtrapolationRule::NullValue,
-        ExtrapolationRule::NullValue>;
+        double,
+        IdxRange<LagBasisVx>,
+        IdxRange<GridVx>,
+        ExtrapolationRule::Null_Null>;
 
 std::pair<IdxRange<GridX>, IdxRange<GridVx>> Init_idx_range_velocity_adv()
 {

@@ -45,6 +45,7 @@ Yann Munschy
 
 Kevin Obrejan <kevin.obrejan@cea.fr>
 - Profiling and performance analysis
+- Gyroaverage operator
 
 Thomas Padioleau <thomas.padioleau@cea.fr>
 - Initial C++ design

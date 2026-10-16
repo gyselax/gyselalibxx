@@ -7,6 +7,8 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "gauss_legendre_integration.hpp"
+#include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "ipoisson_solver.hpp"
 #include "matrix.hpp"
 
@@ -23,11 +25,12 @@
  */
 template <
         class SplineInterpolatorType,
-        class IdxRangeBatched =
-                typename SplineInterpolatorType::BuilderType::interpolation_domain_type>
+        class IdxRangeBatched = typename InterpolationBuilderTraits<
+                typename SplineInterpolatorType::BuilderType>::interpolation_idx_range_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
-              typename SplineInterpolatorType::EvaluatorType::evaluation_domain_type,
+              typename InterpolationEvaluatorTraits<
+                      typename SplineInterpolatorType::EvaluatorType>::evaluation_idx_range_type,
               IdxRangeBatched,
               double,
               typename SplineInterpolatorType::EvaluatorType::memory_space,
@@ -38,7 +41,7 @@ private:
     using SplineEvaluator = typename SplineInterpolatorType::EvaluatorType;
 
     using base_type = IPoissonSolver<
-            typename SplineEvaluator::evaluation_domain_type,
+            typename SplineEvaluator::template evaluation_domain_type<0>,
             IdxRangeBatched,
             double,
             typename SplineEvaluator::memory_space,
@@ -46,9 +49,12 @@ private:
 
 private:
     /// The interpolation mesh type
-    using GridPDEDim = typename SplineBuilder::interpolation_discrete_dimension_type;
+    using GridPDEDim = typename InterpolationBuilderTraits<SplineBuilder>::interpolation_grid_type;
 
-    using InputBSplines = typename SplineBuilder::bsplines_type;
+    using InputBSplines = ddc::type_seq_element_t<
+            0,
+            ddc::to_type_seq_t<
+                    typename InterpolationBuilderTraits<SplineBuilder>::coeff_idx_range_type>>;
 
     using PDEDim = typename GridPDEDim::continuous_dimension_type;
 
@@ -110,7 +116,8 @@ public:
      *
      * This type should be private but is public due to Kokkos restrictions.
      */
-    struct HiddenFEMBSplines : ddc::NonUniformBSplines<PDEDim, InputBSplines::degree()>
+    struct HiddenFEMBSplines
+        : ddc::NonUniformBSplines<PDEDim, InputBSplines::degree(), PDEDim::PERIODIC>
     {
     };
 
@@ -125,13 +132,12 @@ private:
             ddc::PeriodicExtrapolationRule<PDEDim>,
             ddc::NullExtrapolationRule>;
 
-    using FEMSplineEvaluator = ddc::SplineEvaluator<
+    using FEMSplineEvaluator = ddc::SplineEvaluatorND<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            FEMBSplines,
-            GridPDEDim,
-            FEMEvalExtrapolationRule,
-            FEMEvalExtrapolationRule>;
+            ddc::detail::TypeSeq<FEMBSplines>,
+            ddc::detail::TypeSeq<GridPDEDim>,
+            ddc::detail::TypeSeq<FEMEvalExtrapolationRule, FEMEvalExtrapolationRule>>;
 
     using IdxFEMBSplines = Idx<FEMBSplines>;
 
@@ -490,7 +496,6 @@ public:
             IdxFEMBSplines first_repeat_bspline(ddc::discrete_space<FEMBSplines>().nbasis());
             // Copy the first d coefficients into the last d coefficients
             // These coefficients refer to the same InputBSplines which cross the boundaries
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     exec_space(),
@@ -514,9 +519,12 @@ private:
             return spline_evaluator;
         } else {
             static_assert(
-                    (ddc::is_uniform_bsplines_v<typename SplineEvaluator::bsplines_type>)
-                    || ddc::is_non_uniform_bsplines_v<typename SplineEvaluator::bsplines_type>);
-            if constexpr (ddc::is_uniform_bsplines_v<typename SplineEvaluator::bsplines_type>) {
+                    (ddc::is_uniform_bsplines_v<
+                            typename SplineEvaluator::template bsplines_type<0>>)
+                    || ddc::is_non_uniform_bsplines_v<
+                            typename SplineEvaluator::template bsplines_type<0>>);
+            if constexpr (ddc::is_uniform_bsplines_v<
+                                  typename SplineEvaluator::template bsplines_type<0>>) {
                 using break_point_grid = ddc::knot_discrete_dimension_t<InputBSplines>;
                 IdxRange<break_point_grid> break_point_idx_range
                         = ddc::discrete_space<InputBSplines>().break_point_domain();

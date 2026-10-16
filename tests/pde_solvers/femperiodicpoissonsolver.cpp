@@ -28,7 +28,7 @@ struct Batch
 using CoordX = Coord<X>;
 using CoordBatch = Coord<Batch>;
 
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
 
@@ -57,12 +57,10 @@ using IdxRangeBatchX = IdxRange<GridBatch, GridX>;
 
 using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRangeX,
         ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::PERIODIC>;
+        SplineBoundaryClosure::Periodic>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 using DFieldMemBatchX = DFieldMem<IdxRangeBatchX>;

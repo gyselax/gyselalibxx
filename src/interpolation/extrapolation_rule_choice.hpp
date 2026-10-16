@@ -7,43 +7,61 @@ namespace details {
 
 /// Primary template: Rule has no nested `type` alias template, so it is assumed to
 /// already be a concrete, usable extrapolation rule class - use it as-is.
-template <class Rule, class CoeffGrid, class DataType, class = void>
+template <class Rule, class DataType, class Basis, class IdxRangeCoeff, class = void>
 struct ExtrapolationRuleResolver
 {
     using type = Rule;
 };
 
-/// Specialisation selected via SFINAE when Rule exposes `Rule::type<CoeffGrid, DataType>`
+/// Specialisation selected via SFINAE when Rule exposes `Rule::type<Basis, DataType>`
 /// (i.e. Rule is a self-describing tag such as ExtrapolationRule::Periodic) - resolve
 /// through it to obtain the concrete extrapolation rule class.
-template <class Rule, class CoeffGrid, class DataType>
+template <class Rule, class DataType, class Basis, class IdxRangeCoeff>
 struct ExtrapolationRuleResolver<
         Rule,
-        CoeffGrid,
         DataType,
-        std::void_t<typename Rule::template type<CoeffGrid, DataType>>>
+        Basis,
+        IdxRangeCoeff,
+        std::void_t<typename Rule::template type<DataType, Basis, IdxRangeCoeff>>>
 {
-    using type = typename Rule::template type<CoeffGrid, DataType>;
+    using type = typename Rule::template type<DataType, Basis, IdxRangeCoeff>;
 };
 
-} // namespace details
+template <class Rule>
+static constexpr bool is_ddc_constant_extrapolation_rule_v = false;
 
-/// @brief Resolve Rule (either a self-describing tag or a concrete extrapolation rule
-/// class) to the concrete extrapolation rule class to use for a given CoeffGrid/DataType.
-template <class Rule, class CoeffGrid, class DataType>
-using extrapolation_rule_t =
-        typename details::ExtrapolationRuleResolver<Rule, CoeffGrid, DataType>::type;
+template <class CDim>
+static constexpr bool
+        is_ddc_constant_extrapolation_rule_v<ddc::ConstantExtrapolationRule<CDim>> = true;
+
+} // namespace details
 
 /// @brief True if get_extrapolation<Rule, CoeffGrid, DataType, ...> can build the rule
 /// with no extra information: the resolved rule type is default-constructible, or Rule
 /// is the ExtrapolationRule::Constant tag (which get_extrapolation knows how to build
 /// from the boundary of the discrete space).
-template <class Rule, class CoeffGrid, class DataType>
+template <class Rule, class CoeffGrid, class DataType, class Basis>
 constexpr bool is_extrapolation_rule_auto_constructible_v
-        = std::is_default_constructible_v<extrapolation_rule_t<
+        = (std::is_default_constructible_v<Rule>)
+          || (details::is_ddc_constant_extrapolation_rule_v<Rule>)
+          || (std::is_same_v<
                   Rule,
-                  CoeffGrid,
-                  DataType>> || std::is_same_v<Rule, ExtrapolationRule::Constant>;
+                  ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>);
+
+/// @brief Resolve Rule (either a self-describing tag or a concrete extrapolation rule
+/// class) to the concrete extrapolation rule class to use for a given Basis/DataType.
+template <class Rule, class DataType, class Basis, class IdxRangeCoeff>
+using extrapolation_rule_t = ddc::detail::TypeSeq<
+        typename details::ExtrapolationRuleResolver<
+                ddc::type_seq_element_t<0, Rule>,
+                DataType,
+                Basis,
+                IdxRangeCoeff>::type,
+        typename details::ExtrapolationRuleResolver<
+                ddc::type_seq_element_t<1, Rule>,
+                DataType,
+                Basis,
+                IdxRangeCoeff>::type>;
 
 /**
  * @brief Initialise the extrapolation rule.
@@ -51,25 +69,29 @@ constexpr bool is_extrapolation_rule_auto_constructible_v
  * Initialise the extrapolation rule using the default constructor if available. For a
  * constant extrapolation, initialise the extrapolation from the selected extremity.
  */
-template <class Rule, class CoeffGrid, class DataType, class Basis = CoeffGrid>
-extrapolation_rule_t<Rule, CoeffGrid, DataType> get_extrapolation(Extremity extremity)
+template <class Rule, class DataType, class CDim, class IdxRangeCoeff, class IdxRangeBasis>
+Rule get_extrapolation(Extremity extremity)
 {
-    using RuleType = extrapolation_rule_t<Rule, CoeffGrid, DataType>;
-    if constexpr (std::is_default_constructible_v<RuleType>) {
-        return RuleType();
-    } else if constexpr (std::is_same_v<Rule, ExtrapolationRule::Constant>) {
-        if constexpr (is_spline_basis_v<Basis>) {
-            if (extremity == Extremity::FRONT) {
-                return RuleType(ddc::discrete_space<CoeffGrid>().rmin());
-            } else {
-                return RuleType(ddc::discrete_space<CoeffGrid>().rmax());
-            }
+    if constexpr (std::is_default_constructible_v<Rule>) {
+        return Rule();
+    }
+
+    using Basis = find_grid_t<CDim, ddc::to_type_seq_t<IdxRangeBasis>>;
+    if constexpr (details::is_ddc_constant_extrapolation_rule_v<Rule>) {
+        if (extremity == Extremity::FRONT) {
+            return Rule(ddc::discrete_space<Basis>().rmin());
         } else {
-            if (extremity == Extremity::FRONT) {
-                return RuleType(ddc::discrete_space<Basis>().full_domain().front());
-            } else {
-                return RuleType(ddc::discrete_space<Basis>().full_domain().back());
-            }
+            return Rule(ddc::discrete_space<Basis>().rmax());
+        }
+    }
+    using CoeffGrid = find_grid_t<CDim, ddc::to_type_seq_t<IdxRangeCoeff>>;
+    if constexpr (std::is_same_v<
+                          Rule,
+                          ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>) {
+        if (extremity == Extremity::FRONT) {
+            return Rule(ddc::discrete_space<Basis>().full_domain().front());
+        } else {
+            return Rule(ddc::discrete_space<Basis>().full_domain().back());
         }
     } else {
         static_assert("Extrapolation rule initialisation cannot be deduced from type.");

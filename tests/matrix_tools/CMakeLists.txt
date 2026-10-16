@@ -4,6 +4,7 @@ add_executable(matrix_tests
   matrix_batch_ell.cpp
   matrix_batch_csr.cpp
   matrix_batch_tridiag.cpp
+  matrix_utils.cpp
 )
 target_link_libraries(matrix_tests
     PUBLIC
@@ -11,8 +12,8 @@ target_link_libraries(matrix_tests
         GTest::gmock
         DDC::core
         DDC::splines
-        gslx::matrix_tools
-        gslx::math_tools
+        gyselalibxx::matrix_tools
+        gyselalibxx::math_tools
 )
 gtest_discover_tests(matrix_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 

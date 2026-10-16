@@ -56,33 +56,29 @@ ddc::SplineBuilderClosure constexpr LagrangeVyClosure
 // SplineBuilder and SplineEvaluator definition
 using LagrangeInterpolatorX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagrangeX,
-        GridX,
-        ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
-        Real>;
+        Real,
+        IdxRange<LagrangeX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic>;
 using LagrangeInterpolatorY = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagrangeY,
-        GridY,
-        ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
-        Real>;
+        Real,
+        IdxRange<LagrangeY>,
+        IdxRange<GridY>,
+        ExtrapolationRule::Periodic>;
 
 using LagrangeInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagrangeVx,
-        GridVx,
-        ExtrapolationRule::Constant,
-        ExtrapolationRule::Constant,
-        Real>;
+        Real,
+        IdxRange<LagrangeVx>,
+        IdxRange<GridVx>,
+        ExtrapolationRule::Constant_Constant>;
 using LagrangeInterpolatorVy = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        LagrangeVy,
-        GridVy,
-        ExtrapolationRule::Constant,
-        ExtrapolationRule::Constant,
-        Real>;
+        Real,
+        IdxRange<LagrangeVy>,
+        IdxRange<GridVy>,
+        ExtrapolationRule::Constant_Constant>;
 
 using IdxRangeLY = IdxRange<LagrangeY>;
 using IdxRangeLXY = IdxRange<LagrangeX, LagrangeY>;

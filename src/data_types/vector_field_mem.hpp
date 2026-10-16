@@ -143,15 +143,15 @@ private:
     {
     }
 
-    /** Element access using a multi-dimensional Idx
-     * @param delems discrete coordinates
+    /** Element access using a multi-dimensional Idx or IdxStep
+     * @param idx the index or index step which accesses the element
      * @return copy of this element
      */
-    template <class... ODDims, typename T, T... ints>
-    element_type const operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>)
+    template <class IdxType, typename T, T... ints>
+    element_type const operator()(IdxType const& idx, std::integer_sequence<T, ints...>)
             const noexcept
     {
-        return element_type((base_type::m_values[ints](delems))...);
+        return element_type((this->m_values[ints](idx))...);
     }
 
 public:
@@ -213,7 +213,7 @@ public:
      *
      * @return A constant reference to this vector field.
      */
-    view_type span_cview() const
+    view_type get_const_field() const
     {
         return view_type(*this);
     }
@@ -226,7 +226,7 @@ public:
      *
      * @return A constant reference to this vector field.
      */
-    view_type span_view() const
+    view_type get_field() const
     {
         return view_type(*this);
     }
@@ -239,33 +239,30 @@ public:
      *
      * @return A modifiable reference to this vector field.
      */
-    span_type span_view()
+    span_type get_field()
     {
         return span_type(*this);
     }
 
-    /** Element access using a list of Idxs
-     * @param delems 1D discrete coordinates
-     * @return copy of this element
+    /**
+     * Element access using a multi-dimensional Idx or IdxStep.
+     * @param idx_dim The index or index step which accesses the element.
+     * @return Copy of the element accessed.
      */
-    template <class... ODDims>
-    element_type const operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    template <class... IdxType>
+    element_type const operator()(IdxType const&... idx_dim) const noexcept requires(
+            (ddc::is_discrete_element_v<IdxType> && ...)
+            || (ddc::is_discrete_vector_v<IdxType> && ...))
     {
-        Idx<ODDims...> delem_idx(delems...);
-        return this->
-        operator()(delem_idx, std::make_integer_sequence<int, element_type::size()> {});
+        if constexpr (sizeof...(IdxType) == 0) {
+            return this->
+            operator()(Idx<> {}, std::make_integer_sequence<int, element_type::size()> {});
+        } else {
+            using IdxTypeGrouped = ddc::combine_t<IdxType...>;
+            IdxTypeGrouped idx(idx_dim...);
+            return this->operator()(idx, std::make_integer_sequence<int, element_type::size()> {});
+        }
     }
-
-    /** Element access using a multi-dimensional Idx
-     * @param delems discrete coordinates
-     * @return copy of this element
-     */
-    template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    element_type const operator()(Idx<ODDims...> const& delems) const noexcept
-    {
-        return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
-    }
-
 
     /**
      * @brief Slice out some dimensions.
@@ -280,7 +277,7 @@ public:
     template <class... QueryDDims>
     auto operator[](Idx<QueryDDims...> const& slice_spec) const
     {
-        return span_cview()[slice_spec];
+        return get_const_field()[slice_spec];
     }
 
     /**
@@ -296,7 +293,7 @@ public:
     template <class... QueryDDims>
     auto operator[](Idx<QueryDDims...> const& slice_spec)
     {
-        return span_view()[slice_spec];
+        return get_field()[slice_spec];
     }
 
     /**
@@ -311,7 +308,7 @@ public:
     template <class... QueryDDims>
     auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
     {
-        return span_cview()[oidx_range];
+        return get_const_field()[oidx_range];
     }
 
     /**
@@ -326,7 +323,7 @@ public:
     template <class... QueryDDims>
     auto operator[](IdxRange<QueryDDims...> const& oidx_range)
     {
-        return span_view()[oidx_range];
+        return get_field()[oidx_range];
     }
 
     /**
@@ -338,7 +335,7 @@ public:
     inline constexpr chunk_span_type get() noexcept
     {
         static_assert(ddc::in_tags_v<QueryTag, NDTypeTag>, "requested Tag absent from Vector");
-        return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_view();
+        return ::get_field(this->m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>]);
     }
 
     /**
@@ -350,7 +347,7 @@ public:
     inline constexpr chunk_view_type get() const noexcept
     {
         static_assert(ddc::in_tags_v<QueryTag, NDTypeTag>, "requested Tag absent from Vector");
-        return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_cview();
+        return ::get_const_field(this->m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>]);
     }
 };
 
