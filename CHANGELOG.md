@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `Span3D`, `Span4D`, `DSpan3D` and `DSpan4D` aliases.
 - Add `PolarBSplines::eval_basis_and_n_derivs` to evaluate the polar basis splines and their mixed derivatives at once.
 - Allow `IdxStep` indexing for `VectorField` objects.
+- Add new helper functions `find_point_missing_from_superset` and `points_are_subset`.
 
 ### Fixed
 
