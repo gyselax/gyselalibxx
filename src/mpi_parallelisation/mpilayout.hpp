@@ -102,11 +102,9 @@ private:
     template <class... Grids>
     static IdxRange<Grids...> empty_local_idx_range(IdxRange<Grids...> global_idx_range)
     {
-        auto restrict_dim = [](auto global_idx_range_along_dim) {
-            using IdxRange1D = decltype(global_idx_range_along_dim);
-            using Grid1D = ddc::type_seq_element_t<0, ddc::to_type_seq_t<IdxRange1D>>;
+        auto restrict_dim = []<class Grid1D>(IdxRange<Grid1D> global_idx_range_along_dim) {
             if constexpr (ddc::in_tags_v<Grid1D, distributed_type_seq>) {
-                return IdxRange1D(global_idx_range_along_dim.front(), IdxStep<Grid1D>(0));
+                return IdxRange<Grid1D>(global_idx_range_along_dim.front(), IdxStep<Grid1D>(0));
             } else {
                 return global_idx_range_along_dim;
             }
