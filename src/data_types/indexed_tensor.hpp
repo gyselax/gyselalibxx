@@ -263,7 +263,6 @@ KOKKOS_INLINE_FUNCTION void check_all_id_validity(std::index_sequence<Is...>)
 template <bool is_symmetric, class... IndexedTensorType>
 KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType const&... tensor_to_mul)
 {
-    using namespace tensor_tools;
     static_assert(
             (is_indexed_tensor_v<IndexedTensorType> && ...),
             "A tensor multiplication must be carried out over IndexedTensor objects");
