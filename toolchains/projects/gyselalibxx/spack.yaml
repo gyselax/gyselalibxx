@@ -1,6 +1,6 @@
 spack:
   include:
-    - path: externals.yaml
+    - path: gysela/externals.yaml
       optional: true
     - path: gysela
       optional: true

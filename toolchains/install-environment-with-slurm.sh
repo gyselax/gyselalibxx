@@ -3,7 +3,7 @@
 # Ensures the script is not being sourced
 if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
     echo "This script must be executed, not sourced!" >&2
-    return 1
+    exit 1
 fi
 
 # Gets the slurm account to use for compiling on a compute node
@@ -20,7 +20,7 @@ module purge
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 CPUS_PER_GPU=24
 
-. ${TOOLCHAIN_ROOT_DIRECTORY]/config.sh
+. ${TOOLCHAIN_ROOT_DIRECTORY}/config.sh
 GYSELA_SPACK_PREFIX=${GYSELA_SPACK_BASE}/gysela-spack-${GYSELA_SPACK_VERSION}
 export SPACK_DISABLE_LOCAL_CONFIG=True
 export PYTHONDONTWRITEBYTECODE=True
