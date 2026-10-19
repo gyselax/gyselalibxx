@@ -1089,8 +1089,7 @@ protected:
             weights(idx) = neg_1_pow(k) * factor * un_other_patch * (vk_plus - vk_minus);
         });
 
-        weights(idx_outside)
-                = neg_1_pow(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
+        weights(idx_outside) = neg_1_pow(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
     }
 
     /**
