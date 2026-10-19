@@ -7,6 +7,18 @@
 #include "edge_transformation.hpp"
 #include "types.hpp"
 
+/**
+ * @brief Compute the coefficients a, b and c of the interface derivative reconstruction method
+ * for a given Interface between two patches.
+ *
+ * This class specialises DerivReconstructionCoeffs using the information stored in the
+ * Interface (perpendicular grids, B-splines and extremities of the two Edges). It also
+ * provides patch-based accessors and handles the change of sign of the cross-derivatives
+ * when the orientations of the two patches do not agree.
+ *
+ * @tparam InterfaceType The interface between two patches where we want
+ * to compute the derivatives.
+ */
 template <class InterfaceType>
 class InterfaceDerivCoeffs
     : public DerivReconstructionCoeffs<

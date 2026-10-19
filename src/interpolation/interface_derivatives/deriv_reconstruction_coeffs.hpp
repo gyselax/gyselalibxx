@@ -6,6 +6,7 @@
 
 #include "ddc_aliases.hpp"
 #include "geometry_descriptors.hpp"
+#include "math_tools.hpp"
 
 
 /**
@@ -69,38 +70,60 @@ template <
 class DerivReconstructionCoeffs
 {
 protected:
+    /// @brief The grid of interpolation points perpendicular to the interface on patch 1.
     using EdgePerpGrid1 = EdgePerpGrid1Type;
+    /// @brief The grid of interpolation points perpendicular to the interface on patch 2.
     using EdgePerpGrid2 = EdgePerpGrid2Type;
 
+    /// @brief The index range over the interpolation points perpendicular to the interface on patch 1.
     using IdxRange1DPerp_1 = IdxRange<EdgePerpGrid1>;
+    /// @brief The index range over the interpolation points perpendicular to the interface on patch 2.
     using IdxRange1DPerp_2 = IdxRange<EdgePerpGrid2>;
 
+    /// @brief An index of EdgePerpGrid1.
     using Idx1D_1 = Idx<EdgePerpGrid1>;
+    /// @brief An index of EdgePerpGrid2.
     using Idx1D_2 = Idx<EdgePerpGrid2>;
 
+    /// @brief The B-splines in the direction perpendicular to the interface on patch 1.
     using BSplinesPerp1 = BSplinesPerp1Type;
+    /// @brief The B-splines in the direction perpendicular to the interface on patch 2.
     using BSplinesPerp2 = BSplinesPerp2Type;
 
+    /// @brief The grid of break points of the B-splines on patch 1.
     using GridBreakPt1 = ddc::knot_discrete_dimension_t<BSplinesPerp1>;
+    /// @brief The grid of break points of the B-splines on patch 2.
     using GridBreakPt2 = ddc::knot_discrete_dimension_t<BSplinesPerp2>;
 
 protected:
+    /// @brief True if patch 1 has an additional interpolation point in its boundary cell (Greville closure).
     const bool m_is_cell_bound_1_with_extra_interpol_pt;
+    /// @brief True if patch 2 has an additional interpolation point in its boundary cell (Greville closure).
     const bool m_is_cell_bound_2_with_extra_interpol_pt;
 
+    /// @brief The index range of the interpolation points used on patch 1.
     IdxRange1DPerp_1 const m_idx_range_perp_1;
+    /// @brief The index range of the interpolation points used on patch 2.
     IdxRange1DPerp_2 const m_idx_range_perp_2;
 
+    /// @brief The extremity of patch 1 where the interface is located.
     static Extremity constexpr s_extremity_1 = extremity_1;
+    /// @brief The extremity of patch 2 where the interface is located.
     static Extremity constexpr s_extremity_2 = extremity_2;
 
-    double m_coeff_deriv_patch_2;
+    /// @brief The coefficient (a) in front of the derivative on patch 1.
     double m_coeff_deriv_patch_1;
+    /// @brief The coefficient (b) in front of the derivative on patch 2.
+    double m_coeff_deriv_patch_2;
 
+    /// @brief The memory allocated for the weights of the function values on patch 1.
     host_t<DFieldMem<IdxRange1DPerp_1>> m_weights_patch_1_alloc;
+    /// @brief The memory allocated for the weights of the function values on patch 2.
     host_t<DFieldMem<IdxRange1DPerp_2>> m_weights_patch_2_alloc;
 
+    /// @brief The weights @f$ \omega_k @f$ of the function values on patch 1 in the coefficient (c).
     host_t<DField<IdxRange1DPerp_1>> m_weights_patch_1;
+    /// @brief The weights @f$ \omega_k @f$ of the function values on patch 2 in the coefficient (c).
     host_t<DField<IdxRange1DPerp_2>> m_weights_patch_2;
 
 public:
@@ -355,7 +378,6 @@ public:
     /**
      * @brief Get the linear combination of the derivatives values (c).
      *
-     * @anchor get_approx_cross_deriv
      * This linear combination corresponds to an approximation of the
      * interface cross-derivative.
      *
@@ -368,6 +390,8 @@ public:
      *
      * @param derivs_1 Derivatives at the interpolation points on patch 1.
      * @param derivs_2 Derivatives at the interpolation points on patch 2.
+     * @param sign_deriv_2 The sign (+1 or -1) applied to the derivatives on patch 2
+     *          to account for the relative orientation of the two patches.
      * @return the linear combination of the function values (c).
      */
     template <class Layout1, class Layout2>
@@ -380,6 +404,15 @@ public:
     }
 
 protected:
+    /**
+     * @brief Get the linear combination of the function values (c), changing the sign
+     * of the values on patch 2 if required.
+     *
+     * @param function_1 Function values at the interpolation points on patch 1.
+     * @param function_2 Function values at the interpolation points on patch 2.
+     * @param sign_function_2 The sign (+1 or -1) applied to the function values on patch 2.
+     * @return the linear combination of the function values (c).
+     */
     template <class Layout1, class Layout2>
     double get_approx_with_change_of_sign(
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
@@ -409,6 +442,15 @@ protected:
         return coeff_values;
     }
 
+    /**
+     * @brief Check that the break points of the B-splines are interpolation points.
+     * An exception is raised if this is not the case.
+     *
+     * @param is_cell_bound_with_extra_interpol_pt True if the patch has an additional
+     *          interpolation point in its boundary cell.
+     * @param idx_range_perp The index range of the interpolation points used on the patch.
+     * @param extremity The extremity of the patch on which the interface is located.
+     */
     template <typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid>
     void check_break_points_are_interpolation_points(
             bool const is_cell_bound_with_extra_interpol_pt,
@@ -448,6 +490,13 @@ protected:
         });
     }
 
+    /**
+     * @brief Check that the additional interpolation point is located in the boundary
+     * cell of the patch opposite the interface. An exception is raised if this is not the case.
+     *
+     * @param idx_range_perp The index range of the interpolation points used on the patch.
+     * @param extremity The extremity of the patch on which the interface is located.
+     */
     template <typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid>
     void check_additional_interpolation_points_location(
             IdxRange<EdgePerpGrid> const& idx_range_perp,
@@ -984,8 +1033,8 @@ protected:
 
         // Compute the coefficients a and b.
         double const u1 = 2 * Kokkos::sqrt(3);
-        m_coeff_deriv_patch_1 = neg_1_to_the_power(n_cells_1 - 1) * u1 * b_11 * un2 / denominator;
-        m_coeff_deriv_patch_2 = neg_1_to_the_power(n_cells_2 - 1) * u1 * a_11 * un1 / denominator;
+        m_coeff_deriv_patch_1 = neg_1_pow(n_cells_1 - 1) * u1 * b_11 * un2 / denominator;
+        m_coeff_deriv_patch_2 = neg_1_pow(n_cells_2 - 1) * u1 * a_11 * un1 / denominator;
 
 
         // Compute the weights {omega_k}_{k = -NL, ..., NR} in c.
@@ -1002,8 +1051,13 @@ protected:
         set_local_uniform_weights(m_weights_patch_1, -factor_b, un2, interface_idx_1);
     };
 
-    /*
-     * @brief Apply the explicit formula for the uniform case to weights on one side of the interface
+    /**
+     * @brief Apply the explicit formula for the uniform case to weights on one side of the interface.
+     *
+     * @param weights The weights on the patch which should be filled (except at the interface).
+     * @param factor The multiplicative factor associated with this patch.
+     * @param un_other_patch The value @f$ u_N @f$ calculated for the other patch.
+     * @param idx_interface The index of the interface point on this patch.
      */
     template <class EdgePerpGrid>
     static void set_local_uniform_weights(
@@ -1032,11 +1086,11 @@ protected:
             double const vk_plus
                     = Kokkos::pow(u_plus, n_minus_k + 1) - Kokkos::pow(u_minus, n_minus_k + 1);
 
-            weights(idx) = neg_1_to_the_power(k) * factor * un_other_patch * (vk_plus - vk_minus);
+            weights(idx) = neg_1_pow(k) * factor * un_other_patch * (vk_plus - vk_minus);
         });
 
         weights(idx_outside)
-                = neg_1_to_the_power(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
+                = neg_1_pow(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
     }
 
     /**
@@ -1143,16 +1197,18 @@ protected:
     }
 
 
+    /**
+     * @brief Get the index at the given extremity of an index range.
+     *
+     * @param extremity The extremity (FRONT or BACK).
+     * @param idx_range The index range.
+     * @return The first index if extremity is FRONT, the last index otherwise.
+     */
     template <class Grid1D>
     KOKKOS_INLINE_FUNCTION Idx<Grid1D> get_extremity_idx(
             Extremity const extremity,
             IdxRange<Grid1D> const& idx_range) const
     {
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
-    }
-
-    static inline double neg_1_to_the_power(int k)
-    {
-        return 1.0 - 2.0 * (k & 1);
     }
 };
