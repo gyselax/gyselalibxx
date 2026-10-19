@@ -197,6 +197,17 @@ KOKKOS_FUNCTION void symmetric_internal_tensor_mul(
         IndexedTensorType const&... t)
 {
     ((symmetric_internal_tensor_mul_elem<GlobalTensorIndexIdMap, Is>(result, t...)), ...);
+}
+
+template <
+        class GlobalTensorIndexIdMap,
+        class ResultIndexedTensorType,
+        class... IndexedTensorType,
+        std::size_t... Is>
+KOKKOS_FUNCTION void internal_apply_tensor_mul_symmetry(
+        ResultIndexedTensorType& result,
+        std::index_sequence<Is...>)
+{
     ((internal_apply_tensor_mul_symmetry_elem<GlobalTensorIndexIdMap, Is>(result)), ...);
 }
 
@@ -259,19 +270,11 @@ KOKKOS_FUNCTION auto internal_tensor_mul(IndexedTensorType const&... tensor_to_m
     using ResultIndexTypeSeq = non_repeated_indices_t<AllIndexIdMaps>;
     if constexpr (ddc::type_seq_size_v<ResultIndexTypeSeq> == 0) {
         ElementType result = 0.0;
-        if constexpr (is_symmetric) {
-            details::symmetric_internal_tensor_mul<AllIndexIdMaps>(
-                    result,
-                    std::make_index_sequence<
-                            details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
-                    tensor_to_mul...);
-        } else {
-            details::internal_tensor_mul<AllIndexIdMaps>(
-                    result,
-                    std::make_index_sequence<
-                            details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
-                    tensor_to_mul...);
-        }
+        details::internal_tensor_mul<AllIndexIdMaps>(
+                result,
+                std::make_index_sequence<
+                        details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
+                tensor_to_mul...);
         return result;
     } else {
         using ResultTensorType
@@ -284,6 +287,9 @@ KOKKOS_FUNCTION auto internal_tensor_mul(IndexedTensorType const&... tensor_to_m
                     std::make_index_sequence<
                             details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
                     tensor_to_mul...);
+            details::internal_apply_tensor_mul_symmetry<ResultIndexTypeSeq>(
+                    indexed_result,
+                    std::make_index_sequence<details::CalculateSize<ResultIndexTypeSeq>::value>());
         } else {
             details::internal_tensor_mul<AllIndexIdMaps>(
                     indexed_result,
