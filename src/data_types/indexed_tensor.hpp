@@ -246,8 +246,22 @@ KOKKOS_INLINE_FUNCTION void check_all_id_validity(std::index_sequence<Is...>)
 
 
 } // namespace details
+
+/**
+ * @brief A function to multiply tensors together. IndexedTensors are used to describe the index
+ * pattern of the multiplication.
+ * Example:
+ * @code
+ * // Create a tensor C such that C_{ik} = A_{ij} B^{j}_{k}
+ * Tensor C = tensor_mul(index<'i', 'j'>(A), index<'j', 'k'>(B));
+ * @endcode
+ * @tparam is_symmetric Indicates if the resulting tensor is symmetric. If this is the case then
+ * the number of required calculations can be reduced.
+ * @param tensor_to_mul The indexed tensor objects which should be multiplied together.
+ * @return A tensor that is the result of multiplying the objects according to the index pattern
+ */
 template <bool is_symmetric, class... IndexedTensorType>
-KOKKOS_FUNCTION auto internal_tensor_mul(IndexedTensorType const&... tensor_to_mul)
+KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType const&... tensor_to_mul)
 {
     using namespace tensor_tools;
     static_assert(
@@ -340,8 +354,7 @@ KOKKOS_FUNCTION auto index(TensorType const& tensor)
 template <bool is_symmetric = false, class... IndexedTensorType>
 KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
 {
-    using namespace tensor_tools;
-    return internal_tensor_mul<false>(tensor_to_mul...);
+    return tensor_tools::tensor_mul<false>(tensor_to_mul...);
 }
 
 /**
@@ -358,10 +371,9 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
 template <class... IndexedTensorType>
 KOKKOS_FUNCTION auto symmetric_tensor_mul(IndexedTensorType... tensor_to_mul)
 {
-    using namespace tensor_tools;
     static_assert(
-            (is_indexed_tensor_v<IndexedTensorType> && ...),
+            (tensor_tools::is_indexed_tensor_v<IndexedTensorType> && ...),
             "A tensor multiplication must be carried out over IndexedTensor objects");
     static_assert(((IndexedTensorType::tensor_type::rank() == 2) && ...));
-    return internal_tensor_mul<true>(tensor_to_mul...);
+    return tensor_tools::tensor_mul<true>(tensor_to_mul...);
 }
