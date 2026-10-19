@@ -76,10 +76,10 @@ static constexpr ddc::SplineBuilderClosure SplineRClosure = ddc::SplineBuilderCl
 static constexpr ddc::SplineBuilderClosure SplineThetaClosure = ddc::SplineBuilderClosure::PERIODIC;
 
 
-struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
+struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree, R::PERIODIC>
 {
 };
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
+struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree, Theta::PERIODIC>
 {
 };
 

@@ -15,15 +15,15 @@ bool constexpr BsplineOnUniformCellsY = true;
 struct BSplinesX
     : std::conditional_t<
               BsplineOnUniformCellsX,
-              ddc::UniformBSplines<X, BSDegreeX>,
-              ddc::NonUniformBSplines<X, BSDegreeX>>
+              ddc::UniformBSplines<X, BSDegreeX, X::PERIODIC>,
+              ddc::NonUniformBSplines<X, BSDegreeX, X::PERIODIC>>
 {
 };
 struct BSplinesY
     : std::conditional_t<
               BsplineOnUniformCellsY,
-              ddc::UniformBSplines<Y, BSDegreeY>,
-              ddc::NonUniformBSplines<Y, BSDegreeY>>
+              ddc::UniformBSplines<Y, BSDegreeY, Y::PERIODIC>,
+              ddc::NonUniformBSplines<Y, BSDegreeY, Y::PERIODIC>>
 {
 };
 

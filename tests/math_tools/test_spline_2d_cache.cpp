@@ -23,10 +23,10 @@ struct Y
 using CoordX = Coord<X>;
 using CoordY = Coord<Y>;
 
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesY : ddc::UniformBSplines<Y, 3>
+struct BSplinesY : ddc::UniformBSplines<Y, 3, Y::PERIODIC>
 {
 };
 

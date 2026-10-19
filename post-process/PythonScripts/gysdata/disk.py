@@ -13,8 +13,8 @@ import re
 from yaml.loader import SafeLoader
 import yaml
 
-import dask.array as da
 import h5py as h5
+import numpy as np
 import xarray as xr
 
 from . import coord_getters
@@ -161,7 +161,7 @@ class Store(object):
                                 global_coords
                             )
 
-                        data = da.from_array(dset_value)
+                        data = np.array(dset_value)
 
                         # Small verification the match between the coordinates and the data.
                         target_ndim = len(coords)

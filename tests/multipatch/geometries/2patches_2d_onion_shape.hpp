@@ -121,8 +121,8 @@ template <int PatchIdx>
 struct BSplinesR
     : std::conditional_t<
               is_uniform,
-              ddc::UniformBSplines<R, BSplineDegree>,
-              ddc::NonUniformBSplines<R, BSplineDegree>>
+              ddc::UniformBSplines<R, BSplineDegree, R::PERIODIC>,
+              ddc::NonUniformBSplines<R, BSplineDegree, R::PERIODIC>>
 {
 };
 
@@ -134,8 +134,8 @@ template <int PatchIdx>
 struct BSplinesTheta
     : std::conditional_t<
               is_uniform,
-              ddc::UniformBSplines<Theta, BSplineDegree>,
-              ddc::NonUniformBSplines<Theta, BSplineDegree>>
+              ddc::UniformBSplines<Theta, BSplineDegree, Theta::PERIODIC>,
+              ddc::NonUniformBSplines<Theta, BSplineDegree, Theta::PERIODIC>>
 {
 };
 

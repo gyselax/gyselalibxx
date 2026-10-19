@@ -12,7 +12,6 @@ target_sources("data_types"
                 derivative_field.hpp
                 derivative_field_common.hpp
                 derivative_field_mem.hpp
-                idx_range_slice.hpp
                 indexed_tensor.hpp
                 static_tensors.hpp
                 tensor.hpp

@@ -15,10 +15,10 @@
 #include "ddc_helper.hpp"
 #include "global_2d_onion_shape_non_uniform.hpp"
 #include "interface.hpp"
+#include "interface_derivative_coefficients.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
-#include "single_interface_derivatives_calculator.hpp"
 
 
 /*
@@ -124,17 +124,16 @@ using SplineRThetagBuilder = ddc::SplineBuilder2D<
         ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineSolver::LAPACK>;
 
-using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
+using SplineRThetagEvaluator = ddc::SplineEvaluatorND<
         HostExecSpace,
         typename HostExecSpace::memory_space,
-        BSplinesRg,
-        BSplinesThetag,
-        GridRg,
-        GridThetag,
-        ddc::ConstantExtrapolationRule<Rg, Thetag>,
-        ddc::ConstantExtrapolationRule<Rg, Thetag>,
-        ddc::PeriodicExtrapolationRule<Thetag>,
-        ddc::PeriodicExtrapolationRule<Thetag>>;
+        ddc::detail::TypeSeq<BSplinesRg, BSplinesThetag>,
+        ddc::detail::TypeSeq<GridRg, GridThetag>,
+        ddc::detail::TypeSeq<
+                ddc::ConstantExtrapolationRule<Rg>,
+                ddc::ConstantExtrapolationRule<Rg>,
+                ddc::PeriodicExtrapolationRule<Thetag>,
+                ddc::PeriodicExtrapolationRule<Thetag>>>;
 
 
 
@@ -153,27 +152,28 @@ void initialise_2D_function(host_t<DField<IdxRange<Grid1, Grid2>>> function)
 
 
 template <class T>
-struct SingleInterfaceDerivativesCalculatorFixture;
+struct InterfaceDerivCoeffsFixture;
 
 template <class InterpolationType, class Edge_Patch1, class Edge_Patch2>
-struct SingleInterfaceDerivativesCalculatorFixture<
-        std::tuple<InterpolationType, Edge_Patch1, Edge_Patch2>> : public ::testing::Test
+struct InterfaceDerivCoeffsFixture<std::tuple<InterpolationType, Edge_Patch1, Edge_Patch2>>
+    : public ::testing::Test
 {
     // Get the parameters of the test: patch connection and interpolation type.
     using Interpolation = InterpolationType;
-    static constexpr ddc::SplineBuilderClosure Interpolation_v = InterpolationType::value;
+    static constexpr ddc::SplineBuilderClosure closure = InterpolationType::value;
     using Edge1 = Edge_Patch1;
     using Edge2 = Edge_Patch2;
 
 
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
     // patch 1 -----------------------------------
-    static constexpr Coord<R> r1_min = Coord<R>(0.0);
+    static constexpr Coord<R> r1_min
+            = (std::is_same_v<Edge1, EastEdge1>) ? Coord<R>(-1.0) : Coord<R>(0.0);
     static constexpr Coord<R> r1_max = Coord<R>(1.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
-    static constexpr IdxStep<GridR<1>> r1_ncells
-            = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<1>>(5)
-                                                                       : IdxStep<GridR<1>>(30);
+    static constexpr IdxStep<GridR<1>> r1_ncells = (closure == ddc::SplineBuilderClosure::GREVILLE)
+                                                           ? IdxStep<GridR<1>>(5)
+                                                           : IdxStep<GridR<1>>(30);
 
     static constexpr Coord<Theta> theta1_min = Coord<Theta>(0.0);
     static constexpr Coord<Theta> theta1_max = Coord<Theta>(2 * M_PI);
@@ -187,8 +187,8 @@ struct SingleInterfaceDerivativesCalculatorFixture<
             = (std::is_same_v<Edge2, SouthEdge2>) ? Coord<Eta>(2.0 * 2 * M_PI) : Coord<Eta>(2.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
     static constexpr IdxStep<GridR<2>> eta2_ncells
-            = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<2>>(5)
-                                                                       : IdxStep<GridR<2>>(30);
+            = (closure == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<2>>(5)
+                                                               : IdxStep<GridR<2>>(30);
 
     // Exchange R and Theta values for a connection with SouthEdge2.
     static constexpr Coord<Theta> xi2_min = Coord<Xi>(0.0);
@@ -224,7 +224,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
 #endif
 
         std::vector<Coord<R>> interpolation_points_r1;
-        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+        if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
             // Add an interpolation point in the cell on the boundary of the equivalent global domain.
             // The other interpolation points are the break points.
             if constexpr (std::is_same_v<Edge1, EastEdge1>) {
@@ -233,12 +233,12 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                 interpolation_points_r1
                         = get_interpolation_points_add_one_on_right(break_points_r1);
             }
-        } else if (Interpolation_v == ddc::SplineBuilderClosure::HERMITE) {
+        } else if (closure == ddc::SplineBuilderClosure::HERMITE) {
             // Use the break points as interpolation points.
             interpolation_points_r1 = break_points_r1;
         }
         ddc::init_discrete_space<GridR<1>>(
-                SplineInterpPointsR1<Interpolation_v>::template get_sampling<GridR<1>>(
+                SplineInterpPointsR1<closure>::template get_sampling<GridR<1>>(
                         interpolation_points_r1));
         ddc::init_discrete_space<GridTheta<1>>(
                 SplineInterpPointsTheta1::get_sampling<GridTheta<1>>());
@@ -268,7 +268,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
 
         std::vector<Coord<R>> interpolation_points_eta2;
         std::vector<Coord<Theta>> interpolation_points_xi2;
-        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+        if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
             // Add an interpolation point in the cell on the boundary of the equivalent global domain.
             // The other interpolation points are the break points.
             if constexpr (std::is_same_v<Edge2, EastEdge2>) {
@@ -284,13 +284,13 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                         = get_interpolation_points_add_one_on_right(break_points_xi2);
                 interpolation_points_eta2 = break_points_eta2;
             }
-        } else if (Interpolation_v == ddc::SplineBuilderClosure::HERMITE) {
+        } else if (closure == ddc::SplineBuilderClosure::HERMITE) {
             // Use the break points as interpolation points.
             interpolation_points_eta2 = break_points_eta2;
             interpolation_points_xi2 = break_points_xi2;
         }
         ddc::init_discrete_space<GridR<2>>(
-                SplineInterpPointsEta2<Interpolation_v>::template get_sampling<GridR<2>>(
+                SplineInterpPointsEta2<closure>::template get_sampling<GridR<2>>(
                         interpolation_points_eta2));
         ddc::init_discrete_space<GridTheta<2>>(SplineInterpPointsXi2::get_sampling<GridTheta<2>>());
 
@@ -303,12 +303,12 @@ struct SingleInterfaceDerivativesCalculatorFixture<
             // orientation global: ↑→  | local: ↑→
             break_points_r1.pop_back();
             interpolation_points_r1.pop_back();
-            fill_in(break_points_rg, break_points_r1);
-            fill_in(interpolation_points_rg, interpolation_points_r1);
+            append(break_points_rg, break_points_r1);
+            append(interpolation_points_rg, interpolation_points_r1);
         } else if (std::is_same_v<Edge1, WestEdge1>) {
             // orientation global: ↑→  | local: ←↓
-            fill_in_reverse(break_points_rg, break_points_r1);
-            fill_in_reverse(interpolation_points_rg, interpolation_points_r1);
+            append_reverse(break_points_rg, break_points_r1);
+            append_reverse(interpolation_points_rg, interpolation_points_r1);
             break_points_rg.pop_back();
             interpolation_points_rg.pop_back();
         }
@@ -316,12 +316,12 @@ struct SingleInterfaceDerivativesCalculatorFixture<
         // --- fill in with points from patch 2
         if constexpr (std::is_same_v<Edge2, EastEdge2>) {
             // orientation global: ↑→  | local: ←↓
-            fill_in_reverse(break_points_rg, break_points_eta2);
-            fill_in_reverse(interpolation_points_rg, interpolation_points_eta2);
+            append_reverse(break_points_rg, break_points_eta2);
+            append_reverse(interpolation_points_rg, interpolation_points_eta2);
         } else if (std::is_same_v<Edge2, WestEdge2>) {
             // orientation global: ↑→  | local: ↑→
-            fill_in(break_points_rg, break_points_eta2);
-            fill_in(interpolation_points_rg, interpolation_points_eta2);
+            append(break_points_rg, break_points_eta2);
+            append(interpolation_points_rg, interpolation_points_eta2);
         } else if (std::is_same_v<Edge2, SouthEdge2>) {
             // orientation global: ↑→  | local: ↓→
             for (typename Patch2::Coord2 xi : break_points_xi2) {
@@ -341,7 +341,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
         ddc::init_discrete_space<BSplinesThetag>(break_points_thetag);
 
         ddc::init_discrete_space<GridRg>(
-                SplineInterpPointsRg<Interpolation_v>::template get_sampling<GridRg>(
+                SplineInterpPointsRg<closure>::template get_sampling<GridRg>(
                         interpolation_points_rg));
         ddc::init_discrete_space<GridThetag>(
                 SplineInterpPointsThetag::get_sampling<GridThetag>(interpolation_points_thetag));
@@ -349,7 +349,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
 
 
     // DEFINE INDEX RANGES -----------------------------------------------------------------------
-    using SplineInterpPoints_R1 = SplineInterpPointsR1<Interpolation_v>;
+    using SplineInterpPoints_R1 = SplineInterpPointsR1<closure>;
     const typename Patch1::IdxRange1 idx_range_r1 =
             typename Patch1::IdxRange1(SplineInterpPoints_R1::template get_domain<GridR<1>>());
     const typename Patch1::IdxRange2 idx_range_theta1 =
@@ -357,7 +357,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
     const typename Patch1::IdxRange12 idx_range_rtheta1 =
             typename Patch1::IdxRange12(idx_range_r1, idx_range_theta1);
 
-    using SplineInterpPoints_R2 = SplineInterpPointsEta2<Interpolation_v>;
+    using SplineInterpPoints_R2 = SplineInterpPointsEta2<closure>;
     const typename Patch2::IdxRange1 idx_range_eta2 =
             typename Patch2::IdxRange1(SplineInterpPoints_R2::template get_domain<GridR<2>>());
     const typename Patch2::IdxRange2 idx_range_xi2 =
@@ -365,7 +365,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
     const typename Patch2::IdxRange12 idx_range_etaxi2 =
             typename Patch2::IdxRange12(idx_range_eta2, idx_range_xi2);
 
-    using SplineInterpPoints_Rg = SplineInterpPointsRg<Interpolation_v>;
+    using SplineInterpPoints_Rg = SplineInterpPointsRg<closure>;
     const IdxRange<GridRg> idx_range_r_g
             = IdxRange<GridRg>(SplineInterpPoints_Rg::template get_domain<GridRg>());
     const IdxRange<GridThetag> idx_range_theta_g
@@ -423,8 +423,8 @@ struct SingleInterfaceDerivativesCalculatorFixture<
         }
 
         // Instantiation with the reduced index range.
-        SingleInterfaceDerivativesCalculator<Interface_1_2> const
-                derivatives_calculator(reduced_idx_range_perp1, reduced_idx_range_perp2);
+        InterfaceDerivCoeffs<Interface_1_2> const
+                deriv_coeffs(reduced_idx_range_perp1, reduced_idx_range_perp2);
 
 
         IdxRangePerp2 idx_range_perp2;
@@ -434,43 +434,39 @@ struct SingleInterfaceDerivativesCalculatorFixture<
             idx_range_perp2 = idx_range_eta2;
         }
         // Instantiation with the indicated number of chosen cells.
-        SingleInterfaceDerivativesCalculator<Interface_1_2> const
-                derivatives_calculator_approx(idx_range_r1, idx_range_perp2, n_cells);
+        InterfaceDerivCoeffs<Interface_1_2> const
+                deriv_coeffs_approx(idx_range_r1, idx_range_perp2, n_cells);
 
         // Instantiation with the indicated number of chosen cells and 2D index ranges.
-        SingleInterfaceDerivativesCalculator<Interface_1_2> const
-                derivatives_calculator_approx_2D(idx_range_etaxi2, idx_range_rtheta1, n_cells);
+        InterfaceDerivCoeffs<Interface_1_2> const
+                deriv_coeffs_approx_2D(idx_range_etaxi2, idx_range_rtheta1, n_cells);
 
         // Coefficients a and b
-        double const coeff_deriv_patch_1 = derivatives_calculator.get_coeff_deriv_patch_1();
-        double const coeff_deriv_patch_2 = derivatives_calculator.get_coeff_deriv_patch_2();
+        double const coeff_deriv_patch_1 = deriv_coeffs.get_coeff_deriv_patch_1();
+        double const coeff_deriv_patch_2 = deriv_coeffs.get_coeff_deriv_patch_2();
 
         // Compare get_coeff_deriv_patch_1/2 and get_coeff_deriv_on_patch<Patch1/2>.
-        EXPECT_EQ(
-                coeff_deriv_patch_1,
-                derivatives_calculator.template get_coeff_deriv_on_patch<Patch1>());
-        EXPECT_EQ(
-                coeff_deriv_patch_2,
-                derivatives_calculator.template get_coeff_deriv_on_patch<Patch2>());
+        EXPECT_EQ(coeff_deriv_patch_1, deriv_coeffs.template get_coeff_deriv_on_patch<Patch1>());
+        EXPECT_EQ(coeff_deriv_patch_2, deriv_coeffs.template get_coeff_deriv_on_patch<Patch2>());
 
-        // Compare derivatives_calculator and derivatives_calculator_approx.
+        // Compare deriv_coeffs and deriv_coeffs_approx.
         EXPECT_NEAR(
                 coeff_deriv_patch_1,
-                derivatives_calculator_approx.template get_coeff_deriv_on_patch<Patch1>(),
+                deriv_coeffs_approx.template get_coeff_deriv_on_patch<Patch1>(),
                 1e-12);
         EXPECT_NEAR(
                 coeff_deriv_patch_2,
-                derivatives_calculator_approx.template get_coeff_deriv_on_patch<Patch2>(),
+                deriv_coeffs_approx.template get_coeff_deriv_on_patch<Patch2>(),
                 1e-12);
 
-        // Compare derivatives_calculator and derivatives_calculator_approx_2D.
+        // Compare deriv_coeffs and deriv_coeffs_approx_2D.
         EXPECT_NEAR(
                 coeff_deriv_patch_1,
-                derivatives_calculator_approx_2D.template get_coeff_deriv_on_patch<Patch1>(),
+                deriv_coeffs_approx_2D.template get_coeff_deriv_on_patch<Patch1>(),
                 1e-12);
         EXPECT_NEAR(
                 coeff_deriv_patch_2,
-                derivatives_calculator_approx_2D.template get_coeff_deriv_on_patch<Patch2>(),
+                deriv_coeffs_approx_2D.template get_coeff_deriv_on_patch<Patch2>(),
                 1e-12);
 
 
@@ -517,23 +513,23 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                         coord_theta);
             }
 
-            // Coefficient c
-            double sum_values = derivatives_calculator.get_function_coefficients(
+            // Coefficient c (or the approximation of the interface derivative)
+            double deriv_interface_approx = deriv_coeffs.get_approx_deriv(
                     get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
                     get_const_field(function_2[idx_par_2][reduced_idx_range_perp2]));
 
-            // Compare derivatives_calculator and derivatives_calculator_approx.
+            // Compare deriv_coeffs and deriv_coeffs_approx.
             EXPECT_NEAR(
-                    sum_values,
-                    derivatives_calculator_approx.get_function_coefficients(
+                    deriv_interface_approx,
+                    deriv_coeffs_approx.get_approx_deriv(
                             get_const_field(function_1[idx_par_1]),
                             get_const_field(function_2[idx_par_2])),
                     1e-12);
 
-            // Compare derivatives_calculator and derivatives_calculator_approx_2D.
+            // Compare deriv_coeffs and deriv_coeffs_approx_2D.
             EXPECT_NEAR(
-                    sum_values,
-                    derivatives_calculator_approx_2D.get_function_coefficients(
+                    deriv_interface_approx,
+                    deriv_coeffs_approx_2D.get_approx_deriv(
                             get_const_field(function_1[idx_par_1]),
                             get_const_field(function_2[idx_par_2])),
                     1e-12);
@@ -543,20 +539,24 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                     = evaluator_g.deriv(idx_dr, interface_coord, get_const_field(function_g_coef));
 
             // Exact formula ---------------------------------------------------------------------
-            double const deriv_patch_1 = evaluator_g
-                                                 .deriv(idx_dr,
-                                                        interface_minus_coord,
-                                                        get_const_field(function_g_coef));
-            double const deriv_patch_2 = evaluator_g
-                                                 .deriv(idx_dr,
-                                                        interface_plus_coord,
-                                                        get_const_field(function_g_coef));
-            double const local_deriv = sum_values + coeff_deriv_patch_1 * deriv_patch_1
-                                       + coeff_deriv_patch_2 * deriv_patch_2;
+            /* The exact interface derivative is the approximated derivative + the contributions
+               of the derivatives on the other boundaries of the patches. 
+            */
+            double const deriv_bound_patch_1 = evaluator_g
+                                                       .deriv(idx_dr,
+                                                              interface_minus_coord,
+                                                              get_const_field(function_g_coef));
+            double const deriv_bound_patch_2 = evaluator_g
+                                                       .deriv(idx_dr,
+                                                              interface_plus_coord,
+                                                              get_const_field(function_g_coef));
+            double const local_deriv = deriv_interface_approx
+                                       + coeff_deriv_patch_1 * deriv_bound_patch_1
+                                       + coeff_deriv_patch_2 * deriv_bound_patch_2;
             EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
 
             // Approximation ---------------------------------------------------------------------
-            EXPECT_NEAR(sum_values, global_deriv, approximation_error_bound);
+            EXPECT_NEAR(deriv_interface_approx, global_deriv, approximation_error_bound);
         });
     };
 };
@@ -597,15 +597,15 @@ using Cases = tuple_to_types_t<tuple_cat_t<
                 SouthEdge2>>>>;
 
 
-TYPED_TEST_SUITE(SingleInterfaceDerivativesCalculatorFixture, Cases);
+TYPED_TEST_SUITE(InterfaceDerivCoeffsFixture, Cases);
 
 
 
 // Check that the local grids and the equivalent global grid match together.
-TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck)
+TYPED_TEST(InterfaceDerivCoeffsFixture, InterpolationPointsCheck)
 {
     // Get parameters of the test.
-    constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
+    constexpr ddc::SplineBuilderClosure closure = TestFixture::closure;
     using Edge1 = typename TestFixture::Edge1;
     using Edge2 = typename TestFixture::Edge2;
 
@@ -633,7 +633,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
             Patch1::IdxStep1 idx_r(Patch1::Idx1(idx) - TestFixture::idx_range_r1.front());
             Patch1::IdxStep2 idx_theta(Patch1::Idx2(idx) - TestFixture::idx_range_theta1.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+            if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         TestFixture::r1_ncells.value() + 1 - idx_r.value(),
                         TestFixture::theta1_ncells.value() - 1 - idx_theta.value());
@@ -662,7 +662,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+            if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         TestFixture::eta2_ncells.value() - idx_eta.value()
                                 + TestFixture::r1_ncells.value() + 2,
@@ -690,7 +690,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+            if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         idx_eta.value() + TestFixture::r1_ncells.value() + 1,
                         idx_xi.value());
@@ -711,7 +711,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
     } else if (std ::is_same_v<Edge2, SouthEdge2>) {
         // Orientation second patch:  ↓→
         // Orientation global domain: ↑→
-        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+        if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
             Kokkos::abort("Test case not implemented."
                           "We cannot make the Edge1 on Theta with N points to match with the "
                           "Edge2 on R with N+1 points.");
@@ -739,12 +739,10 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
 
 
 // Check the values of the computed interface derivatives.
-TYPED_TEST(
-        SingleInterfaceDerivativesCalculatorFixture,
-        InterfaceDerivativesExactAndApproximationFormulae)
+TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximationFormulae)
 {
     // Get parameters of the test.
-    constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
+    constexpr ddc::SplineBuilderClosure closure = TestFixture::closure;
     using Edge1 = typename TestFixture::Edge1;
     using Edge2 = typename TestFixture::Edge2;
     using Interface_1_2 = typename TestFixture::Interface_1_2;
@@ -824,14 +822,14 @@ TYPED_TEST(
 
 
     // Build an equivalent global spline =========================================================
-    SplineRThetagBuilder<Interpolation_v> builder_g(TestFixture::idx_range_rtheta_g);
+    SplineRThetagBuilder<closure> builder_g(TestFixture::idx_range_rtheta_g);
 
     host_t<DFieldMem<IdxRange<BSplinesRg, BSplinesThetag>>> function_g_coef_alloc(
             builder_g.batched_spline_domain(TestFixture::idx_range_rtheta_g));
     host_t<DField<IdxRange<BSplinesRg, BSplinesThetag>>> function_g_coef
             = get_field(function_g_coef_alloc);
 
-    if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+    if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
         // --- Spline builder
         builder_g(function_g_coef, get_const_field(function_g));
     } else {
@@ -867,17 +865,17 @@ TYPED_TEST(
                 std::optional(get_const_field(derivs_rgmax)));
     }
 
-    ddc::ConstantExtrapolationRule<Rg, Thetag> bc_rmin_g(TestFixture::rg_min);
-    ddc::ConstantExtrapolationRule<Rg, Thetag> bc_rmax_g(TestFixture::rg_max);
+    ddc::ConstantExtrapolationRule<Rg> bc_rmin_g(TestFixture::rg_min);
+    ddc::ConstantExtrapolationRule<Rg> bc_rmax_g(TestFixture::rg_max);
     ddc::PeriodicExtrapolationRule<Thetag> bc_theta_g;
     SplineRThetagEvaluator evaluator_g(bc_rmin_g, bc_rmax_g, bc_theta_g, bc_theta_g);
 
 
     // Check the local derivatives with the global ones at the interfaces ========================
-    if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
+    if constexpr (closure == ddc::SplineBuilderClosure::GREVILLE) {
         // We test if the boundaries are well treated => only work with 5 cells to better identify an error.
         // 5 cells -------------------------------------------------------------------------------
-        SingleInterfaceDerivativesCalculator<Interface_1_2> const derivatives_calculator(
+        InterfaceDerivCoeffs<Interface_1_2> const deriv_coeffs(
                 TestFixture::idx_range_rtheta1,
                 TestFixture::idx_range_etaxi2,
                 ddc::SplineBuilderClosure::GREVILLE,
@@ -899,8 +897,8 @@ TYPED_TEST(
                         double(TestFixture::theta1_max - ddc::coordinate(idx2_1)));
             }
 
-            // Coefficient c.
-            double const sum_values = derivatives_calculator.get_function_coefficients(
+            // Coefficient c (or the approximation of the interface derivative).
+            double const deriv_interface_approx = deriv_coeffs.get_approx_deriv(
                     get_const_field(function_2[idx2_2]),
                     get_const_field(function_1[idx2_1]));
 
@@ -910,7 +908,7 @@ TYPED_TEST(
                                                        get_const_field(function_g_coef));
 
             // Exact formula ---------------------------------------------------------------------
-            double const local_deriv = sum_values;
+            double const local_deriv = deriv_interface_approx;
             EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
         });
     } else {
@@ -964,4 +962,137 @@ TYPED_TEST(
                 function_g_coef,
                 idx_convertor_12);
     }
+}
+
+
+// Check get_approx_cross_deriv().
+TYPED_TEST(InterfaceDerivCoeffsFixture, GetAppoxCrossDeriv)
+{
+    // Get parameters of the test.
+    constexpr ddc::SplineBuilderClosure closure = TestFixture::closure;
+    using Edge1 = typename TestFixture::Edge1;
+    using Edge2 = typename TestFixture::Edge2;
+    using Interface_1_2 = typename TestFixture::Interface_1_2;
+
+    // Define EdgeTransformation operator.
+    using GridPar2 = std::conditional_t<
+            (std::is_same_v<Edge2, SouthEdge2>),
+            typename Patch2::Grid1,
+            typename Patch2::Grid2>;
+    IdxRange<GridPar2> idx_range_par2;
+    if constexpr (std::is_same_v<Edge2, SouthEdge2>) {
+        idx_range_par2 = TestFixture::idx_range_eta2;
+    } else {
+        idx_range_par2 = TestFixture::idx_range_xi2;
+    }
+
+    EdgeTransformation<Interface_1_2>
+            idx_convertor_12(TestFixture::idx_range_theta1, idx_range_par2);
+
+    // Initialise functions values ===============================================================
+    // --- patch 1
+    host_t<DFieldMem<Patch1::IdxRange12>> deriv_theta_1_alloc(TestFixture::idx_range_rtheta1);
+    host_t<DField<Patch1::IdxRange12>> deriv_theta_1 = get_field(deriv_theta_1_alloc);
+
+    // --- patch 2
+    host_t<DFieldMem<Patch2::IdxRange12>> deriv_theta_2_alloc(TestFixture::idx_range_etaxi2);
+    host_t<DField<Patch2::IdxRange12>> deriv_theta_2 = get_field(deriv_theta_2_alloc);
+
+    host_t<DFieldMem<Patch2::IdxRange12>> deriv_theta_2_changed_sign_alloc(
+            TestFixture::idx_range_etaxi2);
+    host_t<DField<Patch2::IdxRange12>> deriv_theta_2_changed_sign
+            = get_field(deriv_theta_2_changed_sign_alloc);
+
+    // Fill in with the correct value.
+    // --- patch 1
+    if constexpr (std::is_same_v<Edge1, EastEdge1>) {
+        // Same orientation than the equivalent global domain.
+        initialise_2D_function<Patch1::Grid1, Patch1::Grid2>(deriv_theta_1);
+    } else {
+        // Different orientation: global: ↑→ | local: ←↓
+        ddc::host_for_each(
+                get_idx_range(deriv_theta_1),
+                [&](Idx<Patch1::Grid1, Patch1::Grid2> idx) {
+                    // Get the coordinate on the equivalent global domain.
+                    double const rg
+                            = TestFixture::r1_max - ddc::coordinate(Idx<Patch1::Grid1>(idx));
+                    double const thetag
+                            = TestFixture::theta1_max - ddc::coordinate(Idx<Patch1::Grid2>(idx));
+                    deriv_theta_1(idx) = -rg * (3. - rg) * Kokkos::sin(thetag);
+                });
+    }
+
+    // --- patch 2
+    if constexpr (std::is_same_v<Edge2, WestEdge2>) {
+        // Same orientation than the equivalent global domain.
+        initialise_2D_function<Patch2::Grid1, Patch2::Grid2>(deriv_theta_2);
+    } else if (std::is_same_v<Edge2, EastEdge2>) {
+        // Different orientation: global: ↑→ | local: ←↓
+        ddc::host_for_each(
+                get_idx_range(deriv_theta_2),
+                [&](Idx<Patch2::Grid1, Patch2::Grid2> idx) {
+                    // Get the coordinate on the equivalent global domain.
+                    double const rg = TestFixture::eta2_max
+                                      - ddc::coordinate(Idx<Patch2::Grid1>(idx))
+                                      + TestFixture::r1_max;
+                    double const thetag
+                            = TestFixture::xi2_max - ddc::coordinate(Idx<Patch2::Grid2>(idx));
+                    deriv_theta_2(idx) = -rg * (3. - rg) * Kokkos::sin(thetag);
+                });
+    } else if (std::is_same_v<Edge2, SouthEdge2>) {
+        // Different orientation: global: ↑→ | local: ↓→
+        ddc::host_for_each(
+                get_idx_range(deriv_theta_2),
+                [&](Idx<Patch2::Grid1, Patch2::Grid2> idx) {
+                    // Get the coordinate on the equivalent global domain.
+                    double const rg = double(ddc::coordinate(Idx<Patch2::Grid2>(idx)))
+                                      + TestFixture::r1_max;
+                    double const thetag = double(
+                            (TestFixture::eta2_max - ddc::coordinate(Idx<Patch2::Grid1>(idx))));
+                    deriv_theta_2(idx) = -rg * (3. - rg) * Kokkos::sin(thetag);
+                });
+    }
+
+    ddc::host_for_each(get_idx_range(deriv_theta_2), [&](Patch2::Idx12 idx) {
+        deriv_theta_2_changed_sign(idx) = -deriv_theta_2(idx);
+    });
+
+    // Check get_approx_cross_deriv() ============================================================
+    InterfaceDerivCoeffs<Interface_1_2> const deriv_coeffs(
+            TestFixture::idx_range_rtheta1,
+            TestFixture::idx_range_etaxi2,
+            closure,
+            closure);
+
+    constexpr bool has_matching_deriv_orientation = Interface_1_2::orientations_agree;
+
+    ddc::host_for_each(TestFixture::idx_range_theta1, [&](Patch1::Idx2 const& idx2_1) {
+        Idx<GridPar2> idx2_2 = idx_convertor_12(idx2_1);
+
+        double const cross_deriv_interface_approx = deriv_coeffs.get_approx_cross_deriv(
+                get_const_field(deriv_theta_1[idx2_1]),
+                get_const_field(deriv_theta_2[idx2_2]));
+
+        double const cross_deriv_interface_approx_21 = deriv_coeffs.get_approx_cross_deriv(
+                get_const_field(deriv_theta_2[idx2_2]),
+                get_const_field(deriv_theta_1[idx2_1]));
+
+        // Check that the input order does not affect the result.
+        EXPECT_NEAR(cross_deriv_interface_approx, cross_deriv_interface_approx_21, 1e-15);
+
+        // Cross-derivatives computed with get_approx_deriv().
+        double deriv_interface_approx;
+        if constexpr (has_matching_deriv_orientation) {
+            deriv_interface_approx = deriv_coeffs.get_approx_deriv(
+                    get_const_field(deriv_theta_1[idx2_1]),
+                    get_const_field(deriv_theta_2[idx2_2]));
+        } else {
+            deriv_interface_approx = deriv_coeffs.get_approx_deriv(
+                    get_const_field(deriv_theta_1[idx2_1]),
+                    get_const_field(deriv_theta_2_changed_sign[idx2_2]));
+        }
+
+        // Check that get_approx_cross_deriv() agrees with get_approx_deriv() when the correct sign is given.
+        EXPECT_NEAR(cross_deriv_interface_approx, deriv_interface_approx, 1e-15);
+    });
 }

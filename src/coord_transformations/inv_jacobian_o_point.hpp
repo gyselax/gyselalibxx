@@ -210,9 +210,9 @@ private:
             CartesianToCircular<Xpc, Ypc, R, Theta>,
             Coord<R, Theta>>;
 
-    using IdxRangeR = typename SplineEvaluator::evaluation_domain_type1;
-    using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
-    using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
+    using IdxRangeR = typename SplineEvaluator::template evaluation_domain_type<0>;
+    using IdxRangeTheta = typename SplineEvaluator::template evaluation_domain_type<1>;
+    using IdxRangeRTheta = typename SplineEvaluator::template evaluation_domain_type<0, 1>;
     using IdxR = typename IdxRangeR::discrete_element_type;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 

@@ -155,7 +155,7 @@ public:
     void deepcopy(FieldSrc const& src)
     {
         ((ddc::parallel_deepcopy(
-                 m_values[ddc::type_seq_rank_v<DDims, NDTypeTag>].span_view(),
+                 get_field(m_values[ddc::type_seq_rank_v<DDims, NDTypeTag>]),
                  ddcHelper::get<DDims>(src))),
          ...);
     }

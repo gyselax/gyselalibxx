@@ -11,7 +11,6 @@
 #include "ddc_helper.hpp"
 #include "edge.hpp"
 #include "edge_transformation.hpp"
-#include "idx_range_slice.hpp"
 
 /** 
  * @brief Store the conforming indexes of each patch of a given interface. 
