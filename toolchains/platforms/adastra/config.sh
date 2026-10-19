@@ -7,16 +7,18 @@ then
     exit 1
 fi
 
-module purge
+# `module` may be missing in non-interactive shells (e.g. under srun)
+if command -v module >/dev/null 2>&1; then module purge; fi
 
 export GYSELA_SPACK_GROUP="${PROJECT}"
 export GYSELA_SPACK_JOBS=96
-export GYSELA_SPACK_VERSION="1.2.2"
+GYSELA_SPACK_VERSION="$(tr -d '[:space:]' < "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/../../spack-version.txt")"
+export GYSELA_SPACK_VERSION
 export GYSELA_SPACK_PREFIX=${ALL_CCFRSCRATCH}/gysela-spack-${GYSELA_SPACK_VERSION}
 
 export PYTHONPYCACHEPREFIX="${ALL_CCFRSCRATCH}/pycache"
 export SPACK_DISABLE_LOCAL_CONFIG=true
 
 if [ -f "${GYSELA_SPACK_PREFIX}/share/spack/setup-env.sh" ]; then
-    . ${GYSELA_SPACK_PREFIX}/share/spack/setup-env.sh
+    . "${GYSELA_SPACK_PREFIX}"/share/spack/setup-env.sh
 fi

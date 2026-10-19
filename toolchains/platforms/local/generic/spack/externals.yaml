@@ -1,0 +1,12 @@
+---
+# Nothing is hardcoded for a generic machine: the system compiler is detected at
+# install time (see GYSELA_DETECT_EXTERNALS in ../../config.sh).
+# Add entries here to reuse other system packages, for instance:
+#
+# packages:
+#   openmpi:
+#     buildable: false
+#     externals:
+#       - spec: openmpi@5.0.3
+#         prefix: /usr
+packages: {}

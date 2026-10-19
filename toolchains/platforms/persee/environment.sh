@@ -15,11 +15,11 @@ environment_name="$1"
 
 module purge
 
-if command -v spack >/dev/null 2>&1
-then
+# Defines GYSELA_SPACK_PREFIX and loads Spack
+. "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/config.sh"
+
+if [[ -n "${SPACK_ENV:-}" ]]; then
     spack env deactivate
-else
-    . /data/gyselarunner/gysela-spack-1.2.2/share/spack/setup-env.sh
 fi
 
 spack env activate ${environment_name}
@@ -29,4 +29,5 @@ export OMP_PLACES=threads
 export OMP_NUM_THREADS=16
 
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
-export LD_LIBRARY_PATH="$(spack location --install-dir kokkos-tools)/lib64:$LD_LIBRARY_PATH"
+kokkos_tools_dir="$(spack location --install-dir kokkos-tools)"
+export LD_LIBRARY_PATH="${kokkos_tools_dir}/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
