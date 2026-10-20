@@ -48,6 +48,34 @@ static constexpr bool is_result_to_arg_v
 template <class OutVectorSpace, class InVectorSpace>
 static constexpr bool are_contravariant_v = is_contravariant_vector_index_set_v<InVectorSpace>
                                             && is_contravariant_vector_index_set_v<OutVectorSpace>;
+
+/// The type of the coordinate at which a mapping or a metric tensor is evaluated.
+template <class MappingOrMetric>
+struct EvaluationCoord;
+
+/// The type of the coordinate at which a metric tensor is evaluated.
+template <concepts::MetricTensor MetricTensorType>
+struct EvaluationCoord<MetricTensorType>
+{
+    /// The type of the coordinate.
+    using type = typename MetricTensorType::CoordArg;
+};
+
+/// The type of the coordinate at which the Jacobian of a mapping is evaluated.
+template <concepts::Mapping Mapping>
+requires requires
+{
+    typename Mapping::CoordJacobian;
+}
+struct EvaluationCoord<Mapping>
+{
+    /// The type of the coordinate.
+    using type = typename Mapping::CoordJacobian;
+};
+
+/// The type of the coordinate at which a mapping or a metric tensor is evaluated.
+template <class MappingOrMetric>
+using evaluation_coord_t = typename EvaluationCoord<MappingOrMetric>::type;
 } // namespace vector_mapper_detail
 
 /**
@@ -270,9 +298,9 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
  * @param[in] vector_field_out The vector field where the vectors on the new vector
  *              space should be saved.
- * @param[in] mapping A mapping describing the relation between the 2 vector
- *              spaces. Changes of variance (covariant <-> contravariant) are
- *              not supported.
+ * @param[in] mapping_or_metric A mapping describing the relation between the 2
+ *              vector spaces if the coordinate system changes, or a metric tensor
+ *              if the variance (covariant <-> contravariant) changes.
  * @param[in] vector_field The vector field to be mapped to the new vector space.
  *
  * @returns A VectorField or VectorFieldMem containing the vectors in the
@@ -281,7 +309,7 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
 template <
         class OutVectorSpace,
         class ExecSpace,
-        class Mapping,
+        class MappingOrMetric,
         class ElementType,
         class IdxRangeType,
         class InVectorSpace,
@@ -294,7 +322,7 @@ void copy_to_vector_space(
                 OutVectorSpace,
                 typename ExecSpace::memory_space,
                 LayoutStridedPolicy> vector_field_out,
-        Mapping mapping,
+        MappingOrMetric mapping_or_metric,
         VectorConstField<
                 ElementType,
                 IdxRangeType,
@@ -303,20 +331,21 @@ void copy_to_vector_space(
                 LayoutStridedPolicy> vector_field)
 {
     using IdxType = typename IdxRangeType::discrete_element_type;
-    using CoordType = typename Mapping::CoordJacobian;
-    using IdxJacobianType = find_idx_t<CoordType, IdxRangeType>;
+    using CoordType = vector_mapper_detail::evaluation_coord_t<MappingOrMetric>;
+    using IdxCoordType = find_idx_t<CoordType, IdxRangeType>;
     const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
             location.function_name(),
             exec_space,
             get_idx_range(vector_field),
             KOKKOS_LAMBDA(IdxType idx) {
-                IdxJacobianType coord_idx(idx);
+                IdxCoordType coord_idx(idx);
                 CoordType coord = ddc::coordinate(coord_idx);
                 ddcHelper::assign_vector_field_element(
                         vector_field_out,
                         idx,
-                        to_vector_space<OutVectorSpace>(mapping, coord, vector_field(idx)));
+                        to_vector_space<
+                                OutVectorSpace>(mapping_or_metric, coord, vector_field(idx)));
             });
 }
 
@@ -330,9 +359,9 @@ void copy_to_vector_space(
  * @param[in] label Label to use in case a new memory allocation.
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
  * @param[in] vector_field The vector field to be mapped to the new vector space.
- * @param[in] mapping A mapping describing the relation between the 2 vector
- *              spaces. Changes of variance (covariant <-> contravariant) are
- *              not supported.
+ * @param[in] mapping_or_metric A mapping describing the relation between the 2
+ *              vector spaces if the coordinate system changes, or a metric tensor
+ *              if the variance (covariant <-> contravariant) changes.
  *
  * @tparam OutVectorSpace The vector space of the final vector.
  *
@@ -342,7 +371,7 @@ void copy_to_vector_space(
 template <
         class OutVectorSpace,
         class ExecSpace,
-        class Mapping,
+        class MappingOrMetric,
         class ElementType,
         class IdxRangeType,
         class InVectorSpace,
@@ -356,7 +385,7 @@ auto create_mirror_view_and_copy_on_vector_space(
                 InVectorSpace,
                 typename ExecSpace::memory_space,
                 LayoutStridedPolicy> vector_field,
-        Mapping mapping)
+        MappingOrMetric mapping_or_metric)
 {
     if constexpr (std::is_same_v<InVectorSpace, OutVectorSpace>) {
         return vector_field;
@@ -370,7 +399,7 @@ auto create_mirror_view_and_copy_on_vector_space(
         copy_to_vector_space(
                 exec_space,
                 get_field(vector_field_out),
-                mapping,
+                mapping_or_metric,
                 get_const_field(vector_field));
         return vector_field_out;
     }
@@ -385,9 +414,9 @@ auto create_mirror_view_and_copy_on_vector_space(
  *
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
  * @param[in] vector_field The vector field to be mapped to the new vector space.
- * @param[in] mapping A mapping describing the relation between the 2 vector
- *              spaces. Changes of variance (covariant <-> contravariant) are
- *              not supported.
+ * @param[in] mapping_or_metric A mapping describing the relation between the 2
+ *              vector spaces if the coordinate system changes, or a metric tensor
+ *              if the variance (covariant <-> contravariant) changes.
  *
  * @tparam OutVectorSpace The vector space of the final vector.
  *
@@ -397,7 +426,7 @@ auto create_mirror_view_and_copy_on_vector_space(
 template <
         class OutVectorSpace,
         class ExecSpace,
-        class Mapping,
+        class MappingOrMetric,
         class ElementType,
         class IdxRangeType,
         class InVectorSpace,
@@ -410,12 +439,12 @@ auto create_mirror_view_and_copy_on_vector_space(
                 InVectorSpace,
                 typename ExecSpace::memory_space,
                 LayoutStridedPolicy> vector_field,
-        Mapping mapping)
+        MappingOrMetric mapping_or_metric)
 {
     return create_mirror_view_and_copy_on_vector_space<
             OutVectorSpace,
             ExecSpace,
-            Mapping,
+            MappingOrMetric,
             ElementType,
             IdxRangeType,
             InVectorSpace,
@@ -423,5 +452,5 @@ auto create_mirror_view_and_copy_on_vector_space(
             "_ (create_mirror_view_and_copy_on_vector_space)",
             exec_space,
             vector_field,
-            mapping);
+            mapping_or_metric);
 }
