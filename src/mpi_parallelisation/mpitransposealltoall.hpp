@@ -52,6 +52,7 @@ private:
             = ddc::detail::convert_type_seq_to_discrete_domain_t<layout_2_mpi_dims>;
 
 private:
+    using IMPITranspose<Layout1, Layout2>::m_comm;
     int m_comm_size;
     Layout1 m_layout_1;
     Layout2 m_layout_2;
@@ -150,7 +151,7 @@ public:
      */
     MPI_Comm communicator() const
     {
-        return IMPITranspose<Layout1, Layout2>::m_comm;
+        return m_comm;
     }
 
     /**
@@ -416,7 +417,7 @@ private:
                     recv_field.data_handle(),
                     recv_field.size() / m_comm_size,
                     MPI_type_descriptor_t<ElementType>,
-                    IMPITranspose<Layout1, Layout2>::m_comm);
+                    m_comm);
         } else {
             // Some ranks are inactive, so MPI_Alltoallv must be used
             int const send_block = send_field.size() / n_send_ranks;
@@ -442,7 +443,7 @@ private:
                     recv_counts.data(),
                     recv_displs.data(),
                     MPI_type_descriptor_t<ElementType>,
-                    IMPITranspose<Layout1, Layout2>::m_comm);
+                    m_comm);
         }
     }
 
