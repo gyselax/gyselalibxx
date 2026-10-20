@@ -31,6 +31,7 @@ struct IdxPlaceholder;
 template <class... Dims>
 struct IdxPlaceholder<Coord<Dims...>>
 {
+    /// The type of the placeholder
     using type = Idx<PlaceholderGrid<Dims>...>;
 };
 
