@@ -223,7 +223,7 @@ There are two kinds of change:
   $J$ denotes its Jacobian matrix.
 
 | Case | Takes | Computation |
-|---|---|---|
+| --- | --- | --- |
 | Same vector space | Mapping or metric tensor | $v$ is returned unchanged |
 | Contravariant → covariant, same coordinate system | Metric tensor | $G v$ |
 | Covariant → contravariant, same coordinate system | Metric tensor | $G^{-1} v$ |
