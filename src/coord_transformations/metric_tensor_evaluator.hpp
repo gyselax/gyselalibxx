@@ -23,9 +23,11 @@ struct PlaceholderGrid
     using continuous_dimension_type = Dim;
 };
 
+/// A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate.
 template <class CoordType>
 struct IdxPlaceholder;
 
+/// A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate.
 template <class... Dims>
 struct IdxPlaceholder<Coord<Dims...>>
 {
