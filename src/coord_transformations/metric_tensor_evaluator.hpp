@@ -22,6 +22,18 @@ struct PlaceholderGrid
     /// The continuous dimension on which the grid is defined.
     using continuous_dimension_type = Dim;
 };
+
+template <class CoordType>
+struct PlaceholderIdx;
+
+template <class... Dims>
+struct PlaceholderIdx<Coord<Dims...>>
+{
+    using type = Idx<PlaceholderGrid<Dims>...>;
+};
+
+template <class CoordType>
+using placeholder_idx_t = typename PlaceholderIdx<CoordType>::type;
 } // namespace metric_tensor_detail
 
 namespace concepts {
@@ -48,7 +60,7 @@ concept MetricTensor = requires
         is_tensor_type_v<typename T::CovariantVectorType>&& requires(
                 T const& t,
                 typename T::CoordArg const& x,
-                Idx<metric_tensor_detail::PlaceholderGrid<typename T::CoordArg>> const& idx)
+                metric_tensor_detail::placeholder_idx_t<typename T::CoordArg> const& idx)
 {
     {
         t(x)
