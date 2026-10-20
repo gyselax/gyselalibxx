@@ -53,6 +53,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The template parameter of `Gradient` must now satisfy `concepts::MetricTensor`.
 - `to_vector_space` now takes a metric tensor instead of a mapping to change the variance (covariant <-> contravariant) of a vector.
 - `to_vector_space` no longer supports changing both the coordinate system and the variance in a single call.
+- The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.
+- The constructor of `PolarSplineFEMPoissonLikeAssembler` now takes the metric tensor as an argument and `PolarSplineFEMPoissonLikeAssembler::operator()` no longer takes the mapping. The type of the metric tensor is an additional template parameter.
+- The constructor of `AdvectionFieldFinder` now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.
 
 ### Deprecated
 

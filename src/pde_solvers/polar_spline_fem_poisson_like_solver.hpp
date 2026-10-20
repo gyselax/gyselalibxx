@@ -32,6 +32,7 @@
  *          concepts::Interpolation.
  * @tparam Mapping The type of the mapping from the logical domain to the physical domain where
  *          the equation is defined.
+ * @tparam MetricTensorType The type of the metric tensor associated with the mapping.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
 template <
@@ -40,6 +41,7 @@ template <
         class PolarBSplinesRTheta,
         concepts::Interpolation Interpolation2D,
         class Mapping,
+        concepts::MetricTensor MetricTensorType,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
     : public IPolarPoissonLikeSolver<
@@ -186,6 +188,7 @@ private:
             PolarBSplinesRTheta,
             QDimRMesh,
             QDimThetaMesh,
+            MetricTensorType,
             IdxRangeFull>;
 
     using PolarSplineEval = PolarSplineEvaluator<
@@ -253,7 +256,6 @@ private:
     IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
-    Mapping m_mapping;
     BuilderType const& m_builder;
     EvaluatorType const& m_evaluator;
 
@@ -283,6 +285,8 @@ public:
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping.
      * @param[in] interpolation
      *      An interpolation builder and evaluator to build coefficients allowing a function to be
      *      evaluated anywhere on the (r,theta) domain.
@@ -307,6 +311,7 @@ public:
      */
     PolarSplineFEMPoissonLikeSolver(
             Mapping const& mapping,
+            MetricTensorType const& metric_tensor,
             Interpolation2D const& interpolation,
             IdxRangeFull idx_range_full,
             std::optional<int> max_iter = std::nullopt,
@@ -335,7 +340,6 @@ public:
                           IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
                   m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
-        , m_mapping(mapping)
         , m_builder(interpolation.get_builder())
         , m_evaluator(interpolation.get_evaluator())
         , m_idx_range_batch(idx_range_full)
@@ -359,7 +363,7 @@ public:
                                           ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                                           - ddc::discrete_space<BSplinesTheta>().nbasis()))))
         , m_int_volume_alloc(calculate_int_volume(mapping))
-        , m_assembler(get_field(m_int_volume_alloc), idx_range_full)
+        , m_assembler(get_field(m_int_volume_alloc), metric_tensor, idx_range_full)
     {
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
@@ -397,7 +401,7 @@ public:
                 alpha_func(m_evaluator, get_const_field(coeff_alpha_alloc));
         CoeffEvaluator<EvaluatorType, ConstFieldBatchedCoeffsSpline2D>
                 beta_func(m_evaluator, get_const_field(coeff_beta_alloc));
-        m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
+        m_assembler(m_gko_matrix, alpha_func, beta_func);
     }
 
     /**
