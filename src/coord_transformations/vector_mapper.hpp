@@ -368,10 +368,8 @@ void copy_to_vector_space(
                     ddcHelper::assign_vector_field_element(
                             vector_field_out,
                             idx,
-                            to_vector_space<OutVectorSpace>(
-                                    mapping_or_metric,
-                                    coord,
-                                    vector_field(idx)));
+                            to_vector_space<
+                                    OutVectorSpace>(mapping_or_metric, coord, vector_field(idx)));
                 }
             });
 }

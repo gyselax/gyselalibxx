@@ -98,8 +98,7 @@ void compute_and_test_Lie_Poisson_Bracket()
                 const double B_theta = 0.1;
                 const double B_phi = 0.9;
                 DVector<Rho_cov, Theta_cov, Phi_cov> B_cov(0.0, B_theta, B_phi);
-                DTensor<BasisSpatial, BasisSpatial> metric_tensor
-                        = get_metric_tensor.inverse(idx);
+                DTensor<BasisSpatial, BasisSpatial> metric_tensor = get_metric_tensor.inverse(idx);
                 DVector<Rho, Theta, Phi> B_cont
                         = tensor_mul(index<'i', 'j'>(metric_tensor), index<'j'>(B_cov));
                 ddcHelper::assign_vector_field_element(B, idx, B_cont);
