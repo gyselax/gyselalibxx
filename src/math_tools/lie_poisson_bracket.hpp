@@ -24,27 +24,39 @@
  *                  the argument type of the 3D mapping but axi-symmetry may make it
  *                  useful to evaluate the mapping on a coordinate with a reduced
  *                  dimensionality.
+ * @tparam MetricTensorType A type which provides the metric tensor at a coordinate
+ *                  of type MappingCoord. By default it is calculated from the
+ *                  Jacobian of the mapping using a MetricTensorEvaluator.
  */
-template <concepts::Mapping Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
+template <
+        concepts::Mapping Mapping3D,
+        class MappingCoord = typename Mapping3D::CoordArg,
+        concepts::MetricTensor MetricTensorType = MetricTensorEvaluator<Mapping3D, MappingCoord>>
 class LiePoissonBracket
 {
+    static_assert(
+            std::is_same_v<typename MetricTensorType::CoordArg, MappingCoord>,
+            "The metric tensor must be evaluated on the same coordinate as the mapping.");
+
     using BasisSpatial = ddc::to_type_seq_t<typename Mapping3D::CoordArg>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
 
 private:
     Mapping3D m_mapping;
-    MetricTensorEvaluator<Mapping3D, MappingCoord> m_metric_tensor;
-    Gradient<MetricTensorEvaluator<Mapping3D, MappingCoord>> m_grad;
+    MetricTensorType m_metric_tensor;
+    Gradient<MetricTensorType> m_grad;
 
 public:
     /**
      * @brief Build a LiePoissonBracket operator.
      * @param mapping The mapping describing the system of coordinates on which the
      *              expression is calculated.
+     * @param metric_tensor An object which provides the metric tensor associated
+     *              with the mapping.
      */
-    explicit LiePoissonBracket(Mapping3D const& mapping)
+    LiePoissonBracket(Mapping3D const& mapping, MetricTensorType const& metric_tensor)
         : m_mapping(mapping)
-        , m_metric_tensor(mapping)
+        , m_metric_tensor(metric_tensor)
         , m_grad(m_metric_tensor)
     {
     }
@@ -138,6 +150,7 @@ public:
             DVectorConstField<IdxRange, BasisSpatial, MemorySpace> const B)
     {
         static_assert(is_accessible_v<ExecSpace, Mapping3D>);
+        static_assert(is_accessible_v<ExecSpace, MetricTensorType>);
         static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
         using IdxType = typename IdxRange::discrete_element_type;
         const std::source_location location = std::source_location::current();
@@ -154,3 +167,8 @@ public:
                 });
     }
 };
+
+/// Deduce the coordinate type from the metric tensor when one is provided.
+template <concepts::Mapping Mapping3D, concepts::MetricTensor MetricTensorType>
+LiePoissonBracket(Mapping3D const&, MetricTensorType const&)
+        -> LiePoissonBracket<Mapping3D, typename MetricTensorType::CoordArg, MetricTensorType>;
