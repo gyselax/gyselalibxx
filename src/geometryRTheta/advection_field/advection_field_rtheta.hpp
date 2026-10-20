@@ -493,7 +493,7 @@ private:
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_G
-                    = m_metric_tensor.inverse(coord_rtheta);
+                    = m_metric_tensor.inverse(irtheta);
             DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J
                     = m_mapping.jacobian_matrix(coord_rtheta);
             double const jacobian = m_mapping.jacobian(coord_rtheta);

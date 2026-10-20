@@ -99,7 +99,7 @@ void compute_and_test_Lie_Poisson_Bracket()
                 const double B_phi = 0.9;
                 DVector<Rho_cov, Theta_cov, Phi_cov> B_cov(0.0, B_theta, B_phi);
                 DTensor<BasisSpatial, BasisSpatial> metric_tensor
-                        = get_metric_tensor.inverse(coord);
+                        = get_metric_tensor.inverse(idx);
                 DVector<Rho, Theta, Phi> B_cont
                         = tensor_mul(index<'i', 'j'>(metric_tensor), index<'j'>(B_cov));
                 ddcHelper::assign_vector_field_element(B, idx, B_cont);
@@ -165,17 +165,17 @@ TEST(LiePoissonBracket, batched_elementwise)
     ddc::init_discrete_space<GridPhi>(
             GridPhi::init<GridPhi>(Coord<Phi>(0.0), Coord<Phi>(2 * M_PI), nphi));
 
-    Coord<Rho, Theta, Phi> coord
-            = ddc::coordinate(Idx<GridRho, GridTheta, GridPhi>(nrho - 1, 0, 0));
+    Idx<GridRho, GridTheta, GridPhi> idx(nrho - 1, 0, 0);
+    Coord<Rho, Theta, Phi> coord = ddc::coordinate(idx);
     DVector<Rho_cov, Theta_cov, Phi_cov> df(0.0, 0.0, 1.0);
     DVector<Rho_cov, Theta_cov, Phi_cov> B_cov(1.0, 1.0, 1.0);
-    DTensor<BasisSpatial, BasisSpatial> inv_G = get_metric_tensor.inverse(coord);
+    DTensor<BasisSpatial, BasisSpatial> inv_G = get_metric_tensor.inverse(idx);
     double B_norm = norm(inv_G, B_cov);
     B_cov /= B_norm;
     DVector<Rho, Theta, Phi> B = tensor_mul(index<'i', 'j'>(inv_G), index<'j'>(B_cov));
     IdentityTensor<double, BasisSpatial, CovBasisSpatial> id;
 
-    DVector<Rho, Theta, Phi> lp = calculate_poisson_bracket(df, id, B, coord);
+    DVector<Rho, Theta, Phi> lp = calculate_poisson_bracket(df, id, B, idx);
 
     double J = mapping.jacobian(coord);
 
