@@ -62,6 +62,7 @@ public:
      * @param[in] global_idx_range The global (non-distributed) index range.
      * @param[in] comm_size The number of MPI processes over which the data is distributed.
      * @param[in] rank The rank of the current MPI process.
+     * @param[in] allow_inactive_ranks Flag allowing inactive MPI ranks (deactivated by default).
      *
      * @returns The distributed index range (empty if rank >= n_active_ranks()).
      */
