@@ -26,7 +26,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="28" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMPITransposeAllToAll_1af9426bfbb72332bf45cfff384863ce21" prot="public" static="no">
         <type>typename Layout2::discrete_domain_type</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="30" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMPITransposeAllToAll_1a313e5b285bf71c5fdb45855e4ecd4573" prot="public" static="no">
         <type>typename Layout1::distributed_sub_idx_range</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="32" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMPITransposeAllToAll_1a1119f153697f8f23c1c382f70f208d4a" prot="public" static="no">
         <type>typename Layout2::distributed_sub_idx_range</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="34" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMPITransposeAllToAll_1a765f1cfc6bcfd5510121bd1d2d8636c2" prot="private" static="no">
         <type>ddcHelper::apply_template_to_type_seq_t&lt; <ref refid="structMPIDim" kindref="compound">MPIDim</ref>, typename Layout2::distributed_type_seq &gt;</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="40" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMPITransposeAllToAll_1a0a3b4290cd7ce5d35dd9fe4cc1cac039" prot="private" static="no">
         <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; layout_1_mpi_dims &gt;</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="42" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMPITransposeAllToAll_1aadda65b9866e417fcaeb5c0f14da6d7b" prot="private" static="no">
         <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; layout_2_mpi_dims &gt;</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="47" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="56" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMPITransposeAllToAll_1ac9709dad99e63b102cdee841a41b487b" prot="private" static="no" mutable="no">
         <type>Layout1</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="48" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="48" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="57" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMPITransposeAllToAll_1a7193945ce3c6779376cf53c26e766ed1" prot="private" static="no" mutable="no">
         <type>Layout2</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="49" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="49" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="58" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMPITransposeAllToAll_1a48cea34f5a1c741451e3af7e9526cd17" prot="private" static="no" mutable="no">
         <type><ref refid="classMPITransposeAllToAll_1aaaab817292b16b7950c336c245618f35" kindref="member">idx_range_type1</ref></type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="50" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="50" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="59" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMPITransposeAllToAll_1aa86f8de0d200fbf29e7f1346a3ffb7b3" prot="private" static="no" mutable="no">
         <type><ref refid="classMPITransposeAllToAll_1af9426bfbb72332bf45cfff384863ce21" kindref="member">idx_range_type2</ref></type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="51" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="51" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="60" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMPITransposeAllToAll_1abaa90f0a03357bf2b11ec6a40346a376" prot="private" static="no" mutable="no">
         <type>layout_1_mpi_idx_range_type</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="52" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="52" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="61" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMPITransposeAllToAll_1a297883c3e3f9aeef584ee968f00e2c49" prot="private" static="no" mutable="no">
         <type>layout_2_mpi_idx_range_type</type>
@@ -229,11 +229,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="53" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="62" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1ab9f7489e92aff72e16e642f20a4c386b" prot="private" static="no" mutable="no">
+        <type><ref refid="classMPITransposeAllToAll_1a313e5b285bf71c5fdb45855e4ecd4573" kindref="member">distributed_idx_range_type1</ref></type>
+        <definition>distributed_idx_range_type1 MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_nonempty_distributed_idx_range_1</definition>
+        <argsstring></argsstring>
+        <name>m_nonempty_distributed_idx_range_1</name>
+        <qualifiedname>MPITransposeAllToAll::m_nonempty_distributed_idx_range_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="64" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1a74db43f5a036b882bd2e3bdb2fe6dc03" prot="private" static="no" mutable="no">
+        <type><ref refid="classMPITransposeAllToAll_1a1119f153697f8f23c1c382f70f208d4a" kindref="member">distributed_idx_range_type2</ref></type>
+        <definition>distributed_idx_range_type2 MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_nonempty_distributed_idx_range_2</definition>
+        <argsstring></argsstring>
+        <name>m_nonempty_distributed_idx_range_2</name>
+        <qualifiedname>MPITransposeAllToAll::m_nonempty_distributed_idx_range_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="65" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classMPITransposeAllToAll_1a1c663a83e6a7b770ef8d764d877d4deb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classMPITransposeAllToAll_1aa2f90699782fe0adbc837d79864a2fcb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class IdxRange</type>
@@ -241,7 +269,7 @@
         </templateparamlist>
         <type></type>
         <definition>MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::MPITransposeAllToAll</definition>
-        <argsstring>(IdxRange global_idx_range, MPI_Comm comm)</argsstring>
+        <argsstring>(IdxRange global_idx_range, MPI_Comm comm, bool allow_inactive_ranks=false)</argsstring>
         <name>MPITransposeAllToAll</name>
         <qualifiedname>MPITransposeAllToAll::MPITransposeAllToAll</qualifiedname>
         <param>
@@ -251,6 +279,11 @@
         <param>
           <type>MPI_Comm</type>
           <declname>comm</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>allow_inactive_ranks</declname>
+          <defval>false</defval>
         </param>
         <briefdescription>
 <para>A constructor for the transpose operator. </para>
@@ -272,12 +305,20 @@
 <para>The MPI communicator. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>allow_inactive_ranks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flag allowing inactive MPI ranks (deactivated by default). </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="63" bodyend="96"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="76" bodyend="127"/>
       </memberdef>
       <memberdef kind="function" id="classMPITransposeAllToAll_1ac9c808ac3e2561eb23c62e545479d896" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -309,7 +350,42 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="106" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="106" bodyend="116"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="137" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="137" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classMPITransposeAllToAll_1a7f367b65d6959635d78f99a96ccc01c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>MPI_Comm</type>
+        <definition>MPI_Comm MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::communicator</definition>
+        <argsstring>() const</argsstring>
+        <name>communicator</name>
+        <qualifiedname>MPITransposeAllToAll::communicator</qualifiedname>
+        <briefdescription>
+<para>Getter for the MPI communicator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="152" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classMPITransposeAllToAll_1a5f81d1855f28a9cadc29e695416616c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout</type>
+          </param>
+        </templateparamlist>
+        <type>int</type>
+        <definition>int MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::n_active_ranks</definition>
+        <argsstring>() const</argsstring>
+        <name>n_active_ranks</name>
+        <qualifiedname>MPITransposeAllToAll::n_active_ranks</qualifiedname>
+        <briefdescription>
+<para>Getter for the number of active ranks in a layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="161" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="161" bodyend="168"/>
       </memberdef>
       <memberdef kind="function" id="classMPITransposeAllToAll_1aedee134078a94aab50d0b3c33fecfdc1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -380,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="137" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="137" bodyend="156"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="189" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="189" bodyend="208"/>
       </memberdef>
       <memberdef kind="function" id="classMPITransposeAllToAll_1ae6292dc81cee04163749bfa358d2bb41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -460,11 +536,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="174" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="174" bodyend="317"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="226" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="226" bodyend="382"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classMPITransposeAllToAll_1acbae6ca6c9df9442f68c9c14647d979a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classMPITransposeAllToAll_1aa3b84617da1957d015674358c4aef43e" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ElementType</type>
@@ -484,7 +560,7 @@
         </templateparamlist>
         <type>void</type>
         <definition>void MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::call_all_to_all</definition>
-        <argsstring>(ExecSpace const &amp;execution_space, Field&lt; ElementType, MPIRecvIdxRange, MemSpace &gt; recv_field, ConstField&lt; ElementType, MPISendIdxRange, MemSpace &gt; send_field) const</argsstring>
+        <argsstring>(ExecSpace const &amp;execution_space, Field&lt; ElementType, MPIRecvIdxRange, MemSpace &gt; recv_field, ConstField&lt; ElementType, MPISendIdxRange, MemSpace &gt; send_field, int n_send_ranks, int n_recv_ranks) const</argsstring>
         <name>call_all_to_all</name>
         <qualifiedname>MPITransposeAllToAll::call_all_to_all</qualifiedname>
         <param>
@@ -499,14 +575,64 @@
           <type>ConstField&lt; ElementType, MPISendIdxRange, MemSpace &gt;</type>
           <declname>send_field</declname>
         </param>
+        <param>
+          <type>int</type>
+          <declname>n_send_ranks</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_recv_ranks</declname>
+        </param>
         <briefdescription>
 <para>Function handling the MPI call. </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">execution_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The execution space (Host/Device) where the code will run. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">recv_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The chunk which will describe the data in the new layout. This data is gathered from the MPI processes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">send_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The chunk describing the data in the current layout. This data will be scattered to other MPI processes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_send_ranks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of active ranks sending data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_recv_ranks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of active ranks receiving data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="327" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="327" bodyend="341"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="402" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="402" bodyend="448"/>
       </memberdef>
       <memberdef kind="function" id="classMPITransposeAllToAll_1a6c66db7c583a27422cbd48ca477d16f3" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -535,14 +661,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="344" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="344" bodyend="353"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="451" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="451" bodyend="460"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>A class describing an operator for converting from/to different MPI layouts using AlltoAll. </para>
     </briefdescription>
     <detaileddescription>
-<para>This class implements a basic AlltoAll operator and currently only works with a basic MPIBlockLayout.</para>
+<para>This class implements a basic AlltoAll operator and currently only works with a basic <ref refid="classMPILayout" kindref="compound">MPILayout</ref>.</para>
+<para>If the optional argument allow_inactive_ranks=true is passed to the class constructor, it is possible to use more MPI processes than points in the distributed dimensions of one (or both) of the layouts. In that case, some processes are inactive (they hold no data) although they are still part of the transpose operator (it is collective) but they send/receive no data in that layout. When using this option, the caller is responsible for the proper handling of the empty fields on the inactive processes.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>Layout1</parametername>
@@ -586,9 +713,10 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="25" bodyend="354"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="32" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="33" bodyend="461"/>
     <listofallmembers>
-      <member refid="classMPITransposeAllToAll_1acbae6ca6c9df9442f68c9c14647d979a" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>call_all_to_all</name></member>
+      <member refid="classMPITransposeAllToAll_1aa3b84617da1957d015674358c4aef43e" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>call_all_to_all</name></member>
+      <member refid="classMPITransposeAllToAll_1a7f367b65d6959635d78f99a96ccc01c6" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>communicator</name></member>
       <member refid="classMPITransposeAllToAll_1a313e5b285bf71c5fdb45855e4ecd4573" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>distributed_idx_range_type1</name></member>
       <member refid="classMPITransposeAllToAll_1a1119f153697f8f23c1c382f70f208d4a" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>distributed_idx_range_type2</name></member>
       <member refid="classMPITransposeAllToAll_1a6c66db7c583a27422cbd48ca477d16f3" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>get_distribution</name></member>
@@ -608,7 +736,10 @@
       <member refid="classMPITransposeAllToAll_1a297883c3e3f9aeef584ee968f00e2c49" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_layout_2_mpi_idx_range</name></member>
       <member refid="classMPITransposeAllToAll_1a48cea34f5a1c741451e3af7e9526cd17" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_local_idx_range_1</name></member>
       <member refid="classMPITransposeAllToAll_1aa86f8de0d200fbf29e7f1346a3ffb7b3" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_local_idx_range_2</name></member>
-      <member refid="classMPITransposeAllToAll_1a1c663a83e6a7b770ef8d764d877d4deb" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>MPITransposeAllToAll</name></member>
+      <member refid="classMPITransposeAllToAll_1ab9f7489e92aff72e16e642f20a4c386b" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_nonempty_distributed_idx_range_1</name></member>
+      <member refid="classMPITransposeAllToAll_1a74db43f5a036b882bd2e3bdb2fe6dc03" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_nonempty_distributed_idx_range_2</name></member>
+      <member refid="classMPITransposeAllToAll_1aa2f90699782fe0adbc837d79864a2fcb" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>MPITransposeAllToAll</name></member>
+      <member refid="classMPITransposeAllToAll_1a5f81d1855f28a9cadc29e695416616c0" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>n_active_ranks</name></member>
       <member refid="classMPITransposeAllToAll_1aedee134078a94aab50d0b3c33fecfdc1" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>operator()</name></member>
       <member refid="classMPITransposeAllToAll_1ae6292dc81cee04163749bfa358d2bb41" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>transpose_to</name></member>
     </listofallmembers>

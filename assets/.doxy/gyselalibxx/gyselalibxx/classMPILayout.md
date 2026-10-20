@@ -95,15 +95,16 @@ See [IMPILayout](classIMPILayout.md)
 
 
 
-
-
-
-
-## Public Static Functions
+## Public Functions
 
 | Type | Name |
 | ---: | :--- |
-|  [**idx\_range\_type**](classMPILayout.md#typedef-idx_range_type) | [**distribute\_idx\_range**](#function-distribute_idx_range) ([**idx\_range\_type**](classMPILayout.md#typedef-idx_range_type) global\_idx\_range, int comm\_size, int rank) <br>_Get the distributed index range which follows the chosen layout._  |
+|  [**idx\_range\_type**](classMPILayout.md#typedef-idx_range_type) | [**distribute\_idx\_range**](#function-distribute_idx_range) ([**idx\_range\_type**](classMPILayout.md#typedef-idx_range_type) global\_idx\_range, int comm\_size, int rank, bool allow\_inactive\_ranks=false) <br>_Get the distributed index range which follows the chosen layout._  |
+|  int | [**n\_active\_ranks**](#function-n_active_ranks) () const<br>_Get the number of active MPI processes._  |
+
+
+
+
 
 
 
@@ -168,7 +169,10 @@ See [IMPILayout](classIMPILayout.md)
 This class describes the simplest way of laying out data. In this layout the data is distributed along dimensions in order until the data is distributed. It is possible that the data may not be distributed along some of the requested dimensions if such distribution is not necessary. For example if we distribute dimensions [**R**](structR.md) and [**Theta**](structTheta.md) of a ([**R**](structR.md), [**Theta**](structTheta.md), Phi, [**Vpar**](structVpar.md), [**Mu**](structMu.md)) grid of size 256 x 1024 x 256 x 64 x 8 over 64 processes, the theta dimension will not be distributed.
 
 
-The data is distributed such that it is maximally distributed over each dimension (in order) such that the size of each local index range along that dimension is the same for all processes. For example if we distribute dimensions [**X**](structX.md) and [**Y**](structY.md) of a ([**X**](structX.md), [**Y**](structY.md), Z) grid of size (10, 15, 4) over 6 processes, the [**X**](structX.md) dimension will be distributed over 2 processes and the [**Y**](structY.md) dimension will be distributed over 3 processes.
+If there are enough points in a layout, the data is distributed such that it is maximally distributed over each dimension (in order) such that the size of each local index range along that dimension is the same for all processes. If there are more MPI processes than points in the dimensions being distributed, some ranks become inactive and hold no data, while the others hold a single point in those dimensions.
+
+
+For example if we distribute dimensions [**X**](structX.md) and [**Y**](structY.md) of a ([**X**](structX.md), [**Y**](structY.md), Z) grid of size (10, 15, 4) over 6 processes, the [**X**](structX.md) dimension will be distributed over 2 processes and the [**Y**](structY.md) dimension will be distributed over 3 processes. If we now distribute the dimension Z on those same 6 processes, the first 4 MPI ranks with hold a single value of Z and the next 2 be inactive and hold no data.
 
 
 
@@ -227,7 +231,7 @@ using MPILayout< IdxRangeData, DistributedDim >::idx_range_type =  IdxRangeData;
 
 
 <hr>
-## Public Static Functions Documentation
+## Public Functions Documentation
 
 
 
@@ -236,10 +240,11 @@ using MPILayout< IdxRangeData, DistributedDim >::idx_range_type =  IdxRangeData;
 
 _Get the distributed index range which follows the chosen layout._ 
 ```C++
-static inline idx_range_type MPILayout::distribute_idx_range (
+inline idx_range_type MPILayout::distribute_idx_range (
     idx_range_type global_idx_range,
     int comm_size,
-    int rank
+    int rank,
+    bool allow_inactive_ranks=false
 ) 
 ```
 
@@ -252,13 +257,39 @@ static inline idx_range_type MPILayout::distribute_idx_range (
 
 * `global_idx_range` The global (non-distributed) index range. 
 * `comm_size` The number of MPI processes over which the data is distributed. 
-* `rank` The rank of the current MPI process.
+* `rank` The rank of the current MPI process. 
+* `allow_inactive_ranks` Flag allowing inactive MPI ranks (deactivated by default).
 
 
 
 **Returns:**
 
-The distributed index range. 
+The distributed index range (empty if rank &gt;= [**n\_active\_ranks()**](classMPILayout.md#function-n_active_ranks)). 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function n\_active\_ranks 
+
+_Get the number of active MPI processes._ 
+```C++
+inline int MPILayout::n_active_ranks () const
+```
+
+
+
+
+
+**Returns:**
+
+The number of active MPI processes. 
 
 
 

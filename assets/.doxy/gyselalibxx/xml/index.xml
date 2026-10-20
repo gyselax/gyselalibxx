@@ -2417,7 +2417,10 @@
     <member refid="classMPILayout_1ad8142e0f533a266313e76614698b2ccc" kind="typedef"><name>idx_range_type</name></member>
     <member refid="classMPILayout_1ad5c0300b226356271de45722fcc7f447" kind="typedef"><name>distributed_sub_idx_range</name></member>
     <member refid="classMPILayout_1a802925fc2fae468337b971b46f769500" kind="typedef"><name>distributed_type_seq</name></member>
-    <member refid="classMPILayout_1a455677e1ae24aca58a4be965bd1f397e" kind="function"><name>distribute_idx_range</name></member>
+    <member refid="classMPILayout_1ad9d0771a4f9f867c2ea489e78127c2ab" kind="variable"><name>m_n_active_ranks</name></member>
+    <member refid="classMPILayout_1a490e7b34a5f8e1d9b9ea3b0212198d6b" kind="function"><name>distribute_idx_range</name></member>
+    <member refid="classMPILayout_1aee975fdb16d70c6a56d338a06bb0f874" kind="function"><name>n_active_ranks</name></member>
+    <member refid="classMPILayout_1a7cfebf550758b8e9183b0831b28b49ae" kind="function"><name>empty_local_idx_range</name></member>
     <member refid="classMPILayout_1ab32c4d3ad1b3e2475033c0d08bb014e6" kind="function"><name>internal_distribute_idx_range</name></member>
     <member refid="classMPILayout_1afc8ae4453ec8db31580d3a6bf4974fa1" kind="function"><name>internal_distribute_idx_range</name></member>
   </compound>
@@ -2455,11 +2458,15 @@
     <member refid="classMPITransposeAllToAll_1aa86f8de0d200fbf29e7f1346a3ffb7b3" kind="variable"><name>m_local_idx_range_2</name></member>
     <member refid="classMPITransposeAllToAll_1abaa90f0a03357bf2b11ec6a40346a376" kind="variable"><name>m_layout_1_mpi_idx_range</name></member>
     <member refid="classMPITransposeAllToAll_1a297883c3e3f9aeef584ee968f00e2c49" kind="variable"><name>m_layout_2_mpi_idx_range</name></member>
-    <member refid="classMPITransposeAllToAll_1a1c663a83e6a7b770ef8d764d877d4deb" kind="function"><name>MPITransposeAllToAll</name></member>
+    <member refid="classMPITransposeAllToAll_1ab9f7489e92aff72e16e642f20a4c386b" kind="variable"><name>m_nonempty_distributed_idx_range_1</name></member>
+    <member refid="classMPITransposeAllToAll_1a74db43f5a036b882bd2e3bdb2fe6dc03" kind="variable"><name>m_nonempty_distributed_idx_range_2</name></member>
+    <member refid="classMPITransposeAllToAll_1aa2f90699782fe0adbc837d79864a2fcb" kind="function"><name>MPITransposeAllToAll</name></member>
     <member refid="classMPITransposeAllToAll_1ac9c808ac3e2561eb23c62e545479d896" kind="function"><name>get_local_idx_range</name></member>
+    <member refid="classMPITransposeAllToAll_1a7f367b65d6959635d78f99a96ccc01c6" kind="function"><name>communicator</name></member>
+    <member refid="classMPITransposeAllToAll_1a5f81d1855f28a9cadc29e695416616c0" kind="function"><name>n_active_ranks</name></member>
     <member refid="classMPITransposeAllToAll_1aedee134078a94aab50d0b3c33fecfdc1" kind="function"><name>operator()</name></member>
     <member refid="classMPITransposeAllToAll_1ae6292dc81cee04163749bfa358d2bb41" kind="function"><name>transpose_to</name></member>
-    <member refid="classMPITransposeAllToAll_1acbae6ca6c9df9442f68c9c14647d979a" kind="function"><name>call_all_to_all</name></member>
+    <member refid="classMPITransposeAllToAll_1aa3b84617da1957d015674358c4aef43e" kind="function"><name>call_all_to_all</name></member>
     <member refid="classMPITransposeAllToAll_1a6c66db7c583a27422cbd48ca477d16f3" kind="function"><name>get_distribution</name></member>
   </compound>
   <compound refid="structMu" kind="struct"><name>Mu</name>
@@ -4005,6 +4012,12 @@
   </compound>
   <compound refid="vortex__merger__initialisation_8hpp" kind="file"><name>vortex_merger_initialisation.hpp</name>
   </compound>
+  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
   <compound refid="poisson__like__rhs__function_8hpp" kind="file"><name>poisson_like_rhs_function.hpp</name>
   </compound>
   <compound refid="bsl__predcorr_8hpp" kind="file"><name>bsl_predcorr.hpp</name>
@@ -4012,6 +4025,12 @@
   <compound refid="bsl__predcorr__second__order__explicit_8hpp" kind="file"><name>bsl_predcorr_second_order_explicit.hpp</name>
   </compound>
   <compound refid="bsl__predcorr__second__order__implicit_8hpp" kind="file"><name>bsl_predcorr_second_order_implicit.hpp</name>
+  </compound>
+  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="collision__configuration_8hpp" kind="file"><name>collision_configuration.hpp</name>
   </compound>
@@ -4367,12 +4386,6 @@
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
   </compound>
-  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
   <compound refid="mpichargedensitycalculator_8cpp" kind="file"><name>mpichargedensitycalculator.cpp</name>
   </compound>
   <compound refid="mpichargedensitycalculator_8hpp" kind="file"><name>mpichargedensitycalculator.hpp</name>
@@ -4392,12 +4405,6 @@
   <compound refid="geometryXVx_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="geometryXVx_2time__integration_2predcorr_8cpp" kind="file"><name>predcorr.cpp</name>
   </compound>

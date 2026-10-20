@@ -10,6 +10,7 @@
 
 
 
+* `#include <algorithm>`
 * `#include <numeric>`
 * `#include <sstream>`
 * `#include <ddc/ddc.hpp>`

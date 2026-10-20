@@ -644,7 +644,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="public-static-functions">Public Static Functions</h2>
+<h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
 <tr>
@@ -655,7 +655,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"><a href="classMPILayout.html#typedef-idx_range_type"><strong>idx_range_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-distribute_idx_range"><strong>distribute_idx_range</strong></a> (<a href="classMPILayout.html#typedef-idx_range_type"><strong>idx_range_type</strong></a> global_idx_range, int comm_size, int rank) <br><em>Get the distributed index range which follows the chosen layout.</em></td>
+<td style="text-align: left;"><a href="#function-distribute_idx_range"><strong>distribute_idx_range</strong></a> (<a href="classMPILayout.html#typedef-idx_range_type"><strong>idx_range_type</strong></a> global_idx_range, int comm_size, int rank, bool allow_inactive_ranks=false) <br><em>Get the distributed index range which follows the chosen layout.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-n_active_ranks"><strong>n_active_ranks</strong></a> () const<br><em>Get the number of active MPI processes.</em></td>
 </tr>
 </tbody>
 </table>
@@ -680,7 +684,8 @@
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>This class describes the simplest way of laying out data. In this layout the data is distributed along dimensions in order until the data is distributed. It is possible that the data may not be distributed along some of the requested dimensions if such distribution is not necessary. For example if we distribute dimensions <a href="structR.html"><strong>R</strong></a> and <a href="structTheta.html"><strong>Theta</strong></a> of a (<a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a>, Phi, <a href="structVpar.html"><strong>Vpar</strong></a>, <a href="structMu.html"><strong>Mu</strong></a>) grid of size 256 x 1024 x 256 x 64 x 8 over 64 processes, the theta dimension will not be distributed.</p>
-<p>The data is distributed such that it is maximally distributed over each dimension (in order) such that the size of each local index range along that dimension is the same for all processes. For example if we distribute dimensions <a href="structX.html"><strong>X</strong></a> and <a href="structY.html"><strong>Y</strong></a> of a (<a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a>, Z) grid of size (10, 15, 4) over 6 processes, the <a href="structX.html"><strong>X</strong></a> dimension will be distributed over 2 processes and the <a href="structY.html"><strong>Y</strong></a> dimension will be distributed over 3 processes.</p>
+<p>If there are enough points in a layout, the data is distributed such that it is maximally distributed over each dimension (in order) such that the size of each local index range along that dimension is the same for all processes. If there are more MPI processes than points in the dimensions being distributed, some ranks become inactive and hold no data, while the others hold a single point in those dimensions.</p>
+<p>For example if we distribute dimensions <a href="structX.html"><strong>X</strong></a> and <a href="structY.html"><strong>Y</strong></a> of a (<a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a>, Z) grid of size (10, 15, 4) over 6 processes, the <a href="structX.html"><strong>X</strong></a> dimension will be distributed over 2 processes and the <a href="structY.html"><strong>Y</strong></a> dimension will be distributed over 3 processes. If we now distribute the dimension Z on those same 6 processes, the first 4 MPI ranks with hold a single value of Z and the next 2 be inactive and hold no data.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>IdxRangeData</code> The IdxRange on which the data is defined. </li>
@@ -704,23 +709,33 @@
 <pre><code class="language-C++">using MPILayout&lt; IdxRangeData, DistributedDim &gt;::idx_range_type =  IdxRangeData;
 </code></pre>
 <hr>
-<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-distribute_idx_range">function distribute_idx_range</h3>
 <p><em>Get the distributed index range which follows the chosen layout.</em> </p>
-<pre><code class="language-C++">static inline idx_range_type MPILayout::distribute_idx_range (
+<pre><code class="language-C++">inline idx_range_type MPILayout::distribute_idx_range (
     idx_range_type global_idx_range,
     int comm_size,
-    int rank
+    int rank,
+    bool allow_inactive_ranks=false
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>global_idx_range</code> The global (non-distributed) index range. </li>
 <li><code>comm_size</code> The number of MPI processes over which the data is distributed. </li>
-<li><code>rank</code> The rank of the current MPI process.</li>
+<li><code>rank</code> The rank of the current MPI process. </li>
+<li><code>allow_inactive_ranks</code> Flag allowing inactive MPI ranks (deactivated by default).</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The distributed index range. </p>
+<p>The distributed index range (empty if rank &gt;= <a href="classMPILayout.html#function-n_active_ranks"><strong>n_active_ranks()</strong></a>). </p>
+<hr>
+
+<h3 id="function-n_active_ranks">function n_active_ranks</h3>
+<p><em>Get the number of active MPI processes.</em> </p>
+<pre><code class="language-C++">inline int MPILayout::n_active_ranks () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The number of active MPI processes. </p>
 <hr>
 <h2 id="protected-static-functions-documentation">Protected Static Functions Documentation</h2>
 <h3 id="function-internal_distribute_idx_range-12">function internal_distribute_idx_range [1/2]</h3>

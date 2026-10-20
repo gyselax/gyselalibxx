@@ -11,6 +11,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <algorithm>
 #include <numeric>
 #include <sstream>
 
@@ -31,24 +32,58 @@ public:
     using distributed_sub_idx_range = typename base_type::distributed_sub_idx_range;
     using distributed_type_seq = typename base_type::distributed_type_seq;
 
+private:
+    int m_n_active_ranks = 0;
+
 public:
-    static idx_range_type distribute_idx_range(
+    idx_range_type distribute_idx_range(
             idx_range_type global_idx_range,
             int comm_size,
-            int rank)
+            int rank,
+            bool allow_inactive_ranks = false)
     {
         distributed_sub_idx_range distrib_idx_range(global_idx_range);
-        if (distrib_idx_range.size() % comm_size != 0) {
+        assert(!distrib_idx_range.empty());
+        // If there are more ranks than points, each active rank handles one point
+        int const n_active = std::min<int>(comm_size, distrib_idx_range.size());
+        m_n_active_ranks = n_active;
+        if (rank >= n_active) {
+            if (allow_inactive_ranks) {
+                return empty_local_idx_range(global_idx_range);
+            } else {
+                throw std::runtime_error("The number of MPI ranks is greater than the number of "
+                                         "points to distribute which is only allowed when the flag "
+                                         "allow_inactive_ranks=true is specified");
+            }
+        }
+        if (distrib_idx_range.size() % n_active != 0) {
             std::ostringstream error_msg;
             error_msg << "The provided index range cannot be split equally over the specified "
                          "number of MPI ranks ("
-                      << distrib_idx_range.extents() << " is not divisible by " << comm_size << ")";
+                      << distrib_idx_range.extents() << " is not divisible by " << n_active << ")";
             throw std::runtime_error(error_msg.str());
         }
-        return internal_distribute_idx_range(global_idx_range, comm_size, rank);
+        return internal_distribute_idx_range(global_idx_range, n_active, rank);
     }
 
+    int n_active_ranks() const
+    {
+        return m_n_active_ranks;
+    }
 
+private:
+    template <class... Grids>
+    static IdxRange<Grids...> empty_local_idx_range(IdxRange<Grids...> global_idx_range)
+    {
+        auto restrict_dim = []<class Grid1D>(IdxRange<Grid1D> global_idx_range_along_dim) {
+            if constexpr (ddc::in_tags_v<Grid1D, distributed_type_seq>) {
+                return IdxRange<Grid1D>(global_idx_range_along_dim.front(), IdxStep<Grid1D>(0));
+            } else {
+                return global_idx_range_along_dim;
+            }
+        };
+        return IdxRange<Grids...>(restrict_dim(ddc::select<Grids>(global_idx_range))...);
+    }
 
 protected:
     template <class HeadTag>

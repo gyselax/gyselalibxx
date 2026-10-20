@@ -575,6 +575,7 @@
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
 
+#include &lt;algorithm&gt;
 #include &lt;numeric&gt;
 #include &lt;sstream&gt;
 
@@ -595,24 +596,58 @@ public:
     using distributed_sub_idx_range = typename base_type::distributed_sub_idx_range;
     using distributed_type_seq = typename base_type::distributed_type_seq;
 
+private:
+    int m_n_active_ranks = 0;
+
 public:
-    static idx_range_type distribute_idx_range(
+    idx_range_type distribute_idx_range(
             idx_range_type global_idx_range,
             int comm_size,
-            int rank)
+            int rank,
+            bool allow_inactive_ranks = false)
     {
         distributed_sub_idx_range distrib_idx_range(global_idx_range);
-        if (distrib_idx_range.size() % comm_size != 0) {
+        assert(!distrib_idx_range.empty());
+        // If there are more ranks than points, each active rank handles one point
+        int const n_active = std::min&lt;int&gt;(comm_size, distrib_idx_range.size());
+        m_n_active_ranks = n_active;
+        if (rank &gt;= n_active) {
+            if (allow_inactive_ranks) {
+                return empty_local_idx_range(global_idx_range);
+            } else {
+                throw std::runtime_error("The number of MPI ranks is greater than the number of "
+                                         "points to distribute which is only allowed when the flag "
+                                         "allow_inactive_ranks=true is specified");
+            }
+        }
+        if (distrib_idx_range.size() % n_active != 0) {
             std::ostringstream error_msg;
             error_msg &lt;&lt; "The provided index range cannot be split equally over the specified "
                          "number of MPI ranks ("
-                      &lt;&lt; distrib_idx_range.extents() &lt;&lt; " is not divisible by " &lt;&lt; comm_size &lt;&lt; ")";
+                      &lt;&lt; distrib_idx_range.extents() &lt;&lt; " is not divisible by " &lt;&lt; n_active &lt;&lt; ")";
             throw std::runtime_error(error_msg.str());
         }
-        return internal_distribute_idx_range(global_idx_range, comm_size, rank);
+        return internal_distribute_idx_range(global_idx_range, n_active, rank);
     }
 
+    int n_active_ranks() const
+    {
+        return m_n_active_ranks;
+    }
 
+private:
+    template &lt;class... Grids&gt;
+    static IdxRange&lt;Grids...&gt; empty_local_idx_range(IdxRange&lt;Grids...&gt; global_idx_range)
+    {
+        auto restrict_dim = []&lt;class Grid1D&gt;(IdxRange&lt;Grid1D&gt; global_idx_range_along_dim) {
+            if constexpr (ddc::in_tags_v&lt;Grid1D, distributed_type_seq&gt;) {
+                return IdxRange&lt;Grid1D&gt;(global_idx_range_along_dim.front(), IdxStep&lt;Grid1D&gt;(0));
+            } else {
+                return global_idx_range_along_dim;
+            }
+        };
+        return IdxRange&lt;Grids...&gt;(restrict_dim(ddc::select&lt;Grids&gt;(global_idx_range))...);
+    }
 
 protected:
     template &lt;class HeadTag&gt;

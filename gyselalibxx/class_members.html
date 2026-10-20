@@ -746,6 +746,7 @@
 <li><strong>check_extrapolation</strong> (<a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>, <a href="classNDLagrangeEvaluator.html"><strong>NDLagrangeEvaluator</strong></a>)</li>
 <li><strong>coeff_grid_type</strong> (<a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>)</li>
 <li><strong>call_all_to_all</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
+<li><strong>communicator</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
 <li><strong>check_residual_norm</strong> (<a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>)</li>
 <li><strong>check_stability</strong> (<a href="classMatrixBatchTridiag.html"><strong>MatrixBatchTridiag</strong></a>)</li>
 <li><strong>c</strong> (<a href="classMatrix__Banded.html"><strong>Matrix_Banded</strong></a>)</li>
@@ -929,6 +930,7 @@
 <li><strong>evaluation_idx_range_type</strong> (<a href="structInterpolationEvaluatorTraits.html"><strong>InterpolationEvaluatorTraits</strong></a>, <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>, <a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>, <a href="classNDLagrangeEvaluator.html"><strong>NDLagrangeEvaluator</strong></a>)</li>
 <li><strong>eval</strong> (<a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>, <a href="classNDLagrangeEvaluator.html"><strong>NDLagrangeEvaluator</strong></a>, <a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
 <li><strong>eval_no_bc</strong> (<a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>, <a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>, <a href="classNDLagrangeEvaluator.html"><strong>NDLagrangeEvaluator</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>empty_local_idx_range</strong> (<a href="classMPILayout.html"><strong>MPILayout</strong></a>)</li>
 <li><strong>evaluation_discrete_dimension_type1</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
 <li><strong>evaluation_discrete_dimension_type2</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
 <li><strong>evaluation_idx_range_type1</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
@@ -1529,6 +1531,7 @@
 <li><strong>m_reference_point_on_input_dim</strong> (<a href="classLinearCoordTransform.html"><strong>LinearCoordTransform</strong></a>)</li>
 <li><strong>m_reference_point_on_output_dim</strong> (<a href="classLinearCoordTransform.html"><strong>LinearCoordTransform</strong></a>)</li>
 <li><strong>m_scaling_factor</strong> (<a href="classLinearCoordTransform.html"><strong>LinearCoordTransform</strong></a>)</li>
+<li><strong>m_n_active_ranks</strong> (<a href="classMPILayout.html"><strong>MPILayout</strong></a>)</li>
 <li><strong>MPITransposeAllToAll</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
 <li><strong>m_comm_size</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
 <li><strong>m_layout_1</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
@@ -1537,6 +1540,8 @@
 <li><strong>m_layout_2_mpi_idx_range</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
 <li><strong>m_local_idx_range_1</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
 <li><strong>m_local_idx_range_2</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
+<li><strong>m_nonempty_distributed_idx_range_1</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
+<li><strong>m_nonempty_distributed_idx_range_2</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
 <li><strong>MatchingIdxSlice</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
 <li><strong>m_conforming_idx_1</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
 <li><strong>m_conforming_idx_2</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
@@ -1682,6 +1687,7 @@
 <li><strong>negative_differentiate_equation</strong> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</strong></a>)</li>
 <li><strong>n_distributed_dimensions</strong> (<a href="classIMPILayout.html"><strong>IMPILayout</strong></a>)</li>
 <li><strong>neg_1_to_the_power</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
+<li><strong>n_active_ranks</strong> (<a href="classMPILayout.html"><strong>MPILayout</strong></a>, <a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
 <li><strong>n</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>)</li>
 <li><strong>nb</strong> (<a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>)</li>
 <li><strong>NDIdentityInterpolationBuilder</strong> (<a href="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.html"><strong>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;</strong></a>)</li>

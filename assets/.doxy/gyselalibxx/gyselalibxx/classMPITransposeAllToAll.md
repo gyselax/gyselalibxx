@@ -91,8 +91,10 @@ See [IMPITranspose](classIMPITranspose.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MPITransposeAllToAll**](#function-mpitransposealltoall) (IdxRange global\_idx\_range, MPI\_Comm comm) <br>_A constructor for the transpose operator._  |
+|   | [**MPITransposeAllToAll**](#function-mpitransposealltoall) (IdxRange global\_idx\_range, MPI\_Comm comm, bool allow\_inactive\_ranks=false) <br>_A constructor for the transpose operator._  |
+|  MPI\_Comm | [**communicator**](#function-communicator) () const<br>_Getter for the MPI communicator._  |
 |  auto | [**get\_local\_idx\_range**](#function-get_local_idx_range) () const<br>_Getter for the local index range._  |
+|  int | [**n\_active\_ranks**](#function-n_active_ranks) () const<br>_Getter for the number of active ranks in a layout._  |
 |  void | [**operator()**](#function-operator) (ExecSpace const & execution\_space, Field&lt; ElementType, IdxRangeOut, MemSpace &gt; recv\_field, ConstField&lt; ElementType, InIdxRange, MemSpace &gt; send\_field) const<br>_An operator which transposes from one layout to another._  |
 |  void | [**transpose\_to**](#function-transpose_to) (ExecSpace const & execution\_space, Field&lt; ElementType, typename OutLayout::discrete\_domain\_type, MemSpace &gt; recv\_field, ConstField&lt; ElementType, InIdxRange, MemSpace &gt; send\_field) const<br>_An operator which transposes from one layout to another._  |
 
@@ -168,7 +170,10 @@ See [IMPITranspose](classIMPITranspose.md)
 ## Detailed Description
 
 
-This class implements a basic AlltoAll operator and currently only works with a basic MPIBlockLayout.
+This class implements a basic AlltoAll operator and currently only works with a basic [**MPILayout**](classMPILayout.md).
+
+
+If the optional argument allow\_inactive\_ranks=true is passed to the class constructor, it is possible to use more MPI processes than points in the distributed dimensions of one (or both) of the layouts. In that case, some processes are inactive (they hold no data) although they are still part of the transpose operator (it is collective) but they send/receive no data in that layout. When using this option, the caller is responsible for the proper handling of the empty fields on the inactive processes.
 
 
 
@@ -253,7 +258,8 @@ _A constructor for the transpose operator._
 template<class IdxRange>
 inline MPITransposeAllToAll::MPITransposeAllToAll (
     IdxRange global_idx_range,
-    MPI_Comm comm
+    MPI_Comm comm,
+    bool allow_inactive_ranks=false
 ) 
 ```
 
@@ -266,11 +272,26 @@ inline MPITransposeAllToAll::MPITransposeAllToAll (
 
 * `global_idx_range` The global index range of the data across processes provided in either layout. 
 * `comm` The MPI communicator. 
+* `allow_inactive_ranks` Flag allowing inactive MPI ranks (deactivated by default). 
 
 
 
 
         
+
+<hr>
+
+
+
+### function communicator 
+
+_Getter for the MPI communicator._ 
+```C++
+inline MPI_Comm MPITransposeAllToAll::communicator () const
+```
+
+
+
 
 <hr>
 
@@ -304,6 +325,21 @@ The local index range in the specified MPI layout.
 
 
         
+
+<hr>
+
+
+
+### function n\_active\_ranks 
+
+_Getter for the number of active ranks in a layout._ 
+```C++
+template<class Layout>
+inline int MPITransposeAllToAll::n_active_ranks () const
+```
+
+
+
 
 <hr>
 
