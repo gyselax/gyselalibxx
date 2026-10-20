@@ -19,6 +19,7 @@ namespace metric_tensor_detail {
 template <class Dim>
 struct PlaceholderGrid
 {
+    /// The continuous dimension on which the grid is defined.
     using continuous_dimension_type = Dim;
 };
 } // namespace metric_tensor_detail

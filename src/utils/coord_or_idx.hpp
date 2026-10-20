@@ -18,7 +18,7 @@ namespace concepts {
  */
 template <class T, class CoordType>
 concept CoordOrIdx = std::is_same_v<T, CoordType> ||(
-        ddc::is_discrete_element_t<T>&& std::is_same_v<ddc::coordinate_of_t<T>, CoordType>);
+        ddc::is_discrete_element_v<T>&& std::is_same_v<ddc::coordinate_of_t<T>, CoordType>);
 } // namespace concepts
 
 namespace ddcHelper {
