@@ -212,6 +212,50 @@ TEST(MappingChange, VectorFieldChangeCopy)
     });
 }
 
+TEST(MappingChange, VectorFieldChangeCopyMetric)
+{
+    setup_coordinates();
+    const CircularToCartesian<R, Theta, X, Y> mapping;
+    MetricTensorEvaluator metric(mapping);
+
+    IdxRange<Species> idx_range_sp(Idx<Species>(0), IdxStep<Species>(3));
+    IdxRangeR idx_range_r(IdxR(1), IdxStepR(N_cells_r)); // Exclude r = 0
+    IdxRangeTheta idx_range_theta(IdxTheta(0), IdxStepTheta(N_cells_theta));
+    IdxRange<Species, GridR, GridTheta> idx_range(idx_range_sp, idx_range_r, idx_range_theta);
+
+    using PolarBasis = VectorIndexSet<R, Theta>;
+    using PolarCovBasis = VectorIndexSet<R_cov, Theta_cov>;
+
+    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, PolarBasis> contra_vector_field(
+            idx_range);
+    ddc::parallel_fill(ddcHelper::get<R>(contra_vector_field), 1.0);
+    ddc::parallel_fill(ddcHelper::get<Theta>(contra_vector_field), 1.0);
+
+    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, PolarCovBasis> cov_vector_field(
+            idx_range);
+    copy_to_vector_space<PolarCovBasis>(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(cov_vector_field),
+            metric,
+            get_const_field(contra_vector_field));
+
+    auto cov_vector_field_host = ddcHelper::create_mirror_view_and_copy(
+            Kokkos::DefaultHostExecutionSpace(),
+            get_field(cov_vector_field));
+
+    ddc::host_for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
+        CoordRTheta coord = ddc::coordinate(IdxRTheta(idx));
+        Tensor G = metric(coord);
+        double r_vec = ddcHelper::get<R_cov>(cov_vector_field_host)(idx);
+        double theta_vec = ddcHelper::get<Theta_cov>(cov_vector_field_host)(idx);
+        double expected_r_vec = ddcHelper::get<R_cov, R_cov>(G) + ddcHelper::get<R_cov, Theta_cov>(G);
+        double expected_theta_vec
+                = ddcHelper::get<Theta_cov, R_cov>(G) + ddcHelper::get<Theta_cov, Theta_cov>(G);
+        EXPECT_NEAR(r_vec, expected_r_vec, 1e-14);
+        EXPECT_NEAR(theta_vec, expected_theta_vec, 1e-14);
+    });
+}
+
 TEST(MappingChange, VectorFieldChangeCopyLayoutStrided)
 {
     setup_coordinates();
