@@ -24,16 +24,16 @@ struct PlaceholderGrid
 };
 
 template <class CoordType>
-struct PlaceholderIdx;
+struct IdxPlaceholder;
 
 template <class... Dims>
-struct PlaceholderIdx<Coord<Dims...>>
+struct IdxPlaceholder<Coord<Dims...>>
 {
     using type = Idx<PlaceholderGrid<Dims>...>;
 };
 
 template <class CoordType>
-using placeholder_idx_t = typename PlaceholderIdx<CoordType>::type;
+using placeholder_idx_t = typename IdxPlaceholder<CoordType>::type;
 } // namespace metric_tensor_detail
 
 namespace concepts {
