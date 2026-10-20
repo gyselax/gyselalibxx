@@ -234,3 +234,6 @@ There are two kinds of change:
 
 A Cartesian basis is both covariant and contravariant, so a change to or from the Cartesian space is always a change of coordinate system.
 To change both the coordinate system and the variance, call `to_vector_space` twice: once with the mapping and once with the metric tensor.
+
+The functions `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` apply the same operations to every element of a vector field.
+They also take either a mapping or a metric tensor.
