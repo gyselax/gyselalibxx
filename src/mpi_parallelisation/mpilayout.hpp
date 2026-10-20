@@ -65,7 +65,11 @@ public:
      *
      * @returns The distributed index range (empty if rank >= n_active_ranks()).
      */
-    idx_range_type distribute_idx_range(idx_range_type global_idx_range, int comm_size, int rank)
+    idx_range_type distribute_idx_range(
+            idx_range_type global_idx_range,
+            int comm_size,
+            int rank,
+            bool allow_inactive_ranks = false)
     {
         distributed_sub_idx_range distrib_idx_range(global_idx_range);
         assert(!distrib_idx_range.empty());
@@ -73,7 +77,13 @@ public:
         int const n_active = std::min<int>(comm_size, distrib_idx_range.size());
         m_n_active_ranks = n_active;
         if (rank >= n_active) {
-            return empty_local_idx_range(global_idx_range);
+            if (allow_inactive_ranks) {
+                return empty_local_idx_range(global_idx_range);
+            } else {
+                throw std::runtime_error("The number of MPI ranks is greater than the number of "
+                                         "points to distribute which is only allowed when the flag "
+                                         "allow_inactive_ranks=true is specified");
+            }
         }
         if (distrib_idx_range.size() % n_active != 0) {
             std::ostringstream error_msg;

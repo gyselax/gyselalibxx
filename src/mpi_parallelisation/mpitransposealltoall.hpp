@@ -89,17 +89,23 @@ public:
         MPI_Comm_size(comm, &m_comm_size);
         MPI_Comm_rank(comm, &rank);
         // Index range of held by this MPI rank (may be empty)
-        m_local_idx_range_1
-                = m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, rank);
-        m_local_idx_range_2
-                = m_layout_2.distribute_idx_range(global_idx_range_layout_2, m_comm_size, rank);
+        m_local_idx_range_1 = m_layout_1.distribute_idx_range(
+                global_idx_range_layout_1,
+                m_comm_size,
+                rank,
+                allow_inactive_ranks);
+        m_local_idx_range_2 = m_layout_2.distribute_idx_range(
+                global_idx_range_layout_2,
+                m_comm_size,
+                rank,
+                allow_inactive_ranks);
 
         if (!allow_inactive_ranks
             && (m_layout_1.n_active_ranks() < m_comm_size
                 || m_layout_2.n_active_ranks() < m_comm_size)) {
-            throw std::runtime_error("The number of MPI ranks is greater than the number that "
-                                     "would be used when maximumly distributing the data which "
-                                     "is only allowed when allow_inactive_ranks=true");
+            throw std::runtime_error("The number of MPI ranks is greater than the number of "
+                                     "points to distribute which is only allowed when the flag "
+                                     "allow_inactive_ranks=true is specified");
         }
 
         // Reference, non-empty index ranges, based on rank 0
@@ -136,6 +142,27 @@ public:
             return m_local_idx_range_1;
         } else if constexpr (std::is_same_v<Layout, Layout2>) {
             return m_local_idx_range_2;
+        }
+    }
+
+    /**
+     * @brief Getter for the MPI communicator.
+     */
+    MPI_Comm communicator() const
+    {
+        return IMPITranspose<Layout1, Layout2>::m_comm;
+    }
+
+    /**
+     * @brief Getter for the number of active ranks in a layout.
+     */
+    template <class Layout>
+    int n_active_ranks() const
+    {
+        if constexpr (std::is_same_v<Layout, Layout1>) {
+            return m_layout_1.n_active_ranks();
+        } else {
+            return m_layout_2.n_active_ranks();
         }
     }
 
