@@ -27,16 +27,14 @@ concept MetricTensor = requires
     typename T::ContravariantVectorType;
     typename T::CovariantVectorType;
 }
-&&is_tensor_type_v<typename T::ContravariantVectorType>&&
-        is_tensor_type_v<typename T::CovariantVectorType>&&requires(
-                T const& t,
-                typename T::CoordArg const& x)
+&&is_tensor_type_v<typename T::ContravariantVectorType>&& is_tensor_type_v<
+        typename T::CovariantVectorType>&& requires(T const& t, typename T::CoordArg const& x)
 {
     {
         t(x)
-        } -> std::same_as<DTensor<
-                ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>,
-                ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>>>;
+        } -> std::same_as<
+                DTensor<ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>,
+                        ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>>>;
     {
         t.inverse(x)
         } -> std::same_as<DTensor<

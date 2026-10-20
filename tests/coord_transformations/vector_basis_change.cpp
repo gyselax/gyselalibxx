@@ -126,8 +126,8 @@ TEST(MappingChange, CovResultToCovArg)
     double const theta_cov = ddcHelper::get<Theta_cov>(A_polar_cov);
     DVector<R, Theta> A_polar_contra
             = to_vector_space<VectorIndexSet<R, Theta>>(mapping, test_coord, A_cart);
-    DVector<R_cov, Theta_cov> A_polar_cov_from_contra = to_vector_space<
-            VectorIndexSet<R_cov, Theta_cov>>(metric, test_coord, A_polar_contra);
+    DVector<R_cov, Theta_cov> A_polar_cov_from_contra
+            = to_vector_space<VectorIndexSet<R_cov, Theta_cov>>(metric, test_coord, A_polar_contra);
     double const r_cov_from_contra = ddcHelper::get<R_cov>(A_polar_cov_from_contra);
     double const theta_cov_from_contra = ddcHelper::get<Theta_cov>(A_polar_cov_from_contra);
     EXPECT_NEAR(r_cov, r_cov_from_contra, 1e-14);
@@ -226,13 +226,11 @@ TEST(MappingChange, VectorFieldChangeCopyMetric)
     using PolarBasis = VectorIndexSet<R, Theta>;
     using PolarCovBasis = VectorIndexSet<R_cov, Theta_cov>;
 
-    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, PolarBasis> contra_vector_field(
-            idx_range);
+    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, PolarBasis> contra_vector_field(idx_range);
     ddc::parallel_fill(ddcHelper::get<R>(contra_vector_field), 1.0);
     ddc::parallel_fill(ddcHelper::get<Theta>(contra_vector_field), 1.0);
 
-    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, PolarCovBasis> cov_vector_field(
-            idx_range);
+    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, PolarCovBasis> cov_vector_field(idx_range);
     copy_to_vector_space<PolarCovBasis>(
             Kokkos::DefaultExecutionSpace(),
             get_field(cov_vector_field),
@@ -248,7 +246,8 @@ TEST(MappingChange, VectorFieldChangeCopyMetric)
         Tensor G = metric(coord);
         double r_vec = ddcHelper::get<R_cov>(cov_vector_field_host)(idx);
         double theta_vec = ddcHelper::get<Theta_cov>(cov_vector_field_host)(idx);
-        double expected_r_vec = ddcHelper::get<R_cov, R_cov>(G) + ddcHelper::get<R_cov, Theta_cov>(G);
+        double expected_r_vec
+                = ddcHelper::get<R_cov, R_cov>(G) + ddcHelper::get<R_cov, Theta_cov>(G);
         double expected_theta_vec
                 = ddcHelper::get<Theta_cov, R_cov>(G) + ddcHelper::get<Theta_cov, Theta_cov>(G);
         EXPECT_NEAR(r_vec, expected_r_vec, 1e-14);

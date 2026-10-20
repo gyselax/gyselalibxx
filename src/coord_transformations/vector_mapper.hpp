@@ -12,42 +12,41 @@ namespace vector_mapper_detail {
 /// True if the vector spaces are the co/contra variant bases associated with the same coordinate system.
 template <class OutVectorSpace, class InVectorSpace>
 static constexpr bool is_variance_change_only_v
-        = !std::is_same_v<OutVectorSpace, InVectorSpace>
-          && std::is_same_v<OutVectorSpace, vector_index_set_dual_t<InVectorSpace>>;
+        = !std::is_same_v<
+                  OutVectorSpace,
+                  InVectorSpace> && std::is_same_v<OutVectorSpace, vector_index_set_dual_t<InVectorSpace>>;
 
 /// True if the vector spaces are associated with different coordinate systems and have the same variance.
 template <class OutVectorSpace, class InVectorSpace>
 static constexpr bool is_coordinate_change_only_v
-        = !std::is_same_v<OutVectorSpace, InVectorSpace>
-          && !is_variance_change_only_v<OutVectorSpace, InVectorSpace>
-          && has_same_variance_v<InVectorSpace, OutVectorSpace>;
+        = !std::is_same_v<
+                  OutVectorSpace,
+                  InVectorSpace> && !is_variance_change_only_v<OutVectorSpace, InVectorSpace> && has_same_variance_v<InVectorSpace, OutVectorSpace>;
 
 /// True if the vector is mapped from the argument basis of the mapping to its result basis.
 template <class OutVectorSpace, class InVectorSpace, class Mapping>
 static constexpr bool is_arg_to_result_v
-        = is_coordinate_change_only_v<OutVectorSpace, InVectorSpace>
-          && std::is_same_v<
-                  get_contravariant_dims_t<InVectorSpace>,
-                  ddc::to_type_seq_t<typename Mapping::CoordArg>>
-          && std::is_same_v<
-                  get_contravariant_dims_t<OutVectorSpace>,
-                  ddc::to_type_seq_t<typename Mapping::CoordResult>>;
+        = is_coordinate_change_only_v<OutVectorSpace, InVectorSpace>&& std::is_same_v<
+                get_contravariant_dims_t<InVectorSpace>,
+                ddc::to_type_seq_t<typename Mapping::CoordArg>>&&
+                std::is_same_v<
+                        get_contravariant_dims_t<OutVectorSpace>,
+                        ddc::to_type_seq_t<typename Mapping::CoordResult>>;
 
 /// True if the vector is mapped from the result basis of the mapping to its argument basis.
 template <class OutVectorSpace, class InVectorSpace, class Mapping>
 static constexpr bool is_result_to_arg_v
-        = is_coordinate_change_only_v<OutVectorSpace, InVectorSpace>
-          && std::is_same_v<
-                  get_contravariant_dims_t<InVectorSpace>,
-                  ddc::to_type_seq_t<typename Mapping::CoordResult>>
-          && std::is_same_v<
-                  get_contravariant_dims_t<OutVectorSpace>,
-                  ddc::to_type_seq_t<typename Mapping::CoordArg>>;
+        = is_coordinate_change_only_v<OutVectorSpace, InVectorSpace>&& std::is_same_v<
+                get_contravariant_dims_t<InVectorSpace>,
+                ddc::to_type_seq_t<typename Mapping::CoordResult>>&&
+                std::is_same_v<
+                        get_contravariant_dims_t<OutVectorSpace>,
+                        ddc::to_type_seq_t<typename Mapping::CoordArg>>;
 
 /// True if both vector spaces are contravariant.
 template <class OutVectorSpace, class InVectorSpace>
-static constexpr bool are_contravariant_v = is_contravariant_vector_index_set_v<InVectorSpace>
-                                            && is_contravariant_vector_index_set_v<OutVectorSpace>;
+static constexpr bool are_contravariant_v = is_contravariant_vector_index_set_v<InVectorSpace>&&
+        is_contravariant_vector_index_set_v<OutVectorSpace>;
 
 /// The type of the coordinate at which a mapping or a metric tensor is evaluated.
 template <class MappingOrMetric>
@@ -102,8 +101,8 @@ template <
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
         [[maybe_unused]] MappingOrMetric const& mapping_or_metric,
         [[maybe_unused]] CoordType const& coord,
-        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
-        std::is_same_v<OutVectorSpace, InVectorSpace>)
+        Tensor<ElementType, InVectorSpace> const&
+                in_vector) requires(std::is_same_v<OutVectorSpace, InVectorSpace>)
 {
     return in_vector;
 }
@@ -130,9 +129,13 @@ template <
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
         MetricTensorType const& metric_tensor,
         CoordType const& coord,
-        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
-                vector_mapper_detail::is_variance_change_only_v<OutVectorSpace, InVectorSpace>&&
-                        is_contravariant_vector_index_set_v<InVectorSpace>)
+        Tensor<ElementType, InVectorSpace> const&
+                in_vector) requires(vector_mapper_detail::
+                                            is_variance_change_only_v<
+                                                    OutVectorSpace,
+                                                    InVectorSpace>&&
+                                                    is_contravariant_vector_index_set_v<
+                                                            InVectorSpace>)
 {
     return tensor_mul(index<'i', 'j'>(metric_tensor(coord)), index<'j'>(in_vector));
 }
@@ -156,12 +159,11 @@ template <
         class CoordType,
         class ElementType,
         class InVectorSpace>
-KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
-        MetricTensorType const& metric_tensor,
-        CoordType const& coord,
-        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
-                vector_mapper_detail::is_variance_change_only_v<OutVectorSpace, InVectorSpace>
-        && !is_contravariant_vector_index_set_v<InVectorSpace>)
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace>
+to_vector_space(MetricTensorType const& metric_tensor, CoordType const& coord, Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_variance_change_only_v<
+                OutVectorSpace,
+                InVectorSpace> && !is_contravariant_vector_index_set_v<InVectorSpace>)
 {
     return tensor_mul(index<'i', 'j'>(metric_tensor.inverse(coord)), index<'j'>(in_vector));
 }
@@ -188,9 +190,15 @@ template <
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
         Mapping const& mapping,
         CoordType const& coord,
-        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
-                vector_mapper_detail::is_arg_to_result_v<OutVectorSpace, InVectorSpace, Mapping>&&
-                        vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
+        Tensor<ElementType, InVectorSpace> const&
+                in_vector) requires(vector_mapper_detail::
+                                            is_arg_to_result_v<
+                                                    OutVectorSpace,
+                                                    InVectorSpace,
+                                                    Mapping>&&
+                                                    vector_mapper_detail::are_contravariant_v<
+                                                            OutVectorSpace,
+                                                            InVectorSpace>)
 {
     // A_{\{p\}}^i = J_{\{q\rightarrow p\}}^i_j A_{\{q\}}^j
     return tensor_mul(index<'i', 'j'>(mapping.jacobian_matrix(coord)), index<'j'>(in_vector));
@@ -215,12 +223,12 @@ template <
         class CoordType,
         class ElementType,
         class InVectorSpace>
-KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
-        Mapping const& mapping,
-        CoordType const& coord,
-        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
-                vector_mapper_detail::is_arg_to_result_v<OutVectorSpace, InVectorSpace, Mapping>
-        && !vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace>
+to_vector_space(Mapping const& mapping, CoordType const& coord, Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_arg_to_result_v<
+                OutVectorSpace,
+                InVectorSpace,
+                Mapping> && !vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
 {
     // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
     //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
@@ -250,9 +258,15 @@ template <
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
         Mapping const& mapping,
         CoordType const& coord,
-        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
-                vector_mapper_detail::is_result_to_arg_v<OutVectorSpace, InVectorSpace, Mapping>&&
-                        vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
+        Tensor<ElementType, InVectorSpace> const&
+                in_vector) requires(vector_mapper_detail::
+                                            is_result_to_arg_v<
+                                                    OutVectorSpace,
+                                                    InVectorSpace,
+                                                    Mapping>&&
+                                                    vector_mapper_detail::are_contravariant_v<
+                                                            OutVectorSpace,
+                                                            InVectorSpace>)
 {
     // A_{\{q\}}^i = (J_{\{q\rightarrow p\}}^{-1})^i_j A_{\{q\}}^j
     InverseJacobianMatrix inv_jacobian(mapping);
@@ -279,12 +293,12 @@ template <
         class CoordType,
         class ElementType,
         class InVectorSpace>
-KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
-        Mapping const& mapping,
-        CoordType const& coord,
-        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
-                vector_mapper_detail::is_result_to_arg_v<OutVectorSpace, InVectorSpace, Mapping>
-        && !vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace>
+to_vector_space(Mapping const& mapping, CoordType const& coord, Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_result_to_arg_v<
+                OutVectorSpace,
+                InVectorSpace,
+                Mapping> && !vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
 {
     // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
     //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
