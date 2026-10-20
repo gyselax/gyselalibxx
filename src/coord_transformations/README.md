@@ -210,3 +210,24 @@ The tools are:
 ## Orthogonal coordinate transformation
 
 A coordinate transformation that is comprised of coordinate transformation components which are orthogonal to one another.
+
+## Changing the vector space of a vector
+
+The function `to_vector_space` (in `vector_mapper.hpp`) expresses a vector $v$ on a different vector space.
+Let the mapping be $\mathcal{F} : q \mapsto p$, where $q$ are the argument coordinates and $p$ are the result coordinates.
+Let $J$ be its Jacobian matrix and $G$ the associated metric tensor.
+The computation depends on how the input and output vector spaces are related:
+
+| Case | Computation |
+|---|---|
+| Same vector space | $v$ is returned unchanged |
+| Contravariant → covariant, same coordinate system | $G v$ |
+| Covariant → contravariant, same coordinate system | $G^{-1} v$ |
+| Argument basis → result basis, contravariant | $J v$ |
+| Argument basis → result basis, covariant | $J^{-T} v$ |
+| Result basis → argument basis, contravariant | $J^{-1} v$ |
+| Result basis → argument basis, covariant | $J^T v$ |
+| Coordinate system and variance both change | The coordinate system is changed first, then the variance |
+
+The metric tensor is calculated from the Jacobian matrix of the mapping.
+So whenever the variance changes, the mapping must map to the Cartesian space.
