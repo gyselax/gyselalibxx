@@ -67,10 +67,11 @@ TEST(MappingChange, ContraToCov)
 {
     setup_coordinates();
     const CircularToCartesian<R, Theta, X, Y> mapping;
+    MetricTensorEvaluator metric(mapping);
     DVector<R, Theta> A_contra(1., 1.);
     Coord<R, Theta> test_coord(std::sqrt(2), 0.25 * M_PI);
     DVector<R_cov, Theta_cov> A_cov
-            = to_vector_space<VectorIndexSet<R_cov, Theta_cov>>(mapping, test_coord, A_contra);
+            = to_vector_space<VectorIndexSet<R_cov, Theta_cov>>(metric, test_coord, A_contra);
     double const r_cov = ddcHelper::get<R_cov>(A_cov);
     double const theta_cov = ddcHelper::get<Theta_cov>(A_cov);
     EXPECT_NEAR(r_cov, 1., 1e-14);
@@ -81,10 +82,11 @@ TEST(MappingChange, CovToContra)
 {
     setup_coordinates();
     const CircularToCartesian<R, Theta, X, Y> mapping;
+    MetricTensorEvaluator metric(mapping);
     DVector<R_cov, Theta_cov> A_cov(1., 1.);
     Coord<R, Theta> test_coord(std::sqrt(2), 0.25 * M_PI);
     DVector<R, Theta> A_contra
-            = to_vector_space<VectorIndexSet<R, Theta>>(mapping, test_coord, A_cov);
+            = to_vector_space<VectorIndexSet<R, Theta>>(metric, test_coord, A_cov);
     double const r = ddcHelper::get<R>(A_contra);
     double const theta = ddcHelper::get<Theta>(A_contra);
     EXPECT_NEAR(r, 1., 1e-14);
@@ -95,13 +97,14 @@ TEST(MappingChange, CovArgToCovResult)
 {
     setup_coordinates();
     const CircularToCartesian<R, Theta, X, Y> mapping;
+    MetricTensorEvaluator metric(mapping);
     DVector<R_cov, Theta_cov> A_polar_cov(std::sqrt(8), 0.0);
     Coord<R, Theta> test_coord(std::sqrt(2), 0.25 * M_PI);
     DVector<X, Y> A_cart = to_vector_space<VectorIndexSet<X, Y>>(mapping, test_coord, A_polar_cov);
     double const x = ddcHelper::get<X>(A_cart);
     double const y = ddcHelper::get<Y>(A_cart);
     DVector<R, Theta> A_polar_contra
-            = to_vector_space<VectorIndexSet<R, Theta>>(mapping, test_coord, A_polar_cov);
+            = to_vector_space<VectorIndexSet<R, Theta>>(metric, test_coord, A_polar_cov);
     DVector<X, Y> A_cart_from_contra
             = to_vector_space<VectorIndexSet<X, Y>>(mapping, test_coord, A_polar_contra);
     double const x_from_contra = ddcHelper::get<X>(A_cart_from_contra);
@@ -114,6 +117,7 @@ TEST(MappingChange, CovResultToCovArg)
 {
     setup_coordinates();
     const CircularToCartesian<R, Theta, X, Y> mapping;
+    MetricTensorEvaluator metric(mapping);
     DVector<X, Y> A_cart(1., 1.);
     Coord<R, Theta> test_coord(std::sqrt(2), 0.25 * M_PI);
     DVector<R_cov, Theta_cov> A_polar_cov
@@ -123,7 +127,7 @@ TEST(MappingChange, CovResultToCovArg)
     DVector<R, Theta> A_polar_contra
             = to_vector_space<VectorIndexSet<R, Theta>>(mapping, test_coord, A_cart);
     DVector<R_cov, Theta_cov> A_polar_cov_from_contra = to_vector_space<
-            VectorIndexSet<R_cov, Theta_cov>>(mapping, test_coord, A_polar_contra);
+            VectorIndexSet<R_cov, Theta_cov>>(metric, test_coord, A_polar_contra);
     double const r_cov_from_contra = ddcHelper::get<R_cov>(A_polar_cov_from_contra);
     double const theta_cov_from_contra = ddcHelper::get<Theta_cov>(A_polar_cov_from_contra);
     EXPECT_NEAR(r_cov, r_cov_from_contra, 1e-14);
