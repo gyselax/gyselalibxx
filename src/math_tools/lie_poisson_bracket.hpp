@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include "coord_or_idx.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "gradient.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "static_tensors.hpp"
+#include "type_seq_tools.hpp"
 #include "vector_field.hpp"
 
 
@@ -70,24 +72,26 @@ public:
      * @param[in] partial_derivatives_g A tensor containing the partial derivatives
      * of the vector field G expressed at the given coordinate : @f$ DG_{ij} = \partial_j G_i @f$.
      * @param[in] B A contravariant vector containing the magnetic field at the given coordinate.
-     * @param[in] coord The coordinate where the calculation is carried out.
+     * @param[in] coord_or_idx The coordinate (or the index of the grid point) where the
+     * calculation is carried out.
      *
      * @return A vector describing the gyrokinetic Poisson bracket at a given coordinate.
      * The vector is indexed in the same way and has the same covariance as the elements of the vector G.
      */
     template <
             class TensorType,
+            concepts::CoordOrIdx<MappingCoord> CoordOrIdxType,
             class = std::enable_if_t<is_tensor_type_v<TensorType> && TensorType::rank() == 2>>
     KOKKOS_INLINE_FUNCTION DTensor<ddc::type_seq_element_t<0, typename TensorType::index_set>>
     operator()(
             DTensor<CovBasisSpatial> const& partial_derivatives_f,
             TensorType const& partial_derivatives_g,
             DTensor<BasisSpatial> const& B,
-            MappingCoord const& coord) const
+            CoordOrIdxType const& coord_or_idx) const
     {
-        double J = m_mapping.jacobian(coord);
+        double J = m_mapping.jacobian(ddcHelper::get_coordinate<MappingCoord>(coord_or_idx));
         LeviCivitaTensor<double, BasisSpatial> eps(J);
-        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord);
+        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord_or_idx);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
                 index<'i', 'j', 'k'>(eps),
@@ -106,19 +110,21 @@ public:
      * @param[in] partial_derivatives_g A vector containing the (covariant) gradient
      * of the scalar field g expressed at the given coordinate.
      * @param[in] B A contravariant vector containing the magnetic field at the given coordinate.
-     * @param[in] coord The coordinate where the calculation is carried out.
+     * @param[in] coord_or_idx The coordinate (or the index of the grid point) where the
+     * calculation is carried out.
      *
      * @return The gyrokinetic Poisson bracket at a given coordinate.
      */
+    template <concepts::CoordOrIdx<MappingCoord> CoordOrIdxType>
     KOKKOS_INLINE_FUNCTION double operator()(
             DTensor<CovBasisSpatial> const& partial_derivatives_f,
             DTensor<CovBasisSpatial> const& partial_derivatives_g,
             DTensor<BasisSpatial> const& B,
-            MappingCoord const& coord) const
+            CoordOrIdxType const& coord_or_idx) const
     {
-        double J = m_mapping.jacobian(coord);
+        double J = m_mapping.jacobian(ddcHelper::get_coordinate<MappingCoord>(coord_or_idx));
         LeviCivitaTensor<double, BasisSpatial> eps(J);
-        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord);
+        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord_or_idx);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
                 index<'i', 'j', 'k'>(eps),
@@ -153,6 +159,7 @@ public:
         static_assert(is_accessible_v<ExecSpace, MetricTensorType>);
         static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
         using IdxType = typename IdxRange::discrete_element_type;
+        using IdxMappingCoord = find_idx_t<MappingCoord, IdxRange>;
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
@@ -163,7 +170,7 @@ public:
                             partial_derivatives_f(idx),
                             partial_derivatives_g(idx),
                             B(idx),
-                            ddc::coordinate(idx));
+                            IdxMappingCoord(idx));
                 });
     }
 };
