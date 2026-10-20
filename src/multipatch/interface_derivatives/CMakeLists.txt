@@ -13,6 +13,7 @@ target_sources("multipatch_interface_derivatives"
 
 target_link_libraries("multipatch_interface_derivatives" INTERFACE
     DDC::core
+    gyselalibxx::interpolation_interface_derivatives
     gyselalibxx::multipatch_data_types
     gyselalibxx::multipatch_connectivity
     gyselalibxx::utils
