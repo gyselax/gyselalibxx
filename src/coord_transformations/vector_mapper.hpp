@@ -8,20 +8,94 @@
 #include "vector_index_tools.hpp"
 #include "view.hpp"
 
+namespace vector_mapper_detail {
+/// True if the vector spaces are the co/contra variant bases associated with the same coordinate system.
+template <class OutVectorSpace, class InVectorSpace>
+static constexpr bool is_variance_change_only_v
+        = !std::is_same_v<OutVectorSpace, InVectorSpace>
+          && std::is_same_v<OutVectorSpace, vector_index_set_dual_t<InVectorSpace>>;
+
+/// True if the vector spaces are associated with different coordinate systems.
+template <class OutVectorSpace, class InVectorSpace>
+static constexpr bool is_coordinate_change_v
+        = !std::is_same_v<OutVectorSpace, InVectorSpace>
+          && !is_variance_change_only_v<OutVectorSpace, InVectorSpace>;
+
+/// True if the vector spaces are associated with different coordinate systems and have the same variance.
+template <class OutVectorSpace, class InVectorSpace>
+static constexpr bool is_coordinate_change_only_v
+        = is_coordinate_change_v<OutVectorSpace, InVectorSpace>
+          && has_same_variance_v<InVectorSpace, OutVectorSpace>;
+
+/// True if the vector is mapped from the argument basis of the mapping to its result basis.
+template <class OutVectorSpace, class InVectorSpace, class Mapping>
+static constexpr bool is_arg_to_result_v
+        = is_coordinate_change_only_v<OutVectorSpace, InVectorSpace>
+          && std::is_same_v<
+                  get_contravariant_dims_t<InVectorSpace>,
+                  ddc::to_type_seq_t<typename Mapping::CoordArg>>
+          && std::is_same_v<
+                  get_contravariant_dims_t<OutVectorSpace>,
+                  ddc::to_type_seq_t<typename Mapping::CoordResult>>;
+
+/// True if the vector is mapped from the result basis of the mapping to its argument basis.
+template <class OutVectorSpace, class InVectorSpace, class Mapping>
+static constexpr bool is_result_to_arg_v
+        = is_coordinate_change_only_v<OutVectorSpace, InVectorSpace>
+          && std::is_same_v<
+                  get_contravariant_dims_t<InVectorSpace>,
+                  ddc::to_type_seq_t<typename Mapping::CoordResult>>
+          && std::is_same_v<
+                  get_contravariant_dims_t<OutVectorSpace>,
+                  ddc::to_type_seq_t<typename Mapping::CoordArg>>;
+
+/// True if both vector spaces are contravariant.
+template <class OutVectorSpace, class InVectorSpace>
+static constexpr bool are_contravariant_v = is_contravariant_vector_index_set_v<InVectorSpace>
+                                            && is_contravariant_vector_index_set_v<OutVectorSpace>;
+} // namespace vector_mapper_detail
+
 /**
  * @brief A helper method to get a vector on a different vector space.
+ * This overload handles the case where the vector is already defined on the
+ * requested vector space.
  *
- * @param[in] mapping A mapping describing the relation between the 2 vector
- *              spaces (or describing the relation between the vector space and
- *              the Cartesian space if a change of variance
- *              (covariant <-> contravariant) is required).
+ * @param[in] mapping A mapping describing the relation between the 2 vector spaces.
  * @param[in] coord The coordinate where the vector is defined.
  * @param[in] in_vector The vector on the original vector space.
  *
  * @tparam OutVectorSpace The vector space of the final vector.
  *
- * @returns A VectorField or VectorFieldMem containing the vectors in the
- *      requested vector space.
+ * @returns The vector on the requested vector space.
+ */
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        [[maybe_unused]] Mapping const& mapping,
+        [[maybe_unused]] CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        std::is_same_v<OutVectorSpace, InVectorSpace>)
+{
+    return in_vector;
+}
+
+/**
+ * @brief A helper method to get a vector on a different vector space.
+ * This overload handles the case where a contravariant vector is mapped to the
+ * covariant basis associated with the same coordinate system.
+ *
+ * @param[in] mapping A mapping describing the relation between the vector space
+ *              and the Cartesian space.
+ * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] in_vector The vector on the original vector space.
+ *
+ * @tparam OutVectorSpace The vector space of the final vector.
+ *
+ * @returns The vector on the requested vector space.
  */
 template <
         class OutVectorSpace,
@@ -32,69 +106,204 @@ template <
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
         Mapping const& mapping,
         CoordType const& coord,
-        Tensor<ElementType, InVectorSpace> const& in_vector)
+        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_variance_change_only_v<OutVectorSpace, InVectorSpace>&&
+                is_contravariant_vector_index_set_v<InVectorSpace>)
 {
-    if constexpr (std::is_same_v<OutVectorSpace, InVectorSpace>) {
-        // If in and out tensor are already defined on the same basis
-        return in_vector;
+    MetricTensorEvaluator<Mapping, CoordType> metric(mapping);
+    return tensor_mul(index<'i', 'j'>(metric(coord)), index<'j'>(in_vector));
+}
 
-    } else if constexpr (std::is_same_v<OutVectorSpace, vector_index_set_dual_t<InVectorSpace>>) {
-        // If in and out tensor are defined on co/contra variant bases associated with the same coordinate system
-        if constexpr (is_contravariant_vector_index_set_v<InVectorSpace>) {
-            MetricTensorEvaluator<Mapping, CoordType> metric(mapping);
-            return tensor_mul(index<'i', 'j'>(metric(coord)), index<'j'>(in_vector));
-        } else {
-            MetricTensorEvaluator<Mapping, CoordType> metric(mapping);
-            return tensor_mul(index<'i', 'j'>(metric.inverse(coord)), index<'j'>(in_vector));
-        }
+/**
+ * @brief A helper method to get a vector on a different vector space.
+ * This overload handles the case where a covariant vector is mapped to the
+ * contravariant basis associated with the same coordinate system.
+ *
+ * @param[in] mapping A mapping describing the relation between the vector space
+ *              and the Cartesian space.
+ * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] in_vector The vector on the original vector space.
+ *
+ * @tparam OutVectorSpace The vector space of the final vector.
+ *
+ * @returns The vector on the requested vector space.
+ */
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_variance_change_only_v<OutVectorSpace, InVectorSpace>
+        && !is_contravariant_vector_index_set_v<InVectorSpace>)
+{
+    MetricTensorEvaluator<Mapping, CoordType> metric(mapping);
+    return tensor_mul(index<'i', 'j'>(metric.inverse(coord)), index<'j'>(in_vector));
+}
 
-    } else if constexpr (!has_same_variance_v<InVectorSpace, OutVectorSpace>) {
-        // If different variance (co/contra)
-        using OutVectorSpaceDual = vector_index_set_dual_t<OutVectorSpace>;
-        Tensor<ElementType, OutVectorSpaceDual> dual_out_vector
-                = to_vector_space<OutVectorSpaceDual>(mapping, coord, in_vector);
-        return to_vector_space<OutVectorSpace>(mapping, coord, dual_out_vector);
+/**
+ * @brief A helper method to get a vector on a different vector space.
+ * This overload handles the case where a contravariant vector is mapped from the
+ * argument basis of the mapping to its result basis.
+ *
+ * @param[in] mapping A mapping describing the relation between the 2 vector spaces.
+ * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] in_vector The vector on the original vector space.
+ *
+ * @tparam OutVectorSpace The vector space of the final vector.
+ *
+ * @returns The vector on the requested vector space.
+ */
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_arg_to_result_v<OutVectorSpace, InVectorSpace, Mapping>&&
+                vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
+{
+    // A_{\{p\}}^i = J_{\{q\rightarrow p\}}^i_j A_{\{q\}}^j
+    return tensor_mul(index<'i', 'j'>(mapping.jacobian_matrix(coord)), index<'j'>(in_vector));
+}
 
-    } else {
-        using ArgBasis = ddc::to_type_seq_t<typename Mapping::CoordArg>;
-        using ResultBasis = ddc::to_type_seq_t<typename Mapping::CoordResult>;
-        using InContraVectorSpace = get_contravariant_dims_t<InVectorSpace>;
-        using OutContraVectorSpace = get_contravariant_dims_t<OutVectorSpace>;
-        if constexpr ((std::is_same_v<InContraVectorSpace, ArgBasis>)&&(
-                              std::is_same_v<OutContraVectorSpace, ResultBasis>)) {
-            if constexpr ((is_contravariant_vector_index_set_v<InVectorSpace>)&&(
-                                  is_contravariant_vector_index_set_v<OutVectorSpace>)) {
-                // A_{\{p\}}^i = J_{\{q\rightarrow p\}}^i_j A_{\{q\}}^j
-                return tensor_mul(
-                        index<'i', 'j'>(mapping.jacobian_matrix(coord)),
-                        index<'j'>(in_vector));
-            } else {
-                // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
-                //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
-                InverseJacobianMatrix inv_jacobian(mapping);
-                return tensor_mul(index<'j', 'i'>(inv_jacobian(coord)), index<'j'>(in_vector));
-            }
-        } else {
-            static_assert((std::is_same_v<InContraVectorSpace, ResultBasis>)&&(
-                    std::is_same_v<OutContraVectorSpace, ArgBasis>));
-            if constexpr ((is_contravariant_vector_index_set_v<InVectorSpace>)&&(
-                                  is_contravariant_vector_index_set_v<OutVectorSpace>)) {
-                static_assert(is_contravariant_vector_index_set_v<OutVectorSpace>);
-                // A_{\{q\}}^i = (J_{\{q\rightarrow p\}}^{-1})^i_j A_{\{q\}}^j
-                InverseJacobianMatrix inv_jacobian(mapping);
-                DTensor<OutVectorSpace, get_covariant_dims_t<InVectorSpace>> I_J
-                        = inv_jacobian(coord);
-                return tensor_mul(index<'i', 'j'>(I_J), index<'j'>(in_vector));
-            } else {
-                // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
-                //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
-                //             = (J_{\{p\rightarrow q\}})_j^i A_{\{q\} j}
-                return tensor_mul(
-                        index<'j', 'i'>(mapping.jacobian_matrix(coord)),
-                        index<'j'>(in_vector));
-            }
-        }
-    }
+/**
+ * @brief A helper method to get a vector on a different vector space.
+ * This overload handles the case where a covariant vector is mapped from the
+ * argument basis of the mapping to its result basis.
+ *
+ * @param[in] mapping A mapping describing the relation between the 2 vector spaces.
+ * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] in_vector The vector on the original vector space.
+ *
+ * @tparam OutVectorSpace The vector space of the final vector.
+ *
+ * @returns The vector on the requested vector space.
+ */
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_arg_to_result_v<OutVectorSpace, InVectorSpace, Mapping>
+        && !vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
+{
+    // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
+    //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
+    InverseJacobianMatrix inv_jacobian(mapping);
+    return tensor_mul(index<'j', 'i'>(inv_jacobian(coord)), index<'j'>(in_vector));
+}
+
+/**
+ * @brief A helper method to get a vector on a different vector space.
+ * This overload handles the case where a contravariant vector is mapped from the
+ * result basis of the mapping to its argument basis.
+ *
+ * @param[in] mapping A mapping describing the relation between the 2 vector spaces.
+ * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] in_vector The vector on the original vector space.
+ *
+ * @tparam OutVectorSpace The vector space of the final vector.
+ *
+ * @returns The vector on the requested vector space.
+ */
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_result_to_arg_v<OutVectorSpace, InVectorSpace, Mapping>&&
+                vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
+{
+    // A_{\{q\}}^i = (J_{\{q\rightarrow p\}}^{-1})^i_j A_{\{q\}}^j
+    InverseJacobianMatrix inv_jacobian(mapping);
+    DTensor<OutVectorSpace, get_covariant_dims_t<InVectorSpace>> I_J = inv_jacobian(coord);
+    return tensor_mul(index<'i', 'j'>(I_J), index<'j'>(in_vector));
+}
+
+/**
+ * @brief A helper method to get a vector on a different vector space.
+ * This overload handles the case where a covariant vector is mapped from the
+ * result basis of the mapping to its argument basis.
+ *
+ * @param[in] mapping A mapping describing the relation between the 2 vector spaces.
+ * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] in_vector The vector on the original vector space.
+ *
+ * @tparam OutVectorSpace The vector space of the final vector.
+ *
+ * @returns The vector on the requested vector space.
+ */
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_result_to_arg_v<OutVectorSpace, InVectorSpace, Mapping>
+        && !vector_mapper_detail::are_contravariant_v<OutVectorSpace, InVectorSpace>)
+{
+    // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
+    //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
+    //             = (J_{\{p\rightarrow q\}})_j^i A_{\{q\} j}
+    return tensor_mul(index<'j', 'i'>(mapping.jacobian_matrix(coord)), index<'j'>(in_vector));
+}
+
+/**
+ * @brief A helper method to get a vector on a different vector space.
+ * This overload handles the case where both the coordinate system and the variance
+ * (covariant <-> contravariant) change. The coordinate system is changed first,
+ * then the variance.
+ *
+ * @param[in] mapping A mapping describing the relation between the 2 vector
+ *              spaces. One of the 2 spaces must be the Cartesian space so that
+ *              the mapping can also be used to change the variance.
+ * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] in_vector The vector on the original vector space.
+ *
+ * @tparam OutVectorSpace The vector space of the final vector.
+ *
+ * @returns The vector on the requested vector space.
+ */
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector) requires(
+        vector_mapper_detail::is_coordinate_change_v<OutVectorSpace, InVectorSpace>
+        && !has_same_variance_v<InVectorSpace, OutVectorSpace>)
+{
+    using OutVectorSpaceDual = vector_index_set_dual_t<OutVectorSpace>;
+    Tensor<ElementType, OutVectorSpaceDual> dual_out_vector
+            = to_vector_space<OutVectorSpaceDual>(mapping, coord, in_vector);
+    return to_vector_space<OutVectorSpace>(mapping, coord, dual_out_vector);
 }
 
 /**
