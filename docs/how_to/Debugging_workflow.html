@@ -489,6 +489,14 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#helpful-debugging-functions">Helpful debugging functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#printing-the-contents-of-a-field">Printing the contents of a field</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#printing-a-type">Printing a type</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#gpu-debug-build">GPU Debug Build</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#finding-the-crashing-line_1">Finding the crashing line</a>
@@ -614,6 +622,27 @@ backtrace
 <pre><code class="language-bash">valgrind ./gysela_exe config_file.yml
 </code></pre>
 <p>One thing to bear in mind is that memory misuse does not always lead to an immediate crash. Instead it can simply corrupt the memory leading to a crash later in the execution. The valgrind errors should therefore be examined in order.</p>
+<h2 id="helpful-debugging-functions">Helpful debugging functions</h2>
+<p>DDC provides some functions which can be useful for printing information when debugging.</p>
+<h3 id="printing-the-contents-of-a-field">Printing the contents of a field</h3>
+<p>A <code>Field</code> (not a <code>FieldMem</code>) can be printed directly with <code>std::cout</code>:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; field &lt;&lt; std::endl;
+</code></pre>
+<p>For large fields this output is abbreviated so only the values at the edges of each dimension are shown.
+If you want to print all the values you can use <code>ddc::print_full</code>:</p>
+<pre><code class="language-cpp">ddc::print_full(std::cout, field);
+</code></pre>
+<p>The values can only be printed if the field is accessible from the CPU.
+A field stored on GPU should therefore be copied to the CPU before printing it, e.g:</p>
+<pre><code class="language-cpp">auto field_host = ddc::create_mirror_view_and_copy(field);
+ddc::print_full(std::cout, get_field(field_host));
+</code></pre>
+<h3 id="printing-a-type">Printing a type</h3>
+<p>Templated code often makes it difficult to know exactly which type is being used.
+<code>print_demangled_type_name</code> can be used to print a readable version of a type name:</p>
+<pre><code class="language-cpp">ddc::detail::print_demangled_type_name(std::cout, typeid(X).name());
+</code></pre>
+<p>where <code>X</code> is the type (or <code>decltype(x)</code> for a variable <code>x</code>) that you want to examine.</p>
 <h2 id="gpu-debug-build">GPU Debug Build</h2>
 <p>If the code runs as expected on CPU but crashes on GPU then you can already disregard the sections of the code which always run on CPU. This can help narrow down the problem.</p>
 <p>Before analysing the code ensure that there are no compilation warnings.
