@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `IdxStep` indexing for `VectorField` objects.
 - Allow `PolarSplineFEMPoissonLikeSolver` to solve a batch of equations (batch dimensions in `IdxRangeFull`).
 - Add `ddcHelper::get_idx_from_linear_index` to get the multi-dimensional index at a given position in an index range.
+- Add a `concepts::MetricTensor` concept describing objects which provide the metric tensor and its inverse at a given coordinate.
+- Allow `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` to take a metric tensor instead of a mapping to change the variance of a vector field.
 
 ### Fixed
 
@@ -47,6 +49,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
 - Speed up the matrix assembly and RHS computation of `PolarSplineFEMPoissonLikeSolver`.
 - The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the full index range on which $\phi$ is defined (including any batch dimensions).
+- The constructor of `LiePoissonBracket` now takes the metric tensor as an argument (in addition to the mapping). The type of the metric tensor is an additional template parameter.
+- The template parameter of `Gradient` must now satisfy `concepts::MetricTensor`.
+- `to_vector_space` now takes a metric tensor instead of a mapping to change the variance (covariant <-> contravariant) of a vector.
+- `to_vector_space` no longer supports changing both the coordinate system and the variance in a single call.
 
 ### Deprecated
 
