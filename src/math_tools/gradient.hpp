@@ -12,7 +12,7 @@
  * @brief A class which implements a gradient operator.
  * @tparam MetricTensorType A type representing a metric tensor.
  */
-template <class MetricTensorType>
+template <concepts::MetricTensor MetricTensorType>
 class Gradient
 {
     using CoordArg = typename MetricTensorType::CoordArg;
@@ -38,7 +38,7 @@ public:
     /**
      * @brief Construct an instance of the class Gradient.
      *
-     * @param metric_tensor A MetricTensorEvaluator.
+     * @param metric_tensor An object which provides the metric tensor (e.g. a MetricTensorEvaluator).
      */
     explicit KOKKOS_FUNCTION Gradient(MetricTensorType const& metric_tensor)
         : m_metric_tensor(metric_tensor)

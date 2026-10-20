@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <concepts>
 #include <type_traits>
 
 #include "coord_transformation_tools.hpp"
@@ -9,6 +10,40 @@
 #include "tensor.hpp"
 #include "vector_index_tools.hpp"
 #include "view.hpp"
+
+namespace concepts {
+/**
+ * @brief A concept describing a type which can provide the metric tensor and its
+ * inverse at a given coordinate.
+ *
+ * The metric tensor must be expressed on the covariant basis (i.e. it acts on
+ * contravariant vectors) and its inverse must be expressed on the contravariant
+ * basis (i.e. it acts on covariant vectors).
+ */
+template <typename T>
+concept MetricTensor = requires
+{
+    typename T::CoordArg;
+    typename T::ContravariantVectorType;
+    typename T::CovariantVectorType;
+}
+&&is_tensor_type_v<typename T::ContravariantVectorType>&&
+        is_tensor_type_v<typename T::CovariantVectorType>&&requires(
+                T const& t,
+                typename T::CoordArg const& x)
+{
+    {
+        t(x)
+        } -> std::same_as<DTensor<
+                ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>,
+                ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>>>;
+    {
+        t.inverse(x)
+        } -> std::same_as<DTensor<
+                ddc::type_seq_element_t<0, typename T::ContravariantVectorType::index_set>,
+                ddc::type_seq_element_t<0, typename T::ContravariantVectorType::index_set>>>;
+};
+} // namespace concepts
 
 /**
  * @brief An operator for calculating the metric tensor.
