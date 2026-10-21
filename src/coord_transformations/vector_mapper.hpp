@@ -85,7 +85,7 @@ using evaluation_coord_t = typename EvaluationCoord<MappingOrMetric>::type;
  * variance change functions.
  *
  * @param[in] mapping_or_metric A mapping or a metric tensor (unused).
- * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] coord The coordinate (or the index of the grid point) where the vector is defined.
  * @param[in] in_vector The vector on the original vector space.
  *
  * @tparam OutVectorSpace The vector space of the final vector.
@@ -113,7 +113,7 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
  * covariant basis associated with the same coordinate system.
  *
  * @param[in] metric_tensor An object which provides the metric tensor.
- * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] coord The coordinate (or the index of the grid point) where the vector is defined.
  * @param[in] in_vector The vector on the original vector space.
  *
  * @tparam OutVectorSpace The vector space of the final vector.
@@ -146,7 +146,7 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
  * contravariant basis associated with the same coordinate system.
  *
  * @param[in] metric_tensor An object which provides the metric tensor.
- * @param[in] coord The coordinate where the vector is defined.
+ * @param[in] coord The coordinate (or the index of the grid point) where the vector is defined.
  * @param[in] in_vector The vector on the original vector space.
  *
  * @tparam OutVectorSpace The vector space of the final vector.
@@ -348,19 +348,37 @@ void copy_to_vector_space(
     using CoordType = vector_mapper_detail::evaluation_coord_t<MappingOrMetric>;
     using IdxCoordType = find_idx_t<CoordType, IdxRangeType>;
     const std::source_location location = std::source_location::current();
-    ddc::parallel_for_each(
-            location.function_name(),
-            exec_space,
-            get_idx_range(vector_field),
-            KOKKOS_LAMBDA(IdxType idx) {
-                IdxCoordType coord_idx(idx);
-                CoordType coord = ddc::coordinate(coord_idx);
-                ddcHelper::assign_vector_field_element(
-                        vector_field_out,
-                        idx,
-                        to_vector_space<
-                                OutVectorSpace>(mapping_or_metric, coord, vector_field(idx)));
-            });
+    if constexpr (concepts::MetricTensor<MappingOrMetric>) {
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space,
+                get_idx_range(vector_field),
+                KOKKOS_LAMBDA(IdxType idx) {
+                    IdxCoordType coord_idx(idx);
+                    // Prefer evaluating the metric tensor at the grid point.
+                    ddcHelper::assign_vector_field_element(
+                            vector_field_out,
+                            idx,
+                            to_vector_space<OutVectorSpace>(
+                                    mapping_or_metric,
+                                    coord_idx,
+                                    vector_field(idx)));
+                });
+    } else {
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space,
+                get_idx_range(vector_field),
+                KOKKOS_LAMBDA(IdxType idx) {
+                    IdxCoordType coord_idx(idx);
+                    CoordType coord = ddc::coordinate(coord_idx);
+                    ddcHelper::assign_vector_field_element(
+                            vector_field_out,
+                            idx,
+                            to_vector_space<
+                                    OutVectorSpace>(mapping_or_metric, coord, vector_field(idx)));
+                });
+    }
 }
 
 /**

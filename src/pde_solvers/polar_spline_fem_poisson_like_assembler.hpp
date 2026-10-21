@@ -1459,7 +1459,7 @@ public:
 
         using Spatial2DVectorSpace = VectorIndexSet<R, Theta>;
 
-        Tensor inv_metric_tensor = metric_tensor.inverse(coord);
+        Tensor inv_metric_tensor = metric_tensor.inverse(idx_quad);
         DTensor<Spatial2DVectorSpace, Spatial2DVectorSpace> inv_metric_tensor_2d;
         ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
