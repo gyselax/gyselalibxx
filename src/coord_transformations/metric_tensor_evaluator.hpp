@@ -149,7 +149,7 @@ public:
     KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> operator()(CoordArg const& coord) const
     {
         Tensor J = m_mapping.jacobian_matrix(coord);
-        return tensor_mul(index<'j', 'i'>(J), index<'j', 'k'>(J));
+        return symmetric_tensor_mul(index<'j', 'i'>(J), index<'j', 'k'>(J));
     }
 
     /**
@@ -164,7 +164,7 @@ public:
     {
         InverseJacobianMatrix get_inverse_jacobian(m_mapping);
         Tensor inv_J = get_inverse_jacobian(coord);
-        return tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
+        return symmetric_tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
     }
 
     /**
