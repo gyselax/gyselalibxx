@@ -529,10 +529,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="204" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="204" bodyend="213"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="336" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="336" bodyend="345"/>
       </memberdef>
-      <memberdef kind="function" id="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="indexed__tensor_8hpp_1a294189c1e9dbf86d07b1573bbd60daeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>is_symmetric</declname>
+            <defname>is_symmetric</defname>
+            <defval>false</defval>
+          </param>
           <param>
             <type>class...</type>
             <declname>IndexedTensorType</declname>
@@ -568,7 +574,46 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="227" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="227" bodyend="268"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="359" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="359" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="indexed__tensor_8hpp_1ad5c11524ca63b332a278c98368d6f1cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>IndexedTensorType</declname>
+            <defname>IndexedTensorType</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto symmetric_tensor_mul</definition>
+        <argsstring>(IndexedTensorType... tensor_to_mul)</argsstring>
+        <name>symmetric_tensor_mul</name>
+        <param>
+          <type>IndexedTensorType...</type>
+          <declname>tensor_to_mul</declname>
+        </param>
+        <briefdescription>
+<para>A function to multiply tensors together to obtain a symmetric tensor. IndexedTensors are used to describe the index pattern of the multiplication. Example: </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting><codeline><highlight class="normal">//<sp/>Create<sp/>a<sp/>tensor<sp/>C<sp/>such<sp/>that<sp/>C_{ik}<sp/>=<sp/>C_{ki}<sp/>=<sp/>A_{ij}<sp/>B^{j}_{k}</highlight></codeline>
+<codeline><highlight class="normal">Tensor<sp/>C<sp/>=<sp/>symmetric_tensor_mul(index&lt;&apos;i&apos;,<sp/>&apos;j&apos;&gt;(A),<sp/>index&lt;&apos;j&apos;,<sp/>&apos;k&apos;&gt;(B));</highlight></codeline>
+</programlisting> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tensor_to_mul</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The indexed tensor objects which should be multiplied together. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A tensor that is the result of multiplying the objects according to the index pattern </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="376" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="376" bodyend="383"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -682,109 +727,200 @@
 <codeline lineno="141"><highlight class="normal"></highlight></codeline>
 <codeline lineno="142"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">GlobalTensorIndexIdMap,</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ResultIndexedTensorType,</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType,</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="147"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>internal_tensor_mul(</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>Is,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ResultIndexedTensorType,</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType&gt;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>symmetric_internal_tensor_mul_elem(</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResultIndexedTensorType&amp;<sp/>result,</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::index_sequence&lt;Is...&gt;,</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IndexedTensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>t)</highlight></codeline>
-<codeline lineno="151"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>((internal_tensor_mul_elem&lt;GlobalTensorIndexIdMap,<sp/>Is&gt;(result,<sp/>t...)),<sp/>...);</highlight></codeline>
-<codeline lineno="153"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ID,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>AllIndexIdMaps&gt;</highlight></codeline>
-<codeline lineno="156"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_id_validity()</highlight></codeline>
-<codeline lineno="157"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/>n_occurrences</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>char_occurrences_v&lt;ID,<sp/>index_identifiers_t&lt;AllIndexIdMaps&gt;&gt;;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(n_occurrences<sp/>==<sp/>2)<sp/>{</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RelevantVectorIndexSets<sp/>=<sp/><ref refid="namespacetensor__tools_1a980d9ffa93ea63cb1ec252adc26d0f2f" kindref="member">relevant_vector_index_sets_t&lt;ID, AllIndexIdMaps&gt;</ref>;</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Set1<sp/>=<sp/>ddc::type_seq_element_t&lt;0,<sp/>RelevantVectorIndexSets&gt;;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Set2<sp/>=<sp/>ddc::type_seq_element_t&lt;1,<sp/>RelevantVectorIndexSets&gt;;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_covariant_idx<sp/>=<sp/>(is_covariant_vector_index_set_v&lt;Set1&gt;)</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(is_covariant_vector_index_set_v&lt;Set2&gt;);</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_contravariant_idx<sp/>=<sp/>(is_contravariant_vector_index_set_v&lt;Set1&gt;)</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(is_contravariant_vector_index_set_v&lt;Set2&gt;);</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>has_covariant_idx<sp/>&amp;&amp;<sp/>has_contravariant_idx,</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Repeated<sp/>indices<sp/>should<sp/>not<sp/>be<sp/>associated<sp/>with<sp/>two<sp/>covariant<sp/>or<sp/>two<sp/>contravariant<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;indices.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;get_contravariant_dims_t&lt;Set1&gt;,<sp/>get_contravariant_dims_t&lt;Set2&gt;&gt;,</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>sum<sp/>over<sp/>incompatible<sp/>VectorIndexSets.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n_occurrences<sp/>==<sp/>1,</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;You<sp/>should<sp/>not<sp/>have<sp/>more<sp/>than<sp/>two<sp/>of<sp/>any<sp/>one<sp/>index<sp/>in<sp/>an<sp/>index<sp/>expression.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="180"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">AllIndexIdMaps,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">UniqueIds,<sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="183"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_all_id_validity(std::index_sequence&lt;Is...&gt;)</highlight></codeline>
-<codeline lineno="184"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>((check_id_validity&lt;ddc::type_seq_element_t&lt;Is,<sp/>UniqueIds&gt;::value,<sp/>AllIndexIdMaps&gt;()),<sp/>...);</highlight></codeline>
-<codeline lineno="186"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"></highlight></codeline>
-<codeline lineno="188"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>details</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="189"><highlight class="normal"></highlight></codeline>
-<codeline lineno="190"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>tensor_tools</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">...<sp/>ids,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType&gt;</highlight></codeline>
-<codeline lineno="204" refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" refkind="member"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="205"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(ids)<sp/>==<sp/>TensorType::rank(),</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;The<sp/>number<sp/>of<sp/>indices<sp/>provided<sp/>must<sp/>be<sp/>equal<sp/>to<sp/>the<sp/>rank<sp/>of<sp/>the<sp/>tensor.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacetensor__tools" kindref="compound">tensor_tools</ref>;</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">TypeSeqCharIds<sp/>=<sp/>ddc::detail::TypeSeq&lt;std::integral_constant&lt;char,<sp/>ids&gt;...&gt;;</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>details::internal_index&lt;</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TypeSeqCharIds&gt;(tensor,<sp/>std::make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(ids)&gt;());</highlight></codeline>
-<codeline lineno="213"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"></highlight></codeline>
-<codeline lineno="226"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType&gt;</highlight></codeline>
-<codeline lineno="227" refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" refkind="member"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(IndexedTensorType...<sp/>tensor_to_mul)</highlight></codeline>
-<codeline lineno="228"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacetensor__tools" kindref="compound">tensor_tools</ref>;</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(is_indexed_tensor_v&lt;IndexedTensorType&gt;<sp/>&amp;&amp;<sp/>...),</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;A<sp/>tensor<sp/>multiplication<sp/>must<sp/>be<sp/>carried<sp/>out<sp/>over<sp/>IndexedTensor<sp/>objects&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>TypeSeq<sp/>of<sp/>VectorIndexIdMaps<sp/>describing<sp/>all<sp/>the<sp/>indices<sp/>which<sp/>appear<sp/>in<sp/>the<sp/>calculation.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">AllIndexIdMaps<sp/>=<sp/>type_seq_cat_t&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IndexedTensorType::index_pattern...&gt;;</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">UniqueIndexIds<sp/>=<sp/>type_seq_unique_t&lt;index_identifiers_t&lt;AllIndexIdMaps&gt;&gt;;</highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>details::check_all_id_validity&lt;AllIndexIdMaps,<sp/>UniqueIndexIds&gt;(</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;ddc::type_seq_size_v&lt;UniqueIndexIds&gt;&gt;());</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Use<sp/>the<sp/>first<sp/>tensor<sp/>argument<sp/>to<sp/>extract<sp/>the<sp/>element<sp/>type<sp/>of<sp/>the<sp/>result.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ElementType<sp/>=<sp/>std::tuple_element_t&lt;</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0,</highlight></codeline>
-<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::tuple&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IndexedTensorType::tensor_type::element_type...&gt;&gt;;</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IndexedTensorType::tensor_type::element_type,</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType&gt;<sp/>&amp;&amp;<sp/>...),</highlight></codeline>
-<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;All<sp/>tensors<sp/>in<sp/>a<sp/>tensor_mul<sp/>must<sp/>have<sp/>the<sp/>same<sp/>element<sp/>type.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ResultIndexTypeSeq<sp/>=<sp/><ref refid="namespacetensor__tools_1a52592b19040f7e788b2621d034df6253" kindref="member">non_repeated_indices_t&lt;AllIndexIdMaps&gt;</ref>;</highlight></codeline>
-<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(ddc::type_seq_size_v&lt;ResultIndexTypeSeq&gt;<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType<sp/>result<sp/>=<sp/>0.0;</highlight></codeline>
-<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::internal_tensor_mul&lt;AllIndexIdMaps&gt;(</highlight></codeline>
-<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result,</highlight></codeline>
-<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;</highlight></codeline>
-<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::CalculateSize&lt;<ref refid="namespacetensor__tools_1abb2871c7aca6c2ad222ec182e2b6d250" kindref="member">unique_indices_t&lt;AllIndexIdMaps&gt;</ref>&gt;::value&gt;(),</highlight></codeline>
-<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_mul...);</highlight></codeline>
-<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ResultTensorType</highlight></codeline>
-<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>to_tensor_t&lt;ElementType,<sp/>get_type_seq_vector_index_set_t&lt;ResultIndexTypeSeq&gt;&gt;;</highlight></codeline>
-<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResultTensorType<sp/>result(0.0);</highlight></codeline>
-<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor&lt;ResultTensorType, ResultIndexTypeSeq&gt;</ref><sp/>indexed_result(result);</highlight></codeline>
-<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::internal_tensor_mul&lt;AllIndexIdMaps&gt;(</highlight></codeline>
-<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>indexed_result,</highlight></codeline>
-<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;</highlight></codeline>
-<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::CalculateSize&lt;<ref refid="namespacetensor__tools_1abb2871c7aca6c2ad222ec182e2b6d250" kindref="member">unique_indices_t&lt;AllIndexIdMaps&gt;</ref>&gt;::value&gt;(),</highlight></codeline>
-<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_mul...);</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="268"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IndexedTensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>t)</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Idx<sp/>=<sp/><ref refid="namespacetensor__tools_1a8b70750aa12d74e15a89a1a3acc3c322" kindref="member">get_nth_tensor_index_element_from_map_t&lt;Is, GlobalTensorIndexIdMap&gt;</ref>;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">TensorElem<sp/>=<sp/><ref refid="namespacetensor__tools_1a2978b8ce6b0bb07f92e089a9cc95337d" kindref="member">extract_sub_tensor_element_t</ref>&lt;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GlobalTensorIndexIdMap,</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ResultIndexedTensorType::index_pattern,</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&gt;;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ReverseTensorElem<sp/>=<sp/><ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">symmetric_tensor_element_t&lt;TensorElem&gt;</ref>;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(ReverseTensorElem::index()<sp/>&lt;=<sp/>TensorElem::index())<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>internal_tensor_mul_elem&lt;GlobalTensorIndexIdMap,<sp/>Is&gt;(result,<sp/>t...);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>GlobalTensorIndexIdMap,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Is,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultIndexedTensorType&gt;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>internal_apply_tensor_mul_symmetry_elem(ResultIndexedTensorType&amp;<sp/>result)</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Idx<sp/>=<sp/><ref refid="namespacetensor__tools_1a8b70750aa12d74e15a89a1a3acc3c322" kindref="member">get_nth_tensor_index_element_from_map_t&lt;Is, GlobalTensorIndexIdMap&gt;</ref>;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">TensorElem<sp/>=<sp/><ref refid="namespacetensor__tools_1a2978b8ce6b0bb07f92e089a9cc95337d" kindref="member">extract_sub_tensor_element_t</ref>&lt;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GlobalTensorIndexIdMap,</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ResultIndexedTensorType::index_pattern,</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&gt;;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ReverseTensorElem<sp/>=<sp/><ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">symmetric_tensor_element_t&lt;TensorElem&gt;</ref>;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(ReverseTensorElem::index()<sp/>&gt;<sp/>TensorElem::index())<sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result().template<sp/>get&lt;TensorElem&gt;()<sp/>=<sp/>result().template<sp/>get&lt;ReverseTensorElem&gt;();</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">GlobalTensorIndexIdMap,</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ResultIndexedTensorType,</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType,</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>internal_tensor_mul(</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResultIndexedTensorType&amp;<sp/>result,</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::index_sequence&lt;Is...&gt;,</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IndexedTensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>t)</highlight></codeline>
+<codeline lineno="185"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>((internal_tensor_mul_elem&lt;GlobalTensorIndexIdMap,<sp/>Is&gt;(result,<sp/>t...)),<sp/>...);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">GlobalTensorIndexIdMap,</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ResultIndexedTensorType,</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType,</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>symmetric_internal_tensor_mul(</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResultIndexedTensorType&amp;<sp/>result,</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::index_sequence&lt;Is...&gt;,</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IndexedTensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>t)</highlight></codeline>
+<codeline lineno="198"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>((symmetric_internal_tensor_mul_elem&lt;GlobalTensorIndexIdMap,<sp/>Is&gt;(result,<sp/>t...)),<sp/>...);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">GlobalTensorIndexIdMap,</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ResultIndexedTensorType,</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType,</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>internal_apply_tensor_mul_symmetry(</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResultIndexedTensorType&amp;<sp/>result,</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::index_sequence&lt;Is...&gt;)</highlight></codeline>
+<codeline lineno="210"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>((internal_apply_tensor_mul_symmetry_elem&lt;GlobalTensorIndexIdMap,<sp/>Is&gt;(result)),<sp/>...);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ID,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>AllIndexIdMaps&gt;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_id_validity()</highlight></codeline>
+<codeline lineno="216"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/>n_occurrences</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>char_occurrences_v&lt;ID,<sp/>index_identifiers_t&lt;AllIndexIdMaps&gt;&gt;;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(n_occurrences<sp/>==<sp/>2)<sp/>{</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RelevantVectorIndexSets<sp/>=<sp/><ref refid="namespacetensor__tools_1a980d9ffa93ea63cb1ec252adc26d0f2f" kindref="member">relevant_vector_index_sets_t&lt;ID, AllIndexIdMaps&gt;</ref>;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Set1<sp/>=<sp/>ddc::type_seq_element_t&lt;0,<sp/>RelevantVectorIndexSets&gt;;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Set2<sp/>=<sp/>ddc::type_seq_element_t&lt;1,<sp/>RelevantVectorIndexSets&gt;;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_covariant_idx<sp/>=<sp/>(is_covariant_vector_index_set_v&lt;Set1&gt;)</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(is_covariant_vector_index_set_v&lt;Set2&gt;);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_contravariant_idx<sp/>=<sp/>(is_contravariant_vector_index_set_v&lt;Set1&gt;)</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(is_contravariant_vector_index_set_v&lt;Set2&gt;);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>has_covariant_idx<sp/>&amp;&amp;<sp/>has_contravariant_idx,</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Repeated<sp/>indices<sp/>should<sp/>not<sp/>be<sp/>associated<sp/>with<sp/>two<sp/>covariant<sp/>or<sp/>two<sp/>contravariant<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;indices.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;get_contravariant_dims_t&lt;Set1&gt;,<sp/>get_contravariant_dims_t&lt;Set2&gt;&gt;,</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>sum<sp/>over<sp/>incompatible<sp/>VectorIndexSets.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n_occurrences<sp/>==<sp/>1,</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;You<sp/>should<sp/>not<sp/>have<sp/>more<sp/>than<sp/>two<sp/>of<sp/>any<sp/>one<sp/>index<sp/>in<sp/>an<sp/>index<sp/>expression.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">AllIndexIdMaps,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">UniqueIds,<sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_all_id_validity(std::index_sequence&lt;Is...&gt;)</highlight></codeline>
+<codeline lineno="243"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/>((check_id_validity&lt;ddc::type_seq_element_t&lt;Is,<sp/>UniqueIds&gt;::value,<sp/>AllIndexIdMaps&gt;()),<sp/>...);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>details</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_symmetric,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType&gt;</highlight></codeline>
+<codeline lineno="264" refid="namespacetensor__tools_1a9e1b4a1bf91fbc9735e82132ff78957c" refkind="member"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="namespacetensor__tools_1a9e1b4a1bf91fbc9735e82132ff78957c" kindref="member">tensor_mul</ref>(IndexedTensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>tensor_to_mul)</highlight></codeline>
+<codeline lineno="265"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(is_indexed_tensor_v&lt;IndexedTensorType&gt;<sp/>&amp;&amp;<sp/>...),</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;A<sp/>tensor<sp/>multiplication<sp/>must<sp/>be<sp/>carried<sp/>out<sp/>over<sp/>IndexedTensor<sp/>objects&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>TypeSeq<sp/>of<sp/>VectorIndexIdMaps<sp/>describing<sp/>all<sp/>the<sp/>indices<sp/>which<sp/>appear<sp/>in<sp/>the<sp/>calculation.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">AllIndexIdMaps<sp/>=<sp/>type_seq_cat_t&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IndexedTensorType::index_pattern...&gt;;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">UniqueIndexIds<sp/>=<sp/>type_seq_unique_t&lt;index_identifiers_t&lt;AllIndexIdMaps&gt;&gt;;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>details::check_all_id_validity&lt;AllIndexIdMaps,<sp/>UniqueIndexIds&gt;(</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;ddc::type_seq_size_v&lt;UniqueIndexIds&gt;&gt;());</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Use<sp/>the<sp/>first<sp/>tensor<sp/>argument<sp/>to<sp/>extract<sp/>the<sp/>element<sp/>type<sp/>of<sp/>the<sp/>result.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ElementType<sp/>=<sp/>std::tuple_element_t&lt;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0,</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::tuple&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IndexedTensorType::tensor_type::element_type...&gt;&gt;;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IndexedTensorType::tensor_type::element_type,</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType&gt;<sp/>&amp;&amp;<sp/>...),</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;All<sp/>tensors<sp/>in<sp/>a<sp/>tensor_mul<sp/>must<sp/>have<sp/>the<sp/>same<sp/>element<sp/>type.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ResultIndexTypeSeq<sp/>=<sp/><ref refid="namespacetensor__tools_1a52592b19040f7e788b2621d034df6253" kindref="member">non_repeated_indices_t&lt;AllIndexIdMaps&gt;</ref>;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(ddc::type_seq_size_v&lt;ResultIndexTypeSeq&gt;<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType<sp/>result<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::internal_tensor_mul&lt;AllIndexIdMaps&gt;(</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result,</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::CalculateSize&lt;<ref refid="namespacetensor__tools_1abb2871c7aca6c2ad222ec182e2b6d250" kindref="member">unique_indices_t&lt;AllIndexIdMaps&gt;</ref>&gt;::value&gt;(),</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_mul...);</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ResultTensorType</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>to_tensor_t&lt;ElementType,<sp/>get_type_seq_vector_index_set_t&lt;ResultIndexTypeSeq&gt;&gt;;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResultTensorType<sp/>result(0.0);</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor&lt;ResultTensorType, ResultIndexTypeSeq&gt;</ref><sp/>indexed_result(result);</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(is_symmetric)<sp/>{</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(ddc::type_seq_size_v&lt;ddc::type_seq_element_t&lt;0,<sp/>ResultIndexTypeSeq&gt;&gt;)</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>==<sp/>(ddc::type_seq_size_v&lt;</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_element_t&lt;1,<sp/>ResultIndexTypeSeq&gt;&gt;),</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Matrix<sp/>must<sp/>be<sp/>square<sp/>to<sp/>be<sp/>symmetrical&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::symmetric_internal_tensor_mul&lt;AllIndexIdMaps&gt;(</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>indexed_result,</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::CalculateSize&lt;<ref refid="namespacetensor__tools_1abb2871c7aca6c2ad222ec182e2b6d250" kindref="member">unique_indices_t&lt;AllIndexIdMaps&gt;</ref>&gt;::value&gt;(),</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_mul...);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::internal_apply_tensor_mul_symmetry&lt;ResultIndexTypeSeq&gt;(</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>indexed_result,</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;details::CalculateSize&lt;ResultIndexTypeSeq&gt;::value&gt;());</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::internal_tensor_mul&lt;AllIndexIdMaps&gt;(</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>indexed_result,</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>details::CalculateSize&lt;<ref refid="namespacetensor__tools_1abb2871c7aca6c2ad222ec182e2b6d250" kindref="member">unique_indices_t&lt;AllIndexIdMaps&gt;</ref>&gt;::value&gt;(),</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_mul...);</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="320"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>details</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight></codeline>
+<codeline lineno="322"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>tensor_tools</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">...<sp/>ids,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType&gt;</highlight></codeline>
+<codeline lineno="336" refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" refkind="member"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="337"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(ids)<sp/>==<sp/>TensorType::rank(),</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;The<sp/>number<sp/>of<sp/>indices<sp/>provided<sp/>must<sp/>be<sp/>equal<sp/>to<sp/>the<sp/>rank<sp/>of<sp/>the<sp/>tensor.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacetensor__tools" kindref="compound">tensor_tools</ref>;</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">TypeSeqCharIds<sp/>=<sp/>ddc::detail::TypeSeq&lt;std::integral_constant&lt;char,<sp/>ids&gt;...&gt;;</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>details::internal_index&lt;</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TypeSeqCharIds&gt;(tensor,<sp/>std::make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(ids)&gt;());</highlight></codeline>
+<codeline lineno="345"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_symmetric<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType&gt;</highlight></codeline>
+<codeline lineno="359" refid="indexed__tensor_8hpp_1a294189c1e9dbf86d07b1573bbd60daeb" refkind="member"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1a294189c1e9dbf86d07b1573bbd60daeb" kindref="member">tensor_mul</ref>(IndexedTensorType...<sp/>tensor_to_mul)</highlight></codeline>
+<codeline lineno="360"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor_tools::tensor_mul&lt;false&gt;(tensor_to_mul...);</highlight></codeline>
+<codeline lineno="362"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"></highlight></codeline>
+<codeline lineno="375"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexedTensorType&gt;</highlight></codeline>
+<codeline lineno="376" refid="indexed__tensor_8hpp_1ad5c11524ca63b332a278c98368d6f1cf" refkind="member"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad5c11524ca63b332a278c98368d6f1cf" kindref="member">symmetric_tensor_mul</ref>(IndexedTensorType...<sp/>tensor_to_mul)</highlight></codeline>
+<codeline lineno="377"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(tensor_tools::is_indexed_tensor_v&lt;IndexedTensorType&gt;<sp/>&amp;&amp;<sp/>...),</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;A<sp/>tensor<sp/>multiplication<sp/>must<sp/>be<sp/>carried<sp/>out<sp/>over<sp/>IndexedTensor<sp/>objects&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(((IndexedTensorType::tensor_type::rank()<sp/>==<sp/>2)<sp/>&amp;&amp;<sp/>...));</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor_tools::tensor_mul&lt;true&gt;(tensor_to_mul...);</highlight></codeline>
+<codeline lineno="383"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp"/>
   </compounddef>

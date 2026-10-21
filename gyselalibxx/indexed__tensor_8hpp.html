@@ -623,6 +623,10 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-symmetric_tensor_mul"><strong>symmetric_tensor_mul</strong></a> (IndexedTensorType... tensor_to_mul) <br><em>A function to multiply tensors together to obtain a symmetric tensor. IndexedTensors are used to describe the index pattern of the multiplication. Example:</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
 <td style="text-align: left;"><a href="#function-tensor_mul"><strong>tensor_mul</strong></a> (IndexedTensorType... tensor_to_mul) <br><em>A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example:</em></td>
 </tr>
 </tbody>
@@ -651,9 +655,27 @@ KOKKOS_FUNCTION auto index (
 <p>An IndexedTensor object. </p>
 <hr>
 
+<h3 id="function-symmetric_tensor_mul">function symmetric_tensor_mul</h3>
+<p><em>A function to multiply tensors together to obtain a symmetric tensor. IndexedTensors are used to describe the index pattern of the multiplication. Example:</em> </p>
+<pre><code class="language-C++">template&lt;class... IndexedTensorType&gt;
+KOKKOS_FUNCTION auto symmetric_tensor_mul (
+    IndexedTensorType... tensor_to_mul
+) 
+</code></pre>
+<pre><code class="language-C++">// Create a tensor C such that C_{ik} = C_{ki} = A_{ij} B^{j}_{k}
+Tensor C = symmetric_tensor_mul(index&lt;'i', 'j'&gt;(A), index&lt;'j', 'k'&gt;(B));
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tensor_to_mul</code> The indexed tensor objects which should be multiplied together. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A tensor that is the result of multiplying the objects according to the index pattern </p>
+<hr>
+
 <h3 id="function-tensor_mul">function tensor_mul</h3>
 <p><em>A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example:</em> </p>
-<pre><code class="language-C++">template&lt;class... IndexedTensorType&gt;
+<pre><code class="language-C++">template&lt;bool is_symmetric, class... IndexedTensorType&gt;
 KOKKOS_FUNCTION auto tensor_mul (
     IndexedTensorType... tensor_to_mul
 ) 

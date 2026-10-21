@@ -57,6 +57,7 @@
 | typedef typename details::GetIndexIds&lt; TypeSeqVectorIndexIdMap &gt;::type | [**index\_identifiers\_t**](#typedef-index_identifiers_t)  <br>_Create a TypeSeq of integral\_constants containing all the character ids found in the TypeSeqVectorIndexIdMap._  |
 | typedef typename details::GetNonRepeatedIndices&lt; TypeSeqVectorIndexIdMap, ddc::type\_seq\_size\_v&lt; TypeSeqVectorIndexIdMap &gt; - 1, [**index\_identifiers\_t**](namespacetensor__tools.md#typedef-index_identifiers_t)&lt; TypeSeqVectorIndexIdMap &gt; &gt;::type | [**non\_repeated\_indices\_t**](#typedef-non_repeated_indices_t)  <br>_Extract the VectorIndexIdMaps whose character id only appears once in a TypeSeq of VectorIndexIdMaps._  |
 | typedef typename details::GetRelevantVectorIndexSets&lt; ID, TypeSeqVectorIndexIdMap &gt;::type | [**relevant\_vector\_index\_sets\_t**](#typedef-relevant_vector_index_sets_t)  <br>_Extract all VectorIndexSets which are described by the same character identifier._  |
+| typedef [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md)&lt; typename TensorIndexElem::tensor\_index\_set, ddc::type\_seq\_element\_t&lt; ddc::type\_seq\_rank\_v&lt; ddc::type\_seq\_element\_t&lt; 1, typename TensorIndexElem::IdxTypeSeq &gt;, ddc::type\_seq\_element\_t&lt; 1, typename TensorIndexElem::tensor\_index\_set &gt; &gt;, ddc::type\_seq\_element\_t&lt; 0, typename TensorIndexElem::tensor\_index\_set &gt; &gt;, ddc::type\_seq\_element\_t&lt; ddc::type\_seq\_rank\_v&lt; ddc::type\_seq\_element\_t&lt; 0, typename TensorIndexElem::IdxTypeSeq &gt;, ddc::type\_seq\_element\_t&lt; 0, typename TensorIndexElem::tensor\_index\_set &gt; &gt;, ddc::type\_seq\_element\_t&lt; 1, typename TensorIndexElem::tensor\_index\_set &gt; &gt; &gt; | [**symmetric\_tensor\_element\_t**](#typedef-symmetric_tensor_element_t)  <br>_Get the_ [_**TensorIndexElement**_](classtensor__tools_1_1TensorIndexElement.md) _representing the element with the same contents in a symmetric matrix._ |
 | typedef typename details::ToTensorIndexElement&lt; ValidatingTensorIndexSet, TypeSeqTensorIndexTag &gt;::type | [**to\_tensor\_index\_element\_t**](#typedef-to_tensor_index_element_t)  <br>_Get a_ [_**TensorIndexElement**_](classtensor__tools_1_1TensorIndexElement.md) _from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices._ |
 | typedef typename details::GetUniqueIndices&lt; TypeSeqVectorIndexIdMap &gt;::type | [**unique\_indices\_t**](#typedef-unique_indices_t)  <br>_Create a TypeSeq of_ [_**VectorIndexIdMap**_](structtensor__tools_1_1VectorIndexIdMap.md) _in which each character id only appears once from a TypeSeq of VectorIndexIdMaps with repeat character ids._ |
 
@@ -88,6 +89,11 @@
 
 
 
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|  KOKKOS\_FUNCTION auto | [**tensor\_mul**](#function-tensor_mul) (IndexedTensorType const &... tensor\_to\_mul) <br>_A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example:_  |
 
 
 
@@ -325,6 +331,31 @@ using tensor_tools::relevant_vector_index_sets_t = typedef typename details::Get
 
 
 
+### typedef symmetric\_tensor\_element\_t 
+
+_Get the_ [_**TensorIndexElement**_](classtensor__tools_1_1TensorIndexElement.md) _representing the element with the same contents in a symmetric matrix._
+```C++
+using tensor_tools::symmetric_tensor_element_t = typedef TensorIndexElement< typename TensorIndexElem::tensor_index_set, ddc::type_seq_element_t< ddc::type_seq_rank_v< ddc::type_seq_element_t<1, typename TensorIndexElem::IdxTypeSeq>, ddc::type_seq_element_t<1, typename TensorIndexElem::tensor_index_set> >, ddc::type_seq_element_t<0, typename TensorIndexElem::tensor_index_set> >, ddc::type_seq_element_t< ddc::type_seq_rank_v< ddc::type_seq_element_t<0, typename TensorIndexElem::IdxTypeSeq>, ddc::type_seq_element_t<0, typename TensorIndexElem::tensor_index_set> >, ddc::type_seq_element_t<1, typename TensorIndexElem::tensor_index_set> >>;
+```
+
+
+
+I.e. return the [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) describing A\_{ik} when given the [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) describing A\_{ki}. 
+
+**Template parameters:**
+
+
+* `TensorIndexElem` A [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md). 
+
+
+
+
+        
+
+<hr>
+
+
+
 ### typedef to\_tensor\_index\_element\_t 
 
 _Get a_ [_**TensorIndexElement**_](classtensor__tools_1_1TensorIndexElement.md) _from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices._
@@ -455,6 +486,55 @@ constexpr bool tensor_tools::is_tensor_index_element_v;
 
 
 
+
+<hr>
+## Public Functions Documentation
+
+
+
+
+### function tensor\_mul 
+
+_A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example:_ 
+```C++
+template<bool is_symmetric, class... IndexedTensorType>
+KOKKOS_FUNCTION auto tensor_tools::tensor_mul (
+    IndexedTensorType const &... tensor_to_mul
+) 
+```
+
+
+
+
+```C++
+// Create a tensor C such that C_{ik} = A_{ij} B^{j}_{k}
+Tensor C = tensor_mul(index<'i', 'j'>(A), index<'j', 'k'>(B));
+```
+ 
+
+**Template parameters:**
+
+
+* `is_symmetric` Indicates if the resulting tensor is symmetric. If this is the case then the number of required calculations can be reduced. 
+
+
+
+**Parameters:**
+
+
+* `tensor_to_mul` The indexed tensor objects which should be multiplied together. 
+
+
+
+**Returns:**
+
+A tensor that is the result of multiplying the objects according to the index pattern 
+
+
+
+
+
+        
 
 <hr>
 

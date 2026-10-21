@@ -68,6 +68,7 @@
 * **to\_coord** ([**ddcHelper**](namespaceddcHelper.md))
 * **total\_interval\_length** ([**ddcHelper**](namespaceddcHelper.md))
 * **theta\_mod** ([**detail\_poisson**](namespacedetail__poisson.md))
+* **tensor\_mul** ([**tensor\_tools**](namespacetensor__tools.md))
 
 
 

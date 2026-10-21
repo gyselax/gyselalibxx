@@ -3769,11 +3769,13 @@
     <member refid="namespacetensor__tools_1a8a7c5666e38030f40be9343d8503b585" kind="typedef"><name>get_nth_tensor_index_element_t</name></member>
     <member refid="namespacetensor__tools_1a8b70750aa12d74e15a89a1a3acc3c322" kind="typedef"><name>get_nth_tensor_index_element_from_map_t</name></member>
     <member refid="namespacetensor__tools_1a2978b8ce6b0bb07f92e089a9cc95337d" kind="typedef"><name>extract_sub_tensor_element_t</name></member>
+    <member refid="namespacetensor__tools_1a4b25532708f7c18aa4ad64e743b4401c" kind="typedef"><name>symmetric_tensor_element_t</name></member>
     <member refid="namespacetensor__tools_1a09cf24ef307ce7250239f76c47aa7ac9" kind="variable"><name>enable_indexed_tensor</name></member>
     <member refid="namespacetensor__tools_1ab86f1ce03b1c2a89e229a73da3e4b561" kind="variable"><name>enable_indexed_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;</name></member>
     <member refid="namespacetensor__tools_1a6ab8da07aa375da3ae97f2347ed8b40d" kind="variable"><name>is_indexed_tensor_v</name></member>
     <member refid="namespacetensor__tools_1a96b145e7281df8a07bc6db14494f3230" kind="variable"><name>is_tensor_index_element_v</name></member>
     <member refid="namespacetensor__tools_1a86b09bb6765b9454c8da9ae3f88b459a" kind="variable"><name>char_occurrences_v</name></member>
+    <member refid="namespacetensor__tools_1a9e1b4a1bf91fbc9735e82132ff78957c" kind="function"><name>tensor_mul</name></member>
   </compound>
   <compound refid="namespacevector__mapper__detail" kind="namespace"><name>vector_mapper_detail</name>
     <member refid="vector__mapper_8hpp_1a744d5389845a75ad3f7bfaeb07542872" kind="typedef"><name>evaluation_coord_t</name></member>
@@ -3911,7 +3913,8 @@
   </compound>
   <compound refid="indexed__tensor_8hpp" kind="file"><name>indexed_tensor.hpp</name>
     <member refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kind="function"><name>index</name></member>
-    <member refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kind="function"><name>tensor_mul</name></member>
+    <member refid="indexed__tensor_8hpp_1a294189c1e9dbf86d07b1573bbd60daeb" kind="function"><name>tensor_mul</name></member>
+    <member refid="indexed__tensor_8hpp_1ad5c11524ca63b332a278c98368d6f1cf" kind="function"><name>symmetric_tensor_mul</name></member>
   </compound>
   <compound refid="static__tensors_8hpp" kind="file"><name>static_tensors.hpp</name>
   </compound>
@@ -4052,6 +4055,12 @@
   </compound>
   <compound refid="vortex__merger__initialisation_8hpp" kind="file"><name>vortex_merger_initialisation.hpp</name>
   </compound>
+  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
   <compound refid="poisson__like__rhs__function_8hpp" kind="file"><name>poisson_like_rhs_function.hpp</name>
   </compound>
   <compound refid="bsl__predcorr_8hpp" kind="file"><name>bsl_predcorr.hpp</name>
@@ -4059,6 +4068,12 @@
   <compound refid="bsl__predcorr__second__order__explicit_8hpp" kind="file"><name>bsl_predcorr_second_order_explicit.hpp</name>
   </compound>
   <compound refid="bsl__predcorr__second__order__implicit_8hpp" kind="file"><name>bsl_predcorr_second_order_implicit.hpp</name>
+  </compound>
+  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="collision__configuration_8hpp" kind="file"><name>collision_configuration.hpp</name>
   </compound>
@@ -4414,12 +4429,6 @@
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
   </compound>
-  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
   <compound refid="mpichargedensitycalculator_8cpp" kind="file"><name>mpichargedensitycalculator.cpp</name>
   </compound>
   <compound refid="mpichargedensitycalculator_8hpp" kind="file"><name>mpichargedensitycalculator.hpp</name>
@@ -4439,12 +4448,6 @@
   <compound refid="geometryXVx_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="geometryXVx_2time__integration_2predcorr_8cpp" kind="file"><name>predcorr.cpp</name>
   </compound>

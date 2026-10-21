@@ -65,6 +65,7 @@
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_FUNCTION auto | [**index**](#function-index) (TensorType const & tensor) <br>_A tool to build an IndexedTensor object from a set of indices. This object can be used to carry out a tensor multiplication using the tensor\_mul function. Example:_  |
+|  KOKKOS\_FUNCTION auto | [**symmetric\_tensor\_mul**](#function-symmetric_tensor_mul) (IndexedTensorType... tensor\_to\_mul) <br>_A function to multiply tensors together to obtain a symmetric tensor. IndexedTensors are used to describe the index pattern of the multiplication. Example:_  |
 |  KOKKOS\_FUNCTION auto | [**tensor\_mul**](#function-tensor_mul) (IndexedTensorType... tensor\_to\_mul) <br>_A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example:_  |
 
 
@@ -152,11 +153,51 @@ An IndexedTensor object.
 
 
 
+### function symmetric\_tensor\_mul 
+
+_A function to multiply tensors together to obtain a symmetric tensor. IndexedTensors are used to describe the index pattern of the multiplication. Example:_ 
+```C++
+template<class... IndexedTensorType>
+KOKKOS_FUNCTION auto symmetric_tensor_mul (
+    IndexedTensorType... tensor_to_mul
+) 
+```
+
+
+
+
+```C++
+// Create a tensor C such that C_{ik} = C_{ki} = A_{ij} B^{j}_{k}
+Tensor C = symmetric_tensor_mul(index<'i', 'j'>(A), index<'j', 'k'>(B));
+```
+ 
+
+**Parameters:**
+
+
+* `tensor_to_mul` The indexed tensor objects which should be multiplied together. 
+
+
+
+**Returns:**
+
+A tensor that is the result of multiplying the objects according to the index pattern 
+
+
+
+
+
+        
+
+<hr>
+
+
+
 ### function tensor\_mul 
 
 _A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example:_ 
 ```C++
-template<class... IndexedTensorType>
+template<bool is_symmetric, class... IndexedTensorType>
 KOKKOS_FUNCTION auto tensor_mul (
     IndexedTensorType... tensor_to_mul
 ) 

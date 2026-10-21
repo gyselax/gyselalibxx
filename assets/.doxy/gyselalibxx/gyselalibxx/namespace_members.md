@@ -101,6 +101,11 @@
 * **relevant\_vector\_index\_sets\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 
 
+## s
+
+* **symmetric\_tensor\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
+
+
 ## t
 
 * **to\_coord** ([**ddcHelper**](namespaceddcHelper.md))
@@ -108,6 +113,7 @@
 * **total\_interval\_length** ([**ddcHelper**](namespaceddcHelper.md))
 * **type\_seq\_intersection\_t** ([**ddcHelper**](namespaceddcHelper.md))
 * **theta\_mod** ([**detail\_poisson**](namespacedetail__poisson.md))
+* **tensor\_mul** ([**tensor\_tools**](namespacetensor__tools.md))
 * **to\_tensor\_index\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 
 

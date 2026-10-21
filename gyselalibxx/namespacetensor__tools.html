@@ -681,6 +681,10 @@
 <td style="text-align: left;"><a href="#typedef-relevant_vector_index_sets_t"><strong>relevant_vector_index_sets_t</strong></a>  <br><em>Extract all VectorIndexSets which are described by the same character identifier.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef <a href="classtensor__tools_1_1TensorIndexElement.html"><strong>TensorIndexElement</strong></a>&lt; typename TensorIndexElem::tensor_index_set, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt; 1, typename TensorIndexElem::IdxTypeSeq &gt;, ddc::type_seq_element_t&lt; 1, typename TensorIndexElem::tensor_index_set &gt; &gt;, ddc::type_seq_element_t&lt; 0, typename TensorIndexElem::tensor_index_set &gt; &gt;, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt; 0, typename TensorIndexElem::IdxTypeSeq &gt;, ddc::type_seq_element_t&lt; 0, typename TensorIndexElem::tensor_index_set &gt; &gt;, ddc::type_seq_element_t&lt; 1, typename TensorIndexElem::tensor_index_set &gt; &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-symmetric_tensor_element_t"><strong>symmetric_tensor_element_t</strong></a>  <br><em>Get the</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>representing the element with the same contents in a symmetric matrix.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename details::ToTensorIndexElement&lt; ValidatingTensorIndexSet, TypeSeqTensorIndexTag &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-to_tensor_index_element_t"><strong>to_tensor_index_element_t</strong></a>  <br><em>Get a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices.</em></td>
 </tr>
@@ -718,6 +722,21 @@
 <tr>
 <td style="text-align: right;">constexpr bool</td>
 <td style="text-align: left;"><a href="#variable-is_tensor_index_element_v"><strong>is_tensor_index_element_v</strong></a>   = <code>details::enable\_tensor\_index\_element&amp;lt;std::remove\_const\_t&amp;lt;std::remove\_reference\_t&amp;lt;Type&amp;gt;&amp;gt;&amp;gt;</code><br><em>A helper to check if a type is a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-tensor_mul"><strong>tensor_mul</strong></a> (IndexedTensorType const &amp;... tensor_to_mul) <br><em>A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example:</em></td>
 </tr>
 </tbody>
 </table>
@@ -806,6 +825,17 @@
 </ul>
 <hr>
 
+<h3 id="typedef-symmetric_tensor_element_t">typedef symmetric_tensor_element_t</h3>
+<p><em>Get the</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>representing the element with the same contents in a symmetric matrix.</em></p>
+<pre><code class="language-C++">using tensor_tools::symmetric_tensor_element_t = typedef TensorIndexElement&lt; typename TensorIndexElem::tensor_index_set, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt;1, typename TensorIndexElem::IdxTypeSeq&gt;, ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt;0, typename TensorIndexElem::IdxTypeSeq&gt;, ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt; &gt;&gt;;
+</code></pre>
+<p>I.e. return the <a href="classtensor__tools_1_1TensorIndexElement.html"><strong>TensorIndexElement</strong></a> describing A_{ik} when given the <a href="classtensor__tools_1_1TensorIndexElement.html"><strong>TensorIndexElement</strong></a> describing A_{ki}. </p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>TensorIndexElem</code> A <a href="classtensor__tools_1_1TensorIndexElement.html"><strong>TensorIndexElement</strong></a>. </li>
+</ul>
+<hr>
+
 <h3 id="typedef-to_tensor_index_element_t">typedef to_tensor_index_element_t</h3>
 <p><em>Get a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices.</em></p>
 <pre><code class="language-C++">using tensor_tools::to_tensor_index_element_t = typedef typename details:: ToTensorIndexElement&lt;ValidatingTensorIndexSet, TypeSeqTensorIndexTag&gt;::type;
@@ -860,6 +890,28 @@
 <p><em>A helper to check if a type is a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">constexpr bool tensor_tools::is_tensor_index_element_v;
 </code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-tensor_mul">function tensor_mul</h3>
+<p><em>A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example:</em> </p>
+<pre><code class="language-C++">template&lt;bool is_symmetric, class... IndexedTensorType&gt;
+KOKKOS_FUNCTION auto tensor_tools::tensor_mul (
+    IndexedTensorType const &amp;... tensor_to_mul
+) 
+</code></pre>
+<pre><code class="language-C++">// Create a tensor C such that C_{ik} = A_{ij} B^{j}_{k}
+Tensor C = tensor_mul(index&lt;'i', 'j'&gt;(A), index&lt;'j', 'k'&gt;(B));
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>is_symmetric</code> Indicates if the resulting tensor is symmetric. If this is the case then the number of required calculations can be reduced. </li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tensor_to_mul</code> The indexed tensor objects which should be multiplied together. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A tensor that is the result of multiplying the objects according to the index pattern </p>
 <hr>
 
 <hr>

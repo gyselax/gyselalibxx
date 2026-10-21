@@ -113,6 +113,40 @@ KOKKOS_FUNCTION void internal_tensor_mul_elem(
 
 template <
         class GlobalTensorIndexIdMap,
+        std::size_t Is,
+        class ResultIndexedTensorType,
+        class... IndexedTensorType>
+KOKKOS_FUNCTION void symmetric_internal_tensor_mul_elem(
+        ResultIndexedTensorType& result,
+        IndexedTensorType const&... t)
+{
+    using Idx = get_nth_tensor_index_element_from_map_t<Is, GlobalTensorIndexIdMap>;
+    using TensorElem = extract_sub_tensor_element_t<
+            GlobalTensorIndexIdMap,
+            typename ResultIndexedTensorType::index_pattern,
+            Idx>;
+    using ReverseTensorElem = symmetric_tensor_element_t<TensorElem>;
+    if constexpr (ReverseTensorElem::index() <= TensorElem::index()) {
+        internal_tensor_mul_elem<GlobalTensorIndexIdMap, Is>(result, t...);
+    }
+}
+
+template <class GlobalTensorIndexIdMap, std::size_t Is, class ResultIndexedTensorType>
+KOKKOS_FUNCTION void internal_apply_tensor_mul_symmetry_elem(ResultIndexedTensorType& result)
+{
+    using Idx = get_nth_tensor_index_element_from_map_t<Is, GlobalTensorIndexIdMap>;
+    using TensorElem = extract_sub_tensor_element_t<
+            GlobalTensorIndexIdMap,
+            typename ResultIndexedTensorType::index_pattern,
+            Idx>;
+    using ReverseTensorElem = symmetric_tensor_element_t<TensorElem>;
+    if constexpr (ReverseTensorElem::index() > TensorElem::index()) {
+        result().template get<TensorElem>() = result().template get<ReverseTensorElem>();
+    }
+}
+
+template <
+        class GlobalTensorIndexIdMap,
         class ResultIndexedTensorType,
         class... IndexedTensorType,
         std::size_t... Is>
@@ -122,6 +156,31 @@ KOKKOS_FUNCTION void internal_tensor_mul(
         IndexedTensorType const&... t)
 {
     ((internal_tensor_mul_elem<GlobalTensorIndexIdMap, Is>(result, t...)), ...);
+}
+
+template <
+        class GlobalTensorIndexIdMap,
+        class ResultIndexedTensorType,
+        class... IndexedTensorType,
+        std::size_t... Is>
+KOKKOS_FUNCTION void symmetric_internal_tensor_mul(
+        ResultIndexedTensorType& result,
+        std::index_sequence<Is...>,
+        IndexedTensorType const&... t)
+{
+    ((symmetric_internal_tensor_mul_elem<GlobalTensorIndexIdMap, Is>(result, t...)), ...);
+}
+
+template <
+        class GlobalTensorIndexIdMap,
+        class ResultIndexedTensorType,
+        class... IndexedTensorType,
+        std::size_t... Is>
+KOKKOS_FUNCTION void internal_apply_tensor_mul_symmetry(
+        ResultIndexedTensorType& result,
+        std::index_sequence<Is...>)
+{
+    ((internal_apply_tensor_mul_symmetry_elem<GlobalTensorIndexIdMap, Is>(result)), ...);
 }
 
 template <char ID, class AllIndexIdMaps>
@@ -157,26 +216,12 @@ KOKKOS_INLINE_FUNCTION void check_all_id_validity(std::index_sequence<Is...>)
     ((check_id_validity<ddc::type_seq_element_t<Is, UniqueIds>::value, AllIndexIdMaps>()), ...);
 }
 
+
 } // namespace details
 
-} // namespace tensor_tools
-
-template <char... ids, class TensorType>
-KOKKOS_FUNCTION auto index(TensorType const& tensor)
+template <bool is_symmetric, class... IndexedTensorType>
+KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType const&... tensor_to_mul)
 {
-    static_assert(
-            sizeof...(ids) == TensorType::rank(),
-            "The number of indices provided must be equal to the rank of the tensor.");
-    using namespace tensor_tools;
-    using TypeSeqCharIds = ddc::detail::TypeSeq<std::integral_constant<char, ids>...>;
-    return details::internal_index<
-            TypeSeqCharIds>(tensor, std::make_index_sequence<sizeof...(ids)>());
-}
-
-template <class... IndexedTensorType>
-KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
-{
-    using namespace tensor_tools;
     static_assert(
             (is_indexed_tensor_v<IndexedTensorType> && ...),
             "A tensor multiplication must be carried out over IndexedTensor objects");
@@ -208,13 +253,59 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
                 = to_tensor_t<ElementType, get_type_seq_vector_index_set_t<ResultIndexTypeSeq>>;
         ResultTensorType result(0.0);
         IndexedTensor<ResultTensorType, ResultIndexTypeSeq> indexed_result(result);
-        details::internal_tensor_mul<AllIndexIdMaps>(
-                indexed_result,
-                std::make_index_sequence<
-                        details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
-                tensor_to_mul...);
+        if constexpr (is_symmetric) {
+            static_assert(
+                    (ddc::type_seq_size_v<ddc::type_seq_element_t<0, ResultIndexTypeSeq>>)
+                            == (ddc::type_seq_size_v<
+                                    ddc::type_seq_element_t<1, ResultIndexTypeSeq>>),
+                    "Matrix must be square to be symmetrical");
+            details::symmetric_internal_tensor_mul<AllIndexIdMaps>(
+                    indexed_result,
+                    std::make_index_sequence<
+                            details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
+                    tensor_to_mul...);
+            details::internal_apply_tensor_mul_symmetry<ResultIndexTypeSeq>(
+                    indexed_result,
+                    std::make_index_sequence<details::CalculateSize<ResultIndexTypeSeq>::value>());
+        } else {
+            details::internal_tensor_mul<AllIndexIdMaps>(
+                    indexed_result,
+                    std::make_index_sequence<
+                            details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
+                    tensor_to_mul...);
+        }
         return result;
     }
+} // namespace details
+
+} // namespace tensor_tools
+
+template <char... ids, class TensorType>
+KOKKOS_FUNCTION auto index(TensorType const& tensor)
+{
+    static_assert(
+            sizeof...(ids) == TensorType::rank(),
+            "The number of indices provided must be equal to the rank of the tensor.");
+    using namespace tensor_tools;
+    using TypeSeqCharIds = ddc::detail::TypeSeq<std::integral_constant<char, ids>...>;
+    return details::internal_index<
+            TypeSeqCharIds>(tensor, std::make_index_sequence<sizeof...(ids)>());
+}
+
+template <bool is_symmetric = false, class... IndexedTensorType>
+KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
+{
+    return tensor_tools::tensor_mul<false>(tensor_to_mul...);
+}
+
+template <class... IndexedTensorType>
+KOKKOS_FUNCTION auto symmetric_tensor_mul(IndexedTensorType... tensor_to_mul)
+{
+    static_assert(
+            (tensor_tools::is_indexed_tensor_v<IndexedTensorType> && ...),
+            "A tensor multiplication must be carried out over IndexedTensor objects");
+    static_assert(((IndexedTensorType::tensor_type::rank() == 2) && ...));
+    return tensor_tools::tensor_mul<true>(tensor_to_mul...);
 }
 ```
 

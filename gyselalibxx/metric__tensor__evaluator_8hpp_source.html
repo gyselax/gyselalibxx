@@ -678,14 +678,14 @@ public:
     KOKKOS_FUNCTION DTensor&lt;Dims_cov, Dims_cov&gt; operator()(CoordArg const&amp; coord) const
     {
         Tensor J = m_mapping.jacobian_matrix(coord);
-        return tensor_mul(index&lt;'j', 'i'&gt;(J), index&lt;'j', 'k'&gt;(J));
+        return symmetric_tensor_mul(index&lt;'j', 'i'&gt;(J), index&lt;'j', 'k'&gt;(J));
     }
 
     KOKKOS_FUNCTION DTensor&lt;Dims, Dims&gt; inverse(CoordArg const&amp; coord) const
     {
         InverseJacobianMatrix get_inverse_jacobian(m_mapping);
         Tensor inv_J = get_inverse_jacobian(coord);
-        return tensor_mul(index&lt;'i', 'j'&gt;(inv_J), index&lt;'k', 'j'&gt;(inv_J));
+        return symmetric_tensor_mul(index&lt;'i', 'j'&gt;(inv_J), index&lt;'k', 'j'&gt;(inv_J));
     }
 
     template &lt;ddc::concepts::discrete_element IdxType&gt;

@@ -957,6 +957,20 @@ using extract_sub_tensor_element_t = typename details::ExtractSubTensorElement&l
         TypeSeqVectorIndexIdMapLocal,
         GlobalTensorIndexElement&gt;::type;
 
+template &lt;class TensorIndexElem&gt;
+using symmetric_tensor_element_t = TensorIndexElement&lt;
+        typename TensorIndexElem::tensor_index_set,
+        ddc::type_seq_element_t&lt;
+                ddc::type_seq_rank_v&lt;
+                        ddc::type_seq_element_t&lt;1, typename TensorIndexElem::IdxTypeSeq&gt;,
+                        ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt;&gt;,
+                ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt;&gt;,
+        ddc::type_seq_element_t&lt;
+                ddc::type_seq_rank_v&lt;
+                        ddc::type_seq_element_t&lt;0, typename TensorIndexElem::IdxTypeSeq&gt;,
+                        ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt;&gt;,
+                ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt;&gt;&gt;;
+
 } // namespace tensor_tools
 </code></pre></div>
               

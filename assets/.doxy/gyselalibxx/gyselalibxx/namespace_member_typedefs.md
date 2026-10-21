@@ -56,6 +56,11 @@
 * **relevant\_vector\_index\_sets\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 
 
+## s
+
+* **symmetric\_tensor\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
+
+
 ## t
 
 * **to\_coord\_t** ([**ddcHelper**](namespaceddcHelper.md))

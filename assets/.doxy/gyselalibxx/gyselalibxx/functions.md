@@ -137,6 +137,7 @@
 
 ## s
 
+* **symmetric\_tensor\_mul** ([**indexed\_tensor.hpp**](indexed__tensor_8hpp.md))
 * **scalar\_product** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **sum** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **save\_logger** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))

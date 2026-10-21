@@ -368,6 +368,36 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="493" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="496" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1a4b25532708f7c18aa4ad64e743b4401c" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class TensorIndexElem</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref>&lt; typename TensorIndexElem::tensor_index_set, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt; 1, typename TensorIndexElem::IdxTypeSeq &gt;, ddc::type_seq_element_t&lt; 1, typename TensorIndexElem::tensor_index_set &gt; &gt;, ddc::type_seq_element_t&lt; 0, typename TensorIndexElem::tensor_index_set &gt; &gt;, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt; 0, typename TensorIndexElem::IdxTypeSeq &gt;, ddc::type_seq_element_t&lt; 0, typename TensorIndexElem::tensor_index_set &gt; &gt;, ddc::type_seq_element_t&lt; 1, typename TensorIndexElem::tensor_index_set &gt; &gt; &gt;</type>
+        <definition>using tensor_tools::symmetric_tensor_element_t = typedef TensorIndexElement&lt; typename TensorIndexElem::tensor_index_set, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt;1, typename TensorIndexElem::IdxTypeSeq&gt;, ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt;0, typename TensorIndexElem::IdxTypeSeq&gt;, ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt; &gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>symmetric_tensor_element_t</name>
+        <qualifiedname>tensor_tools::symmetric_tensor_element_t</qualifiedname>
+        <briefdescription>
+<para>Get the <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> representing the element with the same contents in a symmetric matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>I.e. return the <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> describing A_{ik} when given the <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> describing A_{ki}. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TensorIndexElem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="505" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="516" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="var">
       <memberdef kind="variable" id="namespacetensor__tools_1a09cf24ef307ce7250239f76c47aa7ac9" prot="public" static="no" constexpr="yes" mutable="no">
@@ -500,6 +530,62 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="176" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="176" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacetensor__tools_1a9e1b4a1bf91fbc9735e82132ff78957c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>is_symmetric</declname>
+            <defname>is_symmetric</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>IndexedTensorType</declname>
+            <defname>IndexedTensorType</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto tensor_tools::tensor_mul</definition>
+        <argsstring>(IndexedTensorType const &amp;... tensor_to_mul)</argsstring>
+        <name>tensor_mul</name>
+        <qualifiedname>tensor_tools::tensor_mul</qualifiedname>
+        <param>
+          <type>IndexedTensorType const &amp;...</type>
+          <declname>tensor_to_mul</declname>
+        </param>
+        <briefdescription>
+<para>A function to multiply tensors together. IndexedTensors are used to describe the index pattern of the multiplication. Example: </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting><codeline><highlight class="comment">//<sp/>Create<sp/>a<sp/>tensor<sp/>C<sp/>such<sp/>that<sp/>C_{ik}<sp/>=<sp/>A_{ij}<sp/>B^{j}_{k}</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>C<sp/>=<sp/><ref refid="namespacetensor__tools_1a9e1b4a1bf91fbc9735e82132ff78957c" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(A),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;k&apos;</highlight><highlight class="normal">&gt;(B));</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>is_symmetric</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indicates if the resulting tensor is symmetric. If this is the case then the number of required calculations can be reduced. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tensor_to_mul</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The indexed tensor objects which should be multiplied together. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A tensor that is the result of multiplying the objects according to the index pattern </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="264" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="264" bodyend="320"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
