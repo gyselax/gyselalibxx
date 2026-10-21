@@ -19,7 +19,6 @@ SpeciesInfo:
   mean_velocity_eq: 0.1
 
 Collisions:
-  nustar0_rpeak: 1.
   interspecies: true
 
 Algorithm:

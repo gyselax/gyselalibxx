@@ -53,7 +53,7 @@ struct InternalSpoofGridPhi : InternalSpoofGrid
  */
 template <
         class IdxRangeDistributionFunction,
-        class GridSp,
+        class Species,
         class GridPhi,
         class GridR,
         class GridTheta,
@@ -68,61 +68,36 @@ public:
     using IdxRangeDistributionFunctionType = IdxRangeDistributionFunction;
 
     /**
-     * @brief Mu grid.
-     */
-    using GridMuType = GridMu;
-    /**
-     * @brief Vpar grid.
-     */
-    using GridVparType = GridVpar;
-    /**
-     * @brief R grid.
-     */
-    using GridRType = GridR;
-    /**
-     * @brief Theta grid.
-     */
-    using GridThetaType = GridTheta;
-    /**
-     * @brief Phi grid.
-     */
-    using GridPhiType = GridPhi;
-    /**
-     * @brief Sp grid.
-     */
-    using GridSpType = GridSp;
-
-    /**
      * @brief Sp,Theta,R,Vpar index range.
      */
-    using IdxRangeSpThetaRVparType = IdxRange<GridSpType, GridThetaType, GridRType, GridVparType>;
+    using IdxRangeSpThetaRVparType = IdxRange<Species, GridTheta, GridR, GridVpar>;
     /**
      * @brief Theta,R index range.
      */
-    using IdxRangeThetaRType = IdxRange<GridThetaType, GridRType>;
+    using IdxRangeThetaRType = IdxRange<GridTheta, GridR>;
 
     /**
      * @brief Mu index range.
      */
-    using IdxRangeMuType = IdxRange<GridMuType>;
+    using IdxRangeMuType = IdxRange<GridMu>;
     /**
      * @brief Vpar index range.
      */
-    using IdxRangeVparType = IdxRange<GridVparType>;
+    using IdxRangeVparType = IdxRange<GridVpar>;
     /**
      * @brief R index range.
      */
-    using IdxRangeRType = IdxRange<GridRType>;
+    using IdxRangeRType = IdxRange<GridR>;
     /**
      * @brief Species index range.
      */
-    using IdxRangeSpType = IdxRange<GridSpType>;
+    using IdxRangeSpType = IdxRange<Species>;
 
     static_assert(
-            ddc::is_uniform_point_sampling_v<GridVparType>,
+            ddc::is_uniform_point_sampling_v<GridVpar>,
             "The grid must be uniform in the vpar direction.");
     static_assert(
-            ddc::is_uniform_point_sampling_v<GridVparType>,
+            ddc::is_uniform_point_sampling_v<GridVpar>,
             "The grid must be uniform in the mu direction.");
 
 public:
@@ -140,30 +115,26 @@ public:
             IdxRangeDistributionFunctionType index_range_fdistribution,
             DConstField<IdxRangeMuType> coeff_intdmu,
             DConstField<IdxRangeVparType> coeff_intdvpar)
-        : m_hat_As_allocation {extract_md_index_range<GridSpType>(index_range_fdistribution)}
-        , m_hat_Zs_allocation {extract_md_index_range<GridSpType>(index_range_fdistribution)}
-        , m_mask_buffer_r_allocation {extract_md_index_range<GridRType>(index_range_fdistribution)}
-        , m_mask_LIM_allocation {extract_md_index_range<GridThetaType, GridRType>(
+        : m_hat_As_allocation {extract_md_index_range<Species>(index_range_fdistribution)}
+        , m_hat_Zs_allocation {extract_md_index_range<Species>(index_range_fdistribution)}
+        , m_mask_buffer_r_allocation {extract_md_index_range<GridR>(index_range_fdistribution)}
+        , m_mask_LIM_allocation {extract_md_index_range<GridTheta, GridR>(
                   index_range_fdistribution)}
-        , m_B_norm_allocation {extract_md_index_range<GridThetaType, GridRType>(
+        , m_B_norm_allocation {extract_md_index_range<GridTheta, GridR>(index_range_fdistribution)}
+        , m_Bstar_s_allocation {extract_md_index_range<Species, GridTheta, GridR, GridVpar>(
                   index_range_fdistribution)}
-        , m_Bstar_s_allocation {extract_md_index_range<
-                  GridSpType,
-                  GridThetaType,
-                  GridRType,
-                  GridVparType>(index_range_fdistribution)}
-        , m_mug_allocation {extract_md_index_range<GridMuType>(index_range_fdistribution)}
-        , m_vparg_allocation {extract_md_index_range<GridVparType>(index_range_fdistribution)}
-        , m_coeff_AD_allocation {extract_md_index_range<GridRType>(index_range_fdistribution)}
+        , m_mug_allocation {extract_md_index_range<GridMu>(index_range_fdistribution)}
+        , m_vparg_allocation {extract_md_index_range<GridVpar>(index_range_fdistribution)}
+        , m_coeff_AD_allocation {extract_md_index_range<GridR>(index_range_fdistribution)}
         , m_coeff_intdmu {coeff_intdmu}
         , m_coeff_intdvpar {coeff_intdvpar}
         , m_collisions_interspecies {::PCpp_bool(yaml_input_file, ".Collisions.interspecies")}
-        , m_mu_extent {extract_md_index_range<GridMuType>(index_range_fdistribution).size()}
-        , m_vpar_extent {extract_md_index_range<GridVparType>(index_range_fdistribution).size()}
-        , m_r_extent {extract_md_index_range<GridRType>(index_range_fdistribution).size()}
-        , m_theta_extent {extract_md_index_range<GridThetaType>(index_range_fdistribution).size()}
-        , m_phi_extent {extract_md_index_range<GridPhiType>(index_range_fdistribution).size()}
-        , m_sp_extent {extract_md_index_range<GridSpType>(index_range_fdistribution).size()}
+        , m_mu_extent {extract_md_index_range<GridMu>(index_range_fdistribution).size()}
+        , m_vpar_extent {extract_md_index_range<GridVpar>(index_range_fdistribution).size()}
+        , m_r_extent {extract_md_index_range<GridR>(index_range_fdistribution).size()}
+        , m_theta_extent {extract_md_index_range<GridTheta>(index_range_fdistribution).size()}
+        , m_phi_extent {extract_md_index_range<GridPhi>(index_range_fdistribution).size()}
+        , m_sp_extent {extract_md_index_range<Species>(index_range_fdistribution).size()}
     {
         if (!((m_r_extent > 0) && ((m_r_extent & (m_r_extent - 1)) == 0) && (m_theta_extent > 0)
               && ((m_theta_extent & (m_theta_extent - 1)) == 0) && (m_phi_extent > 0)
@@ -178,18 +149,18 @@ public:
 
         {
             IdxRangeSpType const index_range_sp
-                    = extract_md_index_range<GridSpType>(index_range_fdistribution);
+                    = extract_md_index_range<Species>(index_range_fdistribution);
 
             /* Initialise the mass species.
              */
             host_t<DConstFieldSp> hat_As_host
-                    = ddc::host_discrete_space<GridSpType>().masses()[index_range_sp];
+                    = ddc::host_discrete_space<Species>().masses()[index_range_sp];
             ddc::parallel_deepcopy(get_field(m_hat_As_allocation), hat_As_host);
 
             /* Initialise the species charge.
              */
             host_t<DConstFieldSp> hat_Zs_host
-                    = ddc::host_discrete_space<GridSpType>().charges()[index_range_sp];
+                    = ddc::host_discrete_space<Species>().charges()[index_range_sp];
             ddc::parallel_deepcopy(get_field(m_hat_Zs_allocation), hat_Zs_host);
         }
 
@@ -299,9 +270,6 @@ protected:
         return IdxRange<Grid1D...>(extract_1d_index_range<Grid1D>(index_range)...);
     }
 
-    /* Not protected nor private because there is no internal state to
-     * protect/condition to satisfy.
-     */
 public:
     /**
      * @brief Normalised masses for all species.
