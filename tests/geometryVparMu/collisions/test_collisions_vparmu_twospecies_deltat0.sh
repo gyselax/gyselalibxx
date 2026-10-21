@@ -13,15 +13,18 @@ function finish {
     rm -rf -- "${TMPDIR}"
 }
 trap finish EXIT QUIT ABRT KILL SEGV TERM STOP
-cd -- "${TMPDIR}"
 
-# Generate the input YAML file by default
+cd -- "${TMPDIR}"
 INPUT_YAML_FILE="${PWD}/coll2species_deltat0.yaml"
-echo "Create the input YAML file by default ${INPUT_YAML_FILE}"
+echo "Dump the default configuration: '${INPUT_YAML_FILE}'"
 "${COLL_EXEC}" --dump-config "${INPUT_YAML_FILE}"
-# Change deltat to 0. in the input YAML file.
-NEW_DELTAT=0.
-sed -i "s/\(deltat:\) .*/\1 ${NEW_DELTAT}/" "${INPUT_YAML_FILE}"
-"${COLL_EXEC}" "${INPUT_YAML_FILE}"
-../validate.py coll_00000.h5 coll_00001.h5 fdistribu |& tee ../references/xyz.log
-echo "Success"
+
+LOG_FILE="${PWD}/../references/mi250x.hipcc.adastra.spack.log"
+rm -f -- "${LOG_FILE}"
+################################################################################
+# dt=0, checks the projection/reconstruction
+mkdir 1.delta_t_at_zero && cd 1.delta_t_at_zero
+sed "s/\(deltat:\) .*/\1 0./" "${INPUT_YAML_FILE}" >case.yaml
+"${COLL_EXEC}" case.yaml
+../../validate.py coll_00000.h5 coll_00001.h5 fdistribu |& tee -a "${LOG_FILE}"
+cd ..

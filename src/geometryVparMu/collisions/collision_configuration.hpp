@@ -14,10 +14,15 @@ class CollisionConfiguration
 {
 public:
     /**
+     * @brief Distribution function index range.
+     */
+    using IdxRangeDistributionFunctionType = IdxRange<Species, GridVpar, GridMu>;
+
+    /**
      * @brief Container for the operator input data.
      */
     using CollisionConfigurationDataType = detail::CollisionConfigurationData<
-            IdxRange<Species, GridVpar, GridMu>,
+            IdxRangeDistributionFunctionType,
             Species,
             detail::InternalSpoofGridPhi,
             detail::InternalSpoofGridR,
