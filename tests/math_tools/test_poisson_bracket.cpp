@@ -34,8 +34,8 @@ void compute_and_test_Lie_Poisson_Bracket()
     CylindricalMapping cylindrical_to_cartesian;
     CombinedMapping<CylindricalMapping, ToroidalMapping, Coord<Rho, Theta, Phi>>
             mapping(cylindrical_to_cartesian, toroidal_to_cylindrical);
-    LiePoissonBracket calculate_poisson_bracket(mapping);
     MetricTensorEvaluator get_metric_tensor(mapping);
+    LiePoissonBracket calculate_poisson_bracket(mapping, get_metric_tensor);
 
     using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
@@ -150,8 +150,8 @@ TEST(LiePoissonBracket, batched_elementwise)
     CylindricalMapping cylindrical_to_cartesian;
     CombinedMapping<CylindricalMapping, ToroidalMapping, Coord<Rho, Theta, Phi>>
             mapping(cylindrical_to_cartesian, toroidal_to_cylindrical);
-    LiePoissonBracket calculate_poisson_bracket(mapping);
     MetricTensorEvaluator get_metric_tensor(mapping);
+    LiePoissonBracket calculate_poisson_bracket(mapping, get_metric_tensor);
 
     using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;

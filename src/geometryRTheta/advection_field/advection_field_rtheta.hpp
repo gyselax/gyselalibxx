@@ -82,8 +82,10 @@
  *
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
+ * @tparam MetricTensorType
+ *      A class describing the metric tensor associated with the mapping.
  */
-template <class Mapping>
+template <class Mapping, concepts::MetricTensor MetricTensorType>
 class AdvectionFieldFinder
 {
 public:
@@ -94,6 +96,8 @@ public:
 
 private:
     Mapping const& m_mapping;
+
+    MetricTensorType const m_metric_tensor;
 
     PolarSplineEvaluator<
             Kokkos::DefaultHostExecutionSpace,
@@ -113,12 +117,18 @@ public:
      *
      * @param[in] mapping
      *      The mapping @f$ \mathcal{F} @f$ from the logical domain to the physical domain.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping @f$ \mathcal{F} @f$.
      * @param[in] epsilon
      *      The parameter @f$ \varepsilon @f$ for the linearisation of the
      *      electric field.
      */
-    explicit AdvectionFieldFinder(Mapping const& mapping, double const epsilon = 1e-12)
+    AdvectionFieldFinder(
+            Mapping const& mapping,
+            MetricTensorType const& metric_tensor,
+            double const epsilon = 1e-12)
         : m_mapping(mapping)
+        , m_metric_tensor(metric_tensor)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_spline_evaluator {ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule(), ddc::PeriodicExtrapolationRule<Theta>(), ddc::PeriodicExtrapolationRule<Theta>()}
         , m_epsilon(epsilon) {};
@@ -478,14 +488,12 @@ private:
                        get_const_field(coords),
                        get_const_field(electrostatic_potential_coef));
 
-        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(m_mapping);
-
         // > computation of the advection field
         ddc::host_for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_G
-                    = metric_tensor.inverse(coord_rtheta);
+                    = m_metric_tensor.inverse(coord_rtheta);
             DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J
                     = m_mapping.jacobian_matrix(coord_rtheta);
             double const jacobian = m_mapping.jacobian(coord_rtheta);
