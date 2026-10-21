@@ -570,7 +570,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-advectionfieldfinder">Class AdvectionFieldFinder</h1>
-<p><strong>template &lt;class Mapping&gt;</strong></p>
+<p><strong>template &lt;class Mapping, concepts::MetricTensor MetricTensorType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a></p>
 <p><em>Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -602,7 +602,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-advectionfieldfinder"><strong>AdvectionFieldFinder</strong></a> (Mapping const &amp; mapping, double const epsilon=1e-12) <br><em>Instantiate a AdvectionFieldRTheta .</em></td>
+<td style="text-align: left;"><a href="#function-advectionfieldfinder"><strong>AdvectionFieldFinder</strong></a> (Mapping const &amp; mapping, MetricTensorType const &amp; metric_tensor, double const epsilon=1e-12) <br><em>Instantiate a AdvectionFieldRTheta .</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -662,24 +662,27 @@
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>Mapping</code> A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </li>
+<li><code>MetricTensorType</code> A class describing the metric tensor associated with the mapping. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-matrix_2x2">typedef Matrix_2x2</h3>
 <p><em>Define a 2x2 matrix with an 2D array of an 2D array.</em> </p>
-<pre><code class="language-C++">using AdvectionFieldFinder&lt; Mapping &gt;::Matrix_2x2 =  std::array&lt;std::array&lt;double, 2&gt;, 2&gt;;
+<pre><code class="language-C++">using AdvectionFieldFinder&lt; Mapping, MetricTensorType &gt;::Matrix_2x2 =  std::array&lt;std::array&lt;double, 2&gt;, 2&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-advectionfieldfinder">function AdvectionFieldFinder</h3>
 <p><em>Instantiate a AdvectionFieldRTheta .</em> </p>
-<pre><code class="language-C++">inline explicit AdvectionFieldFinder::AdvectionFieldFinder (
+<pre><code class="language-C++">inline AdvectionFieldFinder::AdvectionFieldFinder (
     Mapping const &amp; mapping,
+    MetricTensorType const &amp; metric_tensor,
     double const epsilon=1e-12
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>mapping</code> The mapping <span class="arithmatex">\(\mathcal{F}\)</span> from the logical domain to the physical domain. </li>
+<li><code>metric_tensor</code> The metric tensor associated with the mapping <span class="arithmatex">\(\mathcal{F}\)</span>. </li>
 <li><code>epsilon</code> The parameter <span class="arithmatex">\(\varepsilon\)</span> for the linearisation of the electric field. </li>
 </ul>
 <hr>

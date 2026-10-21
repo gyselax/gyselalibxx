@@ -9,12 +9,12 @@
     <includedby refid="curl_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp</includedby>
     <includedby refid="lie__poisson__bracket_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</includedby>
     <incdepgraph>
-      <node id="10">
+      <node id="11">
         <label>coord_transformation_tools.hpp</label>
         <link refid="coord__transformation__tools_8hpp_source"/>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -30,7 +30,7 @@
       <node id="23">
         <label>inverse_jacobian_matrix.hpp</label>
         <link refid="inverse__jacobian__matrix_8hpp_source"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -42,9 +42,11 @@
       <node id="9">
         <label>metric_tensor_evaluator.hpp</label>
         <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -92,7 +94,7 @@
       <node id="13">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
@@ -110,7 +112,7 @@
       <node id="15">
         <label>tensor_common.hpp</label>
         <link refid="tensor__common_8hpp_source"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
@@ -202,7 +204,7 @@
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
@@ -238,7 +240,7 @@
       <node id="29">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
@@ -258,7 +260,7 @@
       <node id="19">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
@@ -273,7 +275,7 @@
       <node id="25">
         <label>algorithm</label>
       </node>
-      <node id="11">
+      <node id="12">
         <label>array</label>
       </node>
       <node id="14">
@@ -282,7 +284,7 @@
       <node id="26">
         <label>cmath</label>
       </node>
-      <node id="12">
+      <node id="10">
         <label>concepts</label>
       </node>
       <node id="5">
@@ -338,7 +340,7 @@
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MetricTensorType&gt;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::MetricTensor<sp/>MetricTensorType&gt;</highlight></codeline>
 <codeline lineno="16" refid="classGradient" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classGradient" kindref="compound">Gradient</ref></highlight></codeline>
 <codeline lineno="17"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordArg<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>MetricTensorType::CoordArg;</highlight></codeline>

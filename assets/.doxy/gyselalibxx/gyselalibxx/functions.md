@@ -80,6 +80,11 @@
 * **init\_species\_withfluid** ([**species\_init.cpp**](species__init_8cpp.md), [**species\_init.hpp**](species__init_8hpp.md))
 
 
+## l
+
+* **LiePoissonBracket** ([**lie\_poisson\_bracket.hpp**](lie__poisson__bracket_8hpp.md))
+
+
 ## m
 
 * **make\_polar\_foot\_finder** ([**polar\_foot\_finder.hpp**](polar__foot__finder_8hpp.md))

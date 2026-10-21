@@ -32,4 +32,5 @@ Here is a list of all namespaces with brief descriptions:
 * **namespace** [**std**](namespacestd.md) _STL namespace._     
     * **namespace** [**is\_base\_of**](namespacestd_1_1is__base__of.md) 
 * **namespace** [**tensor\_tools**](namespacetensor__tools.md)     
+* **namespace** [**vector\_mapper\_detail**](namespacevector__mapper__detail.md)     
 

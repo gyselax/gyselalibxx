@@ -100,6 +100,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#orthogonal-coordinate-transformation">Orthogonal coordinate transformation</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#changing-the-vector-space-of-a-vector">Changing the vector space of a vector</a>
+    </li>
     </ul>
                 </li>
     </ul>
@@ -767,7 +769,67 @@ J (R, Z, \zeta) =
 <li>other static analysis tools found in <code>coord_transformation_tools.hpp</code></li>
 </ul>
 <h2 id="orthogonal-coordinate-transformation">Orthogonal coordinate transformation</h2>
-<p>A coordinate transformation that is comprised of coordinate transformation components which are orthogonal to one another.</p></div>
+<p>A coordinate transformation that is comprised of coordinate transformation components which are orthogonal to one another.</p>
+<h2 id="changing-the-vector-space-of-a-vector">Changing the vector space of a vector</h2>
+<p>The function <code>to_vector_space</code> (in <code>vector_mapper.hpp</code>) expresses a vector <span class="arithmatex">\(v\)</span> on a different vector space.
+There are two kinds of change:</p>
+<ul>
+<li>A change of variance (contravariant ↔ covariant) in the same coordinate system.
+  This takes a metric tensor <span class="arithmatex">\(G\)</span> (e.g. a <code>MetricTensorEvaluator</code>).</li>
+<li>A change of coordinate system with the same variance.
+  This takes a mapping <span class="arithmatex">\(\mathcal{F} : q \mapsto p\)</span>, where <span class="arithmatex">\(q\)</span> are the argument coordinates and <span class="arithmatex">\(p\)</span> are the result coordinates.
+  <span class="arithmatex">\(J\)</span> denotes its Jacobian matrix.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Takes</th>
+<th>Computation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Same vector space</td>
+<td>Mapping or metric tensor</td>
+<td><span class="arithmatex">\(v\)</span> is returned unchanged</td>
+</tr>
+<tr>
+<td>Contravariant → covariant, same coordinate system</td>
+<td>Metric tensor</td>
+<td><span class="arithmatex">\(G v\)</span></td>
+</tr>
+<tr>
+<td>Covariant → contravariant, same coordinate system</td>
+<td>Metric tensor</td>
+<td><span class="arithmatex">\(G^{-1} v\)</span></td>
+</tr>
+<tr>
+<td>Argument basis → result basis, contravariant</td>
+<td>Mapping</td>
+<td><span class="arithmatex">\(J v\)</span></td>
+</tr>
+<tr>
+<td>Argument basis → result basis, covariant</td>
+<td>Mapping</td>
+<td><span class="arithmatex">\(J^{-T} v\)</span></td>
+</tr>
+<tr>
+<td>Result basis → argument basis, contravariant</td>
+<td>Mapping</td>
+<td><span class="arithmatex">\(J^{-1} v\)</span></td>
+</tr>
+<tr>
+<td>Result basis → argument basis, covariant</td>
+<td>Mapping</td>
+<td><span class="arithmatex">\(J^T v\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>A Cartesian basis is both covariant and contravariant, so a change to or from the Cartesian space is always a change of coordinate system.
+To change both the coordinate system and the variance, call <code>to_vector_space</code> twice: once with the mapping and once with the metric tensor.</p>
+<p>The functions <code>copy_to_vector_space</code> and <code>create_mirror_view_and_copy_on_vector_space</code> apply the same operations to every element of a vector field.
+They also take either a mapping or a metric tensor.</p></div>
               
             </div>
           </div><footer>

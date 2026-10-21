@@ -97,7 +97,8 @@ public:
         Spline2D density_coef(density_coef_alloc);
 
         // Operators
-        AdvectionFieldFinder advection_field_computer(m_mapping);
+        MetricTensorEvaluator metric_tensor(m_mapping);
+        AdvectionFieldFinder advection_field_computer(m_mapping, metric_tensor);
         PoissonLikeRHSFunction const
                 charge_density(get_const_field(density_coef), m_spline_evaluator);
 

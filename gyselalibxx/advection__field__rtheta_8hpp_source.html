@@ -591,7 +591,7 @@
 
 
 
-template &lt;class Mapping&gt;
+template &lt;class Mapping, concepts::MetricTensor MetricTensorType&gt;
 class AdvectionFieldFinder
 {
 public:
@@ -599,6 +599,8 @@ public:
 
 private:
     Mapping const&amp; m_mapping;
+
+    MetricTensorType const m_metric_tensor;
 
     PolarSplineEvaluator&lt;
             Kokkos::DefaultHostExecutionSpace,
@@ -613,8 +615,12 @@ private:
     static constexpr int n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
 
 public:
-    explicit AdvectionFieldFinder(Mapping const&amp; mapping, double const epsilon = 1e-12)
+    AdvectionFieldFinder(
+            Mapping const&amp; mapping,
+            MetricTensorType const&amp; metric_tensor,
+            double const epsilon = 1e-12)
         : m_mapping(mapping)
+        , m_metric_tensor(metric_tensor)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_spline_evaluator {ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule(), ddc::PeriodicExtrapolationRule&lt;Theta&gt;(), ddc::PeriodicExtrapolationRule&lt;Theta&gt;()}
         , m_epsilon(epsilon) {};
@@ -893,14 +899,12 @@ private:
                        get_const_field(coords),
                        get_const_field(electrostatic_potential_coef));
 
-        MetricTensorEvaluator&lt;Mapping, CoordRTheta&gt; metric_tensor(m_mapping);
-
         // &gt; computation of the advection field
         ddc::host_for_each(grid_without_Opoint, [&amp;](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor&lt;VectorIndexSet&lt;R, Theta&gt;, VectorIndexSet&lt;R, Theta&gt;&gt; inv_G
-                    = metric_tensor.inverse(coord_rtheta);
+                    = m_metric_tensor.inverse(coord_rtheta);
             DTensor&lt;VectorIndexSet&lt;X, Y&gt;, VectorIndexSet&lt;R_cov, Theta_cov&gt;&gt; J
                     = m_mapping.jacobian_matrix(coord_rtheta);
             double const jacobian = m_mapping.jacobian(coord_rtheta);

@@ -2,7 +2,7 @@
 
 # Class Gradient
 
-**template &lt;class MetricTensorType&gt;**
+**template &lt;concepts::MetricTensor MetricTensorType&gt;**
 
 
 
@@ -122,7 +122,7 @@ inline explicit KOKKOS_FUNCTION Gradient::Gradient (
 **Parameters:**
 
 
-* `metric_tensor` A [**MetricTensorEvaluator**](classMetricTensorEvaluator.md). 
+* `metric_tensor` An object which provides the metric tensor (e.g. a [**MetricTensorEvaluator**](classMetricTensorEvaluator.md)). 
 
 
 

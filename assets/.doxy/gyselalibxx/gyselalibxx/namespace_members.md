@@ -10,6 +10,7 @@
 * **assign\_vector\_field\_element** ([**ddcHelper**](namespaceddcHelper.md))
 * **as\_batched\_vector\_view** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **AssertionFailure** ([**gslx::error**](namespacegslx_1_1error.md))
+* **are\_contravariant\_v** ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
 
 
 ## c
@@ -35,6 +36,7 @@
 * **enable\_indexed\_tensor** ([**tensor\_tools**](namespacetensor__tools.md))
 * **enable\_indexed\_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;** ([**tensor\_tools**](namespacetensor__tools.md))
 * **extract\_sub\_tensor\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
+* **evaluation\_coord\_t** ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
 
 
 ## g
@@ -66,6 +68,10 @@
 * **index\_identifiers\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 * **is\_indexed\_tensor\_v** ([**tensor\_tools**](namespacetensor__tools.md))
 * **is\_tensor\_index\_element\_v** ([**tensor\_tools**](namespacetensor__tools.md))
+* **is\_arg\_to\_result\_v** ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
+* **is\_coordinate\_change\_only\_v** ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
+* **is\_result\_to\_arg\_v** ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
+* **is\_variance\_change\_only\_v** ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
 
 
 ## m

@@ -49,7 +49,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), typename QDimRMesh, typename QDimThetaMesh, typename IdxRangeFull&gt;<br>_An operator to assemble a Poisson-like stiffness matrix using polar B-splines._  |
+| class | [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), typename QDimRMesh, typename QDimThetaMesh, MetricTensorType, typename IdxRangeFull&gt;<br>_An operator to assemble a Poisson-like stiffness matrix using polar B-splines._  |
 | struct | [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md) &lt;typename QDimRMesh, typename QDimThetaMesh, typename [**BSplinesR**](structBSplinesR.md), typename [**BSplinesTheta**](structBSplinesTheta.md)&gt;<br>_The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._  |
 
 

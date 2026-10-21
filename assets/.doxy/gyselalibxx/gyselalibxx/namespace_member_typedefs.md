@@ -17,6 +17,7 @@
 
 * **enforce\_first\_interface\_edge\_t** ([**connectivity\_details**](namespaceconnectivity__details.md))
 * **extract\_sub\_tensor\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
+* **evaluation\_coord\_t** ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
 
 
 ## g

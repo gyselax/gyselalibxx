@@ -10,6 +10,7 @@
 
 
 
+* `#include <concepts>`
 * `#include <type_traits>`
 * `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_aliases.hpp"`
@@ -31,6 +32,11 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**concepts**](namespaceconcepts.md) <br> |
 
 
 ## Classes

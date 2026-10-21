@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1MetricTensor" kind="concept">
+    <compoundname>concepts::MetricTensor</compoundname>
+    <includes refid="metric__tensor__evaluator_8hpp" local="no">metric_tensor_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="conceptconcepts_1_1MetricTensor" kindref="compound">concepts::MetricTensor</ref> =  requires
+{
+    typename T::CoordArg;
+    typename T::ContravariantVectorType;
+    typename T::CovariantVectorType;
+}
+&amp;&amp;is_tensor_type_v&lt;typename T::ContravariantVectorType&gt;&amp;&amp; is_tensor_type_v&lt;
+        typename T::CovariantVectorType&gt;&amp;&amp; requires(T const&amp; t, typename T::CoordArg const&amp; x)
+{
+    {
+        t(x)
+        } -&gt; std::same_as&lt;
+                <ref refid="classTensor" kindref="compound">DTensor</ref>&lt;ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;,
+                        ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;&gt;&gt;;
+    {
+        t.inverse(x)
+        } -&gt; std::same_as&lt;<ref refid="classTensor" kindref="compound">DTensor</ref>&lt;
+                ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;,
+                ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;&gt;&gt;;
+}    </initializer>
+    <briefdescription>
+<para>A concept describing a type which can provide the metric tensor and its inverse at a given coordinate. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The metric tensor must be expressed on the covariant basis (i.e. it acts on contravariant vectors) and its inverse must be expressed on the contravariant basis (i.e. it acts on covariant vectors). </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="24" column="1"/>
+  </compounddef>
+</doxygen>

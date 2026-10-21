@@ -833,6 +833,7 @@ template &lt;
         typename PolarBSplinesRTheta,
         typename QDimRMesh,
         typename QDimThetaMesh,
+        concepts::MetricTensor MetricTensorType,
         typename IdxRangeFull = IdxRange&lt;GridR, GridTheta&gt;&gt;
 class PolarSplineFEMPoissonLikeAssembler
 {
@@ -842,6 +843,9 @@ public:
 
     static_assert(R::IS_CONTRAVARIANT);
     static_assert(Theta::IS_CONTRAVARIANT);
+    static_assert(
+            std::is_same_v&lt;typename MetricTensorType::CoordArg, Coord&lt;R, Theta&gt;&gt;,
+            "The metric tensor must be evaluated on (r, theta) coordinates.");
 
 private:
     using R_cov = typename R::Dual;
@@ -935,6 +939,8 @@ private:
 
     QuadField m_int_volume;
 
+    MetricTensorType m_metric_tensor;
+
     // Values and derivatives of the non-zero 1D B-splines at the 1D quadrature points
     DFieldMem&lt;IdxRangeBasisStashR&gt; m_basis_vals_r;
     DFieldMem&lt;IdxRangeBasisStashTheta&gt; m_basis_vals_theta;
@@ -944,6 +950,7 @@ private:
 public:
     explicit PolarSplineFEMPoissonLikeAssembler(
             Field&lt;double, IdxRangeQuadratureRTheta&gt; int_volume,
+            MetricTensorType const&amp; metric_tensor,
             IdxRangeFull idx_range_full)
         : m_nbasis_r(ddc::discrete_space&lt;BSplinesR&gt;().nbasis() - s_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis())
@@ -966,6 +973,7 @@ public:
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_idx_range_batch(idx_range_full)
         , m_int_volume(int_volume)
+        , m_metric_tensor(metric_tensor)
         , m_basis_vals_r(IdxRangeBasisStashR(
                   m_idxrange_quadrature_r,
                   ddc::discrete_space&lt;BSplinesR&gt;().full_domain().take_first(
@@ -1067,14 +1075,13 @@ public:
         compute_tensor_tensor_col_idx(col_idx, nnz_per_row);
     }
 
-    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
     void operator()(
             std::unique_ptr&lt;
                     MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG&gt;&gt; const&amp;
                     gko_matrix,
             CoeffAlpha const&amp; coeff_alpha,
-            CoeffBeta const&amp; coeff_beta,
-            Mapping const&amp; mapping)
+            CoeffBeta const&amp; coeff_beta)
     {
         //CSR data storage
         auto [values, col_idx, nnz_per_row] = gko_matrix-&gt;get_batch_csr();
@@ -1082,21 +1089,21 @@ public:
         compute_singular_singular_elements(
                 coeff_alpha,
                 coeff_beta,
-                mapping,
+                m_metric_tensor,
                 values,
                 col_idx,
                 nnz_per_row);
         compute_singular_tensor_elements(
                 coeff_alpha,
                 coeff_beta,
-                mapping,
+                m_metric_tensor,
                 values,
                 col_idx,
                 nnz_per_row);
         compute_tensor_tensor_elements(
                 coeff_alpha,
                 coeff_beta,
-                mapping,
+                m_metric_tensor,
                 values,
                 col_idx,
                 nnz_per_row);
@@ -1288,11 +1295,11 @@ public:
         Kokkos::Profiling::popRegion();
     }
 
-    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
     void compute_singular_singular_elements(
             CoeffAlpha const&amp; coeff_alpha,
             CoeffBeta const&amp; coeff_beta,
-            Mapping const&amp; mapping,
+            MetricTensorType const&amp; metric_tensor,
             Kokkos::View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
                     values_csr,
             Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
@@ -1350,7 +1357,7 @@ public:
                                         idx_batch,
                                         coeff_alpha,
                                         coeff_beta,
-                                        mapping,
+                                        metric_tensor,
                                         int_volume_proxy,
                                         bspline_stash);
 
@@ -1372,11 +1379,11 @@ public:
                 });
     }
 
-    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
     void compute_singular_tensor_elements(
             CoeffAlpha const&amp; coeff_alpha,
             CoeffBeta const&amp; coeff_beta,
-            Mapping const&amp; mapping,
+            MetricTensorType const&amp; metric_tensor,
             Kokkos::View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
                     values_csr,
             Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
@@ -1486,7 +1493,7 @@ public:
                                         idx_batch,
                                         coeff_alpha,
                                         coeff_beta,
-                                        mapping,
+                                        metric_tensor,
                                         int_volume_proxy,
                                         bspline_stash);
 
@@ -1511,11 +1518,11 @@ public:
                 });
     }
 
-    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
     void compute_tensor_tensor_elements(
             CoeffAlpha const&amp; coeff_alpha,
             CoeffBeta const&amp; coeff_beta,
-            Mapping const&amp; mapping,
+            MetricTensorType const&amp; metric_tensor,
             Kokkos::View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
                     values_csr,
             Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
@@ -1591,7 +1598,7 @@ public:
                             idx_batch,
                             coeff_alpha,
                             coeff_beta,
-                            mapping,
+                            metric_tensor,
                             full_quad_idx_range,
                             int_volume_proxy,
                             bspline_stash);
@@ -1619,14 +1626,14 @@ public:
         Kokkos::Profiling::popRegion();
     }
 
-    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping, class IdxTestType&gt;
+    template &lt;class CoeffAlpha, class CoeffBeta, class IdxTestType&gt;
     static KOKKOS_FUNCTION std::tuple&lt;double, DVector&lt;R, Theta&gt;&gt; get_test_weights(
             IdxTestType idx_test,
             IdxQuadratureRTheta idx_quad,
             IdxBatch idx_batch,
             CoeffAlpha const&amp; coeff_alpha,
             CoeffBeta const&amp; coeff_beta,
-            Mapping const&amp; mapping,
+            MetricTensorType const&amp; metric_tensor,
             DField&lt;IdxRangeQuadratureRTheta&gt; int_volume,
             TensorBSplineStash const&amp; bspline_stash)
     {
@@ -1648,8 +1655,7 @@ public:
 
         using Spatial2DVectorSpace = VectorIndexSet&lt;R, Theta&gt;;
 
-        MetricTensorEvaluator&lt;Mapping, Coord&lt;R, Theta&gt;&gt; get_metric_tensor(mapping);
-        Tensor inv_metric_tensor = get_metric_tensor.inverse(coord);
+        Tensor inv_metric_tensor = metric_tensor.inverse(coord);
         DTensor&lt;Spatial2DVectorSpace, Spatial2DVectorSpace&gt; inv_metric_tensor_2d;
         ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
@@ -1760,7 +1766,7 @@ public:
         return result;
     }
 
-    template &lt;class CoeffAlpha, class CoeffBeta, class Mapping&gt;
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
     static KOKKOS_FUNCTION void fill_test_weights(
             const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team,
             QuadField test_mass,
@@ -1769,7 +1775,7 @@ public:
             IdxBatch idx_batch,
             CoeffAlpha const&amp; coeff_alpha,
             CoeffBeta const&amp; coeff_beta,
-            Mapping const&amp; mapping,
+            MetricTensorType const&amp; metric_tensor,
             IdxRangeQuadratureRTheta const&amp; full_quad_idx_range,
             DField&lt;IdxRangeQuadratureRTheta&gt; int_volume,
             TensorBSplineStash const&amp; bspline_stash)
@@ -1798,7 +1804,7 @@ public:
                             idx_batch,
                             coeff_alpha,
                             coeff_beta,
-                            mapping,
+                            metric_tensor,
                             int_volume,
                             bspline_stash);
                     test_mass(quad_offset) = test_mass_weight;

@@ -574,6 +574,7 @@
 <p><a href="metric__tensor__evaluator_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
+#include &lt;concepts&gt;
 #include &lt;type_traits&gt;
 
 #include "coord_transformation_tools.hpp"
@@ -583,6 +584,30 @@
 #include "tensor.hpp"
 #include "vector_index_tools.hpp"
 #include "view.hpp"
+
+namespace concepts {
+template &lt;typename T&gt;
+concept MetricTensor = requires
+{
+    typename T::CoordArg;
+    typename T::ContravariantVectorType;
+    typename T::CovariantVectorType;
+}
+&amp;&amp;is_tensor_type_v&lt;typename T::ContravariantVectorType&gt;&amp;&amp; is_tensor_type_v&lt;
+        typename T::CovariantVectorType&gt;&amp;&amp; requires(T const&amp; t, typename T::CoordArg const&amp; x)
+{
+    {
+        t(x)
+        } -&gt; std::same_as&lt;
+                DTensor&lt;ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;,
+                        ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;&gt;&gt;;
+    {
+        t.inverse(x)
+        } -&gt; std::same_as&lt;DTensor&lt;
+                ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;,
+                ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;&gt;&gt;;
+};
+} // namespace concepts
 
 template &lt;
         concepts::MappingWithJacobian Mapping,

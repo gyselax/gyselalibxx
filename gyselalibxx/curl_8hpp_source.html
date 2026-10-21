@@ -590,10 +590,9 @@ class Curl
 
 private:
     Mapping3D m_mapping;
-    MetricTensorEvaluator&lt;Mapping3D, MappingCoord&gt; m_metric_tensor;
 
 public:
-    explicit Curl(Mapping3D const&amp; mapping) : m_mapping(mapping), m_metric_tensor(mapping) {}
+    explicit Curl(Mapping3D const&amp; mapping) : m_mapping(mapping) {}
 
     template &lt;class T, class CovBasisF&gt;
     KOKKOS_INLINE_FUNCTION Tensor&lt;T, get_contravariant_dims_t&lt;CovBasisF&gt;&gt; operator()(

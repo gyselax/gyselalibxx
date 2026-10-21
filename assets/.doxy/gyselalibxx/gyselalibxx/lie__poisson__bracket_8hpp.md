@@ -35,7 +35,34 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**LiePoissonBracket**](classLiePoissonBracket.md) &lt;Mapping3D, class MappingCoord&gt;<br>_A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._ |
+| class | [**LiePoissonBracket**](classLiePoissonBracket.md) &lt;Mapping3D, class MappingCoord, MetricTensorType&gt;<br>_A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._ |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|   | [**LiePoissonBracket**](#function-liepoissonbracket) (Mapping3D const &, MetricTensorType const &) <br>_Deduce the coordinate type from the metric tensor when one is provided._  |
 
 
 
@@ -64,28 +91,26 @@
 
 
 
+## Public Functions Documentation
 
 
 
 
+### function LiePoissonBracket 
+
+_Deduce the coordinate type from the metric tensor when one is provided._ 
+```C++
+template<concepts::Mapping Mapping3D, concepts::MetricTensor MetricTensorType>
+LiePoissonBracket (
+    Mapping3D const &,
+    MetricTensorType const &
+) 
+```
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp`

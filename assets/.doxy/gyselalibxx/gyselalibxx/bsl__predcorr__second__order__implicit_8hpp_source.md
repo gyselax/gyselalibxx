@@ -157,7 +157,8 @@ public:
                 ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);
 
-        AdvectionFieldFinder advection_field_computer(m_logical_to_physical);
+        MetricTensorEvaluator metric_tensor(m_logical_to_physical);
+        AdvectionFieldFinder advection_field_computer(m_logical_to_physical, metric_tensor);
 
         PoissonLikeRHSFunction const charge_density(get_const_field(density_coef), m_evaluator);
 

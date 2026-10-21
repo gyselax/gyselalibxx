@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>vector_mapper_detail::EvaluationCoord&lt; MetricTensorType &gt;</compoundname>
+    <includes refid="vector__mapper_8hpp" local="no">vector_mapper.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="conceptconcepts_1_1MetricTensor" kindref="compound">concepts::MetricTensor</ref></type>
+        <declname>MetricTensorType</declname>
+        <defname>MetricTensorType</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4_1a1ab64847f7366b56086c386ef7b636a5" prot="public" static="no">
+        <type>typename MetricTensorType::CoordArg</type>
+        <definition>using vector_mapper_detail::EvaluationCoord&lt; MetricTensorType &gt;::type =  typename MetricTensorType::CoordArg</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>vector_mapper_detail::EvaluationCoord&lt; MetricTensorType &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The type of the coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>The type of the coordinate at which a metric tensor is evaluated. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="57" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="58" bodyend="61"/>
+    <listofallmembers>
+      <member refid="structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4_1a1ab64847f7366b56086c386ef7b636a5" prot="public" virt="non-virtual"><scope>vector_mapper_detail::EvaluationCoord&lt; MetricTensorType &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacevector__mapper__detail" kind="namespace" language="C++">
+    <compoundname>vector_mapper_detail</compoundname>
+    <innerclass refid="structvector__mapper__detail_1_1EvaluationCoord" prot="public">vector_mapper_detail::EvaluationCoord</innerclass>
+    <innerclass refid="structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4" prot="public">vector_mapper_detail::EvaluationCoord&lt; Mapping &gt;</innerclass>
+    <innerclass refid="structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4" prot="public">vector_mapper_detail::EvaluationCoord&lt; MetricTensorType &gt;</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="vector__mapper_8hpp_1a744d5389845a75ad3f7bfaeb07542872" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MappingOrMetric</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structvector__mapper__detail_1_1EvaluationCoord" kindref="compound">EvaluationCoord</ref>&lt; MappingOrMetric &gt;::type</type>
+        <definition>using vector_mapper_detail::evaluation_coord_t = typedef typename EvaluationCoord&lt;MappingOrMetric&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>evaluation_coord_t</name>
+        <qualifiedname>vector_mapper_detail::evaluation_coord_t</qualifiedname>
+        <briefdescription>
+<para>The type of the coordinate at which a mapping or a metric tensor is evaluated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="77" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="vector__mapper_8hpp_1a18d6d0b463bfafbf3d85a43819292ef0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class OutVectorSpace</type>
+          </param>
+          <param>
+            <type>class InVectorSpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool vector_mapper_detail::is_variance_change_only_v</definition>
+        <argsstring></argsstring>
+        <name>is_variance_change_only_v</name>
+        <qualifiedname>vector_mapper_detail::is_variance_change_only_v</qualifiedname>
+        <initializer>= !std::is_same_v&lt;
+                  OutVectorSpace,
+                  InVectorSpace&gt; &amp;&amp; std::is_same_v&lt;OutVectorSpace, vector_index_set_dual_t&lt;InVectorSpace&gt;&gt;</initializer>
+        <briefdescription>
+<para>True if the vector spaces are the co/contra variant bases associated with the same coordinate system. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="14" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="vector__mapper_8hpp_1a67e486d6892f62f7b48be598fb7d0bb8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class OutVectorSpace</type>
+          </param>
+          <param>
+            <type>class InVectorSpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool vector_mapper_detail::is_coordinate_change_only_v</definition>
+        <argsstring></argsstring>
+        <name>is_coordinate_change_only_v</name>
+        <qualifiedname>vector_mapper_detail::is_coordinate_change_only_v</qualifiedname>
+        <initializer>= !std::is_same_v&lt;
+                  OutVectorSpace,
+                  InVectorSpace&gt; &amp;&amp; !is_variance_change_only_v&lt;OutVectorSpace, InVectorSpace&gt; &amp;&amp; has_same_variance_v&lt;InVectorSpace, OutVectorSpace&gt;</initializer>
+        <briefdescription>
+<para>True if the vector spaces are associated with different coordinate systems and have the same variance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="21" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="vector__mapper_8hpp_1aa4c1fe446428d618d3655f521e07c925" prot="public" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class OutVectorSpace</type>
+          </param>
+          <param>
+            <type>class InVectorSpace</type>
+          </param>
+          <param>
+            <type>class Mapping</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool vector_mapper_detail::is_arg_to_result_v</definition>
+        <argsstring></argsstring>
+        <name>is_arg_to_result_v</name>
+        <qualifiedname>vector_mapper_detail::is_arg_to_result_v</qualifiedname>
+        <initializer>= is_coordinate_change_only_v&lt;OutVectorSpace, InVectorSpace&gt;&amp;&amp; std::is_same_v&lt;
+                get_contravariant_dims_t&lt;InVectorSpace&gt;,
+                ddc::to_type_seq_t&lt;typename Mapping::CoordArg&gt;&gt;&amp;&amp;
+                std::is_same_v&lt;
+                        get_contravariant_dims_t&lt;OutVectorSpace&gt;,
+                        ddc::to_type_seq_t&lt;typename Mapping::CoordResult&gt;&gt;</initializer>
+        <briefdescription>
+<para>True if the vector is mapped from the argument basis of the mapping to its result basis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="28" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="vector__mapper_8hpp_1a94e43af4fed9dbf4052fcb1568771562" prot="public" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class OutVectorSpace</type>
+          </param>
+          <param>
+            <type>class InVectorSpace</type>
+          </param>
+          <param>
+            <type>class Mapping</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool vector_mapper_detail::is_result_to_arg_v</definition>
+        <argsstring></argsstring>
+        <name>is_result_to_arg_v</name>
+        <qualifiedname>vector_mapper_detail::is_result_to_arg_v</qualifiedname>
+        <initializer>= is_coordinate_change_only_v&lt;OutVectorSpace, InVectorSpace&gt;&amp;&amp; std::is_same_v&lt;
+                get_contravariant_dims_t&lt;InVectorSpace&gt;,
+                ddc::to_type_seq_t&lt;typename Mapping::CoordResult&gt;&gt;&amp;&amp;
+                std::is_same_v&lt;
+                        get_contravariant_dims_t&lt;OutVectorSpace&gt;,
+                        ddc::to_type_seq_t&lt;typename Mapping::CoordArg&gt;&gt;</initializer>
+        <briefdescription>
+<para>True if the vector is mapped from the result basis of the mapping to its argument basis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="38" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="vector__mapper_8hpp_1af43857d750814bfdb246e6f939f90286" prot="public" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class OutVectorSpace</type>
+          </param>
+          <param>
+            <type>class InVectorSpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool vector_mapper_detail::are_contravariant_v</definition>
+        <argsstring></argsstring>
+        <name>are_contravariant_v</name>
+        <qualifiedname>vector_mapper_detail::are_contravariant_v</qualifiedname>
+        <initializer>= is_contravariant_vector_index_set_v&lt;InVectorSpace&gt;&amp;&amp;
+        is_contravariant_vector_index_set_v&lt;OutVectorSpace&gt;</initializer>
+        <briefdescription>
+<para>True if both vector spaces are contravariant. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="48" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="11" column="1"/>
+  </compounddef>
+</doxygen>

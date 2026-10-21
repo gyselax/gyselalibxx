@@ -93,7 +93,7 @@ _A class which implements a curl operator The implemented equation is:_ \(\nabla
 
 
 * `Mapping3D` A type representing a mapping in 3 dimensions. 
-* `MappingCoord` The type of the coordinate that will be used to evaluate the mapping. This coordinate is used to calculate the determinant of the Jacobian and the metric tensor. It is almost always equal to the argument type of the 3D mapping but axi-symmetry may make it useful to evaluate the mapping on a coordinate with a reduced dimensionality. 
+* `MappingCoord` The type of the coordinate that will be used to evaluate the mapping. This coordinate is used to calculate the determinant of the Jacobian. It is almost always equal to the argument type of the 3D mapping but axi-symmetry may make it useful to evaluate the mapping on a coordinate with a reduced dimensionality. 
 
 
 

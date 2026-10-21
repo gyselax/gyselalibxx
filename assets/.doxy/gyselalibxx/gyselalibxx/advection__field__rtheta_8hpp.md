@@ -42,7 +42,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**AdvectionFieldFinder**](classAdvectionFieldFinder.md) &lt;class Mapping&gt;<br>_Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation._  |
+| class | [**AdvectionFieldFinder**](classAdvectionFieldFinder.md) &lt;class Mapping, MetricTensorType&gt;<br>_Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation._  |
 
 
 

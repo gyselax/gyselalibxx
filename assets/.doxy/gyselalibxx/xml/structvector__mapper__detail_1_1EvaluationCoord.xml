@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structvector__mapper__detail_1_1EvaluationCoord" kind="struct" language="C++" prot="public">
+    <compoundname>vector_mapper_detail::EvaluationCoord</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class MappingOrMetric</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>The type of the coordinate at which a mapping or a metric tensor is evaluated. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="53" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="53" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

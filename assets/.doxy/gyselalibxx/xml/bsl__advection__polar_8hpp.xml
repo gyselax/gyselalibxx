@@ -70,6 +70,8 @@
       <node id="43">
         <label>metric_tensor_evaluator.hpp</label>
         <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="23" relation="include">

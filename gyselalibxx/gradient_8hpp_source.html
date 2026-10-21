@@ -582,7 +582,7 @@
 #include "vector_field.hpp"
 
 
-template &lt;class MetricTensorType&gt;
+template &lt;concepts::MetricTensor MetricTensorType&gt;
 class Gradient
 {
     using CoordArg = typename MetricTensorType::CoordArg;

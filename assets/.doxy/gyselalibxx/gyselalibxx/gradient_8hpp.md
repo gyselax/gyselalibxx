@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Gradient**](classGradient.md) &lt;class MetricTensorType&gt;<br>_A class which implements a gradient operator._  |
+| class | [**Gradient**](classGradient.md) &lt;MetricTensorType&gt;<br>_A class which implements a gradient operator._  |
 
 
 

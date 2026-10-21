@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>vector_mapper_detail::EvaluationCoord&lt; Mapping &gt;</compoundname>
+    <includes refid="vector__mapper_8hpp" local="no">vector_mapper.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref></type>
+        <declname>Mapping</declname>
+        <defname>Mapping</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4_1a32a66bd8cf651e38d41ab7fdea53500c" prot="public" static="no">
+        <type>typename Mapping::CoordJacobian</type>
+        <definition>using vector_mapper_detail::EvaluationCoord&lt; Mapping &gt;::type =  typename Mapping::CoordJacobian</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>vector_mapper_detail::EvaluationCoord&lt; Mapping &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The type of the coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <requiresclause>requires { typename Mapping::CoordJacobian; }    </requiresclause>
+    <briefdescription>
+<para>The type of the coordinate at which the Jacobian of a mapping is evaluated. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="69" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="70" bodyend="73"/>
+    <listofallmembers>
+      <member refid="structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4_1a32a66bd8cf651e38d41ab7fdea53500c" prot="public" virt="non-virtual"><scope>vector_mapper_detail::EvaluationCoord&lt; Mapping &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

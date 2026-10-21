@@ -738,6 +738,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Allow <code>IdxStep</code> indexing for <code>VectorField</code> objects.</li>
 <li>Allow <code>PolarSplineFEMPoissonLikeSolver</code> to solve a batch of equations (batch dimensions in <code>IdxRangeFull</code>).</li>
 <li>Add <code>ddcHelper::get_idx_from_linear_index</code> to get the multi-dimensional index at a given position in an index range.</li>
+<li>Add a <code>concepts::MetricTensor</code> concept describing objects which provide the metric tensor and its inverse at a given coordinate.</li>
+<li>Allow <code>copy_to_vector_space</code> and <code>create_mirror_view_and_copy_on_vector_space</code> to take a metric tensor instead of a mapping to change the variance of a vector field.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -760,6 +762,13 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Speed up the matrix assembly and RHS computation of <code>PolarSplineFEMPoissonLikeSolver</code>.</li>
 <li>The constructor of <code>PolarSplineFEMPoissonLikeSolver</code> now takes the full index range on which <span class="arithmatex">\(\phi\)</span> is defined (including any batch dimensions).</li>
 <li>Allow <code>MPILayout</code> and <code>MPITransposeAllToAll</code> to be used with more MPI ranks than points in the distributed dimensions.</li>
+<li>The constructor of <code>LiePoissonBracket</code> now takes the metric tensor as an argument (in addition to the mapping). The type of the metric tensor is an additional template parameter.</li>
+<li>The template parameter of <code>Gradient</code> must now satisfy <code>concepts::MetricTensor</code>.</li>
+<li><code>to_vector_space</code> now takes a metric tensor instead of a mapping to change the variance (covariant &lt;-&gt; contravariant) of a vector.</li>
+<li><code>to_vector_space</code> no longer supports changing both the coordinate system and the variance in a single call.</li>
+<li>The constructor of <code>PolarSplineFEMPoissonLikeSolver</code> now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.</li>
+<li>The constructor of <code>PolarSplineFEMPoissonLikeAssembler</code> now takes the metric tensor as an argument and <code>PolarSplineFEMPoissonLikeAssembler::operator()</code> no longer takes the mapping. The type of the metric tensor is an additional template parameter.</li>
+<li>The constructor of <code>AdvectionFieldFinder</code> now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

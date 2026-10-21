@@ -375,4 +375,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**is\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) 
     * **struct** [**vector\_index\_set\_dual**](structtensor__tools_1_1vector__index__set__dual.md) _A helper structure to find a VectorIndexSet describing the covariant indices from a VectorIndexSet describing contravariant indices or to find a VectorIndexSet describing the contravariant indices from a VectorIndexSet describing covariant indices._ 
     * **struct** [**vector\_index\_set\_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _The implementation of_ [_**vector\_index\_set\_dual**_](structtensor__tools_1_1vector__index__set__dual.md) _for a VectorIndexSet._    
+* **namespace** [**vector\_mapper\_detail**](namespacevector__mapper__detail.md)     
+    * **struct** [**EvaluationCoord**](structvector__mapper__detail_1_1EvaluationCoord.md) _The type of the coordinate at which a mapping or a metric tensor is evaluated._ 
+    * **struct** [**EvaluationCoord&lt; Mapping &gt;**](structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4.md) _The type of the coordinate at which the Jacobian of a mapping is evaluated._     
+    * **struct** [**EvaluationCoord&lt; MetricTensorType &gt;**](structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4.md) _The type of the coordinate at which a metric tensor is evaluated._     
 

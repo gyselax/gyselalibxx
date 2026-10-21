@@ -2,7 +2,7 @@
 
 # Class LiePoissonBracket
 
-**template &lt;concepts::Mapping Mapping3D, class MappingCoord&gt;**
+**template &lt;concepts::Mapping Mapping3D, class MappingCoord, concepts::MetricTensor MetricTensorType&gt;**
 
 
 
@@ -54,7 +54,7 @@ _A class which implements a gyrokinetic Poisson bracket operator. The implemente
 
 | Type | Name |
 | ---: | :--- |
-|   | [**LiePoissonBracket**](#function-liepoissonbracket) (Mapping3D const & mapping) <br>_Build a_ [_**LiePoissonBracket**_](classLiePoissonBracket.md) _operator._ |
+|   | [**LiePoissonBracket**](#function-liepoissonbracket) (Mapping3D const & mapping, MetricTensorType const & metric\_tensor) <br>_Build a_ [_**LiePoissonBracket**_](classLiePoissonBracket.md) _operator._ |
 |  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; ddc::type\_seq\_element\_t&lt; 0, typename TensorType::index\_set &gt; &gt; | [**operator()**](#function-operator) ([**DTensor**](classTensor.md)&lt; CovBasisSpatial &gt; const & partial\_derivatives\_f, TensorType const & partial\_derivatives\_g, [**DTensor**](classTensor.md)&lt; BasisSpatial &gt; const & B, MappingCoord const & coord) const<br>_Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**operator()**](#function-operator_1) ([**DTensor**](classTensor.md)&lt; CovBasisSpatial &gt; const & partial\_derivatives\_f, [**DTensor**](classTensor.md)&lt; CovBasisSpatial &gt; const & partial\_derivatives\_g, [**DTensor**](classTensor.md)&lt; BasisSpatial &gt; const & B, MappingCoord const & coord) const<br>_Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field._  |
 |  void | [**operator()**](#function-operator_2) (ExecSpace exec\_space, DField&lt; IdxRange, MemorySpace &gt; poisson\_bracket, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial\_derivatives\_f, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial\_derivatives\_g, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, BasisSpatial, MemorySpace &gt; const B) <br>_Compute the gyrokinetic Poisson bracket at every point on a grid from the partial derivatives of the fields f and g, and the magnetic field._  |
@@ -96,6 +96,7 @@ _A class which implements a gyrokinetic Poisson bracket operator. The implemente
 
 * `Mapping3D` A type representing a mapping in 3 dimensions. 
 * `MappingCoord` The type of the coordinate that will be used to evaluate the mapping. This coordinate is used to calculate the determinant of the Jacobian and the metric tensor. It is almost always equal to the argument type of the 3D mapping but axi-symmetry may make it useful to evaluate the mapping on a coordinate with a reduced dimensionality. 
+* `MetricTensorType` A type which provides the metric tensor at a coordinate of type MappingCoord. By default it is calculated from the Jacobian of the mapping using a [**MetricTensorEvaluator**](classMetricTensorEvaluator.md). 
 
 
 
@@ -110,8 +111,9 @@ _A class which implements a gyrokinetic Poisson bracket operator. The implemente
 
 _Build a_ [_**LiePoissonBracket**_](classLiePoissonBracket.md) _operator._
 ```C++
-inline explicit LiePoissonBracket::LiePoissonBracket (
-    Mapping3D const & mapping
+inline LiePoissonBracket::LiePoissonBracket (
+    Mapping3D const & mapping,
+    MetricTensorType const & metric_tensor
 ) 
 ```
 
@@ -123,6 +125,7 @@ inline explicit LiePoissonBracket::LiePoissonBracket (
 
 
 * `mapping` The mapping describing the system of coordinates on which the expression is calculated. 
+* `metric_tensor` An object which provides the metric tensor associated with the mapping. 
 
 
 

@@ -2,7 +2,7 @@
 
 # Class AdvectionFieldFinder
 
-**template &lt;class Mapping&gt;**
+**template &lt;class Mapping, concepts::MetricTensor MetricTensorType&gt;**
 
 
 
@@ -59,7 +59,7 @@ _Solve the Poisson-like equation and return the electric field for the coupled V
 
 | Type | Name |
 | ---: | :--- |
-|   | [**AdvectionFieldFinder**](#function-advectionfieldfinder) (Mapping const & mapping, double const epsilon=1e-12) <br>_Instantiate a AdvectionFieldRTheta ._  |
+|   | [**AdvectionFieldFinder**](#function-advectionfieldfinder) (Mapping const & mapping, MetricTensorType const & metric\_tensor, double const epsilon=1e-12) <br>_Instantiate a AdvectionFieldRTheta ._  |
 |  void | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from a Field of_ \(\phi\) _values._ |
 |  void | [**operator()**](#function-operator_1) (host\_t&lt; Spline2D &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from a spline representation of_ \(\phi\) _solution. The B-splines basis used is the cross-product of two 1D B-splines basis._ |
 |  void | [**operator()**](#function-operator_2) (host\_t&lt; PolarSplineRTheta &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (PolarSplineMem)._  |
@@ -165,6 +165,7 @@ The equation (1) is solved thanks to advection operator (IAdvectionRTheta).
 
 
 * `Mapping` A class describing a mapping from curvilinear coordinates to Cartesian coordinates. 
+* `MetricTensorType` A class describing the metric tensor associated with the mapping. 
 
 
 
@@ -179,7 +180,7 @@ The equation (1) is solved thanks to advection operator (IAdvectionRTheta).
 
 _Define a 2x2 matrix with an 2D array of an 2D array._ 
 ```C++
-using AdvectionFieldFinder< Mapping >::Matrix_2x2 =  std::array<std::array<double, 2>, 2>;
+using AdvectionFieldFinder< Mapping, MetricTensorType >::Matrix_2x2 =  std::array<std::array<double, 2>, 2>;
 ```
 
 
@@ -195,8 +196,9 @@ using AdvectionFieldFinder< Mapping >::Matrix_2x2 =  std::array<std::array<doubl
 
 _Instantiate a AdvectionFieldRTheta ._ 
 ```C++
-inline explicit AdvectionFieldFinder::AdvectionFieldFinder (
+inline AdvectionFieldFinder::AdvectionFieldFinder (
     Mapping const & mapping,
+    MetricTensorType const & metric_tensor,
     double const epsilon=1e-12
 ) 
 ```
@@ -209,6 +211,7 @@ inline explicit AdvectionFieldFinder::AdvectionFieldFinder (
 
 
 * `mapping` The mapping \(\mathcal{F}\) from the logical domain to the physical domain. 
+* `metric_tensor` The metric tensor associated with the mapping \(\mathcal{F}\). 
 * `epsilon` The parameter \(\varepsilon\) for the linearisation of the electric field. 
 
 

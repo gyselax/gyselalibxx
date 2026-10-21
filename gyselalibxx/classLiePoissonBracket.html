@@ -570,7 +570,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-liepoissonbracket">Class LiePoissonBracket</h1>
-<p><strong>template &lt;concepts::Mapping Mapping3D, class MappingCoord&gt;</strong></p>
+<p><strong>template &lt;concepts::Mapping Mapping3D, class MappingCoord, concepts::MetricTensor MetricTensorType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classLiePoissonBracket.html"><strong>LiePoissonBracket</strong></a></p>
 <p><em>A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:</em> <span class="arithmatex">\(\{F, G\} = b\dot(\nabla F \cross \nabla G)\)</span> <em>with</em><span class="arithmatex">\(b= \mathbf{B} / B\)</span> <em>the unitary magnetic field, i.e:</em><span class="arithmatex">\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\)</span> <em>with</em><span class="arithmatex">\({\cal J}_{\rm x}\)</span> <em>the jacobian of the system,</em><span class="arithmatex">\(b_k\)</span> <em>the covariant components of b and</em><span class="arithmatex">\(\epsilon^{ijk}\)</span> <em>the Levi-Civita symbol.</em><a href="#detailed-description">More...</a></p>
 <ul>
@@ -587,7 +587,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-liepoissonbracket"><strong>LiePoissonBracket</strong></a> (Mapping3D const &amp; mapping) <br><em>Build a</em> <a href="classLiePoissonBracket.html"><em><strong>LiePoissonBracket</strong></em></a> <em>operator.</em></td>
+<td style="text-align: left;"><a href="#function-liepoissonbracket"><strong>LiePoissonBracket</strong></a> (Mapping3D const &amp; mapping, MetricTensorType const &amp; metric_tensor) <br><em>Build a</em> <a href="classLiePoissonBracket.html"><em><strong>LiePoissonBracket</strong></em></a> <em>operator.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; ddc::type_seq_element_t&lt; 0, typename TensorType::index_set &gt; &gt;</td>
@@ -608,17 +608,20 @@
 <ul>
 <li><code>Mapping3D</code> A type representing a mapping in 3 dimensions. </li>
 <li><code>MappingCoord</code> The type of the coordinate that will be used to evaluate the mapping. This coordinate is used to calculate the determinant of the Jacobian and the metric tensor. It is almost always equal to the argument type of the 3D mapping but axi-symmetry may make it useful to evaluate the mapping on a coordinate with a reduced dimensionality. </li>
+<li><code>MetricTensorType</code> A type which provides the metric tensor at a coordinate of type MappingCoord. By default it is calculated from the Jacobian of the mapping using a <a href="classMetricTensorEvaluator.html"><strong>MetricTensorEvaluator</strong></a>. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-liepoissonbracket">function LiePoissonBracket</h3>
 <p><em>Build a</em> <a href="classLiePoissonBracket.html"><em><strong>LiePoissonBracket</strong></em></a> <em>operator.</em></p>
-<pre><code class="language-C++">inline explicit LiePoissonBracket::LiePoissonBracket (
-    Mapping3D const &amp; mapping
+<pre><code class="language-C++">inline LiePoissonBracket::LiePoissonBracket (
+    Mapping3D const &amp; mapping,
+    MetricTensorType const &amp; metric_tensor
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>mapping</code> The mapping describing the system of coordinates on which the expression is calculated. </li>
+<li><code>metric_tensor</code> An object which provides the metric tensor associated with the mapping. </li>
 </ul>
 <hr>
 
