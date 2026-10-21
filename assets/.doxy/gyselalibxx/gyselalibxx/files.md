@@ -315,6 +315,7 @@ Here is a list of all files with brief descriptions:
     * **dir** [**utils**](dir_313caf1132e152dd9b58bea13a4052ca.md)     
         * **file** [**assert.cpp**](assert_8cpp.md)     
         * **file** [**assert.hpp**](assert_8hpp.md)     
+        * **file** [**coord\_or\_idx.hpp**](coord__or__idx_8hpp.md)     
         * **file** [**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md)     
         * **file** [**ddc\_aliases.hpp**](ddc__aliases_8hpp.md)     
         * **file** [**ddc\_helper.hpp**](ddc__helper_8hpp.md)     

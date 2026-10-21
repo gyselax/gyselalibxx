@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1CoordOrIdx" kind="concept">
+    <compoundname>concepts::CoordOrIdx</compoundname>
+    <includes refid="coord__or__idx_8hpp" local="no">coord_or_idx.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+      <param>
+        <type>class CoordType</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class T, class CoordType&gt;
+concept <ref refid="conceptconcepts_1_1CoordOrIdx" kindref="compound">concepts::CoordOrIdx</ref> =  std::is_same_v&lt;T, CoordType&gt; ||(
+        ddc::is_discrete_element_v&lt;T&gt;&amp;&amp; std::is_same_v&lt;ddc::coordinate_of_t&lt;T&gt;, CoordType&gt;)    </initializer>
+    <briefdescription>
+<para>A concept satisfied by a coordinate of type CoordType, or by an index whose coordinate is of type CoordType. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This is useful for operators which can be evaluated either at an arbitrary coordinate or at a grid point. Evaluating at a grid point allows the operator to use precomputed values where they are available.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type being tested. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CoordType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/coord_or_idx.hpp" line="20" column="1"/>
+  </compounddef>
+</doxygen>

@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="41" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classLiePoissonBracket_1a28adb399f24c37140c290cdb7ffaa51a" prot="private" static="no">
         <type>get_covariant_dims_t&lt; BasisSpatial &gt;</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="42" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="45" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="45" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="47" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classLiePoissonBracket_1a6e4356cc4e94c8d2c3d7fdf0790a4df3" prot="private" static="no" mutable="no">
         <type>MetricTensorType</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="46" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="46" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="48" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classLiePoissonBracket_1af08ad0ae78101b684135030e27e73359" prot="private" static="no" mutable="no">
         <type><ref refid="classGradient" kindref="compound">Gradient</ref>&lt; MetricTensorType &gt;</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="47" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="49" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -134,12 +134,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="57" bodyend="62"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="59" bodyend="64"/>
       </memberdef>
-      <memberdef kind="function" id="classLiePoissonBracket_1ad491141033902be5ea3fd992fd16d29f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classLiePoissonBracket_1a859de5cdfca4950d01d31949bf172c4c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class TensorType</type>
+          </param>
+          <param>
+            <type><ref refid="conceptconcepts_1_1CoordOrIdx" kindref="compound">concepts::CoordOrIdx</ref>&lt; MappingCoord &gt;</type>
+            <declname>CoordOrIdxType</declname>
+            <defname>CoordOrIdxType</defname>
           </param>
           <param>
             <type>class</type>
@@ -148,7 +153,7 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ddc::type_seq_element_t&lt; 0, typename TensorType::index_set &gt; &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION DTensor&lt; ddc::type_seq_element_t&lt; 0, typename TensorType::index_set &gt; &gt; LiePoissonBracket&lt; Mapping3D, MappingCoord, MetricTensorType &gt;::operator()</definition>
-        <argsstring>(DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_f, TensorType const &amp;partial_derivatives_g, DTensor&lt; BasisSpatial &gt; const &amp;B, MappingCoord const &amp;coord) const</argsstring>
+        <argsstring>(DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_f, TensorType const &amp;partial_derivatives_g, DTensor&lt; BasisSpatial &gt; const &amp;B, CoordOrIdxType const &amp;coord_or_idx) const</argsstring>
         <name>operator()</name>
         <qualifiedname>LiePoissonBracket::operator()</qualifiedname>
         <param>
@@ -164,8 +169,8 @@
           <declname>B</declname>
         </param>
         <param>
-          <type>MappingCoord const &amp;</type>
-          <declname>coord</declname>
+          <type>CoordOrIdxType const &amp;</type>
+          <declname>coord_or_idx</declname>
         </param>
         <briefdescription>
 <para>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field. </para>
@@ -197,10 +202,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">coord</parametername>
+<parametername direction="in">coord_or_idx</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The coordinate where the calculation is carried out.</para>
+<para>The coordinate (or the index of the grid point) where the calculation is carried out.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -210,12 +215,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="82" bodyend="98"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="86" bodyend="102"/>
       </memberdef>
-      <memberdef kind="function" id="classLiePoissonBracket_1aa563225e0687226549832a71a49946d1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classLiePoissonBracket_1a008cb84b50e94be9e6f1018ae07a312d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="conceptconcepts_1_1CoordOrIdx" kindref="compound">concepts::CoordOrIdx</ref>&lt; MappingCoord &gt;</type>
+            <declname>CoordOrIdxType</declname>
+            <defname>CoordOrIdxType</defname>
+          </param>
+        </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION double</type>
         <definition>KOKKOS_INLINE_FUNCTION double LiePoissonBracket&lt; Mapping3D, MappingCoord, MetricTensorType &gt;::operator()</definition>
-        <argsstring>(DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_f, DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_g, DTensor&lt; BasisSpatial &gt; const &amp;B, MappingCoord const &amp;coord) const</argsstring>
+        <argsstring>(DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_f, DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_g, DTensor&lt; BasisSpatial &gt; const &amp;B, CoordOrIdxType const &amp;coord_or_idx) const</argsstring>
         <name>operator()</name>
         <qualifiedname>LiePoissonBracket::operator()</qualifiedname>
         <param>
@@ -231,8 +243,8 @@
           <declname>B</declname>
         </param>
         <param>
-          <type>MappingCoord const &amp;</type>
-          <declname>coord</declname>
+          <type>CoordOrIdxType const &amp;</type>
+          <declname>coord_or_idx</declname>
         </param>
         <briefdescription>
 <para>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field. </para>
@@ -264,10 +276,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">coord</parametername>
+<parametername direction="in">coord_or_idx</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The coordinate where the calculation is carried out.</para>
+<para>The coordinate (or the index of the grid point) where the calculation is carried out.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -277,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="113" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="113" bodyend="129"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="119" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="119" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="classLiePoissonBracket_1a38faf020f97496880fbf4830c7a29d98" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -365,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="145" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="145" bodyend="168"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="151" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="151" bodyend="175"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -399,7 +411,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="35" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="36" bodyend="169"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="37" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="38" bodyend="176"/>
     <listofallmembers>
       <member refid="classLiePoissonBracket_1aa96bc29c22ebde03dc6ec3730f492266" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>BasisSpatial</name></member>
       <member refid="classLiePoissonBracket_1a28adb399f24c37140c290cdb7ffaa51a" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>CovBasisSpatial</name></member>
@@ -407,8 +419,8 @@
       <member refid="classLiePoissonBracket_1af08ad0ae78101b684135030e27e73359" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>m_grad</name></member>
       <member refid="classLiePoissonBracket_1a8e62598bed7f5ef5df7337b10d31c03f" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>m_mapping</name></member>
       <member refid="classLiePoissonBracket_1a6e4356cc4e94c8d2c3d7fdf0790a4df3" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>m_metric_tensor</name></member>
-      <member refid="classLiePoissonBracket_1ad491141033902be5ea3fd992fd16d29f" prot="public" virt="non-virtual"><scope>LiePoissonBracket</scope><name>operator()</name></member>
-      <member refid="classLiePoissonBracket_1aa563225e0687226549832a71a49946d1" prot="public" virt="non-virtual"><scope>LiePoissonBracket</scope><name>operator()</name></member>
+      <member refid="classLiePoissonBracket_1a859de5cdfca4950d01d31949bf172c4c" prot="public" virt="non-virtual"><scope>LiePoissonBracket</scope><name>operator()</name></member>
+      <member refid="classLiePoissonBracket_1a008cb84b50e94be9e6f1018ae07a312d" prot="public" virt="non-virtual"><scope>LiePoissonBracket</scope><name>operator()</name></member>
       <member refid="classLiePoissonBracket_1a38faf020f97496880fbf4830c7a29d98" prot="public" virt="non-virtual"><scope>LiePoissonBracket</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>

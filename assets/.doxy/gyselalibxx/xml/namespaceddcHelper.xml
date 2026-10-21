@@ -838,6 +838,56 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="261" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="261" bodyend="272"/>
       </memberdef>
+      <memberdef kind="function" id="coord__or__idx_8hpp_1a2d90bcac4932fe1aebc853d86a3953a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class CoordType</type>
+          </param>
+          <param>
+            <type><ref refid="conceptconcepts_1_1CoordOrIdx" kindref="compound">concepts::CoordOrIdx</ref>&lt; CoordType &gt;</type>
+            <declname>CoordOrIdxType</declname>
+            <defname>CoordOrIdxType</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION CoordType</type>
+        <definition>KOKKOS_INLINE_FUNCTION CoordType ddcHelper::get_coordinate</definition>
+        <argsstring>(CoordOrIdxType const &amp;coord_or_idx)</argsstring>
+        <name>get_coordinate</name>
+        <qualifiedname>ddcHelper::get_coordinate</qualifiedname>
+        <param>
+          <type>CoordOrIdxType const &amp;</type>
+          <declname>coord_or_idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the coordinate described by a coordinate or an index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord_or_idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A coordinate or the index of a grid point.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CoordType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the coordinate.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The coordinate itself if a coordinate was provided, otherwise the coordinate of the grid point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/coord_or_idx.hpp" line="36" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/coord_or_idx.hpp" bodystart="36" bodyend="43"/>
+      </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1ab85a32309a76aeb021f849ea7bfd2773" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>

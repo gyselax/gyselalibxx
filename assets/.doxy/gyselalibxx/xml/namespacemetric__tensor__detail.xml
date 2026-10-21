@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacemetric__tensor__detail" kind="namespace" language="C++">
+    <compoundname>metric_tensor_detail</compoundname>
+    <innerclass refid="structmetric__tensor__detail_1_1IdxPlaceholder" prot="public">metric_tensor_detail::IdxPlaceholder</innerclass>
+    <innerclass refid="structmetric__tensor__detail_1_1IdxPlaceholder_3_01Coord_3_01Dims_8_8_8_01_4_01_4" prot="public">metric_tensor_detail::IdxPlaceholder&lt; Coord&lt; Dims... &gt; &gt;</innerclass>
+    <innerclass refid="structmetric__tensor__detail_1_1PlaceholderGrid" prot="public">metric_tensor_detail::PlaceholderGrid</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="metric__tensor__evaluator_8hpp_1a06ade013f9e119187f95955e07520073" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class CoordType</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structmetric__tensor__detail_1_1IdxPlaceholder" kindref="compound">IdxPlaceholder</ref>&lt; CoordType &gt;::type</type>
+        <definition>using metric_tensor_detail::placeholder_idx_t = typedef typename IdxPlaceholder&lt;CoordType&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>placeholder_idx_t</name>
+        <qualifiedname>metric_tensor_detail::placeholder_idx_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="39" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="14" column="1"/>
+  </compounddef>
+</doxygen>

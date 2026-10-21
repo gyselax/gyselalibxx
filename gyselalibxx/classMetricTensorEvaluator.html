@@ -614,11 +614,19 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims, Dims &gt;</td>
-<td style="text-align: left;"><a href="#function-inverse"><strong>inverse</strong></a> (<a href="classMetricTensorEvaluator.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the inverse metric tensor associated with the mapping at a given position in space.</em></td>
+<td style="text-align: left;"><a href="#function-inverse-12"><strong>inverse</strong></a> (<a href="classMetricTensorEvaluator.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the inverse metric tensor associated with the mapping at a given position in space.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims, Dims &gt;</td>
+<td style="text-align: left;"><a href="#function-inverse-22"><strong>inverse</strong></a> (IdxType const &amp; idx) const<br><em>Compute the inverse metric tensor associated with the mapping at the coordinate of an index.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims_cov, Dims_cov &gt;</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classMetricTensorEvaluator.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the metric tensor associated with the mapping at a given position in space.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims_cov, Dims_cov &gt;</td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (IdxType const &amp; idx) const<br><em>Compute the metric tensor associated with the mapping at the coordinate of an index.</em></td>
 </tr>
 </tbody>
 </table>
@@ -659,7 +667,7 @@
 </ul>
 <hr>
 
-<h3 id="function-inverse">function inverse</h3>
+<h3 id="function-inverse-12">function inverse [1/2]</h3>
 <p><em>Compute the inverse metric tensor associated with the mapping at a given position in space.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; Dims, Dims &gt; MetricTensorEvaluator::inverse (
     CoordArg const &amp; coord
@@ -668,6 +676,21 @@
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the metric tensor. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>inverse_metric_tensor A DTensor object containing the value of the inverse of the metric tensor. </p>
+<hr>
+
+<h3 id="function-inverse-22">function inverse [2/2]</h3>
+<p><em>Compute the inverse metric tensor associated with the mapping at the coordinate of an index.</em> </p>
+<pre><code class="language-C++">template&lt;ddc::concepts::discrete_element IdxType&gt;
+inline KOKKOS_FUNCTION DTensor &lt; Dims, Dims &gt; MetricTensorEvaluator::inverse (
+    IdxType const &amp; idx
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx</code> The index where we evaluate the metric tensor. </li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>inverse_metric_tensor A DTensor object containing the value of the inverse of the metric tensor. </p>
@@ -683,6 +706,21 @@
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the metric tensor. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>metric_tensor A DTensor object containing the value of the metric tensor. </p>
+<hr>
+
+<h3 id="function-operator_1">function operator()</h3>
+<p><em>Compute the metric tensor associated with the mapping at the coordinate of an index.</em> </p>
+<pre><code class="language-C++">template&lt;ddc::concepts::discrete_element IdxType&gt;
+inline KOKKOS_FUNCTION DTensor &lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator::operator() (
+    IdxType const &amp; idx
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx</code> The index where we evaluate the metric tensor. </li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>metric_tensor A DTensor object containing the value of the metric tensor. </p>

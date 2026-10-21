@@ -747,7 +747,7 @@ KOKKOS_INLINE_FUNCTION Tensor &lt; ElementType, OutVectorSpace &gt; to_vector_sp
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>mapping_or_metric</code> A mapping or a metric tensor (unused). </li>
-<li><code>coord</code> The coordinate where the vector is defined. </li>
+<li><code>coord</code> The coordinate (or the index of the grid point) where the vector is defined. </li>
 <li><code>in_vector</code> The vector on the original vector space.</li>
 </ul>
 <p><strong>Template parameters:</strong></p>
@@ -770,7 +770,7 @@ KOKKOS_INLINE_FUNCTION Tensor &lt; ElementType, OutVectorSpace &gt; to_vector_sp
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>metric_tensor</code> An object which provides the metric tensor. </li>
-<li><code>coord</code> The coordinate where the vector is defined. </li>
+<li><code>coord</code> The coordinate (or the index of the grid point) where the vector is defined. </li>
 <li><code>in_vector</code> The vector on the original vector space.</li>
 </ul>
 <p><strong>Template parameters:</strong></p>
@@ -793,7 +793,7 @@ KOKKOS_INLINE_FUNCTION Tensor &lt; ElementType, OutVectorSpace &gt; to_vector_sp
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>metric_tensor</code> An object which provides the metric tensor. </li>
-<li><code>coord</code> The coordinate where the vector is defined. </li>
+<li><code>coord</code> The coordinate (or the index of the grid point) where the vector is defined. </li>
 <li><code>in_vector</code> The vector on the original vector space.</li>
 </ul>
 <p><strong>Template parameters:</strong></p>

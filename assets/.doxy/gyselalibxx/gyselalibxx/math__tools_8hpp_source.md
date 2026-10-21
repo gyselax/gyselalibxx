@@ -93,7 +93,7 @@ void norm(
                 exec_space,
                 get_idx_range(vals),
                 KOKKOS_LAMBDA(IdxType idx) {
-                    Tensor metric = get_metric(ddc::coordinate(idx));
+                    Tensor metric = get_metric(idx);
                     norm_vals(idx) = norm(metric, vals(idx));
                 });
     } else {
@@ -103,7 +103,7 @@ void norm(
                 exec_space,
                 get_idx_range(vals),
                 KOKKOS_LAMBDA(IdxType idx) {
-                    Tensor metric = get_metric.inverse(ddc::coordinate(idx));
+                    Tensor metric = get_metric.inverse(idx);
                     norm_vals(idx) = norm(metric, vals(idx));
                 });
     }

@@ -37,6 +37,7 @@
 | Type | Name |
 | ---: | :--- |
 | namespace | [**concepts**](namespaceconcepts.md) <br> |
+| namespace | [**metric\_tensor\_detail**](namespacemetric__tensor__detail.md) <br> |
 
 
 ## Classes
@@ -44,6 +45,8 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**MetricTensorEvaluator**](classMetricTensorEvaluator.md) &lt;Mapping, class PositionCoordinate&gt;<br>_An operator for calculating the metric tensor._  |
+| struct | [**IdxPlaceholder&lt; Coord&lt; Dims... &gt; &gt;**](structmetric__tensor__detail_1_1IdxPlaceholder_3_01Coord_3_01Dims_8_8_8_01_4_01_4.md) &lt;Dims&gt;<br>_A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate._  |
+| struct | [**PlaceholderGrid**](structmetric__tensor__detail_1_1PlaceholderGrid.md) &lt;class Dim&gt;<br>_A placeholder grid used to check that a metric tensor can be evaluated at an index. It is never instantiated in a discrete space._  |
 
 
 

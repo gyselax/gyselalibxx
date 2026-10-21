@@ -575,11 +575,13 @@
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
 
+#include "coord_or_idx.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "gradient.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "static_tensors.hpp"
+#include "type_seq_tools.hpp"
 #include "vector_field.hpp"
 
 
@@ -611,17 +613,18 @@ public:
 
     template &lt;
             class TensorType,
+            concepts::CoordOrIdx&lt;MappingCoord&gt; CoordOrIdxType,
             class = std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt; &amp;&amp; TensorType::rank() == 2&gt;&gt;
     KOKKOS_INLINE_FUNCTION DTensor&lt;ddc::type_seq_element_t&lt;0, typename TensorType::index_set&gt;&gt;
     operator()(
             DTensor&lt;CovBasisSpatial&gt; const&amp; partial_derivatives_f,
             TensorType const&amp; partial_derivatives_g,
             DTensor&lt;BasisSpatial&gt; const&amp; B,
-            MappingCoord const&amp; coord) const
+            CoordOrIdxType const&amp; coord_or_idx) const
     {
-        double J = m_mapping.jacobian(coord);
+        double J = m_mapping.jacobian(ddcHelper::get_coordinate&lt;MappingCoord&gt;(coord_or_idx));
         LeviCivitaTensor&lt;double, BasisSpatial&gt; eps(J);
-        DTensor&lt;CovBasisSpatial, CovBasisSpatial&gt; metric_tensor = m_metric_tensor(coord);
+        DTensor&lt;CovBasisSpatial, CovBasisSpatial&gt; metric_tensor = m_metric_tensor(coord_or_idx);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
                 index&lt;'i', 'j', 'k'&gt;(eps),
@@ -631,15 +634,16 @@ public:
                 index&lt;'m', 'k'&gt;(partial_derivatives_g));
     }
 
+    template &lt;concepts::CoordOrIdx&lt;MappingCoord&gt; CoordOrIdxType&gt;
     KOKKOS_INLINE_FUNCTION double operator()(
             DTensor&lt;CovBasisSpatial&gt; const&amp; partial_derivatives_f,
             DTensor&lt;CovBasisSpatial&gt; const&amp; partial_derivatives_g,
             DTensor&lt;BasisSpatial&gt; const&amp; B,
-            MappingCoord const&amp; coord) const
+            CoordOrIdxType const&amp; coord_or_idx) const
     {
-        double J = m_mapping.jacobian(coord);
+        double J = m_mapping.jacobian(ddcHelper::get_coordinate&lt;MappingCoord&gt;(coord_or_idx));
         LeviCivitaTensor&lt;double, BasisSpatial&gt; eps(J);
-        DTensor&lt;CovBasisSpatial, CovBasisSpatial&gt; metric_tensor = m_metric_tensor(coord);
+        DTensor&lt;CovBasisSpatial, CovBasisSpatial&gt; metric_tensor = m_metric_tensor(coord_or_idx);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
                 index&lt;'i', 'j', 'k'&gt;(eps),
@@ -661,6 +665,7 @@ public:
         static_assert(is_accessible_v&lt;ExecSpace, MetricTensorType&gt;);
         static_assert(Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible);
         using IdxType = typename IdxRange::discrete_element_type;
+        using IdxMappingCoord = find_idx_t&lt;MappingCoord, IdxRange&gt;;
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
@@ -671,7 +676,7 @@ public:
                             partial_derivatives_f(idx),
                             partial_derivatives_g(idx),
                             B(idx),
-                            ddc::coordinate(idx));
+                            IdxMappingCoord(idx));
                 });
     }
 };

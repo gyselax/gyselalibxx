@@ -10,11 +10,13 @@
 
 
 
+* `#include "coord_or_idx.hpp"`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "gradient.hpp"`
 * `#include "metric_tensor_evaluator.hpp"`
 * `#include "static_tensors.hpp"`
+* `#include "type_seq_tools.hpp"`
 * `#include "vector_field.hpp"`
 
 

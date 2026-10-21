@@ -27,6 +27,7 @@ Here is a list of all namespaces with brief descriptions:
 * **namespace** [**gslx**](namespacegslx.md)     
     * **namespace** [**error**](namespacegslx_1_1error.md)     
 * **namespace** [**maxwellian\_equilibrium**](namespacemaxwellian__equilibrium.md)     
+* **namespace** [**metric\_tensor\_detail**](namespacemetric__tensor__detail.md)     
 * **namespace** [**ndEval**](namespacendEval.md)     
 * **namespace** [**polar\_foot\_finder\_details**](namespacepolar__foot__finder__details.md)     
 * **namespace** [**std**](namespacestd.md) _STL namespace._     

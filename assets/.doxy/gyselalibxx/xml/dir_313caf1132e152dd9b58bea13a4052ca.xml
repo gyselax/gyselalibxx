@@ -4,6 +4,7 @@
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils</compoundname>
     <innerfile refid="assert_8cpp">assert.cpp</innerfile>
     <innerfile refid="assert_8hpp">assert.hpp</innerfile>
+    <innerfile refid="coord__or__idx_8hpp">coord_or_idx.hpp</innerfile>
     <innerfile refid="ddc__alias__inline__functions_8hpp">ddc_alias_inline_functions.hpp</innerfile>
     <innerfile refid="ddc__aliases_8hpp">ddc_aliases.hpp</innerfile>
     <innerfile refid="ddc__helper_8hpp">ddc_helper.hpp</innerfile>

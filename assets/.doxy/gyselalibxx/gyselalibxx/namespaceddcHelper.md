@@ -88,6 +88,7 @@
 |  KOKKOS\_INLINE\_FUNCTION storage\_type::element\_type const & | [**get**](#function-get) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ValidIndexSet... &gt; const & tensor) <br>_A helper function to get an element of the tensor._  |
 |  constexpr auto | [**get**](#function-get) (VectorFieldType const & field) noexcept<br> |
 |  constexpr auto | [**get**](#function-get) (VectorFieldType & field) noexcept<br> |
+|  KOKKOS\_INLINE\_FUNCTION CoordType | [**get\_coordinate**](#function-get_coordinate) (CoordOrIdxType const & coord\_or\_idx) <br>_Get the coordinate described by a coordinate or an index._  |
 |  KOKKOS\_INLINE\_FUNCTION Idx&lt; Dims... &gt; | [**get\_idx\_from\_linear\_index**](#function-get_idx_from_linear_index) (IdxRange&lt; Dims... &gt; const & idx\_range, std::size\_t linear\_idx) <br>_Get the multi-dimensional index found at a given position in an index range._  |
 |  double | [**maximum\_distance\_between\_adjacent\_points**](#function-maximum_distance_between_adjacent_points) (IdxRange&lt; GridDim &gt; const & idx\_range) <br>_Computes the maximum distance between two adjacent points within an IdxRange._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**restrict\_to\_bspline\_domain**](#function-restrict_to_bspline_domain) (Coord&lt; typename BSpline::continuous\_dimension\_type &gt; & coord) <br>_Calculate the Coordinate inside the domain._  |
@@ -746,6 +747,48 @@ inline constexpr auto ddcHelper::get (
 
 
 
+
+<hr>
+
+
+
+### function get\_coordinate 
+
+_Get the coordinate described by a coordinate or an index._ 
+```C++
+template<class CoordType, concepts::CoordOrIdx < CoordType > CoordOrIdxType>
+KOKKOS_INLINE_FUNCTION CoordType ddcHelper::get_coordinate (
+    CoordOrIdxType const & coord_or_idx
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `coord_or_idx` A coordinate or the index of a grid point.
+
+
+
+**Template parameters:**
+
+
+* `CoordType` The type of the coordinate.
+
+
+
+**Returns:**
+
+The coordinate itself if a coordinate was provided, otherwise the coordinate of the grid point. 
+
+
+
+
+
+        
 
 <hr>
 

@@ -266,7 +266,7 @@ KOKKOS_INLINE_FUNCTION Tensor < ElementType, OutVectorSpace > to_vector_space (
 
 
 * `mapping_or_metric` A mapping or a metric tensor (unused). 
-* `coord` The coordinate where the vector is defined. 
+* `coord` The coordinate (or the index of the grid point) where the vector is defined. 
 * `in_vector` The vector on the original vector space.
 
 
@@ -312,7 +312,7 @@ KOKKOS_INLINE_FUNCTION Tensor < ElementType, OutVectorSpace > to_vector_space (
 
 
 * `metric_tensor` An object which provides the metric tensor. 
-* `coord` The coordinate where the vector is defined. 
+* `coord` The coordinate (or the index of the grid point) where the vector is defined. 
 * `in_vector` The vector on the original vector space.
 
 
@@ -358,7 +358,7 @@ KOKKOS_INLINE_FUNCTION Tensor < ElementType, OutVectorSpace > to_vector_space (
 
 
 * `metric_tensor` An object which provides the metric tensor. 
-* `coord` The coordinate where the vector is defined. 
+* `coord` The coordinate (or the index of the grid point) where the vector is defined. 
 * `in_vector` The vector on the original vector space.
 
 

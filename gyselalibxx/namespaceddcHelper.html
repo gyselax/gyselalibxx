@@ -714,6 +714,10 @@
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (VectorFieldType &amp; field) noexcept<br></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION CoordType</td>
+<td style="text-align: left;"><a href="#function-get_coordinate"><strong>get_coordinate</strong></a> (CoordOrIdxType const &amp; coord_or_idx) <br><em>Get the coordinate described by a coordinate or an index.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION Idx&lt; Dims... &gt;</td>
 <td style="text-align: left;"><a href="#function-get_idx_from_linear_index"><strong>get_idx_from_linear_index</strong></a> (IdxRange&lt; Dims... &gt; const &amp; idx_range, std::size_t linear_idx) <br><em>Get the multi-dimensional index found at a given position in an index range.</em></td>
 </tr>
@@ -1038,6 +1042,25 @@ inline constexpr auto ddcHelper::get (
     VectorFieldType &amp; field
 ) noexcept
 </code></pre>
+<hr>
+
+<h3 id="function-get_coordinate">function get_coordinate</h3>
+<p><em>Get the coordinate described by a coordinate or an index.</em> </p>
+<pre><code class="language-C++">template&lt;class CoordType, concepts::CoordOrIdx &lt; CoordType &gt; CoordOrIdxType&gt;
+KOKKOS_INLINE_FUNCTION CoordType ddcHelper::get_coordinate (
+    CoordOrIdxType const &amp; coord_or_idx
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coord_or_idx</code> A coordinate or the index of a grid point.</li>
+</ul>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>CoordType</code> The type of the coordinate.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The coordinate itself if a coordinate was provided, otherwise the coordinate of the grid point. </p>
 <hr>
 
 <h3 id="function-get_idx_from_linear_index">function get_idx_from_linear_index</h3>

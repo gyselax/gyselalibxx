@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="68" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="113" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMetricTensorEvaluator_1a40f45a1ab0cabb31398ed494efb20e14" prot="private" static="no">
         <type>vector_index_set_dual_t&lt; Dims &gt;</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="69" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="114" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="114" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="73" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="118" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMetricTensorEvaluator_1a963a1d9b3ed9d5fea6fff6f19a9c0ba2" prot="public" static="no">
         <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; vector_index_set_dual_t&lt; Dims &gt; &gt;</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="76" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="121" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMetricTensorEvaluator_1ab6d658a3c74587b141cedac1740711ec" prot="public" static="no">
         <type>PositionCoordinate</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="79" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="124" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="124" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="82" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="82" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="127" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="127" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="90" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="90" bodyend="90"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="135" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="135" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="classMetricTensorEvaluator_1a340cea71092ad4f6f6eace344b833fa2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims_cov, Dims_cov &gt;</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="104" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="104" bodyend="108"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="149" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="149" bodyend="153"/>
       </memberdef>
       <memberdef kind="function" id="classMetricTensorEvaluator_1a54cce1e06b68c8dc7e3908ef71613b9c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims, Dims &gt;</type>
@@ -198,7 +198,85 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="118" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="118" bodyend="123"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="163" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="163" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classMetricTensorEvaluator_1a433cb9140f086bb5f035244380ae29b8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>ddc::concepts::discrete_element</type>
+            <declname>IdxType</declname>
+            <defname>IdxType</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims_cov, Dims_cov &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::operator()</definition>
+        <argsstring>(IdxType const &amp;idx) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>MetricTensorEvaluator::operator()</qualifiedname>
+        <param>
+          <type>IdxType const &amp;</type>
+          <declname>idx</declname>
+        </param>
+    <requiresclause>(std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, CoordArg&gt;)    </requiresclause>
+        <briefdescription>
+<para>Compute the metric tensor associated with the mapping at the coordinate of an index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index where we evaluate the metric tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>metric_tensor A DTensor object containing the value of the metric tensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="181" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="181" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classMetricTensorEvaluator_1a38eafab6acd06789d771be672a8e5cf8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>ddc::concepts::discrete_element</type>
+            <declname>IdxType</declname>
+            <defname>IdxType</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims, Dims &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt; MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::inverse</definition>
+        <argsstring>(IdxType const &amp;idx) const</argsstring>
+        <name>inverse</name>
+        <qualifiedname>MetricTensorEvaluator::inverse</qualifiedname>
+        <param>
+          <type>IdxType const &amp;</type>
+          <declname>idx</declname>
+        </param>
+    <requiresclause>(std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, CoordArg&gt;)    </requiresclause>
+        <briefdescription>
+<para>Compute the inverse metric tensor associated with the mapping at the coordinate of an index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index where we evaluate the metric tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>inverse_metric_tensor A DTensor object containing the value of the inverse of the metric tensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="196" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="196" bodyend="200"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -224,7 +302,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="55" bodyend="124"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="99" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="100" bodyend="201"/>
     <listofallmembers>
       <member refid="classMetricTensorEvaluator_1a7ca6db7787f9a6522e0123f7b00381eb" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>ContravariantVectorType</name></member>
       <member refid="classMetricTensorEvaluator_1ab6d658a3c74587b141cedac1740711ec" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>CoordArg</name></member>
@@ -232,9 +310,11 @@
       <member refid="classMetricTensorEvaluator_1ad692758b51be7349b111b62c9fe8f1c1" prot="private" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>Dims</name></member>
       <member refid="classMetricTensorEvaluator_1a40f45a1ab0cabb31398ed494efb20e14" prot="private" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>Dims_cov</name></member>
       <member refid="classMetricTensorEvaluator_1a54cce1e06b68c8dc7e3908ef71613b9c" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>inverse</name></member>
+      <member refid="classMetricTensorEvaluator_1a38eafab6acd06789d771be672a8e5cf8" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>inverse</name></member>
       <member refid="classMetricTensorEvaluator_1a5f4e962eae51fbf5c0a48915001456ab" prot="private" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>m_mapping</name></member>
       <member refid="classMetricTensorEvaluator_1aa9cc21d5dd3c74af9af9d1a270692612" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>MetricTensorEvaluator</name></member>
       <member refid="classMetricTensorEvaluator_1a340cea71092ad4f6f6eace344b833fa2" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>operator()</name></member>
+      <member refid="classMetricTensorEvaluator_1a433cb9140f086bb5f035244380ae29b8" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

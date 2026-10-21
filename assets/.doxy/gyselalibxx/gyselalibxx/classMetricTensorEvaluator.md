@@ -62,8 +62,10 @@ _An operator for calculating the metric tensor._ [More...](#detailed-description
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_FUNCTION | [**MetricTensorEvaluator**](#function-metrictensorevaluator) (Mapping mapping) <br>_A constructor for the metric tensor operator._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; Dims, Dims &gt; | [**inverse**](#function-inverse) ([**CoordArg**](classMetricTensorEvaluator.md#typedef-coordarg) const & coord) const<br>_Compute the inverse metric tensor associated with the mapping at a given position in space._  |
+|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; Dims, Dims &gt; | [**inverse**](#function-inverse-12) ([**CoordArg**](classMetricTensorEvaluator.md#typedef-coordarg) const & coord) const<br>_Compute the inverse metric tensor associated with the mapping at a given position in space._  |
+|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; Dims, Dims &gt; | [**inverse**](#function-inverse-22) (IdxType const & idx) const<br>_Compute the inverse metric tensor associated with the mapping at the coordinate of an index._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; Dims\_cov, Dims\_cov &gt; | [**operator()**](#function-operator) ([**CoordArg**](classMetricTensorEvaluator.md#typedef-coordarg) const & coord) const<br>_Compute the metric tensor associated with the mapping at a given position in space._  |
+|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; Dims\_cov, Dims\_cov &gt; | [**operator()**](#function-operator_1) (IdxType const & idx) const<br>_Compute the metric tensor associated with the mapping at the coordinate of an index._  |
 
 
 
@@ -183,7 +185,7 @@ inline explicit KOKKOS_FUNCTION MetricTensorEvaluator::MetricTensorEvaluator (
 
 
 
-### function inverse 
+### function inverse [1/2]
 
 _Compute the inverse metric tensor associated with the mapping at a given position in space._ 
 ```C++
@@ -200,6 +202,41 @@ inline KOKKOS_FUNCTION DTensor < Dims, Dims > MetricTensorEvaluator::inverse (
 
 
 * `coord` The coordinate where we evaluate the metric tensor. 
+
+
+
+**Returns:**
+
+inverse\_metric\_tensor A DTensor object containing the value of the inverse of the metric tensor. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function inverse [2/2]
+
+_Compute the inverse metric tensor associated with the mapping at the coordinate of an index._ 
+```C++
+template<ddc::concepts::discrete_element IdxType>
+inline KOKKOS_FUNCTION DTensor < Dims, Dims > MetricTensorEvaluator::inverse (
+    IdxType const & idx
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `idx` The index where we evaluate the metric tensor. 
 
 
 
@@ -237,6 +274,41 @@ The metric tensor matrix is defined as: \(G = (J_{\mathcal{F}})^T J_{\mathcal{F}
 
 
 * `coord` The coordinate where we evaluate the metric tensor. 
+
+
+
+**Returns:**
+
+metric\_tensor A DTensor object containing the value of the metric tensor. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function operator() 
+
+_Compute the metric tensor associated with the mapping at the coordinate of an index._ 
+```C++
+template<ddc::concepts::discrete_element IdxType>
+inline KOKKOS_FUNCTION DTensor < Dims_cov, Dims_cov > MetricTensorEvaluator::operator() (
+    IdxType const & idx
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `idx` The index where we evaluate the metric tensor. 
 
 
 

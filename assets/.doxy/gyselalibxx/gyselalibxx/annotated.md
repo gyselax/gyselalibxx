@@ -341,6 +341,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**is\_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;**](structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4.md) 
 * **struct** [**is\_uniform\_lagrange\_basis**](structis__uniform__lagrange__basis.md) 
 * **namespace** [**maxwellian\_equilibrium**](namespacemaxwellian__equilibrium.md)     
+* **namespace** [**metric\_tensor\_detail**](namespacemetric__tensor__detail.md)     
+    * **struct** [**IdxPlaceholder**](structmetric__tensor__detail_1_1IdxPlaceholder.md) _A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate._ 
+    * **struct** [**IdxPlaceholder&lt; Coord&lt; Dims... &gt; &gt;**](structmetric__tensor__detail_1_1IdxPlaceholder_3_01Coord_3_01Dims_8_8_8_01_4_01_4.md) _A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate._     
+    * **struct** [**PlaceholderGrid**](structmetric__tensor__detail_1_1PlaceholderGrid.md) _A placeholder grid used to check that a metric tensor can be evaluated at an index. It is never instantiated in a discrete space._     
 * **namespace** [**ndEval**](namespacendEval.md)     
 * **namespace** [**polar\_foot\_finder\_details**](namespacepolar__foot__finder__details.md)     
     * **struct** [**ElementwiseChoice**](structpolar__foot__finder__details_1_1ElementwiseChoice.md) 

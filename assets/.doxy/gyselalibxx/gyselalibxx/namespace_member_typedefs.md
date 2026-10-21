@@ -48,6 +48,7 @@
 ## p
 
 * **Periodic** ([**ExtrapolationRule**](namespaceExtrapolationRule.md), [**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
+* **placeholder\_idx\_t** ([**metric\_tensor\_detail**](namespacemetric__tensor__detail.md))
 
 
 ## r

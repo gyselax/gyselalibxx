@@ -1611,7 +1611,7 @@
 <codeline lineno="1459"><highlight class="normal"></highlight></codeline>
 <codeline lineno="1460"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Spatial2DVectorSpace<sp/>=<sp/>VectorIndexSet&lt;R,<sp/>Theta&gt;;</highlight></codeline>
 <codeline lineno="1461"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>inv_metric_tensor<sp/>=<sp/>metric_tensor.inverse(coord);</highlight></codeline>
+<codeline lineno="1462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>inv_metric_tensor<sp/>=<sp/>metric_tensor.inverse(idx_quad);</highlight></codeline>
 <codeline lineno="1463"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;Spatial2DVectorSpace, Spatial2DVectorSpace&gt;</ref><sp/>inv_metric_tensor_2d;</highlight></codeline>
 <codeline lineno="1464"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::assign_elements(inv_metric_tensor_2d,<sp/>inv_metric_tensor);</highlight></codeline>
 <codeline lineno="1465"><highlight class="normal"></highlight></codeline>

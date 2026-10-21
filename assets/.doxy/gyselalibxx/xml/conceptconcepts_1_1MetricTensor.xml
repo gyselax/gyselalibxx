@@ -15,8 +15,11 @@ concept <ref refid="conceptconcepts_1_1MetricTensor" kindref="compound">concepts
     typename T::ContravariantVectorType;
     typename T::CovariantVectorType;
 }
-&amp;&amp;is_tensor_type_v&lt;typename T::ContravariantVectorType&gt;&amp;&amp; is_tensor_type_v&lt;
-        typename T::CovariantVectorType&gt;&amp;&amp; requires(T const&amp; t, typename T::CoordArg const&amp; x)
+&amp;&amp;is_tensor_type_v&lt;typename T::ContravariantVectorType&gt;&amp;&amp;
+        is_tensor_type_v&lt;typename T::CovariantVectorType&gt;&amp;&amp; requires(
+                T const&amp; t,
+                typename T::CoordArg const&amp; x,
+                metric_tensor_detail::placeholder_idx_t&lt;typename T::CoordArg&gt; const&amp; idx)
 {
     {
         t(x)
@@ -28,13 +31,24 @@ concept <ref refid="conceptconcepts_1_1MetricTensor" kindref="compound">concepts
         } -&gt; std::same_as&lt;<ref refid="classTensor" kindref="compound">DTensor</ref>&lt;
                 ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;,
                 ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;&gt;&gt;;
+    {
+        t(idx)
+        } -&gt; std::same_as&lt;
+                <ref refid="classTensor" kindref="compound">DTensor</ref>&lt;ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;,
+                        ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;&gt;&gt;;
+    {
+        t.inverse(idx)
+        } -&gt; std::same_as&lt;<ref refid="classTensor" kindref="compound">DTensor</ref>&lt;
+                ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;,
+                ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;&gt;&gt;;
 }    </initializer>
     <briefdescription>
-<para>A concept describing a type which can provide the metric tensor and its inverse at a given coordinate. </para>
+<para>A concept describing a type which can provide the metric tensor and its inverse at a given coordinate or at a given index. </para>
     </briefdescription>
     <detaileddescription>
-<para>The metric tensor must be expressed on the covariant basis (i.e. it acts on contravariant vectors) and its inverse must be expressed on the contravariant basis (i.e. it acts on covariant vectors). </para>
+<para>The metric tensor must be expressed on the covariant basis (i.e. it acts on contravariant vectors) and its inverse must be expressed on the contravariant basis (i.e. it acts on covariant vectors).</para>
+<para>The operators must also accept any index IdxType such that std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, CoordArg&gt;. This is checked using a placeholder index type. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="24" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="56" column="1"/>
   </compounddef>
 </doxygen>

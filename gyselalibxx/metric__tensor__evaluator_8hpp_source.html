@@ -585,6 +585,26 @@
 #include "vector_index_tools.hpp"
 #include "view.hpp"
 
+namespace metric_tensor_detail {
+template &lt;class Dim&gt;
+struct PlaceholderGrid
+{
+    using continuous_dimension_type = Dim;
+};
+
+template &lt;class CoordType&gt;
+struct IdxPlaceholder;
+
+template &lt;class... Dims&gt;
+struct IdxPlaceholder&lt;Coord&lt;Dims...&gt;&gt;
+{
+    using type = Idx&lt;PlaceholderGrid&lt;Dims&gt;...&gt;;
+};
+
+template &lt;class CoordType&gt;
+using placeholder_idx_t = typename IdxPlaceholder&lt;CoordType&gt;::type;
+} // namespace metric_tensor_detail
+
 namespace concepts {
 template &lt;typename T&gt;
 concept MetricTensor = requires
@@ -593,8 +613,11 @@ concept MetricTensor = requires
     typename T::ContravariantVectorType;
     typename T::CovariantVectorType;
 }
-&amp;&amp;is_tensor_type_v&lt;typename T::ContravariantVectorType&gt;&amp;&amp; is_tensor_type_v&lt;
-        typename T::CovariantVectorType&gt;&amp;&amp; requires(T const&amp; t, typename T::CoordArg const&amp; x)
+&amp;&amp;is_tensor_type_v&lt;typename T::ContravariantVectorType&gt;&amp;&amp;
+        is_tensor_type_v&lt;typename T::CovariantVectorType&gt;&amp;&amp; requires(
+                T const&amp; t,
+                typename T::CoordArg const&amp; x,
+                metric_tensor_detail::placeholder_idx_t&lt;typename T::CoordArg&gt; const&amp; idx)
 {
     {
         t(x)
@@ -603,6 +626,16 @@ concept MetricTensor = requires
                         ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;&gt;&gt;;
     {
         t.inverse(x)
+        } -&gt; std::same_as&lt;DTensor&lt;
+                ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;,
+                ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;&gt;&gt;;
+    {
+        t(idx)
+        } -&gt; std::same_as&lt;
+                DTensor&lt;ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;,
+                        ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;&gt;&gt;;
+    {
+        t.inverse(idx)
         } -&gt; std::same_as&lt;DTensor&lt;
                 ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;,
                 ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;&gt;&gt;;
@@ -653,6 +686,22 @@ public:
         InverseJacobianMatrix get_inverse_jacobian(m_mapping);
         Tensor inv_J = get_inverse_jacobian(coord);
         return tensor_mul(index&lt;'i', 'j'&gt;(inv_J), index&lt;'k', 'j'&gt;(inv_J));
+    }
+
+    template &lt;ddc::concepts::discrete_element IdxType&gt;
+    requires(std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, CoordArg&gt;)
+            KOKKOS_FUNCTION DTensor&lt;Dims_cov, Dims_cov&gt;
+    operator()(IdxType const&amp; idx) const
+    {
+        return (*this)(ddc::coordinate(idx));
+    }
+
+    template &lt;ddc::concepts::discrete_element IdxType&gt;
+    requires(std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, CoordArg&gt;)
+            KOKKOS_FUNCTION DTensor&lt;Dims, Dims&gt; inverse(IdxType const&amp; idx)
+    const
+    {
+        return inverse(ddc::coordinate(idx));
     }
 };
 

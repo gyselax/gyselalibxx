@@ -23,7 +23,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="18" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="18" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGradient_1a797578524c97ebe981f62dab1975fa62" prot="private" static="no">
         <type>ddc::to_type_seq_t&lt; typename MetricTensorType::CoordArg &gt;</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="20" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="20" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGradient_1a9e7105999ad3a56c2fa6e5bddfa4ebc3" prot="private" static="no">
         <type>vector_index_set_dual_t&lt; Dims &gt;</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="21" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="22" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGradient_1a46b3388d269d4812b86c0742d8ce2228" prot="private" static="no">
         <type>typename MetricTensorType::ContravariantVectorType</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="23" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGradient_1ad0785e06c3cdbc18808d46e5ab3f944e" prot="private" static="no">
         <type>typename MetricTensorType::CovariantVectorType</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="24" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGradient_1a22184971638dfd5c6b5a69909118f21f" prot="private" static="no">
         <templateparamlist>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGradient_1a9648b8683142a384c35bbe571034afdb" prot="private" static="no">
         <templateparamlist>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="30" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGradient_1a8c4dee3271b238efbdb603210affdc8b" prot="private" static="no">
         <templateparamlist>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="33" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="35" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="36" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="43" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="43" bodyend="46"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="44" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="44" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classGradient_1a18b2e093f6d021c5297507d1f0a69394" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION DVectorCov</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="61" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="61" bodyend="64"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="62" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="62" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -260,12 +260,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="80" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="80" bodyend="85"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="81" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="81" bodyend="86"/>
       </memberdef>
-      <memberdef kind="function" id="classGradient_1a91c56b0cb7dc0ec63a708029db468ab4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGradient_1af05f5733d2679614694a115f26981be2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="conceptconcepts_1_1CoordOrIdx" kindref="compound">concepts::CoordOrIdx</ref>&lt; CoordArg &gt;</type>
+            <declname>CoordOrIdxType</declname>
+            <defname>CoordOrIdxType</defname>
+          </param>
+        </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION DVectorType</type>
         <definition>KOKKOS_INLINE_FUNCTION DVectorType Gradient&lt; MetricTensorType &gt;::operator()</definition>
-        <argsstring>(DVectorCov const &amp;partial_derivatives, CoordArg const &amp;coord) const</argsstring>
+        <argsstring>(DVectorCov const &amp;partial_derivatives, CoordOrIdxType const &amp;coord_or_idx) const</argsstring>
         <name>operator()</name>
         <qualifiedname>Gradient::operator()</qualifiedname>
         <param>
@@ -273,12 +280,11 @@
           <declname>partial_derivatives</declname>
         </param>
         <param>
-          <type>CoordArg const &amp;</type>
-          <declname>coord</declname>
+          <type>CoordOrIdxType const &amp;</type>
+          <declname>coord_or_idx</declname>
         </param>
         <briefdescription>
-<para>Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the contravariant basis. <linebreak/>
- </para>
+<para>Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the contravariant basis. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -291,10 +297,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">coord</parametername>
+<parametername direction="in">coord_or_idx</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The coordinate at which the gradient should be evaluated.</para>
+<para>The coordinate (or the index of the grid point) at which the gradient should be evaluated.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -304,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="100" bodyend="105"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="103" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classGradient_1a275ba4967fb94de83ac117458eeb7eda" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -351,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="118" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="118" bodyend="134"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="121" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="121" bodyend="136"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -369,7 +375,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="17" bodyend="135"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="17" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="18" bodyend="137"/>
     <listofallmembers>
       <member refid="classGradient_1a64e4e9fca6da517e2146ac091ed82fdc" prot="private" virt="non-virtual"><scope>Gradient</scope><name>CoordArg</name></member>
       <member refid="classGradient_1a797578524c97ebe981f62dab1975fa62" prot="private" virt="non-virtual"><scope>Gradient</scope><name>Dims</name></member>
@@ -383,7 +389,7 @@
       <member refid="classGradient_1adb51fa11ae19b2221fe6e45b8161ce16" prot="private" virt="non-virtual"><scope>Gradient</scope><name>m_metric_tensor</name></member>
       <member refid="classGradient_1a18b2e093f6d021c5297507d1f0a69394" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
       <member refid="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
-      <member refid="classGradient_1a91c56b0cb7dc0ec63a708029db468ab4" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
+      <member refid="classGradient_1af05f5733d2679614694a115f26981be2" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
       <member refid="classGradient_1a275ba4967fb94de83ac117458eeb7eda" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>

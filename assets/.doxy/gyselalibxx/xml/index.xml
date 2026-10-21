@@ -1446,7 +1446,7 @@
     <member refid="classGradient_1a089c6838004a0e19b761a4933ef0d034" kind="function"><name>Gradient</name></member>
     <member refid="classGradient_1a18b2e093f6d021c5297507d1f0a69394" kind="function"><name>operator()</name></member>
     <member refid="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" kind="function"><name>operator()</name></member>
-    <member refid="classGradient_1a91c56b0cb7dc0ec63a708029db468ab4" kind="function"><name>operator()</name></member>
+    <member refid="classGradient_1af05f5733d2679614694a115f26981be2" kind="function"><name>operator()</name></member>
     <member refid="classGradient_1a275ba4967fb94de83ac117458eeb7eda" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classGradientCreator" kind="class"><name>GradientCreator</name>
@@ -1576,6 +1576,11 @@
     <member refid="classIdentityTensor_1a8226c063830730770e62aee983ccbc7f" kind="function"><name>size</name></member>
     <member refid="classIdentityTensor_1ac03c37d10bf94bfcea328f4d4822a13d" kind="function"><name>get</name></member>
     <member refid="classIdentityTensor_1a831d9f57e21b2848a6e30a8db4a7d809" kind="function"><name>IdentityTensor</name></member>
+  </compound>
+  <compound refid="structmetric__tensor__detail_1_1IdxPlaceholder" kind="struct"><name>metric_tensor_detail::IdxPlaceholder</name>
+  </compound>
+  <compound refid="structmetric__tensor__detail_1_1IdxPlaceholder_3_01Coord_3_01Dims_8_8_8_01_4_01_4" kind="struct"><name>metric_tensor_detail::IdxPlaceholder&lt; Coord&lt; Dims... &gt; &gt;</name>
+    <member refid="structmetric__tensor__detail_1_1IdxPlaceholder_3_01Coord_3_01Dims_8_8_8_01_4_01_4_1afb5fed3e6c72fffe4b59feaf52c2c5d2" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classIEquilibrium" kind="class"><name>IEquilibrium</name>
     <member refid="classIEquilibrium_1a7244af05e0e1176c0c02212cee0cfb43" kind="function"><name>~IEquilibrium</name></member>
@@ -2136,8 +2141,8 @@
     <member refid="classLiePoissonBracket_1a6e4356cc4e94c8d2c3d7fdf0790a4df3" kind="variable"><name>m_metric_tensor</name></member>
     <member refid="classLiePoissonBracket_1af08ad0ae78101b684135030e27e73359" kind="variable"><name>m_grad</name></member>
     <member refid="classLiePoissonBracket_1afc4bb466282973b366dac092010a4f22" kind="function"><name>LiePoissonBracket</name></member>
-    <member refid="classLiePoissonBracket_1ad491141033902be5ea3fd992fd16d29f" kind="function"><name>operator()</name></member>
-    <member refid="classLiePoissonBracket_1aa563225e0687226549832a71a49946d1" kind="function"><name>operator()</name></member>
+    <member refid="classLiePoissonBracket_1a859de5cdfca4950d01d31949bf172c4c" kind="function"><name>operator()</name></member>
+    <member refid="classLiePoissonBracket_1a008cb84b50e94be9e6f1018ae07a312d" kind="function"><name>operator()</name></member>
     <member refid="classLiePoissonBracket_1a38faf020f97496880fbf4830c7a29d98" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classLinearCoordTransform" kind="class"><name>LinearCoordTransform</name>
@@ -2401,6 +2406,8 @@
     <member refid="classMetricTensorEvaluator_1aa9cc21d5dd3c74af9af9d1a270692612" kind="function"><name>MetricTensorEvaluator</name></member>
     <member refid="classMetricTensorEvaluator_1a340cea71092ad4f6f6eace344b833fa2" kind="function"><name>operator()</name></member>
     <member refid="classMetricTensorEvaluator_1a54cce1e06b68c8dc7e3908ef71613b9c" kind="function"><name>inverse</name></member>
+    <member refid="classMetricTensorEvaluator_1a433cb9140f086bb5f035244380ae29b8" kind="function"><name>operator()</name></member>
+    <member refid="classMetricTensorEvaluator_1a38eafab6acd06789d771be672a8e5cf8" kind="function"><name>inverse</name></member>
   </compound>
   <compound refid="structFluidMoments_1_1MomentDensity" kind="struct"><name>FluidMoments::MomentDensity</name>
   </compound>
@@ -2745,6 +2752,9 @@
   </compound>
   <compound refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4" kind="struct"><name>connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt;&gt; &gt;</name>
     <member refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4_1a29d56e6980c8c4f084dbeadd8b217794" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structmetric__tensor__detail_1_1PlaceholderGrid" kind="struct"><name>metric_tensor_detail::PlaceholderGrid</name>
+    <member refid="structmetric__tensor__detail_1_1PlaceholderGrid_1a5d88ea6e0b319ae9a4d3f8f242c8a54f" kind="typedef"><name>continuous_dimension_type</name></member>
   </compound>
   <compound refid="classPoissonLikeRHSFunction" kind="class"><name>PoissonLikeRHSFunction</name>
     <member refid="classPoissonLikeRHSFunction_1abc37563d57e207c80bc3cf8ea093c16f" kind="typedef"><name>evaluator_type</name></member>
@@ -3594,6 +3604,8 @@
   </compound>
   <compound refid="conceptconcepts_1_1CompatibleFunc" kind="concept"><name>concepts::CompatibleFunc</name>
   </compound>
+  <compound refid="conceptconcepts_1_1CoordOrIdx" kind="concept"><name>concepts::CoordOrIdx</name>
+  </compound>
   <compound refid="conceptconcepts_1_1Interpolation" kind="concept"><name>concepts::Interpolation</name>
   </compound>
   <compound refid="conceptconcepts_1_1Interpolation1D" kind="concept"><name>concepts::Interpolation1D</name>
@@ -3673,6 +3685,7 @@
     <member refid="vector__field__common_8hpp_1a3073ccd7095e44121805d560d53db101" kind="function"><name>get</name></member>
     <member refid="vector__field__common_8hpp_1a7e96ce78fa06b6f47073469aeeb550a4" kind="function"><name>get</name></member>
     <member refid="multipatch__field_8hpp_1a9aea59138796f480705d5bd006d67d02" kind="function"><name>deepcopy</name></member>
+    <member refid="coord__or__idx_8hpp_1a2d90bcac4932fe1aebc853d86a3953a2" kind="function"><name>get_coordinate</name></member>
     <member refid="ddc__helper_8hpp_1ab85a32309a76aeb021f849ea7bfd2773" kind="function"><name>total_interval_length</name></member>
     <member refid="ddc__helper_8hpp_1a4d5446b992979ca3b2382c0277626048" kind="function"><name>total_interval_length</name></member>
     <member refid="ddc__helper_8hpp_1a342954bb0c44d8d86ceadb9d9fbea79c" kind="function"><name>total_interval_length</name></member>
@@ -3720,6 +3733,9 @@
   </compound>
   <compound refid="namespacemaxwellian__equilibrium" kind="namespace"><name>maxwellian_equilibrium</name>
     <member refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_1a0664bbc4da7127e97a1a058b72321898" kind="function"><name>init_from_input</name></member>
+  </compound>
+  <compound refid="namespacemetric__tensor__detail" kind="namespace"><name>metric_tensor_detail</name>
+    <member refid="metric__tensor__evaluator_8hpp_1a06ade013f9e119187f95955e07520073" kind="typedef"><name>placeholder_idx_t</name></member>
   </compound>
   <compound refid="namespacendEval" kind="namespace"><name>ndEval</name>
     <member refid="vector__field__evaluation_8hpp_1a75b746745a54babbfe5fcc8ead376830" kind="function"><name>evaluate</name></member>
@@ -4036,12 +4052,6 @@
   </compound>
   <compound refid="vortex__merger__initialisation_8hpp" kind="file"><name>vortex_merger_initialisation.hpp</name>
   </compound>
-  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
   <compound refid="poisson__like__rhs__function_8hpp" kind="file"><name>poisson_like_rhs_function.hpp</name>
   </compound>
   <compound refid="bsl__predcorr_8hpp" kind="file"><name>bsl_predcorr.hpp</name>
@@ -4049,12 +4059,6 @@
   <compound refid="bsl__predcorr__second__order__explicit_8hpp" kind="file"><name>bsl_predcorr_second_order_explicit.hpp</name>
   </compound>
   <compound refid="bsl__predcorr__second__order__implicit_8hpp" kind="file"><name>bsl_predcorr_second_order_implicit.hpp</name>
-  </compound>
-  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="collision__configuration_8hpp" kind="file"><name>collision_configuration.hpp</name>
   </compound>
@@ -4410,6 +4414,12 @@
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
   </compound>
+  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
   <compound refid="mpichargedensitycalculator_8cpp" kind="file"><name>mpichargedensitycalculator.cpp</name>
   </compound>
   <compound refid="mpichargedensitycalculator_8hpp" kind="file"><name>mpichargedensitycalculator.hpp</name>
@@ -4429,6 +4439,12 @@
   <compound refid="geometryXVx_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="geometryXVx_2time__integration_2predcorr_8cpp" kind="file"><name>predcorr.cpp</name>
   </compound>
@@ -4874,6 +4890,8 @@
     <member refid="assert_8hpp_1a170afcd9855d768585d688a76e74f7e0" kind="define"><name>GSLX_DEBUG_BREAK</name></member>
     <member refid="assert_8hpp_1a577ea1e6459fb58314bb6c9f592f2992" kind="define"><name>GSLX_ASSERT_ENABLED</name></member>
     <member refid="assert_8hpp_1ab913f9f1f931bff8fa3c433b119d11e5" kind="define"><name>GSLX_ASSERT</name></member>
+  </compound>
+  <compound refid="coord__or__idx_8hpp" kind="file"><name>coord_or_idx.hpp</name>
   </compound>
   <compound refid="ddc__alias__inline__functions_8hpp" kind="file"><name>ddc_alias_inline_functions.hpp</name>
     <member refid="ddc__alias__inline__functions_8hpp_1a7943e1cbe40f175f81b6fe448ed89007" kind="variable"><name>enable_data_access_methods</name></member>

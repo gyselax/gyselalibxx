@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structmetric__tensor__detail_1_1IdxPlaceholder_3_01Coord_3_01Dims_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>metric_tensor_detail::IdxPlaceholder&lt; Coord&lt; Dims... &gt; &gt;</compoundname>
+    <includes refid="metric__tensor__evaluator_8hpp" local="no">metric_tensor_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>Dims</declname>
+        <defname>Dims</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structmetric__tensor__detail_1_1IdxPlaceholder_3_01Coord_3_01Dims_8_8_8_01_4_01_4_1afb5fed3e6c72fffe4b59feaf52c2c5d2" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structmetric__tensor__detail_1_1PlaceholderGrid" kindref="compound">PlaceholderGrid</ref>&lt; Dims &gt;... &gt;</type>
+        <definition>using metric_tensor_detail::IdxPlaceholder&lt; Coord&lt; Dims... &gt; &gt;::type =  Idx&lt;PlaceholderGrid&lt;Dims&gt;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>metric_tensor_detail::IdxPlaceholder&lt; Coord&lt; Dims... &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The type of the placeholder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="32" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="33" bodyend="36"/>
+    <listofallmembers>
+      <member refid="structmetric__tensor__detail_1_1IdxPlaceholder_3_01Coord_3_01Dims_8_8_8_01_4_01_4_1afb5fed3e6c72fffe4b59feaf52c2c5d2" prot="public" virt="non-virtual"><scope>metric_tensor_detail::IdxPlaceholder&lt; Coord&lt; Dims... &gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

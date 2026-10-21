@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structmetric__tensor__detail_1_1IdxPlaceholder" kind="struct" language="C++" prot="public">
+    <compoundname>metric_tensor_detail::IdxPlaceholder</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class CoordType</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="28" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="28" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

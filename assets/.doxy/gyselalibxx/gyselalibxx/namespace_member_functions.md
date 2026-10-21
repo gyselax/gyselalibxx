@@ -33,6 +33,7 @@
 ## g
 
 * **get** ([**ddcHelper**](namespaceddcHelper.md))
+* **get\_coordinate** ([**ddcHelper**](namespaceddcHelper.md))
 * **get\_idx\_from\_linear\_index** ([**ddcHelper**](namespaceddcHelper.md))
 * **get\_polar\_bspline\_vals\_and\_derivs** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_quadrature\_between\_knots** ([**detail\_poisson**](namespacedetail__poisson.md))

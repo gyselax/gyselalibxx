@@ -576,6 +576,7 @@
 
 #pragma once
 
+#include "coord_or_idx.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -623,11 +624,12 @@ public:
         ddcHelper::deepcopy(gradient, partial_derivatives);
     }
 
+    template &lt;concepts::CoordOrIdx&lt;CoordArg&gt; CoordOrIdxType&gt;
     KOKKOS_INLINE_FUNCTION DVectorType
-    operator()(DVectorCov const&amp; partial_derivatives, CoordArg const&amp; coord) const
+    operator()(DVectorCov const&amp; partial_derivatives, CoordOrIdxType const&amp; coord_or_idx) const
     {
         return tensor_mul(
-                index&lt;'i', 'j'&gt;(m_metric_tensor.inverse(coord)),
+                index&lt;'i', 'j'&gt;(m_metric_tensor.inverse(coord_or_idx)),
                 index&lt;'j'&gt;(partial_derivatives));
     }
 
@@ -644,8 +646,7 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(gradient),
                 KOKKOS_CLASS_LAMBDA(IdxType const idx) {
-                    DVectorType gradient_proxy
-                            = (*this)(partial_derivatives(idx), ddc::coordinate(idx));
+                    DVectorType gradient_proxy = (*this)(partial_derivatives(idx), idx);
                     ddcHelper::assign_vector_field_element(gradient, idx, gradient_proxy);
                 });
     }
