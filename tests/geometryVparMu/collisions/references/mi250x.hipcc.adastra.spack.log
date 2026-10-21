@@ -1,3 +1,5 @@
+Non conformity past tolerances detected!
+Non conformity past tolerances detected!
 For dataset 'fdistribu' with shape (2, 128, 64):
 NORM2 (r, a, a-r)           : fdistribu 4.88588747729375050e-01 4.88102455785750566e-01 8.60133668492433947e-04
 NORM2(a-r) / NORM2(r)       : fdistribu 1.76044510335071061e-03
@@ -7,3 +9,31 @@ degenerated reference       : fdistribu False
 degenerated approximation   : fdistribu False
 Max absolute error index    : (np.int64(0), np.int64(63), np.int64(0))
 Max relative error index    : (np.int64(1), np.int64(63), np.int64(63))
+For dataset 'fdistribu' with shape (2, 128, 64):
+NORM2 (r, a, a-r)           : fdistribu 4.88102455785750566e-01 4.88102455785750566e-01 0.00000000000000000e+00
+NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
+MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
+MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
+degenerated reference       : fdistribu False
+degenerated approximation   : fdistribu False
+Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
+Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
+For dataset 'fdistribu' with shape (1, 128, 64):
+NORM2 (r, a, a-r)           : fdistribu 4.88351913108320934e-01 4.88351913108320934e-01 0.00000000000000000e+00
+NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
+MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
+MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
+degenerated reference       : fdistribu False
+degenerated approximation   : fdistribu False
+Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
+Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
+ERROR: [Errno 2] Unable to synchronously open file (unable to open file: name = '../../references/coll_2species_maxwellian_differentT.h5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+For dataset 'fdistribu' with shape (2, 128, 64):
+NORM2 (r, a, a-r)           : fdistribu 4.95206619075261201e-01 4.95206619075261201e-01 0.00000000000000000e+00
+NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
+MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
+MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
+degenerated reference       : fdistribu False
+degenerated approximation   : fdistribu False
+Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
+Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))

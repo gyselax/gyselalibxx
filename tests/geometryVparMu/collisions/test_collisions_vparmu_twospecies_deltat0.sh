@@ -40,7 +40,7 @@ cd ..
 # coll_2species_maxwellian_differentT
 mkdir 3.coll_2species_maxwellian_differentT && cd 3.coll_2species_maxwellian_differentT
 "${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_2species_maxwellian_differentT.yaml"
-../../validate.py coll_00001.h5 ../../references/coll_2species_maxwellian_differentT.h5 fdistribu |& tee -a "${LOG_FILE}"
+../../validate.py coll_00001.h5 ../../references/3.coll_2species_maxwellian_differentT/coll_00010.h5 fdistribu |& tee -a "${LOG_FILE}"
 cd ..
 ################################################################################
 # coll_2species_maxwellian_differentV

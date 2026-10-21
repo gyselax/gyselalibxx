@@ -116,8 +116,7 @@ def compare_hdf5(reference_file, approximation_file, dataset_name):
     }
 
     if warning:
-        print("Non conformity past tolerances detected!")
-        print("Non conformity past tolerances detected!")
+        print("[WARNING]: Non conformity past tolerances detected!")
 
     name = dataset_name
     print(f"For dataset '{dataset_name}' with shape {reference.shape}:")
