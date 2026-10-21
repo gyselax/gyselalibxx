@@ -35,7 +35,8 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridTheta,
         PolarBSplinesRTheta,
         SplineInterpolatorRTheta,
-        typename DiscreteMappingBuilder::MappingType>;
+        typename DiscreteMappingBuilder::MappingType,
+        MetricTensorEvaluator<typename DiscreteMappingBuilder::MappingType>>;
 
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
@@ -141,7 +142,8 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(discrete_mapping, interpolator, grid);
+    MetricTensorEvaluator metric_tensor(discrete_mapping);
+    PoissonSolver solver(discrete_mapping, metric_tensor, interpolator, grid);
 
     solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
