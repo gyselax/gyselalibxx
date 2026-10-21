@@ -70,10 +70,10 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
 
     if constexpr (BSplines::is_uniform()) {
         // If uniform BSplines are used and interpolation points are calculated from them
-        Coord1D min(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_min"));
-        Coord1D max(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_max"));
+        Coord1D min(PCpp_double(conf_gyselalibxx, ".SplineMesh.%s_min", mesh_identifier.c_str()));
+        Coord1D max(PCpp_double(conf_gyselalibxx, ".SplineMesh.%s_max", mesh_identifier.c_str()));
         IdxStep<Grid1D> ncells(
-                PCpp_int(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_ncells"));
+                PCpp_int(conf_gyselalibxx, ".SplineMesh.%s_ncells", mesh_identifier.c_str()));
         ddc::init_discrete_space<BSplines>(min, max, ncells);
     } else if constexpr (!ddcHelper::is_non_uniform_interpolation_points_v<InterpPointInitMethod>) {
         PDI_get_arrays("read_" + mesh_identifier, "breakpoints_" + mesh_identifier, breakpoints);
@@ -135,10 +135,10 @@ inline IdxRange<Grid1D> init_pseudo_uniform_spline_dependent_idx_range(
     using Dim = typename Grid1D::continuous_dimension_type;
     using Coord1D = Coord<Dim>;
 
-    Coord1D min(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_min"));
-    Coord1D max(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_max"));
+    Coord1D min(PCpp_double(conf_gyselalibxx, ".SplineMesh.%s_min", mesh_identifier.c_str()));
+    Coord1D max(PCpp_double(conf_gyselalibxx, ".SplineMesh.%s_max", mesh_identifier.c_str()));
     IdxStep<Grid1D> ncells(
-            PCpp_int(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_ncells"));
+            PCpp_int(conf_gyselalibxx, ".SplineMesh.%s_ncells", mesh_identifier.c_str()));
 
     std::vector<Coord1D> break_points = build_uniform_break_points(min, max, ncells);
 
@@ -178,9 +178,10 @@ inline IdxRange<Grid1D> init_lagrange_dependent_idx_range(
 
     if constexpr (Lagrange::is_uniform()) {
         // If uniform Lagrange interpolation is used and interpolation points are calculated from them
-        Coord1D min(PCpp_double(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_min"));
-        Coord1D max(PCpp_double(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_max"));
-        IdxStep<Grid1D> ncells(PCpp_int(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_ncells"));
+        Coord1D min(PCpp_double(conf_gyselalibxx, ".Mesh.%s_min", mesh_identifier.c_str()));
+        Coord1D max(PCpp_double(conf_gyselalibxx, ".Mesh.%s_max", mesh_identifier.c_str()));
+        IdxStep<Grid1D> ncells(
+                PCpp_int(conf_gyselalibxx, ".Mesh.%s_ncells", mesh_identifier.c_str()));
         ddc::init_discrete_space<Grid1D>(Grid1D::template init<Grid1D>(min, max, ncells + 1));
         interpolation_idx_range = IdxRange<Grid1D>(Idx<Grid1D> {0}, ncells + 1);
     } else {

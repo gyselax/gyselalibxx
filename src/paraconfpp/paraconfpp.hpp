@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include <filesystem>
 #include <stdexcept>
 #include <string>
 #include <utility>
@@ -10,10 +9,10 @@
 #include <paraconf.h>
 
 template <class... Args>
-double PCpp_double(PC_tree_t tree, std::string const& str, Args&&... args)
+double PCpp_double(PC_tree_t tree, char const* index_fmt, Args&&... args)
 {
     double data = 0.;
-    if (PC_status_t s = PC_double(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &data);
+    if (PC_status_t s = PC_double(PC_get(tree, index_fmt, std::forward<Args>(args)...), &data);
         s != PC_OK) {
         throw std::runtime_error(PC_errmsg());
     }
@@ -21,10 +20,10 @@ double PCpp_double(PC_tree_t tree, std::string const& str, Args&&... args)
 }
 
 template <class... Args>
-long PCpp_int(PC_tree_t tree, std::string const& str, Args&&... args)
+long PCpp_int(PC_tree_t tree, char const* index_fmt, Args&&... args)
 {
     long data = 0;
-    if (PC_status_t s = PC_int(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &data);
+    if (PC_status_t s = PC_int(PC_get(tree, index_fmt, std::forward<Args>(args)...), &data);
         s != PC_OK) {
         throw std::runtime_error(PC_errmsg());
     }
@@ -32,10 +31,10 @@ long PCpp_int(PC_tree_t tree, std::string const& str, Args&&... args)
 }
 
 template <class... Args>
-int PCpp_len(PC_tree_t tree, std::string const& str, Args&&... args)
+int PCpp_len(PC_tree_t tree, char const* index_fmt, Args&&... args)
 {
     int data = 0;
-    if (PC_status_t s = PC_len(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &data);
+    if (PC_status_t s = PC_len(PC_get(tree, index_fmt, std::forward<Args>(args)...), &data);
         s != PC_OK) {
         throw std::runtime_error(PC_errmsg());
     }
@@ -43,10 +42,10 @@ int PCpp_len(PC_tree_t tree, std::string const& str, Args&&... args)
 }
 
 template <class... Args>
-bool PCpp_bool(PC_tree_t tree, std::string const& str, Args&&... args)
+bool PCpp_bool(PC_tree_t tree, char const* index_fmt, Args&&... args)
 {
     int data = 0;
-    if (PC_status_t s = PC_bool(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &data);
+    if (PC_status_t s = PC_bool(PC_get(tree, index_fmt, std::forward<Args>(args)...), &data);
         s != PC_OK) {
         throw std::runtime_error(PC_errmsg());
     }
@@ -54,10 +53,10 @@ bool PCpp_bool(PC_tree_t tree, std::string const& str, Args&&... args)
 }
 
 template <class... Args>
-std::string PCpp_string(PC_tree_t tree, std::string const& str, Args&&... args)
+std::string PCpp_string(PC_tree_t tree, char const* index_fmt, Args&&... args)
 {
     char* c_str = nullptr;
-    if (PC_status_t s = PC_string(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &c_str);
+    if (PC_status_t s = PC_string(PC_get(tree, index_fmt, std::forward<Args>(args)...), &c_str);
         s != PC_OK) {
         if (c_str != nullptr) {
             free(c_str);
@@ -70,7 +69,7 @@ std::string PCpp_string(PC_tree_t tree, std::string const& str, Args&&... args)
 }
 
 template <class... Args>
-PC_tree_t PCpp_get(PC_tree_t tree, std::string const& str, Args&&... args)
+PC_tree_t PCpp_get(PC_tree_t tree, char const* index_fmt, Args&&... args)
 {
-    return PC_get(tree, str.c_str(), std::forward<Args>(args)...);
+    return PC_get(tree, index_fmt, std::forward<Args>(args)...);
 }
