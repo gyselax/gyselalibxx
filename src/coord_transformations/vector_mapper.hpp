@@ -348,13 +348,13 @@ void copy_to_vector_space(
     using CoordType = vector_mapper_detail::evaluation_coord_t<MappingOrMetric>;
     using IdxCoordType = find_idx_t<CoordType, IdxRangeType>;
     const std::source_location location = std::source_location::current();
-    ddc::parallel_for_each(
-            location.function_name(),
-            exec_space,
-            get_idx_range(vector_field),
-            KOKKOS_LAMBDA(IdxType idx) {
-                IdxCoordType coord_idx(idx);
-                if constexpr (concepts::MetricTensor<MappingOrMetric>) {
+    if constexpr (concepts::MetricTensor<MappingOrMetric>) {
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space,
+                get_idx_range(vector_field),
+                KOKKOS_LAMBDA(IdxType idx) {
+                    IdxCoordType coord_idx(idx);
                     // Prefer evaluating the metric tensor at the grid point.
                     ddcHelper::assign_vector_field_element(
                             vector_field_out,
@@ -363,15 +363,22 @@ void copy_to_vector_space(
                                     mapping_or_metric,
                                     coord_idx,
                                     vector_field(idx)));
-                } else {
+                });
+    } else {
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space,
+                get_idx_range(vector_field),
+                KOKKOS_LAMBDA(IdxType idx) {
+                    IdxCoordType coord_idx(idx);
                     CoordType coord = ddc::coordinate(coord_idx);
                     ddcHelper::assign_vector_field_element(
                             vector_field_out,
                             idx,
                             to_vector_space<
                                     OutVectorSpace>(mapping_or_metric, coord, vector_field(idx)));
-                }
-            });
+                });
+    }
 }
 
 /**
