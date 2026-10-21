@@ -6,7 +6,7 @@
 #
 # It combines
 #   projects/<project>/spack.yaml          (what to install)
-#   platforms/<site>/config.sh             (site variables, Spack location)
+#   platforms/<site>/gys-setup-env.sh             (site variables, Spack location)
 #   platforms/<site>/<arch>/spack/*.yaml   (externals, packages, repos)
 # into the Spack environment "<project>-<arch>--<version>" (version.txt).
 #
@@ -16,7 +16,7 @@
 #   concretize   concretize the environment
 #   mirror       download all sources to a local mirror       (Slurm mode only)
 #   install      build and install
-# In Slurm mode (GYSELA_USE_SLURM=1 in config.sh, or --slurm), `concretize` and
+# In Slurm mode (GYSELA_USE_SLURM=1 in gys-setup-env.sh, or --slurm), `concretize` and
 # `install` run on a compute node through srun, the others on the login node.
 
 # Ensures the script is not being sourced
@@ -49,12 +49,12 @@ usage() {
 Usage: $(basename "$0") --platform <site> --arch <arch> --project <project> [options]
 
 Options:
-  --platform <site>        one of: $(list_dirs "${TOOLCHAIN_ROOT}/platforms" config.sh)
+  --platform <site>        one of: $(list_dirs "${TOOLCHAIN_ROOT}/platforms" gys-setup-env.sh)
   --arch <arch>            a sub-directory of platforms/<site>/ (e.g. mi250, h100)
   --project <project>      one of: $(list_dirs "${TOOLCHAIN_ROOT}/projects" spack.yaml)
   --step <step>            all (default) | spack | env | concretize | mirror | install
   --slurm-account <acct>   Slurm account (or set GYSELA_SLURM_ACCOUNT)
-  --slurm / --no-slurm     force or disable Slurm mode (default: GYSELA_USE_SLURM from config.sh)
+  --slurm / --no-slurm     force or disable Slurm mode (default: GYSELA_USE_SLURM from gys-setup-env.sh)
   -h, --help               show this help
 EOF
 }
@@ -89,26 +89,26 @@ platform_dir="${TOOLCHAIN_ROOT}/platforms/${platform}"
 conf_dir="${platform_dir}/${arch}/spack"
 project_yaml="${TOOLCHAIN_ROOT}/projects/${project}/spack.yaml"
 
-[[ -d "${platform_dir}" ]] || die "unknown platform '${platform}' (available: $(list_dirs "${TOOLCHAIN_ROOT}/platforms" config.sh))"
+[[ -d "${platform_dir}" ]] || die "unknown platform '${platform}' (available: $(list_dirs "${TOOLCHAIN_ROOT}/platforms" gys-setup-env.sh))"
 [[ -d "${conf_dir}" ]] || die "unknown arch '${arch}' for ${platform} (available: $(list_dirs "${platform_dir}" spack/packages.yaml))"
 [[ -f "${project_yaml}" ]] || die "unknown project '${project}' (available: $(list_dirs "${TOOLCHAIN_ROOT}/projects" spack.yaml))"
-[[ -f "${platform_dir}/config.sh" ]] || die "missing ${platform_dir}/config.sh"
+[[ -f "${platform_dir}/gys-setup-env.sh" ]] || die "missing ${platform_dir}/gys-setup-env.sh"
 for f in externals.yaml packages.yaml; do
     [[ -f "${conf_dir}/${f}" ]] || die "missing ${conf_dir}/${f}"
 done
 [[ -f "${conf_dir}/repos.yaml" ]] || warn "no repos.yaml for ${platform}/${arch}: Spack's default builtin repository will be used"
 
 # ------------------------------------------------------------- site config
-# Spack's setup-env.sh (sourced by config.sh) is not `set -u` clean.
+# Spack's setup-env.sh (sourced by gys-setup-env.sh) is not `set -u` clean.
 set +u
 # shellcheck disable=SC1091
-. "${platform_dir}/config.sh"
+. "${platform_dir}/gys-setup-env.sh"
 set -u
 
-: "${GYSELA_SPACK_GROUP:?not set by ${platform}/config.sh}"
-: "${GYSELA_SPACK_JOBS:?not set by ${platform}/config.sh}"
-: "${GYSELA_SPACK_VERSION:?not set by ${platform}/config.sh}"
-: "${GYSELA_SPACK_PREFIX:?not set by ${platform}/config.sh}"
+: "${GYSELA_SPACK_GROUP:?not set by ${platform}/gys-setup-env.sh}"
+: "${GYSELA_SPACK_JOBS:?not set by ${platform}/gys-setup-env.sh}"
+: "${GYSELA_SPACK_VERSION:?not set by ${platform}/gys-setup-env.sh}"
+: "${GYSELA_SPACK_PREFIX:?not set by ${platform}/gys-setup-env.sh}"
 
 version="$(tr -d '[:space:]' < "${TOOLCHAIN_ROOT}/version.txt")"
 env_name="${project}-${arch}--${version}"
@@ -117,11 +117,11 @@ use_slurm="${slurm_override:-${GYSELA_USE_SLURM:-0}}"
 if [[ "${use_slurm}" == 1 && -z "${GYSELA_INSTALL_WORKER:-}" ]]; then
     [[ -n "${slurm_account}" ]] || die "Slurm mode needs --slurm-account (or GYSELA_SLURM_ACCOUNT)"
     command -v srun >/dev/null 2>&1 || die "srun not found"
-    : "${GYSELA_SLURM_CPUS_PER_GPU:?not set by ${platform}/config.sh}"
-    : "${GYSELA_SLURM_QOS:?not set by ${platform}/config.sh}"
-    : "${GYSELA_SLURM_TIME:?not set by ${platform}/config.sh}"
-    : "${GYSELA_SLURM_GPUS_CONCRETIZE:?not set by ${platform}/config.sh}"
-    : "${GYSELA_SLURM_GPUS_INSTALL:?not set by ${platform}/config.sh}"
+    : "${GYSELA_SLURM_CPUS_PER_GPU:?not set by ${platform}/gys-setup-env.sh}"
+    : "${GYSELA_SLURM_QOS:?not set by ${platform}/gys-setup-env.sh}"
+    : "${GYSELA_SLURM_TIME:?not set by ${platform}/gys-setup-env.sh}"
+    : "${GYSELA_SLURM_GPUS_CONCRETIZE:?not set by ${platform}/gys-setup-env.sh}"
+    : "${GYSELA_SLURM_GPUS_INSTALL:?not set by ${platform}/gys-setup-env.sh}"
 fi
 
 mirror_dir="${GYSELA_SPACK_PREFIX}/var/spack/mirror"

@@ -16,7 +16,7 @@ environment_name="$1"
 module purge
 
 # Defines GYSELA_SPACK_PREFIX and loads Spack
-. "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/config.sh"
+. "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/gys-setup-env.sh"
 
 if [[ -n "${SPACK_ENV:-}" ]]; then
     spack env deactivate

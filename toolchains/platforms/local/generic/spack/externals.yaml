@@ -1,6 +1,6 @@
 ---
 # Nothing is hardcoded for a generic machine: the system compiler is detected at
-# install time (see GYSELA_DETECT_EXTERNALS in ../../config.sh).
+# install time (see GYSELA_DETECT_EXTERNALS in ../../gys-setup-env.sh).
 # Add entries here to reuse other system packages, for instance:
 #
 # packages:
