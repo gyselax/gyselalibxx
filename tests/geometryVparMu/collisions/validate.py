@@ -116,22 +116,25 @@ def compare_hdf5(reference_file, approximation_file, dataset_name):
     }
 
     if warning:
-        name = dataset_name
-        print(f"For dataset '{dataset_name}' with shape {reference.shape}:")
-        print(
-            f"NORM2 (r, a, a-r)           : {name} {reference_norm2:.17e} {approximation_norm2:.17e} {difference_norm2:.17e}"
-        )
-        print(f"NORM2(a-r) / NORM2(r)       : {name} {relative_error_norm2:.17e}")
-        print(
-            f"MAXVAL(ABS(a-r))            : {name} {max_absolute_error:.17e} ABS(a-r)/ABS(r) at argmax ABS(a-r): {max_relative_error_at_max_absolute_error_location:.17e}"
-        )
-        print(
-            f"MAXVAL(ABS(a-r)/ABS(r))     : {name} {max_relative_error:.17e} ABS(a-r) at argmax relative error: {max_absolute_error_at_max_relative_error_location:.17e}"
-        )
-        print(f"degenerated reference       : {name} {has_degenerated_reference}")
-        print(f"degenerated approximation   : {name} {has_degenerated_approximation}")
-        print(f"Max absolute error index    : {max_abs_index}")
-        print(f"Max relative error index    : {max_rel_index}")
+        print("Non conformity past tolerances detected!")
+        print("Non conformity past tolerances detected!")
+
+    name = dataset_name
+    print(f"For dataset '{dataset_name}' with shape {reference.shape}:")
+    print(
+        f"NORM2 (r, a, a-r)           : {name} {reference_norm2:.17e} {approximation_norm2:.17e} {difference_norm2:.17e}"
+    )
+    print(f"NORM2(a-r) / NORM2(r)       : {name} {relative_error_norm2:.17e}")
+    print(
+        f"MAXVAL(ABS(a-r))            : {name} {max_absolute_error:.17e} ABS(a-r)/ABS(r) at argmax ABS(a-r): {max_relative_error_at_max_absolute_error_location:.17e}"
+    )
+    print(
+        f"MAXVAL(ABS(a-r)/ABS(r))     : {name} {max_relative_error:.17e} ABS(a-r) at argmax relative error: {max_absolute_error_at_max_relative_error_location:.17e}"
+    )
+    print(f"degenerated reference       : {name} {has_degenerated_reference}")
+    print(f"degenerated approximation   : {name} {has_degenerated_approximation}")
+    print(f"Max absolute error index    : {max_abs_index}")
+    print(f"Max relative error index    : {max_rel_index}")
 
     return metrics
 
@@ -150,7 +153,6 @@ def main():
     except (OSError, KeyError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
-
     return 1 if metrics["warning"] else 0
 
 

@@ -1,10 +1,11 @@
 #!/bin/bash
 
 set -eu
+# set -o pipefail
 # set -x
 
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <COLL_EXEC>"
+if [ ${#} -ne 1 ]; then
+    echo "Usage: ${0} <COLL_EXEC>"
     exit 1
 fi
 COLL_EXEC="${1}"
@@ -27,4 +28,23 @@ mkdir 1.delta_t_at_zero && cd 1.delta_t_at_zero
 sed "s/\(deltat:\) .*/\1 0./" "${INPUT_YAML_FILE}" >case.yaml
 "${COLL_EXEC}" case.yaml
 ../../validate.py coll_00000.h5 coll_00001.h5 fdistribu |& tee -a "${LOG_FILE}"
+../../validate.py coll_00001.h5 ../../references/1.delta_t_at_zero/coll_00001.h5 fdistribu |& tee -a "${LOG_FILE}"
+cd ..
+################################################################################
+# coll_1specie_maxwellian
+mkdir 2.coll_1specie_maxwellian && cd 2.coll_1specie_maxwellian
+"${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_1specie_maxwellian.yaml"
+../../validate.py coll_00010.h5 ../../references/2.coll_1specie_maxwellian/coll_00010.h5 fdistribu |& tee -a "${LOG_FILE}"
+cd ..
+################################################################################
+# coll_2species_maxwellian_differentT
+mkdir 3.coll_2species_maxwellian_differentT && cd 3.coll_2species_maxwellian_differentT
+"${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_2species_maxwellian_differentT.yaml"
+../../validate.py coll_00001.h5 ../../references/coll_2species_maxwellian_differentT.h5 fdistribu |& tee -a "${LOG_FILE}"
+cd ..
+################################################################################
+# coll_2species_maxwellian_differentV
+mkdir 4.coll_2species_maxwellian_differentV && cd 4.coll_2species_maxwellian_differentV
+"${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_2species_maxwellian_differentV.yaml"
+../../validate.py coll_00010.h5 ../../references/4.coll_2species_maxwellian_differentV/coll_00010.h5 fdistribu |& tee -a "${LOG_FILE}"
 cd ..
