@@ -89,9 +89,6 @@ public:
 
 
 private:
-    template <class TargetDim>
-    KOKKOS_FUNCTION static Idx<TargetDim> to_index(Idx<GridVx> const& index);
-
     // The "Spoof" variables will be identical to the non-spoof versions. They are simply used
     // to prevent the compiler from trying to compile code for the non-uniform case when splines
     // are uniform.

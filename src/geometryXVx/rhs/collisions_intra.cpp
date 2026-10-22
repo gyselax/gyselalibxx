@@ -8,18 +8,6 @@
 #include "fluid_moments.hpp"
 #include "matrix_batch_tridiag.hpp"
 
-template <class TargetDim>
-KOKKOS_FUNCTION Idx<TargetDim> CollisionsIntra::to_index(Idx<GridVx> const& index)
-{
-    static_assert(
-            std::is_same_v<TargetDim, GhostedVx> || std::is_same_v<TargetDim, GhostedVxStaggered>);
-    if constexpr (std::is_same_v<TargetDim, GhostedVx>) {
-        return Idx<GhostedVx>(index.uid() + 1);
-    } else {
-        return Idx<GhostedVxStaggered>(index.uid() + 1);
-    }
-}
-
 // The "Spoof" variables will be identical to the non-spoof versions. They are simply used
 // to prevent the compiler from trying to compile code for the non-uniform case when splines
 // are uniform.
@@ -45,7 +33,7 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<GridVxSpoof>> CollisionsIntra
     breaks[0] = v0 - (v1 - v0);
     breaks[npoints - 1] = vN + (vN - vNm1);
     ddc::host_for_each(idx_range, [&](IdxVx const iv) {
-        breaks[to_index<GhostedVx>(iv).uid()] = ddc::coordinate(iv);
+        breaks[(iv - idx_range.front()).value() + 1] = ddc::coordinate(iv);
     });
     ddc::init_discrete_space<GhostedVxSpoof>(breaks);
 
@@ -56,7 +44,8 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<GridVxSpoof>> CollisionsIntra
     breaks_stag[npoints_stag - 1] = vN + (vN - vNm1) / 2.;
     IdxRangeVx const gridv_less(idx_range.remove_last(IdxStepVx(1)));
     ddc::host_for_each(gridv_less, [&](IdxVx const iv) {
-        breaks_stag[iv.uid() + 1] = CoordVx((ddc::coordinate(iv) + ddc::coordinate(iv + 1)) / 2.);
+        breaks_stag[(iv - idx_range.front()).value() + 1]
+                = CoordVx((ddc::coordinate(iv) + ddc::coordinate(iv + 1)) / 2.);
     });
     ddc::init_discrete_space<GhostedVxStaggeredSpoof>(breaks_stag);
 }
@@ -147,6 +136,13 @@ void CollisionsIntra::compute_matrix_coeff(
         DField<IdxRangeSpXVx_ghosted> Nucoll,
         double deltat) const
 {
+    IdxVx const ivx_first = get_idx_range<GridVx>(AA).front();
+
+    // The ghosted grids contain one ghost point before the first GridVx point
+    IdxVx_ghosted const ivx_ghosted_first = m_gridvx_ghosted.front() + 1;
+    IdxVx_ghosted_staggered const ivx_ghosted_staggered_first
+            = m_gridvx_ghosted_staggered.front() + 1;
+
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(AA),
@@ -154,9 +150,9 @@ void CollisionsIntra::compute_matrix_coeff(
                 IdxSp const isp = ddc::select<Species>(ispxvx);
                 IdxX const ix = ddc::select<GridX>(ispxvx);
                 IdxVx const ivx = ddc::select<GridVx>(ispxvx);
-
-                IdxVx_ghosted ivx_ghosted(to_index<GhostedVx>(ivx));
-                IdxVx_ghosted_staggered ivx_ghosted_staggered(to_index<GhostedVxStaggered>(ivx));
+                IdxVx_ghosted ivx_ghosted(ivx_ghosted_first + (ivx - ivx_first).value());
+                IdxVx_ghosted_staggered ivx_ghosted_staggered(
+                        ivx_ghosted_staggered_first + (ivx - ivx_first).value());
                 IdxVx_ghosted ivx_next_ghosted(ivx_ghosted + 1);
                 IdxVx_ghosted ivx_prev_ghosted(ivx_ghosted - 1);
                 IdxVx_ghosted_staggered ivx_prev_ghosted_staggered(ivx_ghosted_staggered - 1);
@@ -203,19 +199,23 @@ void CollisionsIntra::fill_matrix_with_coeff(
         host_t<DConstFieldVx> BB,
         host_t<DConstFieldVx> CC) const
 {
-    matrix.set_element(0, 0, BB(IdxVx(0)));
-    matrix.set_element(0, 1, CC(IdxVx(0)));
+    IdxRangeVx const gridvx(get_idx_range<GridVx>(AA));
+    IdxVx const ivx_first = gridvx.front();
+    IdxVx const ivx_last = gridvx.back();
 
-    int const npoints(get_idx_range<GridVx>(AA).size());
-    matrix.set_element(npoints - 1, npoints - 1, BB(IdxVx(npoints - 1)));
-    matrix.set_element(npoints - 1, npoints - 2, AA(IdxVx(npoints - 1)));
+    matrix.set_element(0, 0, BB(ivx_first));
+    matrix.set_element(0, 1, CC(ivx_first));
 
-    IdxRangeVx const gridvx_inner(
-            get_idx_range<GridVx>(AA).remove_first(IdxStepVx(1)).remove_last(IdxStepVx(1)));
+    int const npoints(gridvx.size());
+    matrix.set_element(npoints - 1, npoints - 1, BB(ivx_last));
+    matrix.set_element(npoints - 1, npoints - 2, AA(ivx_last));
+
+    IdxRangeVx const gridvx_inner(gridvx.remove_first(IdxStepVx(1)).remove_last(IdxStepVx(1)));
     ddc::host_for_each(gridvx_inner, [&](IdxVx const ivx) {
-        matrix.set_element(ivx.uid(), ivx.uid() - 1, AA(ivx));
-        matrix.set_element(ivx.uid(), ivx.uid(), BB(ivx));
-        matrix.set_element(ivx.uid(), ivx.uid() + 1, CC(ivx));
+        int const row((ivx - ivx_first).value());
+        matrix.set_element(row, row - 1, AA(ivx));
+        matrix.set_element(row, row, BB(ivx));
+        matrix.set_element(row, row + 1, CC(ivx));
     });
 }
 
