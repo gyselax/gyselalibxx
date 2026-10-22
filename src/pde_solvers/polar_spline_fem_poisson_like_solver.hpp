@@ -393,6 +393,8 @@ public:
      */
     void update_coefficients(DConstFieldBatchedRTheta alpha, DConstFieldBatchedRTheta beta) override
     {
+        Kokkos::Profiling::ScopedRegion region("(GSLX) PolarSplineFEMPoissonLikeSolver update");
+
         FieldMemBatchedCoeffsSpline2D coeff_alpha_alloc(
                 batched_basis_idx_range(m_builder, get_idx_range(alpha)));
         FieldMemBatchedCoeffsSpline2D coeff_beta_alloc(
