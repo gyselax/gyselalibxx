@@ -19,14 +19,20 @@
  *    usually corresponds to species and mu.
  *  - "InterpSpace" refers to the space dimensions along which the interpolation is performed, e.g.
  *    poloidal cross-sections when the approximation B // e_phi is assumed.
- *  - "BatchSpace" refers to the remaining dimensions, if any (not yet implemented).
+ *  - "BatchSpace" refers to the remaining dimensions, if any. The same coefficients are used
+ *    for every batch index.
  *
  * @tparam InterpolatorType
  *     Type of the interpolator.
  * @tparam IdxRangeParams
  *     The additional dimensions parametrising the gyroaverage (usually species and mu).
+ * @tparam IdxRangeBatch
+ *     The batch dimensions on which the gyroaverage does not depend (default: none).
  */
-template <concepts::Interpolation InterpolatorType, class IdxRangeParams>
+template <
+        concepts::Interpolation InterpolatorType,
+        class IdxRangeParams,
+        class IdxRangeBatch = IdxRange<>>
 class GyroAverageOperator
 {
     using InterpSpaceBuilderType = typename InterpolatorType::BuilderType;
@@ -37,15 +43,21 @@ class GyroAverageOperator
             = InterpolationBuilderTraits<InterpSpaceBuilderType>::interpolation_idx_range_type;
     using IdxInterpSpace = typename IdxRangeInterpSpace::discrete_element_type;
     using CoordsInterpSpace = ddc::coordinate_of_t<IdxInterpSpace>;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+    using IdxRangeInterpBatchedSpace = ddc::combine_t<IdxRangeBatch, IdxRangeInterpSpace>;
+    using IdxInterpBatchedSpace = typename IdxRangeInterpBatchedSpace::discrete_element_type;
     using IdxParams = typename IdxRangeParams::discrete_element_type;
     using IdxRangeGyroSpace = ddc::combine_t<IdxRangeParams, IdxRangeInterpSpace>;
     using IdxGyroSpace = typename IdxRangeGyroSpace::discrete_element_type;
+    using IdxRangeGyroBatchedSpace = ddc::combine_t<IdxRangeParams, IdxRangeInterpBatchedSpace>;
 
     /// Interpolation coefficients
     using IdxRangeInterpCoeffs
             = InterpolationBuilderTraits<InterpSpaceBuilderType>::coeff_idx_range_type;
-    using DFieldMemInterpCoeffs = DFieldMem<IdxRangeInterpCoeffs>;
-    using DFieldInterpCoeffs = DField<IdxRangeInterpCoeffs>;
+    using IdxRangeBatchedInterpCoeffs = typename InterpolationBuilderTraits<InterpSpaceBuilderType>::
+            template batched_basis_idx_range_type<IdxRangeInterpBatchedSpace>;
+    using DFieldMemBatchedInterpCoeffs = DFieldMem<IdxRangeBatchedInterpCoeffs>;
+    using DFieldBatchedInterpCoeffs = DField<IdxRangeBatchedInterpCoeffs>;
 
 public:
     /// @brief Dimension indexing the sample points (must be public to comply with nvcc rules).
@@ -211,7 +223,7 @@ public:
      *
      * @param[in, out] func Field to process on input and its gyroaverage on output.
      */
-    void operator()(DField<IdxRangeGyroSpace> const& func) const
+    void operator()(DField<IdxRangeGyroBatchedSpace> const& func) const
     {
         IdxRangeParams idx_range_params(get_idx_range(func));
 
@@ -222,26 +234,27 @@ public:
 
     /**
      * @brief For a given parameter set, compute the gyroaverage of a field which only depends on
-     * space.
+     * space (and on the batch dimensions).
      *
      * @param[in, out] func Field to process on input and its gyroaverage on output.
      * @param[in] idx_param Parameter set whose coefficients will be used.
      */
-    void operator()(DField<IdxRangeInterpSpace> const& func, IdxParams idx_param) const
+    void operator()(DField<IdxRangeInterpBatchedSpace> const& func, IdxParams idx_param) const
     {
+        IdxRangeInterpSpace const idx_range_space(get_idx_range(func));
         // Ensure that there are coefficients for the points in the input data
         assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
-                       .contains(get_idx_range(func).front()));
+                       .contains(idx_range_space.front()));
         assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
-                       .contains(get_idx_range(func).back()));
+                       .contains(idx_range_space.back()));
         // Ensure that there are coefficients for the requested parameter set
         assert(IdxRangeParams(get_idx_range(m_gyrocoeffs_weights)).contains(idx_param));
 
         // Initialise the interpolator
-        DFieldMemInterpCoeffs scoef_alloc(
+        DFieldMemBatchedInterpCoeffs scoef_alloc(
                 "scoef (GyroAvrageOperator::operator())",
                 batched_basis_idx_range(m_builder, get_idx_range(func)));
-        DFieldInterpCoeffs scoef = get_field(scoef_alloc);
+        DFieldBatchedInterpCoeffs scoef = get_field(scoef_alloc);
         m_builder(scoef, get_const_field(func));
         InterpSpaceEvaluatorType evaluator = m_evaluator;
 
@@ -255,18 +268,22 @@ public:
                 location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(func),
-                KOKKOS_LAMBDA(IdxInterpSpace const idx_interpspace) {
+                KOKKOS_LAMBDA(IdxInterpBatchedSpace const idx_interpbatchedspace) {
+                    IdxInterpSpace const idx_interpspace(idx_interpbatchedspace);
+                    IdxBatch const idx_batch(idx_interpbatchedspace);
+                    DConstField<IdxRangeInterpCoeffs> const scoef_slice
+                            = get_const_field(scoef[idx_batch]);
                     // Average over gyro points
                     double gavg = 0.0;
                     for (std::size_t igyro = 0; igyro < nb_gyro_points_proxy; igyro++) {
                         IdxList const idx_gyro = idx_gyro0 + igyro;
                         double const value = evaluator(
                                 gyrocoeffs_coords_proxy(idx_param, idx_interpspace, idx_gyro),
-                                get_const_field(scoef));
+                                scoef_slice);
                         gavg += gyrocoeffs_weights_proxy(idx_param, idx_interpspace, idx_gyro)
                                 * value;
                     }
-                    func(idx_interpspace) = gavg;
+                    func(idx_interpbatchedspace) = gavg;
                 });
     }
 };
