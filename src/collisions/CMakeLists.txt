@@ -1,10 +1,8 @@
 # SPDX-License-Identifier: MIT
 
-add_library("collisions" STATIC
-    collision_operator.cpp
-)
+add_library("collisions" INTERFACE)
 
-target_compile_features("collisions" PUBLIC cxx_std_20)
+target_compile_features("collisions" INTERFACE cxx_std_20)
 
 target_sources("collisions"
     INTERFACE
@@ -15,7 +13,7 @@ target_sources("collisions"
 )
 
 target_link_libraries("collisions"
-    PUBLIC
+    INTERFACE
         DDC::core
         gyselalibxx::paraconfpp
         gyselalibxx::speciesinfo
