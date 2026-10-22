@@ -30,6 +30,9 @@ public:
     using IdxRangeDistributionFunctionType =
             typename CollisionConfigurationType::IdxRangeDistributionFunctionType;
 
+    using CollisionConfigurationDataType =
+            typename CollisionConfiguration::CollisionConfigurationDataType;
+
 public:
     /**
      * @brief Construct a new Collision Operator object
@@ -38,7 +41,8 @@ public:
      * data required for its initialisation.
      */
     explicit CollisionOperator(CollisionConfigurationType const& collision_configuration)
-        : m_operator {
+        : m_collision_configuration {collision_configuration}
+        , m_operator {
                   collision_configuration.configuration().m_mu_extent,
                   collision_configuration.configuration().m_vpar_extent,
                   collision_configuration.configuration().m_theta_extent,
@@ -55,17 +59,39 @@ public:
                   /* One less than the number of point in the r direction. */
                   0 /* Null offset */
                           + collision_configuration.configuration().m_r_extent - 1,
-                  collision_configuration.configuration().m_hat_As_allocation.data_handle(),
-                  collision_configuration.configuration().m_hat_Zs_allocation.data_handle(),
-                  collision_configuration.configuration().m_mug_allocation.data_handle(),
-                  collision_configuration.configuration().m_vparg_allocation.data_handle(),
-                  collision_configuration.configuration().m_coeff_intdmu.data_handle(),
-                  collision_configuration.configuration().m_coeff_intdvpar.data_handle(),
-                  collision_configuration.configuration().m_coeff_AD_allocation.data_handle(),
-                  collision_configuration.configuration().m_mask_buffer_r_allocation.data_handle(),
-                  collision_configuration.configuration().m_mask_LIM_allocation.data_handle(),
-                  collision_configuration.configuration().m_B_norm_allocation.data_handle(),
-                  collision_configuration.configuration().m_Bstar_s_allocation.data_handle()}
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_hat_As_allocation.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_hat_Zs_allocation.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_mug_allocation.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_vparg_allocation.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_coeff_intdmu.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_coeff_intdvpar.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_coeff_AD_allocation.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_mask_buffer_r_allocation.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_mask_LIM_allocation.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_B_norm_allocation.allocation_kokkos_view()),
+                  CollisionConfigurationDataType::as_layout_left(
+                          collision_configuration.configuration()
+                                  .m_Bstar_s_allocation.allocation_kokkos_view())}
     {
         // EMPTY
     }
@@ -82,10 +108,18 @@ public:
      */
     void operator()(DField<IdxRangeDistributionFunctionType> all_f_distribution, double deltat_coll)
     {
-        m_operator.Collision(deltat_coll, all_f_distribution.data_handle());
+        m_operator.Collisions(
+                deltat_coll,
+                m_collision_configuration.configuration().cast_fdistrib(
+                        all_f_distribution.allocation_kokkos_view()));
     }
 
 protected:
+    /**
+     * @brief The collision configuration.
+    */
+    CollisionConfiguration const& m_collision_configuration;
+
     /**
      * @brief Opaque C type representing the operator.
     */

@@ -217,6 +217,53 @@ public:
                 });
     }
 
+
+    /// @brief No-op conversion. a_view^t^t=a_view, so if we keep the underlying
+    /// view pointer and simply permute the indicies, we get a layout left view
+    /// without copying.
+    /// @tparam View
+    /// @param a_view A layout left or right, view.
+    /// @return A layout left view.
+    template <class View>
+    static auto as_layout_left(const View& a_view)
+    {
+        if constexpr (std::is_same_v<typename View::array_layout, Kokkos::LayoutRight>) {
+            return [&]<std::size_t... I>(std::index_sequence<I...>) {
+                return Kokkos::View<
+                        typename View::data_type,
+                        Kokkos::LayoutLeft,
+                        typename View::device_type,
+                        Kokkos::MemoryTraits<Kokkos::Unmanaged>> {
+                        a_view.data(),
+                        a_view.extent(View::rank - 1 - I)...};
+            }(std::make_index_sequence<View::rank> {});
+        } else {
+            return a_view;
+        }
+    }
+
+    /// @brief Cast from layout right with potentially no all dimension (missing r, theta or phi) into a full blown 6D
+    /// array with the proper extents.
+    /// @tparam View
+    /// @param a_view A distribution function view.
+    /// @return A views in 6D, layout left and proper extents.
+    template <class View>
+    auto cast_fdistrib(const View& a_view) const
+    {
+        return Kokkos::View<
+                typename View::value_type******,
+                Kokkos::LayoutLeft,
+                typename View::device_type,
+                Kokkos::MemoryTraits<Kokkos::Unmanaged>>(
+                a_view.data(),
+                m_mu_extent,
+                m_vpar_extent,
+                m_theta_extent,
+                m_r_extent,
+                m_phi_extent,
+                m_species_extent);
+    }
+
 protected:
     /**
      * @brief Check if a dimension is spoofed but is not present in the actual
