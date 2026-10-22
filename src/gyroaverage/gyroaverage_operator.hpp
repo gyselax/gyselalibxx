@@ -54,8 +54,9 @@ class GyroAverageOperator
     /// Interpolation coefficients
     using IdxRangeInterpCoeffs
             = InterpolationBuilderTraits<InterpSpaceBuilderType>::coeff_idx_range_type;
-    using IdxRangeBatchedInterpCoeffs = typename InterpolationBuilderTraits<InterpSpaceBuilderType>::
-            template batched_basis_idx_range_type<IdxRangeInterpBatchedSpace>;
+    using IdxRangeBatchedInterpCoeffs =
+            typename InterpolationBuilderTraits<InterpSpaceBuilderType>::
+                    template batched_basis_idx_range_type<IdxRangeInterpBatchedSpace>;
     using DFieldMemBatchedInterpCoeffs = DFieldMem<IdxRangeBatchedInterpCoeffs>;
     using DFieldBatchedInterpCoeffs = DField<IdxRangeBatchedInterpCoeffs>;
 
