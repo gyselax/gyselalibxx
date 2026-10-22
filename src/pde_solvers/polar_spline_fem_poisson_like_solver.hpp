@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "i_interpolation.hpp"
 #include "ipolar_poisson_like_solver.hpp"
 #include "polar_spline_fem_poisson_like_assembler.hpp"
@@ -365,6 +367,8 @@ public:
         , m_int_volume_alloc(calculate_int_volume(mapping))
         , m_assembler(get_field(m_int_volume_alloc), metric_tensor, idx_range_full)
     {
+        Kokkos::Profiling::ScopedRegion region("(GSLX) PolarSplineFEMPoissonLikeSolver init");
+
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
         ddc::parallel_fill(get_field(m_x_init_alloc), 0);
@@ -389,6 +393,8 @@ public:
      */
     void update_coefficients(DConstFieldBatchedRTheta alpha, DConstFieldBatchedRTheta beta) override
     {
+        Kokkos::Profiling::ScopedRegion region("(GSLX) PolarSplineFEMPoissonLikeSolver update");
+
         FieldMemBatchedCoeffsSpline2D coeff_alpha_alloc(
                 batched_basis_idx_range(m_builder, get_idx_range(alpha)));
         FieldMemBatchedCoeffsSpline2D coeff_beta_alloc(
@@ -422,7 +428,7 @@ public:
     template <class RHSFunction>
     void operator()(PolarSplineRTheta spline, RHSFunction const& rhs) const
     {
-        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonRHS");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarSplineFEMPoissonLikeSolver RHS");
 
         static_assert(
                 is_valid_rhs_function_v<RHSFunction>,
@@ -532,7 +538,7 @@ public:
         Kokkos::Profiling::popRegion();
 
         // Solve the matrix equation for every batch in a single call
-        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonSolve");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarSplineFEMPoissonLikeSolver solve");
         m_gko_matrix
                 ->solve(detail_poisson::as_batched_vector_view(x_init),
                         detail_poisson::as_batched_vector_view(b));
@@ -553,6 +559,7 @@ public:
         ddc::parallel_deepcopy(spline[batched_polar_bspl_idx_range], x_init);
         // Apply the Dirichlet boundary conditions
         ddc::parallel_fill(spline[batched_bc_polar_bspl_idx_range], 0.0);
+
         Kokkos::Profiling::popRegion();
     }
 

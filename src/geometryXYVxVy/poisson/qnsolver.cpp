@@ -7,6 +7,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry_xyvxvy.hpp"
 #include "qnsolver.hpp"
@@ -23,7 +25,7 @@ void QNSolver::operator()(
         DVectorFieldXY const electric_field,
         DConstFieldSpVxVyXY const allfdistribu) const
 {
-    Kokkos::Profiling::pushRegion("(GSLX) QNSolver");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) QNSolver");
     assert((get_idx_range(electrostatic_potential) == get_idx_range<GridX, GridY>(allfdistribu)));
     IdxRangeXY const idx_range_xy = get_idx_range(electrostatic_potential);
 
@@ -33,6 +35,4 @@ void QNSolver::operator()(
     m_compute_rho(get_field(rho), allfdistribu);
 
     m_solve_poisson(electrostatic_potential, electric_field, get_field(rho));
-
-    Kokkos::Profiling::popRegion();
 }
