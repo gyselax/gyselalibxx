@@ -13,6 +13,7 @@
 * `#include <iomanip>`
 * `#include <ddc/ddc.hpp>`
 * `#include <ddc/pdi.hpp>`
+* `#include <Kokkos_Profiling_ScopedRegion.hpp>`
 * `#include "collisions_intra.hpp"`
 * `#include "collisions_utils.hpp"`
 * `#include "fluid_moments.hpp"`

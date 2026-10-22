@@ -577,6 +577,8 @@
 #include &lt;ddc/ddc.hpp&gt;
 #include &lt;ddc/pdi.hpp&gt;
 
+#include &lt;Kokkos_Profiling_ScopedRegion.hpp&gt;
+
 #include "collisions_inter.hpp"
 #include "collisions_utils.hpp"
 #include "fluid_moments.hpp"
@@ -710,14 +712,13 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
 
 DFieldSpXVx CollisionsInter::operator()(DFieldSpXVx allfdistribu, double dt) const
 {
-    Kokkos::Profiling::pushRegion("(GSLX) CollisionsInter");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) CollisionsInter");
     RK2&lt;DFieldMemSpXVx&gt; timestepper(get_idx_range(allfdistribu));
 
     timestepper.update(allfdistribu, dt, [&amp;](DFieldSpXVx dy, DConstFieldSpXVx y) {
         get_derivative(dy, y);
     });
 
-    Kokkos::Profiling::popRegion();
     return allfdistribu;
 }
 </code></pre></div>

@@ -11,6 +11,7 @@
 
 
 * `#include <ddc/ddc.hpp>`
+* `#include <Kokkos_Profiling_ScopedRegion.hpp>`
 * `#include "chargedensitycalculator.hpp"`
 
 

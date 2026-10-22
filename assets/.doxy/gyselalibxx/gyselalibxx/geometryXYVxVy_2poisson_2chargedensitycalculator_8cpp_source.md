@@ -12,6 +12,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
@@ -21,7 +23,7 @@ ChargeDensityCalculator::ChargeDensityCalculator(DConstFieldVxVy coeffs) : m_qua
 
 void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const
 {
-    Kokkos::Profiling::pushRegion("(GSLX) ChargeDensityCalculator");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) ChargeDensityCalculator");
 
     IdxRangeSp const kin_species_idx_range = get_idx_range<Species>(allfdistribu);
     host_t<DConstFieldSp> const charges_host = ddc::host_discrete_space<Species>().charges();
@@ -53,8 +55,6 @@ void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfd
                 get_idx_range(rho),
                 KOKKOS_LAMBDA(IdxXY ixy) { rho(ixy) += chargedens_adiabspecies; });
     }
-
-    Kokkos::Profiling::popRegion();
 }
 ```
 

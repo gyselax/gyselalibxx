@@ -10,6 +10,7 @@
 
 
 
+* `#include <Kokkos_Profiling_ScopedRegion.hpp>`
 * `#include "i_interpolation.hpp"`
 * `#include "ipolar_poisson_like_solver.hpp"`
 * `#include "polar_spline_fem_poisson_like_assembler.hpp"`

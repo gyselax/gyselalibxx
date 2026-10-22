@@ -12,6 +12,7 @@
 
 * `#include <type_traits>`
 * `#include <ddc/ddc.hpp>`
+* `#include <Kokkos_Profiling_ScopedRegion.hpp>`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`

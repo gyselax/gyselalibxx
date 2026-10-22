@@ -15,6 +15,7 @@
 * `#include <complex>`
 * `#include <iostream>`
 * `#include <ddc/ddc.hpp>`
+* `#include <Kokkos_Profiling_ScopedRegion.hpp>`
 * `#include "geometry_xvx.hpp"`
 * `#include "qnsolver.hpp"`
 

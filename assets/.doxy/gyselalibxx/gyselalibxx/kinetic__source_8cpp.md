@@ -12,6 +12,7 @@
 
 * `#include <ddc/ddc.hpp>`
 * `#include <ddc/pdi.hpp>`
+* `#include <Kokkos_Profiling_ScopedRegion.hpp>`
 * `#include "kinetic_source.hpp"`
 * `#include "mask_tanh.hpp"`
 * `#include "species_info.hpp"`

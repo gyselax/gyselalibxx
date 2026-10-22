@@ -15,6 +15,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "krook_source_adaptive.hpp"
 #include "mask_tanh.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -151,13 +153,14 @@ void KrookSourceAdaptive::get_derivative(
 
 DFieldSpXVx KrookSourceAdaptive::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
-    Kokkos::Profiling::pushRegion("(GSLX) KrookSource");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) KrookSource");
+
     RK2<DFieldMemSpXVx> timestepper(get_idx_range(allfdistribu));
 
     timestepper.update(allfdistribu, dt, [&](DFieldSpXVx df, DConstFieldSpXVx f) {
         get_derivative(df, f, get_const_field(allfdistribu));
     });
-    Kokkos::Profiling::popRegion();
+
     return allfdistribu;
 }
 ```

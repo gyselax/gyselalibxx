@@ -14,6 +14,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "i_interpolation.hpp"
@@ -71,10 +73,11 @@ public:
             Field<DataType, IdxRangeFdistrib> const allfdistribu,
             DataType const dt) const override
     {
+        Kokkos::Profiling::ScopedRegion region("(GSLX) BslAdvectionSpatial");
+
         using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFdistrib, Species, GridX>;
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
-        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionSpatial");
         IdxRangeFdistrib const idx_range = get_idx_range(allfdistribu);
         IdxRange<GridX> const x_idx_range = ddc::select<GridX>(idx_range);
         IdxRange<Species> const sp_idx_range = ddc::select<Species>(idx_range);
@@ -116,7 +119,6 @@ public:
                     get_const_field(function_coefs_alloc));
         }
 
-        Kokkos::Profiling::popRegion();
         return allfdistribu;
     }
 };

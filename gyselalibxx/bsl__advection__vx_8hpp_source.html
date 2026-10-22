@@ -578,6 +578,8 @@
 
 #include &lt;ddc/ddc.hpp&gt;
 
+#include &lt;Kokkos_Profiling_ScopedRegion.hpp&gt;
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
@@ -636,11 +638,11 @@ public:
             ConstField&lt;DataType, IdxRangeSpatial&gt; const electric_field,
             DataType const dt) const override
     {
+        Kokkos::Profiling::ScopedRegion region("(GSLX) BslAdvectionVelocity");
+
         using IdxRangeBatch = ddc::remove_dims_of_t&lt;IdxRangeFdistribu, Species, GridV&gt;;
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
-
-        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionVelocity");
         IdxRangeFdistribu const idx_range = get_idx_range(allfdistribu);
         IdxRange&lt;GridV&gt; const idx_range_v = ddc::select&lt;GridV&gt;(idx_range);
         IdxRange&lt;Species&gt; const idx_range_sp = ddc::select&lt;Species&gt;(idx_range);
@@ -685,7 +687,6 @@ public:
                     get_const_field(function_coefs_alloc));
         });
 
-        Kokkos::Profiling::popRegion();
         return allfdistribu;
     }
 };

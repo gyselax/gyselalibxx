@@ -11,6 +11,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "i_interpolation.hpp"
@@ -122,6 +124,8 @@ public:
             DVectorConstFieldAdvection advection_field,
             double dt) const
     {
+        Kokkos::Profiling::ScopedRegion region("(GSLX) BslAdvectionPolar");
+
         // Pre-allocate coefficient storage
         DFieldMem<IdxRangeCoeffBatchedRTheta, MemorySpace> coefs_alloc(
                 batched_basis_idx_range(m_builder_2d, get_idx_range(allfdistribu)));
@@ -132,7 +136,6 @@ public:
         typename FootFinder::ElementwiseOperator::GPUCompat find_foot = find_foot_alloc(dt);
 
         // Interpolate the function on the feet of the characteristics. --------------------------
-        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
         m_builder_2d(get_field(coefs_alloc), get_const_field(allfdistribu));
 
         Evaluator2D const& evaluator_2d_proxy = m_evaluator_2d;
@@ -155,7 +158,6 @@ public:
                     IdxBatch batch_idx(idx);
                     allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs[batch_idx]);
                 });
-        Kokkos::Profiling::popRegion();
 
         unify_value_at_centre_pt(allfdistribu);
 
