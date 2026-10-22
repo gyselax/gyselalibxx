@@ -1481,35 +1481,40 @@
   <compound refid="structGridY" kind="struct"><name>GridY</name>
   </compound>
   <compound refid="classGyroAverageOperator" kind="class"><name>GyroAverageOperator</name>
-    <member refid="classGyroAverageOperator_1a23b48e18e34e9eec2864cf7daed262b1" kind="typedef"><name>InterpSpaceBuilderType</name></member>
-    <member refid="classGyroAverageOperator_1ab689415dcc3a907823ec08af110046bc" kind="typedef"><name>InterpSpaceEvaluatorType</name></member>
-    <member refid="classGyroAverageOperator_1a5fced9feb5384cce6970d8e2ffa0e55f" kind="typedef"><name>ExecutionSpace</name></member>
-    <member refid="classGyroAverageOperator_1affec67e4258ac6e782a17194a67f81d7" kind="typedef"><name>IdxRangeInterpSpace</name></member>
-    <member refid="classGyroAverageOperator_1a480c245f6757fd0b29ae6600631bf4e4" kind="typedef"><name>IdxInterpSpace</name></member>
-    <member refid="classGyroAverageOperator_1a4aff84a35fb0a3c86651125eb24c5ac2" kind="typedef"><name>CoordsInterpSpace</name></member>
-    <member refid="classGyroAverageOperator_1ac96b33dc37da2d9dc5858c97a0e59410" kind="typedef"><name>IdxParams</name></member>
-    <member refid="classGyroAverageOperator_1a1de37b9077748ef27500daa573bcdf91" kind="typedef"><name>IdxRangeGyroSpace</name></member>
-    <member refid="classGyroAverageOperator_1aefc529a160a6edfd39f0afeeeae56aff" kind="typedef"><name>IdxGyroSpace</name></member>
-    <member refid="classGyroAverageOperator_1a5948d6802727821de58ed85c8273fde4" kind="typedef"><name>IdxRangeInterpCoeffs</name></member>
-    <member refid="classGyroAverageOperator_1aa50f8658a7fb351c32ea5a5742a334a9" kind="typedef"><name>DFieldMemInterpCoeffs</name></member>
-    <member refid="classGyroAverageOperator_1a08c0c963043a637dc3cfcc5f7c2e2e21" kind="typedef"><name>DFieldInterpCoeffs</name></member>
-    <member refid="classGyroAverageOperator_1a775dc0dac6cc568597c64f104ac184e2" kind="typedef"><name>IdxRangeList</name></member>
-    <member refid="classGyroAverageOperator_1a3b9f2e50ef43eb342e89bb253e344d7e" kind="typedef"><name>IdxList</name></member>
-    <member refid="classGyroAverageOperator_1ae3f02103f4420287839f7973853ae09f" kind="typedef"><name>IdxRangeGyroCoeffs</name></member>
-    <member refid="classGyroAverageOperator_1aaafaf7bd91762519a140ad877c9bc9cb" kind="typedef"><name>GyroCoeffsCoordsMem</name></member>
-    <member refid="classGyroAverageOperator_1a09e13c1159fc131073a2e9be464977a8" kind="typedef"><name>GyroCoeffsWeightsMem</name></member>
-    <member refid="classGyroAverageOperator_1a88d48e883f96e9d8809607fd0c98f904" kind="typedef"><name>GyroCoeffsCoords</name></member>
-    <member refid="classGyroAverageOperator_1a7ac7e422184695f1e65656135ba29633" kind="typedef"><name>GyroCoeffsWeights</name></member>
-    <member refid="classGyroAverageOperator_1ad286b1d8df37c617ab2d73fe19801dc2" kind="variable"><name>m_builder</name></member>
-    <member refid="classGyroAverageOperator_1adf143e65d4f7af69147fa928416be1a7" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classGyroAverageOperator_1a16554acf13b7b8d691813320abd090ca" kind="variable"><name>m_gyrocoeffs_coords</name></member>
-    <member refid="classGyroAverageOperator_1adf98165f1afd0c35b7bea8d47f4236b2" kind="variable"><name>m_gyrocoeffs_weights</name></member>
-    <member refid="classGyroAverageOperator_1a82287b2aa3f4f01c1a1abff2fff7c0c5" kind="variable"><name>m_nb_gyro_points</name></member>
-    <member refid="classGyroAverageOperator_1af8f18309c5b2465f71b51230387680f5" kind="function"><name>build_empty_coefficients</name></member>
-    <member refid="classGyroAverageOperator_1a95b548f2459f8017e11c3c8f2b16d94c" kind="function"><name>build_circular_coefficients</name></member>
-    <member refid="classGyroAverageOperator_1ae6841987fbdfc756a6efe74a27135d4d" kind="function"><name>GyroAverageOperator</name></member>
-    <member refid="classGyroAverageOperator_1aacbaf347695ad1ff769987897b187b37" kind="function"><name>operator()</name></member>
-    <member refid="classGyroAverageOperator_1a2786f3bf8c39ea692056886c09f38d90" kind="function"><name>operator()</name></member>
+    <member refid="classGyroAverageOperator_1afff27f727769014c9632d42c37d46fa7" kind="typedef"><name>InterpSpaceBuilderType</name></member>
+    <member refid="classGyroAverageOperator_1a297be63911d79ce49329ce0090fe81f2" kind="typedef"><name>InterpSpaceEvaluatorType</name></member>
+    <member refid="classGyroAverageOperator_1a3413f49b1521767edd52258b89911272" kind="typedef"><name>ExecutionSpace</name></member>
+    <member refid="classGyroAverageOperator_1a74c1e04a153551dd39d5242f995e7681" kind="typedef"><name>IdxRangeInterpSpace</name></member>
+    <member refid="classGyroAverageOperator_1afc9f823d71320d917a0a8cb56bc4df52" kind="typedef"><name>IdxInterpSpace</name></member>
+    <member refid="classGyroAverageOperator_1af8add4fc1e02ffcd5f7886eb9679b352" kind="typedef"><name>CoordsInterpSpace</name></member>
+    <member refid="classGyroAverageOperator_1ab5b69e4f324746b8a2bfbdd8ebdc82ee" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classGyroAverageOperator_1aa4f1330cfa1d0002a5876c085febff2d" kind="typedef"><name>IdxRangeInterpBatchedSpace</name></member>
+    <member refid="classGyroAverageOperator_1a84141428004ebef0aebb13d7e7a816a0" kind="typedef"><name>IdxInterpBatchedSpace</name></member>
+    <member refid="classGyroAverageOperator_1a069531c23336f4c92292f3fbeab86b82" kind="typedef"><name>IdxParams</name></member>
+    <member refid="classGyroAverageOperator_1acb840d5c0ee882e3e1012b3c158c93ff" kind="typedef"><name>IdxRangeGyroSpace</name></member>
+    <member refid="classGyroAverageOperator_1a3ec5f2d3786fc8d5331538827b78e0f3" kind="typedef"><name>IdxGyroSpace</name></member>
+    <member refid="classGyroAverageOperator_1a626554e6247f6e3e4ffb4055e9756545" kind="typedef"><name>IdxRangeGyroBatchedSpace</name></member>
+    <member refid="classGyroAverageOperator_1a8bc9c3ca7c027a5db97a37062dcc4308" kind="typedef"><name>IdxRangeInterpCoeffs</name></member>
+    <member refid="classGyroAverageOperator_1ae53932a1747341dd1197e8d2f1f7a27c" kind="typedef"><name>IdxRangeBatchedInterpCoeffs</name></member>
+    <member refid="classGyroAverageOperator_1acf8b6d7fd7a2feafcd56fea309692762" kind="typedef"><name>DFieldMemBatchedInterpCoeffs</name></member>
+    <member refid="classGyroAverageOperator_1ad524d730009948fe5e443961d5ef3503" kind="typedef"><name>DFieldBatchedInterpCoeffs</name></member>
+    <member refid="classGyroAverageOperator_1ab396f1d1823850dffe054cd73138410f" kind="typedef"><name>IdxRangeList</name></member>
+    <member refid="classGyroAverageOperator_1a6ca0b6c064828b697a8608f5ca2a63f5" kind="typedef"><name>IdxList</name></member>
+    <member refid="classGyroAverageOperator_1a7e8b4ae73c2ed2b0bb3afc11442abaf1" kind="typedef"><name>IdxRangeGyroCoeffs</name></member>
+    <member refid="classGyroAverageOperator_1a50b263a5aba158ad827a43edbe619fb0" kind="typedef"><name>GyroCoeffsCoordsMem</name></member>
+    <member refid="classGyroAverageOperator_1a97c178adbedf3f42531a89fc2ec24ae3" kind="typedef"><name>GyroCoeffsWeightsMem</name></member>
+    <member refid="classGyroAverageOperator_1a8ccaef06442c1d4be2445aee7bf2f1a9" kind="typedef"><name>GyroCoeffsCoords</name></member>
+    <member refid="classGyroAverageOperator_1a2cd1798bbcdc13e858508575fc431884" kind="typedef"><name>GyroCoeffsWeights</name></member>
+    <member refid="classGyroAverageOperator_1a92b5f0601139f80ef71703a1b3d6bd87" kind="variable"><name>m_builder</name></member>
+    <member refid="classGyroAverageOperator_1aad8560d3ec4a060f82149df28b0705d4" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classGyroAverageOperator_1a458fc7d25a2c2b0f060c5a516f563a6c" kind="variable"><name>m_gyrocoeffs_coords</name></member>
+    <member refid="classGyroAverageOperator_1ae65af373443e20f40904a8e30c8ef423" kind="variable"><name>m_gyrocoeffs_weights</name></member>
+    <member refid="classGyroAverageOperator_1a96f01262c67e46a659b2ff5cdf99cb15" kind="variable"><name>m_nb_gyro_points</name></member>
+    <member refid="classGyroAverageOperator_1a610df07b5e5eecaa393b4716f77df11e" kind="function"><name>build_empty_coefficients</name></member>
+    <member refid="classGyroAverageOperator_1aabfd28f6da8037b8f81ff0a43f244b51" kind="function"><name>build_circular_coefficients</name></member>
+    <member refid="classGyroAverageOperator_1a05536f56f031211f441dddbf8d979b3f" kind="function"><name>GyroAverageOperator</name></member>
+    <member refid="classGyroAverageOperator_1ac92ea68076d6e4c52115654173bfd05d" kind="function"><name>operator()</name></member>
+    <member refid="classGyroAverageOperator_1af781df4e55cf415c14336d8d650d3a89" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" kind="struct"><name>FEM1DPoissonSolver::HiddenFEMBSplines</name>
   </compound>
@@ -4055,6 +4060,12 @@
   </compound>
   <compound refid="vortex__merger__initialisation_8hpp" kind="file"><name>vortex_merger_initialisation.hpp</name>
   </compound>
+  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
   <compound refid="poisson__like__rhs__function_8hpp" kind="file"><name>poisson_like_rhs_function.hpp</name>
   </compound>
   <compound refid="bsl__predcorr_8hpp" kind="file"><name>bsl_predcorr.hpp</name>
@@ -4062,6 +4073,12 @@
   <compound refid="bsl__predcorr__second__order__explicit_8hpp" kind="file"><name>bsl_predcorr_second_order_explicit.hpp</name>
   </compound>
   <compound refid="bsl__predcorr__second__order__implicit_8hpp" kind="file"><name>bsl_predcorr_second_order_implicit.hpp</name>
+  </compound>
+  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="collision__configuration_8hpp" kind="file"><name>collision_configuration.hpp</name>
   </compound>
@@ -4417,12 +4434,6 @@
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
   </compound>
-  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
   <compound refid="mpichargedensitycalculator_8cpp" kind="file"><name>mpichargedensitycalculator.cpp</name>
   </compound>
   <compound refid="mpichargedensitycalculator_8hpp" kind="file"><name>mpichargedensitycalculator.hpp</name>
@@ -4442,12 +4453,6 @@
   <compound refid="geometryXVx_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="geometryXVx_2time__integration_2predcorr_8cpp" kind="file"><name>predcorr.cpp</name>
   </compound>

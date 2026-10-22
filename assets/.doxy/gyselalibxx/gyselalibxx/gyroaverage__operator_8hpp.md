@@ -31,7 +31,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**GyroAverageOperator**](classGyroAverageOperator.md) &lt;InterpolatorType, class IdxRangeParams&gt;<br>_Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre- determined sample points along the gyro-motion._  |
+| class | [**GyroAverageOperator**](classGyroAverageOperator.md) &lt;InterpolatorType, class IdxRangeParams, class IdxRangeBatch&gt;<br>_Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre- determined sample points along the gyro-motion._  |
 
 
 

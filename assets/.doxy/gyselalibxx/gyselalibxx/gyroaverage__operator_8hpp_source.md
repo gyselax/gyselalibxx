@@ -16,7 +16,10 @@
 #include "i_interpolation.hpp"
 
 
-template <concepts::Interpolation InterpolatorType, class IdxRangeParams>
+template <
+        concepts::Interpolation InterpolatorType,
+        class IdxRangeParams,
+        class IdxRangeBatch = IdxRange<>>
 class GyroAverageOperator
 {
     using InterpSpaceBuilderType = typename InterpolatorType::BuilderType;
@@ -27,14 +30,21 @@ class GyroAverageOperator
             = InterpolationBuilderTraits<InterpSpaceBuilderType>::interpolation_idx_range_type;
     using IdxInterpSpace = typename IdxRangeInterpSpace::discrete_element_type;
     using CoordsInterpSpace = ddc::coordinate_of_t<IdxInterpSpace>;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+    using IdxRangeInterpBatchedSpace = ddc::combine_t<IdxRangeBatch, IdxRangeInterpSpace>;
+    using IdxInterpBatchedSpace = typename IdxRangeInterpBatchedSpace::discrete_element_type;
     using IdxParams = typename IdxRangeParams::discrete_element_type;
     using IdxRangeGyroSpace = ddc::combine_t<IdxRangeParams, IdxRangeInterpSpace>;
     using IdxGyroSpace = typename IdxRangeGyroSpace::discrete_element_type;
+    using IdxRangeGyroBatchedSpace = ddc::combine_t<IdxRangeParams, IdxRangeInterpBatchedSpace>;
 
     using IdxRangeInterpCoeffs
             = InterpolationBuilderTraits<InterpSpaceBuilderType>::coeff_idx_range_type;
-    using DFieldMemInterpCoeffs = DFieldMem<IdxRangeInterpCoeffs>;
-    using DFieldInterpCoeffs = DField<IdxRangeInterpCoeffs>;
+    using IdxRangeBatchedInterpCoeffs =
+            typename InterpolationBuilderTraits<InterpSpaceBuilderType>::
+                    template batched_basis_idx_range_type<IdxRangeInterpBatchedSpace>;
+    using DFieldMemBatchedInterpCoeffs = DFieldMem<IdxRangeBatchedInterpCoeffs>;
+    using DFieldBatchedInterpCoeffs = DField<IdxRangeBatchedInterpCoeffs>;
 
 public:
     struct CoeffList;
@@ -146,7 +156,7 @@ public:
     {
     }
 
-    void operator()(DField<IdxRangeGyroSpace> const& func) const
+    void operator()(DField<IdxRangeGyroBatchedSpace> const& func) const
     {
         IdxRangeParams idx_range_params(get_idx_range(func));
 
@@ -155,21 +165,19 @@ public:
         });
     }
 
-    void operator()(DField<IdxRangeInterpSpace> const& func, IdxParams idx_param) const
+    void operator()(DField<IdxRangeInterpBatchedSpace> const& func, IdxParams idx_param) const
     {
         // Ensure that there are coefficients for the points in the input data
         assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
-                       .contains(get_idx_range(func).front()));
-        assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
-                       .contains(get_idx_range(func).back()));
+               == IdxRangeInterpSpace(get_idx_range(func)));
         // Ensure that there are coefficients for the requested parameter set
         assert(IdxRangeParams(get_idx_range(m_gyrocoeffs_weights)).contains(idx_param));
 
         // Initialise the interpolator
-        DFieldMemInterpCoeffs scoef_alloc(
+        DFieldMemBatchedInterpCoeffs scoef_alloc(
                 "scoef (GyroAvrageOperator::operator())",
                 batched_basis_idx_range(m_builder, get_idx_range(func)));
-        DFieldInterpCoeffs scoef = get_field(scoef_alloc);
+        DFieldBatchedInterpCoeffs scoef = get_field(scoef_alloc);
         m_builder(scoef, get_const_field(func));
         InterpSpaceEvaluatorType evaluator = m_evaluator;
 
@@ -183,18 +191,22 @@ public:
                 location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(func),
-                KOKKOS_LAMBDA(IdxInterpSpace const idx_interpspace) {
+                KOKKOS_LAMBDA(IdxInterpBatchedSpace const idx_interpbatchedspace) {
+                    IdxInterpSpace const idx_interpspace(idx_interpbatchedspace);
+                    IdxBatch const idx_batch(idx_interpbatchedspace);
+                    DConstField<IdxRangeInterpCoeffs> const scoef_slice
+                            = get_const_field(scoef[idx_batch]);
                     // Average over gyro points
                     double gavg = 0.0;
                     for (std::size_t igyro = 0; igyro < nb_gyro_points_proxy; igyro++) {
                         IdxList const idx_gyro = idx_gyro0 + igyro;
                         double const value = evaluator(
                                 gyrocoeffs_coords_proxy(idx_param, idx_interpspace, idx_gyro),
-                                get_const_field(scoef));
+                                scoef_slice);
                         gavg += gyrocoeffs_weights_proxy(idx_param, idx_interpspace, idx_gyro)
                                 * value;
                     }
-                    func(idx_interpspace) = gavg;
+                    func(idx_interpbatchedspace) = gavg;
                 });
     }
 };

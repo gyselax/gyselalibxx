@@ -2,7 +2,7 @@
 
 # Class GyroAverageOperator
 
-**template &lt;concepts::Interpolation InterpolatorType, class IdxRangeParams&gt;**
+**template &lt;concepts::Interpolation InterpolatorType, class IdxRangeParams, class IdxRangeBatch&gt;**
 
 
 
@@ -63,8 +63,8 @@ _Operator to compute the gyroaverage of a field as a weighted sum of the its val
 | Type | Name |
 | ---: | :--- |
 |   | [**GyroAverageOperator**](#function-gyroaverageoperator) (InterpolatorType const & interpolator, [**GyroCoeffsCoordsMem**](classGyroAverageOperator.md#typedef-gyrocoeffscoordsmem) & gyrocoeffs\_coords, [**GyroCoeffsWeightsMem**](classGyroAverageOperator.md#typedef-gyrocoeffsweightsmem) & gyrocoeffs\_weights) <br>_Constructor for the general case where coefficients are computed by the caller._  |
-|  void | [**operator()**](#function-operator) (DField&lt; IdxRangeGyroSpace &gt; const & func) const<br>_Compute the gyroaverage of a field which depends both on space and parameter sets._  |
-|  void | [**operator()**](#function-operator_1) (DField&lt; IdxRangeInterpSpace &gt; const & func, IdxParams idx\_param) const<br>_For a given parameter set, compute the gyroaverage of a field which only depends on space._  |
+|  void | [**operator()**](#function-operator) (DField&lt; IdxRangeGyroBatchedSpace &gt; const & func) const<br>_Compute the gyroaverage of a field which depends both on space and parameter sets._  |
+|  void | [**operator()**](#function-operator_1) (DField&lt; IdxRangeInterpBatchedSpace &gt; const & func, IdxParams idx\_param) const<br>_For a given parameter set, compute the gyroaverage of a field which only depends on space (and on the batch dimensions)._  |
 
 
 ## Public Static Functions
@@ -108,7 +108,7 @@ Interpolation is used to evaluate the field at points which are not on the grid.
 We distinguish 3 types of dimensions:
 * "Params" refers to the dimensions which parametrise the gyroaverage of a given field; this usually corresponds to species and mu.
 * "InterpSpace" refers to the space dimensions along which the interpolation is performed, e.g. poloidal cross-sections when the approximation B // e\_phi is assumed.
-* "BatchSpace" refers to the remaining dimensions, if any (not yet implemented).
+* "BatchSpace" refers to the remaining dimensions, if any. The same coefficients are used for every batch index.
 
 
 
@@ -120,6 +120,7 @@ We distinguish 3 types of dimensions:
 
 * `InterpolatorType` Type of the interpolator. 
 * `IdxRangeParams` The additional dimensions parametrising the gyroaverage (usually species and mu). 
+* `IdxRangeBatch` The batch dimensions on which the gyroaverage does not depend (default: none). 
 
 
 
@@ -134,7 +135,7 @@ We distinguish 3 types of dimensions:
 
 _A Field of point coordinates for the sample points._ 
 ```C++
-using GyroAverageOperator< InterpolatorType, IdxRangeParams >::GyroCoeffsCoords =  Field<CoordsInterpSpace, IdxRangeGyroCoeffs>;
+using GyroAverageOperator< InterpolatorType, IdxRangeParams, IdxRangeBatch >::GyroCoeffsCoords =  Field<CoordsInterpSpace, IdxRangeGyroCoeffs>;
 ```
 
 
@@ -148,7 +149,7 @@ using GyroAverageOperator< InterpolatorType, IdxRangeParams >::GyroCoeffsCoords 
 
 _A FieldMem of point coordinates for the sample points._ 
 ```C++
-using GyroAverageOperator< InterpolatorType, IdxRangeParams >::GyroCoeffsCoordsMem =  FieldMem<CoordsInterpSpace, IdxRangeGyroCoeffs>;
+using GyroAverageOperator< InterpolatorType, IdxRangeParams, IdxRangeBatch >::GyroCoeffsCoordsMem =  FieldMem<CoordsInterpSpace, IdxRangeGyroCoeffs>;
 ```
 
 
@@ -162,7 +163,7 @@ using GyroAverageOperator< InterpolatorType, IdxRangeParams >::GyroCoeffsCoordsM
 
 _A Field of doubles containing the sample points' weights._ 
 ```C++
-using GyroAverageOperator< InterpolatorType, IdxRangeParams >::GyroCoeffsWeights =  DField<IdxRangeGyroCoeffs>;
+using GyroAverageOperator< InterpolatorType, IdxRangeParams, IdxRangeBatch >::GyroCoeffsWeights =  DField<IdxRangeGyroCoeffs>;
 ```
 
 
@@ -176,7 +177,7 @@ using GyroAverageOperator< InterpolatorType, IdxRangeParams >::GyroCoeffsWeights
 
 _A FieldMem of doubles containing the sample points' weights._ 
 ```C++
-using GyroAverageOperator< InterpolatorType, IdxRangeParams >::GyroCoeffsWeightsMem =  DFieldMem<IdxRangeGyroCoeffs>;
+using GyroAverageOperator< InterpolatorType, IdxRangeParams, IdxRangeBatch >::GyroCoeffsWeightsMem =  DFieldMem<IdxRangeGyroCoeffs>;
 ```
 
 
@@ -224,7 +225,7 @@ inline explicit GyroAverageOperator::GyroAverageOperator (
 _Compute the gyroaverage of a field which depends both on space and parameter sets._ 
 ```C++
 inline void GyroAverageOperator::operator() (
-    DField< IdxRangeGyroSpace > const & func
+    DField< IdxRangeGyroBatchedSpace > const & func
 ) const
 ```
 
@@ -251,10 +252,10 @@ The computation is done in-place for each parameter set.
 
 ### function operator() 
 
-_For a given parameter set, compute the gyroaverage of a field which only depends on space._ 
+_For a given parameter set, compute the gyroaverage of a field which only depends on space (and on the batch dimensions)._ 
 ```C++
 inline void GyroAverageOperator::operator() (
-    DField< IdxRangeInterpSpace > const & func,
+    DField< IdxRangeInterpBatchedSpace > const & func,
     IdxParams idx_param
 ) const
 ```

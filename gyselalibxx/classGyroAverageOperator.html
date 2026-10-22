@@ -570,7 +570,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-gyroaverageoperator">Class GyroAverageOperator</h1>
-<p><strong>template &lt;concepts::Interpolation InterpolatorType, class IdxRangeParams&gt;</strong></p>
+<p><strong>template &lt;concepts::Interpolation InterpolatorType, class IdxRangeParams, class IdxRangeBatch&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classGyroAverageOperator.html"><strong>GyroAverageOperator</strong></a></p>
 <p><em>Operator to compute the gyroaverage of a field as a weighted sum of the its value at pre- determined sample points along the gyro-motion.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -618,11 +618,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DField&lt; IdxRangeGyroSpace &gt; const &amp; func) const<br><em>Compute the gyroaverage of a field which depends both on space and parameter sets.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DField&lt; IdxRangeGyroBatchedSpace &gt; const &amp; func) const<br><em>Compute the gyroaverage of a field which depends both on space and parameter sets.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DField&lt; IdxRangeInterpSpace &gt; const &amp; func, IdxParams idx_param) const<br><em>For a given parameter set, compute the gyroaverage of a field which only depends on space.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DField&lt; IdxRangeInterpBatchedSpace &gt; const &amp; func, IdxParams idx_param) const<br><em>For a given parameter set, compute the gyroaverage of a field which only depends on space (and on the batch dimensions).</em></td>
 </tr>
 </tbody>
 </table>
@@ -650,34 +650,35 @@
 <p>We distinguish 3 types of dimensions:
 * "Params" refers to the dimensions which parametrise the gyroaverage of a given field; this usually corresponds to species and mu.
 * "InterpSpace" refers to the space dimensions along which the interpolation is performed, e.g. poloidal cross-sections when the approximation B // e_phi is assumed.
-* "BatchSpace" refers to the remaining dimensions, if any (not yet implemented).</p>
+* "BatchSpace" refers to the remaining dimensions, if any. The same coefficients are used for every batch index.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>InterpolatorType</code> Type of the interpolator. </li>
 <li><code>IdxRangeParams</code> The additional dimensions parametrising the gyroaverage (usually species and mu). </li>
+<li><code>IdxRangeBatch</code> The batch dimensions on which the gyroaverage does not depend (default: none). </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-gyrocoeffscoords">typedef GyroCoeffsCoords</h3>
 <p><em>A Field of point coordinates for the sample points.</em> </p>
-<pre><code class="language-C++">using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams &gt;::GyroCoeffsCoords =  Field&lt;CoordsInterpSpace, IdxRangeGyroCoeffs&gt;;
+<pre><code class="language-C++">using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams, IdxRangeBatch &gt;::GyroCoeffsCoords =  Field&lt;CoordsInterpSpace, IdxRangeGyroCoeffs&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-gyrocoeffscoordsmem">typedef GyroCoeffsCoordsMem</h3>
 <p><em>A FieldMem of point coordinates for the sample points.</em> </p>
-<pre><code class="language-C++">using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams &gt;::GyroCoeffsCoordsMem =  FieldMem&lt;CoordsInterpSpace, IdxRangeGyroCoeffs&gt;;
+<pre><code class="language-C++">using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams, IdxRangeBatch &gt;::GyroCoeffsCoordsMem =  FieldMem&lt;CoordsInterpSpace, IdxRangeGyroCoeffs&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-gyrocoeffsweights">typedef GyroCoeffsWeights</h3>
 <p><em>A Field of doubles containing the sample points' weights.</em> </p>
-<pre><code class="language-C++">using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams &gt;::GyroCoeffsWeights =  DField&lt;IdxRangeGyroCoeffs&gt;;
+<pre><code class="language-C++">using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams, IdxRangeBatch &gt;::GyroCoeffsWeights =  DField&lt;IdxRangeGyroCoeffs&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-gyrocoeffsweightsmem">typedef GyroCoeffsWeightsMem</h3>
 <p><em>A FieldMem of doubles containing the sample points' weights.</em> </p>
-<pre><code class="language-C++">using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams &gt;::GyroCoeffsWeightsMem =  DFieldMem&lt;IdxRangeGyroCoeffs&gt;;
+<pre><code class="language-C++">using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams, IdxRangeBatch &gt;::GyroCoeffsWeightsMem =  DFieldMem&lt;IdxRangeGyroCoeffs&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -700,7 +701,7 @@
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the gyroaverage of a field which depends both on space and parameter sets.</em> </p>
 <pre><code class="language-C++">inline void GyroAverageOperator::operator() (
-    DField&lt; IdxRangeGyroSpace &gt; const &amp; func
+    DField&lt; IdxRangeGyroBatchedSpace &gt; const &amp; func
 ) const
 </code></pre>
 <p>The computation is done in-place for each parameter set.</p>
@@ -711,9 +712,9 @@
 <hr>
 
 <h3 id="function-operator_1">function operator()</h3>
-<p><em>For a given parameter set, compute the gyroaverage of a field which only depends on space.</em> </p>
+<p><em>For a given parameter set, compute the gyroaverage of a field which only depends on space (and on the batch dimensions).</em> </p>
 <pre><code class="language-C++">inline void GyroAverageOperator::operator() (
-    DField&lt; IdxRangeInterpSpace &gt; const &amp; func,
+    DField&lt; IdxRangeInterpBatchedSpace &gt; const &amp; func,
     IdxParams idx_param
 ) const
 </code></pre>
