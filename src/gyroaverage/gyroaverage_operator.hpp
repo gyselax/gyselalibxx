@@ -242,12 +242,9 @@ public:
      */
     void operator()(DField<IdxRangeInterpBatchedSpace> const& func, IdxParams idx_param) const
     {
-        IdxRangeInterpSpace const idx_range_space(get_idx_range(func));
         // Ensure that there are coefficients for the points in the input data
         assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
-                       .contains(idx_range_space.front()));
-        assert(IdxRangeInterpSpace(get_idx_range(m_gyrocoeffs_weights))
-                       .contains(idx_range_space.back()));
+               == IdxRangeInterpSpace(get_idx_range(func)));
         // Ensure that there are coefficients for the requested parameter set
         assert(IdxRangeParams(get_idx_range(m_gyrocoeffs_weights)).contains(idx_param));
 
