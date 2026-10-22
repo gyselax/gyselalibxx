@@ -134,7 +134,7 @@ public:
         , m_r_extent {extract_md_index_range<GridR>(index_range_fdistribution).size()}
         , m_theta_extent {extract_md_index_range<GridTheta>(index_range_fdistribution).size()}
         , m_phi_extent {extract_md_index_range<GridPhi>(index_range_fdistribution).size()}
-        , m_sp_extent {extract_md_index_range<Species>(index_range_fdistribution).size()}
+        , m_species_extent {extract_md_index_range<Species>(index_range_fdistribution).size()}
     {
         if (!((m_r_extent > 0) && ((m_r_extent & (m_r_extent - 1)) == 0) && (m_theta_extent > 0)
               && ((m_theta_extent & (m_theta_extent - 1)) == 0) && (m_phi_extent > 0)
@@ -365,6 +365,6 @@ public:
     /**
      * @brief Species dimension extent.
      */
-    std::size_t m_sp_extent;
+    std::size_t m_species_extent;
 };
 } // namespace detail
