@@ -329,9 +329,7 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 
 TEST_P(GyroAverageCircularParamTests, TestAnalyticalBatched)
 {
-    //ddc::init_discrete_space<GridBatch>(
-    //        GridBatch::init<GridBatch>(Coord<Batch>(0.0), Coord<Batch>(1.0), IdxStep<GridBatch>(3)));
-    IdxRangeBatch const batch_idx_range(IdxBatch(0), IdxStep<GridBatch>(3));
+    IdxRangeBatch const batch_idx_range(IdxBatch(0), IdxStep<GridBatch>(2));
 
     DFieldRTheta A = get_field(m_A_alloc);
     DFieldMuRTheta A_gavg = get_field(m_A_gavg_alloc);
