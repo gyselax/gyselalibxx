@@ -119,11 +119,11 @@ void KrookSourceAdaptive::get_derivative(
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
 
     DFieldMemSpX amplitudes_alloc("amplitudes (KrookSourceAdaptive::get_derivative)", grid_sp_x);
-    auto amplitudes = get_field(amplitudes_alloc);
+    DFieldSpX amplitudes = get_field(amplitudes_alloc);
     get_amplitudes(amplitudes, allfdistribu);
 
-    auto ftarget(get_field(m_ftarget));
-    auto mask(get_field(m_mask));
+    DConstFieldVx ftarget(get_const_field(m_ftarget));
+    DConstFieldX mask(get_const_field(m_mask));
 
     const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
