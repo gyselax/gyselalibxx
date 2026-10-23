@@ -2,8 +2,10 @@
 
 #pragma once
 
+#include <ddc/ddc.hpp>
+
 /// @brief Moments discrete dimension to access constant attributes related to fluid moments.
-class Moments
+class Moments : ddc::DiscreteDimension
 {
 public:
     /// alias of the discrete dimension

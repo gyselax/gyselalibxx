@@ -218,13 +218,13 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridLast)
 }
 
 namespace {
-struct GridA
+struct GridA : ddc::DiscreteDimension
 {
 };
-struct GridB
+struct GridB : ddc::DiscreteDimension
 {
 };
-struct GridC
+struct GridC : ddc::DiscreteDimension
 {
 };
 } // namespace
