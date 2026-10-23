@@ -109,8 +109,8 @@ int main(int argc, char** argv)
     // ---> Reading of algorithm info from input YAML file
     double const deltat = PCpp_double(conf_collision, ".Algorithm.deltat");
     if (deltat > 1.e-2) {
-        throw std::runtime_error(
-                "Deltat must be inferior to 1.e-2 for numerical stability of the scheme.");
+        cerr << "Deltat must be inferior to 1.e-2 for numerical stability of the scheme." << endl;
+        return EXIT_FAILURE;
     }
     int const nbiter = static_cast<int>(PCpp_int(conf_collision, ".Algorithm.nbiter"));
 

@@ -43,8 +43,8 @@ public:
         static bool constexpr IS_CONTRAVARIANT = true;
         using Dual = Y;
     };
-    using CoordX = Coordinate<X>;
-    using CoordY = Coordinate<Y>;
+    using CoordX = Coord<X>;
+    using CoordY = Coord<Y>;
     struct GridX : UniformGridBase<X>
     {
     };
