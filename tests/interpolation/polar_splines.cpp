@@ -279,7 +279,7 @@ TEST(PolarSplineTest, ConstantEvalGPU)
     test_polar_spline_eval_gpu();
 }
 
-struct GridBatch
+struct GridBatch : ddc::DiscreteDimension
 {
 };
 
