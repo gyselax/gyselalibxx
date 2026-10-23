@@ -33,7 +33,7 @@ Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> as_ba
         DField<IdxRange<Dims...>> field)
 {
     static_assert(sizeof...(Dims) > 0);
-    using LastDim = ddc::type_seq_element_t<sizeof...(Dims) - 1, ddc::detail::TypeSeq<Dims...>>;
+    using LastDim = ddc::type_seq_element_t<sizeof...(Dims) - 1, ddc::TypeSeq<Dims...>>;
     IdxRange<Dims...> idx_range = get_idx_range(field);
     std::size_t const matrix_size = idx_range.template extent<LastDim>();
     assert(field.size() == idx_range.size());

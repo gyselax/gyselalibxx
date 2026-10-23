@@ -110,13 +110,13 @@ TEST(MultipatchConnectivityTest, FindConnections)
     using namespace periodic_strips_uniform_2d_9patches;
     EXPECT_TRUE((std::is_same_v<
                  typename Connectivity::template find_connections_t<Patch1, Patch2>,
-                 ddc::detail::TypeSeq<Interface_1_2>>));
+                 ddc::TypeSeq<Interface_1_2>>));
     EXPECT_TRUE((std::is_same_v<
                  typename Connectivity::template find_connections_t<Patch1, Patch5>,
-                 ddc::detail::TypeSeq<>>));
+                 ddc::TypeSeq<>>));
     EXPECT_TRUE((std::is_same_v<
                  typename Connectivity::template find_connections_t<Patch7, Patch9>,
-                 ddc::detail::TypeSeq<Interface_9_7>>));
+                 ddc::TypeSeq<Interface_9_7>>));
 }
 
 TEST(MultipatchConnectivityTest, FindConnections2)
@@ -381,14 +381,14 @@ TEST(MultipatchConnectivityDetailsTest, CollectGridsOnDim)
     using interface_collection =
             typename Connectivity::get_all_interfaces_along_direction_t<GridX<1>>;
     using expected_interfaces_along_gridx
-            = ddc::detail::TypeSeq<WestInterface1, Interface_1_2, Interface_2_3, EastInterface3>;
+            = ddc::TypeSeq<WestInterface1, Interface_1_2, Interface_2_3, EastInterface3>;
 
     static_assert(std::is_same_v<interface_collection, expected_interfaces_along_gridx>);
 
     // Try from patch 1
     using Grid1DSeq1 = collect_grids_on_dim_t<Patch1, GridX<1>, interface_collection>;
 
-    static_assert(std::is_same_v<Grid1DSeq1, ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>>>);
+    static_assert(std::is_same_v<Grid1DSeq1, ddc::TypeSeq<GridX<1>, GridX<2>, GridX<3>>>);
     static_assert(ddc::in_tags_v<GridX<1>, Grid1DSeq1>);
     static_assert(ddc::in_tags_v<GridX<2>, Grid1DSeq1>);
     static_assert(ddc::in_tags_v<GridX<3>, Grid1DSeq1>);
@@ -396,7 +396,7 @@ TEST(MultipatchConnectivityDetailsTest, CollectGridsOnDim)
     // Try from patch 2
     using Grid1DSeq2 = collect_grids_on_dim_t<Patch2, GridX<2>, interface_collection>;
 
-    static_assert(std::is_same_v<Grid1DSeq2, ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>>>);
+    static_assert(std::is_same_v<Grid1DSeq2, ddc::TypeSeq<GridX<1>, GridX<2>, GridX<3>>>);
     static_assert(ddc::in_tags_v<GridX<1>, Grid1DSeq2>);
     static_assert(ddc::in_tags_v<GridX<2>, Grid1DSeq2>);
     static_assert(ddc::in_tags_v<GridX<3>, Grid1DSeq2>);
@@ -404,7 +404,7 @@ TEST(MultipatchConnectivityDetailsTest, CollectGridsOnDim)
     // Try from patch 3
     using Grid1DSeq3 = collect_grids_on_dim_t<Patch3, GridX<3>, interface_collection>;
 
-    static_assert(std::is_same_v<Grid1DSeq3, ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>>>);
+    static_assert(std::is_same_v<Grid1DSeq3, ddc::TypeSeq<GridX<1>, GridX<2>, GridX<3>>>);
     static_assert(ddc::in_tags_v<GridX<1>, Grid1DSeq3>);
     static_assert(ddc::in_tags_v<GridX<2>, Grid1DSeq3>);
     static_assert(ddc::in_tags_v<GridX<3>, Grid1DSeq3>);

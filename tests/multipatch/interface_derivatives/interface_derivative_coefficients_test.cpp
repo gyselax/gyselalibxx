@@ -127,9 +127,9 @@ using SplineRThetagBuilder = ddc::SplineBuilder2D<
 using SplineRThetagEvaluator = ddc::SplineEvaluatorND<
         HostExecSpace,
         typename HostExecSpace::memory_space,
-        ddc::detail::TypeSeq<BSplinesRg, BSplinesThetag>,
-        ddc::detail::TypeSeq<GridRg, GridThetag>,
-        ddc::detail::TypeSeq<
+        ddc::TypeSeq<BSplinesRg, BSplinesThetag>,
+        ddc::TypeSeq<GridRg, GridThetag>,
+        ddc::TypeSeq<
                 ddc::ConstantExtrapolationRule<Rg>,
                 ddc::ConstantExtrapolationRule<Rg>,
                 ddc::PeriodicExtrapolationRule<Thetag>,

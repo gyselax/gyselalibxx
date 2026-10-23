@@ -235,7 +235,7 @@ private:
         mapping_type mapping_r(extents_r);
 
         std::array<std::size_t, sizeof...(DDims)> strides_s {
-                mapping_r.stride(ddc::type_seq_rank_v<DDims, ddc::detail::TypeSeq<DDims...>>)...};
+                mapping_r.stride(ddc::type_seq_rank_v<DDims, ddc::TypeSeq<DDims...>>)...};
         Kokkos::layout_stride::mapping<extents_type> mapping_s(extents_r, strides_s);
         return internal_mdspan_type(ptr, mapping_s);
     }
@@ -321,8 +321,7 @@ public:
                 ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>(
                         m_deriv_idx_range...))
     {
-        static_assert(
-                ddc::type_seq_same_v<ddc::detail::TypeSeq<DerivDoms...>, physical_deriv_grids>);
+        static_assert(ddc::type_seq_same_v<ddc::TypeSeq<DerivDoms...>, physical_deriv_grids>);
         initialise_chunks(label, allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
 

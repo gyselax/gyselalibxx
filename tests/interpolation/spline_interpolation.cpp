@@ -66,7 +66,7 @@ using Interp1D = detail::SplineInterpolator<
         ExecSpace,
         BSplinesX,
         GridX,
-        ddc::detail::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>,
+        ddc::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>,
         SplineBoundaryClosure::Greville_Greville,
         ddc::SplineSolver::LAPACK>;
 
@@ -76,13 +76,10 @@ using Interp2D = detail::SplineInterpolator2D<
         BSplinesY,
         GridX,
         GridY,
-        ddc::detail::TypeSeq<
-                ddc::detail::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>,
-                ddc::detail::TypeSeq<
-                        ddc::PeriodicExtrapolationRule<Y>,
-                        ddc::PeriodicExtrapolationRule<Y>>>,
-        ddc::detail::
-                TypeSeq<SplineBoundaryClosure::Greville_Greville, SplineBoundaryClosure::Periodic>,
+        ddc::TypeSeq<
+                ddc::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>,
+                ddc::TypeSeq<ddc::PeriodicExtrapolationRule<Y>, ddc::PeriodicExtrapolationRule<Y>>>,
+        ddc::TypeSeq<SplineBoundaryClosure::Greville_Greville, SplineBoundaryClosure::Periodic>,
         ddc::SplineSolver::LAPACK>;
 
 using Interp3D = detail::SplineInterpolator3D<
@@ -93,13 +90,11 @@ using Interp3D = detail::SplineInterpolator3D<
         GridX,
         GridY,
         GridZ,
-        ddc::detail::TypeSeq<
-                ddc::detail::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>,
-                ddc::detail::TypeSeq<
-                        ddc::PeriodicExtrapolationRule<Y>,
-                        ddc::PeriodicExtrapolationRule<Y>>,
-                ddc::detail::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>>,
-        ddc::detail::TypeSeq<
+        ddc::TypeSeq<
+                ddc::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>,
+                ddc::TypeSeq<ddc::PeriodicExtrapolationRule<Y>, ddc::PeriodicExtrapolationRule<Y>>,
+                ddc::TypeSeq<ddc::NullExtrapolationRule, ddc::NullExtrapolationRule>>,
+        ddc::TypeSeq<
                 SplineBoundaryClosure::Greville_Greville,
                 SplineBoundaryClosure::Periodic,
                 SplineBoundaryClosure::Greville_Greville>,

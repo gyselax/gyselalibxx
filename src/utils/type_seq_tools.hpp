@@ -26,7 +26,7 @@ template <
         std::size_t Start,
         std::size_t End,
         std::size_t Idx = 0,
-        class TypeSeqOut = ddc::detail::TypeSeq<>>
+        class TypeSeqOut = ddc::TypeSeq<>>
 struct TypeSeqRange
 {
     static_assert(End <= ddc::type_seq_size_v<TypeSeqIn>);
@@ -34,7 +34,7 @@ struct TypeSeqRange
             (Start <= Idx) && (Idx < End),
             ddc::type_seq_merge_t<
                     TypeSeqOut,
-                    ddc::detail::TypeSeq<ddc::type_seq_element_t<Idx, TypeSeqIn>>>,
+                    ddc::TypeSeq<ddc::type_seq_element_t<Idx, TypeSeqIn>>>,
             TypeSeqOut>;
     using type = typename TypeSeqRange<TypeSeqIn, Start, End, Idx + 1, new_result_type>::type;
 };
@@ -49,16 +49,16 @@ template <class Dim, class TypeSeqGrid>
 struct FindGrid;
 
 template <class Dim, class HeadGrid, class... Grids>
-struct FindGrid<Dim, ddc::detail::TypeSeq<HeadGrid, Grids...>>
+struct FindGrid<Dim, ddc::TypeSeq<HeadGrid, Grids...>>
 {
     using type = std::conditional_t<
             std::is_same_v<typename GetCDim<HeadGrid>::type, Dim>,
             HeadGrid,
-            typename FindGrid<Dim, ddc::detail::TypeSeq<Grids...>>::type>;
+            typename FindGrid<Dim, ddc::TypeSeq<Grids...>>::type>;
 };
 
 template <class Dim>
-struct FindGrid<Dim, ddc::detail::TypeSeq<>>
+struct FindGrid<Dim, ddc::TypeSeq<>>
 {
     static_assert(std::is_same_v<Dim, Dim>, "Grid not found");
     using type = void;
@@ -68,9 +68,9 @@ template <class TypeSeqDims, class TypeSeqGrids>
 struct FindAllGrids;
 
 template <class... TypeSeqDims, class TypeSeqGrids>
-struct FindAllGrids<ddc::detail::TypeSeq<TypeSeqDims...>, TypeSeqGrids>
+struct FindAllGrids<ddc::TypeSeq<TypeSeqDims...>, TypeSeqGrids>
 {
-    using type = ddc::detail::TypeSeq<typename FindGrid<TypeSeqDims, TypeSeqGrids>::type...>;
+    using type = ddc::TypeSeq<typename FindGrid<TypeSeqDims, TypeSeqGrids>::type...>;
 };
 
 template <class CoordType, class IdxRangeType>
@@ -86,34 +86,33 @@ template <class... TypeSeqs>
 struct TypeSeqCat;
 
 template <class... First, class... Second, class... TailTypeSeqs>
-struct TypeSeqCat<ddc::detail::TypeSeq<First...>, ddc::detail::TypeSeq<Second...>, TailTypeSeqs...>
+struct TypeSeqCat<ddc::TypeSeq<First...>, ddc::TypeSeq<Second...>, TailTypeSeqs...>
 {
-    using type =
-            typename TypeSeqCat<ddc::detail::TypeSeq<First..., Second...>, TailTypeSeqs...>::type;
+    using type = typename TypeSeqCat<ddc::TypeSeq<First..., Second...>, TailTypeSeqs...>::type;
 };
 
 template <class... First, class... Second>
-struct TypeSeqCat<ddc::detail::TypeSeq<First...>, ddc::detail::TypeSeq<Second...>>
+struct TypeSeqCat<ddc::TypeSeq<First...>, ddc::TypeSeq<Second...>>
 {
-    using type = ddc::detail::TypeSeq<First..., Second...>;
+    using type = ddc::TypeSeq<First..., Second...>;
 };
 
-template <class StartTypeSeq, class ResultTypeSeq = ddc::detail::TypeSeq<>>
+template <class StartTypeSeq, class ResultTypeSeq = ddc::TypeSeq<>>
 struct GetUnique;
 
 template <class HeadElem, class... TailElems, class... ResultElems>
-struct GetUnique<ddc::detail::TypeSeq<HeadElem, TailElems...>, ddc::detail::TypeSeq<ResultElems...>>
+struct GetUnique<ddc::TypeSeq<HeadElem, TailElems...>, ddc::TypeSeq<ResultElems...>>
 {
     using type = typename GetUnique<
-            ddc::detail::TypeSeq<TailElems...>,
+            ddc::TypeSeq<TailElems...>,
             std::conditional_t<
-                    ddc::in_tags_v<HeadElem, ddc::detail::TypeSeq<ResultElems...>>,
-                    ddc::detail::TypeSeq<ResultElems...>,
-                    ddc::detail::TypeSeq<ResultElems..., HeadElem>>>::type;
+                    ddc::in_tags_v<HeadElem, ddc::TypeSeq<ResultElems...>>,
+                    ddc::TypeSeq<ResultElems...>,
+                    ddc::TypeSeq<ResultElems..., HeadElem>>>::type;
 };
 
 template <class ResultTypeSeq>
-struct GetUnique<ddc::detail::TypeSeq<>, ResultTypeSeq>
+struct GetUnique<ddc::TypeSeq<>, ResultTypeSeq>
 {
     using type = ResultTypeSeq;
 };
@@ -123,57 +122,55 @@ struct GetPermutationParity;
 
 template <class HeadType, class... TailTypeSeq, class... TailOrderedTypeSeq>
 struct GetPermutationParity<
-        ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
-        ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>>
+        ddc::TypeSeq<HeadType, TailTypeSeq...>,
+        ddc::TypeSeq<HeadType, TailOrderedTypeSeq...>>
 {
 private:
     static constexpr bool contains_duplicate
             = (!std::is_same_v<
-                      ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>,
+                      ddc::TypeSeq<HeadType, TailOrderedTypeSeq...>,
                       typename detail::GetUnique<
-                              ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>>::type>)
+                              ddc::TypeSeq<HeadType, TailOrderedTypeSeq...>>::type>)
               || (!std::is_same_v<
-                      ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
-                      typename detail::GetUnique<
-                              ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>);
+                      ddc::TypeSeq<HeadType, TailTypeSeq...>,
+                      typename detail::GetUnique<ddc::TypeSeq<HeadType, TailTypeSeq...>>::type>);
 
 public:
-    static constexpr int value
-            = contains_duplicate ? 0
-                                 : GetPermutationParity<
-                                         ddc::detail::TypeSeq<TailTypeSeq...>,
-                                         ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
+    static constexpr int value = contains_duplicate
+                                         ? 0
+                                         : GetPermutationParity<
+                                                 ddc::TypeSeq<TailTypeSeq...>,
+                                                 ddc::TypeSeq<TailOrderedTypeSeq...>>::value;
 };
 
 template <class HeadType, class... TailTypeSeq, class OrderedHeadType, class... TailOrderedTypeSeq>
 struct GetPermutationParity<
-        ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
-        ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>
+        ddc::TypeSeq<HeadType, TailTypeSeq...>,
+        ddc::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>
 {
 private:
     static constexpr bool contains_duplicate
             = (!std::is_same_v<
-                      ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>,
+                      ddc::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>,
                       typename detail::GetUnique<
-                              ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>::type>)
+                              ddc::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>::type>)
               || (!std::is_same_v<
-                      ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
-                      typename detail::GetUnique<
-                              ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>);
+                      ddc::TypeSeq<HeadType, TailTypeSeq...>,
+                      typename detail::GetUnique<ddc::TypeSeq<HeadType, TailTypeSeq...>>::type>);
 
 public:
-    static constexpr int value
-            = contains_duplicate ? 0
-                                 : -GetPermutationParity<
-                                         ddc::type_seq_replace_t<
-                                                 ddc::detail::TypeSeq<TailTypeSeq...>,
-                                                 ddc::detail::TypeSeq<OrderedHeadType>,
-                                                 ddc::detail::TypeSeq<HeadType>>,
-                                         ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
+    static constexpr int value = contains_duplicate
+                                         ? 0
+                                         : -GetPermutationParity<
+                                                 ddc::type_seq_replace_t<
+                                                         ddc::TypeSeq<TailTypeSeq...>,
+                                                         ddc::TypeSeq<OrderedHeadType>,
+                                                         ddc::TypeSeq<HeadType>>,
+                                                 ddc::TypeSeq<TailOrderedTypeSeq...>>::value;
 };
 
 template <>
-struct GetPermutationParity<ddc::detail::TypeSeq<>, ddc::detail::TypeSeq<>>
+struct GetPermutationParity<ddc::TypeSeq<>, ddc::TypeSeq<>>
 {
     static constexpr int value = 1;
 };
@@ -189,7 +186,7 @@ private:
     using get_element = Element;
 
 public:
-    using type = ddc::detail::TypeSeq<get_element<Is>...>;
+    using type = ddc::TypeSeq<get_element<Is>...>;
 };
 
 template <template <typename P> typename Condition, class... T>

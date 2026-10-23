@@ -555,8 +555,8 @@ private:
         static_assert(
                 sizeof...(DerivDims) == 0
                         || ddc::type_seq_same_v<
-                                ddc::detail::TypeSeq<DerivDims...>,
-                                ddc::detail::TypeSeq<deriv_dim>>,
+                                ddc::TypeSeq<DerivDims...>,
+                                ddc::TypeSeq<deriv_dim>>,
                 "The only valid dimension for deriv_order is Deriv<Dim>");
 
         constexpr std::size_t n_basis = lagrange_basis_type::degree() + 1;
