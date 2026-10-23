@@ -11,6 +11,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add GVEC in the toolchains.
+- Allow `GyroAverageOperator` to work with any interpolation scheme.
+- Add `TypeOnPatch` to `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` to get the type stored on a given patch.
+- Allow `ddcHelper::get<Dim>(..)` to be used on a multipatch argument.
+- Allow `PolarSplineEvaluator::operator()` and `PolarSplineEvaluator::deriv` to evaluate a batch of polar splines on a grid.
+- Add new constructors to `DerivFieldMem` where the idx range slices for the derivatives default to the edge of the physical domain.
+- Add constructor `MultipatchField<TypeOnPatch, SubsetPatches...>` to get a subset of the objects stored in a `MultipatchField`.
+- Add `InterfaceDerivCoeffs::get_approx_cross_deriv()`.
+- Add an `InfNormResidual` Ginkgo stopping criterion based on the infinite norm of the residual.
+- Add `GkoMatrixResidualNorm` to choose the norm (2-norm or infinite norm) used in the stopping criterion of the `MatrixBatchCsr` CG and BiCGSTAB solvers. It can be passed to the constructors of `MatrixBatchCsr` and `PolarSplineFEMPoissonLikeSolver`.
+- Add `Span3D`, `Span4D`, `DSpan3D` and `DSpan4D` aliases.
+- Add `PolarBSplines::eval_basis_and_n_derivs` to evaluate the polar basis splines and their mixed derivatives at once.
+- Allow `IdxStep` indexing for `VectorField` objects.
+- Allow `PolarSplineFEMPoissonLikeSolver` to solve a batch of equations (batch dimensions in `IdxRangeFull`).
+- Add `ddcHelper::get_idx_from_linear_index` to get the multi-dimensional index at a given position in an index range.
+- Add a `concepts::MetricTensor` concept describing objects which provide the metric tensor and its inverse at a given coordinate or index.
+- `MetricTensorEvaluator` can be evaluated at an index whose coordinate type matches `CoordArg`.
+- The pointwise operators of `Gradient` and `LiePoissonBracket` can be evaluated at an index whose coordinate type matches the coordinate of the metric tensor.
+- Allow `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` to take a metric tensor instead of a mapping to change the variance of a vector field.
+- Add `symmetric_tensor_mul` to calculate a tensor multiplication whose result is symmetric.
+
+### Fixed
+
+- Fix compilation errors due to use of `std::make_tuple` in functions that are GPU compatible.
+- Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
+- Fix Jean-Zay environment with missing environment variables.
+
+### Changed
+
+- Rename `SingleInterfaceDerivativesCalculator` to `InterfaceDerivCoeffs`.
+- Rename `SingleInterfaceDerivativesCalculatorCollection` to `InterfaceDerivCoeffsCollection`.
+- Rename `SingleInterfaceDerivativesCalculator::get_function_coefficients()` to `InterfaceDerivCoeffs::get_approx_deriv()`.
+- Rename file `single_interface_derivatives_calculator.hpp` to `interface_derivative_coefficients.hpp`.
+- Rename file `single_interface_derivatives_calculator_collection.hpp` to `interface_derivative_coefficients_collection.hpp`.
+- Use `ddc::SplineEvaluatorND` instead of explicitly ranked DDC classes.
+- Replace `MultipatchSplineEvaluator::deriv_dim_1()`, `MultipatchSplineEvaluator::deriv_dim_2()`, `MultipatchSplineEvaluator::deriv_1_and_2()`, `MultipatchSplineEvaluator::deriv<InterestDim>()` by `MultipatchSplineEvaluator::deriv()` taking as input the derivative order (similar as `ddc::SplineEvaluator2D`).
+- `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` are now aliases for `detail::` classes templated on `ddc::detail::TypeSeq`s of the patches and of the stored types. Type templates which give the same type on each patch now lead to the same class.
+- The constructor of `MultipatchField` from another multipatch object is now explicit.
+- Rewrite of the `GyroAverageOperator` to enable importing external coefficients for geometries where no inverse mapping is available.
+- The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
+- Speed up the matrix assembly and RHS computation of `PolarSplineFEMPoissonLikeSolver`.
+- The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the full index range on which $\phi$ is defined (including any batch dimensions).
+- Allow `MPILayout` and `MPITransposeAllToAll` to be used with more MPI ranks than points in the distributed dimensions.
+- The constructor of `LiePoissonBracket` now takes the metric tensor as an argument (in addition to the mapping). The type of the metric tensor is an additional template parameter.
+- The template parameter of `Gradient` must now satisfy `concepts::MetricTensor`.
+- `to_vector_space` now takes a metric tensor instead of a mapping to change the variance (covariant <-> contravariant) of a vector.
+- `to_vector_space` no longer supports changing both the coordinate system and the variance in a single call.
+- The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.
+- The constructor of `PolarSplineFEMPoissonLikeAssembler` now takes the metric tensor as an argument and `PolarSplineFEMPoissonLikeAssembler::operator()` no longer takes the mapping. The type of the metric tensor is an additional template parameter.
+- The constructor of `AdvectionFieldFinder` now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.
+- Calls to Kokkos profiling's region push/pop were replaced by calls `ScopedRegion` whenever possible to capture RAII deallocations.
+
+### Deprecated
+
+### Removed
+
+- Removed `.span_view` and `.span_cview` from Gyselalib++ objects.
+- Remove the r-value converting constructors of `MultipatchType`, `MultipatchField` and `MultipatchFieldMem`.
+- Remove `MultipatchField::idx_type`.
+- Remove `MatrixBatchCsr::norm`.
+- Remove `MatrixBatchEll::norm`.
+- Remove `detail::combine_t` (prefer `ddc::combine_t`).
+
+### Dependency requirements
+
+- Remove Dask dependency in the tests.
+- Update DDC to [v0.16.0](https://github.com/CExA-project/ddc/releases/tag/v0.16.0).
+- Update GMGPolar dependency to [v2.4.0](https://github.com/SciCompMod/GMGPolar/releases/tag/v2.4.1).
+
+## [v0.8.0] - 2026-09-09
+
+### Added
+
+- Add an `extrapolation_rule` argument to `GMGPolarPoissonLikeSolver`. Default no extrapolation.
 - Add a new constructor for `GaussLegendre` from an index range describing the cell edges.
 - Add a `GradientCreator` operator to group derivative calculations.
 - Add a `NDLagrangeEvaluator` class.
@@ -37,6 +111,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a method `get_derivative` to `CentralFDMPartialDerivative` so it respects the `LocalPartialDerivativeCreator` concept.
 - Add class `GMGPolarPoissonLikeSolver` to allow the use of [GMGPolar](https://github.com/SciCompMod/GMGPolar) as a polar Poisson solver.
 - Add GMGPolar in the toolchains.
+- Allow `SplineInterpolator` and `LagrangeInterpolator` to specify custom extrapolation rules.
+- Allow `IdentityInterpolationBuilder` class to take a field on a strided layout.
+- Add a `DiscreteMapping` class to handle ND mappings whose values are only known at the mesh points of a grid.
+- Add a `CoordWithOPoint` class to recognise radial and poloidal components of a 2D coordinate.
+- Add MI300 toolchain for Adastra.
+- Add CMake installation commands and call the package `gyselalibxx`.
 
 ### Fixed
 
@@ -53,6 +133,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix use of `BslAdvectionSpatial` and `BslAdvectionVelocity` with non-double precision.
 - Fix H100 toolchain on Jean-Zay.
 - Fix Lagrange basis non-uniform initialisation for a sub-domain.
+- Fix use of `ExtrapolationRule::Constant` for 2D splines.
+- Fix use of a generic interpolator in `FEM1DPoissonSolver`, `PolarFootFinder` and `BslAdvectionPolar`.
+- Fix use of polar advection with `DiscreteMapping` class.
 
 ### Changed
 
@@ -86,6 +169,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use uppercase L suffix for long double literals.
 - Allow passing fields defined on strided domains to `BslAdvection1D`.
 - Allow `run_cppcheck` CI script to be run in parallel.
+- Simplify `restrict_to_idx_range` implementation.
+- Rename CMake options `POLAR_SPLINES_TEST_DEGREE_[MIN/MAX]` to `GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_[MIN/MAX]`.
+- Changed `ExtrapolationRule::RULENAME` from an enum to `ExtrapolationRule::RuleName`, a struct tag in a namespace.
+- Remove the C compiler dependency.
+- Make the dependency on GoogleTest dependent on the CMake option `GYSELALIBXX_BUILD_TESTING`.
+- Group extrapolation rules by dimension in `SplineInterpolator` and `LagrangeInterpolator`.
+- Group spline boundary closure rules by dimension in `SplineInterpolator`.
+- Change the `LagrangeInterpolator` templates to allow ND cases to be handled.
+- Change the `SplineInterpolator` templates to allow 2D cases to be handled.
+- Setup `GMGPolar` in `GMGPolarPoissonLikeSolver::update_coefficients` instead of `GMGPolarPoissonLikeSolver::operator()`.
+- Use `Interpolator` concept instead of `Builder` and `Evaluator` classes to simplify classes:
+  - `PolarFootFinder`
+  - `DiscretePoloidalCSSplineMappingBuilder`
+  - `RefinedDiscretePoloidalCSSplineMappingBuilder`
+  - `BslPredCorrRTheta`
+  - `BslExplicitPredCorrRTheta`
+  - `BslImplicitPredCorrRTheta`
+  - `PolarSplineFEMPoissonLikeSolver`
+  - `GMGPolarPoissonLikeSolver`
+- The CMake namespace `gslx` has been renamed `gyselalibxx`.
 
 ### Deprecated
 
@@ -104,6 +207,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove unuseful defaulted template parameters `MinBound` and `MaxBound` from `LagrangeInterpolator`.
 - Remove unused superclass `IPolarFootFinder`.
 - Remove BslAdvectionPolar::operator() taking `advection_field_xy_centre`.
+- Remove `cartesian_tag_*` aliases in mappings.
+- Remove `cylindrical_tag_*` and `toroidal_tag_*` aliases in `ToroidalToCylindrical`.
+- Remove `LAPACK` dependency (`LAPACKE` remains).
 
 ## [v0.7.0] - 2026-03-18
 

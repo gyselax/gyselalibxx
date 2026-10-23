@@ -15,23 +15,23 @@ bool constexpr BsplineOnUniformCellsY = true;
 struct BSplinesX
     : std::conditional_t<
               BsplineOnUniformCellsX,
-              ddc::UniformBSplines<X, BSDegreeX>,
-              ddc::NonUniformBSplines<X, BSDegreeX>>
+              ddc::UniformBSplines<X, BSDegreeX, X::PERIODIC>,
+              ddc::NonUniformBSplines<X, BSDegreeX, X::PERIODIC>>
 {
 };
 struct BSplinesY
     : std::conditional_t<
               BsplineOnUniformCellsY,
-              ddc::UniformBSplines<Y, BSDegreeY>,
-              ddc::NonUniformBSplines<Y, BSDegreeY>>
+              ddc::UniformBSplines<Y, BSDegreeY, Y::PERIODIC>,
+              ddc::NonUniformBSplines<Y, BSDegreeY, Y::PERIODIC>>
 {
 };
 
 ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
 ddc::SplineBuilderClosure constexpr SplineYClosure = ddc::SplineBuilderClosure::PERIODIC;
 
-ExtrapolationRule constexpr SplineXExtrapolation = ExtrapolationRule::PERIODIC;
-ExtrapolationRule constexpr SplineYExtrapolation = ExtrapolationRule::PERIODIC;
+using SplineXExtrapolation = ExtrapolationRule::Periodic;
+using SplineYExtrapolation = ExtrapolationRule::Periodic;
 
 // IDim initialisers
 using SplineInterpPointsX
@@ -43,21 +43,17 @@ using SplineInterpPointsY
 // SplineBuilder and SplineEvaluator definitions
 using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
         SplineXExtrapolation,
-        SplineXExtrapolation,
-        SplineXClosure,
-        SplineXClosure>;
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 using SplineYInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesY,
-        GridY,
+        IdxRange<BSplinesY>,
+        IdxRange<GridY>,
         SplineYExtrapolation,
-        SplineYExtrapolation,
-        SplineYClosure,
-        SplineYClosure>;
+        SplineBoundaryClosures<SplineYClosure, SplineYClosure>>;
 
 // Spline index range
 using IdxRangeBSX = IdxRange<BSplinesX>;

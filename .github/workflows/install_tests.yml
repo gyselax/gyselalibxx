@@ -67,7 +67,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           source ${GITHUB_WORKSPACE}/toolchains/cpu.spack.gyselalibxx_env/environment.sh
-          spack buildcache push --update-index local-buildcache
+          spack buildcache push --allow-missing --update-index local-buildcache
         if: ${{!cancelled()}}
       - name: Build code
         uses: ./.github/actions/build_code

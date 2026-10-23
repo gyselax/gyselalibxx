@@ -19,10 +19,10 @@ target_link_libraries(unit_tests_advection
         GTest::gtest
         GTest::gmock
 
-        gslx::advection
-        gslx::speciesinfo
-        gslx::timestepper
-        gslx::utils
+        gyselalibxx::advection
+        gyselalibxx::speciesinfo
+        gyselalibxx::timestepper
+        gyselalibxx::utils
 )
 target_compile_definitions(unit_tests_advection PUBLIC)
 

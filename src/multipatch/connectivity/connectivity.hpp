@@ -98,10 +98,11 @@ public:
      *
      * @return A tuple of index ranges along the line of interest.
      */
-    template <class Grid1D, template <typename P> typename T, class... Patches>
-    static auto get_all_idx_ranges_along_direction(MultipatchType<T, Patches...> all_idx_ranges)
+    template <class Grid1D, class TypeSeqPatches, class TypeSeqInternalTypes>
+    static auto get_all_idx_ranges_along_direction(
+            detail::MultipatchType<TypeSeqPatches, TypeSeqInternalTypes> all_idx_ranges)
     {
-        static_assert(ddc::type_seq_same_v<all_patches, ddc::detail::TypeSeq<Patches...>>);
+        static_assert(ddc::type_seq_same_v<all_patches, TypeSeqPatches>);
         return get_all_idx_ranges_along_direction<Grid1D>(all_idx_ranges.get_tuple());
     }
 
@@ -110,13 +111,14 @@ private:
     template <class RelevantGrids, class IdxRangeTuple, std::size_t... PatchIndex>
     static auto get_idx_range(IdxRangeTuple all_idx_ranges, std::index_sequence<PatchIndex...>)
     {
-        return std::make_tuple(
+        return std::tuple<IdxRange<ddc::type_seq_element_t<PatchIndex, RelevantGrids>>...>(
                 get_idx_range<PatchIndex, RelevantGrids, IdxRangeTuple>(all_idx_ranges)...);
     }
 
     /// Get the relevant index range from the input index ranges using the grid to identify it.
     template <std::size_t PatchIndex, class RelevantGrids, class IdxRangeTuple>
-    static auto get_idx_range(IdxRangeTuple all_idx_ranges)
+    static IdxRange<ddc::type_seq_element_t<PatchIndex, RelevantGrids>> get_idx_range(
+            IdxRangeTuple all_idx_ranges)
     {
         using GridToLocate = ddc::type_seq_element_t<PatchIndex, RelevantGrids>;
         using GridLocation = find_relevant_idx_range_t<GridToLocate, IdxRangeTuple>;

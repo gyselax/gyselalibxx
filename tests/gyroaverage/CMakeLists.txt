@@ -12,9 +12,14 @@ target_link_libraries(unit_tests_gyroaverage
         GTest::gmock
         DDC::core
         DDC::splines
-        gslx::utils
-        gslx::gyroaverage
+        gyselalibxx::utils
+        gyselalibxx::gyroaverage
         testing_tools
 )
-gtest_discover_tests(unit_tests_gyroaverage DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_gyroaverage
+    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
+    DISCOVERY_MODE PRE_TEST
+    PROPERTIES TIMEOUT 10
+    PROPERTIES COST 10
+)
 

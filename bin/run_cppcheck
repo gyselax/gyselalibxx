@@ -42,6 +42,7 @@ if __name__ == '__main__':
            '--library=googletest', '--max-ctu-depth=5', '--check-level=exhaustive',
            '--std=c++20', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
            '--suppress=knownConditionTrueFalse', '--suppress=ctuOneDefinitionRuleViolation',
+           '--suppress=throwInEntryPoint',
            '--inline-suppr', '-j', str(args.parallel),
            f'--addon={GYSELALIB_ROOT}/bin/ci_tools/check_naming_conventions',
            f'--addon={GYSELALIB_ROOT}/bin/ci_tools/check_for_memory_misuse',

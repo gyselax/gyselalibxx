@@ -11,4 +11,4 @@ target_link_libraries("simulation_utils"
         DDC::core
 )
 
-add_library("gslx::simulation_utils" ALIAS "simulation_utils")
+add_library("gyselalibxx::simulation_utils" ALIAS "simulation_utils")

@@ -102,7 +102,6 @@ void check_norms(
 template <class Mapping>
 void launch_tests(
         Mapping const& mapping,
-        SplineRThetaBuilder_host const& builder,
         IdxRangeRTheta const& grid,
         std::array<std::array<double, 2>, 5> const& expected_norms,
         std::array<std::array<double, 2>, 5> const& TOLs)
@@ -219,7 +218,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     IdxRangeTheta interpolation_idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    SplineRThetaBuilder_host builder(grid);
+    SplineInterpolatorRThetaConst_host interpolator(grid);
 
 
     // ------------------------------------------------------------------------------------------------
@@ -250,29 +249,15 @@ TEST_P(SplineQuadrature, TestFunctions)
     TOLs[4][0] = 5e-2;
     TOLs[4][1] = 5e-6;
 
-    launch_tests(mapping_1, builder, grid, expected_norms, TOLs);
+    launch_tests(mapping_1, grid, expected_norms, TOLs);
 
 
     std::cout << std::endl
               << "DISCRETE MAPPING ---------------------------------------------------"
               << std::endl;
-    ddc::ConstantExtrapolationRule<R, Theta> bv_r_min(r_min);
-    ddc::ConstantExtrapolationRule<R, Theta> bv_r_max(r_max);
-    ddc::PeriodicExtrapolationRule<Theta> bv_knots_min;
-    ddc::PeriodicExtrapolationRule<Theta> bv_knots_max;
-    SplineRThetaEvaluatorConstBound_host
-            spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_knots_min, bv_knots_max);
 
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluatorConstBound_host> const
-            discrete_mapping_builder(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    mapping_1,
-                    builder,
-                    spline_evaluator_extrapol);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host> const
+            discrete_mapping_builder(Kokkos::DefaultHostExecutionSpace(), mapping_1, interpolator);
     DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
     TOLs[0][0] = 5e-6;
     TOLs[0][1] = 5e-7;
@@ -285,7 +270,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     TOLs[4][0] = 5e-2;
     TOLs[4][1] = 5e-6;
 
-    launch_tests(discrete_mapping, builder, grid, expected_norms, TOLs);
+    launch_tests(discrete_mapping, grid, expected_norms, TOLs);
 }
 
 

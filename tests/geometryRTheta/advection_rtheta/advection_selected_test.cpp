@@ -115,34 +115,9 @@ int main(int argc, char** argv)
 
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
-    // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder_host const builder_host(grid);
-    SplineRThetaBuilder const builder(grid);
-
-    // --- Evaluator for the test function:
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-
-    // --- Evaluator for the test advection field:
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
-
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
+    // --- Interpolator for the test function:
+    SplineInterpolatorRTheta interpolator(grid);
+    SplineInterpolatorRThetaConst interpolator_const(grid);
 
     std::string key;
 
@@ -171,27 +146,17 @@ int main(int argc, char** argv)
 #elif not defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     static_assert(false, "No mapping macro defined");
 #else
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluatorConstBound_host>
+    SplineInterpolatorRThetaConst_host interpolator_const_host(grid);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host>
             mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
-                    builder_host,
-                    spline_evaluator_extrapol_host);
+                    interpolator_const_host);
     DiscretePoloidalCSSplineMapping to_physical_mapping_host = mapping_builder_host();
-    DiscretePoloidalCSSplineMappingBuilder<
-            X,
-            Y,
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorConstBound>
-            mapping_builder(
-                    Kokkos::DefaultExecutionSpace(),
-                    to_physical_analytical_mapping,
-                    builder,
-                    spline_evaluator_extrapol);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst> mapping_builder(
+            Kokkos::DefaultExecutionSpace(),
+            to_physical_analytical_mapping,
+            interpolator_const);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     std::string const mapping_name = "DISCRETE";
     key += "discrete";
@@ -259,16 +224,12 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
-    PolarFootFinder const foot_finder
-            = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
-                    time_stepper,
-                    to_physical_mapping,
-                    grid,
-                    builder,
-                    spline_evaluator_extrapol);
+    PolarFootFinder const foot_finder = make_polar_foot_finder<
+            FFSpace,
+            AdvectionFieldSpace::
+                    PHYSICAL>(time_stepper, to_physical_mapping, grid, interpolator_const);
 
-    BslAdvectionPolar
-            advection_operator(builder, spline_evaluator, foot_finder, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, foot_finder, to_physical_mapping);
 
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;

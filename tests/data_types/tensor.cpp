@@ -396,6 +396,30 @@ TEST(TensorTest, MulOrthonormal)
     EXPECT_EQ(E, 42);
 }
 
+TEST(TensorTest, SymmetricMul)
+{
+    using Tensor2D_A = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    using Tensor2D_G = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    Tensor2D_A A;
+    ddcHelper::get<X, X>(A) = 1;
+    ddcHelper::get<X, Y>(A) = 0;
+    ddcHelper::get<Y, X>(A) = 2;
+    ddcHelper::get<Y, Y>(A) = 4;
+    // G = A^T A, which is symmetric by construction.
+    Tensor2D_G G = symmetric_tensor_mul(index<'j', 'i'>(A), index<'j', 'k'>(A));
+    int val = ddcHelper::get<X, X>(G);
+    EXPECT_EQ(val, 5);
+    val = ddcHelper::get<X, Y>(G);
+    EXPECT_EQ(val, 8);
+    val = ddcHelper::get<Y, X>(G);
+    EXPECT_EQ(val, 8);
+    val = ddcHelper::get<Y, Y>(G);
+    EXPECT_EQ(val, 16);
+    val = ddcHelper::get<X, Y>(G);
+    int sym_val = ddcHelper::get<Y, X>(G);
+    EXPECT_EQ(val, sym_val);
+}
+
 TEST(TensorTest, LeviCivita2D)
 {
     CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;

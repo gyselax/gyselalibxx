@@ -21,7 +21,7 @@ export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
 
 module purge
 
-git clone --branch v1.1.0 --depth 1 https://github.com/spack/spack.git $HOME/spack || true
+git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git $HOME/spack || true
 . $HOME/spack/share/spack/setup-env.sh
 
 spack env remove --yes-to-all gyselalibxx-spack-environment
@@ -30,4 +30,4 @@ spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyse
 echo "Preparing the Spack environment..."
 
 # Concretize on the compute node
-spack --env gyselalibxx-spack-environment install --concurrent-packages 2 --jobs 8
+spack --env gyselalibxx-spack-environment install --jobs 16

@@ -49,10 +49,10 @@ using CoordVx = Coord<Vx>;
 using CoordVy = Coord<Vy>;
 
 // Splines
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesY : ddc::UniformBSplines<Y, 3>
+struct BSplinesY : ddc::UniformBSplines<Y, 3, Y::PERIODIC>
 {
 };
 
@@ -123,21 +123,17 @@ using DFieldXYVxVy = FieldXYVxVy<double>;
 // Operators
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
-        PERIODIC,
-        PERIODIC,
-        SplineXClosure,
-        SplineXClosure>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 using SplineInterpolatorY = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesY,
-        GridY,
-        PERIODIC,
-        PERIODIC,
-        SplineYClosure,
-        SplineYClosure>;
+        IdxRange<BSplinesY>,
+        IdxRange<GridY>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineYClosure, SplineYClosure>>;
 
 
 

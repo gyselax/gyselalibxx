@@ -36,10 +36,10 @@ using CoordX = Coord<X>;
 using CoordVx = Coord<Vx>;
 
 // Spline
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
+struct BSplinesVx : ddc::UniformBSplines<Vx, 3, Vx::PERIODIC>
 {
 };
 
@@ -102,12 +102,10 @@ using DFieldXVx = FieldXVx<double>;
 // Operators
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
-        PERIODIC,
-        PERIODIC,
-        SplineXClosure,
-        SplineXClosure>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 
 class XVxAdvection1DTest : public ::testing::Test

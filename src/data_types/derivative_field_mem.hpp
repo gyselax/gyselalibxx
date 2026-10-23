@@ -211,14 +211,14 @@ private:
                     & (1 << ddc::type_seq_rank_v<
                                ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
                                deriv_tags>)) {
-                IdxRangeSlice<QueryDDim> idx_range_local(base_type::m_cross_derivative_idx_range);
+                IdxRangeSlice<QueryDDim> idx_range_local(this->m_cross_derivative_idx_range);
                 return idx_range_local.extents().value();
             } else {
-                IdxRange<QueryDDim> idx_range_local(base_type::m_physical_idx_range);
+                IdxRange<QueryDDim> idx_range_local(this->m_physical_idx_range);
                 return idx_range_local.extents().value();
             }
         } else {
-            IdxRange<QueryDDim> idx_range_local(base_type::m_physical_idx_range);
+            IdxRange<QueryDDim> idx_range_local(this->m_physical_idx_range);
             return idx_range_local.extents().value();
         }
     }
@@ -226,10 +226,10 @@ private:
     /// @brief Make the internal mdspan that will be saved in internal_fields at the index ArrayIndex.
     template <std::size_t ArrayIndex>
     std::enable_if_t<std::is_constructible_v<mapping_type, extents_type>, internal_mdspan_type>
-    make_internal_mdspan(allocator_type allocator)
+    make_internal_mdspan(std::string const& label_str, allocator_type allocator)
     {
         std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
-        element_type* ptr = allocator.allocate("", alloc_size);
+        element_type* ptr = allocator.allocate(label_str, alloc_size);
 
         extents_type extents_r(get_mdspan_size<DDims, ArrayIndex>()...);
         mapping_type mapping_r(extents_r);
@@ -242,17 +242,23 @@ private:
 
     /// @brief Initialise the chunks inside internal_fields.
     template <std::size_t... ArrayIndex>
-    void initialise_chunks(allocator_type allocator, std::index_sequence<ArrayIndex...>)
+    void initialise_chunks(
+            std::string const& label_str,
+            allocator_type allocator,
+            std::index_sequence<ArrayIndex...>)
     {
-        ((base_type::internal_fields[ArrayIndex] = make_internal_mdspan<ArrayIndex>(allocator)),
+        ((this->internal_fields[ArrayIndex]
+          = make_internal_mdspan<ArrayIndex>(label_str, allocator)),
          ...);
     }
 
     /// @brief Free the internal pointer that is saved in internal_fields at the index ArrayIndex.
     template <std::size_t ArrayIndex>
-    void free_ptr(ElementType* const ptr, allocator_type allocator)
+    void free_ptr( // cppcheck-suppress functionStatic
+            ElementType* const ptr,
+            allocator_type allocator)
     {
-        std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
+        std::size_t alloc_size(((this->get_mdspan_size<DDims, ArrayIndex>()) * ...));
         allocator.deallocate(ptr, alloc_size);
     }
 
@@ -260,8 +266,7 @@ private:
     template <std::size_t... ArrayIndex>
     void free_chunks(allocator_type allocator, std::index_sequence<ArrayIndex...>)
     {
-        (free_ptr<ArrayIndex>(base_type::internal_fields[ArrayIndex].data_handle(), allocator),
-         ...);
+        (free_ptr<ArrayIndex>(this->internal_fields[ArrayIndex].data_handle(), allocator), ...);
     }
 
 public:
@@ -269,14 +274,27 @@ public:
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
      * the provided index ranges.
      *
+     * @param label The label of the object. 
      * @param val_idx_range The index range on which the values of the field are defined.
-     * @param m_deriv_idx_range The 1D sub-index ranges on which the derivatives of the field are defined.
+     * @param deriv_idx_range The 1D sub-index ranges on which the derivatives of the field are defined.
      */
     template <class... DerivDoms>
     DerivFieldMem(
+            std::string const& label,
             physical_idx_range_type val_idx_range,
-            ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
-        : DerivFieldMem(allocator_type(), val_idx_range, m_deriv_idx_range...)
+            ddc::StridedDiscreteDomain<
+                    DerivDoms>... deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
+        : DerivFieldMem(label, allocator_type(), val_idx_range, deriv_idx_range...)
+    {
+    }
+
+    /// Version without a label
+    template <class... DerivDoms>
+    DerivFieldMem(
+            physical_idx_range_type val_idx_range,
+            ddc::StridedDiscreteDomain<
+                    DerivDoms>... deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
+        : DerivFieldMem("no-label", val_idx_range, deriv_idx_range...)
     {
     }
 
@@ -284,33 +302,106 @@ public:
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
      * the provided index ranges.
      *
+     * @param label The label of the object. 
      * @param allocator The object which allocates the memory on the CPU or GPU.
      * @param val_idx_range The index range on which the values of the field are defined.
      * @param m_deriv_idx_range The 1D sub-index ranges on which the derivatives of the field are defined.
      */
     template <class... DerivDoms>
     DerivFieldMem(
+            std::string const& label,
             allocator_type allocator,
             physical_idx_range_type val_idx_range,
-            ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
+            ddc::StridedDiscreteDomain<
+                    DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
         : base_type(
+                label,
                 val_idx_range,
-                discrete_deriv_idx_range_type(
-                        IdxRange<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
-                                Idx<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(1),
-                                IdxStep<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
-                                        NDerivs))...),
-                to_subidx_range_collection<physical_deriv_grids>(m_deriv_idx_range...))
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>(
+                        m_deriv_idx_range...))
     {
         static_assert(
                 ddc::type_seq_same_v<ddc::detail::TypeSeq<DerivDoms...>, physical_deriv_grids>);
-        initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
+        initialise_chunks(label, allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
+
+    /// Version without a label
+    template <class... DerivDoms>
+    DerivFieldMem(
+            allocator_type allocator,
+            physical_idx_range_type val_idx_range,
+            ddc::StridedDiscreteDomain<
+                    DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
+        : DerivFieldMem("no-label", allocator, val_idx_range, m_deriv_idx_range...)
+    {
+    }
+
+    /**
+     * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
+     * the provided index ranges. The derivatives are assumed to be found at the boundaries.
+     *
+     * @param label The label of the object. 
+     * @param allocator The object which allocates the memory on the CPU or GPU.
+     * @param val_idx_range The index range on which the values of the field are defined.
+     */
+    DerivFieldMem(
+            std::string const& label,
+            allocator_type allocator,
+            physical_idx_range_type val_idx_range)
+        : base_type(
+                label,
+                val_idx_range,
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
+    {
+        initialise_chunks(label, allocator, std::make_integer_sequence<std::size_t, n_fields> {});
+    }
+
+    /// Version without a label
+    DerivFieldMem(allocator_type allocator, physical_idx_range_type val_idx_range)
+        : DerivFieldMem("no-label", allocator, val_idx_range)
+    {
+    }
+
+    /**
+     * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
+     * the provided index ranges. The derivatives are assumed to be found at the boundaries.
+     *
+     * @param label The label of the object. 
+     * @param val_idx_range The index range on which the values of the field are defined.
+     */
+    explicit DerivFieldMem(std::string const& label, physical_idx_range_type val_idx_range)
+        : DerivFieldMem(label, allocator_type(), val_idx_range)
+    {
+    }
+
+    /// Version without a label
+    explicit DerivFieldMem(physical_idx_range_type val_idx_range)
+        : DerivFieldMem("no-label", val_idx_range)
+    {
+    }
+
+
+    /** Constructs a new DerivFieldMem by move.
+     * @param other the DerivFieldMem to move.
+     */
+    DerivFieldMem(DerivFieldMem&& other) noexcept
+        : base_type(std::move(static_cast<base_type&>(other)))
+    {
+        // Set the first internal field to store a nullptr, this prevents the memory being deallocated
+        other.internal_fields[0]
+                = internal_mdspan_type(nullptr, other.internal_fields[0].mapping());
+    }
+
 
     /// Destructor, responsible to deallocate memory.
     ~DerivFieldMem()
     {
-        free_chunks(allocator_type {}, std::make_integer_sequence<std::size_t, n_fields> {});
+        // Deallocate the memory, but only if it was not moved to a new DerivFieldMem via an r-value constructor
+        if (this->internal_fields[0].data_handle()) {
+            free_chunks(allocator_type {}, std::make_integer_sequence<std::size_t, n_fields> {});
+        }
     }
 
     /// Deleted copy operator
@@ -335,9 +426,9 @@ public:
     element_type& operator()(DElem... elems) noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_index_type = detail::combine_t<DElem...>;
+        using full_index_type = ddc::combine_t<DElem...>;
         full_index_type elem(elems...);
-        return base_type::get_internal_field(elem)();
+        return this->get_internal_field(elem)();
     }
 
     /**
@@ -353,9 +444,9 @@ public:
     element_type const& operator()(DElem... elems) const noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_index_type = detail::combine_t<DElem...>;
+        using full_index_type = ddc::combine_t<DElem...>;
         full_index_type elem(elems...);
-        return base_type::get_internal_field(elem)();
+        return this->get_internal_field(elem)();
     }
 
     /**
@@ -370,7 +461,7 @@ public:
     template <class... QueryDDims>
     constexpr auto operator[](Idx<QueryDDims...> const& slice_spec) const
     {
-        return base_type::get_internal_field(slice_spec).span_cview();
+        return get_const_field(this->get_internal_field(slice_spec));
     }
 
     /**
@@ -385,7 +476,7 @@ public:
     template <class... QueryDDims>
     constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)
     {
-        return base_type::get_internal_field(slice_spec);
+        return this->get_internal_field(slice_spec);
     }
 
     /**
@@ -402,7 +493,7 @@ public:
     template <class... QueryDDims>
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
     {
-        return base_type::get_internal_field(oidx_range);
+        return this->get_internal_field(oidx_range);
     }
 
     /**
@@ -419,7 +510,7 @@ public:
     template <class... QueryDDims>
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
     {
-        return base_type::get_internal_field(oidx_range).span_cview();
+        return get_const_field(this->get_internal_field(oidx_range));
     }
 
     /**
@@ -430,7 +521,7 @@ public:
      *
      * @returns A constant span of this field.
      */
-    view_type span_cview() const
+    view_type get_const_field() const
     {
         return view_type(*this);
     }
@@ -443,7 +534,7 @@ public:
      *
      * @returns A constant span of this field.
      */
-    view_type span_view() const
+    view_type get_field() const
     {
         return view_type(*this);
     }
@@ -456,9 +547,36 @@ public:
      *
      * @returns A span of this field.
      */
-    span_type span_view()
+    span_type get_field()
     {
         return span_type(*this);
+    }
+
+    /** Returns the label of the DerivFieldMem.
+     * @return c-string.
+     */
+    char const* label() const
+    {
+        return this->m_label.c_str();
+    }
+
+private:
+    /// Get the index range for all the ddc::Deriv<Dim> dimensions. Unpacking is handled by
+    /// passing an index range of type physical_deriv_idx_range_type.
+    template <class... DerivDims>
+    static discrete_deriv_idx_range_type get_deriv_range(IdxRange<DerivDims...>)
+    {
+        static_assert(std::is_same_v<IdxRange<DerivDims...>, physical_deriv_idx_range_type>);
+        return discrete_deriv_idx_range_type(
+                get_deriv_range<typename DerivDims::continuous_dimension_type>()...);
+    }
+
+    /// Get the index range for ddc::Deriv<Dim>
+    template <class Dim>
+    static IdxRange<ddc::Deriv<Dim>> get_deriv_range()
+    {
+        return IdxRange<
+                ddc::Deriv<Dim>>(Idx<ddc::Deriv<Dim>>(1), IdxStep<ddc::Deriv<Dim>>(NDerivs));
     }
 };
 

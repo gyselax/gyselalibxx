@@ -192,7 +192,7 @@ On the polar grid we have:  $`(t, \overrightarrow{x}) = (t,x(r,\theta),y(r,\thet
 
 The BslAdvectionPolar operator can take as input
 the advection field expressed on the $`(e_x, e_y)`$ basis of the physical domain or
-the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../docs/standards/mathematical_and_physical_conventions.md) of the logical domain,
+the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../docs/core_concepts/mathematical_and_physical_conventions.md) of the logical domain,
 
 ```math
 A = A_x e_x + A_y e_y \quad \text{or} \quad A = A^r e_r + A^\theta e_\theta.

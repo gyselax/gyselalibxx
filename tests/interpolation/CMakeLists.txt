@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: MIT
 
-if (DEFINED ENV{POLAR_SPLINES_TEST_DEGREE_MIN})
-    set(POLAR_SPLINES_TEST_DEGREE_MIN $ENV{POLAR_SPLINES_TEST_DEGREE_MIN})
+if (DEFINED ENV{GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MIN})
+    set(GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MIN $ENV{GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MIN})
 else()
-    set(POLAR_SPLINES_TEST_DEGREE_MIN 3 CACHE STRING "Minimum degree to test splines.")
+    set(GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MIN 3 CACHE STRING "Minimum degree to test splines.")
 endif()
 
-if (DEFINED ENV{POLAR_SPLINES_TEST_DEGREE_MAX})
-    set(POLAR_SPLINES_TEST_DEGREE_MAX $ENV{POLAR_SPLINES_TEST_DEGREE_MAX})
+if (DEFINED ENV{GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MAX})
+    set(GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MAX $ENV{GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MAX})
 else()
-    set(POLAR_SPLINES_TEST_DEGREE_MAX 3 CACHE STRING "Maximum degree to test splines.")
+    set(GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MAX 3 CACHE STRING "Maximum degree to test splines.")
 endif()
 
 include(GoogleTest)
@@ -22,7 +22,7 @@ target_link_libraries(bernstein_tests
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::polar_splines
+        gyselalibxx::polar_splines
 )
 target_include_directories(bernstein_tests
     PRIVATE
@@ -38,7 +38,7 @@ target_link_libraries(polar_bsplines_tests
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::polar_splines
+        gyselalibxx::polar_splines
 )
 target_include_directories(polar_bsplines_tests
     PRIVATE
@@ -52,11 +52,11 @@ foreach(CONTINUITY RANGE -1 1)
   if (${MIN_DEGREE} LESS 1)
     set(MIN_DEGREE 1)
   endif()
-  if (${MIN_DEGREE} LESS ${POLAR_SPLINES_TEST_DEGREE_MIN})
-    set(MIN_DEGREE ${POLAR_SPLINES_TEST_DEGREE_MIN})
+  if (${MIN_DEGREE} LESS ${GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MIN})
+    set(MIN_DEGREE ${GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MIN})
   endif()
-  foreach(DEGREE_R RANGE ${MIN_DEGREE} ${POLAR_SPLINES_TEST_DEGREE_MAX})
-    foreach(DEGREE_P RANGE ${MIN_DEGREE} ${POLAR_SPLINES_TEST_DEGREE_MAX})
+  foreach(DEGREE_R RANGE ${MIN_DEGREE} ${GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MAX})
+    foreach(DEGREE_P RANGE ${MIN_DEGREE} ${GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_MAX})
       foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
         foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
           set(test_name "polar_splines_tests_DEGREE_R_${DEGREE_R}_DEGREE_P_${DEGREE_P}_CONTINUITY_${CONTINUITY}_${BSPLINES_TYPE}_${MAPPING_TYPE}")
@@ -65,7 +65,7 @@ foreach(CONTINUITY RANGE -1 1)
             PUBLIC
             GTest::gtest
             GTest::gmock
-            gslx::polar_splines
+            gyselalibxx::polar_splines
           )
           target_compile_definitions("${test_name}" PUBLIC -DDEGREE_R=${DEGREE_R} -DDEGREE_P=${DEGREE_P} -D${BSPLINES_TYPE} -DCONTINUITY=${CONTINUITY} -D${MAPPING_TYPE})
           gtest_discover_tests("${test_name}"
@@ -89,8 +89,8 @@ target_link_libraries(lagrange_tests
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::interpolation
-        gslx::math_tools
+        gyselalibxx::interpolation
+        gyselalibxx::math_tools
 )
 target_include_directories(lagrange_tests
     PRIVATE
@@ -98,4 +98,17 @@ target_include_directories(lagrange_tests
 )
 
 gtest_discover_tests(lagrange_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
+
+add_executable(spline_interpolation_tests
+    ../main.cpp
+    spline_interpolation.cpp
+)
+target_link_libraries(spline_interpolation_tests
+    PUBLIC
+        GTest::gtest
+        GTest::gmock
+        gyselalibxx::interpolation
+)
+
+gtest_discover_tests(spline_interpolation_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 

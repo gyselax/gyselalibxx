@@ -2,8 +2,10 @@
 
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <cmath>
+#include <utility>
 
 #include <ddc/ddc.hpp>
 
@@ -82,7 +84,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
  * @return The equivalent coordinate inside the domain.
  */
 template <class IDim>
-constexpr std::enable_if_t<
+KOKKOS_INLINE_FUNCTION std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC,
         Coord<typename IDim::continuous_dimension_type>>
 restrict_to_idx_range(
@@ -92,22 +94,13 @@ restrict_to_idx_range(
     using Coord1D = Coord<typename IDim::continuous_dimension_type>;
     double const x_min = ddc::rmin(idx_range);
     double const length = total_interval_length(idx_range);
-    double const x_max = x_min + length;
 
-    assert(length > 0);
+    KOKKOS_ASSERT(length > 0);
     coord -= x_min;
-    if (fabs(coord) > 10 * length) {
-        double periodic_factor = 2 * M_PI / length;
-        double coord_2pi = double(coord) * periodic_factor;
-        coord_2pi = std::copysign(std::acos(std::cos(coord_2pi)), std::sin(coord_2pi));
-        coord = coord_2pi < 0 ? Coord1D((coord_2pi + 2 * M_PI) / periodic_factor)
-                              : Coord1D((coord_2pi) / periodic_factor);
-    }
+    coord = Coord1D(Kokkos::fmod((double)coord, length));
     coord += x_min;
-    while (coord < x_min)
+    if (coord < x_min)
         coord += length;
-    while (coord >= x_max)
-        coord -= length;
     return coord;
 }
 
@@ -209,6 +202,41 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
             });
 
     return max_dist;
+}
+
+/**
+ * @brief Get the multi-dimensional index found at a given position in an index range.
+ *
+ * The index range is traversed in layout_right order (the last dimension varies fastest).
+ * This is the inverse of the linearisation used to store a contiguous layout_right Field
+ * defined on the index range.
+ *
+ * @param idx_range The index range.
+ * @param linear_idx The position of the index in the index range (0 <= linear_idx < idx_range.size()).
+ *
+ * @return The index found at the position linear_idx.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION Idx<Dims...> get_idx_from_linear_index(
+        IdxRange<Dims...> const& idx_range,
+        std::size_t linear_idx)
+{
+    if constexpr (sizeof...(Dims) == 0) {
+        KOKKOS_ASSERT(linear_idx == 0);
+        return Idx<>();
+    } else {
+        KOKKOS_ASSERT(linear_idx < idx_range.size());
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const extents
+                = ddc::detail::array(idx_range.extents());
+        IdxStep<Dims...> offset;
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)>& offsets
+                = ddc::detail::array(offset);
+        for (std::size_t i = sizeof...(Dims); i > 0; --i) {
+            offsets[i - 1] = linear_idx % extents[i - 1];
+            linear_idx /= extents[i - 1];
+        }
+        return idx_range.front() + offset;
+    }
 }
 } // namespace ddcHelper
 

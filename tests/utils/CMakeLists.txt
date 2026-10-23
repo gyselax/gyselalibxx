@@ -17,8 +17,8 @@ target_link_libraries(unit_tests_utils
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-        gslx::utils
-        gslx::data_types
+        gyselalibxx::utils
+        gyselalibxx::data_types
 )
 
 gtest_discover_tests(unit_tests_utils DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

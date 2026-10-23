@@ -22,7 +22,7 @@ struct X
 
 using CoordX = Coord<X>;
 
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
 
@@ -41,12 +41,10 @@ using IdxRangeX = IdxRange<GridX>;
 
 using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesX,
-        GridX,
-        ExtrapolationRule::NULL_VALUE,
-        ExtrapolationRule::NULL_VALUE,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::GREVILLE>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Null_Null,
+        SplineBoundaryClosure::Greville_Greville>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 

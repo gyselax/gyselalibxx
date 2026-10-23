@@ -12,8 +12,8 @@ target_link_libraries(unit_tests_parallelisation_layout
         DDC::core
         GTest::gtest
         GTest::gmock
-        gslx::mpi_parallelisation
-        gslx::utils
+        gyselalibxx::mpi_parallelisation
+        gyselalibxx::utils
 )
 
 gtest_discover_tests(unit_tests_parallelisation_layout DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
@@ -27,8 +27,8 @@ target_link_libraries(unit_tests_parallelisation
         DDC::core
         GTest::gtest
         GTest::gmock
-        gslx::mpi_parallelisation
-        gslx::utils
+        gyselalibxx::mpi_parallelisation
+        gyselalibxx::utils
 )
 
 function(make_mpi_test test_name)
@@ -44,5 +44,7 @@ endfunction()
 
 make_mpi_test(MPIParallelisation.AllToAll2D_CPU)
 make_mpi_test(MPIParallelisation.AllToAll2D_GPU)
+make_mpi_test(MPIParallelisation.AllToAll2D_CPU_MoreMPIs)
+make_mpi_test(MPIParallelisation.AllToAll2D_GPU_MoreMPIs)
 make_mpi_test(MPIParallelisation.AllToAll3D_CPU)
 make_mpi_test(MPIParallelisation.AllToAll4D_CPU)

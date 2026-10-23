@@ -8,7 +8,7 @@ string(STRIP "${GYSELALIBXX_VERSION_STRING}" GYSELALIBXX_VERSION_STRING)
 
 # Set project language and version
 project(gyselalibxx
-    LANGUAGES C CXX
+    LANGUAGES CXX
     VERSION ${GYSELALIBXX_VERSION_STRING})
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
@@ -40,35 +40,34 @@ if ("${GYSELALIBXX_COMPILE_SOURCE}")
 ## Use CTest for running tests
 include(CTest)
 
-find_package(LAPACK REQUIRED)
-
 find_package(MPI REQUIRED)
 
 find_package(paraconf 1.0.0...<2 REQUIRED COMPONENTS C)
 
 find_package(PDI 1.10.1...<2 REQUIRED COMPONENTS C)
 
-find_package(GTest 1.12 REQUIRED)
+find_package(Kokkos 4.4.1...<6 REQUIRED)
 
-find_package(Kokkos 4.4.1...<5 REQUIRED)
+find_package(KokkosKernels 4.5.1...<6 REQUIRED)
 
-find_package(KokkosKernels 4.5.1...<5 REQUIRED)
+find_package(DDC 0.16.0 REQUIRED COMPONENTS fft pdi splines)
 
-find_package(DDC 0.15.0 REQUIRED COMPONENTS fft pdi splines)
-
-find_package(koliop 0.1.2 REQUIRED)
+find_package(koliop 0.2.0 REQUIRED)
 
 find_package(LAPACKE REQUIRED)
 
 find_package(Ginkgo 1.8 REQUIRED)
 
-find_package(GMGPolar 2.3.1 REQUIRED)
+find_package(GMGPolar 2.4.0 REQUIRED)
 
 
 ###############################################################################################
 #                              Build libraries and executables
 ###############################################################################################
 # Our project code
+
+## Provides CMAKE_INSTALL_<dir> variables
+include(GNUInstallDirs)
 
 set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_grid xnonperiod_vx_user_defined_grid)
 set(PRECISION_VARIANTS_LIST float double)
@@ -83,7 +82,42 @@ endif()
 
 ## if tests are enabled, build the tests in `tests/`
 if("${GYSELALIBXX_BUILD_TESTING}")
+    find_package(GTest 1.12 REQUIRED)
+
     add_subdirectory(tests/)
 endif()
+
+include(CMakePackageConfigHelpers)
+
+## Installation of Config and ConfigVersion files
+
+set(GYSELALIBXX_INSTALL_CMAKEDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+
+install(FILES cmake/FindLAPACKE.cmake DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
+
+install(EXPORT gyselalibxxTargets NAMESPACE gyselalibxx:: DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
+
+configure_package_config_file(
+    cmake/gyselalibxxConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfig.cmake
+    INSTALL_DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR}
+    NO_SET_AND_CHECK_MACRO
+)
+
+# We use SameMinorVersion until major version 1
+if(PROJECT_VERSION VERSION_GREATER_EQUAL 1)
+    message(FATAL_ERROR "Gyselalibxx must switch COMPATIBILITY mode to SameMajorVersion")
+endif()
+write_basic_package_version_file(
+    ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfigVersion.cmake
+    COMPATIBILITY SameMinorVersion
+)
+
+install(
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/gyselalibxxConfigVersion.cmake
+    DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR}
+)
 
 endif() # GYSELALIBXX_COMPILE_SOURCE

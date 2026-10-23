@@ -16,7 +16,7 @@ struct X
 
 using CoordX = Coord<X>;
 
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
 
@@ -103,7 +103,7 @@ struct ComputeErrorTraits
     {
         static bool constexpr PERIODIC = false;
     };
-    struct BSplinesY : ddc::UniformBSplines<Y, 3>
+    struct BSplinesY : ddc::UniformBSplines<Y, 3, Y::PERIODIC>
     {
     };
     using GrevillePointsY = ddc::KnotsAsInterpolationPoints<
