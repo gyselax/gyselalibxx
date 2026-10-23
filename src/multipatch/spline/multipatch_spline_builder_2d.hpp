@@ -194,15 +194,15 @@ class MultipatchSplineBuilder2D
     using batched_spline_domain_type_on_patch
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedIdxRange>,
-                    ddc::detail::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
-                    ddc::detail::TypeSeq<typename Patch::BSplines1, typename Patch::BSplines2>>>;
+                    ddc::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
+                    ddc::TypeSeq<typename Patch::BSplines1, typename Patch::BSplines2>>>;
 
     template <class Patch, class BatchedIdxRange>
     using batched_derivs_domain_type_on_patch
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedIdxRange>,
-                    ddc::detail::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
-                    ddc::detail::TypeSeq<
+                    ddc::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
+                    ddc::TypeSeq<
                             ddc::Deriv<typename Patch::Dim1>,
                             ddc::Deriv<typename Patch::Dim2>>>>;
 
@@ -228,14 +228,14 @@ class MultipatchSplineBuilder2D
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedBS = detail::MultipatchType<
             typename MultipatchIdxRangeBatched::PatchOrdering,
-            ddc::detail::TypeSeq<batched_spline_domain_type_on_patch<
+            ddc::TypeSeq<batched_spline_domain_type_on_patch<
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
 
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType<
             typename MultipatchIdxRangeBatched::PatchOrdering,
-            ddc::detail::TypeSeq<batched_derivs_domain_type_on_patch<
+            ddc::TypeSeq<batched_derivs_domain_type_on_patch<
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
 

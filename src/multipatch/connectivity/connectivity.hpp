@@ -18,7 +18,7 @@ class MultipatchConnectivity
 {
 public:
     /// A type sequence of all the interfaces handled by this class.
-    using interface_collection = ddc::detail::TypeSeq<Interfaces...>;
+    using interface_collection = ddc::TypeSeq<Interfaces...>;
 
     /// A type sequence of all the edges handled by this class except the OuterEdge types.
     using inner_edges

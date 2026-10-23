@@ -49,7 +49,7 @@ public:
     }
 
     /// The TensorIndexSet describing the possible indices.
-    using index_set = ddc::detail::TypeSeq<ValidIndexSetRow, ValidIndexSetCol>;
+    using index_set = ddc::TypeSeq<ValidIndexSetRow, ValidIndexSetCol>;
 
     /**
      * @brief Construct an uninitialised tensor object.

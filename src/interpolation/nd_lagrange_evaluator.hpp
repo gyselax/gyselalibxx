@@ -55,7 +55,7 @@ private:
     using nd_minus_1_evaluator_type = std::conditional_t<
             (sizeof...(Evaluators1D) > 1),
             NDLagrangeEvaluator<Evaluators1D...>,
-            ddc::type_seq_element_t<0, ddc::detail::TypeSeq<Evaluators1D...>>>;
+            ddc::type_seq_element_t<0, ddc::TypeSeq<Evaluators1D...>>>;
 
     using HeadBasis = typename HeadEvaluator::lagrange_basis_type;
     using HeadCoeffGrid = typename HeadEvaluator::coeff_grid_type;
@@ -372,8 +372,8 @@ private:
     static KOKKOS_INLINE_FUNCTION Coord<CDim> apply_periodic_bcs(Coord<CDim> coord)
     {
         if constexpr (CDim::PERIODIC) {
-            using BasisTypes = ddc::detail::
-                    TypeSeq<HeadBasis, typename Evaluators1D::lagrange_basis_type...>;
+            using BasisTypes
+                    = ddc::TypeSeq<HeadBasis, typename Evaluators1D::lagrange_basis_type...>;
             using Basis = find_grid_t<CDim, BasisTypes>;
             if (coord < ddc::discrete_space<Basis>().rmin()
                 || coord > ddc::discrete_space<Basis>().rmax()) {
@@ -432,15 +432,15 @@ private:
             const
     {
         static_assert(
-                (ddc::in_tags_v<HeadContDim, ddc::detail::TypeSeq<CoordsDims...>>)&&(
+                (ddc::in_tags_v<HeadContDim, ddc::TypeSeq<CoordsDims...>>)&&(
                         ddc::in_tags_v<
                                 typename Evaluators1D::continuous_dimension_type,
-                                ddc::detail::TypeSeq<CoordsDims...>> && ...),
+                                ddc::TypeSeq<CoordsDims...>> && ...),
                 "Evaluation coordinate must contain the evaluation dimensions");
 
-        using DerivDimsTypeSeq = ddc::detail::TypeSeq<DerivDims...>;
-        using TailDerivDimsTypeSeq = ddc::
-                type_seq_remove_t<DerivDimsTypeSeq, ddc::detail::TypeSeq<ddc::Deriv<HeadContDim>>>;
+        using DerivDimsTypeSeq = ddc::TypeSeq<DerivDims...>;
+        using TailDerivDimsTypeSeq
+                = ddc::type_seq_remove_t<DerivDimsTypeSeq, ddc::TypeSeq<ddc::Deriv<HeadContDim>>>;
         using IdxTailDerivDims = typename ddc::detail::convert_type_seq_to_discrete_domain_t<
                 TailDerivDimsTypeSeq>::discrete_element_type;
 
