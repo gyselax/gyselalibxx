@@ -73,8 +73,7 @@ public:
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
                     ddc::to_type_seq_t<IdxRangeInterpolation>,
-                    ddc::detail::TypeSeq<
-                            typename Basis::template Impl<Basis, MemorySpace>::knot_grid...>>>;
+                    ddc::TypeSeq<typename Basis::template Impl<Basis, MemorySpace>::knot_grid...>>>;
 
     /// @brief The type of the index range on which derivatives should be provided (here unused).
     template <class BatchedInterpolationIdxRange>
@@ -156,7 +155,7 @@ private:
     {
         using Dim = typename ChosenGridDim::continuous_dimension_type;
         if constexpr (Dim::PERIODIC) {
-            using ChosenBasis = find_grid_t<Dim, ddc::detail::TypeSeq<Basis...>>;
+            using ChosenBasis = find_grid_t<Dim, ddc::TypeSeq<Basis...>>;
             using BasisKnots =
                     typename ChosenBasis::template Impl<ChosenBasis, MemorySpace>::knot_grid;
             static_assert(ddc::in_tags_v<BasisKnots, ddc::to_type_seq_t<IdxRangeFull>>);

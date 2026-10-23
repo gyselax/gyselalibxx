@@ -7,7 +7,7 @@
  * to index a vector (e.g. x to get E_x).
  */
 template <class... Dims>
-using VectorIndexSet = ddc::detail::TypeSeq<Dims...>;
+using VectorIndexSet = ddc::TypeSeq<Dims...>;
 
 /**
  * @namespace tensor_tools A namespace to group all the tools that are useful to
@@ -135,6 +135,14 @@ struct VectorIndexIdMap
 };
 
 } // namespace tensor_tools
+
+namespace ddc::detail {
+
+template <char Id, class AssociatedVectorIndexSet>
+inline constexpr bool
+        is_type_seq_v<tensor_tools::VectorIndexIdMap<Id, AssociatedVectorIndexSet>> = true;
+
+}
 
 template <class Type>
 static constexpr bool is_vector_index_set_v = tensor_tools::is_vector_index_set<Type>::value;

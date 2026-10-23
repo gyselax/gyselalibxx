@@ -82,8 +82,8 @@ public:
     /// @brief MultipatchType storing the index range.
     using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patches...>;
 
-    /// @brief Sequence ddc::detail::TypeSeq of patch tags.
-    using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
+    /// @brief Sequence ddc::TypeSeq of patch tags.
+    using PatchOrdering = ddc::TypeSeq<Patches...>;
 
     /// @brief The space (CPU/GPU) where the calculations are carried out.
     using exec_space = ExecSpace;

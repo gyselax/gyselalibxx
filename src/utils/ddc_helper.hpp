@@ -288,9 +288,9 @@ template <template <class Tag> class Templ, class TypeSeq>
 struct ApplyTemplateToTypeSeq;
 
 template <template <class Tag> class Templ, class... Tags>
-struct ApplyTemplateToTypeSeq<Templ, ddc::detail::TypeSeq<Tags...>>
+struct ApplyTemplateToTypeSeq<Templ, ddc::TypeSeq<Tags...>>
 {
-    using type = ddc::detail::TypeSeq<Templ<Tags>...>;
+    using type = ddc::TypeSeq<Templ<Tags>...>;
 };
 
 /// R contains all elements that are in A and B.
@@ -301,27 +301,24 @@ template <class TagSeqA, class TagSeqB, class TagSeqR>
 struct TypeSeqIntersection;
 
 template <class TypeSeqA, class TypeSeqR>
-struct TypeSeqIntersection<TypeSeqA, ddc::detail::TypeSeq<>, TypeSeqR>
+struct TypeSeqIntersection<TypeSeqA, ddc::TypeSeq<>, TypeSeqR>
 {
     using type = TypeSeqR;
 };
 
 template <class TypeSeqA, class HeadTagsB, class... TailTagsB, class... TagsR>
-struct TypeSeqIntersection<
-        TypeSeqA,
-        ddc::detail::TypeSeq<HeadTagsB, TailTagsB...>,
-        ddc::detail::TypeSeq<TagsR...>>
+struct TypeSeqIntersection<TypeSeqA, ddc::TypeSeq<HeadTagsB, TailTagsB...>, ddc::TypeSeq<TagsR...>>
 {
     using type = std::conditional_t<
             ddc::in_tags_v<HeadTagsB, TypeSeqA>,
             typename TypeSeqIntersection<
                     TypeSeqA,
-                    ddc::detail::TypeSeq<TailTagsB...>,
-                    ddc::detail::TypeSeq<TagsR..., HeadTagsB>>::type,
+                    ddc::TypeSeq<TailTagsB...>,
+                    ddc::TypeSeq<TagsR..., HeadTagsB>>::type,
             typename TypeSeqIntersection<
                     TypeSeqA,
-                    ddc::detail::TypeSeq<TailTagsB...>,
-                    ddc::detail::TypeSeq<TagsR...>>::type>;
+                    ddc::TypeSeq<TailTagsB...>,
+                    ddc::TypeSeq<TagsR...>>::type>;
 };
 
 
@@ -329,7 +326,7 @@ template <class ValidIndexSet>
 struct ToCoord;
 
 template <class... Dims>
-struct ToCoord<ddc::detail::TypeSeq<Dims...>>
+struct ToCoord<ddc::TypeSeq<Dims...>>
 {
     using type = Coord<Dims...>;
 };
@@ -368,7 +365,7 @@ using apply_template_to_type_seq_t = typename detail::ApplyTemplateToTypeSeq<Tem
 /// A helper to find all types which are found in both TypeSeq1 and TypeSeq2
 template <class TypeSeq1, class TypeSeq2>
 using type_seq_intersection_t =
-        typename detail::TypeSeqIntersection<TypeSeq1, TypeSeq2, ddc::detail::TypeSeq<>>::type;
+        typename detail::TypeSeqIntersection<TypeSeq1, TypeSeq2, ddc::TypeSeq<>>::type;
 
 /// Get a coordinate from a TypeSeq
 template <class ValidIndexSet>

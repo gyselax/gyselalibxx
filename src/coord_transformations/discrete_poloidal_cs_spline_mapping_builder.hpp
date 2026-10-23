@@ -271,9 +271,9 @@ private:
     using RefinedSplineEvaluator = ddc::SplineEvaluatorND<
             ExecSpace,
             MemorySpace,
-            ddc::detail::TypeSeq<BSplinesRRefined, BSplinesThetaRefined>,
-            ddc::detail::TypeSeq<GridRRefined, GridThetaRefined>,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<BSplinesRRefined, BSplinesThetaRefined>,
+            ddc::TypeSeq<GridRRefined, GridThetaRefined>,
+            ddc::TypeSeq<
                     typename SplineEvaluator::template lower_extrapolation_rule_type<0>,
                     typename SplineEvaluator::template upper_extrapolation_rule_type<0>,
                     typename SplineEvaluator::template lower_extrapolation_rule_type<1>,

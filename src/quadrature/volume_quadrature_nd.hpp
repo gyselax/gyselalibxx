@@ -52,7 +52,7 @@ DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space> compute_coeffs_on_ma
     using IdxJacobian = find_idx_t<CoordJacobian, IdxRangeCoeffs>;
     using TypeSeqJacobian = ddc::to_type_seq_t<IdxJacobian>;
     // Strip any Grids not found in the index range
-    using TypeSeqJ = ddc::type_seq_remove_t<TypeSeqJacobian, ddc::detail::TypeSeq<void>>;
+    using TypeSeqJ = ddc::type_seq_remove_t<TypeSeqJacobian, ddc::TypeSeq<void>>;
     using IdxRangeJ = ddc::detail::convert_type_seq_to_discrete_domain_t<TypeSeqJ>;
     using IdxJ = typename IdxRangeJ::discrete_element_type;
     using CoordJ = ddc::coordinate_of_t<IdxJ>;

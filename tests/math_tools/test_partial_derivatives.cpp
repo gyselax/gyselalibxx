@@ -260,9 +260,9 @@ public:
     using SplineInterpPointsY
             = ddc::GrevilleInterpolationPoints<BSplinesY, SplineClosure, SplineClosure>;
 
-    using BSplinesDDim = find_grid_t<DDim, ddc::detail::TypeSeq<BSplinesX, BSplinesY>>;
+    using BSplinesDDim = find_grid_t<DDim, ddc::TypeSeq<BSplinesX, BSplinesY>>;
 
-    using GridDDim = find_grid_t<DDim, ddc::detail::TypeSeq<GridX, GridY>>;
+    using GridDDim = find_grid_t<DDim, ddc::TypeSeq<GridX, GridY>>;
 
     using SplineInterpPointsDDim
             = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsX, SplineInterpPointsY>;
