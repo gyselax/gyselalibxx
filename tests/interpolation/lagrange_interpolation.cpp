@@ -310,12 +310,16 @@ DataType get_cosine_error(
     Field<DataType, IdxRange<TestGridType>> values_at_test_points(values_at_test_points_alloc);
     evaluator.deriv(deriv_order, values_at_test_points, get_const_field(lagrange_coeffs));
 
+    int const n_deriv
+            = (deriv_order - Idx<ddc::Deriv<typename GridType::continuous_dimension_type>>(0))
+                      .value();
+
     return error_norm_inf(
             Kokkos::DefaultExecutionSpace(),
             get_const_field(values_at_test_points),
             KOKKOS_LAMBDA(Idx<TestGridType> idx) {
-                return static_cast<DataType>(Kokkos::cos(
-                        0.5 * Kokkos::numbers::pi * deriv_order.uid() + ddc::coordinate(idx)));
+                return static_cast<DataType>(
+                        Kokkos::cos(0.5 * Kokkos::numbers::pi * n_deriv + ddc::coordinate(idx)));
             });
 }
 
