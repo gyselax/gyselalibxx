@@ -60,29 +60,29 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 get_field(m_operator_quantities.m_B_norm_allocation),
                 B_norm);
-        /* Koliop's Bstar_s is needed in a format layout different from the
-         * rest of the code. It is needed in layout right
-         * [sp, theta, r, vpar] where as the input is in [sp, vpar].
-         * We simply iterate over [sp, theta, r, vpar] and copy the input
-         * [sp, vpar] for every theta, r.
+        /* Koliop's Bstar_s is needed in a format layout different from the rest of the code. It is needed in layout
+         * right [sp, theta, r, vpar] where as the input is in [sp, vpar]. We simply iterate over [sp, theta, r, vpar]
+         * and copy the input [sp, vpar] for every theta, r.
          */
         CollisionConfigurationDataType::transpose_replicate_deep_copy(
                 get_field(m_operator_quantities.m_Bstar_s_allocation),
                 Bstar_s);
-        /* When collisions only are tested, what matter is nu_ref * dt, we
-         * choose to only change dt.
+        /* When collisions only are tested, what matter is nu_ref * dt, we choose to only change dt.
          */
-        // m_operator_quantities.m_nu_ref = 1.0;
+        if (m_operator_quantities.m_nu_ref != 1.0) {
+            throw std::logic_error(
+                    "nu_ref should be fixed at 1, use dt only to change collisionality.");
+        }
         ddc::parallel_fill(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(m_operator_quantities.m_coeff_AD_allocation),
-                Kokkos::sqrt(2.0));
+                m_operator_quantities.m_nu_ref * Kokkos::sqrt(2.0));
         Kokkos::fence();
     }
 
     /**
-     * @brief Can be used to obtain the quantities the operator needs for its
-     * initialisation, modification is not authorised.
+     * @brief Can be used to obtain the quantities the operator needs for its initialisation, modification is not
+     * authorized.
      *
      * @return const CollisionConfigurationDataType&
      */
