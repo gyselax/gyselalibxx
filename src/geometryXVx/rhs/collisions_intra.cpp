@@ -8,6 +8,16 @@
 #include "fluid_moments.hpp"
 #include "matrix_batch_tridiag.hpp"
 
+template <class TargetDim>
+KOKKOS_FUNCTION Idx<TargetDim> CollisionsIntra::to_index(
+        Idx<GridVx> const& index,
+        Idx<GridVx> const& first_index)
+{
+    static_assert(
+            std::is_same_v<TargetDim, GhostedVx> || std::is_same_v<TargetDim, GhostedVxStaggered>);
+    return Idx<TargetDim>(0) + IdxStep<TargetDim>((index - first_index).value() + 1);
+}
+
 // The "Spoof" variables will be identical to the non-spoof versions. They are simply used
 // to prevent the compiler from trying to compile code for the non-uniform case when splines
 // are uniform.
@@ -25,28 +35,30 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<GridVxSpoof>> CollisionsIntra
     CoordVx const v1 = ddc::coordinate(idx_range.front() + 1);
     CoordVx const vN = ddc::coordinate(idx_range.back());
     CoordVx const vNm1 = ddc::coordinate(idx_range.back() - 1);
-    int const ncells(idx_range.size() - 1);
+    size_t const ncells(idx_range.size() - 1);
 
     // ghosted points
-    int const npoints(ncells + 3);
+    size_t const npoints(ncells + 3);
     std::vector<CoordVx> breaks(npoints);
     breaks[0] = v0 - (v1 - v0);
     breaks[npoints - 1] = vN + (vN - vNm1);
-    ddc::host_for_each(idx_range, [&](IdxVx const iv) {
-        breaks[(iv - idx_range.front()).value() + 1] = ddc::coordinate(iv);
-    });
+    for (size_t iv = 0; iv < npoints - 1; ++iv) {
+        breaks[iv] = ddc::coordinate(idx_range.front() + iv);
+    }
     ddc::init_discrete_space<GhostedVxSpoof>(breaks);
 
     // ghosted staggered points
-    int const npoints_stag(ncells + 2);
+    size_t const npoints_stag(ncells + 2);
     std::vector<CoordVx> breaks_stag(npoints_stag);
     breaks_stag[0] = v0 - (v1 - v0) / 2.;
     breaks_stag[npoints_stag - 1] = vN + (vN - vNm1) / 2.;
     IdxRangeVx const gridv_less(idx_range.remove_last(IdxStepVx(1)));
-    ddc::host_for_each(gridv_less, [&](IdxVx const iv) {
-        breaks_stag[(iv - idx_range.front()).value() + 1]
-                = CoordVx((ddc::coordinate(iv) + ddc::coordinate(iv + 1)) / 2.);
-    });
+    for (size_t iv = 0; iv < npoints_stag - 1; ++iv) {
+        breaks_stag[iv] = CoordVx(
+                (ddc::coordinate(gridv_less.front() + iv)
+                 + ddc::coordinate(gridv_less.front() + iv + 1))
+                / 2.);
+    }
     ddc::init_discrete_space<GhostedVxStaggeredSpoof>(breaks_stag);
 }
 
@@ -137,12 +149,6 @@ void CollisionsIntra::compute_matrix_coeff(
         double deltat) const
 {
     IdxVx const ivx_first = get_idx_range<GridVx>(AA).front();
-
-    // The ghosted grids contain one ghost point before the first GridVx point
-    IdxVx_ghosted const ivx_ghosted_first = m_gridvx_ghosted.front() + 1;
-    IdxVx_ghosted_staggered const ivx_ghosted_staggered_first
-            = m_gridvx_ghosted_staggered.front() + 1;
-
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(AA),
@@ -150,9 +156,10 @@ void CollisionsIntra::compute_matrix_coeff(
                 IdxSp const isp = ddc::select<Species>(ispxvx);
                 IdxX const ix = ddc::select<GridX>(ispxvx);
                 IdxVx const ivx = ddc::select<GridVx>(ispxvx);
-                IdxVx_ghosted ivx_ghosted(ivx_ghosted_first + (ivx - ivx_first).value());
+
+                IdxVx_ghosted ivx_ghosted(to_index<GhostedVx>(ivx, ivx_first));
                 IdxVx_ghosted_staggered ivx_ghosted_staggered(
-                        ivx_ghosted_staggered_first + (ivx - ivx_first).value());
+                        to_index<GhostedVxStaggered>(ivx, ivx_first));
                 IdxVx_ghosted ivx_next_ghosted(ivx_ghosted + 1);
                 IdxVx_ghosted ivx_prev_ghosted(ivx_ghosted - 1);
                 IdxVx_ghosted_staggered ivx_prev_ghosted_staggered(ivx_ghosted_staggered - 1);
