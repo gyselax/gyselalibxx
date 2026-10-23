@@ -37,7 +37,7 @@ struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
 
-using IdxStepX = IdxStep<X>;
+using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 using DFieldMemX = DFieldMem<IdxRangeX>;
 

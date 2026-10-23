@@ -6,7 +6,7 @@
 
 namespace {
 
-struct GridX
+struct GridX : ddc::DiscreteDimension
 {
 };
 

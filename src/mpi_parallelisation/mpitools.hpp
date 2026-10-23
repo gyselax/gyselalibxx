@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+
 #include <mpi.h>
+
+#include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
 
@@ -10,7 +13,7 @@
  * be collected from.
  */
 template <class DistributedDim>
-struct MPIDim
+struct MPIDim : ddc::DiscreteDimension
 {
     /// The dimension which is distributed over the MPI ranks.
     using distributed_dim = DistributedDim;

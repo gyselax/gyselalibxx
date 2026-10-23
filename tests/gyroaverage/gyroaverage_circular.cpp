@@ -40,10 +40,14 @@ struct Theta
     using Dual = Theta_cov;
 };
 
-struct Mu;
+struct Mu : ddc::DiscreteDimension
+{
+};
 
 /// A dummy dimension used to check batching
-struct Batch;
+struct Batch : ddc::DiscreteDimension
+{
+};
 
 // --- Spline definitions
 int constexpr BSDegreeR = 3;
