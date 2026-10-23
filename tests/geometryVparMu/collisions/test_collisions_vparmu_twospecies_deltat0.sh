@@ -28,29 +28,29 @@ rm -f -- "${LOG_FILE}"
     echo "1.delta_t_at_zero"
     mkdir 1.delta_t_at_zero && cd 1.delta_t_at_zero
     sed "s/\(deltat:\) .*/\1 0./" "${INPUT_YAML_FILE}" >case.yaml
-    "${COLL_EXEC}" case.yaml 1>&2
+    /usr/bin/time --verbose "${COLL_EXEC}" case.yaml 1>&2
     ../../validate.py coll_00000.h5 coll_00001.h5 fdistribu || true
-    ../../validate.py coll_00001.h5 ../../references/1.delta_t_at_zero/coll_00001.h5 fdistribu || true
+    ../../validate.py coll_00001.h5 ../../references/1.delta_t_at_zero/coll_00001.h5 fdistribu
     cd ..
     ################################################################################
     # coll_1specie_maxwellian
     echo "2.coll_1specie_maxwellian"
     mkdir 2.coll_1specie_maxwellian && cd 2.coll_1specie_maxwellian
-    "${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_1specie_maxwellian.yaml" 1>&2
-    ../../validate.py coll_00010.h5 ../../references/2.coll_1specie_maxwellian/coll_00010.h5 fdistribu || true
+    /usr/bin/time --verbose "${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_1specie_maxwellian.yaml" 1>&2
+    ../../validate.py coll_00010.h5 ../../references/2.coll_1specie_maxwellian/coll_00010.h5 fdistribu
     cd ..
     ################################################################################
     # coll_2species_maxwellian_differentT
     echo "3.coll_2species_maxwellian_differentT"
     mkdir 3.coll_2species_maxwellian_differentT && cd 3.coll_2species_maxwellian_differentT
-    "${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_2species_maxwellian_differentT.yaml" 1>&2
-    ../../validate.py coll_00010.h5 ../../references/3.coll_2species_maxwellian_differentT/coll_00010.h5 fdistribu || true
+    /usr/bin/time --verbose "${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_2species_maxwellian_differentT.yaml" 1>&2
+    ../../validate.py coll_00010.h5 ../../references/3.coll_2species_maxwellian_differentT/coll_00010.h5 fdistribu
     cd ..
     ################################################################################
     # coll_2species_maxwellian_differentV
     echo "4.coll_2species_maxwellian_differentV"
     mkdir 4.coll_2species_maxwellian_differentV && cd 4.coll_2species_maxwellian_differentV
-    "${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_2species_maxwellian_differentV.yaml" 1>&2
-    ../../validate.py coll_00010.h5 ../../references/4.coll_2species_maxwellian_differentV/coll_00010.h5 fdistribu || true
+    /usr/bin/time --verbose "${COLL_EXEC}" "${PWD}/../../../../../simulations/geometryVparMu/collisions/coll_2species_maxwellian_differentV.yaml" 1>&2
+    ../../validate.py coll_00010.h5 ../../references/4.coll_2species_maxwellian_differentV/coll_00010.h5 fdistribu
     cd ..
 } | tee "${LOG_FILE}"

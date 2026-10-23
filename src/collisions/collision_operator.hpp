@@ -43,22 +43,10 @@ public:
     explicit CollisionOperator(CollisionConfigurationType const& collision_configuration)
         : m_collision_configuration {collision_configuration}
         , m_operator {
-                  collision_configuration.configuration().m_mu_extent,
-                  collision_configuration.configuration().m_vpar_extent,
                   collision_configuration.configuration().m_theta_extent,
                   collision_configuration.configuration().m_r_extent,
                   collision_configuration.configuration().m_phi_extent,
-                  collision_configuration.configuration().m_species_extent,
-                  collision_configuration.configuration().m_r_extent,
-                  collision_configuration.configuration().m_theta_extent,
-                  0,
-                  0,
                   collision_configuration.configuration().m_collisions_interspecies,
-                  false,
-                  true,
-                  /* One less than the number of point in the r direction. */
-                  0 /* Null offset */
-                          + collision_configuration.configuration().m_r_extent - 1,
                   CollisionConfigurationDataType::as_layout_left(
                           collision_configuration.configuration()
                                   .m_hat_As_allocation.allocation_kokkos_view()),
@@ -80,12 +68,6 @@ public:
                   CollisionConfigurationDataType::as_layout_left(
                           collision_configuration.configuration()
                                   .m_coeff_AD_allocation.allocation_kokkos_view()),
-                  CollisionConfigurationDataType::as_layout_left(
-                          collision_configuration.configuration()
-                                  .m_mask_buffer_r_allocation.allocation_kokkos_view()),
-                  CollisionConfigurationDataType::as_layout_left(
-                          collision_configuration.configuration()
-                                  .m_mask_LIM_allocation.allocation_kokkos_view()),
                   CollisionConfigurationDataType::as_layout_left(
                           collision_configuration.configuration()
                                   .m_B_norm_allocation.allocation_kokkos_view()),
