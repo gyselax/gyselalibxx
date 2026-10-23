@@ -6,7 +6,7 @@
 #include "noperturbinitialisation.hpp"
 
 
-explicit NoPerturbInitialisation::NoPerturbInitialisation(DConstFieldSpVparMu fequilibrium)
+NoPerturbInitialisation::NoPerturbInitialisation(DConstFieldSpVparMu fequilibrium)
     : m_fequilibrium(fequilibrium)
 {
 }
