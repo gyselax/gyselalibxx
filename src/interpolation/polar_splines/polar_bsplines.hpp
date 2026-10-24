@@ -943,12 +943,10 @@ DField<IdxRange<DDim>, MemorySpace> integrals(
     std::size_t n_singular_theta = singular_2d_idx_range.template extent<BSplinesTheta>().value();
 
     IdxRange<DDim> singular_idx_range = DDim::template singular_idx_range<DDim>();
-    Kokkos::parallel_for(
-            Kokkos::TeamPolicy<>(execution_space, singular_idx_range.size(), Kokkos::AUTO),
-            KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                const int idx = team.league_rank();
-                Idx<DDim> k(idx);
-
+    ddc::parallel_for_each_team(
+            execution_space,
+            singular_idx_range,
+            KOKKOS_LAMBDA(const ddc::TeamPolicyMember<ExecSpace>& team, Idx<DDim> k) {
                 // Sum over quadrature dimensions
                 double teamSum = 0;
                 Kokkos::parallel_reduce(

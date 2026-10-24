@@ -129,10 +129,6 @@ public:
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
                 "Execution space is not compatible with memory space where coefficients are found");
-        static_assert(
-                std::is_same_v<ExecutionSpace, Kokkos::DefaultExecutionSpace>,
-                "Kokkos::TeamPolicy only works with the default execution space. Please use "
-                "DefaultExecutionSpace to call this batched operator.");
         using ExpectedBatchDims = ddc::type_seq_remove_t<
                 ddc::to_type_seq_t<IdxRangeTotal>,
                 ddc::to_type_seq_t<IdxRangeQuadrature>>;
@@ -165,12 +161,12 @@ public:
 
         QuadConstField const coeff_proxy = m_coefficients;
         // Loop over batch dimensions
-        Kokkos::parallel_for(
-                Kokkos::TeamPolicy<>(exec_space, batch_idx_range.size(), Kokkos::AUTO),
-                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const int idx = team.league_rank();
-                    IdxBatch ib = to_discrete_element(idx, batch_idx_range);
-
+        ddc::parallel_for_each_team(
+                exec_space,
+                batch_idx_range,
+                KOKKOS_LAMBDA(
+                        ddc::TeamPolicyMember<ExecutionSpace> const& team,
+                        IdxBatch const ib) {
                     // Sum over quadrature dimensions
                     DataType teamSum = 0;
                     Kokkos::parallel_reduce(

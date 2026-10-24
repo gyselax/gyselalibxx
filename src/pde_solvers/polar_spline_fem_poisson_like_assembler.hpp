@@ -916,17 +916,13 @@ public:
 
         // Calculate the matrix elements following a stencil
         // Teams loop over rows
-        Kokkos::parallel_for(
+        ddc::parallel_for_each_team(
                 location.function_name(),
-                Kokkos::TeamPolicy<>(
-                        Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_tensor_basis.size(),
-                        Kokkos::AUTO),
-                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    // Calculate the index of the test b-spline
-                    IdxBSPolar const idx_test_polar(
-                            idxrange_fem_non_singular_front + IdxStepBSPolar {team.league_rank()});
-
+                Kokkos::DefaultExecutionSpace(),
+                m_idxrange_fem_tensor_basis,
+                KOKKOS_LAMBDA(
+                        ddc::TeamPolicyMember<Kokkos::DefaultExecutionSpace> const& team,
+                        IdxBSPolar const idx_test_polar) {
                     // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
                     const IdxBSR idx_test_r(idx_test);
