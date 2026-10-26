@@ -12,7 +12,7 @@
 namespace detail {
 
 /**
- * @brief Not all simulations expose r,theta,phi (tor1, tor2, tor3) so we "spoof" the presence of the dimensions. This
+ * @brief Not all simulations expose theta,r,phi (tor1, tor2, tor3) so we "spoof" the presence of the dimensions. This
  * is the class from which fake dimensions inherit. These fake dimensions are inserted in order to match Koliop's
  * interface. These fake dimensions are then assigned to an: IdxRange<Grid1D>(Idx<Grid1D> {0}, IdxStep<Grid1D> {1}); See
  * create_scalar_index_range();
@@ -22,35 +22,36 @@ struct InternalSpoofGrid
 };
 
 /**
+ * @brief Fake toroidal dimension to be used if there is no toroidal dimension in the simulation.
+ */
+struct InternalSpoofGridTor3 : InternalSpoofGrid
+{
+};
+
+/**
  * @brief Fake radial dimension to be used if there is no radial dimension in the simulation.
  */
-struct InternalSpoofGridR : InternalSpoofGrid
+struct InternalSpoofGridTor2 : InternalSpoofGrid
 {
 };
 
 /**
  * @brief Fake poloidal dimension to be used if there is no poloidal dimension in the simulation.
  */
-struct InternalSpoofGridTheta : InternalSpoofGrid
+struct InternalSpoofGridTor1 : InternalSpoofGrid
 {
 };
 
 /**
- * @brief Fake toroidal dimension to be used if there is no toroidal dimension in the simulation.
- */
-struct InternalSpoofGridPhi : InternalSpoofGrid
-{
-};
-
-/**
- * @brief A storage class for the fields the collision operator requires.
+ * @brief A storage class for the fields the collision operator requires. For a tokamak geometry, tor1 is expected to be
+ * theta, tor2 r and tor3 phi.
  */
 template <
         class IdxRangeDistributionFunction,
         class Species,
-        class GridPhi,
-        class GridR,
-        class GridTheta,
+        class GridTor3,
+        class GridTor2,
+        class GridTor1,
         class GridVpar,
         class GridMu>
 class CollisionConfigurationData
@@ -80,21 +81,26 @@ public:
             DConstField<IdxRange<GridVpar>> coeff_intdvpar)
         : m_hat_As_allocation {extract_md_index_range<Species>(index_range_fdistribution)}
         , m_hat_Zs_allocation {extract_md_index_range<Species>(index_range_fdistribution)}
-        , m_B_norm_allocation {extract_md_index_range<GridTheta, GridR>(index_range_fdistribution)}
-        , m_Bstar_s_allocation {extract_md_index_range<Species, GridTheta, GridR, GridVpar>(
+        , m_B_norm_allocation {extract_md_index_range<GridTor3, GridTor2, GridTor1>(
                   index_range_fdistribution)}
+        , m_Bstar_s_allocation {extract_md_index_range<
+                  Species,
+                  GridTor3,
+                  GridTor2,
+                  GridTor1,
+                  GridVpar>(index_range_fdistribution)}
         , m_mug_allocation {extract_md_index_range<GridMu>(index_range_fdistribution)}
         , m_vparg_allocation {extract_md_index_range<GridVpar>(index_range_fdistribution)}
         , m_coeff_intdmu {coeff_intdmu}
         , m_coeff_intdvpar {coeff_intdvpar}
-        , m_coeff_AD_allocation {extract_md_index_range<GridR>(index_range_fdistribution)}
+        , m_coeff_AD_allocation {extract_md_index_range<GridTor2>(index_range_fdistribution)}
         , m_nu_ref {::PCpp_double(yaml_input_file, ".Collisions.nu_ref")}
         , m_collisions_interspecies {::PCpp_bool(yaml_input_file, ".Collisions.interspecies")}
         , m_mu_extent {extract_md_index_range<GridMu>(index_range_fdistribution).size()}
         , m_vpar_extent {extract_md_index_range<GridVpar>(index_range_fdistribution).size()}
-        , m_theta_extent {extract_md_index_range<GridTheta>(index_range_fdistribution).size()}
-        , m_r_extent {extract_md_index_range<GridR>(index_range_fdistribution).size()}
-        , m_phi_extent {extract_md_index_range<GridPhi>(index_range_fdistribution).size()}
+        , m_theta_extent {extract_md_index_range<GridTor1>(index_range_fdistribution).size()}
+        , m_r_extent {extract_md_index_range<GridTor2>(index_range_fdistribution).size()}
+        , m_phi_extent {extract_md_index_range<GridTor3>(index_range_fdistribution).size()}
         , m_species_extent {extract_md_index_range<Species>(index_range_fdistribution).size()}
     {
         /* Define default array values. The user of CollisionConfigurationData is free to modify these.
@@ -264,12 +270,12 @@ public:
     /**
      * @brief B norm in (theta,r). [TODO] Attention this must be 3D for generalisation to 3D geometry.
      */
-    DFieldMem<IdxRange<GridTheta, GridR>> m_B_norm_allocation;
+    DFieldMem<IdxRange<GridTor3, GridTor2, GridTor1>> m_B_norm_allocation;
 
     /**
-     * @brief Bstar_s(species,theta,r,vpar). [TODO] Must be 5D for full 3D geometry.
+     * @brief Bstar_s(species,theta,r,vpar).
      */
-    DFieldMem<IdxRange<Species, GridTheta, GridR, GridVpar>> m_Bstar_s_allocation;
+    DFieldMem<IdxRange<Species, GridTor3, GridTor2, GridTor1, GridVpar>> m_Bstar_s_allocation;
 
     /**
      * @brief Grid in mu direction.
@@ -296,7 +302,7 @@ public:
      * nu_ref*sqrt(2) because masking on the r profile can be useful, notably because collision can behave badly on the
      * colder edges.
      */
-    DFieldMem<IdxRange<GridR>> m_coeff_AD_allocation;
+    DFieldMem<IdxRange<GridTor2>> m_coeff_AD_allocation;
 
     /**
      * @brief Collisionality, not used as is, instead, used to build a radial profile (coeff_AD).

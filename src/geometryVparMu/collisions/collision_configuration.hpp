@@ -24,9 +24,9 @@ public:
     using CollisionConfigurationDataType = detail::CollisionConfigurationData<
             IdxRangeDistributionFunctionType,
             Species,
-            detail::InternalSpoofGridPhi,
-            detail::InternalSpoofGridR,
-            detail::InternalSpoofGridTheta,
+            detail::InternalSpoofGridTor3,
+            detail::InternalSpoofGridTor2,
+            detail::InternalSpoofGridTor1,
             GridVpar,
             GridMu>;
 
@@ -54,7 +54,8 @@ public:
                   coeff_intdmu,
                   coeff_intdvpar}
     {
-        /* B_norm is a scalar when there is no Theta nor R dimensions.
+        /* B_norm is a scalar when there is no Theta nor R dimensions. We should avoid copying it, it can get quite
+         * large.
          */
         ddc::parallel_fill(
                 Kokkos::DefaultExecutionSpace(),
