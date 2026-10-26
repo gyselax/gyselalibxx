@@ -273,7 +273,8 @@ public:
     DFieldMem<IdxRange<GridTor3, GridTor2, GridTor1>> m_B_norm_allocation;
 
     /**
-     * @brief Bstar_s(species,theta,r,vpar).
+     * @brief Bstar_s(species,theta,r,vpar). We should avoid copying it, it can get quite large. This should match what
+     * koliop expects but can also be cheaply changed in koliop for whatever fits better the geometry of the simulation.
      */
     DFieldMem<IdxRange<Species, GridTor3, GridTor2, GridTor1, GridVpar>> m_Bstar_s_allocation;
 

@@ -54,8 +54,7 @@ public:
                   coeff_intdmu,
                   coeff_intdvpar}
     {
-        /* B_norm is a scalar when there is no Theta nor R dimensions. We should avoid copying it, it can get quite
-         * large.
+        /* B_norm is a scalar when there is no Theta nor R dimensions.
          */
         ddc::parallel_fill(
                 Kokkos::DefaultExecutionSpace(),
