@@ -23,6 +23,7 @@ echo "Dump the default configuration: '${INPUT_YAML_FILE}'"
 LOG_FILE="${PWD}/../mi250x.hipcc.adastra.spack.log"
 rm -f -- "${LOG_FILE}"
 {
+    timedatectl
     ################################################################################
     # dt=0, checks the projection/reconstruction
     echo "1.delta_t_at_zero"
