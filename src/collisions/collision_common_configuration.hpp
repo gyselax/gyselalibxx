@@ -268,7 +268,7 @@ public:
     DFieldMem<IdxRange<Species>> m_hat_Zs_allocation;
 
     /**
-     * @brief B norm in (theta,r). [TODO] Attention this must be 3D for generalisation to 3D geometry.
+     * @brief B norm in (theta,r,phi).
      */
     DFieldMem<IdxRange<GridTor3, GridTor2, GridTor1>> m_B_norm_allocation;
 
