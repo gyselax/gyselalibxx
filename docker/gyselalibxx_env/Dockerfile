@@ -130,11 +130,12 @@ RUN chmod +x /bin/bash_run \
  && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $GMGPolar_ROOT \
  && rm -rf build \
- && rm -rf kokkos kokkos-fft kokkos-kernels kokkos-tools ddc gmgpolar \
+ && rm -rf kokkos kokkos-fft kokkos-kernels kokkos-tools libkoliop ddc GMGPolar \
  && git clone --branch v1.17.0 --depth 1 https://github.com/google/googletest.git \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
  && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix /opt/googletest \
+ && rm -rf build googletest \
  && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build -DUSE_MATCHCOMPILER=ON -DCMAKE_BUILD_TYPE=Release \
