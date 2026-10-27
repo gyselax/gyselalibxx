@@ -280,9 +280,11 @@ class CompositeSplineBuilder3D
 {
     using Traits1 = InterpolationBuilderTraits<Builder1>;
     using Traits23 = InterpolationBuilderTraits<Builder23>;
-    // The per-dimension traits of the 2D builder are obtained from the 1D builders that it uses
-    using Traits2 = InterpolationBuilderTraits<typename Builder23::builder_type1>;
-    using Traits3 = InterpolationBuilderTraits<typename Builder23::builder_type2>;
+    // The per-dimension properties of the 2D builder are obtained from the 1D builders that it uses
+    using Builder2 = typename Builder23::builder_type1;
+    using Builder3 = typename Builder23::builder_type2;
+    using Traits2 = InterpolationBuilderTraits<Builder2>;
+    using Traits3 = InterpolationBuilderTraits<Builder3>;
 
     static_assert(Traits23::rank() == 2);
     static_assert(std::is_same_v<typename Builder1::exec_space, typename Builder23::exec_space>);
@@ -422,5 +424,256 @@ public:
         return ::batched_basis_idx_range(
                 m_builder23,
                 ::batched_basis_idx_range(m_builder1, batched_interpolation_idx_range));
+    }
+
+    /**
+     * @brief Compute a 3D spline approximation of a function.
+     *
+     * Use the values of a function and the derivatives of the function at the boundaries
+     * (in the case of Hermite boundary conditions only) to calculate the coefficients of a
+     * 3D spline approximation of this function.
+     *
+     * @param[out] coeffs The coefficients of the spline.
+     * @param[in] vals The values of the function at the interpolation mesh.
+     * @param[in] derivs_min1 The values of the derivatives at the lower boundary in the first dimension.
+     * @param[in] derivs_max1 The values of the derivatives at the upper boundary in the first dimension.
+     * @param[in] derivs_min2 The values of the derivatives at the lower boundary in the second dimension.
+     * @param[in] derivs_max2 The values of the derivatives at the upper boundary in the second dimension.
+     * @param[in] derivs_min3 The values of the derivatives at the lower boundary in the third dimension.
+     * @param[in] derivs_max3 The values of the derivatives at the upper boundary in the third dimension.
+     * @param[in] mixed_derivs_min1_min2 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension and the lower boundary in the second dimension.
+     * @param[in] mixed_derivs_max1_min2 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension and the lower boundary in the second dimension.
+     * @param[in] mixed_derivs_min1_max2 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension and the upper boundary in the second dimension.
+     * @param[in] mixed_derivs_max1_max2 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension and the upper boundary in the second dimension.
+     * @param[in] mixed_derivs_min2_min3 The values of the cross-derivatives at the lower boundary
+     *      in the second dimension and the lower boundary in the third dimension.
+     * @param[in] mixed_derivs_max2_min3 The values of the cross-derivatives at the upper boundary
+     *      in the second dimension and the lower boundary in the third dimension.
+     * @param[in] mixed_derivs_min2_max3 The values of the cross-derivatives at the lower boundary
+     *      in the second dimension and the upper boundary in the third dimension.
+     * @param[in] mixed_derivs_max2_max3 The values of the cross-derivatives at the upper boundary
+     *      in the second dimension and the upper boundary in the third dimension.
+     * @param[in] mixed_derivs_min1_min3 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension and the lower boundary in the third dimension.
+     * @param[in] mixed_derivs_max1_min3 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension and the lower boundary in the third dimension.
+     * @param[in] mixed_derivs_min1_max3 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension and the upper boundary in the third dimension.
+     * @param[in] mixed_derivs_max1_max3 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension and the upper boundary in the third dimension.
+     * @param[in] mixed_derivs_min1_min2_min3 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension, the lower boundary in the second dimension and the lower
+     *      boundary in the third dimension.
+     * @param[in] mixed_derivs_max1_min2_min3 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension, the lower boundary in the second dimension and the lower
+     *      boundary in the third dimension.
+     * @param[in] mixed_derivs_min1_max2_min3 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension, the upper boundary in the second dimension and the lower
+     *      boundary in the third dimension.
+     * @param[in] mixed_derivs_max1_max2_min3 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension, the upper boundary in the second dimension and the lower
+     *      boundary in the third dimension.
+     * @param[in] mixed_derivs_min1_min2_max3 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension, the lower boundary in the second dimension and the upper
+     *      boundary in the third dimension.
+     * @param[in] mixed_derivs_max1_min2_max3 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension, the lower boundary in the second dimension and the upper
+     *      boundary in the third dimension.
+     * @param[in] mixed_derivs_min1_max2_max3 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension, the upper boundary in the second dimension and the upper
+     *      boundary in the third dimension.
+     * @param[in] mixed_derivs_max1_max2_max3 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension, the upper boundary in the second dimension and the upper
+     *      boundary in the third dimension.
+     */
+    template <class IdxRangeBatchedInterpolation, class Layout>
+    void operator()(
+            Field<data_type,
+                  batched_basis_idx_range_type<IdxRangeBatchedInterpolation>,
+                  memory_space,
+                  Layout> coeffs,
+            ConstField<data_type, IdxRangeBatchedInterpolation, memory_space, Layout> vals,
+            std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_min1
+            = std::nullopt,
+            std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_max1
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_min2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_max2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_max3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1_2<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_min2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1_2<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_min2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1_2<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_max2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1_2<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_max2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type2_3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min2_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type2_3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max2_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type2_3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min2_max3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type2_3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max2_max3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1_3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1_3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1_3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_max3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1_3<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_max3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_min2_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_min2_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_max2_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_max2_min3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_min2_max3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_min2_max3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_max2_max3
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_max2_max3
+            = std::nullopt) const
+    {
+        static_assert(
+                Builder2::s_sbc_xmin != ddc::SplineBuilderClosure::HERMITE
+                        && Builder2::s_sbc_xmax != ddc::SplineBuilderClosure::HERMITE
+                        && Builder3::s_sbc_xmin != ddc::SplineBuilderClosure::HERMITE
+                        && Builder3::s_sbc_xmax != ddc::SplineBuilderClosure::HERMITE,
+                "Hermite boundary conditions are not yet supported in the second and third "
+                "dimensions");
+
+        // Do not return early if the batch index range is empty as Builder1 may require
+        // the participation of all MPI ranks.
+
+        // Build the coefficients along the first dimension
+        FieldMem<data_type,
+                 typename Traits1::template batched_basis_idx_range_type<
+                         IdxRangeBatchedInterpolation>,
+                 memory_space>
+                coeffs1_alloc(::batched_basis_idx_range(m_builder1, get_idx_range(vals)));
+        m_builder1(get_field(coeffs1_alloc), vals, derivs_min1, derivs_max1);
+
+        // Build the coefficients along the second and third dimensions
+        m_builder23(coeffs, get_const_field(coeffs1_alloc));
     }
 };

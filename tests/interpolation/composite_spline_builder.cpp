@@ -213,6 +213,7 @@ struct SplineConfig
 using ConfigXGreville = SplineConfig<BSplinesX, ddc::SplineBuilderClosure::GREVILLE>;
 using ConfigXHermite = SplineConfig<BSplinesX, ddc::SplineBuilderClosure::HERMITE>;
 using ConfigYPeriodic = SplineConfig<BSplinesY, ddc::SplineBuilderClosure::PERIODIC>;
+using ConfigZGreville = SplineConfig<BSplinesZ, ddc::SplineBuilderClosure::GREVILLE>;
 using ConfigZHermite = SplineConfig<BSplinesZ, ddc::SplineBuilderClosure::HERMITE>;
 
 void init_bsplines()
@@ -242,64 +243,62 @@ KOKKOS_FUNCTION double test_function_1d(Coord<Dim> coord, int deriv_order = 0)
 /**
  * Fill a field with the values of the test function at the interpolation points.
  * The test function is constant along the batch dimensions.
+ *
+ * @tparam Dims The interpolation dimensions.
  */
-template <class... Grids>
+template <class... Dims, class... Grids>
 void fill_with_test_values(DField<IdxRange<Grids...>> vals)
 {
-    using Grid1 = ddc::type_seq_element_t<sizeof...(Grids) - 2, ddc::detail::TypeSeq<Grids...>>;
-    using Grid2 = ddc::type_seq_element_t<sizeof...(Grids) - 1, ddc::detail::TypeSeq<Grids...>>;
+    using GridTypeSeq = ddc::detail::TypeSeq<Grids...>;
     ddc::parallel_for_each(
             ExecSpace(),
             get_idx_range(vals),
             KOKKOS_LAMBDA(Idx<Grids...> idx) {
-                vals(idx) = test_function_1d(ddc::coordinate(Idx<Grid1>(idx)))
-                            * test_function_1d(ddc::coordinate(Idx<Grid2>(idx)));
+                vals(idx)
+                        = (test_function_1d(
+                                   ddc::coordinate(Idx<find_grid_t<Dims, GridTypeSeq>>(idx)))
+                           * ...);
             });
 }
 
 /**
+ * Evaluate the 1D test function along Dim at an index. If the index is defined along the
+ * derivative dimension ddc::Deriv<Dim> then the derivative of the order given by the index
+ * is evaluated at the boundary. Otherwise the test function is evaluated at the coordinate
+ * of the index and the boundary is unused.
+ */
+template <class Dim, class... Grids>
+KOKKOS_FUNCTION double test_function_on_dim(Idx<Grids...> idx, Coord<Dim> boundary)
+{
+    using GridTypeSeq = ddc::detail::TypeSeq<Grids...>;
+    if constexpr (ddc::in_tags_v<ddc::Deriv<Dim>, GridTypeSeq>) {
+        int const deriv_order = (Idx<ddc::Deriv<Dim>>(idx) - Idx<ddc::Deriv<Dim>>(0)).value();
+        return test_function_1d(boundary, deriv_order);
+    } else {
+        return test_function_1d(ddc::coordinate(Idx<find_grid_t<Dim, GridTypeSeq>>(idx)));
+    }
+}
+
+/**
  * Fill a field with the values of the test function where the field is defined along
- * derivative dimensions. Along each of Dim1 and Dim2 the field is defined either on an
- * interpolation grid or on the derivative dimension ddc::Deriv<Dim>. Along a derivative
+ * derivative dimensions. Along each interpolation dimension the field is defined either on
+ * an interpolation grid or on the derivative dimension ddc::Deriv<Dim>. Along a derivative
  * dimension the derivative of the order given by the index is evaluated at the boundary.
  * The test function is constant along any other (batch) dimensions.
  *
  * @param[out] derivs The field to be filled.
- * @param[in] boundary1 The boundary at which derivatives along Dim1 are evaluated.
- *          Unused if the field is not defined along ddc::Deriv<Dim1>.
- * @param[in] boundary2 The boundary at which derivatives along Dim2 are evaluated.
- *          Unused if the field is not defined along ddc::Deriv<Dim2>.
+ * @param[in] boundaries The boundary of each interpolation dimension at which derivatives
+ *          are evaluated. A boundary is unused if the field is not defined along the
+ *          derivative dimension of that interpolation dimension.
  */
-template <class Dim1, class Dim2, class... Grids>
-void fill_with_test_derivs(
-        DField<IdxRange<Grids...>> derivs,
-        Coord<Dim1> boundary1,
-        Coord<Dim2> boundary2)
+template <class... Grids, class... Dims>
+void fill_with_test_derivs(DField<IdxRange<Grids...>> derivs, Coord<Dims>... boundaries)
 {
-    using GridTypeSeq = ddc::detail::TypeSeq<Grids...>;
-    using Grid1 = find_grid_t<Dim1, GridTypeSeq>;
-    using Grid2 = find_grid_t<Dim2, GridTypeSeq>;
     ddc::parallel_for_each(
             ExecSpace(),
             get_idx_range(derivs),
             KOKKOS_LAMBDA(Idx<Grids...> idx) {
-                double val1;
-                if constexpr (ddc::in_tags_v<ddc::Deriv<Dim1>, GridTypeSeq>) {
-                    int const deriv_order
-                            = (Idx<ddc::Deriv<Dim1>>(idx) - Idx<ddc::Deriv<Dim1>>(0)).value();
-                    val1 = test_function_1d(boundary1, deriv_order);
-                } else {
-                    val1 = test_function_1d(ddc::coordinate(Idx<Grid1>(idx)));
-                }
-                double val2;
-                if constexpr (ddc::in_tags_v<ddc::Deriv<Dim2>, GridTypeSeq>) {
-                    int const deriv_order
-                            = (Idx<ddc::Deriv<Dim2>>(idx) - Idx<ddc::Deriv<Dim2>>(0)).value();
-                    val2 = test_function_1d(boundary2, deriv_order);
-                } else {
-                    val2 = test_function_1d(ddc::coordinate(Idx<Grid2>(idx)));
-                }
-                derivs(idx) = val1 * val2;
+                derivs(idx) = (test_function_on_dim(idx, boundaries) * ...);
             });
 }
 
@@ -367,7 +366,7 @@ void check_composite_2d_against_ddc(IdxRange<BatchGrids...> idx_range_batch = Id
     Coord<Dim2> const max2 = ddc::coordinate(idx_range_2.back());
 
     DFieldMem<IdxRangeBatched> vals_alloc(idx_range_batched);
-    fill_with_test_values(get_field(vals_alloc));
+    fill_with_test_values<Dim1, Dim2>(get_field(vals_alloc));
 
     auto idx_range_derivs1 = builder1.batched_derivs_xmin_domain(idx_range_batched);
     DFieldMem<decltype(idx_range_derivs1)> derivs_min1_alloc(idx_range_derivs1);
@@ -421,6 +420,102 @@ void check_composite_2d_against_ddc(IdxRange<BatchGrids...> idx_range_batch = Id
             std::optional(get_const_field(mixed_derivs_max1_min2_alloc)),
             std::optional(get_const_field(mixed_derivs_min1_max2_alloc)),
             std::optional(get_const_field(mixed_derivs_max1_max2_alloc)));
+
+    EXPECT_LE(
+            max_abs_difference(get_const_field(coeffs_alloc), get_const_field(ref_coeffs_alloc)),
+            1e-13);
+}
+
+/**
+ * Check that the CompositeSplineBuilder3D gives the same coefficients as ddc::SplineBuilder3D.
+ *
+ * @param idx_range_batch The index range of the batch dimensions (if any). These grids must
+ *          already be initialised.
+ */
+template <class Config1, class Config2, class Config3, class... BatchGrids>
+void check_composite_3d_against_ddc(IdxRange<BatchGrids...> idx_range_batch = IdxRange<>())
+{
+    using Grid1 = typename Config1::Grid;
+    using Grid2 = typename Config2::Grid;
+    using Grid3 = typename Config3::Grid;
+    using Builder1 = typename Config1::Builder;
+    using Builder23 = ddc::SplineBuilder2D<
+            ExecSpace,
+            MemSpace,
+            typename Config2::bsplines_type,
+            typename Config3::bsplines_type,
+            Grid2,
+            Grid3,
+            Config2::closure,
+            Config2::closure,
+            Config3::closure,
+            Config3::closure,
+            ddc::SplineSolver::LAPACK>;
+    using Builder = CompositeSplineBuilder3D<Builder1, Builder23>;
+    using RefBuilder = ddc::SplineBuilder3D<
+            ExecSpace,
+            MemSpace,
+            typename Config1::bsplines_type,
+            typename Config2::bsplines_type,
+            typename Config3::bsplines_type,
+            Grid1,
+            Grid2,
+            Grid3,
+            Config1::closure,
+            Config1::closure,
+            Config2::closure,
+            Config2::closure,
+            Config3::closure,
+            Config3::closure,
+            ddc::SplineSolver::LAPACK>;
+
+    static_assert(concepts::InterpolationBuilder<Builder>);
+
+    using IdxRangeBatched = IdxRange<BatchGrids..., Grid1, Grid2, Grid3>;
+
+    init_bsplines();
+    IdxRange<Grid1> idx_range_1 = Config1::init_grid();
+    IdxRange<Grid2> idx_range_2 = Config2::init_grid();
+    IdxRange<Grid3> idx_range_3 = Config3::init_grid();
+    IdxRange<Grid1, Grid2, Grid3> idx_range(idx_range_1, idx_range_2, idx_range_3);
+    IdxRangeBatched idx_range_batched(idx_range_batch, idx_range);
+
+    Builder1 builder1(idx_range);
+    Builder23 builder23(idx_range);
+    Builder builder(builder1, builder23);
+    RefBuilder ref_builder(idx_range);
+
+    using Dim1 = typename Grid1::continuous_dimension_type;
+    using Dim2 = typename Grid2::continuous_dimension_type;
+    using Dim3 = typename Grid3::continuous_dimension_type;
+    Coord<Dim1> const min1 = ddc::coordinate(idx_range_1.front());
+    Coord<Dim1> const max1 = ddc::coordinate(idx_range_1.back());
+    Coord<Dim2> const min2 = ddc::coordinate(idx_range_2.front());
+    Coord<Dim3> const min3 = ddc::coordinate(idx_range_3.front());
+
+    DFieldMem<IdxRangeBatched> vals_alloc(idx_range_batched);
+    fill_with_test_values<Dim1, Dim2, Dim3>(get_field(vals_alloc));
+
+    auto idx_range_derivs1 = builder1.batched_derivs_xmin_domain(idx_range_batched);
+    DFieldMem<decltype(idx_range_derivs1)> derivs_min1_alloc(idx_range_derivs1);
+    DFieldMem<decltype(idx_range_derivs1)> derivs_max1_alloc(idx_range_derivs1);
+    fill_with_test_derivs(get_field(derivs_min1_alloc), min1, min2, min3);
+    fill_with_test_derivs(get_field(derivs_max1_alloc), max1, min2, min3);
+
+    using IdxRangeCoeffs = typename Builder::template batched_basis_idx_range_type<IdxRangeBatched>;
+    DFieldMem<IdxRangeCoeffs> coeffs_alloc(builder.batched_basis_idx_range(idx_range_batched));
+    DFieldMem<IdxRangeCoeffs> ref_coeffs_alloc(
+            ref_builder.batched_spline_domain(idx_range_batched));
+
+    builder(get_field(coeffs_alloc),
+            get_const_field(vals_alloc),
+            std::optional(get_const_field(derivs_min1_alloc)),
+            std::optional(get_const_field(derivs_max1_alloc)));
+    ref_builder(
+            get_field(ref_coeffs_alloc),
+            get_const_field(vals_alloc),
+            std::optional(get_const_field(derivs_min1_alloc)),
+            std::optional(get_const_field(derivs_max1_alloc)));
 
     EXPECT_LE(
             max_abs_difference(get_const_field(coeffs_alloc), get_const_field(ref_coeffs_alloc)),
@@ -560,4 +655,14 @@ TEST(CompositeSplineBuilder3D, BatchedBasisIdxRange)
     EXPECT_EQ(
             builder.batched_basis_idx_range(idx_range_xbyz),
             ref_builder.batched_spline_domain(idx_range_xbyz));
+}
+
+TEST(CompositeSplineBuilder3D, GrevillePeriodicGreville)
+{
+    check_composite_3d_against_ddc<ConfigXGreville, ConfigYPeriodic, ConfigZGreville>();
+}
+
+TEST(CompositeSplineBuilder3D, HermitePeriodicGreville)
+{
+    check_composite_3d_against_ddc<ConfigXHermite, ConfigYPeriodic, ConfigZGreville>();
 }
