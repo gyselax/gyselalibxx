@@ -47,9 +47,6 @@ runs:
         # Save the CSV to the outputs for use in the build-push-action
         print("full_tags=", full_tags, file=open(os.environ["GITHUB_OUTPUT"], 'a'), sep='')
       shell: python
-    - name: Set up QEMU
-      if: steps.rebuild-check.outputs.rebuild == 'true'
-      uses: docker/setup-qemu-action@v4
     - name: Set up Docker Buildx
       if: steps.rebuild-check.outputs.rebuild == 'true'
       uses: docker/setup-buildx-action@v4
