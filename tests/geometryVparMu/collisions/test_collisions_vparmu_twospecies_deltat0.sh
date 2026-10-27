@@ -16,7 +16,7 @@ function finish {
 trap finish EXIT QUIT ABRT KILL SEGV TERM STOP
 
 REFERENCE_DIRECTORY="${PWD}/references"
-if [[ "$(hostname)" == "persee" ]]; then
+if hostname | grep -q '^persee'; then
     REFERENCE_DIRECTORY="/data/gyselarunner/gyselalibxx_references/tests/geometryVparMu/collisions"
 fi
 cd -- "${TMPDIR}"
