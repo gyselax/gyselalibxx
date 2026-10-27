@@ -495,4 +495,24 @@ using extract_sub_tensor_element_t = typename details::ExtractSubTensorElement<
         TypeSeqVectorIndexIdMapLocal,
         GlobalTensorIndexElement>::type;
 
+/**
+ * @brief Get the TensorIndexElement representing the element with the same contents in a symmetric matrix.
+ *
+ * I.e. return the TensorIndexElement describing A_{ik} when given the TensorIndexElement describing A_{ki}.
+ * @tparam TensorIndexElem A TensorIndexElement.
+ */
+template <class TensorIndexElem>
+using symmetric_tensor_element_t = TensorIndexElement<
+        typename TensorIndexElem::tensor_index_set,
+        ddc::type_seq_element_t<
+                ddc::type_seq_rank_v<
+                        ddc::type_seq_element_t<1, typename TensorIndexElem::IdxTypeSeq>,
+                        ddc::type_seq_element_t<1, typename TensorIndexElem::tensor_index_set>>,
+                ddc::type_seq_element_t<0, typename TensorIndexElem::tensor_index_set>>,
+        ddc::type_seq_element_t<
+                ddc::type_seq_rank_v<
+                        ddc::type_seq_element_t<0, typename TensorIndexElem::IdxTypeSeq>,
+                        ddc::type_seq_element_t<0, typename TensorIndexElem::tensor_index_set>>,
+                ddc::type_seq_element_t<1, typename TensorIndexElem::tensor_index_set>>>;
+
 } // namespace tensor_tools
