@@ -112,7 +112,7 @@ jobs:
           - name: 'clang'
             c_compiler: 'clang'
             cxx_compiler: 'clang++'
-            glibc_tunables: 'glibc.malloc.tcache_count=32'
+            glibc_tunables: 'glibc.malloc.tcache_count=64'
         exclude:
           - toolchain: 'ci_coverage_toolchain'
             compiler:
