@@ -42,7 +42,8 @@ extend-exclude = ["*.tex",
                   "*.sty",
                   "*.js",
                   "*.svg",
-                  "*.css"
+                  "*.css",
+                  "*.log"
                   ]
 
 [type.md]
