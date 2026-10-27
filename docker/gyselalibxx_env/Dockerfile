@@ -49,7 +49,7 @@ RUN chmod +x /bin/bash_run \
  && git clone --branch v1.11.0 --depth 1 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build \
  && cd .. \
  && rm -rf ginkgo \
@@ -68,31 +68,31 @@ RUN chmod +x /bin/bash_run \
  && export DDC_ROOT=/opt/serial/DDC \
  && export GMGPolar_ROOT=/opt/serial/GMGPolar \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_SERIAL=ON -B build -S kokkos \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $Kokkos_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-fft \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $KokkosFFT_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-kernels \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $KokkosKernels_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $KokkosTools_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S libkoliop \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $koliop_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $DDC_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S GMGPolar \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $GMGPolar_ROOT \
  && rm -rf build \
  && export Kokkos_ROOT=/opt/openmp/Kokkos \
@@ -103,42 +103,42 @@ RUN chmod +x /bin/bash_run \
  && export DDC_ROOT=/opt/openmp/DDC \
  && export GMGPolar_ROOT=/opt/openmp/GMGPolar \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_OPENMP=ON -B build -S kokkos \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $Kokkos_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-fft \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $KokkosFFT_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-kernels \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $KokkosKernels_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $KokkosTools_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S libkoliop \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $koliop_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $DDC_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S GMGPolar \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix $GMGPolar_ROOT \
  && rm -rf build \
  && rm -rf kokkos kokkos-fft kokkos-kernels kokkos-tools ddc gmgpolar \
  && git clone --branch v1.17.0 --depth 1 https://github.com/google/googletest.git \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build --prefix /opt/googletest \
  && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build -DUSE_MATCHCOMPILER=ON -DCMAKE_BUILD_TYPE=Release \
- && cmake --build build \
+ && cmake --build build --parallel $(nproc) \
  && cmake --install build \
  && cd .. \
  && rm -rf cppcheck \
