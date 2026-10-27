@@ -210,3 +210,30 @@ The tools are:
 ## Orthogonal coordinate transformation
 
 A coordinate transformation that is comprised of coordinate transformation components which are orthogonal to one another.
+
+## Changing the vector space of a vector
+
+The function `to_vector_space` (in `vector_mapper.hpp`) expresses a vector $v$ on a different vector space.
+There are two kinds of change:
+
+- A change of variance (contravariant ↔ covariant) in the same coordinate system.
+  This takes a metric tensor $G$ (e.g. a `MetricTensorEvaluator`).
+- A change of coordinate system with the same variance.
+  This takes a mapping $\mathcal{F} : q \mapsto p$, where $q$ are the argument coordinates and $p$ are the result coordinates.
+  $J$ denotes its Jacobian matrix.
+
+| Case | Takes | Computation |
+| --- | --- | --- |
+| Same vector space | Mapping or metric tensor | $v$ is returned unchanged |
+| Contravariant → covariant, same coordinate system | Metric tensor | $G v$ |
+| Covariant → contravariant, same coordinate system | Metric tensor | $G^{-1} v$ |
+| Argument basis → result basis, contravariant | Mapping | $J v$ |
+| Argument basis → result basis, covariant | Mapping | $J^{-T} v$ |
+| Result basis → argument basis, contravariant | Mapping | $J^{-1} v$ |
+| Result basis → argument basis, covariant | Mapping | $J^T v$ |
+
+A Cartesian basis is both covariant and contravariant, so a change to or from the Cartesian space is always a change of coordinate system.
+To change both the coordinate system and the variance, call `to_vector_space` twice: once with the mapping and once with the metric tensor.
+
+The functions `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` apply the same operations to every element of a vector field.
+They also take either a mapping or a metric tensor.

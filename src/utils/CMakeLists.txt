@@ -10,6 +10,7 @@ target_sources("utils"
         FILE_SET HEADERS
             FILES
                 assert.hpp
+                coord_or_idx.hpp
                 ddc_alias_inline_functions.hpp
                 ddc_aliases.hpp
                 ddc_helper.hpp
