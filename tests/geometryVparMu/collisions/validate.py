@@ -130,8 +130,8 @@ def compare_hdf5(reference_file, approximation_file, dataset_name):
     print(
         f"MAXVAL(ABS(a-r)/ABS(r))     : {name} {max_relative_error:.17e} ABS(a-r) at argmax relative error: {max_absolute_error_at_max_relative_error_location:.17e}"
     )
-    print(f"degenerated reference       : {name} {has_degenerated_reference}")
-    print(f"degenerated approximation   : {name} {has_degenerated_approximation}")
+    print(f"Degenerated reference       : {name} {has_degenerated_reference}")
+    print(f"Degenerated approximation   : {name} {has_degenerated_approximation}")
     print(f"Max absolute error index    : {max_abs_index}")
     print(f"Max relative error index    : {max_rel_index}")
 

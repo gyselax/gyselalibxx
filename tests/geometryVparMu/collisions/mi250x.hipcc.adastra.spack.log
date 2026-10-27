@@ -1,3 +1,11 @@
+g1000
+               Local time: Tue 2026-10-27 10:12:40 CET
+           Universal time: Tue 2026-10-27 09:12:40 UTC
+                 RTC time: Tue 2026-10-27 09:12:40
+                Time zone: Europe/Paris (CET, +0100)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
 1.delta_t_at_zero
 [WARNING]: Non conformity past tolerances detected!
 For dataset 'fdistribu' with shape (2, 128, 64):
@@ -5,8 +13,8 @@ NORM2 (r, a, a-r)           : fdistribu 4.88588747729375050e-01 4.88102455785750
 NORM2(a-r) / NORM2(r)       : fdistribu 1.76044510335071061e-03
 MAXVAL(ABS(a-r))            : fdistribu 1.68554803848530721e-04 ABS(a-r)/ABS(r) at argmax ABS(a-r): 2.65763668919319351e-03
 MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 2.71915349378160753e-01 ABS(a-r) at argmax relative error: 3.46956194975346092e-12
-degenerated reference       : fdistribu False
-degenerated approximation   : fdistribu False
+Degenerated reference       : fdistribu False
+Degenerated approximation   : fdistribu False
 Max absolute error index    : (np.int64(0), np.int64(63), np.int64(0))
 Max relative error index    : (np.int64(1), np.int64(63), np.int64(63))
 For dataset 'fdistribu' with shape (2, 128, 64):
@@ -14,37 +22,64 @@ NORM2 (r, a, a-r)           : fdistribu 4.88102455785750566e-01 4.88102455785750
 NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
 MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
 MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
-degenerated reference       : fdistribu False
-degenerated approximation   : fdistribu False
+Degenerated reference       : fdistribu False
+Degenerated approximation   : fdistribu False
 Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
 Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
 2.coll_1specie_maxwellian
+For dataset 'fdistribu' with shape (1, 128, 64):
+NORM2 (r, a, a-r)           : fdistribu 4.88588747695835934e-01 4.88588747695835934e-01 0.00000000000000000e+00
+NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
+MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
+MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
+Degenerated reference       : fdistribu False
+Degenerated approximation   : fdistribu False
+Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
+Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
 For dataset 'fdistribu' with shape (1, 128, 64):
 NORM2 (r, a, a-r)           : fdistribu 4.88351913108320934e-01 4.88351913108320934e-01 0.00000000000000000e+00
 NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
 MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
 MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
-degenerated reference       : fdistribu False
-degenerated approximation   : fdistribu False
+Degenerated reference       : fdistribu False
+Degenerated approximation   : fdistribu False
 Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
 Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
 3.coll_2species_maxwellian_differentT
+For dataset 'fdistribu' with shape (2, 128, 64):
+NORM2 (r, a, a-r)           : fdistribu 4.88588747729375050e-01 4.88588747729375050e-01 0.00000000000000000e+00
+NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
+MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
+MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
+Degenerated reference       : fdistribu False
+Degenerated approximation   : fdistribu False
+Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
+Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
 For dataset 'fdistribu' with shape (2, 128, 64):
 NORM2 (r, a, a-r)           : fdistribu 4.95206589404007635e-01 4.95206589404007635e-01 0.00000000000000000e+00
 NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
 MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
 MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
-degenerated reference       : fdistribu False
-degenerated approximation   : fdistribu False
+Degenerated reference       : fdistribu False
+Degenerated approximation   : fdistribu False
 Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
 Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
 4.coll_2species_maxwellian_differentV
+For dataset 'fdistribu' with shape (2, 128, 64):
+NORM2 (r, a, a-r)           : fdistribu 4.88588747735164475e-01 4.88588747735164475e-01 0.00000000000000000e+00
+NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
+MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
+MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
+Degenerated reference       : fdistribu False
+Degenerated approximation   : fdistribu False
+Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
+Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
 For dataset 'fdistribu' with shape (2, 128, 64):
 NORM2 (r, a, a-r)           : fdistribu 4.95206619075261201e-01 4.95206619075261201e-01 0.00000000000000000e+00
 NORM2(a-r) / NORM2(r)       : fdistribu 0.00000000000000000e+00
 MAXVAL(ABS(a-r))            : fdistribu 0.00000000000000000e+00 ABS(a-r)/ABS(r) at argmax ABS(a-r): 0.00000000000000000e+00
 MAXVAL(ABS(a-r)/ABS(r))     : fdistribu 0.00000000000000000e+00 ABS(a-r) at argmax relative error: 0.00000000000000000e+00
-degenerated reference       : fdistribu False
-degenerated approximation   : fdistribu False
+Degenerated reference       : fdistribu False
+Degenerated approximation   : fdistribu False
 Max absolute error index    : (np.int64(0), np.int64(0), np.int64(0))
 Max relative error index    : (np.int64(0), np.int64(0), np.int64(0))
