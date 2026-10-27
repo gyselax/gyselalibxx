@@ -102,6 +102,7 @@ gtest_discover_tests(lagrange_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TI
 add_executable(spline_interpolation_tests
     ../main.cpp
     spline_interpolation.cpp
+    composite_spline_builder.cpp
 )
 target_link_libraries(spline_interpolation_tests
     PUBLIC
