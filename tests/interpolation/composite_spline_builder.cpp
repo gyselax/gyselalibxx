@@ -57,14 +57,19 @@ struct BSplinesZ : ddc::UniformBSplines<Z, Degree, Z::PERIODIC>
 
 auto constexpr ClosureX = ddc::SplineBuilderClosure::GREVILLE;
 auto constexpr ClosureY = ddc::SplineBuilderClosure::PERIODIC;
+auto constexpr ClosureZ = ddc::SplineBuilderClosure::GREVILLE;
 
 using SplineInterpPointsX = ddc::GrevilleInterpolationPoints<BSplinesX, ClosureX, ClosureX>;
 using SplineInterpPointsY = ddc::GrevilleInterpolationPoints<BSplinesY, ClosureY, ClosureY>;
+using SplineInterpPointsZ = ddc::GrevilleInterpolationPoints<BSplinesZ, ClosureZ, ClosureZ>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
 struct GridY : SplineInterpPointsY::interpolation_discrete_dimension_type
+{
+};
+struct GridZ : SplineInterpPointsZ::interpolation_discrete_dimension_type
 {
 };
 struct GridBatch : UniformGridBase<Batch>
@@ -73,6 +78,8 @@ struct GridBatch : UniformGridBase<Batch>
 
 using IdxRangeXY = IdxRange<GridX, GridY>;
 using IdxRangeXBatchY = IdxRange<GridX, GridBatch, GridY>;
+using IdxRangeXYZ = IdxRange<GridX, GridY, GridZ>;
+using IdxRangeXBatchYZ = IdxRange<GridX, GridBatch, GridY, GridZ>;
 
 using ExecSpace = Kokkos::DefaultExecutionSpace;
 using MemSpace = ExecSpace::memory_space;
@@ -108,12 +115,53 @@ using RefBuilderXY = ddc::SplineBuilder2D<
         ClosureY,
         ddc::SplineSolver::LAPACK>;
 
+using BuilderZ = ddc::SplineBuilder<
+        ExecSpace,
+        MemSpace,
+        BSplinesZ,
+        GridZ,
+        ClosureZ,
+        ClosureZ,
+        ddc::SplineSolver::LAPACK>;
+using BuilderYZ = ddc::SplineBuilder2D<
+        ExecSpace,
+        MemSpace,
+        BSplinesY,
+        BSplinesZ,
+        GridY,
+        GridZ,
+        ClosureY,
+        ClosureY,
+        ClosureZ,
+        ClosureZ,
+        ddc::SplineSolver::LAPACK>;
+
+using BuilderXYZ = CompositeSplineBuilder3D<BuilderX, BuilderYZ>;
+using RefBuilderXYZ = ddc::SplineBuilder3D<
+        ExecSpace,
+        MemSpace,
+        BSplinesX,
+        BSplinesY,
+        BSplinesZ,
+        GridX,
+        GridY,
+        GridZ,
+        ClosureX,
+        ClosureX,
+        ClosureY,
+        ClosureY,
+        ClosureZ,
+        ClosureZ,
+        ddc::SplineSolver::LAPACK>;
+
 void init_discrete_spaces()
 {
     ddc::init_discrete_space<BSplinesX>(Coord<X>(0.0), Coord<X>(1.0), IdxStep<GridX>(10));
     ddc::init_discrete_space<BSplinesY>(Coord<Y>(0.0), Coord<Y>(2.0), IdxStep<GridY>(12));
+    ddc::init_discrete_space<BSplinesZ>(Coord<Z>(0.0), Coord<Z>(1.5), IdxStep<GridZ>(8));
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     ddc::init_discrete_space<GridY>(SplineInterpPointsY::get_sampling<GridY>());
+    ddc::init_discrete_space<GridZ>(SplineInterpPointsZ::get_sampling<GridZ>());
     ddc::init_discrete_space<GridBatch>(
             GridBatch::init(Coord<Batch>(0.0), Coord<Batch>(1.0), IdxStep<GridBatch>(4)));
 }
@@ -123,6 +171,14 @@ IdxRangeXY get_interpolation_idx_range()
     return IdxRangeXY(
             SplineInterpPointsX::get_domain<GridX>(),
             SplineInterpPointsY::get_domain<GridY>());
+}
+
+IdxRangeXYZ get_interpolation_idx_range_3d()
+{
+    return IdxRangeXYZ(
+            SplineInterpPointsX::get_domain<GridX>(),
+            SplineInterpPointsY::get_domain<GridY>(),
+            SplineInterpPointsZ::get_domain<GridZ>());
 }
 
 /**
@@ -163,7 +219,7 @@ void init_bsplines()
 {
     ddc::init_discrete_space<BSplinesX>(Coord<X>(0.0), Coord<X>(1.0), IdxStep<GridX>(10));
     ddc::init_discrete_space<BSplinesY>(Coord<Y>(0.0), Coord<Y>(2.0), IdxStep<GridY>(12));
-    ddc::init_discrete_space<BSplinesZ>(Coord<Z>(0.0), Coord<Z>(1.5), 8);
+    ddc::init_discrete_space<BSplinesZ>(Coord<Z>(0.0), Coord<Z>(1.5), IdxStep<GridZ>(8));
 }
 
 /**
@@ -445,4 +501,63 @@ TEST(CompositeSplineBuilder2D, HermiteHermiteBatched)
             GridBatch::init(Coord<Batch>(0.0), Coord<Batch>(1.0), IdxStep<GridBatch>(4)));
     IdxRange<GridBatch> idx_range_batch(Idx<GridBatch>(0), IdxStep<GridBatch>(4));
     check_composite_2d_against_ddc<ConfigXHermite, ConfigZHermite>(idx_range_batch);
+}
+
+TEST(CompositeSplineBuilder3D, Types)
+{
+    using RefTraits = InterpolationBuilderTraits<RefBuilderXYZ>;
+    static_assert(std::is_same_v<BuilderXYZ::exec_space, RefBuilderXYZ::exec_space>);
+    static_assert(std::is_same_v<BuilderXYZ::memory_space, RefBuilderXYZ::memory_space>);
+    static_assert(std::is_same_v<BuilderXYZ::data_type, RefTraits::data_type>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::interpolation_idx_range_type,
+                  RefTraits::interpolation_idx_range_type>);
+    static_assert(
+            std::is_same_v<BuilderXYZ::coeff_idx_range_type, RefTraits::coeff_idx_range_type>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::batched_basis_idx_range_type<IdxRangeXBatchYZ>,
+                  RefBuilderXYZ::batched_spline_domain_type<IdxRangeXBatchYZ>>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::batched_derivs_idx_range_type1<IdxRangeXBatchYZ>,
+                  RefBuilderXYZ::batched_derivs_domain_type1<IdxRangeXBatchYZ>>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::batched_derivs_idx_range_type2<IdxRangeXBatchYZ>,
+                  RefBuilderXYZ::batched_derivs_domain_type2<IdxRangeXBatchYZ>>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::batched_derivs_idx_range_type3<IdxRangeXBatchYZ>,
+                  RefBuilderXYZ::batched_derivs_domain_type3<IdxRangeXBatchYZ>>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::batched_derivs_idx_range_type1_2<IdxRangeXBatchYZ>,
+                  RefBuilderXYZ::batched_derivs_domain_type1_2<IdxRangeXBatchYZ>>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::batched_derivs_idx_range_type2_3<IdxRangeXBatchYZ>,
+                  RefBuilderXYZ::batched_derivs_domain_type2_3<IdxRangeXBatchYZ>>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::batched_derivs_idx_range_type1_3<IdxRangeXBatchYZ>,
+                  RefBuilderXYZ::batched_derivs_domain_type1_3<IdxRangeXBatchYZ>>);
+    static_assert(std::is_same_v<
+                  BuilderXYZ::batched_derivs_idx_range_type<IdxRangeXBatchYZ>,
+                  RefBuilderXYZ::batched_derivs_domain_type<IdxRangeXBatchYZ>>);
+}
+
+TEST(CompositeSplineBuilder3D, BatchedBasisIdxRange)
+{
+    init_discrete_spaces();
+    IdxRangeXYZ idx_range_xyz = get_interpolation_idx_range_3d();
+    IdxRangeXBatchYZ idx_range_xbyz(
+            ddc::select<GridX>(idx_range_xyz),
+            IdxRange<GridBatch>(Idx<GridBatch>(0), IdxStep<GridBatch>(4)),
+            ddc::select<GridY, GridZ>(idx_range_xyz));
+
+    BuilderX builder_x(idx_range_xyz);
+    BuilderYZ builder_yz(idx_range_xyz);
+    BuilderXYZ builder(builder_x, builder_yz);
+    RefBuilderXYZ ref_builder(idx_range_xyz);
+
+    EXPECT_EQ(
+            builder.batched_basis_idx_range(idx_range_xyz),
+            ref_builder.batched_spline_domain(idx_range_xyz));
+    EXPECT_EQ(
+            builder.batched_basis_idx_range(idx_range_xbyz),
+            ref_builder.batched_spline_domain(idx_range_xbyz));
 }

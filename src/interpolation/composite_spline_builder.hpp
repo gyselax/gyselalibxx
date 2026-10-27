@@ -261,3 +261,166 @@ public:
                 coeffs1_derivs_max2);
     }
 };
+
+/**
+ * @brief A 3D spline builder which combines a 1D builder and a 2D builder.
+ *
+ * The 1D builder is used to compute the spline coefficients along the first dimension
+ * (e.g. using an operator which distributes the work with MPI). The 2D builder (a
+ * ddc::SplineBuilder2D) is then used to compute the spline coefficients along the second
+ * and third dimensions. The algorithm is the same as the one used in ddc::SplineBuilder3D.
+ *
+ * The dimensions handled by the 2D builder must be fully available on each MPI rank.
+ *
+ * @tparam Builder1 The 1D builder used along the first dimension.
+ * @tparam Builder23 The 2D builder (ddc::SplineBuilder2D) used along the second and third dimensions.
+ */
+template <concepts::InterpolationBuilder1D Builder1, concepts::InterpolationBuilder Builder23>
+class CompositeSplineBuilder3D
+{
+    using Traits1 = InterpolationBuilderTraits<Builder1>;
+    using Traits23 = InterpolationBuilderTraits<Builder23>;
+    // The per-dimension traits of the 2D builder are obtained from the 1D builders that it uses
+    using Traits2 = InterpolationBuilderTraits<typename Builder23::builder_type1>;
+    using Traits3 = InterpolationBuilderTraits<typename Builder23::builder_type2>;
+
+    static_assert(Traits23::rank() == 2);
+    static_assert(std::is_same_v<typename Builder1::exec_space, typename Builder23::exec_space>);
+    static_assert(std::is_same_v<typename Builder1::memory_space, typename Builder23::memory_space>);
+    static_assert(std::is_same_v<typename Traits1::data_type, typename Traits23::data_type>);
+
+public:
+    /// @brief The type of the Kokkos execution space used by this class.
+    using exec_space = typename Builder1::exec_space;
+
+    /// @brief The type of the Kokkos memory space used by this class.
+    using memory_space = typename Builder1::memory_space;
+
+    /// @brief The data type that the data is saved on.
+    using data_type = typename Traits1::data_type;
+
+    /// @brief The type of the builder used along the first dimension.
+    using builder_type1 = Builder1;
+
+    /// @brief The type of the builder used along the second and third dimensions.
+    using builder_type_2_3 = Builder23;
+
+    /// @brief The 3D index range for the interpolation mesh.
+    using interpolation_idx_range_type = ddc::combine_t<
+            typename Traits1::interpolation_idx_range_type,
+            typename Traits23::interpolation_idx_range_type>;
+
+    /// @brief The 3D index range for the interpolation coefficients.
+    using coeff_idx_range_type = ddc::combine_t<
+            typename Traits1::coeff_idx_range_type,
+            typename Traits23::coeff_idx_range_type>;
+
+    /**
+     * @brief The batched index range on which the coefficients are defined.
+     *
+     * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    using batched_basis_idx_range_type = typename Traits23::template batched_basis_idx_range_type<
+            typename Traits1::template batched_basis_idx_range_type<IdxRangeBatchedInterpolation>>;
+
+    /**
+     * @brief The batched index range on which the derivatives in the first dimension are defined.
+     *
+     * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type1 =
+            typename Traits1::template batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>;
+
+    /**
+     * @brief The batched index range on which the derivatives in the second dimension are defined.
+     *
+     * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type2 =
+            typename Traits2::template batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>;
+
+    /**
+     * @brief The batched index range on which the derivatives in the third dimension are defined.
+     *
+     * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type3 =
+            typename Traits3::template batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>;
+
+    /**
+     * @brief The batched index range on which the cross-derivatives in the first and second
+     * dimensions are defined.
+     *
+     * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type1_2 = typename Traits1::template batched_derivs_idx_range_type<
+            batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>>;
+
+    /**
+     * @brief The batched index range on which the cross-derivatives in the second and third
+     * dimensions are defined.
+     *
+     * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type2_3 = typename Traits2::template batched_derivs_idx_range_type<
+            batched_derivs_idx_range_type3<IdxRangeBatchedInterpolation>>;
+
+    /**
+     * @brief The batched index range on which the cross-derivatives in the first and third
+     * dimensions are defined.
+     *
+     * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type1_3 = typename Traits1::template batched_derivs_idx_range_type<
+            batched_derivs_idx_range_type3<IdxRangeBatchedInterpolation>>;
+
+    /**
+     * @brief The batched index range on which the cross-derivatives in all three dimensions
+     * are defined.
+     *
+     * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type = typename Traits1::template batched_derivs_idx_range_type<
+            batched_derivs_idx_range_type2_3<IdxRangeBatchedInterpolation>>;
+
+private:
+    Builder1 const& m_builder1;
+    Builder23 const& m_builder23;
+
+public:
+    /**
+     * @brief Build a CompositeSplineBuilder3D from a 1D builder and a 2D builder.
+     *
+     * @param[in] builder1 The builder used along the first dimension.
+     * @param[in] builder23 The builder used along the second and third dimensions.
+     */
+    CompositeSplineBuilder3D(Builder1 const& builder1, Builder23 const& builder23)
+        : m_builder1(builder1)
+        , m_builder23(builder23)
+    {
+    }
+
+    /**
+     * @brief Get the batched index range on which the coefficients are defined.
+     *
+     * @param[in] batched_interpolation_idx_range The batched index range on which the interpolation points are defined.
+     *
+     * @return The batched index range on which the coefficients are defined.
+     */
+    template <class IdxRangeBatchedInterpolation>
+    batched_basis_idx_range_type<IdxRangeBatchedInterpolation> batched_basis_idx_range(
+            IdxRangeBatchedInterpolation const& batched_interpolation_idx_range) const noexcept
+    {
+        return ::batched_basis_idx_range(
+                m_builder23,
+                ::batched_basis_idx_range(m_builder1, batched_interpolation_idx_range));
+    }
+};
