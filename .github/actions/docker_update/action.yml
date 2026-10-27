@@ -65,7 +65,10 @@ runs:
       uses: docker/build-push-action@v7
       with:
         context: ./docker/gyselalibxx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
+        # Store the cache for every layer (mode=max) in a separate tag so that unchanged
+        # layers are not rebuilt when the Dockerfile is modified
+        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:buildcache
+        cache-to: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:buildcache,mode=max
         pull: true
         push: true
         call: ${{ (steps.rebuild-check.outputs.rebuild == 'true') && 'build' || 'check' }}
