@@ -167,50 +167,83 @@ public:
                     memory_space,
                     Layout>> derivs_max1
             = std::nullopt,
-            [[maybe_unused]] std::optional<ConstField<
+            std::optional<ConstField<
                     data_type,
                     batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>,
                     memory_space,
                     Layout>> derivs_min2
             = std::nullopt,
-            [[maybe_unused]] std::optional<ConstField<
+            std::optional<ConstField<
                     data_type,
                     batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>,
                     memory_space,
                     Layout>> derivs_max2
             = std::nullopt,
-            [[maybe_unused]] std::optional<ConstField<
+            std::optional<ConstField<
                     data_type,
                     batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
                     memory_space,
                     Layout>> mixed_derivs_min1_min2
             = std::nullopt,
-            [[maybe_unused]] std::optional<ConstField<
+            std::optional<ConstField<
                     data_type,
                     batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
                     memory_space,
                     Layout>> mixed_derivs_max1_min2
             = std::nullopt,
-            [[maybe_unused]] std::optional<ConstField<
+            std::optional<ConstField<
                     data_type,
                     batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
                     memory_space,
                     Layout>> mixed_derivs_min1_max2
             = std::nullopt,
-            [[maybe_unused]] std::optional<ConstField<
+            std::optional<ConstField<
                     data_type,
                     batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
                     memory_space,
                     Layout>> mixed_derivs_max1_max2
             = std::nullopt) const
     {
-        static_assert(
-                Builder2::s_sbc_xmin != ddc::SplineBuilderClosure::HERMITE
-                        && Builder2::s_sbc_xmax != ddc::SplineBuilderClosure::HERMITE,
-                "Hermite boundary conditions are not yet supported in the second dimension");
+        using IdxRangeBatchedDerivs2 = batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>;
+        using IdxRangeCoeffs1Derivs2 =
+                typename Traits1::template batched_basis_idx_range_type<IdxRangeBatchedDerivs2>;
 
         // Do not return early if the batch index range is empty as Builder1 may require
         // the participation of all MPI ranks.
+
+        // Build the coefficients along the first dimension of the derivatives at the lower
+        // boundary of the second dimension
+        std::optional<FieldMem<data_type, IdxRangeCoeffs1Derivs2, memory_space>>
+                coeffs1_derivs_min2_alloc;
+        std::optional<ConstField<data_type, IdxRangeCoeffs1Derivs2, memory_space>>
+                coeffs1_derivs_min2;
+        if constexpr (Builder2::s_sbc_xmin == ddc::SplineBuilderClosure::HERMITE) {
+            coeffs1_derivs_min2_alloc.emplace(
+                    ::batched_basis_idx_range(m_builder1, get_idx_range(*derivs_min2)));
+            m_builder1(
+                    get_field(*coeffs1_derivs_min2_alloc),
+                    *derivs_min2,
+                    mixed_derivs_min1_min2,
+                    mixed_derivs_max1_min2);
+            coeffs1_derivs_min2 = get_const_field(*coeffs1_derivs_min2_alloc);
+        }
+
+        // Build the coefficients along the first dimension of the derivatives at the upper
+        // boundary of the second dimension
+        std::optional<FieldMem<data_type, IdxRangeCoeffs1Derivs2, memory_space>>
+                coeffs1_derivs_max2_alloc;
+        std::optional<ConstField<data_type, IdxRangeCoeffs1Derivs2, memory_space>>
+                coeffs1_derivs_max2;
+        if constexpr (Builder2::s_sbc_xmax == ddc::SplineBuilderClosure::HERMITE) {
+            coeffs1_derivs_max2_alloc.emplace(
+                    ::batched_basis_idx_range(m_builder1, get_idx_range(*derivs_max2)));
+            m_builder1(
+                    get_field(*coeffs1_derivs_max2_alloc),
+                    *derivs_max2,
+                    mixed_derivs_min1_max2,
+                    mixed_derivs_max1_max2);
+            coeffs1_derivs_max2 = get_const_field(*coeffs1_derivs_max2_alloc);
+        }
 
         // Build the coefficients along the first dimension
         FieldMem<data_type,
@@ -221,6 +254,10 @@ public:
         m_builder1(get_field(coeffs1_alloc), vals, derivs_min1, derivs_max1);
 
         // Build the coefficients along the second dimension
-        m_builder2(coeffs, get_const_field(coeffs1_alloc));
+        m_builder2(
+                coeffs,
+                get_const_field(coeffs1_alloc),
+                coeffs1_derivs_min2,
+                coeffs1_derivs_max2);
     }
 };

@@ -11,6 +11,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "i_interpolation_builder.hpp"
+#include "type_seq_tools.hpp"
 
 namespace {
 
@@ -32,6 +33,12 @@ struct Y
     static double constexpr wavenumber = Kokkos::numbers::pi;
     static double constexpr phase = 0.7;
 };
+struct Z
+{
+    static bool constexpr PERIODIC = false;
+    static double constexpr wavenumber = 0.9;
+    static double constexpr phase = 0.4;
+};
 struct Batch
 {
 };
@@ -42,6 +49,9 @@ struct BSplinesX : ddc::UniformBSplines<X, Degree, X::PERIODIC>
 {
 };
 struct BSplinesY : ddc::UniformBSplines<Y, Degree, Y::PERIODIC>
+{
+};
+struct BSplinesZ : ddc::UniformBSplines<Z, Degree, Z::PERIODIC>
 {
 };
 
@@ -147,11 +157,13 @@ struct SplineConfig
 using ConfigXGreville = SplineConfig<BSplinesX, ddc::SplineBuilderClosure::GREVILLE>;
 using ConfigXHermite = SplineConfig<BSplinesX, ddc::SplineBuilderClosure::HERMITE>;
 using ConfigYPeriodic = SplineConfig<BSplinesY, ddc::SplineBuilderClosure::PERIODIC>;
+using ConfigZHermite = SplineConfig<BSplinesZ, ddc::SplineBuilderClosure::HERMITE>;
 
 void init_bsplines()
 {
     ddc::init_discrete_space<BSplinesX>(Coord<X>(0.0), Coord<X>(1.0), IdxStep<GridX>(10));
     ddc::init_discrete_space<BSplinesY>(Coord<Y>(0.0), Coord<Y>(2.0), IdxStep<GridY>(12));
+    ddc::init_discrete_space<BSplinesZ>(Coord<Z>(0.0), Coord<Z>(1.5), 8);
 }
 
 /**
@@ -178,8 +190,8 @@ KOKKOS_FUNCTION double test_function_1d(Coord<Dim> coord, int deriv_order = 0)
 template <class... Grids>
 void fill_with_test_values(DField<IdxRange<Grids...>> vals)
 {
-    using Grid1 = ddc::type_seq_element_t<sizeof...(Grids)-2, ddc::detail::TypeSeq<Grids...>>;
-    using Grid2 = ddc::type_seq_element_t<sizeof...(Grids)-1, ddc::detail::TypeSeq<Grids...>>;
+    using Grid1 = ddc::type_seq_element_t<sizeof...(Grids) - 2, ddc::detail::TypeSeq<Grids...>>;
+    using Grid2 = ddc::type_seq_element_t<sizeof...(Grids) - 1, ddc::detail::TypeSeq<Grids...>>;
     ddc::parallel_for_each(
             ExecSpace(),
             get_idx_range(vals),
@@ -190,24 +202,48 @@ void fill_with_test_values(DField<IdxRange<Grids...>> vals)
 }
 
 /**
- * Fill a field with the derivatives of the test function along DimDeriv on the boundary
- * of that dimension. The test function is constant along the batch dimensions.
+ * Fill a field with the values of the test function where the field is defined along
+ * derivative dimensions. Along each of Dim1 and Dim2 the field is defined either on an
+ * interpolation grid or on the derivative dimension ddc::Deriv<Dim>. Along a derivative
+ * dimension the derivative of the order given by the index is evaluated at the boundary.
+ * The test function is constant along any other (batch) dimensions.
+ *
+ * @param[out] derivs The field to be filled.
+ * @param[in] boundary1 The boundary at which derivatives along Dim1 are evaluated.
+ *          Unused if the field is not defined along ddc::Deriv<Dim1>.
+ * @param[in] boundary2 The boundary at which derivatives along Dim2 are evaluated.
+ *          Unused if the field is not defined along ddc::Deriv<Dim2>.
  */
-template <class DimDeriv, class... Grids>
-void fill_with_test_derivs(DField<IdxRange<Grids...>> derivs, Coord<DimDeriv> boundary)
+template <class Dim1, class Dim2, class... Grids>
+void fill_with_test_derivs(
+        DField<IdxRange<Grids...>> derivs,
+        Coord<Dim1> boundary1,
+        Coord<Dim2> boundary2)
 {
-    using GridDeriv = ddc::type_seq_element_t<sizeof...(Grids)-2, ddc::detail::TypeSeq<Grids...>>;
-    using Grid2 = ddc::type_seq_element_t<sizeof...(Grids)-1, ddc::detail::TypeSeq<Grids...>>;
-    static_assert(std::is_same_v<GridDeriv, ddc::Deriv<DimDeriv>>);
+    using GridTypeSeq = ddc::detail::TypeSeq<Grids...>;
+    using Grid1 = find_grid_t<Dim1, GridTypeSeq>;
+    using Grid2 = find_grid_t<Dim2, GridTypeSeq>;
     ddc::parallel_for_each(
             ExecSpace(),
             get_idx_range(derivs),
             KOKKOS_LAMBDA(Idx<Grids...> idx) {
-                int const deriv_order = (Idx<ddc::Deriv<DimDeriv>>(idx)
-                                         - Idx<ddc::Deriv<DimDeriv>>(0))
-                                                .value();
-                derivs(idx) = test_function_1d(boundary, deriv_order)
-                              * test_function_1d(ddc::coordinate(Idx<Grid2>(idx)));
+                double val1;
+                if constexpr (ddc::in_tags_v<ddc::Deriv<Dim1>, GridTypeSeq>) {
+                    int const deriv_order
+                            = (Idx<ddc::Deriv<Dim1>>(idx) - Idx<ddc::Deriv<Dim1>>(0)).value();
+                    val1 = test_function_1d(boundary1, deriv_order);
+                } else {
+                    val1 = test_function_1d(ddc::coordinate(Idx<Grid1>(idx)));
+                }
+                double val2;
+                if constexpr (ddc::in_tags_v<ddc::Deriv<Dim2>, GridTypeSeq>) {
+                    int const deriv_order
+                            = (Idx<ddc::Deriv<Dim2>>(idx) - Idx<ddc::Deriv<Dim2>>(0)).value();
+                    val2 = test_function_1d(boundary2, deriv_order);
+                } else {
+                    val2 = test_function_1d(ddc::coordinate(Idx<Grid2>(idx)));
+                }
+                derivs(idx) = val1 * val2;
             });
 }
 
@@ -225,9 +261,14 @@ double max_abs_difference(DConstField<IdxRangeType> field1, DConstField<IdxRange
             });
 }
 
-/// Check that the CompositeSplineBuilder2D gives the same coefficients as ddc::SplineBuilder2D.
-template <class Config1, class Config2>
-void check_composite_2d_against_ddc()
+/**
+ * Check that the CompositeSplineBuilder2D gives the same coefficients as ddc::SplineBuilder2D.
+ *
+ * @param idx_range_batch The index range of the batch dimensions (if any). These grids must
+ *          already be initialised.
+ */
+template <class Config1, class Config2, class... BatchGrids>
+void check_composite_2d_against_ddc(IdxRange<BatchGrids...> idx_range_batch = IdxRange<>())
 {
     using Grid1 = typename Config1::Grid;
     using Grid2 = typename Config2::Grid;
@@ -249,38 +290,81 @@ void check_composite_2d_against_ddc()
 
     static_assert(concepts::InterpolationBuilder<Builder>);
 
+    using IdxRangeBatched = IdxRange<BatchGrids..., Grid1, Grid2>;
+
     init_bsplines();
-    IdxRange<Grid1, Grid2> idx_range(Config1::init_grid(), Config2::init_grid());
+    IdxRange<Grid1> idx_range_1 = Config1::init_grid();
+    IdxRange<Grid2> idx_range_2 = Config2::init_grid();
+    IdxRange<Grid1, Grid2> idx_range(idx_range_1, idx_range_2);
+    IdxRangeBatched idx_range_batched(idx_range_batch, idx_range);
 
     Builder1 builder1(idx_range);
     Builder2 builder2(idx_range);
     Builder builder(builder1, builder2);
     RefBuilder ref_builder(idx_range);
 
-    DFieldMem<IdxRange<Grid1, Grid2>> vals_alloc(idx_range);
+    using Dim1 = typename Grid1::continuous_dimension_type;
+    using Dim2 = typename Grid2::continuous_dimension_type;
+    Coord<Dim1> const min1 = ddc::coordinate(idx_range_1.front());
+    Coord<Dim1> const max1 = ddc::coordinate(idx_range_1.back());
+    Coord<Dim2> const min2 = ddc::coordinate(idx_range_2.front());
+    Coord<Dim2> const max2 = ddc::coordinate(idx_range_2.back());
+
+    DFieldMem<IdxRangeBatched> vals_alloc(idx_range_batched);
     fill_with_test_values(get_field(vals_alloc));
 
-    auto idx_range_derivs1 = builder1.batched_derivs_xmin_domain(idx_range);
+    auto idx_range_derivs1 = builder1.batched_derivs_xmin_domain(idx_range_batched);
     DFieldMem<decltype(idx_range_derivs1)> derivs_min1_alloc(idx_range_derivs1);
     DFieldMem<decltype(idx_range_derivs1)> derivs_max1_alloc(idx_range_derivs1);
-    IdxRange<Grid1> idx_range_1(idx_range);
-    fill_with_test_derivs(get_field(derivs_min1_alloc), ddc::coordinate(idx_range_1.front()));
-    fill_with_test_derivs(get_field(derivs_max1_alloc), ddc::coordinate(idx_range_1.back()));
+    fill_with_test_derivs(get_field(derivs_min1_alloc), min1, min2);
+    fill_with_test_derivs(get_field(derivs_max1_alloc), max1, min2);
 
-    using IdxRangeCoeffs =
-            typename Builder::template batched_basis_idx_range_type<IdxRange<Grid1, Grid2>>;
-    DFieldMem<IdxRangeCoeffs> coeffs_alloc(builder.batched_basis_idx_range(idx_range));
-    DFieldMem<IdxRangeCoeffs> ref_coeffs_alloc(ref_builder.batched_spline_domain(idx_range));
+    auto idx_range_derivs2 = builder2.batched_derivs_xmin_domain(idx_range_batched);
+    DFieldMem<decltype(idx_range_derivs2)> derivs_min2_alloc(idx_range_derivs2);
+    DFieldMem<decltype(idx_range_derivs2)> derivs_max2_alloc(idx_range_derivs2);
+    fill_with_test_derivs(get_field(derivs_min2_alloc), min1, min2);
+    fill_with_test_derivs(get_field(derivs_max2_alloc), min1, max2);
+
+    auto idx_range_mixed_derivs = builder1.batched_derivs_xmin_domain(idx_range_derivs2);
+    DFieldMem<decltype(idx_range_mixed_derivs)> mixed_derivs_min1_min2_alloc(
+            idx_range_mixed_derivs);
+    DFieldMem<decltype(idx_range_mixed_derivs)> mixed_derivs_max1_min2_alloc(
+            idx_range_mixed_derivs);
+    DFieldMem<decltype(idx_range_mixed_derivs)> mixed_derivs_min1_max2_alloc(
+            idx_range_mixed_derivs);
+    DFieldMem<decltype(idx_range_mixed_derivs)> mixed_derivs_max1_max2_alloc(
+            idx_range_mixed_derivs);
+    fill_with_test_derivs(get_field(mixed_derivs_min1_min2_alloc), min1, min2);
+    fill_with_test_derivs(get_field(mixed_derivs_max1_min2_alloc), max1, min2);
+    fill_with_test_derivs(get_field(mixed_derivs_min1_max2_alloc), min1, max2);
+    fill_with_test_derivs(get_field(mixed_derivs_max1_max2_alloc), max1, max2);
+
+    using IdxRangeCoeffs = typename Builder::template batched_basis_idx_range_type<IdxRangeBatched>;
+    DFieldMem<IdxRangeCoeffs> coeffs_alloc(builder.batched_basis_idx_range(idx_range_batched));
+    DFieldMem<IdxRangeCoeffs> ref_coeffs_alloc(
+            ref_builder.batched_spline_domain(idx_range_batched));
 
     builder(get_field(coeffs_alloc),
             get_const_field(vals_alloc),
             std::optional(get_const_field(derivs_min1_alloc)),
-            std::optional(get_const_field(derivs_max1_alloc)));
+            std::optional(get_const_field(derivs_max1_alloc)),
+            std::optional(get_const_field(derivs_min2_alloc)),
+            std::optional(get_const_field(derivs_max2_alloc)),
+            std::optional(get_const_field(mixed_derivs_min1_min2_alloc)),
+            std::optional(get_const_field(mixed_derivs_max1_min2_alloc)),
+            std::optional(get_const_field(mixed_derivs_min1_max2_alloc)),
+            std::optional(get_const_field(mixed_derivs_max1_max2_alloc)));
     ref_builder(
             get_field(ref_coeffs_alloc),
             get_const_field(vals_alloc),
             std::optional(get_const_field(derivs_min1_alloc)),
-            std::optional(get_const_field(derivs_max1_alloc)));
+            std::optional(get_const_field(derivs_max1_alloc)),
+            std::optional(get_const_field(derivs_min2_alloc)),
+            std::optional(get_const_field(derivs_max2_alloc)),
+            std::optional(get_const_field(mixed_derivs_min1_min2_alloc)),
+            std::optional(get_const_field(mixed_derivs_max1_min2_alloc)),
+            std::optional(get_const_field(mixed_derivs_min1_max2_alloc)),
+            std::optional(get_const_field(mixed_derivs_max1_max2_alloc)));
 
     EXPECT_LE(
             max_abs_difference(get_const_field(coeffs_alloc), get_const_field(ref_coeffs_alloc)),
@@ -343,4 +427,22 @@ TEST(CompositeSplineBuilder2D, GrevillePeriodic)
 TEST(CompositeSplineBuilder2D, HermitePeriodic)
 {
     check_composite_2d_against_ddc<ConfigXHermite, ConfigYPeriodic>();
+}
+
+TEST(CompositeSplineBuilder2D, GrevilleHermite)
+{
+    check_composite_2d_against_ddc<ConfigXGreville, ConfigZHermite>();
+}
+
+TEST(CompositeSplineBuilder2D, HermiteHermite)
+{
+    check_composite_2d_against_ddc<ConfigXHermite, ConfigZHermite>();
+}
+
+TEST(CompositeSplineBuilder2D, HermiteHermiteBatched)
+{
+    ddc::init_discrete_space<GridBatch>(
+            GridBatch::init(Coord<Batch>(0.0), Coord<Batch>(1.0), IdxStep<GridBatch>(4)));
+    IdxRange<GridBatch> idx_range_batch(Idx<GridBatch>(0), IdxStep<GridBatch>(4));
+    check_composite_2d_against_ddc<ConfigXHermite, ConfigZHermite>(idx_range_batch);
 }
