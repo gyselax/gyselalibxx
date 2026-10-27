@@ -170,7 +170,8 @@ public:
     static auto as_layout_left(const View& a_view)
     {
         if constexpr (std::is_same_v<typename View::array_layout, Kokkos::LayoutRight>) {
-            return [&]<std::size_t... I>(std::index_sequence<I...>) {
+            return [&]<std::size_t... I>(std::index_sequence<I...>)
+            {
                 return Kokkos::View<
                         typename View::data_type,
                         Kokkos::LayoutLeft,
@@ -178,7 +179,8 @@ public:
                         Kokkos::MemoryTraits<Kokkos::Unmanaged>> {
                         a_view.data(),
                         a_view.extent(View::rank - 1 - I)...};
-            }(std::make_index_sequence<View::rank> {});
+            }
+            (std::make_index_sequence<View::rank> {});
         } else {
             return a_view;
         }

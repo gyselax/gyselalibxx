@@ -49,10 +49,10 @@ public:
             double B_norm,
             DConstField<IdxRange<Species, GridVpar>> Bstar_s)
         : m_operator_quantities {
-                  yaml_input_file,
-                  index_range_fdistribution,
-                  coeff_intdmu,
-                  coeff_intdvpar}
+                yaml_input_file,
+                index_range_fdistribution,
+                coeff_intdmu,
+                coeff_intdvpar}
     {
         /* B_norm is a scalar when there is no Theta nor R dimensions.
          */
