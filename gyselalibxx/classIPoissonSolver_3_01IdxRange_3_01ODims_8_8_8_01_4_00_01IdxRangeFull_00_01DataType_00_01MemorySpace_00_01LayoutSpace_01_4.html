@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -675,7 +681,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-using_vector_field"><strong>using_vector_field</strong></a>   = <code>ddc::type\_seq\_size\_v&amp;lt;[**laplacian\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-laplacian_tags)&amp;gt; == 1</code><br><em>Indicates whether the gradient is represented by a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>or a Field.</em></td>
 </tr>
 </tbody>
@@ -693,7 +699,8 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-batch_idx_range_type">typedef batch_idx_range_type</h3>
 <p><em>The index range type describing the batch dimensions.</em> </p>
-<pre><code class="language-C++">using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::batch_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;batch_tags&gt;;
+<pre><code class="language-C++">using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::batch_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;batch_tags&gt;;
 </code></pre>
 <hr>
 
@@ -735,7 +742,10 @@
 
 <h3 id="typedef-vector_field_type">typedef vector_field_type</h3>
 <p><em>The type of the derivative of</em> <span class="arithmatex">\(\phi\)</span> <em>.</em></p>
-<pre><code class="language-C++">using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::vector_field_type =  std::conditional_t&lt; ddc::type_seq_size_v&lt;laplacian_tags&gt; == 1, field_type, VectorField&lt;DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace&gt; &gt;;
+<pre><code class="language-C++">using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::vector_field_type =  std::conditional_t&lt;
+            ddc::type_seq_size_v&lt;laplacian_tags&gt; == 1,
+            field_type,
+            VectorField&lt;DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace&gt;&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -799,7 +809,7 @@
 <h2 id="protected-static-attributes-documentation">Protected Static Attributes Documentation</h2>
 <h3 id="variable-using_vector_field">variable using_vector_field</h3>
 <p><em>Indicates whether the gradient is represented by a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>or a Field.</em></p>
-<pre><code class="language-C++">constexpr bool IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::using_vector_field;
+<pre><code class="language-C++">bool IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::using_vector_field;
 </code></pre>
 <hr>
 

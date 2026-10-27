@@ -35,7 +35,7 @@ _A class to evaluate, differentiate or integrate a Lagrange function._ [More...]
 | Type | Name |
 | ---: | :--- |
 | typedef ddc::remove\_dims\_of\_t&lt; BatchedInterpolationIdxRange, InterpolationGrid &gt; | [**batch\_idx\_range\_type**](#typedef-batch_idx_range_type)  <br>_The type of the batch domain (obtained by removing the dimension of interest from the whole domain)._  |
-| typedef ddc::replace\_dim\_of\_t&lt; BatchedInterpolationIdxRange, InterpolationGrid, [**coeff\_grid\_type**](classLagrangeEvaluator.md#typedef-coeff_grid_type) &gt; | [**batched\_coeff\_idx\_range\_type**](#typedef-batched_coeff_idx_range_type)  <br>_The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain and batch domain) preserving the order of dimensions._  |
+| typedef ddc:: replace\_dim\_of\_t&lt; BatchedInterpolationIdxRange, InterpolationGrid, [**coeff\_grid\_type**](classLagrangeEvaluator.md#typedef-coeff_grid_type) &gt; | [**batched\_coeff\_idx\_range\_type**](#typedef-batched_coeff_idx_range_type)  <br>_The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain and batch domain) preserving the order of dimensions._  |
 | typedef BatchedInterpolationIdxRange | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_The type of the whole domain representing evaluation points._  |
 | typedef typename LagrangeBasis::template Impl&lt; LagrangeBasis, MemorySpace &gt;::knot\_grid | [**coeff\_grid\_type**](#typedef-coeff_grid_type)  <br>_The grid on which the interpolation coefficients should be provided._  |
 | typedef IdxRange&lt; [**coeff\_grid\_type**](classLagrangeEvaluator.md#typedef-coeff_grid_type) &gt; | [**coeff\_idx\_range\_type**](#typedef-coeff_idx_range_type)  <br>_The type of the 1D Lagrange domain corresponding to the dimension of interest._  |
@@ -170,7 +170,8 @@ using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, Interp
 
 _The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain and batch domain) preserving the order of dimensions._ 
 ```C++
-using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::batched_coeff_idx_range_type =  ddc:: replace_dim_of_t<BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type>;
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::batched_coeff_idx_range_type =  ddc::
+            replace_dim_of_t<BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type>;
 ```
 
 
@@ -220,7 +221,8 @@ using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, Interp
 
 _The grid on which the interpolation coefficients should be provided._ 
 ```C++
-using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::coeff_grid_type =  typename LagrangeBasis::template Impl<LagrangeBasis, MemorySpace>::knot_grid;
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::coeff_grid_type = 
+            typename LagrangeBasis::template Impl<LagrangeBasis, MemorySpace>::knot_grid;
 ```
 
 

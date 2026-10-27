@@ -103,7 +103,7 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 |  KOKKOS\_FUNCTION constexpr reference | [**operator()**](#function-operator) (DElem... elems) noexcept const<br>_Get an element from a constant field. An Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**DerivField**](classDerivField.md) & | [**operator=**](#function-operator_1) ([**DerivField**](classDerivField.md) const & other) = default<br> |
 |  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**DerivField**](classDerivField.md) & | [**operator=**](#function-operator_2) ([**DerivField**](classDerivField.md) && other) = default<br> |
-|  constexpr auto | [**operator[]**](#function-operator_3) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Get a Field describing a subset of the data._  |
+|  auto | [**operator[]**](#function-operator_3) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Get a Field describing a subset of the data._  |
 |  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_4) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) const<br>_Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~DerivField**](#function-derivfield) () = default<br> |
 
@@ -727,7 +727,7 @@ Move-assigns a new value to this [**DerivField**](classDerivField.md)
 _Get a Field describing a subset of the data._ 
 ```C++
 template<class... QueryDDims>
-inline constexpr auto DerivField< ElementType, IdxRange< DDims... >, MemorySpace, LayoutStridedPolicy >::operator[] (
+inline auto DerivField< ElementType, IdxRange< DDims... >, MemorySpace, LayoutStridedPolicy >::operator[] (
     Idx< QueryDDims... > const & slice_spec
 ) const
 ```

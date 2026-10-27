@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -601,7 +607,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</td>
+<td style="text-align: right;">typedef detail:: MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-multipatchfield"><strong>MultipatchField</strong></a>  <br><em>A class to store field objects on patches.</em></td>
 </tr>
 </tbody>
@@ -616,11 +622,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-enable_multipatch_field"><strong>enable_multipatch_field</strong></a>   = <code>false</code><br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_multipatch_field_v"><strong>is_multipatch_field_v</strong></a>   = <code>enable\_multipatch\_field&amp;lt;std::remove\_const\_t&amp;lt;std::remove\_reference\_t&amp;lt;T&amp;gt;&amp;gt;&amp;gt;</code><br></td>
 </tr>
 </tbody>
@@ -628,7 +634,8 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-multipatchfield">typedef MultipatchField</h3>
 <p><em>A class to store field objects on patches.</em> </p>
-<pre><code class="language-C++">using MultipatchField =  detail:: MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt; &gt;;
+<pre><code class="language-C++">using MultipatchField =  detail::
+        MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
 </code></pre>
 <p>See detail::MultipatchField for more details. This alias creates the type T&lt;Patch&gt; for each of the patches. Two type templates which return the same type for each patch therefore lead to the same MultipatchField.</p>
 <p><strong>Template parameters:</strong></p>
@@ -639,12 +646,12 @@
 <hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-enable_multipatch_field">variable enable_multipatch_field</h3>
-<pre><code class="language-C++">constexpr bool enable_multipatch_field;
+<pre><code class="language-C++">bool enable_multipatch_field;
 </code></pre>
 <hr>
 
 <h3 id="variable-is_multipatch_field_v">variable is_multipatch_field_v</h3>
-<pre><code class="language-C++">constexpr bool is_multipatch_field_v;
+<pre><code class="language-C++">bool is_multipatch_field_v;
 </code></pre>
 <hr>
 

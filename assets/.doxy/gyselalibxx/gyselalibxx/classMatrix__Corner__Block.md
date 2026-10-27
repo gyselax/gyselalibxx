@@ -201,7 +201,10 @@ See [Matrix](classMatrix.md)
 ## Detailed Description
 
 
- where Q is a banded matrix, and Q and delta are square matrices.
+
+
+
+where Q is a banded matrix, and Q and delta are square matrices.
 
 
 The matrix equation is factorised using a LU decomposition. The equation is then solved using this decomposition as described in section 2.5.2.1 of Emily Bourne's thesis [1].
@@ -611,7 +614,10 @@ virtual void Matrix_Corner_Block::calculate_delta_to_factorise ()
 
 
 
- It is defined as:
+
+
+
+It is defined as:
 
 
 

@@ -28,13 +28,12 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**ChargeDensityCalculator**](classChargeDensityCalculator.md) _A class which computes charges density with Kokkos._     
 * **class** [**CircularToCartesian**](classCircularToCartesian.md) _A class for describing the circular 2D mapping._     
 * **class** [**CollisionConfiguration**](classCollisionConfiguration.md) _Class to collect information to initialise the collision operator for a SpVparMu geometry._     
-* **class** [**CollisionOperator**](classCollisionOperator.md) _A class which computes the collision operator in (Sp,vpar,mu)._     
 * **class** [**CollisionsInter**](classCollisionsInter.md) _Class describing the inter-species collision operator._     
 * **class** [**CollisionsIntra**](classCollisionsIntra.md) _Class describing the intra-species collision operator._     
     * **struct** [**GhostedVx**](structCollisionsIntra_1_1GhostedVx.md) 
     * **struct** [**GhostedVxStaggered**](structCollisionsIntra_1_1GhostedVxStaggered.md) 
 * **class** [**CombinedMapping**](classCombinedMapping.md) _A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_ \(\mathcal{F}\) _and Mapping2 as_\(\mathcal{G}\) _then this mapping represents:_\(\mathcal{F} \circ \mathcal{G}\) _._    
-* **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __    
+* **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._     
 * **class** [**ConstantIdentityInterpolationExtrapolationRule**](classConstantIdentityInterpolationExtrapolationRule.md) _A constant extrapolation rule for identity-based (Lagrange) interpolation._     
 * **class** [**ConstantPartialDerivative**](classConstantPartialDerivative.md) _A class to get the derivative of a constant function. When the derivative of a function is known to be 0 but the dimension is still needed this class can be used to avoid unnecessary calculations._     
 * **class** [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md) _A class to create a_ [_**ConstantPartialDerivative**_](classConstantPartialDerivative.md) _via a create\_instance function._    
@@ -269,11 +268,11 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d102.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d237.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d239.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d241.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d243.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d246112055366116036342230301014313145357365134015.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d356066043023202233255072235367015335150241272211.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d326070111030233364115366221347024251137254265306.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d242014254351270173276070053314323275024306121236.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d271227243350105346157011240351043102154057131232.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
@@ -306,7 +305,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**FindPatch&lt; Grid1D, ddc::detail::TypeSeq&lt;&gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4.md) _Specialisation of_ [_**FindPatch**_](structconnectivity__details_1_1FindPatch.md) _for an empty patch list._
     * **struct** [**FindPatch&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1detail_1_1TypeSeq_3_01Patch5f5acd76cfd59a22ebf513823679a320.md)     
     * **struct** [**FindPatch&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; Patch&lt; QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1detail_1_1TypeSeq_3_01Patchd8fc8921dec760f8fe4c90c2a6947228.md)     
-    * **struct** [**FindRelevantIdxRangeType**](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _A class to find any index range types which contain an index range defined on the provided grid. E.g. Grid1, std::tuple&lt;IdxRange&lt;Grid1, Grid2&gt;, IdxRange&lt;Grid3,Grid4&gt;&gt; will find: ddc::detail::TypeSeq&lt;IdxRange&lt;Grid1, Grid2&gt;&gt;_ 
+    * **struct** [**FindRelevantIdxRangeType**](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _A class to find any index range types which contain an index range defined on the provided grid. E.g. Grid1, std::tuple&lt;IdxRange&lt;Grid1, Grid2&gt;, IdxRange&lt;Grid3,Grid4&gt;&gt; will find: ddc::detail::TypeSeq&lt;IdxRange&lt;Grid1, Grid2&gt;&gt;._ 
     * **struct** [**FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;**](structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b.md) _Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _to iterate recursively over the possible index range types._    
     * **struct** [**FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;**](structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4.md) _Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _for an empty list of index range types._    
     * **struct** [**PatchConnection**](structconnectivity__details_1_1PatchConnection.md) _A class which finds all interfaces connected to a given patch._ 
@@ -369,7 +368,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**GetCovariantDims**](structtensor__tools_1_1GetCovariantDims.md) _A class to get a VectorIndexSet containing only covariant dimensions._ 
     * **struct** [**GetCovariantDims&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1GetCovariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _A class to get a VectorIndexSet containing only covariant dimensions._     
     * **class** [**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) _A class to capture the description of a tensor indexed at a specific component. This class should not be explicitly declared in user code. It is the output of a call to the index&lt;...&gt; function and is an input to the tensor\_mul function._     
-    * **class** [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) _A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_ \(g_{xx}\) _would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;._
+    * **class** [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) _A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_ \(g_{xx}\) _would have the index_[_**TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;**_](classtensor__tools_1_1TensorIndexElement.md) _._
     * **struct** [**VectorIndexIdMap**](structtensor__tools_1_1VectorIndexIdMap.md) _A class representing a vector index identifier._     
     * **struct** [**is\_contravariant\_vector\_index\_set**](structtensor__tools_1_1is__contravariant__vector__index__set.md) 
     * **struct** [**is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _A helper structure to check if all the dimensions in a VectorIndexSet can represent contravariant indices._     

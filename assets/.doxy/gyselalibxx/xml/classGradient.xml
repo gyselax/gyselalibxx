@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classGradient" kind="class" language="C++" prot="public">
     <compoundname>Gradient</compoundname>
     <includes refid="gradient_8hpp" local="no">gradient.hpp</includes>
@@ -87,7 +87,7 @@
             <type>class IdxRange</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRange, Dims &gt;</type>
+        <type>DVectorField&lt; IdxRange, Dims &gt;</type>
         <definition>using Gradient&lt; MetricTensorType &gt;::DVectorFieldType =  DVectorField&lt;IdxRange, Dims&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorFieldType</name>
@@ -106,7 +106,7 @@
             <type>class IdxRange</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRange, Dims_cov &gt;</type>
+        <type>DVectorField&lt; IdxRange, Dims_cov &gt;</type>
         <definition>using Gradient&lt; MetricTensorType &gt;::DVectorFieldCovType =  DVectorField&lt;IdxRange, Dims_cov&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorFieldCovType</name>
@@ -125,7 +125,7 @@
             <type>class IdxRange</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRange, Dims_cov &gt;</type>
+        <type>DVectorConstField&lt; IdxRange, Dims_cov &gt;</type>
         <definition>using Gradient&lt; MetricTensorType &gt;::DVectorConstFieldCovType =  DVectorConstField&lt;IdxRange, Dims_cov&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorConstFieldCovType</name>
@@ -228,11 +228,11 @@
         <name>operator()</name>
         <qualifiedname>Gradient::operator()</qualifiedname>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorFieldCovType</ref>&lt; IdxRange &gt;</type>
+          <type>DVectorFieldCovType&lt; IdxRange &gt;</type>
           <declname>gradient</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorConstFieldCovType</ref>&lt; IdxRange &gt; const</type>
+          <type>DVectorConstFieldCovType&lt; IdxRange &gt; const</type>
           <declname>partial_derivatives</declname>
         </param>
         <briefdescription>
@@ -324,16 +324,15 @@
         <name>operator()</name>
         <qualifiedname>Gradient::operator()</qualifiedname>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorFieldType</ref>&lt; IdxRange &gt; const</type>
+          <type>DVectorFieldType&lt; IdxRange &gt; const</type>
           <declname>gradient</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorConstFieldCovType</ref>&lt; IdxRange &gt; const</type>
+          <type>DVectorConstFieldCovType&lt; IdxRange &gt; const</type>
           <declname>partial_derivatives</declname>
         </param>
         <briefdescription>
-<para>Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis. <linebreak/>
- </para>
+<para>Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>

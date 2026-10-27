@@ -200,7 +200,6 @@ If the interpolation points are uniform, it computes the coefficients with an ex
 * `idx_range_1d_2` 1D index range perpendicular to the [**Interface**](structInterface.md), on the patch 2. 
 * `Closure1` The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. 
 * `Closure2` The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. 
- 
 
 
 

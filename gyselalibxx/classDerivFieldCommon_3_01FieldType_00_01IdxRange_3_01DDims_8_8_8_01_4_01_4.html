@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -662,7 +668,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-idx_range"><strong>idx_range</strong></a> () const<br><em>Get the physical index range on which the Field is defined. This method is equivalent to calling</em> <code>get_idx_range(this-&gt; get_values_field() )</code> __</td>
+<td style="text-align: left;"><a href="#function-idx_range"><strong>idx_range</strong></a> () const<br><em>Get the physical index range on which the Field is defined. This method is equivalent to calling</em> <code>get_idx_range(this-&gt; get_values_field() )</code> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">IdxRangeSlice&lt; Grid1D &gt;</td>
@@ -762,7 +768,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr int</td>
+<td style="text-align: right;">int</td>
 <td style="text-align: left;"><a href="#variable-n_fields"><strong>n_fields</strong></a>   = <code>1 &amp;lt;&amp;lt; ddc::type\_seq\_size\_v&amp;lt;[**deriv\_tags**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-deriv_tags)&amp;gt;</code><br><em>The number of fields which must be created to describe this object.</em></td>
 </tr>
 </tbody>
@@ -822,7 +828,7 @@
 
 <h3 id="typedef-deriv_tags">typedef deriv_tags</h3>
 <p><em>A type sequence containing all derivatives present in this object.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::deriv_tags =  detail::deriv_sub_set_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt; &gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::deriv_tags =  detail::deriv_sub_set_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -860,7 +866,7 @@
 
 <h3 id="typedef-physical_deriv_grids">typedef physical_deriv_grids</h3>
 <p><em>A type sequence containing all physical dimensions for which derivatives are present in this object.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_deriv_grids =  find_all_grids_t&lt;detail::strip_deriv_t&lt;deriv_tags&gt;, ddc::detail::TypeSeq&lt;DDims...&gt; &gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_deriv_grids =  find_all_grids_t&lt;detail::strip_deriv_t&lt;deriv_tags&gt;, ddc::detail::TypeSeq&lt;DDims...&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -943,7 +949,7 @@ inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get
 <hr>
 
 <h3 id="function-idx_range">function idx_range</h3>
-<p><em>Get the physical index range on which the Field is defined. This method is equivalent to calling</em> <code>get_idx_range(this-&gt; get_values_field() )</code> __</p>
+<p><em>Get the physical index range on which the Field is defined. This method is equivalent to calling</em> <code>get_idx_range(this-&gt; get_values_field() )</code> <em>.</em></p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION physical_idx_range_type DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::idx_range () const
 </code></pre>
 <hr>
@@ -975,7 +981,8 @@ inline IdxRangeSlice&lt; Grid1D &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt
 
 <h3 id="typedef-discrete_deriv_idx_range_type">typedef discrete_deriv_idx_range_type</h3>
 <p><em>The IdxRange which describes the derivatives present on each field.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::discrete_deriv_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;deriv_tags&gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::discrete_deriv_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;deriv_tags&gt;;
 </code></pre>
 <hr>
 
@@ -993,19 +1000,26 @@ inline IdxRangeSlice&lt; Grid1D &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt
 
 <h3 id="typedef-internal_mdspan_type">typedef internal_mdspan_type</h3>
 <p><em>The type of the memory block stored in the array internal_fields.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::internal_mdspan_type =  Kokkos::mdspan&lt; element_type, Kokkos::dextents&lt;std::size_t, sizeof...(DDims)&gt;, Kokkos::layout_stride&gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::internal_mdspan_type =  Kokkos::mdspan&lt;
+            element_type,
+            Kokkos::dextents&lt;std::size_t, sizeof...(DDims)&gt;,
+            Kokkos::layout_stride&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-internal_mdview_type">typedef internal_mdview_type</h3>
 <p><em>The type of a constant view on the memory block stored in the array internal_fields.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::internal_mdview_type =  Kokkos::mdspan&lt; const element_type, Kokkos::dextents&lt;std::size_t, sizeof...(DDims)&gt;, Kokkos::layout_stride&gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::internal_mdview_type =  Kokkos::mdspan&lt;
+            const element_type,
+            Kokkos::dextents&lt;std::size_t, sizeof...(DDims)&gt;,
+            Kokkos::layout_stride&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-physical_idx_range_type">typedef physical_idx_range_type</h3>
 <p><em>The index range for the field excluding derivatives.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;physical_grids&gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;physical_grids&gt;;
 </code></pre>
 <hr>
 
@@ -1048,7 +1062,7 @@ inline IdxRangeSlice&lt; Grid1D &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt
 <h2 id="protected-static-attributes-documentation">Protected Static Attributes Documentation</h2>
 <h3 id="variable-n_fields">variable n_fields</h3>
 <p><em>The number of fields which must be created to describe this object.</em> </p>
-<pre><code class="language-C++">constexpr int DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::n_fields;
+<pre><code class="language-C++">int DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::n_fields;
 </code></pre>
 <hr>
 <h2 id="protected-functions-documentation">Protected Functions Documentation</h2>
@@ -1085,7 +1099,7 @@ inline KOKKOS_FUNCTION int DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims...
 <p><strong>Returns:</strong></p>
 <p>int The index of the internal field inside the array internal_fields. </p>
 <p><strong>Returns:</strong></p>
-<p>discrete_deriv_idx_range_type The index range of the derivatives at the field at the index. </p>
+<p><a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-discrete_deriv_idx_range_type"><strong>discrete_deriv_idx_range_type</strong></a> The index range of the derivatives at the field at the index. </p>
 <hr>
 
 <h3 id="function-get_index">function get_index</h3>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="simpson__quadrature_8hpp" kind="file" language="C++">
     <compoundname>simpson_quadrature.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -334,7 +334,7 @@
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::RangePolicy&lt;ExecSpace&gt;(0,<sp/>1),</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i)<sp/>{</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;Grid1D&gt;<sp/>idx_c</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>idx_range.back()<sp/>-<sp/>1<sp/>-<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">(Grid1D::continuous_dimension_type::PERIODIC);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>idx_range.back()<sp/>-<sp/>1<sp/>-<sp/>int(Grid1D::continuous_dimension_type::PERIODIC);</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dx_l<sp/>=<sp/>distance_at_left(idx_c);</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dx_r<sp/>=<sp/>distance_at_right(idx_c);</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dx_sum<sp/>=<sp/>dx_l<sp/>+<sp/>dx_r;</highlight></codeline>

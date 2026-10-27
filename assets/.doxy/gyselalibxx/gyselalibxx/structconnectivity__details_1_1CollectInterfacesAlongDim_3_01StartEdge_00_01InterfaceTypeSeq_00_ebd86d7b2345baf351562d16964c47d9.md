@@ -92,7 +92,12 @@ _Specialisation of_ [_**CollectInterfacesAlongDim**_](structconnectivity__detail
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::CollectInterfacesAlongDim< StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, OutsideEdge, false >::type =  typename AddToTypeSeq< enforce_first_interface_edge_t< typename FindInterface<StartEdge, InterfaceTypeSeq>::type, std::conditional_t<StartEdge::extremity == FRONT, OutsideEdge, StartEdge> >, FoundInterfaces, insert_pos>::type;
+using connectivity_details::CollectInterfacesAlongDim< StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, OutsideEdge, false >::type =  typename AddToTypeSeq<
+            enforce_first_interface_edge_t<
+                    typename FindInterface<StartEdge, InterfaceTypeSeq>::type,
+                    std::conditional_t<StartEdge::extremity == FRONT, OutsideEdge, StartEdge>>,
+            FoundInterfaces,
+            insert_pos>::type;
 ```
 
 

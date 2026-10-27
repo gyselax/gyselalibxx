@@ -189,13 +189,12 @@ Computation of Vcoll and Tcoll, which are the moments of the kernel maxwellian f
 * 
   \[Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]\]
 
-* \(Pcoll = Imean0*Imean4 - Imean1*Imean3\) where the 5 integrals are defined as:  \(\[
-    Imean0=<Dcoll> ;
+* \(Pcoll = Imean0*Imean4 - Imean1*Imean3\) where the 5 integrals are defined as:       \(\[    Imean0=<Dcoll> ;
     Imean1=<v*Dcoll> ;
     Imean2=<v^2*Dcoll> ;
     Imean3=<d/dv(Dcoll)>
     Imean4=<d/dv(v*Dcoll)>
- \]\) The brackets \(<.>\) represent the integral in velocity: \(<.> = \int . dv\)
+\]\) The brackets \(<.>\) represent the integral in velocity: \(<.> = \int . dv\)
 
 
 

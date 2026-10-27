@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classMatrix" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>Matrix</compoundname>
     <derivedcompoundref refid="classMatrix__Banded" prot="public" virt="non-virtual">Matrix_Banded</derivedcompoundref>
@@ -126,9 +126,9 @@
         <reimplementedby refid="classMatrix__Banded_1a881a233b2d548f7ea5c4e0f3cdcf5a15">set_element</reimplementedby>
         <reimplementedby refid="classMatrix__Centre__Block_1a27db3d1e7264670ff43acd1e55e85011">set_element</reimplementedby>
         <reimplementedby refid="classMatrix__Corner__Block_1ac388c62891d9e088ff9c97bc2f6fab1b">set_element</reimplementedby>
+        <reimplementedby refid="classMatrix__Dense_1ab1d60c479da034c628f830c2f967a8b4">set_element</reimplementedby>
         <reimplementedby refid="classMatrix__PDS__Tridiag_1a940a5792070054a13214e854811b0fc8">set_element</reimplementedby>
         <reimplementedby refid="classMatrix__Periodic__Banded_1ae281ee32e158b7abf8efb4e314683f6b">set_element</reimplementedby>
-        <reimplementedby refid="classMatrix__Dense_1ab1d60c479da034c628f830c2f967a8b4">set_element</reimplementedby>
         <param>
           <type>int</type>
           <declname>i</declname>
@@ -417,7 +417,8 @@
                   * * * * *
 *                   * * * *
 * *                   * * *
-</verbatim> <parameterlist kind="param"><parameteritem>
+</verbatim></para>
+<para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">n</parametername>
 </parameternamelist>
@@ -496,7 +497,8 @@
 <para><verbatim>A B C
 D E F
 G H I
-</verbatim> where E is a banded matrix, and A, E and I are square matrices.</para>
+</verbatim></para>
+<para>where E is a banded matrix, and A, E and I are square matrices.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">n</parametername>
@@ -584,8 +586,8 @@ G H I
         <argsstring>(double *b, char transpose, int n_equations) const =0</argsstring>
         <name>solve_inplace_method</name>
         <qualifiedname>Matrix::solve_inplace_method</qualifiedname>
-        <reimplementedby refid="classMatrix__Corner__Block_1ac4168729949503dc3f675fe0c3e82348">solve_inplace_method</reimplementedby>
         <reimplementedby refid="classMatrix__Banded_1a6d555bff9cfb365ebb32b25c72e640e9">solve_inplace_method</reimplementedby>
+        <reimplementedby refid="classMatrix__Corner__Block_1ac4168729949503dc3f675fe0c3e82348">solve_inplace_method</reimplementedby>
         <reimplementedby refid="classMatrix__Dense_1a04bd8154d80037d7450d40bfd5885dd8">solve_inplace_method</reimplementedby>
         <reimplementedby refid="classMatrix__PDS__Tridiag_1af414c819d702db8eefaac2b1fcb08fd2">solve_inplace_method</reimplementedby>
         <param>

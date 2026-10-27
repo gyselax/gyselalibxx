@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classNonUniformLagrangeBasis_1_1Impl" kind="class" language="C++" prot="public">
     <compoundname>NonUniformLagrangeBasis::Impl</compoundname>
     <includes refid="lagrange__basis__non__uniform_8hpp" local="no">lagrange_basis_non_uniform.hpp</includes>
@@ -44,7 +44,7 @@
         <name>Impl</name>
         <qualifiedname>NonUniformLagrangeBasis::Impl::Impl</qualifiedname>
         <param>
-          <type><ref refid="classNonUniformLagrangeBasis_1_1Impl" kindref="compound">Impl</ref></type>
+          <type>Impl</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -151,7 +151,7 @@
         <name>Impl</name>
         <qualifiedname>NonUniformLagrangeBasis::Impl::Impl</qualifiedname>
         <param>
-          <type><ref refid="classNonUniformLagrangeBasis_1_1Impl" kindref="compound">Impl</ref>&lt; DDim, OriginMemorySpace &gt; const &amp;</type>
+          <type>Impl&lt; DDim, OriginMemorySpace &gt; const &amp;</type>
           <declname>impl</declname>
         </param>
         <briefdescription>

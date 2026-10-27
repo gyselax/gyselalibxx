@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classBslPredCorrRTheta" kind="class" language="C++" prot="public">
     <compoundname>BslPredCorrRTheta</compoundname>
     <basecompoundref refid="classITimeSolverRTheta" prot="public" virt="non-virtual">ITimeSolverRTheta</basecompoundref>
@@ -47,7 +47,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="63" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBslPredCorrRTheta_1a9d6b01812cc2dd8f843130b2d2a27b20" prot="private" static="no" mutable="no">
-        <type><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref> const  &amp;</type>
+        <type>BslAdvectionRTheta const  &amp;</type>
         <definition>BslAdvectionRTheta const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder, PolarPoissonLikeSolver &gt;::m_advection_solver</definition>
         <argsstring></argsstring>
         <name>m_advection_solver</name>
@@ -115,7 +115,7 @@
           <declname>mapping</declname>
         </param>
         <param>
-          <type><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref> const &amp;</type>
+          <type>BslAdvectionRTheta const &amp;</type>
           <declname>advection_solver</declname>
         </param>
         <param>

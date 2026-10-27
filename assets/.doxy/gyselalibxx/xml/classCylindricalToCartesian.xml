@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classCylindricalToCartesian" kind="class" language="C++" prot="public">
     <compoundname>CylindricalToCartesian</compoundname>
     <includes refid="cylindrical__to__cartesian_8hpp" local="no">cylindrical_to_cartesian.hpp</includes>
@@ -418,7 +418,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp" line="161" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp" bodystart="161" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, Z &gt;, VectorIndexSet&lt; <ref refid="classCylindricalToCartesian_1a0f20428fdcab7959b3d6b5cb27cf9a29" kindref="member">R_cov</ref>, <ref refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" kindref="member">Z_cov</ref>, <ref refid="classCylindricalToCartesian_1a585a32f926487c142fd2479c7e0c912e" kindref="member">Zeta_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, Z &gt;, VectorIndexSet&lt; <ref refid="classCylindricalToCartesian_1a0f20428fdcab7959b3d6b5cb27cf9a29" kindref="member">R_cov</ref><ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" kindref="member">Z_cov</ref>, <ref refid="classCylindricalToCartesian_1a585a32f926487c142fd2479c7e0c912e" kindref="member">Zeta_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y, Z &gt;, VectorIndexSet&lt; R_cov, Z_cov, Zeta_cov &gt; &gt; CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::jacobian_matrix</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>
@@ -489,7 +489,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp" line="205" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp" bodystart="205" bodyend="231"/>
       </memberdef>
       <memberdef kind="function" id="classCylindricalToCartesian_1a07bc2e8d4fc932cb988298561e542750" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta &gt;, VectorIndexSet&lt; <ref refid="classCylindricalToCartesian_1a6659f0416281d0a6898234cae492417a" kindref="member">X_cov</ref>, <ref refid="classCylindricalToCartesian_1ae6e3d1d40c0e22e8c2a2f881a5f62357" kindref="member">Y_cov</ref>, <ref refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" kindref="member">Z_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta &gt;, VectorIndexSet&lt; <ref refid="classCylindricalToCartesian_1a6659f0416281d0a6898234cae492417a" kindref="member">X_cov</ref>, <ref refid="classCylindricalToCartesian_1ae6e3d1d40c0e22e8c2a2f881a5f62357" kindref="member">Y_cov</ref>, <ref refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" kindref="member">Z_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; R, Z, Zeta &gt;, VectorIndexSet&lt; X_cov, Y_cov, Z_cov &gt; &gt; CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::inv_jacobian_matrix</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>inv_jacobian_matrix</name>

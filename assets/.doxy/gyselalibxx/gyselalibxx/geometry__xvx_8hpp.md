@@ -312,7 +312,7 @@ using CoordXVx =  Coord<X, Vx>;
 ### typedef DConstFieldSpMom 
 
 ```C++
-typedef ConstFieldSpMom< double > DConstFieldSpMom;
+typedef ConstFieldSpMom< double > DConstFieldSpMom =  ConstFieldSpMom<double>;
 ```
 
 

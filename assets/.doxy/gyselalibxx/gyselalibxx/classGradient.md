@@ -56,9 +56,9 @@ _A class which implements a gradient operator._ [More...](#detailed-description)
 | ---: | :--- |
 |  KOKKOS\_FUNCTION | [**Gradient**](#function-gradient) (MetricTensorType const & metric\_tensor) <br>_Construct an instance of the class_ [_**Gradient**_](classGradient.md) _._ |
 |  KOKKOS\_INLINE\_FUNCTION DVectorCov | [**operator()**](#function-operator) (DVectorCov const & partial\_derivatives) const<br>_Compute the gradient of a scalar field at a given coordinate, from the partial derivatives of the field. The gradient is expressed on the covariant basis. The components of the gradient in the covariant basis are simply equal to the value of the partial derivatives of the scalar field._  |
-|  KOKKOS\_INLINE\_FUNCTION void | [**operator()**](#function-operator_1) ([**DVectorFieldCovType**](classVectorField.md)&lt; IdxRange &gt; gradient, [**DVectorConstFieldCovType**](classVectorField.md)&lt; IdxRange &gt; const partial\_derivatives) const<br>_Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the covariant basis. The components of the gradient in the covariant basis are simply equal to the value of the partial derivatives of the scalar field._  |
+|  KOKKOS\_INLINE\_FUNCTION void | [**operator()**](#function-operator_1) (DVectorFieldCovType&lt; IdxRange &gt; gradient, DVectorConstFieldCovType&lt; IdxRange &gt; const partial\_derivatives) const<br>_Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the covariant basis. The components of the gradient in the covariant basis are simply equal to the value of the partial derivatives of the scalar field._  |
 |  KOKKOS\_INLINE\_FUNCTION DVectorType | [**operator()**](#function-operator_2) (DVectorCov const & partial\_derivatives, CoordOrIdxType const & coord\_or\_idx) const<br>_Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the contravariant basis._  |
-|  void | [**operator()**](#function-operator_3) ([**DVectorFieldType**](classVectorField.md)&lt; IdxRange &gt; const gradient, [**DVectorConstFieldCovType**](classVectorField.md)&lt; IdxRange &gt; const partial\_derivatives) const<br>_Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis._  __ |
+|  void | [**operator()**](#function-operator_3) (DVectorFieldType&lt; IdxRange &gt; const gradient, DVectorConstFieldCovType&lt; IdxRange &gt; const partial\_derivatives) const<br>_Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis._  |
 
 
 
@@ -173,8 +173,8 @@ _Compute the gradient of a scalar field at a given coordinate, using partial der
 ```C++
 template<class IdxRange>
 inline KOKKOS_INLINE_FUNCTION void Gradient::operator() (
-    DVectorFieldCovType < IdxRange > gradient,
-    DVectorConstFieldCovType < IdxRange > const partial_derivatives
+    DVectorFieldCovType< IdxRange > gradient,
+    DVectorConstFieldCovType< IdxRange > const partial_derivatives
 ) const
 ```
 
@@ -236,12 +236,12 @@ The components of the gradient at a given coordinate, expressed on the contravar
 
 ### function operator() 
 
-_Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis._  __
+_Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis._ 
 ```C++
 template<class IdxRange>
 inline void Gradient::operator() (
-    DVectorFieldType < IdxRange > const gradient,
-    DVectorConstFieldCovType < IdxRange > const partial_derivatives
+    DVectorFieldType< IdxRange > const gradient,
+    DVectorConstFieldCovType< IdxRange > const partial_derivatives
 ) const
 ```
 

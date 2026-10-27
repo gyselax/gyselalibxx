@@ -48,7 +48,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr Idx&lt; TargetGrid &gt; | [**out\_of\_bounds\_idx**](#variable-out_of_bounds_idx)   = `Idx&lt;TargetGrid&gt;(std::string::npos)`<br> |
+|  Idx&lt; TargetGrid &gt; | [**out\_of\_bounds\_idx**](#variable-out_of_bounds_idx)   = `Idx&lt;TargetGrid&gt;(std::string::npos)`<br> |
 
 
 
@@ -99,7 +99,7 @@
 ### variable out\_of\_bounds\_idx 
 
 ```C++
-constexpr Idx<TargetGrid> out_of_bounds_idx;
+Idx<TargetGrid> out_of_bounds_idx;
 ```
 
 

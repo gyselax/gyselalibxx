@@ -496,7 +496,11 @@ using VectorConstFieldXY_XY =  typename VectorFieldMemXY_XY::view_type;
 ### typedef VectorFieldMemXY\_XY 
 
 ```C++
-using VectorFieldMemXY_XY =  VectorFieldMem< double, IdxRangeXY, VectorIndexSet<X, Y>, Kokkos::DefaultExecutionSpace::memory_space>;
+using VectorFieldMemXY_XY =  VectorFieldMem<
+        double,
+        IdxRangeXY,
+        VectorIndexSet<X, Y>,
+        Kokkos::DefaultExecutionSpace::memory_space>;
 ```
 
 

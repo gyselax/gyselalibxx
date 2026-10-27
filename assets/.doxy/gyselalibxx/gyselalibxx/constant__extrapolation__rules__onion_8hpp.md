@@ -36,7 +36,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) &lt;class PatchLocator&gt;<br>_Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __ |
+| struct | [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) &lt;class PatchLocator&gt;<br>_Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  |
 
 
 

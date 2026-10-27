@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="l__norm__tools_8hpp" kind="file" language="C++">
     <compoundname>l_norm_tools.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -327,6 +327,7 @@
         <link refid="crank__nicolson_8hpp_source"/>
       </node>
     </invincdepgraph>
+    <innerconcept refid="conceptconcepts_1_1CompatibleFunc">concepts::CompatibleFunc</innerconcept>
     <innernamespace refid="namespaceconcepts">concepts</innernamespace>
     <sectiondef kind="func">
       <memberdef kind="function" id="l__norm__tools_8hpp_1a61d74f9926c59120d9d583329a93db08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -383,7 +384,7 @@
         <argsstring>(Vector&lt; ElementType, Tags... &gt; vec)</argsstring>
         <name>norm_inf</name>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Vector</ref>&lt; ElementType, Tags... &gt;</type>
+          <type>Vector&lt; ElementType, Tags... &gt;</type>
           <declname>vec</declname>
         </param>
         <briefdescription>
@@ -578,7 +579,7 @@
           <declname>exec_space</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;</type>
+          <type>VectorConstField&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;</type>
           <declname>function</declname>
         </param>
         <briefdescription>
@@ -834,11 +835,11 @@
           <declname>exec_space</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;</type>
+          <type>VectorConstField&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;</type>
           <declname>function</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;</type>
+          <type>VectorConstField&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;</type>
           <declname>exact_function</declname>
         </param>
         <briefdescription>
@@ -1171,8 +1172,9 @@
 <para>File Describing useful mathematical functions to compute Lnorms </para>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight></codeline>
-<codeline lineno="7"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
@@ -1189,9 +1191,9 @@
 <codeline lineno="32"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Tags&gt;</highlight></codeline>
-<codeline lineno="46" refid="l__norm__tools_8hpp_1a1cf1e40b723868f2ca5f8c7f7f1bbadb" refkind="member"><highlight class="normal">KOKKOS_FUNCTION<sp/>ElementType<sp/><ref refid="l__norm__tools_8hpp_1a61d74f9926c59120d9d583329a93db08" kindref="member">norm_inf</ref>(<ref refid="classTensor" kindref="compound">Vector&lt;ElementType, Tags...&gt;</ref><sp/>vec)</highlight></codeline>
+<codeline lineno="46" refid="l__norm__tools_8hpp_1a1cf1e40b723868f2ca5f8c7f7f1bbadb" refkind="member"><highlight class="normal">KOKKOS_FUNCTION<sp/>ElementType<sp/><ref refid="l__norm__tools_8hpp_1a61d74f9926c59120d9d583329a93db08" kindref="member">norm_inf</ref>(Vector&lt;ElementType,<sp/>Tags...&gt;<sp/>vec)</highlight></codeline>
 <codeline lineno="47"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">index_set<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classTensor" kindref="compound">Vector</ref>&lt;ElementType,<sp/>Tags...&gt;::template<sp/>vector_index_set_t&lt;0&gt;;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">index_set<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Vector&lt;ElementType,<sp/>Tags...&gt;::template<sp/>vector_index_set_t&lt;0&gt;;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;index_set,<sp/>vector_index_set_dual_t&lt;index_set&gt;&gt;,</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Mapping<sp/>is<sp/>needed<sp/>to<sp/>calculate<sp/>norm_inf<sp/>on<sp/>a<sp/>non-orthonormal<sp/>coordinate<sp/>system&quot;</highlight><highlight class="normal">);</highlight></codeline>
@@ -1211,7 +1213,7 @@
 <codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment">//<sp/>General<sp/>implementation<sp/>of<sp/>the<sp/>infinity<sp/>norm.<sp/>This<sp/>function<sp/>is<sp/>in<sp/>a<sp/>namespace<sp/>to<sp/>avoid<sp/>code<sp/>duplication</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment">//<sp/>without<sp/>creating<sp/>a<sp/>function<sp/>so<sp/>general<sp/>that<sp/>it<sp/>also<sp/>captures<sp/>multipatch<sp/>types.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DataType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>FuncType&gt;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal">DataType<sp/><ref refid="l__norm__tools_8hpp_1a61d74f9926c59120d9d583329a93db08" kindref="member">norm_inf</ref>(ExecSpace<sp/>exec_space,<sp/>FuncType<sp/>function)</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">DataType<sp/>norm_inf(ExecSpace<sp/>exec_space,<sp/>FuncType<sp/>function)</highlight></codeline>
 <codeline lineno="80"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::SpaceAccessibility&lt;ExecSpace,<sp/>typename<sp/>FuncType::memory_space&gt;::accessible);</highlight></codeline>
@@ -1271,7 +1273,7 @@
 <codeline lineno="154"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>VectorIndexSetType&gt;</highlight></codeline>
 <codeline lineno="155" refid="l__norm__tools_8hpp_1a51fd7823c5cc86e3e7d753dfdcfb1471" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>ElementType<sp/><ref refid="l__norm__tools_8hpp_1a61d74f9926c59120d9d583329a93db08" kindref="member">norm_inf</ref>(</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/>exec_space,</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorConstField&lt;</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
 <codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange,</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSetType,</highlight></codeline>
@@ -1324,12 +1326,12 @@
 <codeline lineno="238"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>VectorIndexSetType&gt;</highlight></codeline>
 <codeline lineno="239" refid="l__norm__tools_8hpp_1a31144bf2ce8b35e109a87fcb291b6c71" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>ElementType<sp/><ref refid="l__norm__tools_8hpp_1ae88afaf9e53757beb5a965bd85aeaa00" kindref="member">error_norm_inf</ref>(</highlight></codeline>
 <codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/>exec_space,</highlight></codeline>
-<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorConstField&lt;</highlight></codeline>
 <codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
 <codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange,</highlight></codeline>
 <codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSetType,</highlight></codeline>
 <codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space&gt;<sp/>function,</highlight></codeline>
-<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorConstField&lt;</highlight></codeline>
 <codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange,</highlight></codeline>
 <codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSetType,</highlight></codeline>

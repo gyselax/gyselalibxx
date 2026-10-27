@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classSpline2DPartialDerivative" kind="class" language="C++" prot="public">
     <compoundname>Spline2DPartialDerivative</compoundname>
     <basecompoundref refid="classIPartialDerivative" prot="public" virt="non-virtual">IPartialDerivative&lt; IdxRangeBatched, DerivativeDimension &gt;</basecompoundref>
@@ -261,7 +261,7 @@
       <member refid="classSpline2DPartialDerivative_1abc52c9393410ebdec54ed4cf82e7b14e" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>DFieldBS</name></member>
       <member refid="classSpline2DPartialDerivative_1ad9312c8881c576b1456e780bcd09d389" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>DFieldBSMem</name></member>
       <member refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>DFieldType</name></member>
-      <member refid="classIPartialDerivative_1a5b5bbff2fea1001b2a434b28784f288f" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>GridDerivativeDimension</name></member>
+      <member refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>GridDerivativeDimension</name></member>
       <member refid="classIPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>IdxRangeBatch</name></member>
       <member refid="classSpline2DPartialDerivative_1a2040e0968d53f1264d49cd574846d8cc" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>IdxRangeBS</name></member>
       <member refid="classIPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>IdxRangeDeriv</name></member>

@@ -91,8 +91,8 @@ Inherits the following classes: [VectorFieldCommon](classVectorFieldCommon.md)
 |   | [**VectorFieldMem**](#function-vectorfieldmem-57) (std::string const & label, [**index\_range\_type**](classVectorFieldMem.md#typedef-index_range_type) const & idx\_range, [**Allocator**](classVectorFieldMem.md#typedef-allocator) allocator=[**Allocator**](classVectorFieldMem.md#typedef-allocator)()) <br> |
 |   | [**VectorFieldMem**](#function-vectorfieldmem-67) ([**VectorFieldMem**](classVectorFieldMem.md) const & other) = delete<br>_Deleted: use deepcopy instead._  |
 |   | [**VectorFieldMem**](#function-vectorfieldmem-77) ([**VectorFieldMem**](classVectorFieldMem.md) && other) = default<br> |
-|  constexpr chunk\_span\_type | [**get**](#function-get-12) () noexcept<br>_Get the Field describing the component in the QueryTag direction._  |
-|  constexpr chunk\_view\_type | [**get**](#function-get-22) () noexcept const<br>_Get the Field describing the component in the QueryTag direction._  |
+|  chunk\_span\_type | [**get**](#function-get-12) () noexcept<br>_Get the Field describing the component in the QueryTag direction._  |
+|  chunk\_view\_type | [**get**](#function-get-22) () noexcept const<br>_Get the Field describing the component in the QueryTag direction._  |
 |  [**view\_type**](classVectorFieldMem.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br> |
 |  [**view\_type**](classVectorFieldMem.md#typedef-view_type) | [**get\_field**](#function-get_field-12) () const<br> |
 |  [**span\_type**](classVectorFieldMem.md#typedef-span_type) | [**get\_field**](#function-get_field-22) () <br> |
@@ -266,7 +266,12 @@ using VectorFieldMem< ElementType, IdxRangeType, VectorIndexSetType, MemSpace >:
 
 _A type which can hold a reference to this_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._
 ```C++
-using VectorFieldMem< ElementType, IdxRangeType, VectorIndexSetType, MemSpace >::span_type =  VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right>;
+using VectorFieldMem< ElementType, IdxRangeType, VectorIndexSetType, MemSpace >::span_type =  VectorField<
+            ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemSpace,
+            Kokkos::layout_right>;
 ```
 
 
@@ -284,7 +289,12 @@ This is a DDC keyword used to make this class interchangeable with Field.
 
 _A type which can hold a constant reference to this_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._
 ```C++
-using VectorFieldMem< ElementType, IdxRangeType, VectorIndexSetType, MemSpace >::view_type =  VectorField< const ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right>;
+using VectorFieldMem< ElementType, IdxRangeType, VectorIndexSetType, MemSpace >::view_type =  VectorField<
+            const ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemSpace,
+            Kokkos::layout_right>;
 ```
 
 
@@ -425,7 +435,7 @@ Constructs a new [**VectorFieldMem**](classVectorFieldMem.md) by move
 _Get the Field describing the component in the QueryTag direction._ 
 ```C++
 template<class QueryTag>
-inline constexpr chunk_span_type VectorFieldMem::get () noexcept
+inline chunk_span_type VectorFieldMem::get () noexcept
 ```
 
 
@@ -451,7 +461,7 @@ The field in the specified direction.
 _Get the Field describing the component in the QueryTag direction._ 
 ```C++
 template<class QueryTag>
-inline constexpr chunk_view_type VectorFieldMem::get () noexcept const
+inline chunk_view_type VectorFieldMem::get () noexcept const
 ```
 
 

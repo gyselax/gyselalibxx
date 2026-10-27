@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classtensor__tools_1_1IndexedTensor" kind="class" language="C++" prot="public">
     <compoundname>tensor_tools::IndexedTensor</compoundname>
     <includes refid="indexed__tensor_8hpp" local="no">indexed_tensor.hpp</includes>
@@ -96,7 +96,7 @@
         <name>IndexedTensor</name>
         <qualifiedname>tensor_tools::IndexedTensor::IndexedTensor</qualifiedname>
         <param>
-          <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> const &amp;</type>
+          <type>IndexedTensor const &amp;</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -113,7 +113,7 @@
         <name>IndexedTensor</name>
         <qualifiedname>tensor_tools::IndexedTensor::IndexedTensor</qualifiedname>
         <param>
-          <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> &amp;&amp;</type>
+          <type>IndexedTensor &amp;&amp;</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -138,13 +138,13 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="56" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1af4b4eb7621bfd6bbff308f0843ff70eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> &amp;</type>
+        <type><ref refid="classtensor__tools_1_1IndexedTensor_1adc2f44bbee1b54e63cfc68a08ff8f632" kindref="member">IndexedTensor</ref> &amp;</type>
         <definition>IndexedTensor &amp; tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::operator=</definition>
         <argsstring>(IndexedTensor const &amp;)=delete</argsstring>
         <name>operator=</name>
         <qualifiedname>tensor_tools::IndexedTensor::operator=</qualifiedname>
         <param>
-          <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> const &amp;</type>
+          <type><ref refid="classtensor__tools_1_1IndexedTensor_1adc2f44bbee1b54e63cfc68a08ff8f632" kindref="member">IndexedTensor</ref> const &amp;</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -155,13 +155,13 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="58" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1a7be8571c3a3f172553a9af1a7a35b3f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> &amp;</type>
+        <type><ref refid="classtensor__tools_1_1IndexedTensor_1adc2f44bbee1b54e63cfc68a08ff8f632" kindref="member">IndexedTensor</ref> &amp;</type>
         <definition>IndexedTensor &amp; tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::operator=</definition>
         <argsstring>(IndexedTensor &amp;&amp;)=delete</argsstring>
         <name>operator=</name>
         <qualifiedname>tensor_tools::IndexedTensor::operator=</qualifiedname>
         <param>
-          <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> &amp;&amp;</type>
+          <type><ref refid="classtensor__tools_1_1IndexedTensor_1adc2f44bbee1b54e63cfc68a08ff8f632" kindref="member">IndexedTensor</ref> &amp;&amp;</type>
         </param>
         <briefdescription>
         </briefdescription>

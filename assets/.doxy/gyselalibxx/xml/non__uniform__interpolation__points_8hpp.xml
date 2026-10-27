@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="non__uniform__interpolation__points_8hpp" kind="file" language="C++">
     <compoundname>non_uniform_interpolation_points.hpp</compoundname>
     <includes local="no">cassert</includes>
@@ -388,7 +388,7 @@
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ddcHelper<sp/>{</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>BSplines,<sp/>ddc::SplineBuilderClosure<sp/>BcXmin,<sp/>ddc::SplineBuilderClosure<sp/>BcXmax&gt;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NonUniformInterpolationPoints;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classddcHelper_1_1NonUniformInterpolationPoints" kindref="compound">NonUniformInterpolationPoints</ref>;</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline lineno="19" refid="structddcHelper_1_1is__non__uniform__interpolation__points" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structddcHelper_1_1is__non__uniform__interpolation__points" kindref="compound">is_non_uniform_interpolation_points</ref><sp/>:<sp/>std::false_type</highlight></codeline>
@@ -476,7 +476,7 @@
 <codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>domain_len<sp/>=<sp/>ddc::discrete_space&lt;BSplines&gt;().rmax()</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddc::discrete_space&lt;BSplines&gt;().rmin();</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SamplingImpl<sp/>result(interp_points.front(),<sp/>domain_len<sp/>/<sp/>(interp_points.size()<sp/>-<sp/>1));</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;Sampling&gt;<sp/>idx_range(get_domain&lt;Sampling&gt;());</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;Sampling&gt;<sp/>idx_range(<ref refid="classddcHelper_1_1NonUniformInterpolationPoints_1a947c549e52044a11d9483af1627835f4" kindref="member">get_domain&lt;Sampling&gt;</ref>());</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>same_points<sp/>=<sp/>ddc::host_transform_reduce(</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idx_range,</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,</highlight></codeline>

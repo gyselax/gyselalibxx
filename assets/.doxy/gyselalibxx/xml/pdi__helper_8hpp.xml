@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="pdi__helper_8hpp" kind="file" language="C++">
     <compoundname>pdi_helper.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -307,7 +307,7 @@
           <declname>name_stem</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt;</type>
+          <type>VectorConstField&lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt;</type>
           <declname>out_vector</declname>
         </param>
         <param>
@@ -449,7 +449,7 @@
 <codeline lineno="104"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>IndexTag,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>StringType&gt;</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PDI_expose_vector_field(</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>name_stem,</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt;ElementType,<sp/>IdxRangeType,<sp/>VectorIndexSet&lt;IndexTag...&gt;,<sp/>Kokkos::HostSpace&gt;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorConstField&lt;ElementType,<sp/>IdxRangeType,<sp/>VectorIndexSet&lt;IndexTag...&gt;,<sp/>Kokkos::HostSpace&gt;</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out_vector,</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StringType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>name_suffixes)</highlight></codeline>
 <codeline lineno="110"><highlight class="normal">{</highlight></codeline>

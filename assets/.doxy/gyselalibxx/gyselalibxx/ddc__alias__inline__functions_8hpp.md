@@ -39,21 +39,21 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_data\_access\_methods**](#variable-enable_data_access_methods)   = `false`<br> |
-|  constexpr bool | [**enable\_data\_access\_methods&lt; Field&lt; ElementType, IdxRangeType, LayoutType, MemoryType &gt; &gt;**](#variable-enable_data_access_methods-field-elementtype-idxrangetype-layouttype-memorytype)   = `true`<br> |
-|  constexpr bool | [**enable\_data\_access\_methods&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;**](#variable-enable_data_access_methods-fieldmem-elementtype-idxrangetype-memorytype)   = `true`<br> |
-|  constexpr bool | [**enable\_mem\_type**](#variable-enable_mem_type)   = `false`<br> |
-|  constexpr bool | [**enable\_mem\_type&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;**](#variable-enable_mem_type-fieldmem-elementtype-idxrangetype-memorytype)   = `true`<br> |
-|  constexpr bool | [**has\_data\_access\_methods\_v**](#variable-has_data_access_methods_v)   = `enable\_data\_access\_methods&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
-|  constexpr bool | [**is\_mem\_type\_v**](#variable-is_mem_type_v)   = `enable\_mem\_type&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
+|  bool | [**enable\_data\_access\_methods**](#variable-enable_data_access_methods)   = `false`<br> |
+|  bool | [**enable\_data\_access\_methods&lt; Field&lt; ElementType, IdxRangeType, LayoutType, MemoryType &gt; &gt;**](#variable-enable_data_access_methods-field-elementtype-idxrangetype-layouttype-memorytype)   = `true`<br> |
+|  bool | [**enable\_data\_access\_methods&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;**](#variable-enable_data_access_methods-fieldmem-elementtype-idxrangetype-memorytype)   = `true`<br> |
+|  bool | [**enable\_mem\_type**](#variable-enable_mem_type)   = `false`<br> |
+|  bool | [**enable\_mem\_type&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;**](#variable-enable_mem_type-fieldmem-elementtype-idxrangetype-memorytype)   = `true`<br> |
+|  bool | [**has\_data\_access\_methods\_v**](#variable-has_data_access_methods_v)   = `enable\_data\_access\_methods&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
+|  bool | [**is\_mem\_type\_v**](#variable-is_mem_type_v)   = `enable\_mem\_type&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
 
 
 ## Public Static Attributes
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**has\_idx\_range\_v**](#variable-has_idx_range_v)   = `detail::HasIdxRange&lt;Type&gt;::value`<br> |
-|  constexpr bool | [**is\_gslx\_field\_v**](#variable-is_gslx_field_v)   = `detail::IsGslxField&lt;Type&gt;::value`<br> |
+|  bool | [**has\_idx\_range\_v**](#variable-has_idx_range_v)   = `detail::HasIdxRange&lt;Type&gt;::value`<br> |
+|  bool | [**is\_gslx\_field\_v**](#variable-is_gslx_field_v)   = `detail::IsGslxField&lt;Type&gt;::value`<br> |
 
 
 
@@ -114,7 +114,7 @@
 ### variable enable\_data\_access\_methods 
 
 ```C++
-constexpr bool enable_data_access_methods;
+bool enable_data_access_methods;
 ```
 
 
@@ -127,7 +127,7 @@ constexpr bool enable_data_access_methods;
 ### variable enable\_data\_access\_methods&lt; Field&lt; ElementType, IdxRangeType, LayoutType, MemoryType &gt; &gt; 
 
 ```C++
-constexpr bool enable_data_access_methods< Field< ElementType, IdxRangeType, LayoutType, MemoryType > >;
+bool enable_data_access_methods< Field< ElementType, IdxRangeType, LayoutType, MemoryType > >;
 ```
 
 
@@ -140,7 +140,7 @@ constexpr bool enable_data_access_methods< Field< ElementType, IdxRangeType, Lay
 ### variable enable\_data\_access\_methods&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt; 
 
 ```C++
-constexpr bool enable_data_access_methods< FieldMem< ElementType, IdxRangeType, MemoryType > >;
+bool enable_data_access_methods< FieldMem< ElementType, IdxRangeType, MemoryType > >;
 ```
 
 
@@ -153,7 +153,7 @@ constexpr bool enable_data_access_methods< FieldMem< ElementType, IdxRangeType, 
 ### variable enable\_mem\_type 
 
 ```C++
-constexpr bool enable_mem_type;
+bool enable_mem_type;
 ```
 
 
@@ -166,7 +166,7 @@ constexpr bool enable_mem_type;
 ### variable enable\_mem\_type&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt; 
 
 ```C++
-constexpr bool enable_mem_type< FieldMem< ElementType, IdxRangeType, MemoryType > >;
+bool enable_mem_type< FieldMem< ElementType, IdxRangeType, MemoryType > >;
 ```
 
 
@@ -179,7 +179,7 @@ constexpr bool enable_mem_type< FieldMem< ElementType, IdxRangeType, MemoryType 
 ### variable has\_data\_access\_methods\_v 
 
 ```C++
-constexpr bool has_data_access_methods_v;
+bool has_data_access_methods_v;
 ```
 
 
@@ -192,7 +192,7 @@ constexpr bool has_data_access_methods_v;
 ### variable is\_mem\_type\_v 
 
 ```C++
-constexpr bool is_mem_type_v;
+bool is_mem_type_v;
 ```
 
 
@@ -207,7 +207,7 @@ constexpr bool is_mem_type_v;
 ### variable has\_idx\_range\_v 
 
 ```C++
-constexpr bool has_idx_range_v;
+bool has_idx_range_v;
 ```
 
 
@@ -220,7 +220,7 @@ constexpr bool has_idx_range_v;
 ### variable is\_gslx\_field\_v 
 
 ```C++
-constexpr bool is_gslx_field_v;
+bool is_gslx_field_v;
 ```
 
 

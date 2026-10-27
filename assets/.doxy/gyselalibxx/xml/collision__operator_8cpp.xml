@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="collision__operator_8cpp" kind="file" language="C++">
     <compoundname>collision_operator.cpp</compoundname>
     <includes local="no">KOLIOP/koliop.h</includes>
@@ -30,8 +30,6 @@
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="18">
@@ -129,8 +127,8 @@
     </incdepgraph>
     <sectiondef kind="var">
       <memberdef kind="variable" id="collision__operator_8cpp_1a022d351f177d08555cf5ad887858a73b" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr std::size_t</type>
-        <definition>constexpr std::size_t local_idx_range_r_offset</definition>
+        <type>std::size_t</type>
+        <definition>std::size_t local_idx_range_r_offset</definition>
         <argsstring></argsstring>
         <name>local_idx_range_r_offset</name>
         <initializer>= 0</initializer>
@@ -143,8 +141,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.cpp" line="7" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.cpp" bodystart="7" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="collision__operator_8cpp_1a20a61f0c70506b40be4883401c369b90" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr std::size_t</type>
-        <definition>constexpr std::size_t local_idx_range_theta_offset</definition>
+        <type>std::size_t</type>
+        <definition>std::size_t local_idx_range_theta_offset</definition>
         <argsstring></argsstring>
         <name>local_idx_range_theta_offset</name>
         <initializer>= 0</initializer>
@@ -157,8 +155,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.cpp" line="9" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.cpp" bodystart="9" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="collision__operator_8cpp_1a3e5826074a0691d0a47a2aa9074524dc" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr std::int8_t</type>
-        <definition>constexpr std::int8_t is_sol_enabled</definition>
+        <type>std::int8_t</type>
+        <definition>std::int8_t is_sol_enabled</definition>
         <argsstring></argsstring>
         <name>is_sol_enabled</name>
         <initializer>= false</initializer>
@@ -171,8 +169,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.cpp" line="14" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.cpp" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="collision__operator_8cpp_1a878048a648864a786105b0b734c3532d" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr std::int8_t</type>
-        <definition>constexpr std::int8_t is_limiter_mask_enabled</definition>
+        <type>std::int8_t</type>
+        <definition>std::int8_t is_limiter_mask_enabled</definition>
         <argsstring></argsstring>
         <name>is_limiter_mask_enabled</name>
         <initializer>= true</initializer>

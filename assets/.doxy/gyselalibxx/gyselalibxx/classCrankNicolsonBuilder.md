@@ -165,7 +165,7 @@ inline auto CrankNicolsonBuilder::preallocate (
 **Template parameters:**
 
 
-* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from time\_stepper\_t). 
+* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from [**time\_stepper\_t**](classCrankNicolsonBuilder.md#typedef-time_stepper_t)). 
 
 
 
@@ -198,7 +198,7 @@ inline auto CrankNicolsonBuilder::preallocate () const
 **Template parameters:**
 
 
-* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from time\_stepper\_t). 
+* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from [**time\_stepper\_t**](classCrankNicolsonBuilder.md#typedef-time_stepper_t)). 
 
 
 

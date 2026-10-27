@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -600,7 +606,12 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-lagrangeinterpolator">typedef LagrangeInterpolator</h3>
 <p><em>A helper alias to define an instance of detail::LagrangeInterpolator.</em> </p>
-<pre><code class="language-C++">using LagrangeInterpolator =  typename detail::LagrangeInterpolatorResolver&lt; ExecSpace, DataType, IdxRangeBasis, IdxRangeInterpGrid, ExtrapRules...&gt;::type;
+<pre><code class="language-C++">using LagrangeInterpolator =  typename detail::LagrangeInterpolatorResolver&lt;
+        ExecSpace,
+        DataType,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        ExtrapRules...&gt;::type;
 </code></pre>
 <p>The helper allows ExtrapRules to be more general. It is a ddc::detail::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> namespace (e.g. <a href="namespaceExtrapolationRule.html#typedef-periodic"><strong>ExtrapolationRule::Periodic</strong></a>) or a custom, already-concrete extrapolation rule class. </p>
 <hr>

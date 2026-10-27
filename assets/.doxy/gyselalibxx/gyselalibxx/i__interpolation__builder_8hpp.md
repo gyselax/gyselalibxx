@@ -47,7 +47,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::type\_seq\_element\_t&lt; 0, ddc::to\_type\_seq\_t&lt; typename [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md)&lt; BuilderType &gt;::interpolation\_idx\_range\_type &gt; &gt; | [**interpolation\_grid\_t**](#typedef-interpolation_grid_t)  <br>_The discrete grid on which interpolation values are given (1D builders only)._  |
+| typedef ddc::type\_seq\_element\_t&lt; 0, ddc::to\_type\_seq\_t&lt; typename [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md)&lt; BuilderType &gt;[**::interpolation\_idx\_range\_type**](structInterpolationBuilderTraits.md) &gt; &gt; | [**interpolation\_grid\_t**](#typedef-interpolation_grid_t)  <br>_The discrete grid on which interpolation values are given (1D builders only)._  |
 
 
 
@@ -110,7 +110,10 @@
 
 _The discrete grid on which interpolation values are given (1D builders only)._ 
 ```C++
-using interpolation_grid_t =  ddc::type_seq_element_t< 0, ddc::to_type_seq_t< typename InterpolationBuilderTraits<BuilderType>::interpolation_idx_range_type> >;
+using interpolation_grid_t =  ddc::type_seq_element_t<
+        0,
+        ddc::to_type_seq_t<
+                typename InterpolationBuilderTraits<BuilderType>::interpolation_idx_range_type>>;
 ```
 
 

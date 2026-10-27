@@ -92,7 +92,10 @@ _Specialisation of_ [_**StripOutsideEdges**_](structconnectivity__details_1_1Str
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::StripOutsideEdges< ddc::detail::TypeSeq< EdgeType > >::type =  std::conditional_t< std::is_same_v<EdgeType, OutsideEdge>, ddc::detail::TypeSeq<>, ddc::detail::TypeSeq<EdgeType> >;
+using connectivity_details::StripOutsideEdges< ddc::detail::TypeSeq< EdgeType > >::type =  std::conditional_t<
+            std::is_same_v<EdgeType, OutsideEdge>,
+            ddc::detail::TypeSeq<>,
+            ddc::detail::TypeSeq<EdgeType>>;
 ```
 
 

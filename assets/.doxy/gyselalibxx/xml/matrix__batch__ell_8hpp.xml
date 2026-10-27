@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="matrix__batch__ell_8hpp" kind="file" language="C++">
     <compoundname>matrix_batch_ell.hpp</compoundname>
     <includes local="no">ginkgo/extensions/kokkos.hpp</includes>
@@ -102,12 +102,12 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;matrix_utils.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace&gt;</highlight></codeline>
-<codeline lineno="24" refid="classMatrixBatchEll" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMatrixBatchEll" kindref="compound">MatrixBatchEll</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref>&lt;ExecSpace&gt;</highlight></codeline>
+<codeline lineno="24" refid="classMatrixBatchEll" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMatrixBatchEll_1aaef2264db89e99beb1a012d190e95ecc" kindref="member">MatrixBatchEll</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classMatrixBatch_1aa36e5c69da8c424b977aae7ac390715c" kindref="member">MatrixBatch</ref>&lt;ExecSpace&gt;</highlight></codeline>
 <codeline lineno="25"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classMatrixBatch_1aaefa005779305b357172ff993db97030" kindref="member">MatrixBatch&lt;ExecSpace&gt;::BatchedRHS</ref>;</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref>&lt;ExecSpace&gt;<ref refid="classMatrixBatch_1a62a55966b021f64906841fb38764dbc0" kindref="member">::size</ref>;</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref>&lt;ExecSpace&gt;<ref refid="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" kindref="member">::batch_size</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMatrixBatch_1aa36e5c69da8c424b977aae7ac390715c" kindref="member">MatrixBatch</ref>&lt;ExecSpace&gt;<ref refid="classMatrixBatch_1a62a55966b021f64906841fb38764dbc0" kindref="member">::size</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMatrixBatch_1aa36e5c69da8c424b977aae7ac390715c" kindref="member">MatrixBatch</ref>&lt;ExecSpace&gt;<ref refid="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" kindref="member">::batch_size</ref>;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">batch_sparse_type<sp/>=<sp/>gko::batch::matrix::Ell&lt;double,<sp/>int&gt;;</highlight></codeline>
@@ -128,7 +128,7 @@
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;int&gt;<sp/>max_iter<sp/>=<sp/>std::nullopt,</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;double&gt;<sp/>res_tol<sp/>=<sp/>std::nullopt,</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;bool&gt;<sp/>logger<sp/>=<sp/>std::nullopt)</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref>&lt;ExecSpace&gt;(<ref refid="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" kindref="member">batch_size</ref>,<sp/>mat_size)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatrixBatch_1aa36e5c69da8c424b977aae7ac390715c" kindref="member">MatrixBatch</ref>&lt;ExecSpace&gt;(<ref refid="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" kindref="member">batch_size</ref>,<sp/>mat_size)</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_iter(max_iter.value_or(mat_size))</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_tol(res_tol.value_or(1e-15))</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_with_logger(logger.value_or(false))</highlight></codeline>
@@ -147,7 +147,7 @@
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;int&gt;<sp/>max_iter<sp/>=<sp/>std::nullopt,</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;double&gt;<sp/>res_tol<sp/>=<sp/>std::nullopt,</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;bool&gt;<sp/>logger<sp/>=<sp/>std::nullopt)</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref>&lt;ExecSpace&gt;(batch_values.extent(0),<sp/>batch_values.extent(1))</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatrixBatch_1aa36e5c69da8c424b977aae7ac390715c" kindref="member">MatrixBatch</ref>&lt;ExecSpace&gt;(batch_values.extent(0),<sp/>batch_values.extent(1))</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_iter(max_iter.value_or(500))</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_tol(res_tol.value_or(1e-15))</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_with_logger(logger.value_or(false))</highlight></codeline>

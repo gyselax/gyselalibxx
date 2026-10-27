@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -586,7 +592,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims &gt;</td>
+<td style="text-align: right;">typedef DTensor&lt; Dims &gt;</td>
 <td style="text-align: left;"><a href="#typedef-contravariantvectortype"><strong>ContravariantVectorType</strong></a>  <br><em>The type of a contravariant vector associated with this mapping.</em></td>
 </tr>
 <tr>
@@ -594,7 +600,7 @@
 <td style="text-align: left;"><a href="#typedef-coordarg"><strong>CoordArg</strong></a>  <br><em>The type of a coordinate associated with this mapping.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="classTensor.html"><strong>DTensor</strong></a>&lt; vector_index_set_dual_t&lt; Dims &gt; &gt;</td>
+<td style="text-align: right;">typedef DTensor&lt; vector_index_set_dual_t&lt; Dims &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-covariantvectortype"><strong>CovariantVectorType</strong></a>  <br><em>The type of a covariant vector associated with this mapping.</em></td>
 </tr>
 </tbody>
@@ -613,19 +619,19 @@
 <td style="text-align: left;"><a href="#function-metrictensorevaluator"><strong>MetricTensorEvaluator</strong></a> (Mapping mapping) <br><em>A constructor for the metric tensor operator.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims, Dims &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt;</td>
 <td style="text-align: left;"><a href="#function-inverse-12"><strong>inverse</strong></a> (<a href="classMetricTensorEvaluator.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the inverse metric tensor associated with the mapping at a given position in space.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims, Dims &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt;</td>
 <td style="text-align: left;"><a href="#function-inverse-22"><strong>inverse</strong></a> (IdxType const &amp; idx) const<br><em>Compute the inverse metric tensor associated with the mapping at the coordinate of an index.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims_cov, Dims_cov &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt;</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classMetricTensorEvaluator.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the metric tensor associated with the mapping at a given position in space.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; Dims_cov, Dims_cov &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt;</td>
 <td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (IdxType const &amp; idx) const<br><em>Compute the metric tensor associated with the mapping at the coordinate of an index.</em></td>
 </tr>
 </tbody>
@@ -651,7 +657,7 @@
 
 <h3 id="typedef-covariantvectortype">typedef CovariantVectorType</h3>
 <p><em>The type of a covariant vector associated with this mapping.</em> </p>
-<pre><code class="language-C++">using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::CovariantVectorType =  DTensor&lt;vector_index_set_dual_t&lt;Dims&gt; &gt;;
+<pre><code class="language-C++">using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::CovariantVectorType =  DTensor&lt;vector_index_set_dual_t&lt;Dims&gt;&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -669,7 +675,7 @@
 
 <h3 id="function-inverse-12">function inverse [1/2]</h3>
 <p><em>Compute the inverse metric tensor associated with the mapping at a given position in space.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; Dims, Dims &gt; MetricTensorEvaluator::inverse (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt; MetricTensorEvaluator::inverse (
     CoordArg const &amp; coord
 ) const
 </code></pre>
@@ -684,7 +690,7 @@
 <h3 id="function-inverse-22">function inverse [2/2]</h3>
 <p><em>Compute the inverse metric tensor associated with the mapping at the coordinate of an index.</em> </p>
 <pre><code class="language-C++">template&lt;ddc::concepts::discrete_element IdxType&gt;
-inline KOKKOS_FUNCTION DTensor &lt; Dims, Dims &gt; MetricTensorEvaluator::inverse (
+inline KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt; MetricTensorEvaluator::inverse (
     IdxType const &amp; idx
 ) const
 </code></pre>
@@ -698,7 +704,7 @@ inline KOKKOS_FUNCTION DTensor &lt; Dims, Dims &gt; MetricTensorEvaluator::inver
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the metric tensor associated with the mapping at a given position in space.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator::operator() (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator::operator() (
     CoordArg const &amp; coord
 ) const
 </code></pre>
@@ -714,7 +720,7 @@ inline KOKKOS_FUNCTION DTensor &lt; Dims, Dims &gt; MetricTensorEvaluator::inver
 <h3 id="function-operator_1">function operator()</h3>
 <p><em>Compute the metric tensor associated with the mapping at the coordinate of an index.</em> </p>
 <pre><code class="language-C++">template&lt;ddc::concepts::discrete_element IdxType&gt;
-inline KOKKOS_FUNCTION DTensor &lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator::operator() (
+inline KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator::operator() (
     IdxType const &amp; idx
 ) const
 </code></pre>

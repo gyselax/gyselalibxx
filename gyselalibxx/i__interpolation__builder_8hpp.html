@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -629,7 +635,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename <a href="structInterpolationBuilderTraits.html"><strong>InterpolationBuilderTraits</strong></a>&lt; BuilderType &gt;::interpolation_idx_range_type &gt; &gt;</td>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename <a href="structInterpolationBuilderTraits.html"><strong>InterpolationBuilderTraits</strong></a>&lt; BuilderType &gt;<a href="structInterpolationBuilderTraits.html"><strong>::interpolation_idx_range_type</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-interpolation_grid_t"><strong>interpolation_grid_t</strong></a>  <br><em>The discrete grid on which interpolation values are given (1D builders only).</em></td>
 </tr>
 </tbody>
@@ -652,7 +658,10 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-interpolation_grid_t">typedef interpolation_grid_t</h3>
 <p><em>The discrete grid on which interpolation values are given (1D builders only).</em> </p>
-<pre><code class="language-C++">using interpolation_grid_t =  ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename InterpolationBuilderTraits&lt;BuilderType&gt;::interpolation_idx_range_type&gt; &gt;;
+<pre><code class="language-C++">using interpolation_grid_t =  ddc::type_seq_element_t&lt;
+        0,
+        ddc::to_type_seq_t&lt;
+                typename InterpolationBuilderTraits&lt;BuilderType&gt;::interpolation_idx_range_type&gt;&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

@@ -40,7 +40,7 @@ _A helper structure to check if all the dimensions in a VectorIndexSet can repre
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**value**](#variable-value)   = `(Dims::IS\_COVARIANT && ...)`<br>_Compile-time boolean indicating if the vector indices are covariant._  |
+|  bool | [**value**](#variable-value)   = `(Dims::IS\_COVARIANT && ...)`<br>_Compile-time boolean indicating if the vector indices are covariant._  |
 
 
 
@@ -92,7 +92,7 @@ _A helper structure to check if all the dimensions in a VectorIndexSet can repre
 
 _Compile-time boolean indicating if the vector indices are covariant._ 
 ```C++
-constexpr bool tensor_tools::is_covariant_vector_index_set< VectorIndexSet< Dims... > >::value;
+bool tensor_tools::is_covariant_vector_index_set< VectorIndexSet< Dims... > >::value;
 ```
 
 

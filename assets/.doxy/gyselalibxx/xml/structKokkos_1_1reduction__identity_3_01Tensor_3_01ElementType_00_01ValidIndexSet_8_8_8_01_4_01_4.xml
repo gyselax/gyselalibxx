@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
     <compoundname>Kokkos::reduction_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;</compoundname>
     <includes refid="tensor_8hpp" local="no">tensor.hpp</includes>

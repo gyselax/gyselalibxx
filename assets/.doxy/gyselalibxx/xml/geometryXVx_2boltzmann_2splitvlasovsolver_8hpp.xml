@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometryXVx_2boltzmann_2splitvlasovsolver_8hpp" kind="file" language="C++">
     <compoundname>splitvlasovsolver.hpp</compoundname>
     <includes refid="geometry__xvx_8hpp" local="yes">geometry_xvx.hpp</includes>
@@ -170,18 +170,18 @@
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;iadvectionx.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;iboltzmannsolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19" refid="classSplitVlasovSolver" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplitVlasovSolver" kindref="compound">SplitVlasovSolver</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIBoltzmannSolver" kindref="compound">IBoltzmannSolver</ref></highlight></codeline>
+<codeline lineno="19" refid="classSplitVlasovSolver" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplitVlasovSolver_1aad8ce76367a0be688bfbd8e5a2830040" kindref="member">SplitVlasovSolver</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIBoltzmannSolver" kindref="compound">IBoltzmannSolver</ref></highlight></codeline>
 <codeline lineno="20"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial&lt;GeometryXVx, GridX&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_advec_x;</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity&lt;GeometryXVx, GridVx&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_advec_vx;</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplitVlasovSolver" kindref="compound">SplitVlasovSolver</ref>(</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplitVlasovSolver_1aad8ce76367a0be688bfbd8e5a2830040" kindref="member">SplitVlasovSolver</ref>(</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial&lt;GeometryXVx, GridX&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>advec_x,</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity&lt;GeometryXVx, GridVx&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>advec_vx);</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplitVlasovSolver" kindref="compound">~SplitVlasovSolver</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplitVlasovSolver_1aad8ce76367a0be688bfbd8e5a2830040" kindref="member">~SplitVlasovSolver</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/><ref refid="classSplitVlasovSolver_1a958b142757ef330191c9c25188294f15" kindref="member">operator()</ref>(DFieldSpXVx<sp/>allfdistribu,<sp/>DConstFieldX<sp/>electric_field,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>

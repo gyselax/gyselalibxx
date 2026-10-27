@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -590,7 +596,7 @@
 <td style="text-align: left;"><a href="#typedef-r"><strong>R</strong></a>  <br><em>The radial dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>detail_poisson::TensorBSplineStash</strong></a>&lt; QDimRMesh, QDimThetaMesh, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
+<td style="text-align: right;">typedef detail_poisson:: <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a>&lt; QDimRMesh, QDimThetaMesh, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a>  <br><em>The values and derivatives of the 1D B-splines at the quadrature points.</em></td>
 </tr>
 <tr>
@@ -638,7 +644,7 @@
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a></td>
-<td style="text-align: left;"><a href="#function-get_tensor_bspline_stash"><strong>get_tensor_bspline_stash</strong></a> () const<br><em>Get the TensorBSplineStash of the values and derivatives of the 1D B-splines at the quadrature points.</em></td>
+<td style="text-align: left;"><a href="#function-get_tensor_bspline_stash"><strong>get_tensor_bspline_stash</strong></a> () const<br><em>Get the</em> <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><em><strong>TensorBSplineStash</strong></em></a> <em>of the values and derivatives of the 1D B-splines at the quadrature points.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -665,14 +671,14 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION void</td>
-<td style="text-align: left;"><a href="#function-fill_test_weights"><strong>fill_test_weights</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, QuadField test_mass, <a href="classVectorField.html"><strong>DVectorField</strong></a>&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a> &gt; &gt; test_stiffness, IdxBSRTheta idx_test, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, IdxRangeQuadratureRTheta const &amp; full_quad_idx_range, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_mass_weight and test_stiffness_weight at every quadrature point in the support of a test function and saves them in team scratch memory.</em></td>
+<td style="text-align: left;"><a href="#function-fill_test_weights"><strong>fill_test_weights</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, QuadField test_mass, DVectorField&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a><a href="structR.html"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a><a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; test_stiffness, IdxBSRTheta idx_test, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, IdxRangeQuadratureRTheta const &amp; full_quad_idx_range, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_mass_weight and test_stiffness_weight at every quadrature point in the support of a test function and saves them in team scratch memory.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-get_matrix_stencil_element"><strong>get_matrix_stencil_element</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, IdxBSRTheta idx_test, IdxBSRTheta idx_trial, QuadField test_mass, <a href="classVectorField.html"><strong>DVectorField</strong></a>&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a> &gt; &gt; test_stiffness, IdxRangeQuadratureRTheta const &amp; full_quad_idx_range, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em></td>
+<td style="text-align: left;"><a href="#function-get_matrix_stencil_element"><strong>get_matrix_stencil_element</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, IdxBSRTheta idx_test, IdxBSRTheta idx_trial, QuadField test_mass, DVectorField&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a><a href="structR.html"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a><a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; test_stiffness, IdxRangeQuadratureRTheta const &amp; full_quad_idx_range, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-r"><strong>R</strong></a><a href="structR.html"><strong>R</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-theta"><strong>Theta</strong></a><a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-get_test_weights"><strong>get_test_weights</strong></a> (IdxTestType idx_test, IdxQuadratureRTheta idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume, <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em></td>
 </tr>
 <tr>
@@ -708,7 +714,8 @@ in the 5D GYSELA Code". December 2022.) </p>
 
 <h3 id="typedef-tensorbsplinestash">typedef TensorBSplineStash</h3>
 <p><em>The values and derivatives of the 1D B-splines at the quadrature points.</em> </p>
-<pre><code class="language-C++">using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson:: TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;;
+<pre><code class="language-C++">using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson::
+            TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;;
 </code></pre>
 <hr>
 
@@ -846,7 +853,7 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_tensor_tensor_elements (
 <hr>
 
 <h3 id="function-get_tensor_bspline_stash">function get_tensor_bspline_stash</h3>
-<p><em>Get the TensorBSplineStash of the values and derivatives of the 1D B-splines at the quadrature points.</em> </p>
+<p><em>Get the</em> <a href="classPolarSplineFEMPoissonLikeAssembler.html#typedef-tensorbsplinestash"><em><strong>TensorBSplineStash</strong></em></a> <em>of the values and derivatives of the 1D B-splines at the quadrature points.</em></p>
 <pre><code class="language-C++">inline TensorBSplineStash PolarSplineFEMPoissonLikeAssembler::get_tensor_bspline_stash () const
 </code></pre>
 <p><strong>Returns:</strong></p>
@@ -919,7 +926,7 @@ inline void PolarSplineFEMPoissonLikeAssembler::operator() (
 static inline KOKKOS_FUNCTION void PolarSplineFEMPoissonLikeAssembler::fill_test_weights (
     const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team,
     QuadField test_mass,
-    DVectorField &lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; R , Theta &gt; &gt; test_stiffness,
+    DVectorField&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; R R , Theta Theta &gt; &gt; test_stiffness,
     IdxBSRTheta idx_test,
     IdxBatch idx_batch,
     CoeffAlpha const &amp; coeff_alpha,
@@ -953,7 +960,7 @@ static inline KOKKOS_FUNCTION void PolarSplineFEMPoissonLikeAssembler::fill_test
     IdxBSRTheta idx_test,
     IdxBSRTheta idx_trial,
     QuadField test_mass,
-    DVectorField &lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; R , Theta &gt; &gt; test_stiffness,
+    DVectorField&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; R R , Theta Theta &gt; &gt; test_stiffness,
     IdxRangeQuadratureRTheta const &amp; full_quad_idx_range,
     TensorBSplineStash const &amp; bspline_stash
 ) 
@@ -975,7 +982,7 @@ static inline KOKKOS_FUNCTION void PolarSplineFEMPoissonLikeAssembler::fill_test
 <h3 id="function-get_test_weights">function get_test_weights</h3>
 <p><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em> </p>
 <pre><code class="language-C++">template&lt;class CoeffAlpha, class CoeffBeta, class IdxTestType&gt;
-static inline KOKKOS_FUNCTION std::tuple&lt; double, DVector &lt; R , Theta &gt; &gt; PolarSplineFEMPoissonLikeAssembler::get_test_weights (
+static inline KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R R , Theta Theta &gt; &gt; PolarSplineFEMPoissonLikeAssembler::get_test_weights (
     IdxTestType idx_test,
     IdxQuadratureRTheta idx_quad,
     IdxBatch idx_batch,

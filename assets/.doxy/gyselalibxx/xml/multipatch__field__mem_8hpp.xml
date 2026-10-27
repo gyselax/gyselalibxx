@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="multipatch__field__mem_8hpp" kind="file" language="C++">
     <compoundname>multipatch_field_mem.hpp</compoundname>
     <includes refid="multipatch__field_8hpp" local="yes">multipatch_field.hpp</includes>
@@ -348,7 +348,7 @@
       </node>
     </invincdepgraph>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="multipatch__field__mem_8hpp_1a4144d0dd3ad41b46087fa4dd9ce05fa2" prot="public" static="no">
+      <memberdef kind="typedef" id="multipatch__field__mem_8hpp_1a49849615bb3ae11e5b1442bb7d367bc8" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>template&lt; typename P &gt; typename</type>
@@ -361,8 +361,9 @@
             <defname>Patches</defname>
           </param>
         </templateparamlist>
-        <type>detail::MultipatchFieldMem&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</type>
-        <definition>using MultipatchFieldMem =  detail:: MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt; &gt;</definition>
+        <type>detail:: MultipatchFieldMem&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</type>
+        <definition>using MultipatchFieldMem =  detail::
+        MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchFieldMem</name>
         <briefdescription>
@@ -391,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="209" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="210" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="209" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="209" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -401,8 +402,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_multipatch_field_mem</definition>
+        <type>bool</type>
+        <definition>bool enable_multipatch_field_mem</definition>
         <argsstring></argsstring>
         <name>enable_multipatch_field_mem</name>
         <initializer>= false</initializer>
@@ -420,8 +421,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_multipatch_field_mem_v</definition>
+        <type>bool</type>
+        <definition>bool is_multipatch_field_mem_v</definition>
         <argsstring></argsstring>
         <name>is_multipatch_field_mem_v</name>
         <initializer>= enable_multipatch_field_mem&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;</initializer>
@@ -517,8 +518,8 @@
 <codeline lineno="120"><highlight class="normal"></highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>~MultipatchFieldMem()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;class<sp/><ref refid="structPatch" kindref="compound">Patch</ref>&gt;</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>typename<sp/>TypeOnPatch&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;::view_type<sp/>get()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;class<sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>typename<sp/>TypeOnPatch&lt;Patch&gt;::view_type<sp/>get()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="131"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>::get_const_field(std::get&lt;TypeOnPatch&lt;Patch&gt;&gt;(base_type::m_tuple));</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>

@@ -50,7 +50,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**is\_timestepper\_builder\_v**](#variable-is_timestepper_builder_v)   = `detail::enable\_is\_timestepper\_builder&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
+|  bool | [**is\_timestepper\_builder\_v**](#variable-is_timestepper_builder_v)   = `detail::enable\_is\_timestepper\_builder&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
 
 
 
@@ -103,7 +103,7 @@
 ### variable is\_timestepper\_builder\_v 
 
 ```C++
-constexpr bool is_timestepper_builder_v;
+bool is_timestepper_builder_v;
 ```
 
 

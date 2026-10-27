@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -573,10 +579,7 @@
 <p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_7700c957c7ac062c1c9c3e42e00e7e24.html"><strong>paraconfpp</strong></a> <strong>&gt;</strong> <a href="paraconfpp_8hpp.html"><strong>paraconfpp.hpp</strong></a></p>
 <p><a href="paraconfpp_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
-<li><code>#include &lt;filesystem&gt;</code></li>
-<li><code>#include &lt;stdexcept&gt;</code></li>
-<li><code>#include &lt;string&gt;</code></li>
-<li><code>#include &lt;utility&gt;</code></li>
+<li><code>#include &lt;string_view&gt;</code></li>
 <li><code>#include &lt;paraconf.h&gt;</code></li>
 </ul>
 <h2 id="public-functions">Public Functions</h2>
@@ -590,89 +593,145 @@
 <tbody>
 <tr>
 <td style="text-align: right;">bool</td>
-<td style="text-align: left;"><a href="#function-pcpp_bool"><strong>PCpp_bool</strong></a> (PC_tree_t tree, std::string const &amp; str, Args &amp;&amp;... args) <br></td>
+<td style="text-align: left;"><a href="#function-pcpp_bool"><strong>PCpp_bool</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration value as a boolean.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-pcpp_double"><strong>PCpp_double</strong></a> (PC_tree_t tree, std::string const &amp; str, Args &amp;&amp;... args) <br></td>
+<td style="text-align: left;"><a href="#function-pcpp_double"><strong>PCpp_double</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration value as a double.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">PC_tree_t</td>
-<td style="text-align: left;"><a href="#function-pcpp_get"><strong>PCpp_get</strong></a> (PC_tree_t tree, std::string const &amp; str, Args &amp;&amp;... args) <br></td>
+<td style="text-align: left;"><a href="#function-pcpp_get"><strong>PCpp_get</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration entry.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">long</td>
-<td style="text-align: left;"><a href="#function-pcpp_int"><strong>PCpp_int</strong></a> (PC_tree_t tree, std::string const &amp; str, Args &amp;&amp;... args) <br></td>
+<td style="text-align: left;"><a href="#function-pcpp_int"><strong>PCpp_int</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration value as an integer.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">int</td>
-<td style="text-align: left;"><a href="#function-pcpp_len"><strong>PCpp_len</strong></a> (PC_tree_t tree, std::string const &amp; str, Args &amp;&amp;... args) <br></td>
+<td style="text-align: left;"><a href="#function-pcpp_len"><strong>PCpp_len</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves the length of a configuration entry.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">std::string</td>
-<td style="text-align: left;"><a href="#function-pcpp_string"><strong>PCpp_string</strong></a> (PC_tree_t tree, std::string const &amp; str, Args &amp;&amp;... args) <br></td>
+<td style="text-align: left;"><a href="#function-pcpp_string"><strong>PCpp_string</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration value as a string.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-pcpp_bool">function PCpp_bool</h3>
-<pre><code class="language-C++">template&lt;class... Args&gt;
-bool PCpp_bool (
+<p><em>Retrieves a configuration value as a boolean.</em> </p>
+<pre><code class="language-C++">bool PCpp_bool (
     PC_tree_t tree,
-    std::string const &amp; str,
-    Args &amp;&amp;... args
+    std::string_view key
 ) 
 </code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration value as a boolean.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the value cannot be retrieved or converted. </li>
+</ul>
 <hr>
 
 <h3 id="function-pcpp_double">function PCpp_double</h3>
-<pre><code class="language-C++">template&lt;class... Args&gt;
-double PCpp_double (
+<p><em>Retrieves a configuration value as a double.</em> </p>
+<pre><code class="language-C++">double PCpp_double (
     PC_tree_t tree,
-    std::string const &amp; str,
-    Args &amp;&amp;... args
+    std::string_view key
 ) 
 </code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration value as a double.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the value cannot be retrieved or converted. </li>
+</ul>
 <hr>
 
 <h3 id="function-pcpp_get">function PCpp_get</h3>
-<pre><code class="language-C++">template&lt;class... Args&gt;
-PC_tree_t PCpp_get (
+<p><em>Retrieves a configuration entry.</em> </p>
+<pre><code class="language-C++">PC_tree_t PCpp_get (
     PC_tree_t tree,
-    std::string const &amp; str,
-    Args &amp;&amp;... args
+    std::string_view key
 ) 
 </code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration entry, or an invalid handle if the entry cannot be found. </p>
 <hr>
 
 <h3 id="function-pcpp_int">function PCpp_int</h3>
-<pre><code class="language-C++">template&lt;class... Args&gt;
-long PCpp_int (
+<p><em>Retrieves a configuration value as an integer.</em> </p>
+<pre><code class="language-C++">long PCpp_int (
     PC_tree_t tree,
-    std::string const &amp; str,
-    Args &amp;&amp;... args
+    std::string_view key
 ) 
 </code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration value as a long integer.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the value cannot be retrieved or converted. </li>
+</ul>
 <hr>
 
 <h3 id="function-pcpp_len">function PCpp_len</h3>
-<pre><code class="language-C++">template&lt;class... Args&gt;
-int PCpp_len (
+<p><em>Retrieves the length of a configuration entry.</em> </p>
+<pre><code class="language-C++">int PCpp_len (
     PC_tree_t tree,
-    std::string const &amp; str,
-    Args &amp;&amp;... args
+    std::string_view key
 ) 
 </code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The length of the configuration entry.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the length cannot be retrieved. </li>
+</ul>
 <hr>
 
 <h3 id="function-pcpp_string">function PCpp_string</h3>
-<pre><code class="language-C++">template&lt;class... Args&gt;
-std::string PCpp_string (
+<p><em>Retrieves a configuration value as a string.</em> </p>
+<pre><code class="language-C++">std::string PCpp_string (
     PC_tree_t tree,
-    std::string const &amp; str,
-    Args &amp;&amp;... args
+    std::string_view key
 ) 
 </code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration value as a string.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the value cannot be retrieved or converted. </li>
+</ul>
 <hr>
 
 <hr>

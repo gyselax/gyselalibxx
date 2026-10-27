@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="poisson__like__rhs__function_8hpp" kind="file" language="C++">
     <compoundname>poisson_like_rhs_function.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -555,10 +555,10 @@
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RadialExtrapolationRule&gt;</highlight></codeline>
-<codeline lineno="17" refid="classPoissonLikeRHSFunction" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref></highlight></codeline>
+<codeline lineno="17" refid="classPoissonLikeRHSFunction" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classPoissonLikeRHSFunction_1a47c654a189131d6361f9fdeb3fc5818c" kindref="member">PoissonLikeRHSFunction</ref></highlight></codeline>
 <codeline lineno="18"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="21" refid="classPoissonLikeRHSFunction_1abc37563d57e207c80bc3cf8ea093c16f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPoissonLikeRHSFunction_1abc37563d57e207c80bc3cf8ea093c16f" kindref="member">evaluator_type</ref><sp/>=<sp/>ddc::SplineEvaluatorND&lt;</highlight></codeline>
+<codeline lineno="21" refid="classPoissonLikeRHSFunction_1a2e7cb2b0eec14d444e0b0541ad7c448c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classPoissonLikeRHSFunction_1a2e7cb2b0eec14d444e0b0541ad7c448c" kindref="member">evaluator_type</ref><sp/>=<sp/>ddc::SplineEvaluatorND&lt;</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;BSplinesR,<sp/>BSplinesTheta&gt;,</highlight></codeline>
@@ -571,10 +571,10 @@
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>ConstSpline2D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>m_coefs;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPoissonLikeRHSFunction_1abc37563d57e207c80bc3cf8ea093c16f" kindref="member">evaluator_type</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_evaluator;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPoissonLikeRHSFunction_1a2e7cb2b0eec14d444e0b0541ad7c448c" kindref="member">evaluator_type</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_evaluator;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="45" refid="classPoissonLikeRHSFunction_1a47c654a189131d6361f9fdeb3fc5818c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPoissonLikeRHSFunction_1a47c654a189131d6361f9fdeb3fc5818c" kindref="member">PoissonLikeRHSFunction</ref>(ConstSpline2D<sp/>coefs,<sp/><ref refid="classPoissonLikeRHSFunction_1abc37563d57e207c80bc3cf8ea093c16f" kindref="member">evaluator_type</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>evaluator)</highlight></codeline>
+<codeline lineno="45" refid="classPoissonLikeRHSFunction_1a47c654a189131d6361f9fdeb3fc5818c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPoissonLikeRHSFunction_1a47c654a189131d6361f9fdeb3fc5818c" kindref="member">PoissonLikeRHSFunction</ref>(ConstSpline2D<sp/>coefs,<sp/><ref refid="classPoissonLikeRHSFunction_1a2e7cb2b0eec14d444e0b0541ad7c448c" kindref="member">evaluator_type</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>evaluator)</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_coefs(coefs)</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(evaluator)</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometryXVx_2initialisation_2iequilibrium_8hpp" kind="file" language="C++">
     <compoundname>iequilibrium.hpp</compoundname>
     <includes local="no">memory</includes>
@@ -44,12 +44,6 @@
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -137,9 +131,6 @@
       <node id="11">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="20">
-        <label>filesystem</label>
-      </node>
       <node id="2">
         <label>memory</label>
       </node>
@@ -149,11 +140,8 @@
       <node id="10">
         <label>source_location</label>
       </node>
-      <node id="21">
-        <label>stdexcept</label>
-      </node>
-      <node id="22">
-        <label>string</label>
+      <node id="20">
+        <label>string_view</label>
       </node>
       <node id="7">
         <label>type_traits</label>
@@ -201,7 +189,7 @@
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classIEquilibrium" kindref="compound">IEquilibrium</ref></highlight></codeline>
 <codeline lineno="16"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classIEquilibrium" kindref="compound">~IEquilibrium</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~IEquilibrium()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="26" refid="classIEquilibrium_1a3ea3adf00a9a416a8e3fe54caba902a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DFieldSpVx<sp/><ref refid="classIEquilibrium_1a3ea3adf00a9a416a8e3fe54caba902a4" kindref="member">operator()</ref>(DFieldSpVx<sp/>allfequilibrium)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal">};</highlight></codeline>

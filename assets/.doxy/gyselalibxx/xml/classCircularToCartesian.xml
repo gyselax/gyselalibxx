@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classCircularToCartesian" kind="class" language="C++" prot="public">
     <compoundname>CircularToCartesian</compoundname>
     <includes refid="circular__to__cartesian_8hpp" local="no">circular_to_cartesian.hpp</includes>
@@ -448,7 +448,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="171" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="171" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a9adea9d8d953ca89baa8ebc15ad71dee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classCircularToCartesian_1a35f4f63e3d95fdffec7f9ba69d384c85" kindref="member">R_cov</ref>, <ref refid="classCircularToCartesian_1a11728cf484228e3530ab90bfe831895f" kindref="member">Theta_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classCircularToCartesian_1a35f4f63e3d95fdffec7f9ba69d384c85" kindref="member">R_cov</ref><ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="classCircularToCartesian_1a11728cf484228e3530ab90bfe831895f" kindref="member">Theta_cov</ref><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y &gt;, VectorIndexSet&lt; R_cov, Theta_cov &gt; &gt; CircularToCartesian&lt; R, Theta, X, Y &gt;::jacobian_matrix</definition>
         <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>
@@ -519,7 +519,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="209" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="209" bodyend="231"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1ad6a44656287d8f142c833f109fdfedc6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, VectorIndexSet&lt; <ref refid="classCircularToCartesian_1acb13de22eb215b860dfed57b2dfe96a3" kindref="member">X_cov</ref>, <ref refid="classCircularToCartesian_1aa8fd7fc7b680f23dfd45e37f3de75ff8" kindref="member">Y_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, VectorIndexSet&lt; <ref refid="classCircularToCartesian_1acb13de22eb215b860dfed57b2dfe96a3" kindref="member">X_cov</ref>, <ref refid="classCircularToCartesian_1aa8fd7fc7b680f23dfd45e37f3de75ff8" kindref="member">Y_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; R, Theta &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt; CircularToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_matrix</definition>
         <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
         <name>inv_jacobian_matrix</name>

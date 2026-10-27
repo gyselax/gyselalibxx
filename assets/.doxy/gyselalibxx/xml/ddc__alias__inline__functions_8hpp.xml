@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="ddc__alias__inline__functions_8hpp" kind="file" language="C++">
     <compoundname>ddc_alias_inline_functions.hpp</compoundname>
     <includes local="no">type_traits</includes>
@@ -1406,8 +1406,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_data_access_methods</definition>
+        <type>bool</type>
+        <definition>bool enable_data_access_methods</definition>
         <argsstring></argsstring>
         <name>enable_data_access_methods</name>
         <initializer>= false</initializer>
@@ -1425,8 +1425,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_mem_type</definition>
+        <type>bool</type>
+        <definition>bool enable_mem_type</definition>
         <argsstring></argsstring>
         <name>enable_mem_type</name>
         <initializer>= false</initializer>
@@ -1453,8 +1453,8 @@
             <type>class MemoryType</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_data_access_methods&lt; Field&lt; ElementType, IdxRangeType, LayoutType, MemoryType &gt; &gt;</definition>
+        <type>bool</type>
+        <definition>bool enable_data_access_methods&lt; Field&lt; ElementType, IdxRangeType, LayoutType, MemoryType &gt; &gt;</definition>
         <argsstring></argsstring>
         <name>enable_data_access_methods&lt; Field&lt; ElementType, IdxRangeType, LayoutType, MemoryType &gt; &gt;</name>
         <initializer>= true</initializer>
@@ -1478,8 +1478,8 @@
             <type>class MemoryType</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_data_access_methods&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;</definition>
+        <type>bool</type>
+        <definition>bool enable_data_access_methods&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;</definition>
         <argsstring></argsstring>
         <name>enable_data_access_methods&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;</name>
         <initializer>= true</initializer>
@@ -1503,8 +1503,8 @@
             <type>class MemoryType</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_mem_type&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;</definition>
+        <type>bool</type>
+        <definition>bool enable_mem_type&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;</definition>
         <argsstring></argsstring>
         <name>enable_mem_type&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;</name>
         <initializer>= true</initializer>
@@ -1522,8 +1522,8 @@
             <type>typename Type</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool has_idx_range_v</definition>
+        <type>bool</type>
+        <definition>bool has_idx_range_v</definition>
         <argsstring></argsstring>
         <name>has_idx_range_v</name>
         <initializer>= detail::HasIdxRange&lt;Type&gt;::value</initializer>
@@ -1541,8 +1541,8 @@
             <type>typename Type</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_gslx_field_v</definition>
+        <type>bool</type>
+        <definition>bool is_gslx_field_v</definition>
         <argsstring></argsstring>
         <name>is_gslx_field_v</name>
         <initializer>= detail::IsGslxField&lt;Type&gt;::value</initializer>
@@ -1560,8 +1560,8 @@
             <type>typename Type</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool has_data_access_methods_v</definition>
+        <type>bool</type>
+        <definition>bool has_data_access_methods_v</definition>
         <argsstring></argsstring>
         <name>has_data_access_methods_v</name>
         <initializer>= enable_data_access_methods&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Type&gt;&gt;&gt;</initializer>
@@ -1579,8 +1579,8 @@
             <type>class Type</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_mem_type_v</definition>
+        <type>bool</type>
+        <definition>bool is_mem_type_v</definition>
         <argsstring></argsstring>
         <name>is_mem_type_v</name>
         <initializer>= enable_mem_type&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Type&gt;&gt;&gt;</initializer>
@@ -1838,7 +1838,7 @@
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>f(...);</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(f&lt;Type&gt;(0))<sp/>==<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(f&lt;Type&gt;(0))<sp/>==<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(char));</highlight></codeline>
 <codeline lineno="35"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
@@ -1864,7 +1864,7 @@
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>f(...);</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(f&lt;Type&gt;(0))<sp/>==<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(f&lt;Type&gt;(0))<sp/>==<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(char));</highlight></codeline>
 <codeline lineno="61"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
 <codeline lineno="63"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>

@@ -56,8 +56,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**is\_lagrange\_basis\_v**](#variable-is_lagrange_basis_v)   = `is\_uniform\_lagrange\_basis\_v&lt;Basis&gt; \|\| is\_non\_uniform\_lagrange\_basis\_v&lt;Basis&gt;`<br>_A type trait that is true when Basis is a Lagrange basis type._  |
-|  constexpr bool | [**is\_spline\_basis\_v**](#variable-is_spline_basis_v)   = `ddc::is\_uniform\_bsplines\_v&lt;Basis&gt; \|\| ddc::is\_non\_uniform\_bsplines\_v&lt;Basis&gt;`<br>_A type trait that is true when Basis is a B-spline basis type._  |
+|  bool | [**is\_lagrange\_basis\_v**](#variable-is_lagrange_basis_v)   = `is\_uniform\_lagrange\_basis\_v&lt;Basis&gt; \|\| is\_non\_uniform\_lagrange\_basis\_v&lt;Basis&gt;`<br>_A type trait that is true when Basis is a Lagrange basis type._  |
+|  bool | [**is\_spline\_basis\_v**](#variable-is_spline_basis_v)   = `ddc::is\_uniform\_bsplines\_v&lt;Basis&gt; \|\| ddc::is\_non\_uniform\_bsplines\_v&lt;Basis&gt;`<br>_A type trait that is true when Basis is a B-spline basis type._  |
 
 
 
@@ -111,7 +111,7 @@
 
 _A type trait that is true when Basis is a Lagrange basis type._ 
 ```C++
-constexpr bool is_lagrange_basis_v;
+bool is_lagrange_basis_v;
 ```
 
 
@@ -139,7 +139,7 @@ Evaluates to true for both [**UniformLagrangeBasis**](classUniformLagrangeBasis.
 
 _A type trait that is true when Basis is a B-spline basis type._ 
 ```C++
-constexpr bool is_spline_basis_v;
+bool is_spline_basis_v;
 ```
 
 

@@ -82,8 +82,8 @@
 |  KOKKOS\_FUNCTION Idx&lt; DDim &gt; | [**get\_polar\_index**](#function-get_polar_index) ([**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) const & idx) <br> |
 |  KOKKOS\_FUNCTION Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; | [**get\_singular\_subset**](#function-get_singular_subset) (Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs) <br>_Get the subset of the coefficients associated with singular basis splines._  |
 |  KOKKOS\_FUNCTION Field&lt; ElementType, [**tensor\_product\_idx\_range\_type**](classPolarBSplines.md#typedef-tensor_product_idx_range_type), MemorySpace &gt; | [**get\_tensor\_product\_subset**](#function-get_tensor_product_subset) (Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs) <br>_Get the subset of the coefficients of tensor product basis splines._  |
-|  constexpr std::size\_t | [**n\_singular\_basis**](#function-n_singular_basis) () <br> |
-|  constexpr KOKKOS\_FUNCTION IdxRange&lt; DDim &gt; | [**singular\_idx\_range**](#function-singular_idx_range) () <br>_Get the IdxRange containing the indices of the b-splines which traverse the singular point._  |
+|  std::size\_t | [**n\_singular\_basis**](#function-n_singular_basis) () <br> |
+|  KOKKOS\_FUNCTION IdxRange&lt; DDim &gt; | [**singular\_idx\_range**](#function-singular_idx_range) () <br>_Get the IdxRange containing the indices of the b-splines which traverse the singular point._  |
 
 
 
@@ -401,7 +401,7 @@ Get the subset of the coefficients which are associated with basis splines which
 ### function n\_singular\_basis 
 
 ```C++
-static inline constexpr std::size_t PolarBSplines::n_singular_basis () 
+static inline std::size_t PolarBSplines::n_singular_basis () 
 ```
 
 
@@ -430,7 +430,7 @@ The number of B-splines which traverse the singular point.
 _Get the IdxRange containing the indices of the b-splines which traverse the singular point._ 
 ```C++
 template<class DDim>
-static inline constexpr KOKKOS_FUNCTION IdxRange< DDim > PolarBSplines::singular_idx_range () 
+static inline KOKKOS_FUNCTION IdxRange< DDim > PolarBSplines::singular_idx_range () 
 ```
 
 

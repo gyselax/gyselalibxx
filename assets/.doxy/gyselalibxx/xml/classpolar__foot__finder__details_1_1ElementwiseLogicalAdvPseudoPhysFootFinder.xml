@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder" kind="class" language="C++" prot="public">
     <compoundname>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</compoundname>
     <includes refid="logical__advection__pseudo__physical__foot__finder_8hpp" local="no">logical_advection_pseudo_physical_foot_finder.hpp</includes>
@@ -71,9 +71,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="39" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1aa8367f9bed2f941088cd3d6c14da5843" prot="private" static="no">
+      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1ae0cd982d8ba1cd98e33d51534789eb51" prot="private" static="no">
         <type>find_grid_t&lt; <ref refid="structR" kindref="compound">R</ref>, ddc::to_type_seq_t&lt; typename RThetaAdvectionEvaluator::template spline_domain_type&lt; 0, 1 &gt; &gt; &gt;</type>
-        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::BSplinesR =  find_grid_t&lt; R, ddc::to_type_seq_t&lt; typename RThetaAdvectionEvaluator::template spline_domain_type&lt;0, 1&gt; &gt;&gt;</definition>
+        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepper, LogicalToPseudoPhysicalMapping &gt;::BSplinesR =  find_grid_t&lt;
+            R,
+            ddc::to_type_seq_t&lt;
+                    typename RThetaAdvectionEvaluator::template spline_domain_type&lt;0, 1&gt;&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>BSplinesR</name>
         <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder::BSplinesR</qualifiedname>
@@ -83,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="43" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1aa967c47b7018e58b0a927bab9411a95d" prot="private" static="no">
         <type>Idx&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -453,7 +456,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp" bodystart="34" bodyend="164"/>
     <listofallmembers>
-      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1aa8367f9bed2f941088cd3d6c14da5843" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>BSplinesR</name></member>
+      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1ae0cd982d8ba1cd98e33d51534789eb51" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>BSplinesR</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1af60172a862fb0669aeab744dff74b80e" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>CoordRTheta</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a56e6cf5e9c131c1a0acb8c9410024c8c" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>CoordX_pcY_pc</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a6870b7fe45d85510f9b83ce2d75f2f8f" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</scope><name>ElementwiseLogicalAdvPseudoPhysFootFinder</name></member>

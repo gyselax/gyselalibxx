@@ -152,7 +152,7 @@ See [TensorCommon](classTensorCommon.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**s\_n\_elements**](classTensorCommon.md#variable-s_n_elements)   = `(ddc::type\_seq\_size\_v&lt;ValidIndexSet&gt; \* ...)`<br>_The number of elements in the mdspan._  |
+|  std::size\_t | [**s\_n\_elements**](classTensorCommon.md#variable-s_n_elements)   = `(ddc::type\_seq\_size\_v&lt;ValidIndexSet&gt; \* ...)`<br>_The number of elements in the mdspan._  |
 
 
 

@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslExplicitPredCorrRTheta**](#function-bslexplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, PolarPoissonLikeSolver const & poisson\_solver, SplineInterpolatorRThetaConst const & advection\_interpolator) <br>_Instantiate a_ [_**BslExplicitPredCorrRTheta**_](classBslExplicitPredCorrRTheta.md) _._ |
+|   | [**BslExplicitPredCorrRTheta**](#function-bslexplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, BslAdvectionRTheta const & advection\_solver, IdxRangeRTheta const & grid, PolarPoissonLikeSolver const & poisson\_solver, SplineInterpolatorRThetaConst const & advection\_interpolator) <br>_Instantiate a_ [_**BslExplicitPredCorrRTheta**_](classBslExplicitPredCorrRTheta.md) _._ |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
 

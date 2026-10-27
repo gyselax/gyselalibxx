@@ -63,12 +63,12 @@
 | Type | Name |
 | ---: | :--- |
 |   | [**Impl**](#function-impl-25) ([**CartesianToBarycentric**](classCartesianToBarycentric.md)&lt; [**X**](structX.md), [**Y**](structY.md), Corner1Tag, Corner2Tag, Corner3Tag &gt; const & coord\_changer) <br>_Construct the basis from the barycentric coordinate mapping._  |
-|   | [**Impl**](#function-impl-35) ([**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md)&lt; DDim, OriginMemorySpace &gt; const & impl) <br>_Construct the basis by copy. This constructor is used to create the class on a different memory space._  |
-|   | [**Impl**](#function-impl-45) ([**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) const & x) = default<br>_Construct the basis by copy._  |
-|   | [**Impl**](#function-impl-55) ([**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) && x) = default<br>_Construct the basis from an r-value._  |
+|   | [**Impl**](#function-impl-35) (Impl&lt; DDim, OriginMemorySpace &gt; const & impl) <br>_Construct the basis by copy. This constructor is used to create the class on a different memory space._  |
+|   | [**Impl**](#function-impl-45) (Impl const & x) = default<br>_Construct the basis by copy._  |
+|   | [**Impl**](#function-impl-55) (Impl && x) = default<br>_Construct the basis from an r-value._  |
 |  void | [**eval\_basis**](#function-eval_basis) (host\_t&lt; DField&lt; IdxRange&lt; DDim &gt; &gt; &gt; values, Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const & x) const<br>_Evaluate the basis at the given coordinate._  |
-|  [**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) & | [**operator=**](#function-operator) ([**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) const & x) = default<br>_Copy-assign the class._  |
-|  [**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) & | [**operator=**](#function-operator_1) ([**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) && x) = default<br>_Move-assign the class._  |
+|  Impl & | [**operator=**](#function-operator) (Impl const & x) = default<br>_Copy-assign the class._  |
+|  Impl & | [**operator=**](#function-operator_1) (Impl && x) = default<br>_Move-assign the class._  |
 |   | [**~Impl**](#function-impl) () = default<br> |
 
 
@@ -211,7 +211,7 @@ _Construct the basis by copy. This constructor is used to create the class on a 
 ```C++
 template<class OriginMemorySpace>
 inline explicit TriangularBernsteinPolynomialBasis::Impl::Impl (
-    Impl < DDim, OriginMemorySpace > const & impl
+    Impl< DDim, OriginMemorySpace > const & impl
 ) 
 ```
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="mpilayout_8hpp" kind="file" language="C++">
     <compoundname>mpilayout.hpp</compoundname>
     <includes local="no">algorithm</includes>
@@ -215,7 +215,7 @@
 <codeline lineno="42"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(ddc::is_discrete_domain_v&lt;IdxRangeData&gt;);</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIMPILayout" kindref="compound">base_type</ref><sp/>=<sp/><ref refid="classIMPILayout" kindref="compound">IMPILayout</ref>&lt;IdxRangeData,<sp/>DistributedDim...&gt;;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">base_type<sp/>=<sp/><ref refid="classIMPILayout" kindref="compound">IMPILayout</ref>&lt;IdxRangeData,<sp/>DistributedDim...&gt;;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="49" refid="classMPILayout_1ad8142e0f533a266313e76614698b2ccc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMPILayout_1ad8142e0f533a266313e76614698b2ccc" kindref="member">idx_range_type</ref><sp/>=<sp/>IdxRangeData;</highlight></codeline>

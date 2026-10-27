@@ -48,7 +48,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**is\_uniform\_lagrange\_basis\_v**](#variable-is_uniform_lagrange_basis_v)   = `[**is\_uniform\_lagrange\_basis**](structis__uniform__lagrange__basis.md)&lt;DDim&gt;::value`<br> |
+|  bool | [**is\_uniform\_lagrange\_basis\_v**](#variable-is_uniform_lagrange_basis_v)   = `[**is\_uniform\_lagrange\_basis**](structis__uniform__lagrange__basis.md)&lt;DDim&gt;::value`<br> |
 
 
 
@@ -101,7 +101,7 @@
 ### variable is\_uniform\_lagrange\_basis\_v 
 
 ```C++
-constexpr bool is_uniform_lagrange_basis_v;
+bool is_uniform_lagrange_basis_v;
 ```
 
 

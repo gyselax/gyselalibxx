@@ -45,9 +45,9 @@ _A class that computes fluid moments of the distribution function._ [More...](#d
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr [**MomentDensity**](structFluidMoments_1_1MomentDensity.md) | [**s\_density**](#variable-s_density)   = `[**MomentDensity**](structFluidMoments_1_1MomentDensity.md)()`<br> |
-|  constexpr [**MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) | [**s\_temperature**](#variable-s_temperature)   = `[**MomentTemperature**](structFluidMoments_1_1MomentTemperature.md)()`<br> |
-|  constexpr [**MomentVelocity**](structFluidMoments_1_1MomentVelocity.md) | [**s\_velocity**](#variable-s_velocity)   = `[**MomentVelocity**](structFluidMoments_1_1MomentVelocity.md)()`<br> |
+|  [**MomentDensity**](structFluidMoments_1_1MomentDensity.md) | [**s\_density**](#variable-s_density)   = `[**MomentDensity**](structFluidMoments_1_1MomentDensity.md)()`<br> |
+|  [**MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) | [**s\_temperature**](#variable-s_temperature)   = `[**MomentTemperature**](structFluidMoments_1_1MomentTemperature.md)()`<br> |
+|  [**MomentVelocity**](structFluidMoments_1_1MomentVelocity.md) | [**s\_velocity**](#variable-s_velocity)   = `[**MomentVelocity**](structFluidMoments_1_1MomentVelocity.md)()`<br> |
 
 
 
@@ -117,7 +117,7 @@ These fluid moments are the density, mean velocity and temperature of the distri
 ### variable s\_density 
 
 ```C++
-constexpr MomentDensity FluidMoments::s_density;
+MomentDensity FluidMoments::s_density;
 ```
 
 
@@ -134,7 +134,7 @@ A static instance of [**MomentDensity**](structFluidMoments_1_1MomentDensity.md)
 ### variable s\_temperature 
 
 ```C++
-constexpr MomentTemperature FluidMoments::s_temperature;
+MomentTemperature FluidMoments::s_temperature;
 ```
 
 
@@ -151,7 +151,7 @@ A static instance of [**MomentTemperature**](structFluidMoments_1_1MomentTempera
 ### variable s\_velocity 
 
 ```C++
-constexpr MomentVelocity FluidMoments::s_velocity;
+MomentVelocity FluidMoments::s_velocity;
 ```
 
 

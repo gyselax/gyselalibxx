@@ -42,7 +42,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef DConstField&lt; IdxRangeBSRTheta &gt; | [**ConstSpline2D**](#typedef-constspline2d)  <br> |
-| typedef [**VectorConstField**](classVectorField.md)&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**ConstVectorSplineCoeffs2D**](#typedef-constvectorsplinecoeffs2d)  <br> |
+| typedef VectorConstField&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**ConstVectorSplineCoeffs2D**](#typedef-constvectorsplinecoeffs2d)  <br> |
 | typedef Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; | [**IdxPolarBspl**](#typedef-idxpolarbspl)  <br>_Type of the index of an element of polar B-splines._  |
 | typedef IdxRange&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; | [**IdxRangeBSPolar**](#typedef-idxrangebspolar)  <br> |
 | typedef IdxRange&lt; [**BSplinesR**](structBSplinesR.md) &gt; | [**IdxRangeBSR**](#typedef-idxrangebsr)  <br> |
@@ -144,7 +144,7 @@ using ConstSpline2D =  DConstField<IdxRangeBSRTheta>;
 ### typedef ConstVectorSplineCoeffs2D 
 
 ```C++
-using ConstVectorSplineCoeffs2D =  VectorConstField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2> >;
+using ConstVectorSplineCoeffs2D =  VectorConstField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
 ```
 
 
@@ -224,7 +224,7 @@ using IdxRangeBSTheta =  IdxRange<BSplinesTheta>;
 
 _Tag the polar B-splines decomposition of a function._ 
 ```C++
-using PolarSplineMemRTheta =  DFieldMem<IdxRange<PolarBSplinesRTheta> >;
+using PolarSplineMemRTheta =  DFieldMem<IdxRange<PolarBSplinesRTheta>>;
 ```
 
 
@@ -241,7 +241,7 @@ Store the polar B-splines coefficients of the function.
 ### typedef PolarSplineRTheta 
 
 ```C++
-using PolarSplineRTheta =  DField<IdxRange<PolarBSplinesRTheta> >;
+using PolarSplineRTheta =  DField<IdxRange<PolarBSplinesRTheta>>;
 ```
 
 
@@ -306,7 +306,16 @@ using SplineInterpPointsTheta =  ddc::GrevilleInterpolationPoints<BSplinesTheta,
 ### typedef SplineInterpolatorRTheta 
 
 ```C++
-using SplineInterpolatorRTheta =  SplineInterpolator< Kokkos::DefaultExecutionSpace, IdxRange<BSplinesR, BSplinesTheta>, IdxRangeRTheta, ExtrapolationRule::Null_Null, ExtrapolationRule::Periodic, SplineBoundaryClosures< SplineRClosure, SplineRClosure>, SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure> >;
+using SplineInterpolatorRTheta =  SplineInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRangeRTheta,
+        ExtrapolationRule::Null_Null, 
+        ExtrapolationRule::Periodic, 
+        SplineBoundaryClosures<
+                SplineRClosure, 
+                SplineRClosure>, 
+        SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure>>;
 ```
 
 
@@ -319,7 +328,16 @@ using SplineInterpolatorRTheta =  SplineInterpolator< Kokkos::DefaultExecutionSp
 ### typedef SplineInterpolatorRThetaConst 
 
 ```C++
-using SplineInterpolatorRThetaConst =  SplineInterpolator< Kokkos::DefaultExecutionSpace, IdxRange<BSplinesR, BSplinesTheta>, IdxRangeRTheta, ExtrapolationRule::Constant_Constant, ExtrapolationRule::Periodic, SplineBoundaryClosures< SplineRClosure, SplineRClosure>, SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure> >;
+using SplineInterpolatorRThetaConst =  SplineInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRangeRTheta,
+        ExtrapolationRule::Constant_Constant, 
+        ExtrapolationRule::Periodic, 
+        SplineBoundaryClosures<
+                SplineRClosure, 
+                SplineRClosure>, 
+        SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure>>;
 ```
 
 
@@ -332,7 +350,16 @@ using SplineInterpolatorRThetaConst =  SplineInterpolator< Kokkos::DefaultExecut
 ### typedef SplineInterpolatorRThetaConst\_host 
 
 ```C++
-using SplineInterpolatorRThetaConst_host =  SplineInterpolator< Kokkos::DefaultHostExecutionSpace, IdxRange<BSplinesR, BSplinesTheta>, IdxRangeRTheta, ExtrapolationRule::Constant_Constant, ExtrapolationRule::Periodic, SplineBoundaryClosures< SplineRClosure, SplineRClosure>, SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure> >;
+using SplineInterpolatorRThetaConst_host =  SplineInterpolator<
+        Kokkos::DefaultHostExecutionSpace,
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRangeRTheta,
+        ExtrapolationRule::Constant_Constant, 
+        ExtrapolationRule::Periodic, 
+        SplineBoundaryClosures<
+                SplineRClosure, 
+                SplineRClosure>, 
+        SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure>>;
 ```
 
 
@@ -384,7 +411,8 @@ using SplineRThetaEvaluatorConstBound =  typename SplineInterpolatorRThetaConst:
 ### typedef SplineRThetaEvaluatorConstBound\_host 
 
 ```C++
-using SplineRThetaEvaluatorConstBound_host =  typename SplineInterpolatorRThetaConst_host::EvaluatorType;
+using SplineRThetaEvaluatorConstBound_host = 
+        typename SplineInterpolatorRThetaConst_host::EvaluatorType;
 ```
 
 
@@ -410,7 +438,16 @@ using SplineRThetaEvaluatorNullBound =  typename SplineInterpolatorRTheta::Evalu
 ### typedef SplineRThetaEvaluatorNullBound\_host 
 
 ```C++
-using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluatorND< Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>, ddc::detail::TypeSeq<GridR, GridTheta>, ddc::detail::TypeSeq< ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule<Theta>, ddc::PeriodicExtrapolationRule<Theta> >>;
+using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluatorND<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::HostSpace,
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::NullExtrapolationRule, 
+                ddc::NullExtrapolationRule, 
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 ```
 
 
@@ -423,7 +460,7 @@ using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluatorND< Kokkos::Def
 ### typedef VectorSplineCoeffs2D 
 
 ```C++
-using VectorSplineCoeffs2D =  VectorField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2> >;
+using VectorSplineCoeffs2D =  VectorField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
 ```
 
 
@@ -436,7 +473,7 @@ using VectorSplineCoeffs2D =  VectorField<double, IdxRangeBSRTheta, VectorIndexS
 ### typedef VectorSplineCoeffsMem2D 
 
 ```C++
-using VectorSplineCoeffsMem2D =  VectorFieldMem<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2> >;
+using VectorSplineCoeffsMem2D =  VectorFieldMem<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
 ```
 
 

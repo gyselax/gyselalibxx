@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="vector__index__tools_8hpp" kind="file" language="C++">
     <compoundname>vector_index_tools.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -1129,14 +1129,15 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" bodystart="10" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="vector__index__tools_8hpp_1ac77d123f241eb6784fb80dfdeadbac58" prot="public" static="no">
+      <memberdef kind="typedef" id="vector__index__tools_8hpp_1afc76c95ceb601823306dd98da35f160f" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class AnyVectorIndexSet</type>
           </param>
         </templateparamlist>
         <type>typename <ref refid="structtensor__tools_1_1GetContravariantDims" kindref="compound">tensor_tools::GetContravariantDims</ref>&lt; AnyVectorIndexSet &gt;::type</type>
-        <definition>using get_contravariant_dims_t =  typename tensor_tools::GetContravariantDims&lt;AnyVectorIndexSet&gt;::type</definition>
+        <definition>using get_contravariant_dims_t = 
+        typename tensor_tools::GetContravariantDims&lt;AnyVectorIndexSet&gt;::type</definition>
         <argsstring></argsstring>
         <name>get_contravariant_dims_t</name>
         <briefdescription>
@@ -1145,7 +1146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" line="143" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" bodystart="144" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" line="143" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="vector__index__tools_8hpp_1a866b7f8b03fa9e807616e8228201c787" prot="public" static="no">
         <templateparamlist>
@@ -1192,8 +1193,8 @@
             <type>class Type</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_vector_index_set_v</definition>
+        <type>bool</type>
+        <definition>bool is_vector_index_set_v</definition>
         <argsstring></argsstring>
         <name>is_vector_index_set_v</name>
         <initializer>= <ref refid="structtensor__tools_1_1is__vector__index__set" kindref="compound">tensor_tools::is_vector_index_set</ref>&lt;Type&gt;::value</initializer>
@@ -1211,8 +1212,8 @@
             <type>class VectorIndexSet</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_covariant_vector_index_set_v</definition>
+        <type>bool</type>
+        <definition>bool is_covariant_vector_index_set_v</definition>
         <argsstring></argsstring>
         <name>is_covariant_vector_index_set_v</name>
         <initializer>= <ref refid="structtensor__tools_1_1is__covariant__vector__index__set" kindref="compound">tensor_tools::is_covariant_vector_index_set</ref>&lt;VectorIndexSet&gt;::value</initializer>
@@ -1231,8 +1232,8 @@
             <type>class VectorIndexSet</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_contravariant_vector_index_set_v</definition>
+        <type>bool</type>
+        <definition>bool is_contravariant_vector_index_set_v</definition>
         <argsstring></argsstring>
         <name>is_contravariant_vector_index_set_v</name>
         <initializer>= <ref refid="structtensor__tools_1_1is__contravariant__vector__index__set" kindref="compound">tensor_tools::is_contravariant_vector_index_set</ref>&lt;VectorIndexSet&gt;::value</initializer>
@@ -1251,8 +1252,8 @@
             <type>class VectorIndexSet</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_cartesian_vector_index_set_v</definition>
+        <type>bool</type>
+        <definition>bool is_cartesian_vector_index_set_v</definition>
         <argsstring></argsstring>
         <name>is_cartesian_vector_index_set_v</name>
         <initializer>= is_covariant_vector_index_set_v&lt;VectorIndexSet&gt;&amp;&amp;
@@ -1275,8 +1276,8 @@
             <type>class VectorIndexSet2</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool has_same_variance_v</definition>
+        <type>bool</type>
+        <definition>bool has_same_variance_v</definition>
         <argsstring></argsstring>
         <name>has_same_variance_v</name>
         <initializer>= (is_covariant_vector_index_set_v&lt;
@@ -1313,7 +1314,7 @@
 <codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
 <codeline lineno="30" refid="structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtensor__tools_1_1GetContravariantDims" kindref="compound">GetContravariantDims</ref>&lt;VectorIndexSet&lt;Dims...&gt;&gt;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="33" refid="structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ab047e3c9b5e6469057917838e1707e1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ab047e3c9b5e6469057917838e1707e1f" kindref="member">type</ref><sp/>=<sp/>VectorIndexSet&lt;</highlight></codeline>
+<codeline lineno="33" refid="structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1a359319af80edf9629d4d647f5051a8cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1a359319af80edf9629d4d647f5051a8cd" kindref="member">type</ref><sp/>=<sp/>VectorIndexSet&lt;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;Dims::IS_CONTRAVARIANT,<sp/>Dims,<sp/>typename<sp/>Dims::Dual&gt;...&gt;;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
@@ -1345,13 +1346,13 @@
 <codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
 <codeline lineno="79" refid="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtensor__tools_1_1is__covariant__vector__index__set" kindref="compound">is_covariant_vector_index_set</ref>&lt;VectorIndexSet&lt;Dims...&gt;&gt;</highlight></codeline>
 <codeline lineno="80"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="82" refid="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ad1ff9c8b7d85ffec86b55bc4b2ef6c65" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>(Dims::IS_COVARIANT<sp/>&amp;&amp;<sp/>...);</highlight></codeline>
+<codeline lineno="82" refid="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ad1ff9c8b7d85ffec86b55bc4b2ef6c65" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ad1ff9c8b7d85ffec86b55bc4b2ef6c65" kindref="member">value</ref><sp/>=<sp/>(Dims::IS_COVARIANT<sp/>&amp;&amp;<sp/>...);</highlight></codeline>
 <codeline lineno="83"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
 <codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
 <codeline lineno="90" refid="structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtensor__tools_1_1is__contravariant__vector__index__set" kindref="compound">is_contravariant_vector_index_set</ref>&lt;VectorIndexSet&lt;Dims...&gt;&gt;</highlight></codeline>
 <codeline lineno="91"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="93" refid="structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ab4124b9a6a3e65c603b430020758dc92" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>(Dims::IS_CONTRAVARIANT<sp/>&amp;&amp;<sp/>...);</highlight></codeline>
+<codeline lineno="93" refid="structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ab4124b9a6a3e65c603b430020758dc92" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ab4124b9a6a3e65c603b430020758dc92" kindref="member">value</ref><sp/>=<sp/>(Dims::IS_CONTRAVARIANT<sp/>&amp;&amp;<sp/>...);</highlight></codeline>
 <codeline lineno="94"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
 <codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>VectorIndexSet&gt;</highlight></codeline>

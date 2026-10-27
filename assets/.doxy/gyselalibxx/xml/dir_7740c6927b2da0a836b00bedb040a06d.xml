@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_7740c6927b2da0a836b00bedb040a06d" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch</compoundname>
     <innerdir refid="dir_28b51abc9241105ab41b66c468e7d019">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity</innerdir>

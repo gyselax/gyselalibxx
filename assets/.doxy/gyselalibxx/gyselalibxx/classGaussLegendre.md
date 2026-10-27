@@ -71,7 +71,7 @@ _An operator for constructing a Gauss-Legendre quadrature._ [More...](#detailed-
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**order**](#function-order) () <br>_The order of the quadrature scheme._  |
+|  std::size\_t | [**order**](#function-order) () <br>_The order of the quadrature scheme._  |
 
 
 
@@ -304,7 +304,7 @@ The index range where functions should be evaluated.
 
 _The order of the quadrature scheme._ 
 ```C++
-static inline constexpr std::size_t GaussLegendre::order () 
+static inline std::size_t GaussLegendre::order () 
 ```
 
 

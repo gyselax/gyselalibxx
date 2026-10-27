@@ -109,7 +109,10 @@ _A class which collects all grids along a given dimension in both directions._ [
 
 _The type sequence describing all grids found by iterating along this dimension in the backwards direction._ 
 ```C++
-using connectivity_details::CollectAllInterfacesOnDim< StartPatch, Grid1D, InterfaceTypeSeq >::BackwardTypeSeq =  typename CollectInterfacesAlongDim< Edge<StartPatch, Grid1D, FRONT>, InterfaceTypeSeq, BackInsert>::type;
+using connectivity_details::CollectAllInterfacesOnDim< StartPatch, Grid1D, InterfaceTypeSeq >::BackwardTypeSeq =  typename CollectInterfacesAlongDim<
+            Edge<StartPatch, Grid1D, FRONT>,
+            InterfaceTypeSeq,
+            BackInsert>::type;
 ```
 
 
@@ -127,7 +130,14 @@ This is found by working backward from front (start) of grid inserting each new 
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::CollectAllInterfacesOnDim< StartPatch, Grid1D, InterfaceTypeSeq >::type =  ddc::type_seq_merge_t< BackwardTypeSeq, typename CollectInterfacesAlongDim< Edge<StartPatch, Grid1D, BACK>, InterfaceTypeSeq, FrontInsert, BackwardTypeSeq>::type>;
+using connectivity_details::CollectAllInterfacesOnDim< StartPatch, Grid1D, InterfaceTypeSeq >::type =  ddc::type_seq_merge_t<
+            BackwardTypeSeq,
+            
+            typename CollectInterfacesAlongDim<
+                    Edge<StartPatch, Grid1D, BACK>,
+                    InterfaceTypeSeq,
+                    FrontInsert,
+                    BackwardTypeSeq>::type>;
 ```
 
 

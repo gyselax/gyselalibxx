@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined" kind="struct" language="C++" prot="public">
     <compoundname>RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesRRefined</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BSplinesROriginal::is_uniform(), ddc::UniformBSplines&lt; R, BSplinesROriginal::degree(), R::PERIODIC &gt;, ddc::NonUniformBSplines&lt; R, BSplinesROriginal::degree(), R::PERIODIC &gt; &gt;</basecompoundref>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="conceptconcepts_1_1InterpolationEvaluator" kind="concept">
     <compoundname>concepts::InterpolationEvaluator</compoundname>
     <includes refid="i__interpolation__evaluator_8hpp" local="no">i_interpolation_evaluator.hpp</includes>
@@ -16,7 +16,7 @@ concept <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound
     typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::data_type;
     typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::evaluation_idx_range_type;
     typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::coord_type;
-    typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::coeff_idx_range_type;
+    typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::coeff_idx_range_type</ref>;
 }
 &amp;&amp;requires()
 {
@@ -71,7 +71,7 @@ concept <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound
     </briefdescription>
     <detaileddescription>
 <para>An interpolation evaluator is a callable that takes a field of interpolation coefficients (on a basis domain) and produces function values on an evaluation mesh, optionally at user-supplied coordinates. The evaluator may operate over one or more interpolation dimensions simultaneously (N ≥ 1).</para>
-<para>Type information is accessed through InterpolationEvaluatorTraits&lt;Evaluator&gt;, which has a primary template delegating to the evaluator&apos;s own aliases and can be specialised for external evaluators (e.g. ddc::SplineEvaluatorND).</para>
+<para>Type information is accessed through <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits&lt;Evaluator&gt;</ref>, which has a primary template delegating to the evaluator&apos;s own aliases and can be specialised for external evaluators (e.g. ddc::SplineEvaluatorND).</para>
 <para>The template alias and method requirements are verified using evaluation_idx_range_type as a representative domain. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="182" column="1"/>

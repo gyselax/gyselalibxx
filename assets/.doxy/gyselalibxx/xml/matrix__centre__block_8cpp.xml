@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="matrix__centre__block_8cpp" kind="file" language="C++">
     <compoundname>matrix_centre_block.cpp</compoundname>
     <includes local="no">utility</includes>
@@ -121,7 +121,7 @@
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Centre__Block_1a7cce0e26c2a0a31b8412a418f988dfb2" kindref="member">Matrix_Centre_Block::adjust_indexes</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>i,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>j)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="22"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>&lt;<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>)</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i<sp/>+=<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;<ref refid="classMatrix_1a15badbcf214a7842a0a654f9210f39a1" kindref="member">get_size</ref>();</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i<sp/>+=<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size();</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>&lt;<sp/><ref refid="classMatrix__Centre__Block_1a2f2b0a3f24815ba87139c0639ec93c6b" kindref="member">bottom_block_index</ref>)</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i<sp/>-=<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>

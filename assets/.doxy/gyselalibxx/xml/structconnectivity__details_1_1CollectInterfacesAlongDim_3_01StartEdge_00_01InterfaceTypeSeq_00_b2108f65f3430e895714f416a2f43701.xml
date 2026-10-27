@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701" kind="struct" language="C++" prot="public">
     <compoundname>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;</compoundname>
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
@@ -23,9 +23,14 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1aa92bb7a60063721d6f9cb3abb70caf06" prot="public" static="no">
-        <type>typename <ref refid="structconnectivity__details_1_1AddToTypeSeq" kindref="compound">AddToTypeSeq</ref>&lt; enforce_first_interface_edge_t&lt; typename <ref refid="structconnectivity__details_1_1FindInterface" kindref="compound">FindInterface</ref>&lt; StartEdge, InterfaceTypeSeq &gt;<ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a2636f16ad2713171f31c1e914e5e4ffa" kindref="member">::type</ref>, std::conditional_t&lt; StartEdge::extremity==FRONT, MatchingEdge, StartEdge &gt; &gt;, FoundInterfaces, insert_pos &gt;<ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a2636f16ad2713171f31c1e914e5e4ffa" kindref="member">::type</ref></type>
-        <definition>using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::NewInterfaceList =  typename AddToTypeSeq&lt; enforce_first_interface_edge_t&lt; typename FindInterface&lt;StartEdge, InterfaceTypeSeq&gt;::type, std::conditional_t&lt;StartEdge::extremity == FRONT, MatchingEdge, StartEdge&gt; &gt;, FoundInterfaces, insert_pos&gt;::type</definition>
+      <memberdef kind="typedef" id="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1aa6623d6c7496d6d8f20ecf79d68183e4" prot="public" static="no">
+        <type>typename <ref refid="structconnectivity__details_1_1AddToTypeSeq" kindref="compound">AddToTypeSeq</ref>&lt; enforce_first_interface_edge_t&lt; typename <ref refid="structconnectivity__details_1_1FindInterface" kindref="compound">FindInterface</ref>&lt; StartEdge, InterfaceTypeSeq &gt;<ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a9ef0842e2540899d5797d17219e70bce" kindref="member">::type</ref>, std::conditional_t&lt; StartEdge::extremity==FRONT, MatchingEdge, StartEdge &gt; &gt;, FoundInterfaces, insert_pos &gt;<ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a9ef0842e2540899d5797d17219e70bce" kindref="member">::type</ref></type>
+        <definition>using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::NewInterfaceList =  typename AddToTypeSeq&lt;
+            enforce_first_interface_edge_t&lt;
+                    typename FindInterface&lt;StartEdge, InterfaceTypeSeq&gt;::type,
+                    std::conditional_t&lt;StartEdge::extremity == FRONT, MatchingEdge, StartEdge&gt;&gt;,
+            FoundInterfaces,
+            insert_pos&gt;::type</definition>
         <argsstring></argsstring>
         <name>NewInterfaceList</name>
         <qualifiedname>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::NewInterfaceList</qualifiedname>
@@ -36,11 +41,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="359" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="364" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="359" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="359" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a2636f16ad2713171f31c1e914e5e4ffa" prot="public" static="no">
-        <type>typename <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim" kindref="compound">CollectInterfacesAlongDim</ref>&lt; typename <ref refid="structconnectivity__details_1_1SwapExtremity" kindref="compound">SwapExtremity</ref>&lt; MatchingEdge &gt;::type, InterfaceTypeSeq, insert_pos, <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1aa92bb7a60063721d6f9cb3abb70caf06" kindref="member">NewInterfaceList</ref> &gt;::type</type>
-        <definition>using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::type =  typename CollectInterfacesAlongDim&lt; typename SwapExtremity&lt;MatchingEdge&gt;::type, InterfaceTypeSeq, insert_pos, NewInterfaceList&gt;::type</definition>
+      <memberdef kind="typedef" id="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a9ef0842e2540899d5797d17219e70bce" prot="public" static="no">
+        <type>typename <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim" kindref="compound">CollectInterfacesAlongDim</ref>&lt; typename <ref refid="structconnectivity__details_1_1SwapExtremity" kindref="compound">SwapExtremity</ref>&lt; MatchingEdge &gt;::type, InterfaceTypeSeq, insert_pos, <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1aa6623d6c7496d6d8f20ecf79d68183e4" kindref="member">NewInterfaceList</ref> &gt;::type</type>
+        <definition>using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::type =  typename CollectInterfacesAlongDim&lt;
+            typename SwapExtremity&lt;MatchingEdge&gt;::type,
+            InterfaceTypeSeq,
+            insert_pos,
+            NewInterfaceList&gt;::type</definition>
         <argsstring></argsstring>
         <name>type</name>
         <qualifiedname>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::type</qualifiedname>
@@ -51,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="366" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="370" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="366" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="366" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -61,8 +70,8 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="350" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="357" bodyend="371"/>
     <listofallmembers>
-      <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1aa92bb7a60063721d6f9cb3abb70caf06" prot="public" virt="non-virtual"><scope>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;</scope><name>NewInterfaceList</name></member>
-      <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a2636f16ad2713171f31c1e914e5e4ffa" prot="public" virt="non-virtual"><scope>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;</scope><name>type</name></member>
+      <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1aa6623d6c7496d6d8f20ecf79d68183e4" prot="public" virt="non-virtual"><scope>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;</scope><name>NewInterfaceList</name></member>
+      <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a9ef0842e2540899d5797d17219e70bce" prot="public" virt="non-virtual"><scope>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;</scope><name>type</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

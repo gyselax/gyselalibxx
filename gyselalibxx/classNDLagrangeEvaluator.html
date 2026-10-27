@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -679,11 +685,9 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The ND Lagrange polynomial is defined as:  <span class="arithmatex">\(\[
-  L(x_1, \ldots, x_N)
+<p>The ND Lagrange polynomial is defined as:    <span class="arithmatex">\(\[  L(x_1, \ldots, x_N)
   = \sum_{i_1=0}^{d_1}\dots\sum_{i_N=0}^{d_N} \prod_{j=1}^N f(x_1, \ldots, x_N) l_{j,i_j}(x_j)
-\]\)</span> The evaluation is recursive:  <span class="arithmatex">\(\[
-  L(x_1, \ldots, x_N)
+\]\)</span> The evaluation is recursive:    <span class="arithmatex">\(\[  L(x_1, \ldots, x_N)
   = \sum_{i_1=0}^{d_1} l_{1,i_1}(x_1) L(x_2, \dots, x_N)
 \]\)</span></p>
 <p>The recursion terminates when only one evaluator remains: in that case the tail type is the <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> itself and the 1D evaluation (including its configured extrapolation rules) is invoked directly.</p>
@@ -695,7 +699,9 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-batch_idx_range_type">typedef batch_idx_range_type</h3>
 <p><em>The type of the batch index range (obtained by removing the dimensions of interest from the whole domain).</em> </p>
-<pre><code class="language-C++">using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::batch_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_remove_t&lt; ddc::to_type_seq_t&lt;BatchedInterpolationIdxRange&gt;, ddc::to_type_seq_t&lt;evaluation_idx_range_type&gt; &gt;&gt;;
+<pre><code class="language-C++">using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::batch_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_remove_t&lt;
+                    ddc::to_type_seq_t&lt;BatchedInterpolationIdxRange&gt;,
+                    ddc::to_type_seq_t&lt;evaluation_idx_range_type&gt;&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -705,7 +711,10 @@
 
 <h3 id="typedef-batched_coeff_idx_range_type">typedef batched_coeff_idx_range_type</h3>
 <p><em>The type of the ND index range on which the Lagrange coefficients are defined plus any batch dimensions.</em> </p>
-<pre><code class="language-C++">using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::batched_coeff_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt;BatchedInterpolationIdxRange&gt;, ddc::to_type_seq_t&lt;evaluation_idx_range_type&gt;, ddc::to_type_seq_t&lt;coeff_idx_range_type&gt; &gt;&gt;;
+<pre><code class="language-C++">using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::batched_coeff_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
+                    ddc::to_type_seq_t&lt;BatchedInterpolationIdxRange&gt;,
+                    ddc::to_type_seq_t&lt;evaluation_idx_range_type&gt;,
+                    ddc::to_type_seq_t&lt;coeff_idx_range_type&gt;&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -737,7 +746,9 @@
 
 <h3 id="typedef-evaluation_idx_range_type">typedef evaluation_idx_range_type</h3>
 <p><em>The type of the index range for the ND evaluation mesh used by this class.</em> </p>
-<pre><code class="language-C++">using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::evaluation_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;type_seq_cat_t&lt; ddc::to_type_seq_t&lt;IdxRangeHeadEval&gt;, ddc::to_type_seq_t&lt;typename Evaluators1D::evaluation_idx_range_type&gt;...&gt; &gt;;
+<pre><code class="language-C++">using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::evaluation_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;type_seq_cat_t&lt;
+                    ddc::to_type_seq_t&lt;IdxRangeHeadEval&gt;,
+                    ddc::to_type_seq_t&lt;typename Evaluators1D::evaluation_idx_range_type&gt;...&gt;&gt;;
 </code></pre>
 <hr>
 

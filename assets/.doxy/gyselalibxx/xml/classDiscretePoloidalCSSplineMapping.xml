@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classDiscretePoloidalCSSplineMapping" kind="class" language="C++" prot="public">
     <compoundname>DiscretePoloidalCSSplineMapping</compoundname>
     <includes refid="discrete__poloidal__cs__spline__mapping_8hpp" local="no">discrete_poloidal_cs_spline_mapping.hpp</includes>
@@ -548,7 +548,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="196" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="196" bodyend="209"/>
       </memberdef>
       <memberdef kind="function" id="classDiscretePoloidalCSSplineMapping_1af2f9dc7fbf7f5b316dbaf841bcdc2511" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classDiscretePoloidalCSSplineMapping_1a64530f08f7985257806364087b9e2df3" kindref="member">R_cov</ref>, <ref refid="classDiscretePoloidalCSSplineMapping_1a3f31fd91ddfa76c12df8a8f019e84360" kindref="member">Theta_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classDiscretePoloidalCSSplineMapping_1a64530f08f7985257806364087b9e2df3" kindref="member">R_cov</ref><ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="classDiscretePoloidalCSSplineMapping_1a3f31fd91ddfa76c12df8a8f019e84360" kindref="member">Theta_cov</ref><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y &gt;, VectorIndexSet&lt; R_cov, Theta_cov &gt; &gt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::jacobian_matrix</definition>
         <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>
@@ -654,7 +654,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" line="308" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping.hpp" bodystart="308" bodyend="314"/>
       </memberdef>
       <memberdef kind="function" id="classDiscretePoloidalCSSplineMapping_1ad985df5230d0f8a29e00a6d80b56b778" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classDiscretePoloidalCSSplineMapping_1a64530f08f7985257806364087b9e2df3" kindref="member">R_cov</ref>, <ref refid="classDiscretePoloidalCSSplineMapping_1a3f31fd91ddfa76c12df8a8f019e84360" kindref="member">Theta_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classDiscretePoloidalCSSplineMapping_1a64530f08f7985257806364087b9e2df3" kindref="member">R_cov</ref><ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="classDiscretePoloidalCSSplineMapping_1a3f31fd91ddfa76c12df8a8f019e84360" kindref="member">Theta_cov</ref><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y &gt;, VectorIndexSet&lt; R_cov, Theta_cov &gt; &gt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::first_order_jacobian_matrix_r_rtheta</definition>
         <argsstring>(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</argsstring>
         <name>first_order_jacobian_matrix_r_rtheta</name>

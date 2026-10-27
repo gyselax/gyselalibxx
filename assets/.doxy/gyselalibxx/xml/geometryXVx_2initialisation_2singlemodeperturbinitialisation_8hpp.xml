@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp" kind="file" language="C++">
     <compoundname>singlemodeperturbinitialisation.hpp</compoundname>
     <includes local="no">paraconf.h</includes>
@@ -51,12 +51,6 @@
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -144,20 +138,14 @@
       <node id="10">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="20">
-        <label>filesystem</label>
-      </node>
       <node id="2">
         <label>paraconf.h</label>
       </node>
       <node id="9">
         <label>source_location</label>
       </node>
-      <node id="21">
-        <label>stdexcept</label>
-      </node>
-      <node id="22">
-        <label>string</label>
+      <node id="20">
+        <label>string_view</label>
       </node>
       <node id="6">
         <label>type_traits</label>
@@ -183,7 +171,7 @@
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;paraconfpp.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_info.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19" refid="classSingleModePerturbInitialisation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSingleModePerturbInitialisation" kindref="compound">SingleModePerturbInitialisation</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIInitialisation" kindref="compound">IInitialisation</ref></highlight></codeline>
+<codeline lineno="19" refid="classSingleModePerturbInitialisation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSingleModePerturbInitialisation_1a53f1ad6e7bf8f78b993c8c29d334f518" kindref="member">SingleModePerturbInitialisation</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIInitialisation" kindref="compound">IInitialisation</ref></highlight></codeline>
 <codeline lineno="20"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldSpVx<sp/>m_fequilibrium;</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
@@ -197,14 +185,14 @@
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>perturb_mode,</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>perturb_amplitude)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSingleModePerturbInitialisation" kindref="compound">SingleModePerturbInitialisation</ref>(</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSingleModePerturbInitialisation_1a53f1ad6e7bf8f78b993c8c29d334f518" kindref="member">SingleModePerturbInitialisation</ref>(</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldSpVx<sp/>fequilibrium,</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;IFieldMemSp&gt;<sp/>init_perturb_mode,</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>init_perturb_amplitude);</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSingleModePerturbInitialisation" kindref="compound">~SingleModePerturbInitialisation</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSingleModePerturbInitialisation_1a53f1ad6e7bf8f78b993c8c29d334f518" kindref="member">~SingleModePerturbInitialisation</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classSingleModePerturbInitialisation" kindref="compound">SingleModePerturbInitialisation</ref><sp/><ref refid="classSingleModePerturbInitialisation_1a33624a09295716f95d370b8dd6c8d7fe" kindref="member">init_from_input</ref>(</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classSingleModePerturbInitialisation_1a53f1ad6e7bf8f78b993c8c29d334f518" kindref="member">SingleModePerturbInitialisation</ref><sp/><ref refid="classSingleModePerturbInitialisation_1a33624a09295716f95d370b8dd6c8d7fe" kindref="member">init_from_input</ref>(</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldSpVx<sp/>allfequilibrium,</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp<sp/>idx_range_kinsp,</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>yaml_input_file);</highlight></codeline>

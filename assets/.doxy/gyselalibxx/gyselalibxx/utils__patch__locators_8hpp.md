@@ -42,7 +42,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**is\_onion\_patch\_locator\_v**](#variable-is_onion_patch_locator_v)   = `[**is\_onion\_patch\_locator**](structis__onion__patch__locator.md)&lt;T&gt;::value`<br>_Boolean: true if the patch locator is adapted to onion geometry._  |
+|  bool | [**is\_onion\_patch\_locator\_v**](#variable-is_onion_patch_locator_v)   = `[**is\_onion\_patch\_locator**](structis__onion__patch__locator.md)&lt;T&gt;::value`<br>_Boolean: true if the patch locator is adapted to onion geometry._  |
 
 
 
@@ -96,7 +96,7 @@
 
 _Boolean: true if the patch locator is adapted to onion geometry._ 
 ```C++
-constexpr bool is_onion_patch_locator_v;
+bool is_onion_patch_locator_v;
 ```
 
 

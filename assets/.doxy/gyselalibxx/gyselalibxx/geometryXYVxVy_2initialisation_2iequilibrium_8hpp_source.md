@@ -19,6 +19,7 @@ class IEquilibrium
 public:
     virtual ~IEquilibrium() = default;
 
+
     virtual DFieldSpVxVy operator()(DFieldSpVxVy allfequilibrium) const = 0;
 };
 ```

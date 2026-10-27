@@ -34,7 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef [**DTensor**](classTensor.md)&lt; ValidArgIndices, vector\_index\_set\_dual\_t&lt; ValidResultIndices &gt; &gt; | [**InverseJacobianTensor**](#typedef-inversejacobiantensor)  <br>_The type of the tensor representing the inverse Jacobian._  |
+| typedef DTensor&lt; ValidArgIndices, vector\_index\_set\_dual\_t&lt; ValidResultIndices &gt; &gt; | [**InverseJacobianTensor**](#typedef-inversejacobiantensor)  <br>_The type of the tensor representing the inverse Jacobian._  |
 
 
 
@@ -116,7 +116,7 @@ A class to calculate the inverse of the Jacobian matrix. If specialised methods 
 
 _The type of the tensor representing the inverse Jacobian._ 
 ```C++
-using InverseJacobianMatrix< Mapping >::InverseJacobianTensor =  DTensor<ValidArgIndices, vector_index_set_dual_t<ValidResultIndices> >;
+using InverseJacobianMatrix< Mapping >::InverseJacobianTensor =  DTensor<ValidArgIndices, vector_index_set_dual_t<ValidResultIndices>>;
 ```
 
 

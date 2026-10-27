@@ -42,9 +42,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_interface\_derivative\_coefficients\_collection**](#variable-enable_interface_derivative_coefficients_collection)   = `false`<br> |
-|  constexpr bool | [**enable\_interface\_derivative\_coefficients\_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;**](#variable-enable_interface_derivative_coefficients_collection-interfacederivcoeffscollection-derivcalculatortype)   = `true`<br> |
-|  constexpr bool | [**is\_interface\_derivative\_coefficients\_collection\_v**](#variable-is_interface_derivative_coefficients_collection_v)   = `/* multi line expression */`<br> |
+|  bool | [**enable\_interface\_derivative\_coefficients\_collection**](#variable-enable_interface_derivative_coefficients_collection)   = `false`<br> |
+|  bool | [**enable\_interface\_derivative\_coefficients\_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;**](#variable-enable_interface_derivative_coefficients_collection-interfacederivcoeffscollection-derivcalculatortype)   = `true`<br> |
+|  bool | [**is\_interface\_derivative\_coefficients\_collection\_v**](#variable-is_interface_derivative_coefficients_collection_v)   = `/* multi line expression */`<br> |
 
 
 
@@ -102,7 +102,7 @@
 ### variable enable\_interface\_derivative\_coefficients\_collection 
 
 ```C++
-constexpr bool enable_interface_derivative_coefficients_collection;
+bool enable_interface_derivative_coefficients_collection;
 ```
 
 
@@ -115,7 +115,7 @@ constexpr bool enable_interface_derivative_coefficients_collection;
 ### variable enable\_interface\_derivative\_coefficients\_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt; 
 
 ```C++
-constexpr bool enable_interface_derivative_coefficients_collection< InterfaceDerivCoeffsCollection< DerivCalculatorType... > >;
+bool enable_interface_derivative_coefficients_collection< InterfaceDerivCoeffsCollection< DerivCalculatorType... > >;
 ```
 
 
@@ -128,7 +128,7 @@ constexpr bool enable_interface_derivative_coefficients_collection< InterfaceDer
 ### variable is\_interface\_derivative\_coefficients\_collection\_v 
 
 ```C++
-constexpr bool is_interface_derivative_coefficients_collection_v;
+bool is_interface_derivative_coefficients_collection_v;
 ```
 
 

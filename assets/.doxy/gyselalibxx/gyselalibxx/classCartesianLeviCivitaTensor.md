@@ -68,7 +68,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr KOKKOS\_FUNCTION ElementType | [**get**](#function-get) () <br>_Get an element of the tensor._  |
+|  KOKKOS\_FUNCTION ElementType | [**get**](#function-get) () <br>_Get an element of the tensor._  |
 |  KOKKOS\_FUNCTION constexpr std::size\_t | [**rank**](#function-rank) () <br>_The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor._  |
 |  KOKKOS\_FUNCTION constexpr std::size\_t | [**size**](#function-size) () <br>_The size of the tensor. This is the number of elements in the tensor._  |
 
@@ -193,7 +193,7 @@ KOKKOS_DEFAULTED_FUNCTION CartesianLeviCivitaTensor::CartesianLeviCivitaTensor (
 _Get an element of the tensor._ 
 ```C++
 template<class QueryTensorIndexElement>
-static inline constexpr KOKKOS_FUNCTION ElementType CartesianLeviCivitaTensor::get () 
+static inline KOKKOS_FUNCTION ElementType CartesianLeviCivitaTensor::get () 
 ```
 
 

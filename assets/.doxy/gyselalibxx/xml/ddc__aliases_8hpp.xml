@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="ddc__aliases_8hpp" kind="file" language="C++">
     <compoundname>ddc_aliases.hpp</compoundname>
     <includes local="no">source_location</includes>
@@ -2345,7 +2345,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_aliases.hpp" line="34" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_aliases.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="ddc__aliases_8hpp_1abda38dfd03ef2a3c48f3818a2abe1171" prot="public" static="no">
+      <memberdef kind="typedef" id="ddc__aliases_8hpp_1a5a81557f0d22d951ffa074b4c2780dfe" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class ElementType</type>
@@ -2359,7 +2359,7 @@
           </param>
         </templateparamlist>
         <type>ddc::Chunk&lt; ElementType, IdxRange, ddc::KokkosAllocator&lt; ElementType, MemSpace &gt; &gt;</type>
-        <definition>using FieldMem =  ddc::Chunk&lt;ElementType, IdxRange, ddc::KokkosAllocator&lt;ElementType, MemSpace&gt; &gt;</definition>
+        <definition>using FieldMem =  ddc::Chunk&lt;ElementType, IdxRange, ddc::KokkosAllocator&lt;ElementType, MemSpace&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>FieldMem</name>
         <briefdescription>
@@ -2416,7 +2416,7 @@
         <argsstring></argsstring>
         <name>Field</name>
         <briefdescription>
-<para>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid <formula id="425">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid <formula id="425">${x_0, x_1, .., x_N}$</formula>). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2443,7 +2443,7 @@
         <argsstring></argsstring>
         <name>DField</name>
         <briefdescription>
-<para>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="425">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="425">${x_0, x_1, .., x_N}$</formula>). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2473,7 +2473,7 @@
         <argsstring></argsstring>
         <name>ConstField</name>
         <briefdescription>
-<para>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid <formula id="425">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid <formula id="425">${x_0, x_1, .., x_N}$</formula>). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2500,7 +2500,7 @@
         <argsstring></argsstring>
         <name>DConstField</name>
         <briefdescription>
-<para>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="425">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="425">${x_0, x_1, .., x_N}$</formula>). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2560,60 +2560,61 @@
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/kernels/splines.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Coord<sp/>=<sp/>ddc::Coordinate&lt;Dims...&gt;;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>GridTypes&gt;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>GridTypes&gt;</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Idx<sp/>=<sp/>ddc::DiscreteElement&lt;GridTypes...&gt;;</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>GridTypes&gt;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>GridTypes&gt;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStep<sp/>=<sp/>ddc::DiscreteVector&lt;GridTypes...&gt;;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>GridTypes&gt;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>GridTypes&gt;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRange<sp/>=<sp/>ddc::DiscreteDomain&lt;GridTypes...&gt;;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>GridTypes&gt;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSlice<sp/>=<sp/>ddc::StridedDiscreteDomain&lt;GridTypes...&gt;;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRange,</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemSpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMem<sp/>=<sp/>ddc::Chunk&lt;ElementType,<sp/>IdxRange,<sp/>ddc::KokkosAllocator&lt;ElementType,<sp/>MemSpace&gt;&gt;;</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMem<sp/>=<sp/>FieldMem&lt;double,<sp/>IdxRange,<sp/>MemSpace&gt;;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRange,</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemorySpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LayoutStridedPolicy<sp/>=<sp/>Kokkos::layout_right&gt;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Field<sp/>=<sp/>ddc::ChunkSpan&lt;ElementType,<sp/>IdxRange,<sp/>LayoutStridedPolicy,<sp/>MemorySpace&gt;;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRange,</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemorySpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LayoutStridedPolicy<sp/>=<sp/>Kokkos::layout_right&gt;</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DField<sp/>=<sp/>Field&lt;double,<sp/>IdxRange,<sp/>MemorySpace,<sp/>LayoutStridedPolicy&gt;;</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRange,</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemorySpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LayoutStridedPolicy<sp/>=<sp/>Kokkos::layout_right&gt;</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstField<sp/>=<sp/>ddc::ChunkView&lt;ElementType,<sp/>IdxRange,<sp/>LayoutStridedPolicy,<sp/>MemorySpace&gt;;</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRange,</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemorySpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LayoutStridedPolicy<sp/>=<sp/>Kokkos::layout_right&gt;</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstField<sp/>=<sp/>ConstField&lt;double,<sp/>IdxRange,<sp/>MemorySpace,<sp/>LayoutStridedPolicy&gt;;</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim&gt;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim&gt;</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">UniformGridBase<sp/>=<sp/>ddc::UniformPointSampling&lt;Dim&gt;;</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim&gt;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim&gt;</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">NonUniformGridBase<sp/>=<sp/>ddc::NonUniformPointSampling&lt;Dim&gt;;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_aliases.hpp"/>

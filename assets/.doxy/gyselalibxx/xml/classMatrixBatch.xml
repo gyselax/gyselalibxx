@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classMatrixBatch" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>MatrixBatch</compoundname>
-    <derivedcompoundref refid="classMatrixBatchCsr" prot="public" virt="non-virtual">MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt;</derivedcompoundref>
     <derivedcompoundref refid="classMatrixBatchCsr" prot="public" virt="non-virtual">MatrixBatchCsr&lt; ExecSpace, Solver &gt;</derivedcompoundref>
     <derivedcompoundref refid="classMatrixBatchEll" prot="public" virt="non-virtual">MatrixBatchEll&lt; ExecSpace &gt;</derivedcompoundref>
     <derivedcompoundref refid="classMatrixBatchTridiag" prot="public" virt="non-virtual">MatrixBatchTridiag&lt; ExecSpace &gt;</derivedcompoundref>
@@ -228,25 +227,19 @@
         <label>MatrixBatch&lt; ExecSpace &gt;</label>
         <link refid="classMatrixBatch"/>
       </node>
-      <node id="3">
+      <node id="2">
         <label>MatrixBatchCsr&lt; ExecSpace, Solver &gt;</label>
         <link refid="classMatrixBatchCsr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="2">
-        <label>MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt;</label>
-        <link refid="classMatrixBatchCsr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
+      <node id="3">
         <label>MatrixBatchEll&lt; ExecSpace &gt;</label>
         <link refid="classMatrixBatchEll"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="5">
+      <node id="4">
         <label>MatrixBatchTridiag&lt; ExecSpace &gt;</label>
         <link refid="classMatrixBatchTridiag"/>
         <childnode refid="1" relation="public-inheritance">

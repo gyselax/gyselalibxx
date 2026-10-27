@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -590,7 +596,7 @@
 <td style="text-align: left;"><a href="#typedef-batch_idx_range_type"><strong>batch_idx_range_type</strong></a>  <br><em>The type of the batch domain (obtained by removing the dimension of interest from the whole domain).</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, InterpolationGrid, <a href="classLagrangeEvaluator.html#typedef-coeff_grid_type"><strong>coeff_grid_type</strong></a> &gt;</td>
+<td style="text-align: right;">typedef ddc:: replace_dim_of_t&lt; BatchedInterpolationIdxRange, InterpolationGrid, <a href="classLagrangeEvaluator.html#typedef-coeff_grid_type"><strong>coeff_grid_type</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>  <br><em>The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain and batch domain) preserving the order of dimensions.</em></td>
 </tr>
 <tr>
@@ -731,7 +737,8 @@
 
 <h3 id="typedef-batched_coeff_idx_range_type">typedef batched_coeff_idx_range_type</h3>
 <p><em>The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain and batch domain) preserving the order of dimensions.</em> </p>
-<pre><code class="language-C++">using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batched_coeff_idx_range_type =  ddc:: replace_dim_of_t&lt;BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type&gt;;
+<pre><code class="language-C++">using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batched_coeff_idx_range_type =  ddc::
+            replace_dim_of_t&lt;BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -751,7 +758,8 @@
 
 <h3 id="typedef-coeff_grid_type">typedef coeff_grid_type</h3>
 <p><em>The grid on which the interpolation coefficients should be provided.</em> </p>
-<pre><code class="language-C++">using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::coeff_grid_type =  typename LagrangeBasis::template Impl&lt;LagrangeBasis, MemorySpace&gt;::knot_grid;
+<pre><code class="language-C++">using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::coeff_grid_type = 
+            typename LagrangeBasis::template Impl&lt;LagrangeBasis, MemorySpace&gt;::knot_grid;
 </code></pre>
 <hr>
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classInfNormResidual" kind="class" language="C++" prot="public">
     <compoundname>InfNormResidual</compoundname>
     <basecompoundref prot="public" virt="non-virtual">gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace &gt;, gko::stop::Criterion &gt;</basecompoundref>
@@ -286,7 +286,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace  &gt;, gko::stop::Criterion &gt;</label>
+        <label>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace &gt;, gko::stop::Criterion &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -297,7 +297,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace  &gt;, gko::stop::Criterion &gt;</label>
+        <label>gko::EnablePolymorphicObject&lt; InfNormResidual&lt; Kokkos::DefaultExecutionSpace &gt;, gko::stop::Criterion &gt;</label>
       </node>
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/inf_norm_residual_criterion.hpp" bodystart="25" bodyend="116"/>

@@ -105,7 +105,14 @@ Holds the spline coefficient field and the preallocated time stepper. Call `oper
 
 _The non-owning operator that can be used on GPU._ 
 ```C++
-using polar_foot_finder_details::ElementwisePhysicalAdvPhysicalFootFinderMem< GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder, LogicalToPhysicalMapping >::GPUCompat =  ElementwisePhysicalAdvPhysicalFootFinder< GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, typename AdvecCoefFieldMem::view_type, TimeStepper, LogicalToPhysicalMapping>;
+using polar_foot_finder_details::ElementwisePhysicalAdvPhysicalFootFinderMem< GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder, LogicalToPhysicalMapping >::GPUCompat =  ElementwisePhysicalAdvPhysicalFootFinder<
+            GridR,
+            GridTheta,
+            IdxRangeOperator,
+            RThetaAdvectionEvaluator,
+            typename AdvecCoefFieldMem::view_type,
+            TimeStepper,
+            LogicalToPhysicalMapping>;
 ```
 
 

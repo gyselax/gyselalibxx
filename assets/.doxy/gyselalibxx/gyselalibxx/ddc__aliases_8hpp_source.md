@@ -16,6 +16,7 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+
 template <class... Dims>
 using Coord = ddc::Coordinate<Dims...>;
 

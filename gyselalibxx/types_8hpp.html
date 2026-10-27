@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -680,7 +686,7 @@
 <td style="text-align: left;"><a href="#typedef-dfieldonpatch_host"><strong>DFieldOnPatch_host</strong></a>  <br><em>A Field of doubles defined on host on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</td>
+<td style="text-align: right;">typedef VectorConstField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-dvectorconstfieldonpatch"><strong>DVectorConstFieldOnPatch</strong></a>  <br><em>A ConstVectorField of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
@@ -696,7 +702,7 @@
 <td style="text-align: left;"><a href="#typedef-derivfieldmemonpatch"><strong>DerivFieldMemOnPatch</strong></a>  <br><em>A field memory with derivatives containing the function values on the 2D grid, the first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef host_t&lt; <a href="classDerivFieldMem.html"><strong>DerivFieldMemOnPatch</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef host_t&lt; DerivFieldMemOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-derivfieldmemonpatch_host"><strong>DerivFieldMemOnPatch_host</strong></a>  <br><em>A field memory with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></td>
 </tr>
 <tr>
@@ -704,7 +710,7 @@
 <td style="text-align: left;"><a href="#typedef-derivfieldonpatch"><strong>DerivFieldOnPatch</strong></a>  <br><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef host_t&lt; <a href="classDerivField.html"><strong>DerivFieldOnPatch</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef host_t&lt; DerivFieldOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-derivfieldonpatch_host"><strong>DerivFieldOnPatch_host</strong></a>  <br><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></td>
 </tr>
 <tr>
@@ -776,19 +782,19 @@
 
 <h3 id="typedef-constderiv12_onpatch_2d">typedef ConstDeriv12_OnPatch_2D</h3>
 <p><em>A constant field of the derivatives</em> <span class="arithmatex">\(\partial_1^(n)\partial_2^(m) f(x)\)</span> <em>defined on the index ranges of valid n and m.</em></p>
-<pre><code class="language-C++">using ConstDeriv12_OnPatch_2D =  DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, ddc::Deriv&lt;typename Patch::Dim2&gt; &gt;&gt;;
+<pre><code class="language-C++">using ConstDeriv12_OnPatch_2D =  DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, ddc::Deriv&lt;typename Patch::Dim2&gt;&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constderiv1_onpatch_2d">typedef ConstDeriv1_OnPatch_2D</h3>
 <p><em>A constant field of the n-th derivatives in the direction of</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid.</em></p>
-<pre><code class="language-C++">using ConstDeriv1_OnPatch_2D =  DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid2&gt; &gt;;
+<pre><code class="language-C++">using ConstDeriv1_OnPatch_2D =  DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid2&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constderiv2_onpatch_2d">typedef ConstDeriv2_OnPatch_2D</h3>
 <p><em>A constant field of the n-th derivatives in the direction of</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid.</em></p>
-<pre><code class="language-C++">using ConstDeriv2_OnPatch_2D =  DConstField&lt;IdxRange&lt;typename Patch::Grid1, ddc::Deriv&lt;typename Patch::Dim2&gt; &gt;&gt;;
+<pre><code class="language-C++">using ConstDeriv2_OnPatch_2D =  DConstField&lt;IdxRange&lt;typename Patch::Grid1, ddc::Deriv&lt;typename Patch::Dim2&gt;&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -800,7 +806,7 @@
 
 <h3 id="typedef-constsplinecoeff1onpatch_2d">typedef ConstSplineCoeff1OnPatch_2D</h3>
 <p><em>A constant field of spline coefficients batched over the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
-<pre><code class="language-C++">using ConstSplineCoeff1OnPatch_2D =  DConstField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt; &gt;;
+<pre><code class="language-C++">using ConstSplineCoeff1OnPatch_2D =  DConstField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -812,7 +818,7 @@
 
 <h3 id="typedef-constsplinecoeffonpatch_2d_host">typedef ConstSplineCoeffOnPatch_2D_host</h3>
 <p><em>A constant field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></p>
-<pre><code class="language-C++">using ConstSplineCoeffOnPatch_2D_host =  host_t&lt;ConstSplineCoeffOnPatch_2D&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using ConstSplineCoeffOnPatch_2D_host =  host_t&lt;ConstSplineCoeffOnPatch_2D&lt;Patch&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -854,7 +860,7 @@
 
 <h3 id="typedef-dconstfieldonpatch_host">typedef DConstFieldOnPatch_host</h3>
 <p><em>A constant Field of doubles on host on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
-<pre><code class="language-C++">using DConstFieldOnPatch_host =  host_t&lt;DConstFieldOnPatch&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using DConstFieldOnPatch_host =  host_t&lt;DConstFieldOnPatch&lt;Patch&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -890,49 +896,71 @@
 
 <h3 id="typedef-dfieldonpatch_host">typedef DFieldOnPatch_host</h3>
 <p><em>A Field of doubles defined on host on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
-<pre><code class="language-C++">using DFieldOnPatch_host =  host_t&lt;DFieldOnPatch&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using DFieldOnPatch_host =  host_t&lt;DFieldOnPatch&lt;Patch&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dvectorconstfieldonpatch">typedef DVectorConstFieldOnPatch</h3>
 <p><em>A ConstVectorField of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
-<pre><code class="language-C++">using DVectorConstFieldOnPatch =  VectorConstField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
+<pre><code class="language-C++">using DVectorConstFieldOnPatch =  VectorConstField&lt;
+        double,
+        typename Patch::IdxRange12,
+        VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dvectorfieldmemonpatch">typedef DVectorFieldMemOnPatch</h3>
 <p><em>A</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>of doubles defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
-<pre><code class="language-C++">using DVectorFieldMemOnPatch =  VectorFieldMem&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
+<pre><code class="language-C++">using DVectorFieldMemOnPatch =  VectorFieldMem&lt;
+        double,
+        typename Patch::IdxRange12,
+        VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dvectorfieldonpatch">typedef DVectorFieldOnPatch</h3>
 <p><em>A</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>of doubles defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
-<pre><code class="language-C++">using DVectorFieldOnPatch =  VectorField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
+<pre><code class="language-C++">using DVectorFieldOnPatch =  VectorField&lt;
+        double,
+        typename Patch::IdxRange12,
+        VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-derivfieldmemonpatch">typedef DerivFieldMemOnPatch</h3>
 <p><em>A field memory with derivatives containing the function values on the 2D grid, the first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></p>
-<pre><code class="language-C++">using DerivFieldMemOnPatch =  DerivFieldMem&lt; double, IdxRange&lt; ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid1, ddc::Deriv&lt;typename Patch::Dim2&gt;, typename Patch::Grid2&gt;, 1&gt;;
+<pre><code class="language-C++">using DerivFieldMemOnPatch =  DerivFieldMem&lt;
+        double,
+        IdxRange&lt;
+                ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                typename Patch::Grid1,
+                ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                typename Patch::Grid2&gt;,
+        1&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-derivfieldmemonpatch_host">typedef DerivFieldMemOnPatch_host</h3>
 <p><em>A field memory with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></p>
-<pre><code class="language-C++">using DerivFieldMemOnPatch_host =  host_t&lt;DerivFieldMemOnPatch&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using DerivFieldMemOnPatch_host =  host_t&lt;DerivFieldMemOnPatch&lt;Patch&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-derivfieldonpatch">typedef DerivFieldOnPatch</h3>
 <p><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></p>
-<pre><code class="language-C++">using DerivFieldOnPatch =  DerivField&lt; double, IdxRange&lt; ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid1, ddc::Deriv&lt;typename Patch::Dim2&gt;, typename Patch::Grid2&gt; &gt;;
+<pre><code class="language-C++">using DerivFieldOnPatch =  DerivField&lt;
+        double,
+        IdxRange&lt;
+                ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                typename Patch::Grid1,
+                ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                typename Patch::Grid2&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-derivfieldonpatch_host">typedef DerivFieldOnPatch_host</h3>
 <p><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></p>
-<pre><code class="language-C++">using DerivFieldOnPatch_host =  host_t&lt;DerivFieldOnPatch&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using DerivFieldOnPatch_host =  host_t&lt;DerivFieldOnPatch&lt;Patch&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -986,7 +1014,7 @@
 
 <h3 id="typedef-splinecoeff1onpatch_2d">typedef SplineCoeff1OnPatch_2D</h3>
 <p><em>A field of spline coefficients batched over the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
-<pre><code class="language-C++">using SplineCoeff1OnPatch_2D =  DField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt; &gt;;
+<pre><code class="language-C++">using SplineCoeff1OnPatch_2D =  DField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -998,7 +1026,7 @@
 
 <h3 id="typedef-splinecoeffmemonpatch_2d_host">typedef SplineCoeffMemOnPatch_2D_host</h3>
 <p><em>A field memory of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></p>
-<pre><code class="language-C++">using SplineCoeffMemOnPatch_2D_host =  host_t&lt;SplineCoeffMemOnPatch_2D&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using SplineCoeffMemOnPatch_2D_host =  host_t&lt;SplineCoeffMemOnPatch_2D&lt;Patch&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -1010,7 +1038,7 @@
 
 <h3 id="typedef-splinecoeffonpatch_2d_host">typedef SplineCoeffOnPatch_2D_host</h3>
 <p><em>A field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></p>
-<pre><code class="language-C++">using SplineCoeffOnPatch_2D_host =  host_t&lt;SplineCoeffOnPatch_2D&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using SplineCoeffOnPatch_2D_host =  host_t&lt;SplineCoeffOnPatch_2D&lt;Patch&gt;&gt;;
 </code></pre>
 <hr>
 

@@ -34,7 +34,7 @@ _Owning manager for_ [_**ElementwisePhysicalAdvPseudoPhysicalFootFinder**_](clas
 
 | Type | Name |
 | ---: | :--- |
-| typedef [**ElementwisePhysicalAdvPseudoPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), IdxRangeOperator, RThetaAdvectionEvaluator, [**PseudoPhysicalToAdvectionMapping**](classCombinedMapping.md), [**PseudoPhysicalToLogicalMapping**](classCartesianToCircular.md), [**LogicalToPseudoPhysicalMapping**](classCircularToCartesian.md), typename AdvecCoefFieldMem::view\_type, TimeStepper &gt; | [**GPUCompat**](#typedef-gpucompat)  <br>_The non-owning operator that can be used on GPU._  |
+| typedef [**ElementwisePhysicalAdvPseudoPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), IdxRangeOperator, RThetaAdvectionEvaluator, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, typename AdvecCoefFieldMem::view\_type, TimeStepper &gt; | [**GPUCompat**](#typedef-gpucompat)  <br>_The non-owning operator that can be used on GPU._  |
 
 
 
@@ -105,7 +105,16 @@ Builds the `CombinedMapping` (physical-to-advection), holds the spline coefficie
 
 _The non-owning operator that can be used on GPU._ 
 ```C++
-using polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinderMem< GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder, LogicalToPhysicalMapping >::GPUCompat =  ElementwisePhysicalAdvPseudoPhysicalFootFinder< GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, typename AdvecCoefFieldMem::view_type, TimeStepper>;
+using polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinderMem< GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder, LogicalToPhysicalMapping >::GPUCompat =  ElementwisePhysicalAdvPseudoPhysicalFootFinder<
+            GridR,
+            GridTheta,
+            IdxRangeOperator,
+            RThetaAdvectionEvaluator,
+            PseudoPhysicalToAdvectionMapping,
+            PseudoPhysicalToLogicalMapping,
+            LogicalToPseudoPhysicalMapping,
+            typename AdvecCoefFieldMem::view_type,
+            TimeStepper>;
 ```
 
 

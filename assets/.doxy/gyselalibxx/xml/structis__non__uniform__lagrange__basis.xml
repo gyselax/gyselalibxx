@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structis__non__uniform__lagrange__basis" kind="struct" language="C++" prot="public">
     <compoundname>is_non_uniform_lagrange_basis</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::is_base_of::type</basecompoundref>

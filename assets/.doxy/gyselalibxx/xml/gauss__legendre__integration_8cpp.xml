@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="gauss__legendre__integration_8cpp" kind="file" language="C++">
     <compoundname>gauss_legendre_integration.cpp</compoundname>
     <includes local="no">array</includes>
@@ -95,6 +95,52 @@
         <label>vector</label>
       </node>
     </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="gauss__legendre__integration_8cpp_1a2537e949104240e0ad8f065e1c50381e" prot="public" static="no" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>NPoints</declname>
+            <defname>NPoints</defname>
+          </param>
+        </templateparamlist>
+        <type>std::array&lt; long double, NPoints &gt;</type>
+        <definition>std::array&lt;long double, NPoints&gt; GaussLegendreCoefficients&lt; NPoints &gt;::pos</definition>
+        <argsstring></argsstring>
+        <name>GaussLegendreCoefficients&lt; NPoints &gt;::pos</name>
+        <qualifiedname>pos</qualifiedname>
+        <initializer>= s_pos&lt;NPoints&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp" line="189" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="gauss__legendre__integration_8cpp_1a9f470ba423dd40f17357e5ac9f430d34" prot="public" static="no" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>NPoints</declname>
+            <defname>NPoints</defname>
+          </param>
+        </templateparamlist>
+        <type>std::array&lt; long double, NPoints &gt;</type>
+        <definition>std::array&lt;long double, NPoints&gt; GaussLegendreCoefficients&lt; NPoints &gt;::weight</definition>
+        <argsstring></argsstring>
+        <name>GaussLegendreCoefficients&lt; NPoints &gt;::weight</name>
+        <qualifiedname>weight</qualifiedname>
+        <initializer>= s_weight&lt;NPoints&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp" line="192" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp" bodystart="192" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -106,7 +152,7 @@
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>NPo</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">s&gt;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>NPo</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">s&gt;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::array&lt;long<sp/>double,<sp/>NPoints&gt;<sp/>s_pos;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>NPo</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">s&gt;</highlight></codeline>
@@ -281,10 +327,10 @@
 <codeline lineno="186"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="187"><highlight class="normal"></highlight></codeline>
 <codeline lineno="188"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>NPo</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">s&gt;</highlight></codeline>
-<codeline lineno="189"><highlight class="normal">std::array&lt;long<sp/>double,<sp/>NPoints&gt;<sp/><ref refid="structGaussLegendreCoefficients" kindref="compound">GaussLegendreCoefficients&lt;NPoints&gt;::pos</ref><sp/>=<sp/>s_pos&lt;NPoints&gt;;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal">std::array&lt;long<sp/>double,<sp/>NPoints&gt;<sp/><ref refid="structGaussLegendreCoefficients_1a0c3310b51b205aeda0dab17f4925c4d2" kindref="member">GaussLegendreCoefficients&lt;NPoints&gt;::pos</ref><sp/>=<sp/>s_pos&lt;NPoints&gt;;</highlight></codeline>
 <codeline lineno="190"><highlight class="normal"></highlight></codeline>
 <codeline lineno="191"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>NPo</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">s&gt;</highlight></codeline>
-<codeline lineno="192"><highlight class="normal">std::array&lt;long<sp/>double,<sp/>NPoints&gt;<sp/><ref refid="structGaussLegendreCoefficients" kindref="compound">GaussLegendreCoefficients&lt;NPoints&gt;::weight</ref><sp/>=<sp/>s_weight&lt;NPoints&gt;;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal">std::array&lt;long<sp/>double,<sp/>NPoints&gt;<sp/><ref refid="structGaussLegendreCoefficients_1afe529976684244a390c122afe1b8bb86" kindref="member">GaussLegendreCoefficients&lt;NPoints&gt;::weight</ref><sp/>=<sp/>s_weight&lt;NPoints&gt;;</highlight></codeline>
 <codeline lineno="193"><highlight class="normal"></highlight></codeline>
 <codeline lineno="194"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGaussLegendreCoefficients" kindref="compound">GaussLegendreCoefficients&lt;1&gt;</ref>;</highlight></codeline>
 <codeline lineno="195"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGaussLegendreCoefficients" kindref="compound">GaussLegendreCoefficients&lt;2&gt;</ref>;</highlight></codeline>

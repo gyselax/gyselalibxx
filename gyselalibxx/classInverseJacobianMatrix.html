@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -586,7 +592,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef <a href="classTensor.html"><strong>DTensor</strong></a>&lt; ValidArgIndices, vector_index_set_dual_t&lt; ValidResultIndices &gt; &gt;</td>
+<td style="text-align: right;">typedef DTensor&lt; ValidArgIndices, vector_index_set_dual_t&lt; ValidResultIndices &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-inversejacobiantensor"><strong>InverseJacobianTensor</strong></a>  <br><em>The type of the tensor representing the inverse Jacobian.</em></td>
 </tr>
 </tbody>
@@ -623,7 +629,7 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-inversejacobiantensor">typedef InverseJacobianTensor</h3>
 <p><em>The type of the tensor representing the inverse Jacobian.</em> </p>
-<pre><code class="language-C++">using InverseJacobianMatrix&lt; Mapping &gt;::InverseJacobianTensor =  DTensor&lt;ValidArgIndices, vector_index_set_dual_t&lt;ValidResultIndices&gt; &gt;;
+<pre><code class="language-C++">using InverseJacobianMatrix&lt; Mapping &gt;::InverseJacobianTensor =  DTensor&lt;ValidArgIndices, vector_index_set_dual_t&lt;ValidResultIndices&gt;&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

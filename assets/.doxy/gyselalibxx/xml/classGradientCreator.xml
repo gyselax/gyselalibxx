@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classGradientCreator" kind="class" language="C++" prot="public">
     <compoundname>GradientCreator</compoundname>
     <includes refid="gradient__creator_8hpp" local="no">gradient_creator.hpp</includes>
@@ -66,7 +66,7 @@
         <name>operator()</name>
         <qualifiedname>GradientCreator::operator()</qualifiedname>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRangeFull, get_covariant_dims_t&lt; VectorIndexSet&lt; DerivativeDims... &gt; &gt; &gt;</type>
+          <type>DVectorField&lt; IdxRangeFull, get_covariant_dims_t&lt; VectorIndexSet&lt; DerivativeDims... &gt; &gt; &gt;</type>
           <declname>grad_func_cov</declname>
         </param>
         <param>

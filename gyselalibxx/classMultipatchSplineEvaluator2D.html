@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -570,7 +576,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-multipatchsplineevaluator2d">Class MultipatchSplineEvaluator2D</h1>
-<p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, class ExtrapolationRule, template&lt; typename P &gt; typename ValuesOnPatch, class PatchLocator, class... Patches&gt;</strong></p>
+<p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, class <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a>, template&lt; typename P &gt; typename ValuesOnPatch, class PatchLocator, class... Patches&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a></p>
 <p><em>A class to evaluate all the splines of all the patches at once.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -661,7 +667,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: right;">std::size_t</td>
 <td style="text-align: left;"><a href="#variable-n_patches"><strong>n_patches</strong></a>   = <code>ddc::type\_seq\_size\_v&amp;lt;PatchOrdering&amp;gt;</code><br><em>The number of patches.</em></td>
 </tr>
 </tbody>
@@ -677,7 +683,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-multipatchsplineevaluator2d"><strong>MultipatchSplineEvaluator2D</strong></a> (PatchLocator const &amp; patch_locator, ExtrapolationRule const &amp; extrapolation_rule) <br><em>Instantiate a</em> <a href="classMultipatchSplineEvaluator2D.html"><em><strong>MultipatchSplineEvaluator2D</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-multipatchsplineevaluator2d"><strong>MultipatchSplineEvaluator2D</strong></a> (PatchLocator const &amp; patch_locator, <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> const &amp; extrapolation_rule) <br><em>Instantiate a</em> <a href="classMultipatchSplineEvaluator2D.html"><em><strong>MultipatchSplineEvaluator2D</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -813,7 +819,9 @@
 
 <h3 id="typedef-evaluation_idx_range_type">typedef evaluation_idx_range_type</h3>
 <p><em>The type of the domain for the 2D evaluation mesh used by this class.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::evaluation_idx_range_type =  IdxRange&lt; evaluation_discrete_dimension_type1&lt;Patch&gt;, evaluation_discrete_dimension_type2&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::evaluation_idx_range_type =  IdxRange&lt;
+            evaluation_discrete_dimension_type1&lt;Patch&gt;,
+            evaluation_discrete_dimension_type2&lt;Patch&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -823,7 +831,7 @@
 
 <h3 id="typedef-evaluation_idx_range_type1">typedef evaluation_idx_range_type1</h3>
 <p><em>The type of the domain for the 1D evaluation mesh along first dimension used by this class.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::evaluation_idx_range_type1 =  IdxRange&lt;evaluation_discrete_dimension_type1&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::evaluation_idx_range_type1 =  IdxRange&lt;evaluation_discrete_dimension_type1&lt;Patch&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -833,7 +841,7 @@
 
 <h3 id="typedef-evaluation_idx_range_type2">typedef evaluation_idx_range_type2</h3>
 <p><em>The type of the domain for the 1D evaluation mesh along second dimension used by this class.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::evaluation_idx_range_type2 =  IdxRange&lt;evaluation_discrete_dimension_type2&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::evaluation_idx_range_type2 =  IdxRange&lt;evaluation_discrete_dimension_type2&lt;Patch&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -855,7 +863,7 @@
 
 <h3 id="typedef-spline_idx_range_type">typedef spline_idx_range_type</h3>
 <p><em>The type of the 2D spline domain corresponding to the dimensions of interest.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::spline_idx_range_type =  IdxRange&lt;bsplines_type1&lt;Patch&gt;, bsplines_type2&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::spline_idx_range_type =  IdxRange&lt;bsplines_type1&lt;Patch&gt;, bsplines_type2&lt;Patch&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -865,7 +873,7 @@
 
 <h3 id="typedef-spline_idx_range_type1">typedef spline_idx_range_type1</h3>
 <p><em>The type of the 1D spline domain corresponding to the first dimension of interest.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::spline_idx_range_type1 =  IdxRange&lt;bsplines_type1&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::spline_idx_range_type1 =  IdxRange&lt;bsplines_type1&lt;Patch&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -875,7 +883,7 @@
 
 <h3 id="typedef-spline_idx_range_type2">typedef spline_idx_range_type2</h3>
 <p><em>The type of the 1D spline domain corresponding to the second dimension of interest.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::spline_idx_range_type2 =  IdxRange&lt;bsplines_type2&lt;Patch&gt; &gt;;
+<pre><code class="language-C++">using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::spline_idx_range_type2 =  IdxRange&lt;bsplines_type2&lt;Patch&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -885,7 +893,7 @@
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
 <h3 id="variable-n_patches">variable n_patches</h3>
 <p><em>The number of patches.</em> </p>
-<pre><code class="language-C++">constexpr std::size_t MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::n_patches;
+<pre><code class="language-C++">std::size_t MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::n_patches;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

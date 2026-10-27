@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classVectorField" kind="class" language="C++" prot="public">
     <compoundname>VectorField</compoundname>
     <basecompoundref refid="classVectorFieldCommon" prot="public" virt="non-virtual">VectorFieldCommon&lt; Field&lt; ElementType, IdxRangeType, MemorySpace, LayoutStridedPolicy &gt;, VectorIndexSetType &gt;</basecompoundref>
@@ -52,9 +52,14 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="91" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classVectorField_1a26a5aba14a99a5d32086df8e34c89131" prot="public" static="no">
+      <memberdef kind="typedef" id="classVectorField_1af6fe1a15d255c0dec99951b9bf968480" prot="public" static="no">
         <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;</type>
-        <definition>using VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_type =  VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy&gt;</definition>
+        <definition>using VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_type =  VectorField&lt;
+            ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemorySpace,
+            LayoutStridedPolicy&gt;</definition>
         <argsstring></argsstring>
         <name>span_type</name>
         <qualifiedname>VectorField::span_type</qualifiedname>
@@ -66,11 +71,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="111" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classVectorField_1a30f93eebda677a7328532e3bfd1464cb" prot="public" static="no">
+      <memberdef kind="typedef" id="classVectorField_1a4b197228f303fa45b9c15774def11d27" prot="public" static="no">
         <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;</type>
-        <definition>using VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::view_type =  VectorField&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy&gt;</definition>
+        <definition>using VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::view_type =  VectorField&lt;
+            const ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemorySpace,
+            LayoutStridedPolicy&gt;</definition>
         <argsstring></argsstring>
         <name>view_type</name>
         <qualifiedname>VectorField::view_type</qualifiedname>
@@ -81,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="121" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classVectorField_1ae49ce7f9b3a24a4b22f7b247ae0da5bc" prot="public" static="no">
         <type>LayoutStridedPolicy</type>
@@ -336,8 +346,8 @@
             <defname>Is</defname>
           </param>
         </templateparamlist>
-        <type>constexpr auto</type>
-        <definition>constexpr auto VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get_slice</definition>
+        <type>auto</type>
+        <definition>auto VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get_slice</definition>
         <argsstring>(SliceType const &amp;slice_spec, std::index_sequence&lt; Is... &gt; const &amp;)</argsstring>
         <name>get_slice</name>
         <qualifiedname>VectorField::get_slice</qualifiedname>
@@ -784,8 +794,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="316" column="53"/>
       </memberdef>
       <memberdef kind="function" id="classVectorField_1aeb7f486875c7d07daae82b75f5ec86df" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>constexpr <ref refid="classVectorField_1a30f93eebda677a7328532e3bfd1464cb" kindref="member">view_type</ref></type>
-        <definition>constexpr view_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get_const_field</definition>
+        <type><ref refid="classVectorField_1a4b197228f303fa45b9c15774def11d27" kindref="member">view_type</ref></type>
+        <definition>view_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get_const_field</definition>
         <argsstring>() const</argsstring>
         <name>get_const_field</name>
         <qualifiedname>VectorField::get_const_field</qualifiedname>
@@ -803,8 +813,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="326" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="326" bodyend="329"/>
       </memberdef>
       <memberdef kind="function" id="classVectorField_1a59275acbcdd09c92c188790ac2bfca3e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>constexpr <ref refid="classVectorField_1a26a5aba14a99a5d32086df8e34c89131" kindref="member">span_type</ref></type>
-        <definition>constexpr span_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get_field</definition>
+        <type><ref refid="classVectorField_1af6fe1a15d255c0dec99951b9bf968480" kindref="member">span_type</ref></type>
+        <definition>span_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get_field</definition>
         <argsstring>() const</argsstring>
         <name>get_field</name>
         <qualifiedname>VectorField::get_field</qualifiedname>
@@ -867,8 +877,8 @@
             <defname>QueryDDims</defname>
           </param>
         </templateparamlist>
-        <type>constexpr auto</type>
-        <definition>constexpr auto VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator[]</definition>
+        <type>auto</type>
+        <definition>auto VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator[]</definition>
         <argsstring>(Idx&lt; QueryDDims... &gt; const &amp;slice_spec)</argsstring>
         <name>operator[]</name>
         <qualifiedname>VectorField::operator[]</qualifiedname>
@@ -906,8 +916,8 @@
             <defname>QueryDDims</defname>
           </param>
         </templateparamlist>
-        <type>constexpr auto</type>
-        <definition>constexpr auto VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator[]</definition>
+        <type>auto</type>
+        <definition>auto VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator[]</definition>
         <argsstring>(IdxRange&lt; QueryDDims... &gt; const &amp;oidx_range)</argsstring>
         <name>operator[]</name>
         <qualifiedname>VectorField::operator[]</qualifiedname>
@@ -943,8 +953,8 @@
             <type>class QueryTag</type>
           </param>
         </templateparamlist>
-        <type>constexpr chunk_span_type</type>
-        <definition>constexpr chunk_span_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get</definition>
+        <type>chunk_span_type</type>
+        <definition>chunk_span_type VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get</definition>
         <argsstring>() const noexcept</argsstring>
         <name>get</name>
         <qualifiedname>VectorField::get</qualifiedname>
@@ -1052,7 +1062,7 @@
       <member refid="classVectorField_1ab3ccb08f4e0e126273e19f8a25fe5d3a" prot="public" virt="non-virtual"><scope>VectorField</scope><name>operator=</name></member>
       <member refid="classVectorField_1a91884e95ae7f44dccbd595274f470426" prot="public" virt="non-virtual"><scope>VectorField</scope><name>operator[]</name></member>
       <member refid="classVectorField_1ad28c3e424b784451e334e370aee4568c" prot="public" virt="non-virtual"><scope>VectorField</scope><name>operator[]</name></member>
-      <member refid="classVectorField_1a26a5aba14a99a5d32086df8e34c89131" prot="public" virt="non-virtual"><scope>VectorField</scope><name>span_type</name></member>
+      <member refid="classVectorField_1af6fe1a15d255c0dec99951b9bf968480" prot="public" virt="non-virtual"><scope>VectorField</scope><name>span_type</name></member>
       <member refid="classVectorField_1a1eb942e92bf62a37ba2acc657cfb12f6" prot="private" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>
       <member refid="classVectorField_1a41ca335a210ce90086745e968e0fb999" prot="private" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>
       <member refid="classVectorField_1a5a8f0b8e0054c95e55fb0750a80a043b" prot="private" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>
@@ -1066,7 +1076,7 @@
       <member refid="classVectorField_1acbc5b648ae6509375d9002447c8f1652" prot="public" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>
       <member refid="classVectorField_1a302b90ce88e5f5b64c08f7734284c387" prot="public" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>
       <member refid="classVectorField_1ad64ff813a3b5d71388b2f27f1be99e30" prot="public" virt="non-virtual"><scope>VectorField</scope><name>VectorField</name></member>
-      <member refid="classVectorField_1a30f93eebda677a7328532e3bfd1464cb" prot="public" virt="non-virtual"><scope>VectorField</scope><name>view_type</name></member>
+      <member refid="classVectorField_1a4b197228f303fa45b9c15774def11d27" prot="public" virt="non-virtual"><scope>VectorField</scope><name>view_type</name></member>
       <member refid="classVectorField_1a2b36131fbfab447bcdc402fc91cf1131" prot="public" virt="non-virtual"><scope>VectorField</scope><name>~VectorField</name></member>
     </listofallmembers>
   </compounddef>

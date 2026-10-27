@@ -37,8 +37,8 @@ _A class which describes a mapping which is constructed by combining two mapping
 | typedef typename Mapping2::CoordArg | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
 | typedef CoordJacobianType | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef typename Mapping1::CoordResult | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
-| typedef [**DTensor**](classTensor.md)&lt; ddc::to\_type\_seq\_t&lt; [**CoordArg**](classCombinedMapping.md#typedef-coordarg) &gt;, vector\_index\_set\_dual\_t&lt; ddc::to\_type\_seq\_t&lt; [**CoordResult**](classCombinedMapping.md#typedef-coordresult) &gt; &gt; &gt; | [**InvJacobianMatrixType**](#typedef-invjacobianmatrixtype)  <br>_The type of the inverse Jacobian matrix._  |
-| typedef [**DTensor**](classTensor.md)&lt; ddc::to\_type\_seq\_t&lt; [**CoordResult**](classCombinedMapping.md#typedef-coordresult) &gt;, vector\_index\_set\_dual\_t&lt; ddc::to\_type\_seq\_t&lt; [**CoordArg**](classCombinedMapping.md#typedef-coordarg) &gt; &gt; &gt; | [**JacobianMatrixType**](#typedef-jacobianmatrixtype)  <br>_The type of the Jacobian matrix._  |
+| typedef DTensor&lt; ddc::to\_type\_seq\_t&lt; [**CoordArg**](classCombinedMapping.md#typedef-coordarg) &gt;, vector\_index\_set\_dual\_t&lt; ddc::to\_type\_seq\_t&lt; [**CoordResult**](classCombinedMapping.md#typedef-coordresult) &gt; &gt; &gt; | [**InvJacobianMatrixType**](#typedef-invjacobianmatrixtype)  <br>_The type of the inverse Jacobian matrix._  |
+| typedef DTensor&lt; ddc::to\_type\_seq\_t&lt; [**CoordResult**](classCombinedMapping.md#typedef-coordresult) &gt;, vector\_index\_set\_dual\_t&lt; ddc::to\_type\_seq\_t&lt; [**CoordArg**](classCombinedMapping.md#typedef-coordarg) &gt; &gt; &gt; | [**JacobianMatrixType**](#typedef-jacobianmatrixtype)  <br>_The type of the Jacobian matrix._  |
 
 
 
@@ -161,7 +161,9 @@ using CombinedMapping< Mapping1, Mapping2, CoordJacobianType >::CoordResult =  t
 
 _The type of the inverse Jacobian matrix._ 
 ```C++
-using CombinedMapping< Mapping1, Mapping2, CoordJacobianType >::InvJacobianMatrixType =  DTensor< ddc::to_type_seq_t<CoordArg>, vector_index_set_dual_t<ddc::to_type_seq_t<CoordResult> >>;
+using CombinedMapping< Mapping1, Mapping2, CoordJacobianType >::InvJacobianMatrixType =  DTensor<
+            ddc::to_type_seq_t<CoordArg>,
+            vector_index_set_dual_t<ddc::to_type_seq_t<CoordResult>>>;
 ```
 
 
@@ -175,7 +177,9 @@ using CombinedMapping< Mapping1, Mapping2, CoordJacobianType >::InvJacobianMatri
 
 _The type of the Jacobian matrix._ 
 ```C++
-using CombinedMapping< Mapping1, Mapping2, CoordJacobianType >::JacobianMatrixType =  DTensor< ddc::to_type_seq_t<CoordResult>, vector_index_set_dual_t<ddc::to_type_seq_t<CoordArg> >>;
+using CombinedMapping< Mapping1, Mapping2, CoordJacobianType >::JacobianMatrixType =  DTensor<
+            ddc::to_type_seq_t<CoordResult>,
+            vector_index_set_dual_t<ddc::to_type_seq_t<CoordArg>>>;
 ```
 
 

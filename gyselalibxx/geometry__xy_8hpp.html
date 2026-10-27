@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -881,7 +887,11 @@
 <hr>
 
 <h3 id="typedef-vectorfieldmemxy_xy">typedef VectorFieldMemXY_XY</h3>
-<pre><code class="language-C++">using VectorFieldMemXY_XY =  VectorFieldMem&lt; double, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;, Kokkos::DefaultExecutionSpace::memory_space&gt;;
+<pre><code class="language-C++">using VectorFieldMemXY_XY =  VectorFieldMem&lt;
+        double,
+        IdxRangeXY,
+        VectorIndexSet&lt;X, Y&gt;,
+        Kokkos::DefaultExecutionSpace::memory_space&gt;;
 </code></pre>
 <hr>
 

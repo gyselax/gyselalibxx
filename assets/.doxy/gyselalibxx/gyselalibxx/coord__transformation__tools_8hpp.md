@@ -59,9 +59,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**has\_singular\_o\_point\_inv\_jacobian\_v**](#variable-has_singular_o_point_inv_jacobian_v)   = `/* multi line expression */`<br> |
-|  constexpr bool | [**is\_accessible\_v**](#variable-is_accessible_v)   = `/* multi line expression */`<br> |
-|  constexpr bool | [**is\_coord\_transform\_with\_o\_point\_v**](#variable-is_coord_transform_with_o_point_v)   = `mapping\_detail::HasOPoint&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Mapping&gt;&gt;&gt;::value`<br>_Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point._  |
+|  bool | [**has\_singular\_o\_point\_inv\_jacobian\_v**](#variable-has_singular_o_point_inv_jacobian_v)   = `/* multi line expression */`<br> |
+|  bool | [**is\_accessible\_v**](#variable-is_accessible_v)   = `/* multi line expression */`<br> |
+|  bool | [**is\_coord\_transform\_with\_o\_point\_v**](#variable-is_coord_transform_with_o_point_v)   = `mapping\_detail::HasOPoint&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Mapping&gt;&gt;&gt;::value`<br>_Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point._  |
 
 
 
@@ -127,7 +127,7 @@ using inverse_mapping_t =  decltype(std::declval<Mapping>().get_inverse_mapping(
 ### variable has\_singular\_o\_point\_inv\_jacobian\_v 
 
 ```C++
-constexpr bool has_singular_o_point_inv_jacobian_v;
+bool has_singular_o_point_inv_jacobian_v;
 ```
 
 
@@ -140,7 +140,7 @@ constexpr bool has_singular_o_point_inv_jacobian_v;
 ### variable is\_accessible\_v 
 
 ```C++
-constexpr bool is_accessible_v;
+bool is_accessible_v;
 ```
 
 
@@ -154,7 +154,7 @@ constexpr bool is_accessible_v;
 
 _Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point._ 
 ```C++
-constexpr bool is_coord_transform_with_o_point_v;
+bool is_coord_transform_with_o_point_v;
 ```
 
 

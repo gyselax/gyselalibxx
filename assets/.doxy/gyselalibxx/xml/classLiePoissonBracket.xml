@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classLiePoissonBracket" kind="class" language="C++" prot="public">
     <compoundname>LiePoissonBracket</compoundname>
     <includes refid="lie__poisson__bracket_8hpp" local="no">lie_poisson_bracket.hpp</includes>
@@ -151,13 +151,13 @@
             <defval>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt; &amp;&amp; TensorType::rank() == 2&gt;</defval>
           </param>
         </templateparamlist>
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ddc::type_seq_element_t&lt; 0, typename TensorType::index_set &gt; &gt;</type>
+        <type>KOKKOS_INLINE_FUNCTION DTensor&lt; ddc::type_seq_element_t&lt; 0, typename TensorType::index_set &gt; &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION DTensor&lt; ddc::type_seq_element_t&lt; 0, typename TensorType::index_set &gt; &gt; LiePoissonBracket&lt; Mapping3D, MappingCoord, MetricTensorType &gt;::operator()</definition>
         <argsstring>(DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_f, TensorType const &amp;partial_derivatives_g, DTensor&lt; BasisSpatial &gt; const &amp;B, CoordOrIdxType const &amp;coord_or_idx) const</argsstring>
         <name>operator()</name>
         <qualifiedname>LiePoissonBracket::operator()</qualifiedname>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; CovBasisSpatial &gt; const &amp;</type>
+          <type>DTensor&lt; CovBasisSpatial &gt; const &amp;</type>
           <declname>partial_derivatives_f</declname>
         </param>
         <param>
@@ -165,7 +165,7 @@
           <declname>partial_derivatives_g</declname>
         </param>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; BasisSpatial &gt; const &amp;</type>
+          <type>DTensor&lt; BasisSpatial &gt; const &amp;</type>
           <declname>B</declname>
         </param>
         <param>
@@ -231,15 +231,15 @@
         <name>operator()</name>
         <qualifiedname>LiePoissonBracket::operator()</qualifiedname>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; CovBasisSpatial &gt; const &amp;</type>
+          <type>DTensor&lt; CovBasisSpatial &gt; const &amp;</type>
           <declname>partial_derivatives_f</declname>
         </param>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; CovBasisSpatial &gt; const &amp;</type>
+          <type>DTensor&lt; CovBasisSpatial &gt; const &amp;</type>
           <declname>partial_derivatives_g</declname>
         </param>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; BasisSpatial &gt; const &amp;</type>
+          <type>DTensor&lt; BasisSpatial &gt; const &amp;</type>
           <declname>B</declname>
         </param>
         <param>
@@ -317,15 +317,15 @@
           <declname>poisson_bracket</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const</type>
+          <type>DVectorConstField&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const</type>
           <declname>partial_derivatives_f</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const</type>
+          <type>DVectorConstField&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const</type>
           <declname>partial_derivatives_g</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRange, BasisSpatial, MemorySpace &gt; const</type>
+          <type>DVectorConstField&lt; IdxRange, BasisSpatial, MemorySpace &gt; const</type>
           <declname>B</declname>
         </param>
         <briefdescription>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classDiscreteMapping" kind="class" language="C++" prot="public">
     <compoundname>DiscreteMapping</compoundname>
     <includes refid="discrete__mapping_8hpp" local="no">discrete_mapping.hpp</includes>
@@ -109,9 +109,13 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classDiscreteMapping_1a759b95b7694cbe22ee515df7d330d4d6" prot="private" static="no">
-        <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; <ref refid="classDiscreteMapping_1a61eee2bf7a2e0c0112edb71269868149" kindref="member">DataType</ref>, typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; NDEvaluator &gt;::coeff_idx_range_type, <ref refid="classDiscreteMapping_1aca28c1bacac69d3ce652f312470ff15e" kindref="member">ResultBasis</ref>, typename NDEvaluator::memory_space &gt;</type>
-        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::CoeffField =  VectorConstField&lt; DataType, typename InterpolationEvaluatorTraits&lt;NDEvaluator&gt;::coeff_idx_range_type, ResultBasis, typename NDEvaluator::memory_space&gt;</definition>
+      <memberdef kind="typedef" id="classDiscreteMapping_1a162cc6728c23405e728f14bceb2c5466" prot="private" static="no">
+        <type>VectorConstField&lt; <ref refid="classDiscreteMapping_1a61eee2bf7a2e0c0112edb71269868149" kindref="member">DataType</ref>, typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; NDEvaluator &gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::coeff_idx_range_type</ref>, <ref refid="classDiscreteMapping_1aca28c1bacac69d3ce652f312470ff15e" kindref="member">ResultBasis</ref>, typename NDEvaluator::memory_space &gt;</type>
+        <definition>using DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::CoeffField =  VectorConstField&lt;
+            DataType,
+            typename InterpolationEvaluatorTraits&lt;NDEvaluator&gt;::coeff_idx_range_type,
+            ResultBasis,
+            typename NDEvaluator::memory_space&gt;</definition>
         <argsstring></argsstring>
         <name>CoeffField</name>
         <qualifiedname>DiscreteMapping::CoeffField</qualifiedname>
@@ -121,12 +125,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="85" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classDiscreteMapping_1a4ae1bc5a5503271ccd161944ed8a39a8" prot="private" static="no" mutable="no">
-        <type><ref refid="classVectorField" kindref="compound">CoeffField</ref></type>
+        <type>CoeffField</type>
         <definition>CoeffField DiscreteMapping&lt; StartCoord, EndCoord, NDEvaluator &gt;::m_coeff_representation</definition>
         <argsstring></argsstring>
         <name>m_coeff_representation</name>
@@ -162,7 +166,7 @@
         <name>DiscreteMapping</name>
         <qualifiedname>DiscreteMapping::DiscreteMapping</qualifiedname>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">CoeffField</ref></type>
+          <type>CoeffField</type>
           <declname>coeff_representation</declname>
         </param>
         <param>
@@ -453,7 +457,7 @@
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" line="61" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping.hpp" bodystart="62" bodyend="229"/>
     <listofallmembers>
       <member refid="classDiscreteMapping_1ac14c59e2bfb7ee641f01e00e98ec41da" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>ArgBasis</name></member>
-      <member refid="classDiscreteMapping_1a759b95b7694cbe22ee515df7d330d4d6" prot="private" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoeffField</name></member>
+      <member refid="classDiscreteMapping_1a162cc6728c23405e728f14bceb2c5466" prot="private" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoeffField</name></member>
       <member refid="classDiscreteMapping_1a0770b9cd95c041fc5a8e4942ea5a62f6" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoordArg</name></member>
       <member refid="classDiscreteMapping_1a006a0b937efbaa8e24d21999ab8805b5" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoordJacobian</name></member>
       <member refid="classDiscreteMapping_1a3b25d1195f6c9cd01842961ca0c3e4bc" prot="public" virt="non-virtual"><scope>DiscreteMapping</scope><name>CoordResult</name></member>

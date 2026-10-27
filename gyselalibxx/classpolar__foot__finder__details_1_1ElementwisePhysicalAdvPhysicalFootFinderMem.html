@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -615,7 +621,14 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-gpucompat">typedef GPUCompat</h3>
 <p><em>The non-owning operator that can be used on GPU.</em> </p>
-<pre><code class="language-C++">using polar_foot_finder_details::ElementwisePhysicalAdvPhysicalFootFinderMem&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder, LogicalToPhysicalMapping &gt;::GPUCompat =  ElementwisePhysicalAdvPhysicalFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, typename AdvecCoefFieldMem::view_type, TimeStepper, LogicalToPhysicalMapping&gt;;
+<pre><code class="language-C++">using polar_foot_finder_details::ElementwisePhysicalAdvPhysicalFootFinderMem&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder, LogicalToPhysicalMapping &gt;::GPUCompat =  ElementwisePhysicalAdvPhysicalFootFinder&lt;
+            GridR,
+            GridTheta,
+            IdxRangeOperator,
+            RThetaAdvectionEvaluator,
+            typename AdvecCoefFieldMem::view_type,
+            TimeStepper,
+            LogicalToPhysicalMapping&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

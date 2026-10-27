@@ -64,7 +64,7 @@ _A mapping whose values are only known at the mesh points of a grid, evaluated e
 
 | Type | Name |
 | ---: | :--- |
-|   | [**DiscreteMapping**](#function-discretemapping-12) ([**CoeffField**](classVectorField.md) coeff\_representation, NDEvaluator const & evaluator) <br>_Instantiate a_ [_**DiscreteMapping**_](classDiscreteMapping.md) _from the coefficients of an interpolating function which approximates the mapping._ |
+|   | [**DiscreteMapping**](#function-discretemapping-12) (CoeffField coeff\_representation, NDEvaluator const & evaluator) <br>_Instantiate a_ [_**DiscreteMapping**_](classDiscreteMapping.md) _from the coefficients of an interpolating function which approximates the mapping._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**DiscreteMapping**](#function-discretemapping-22) ([**DiscreteMapping**](classDiscreteMapping.md) const & other) = default<br>_Copy-construct a_ [_**DiscreteMapping**_](classDiscreteMapping.md) _._ |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordJacobian**](classDiscreteMapping.md#typedef-coordjacobian) const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordJacobian**](classDiscreteMapping.md#typedef-coordjacobian) coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |

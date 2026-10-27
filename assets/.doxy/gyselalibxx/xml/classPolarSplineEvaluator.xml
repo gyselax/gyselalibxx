@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classPolarSplineEvaluator" kind="class" language="C++" prot="public">
     <compoundname>PolarSplineEvaluator</compoundname>
     <includes refid="polar__spline__evaluator_8hpp" local="no">polar_spline_evaluator.hpp</includes>
@@ -344,7 +344,7 @@
         <name>operator()</name>
         <qualifiedname>PolarSplineEvaluator::operator()</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
@@ -399,7 +399,7 @@
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
@@ -508,7 +508,7 @@
           <declname>deriv_order</declname>
         </param>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
@@ -559,7 +559,7 @@
         <name>deriv_dim_1</name>
         <qualifiedname>PolarSplineEvaluator::deriv_dim_1</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
@@ -602,7 +602,7 @@
         <name>deriv_dim_2</name>
         <qualifiedname>PolarSplineEvaluator::deriv_dim_2</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
@@ -645,7 +645,7 @@
         <name>deriv_1_and_2</name>
         <qualifiedname>PolarSplineEvaluator::deriv_1_and_2</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
@@ -709,7 +709,7 @@
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
@@ -841,7 +841,7 @@
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
@@ -945,7 +945,7 @@
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
@@ -1049,7 +1049,7 @@
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
@@ -1146,7 +1146,7 @@
         <name>eval</name>
         <qualifiedname>PolarSplineEvaluator::eval</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
@@ -1175,7 +1175,7 @@
         <name>eval_no_bc</name>
         <qualifiedname>PolarSplineEvaluator::eval_no_bc</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a6909aea6feb07dff1f4cdd536d2f51e5" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineEvaluator_1a55766ad2bcf37b9fb555a9c06f570fbe" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>

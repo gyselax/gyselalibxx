@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -665,7 +671,7 @@
 <td style="text-align: left;"><a href="#function-jacobian_component"><strong>jacobian_component</strong></a> (<a href="classCartesianToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the (i,j) coefficient of the Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structR.html"><strong>R</strong></a>, Z, Zeta &gt;, VectorIndexSet&lt; <a href="classCartesianToCylindrical.html#typedef-x_cov"><strong>X_cov</strong></a>, <a href="classCartesianToCylindrical.html#typedef-y_cov"><strong>Y_cov</strong></a>, <a href="classCartesianToCylindrical.html#typedef-z_cov"><strong>Z_cov</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <a href="structR.html"><strong>R</strong></a>, Z, Zeta &gt;, VectorIndexSet&lt; <a href="classCartesianToCylindrical.html#typedef-x_cov"><strong>X_cov</strong></a>, <a href="classCartesianToCylindrical.html#typedef-y_cov"><strong>Y_cov</strong></a>, <a href="classCartesianToCylindrical.html#typedef-z_cov"><strong>Z_cov</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (<a href="classCartesianToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
 </tr>
 <tr>
@@ -839,7 +845,7 @@ inline KOKKOS_FUNCTION double CartesianToCylindrical::jacobian_component (
 
 <h3 id="function-jacobian_matrix">function jacobian_matrix</h3>
 <p><em>Compute full Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; R , Z, Zeta &gt;, VectorIndexSet&lt; X_cov , Y_cov , Z_cov &gt; &gt; CartesianToCylindrical::jacobian_matrix (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; R , Z, Zeta &gt;, VectorIndexSet&lt; X_cov , Y_cov , Z_cov &gt; &gt; CartesianToCylindrical::jacobian_matrix (
     CoordArg const &amp; coord
 ) const
 </code></pre>

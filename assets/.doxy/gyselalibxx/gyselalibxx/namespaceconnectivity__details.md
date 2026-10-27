@@ -58,7 +58,7 @@
 | struct | [**FindPatch&lt; Grid1D, ddc::detail::TypeSeq&lt;&gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4.md) &lt;class Grid1D&gt;<br>_Specialisation of_ [_**FindPatch**_](structconnectivity__details_1_1FindPatch.md) _for an empty patch list._ |
 | struct | [**FindPatch&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1detail_1_1TypeSeq_3_01Patch5f5acd76cfd59a22ebf513823679a320.md) &lt;class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, RemainingPatchTypes&gt;<br> |
 | struct | [**FindPatch&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; Patch&lt; QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1detail_1_1TypeSeq_3_01Patchd8fc8921dec760f8fe4c90c2a6947228.md) &lt;class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, RemainingPatchTypes&gt;<br> |
-| struct | [**FindRelevantIdxRangeType**](structconnectivity__details_1_1FindRelevantIdxRangeType.md) &lt;class QueryGrid1D, class IdxRangeTuple&gt;<br>_A class to find any index range types which contain an index range defined on the provided grid. E.g. Grid1, std::tuple&lt;IdxRange&lt;Grid1, Grid2&gt;, IdxRange&lt;Grid3,Grid4&gt;&gt; will find: ddc::detail::TypeSeq&lt;IdxRange&lt;Grid1, Grid2&gt;&gt;_  |
+| struct | [**FindRelevantIdxRangeType**](structconnectivity__details_1_1FindRelevantIdxRangeType.md) &lt;class QueryGrid1D, class IdxRangeTuple&gt;<br>_A class to find any index range types which contain an index range defined on the provided grid. E.g. Grid1, std::tuple&lt;IdxRange&lt;Grid1, Grid2&gt;, IdxRange&lt;Grid3,Grid4&gt;&gt; will find: ddc::detail::TypeSeq&lt;IdxRange&lt;Grid1, Grid2&gt;&gt;._  |
 | struct | [**FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;**](structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b.md) &lt;class QueryGrid1D, class IdxRangeHead, IdxRangeTypes&gt;<br>_Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _to iterate recursively over the possible index range types._ |
 | struct | [**FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;**](structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4.md) &lt;class QueryGrid1D&gt;<br>_Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _for an empty list of index range types._ |
 | struct | [**PatchConnection**](structconnectivity__details_1_1PatchConnection.md) &lt;class [**Patch**](structPatch.md), class InterfaceTypeSeq&gt;<br>_A class which finds all interfaces connected to a given patch._  |
@@ -157,7 +157,8 @@ enum connectivity_details::InsertPosition {
 
 _A tool to flip the edges in an interface to ensure that the correct edge comes first._ 
 ```C++
-using connectivity_details::enforce_first_interface_edge_t = typedef typename EnforceFirstInterfaceEdge<InterfaceType, FirstEdge>::type;
+using connectivity_details::enforce_first_interface_edge_t = 
+        typename EnforceFirstInterfaceEdge<InterfaceType, FirstEdge>::type;
 ```
 
 

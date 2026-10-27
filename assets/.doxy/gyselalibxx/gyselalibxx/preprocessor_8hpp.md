@@ -144,7 +144,10 @@ GSLX\_UTILITY\_STRINGIFY
 This macro will convert the text as argument to a string literal.
 
 
-Example usage:  Expands to :  
+Example usage: 
+
+
+Expands to :  
 
 
         

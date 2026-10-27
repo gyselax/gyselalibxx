@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" kind="file" language="C++">
     <compoundname>maxwellianequilibrium.hpp</compoundname>
     <includes local="no">paraconf.h</includes>
@@ -47,12 +47,6 @@
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -122,20 +116,14 @@
       <node id="10">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="18">
-        <label>filesystem</label>
-      </node>
       <node id="2">
         <label>paraconf.h</label>
       </node>
       <node id="9">
         <label>source_location</label>
       </node>
-      <node id="19">
-        <label>stdexcept</label>
-      </node>
-      <node id="20">
-        <label>string</label>
+      <node id="18">
+        <label>string_view</label>
       </node>
       <node id="6">
         <label>type_traits</label>
@@ -161,7 +149,7 @@
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;paraconfpp.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_info.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13" refid="classMaxwellianEquilibrium" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIEquilibrium" kindref="compound">IEquilibrium</ref></highlight></codeline>
+<codeline lineno="13" refid="classMaxwellianEquilibrium" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMaxwellianEquilibrium_1a52616624ef6c0da7107c05d680a11a74" kindref="member">MaxwellianEquilibrium</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIEquilibrium" kindref="compound">IEquilibrium</ref></highlight></codeline>
 <codeline lineno="14"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>mass<sp/>of<sp/>all<sp/>kinetic<sp/>species</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>m_mass;</highlight></codeline>
@@ -180,16 +168,16 @@
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>m_magnetic_field;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref>(</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMaxwellianEquilibrium_1a52616624ef6c0da7107c05d680a11a74" kindref="member">MaxwellianEquilibrium</ref>(</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/><ref refid="classMaxwellianEquilibrium_1aebb6814626426a44934a85ced7e2fe62" kindref="member">mass</ref>,</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/><ref refid="classMaxwellianEquilibrium_1a86de6dac16d6f3a968b16b028c4bee8d" kindref="member">density_eq</ref>,</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/><ref refid="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" kindref="member">temperature_eq</ref>,</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/><ref refid="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" kindref="member">mean_velocity_eq</ref>,</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>magnetic_field);</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMaxwellianEquilibrium" kindref="compound">~MaxwellianEquilibrium</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMaxwellianEquilibrium_1a52616624ef6c0da7107c05d680a11a74" kindref="member">~MaxwellianEquilibrium</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref><sp/><ref refid="classMaxwellianEquilibrium_1aff3c441bf785e05f0f3b9e6594209876" kindref="member">init_from_input</ref>(</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classMaxwellianEquilibrium_1a52616624ef6c0da7107c05d680a11a74" kindref="member">MaxwellianEquilibrium</ref><sp/><ref refid="classMaxwellianEquilibrium_1aff3c441bf785e05f0f3b9e6594209876" kindref="member">init_from_input</ref>(</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp<sp/>idx_range_kinsp,</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>yaml_input_file);</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>

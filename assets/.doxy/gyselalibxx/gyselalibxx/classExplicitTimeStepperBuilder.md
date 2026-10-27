@@ -167,7 +167,7 @@ static inline auto ExplicitTimeStepperBuilder::preallocate (
 **Template parameters:**
 
 
-* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from time\_stepper\_t). 
+* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from [**time\_stepper\_t**](classExplicitTimeStepperBuilder.md#typedef-time_stepper_t)). 
 
 
 
@@ -200,7 +200,7 @@ static inline auto ExplicitTimeStepperBuilder::preallocate ()
 **Template parameters:**
 
 
-* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from time\_stepper\_t). 
+* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from [**time\_stepper\_t**](classExplicitTimeStepperBuilder.md#typedef-time_stepper_t)). 
 
 
 

@@ -69,9 +69,9 @@ Inherits the following classes: detail::UniformLagrangeBasisBase
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**degree**](#function-degree) () noexcept<br>_The degree of the Lagrange polynomials._  |
-|  constexpr bool | [**is\_periodic**](#function-is_periodic) () noexcept<br>_Indicates if the Lagrange polynomials are periodic or not._  |
-|  constexpr bool | [**is\_uniform**](#function-is_uniform) () noexcept<br>_Indicates if the Lagrange polynomials are uniform or not (this is the case here)._  |
+|  std::size\_t | [**degree**](#function-degree) () noexcept<br>_The degree of the Lagrange polynomials._  |
+|  bool | [**is\_periodic**](#function-is_periodic) () noexcept<br>_Indicates if the Lagrange polynomials are periodic or not._  |
+|  bool | [**is\_uniform**](#function-is_uniform) () noexcept<br>_Indicates if the Lagrange polynomials are uniform or not (this is the case here)._  |
 
 
 
@@ -170,7 +170,7 @@ using UniformLagrangeBasis< Dim, D, DataType >::discrete_dimension_type =  Unifo
 
 _The degree of the Lagrange polynomials._ 
 ```C++
-static inline constexpr std::size_t UniformLagrangeBasis::degree () noexcept
+static inline std::size_t UniformLagrangeBasis::degree () noexcept
 ```
 
 
@@ -195,7 +195,7 @@ The degree.
 
 _Indicates if the Lagrange polynomials are periodic or not._ 
 ```C++
-static inline constexpr bool UniformLagrangeBasis::is_periodic () noexcept
+static inline bool UniformLagrangeBasis::is_periodic () noexcept
 ```
 
 
@@ -220,7 +220,7 @@ A boolean indicating if the Lagrange polynomials are periodic or not.
 
 _Indicates if the Lagrange polynomials are uniform or not (this is the case here)._ 
 ```C++
-static inline constexpr bool UniformLagrangeBasis::is_uniform () noexcept
+static inline bool UniformLagrangeBasis::is_uniform () noexcept
 ```
 
 

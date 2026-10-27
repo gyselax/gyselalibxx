@@ -97,7 +97,12 @@
 
 _A helper alias to define an instance of detail::LagrangeInterpolator._ 
 ```C++
-using LagrangeInterpolator =  typename detail::LagrangeInterpolatorResolver< ExecSpace, DataType, IdxRangeBasis, IdxRangeInterpGrid, ExtrapRules...>::type;
+using LagrangeInterpolator =  typename detail::LagrangeInterpolatorResolver<
+        ExecSpace,
+        DataType,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        ExtrapRules...>::type;
 ```
 
 

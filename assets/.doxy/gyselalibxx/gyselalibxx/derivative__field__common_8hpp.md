@@ -46,10 +46,10 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_borrowed\_deriv\_field**](#variable-enable_borrowed_deriv_field)   = `false`<br> |
-|  constexpr bool | [**enable\_deriv\_field**](#variable-enable_deriv_field)   = `false`<br> |
-|  constexpr bool | [**is\_borrowed\_deriv\_field\_v**](#variable-is_borrowed_deriv_field_v)   = `/* multi line expression */`<br> |
-|  constexpr bool | [**is\_deriv\_field\_v**](#variable-is_deriv_field_v)   = `enable\_deriv\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
+|  bool | [**enable\_borrowed\_deriv\_field**](#variable-enable_borrowed_deriv_field)   = `false`<br> |
+|  bool | [**enable\_deriv\_field**](#variable-enable_deriv_field)   = `false`<br> |
+|  bool | [**is\_borrowed\_deriv\_field\_v**](#variable-is_borrowed_deriv_field_v)   = `/* multi line expression */`<br> |
+|  bool | [**is\_deriv\_field\_v**](#variable-is_deriv_field_v)   = `enable\_deriv\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 
@@ -102,7 +102,7 @@
 ### variable enable\_borrowed\_deriv\_field 
 
 ```C++
-constexpr bool enable_borrowed_deriv_field;
+bool enable_borrowed_deriv_field;
 ```
 
 
@@ -115,7 +115,7 @@ constexpr bool enable_borrowed_deriv_field;
 ### variable enable\_deriv\_field 
 
 ```C++
-constexpr bool enable_deriv_field;
+bool enable_deriv_field;
 ```
 
 
@@ -128,7 +128,7 @@ constexpr bool enable_deriv_field;
 ### variable is\_borrowed\_deriv\_field\_v 
 
 ```C++
-constexpr bool is_borrowed_deriv_field_v;
+bool is_borrowed_deriv_field_v;
 ```
 
 
@@ -141,7 +141,7 @@ constexpr bool is_borrowed_deriv_field_v;
 ### variable is\_deriv\_field\_v 
 
 ```C++
-constexpr bool is_deriv_field_v;
+bool is_deriv_field_v;
 ```
 
 

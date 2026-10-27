@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270" kind="struct" language="C++" prot="public">
     <compoundname>ddcHelper::is_non_uniform_interpolation_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
     <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
     <templateparamlist>
       <param>
@@ -28,8 +29,13 @@
         <link refid="structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="3">
         <label>std::true_type</label>
       </node>
     </inheritancegraph>
@@ -39,8 +45,13 @@
         <link refid="structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="3">
         <label>std::true_type</label>
       </node>
     </collaborationgraph>

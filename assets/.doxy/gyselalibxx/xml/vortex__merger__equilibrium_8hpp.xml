@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="vortex__merger__equilibrium_8hpp" kind="file" language="C++">
     <compoundname>vortex_merger_equilibrium.hpp</compoundname>
     <includes local="no">functional</includes>
@@ -775,7 +775,7 @@
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarPoissonLikeSolver&gt;</highlight></codeline>
-<codeline lineno="24" refid="classVortexMergerEquilibria" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classVortexMergerEquilibria" kindref="compound">VortexMergerEquilibria</ref></highlight></codeline>
+<codeline lineno="24" refid="classVortexMergerEquilibria" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classVortexMergerEquilibria_1a7ff00ce61340dbbcceb2d9ed16869e73" kindref="member">VortexMergerEquilibria</ref></highlight></codeline>
 <codeline lineno="25"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>Mapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_mapping;</highlight></codeline>

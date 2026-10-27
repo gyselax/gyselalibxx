@@ -132,7 +132,9 @@ using MultipatchConnectivity< Interfaces >::all_patches =  extract_patches_t<inn
 
 _A tool to find all interfaces linking 2 patches._ 
 ```C++
-using MultipatchConnectivity< Interfaces >::find_connections_t =  ddcHelper::type_seq_intersection_t< get_type_seq_connections_t<QueryPatch1>, get_type_seq_connections_t<QueryPatch2> >;
+using MultipatchConnectivity< Interfaces >::find_connections_t =  ddcHelper::type_seq_intersection_t<
+            get_type_seq_connections_t<QueryPatch1>,
+            get_type_seq_connections_t<QueryPatch2>>;
 ```
 
 
@@ -158,7 +160,10 @@ using MultipatchConnectivity< Interfaces >::find_connections_t =  ddcHelper::typ
 
 _A tool to find all interfaces along a line which passes through the requested grid._ 
 ```C++
-using MultipatchConnectivity< Interfaces >::get_all_interfaces_along_direction_t =  collect_interfaces_on_dim_t< find_patch_t<Grid1D, all_patches>, Grid1D, interface_collection>;
+using MultipatchConnectivity< Interfaces >::get_all_interfaces_along_direction_t =  collect_interfaces_on_dim_t<
+            find_patch_t<Grid1D, all_patches>,
+            Grid1D,
+            interface_collection>;
 ```
 
 
@@ -183,7 +188,7 @@ using MultipatchConnectivity< Interfaces >::get_all_interfaces_along_direction_t
 
 _A tool to find a tuple of all interfaces of a patch._ 
 ```C++
-using MultipatchConnectivity< Interfaces >::get_connections_t =  to_tuple_t<get_type_seq_connections_t<QueryPatch> >;
+using MultipatchConnectivity< Interfaces >::get_connections_t =  to_tuple_t<get_type_seq_connections_t<QueryPatch>>;
 ```
 
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structInterface" kind="struct" language="C++" prot="public">
     <compoundname>Interface</compoundname>
     <includes refid="interface_8hpp" local="no">interface.hpp</includes>
@@ -63,7 +63,7 @@
         <name>OtherEdge</name>
         <qualifiedname>Interface::OtherEdge</qualifiedname>
         <briefdescription>
-<para>A tool to get the other edge of an interface. I.e. to get Edge1 given Edge2 or Edge2 given Edge1. </para>
+<para>A tool to get the other edge of an interface. I.e. to get <ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref> given <ref refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kindref="member">Edge2</ref> or <ref refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kindref="member">Edge2</ref> given <ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -74,8 +74,8 @@
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="structInterface_1af2dbae0b5ea4505116a20eeb5179e72d" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr bool</type>
-        <definition>constexpr bool Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::orientations_agree</definition>
+        <type>bool</type>
+        <definition>bool Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::orientations_agree</definition>
         <argsstring></argsstring>
         <name>orientations_agree</name>
         <qualifiedname>Interface::orientations_agree</qualifiedname>
@@ -97,7 +97,7 @@
             <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
+        <type>bool</type>
         <definition>static constexpr bool Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::connected_to_patch</definition>
         <argsstring>()</argsstring>
         <name>connected_to_patch</name>

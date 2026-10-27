@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="conceptconcepts_1_1MetricTensor" kind="concept">
     <compoundname>concepts::MetricTensor</compoundname>
     <includes refid="metric__tensor__evaluator_8hpp" local="no">metric_tensor_evaluator.hpp</includes>
@@ -24,21 +24,21 @@ concept <ref refid="conceptconcepts_1_1MetricTensor" kindref="compound">concepts
     {
         t(x)
         } -&gt; std::same_as&lt;
-                <ref refid="classTensor" kindref="compound">DTensor</ref>&lt;ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;,
+                DTensor&lt;ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;,
                         ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;&gt;&gt;;
     {
         t.inverse(x)
-        } -&gt; std::same_as&lt;<ref refid="classTensor" kindref="compound">DTensor</ref>&lt;
+        } -&gt; std::same_as&lt;DTensor&lt;
                 ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;,
                 ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;&gt;&gt;;
     {
         t(idx)
         } -&gt; std::same_as&lt;
-                <ref refid="classTensor" kindref="compound">DTensor</ref>&lt;ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;,
+                DTensor&lt;ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;,
                         ddc::type_seq_element_t&lt;0, typename T::CovariantVectorType::index_set&gt;&gt;&gt;;
     {
         t.inverse(idx)
-        } -&gt; std::same_as&lt;<ref refid="classTensor" kindref="compound">DTensor</ref>&lt;
+        } -&gt; std::same_as&lt;DTensor&lt;
                 ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;,
                 ddc::type_seq_element_t&lt;0, typename T::ContravariantVectorType::index_set&gt;&gt;&gt;;
 }    </initializer>

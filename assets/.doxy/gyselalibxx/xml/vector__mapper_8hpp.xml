@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="vector__mapper_8hpp" kind="file" language="C++">
     <compoundname>vector_mapper.hpp</compoundname>
     <includes refid="inverse__jacobian__matrix_8hpp" local="yes">inverse_jacobian_matrix.hpp</includes>
@@ -979,7 +979,7 @@
           <declname>mapping_or_metric</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt;</type>
+          <type>VectorConstField&lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt;</type>
           <declname>vector_field</declname>
         </param>
         <briefdescription>
@@ -1228,19 +1228,19 @@
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;view.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">vector_mapper_detail<sp/>{</highlight></codeline>
-<codeline lineno="13"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace&gt;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace&gt;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_variance_change_only_v</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>!std::is_same_v&lt;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>OutVectorSpace,</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InVectorSpace&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;OutVectorSpace,<sp/>vector_index_set_dual_t&lt;InVectorSpace&gt;&gt;;</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace&gt;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace&gt;</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_coordinate_change_only_v</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>!std::is_same_v&lt;</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>OutVectorSpace,</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InVectorSpace&gt;<sp/>&amp;&amp;<sp/>!is_variance_change_only_v&lt;OutVectorSpace,<sp/>InVectorSpace&gt;<sp/>&amp;&amp;<sp/>has_same_variance_v&lt;InVectorSpace,<sp/>OutVectorSpace&gt;;</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_arg_to_result_v</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>is_coordinate_change_only_v&lt;OutVectorSpace,<sp/>InVectorSpace&gt;&amp;&amp;<sp/>std::is_same_v&lt;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_contravariant_dims_t&lt;InVectorSpace&gt;,</highlight></codeline>
@@ -1249,7 +1249,7 @@
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_contravariant_dims_t&lt;OutVectorSpace&gt;,</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;typename<sp/>Mapping::CoordResult&gt;&gt;;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_result_to_arg_v</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>is_coordinate_change_only_v&lt;OutVectorSpace,<sp/>InVectorSpace&gt;&amp;&amp;<sp/>std::is_same_v&lt;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_contravariant_dims_t&lt;InVectorSpace&gt;,</highlight></codeline>
@@ -1258,20 +1258,20 @@
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_contravariant_dims_t&lt;OutVectorSpace&gt;,</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;typename<sp/>Mapping::CoordArg&gt;&gt;;</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace&gt;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace&gt;</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>are_contravariant_v<sp/>=<sp/>is_contravariant_vector_index_set_v&lt;InVectorSpace&gt;&amp;&amp;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_contravariant_vector_index_set_v&lt;OutVectorSpace&gt;;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MappingOrMetric&gt;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MappingOrMetric&gt;</highlight></codeline>
 <codeline lineno="53" refid="structvector__mapper__detail_1_1EvaluationCoord" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvector__mapper__detail_1_1EvaluationCoord" kindref="compound">EvaluationCoord</ref>;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::MetricTensor<sp/>MetricTensorType&gt;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::MetricTensor<sp/>MetricTensorType&gt;</highlight></codeline>
 <codeline lineno="57" refid="structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvector__mapper__detail_1_1EvaluationCoord" kindref="compound">EvaluationCoord</ref>&lt;MetricTensorType&gt;</highlight></codeline>
 <codeline lineno="58"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="60" refid="structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4_1a1ab64847f7366b56086c386ef7b636a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4_1a1ab64847f7366b56086c386ef7b636a5" kindref="member">type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>MetricTensorType::CoordArg;</highlight></codeline>
 <codeline lineno="61"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::Mapping<sp/>Mapping&gt;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::Mapping<sp/>Mapping&gt;</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="66"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordJacobian;</highlight></codeline>
@@ -1281,7 +1281,7 @@
 <codeline lineno="72" refid="structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4_1a32a66bd8cf651e38d41ab7fdea53500c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4_1a32a66bd8cf651e38d41ab7fdea53500c" kindref="member">type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordJacobian;</highlight></codeline>
 <codeline lineno="73"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MappingOrMetric&gt;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MappingOrMetric&gt;</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">evaluation_coord_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structvector__mapper__detail_1_1EvaluationCoord" kindref="compound">EvaluationCoord&lt;MappingOrMetric&gt;::type</ref>;</highlight></codeline>
 <codeline lineno="78"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>vector_mapper_detail</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
@@ -1398,7 +1398,7 @@
 <codeline lineno="270"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>A_{\{q\}}^i<sp/>=<sp/>(J_{\{q\rightarrow<sp/>p\}}^{-1})^i_j<sp/>A_{\{q\}}^j</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInverseJacobianMatrix" kindref="compound">InverseJacobianMatrix</ref><sp/>inv_jacobian(mapping);</highlight></codeline>
-<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;OutVectorSpace, get_covariant_dims_t&lt;InVectorSpace&gt;</ref>&gt;<sp/>I_J<sp/>=<sp/>inv_jacobian(coord);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>DTensor&lt;OutVectorSpace,<sp/>get_covariant_dims_t&lt;InVectorSpace&gt;&gt;<sp/>I_J<sp/>=<sp/>inv_jacobian(coord);</highlight></codeline>
 <codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1a294189c1e9dbf86d07b1573bbd60daeb" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(I_J),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(in_vector));</highlight></codeline>
 <codeline lineno="275"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="276"><highlight class="normal"></highlight></codeline>
@@ -1438,7 +1438,7 @@
 <codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
 <codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LayoutStridedPolicy&gt;<sp/>vector_field_out,</highlight></codeline>
 <codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MappingOrMetric<sp/>mapping_or_metric,</highlight></codeline>
-<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt;</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorConstField&lt;</highlight></codeline>
 <codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
 <codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeType,</highlight></codeline>
 <codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InVectorSpace,</highlight></codeline>

@@ -106,7 +106,8 @@ _A class to get a VectorIndexSet containing only contravariant dimensions._ [Mor
 
 _The type of the VectorIndexSet containing only contravariant dimensions._ 
 ```C++
-using tensor_tools::GetContravariantDims< VectorIndexSet< Dims... > >::type =  VectorIndexSet< std::conditional_t<Dims::IS_CONTRAVARIANT, Dims, typename Dims::Dual>...>;
+using tensor_tools::GetContravariantDims< VectorIndexSet< Dims... > >::type =  VectorIndexSet<
+            std::conditional_t<Dims::IS_CONTRAVARIANT, Dims, typename Dims::Dual>...>;
 ```
 
 

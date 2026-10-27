@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -748,15 +754,15 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1CollectAllGridsOnDim.html"><strong>connectivity_details::CollectAllGridsOnDim</strong></a>&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type</td>
+<td style="text-align: right;">typedef typename connectivity_details:: CollectAllGridsOnDim&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-collect_grids_on_dim_t"><strong>collect_grids_on_dim_t</strong></a>  <br><em>A tool to collect all grids along a given line including the specified grid.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1CollectAllInterfacesOnDim.html"><strong>connectivity_details::CollectAllInterfacesOnDim</strong></a>&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type</td>
+<td style="text-align: right;">typedef typename connectivity_details:: CollectAllInterfacesOnDim&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-collect_interfaces_on_dim_t"><strong>collect_interfaces_on_dim_t</strong></a>  <br><em>A tool to collect all interfaces along a given line including the specified grid.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1FindInterface.html"><strong>connectivity_details::FindInterface</strong></a>&lt; StartEdge, InterfaceTypeSeq &gt;::type::template OtherEdge&lt; StartEdge &gt;</td>
+<td style="text-align: right;">typedef typename connectivity_details:: FindInterface&lt; StartEdge, InterfaceTypeSeq &gt;::type::template OtherEdge&lt; StartEdge &gt;</td>
 <td style="text-align: left;"><a href="#typedef-equivalent_edge_t"><strong>equivalent_edge_t</strong></a>  <br><em>A utility to get the other edge in an interface.</em></td>
 </tr>
 <tr>
@@ -792,19 +798,22 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-collect_grids_on_dim_t">typedef collect_grids_on_dim_t</h3>
 <p><em>A tool to collect all grids along a given line including the specified grid.</em> </p>
-<pre><code class="language-C++">using collect_grids_on_dim_t =  typename connectivity_details:: CollectAllGridsOnDim&lt;StartPatch, Grid1D, InterfaceTypeSeq&gt;::type;
+<pre><code class="language-C++">using collect_grids_on_dim_t =  typename connectivity_details::
+        CollectAllGridsOnDim&lt;StartPatch, Grid1D, InterfaceTypeSeq&gt;::type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-collect_interfaces_on_dim_t">typedef collect_interfaces_on_dim_t</h3>
 <p><em>A tool to collect all interfaces along a given line including the specified grid.</em> </p>
-<pre><code class="language-C++">using collect_interfaces_on_dim_t =  typename connectivity_details:: CollectAllInterfacesOnDim&lt;StartPatch, Grid1D, InterfaceTypeSeq&gt;::type;
+<pre><code class="language-C++">using collect_interfaces_on_dim_t =  typename connectivity_details::
+        CollectAllInterfacesOnDim&lt;StartPatch, Grid1D, InterfaceTypeSeq&gt;::type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-equivalent_edge_t">typedef equivalent_edge_t</h3>
 <p><em>A utility to get the other edge in an interface.</em> </p>
-<pre><code class="language-C++">using equivalent_edge_t =  typename connectivity_details:: FindInterface&lt;StartEdge, InterfaceTypeSeq&gt;::type::template OtherEdge&lt;StartEdge&gt;;
+<pre><code class="language-C++">using equivalent_edge_t =  typename connectivity_details::
+        FindInterface&lt;StartEdge, InterfaceTypeSeq&gt;::type::template OtherEdge&lt;StartEdge&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -821,7 +830,8 @@
 
 <h3 id="typedef-find_associated_interface_t">typedef find_associated_interface_t</h3>
 <p><em>A tool to find the interface which contains a specified edge.</em> </p>
-<pre><code class="language-C++">using find_associated_interface_t =  typename connectivity_details::FindInterface&lt;EdgeType, InterfaceTypeSeq&gt;::type;
+<pre><code class="language-C++">using find_associated_interface_t = 
+        typename connectivity_details::FindInterface&lt;EdgeType, InterfaceTypeSeq&gt;::type;
 </code></pre>
 <hr>
 
@@ -833,19 +843,23 @@
 
 <h3 id="typedef-find_relevant_idx_range_t">typedef find_relevant_idx_range_t</h3>
 <p><em>A tool to find the first multi-D index range which contains a specific grid.</em> </p>
-<pre><code class="language-C++">using find_relevant_idx_range_t =  ddc::type_seq_element_t&lt; 0, typename connectivity_details::FindRelevantIdxRangeType&lt;QueryGrid1D, IdxRangeTuple&gt;::type&gt;;
+<pre><code class="language-C++">using find_relevant_idx_range_t =  ddc::type_seq_element_t&lt;
+        0,
+        typename connectivity_details::FindRelevantIdxRangeType&lt;QueryGrid1D, IdxRangeTuple&gt;::type&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-interfaces_of_patch_t">typedef interfaces_of_patch_t</h3>
 <p><em>A tool to find all interfaces directly connected to the start patch.</em> </p>
-<pre><code class="language-C++">using interfaces_of_patch_t =  typename connectivity_details::PatchConnection&lt;StartPatch, InterfaceTypeSeq&gt;::type;
+<pre><code class="language-C++">using interfaces_of_patch_t = 
+        typename connectivity_details::PatchConnection&lt;StartPatch, InterfaceTypeSeq&gt;::type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-strip_outside_edges_t">typedef strip_outside_edges_t</h3>
 <p><em>A tool to find all edges which are not</em> <a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>types.</em></p>
-<pre><code class="language-C++">using strip_outside_edges_t =  typename connectivity_details::StripOutsideEdges&lt;ddc::detail::TypeSeq&lt;EdgeType...&gt; &gt;::type;
+<pre><code class="language-C++">using strip_outside_edges_t = 
+        typename connectivity_details::StripOutsideEdges&lt;ddc::detail::TypeSeq&lt;EdgeType...&gt;&gt;::type;
 </code></pre>
 <hr>
 

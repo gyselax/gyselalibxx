@@ -51,7 +51,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**is\_tensor\_type\_v**](#variable-is_tensor_type_v)   = `detail::enable\_tensor\_type&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
+|  bool | [**is\_tensor\_type\_v**](#variable-is_tensor_type_v)   = `detail::enable\_tensor\_type&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
 
 
 
@@ -118,7 +118,7 @@
 ### variable is\_tensor\_type\_v 
 
 ```C++
-constexpr bool is_tensor_type_v;
+bool is_tensor_type_v;
 ```
 
 

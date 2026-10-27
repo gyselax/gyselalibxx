@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometry__xvx_8hpp" kind="file" language="C++">
     <compoundname>geometry_xvx.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -1434,9 +1434,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="241" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="241" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xvx_8hpp_1aee2ef06a2fde3eaa8bee7717ddf812c5" prot="public" static="no">
+      <memberdef kind="typedef" id="geometry__xvx_8hpp_1a785158b9b64d18516a66c72d50b6ca71" prot="public" static="no">
         <type>ConstFieldSpMom&lt; double &gt;</type>
-        <definition>typedef ConstFieldSpMom&lt; double &gt; DConstFieldSpMom</definition>
+        <definition>typedef ConstFieldSpMom&lt; double &gt; DConstFieldSpMom =  ConstFieldSpMom&lt;double&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldSpMom</name>
         <briefdescription>
@@ -1553,12 +1553,12 @@
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1aa1915e83f5e8d1363cbc25d737b52a9c" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1aa1915e83f5e8d1363cbc25d737b52a9c" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1a8f2020d96b3716fc6de24ef27e6c158f" kindref="member">IS_COVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1a21b0a7c9531a817b3696d54d248192bf" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structX" kindref="compound">X</ref>;</highlight></codeline>
+<codeline lineno="33" refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structX" kindref="compound">X</ref>;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVx" kindref="compound">Vx</ref></highlight></codeline>
@@ -1790,7 +1790,7 @@
 <codeline lineno="283" refid="classGeometryXVx_1a8903d9f025308985617b427783801967" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXVx_1a8903d9f025308985617b427783801967" kindref="member">IdxRangeVelocity</ref><sp/>=<sp/>IdxRangeVx;</highlight></codeline>
 <codeline lineno="284"><highlight class="normal"></highlight></codeline>
 <codeline lineno="285"><highlight class="normal"></highlight></codeline>
-<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>using<sp/>FdistribuIdxRange<sp/>=<sp/>IdxRange&lt;DimSp,<sp/>typename<sp/>decltype(SpatialDDom),<sp/>typename<sp/>decltype(VelocityDDom)&gt;(IdxRange());</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>using<sp/>FdistribuIdxRange<sp/>=<sp/>IdxRange&lt;DimSp,<sp/>typename<sp/>decltype(SpatialDDom),<sp/>typename<sp/>decltype(VelocityDDom)&gt;(IdxRange());</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="290" refid="classGeometryXVx_1afca0714427d19b4e591abd6f7b0656e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXVx_1afca0714427d19b4e591abd6f7b0656e8" kindref="member">IdxRangeFdistribu</ref><sp/>=<sp/>IdxRangeSpXVx;</highlight></codeline>
 <codeline lineno="291"><highlight class="normal">};</highlight></codeline>
     </programlisting>

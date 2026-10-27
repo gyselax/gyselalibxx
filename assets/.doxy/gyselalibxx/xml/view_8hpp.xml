@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="view_8hpp" kind="file" language="C++">
     <compoundname>view.hpp</compoundname>
     <includes local="no">array</includes>
@@ -714,7 +714,7 @@
       </node>
     </invincdepgraph>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="view_8hpp_1a18a55b6c654d80286af78ef3cdea4197" prot="public" static="no">
+      <memberdef kind="typedef" id="view_8hpp_1aca733533e55837d1036fc0497f0df21d" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>std::size_t</type>
@@ -726,7 +726,7 @@
           </param>
         </templateparamlist>
         <type>Kokkos::mdspan&lt; ElementType, Kokkos::dextents&lt; std::size_t, N &gt; &gt;</type>
-        <definition>using SpanND =  Kokkos::mdspan&lt;ElementType, Kokkos::dextents&lt;std::size_t, N&gt; &gt;</definition>
+        <definition>using SpanND =  Kokkos::mdspan&lt;ElementType, Kokkos::dextents&lt;std::size_t, N&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>SpanND</name>
         <briefdescription>
@@ -1152,7 +1152,7 @@
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>Kokkos::mdspan&lt;ElementType,<sp/>Kokkos::dextents&lt;std::size_t,<sp/>N&gt;,<sp/>Kokkos::layout_stride&gt;;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Extents,</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Layout,</highlight></codeline>
@@ -1263,12 +1263,12 @@
 <codeline lineno="142"><highlight class="normal"></highlight></codeline>
 <codeline lineno="143"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DView2D<sp/>=<sp/>View2D&lt;double&gt;;</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="146"><highlight class="keyword">using<sp/></highlight><highlight class="normal">Matrix_2x2<sp/>=<sp/>std::array&lt;std::array&lt;double,<sp/>2&gt;,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Matrix_2x2<sp/>=<sp/>std::array&lt;std::array&lt;double,<sp/>2&gt;,<sp/>2&gt;;</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"></highlight></codeline>
 <codeline lineno="148"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>C&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="149"><highlight class="normal"></highlight><highlight class="comment">//<sp/>constexpr<sp/>bool<sp/>is_contiguous_v<sp/>=<sp/>detail::IsContiguous&lt;C&gt;::val;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="153"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Extents,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Layout,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Accessor&gt;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Extents,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Layout,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Accessor&gt;</highlight></codeline>
 <codeline lineno="154"><highlight class="normal">std::ostream&amp;<sp/>operator&lt;&lt;(</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ostream&amp;<sp/>os,</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::mdspan&lt;ElementType,<sp/>Extents,<sp/>Layout,<sp/>Accessor&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>s)</highlight></codeline>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classLinearCoordTransform" kind="class" language="C++" prot="public">
     <compoundname>LinearCoordTransform</compoundname>
     <includes refid="linear__coord__transform_8hpp" local="no">linear_coord_transform.hpp</includes>
@@ -267,7 +267,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/linear_coord_transform.hpp" line="94" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/linear_coord_transform.hpp" bodystart="94" bodyend="97"/>
       </memberdef>
       <memberdef kind="function" id="classLinearCoordTransform_1a7729159851e0fa1b8d916202f1888d40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; OutputDim &gt;, VectorIndexSet&lt; InputDim &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; OutputDim &gt;, VectorIndexSet&lt; InputDim &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; OutputDim &gt;, VectorIndexSet&lt; InputDim &gt; &gt; LinearCoordTransform&lt; InputDim, OutputDim, CoordJacob &gt;::jacobian_matrix</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>
@@ -338,7 +338,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/linear_coord_transform.hpp" line="127" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/linear_coord_transform.hpp" bodystart="127" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="classLinearCoordTransform_1ad12f5b436962abd7b88193b5fb4b2052" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; InputDim &gt;, VectorIndexSet&lt; OutputDim &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; InputDim &gt;, VectorIndexSet&lt; OutputDim &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; InputDim &gt;, VectorIndexSet&lt; OutputDim &gt; &gt; LinearCoordTransform&lt; InputDim, OutputDim, CoordJacob &gt;::inv_jacobian_matrix</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>inv_jacobian_matrix</name>

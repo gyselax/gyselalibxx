@@ -18,7 +18,7 @@
 
 
 
-Inherited by the following classes: [MatrixBatchCsr](classMatrixBatchCsr.md),  [MatrixBatchCsr](classMatrixBatchCsr.md),  [MatrixBatchEll](classMatrixBatchEll.md),  [MatrixBatchTridiag](classMatrixBatchTridiag.md)
+Inherited by the following classes: [MatrixBatchCsr](classMatrixBatchCsr.md),  [MatrixBatchEll](classMatrixBatchEll.md),  [MatrixBatchTridiag](classMatrixBatchTridiag.md)
 
 
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classInterfaceDerivCoeffs" kind="class" language="C++" prot="public">
     <compoundname>InterfaceDerivCoeffs</compoundname>
     <includes refid="interface__derivative__coefficients_8hpp" local="no">interface_derivative_coefficients.hpp</includes>
@@ -205,9 +205,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="91" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1aeaf5344e9bfe7ff77e104c73cb39c0a0" prot="private" static="no">
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1a6a1d3bb07d1b901b6d556c40f193d53a" prot="private" static="no">
         <type>std::conditional_t&lt; std::is_same_v&lt; EdgePerpGrid1, typename Patch1::Grid1 &gt;, typename Patch1::BSplines1, typename Patch1::BSplines2 &gt;</type>
-        <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::BSplinesPerp1 =  std::conditional_t&lt; std::is_same_v&lt;EdgePerpGrid1, typename Patch1::Grid1&gt;, typename Patch1::BSplines1, typename Patch1::BSplines2&gt;</definition>
+        <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::BSplinesPerp1 =  std::conditional_t&lt;
+            std::is_same_v&lt;EdgePerpGrid1, typename Patch1::Grid1&gt;,
+            typename Patch1::BSplines1,
+            typename Patch1::BSplines2&gt;</definition>
         <argsstring></argsstring>
         <name>BSplinesPerp1</name>
         <qualifiedname>InterfaceDerivCoeffs::BSplinesPerp1</qualifiedname>
@@ -217,11 +220,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="96" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="93" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1af06936ba2659fb50136127d90afaaaf5" prot="private" static="no">
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1a62ed91b8fa626447bf9b908a74645b44" prot="private" static="no">
         <type>std::conditional_t&lt; std::is_same_v&lt; EdgePerpGrid2, typename Patch2::Grid1 &gt;, typename Patch2::BSplines1, typename Patch2::BSplines2 &gt;</type>
-        <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::BSplinesPerp2 =  std::conditional_t&lt; std::is_same_v&lt;EdgePerpGrid2, typename Patch2::Grid1&gt;, typename Patch2::BSplines1, typename Patch2::BSplines2&gt;</definition>
+        <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::BSplinesPerp2 =  std::conditional_t&lt;
+            std::is_same_v&lt;EdgePerpGrid2, typename Patch2::Grid1&gt;,
+            typename Patch2::BSplines1,
+            typename Patch2::BSplines2&gt;</definition>
         <argsstring></argsstring>
         <name>BSplinesPerp2</name>
         <qualifiedname>InterfaceDerivCoeffs::BSplinesPerp2</qualifiedname>
@@ -231,11 +237,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="100" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="97" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1a9e5bf21e0f72e2eb67691e78ec105bf0" prot="private" static="no">
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1aa46b478b75b26a3c745d2875b9d17d0c" prot="private" static="no">
         <type>std::conditional_t&lt; BSplinesPerp1::is_uniform(), ddc::UniformBsplinesKnots&lt; BSplinesPerp1 &gt;, ddc::NonUniformBsplinesKnots&lt; BSplinesPerp1 &gt; &gt;</type>
-        <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::GridBreakPt1 =  std::conditional_t&lt; BSplinesPerp1::is_uniform(), ddc::UniformBsplinesKnots&lt;BSplinesPerp1&gt;, ddc::NonUniformBsplinesKnots&lt;BSplinesPerp1&gt; &gt;</definition>
+        <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::GridBreakPt1 =  std::conditional_t&lt;
+            BSplinesPerp1::is_uniform(),
+            ddc::UniformBsplinesKnots&lt;BSplinesPerp1&gt;,
+            ddc::NonUniformBsplinesKnots&lt;BSplinesPerp1&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>GridBreakPt1</name>
         <qualifiedname>InterfaceDerivCoeffs::GridBreakPt1</qualifiedname>
@@ -245,11 +254,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="105" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1a8b9b6e7cc4f1dd90270dcd0637916d73" prot="private" static="no">
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1aea38f74d4a7d7ffcd058f80bec1ef175" prot="private" static="no">
         <type>std::conditional_t&lt; BSplinesPerp2::is_uniform(), ddc::UniformBsplinesKnots&lt; BSplinesPerp2 &gt;, ddc::NonUniformBsplinesKnots&lt; BSplinesPerp2 &gt; &gt;</type>
-        <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::GridBreakPt2 =  std::conditional_t&lt; BSplinesPerp2::is_uniform(), ddc::UniformBsplinesKnots&lt;BSplinesPerp2&gt;, ddc::NonUniformBsplinesKnots&lt;BSplinesPerp2&gt; &gt;</definition>
+        <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::GridBreakPt2 =  std::conditional_t&lt;
+            BSplinesPerp2::is_uniform(),
+            ddc::UniformBsplinesKnots&lt;BSplinesPerp2&gt;,
+            ddc::NonUniformBsplinesKnots&lt;BSplinesPerp2&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>GridBreakPt2</name>
         <qualifiedname>InterfaceDerivCoeffs::GridBreakPt2</qualifiedname>
@@ -259,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="109" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1a49e77ca76434363246a5ea917d16bfb0" prot="private" static="no">
         <type>IdxRange&lt; GridBreakPt1 &gt;</type>
@@ -541,8 +553,7 @@
 <parametername>Closure2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. <linebreak/>
- </para>
+<para>The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1265,8 +1276,7 @@ The following parameters are array with three elements corresponding to the valu
           <declname>weights_patch2</declname>
         </param>
         <briefdescription>
-<para>Correction of the local coefficients on the boundary for additional interpolation points in the middle of a cell. <linebreak/>
- </para>
+<para>Correction of the local coefficients on the boundary for additional interpolation points in the middle of a cell. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -1555,8 +1565,8 @@ The following parameters are array with three elements corresponding to the valu
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="66" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="67" bodyend="1223"/>
     <listofallmembers>
       <member refid="classInterfaceDerivCoeffs_1a61d1ec3aee1fcc9b526b832ba9536f1b" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>associated_interface</name></member>
-      <member refid="classInterfaceDerivCoeffs_1aeaf5344e9bfe7ff77e104c73cb39c0a0" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>BSplinesPerp1</name></member>
-      <member refid="classInterfaceDerivCoeffs_1af06936ba2659fb50136127d90afaaaf5" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>BSplinesPerp2</name></member>
+      <member refid="classInterfaceDerivCoeffs_1a6a1d3bb07d1b901b6d556c40f193d53a" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>BSplinesPerp1</name></member>
+      <member refid="classInterfaceDerivCoeffs_1a62ed91b8fa626447bf9b908a74645b44" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>BSplinesPerp2</name></member>
       <member refid="classInterfaceDerivCoeffs_1a6031b7019c0e2f70a917bd0e2356f3ad" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>check_additional_interpolation_points_location</name></member>
       <member refid="classInterfaceDerivCoeffs_1aa9efa87be3a68509a07947d5be50fa96" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>check_break_points_are_interpolation_points</name></member>
       <member refid="classInterfaceDerivCoeffs_1a5911adc78297a3d2c2db0c719d49662a" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>correction_boundary</name></member>
@@ -1577,8 +1587,8 @@ The following parameters are array with three elements corresponding to the valu
       <member refid="classInterfaceDerivCoeffs_1a5acef90f978869e480726e2ff3dfa0d6" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_coeff_deriv_patch_2</name></member>
       <member refid="classInterfaceDerivCoeffs_1ab9653aabab2507a12ed73dd0109bf52a" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_extremity_idx</name></member>
       <member refid="classInterfaceDerivCoeffs_1a862f05575170ac9c8f314d5effa6ca7d" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_gammas</name></member>
-      <member refid="classInterfaceDerivCoeffs_1a9e5bf21e0f72e2eb67691e78ec105bf0" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>GridBreakPt1</name></member>
-      <member refid="classInterfaceDerivCoeffs_1a8b9b6e7cc4f1dd90270dcd0637916d73" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>GridBreakPt2</name></member>
+      <member refid="classInterfaceDerivCoeffs_1aa46b478b75b26a3c745d2875b9d17d0c" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>GridBreakPt1</name></member>
+      <member refid="classInterfaceDerivCoeffs_1aea38f74d4a7d7ffcd058f80bec1ef175" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>GridBreakPt2</name></member>
       <member refid="classInterfaceDerivCoeffs_1aa344ee94d339276d78b4f18bd589c0e2" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>Idx1D_1</name></member>
       <member refid="classInterfaceDerivCoeffs_1a018ea3f6b9b523936a1cb7eb5f3d7027" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>Idx1D_2</name></member>
       <member refid="classInterfaceDerivCoeffs_1a31a1a95ae545c3b4189cacba4b6bc694" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>IdxRange1DPar_1</name></member>

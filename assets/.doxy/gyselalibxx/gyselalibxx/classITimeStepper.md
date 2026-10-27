@@ -34,8 +34,8 @@ _The superclass from which all timestepping methods inherit._ [More...](#detaile
 
 | Type | Name |
 | ---: | :--- |
-| typedef timestepper\_detail::const\_reference\_t&lt; [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem) &gt; | [**DerivConstField**](#typedef-derivconstfield)  <br>_The constant type of the derivatives values of the function being evolved._  |
-| typedef timestepper\_detail::reference\_t&lt; [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem) &gt; | [**DerivField**](#typedef-derivfield)  <br>_The type of the derivatives of the function being evolved._  |
+| typedef timestepper\_detail::const\_reference\_t&lt; [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem)[**DerivFieldMem**](classDerivFieldMem.md) &gt; | [**DerivConstField**](#typedef-derivconstfield)  <br>_The constant type of the derivatives values of the function being evolved._  |
+| typedef timestepper\_detail::reference\_t&lt; [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem)[**DerivFieldMem**](classDerivFieldMem.md) &gt; | [**DerivField**](#typedef-derivfield)  <br>_The type of the derivatives of the function being evolved._  |
 | typedef DerivFieldMemType | [**DerivFieldMem**](#typedef-derivfieldmem)  <br>_The type of the memory allocation for the derivatives of the function being evolved._  |
 | typedef typename timestepper\_detail::IdxRangeType&lt; FieldMem &gt;::type | [**IdxRange**](#typedef-idxrange)  <br>_The type of the index range on which the values of the function are defined._  |
 | typedef timestepper\_detail::const\_reference\_t&lt; FieldMem &gt; | [**ValConstField**](#typedef-valconstfield)  <br>_The constant type of the values of the function being evolved._  |
@@ -66,9 +66,9 @@ _The superclass from which all timestepping methods inherit._ [More...](#detaile
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**update**](#function-update-13) ([**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator) const<br>_Carry out one step of the timestepping scheme._  |
-|  void | [**update**](#function-update-23) (ExecSpace const & exec\_space, [**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator) const<br>_Carry out one step of the timestepping scheme._  |
-| virtual void | [**update**](#function-update-33) (ExecSpace const & exec\_space, [**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator, std::function&lt; void([**ValField**](classITimeStepper.md#typedef-valfield), [**DerivConstField**](classITimeStepper.md#typedef-derivconstfield), double)&gt; y\_update) const = 0<br>_Carry out one step of the timestepping scheme._  |
+|  void | [**update**](#function-update-13) ([**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield)[**DerivField**](classDerivField.md), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator) const<br>_Carry out one step of the timestepping scheme._  |
+|  void | [**update**](#function-update-23) (ExecSpace const & exec\_space, [**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield)[**DerivField**](classDerivField.md), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator) const<br>_Carry out one step of the timestepping scheme._  |
+| virtual void | [**update**](#function-update-33) (ExecSpace const & exec\_space, [**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield)[**DerivField**](classDerivField.md), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator, std::function&lt; void([**ValField**](classITimeStepper.md#typedef-valfield), [**DerivConstField**](classITimeStepper.md#typedef-derivconstfield), double)&gt; y\_update) const = 0<br>_Carry out one step of the timestepping scheme._  |
 
 
 
@@ -230,7 +230,7 @@ _Carry out one step of the timestepping scheme._
 inline void ITimeStepper::update (
     ValField y,
     double dt,
-    std::function< void( DerivField , ValConstField )> dy_calculator
+    std::function< void( DerivField DerivField , ValConstField )> dy_calculator
 ) const
 ```
 
@@ -265,7 +265,7 @@ inline void ITimeStepper::update (
     ExecSpace const & exec_space,
     ValField y,
     double dt,
-    std::function< void( DerivField , ValConstField )> dy_calculator
+    std::function< void( DerivField DerivField , ValConstField )> dy_calculator
 ) const
 ```
 
@@ -279,7 +279,7 @@ This function is a wrapper around the update function below. The values of the f
 **Parameters:**
 
 
-* `exec_space` The space on which the function is executed (CPU/GPU). 
+* [**exec\_space**](classITimeStepper.md#typedef-exec_space) The space on which the function is executed (CPU/GPU). 
 * `y` The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. 
 * `dt` The time step over which the values should be evolved. 
 * `dy_calculator` The function describing how the derivative of the evolve function is calculated. 
@@ -301,7 +301,7 @@ virtual void ITimeStepper::update (
     ExecSpace const & exec_space,
     ValField y,
     double dt,
-    std::function< void( DerivField , ValConstField )> dy_calculator,
+    std::function< void( DerivField DerivField , ValConstField )> dy_calculator,
     std::function< void( ValField , DerivConstField , double)> y_update
 ) const = 0
 ```
@@ -313,7 +313,7 @@ virtual void ITimeStepper::update (
 **Parameters:**
 
 
-* `exec_space` The space on which the function is executed (CPU/GPU). 
+* [**exec\_space**](classITimeStepper.md#typedef-exec_space) The space on which the function is executed (CPU/GPU). 
 * `y` The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. 
 * `dt` The time step over which the values should be evolved. 
 * `dy_calculator` The function describing how the derivative of the evolve function is calculated. 

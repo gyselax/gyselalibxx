@@ -55,7 +55,7 @@ _Define an advection operator on 2D_ \((r, \theta)\) _domain._[More...](#detaile
 | Type | Name |
 | ---: | :--- |
 |   | [**BslAdvectionPolar**](#function-bsladvectionpolar) (Interpolator2D const & interpolator\_2d, FootFinder & foot\_finder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, std::optional&lt; IdxRangeBatched &gt; idx\_range\_advected\_points=std::nullopt) <br>_Instantiate an advection operator._  |
-|  DFieldFDistribu | [**operator()**](#function-operator) (DFieldFDistribu allfdistribu, [**DVectorConstFieldAdvection**](classVectorField.md) advection\_field, double dt) const<br>_Advect a function over a time step dt with the given advection field along the physical directions._  |
+|  DFieldFDistribu | [**operator()**](#function-operator) (DFieldFDistribu allfdistribu, DVectorConstFieldAdvection advection\_field, double dt) const<br>_Advect a function over a time step dt with the given advection field along the physical directions._  |
 |   | [**~BslAdvectionPolar**](#function-bsladvectionpolar) () = default<br> |
 
 

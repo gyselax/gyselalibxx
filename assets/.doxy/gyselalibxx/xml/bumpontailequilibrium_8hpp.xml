@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="bumpontailequilibrium_8hpp" kind="file" language="C++">
     <compoundname>bumpontailequilibrium.hpp</compoundname>
     <includes local="no">paraconf.h</includes>
@@ -58,12 +58,6 @@
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -151,9 +145,6 @@
       <node id="10">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="21">
-        <label>filesystem</label>
-      </node>
       <node id="19">
         <label>memory</label>
       </node>
@@ -163,11 +154,8 @@
       <node id="9">
         <label>source_location</label>
       </node>
-      <node id="22">
-        <label>stdexcept</label>
-      </node>
-      <node id="23">
-        <label>string</label>
+      <node id="21">
+        <label>string_view</label>
       </node>
       <node id="6">
         <label>type_traits</label>
@@ -194,7 +182,7 @@
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;paraconfpp.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_info.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="21" refid="classBumpontailEquilibrium" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIEquilibrium" kindref="compound">IEquilibrium</ref></highlight></codeline>
+<codeline lineno="21" refid="classBumpontailEquilibrium" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBumpontailEquilibrium_1af3995062c5408eea2ae7761113d30c52" kindref="member">BumpontailEquilibrium</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIEquilibrium" kindref="compound">IEquilibrium</ref></highlight></codeline>
 <codeline lineno="22"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>m_epsilon_bot;</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
@@ -208,16 +196,16 @@
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classBumpontailEquilibrium_1a83f8500f622451e98637fb272208fe41" kindref="member">epsilon_bot</ref>,</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classBumpontailEquilibrium_1afaae3266ba6ecff76e2764c3f0bf4ffd" kindref="member">temperature_bot</ref>,</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classBumpontailEquilibrium_1a8c7af3f669150f90350907d721f22314" kindref="member">mean_velocity_bot</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>(</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium_1af3995062c5408eea2ae7761113d30c52" kindref="member">BumpontailEquilibrium</ref>(</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/><ref refid="classBumpontailEquilibrium_1a83f8500f622451e98637fb272208fe41" kindref="member">epsilon_bot</ref>,</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/><ref refid="classBumpontailEquilibrium_1afaae3266ba6ecff76e2764c3f0bf4ffd" kindref="member">temperature_bot</ref>,</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/><ref refid="classBumpontailEquilibrium_1a8c7af3f669150f90350907d721f22314" kindref="member">mean_velocity_bot</ref>);</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium" kindref="compound">~BumpontailEquilibrium</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium_1af3995062c5408eea2ae7761113d30c52" kindref="member">~BumpontailEquilibrium</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66" refid="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" kindref="member">BumpontailEquilibrium</ref>(<ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66" refid="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" kindref="member">BumpontailEquilibrium</ref>(<ref refid="classBumpontailEquilibrium_1af3995062c5408eea2ae7761113d30c52" kindref="member">BumpontailEquilibrium</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71" refid="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>&amp;<sp/><ref refid="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" kindref="member">operator=</ref>(<ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71" refid="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium_1af3995062c5408eea2ae7761113d30c52" kindref="member">BumpontailEquilibrium</ref>&amp;<sp/><ref refid="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" kindref="member">operator=</ref>(<ref refid="classBumpontailEquilibrium_1af3995062c5408eea2ae7761113d30c52" kindref="member">BumpontailEquilibrium</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpVx<sp/><ref refid="classBumpontailEquilibrium_1a4c85a379ea216bb7ac95186cf8af8817" kindref="member">operator()</ref>(DFieldSpVx<sp/>allfequilibrium)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
@@ -239,7 +227,7 @@
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">bumpontail_equilibrium<sp/>{</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref><sp/>init_from_input(IdxRangeSp<sp/>idx_range_kinsp,<sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>yaml_input_file);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal">BumpontailEquilibrium<sp/>init_from_input(IdxRangeSp<sp/>idx_range_kinsp,<sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>yaml_input_file);</highlight></codeline>
 <codeline lineno="117"><highlight class="normal"></highlight></codeline>
 <codeline lineno="118"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>bumpontail_equilibrium</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>

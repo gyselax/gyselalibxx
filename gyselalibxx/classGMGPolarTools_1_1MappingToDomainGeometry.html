@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -587,11 +593,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-fx"><strong>Fx</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>X(r, theta)</em></td>
+<td style="text-align: left;"><a href="#function-fx"><strong>Fx</strong></a> (const double &amp; r, const double &amp; theta) const<br><a href="structX.html"><em><strong>X(r, theta)</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-fy"><strong>Fy</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>Y(r, theta)</em></td>
+<td style="text-align: left;"><a href="#function-fy"><strong>Fy</strong></a> (const double &amp; r, const double &amp; theta) const<br><a href="structY.html"><em><strong>Y(r, theta)</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -599,19 +605,19 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-dfx_dr"><strong>dFx_dr</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/dr X(r, theta)</em></td>
+<td style="text-align: left;"><a href="#function-dfx_dr"><strong>dFx_dr</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/dr</em> <a href="structX.html"><em><strong>X(r, theta)</strong></em></a> __</td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-dfx_dtheta"><strong>dFx_dtheta</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/(d theta) X(r, theta)</em></td>
+<td style="text-align: left;"><a href="#function-dfx_dtheta"><strong>dFx_dtheta</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/(d theta)</em> <a href="structX.html"><em><strong>X(r, theta)</strong></em></a> __</td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-dfy_dr"><strong>dFy_dr</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/dr Y(r, theta)</em></td>
+<td style="text-align: left;"><a href="#function-dfy_dr"><strong>dFy_dr</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/dr</em> <a href="structY.html"><em><strong>Y(r, theta)</strong></em></a> __</td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-dfy_dtheta"><strong>dFy_dtheta</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/(d theta) Y(r, theta)</em></td>
+<td style="text-align: left;"><a href="#function-dfy_dtheta"><strong>dFy_dtheta</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/(d theta)</em> <a href="structY.html"><em><strong>Y(r, theta)</strong></em></a> __</td>
 </tr>
 </tbody>
 </table>
@@ -622,7 +628,7 @@
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-fx">function Fx</h3>
-<p><em>X(r, theta)</em> </p>
+<p><a href="structX.html"><em><strong>X(r, theta)</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::Fx (
     const double &amp; r,
     const double &amp; theta
@@ -631,7 +637,7 @@
 <hr>
 
 <h3 id="function-fy">function Fy</h3>
-<p><em>Y(r, theta)</em> </p>
+<p><a href="structY.html"><em><strong>Y(r, theta)</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::Fy (
     const double &amp; r,
     const double &amp; theta
@@ -648,7 +654,7 @@
 <hr>
 
 <h3 id="function-dfx_dr">function dFx_dr</h3>
-<p><em>d/dr X(r, theta)</em> </p>
+<p><em>d/dr</em> <a href="structX.html"><em><strong>X(r, theta)</strong></em></a> __</p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFx_dr (
     const double &amp; r,
     const double &amp; theta
@@ -657,7 +663,7 @@
 <hr>
 
 <h3 id="function-dfx_dtheta">function dFx_dtheta</h3>
-<p><em>d/(d theta) X(r, theta)</em> </p>
+<p><em>d/(d theta)</em> <a href="structX.html"><em><strong>X(r, theta)</strong></em></a> __</p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFx_dtheta (
     const double &amp; r,
     const double &amp; theta
@@ -666,7 +672,7 @@
 <hr>
 
 <h3 id="function-dfy_dr">function dFy_dr</h3>
-<p><em>d/dr Y(r, theta)</em> </p>
+<p><em>d/dr</em> <a href="structY.html"><em><strong>Y(r, theta)</strong></em></a> __</p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFy_dr (
     const double &amp; r,
     const double &amp; theta
@@ -675,7 +681,7 @@
 <hr>
 
 <h3 id="function-dfy_dtheta">function dFy_dtheta</h3>
-<p><em>d/(d theta) Y(r, theta)</em> </p>
+<p><em>d/(d theta)</em> <a href="structY.html"><em><strong>Y(r, theta)</strong></em></a> __</p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFy_dtheta (
     const double &amp; r,
     const double &amp; theta

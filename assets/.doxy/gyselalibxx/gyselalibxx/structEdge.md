@@ -47,7 +47,7 @@ _Define an edge of a given patch._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr Extremity | [**extremity**](#variable-extremity)   = `extremity\_val`<br>_Design if the edge is on the BACK or the FRONT of the other dimension._  |
+|  Extremity | [**extremity**](#variable-extremity)   = `extremity\_val`<br>_Design if the edge is on the BACK or the FRONT of the other dimension._  |
 
 
 
@@ -140,7 +140,10 @@ using Edge< Patch, Grid1D, extremity_val >::associated_patch =  Patch;
 
 _Grid parallel to the edge._ 
 ```C++
-using Edge< Patch, Grid1D, extremity_val >::parallel_grid =  std::conditional_t< std::is_same_v<Grid1D, typename Patch::Grid1>, typename Patch::Grid2, typename Patch::Grid1>;
+using Edge< Patch, Grid1D, extremity_val >::parallel_grid =  std::conditional_t<
+            std::is_same_v<Grid1D, typename Patch::Grid1>,
+            typename Patch::Grid2,
+            typename Patch::Grid1>;
 ```
 
 
@@ -170,7 +173,7 @@ using Edge< Patch, Grid1D, extremity_val >::perpendicular_grid =  Grid1D;
 
 _Design if the edge is on the BACK or the FRONT of the other dimension._ 
 ```C++
-constexpr Extremity Edge< Patch, Grid1D, extremity_val >::extremity;
+Extremity Edge< Patch, Grid1D, extremity_val >::extremity;
 ```
 
 

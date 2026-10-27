@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="mpisplitvlasovsolver_8cpp" kind="file" language="C++">
     <compoundname>mpisplitvlasovsolver.cpp</compoundname>
     <includes refid="mpisplitvlasovsolver_8hpp" local="yes">mpisplitvlasovsolver.hpp</includes>
@@ -404,11 +404,11 @@
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal">DFieldSpVxVyXY<sp/><ref refid="classMpiSplitVlasovSolver_1a90652f4a09f86eeebe1623f865418a0d" kindref="member">MpiSplitVlasovSolver::operator()</ref>(</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldSpVxVyXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>allfdistribu_v2Dsplit,</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstFieldXY</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>electric_field,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorConstFieldXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>electric_field,</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Real<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="23"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSpVxVyXY<sp/>idxrange_v2Dsplit(m_transpose.get_local_idx_range&lt;<ref refid="classMPILayout" kindref="compound">V2DSplit</ref>&gt;());</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSpXYVxVy<sp/>idxrange_x2Dsplit(m_transpose.get_local_idx_range&lt;<ref refid="classMPILayout" kindref="compound">X2DSplit</ref>&gt;());</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSpVxVyXY<sp/>idxrange_v2Dsplit(m_transpose.get_local_idx_range&lt;V2DSplit&gt;());</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSpXYVxVy<sp/>idxrange_x2Dsplit(m_transpose.get_local_idx_range&lt;X2DSplit&gt;());</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeXY<sp/>idx_range_xy_v2Dsplit(idxrange_v2Dsplit);</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXYVxVy<sp/>allfdistribu_x2Dsplit_alloc(</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;allfdistribu_x2Dsplit<sp/>(MpiSplitVlasovSolver::operator())&quot;</highlight><highlight class="normal">,</highlight></codeline>

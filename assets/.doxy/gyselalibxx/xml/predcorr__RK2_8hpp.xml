@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="predcorr__RK2_8hpp" kind="file" language="C++">
     <compoundname>predcorr_RK2.hpp</compoundname>
     <includes local="no">chrono</includes>
@@ -262,7 +262,7 @@
         </childnode>
         <childnode refid="61" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
@@ -438,15 +438,9 @@
       <node id="61">
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
         <childnode refid="62" relation="include">
         </childnode>
         <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="64" relation="include">
         </childnode>
       </node>
       <node id="60">
@@ -503,7 +497,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="65">
+      <node id="64">
         <label>rk2.hpp</label>
         <link refid="rk2_8hpp_source"/>
         <childnode refid="17" relation="include">
@@ -630,17 +624,14 @@
       <node id="54">
         <label>ostream</label>
       </node>
-      <node id="64">
+      <node id="63">
         <label>paraconf.h</label>
       </node>
       <node id="14">
         <label>source_location</label>
       </node>
       <node id="62">
-        <label>stdexcept</label>
-      </node>
-      <node id="63">
-        <label>string</label>
+        <label>string_view</label>
       </node>
       <node id="8">
         <label>type_traits</label>
@@ -679,7 +670,7 @@
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field_mem.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PoissonSolver,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>AdvectionX,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>AdvectionY&gt;</highlight></codeline>
-<codeline lineno="47" refid="classPredCorrRK2XY" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classPredCorrRK2XY" kindref="compound">PredCorrRK2XY</ref></highlight></codeline>
+<codeline lineno="47" refid="classPredCorrRK2XY" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classPredCorrRK2XY_1a2c3ee01251b6c339e06d5f2276e69c9d" kindref="member">PredCorrRK2XY</ref></highlight></codeline>
 <codeline lineno="48"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>PoissonSolver<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_poisson_solver;</highlight></codeline>
@@ -710,7 +701,7 @@
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>meshXY);</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldXY<sp/>electrostatic_potential<sp/>=<sp/>get_field(electrostatic_potential_alloc);</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY_XY</ref></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorFieldMemXY_XY</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>electric_field_alloc(</highlight><highlight class="stringliteral">&quot;electri_field<sp/>(PredCorrRK2XY::operator())&quot;</highlight><highlight class="normal">,<sp/>meshXY);</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorFieldXY_XY<sp/>electric_field<sp/>=<sp/>get_field(electric_field_alloc);</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"></highlight></codeline>

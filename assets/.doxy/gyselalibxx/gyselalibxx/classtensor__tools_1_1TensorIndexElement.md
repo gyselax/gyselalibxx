@@ -10,7 +10,7 @@
 
 
 
-_A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_ \(g_{xx}\) _would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;._[More...](#detailed-description)
+_A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_ \(g_{xx}\) _would have the index_[_**TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;**_](classtensor__tools_1_1TensorIndexElement.md) _._[More...](#detailed-description)
 
 
 

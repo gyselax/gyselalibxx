@@ -92,7 +92,9 @@ _Predefined_ [_**SplineBoundaryClosures**_](structSplineBoundaryClosures.md) _fo
 
 _Convenience pairing of ddc::SplineBuilderClosure::GREVILLE for both boundaries._ 
 ```C++
-using SplineBoundaryClosure::Greville_Greville = typedef SplineBoundaryClosures< ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE>;
+using SplineBoundaryClosure::Greville_Greville =  SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 ```
 
 
@@ -106,7 +108,9 @@ using SplineBoundaryClosure::Greville_Greville = typedef SplineBoundaryClosures<
 
 _Convenience pairing of ddc::SplineBuilderClosure::HERMITE for both boundaries._ 
 ```C++
-using SplineBoundaryClosure::Hermite_Hermite = typedef SplineBoundaryClosures< ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE>;
+using SplineBoundaryClosure::Hermite_Hermite =  SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
 ```
 
 
@@ -120,7 +124,9 @@ using SplineBoundaryClosure::Hermite_Hermite = typedef SplineBoundaryClosures< d
 
 _Convenience pairing of ddc::SplineBuilderClosure::HOMOGENEOUS\_HERMITE for both boundaries._ 
 ```C++
-using SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite = typedef SplineBoundaryClosures< ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE, ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE>;
+using SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite =  SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE>;
 ```
 
 
@@ -134,7 +140,9 @@ using SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite = typedef Spl
 
 _Convenience pairing of ddc::SplineBuilderClosure::PERIODIC for both boundaries._ 
 ```C++
-using SplineBoundaryClosure::Periodic = typedef SplineBoundaryClosures< ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC>;
+using SplineBoundaryClosure::Periodic =  SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 ```
 
 

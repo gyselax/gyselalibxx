@@ -428,7 +428,10 @@ virtual void Matrix_Periodic_Banded::calculate_delta_to_factorise () override
 
 
 
- It is defined as:
+
+
+
+It is defined as:
 
 
 

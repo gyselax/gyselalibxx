@@ -65,10 +65,10 @@ _A class describing a linear coordinate transformation._ [More...](#detailed-des
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**LinearCoordTransform**](#function-linearcoordtransform-22) ([**LinearCoordTransform**](classLinearCoordTransform.md) const & other) = default<br> |
 |  KOKKOS\_INLINE\_FUNCTION [**LinearCoordTransform**](classLinearCoordTransform.md)&lt; OutputDim, InputDim &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) ([**CoordArg**](classLinearCoordTransform.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; InputDim &gt;, VectorIndexSet&lt; OutputDim &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) ([**CoordArg**](classLinearCoordTransform.md#typedef-coordarg) const & coord) const<br>_Compute full inverse Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; InputDim &gt;, VectorIndexSet&lt; OutputDim &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) ([**CoordArg**](classLinearCoordTransform.md#typedef-coordarg) const & coord) const<br>_Compute full inverse Jacobian matrix._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordArg**](classLinearCoordTransform.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordArg**](classLinearCoordTransform.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; OutputDim &gt;, VectorIndexSet&lt; InputDim &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classLinearCoordTransform.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; OutputDim &gt;, VectorIndexSet&lt; InputDim &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classLinearCoordTransform.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**CoordResult**](classLinearCoordTransform.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classLinearCoordTransform.md#typedef-coordarg) const & coord) const<br>_Convert the coordinate on the input dimension to a coordinate on the output dimension._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~LinearCoordTransform**](#function-linearcoordtransform) () = default<br> |
 
@@ -282,7 +282,7 @@ A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
 
 _Compute full inverse Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < VectorIndexSet< InputDim >, VectorIndexSet< OutputDim > > LinearCoordTransform::inv_jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< VectorIndexSet< InputDim >, VectorIndexSet< OutputDim > > LinearCoordTransform::inv_jacobian_matrix (
     CoordArg const & coord
 ) const
 ```
@@ -388,7 +388,7 @@ A double with the value of the (i,j) coefficient of the Jacobian matrix.
 
 _Compute full Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < VectorIndexSet< OutputDim >, VectorIndexSet< InputDim > > LinearCoordTransform::jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< VectorIndexSet< OutputDim >, VectorIndexSet< InputDim > > LinearCoordTransform::jacobian_matrix (
     CoordArg const & coord
 ) const
 ```

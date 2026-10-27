@@ -95,7 +95,7 @@
 ### typedef placeholder\_idx\_t 
 
 ```C++
-using metric_tensor_detail::placeholder_idx_t = typedef typename IdxPlaceholder<CoordType>::type;
+using metric_tensor_detail::placeholder_idx_t =  typename IdxPlaceholder<CoordType>::type;
 ```
 
 

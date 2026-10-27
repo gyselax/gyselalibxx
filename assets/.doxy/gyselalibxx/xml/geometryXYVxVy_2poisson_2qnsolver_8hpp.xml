@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometryXYVxVy_2poisson_2qnsolver_8hpp" kind="file" language="C++">
     <compoundname>qnsolver.hpp</compoundname>
     <includes refid="geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp" local="yes">chargedensitycalculator.hpp</includes>
@@ -371,23 +371,23 @@
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classQNSolver" kindref="compound">QNSolver</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIQNSolver" kindref="compound">IQNSolver</ref></highlight></codeline>
 <codeline lineno="22"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PoissonSolver<sp/>=<sp/><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PoissonSolver<sp/>=<sp/>IPoissonSolver&lt;</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeXY,</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeXY,</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Real,</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::layout_right&gt;;</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>PoissonSolver<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_solve_poisson;</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_compute_rho;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>IChargeDensityCalculator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_compute_rho;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="39" refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" kindref="member">QNSolver</ref>(<ref refid="classIPoissonSolver" kindref="compound">PoissonSolver</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>solve_poisson,<sp/><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>compute_rho);</highlight></codeline>
+<codeline lineno="39" refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" kindref="member">QNSolver</ref>(PoissonSolver<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>solve_poisson,<sp/><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>compute_rho);</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classQNSolver" kindref="compound">~QNSolver</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" kindref="member">~QNSolver</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classQNSolver_1a866ea0a8cd34e7789d8847aaf963fdf2" kindref="member">operator()</ref>(</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldXY<sp/>electrostatic_potential,</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorFieldXY</ref><sp/>electric_field,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorFieldXY<sp/>electric_field,</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldSpVxVyXY<sp/>allfdistribu)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal">};</highlight></codeline>
     </programlisting>

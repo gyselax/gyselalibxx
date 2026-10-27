@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -595,7 +601,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (<a href="classVectorField.html"><strong>DVectorFieldCovType</strong></a>&lt; IdxRange &gt; gradient, <a href="classVectorField.html"><strong>DVectorConstFieldCovType</strong></a>&lt; IdxRange &gt; const partial_derivatives) const<br><em>Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the covariant basis. The components of the gradient in the covariant basis are simply equal to the value of the partial derivatives of the scalar field.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DVectorFieldCovType&lt; IdxRange &gt; gradient, DVectorConstFieldCovType&lt; IdxRange &gt; const partial_derivatives) const<br><em>Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the covariant basis. The components of the gradient in the covariant basis are simply equal to the value of the partial derivatives of the scalar field.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION DVectorType</td>
@@ -603,7 +609,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_3"><strong>operator()</strong></a> (<a href="classVectorField.html"><strong>DVectorFieldType</strong></a>&lt; IdxRange &gt; const gradient, <a href="classVectorField.html"><strong>DVectorConstFieldCovType</strong></a>&lt; IdxRange &gt; const partial_derivatives) const<br><em>Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis.</em>  __</td>
+<td style="text-align: left;"><a href="#function-operator_3"><strong>operator()</strong></a> (DVectorFieldType&lt; IdxRange &gt; const gradient, DVectorConstFieldCovType&lt; IdxRange &gt; const partial_derivatives) const<br><em>Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis.</em></td>
 </tr>
 </tbody>
 </table>
@@ -643,8 +649,8 @@
 <p><em>Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the covariant basis. The components of the gradient in the covariant basis are simply equal to the value of the partial derivatives of the scalar field.</em> </p>
 <pre><code class="language-C++">template&lt;class IdxRange&gt;
 inline KOKKOS_INLINE_FUNCTION void Gradient::operator() (
-    DVectorFieldCovType &lt; IdxRange &gt; gradient,
-    DVectorConstFieldCovType &lt; IdxRange &gt; const partial_derivatives
+    DVectorFieldCovType&lt; IdxRange &gt; gradient,
+    DVectorConstFieldCovType&lt; IdxRange &gt; const partial_derivatives
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -672,11 +678,11 @@ inline KOKKOS_INLINE_FUNCTION DVectorType Gradient::operator() (
 <hr>
 
 <h3 id="function-operator_3">function operator()</h3>
-<p><em>Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis.</em>  __</p>
+<p><em>Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis.</em> </p>
 <pre><code class="language-C++">template&lt;class IdxRange&gt;
 inline void Gradient::operator() (
-    DVectorFieldType &lt; IdxRange &gt; const gradient,
-    DVectorConstFieldCovType &lt; IdxRange &gt; const partial_derivatives
+    DVectorFieldType&lt; IdxRange &gt; const gradient,
+    DVectorConstFieldCovType&lt; IdxRange &gt; const partial_derivatives
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>

@@ -126,7 +126,14 @@ NOTE: Thanks to C++17 template constructor argument type deduction, we do not ne
 
 _Container for the operator input data._ 
 ```C++
-using CollisionConfiguration< GridSp, GridVpar, GridMu >::CollisionConfigurationDataType =  detail::CollisionConfigurationData< IdxRangeDistributionFunctionType, GridSpType, GridPhiType, GridRType, GridThetaType, GridVparType, GridMuType>;
+using CollisionConfiguration< GridSp, GridVpar, GridMu >::CollisionConfigurationDataType =  detail::CollisionConfigurationData<
+            IdxRangeDistributionFunctionType,
+            GridSpType,
+            GridPhiType,
+            GridRType,
+            GridThetaType,
+            GridVparType,
+            GridMuType>;
 ```
 
 
@@ -328,7 +335,7 @@ inline const CollisionConfigurationDataType & CollisionConfiguration::configurat
 
 **Returns:**
 
-const CollisionConfigurationDataType& 
+const [**CollisionConfigurationDataType**](classCollisionConfiguration.md#typedef-collisionconfigurationdatatype)& 
 
 
 

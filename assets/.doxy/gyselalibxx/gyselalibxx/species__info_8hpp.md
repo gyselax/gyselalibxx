@@ -60,7 +60,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**is\_species\_information\_v**](#variable-is_species_information_v)   = `std::is\_same\_v&lt;typename Grid1D::discrete\_dimension\_type, [**SpeciesInformation**](classSpeciesInformation.md)&gt;`<br> |
+|  bool | [**is\_species\_information\_v**](#variable-is_species_information_v)   = `std::is\_same\_v&lt;typename Grid1D::discrete\_dimension\_type, [**SpeciesInformation**](classSpeciesInformation.md)&gt;`<br> |
 
 
 
@@ -252,7 +252,7 @@ using IdxStepSp =  IdxStep<Species>;
 ### variable is\_species\_information\_v 
 
 ```C++
-constexpr bool is_species_information_v;
+bool is_species_information_v;
 ```
 
 

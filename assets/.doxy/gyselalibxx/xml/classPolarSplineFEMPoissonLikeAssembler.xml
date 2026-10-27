@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classPolarSplineFEMPoissonLikeAssembler" kind="class" language="C++" prot="public">
     <compoundname>PolarSplineFEMPoissonLikeAssembler</compoundname>
     <includes refid="polar__spline__fem__poisson__like__assembler_8hpp" local="no">polar_spline_fem_poisson_like_assembler.hpp</includes>
@@ -60,9 +60,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="426" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="426" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1aadb033c8a4a5f11780f35427b13fefba" prot="public" static="no">
-        <type><ref refid="structdetail__poisson_1_1TensorBSplineStash" kindref="compound">detail_poisson::TensorBSplineStash</ref>&lt; QDimRMesh, QDimThetaMesh, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson:: TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" prot="public" static="no">
+        <type>detail_poisson:: <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" kindref="member">TensorBSplineStash</ref>&lt; QDimRMesh, QDimThetaMesh, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson::
+            TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;</definition>
         <argsstring></argsstring>
         <name>TensorBSplineStash</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::TensorBSplineStash</qualifiedname>
@@ -73,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="517" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="518" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="517" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="517" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -482,9 +483,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="500" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="500" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1a76551072367130301254a514b292a92c" prot="private" static="no">
-        <type>IdxRange&lt; QDimRMesh, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, ddc::Deriv&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1aa2fb63cd3d8427c09f2690168b66f378" kindref="member">R</ref> &gt; &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBasisStashR =  IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1a9f6279fd82ad8e3a831efdf55fb399a4" prot="private" static="no">
+        <type>IdxRange&lt; QDimRMesh, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, ddc::Deriv&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1aa2fb63cd3d8427c09f2690168b66f378" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref> &gt; &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBasisStashR =  IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBasisStashR</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::IdxRangeBasisStashR</qualifiedname>
@@ -497,9 +498,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="507" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="507" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1a2fb2d83ae3875ff64c4b909e11a486f9" prot="private" static="no">
-        <type>IdxRange&lt; QDimThetaMesh, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, ddc::Deriv&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" kindref="member">Theta</ref> &gt; &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBasisStashTheta =  IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1abc002c19c00c6d4b7e25fdbfad2c5417" prot="private" static="no">
+        <type>IdxRange&lt; QDimThetaMesh, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, ddc::Deriv&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+        <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBasisStashTheta =  IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBasisStashTheta</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::IdxRangeBasisStashTheta</qualifiedname>
@@ -526,9 +527,13 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="538" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="538" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1a3ce4164db2295f9969588909ea57f955" prot="private" static="no">
+      <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1a0fe2385f7d43e48253c72698f52d17c1" prot="private" static="no">
         <type>Kokkos::View&lt; double *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::scratch_memory_space, Kokkos::MemoryTraits&lt; Kokkos::Unmanaged &gt; &gt;</type>
-        <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::ScratchView =  Kokkos::View&lt; double*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::scratch_memory_space, Kokkos::MemoryTraits&lt;Kokkos::Unmanaged&gt; &gt;</definition>
+        <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::ScratchView =  Kokkos::View&lt;
+            double*,
+            Kokkos::LayoutRight,
+            Kokkos::DefaultExecutionSpace::scratch_memory_space,
+            Kokkos::MemoryTraits&lt;Kokkos::Unmanaged&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>ScratchView</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::ScratchView</qualifiedname>
@@ -538,13 +543,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="541" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="545" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="541" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="541" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a95a6ba25d15462b9a7fba84a0b32e80d" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_gauss_legendre_r</definition>
+        <type>int</type>
+        <definition>int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_gauss_legendre_r</definition>
         <argsstring></argsstring>
         <name>s_n_gauss_legendre_r</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::s_n_gauss_legendre_r</qualifiedname>
@@ -558,8 +563,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="521" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="521" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a28e9c15ed84401e1b1b8500c06f474fa" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_gauss_legendre_theta</definition>
+        <type>int</type>
+        <definition>int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_gauss_legendre_theta</definition>
         <argsstring></argsstring>
         <name>s_n_gauss_legendre_theta</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::s_n_gauss_legendre_theta</qualifiedname>
@@ -573,8 +578,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="522" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="522" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a68aac10105ed534b77026ca3b9331c98" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_overlap_cells</definition>
+        <type>int</type>
+        <definition>int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_overlap_cells</definition>
         <argsstring></argsstring>
         <name>s_n_overlap_cells</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::s_n_overlap_cells</qualifiedname>
@@ -588,8 +593,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="524" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="524" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a9d9d4e88382a579bf3a5ad1a327d5520" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_non_zero_bases_r</definition>
+        <type>int</type>
+        <definition>int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_non_zero_bases_r</definition>
         <argsstring></argsstring>
         <name>s_n_non_zero_bases_r</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::s_n_non_zero_bases_r</qualifiedname>
@@ -603,8 +608,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="528" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="528" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a35f34f9fa573f380270856596b89bda0" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_non_zero_bases_theta</definition>
+        <type>int</type>
+        <definition>int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_non_zero_bases_theta</definition>
         <argsstring></argsstring>
         <name>s_n_non_zero_bases_theta</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::s_n_non_zero_bases_theta</qualifiedname>
@@ -618,8 +623,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="531" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="531" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a75d828a136efaf86f00b7a1b015fcae8" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_quad_support_r</definition>
+        <type>int</type>
+        <definition>int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_quad_support_r</definition>
         <argsstring></argsstring>
         <name>s_n_quad_support_r</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::s_n_quad_support_r</qualifiedname>
@@ -633,8 +638,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="534" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="534" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a6afec5a54ca18036b5db2d8f9d9dba02" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_quad_support_theta</definition>
+        <type>int</type>
+        <definition>int PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_quad_support_theta</definition>
         <argsstring></argsstring>
         <name>s_n_quad_support_theta</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::s_n_quad_support_theta</qualifiedname>
@@ -929,13 +934,13 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="583" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="583" bodyend="625"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a2dc1f60bdfb1d07cb929225f30719a4a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classPolarSplineFEMPoissonLikeAssembler_1aadb033c8a4a5f11780f35427b13fefba" kindref="member">TensorBSplineStash</ref></type>
+        <type><ref refid="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" kindref="member">TensorBSplineStash</ref></type>
         <definition>TensorBSplineStash PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::get_tensor_bspline_stash</definition>
         <argsstring>() const</argsstring>
         <name>get_tensor_bspline_stash</name>
         <qualifiedname>PolarSplineFEMPoissonLikeAssembler::get_tensor_bspline_stash</qualifiedname>
         <briefdescription>
-<para>Get the TensorBSplineStash of the values and derivatives of the 1D B-splines at the quadrature points. </para>
+<para>Get the <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" kindref="member">TensorBSplineStash</ref> of the values and derivatives of the 1D B-splines at the quadrature points. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="return"><para>The stashed values of the 1D B-splines. </para>
@@ -1661,7 +1666,7 @@
             <type>class IdxTestType</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION std::tuple&lt; double, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1aa2fb63cd3d8427c09f2690168b66f378" kindref="member">R</ref>, <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" kindref="member">Theta</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1aa2fb63cd3d8427c09f2690168b66f378" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
         <definition>static KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R, Theta &gt; &gt; PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::get_test_weights</definition>
         <argsstring>(IdxTestType idx_test, IdxQuadratureRTheta idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, MetricTensorType const &amp;metric_tensor, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume, TensorBSplineStash const &amp;bspline_stash)</argsstring>
         <name>get_test_weights</name>
@@ -1695,7 +1700,7 @@
           <declname>int_volume</declname>
         </param>
         <param>
-          <type><ref refid="classPolarSplineFEMPoissonLikeAssembler_1aadb033c8a4a5f11780f35427b13fefba" kindref="member">TensorBSplineStash</ref> const &amp;</type>
+          <type><ref refid="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" kindref="member">TensorBSplineStash</ref> const &amp;</type>
           <declname>bspline_stash</declname>
         </param>
         <briefdescription>
@@ -1803,7 +1808,7 @@
           <declname>test_mass</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1aa2fb63cd3d8427c09f2690168b66f378" kindref="member">R</ref>, <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" kindref="member">Theta</ref> &gt; &gt;</type>
+          <type>DVectorField&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1aa2fb63cd3d8427c09f2690168b66f378" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
           <declname>test_stiffness</declname>
         </param>
         <param>
@@ -1811,7 +1816,7 @@
           <declname>full_quad_idx_range</declname>
         </param>
         <param>
-          <type><ref refid="classPolarSplineFEMPoissonLikeAssembler_1aadb033c8a4a5f11780f35427b13fefba" kindref="member">TensorBSplineStash</ref> const &amp;</type>
+          <type><ref refid="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" kindref="member">TensorBSplineStash</ref> const &amp;</type>
           <declname>bspline_stash</declname>
         </param>
         <briefdescription>
@@ -1906,7 +1911,7 @@
           <declname>test_mass</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1aa2fb63cd3d8427c09f2690168b66f378" kindref="member">R</ref>, <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" kindref="member">Theta</ref> &gt; &gt;</type>
+          <type>DVectorField&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; <ref refid="classPolarSplineFEMPoissonLikeAssembler_1aa2fb63cd3d8427c09f2690168b66f378" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
           <declname>test_stiffness</declname>
         </param>
         <param>
@@ -1938,7 +1943,7 @@
           <declname>int_volume</declname>
         </param>
         <param>
-          <type><ref refid="classPolarSplineFEMPoissonLikeAssembler_1aadb033c8a4a5f11780f35427b13fefba" kindref="member">TensorBSplineStash</ref> const &amp;</type>
+          <type><ref refid="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" kindref="member">TensorBSplineStash</ref> const &amp;</type>
           <declname>bspline_stash</declname>
         </param>
         <briefdescription>
@@ -2159,8 +2164,8 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a5d923ecefe0d1eeb005586afd9c490f2" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxQuadratureR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a011bd84919ffb51069a021236ca3b2b8" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxQuadratureRTheta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1ae6108fff5109f3ef9ef40cffd1fac6de" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxQuadratureTheta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a76551072367130301254a514b292a92c" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxRangeBasisStashR</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a2fb2d83ae3875ff64c4b909e11a486f9" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxRangeBasisStashTheta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a9f6279fd82ad8e3a831efdf55fb399a4" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxRangeBasisStashR</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1abc002c19c00c6d4b7e25fdbfad2c5417" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxRangeBasisStashTheta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a92a2340898624760a806f3067ae64c8a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxRangeBatch</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a8cfbd13476c1a020a5a0c79e5a2621e7" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxRangeBSPolar</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a5b57ea17761dc6912d54649735c25d31" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxRangeBSR</name></member>
@@ -2206,10 +2211,10 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a68aac10105ed534b77026ca3b9331c98" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>s_n_overlap_cells</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a75d828a136efaf86f00b7a1b015fcae8" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>s_n_quad_support_r</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6afec5a54ca18036b5db2d8f9d9dba02" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>s_n_quad_support_theta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a3ce4164db2295f9969588909ea57f955" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>ScratchView</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a0fe2385f7d43e48253c72698f52d17c1" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>ScratchView</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6d7ed0629a90e05b6f43360593c14fe9" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>setup_sparse_matrix</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a468a9fc94674dd7932280258bc9db7b7" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>stash_basis_eval</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1aadb033c8a4a5f11780f35427b13fefba" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>TensorBSplineStash</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>TensorBSplineStash</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a202144b4a5daaeaac66e49047da6f4a4" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>Theta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1ae06315f6dd25d2451b651026d06bc07a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>Theta_cov</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1ad5b4be6e36b86c7b3e4d2545a85e29f4" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>to_polar</name></member>

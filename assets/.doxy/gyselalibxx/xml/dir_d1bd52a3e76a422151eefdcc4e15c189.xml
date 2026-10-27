@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_d1bd52a3e76a422151eefdcc4e15c189" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives</compoundname>
     <innerfile refid="interface__derivative__coefficients_8hpp">interface_derivative_coefficients.hpp</innerfile>

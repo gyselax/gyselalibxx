@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="collisions__inter_8hpp" kind="file" language="C++">
     <compoundname>collisions_inter.hpp</compoundname>
     <includes local="no">cassert</includes>
@@ -205,7 +205,7 @@
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;quadrature.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="trapezoid__quadrature_8hpp" kindref="compound">trapezoid_quadrature.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24" refid="classCollisionsInter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCollisionsInter" kindref="compound">CollisionsInter</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIRightHandSide" kindref="compound">IRightHandSide</ref></highlight></codeline>
+<codeline lineno="24" refid="classCollisionsInter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCollisionsInter_1acdd51d6c9f1b051ec7661c1a160a31b7" kindref="member">CollisionsInter</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIRightHandSide" kindref="compound">IRightHandSide</ref></highlight></codeline>
 <codeline lineno="25"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>m_nustar0;</highlight></codeline>
@@ -213,7 +213,7 @@
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>m_nustar_profile;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsInter" kindref="compound">CollisionsInter</ref>(IdxRangeSpXVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mesh,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>nustar0);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsInter_1acdd51d6c9f1b051ec7661c1a160a31b7" kindref="member">CollisionsInter</ref>(IdxRangeSpXVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mesh,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>nustar0);</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/><ref refid="classCollisionsInter_1a1f8104eb5930b71b25856a0640c534bf" kindref="member">operator()</ref>(DFieldSpXVx<sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>

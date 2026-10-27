@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classMatrix__Centre__Block" kind="class" language="C++" prot="public">
     <compoundname>Matrix_Centre_Block</compoundname>
     <basecompoundref refid="classMatrix__Corner__Block" prot="public" virt="non-virtual">Matrix_Corner_Block</basecompoundref>
@@ -389,10 +389,12 @@
 <para>I.e. for <verbatim> bx = A
       B
       C
-</verbatim> with <formula id="352">$ B $</formula> a vector of length nb, return <verbatim> bx = B
+</verbatim></para>
+<para>with <formula id="352">$ B $</formula> a vector of length nb, return <verbatim> bx = B
       A
       C
-</verbatim> <parameterlist kind="param"><parameteritem>
+</verbatim></para>
+<para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">bx</parametername>
 </parameternamelist>
@@ -426,10 +428,12 @@
 <para>I.e. for <verbatim> bx = B
       A
       C
-</verbatim> with <formula id="352">$ B $</formula> a vector of length nb, return <verbatim> bx = A
+</verbatim></para>
+<para>with <formula id="352">$ B $</formula> a vector of length nb, return <verbatim> bx = A
       B
       C
-</verbatim> <parameterlist kind="param"><parameteritem>
+</verbatim></para>
+<para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">bx</parametername>
 </parameternamelist>
@@ -463,10 +467,12 @@
 <para>I.e. for <verbatim> bx = A
       B
       C
-</verbatim> with <formula id="352">$ B $</formula> a vector of length nb, return <verbatim> bx = B
+</verbatim></para>
+<para>with <formula id="352">$ B $</formula> a vector of length nb, return <verbatim> bx = B
       A
       C
-</verbatim> <parameterlist kind="param"><parameteritem>
+</verbatim></para>
+<para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">bx</parametername>
 </parameternamelist>
@@ -500,10 +506,12 @@
 <para>I.e. for <verbatim> bx = B
       A
       C
-</verbatim> with <formula id="352">$ B $</formula> a vector of length nb, return <verbatim> bx = A
+</verbatim></para>
+<para>with <formula id="352">$ B $</formula> a vector of length nb, return <verbatim> bx = A
       B
       C
-</verbatim> <parameterlist kind="param"><parameteritem>
+</verbatim></para>
+<para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">bx</parametername>
 </parameternamelist>
@@ -528,20 +536,24 @@
 <para><verbatim>A B C
 D E F
 G H I
-</verbatim> where E is a banded matrix, and A, E and I are square matrices.</para>
+</verbatim></para>
+<para>where E is a banded matrix, and A, E and I are square matrices.</para>
 <para>This matrix is solved by rearranging it to: <verbatim>E D F
 B A C
 H G I
-</verbatim> This new matrix is a corner matrix of the form: <verbatim> |    Q   | gamma |
+</verbatim></para>
+<para>This new matrix is a corner matrix of the form: <verbatim> |    Q   | gamma |
  | lambda | delta |
-</verbatim> with <formula id="351">$ Q = E $</formula> and <verbatim>gamma = D F
+</verbatim></para>
+<para>with <formula id="351">$ Q = E $</formula> and <verbatim>gamma = D F
 
 lambda = B
          H
 
 delta = A C
         G I
-</verbatim> Internally the matrix is saved in the corner format. </para>
+</verbatim></para>
+<para>Internally the matrix is saved in the corner format. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="3">

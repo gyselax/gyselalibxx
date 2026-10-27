@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespaceExtrapolationRule" kind="namespace" language="C++">
     <compoundname>ExtrapolationRule</compoundname>
-    <innerclass refid="structExtrapolationRule_1_1Constant" prot="public">ExtrapolationRule::Constant</innerclass>
-    <innerclass refid="structExtrapolationRule_1_1NullValue" prot="public">ExtrapolationRule::NullValue</innerclass>
     <innerclass refid="structExtrapolationRule_1_1OneSidedPeriodic" prot="public">ExtrapolationRule::OneSidedPeriodic</innerclass>
+    <innerclass refid="structExtrapolationRule_1_1NullValue" prot="public">ExtrapolationRule::NullValue</innerclass>
+    <innerclass refid="structExtrapolationRule_1_1Constant" prot="public">ExtrapolationRule::Constant</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceExtrapolationRule_1a74ee3ad52ef4fa4ed41e57dd16fa3393" prot="public" static="no">
         <type>ddc::detail::TypeSeq&lt; <ref refid="structExtrapolationRule_1_1OneSidedPeriodic" kindref="compound">OneSidedPeriodic</ref>, <ref refid="structExtrapolationRule_1_1OneSidedPeriodic" kindref="compound">OneSidedPeriodic</ref> &gt;</type>
-        <definition>using ExtrapolationRule::Periodic = typedef ddc::detail::TypeSeq&lt;OneSidedPeriodic, OneSidedPeriodic&gt;</definition>
+        <definition>using ExtrapolationRule::Periodic =  ddc::detail::TypeSeq&lt;OneSidedPeriodic, OneSidedPeriodic&gt;</definition>
         <argsstring></argsstring>
         <name>Periodic</name>
         <qualifiedname>ExtrapolationRule::Periodic</qualifiedname>
@@ -21,9 +21,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="110" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceExtrapolationRule_1a09227876d2442ba8cd05940b5adbd303" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceExtrapolationRule_1a59b7fa474989f3dd46794ae21590d438" prot="public" static="no">
         <type>ddc::detail::TypeSeq&lt; <ref refid="structExtrapolationRule_1_1NullValue" kindref="compound">NullValue</ref>, <ref refid="structExtrapolationRule_1_1NullValue" kindref="compound">NullValue</ref> &gt;</type>
-        <definition>using ExtrapolationRule::Null_Null = typedef ddc::detail::TypeSeq&lt;NullValue, NullValue&gt;</definition>
+        <definition>using ExtrapolationRule::Null_Null =  ddc::detail::TypeSeq&lt;NullValue, NullValue&gt;</definition>
         <argsstring></argsstring>
         <name>Null_Null</name>
         <qualifiedname>ExtrapolationRule::Null_Null</qualifiedname>
@@ -36,9 +36,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="121" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="121" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceExtrapolationRule_1aa3665802a09eb11760a0e5664756a3c0" prot="public" static="no">
         <type>ddc::detail::TypeSeq&lt; <ref refid="structExtrapolationRule_1_1Constant" kindref="compound">Constant</ref>, <ref refid="structExtrapolationRule_1_1Constant" kindref="compound">Constant</ref> &gt;</type>
-        <definition>using ExtrapolationRule::Constant_Constant = typedef ddc::detail::TypeSeq&lt;Constant, Constant&gt;</definition>
+        <definition>using ExtrapolationRule::Constant_Constant =  ddc::detail::TypeSeq&lt;Constant, Constant&gt;</definition>
         <argsstring></argsstring>
         <name>Constant_Constant</name>
         <qualifiedname>ExtrapolationRule::Constant_Constant</qualifiedname>

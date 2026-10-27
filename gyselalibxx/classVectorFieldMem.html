@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -646,11 +652,11 @@
 <td style="text-align: left;"><a href="#function-vectorfieldmem-77"><strong>VectorFieldMem</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> &amp;&amp; other) = default<br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr chunk_span_type</td>
+<td style="text-align: right;">chunk_span_type</td>
 <td style="text-align: left;"><a href="#function-get-12"><strong>get</strong></a> () noexcept<br><em>Get the Field describing the component in the QueryTag direction.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr chunk_view_type</td>
+<td style="text-align: right;">chunk_view_type</td>
 <td style="text-align: left;"><a href="#function-get-22"><strong>get</strong></a> () noexcept const<br><em>Get the Field describing the component in the QueryTag direction.</em></td>
 </tr>
 <tr>
@@ -743,14 +749,24 @@
 
 <h3 id="typedef-span_type">typedef span_type</h3>
 <p><em>A type which can hold a reference to this</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_type =  VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right&gt;;
+<pre><code class="language-C++">using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_type =  VectorField&lt;
+            ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemSpace,
+            Kokkos::layout_right&gt;;
 </code></pre>
 <p>This is a DDC keyword used to make this class interchangeable with Field. </p>
 <hr>
 
 <h3 id="typedef-view_type">typedef view_type</h3>
 <p><em>A type which can hold a constant reference to this</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::view_type =  VectorField&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right&gt;;
+<pre><code class="language-C++">using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::view_type =  VectorField&lt;
+            const ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemSpace,
+            Kokkos::layout_right&gt;;
 </code></pre>
 <p>This is a DDC keyword used to make this class interchangeable with Field. </p>
 <hr>
@@ -814,7 +830,7 @@
 <h3 id="function-get-12">function get [1/2]</h3>
 <p><em>Get the Field describing the component in the QueryTag direction.</em> </p>
 <pre><code class="language-C++">template&lt;class QueryTag&gt;
-inline constexpr chunk_span_type VectorFieldMem::get () noexcept
+inline chunk_span_type VectorFieldMem::get () noexcept
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The field in the specified direction. </p>
@@ -823,7 +839,7 @@ inline constexpr chunk_span_type VectorFieldMem::get () noexcept
 <h3 id="function-get-22">function get [2/2]</h3>
 <p><em>Get the Field describing the component in the QueryTag direction.</em> </p>
 <pre><code class="language-C++">template&lt;class QueryTag&gt;
-inline constexpr chunk_view_type VectorFieldMem::get () noexcept const
+inline chunk_view_type VectorFieldMem::get () noexcept const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The constant field in the specified direction. </p>

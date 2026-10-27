@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -591,11 +597,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">typedef ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><strong>interpolation_grid_type</strong></a>, <a href="classIdentityInterpolationBuilder.html#typedef-basis_domain_type"><strong>basis_domain_type</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>  <br><em>The batched domain type with interpolation_grid_type replaced by basis_domain_type.</em></td>
+<td style="text-align: left;"><a href="#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>  <br><em>The batched domain type with</em> <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><em><strong>interpolation_grid_type</strong></em></a> <em>replaced by</em><a href="classIdentityInterpolationBuilder.html#typedef-basis_domain_type"><em><strong>basis_domain_type</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><strong>interpolation_grid_type</strong></a>, <a href="classIdentityInterpolationBuilder.html#typedef-deriv_type"><strong>deriv_type</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>The batched domain type with interpolation_grid_type replaced by deriv_type.</em></td>
+<td style="text-align: right;">typedef ddc:: replace_dim_of_t&lt; BatchedInterpolationIdxRange, <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><strong>interpolation_grid_type</strong></a>, <a href="classIdentityInterpolationBuilder.html#typedef-deriv_type"><strong>deriv_type</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>The batched domain type with</em> <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><em><strong>interpolation_grid_type</strong></em></a> <em>replaced by</em><a href="classIdentityInterpolationBuilder.html#typedef-deriv_type"><em><strong>deriv_type</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef IdxRange&lt; <a href="classIdentityInterpolationBuilder.html#typedef-basis_domain_type"><strong>basis_domain_type</strong></a> &gt;</td>
@@ -641,11 +647,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr int</td>
+<td style="text-align: right;">int</td>
 <td style="text-align: left;"><a href="#variable-s_nbe_xmax"><strong>s_nbe_xmax</strong></a>   = <code>0</code><br><em>The number of equations defining the boundary condition at the upper bound.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr int</td>
+<td style="text-align: right;">int</td>
 <td style="text-align: left;"><a href="#variable-s_nbe_xmin"><strong>s_nbe_xmin</strong></a>   = <code>0</code><br><em>The number of equations defining the boundary condition at the lower bound.</em></td>
 </tr>
 </tbody>
@@ -699,14 +705,18 @@
 <hr>
 
 <h3 id="typedef-batched_basis_idx_range_type">typedef batched_basis_idx_range_type</h3>
-<p><em>The batched domain type with interpolation_grid_type replaced by basis_domain_type.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_basis_idx_range_type =  ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, interpolation_grid_type, basis_domain_type&gt;;
+<p><em>The batched domain type with</em> <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><em><strong>interpolation_grid_type</strong></em></a> <em>replaced by</em><a href="classIdentityInterpolationBuilder.html#typedef-basis_domain_type"><em><strong>basis_domain_type</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_basis_idx_range_type =  ddc::replace_dim_of_t&lt;
+            BatchedInterpolationIdxRange,
+            interpolation_grid_type,
+            basis_domain_type&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-batched_derivs_idx_range_type">typedef batched_derivs_idx_range_type</h3>
-<p><em>The batched domain type with interpolation_grid_type replaced by deriv_type.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_derivs_idx_range_type =  ddc:: replace_dim_of_t&lt;BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type&gt;;
+<p><em>The batched domain type with</em> <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><em><strong>interpolation_grid_type</strong></em></a> <em>replaced by</em><a href="classIdentityInterpolationBuilder.html#typedef-deriv_type"><em><strong>deriv_type</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_derivs_idx_range_type =  ddc::
+            replace_dim_of_t&lt;BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type&gt;;
 </code></pre>
 <hr>
 
@@ -760,13 +770,13 @@
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
 <h3 id="variable-s_nbe_xmax">variable s_nbe_xmax</h3>
 <p><em>The number of equations defining the boundary condition at the upper bound.</em> </p>
-<pre><code class="language-C++">constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmax;
+<pre><code class="language-C++">int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmax;
 </code></pre>
 <hr>
 
 <h3 id="variable-s_nbe_xmin">variable s_nbe_xmin</h3>
 <p><em>The number of equations defining the boundary condition at the lower bound.</em> </p>
-<pre><code class="language-C++">constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmin;
+<pre><code class="language-C++">int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmin;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

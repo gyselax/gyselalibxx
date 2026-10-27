@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -648,7 +654,7 @@
 
 <h3 id="typedef-gridderivativedimension">typedef GridDerivativeDimension</h3>
 <p><em>The type of the grid on the dimension on which the partial derivative is calculated.</em> </p>
-<pre><code class="language-C++">using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::GridDerivativeDimension =  find_grid_t&lt;DerivativeDimension, ddc::to_type_seq_t&lt;IdxRangeFull&gt; &gt;;
+<pre><code class="language-C++">using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::GridDerivativeDimension =  find_grid_t&lt;DerivativeDimension, ddc::to_type_seq_t&lt;IdxRangeFull&gt;&gt;;
 </code></pre>
 <hr>
 

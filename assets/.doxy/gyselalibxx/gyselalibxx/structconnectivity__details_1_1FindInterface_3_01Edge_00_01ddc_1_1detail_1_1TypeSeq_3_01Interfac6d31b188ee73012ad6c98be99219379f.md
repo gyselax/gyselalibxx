@@ -92,7 +92,8 @@ _Specialisation of_ [_**FindInterface**_](structconnectivity__details_1_1FindInt
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::FindInterface< Edge, ddc::detail::TypeSeq< Interface1, RemainingInterfaceTypes... > >::type =  typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...> >::type;
+using connectivity_details::FindInterface< Edge, ddc::detail::TypeSeq< Interface1, RemainingInterfaceTypes... > >::type = 
+            typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::type;
 ```
 
 

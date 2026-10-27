@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="interface__derivative__coefficients__collection_8hpp" kind="file" language="C++">
     <compoundname>interface_derivative_coefficients_collection.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -303,8 +303,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_interface_derivative_coefficients_collection</definition>
+        <type>bool</type>
+        <definition>bool enable_interface_derivative_coefficients_collection</definition>
         <argsstring></argsstring>
         <name>enable_interface_derivative_coefficients_collection</name>
         <initializer>= false</initializer>
@@ -322,8 +322,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_interface_derivative_coefficients_collection_v</definition>
+        <type>bool</type>
+        <definition>bool is_interface_derivative_coefficients_collection_v</definition>
         <argsstring></argsstring>
         <name>is_interface_derivative_coefficients_collection_v</name>
         <initializer>= enable_interface_derivative_coefficients_collection&lt;
@@ -344,8 +344,8 @@
             <defname>DerivCalculatorType</defname>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;</definition>
+        <type>bool</type>
+        <definition>bool enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;</definition>
         <argsstring></argsstring>
         <name>enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;</name>
         <initializer>= true</initializer>
@@ -407,7 +407,7 @@
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Interfaces&gt;</highlight></codeline>
-<codeline lineno="33" refid="classInterfaceDerivCoeffsCollection" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref></highlight></codeline>
+<codeline lineno="33" refid="classInterfaceDerivCoeffsCollection" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInterfaceDerivCoeffsCollection_1a712d41c51e79f3a7d160fac8e3d5ad73" kindref="member">InterfaceDerivCoeffsCollection</ref></highlight></codeline>
 <codeline lineno="34"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivCalculatorTypeSeq<sp/>=<sp/>ddc::detail::TypeSeq&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;...&gt;;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>

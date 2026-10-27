@@ -66,9 +66,9 @@ _A class which evaluates the triangular Bernstein polynomials._ [More...](#detai
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**degree**](#function-degree) () noexcept<br>_The degree of the triangular Bernstein polynomials._  |
-|  constexpr std::size\_t | [**nbasis**](#function-nbasis) () <br>_The number of basis elements._  |
-|  constexpr std::size\_t | [**rank**](#function-rank) () <br>_The rank of the system of equations. This is equal to the number of dimensions in the coordinates on which the polynomials are evaluated._  |
+|  std::size\_t | [**degree**](#function-degree) () noexcept<br>_The degree of the triangular Bernstein polynomials._  |
+|  std::size\_t | [**nbasis**](#function-nbasis) () <br>_The number of basis elements._  |
+|  std::size\_t | [**rank**](#function-rank) () <br>_The rank of the system of equations. This is equal to the number of dimensions in the coordinates on which the polynomials are evaluated._  |
 
 
 
@@ -148,7 +148,7 @@ using TriangularBernsteinPolynomialBasis< X, Y, Corner1Tag, Corner2Tag, Corner3T
 
 _The degree of the triangular Bernstein polynomials._ 
 ```C++
-static inline constexpr std::size_t TriangularBernsteinPolynomialBasis::degree () noexcept
+static inline std::size_t TriangularBernsteinPolynomialBasis::degree () noexcept
 ```
 
 
@@ -173,7 +173,7 @@ The degree of the triangular Bernstein polynomials.
 
 _The number of basis elements._ 
 ```C++
-static inline constexpr std::size_t TriangularBernsteinPolynomialBasis::nbasis () 
+static inline std::size_t TriangularBernsteinPolynomialBasis::nbasis () 
 ```
 
 
@@ -198,7 +198,7 @@ The number of basis elements.
 
 _The rank of the system of equations. This is equal to the number of dimensions in the coordinates on which the polynomials are evaluated._ 
 ```C++
-static inline constexpr std::size_t TriangularBernsteinPolynomialBasis::rank () 
+static inline std::size_t TriangularBernsteinPolynomialBasis::rank () 
 ```
 
 

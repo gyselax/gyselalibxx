@@ -107,8 +107,8 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 |  [**element\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-element_type) const & | [**operator()**](#function-operator_1) (DElem... elems) noexcept const<br>_Get an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  [**DerivFieldMem**](classDerivFieldMem.md) & | [**operator=**](#function-operator_2) ([**DerivFieldMem**](classDerivFieldMem.md) const & other) = delete<br>_Deleted copy operator._  |
 |  [**DerivFieldMem**](classDerivFieldMem.md) & | [**operator=**](#function-operator_3) ([**DerivFieldMem**](classDerivFieldMem.md) && other) = default<br> |
-|  constexpr auto | [**operator[]**](#function-operator_4) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Get a ConstField describing a subset of the data._  |
-|  constexpr auto | [**operator[]**](#function-operator_5) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Get a Field describing a subset of the data._  |
+|  auto | [**operator[]**](#function-operator_4) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Get a ConstField describing a subset of the data._  |
+|  auto | [**operator[]**](#function-operator_5) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Get a Field describing a subset of the data._  |
 |  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_6) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
 |  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_7) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) const<br>_Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
 |   | [**~DerivFieldMem**](#function-derivfieldmem) () <br>_Destructor, responsible to deallocate memory._  |
@@ -335,7 +335,11 @@ using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::phy
 
 _The type of a modifiable span of this field. This is a DDC keyword used to make this class interchangeable with Field._ 
 ```C++
-using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::span_type =  DerivField< ElementType, IdxRange<DDims...>, typename chunk_type::memory_space, typename chunk_type::layout_type>;
+using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::span_type =  DerivField<
+            ElementType,
+            IdxRange<DDims...>,
+            typename chunk_type::memory_space,
+            typename chunk_type::layout_type>;
 ```
 
 
@@ -349,7 +353,11 @@ using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::spa
 
 _The type of a constant view of this field. This is a DDC keyword used to make this class interchangeable with Field._ 
 ```C++
-using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::view_type =  DerivField< ElementType const, IdxRange<DDims...>, typename chunk_type::memory_space, typename chunk_type::layout_type>;
+using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::view_type =  DerivField<
+            ElementType const,
+            IdxRange<DDims...>,
+            typename chunk_type::memory_space,
+            typename chunk_type::layout_type>;
 ```
 
 
@@ -815,7 +823,7 @@ Move-assigns a new value to this field
 _Get a ConstField describing a subset of the data._ 
 ```C++
 template<class... QueryDDims>
-inline constexpr auto DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::operator[] (
+inline auto DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::operator[] (
     Idx< QueryDDims... > const & slice_spec
 ) const
 ```
@@ -850,7 +858,7 @@ ConstField A subset of the data.
 _Get a Field describing a subset of the data._ 
 ```C++
 template<class... QueryDDims>
-inline constexpr auto DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::operator[] (
+inline auto DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::operator[] (
     Idx< QueryDDims... > const & slice_spec
 ) 
 ```

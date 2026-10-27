@@ -40,8 +40,8 @@ _A structure containing the weights and positions associated with a Gauss-Legend
 
 | Type | Name |
 | ---: | :--- |
-|  std::array&lt; long double, NPoints &gt; | [**pos**](#variable-pos)   = `s\_pos&lt;NPoints&gt;`<br>_The positions on the domain [-1,1] where the function should be evaluated._  |
-|  std::array&lt; long double, NPoints &gt; | [**weight**](#variable-weight)   = `s\_weight&lt;NPoints&gt;`<br>_The weights that the function should be multiplied by in the Gauss-Legendre quadrature._  |
+|  std::array&lt; long double, NPoints &gt; | [**pos**](#variable-pos)  <br>_The positions on the domain [-1,1] where the function should be evaluated._  |
+|  std::array&lt; long double, NPoints &gt; | [**weight**](#variable-weight)  <br>_The weights that the function should be multiplied by in the Gauss-Legendre quadrature._  |
 
 
 
@@ -107,7 +107,7 @@ _A structure containing the weights and positions associated with a Gauss-Legend
 
 _The positions on the domain [-1,1] where the function should be evaluated._ 
 ```C++
-std::array< long double, NPoints > GaussLegendreCoefficients< NPoints >::pos;
+std::array<long double, NPoints> GaussLegendreCoefficients< NPoints >::pos;
 ```
 
 
@@ -121,7 +121,7 @@ std::array< long double, NPoints > GaussLegendreCoefficients< NPoints >::pos;
 
 _The weights that the function should be multiplied by in the Gauss-Legendre quadrature._ 
 ```C++
-std::array< long double, NPoints > GaussLegendreCoefficients< NPoints >::weight;
+std::array<long double, NPoints> GaussLegendreCoefficients< NPoints >::weight;
 ```
 
 

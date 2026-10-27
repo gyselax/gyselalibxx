@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="interface__derivative__coefficients_8hpp" kind="file" language="C++">
     <compoundname>interface_derivative_coefficients.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -324,7 +324,7 @@
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InterfaceType&gt;</highlight></codeline>
-<codeline lineno="66" refid="classInterfaceDerivCoeffs" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref></highlight></codeline>
+<codeline lineno="66" refid="classInterfaceDerivCoeffs" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInterfaceDerivCoeffs_1ae5aa159f4327e1038ee64430e516fccf" kindref="member">InterfaceDerivCoeffs</ref></highlight></codeline>
 <codeline lineno="67"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(!std::is_same_v&lt;typename<sp/>InterfaceType::Edge1,<sp/>OutsideEdge&gt;)&amp;&amp;(</highlight></codeline>
@@ -467,7 +467,7 @@
 <codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeB<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_b,</highlight></codeline>
 <codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>Closure1<sp/>=<sp/>ddc::SplineBuilderClosure::HERMITE,</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>Closure2<sp/>=<sp/>ddc::SplineBuilderClosure::HERMITE)</highlight></codeline>
-<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>(</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classInterfaceDerivCoeffs_1ae5aa159f4327e1038ee64430e516fccf" kindref="member">InterfaceDerivCoeffs</ref>(</highlight></codeline>
 <codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange1DPerp_1(idx_range_a,<sp/>idx_range_b),</highlight></codeline>
 <codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange1DPerp_2(idx_range_a,<sp/>idx_range_b),</highlight></codeline>
 <codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Closure1,</highlight></codeline>
@@ -481,7 +481,7 @@
 <codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange1DPerp_1<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_1d_1,</highlight></codeline>
 <codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange1DPerp_2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_1d_2,</highlight></codeline>
 <codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>number_chosen_cells)</highlight></codeline>
-<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>(</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classInterfaceDerivCoeffs_1ae5aa159f4327e1038ee64430e516fccf" kindref="member">InterfaceDerivCoeffs</ref>(</highlight></codeline>
 <codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(m_extremity_1<sp/>==<sp/>Extremity::FRONT)</highlight></codeline>
 <codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>?<sp/>idx_range_1d_1.take_first(IdxStep&lt;EdgePerpGrid1&gt;(</highlight></codeline>
 <codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::min(number_chosen_cells<sp/>+<sp/>1,<sp/>idx_range_1d_1.size())))</highlight></codeline>
@@ -502,7 +502,7 @@
 <codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeA<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_a,</highlight></codeline>
 <codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeB<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_b,</highlight></codeline>
 <codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>number_chosen_cells)</highlight></codeline>
-<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>(</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classInterfaceDerivCoeffs_1ae5aa159f4327e1038ee64430e516fccf" kindref="member">InterfaceDerivCoeffs</ref>(</highlight></codeline>
 <codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange1DPerp_1(idx_range_a,<sp/>idx_range_b),</highlight></codeline>
 <codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange1DPerp_2(idx_range_a,<sp/>idx_range_b),</highlight></codeline>
 <codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>number_chosen_cells)</highlight></codeline>
@@ -682,7 +682,7 @@
 <codeline lineno="552"><highlight class="normal"></highlight></codeline>
 <codeline lineno="553"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>===========================================================================================</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="554"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NON-UNIFORM<sp/>INTERPOLATION<sp/>POINTS<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="555"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>===========================================================================================</highlight></codeline>
+<codeline lineno="555"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>===========================================================================================</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="560"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_coefficients_non_uniform_case()</highlight></codeline>
 <codeline lineno="561"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="562"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Memory<sp/>allocation<sp/>---------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
@@ -1105,7 +1105,7 @@
 <codeline lineno="1010"><highlight class="normal"></highlight></codeline>
 <codeline lineno="1011"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>===========================================================================================</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="1012"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>UNIFORM<sp/>INTERPOLATION<sp/>POINTS<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1013"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>===========================================================================================</highlight></codeline>
+<codeline lineno="1013"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>===========================================================================================</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="1018"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_coefficients_uniform_per_patch_case()</highlight></codeline>
 <codeline lineno="1019"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="1020"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>n_cells_1<sp/>=<sp/>m_idx_range_perp_1.size()<sp/>-<sp/>1;</highlight></codeline>

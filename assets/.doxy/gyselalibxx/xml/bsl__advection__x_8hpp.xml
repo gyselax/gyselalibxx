@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="bsl__advection__x_8hpp" kind="file" language="C++">
     <compoundname>bsl_advection_x.hpp</compoundname>
     <includes local="no">type_traits</includes>
@@ -417,7 +417,7 @@
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_info.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Geometry,<sp/>concepts::Interpolation1D<sp/>FunctionInterpolator,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DataType<sp/>=<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="19" refid="classBslAdvectionSpatial" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBslAdvectionSpatial" kindref="compound">BslAdvectionSpatial</ref></highlight></codeline>
+<codeline lineno="19" refid="classBslAdvectionSpatial" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBslAdvectionSpatial_1ad12ee397dd9411205145448f4d389de2" kindref="member">BslAdvectionSpatial</ref></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt;</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Geometry,</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>interpolation_grid_t&lt;typename<sp/>FunctionInterpolator::BuilderType&gt;,</highlight></codeline>
@@ -428,7 +428,7 @@
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FunctionBuilder<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>FunctionInterpolator::BuilderType;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FunctionEvaluator<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>FunctionInterpolator::EvaluatorType;</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structGridX" kindref="compound">GridX</ref><sp/>=<sp/>interpolation_grid_t&lt;typename<sp/>FunctionInterpolator::BuilderType&gt;;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">GridX<sp/>=<sp/>interpolation_grid_t&lt;typename<sp/>FunctionInterpolator::BuilderType&gt;;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">GridV<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Geometry::template<sp/>velocity_dim_for&lt;GridX&gt;;</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeFdistrib<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Geometry::IdxRangeFdistribu;</highlight></codeline>
@@ -447,7 +447,7 @@
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>FunctionEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_function_evaluator;</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="56" refid="classBslAdvectionSpatial_1ad12ee397dd9411205145448f4d389de2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[deprecated]]<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classBslAdvectionSpatial_1ad12ee397dd9411205145448f4d389de2" kindref="member">BslAdvectionSpatial</ref>(</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>[[deprecated]]<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classBslAdvectionSpatial_1ad12ee397dd9411205145448f4d389de2" kindref="member">BslAdvectionSpatial</ref>(</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FunctionBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>function_builder,</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FunctionEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>function_evaluator)</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_function_builder(function_builder)</highlight></codeline>
@@ -455,7 +455,7 @@
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classBslAdvectionSpatial_1a1bbd4a8ca15c1a9faafd5f97ebac2343" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classBslAdvectionSpatial_1a1bbd4a8ca15c1a9faafd5f97ebac2343" kindref="member">BslAdvectionSpatial</ref>(FunctionInterpolator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>function_interpolator)</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classBslAdvectionSpatial_1ad12ee397dd9411205145448f4d389de2" kindref="member">BslAdvectionSpatial</ref>(FunctionInterpolator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>function_interpolator)</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_function_builder(function_interpolator.get_builder())</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_function_evaluator(function_interpolator.get_evaluator())</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
@@ -463,7 +463,7 @@
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBslAdvectionSpatial" kindref="compound">~BslAdvectionSpatial</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83" refid="classBslAdvectionSpatial_1a5d4c41979f85be049fa4115aebd292f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>Field&lt;DataType,<sp/>IdxRangeFdistrib&gt;<sp/><ref refid="classBslAdvectionSpatial_1a5d4c41979f85be049fa4115aebd292f4" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>Field&lt;DataType,<sp/>IdxRangeFdistrib&gt;<sp/><ref refid="classBslAdvectionSpatial_1a5d4c41979f85be049fa4115aebd292f4" kindref="member">operator()</ref>(</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Field&lt;DataType,<sp/>IdxRangeFdistrib&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>allfdistribu,</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
 <codeline lineno="86"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>

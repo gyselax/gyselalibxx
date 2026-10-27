@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classITimeStepper" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>ITimeStepper</compoundname>
     <includes refid="itimestepper_8hpp" local="no">itimestepper.hpp</includes>
@@ -93,7 +93,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="350" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="350" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" prot="public" static="no">
-        <type>timestepper_detail::reference_t&lt; <ref refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" kindref="member">DerivFieldMem</ref> &gt;</type>
+        <type>timestepper_detail::reference_t&lt; <ref refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" kindref="member">DerivFieldMem</ref><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref> &gt;</type>
         <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivField =  timestepper_detail::reference_t&lt;DerivFieldMem&gt;</definition>
         <argsstring></argsstring>
         <name>DerivField</name>
@@ -108,7 +108,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="353" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="353" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classITimeStepper_1a70082a22831aae26f2f9d4f7bd3b55e2" prot="public" static="no">
-        <type>timestepper_detail::const_reference_t&lt; <ref refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" kindref="member">DerivFieldMem</ref> &gt;</type>
+        <type>timestepper_detail::const_reference_t&lt; <ref refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" kindref="member">DerivFieldMem</ref><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref> &gt;</type>
         <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivConstField =  timestepper_detail::const_reference_t&lt;DerivFieldMem&gt;</definition>
         <argsstring></argsstring>
         <name>DerivConstField</name>
@@ -154,7 +154,7 @@
           <declname>dt</declname>
         </param>
         <param>
-          <type>std::function&lt; void(<ref refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" kindref="member">ValConstField</ref>)&gt;</type>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" kindref="member">DerivField</ref><ref refid="classDerivField" kindref="compound">DerivField</ref>, <ref refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" kindref="member">ValConstField</ref>)&gt;</type>
           <declname>dy_calculator</declname>
         </param>
         <briefdescription>
@@ -212,7 +212,7 @@
           <declname>dt</declname>
         </param>
         <param>
-          <type>std::function&lt; void(<ref refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" kindref="member">ValConstField</ref>)&gt;</type>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" kindref="member">DerivField</ref><ref refid="classDerivField" kindref="compound">DerivField</ref>, <ref refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" kindref="member">ValConstField</ref>)&gt;</type>
           <declname>dy_calculator</declname>
         </param>
         <briefdescription>
@@ -222,7 +222,7 @@
 <para>This function is a wrapper around the update function below. The values of the function are updated using the trivial method $f += df * dt$. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="in">exec_space</parametername>
+<parametername direction="in"><ref refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" kindref="member">exec_space</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The space on which the function is executed (CPU/GPU). </para>
@@ -283,7 +283,7 @@
           <declname>dt</declname>
         </param>
         <param>
-          <type>std::function&lt; void(<ref refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" kindref="member">ValConstField</ref>)&gt;</type>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" kindref="member">DerivField</ref><ref refid="classDerivField" kindref="compound">DerivField</ref>, <ref refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" kindref="member">ValConstField</ref>)&gt;</type>
           <declname>dy_calculator</declname>
         </param>
         <param>
@@ -296,7 +296,7 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="in">exec_space</parametername>
+<parametername direction="in"><ref refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" kindref="member">exec_space</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The space on which the function is executed (CPU/GPU). </para>

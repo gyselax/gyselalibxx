@@ -57,7 +57,7 @@
 | Type | Name |
 | ---: | :--- |
 |  Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; | [**as\_batched\_vector\_view**](#function-as_batched_vector_view) (DField&lt; IdxRange&lt; Dims... &gt; &gt; field) <br>_Get a 2D Kokkos view of a 1D field with N batch dimensions._  |
-|  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, std::tuple&lt; double, [**DVector**](classTensor.md)&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (IdxQuad idx\_quad, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point._  |
+|  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (IdxQuad idx\_quad, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; start\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; end\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; start\_knot\_theta, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; end\_knot\_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the quadrature range between a provided set of knots._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_support\_quadrature**](#function-get_support_quadrature) (Idx&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the range of quadrature points in the support of a tensor product B-spline._  |
 |  KOKKOS\_FUNCTION Idx&lt; DDom &gt; | [**mod\_add**](#function-mod_add) (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx\_step, IdxRange&lt; DDom &gt; idx\_range) <br> |
@@ -139,7 +139,7 @@ A 2D Kokkos view of shape (number of batches, matrix size).
 _Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point._ 
 ```C++
 template<bool calculate_derivs, class PolarBSplinesRTheta, class IdxQuad>
-KOKKOS_FUNCTION std::conditional_t< calculate_derivs, std::tuple< double, DVector < typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual > >, double > detail_poisson::get_polar_bspline_vals_and_derivs (
+KOKKOS_FUNCTION std::conditional_t< calculate_derivs, std::tuple< double, DVector< typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual > >, double > detail_poisson::get_polar_bspline_vals_and_derivs (
     IdxQuad idx_quad,
     Idx< PolarBSplinesRTheta > idx
 ) 

@@ -53,9 +53,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_borrowed\_deriv\_field&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_borrowed_deriv_field-derivfield-elementtype-supporttype-memoryspace-layoutstridedpolicy)   = `true`<br> |
-|  constexpr bool | [**enable\_data\_access\_methods&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_data_access_methods-derivfield-elementtype-supporttype-memoryspace-layoutstridedpolicy)   = `true`<br> |
-|  constexpr bool | [**enable\_deriv\_field&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_deriv_field-derivfield-elementtype-supporttype-memoryspace-layoutstridedpolicy)   = `true`<br> |
+|  bool | [**enable\_borrowed\_deriv\_field&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_borrowed_deriv_field-derivfield-elementtype-supporttype-memoryspace-layoutstridedpolicy)   = `true`<br> |
+|  bool | [**enable\_data\_access\_methods&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_data_access_methods-derivfield-elementtype-supporttype-memoryspace-layoutstridedpolicy)   = `true`<br> |
+|  bool | [**enable\_deriv\_field&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_deriv_field-derivfield-elementtype-supporttype-memoryspace-layoutstridedpolicy)   = `true`<br> |
 
 
 
@@ -123,7 +123,7 @@ using DerivConstField =  DerivField<ElementType const, SupportType, MemorySpace,
 ### variable enable\_borrowed\_deriv\_field&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt; 
 
 ```C++
-constexpr bool enable_borrowed_deriv_field< DerivField< ElementType, SupportType, MemorySpace, LayoutStridedPolicy > >;
+bool enable_borrowed_deriv_field< DerivField< ElementType, SupportType, MemorySpace, LayoutStridedPolicy > >;
 ```
 
 
@@ -136,7 +136,7 @@ constexpr bool enable_borrowed_deriv_field< DerivField< ElementType, SupportType
 ### variable enable\_data\_access\_methods&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt; 
 
 ```C++
-constexpr bool enable_data_access_methods< DerivField< ElementType, SupportType, MemorySpace, LayoutStridedPolicy > >;
+bool enable_data_access_methods< DerivField< ElementType, SupportType, MemorySpace, LayoutStridedPolicy > >;
 ```
 
 
@@ -149,7 +149,7 @@ constexpr bool enable_data_access_methods< DerivField< ElementType, SupportType,
 ### variable enable\_deriv\_field&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt; 
 
 ```C++
-constexpr bool enable_deriv_field< DerivField< ElementType, SupportType, MemorySpace, LayoutStridedPolicy > >;
+bool enable_deriv_field< DerivField< ElementType, SupportType, MemorySpace, LayoutStridedPolicy > >;
 ```
 
 

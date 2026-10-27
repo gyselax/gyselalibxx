@@ -96,7 +96,7 @@ Inherits the following classes: [IBoltzmannSolver](classIBoltzmannSolver.md),  [
 |   | [**SplitVlasovSolver**](#function-splitvlasovsolver-12) ([**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryXVx**](classGeometryXVx.md), [**GridX**](structGridX.md) &gt; const & advec\_x, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryXVx**](classGeometryXVx.md), [**GridVx**](structGridVx.md) &gt; const & advec\_vx) <br>_Creates an instance of the split vlasov solver class._  |
 |   | [**SplitVlasovSolver**](#function-splitvlasovsolver-22) ([**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridX**](structGridX.md), Real &gt; const & advec\_x, [**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridY**](structGridY.md), Real &gt; const & advec\_y, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridVx**](structGridVx.md), Real &gt; const & advec\_vx, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridVy**](structGridVy.md), Real &gt; const & advec\_vy) <br>_Creates an instance of the split vlasov solver class._  |
 | virtual DFieldSpXVx | [**operator()**](#function-operator) (DFieldSpXVx allfdistribu, DConstFieldX electric\_field, double dt) override const<br>_Solves a Vlasov equation on a timestep dt._  |
-| virtual DFieldSpVxVyXY | [**operator()**](#function-operator_1) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) electric\_field, Real dt) override const<br>_Solves a Vlasov equation on a timestep dt._  |
+| virtual DFieldSpVxVyXY | [**operator()**](#function-operator_1) (DFieldSpVxVyXY allfdistribu, DVectorConstFieldXY electric\_field, Real dt) override const<br>_Solves a Vlasov equation on a timestep dt._  |
 |   | [**~SplitVlasovSolver**](#function-splitvlasovsolver-12) () override<br> |
 |   | [**~SplitVlasovSolver**](#function-splitvlasovsolver-12) () override<br> |
 
@@ -117,7 +117,7 @@ See [IVlasovSolver](classIVlasovSolver.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual DFieldSpVxVyXY | [**operator()**](classIVlasovSolver.md#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) efield, Real dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
+| virtual DFieldSpVxVyXY | [**operator()**](classIVlasovSolver.md#function-operator) (DFieldSpVxVyXY allfdistribu, DVectorConstFieldXY efield, Real dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
 | virtual  | [**~IVlasovSolver**](classIVlasovSolver.md#function-ivlasovsolver) () = default<br> |
 
 

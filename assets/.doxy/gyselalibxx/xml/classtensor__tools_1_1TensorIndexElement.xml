@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classtensor__tools_1_1TensorIndexElement" kind="class" language="C++" prot="public">
     <compoundname>tensor_tools::TensorIndexElement</compoundname>
     <templateparamlist>
@@ -13,7 +13,7 @@
       </param>
     </templateparamlist>
     <briefdescription>
-<para>A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element <formula id="185">$ g_{xx} $</formula> would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;. </para>
+<para>A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element <formula id="185">$ g_{xx} $</formula> would have the index <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;</ref>. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="spline__builder__deriv__field__2d_8hpp" kind="file" language="C++">
     <compoundname>spline_builder_deriv_field_2d.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -170,7 +170,7 @@
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure<sp/>SplineBuilderClosure1max,</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure<sp/>SplineBuilderClosure2min,</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure<sp/>SplineBuilderClosure2max&gt;</highlight></codeline>
-<codeline lineno="33" refid="classSplineBuilderDerivField2D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplineBuilderDerivField2D" kindref="compound">SplineBuilderDerivField2D</ref></highlight></codeline>
+<codeline lineno="33" refid="classSplineBuilderDerivField2D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplineBuilderDerivField2D_1a89e24f6d8d056c08a574907de4a621aa" kindref="member">SplineBuilderDerivField2D</ref></highlight></codeline>
 <codeline lineno="34"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MemorySpace<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
@@ -193,7 +193,7 @@
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineSolver::LAPACK&gt;;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineType<sp/>=<sp/>DField&lt;IdxRange&lt;BSplines1,<sp/>BSplines2&gt;,<sp/>MemorySpace&gt;;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classDerivField" kindref="compound">DerivFieldType</ref><sp/>=<sp/><ref refid="classDerivField" kindref="compound">DerivField&lt;double, IdxRange&lt;Deriv1, Grid1, Deriv2, Grid2&gt;</ref>,<sp/>MemorySpace&gt;;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivFieldType<sp/>=<sp/><ref refid="classDerivField" kindref="compound">DerivField&lt;double, IdxRange&lt;Deriv1, Grid1, Deriv2, Grid2&gt;</ref>,<sp/>MemorySpace&gt;;</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FunctFieldMem<sp/>=<sp/>DFieldMem&lt;IdxRange&lt;Grid1,<sp/>Grid2&gt;,<sp/>MemorySpace&gt;;</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FunctField<sp/>=<sp/>DField&lt;IdxRange&lt;Grid1,<sp/>Grid2&gt;,<sp/>MemorySpace&gt;;</highlight></codeline>
@@ -216,7 +216,7 @@
 <codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="84" refid="classSplineBuilderDerivField2D_1a89e24f6d8d056c08a574907de4a621aa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderDerivField2D_1a89e24f6d8d056c08a574907de4a621aa" kindref="member">SplineBuilderDerivField2D</ref>(Builder2D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder)<sp/>:<sp/>m_builder(builder)<sp/>{}</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="classSplineBuilderDerivField2D_1a9dc3d8777f7550df0888c92ac2131983" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderDerivField2D_1a9dc3d8777f7550df0888c92ac2131983" kindref="member">operator()</ref>(SplineType<sp/>spline,<sp/><ref refid="classDerivField" kindref="compound">DerivFieldType</ref><sp/>function_and_derivs)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="93" refid="classSplineBuilderDerivField2D_1a9dc3d8777f7550df0888c92ac2131983" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderDerivField2D_1a9dc3d8777f7550df0888c92ac2131983" kindref="member">operator()</ref>(SplineType<sp/>spline,<sp/>DerivFieldType<sp/>function_and_derivs)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="94"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>that<sp/>the<sp/>DerivField<sp/>contains<sp/>the<sp/>necessary<sp/>derivatives<sp/>for<sp/>the<sp/>builder.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;Deriv1&gt;<sp/>idx_range_d1_min(</highlight></codeline>
@@ -329,7 +329,7 @@
 <codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="204"><highlight class="normal"></highlight></codeline>
 <codeline lineno="205"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="211" refid="classSplineBuilderDerivField2D_1acf6829832655a36412fcd3ef6224a9a6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderDerivField2D_1acf6829832655a36412fcd3ef6224a9a6" kindref="member">fill_in_function</ref>(FunctField<sp/>function,<sp/><ref refid="classDerivField" kindref="compound">DerivFieldType</ref><sp/>function_and_derivs)</highlight></codeline>
+<codeline lineno="211" refid="classSplineBuilderDerivField2D_1acf6829832655a36412fcd3ef6224a9a6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderDerivField2D_1acf6829832655a36412fcd3ef6224a9a6" kindref="member">fill_in_function</ref>(FunctField<sp/>function,<sp/>DerivFieldType<sp/>function_and_derivs)</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Fill<sp/>the<sp/>field<sp/>with<sp/>correct<sp/>layout.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::source_location<sp/>location<sp/>=<sp/>std::source_location::current();</highlight></codeline>
@@ -344,7 +344,7 @@
 <codeline lineno="223"><highlight class="normal"></highlight></codeline>
 <codeline lineno="231" refid="classSplineBuilderDerivField2D_1abc4b77ad43c92bb0e410ccd126e5b5b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderDerivField2D_1abc4b77ad43c92bb0e410ccd126e5b5b4" kindref="member">fill_in_deriv1</ref>(</highlight></codeline>
 <codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Deriv1Field<sp/>deriv1,</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivField" kindref="compound">DerivFieldType</ref><sp/>function_and_derivs,</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DerivFieldType<sp/>function_and_derivs,</highlight></codeline>
 <codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;Grid1&gt;<sp/>idx_slice)</highlight></codeline>
 <codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::source_location<sp/>location<sp/>=<sp/>std::source_location::current();</highlight></codeline>
@@ -359,7 +359,7 @@
 <codeline lineno="245"><highlight class="normal"></highlight></codeline>
 <codeline lineno="253" refid="classSplineBuilderDerivField2D_1a592d5ec017b776081f0918e924ef3172" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderDerivField2D_1a592d5ec017b776081f0918e924ef3172" kindref="member">fill_in_deriv2</ref>(</highlight></codeline>
 <codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Deriv2Field<sp/>deriv2,</highlight></codeline>
-<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivField" kindref="compound">DerivFieldType</ref><sp/>function_and_derivs,</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DerivFieldType<sp/>function_and_derivs,</highlight></codeline>
 <codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;Grid2&gt;<sp/>idx_slice)</highlight></codeline>
 <codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::source_location<sp/>location<sp/>=<sp/>std::source_location::current();</highlight></codeline>
@@ -374,7 +374,7 @@
 <codeline lineno="267"><highlight class="normal"></highlight></codeline>
 <codeline lineno="278" refid="classSplineBuilderDerivField2D_1ae855342c0e4b1f5754fb0c63c1ead80a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderDerivField2D_1ae855342c0e4b1f5754fb0c63c1ead80a" kindref="member">fill_in_cross_deriv</ref>(</highlight></codeline>
 <codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CrossDerivField<sp/>cross_deriv,</highlight></codeline>
-<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivField" kindref="compound">DerivFieldType</ref><sp/>function_and_derivs,</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DerivFieldType<sp/>function_and_derivs,</highlight></codeline>
 <codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;Grid1&gt;<sp/>idx_slice_1,</highlight></codeline>
 <codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;Grid2&gt;<sp/>idx_slice_2)</highlight></codeline>
 <codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>

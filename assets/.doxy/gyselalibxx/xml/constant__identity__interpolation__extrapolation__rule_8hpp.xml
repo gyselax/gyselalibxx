@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="constant__identity__interpolation__extrapolation__rule_8hpp" kind="file" language="C++">
     <compoundname>constant_identity_interpolation_extrapolation_rule.hpp</compoundname>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
@@ -213,7 +213,7 @@
 <codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoeffGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DataType<sp/>=<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="21" refid="classConstantIdentityInterpolationExtrapolationRule" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classConstantIdentityInterpolationExtrapolationRule" kindref="compound">ConstantIdentityInterpolationExtrapolationRule</ref></highlight></codeline>
+<codeline lineno="21" refid="classConstantIdentityInterpolationExtrapolationRule" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classConstantIdentityInterpolationExtrapolationRule_1a236beb3602d3220eabce2135f93172ef" kindref="member">ConstantIdentityInterpolationExtrapolationRule</ref></highlight></codeline>
 <codeline lineno="22"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>Idx&lt;CoeffGrid&gt;<sp/>m_coeff_idx;</highlight></codeline>

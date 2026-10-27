@@ -50,7 +50,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef [**Tensor**](classTensor.md)&lt; double, ValidIndexSet... &gt; | [**DTensor**](#typedef-dtensor)  <br>_A helper type alias to get a tensor containing doubles._  |
-| typedef [**Vector**](classTensor.md)&lt; double, Dims... &gt; | [**DVector**](#typedef-dvector)  <br>_A helper type alias to get a 1D tensor (a vector) of doubles._  |
+| typedef Vector&lt; double, Dims... &gt; | [**DVector**](#typedef-dvector)  <br>_A helper type alias to get a 1D tensor (a vector) of doubles._  |
 | typedef [**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSet&lt; Dims... &gt; &gt; | [**Vector**](#typedef-vector)  <br>_A helper type alias to get a 1D tensor (a vector)._  |
 | typedef typename detail::ToTensor&lt; ElementType, TypeSeqValidIndexSet &gt;::type | [**to\_tensor\_t**](#typedef-to_tensor_t)  <br> |
 
@@ -77,7 +77,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  std::ostream & | [**operator&lt;&lt;**](#function-operator) (std::ostream & o, [**Vector**](classTensor.md)&lt; ElementType, Dim1, TailDims... &gt; vec) <br> |
+|  std::ostream & | [**operator&lt;&lt;**](#function-operator) (std::ostream & o, Vector&lt; ElementType, Dim1, TailDims... &gt; vec) <br> |
 
 
 
@@ -165,7 +165,7 @@ using DVector =  Vector<double, Dims...>;
 
 _A helper type alias to get a 1D tensor (a vector)._ 
 ```C++
-using Vector =  Tensor<ElementType, VectorIndexSet<Dims...> >;
+using Vector =  Tensor<ElementType, VectorIndexSet<Dims...>>;
 ```
 
 
@@ -208,7 +208,7 @@ using to_tensor_t =  typename detail::ToTensor<ElementType, TypeSeqValidIndexSet
 template<class ElementType, class Dim1, class... TailDims>
 std::ostream & operator<< (
     std::ostream & o,
-    Vector < ElementType, Dim1, TailDims... > vec
+    Vector< ElementType, Dim1, TailDims... > vec
 ) 
 ```
 

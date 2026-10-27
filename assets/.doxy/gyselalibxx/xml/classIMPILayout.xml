@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classIMPILayout" kind="class" language="C++" prot="public">
     <compoundname>IMPILayout</compoundname>
+    <derivedcompoundref refid="classMPILayout" prot="public" virt="non-virtual">MPILayout&lt; IdxRangeSpXYVxVy, GridX, GridY &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classMPILayout" prot="public" virt="non-virtual">MPILayout&lt; IdxRangeSpVxVyXY, GridVx, GridVy &gt;</derivedcompoundref>
     <includes refid="impilayout_8hpp" local="no">impilayout.hpp</includes>
     <templateparamlist>
       <param>
@@ -78,8 +80,8 @@
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="classIMPILayout_1ab55757fa0972d849a94feeca30a9f465" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int IMPILayout&lt; IdxRangeData, DistributedDim &gt;::n_distributed_dimensions</definition>
+        <type>int</type>
+        <definition>int IMPILayout&lt; IdxRangeData, DistributedDim &gt;::n_distributed_dimensions</definition>
         <argsstring></argsstring>
         <name>n_distributed_dimensions</name>
         <qualifiedname>IMPILayout::n_distributed_dimensions</qualifiedname>
@@ -94,8 +96,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impilayout.hpp" line="39" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impilayout.hpp" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classIMPILayout_1aab14961802d15d51c8a1a45c7896e64d" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr bool</type>
-        <definition>constexpr bool IMPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_idx_ranges_are_first</definition>
+        <type>bool</type>
+        <definition>bool IMPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_idx_ranges_are_first</definition>
         <argsstring></argsstring>
         <name>distributed_idx_ranges_are_first</name>
         <qualifiedname>IMPILayout::distributed_idx_ranges_are_first</qualifiedname>
@@ -120,7 +122,7 @@
             <defname>I</defname>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
+        <type>bool</type>
         <definition>static constexpr bool IMPILayout&lt; IdxRangeData, DistributedDim &gt;::check_distributed_idx_ranges_are_first</definition>
         <argsstring>(std::integer_sequence&lt; std::size_t, I... &gt;)</argsstring>
         <name>check_distributed_idx_ranges_are_first</name>
@@ -160,6 +162,24 @@
 </parameterlist>
 </para>
     </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>IMPILayout&lt; IdxRangeData, DistributedDim &gt;</label>
+        <link refid="classIMPILayout"/>
+      </node>
+      <node id="3">
+        <label>MPILayout&lt; IdxRangeSpVxVyXY, GridVx, GridVy &gt;</label>
+        <link refid="classMPILayout"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>MPILayout&lt; IdxRangeSpXYVxVy, GridX, GridY &gt;</label>
+        <link refid="classMPILayout"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impilayout.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impilayout.hpp" bodystart="16" bodyend="46"/>
     <listofallmembers>
       <member refid="classIMPILayout_1aa376ad92686fe2a6d0e7d94babbbe944" prot="private" virt="non-virtual"><scope>IMPILayout</scope><name>check_distributed_idx_ranges_are_first</name></member>

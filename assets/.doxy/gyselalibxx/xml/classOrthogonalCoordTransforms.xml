@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classOrthogonalCoordTransforms" kind="class" language="C++" prot="public">
     <compoundname>OrthogonalCoordTransforms</compoundname>
     <includes refid="orthogonal__coord__transforms_8hpp" local="no">orthogonal_coord_transforms.hpp</includes>
@@ -185,7 +185,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/orthogonal_coord_transforms.hpp" line="114" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/orthogonal_coord_transforms.hpp" bodystart="114" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classOrthogonalCoordTransforms_1ae7f0125b08cc1fafa2c70f3c50bd920c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ddc::to_type_seq_t&lt; <ref refid="classOrthogonalCoordTransforms_1afefad21ce2c07c75937aa97df51efe6c" kindref="member">CoordResult</ref> &gt;, get_covariant_dims_t&lt; ddc::to_type_seq_t&lt; <ref refid="classOrthogonalCoordTransforms_1a674712b33e4623a1d12552a4b6b7cc77" kindref="member">CoordArg</ref> &gt; &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; ddc::to_type_seq_t&lt; <ref refid="classOrthogonalCoordTransforms_1afefad21ce2c07c75937aa97df51efe6c" kindref="member">CoordResult</ref> &gt;, get_covariant_dims_t&lt; ddc::to_type_seq_t&lt; <ref refid="classOrthogonalCoordTransforms_1a674712b33e4623a1d12552a4b6b7cc77" kindref="member">CoordArg</ref> &gt; &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; ddc::to_type_seq_t&lt; CoordResult &gt;, get_covariant_dims_t&lt; ddc::to_type_seq_t&lt; CoordArg &gt; &gt; &gt; OrthogonalCoordTransforms&lt; ArgCoord, ResultCoord, JacobianCoord, CoordTransform &gt;::jacobian_matrix</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>

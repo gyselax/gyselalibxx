@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -589,7 +595,7 @@
 <td style="text-align: left;"><a href="#function-deriv"><strong>deriv</strong></a> (Evaluator const &amp; evaluator, <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeEval, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutOut &gt; output, ConstField&lt; CoordType, IdxRangeCoord, MemorySpace, LayoutCoords &gt; coords, ConstField&lt; ElementType, IdxRangeCoeff, MemorySpace, LayoutCoeff &gt; coeffs) <br><em>Compute first-order partial derivatives at explicit coordinates as a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>Vector</strong></a>&lt; ElementType, VectorDims... &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION Vector&lt; ElementType, VectorDims... &gt;</td>
 <td style="text-align: left;"><a href="#function-evaluate"><strong>evaluate</strong></a> (Evaluator const &amp; evaluator, CoordType const &amp; coord, <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt; coeffs) <br><em>Evaluate an ND interpolation at a single coordinate on each component of a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
@@ -662,7 +668,7 @@ void ndEval::deriv (
 <h3 id="function-evaluate">function evaluate</h3>
 <p><em>Evaluate an ND interpolation at a single coordinate on each component of a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">template&lt;concepts::InterpolationEvaluator Evaluator, class CoordType, class ElementType, class IdxRangeCoeff, class MemorySpace, class LayoutCoeff, class... VectorDims&gt;
-KOKKOS_FUNCTION Vector &lt; ElementType, VectorDims... &gt; ndEval::evaluate (
+KOKKOS_FUNCTION Vector&lt; ElementType, VectorDims... &gt; ndEval::evaluate (
     Evaluator const &amp; evaluator,
     CoordType const &amp; coord,
     VectorField &lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt; coeffs

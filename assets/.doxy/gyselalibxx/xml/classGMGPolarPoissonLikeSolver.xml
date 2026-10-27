@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classGMGPolarPoissonLikeSolver" kind="class" language="C++" prot="public">
     <compoundname>GMGPolarPoissonLikeSolver</compoundname>
     <basecompoundref refid="classIPolarPoissonLikeSolver" prot="public" virt="non-virtual">IPolarPoissonLikeSolver&lt; IdxRange&lt; GridR, GridTheta &gt;, IdxRange&lt; GridR, GridTheta &gt; &gt;</basecompoundref>
@@ -174,7 +174,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="176" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="176" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGMGPolarPoissonLikeSolver_1a8862f74158c62522b27f9e801e3a73eb" prot="private" static="no">
-        <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; BuilderType &gt;::coeff_idx_range_type</type>
+        <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; BuilderType &gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::coeff_idx_range_type</ref></type>
         <definition>using GMGPolarPoissonLikeSolver&lt; ToPhysicalMapping, GridR, GridTheta, InterpolatorType &gt;::IdxRangeCoeff =  typename InterpolationBuilderTraits&lt;BuilderType&gt;::coeff_idx_range_type</definition>
         <argsstring></argsstring>
         <name>IdxRangeCoeff</name>
@@ -232,7 +232,7 @@
     </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1a341b29516699e856b3ff18c35b27fd7b" prot="private" static="no" mutable="no">
-        <type><ref refid="classGMGPolarTools_1_1MappingToDomainGeometry" kindref="compound">DomainGeometry</ref> const</type>
+        <type>DomainGeometry const</type>
         <definition>DomainGeometry const GMGPolarPoissonLikeSolver&lt; ToPhysicalMapping, GridR, GridTheta, InterpolatorType &gt;::m_domain_geom</definition>
         <argsstring></argsstring>
         <name>m_domain_geom</name>
@@ -260,7 +260,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="186" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="186" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1a8b7ba4275bfdbcb9349a683c95c8dc97" prot="private" static="no" mutable="no">
-        <type><ref refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients" kindref="compound">DensityCoeffs</ref></type>
+        <type>DensityCoeffs</type>
         <definition>DensityCoeffs GMGPolarPoissonLikeSolver&lt; ToPhysicalMapping, GridR, GridTheta, InterpolatorType &gt;::m_density_coeffs</definition>
         <argsstring></argsstring>
         <name>m_density_coeffs</name>
@@ -358,7 +358,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="194" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="194" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1a35ffc1d238cd81fdaa3663299e029ae9" prot="private" static="no" mutable="no">
-        <type>std::unique_ptr&lt; gmgpolar::GMGPolar&lt; <ref refid="classGMGPolarTools_1_1MappingToDomainGeometry" kindref="compound">DomainGeometry</ref>, <ref refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients" kindref="compound">DensityCoeffs</ref> &gt; &gt;</type>
+        <type>std::unique_ptr&lt; gmgpolar::GMGPolar&lt; DomainGeometry, DensityCoeffs &gt; &gt;</type>
         <definition>std::unique_ptr&lt;gmgpolar::GMGPolar&lt;DomainGeometry, DensityCoeffs&gt; &gt; GMGPolarPoissonLikeSolver&lt; ToPhysicalMapping, GridR, GridTheta, InterpolatorType &gt;::m_solver</definition>
         <argsstring></argsstring>
         <name>m_solver</name>

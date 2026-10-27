@@ -77,7 +77,7 @@
 | typedef FieldR&lt; double &gt; | [**DFieldR**](#typedef-dfieldr)  <br> |
 | typedef FieldRTheta&lt; double &gt; | [**DFieldRTheta**](#typedef-dfieldrtheta)  <br> |
 | typedef FieldTheta&lt; double &gt; | [**DFieldTheta**](#typedef-dfieldtheta)  <br> |
-| typedef [**VectorConstField**](classVectorField.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**DVectorConstFieldRTheta**](#typedef-dvectorconstfieldrtheta)  <br> |
+| typedef VectorConstField&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**DVectorConstFieldRTheta**](#typedef-dvectorconstfieldrtheta)  <br> |
 | typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**DVectorFieldMemRTheta**](#typedef-dvectorfieldmemrtheta)  <br> |
 | typedef [**VectorField**](classVectorField.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**DVectorFieldRTheta**](#typedef-dvectorfieldrtheta)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeR &gt; | [**FieldMemR**](#typedef-fieldmemr)  <br> |
@@ -437,7 +437,7 @@ using DFieldTheta =  FieldTheta<double>;
 ### typedef DVectorConstFieldRTheta 
 
 ```C++
-using DVectorConstFieldRTheta =  VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2> >;
+using DVectorConstFieldRTheta =  VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 ```
 
 
@@ -450,7 +450,7 @@ using DVectorConstFieldRTheta =  VectorConstField<double, IdxRangeRTheta, Vector
 ### typedef DVectorFieldMemRTheta 
 
 ```C++
-using DVectorFieldMemRTheta =  VectorFieldMem<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2> >;
+using DVectorFieldMemRTheta =  VectorFieldMem<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 ```
 
 
@@ -463,7 +463,7 @@ using DVectorFieldMemRTheta =  VectorFieldMem<double, IdxRangeRTheta, VectorInde
 ### typedef DVectorFieldRTheta 
 
 ```C++
-using DVectorFieldRTheta =  VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2> >;
+using DVectorFieldRTheta =  VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 ```
 
 

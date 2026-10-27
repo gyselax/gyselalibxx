@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b" kind="struct" language="C++" prot="public">
     <compoundname>connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;</compoundname>
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
@@ -17,9 +17,11 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b_1a236983aa6398032c45d2a998cfeb4306" prot="public" static="no">
+      <memberdef kind="typedef" id="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b_1a15225bbe033e5b0292fb24e301bfb300" prot="public" static="no">
         <type>ddc::type_seq_merge_t&lt; typename <ref refid="structconnectivity__details_1_1SelectRelevantIdxRangeType" kindref="compound">SelectRelevantIdxRangeType</ref>&lt; QueryGrid1D, IdxRangeHead &gt;::type, typename <ref refid="structconnectivity__details_1_1FindRelevantIdxRangeType" kindref="compound">FindRelevantIdxRangeType</ref>&lt; QueryGrid1D, std::tuple&lt; IdxRangeTypes... &gt; &gt;::type &gt;</type>
-        <definition>using connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;::type =  ddc::type_seq_merge_t&lt; typename SelectRelevantIdxRangeType&lt;QueryGrid1D, IdxRangeHead&gt;::type, typename FindRelevantIdxRangeType&lt;QueryGrid1D, std::tuple&lt;IdxRangeTypes...&gt; &gt;::type&gt;</definition>
+        <definition>using connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;::type =  ddc::type_seq_merge_t&lt;
+            typename SelectRelevantIdxRangeType&lt;QueryGrid1D, IdxRangeHead&gt;::type,
+            typename FindRelevantIdxRangeType&lt;QueryGrid1D, std::tuple&lt;IdxRangeTypes...&gt;&gt;::type&gt;</definition>
         <argsstring></argsstring>
         <name>type</name>
         <qualifiedname>connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;::type</qualifiedname>
@@ -30,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="597" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="599" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="597" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="597" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -40,7 +42,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="594" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="595" bodyend="600"/>
     <listofallmembers>
-      <member refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b_1a236983aa6398032c45d2a998cfeb4306" prot="public" virt="non-virtual"><scope>connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;</scope><name>type</name></member>
+      <member refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b_1a15225bbe033e5b0292fb24e301bfb300" prot="public" virt="non-virtual"><scope>connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;</scope><name>type</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

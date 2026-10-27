@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="conceptconcepts_1_1InterpolationBuilder" kind="concept">
     <compoundname>concepts::InterpolationBuilder</compoundname>
     <includes refid="i__interpolation__builder_8hpp" local="no">i_interpolation_builder.hpp</includes>
@@ -14,17 +14,17 @@ concept <ref refid="conceptconcepts_1_1InterpolationBuilder" kindref="compound">
     typename Builder::exec_space;
     typename Builder::memory_space;
     typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::data_type;
-    typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::interpolation_idx_range_type;
+    typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::interpolation_idx_range_type</ref>;
 }
 &amp;&amp;requires(
         Builder const&amp; b,
         Field&lt;typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::data_type,
               typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::template batched_basis_idx_range_type&lt;
-                      typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::interpolation_idx_range_type&gt;,
+                      typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::interpolation_idx_range_type</ref>&gt;,
               typename Builder::memory_space&gt; coeffs,
         ConstField&lt;
                 typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::data_type,
-                typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::interpolation_idx_range_type,
+                typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::interpolation_idx_range_type</ref>,
                 typename Builder::memory_space&gt; vals)
 {
     {b(coeffs, vals)};
@@ -34,8 +34,8 @@ concept <ref refid="conceptconcepts_1_1InterpolationBuilder" kindref="compound">
     </briefdescription>
     <detaileddescription>
 <para>An interpolation builder is a callable that takes function values on an interpolation mesh and computes the coefficients of an interpolation representation (e.g. spline or Lagrange) of that function. The builder may operate over one or more interpolation dimensions simultaneously (N ≥ 1).</para>
-<para>Type information is accessed through InterpolationBuilderTraits&lt;Builder&gt;, which has a primary template delegating to Builder&apos;s own aliases and can be specialised for external builders (e.g. ddc::SplineBuilder).</para>
-<para>The callable requirement is verified using interpolation_idx_range_type as the representative non-batched domain:<itemizedlist>
+<para>Type information is accessed through <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits&lt;Builder&gt;</ref>, which has a primary template delegating to Builder&apos;s own aliases and can be specialised for external builders (e.g. ddc::SplineBuilder).</para>
+<para>The callable requirement is verified using <ref refid="structInterpolationBuilderTraits" kindref="compound">interpolation_idx_range_type</ref> as the representative non-batched domain:<itemizedlist>
 <listitem><para>b(coeffs, vals) — build interpolation coefficients from function values. </para>
 </listitem></itemizedlist>
 </para>

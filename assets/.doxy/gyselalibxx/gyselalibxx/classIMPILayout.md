@@ -18,6 +18,7 @@ _A super class describing a way in which data may be laid out across MPI process
 
 
 
+Inherited by the following classes: [MPILayout](classMPILayout.md),  [MPILayout](classMPILayout.md)
 
 
 
@@ -47,8 +48,8 @@ _A super class describing a way in which data may be laid out across MPI process
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**distributed\_idx\_ranges\_are\_first**](#variable-distributed_idx_ranges_are_first)   = `/* multi line expression */`<br>_A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory._  |
-|  constexpr int | [**n\_distributed\_dimensions**](#variable-n_distributed_dimensions)   = `sizeof...(DistributedDim)`<br>_The number of dimensions that are distributed across MPI processes._  |
+|  bool | [**distributed\_idx\_ranges\_are\_first**](#variable-distributed_idx_ranges_are_first)   = `/* multi line expression */`<br>_A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory._  |
+|  int | [**n\_distributed\_dimensions**](#variable-n_distributed_dimensions)   = `sizeof...(DistributedDim)`<br>_The number of dimensions that are distributed across MPI processes._  |
 
 
 
@@ -159,7 +160,7 @@ using IMPILayout< IdxRangeData, DistributedDim >::distributed_type_seq =  ddc::d
 
 _A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory._ 
 ```C++
-constexpr bool IMPILayout< IdxRangeData, DistributedDim >::distributed_idx_ranges_are_first;
+bool IMPILayout< IdxRangeData, DistributedDim >::distributed_idx_ranges_are_first;
 ```
 
 
@@ -173,7 +174,7 @@ constexpr bool IMPILayout< IdxRangeData, DistributedDim >::distributed_idx_range
 
 _The number of dimensions that are distributed across MPI processes._ 
 ```C++
-constexpr int IMPILayout< IdxRangeData, DistributedDim >::n_distributed_dimensions;
+int IMPILayout< IdxRangeData, DistributedDim >::n_distributed_dimensions;
 ```
 
 

@@ -1,8 +1,22 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classVectorFieldCommon" kind="class" language="C++" prot="public">
     <compoundname>VectorFieldCommon</compoundname>
-    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; DataType, typename InterpolationEvaluatorTraits&lt; NDEvaluator &gt;::coeff_idx_range_type, ResultBasis, typename NDEvaluator::memory_space &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; double, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; ElementType, SupportType, VectorIndexSetType, NewMemorySpace, Layout &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; X, Y &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorField" prot="public" virt="non-virtual">VectorField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorFieldMem" prot="public" virt="non-virtual">VectorFieldMem&lt; double, IdxRangeType, VectorIndexSetType, MemSpace &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorFieldMem" prot="public" virt="non-virtual">VectorFieldMem&lt; ElementType, SupportType, VectorIndexSetType, NewMemorySpace &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorFieldMem" prot="public" virt="non-virtual">VectorFieldMem&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorFieldMem" prot="public" virt="non-virtual">VectorFieldMem&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorFieldMem" prot="public" virt="non-virtual">VectorFieldMem&lt; double, IdxRangeXY, VectorIndexSet&lt; X, Y &gt;, Kokkos::DefaultExecutionSpace::memory_space &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorFieldMem" prot="public" virt="non-virtual">VectorFieldMem&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; X, Y &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classVectorFieldMem" prot="public" virt="non-virtual">VectorFieldMem&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</derivedcompoundref>
     <templateparamlist>
       <param>
         <type>class FieldType</type>
@@ -16,8 +30,50 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
+      <node id="4">
+        <label>VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right &gt;</label>
+        <link refid="classVectorField"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>VectorField&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; X, Y &gt; &gt;</label>
+        <link refid="classVectorField"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>VectorField&lt; ElementType, SupportType, VectorIndexSetType, NewMemorySpace, Layout &gt;</label>
+        <link refid="classVectorField"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>VectorField&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right &gt;</label>
+        <link refid="classVectorField"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>VectorField&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</label>
+        <link refid="classVectorField"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>VectorField&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</label>
+        <link refid="classVectorField"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="2">
-        <label>VectorField&lt; DataType, typename InterpolationEvaluatorTraits&lt; NDEvaluator &gt;::coeff_idx_range_type, ResultBasis, typename NDEvaluator::memory_space &gt;</label>
+        <label>VectorField&lt; double, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;</label>
+        <link refid="classVectorField"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>VectorField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</label>
         <link refid="classVectorField"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
@@ -25,6 +81,48 @@
       <node id="1">
         <label>VectorFieldCommon&lt; FieldType, NDTypeSeq &gt;</label>
         <link refid="classVectorFieldCommon"/>
+      </node>
+      <node id="15">
+        <label>VectorFieldMem&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; X, Y &gt; &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>VectorFieldMem&lt; ElementType, SupportType, VectorIndexSetType, NewMemorySpace &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>VectorFieldMem&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>VectorFieldMem&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>VectorFieldMem&lt; double, IdxRangeType, VectorIndexSetType, MemSpace &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>VectorFieldMem&lt; double, IdxRangeXY, VectorIndexSet&lt; X, Y &gt;, Kokkos::DefaultExecutionSpace::memory_space &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>VectorFieldMem&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
       </node>
     </inheritancegraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" bodystart="10" bodyend="-1"/>

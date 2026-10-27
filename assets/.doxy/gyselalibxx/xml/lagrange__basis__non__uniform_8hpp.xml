@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="lagrange__basis__non__uniform_8hpp" kind="file" language="C++">
     <compoundname>lagrange_basis_non_uniform.hpp</compoundname>
     <includes local="no">array</includes>
@@ -485,8 +485,8 @@
             <type>class DDim</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_non_uniform_lagrange_basis_v</definition>
+        <type>bool</type>
+        <definition>bool is_non_uniform_lagrange_basis_v</definition>
         <argsstring></argsstring>
         <name>is_non_uniform_lagrange_basis_v</name>
         <initializer>= <ref refid="structis__non__uniform__lagrange__basis" kindref="compound">is_non_uniform_lagrange_basis</ref>&lt;DDim&gt;::value</initializer>
@@ -539,7 +539,7 @@
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54" refid="classNonUniformLagrangeBasis_1affe26bb323f796a6c4aaf3ddfa8629d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classNonUniformLagrangeBasis_1affe26bb323f796a6c4aaf3ddfa8629d6" kindref="member">coord_type</ref><sp/>=<sp/>Coord&lt;Dim&gt;;</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57" refid="classNonUniformLagrangeBasis_1a270f3c91a8bad8ab23a3d9dbdc17330c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classNonUniformLagrangeBasis" kindref="compound">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classNonUniformLagrangeBasis" kindref="compound">NonUniformLagrangeBasis</ref>;</highlight></codeline>
+<codeline lineno="57" refid="classNonUniformLagrangeBasis_1a270f3c91a8bad8ab23a3d9dbdc17330c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classNonUniformLagrangeBasis_1a270f3c91a8bad8ab23a3d9dbdc17330c" kindref="member">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classNonUniformLagrangeBasis" kindref="compound">NonUniformLagrangeBasis</ref>;</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
 <codeline lineno="63" refid="classNonUniformLagrangeBasis_1a0eedacfae3a36f48bb754d45b2f1310d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classNonUniformLagrangeBasis_1a0eedacfae3a36f48bb754d45b2f1310d" kindref="member">degree</ref>()<sp/>noexcept</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
@@ -558,13 +558,13 @@
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight></codeline>
 <codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
-<codeline lineno="93" refid="classNonUniformLagrangeBasis_1_1Impl" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classNonUniformLagrangeBasis_1_1Impl" kindref="compound">Impl</ref></highlight></codeline>
+<codeline lineno="93" refid="classNonUniformLagrangeBasis_1_1Impl" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Impl</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ODDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OMemorySpace&gt;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classNonUniformLagrangeBasis_1_1Impl" kindref="compound">Impl</ref>;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Impl;</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="100" refid="classNonUniformLagrangeBasis_1_1Impl_1a2db4a21f8fa52bcad6adaf930dee5a24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structNonUniformLagrangeKnots" kindref="compound">knot_grid</ref><sp/>=<sp/><ref refid="structNonUniformLagrangeKnots" kindref="compound">NonUniformLagrangeKnots&lt;DDim&gt;</ref>;</highlight></codeline>
+<codeline lineno="100" refid="classNonUniformLagrangeBasis_1_1Impl_1a2db4a21f8fa52bcad6adaf930dee5a24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classNonUniformLagrangeBasis_1_1Impl_1a2db4a21f8fa52bcad6adaf930dee5a24" kindref="member">knot_grid</ref><sp/>=<sp/><ref refid="structNonUniformLagrangeKnots" kindref="compound">NonUniformLagrangeKnots&lt;DDim&gt;</ref>;</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;knot_grid&gt;<sp/>m_knot_domain;</highlight></codeline>
@@ -573,7 +573,7 @@
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;DDim&gt;<sp/>m_reference;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classNonUniformLagrangeBasis_1_1Impl" kindref="compound">Impl</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Impl()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="110"><highlight class="normal"></highlight></codeline>
 <codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D&gt;</highlight></codeline>
 <codeline lineno="117" refid="classNonUniformLagrangeBasis_1_1Impl_1ad1f233299d211a6a076dd12074b10675" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classNonUniformLagrangeBasis_1_1Impl_1ad1f233299d211a6a076dd12074b10675" kindref="member">Impl</ref>(IdxRange&lt;Grid1D&gt;<sp/><ref refid="classNonUniformLagrangeBasis_1_1Impl_1afab457f35ffd170e46a266cdf2536abe" kindref="member">break_point_domain</ref>)</highlight></codeline>
@@ -627,7 +627,7 @@
 <codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="166"><highlight class="normal"></highlight></codeline>
 <codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OriginMemorySpace&gt;</highlight></codeline>
-<codeline lineno="172" refid="classNonUniformLagrangeBasis_1_1Impl_1a243a0e2af970857df060f6c9575f3af7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classNonUniformLagrangeBasis_1_1Impl_1a243a0e2af970857df060f6c9575f3af7" kindref="member">Impl</ref>(<ref refid="classNonUniformLagrangeBasis_1_1Impl" kindref="compound">Impl&lt;DDim, OriginMemorySpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>impl)</highlight></codeline>
+<codeline lineno="172" refid="classNonUniformLagrangeBasis_1_1Impl_1a243a0e2af970857df060f6c9575f3af7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classNonUniformLagrangeBasis_1_1Impl_1a243a0e2af970857df060f6c9575f3af7" kindref="member">Impl</ref>(Impl&lt;DDim,<sp/>OriginMemorySpace&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>impl)</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_knot_domain(impl.m_knot_domain)</highlight></codeline>
 <codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_break_point_domain(impl.m_break_point_domain)</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_reference(impl.m_reference)</highlight></codeline>

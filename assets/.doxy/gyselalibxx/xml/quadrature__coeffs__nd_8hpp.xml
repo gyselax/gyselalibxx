@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="quadrature__coeffs__nd_8hpp" kind="file" language="C++">
     <compoundname>quadrature_coeffs_nd.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -191,8 +191,8 @@
 <para>File providing helper functions for defining multi-dimensional quadrature methods. </para>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight></codeline>
-<codeline lineno="6"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>

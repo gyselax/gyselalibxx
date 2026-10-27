@@ -36,7 +36,7 @@ _Represent a simple interface where two edges intersect._ [More...](#detailed-de
 | ---: | :--- |
 | typedef Edge1Type | [**Edge1**](#typedef-edge1)  <br>[_**Edge**_](structEdge.md) _type of the first patch._ |
 | typedef Edge2Type | [**Edge2**](#typedef-edge2)  <br>[_**Edge**_](structEdge.md) _type of the second patch._ |
-| typedef std::conditional\_t&lt; std::is\_same\_v&lt; [**Edge**](structEdge.md), [**Edge1**](structInterface.md#typedef-edge1) &gt;, [**Edge2**](structInterface.md#typedef-edge2), [**Edge1**](structInterface.md#typedef-edge1) &gt; | [**OtherEdge**](#typedef-otheredge)  <br>_A tool to get the other edge of an interface. I.e. to get Edge1 given Edge2 or Edge2 given Edge1._  |
+| typedef std::conditional\_t&lt; std::is\_same\_v&lt; [**Edge**](structEdge.md), [**Edge1**](structInterface.md#typedef-edge1) &gt;, [**Edge2**](structInterface.md#typedef-edge2), [**Edge1**](structInterface.md#typedef-edge1) &gt; | [**OtherEdge**](#typedef-otheredge)  <br>_A tool to get the other edge of an interface. I.e. to get_ [_**Edge1**_](structInterface.md#typedef-edge1) _given_[_**Edge2**_](structInterface.md#typedef-edge2) _or_[_**Edge2**_](structInterface.md#typedef-edge2) _given_[_**Edge1**_](structInterface.md#typedef-edge1) _._ |
 
 
 
@@ -47,7 +47,7 @@ _Represent a simple interface where two edges intersect._ [More...](#detailed-de
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**orientations\_agree**](#variable-orientations_agree)   = `orientations\_agree\_bool`<br>_Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See_ [_**EdgeTransformation**_](classEdgeTransformation.md) _)._ |
+|  bool | [**orientations\_agree**](#variable-orientations_agree)   = `orientations\_agree\_bool`<br>_Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See_ [_**EdgeTransformation**_](classEdgeTransformation.md) _)._ |
 
 
 
@@ -68,7 +68,7 @@ _Represent a simple interface where two edges intersect._ [More...](#detailed-de
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**connected\_to\_patch**](#function-connected_to_patch) () <br>_A compile-time function to check if an interface is on the edge of a given patch._  |
+|  bool | [**connected\_to\_patch**](#function-connected_to_patch) () <br>_A compile-time function to check if an interface is on the edge of a given patch._  |
 
 
 
@@ -149,7 +149,7 @@ using Interface< Edge1Type, Edge2Type, orientations_agree_bool >::Edge2 =  Edge2
 
 ### typedef OtherEdge 
 
-_A tool to get the other edge of an interface. I.e. to get Edge1 given Edge2 or Edge2 given Edge1._ 
+_A tool to get the other edge of an interface. I.e. to get_ [_**Edge1**_](structInterface.md#typedef-edge1) _given_[_**Edge2**_](structInterface.md#typedef-edge2) _or_[_**Edge2**_](structInterface.md#typedef-edge2) _given_[_**Edge1**_](structInterface.md#typedef-edge1) _._
 ```C++
 using Interface< Edge1Type, Edge2Type, orientations_agree_bool >::OtherEdge =  std::conditional_t<std::is_same_v<Edge, Edge1>, Edge2, Edge1>;
 ```
@@ -167,7 +167,7 @@ using Interface< Edge1Type, Edge2Type, orientations_agree_bool >::OtherEdge =  s
 
 _Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See_ [_**EdgeTransformation**_](classEdgeTransformation.md) _)._
 ```C++
-constexpr bool Interface< Edge1Type, Edge2Type, orientations_agree_bool >::orientations_agree;
+bool Interface< Edge1Type, Edge2Type, orientations_agree_bool >::orientations_agree;
 ```
 
 
@@ -184,7 +184,7 @@ constexpr bool Interface< Edge1Type, Edge2Type, orientations_agree_bool >::orien
 _A compile-time function to check if an interface is on the edge of a given patch._ 
 ```C++
 template<class Patch>
-static inline constexpr bool Interface::connected_to_patch () 
+static inline bool Interface::connected_to_patch () 
 ```
 
 

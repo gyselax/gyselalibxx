@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -648,7 +654,9 @@
 
 <h3 id="typedef-find_connections_t">typedef find_connections_t</h3>
 <p><em>A tool to find all interfaces linking 2 patches.</em> </p>
-<pre><code class="language-C++">using MultipatchConnectivity&lt; Interfaces &gt;::find_connections_t =  ddcHelper::type_seq_intersection_t&lt; get_type_seq_connections_t&lt;QueryPatch1&gt;, get_type_seq_connections_t&lt;QueryPatch2&gt; &gt;;
+<pre><code class="language-C++">using MultipatchConnectivity&lt; Interfaces &gt;::find_connections_t =  ddcHelper::type_seq_intersection_t&lt;
+            get_type_seq_connections_t&lt;QueryPatch1&gt;,
+            get_type_seq_connections_t&lt;QueryPatch2&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -659,7 +667,10 @@
 
 <h3 id="typedef-get_all_interfaces_along_direction_t">typedef get_all_interfaces_along_direction_t</h3>
 <p><em>A tool to find all interfaces along a line which passes through the requested grid.</em> </p>
-<pre><code class="language-C++">using MultipatchConnectivity&lt; Interfaces &gt;::get_all_interfaces_along_direction_t =  collect_interfaces_on_dim_t&lt; find_patch_t&lt;Grid1D, all_patches&gt;, Grid1D, interface_collection&gt;;
+<pre><code class="language-C++">using MultipatchConnectivity&lt; Interfaces &gt;::get_all_interfaces_along_direction_t =  collect_interfaces_on_dim_t&lt;
+            find_patch_t&lt;Grid1D, all_patches&gt;,
+            Grid1D,
+            interface_collection&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -669,7 +680,7 @@
 
 <h3 id="typedef-get_connections_t">typedef get_connections_t</h3>
 <p><em>A tool to find a tuple of all interfaces of a patch.</em> </p>
-<pre><code class="language-C++">using MultipatchConnectivity&lt; Interfaces &gt;::get_connections_t =  to_tuple_t&lt;get_type_seq_connections_t&lt;QueryPatch&gt; &gt;;
+<pre><code class="language-C++">using MultipatchConnectivity&lt; Interfaces &gt;::get_connections_t =  to_tuple_t&lt;get_type_seq_connections_t&lt;QueryPatch&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a" kind="struct" language="C++" prot="private">
     <compoundname>RefinedDiscretePoloidalCSSplineMappingBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;</compoundname>
     <templateparamlist>
@@ -30,9 +30,20 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a_1a817bf1301ea00e1098e26e0d984f9524" prot="public" static="no">
+      <memberdef kind="typedef" id="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a_1ae1d231e419d853d4cf32f5d519a77a64" prot="public" static="no">
         <type>ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined" kindref="compound">BSplinesRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined" kindref="compound">BSplinesThetaRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref>, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt;</type>
-        <definition>using RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator, ncells_r, ncells_theta &gt;::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;::type =  ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesRRefined, BSplinesThetaRefined, GridRRefined, GridThetaRefined, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver&gt;</definition>
+        <definition>using RefinedDiscretePoloidalCSSplineMappingBuilder&lt; X, Y, Interpolator, ncells_r, ncells_theta &gt;::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;::type =  ddc::SplineBuilder2D&lt;
+                ExecSpace,
+                MemorySpace,
+                BSplinesRRefined,
+                BSplinesThetaRefined,
+                GridRRefined,
+                GridThetaRefined,
+                SBCLower1,
+                SBCUpper1,
+                SBCLower2,
+                SBCUpper2,
+                Solver&gt;</definition>
         <argsstring></argsstring>
         <name>type</name>
         <qualifiedname>RefinedDiscretePoloidalCSSplineMappingBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;::type</qualifiedname>
@@ -42,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="255" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="266" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="255" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="255" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -51,7 +62,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" line="242" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp" bodystart="254" bodyend="267"/>
     <listofallmembers>
-      <member refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a_1a817bf1301ea00e1098e26e0d984f9524" prot="public" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;</scope><name>type</name></member>
+      <member refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a_1ae1d231e419d853d4cf32f5d519a77a64" prot="public" virt="non-virtual"><scope>RefinedDiscretePoloidalCSSplineMappingBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;</scope><name>type</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

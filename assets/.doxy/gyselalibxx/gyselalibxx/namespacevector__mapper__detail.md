@@ -49,11 +49,11 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**are\_contravariant\_v**](#variable-are_contravariant_v)   = `/* multi line expression */`<br>_True if both vector spaces are contravariant._  |
-|  constexpr bool | [**is\_arg\_to\_result\_v**](#variable-is_arg_to_result_v)   = `/* multi line expression */`<br>_True if the vector is mapped from the argument basis of the mapping to its result basis._  |
-|  constexpr bool | [**is\_coordinate\_change\_only\_v**](#variable-is_coordinate_change_only_v)   = `/* multi line expression */`<br>_True if the vector spaces are associated with different coordinate systems and have the same variance._  |
-|  constexpr bool | [**is\_result\_to\_arg\_v**](#variable-is_result_to_arg_v)   = `/* multi line expression */`<br>_True if the vector is mapped from the result basis of the mapping to its argument basis._  |
-|  constexpr bool | [**is\_variance\_change\_only\_v**](#variable-is_variance_change_only_v)   = `/* multi line expression */`<br>_True if the vector spaces are the co/contra variant bases associated with the same coordinate system._  |
+|  bool | [**are\_contravariant\_v**](#variable-are_contravariant_v)   = `/* multi line expression */`<br>_True if both vector spaces are contravariant._  |
+|  bool | [**is\_arg\_to\_result\_v**](#variable-is_arg_to_result_v)   = `/* multi line expression */`<br>_True if the vector is mapped from the argument basis of the mapping to its result basis._  |
+|  bool | [**is\_coordinate\_change\_only\_v**](#variable-is_coordinate_change_only_v)   = `/* multi line expression */`<br>_True if the vector spaces are associated with different coordinate systems and have the same variance._  |
+|  bool | [**is\_result\_to\_arg\_v**](#variable-is_result_to_arg_v)   = `/* multi line expression */`<br>_True if the vector is mapped from the result basis of the mapping to its argument basis._  |
+|  bool | [**is\_variance\_change\_only\_v**](#variable-is_variance_change_only_v)   = `/* multi line expression */`<br>_True if the vector spaces are the co/contra variant bases associated with the same coordinate system._  |
 
 
 
@@ -105,7 +105,7 @@
 
 _The type of the coordinate at which a mapping or a metric tensor is evaluated._ 
 ```C++
-using vector_mapper_detail::evaluation_coord_t = typedef typename EvaluationCoord<MappingOrMetric>::type;
+using vector_mapper_detail::evaluation_coord_t =  typename EvaluationCoord<MappingOrMetric>::type;
 ```
 
 
@@ -121,7 +121,7 @@ using vector_mapper_detail::evaluation_coord_t = typedef typename EvaluationCoor
 
 _True if both vector spaces are contravariant._ 
 ```C++
-constexpr bool vector_mapper_detail::are_contravariant_v;
+bool vector_mapper_detail::are_contravariant_v;
 ```
 
 
@@ -135,7 +135,7 @@ constexpr bool vector_mapper_detail::are_contravariant_v;
 
 _True if the vector is mapped from the argument basis of the mapping to its result basis._ 
 ```C++
-constexpr bool vector_mapper_detail::is_arg_to_result_v;
+bool vector_mapper_detail::is_arg_to_result_v;
 ```
 
 
@@ -149,7 +149,7 @@ constexpr bool vector_mapper_detail::is_arg_to_result_v;
 
 _True if the vector spaces are associated with different coordinate systems and have the same variance._ 
 ```C++
-constexpr bool vector_mapper_detail::is_coordinate_change_only_v;
+bool vector_mapper_detail::is_coordinate_change_only_v;
 ```
 
 
@@ -163,7 +163,7 @@ constexpr bool vector_mapper_detail::is_coordinate_change_only_v;
 
 _True if the vector is mapped from the result basis of the mapping to its argument basis._ 
 ```C++
-constexpr bool vector_mapper_detail::is_result_to_arg_v;
+bool vector_mapper_detail::is_result_to_arg_v;
 ```
 
 
@@ -177,7 +177,7 @@ constexpr bool vector_mapper_detail::is_result_to_arg_v;
 
 _True if the vector spaces are the co/contra variant bases associated with the same coordinate system._ 
 ```C++
-constexpr bool vector_mapper_detail::is_variance_change_only_v;
+bool vector_mapper_detail::is_variance_change_only_v;
 ```
 
 

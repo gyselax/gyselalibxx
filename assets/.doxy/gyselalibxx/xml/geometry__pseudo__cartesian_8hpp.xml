@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometry__pseudo__cartesian_8hpp" kind="file" language="C++">
     <compoundname>geometry_pseudo_cartesian.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -146,7 +146,7 @@
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24" refid="structX__pC_1a8576602fe7c14f6940877518ca6c80e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX__pC_1a8576602fe7c14f6940877518ca6c80e8" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27" refid="structX__pC_1abed64025e8d38764331cf6d02e1e3051" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX__pC" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structX__pC" kindref="compound">X_pC</ref>;</highlight></codeline>
+<codeline lineno="27" refid="structX__pC_1abed64025e8d38764331cf6d02e1e3051" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX__pC_1abed64025e8d38764331cf6d02e1e3051" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structX__pC" kindref="compound">X_pC</ref>;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="34" refid="structY__pC" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structY__pC" kindref="compound">Y_pC</ref></highlight></codeline>
@@ -157,7 +157,7 @@
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
 <codeline lineno="46" refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49" refid="structY__pC_1aeabc43c1347d9a7b0f4ecd8ba69132b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY__pC" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structY__pC" kindref="compound">Y_pC</ref>;</highlight></codeline>
+<codeline lineno="49" refid="structY__pC_1aeabc43c1347d9a7b0f4ecd8ba69132b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY__pC_1aeabc43c1347d9a7b0f4ecd8ba69132b0" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structY__pC" kindref="compound">Y_pC</ref>;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordX_pC<sp/>=<sp/>Coord&lt;X_pC&gt;;</highlight></codeline>

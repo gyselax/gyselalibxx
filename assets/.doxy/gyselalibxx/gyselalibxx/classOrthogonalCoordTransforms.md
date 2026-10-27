@@ -65,7 +65,7 @@ _A multi-dimensional coordinate transformation which can be decomposed into mult
 |  KOKKOS\_INLINE\_FUNCTION auto | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordJacobian**](classOrthogonalCoordTransforms.md#typedef-coordjacobian) const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordArg**](classOrthogonalCoordTransforms.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; ddc::to\_type\_seq\_t&lt; [**CoordResult**](classOrthogonalCoordTransforms.md#typedef-coordresult) &gt;, get\_covariant\_dims\_t&lt; ddc::to\_type\_seq\_t&lt; [**CoordArg**](classOrthogonalCoordTransforms.md#typedef-coordarg) &gt; &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classOrthogonalCoordTransforms.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; ddc::to\_type\_seq\_t&lt; [**CoordResult**](classOrthogonalCoordTransforms.md#typedef-coordresult) &gt;, get\_covariant\_dims\_t&lt; ddc::to\_type\_seq\_t&lt; [**CoordArg**](classOrthogonalCoordTransforms.md#typedef-coordarg) &gt; &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classOrthogonalCoordTransforms.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**CoordResult**](classOrthogonalCoordTransforms.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classOrthogonalCoordTransforms.md#typedef-coordarg) const & coord) const<br>_Convert the coordinate to the output coordinate system._  |
 |  KOKKOS\_INLINE\_FUNCTION auto | [**operator()**](#function-operator_1) (CoordType const & coord) const<br>_Convert a subset of coordinates to the corresponding subset of the output coordinate system._  |
 
@@ -293,7 +293,7 @@ A double with the value of the (i,j) coefficient of the Jacobian matrix.
 
 _Compute full Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < ddc::to_type_seq_t< CoordResult >, get_covariant_dims_t< ddc::to_type_seq_t< CoordArg > > > OrthogonalCoordTransforms::jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< ddc::to_type_seq_t< CoordResult >, get_covariant_dims_t< ddc::to_type_seq_t< CoordArg > > > OrthogonalCoordTransforms::jacobian_matrix (
     CoordArg const & coord
 ) const
 ```

@@ -40,7 +40,7 @@ _A helper structure to check if all the dimensions in a VectorIndexSet can repre
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**value**](#variable-value)   = `(Dims::IS\_CONTRAVARIANT && ...)`<br>_Compile-time boolean indicating if the vector indices are contravariant._  |
+|  bool | [**value**](#variable-value)   = `(Dims::IS\_CONTRAVARIANT && ...)`<br>_Compile-time boolean indicating if the vector indices are contravariant._  |
 
 
 
@@ -92,7 +92,7 @@ _A helper structure to check if all the dimensions in a VectorIndexSet can repre
 
 _Compile-time boolean indicating if the vector indices are contravariant._ 
 ```C++
-constexpr bool tensor_tools::is_contravariant_vector_index_set< VectorIndexSet< Dims... > >::value;
+bool tensor_tools::is_contravariant_vector_index_set< VectorIndexSet< Dims... > >::value;
 ```
 
 

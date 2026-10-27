@@ -146,7 +146,7 @@ using IPartialDerivative< IdxRangeFull, DerivativeDimension >::DFieldType =  DFi
 
 _The type of the grid on the dimension on which the partial derivative is calculated._ 
 ```C++
-using IPartialDerivative< IdxRangeFull, DerivativeDimension >::GridDerivativeDimension =  find_grid_t<DerivativeDimension, ddc::to_type_seq_t<IdxRangeFull> >;
+using IPartialDerivative< IdxRangeFull, DerivativeDimension >::GridDerivativeDimension =  find_grid_t<DerivativeDimension, ddc::to_type_seq_t<IdxRangeFull>>;
 ```
 
 

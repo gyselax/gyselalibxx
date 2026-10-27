@@ -38,7 +38,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) &lt;class ExecSpace, class MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, class ExtrapolationRule, ValuesOnPatch, class PatchLocator, Patches&gt;<br>_A class to evaluate all the splines of all the patches at once._  |
+| class | [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) &lt;class ExecSpace, class MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, class [**ExtrapolationRule**](namespaceExtrapolationRule.md), ValuesOnPatch, class PatchLocator, Patches&gt;<br>_A class to evaluate all the splines of all the patches at once._  |
 
 
 

@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -621,7 +627,7 @@
 <td style="text-align: left;"><a href="#function-inv_jacobian_component"><strong>inv_jacobian_component</strong></a> (<a href="classIdentityCoordinateChange.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the (i,j) coefficient of the Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; ResultBasis, ArgBasisCov &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt;</td>
 <td style="text-align: left;"><a href="#function-inv_jacobian_matrix"><strong>inv_jacobian_matrix</strong></a> (<a href="classIdentityCoordinateChange.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
 </tr>
 <tr>
@@ -633,7 +639,7 @@
 <td style="text-align: left;"><a href="#function-jacobian_component"><strong>jacobian_component</strong></a> (<a href="classIdentityCoordinateChange.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the (i,j) coefficient of the Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; ResultBasis, ArgBasisCov &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt;</td>
 <td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (<a href="classIdentityCoordinateChange.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
 </tr>
 <tr>
@@ -707,7 +713,7 @@ inline KOKKOS_INLINE_FUNCTION double IdentityCoordinateChange::inv_jacobian_comp
 
 <h3 id="function-inv_jacobian_matrix">function inv_jacobian_matrix</h3>
 <p><em>Compute full Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; ResultBasis, ArgBasisCov &gt; IdentityCoordinateChange::inv_jacobian_matrix (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt; IdentityCoordinateChange::inv_jacobian_matrix (
     CoordArg const &amp; coord
 ) const
 </code></pre>
@@ -750,7 +756,7 @@ inline KOKKOS_INLINE_FUNCTION double IdentityCoordinateChange::jacobian_componen
 
 <h3 id="function-jacobian_matrix">function jacobian_matrix</h3>
 <p><em>Compute full Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; ResultBasis, ArgBasisCov &gt; IdentityCoordinateChange::jacobian_matrix (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt; IdentityCoordinateChange::jacobian_matrix (
     CoordArg const &amp; coord
 ) const
 </code></pre>

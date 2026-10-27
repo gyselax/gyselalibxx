@@ -34,7 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef detail::MultipatchType&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchType**](#typedef-multipatchtype)  <br>_A class to store several objects that are of a type which is templated by the patch._  |
+| typedef detail:: MultipatchType&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchType**](#typedef-multipatchtype)  <br>_A class to store several objects that are of a type which is templated by the patch._  |
 
 
 
@@ -43,8 +43,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_multipatch\_type**](#variable-enable_multipatch_type)   = `false`<br> |
-|  constexpr bool | [**is\_multipatch\_type\_v**](#variable-is_multipatch_type_v)   = `enable\_multipatch\_type&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
+|  bool | [**enable\_multipatch\_type**](#variable-enable_multipatch_type)   = `false`<br> |
+|  bool | [**is\_multipatch\_type\_v**](#variable-is_multipatch_type_v)   = `enable\_multipatch\_type&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 
@@ -98,7 +98,8 @@
 
 _A class to store several objects that are of a type which is templated by the patch._ 
 ```C++
-using MultipatchType =  detail:: MultipatchType<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...> >;
+using MultipatchType =  detail::
+        MultipatchType<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
 ```
 
 
@@ -128,7 +129,7 @@ See detail::MultipatchType for more details. This alias creates the type T&lt;Pa
 ### variable enable\_multipatch\_type 
 
 ```C++
-constexpr bool enable_multipatch_type;
+bool enable_multipatch_type;
 ```
 
 
@@ -141,7 +142,7 @@ constexpr bool enable_multipatch_type;
 ### variable is\_multipatch\_type\_v 
 
 ```C++
-constexpr bool is_multipatch_type_v;
+bool is_multipatch_type_v;
 ```
 
 

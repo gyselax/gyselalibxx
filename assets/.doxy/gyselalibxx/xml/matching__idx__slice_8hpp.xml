@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="matching__idx__slice_8hpp" kind="file" language="C++">
     <compoundname>matching_idx_slice.hpp</compoundname>
     <includes local="no">numeric</includes>
@@ -141,7 +141,7 @@
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;edge_transformation.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Interface&gt;</highlight></codeline>
-<codeline lineno="37" refid="classMatchingIdxSlice" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMatchingIdxSlice" kindref="compound">MatchingIdxSlice</ref></highlight></codeline>
+<codeline lineno="37" refid="classMatchingIdxSlice" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMatchingIdxSlice_1ab6481837fb8af1581fac27689fcdc488" kindref="member">MatchingIdxSlice</ref></highlight></codeline>
 <codeline lineno="38"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(!std::is_same_v&lt;typename<sp/>Interface::Edge1,<sp/>OutsideEdge&gt;)&amp;&amp;(</highlight></codeline>
@@ -176,7 +176,7 @@
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSlice2<sp/>m_conforming_idx_2;</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatchingIdxSlice" kindref="compound">~MatchingIdxSlice</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatchingIdxSlice_1ab6481837fb8af1581fac27689fcdc488" kindref="member">~MatchingIdxSlice</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight></codeline>
 <codeline lineno="89" refid="classMatchingIdxSlice_1ab6481837fb8af1581fac27689fcdc488" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatchingIdxSlice_1ab6481837fb8af1581fac27689fcdc488" kindref="member">MatchingIdxSlice</ref>(IdxRange1D_1<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_1,<sp/>IdxRange1D_2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_2)</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_idx_range_edge_1(idx_range_1)</highlight></codeline>
@@ -193,7 +193,7 @@
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
 <codeline lineno="102"><highlight class="normal"></highlight></codeline>
 <codeline lineno="118" refid="classMatchingIdxSlice_1a4d9de778afd3499b8d59c00d506b5d66" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatchingIdxSlice_1a4d9de778afd3499b8d59c00d506b5d66" kindref="member">MatchingIdxSlice</ref>(IdxRange2D_1<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_1,<sp/>IdxRange2D_2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range_2)</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatchingIdxSlice" kindref="compound">MatchingIdxSlice</ref>(ddc::select&lt;EdgeGrid1&gt;(idx_range_1),<sp/>ddc::select&lt;EdgeGrid2&gt;(idx_range_2))</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatchingIdxSlice_1ab6481837fb8af1581fac27689fcdc488" kindref="member">MatchingIdxSlice</ref>(ddc::select&lt;EdgeGrid1&gt;(idx_range_1),<sp/>ddc::select&lt;EdgeGrid2&gt;(idx_range_2))</highlight></codeline>
 <codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>

@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -586,7 +592,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef ddc::type_seq_merge_t&lt; typename <a href="structconnectivity__details_1_1PatchConnection.html"><strong>PatchConnection</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a>, ddc::detail::TypeSeq&lt; InterfaceType1 &gt; &gt;::type, typename <a href="structconnectivity__details_1_1PatchConnection.html"><strong>PatchConnection</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a>, ddc::detail::TypeSeq&lt; RemainingInterfaceTypes... &gt; &gt;::type &gt;</td>
+<td style="text-align: right;">typedef ddc::type_seq_merge_t&lt; typename <a href="structconnectivity__details_1_1PatchConnection.html"><strong>PatchConnection</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a>, ddc::detail::TypeSeq&lt; InterfaceType1 &gt; &gt;::type, typename <a href="structconnectivity__details_1_1PatchConnection.html"><strong>PatchConnection</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a>, ddc::detail::TypeSeq&lt; RemainingInterfaceTypes... &gt; &gt;:: <a href="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01Interd9a0a5e7aafe0b71fe7c76720b7c5da6.html#typedef-type"><strong>type</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The type found by the class.</em></td>
 </tr>
 </tbody>
@@ -594,7 +600,10 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType1, RemainingInterfaceTypes... &gt; &gt;::type =  ddc::type_seq_merge_t&lt; typename PatchConnection&lt;Patch, ddc::detail::TypeSeq&lt;InterfaceType1&gt; &gt;::type, typename PatchConnection&lt;Patch, ddc::detail::TypeSeq&lt;RemainingInterfaceTypes...&gt; &gt;:: type&gt;;
+<pre><code class="language-C++">using connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType1, RemainingInterfaceTypes... &gt; &gt;::type =  ddc::type_seq_merge_t&lt;
+            typename PatchConnection&lt;Patch, ddc::detail::TypeSeq&lt;InterfaceType1&gt;&gt;::type,
+            typename PatchConnection&lt;Patch, ddc::detail::TypeSeq&lt;RemainingInterfaceTypes...&gt;&gt;::
+                    type&gt;;
 </code></pre>
 <hr>
 

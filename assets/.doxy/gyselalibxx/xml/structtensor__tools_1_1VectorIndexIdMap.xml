@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structtensor__tools_1_1VectorIndexIdMap" kind="struct" language="C++" prot="public">
     <compoundname>tensor_tools::VectorIndexIdMap</compoundname>
     <includes refid="vector__index__tools_8hpp" local="no">vector_index_tools.hpp</includes>
@@ -32,8 +32,8 @@
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="structtensor__tools_1_1VectorIndexIdMap_1a413bb8e930c9dbaa44463d5736d6e366" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr char</type>
-        <definition>constexpr char tensor_tools::VectorIndexIdMap&lt; Id, AssociatedVectorIndexSet &gt;::id</definition>
+        <type>char</type>
+        <definition>char tensor_tools::VectorIndexIdMap&lt; Id, AssociatedVectorIndexSet &gt;::id</definition>
         <argsstring></argsstring>
         <name>id</name>
         <qualifiedname>tensor_tools::VectorIndexIdMap::id</qualifiedname>

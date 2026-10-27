@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classPolarBSplines" kind="class" language="C++" prot="public">
     <compoundname>PolarBSplines</compoundname>
     <includes refid="polar__bsplines_8hpp" local="no">polar_bsplines.hpp</includes>
@@ -218,7 +218,7 @@
     </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="classPolarBSplines_1a9254ee09fe5fce248ae80efac56c82c3" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>constexpr std::size_t</type>
+        <type>std::size_t</type>
         <definition>static constexpr std::size_t PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::n_singular_basis</definition>
         <argsstring>()</argsstring>
         <name>n_singular_basis</name>
@@ -241,7 +241,7 @@
             <type>class DDim</type>
           </param>
         </templateparamlist>
-        <type>constexpr KOKKOS_FUNCTION IdxRange&lt; DDim &gt;</type>
+        <type>KOKKOS_FUNCTION IdxRange&lt; DDim &gt;</type>
         <definition>static constexpr KOKKOS_FUNCTION IdxRange&lt; DDim &gt; PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::singular_idx_range</definition>
         <argsstring>()</argsstring>
         <name>singular_idx_range</name>

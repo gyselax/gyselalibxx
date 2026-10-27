@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structEdge" kind="struct" language="C++" prot="public">
     <compoundname>Edge</compoundname>
     <includes refid="edge_8hpp" local="no">edge.hpp</includes>
@@ -47,9 +47,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structEdge_1a45e9ce9846a4f8d061b19460c3cc4c6d" prot="public" static="no">
+      <memberdef kind="typedef" id="structEdge_1afae81ff4f884eca1ef9b57ff1d4e225a" prot="public" static="no">
         <type>std::conditional_t&lt; std::is_same_v&lt; Grid1D, typename Patch::Grid1 &gt;, typename Patch::Grid2, typename Patch::Grid1 &gt;</type>
-        <definition>using Edge&lt; Patch, Grid1D, extremity_val &gt;::parallel_grid =  std::conditional_t&lt; std::is_same_v&lt;Grid1D, typename Patch::Grid1&gt;, typename Patch::Grid2, typename Patch::Grid1&gt;</definition>
+        <definition>using Edge&lt; Patch, Grid1D, extremity_val &gt;::parallel_grid =  std::conditional_t&lt;
+            std::is_same_v&lt;Grid1D, typename Patch::Grid1&gt;,
+            typename Patch::Grid2,
+            typename Patch::Grid1&gt;</definition>
         <argsstring></argsstring>
         <name>parallel_grid</name>
         <qualifiedname>Edge::parallel_grid</qualifiedname>
@@ -60,13 +63,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="34" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="structEdge_1ab30ccf4f66cb1a094ab1d771965a9154" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr Extremity</type>
-        <definition>constexpr Extremity Edge&lt; Patch, Grid1D, extremity_val &gt;::extremity</definition>
+        <type>Extremity</type>
+        <definition>Extremity Edge&lt; Patch, Grid1D, extremity_val &gt;::extremity</definition>
         <argsstring></argsstring>
         <name>extremity</name>
         <qualifiedname>Edge::extremity</qualifiedname>
@@ -123,7 +126,7 @@
     <listofallmembers>
       <member refid="structEdge_1a01bafe4f74a4d717a45f57c4f7e023a9" prot="public" virt="non-virtual"><scope>Edge</scope><name>associated_patch</name></member>
       <member refid="structEdge_1ab30ccf4f66cb1a094ab1d771965a9154" prot="public" virt="non-virtual"><scope>Edge</scope><name>extremity</name></member>
-      <member refid="structEdge_1a45e9ce9846a4f8d061b19460c3cc4c6d" prot="public" virt="non-virtual"><scope>Edge</scope><name>parallel_grid</name></member>
+      <member refid="structEdge_1afae81ff4f884eca1ef9b57ff1d4e225a" prot="public" virt="non-virtual"><scope>Edge</scope><name>parallel_grid</name></member>
       <member refid="structEdge_1a17c65ef78459378e78d6327af23bc017" prot="public" virt="non-virtual"><scope>Edge</scope><name>perpendicular_grid</name></member>
     </listofallmembers>
   </compounddef>

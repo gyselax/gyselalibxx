@@ -75,7 +75,7 @@ _A class for describing the cylindrical 3D mapping._ [More...](#detailed-descrip
 |  [**CylindricalToCartesian**](classCylindricalToCartesian.md)&lt; [**R**](structR.md), Z, Zeta, [**X**](structX.md), [**Y**](structY.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordArg**](classCartesianToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordArg**](classCartesianToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**R**](structR.md), Z, Zeta &gt;, VectorIndexSet&lt; [**X\_cov**](classCartesianToCylindrical.md#typedef-x_cov), [**Y\_cov**](classCartesianToCylindrical.md#typedef-y_cov), [**Z\_cov**](classCartesianToCylindrical.md#typedef-z_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classCartesianToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; [**R**](structR.md), Z, Zeta &gt;, VectorIndexSet&lt; [**X\_cov**](classCartesianToCylindrical.md#typedef-x_cov), [**Y\_cov**](classCartesianToCylindrical.md#typedef-y_cov), [**Z\_cov**](classCartesianToCylindrical.md#typedef-z_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classCartesianToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**CoordResult**](classCartesianToCylindrical.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classCartesianToCylindrical.md#typedef-coordarg) const & coord) const<br>_Convert the coordinate (x,y,z) to the equivalent_ \((r, z, \zeta)\) _coordinate._ |
 |  [**CartesianToCylindrical**](classCartesianToCylindrical.md) & | [**operator=**](#function-operator_1) ([**CartesianToCylindrical**](classCartesianToCylindrical.md) const & x) = default<br>_Assign a_ [_**CartesianToCylindrical**_](classCartesianToCylindrical.md) _from another_[_**CartesianToCylindrical**_](classCartesianToCylindrical.md) _(lvalue)._ |
 |  [**CartesianToCylindrical**](classCartesianToCylindrical.md) & | [**operator=**](#function-operator_2) ([**CartesianToCylindrical**](classCartesianToCylindrical.md) && x) = default<br>_Assign a_ [_**CartesianToCylindrical**_](classCartesianToCylindrical.md) _from another temporary_[_**CartesianToCylindrical**_](classCartesianToCylindrical.md) _(rvalue)._ |
@@ -513,7 +513,7 @@ A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
 
 _Compute full Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < VectorIndexSet< R , Z, Zeta >, VectorIndexSet< X_cov , Y_cov , Z_cov > > CartesianToCylindrical::jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< VectorIndexSet< R , Z, Zeta >, VectorIndexSet< X_cov , Y_cov , Z_cov > > CartesianToCylindrical::jacobian_matrix (
     CoordArg const & coord
 ) const
 ```

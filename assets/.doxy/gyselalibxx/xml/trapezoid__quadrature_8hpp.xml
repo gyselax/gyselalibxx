@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="trapezoid__quadrature_8hpp" kind="file" language="C++">
     <compoundname>trapezoid_quadrature.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -200,8 +200,8 @@
 <para>File providing quadrature coefficients via the trapezoidal method. </para>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight></codeline>
-<codeline lineno="5"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
@@ -260,7 +260,7 @@
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idx_range,</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::function&lt;DFieldMem&lt;IdxRange&lt;ODims&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space&gt;(</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;ODims&gt;)&gt;(</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>trapezoid_quadrature_coefficients_1d&lt;ExecSpace,<sp/>DataType,<sp/>ODims&gt;))...);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trapezoid__quadrature_8hpp_1a4145740dbd5656149f70583cdf6b98db" kindref="member">trapezoid_quadrature_coefficients_1d&lt;ExecSpace, DataType, ODims&gt;</ref>))...);</highlight></codeline>
 <codeline lineno="90"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/trapezoid_quadrature.hpp"/>

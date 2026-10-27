@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -583,11 +589,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;">typedef typename detail::FindAllGrids&lt; TypeSeqDim, TypeSeqGrid &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-find_all_grids_t"><strong>find_all_grids_t</strong></a>  <br><em>A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></td>
+<td style="text-align: left;"><a href="#typedef-find_all_grids_t"><strong>find_all_grids_t</strong></a>  <br><em>A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename detail::FindGrid&lt; Dim, TypeSeqGrid &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-find_grid_t"><strong>find_grid_t</strong></a>  <br><em>A tool to find the grid that is defined along the specified dimension (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></td>
+<td style="text-align: left;"><a href="#typedef-find_grid_t"><strong>find_grid_t</strong></a>  <br><em>A tool to find the grid that is defined along the specified dimension (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename detail::FindIdxType&lt; CoordType, IdxRangeType &gt;::type</td>
@@ -625,24 +631,24 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-type_seq_has_unique_elements_v"><strong>type_seq_has_unique_elements_v</strong></a>   = <code>std::is\_same\_v&amp;lt;TypeSeqType, type\_seq\_unique\_t&amp;lt;TypeSeqType&amp;gt;&amp;gt;</code><br><em>Determine if a type sequence only contains unique elements.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr int</td>
+<td style="text-align: right;">int</td>
 <td style="text-align: left;"><a href="#variable-type_seq_permutation_parity_v"><strong>type_seq_permutation_parity_v</strong></a>   = <code>detail::GetPermutationParity&amp;lt;TypeSeqType, OrderedTypeSeq&amp;gt;::value</code><br><em>Determine if the permutation parity of a type sequence.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-find_all_grids_t">typedef find_all_grids_t</h3>
-<p><em>A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></p>
+<p><em>A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>).</em></p>
 <pre><code class="language-C++">using find_all_grids_t =  typename detail::FindAllGrids&lt;TypeSeqDim, TypeSeqGrid&gt;::type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-find_grid_t">typedef find_grid_t</h3>
-<p><em>A tool to find the grid that is defined along the specified dimension (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></p>
+<p><em>A tool to find the grid that is defined along the specified dimension (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>).</em></p>
 <pre><code class="language-C++">using find_grid_t =  typename detail::FindGrid&lt;Dim, TypeSeqGrid&gt;::type;
 </code></pre>
 <hr>
@@ -681,7 +687,8 @@
 
 <h3 id="typedef-type_seq_duplicate_t">typedef type_seq_duplicate_t</h3>
 <p><em>Create a type sequence containing the element Element, repeated n times.</em> </p>
-<pre><code class="language-C++">using type_seq_duplicate_t =  typename detail::TypeSeqDuplicate&lt;Element, std::make_index_sequence&lt;n_elements&gt; &gt;::type;
+<pre><code class="language-C++">using type_seq_duplicate_t = 
+        typename detail::TypeSeqDuplicate&lt;Element, std::make_index_sequence&lt;n_elements&gt;&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -708,7 +715,7 @@
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-type_seq_has_unique_elements_v">variable type_seq_has_unique_elements_v</h3>
 <p><em>Determine if a type sequence only contains unique elements.</em> </p>
-<pre><code class="language-C++">constexpr bool type_seq_has_unique_elements_v;
+<pre><code class="language-C++">bool type_seq_has_unique_elements_v;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -718,7 +725,7 @@
 
 <h3 id="variable-type_seq_permutation_parity_v">variable type_seq_permutation_parity_v</h3>
 <p><em>Determine if the permutation parity of a type sequence.</em> </p>
-<pre><code class="language-C++">constexpr int type_seq_permutation_parity_v;
+<pre><code class="language-C++">int type_seq_permutation_parity_v;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>

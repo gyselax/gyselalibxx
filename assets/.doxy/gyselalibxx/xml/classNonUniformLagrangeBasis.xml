@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classNonUniformLagrangeBasis" kind="class" language="C++" prot="public">
     <compoundname>NonUniformLagrangeBasis</compoundname>
     <basecompoundref prot="private" virt="non-virtual">detail::NonUniformLagrangeBasisBase</basecompoundref>
@@ -68,7 +68,7 @@
     </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1a0eedacfae3a36f48bb754d45b2f1310d" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>constexpr std::size_t</type>
+        <type>std::size_t</type>
         <definition>static constexpr std::size_t NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::degree</definition>
         <argsstring>() noexcept</argsstring>
         <name>degree</name>
@@ -86,7 +86,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="63" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="63" bodyend="66"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1a5b1c4708aad1d6fd2f88ee9bd9781fe0" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>constexpr bool</type>
+        <type>bool</type>
         <definition>static constexpr bool NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::is_periodic</definition>
         <argsstring>() noexcept</argsstring>
         <name>is_periodic</name>
@@ -104,7 +104,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="72" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="72" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1aab4158846797a4a81067429b7fac286f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>constexpr bool</type>
+        <type>bool</type>
         <definition>static constexpr bool NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::is_uniform</definition>
         <argsstring>() noexcept</argsstring>
         <name>is_uniform</name>

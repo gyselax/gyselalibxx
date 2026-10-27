@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="multipatch__math__tools_8hpp" kind="file" language="C++">
     <compoundname>multipatch_math_tools.hpp</compoundname>
     <includes refid="l__norm__tools_8hpp" local="yes">l_norm_tools.hpp</includes>
@@ -463,7 +463,7 @@
 <codeline lineno="30"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TypeSeqInternalTypes&gt;</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>error_norm_inf(</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="l__norm__tools_8hpp_1ae88afaf9e53757beb5a965bd85aeaa00" kindref="member">error_norm_inf</ref>(</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/>exec_space,</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;,<sp/>TypeSeqInternalTypes&gt;</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>multipatch_function,</highlight></codeline>
@@ -475,7 +475,7 @@
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::SpaceAccessibility&lt;ExecSpace,<sp/>typename<sp/>FuncType::memory_space&gt;::accessible);</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/>NPatches<sp/>=<sp/>multipatch_function.size();</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;double,<sp/>NPatches&gt;<sp/>norm_inf_on_patch({(error_norm_inf(</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;double,<sp/>NPatches&gt;<sp/>norm_inf_on_patch({(<ref refid="l__norm__tools_8hpp_1ae88afaf9e53757beb5a965bd85aeaa00" kindref="member">error_norm_inf</ref>(</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exec_space,</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>multipatch_function.template<sp/>get&lt;Patches&gt;(),</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>multipatch_exact_function.template<sp/>get&lt;Patches&gt;()))...});</highlight></codeline>

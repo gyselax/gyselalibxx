@@ -51,9 +51,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_data\_access\_methods&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;**](#variable-enable_data_access_methods-vectorfieldmem-elementtype-idxrangetype-dimseq-allocator)   = `true`<br> |
-|  constexpr bool | [**enable\_mem\_type&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;**](#variable-enable_mem_type-vectorfieldmem-elementtype-idxrangetype-dimseq-allocator)   = `true`<br> |
-|  constexpr bool | [**enable\_vector\_field&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, MemSpace &gt; &gt;**](#variable-enable_vector_field-vectorfieldmem-elementtype-idxrangetype-dimseq-memspace)   = `true`<br> |
+|  bool | [**enable\_data\_access\_methods&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;**](#variable-enable_data_access_methods-vectorfieldmem-elementtype-idxrangetype-dimseq-allocator)   = `true`<br> |
+|  bool | [**enable\_mem\_type&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;**](#variable-enable_mem_type-vectorfieldmem-elementtype-idxrangetype-dimseq-allocator)   = `true`<br> |
+|  bool | [**enable\_vector\_field&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, MemSpace &gt; &gt;**](#variable-enable_vector_field-vectorfieldmem-elementtype-idxrangetype-dimseq-memspace)   = `true`<br> |
 
 
 
@@ -121,7 +121,7 @@ using DVectorFieldMem =  VectorFieldMem<double, IdxRangeType, VectorIndexSetType
 ### variable enable\_data\_access\_methods&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt; 
 
 ```C++
-constexpr bool enable_data_access_methods< VectorFieldMem< ElementType, IdxRangeType, DimSeq, Allocator > >;
+bool enable_data_access_methods< VectorFieldMem< ElementType, IdxRangeType, DimSeq, Allocator > >;
 ```
 
 
@@ -134,7 +134,7 @@ constexpr bool enable_data_access_methods< VectorFieldMem< ElementType, IdxRange
 ### variable enable\_mem\_type&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt; 
 
 ```C++
-constexpr bool enable_mem_type< VectorFieldMem< ElementType, IdxRangeType, DimSeq, Allocator > >;
+bool enable_mem_type< VectorFieldMem< ElementType, IdxRangeType, DimSeq, Allocator > >;
 ```
 
 
@@ -147,7 +147,7 @@ constexpr bool enable_mem_type< VectorFieldMem< ElementType, IdxRangeType, DimSe
 ### variable enable\_vector\_field&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, MemSpace &gt; &gt; 
 
 ```C++
-constexpr bool enable_vector_field< VectorFieldMem< ElementType, IdxRangeType, DimSeq, MemSpace > >;
+bool enable_vector_field< VectorFieldMem< ElementType, IdxRangeType, DimSeq, MemSpace > >;
 ```
 
 

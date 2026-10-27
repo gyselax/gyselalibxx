@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</compoundname>
     <includes refid="ipoisson__solver_8hpp" local="no">ipoisson_solver.hpp</includes>
@@ -115,9 +115,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a8d449bec424d93bb4197505651f90f8d" prot="public" static="no">
+      <memberdef kind="typedef" id="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1ab4ddaa34dfe4c018a83cd6fbdbcf534d" prot="public" static="no">
         <type>std::conditional_t&lt; ddc::type_seq_size_v&lt; <ref refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a42762d3d2a291b678b4c6af816c62a47" kindref="member">laplacian_tags</ref> &gt;==1, <ref refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a70c15e18ae75e7dfd779de53699f2983" kindref="member">field_type</ref>, <ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; DataType, IdxRangeFull, <ref refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1aad16a630618b07e40a00054d24a8a520" kindref="member">real_laplacian_tags</ref>, MemorySpace, LayoutSpace &gt; &gt;</type>
-        <definition>using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::vector_field_type =  std::conditional_t&lt; ddc::type_seq_size_v&lt;laplacian_tags&gt; == 1, field_type, VectorField&lt;DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace&gt; &gt;</definition>
+        <definition>using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::vector_field_type =  std::conditional_t&lt;
+            ddc::type_seq_size_v&lt;laplacian_tags&gt; == 1,
+            field_type,
+            VectorField&lt;DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>vector_field_type</name>
         <qualifiedname>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::vector_field_type</qualifiedname>
@@ -128,11 +131,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a9d8812f0988c0eebc67811306b48d63b" prot="public" static="no">
+      <memberdef kind="typedef" id="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a9ad5e47fe04735721ee2ace352812c39" prot="public" static="no">
         <type>typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt; <ref refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a64246c0ee0f24f946266d50f8111837c" kindref="member">batch_tags</ref> &gt;</type>
-        <definition>using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::batch_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;batch_tags&gt;</definition>
+        <definition>using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::batch_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;batch_tags&gt;</definition>
         <argsstring></argsstring>
         <name>batch_idx_range_type</name>
         <qualifiedname>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::batch_idx_range_type</qualifiedname>
@@ -143,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" bodystart="64" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1afab09b47929744ec0afb693a75182ff4" prot="public" static="no">
         <type>typename batch_idx_range_type::discrete_element_type</type>
@@ -208,8 +212,8 @@
     </sectiondef>
     <sectiondef kind="protected-static-attrib">
       <memberdef kind="variable" id="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1adaf2eea84d90f1ee2ca492ff82b307a2" prot="protected" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr bool</type>
-        <definition>constexpr bool IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::using_vector_field</definition>
+        <type>bool</type>
+        <definition>bool IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::using_vector_field</definition>
         <argsstring></argsstring>
         <name>using_vector_field</name>
         <qualifiedname>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::using_vector_field</qualifiedname>
@@ -279,7 +283,7 @@
           <declname>phi</declname>
         </param>
         <param>
-          <type><ref refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a8d449bec424d93bb4197505651f90f8d" kindref="member">vector_field_type</ref></type>
+          <type><ref refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1ab4ddaa34dfe4c018a83cd6fbdbcf534d" kindref="member">vector_field_type</ref></type>
           <declname>E</declname>
         </param>
         <param>
@@ -365,7 +369,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" line="32" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" bodystart="33" bodyend="101"/>
     <listofallmembers>
-      <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a9d8812f0988c0eebc67811306b48d63b" prot="public" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>batch_idx_range_type</name></member>
+      <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a9ad5e47fe04735721ee2ace352812c39" prot="public" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>batch_idx_range_type</name></member>
       <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1afab09b47929744ec0afb693a75182ff4" prot="public" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>batch_index_type</name></member>
       <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a64246c0ee0f24f946266d50f8111837c" prot="protected" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>batch_tags</name></member>
       <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a7d2c3b92119407afe38cca3ad5a7ae09" prot="public" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>const_field_type</name></member>
@@ -379,7 +383,7 @@
       <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1aad16a630618b07e40a00054d24a8a520" prot="protected" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>real_laplacian_tags</name></member>
       <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a6056ba7891398a579f641af48b2479c4" prot="protected" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>space_tags</name></member>
       <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1adaf2eea84d90f1ee2ca492ff82b307a2" prot="protected" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>using_vector_field</name></member>
-      <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a8d449bec424d93bb4197505651f90f8d" prot="public" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>vector_field_type</name></member>
+      <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1ab4ddaa34dfe4c018a83cd6fbdbcf534d" prot="public" virt="non-virtual"><scope>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</scope><name>vector_field_type</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -65,7 +65,7 @@ _A traits struct for accessing type aliases of an interpolation builder._ [More.
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions._  |
+|  std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions._  |
 
 
 
@@ -102,12 +102,12 @@ Specialise this struct to adapt external builders whose alias names differ from 
 
 
 Defines: Type aliases:
-* data\_type
-* interpolation\_idx\_range\_type
-* coeff\_idx\_range\_type Static functions:
+* [**data\_type**](structInterpolationBuilderTraits.md#typedef-data_type)
+* [**interpolation\_idx\_range\_type**](structInterpolationBuilderTraits.md#typedef-interpolation_idx_range_type)
+* [**coeff\_idx\_range\_type**](structInterpolationBuilderTraits.md#typedef-coeff_idx_range_type) Static functions:
 * [**rank()**](structInterpolationBuilderTraits.md#function-rank) Type calculators:
-* batched\_basis\_idx\_range\_type
-* batched\_derivs\_idx\_range\_type (1D builders only; not required by the concept)
+* [**batched\_basis\_idx\_range\_type**](structInterpolationBuilderTraits.md#typedef-batched_basis_idx_range_type)
+* [**batched\_derivs\_idx\_range\_type**](structInterpolationBuilderTraits.md#typedef-batched_derivs_idx_range_type) (1D builders only; not required by the concept)
 
 
 
@@ -132,7 +132,8 @@ Defines: Type aliases:
 
 _Batched domain with the interpolation grid(s) replaced by the basis grid(s)._ 
 ```C++
-using InterpolationBuilderTraits< Builder >::batched_basis_idx_range_type =  typename Builder::template batched_basis_idx_range_type<IdxRangeBatchedInterpolation>;
+using InterpolationBuilderTraits< Builder >::batched_basis_idx_range_type = 
+            typename Builder::template batched_basis_idx_range_type<IdxRangeBatchedInterpolation>;
 ```
 
 
@@ -146,7 +147,8 @@ using InterpolationBuilderTraits< Builder >::batched_basis_idx_range_type =  typ
 
 _Batched domain with the interpolation grid replaced by the deriv type._ 
 ```C++
-using InterpolationBuilderTraits< Builder >::batched_derivs_idx_range_type =  typename Builder::template batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>;
+using InterpolationBuilderTraits< Builder >::batched_derivs_idx_range_type = 
+            typename Builder::template batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>;
 ```
 
 
@@ -204,7 +206,7 @@ using InterpolationBuilderTraits< Builder >::interpolation_idx_range_type =  typ
 
 _The number of interpolation dimensions._ 
 ```C++
-static inline constexpr std::size_t InterpolationBuilderTraits::rank () 
+static inline std::size_t InterpolationBuilderTraits::rank () 
 ```
 
 

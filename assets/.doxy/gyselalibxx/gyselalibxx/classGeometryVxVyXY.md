@@ -139,7 +139,10 @@ using GeometryVxVyXY::IdxRangeVelocity =  IdxRangeVxVy;
 
 _A templated type giving the velocity discretised dimension type associated to a spatial discretised dimension type._ 
 ```C++
-using GeometryVxVyXY::velocity_dim_for =  std::conditional_t< std::is_same_v<T, GridX>, GridVx, std::conditional_t<std::is_same_v<T, GridY>, GridVy, void> >;
+using GeometryVxVyXY::velocity_dim_for =  std::conditional_t<
+            std::is_same_v<T, GridX>,
+            GridVx,
+            std::conditional_t<std::is_same_v<T, GridY>, GridVy, void>>;
 ```
 
 

@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -631,7 +637,7 @@
 <td style="text-align: left;"><a href="#variable-is_coordinate_v"><strong>is_coordinate_v</strong></a>   = <code>ddc::detail::is\_tagged\_vector\_v&amp;lt;T&amp;gt;</code><br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_non_uniform_interpolation_points_v"><strong>is_non_uniform_interpolation_points_v</strong></a>   = <code>[**is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md)&amp;lt;T&amp;gt;::value</code><br></td>
 </tr>
 </tbody>
@@ -651,7 +657,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION void</td>
-<td style="text-align: left;"><a href="#function-assign_vector_field_element"><strong>assign_vector_field_element</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete_element_type idx, <a href="classTensor.html"><strong>Vector</strong></a>&lt; ElementType, Dims... &gt; const &amp; vector) <br><em>Copy the elements of a vector into a vector field at a given index.</em></td>
+<td style="text-align: left;"><a href="#function-assign_vector_field_element"><strong>assign_vector_field_element</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete_element_type idx, Vector&lt; ElementType, Dims... &gt; const &amp; vector) <br><em>Copy the elements of a vector into a vector field at a given index.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
@@ -672,6 +678,10 @@
 <tr>
 <td style="text-align: right;">auto</td>
 <td style="text-align: left;"><a href="#function-deepcopy"><strong>deepcopy</strong></a> (ExecSpace const &amp; execution_space, FieldDst &amp;&amp; dst, FieldSrc &amp;&amp; src) <br><em>Copy the contents of one</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>into another.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">auto</td>
+<td style="text-align: left;"><a href="#function-deepcopy"><strong>deepcopy</strong></a> (FieldDst &amp;&amp; dst, FieldSrc &amp;&amp; src) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -706,11 +716,11 @@
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a>&lt; storage_type, ValidIndexSet... &gt; const &amp; tensor) <br><em>A helper function to get an element of the tensor.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr auto</td>
+<td style="text-align: right;">auto</td>
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (VectorFieldType const &amp; field) noexcept<br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr auto</td>
+<td style="text-align: right;">auto</td>
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (VectorFieldType &amp; field) noexcept<br></td>
 </tr>
 <tr>
@@ -738,15 +748,15 @@
 <td style="text-align: left;"><a href="#function-to_coord"><strong>to_coord</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a>&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp; tensor) <br><em>A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt;</td>
+<td style="text-align: right;">std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt;</td>
 <td style="text-align: left;"><a href="#function-total_interval_length"><strong>total_interval_length</strong></a> (IdxRange&lt; IDim &gt; const &amp; idx_range) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_uniform_point_sampling_v&lt; IDim &gt;, double &gt;</td>
+<td style="text-align: right;">std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_uniform_point_sampling_v&lt; IDim &gt;, double &gt;</td>
 <td style="text-align: left;"><a href="#function-total_interval_length"><strong>total_interval_length</strong></a> (IdxRange&lt; IDim &gt; const &amp; idx_range) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_non_uniform_point_sampling_v&lt; IDim &gt;, double &gt;</td>
+<td style="text-align: right;">std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_non_uniform_point_sampling_v&lt; IDim &gt;, double &gt;</td>
 <td style="text-align: left;"><a href="#function-total_interval_length"><strong>total_interval_length</strong></a> (IdxRange&lt; IDim &gt; const &amp; idx_range) <br></td>
 </tr>
 </tbody>
@@ -754,19 +764,20 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-apply_template_to_type_seq_t">typedef apply_template_to_type_seq_t</h3>
 <p><em>A helper to get a type sequence by applying a template to a sequence of type tags.</em> </p>
-<pre><code class="language-C++">using ddcHelper::apply_template_to_type_seq_t = typedef typename detail::ApplyTemplateToTypeSeq&lt;Templ, TypeSeq&gt;::type;
+<pre><code class="language-C++">using ddcHelper::apply_template_to_type_seq_t =  typename detail::ApplyTemplateToTypeSeq&lt;Templ, TypeSeq&gt;::type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-to_coord_t">typedef to_coord_t</h3>
 <p><em>Get a coordinate from a TypeSeq.</em> </p>
-<pre><code class="language-C++">using ddcHelper::to_coord_t = typedef typename detail::ToCoord&lt;ValidIndexSet&gt;::type;
+<pre><code class="language-C++">using ddcHelper::to_coord_t =  typename detail::ToCoord&lt;ValidIndexSet&gt;::type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-type_seq_intersection_t">typedef type_seq_intersection_t</h3>
 <p><em>A helper to find all types which are found in both TypeSeq1 and TypeSeq2.</em> </p>
-<pre><code class="language-C++">using ddcHelper::type_seq_intersection_t = typedef typename detail::TypeSeqIntersection&lt;TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt; &gt;::type;
+<pre><code class="language-C++">using ddcHelper::type_seq_intersection_t = 
+        typename detail::TypeSeqIntersection&lt;TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt;&gt;::type;
 </code></pre>
 <hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
@@ -776,7 +787,7 @@
 <hr>
 
 <h3 id="variable-is_non_uniform_interpolation_points_v">variable is_non_uniform_interpolation_points_v</h3>
-<pre><code class="language-C++">constexpr bool ddcHelper::is_non_uniform_interpolation_points_v;
+<pre><code class="language-C++">bool ddcHelper::is_non_uniform_interpolation_points_v;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -802,7 +813,7 @@ KOKKOS_INLINE_FUNCTION void ddcHelper::assign_elements (
 KOKKOS_INLINE_FUNCTION void ddcHelper::assign_vector_field_element (
     VectorField &lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field,
     typename IdxRangeType::discrete_element_type idx,
-    Vector &lt; ElementType, Dims... &gt; const &amp; vector
+    Vector&lt; ElementType, Dims... &gt; const &amp; vector
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -889,6 +900,15 @@ auto ddcHelper::deepcopy (
 <hr>
 
 <h3 id="function-deepcopy_2">function deepcopy</h3>
+<pre><code class="language-C++">template&lt;class FieldDst, class FieldSrc, std::enable_if_t&lt; is_borrowed_vector_field_v&lt; FieldDst &gt; &amp;&amp;is_borrowed_vector_field_v&lt; FieldSrc &gt;, bool &gt;&gt;
+auto ddcHelper::deepcopy (
+    FieldDst &amp;&amp; dst,
+    FieldSrc &amp;&amp; src
+) 
+</code></pre>
+<hr>
+
+<h3 id="function-deepcopy_3">function deepcopy</h3>
 <p><em>Copy the data from one MultipatchField into another.</em> </p>
 <pre><code class="language-C++">template&lt;class... Patches, class TypeSeqInternalTypes1, class TypeSeqInternalTypes2&gt;
 void ddcHelper::deepcopy (
@@ -1030,7 +1050,7 @@ KOKKOS_INLINE_FUNCTION storage_type::element_type const &amp; ddcHelper::get (
 
 <h3 id="function-get_5">function get</h3>
 <pre><code class="language-C++">template&lt;class QueryTag, class VectorFieldType, std::enable_if_t&lt; is_vector_field_v&lt; VectorFieldType &gt;, bool &gt;&gt;
-inline constexpr auto ddcHelper::get (
+inline auto ddcHelper::get (
     VectorFieldType const &amp; field
 ) noexcept
 </code></pre>
@@ -1038,7 +1058,7 @@ inline constexpr auto ddcHelper::get (
 
 <h3 id="function-get_6">function get</h3>
 <pre><code class="language-C++">template&lt;class QueryTag, class VectorFieldType, std::enable_if_t&lt; is_vector_field_v&lt; VectorFieldType &gt;, bool &gt;&gt;
-inline constexpr auto ddcHelper::get (
+inline auto ddcHelper::get (
     VectorFieldType &amp; field
 ) noexcept
 </code></pre>
@@ -1147,7 +1167,7 @@ KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; ddcHelper::to_coord (
 
 <h3 id="function-total_interval_length">function total_interval_length</h3>
 <pre><code class="language-C++">template&lt;class IDim&gt;
-constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt; ddcHelper::total_interval_length (
+std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt; ddcHelper::total_interval_length (
     IdxRange&lt; IDim &gt; const &amp; idx_range
 ) 
 </code></pre>
@@ -1162,7 +1182,7 @@ constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double
 
 <h3 id="function-total_interval_length_1">function total_interval_length</h3>
 <pre><code class="language-C++">template&lt;class IDim&gt;
-constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_uniform_point_sampling_v&lt; IDim &gt;, double &gt; ddcHelper::total_interval_length (
+std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_uniform_point_sampling_v&lt; IDim &gt;, double &gt; ddcHelper::total_interval_length (
     IdxRange&lt; IDim &gt; const &amp; idx_range
 ) 
 </code></pre>
@@ -1177,7 +1197,7 @@ constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&a
 
 <h3 id="function-total_interval_length_2">function total_interval_length</h3>
 <pre><code class="language-C++">template&lt;class IDim&gt;
-constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_non_uniform_point_sampling_v&lt; IDim &gt;, double &gt; ddcHelper::total_interval_length (
+std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_non_uniform_point_sampling_v&lt; IDim &gt;, double &gt; ddcHelper::total_interval_length (
     IdxRange&lt; IDim &gt; const &amp; idx_range
 ) 
 </code></pre>

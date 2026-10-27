@@ -33,6 +33,12 @@
 
 
 
+## Public Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  std::array&lt; long double, NPoints &gt; | [**pos**](#variable-pos)   = `s\_pos&lt;NPoints&gt;`<br> |
+|  std::array&lt; long double, NPoints &gt; | [**weight**](#variable-weight)   = `s\_weight&lt;NPoints&gt;`<br> |
 
 
 
@@ -77,6 +83,34 @@
 
 
 
+## Public Attributes Documentation
+
+
+
+
+### variable pos 
+
+```C++
+std::array<long double, NPoints> GaussLegendreCoefficients< NPoints >::pos;
+```
+
+
+
+
+<hr>
+
+
+
+### variable weight 
+
+```C++
+std::array<long double, NPoints> GaussLegendreCoefficients< NPoints >::weight;
+```
+
+
+
+
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp`

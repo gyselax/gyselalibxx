@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -624,7 +630,10 @@
 
 <h3 id="typedef-velocity_dim_for">typedef velocity_dim_for</h3>
 <p><em>A templated type giving the velocity discretised dimension type associated to a spatial discretised dimension type.</em> </p>
-<pre><code class="language-C++">using GeometryXYVxVy::velocity_dim_for =  std::conditional_t&lt; std::is_same_v&lt;T, GridX&gt;, GridVx, std::conditional_t&lt;std::is_same_v&lt;T, GridY&gt;, GridVy, void&gt; &gt;;
+<pre><code class="language-C++">using GeometryXYVxVy::velocity_dim_for =  std::conditional_t&lt;
+            std::is_same_v&lt;T, GridX&gt;,
+            GridVx,
+            std::conditional_t&lt;std::is_same_v&lt;T, GridY&gt;, GridVy, void&gt;&gt;;
 </code></pre>
 <hr>
 

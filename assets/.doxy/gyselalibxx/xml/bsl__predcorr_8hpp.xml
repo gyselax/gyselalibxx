@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="bsl__predcorr_8hpp" kind="file" language="C++">
     <compoundname>bsl_predcorr.hpp</compoundname>
     <includes local="no">chrono</includes>
@@ -1000,14 +1000,14 @@
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions_r_theta.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>FootFinder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarPoissonLikeSolver&gt;</highlight></codeline>
-<codeline lineno="58" refid="classBslPredCorrRTheta" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBslPredCorrRTheta" kindref="compound">BslPredCorrRTheta</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classITimeSolverRTheta" kindref="compound">ITimeSolverRTheta</ref></highlight></codeline>
+<codeline lineno="58" refid="classBslPredCorrRTheta" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBslPredCorrRTheta_1a15e462d5390c9cd78dd3719723bf673b" kindref="member">BslPredCorrRTheta</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classITimeSolverRTheta" kindref="compound">ITimeSolverRTheta</ref></highlight></codeline>
 <codeline lineno="59"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/>=<sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionPolar&lt;FootFinder, Mapping, SplineInterpolatorRTheta&gt;</ref>;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">BslAdvectionRTheta<sp/>=<sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionPolar&lt;FootFinder, Mapping, SplineInterpolatorRTheta&gt;</ref>;</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>Mapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_mapping;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_advection_solver;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>BslAdvectionRTheta<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_advection_solver;</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>PolarPoissonLikeSolver<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_poisson_solver;</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
@@ -1018,7 +1018,7 @@
 <codeline lineno="73"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="89" refid="classBslPredCorrRTheta_1a15e462d5390c9cd78dd3719723bf673b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBslPredCorrRTheta_1a15e462d5390c9cd78dd3719723bf673b" kindref="member">BslPredCorrRTheta</ref>(</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping,</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>advection_solver,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BslAdvectionRTheta<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>advection_solver,</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineInterpolatorRTheta<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>rhs_interpolator,</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PolarPoissonLikeSolver<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>poisson_solver)</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_mapping(mapping)</highlight></codeline>
@@ -1083,8 +1083,8 @@
 <codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;electrical_potential&quot;</highlight><highlight class="normal">,<sp/>electrical_potential_host);</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"></highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>RK2<sp/>methods</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;X, Y&gt;</ref>,<sp/>DConstFieldRTheta)&gt;<sp/>define_advection_field<sp/>=</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[&amp;](<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;X, Y&gt;</ref><sp/>advection_field,<sp/>DConstFieldRTheta<sp/>density)<sp/>{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(DVectorFieldRTheta&lt;X,<sp/>Y&gt;,<sp/>DConstFieldRTheta)&gt;<sp/>define_advection_field<sp/>=</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[&amp;](DVectorFieldRTheta&lt;X,<sp/>Y&gt;<sp/>advection_field,<sp/>DConstFieldRTheta<sp/>density)<sp/>{</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>compute<sp/>electrostatic<sp/>potential:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(density_coef,<sp/>get_const_field(density));</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_poisson_solver(electrostatic_potential_coef,<sp/>charge_density);</highlight></codeline>

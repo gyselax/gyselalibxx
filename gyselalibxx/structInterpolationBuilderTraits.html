@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -617,7 +623,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: right;">std::size_t</td>
 <td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions.</em></td>
 </tr>
 </tbody>
@@ -626,12 +632,12 @@
 <p>The primary template delegates to the builder's own type aliases, so any class that defines them directly (e.g. <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a>) satisfies the InterpolationBuilder concept without specialisation.</p>
 <p>Specialise this struct to adapt external builders whose alias names differ from the convention (e.g. ddc::SplineBuilder).</p>
 <p>Defines: Type aliases:
-* data_type
-* interpolation_idx_range_type
-* coeff_idx_range_type Static functions:
+* <a href="structInterpolationBuilderTraits.html#typedef-data_type"><strong>data_type</strong></a>
+* <a href="structInterpolationBuilderTraits.html#typedef-interpolation_idx_range_type"><strong>interpolation_idx_range_type</strong></a>
+* <a href="structInterpolationBuilderTraits.html#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a> Static functions:
 * <a href="structInterpolationBuilderTraits.html#function-rank"><strong>rank()</strong></a> Type calculators:
-* batched_basis_idx_range_type
-* batched_derivs_idx_range_type (1D builders only; not required by the concept)</p>
+* <a href="structInterpolationBuilderTraits.html#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>
+* <a href="structInterpolationBuilderTraits.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a> (1D builders only; not required by the concept)</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>Builder</code> The interpolation builder type. </li>
@@ -639,13 +645,15 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-batched_basis_idx_range_type">typedef batched_basis_idx_range_type</h3>
 <p><em>Batched domain with the interpolation grid(s) replaced by the basis grid(s).</em> </p>
-<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::batched_basis_idx_range_type =  typename Builder::template batched_basis_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;;
+<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::batched_basis_idx_range_type = 
+            typename Builder::template batched_basis_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-batched_derivs_idx_range_type">typedef batched_derivs_idx_range_type</h3>
 <p><em>Batched domain with the interpolation grid replaced by the deriv type.</em> </p>
-<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::batched_derivs_idx_range_type =  typename Builder::template batched_derivs_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;;
+<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::batched_derivs_idx_range_type = 
+            typename Builder::template batched_derivs_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;;
 </code></pre>
 <hr>
 
@@ -669,7 +677,7 @@
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
 <h3 id="function-rank">function rank</h3>
 <p><em>The number of interpolation dimensions.</em> </p>
-<pre><code class="language-C++">static inline constexpr std::size_t InterpolationBuilderTraits::rank () 
+<pre><code class="language-C++">static inline std::size_t InterpolationBuilderTraits::rank () 
 </code></pre>
 <hr>
 

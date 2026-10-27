@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="noperturbinitialisation_8hpp" kind="file" language="C++">
     <compoundname>noperturbinitialisation.hpp</compoundname>
     <includes local="no">paraconf.h</includes>
@@ -47,12 +47,6 @@
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
@@ -122,20 +116,14 @@
       <node id="10">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="18">
-        <label>filesystem</label>
-      </node>
       <node id="2">
         <label>paraconf.h</label>
       </node>
       <node id="9">
         <label>source_location</label>
       </node>
-      <node id="19">
-        <label>stdexcept</label>
-      </node>
-      <node id="20">
-        <label>string</label>
+      <node id="18">
+        <label>string_view</label>
       </node>
       <node id="6">
         <label>type_traits</label>
@@ -161,14 +149,14 @@
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;paraconfpp.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_info.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13" refid="classNoPerturbInitialisation" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classNoPerturbInitialisation" kindref="compound">NoPerturbInitialisation</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIInitialisation" kindref="compound">IInitialisation</ref></highlight></codeline>
+<codeline lineno="13" refid="classNoPerturbInitialisation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classNoPerturbInitialisation_1a919ea658a748a50669b2e917b34b84fd" kindref="member">NoPerturbInitialisation</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIInitialisation" kindref="compound">IInitialisation</ref></highlight></codeline>
 <codeline lineno="14"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldSpVparMu<sp/>m_fequilibrium;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classNoPerturbInitialisation" kindref="compound">NoPerturbInitialisation</ref>(DConstFieldSpVparMu<sp/>fequilibrium);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classNoPerturbInitialisation_1a919ea658a748a50669b2e917b34b84fd" kindref="member">NoPerturbInitialisation</ref>(DConstFieldSpVparMu<sp/>fequilibrium);</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classNoPerturbInitialisation" kindref="compound">~NoPerturbInitialisation</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classNoPerturbInitialisation_1a919ea658a748a50669b2e917b34b84fd" kindref="member">~NoPerturbInitialisation</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpVparMu<sp/><ref refid="classNoPerturbInitialisation_1a590cd5775ca6e618706801b9173e6167" kindref="member">operator()</ref>(DFieldSpVparMu<sp/>allfdistribu)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal">};</highlight></codeline>

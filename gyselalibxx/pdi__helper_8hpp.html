@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -593,7 +599,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-pdi_expose_vector_field"><strong>PDI_expose_vector_field</strong></a> (std::string const &amp; name_stem, <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt; out_vector, StringType const &amp;... name_suffixes) <br><em>A helper function to expose a vector field to PDI ready for output to a file.</em></td>
+<td style="text-align: left;"><a href="#function-pdi_expose_vector_field"><strong>PDI_expose_vector_field</strong></a> (std::string const &amp; name_stem, VectorConstField&lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt; out_vector, StringType const &amp;... name_suffixes) <br><em>A helper function to expose a vector field to PDI ready for output to a file.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -616,7 +622,7 @@ void PDI_expose_idx_range (
 <pre><code class="language-C++">template&lt;class ElementType, class IdxRangeType, class... IndexTag, class... StringType&gt;
 void PDI_expose_vector_field (
     std::string const &amp; name_stem,
-    VectorConstField &lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt; out_vector,
+    VectorConstField&lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt; out_vector,
     StringType const &amp;... name_suffixes
 ) 
 </code></pre>

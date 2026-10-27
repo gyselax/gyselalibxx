@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classIdentityTensor" kind="class" language="C++" prot="public">
     <compoundname>IdentityTensor</compoundname>
     <includes refid="static__tensors_8hpp" local="no">static_tensors.hpp</includes>
@@ -121,7 +121,7 @@
             <type>class QueryTensorIndexElement</type>
           </param>
         </templateparamlist>
-        <type>constexpr KOKKOS_FUNCTION ElementType</type>
+        <type>KOKKOS_FUNCTION ElementType</type>
         <definition>static constexpr KOKKOS_FUNCTION ElementType IdentityTensor&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt;::get</definition>
         <argsstring>()</argsstring>
         <name>get</name>

@@ -116,14 +116,11 @@ For polar integration, we can add the Jacobian determinant to the quadrature coe
 
 
 * 2D example: (but it is implemented for ND)
-
-
-
-
-
-\[\int_{\Omega_{\text{cart}}} f(x,y) dxdy
+  \[\int_{\Omega_{\text{cart}}} f(x,y) dxdy
  = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta
  \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}\]
+
+
 
 
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_e9f169004bcfe9f3cb1f8a27ce024e59" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta</compoundname>
     <innerdir refid="dir_93bd9c5dcb1561501879bb6d3649fe64">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field</innerdir>

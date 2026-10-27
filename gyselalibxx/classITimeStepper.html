@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -586,11 +592,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef timestepper_detail::const_reference_t&lt; <a href="classITimeStepper.html#typedef-derivfieldmem"><strong>DerivFieldMem</strong></a> &gt;</td>
+<td style="text-align: right;">typedef timestepper_detail::const_reference_t&lt; <a href="classITimeStepper.html#typedef-derivfieldmem"><strong>DerivFieldMem</strong></a><a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-derivconstfield"><strong>DerivConstField</strong></a>  <br><em>The constant type of the derivatives values of the function being evolved.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef timestepper_detail::reference_t&lt; <a href="classITimeStepper.html#typedef-derivfieldmem"><strong>DerivFieldMem</strong></a> &gt;</td>
+<td style="text-align: right;">typedef timestepper_detail::reference_t&lt; <a href="classITimeStepper.html#typedef-derivfieldmem"><strong>DerivFieldMem</strong></a><a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-derivfield"><strong>DerivField</strong></a>  <br><em>The type of the derivatives of the function being evolved.</em></td>
 </tr>
 <tr>
@@ -630,15 +636,15 @@
 <tbody>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-update-13"><strong>update</strong></a> (<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
+<td style="text-align: left;"><a href="#function-update-13"><strong>update</strong></a> (<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a><a href="classDerivField.html"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-update-23"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
+<td style="text-align: left;"><a href="#function-update-23"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a><a href="classDerivField.html"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="#function-update-33"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator, std::function&lt; void(<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a>, <a href="classITimeStepper.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>, double)&gt; y_update) const = 0<br><em>Carry out one step of the timestepping scheme.</em></td>
+<td style="text-align: left;"><a href="#function-update-33"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a><a href="classDerivField.html"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator, std::function&lt; void(<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a>, <a href="classITimeStepper.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>, double)&gt; y_update) const = 0<br><em>Carry out one step of the timestepping scheme.</em></td>
 </tr>
 </tbody>
 </table>
@@ -698,7 +704,7 @@
 <pre><code class="language-C++">inline void ITimeStepper::update (
     ValField y,
     double dt,
-    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator
+    std::function&lt; void( DerivField DerivField , ValConstField )&gt; dy_calculator
 ) const
 </code></pre>
 <p>This function is a wrapper around the update function below. The values of the function are updated using the trivial method <span class="arithmatex">\(f += df \* dt\)</span>. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</p>
@@ -716,13 +722,13 @@
     ExecSpace const &amp; exec_space,
     ValField y,
     double dt,
-    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator
+    std::function&lt; void( DerivField DerivField , ValConstField )&gt; dy_calculator
 ) const
 </code></pre>
 <p>This function is a wrapper around the update function below. The values of the function are updated using the trivial method <span class="arithmatex">\(f += df \* dt\)</span>. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><a href="classITimeStepper.html#typedef-exec_space"><strong>exec_space</strong></a> The space on which the function is executed (CPU/GPU). </li>
 <li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
 <li><code>dt</code> The time step over which the values should be evolved. </li>
 <li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
@@ -735,13 +741,13 @@
     ExecSpace const &amp; exec_space,
     ValField y,
     double dt,
-    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator,
+    std::function&lt; void( DerivField DerivField , ValConstField )&gt; dy_calculator,
     std::function&lt; void( ValField , DerivConstField , double)&gt; y_update
 ) const = 0
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><a href="classITimeStepper.html#typedef-exec_space"><strong>exec_space</strong></a> The space on which the function is executed (CPU/GPU). </li>
 <li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
 <li><code>dt</code> The time step over which the values should be evolved. </li>
 <li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>

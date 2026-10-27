@@ -105,7 +105,6 @@
 * **m\_quadrature** ([**ChargeDensityCalculator**](classChargeDensityCalculator.md))
 * **m\_nustar0** ([**CollisionConfiguration**](classCollisionConfiguration.md), [**CollisionsInter**](classCollisionsInter.md), [**CollisionsIntra**](classCollisionsIntra.md))
 * **m\_operator\_quantities** ([**CollisionConfiguration**](classCollisionConfiguration.md))
-* **m\_operator\_handle** ([**CollisionOperator**](classCollisionOperator.md))
 * **m\_nustar\_profile** ([**CollisionsInter**](classCollisionsInter.md), [**CollisionsIntra**](classCollisionsIntra.md))
 * **m\_nustar\_profile\_alloc** ([**CollisionsInter**](classCollisionsInter.md), [**CollisionsIntra**](classCollisionsIntra.md))
 * **m\_fthresh** ([**CollisionsIntra**](classCollisionsIntra.md))

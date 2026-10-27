@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -617,7 +623,7 @@
 <td style="text-align: left;"><a href="#function-vals"><strong>vals</strong></a> (Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, Idx&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx) const<br><em>Get the value of a tensor product B-spline at a quadrature point.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="structR__cov.html"><strong>R_cov</strong></a>, <a href="structTheta__cov.html"><strong>Theta_cov</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <a href="structR__cov.html"><strong>R_cov</strong></a>, <a href="structTheta__cov.html"><strong>Theta_cov</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-vals_and_derivs"><strong>vals_and_derivs</strong></a> (Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, Idx&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx) const<br><em>Get the value and the derivatives of a tensor product B-spline at a quadrature point.</em></td>
 </tr>
 </tbody>
@@ -675,7 +681,7 @@
 
 <h3 id="function-vals_and_derivs">function vals_and_derivs</h3>
 <p><em>Get the value and the derivatives of a tensor product B-spline at a quadrature point.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION std::tuple&lt; double, DVector &lt; R_cov , Theta_cov &gt; &gt; detail_poisson::TensorBSplineStash::vals_and_derivs (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R_cov , Theta_cov &gt; &gt; detail_poisson::TensorBSplineStash::vals_and_derivs (
     Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad,
     Idx&lt; BSplinesR , BSplinesTheta &gt; idx
 ) const

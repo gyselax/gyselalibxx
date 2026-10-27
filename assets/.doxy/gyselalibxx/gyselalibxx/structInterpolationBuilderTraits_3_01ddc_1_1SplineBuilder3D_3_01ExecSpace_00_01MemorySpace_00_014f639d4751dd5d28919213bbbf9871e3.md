@@ -65,7 +65,7 @@ _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilde
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions (always 1 for SplineBuilder)._  |
+|  std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions (always 1 for SplineBuilder)._  |
 
 
 
@@ -98,7 +98,7 @@ _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilde
 ddc::SplineBuilder3D uses different alias names from the InterpolationBuilder convention. This specialisation provides the mapping so that ddc::SplineBuilder3D can be used directly as an InterpolationBuilder without wrapping it.
 
 
-Mapping: interpolation\_discrete\_dimension\_type -&gt; interpolation\_grid\_type interpolation\_domain\_type -&gt; interpolation\_idx\_range\_type bsplines\_type -&gt; basis\_domain\_type batched\_spline\_domain\_type&lt;D&gt; -&gt; batched\_basis\_idx\_range\_type&lt;D&gt; batched\_derivs\_domain\_type&lt;D&gt; -&gt; batched\_derivs\_idx\_range\_type&lt;D&gt; 
+Mapping: interpolation\_discrete\_dimension\_type -&gt; interpolation\_grid\_type interpolation\_domain\_type -&gt; [**interpolation\_idx\_range\_type**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.md#typedef-interpolation_idx_range_type) bsplines\_type -&gt; basis\_domain\_type batched\_spline\_domain\_type&lt;D&gt; -&gt; [**batched\_basis\_idx\_range\_type&lt;D&gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.md#typedef-batched_basis_idx_range_type) batched\_derivs\_domain\_type&lt;D&gt; -&gt; [**batched\_derivs\_idx\_range\_type&lt;D&gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.md#typedef-batched_derivs_idx_range_type) 
 
 
     
@@ -111,7 +111,8 @@ Mapping: interpolation\_discrete\_dimension\_type -&gt; interpolation\_grid\_typ
 
 _Batched domain with InterpolationDDim replaced by BSplines._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver > >::batched_basis_idx_range_type =  typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
+using InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver > >::batched_basis_idx_range_type = 
+            typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
 ```
 
 
@@ -125,7 +126,8 @@ using InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, 
 
 _Batched domain with InterpolationDDim replaced by deriv\_type._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver > >::batched_derivs_idx_range_type =  typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
+using InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver > >::batched_derivs_idx_range_type = 
+            typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
 ```
 
 
@@ -139,7 +141,10 @@ using InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, 
 
 _The discrete dimension for the B-spline coefficients._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver > >::coeff_idx_range_type =  IdxRange< typename Builder::bsplines_type1, typename Builder::bsplines_type2, typename Builder::bsplines_type3>;
+using InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver > >::coeff_idx_range_type =  IdxRange<
+            typename Builder::bsplines_type1,
+            typename Builder::bsplines_type2,
+            typename Builder::bsplines_type3>;
 ```
 
 
@@ -187,7 +192,7 @@ The 1D index range for the interpolation mesh.
 
 _The number of interpolation dimensions (always 1 for SplineBuilder)._ 
 ```C++
-static inline constexpr std::size_t InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver > >::rank () 
+static inline std::size_t InterpolationBuilderTraits< ddc::SplineBuilder3D< ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver > >::rank () 
 ```
 
 

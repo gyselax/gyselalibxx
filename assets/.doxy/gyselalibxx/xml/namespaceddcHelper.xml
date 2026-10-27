@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespaceddcHelper" kind="namespace" language="C++">
     <compoundname>ddcHelper</compoundname>
+    <innerclass refid="classddcHelper_1_1NonUniformInterpolationPoints" prot="public">ddcHelper::NonUniformInterpolationPoints</innerclass>
     <innerclass refid="structddcHelper_1_1is__non__uniform__interpolation__points" prot="public">ddcHelper::is_non_uniform_interpolation_points</innerclass>
     <innerclass refid="structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270" prot="public">ddcHelper::is_non_uniform_interpolation_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;</innerclass>
-    <innerclass refid="classddcHelper_1_1NonUniformInterpolationPoints" prot="public">ddcHelper::NonUniformInterpolationPoints</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="ddc__helper_8hpp_1aabbf4cbd249da175f1cea2ae2cb61aee" prot="public" static="no">
+      <memberdef kind="typedef" id="ddc__helper_8hpp_1a5f41ad4f1b11d02914a07df79215d57a" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>template&lt; class Tag &gt; class</type>
@@ -18,7 +18,7 @@
           </param>
         </templateparamlist>
         <type>typename detail::ApplyTemplateToTypeSeq&lt; Templ, TypeSeq &gt;::type</type>
-        <definition>using ddcHelper::apply_template_to_type_seq_t = typedef typename detail::ApplyTemplateToTypeSeq&lt;Templ, TypeSeq&gt;::type</definition>
+        <definition>using ddcHelper::apply_template_to_type_seq_t =  typename detail::ApplyTemplateToTypeSeq&lt;Templ, TypeSeq&gt;::type</definition>
         <argsstring></argsstring>
         <name>apply_template_to_type_seq_t</name>
         <qualifiedname>ddcHelper::apply_template_to_type_seq_t</qualifiedname>
@@ -31,7 +31,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="366" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="366" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="ddc__helper_8hpp_1aa238a8fb325126a81a31cd8fc6a436cc" prot="public" static="no">
+      <memberdef kind="typedef" id="ddc__helper_8hpp_1a76a0dd4e0d1391135b582da843f4de49" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class TypeSeq1</type>
@@ -41,7 +41,8 @@
           </param>
         </templateparamlist>
         <type>typename detail::TypeSeqIntersection&lt; TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt; &gt;::type</type>
-        <definition>using ddcHelper::type_seq_intersection_t = typedef typename detail::TypeSeqIntersection&lt;TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt; &gt;::type</definition>
+        <definition>using ddcHelper::type_seq_intersection_t = 
+        typename detail::TypeSeqIntersection&lt;TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt;&gt;::type</definition>
         <argsstring></argsstring>
         <name>type_seq_intersection_t</name>
         <qualifiedname>ddcHelper::type_seq_intersection_t</qualifiedname>
@@ -52,16 +53,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="370" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="371" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="370" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="370" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="ddc__helper_8hpp_1a8fe773985cd825fa9ddac001aef03324" prot="public" static="no">
+      <memberdef kind="typedef" id="ddc__helper_8hpp_1a898ecef402209732ea0cfc3fe57ae77c" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class ValidIndexSet</type>
           </param>
         </templateparamlist>
         <type>typename detail::ToCoord&lt; ValidIndexSet &gt;::type</type>
-        <definition>using ddcHelper::to_coord_t = typedef typename detail::ToCoord&lt;ValidIndexSet&gt;::type</definition>
+        <definition>using ddcHelper::to_coord_t =  typename detail::ToCoord&lt;ValidIndexSet&gt;::type</definition>
         <argsstring></argsstring>
         <name>to_coord_t</name>
         <qualifiedname>ddcHelper::to_coord_t</qualifiedname>
@@ -102,8 +103,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool ddcHelper::is_non_uniform_interpolation_points_v</definition>
+        <type>bool</type>
+        <definition>bool ddcHelper::is_non_uniform_interpolation_points_v</definition>
         <argsstring></argsstring>
         <name>is_non_uniform_interpolation_points_v</name>
         <qualifiedname>ddcHelper::is_non_uniform_interpolation_points_v</qualifiedname>
@@ -650,7 +651,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="481" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="481" bodyend="503"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="480" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="480" bodyend="502"/>
       </memberdef>
       <memberdef kind="function" id="vector__field_8hpp_1a0a990d73f5440550ebb60058ea19544c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -686,7 +687,7 @@
           <declname>idx</declname>
         </param>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Vector</ref>&lt; ElementType, Dims... &gt; const &amp;</type>
+          <type>Vector&lt; ElementType, Dims... &gt; const &amp;</type>
           <declname>vector</declname>
         </param>
         <briefdescription>
@@ -722,7 +723,41 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="520" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="520" bodyend="531"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="519" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="519" bodyend="530"/>
+      </memberdef>
+      <memberdef kind="function" id="vector__field__common_8hpp_1a9a2d3927b6e69a7dee15d2d617bf6655" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class FieldDst</type>
+          </param>
+          <param>
+            <type>class FieldSrc</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; is_borrowed_vector_field_v&lt; FieldDst &gt; &amp;&amp;is_borrowed_vector_field_v&lt; FieldSrc &gt;, bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto ddcHelper::deepcopy</definition>
+        <argsstring>(FieldDst &amp;&amp;dst, FieldSrc &amp;&amp;src)</argsstring>
+        <name>deepcopy</name>
+        <qualifiedname>ddcHelper::deepcopy</qualifiedname>
+        <param>
+          <type>FieldDst &amp;&amp;</type>
+          <declname>dst</declname>
+        </param>
+        <param>
+          <type>FieldSrc &amp;&amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" line="35" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" bodystart="35" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="vector__field__common_8hpp_1a3073ccd7095e44121805d560d53db101" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -737,8 +772,8 @@
             <defval>true</defval>
           </param>
         </templateparamlist>
-        <type>constexpr auto</type>
-        <definition>constexpr auto ddcHelper::get</definition>
+        <type>auto</type>
+        <definition>auto ddcHelper::get</definition>
         <argsstring>(VectorFieldType const &amp;field) noexcept</argsstring>
         <name>get</name>
         <qualifiedname>ddcHelper::get</qualifiedname>
@@ -767,8 +802,8 @@
             <defval>true</defval>
           </param>
         </templateparamlist>
-        <type>constexpr auto</type>
-        <definition>constexpr auto ddcHelper::get</definition>
+        <type>auto</type>
+        <definition>auto ddcHelper::get</definition>
         <argsstring>(VectorFieldType &amp;field) noexcept</argsstring>
         <name>get</name>
         <qualifiedname>ddcHelper::get</qualifiedname>
@@ -894,8 +929,8 @@
             <type>class IDim</type>
           </param>
         </templateparamlist>
-        <type>constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt;</type>
-        <definition>constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt; ddcHelper::total_interval_length</definition>
+        <type>std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt;</type>
+        <definition>std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt; ddcHelper::total_interval_length</definition>
         <argsstring>(IdxRange&lt; IDim &gt; const &amp;idx_range)</argsstring>
         <name>total_interval_length</name>
         <qualifiedname>ddcHelper::total_interval_length</qualifiedname>
@@ -930,8 +965,8 @@
             <type>class IDim</type>
           </param>
         </templateparamlist>
-        <type>constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_uniform_point_sampling_v&lt; IDim &gt;, double &gt;</type>
-        <definition>constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_uniform_point_sampling_v&lt; IDim &gt;, double &gt; ddcHelper::total_interval_length</definition>
+        <type>std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_uniform_point_sampling_v&lt; IDim &gt;, double &gt;</type>
+        <definition>std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_uniform_point_sampling_v&lt; IDim &gt;, double &gt; ddcHelper::total_interval_length</definition>
         <argsstring>(IdxRange&lt; IDim &gt; const &amp;idx_range)</argsstring>
         <name>total_interval_length</name>
         <qualifiedname>ddcHelper::total_interval_length</qualifiedname>
@@ -966,8 +1001,8 @@
             <type>class IDim</type>
           </param>
         </templateparamlist>
-        <type>constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_non_uniform_point_sampling_v&lt; IDim &gt;, double &gt;</type>
-        <definition>constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_non_uniform_point_sampling_v&lt; IDim &gt;, double &gt; ddcHelper::total_interval_length</definition>
+        <type>std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_non_uniform_point_sampling_v&lt; IDim &gt;, double &gt;</type>
+        <definition>std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC &amp;&amp;ddc::is_non_uniform_point_sampling_v&lt; IDim &gt;, double &gt; ddcHelper::total_interval_length</definition>
         <argsstring>(IdxRange&lt; IDim &gt; const &amp;idx_range)</argsstring>
         <name>total_interval_length</name>
         <qualifiedname>ddcHelper::total_interval_length</qualifiedname>

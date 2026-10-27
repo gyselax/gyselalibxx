@@ -92,7 +92,10 @@ _Specialisation of_ [_**PatchConnection**_](structconnectivity__details_1_1Patch
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::PatchConnection< Patch, ddc::detail::TypeSeq< InterfaceType > >::type =  std::conditional_t< InterfaceType::template connected_to_patch<Patch>(), ddc::detail::TypeSeq<InterfaceType>, ddc::detail::TypeSeq<> >;
+using connectivity_details::PatchConnection< Patch, ddc::detail::TypeSeq< InterfaceType > >::type =  std::conditional_t<
+            InterfaceType::template connected_to_patch<Patch>(),
+            ddc::detail::TypeSeq<InterfaceType>,
+            ddc::detail::TypeSeq<>>;
 ```
 
 

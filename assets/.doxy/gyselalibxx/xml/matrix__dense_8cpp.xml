@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="matrix__dense_8cpp" kind="file" language="C++">
     <compoundname>matrix_dense.cpp</compoundname>
     <includes local="no">cassert</includes>
@@ -108,7 +108,7 @@
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>a[j<sp/>*<sp/><ref refid="classMatrix_1a687d05d0c6cb4e1a8dc1a40e4926e9a3" kindref="member">n</ref><sp/>+<sp/>i];</highlight></codeline>
 <codeline lineno="31"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Matrix_Dense::factorise_method()</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classMatrix_1a763f3f848403c33d0bcd494df1133218" kindref="member">Matrix_Dense::factorise_method</ref>()</highlight></codeline>
 <codeline lineno="34"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LAPACKE_dgetrf(LAPACK_COL_MAJOR,<sp/><ref refid="classMatrix_1a687d05d0c6cb4e1a8dc1a40e4926e9a3" kindref="member">n</ref>,<sp/><ref refid="classMatrix_1a687d05d0c6cb4e1a8dc1a40e4926e9a3" kindref="member">n</ref>,<sp/>a.get(),<sp/><ref refid="classMatrix_1a687d05d0c6cb4e1a8dc1a40e4926e9a3" kindref="member">n</ref>,<sp/>ipiv.get());</highlight></codeline>
 <codeline lineno="36"><highlight class="normal">}</highlight></codeline>

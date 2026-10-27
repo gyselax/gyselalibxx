@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="ipartial__derivative_8hpp" kind="file" language="C++">
     <compoundname>ipartial_derivative.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -111,6 +111,8 @@
     </invincdepgraph>
     <innerclass refid="classIPartialDerivative" prot="public">IPartialDerivative</innerclass>
     <innerclass refid="classIPartialDerivativeCreator" prot="public">IPartialDerivativeCreator</innerclass>
+    <innerconcept refid="conceptconcepts_1_1LocalPartialDerivative">concepts::LocalPartialDerivative</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1LocalPartialDerivativeCreator">concepts::LocalPartialDerivativeCreator</innerconcept>
     <innernamespace refid="namespaceconcepts">concepts</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -135,16 +137,16 @@
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="26" refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kindref="member">DConstFieldType</ref><sp/>=<sp/>DConstField&lt;IdxRangeFull&gt;;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="classIPartialDerivative_1a5b5bbff2fea1001b2a434b28784f288f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a5b5bbff2fea1001b2a434b28784f288f" kindref="member">GridDerivativeDimension</ref></highlight></codeline>
+<codeline lineno="29" refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" kindref="member">GridDerivativeDimension</ref></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>find_grid_t&lt;DerivativeDimension,<sp/>ddc::to_type_seq_t&lt;IdxRangeFull&gt;&gt;;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="classIPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" kindref="member">IdxRangeDeriv</ref><sp/>=<sp/>IdxRange&lt;GridDerivativeDimension&gt;;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" kindref="member">IdxRangeDeriv</ref><sp/>=<sp/>IdxRange&lt;GridDerivativeDimension&gt;;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36" refid="classIPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" kindref="member">IdxRangeBatch</ref><sp/>=<sp/>ddc::remove_dims_of_t&lt;IdxRangeFull,<sp/>GridDerivativeDimension&gt;;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" kindref="member">IdxRangeBatch</ref><sp/>=<sp/>ddc::remove_dims_of_t&lt;IdxRangeFull,<sp/>GridDerivativeDimension&gt;;</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative" kindref="compound">~IPartialDerivative</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45" refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" kindref="member">operator()</ref>(<ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">DFieldType</ref><sp/>differentiated_field)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" kindref="member">operator()</ref>(<ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">DFieldType</ref><sp/>differentiated_field)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeFull,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DerivativeDimension&gt;</highlight></codeline>

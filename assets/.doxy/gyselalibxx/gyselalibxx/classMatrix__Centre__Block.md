@@ -281,10 +281,22 @@ See [Matrix](classMatrix.md)
 ## Detailed Description
 
 
- where E is a banded matrix, and A, E and I are square matrices.
 
 
-This matrix is solved by rearranging it to:  This new matrix is a corner matrix of the form:  with \(Q = E\) and  Internally the matrix is saved in the corner format. 
+
+where E is a banded matrix, and A, E and I are square matrices.
+
+
+This matrix is solved by rearranging it to: 
+
+
+This new matrix is a corner matrix of the form: 
+
+
+with \(Q = E\) and 
+
+
+Internally the matrix is saved in the corner format. 
 
 
     
@@ -614,7 +626,13 @@ DSpan1D Matrix_Centre_Block::swap_array_to_centre (
 
 
 
-I.e. for  with \(B\) a vector of length nb, return  
+I.e. for 
+
+
+with \(B\) a vector of length nb, return 
+
+
+
 
 **Parameters:**
 
@@ -648,7 +666,13 @@ DSpan2D Matrix_Centre_Block::swap_array_to_centre (
 
 
 
-I.e. for  with \(B\) a vector of length nb, return  
+I.e. for 
+
+
+with \(B\) a vector of length nb, return 
+
+
+
 
 **Parameters:**
 
@@ -682,7 +706,13 @@ DSpan1D Matrix_Centre_Block::swap_array_to_corner (
 
 
 
-I.e. for  with \(B\) a vector of length nb, return  
+I.e. for 
+
+
+with \(B\) a vector of length nb, return 
+
+
+
 
 **Parameters:**
 
@@ -716,7 +746,13 @@ DSpan2D Matrix_Centre_Block::swap_array_to_corner (
 
 
 
-I.e. for  with \(B\) a vector of length nb, return  
+I.e. for 
+
+
+with \(B\) a vector of length nb, return 
+
+
+
 
 **Parameters:**
 

@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -576,6 +582,7 @@
 <ul>
 <li><code>#include &lt;impilayout.hpp&gt;</code></li>
 </ul>
+<p>Inherited by the following classes: <a href="classMPILayout.html">MPILayout</a>,  <a href="classMPILayout.html">MPILayout</a></p>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -609,11 +616,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-distributed_idx_ranges_are_first"><strong>distributed_idx_ranges_are_first</strong></a>   = <code>/* multi line expression */</code><br><em>A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr int</td>
+<td style="text-align: right;">int</td>
 <td style="text-align: left;"><a href="#variable-n_distributed_dimensions"><strong>n_distributed_dimensions</strong></a>   = <code>sizeof...(DistributedDim)</code><br><em>The number of dimensions that are distributed across MPI processes.</em></td>
 </tr>
 </tbody>
@@ -645,13 +652,13 @@
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
 <h3 id="variable-distributed_idx_ranges_are_first">variable distributed_idx_ranges_are_first</h3>
 <p><em>A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory.</em> </p>
-<pre><code class="language-C++">constexpr bool IMPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_idx_ranges_are_first;
+<pre><code class="language-C++">bool IMPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_idx_ranges_are_first;
 </code></pre>
 <hr>
 
 <h3 id="variable-n_distributed_dimensions">variable n_distributed_dimensions</h3>
 <p><em>The number of dimensions that are distributed across MPI processes.</em> </p>
-<pre><code class="language-C++">constexpr int IMPILayout&lt; IdxRangeData, DistributedDim &gt;::n_distributed_dimensions;
+<pre><code class="language-C++">int IMPILayout&lt; IdxRangeData, DistributedDim &gt;::n_distributed_dimensions;
 </code></pre>
 <hr>
 

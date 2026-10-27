@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="inf__norm__residual__criterion_8hpp" kind="file" language="C++">
     <compoundname>inf_norm_residual_criterion.hpp</compoundname>
     <includes local="no">source_location</includes>
@@ -134,10 +134,10 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;matrix_utils.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
-<codeline lineno="23" refid="classInfNormResidual" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInfNormResidual" kindref="compound">InfNormResidual</ref></highlight></codeline>
+<codeline lineno="23" refid="classInfNormResidual" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" kindref="member">InfNormResidual</ref></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gko::EnablePolymorphicObject&lt;InfNormResidual&lt;ExecSpace&gt;,<sp/>gko::stop::Criterion&gt;</highlight></codeline>
 <codeline lineno="25"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">gko::EnablePolymorphicObject&lt;<ref refid="classInfNormResidual" kindref="compound">InfNormResidual</ref>&lt;ExecSpace&gt;,<sp/>gko::stop::Criterion&gt;;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">gko::EnablePolymorphicObject&lt;<ref refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" kindref="member">InfNormResidual</ref>&lt;ExecSpace&gt;,<sp/>gko::stop::Criterion&gt;;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="30" refid="classInfNormResidual_1a497f62e5573832be0b0d356128406508" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInfNormResidual_1a497f62e5573832be0b0d356128406508" kindref="member">GKO_CREATE_FACTORY_PARAMETERS</ref>(parameters,<sp/>Factory)</highlight></codeline>
@@ -148,7 +148,7 @@
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>reduction_factor,</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1e-8);</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="39" refid="classInfNormResidual_1ac0d186fdae7eddae94eedf100900e1ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInfNormResidual_1ac0d186fdae7eddae94eedf100900e1ec" kindref="member">GKO_ENABLE_CRITERION_FACTORY</ref>(<ref refid="classInfNormResidual" kindref="compound">InfNormResidual&lt;ExecSpace&gt;</ref>,<sp/>parameters,<sp/>Factory);</highlight></codeline>
+<codeline lineno="39" refid="classInfNormResidual_1ac0d186fdae7eddae94eedf100900e1ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInfNormResidual_1ac0d186fdae7eddae94eedf100900e1ec" kindref="member">GKO_ENABLE_CRITERION_FACTORY</ref>(<ref refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" kindref="member">InfNormResidual&lt;ExecSpace&gt;</ref>,<sp/>parameters,<sp/>Factory);</highlight></codeline>
 <codeline lineno="41" refid="classInfNormResidual_1a4980d3176eda697b1b02ef8a9e77bb4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInfNormResidual_1a4980d3176eda697b1b02ef8a9e77bb4c" kindref="member">GKO_ENABLE_BUILD_METHOD</ref>(Factory);</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56" refid="classInfNormResidual_1a7f70f6633a9b98e2ad5671afbe8c4233" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classInfNormResidual_1a7f70f6633a9b98e2ad5671afbe8c4233" kindref="member">check_impl</ref>(</highlight></codeline>
@@ -183,14 +183,14 @@
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="91" refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" kindref="member">InfNormResidual</ref>(std::shared_ptr&lt;gko::Executor<sp/>const&gt;<sp/>exec)</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>gko::EnablePolymorphicObject&lt;<ref refid="classInfNormResidual" kindref="compound">InfNormResidual</ref>&lt;ExecSpace&gt;,<sp/>gko::stop::Criterion&gt;(</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>gko::EnablePolymorphicObject&lt;<ref refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" kindref="member">InfNormResidual</ref>&lt;ExecSpace&gt;,<sp/>gko::stop::Criterion&gt;(</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(exec))</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_threshold(0.)</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
 <codeline lineno="103" refid="classInfNormResidual_1a54e6c1d29ecb14474c0cca25945efb83" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInfNormResidual_1a54e6c1d29ecb14474c0cca25945efb83" kindref="member">InfNormResidual</ref>(Factory<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">*<sp/>factory,<sp/>gko::stop::CriterionArgs<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>args)</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>gko::EnablePolymorphicObject&lt;<ref refid="classInfNormResidual" kindref="compound">InfNormResidual</ref>&lt;ExecSpace&gt;,<sp/>gko::stop::Criterion&gt;(</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>gko::EnablePolymorphicObject&lt;<ref refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" kindref="member">InfNormResidual</ref>&lt;ExecSpace&gt;,<sp/>gko::stop::Criterion&gt;(</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>factory-&gt;get_executor())</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>parameters_<sp/>{factory-&gt;get_parameters()}</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_threshold(</highlight></codeline>

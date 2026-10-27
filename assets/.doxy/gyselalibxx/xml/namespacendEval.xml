@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespacendEval" kind="namespace" language="C++">
     <compoundname>ndEval</compoundname>
     <sectiondef kind="func">
@@ -31,7 +31,7 @@
             <defname>VectorDims</defname>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Vector</ref>&lt; ElementType, VectorDims... &gt;</type>
+        <type>KOKKOS_FUNCTION Vector&lt; ElementType, VectorDims... &gt;</type>
         <definition>KOKKOS_FUNCTION Vector&lt; ElementType, VectorDims... &gt; ndEval::evaluate</definition>
         <argsstring>(Evaluator const &amp;evaluator, CoordType const &amp;coord, VectorField&lt; const ElementType, IdxRangeCoeff, VectorIndexSet&lt; VectorDims... &gt;, MemorySpace, LayoutCoeff &gt; coeffs)</argsstring>
         <name>evaluate</name>

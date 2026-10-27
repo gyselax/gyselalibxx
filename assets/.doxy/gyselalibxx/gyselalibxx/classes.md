@@ -73,7 +73,6 @@
 * [**CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert\_pos, FoundInterfaces, OutsideEdge, false &gt;**](structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_ebd86d7b2345baf351562d16964c47d9.md)
 ([**connectivity\_details**](namespaceconnectivity__details.md))
 * [**CollisionConfiguration**](classCollisionConfiguration.md)
-* [**CollisionOperator**](classCollisionOperator.md)
 * [**CollisionsInter**](classCollisionsInter.md)
 * [**CollisionsIntra**](classCollisionsIntra.md)
 * [**CombinedMapping**](classCombinedMapping.md)

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="spline__interpolation_8hpp" kind="file" language="C++">
     <compoundname>spline_interpolation.hpp</compoundname>
     <includes local="no">utility</includes>
@@ -443,7 +443,7 @@
     <innerclass refid="structSplineBoundaryClosures" prot="public">SplineBoundaryClosures</innerclass>
     <innernamespace refid="namespaceSplineBoundaryClosure">SplineBoundaryClosure</innernamespace>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="spline__interpolation_8hpp_1a157d9a4884beda9853999545b1c0f700" prot="public" static="no">
+      <memberdef kind="typedef" id="spline__interpolation_8hpp_1a6cd97b52d4747335501fa124e924e492" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class ExecSpace</type>
@@ -461,7 +461,12 @@
           </param>
         </templateparamlist>
         <type>typename detail::SplineInterpolatorResolver&lt; ExecSpace, IdxRangeBasis, IdxRangeInterpGrid, ddc::SplineSolver::LAPACK, TailTags... &gt;::type</type>
-        <definition>using SplineInterpolator =  typename detail::SplineInterpolatorResolver&lt; ExecSpace, IdxRangeBasis, IdxRangeInterpGrid, ddc::SplineSolver::LAPACK, TailTags...&gt;::type</definition>
+        <definition>using SplineInterpolator =  typename detail::SplineInterpolatorResolver&lt;
+        ExecSpace,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        ddc::SplineSolver::LAPACK,
+        TailTags...&gt;::type</definition>
         <argsstring></argsstring>
         <name>SplineInterpolator</name>
         <briefdescription>
@@ -506,9 +511,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="1010" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="1015" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="1010" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="1010" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="spline__interpolation_8hpp_1a2485f3a62b25608e6158b0f02f016e24" prot="public" static="no">
+      <memberdef kind="typedef" id="spline__interpolation_8hpp_1a41be9d90e5c585bcf88e9698dd79682c" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class ExecSpace</type>
@@ -531,7 +536,12 @@
           </param>
         </templateparamlist>
         <type>typename detail::SplineInterpolatorResolver&lt; ExecSpace, IdxRangeBasis, IdxRangeInterpGrid, Solver, TailTags... &gt;::type</type>
-        <definition>using SplineInterpolatorWSolver =  typename detail::SplineInterpolatorResolver&lt; ExecSpace, IdxRangeBasis, IdxRangeInterpGrid, Solver, TailTags...&gt;::type</definition>
+        <definition>using SplineInterpolatorWSolver =  typename detail::SplineInterpolatorResolver&lt;
+        ExecSpace,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        Solver,
+        TailTags...&gt;::type</definition>
         <argsstring></argsstring>
         <name>SplineInterpolatorWSolver</name>
         <briefdescription>
@@ -584,7 +594,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="1039" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="1044" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="1039" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="1039" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -608,21 +618,21 @@
 <codeline lineno="20" refid="structSplineBoundaryClosures_1a5e2d34050566c057ab02fd2829389902" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structSplineBoundaryClosures_1a5e2d34050566c057ab02fd2829389902" kindref="member">max</ref><sp/>=<sp/>std::integral_constant&lt;ddc::SplineBuilderClosure,<sp/>MaxClosure&gt;;</highlight></codeline>
 <codeline lineno="21"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25" refid="namespaceSplineBoundaryClosure" refkind="compound"><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSplineBoundaryClosure" kindref="compound">SplineBoundaryClosure</ref><sp/>{</highlight></codeline>
+<codeline lineno="25" refid="namespaceSplineBoundaryClosure" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSplineBoundaryClosure" kindref="compound">SplineBoundaryClosure</ref><sp/>{</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28" refid="namespaceSplineBoundaryClosure_1a1967a7e5340b57d5c529b428761b6611" refkind="member"><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structSplineBoundaryClosures" kindref="compound">Periodic</ref><sp/>=<sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
+<codeline lineno="28" refid="namespaceSplineBoundaryClosure_1ab56960953ca4d875820e4447f5f6cf81" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceSplineBoundaryClosure_1ab56960953ca4d875820e4447f5f6cf81" kindref="member">Periodic</ref><sp/>=<sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure::PERIODIC,</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure::PERIODIC&gt;;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="namespaceSplineBoundaryClosure_1a14035a231e1e52d0d9b93994004a1df3" refkind="member"><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structSplineBoundaryClosures" kindref="compound">Greville_Greville</ref><sp/>=<sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
+<codeline lineno="33" refid="namespaceSplineBoundaryClosure_1af68aeb9f3a145f63ccb8340217909c5a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceSplineBoundaryClosure_1af68aeb9f3a145f63ccb8340217909c5a" kindref="member">Greville_Greville</ref><sp/>=<sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure::GREVILLE,</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure::GREVILLE&gt;;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="namespaceSplineBoundaryClosure_1a5a301ac5ad662b23e4dde2e0f65006d8" refkind="member"><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structSplineBoundaryClosures" kindref="compound">Hermite_Hermite</ref><sp/>=<sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
+<codeline lineno="38" refid="namespaceSplineBoundaryClosure_1ab7ba093b0abba0ae19218c649e65fdc6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceSplineBoundaryClosure_1ab7ba093b0abba0ae19218c649e65fdc6" kindref="member">Hermite_Hermite</ref><sp/>=<sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure::HERMITE,</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure::HERMITE&gt;;</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44" refid="namespaceSplineBoundaryClosure_1adf25d9efa737ba2cb8fee34460c127ef" refkind="member"><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structSplineBoundaryClosures" kindref="compound">HomogeneousHermite_HomogeneousHermite</ref><sp/>=<sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
+<codeline lineno="44" refid="namespaceSplineBoundaryClosure_1ac2cb9725f226383156bc8bc564592f5e" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceSplineBoundaryClosure_1ac2cb9725f226383156bc8bc564592f5e" kindref="member">HomogeneousHermite_HomogeneousHermite</ref><sp/>=<sp/><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt;</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE&gt;;</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
@@ -1200,7 +1210,7 @@
 <codeline lineno="865"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTags&gt;</highlight></codeline>
 <codeline lineno="866"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SplineInterpolatorResolver;</highlight></codeline>
 <codeline lineno="867"><highlight class="normal"></highlight></codeline>
-<codeline lineno="869"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="869"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="870"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,</highlight></codeline>
 <codeline lineno="871"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Basis,</highlight></codeline>
 <codeline lineno="872"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">InterpGrid,</highlight></codeline>
@@ -1224,7 +1234,7 @@
 <codeline lineno="890"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Solver&gt;;</highlight></codeline>
 <codeline lineno="891"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="892"><highlight class="normal"></highlight></codeline>
-<codeline lineno="894"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="894"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="895"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,</highlight></codeline>
 <codeline lineno="896"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Basis1,</highlight></codeline>
 <codeline lineno="897"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Basis2,</highlight></codeline>
@@ -1266,7 +1276,7 @@
 <codeline lineno="933"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Solver&gt;;</highlight></codeline>
 <codeline lineno="934"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="935"><highlight class="normal"></highlight></codeline>
-<codeline lineno="937"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="937"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
 <codeline lineno="938"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,</highlight></codeline>
 <codeline lineno="939"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Basis1,</highlight></codeline>
 <codeline lineno="940"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Basis2,</highlight></codeline>

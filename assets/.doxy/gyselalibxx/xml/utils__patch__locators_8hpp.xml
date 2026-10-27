@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="utils__patch__locators_8hpp" kind="file" language="C++">
     <compoundname>utils_patch_locators.hpp</compoundname>
     <includes refid="onion__patch__locator_8hpp" local="yes">onion_patch_locator.hpp</includes>
@@ -332,8 +332,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_onion_patch_locator_v</definition>
+        <type>bool</type>
+        <definition>bool is_onion_patch_locator_v</definition>
         <argsstring></argsstring>
         <name>is_onion_patch_locator_v</name>
         <initializer>= <ref refid="structis__onion__patch__locator" kindref="compound">is_onion_patch_locator</ref>&lt;T&gt;::value</initializer>
@@ -359,12 +359,12 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;onion_patch_locator.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Tag&gt;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Tag&gt;</highlight></codeline>
 <codeline lineno="10" refid="structis__onion__patch__locator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structis__onion__patch__locator" kindref="compound">is_onion_patch_locator</ref><sp/>:<sp/>std::false_type</highlight></codeline>
 <codeline lineno="11"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="12"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_onion_patch_locator_v<sp/>=<sp/><ref refid="structis__onion__patch__locator" kindref="compound">is_onion_patch_locator&lt;T&gt;::value</ref>;</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>

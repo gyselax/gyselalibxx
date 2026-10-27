@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classVectorFieldMem" kind="class" language="C++" prot="public">
     <compoundname>VectorFieldMem</compoundname>
     <basecompoundref refid="classVectorFieldCommon" prot="public" virt="non-virtual">VectorFieldCommon&lt; FieldMem&lt; ElementType, IdxRangeType, MemSpace &gt;, VectorIndexSetType &gt;</basecompoundref>
@@ -50,9 +50,14 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="80" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" prot="public" static="no">
+      <memberdef kind="typedef" id="classVectorFieldMem_1a8f97183c5dea06be5000331e56c7a5f9" prot="public" static="no">
         <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right &gt;</type>
-        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_type =  VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right&gt;</definition>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_type =  VectorField&lt;
+            ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemSpace,
+            Kokkos::layout_right&gt;</definition>
         <argsstring></argsstring>
         <name>span_type</name>
         <qualifiedname>VectorFieldMem::span_type</qualifiedname>
@@ -64,11 +69,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="93" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" prot="public" static="no">
+      <memberdef kind="typedef" id="classVectorFieldMem_1a95c48ba0b31f9fef4724fb8d56633743" prot="public" static="no">
         <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right &gt;</type>
-        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::view_type =  VectorField&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right&gt;</definition>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::view_type =  VectorField&lt;
+            const ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemSpace,
+            Kokkos::layout_right&gt;</definition>
         <argsstring></argsstring>
         <name>view_type</name>
         <qualifiedname>VectorFieldMem::view_type</qualifiedname>
@@ -80,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="105" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classVectorFieldMem_1ae89a87415f8842ac65d868a3534005fa" prot="public" static="no">
         <type>typename base_type::discrete_domain_type</type>
@@ -485,7 +495,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="206" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1afeb8583634f557056ad970a2500769fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">view_type</ref></type>
+        <type><ref refid="classVectorFieldMem_1a95c48ba0b31f9fef4724fb8d56633743" kindref="member">view_type</ref></type>
         <definition>view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get_const_field</definition>
         <argsstring>() const</argsstring>
         <name>get_const_field</name>
@@ -504,7 +514,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="216" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="216" bodyend="219"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1acf40e163c1ae01c5034b46c3e8e74b9a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">view_type</ref></type>
+        <type><ref refid="classVectorFieldMem_1a95c48ba0b31f9fef4724fb8d56633743" kindref="member">view_type</ref></type>
         <definition>view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get_field</definition>
         <argsstring>() const</argsstring>
         <name>get_field</name>
@@ -523,7 +533,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="229" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="229" bodyend="232"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1ac8c29526c973804e753b15c4e4ef6eec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">span_type</ref></type>
+        <type><ref refid="classVectorFieldMem_1a8f97183c5dea06be5000331e56c7a5f9" kindref="member">span_type</ref></type>
         <definition>span_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get_field</definition>
         <argsstring>()</argsstring>
         <name>get_field</name>
@@ -741,8 +751,8 @@
             <type>class QueryTag</type>
           </param>
         </templateparamlist>
-        <type>constexpr chunk_span_type</type>
-        <definition>constexpr chunk_span_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get</definition>
+        <type>chunk_span_type</type>
+        <definition>chunk_span_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get</definition>
         <argsstring>() noexcept</argsstring>
         <name>get</name>
         <qualifiedname>VectorFieldMem::get</qualifiedname>
@@ -764,8 +774,8 @@
             <type>class QueryTag</type>
           </param>
         </templateparamlist>
-        <type>constexpr chunk_view_type</type>
-        <definition>constexpr chunk_view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get</definition>
+        <type>chunk_view_type</type>
+        <definition>chunk_view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get</definition>
         <argsstring>() const noexcept</argsstring>
         <name>get</name>
         <qualifiedname>VectorFieldMem::get</qualifiedname>
@@ -868,7 +878,7 @@
       <member refid="classVectorFieldMem_1a803238e91bdec84b861d8e7eb11cc8af" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
       <member refid="classVectorFieldMem_1a8f37de8cfbcb2dd9bc3b5a82acf98dc4" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
       <member refid="classVectorFieldMem_1a5770ccc15ea62e4105e65aab707837e7" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
-      <member refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_type</name></member>
+      <member refid="classVectorFieldMem_1a8f97183c5dea06be5000331e56c7a5f9" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_type</name></member>
       <member refid="classVectorFieldMem_1a69b83be2aa9a2e350191b76b4dde1b0e" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1abe439e1867e7ac8d564e77ba3c78e621" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a044e87b9de9db522db0e3d2aaac2545d" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
@@ -876,7 +886,7 @@
       <member refid="classVectorFieldMem_1aff256d9dfc07862551c5f232334d8c50" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a388c820f99c6290ee89ec1cca4685e66" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a43fb3313fbd0e4c96ebd7b7252031532" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
-      <member refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>view_type</name></member>
+      <member refid="classVectorFieldMem_1a95c48ba0b31f9fef4724fb8d56633743" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>view_type</name></member>
       <member refid="classVectorFieldMem_1ae0c51ded5f7792cba8913a70036e49f3" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>~VectorFieldMem</name></member>
     </listofallmembers>
   </compounddef>

@@ -19,6 +19,7 @@ class IInitialisation
 public:
     virtual ~IInitialisation() = default;
 
+
     virtual DFieldSpXYVxVy operator()(DFieldSpXYVxVy allfdistribu) const = 0;
 };
 ```

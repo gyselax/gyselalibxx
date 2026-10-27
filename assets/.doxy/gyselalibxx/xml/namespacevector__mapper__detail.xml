@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespacevector__mapper__detail" kind="namespace" language="C++">
     <compoundname>vector_mapper_detail</compoundname>
     <innerclass refid="structvector__mapper__detail_1_1EvaluationCoord" prot="public">vector_mapper_detail::EvaluationCoord</innerclass>
-    <innerclass refid="structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4" prot="public">vector_mapper_detail::EvaluationCoord&lt; Mapping &gt;</innerclass>
     <innerclass refid="structvector__mapper__detail_1_1EvaluationCoord_3_01MetricTensorType_01_4" prot="public">vector_mapper_detail::EvaluationCoord&lt; MetricTensorType &gt;</innerclass>
+    <innerclass refid="structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4" prot="public">vector_mapper_detail::EvaluationCoord&lt; Mapping &gt;</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="vector__mapper_8hpp_1a744d5389845a75ad3f7bfaeb07542872" prot="public" static="no">
+      <memberdef kind="typedef" id="vector__mapper_8hpp_1a67540732b7eaf95975420943f5de2d0f" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class MappingOrMetric</type>
           </param>
         </templateparamlist>
         <type>typename <ref refid="structvector__mapper__detail_1_1EvaluationCoord" kindref="compound">EvaluationCoord</ref>&lt; MappingOrMetric &gt;::type</type>
-        <definition>using vector_mapper_detail::evaluation_coord_t = typedef typename EvaluationCoord&lt;MappingOrMetric&gt;::type</definition>
+        <definition>using vector_mapper_detail::evaluation_coord_t =  typename EvaluationCoord&lt;MappingOrMetric&gt;::type</definition>
         <argsstring></argsstring>
         <name>evaluation_coord_t</name>
         <qualifiedname>vector_mapper_detail::evaluation_coord_t</qualifiedname>
@@ -37,8 +37,8 @@
             <type>class InVectorSpace</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool vector_mapper_detail::is_variance_change_only_v</definition>
+        <type>bool</type>
+        <definition>bool vector_mapper_detail::is_variance_change_only_v</definition>
         <argsstring></argsstring>
         <name>is_variance_change_only_v</name>
         <qualifiedname>vector_mapper_detail::is_variance_change_only_v</qualifiedname>
@@ -63,8 +63,8 @@
             <type>class InVectorSpace</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool vector_mapper_detail::is_coordinate_change_only_v</definition>
+        <type>bool</type>
+        <definition>bool vector_mapper_detail::is_coordinate_change_only_v</definition>
         <argsstring></argsstring>
         <name>is_coordinate_change_only_v</name>
         <qualifiedname>vector_mapper_detail::is_coordinate_change_only_v</qualifiedname>
@@ -92,8 +92,8 @@
             <type>class Mapping</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool vector_mapper_detail::is_arg_to_result_v</definition>
+        <type>bool</type>
+        <definition>bool vector_mapper_detail::is_arg_to_result_v</definition>
         <argsstring></argsstring>
         <name>is_arg_to_result_v</name>
         <qualifiedname>vector_mapper_detail::is_arg_to_result_v</qualifiedname>
@@ -124,8 +124,8 @@
             <type>class Mapping</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool vector_mapper_detail::is_result_to_arg_v</definition>
+        <type>bool</type>
+        <definition>bool vector_mapper_detail::is_result_to_arg_v</definition>
         <argsstring></argsstring>
         <name>is_result_to_arg_v</name>
         <qualifiedname>vector_mapper_detail::is_result_to_arg_v</qualifiedname>
@@ -153,8 +153,8 @@
             <type>class InVectorSpace</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool vector_mapper_detail::are_contravariant_v</definition>
+        <type>bool</type>
+        <definition>bool vector_mapper_detail::are_contravariant_v</definition>
         <argsstring></argsstring>
         <name>are_contravariant_v</name>
         <qualifiedname>vector_mapper_detail::are_contravariant_v</qualifiedname>

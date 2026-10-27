@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometryXYVxVy_2poisson_2nullqnsolver_8cpp" kind="file" language="C++">
     <compoundname>nullqnsolver.cpp</compoundname>
     <includes refid="geometryXYVxVy_2poisson_2nullqnsolver_8hpp" local="yes">nullqnsolver.hpp</includes>
@@ -307,7 +307,7 @@
 <codeline lineno="2"><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nullqnsolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classNullQNSolver_1ac636ac6b797e8bf883a53955f191d4ed" kindref="member">NullQNSolver::operator()</ref>(DFieldXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">,<sp/><ref refid="classVectorField" kindref="compound">DVectorFieldXY</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">,<sp/>DConstFieldSpVxVyXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classNullQNSolver_1ac636ac6b797e8bf883a53955f191d4ed" kindref="member">NullQNSolver::operator()</ref>(DFieldXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">,<sp/>DVectorFieldXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">,<sp/>DConstFieldSpVxVyXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="6"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="7"><highlight class="normal">}</highlight></codeline>
     </programlisting>

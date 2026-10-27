@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="coord__transformation__tools_8hpp" kind="file" language="C++">
     <compoundname>coord_transformation_tools.hpp</compoundname>
     <includes local="no">array</includes>
@@ -664,6 +664,17 @@
       </node>
     </invincdepgraph>
     <innerclass refid="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4" prot="public">CoordWithOPoint&lt; Coord&lt; Dim1, Dim2 &gt; &gt;</innerclass>
+    <innerconcept refid="conceptconcepts_1_1Mapping">concepts::Mapping</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1JacobianMatrix">concepts::JacobianMatrix</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1InvJacobianMatrix">concepts::InvJacobianMatrix</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1MappingWithJacobian">concepts::MappingWithJacobian</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1MappingWithInvJacobian">concepts::MappingWithInvJacobian</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1MappingWithIntegrationCoord">concepts::MappingWithIntegrationCoord</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1AnalyticalMapping">concepts::AnalyticalMapping</innerconcept>
+    <innerconcept refid="conceptis__mapping__v">is_mapping_v</innerconcept>
+    <innerconcept refid="concepthas__jacobian__v">has_jacobian_v</innerconcept>
+    <innerconcept refid="concepthas__inv__jacobian__v">has_inv_jacobian_v</innerconcept>
+    <innerconcept refid="conceptis__analytical__mapping__v">is_analytical_mapping_v</innerconcept>
     <innernamespace refid="namespaceconcepts">concepts</innernamespace>
     <sectiondef kind="typedef">
       <memberdef kind="typedef" id="coord__transformation__tools_8hpp_1a73b10b1b7a6d6f065a61b7cd3e07715d" prot="public" static="no">
@@ -695,8 +706,8 @@
             <type>class Type</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_accessible_v</definition>
+        <type>bool</type>
+        <definition>bool is_accessible_v</definition>
         <argsstring></argsstring>
         <name>is_accessible_v</name>
         <initializer>= mapping_detail::
@@ -715,8 +726,8 @@
             <type>class Mapping</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_coord_transform_with_o_point_v</definition>
+        <type>bool</type>
+        <definition>bool is_coord_transform_with_o_point_v</definition>
         <argsstring></argsstring>
         <name>is_coord_transform_with_o_point_v</name>
         <initializer>= mapping_detail::HasOPoint&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value</initializer>
@@ -735,8 +746,8 @@
             <type>class Mapping</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool has_singular_o_point_inv_jacobian_v</definition>
+        <type>bool</type>
+        <definition>bool has_singular_o_point_inv_jacobian_v</definition>
         <argsstring></argsstring>
         <name>has_singular_o_point_inv_jacobian_v</name>
         <initializer>= mapping_detail::SingularOPointInvJacobian&lt;
@@ -870,7 +881,7 @@
 <codeline lineno="134"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType&gt;</highlight></codeline>
 <codeline lineno="135" refid="structCoordWithOPoint" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structCoordWithOPoint" kindref="compound">CoordWithOPoint</ref>;</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"></highlight></codeline>
-<codeline lineno="138"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
 <codeline lineno="139" refid="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structCoordWithOPoint" kindref="compound">CoordWithOPoint</ref>&lt;Coord&lt;Dim1,<sp/>Dim2&gt;&gt;</highlight></codeline>
 <codeline lineno="140"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="142" refid="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4_1a43462322284c3ab79fbdeaef2c3559aa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structCoordWithOPoint_3_01Coord_3_01Dim1_00_01Dim2_01_4_01_4_1a43462322284c3ab79fbdeaef2c3559aa" kindref="member">curvilinear_tag_r</ref><sp/>=<sp/>std::conditional_t&lt;Dim1::PERIODIC,<sp/>Dim2,<sp/>Dim1&gt;;</highlight></codeline>
@@ -892,7 +903,7 @@
 <codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
 <codeline lineno="160" refid="concepthas__inv__jacobian__v" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="concepthas__inv__jacobian__v" kindref="compound">has_inv_jacobian_v</ref><sp/>=<sp/><ref refid="conceptconcepts_1_1MappingWithInvJacobian" kindref="compound">concepts::MappingWithInvJacobian&lt;Mapping&gt;</ref>;</highlight></codeline>
 <codeline lineno="161"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_coord_transform_with_o_point_v</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>mapping_detail::HasOPoint&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value;</highlight></codeline>
 <codeline lineno="166"><highlight class="normal"></highlight></codeline>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structGaussLegendreCoefficients" kind="struct" language="C++" prot="public">
     <compoundname>GaussLegendreCoefficients</compoundname>
     <includes refid="gauss__legendre__integration_8hpp" local="no">gauss_legendre_integration.hpp</includes>
@@ -11,13 +11,12 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structGaussLegendreCoefficients_1a37090be09a17b4e59533dd21298bbc04" prot="public" static="yes" mutable="no">
+      <memberdef kind="variable" id="structGaussLegendreCoefficients_1a0c3310b51b205aeda0dab17f4925c4d2" prot="public" static="yes" mutable="no">
         <type>std::array&lt; long double, NPoints &gt;</type>
-        <definition>std::array&lt; long double, NPoints &gt; GaussLegendreCoefficients&lt; NPoints &gt;::pos</definition>
+        <definition>std::array&lt;long double, NPoints&gt; GaussLegendreCoefficients&lt; NPoints &gt;::pos</definition>
         <argsstring></argsstring>
         <name>pos</name>
         <qualifiedname>GaussLegendreCoefficients::pos</qualifiedname>
-        <initializer>= s_pos&lt;NPoints&gt;</initializer>
         <briefdescription>
 <para>The positions on the domain [-1,1] where the function should be evaluated. </para>
         </briefdescription>
@@ -27,13 +26,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="26" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="26" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structGaussLegendreCoefficients_1aa4a6fa7f07cf8f2bcbd38d0153a321ce" prot="public" static="yes" mutable="no">
+      <memberdef kind="variable" id="structGaussLegendreCoefficients_1afe529976684244a390c122afe1b8bb86" prot="public" static="yes" mutable="no">
         <type>std::array&lt; long double, NPoints &gt;</type>
-        <definition>std::array&lt; long double, NPoints &gt; GaussLegendreCoefficients&lt; NPoints &gt;::weight</definition>
+        <definition>std::array&lt;long double, NPoints&gt; GaussLegendreCoefficients&lt; NPoints &gt;::weight</definition>
         <argsstring></argsstring>
         <name>weight</name>
         <qualifiedname>GaussLegendreCoefficients::weight</qualifiedname>
-        <initializer>= s_weight&lt;NPoints&gt;</initializer>
         <briefdescription>
 <para>The weights that the function should be multiplied by in the Gauss-Legendre quadrature. </para>
         </briefdescription>
@@ -74,8 +72,8 @@
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="21" bodyend="32"/>
     <listofallmembers>
-      <member refid="structGaussLegendreCoefficients_1a37090be09a17b4e59533dd21298bbc04" prot="public" virt="non-virtual"><scope>GaussLegendreCoefficients</scope><name>pos</name></member>
-      <member refid="structGaussLegendreCoefficients_1aa4a6fa7f07cf8f2bcbd38d0153a321ce" prot="public" virt="non-virtual"><scope>GaussLegendreCoefficients</scope><name>weight</name></member>
+      <member refid="structGaussLegendreCoefficients_1a0c3310b51b205aeda0dab17f4925c4d2" prot="public" virt="non-virtual"><scope>GaussLegendreCoefficients</scope><name>pos</name></member>
+      <member refid="structGaussLegendreCoefficients_1afe529976684244a390c122afe1b8bb86" prot="public" virt="non-virtual"><scope>GaussLegendreCoefficients</scope><name>weight</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

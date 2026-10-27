@@ -92,7 +92,9 @@ _Specialisation of_ [_**ExtractPatches**_](structconnectivity__details_1_1Extrac
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::ExtractPatches< ddc::detail::TypeSeq< EdgeType1, EdgeTypes... > >::type =  ddc::type_seq_merge_t< ddc::detail::TypeSeq<typename EdgeType1::associated_patch>, typename ExtractPatches<ddc::detail::TypeSeq<EdgeTypes...> >::type>;
+using connectivity_details::ExtractPatches< ddc::detail::TypeSeq< EdgeType1, EdgeTypes... > >::type =  ddc::type_seq_merge_t<
+            ddc::detail::TypeSeq<typename EdgeType1::associated_patch>,
+            typename ExtractPatches<ddc::detail::TypeSeq<EdgeTypes...>>::type>;
 ```
 
 

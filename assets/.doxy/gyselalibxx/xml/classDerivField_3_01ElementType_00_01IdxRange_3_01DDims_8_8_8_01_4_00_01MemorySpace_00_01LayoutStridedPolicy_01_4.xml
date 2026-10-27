@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4" kind="class" language="C++" prot="public">
     <compoundname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</compoundname>
     <basecompoundref refid="classDerivFieldCommon" prot="public" virt="non-virtual">DerivFieldCommon&lt; Field&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;, IdxRange&lt; DDims... &gt; &gt;</basecompoundref>
@@ -21,9 +21,11 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a80f7894a089915c53af8b9526cd54f36" prot="private" static="no">
+      <memberdef kind="typedef" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a34cec766051e456497e1ca068adfd891" prot="private" static="no">
         <type><ref refid="classDerivFieldCommon" kindref="compound">DerivFieldCommon</ref>&lt; Field&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;, IdxRange&lt; DDims... &gt; &gt;</type>
-        <definition>using DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::base_type =  DerivFieldCommon&lt; Field&lt;ElementType, IdxRange&lt;DDims...&gt;, MemorySpace, LayoutStridedPolicy&gt;, IdxRange&lt;DDims...&gt; &gt;</definition>
+        <definition>using DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::base_type =  DerivFieldCommon&lt;
+            Field&lt;ElementType, IdxRange&lt;DDims...&gt;, MemorySpace, LayoutStridedPolicy&gt;,
+            IdxRange&lt;DDims...&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>base_type</name>
         <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::base_type</qualifiedname>
@@ -34,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="112" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ad21d2967a8bc54612ea2bbc9e80616c1" prot="private" static="no">
         <type>typename base_type::discrete_deriv_idx_range_type</type>
@@ -49,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="169" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="169" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="168" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="168" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a64ecbf1f362f16ddfc6cffc7b9e9e531" prot="private" static="no">
         <type>typename base_type::discrete_deriv_index_type</type>
@@ -64,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="174" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="174" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="173" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="173" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ad4ddc3aa0d58b7298246fd58c3d800ec" prot="private" static="no">
         <type>typename chunk_type::reference</type>
@@ -79,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="177" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="177" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="176" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="176" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -264,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="164" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="165" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="164" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="164" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -291,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="187" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="187" bodyend="203"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="186" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="186" bodyend="202"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a5715833cb4d3a008b509a5760f272094" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -313,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="207" column="57" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="207" bodyend="210"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="206" column="57" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="206" bodyend="209"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ab026f2f41036bfda6c6e6c06c8223670" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -345,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="214" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="214" bodyend="221"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="213" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="213" bodyend="220"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aea01e036a1639d070d35df387ec85b34" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -363,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="223" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="223" bodyend="234"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="222" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="222" bodyend="233"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -394,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="242" column="41"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="241" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1af1f36e186cf5cdf4050442c18105ea22" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION constexpr</type>
@@ -423,7 +425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="249" column="41"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="248" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ab745a7772a5a73b63e275a4887c00ec6" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -444,7 +446,7 @@
           </param>
         </templateparamlist>
         <type>constexpr</type>
-        <definition>constexpr DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::DerivField</definition>
+        <definition>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::DerivField</definition>
         <argsstring>(DerivFieldMem&lt; OElementType, index_range_type, NDerivs, Allocator &gt; &amp;field)</argsstring>
         <name>DerivField</name>
         <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::DerivField</qualifiedname>
@@ -469,7 +471,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="261" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="261" bodyend="270"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="260" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="260" bodyend="269"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aca911b432b83e28114781e8fbf062eee" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -498,7 +500,7 @@
           </param>
         </templateparamlist>
         <type>constexpr</type>
-        <definition>constexpr DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::DerivField</definition>
+        <definition>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::DerivField</definition>
         <argsstring>(DerivFieldMem&lt; OElementType, index_range_type, NDerivs, Allocator &gt; const &amp;field)</argsstring>
         <name>DerivField</name>
         <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::DerivField</qualifiedname>
@@ -523,7 +525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="285" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="285" bodyend="294"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="284" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="284" bodyend="293"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aa7e25d8a63289256c1957f6b4b48ab62" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -557,7 +559,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="303" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="303" bodyend="313"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="302" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="302" bodyend="312"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aff344a2cabdff7ca3284427c7757f5ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -571,7 +573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="315" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="314" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a5c73fc7d3e23f0dc0b8cfe0c352495f2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION constexpr <ref refid="classDerivField" kindref="compound">DerivField</ref> &amp;</type>
@@ -601,7 +603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="321" column="52"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="320" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a16496ea9865d678f0cc111ab934849a3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION constexpr <ref refid="classDerivField" kindref="compound">DerivField</ref> &amp;</type>
@@ -631,7 +633,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="327" column="52"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="326" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a86f232e462344ee0dbc33c7bbf2d7b57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -671,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="335" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="335" bodyend="343"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="334" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="334" bodyend="342"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a86babf139eeb18c97f045852b155a613" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -726,7 +728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="352" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="352" bodyend="361"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="351" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="351" bodyend="360"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a11d7a0ef77df2e057a0f56d2555fe582" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -764,7 +766,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="373" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="373" bodyend="379"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="372" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="372" bodyend="378"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a1629f76c7845f8077707e2e63ce4279f" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -774,8 +776,8 @@
             <defname>QueryDDims</defname>
           </param>
         </templateparamlist>
-        <type>constexpr auto</type>
-        <definition>constexpr auto DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::operator[]</definition>
+        <type>auto</type>
+        <definition>auto DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::operator[]</definition>
         <argsstring>(Idx&lt; QueryDDims... &gt; const &amp;slice_spec) const</argsstring>
         <name>operator[]</name>
         <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::operator[]</qualifiedname>
@@ -802,7 +804,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="391" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="391" bodyend="394"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="390" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="390" bodyend="393"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1acfb3e5f4e43f2cbe04e8c4edc5f0fb5c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -840,7 +842,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="408" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="408" bodyend="411"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="407" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="407" bodyend="410"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a4d3b959c2d379435393f5587ac5b55bc" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION constexpr <ref refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a695e683f3937dbfc72c277b00347274a" kindref="member">view_type</ref></type>
@@ -859,7 +861,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="421" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="421" bodyend="424"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="420" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="420" bodyend="423"/>
       </memberdef>
       <memberdef kind="function" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a6e684ac2b3f507136855b704b532bddb" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION constexpr <ref refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ad4c88b591e1de7d100a400f9fd0203ad" kindref="member">span_type</ref></type>
@@ -878,7 +880,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="434" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="434" bodyend="437"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="433" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="433" bodyend="436"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -947,7 +949,7 @@
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="103" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="107" bodyend="438"/>
     <listofallmembers>
-      <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a80f7894a089915c53af8b9526cd54f36" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>base_type</name></member>
+      <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a34cec766051e456497e1ca068adfd891" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>base_type</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a87a55b42526619bb91be37de6f6e416f" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>chunk_type</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a86f232e462344ee0dbc33c7bbf2d7b57" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>deepcopy</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a86babf139eeb18c97f045852b155a613" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>deepcopy</name></member>

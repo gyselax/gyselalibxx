@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="collisions__utils_8hpp" kind="file" language="C++">
     <compoundname>collisions_utils.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -456,13 +456,12 @@ Computes the space and species dependent collision frequency collfreq. </para>
 <para>Computation of Vcoll and Tcoll, which are the moments of the kernel maxwellian function of the intra species collision operator. Vcoll and Tcoll are defined as follows:<itemizedlist>
 <listitem><para><formula id="296">$Tcoll = Pcoll^{-1}[Imean0*Imean2 - Imean1*Imean1]$</formula></para>
 </listitem><listitem><para><formula id="297">$Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]$</formula></para>
-</listitem><listitem><para><formula id="298">$Pcoll = Imean0*Imean4 - Imean1*Imean3$</formula> where the 5 integrals are defined as:  <formula id="299">\[
-    Imean0=&lt;Dcoll&gt; ;
+</listitem><listitem><para><formula id="298">$Pcoll = Imean0*Imean4 - Imean1*Imean3$</formula> where the 5 integrals are defined as:       <formula id="299">\[    Imean0=&lt;Dcoll&gt; ;
     Imean1=&lt;v*Dcoll&gt; ;
     Imean2=&lt;v^2*Dcoll&gt; ;
     Imean3=&lt;d/dv(Dcoll)&gt;
     Imean4=&lt;d/dv(v*Dcoll)&gt;
- \]</formula> The brackets <formula id="300">$&lt;.&gt;$</formula> represent the integral in velocity: <formula id="301">$&lt;.&gt; = \int . dv$</formula></para>
+\]</formula> The brackets <formula id="300">$&lt;.&gt;$</formula> represent the integral in velocity: <formula id="301">$&lt;.&gt; = \int . dv$</formula></para>
 </listitem></itemizedlist>
 </para>
 <para><parameterlist kind="param"><parameteritem>
@@ -851,7 +850,7 @@ Computes the momentum and energy exchange terms between ions and electrons </par
 <codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;Species,<sp/>GridX,<sp/>LocalGridVx&gt;&gt;<sp/>dvDcoll)</highlight></codeline>
 <codeline lineno="162"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>quadrature_coeffs_alloc(</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>trapezoid_quadrature_coefficients&lt;Kokkos::DefaultExecutionSpace&gt;(</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trapezoid__quadrature_8hpp_1a2e9e7d21b2da01a44fb6d6399a13fa0e" kindref="member">trapezoid_quadrature_coefficients&lt;Kokkos::DefaultExecutionSpace&gt;</ref>(</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range&lt;GridVx&gt;(allfdistribu)));</highlight></codeline>
 <codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>quadrature_coeffs<sp/>=<sp/>get_const_field(quadrature_coeffs_alloc);</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"></highlight></codeline>

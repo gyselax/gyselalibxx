@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classExplicitTimeStepperBuilder" kind="class" language="C++" prot="public">
     <compoundname>ExplicitTimeStepperBuilder</compoundname>
     <includes refid="itimestepper_8hpp" local="no">itimestepper.hpp</includes>
@@ -107,7 +107,7 @@
 <parametername>ChosenTimeStepper</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The type of the TimeStepper to be constructed (obtained from time_stepper_t). </para>
+<para>The type of the TimeStepper to be constructed (obtained from <ref refid="classExplicitTimeStepperBuilder_1a37ec04e4a03c1080891a68fb27395573" kindref="member">time_stepper_t</ref>). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -146,7 +146,7 @@
 <parametername>ChosenTimeStepper</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The type of the TimeStepper to be constructed (obtained from time_stepper_t). </para>
+<para>The type of the TimeStepper to be constructed (obtained from <ref refid="classExplicitTimeStepperBuilder_1a37ec04e4a03c1080891a68fb27395573" kindref="member">time_stepper_t</ref>). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

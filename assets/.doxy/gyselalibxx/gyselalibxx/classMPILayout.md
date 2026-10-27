@@ -67,8 +67,8 @@ See [IMPILayout](classIMPILayout.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**distributed\_idx\_ranges\_are\_first**](classIMPILayout.md#variable-distributed_idx_ranges_are_first)   = `/* multi line expression */`<br>_A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory._  |
-|  constexpr int | [**n\_distributed\_dimensions**](classIMPILayout.md#variable-n_distributed_dimensions)   = `sizeof...(DistributedDim)`<br>_The number of dimensions that are distributed across MPI processes._  |
+|  bool | [**distributed\_idx\_ranges\_are\_first**](classIMPILayout.md#variable-distributed_idx_ranges_are_first)   = `/* multi line expression */`<br>_A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory._  |
+|  int | [**n\_distributed\_dimensions**](classIMPILayout.md#variable-n_distributed_dimensions)   = `sizeof...(DistributedDim)`<br>_The number of dimensions that are distributed across MPI processes._  |
 
 
 

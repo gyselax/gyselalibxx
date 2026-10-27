@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="spline__1d__partial__derivative_8hpp" kind="file" language="C++">
     <compoundname>spline_1d_partial_derivative.hpp</compoundname>
     <includes refid="ddc__alias__inline__functions_8hpp" local="yes">ddc_alias_inline_functions.hpp</includes>
@@ -87,7 +87,7 @@
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline1DBuilder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline1DEvaluator,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeBatched&gt;</highlight></codeline>
-<codeline lineno="18" refid="classSpline1DPartialDerivative" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpline1DPartialDerivative" kindref="compound">Spline1DPartialDerivative</ref></highlight></codeline>
+<codeline lineno="18" refid="classSpline1DPartialDerivative" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpline1DPartialDerivative_1a4d8bc99c8cc8f7b5fabbb119e2fef77b" kindref="member">Spline1DPartialDerivative</ref></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched,</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>Spline1DBuilder::continuous_dimension_type&gt;</highlight></codeline>
@@ -101,7 +101,7 @@
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivativeDimension<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Spline1DBuilder::continuous_dimension_type;</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative" kindref="compound">base_type</ref><sp/>=<sp/><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative&lt;IdxRangeBatched, DerivativeDimension&gt;</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">base_type<sp/>=<sp/><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative&lt;IdxRangeBatched, DerivativeDimension&gt;</ref>;</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kindref="member">base_type::DConstFieldType</ref>;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">base_type::DFieldType</ref>;</highlight></codeline>
@@ -138,7 +138,7 @@
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
 <codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline1DBuilder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline1DEvaluator,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeBatched&gt;</highlight></codeline>
-<codeline lineno="94" refid="classSpline1DPartialDerivativeCreator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpline1DPartialDerivativeCreator" kindref="compound">Spline1DPartialDerivativeCreator</ref></highlight></codeline>
+<codeline lineno="94" refid="classSpline1DPartialDerivativeCreator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpline1DPartialDerivativeCreator_1a3160d0f8e67bd155f84953d2c5a81290" kindref="member">Spline1DPartialDerivativeCreator</ref></highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivativeCreator" kindref="compound">IPartialDerivativeCreator</ref>&lt;</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched,</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>Spline1DBuilder::continuous_dimension_type&gt;</highlight></codeline>

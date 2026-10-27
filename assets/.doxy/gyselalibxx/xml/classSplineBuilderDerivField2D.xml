@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classSplineBuilderDerivField2D" kind="class" language="C++" prot="public">
     <compoundname>SplineBuilderDerivField2D</compoundname>
     <includes refid="spline__builder__deriv__field__2d_8hpp" local="no">spline_builder_deriv_field_2d.hpp</includes>
@@ -111,9 +111,20 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineBuilderDerivField2D_1aa7836fe12b8be3ff941f6a6743093b2c" prot="private" static="no">
+      <memberdef kind="typedef" id="classSplineBuilderDerivField2D_1ac02a8e42cf5309503001cb99cd95f85a" prot="private" static="no">
         <type>ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max, ddc::SplineSolver::LAPACK &gt;</type>
-        <definition>using SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::Builder2D =  ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max, ddc::SplineSolver::LAPACK&gt;</definition>
+        <definition>using SplineBuilderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, SplineBuilderClosure1min, SplineBuilderClosure1max, SplineBuilderClosure2min, SplineBuilderClosure2max &gt;::Builder2D =  ddc::SplineBuilder2D&lt;
+            ExecSpace,
+            MemorySpace,
+            BSplines1,
+            BSplines2,
+            Grid1,
+            Grid2,
+            SplineBuilderClosure1min,
+            SplineBuilderClosure1max,
+            SplineBuilderClosure2min,
+            SplineBuilderClosure2max,
+            ddc::SplineSolver::LAPACK&gt;</definition>
         <argsstring></argsstring>
         <name>Builder2D</name>
         <qualifiedname>SplineBuilderDerivField2D::Builder2D</qualifiedname>
@@ -123,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSplineBuilderDerivField2D_1afc411d36b098c5722bf54c8ac19a3b55" prot="private" static="no">
         <type>DField&lt; IdxRange&lt; BSplines1, BSplines2 &gt;, MemorySpace &gt;</type>
@@ -365,7 +376,7 @@
           <declname>spline</declname>
         </param>
         <param>
-          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <type>DerivFieldType</type>
           <declname>function_and_derivs</declname>
         </param>
         <briefdescription>
@@ -408,7 +419,7 @@
           <declname>function</declname>
         </param>
         <param>
-          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <type>DerivFieldType</type>
           <declname>function_and_derivs</declname>
         </param>
         <briefdescription>
@@ -449,7 +460,7 @@
           <declname>deriv1</declname>
         </param>
         <param>
-          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <type>DerivFieldType</type>
           <declname>function_and_derivs</declname>
         </param>
         <param>
@@ -502,7 +513,7 @@
           <declname>deriv2</declname>
         </param>
         <param>
-          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <type>DerivFieldType</type>
           <declname>function_and_derivs</declname>
         </param>
         <param>
@@ -555,7 +566,7 @@
           <declname>cross_deriv</declname>
         </param>
         <param>
-          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <type>DerivFieldType</type>
           <declname>function_and_derivs</declname>
         </param>
         <param>
@@ -619,7 +630,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="34" bodyend="294"/>
     <listofallmembers>
-      <member refid="classSplineBuilderDerivField2D_1aa7836fe12b8be3ff941f6a6743093b2c" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>Builder2D</name></member>
+      <member refid="classSplineBuilderDerivField2D_1ac02a8e42cf5309503001cb99cd95f85a" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>Builder2D</name></member>
       <member refid="classSplineBuilderDerivField2D_1a4f740cd442d3591df7818e41e5d03eba" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>CrossDerivConstField</name></member>
       <member refid="classSplineBuilderDerivField2D_1ac4f5b9cd9abcb616de0f9d58697e314a" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>CrossDerivField</name></member>
       <member refid="classSplineBuilderDerivField2D_1ae85323bd62eac692792adbeb57e533e4" prot="private" virt="non-virtual"><scope>SplineBuilderDerivField2D</scope><name>CrossDerivFieldMem</name></member>

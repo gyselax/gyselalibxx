@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4" kind="struct" language="C++" prot="public">
     <compoundname>connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;</compoundname>
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>

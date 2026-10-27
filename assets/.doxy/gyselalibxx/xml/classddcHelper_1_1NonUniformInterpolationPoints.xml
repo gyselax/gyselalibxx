@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classddcHelper_1_1NonUniformInterpolationPoints" kind="class" language="C++" prot="public">
     <compoundname>ddcHelper::NonUniformInterpolationPoints</compoundname>
     <includes refid="non__uniform__interpolation__points_8hpp" local="no">non_uniform_interpolation_points.hpp</includes>
@@ -33,9 +33,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classddcHelper_1_1NonUniformInterpolationPoints_1ad3add30e41b01c6769909b3894c6db80" prot="private" static="no">
+      <memberdef kind="typedef" id="classddcHelper_1_1NonUniformInterpolationPoints_1ab771eaf92597f47aa6fa612975dfde23" prot="private" static="no">
         <type>std::conditional_t&lt; BSplines::is_uniform(), ddc::UniformBsplinesKnots&lt; BSplines &gt;, ddc::NonUniformBsplinesKnots&lt; BSplines &gt; &gt;</type>
-        <definition>using ddcHelper::NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt;::BreakPointsType =  std::conditional_t&lt; BSplines::is_uniform(), ddc::UniformBsplinesKnots&lt;BSplines&gt;, ddc::NonUniformBsplinesKnots&lt;BSplines&gt; &gt;</definition>
+        <definition>using ddcHelper::NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt;::BreakPointsType =  std::conditional_t&lt;
+            BSplines::is_uniform(),
+            ddc::UniformBsplinesKnots&lt;BSplines&gt;,
+            ddc::NonUniformBsplinesKnots&lt;BSplines&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>BreakPointsType</name>
         <qualifiedname>ddcHelper::NonUniformInterpolationPoints::BreakPointsType</qualifiedname>
@@ -45,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" bodystart="49" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classddcHelper_1_1NonUniformInterpolationPoints_1a7d9d9428e7b5f7bbda79868452096711" prot="private" static="no">
         <type>Idx&lt; BreakPointsType &gt;</type>
@@ -82,8 +85,8 @@
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="classddcHelper_1_1NonUniformInterpolationPoints_1a7bcc5b181b0ee337b8dd9373490ef32c" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int ddcHelper::NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt;::N_BE_MIN</definition>
+        <type>int</type>
+        <definition>int ddcHelper::NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt;::N_BE_MIN</definition>
         <argsstring></argsstring>
         <name>N_BE_MIN</name>
         <qualifiedname>ddcHelper::NonUniformInterpolationPoints::N_BE_MIN</qualifiedname>
@@ -98,8 +101,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" line="54" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classddcHelper_1_1NonUniformInterpolationPoints_1a846681c7521c62de2bb62cf4e8ee4402" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int ddcHelper::NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt;::N_BE_MAX</definition>
+        <type>int</type>
+        <definition>int ddcHelper::NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt;::N_BE_MAX</definition>
         <argsstring></argsstring>
         <name>N_BE_MAX</name>
         <qualifiedname>ddcHelper::NonUniformInterpolationPoints::N_BE_MAX</qualifiedname>
@@ -224,7 +227,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp" bodystart="44" bodyend="158"/>
     <listofallmembers>
-      <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1ad3add30e41b01c6769909b3894c6db80" prot="private" virt="non-virtual"><scope>ddcHelper::NonUniformInterpolationPoints</scope><name>BreakPointsType</name></member>
+      <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1ab771eaf92597f47aa6fa612975dfde23" prot="private" virt="non-virtual"><scope>ddcHelper::NonUniformInterpolationPoints</scope><name>BreakPointsType</name></member>
       <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1ad77297ae5dfb40b29258c41d81a18793" prot="private" virt="non-virtual"><scope>ddcHelper::NonUniformInterpolationPoints</scope><name>check_n_points_in_cell</name></member>
       <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1ab8ff930d36034282ebc3165145af6ab9" prot="private" virt="non-virtual"><scope>ddcHelper::NonUniformInterpolationPoints</scope><name>Dim</name></member>
       <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1a947c549e52044a11d9483af1627835f4" prot="public" virt="non-virtual"><scope>ddcHelper::NonUniformInterpolationPoints</scope><name>get_domain</name></member>

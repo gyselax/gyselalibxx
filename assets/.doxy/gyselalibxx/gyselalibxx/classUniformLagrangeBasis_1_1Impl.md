@@ -61,7 +61,7 @@ _Storage class of the static attributes of the discrete dimension._ [More...](#d
 | ---: | :--- |
 |   | [**Impl**](#function-impl-24) () = default<br> |
 |   | [**Impl**](#function-impl-34) (IdxRange&lt; Grid1D &gt; break\_point\_domain) <br>_Initialise the possible Lagrange bases._  |
-|   | [**Impl**](#function-impl-44) ([**Impl**](classUniformLagrangeBasis_1_1Impl.md)&lt; DDim, OriginMemorySpace &gt; const & impl) <br>_Copy-constructs from another_ [_**Impl**_](classUniformLagrangeBasis_1_1Impl.md) _with a different Kokkos memory space._ |
+|   | [**Impl**](#function-impl-44) (Impl&lt; DDim, OriginMemorySpace &gt; const & impl) <br>_Copy-constructs from another_ [_**Impl**_](classUniformLagrangeBasis_1_1Impl.md) _with a different Kokkos memory space._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxRange&lt; [**knot\_grid**](classUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; | [**break\_point\_domain**](#function-break_point_domain) () const<br>_Returns the index range of the break points._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**eval\_basis**](#function-eval_basis) (Span1D&lt; DataType &gt; values, [**coord\_type**](classUniformLagrangeBasis.md#typedef-coord_type) x, Idx&lt; [**knot\_grid**](classUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; poly\_start) const<br>_Evaluate the selected set of bases at the coordinate._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**eval\_basis\_and\_n\_derivs**](#function-eval_basis_and_n_derivs) (Span2D&lt; DataType &gt; derivs, [**coord\_type**](classUniformLagrangeBasis.md#typedef-coord_type) const & x, Idx&lt; [**knot\_grid**](classUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; poly\_start, std::size\_t n\_derivs) const<br>_Evaluate the selected set of bases and their derivatives at the coordinate._  |
@@ -173,7 +173,7 @@ _Copy-constructs from another_ [_**Impl**_](classUniformLagrangeBasis_1_1Impl.md
 ```C++
 template<class OriginMemorySpace>
 inline explicit UniformLagrangeBasis::Impl::Impl (
-    Impl < DDim, OriginMemorySpace > const & impl
+    Impl< DDim, OriginMemorySpace > const & impl
 ) 
 ```
 

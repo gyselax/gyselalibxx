@@ -313,7 +313,7 @@ using Span4D =  SpanND<4, ElementType>;
 ### typedef SpanND 
 
 ```C++
-using SpanND =  Kokkos::mdspan<ElementType, Kokkos::dextents<std::size_t, N> >;
+using SpanND =  Kokkos::mdspan<ElementType, Kokkos::dextents<std::size_t, N>>;
 ```
 
 

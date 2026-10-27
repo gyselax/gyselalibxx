@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometryXYVxVy_2vlasov_2splitvlasovsolver_8cpp" kind="file" language="C++">
     <compoundname>splitvlasovsolver.cpp</compoundname>
     <includes refid="iadvectionvx_8hpp" local="yes">iadvectionvx.hpp</includes>
@@ -347,7 +347,7 @@
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal">DFieldSpVxVyXY<sp/><ref refid="classSplitVlasovSolver_1a958b142757ef330191c9c25188294f15" kindref="member">SplitVlasovSolver::operator()</ref>(</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldSpVxVyXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>allfdistribu,</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstFieldXY</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>electric_field,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorConstFieldXY<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>electric_field,</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Real<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="23"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>m_advec_x(allfdistribu,<sp/>dt<sp/>/<sp/>2);</highlight></codeline>

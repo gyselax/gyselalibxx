@@ -96,14 +96,14 @@ Inherits the following classes: [VectorFieldCommon](classVectorFieldCommon.md)
 |  KOKKOS\_FUNCTION constexpr | [**VectorField**](#function-vectorfield-1113) ([**VectorField**](classVectorField.md)&lt; OElementType, [**index\_range\_type**](classVectorField.md#typedef-index_range_type), VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; const & other) noexcept<br> |
 |  KOKKOS\_FUNCTION | [**VectorField**](#function-vectorfield-1213) ([**index\_range\_type**](classVectorField.md#typedef-index_range_type) const & idx\_range, OElementType \*... ptr) <br> |
 |  KOKKOS\_FUNCTION constexpr | [**VectorField**](#function-vectorfield-1313) (FieldType... fields) <br> |
-|  constexpr chunk\_span\_type | [**get**](#function-get) () noexcept const<br>_Get the Field describing the component in the QueryTag direction._  |
-|  constexpr [**view\_type**](classVectorField.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br> |
-|  constexpr [**span\_type**](classVectorField.md#typedef-span_type) | [**get\_field**](#function-get_field) () const<br> |
+|  chunk\_span\_type | [**get**](#function-get) () noexcept const<br>_Get the Field describing the component in the QueryTag direction._  |
+|  [**view\_type**](classVectorField.md#typedef-view_type) | [**get\_const\_field**](#function-get_const_field) () const<br> |
+|  [**span\_type**](classVectorField.md#typedef-span_type) | [**get\_field**](#function-get_field) () const<br> |
 |  KOKKOS\_FUNCTION [**element\_type**](classVectorField.md#typedef-element_type) const | [**operator()**](#function-operator) (IdxType const &... idx\_dim) noexcept const<br> |
 |  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**VectorField**](classVectorField.md) & | [**operator=**](#function-operator_1) ([**VectorField**](classVectorField.md) const & other) = default<br> |
 |  KOKKOS\_DEFAULTED\_FUNCTION constexpr [**VectorField**](classVectorField.md) & | [**operator=**](#function-operator_2) ([**VectorField**](classVectorField.md) && other) = default<br> |
-|  constexpr auto | [**operator[]**](#function-operator_3) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Slice out some dimensions._  |
-|  constexpr auto | [**operator[]**](#function-operator_4) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Slice out some dimensions._  |
+|  auto | [**operator[]**](#function-operator_3) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Slice out some dimensions._  |
+|  auto | [**operator[]**](#function-operator_4) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Slice out some dimensions._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~VectorField**](#function-vectorfield) () = default<br>[_**VectorField**_](classVectorField.md) _destructor._ |
 
 
@@ -279,7 +279,12 @@ using VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, L
 
 _A type which can hold a modifiable reference to a_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._
 ```C++
-using VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy >::span_type =  VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy>;
+using VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy >::span_type =  VectorField<
+            ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemorySpace,
+            LayoutStridedPolicy>;
 ```
 
 
@@ -297,7 +302,12 @@ A type which can hold a reference to a [**VectorFieldMem**](classVectorFieldMem.
 
 _A type which can hold a constant reference to a_ [_**VectorFieldMem**_](classVectorFieldMem.md) _. This is a DDC keyword used to make this class interchangeable with Field._
 ```C++
-using VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy >::view_type =  VectorField< const ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy>;
+using VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy >::view_type =  VectorField<
+            const ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemorySpace,
+            LayoutStridedPolicy>;
 ```
 
 
@@ -533,7 +543,7 @@ Constructs a new [**VectorField**](classVectorField.md) containing references to
 _Get the Field describing the component in the QueryTag direction._ 
 ```C++
 template<class QueryTag>
-inline constexpr chunk_span_type VectorField::get () noexcept const
+inline chunk_span_type VectorField::get () noexcept const
 ```
 
 
@@ -557,7 +567,7 @@ The field in the specified direction.
 ### function get\_const\_field 
 
 ```C++
-inline constexpr view_type VectorField::get_const_field () const
+inline view_type VectorField::get_const_field () const
 ```
 
 
@@ -587,7 +597,7 @@ A constant reference to the vector field.
 ### function get\_field 
 
 ```C++
-inline constexpr span_type VectorField::get_field () const
+inline span_type VectorField::get_field () const
 ```
 
 
@@ -719,7 +729,7 @@ Move-assigns a new value to this [**VectorField**](classVectorField.md)
 _Slice out some dimensions._ 
 ```C++
 template<class... QueryDDims>
-inline constexpr auto VectorField::operator[] (
+inline auto VectorField::operator[] (
     Idx< QueryDDims... > const & slice_spec
 ) 
 ```
@@ -757,7 +767,7 @@ A reference to the vector field on the sliced index range.
 _Slice out some dimensions._ 
 ```C++
 template<class... QueryDDims>
-inline constexpr auto VectorField::operator[] (
+inline auto VectorField::operator[] (
     IdxRange< QueryDDims... > const & oidx_range
 ) 
 ```

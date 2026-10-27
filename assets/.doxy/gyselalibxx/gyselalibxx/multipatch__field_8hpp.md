@@ -38,7 +38,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchField**](#typedef-multipatchfield)  <br>_A class to store field objects on patches._  |
+| typedef detail:: MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchField**](#typedef-multipatchfield)  <br>_A class to store field objects on patches._  |
 
 
 
@@ -47,8 +47,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_multipatch\_field**](#variable-enable_multipatch_field)   = `false`<br> |
-|  constexpr bool | [**is\_multipatch\_field\_v**](#variable-is_multipatch_field_v)   = `enable\_multipatch\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
+|  bool | [**enable\_multipatch\_field**](#variable-enable_multipatch_field)   = `false`<br> |
+|  bool | [**is\_multipatch\_field\_v**](#variable-is_multipatch_field_v)   = `enable\_multipatch\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 
@@ -102,7 +102,8 @@
 
 _A class to store field objects on patches._ 
 ```C++
-using MultipatchField =  detail:: MultipatchField<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...> >;
+using MultipatchField =  detail::
+        MultipatchField<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
 ```
 
 
@@ -132,7 +133,7 @@ See detail::MultipatchField for more details. This alias creates the type T&lt;P
 ### variable enable\_multipatch\_field 
 
 ```C++
-constexpr bool enable_multipatch_field;
+bool enable_multipatch_field;
 ```
 
 
@@ -145,7 +146,7 @@ constexpr bool enable_multipatch_field;
 ### variable is\_multipatch\_field\_v 
 
 ```C++
-constexpr bool is_multipatch_field_v;
+bool is_multipatch_field_v;
 ```
 
 

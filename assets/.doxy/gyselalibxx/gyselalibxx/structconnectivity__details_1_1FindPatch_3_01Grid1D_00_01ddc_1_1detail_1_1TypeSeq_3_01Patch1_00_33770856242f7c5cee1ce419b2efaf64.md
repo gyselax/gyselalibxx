@@ -92,7 +92,7 @@ _Specialisation of_ [_**FindPatch**_](structconnectivity__details_1_1FindPatch.m
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::FindPatch< Grid1D, ddc::detail::TypeSeq< Patch1, RemainingPatchTypes... > >::type =  typename FindPatch<Grid1D, ddc::detail::TypeSeq<RemainingPatchTypes...> >::type;
+using connectivity_details::FindPatch< Grid1D, ddc::detail::TypeSeq< Patch1, RemainingPatchTypes... > >::type =  typename FindPatch<Grid1D, ddc::detail::TypeSeq<RemainingPatchTypes...>>::type;
 ```
 
 

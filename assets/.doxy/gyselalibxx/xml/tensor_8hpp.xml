@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="tensor_8hpp" kind="file" language="C++">
     <compoundname>tensor.hpp</compoundname>
     <includes local="no">array</includes>
@@ -1155,7 +1155,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="208" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="208" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="tensor_8hpp_1ae3239ebdbab479a3e67907f2d16e8eb1" prot="public" static="no">
+      <memberdef kind="typedef" id="tensor_8hpp_1a9e1281858166112d499caaa686179e7c" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class ElementType</type>
@@ -1167,7 +1167,7 @@
           </param>
         </templateparamlist>
         <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, VectorIndexSet&lt; Dims... &gt; &gt;</type>
-        <definition>using Vector =  Tensor&lt;ElementType, VectorIndexSet&lt;Dims...&gt; &gt;</definition>
+        <definition>using Vector =  Tensor&lt;ElementType, VectorIndexSet&lt;Dims...&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>Vector</name>
         <briefdescription>
@@ -1205,7 +1205,7 @@
             <defname>Dims</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="classTensor" kindref="compound">Vector</ref>&lt; double, Dims... &gt;</type>
+        <type>Vector&lt; double, Dims... &gt;</type>
         <definition>using DVector =  Vector&lt;double, Dims...&gt;</definition>
         <argsstring></argsstring>
         <name>DVector</name>
@@ -1253,7 +1253,7 @@
           <declname>o</declname>
         </param>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Vector</ref>&lt; ElementType, Dim1, TailDims... &gt;</type>
+          <type>Vector&lt; ElementType, Dim1, TailDims... &gt;</type>
           <declname>vec</declname>
         </param>
         <briefdescription>
@@ -1313,8 +1313,8 @@
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ValidIndexSetFirstDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
-<codeline lineno="52" refid="classTensor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classTensor" kindref="compound">Tensor</ref></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;</highlight></codeline>
+<codeline lineno="52" refid="classTensor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classTensor_1a4a47cd908de66325add93143756fb97f" kindref="member">Tensor</ref></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classTensorCommon_1aa8113a619dcbfad32c34654774c384a5" kindref="member">TensorCommon</ref>&lt;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>detail::TensorDataInnards&lt;</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(ddc::type_seq_size_v&lt;ValidIndexSet&gt;<sp/>*<sp/>...</highlight></codeline>
@@ -1322,7 +1322,7 @@
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ValidIndexSetFirstDim,</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ValidIndexSet...&gt;</highlight></codeline>
 <codeline lineno="60"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensorCommon" kindref="compound">base_type</ref><sp/>=<sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">base_type<sp/>=<sp/><ref refid="classTensorCommon_1aa8113a619dcbfad32c34654774c384a5" kindref="member">TensorCommon</ref>&lt;</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>detail::TensorDataInnards&lt;</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(ddc::type_seq_size_v&lt;ValidIndexSet&gt;<sp/>*<sp/>...</highlight></codeline>
@@ -1388,13 +1388,13 @@
 <codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="151"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158" refid="classTensor_1a2adcf14b0c73758f9d7a4530699f5f28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor_1a2adcf14b0c73758f9d7a4530699f5f28" kindref="member">Tensor</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o_tensor)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="158" refid="classTensor_1a2adcf14b0c73758f9d7a4530699f5f28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor_1a2adcf14b0c73758f9d7a4530699f5f28" kindref="member">Tensor</ref>(<ref refid="classTensor_1a4a47cd908de66325add93143756fb97f" kindref="member">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o_tensor)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="159"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166" refid="classTensor_1a12e2b6f5f2fc74784794a91bc6675670" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor_1a12e2b6f5f2fc74784794a91bc6675670" kindref="member">Tensor</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref>&amp;&amp;<sp/>o_tensor)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="166" refid="classTensor_1a12e2b6f5f2fc74784794a91bc6675670" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor_1a12e2b6f5f2fc74784794a91bc6675670" kindref="member">Tensor</ref>(<ref refid="classTensor_1a4a47cd908de66325add93143756fb97f" kindref="member">Tensor</ref>&amp;&amp;<sp/>o_tensor)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"></highlight></codeline>
-<codeline lineno="173" refid="classTensor_1af6e516caedbe34eacbd831697ec9ee42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&amp;<sp/><ref refid="classTensor_1af6e516caedbe34eacbd831697ec9ee42" kindref="member">operator=</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="173" refid="classTensor_1af6e516caedbe34eacbd831697ec9ee42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor_1a4a47cd908de66325add93143756fb97f" kindref="member">Tensor</ref>&amp;<sp/><ref refid="classTensor_1af6e516caedbe34eacbd831697ec9ee42" kindref="member">operator=</ref>(<ref refid="classTensor_1a4a47cd908de66325add93143756fb97f" kindref="member">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="174"><highlight class="normal"></highlight></codeline>
-<codeline lineno="180" refid="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&amp;<sp/><ref refid="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" kindref="member">operator=</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="180" refid="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor_1a4a47cd908de66325add93143756fb97f" kindref="member">Tensor</ref>&amp;<sp/><ref refid="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" kindref="member">operator=</ref>(<ref refid="classTensor_1a4a47cd908de66325add93143756fb97f" kindref="member">Tensor</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="181"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"></highlight></codeline>
 <codeline lineno="183"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
@@ -1413,19 +1413,19 @@
 <codeline lineno="196"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqVal</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
 <codeline lineno="197"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">to_tensor_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ToTensor&lt;ElementType,<sp/>TypeSeqValidIndexSet&gt;::type;</highlight></codeline>
 <codeline lineno="198"><highlight class="normal"></highlight></codeline>
-<codeline lineno="200"><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Type<sp/>aliases</highlight></codeline>
-<codeline lineno="202"></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Type<sp/>aliases</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
 <codeline lineno="207"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor" kindref="compound">DTensor</ref><sp/>=<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;double,<sp/>ValidIndexSet...&gt;;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DTensor<sp/>=<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;double,<sp/>ValidIndexSet...&gt;;</highlight></codeline>
 <codeline lineno="209"><highlight class="normal"></highlight></codeline>
 <codeline lineno="215"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor" kindref="compound">Vector</ref><sp/>=<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>VectorIndexSet&lt;Dims...&gt;&gt;;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Vector<sp/>=<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>VectorIndexSet&lt;Dims...&gt;&gt;;</highlight></codeline>
 <codeline lineno="217"><highlight class="normal"></highlight></codeline>
 <codeline lineno="222"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
-<codeline lineno="223"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor" kindref="compound">DVector</ref><sp/>=<sp/><ref refid="classTensor" kindref="compound">Vector</ref>&lt;double,<sp/>Dims...&gt;;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DVector<sp/>=<sp/>Vector&lt;double,<sp/>Dims...&gt;;</highlight></codeline>
 <codeline lineno="224"><highlight class="normal"></highlight></codeline>
 <codeline lineno="225"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailDims&gt;</highlight></codeline>
-<codeline lineno="226"><highlight class="normal">std::ostream&amp;<sp/>operator&lt;&lt;(std::ostream&amp;<sp/>o,<sp/><ref refid="classTensor" kindref="compound">Vector&lt;ElementType, Dim1, TailDims...&gt;</ref><sp/>vec)</highlight></codeline>
+<codeline lineno="226"><highlight class="normal">std::ostream&amp;<sp/>operator&lt;&lt;(std::ostream&amp;<sp/>o,<sp/>Vector&lt;ElementType,<sp/>Dim1,<sp/>TailDims...&gt;<sp/>vec)</highlight></codeline>
 <codeline lineno="227"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>o<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;(&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>o<sp/>&lt;&lt;<sp/>ddcHelper::get&lt;Dim1&gt;(vec);</highlight></codeline>
@@ -1437,12 +1437,12 @@
 <codeline lineno="235"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
 <codeline lineno="236"><highlight class="normal"></highlight></codeline>
 <codeline lineno="237"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_tensor_type&lt;<ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>ValidIndexSet...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_tensor_type&lt;Tensor&lt;ElementType,<sp/>ValidIndexSet...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="239"><highlight class="normal"></highlight></codeline>
 <codeline lineno="240"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="241"><highlight class="normal"></highlight></codeline>
-<codeline lineno="242"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Kokkos<sp/>{<sp/></highlight><highlight class="comment">//reduction<sp/>identity<sp/>must<sp/>be<sp/>defined<sp/>in<sp/>Kokkos<sp/>namespace</highlight></codeline>
-<codeline lineno="244"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Kokkos<sp/>{<sp/></highlight><highlight class="comment">//reduction<sp/>identity<sp/>must<sp/>be<sp/>defined<sp/>in<sp/>Kokkos<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
 <codeline lineno="245" refid="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">reduction_identity&lt;<ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>ValidIndexSet...&gt;&gt;</highlight></codeline>
 <codeline lineno="246"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="248" refid="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4_1a3e01e7ef0596f16ac75a51320906180e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FORCEINLINE_FUNCTION<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>ValidIndexSet...&gt;<sp/><ref refid="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4_1a3e01e7ef0596f16ac75a51320906180e" kindref="member">sum</ref>()</highlight></codeline>

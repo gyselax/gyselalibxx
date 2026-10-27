@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef detail::MultipatchFieldMem&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchFieldMem**](#typedef-multipatchfieldmem)  <br>_A class to store field memory block objects on patches._  |
+| typedef detail:: MultipatchFieldMem&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchFieldMem**](#typedef-multipatchfieldmem)  <br>_A class to store field memory block objects on patches._  |
 
 
 
@@ -42,8 +42,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_multipatch\_field\_mem**](#variable-enable_multipatch_field_mem)   = `false`<br> |
-|  constexpr bool | [**is\_multipatch\_field\_mem\_v**](#variable-is_multipatch_field_mem_v)   = `enable\_multipatch\_field\_mem&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
+|  bool | [**enable\_multipatch\_field\_mem**](#variable-enable_multipatch_field_mem)   = `false`<br> |
+|  bool | [**is\_multipatch\_field\_mem\_v**](#variable-is_multipatch_field_mem_v)   = `enable\_multipatch\_field\_mem&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 
@@ -97,7 +97,8 @@
 
 _A class to store field memory block objects on patches._ 
 ```C++
-using MultipatchFieldMem =  detail:: MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...> >;
+using MultipatchFieldMem =  detail::
+        MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
 ```
 
 
@@ -127,7 +128,7 @@ See detail::MultipatchFieldMem for more details. This alias creates the type T&l
 ### variable enable\_multipatch\_field\_mem 
 
 ```C++
-constexpr bool enable_multipatch_field_mem;
+bool enable_multipatch_field_mem;
 ```
 
 
@@ -140,7 +141,7 @@ constexpr bool enable_multipatch_field_mem;
 ### variable is\_multipatch\_field\_mem\_v 
 
 ```C++
-constexpr bool is_multipatch_field_mem_v;
+bool is_multipatch_field_mem_v;
 ```
 
 

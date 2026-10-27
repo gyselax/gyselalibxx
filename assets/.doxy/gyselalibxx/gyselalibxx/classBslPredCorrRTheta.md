@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, SplineInterpolatorRTheta const & rhs\_interpolator, PolarPoissonLikeSolver const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
+|   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, BslAdvectionRTheta const & advection\_solver, SplineInterpolatorRTheta const & rhs\_interpolator, PolarPoissonLikeSolver const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) override const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
 

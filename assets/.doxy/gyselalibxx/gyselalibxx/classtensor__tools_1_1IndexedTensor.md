@@ -61,12 +61,12 @@ _A class to capture the description of a tensor indexed at a specific component.
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_FUNCTION | [**IndexedTensor**](#function-indexedtensor-13) (TensorType & tensor) <br>_A constructor of an indexed tensor._  |
-|   | [**IndexedTensor**](#function-indexedtensor-23) ([**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) const &) = delete<br> |
-|   | [**IndexedTensor**](#function-indexedtensor-33) ([**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) &&) = delete<br> |
+|   | [**IndexedTensor**](#function-indexedtensor-23) (IndexedTensor const &) = delete<br> |
+|   | [**IndexedTensor**](#function-indexedtensor-33) (IndexedTensor &&) = delete<br> |
 |  KOKKOS\_FUNCTION TensorType & | [**operator()**](#function-operator) () <br>_An operator to access the underlying tensor._  |
 |  KOKKOS\_FUNCTION TensorType const & | [**operator()**](#function-operator_1) () const<br>_An operator to access the underlying tensor._  |
-|  [**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) & | [**operator=**](#function-operator_2) ([**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) const &) = delete<br> |
-|  [**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) & | [**operator=**](#function-operator_3) ([**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) &&) = delete<br> |
+|  [**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md#function-indexedtensor-13) & | [**operator=**](#function-operator_2) ([**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md#function-indexedtensor-13) const &) = delete<br> |
+|  [**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md#function-indexedtensor-13) & | [**operator=**](#function-operator_3) ([**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md#function-indexedtensor-13) &&) = delete<br> |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~IndexedTensor**](#function-indexedtensor) () noexcept<br> |
 
 

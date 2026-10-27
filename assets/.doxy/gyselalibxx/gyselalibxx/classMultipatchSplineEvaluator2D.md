@@ -2,7 +2,7 @@
 
 # Class MultipatchSplineEvaluator2D
 
-**template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, class ExtrapolationRule, template&lt; typename P &gt; typename ValuesOnPatch, class PatchLocator, class... Patches&gt;**
+**template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, class [**ExtrapolationRule**](namespaceExtrapolationRule.md), template&lt; typename P &gt; typename ValuesOnPatch, class PatchLocator, class... Patches&gt;**
 
 
 
@@ -60,7 +60,7 @@ _A class to evaluate all the splines of all the patches at once._ [More...](#det
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**n\_patches**](#variable-n_patches)   = `ddc::type\_seq\_size\_v&lt;PatchOrdering&gt;`<br>_The number of patches._  |
+|  std::size\_t | [**n\_patches**](#variable-n_patches)   = `ddc::type\_seq\_size\_v&lt;PatchOrdering&gt;`<br>_The number of patches._  |
 
 
 
@@ -79,7 +79,7 @@ _A class to evaluate all the splines of all the patches at once._ [More...](#det
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MultipatchSplineEvaluator2D**](#function-multipatchsplineevaluator2d) (PatchLocator const & patch\_locator, ExtrapolationRule const & extrapolation\_rule) <br>_Instantiate a_ [_**MultipatchSplineEvaluator2D**_](classMultipatchSplineEvaluator2D.md) _._ |
+|   | [**MultipatchSplineEvaluator2D**](#function-multipatchsplineevaluator2d) (PatchLocator const & patch\_locator, [**ExtrapolationRule**](namespaceExtrapolationRule.md) const & extrapolation\_rule) <br>_Instantiate a_ [_**MultipatchSplineEvaluator2D**_](classMultipatchSplineEvaluator2D.md) _._ |
 |  void | [**apply\_evaluator**](#function-apply_evaluator) (IdxDeriv const & deriv\_order, ValuesOnPatch&lt; StoringPatch &gt; const & patch\_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const & patch\_coords, MultipatchSplineCoeff const patches\_splines) const<br>_Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Needed public for functions on GPU._  |
 |  void | [**apply\_integrate**](#function-apply_integrate) (double & integral, [**SplineCoeffOnPatch**](classMultipatchSplineEvaluator2D.md#typedef-splinecoeffonpatch)&lt; [**Patch**](structPatch.md) &gt; const & spline\_coef) const<br>_Integrate the spline defined on the given patch._  |
 |  KOKKOS\_FUNCTION double | [**deriv**](#function-deriv-12) (Idx&lt; DerivDims... &gt; const & deriv\_order, Coord&lt; CDim1, CDim2 &gt; const & coord\_eval, MultipatchSplineCoeff const & patches\_splines) const<br>_Differentiate 2D splines (described by their spline coefficients) at a given coordinate along a specified dimension of interest._  |
@@ -360,7 +360,9 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 _The type of the domain for the 2D evaluation mesh used by this class._ 
 ```C++
-using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::evaluation_idx_range_type =  IdxRange< evaluation_discrete_dimension_type1<Patch>, evaluation_discrete_dimension_type2<Patch> >;
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::evaluation_idx_range_type =  IdxRange<
+            evaluation_discrete_dimension_type1<Patch>,
+            evaluation_discrete_dimension_type2<Patch>>;
 ```
 
 
@@ -385,7 +387,7 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 _The type of the domain for the 1D evaluation mesh along first dimension used by this class._ 
 ```C++
-using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::evaluation_idx_range_type1 =  IdxRange<evaluation_discrete_dimension_type1<Patch> >;
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::evaluation_idx_range_type1 =  IdxRange<evaluation_discrete_dimension_type1<Patch>>;
 ```
 
 
@@ -410,7 +412,7 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 _The type of the domain for the 1D evaluation mesh along second dimension used by this class._ 
 ```C++
-using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::evaluation_idx_range_type2 =  IdxRange<evaluation_discrete_dimension_type2<Patch> >;
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::evaluation_idx_range_type2 =  IdxRange<evaluation_discrete_dimension_type2<Patch>>;
 ```
 
 
@@ -463,7 +465,7 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 _The type of the 2D spline domain corresponding to the dimensions of interest._ 
 ```C++
-using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::spline_idx_range_type =  IdxRange<bsplines_type1<Patch>, bsplines_type2<Patch> >;
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::spline_idx_range_type =  IdxRange<bsplines_type1<Patch>, bsplines_type2<Patch>>;
 ```
 
 
@@ -488,7 +490,7 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 _The type of the 1D spline domain corresponding to the first dimension of interest._ 
 ```C++
-using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::spline_idx_range_type1 =  IdxRange<bsplines_type1<Patch> >;
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::spline_idx_range_type1 =  IdxRange<bsplines_type1<Patch>>;
 ```
 
 
@@ -513,7 +515,7 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 _The type of the 1D spline domain corresponding to the second dimension of interest._ 
 ```C++
-using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::spline_idx_range_type2 =  IdxRange<bsplines_type2<Patch> >;
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::spline_idx_range_type2 =  IdxRange<bsplines_type2<Patch>>;
 ```
 
 
@@ -540,7 +542,7 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 _The number of patches._ 
 ```C++
-constexpr std::size_t MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::n_patches;
+std::size_t MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::n_patches;
 ```
 
 

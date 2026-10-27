@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structConstantExtrapolationRuleOnion" kind="struct" language="C++" prot="public">
     <compoundname>ConstantExtrapolationRuleOnion</compoundname>
     <includes refid="constant__extrapolation__rules__onion_8hpp" local="no">constant_extrapolation_rules_onion.hpp</includes>
@@ -110,8 +110,8 @@
     </sectiondef>
     <sectiondef kind="private-static-attrib">
       <memberdef kind="variable" id="structConstantExtrapolationRuleOnion_1a1b04e79eca395d01360d12c669c31cc5" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr std::size_t</type>
-        <definition>constexpr std::size_t ConstantExtrapolationRuleOnion&lt; PatchLocator &gt;::n_patches</definition>
+        <type>std::size_t</type>
+        <definition>std::size_t ConstantExtrapolationRuleOnion&lt; PatchLocator &gt;::n_patches</definition>
         <argsstring></argsstring>
         <name>n_patches</name>
         <qualifiedname>ConstantExtrapolationRuleOnion::n_patches</qualifiedname>
@@ -309,8 +309,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types. <linebreak/>
- </para>
+<para>Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>

@@ -379,7 +379,6 @@ void CollisionsIntra::compute_rhs_vector (
 * `CC` A vector representing the upper diagonal of the matrix of the linear system. 
 * `allfdistribu` The distribution function. 
 * `fthresh` A constant value used for imposing Dirichlet boundary condition to solve the linear system. 
- 
 
 
 

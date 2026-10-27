@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometry__xy_8hpp" kind="file" language="C++">
     <compoundname>geometry_xy.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -614,9 +614,13 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp" line="120" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp" bodystart="120" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xy_8hpp_1a4805f6b1b159865cb90983ab389daeb5" prot="public" static="no">
+      <memberdef kind="typedef" id="geometry__xy_8hpp_1a1e85615f0450d682e3bf86dc0a4f3915" prot="public" static="no">
         <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt; double, IdxRangeXY, VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, Kokkos::DefaultExecutionSpace::memory_space &gt;</type>
-        <definition>using VectorFieldMemXY_XY =  VectorFieldMem&lt; double, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;, Kokkos::DefaultExecutionSpace::memory_space&gt;</definition>
+        <definition>using VectorFieldMemXY_XY =  VectorFieldMem&lt;
+        double,
+        IdxRangeXY,
+        VectorIndexSet&lt;X, Y&gt;,
+        Kokkos::DefaultExecutionSpace::memory_space&gt;</definition>
         <argsstring></argsstring>
         <name>VectorFieldMemXY_XY</name>
         <briefdescription>
@@ -625,10 +629,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp" line="125" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp" bodystart="129" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp" line="125" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp" bodystart="125" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xy_8hpp_1af407b77bdcd80902b1b620746b4774e9" prot="public" static="no">
-        <type>typename <ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">VectorFieldMemXY_XY::span_type</ref></type>
+        <type>typename <ref refid="classVectorFieldMem_1a8f97183c5dea06be5000331e56c7a5f9" kindref="member">VectorFieldMemXY_XY::span_type</ref></type>
         <definition>using VectorFieldXY_XY =  typename VectorFieldMemXY_XY::span_type</definition>
         <argsstring></argsstring>
         <name>VectorFieldXY_XY</name>
@@ -641,7 +645,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp" line="130" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp" bodystart="130" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xy_8hpp_1a0f49de3dbee224e5716a389e6f024d2d" prot="public" static="no">
-        <type>typename <ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">VectorFieldMemXY_XY::view_type</ref></type>
+        <type>typename <ref refid="classVectorFieldMem_1a95c48ba0b31f9fef4724fb8d56633743" kindref="member">VectorFieldMemXY_XY::view_type</ref></type>
         <definition>using VectorConstFieldXY_XY =  typename VectorFieldMemXY_XY::view_type</definition>
         <argsstring></argsstring>
         <name>VectorConstFieldXY_XY</name>
@@ -680,7 +684,7 @@
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1a21b0a7c9531a817b3696d54d248192bf" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31" refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structX" kindref="compound">X</ref>;</highlight></codeline>
+<codeline lineno="31" refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structX" kindref="compound">X</ref>;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref></highlight></codeline>
@@ -691,7 +695,7 @@
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a36729b36e12627fd69c709e3b26ce176" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51" refid="structY_1aad98c6afa465f3fb654029648420df1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structY" kindref="compound">Y</ref>;</highlight></codeline>
+<codeline lineno="51" refid="structY_1aad98c6afa465f3fb654029648420df1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structY" kindref="compound">Y</ref>;</highlight></codeline>
 <codeline lineno="52"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
@@ -765,13 +769,13 @@
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>
 <codeline lineno="123"><highlight class="normal"></highlight><highlight class="comment">//<sp/>VectorFieldMem<sp/>aliases</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="124"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Represent<sp/>a<sp/>vector<sp/>field<sp/>(v_x,<sp/>v_y)<sp/>on<sp/>indices<sp/>(x_i,<sp/>y_j)<sp/>:<sp/>(v_x(x_i,<sp/>y_j),<sp/>v_y(x_i,y_j))</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY_XY</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorFieldMemXY_XY<sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt;</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double,</highlight></codeline>
 <codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeXY,</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;X,<sp/>Y&gt;,</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;;</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorFieldXY_XY<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">VectorFieldMemXY_XY::span_type</ref>;</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorConstFieldXY_XY<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">VectorFieldMemXY_XY::view_type</ref>;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorFieldXY_XY<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classVectorFieldMem_1a8f97183c5dea06be5000331e56c7a5f9" kindref="member">VectorFieldMemXY_XY::span_type</ref>;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorConstFieldXY_XY<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classVectorFieldMem_1a95c48ba0b31f9fef4724fb8d56633743" kindref="member">VectorFieldMemXY_XY::view_type</ref>;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp"/>
   </compounddef>

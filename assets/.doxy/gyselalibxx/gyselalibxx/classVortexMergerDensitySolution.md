@@ -148,7 +148,7 @@ inline void VortexMergerDensitySolution::set_initialisation (
 
 
 
-The initial condition is given by  
+The initial condition is given by     
 \[\rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon
      \left(
          \exp\left[-\frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2\sigma^2}\right]

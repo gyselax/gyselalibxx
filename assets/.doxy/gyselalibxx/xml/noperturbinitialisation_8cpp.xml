@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="noperturbinitialisation_8cpp" kind="file" language="C++">
     <compoundname>noperturbinitialisation.cpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -54,12 +54,6 @@
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -129,20 +123,14 @@
       <node id="10">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="19">
-        <label>filesystem</label>
-      </node>
       <node id="12">
         <label>paraconf.h</label>
       </node>
       <node id="9">
         <label>source_location</label>
       </node>
-      <node id="20">
-        <label>stdexcept</label>
-      </node>
-      <node id="21">
-        <label>string</label>
+      <node id="19">
+        <label>string_view</label>
       </node>
       <node id="15">
         <label>type_traits</label>

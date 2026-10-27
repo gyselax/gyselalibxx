@@ -105,7 +105,11 @@ _The implementation of_ [_**NDIdentityInterpolationBuilder**_](classNDIdentityIn
 
 _Batched domain with each interpolation grid replaced by its basis domain._ 
 ```C++
-using NDIdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange< Basis... > >::batched_basis_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t< ddc::to_type_seq_t<BatchedInterpolationIdxRange>, ddc::to_type_seq_t<IdxRangeInterpolation>, ddc::detail::TypeSeq< typename Basis::template Impl<Basis, MemorySpace>::knot_grid...> >>;
+using NDIdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange< Basis... > >::batched_basis_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
+                    ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
+                    ddc::to_type_seq_t<IdxRangeInterpolation>,
+                    ddc::detail::TypeSeq<
+                            typename Basis::template Impl<Basis, MemorySpace>::knot_grid...>>>;
 ```
 
 

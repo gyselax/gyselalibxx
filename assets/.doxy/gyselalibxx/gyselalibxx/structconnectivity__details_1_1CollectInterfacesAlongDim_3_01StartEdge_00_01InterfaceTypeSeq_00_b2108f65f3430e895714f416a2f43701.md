@@ -93,7 +93,12 @@ _Specialisation of_ [_**CollectInterfacesAlongDim**_](structconnectivity__detail
 
 _The new list of interfaces that have been found including the interface from the current patch._ 
 ```C++
-using connectivity_details::CollectInterfacesAlongDim< StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false >::NewInterfaceList =  typename AddToTypeSeq< enforce_first_interface_edge_t< typename FindInterface<StartEdge, InterfaceTypeSeq>::type, std::conditional_t<StartEdge::extremity == FRONT, MatchingEdge, StartEdge> >, FoundInterfaces, insert_pos>::type;
+using connectivity_details::CollectInterfacesAlongDim< StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false >::NewInterfaceList =  typename AddToTypeSeq<
+            enforce_first_interface_edge_t<
+                    typename FindInterface<StartEdge, InterfaceTypeSeq>::type,
+                    std::conditional_t<StartEdge::extremity == FRONT, MatchingEdge, StartEdge>>,
+            FoundInterfaces,
+            insert_pos>::type;
 ```
 
 
@@ -107,7 +112,11 @@ using connectivity_details::CollectInterfacesAlongDim< StartEdge, InterfaceTypeS
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::CollectInterfacesAlongDim< StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false >::type =  typename CollectInterfacesAlongDim< typename SwapExtremity<MatchingEdge>::type, InterfaceTypeSeq, insert_pos, NewInterfaceList>::type;
+using connectivity_details::CollectInterfacesAlongDim< StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false >::type =  typename CollectInterfacesAlongDim<
+            typename SwapExtremity<MatchingEdge>::type,
+            InterfaceTypeSeq,
+            insert_pos,
+            NewInterfaceList>::type;
 ```
 
 

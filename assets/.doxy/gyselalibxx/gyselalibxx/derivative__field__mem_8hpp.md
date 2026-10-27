@@ -45,9 +45,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_data\_access\_methods&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt;**](#variable-enable_data_access_methods-derivfieldmem-elementtype-supporttype-nderivs-allocator)   = `true`<br> |
-|  constexpr bool | [**enable\_deriv\_field&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, MemSpace &gt; &gt;**](#variable-enable_deriv_field-derivfieldmem-elementtype-supporttype-nderivs-memspace)   = `true`<br> |
-|  constexpr bool | [**enable\_mem\_type&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt;**](#variable-enable_mem_type-derivfieldmem-elementtype-supporttype-nderivs-allocator)   = `true`<br> |
+|  bool | [**enable\_data\_access\_methods&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt;**](#variable-enable_data_access_methods-derivfieldmem-elementtype-supporttype-nderivs-allocator)   = `true`<br> |
+|  bool | [**enable\_deriv\_field&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, MemSpace &gt; &gt;**](#variable-enable_deriv_field-derivfieldmem-elementtype-supporttype-nderivs-memspace)   = `true`<br> |
+|  bool | [**enable\_mem\_type&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt;**](#variable-enable_mem_type-derivfieldmem-elementtype-supporttype-nderivs-allocator)   = `true`<br> |
 
 
 
@@ -100,7 +100,7 @@
 ### variable enable\_data\_access\_methods&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt; 
 
 ```C++
-constexpr bool enable_data_access_methods< DerivFieldMem< ElementType, SupportType, NDerivs, Allocator > >;
+bool enable_data_access_methods< DerivFieldMem< ElementType, SupportType, NDerivs, Allocator > >;
 ```
 
 
@@ -113,7 +113,7 @@ constexpr bool enable_data_access_methods< DerivFieldMem< ElementType, SupportTy
 ### variable enable\_deriv\_field&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, MemSpace &gt; &gt; 
 
 ```C++
-constexpr bool enable_deriv_field< DerivFieldMem< ElementType, SupportType, NDerivs, MemSpace > >;
+bool enable_deriv_field< DerivFieldMem< ElementType, SupportType, NDerivs, MemSpace > >;
 ```
 
 
@@ -126,7 +126,7 @@ constexpr bool enable_deriv_field< DerivFieldMem< ElementType, SupportType, NDer
 ### variable enable\_mem\_type&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt; 
 
 ```C++
-constexpr bool enable_mem_type< DerivFieldMem< ElementType, SupportType, NDerivs, Allocator > >;
+bool enable_mem_type< DerivFieldMem< ElementType, SupportType, NDerivs, Allocator > >;
 ```
 
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="mask__tanh_8cpp" kind="file" language="C++">
     <compoundname>mask_tanh.cpp</compoundname>
     <includes local="no">cmath</includes>
@@ -328,7 +328,7 @@
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(normalised)<sp/>{</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemX&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>quadrature_coeffs</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>trapezoid_quadrature_coefficients&lt;Kokkos::DefaultHostExecutionSpace&gt;(gridx);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="trapezoid__quadrature_8hpp_1a2e9e7d21b2da01a44fb6d6399a13fa0e" kindref="member">trapezoid_quadrature_coefficients&lt;Kokkos::DefaultHostExecutionSpace&gt;</ref>(gridx);</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;Quadrature&lt;IdxRangeX&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>integrate_x(get_const_field(quadrature_coeffs));</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>coeff_norm</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>integrate_x(Kokkos::DefaultHostExecutionSpace(),<sp/>get_const_field(mask));</highlight></codeline>

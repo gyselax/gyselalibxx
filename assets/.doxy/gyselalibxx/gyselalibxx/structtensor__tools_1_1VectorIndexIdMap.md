@@ -45,7 +45,7 @@ _A class representing a vector index identifier._ [More...](#detailed-descriptio
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr char | [**id**](#variable-id)   = `Id`<br>_The character identifying the index._  |
+|  char | [**id**](#variable-id)   = `Id`<br>_The character identifying the index._  |
 
 
 
@@ -131,7 +131,7 @@ using tensor_tools::VectorIndexIdMap< Id, AssociatedVectorIndexSet >::possible_i
 
 _The character identifying the index._ 
 ```C++
-constexpr char tensor_tools::VectorIndexIdMap< Id, AssociatedVectorIndexSet >::id;
+char tensor_tools::VectorIndexIdMap< Id, AssociatedVectorIndexSet >::id;
 ```
 
 

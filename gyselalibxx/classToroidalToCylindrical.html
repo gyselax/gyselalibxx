@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -621,7 +627,7 @@
 <td style="text-align: left;"><a href="#function-inv_jacobian_component"><strong>inv_jacobian_component</strong></a> (<a href="classToroidalToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the (i,j) coefficient of the inverse of the Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; Rho, <a href="structTheta.html"><strong>Theta</strong></a>, Phi &gt;, VectorIndexSet&lt; <a href="structR__cov.html"><strong>R_cov</strong></a>, Z_cov, Zeta_cov &gt; &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; Rho, <a href="structTheta.html"><strong>Theta</strong></a>, Phi &gt;, VectorIndexSet&lt; <a href="structR__cov.html"><strong>R_cov</strong></a>, Z_cov, Zeta_cov &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-inv_jacobian_matrix"><strong>inv_jacobian_matrix</strong></a> (<a href="classToroidalToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the inverse of the Jacobian matrix.</em></td>
 </tr>
 <tr>
@@ -633,7 +639,7 @@
 <td style="text-align: left;"><a href="#function-jacobian_component"><strong>jacobian_component</strong></a> (<a href="classToroidalToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the (i,j) coefficient of the Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structR.html"><strong>R</strong></a>, Z, Zeta &gt;, VectorIndexSet&lt; Rho_cov, <a href="structTheta__cov.html"><strong>Theta_cov</strong></a>, Phi_cov &gt; &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <a href="structR.html"><strong>R</strong></a>, Z, Zeta &gt;, VectorIndexSet&lt; Rho_cov, <a href="structTheta__cov.html"><strong>Theta_cov</strong></a>, Phi_cov &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (<a href="classToroidalToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the Jacobian matrix.</em></td>
 </tr>
 <tr>
@@ -710,7 +716,7 @@ inline KOKKOS_INLINE_FUNCTION double ToroidalToCylindrical::inv_jacobian_compone
 
 <h3 id="function-inv_jacobian_matrix">function inv_jacobian_matrix</h3>
 <p><em>Compute the inverse of the Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; Rho, Theta , Phi &gt;, VectorIndexSet&lt; R_cov , Z_cov, Zeta_cov &gt; &gt; ToroidalToCylindrical::inv_jacobian_matrix (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; Rho, Theta , Phi &gt;, VectorIndexSet&lt; R_cov , Z_cov, Zeta_cov &gt; &gt; ToroidalToCylindrical::inv_jacobian_matrix (
     CoordArg const &amp; coord
 ) const
 </code></pre>
@@ -759,7 +765,7 @@ inline KOKKOS_INLINE_FUNCTION double ToroidalToCylindrical::jacobian_component (
 
 <h3 id="function-jacobian_matrix">function jacobian_matrix</h3>
 <p><em>Compute the Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; R , Z, Zeta &gt;, VectorIndexSet&lt; Rho_cov, Theta_cov , Phi_cov &gt; &gt; ToroidalToCylindrical::jacobian_matrix (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; R , Z, Zeta &gt;, VectorIndexSet&lt; Rho_cov, Theta_cov , Phi_cov &gt; &gt; ToroidalToCylindrical::jacobian_matrix (
     CoordArg const &amp; coord
 ) const
 </code></pre>

@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -598,13 +604,22 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-newinterfacelist">typedef NewInterfaceList</h3>
 <p><em>The new list of interfaces that have been found including the interface from the current patch.</em> </p>
-<pre><code class="language-C++">using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::NewInterfaceList =  typename AddToTypeSeq&lt; enforce_first_interface_edge_t&lt; typename FindInterface&lt;StartEdge, InterfaceTypeSeq&gt;::type, std::conditional_t&lt;StartEdge::extremity == FRONT, MatchingEdge, StartEdge&gt; &gt;, FoundInterfaces, insert_pos&gt;::type;
+<pre><code class="language-C++">using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::NewInterfaceList =  typename AddToTypeSeq&lt;
+            enforce_first_interface_edge_t&lt;
+                    typename FindInterface&lt;StartEdge, InterfaceTypeSeq&gt;::type,
+                    std::conditional_t&lt;StartEdge::extremity == FRONT, MatchingEdge, StartEdge&gt;&gt;,
+            FoundInterfaces,
+            insert_pos&gt;::type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::type =  typename CollectInterfacesAlongDim&lt; typename SwapExtremity&lt;MatchingEdge&gt;::type, InterfaceTypeSeq, insert_pos, NewInterfaceList&gt;::type;
+<pre><code class="language-C++">using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;::type =  typename CollectInterfacesAlongDim&lt;
+            typename SwapExtremity&lt;MatchingEdge&gt;::type,
+            InterfaceTypeSeq,
+            insert_pos,
+            NewInterfaceList&gt;::type;
 </code></pre>
 <hr>
 

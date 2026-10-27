@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="math__tools_8hpp" kind="file" language="C++">
     <compoundname>math_tools.hpp</compoundname>
     <includes local="no">algorithm</includes>
@@ -800,7 +800,7 @@
           <declname>get_metric</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space &gt;</type>
+          <type>DVectorConstField&lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space &gt;</type>
           <declname>vals</declname>
         </param>
         <briefdescription>
@@ -916,7 +916,7 @@
         <argsstring>(DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr)</argsstring>
         <name>determinant</name>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt;</type>
+          <type>DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt;</type>
           <declname>arr</declname>
         </param>
         <briefdescription>
@@ -953,7 +953,7 @@
         <argsstring>(DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr)</argsstring>
         <name>determinant</name>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt;</type>
+          <type>DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt;</type>
           <declname>arr</declname>
         </param>
         <briefdescription>
@@ -979,12 +979,12 @@
             <type>class ColDim2</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt;</type>
+        <type>KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; inverse</definition>
         <argsstring>(DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr)</argsstring>
         <name>inverse</name>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt;</type>
+          <type>DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt;</type>
           <declname>arr</declname>
         </param>
         <briefdescription>
@@ -1016,12 +1016,12 @@
             <type>class ColDim3</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; inverse</definition>
         <argsstring>(DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr)</argsstring>
         <name>inverse</name>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt;</type>
+          <type>DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt;</type>
           <declname>arr</declname>
         </param>
         <briefdescription>
@@ -1237,7 +1237,7 @@
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/>exec_space,</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DField&lt;IdxRangeType,<sp/>typename<sp/>ExecSpace::memory_space&gt;<sp/>norm_vals,</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMetricTensorEvaluator" kindref="compound">MetricTensorEvaluator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>get_metric,</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstField&lt;IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space&gt;</ref><sp/>vals)</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorConstField&lt;IdxRangeType,<sp/>VectorIndexSetType,<sp/>typename<sp/>ExecSpace::memory_space&gt;<sp/>vals)</highlight></codeline>
 <codeline lineno="76"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeType::discrete_element_type;</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
@@ -1306,7 +1306,7 @@
 <codeline lineno="141"><highlight class="normal"></highlight></codeline>
 <codeline lineno="142"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim2&gt;</highlight></codeline>
 <codeline lineno="143"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>determinant(</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2&gt;,<sp/>VectorIndexSet&lt;ColDim1,<sp/>ColDim2&gt;&gt;<sp/>arr)</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DTensor&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2&gt;,<sp/>VectorIndexSet&lt;ColDim1,<sp/>ColDim2&gt;&gt;<sp/>arr)</highlight></codeline>
 <codeline lineno="145"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim2&gt;(arr)</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim2&gt;(arr);</highlight></codeline>
@@ -1314,7 +1314,7 @@
 <codeline lineno="149"><highlight class="normal"></highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim3,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim3&gt;</highlight></codeline>
 <codeline lineno="151"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>determinant(</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2,<sp/>RowDim3&gt;,</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DTensor&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2,<sp/>RowDim3&gt;,</highlight></codeline>
 <codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;ColDim1,<sp/>ColDim2,<sp/>ColDim3&gt;&gt;<sp/>arr)</highlight></codeline>
 <codeline lineno="154"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim2&gt;(arr)</highlight></codeline>
@@ -1332,16 +1332,16 @@
 <codeline lineno="167"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"></highlight></codeline>
 <codeline lineno="169"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim2&gt;</highlight></codeline>
-<codeline lineno="170"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>DTensor&lt;</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;typename<sp/>ColDim1::Dual,<sp/>typename<sp/>ColDim2::Dual&gt;,</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;typename<sp/>RowDim1::Dual,<sp/>typename<sp/>RowDim2::Dual&gt;&gt;</highlight></codeline>
-<codeline lineno="173"><highlight class="normal">inverse(<ref refid="classTensor" kindref="compound">DTensor</ref>&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2&gt;,<sp/>VectorIndexSet&lt;ColDim1,<sp/>ColDim2&gt;&gt;<sp/>arr)</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">inverse(DTensor&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2&gt;,<sp/>VectorIndexSet&lt;ColDim1,<sp/>ColDim2&gt;&gt;<sp/>arr)</highlight></codeline>
 <codeline lineno="174"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutRowDim1<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ColDim1::Dual;</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutRowDim2<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ColDim2::Dual;</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutColDim1<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RowDim1::Dual;</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutColDim2<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RowDim2::Dual;</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;OutRowDim1, OutRowDim2&gt;</ref>,<sp/>VectorIndexSet&lt;OutColDim1,<sp/>OutColDim2&gt;&gt;<sp/>inv;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>DTensor&lt;VectorIndexSet&lt;OutRowDim1,<sp/>OutRowDim2&gt;,<sp/>VectorIndexSet&lt;OutColDim1,<sp/>OutColDim2&gt;&gt;<sp/>inv;</highlight></codeline>
 <codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>det<sp/>=<sp/>determinant(arr);</highlight></codeline>
 <codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim1,<sp/>OutColDim1&gt;(inv)<sp/>=<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim2&gt;(arr)<sp/>/<sp/>det;</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim2,<sp/>OutColDim1&gt;(inv)<sp/>=<sp/>-ddcHelper::get&lt;RowDim2,<sp/>ColDim1&gt;(arr)<sp/>/<sp/>det;</highlight></codeline>
@@ -1351,11 +1351,11 @@
 <codeline lineno="186"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="187"><highlight class="normal"></highlight></codeline>
 <codeline lineno="188"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim3,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim3&gt;</highlight></codeline>
-<codeline lineno="189"><highlight class="normal">KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal">KOKKOS_FUNCTION<sp/>DTensor&lt;</highlight></codeline>
 <codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;typename<sp/>ColDim1::Dual,<sp/>typename<sp/>ColDim2::Dual,<sp/>typename<sp/>ColDim3::Dual&gt;,</highlight></codeline>
 <codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;typename<sp/>RowDim1::Dual,<sp/>typename<sp/>RowDim2::Dual,<sp/>typename<sp/>RowDim3::Dual&gt;&gt;</highlight></codeline>
 <codeline lineno="192"><highlight class="normal">inverse(</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2,<sp/>RowDim3&gt;,</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DTensor&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2,<sp/>RowDim3&gt;,</highlight></codeline>
 <codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;ColDim1,<sp/>ColDim2,<sp/>ColDim3&gt;&gt;<sp/>arr)</highlight></codeline>
 <codeline lineno="195"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutRowDim1<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ColDim1::Dual;</highlight></codeline>
@@ -1364,7 +1364,7 @@
 <codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutColDim1<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RowDim1::Dual;</highlight></codeline>
 <codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutColDim2<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RowDim2::Dual;</highlight></codeline>
 <codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutColDim3<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RowDim3::Dual;</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;OutRowDim1, OutRowDim2, OutRowDim3&gt;</ref>,</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>DTensor&lt;VectorIndexSet&lt;OutRowDim1,<sp/>OutRowDim2,<sp/>OutRowDim3&gt;,</highlight></codeline>
 <codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;OutColDim1,<sp/>OutColDim2,<sp/>OutColDim3&gt;&gt;</highlight></codeline>
 <codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inv;</highlight></codeline>
 <codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>det<sp/>=<sp/>determinant(arr);</highlight></codeline>

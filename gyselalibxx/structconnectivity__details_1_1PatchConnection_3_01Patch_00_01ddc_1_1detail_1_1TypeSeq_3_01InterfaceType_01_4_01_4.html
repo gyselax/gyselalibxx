@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -594,7 +600,10 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;::type =  std::conditional_t&lt; InterfaceType::template connected_to_patch&lt;Patch&gt;(), ddc::detail::TypeSeq&lt;InterfaceType&gt;, ddc::detail::TypeSeq&lt;&gt; &gt;;
+<pre><code class="language-C++">using connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;::type =  std::conditional_t&lt;
+            InterfaceType::template connected_to_patch&lt;Patch&gt;(),
+            ddc::detail::TypeSeq&lt;InterfaceType&gt;,
+            ddc::detail::TypeSeq&lt;&gt;&gt;;
 </code></pre>
 <hr>
 

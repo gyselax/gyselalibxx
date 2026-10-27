@@ -74,7 +74,7 @@ _An abstract class which holds a chunk of memory describing a field and its deri
 |  auto | [**get\_mdspan**](#function-get_mdspan-22) () <br>_Get the mdspan holding the values of the function from the internal array internal\_fields._  |
 |  auto | [**get\_values\_const\_field**](#function-get_values_const_field) () const<br>_Get the Field which holds the values of the function._  |
 |  auto | [**get\_values\_field**](#function-get_values_field) () const<br>_Get the Field which holds the values of the function._  |
-|  KOKKOS\_FUNCTION [**physical\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_idx_range_type) | [**idx\_range**](#function-idx_range) () const<br>_Get the physical index range on which the Field is defined. This method is equivalent to calling_ `get_idx_range(this-> get_values_field() )` __ |
+|  KOKKOS\_FUNCTION [**physical\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_idx_range_type) | [**idx\_range**](#function-idx_range) () const<br>_Get the physical index range on which the Field is defined. This method is equivalent to calling_ `get_idx_range(this-> get_values_field() )` _._ |
 |  IdxRangeSlice&lt; Grid1D &gt; | [**idx\_range\_for\_deriv**](#function-idx_range_for_deriv) () const<br>_Get the physical index range along Grid1D on which the derivatives of that dimension are defined._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~DerivFieldCommon**](#function-derivfieldcommon) () = default<br> |
 
@@ -113,7 +113,7 @@ _An abstract class which holds a chunk of memory describing a field and its deri
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr int | [**n\_fields**](#variable-n_fields)   = `1 &lt;&lt; ddc::type\_seq\_size\_v&lt;[**deriv\_tags**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-deriv_tags)&gt;`<br>_The number of fields which must be created to describe this object._  |
+|  int | [**n\_fields**](#variable-n_fields)   = `1 &lt;&lt; ddc::type\_seq\_size\_v&lt;[**deriv\_tags**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-deriv_tags)&gt;`<br>_The number of fields which must be created to describe this object._  |
 
 
 
@@ -185,7 +185,7 @@ This is a DDC keyword used to make this class interchangeable with Field. In DDC
 
 _A type sequence containing all derivatives present in this object._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::deriv_tags =  detail::deriv_sub_set_t<ddc::detail::TypeSeq<DDims...> >;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::deriv_tags =  detail::deriv_sub_set_t<ddc::detail::TypeSeq<DDims...>>;
 ```
 
 
@@ -277,7 +277,7 @@ using DerivFieldCommon< FieldType, IdxRange< DDims... > >::index_type =  discret
 
 _A type sequence containing all physical dimensions for which derivatives are present in this object._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_deriv_grids =  find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...> >;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_deriv_grids =  find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...>>;
 ```
 
 
@@ -491,7 +491,7 @@ Field The field on the physical index range.
 
 ### function idx\_range 
 
-_Get the physical index range on which the Field is defined. This method is equivalent to calling_ `get_idx_range(this-> get_values_field() )` __
+_Get the physical index range on which the Field is defined. This method is equivalent to calling_ `get_idx_range(this-> get_values_field() )` _._
 ```C++
 inline KOKKOS_FUNCTION physical_idx_range_type DerivFieldCommon< FieldType, IdxRange< DDims... > >::idx_range () const
 ```
@@ -569,7 +569,8 @@ using DerivFieldCommon< FieldType, IdxRange< DDims... > >::chunk_view =  typenam
 
 _The IdxRange which describes the derivatives present on each field._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::discrete_deriv_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t<deriv_tags>;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::discrete_deriv_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<deriv_tags>;
 ```
 
 
@@ -611,7 +612,10 @@ using DerivFieldCommon< FieldType, IdxRange< DDims... > >::discrete_deriv_vector
 
 _The type of the memory block stored in the array internal\_fields._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::internal_mdspan_type =  Kokkos::mdspan< element_type, Kokkos::dextents<std::size_t, sizeof...(DDims)>, Kokkos::layout_stride>;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::internal_mdspan_type =  Kokkos::mdspan<
+            element_type,
+            Kokkos::dextents<std::size_t, sizeof...(DDims)>,
+            Kokkos::layout_stride>;
 ```
 
 
@@ -625,7 +629,10 @@ using DerivFieldCommon< FieldType, IdxRange< DDims... > >::internal_mdspan_type 
 
 _The type of a constant view on the memory block stored in the array internal\_fields._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::internal_mdview_type =  Kokkos::mdspan< const element_type, Kokkos::dextents<std::size_t, sizeof...(DDims)>, Kokkos::layout_stride>;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::internal_mdview_type =  Kokkos::mdspan<
+            const element_type,
+            Kokkos::dextents<std::size_t, sizeof...(DDims)>,
+            Kokkos::layout_stride>;
 ```
 
 
@@ -639,7 +646,8 @@ using DerivFieldCommon< FieldType, IdxRange< DDims... > >::internal_mdview_type 
 
 _The index range for the field excluding derivatives._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_grids>;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_grids>;
 ```
 
 
@@ -745,7 +753,7 @@ physical_idx_range_type DerivFieldCommon< FieldType, IdxRange< DDims... > >::m_p
 
 _The number of fields which must be created to describe this object._ 
 ```C++
-constexpr int DerivFieldCommon< FieldType, IdxRange< DDims... > >::n_fields;
+int DerivFieldCommon< FieldType, IdxRange< DDims... > >::n_fields;
 ```
 
 
@@ -823,7 +831,7 @@ int The index of the internal field inside the array internal\_fields.
 
 **Returns:**
 
-discrete\_deriv\_idx\_range\_type The index range of the derivatives at the field at the index. 
+[**discrete\_deriv\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-discrete_deriv_idx_range_type) The index range of the derivatives at the field at the index. 
 
 
 

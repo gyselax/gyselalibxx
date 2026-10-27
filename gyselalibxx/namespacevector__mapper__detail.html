@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -619,23 +625,23 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-are_contravariant_v"><strong>are_contravariant_v</strong></a>   = <code>/* multi line expression */</code><br><em>True if both vector spaces are contravariant.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_arg_to_result_v"><strong>is_arg_to_result_v</strong></a>   = <code>/* multi line expression */</code><br><em>True if the vector is mapped from the argument basis of the mapping to its result basis.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_coordinate_change_only_v"><strong>is_coordinate_change_only_v</strong></a>   = <code>/* multi line expression */</code><br><em>True if the vector spaces are associated with different coordinate systems and have the same variance.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_result_to_arg_v"><strong>is_result_to_arg_v</strong></a>   = <code>/* multi line expression */</code><br><em>True if the vector is mapped from the result basis of the mapping to its argument basis.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_variance_change_only_v"><strong>is_variance_change_only_v</strong></a>   = <code>/* multi line expression */</code><br><em>True if the vector spaces are the co/contra variant bases associated with the same coordinate system.</em></td>
 </tr>
 </tbody>
@@ -643,37 +649,37 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-evaluation_coord_t">typedef evaluation_coord_t</h3>
 <p><em>The type of the coordinate at which a mapping or a metric tensor is evaluated.</em> </p>
-<pre><code class="language-C++">using vector_mapper_detail::evaluation_coord_t = typedef typename EvaluationCoord&lt;MappingOrMetric&gt;::type;
+<pre><code class="language-C++">using vector_mapper_detail::evaluation_coord_t =  typename EvaluationCoord&lt;MappingOrMetric&gt;::type;
 </code></pre>
 <hr>
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
 <h3 id="variable-are_contravariant_v">variable are_contravariant_v</h3>
 <p><em>True if both vector spaces are contravariant.</em> </p>
-<pre><code class="language-C++">constexpr bool vector_mapper_detail::are_contravariant_v;
+<pre><code class="language-C++">bool vector_mapper_detail::are_contravariant_v;
 </code></pre>
 <hr>
 
 <h3 id="variable-is_arg_to_result_v">variable is_arg_to_result_v</h3>
 <p><em>True if the vector is mapped from the argument basis of the mapping to its result basis.</em> </p>
-<pre><code class="language-C++">constexpr bool vector_mapper_detail::is_arg_to_result_v;
+<pre><code class="language-C++">bool vector_mapper_detail::is_arg_to_result_v;
 </code></pre>
 <hr>
 
 <h3 id="variable-is_coordinate_change_only_v">variable is_coordinate_change_only_v</h3>
 <p><em>True if the vector spaces are associated with different coordinate systems and have the same variance.</em> </p>
-<pre><code class="language-C++">constexpr bool vector_mapper_detail::is_coordinate_change_only_v;
+<pre><code class="language-C++">bool vector_mapper_detail::is_coordinate_change_only_v;
 </code></pre>
 <hr>
 
 <h3 id="variable-is_result_to_arg_v">variable is_result_to_arg_v</h3>
 <p><em>True if the vector is mapped from the result basis of the mapping to its argument basis.</em> </p>
-<pre><code class="language-C++">constexpr bool vector_mapper_detail::is_result_to_arg_v;
+<pre><code class="language-C++">bool vector_mapper_detail::is_result_to_arg_v;
 </code></pre>
 <hr>
 
 <h3 id="variable-is_variance_change_only_v">variable is_variance_change_only_v</h3>
 <p><em>True if the vector spaces are the co/contra variant bases associated with the same coordinate system.</em> </p>
-<pre><code class="language-C++">constexpr bool vector_mapper_detail::is_variance_change_only_v;
+<pre><code class="language-C++">bool vector_mapper_detail::is_variance_change_only_v;
 </code></pre>
 <hr>
 

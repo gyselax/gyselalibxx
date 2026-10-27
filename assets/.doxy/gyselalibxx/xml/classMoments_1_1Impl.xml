@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classMoments_1_1Impl" kind="class" language="C++" prot="public">
     <compoundname>Moments::Impl</compoundname>
     <includes refid="moments_8hpp" local="no">moments.hpp</includes>
@@ -44,7 +44,7 @@
         <name>Impl</name>
         <qualifiedname>Moments::Impl::Impl</qualifiedname>
         <param>
-          <type><ref refid="classMoments_1_1Impl" kindref="compound">Impl</ref></type>
+          <type>Impl</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -68,7 +68,7 @@
         <name>Impl</name>
         <qualifiedname>Moments::Impl::Impl</qualifiedname>
         <param>
-          <type><ref refid="classMoments_1_1Impl" kindref="compound">Impl</ref>&lt; Grid1D, OMemorySpace &gt; const &amp;</type>
+          <type>Impl&lt; Grid1D, OMemorySpace &gt; const &amp;</type>
           <declname>impl</declname>
         </param>
         <briefdescription>

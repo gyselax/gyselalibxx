@@ -18,6 +18,7 @@ _A superclass for_ [_**Tensor**_](classTensor.md) _calculations._[_**Tensor**_](
 
 
 
+Inherited by the following classes: [Tensor](classTensor.md),  [Tensor](classTensor.md),  [Tensor](classTensor.md)
 
 
 
@@ -96,7 +97,7 @@ _A superclass for_ [_**Tensor**_](classTensor.md) _calculations._[_**Tensor**_](
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**s\_n\_elements**](#variable-s_n_elements)   = `(ddc::type\_seq\_size\_v&lt;ValidIndexSet&gt; \* ...)`<br>_The number of elements in the mdspan._  |
+|  std::size\_t | [**s\_n\_elements**](#variable-s_n_elements)   = `(ddc::type\_seq\_size\_v&lt;ValidIndexSet&gt; \* ...)`<br>_The number of elements in the mdspan._  |
 
 
 
@@ -130,7 +131,7 @@ _A superclass for_ [_**Tensor**_](classTensor.md) _calculations._[_**Tensor**_](
 **Template parameters:**
 
 
-* `element_type` The type of the elements of the tensor (usually double/complex). 
+* [**element\_type**](classTensorCommon.md#typedef-element_type) The type of the elements of the tensor (usually double/complex). 
 * `LayoutType` The way in which the underlying mdspan will be laid out in memory, usually Kokkos::layout\_right or Kokkos::layout\_stride. 
 * `ValidIndexSet` The indices that can be used along each dimension of the tensor. 
 
@@ -615,7 +616,7 @@ The object providing access to the underlying mdspan via an operator(). The data
 
 _The number of elements in the mdspan._ 
 ```C++
-constexpr std::size_t TensorCommon< DataStorageType, ValidIndexSet >::s_n_elements;
+std::size_t TensorCommon< DataStorageType, ValidIndexSet >::s_n_elements;
 ```
 
 

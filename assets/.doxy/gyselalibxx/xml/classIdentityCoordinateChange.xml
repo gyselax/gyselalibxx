@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classIdentityCoordinateChange" kind="class" language="C++" prot="public">
     <compoundname>IdentityCoordinateChange</compoundname>
     <includes refid="identity__coordinate__change_8hpp" local="no">identity_coordinate_change.hpp</includes>
@@ -145,7 +145,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="55" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="55" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1aee43e63adcd94fb44fa8683b54f239f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ResultBasis, ArgBasisCov &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt; IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::jacobian_matrix</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>
@@ -246,7 +246,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="104" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="104" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1a8123641d097b9a83c292c23f99dd15c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ResultBasis, ArgBasisCov &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt; IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::inv_jacobian_matrix</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>inv_jacobian_matrix</name>
@@ -354,7 +354,7 @@
         <name>fill_diagonal_elements</name>
         <qualifiedname>IdentityCoordinateChange::fill_diagonal_elements</qualifiedname>
         <param>
-          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; RowDims... &gt;, VectorIndexSet&lt; ColDims... &gt; &gt; &amp;</type>
+          <type>DTensor&lt; VectorIndexSet&lt; RowDims... &gt;, VectorIndexSet&lt; ColDims... &gt; &gt; &amp;</type>
           <declname>matrix</declname>
         </param>
         <briefdescription>

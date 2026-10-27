@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
     <compoundname>connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;</compoundname>
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
@@ -14,9 +14,11 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4_1a8965f4b521e6227c5d1b785cc8b5fb25" prot="public" static="no">
+      <memberdef kind="typedef" id="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4_1abd19ff4869fcc56eceab2e8a85170806" prot="public" static="no">
         <type>ddc::type_seq_merge_t&lt; ddc::detail::TypeSeq&lt; typename EdgeType1::associated_patch &gt;, typename <ref refid="structconnectivity__details_1_1ExtractPatches" kindref="compound">ExtractPatches</ref>&lt; ddc::detail::TypeSeq&lt; EdgeTypes... &gt; &gt;::type &gt;</type>
-        <definition>using connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;::type =  ddc::type_seq_merge_t&lt; ddc::detail::TypeSeq&lt;typename EdgeType1::associated_patch&gt;, typename ExtractPatches&lt;ddc::detail::TypeSeq&lt;EdgeTypes...&gt; &gt;::type&gt;</definition>
+        <definition>using connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;::type =  ddc::type_seq_merge_t&lt;
+            ddc::detail::TypeSeq&lt;typename EdgeType1::associated_patch&gt;,
+            typename ExtractPatches&lt;ddc::detail::TypeSeq&lt;EdgeTypes...&gt;&gt;::type&gt;</definition>
         <argsstring></argsstring>
         <name>type</name>
         <qualifiedname>connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;::type</qualifiedname>
@@ -27,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="118" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="116" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -37,7 +39,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="113" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="114" bodyend="119"/>
     <listofallmembers>
-      <member refid="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4_1a8965f4b521e6227c5d1b785cc8b5fb25" prot="public" virt="non-virtual"><scope>connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;</scope><name>type</name></member>
+      <member refid="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4_1abd19ff4869fcc56eceab2e8a85170806" prot="public" virt="non-virtual"><scope>connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;</scope><name>type</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

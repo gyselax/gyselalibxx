@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -598,11 +604,11 @@
 <td style="text-align: left;"><a href="#typedef-coordresult"><strong>CoordResult</strong></a>  <br><em>The type of the result of the function described by this mapping.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="classTensor.html"><strong>DTensor</strong></a>&lt; ddc::to_type_seq_t&lt; <a href="classCombinedMapping.html#typedef-coordarg"><strong>CoordArg</strong></a> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <a href="classCombinedMapping.html#typedef-coordresult"><strong>CoordResult</strong></a> &gt; &gt; &gt;</td>
+<td style="text-align: right;">typedef DTensor&lt; ddc::to_type_seq_t&lt; <a href="classCombinedMapping.html#typedef-coordarg"><strong>CoordArg</strong></a> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <a href="classCombinedMapping.html#typedef-coordresult"><strong>CoordResult</strong></a> &gt; &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-invjacobianmatrixtype"><strong>InvJacobianMatrixType</strong></a>  <br><em>The type of the inverse Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="classTensor.html"><strong>DTensor</strong></a>&lt; ddc::to_type_seq_t&lt; <a href="classCombinedMapping.html#typedef-coordresult"><strong>CoordResult</strong></a> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <a href="classCombinedMapping.html#typedef-coordarg"><strong>CoordArg</strong></a> &gt; &gt; &gt;</td>
+<td style="text-align: right;">typedef DTensor&lt; ddc::to_type_seq_t&lt; <a href="classCombinedMapping.html#typedef-coordresult"><strong>CoordResult</strong></a> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <a href="classCombinedMapping.html#typedef-coordarg"><strong>CoordArg</strong></a> &gt; &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-jacobianmatrixtype"><strong>JacobianMatrixType</strong></a>  <br><em>The type of the Jacobian matrix.</em></td>
 </tr>
 </tbody>
@@ -678,13 +684,17 @@
 
 <h3 id="typedef-invjacobianmatrixtype">typedef InvJacobianMatrixType</h3>
 <p><em>The type of the inverse Jacobian matrix.</em> </p>
-<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::InvJacobianMatrixType =  DTensor&lt; ddc::to_type_seq_t&lt;CoordArg&gt;, vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordResult&gt; &gt;&gt;;
+<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::InvJacobianMatrixType =  DTensor&lt;
+            ddc::to_type_seq_t&lt;CoordArg&gt;,
+            vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordResult&gt;&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-jacobianmatrixtype">typedef JacobianMatrixType</h3>
 <p><em>The type of the Jacobian matrix.</em> </p>
-<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::JacobianMatrixType =  DTensor&lt; ddc::to_type_seq_t&lt;CoordResult&gt;, vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt; &gt;&gt;;
+<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::JacobianMatrixType =  DTensor&lt;
+            ddc::to_type_seq_t&lt;CoordResult&gt;,
+            vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt;&gt;&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

@@ -45,8 +45,8 @@ _Helper class for the initialisation of the mesh of interpolation points._ [More
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr int | [**N\_BE\_MAX**](#variable-n_be_max)   = `n\_boundary\_equations(BcXmax, BSplines::degree())`<br>_The number of boundary equations at the upper bound in a spline interpolation._  |
-|  constexpr int | [**N\_BE\_MIN**](#variable-n_be_min)   = `n\_boundary\_equations(BcXmin, BSplines::degree())`<br>_The number of boundary equations at the lower bound in a spline interpolation._  |
+|  int | [**N\_BE\_MAX**](#variable-n_be_max)   = `n\_boundary\_equations(BcXmax, BSplines::degree())`<br>_The number of boundary equations at the upper bound in a spline interpolation._  |
+|  int | [**N\_BE\_MIN**](#variable-n_be_min)   = `n\_boundary\_equations(BcXmin, BSplines::degree())`<br>_The number of boundary equations at the lower bound in a spline interpolation._  |
 
 
 
@@ -133,7 +133,7 @@ This is always NonUniformPointSampling.
 
 _The number of boundary equations at the upper bound in a spline interpolation._ 
 ```C++
-constexpr int ddcHelper::NonUniformInterpolationPoints< BSplines, BcXmin, BcXmax >::N_BE_MAX;
+int ddcHelper::NonUniformInterpolationPoints< BSplines, BcXmin, BcXmax >::N_BE_MAX;
 ```
 
 
@@ -147,7 +147,7 @@ constexpr int ddcHelper::NonUniformInterpolationPoints< BSplines, BcXmin, BcXmax
 
 _The number of boundary equations at the lower bound in a spline interpolation._ 
 ```C++
-constexpr int ddcHelper::NonUniformInterpolationPoints< BSplines, BcXmin, BcXmax >::N_BE_MIN;
+int ddcHelper::NonUniformInterpolationPoints< BSplines, BcXmin, BcXmax >::N_BE_MIN;
 ```
 
 

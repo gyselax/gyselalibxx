@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="iequilibrium_8cpp" kind="file" language="C++">
     <compoundname>iequilibrium.cpp</compoundname>
     <includes local="no">string</includes>
@@ -48,7 +48,7 @@
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="20">
@@ -63,7 +63,7 @@
         <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="24">
         <label>maxwellianequilibrium.hpp</label>
         <link refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_source"/>
         <childnode refid="4" relation="include">
@@ -81,12 +81,6 @@
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -174,9 +168,6 @@
       <node id="12">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="23">
-        <label>filesystem</label>
-      </node>
       <node id="21">
         <label>memory</label>
       </node>
@@ -186,11 +177,11 @@
       <node id="11">
         <label>source_location</label>
       </node>
-      <node id="24">
-        <label>stdexcept</label>
-      </node>
       <node id="2">
         <label>string</label>
+      </node>
+      <node id="23">
+        <label>string_view</label>
       </node>
       <node id="8">
         <label>type_traits</label>

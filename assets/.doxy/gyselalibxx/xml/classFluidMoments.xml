@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classFluidMoments" kind="class" language="C++" prot="public">
     <compoundname>FluidMoments</compoundname>
     <includes refid="fluid__moments_8hpp" local="no">fluid_moments.hpp</includes>
     <innerclass refid="structFluidMoments_1_1MomentDensity" prot="public">FluidMoments::MomentDensity</innerclass>
-    <innerclass refid="structFluidMoments_1_1MomentTemperature" prot="public">FluidMoments::MomentTemperature</innerclass>
     <innerclass refid="structFluidMoments_1_1MomentVelocity" prot="public">FluidMoments::MomentVelocity</innerclass>
+    <innerclass refid="structFluidMoments_1_1MomentTemperature" prot="public">FluidMoments::MomentTemperature</innerclass>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classFluidMoments_1ac37d792332d5619f6a80cbd5c45d9af3" prot="private" static="no" mutable="no">
         <type><ref refid="classQuadrature" kindref="compound">Quadrature</ref>&lt; IdxRangeVx, IdxRangeSpXVx &gt;</type>
@@ -24,8 +24,8 @@
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="classFluidMoments_1a51b8fc4fc4530a3cad0836bb997c4c3d" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr <ref refid="structFluidMoments_1_1MomentDensity" kindref="compound">MomentDensity</ref></type>
-        <definition>constexpr MomentDensity FluidMoments::s_density</definition>
+        <type><ref refid="structFluidMoments_1_1MomentDensity" kindref="compound">MomentDensity</ref></type>
+        <definition>MomentDensity FluidMoments::s_density</definition>
         <argsstring></argsstring>
         <name>s_density</name>
         <qualifiedname>FluidMoments::s_density</qualifiedname>
@@ -40,8 +40,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="45" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classFluidMoments_1a0e36a0f2a4851525413ad0f033ffe37f" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr <ref refid="structFluidMoments_1_1MomentVelocity" kindref="compound">MomentVelocity</ref></type>
-        <definition>constexpr MomentVelocity FluidMoments::s_velocity</definition>
+        <type><ref refid="structFluidMoments_1_1MomentVelocity" kindref="compound">MomentVelocity</ref></type>
+        <definition>MomentVelocity FluidMoments::s_velocity</definition>
         <argsstring></argsstring>
         <name>s_velocity</name>
         <qualifiedname>FluidMoments::s_velocity</qualifiedname>
@@ -56,8 +56,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="50" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classFluidMoments_1a4648e3f7abc452675a0ed4bdecd59a80" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr <ref refid="structFluidMoments_1_1MomentTemperature" kindref="compound">MomentTemperature</ref></type>
-        <definition>constexpr MomentTemperature FluidMoments::s_temperature</definition>
+        <type><ref refid="structFluidMoments_1_1MomentTemperature" kindref="compound">MomentTemperature</ref></type>
+        <definition>MomentTemperature FluidMoments::s_temperature</definition>
         <argsstring></argsstring>
         <name>s_temperature</name>
         <qualifiedname>FluidMoments::s_temperature</qualifiedname>

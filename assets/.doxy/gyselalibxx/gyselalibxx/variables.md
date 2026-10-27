@@ -465,6 +465,7 @@
 
 * **PolarSplineMemRTheta** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **PolarSplineRTheta** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
+* **pos** ([**gauss\_legendre\_integration.cpp**](gauss__legendre__integration_8cpp.md))
 
 
 ## r
@@ -544,6 +545,11 @@
 * **View1D** ([**view.hpp**](view_8hpp.md))
 * **View2D** ([**view.hpp**](view_8hpp.md))
 * **ViewND** ([**view.hpp**](view_8hpp.md))
+
+
+## w
+
+* **weight** ([**gauss\_legendre\_integration.cpp**](gauss__legendre__integration_8cpp.md))
 
 
 ## x

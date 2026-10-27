@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structdetail__poisson_1_1TensorBSplineStash" kind="struct" language="C++" prot="public">
     <compoundname>detail_poisson::TensorBSplineStash</compoundname>
     <includes refid="polar__spline__fem__poisson__like__assembler_8hpp" local="no">polar_spline_fem_poisson_like_assembler.hpp</includes>
@@ -139,7 +139,7 @@
     </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="structdetail__poisson_1_1TensorBSplineStash_1a48e9525db4964af372c7bd20f09a6b0b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION std::tuple&lt; double, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="structTheta__cov" kindref="compound">Theta_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="structTheta__cov" kindref="compound">Theta_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R_cov, Theta_cov &gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::vals_and_derivs</definition>
         <argsstring>(Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, Idx&lt; BSplinesR, BSplinesTheta &gt; idx) const</argsstring>
         <name>vals_and_derivs</name>

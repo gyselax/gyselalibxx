@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem" kind="class" language="C++" prot="public">
     <compoundname>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</compoundname>
     <includes refid="logical__advection__logical__foot__finder_8hpp" local="no">logical_advection_logical_foot_finder.hpp</includes>
@@ -66,9 +66,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" line="174" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" bodystart="174" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ab73ddc2580d91898622adf1a07e61867" prot="private" static="no">
-        <type>typename TimeStepperBuilder::template time_stepper_t&lt; CoordRTheta, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
-        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder &gt;::TimeStepper =  typename TimeStepperBuilder::template time_stepper_t&lt;CoordRTheta, DVector&lt;R, Theta&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1af000cdcd3815cbe6f7f5c7830060e1c0" prot="private" static="no">
+        <type>typename TimeStepperBuilder::template time_stepper_t&lt; CoordRTheta, DVector&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder &gt;::TimeStepper = 
+            typename TimeStepperBuilder::template time_stepper_t&lt;CoordRTheta, DVector&lt;R, Theta&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>TimeStepper</name>
         <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem::TimeStepper</qualifiedname>
@@ -78,13 +79,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" line="176" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" bodystart="177" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" line="176" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" bodystart="176" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a9d17fe72e1afb08f856c11969f1b174c" prot="public" static="no">
+      <memberdef kind="typedef" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ab706cfe54a817efc620572a395036cea" prot="public" static="no">
         <type><ref refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder" kindref="compound">ElementwiseLogicalAdvLogicalFootFinder</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, IdxRangeOperator, RThetaAdvectionEvaluator, typename AdvecCoefFieldMem::view_type, TimeStepper &gt;</type>
-        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder &gt;::GPUCompat =  ElementwiseLogicalAdvLogicalFootFinder&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, typename AdvecCoefFieldMem::view_type, TimeStepper&gt;</definition>
+        <definition>using polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder &gt;::GPUCompat =  ElementwiseLogicalAdvLogicalFootFinder&lt;
+            GridR,
+            GridTheta,
+            IdxRangeOperator,
+            RThetaAdvectionEvaluator,
+            typename AdvecCoefFieldMem::view_type,
+            TimeStepper&gt;</definition>
         <argsstring></argsstring>
         <name>GPUCompat</name>
         <qualifiedname>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem::GPUCompat</qualifiedname>
@@ -95,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" line="182" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" bodystart="188" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" line="182" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" bodystart="182" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -258,7 +265,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" line="217" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp" bodystart="217" bodyend="229"/>
       </memberdef>
       <memberdef kind="function" id="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1abfc67fb7e56b6ca52ea2f3ee42fde8f6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a9d17fe72e1afb08f856c11969f1b174c" kindref="member">GPUCompat</ref></type>
+        <type><ref refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ab706cfe54a817efc620572a395036cea" kindref="member">GPUCompat</ref></type>
         <definition>GPUCompat polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefFieldMem, TimeStepperBuilder &gt;::operator()</definition>
         <argsstring>(double dt)</argsstring>
         <name>operator()</name>
@@ -300,7 +307,7 @@
     <listofallmembers>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a0f3b12af2025094c586e56c613037704" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>CoordRTheta</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a7955aec6f68444254d4196067b5ae910" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>ElementwiseLogicalAdvLogicalFootFinderMem</name></member>
-      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a9d17fe72e1afb08f856c11969f1b174c" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>GPUCompat</name></member>
+      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ab706cfe54a817efc620572a395036cea" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>GPUCompat</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a502d07f16c795972c9d86120ddd409cb" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>m_advection_field_coefs_alloc</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ab394700c2fba6dceb894313f43dcd761" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>m_evaluator_advection_field</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ac73d76286e4b987b84e325a150b3b6ba" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>m_idx_range_theta</name></member>
@@ -308,7 +315,7 @@
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1abfc67fb7e56b6ca52ea2f3ee42fde8f6" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>operator()</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a66741c511b7c7f24e9d8400b511b43c2" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>R</name></member>
       <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a50b6cf57feeec91e3dcfe5052a6c64ff" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>Theta</name></member>
-      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ab73ddc2580d91898622adf1a07e61867" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>TimeStepper</name></member>
+      <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1af000cdcd3815cbe6f7f5c7830060e1c0" prot="private" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</scope><name>TimeStepper</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

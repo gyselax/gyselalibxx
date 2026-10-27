@@ -92,7 +92,9 @@ _Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::FindRelevantIdxRangeType< QueryGrid1D, std::tuple< IdxRangeHead, IdxRangeTypes... > >::type =  ddc::type_seq_merge_t< typename SelectRelevantIdxRangeType<QueryGrid1D, IdxRangeHead>::type, typename FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeTypes...> >::type>;
+using connectivity_details::FindRelevantIdxRangeType< QueryGrid1D, std::tuple< IdxRangeHead, IdxRangeTypes... > >::type =  ddc::type_seq_merge_t<
+            typename SelectRelevantIdxRangeType<QueryGrid1D, IdxRangeHead>::type,
+            typename FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeTypes...>>::type>;
 ```
 
 

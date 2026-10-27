@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometry__r__theta_8hpp" kind="file" language="C++">
     <compoundname>geometry_r_theta.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -952,7 +952,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="203" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="203" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a550909ae6921c9cf6eb4bb6589311e4c" prot="public" static="no">
+      <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a30ae4b2ec261e5dbf7d7a8eda054bcb0" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class Dim1</type>
@@ -962,7 +962,7 @@
           </param>
         </templateparamlist>
         <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</type>
-        <definition>using DVectorFieldMemRTheta =  VectorFieldMem&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt; &gt;</definition>
+        <definition>using DVectorFieldMemRTheta =  VectorFieldMem&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorFieldMemRTheta</name>
         <briefdescription>
@@ -973,7 +973,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="208" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="208" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a51fa3212cdba1945f4e6ebb81b14b9b6" prot="public" static="no">
+      <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a87557a70b11d28ff26b5603d97fbfd1e" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class Dim1</type>
@@ -983,7 +983,7 @@
           </param>
         </templateparamlist>
         <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</type>
-        <definition>using DVectorFieldRTheta =  VectorField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt; &gt;</definition>
+        <definition>using DVectorFieldRTheta =  VectorField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorFieldRTheta</name>
         <briefdescription>
@@ -994,7 +994,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="211" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="211" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__r__theta_8hpp_1aff004ace4ef103d1ede2aba5a9fd16da" prot="public" static="no">
+      <memberdef kind="typedef" id="geometry__r__theta_8hpp_1aed50f8050bf3ef91615a8f69383a4c5a" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class Dim1</type>
@@ -1003,8 +1003,8 @@
             <type>class Dim2</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</type>
-        <definition>using DVectorConstFieldRTheta =  VectorConstField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt; &gt;</definition>
+        <type>VectorConstField&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</type>
+        <definition>using DVectorConstFieldRTheta =  VectorConstField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorConstFieldRTheta</name>
         <briefdescription>
@@ -1013,7 +1013,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="214" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="215" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="214" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="214" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a5e9223a5af2d88988df1dc0873f1f021" prot="public" static="no">
         <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref> &gt;</type>
@@ -1026,7 +1026,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="286" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="286" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="285" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="285" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a6efd472443b007215996db4a3525a96c" prot="public" static="no">
         <type>Coord&lt; <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -1039,7 +1039,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="287" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="287" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="286" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="286" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a10247c2fe6a1199a77f867e7d345e7ac" prot="public" static="no">
         <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -1052,7 +1052,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="288" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="288" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="287" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="287" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a7d38310972352694a6247cc9f84304ce" prot="public" static="no">
         <type>Coord&lt; <ref refid="structVx" kindref="compound">Vx</ref> &gt;</type>
@@ -1065,7 +1065,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="290" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="290" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="289" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="289" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__r__theta_8hpp_1a6bb4c25a20696d975f8bdfe1de4d13df" prot="public" static="no">
         <type>Coord&lt; <ref refid="structVy" kindref="compound">Vy</ref> &gt;</type>
@@ -1078,7 +1078,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="291" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="291" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="290" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="290" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1120,7 +1120,7 @@
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="42" refid="structR_1acebf526cf7e2a2e3d470be1ea38a8f64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structR_1acebf526cf7e2a2e3d470be1ea38a8f64" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45" refid="structR_1a35006d7e5031a9bd48e5af62534c421f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR__cov" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structR__cov" kindref="compound">R_cov</ref>;</highlight></codeline>
+<codeline lineno="45" refid="structR_1a35006d7e5031a9bd48e5af62534c421f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structR__cov" kindref="compound">R_cov</ref>;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="50" refid="structTheta" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structTheta" kindref="compound">Theta</ref></highlight></codeline>
 <codeline lineno="51"><highlight class="normal">{</highlight></codeline>
@@ -1130,7 +1130,7 @@
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
 <codeline lineno="62" refid="structTheta_1a458a68916b624e4a937f0d38533a1942" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structTheta_1a458a68916b624e4a937f0d38533a1942" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65" refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta__cov" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref>;</highlight></codeline>
+<codeline lineno="65" refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref>;</highlight></codeline>
 <codeline lineno="66"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"></highlight></codeline>
 <codeline lineno="71" refid="structR__cov" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structR__cov" kindref="compound">R_cov</ref></highlight></codeline>
@@ -1141,7 +1141,7 @@
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
 <codeline lineno="83" refid="structR__cov_1ad33bfa8d84633a654f6d895b62e55bd3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structR__cov_1ad33bfa8d84633a654f6d895b62e55bd3" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86" refid="structR__cov_1a8730d9a5eb3d718d402cad8cbbc93f0d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structR" kindref="compound">R</ref>;</highlight></codeline>
+<codeline lineno="86" refid="structR__cov_1a8730d9a5eb3d718d402cad8cbbc93f0d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR__cov_1a8730d9a5eb3d718d402cad8cbbc93f0d" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structR" kindref="compound">R</ref>;</highlight></codeline>
 <codeline lineno="87"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="91" refid="structTheta__cov" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref></highlight></codeline>
 <codeline lineno="92"><highlight class="normal">{</highlight></codeline>
@@ -1151,7 +1151,7 @@
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
 <codeline lineno="103" refid="structTheta__cov_1aa8fa7e714a2fd9fc2de39f95d97e6e4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structTheta__cov_1aa8fa7e714a2fd9fc2de39f95d97e6e4a" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106" refid="structTheta__cov_1a5249a3e36315f79336d879b37293d0fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structTheta" kindref="compound">Theta</ref>;</highlight></codeline>
+<codeline lineno="106" refid="structTheta__cov_1a5249a3e36315f79336d879b37293d0fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta__cov_1a5249a3e36315f79336d879b37293d0fb" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structTheta" kindref="compound">Theta</ref>;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight></codeline>
 <codeline lineno="112" refid="structVr" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVr" kindref="compound">Vr</ref></highlight></codeline>
@@ -1239,47 +1239,47 @@
 <codeline lineno="205"><highlight class="normal"></highlight></codeline>
 <codeline lineno="206"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>VectorFieldMem<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="207"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMemRTheta</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DVectorFieldMemRTheta<sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
 <codeline lineno="209"><highlight class="normal"></highlight></codeline>
 <codeline lineno="210"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DVectorFieldRTheta<sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"></highlight></codeline>
 <codeline lineno="213"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorConstFieldRTheta</ref></highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorConstField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DVectorConstFieldRTheta</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VectorConstField&lt;double,<sp/>IdxRangeRTheta,<sp/>VectorIndexSet&lt;Dim1,<sp/>Dim2&gt;&gt;;</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"></highlight></codeline>
 <codeline lineno="217"><highlight class="normal"></highlight></codeline>
 <codeline lineno="218"><highlight class="normal"></highlight></codeline>
 <codeline lineno="219"><highlight class="normal"></highlight><highlight class="comment">//<sp/>CARTESIAN<sp/>SPACE<sp/>AND<sp/>VELOCITY<sp/>------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="220"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>Continuous<sp/>dimensions</highlight></codeline>
-<codeline lineno="224" refid="structX" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">X</ref></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>Continuous<sp/>dimensions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">X</ref></highlight></codeline>
 <codeline lineno="225"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="230" refid="structX_1aa1915e83f5e8d1363cbc25d737b52a9c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1aa1915e83f5e8d1363cbc25d737b52a9c" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1aa1915e83f5e8d1363cbc25d737b52a9c" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="231"><highlight class="normal"></highlight></codeline>
-<codeline lineno="233" refid="structX_1a8f2020d96b3716fc6de24ef27e6c158f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1a8f2020d96b3716fc6de24ef27e6c158f" kindref="member">IS_COVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1a8f2020d96b3716fc6de24ef27e6c158f" kindref="member">IS_COVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="234"><highlight class="normal"></highlight></codeline>
-<codeline lineno="236" refid="structX_1a21b0a7c9531a817b3696d54d248192bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1a21b0a7c9531a817b3696d54d248192bf" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structX_1a21b0a7c9531a817b3696d54d248192bf" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="237"><highlight class="normal"></highlight></codeline>
-<codeline lineno="239" refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structX" kindref="compound">X</ref>;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structX" kindref="compound">X</ref>;</highlight></codeline>
 <codeline lineno="240"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="244" refid="structY" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref></highlight></codeline>
 <codeline lineno="245"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="250" refid="structY_1a0333176b598ab1ac9bf749dfca10cc2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a0333176b598ab1ac9bf749dfca10cc2f" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a0333176b598ab1ac9bf749dfca10cc2f" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="251"><highlight class="normal"></highlight></codeline>
-<codeline lineno="253" refid="structY_1a9743efa727bd8c0249715bf6ac425bc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a9743efa727bd8c0249715bf6ac425bc9" kindref="member">IS_COVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a9743efa727bd8c0249715bf6ac425bc9" kindref="member">IS_COVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="254"><highlight class="normal"></highlight></codeline>
-<codeline lineno="256" refid="structY_1a36729b36e12627fd69c709e3b26ce176" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a36729b36e12627fd69c709e3b26ce176" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a36729b36e12627fd69c709e3b26ce176" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="257"><highlight class="normal"></highlight></codeline>
-<codeline lineno="259" refid="structY_1aad98c6afa465f3fb654029648420df1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structY" kindref="compound">Y</ref>;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Dual</ref><sp/>=<sp/><ref refid="structY" kindref="compound">Y</ref>;</highlight></codeline>
 <codeline lineno="260"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="261"><highlight class="normal"></highlight></codeline>
-<codeline lineno="265" refid="structVx" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVx" kindref="compound">Vx</ref></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVx" kindref="compound">Vx</ref></highlight></codeline>
 <codeline lineno="266"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="271" refid="structVx_1aabb61a786e12232d6e6adaf41a545a4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structVx_1aabb61a786e12232d6e6adaf41a545a4a" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structVx_1aabb61a786e12232d6e6adaf41a545a4a" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="272"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="276" refid="structVy" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVy" kindref="compound">Vy</ref></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVy" kindref="compound">Vy</ref></highlight></codeline>
 <codeline lineno="277"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="282" refid="structVy_1aebef90bce85084cc54c7c89419dce525" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structVy_1aebef90bce85084cc54c7c89419dce525" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structVy_1aebef90bce85084cc54c7c89419dce525" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="283"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="284"><highlight class="normal"></highlight></codeline>
 <codeline lineno="285"><highlight class="normal"></highlight></codeline>

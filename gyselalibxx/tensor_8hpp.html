@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -629,7 +635,7 @@
 <td style="text-align: left;"><a href="#typedef-dtensor"><strong>DTensor</strong></a>  <br><em>A helper type alias to get a tensor containing doubles.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="classTensor.html"><strong>Vector</strong></a>&lt; double, Dims... &gt;</td>
+<td style="text-align: right;">typedef Vector&lt; double, Dims... &gt;</td>
 <td style="text-align: left;"><a href="#typedef-dvector"><strong>DVector</strong></a>  <br><em>A helper type alias to get a 1D tensor (a vector) of doubles.</em></td>
 </tr>
 <tr>
@@ -653,7 +659,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">std::ostream &amp;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator&lt;&lt;</strong></a> (std::ostream &amp; o, <a href="classTensor.html"><strong>Vector</strong></a>&lt; ElementType, Dim1, TailDims... &gt; vec) <br></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator&lt;&lt;</strong></a> (std::ostream &amp; o, Vector&lt; ElementType, Dim1, TailDims... &gt; vec) <br></td>
 </tr>
 </tbody>
 </table>
@@ -680,7 +686,7 @@
 
 <h3 id="typedef-vector">typedef Vector</h3>
 <p><em>A helper type alias to get a 1D tensor (a vector).</em> </p>
-<pre><code class="language-C++">using Vector =  Tensor&lt;ElementType, VectorIndexSet&lt;Dims...&gt; &gt;;
+<pre><code class="language-C++">using Vector =  Tensor&lt;ElementType, VectorIndexSet&lt;Dims...&gt;&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -698,7 +704,7 @@
 <pre><code class="language-C++">template&lt;class ElementType, class Dim1, class... TailDims&gt;
 std::ostream &amp; operator&lt;&lt; (
     std::ostream &amp; o,
-    Vector &lt; ElementType, Dim1, TailDims... &gt; vec
+    Vector&lt; ElementType, Dim1, TailDims... &gt; vec
 ) 
 </code></pre>
 <hr>

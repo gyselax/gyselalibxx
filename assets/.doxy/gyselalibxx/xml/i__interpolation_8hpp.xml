@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="i__interpolation_8hpp" kind="file" language="C++">
     <compoundname>i_interpolation.hpp</compoundname>
     <includes local="no">ddc/kernels/splines.hpp</includes>
@@ -527,6 +527,8 @@
     <innerclass refid="structExtrapolationRule_1_1OneSidedPeriodic" prot="public">ExtrapolationRule::OneSidedPeriodic</innerclass>
     <innerclass refid="structExtrapolationRule_1_1NullValue" prot="public">ExtrapolationRule::NullValue</innerclass>
     <innerclass refid="structExtrapolationRule_1_1Constant" prot="public">ExtrapolationRule::Constant</innerclass>
+    <innerconcept refid="conceptconcepts_1_1Interpolation">concepts::Interpolation</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1Interpolation1D">concepts::Interpolation1D</innerconcept>
     <innernamespace refid="namespaceconcepts">concepts</innernamespace>
     <innernamespace refid="namespaceExtrapolationRule">ExtrapolationRule</innernamespace>
     <sectiondef kind="var">
@@ -536,8 +538,8 @@
             <type>class Basis</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_lagrange_basis_v</definition>
+        <type>bool</type>
+        <definition>bool is_lagrange_basis_v</definition>
         <argsstring></argsstring>
         <name>is_lagrange_basis_v</name>
         <initializer>= is_uniform_lagrange_basis_v&lt;Basis&gt; || is_non_uniform_lagrange_basis_v&lt;Basis&gt;</initializer>
@@ -567,8 +569,8 @@
             <type>class Basis</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_spline_basis_v</definition>
+        <type>bool</type>
+        <definition>bool is_spline_basis_v</definition>
         <argsstring></argsstring>
         <name>is_spline_basis_v</name>
         <initializer>= ddc::is_uniform_bsplines_v&lt;Basis&gt; || ddc::is_non_uniform_bsplines_v&lt;Basis&gt;</initializer>
@@ -655,20 +657,20 @@
 <codeline lineno="106" refid="structExtrapolationRule_1_1OneSidedPeriodic_1ab4c5ffc7a9dba42c70adf9c3143a4b08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1OneSidedPeriodic_1ab4c5ffc7a9dba42c70adf9c3143a4b08" kindref="member">type</ref><sp/>=<sp/>ddc::PeriodicExtrapolationRule&lt;typename<sp/>Basis::continuous_dimension_type&gt;;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110" refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" refkind="member"><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">Periodic</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;OneSidedPeriodic,<sp/>OneSidedPeriodic&gt;;</highlight></codeline>
+<codeline lineno="110" refid="namespaceExtrapolationRule_1a74ee3ad52ef4fa4ed41e57dd16fa3393" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a74ee3ad52ef4fa4ed41e57dd16fa3393" kindref="member">Periodic</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;OneSidedPeriodic,<sp/>OneSidedPeriodic&gt;;</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="113" refid="structExtrapolationRule_1_1NullValue" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1NullValue" kindref="compound">NullValue</ref></highlight></codeline>
+<codeline lineno="113" refid="structExtrapolationRule_1_1NullValue" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1NullValue" kindref="compound">NullValue</ref></highlight></codeline>
 <codeline lineno="114"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DataType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Basis,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoeffGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
 <codeline lineno="117" refid="structExtrapolationRule_1_1NullValue_1adbbcc6be7279aaf07e4d0d4ccd2bcafb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1NullValue_1adbbcc6be7279aaf07e4d0d4ccd2bcafb" kindref="member">type</ref><sp/>=<sp/>ddc::NullExtrapolationRule;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="121" refid="namespaceExtrapolationRule_1a09227876d2442ba8cd05940b5adbd303" refkind="member"><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a09227876d2442ba8cd05940b5adbd303" kindref="member">Null_Null</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;NullValue,<sp/>NullValue&gt;;</highlight></codeline>
+<codeline lineno="121" refid="namespaceExtrapolationRule_1a59b7fa474989f3dd46794ae21590d438" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a59b7fa474989f3dd46794ae21590d438" kindref="member">Null_Null</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;NullValue,<sp/>NullValue&gt;;</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>
 <codeline lineno="128" refid="structExtrapolationRule_1_1Constant" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1Constant" kindref="compound">Constant</ref></highlight></codeline>
 <codeline lineno="129"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DataType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Basis,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeCoeff&gt;</highlight></codeline>
-<codeline lineno="132" refid="structExtrapolationRule_1_1Constant_1a101806315769a6363937197fa084d51b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1Constant_1a101806315769a6363937197fa084d51b" kindref="member">type</ref><sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
+<codeline lineno="132" refid="structExtrapolationRule_1_1Constant_1a4897275f3becca6c9e069bde70ad88ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1Constant_1a4897275f3becca6c9e069bde70ad88ba" kindref="member">type</ref><sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_spline_basis_v&lt;Basis&gt;,</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::ConstantExtrapolationRule&lt;typename<sp/>Basis::continuous_dimension_type&gt;,</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classConstantIdentityInterpolationExtrapolationRule" kindref="compound">ConstantIdentityInterpolationExtrapolationRule</ref>&lt;</highlight></codeline>
@@ -678,7 +680,7 @@
 <codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType&gt;&gt;;</highlight></codeline>
 <codeline lineno="140"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="141"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143" refid="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" refkind="member"><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" kindref="member">Constant_Constant</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;Constant,<sp/>Constant&gt;;</highlight></codeline>
+<codeline lineno="143" refid="namespaceExtrapolationRule_1aa3665802a09eb11760a0e5664756a3c0" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1aa3665802a09eb11760a0e5664756a3c0" kindref="member">Constant_Constant</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;Constant,<sp/>Constant&gt;;</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
 <codeline lineno="145"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ExtrapolationRule</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>

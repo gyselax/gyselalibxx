@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -595,7 +601,14 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The concrete extrapolation rule class for a given CoeffGrid/DataType.</em> </p>
-<pre><code class="language-C++">using ExtrapolationRule::Constant::type =  std::conditional_t&lt; is_spline_basis_v&lt;Basis&gt;, ddc::ConstantExtrapolationRule&lt;typename Basis::continuous_dimension_type&gt;, ConstantIdentityInterpolationExtrapolationRule&lt; find_grid_t&lt; typename Basis::continuous_dimension_type, ddc::to_type_seq_t&lt;IdxRangeCoeff&gt; &gt;, DataType&gt; &gt;;
+<pre><code class="language-C++">using ExtrapolationRule::Constant::type =  std::conditional_t&lt;
+            is_spline_basis_v&lt;Basis&gt;,
+            ddc::ConstantExtrapolationRule&lt;typename Basis::continuous_dimension_type&gt;,
+            ConstantIdentityInterpolationExtrapolationRule&lt;
+                    find_grid_t&lt;
+                            typename Basis::continuous_dimension_type,
+                            ddc::to_type_seq_t&lt;IdxRangeCoeff&gt;&gt;,
+                    DataType&gt;&gt;;
 </code></pre>
 <hr>
 

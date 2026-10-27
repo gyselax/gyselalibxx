@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -602,25 +608,33 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-greville_greville">typedef Greville_Greville</h3>
 <p><em>Convenience pairing of ddc::SplineBuilderClosure::GREVILLE for both boundaries.</em> </p>
-<pre><code class="language-C++">using SplineBoundaryClosure::Greville_Greville = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE&gt;;
+<pre><code class="language-C++">using SplineBoundaryClosure::Greville_Greville =  SplineBoundaryClosures&lt;
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-hermite_hermite">typedef Hermite_Hermite</h3>
 <p><em>Convenience pairing of ddc::SplineBuilderClosure::HERMITE for both boundaries.</em> </p>
-<pre><code class="language-C++">using SplineBoundaryClosure::Hermite_Hermite = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE&gt;;
+<pre><code class="language-C++">using SplineBoundaryClosure::Hermite_Hermite =  SplineBoundaryClosures&lt;
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-homogeneoushermite_homogeneoushermite">typedef HomogeneousHermite_HomogeneousHermite</h3>
 <p><em>Convenience pairing of ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE for both boundaries.</em> </p>
-<pre><code class="language-C++">using SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE, ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE&gt;;
+<pre><code class="language-C++">using SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite =  SplineBoundaryClosures&lt;
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-periodic">typedef Periodic</h3>
 <p><em>Convenience pairing of ddc::SplineBuilderClosure::PERIODIC for both boundaries.</em> </p>
-<pre><code class="language-C++">using SplineBoundaryClosure::Periodic = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC&gt;;
+<pre><code class="language-C++">using SplineBoundaryClosure::Periodic =  SplineBoundaryClosures&lt;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC&gt;;
 </code></pre>
 <hr>
 

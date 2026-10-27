@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="splitrighthandsidesolver_8hpp" kind="file" language="C++">
     <compoundname>splitrighthandsidesolver.hpp</compoundname>
     <includes local="no">utility</includes>
@@ -166,18 +166,18 @@
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;iboltzmannsolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;irighthandside.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23" refid="classSplitRightHandSideSolver" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplitRightHandSideSolver" kindref="compound">SplitRightHandSideSolver</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIBoltzmannSolver" kindref="compound">IBoltzmannSolver</ref></highlight></codeline>
+<codeline lineno="23" refid="classSplitRightHandSideSolver" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplitRightHandSideSolver_1a0774d6960fa867c5ceacd89f05ecbd44" kindref="member">SplitRightHandSideSolver</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIBoltzmannSolver" kindref="compound">IBoltzmannSolver</ref></highlight></codeline>
 <codeline lineno="24"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIBoltzmannSolver" kindref="compound">IBoltzmannSolver</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_boltzmann_solver;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::reference_wrapper&lt;IRightHandSide<sp/>const&gt;&gt;<sp/>m_rhs;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplitRightHandSideSolver" kindref="compound">SplitRightHandSideSolver</ref>(</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplitRightHandSideSolver_1a0774d6960fa867c5ceacd89f05ecbd44" kindref="member">SplitRightHandSideSolver</ref>(</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classIBoltzmannSolver" kindref="compound">IBoltzmannSolver</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>vlasov_solver,</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::reference_wrapper&lt;IRightHandSide<sp/>const&gt;&gt;<sp/>rhs);</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplitRightHandSideSolver" kindref="compound">~SplitRightHandSideSolver</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplitRightHandSideSolver_1a0774d6960fa867c5ceacd89f05ecbd44" kindref="member">~SplitRightHandSideSolver</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/><ref refid="classSplitRightHandSideSolver_1a350971eed31753861f6e2917b9b6b968" kindref="member">operator()</ref>(DFieldSpXVx<sp/>allfdistribu,<sp/>DConstFieldX<sp/>electric_field,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>

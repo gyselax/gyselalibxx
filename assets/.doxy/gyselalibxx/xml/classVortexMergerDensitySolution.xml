@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classVortexMergerDensitySolution" kind="class" language="C++" prot="public">
     <compoundname>VortexMergerDensitySolution</compoundname>
     <includes refid="vortex__merger__initialisation_8hpp" local="no">vortex_merger_initialisation.hpp</includes>
@@ -96,7 +96,7 @@
 <para>Set an initial condition for the vortex merger simulation. </para>
         </briefdescription>
         <detaileddescription>
-<para>The initial condition is given by  <formula id="246">$ \rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon
+<para>The initial condition is given by     <formula id="246">$ \rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon
      \left(
          \exp\left[-\frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2\sigma^2}\right]
       +  \exp\left[-\frac{(x - x_2^*)^2 + (y - y_2^*)^2}{2\sigma^2}\right]

@@ -72,11 +72,11 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 |   | [**CircularToCartesian**](#function-circulartocartesian-33) ([**CircularToCartesian**](classCircularToCartesian.md) && x) = default<br>_Instantiate a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another temporary_[_**CircularToCartesian**_](classCircularToCartesian.md) _(rvalue)._ |
 |  KOKKOS\_INLINE\_FUNCTION [**CartesianToCircular**](classCartesianToCircular.md)&lt; [**X**](structX.md), [**Y**](structY.md), [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt;, VectorIndexSet&lt; [**X\_cov**](classCircularToCartesian.md#typedef-x_cov), [**Y\_cov**](classCircularToCartesian.md#typedef-y_cov) &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full inverse Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt;, VectorIndexSet&lt; [**X\_cov**](classCircularToCartesian.md#typedef-x_cov), [**Y\_cov**](classCircularToCartesian.md#typedef-y_cov) &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full inverse Jacobian matrix._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian-12) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian**](#function-jacobian-22) (Coord&lt; [**R**](structR.md) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping as a function of the radius._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classCircularToCartesian.md#typedef-r_cov), [**Theta\_cov**](classCircularToCartesian.md#typedef-theta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classCircularToCartesian.md#typedef-r_cov)[**R\_cov**](structR__cov.md), [**Theta\_cov**](classCircularToCartesian.md#typedef-theta_cov)[**Theta\_cov**](structTheta__cov.md) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**o\_point**](#function-o_point) () const<br>_Get the O-point in Cartesian coordinates._  |
 |  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_ \((r, \theta)\) _coordinate to the equivalent (x,y) coordinate._ |
 |  [**CircularToCartesian**](classCircularToCartesian.md) & | [**operator=**](#function-operator_1) ([**CircularToCartesian**](classCircularToCartesian.md) const & x) = default<br>_Assign a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another_[_**CircularToCartesian**_](classCircularToCartesian.md) _(lvalue)._ |
@@ -437,7 +437,7 @@ A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
 
 _Compute full inverse Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < VectorIndexSet< R , Theta >, VectorIndexSet< X_cov , Y_cov > > CircularToCartesian::inv_jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< VectorIndexSet< R , Theta >, VectorIndexSet< X_cov , Y_cov > > CircularToCartesian::inv_jacobian_matrix (
     Coord< R , Theta > const & coord
 ) const
 ```
@@ -577,7 +577,7 @@ A double with the value of the (i,j) coefficient of the Jacobian matrix.
 
 _Compute full Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < VectorIndexSet< X , Y >, VectorIndexSet< R_cov , Theta_cov > > CircularToCartesian::jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< VectorIndexSet< X , Y >, VectorIndexSet< R_cov R_cov , Theta_cov Theta_cov > > CircularToCartesian::jacobian_matrix (
     Coord< R , Theta > const & coord
 ) const
 ```

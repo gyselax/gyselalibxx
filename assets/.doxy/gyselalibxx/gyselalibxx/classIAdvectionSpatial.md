@@ -18,7 +18,6 @@ _A class which provides an advection operator._ [More...](#detailed-description)
 
 
 
-Inherited by the following classes: [BslAdvectionSpatial](classBslAdvectionSpatial.md)
 
 
 

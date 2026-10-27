@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_e2479f83d09a2f8b4ff065e45deaef4e" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration</compoundname>
     <innerfile refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp">itimesolver.hpp</innerfile>

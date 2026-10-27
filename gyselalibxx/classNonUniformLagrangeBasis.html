@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -625,15 +631,15 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: right;">std::size_t</td>
 <td style="text-align: left;"><a href="#function-degree"><strong>degree</strong></a> () noexcept<br><em>The degree of the Lagrange polynomials.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#function-is_periodic"><strong>is_periodic</strong></a> () noexcept<br><em>Indicates if the Lagrange polynomials are periodic or not.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#function-is_uniform"><strong>is_uniform</strong></a> () noexcept<br><em>Indicates if the Lagrange polynomials are uniform or not (this is the case here).</em></td>
 </tr>
 </tbody>
@@ -667,7 +673,7 @@
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
 <h3 id="function-degree">function degree</h3>
 <p><em>The degree of the Lagrange polynomials.</em> </p>
-<pre><code class="language-C++">static inline constexpr std::size_t NonUniformLagrangeBasis::degree () noexcept
+<pre><code class="language-C++">static inline std::size_t NonUniformLagrangeBasis::degree () noexcept
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The degree. </p>
@@ -675,7 +681,7 @@
 
 <h3 id="function-is_periodic">function is_periodic</h3>
 <p><em>Indicates if the Lagrange polynomials are periodic or not.</em> </p>
-<pre><code class="language-C++">static inline constexpr bool NonUniformLagrangeBasis::is_periodic () noexcept
+<pre><code class="language-C++">static inline bool NonUniformLagrangeBasis::is_periodic () noexcept
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>A boolean indicating if the Lagrange polynomials are periodic or not. </p>
@@ -683,7 +689,7 @@
 
 <h3 id="function-is_uniform">function is_uniform</h3>
 <p><em>Indicates if the Lagrange polynomials are uniform or not (this is the case here).</em> </p>
-<pre><code class="language-C++">static inline constexpr bool NonUniformLagrangeBasis::is_uniform () noexcept
+<pre><code class="language-C++">static inline bool NonUniformLagrangeBasis::is_uniform () noexcept
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>A boolean indicating if the Lagrange polynomials are uniform or not. </p>

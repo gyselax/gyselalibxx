@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -591,7 +597,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (SplineType spline, <a href="classDerivField.html"><strong>DerivFieldType</strong></a> function_and_derivs) const<br><em>Build the spline representation of the function given in a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>applying the referenced spline builder stored in the class.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (SplineType spline, DerivFieldType function_and_derivs) const<br><em>Build the spline representation of the function given in a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>applying the referenced spline builder stored in the class.</em></td>
 </tr>
 </tbody>
 </table>
@@ -606,19 +612,19 @@
 <tbody>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-fill_in_cross_deriv"><strong>fill_in_cross_deriv</strong></a> (CrossDerivField cross_deriv, <a href="classDerivField.html"><strong>DerivFieldType</strong></a> function_and_derivs, Idx&lt; Grid1 &gt; idx_slice_1, Idx&lt; Grid2 &gt; idx_slice_2) <br><em>Fill in the cross_deriv field with the cross derivatives stored in the function_and_derivs.</em></td>
+<td style="text-align: left;"><a href="#function-fill_in_cross_deriv"><strong>fill_in_cross_deriv</strong></a> (CrossDerivField cross_deriv, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice_1, Idx&lt; Grid2 &gt; idx_slice_2) <br><em>Fill in the cross_deriv field with the cross derivatives stored in the function_and_derivs.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-fill_in_deriv1"><strong>fill_in_deriv1</strong></a> (Deriv1Field deriv1, <a href="classDerivField.html"><strong>DerivFieldType</strong></a> function_and_derivs, Idx&lt; Grid1 &gt; idx_slice) <br><em>Fill in the deriv1 field with the derivatives along the first dimension stored in the function_and_derivs.</em></td>
+<td style="text-align: left;"><a href="#function-fill_in_deriv1"><strong>fill_in_deriv1</strong></a> (Deriv1Field deriv1, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice) <br><em>Fill in the deriv1 field with the derivatives along the first dimension stored in the function_and_derivs.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-fill_in_deriv2"><strong>fill_in_deriv2</strong></a> (Deriv2Field deriv2, <a href="classDerivField.html"><strong>DerivFieldType</strong></a> function_and_derivs, Idx&lt; Grid2 &gt; idx_slice) <br><em>Fill in the deriv2 field with the derivatives along the second dimension stored in the function_and_derivs.</em></td>
+<td style="text-align: left;"><a href="#function-fill_in_deriv2"><strong>fill_in_deriv2</strong></a> (Deriv2Field deriv2, DerivFieldType function_and_derivs, Idx&lt; Grid2 &gt; idx_slice) <br><em>Fill in the deriv2 field with the derivatives along the second dimension stored in the function_and_derivs.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-fill_in_function"><strong>fill_in_function</strong></a> (FunctField function, <a href="classDerivField.html"><strong>DerivFieldType</strong></a> function_and_derivs) <br><em>Fill in the function field with the values stored in the function_and_derivs.</em></td>
+<td style="text-align: left;"><a href="#function-fill_in_function"><strong>fill_in_function</strong></a> (FunctField function, DerivFieldType function_and_derivs) <br><em>Fill in the function field with the values stored in the function_and_derivs.</em></td>
 </tr>
 </tbody>
 </table>

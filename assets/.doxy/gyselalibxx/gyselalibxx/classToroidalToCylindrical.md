@@ -64,10 +64,10 @@ _A class describing a coordinate change from a toroidal system of coordinates to
 |   | [**ToroidalToCylindrical**](#function-toroidaltocylindrical) (Curvilinear2DToCartesian const & mapping\_2d) <br>_Instantiate a_ [_**ToroidalToCylindrical**_](classToroidalToCylindrical.md) _mapping from a 2D Curvilinear2DToCartesian mapping._ |
 |  Curvilinear2DToCartesian | [**get\_2d\_polar\_mapping**](#function-get_2d_polar_mapping) () const<br>_Get the mapping describing the polar plane._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the inverse of the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; Rho, [**Theta**](structTheta.md), Phi &gt;, VectorIndexSet&lt; [**R\_cov**](structR__cov.md), Z\_cov, Zeta\_cov &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the inverse of the Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; Rho, [**Theta**](structTheta.md), Phi &gt;, VectorIndexSet&lt; [**R\_cov**](structR__cov.md), Z\_cov, Zeta\_cov &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the inverse of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian: the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**R**](structR.md), Z, Zeta &gt;, VectorIndexSet&lt; Rho\_cov, [**Theta\_cov**](structTheta__cov.md), Phi\_cov &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; [**R**](structR.md), Z, Zeta &gt;, VectorIndexSet&lt; Rho\_cov, [**Theta\_cov**](structTheta__cov.md), Phi\_cov &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**CoordResult**](classToroidalToCylindrical.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Convert the_ \((\rho, \theta, \phi)\) _coordinate to the equivalent_\((R, Z, \zeta)\) _coordinate._ |
 
 
@@ -261,7 +261,7 @@ The value of the (i,j) coefficient of the Jacobian matrix.
 
 _Compute the inverse of the Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < VectorIndexSet< Rho, Theta , Phi >, VectorIndexSet< R_cov , Z_cov, Zeta_cov > > ToroidalToCylindrical::inv_jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< VectorIndexSet< Rho, Theta , Phi >, VectorIndexSet< R_cov , Z_cov, Zeta_cov > > ToroidalToCylindrical::inv_jacobian_matrix (
     CoordArg const & coord
 ) const
 ```
@@ -375,7 +375,7 @@ The value of the (i,j) coefficient of the Jacobian matrix.
 
 _Compute the Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < VectorIndexSet< R , Z, Zeta >, VectorIndexSet< Rho_cov, Theta_cov , Phi_cov > > ToroidalToCylindrical::jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< VectorIndexSet< R , Z, Zeta >, VectorIndexSet< Rho_cov, Theta_cov , Phi_cov > > ToroidalToCylindrical::jacobian_matrix (
     CoordArg const & coord
 ) const
 ```

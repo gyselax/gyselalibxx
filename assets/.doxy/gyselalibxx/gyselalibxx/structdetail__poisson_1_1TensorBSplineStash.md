@@ -63,7 +63,7 @@ _The values and first derivatives of the non-zero 1D B-splines at the 1D quadrat
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_FUNCTION double | [**vals**](#function-vals) (Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad, Idx&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx) const<br>_Get the value of a tensor product B-spline at a quadrature point._  |
-|  KOKKOS\_FUNCTION std::tuple&lt; double, [**DVector**](classTensor.md)&lt; [**R\_cov**](structR__cov.md), [**Theta\_cov**](structTheta__cov.md) &gt; &gt; | [**vals\_and\_derivs**](#function-vals_and_derivs) (Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad, Idx&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx) const<br>_Get the value and the derivatives of a tensor product B-spline at a quadrature point._  |
+|  KOKKOS\_FUNCTION std::tuple&lt; double, DVector&lt; [**R\_cov**](structR__cov.md), [**Theta\_cov**](structTheta__cov.md) &gt; &gt; | [**vals\_and\_derivs**](#function-vals_and_derivs) (Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad, Idx&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx) const<br>_Get the value and the derivatives of a tensor product B-spline at a quadrature point._  |
 
 
 
@@ -218,7 +218,7 @@ The value of the B-spline at the quadrature point.
 
 _Get the value and the derivatives of a tensor product B-spline at a quadrature point._ 
 ```C++
-inline KOKKOS_FUNCTION std::tuple< double, DVector < R_cov , Theta_cov > > detail_poisson::TensorBSplineStash::vals_and_derivs (
+inline KOKKOS_FUNCTION std::tuple< double, DVector< R_cov , Theta_cov > > detail_poisson::TensorBSplineStash::vals_and_derivs (
     Idx< QDimRMesh, QDimThetaMesh > idx_quad,
     Idx< BSplinesR , BSplinesTheta > idx
 ) const

@@ -49,8 +49,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr int | [**outside\_rmax\_domain**](#variable-outside_rmax_domain)   = `-1`<br>_Default value to define outside domain (not a patch) for radius bigger than the maximum radius._  |
-|  constexpr int | [**outside\_rmin\_domain**](#variable-outside_rmin_domain)   = `-2`<br>_Default value to define outside domain (not a patch) for radius smaller than the minimum radius._  |
+|  int | [**outside\_rmax\_domain**](#variable-outside_rmax_domain)   = `-1`<br>_Default value to define outside domain (not a patch) for radius bigger than the maximum radius._  |
+|  int | [**outside\_rmin\_domain**](#variable-outside_rmin_domain)   = `-2`<br>_Default value to define outside domain (not a patch) for radius smaller than the minimum radius._  |
 
 
 
@@ -202,7 +202,7 @@ using OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalT
 
 _Default value to define outside domain (not a patch) for radius bigger than the maximum radius._ 
 ```C++
-constexpr int OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::outside_rmax_domain;
+int OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::outside_rmax_domain;
 ```
 
 
@@ -216,7 +216,7 @@ constexpr int OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, 
 
 _Default value to define outside domain (not a patch) for radius smaller than the minimum radius._ 
 ```C++
-constexpr int OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::outside_rmin_domain;
+int OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::outside_rmin_domain;
 ```
 
 

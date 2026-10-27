@@ -10,7 +10,7 @@
 
 
 
-_Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __[More...](#detailed-description)
+_Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._ [More...](#detailed-description)
 
 * `#include <constant_extrapolation_rules_onion.hpp>`
 

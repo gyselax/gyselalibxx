@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="matrix__utils_8hpp" kind="file" language="C++">
     <compoundname>matrix_utils.hpp</compoundname>
     <includes local="no">source_location</includes>
@@ -696,6 +696,7 @@
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>GkoMatrixResidualNorm<sp/>{<sp/>TWO,<sp/>INF<sp/>};</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>KokkosViewType&gt;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>to_gko_multivector(</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>gko::Executor&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>gko_exec,</highlight></codeline>

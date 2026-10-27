@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -618,27 +624,27 @@
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-impl-35"><strong>Impl</strong></a> (<a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>Impl</strong></a>&lt; DDim, OriginMemorySpace &gt; const &amp; impl) <br><em>Construct the basis by copy. This constructor is used to create the class on a different memory space.</em></td>
+<td style="text-align: left;"><a href="#function-impl-35"><strong>Impl</strong></a> (Impl&lt; DDim, OriginMemorySpace &gt; const &amp; impl) <br><em>Construct the basis by copy. This constructor is used to create the class on a different memory space.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-impl-45"><strong>Impl</strong></a> (<a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>Impl</strong></a> const &amp; x) = default<br><em>Construct the basis by copy.</em></td>
+<td style="text-align: left;"><a href="#function-impl-45"><strong>Impl</strong></a> (Impl const &amp; x) = default<br><em>Construct the basis by copy.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-impl-55"><strong>Impl</strong></a> (<a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>Impl</strong></a> &amp;&amp; x) = default<br><em>Construct the basis from an r-value.</em></td>
+<td style="text-align: left;"><a href="#function-impl-55"><strong>Impl</strong></a> (Impl &amp;&amp; x) = default<br><em>Construct the basis from an r-value.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-eval_basis"><strong>eval_basis</strong></a> (host_t&lt; DField&lt; IdxRange&lt; DDim &gt; &gt; &gt; values, Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; const &amp; x) const<br><em>Evaluate the basis at the given coordinate.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>Impl</strong></a> &amp;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator=</strong></a> (<a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>Impl</strong></a> const &amp; x) = default<br><em>Copy-assign the class.</em></td>
+<td style="text-align: right;">Impl &amp;</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator=</strong></a> (Impl const &amp; x) = default<br><em>Copy-assign the class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>Impl</strong></a> &amp;</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator=</strong></a> (<a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>Impl</strong></a> &amp;&amp; x) = default<br><em>Move-assign the class.</em></td>
+<td style="text-align: right;">Impl &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator=</strong></a> (Impl &amp;&amp; x) = default<br><em>Move-assign the class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -693,7 +699,7 @@
 <p><em>Construct the basis by copy. This constructor is used to create the class on a different memory space.</em> </p>
 <pre><code class="language-C++">template&lt;class OriginMemorySpace&gt;
 inline explicit TriangularBernsteinPolynomialBasis::Impl::Impl (
-    Impl &lt; DDim, OriginMemorySpace &gt; const &amp; impl
+    Impl&lt; DDim, OriginMemorySpace &gt; const &amp; impl
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>

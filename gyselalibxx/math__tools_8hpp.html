@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -594,23 +600,23 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-determinant"><strong>determinant</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br></td>
+<td style="text-align: left;"><a href="#function-determinant"><strong>determinant</strong></a> (DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-determinant"><strong>determinant</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br></td>
+<td style="text-align: left;"><a href="#function-determinant"><strong>determinant</strong></a> (DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION std::size_t</td>
 <td style="text-align: left;"><a href="#function-factorial"><strong>factorial</strong></a> (std::size_t f) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt;</td>
-<td style="text-align: left;"><a href="#function-inverse"><strong>inverse</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-inverse"><strong>inverse</strong></a> (DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt;</td>
-<td style="text-align: left;"><a href="#function-inverse"><strong>inverse</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br></td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-inverse"><strong>inverse</strong></a> (DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION constexpr double</td>
@@ -630,7 +636,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-norm"><strong>norm</strong></a> (ExecSpace exec_space, DField&lt; IdxRangeType, typename ExecSpace::memory_space &gt; norm_vals, <a href="classMetricTensorEvaluator.html"><strong>MetricTensorEvaluator</strong></a> const &amp; get_metric, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space &gt; vals) <br></td>
+<td style="text-align: left;"><a href="#function-norm"><strong>norm</strong></a> (ExecSpace exec_space, DField&lt; IdxRangeType, typename ExecSpace::memory_space &gt; norm_vals, <a href="classMetricTensorEvaluator.html"><strong>MetricTensorEvaluator</strong></a> const &amp; get_metric, DVectorConstField&lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space &gt; vals) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
@@ -677,7 +683,7 @@
 <h3 id="function-determinant">function determinant</h3>
 <pre><code class="language-C++">template&lt;class RowDim1, class RowDim2, class ColDim1, class ColDim2&gt;
 KOKKOS_INLINE_FUNCTION double determinant (
-    DTensor &lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr
+    DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr
 ) 
 </code></pre>
 <hr>
@@ -685,7 +691,7 @@ KOKKOS_INLINE_FUNCTION double determinant (
 <h3 id="function-determinant_1">function determinant</h3>
 <pre><code class="language-C++">template&lt;class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3&gt;
 KOKKOS_INLINE_FUNCTION double determinant (
-    DTensor &lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr
+    DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr
 ) 
 </code></pre>
 <hr>
@@ -699,16 +705,16 @@ KOKKOS_INLINE_FUNCTION double determinant (
 
 <h3 id="function-inverse">function inverse</h3>
 <pre><code class="language-C++">template&lt;class RowDim1, class RowDim2, class ColDim1, class ColDim2&gt;
-KOKKOS_INLINE_FUNCTION DTensor &lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; inverse (
-    DTensor &lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr
+KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; inverse (
+    DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr
 ) 
 </code></pre>
 <hr>
 
 <h3 id="function-inverse_1">function inverse</h3>
 <pre><code class="language-C++">template&lt;class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3&gt;
-KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; inverse (
-    DTensor &lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr
+KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; inverse (
+    DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr
 ) 
 </code></pre>
 <hr>
@@ -753,7 +759,7 @@ void norm (
     ExecSpace exec_space,
     DField&lt; IdxRangeType, typename ExecSpace::memory_space &gt; norm_vals,
     MetricTensorEvaluator const &amp; get_metric,
-    DVectorConstField &lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space &gt; vals
+    DVectorConstField&lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space &gt; vals
 ) 
 </code></pre>
 <hr>

@@ -34,7 +34,7 @@ _Specialisation of_ [_**CollectGridsAlongDim**_](structconnectivity__details_1_1
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename [**AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md)&lt; typename StartEdge::perpendicular\_grid, FoundGrids, insert\_pos &gt;::type | [**type**](#typedef-type)  <br>_The type found by the class._  |
+| typedef typename [**AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md)&lt; typename StartEdge::perpendicular\_grid, FoundGrids, insert\_pos &gt;:: [**type**](structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01ins70deef724c6e45ed62db534c3d9697ec.md#typedef-type) | [**type**](#typedef-type)  <br>_The type found by the class._  |
 
 
 
@@ -92,7 +92,9 @@ _Specialisation of_ [_**CollectGridsAlongDim**_](structconnectivity__details_1_1
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::CollectGridsAlongDim< StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, OutsideEdge, false >::type =  typename AddToTypeSeq<typename StartEdge::perpendicular_grid, FoundGrids, insert_pos>:: type;
+using connectivity_details::CollectGridsAlongDim< StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, OutsideEdge, false >::type = 
+            typename AddToTypeSeq<typename StartEdge::perpendicular_grid, FoundGrids, insert_pos>::
+                    type;
 ```
 
 

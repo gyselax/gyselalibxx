@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="ivlasovsolver_8hpp" kind="file" language="C++">
     <compoundname>ivlasovsolver.hpp</compoundname>
     <includes refid="geometry__xyvxvy_8hpp" local="yes">geometry_xyvxvy.hpp</includes>
@@ -320,7 +320,7 @@
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="26" refid="classIVlasovSolver_1a681dad83ed77cef62729322bc51f4ba8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DFieldSpVxVyXY<sp/><ref refid="classIVlasovSolver_1a681dad83ed77cef62729322bc51f4ba8" kindref="member">operator()</ref>(</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldSpVxVyXY<sp/>allfdistribu,</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstFieldXY</ref><sp/>efield,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorConstFieldXY<sp/>efield,</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Real<sp/>dt)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal">};</highlight></codeline>
     </programlisting>

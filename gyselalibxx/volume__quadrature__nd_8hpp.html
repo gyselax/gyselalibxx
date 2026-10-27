@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -609,11 +615,11 @@ DFieldMem&lt; IdxRangeCoeffs, typename ExecSpace::memory_space &gt; compute_coef
 </code></pre>
 <p>For polar integration, we can add the Jacobian determinant to the quadrature coefficients.</p>
 <ul>
-<li>2D example: (but it is implemented for ND)</li>
-</ul>
-<div class="arithmatex">\[\int_{\Omega_{\text{cart}}} f(x,y) dxdy
+<li>2D example: (but it is implemented for ND)
+  [\int_{\Omega_{\text{cart}}} f(x,y) dxdy
  = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta
- \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}\]</div>
+ \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}]</li>
+</ul>
 <p>This function uses rvalues. It means that coefficients is a temporary input parameter and it returns a temporary coefficient object. The <a href="classQuadrature.html"><strong>Quadrature</strong></a> object can only be instantiate with rvalues.</p>
 <p><strong>Parameters:</strong></p>
 <ul>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classIdentityInterpolationBuilder" kind="class" language="C++" prot="public">
     <compoundname>IdentityInterpolationBuilder</compoundname>
     <includes refid="identity__interpolation__builder_8hpp" local="no">identity_interpolation_builder.hpp</includes>
@@ -156,51 +156,55 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="50" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classIdentityInterpolationBuilder_1a5ce180cadfffa6db674ea0f5fa68e5b3" prot="public" static="no">
+      <memberdef kind="typedef" id="classIdentityInterpolationBuilder_1a0af770ffdf5835d499b7af1b738c9376" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class BatchedInterpolationIdxRange</type>
           </param>
         </templateparamlist>
         <type>ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, <ref refid="classIdentityInterpolationBuilder_1a6f9f1c74b1d2eb5b3247098e4cd96093" kindref="member">interpolation_grid_type</ref>, <ref refid="classIdentityInterpolationBuilder_1abe782ddcb0181c0e7b7d0dde595cea54" kindref="member">basis_domain_type</ref> &gt;</type>
-        <definition>using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_basis_idx_range_type =  ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, interpolation_grid_type, basis_domain_type&gt;</definition>
+        <definition>using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_basis_idx_range_type =  ddc::replace_dim_of_t&lt;
+            BatchedInterpolationIdxRange,
+            interpolation_grid_type,
+            basis_domain_type&gt;</definition>
         <argsstring></argsstring>
         <name>batched_basis_idx_range_type</name>
         <qualifiedname>IdentityInterpolationBuilder::batched_basis_idx_range_type</qualifiedname>
         <briefdescription>
-<para>The batched domain type with interpolation_grid_type replaced by basis_domain_type. </para>
+<para>The batched domain type with <ref refid="classIdentityInterpolationBuilder_1a6f9f1c74b1d2eb5b3247098e4cd96093" kindref="member">interpolation_grid_type</ref> replaced by <ref refid="classIdentityInterpolationBuilder_1abe782ddcb0181c0e7b7d0dde595cea54" kindref="member">basis_domain_type</ref>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="57" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" prot="public" static="no">
+      <memberdef kind="typedef" id="classIdentityInterpolationBuilder_1a224ac5c22faad97e59d38a093b597f2b" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class BatchedInterpolationIdxRange</type>
           </param>
         </templateparamlist>
-        <type>ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, <ref refid="classIdentityInterpolationBuilder_1a6f9f1c74b1d2eb5b3247098e4cd96093" kindref="member">interpolation_grid_type</ref>, <ref refid="classIdentityInterpolationBuilder_1a63c15db52b118b689c837fd7aaf9c33b" kindref="member">deriv_type</ref> &gt;</type>
-        <definition>using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_derivs_idx_range_type =  ddc:: replace_dim_of_t&lt;BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type&gt;</definition>
+        <type>ddc:: replace_dim_of_t&lt; BatchedInterpolationIdxRange, <ref refid="classIdentityInterpolationBuilder_1a6f9f1c74b1d2eb5b3247098e4cd96093" kindref="member">interpolation_grid_type</ref>, <ref refid="classIdentityInterpolationBuilder_1a63c15db52b118b689c837fd7aaf9c33b" kindref="member">deriv_type</ref> &gt;</type>
+        <definition>using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_derivs_idx_range_type =  ddc::
+            replace_dim_of_t&lt;BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type&gt;</definition>
         <argsstring></argsstring>
         <name>batched_derivs_idx_range_type</name>
         <qualifiedname>IdentityInterpolationBuilder::batched_derivs_idx_range_type</qualifiedname>
         <briefdescription>
-<para>The batched domain type with interpolation_grid_type replaced by deriv_type. </para>
+<para>The batched domain type with <ref refid="classIdentityInterpolationBuilder_1a6f9f1c74b1d2eb5b3247098e4cd96093" kindref="member">interpolation_grid_type</ref> replaced by <ref refid="classIdentityInterpolationBuilder_1a63c15db52b118b689c837fd7aaf9c33b" kindref="member">deriv_type</ref>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="classIdentityInterpolationBuilder_1a1787260395e125f5afd766e026c20511" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmin</definition>
+        <type>int</type>
+        <definition>int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmin</definition>
         <argsstring></argsstring>
         <name>s_nbe_xmin</name>
         <qualifiedname>IdentityInterpolationBuilder::s_nbe_xmin</qualifiedname>
@@ -215,8 +219,8 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="66" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classIdentityInterpolationBuilder_1ad7a730453d02850a3fe29dadf91c49b2" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr int</type>
-        <definition>constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmax</definition>
+        <type>int</type>
+        <definition>int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmax</definition>
         <argsstring></argsstring>
         <name>s_nbe_xmax</name>
         <qualifiedname>IdentityInterpolationBuilder::s_nbe_xmax</qualifiedname>
@@ -268,7 +272,7 @@
         <name>operator()</name>
         <qualifiedname>IdentityInterpolationBuilder::operator()</qualifiedname>
         <param>
-          <type>Field&lt; DataType, <ref refid="classIdentityInterpolationBuilder_1a5ce180cadfffa6db674ea0f5fa68e5b3" kindref="member">batched_basis_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classIdentityInterpolationBuilder_1a1efe4dad3715309d3bf818cbfe648822" kindref="member">memory_space</ref>, LayoutCoeffs &gt;</type>
+          <type>Field&lt; DataType, <ref refid="classIdentityInterpolationBuilder_1a0af770ffdf5835d499b7af1b738c9376" kindref="member">batched_basis_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classIdentityInterpolationBuilder_1a1efe4dad3715309d3bf818cbfe648822" kindref="member">memory_space</ref>, LayoutCoeffs &gt;</type>
           <declname>coeffs</declname>
         </param>
         <param>
@@ -276,12 +280,12 @@
           <declname>vals</declname>
         </param>
         <param>
-          <type>std::optional&lt; ConstField&lt; DataType, <ref refid="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" kindref="member">batched_derivs_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classIdentityInterpolationBuilder_1a1efe4dad3715309d3bf818cbfe648822" kindref="member">memory_space</ref>, LayoutDerivs &gt; &gt;</type>
+          <type>std::optional&lt; ConstField&lt; DataType, <ref refid="classIdentityInterpolationBuilder_1a224ac5c22faad97e59d38a093b597f2b" kindref="member">batched_derivs_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classIdentityInterpolationBuilder_1a1efe4dad3715309d3bf818cbfe648822" kindref="member">memory_space</ref>, LayoutDerivs &gt; &gt;</type>
           <declname>derivs_xmin</declname>
           <defval>std::nullopt</defval>
         </param>
         <param>
-          <type>std::optional&lt; ConstField&lt; DataType, <ref refid="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" kindref="member">batched_derivs_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classIdentityInterpolationBuilder_1a1efe4dad3715309d3bf818cbfe648822" kindref="member">memory_space</ref>, LayoutDerivs &gt; &gt;</type>
+          <type>std::optional&lt; ConstField&lt; DataType, <ref refid="classIdentityInterpolationBuilder_1a224ac5c22faad97e59d38a093b597f2b" kindref="member">batched_derivs_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classIdentityInterpolationBuilder_1a1efe4dad3715309d3bf818cbfe648822" kindref="member">memory_space</ref>, LayoutDerivs &gt; &gt;</type>
           <declname>derivs_xmax</declname>
           <defval>std::nullopt</defval>
         </param>
@@ -335,7 +339,7 @@
             <type>class BatchedInterpolationIdxRange</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" kindref="member">batched_derivs_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
+        <type><ref refid="classIdentityInterpolationBuilder_1a224ac5c22faad97e59d38a093b597f2b" kindref="member">batched_derivs_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
         <definition>batched_derivs_idx_range_type&lt; BatchedInterpolationIdxRange &gt; IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_derivs_xmin_domain</definition>
         <argsstring>(BatchedInterpolationIdxRange const &amp;batched_interpolation_domain) const noexcept</argsstring>
         <name>batched_derivs_xmin_domain</name>
@@ -372,7 +376,7 @@
             <type>class BatchedInterpolationIdxRange</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" kindref="member">batched_derivs_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
+        <type><ref refid="classIdentityInterpolationBuilder_1a224ac5c22faad97e59d38a093b597f2b" kindref="member">batched_derivs_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
         <definition>batched_derivs_idx_range_type&lt; BatchedInterpolationIdxRange &gt; IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_derivs_xmax_domain</definition>
         <argsstring>(BatchedInterpolationIdxRange const &amp;batched_interpolation_domain) const noexcept</argsstring>
         <name>batched_derivs_xmax_domain</name>
@@ -409,7 +413,7 @@
             <type>class BatchedInterpolationIdxRange</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classIdentityInterpolationBuilder_1a5ce180cadfffa6db674ea0f5fa68e5b3" kindref="member">batched_basis_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
+        <type><ref refid="classIdentityInterpolationBuilder_1a0af770ffdf5835d499b7af1b738c9376" kindref="member">batched_basis_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
         <definition>batched_basis_idx_range_type&lt; BatchedInterpolationIdxRange &gt; IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_basis_idx_range</definition>
         <argsstring>(BatchedInterpolationIdxRange const &amp;batched_interpolation_domain) const noexcept</argsstring>
         <name>batched_basis_idx_range</name>
@@ -492,8 +496,8 @@
     <listofallmembers>
       <member refid="classIdentityInterpolationBuilder_1abe782ddcb0181c0e7b7d0dde595cea54" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>basis_domain_type</name></member>
       <member refid="classIdentityInterpolationBuilder_1a6e1cf38340ea153cf8e9f483b519c3ee" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_basis_idx_range</name></member>
-      <member refid="classIdentityInterpolationBuilder_1a5ce180cadfffa6db674ea0f5fa68e5b3" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_basis_idx_range_type</name></member>
-      <member refid="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_derivs_idx_range_type</name></member>
+      <member refid="classIdentityInterpolationBuilder_1a0af770ffdf5835d499b7af1b738c9376" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_basis_idx_range_type</name></member>
+      <member refid="classIdentityInterpolationBuilder_1a224ac5c22faad97e59d38a093b597f2b" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_derivs_idx_range_type</name></member>
       <member refid="classIdentityInterpolationBuilder_1a48c4b088dc35e841dc702f2ad9200d36" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_derivs_xmax_domain</name></member>
       <member refid="classIdentityInterpolationBuilder_1a70d7e70b1683afc4ccb46525e3596e67" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_derivs_xmin_domain</name></member>
       <member refid="classIdentityInterpolationBuilder_1a1e94e3cf345552d299316b9a09a5263d" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>coeff_idx_range_type</name></member>

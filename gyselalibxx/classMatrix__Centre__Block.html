@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -899,7 +905,10 @@
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>where E is a banded matrix, and A, E and I are square matrices.</p>
-<p>This matrix is solved by rearranging it to:  This new matrix is a corner matrix of the form:  with <span class="arithmatex">\(Q = E\)</span> and  Internally the matrix is saved in the corner format. </p>
+<p>This matrix is solved by rearranging it to: </p>
+<p>This new matrix is a corner matrix of the form: </p>
+<p>with <span class="arithmatex">\(Q = E\)</span> and </p>
+<p>Internally the matrix is saved in the corner format. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-matrix_centre_block">function Matrix_Centre_Block</h3>
 <p><em>A constructor for the matrix.</em> </p>
@@ -1045,7 +1054,8 @@
     DSpan1D bx
 ) const
 </code></pre>
-<p>I.e. for  with <span class="arithmatex">\(B\)</span> a vector of length nb, return  </p>
+<p>I.e. for </p>
+<p>with <span class="arithmatex">\(B\)</span> a vector of length nb, return </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The solution of the rearranged matrix equation. </li>
@@ -1060,7 +1070,8 @@
     DSpan2D bx
 ) const
 </code></pre>
-<p>I.e. for  with <span class="arithmatex">\(B\)</span> a vector of length nb, return  </p>
+<p>I.e. for </p>
+<p>with <span class="arithmatex">\(B\)</span> a vector of length nb, return </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The solutions of the rearranged matrix equations. </li>
@@ -1075,7 +1086,8 @@
     DSpan1D bx
 ) const
 </code></pre>
-<p>I.e. for  with <span class="arithmatex">\(B\)</span> a vector of length nb, return  </p>
+<p>I.e. for </p>
+<p>with <span class="arithmatex">\(B\)</span> a vector of length nb, return </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The right-hand side of the matrix equation to be solved. </li>
@@ -1090,7 +1102,8 @@
     DSpan2D bx
 ) const
 </code></pre>
-<p>I.e. for  with <span class="arithmatex">\(B\)</span> a vector of length nb, return  </p>
+<p>I.e. for </p>
+<p>with <span class="arithmatex">\(B\)</span> a vector of length nb, return </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The right-hand sides of the matrix equations to be solved. </li>

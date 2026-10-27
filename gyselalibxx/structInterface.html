@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -595,7 +601,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">typedef std::conditional_t&lt; std::is_same_v&lt; <a href="structEdge.html"><strong>Edge</strong></a>, <a href="structInterface.html#typedef-edge1"><strong>Edge1</strong></a> &gt;, <a href="structInterface.html#typedef-edge2"><strong>Edge2</strong></a>, <a href="structInterface.html#typedef-edge1"><strong>Edge1</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-otheredge"><strong>OtherEdge</strong></a>  <br><em>A tool to get the other edge of an interface. I.e. to get Edge1 given Edge2 or Edge2 given Edge1.</em></td>
+<td style="text-align: left;"><a href="#typedef-otheredge"><strong>OtherEdge</strong></a>  <br><em>A tool to get the other edge of an interface. I.e. to get</em> <a href="structInterface.html#typedef-edge1"><em><strong>Edge1</strong></em></a> <em>given</em><a href="structInterface.html#typedef-edge2"><em><strong>Edge2</strong></em></a> <em>or</em><a href="structInterface.html#typedef-edge2"><em><strong>Edge2</strong></em></a> <em>given</em><a href="structInterface.html#typedef-edge1"><em><strong>Edge1</strong></em></a> <em>.</em></td>
 </tr>
 </tbody>
 </table>
@@ -609,7 +615,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-orientations_agree"><strong>orientations_agree</strong></a>   = <code>orientations\_agree\_bool</code><br><em>Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See</em> <a href="classEdgeTransformation.html"><em><strong>EdgeTransformation</strong></em></a> <em>).</em></td>
 </tr>
 </tbody>
@@ -624,7 +630,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#function-connected_to_patch"><strong>connected_to_patch</strong></a> () <br><em>A compile-time function to check if an interface is on the edge of a given patch.</em></td>
 </tr>
 </tbody>
@@ -651,21 +657,21 @@
 <hr>
 
 <h3 id="typedef-otheredge">typedef OtherEdge</h3>
-<p><em>A tool to get the other edge of an interface. I.e. to get Edge1 given Edge2 or Edge2 given Edge1.</em> </p>
+<p><em>A tool to get the other edge of an interface. I.e. to get</em> <a href="structInterface.html#typedef-edge1"><em><strong>Edge1</strong></em></a> <em>given</em><a href="structInterface.html#typedef-edge2"><em><strong>Edge2</strong></em></a> <em>or</em><a href="structInterface.html#typedef-edge2"><em><strong>Edge2</strong></em></a> <em>given</em><a href="structInterface.html#typedef-edge1"><em><strong>Edge1</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">using Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::OtherEdge =  std::conditional_t&lt;std::is_same_v&lt;Edge, Edge1&gt;, Edge2, Edge1&gt;;
 </code></pre>
 <hr>
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
 <h3 id="variable-orientations_agree">variable orientations_agree</h3>
 <p><em>Orientation of the parallel grids to the interface. If True, the physical grids of the two patches parallel to the interface have the same orientation. If False, the physical grids of the two patches parallel to the interface have the opposite orientation. (See</em> <a href="classEdgeTransformation.html"><em><strong>EdgeTransformation</strong></em></a> <em>).</em></p>
-<pre><code class="language-C++">constexpr bool Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::orientations_agree;
+<pre><code class="language-C++">bool Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::orientations_agree;
 </code></pre>
 <hr>
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
 <h3 id="function-connected_to_patch">function connected_to_patch</h3>
 <p><em>A compile-time function to check if an interface is on the edge of a given patch.</em> </p>
 <pre><code class="language-C++">template&lt;class Patch&gt;
-static inline constexpr bool Interface::connected_to_patch () 
+static inline bool Interface::connected_to_patch () 
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>

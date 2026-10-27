@@ -93,10 +93,10 @@ Inherits the following classes: [IQNSolver](classIQNSolver.md),  [IQNSolver](cla
 
 | Type | Name |
 | ---: | :--- |
-|   | [**QNSolver**](#function-qnsolver-12) ([**PoissonSolver**](classIPoissonSolver.md) const & solve\_poisson, [**IChargeDensityCalculator**](classIChargeDensityCalculator.md) const & compute\_rho) <br> |
-|   | [**QNSolver**](#function-qnsolver-12) ([**PoissonSolver**](classIPoissonSolver.md) const & solve\_poisson, [**IChargeDensityCalculator**](classIChargeDensityCalculator.md) const & compute\_rho) <br> |
+|   | [**QNSolver**](#function-qnsolver-12) (PoissonSolver const & solve\_poisson, [**IChargeDensityCalculator**](classIChargeDensityCalculator.md) const & compute\_rho) <br> |
+|   | [**QNSolver**](#function-qnsolver-12) (PoissonSolver const & solve\_poisson, [**IChargeDensityCalculator**](classIChargeDensityCalculator.md) const & compute\_rho) <br> |
 | virtual void | [**operator()**](#function-operator) (DFieldX electrostatic\_potential, DFieldX electric\_field, DConstFieldSpXVx allfdistribu) override const<br> |
-| virtual void | [**operator()**](#function-operator_1) (DFieldXY electrostatic\_potential, [**DVectorFieldXY**](classVectorField.md) electric\_field, DConstFieldSpVxVyXY allfdistribu) override const<br> |
+| virtual void | [**operator()**](#function-operator_1) (DFieldXY electrostatic\_potential, DVectorFieldXY electric\_field, DConstFieldSpVxVyXY allfdistribu) override const<br> |
 |   | [**~QNSolver**](#function-qnsolver-12) () override<br> |
 |   | [**~QNSolver**](#function-qnsolver-12) () override<br> |
 
@@ -107,9 +107,9 @@ See [IQNSolver](classIQNSolver.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**operator()**](classIQNSolver.md#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; electric\_field, host\_t&lt; DConstFieldRTheta &gt; density) const = 0<br>_Compute the electrical potential and the electric field from the Quasi-Neutrality equation._  |
+| virtual void | [**operator()**](classIQNSolver.md#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; DVectorFieldRTheta&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; electric\_field, host\_t&lt; DConstFieldRTheta &gt; density) const = 0<br>_Compute the electrical potential and the electric field from the Quasi-Neutrality equation._  |
 | virtual void | [**operator()**](classIQNSolver.md#function-operator_1) (DFieldX electrostatic\_potential, DFieldX electric\_field, DConstFieldSpXVx allfdistribu) const = 0<br> |
-| virtual void | [**operator()**](classIQNSolver.md#function-operator_2) (DFieldXY electrostatic\_potential, [**DVectorFieldXY**](classVectorField.md) electric\_field, DConstFieldSpVxVyXY allfdistribu) const = 0<br> |
+| virtual void | [**operator()**](classIQNSolver.md#function-operator_2) (DFieldXY electrostatic\_potential, DVectorFieldXY electric\_field, DConstFieldSpVxVyXY allfdistribu) const = 0<br> |
 | virtual  | [**~IQNSolver**](classIQNSolver.md#function-iqnsolver-13) () = default<br> |
 | virtual  | [**~IQNSolver**](classIQNSolver.md#function-iqnsolver-13) () = default<br> |
 | virtual  | [**~IQNSolver**](classIQNSolver.md#function-iqnsolver-13) () = default<br> |
@@ -121,9 +121,9 @@ See [IQNSolver](classIQNSolver.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**operator()**](classIQNSolver.md#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; electric\_field, host\_t&lt; DConstFieldRTheta &gt; density) const = 0<br>_Compute the electrical potential and the electric field from the Quasi-Neutrality equation._  |
+| virtual void | [**operator()**](classIQNSolver.md#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; DVectorFieldRTheta&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; electric\_field, host\_t&lt; DConstFieldRTheta &gt; density) const = 0<br>_Compute the electrical potential and the electric field from the Quasi-Neutrality equation._  |
 | virtual void | [**operator()**](classIQNSolver.md#function-operator_1) (DFieldX electrostatic\_potential, DFieldX electric\_field, DConstFieldSpXVx allfdistribu) const = 0<br> |
-| virtual void | [**operator()**](classIQNSolver.md#function-operator_2) (DFieldXY electrostatic\_potential, [**DVectorFieldXY**](classVectorField.md) electric\_field, DConstFieldSpVxVyXY allfdistribu) const = 0<br> |
+| virtual void | [**operator()**](classIQNSolver.md#function-operator_2) (DFieldXY electrostatic\_potential, DVectorFieldXY electric\_field, DConstFieldSpVxVyXY allfdistribu) const = 0<br> |
 | virtual  | [**~IQNSolver**](classIQNSolver.md#function-iqnsolver-13) () = default<br> |
 | virtual  | [**~IQNSolver**](classIQNSolver.md#function-iqnsolver-13) () = default<br> |
 | virtual  | [**~IQNSolver**](classIQNSolver.md#function-iqnsolver-13) () = default<br> |

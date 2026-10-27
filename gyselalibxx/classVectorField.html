@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -666,15 +672,15 @@
 <td style="text-align: left;"><a href="#function-vectorfield-1313"><strong>VectorField</strong></a> (FieldType... fields) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr chunk_span_type</td>
+<td style="text-align: right;">chunk_span_type</td>
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () noexcept const<br><em>Get the Field describing the component in the QueryTag direction.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr <a href="classVectorField.html#typedef-view_type"><strong>view_type</strong></a></td>
+<td style="text-align: right;"><a href="classVectorField.html#typedef-view_type"><strong>view_type</strong></a></td>
 <td style="text-align: left;"><a href="#function-get_const_field"><strong>get_const_field</strong></a> () const<br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr <a href="classVectorField.html#typedef-span_type"><strong>span_type</strong></a></td>
+<td style="text-align: right;"><a href="classVectorField.html#typedef-span_type"><strong>span_type</strong></a></td>
 <td style="text-align: left;"><a href="#function-get_field"><strong>get_field</strong></a> () const<br></td>
 </tr>
 <tr>
@@ -690,11 +696,11 @@
 <td style="text-align: left;"><a href="#function-operator_2"><strong>operator=</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a> &amp;&amp; other) = default<br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr auto</td>
+<td style="text-align: right;">auto</td>
 <td style="text-align: left;"><a href="#function-operator_3"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) <br><em>Slice out some dimensions.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr auto</td>
+<td style="text-align: right;">auto</td>
 <td style="text-align: left;"><a href="#function-operator_4"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) <br><em>Slice out some dimensions.</em></td>
 </tr>
 <tr>
@@ -753,14 +759,24 @@
 
 <h3 id="typedef-span_type">typedef span_type</h3>
 <p><em>A type which can hold a modifiable reference to a</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">using VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_type =  VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy&gt;;
+<pre><code class="language-C++">using VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_type =  VectorField&lt;
+            ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemorySpace,
+            LayoutStridedPolicy&gt;;
 </code></pre>
 <p>A type which can hold a reference to a <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>. If this object is modifiable then so is the span type. This is a DDC keyword used to make this class interchangeable with Field. </p>
 <hr>
 
 <h3 id="typedef-view_type">typedef view_type</h3>
 <p><em>A type which can hold a constant reference to a</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>. This is a DDC keyword used to make this class interchangeable with Field.</em></p>
-<pre><code class="language-C++">using VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::view_type =  VectorField&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy&gt;;
+<pre><code class="language-C++">using VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::view_type =  VectorField&lt;
+            const ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemorySpace,
+            LayoutStridedPolicy&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -872,14 +888,14 @@ inline KOKKOS_FUNCTION constexpr VectorField::VectorField (
 <h3 id="function-get">function get</h3>
 <p><em>Get the Field describing the component in the QueryTag direction.</em> </p>
 <pre><code class="language-C++">template&lt;class QueryTag&gt;
-inline constexpr chunk_span_type VectorField::get () noexcept const
+inline chunk_span_type VectorField::get () noexcept const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The field in the specified direction. </p>
 <hr>
 
 <h3 id="function-get_const_field">function get_const_field</h3>
-<pre><code class="language-C++">inline constexpr view_type VectorField::get_const_field () const
+<pre><code class="language-C++">inline view_type VectorField::get_const_field () const
 </code></pre>
 <p>Get a constant reference to the vector field referred to by this vector field span.</p>
 <p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_const_field should be used.</p>
@@ -888,7 +904,7 @@ inline constexpr chunk_span_type VectorField::get () noexcept const
 <hr>
 
 <h3 id="function-get_field">function get_field</h3>
-<pre><code class="language-C++">inline constexpr span_type VectorField::get_field () const
+<pre><code class="language-C++">inline span_type VectorField::get_field () const
 </code></pre>
 <p>Get a modifiable reference to the vector field referred to by this vector field span.</p>
 <p>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</p>
@@ -942,7 +958,7 @@ inline KOKKOS_FUNCTION element_type const VectorField::operator() (
 <h3 id="function-operator_3">function operator[]</h3>
 <p><em>Slice out some dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryDDims&gt;
-inline constexpr auto VectorField::operator[] (
+inline auto VectorField::operator[] (
     Idx&lt; QueryDDims... &gt; const &amp; slice_spec
 ) 
 </code></pre>
@@ -958,7 +974,7 @@ inline constexpr auto VectorField::operator[] (
 <h3 id="function-operator_4">function operator[]</h3>
 <p><em>Slice out some dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryDDims&gt;
-inline constexpr auto VectorField::operator[] (
+inline auto VectorField::operator[] (
     IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range
 ) 
 </code></pre>

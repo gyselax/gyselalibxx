@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classCombinedMapping" kind="class" language="C++" prot="public">
     <compoundname>CombinedMapping</compoundname>
     <includes refid="combined__mapping_8hpp" local="no">combined_mapping.hpp</includes>
@@ -65,9 +65,11 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classCombinedMapping_1a0d93115eb69d758d8a11a5b4f470fa8f" prot="public" static="no">
-        <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt; &gt; &gt;</type>
-        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::JacobianMatrixType =  DTensor&lt; ddc::to_type_seq_t&lt;CoordResult&gt;, vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt; &gt;&gt;</definition>
+      <memberdef kind="typedef" id="classCombinedMapping_1ac180bfdbb7d85ae40e9d0cd5156ec32c" prot="public" static="no">
+        <type>DTensor&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt; &gt; &gt;</type>
+        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::JacobianMatrixType =  DTensor&lt;
+            ddc::to_type_seq_t&lt;CoordResult&gt;,
+            vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt;&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>JacobianMatrixType</name>
         <qualifiedname>CombinedMapping::JacobianMatrixType</qualifiedname>
@@ -78,11 +80,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classCombinedMapping_1a1c59688cb74997538f6afa7d9769268a" prot="public" static="no">
-        <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt; &gt; &gt;</type>
-        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::InvJacobianMatrixType =  DTensor&lt; ddc::to_type_seq_t&lt;CoordArg&gt;, vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordResult&gt; &gt;&gt;</definition>
+      <memberdef kind="typedef" id="classCombinedMapping_1a777d03d314a0ae611c7c7e1ce8fea765" prot="public" static="no">
+        <type>DTensor&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt; &gt; &gt;</type>
+        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::InvJacobianMatrixType =  DTensor&lt;
+            ddc::to_type_seq_t&lt;CoordArg&gt;,
+            vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordResult&gt;&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>InvJacobianMatrixType</name>
         <qualifiedname>CombinedMapping::InvJacobianMatrixType</qualifiedname>
@@ -93,13 +97,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="48" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classCombinedMapping_1a68d8f009a20a024043aa0e6b9bc18207" prot="private" static="no">
+      <memberdef kind="typedef" id="classCombinedMapping_1afe33961ae7851cdef7d697af9e94d4e9" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt; &gt;</type>
-        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::DimArg1 =  ddc::type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;CoordArg&gt; &gt;</definition>
+        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::DimArg1 =  ddc::type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;CoordArg&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>DimArg1</name>
         <qualifiedname>CombinedMapping::DimArg1</qualifiedname>
@@ -111,9 +115,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="51" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classCombinedMapping_1a4c08bd06ad49f8e1d0dab269f03b7e59" prot="private" static="no">
+      <memberdef kind="typedef" id="classCombinedMapping_1ae07425697f234888c17921975696377a" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt; &gt;</type>
-        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::DimArg2 =  ddc::type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;CoordArg&gt; &gt;</definition>
+        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::DimArg2 =  ddc::type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;CoordArg&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>DimArg2</name>
         <qualifiedname>CombinedMapping::DimArg2</qualifiedname>
@@ -125,9 +129,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classCombinedMapping_1a40c4311f2095df841ea7825e92440402" prot="private" static="no">
+      <memberdef kind="typedef" id="classCombinedMapping_1a4a8d57befaf6381d9da6ee225ff139be" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt; &gt;</type>
-        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::DimResult1 =  ddc::type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;CoordResult&gt; &gt;</definition>
+        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::DimResult1 =  ddc::type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;CoordResult&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>DimResult1</name>
         <qualifiedname>CombinedMapping::DimResult1</qualifiedname>
@@ -139,9 +143,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classCombinedMapping_1a954c2537b8176d8bbd9f7c8dd7ec6e96" prot="private" static="no">
+      <memberdef kind="typedef" id="classCombinedMapping_1aa075b3333e50ce2093cbd78eb9c36ac7" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt; &gt;</type>
-        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::DimResult2 =  ddc::type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;CoordResult&gt; &gt;</definition>
+        <definition>using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::DimResult2 =  ddc::type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;CoordResult&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>DimResult2</name>
         <qualifiedname>CombinedMapping::DimResult2</qualifiedname>
@@ -300,7 +304,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="97" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="97" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classCombinedMapping_1aae0f04e41772585563d0b9be1070cec3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="classCombinedMapping_1a0d93115eb69d758d8a11a5b4f470fa8f" kindref="member">JacobianMatrixType</ref></type>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classCombinedMapping_1ac180bfdbb7d85ae40e9d0cd5156ec32c" kindref="member">JacobianMatrixType</ref></type>
         <definition>KOKKOS_INLINE_FUNCTION JacobianMatrixType CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::jacobian_matrix</definition>
         <argsstring>(CoordJacobian const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>
@@ -406,7 +410,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="159" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="159" bodyend="162"/>
       </memberdef>
       <memberdef kind="function" id="classCombinedMapping_1af84a8fea2e82ba5c78ddedfea181e5f5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classCombinedMapping_1a1c59688cb74997538f6afa7d9769268a" kindref="member">InvJacobianMatrixType</ref></type>
+        <type>KOKKOS_FUNCTION <ref refid="classCombinedMapping_1a777d03d314a0ae611c7c7e1ce8fea765" kindref="member">InvJacobianMatrixType</ref></type>
         <definition>KOKKOS_FUNCTION InvJacobianMatrixType CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::inv_jacobian_matrix</definition>
         <argsstring>(CoordIntermediate const &amp;coord) const</argsstring>
         <name>inv_jacobian_matrix</name>
@@ -548,7 +552,7 @@
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classCombinedMapping_1af2a39b1a3c17e96b9ce968db9b9bccf1" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="classCombinedMapping_1a1c59688cb74997538f6afa7d9769268a" kindref="member">InvJacobianMatrixType</ref></type>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classCombinedMapping_1a777d03d314a0ae611c7c7e1ce8fea765" kindref="member">InvJacobianMatrixType</ref></type>
         <definition>KOKKOS_INLINE_FUNCTION InvJacobianMatrixType CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::non_singular_inverse_jacobian_matrix</definition>
         <argsstring>(CoordIntermediate const &amp;coord) const</argsstring>
         <name>non_singular_inverse_jacobian_matrix</name>
@@ -594,19 +598,19 @@
       <member refid="classCombinedMapping_1a750e5ed678bd611774d45177151527de" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>CoordIntermediate</name></member>
       <member refid="classCombinedMapping_1ab6600cd1c21a95897b6b7e0af20ff1d4" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>CoordJacobian</name></member>
       <member refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>CoordResult</name></member>
-      <member refid="classCombinedMapping_1a68d8f009a20a024043aa0e6b9bc18207" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimArg1</name></member>
-      <member refid="classCombinedMapping_1a4c08bd06ad49f8e1d0dab269f03b7e59" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimArg2</name></member>
-      <member refid="classCombinedMapping_1a40c4311f2095df841ea7825e92440402" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimResult1</name></member>
-      <member refid="classCombinedMapping_1a954c2537b8176d8bbd9f7c8dd7ec6e96" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimResult2</name></member>
+      <member refid="classCombinedMapping_1afe33961ae7851cdef7d697af9e94d4e9" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimArg1</name></member>
+      <member refid="classCombinedMapping_1ae07425697f234888c17921975696377a" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimArg2</name></member>
+      <member refid="classCombinedMapping_1a4a8d57befaf6381d9da6ee225ff139be" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimResult1</name></member>
+      <member refid="classCombinedMapping_1aa075b3333e50ce2093cbd78eb9c36ac7" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimResult2</name></member>
       <member refid="classCombinedMapping_1a9ca64a62435219e248a9b4a0da886318" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>get</name></member>
       <member refid="classCombinedMapping_1a9f2e53eac9108d656fd843227fdc451d" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian</name></member>
       <member refid="classCombinedMapping_1a49604158bca91eb0e59fe8beb095c2ab" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian_component</name></member>
       <member refid="classCombinedMapping_1af84a8fea2e82ba5c78ddedfea181e5f5" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian_matrix</name></member>
-      <member refid="classCombinedMapping_1a1c59688cb74997538f6afa7d9769268a" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>InvJacobianMatrixType</name></member>
+      <member refid="classCombinedMapping_1a777d03d314a0ae611c7c7e1ce8fea765" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>InvJacobianMatrixType</name></member>
       <member refid="classCombinedMapping_1a32c23aba0dc6f606e502c932a1d003cc" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>jacobian</name></member>
       <member refid="classCombinedMapping_1a8ea5397c3808cff9bcb070b1cc1e0763" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>jacobian_component</name></member>
       <member refid="classCombinedMapping_1aae0f04e41772585563d0b9be1070cec3" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>jacobian_matrix</name></member>
-      <member refid="classCombinedMapping_1a0d93115eb69d758d8a11a5b4f470fa8f" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>JacobianMatrixType</name></member>
+      <member refid="classCombinedMapping_1ac180bfdbb7d85ae40e9d0cd5156ec32c" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>JacobianMatrixType</name></member>
       <member refid="classCombinedMapping_1a023599e85b2489a3ce9a6a4fa8ad731a" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>m_epsilon</name></member>
       <member refid="classCombinedMapping_1aa31c3c209ae6e2c0162d744a42dd93da" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>m_mapping_1</name></member>
       <member refid="classCombinedMapping_1a89c66b4fdffc5db31f7bd0e0ee8b0578" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>m_mapping_2</name></member>

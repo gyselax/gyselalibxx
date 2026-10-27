@@ -97,7 +97,14 @@ The function is clamped to the value at the nearest boundary point.
 
 _The concrete extrapolation rule class for a given CoeffGrid/DataType._ 
 ```C++
-using ExtrapolationRule::Constant::type =  std::conditional_t< is_spline_basis_v<Basis>, ddc::ConstantExtrapolationRule<typename Basis::continuous_dimension_type>, ConstantIdentityInterpolationExtrapolationRule< find_grid_t< typename Basis::continuous_dimension_type, ddc::to_type_seq_t<IdxRangeCoeff> >, DataType> >;
+using ExtrapolationRule::Constant::type =  std::conditional_t<
+            is_spline_basis_v<Basis>,
+            ddc::ConstantExtrapolationRule<typename Basis::continuous_dimension_type>,
+            ConstantIdentityInterpolationExtrapolationRule<
+                    find_grid_t<
+                            typename Basis::continuous_dimension_type,
+                            ddc::to_type_seq_t<IdxRangeCoeff>>,
+                    DataType>>;
 ```
 
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01FrontInsert_01_4" kind="struct" language="C++" prot="public">
     <compoundname>connectivity_details::AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;</compoundname>
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
@@ -12,9 +12,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01FrontInsert_01_4_1a740fc6cb29bd99877ea578ca4aa911b1" prot="public" static="no">
+      <memberdef kind="typedef" id="structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01FrontInsert_01_4_1ae16944eb9b5af454f4a5e47de6aab53e" prot="public" static="no">
         <type>ddc::type_seq_merge_t&lt; TypeSeq, ddc::detail::TypeSeq&lt; ToInsert &gt; &gt;</type>
-        <definition>using connectivity_details::AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;::type =  ddc::type_seq_merge_t&lt;TypeSeq, ddc::detail::TypeSeq&lt;ToInsert&gt; &gt;</definition>
+        <definition>using connectivity_details::AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;::type =  ddc::type_seq_merge_t&lt;TypeSeq, ddc::detail::TypeSeq&lt;ToInsert&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>type</name>
         <qualifiedname>connectivity_details::AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;::type</qualifiedname>
@@ -35,7 +35,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="305" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="306" bodyend="309"/>
     <listofallmembers>
-      <member refid="structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01FrontInsert_01_4_1a740fc6cb29bd99877ea578ca4aa911b1" prot="public" virt="non-virtual"><scope>connectivity_details::AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;</scope><name>type</name></member>
+      <member refid="structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01FrontInsert_01_4_1ae16944eb9b5af454f4a5e47de6aab53e" prot="public" virt="non-virtual"><scope>connectivity_details::AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;</scope><name>type</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

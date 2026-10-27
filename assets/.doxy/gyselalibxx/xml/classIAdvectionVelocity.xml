@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classIAdvectionVelocity" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>IAdvectionVelocity</compoundname>
-    <derivedcompoundref refid="classBslAdvectionVelocity" prot="public" virt="non-virtual">BslAdvectionVelocity&lt; Geometry, FunctionInterpolator, DataType &gt;</derivedcompoundref>
     <includes refid="iadvectionvx_8hpp" local="no">iadvectionvx.hpp</includes>
     <templateparamlist>
       <param>
@@ -93,18 +92,6 @@
     <detaileddescription>
 <para>An abstract class which implements a function that applies the transport along a velocity direction of the phase space. </para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="2">
-        <label>BslAdvectionVelocity&lt; Geometry, FunctionInterpolator, DataType &gt;</label>
-        <link refid="classBslAdvectionVelocity"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>IAdvectionVelocity&lt; Geometry, GridV, DataType &gt;</label>
-        <link refid="classIAdvectionVelocity"/>
-      </node>
-    </inheritancegraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionvx.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionvx.hpp" bodystart="17" bodyend="34"/>
     <listofallmembers>
       <member refid="classIAdvectionVelocity_1a475dfaa247dbbb07032c3ef229a22bb4" prot="public" virt="pure-virtual"><scope>IAdvectionVelocity</scope><name>operator()</name></member>

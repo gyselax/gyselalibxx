@@ -54,13 +54,13 @@ _Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry c
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_INLINE\_FUNCTION double | [**Fx**](#function-fx) (const double & r, const double & theta) const<br>_X(r, theta)_  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**Fy**](#function-fy) (const double & r, const double & theta) const<br>_Y(r, theta)_  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**Fx**](#function-fx) (const double & r, const double & theta) const<br>[_**X(r, theta)**_](structX.md) _._ |
+|  KOKKOS\_INLINE\_FUNCTION double | [**Fy**](#function-fy) (const double & r, const double & theta) const<br>[_**Y(r, theta)**_](structY.md) _._ |
 |   | [**MappingToDomainGeometry**](#function-mappingtodomaingeometry) (ToPhysicalMapping to\_physical) <br>_Construct the wrapper class._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**dFx\_dr**](#function-dfx_dr) (const double & r, const double & theta) const<br>_d/dr X(r, theta)_  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**dFx\_dtheta**](#function-dfx_dtheta) (const double & r, const double & theta) const<br>_d/(d theta) X(r, theta)_  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**dFy\_dr**](#function-dfy_dr) (const double & r, const double & theta) const<br>_d/dr Y(r, theta)_  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**dFy\_dtheta**](#function-dfy_dtheta) (const double & r, const double & theta) const<br>_d/(d theta) Y(r, theta)_  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**dFx\_dr**](#function-dfx_dr) (const double & r, const double & theta) const<br>_d/dr_ [_**X(r, theta)**_](structX.md) __ |
+|  KOKKOS\_INLINE\_FUNCTION double | [**dFx\_dtheta**](#function-dfx_dtheta) (const double & r, const double & theta) const<br>_d/(d theta)_ [_**X(r, theta)**_](structX.md) __ |
+|  KOKKOS\_INLINE\_FUNCTION double | [**dFy\_dr**](#function-dfy_dr) (const double & r, const double & theta) const<br>_d/dr_ [_**Y(r, theta)**_](structY.md) __ |
+|  KOKKOS\_INLINE\_FUNCTION double | [**dFy\_dtheta**](#function-dfy_dtheta) (const double & r, const double & theta) const<br>_d/(d theta)_ [_**Y(r, theta)**_](structY.md) __ |
 
 
 
@@ -110,7 +110,7 @@ _Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry c
 
 ### function Fx 
 
-_X(r, theta)_ 
+[_**X(r, theta)**_](structX.md) _._
 ```C++
 inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::Fx (
     const double & r,
@@ -127,7 +127,7 @@ inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::Fx 
 
 ### function Fy 
 
-_Y(r, theta)_ 
+[_**Y(r, theta)**_](structY.md) _._
 ```C++
 inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::Fy (
     const double & r,
@@ -160,7 +160,7 @@ inline explicit GMGPolarTools::MappingToDomainGeometry::MappingToDomainGeometry 
 
 ### function dFx\_dr 
 
-_d/dr X(r, theta)_ 
+_d/dr_ [_**X(r, theta)**_](structX.md) __
 ```C++
 inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFx_dr (
     const double & r,
@@ -177,7 +177,7 @@ inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFx
 
 ### function dFx\_dtheta 
 
-_d/(d theta) X(r, theta)_ 
+_d/(d theta)_ [_**X(r, theta)**_](structX.md) __
 ```C++
 inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFx_dtheta (
     const double & r,
@@ -194,7 +194,7 @@ inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFx
 
 ### function dFy\_dr 
 
-_d/dr Y(r, theta)_ 
+_d/dr_ [_**Y(r, theta)**_](structY.md) __
 ```C++
 inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFy_dr (
     const double & r,
@@ -211,7 +211,7 @@ inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFy
 
 ### function dFy\_dtheta 
 
-_d/(d theta) Y(r, theta)_ 
+_d/(d theta)_ [_**Y(r, theta)**_](structY.md) __
 ```C++
 inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFy_dtheta (
     const double & r,

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classCollisionsIntra" kind="class" language="C++" prot="public">
     <compoundname>CollisionsIntra</compoundname>
     <basecompoundref refid="classIRightHandSide" prot="public" virt="non-virtual">IRightHandSide</basecompoundref>
@@ -100,8 +100,8 @@
     </sectiondef>
     <sectiondef kind="private-static-attrib">
       <memberdef kind="variable" id="classCollisionsIntra_1ad0a8b91c85101449cb4d869855d3642d" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr bool</type>
-        <definition>constexpr bool CollisionsIntra::uniform_edge_v</definition>
+        <type>bool</type>
+        <definition>bool CollisionsIntra::uniform_edge_v</definition>
         <argsstring></argsstring>
         <name>uniform_edge_v</name>
         <qualifiedname>CollisionsIntra::uniform_edge_v</qualifiedname>
@@ -556,8 +556,7 @@
 <parametername direction="in">fthresh</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A constant value used for imposing Dirichlet boundary condition to solve the linear system. <linebreak/>
- </para>
+<para>A constant value used for imposing Dirichlet boundary condition to solve the linear system. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

@@ -89,9 +89,9 @@ See [TriangularBernsteinPolynomialBasis](classTriangularBernsteinPolynomialBasis
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**degree**](classTriangularBernsteinPolynomialBasis.md#function-degree) () noexcept<br>_The degree of the triangular Bernstein polynomials._  |
-|  constexpr std::size\_t | [**nbasis**](classTriangularBernsteinPolynomialBasis.md#function-nbasis) () <br>_The number of basis elements._  |
-|  constexpr std::size\_t | [**rank**](classTriangularBernsteinPolynomialBasis.md#function-rank) () <br>_The rank of the system of equations. This is equal to the number of dimensions in the coordinates on which the polynomials are evaluated._  |
+|  std::size\_t | [**degree**](classTriangularBernsteinPolynomialBasis.md#function-degree) () noexcept<br>_The degree of the triangular Bernstein polynomials._  |
+|  std::size\_t | [**nbasis**](classTriangularBernsteinPolynomialBasis.md#function-nbasis) () <br>_The number of basis elements._  |
+|  std::size\_t | [**rank**](classTriangularBernsteinPolynomialBasis.md#function-rank) () <br>_The rank of the system of equations. This is equal to the number of dimensions in the coordinates on which the polynomials are evaluated._  |
 
 
 

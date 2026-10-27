@@ -82,9 +82,9 @@
 | typedef FieldVy&lt; Real &gt; | [**DFieldVy**](#typedef-dfieldvy)  <br> |
 | typedef FieldXY&lt; Real &gt; | [**DFieldXY**](#typedef-dfieldxy)  <br> |
 | typedef FieldY&lt; Real &gt; | [**DFieldY**](#typedef-dfieldy)  <br> |
-| typedef [**VectorConstFieldXY**](classVectorField.md)&lt; Real &gt; | [**DVectorConstFieldXY**](#typedef-dvectorconstfieldxy)  <br> |
-| typedef [**VectorFieldMemXY**](classVectorFieldMem.md)&lt; Real &gt; | [**DVectorFieldMemXY**](#typedef-dvectorfieldmemxy)  <br> |
-| typedef [**VectorFieldXY**](classVectorField.md)&lt; Real &gt; | [**DVectorFieldXY**](#typedef-dvectorfieldxy)  <br> |
+| typedef VectorConstFieldXY&lt; Real &gt; | [**DVectorConstFieldXY**](#typedef-dvectorconstfieldxy)  <br> |
+| typedef VectorFieldMemXY&lt; Real &gt; | [**DVectorFieldMemXY**](#typedef-dvectorfieldmemxy)  <br> |
+| typedef VectorFieldXY&lt; Real &gt; | [**DVectorFieldXY**](#typedef-dvectorfieldxy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpVxVy &gt; | [**FieldMemSpVxVy**](#typedef-fieldmemspvxvy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpVxVyXY &gt; | [**FieldMemSpVxVyXY**](#typedef-fieldmemspvxvyxy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpXYVxVy &gt; | [**FieldMemSpXYVxVy**](#typedef-fieldmemspxyvxvy)  <br> |
@@ -119,7 +119,7 @@
 | typedef Idx&lt; [**GridY**](structGridY.md) &gt; | [**IdxY**](#typedef-idxy)  <br> |
 | typedef GYSELALIBXX\_BUILD\_REAL\_PRECISION | [**Real**](#typedef-real)  <br> |
 | typedef [**MPILayout**](classMPILayout.md)&lt; IdxRangeSpVxVyXY, [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md) &gt; | [**V2DSplit**](#typedef-v2dsplit)  <br> |
-| typedef [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorConstFieldXY**](#typedef-vectorconstfieldxy)  <br> |
+| typedef VectorConstField&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorConstFieldXY**](#typedef-vectorconstfieldxy)  <br> |
 | typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorFieldMemXY**](#typedef-vectorfieldmemxy)  <br> |
 | typedef [**VectorField**](classVectorField.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorFieldXY**](#typedef-vectorfieldxy)  <br> |
 | typedef [**MPILayout**](classMPILayout.md)&lt; IdxRangeSpXYVxVy, [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**X2DSplit**](#typedef-x2dsplit)  <br> |
@@ -1063,7 +1063,7 @@ using V2DSplit =  MPILayout<IdxRangeSpVxVyXY, GridVx, GridVy>;
 ### typedef VectorConstFieldXY 
 
 ```C++
-using VectorConstFieldXY =  VectorConstField<ElementType, IdxRangeXY, VectorIndexSet<X, Y> >;
+using VectorConstFieldXY =  VectorConstField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
 ```
 
 
@@ -1076,7 +1076,7 @@ using VectorConstFieldXY =  VectorConstField<ElementType, IdxRangeXY, VectorInde
 ### typedef VectorFieldMemXY 
 
 ```C++
-using VectorFieldMemXY =  VectorFieldMem<ElementType, IdxRangeXY, VectorIndexSet<X, Y> >;
+using VectorFieldMemXY =  VectorFieldMem<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
 ```
 
 
@@ -1089,7 +1089,7 @@ using VectorFieldMemXY =  VectorFieldMem<ElementType, IdxRangeXY, VectorIndexSet
 ### typedef VectorFieldXY 
 
 ```C++
-using VectorFieldXY =  VectorField<ElementType, IdxRangeXY, VectorIndexSet<X, Y> >;
+using VectorFieldXY =  VectorField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
 ```
 
 

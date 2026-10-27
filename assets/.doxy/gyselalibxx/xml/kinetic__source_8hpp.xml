@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="kinetic__source_8hpp" kind="file" language="C++">
     <compoundname>kinetic_source.hpp</compoundname>
     <includes local="no">cmath</includes>
@@ -148,7 +148,7 @@
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry_xvx.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;irighthandside.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31" refid="classKineticSource" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classKineticSource" kindref="compound">KineticSource</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIRightHandSide" kindref="compound">IRightHandSide</ref></highlight></codeline>
+<codeline lineno="31" refid="classKineticSource" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classKineticSource_1ac1eb6d9a4a099ed40aa4bd3b22165358" kindref="member">KineticSource</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIRightHandSide" kindref="compound">IRightHandSide</ref></highlight></codeline>
 <codeline lineno="32"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>m_amplitude;</highlight></codeline>
@@ -159,7 +159,7 @@
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemVx<sp/>m_velocity_shape;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classKineticSource" kindref="compound">KineticSource</ref>(</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classKineticSource_1ac1eb6d9a4a099ed40aa4bd3b22165358" kindref="member">KineticSource</ref>(</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeX<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>gridx,</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>gridv,</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>extent,</highlight></codeline>
@@ -169,7 +169,7 @@
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>energy,</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>temperature);</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classKineticSource" kindref="compound">~KineticSource</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classKineticSource_1ac1eb6d9a4a099ed40aa4bd3b22165358" kindref="member">~KineticSource</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/><ref refid="classKineticSource_1a384f4c655ebe246d99964de77ee780d2" kindref="member">operator()</ref>(DFieldSpXVx<sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="77"><highlight class="normal">};</highlight></codeline>

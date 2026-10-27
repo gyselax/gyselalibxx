@@ -60,16 +60,16 @@
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
-|  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
+|  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) (DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
+|  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) (DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
 |  KOKKOS\_INLINE\_FUNCTION std::size\_t | [**factorial**](#function-factorial) (std::size\_t f) <br> |
-|  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; | [**inverse**](#function-inverse) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; | [**inverse**](#function-inverse) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
+|  KOKKOS\_INLINE\_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; | [**inverse**](#function-inverse) (DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; | [**inverse**](#function-inverse) (DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**ipow**](#function-ipow) (double a, std::size\_t i) <br> |
 |  KOKKOS\_INLINE\_FUNCTION double | [**ipow**](#function-ipow) (double a, int i) <br> |
 |  T | [**modulo**](#function-modulo) (T x, T y) <br> |
 |  KOKKOS\_INLINE\_FUNCTION ElementType | [**norm**](#function-norm) ([**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType, VectorIndexSetType &gt; const & metric, [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; const & vec) <br> |
-|  void | [**norm**](#function-norm) (ExecSpace exec\_space, DField&lt; IdxRangeType, typename ExecSpace::memory\_space &gt; norm\_vals, [**MetricTensorEvaluator**](classMetricTensorEvaluator.md) const & get\_metric, [**DVectorConstField**](classVectorField.md)&lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory\_space &gt; vals) <br> |
+|  void | [**norm**](#function-norm) (ExecSpace exec\_space, DField&lt; IdxRangeType, typename ExecSpace::memory\_space &gt; norm\_vals, [**MetricTensorEvaluator**](classMetricTensorEvaluator.md) const & get\_metric, DVectorConstField&lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory\_space &gt; vals) <br> |
 |  KOKKOS\_INLINE\_FUNCTION double | [**scalar\_product**](#function-scalar_product) ([**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType &gt; const & a, [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; const & b) <br> |
 |  KOKKOS\_INLINE\_FUNCTION double | [**scalar\_product**](#function-scalar_product) ([**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType, VectorIndexSetType &gt; const & metric, [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; const & a, [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; const & b) <br> |
 |  KOKKOS\_INLINE\_FUNCTION T | [**sum**](#function-sum) (const T \* array, int size) <br> |
@@ -119,7 +119,7 @@
 ```C++
 template<class RowDim1, class RowDim2, class ColDim1, class ColDim2>
 KOKKOS_INLINE_FUNCTION double determinant (
-    DTensor < VectorIndexSet< RowDim1, RowDim2 >, VectorIndexSet< ColDim1, ColDim2 > > arr
+    DTensor< VectorIndexSet< RowDim1, RowDim2 >, VectorIndexSet< ColDim1, ColDim2 > > arr
 ) 
 ```
 
@@ -135,7 +135,7 @@ KOKKOS_INLINE_FUNCTION double determinant (
 ```C++
 template<class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
 KOKKOS_INLINE_FUNCTION double determinant (
-    DTensor < VectorIndexSet< RowDim1, RowDim2, RowDim3 >, VectorIndexSet< ColDim1, ColDim2, ColDim3 > > arr
+    DTensor< VectorIndexSet< RowDim1, RowDim2, RowDim3 >, VectorIndexSet< ColDim1, ColDim2, ColDim3 > > arr
 ) 
 ```
 
@@ -165,8 +165,8 @@ KOKKOS_INLINE_FUNCTION std::size_t factorial (
 
 ```C++
 template<class RowDim1, class RowDim2, class ColDim1, class ColDim2>
-KOKKOS_INLINE_FUNCTION DTensor < VectorIndexSet< typename ColDim1::Dual, typename ColDim2::Dual >, VectorIndexSet< typename RowDim1::Dual, typename RowDim2::Dual > > inverse (
-    DTensor < VectorIndexSet< RowDim1, RowDim2 >, VectorIndexSet< ColDim1, ColDim2 > > arr
+KOKKOS_INLINE_FUNCTION DTensor< VectorIndexSet< typename ColDim1::Dual, typename ColDim2::Dual >, VectorIndexSet< typename RowDim1::Dual, typename RowDim2::Dual > > inverse (
+    DTensor< VectorIndexSet< RowDim1, RowDim2 >, VectorIndexSet< ColDim1, ColDim2 > > arr
 ) 
 ```
 
@@ -181,8 +181,8 @@ KOKKOS_INLINE_FUNCTION DTensor < VectorIndexSet< typename ColDim1::Dual, typenam
 
 ```C++
 template<class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
-KOKKOS_FUNCTION DTensor < VectorIndexSet< typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual >, VectorIndexSet< typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual > > inverse (
-    DTensor < VectorIndexSet< RowDim1, RowDim2, RowDim3 >, VectorIndexSet< ColDim1, ColDim2, ColDim3 > > arr
+KOKKOS_FUNCTION DTensor< VectorIndexSet< typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual >, VectorIndexSet< typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual > > inverse (
+    DTensor< VectorIndexSet< RowDim1, RowDim2, RowDim3 >, VectorIndexSet< ColDim1, ColDim2, ColDim3 > > arr
 ) 
 ```
 
@@ -267,7 +267,7 @@ void norm (
     ExecSpace exec_space,
     DField< IdxRangeType, typename ExecSpace::memory_space > norm_vals,
     MetricTensorEvaluator const & get_metric,
-    DVectorConstField < IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space > vals
+    DVectorConstField< IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space > vals
 ) 
 ```
 

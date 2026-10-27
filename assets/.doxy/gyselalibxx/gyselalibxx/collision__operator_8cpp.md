@@ -40,10 +40,10 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::int8\_t | [**is\_limiter\_mask\_enabled**](#variable-is_limiter_mask_enabled)   = `true`<br> |
-|  constexpr std::int8\_t | [**is\_sol\_enabled**](#variable-is_sol_enabled)   = `false`<br> |
-|  constexpr std::size\_t | [**local\_idx\_range\_r\_offset**](#variable-local_idx_range_r_offset)   = `0`<br> |
-|  constexpr std::size\_t | [**local\_idx\_range\_theta\_offset**](#variable-local_idx_range_theta_offset)   = `0`<br> |
+|  std::int8\_t | [**is\_limiter\_mask\_enabled**](#variable-is_limiter_mask_enabled)   = `true`<br> |
+|  std::int8\_t | [**is\_sol\_enabled**](#variable-is_sol_enabled)   = `false`<br> |
+|  std::size\_t | [**local\_idx\_range\_r\_offset**](#variable-local_idx_range_r_offset)   = `0`<br> |
+|  std::size\_t | [**local\_idx\_range\_theta\_offset**](#variable-local_idx_range_theta_offset)   = `0`<br> |
 
 
 
@@ -94,7 +94,7 @@
 ### variable is\_limiter\_mask\_enabled 
 
 ```C++
-constexpr std::int8_t is_limiter_mask_enabled;
+std::int8_t is_limiter_mask_enabled;
 ```
 
 
@@ -107,7 +107,7 @@ constexpr std::int8_t is_limiter_mask_enabled;
 ### variable is\_sol\_enabled 
 
 ```C++
-constexpr std::int8_t is_sol_enabled;
+std::int8_t is_sol_enabled;
 ```
 
 
@@ -120,7 +120,7 @@ constexpr std::int8_t is_sol_enabled;
 ### variable local\_idx\_range\_r\_offset 
 
 ```C++
-constexpr std::size_t local_idx_range_r_offset;
+std::size_t local_idx_range_r_offset;
 ```
 
 
@@ -133,7 +133,7 @@ constexpr std::size_t local_idx_range_r_offset;
 ### variable local\_idx\_range\_theta\_offset 
 
 ```C++
-constexpr std::size_t local_idx_range_theta_offset;
+std::size_t local_idx_range_theta_offset;
 ```
 
 

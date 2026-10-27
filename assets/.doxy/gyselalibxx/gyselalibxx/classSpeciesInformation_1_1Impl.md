@@ -59,7 +59,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**Impl**](#function-impl-23) ([**Impl**](classSpeciesInformation_1_1Impl.md)&lt; Grid1D, OMemorySpace &gt; const & impl) <br>_Conversion constructor between different memory spaces._  |
+|   | [**Impl**](#function-impl-23) (Impl&lt; Grid1D, OMemorySpace &gt; const & impl) <br>_Conversion constructor between different memory spaces._  |
 |   | [**Impl**](#function-impl-33) (DFieldMem&lt; index\_range\_type, MemorySpace &gt; charge, DFieldMem&lt; index\_range\_type, MemorySpace &gt; mass) <br>_Main constructor taking all attributes._  |
 |  KOKKOS\_FUNCTION double | [**charge**](#function-charge) (discrete\_element\_type const isp) const<br> |
 |  auto | [**charges**](#function-charges) () const<br> |
@@ -121,7 +121,7 @@ _Conversion constructor between different memory spaces._
 ```C++
 template<class OMemorySpace>
 inline explicit SpeciesInformation::Impl::Impl (
-    Impl < Grid1D, OMemorySpace > const & impl
+    Impl< Grid1D, OMemorySpace > const & impl
 ) 
 ```
 

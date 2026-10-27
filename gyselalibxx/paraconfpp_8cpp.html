@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp} - GyselalibX</title>
+    <title>File paraconfpp.cpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d102.md";
+        var mkdocs_page_name = "File paraconfpp.cpp";
+        var mkdocs_page_input_path = "gyselalibxx/paraconfpp_8cpp.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -559,9 +565,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp}</li>
+      <li class="breadcrumb-item active">File paraconfpp.cpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d102.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/paraconfpp_8cpp.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -569,10 +575,170 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcgeometryxvxrhscollisions_utilscpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d102.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp}</strong></a></p>
+                <div><h1 id="file-paraconfppcpp">File paraconfpp.cpp</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_7700c957c7ac062c1c9c3e42e00e7e24.html"><strong>paraconfpp</strong></a> <strong>&gt;</strong> <a href="paraconfpp_8cpp.html"><strong>paraconfpp.cpp</strong></a></p>
+<p><a href="paraconfpp_8cpp_source.html">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;cstdlib&gt;</code></li>
+<li><code>#include &lt;stdexcept&gt;</code></li>
+<li><code>#include &lt;string_view&gt;</code></li>
+<li><code>#include &lt;paraconf.h&gt;</code></li>
+<li><code>#include "paraconfpp.hpp"</code></li>
+</ul>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a href="#function-pcpp_bool"><strong>PCpp_bool</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration value as a boolean.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#function-pcpp_double"><strong>PCpp_double</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration value as a double.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PC_tree_t</td>
+<td style="text-align: left;"><a href="#function-pcpp_get"><strong>PCpp_get</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration entry.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">long</td>
+<td style="text-align: left;"><a href="#function-pcpp_int"><strong>PCpp_int</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration value as an integer.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-pcpp_len"><strong>PCpp_len</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves the length of a configuration entry.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::string</td>
+<td style="text-align: left;"><a href="#function-pcpp_string"><strong>PCpp_string</strong></a> (PC_tree_t tree, std::string_view key) <br><em>Retrieves a configuration value as a string.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-pcpp_bool">function PCpp_bool</h3>
+<p><em>Retrieves a configuration value as a boolean.</em> </p>
+<pre><code class="language-C++">bool PCpp_bool (
+    PC_tree_t tree,
+    std::string_view key
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration value as a boolean.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the value cannot be retrieved or converted. </li>
+</ul>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp</code></p></div>
+
+<h3 id="function-pcpp_double">function PCpp_double</h3>
+<p><em>Retrieves a configuration value as a double.</em> </p>
+<pre><code class="language-C++">double PCpp_double (
+    PC_tree_t tree,
+    std::string_view key
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration value as a double.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the value cannot be retrieved or converted. </li>
+</ul>
+<hr>
+
+<h3 id="function-pcpp_get">function PCpp_get</h3>
+<p><em>Retrieves a configuration entry.</em> </p>
+<pre><code class="language-C++">PC_tree_t PCpp_get (
+    PC_tree_t tree,
+    std::string_view key
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration entry, or an invalid handle if the entry cannot be found. </p>
+<hr>
+
+<h3 id="function-pcpp_int">function PCpp_int</h3>
+<p><em>Retrieves a configuration value as an integer.</em> </p>
+<pre><code class="language-C++">long PCpp_int (
+    PC_tree_t tree,
+    std::string_view key
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration value as a long integer.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the value cannot be retrieved or converted. </li>
+</ul>
+<hr>
+
+<h3 id="function-pcpp_len">function PCpp_len</h3>
+<p><em>Retrieves the length of a configuration entry.</em> </p>
+<pre><code class="language-C++">int PCpp_len (
+    PC_tree_t tree,
+    std::string_view key
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The length of the configuration entry.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the length cannot be retrieved. </li>
+</ul>
+<hr>
+
+<h3 id="function-pcpp_string">function PCpp_string</h3>
+<p><em>Retrieves a configuration value as a string.</em> </p>
+<pre><code class="language-C++">std::string PCpp_string (
+    PC_tree_t tree,
+    std::string_view key
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tree</code> The configuration tree. </li>
+<li><code>key</code> The key identifying the configuration entry.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The configuration value as a string.</p>
+<p><strong>Exception:</strong></p>
+<ul>
+<li><code>std::runtime_error</code> If the value cannot be retrieved or converted. </li>
+</ul>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/paraconfpp/paraconfpp.cpp</code></p></div>
               
             </div>
           </div><footer>

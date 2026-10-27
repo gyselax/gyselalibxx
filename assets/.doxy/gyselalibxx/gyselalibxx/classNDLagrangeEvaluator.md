@@ -109,11 +109,9 @@ _Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations._ [M
 ## Detailed Description
 
 
-The ND Lagrange polynomial is defined as:  \(\[
-  L(x_1, \ldots, x_N)
+The ND Lagrange polynomial is defined as:    \(\[  L(x_1, \ldots, x_N)
   = \sum_{i_1=0}^{d_1}\dots\sum_{i_N=0}^{d_N} \prod_{j=1}^N f(x_1, \ldots, x_N) l_{j,i_j}(x_j)
-\]\) The evaluation is recursive:  \(\[
-  L(x_1, \ldots, x_N)
+\]\) The evaluation is recursive:    \(\[  L(x_1, \ldots, x_N)
   = \sum_{i_1=0}^{d_1} l_{1,i_1}(x_1) L(x_2, \dots, x_N)
 \]\)
 
@@ -142,7 +140,9 @@ The recursion terminates when only one evaluator remains: in that case the tail 
 
 _The type of the batch index range (obtained by removing the dimensions of interest from the whole domain)._ 
 ```C++
-using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::batch_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_remove_t< ddc::to_type_seq_t<BatchedInterpolationIdxRange>, ddc::to_type_seq_t<evaluation_idx_range_type> >>;
+using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::batch_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_remove_t<
+                    ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
+                    ddc::to_type_seq_t<evaluation_idx_range_type>>>;
 ```
 
 
@@ -167,7 +167,10 @@ using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::batch_idx_range_type =
 
 _The type of the ND index range on which the Lagrange coefficients are defined plus any batch dimensions._ 
 ```C++
-using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::batched_coeff_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t< ddc::to_type_seq_t<BatchedInterpolationIdxRange>, ddc::to_type_seq_t<evaluation_idx_range_type>, ddc::to_type_seq_t<coeff_idx_range_type> >>;
+using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::batched_coeff_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
+                    ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
+                    ddc::to_type_seq_t<evaluation_idx_range_type>,
+                    ddc::to_type_seq_t<coeff_idx_range_type>>>;
 ```
 
 
@@ -245,7 +248,9 @@ using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::data_type =  typename 
 
 _The type of the index range for the ND evaluation mesh used by this class._ 
 ```C++
-using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::evaluation_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<type_seq_cat_t< ddc::to_type_seq_t<IdxRangeHeadEval>, ddc::to_type_seq_t<typename Evaluators1D::evaluation_idx_range_type>...> >;
+using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::evaluation_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<type_seq_cat_t<
+                    ddc::to_type_seq_t<IdxRangeHeadEval>,
+                    ddc::to_type_seq_t<typename Evaluators1D::evaluation_idx_range_type>...>>;
 ```
 
 

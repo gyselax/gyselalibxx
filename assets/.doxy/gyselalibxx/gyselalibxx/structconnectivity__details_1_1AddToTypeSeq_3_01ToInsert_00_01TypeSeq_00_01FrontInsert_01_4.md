@@ -92,7 +92,7 @@ _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTyp
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::AddToTypeSeq< ToInsert, TypeSeq, FrontInsert >::type =  ddc::type_seq_merge_t<TypeSeq, ddc::detail::TypeSeq<ToInsert> >;
+using connectivity_details::AddToTypeSeq< ToInsert, TypeSeq, FrontInsert >::type =  ddc::type_seq_merge_t<TypeSeq, ddc::detail::TypeSeq<ToInsert>>;
 ```
 
 

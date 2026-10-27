@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01InterfaceType_01_4_01_4" kind="struct" language="C++" prot="public">
     <compoundname>connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;</compoundname>
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
@@ -12,9 +12,12 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01InterfaceType_01_4_01_4_1a8f3e514120676d44e357f6ed57700784" prot="public" static="no">
+      <memberdef kind="typedef" id="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01InterfaceType_01_4_01_4_1ad1524c272d1e50b7f481d788e570a95e" prot="public" static="no">
         <type>std::conditional_t&lt; InterfaceType::template connected_to_patch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;(), ddc::detail::TypeSeq&lt; InterfaceType &gt;, ddc::detail::TypeSeq&lt;&gt; &gt;</type>
-        <definition>using connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;::type =  std::conditional_t&lt; InterfaceType::template connected_to_patch&lt;Patch&gt;(), ddc::detail::TypeSeq&lt;InterfaceType&gt;, ddc::detail::TypeSeq&lt;&gt; &gt;</definition>
+        <definition>using connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;::type =  std::conditional_t&lt;
+            InterfaceType::template connected_to_patch&lt;Patch&gt;(),
+            ddc::detail::TypeSeq&lt;InterfaceType&gt;,
+            ddc::detail::TypeSeq&lt;&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>type</name>
         <qualifiedname>connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;::type</qualifiedname>
@@ -25,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="35" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -35,7 +38,7 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="32" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="33" bodyend="39"/>
     <listofallmembers>
-      <member refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01InterfaceType_01_4_01_4_1a8f3e514120676d44e357f6ed57700784" prot="public" virt="non-virtual"><scope>connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;</scope><name>type</name></member>
+      <member refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01InterfaceType_01_4_01_4_1ad1524c272d1e50b7f481d788e570a95e" prot="public" virt="non-virtual"><scope>connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;</scope><name>type</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f" kind="class" language="C++" prot="public">
     <compoundname>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</compoundname>
     <includes refid="inv__jacobian__o__point_8hpp" local="no">inv_jacobian_o_point.hpp</includes>
@@ -69,9 +69,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="58" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1ad98fb2fb04b9c241f9643125f4069fed" prot="private" static="no">
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a4342a105a94a66fcaf0ac9cbff380a2b" prot="private" static="no">
         <type><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt; <ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref>, <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt; Xpc, Ypc, <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
-        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Mapping =  CombinedMapping&lt; CircularToCartesian&lt;R, Theta, X, Y&gt;, CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;, Coord&lt;R, Theta&gt; &gt;</definition>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Mapping =  CombinedMapping&lt;
+            CircularToCartesian&lt;R, Theta, X, Y&gt;,
+            CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;,
+            Coord&lt;R, Theta&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>Mapping</name>
         <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Mapping</qualifiedname>
@@ -81,12 +84,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="64" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1ac8cbc6c55c78f4bcbcb3500dd02491f2" prot="private" static="no" mutable="no">
-        <type><ref refid="classCombinedMapping" kindref="compound">Mapping</ref></type>
+        <type>Mapping</type>
         <definition>Mapping InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::m_mapping</definition>
         <argsstring></argsstring>
         <name>m_mapping</name>
@@ -108,7 +111,7 @@
         <name>InvJacobianOPoint</name>
         <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::InvJacobianOPoint</qualifiedname>
         <param>
-          <type><ref refid="classCombinedMapping" kindref="compound">Mapping</ref> const &amp;</type>
+          <type>Mapping const &amp;</type>
           <declname>mapping</declname>
         </param>
         <briefdescription>
@@ -131,7 +134,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="74" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="74" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1aae48865b7f1b1d592a92ce539c0c1ebe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt;</type>
+        <type>KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt; InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::operator()</definition>
         <argsstring>() const</argsstring>
         <name>operator()</name>
@@ -166,7 +169,7 @@
       <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a2ddce5131e465098eecf35c4686f3bbe" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>CoordRTheta</name></member>
       <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a82112d29decc49118b332f5adefbf362" prot="public" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>InvJacobianOPoint</name></member>
       <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1ac8cbc6c55c78f4bcbcb3500dd02491f2" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>m_mapping</name></member>
-      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1ad98fb2fb04b9c241f9643125f4069fed" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>Mapping</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a4342a105a94a66fcaf0ac9cbff380a2b" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>Mapping</name></member>
       <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1aae48865b7f1b1d592a92ce539c0c1ebe" prot="public" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>operator()</name></member>
       <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a44b3e4518ef429c39f95a09453e353ed" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>X_cov</name></member>
       <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a12d771a92e754aa4b3a5a34e270d6522" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>Y_cov</name></member>

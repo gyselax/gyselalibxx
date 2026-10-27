@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -653,7 +659,7 @@
 <td style="text-align: left;"><a href="#function-inv_jacobian_component"><strong>inv_jacobian_component</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Compute the (i,j) coefficient of the inverse Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, VectorIndexSet&lt; <a href="classCircularToCartesian.html#typedef-x_cov"><strong>X_cov</strong></a>, <a href="classCircularToCartesian.html#typedef-y_cov"><strong>Y_cov</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, VectorIndexSet&lt; <a href="classCircularToCartesian.html#typedef-x_cov"><strong>X_cov</strong></a>, <a href="classCircularToCartesian.html#typedef-y_cov"><strong>Y_cov</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-inv_jacobian_matrix"><strong>inv_jacobian_matrix</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Compute full inverse Jacobian matrix.</em></td>
 </tr>
 <tr>
@@ -669,7 +675,7 @@
 <td style="text-align: left;"><a href="#function-jacobian_component"><strong>jacobian_component</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Compute the (i,j) coefficient of the Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, VectorIndexSet&lt; <a href="classCircularToCartesian.html#typedef-r_cov"><strong>R_cov</strong></a>, <a href="classCircularToCartesian.html#typedef-theta_cov"><strong>Theta_cov</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, VectorIndexSet&lt; <a href="classCircularToCartesian.html#typedef-r_cov"><strong>R_cov</strong></a><a href="structR__cov.html"><strong>R_cov</strong></a>, <a href="classCircularToCartesian.html#typedef-theta_cov"><strong>Theta_cov</strong></a><a href="structTheta__cov.html"><strong>Theta_cov</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
 </tr>
 <tr>
@@ -822,7 +828,7 @@ inline KOKKOS_FUNCTION double CircularToCartesian::inv_jacobian_component (
 
 <h3 id="function-inv_jacobian_matrix">function inv_jacobian_matrix</h3>
 <p><em>Compute full inverse Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; R , Theta &gt;, VectorIndexSet&lt; X_cov , Y_cov &gt; &gt; CircularToCartesian::inv_jacobian_matrix (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; R , Theta &gt;, VectorIndexSet&lt; X_cov , Y_cov &gt; &gt; CircularToCartesian::inv_jacobian_matrix (
     Coord&lt; R , Theta &gt; const &amp; coord
 ) const
 </code></pre>
@@ -880,7 +886,7 @@ inline KOKKOS_FUNCTION double CircularToCartesian::jacobian_component (
 
 <h3 id="function-jacobian_matrix">function jacobian_matrix</h3>
 <p><em>Compute full Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; X , Y &gt;, VectorIndexSet&lt; R_cov , Theta_cov &gt; &gt; CircularToCartesian::jacobian_matrix (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X , Y &gt;, VectorIndexSet&lt; R_cov R_cov , Theta_cov Theta_cov &gt; &gt; CircularToCartesian::jacobian_matrix (
     Coord&lt; R , Theta &gt; const &amp; coord
 ) const
 </code></pre>

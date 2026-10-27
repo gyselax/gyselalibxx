@@ -66,7 +66,7 @@ _A traits struct for accessing type aliases of an interpolation evaluator._ [Mor
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions._  |
+|  std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions._  |
 
 
 
@@ -103,13 +103,13 @@ Specialise this struct to adapt external evaluators whose alias names differ (e.
 
 
 Defines: Type aliases:
-* data\_type
-* evaluation\_idx\_range\_type
-* coord\_type
-* coeff\_idx\_range\_type Static functions
+* [**data\_type**](structInterpolationEvaluatorTraits.md#typedef-data_type)
+* [**evaluation\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-evaluation_idx_range_type)
+* [**coord\_type**](structInterpolationEvaluatorTraits.md#typedef-coord_type)
+* [**coeff\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-coeff_idx_range_type) Static functions
 * [**rank()**](structInterpolationEvaluatorTraits.md#function-rank) Type calculators
-* batched\_evaluation\_idx\_range\_type
-* batched\_coeff\_idx\_range\_type
+* [**batched\_evaluation\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-batched_evaluation_idx_range_type)
+* [**batched\_coeff\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-batched_coeff_idx_range_type)
 
 
 
@@ -134,7 +134,8 @@ Defines: Type aliases:
 
 _Batched domain with the evaluation grid replaced by the coefficient grid(s)._ 
 ```C++
-using InterpolationEvaluatorTraits< Evaluator >::batched_coeff_idx_range_type =  typename Evaluator::template batched_coeff_idx_range_type<D>;
+using InterpolationEvaluatorTraits< Evaluator >::batched_coeff_idx_range_type = 
+            typename Evaluator::template batched_coeff_idx_range_type<D>;
 ```
 
 
@@ -148,7 +149,9 @@ using InterpolationEvaluatorTraits< Evaluator >::batched_coeff_idx_range_type = 
 
 _Batched index range for the evaluation._ 
 ```C++
-using InterpolationEvaluatorTraits< Evaluator >::batched_evaluation_idx_range_type =  typename Evaluator::template batched_evaluation_idx_range_type< BatchedInterpolationIdxRange>;
+using InterpolationEvaluatorTraits< Evaluator >::batched_evaluation_idx_range_type = 
+            typename Evaluator::template batched_evaluation_idx_range_type<
+                    BatchedInterpolationIdxRange>;
 ```
 
 
@@ -220,7 +223,7 @@ using InterpolationEvaluatorTraits< Evaluator >::evaluation_idx_range_type =  ty
 
 _The number of interpolation dimensions._ 
 ```C++
-static inline constexpr std::size_t InterpolationEvaluatorTraits::rank () 
+static inline std::size_t InterpolationEvaluatorTraits::rank () 
 ```
 
 

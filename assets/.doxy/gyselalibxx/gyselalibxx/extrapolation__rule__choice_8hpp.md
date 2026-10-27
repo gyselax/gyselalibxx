@@ -42,7 +42,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**is\_extrapolation\_rule\_auto\_constructible\_v**](#variable-is_extrapolation_rule_auto_constructible_v)   = `/* multi line expression */`<br>_True if get\_extrapolation&lt;Rule, CoeffGrid, DataType, ...&gt; can build the rule with no extra information: the resolved rule type is default-constructible, or Rule is the_ [_**ExtrapolationRule::Constant**_](structExtrapolationRule_1_1Constant.md) _tag (which get\_extrapolation knows how to build from the boundary of the discrete space)._ |
+|  bool | [**is\_extrapolation\_rule\_auto\_constructible\_v**](#variable-is_extrapolation_rule_auto_constructible_v)   = `/* multi line expression */`<br>_True if get\_extrapolation&lt;Rule, CoeffGrid, DataType, ...&gt; can build the rule with no extra information: the resolved rule type is default-constructible, or Rule is the_ [_**ExtrapolationRule::Constant**_](structExtrapolationRule_1_1Constant.md) _tag (which get\_extrapolation knows how to build from the boundary of the discrete space)._ |
 
 
 
@@ -101,7 +101,17 @@
 
 _Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._ 
 ```C++
-using extrapolation_rule_t =  ddc::detail::TypeSeq< typename details::ExtrapolationRuleResolver< ddc::type_seq_element_t<0, Rule>, DataType, Basis, IdxRangeCoeff>::type, typename details::ExtrapolationRuleResolver< ddc::type_seq_element_t<1, Rule>, DataType, Basis, IdxRangeCoeff>::type>;
+using extrapolation_rule_t =  ddc::detail::TypeSeq<
+        typename details::ExtrapolationRuleResolver<
+                ddc::type_seq_element_t<0, Rule>,
+                DataType,
+                Basis,
+                IdxRangeCoeff>::type,
+        typename details::ExtrapolationRuleResolver<
+                ddc::type_seq_element_t<1, Rule>,
+                DataType,
+                Basis,
+                IdxRangeCoeff>::type>;
 ```
 
 
@@ -117,7 +127,7 @@ using extrapolation_rule_t =  ddc::detail::TypeSeq< typename details::Extrapolat
 
 _True if get\_extrapolation&lt;Rule, CoeffGrid, DataType, ...&gt; can build the rule with no extra information: the resolved rule type is default-constructible, or Rule is the_ [_**ExtrapolationRule::Constant**_](structExtrapolationRule_1_1Constant.md) _tag (which get\_extrapolation knows how to build from the boundary of the discrete space)._
 ```C++
-constexpr bool is_extrapolation_rule_auto_constructible_v;
+bool is_extrapolation_rule_auto_constructible_v;
 ```
 
 

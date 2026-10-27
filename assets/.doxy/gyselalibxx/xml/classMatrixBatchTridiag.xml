@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classMatrixBatchTridiag" kind="class" language="C++" prot="public">
     <compoundname>MatrixBatchTridiag</compoundname>
     <basecompoundref refid="classMatrixBatch" prot="public" virt="non-virtual">MatrixBatch&lt; ExecSpace &gt;</basecompoundref>
@@ -23,7 +23,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="36" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="36" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="35" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMatrixBatchTridiag_1a22ebe5ae1960b991fb2394e941d3c8c4" prot="private" static="no" mutable="no">
         <type>DKokkosView2D</type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="37" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="36" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMatrixBatchTridiag_1a8924490781ec3089994151f4807a58a7" prot="private" static="no" mutable="no">
         <type>DKokkosView2D</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="38" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="37" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="54" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="54" bodyend="66"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="53" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="53" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classMatrixBatchTridiag_1a5951ed8d2a582543b1962b6f0ecfe490" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="79" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="79" bodyend="121"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="78" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="78" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="classMatrixBatchTridiag_1a92c40d724831cfe30419dadbb6dfa4f1" prot="public" static="no" const="no" explicit="no" inline="yes" final="yes" virt="virtual">
         <type>void</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="130" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="130" bodyend="133"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="129" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="129" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="classMatrixBatchTridiag_1a47bb05714a68d7b8710b9c4f692bf5ec" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
         <type>void</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="140" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="140" bodyend="188"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" line="139" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp" bodystart="139" bodyend="187"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structInterpolationBuilderTraits" kind="struct" language="C++" prot="public">
     <compoundname>InterpolationBuilderTraits</compoundname>
     <includes refid="i__interpolation__builder_8hpp" local="no">i_interpolation_builder.hpp</includes>
@@ -54,14 +54,15 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structInterpolationBuilderTraits_1a1571c2b75b4b5eda61672305d05f7ee9" prot="public" static="no">
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_1a2ca4eac98f4c2bea4cf9e8b06f46c0eb" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class IdxRangeBatchedInterpolation</type>
           </param>
         </templateparamlist>
-        <type>typename Builder::template <ref refid="structInterpolationBuilderTraits_1a1571c2b75b4b5eda61672305d05f7ee9" kindref="member">batched_basis_idx_range_type</ref>&lt; IdxRangeBatchedInterpolation &gt;</type>
-        <definition>using InterpolationBuilderTraits&lt; Builder &gt;::batched_basis_idx_range_type =  typename Builder::template batched_basis_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;</definition>
+        <type>typename Builder::template <ref refid="structInterpolationBuilderTraits_1a2ca4eac98f4c2bea4cf9e8b06f46c0eb" kindref="member">batched_basis_idx_range_type</ref>&lt; IdxRangeBatchedInterpolation &gt;</type>
+        <definition>using InterpolationBuilderTraits&lt; Builder &gt;::batched_basis_idx_range_type = 
+            typename Builder::template batched_basis_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;</definition>
         <argsstring></argsstring>
         <name>batched_basis_idx_range_type</name>
         <qualifiedname>InterpolationBuilderTraits::batched_basis_idx_range_type</qualifiedname>
@@ -72,16 +73,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structInterpolationBuilderTraits_1ab26d18a8e7463c40e3bef78c6200bf0b" prot="public" static="no">
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_1af6b4905dafa77d437b6465374049d83f" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class IdxRangeBatchedInterpolation</type>
           </param>
         </templateparamlist>
-        <type>typename Builder::template <ref refid="structInterpolationBuilderTraits_1ab26d18a8e7463c40e3bef78c6200bf0b" kindref="member">batched_derivs_idx_range_type</ref>&lt; IdxRangeBatchedInterpolation &gt;</type>
-        <definition>using InterpolationBuilderTraits&lt; Builder &gt;::batched_derivs_idx_range_type =  typename Builder::template batched_derivs_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;</definition>
+        <type>typename Builder::template <ref refid="structInterpolationBuilderTraits_1af6b4905dafa77d437b6465374049d83f" kindref="member">batched_derivs_idx_range_type</ref>&lt; IdxRangeBatchedInterpolation &gt;</type>
+        <definition>using InterpolationBuilderTraits&lt; Builder &gt;::batched_derivs_idx_range_type = 
+            typename Builder::template batched_derivs_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;</definition>
         <argsstring></argsstring>
         <name>batched_derivs_idx_range_type</name>
         <qualifiedname>InterpolationBuilderTraits::batched_derivs_idx_range_type</qualifiedname>
@@ -92,12 +94,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="58" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="structInterpolationBuilderTraits_1abac68ee97aea6d2e8fa58d645c68bf70" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>constexpr std::size_t</type>
+        <type>std::size_t</type>
         <definition>static constexpr std::size_t InterpolationBuilderTraits&lt; Builder &gt;::rank</definition>
         <argsstring>()</argsstring>
         <name>rank</name>
@@ -119,12 +121,12 @@
 <para>The primary template delegates to the builder&apos;s own type aliases, so any class that defines them directly (e.g. <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>) satisfies the InterpolationBuilder concept without specialisation.</para>
 <para>Specialise this struct to adapt external builders whose alias names differ from the convention (e.g. ddc::SplineBuilder).</para>
 <para>Defines: Type aliases:<itemizedlist>
-<listitem><para>data_type</para>
-</listitem><listitem><para>interpolation_idx_range_type</para>
-</listitem><listitem><para>coeff_idx_range_type Static functions:</para>
+<listitem><para><ref refid="structInterpolationBuilderTraits_1a1cfb37f788c7cf72aba5f9cac0929d90" kindref="member">data_type</ref></para>
+</listitem><listitem><para><ref refid="structInterpolationBuilderTraits_1a28f0e9c3a2146db9ea37f936330d19e5" kindref="member">interpolation_idx_range_type</ref></para>
+</listitem><listitem><para><ref refid="structInterpolationBuilderTraits_1af3333eb7bf31870254a4b741da8f4389" kindref="member">coeff_idx_range_type</ref> Static functions:</para>
 </listitem><listitem><para><ref refid="structInterpolationBuilderTraits_1abac68ee97aea6d2e8fa58d645c68bf70" kindref="member">rank()</ref> Type calculators:</para>
-</listitem><listitem><para>batched_basis_idx_range_type</para>
-</listitem><listitem><para>batched_derivs_idx_range_type (1D builders only; not required by the concept)</para>
+</listitem><listitem><para><ref refid="structInterpolationBuilderTraits_1a2ca4eac98f4c2bea4cf9e8b06f46c0eb" kindref="member">batched_basis_idx_range_type</ref></para>
+</listitem><listitem><para><ref refid="structInterpolationBuilderTraits_1af6b4905dafa77d437b6465374049d83f" kindref="member">batched_derivs_idx_range_type</ref> (1D builders only; not required by the concept)</para>
 </listitem></itemizedlist>
 </para>
 <para><parameterlist kind="templateparam"><parameteritem>
@@ -140,8 +142,8 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="34" bodyend="59"/>
     <listofallmembers>
-      <member refid="structInterpolationBuilderTraits_1a1571c2b75b4b5eda61672305d05f7ee9" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>batched_basis_idx_range_type</name></member>
-      <member refid="structInterpolationBuilderTraits_1ab26d18a8e7463c40e3bef78c6200bf0b" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>batched_derivs_idx_range_type</name></member>
+      <member refid="structInterpolationBuilderTraits_1a2ca4eac98f4c2bea4cf9e8b06f46c0eb" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>batched_basis_idx_range_type</name></member>
+      <member refid="structInterpolationBuilderTraits_1af6b4905dafa77d437b6465374049d83f" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>batched_derivs_idx_range_type</name></member>
       <member refid="structInterpolationBuilderTraits_1af3333eb7bf31870254a4b741da8f4389" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>coeff_idx_range_type</name></member>
       <member refid="structInterpolationBuilderTraits_1a1cfb37f788c7cf72aba5f9cac0929d90" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>data_type</name></member>
       <member refid="structInterpolationBuilderTraits_1a28f0e9c3a2146db9ea37f936330d19e5" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>interpolation_idx_range_type</name></member>

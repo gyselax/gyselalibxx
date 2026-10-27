@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classCzarnyToCartesian" kind="class" language="C++" prot="public">
     <compoundname>CzarnyToCartesian</compoundname>
     <includes refid="czarny__to__cartesian_8hpp" local="no">czarny_to_cartesian.hpp</includes>
@@ -511,7 +511,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="214" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="214" bodyend="222"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classCzarnyToCartesian_1a15bf99762215733076b5a4c20ff8338c" kindref="member">R_cov</ref>, <ref refid="classCzarnyToCartesian_1aced2a90b42b1647181bbfece8eac8708" kindref="member">Theta_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classCzarnyToCartesian_1a15bf99762215733076b5a4c20ff8338c" kindref="member">R_cov</ref><ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="classCzarnyToCartesian_1aced2a90b42b1647181bbfece8eac8708" kindref="member">Theta_cov</ref><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y &gt;, VectorIndexSet&lt; R_cov, Theta_cov &gt; &gt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;::jacobian_matrix</definition>
         <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>
@@ -582,7 +582,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="274" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="274" bodyend="316"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a3efb06a52c04cacab4474cd2475823ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, VectorIndexSet&lt; <ref refid="classCzarnyToCartesian_1a01671e9f90dfeda7700cd6226b3f4007" kindref="member">X_cov</ref>, <ref refid="classCzarnyToCartesian_1afff1c38ec37833746294d5ef53ac3631" kindref="member">Y_cov</ref> &gt; &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, VectorIndexSet&lt; <ref refid="classCzarnyToCartesian_1a01671e9f90dfeda7700cd6226b3f4007" kindref="member">X_cov</ref>, <ref refid="classCzarnyToCartesian_1afff1c38ec37833746294d5ef53ac3631" kindref="member">Y_cov</ref> &gt; &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; R, Theta &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_matrix</definition>
         <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
         <name>inv_jacobian_matrix</name>

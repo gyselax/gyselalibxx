@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="species__info_8hpp" kind="file" language="C++">
     <compoundname>species_info.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -656,8 +656,8 @@
             <type>class Grid1D</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_species_information_v</definition>
+        <type>bool</type>
+        <definition>bool is_species_information_v</definition>
         <argsstring></argsstring>
         <name>is_species_information_v</name>
         <initializer>= std::is_same_v&lt;typename Grid1D::discrete_dimension_type, <ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>&gt;</initializer>
@@ -761,17 +761,17 @@
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12" refid="classSpeciesInformation" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref></highlight></codeline>
+<codeline lineno="12" refid="classSpeciesInformation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref></highlight></codeline>
 <codeline lineno="13"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="16" refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>;</highlight></codeline>
+<codeline lineno="16" refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" kindref="member">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>;</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
-<codeline lineno="21" refid="classSpeciesInformation_1_1Impl" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation_1_1Impl" kindref="compound">Impl</ref></highlight></codeline>
+<codeline lineno="21" refid="classSpeciesInformation_1_1Impl" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Impl</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ODDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OMemorySpace&gt;</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation_1_1Impl" kindref="compound">Impl</ref>;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Impl;</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">discrete_element_type<sp/>=<sp/>Idx&lt;Grid1D&gt;;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
@@ -796,10 +796,10 @@
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>discrete_element_type<sp/>m_ielec;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="54" refid="classSpeciesInformation_1_1Impl_1aa89c8b5db4b1bb25e001ead86f921e82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>;</highlight></codeline>
+<codeline lineno="54" refid="classSpeciesInformation_1_1Impl_1aa89c8b5db4b1bb25e001ead86f921e82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation_1_1Impl_1aa89c8b5db4b1bb25e001ead86f921e82" kindref="member">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>;</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OMemorySpace&gt;</highlight></codeline>
-<codeline lineno="61" refid="classSpeciesInformation_1_1Impl_1a9db19ad040ca32c4bcd51b6aedd776c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classSpeciesInformation_1_1Impl_1a9db19ad040ca32c4bcd51b6aedd776c3" kindref="member">Impl</ref>(<ref refid="classSpeciesInformation_1_1Impl" kindref="compound">Impl&lt;Grid1D, OMemorySpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>impl)</highlight></codeline>
+<codeline lineno="61" refid="classSpeciesInformation_1_1Impl_1a9db19ad040ca32c4bcd51b6aedd776c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classSpeciesInformation_1_1Impl_1a9db19ad040ca32c4bcd51b6aedd776c3" kindref="member">Impl</ref>(Impl&lt;Grid1D,<sp/>OMemorySpace&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>impl)</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_charge(get_idx_range(impl.m_charge))</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_mass(get_idx_range(impl.m_mass))</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_ielec(impl.m_ielec)</highlight></codeline>

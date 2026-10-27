@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -603,7 +609,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classtensor__tools_1_1TensorIndexElement.html"><strong>TensorIndexElement</strong></a> &lt;class ValidatingTensorIndexSet, Dims&gt;<br><em>A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element</em> <span class="arithmatex">\(g_{xx}\)</span> <em>would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;.</em></td>
+<td style="text-align: left;"><a href="classtensor__tools_1_1TensorIndexElement.html"><strong>TensorIndexElement</strong></a> &lt;class ValidatingTensorIndexSet, Dims&gt;<br><em>A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element</em> <span class="arithmatex">\(g_{xx}\)</span> <em>would have the index</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
@@ -654,7 +660,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">typedef typename details::ExtractSubTensorElement&lt; TypeSeqVectorIndexIdMapGlobal, TypeSeqVectorIndexIdMapLocal, GlobalTensorIndexElement &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-extract_sub_tensor_element_t"><strong>extract_sub_tensor_element_t</strong></a>  <br><em>Extract the relevant elements of a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>to create a sub-TensorIndexElement using a global and a local TypeSeq of VectorIndexIdMaps to identify the relevant elements. For example: for GlobalTensorIndexElement = TensorIndexElement&lt;X,Y&gt; with TypeSeqVectorIndexIdMapGlobal = TypeSeq&lt;</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'i', VectorIndexSet&lt;X, Y&gt;&gt;,</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'j', VectorIndexSet&lt;X, Y&gt;&gt;&gt; and TypeSeqVectorIndexIdMapLocal = TypeSeq&lt;</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'j', VectorIndexSet&lt;X, Y&gt;&gt;&gt; we obtain TensorIndexElement&lt;Y&gt;</em></td>
+<td style="text-align: left;"><a href="#typedef-extract_sub_tensor_element_t"><strong>extract_sub_tensor_element_t</strong></a>  <br><em>Extract the relevant elements of a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>to create a sub-TensorIndexElement using a global and a local TypeSeq of VectorIndexIdMaps to identify the relevant elements. For example: for GlobalTensorIndexElement =</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement&lt;X,Y&gt;</strong></em></a> <em>with TypeSeqVectorIndexIdMapGlobal = TypeSeq&lt;</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'i', VectorIndexSet&lt;X, Y&gt;&gt;,</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'j', VectorIndexSet&lt;X, Y&gt;&gt;&gt; and TypeSeqVectorIndexIdMapLocal = TypeSeq&lt;</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'j', VectorIndexSet&lt;X, Y&gt;&gt;&gt; we obtain</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement&lt;Y&gt;</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef <a href="namespacetensor__tools.html#typedef-to_tensor_index_element_t"><strong>to_tensor_index_element_t</strong></a>&lt; <a href="namespacetensor__tools.html#typedef-get_type_seq_vector_index_set_t"><strong>get_type_seq_vector_index_set_t</strong></a>&lt; TypeSeqVectorIndexIdMap &gt;, typename details::GetNthTensorIndexElementFromMap&lt; TypeSeqVectorIndexIdMap, <a href="namespacetensor__tools.html#typedef-get_nth_tensor_index_element_t"><strong>get_nth_tensor_index_element_t</strong></a>&lt; Elem, <a href="namespacetensor__tools.html#typedef-get_type_seq_vector_index_set_t"><strong>get_type_seq_vector_index_set_t</strong></a>&lt; <a href="namespacetensor__tools.html#typedef-unique_indices_t"><strong>unique_indices_t</strong></a>&lt; TypeSeqVectorIndexIdMap &gt; &gt; &gt;, ddc::type_seq_size_v&lt; TypeSeqVectorIndexIdMap &gt; &gt;::type &gt;</td>
@@ -662,7 +668,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename details::GetNthTensorIndexElement&lt; IndexPosition, ddc::type_seq_size_v&lt; TypeSeqVectorIndexSet &gt;, TypeSeqVectorIndexSet &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-get_nth_tensor_index_element_t"><strong>get_nth_tensor_index_element_t</strong></a>  <br><em>Get the</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>which indexes a</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>at the n-th position of its internal array. E.g. for a 2x2</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>, get_nth_tensor_index_element_t&lt;1, TypeSeqVectorIndexSet&gt; returns the</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>which indexes element 1 of the array, so the element {0,1} of the tensor.</em></td>
+<td style="text-align: left;"><a href="#typedef-get_nth_tensor_index_element_t"><strong>get_nth_tensor_index_element_t</strong></a>  <br><em>Get the</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>which indexes a</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>at the n-th position of its internal array. E.g. for a 2x2</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>,</em><a href="namespacetensor__tools.html#typedef-get_nth_tensor_index_element_t"><em><strong>get_nth_tensor_index_element_t&lt;1, TypeSeqVectorIndexSet&gt;</strong></em></a> <em>returns the</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>which indexes element 1 of the array, so the element {0,1} of the tensor.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename details::ExtractTypeSeqIndexSet&lt; TypeSeqVectorIndexIdMap &gt;::type</td>
@@ -685,7 +691,7 @@
 <td style="text-align: left;"><a href="#typedef-symmetric_tensor_element_t"><strong>symmetric_tensor_element_t</strong></a>  <br><em>Get the</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>representing the element with the same contents in a symmetric matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename details::ToTensorIndexElement&lt; ValidatingTensorIndexSet, TypeSeqTensorIndexTag &gt;::type</td>
+<td style="text-align: right;">typedef typename details:: ToTensorIndexElement&lt; ValidatingTensorIndexSet, TypeSeqTensorIndexTag &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-to_tensor_index_element_t"><strong>to_tensor_index_element_t</strong></a>  <br><em>Get a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices.</em></td>
 </tr>
 <tr>
@@ -704,23 +710,23 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: right;">std::size_t</td>
 <td style="text-align: left;"><a href="#variable-char_occurrences_v"><strong>char_occurrences_v</strong></a>   = <code>details::CountChar&amp;lt;search\_char, CharTypeSeq&amp;gt;::value</code><br><em>Count the number of instances of a character in a TypeSeq of literals.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-enable_indexed_tensor"><strong>enable_indexed_tensor</strong></a>   = <code>false</code><br><em>A boolean, true if the type is an</em> <a href="classtensor__tools_1_1IndexedTensor.html"><em><strong>IndexedTensor</strong></em></a> <em>, false otherwise.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-enable_indexed_tensor-indexedtensor-tensortype-typeseqvectorindexidmap"><strong>enable_indexed_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;</strong></a>   = <code>true</code><br><em>A boolean, true if the type is an</em> <a href="classtensor__tools_1_1IndexedTensor.html"><em><strong>IndexedTensor</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_indexed_tensor_v"><strong>is_indexed_tensor_v</strong></a>   = <code>[**enable\_indexed\_tensor**](namespacetensor__tools.md#variable-enable_indexed_tensor)&amp;lt;std::remove\_const\_t&amp;lt;std::remove\_reference\_t&amp;lt;Type&amp;gt;&amp;gt;&amp;gt;</code><br><em>A tool to check if a type is an</em> <a href="classtensor__tools_1_1IndexedTensor.html"><em><strong>IndexedTensor</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_tensor_index_element_v"><strong>is_tensor_index_element_v</strong></a>   = <code>details::enable\_tensor\_index\_element&amp;lt;std::remove\_const\_t&amp;lt;std::remove\_reference\_t&amp;lt;Type&amp;gt;&amp;gt;&amp;gt;</code><br><em>A helper to check if a type is a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>.</em></td>
 </tr>
 </tbody>
@@ -744,8 +750,11 @@
 <p>A namespace to group all the tools that are useful to carry out non-trivial operations on tensors. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-extract_sub_tensor_element_t">typedef extract_sub_tensor_element_t</h3>
-<p><em>Extract the relevant elements of a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>to create a sub-TensorIndexElement using a global and a local TypeSeq of VectorIndexIdMaps to identify the relevant elements. For example: for GlobalTensorIndexElement = TensorIndexElement&lt;X,Y&gt; with TypeSeqVectorIndexIdMapGlobal = TypeSeq&lt;</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'i', VectorIndexSet&lt;X, Y&gt;&gt;,</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'j', VectorIndexSet&lt;X, Y&gt;&gt;&gt; and TypeSeqVectorIndexIdMapLocal = TypeSeq&lt;</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'j', VectorIndexSet&lt;X, Y&gt;&gt;&gt; we obtain TensorIndexElement&lt;Y&gt;</em></p>
-<pre><code class="language-C++">using tensor_tools::extract_sub_tensor_element_t = typedef typename details::ExtractSubTensorElement&lt; TypeSeqVectorIndexIdMapGlobal, TypeSeqVectorIndexIdMapLocal, GlobalTensorIndexElement&gt;::type;
+<p><em>Extract the relevant elements of a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>to create a sub-TensorIndexElement using a global and a local TypeSeq of VectorIndexIdMaps to identify the relevant elements. For example: for GlobalTensorIndexElement =</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement&lt;X,Y&gt;</strong></em></a> <em>with TypeSeqVectorIndexIdMapGlobal = TypeSeq&lt;</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'i', VectorIndexSet&lt;X, Y&gt;&gt;,</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'j', VectorIndexSet&lt;X, Y&gt;&gt;&gt; and TypeSeqVectorIndexIdMapLocal = TypeSeq&lt;</em><a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>&lt;'j', VectorIndexSet&lt;X, Y&gt;&gt;&gt; we obtain</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement&lt;Y&gt;</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using tensor_tools::extract_sub_tensor_element_t =  typename details::ExtractSubTensorElement&lt;
+        TypeSeqVectorIndexIdMapGlobal,
+        TypeSeqVectorIndexIdMapLocal,
+        GlobalTensorIndexElement&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -757,7 +766,14 @@
 
 <h3 id="typedef-get_nth_tensor_index_element_from_map_t">typedef get_nth_tensor_index_element_from_map_t</h3>
 <p><em>Get the n-th valid index for a tensor which is accessed according to the pattern described by a TypeSeq of VectorIndexIdMaps. E.g. for a 2D tensor with components A_{xx}, A_{xy}, A_{yx}, A_{yy}, indexed with.</em> </p>
-<pre><code class="language-C++">using tensor_tools::get_nth_tensor_index_element_from_map_t = typedef to_tensor_index_element_t&lt; get_type_seq_vector_index_set_t&lt;TypeSeqVectorIndexIdMap&gt;, typename details::GetNthTensorIndexElementFromMap&lt; TypeSeqVectorIndexIdMap, get_nth_tensor_index_element_t&lt; Elem, get_type_seq_vector_index_set_t&lt;unique_indices_t&lt;TypeSeqVectorIndexIdMap&gt; &gt;&gt;, ddc::type_seq_size_v&lt;TypeSeqVectorIndexIdMap&gt; &gt;::type&gt;;
+<pre><code class="language-C++">using tensor_tools::get_nth_tensor_index_element_from_map_t =  to_tensor_index_element_t&lt;
+        get_type_seq_vector_index_set_t&lt;TypeSeqVectorIndexIdMap&gt;,
+        typename details::GetNthTensorIndexElementFromMap&lt;
+                TypeSeqVectorIndexIdMap,
+                get_nth_tensor_index_element_t&lt;
+                        Elem,
+                        get_type_seq_vector_index_set_t&lt;unique_indices_t&lt;TypeSeqVectorIndexIdMap&gt;&gt;&gt;,
+                ddc::type_seq_size_v&lt;TypeSeqVectorIndexIdMap&gt;&gt;::type&gt;;
 </code></pre>
 <pre><code class="language-C++">TypeSeq&lt;VectorIndexIdMap&lt;'i', VectorIndexSet&lt;X, Y&gt;&gt;, VectorIndexIdMap&lt;'i', VectorIndexSet&lt;X, Y&gt;&gt;&gt;
 </code></pre>
@@ -774,8 +790,11 @@
 <hr>
 
 <h3 id="typedef-get_nth_tensor_index_element_t">typedef get_nth_tensor_index_element_t</h3>
-<p><em>Get the</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>which indexes a</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>at the n-th position of its internal array. E.g. for a 2x2</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>, get_nth_tensor_index_element_t&lt;1, TypeSeqVectorIndexSet&gt; returns the</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>which indexes element 1 of the array, so the element {0,1} of the tensor.</em></p>
-<pre><code class="language-C++">using tensor_tools::get_nth_tensor_index_element_t = typedef typename details::GetNthTensorIndexElement&lt; IndexPosition, ddc::type_seq_size_v&lt;TypeSeqVectorIndexSet&gt;, TypeSeqVectorIndexSet&gt;::type;
+<p><em>Get the</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>which indexes a</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>at the n-th position of its internal array. E.g. for a 2x2</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>,</em><a href="namespacetensor__tools.html#typedef-get_nth_tensor_index_element_t"><em><strong>get_nth_tensor_index_element_t&lt;1, TypeSeqVectorIndexSet&gt;</strong></em></a> <em>returns the</em><a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>which indexes element 1 of the array, so the element {0,1} of the tensor.</em></p>
+<pre><code class="language-C++">using tensor_tools::get_nth_tensor_index_element_t =  typename details::GetNthTensorIndexElement&lt;
+        IndexPosition,
+        ddc::type_seq_size_v&lt;TypeSeqVectorIndexSet&gt;,
+        TypeSeqVectorIndexSet&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -786,7 +805,8 @@
 
 <h3 id="typedef-get_type_seq_vector_index_set_t">typedef get_type_seq_vector_index_set_t</h3>
 <p><em>Get a TypeSeq of valid VectorIndexSets from a TypeSeq of VectorIndexIdMaps.</em> </p>
-<pre><code class="language-C++">using tensor_tools::get_type_seq_vector_index_set_t = typedef typename details::ExtractTypeSeqIndexSet&lt;TypeSeqVectorIndexIdMap&gt;::type;
+<pre><code class="language-C++">using tensor_tools::get_type_seq_vector_index_set_t = 
+        typename details::ExtractTypeSeqIndexSet&lt;TypeSeqVectorIndexIdMap&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -796,7 +816,7 @@
 
 <h3 id="typedef-index_identifiers_t">typedef index_identifiers_t</h3>
 <p><em>Create a TypeSeq of integral_constants containing all the character ids found in the TypeSeqVectorIndexIdMap.</em> </p>
-<pre><code class="language-C++">using tensor_tools::index_identifiers_t = typedef typename details::GetIndexIds&lt;TypeSeqVectorIndexIdMap&gt;::type;
+<pre><code class="language-C++">using tensor_tools::index_identifiers_t =  typename details::GetIndexIds&lt;TypeSeqVectorIndexIdMap&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -806,7 +826,10 @@
 
 <h3 id="typedef-non_repeated_indices_t">typedef non_repeated_indices_t</h3>
 <p><em>Extract the VectorIndexIdMaps whose character id only appears once in a TypeSeq of VectorIndexIdMaps.</em> </p>
-<pre><code class="language-C++">using tensor_tools::non_repeated_indices_t = typedef typename details::GetNonRepeatedIndices&lt; TypeSeqVectorIndexIdMap, ddc::type_seq_size_v&lt;TypeSeqVectorIndexIdMap&gt; - 1, index_identifiers_t&lt;TypeSeqVectorIndexIdMap&gt; &gt;::type;
+<pre><code class="language-C++">using tensor_tools::non_repeated_indices_t =  typename details::GetNonRepeatedIndices&lt;
+        TypeSeqVectorIndexIdMap,
+        ddc::type_seq_size_v&lt;TypeSeqVectorIndexIdMap&gt; - 1,
+        index_identifiers_t&lt;TypeSeqVectorIndexIdMap&gt;&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -816,7 +839,8 @@
 
 <h3 id="typedef-relevant_vector_index_sets_t">typedef relevant_vector_index_sets_t</h3>
 <p><em>Extract all VectorIndexSets which are described by the same character identifier.</em> </p>
-<pre><code class="language-C++">using tensor_tools::relevant_vector_index_sets_t = typedef typename details::GetRelevantVectorIndexSets&lt;ID, TypeSeqVectorIndexIdMap&gt;::type;
+<pre><code class="language-C++">using tensor_tools::relevant_vector_index_sets_t = 
+        typename details::GetRelevantVectorIndexSets&lt;ID, TypeSeqVectorIndexIdMap&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -827,7 +851,18 @@
 
 <h3 id="typedef-symmetric_tensor_element_t">typedef symmetric_tensor_element_t</h3>
 <p><em>Get the</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>representing the element with the same contents in a symmetric matrix.</em></p>
-<pre><code class="language-C++">using tensor_tools::symmetric_tensor_element_t = typedef TensorIndexElement&lt; typename TensorIndexElem::tensor_index_set, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt;1, typename TensorIndexElem::IdxTypeSeq&gt;, ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; ddc::type_seq_element_t&lt;0, typename TensorIndexElem::IdxTypeSeq&gt;, ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt; &gt;, ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt; &gt;&gt;;
+<pre><code class="language-C++">using tensor_tools::symmetric_tensor_element_t =  TensorIndexElement&lt;
+        typename TensorIndexElem::tensor_index_set,
+        ddc::type_seq_element_t&lt;
+                ddc::type_seq_rank_v&lt;
+                        ddc::type_seq_element_t&lt;1, typename TensorIndexElem::IdxTypeSeq&gt;,
+                        ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt;&gt;,
+                ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt;&gt;,
+        ddc::type_seq_element_t&lt;
+                ddc::type_seq_rank_v&lt;
+                        ddc::type_seq_element_t&lt;0, typename TensorIndexElem::IdxTypeSeq&gt;,
+                        ddc::type_seq_element_t&lt;0, typename TensorIndexElem::tensor_index_set&gt;&gt;,
+                ddc::type_seq_element_t&lt;1, typename TensorIndexElem::tensor_index_set&gt;&gt;&gt;;
 </code></pre>
 <p>I.e. return the <a href="classtensor__tools_1_1TensorIndexElement.html"><strong>TensorIndexElement</strong></a> describing A_{ik} when given the <a href="classtensor__tools_1_1TensorIndexElement.html"><strong>TensorIndexElement</strong></a> describing A_{ki}. </p>
 <p><strong>Template parameters:</strong></p>
@@ -838,7 +873,8 @@
 
 <h3 id="typedef-to_tensor_index_element_t">typedef to_tensor_index_element_t</h3>
 <p><em>Get a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices.</em></p>
-<pre><code class="language-C++">using tensor_tools::to_tensor_index_element_t = typedef typename details:: ToTensorIndexElement&lt;ValidatingTensorIndexSet, TypeSeqTensorIndexTag&gt;::type;
+<pre><code class="language-C++">using tensor_tools::to_tensor_index_element_t =  typename details::
+        ToTensorIndexElement&lt;ValidatingTensorIndexSet, TypeSeqTensorIndexTag&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -849,7 +885,7 @@
 
 <h3 id="typedef-unique_indices_t">typedef unique_indices_t</h3>
 <p><em>Create a TypeSeq of</em> <a href="structtensor__tools_1_1VectorIndexIdMap.html"><em><strong>VectorIndexIdMap</strong></em></a> <em>in which each character id only appears once from a TypeSeq of VectorIndexIdMaps with repeat character ids.</em></p>
-<pre><code class="language-C++">using tensor_tools::unique_indices_t = typedef typename details::GetUniqueIndices&lt;TypeSeqVectorIndexIdMap&gt;::type;
+<pre><code class="language-C++">using tensor_tools::unique_indices_t =  typename details::GetUniqueIndices&lt;TypeSeqVectorIndexIdMap&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -859,7 +895,7 @@
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-char_occurrences_v">variable char_occurrences_v</h3>
 <p><em>Count the number of instances of a character in a TypeSeq of literals.</em> </p>
-<pre><code class="language-C++">constexpr std::size_t tensor_tools::char_occurrences_v;
+<pre><code class="language-C++">std::size_t tensor_tools::char_occurrences_v;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -870,25 +906,25 @@
 
 <h3 id="variable-enable_indexed_tensor">variable enable_indexed_tensor</h3>
 <p><em>A boolean, true if the type is an</em> <a href="classtensor__tools_1_1IndexedTensor.html"><em><strong>IndexedTensor</strong></em></a> <em>, false otherwise.</em></p>
-<pre><code class="language-C++">constexpr bool tensor_tools::enable_indexed_tensor;
+<pre><code class="language-C++">bool tensor_tools::enable_indexed_tensor;
 </code></pre>
 <hr>
 
 <h3 id="variable-enable_indexed_tensor-indexedtensor-tensortype-typeseqvectorindexidmap">variable enable_indexed_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;</h3>
 <p><em>A boolean, true if the type is an</em> <a href="classtensor__tools_1_1IndexedTensor.html"><em><strong>IndexedTensor</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">constexpr bool tensor_tools::enable_indexed_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;;
+<pre><code class="language-C++">bool tensor_tools::enable_indexed_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="variable-is_indexed_tensor_v">variable is_indexed_tensor_v</h3>
 <p><em>A tool to check if a type is an</em> <a href="classtensor__tools_1_1IndexedTensor.html"><em><strong>IndexedTensor</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">constexpr bool tensor_tools::is_indexed_tensor_v;
+<pre><code class="language-C++">bool tensor_tools::is_indexed_tensor_v;
 </code></pre>
 <hr>
 
 <h3 id="variable-is_tensor_index_element_v">variable is_tensor_index_element_v</h3>
 <p><em>A helper to check if a type is a</em> <a href="classtensor__tools_1_1TensorIndexElement.html"><em><strong>TensorIndexElement</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">constexpr bool tensor_tools::is_tensor_index_element_v;
+<pre><code class="language-C++">bool tensor_tools::is_tensor_index_element_v;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

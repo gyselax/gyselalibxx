@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4" kind="struct" language="C++" prot="public">
     <compoundname>is_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
     <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
     <templateparamlist>
       <param>
@@ -27,8 +28,13 @@
         <link refid="structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="3">
         <label>std::true_type</label>
       </node>
     </inheritancegraph>
@@ -38,8 +44,13 @@
         <link refid="structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="3">
         <label>std::true_type</label>
       </node>
     </collaborationgraph>

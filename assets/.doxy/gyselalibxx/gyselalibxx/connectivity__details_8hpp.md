@@ -79,9 +79,9 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename [**connectivity\_details::CollectAllGridsOnDim**](structconnectivity__details_1_1CollectAllGridsOnDim.md)&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type | [**collect\_grids\_on\_dim\_t**](#typedef-collect_grids_on_dim_t)  <br>_A tool to collect all grids along a given line including the specified grid._  |
-| typedef typename [**connectivity\_details::CollectAllInterfacesOnDim**](structconnectivity__details_1_1CollectAllInterfacesOnDim.md)&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type | [**collect\_interfaces\_on\_dim\_t**](#typedef-collect_interfaces_on_dim_t)  <br>_A tool to collect all interfaces along a given line including the specified grid._  |
-| typedef typename [**connectivity\_details::FindInterface**](structconnectivity__details_1_1FindInterface.md)&lt; StartEdge, InterfaceTypeSeq &gt;::type::template OtherEdge&lt; StartEdge &gt; | [**equivalent\_edge\_t**](#typedef-equivalent_edge_t)  <br>_A utility to get the other edge in an interface._  |
+| typedef typename connectivity\_details:: CollectAllGridsOnDim&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type | [**collect\_grids\_on\_dim\_t**](#typedef-collect_grids_on_dim_t)  <br>_A tool to collect all grids along a given line including the specified grid._  |
+| typedef typename connectivity\_details:: CollectAllInterfacesOnDim&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type | [**collect\_interfaces\_on\_dim\_t**](#typedef-collect_interfaces_on_dim_t)  <br>_A tool to collect all interfaces along a given line including the specified grid._  |
+| typedef typename connectivity\_details:: FindInterface&lt; StartEdge, InterfaceTypeSeq &gt;::type::template OtherEdge&lt; StartEdge &gt; | [**equivalent\_edge\_t**](#typedef-equivalent_edge_t)  <br>_A utility to get the other edge in an interface._  |
 | typedef typename [**connectivity\_details::ExtractPatches**](structconnectivity__details_1_1ExtractPatches.md)&lt; EdgeTypeSeq &gt;::type | [**extract\_patches\_t**](#typedef-extract_patches_t)  <br>_A tool to find all the patches used by the various edges._  |
 | typedef typename [**connectivity\_details::FindInterface**](structconnectivity__details_1_1FindInterface.md)&lt; EdgeType, InterfaceTypeSeq &gt;::type | [**find\_associated\_interface\_t**](#typedef-find_associated_interface_t)  <br>_A tool to find the interface which contains a specified edge._  |
 | typedef typename [**connectivity\_details::FindPatch**](structconnectivity__details_1_1FindPatch.md)&lt; Grid1D, PatchTypeSeq &gt;::type | [**find\_patch\_t**](#typedef-find_patch_t)  <br>_A tool to find a patch which contains the specified grid._  |
@@ -146,7 +146,8 @@
 
 _A tool to collect all grids along a given line including the specified grid._ 
 ```C++
-using collect_grids_on_dim_t =  typename connectivity_details:: CollectAllGridsOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
+using collect_grids_on_dim_t =  typename connectivity_details::
+        CollectAllGridsOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
 ```
 
 
@@ -160,7 +161,8 @@ using collect_grids_on_dim_t =  typename connectivity_details:: CollectAllGridsO
 
 _A tool to collect all interfaces along a given line including the specified grid._ 
 ```C++
-using collect_interfaces_on_dim_t =  typename connectivity_details:: CollectAllInterfacesOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
+using collect_interfaces_on_dim_t =  typename connectivity_details::
+        CollectAllInterfacesOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
 ```
 
 
@@ -174,7 +176,8 @@ using collect_interfaces_on_dim_t =  typename connectivity_details:: CollectAllI
 
 _A utility to get the other edge in an interface._ 
 ```C++
-using equivalent_edge_t =  typename connectivity_details:: FindInterface<StartEdge, InterfaceTypeSeq>::type::template OtherEdge<StartEdge>;
+using equivalent_edge_t =  typename connectivity_details::
+        FindInterface<StartEdge, InterfaceTypeSeq>::type::template OtherEdge<StartEdge>;
 ```
 
 
@@ -214,7 +217,8 @@ using extract_patches_t =  typename connectivity_details::ExtractPatches<EdgeTyp
 
 _A tool to find the interface which contains a specified edge._ 
 ```C++
-using find_associated_interface_t =  typename connectivity_details::FindInterface<EdgeType, InterfaceTypeSeq>::type;
+using find_associated_interface_t = 
+        typename connectivity_details::FindInterface<EdgeType, InterfaceTypeSeq>::type;
 ```
 
 
@@ -242,7 +246,9 @@ using find_patch_t =  typename connectivity_details::FindPatch<Grid1D, PatchType
 
 _A tool to find the first multi-D index range which contains a specific grid._ 
 ```C++
-using find_relevant_idx_range_t =  ddc::type_seq_element_t< 0, typename connectivity_details::FindRelevantIdxRangeType<QueryGrid1D, IdxRangeTuple>::type>;
+using find_relevant_idx_range_t =  ddc::type_seq_element_t<
+        0,
+        typename connectivity_details::FindRelevantIdxRangeType<QueryGrid1D, IdxRangeTuple>::type>;
 ```
 
 
@@ -256,7 +262,8 @@ using find_relevant_idx_range_t =  ddc::type_seq_element_t< 0, typename connecti
 
 _A tool to find all interfaces directly connected to the start patch._ 
 ```C++
-using interfaces_of_patch_t =  typename connectivity_details::PatchConnection<StartPatch, InterfaceTypeSeq>::type;
+using interfaces_of_patch_t = 
+        typename connectivity_details::PatchConnection<StartPatch, InterfaceTypeSeq>::type;
 ```
 
 
@@ -270,7 +277,8 @@ using interfaces_of_patch_t =  typename connectivity_details::PatchConnection<St
 
 _A tool to find all edges which are not_ [_**OutsideEdge**_](structOutsideEdge.md) _types._
 ```C++
-using strip_outside_edges_t =  typename connectivity_details::StripOutsideEdges<ddc::detail::TypeSeq<EdgeType...> >::type;
+using strip_outside_edges_t = 
+        typename connectivity_details::StripOutsideEdges<ddc::detail::TypeSeq<EdgeType...>>::type;
 ```
 
 

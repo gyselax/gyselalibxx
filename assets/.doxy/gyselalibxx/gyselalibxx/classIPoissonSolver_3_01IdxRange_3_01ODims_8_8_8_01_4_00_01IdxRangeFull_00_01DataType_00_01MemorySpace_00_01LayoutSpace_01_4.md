@@ -90,7 +90,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**using\_vector\_field**](#variable-using_vector_field)   = `ddc::type\_seq\_size\_v&lt;[**laplacian\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-laplacian_tags)&gt; == 1`<br>_Indicates whether the gradient is represented by a_ [_**VectorField**_](classVectorField.md) _or a Field._ |
+|  bool | [**using\_vector\_field**](#variable-using_vector_field)   = `ddc::type\_seq\_size\_v&lt;[**laplacian\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-laplacian_tags)&gt; == 1`<br>_Indicates whether the gradient is represented by a_ [_**VectorField**_](classVectorField.md) _or a Field._ |
 
 
 
@@ -140,7 +140,8 @@ An abstract class from which a Poisson solver can inherit. Classes inheriting fr
 
 _The index range type describing the batch dimensions._ 
 ```C++
-using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::batch_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t<batch_tags>;
+using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::batch_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<batch_tags>;
 ```
 
 
@@ -238,7 +239,10 @@ using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace,
 
 _The type of the derivative of_ \(\phi\) _._
 ```C++
-using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::vector_field_type =  std::conditional_t< ddc::type_seq_size_v<laplacian_tags> == 1, field_type, VectorField<DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace> >;
+using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::vector_field_type =  std::conditional_t<
+            ddc::type_seq_size_v<laplacian_tags> == 1,
+            field_type,
+            VectorField<DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace>>;
 ```
 
 
@@ -388,7 +392,7 @@ using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace,
 
 _Indicates whether the gradient is represented by a_ [_**VectorField**_](classVectorField.md) _or a Field._
 ```C++
-constexpr bool IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::using_vector_field;
+bool IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::using_vector_field;
 ```
 
 

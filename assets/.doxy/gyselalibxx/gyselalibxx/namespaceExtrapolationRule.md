@@ -105,7 +105,7 @@ Each tag exposes a type alias template that resolves, given the coefficient grid
 
 _Convenience pairing of_ [_**ExtrapolationRule::Constant**_](structExtrapolationRule_1_1Constant.md) _for both boundaries._
 ```C++
-using ExtrapolationRule::Constant_Constant = typedef ddc::detail::TypeSeq<Constant, Constant>;
+using ExtrapolationRule::Constant_Constant =  ddc::detail::TypeSeq<Constant, Constant>;
 ```
 
 
@@ -119,7 +119,7 @@ using ExtrapolationRule::Constant_Constant = typedef ddc::detail::TypeSeq<Consta
 
 _Convenience pairing of_ [_**ExtrapolationRule::NullValue**_](structExtrapolationRule_1_1NullValue.md) _for both boundaries._
 ```C++
-using ExtrapolationRule::Null_Null = typedef ddc::detail::TypeSeq<NullValue, NullValue>;
+using ExtrapolationRule::Null_Null =  ddc::detail::TypeSeq<NullValue, NullValue>;
 ```
 
 
@@ -133,7 +133,7 @@ using ExtrapolationRule::Null_Null = typedef ddc::detail::TypeSeq<NullValue, Nul
 
 _Convenience pairing of_ [_**ExtrapolationRule::OneSidedPeriodic**_](structExtrapolationRule_1_1OneSidedPeriodic.md) _for both boundaries._
 ```C++
-using ExtrapolationRule::Periodic = typedef ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
+using ExtrapolationRule::Periodic =  ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
 ```
 
 

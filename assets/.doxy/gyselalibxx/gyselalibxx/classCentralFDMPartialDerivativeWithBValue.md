@@ -87,7 +87,7 @@ See [IPartialDerivative](classIPartialDerivative.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**CentralFDMPartialDerivativeWithBValue**](#function-centralfdmpartialderivativewithbvalue) (DConstFieldType const field\_ref, double bvalue\_left, double bvalue\_right) <br>_Construct an instance of the class_ [_**CentralFDMPartialDerivative**_](classCentralFDMPartialDerivative.md) _._ |
-| virtual void | [**operator()**](#function-operator) (DFieldType differentiated\_field) const<br>_Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see_ `./README.md` __ |
+| virtual void | [**operator()**](#function-operator) (DFieldType differentiated\_field) const<br>_Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see_ `./README.md` _._ |
 
 
 ## Public Functions inherited from IPartialDerivative
@@ -205,7 +205,7 @@ inline explicit CentralFDMPartialDerivativeWithBValue::CentralFDMPartialDerivati
 
 ### function operator() 
 
-_Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see_ `./README.md` __
+_Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see_ `./README.md` _._
 ```C++
 inline virtual void CentralFDMPartialDerivativeWithBValue::operator() (
     DFieldType differentiated_field

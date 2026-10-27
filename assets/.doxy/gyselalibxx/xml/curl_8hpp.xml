@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="curl_8hpp" kind="file" language="C++">
     <compoundname>curl.hpp</compoundname>
     <includes refid="ddc__alias__inline__functions_8hpp" local="yes">ddc_alias_inline_functions.hpp</includes>
@@ -349,7 +349,7 @@
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::Mapping<sp/>Mapping3D,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MappingCoord<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping3D::CoordArg&gt;</highlight></codeline>
-<codeline lineno="27" refid="classCurl" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCurl" kindref="compound">Curl</ref></highlight></codeline>
+<codeline lineno="27" refid="classCurl" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCurl_1a9cb52bec55d7d60e3ce868232c8450c6" kindref="member">Curl</ref></highlight></codeline>
 <codeline lineno="28"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">BasisSpatial<sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>Mapping3D::CoordArg&gt;;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CovBasisSpatial<sp/>=<sp/>get_covariant_dims_t&lt;BasisSpatial&gt;;</highlight></codeline>

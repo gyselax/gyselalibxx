@@ -18,7 +18,7 @@ _A superclass describing an operator for converting from/to different MPI layout
 
 
 
-Inherited by the following classes: [MPITransposeAllToAll](classMPITransposeAllToAll.md),  [MPITransposeAllToAll](classMPITransposeAllToAll.md)
+Inherited by the following classes: [MPITransposeAllToAll](classMPITransposeAllToAll.md)
 
 
 

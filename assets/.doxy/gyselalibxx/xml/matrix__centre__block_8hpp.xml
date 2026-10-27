@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="matrix__centre__block_8hpp" kind="file" language="C++">
     <compoundname>matrix_centre_block.hpp</compoundname>
     <includes local="no">memory</includes>
@@ -94,10 +94,10 @@
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMatrix" kindref="compound">Matrix</ref>;</highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43" refid="classMatrix__Centre__Block" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMatrix__Centre__Block" kindref="compound">Matrix_Centre_Block</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block" kindref="compound">Matrix_Corner_Block</ref></highlight></codeline>
+<codeline lineno="43" refid="classMatrix__Centre__Block" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMatrix__Centre__Block_1aec4c02c287577b54d57a0b6123d7f869" kindref="member">Matrix_Centre_Block</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1a02c714c7dbf1c5d96d3deccdc2e1c510" kindref="member">Matrix_Corner_Block</ref></highlight></codeline>
 <codeline lineno="44"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block" kindref="compound">Matrix_Centre_Block</ref>(</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1aec4c02c287577b54d57a0b6123d7f869" kindref="member">Matrix_Centre_Block</ref>(</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classMatrix_1a687d05d0c6cb4e1a8dc1a40e4926e9a3" kindref="member">n</ref>,</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>,</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Centre__Block_1a518e1030a8ea5e08018a3f2c76c56f59" kindref="member">bottom_block_size</ref>,</highlight></codeline>

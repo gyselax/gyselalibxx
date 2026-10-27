@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="collisions__intra_8cpp" kind="file" language="C++">
     <compoundname>collisions_intra.cpp</compoundname>
     <includes local="no">iomanip</includes>
@@ -581,7 +581,7 @@
 <codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>temperature<sp/>=<sp/>get_field(temperature_alloc);</highlight></codeline>
 <codeline lineno="280"><highlight class="normal"></highlight></codeline>
 <codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>quadrature_coeffs_alloc(</highlight></codeline>
-<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>trapezoid_quadrature_coefficients&lt;Kokkos::DefaultExecutionSpace&gt;(</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trapezoid__quadrature_8hpp_1a2e9e7d21b2da01a44fb6d6399a13fa0e" kindref="member">trapezoid_quadrature_coefficients&lt;Kokkos::DefaultExecutionSpace&gt;</ref>(</highlight></codeline>
 <codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range&lt;GridVx&gt;(allfdistribu)));</highlight></codeline>
 <codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldVx<sp/>quadrature_coeffs<sp/>=<sp/>get_const_field(quadrature_coeffs_alloc);</highlight></codeline>
 <codeline lineno="285"><highlight class="normal"></highlight></codeline>
@@ -693,7 +693,7 @@
 <codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RR_view(RR.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
 <codeline lineno="392"><highlight class="normal"></highlight></codeline>
 <codeline lineno="393"><highlight class="normal"></highlight></codeline>
-<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrixBatchTridiag" kindref="compound">MatrixBatchTridiag&lt;Kokkos::DefaultExecutionSpace&gt;</ref></highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixBatchTridiag&lt;Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
 <codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>matrix(batch_size,<sp/>mat_size,<sp/>AA_view,<sp/>BB_view,<sp/>CC_view);</highlight></codeline>
 <codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix.setup_solver();</highlight></codeline>
 <codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix.solve(RR_view);</highlight></codeline>

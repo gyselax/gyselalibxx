@@ -428,7 +428,10 @@ static std::unique_ptr< Matrix > Matrix::make_new_block_with_banded_region (
 
 
 
- where E is a banded matrix, and A, E and I are square matrices.
+
+
+
+where E is a banded matrix, and A, E and I are square matrices.
 
 
 
@@ -473,7 +476,10 @@ static std::unique_ptr< Matrix > Matrix::make_new_periodic_banded (
 
 
 
- 
+
+
+
+
 
 **Parameters:**
 

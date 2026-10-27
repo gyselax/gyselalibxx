@@ -129,7 +129,16 @@ Allocates and stores the spline coefficients of the advection field on the appro
 
 _The non-owning operator that can be used on GPU._ 
 ```C++
-using ElementwiseSplinePolarFootFinderMem< GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefFieldMem, TimeStepper >::GPUCompat =  ElementwiseSplinePolarFootFinder< GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, typename AdvecCoefFieldMem::view_type, TimeStepper>;
+using ElementwiseSplinePolarFootFinderMem< GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefFieldMem, TimeStepper >::GPUCompat =  ElementwiseSplinePolarFootFinder<
+            GridR,
+            GridTheta,
+            IdxRangeOperator,
+            SplineRThetaEvaluatorAdvection,
+            PseudoPhysicalToAdvectionMapping,
+            PseudoPhysicalToLogicalMapping,
+            LogicalToPseudoPhysicalMapping,
+            typename AdvecCoefFieldMem::view_type,
+            TimeStepper>;
 ```
 
 

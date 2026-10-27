@@ -92,7 +92,14 @@ _Selects_ [_**ElementwisePhysicalAdvPseudoPhysicalFootFinderMem**_](classpolar__
 
 _The selected elementwise operator type._ 
 ```C++
-using polar_foot_finder_details::ElementwiseChoice< FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping >::type =  ElementwisePhysicalAdvPseudoPhysicalFootFinderMem< GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping>;
+using polar_foot_finder_details::ElementwiseChoice< FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping >::type =  ElementwisePhysicalAdvPseudoPhysicalFootFinderMem<
+            GridR,
+            GridTheta,
+            IdxRangeOperator,
+            RThetaAdvectionEvaluator,
+            AdvecCoefField,
+            TimeStepperBuilder,
+            LogicalToPhysicalMapping>;
 ```
 
 

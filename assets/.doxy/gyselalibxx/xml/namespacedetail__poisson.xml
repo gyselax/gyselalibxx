@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespacedetail__poisson" kind="namespace" language="C++">
     <compoundname>detail_poisson</compoundname>
     <innerclass refid="structdetail__poisson_1_1TensorBSplineStash" prot="public">detail_poisson::TensorBSplineStash</innerclass>
@@ -194,7 +194,7 @@
             <type>class IdxQuad</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt;</type>
+        <type>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt;</type>
         <definition>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; detail_poisson::get_polar_bspline_vals_and_derivs</definition>
         <argsstring>(IdxQuad idx_quad, Idx&lt; PolarBSplinesRTheta &gt; idx)</argsstring>
         <name>get_polar_bspline_vals_and_derivs</name>

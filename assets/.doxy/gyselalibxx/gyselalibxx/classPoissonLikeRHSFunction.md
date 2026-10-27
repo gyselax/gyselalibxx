@@ -112,7 +112,16 @@ _Type of right-hand side (rhs) function of the Poisson equation._ [More...](#det
 
 _The type of the 2D Spline Evaluator used by this class._ 
 ```C++
-using PoissonLikeRHSFunction< RadialExtrapolationRule >::evaluator_type =  ddc::SplineEvaluatorND< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>, ddc::detail::TypeSeq<GridR, GridTheta>, ddc::detail::TypeSeq< RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule<Theta>, ddc::PeriodicExtrapolationRule<Theta> >>;
+using PoissonLikeRHSFunction< RadialExtrapolationRule >::evaluator_type =  ddc::SplineEvaluatorND<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+            ddc::detail::TypeSeq<GridR, GridTheta>,
+            ddc::detail::TypeSeq<
+                    RadialExtrapolationRule,
+                    RadialExtrapolationRule,
+                    ddc::PeriodicExtrapolationRule<Theta>,
+                    ddc::PeriodicExtrapolationRule<Theta>>>;
 ```
 
 

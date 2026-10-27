@@ -87,7 +87,7 @@ See [IPartialDerivative](classIPartialDerivative.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**CentralFDMPartialDerivative**](#function-centralfdmpartialderivative) (DConstFieldType const field\_ref) <br>_Construct an instance of the class_ [_**CentralFDMPartialDerivative**_](classCentralFDMPartialDerivative.md) _._ |
-| virtual void | [**operator()**](#function-operator) (DFieldType differentiated\_field) const<br>_Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see_ `./README.md` __ |
+| virtual void | [**operator()**](#function-operator) (DFieldType differentiated\_field) const<br>_Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see_ `./README.md` _._ |
 
 
 ## Public Functions inherited from IPartialDerivative
@@ -105,7 +105,7 @@ See [IPartialDerivative](classIPartialDerivative.md)
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_INLINE\_FUNCTION double | [**get\_derivative**](#function-get_derivative) (std::array&lt; Coord&lt; DerivativeDimension &gt;, 3 &gt; const & field\_positions, std::array&lt; double, 3 &gt; const & field\_values) <br>_Compute the partial derivative locally from the values at 3 known positions._  |
-|  constexpr int | [**n\_local\_points**](#function-n_local_points) () <br>_The number of points required to calculate the derivative locally._  |
+|  int | [**n\_local\_points**](#function-n_local_points) () <br>_The number of points required to calculate the derivative locally._  |
 
 
 
@@ -207,7 +207,7 @@ inline explicit CentralFDMPartialDerivative::CentralFDMPartialDerivative (
 
 ### function operator() 
 
-_Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see_ `./README.md` __
+_Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see_ `./README.md` _._
 ```C++
 inline virtual void CentralFDMPartialDerivative::operator() (
     DFieldType differentiated_field
@@ -276,7 +276,7 @@ The derivative at the central point.
 
 _The number of points required to calculate the derivative locally._ 
 ```C++
-static inline constexpr int CentralFDMPartialDerivative::n_local_points () 
+static inline int CentralFDMPartialDerivative::n_local_points () 
 ```
 
 

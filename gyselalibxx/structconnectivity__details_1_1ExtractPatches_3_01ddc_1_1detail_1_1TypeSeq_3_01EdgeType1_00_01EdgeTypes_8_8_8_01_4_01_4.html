@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -594,7 +600,9 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;::type =  ddc::type_seq_merge_t&lt; ddc::detail::TypeSeq&lt;typename EdgeType1::associated_patch&gt;, typename ExtractPatches&lt;ddc::detail::TypeSeq&lt;EdgeTypes...&gt; &gt;::type&gt;;
+<pre><code class="language-C++">using connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;::type =  ddc::type_seq_merge_t&lt;
+            ddc::detail::TypeSeq&lt;typename EdgeType1::associated_patch&gt;,
+            typename ExtractPatches&lt;ddc::detail::TypeSeq&lt;EdgeTypes...&gt;&gt;::type&gt;;
 </code></pre>
 <hr>
 

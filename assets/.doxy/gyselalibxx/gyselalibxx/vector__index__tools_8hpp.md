@@ -63,11 +63,11 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**has\_same\_variance\_v**](#variable-has_same_variance_v)   = `/* multi line expression */`<br>_A compile-time boolean to check if two VectorIndexSets have the same variance. In other words to check if both are covariant or both are contravariant._  |
-|  constexpr bool | [**is\_cartesian\_vector\_index\_set\_v**](#variable-is_cartesian_vector_index_set_v)   = `/* multi line expression */`<br>_A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent both covariant and contravariant indices and are therefore represent a Cartesian coordinate system._  |
-|  constexpr bool | [**is\_contravariant\_vector\_index\_set\_v**](#variable-is_contravariant_vector_index_set_v)   = `[**tensor\_tools::is\_contravariant\_vector\_index\_set**](structtensor__tools_1_1is__contravariant__vector__index__set.md)&lt;VectorIndexSet&gt;::value`<br>_A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent contravariant indices._  |
-|  constexpr bool | [**is\_covariant\_vector\_index\_set\_v**](#variable-is_covariant_vector_index_set_v)   = `[**tensor\_tools::is\_covariant\_vector\_index\_set**](structtensor__tools_1_1is__covariant__vector__index__set.md)&lt;VectorIndexSet&gt;::value`<br>_A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent covariant indices._  |
-|  constexpr bool | [**is\_vector\_index\_set\_v**](#variable-is_vector_index_set_v)   = `[**tensor\_tools::is\_vector\_index\_set**](structtensor__tools_1_1is__vector__index__set.md)&lt;Type&gt;::value`<br> |
+|  bool | [**has\_same\_variance\_v**](#variable-has_same_variance_v)   = `/* multi line expression */`<br>_A compile-time boolean to check if two VectorIndexSets have the same variance. In other words to check if both are covariant or both are contravariant._  |
+|  bool | [**is\_cartesian\_vector\_index\_set\_v**](#variable-is_cartesian_vector_index_set_v)   = `/* multi line expression */`<br>_A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent both covariant and contravariant indices and are therefore represent a Cartesian coordinate system._  |
+|  bool | [**is\_contravariant\_vector\_index\_set\_v**](#variable-is_contravariant_vector_index_set_v)   = `[**tensor\_tools::is\_contravariant\_vector\_index\_set**](structtensor__tools_1_1is__contravariant__vector__index__set.md)&lt;VectorIndexSet&gt;::value`<br>_A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent contravariant indices._  |
+|  bool | [**is\_covariant\_vector\_index\_set\_v**](#variable-is_covariant_vector_index_set_v)   = `[**tensor\_tools::is\_covariant\_vector\_index\_set**](structtensor__tools_1_1is__covariant__vector__index__set.md)&lt;VectorIndexSet&gt;::value`<br>_A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent covariant indices._  |
+|  bool | [**is\_vector\_index\_set\_v**](#variable-is_vector_index_set_v)   = `[**tensor\_tools::is\_vector\_index\_set**](structtensor__tools_1_1is__vector__index__set.md)&lt;Type&gt;::value`<br> |
 
 
 
@@ -132,7 +132,8 @@ using VectorIndexSet =  ddc::detail::TypeSeq<Dims...>;
 ### typedef get\_contravariant\_dims\_t 
 
 ```C++
-using get_contravariant_dims_t =  typename tensor_tools::GetContravariantDims<AnyVectorIndexSet>::type;
+using get_contravariant_dims_t = 
+        typename tensor_tools::GetContravariantDims<AnyVectorIndexSet>::type;
 ```
 
 
@@ -175,7 +176,7 @@ using vector_index_set_dual_t =  typename tensor_tools::vector_index_set_dual<Ve
 
 _A compile-time boolean to check if two VectorIndexSets have the same variance. In other words to check if both are covariant or both are contravariant._ 
 ```C++
-constexpr bool has_same_variance_v;
+bool has_same_variance_v;
 ```
 
 
@@ -189,7 +190,7 @@ constexpr bool has_same_variance_v;
 
 _A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent both covariant and contravariant indices and are therefore represent a Cartesian coordinate system._ 
 ```C++
-constexpr bool is_cartesian_vector_index_set_v;
+bool is_cartesian_vector_index_set_v;
 ```
 
 
@@ -203,7 +204,7 @@ constexpr bool is_cartesian_vector_index_set_v;
 
 _A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent contravariant indices._ 
 ```C++
-constexpr bool is_contravariant_vector_index_set_v;
+bool is_contravariant_vector_index_set_v;
 ```
 
 
@@ -217,7 +218,7 @@ constexpr bool is_contravariant_vector_index_set_v;
 
 _A compile-time boolean to check if all the dimensions in a VectorIndexSet can represent covariant indices._ 
 ```C++
-constexpr bool is_covariant_vector_index_set_v;
+bool is_covariant_vector_index_set_v;
 ```
 
 
@@ -230,7 +231,7 @@ constexpr bool is_covariant_vector_index_set_v;
 ### variable is\_vector\_index\_set\_v 
 
 ```C++
-constexpr bool is_vector_index_set_v;
+bool is_vector_index_set_v;
 ```
 
 

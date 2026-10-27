@@ -21,6 +21,7 @@
 
 enum class GkoMatrixResidualNorm { TWO, INF };
 
+
 template <class KokkosViewType>
 auto to_gko_multivector(
         std::shared_ptr<const gko::Executor> const& gko_exec,

@@ -104,7 +104,12 @@
 
 _Resolves to the 1D or 2D SplineInterpolator matching the given index ranges, using the default (LAPACK) spline solver backend._ 
 ```C++
-using SplineInterpolator =  typename detail::SplineInterpolatorResolver< ExecSpace, IdxRangeBasis, IdxRangeInterpGrid, ddc::SplineSolver::LAPACK, TailTags...>::type;
+using SplineInterpolator =  typename detail::SplineInterpolatorResolver<
+        ExecSpace,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        ddc::SplineSolver::LAPACK,
+        TailTags...>::type;
 ```
 
 
@@ -135,7 +140,12 @@ The resulting type is chosen by detail::SplineInterpolatorResolver based on the 
 
 _Resolves to the 1D or 2D SplineInterpolator matching the given index ranges, using an explicitly chosen spline solver backend._ 
 ```C++
-using SplineInterpolatorWSolver =  typename detail::SplineInterpolatorResolver< ExecSpace, IdxRangeBasis, IdxRangeInterpGrid, Solver, TailTags...>::type;
+using SplineInterpolatorWSolver =  typename detail::SplineInterpolatorResolver<
+        ExecSpace,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        Solver,
+        TailTags...>::type;
 ```
 
 

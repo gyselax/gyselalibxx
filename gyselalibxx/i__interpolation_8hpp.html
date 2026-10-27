@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -634,11 +640,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_lagrange_basis_v"><strong>is_lagrange_basis_v</strong></a>   = <code>is\_uniform\_lagrange\_basis\_v&amp;lt;Basis&amp;gt; \|\| is\_non\_uniform\_lagrange\_basis\_v&amp;lt;Basis&amp;gt;</code><br><em>A type trait that is true when Basis is a Lagrange basis type.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-is_spline_basis_v"><strong>is_spline_basis_v</strong></a>   = <code>ddc::is\_uniform\_bsplines\_v&amp;lt;Basis&amp;gt; \|\| ddc::is\_non\_uniform\_bsplines\_v&amp;lt;Basis&amp;gt;</code><br><em>A type trait that is true when Basis is a B-spline basis type.</em></td>
 </tr>
 </tbody>
@@ -646,7 +652,7 @@
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-is_lagrange_basis_v">variable is_lagrange_basis_v</h3>
 <p><em>A type trait that is true when Basis is a Lagrange basis type.</em> </p>
-<pre><code class="language-C++">constexpr bool is_lagrange_basis_v;
+<pre><code class="language-C++">bool is_lagrange_basis_v;
 </code></pre>
 <p>Evaluates to true for both <a href="classUniformLagrangeBasis.html"><strong>UniformLagrangeBasis</strong></a> and <a href="classNonUniformLagrangeBasis.html"><strong>NonUniformLagrangeBasis</strong></a> instantiations, false for all other types.</p>
 <p><strong>Template parameters:</strong></p>
@@ -657,7 +663,7 @@
 
 <h3 id="variable-is_spline_basis_v">variable is_spline_basis_v</h3>
 <p><em>A type trait that is true when Basis is a B-spline basis type.</em> </p>
-<pre><code class="language-C++">constexpr bool is_spline_basis_v;
+<pre><code class="language-C++">bool is_spline_basis_v;
 </code></pre>
 <p>Evaluates to true for both ddc::UniformBSplines and ddc::NonUniformBSplines instantiations, false for all other types.</p>
 <p><strong>Template parameters:</strong></p>

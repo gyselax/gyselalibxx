@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="lagrange__interpolation_8hpp" kind="file" language="C++">
     <compoundname>lagrange_interpolation.hpp</compoundname>
     <includes local="no">utility</includes>
@@ -422,7 +422,7 @@
       </node>
     </incdepgraph>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="lagrange__interpolation_8hpp_1ac1208e33aa55305e0431947cc29d4eee" prot="public" static="no">
+      <memberdef kind="typedef" id="lagrange__interpolation_8hpp_1affa798b8abac8ccc83f38b272820655b" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class ExecSpace</type>
@@ -443,18 +443,23 @@
           </param>
         </templateparamlist>
         <type>typename detail::LagrangeInterpolatorResolver&lt; ExecSpace, DataType, IdxRangeBasis, IdxRangeInterpGrid, ExtrapRules... &gt;::type</type>
-        <definition>using LagrangeInterpolator =  typename detail::LagrangeInterpolatorResolver&lt; ExecSpace, DataType, IdxRangeBasis, IdxRangeInterpGrid, ExtrapRules...&gt;::type</definition>
+        <definition>using LagrangeInterpolator =  typename detail::LagrangeInterpolatorResolver&lt;
+        ExecSpace,
+        DataType,
+        IdxRangeBasis,
+        IdxRangeInterpGrid,
+        ExtrapRules...&gt;::type</definition>
         <argsstring></argsstring>
         <name>LagrangeInterpolator</name>
         <briefdescription>
 <para>A helper alias to define an instance of detail::LagrangeInterpolator. </para>
         </briefdescription>
         <detaileddescription>
-<para>The helper allows ExtrapRules to be more general. It is a ddc::detail::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the <ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref> namespace (e.g. <ref refid="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" kindref="member">ExtrapolationRule::Periodic</ref>) or a custom, already-concrete extrapolation rule class. </para>
+<para>The helper allows ExtrapRules to be more general. It is a ddc::detail::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the <ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref> namespace (e.g. <ref refid="namespaceExtrapolationRule_1a74ee3ad52ef4fa4ed41e57dd16fa3393" kindref="member">ExtrapolationRule::Periodic</ref>) or a custom, already-concrete extrapolation rule class. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="487" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="492" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="487" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="487" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -495,7 +500,7 @@
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_lagrange_basis_v&lt;Basis&gt;);</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">BuilderType<sp/>=<sp/><ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>&lt;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">BuilderType<sp/>=<sp/>IdentityInterpolationBuilder&lt;</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
@@ -517,7 +522,7 @@
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;continuous_dimension_type&gt;&gt;);</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">EvaluatorType<sp/>=<sp/><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>&lt;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">EvaluatorType<sp/>=<sp/>LagrangeEvaluator&lt;</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
@@ -590,7 +595,7 @@
 <codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">DataType<sp/>=<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&gt;</highlight></codeline>
 <codeline lineno="206"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NDLagrangeInterpolator;</highlight></codeline>
 <codeline lineno="207"><highlight class="normal"></highlight></codeline>
-<codeline lineno="209"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Basis,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Grid1D,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ExtrapRules,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">DataType&gt;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Basis,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Grid1D,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ExtrapRules,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">DataType&gt;</highlight></codeline>
 <codeline lineno="210"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NDLagrangeInterpolator&lt;</highlight></codeline>
 <codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;Basis...&gt;,</highlight></codeline>
@@ -614,14 +619,14 @@
 <codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MaxRule<sp/>=<sp/>ddc::type_seq_element_t&lt;1,<sp/>Rule&gt;;</highlight></codeline>
 <codeline lineno="232"><highlight class="normal"></highlight></codeline>
 <codeline lineno="233"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">BuilderType<sp/>=<sp/><ref refid="classNDIdentityInterpolationBuilder" kindref="compound">NDIdentityInterpolationBuilder</ref>&lt;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">BuilderType<sp/>=<sp/>NDIdentityInterpolationBuilder&lt;</highlight></codeline>
 <codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>memory_space,</highlight></codeline>
 <codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
 <codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;Grid1D...&gt;,</highlight></codeline>
 <codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;Basis...&gt;&gt;;</highlight></codeline>
 <codeline lineno="241"><highlight class="normal"></highlight></codeline>
-<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">EvaluatorType<sp/>=<sp/><ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref>&lt;<ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>&lt;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">EvaluatorType<sp/>=<sp/>NDLagrangeEvaluator&lt;LagrangeEvaluator&lt;</highlight></codeline>
 <codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>memory_space,</highlight></codeline>
 <codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
@@ -675,7 +680,7 @@
 <codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoeffGrid&lt;Basis&gt;,</highlight></codeline>
 <codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
 <codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Basis&gt;<sp/>&amp;&amp;<sp/>...))</highlight></codeline>
-<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_evaluator(<ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>&lt;</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_evaluator(LagrangeEvaluator&lt;</highlight></codeline>
 <codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>memory_space,</highlight></codeline>
 <codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
@@ -701,7 +706,7 @@
 <codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>NDLagrangeInterpolator(</highlight></codeline>
 <codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;Grid1D...&gt;<sp/>idx_range,</highlight></codeline>
 <codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::pair&lt;MinRule&lt;ExtrapRules&gt;,<sp/>MaxRule&lt;ExtrapRules&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>extrapolation_rules)</highlight></codeline>
-<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_evaluator(<ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>&lt;</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_evaluator(LagrangeEvaluator&lt;</highlight></codeline>
 <codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>memory_space,</highlight></codeline>
 <codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
@@ -749,7 +754,7 @@
 <codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtrapRules,</highlight></codeline>
 <codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
 <codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Basis,</highlight></codeline>
-<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>&lt;</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdentityInterpolationBuilder&lt;</highlight></codeline>
 <codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="418"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
 <codeline lineno="419"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
@@ -784,7 +789,7 @@
 <codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtrapRulesHead,</highlight></codeline>
 <codeline lineno="449"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
 <codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BasisHead,</highlight></codeline>
-<codeline lineno="451"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classNDIdentityInterpolationBuilder" kindref="compound">NDIdentityInterpolationBuilder</ref>&lt;</highlight></codeline>
+<codeline lineno="451"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>NDIdentityInterpolationBuilder&lt;</highlight></codeline>
 <codeline lineno="452"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="453"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
 <codeline lineno="454"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
@@ -794,7 +799,7 @@
 <codeline lineno="458"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtrapRules,</highlight></codeline>
 <codeline lineno="459"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>
 <codeline lineno="460"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Basis,</highlight></codeline>
-<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classNDIdentityInterpolationBuilder" kindref="compound">NDIdentityInterpolationBuilder</ref>&lt;</highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>NDIdentityInterpolationBuilder&lt;</highlight></codeline>
 <codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
 <codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
 <codeline lineno="464"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>

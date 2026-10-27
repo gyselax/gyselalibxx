@@ -1,11 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespaceSplineBoundaryClosure" kind="namespace" language="C++">
     <compoundname>SplineBoundaryClosure</compoundname>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1a1967a7e5340b57d5c529b428761b6611" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1ab56960953ca4d875820e4447f5f6cf81" prot="public" static="no">
         <type><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC &gt;</type>
-        <definition>using SplineBoundaryClosure::Periodic = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC&gt;</definition>
+        <definition>using SplineBoundaryClosure::Periodic =  SplineBoundaryClosures&lt;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC&gt;</definition>
         <argsstring></argsstring>
         <name>Periodic</name>
         <qualifiedname>SplineBoundaryClosure::Periodic</qualifiedname>
@@ -16,11 +18,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="28" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="30" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="28" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1a14035a231e1e52d0d9b93994004a1df3" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1af68aeb9f3a145f63ccb8340217909c5a" prot="public" static="no">
         <type><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE &gt;</type>
-        <definition>using SplineBoundaryClosure::Greville_Greville = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE&gt;</definition>
+        <definition>using SplineBoundaryClosure::Greville_Greville =  SplineBoundaryClosures&lt;
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE&gt;</definition>
         <argsstring></argsstring>
         <name>Greville_Greville</name>
         <qualifiedname>SplineBoundaryClosure::Greville_Greville</qualifiedname>
@@ -31,11 +35,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="33" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1a5a301ac5ad662b23e4dde2e0f65006d8" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1ab7ba093b0abba0ae19218c649e65fdc6" prot="public" static="no">
         <type><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE &gt;</type>
-        <definition>using SplineBoundaryClosure::Hermite_Hermite = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE&gt;</definition>
+        <definition>using SplineBoundaryClosure::Hermite_Hermite =  SplineBoundaryClosures&lt;
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE&gt;</definition>
         <argsstring></argsstring>
         <name>Hermite_Hermite</name>
         <qualifiedname>SplineBoundaryClosure::Hermite_Hermite</qualifiedname>
@@ -46,11 +52,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="40" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1adf25d9efa737ba2cb8fee34460c127ef" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1ac2cb9725f226383156bc8bc564592f5e" prot="public" static="no">
         <type><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE, ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE &gt;</type>
-        <definition>using SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite = typedef SplineBoundaryClosures&lt; ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE, ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE&gt;</definition>
+        <definition>using SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite =  SplineBoundaryClosures&lt;
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE&gt;</definition>
         <argsstring></argsstring>
         <name>HomogeneousHermite_HomogeneousHermite</name>
         <qualifiedname>SplineBoundaryClosure::HomogeneousHermite_HomogeneousHermite</qualifiedname>
@@ -61,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="44" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="46" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="44" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

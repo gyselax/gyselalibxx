@@ -92,7 +92,10 @@ _Specialisation of_ [_**SelectRelevantIdxRangeType**_](structconnectivity__detai
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::SelectRelevantIdxRangeType< QueryGrid1D, IdxRange< IdxRangeGrids... > >::type =  std::conditional_t< ddc::in_tags_v<QueryGrid1D, ddc::detail::TypeSeq<IdxRangeGrids...> >, ddc::detail::TypeSeq<IdxRange<IdxRangeGrids...> >, ddc::detail::TypeSeq<> >;
+using connectivity_details::SelectRelevantIdxRangeType< QueryGrid1D, IdxRange< IdxRangeGrids... > >::type =  std::conditional_t<
+            ddc::in_tags_v<QueryGrid1D, ddc::detail::TypeSeq<IdxRangeGrids...>>,
+            ddc::detail::TypeSeq<IdxRange<IdxRangeGrids...>>,
+            ddc::detail::TypeSeq<>>;
 ```
 
 

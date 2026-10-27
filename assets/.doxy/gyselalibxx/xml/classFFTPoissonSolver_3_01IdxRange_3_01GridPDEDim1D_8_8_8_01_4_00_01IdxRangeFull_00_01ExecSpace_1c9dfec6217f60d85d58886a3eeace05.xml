@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05" kind="class" language="C++" prot="public">
     <compoundname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</compoundname>
     <basecompoundref refid="classIPoissonSolver" prot="public" virt="non-virtual">IPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, DataType, ExecSpace::memory_space, LayoutSpace &gt;</basecompoundref>
@@ -25,9 +25,14 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab61024e1de86010f92daf28a46876b9a" prot="private" static="no">
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a688a324750c9f4194a5981985490eee3" prot="private" static="no">
         <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, DataType, typename ExecSpace::memory_space, LayoutSpace &gt;</type>
-        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::base_type =  IPoissonSolver&lt; IdxRange&lt;GridPDEDim1D...&gt;, IdxRangeFull, DataType, typename ExecSpace::memory_space, LayoutSpace&gt;</definition>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::base_type =  IPoissonSolver&lt;
+            IdxRange&lt;GridPDEDim1D...&gt;,
+            IdxRangeFull,
+            DataType,
+            typename ExecSpace::memory_space,
+            LayoutSpace&gt;</definition>
         <argsstring></argsstring>
         <name>base_type</name>
         <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::base_type</qualifiedname>
@@ -37,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="55" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -162,7 +167,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a84950390da2b18e834edaa5f972d941e" prot="public" static="no">
-        <type>IdxRange&lt; GridFourier&lt; typename GridPDEDim1D::continuous_dimension_type &gt;... &gt;</type>
+        <type>IdxRange&lt; <ref refid="structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8" kindref="compound">GridFourier</ref>&lt; typename GridPDEDim1D::continuous_dimension_type &gt;... &gt;</type>
         <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_idx_range_type =  IdxRange&lt;GridFourier&lt;typename GridPDEDim1D::continuous_dimension_type&gt;...&gt;</definition>
         <argsstring></argsstring>
         <name>fourier_idx_range_type</name>
@@ -174,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="92" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8259a46f7cc09d933b0bfdffdd0181a8" prot="public" static="no">
         <type>typename fourier_idx_range_type::discrete_element_type</type>
@@ -189,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="94" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ae76ab2b968dc0f2e4fee27b9b494821e" prot="public" static="no">
         <type>FieldMem&lt; Kokkos::complex&lt; DataType &gt;, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a84950390da2b18e834edaa5f972d941e" kindref="member">fourier_idx_range_type</ref>, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" kindref="member">memory_space</ref> &gt;</type>
@@ -204,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="98" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="96" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" prot="public" static="no">
         <type>typename fourier_field_mem_type::span_type</type>
@@ -219,13 +224,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="100" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="98" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
       <memberdef kind="variable" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a2b6a386dd0eebfb48a7acfcbb794e8e8" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr ddc::FFT_Normalization</type>
-        <definition>constexpr ddc::FFT_Normalization FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::m_norm</definition>
+        <type>ddc::FFT_Normalization</type>
+        <definition>ddc::FFT_Normalization FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::m_norm</definition>
         <argsstring></argsstring>
         <name>m_norm</name>
         <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::m_norm</qualifiedname>
@@ -237,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="104" column="45" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="104" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="102" column="45" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -275,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="114" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="114" bodyend="119"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="112" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="112" bodyend="117"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -344,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="132" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="132" bodyend="144"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="130" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="130" bodyend="142"/>
       </memberdef>
       <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69160e34a2349192829843c4c75d55a8" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -397,7 +402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="153" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="153" bodyend="163"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="151" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="151" bodyend="161"/>
       </memberdef>
       <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1aca6044e50df8facb6c4a1c47b398888c" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -457,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="173" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="173" bodyend="186"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="171" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="171" bodyend="184"/>
       </memberdef>
       <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab913352a4adb796daf364d898cb47993" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -480,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="189" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="189" bodyend="193"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="187" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="187" bodyend="191"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -528,7 +533,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="204" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="204" bodyend="227"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="202" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="202" bodyend="225"/>
       </memberdef>
       <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3a6cacb771958ebb2a476c7dc9a83dc7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -583,7 +588,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="239" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="239" bodyend="252"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="237" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="237" bodyend="250"/>
       </memberdef>
       <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ad7226b3b5d3048798471a03309f3bef9" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -612,7 +617,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="262" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="262" bodyend="265"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="260" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="260" bodyend="263"/>
       </memberdef>
       <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a08d65e6a86a27a3868c011c5228fd5db" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
         <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kindref="member">field_type</ref></type>
@@ -655,7 +660,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="276" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="276" bodyend="304"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="274" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="274" bodyend="302"/>
       </memberdef>
       <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab1df382591495ba2e891e9919ceda487" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
         <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kindref="member">field_type</ref></type>
@@ -710,7 +715,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="318" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="318" bodyend="351"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="316" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="316" bodyend="349"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -786,7 +791,7 @@
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="46" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="53" bodyend="352"/>
     <listofallmembers>
-      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab61024e1de86010f92daf28a46876b9a" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>base_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a688a324750c9f4194a5981985490eee3" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>base_type</name></member>
       <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab899291c2c8912ae076a8ae890875068" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>batch_idx_range_type</name></member>
       <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a623c8f00032d066a67beed88195b2762" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>batch_index_type</name></member>
       <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a9f3372ba0facbbdf5a3e93b176aa0670" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>const_field_type</name></member>

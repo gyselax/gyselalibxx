@@ -59,7 +59,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**Impl**](#function-impl-23) ([**Impl**](classMoments_1_1Impl.md)&lt; Grid1D, OMemorySpace &gt; const & impl) <br>_Conversion constructor between different memory spaces._  |
+|   | [**Impl**](#function-impl-23) (Impl&lt; Grid1D, OMemorySpace &gt; const & impl) <br>_Conversion constructor between different memory spaces._  |
 |   | [**Impl**](#function-impl-33) () <br>_Main constructor._  |
 
 
@@ -116,7 +116,7 @@ _Conversion constructor between different memory spaces._
 ```C++
 template<class OMemorySpace>
 inline explicit Moments::Impl::Impl (
-    Impl < Grid1D, OMemorySpace > const & impl
+    Impl< Grid1D, OMemorySpace > const & impl
 ) 
 ```
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="constant__partial__derivatives_8hpp" kind="file" language="C++">
     <compoundname>constant_partial_derivatives.hpp</compoundname>
     <includes local="no">memory</includes>
@@ -84,10 +84,10 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ipartial_derivative.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeFull,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DerivativeDimension&gt;</highlight></codeline>
-<codeline lineno="17" refid="classConstantPartialDerivative" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classConstantPartialDerivative" kindref="compound">ConstantPartialDerivative</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt;IdxRangeFull,<sp/>DerivativeDimension&gt;</highlight></codeline>
+<codeline lineno="17" refid="classConstantPartialDerivative" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classConstantPartialDerivative_1ae97e955a695b5bf344398fcb2bcf9726" kindref="member">ConstantPartialDerivative</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt;IdxRangeFull,<sp/>DerivativeDimension&gt;</highlight></codeline>
 <codeline lineno="18"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative" kindref="compound">base_type</ref><sp/>=<sp/><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;</ref>;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">base_type<sp/>=<sp/><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;</ref>;</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">base_type::DFieldType</ref>;</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
@@ -104,7 +104,7 @@
 <codeline lineno="46"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeFull,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DerivativeDimension&gt;</highlight></codeline>
-<codeline lineno="57" refid="classConstantPartialDerivativeCreator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classConstantPartialDerivativeCreator" kindref="compound">ConstantPartialDerivativeCreator</ref></highlight></codeline>
+<codeline lineno="57" refid="classConstantPartialDerivativeCreator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classConstantPartialDerivativeCreator_1a6021c28edc48bc8432f0c257c87d9604" kindref="member">ConstantPartialDerivativeCreator</ref></highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivativeCreator" kindref="compound">IPartialDerivativeCreator</ref>&lt;IdxRangeFull,<sp/>DerivativeDimension&gt;</highlight></codeline>
 <codeline lineno="59"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>

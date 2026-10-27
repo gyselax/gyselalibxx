@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="collisions__intra_8hpp" kind="file" language="C++">
     <compoundname>collisions_intra.hpp</compoundname>
     <includes local="no">cassert</includes>
@@ -250,7 +250,7 @@
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;quadrature.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="trapezoid__quadrature_8hpp" kindref="compound">trapezoid_quadrature.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="classCollisionsIntra" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCollisionsIntra" kindref="compound">CollisionsIntra</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIRightHandSide" kindref="compound">IRightHandSide</ref></highlight></codeline>
+<codeline lineno="38" refid="classCollisionsIntra" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCollisionsIntra_1addf7a93d3bbdc450236e56d71609c10b" kindref="member">CollisionsIntra</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIRightHandSide" kindref="compound">IRightHandSide</ref></highlight></codeline>
 <codeline lineno="39"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>uniform_edge_v<sp/>=<sp/>ddc::is_uniform_point_sampling_v&lt;GridVx&gt;;</highlight></codeline>
@@ -315,7 +315,7 @@
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsIntra_1aa8de0dc7f09923428fa8ef0e30aeef1e" kindref="member">IdxRangeSpXVx_ghosted_staggered</ref><sp/>m_mesh_ghosted_staggered;</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"></highlight></codeline>
 <codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsIntra" kindref="compound">CollisionsIntra</ref>(IdxRangeSpXVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mesh,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>nustar0);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsIntra_1addf7a93d3bbdc450236e56d71609c10b" kindref="member">CollisionsIntra</ref>(IdxRangeSpXVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mesh,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>nustar0);</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"></highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/><ref refid="classCollisionsIntra_1ad066a79f6c0a9dcf3720dbfc5e9056e0" kindref="member">operator()</ref>(DFieldSpXVx<sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="149"><highlight class="normal"></highlight></codeline>

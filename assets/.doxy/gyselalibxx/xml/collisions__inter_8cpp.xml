@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="collisions__inter_8cpp" kind="file" language="C++">
     <compoundname>collisions_inter.cpp</compoundname>
     <includes local="no">iomanip</includes>
@@ -531,7 +531,7 @@
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>idx_range_vx(get_idx_range&lt;GridVx&gt;(allfdistribu));</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemVx<sp/>quadrature_coeffs_alloc(</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>trapezoid_quadrature_coefficients&lt;Kokkos::DefaultExecutionSpace&gt;(idx_range_vx));</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trapezoid__quadrature_8hpp_1a2e9e7d21b2da01a44fb6d6399a13fa0e" kindref="member">trapezoid_quadrature_coefficients&lt;Kokkos::DefaultExecutionSpace&gt;</ref>(idx_range_vx));</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldVx<sp/>quadrature_coeffs<sp/>=<sp/>get_field(quadrature_coeffs_alloc);</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Moments<sp/>computation</highlight><highlight class="normal"></highlight></codeline>
@@ -626,7 +626,7 @@
 <codeline lineno="139"><highlight class="normal">DFieldSpXVx<sp/><ref refid="classCollisionsInter_1a1f8104eb5930b71b25856a0640c534bf" kindref="member">CollisionsInter::operator()</ref>(DFieldSpXVx<sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="140"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::ScopedRegion<sp/>region(</highlight><highlight class="stringliteral">&quot;(GSLX)<sp/>CollisionsInter&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classRK2" kindref="compound">RK2&lt;DFieldMemSpXVx&gt;</ref><sp/>timestepper(get_idx_range(allfdistribu));</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>RK2&lt;DFieldMemSpXVx&gt;<sp/>timestepper(get_idx_range(allfdistribu));</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"></highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>timestepper.update(allfdistribu,<sp/>dt,<sp/>[&amp;](DFieldSpXVx<sp/>dy,<sp/>DConstFieldSpXVx<sp/>y)<sp/>{</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCollisionsInter_1a5c4799a989c55fd97e6572a1ee1dab3b" kindref="member">get_derivative</ref>(dy,<sp/>y);</highlight></codeline>

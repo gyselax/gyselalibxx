@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -624,7 +630,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a href="#variable-dimensions_are_adjacent_v"><strong>dimensions_are_adjacent_v</strong></a>   = <code>detail::DimensionsAreAdjacent&amp;lt;Query, ContainerTypeSeq&amp;gt;::value</code><br><em>A helper constant to determine if a set of types found within a TypeSeq are adjacent to one another.</em></td>
 </tr>
 </tbody>
@@ -647,7 +653,10 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-insert_into_seq_before_t">typedef insert_into_seq_before_t</h3>
 <p><em>A tool to insert a tag into an existing TypeSeq immediately preceding an existing subset of tags.</em> </p>
-<pre><code class="language-C++">using insert_into_seq_before_t =  typename detail::InsertIntoTypeSeq&lt; TagToInsert, ddc::type_seq_rank_v&lt;ddc::type_seq_element_t&lt;0, SubSeq&gt;, TypeSeq&gt;, TypeSeq&gt;::type;
+<pre><code class="language-C++">using insert_into_seq_before_t =  typename detail::InsertIntoTypeSeq&lt;
+        TagToInsert,
+        ddc::type_seq_rank_v&lt;ddc::type_seq_element_t&lt;0, SubSeq&gt;, TypeSeq&gt;,
+        TypeSeq&gt;::type;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -684,7 +693,7 @@
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-dimensions_are_adjacent_v">variable dimensions_are_adjacent_v</h3>
 <p><em>A helper constant to determine if a set of types found within a TypeSeq are adjacent to one another.</em> </p>
-<pre><code class="language-C++">constexpr bool dimensions_are_adjacent_v;
+<pre><code class="language-C++">bool dimensions_are_adjacent_v;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>

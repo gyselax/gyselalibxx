@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classMetricTensorEvaluator" kind="class" language="C++" prot="public">
     <compoundname>MetricTensorEvaluator</compoundname>
     <includes refid="metric__tensor__evaluator_8hpp" local="no">metric_tensor_evaluator.hpp</includes>
@@ -46,7 +46,7 @@
     </sectiondef>
     <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classMetricTensorEvaluator_1a7ca6db7787f9a6522e0123f7b00381eb" prot="public" static="no">
-        <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims &gt;</type>
+        <type>DTensor&lt; Dims &gt;</type>
         <definition>using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::ContravariantVectorType =  DTensor&lt;Dims&gt;</definition>
         <argsstring></argsstring>
         <name>ContravariantVectorType</name>
@@ -60,9 +60,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="118" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classMetricTensorEvaluator_1a963a1d9b3ed9d5fea6fff6f19a9c0ba2" prot="public" static="no">
-        <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; vector_index_set_dual_t&lt; Dims &gt; &gt;</type>
-        <definition>using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::CovariantVectorType =  DTensor&lt;vector_index_set_dual_t&lt;Dims&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classMetricTensorEvaluator_1ad1c52e52c3903d8dcb586538fac5fb00" prot="public" static="no">
+        <type>DTensor&lt; vector_index_set_dual_t&lt; Dims &gt; &gt;</type>
+        <definition>using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::CovariantVectorType =  DTensor&lt;vector_index_set_dual_t&lt;Dims&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>CovariantVectorType</name>
         <qualifiedname>MetricTensorEvaluator::CovariantVectorType</qualifiedname>
@@ -138,7 +138,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="135" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="135" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="classMetricTensorEvaluator_1a340cea71092ad4f6f6eace344b833fa2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims_cov, Dims_cov &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::operator()</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>operator()</name>
@@ -170,7 +170,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="149" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="149" bodyend="153"/>
       </memberdef>
       <memberdef kind="function" id="classMetricTensorEvaluator_1a54cce1e06b68c8dc7e3908ef71613b9c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims, Dims &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt; MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::inverse</definition>
         <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>inverse</name>
@@ -208,7 +208,7 @@
             <defname>IdxType</defname>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims_cov, Dims_cov &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::operator()</definition>
         <argsstring>(IdxType const &amp;idx) const</argsstring>
         <name>operator()</name>
@@ -217,7 +217,7 @@
           <type>IdxType const &amp;</type>
           <declname>idx</declname>
         </param>
-    <requiresclause>(std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, CoordArg&gt;)    </requiresclause>
+    <requiresclause>(std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, <ref refid="classMetricTensorEvaluator_1ab6d658a3c74587b141cedac1740711ec" kindref="member">CoordArg</ref>&gt;)    </requiresclause>
         <briefdescription>
 <para>Compute the metric tensor associated with the mapping at the coordinate of an index. </para>
         </briefdescription>
@@ -247,7 +247,7 @@
             <defname>IdxType</defname>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims, Dims &gt;</type>
+        <type>KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt;</type>
         <definition>KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt; MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::inverse</definition>
         <argsstring>(IdxType const &amp;idx) const</argsstring>
         <name>inverse</name>
@@ -256,7 +256,7 @@
           <type>IdxType const &amp;</type>
           <declname>idx</declname>
         </param>
-    <requiresclause>(std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, CoordArg&gt;)    </requiresclause>
+    <requiresclause>(std::is_same_v&lt;ddc::coordinate_of_t&lt;IdxType&gt;, <ref refid="classMetricTensorEvaluator_1ab6d658a3c74587b141cedac1740711ec" kindref="member">CoordArg</ref>&gt;)    </requiresclause>
         <briefdescription>
 <para>Compute the inverse metric tensor associated with the mapping at the coordinate of an index. </para>
         </briefdescription>
@@ -306,7 +306,7 @@
     <listofallmembers>
       <member refid="classMetricTensorEvaluator_1a7ca6db7787f9a6522e0123f7b00381eb" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>ContravariantVectorType</name></member>
       <member refid="classMetricTensorEvaluator_1ab6d658a3c74587b141cedac1740711ec" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>CoordArg</name></member>
-      <member refid="classMetricTensorEvaluator_1a963a1d9b3ed9d5fea6fff6f19a9c0ba2" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>CovariantVectorType</name></member>
+      <member refid="classMetricTensorEvaluator_1ad1c52e52c3903d8dcb586538fac5fb00" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>CovariantVectorType</name></member>
       <member refid="classMetricTensorEvaluator_1ad692758b51be7349b111b62c9fe8f1c1" prot="private" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>Dims</name></member>
       <member refid="classMetricTensorEvaluator_1a40f45a1ab0cabb31398ed494efb20e14" prot="private" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>Dims_cov</name></member>
       <member refid="classMetricTensorEvaluator_1a54cce1e06b68c8dc7e3908ef71613b9c" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>inverse</name></member>

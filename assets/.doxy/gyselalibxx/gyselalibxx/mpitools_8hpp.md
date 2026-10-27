@@ -49,7 +49,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**dimensions\_are\_adjacent\_v**](#variable-dimensions_are_adjacent_v)   = `detail::DimensionsAreAdjacent&lt;Query, ContainerTypeSeq&gt;::value`<br>_A helper constant to determine if a set of types found within a TypeSeq are adjacent to one another._  |
+|  bool | [**dimensions\_are\_adjacent\_v**](#variable-dimensions_are_adjacent_v)   = `detail::DimensionsAreAdjacent&lt;Query, ContainerTypeSeq&gt;::value`<br>_A helper constant to determine if a set of types found within a TypeSeq are adjacent to one another._  |
 
 
 ## Public Static Attributes
@@ -108,7 +108,10 @@
 
 _A tool to insert a tag into an existing TypeSeq immediately preceding an existing subset of tags._ 
 ```C++
-using insert_into_seq_before_t =  typename detail::InsertIntoTypeSeq< TagToInsert, ddc::type_seq_rank_v<ddc::type_seq_element_t<0, SubSeq>, TypeSeq>, TypeSeq>::type;
+using insert_into_seq_before_t =  typename detail::InsertIntoTypeSeq<
+        TagToInsert,
+        ddc::type_seq_rank_v<ddc::type_seq_element_t<0, SubSeq>, TypeSeq>,
+        TypeSeq>::type;
 ```
 
 
@@ -196,7 +199,7 @@ E.g. if MPI&lt;Phi&gt; is inserted into &lt;[**R**](structR.md), [**Theta**](str
 
 _A helper constant to determine if a set of types found within a TypeSeq are adjacent to one another._ 
 ```C++
-constexpr bool dimensions_are_adjacent_v;
+bool dimensions_are_adjacent_v;
 ```
 
 

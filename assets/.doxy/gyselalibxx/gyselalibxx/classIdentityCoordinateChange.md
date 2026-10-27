@@ -64,10 +64,10 @@ _A class describing an identity transformation._ [More...](#detailed-description
 |  KOKKOS\_INLINE\_FUNCTION [**IdentityCoordinateChange**](classIdentityCoordinateChange.md)&lt; ResultBasis, ArgBasis &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian**](#function-inv_jacobian) ([**CoordArg**](classIdentityCoordinateChange.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) ([**CoordArg**](classIdentityCoordinateChange.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; ResultBasis, ArgBasisCov &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) ([**CoordArg**](classIdentityCoordinateChange.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) ([**CoordArg**](classIdentityCoordinateChange.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordArg**](classIdentityCoordinateChange.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordArg**](classIdentityCoordinateChange.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; ResultBasis, ArgBasisCov &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classIdentityCoordinateChange.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classIdentityCoordinateChange.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**CoordResult**](classIdentityCoordinateChange.md#typedef-coordresult) | [**operator()**](#function-operator) (Coord&lt; ArgDims... &gt; const & coord) const<br>_Convert the coordinate in the argument basis to the equivalent coordinate in the result basis._  |
 
 
@@ -262,7 +262,7 @@ A double with the value of the (i,j) coefficient of the Jacobian matrix.
 
 _Compute full Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < ResultBasis, ArgBasisCov > IdentityCoordinateChange::inv_jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< ResultBasis, ArgBasisCov > IdentityCoordinateChange::inv_jacobian_matrix (
     CoordArg const & coord
 ) const
 ```
@@ -365,7 +365,7 @@ A double with the value of the (i,j) coefficient of the Jacobian matrix.
 
 _Compute full Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < ResultBasis, ArgBasisCov > IdentityCoordinateChange::jacobian_matrix (
+inline KOKKOS_FUNCTION DTensor< ResultBasis, ArgBasisCov > IdentityCoordinateChange::jacobian_matrix (
     CoordArg const & coord
 ) const
 ```

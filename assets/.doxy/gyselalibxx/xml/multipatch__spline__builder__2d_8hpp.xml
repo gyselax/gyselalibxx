@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="multipatch__spline__builder__2d_8hpp" kind="file" language="C++">
     <compoundname>multipatch_spline_builder_2d.hpp</compoundname>
     <includes local="no">cassert</includes>
@@ -308,7 +308,7 @@
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ValuesOnPatch,</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
-<codeline lineno="65" refid="classMultipatchSplineBuilder2D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMultipatchSplineBuilder2D" kindref="compound">MultipatchSplineBuilder2D</ref></highlight></codeline>
+<codeline lineno="65" refid="classMultipatchSplineBuilder2D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMultipatchSplineBuilder2D_1a8e1c693d015b942fb6929c1b0d86400a" kindref="member">MultipatchSplineBuilder2D</ref></highlight></codeline>
 <codeline lineno="66"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(((ddc::is_uniform_bsplines_v&lt;BSpline1OnPatch&lt;Patches&gt;&gt;)</highlight></codeline>
@@ -409,7 +409,7 @@
 <codeline lineno="172"><highlight class="normal"></highlight></codeline>
 <codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MultipatchSplineCoeffs<sp/>=<sp/>MultipatchField&lt;SplineOnPatch,<sp/>Patches...&gt;;</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"></highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>For<sp/>PERIODIC<sp/>or<sp/>GREVILLE<sp/>boundary<sp/>conditions</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>For<sp/>PERIODIC<sp/>or<sp/>GREVILLE<sp/>boundary<sp/>conditions</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MultipatchValues<sp/>=<sp/>MultipatchField&lt;ValuesOnPatch,<sp/>Patches...&gt;;</highlight></codeline>
 <codeline lineno="179"><highlight class="normal"></highlight></codeline>
 <codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MultipatchDerivs1<sp/>=<sp/>MultipatchField&lt;Derivs1OnPatch,<sp/>Patches...&gt;;</highlight></codeline>

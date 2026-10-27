@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -586,7 +592,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1AddToTypeSeq.html"><strong>AddToTypeSeq</strong></a>&lt; typename StartEdge::perpendicular_grid, FoundGrids, insert_pos &gt;::type</td>
+<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1AddToTypeSeq.html"><strong>AddToTypeSeq</strong></a>&lt; typename StartEdge::perpendicular_grid, FoundGrids, insert_pos &gt;:: <a href="structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01ins70deef724c6e45ed62db534c3d9697ec.html#typedef-type"><strong>type</strong></a></td>
 <td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The type found by the class.</em></td>
 </tr>
 </tbody>
@@ -594,7 +600,9 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::CollectGridsAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, OutsideEdge, false &gt;::type =  typename AddToTypeSeq&lt;typename StartEdge::perpendicular_grid, FoundGrids, insert_pos&gt;:: type;
+<pre><code class="language-C++">using connectivity_details::CollectGridsAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, OutsideEdge, false &gt;::type = 
+            typename AddToTypeSeq&lt;typename StartEdge::perpendicular_grid, FoundGrids, insert_pos&gt;::
+                    type;
 </code></pre>
 <hr>
 

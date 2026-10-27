@@ -344,6 +344,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -689,7 +695,14 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-collisionconfigurationdatatype">typedef CollisionConfigurationDataType</h3>
 <p><em>Container for the operator input data.</em> </p>
-<pre><code class="language-C++">using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::CollisionConfigurationDataType =  detail::CollisionConfigurationData&lt; IdxRangeDistributionFunctionType, GridSpType, GridPhiType, GridRType, GridThetaType, GridVparType, GridMuType&gt;;
+<pre><code class="language-C++">using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::CollisionConfigurationDataType =  detail::CollisionConfigurationData&lt;
+            IdxRangeDistributionFunctionType,
+            GridSpType,
+            GridPhiType,
+            GridRType,
+            GridThetaType,
+            GridVparType,
+            GridMuType&gt;;
 </code></pre>
 <hr>
 
@@ -780,7 +793,7 @@
 <pre><code class="language-C++">inline const CollisionConfigurationDataType &amp; CollisionConfiguration::configuration () const
 </code></pre>
 <p><strong>Returns:</strong></p>
-<p>const CollisionConfigurationDataType&amp; </p>
+<p>const <a href="classCollisionConfiguration.html#typedef-collisionconfigurationdatatype"><strong>CollisionConfigurationDataType</strong></a>&amp; </p>
 <hr>
 <h2 id="protected-attributes-documentation">Protected Attributes Documentation</h2>
 <h3 id="variable-m_nustar0">variable m_nustar0</h3>

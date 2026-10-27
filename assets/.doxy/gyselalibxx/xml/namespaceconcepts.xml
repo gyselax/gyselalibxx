@@ -1,7 +1,24 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespaceconcepts" kind="namespace" language="C++">
     <compoundname>concepts</compoundname>
+    <innerconcept refid="conceptconcepts_1_1Mapping">concepts::Mapping</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1JacobianMatrix">concepts::JacobianMatrix</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1InvJacobianMatrix">concepts::InvJacobianMatrix</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1MappingWithJacobian">concepts::MappingWithJacobian</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1MappingWithInvJacobian">concepts::MappingWithInvJacobian</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1MappingWithIntegrationCoord">concepts::MappingWithIntegrationCoord</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1AnalyticalMapping">concepts::AnalyticalMapping</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1MetricTensor">concepts::MetricTensor</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1Interpolation">concepts::Interpolation</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1Interpolation1D">concepts::Interpolation1D</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1InterpolationBuilder">concepts::InterpolationBuilder</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1InterpolationBuilder1D">concepts::InterpolationBuilder1D</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1InterpolationEvaluator">concepts::InterpolationEvaluator</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1LocalPartialDerivative">concepts::LocalPartialDerivative</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1LocalPartialDerivativeCreator">concepts::LocalPartialDerivativeCreator</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1CompatibleFunc">concepts::CompatibleFunc</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1CoordOrIdx">concepts::CoordOrIdx</innerconcept>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

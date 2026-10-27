@@ -55,7 +55,7 @@ _Operator to calculate the gradient of a function._ [More...](#detailed-descript
 | Type | Name |
 | ---: | :--- |
 |   | [**GradientCreator**](#function-gradientcreator) ([**IPartialDerivativeCreator**](classIPartialDerivativeCreator.md)&lt; IdxRangeFull, DerivativeDims &gt; const &... partial\_derivative\_operator) <br>_Create a_ [_**GradientCreator**_](classGradientCreator.md) _._ |
-|  void | [**operator()**](#function-operator) ([**DVectorField**](classVectorField.md)&lt; IdxRangeFull, get\_covariant\_dims\_t&lt; VectorIndexSet&lt; DerivativeDims... &gt; &gt; &gt; grad\_func\_cov, DConstField&lt; IdxRangeFull &gt; func) const<br>_Fill a_ [_**VectorField**_](classVectorField.md) _with the values of the gradient of a function._ |
+|  void | [**operator()**](#function-operator) (DVectorField&lt; IdxRangeFull, get\_covariant\_dims\_t&lt; VectorIndexSet&lt; DerivativeDims... &gt; &gt; &gt; grad\_func\_cov, DConstField&lt; IdxRangeFull &gt; func) const<br>_Fill a_ [_**VectorField**_](classVectorField.md) _with the values of the gradient of a function._ |
 
 
 
@@ -136,7 +136,7 @@ inline explicit GradientCreator::GradientCreator (
 _Fill a_ [_**VectorField**_](classVectorField.md) _with the values of the gradient of a function._
 ```C++
 inline void GradientCreator::operator() (
-    DVectorField < IdxRangeFull, get_covariant_dims_t< VectorIndexSet< DerivativeDims... > > > grad_func_cov,
+    DVectorField< IdxRangeFull, get_covariant_dims_t< VectorIndexSet< DerivativeDims... > > > grad_func_cov,
     DConstField< IdxRangeFull > func
 ) const
 ```

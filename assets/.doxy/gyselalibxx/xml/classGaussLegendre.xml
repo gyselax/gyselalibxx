@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classGaussLegendre" kind="class" language="C++" prot="public">
     <compoundname>GaussLegendre</compoundname>
     <includes refid="gauss__legendre__integration_8hpp" local="no">gauss_legendre_integration.hpp</includes>
@@ -110,7 +110,7 @@
     </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="classGaussLegendre_1acf289b55a3b0992dc208a960aad91d58" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>constexpr std::size_t</type>
+        <type>std::size_t</type>
         <definition>static constexpr std::size_t GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::order</definition>
         <argsstring>()</argsstring>
         <name>order</name>

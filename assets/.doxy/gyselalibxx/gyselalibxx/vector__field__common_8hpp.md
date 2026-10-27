@@ -43,10 +43,10 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_borrowed\_vector\_field**](#variable-enable_borrowed_vector_field)   = `false`<br> |
-|  constexpr bool | [**enable\_vector\_field**](#variable-enable_vector_field)   = `false`<br> |
-|  constexpr bool | [**is\_borrowed\_vector\_field\_v**](#variable-is_borrowed_vector_field_v)   = `/* multi line expression */`<br> |
-|  constexpr bool | [**is\_vector\_field\_v**](#variable-is_vector_field_v)   = `enable\_vector\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
+|  bool | [**enable\_borrowed\_vector\_field**](#variable-enable_borrowed_vector_field)   = `false`<br> |
+|  bool | [**enable\_vector\_field**](#variable-enable_vector_field)   = `false`<br> |
+|  bool | [**is\_borrowed\_vector\_field\_v**](#variable-is_borrowed_vector_field_v)   = `/* multi line expression */`<br> |
+|  bool | [**is\_vector\_field\_v**](#variable-is_vector_field_v)   = `enable\_vector\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 
@@ -99,7 +99,7 @@
 ### variable enable\_borrowed\_vector\_field 
 
 ```C++
-constexpr bool enable_borrowed_vector_field;
+bool enable_borrowed_vector_field;
 ```
 
 
@@ -112,7 +112,7 @@ constexpr bool enable_borrowed_vector_field;
 ### variable enable\_vector\_field 
 
 ```C++
-constexpr bool enable_vector_field;
+bool enable_vector_field;
 ```
 
 
@@ -125,7 +125,7 @@ constexpr bool enable_vector_field;
 ### variable is\_borrowed\_vector\_field\_v 
 
 ```C++
-constexpr bool is_borrowed_vector_field_v;
+bool is_borrowed_vector_field_v;
 ```
 
 
@@ -138,7 +138,7 @@ constexpr bool is_borrowed_vector_field_v;
 ### variable is\_vector\_field\_v 
 
 ```C++
-constexpr bool is_vector_field_v;
+bool is_vector_field_v;
 ```
 
 

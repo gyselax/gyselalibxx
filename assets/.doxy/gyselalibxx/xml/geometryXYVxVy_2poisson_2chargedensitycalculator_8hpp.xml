@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp" kind="file" language="C++">
     <compoundname>chargedensitycalculator.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
@@ -353,10 +353,10 @@
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classChargeDensityCalculator" kindref="compound">ChargeDensityCalculator</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref></highlight></codeline>
 <codeline lineno="21"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classQuadrature" kindref="compound">Quadrature&lt;IdxRangeVxVy, IdxRangeXYVxVy, Real&gt;</ref><sp/>m_quadrature;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>Quadrature&lt;IdxRangeVxVy,<sp/>IdxRangeXYVxVy,<sp/>Real&gt;<sp/>m_quadrature;</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classChargeDensityCalculator" kindref="compound">ChargeDensityCalculator</ref>(DConstFieldVxVy<sp/>coeffs);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classChargeDensityCalculator_1ae129d33bd6dcb7a675e664a53c0a4747" kindref="member">ChargeDensityCalculator</ref>(DConstFieldVxVy<sp/>coeffs);</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classChargeDensityCalculator_1a164ef05aba41f41d7862c1aa216c154e" kindref="member">operator()</ref>(DFieldXY<sp/>rho,<sp/>DConstFieldSpVxVyXY<sp/>allfdistribu)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">final</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="39"><highlight class="normal">};</highlight></codeline>

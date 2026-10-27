@@ -16,7 +16,6 @@
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
 * `#include "species_info.hpp"`
-* `#include <KOLIOP/koliop.h>`
 
 
 
@@ -32,11 +31,6 @@
 
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| class | [**CollisionOperator**](classCollisionOperator.md) &lt;class [**CollisionConfiguration**](classCollisionConfiguration.md)&gt;<br>_A class which computes the collision operator in (Sp,vpar,mu)._  |
 
 
 

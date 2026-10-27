@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classFEM1DPoissonSolver" kind="class" language="C++" prot="public">
     <compoundname>FEM1DPoissonSolver</compoundname>
     <basecompoundref refid="classIPoissonSolver" prot="public" virt="non-virtual">IPoissonSolver&lt; InterpolationEvaluatorTraits&lt; SplineInterpolatorType::EvaluatorType &gt;::evaluation_idx_range_type, typename InterpolationBuilderTraits&lt; typename SplineInterpolatorType::BuilderType &gt;::interpolation_idx_range_type, double, SplineInterpolatorType::EvaluatorType::memory_space, Kokkos::layout_right &gt;</basecompoundref>
@@ -12,7 +12,7 @@
       </param>
       <param>
         <type>class IdxRangeBatched</type>
-        <defval>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;                typename SplineInterpolatorType::BuilderType&gt;::interpolation_idx_range_type</defval>
+        <defval>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;                typename SplineInterpolatorType::BuilderType&gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::interpolation_idx_range_type</ref></defval>
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
@@ -44,9 +44,14 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="41" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a32dc988b610f63320750b54a6d2c1593" prot="private" static="no">
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1adb77cf6b3cb0d88137cffb2676da8e18" prot="private" static="no">
         <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; typename SplineEvaluator::template evaluation_domain_type&lt; 0 &gt;, IdxRangeBatched, double, typename SplineEvaluator::memory_space, Kokkos::layout_right &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::base_type =  IPoissonSolver&lt; typename SplineEvaluator::template evaluation_domain_type&lt;0&gt;, IdxRangeBatched, double, typename SplineEvaluator::memory_space, Kokkos::layout_right&gt;</definition>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::base_type =  IPoissonSolver&lt;
+            typename SplineEvaluator::template evaluation_domain_type&lt;0&gt;,
+            IdxRangeBatched,
+            double,
+            typename SplineEvaluator::memory_space,
+            Kokkos::layout_right&gt;</definition>
         <argsstring></argsstring>
         <name>base_type</name>
         <qualifiedname>FEM1DPoissonSolver::base_type</qualifiedname>
@@ -56,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="48" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aae1c75f832e2a412146b3198e31449ab" prot="private" static="no">
         <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; SplineBuilder &gt;::interpolation_grid_type</type>
@@ -73,9 +78,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a72702c398079a91dfc19acb90e9816e9" prot="private" static="no">
-        <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; SplineBuilder &gt;::coeff_idx_range_type &gt; &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::InputBSplines =  ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename InterpolationBuilderTraits&lt;SplineBuilder&gt;::coeff_idx_range_type&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a66244ae61d725b73e27401b7376bd103" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; SplineBuilder &gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::coeff_idx_range_type</ref> &gt; &gt;</type>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::InputBSplines =  ddc::type_seq_element_t&lt;
+            0,
+            ddc::to_type_seq_t&lt;
+                    typename InterpolationBuilderTraits&lt;SplineBuilder&gt;::coeff_idx_range_type&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>InputBSplines</name>
         <qualifiedname>FEM1DPoissonSolver::InputBSplines</qualifiedname>
@@ -85,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="57" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ae75a22c24a4c2d470ff37be288949d38" prot="private" static="no">
         <type>typename GridPDEDim::continuous_dimension_type</type>
@@ -337,9 +345,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a350f45b6412e8845f913cc8e6cf65ae7" prot="private" static="no">
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ac96420e164472476fd99ca5c39b59f99" prot="private" static="no">
         <type>std::conditional_t&lt; ddc::is_uniform_bsplines_v&lt; InputBSplines &gt; &amp;&amp;!InputBSplines::is_periodic(), <ref refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" kindref="compound">HiddenFEMBSplines</ref>, InputBSplines &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::FEMBSplines =  std::conditional_t&lt; ddc::is_uniform_bsplines_v&lt;InputBSplines&gt; &amp;&amp; !InputBSplines::is_periodic(), HiddenFEMBSplines, InputBSplines&gt;</definition>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::FEMBSplines =  std::conditional_t&lt;
+            ddc::is_uniform_bsplines_v&lt;InputBSplines&gt; &amp;&amp; !InputBSplines::is_periodic(),
+            HiddenFEMBSplines,
+            InputBSplines&gt;</definition>
         <argsstring></argsstring>
         <name>FEMBSplines</name>
         <qualifiedname>FEM1DPoissonSolver::FEMBSplines</qualifiedname>
@@ -349,11 +360,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="125" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="128" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="125" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="125" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a0a7e3ed220e6b509d09bb81ae95b055b" prot="private" static="no">
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a0561aa9bf622d86da1b6436b385e9d6b" prot="private" static="no">
         <type>std::conditional_t&lt; FEMBSplines::is_periodic(), ddc::PeriodicExtrapolationRule&lt; PDEDim &gt;, ddc::NullExtrapolationRule &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::FEMEvalExtrapolationRule =  std::conditional_t&lt; FEMBSplines::is_periodic(), ddc::PeriodicExtrapolationRule&lt;PDEDim&gt;, ddc::NullExtrapolationRule&gt;</definition>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::FEMEvalExtrapolationRule =  std::conditional_t&lt;
+            FEMBSplines::is_periodic(),
+            ddc::PeriodicExtrapolationRule&lt;PDEDim&gt;,
+            ddc::NullExtrapolationRule&gt;</definition>
         <argsstring></argsstring>
         <name>FEMEvalExtrapolationRule</name>
         <qualifiedname>FEM1DPoissonSolver::FEMEvalExtrapolationRule</qualifiedname>
@@ -363,11 +377,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="130" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="133" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="130" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="130" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a69c3de26159eedf806d8e6681178c0be" prot="private" static="no">
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a968ad9204032190b2b8f08f00d0e30d0" prot="private" static="no">
         <type>ddc::SplineEvaluatorND&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, ddc::detail::TypeSeq&lt; FEMBSplines &gt;, ddc::detail::TypeSeq&lt; GridPDEDim &gt;, ddc::detail::TypeSeq&lt; FEMEvalExtrapolationRule, FEMEvalExtrapolationRule &gt; &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::FEMSplineEvaluator =  ddc::SplineEvaluatorND&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, ddc::detail::TypeSeq&lt;FEMBSplines&gt;, ddc::detail::TypeSeq&lt;GridPDEDim&gt;, ddc::detail::TypeSeq&lt;FEMEvalExtrapolationRule, FEMEvalExtrapolationRule&gt; &gt;</definition>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::FEMSplineEvaluator =  ddc::SplineEvaluatorND&lt;
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            ddc::detail::TypeSeq&lt;FEMBSplines&gt;,
+            ddc::detail::TypeSeq&lt;GridPDEDim&gt;,
+            ddc::detail::TypeSeq&lt;FEMEvalExtrapolationRule, FEMEvalExtrapolationRule&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>FEMSplineEvaluator</name>
         <qualifiedname>FEM1DPoissonSolver::FEMSplineEvaluator</qualifiedname>
@@ -377,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="135" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="140" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="135" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a87ccd16b3135d9527fde0d7b7c28b344" prot="private" static="no">
         <type>Idx&lt; FEMBSplines &gt;</type>
@@ -407,9 +426,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="144" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="144" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ae2ac8b8e3da8247f78e80d51e6435b07" prot="private" static="no">
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aaceae3e56cb849c7e3091d865dabaf6b" prot="private" static="no">
         <type>typename FEMSplineEvaluator::template batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::IdxRangeBatchedFEMBSplines =  typename FEMSplineEvaluator::template batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::IdxRangeBatchedFEMBSplines = 
+            typename FEMSplineEvaluator::template batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatchedFEMBSplines</name>
         <qualifiedname>FEM1DPoissonSolver::IdxRangeBatchedFEMBSplines</qualifiedname>
@@ -419,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="146" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="147" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="146" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1ab1e001e85760c3e5f3699f9ddc25f2cc" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeFEMBSplines, memory_space &gt;</type>
@@ -491,9 +511,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="157" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="157" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1acaae2da1c6b619232e9957cf38e4438f" prot="private" static="no">
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a1ac3474944a708ee8631703ec801857c" prot="private" static="no">
         <type>typename SplineEvaluator::template batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::IdxRangeBatchedBSplines =  typename SplineEvaluator::template batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::IdxRangeBatchedBSplines = 
+            typename SplineEvaluator::template batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatchedBSplines</name>
         <qualifiedname>FEM1DPoissonSolver::IdxRangeBatchedBSplines</qualifiedname>
@@ -503,7 +524,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="159" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="160" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="159" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a09cca76db4bef3f44905ae18168fdcb9" prot="private" static="no">
         <type>typename IdxRangeBatched::discrete_element_type</type>
@@ -589,9 +610,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="172" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="172" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a8b21832dcb4c1dd3581155a3e5f2bbbe" prot="private" static="no">
-        <type>ddc::type_seq_merge_t&lt; typename base_type::batch_tags, ddc::detail::TypeSeq&lt; <ref refid="structFEM1DPoissonSolver_1_1GridPDEDimQ" kindref="compound">GridPDEDimQ</ref> &gt; &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::RHSQuadTags =  ddc:: type_seq_merge_t&lt;typename base_type::batch_tags, ddc::detail::TypeSeq&lt;GridPDEDimQ&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a36469cc09cde2ac6bb3727e393e299c6" prot="private" static="no">
+        <type>ddc:: type_seq_merge_t&lt; typename base_type::batch_tags, ddc::detail::TypeSeq&lt; <ref refid="structFEM1DPoissonSolver_1_1GridPDEDimQ" kindref="compound">GridPDEDimQ</ref> &gt; &gt;</type>
+        <definition>using FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;::RHSQuadTags =  ddc::
+            type_seq_merge_t&lt;typename base_type::batch_tags, ddc::detail::TypeSeq&lt;GridPDEDimQ&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>RHSQuadTags</name>
         <qualifiedname>FEM1DPoissonSolver::RHSQuadTags</qualifiedname>
@@ -601,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="174" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="175" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="174" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="174" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aaf1a35e3acaa1435336fa9189a4877a5" prot="private" static="no">
         <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; RHSQuadTags &gt;</type>
@@ -1082,7 +1104,7 @@
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="30" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="38" bodyend="567"/>
     <listofallmembers>
-      <member refid="classFEM1DPoissonSolver_1a32dc988b610f63320750b54a6d2c1593" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>base_type</name></member>
+      <member refid="classFEM1DPoissonSolver_1adb77cf6b3cb0d88137cffb2676da8e18" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>base_type</name></member>
       <member refid="classFEM1DPoissonSolver_1adbd27a6b7fec56a46646ffce6a284e3b" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>batch_idx_range_type</name></member>
       <member refid="classFEM1DPoissonSolver_1a13485bf502a688f47f08b2269e0794c0" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>batch_index_type</name></member>
       <member refid="classFEM1DPoissonSolver_1ace3dcc307aaa5f0f13bbd4c7ffddd862" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>BatchedFEMBSplinesCoeff</name></member>
@@ -1100,10 +1122,10 @@
       <member refid="classFEM1DPoissonSolver_1a191901c3f4aa1ea57d0c88af13f18ef3" prot="public" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEM1DPoissonSolver</name></member>
       <member refid="classFEM1DPoissonSolver_1a46b0dfc97427d5afb058dadbc21c325f" prot="public" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEM1DPoissonSolver</name></member>
       <member refid="classFEM1DPoissonSolver_1aed42b273c3543c0f10aac7d54751b99f" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>fem_idx_range_type</name></member>
-      <member refid="classFEM1DPoissonSolver_1a350f45b6412e8845f913cc8e6cf65ae7" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEMBSplines</name></member>
+      <member refid="classFEM1DPoissonSolver_1ac96420e164472476fd99ca5c39b59f99" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEMBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1ab1e001e85760c3e5f3699f9ddc25f2cc" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEMBSplinesCoeffMem</name></member>
-      <member refid="classFEM1DPoissonSolver_1a0a7e3ed220e6b509d09bb81ae95b055b" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEMEvalExtrapolationRule</name></member>
-      <member refid="classFEM1DPoissonSolver_1a69c3de26159eedf806d8e6681178c0be" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEMSplineEvaluator</name></member>
+      <member refid="classFEM1DPoissonSolver_1a0561aa9bf622d86da1b6436b385e9d6b" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEMEvalExtrapolationRule</name></member>
+      <member refid="classFEM1DPoissonSolver_1a968ad9204032190b2b8f08f00d0e30d0" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>FEMSplineEvaluator</name></member>
       <member refid="classFEM1DPoissonSolver_1a9364041483f169650e1512c53ce87c31" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>field_type</name></member>
       <member refid="classFEM1DPoissonSolver_1a09cca76db4bef3f44905ae18168fdcb9" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>full_index</name></member>
       <member refid="classFEM1DPoissonSolver_1aae1c75f832e2a412146b3198e31449ab" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>GridPDEDim</name></member>
@@ -1111,15 +1133,15 @@
       <member refid="classFEM1DPoissonSolver_1a87ccd16b3135d9527fde0d7b7c28b344" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxFEMBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1ae6238b80f7aca65c851c9343af25aaa7" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxPDEDim</name></member>
       <member refid="classFEM1DPoissonSolver_1a6c1ddf68b69b92499c768d7a679c400c" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxQ</name></member>
-      <member refid="classFEM1DPoissonSolver_1acaae2da1c6b619232e9957cf38e4438f" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBatchedBSplines</name></member>
-      <member refid="classFEM1DPoissonSolver_1ae2ac8b8e3da8247f78e80d51e6435b07" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBatchedFEMBSplines</name></member>
+      <member refid="classFEM1DPoissonSolver_1a1ac3474944a708ee8631703ec801857c" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBatchedBSplines</name></member>
+      <member refid="classFEM1DPoissonSolver_1aaceae3e56cb849c7e3091d865dabaf6b" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBatchedFEMBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1a65ec690dc581a1198070cc40bca0b1f8" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1aa469d9d29110e93d5d76beb230b881ec" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeFEMBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1a87f0bf876e03eea6667f9307dec9e687" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeQ</name></member>
       <member refid="classFEM1DPoissonSolver_1aaf1a35e3acaa1435336fa9189a4877a5" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeRHSQuadrature</name></member>
       <member refid="classFEM1DPoissonSolver_1a5ac943de53161b431446819e6bd5e9fd" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRHSQuadrature</name></member>
       <member refid="classFEM1DPoissonSolver_1aac5ff908a046b5292cae9bad26ab4829" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxStepQ</name></member>
-      <member refid="classFEM1DPoissonSolver_1a72702c398079a91dfc19acb90e9816e9" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>InputBSplines</name></member>
+      <member refid="classFEM1DPoissonSolver_1a66244ae61d725b73e27401b7376bd103" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>InputBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1ac9c65305eddf5e4c83269bf5e1847b5a" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>jit_build_nubsplinesx</name></member>
       <member refid="classFEM1DPoissonSolver_1a91fa77e580f8564cfaa146573e120bb0" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>m_fem_matrix</name></member>
       <member refid="classFEM1DPoissonSolver_1a79de4a6fc2131a2ded0bcc0ff35182ba" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>m_matrix_size</name></member>
@@ -1132,7 +1154,7 @@
       <member refid="classFEM1DPoissonSolver_1aa4181c1a3adda2261c737d545e3fe8f2" prot="public" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>operator()</name></member>
       <member refid="classFEM1DPoissonSolver_1ae75a22c24a4c2d470ff37be288949d38" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>PDEDim</name></member>
       <member refid="classFEM1DPoissonSolver_1a7c5178a09f017728adeb932d70264945" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>RHSBSplines</name></member>
-      <member refid="classFEM1DPoissonSolver_1a8b21832dcb4c1dd3581155a3e5f2bbbe" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>RHSQuadTags</name></member>
+      <member refid="classFEM1DPoissonSolver_1a36469cc09cde2ac6bb3727e393e299c6" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>RHSQuadTags</name></member>
       <member refid="classFEM1DPoissonSolver_1a16d5d9413c2f0555ace584b17cd5920f" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>RHSSplineCoeff</name></member>
       <member refid="classFEM1DPoissonSolver_1a30dc566bd4d1b24ba1b0994870c8bc5e" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>RHSSplineCoeffMem</name></member>
       <member refid="classFEM1DPoissonSolver_1a079b4971bf60e8e8aca310f8ad6bfc8a" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>s_degree</name></member>

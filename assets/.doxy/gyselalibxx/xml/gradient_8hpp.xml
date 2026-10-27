@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="gradient_8hpp" kind="file" language="C++">
     <compoundname>gradient.hpp</compoundname>
     <includes refid="coord__or__idx_8hpp" local="yes">coord_or_idx.hpp</includes>
@@ -353,7 +353,7 @@
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::MetricTensor<sp/>MetricTensorType&gt;</highlight></codeline>
-<codeline lineno="17" refid="classGradient" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classGradient" kindref="compound">Gradient</ref></highlight></codeline>
+<codeline lineno="17" refid="classGradient" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classGradient_1a089c6838004a0e19b761a4933ef0d034" kindref="member">Gradient</ref></highlight></codeline>
 <codeline lineno="18"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordArg<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>MetricTensorType::CoordArg;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
@@ -364,13 +364,13 @@
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DVectorCov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>MetricTensorType::CovariantVectorType;</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange&gt;</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorFieldType</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">DVectorField&lt;IdxRange, Dims&gt;</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DVectorFieldType<sp/>=<sp/>DVectorField&lt;IdxRange,<sp/>Dims&gt;;</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange&gt;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorFieldCovType</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">DVectorField&lt;IdxRange, Dims_cov&gt;</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DVectorFieldCovType<sp/>=<sp/>DVectorField&lt;IdxRange,<sp/>Dims_cov&gt;;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange&gt;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorConstFieldCovType</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">DVectorConstField&lt;IdxRange, Dims_cov&gt;</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DVectorConstFieldCovType<sp/>=<sp/>DVectorConstField&lt;IdxRange,<sp/>Dims_cov&gt;;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>MetricTensorType<sp/>m_metric_tensor;</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
@@ -387,8 +387,8 @@
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange&gt;</highlight></codeline>
 <codeline lineno="81" refid="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" kindref="member">operator()</ref>(</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorFieldCovType&lt;IdxRange&gt;</ref><sp/>gradient,</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstFieldCovType&lt;IdxRange&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>partial_derivatives)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorFieldCovType&lt;IdxRange&gt;<sp/>gradient,</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorConstFieldCovType&lt;IdxRange&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>partial_derivatives)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="84"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::deepcopy(gradient,<sp/>partial_derivatives);</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -404,8 +404,8 @@
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
 <codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRange&gt;</highlight></codeline>
 <codeline lineno="121" refid="classGradient_1a275ba4967fb94de83ac117458eeb7eda" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classGradient_1a275ba4967fb94de83ac117458eeb7eda" kindref="member">operator()</ref>(</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorFieldType&lt;IdxRange&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>gradient,</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">DVectorConstFieldCovType&lt;IdxRange&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>partial_derivatives)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorFieldType&lt;IdxRange&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>gradient,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DVectorConstFieldCovType&lt;IdxRange&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>partial_derivatives)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="124"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_accessible_v&lt;Kokkos::DefaultExecutionSpace,<sp/>MetricTensorType&gt;);</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRange::discrete_element_type;</highlight></codeline>

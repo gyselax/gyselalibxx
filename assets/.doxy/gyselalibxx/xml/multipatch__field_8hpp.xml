@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="multipatch__field_8hpp" kind="file" language="C++">
     <compoundname>multipatch_field.hpp</compoundname>
     <includes refid="multipatch__type_8hpp" local="yes">multipatch_type.hpp</includes>
@@ -366,7 +366,7 @@
     </invincdepgraph>
     <innernamespace refid="namespaceddcHelper">ddcHelper</innernamespace>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="multipatch__field_8hpp_1a1d4d765fa0bc28a1c3fa7418f86f8786" prot="public" static="no">
+      <memberdef kind="typedef" id="multipatch__field_8hpp_1a579616c6252f63b15dd5e7a73a501f3e" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>template&lt; typename P &gt; typename</type>
@@ -379,8 +379,9 @@
             <defname>Patches</defname>
           </param>
         </templateparamlist>
-        <type>detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</type>
-        <definition>using MultipatchField =  detail:: MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt; &gt;</definition>
+        <type>detail:: MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</type>
+        <definition>using MultipatchField =  detail::
+        MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchField</name>
         <briefdescription>
@@ -409,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="245" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="246" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="245" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="245" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -419,8 +420,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool enable_multipatch_field</definition>
+        <type>bool</type>
+        <definition>bool enable_multipatch_field</definition>
         <argsstring></argsstring>
         <name>enable_multipatch_field</name>
         <initializer>= false</initializer>
@@ -438,8 +439,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>constexpr bool</type>
-        <definition>constexpr bool is_multipatch_field_v</definition>
+        <type>bool</type>
+        <definition>bool is_multipatch_field_v</definition>
         <argsstring></argsstring>
         <name>is_multipatch_field_v</name>
         <initializer>= enable_multipatch_field&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;</initializer>

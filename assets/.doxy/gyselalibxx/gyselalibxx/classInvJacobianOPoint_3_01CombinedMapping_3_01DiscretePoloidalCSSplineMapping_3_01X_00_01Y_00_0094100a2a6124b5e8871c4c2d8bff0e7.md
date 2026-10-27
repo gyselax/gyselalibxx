@@ -54,8 +54,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**InvJacobianOPoint**](#function-invjacobianopoint) ([**Mapping**](classCombinedMapping.md) const & mapping) <br>_The constructor of_ [_**InvJacobianOPoint**_](classInvJacobianOPoint.md) _._ |
-|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X\_cov, Y\_cov &gt; &gt; | [**operator()**](#function-operator) () const<br>_Compute the full inverse Jacobian matrix from a coordinate system (x\_pc, y\_pc) to a coordinate system (x, y) at the central point._  |
+|  KOKKOS\_FUNCTION | [**InvJacobianOPoint**](#function-invjacobianopoint) (Mapping const & mapping) <br>_The constructor of_ [_**InvJacobianOPoint**_](classInvJacobianOPoint.md) _._ |
+|  KOKKOS\_FUNCTION DTensor&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X\_cov, Y\_cov &gt; &gt; | [**operator()**](#function-operator) () const<br>_Compute the full inverse Jacobian matrix from a coordinate system (x\_pc, y\_pc) to a coordinate system (x, y) at the central point._  |
 
 
 
@@ -127,7 +127,7 @@ inline explicit KOKKOS_FUNCTION InvJacobianOPoint< CombinedMapping< DiscretePolo
 
 _Compute the full inverse Jacobian matrix from a coordinate system (x\_pc, y\_pc) to a coordinate system (x, y) at the central point._ 
 ```C++
-inline KOKKOS_FUNCTION DTensor < VectorIndexSet< Xpc, Ypc >, VectorIndexSet< X_cov, Y_cov > > InvJacobianOPoint< CombinedMapping< DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySpace >, CartesianToCircular< Xpc, Ypc, R, Theta >, Coord< R, Theta > >, Coord< R, Theta > >::operator() () const
+inline KOKKOS_FUNCTION DTensor< VectorIndexSet< Xpc, Ypc >, VectorIndexSet< X_cov, Y_cov > > InvJacobianOPoint< CombinedMapping< DiscretePoloidalCSSplineMapping< X, Y, SplineEvaluator, R, Theta, MemorySpace >, CartesianToCircular< Xpc, Ypc, R, Theta >, Coord< R, Theta > >, Coord< R, Theta > >::operator() () const
 ```
 
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classMatrix__Corner__Block" kind="class" language="C++" prot="public">
     <compoundname>Matrix_Corner_Block</compoundname>
     <basecompoundref refid="classMatrix" prot="public" virt="non-virtual">Matrix</basecompoundref>
@@ -494,7 +494,8 @@
         <detaileddescription>
 <para><verbatim>L = |   Q    |    0   |
     | lambda | delta&apos; |
-</verbatim> It is defined as:</para>
+</verbatim></para>
+<para>It is defined as:</para>
 <para><formula id="354">$ \delta&apos; = \delta - \lambda \beta $</formula></para>
 <para>With <formula id="160">$ \beta $</formula> the solution of the equation:</para>
 <para><formula id="355">$ Q \beta = \gamma $</formula></para>
@@ -770,7 +771,8 @@
     <detaileddescription>
 <para><verbatim> |    Q   | gamma |
  | lambda | delta |
-</verbatim> where Q is a banded matrix, and Q and delta are square matrices.</para>
+</verbatim></para>
+<para>where Q is a banded matrix, and Q and delta are square matrices.</para>
 <para>The matrix equation is factorised using a LU decomposition. The equation is then solved using this decomposition as described in section 2.5.2.1 of Emily Bourne&apos;s thesis [1].</para>
 <para>[1] Emily Bourne, &quot;Non-Uniform Numerical Schemes for the Modelling of Turbulence in the 5D GYSELA Code&quot;. December 2022. </para>
     </detaileddescription>

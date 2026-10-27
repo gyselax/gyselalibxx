@@ -47,7 +47,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef [**VectorConstField**](classVectorField.md)&lt; double, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; | [**DVectorConstField**](#typedef-dvectorconstfield)  <br> |
+| typedef VectorConstField&lt; double, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; | [**DVectorConstField**](#typedef-dvectorconstfield)  <br> |
 | typedef [**VectorField**](classVectorField.md)&lt; double, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; | [**DVectorField**](#typedef-dvectorfield)  <br> |
 | typedef [**VectorField**](classVectorField.md)&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; | [**VectorConstField**](#typedef-vectorconstfield)  <br> |
 
@@ -58,9 +58,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**enable\_borrowed\_vector\_field&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_borrowed_vector_field-vectorfield-elementtype-idxrangetype-vectorindexsettype-memoryspace-layoutstridedpolicy)   = `true`<br> |
-|  constexpr bool | [**enable\_data\_access\_methods&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_data_access_methods-vectorfield-elementtype-idxrangetype-vectorindexsettype-memoryspace-layoutstridedpolicy)   = `true`<br> |
-|  constexpr bool | [**enable\_vector\_field&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_vector_field-vectorfield-elementtype-idxrangetype-vectorindexsettype-memoryspace-layoutstridedpolicy)   = `true`<br> |
+|  bool | [**enable\_borrowed\_vector\_field&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_borrowed_vector_field-vectorfield-elementtype-idxrangetype-vectorindexsettype-memoryspace-layoutstridedpolicy)   = `true`<br> |
+|  bool | [**enable\_data\_access\_methods&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_data_access_methods-vectorfield-elementtype-idxrangetype-vectorindexsettype-memoryspace-layoutstridedpolicy)   = `true`<br> |
+|  bool | [**enable\_vector\_field&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;**](#variable-enable_vector_field-vectorfield-elementtype-idxrangetype-vectorindexsettype-memoryspace-layoutstridedpolicy)   = `true`<br> |
 
 
 
@@ -113,7 +113,12 @@
 ### typedef DVectorConstField 
 
 ```C++
-using DVectorConstField =  VectorConstField< double, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy>;
+using DVectorConstField =  VectorConstField<
+        double,
+        IdxRangeType,
+        VectorIndexSetType,
+        MemorySpace,
+        LayoutStridedPolicy>;
 ```
 
 
@@ -139,7 +144,12 @@ using DVectorField =  VectorField<double, IdxRangeType, VectorIndexSetType, Memo
 ### typedef VectorConstField 
 
 ```C++
-using VectorConstField =  VectorField< const ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy>;
+using VectorConstField =  VectorField<
+        const ElementType,
+        IdxRangeType,
+        VectorIndexSetType,
+        MemorySpace,
+        LayoutStridedPolicy>;
 ```
 
 
@@ -154,7 +164,7 @@ using VectorConstField =  VectorField< const ElementType, IdxRangeType, VectorIn
 ### variable enable\_borrowed\_vector\_field&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt; 
 
 ```C++
-constexpr bool enable_borrowed_vector_field< VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy > >;
+bool enable_borrowed_vector_field< VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy > >;
 ```
 
 
@@ -167,7 +177,7 @@ constexpr bool enable_borrowed_vector_field< VectorField< ElementType, IdxRangeT
 ### variable enable\_data\_access\_methods&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt; 
 
 ```C++
-constexpr bool enable_data_access_methods< VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy > >;
+bool enable_data_access_methods< VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy > >;
 ```
 
 
@@ -180,7 +190,7 @@ constexpr bool enable_data_access_methods< VectorField< ElementType, IdxRangeTyp
 ### variable enable\_vector\_field&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt; 
 
 ```C++
-constexpr bool enable_vector_field< VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy > >;
+bool enable_vector_field< VectorField< ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy > >;
 ```
 
 
