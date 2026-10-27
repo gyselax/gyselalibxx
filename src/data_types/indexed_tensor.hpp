@@ -296,9 +296,11 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType const&... tensor_to_mul)
         IndexedTensor<ResultTensorType, ResultIndexTypeSeq> indexed_result(result);
         if constexpr (is_symmetric) {
             static_assert(
-                    (ddc::type_seq_size_v<ddc::type_seq_element_t<0, ResultIndexTypeSeq>>)
-                            == (ddc::type_seq_size_v<
-                                    ddc::type_seq_element_t<1, ResultIndexTypeSeq>>),
+                    (ddc::type_seq_size_v<typename ddc::type_seq_element_t<0, ResultIndexTypeSeq>::
+                                                  possible_idx_values>)
+                            == (ddc::type_seq_size_v<typename ddc::type_seq_element_t<
+                                        1,
+                                        ResultIndexTypeSeq>::possible_idx_values>),
                     "Matrix must be square to be symmetrical");
             details::symmetric_internal_tensor_mul<AllIndexIdMaps>(
                     indexed_result,
