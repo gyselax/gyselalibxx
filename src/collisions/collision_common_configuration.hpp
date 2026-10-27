@@ -161,7 +161,7 @@ public:
     }
 
     /// @brief No-op conversion. a_view^t^t=a_view, so if we keep the underlying
-    /// view pointer and simply permute the indicies, we get a layout left view
+    /// view pointer and simply permute the indices, we get a layout left view
     /// without copying.
     /// @tparam View
     /// @param a_view A layout left or right, view.
@@ -268,7 +268,7 @@ public:
     DFieldMem<IdxRange<Species>> m_hat_Zs_allocation;
 
     /**
-     * @brief B norm in (phi,theta,r), ordered to favor the stellarator/tokamak geometry distribution.
+     * @brief B norm in (phi,theta,r), ordered to favour the stellarator/tokamak geometry distribution.
      */
     DFieldMem<IdxRange<GridTor3, GridTor1, GridTor2>> m_B_norm_allocation;
 

@@ -82,7 +82,7 @@ public:
 
     /**
      * @brief Can be used to obtain the quantities the operator needs for its initialisation, modification is not
-     * authorized.
+     * authorised.
      *
      * @return const CollisionConfigurationDataType&
      */

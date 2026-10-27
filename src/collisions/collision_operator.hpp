@@ -18,9 +18,14 @@ template <class CollisionConfiguration>
 class CollisionOperator /* : public IRightHandSide */
 {
 public:
+    /**
+      * @brief IdxRangeDistributionFunctionType
+      */
     using IdxRangeDistributionFunctionType =
             typename CollisionConfiguration::IdxRangeDistributionFunctionType;
-
+    /**
+      * @brief CollisionConfigurationDataType
+      */
     using CollisionConfigurationDataType =
             typename CollisionConfiguration::CollisionConfigurationDataType;
 

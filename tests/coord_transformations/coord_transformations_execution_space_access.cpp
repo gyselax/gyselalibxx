@@ -44,9 +44,8 @@ public:
     MappingMemoryAccess()
         : interpolation_idx_range_r(InterpPointsR::get_domain<GridR>())
         , interpolation_idx_range_theta(InterpPointsTheta::get_domain<GridTheta>())
-        , interpolation_idx_range_rtheta(
-                  interpolation_idx_range_r,
-                  interpolation_idx_range_theta) {};
+        , interpolation_idx_range_rtheta(interpolation_idx_range_r, interpolation_idx_range_theta) {
+        };
 
     static void SetUpTestSuite()
     {

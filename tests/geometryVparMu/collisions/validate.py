@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+"""Validation tool."""
+
 import argparse
 import sys
 
@@ -13,6 +15,7 @@ MAX_RELATIVE_ERROR_TOLERANCE = 1e-10
 
 
 def compare_hdf5(reference_file, approximation_file, dataset_name):
+    """    compare_hdf5    """
     with (
         h5py.File(reference_file, "r") as f_ref,
         h5py.File(approximation_file, "r") as f_approx,
@@ -139,6 +142,7 @@ def compare_hdf5(reference_file, approximation_file, dataset_name):
 
 
 def main():
+    """    main    """
     parser = argparse.ArgumentParser(
         description="Compare one dataset in two HDF5 files."
     )

@@ -191,11 +191,9 @@ template <class AdvectionField>
 AdvectionField init_field()
 {
     static_assert(
-            std::is_same_v<
-                    AdvectionField,
-                    AdvectionField_translation<
-                            X,
-                            Y>> || std::is_same_v<AdvectionField, AdvectionField_rotation<X, Y, R, Theta>> || std::is_same_v<AdvectionField, AdvectionField_decentred_rotation<X, Y>>);
+            std::is_same_v<AdvectionField, AdvectionField_translation<X, Y>>
+            || std::is_same_v<AdvectionField, AdvectionField_rotation<X, Y, R, Theta>>
+            || std::is_same_v<AdvectionField, AdvectionField_decentred_rotation<X, Y>>);
     if constexpr (std::is_same_v<AdvectionField, AdvectionField_translation<X, Y>>) {
         return AdvectionField(DVector<X, Y>(
                 std::cos(2 * M_PI * 511. / 4096.) / 2.,
