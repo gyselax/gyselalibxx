@@ -110,8 +110,8 @@ public:
 
     MultiPatchField2Patches()
         : index_range_xy1(
-                  Patch1::IdxRange1(Patch1::Idx1(0), x1_size),
-                  Patch1::IdxRange2(Patch1::Idx2(0), y1_size))
+                Patch1::IdxRange1(Patch1::Idx1(0), x1_size),
+                Patch1::IdxRange2(Patch1::Idx2(0), y1_size))
         , index_range_xy2(
                   Patch2::IdxRange1(Patch2::Idx1(0), x2_size),
                   Patch2::IdxRange2(Patch2::Idx2(0), y2_size))
