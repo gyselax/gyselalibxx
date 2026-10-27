@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <optional>
 #include <type_traits>
 #include <utility>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "i_interpolation_builder.hpp"
 
@@ -122,5 +124,103 @@ public:
         return ::batched_basis_idx_range(
                 m_builder2,
                 ::batched_basis_idx_range(m_builder1, batched_interpolation_idx_range));
+    }
+
+    /**
+     * @brief Compute a 2D spline approximation of a function.
+     *
+     * Use the values of a function and the derivatives of the function at the boundaries
+     * (in the case of Hermite boundary conditions only) to calculate the coefficients of a
+     * 2D spline approximation of this function.
+     *
+     * @param[out] coeffs The coefficients of the spline.
+     * @param[in] vals The values of the function at the interpolation mesh.
+     * @param[in] derivs_min1 The values of the derivatives at the lower boundary in the first dimension.
+     * @param[in] derivs_max1 The values of the derivatives at the upper boundary in the first dimension.
+     * @param[in] derivs_min2 The values of the derivatives at the lower boundary in the second dimension.
+     * @param[in] derivs_max2 The values of the derivatives at the upper boundary in the second dimension.
+     * @param[in] mixed_derivs_min1_min2 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension and the lower boundary in the second dimension.
+     * @param[in] mixed_derivs_max1_min2 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension and the lower boundary in the second dimension.
+     * @param[in] mixed_derivs_min1_max2 The values of the cross-derivatives at the lower boundary
+     *      in the first dimension and the upper boundary in the second dimension.
+     * @param[in] mixed_derivs_max1_max2 The values of the cross-derivatives at the upper boundary
+     *      in the first dimension and the upper boundary in the second dimension.
+     */
+    template <class IdxRangeBatchedInterpolation, class Layout>
+    void operator()(
+            Field<data_type,
+                  batched_basis_idx_range_type<IdxRangeBatchedInterpolation>,
+                  memory_space,
+                  Layout> coeffs,
+            ConstField<data_type, IdxRangeBatchedInterpolation, memory_space, Layout> vals,
+            std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_min1
+            = std::nullopt,
+            std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type1<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_max1
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_min2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> derivs_max2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_min2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_min2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_min1_max2
+            = std::nullopt,
+            [[maybe_unused]] std::optional<ConstField<
+                    data_type,
+                    batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout>> mixed_derivs_max1_max2
+            = std::nullopt) const
+    {
+        static_assert(
+                Builder2::s_sbc_xmin != ddc::SplineBuilderClosure::HERMITE
+                        && Builder2::s_sbc_xmax != ddc::SplineBuilderClosure::HERMITE,
+                "Hermite boundary conditions are not yet supported in the second dimension");
+
+        // Do not return early if the batch index range is empty as Builder1 may require
+        // the participation of all MPI ranks.
+
+        // Build the coefficients along the first dimension
+        FieldMem<data_type,
+                 typename Traits1::template batched_basis_idx_range_type<
+                         IdxRangeBatchedInterpolation>,
+                 memory_space>
+                coeffs1_alloc(::batched_basis_idx_range(m_builder1, get_idx_range(vals)));
+        m_builder1(get_field(coeffs1_alloc), vals, derivs_min1, derivs_max1);
+
+        // Build the coefficients along the second dimension
+        m_builder2(coeffs, get_const_field(coeffs1_alloc));
     }
 };
