@@ -7,7 +7,8 @@
 
 #include <gtest/gtest.h>
 
-#include "composite_spline_builder.hpp"
+#include "composite_spline_builder_2d.hpp"
+#include "composite_spline_builder_3d.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "i_interpolation_builder.hpp"

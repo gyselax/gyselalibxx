@@ -8,7 +8,8 @@ target_sources("interpolation"
     INTERFACE
         FILE_SET HEADERS
             FILES
-                composite_spline_builder.hpp
+                composite_spline_builder_2d.hpp
+                composite_spline_builder_3d.hpp
                 constant_identity_interpolation_extrapolation_rule.hpp
                 extrapolation_rule_choice.hpp
                 i_interpolation.hpp
