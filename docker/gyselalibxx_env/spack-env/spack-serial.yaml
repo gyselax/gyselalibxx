@@ -1,0 +1,70 @@
+spack:
+  concretizer:
+    reuse: false
+    unify: true
+  mirrors:
+    github-buildcache:
+      url: oci://ghcr.io/gyselax/gyselalibxx-ci-ubuntu-noble
+      binary: true
+      signed: false
+      access_pair:
+        id_variable: GITHUB_USER
+        secret_variable: GITHUB_TOKEN
+  packages:
+    all:
+      prefer:
+        - '~cuda'
+        - '~rocm'
+        - '~openmp'
+        - '~mpi'
+        - '~fortran'
+      require:
+        - 'target=x86_64'
+    c:
+      require: 'gcc@13'
+    cxx:
+      require: 'gcc@13'
+    fortran:
+      require: 'gcc@13'
+    lapack:
+      require:
+        - 'openblas@0.3'
+    mpi:
+      require:
+        - 'openmpi@5.0'
+    py-dask:
+      prefer:
+        - '~dataframe'
+    py-pandas:
+      prefer:
+        - '~performance'
+  repos:
+    patches:
+      git: https://github.com/gyselax/spack.git
+      branch: releases/v2026.06
+    builtin:
+      branch: releases/v2026.06
+  specs:
+    - 'cmake@3.31'
+    - 'ddc@0.16 +fft +pdi +splines'
+    - 'ginkgo@1.11'
+    - 'gmgpolar@2.4'
+    - 'googletest@1.17 +gmock'
+    - 'kokkos@5.1 +serial'
+    - 'kokkos-kernels@5.1'
+    - 'koliop@0.2'
+    - 'lapack'
+    - 'mpi'
+    - 'paraconf@1.0'
+    - 'pdi@1.11'
+    - 'pdiplugin-decl-hdf5@1.11 +mpi'
+    - 'pdiplugin-mpi@1.11'
+    - 'pdiplugin-set-value@1.11'
+    - 'python@3.14'
+
+    - 'py-h5py@3.16'
+    - 'py-matplotlib@3.11 ^freetype@2.14.1'
+    - 'py-numpy@2.4'
+    - 'py-pyyaml@6.0'
+    - 'py-xarray@2026.4'
+  view: true
