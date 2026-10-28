@@ -65,6 +65,9 @@ runs:
         cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
         pull: true
         push: true
+        secrets: |
+          github_user_id=${{github.actor}}
+          github_token_id=${{github.token}}
         tags: ${{ steps.get-tags.outputs.full_tags }}
     - name: Add tags to the existing image
       if: (inputs.add_tags == 'true') && (steps.rebuild-check.outputs.rebuild == 'false')

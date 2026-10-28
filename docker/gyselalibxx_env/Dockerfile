@@ -81,7 +81,9 @@ ENV HOME=/ci
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY spack-env /data/spack-env
-RUN git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git /ci/spack \
+RUN --mount=type=secret,id=github_user_id,env=GITHUB_USER \
+    --mount=type=secret,id=github_token_id,env=GITHUB_TOKEN \
+    git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git /ci/spack \
     && . /ci/spack/share/spack/setup-env.sh \
     && for backend in serial openmp; do \
         spack env create "gyselalibxx-${backend}" "/data/spack-env/spack-${backend}.yaml" \
