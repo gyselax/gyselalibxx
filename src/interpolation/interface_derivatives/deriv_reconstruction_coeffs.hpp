@@ -376,6 +376,44 @@ public:
     }
 
     /**
+     * @brief Get the linear combination of the function values (c) on patch1.
+     *
+     * The sum of this linear combination and get_approx_deriv_patch2_component
+     * corresponds to an approximation of the interface derivative.
+     *
+     * @param function_1 Function values at the interpolation points on patch 1.
+     */
+    template <class Layout1>
+    inline double get_approx_deriv_patch1_component(
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
+    {
+        return ddc::host_transform_reduce(
+                m_idx_range_perp_1,
+                0.0,
+                ddc::reducer::sum<double>(),
+                [&](Idx1D_1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
+    }
+
+    /**
+     * @brief Get the linear combination of the function values (c) on patch2.
+     *
+     * The sum of this linear combination and get_approx_deriv_patch2_component
+     * corresponds to an approximation of the interface derivative.
+     *
+     * @param function_2 Function values at the interpolation points on patch 2.
+     */
+    template <class Layout2>
+    inline double get_approx_deriv_patch2_component(
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
+    {
+        return ddc::host_transform_reduce(
+                m_idx_range_perp_2,
+                0.0,
+                ddc::reducer::sum<double>(),
+                [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
+    }
+
+    /**
      * @brief Get the linear combination of the derivatives values (c).
      *
      * This linear combination corresponds to an approximation of the
