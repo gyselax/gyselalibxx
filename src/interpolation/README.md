@@ -29,6 +29,17 @@ In order for the interpolation to function correctly the values $`f_j=f(x_j)`$ p
 
 The spline interpolation method is based entirely on the SplineBuilder and SplineEvaluator classes which are found in DDC.
 
+### Composite Spline Builders
+
+Multi-dimensional splines are tensor products of 1D splines, so their coefficients can be computed by building the spline one dimension at a time. The classes `CompositeSplineBuilder2D` and `CompositeSplineBuilder3D` use this property to combine a 1D builder along the first dimension with a DDC builder for the remaining dimensions:
+
+- `CompositeSplineBuilder2D<Builder1, Builder2>` combines two 1D builders (`Builder2` is a `ddc::SplineBuilder`).
+- `CompositeSplineBuilder3D<Builder1, Builder23>` combines a 1D builder with a 2D builder (`Builder23` is a `ddc::SplineBuilder2D`).
+
+The builder along the first dimension only needs to satisfy the `concepts::InterpolationBuilder1D` concept. This makes it possible to use an alternative method in this dimension, e.g. an operator which distributes the computation of the coefficients with MPI.
+
+The composite builders take the same arguments as the equivalent DDC builders (`ddc::SplineBuilder2D` and `ddc::SplineBuilder3D`) and give the same coefficients.
+
 ### Polar Spline Interpolation
 
 There is no method to construct a polar spline from the values of a function. It should be possible to construct such a `PolarSplineBuilder`, but it is not clear where the interpolation points should be placed near the O-point in order to obtain a well-conditioned problem. The B-splines, splines and the spline evaluator for the polar splines can be found in the sub-folder [polar\_splines](./polar_splines/README.md).
