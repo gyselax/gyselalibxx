@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "coord_or_idx.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -12,7 +13,7 @@
  * @brief A class which implements a gradient operator.
  * @tparam MetricTensorType A type representing a metric tensor.
  */
-template <class MetricTensorType>
+template <concepts::MetricTensor MetricTensorType>
 class Gradient
 {
     using CoordArg = typename MetricTensorType::CoordArg;
@@ -38,7 +39,7 @@ public:
     /**
      * @brief Construct an instance of the class Gradient.
      *
-     * @param metric_tensor A MetricTensorEvaluator.
+     * @param metric_tensor An object which provides the metric tensor (e.g. a MetricTensorEvaluator).
      */
     explicit KOKKOS_FUNCTION Gradient(MetricTensorType const& metric_tensor)
         : m_metric_tensor(metric_tensor)
@@ -85,22 +86,24 @@ public:
     }
 
     /**
-     * @brief Compute the gradient of a scalar field at a given coordinate, 
-     * using partial derivatives of the field. The gradient is expressed 
-     * on the contravariant basis.  
+     * @brief Compute the gradient of a scalar field at a given coordinate,
+     * using partial derivatives of the field. The gradient is expressed
+     * on the contravariant basis.
      *
-     * @param[in] partial_derivatives A vector that contains the partial 
+     * @param[in] partial_derivatives A vector that contains the partial
      * derivatives of the scalar field expressed at a given coordinate.
-     * @param[in] coord The coordinate at which the gradient should be evaluated.
+     * @param[in] coord_or_idx The coordinate (or the index of the grid point)
+     * at which the gradient should be evaluated.
      *
-     * @return The components of the gradient at a given coordinate, 
+     * @return The components of the gradient at a given coordinate,
      * expressed on the contravariant basis.
      */
+    template <concepts::CoordOrIdx<CoordArg> CoordOrIdxType>
     KOKKOS_INLINE_FUNCTION DVectorType
-    operator()(DVectorCov const& partial_derivatives, CoordArg const& coord) const
+    operator()(DVectorCov const& partial_derivatives, CoordOrIdxType const& coord_or_idx) const
     {
         return tensor_mul(
-                index<'i', 'j'>(m_metric_tensor.inverse(coord)),
+                index<'i', 'j'>(m_metric_tensor.inverse(coord_or_idx)),
                 index<'j'>(partial_derivatives));
     }
 
@@ -127,8 +130,7 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(gradient),
                 KOKKOS_CLASS_LAMBDA(IdxType const idx) {
-                    DVectorType gradient_proxy
-                            = (*this)(partial_derivatives(idx), ddc::coordinate(idx));
+                    DVectorType gradient_proxy = (*this)(partial_derivatives(idx), idx);
                     ddcHelper::assign_vector_field_element(gradient, idx, gradient_proxy);
                 });
     }

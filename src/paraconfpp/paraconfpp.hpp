@@ -2,75 +2,77 @@
 
 #pragma once
 
-#include <filesystem>
-#include <stdexcept>
-#include <string>
-#include <utility>
+#include <string_view>
 
 #include <paraconf.h>
 
-template <class... Args>
-double PCpp_double(PC_tree_t tree, std::string const& str, Args&&... args)
-{
-    double data = 0.;
-    if (PC_status_t s = PC_double(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &data);
-        s != PC_OK) {
-        throw std::runtime_error(PC_errmsg());
-    }
-    return data;
-}
+/**
+ * @brief Retrieves a configuration value as a double.
+ *
+ * @param tree The configuration tree.
+ * @param key The key identifying the configuration entry.
+ *
+ * @return The configuration value as a double.
+ *
+ * @throws std::runtime_error If the value cannot be retrieved or converted.
+ */
+double PCpp_double(PC_tree_t tree, std::string_view key);
 
-template <class... Args>
-long PCpp_int(PC_tree_t tree, std::string const& str, Args&&... args)
-{
-    long data = 0;
-    if (PC_status_t s = PC_int(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &data);
-        s != PC_OK) {
-        throw std::runtime_error(PC_errmsg());
-    }
-    return data;
-}
+/**
+ * @brief Retrieves a configuration value as an integer.
+ *
+ * @param tree The configuration tree.
+ * @param key The key identifying the configuration entry.
+ *
+ * @return The configuration value as a long integer.
+ *
+ * @throws std::runtime_error If the value cannot be retrieved or converted.
+ */
+long PCpp_int(PC_tree_t tree, std::string_view key);
 
-template <class... Args>
-int PCpp_len(PC_tree_t tree, std::string const& str, Args&&... args)
-{
-    int data = 0;
-    if (PC_status_t s = PC_len(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &data);
-        s != PC_OK) {
-        throw std::runtime_error(PC_errmsg());
-    }
-    return data;
-}
+/**
+ * @brief Retrieves the length of a configuration entry.
+ *
+ * @param tree The configuration tree.
+ * @param key The key identifying the configuration entry.
+ *
+ * @return The length of the configuration entry.
+ *
+ * @throws std::runtime_error If the length cannot be retrieved.
+ */
+int PCpp_len(PC_tree_t tree, std::string_view key);
 
-template <class... Args>
-bool PCpp_bool(PC_tree_t tree, std::string const& str, Args&&... args)
-{
-    int data = 0;
-    if (PC_status_t s = PC_bool(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &data);
-        s != PC_OK) {
-        throw std::runtime_error(PC_errmsg());
-    }
-    return data;
-}
+/**
+ * @brief Retrieves a configuration value as a boolean.
+ *
+ * @param tree The configuration tree.
+ * @param key The key identifying the configuration entry.
+ *
+ * @return The configuration value as a boolean.
+ *
+ * @throws std::runtime_error If the value cannot be retrieved or converted.
+ */
+bool PCpp_bool(PC_tree_t tree, std::string_view key);
 
-template <class... Args>
-std::string PCpp_string(PC_tree_t tree, std::string const& str, Args&&... args)
-{
-    char* c_str = nullptr;
-    if (PC_status_t s = PC_string(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &c_str);
-        s != PC_OK) {
-        if (c_str != nullptr) {
-            free(c_str);
-        }
-        throw std::runtime_error(PC_errmsg());
-    }
-    std::string const str_out(c_str);
-    free(c_str);
-    return str_out;
-}
+/**
+ * @brief Retrieves a configuration value as a string.
+ *
+ * @param tree The configuration tree.
+ * @param key The key identifying the configuration entry.
+ *
+ * @return The configuration value as a string.
+ *
+ * @throws std::runtime_error If the value cannot be retrieved or converted.
+ */
+std::string PCpp_string(PC_tree_t tree, std::string_view key);
 
-template <class... Args>
-PC_tree_t PCpp_get(PC_tree_t tree, std::string const& str, Args&&... args)
-{
-    return PC_get(tree, str.c_str(), std::forward<Args>(args)...);
-}
+/**
+ * @brief Retrieves a configuration entry.
+ *
+ * @param tree The configuration tree.
+ * @param key The key identifying the configuration entry.
+ *
+ * @return The configuration entry, or an invalid handle if the entry
+ *         cannot be found.
+ */
+PC_tree_t PCpp_get(PC_tree_t tree, std::string_view key);
