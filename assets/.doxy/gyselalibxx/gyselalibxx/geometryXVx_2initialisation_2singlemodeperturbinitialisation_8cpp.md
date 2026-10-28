@@ -10,7 +10,6 @@
 
 
 
-* `#include <format>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_helper.hpp"`
 * `#include "singlemodeperturbinitialisation.hpp"`

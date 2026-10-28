@@ -10,7 +10,6 @@
 
 
 
-* `#include <format>`
 * `#include <ddc/ddc.hpp>`
 * `#include "bumpontailequilibrium.hpp"`
 

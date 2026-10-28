@@ -344,12 +344,6 @@
                 </li>
     </ul>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -580,8 +574,6 @@
 <p><a href="bumpontailequilibrium_8cpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 
-#include &lt;format&gt;
-
 #include &lt;ddc/ddc.hpp&gt;
 
 #include "bumpontailequilibrium.hpp"
@@ -630,8 +622,7 @@ BumpontailEquilibrium bumpontail_equilibrium::init_from_input(
     host_t&lt;DFieldMemSp&gt; mean_velocity_bot(idx_range_kinsp);
 
     for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp
-                = PCpp_get(yaml_input_file, std::format(".SpeciesInfo[{}]", isp.uid()));
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
 
         epsilon_bot(isp) = PCpp_double(conf_isp, ".epsilon_bot");
         temperature_bot(isp) = PCpp_double(conf_isp, ".temperature_bot");

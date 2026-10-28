@@ -344,12 +344,6 @@
                 </li>
     </ul>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="src/paraconfpp/index.html">Paraconfpp</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="src/pde_solvers/index.html">PDE Solvers</a>
@@ -755,7 +749,6 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Fix compilation errors due to use of <code>std::make_tuple</code> in functions that are GPU compatible.</li>
 <li>Fix errors in <code>InterfaceDerivCoeffs</code> for uniform patches with a different <span class="arithmatex">\(\Delta x\)</span>.</li>
 <li>Fix Jean-Zay environment with missing environment variables.</li>
-<li>Fix paraconf warnings.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>
@@ -781,7 +774,6 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>The constructor of <code>PolarSplineFEMPoissonLikeAssembler</code> now takes the metric tensor as an argument and <code>PolarSplineFEMPoissonLikeAssembler::operator()</code> no longer takes the mapping. The type of the metric tensor is an additional template parameter.</li>
 <li>The constructor of <code>AdvectionFieldFinder</code> now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.</li>
 <li>Calls to Kokkos profiling's region push/pop were replaced by calls <code>ScopedRegion</code> whenever possible to capture RAII deallocations.</li>
-<li>C++ paraconf wrapper functions only accept pre-formatted strings.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

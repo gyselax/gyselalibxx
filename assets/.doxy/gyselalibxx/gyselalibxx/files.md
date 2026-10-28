@@ -281,7 +281,6 @@ Here is a list of all files with brief descriptions:
         * **dir** [**utils**](dir_573def5310cd01d120c251a7885d602c.md)     
             * **file** [**multipatch\_math\_tools.hpp**](multipatch__math__tools_8hpp.md)     
     * **dir** [**paraconfpp**](dir_7700c957c7ac062c1c9c3e42e00e7e24.md)     
-        * **file** [**paraconfpp.cpp**](paraconfpp_8cpp.md)     
         * **file** [**paraconfpp.hpp**](paraconfpp_8hpp.md)     
     * **dir** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md)     
         * **file** [**fem\_1d\_poisson\_solver.hpp**](fem__1d__poisson__solver_8hpp.md)     

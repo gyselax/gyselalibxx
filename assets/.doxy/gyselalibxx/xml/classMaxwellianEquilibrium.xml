@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="10" bodyend="22"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="9" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="64" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="24" bodyend="45"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="64" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="23" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1aebb6814626426a44934a85ced7e2fe62" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>host_t&lt; DConstFieldSp &gt;</type>
@@ -370,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="9" bodyend="17"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="7" bodyend="15"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -452,7 +452,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="55" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="19" bodyend="42"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="55" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="17" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1a86de6dac16d6f3a968b16b028c4bee8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>host_t&lt; DConstFieldSp &gt;</type>
@@ -559,7 +559,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp" bodystart="9" bodyend="17"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp" bodystart="7" bodyend="15"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -605,7 +605,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="53" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp" bodystart="19" bodyend="44"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="53" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp" bodystart="17" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1a84368004d877ee3cafba6fc09f3eaeea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>host_t&lt; ConstFieldSp&lt; Real &gt; &gt;</type>
@@ -704,7 +704,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="55" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="47" bodyend="74"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="55" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="46" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1ad10e98762e5b6716ed6e62f6768bebd9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -798,7 +798,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="81" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="76" bodyend="105"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="81" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="74" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1a45ec8865ba58e58d26fb9174e78faff7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -863,7 +863,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="68" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="46" bodyend="66"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="68" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="44" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref></type>
@@ -971,7 +971,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="67" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp" bodystart="77" bodyend="100"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="67" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp" bodystart="74" bodyend="97"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

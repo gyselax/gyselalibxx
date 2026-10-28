@@ -11,7 +11,6 @@
 
 
 * `#include <cmath>`
-* `#include <format>`
 * `#include <ddc/ddc.hpp>`
 * `#include "maxwellianequilibrium.hpp"`
 

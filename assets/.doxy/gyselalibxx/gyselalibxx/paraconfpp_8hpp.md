@@ -10,7 +10,10 @@
 
 
 
-* `#include <string_view>`
+* `#include <filesystem>`
+* `#include <stdexcept>`
+* `#include <string>`
+* `#include <utility>`
 * `#include <paraconf.h>`
 
 
@@ -53,12 +56,12 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**PCpp\_bool**](#function-pcpp_bool) (PC\_tree\_t tree, std::string\_view key) <br>_Retrieves a configuration value as a boolean._  |
-|  double | [**PCpp\_double**](#function-pcpp_double) (PC\_tree\_t tree, std::string\_view key) <br>_Retrieves a configuration value as a double._  |
-|  PC\_tree\_t | [**PCpp\_get**](#function-pcpp_get) (PC\_tree\_t tree, std::string\_view key) <br>_Retrieves a configuration entry._  |
-|  long | [**PCpp\_int**](#function-pcpp_int) (PC\_tree\_t tree, std::string\_view key) <br>_Retrieves a configuration value as an integer._  |
-|  int | [**PCpp\_len**](#function-pcpp_len) (PC\_tree\_t tree, std::string\_view key) <br>_Retrieves the length of a configuration entry._  |
-|  std::string | [**PCpp\_string**](#function-pcpp_string) (PC\_tree\_t tree, std::string\_view key) <br>_Retrieves a configuration value as a string._  |
+|  bool | [**PCpp\_bool**](#function-pcpp_bool) (PC\_tree\_t tree, std::string const & str, Args &&... args) <br> |
+|  double | [**PCpp\_double**](#function-pcpp_double) (PC\_tree\_t tree, std::string const & str, Args &&... args) <br> |
+|  PC\_tree\_t | [**PCpp\_get**](#function-pcpp_get) (PC\_tree\_t tree, std::string const & str, Args &&... args) <br> |
+|  long | [**PCpp\_int**](#function-pcpp_int) (PC\_tree\_t tree, std::string const & str, Args &&... args) <br> |
+|  int | [**PCpp\_len**](#function-pcpp_len) (PC\_tree\_t tree, std::string const & str, Args &&... args) <br> |
+|  std::string | [**PCpp\_string**](#function-pcpp_string) (PC\_tree\_t tree, std::string const & str, Args &&... args) <br> |
 
 
 
@@ -94,42 +97,17 @@
 
 ### function PCpp\_bool 
 
-_Retrieves a configuration value as a boolean._ 
 ```C++
+template<class... Args>
 bool PCpp_bool (
     PC_tree_t tree,
-    std::string_view key
+    std::string const & str,
+    Args &&... args
 ) 
 ```
 
 
 
-
-
-**Parameters:**
-
-
-* `tree` The configuration tree. 
-* `key` The key identifying the configuration entry.
-
-
-
-**Returns:**
-
-The configuration value as a boolean.
-
-
-
-
-**Exception:**
-
-
-* `std::runtime_error` If the value cannot be retrieved or converted. 
-
-
-
-
-        
 
 <hr>
 
@@ -137,42 +115,17 @@ The configuration value as a boolean.
 
 ### function PCpp\_double 
 
-_Retrieves a configuration value as a double._ 
 ```C++
+template<class... Args>
 double PCpp_double (
     PC_tree_t tree,
-    std::string_view key
+    std::string const & str,
+    Args &&... args
 ) 
 ```
 
 
 
-
-
-**Parameters:**
-
-
-* `tree` The configuration tree. 
-* `key` The key identifying the configuration entry.
-
-
-
-**Returns:**
-
-The configuration value as a double.
-
-
-
-
-**Exception:**
-
-
-* `std::runtime_error` If the value cannot be retrieved or converted. 
-
-
-
-
-        
 
 <hr>
 
@@ -180,35 +133,17 @@ The configuration value as a double.
 
 ### function PCpp\_get 
 
-_Retrieves a configuration entry._ 
 ```C++
+template<class... Args>
 PC_tree_t PCpp_get (
     PC_tree_t tree,
-    std::string_view key
+    std::string const & str,
+    Args &&... args
 ) 
 ```
 
 
 
-
-
-**Parameters:**
-
-
-* `tree` The configuration tree. 
-* `key` The key identifying the configuration entry.
-
-
-
-**Returns:**
-
-The configuration entry, or an invalid handle if the entry cannot be found. 
-
-
-
-
-
-        
 
 <hr>
 
@@ -216,42 +151,17 @@ The configuration entry, or an invalid handle if the entry cannot be found.
 
 ### function PCpp\_int 
 
-_Retrieves a configuration value as an integer._ 
 ```C++
+template<class... Args>
 long PCpp_int (
     PC_tree_t tree,
-    std::string_view key
+    std::string const & str,
+    Args &&... args
 ) 
 ```
 
 
 
-
-
-**Parameters:**
-
-
-* `tree` The configuration tree. 
-* `key` The key identifying the configuration entry.
-
-
-
-**Returns:**
-
-The configuration value as a long integer.
-
-
-
-
-**Exception:**
-
-
-* `std::runtime_error` If the value cannot be retrieved or converted. 
-
-
-
-
-        
 
 <hr>
 
@@ -259,42 +169,17 @@ The configuration value as a long integer.
 
 ### function PCpp\_len 
 
-_Retrieves the length of a configuration entry._ 
 ```C++
+template<class... Args>
 int PCpp_len (
     PC_tree_t tree,
-    std::string_view key
+    std::string const & str,
+    Args &&... args
 ) 
 ```
 
 
 
-
-
-**Parameters:**
-
-
-* `tree` The configuration tree. 
-* `key` The key identifying the configuration entry.
-
-
-
-**Returns:**
-
-The length of the configuration entry.
-
-
-
-
-**Exception:**
-
-
-* `std::runtime_error` If the length cannot be retrieved. 
-
-
-
-
-        
 
 <hr>
 
@@ -302,42 +187,17 @@ The length of the configuration entry.
 
 ### function PCpp\_string 
 
-_Retrieves a configuration value as a string._ 
 ```C++
+template<class... Args>
 std::string PCpp_string (
     PC_tree_t tree,
-    std::string_view key
+    std::string const & str,
+    Args &&... args
 ) 
 ```
 
 
 
-
-
-**Parameters:**
-
-
-* `tree` The configuration tree. 
-* `key` The key identifying the configuration entry.
-
-
-
-**Returns:**
-
-The configuration value as a string.
-
-
-
-
-**Exception:**
-
-
-* `std::runtime_error` If the value cannot be retrieved or converted. 
-
-
-
-
-        
 
 <hr>
 

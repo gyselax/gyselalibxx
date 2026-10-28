@@ -198,6 +198,12 @@
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="35" relation="include">
         </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
@@ -291,6 +297,9 @@
       <node id="10">
         <label>ddc/kernels/splines.hpp</label>
       </node>
+      <node id="35">
+        <label>filesystem</label>
+      </node>
       <node id="21">
         <label>numeric</label>
       </node>
@@ -303,8 +312,11 @@
       <node id="22">
         <label>sstream</label>
       </node>
-      <node id="35">
-        <label>string_view</label>
+      <node id="36">
+        <label>stdexcept</label>
+      </node>
+      <node id="37">
+        <label>string</label>
       </node>
       <node id="6">
         <label>type_traits</label>

@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="36" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="81" bodyend="99"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="36" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="78" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="classSingleModePerturbInitialisation_1a53f1ad6e7bf8f78b993c8c29d334f518" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="10" bodyend="18"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="8" bodyend="16"/>
       </memberdef>
       <memberdef kind="function" id="classSingleModePerturbInitialisation_1a7b5b1a18f5a18bc9a18a84b8ad1f2727" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="72" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="21" bodyend="55"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="72" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="19" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSingleModePerturbInitialisation_1acc705602deefbd30029f5cbd51223ee5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="30" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="87" bodyend="111"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="30" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="84" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classSingleModePerturbInitialisation_1a0944b2220d8397e218f67c8b2e67884b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="12" bodyend="20"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="10" bodyend="18"/>
       </memberdef>
       <memberdef kind="function" id="classSingleModePerturbInitialisation_1a7b5b1a18f5a18bc9a18a84b8ad1f2727" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="53" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="22" bodyend="60"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="53" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="20" bodyend="58"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -423,7 +423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="62" column="44" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="58" bodyend="78"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="62" column="44" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="56" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="classSingleModePerturbInitialisation_1a32e2ee595771fde8d22aa4efa691b2ab" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSingleModePerturbInitialisation" kindref="compound">SingleModePerturbInitialisation</ref></type>
@@ -478,7 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="63" column="44" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="63" bodyend="84"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="63" column="44" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="61" bodyend="81"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

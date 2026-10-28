@@ -122,12 +122,12 @@
 * **PDI\_expose\_idx\_range** ([**pdi\_helper.hpp**](pdi__helper_8hpp.md))
 * **PDI\_expose\_vector\_field** ([**pdi\_helper.hpp**](pdi__helper_8hpp.md))
 * **PDI\_get\_arrays** ([**pdi\_helper.hpp**](pdi__helper_8hpp.md))
-* **PCpp\_bool** ([**paraconfpp.cpp**](paraconfpp_8cpp.md), [**paraconfpp.hpp**](paraconfpp_8hpp.md))
-* **PCpp\_double** ([**paraconfpp.cpp**](paraconfpp_8cpp.md), [**paraconfpp.hpp**](paraconfpp_8hpp.md))
-* **PCpp\_get** ([**paraconfpp.cpp**](paraconfpp_8cpp.md), [**paraconfpp.hpp**](paraconfpp_8hpp.md))
-* **PCpp\_int** ([**paraconfpp.cpp**](paraconfpp_8cpp.md), [**paraconfpp.hpp**](paraconfpp_8hpp.md))
-* **PCpp\_len** ([**paraconfpp.cpp**](paraconfpp_8cpp.md), [**paraconfpp.hpp**](paraconfpp_8hpp.md))
-* **PCpp\_string** ([**paraconfpp.cpp**](paraconfpp_8cpp.md), [**paraconfpp.hpp**](paraconfpp_8hpp.md))
+* **PCpp\_bool** ([**paraconfpp.hpp**](paraconfpp_8hpp.md))
+* **PCpp\_double** ([**paraconfpp.hpp**](paraconfpp_8hpp.md))
+* **PCpp\_get** ([**paraconfpp.hpp**](paraconfpp_8hpp.md))
+* **PCpp\_int** ([**paraconfpp.hpp**](paraconfpp_8hpp.md))
+* **PCpp\_len** ([**paraconfpp.hpp**](paraconfpp_8hpp.md))
+* **PCpp\_string** ([**paraconfpp.hpp**](paraconfpp_8hpp.md))
 
 
 ## q

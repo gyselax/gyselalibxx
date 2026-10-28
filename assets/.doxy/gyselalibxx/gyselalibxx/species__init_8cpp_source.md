@@ -10,8 +10,6 @@
 ```C++
 // SPDX-License-Identifier: MIT
 
-#include <format>
-
 #include "species_init.hpp"
 
 /*
@@ -38,7 +36,8 @@ void init_all_species(
     for (IdxSp const isp : idxrange_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(
                 conf_gyselalibxx,
-                std::format(".SpeciesInfo[{}]", (isp - idxrange_kinsp.front()).value()));
+                ".SpeciesInfo[%d]",
+                (isp - idxrange_kinsp.front()).value());
 
         kinetic_charges(isp) = PCpp_double(conf_isp, ".charge");
         kinetic_masses(isp) = PCpp_double(conf_isp, ".mass");
@@ -65,7 +64,8 @@ void init_all_species(
     for (IdxSp const isp : idxrange_fluidsp) {
         PC_tree_t const conf_nisp = PCpp_get(
                 conf_gyselalibxx,
-                std::format(".NeutralSpeciesInfo[{}]", (isp - idxrange_fluidsp.front()).value()));
+                ".NeutralSpeciesInfo[%d]",
+                (isp - idxrange_fluidsp.front()).value());
         fluid_charges(isp) = 0.; // neutral charge is zero
         fluid_masses(isp) = PCpp_double(conf_nisp, ".mass");
     }

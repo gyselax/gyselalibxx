@@ -344,12 +344,6 @@
                 </li>
     </ul>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -581,7 +575,6 @@
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 
 #include &lt;cmath&gt;
-#include &lt;format&gt;
 
 #include &lt;ddc/ddc.hpp&gt;
 
@@ -636,8 +629,7 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
 
     for (IdxSp const isp : idx_range_kinsp) {
         IdxStepSp const step_sp = isp - idx_range_kinsp.front();
-        PC_tree_t const conf_isp
-                = PCpp_get(yaml_input_file, std::format(".SpeciesInfo[{}]", step_sp.value()));
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", step_sp.value());
 
         mass_input_file(step_sp) = PCpp_double(conf_isp, ".mass");
         density_eq_input_file(step_sp) = PCpp_double(conf_isp, ".density_eq");

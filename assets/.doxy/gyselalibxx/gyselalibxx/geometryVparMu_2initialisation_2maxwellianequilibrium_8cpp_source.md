@@ -11,7 +11,6 @@
 // SPDX-License-Identifier: MIT
 
 #include <cmath>
-#include <format>
 
 #include <ddc/ddc.hpp>
 
@@ -66,8 +65,7 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
 
     for (IdxSp const isp : idx_range_kinsp) {
         IdxStepSp const step_sp = isp - idx_range_kinsp.front();
-        PC_tree_t const conf_isp
-                = PCpp_get(yaml_input_file, std::format(".SpeciesInfo[{}]", step_sp.value()));
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", step_sp.value());
 
         mass_input_file(step_sp) = PCpp_double(conf_isp, ".mass");
         density_eq_input_file(step_sp) = PCpp_double(conf_isp, ".density_eq");

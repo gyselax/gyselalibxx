@@ -344,12 +344,6 @@
                 </li>
     </ul>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -582,21 +576,78 @@
 
 #pragma once
 
-#include &lt;string_view&gt;
+#include &lt;filesystem&gt;
+#include &lt;stdexcept&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
 
 #include &lt;paraconf.h&gt;
 
-double PCpp_double(PC_tree_t tree, std::string_view key);
+template &lt;class... Args&gt;
+double PCpp_double(PC_tree_t tree, std::string const&amp; str, Args&amp;&amp;... args)
+{
+    double data = 0.;
+    if (PC_status_t s = PC_double(PC_get(tree, str.c_str(), std::forward&lt;Args&gt;(args)...), &amp;data);
+        s != PC_OK) {
+        throw std::runtime_error(PC_errmsg());
+    }
+    return data;
+}
 
-long PCpp_int(PC_tree_t tree, std::string_view key);
+template &lt;class... Args&gt;
+long PCpp_int(PC_tree_t tree, std::string const&amp; str, Args&amp;&amp;... args)
+{
+    long data = 0;
+    if (PC_status_t s = PC_int(PC_get(tree, str.c_str(), std::forward&lt;Args&gt;(args)...), &amp;data);
+        s != PC_OK) {
+        throw std::runtime_error(PC_errmsg());
+    }
+    return data;
+}
 
-int PCpp_len(PC_tree_t tree, std::string_view key);
+template &lt;class... Args&gt;
+int PCpp_len(PC_tree_t tree, std::string const&amp; str, Args&amp;&amp;... args)
+{
+    int data = 0;
+    if (PC_status_t s = PC_len(PC_get(tree, str.c_str(), std::forward&lt;Args&gt;(args)...), &amp;data);
+        s != PC_OK) {
+        throw std::runtime_error(PC_errmsg());
+    }
+    return data;
+}
 
-bool PCpp_bool(PC_tree_t tree, std::string_view key);
+template &lt;class... Args&gt;
+bool PCpp_bool(PC_tree_t tree, std::string const&amp; str, Args&amp;&amp;... args)
+{
+    int data = 0;
+    if (PC_status_t s = PC_bool(PC_get(tree, str.c_str(), std::forward&lt;Args&gt;(args)...), &amp;data);
+        s != PC_OK) {
+        throw std::runtime_error(PC_errmsg());
+    }
+    return data;
+}
 
-std::string PCpp_string(PC_tree_t tree, std::string_view key);
+template &lt;class... Args&gt;
+std::string PCpp_string(PC_tree_t tree, std::string const&amp; str, Args&amp;&amp;... args)
+{
+    char* c_str = nullptr;
+    if (PC_status_t s = PC_string(PC_get(tree, str.c_str(), std::forward&lt;Args&gt;(args)...), &amp;c_str);
+        s != PC_OK) {
+        if (c_str != nullptr) {
+            free(c_str);
+        }
+        throw std::runtime_error(PC_errmsg());
+    }
+    std::string const str_out(c_str);
+    free(c_str);
+    return str_out;
+}
 
-PC_tree_t PCpp_get(PC_tree_t tree, std::string_view key);
+template &lt;class... Args&gt;
+PC_tree_t PCpp_get(PC_tree_t tree, std::string const&amp; str, Args&amp;&amp;... args)
+{
+    return PC_get(tree, str.c_str(), std::forward&lt;Args&gt;(args)...);
+}
 </code></pre></div>
               
             </div>

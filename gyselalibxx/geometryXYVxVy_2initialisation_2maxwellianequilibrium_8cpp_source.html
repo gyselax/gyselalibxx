@@ -344,12 +344,6 @@
                 </li>
     </ul>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" >paraconfpp</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/paraconfpp/index.html">Paraconfpp</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
@@ -580,8 +574,6 @@
 <p><a href="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 
-#include &lt;format&gt;
-
 #include &lt;ddc/ddc.hpp&gt;
 
 #include "maxwellianequilibrium.hpp"
@@ -633,9 +625,8 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
     host_t&lt;FieldMemSp&lt;Real&gt;&gt; l_mean_velocity_eq(idx_range_kinsp);
 
     for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(
-                yaml_input_file,
-                std::format(".SpeciesInfo[{}]", (isp - idx_range_kinsp.front()).value()));
+        PC_tree_t const conf_isp
+                = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp - idx_range_kinsp.front());
 
         l_density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
         l_temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");

@@ -10,7 +10,6 @@
 
 
 
-* `#include <format>`
 * `#include "species_init.hpp"`
 
 

@@ -4835,21 +4835,13 @@
     <member refid="multipatch__math__tools_8hpp_1a23226e2bb654e773c34c5f2bc71ef934" kind="function"><name>norm_inf</name></member>
     <member refid="multipatch__math__tools_8hpp_1ace3f295cabc87fb55b680e3177bfae32" kind="function"><name>error_norm_inf</name></member>
   </compound>
-  <compound refid="paraconfpp_8cpp" kind="file"><name>paraconfpp.cpp</name>
-    <member refid="paraconfpp_8cpp_1a6b3b4e751238e181a0bf4a287ab197ef" kind="function"><name>PCpp_double</name></member>
-    <member refid="paraconfpp_8cpp_1a69cce0257ada56afa715b731745c17e7" kind="function"><name>PCpp_int</name></member>
-    <member refid="paraconfpp_8cpp_1a5239b1468ac31c201e7736737568b901" kind="function"><name>PCpp_len</name></member>
-    <member refid="paraconfpp_8cpp_1a9d418e8493f50eb0964314949ec36520" kind="function"><name>PCpp_bool</name></member>
-    <member refid="paraconfpp_8cpp_1a26ebe475d0b7cc427f8cea576f3606b1" kind="function"><name>PCpp_string</name></member>
-    <member refid="paraconfpp_8cpp_1a2de9ee59b418d73562f04bb1ea93f6a3" kind="function"><name>PCpp_get</name></member>
-  </compound>
   <compound refid="paraconfpp_8hpp" kind="file"><name>paraconfpp.hpp</name>
-    <member refid="paraconfpp_8hpp_1ab855c174ba7352f0b786871270003244" kind="function"><name>PCpp_double</name></member>
-    <member refid="paraconfpp_8hpp_1a5600bb2792084141bf9fb4dc63f686d8" kind="function"><name>PCpp_int</name></member>
-    <member refid="paraconfpp_8hpp_1a4448eb80ac8601483e476230811d73b5" kind="function"><name>PCpp_len</name></member>
-    <member refid="paraconfpp_8hpp_1ab549038b588d8aae7bd614be568e3bac" kind="function"><name>PCpp_bool</name></member>
-    <member refid="paraconfpp_8hpp_1a516f60cc5242d5b00ee9373b06ca745b" kind="function"><name>PCpp_string</name></member>
-    <member refid="paraconfpp_8hpp_1a86bf102bdb89831d5ef9add6c52e16b3" kind="function"><name>PCpp_get</name></member>
+    <member refid="paraconfpp_8hpp_1a9d1729c1645f91a80866cb880a16697f" kind="function"><name>PCpp_double</name></member>
+    <member refid="paraconfpp_8hpp_1add3ab176000a81c22802c9c8be499949" kind="function"><name>PCpp_int</name></member>
+    <member refid="paraconfpp_8hpp_1a51137df1bb747e35631b1c42689741b4" kind="function"><name>PCpp_len</name></member>
+    <member refid="paraconfpp_8hpp_1a6e882bf39237aa4381d76677c8418bc7" kind="function"><name>PCpp_bool</name></member>
+    <member refid="paraconfpp_8hpp_1a83c6d2d9f6b5e9d1671a06b06930ba73" kind="function"><name>PCpp_string</name></member>
+    <member refid="paraconfpp_8hpp_1af481c2acd6f9cb038978d1fc61ab2e06" kind="function"><name>PCpp_get</name></member>
   </compound>
   <compound refid="fem__1d__poisson__solver_8hpp" kind="file"><name>fem_1d_poisson_solver.hpp</name>
   </compound>
