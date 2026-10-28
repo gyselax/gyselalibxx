@@ -245,10 +245,11 @@ public:
         }
 
         // Build the coefficients along the first dimension
-        FieldMem<data_type,
-                 typename Traits1::template batched_basis_idx_range_type<
-                         IdxRangeBatchedInterpolation>,
-                 memory_space>
+        FieldMem<
+                data_type,
+                typename Traits1::template batched_basis_idx_range_type<
+                        IdxRangeBatchedInterpolation>,
+                memory_space>
                 coeffs1_alloc(::batched_basis_idx_range(m_builder1, get_idx_range(vals)));
         m_builder1(get_field(coeffs1_alloc), vals, derivs_min1, derivs_max1);
 
@@ -260,4 +261,3 @@ public:
                 coeffs1_derivs_max2);
     }
 };
-

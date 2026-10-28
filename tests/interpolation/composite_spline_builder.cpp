@@ -878,6 +878,5 @@ TEST(CompositeSplineBuilder3D, HermiteHermiteHermiteBatched)
     ddc::init_discrete_space<GridBatch>(
             GridBatch::init(Coord<Batch>(0.0), Coord<Batch>(1.0), IdxStep<GridBatch>(4)));
     IdxRange<GridBatch> idx_range_batch(Idx<GridBatch>(0), IdxStep<GridBatch>(4));
-    check_composite_3d_against_ddc<ConfigXHermite, ConfigWHermite, ConfigZHermite>(
-            idx_range_batch);
+    check_composite_3d_against_ddc<ConfigXHermite, ConfigWHermite, ConfigZHermite>(idx_range_batch);
 }

@@ -35,7 +35,8 @@ class CompositeSplineBuilder3D
 
     static_assert(Traits23::rank() == 2);
     static_assert(std::is_same_v<typename Builder1::exec_space, typename Builder23::exec_space>);
-    static_assert(std::is_same_v<typename Builder1::memory_space, typename Builder23::memory_space>);
+    static_assert(
+            std::is_same_v<typename Builder1::memory_space, typename Builder23::memory_space>);
     static_assert(std::is_same_v<typename Traits1::data_type, typename Traits23::data_type>);
 
 public:
@@ -107,8 +108,9 @@ public:
      * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
      */
     template <class IdxRangeBatchedInterpolation>
-    using batched_derivs_idx_range_type1_2 = typename Traits1::template batched_derivs_idx_range_type<
-            batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>>;
+    using batched_derivs_idx_range_type1_2 =
+            typename Traits1::template batched_derivs_idx_range_type<
+                    batched_derivs_idx_range_type2<IdxRangeBatchedInterpolation>>;
 
     /**
      * @brief The batched index range on which the cross-derivatives in the second and third
@@ -117,8 +119,9 @@ public:
      * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
      */
     template <class IdxRangeBatchedInterpolation>
-    using batched_derivs_idx_range_type2_3 = typename Traits2::template batched_derivs_idx_range_type<
-            batched_derivs_idx_range_type3<IdxRangeBatchedInterpolation>>;
+    using batched_derivs_idx_range_type2_3 =
+            typename Traits2::template batched_derivs_idx_range_type<
+                    batched_derivs_idx_range_type3<IdxRangeBatchedInterpolation>>;
 
     /**
      * @brief The batched index range on which the cross-derivatives in the first and third
@@ -127,8 +130,9 @@ public:
      * @tparam IdxRangeBatchedInterpolation The batched index range on which the interpolation points are defined.
      */
     template <class IdxRangeBatchedInterpolation>
-    using batched_derivs_idx_range_type1_3 = typename Traits1::template batched_derivs_idx_range_type<
-            batched_derivs_idx_range_type3<IdxRangeBatchedInterpolation>>;
+    using batched_derivs_idx_range_type1_3 =
+            typename Traits1::template batched_derivs_idx_range_type<
+                    batched_derivs_idx_range_type3<IdxRangeBatchedInterpolation>>;
 
     /**
      * @brief The batched index range on which the cross-derivatives in all three dimensions
@@ -559,10 +563,11 @@ public:
         }
 
         // Build the coefficients along the first dimension
-        FieldMem<data_type,
-                 typename Traits1::template batched_basis_idx_range_type<
-                         IdxRangeBatchedInterpolation>,
-                 memory_space>
+        FieldMem<
+                data_type,
+                typename Traits1::template batched_basis_idx_range_type<
+                        IdxRangeBatchedInterpolation>,
+                memory_space>
                 coeffs1_alloc(::batched_basis_idx_range(m_builder1, get_idx_range(vals)));
         m_builder1(get_field(coeffs1_alloc), vals, derivs_min1, derivs_max1);
 
