@@ -39,6 +39,12 @@ struct Z
     static double constexpr wavenumber = 0.9;
     static double constexpr phase = 0.4;
 };
+struct W
+{
+    static bool constexpr PERIODIC = false;
+    static double constexpr wavenumber = 1.7;
+    static double constexpr phase = 0.1;
+};
 struct Batch
 {
 };
@@ -52,6 +58,9 @@ struct BSplinesY : ddc::UniformBSplines<Y, Degree, Y::PERIODIC>
 {
 };
 struct BSplinesZ : ddc::UniformBSplines<Z, Degree, Z::PERIODIC>
+{
+};
+struct BSplinesW : ddc::UniformBSplines<W, Degree, W::PERIODIC>
 {
 };
 
@@ -215,12 +224,14 @@ using ConfigXHermite = SplineConfig<BSplinesX, ddc::SplineBuilderClosure::HERMIT
 using ConfigYPeriodic = SplineConfig<BSplinesY, ddc::SplineBuilderClosure::PERIODIC>;
 using ConfigZGreville = SplineConfig<BSplinesZ, ddc::SplineBuilderClosure::GREVILLE>;
 using ConfigZHermite = SplineConfig<BSplinesZ, ddc::SplineBuilderClosure::HERMITE>;
+using ConfigWHermite = SplineConfig<BSplinesW, ddc::SplineBuilderClosure::HERMITE>;
 
 void init_bsplines()
 {
     ddc::init_discrete_space<BSplinesX>(Coord<X>(0.0), Coord<X>(1.0), IdxStep<GridX>(10));
     ddc::init_discrete_space<BSplinesY>(Coord<Y>(0.0), Coord<Y>(2.0), IdxStep<GridY>(12));
     ddc::init_discrete_space<BSplinesZ>(Coord<Z>(0.0), Coord<Z>(1.5), IdxStep<GridZ>(8));
+    ddc::init_discrete_space<BSplinesW>(Coord<W>(0.0), Coord<W>(0.8), 6);
 }
 
 /**
@@ -300,6 +311,30 @@ void fill_with_test_derivs(DField<IdxRange<Grids...>> derivs, Coord<Dims>... bou
             KOKKOS_LAMBDA(Idx<Grids...> idx) {
                 derivs(idx) = (test_function_on_dim(idx, boundaries) * ...);
             });
+}
+
+/**
+ * Allocate a field on an index range containing derivative dimensions and fill it with
+ * the values of the test function (see fill_with_test_derivs).
+ */
+template <class IdxRangeDerivs, class... Dims>
+DFieldMem<IdxRangeDerivs> make_test_derivs(
+        IdxRangeDerivs idx_range_derivs,
+        Coord<Dims>... boundaries)
+{
+    DFieldMem<IdxRangeDerivs> derivs_alloc(idx_range_derivs);
+    fill_with_test_derivs(get_field(derivs_alloc), boundaries...);
+    return derivs_alloc;
+}
+
+/// Get an optional containing the field if the condition is true, or an empty optional otherwise.
+template <class FieldType>
+std::optional<FieldType> optional_if(bool condition, FieldType field)
+{
+    if (condition) {
+        return field;
+    }
+    return std::nullopt;
 }
 
 /// Get the maximum absolute difference between two fields.
@@ -483,7 +518,10 @@ void check_composite_3d_against_ddc(IdxRange<BatchGrids...> idx_range_batch = Id
     Builder1 builder1(idx_range);
     Builder23 builder23(idx_range);
     Builder builder(builder1, builder23);
-    RefBuilder ref_builder(idx_range);
+
+    // 1D builders along the second and third dimensions (used to get the derivative index ranges)
+    typename Config2::Builder builder2(idx_range);
+    typename Config3::Builder builder3(idx_range);
 
     using Dim1 = typename Grid1::continuous_dimension_type;
     using Dim2 = typename Grid2::continuous_dimension_type;
@@ -491,35 +529,187 @@ void check_composite_3d_against_ddc(IdxRange<BatchGrids...> idx_range_batch = Id
     Coord<Dim1> const min1 = ddc::coordinate(idx_range_1.front());
     Coord<Dim1> const max1 = ddc::coordinate(idx_range_1.back());
     Coord<Dim2> const min2 = ddc::coordinate(idx_range_2.front());
+    Coord<Dim2> const max2 = ddc::coordinate(idx_range_2.back());
     Coord<Dim3> const min3 = ddc::coordinate(idx_range_3.front());
+    Coord<Dim3> const max3 = ddc::coordinate(idx_range_3.back());
 
     DFieldMem<IdxRangeBatched> vals_alloc(idx_range_batched);
     fill_with_test_values<Dim1, Dim2, Dim3>(get_field(vals_alloc));
 
     auto idx_range_derivs1 = builder1.batched_derivs_xmin_domain(idx_range_batched);
-    DFieldMem<decltype(idx_range_derivs1)> derivs_min1_alloc(idx_range_derivs1);
-    DFieldMem<decltype(idx_range_derivs1)> derivs_max1_alloc(idx_range_derivs1);
-    fill_with_test_derivs(get_field(derivs_min1_alloc), min1, min2, min3);
-    fill_with_test_derivs(get_field(derivs_max1_alloc), max1, min2, min3);
+    auto idx_range_derivs2 = builder2.batched_derivs_xmin_domain(idx_range_batched);
+    auto idx_range_derivs3 = builder3.batched_derivs_xmin_domain(idx_range_batched);
+    auto idx_range_derivs1_2 = builder1.batched_derivs_xmin_domain(idx_range_derivs2);
+    // ddc::SplineBuilder3D uses the cross-derivatives in the second and third dimensions as
+    // soon as one of these dimensions has Hermite boundary conditions. It expects degree/2
+    // derivatives along both dimensions, even if the other dimension is not Hermite.
+    IdxRange<ddc::Deriv<Dim2>> idx_range_deriv2(
+            Idx<ddc::Deriv<Dim2>>(1),
+            IdxStep<ddc::Deriv<Dim2>>(Config2::bsplines_type::degree() / 2));
+    IdxRange<ddc::Deriv<Dim3>> idx_range_deriv3(
+            Idx<ddc::Deriv<Dim3>>(1),
+            IdxStep<ddc::Deriv<Dim3>>(Config3::bsplines_type::degree() / 2));
+    auto idx_range_derivs2_3 = ddc::replace_dim_of<Grid2, ddc::Deriv<Dim2>>(
+            ddc::replace_dim_of<Grid3, ddc::Deriv<Dim3>>(idx_range_batched, idx_range_deriv3),
+            idx_range_deriv2);
+    auto idx_range_derivs1_3 = builder1.batched_derivs_xmin_domain(idx_range_derivs3);
+    auto idx_range_derivs1_2_3 = builder1.batched_derivs_xmin_domain(idx_range_derivs2_3);
+
+    auto derivs_min1_alloc = make_test_derivs(idx_range_derivs1, min1, min2, min3);
+    auto derivs_max1_alloc = make_test_derivs(idx_range_derivs1, max1, min2, min3);
+    auto derivs_min2_alloc = make_test_derivs(idx_range_derivs2, min1, min2, min3);
+    auto derivs_max2_alloc = make_test_derivs(idx_range_derivs2, min1, max2, min3);
+    auto derivs_min3_alloc = make_test_derivs(idx_range_derivs3, min1, min2, min3);
+    auto derivs_max3_alloc = make_test_derivs(idx_range_derivs3, min1, min2, max3);
+
+    auto mixed_derivs_min1_min2_alloc = make_test_derivs(idx_range_derivs1_2, min1, min2, min3);
+    auto mixed_derivs_max1_min2_alloc = make_test_derivs(idx_range_derivs1_2, max1, min2, min3);
+    auto mixed_derivs_min1_max2_alloc = make_test_derivs(idx_range_derivs1_2, min1, max2, min3);
+    auto mixed_derivs_max1_max2_alloc = make_test_derivs(idx_range_derivs1_2, max1, max2, min3);
+
+    auto mixed_derivs_min2_min3_alloc = make_test_derivs(idx_range_derivs2_3, min1, min2, min3);
+    auto mixed_derivs_max2_min3_alloc = make_test_derivs(idx_range_derivs2_3, min1, max2, min3);
+    auto mixed_derivs_min2_max3_alloc = make_test_derivs(idx_range_derivs2_3, min1, min2, max3);
+    auto mixed_derivs_max2_max3_alloc = make_test_derivs(idx_range_derivs2_3, min1, max2, max3);
+
+    auto mixed_derivs_min1_min3_alloc = make_test_derivs(idx_range_derivs1_3, min1, min2, min3);
+    auto mixed_derivs_max1_min3_alloc = make_test_derivs(idx_range_derivs1_3, max1, min2, min3);
+    auto mixed_derivs_min1_max3_alloc = make_test_derivs(idx_range_derivs1_3, min1, min2, max3);
+    auto mixed_derivs_max1_max3_alloc = make_test_derivs(idx_range_derivs1_3, max1, min2, max3);
+
+    auto mixed_derivs_min1_min2_min3_alloc
+            = make_test_derivs(idx_range_derivs1_2_3, min1, min2, min3);
+    auto mixed_derivs_max1_min2_min3_alloc
+            = make_test_derivs(idx_range_derivs1_2_3, max1, min2, min3);
+    auto mixed_derivs_min1_max2_min3_alloc
+            = make_test_derivs(idx_range_derivs1_2_3, min1, max2, min3);
+    auto mixed_derivs_max1_max2_min3_alloc
+            = make_test_derivs(idx_range_derivs1_2_3, max1, max2, min3);
+    auto mixed_derivs_min1_min2_max3_alloc
+            = make_test_derivs(idx_range_derivs1_2_3, min1, min2, max3);
+    auto mixed_derivs_max1_min2_max3_alloc
+            = make_test_derivs(idx_range_derivs1_2_3, max1, min2, max3);
+    auto mixed_derivs_min1_max2_max3_alloc
+            = make_test_derivs(idx_range_derivs1_2_3, min1, max2, max3);
+    auto mixed_derivs_max1_max2_max3_alloc
+            = make_test_derivs(idx_range_derivs1_2_3, max1, max2, max3);
 
     using IdxRangeCoeffs = typename Builder::template batched_basis_idx_range_type<IdxRangeBatched>;
     DFieldMem<IdxRangeCoeffs> coeffs_alloc(builder.batched_basis_idx_range(idx_range_batched));
-    DFieldMem<IdxRangeCoeffs> ref_coeffs_alloc(
-            ref_builder.batched_spline_domain(idx_range_batched));
+    DFieldMem<IdxRangeCoeffs> ref_coeffs_alloc(builder.batched_basis_idx_range(idx_range_batched));
+
+    constexpr bool hermite2 = Config2::closure == ddc::SplineBuilderClosure::HERMITE;
+    constexpr bool hermite3 = Config3::closure == ddc::SplineBuilderClosure::HERMITE;
+
+    // The cross-derivatives in the second and third dimensions (and the cross-derivatives in
+    // all three dimensions) are only needed if both the second and the third dimensions are
+    // Hermite. Check that CompositeSplineBuilder3D does not require them otherwise.
+    constexpr bool hermite2_3 = hermite2 && hermite3;
 
     builder(get_field(coeffs_alloc),
             get_const_field(vals_alloc),
             std::optional(get_const_field(derivs_min1_alloc)),
-            std::optional(get_const_field(derivs_max1_alloc)));
-    ref_builder(
-            get_field(ref_coeffs_alloc),
-            get_const_field(vals_alloc),
-            std::optional(get_const_field(derivs_min1_alloc)),
-            std::optional(get_const_field(derivs_max1_alloc)));
+            std::optional(get_const_field(derivs_max1_alloc)),
+            std::optional(get_const_field(derivs_min2_alloc)),
+            std::optional(get_const_field(derivs_max2_alloc)),
+            std::optional(get_const_field(derivs_min3_alloc)),
+            std::optional(get_const_field(derivs_max3_alloc)),
+            std::optional(get_const_field(mixed_derivs_min1_min2_alloc)),
+            std::optional(get_const_field(mixed_derivs_max1_min2_alloc)),
+            std::optional(get_const_field(mixed_derivs_min1_max2_alloc)),
+            std::optional(get_const_field(mixed_derivs_max1_max2_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_min2_min3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_max2_min3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_min2_max3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_max2_max3_alloc)),
+            std::optional(get_const_field(mixed_derivs_min1_min3_alloc)),
+            std::optional(get_const_field(mixed_derivs_max1_min3_alloc)),
+            std::optional(get_const_field(mixed_derivs_min1_max3_alloc)),
+            std::optional(get_const_field(mixed_derivs_max1_max3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_min1_min2_min3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_max1_min2_min3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_min1_max2_min3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_max1_max2_min3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_min1_min2_max3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_max1_min2_max3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_min1_max2_max3_alloc)),
+            optional_if(hermite2_3, get_const_field(mixed_derivs_max1_max2_max3_alloc)));
 
-    EXPECT_LE(
-            max_abs_difference(get_const_field(coeffs_alloc), get_const_field(ref_coeffs_alloc)),
-            1e-13);
+    // ddc::SplineBuilder3D fails if the third dimension is Hermite but the second is not, as it
+    // uses the cross-derivatives in the second and third dimensions as soon as one of these
+    // dimensions is Hermite. In this case the reference is computed with ddc::SplineBuilder3D
+    // treating the third dimension first. This gives the same coefficients up to round-off.
+    if constexpr (hermite3 && !hermite2) {
+        static_assert(
+                Config1::closure != ddc::SplineBuilderClosure::HERMITE,
+                "The reordered reference only handles Hermite boundary conditions in the third "
+                "dimension");
+        using RefBuilderReordered = ddc::SplineBuilder3D<
+                ExecSpace,
+                MemSpace,
+                typename Config3::bsplines_type,
+                typename Config1::bsplines_type,
+                typename Config2::bsplines_type,
+                Grid3,
+                Grid1,
+                Grid2,
+                Config3::closure,
+                Config3::closure,
+                Config1::closure,
+                Config1::closure,
+                Config2::closure,
+                Config2::closure,
+                ddc::SplineSolver::LAPACK>;
+        RefBuilderReordered ref_builder(idx_range);
+        ref_builder(
+                get_field(ref_coeffs_alloc),
+                get_const_field(vals_alloc),
+                std::optional(get_const_field(derivs_min3_alloc)),
+                std::optional(get_const_field(derivs_max3_alloc)));
+
+        EXPECT_LE(
+                max_abs_difference(
+                        get_const_field(coeffs_alloc),
+                        get_const_field(ref_coeffs_alloc)),
+                1e-12);
+    } else {
+        RefBuilder ref_builder(idx_range);
+        ref_builder(
+                get_field(ref_coeffs_alloc),
+                get_const_field(vals_alloc),
+                std::optional(get_const_field(derivs_min1_alloc)),
+                std::optional(get_const_field(derivs_max1_alloc)),
+                std::optional(get_const_field(derivs_min2_alloc)),
+                std::optional(get_const_field(derivs_max2_alloc)),
+                std::optional(get_const_field(derivs_min3_alloc)),
+                std::optional(get_const_field(derivs_max3_alloc)),
+                std::optional(get_const_field(mixed_derivs_min1_min2_alloc)),
+                std::optional(get_const_field(mixed_derivs_max1_min2_alloc)),
+                std::optional(get_const_field(mixed_derivs_min1_max2_alloc)),
+                std::optional(get_const_field(mixed_derivs_max1_max2_alloc)),
+                std::optional(get_const_field(mixed_derivs_min2_min3_alloc)),
+                std::optional(get_const_field(mixed_derivs_max2_min3_alloc)),
+                std::optional(get_const_field(mixed_derivs_min2_max3_alloc)),
+                std::optional(get_const_field(mixed_derivs_max2_max3_alloc)),
+                std::optional(get_const_field(mixed_derivs_min1_min3_alloc)),
+                std::optional(get_const_field(mixed_derivs_max1_min3_alloc)),
+                std::optional(get_const_field(mixed_derivs_min1_max3_alloc)),
+                std::optional(get_const_field(mixed_derivs_max1_max3_alloc)),
+                std::optional(get_const_field(mixed_derivs_min1_min2_min3_alloc)),
+                std::optional(get_const_field(mixed_derivs_max1_min2_min3_alloc)),
+                std::optional(get_const_field(mixed_derivs_min1_max2_min3_alloc)),
+                std::optional(get_const_field(mixed_derivs_max1_max2_min3_alloc)),
+                std::optional(get_const_field(mixed_derivs_min1_min2_max3_alloc)),
+                std::optional(get_const_field(mixed_derivs_max1_min2_max3_alloc)),
+                std::optional(get_const_field(mixed_derivs_min1_max2_max3_alloc)),
+                std::optional(get_const_field(mixed_derivs_max1_max2_max3_alloc)));
+
+        EXPECT_LE(
+                max_abs_difference(
+                        get_const_field(coeffs_alloc),
+                        get_const_field(ref_coeffs_alloc)),
+                1e-13);
+    }
 }
 
 } // namespace
@@ -665,4 +855,28 @@ TEST(CompositeSplineBuilder3D, GrevillePeriodicGreville)
 TEST(CompositeSplineBuilder3D, HermitePeriodicGreville)
 {
     check_composite_3d_against_ddc<ConfigXHermite, ConfigYPeriodic, ConfigZGreville>();
+}
+
+TEST(CompositeSplineBuilder3D, PeriodicHermiteGreville)
+{
+    check_composite_3d_against_ddc<ConfigYPeriodic, ConfigXHermite, ConfigZGreville>();
+}
+
+TEST(CompositeSplineBuilder3D, GrevillePeriodicHermite)
+{
+    check_composite_3d_against_ddc<ConfigXGreville, ConfigYPeriodic, ConfigZHermite>();
+}
+
+TEST(CompositeSplineBuilder3D, HermiteHermiteHermite)
+{
+    check_composite_3d_against_ddc<ConfigXHermite, ConfigWHermite, ConfigZHermite>();
+}
+
+TEST(CompositeSplineBuilder3D, HermiteHermiteHermiteBatched)
+{
+    ddc::init_discrete_space<GridBatch>(
+            GridBatch::init(Coord<Batch>(0.0), Coord<Batch>(1.0), IdxStep<GridBatch>(4)));
+    IdxRange<GridBatch> idx_range_batch(Idx<GridBatch>(0), IdxStep<GridBatch>(4));
+    check_composite_3d_against_ddc<ConfigXHermite, ConfigWHermite, ConfigZHermite>(
+            idx_range_batch);
 }
