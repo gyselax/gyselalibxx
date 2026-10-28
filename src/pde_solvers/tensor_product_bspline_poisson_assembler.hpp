@@ -6,9 +6,9 @@
 #include "gauss_legendre_integration.hpp"
 #include "identity_coordinate_change.hpp"
 #include "metric_tensor_evaluator.hpp"
-#include "volume_quadrature_nd.hpp"
 #include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_interpolation.hpp"
+#include "volume_quadrature_nd.hpp"
 
 
 namespace detail {
@@ -89,8 +89,10 @@ KOKKOS_FUNCTION double weak_integral_element(
         EvalDeriv1DType const& trial_bspline_val_and_deriv,
         EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
         EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
-        DConstField<IdxRange<typename ThisPatch::BSplines1, typename ThisPatch::BSplines2>> coeff_alpha,
-        DConstField<IdxRange<typename ThisPatch::BSplines1, typename ThisPatch::BSplines2>> coeff_beta,
+        DConstField<IdxRange<typename ThisPatch::BSplines1, typename ThisPatch::BSplines2>>
+                coeff_alpha,
+        DConstField<IdxRange<typename ThisPatch::BSplines1, typename ThisPatch::BSplines2>>
+                coeff_beta,
         SplineRThetaEvaluatorNullBound const& spline_evaluator,
         Mapping const& mapping,
         DField<IdxRange<QDimRMesh, QDimThetaMesh>> int_volume)
@@ -217,31 +219,29 @@ class TensorProductBSplinePoissonAssembler
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
     using SplineRThetaEvaluatorNullBound = std::conditional_t<
-        s_theta_is_periodic, 
-        ddc::SplineEvaluator2D<
-            Kokkos::DefaultExecutionSpace,
-            typename Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule, // boundary at r=0
-            ddc::NullExtrapolationRule, // boundary at rmax
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>
-        >,
-        ddc::SplineEvaluator2D<
-            Kokkos::DefaultExecutionSpace,
-            typename Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta, // MARK1
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule, // boundary at r=0
-            ddc::NullExtrapolationRule, // boundary at rmax
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule>
-    >;
+            s_theta_is_periodic,
+            ddc::SplineEvaluator2D<
+                    Kokkos::DefaultExecutionSpace,
+                    typename Kokkos::DefaultExecutionSpace::memory_space,
+                    BSplinesR,
+                    BSplinesTheta,
+                    GridR,
+                    GridTheta,
+                    ddc::NullExtrapolationRule, // boundary at r=0
+                    ddc::NullExtrapolationRule, // boundary at rmax
+                    ddc::PeriodicExtrapolationRule<Theta>,
+                    ddc::PeriodicExtrapolationRule<Theta>>,
+            ddc::SplineEvaluator2D<
+                    Kokkos::DefaultExecutionSpace,
+                    typename Kokkos::DefaultExecutionSpace::memory_space,
+                    BSplinesR,
+                    BSplinesTheta, // MARK1
+                    GridR,
+                    GridTheta,
+                    ddc::NullExtrapolationRule, // boundary at r=0
+                    ddc::NullExtrapolationRule, // boundary at rmax
+                    ddc::NullExtrapolationRule,
+                    ddc::NullExtrapolationRule>>;
 
     const int m_nbasis_r;
     const int m_nbasis_theta;
@@ -311,13 +311,11 @@ class TensorProductBSplinePoissonAssembler
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
     using Mapping = std::conditional_t<
-        s_theta_is_periodic,
-        CircularToCartesian<typename ThisPatch::Dim1, typename ThisPatch::Dim2, X, Y>,
-        IdentityCoordinateChange<
-            VectorIndexSet<typename ThisPatch::Dim1, typename ThisPatch::Dim2>,
-            VectorIndexSet<X, Y>
-        >
-    >;
+            s_theta_is_periodic,
+            CircularToCartesian<typename ThisPatch::Dim1, typename ThisPatch::Dim2, X, Y>,
+            IdentityCoordinateChange<
+                    VectorIndexSet<typename ThisPatch::Dim1, typename ThisPatch::Dim2>,
+                    VectorIndexSet<X, Y>>>;
     Mapping m_mapping;
 
 public:
@@ -410,61 +408,63 @@ public:
         std::size_t const n_splines_1d_overlap = 2 * degree + 1;
 
         // TODO: Add Comments!
-        auto compute_nnz_per_row = [&](int j){
-            int min_idx = std::max(j-3,0);
-            int max_idx = std::min(j+3,m_nbasis_theta-1);
+        auto compute_nnz_per_row = [&](int j) {
+            int min_idx = std::max(j - 3, 0);
+            int max_idx = std::min(j + 3, m_nbasis_theta - 1);
             return max_idx + 1 - min_idx;
         };
-        auto nnz_per_row_for_thetas = [&](int i){
-            for (int j=0; j < m_nbasis_theta; j++){
-                const int row_offset = i*m_nbasis_theta;
-                nnz_per_row_csr_host(row_offset + j + 2) = (degree + i + 1) * compute_nnz_per_row(j);
+        auto nnz_per_row_for_thetas = [&](int i) {
+            for (int j = 0; j < m_nbasis_theta; j++) {
+                const int row_offset = i * m_nbasis_theta;
+                nnz_per_row_csr_host(row_offset + j + 2)
+                        = (degree + i + 1) * compute_nnz_per_row(j);
             }
         };
 
         // Fill the nnz_per_row array for the first couple of r values
         for (int i(0); i < degree; i++) {
-            if constexpr (s_theta_is_periodic){
-                for(int k(i * m_nbasis_theta); k < (i + 1) * m_nbasis_theta; k++) {
+            if constexpr (s_theta_is_periodic) {
+                for (int k(i * m_nbasis_theta); k < (i + 1) * m_nbasis_theta; k++) {
                     nnz_per_row_csr_host(k + 2) = (degree + i + 1) * n_splines_1d_overlap;
                 }
-            }
-            else{
-                for(int j=0; j < m_nbasis_theta; j++){
-                    const int row_offset = i*m_nbasis_theta;
-                    nnz_per_row_csr_host(row_offset + j + 2) = (degree + i + 1) * compute_nnz_per_row(j);
+            } else {
+                for (int j = 0; j < m_nbasis_theta; j++) {
+                    const int row_offset = i * m_nbasis_theta;
+                    nnz_per_row_csr_host(row_offset + j + 2)
+                            = (degree + i + 1) * compute_nnz_per_row(j);
                 }
             }
         }
-        if constexpr(s_theta_is_periodic){
+        if constexpr (s_theta_is_periodic) {
             for (int i(degree * m_nbasis_theta); i < m_matrix_size - degree * m_nbasis_theta; i++) {
                 nnz_per_row_csr_host(i + 2) = n_splines_1d_overlap * n_splines_1d_overlap;
             }
-        }
-        else{
-            for(int i=degree; i < m_nbasis_r - degree; i++){
-                for(int j=0; j < m_nbasis_theta; j++){
-                    const int row_offset = i*m_nbasis_theta;
-                    nnz_per_row_csr_host(row_offset + j + 2) = n_splines_1d_overlap * compute_nnz_per_row(j);
+        } else {
+            for (int i = degree; i < m_nbasis_r - degree; i++) {
+                for (int j = 0; j < m_nbasis_theta; j++) {
+                    const int row_offset = i * m_nbasis_theta;
+                    nnz_per_row_csr_host(row_offset + j + 2)
+                            = n_splines_1d_overlap * compute_nnz_per_row(j);
                 }
             }
         }
 
         for (int i(1); i < degree + 1; i++) {
-            if constexpr(s_theta_is_periodic)
+            if constexpr (s_theta_is_periodic)
                 for (size_t k(m_matrix_size - i * m_nbasis_theta);
-                    k < m_matrix_size - (i - 1) * m_nbasis_theta;
-                    k++) {
+                     k < m_matrix_size - (i - 1) * m_nbasis_theta;
+                     k++) {
                     nnz_per_row_csr_host(k + 2) = (degree + i) * n_splines_1d_overlap;
                 }
             else
-                for (int j=0; j < m_nbasis_theta; j++){
-                    const int row_offset = (m_nbasis_theta - i)*m_nbasis_theta;
-                    nnz_per_row_csr_host(row_offset + j + 2) = (degree + i) * compute_nnz_per_row(j);
+                for (int j = 0; j < m_nbasis_theta; j++) {
+                    const int row_offset = (m_nbasis_theta - i) * m_nbasis_theta;
+                    nnz_per_row_csr_host(row_offset + j + 2)
+                            = (degree + i) * compute_nnz_per_row(j);
                 }
         }
 
-        
+
         // sum non-zero elements count
         for (size_t k = 2; k < m_matrix_size + 2; k++) {
             nnz_per_row_csr_host(k) += nnz_per_row_csr_host(k - 1);
@@ -486,17 +486,15 @@ public:
 
         ddc::NullExtrapolationRule bv_r_min;
         ddc::NullExtrapolationRule bv_r_max;
-        auto init_spline_evaluator = [&](){
-            if constexpr (s_theta_is_periodic){
+        auto init_spline_evaluator = [&]() {
+            if constexpr (s_theta_is_periodic) {
                 return SplineRThetaEvaluatorNullBound(
-                    bv_r_min, 
-                    bv_r_max, 
-                    ddc::PeriodicExtrapolationRule<Theta>{}, 
-                    ddc::PeriodicExtrapolationRule<Theta>{});
-            }
-            else
+                        bv_r_min,
+                        bv_r_max,
+                        ddc::PeriodicExtrapolationRule<Theta> {},
+                        ddc::PeriodicExtrapolationRule<Theta> {});
+            } else
                 return SplineRThetaEvaluatorNullBound(bv_r_min, bv_r_max, bv_r_min, bv_r_max);
-
         };
         SplineRThetaEvaluatorNullBound spline_evaluator = init_spline_evaluator(); // MARK0
 
@@ -515,21 +513,18 @@ public:
             // The other ones are dealt with using the symmetry
             // These are the theta indices that have remain to be filled
             IdxRangeBSTheta remaining_theta;
-            if constexpr(s_theta_is_periodic){
+            if constexpr (s_theta_is_periodic) {
                 remaining_theta = IdxRangeBSTheta(
                         Idx<BSplinesTheta> {idx_test_theta},
                         IdxStep<BSplinesTheta> {BSplinesTheta::degree() + 1});
-            }
-            else{
-                remaining_theta = IdxRangeBSTheta (
-                    Idx<BSplinesTheta> {idx_test_theta},
-                    IdxStep<BSplinesTheta> {
-                        std::min(
-                            static_cast<int>(BSplinesTheta::degree() + 1), 
-                            static_cast<int>(m_nbasis_theta) - static_cast<int>(idx_test_theta)
-                        )
-                    }
-                );
+            } else {
+                remaining_theta = IdxRangeBSTheta(
+                        Idx<BSplinesTheta> {idx_test_theta},
+                        IdxStep<BSplinesTheta> {
+                                std::
+                                        min(static_cast<int>(BSplinesTheta::degree() + 1),
+                                            static_cast<int>(m_nbasis_theta)
+                                                    - static_cast<int>(idx_test_theta))});
             }
             // Fill the entries with the same r-index first
             ddc::host_for_each(remaining_theta, [&](Idx<BSplinesTheta> const idx_trial_theta) {
@@ -542,8 +537,7 @@ public:
                         spline_evaluator,
                         m_mapping);
                 if (idx_test == idx_trial) {
-
-                    // 
+                    //
 
                     const int idx = nnz_per_row_csr_host(int_idx_test + 1);
                     assert("Idx out of bounds" && idx >= 0 && idx < cols_csr.size());
@@ -557,10 +551,9 @@ public:
                 } else {
                     const std::size_t idx_trial_r(ddc::select<BSplinesR>(idx_trial).uid());
                     std::size_t idx_trial_theta_ul;
-                    if constexpr(s_theta_is_periodic){
+                    if constexpr (s_theta_is_periodic) {
                         idx_trial_theta_ul = theta_mod(ddc::select<BSplinesTheta>(idx_trial).uid());
-                    }
-                    else
+                    } else
                         idx_trial_theta_ul = ddc::select<BSplinesTheta>(idx_trial).uid();
                     const int int_idx_trial = idx_trial_r * n_splines_theta + idx_trial_theta_ul;
                     const int aij_idx = nnz_per_row_csr_host(int_idx_test + 1);
@@ -595,30 +588,25 @@ public:
             // Now we need the relevant theta to the left and the right
             // We add the whole N_theta. That can not work in the non-periodic context
             IdxRangeBSTheta relevant_theta;
-            if constexpr(s_theta_is_periodic){
+            if constexpr (s_theta_is_periodic) {
                 relevant_theta = IdxRangeBSTheta(
                         Idx<BSplinesTheta> {
                                 idx_test_theta + ddc::discrete_space<BSplinesTheta>().nbasis()
                                 - BSplinesTheta::degree()},
                         IdxStep<BSplinesTheta> {2 * BSplinesTheta::degree() + 1});
-            }
-            else{
-                Idx<BSplinesTheta> const idx_min{
-                    std::max(0, static_cast<int>(idx_test_theta)-3)
-                };
-                Idx<BSplinesTheta> const idx_max{
-                    std::min(m_nbasis_theta - 1, static_cast<int>(idx_test_theta)+3)
-                };
-                relevant_theta = IdxRangeBSTheta(
-                        Idx<BSplinesTheta> {idx_min},
-                        idx_max + 1 - idx_min
-                );
+            } else {
+                Idx<BSplinesTheta> const idx_min {
+                        std::max(0, static_cast<int>(idx_test_theta) - 3)};
+                Idx<BSplinesTheta> const idx_max {
+                        std::min(m_nbasis_theta - 1, static_cast<int>(idx_test_theta) + 3)};
+                relevant_theta
+                        = IdxRangeBSTheta(Idx<BSplinesTheta> {idx_min}, idx_max + 1 - idx_min);
             }
             IdxRangeBSRTheta trial_idx_range(remaining_r, relevant_theta);
             ddc::host_for_each(trial_idx_range, [&](IdxBSRTheta const idx_trial) {
                 const int idx_trial_r(ddc::select<BSplinesR>(idx_trial).uid());
                 int idx_trial_theta;
-                if constexpr(s_theta_is_periodic)
+                if constexpr (s_theta_is_periodic)
                     idx_trial_theta = theta_mod(ddc::select<BSplinesTheta>(idx_trial).uid());
                 else
                     idx_trial_theta = ddc::select<BSplinesTheta>(idx_trial).uid();
@@ -706,10 +694,9 @@ public:
         if constexpr (s_theta_is_periodic) {
             idx_test_theta = theta_mod(ddc::select<BSplinesTheta>(idx_test).uid());
             idx_trial_theta = theta_mod(ddc::select<BSplinesTheta>(idx_trial).uid());
-        }
-        else{
+        } else {
             idx_test_theta = ddc::select<BSplinesTheta>(idx_test).uid();
-            idx_trial_theta =ddc::select<BSplinesTheta>(idx_trial).uid();
+            idx_trial_theta = ddc::select<BSplinesTheta>(idx_trial).uid();
         }
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
 
@@ -733,13 +720,12 @@ public:
         // modulo. The threshold nbasis_theta - p is where "far to the right" turns into "close on the
         // left": an offset in [nbasis - p, nbasis - 1] corresponds to [-p, -1].
         int theta_offset;
-        if constexpr(s_theta_is_periodic) {
+        if constexpr (s_theta_is_periodic) {
             theta_offset = theta_mod(idx_trial_theta - idx_test_theta);
             if (theta_offset >= int(m_nbasis_theta - BSplinesTheta::degree())) {
                 theta_offset -= m_nbasis_theta;
             }
-        }
-        else{
+        } else {
             theta_offset = idx_trial_theta - idx_test_theta;
         }
         assert(r_offset >= 0);
@@ -788,14 +774,13 @@ public:
             //      j > i they intersect on [j - p, i], i.e. first = j - p and n = p + 1 - offset cells.
             //      Example (p = 3): test 5, trial 6: cells [3, 6] cap [2, 5] = [3, 5], first = 3, n = 3.
             //      With periodicity first is taken modulo the number of cells.
-            if constexpr(s_theta_is_periodic){
+            if constexpr (s_theta_is_periodic) {
                 first_overlap_theta = theta_mod(idx_trial_theta - BSplinesTheta::degree());
-            }
-            else
+            } else
                 first_overlap_theta = idx_trial_theta - BSplinesTheta::degree();
-                // The same formula as in the periodic branch, first = j - p, but without the
-                //      modulo. It can therefore be negative (j < p) or the range can end beyond the
-                //      last cell; both are cut to the existing cells further down (the F1 fix).
+            // The same formula as in the periodic branch, first = j - p, but without the
+            //      modulo. It can therefore be negative (j < p) or the range can end beyond the
+            //      last cell; both are cut to the existing cells further down (the F1 fix).
         } else {
             n_overlap_stencil_theta = BSplinesTheta::degree() + 1 + theta_offset;
             // first_overlap_* is the first cell where both splines are non-zero, n_overlap_stencil_* the number of such
@@ -804,10 +789,9 @@ public:
             //      [i - p, j]: first = i - p, n = p + 1 + offset.
             //      Example (p = 3): test 6, trial 5 (offset -1): [3, 6] cap [2, 5] = [3, 5], first = 3, n = 3.
             //      offset = 0 (same spline): first = i - p, n = p + 1, the whole support.
-            if constexpr(s_theta_is_periodic){
+            if constexpr (s_theta_is_periodic) {
                 first_overlap_theta = theta_mod(idx_test_theta - BSplinesTheta::degree());
-            }
-            else
+            } else
                 first_overlap_theta = idx_test_theta - BSplinesTheta::degree();
         }
 
@@ -956,10 +940,11 @@ public:
             idx_theta -= ncells_theta;
         return idx_theta;
     }
-    auto get_idx_range_bsplines_theta(){
+    auto get_idx_range_bsplines_theta()
+    {
         if constexpr (s_theta_is_periodic)
             return ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
-                IdxStep<BSplinesTheta> {m_nbasis_theta});
+                    IdxStep<BSplinesTheta> {m_nbasis_theta});
         else
             return ddc::discrete_space<BSplinesTheta>().full_domain();
     }
