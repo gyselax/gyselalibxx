@@ -66,7 +66,8 @@ template <
         class BSplinesPerp1Type,
         class BSplinesPerp2Type,
         Extremity extremity_1,
-        Extremity extremity_2>
+        Extremity extremity_2,
+        class ExecSpace = Kokkos::DefaultExecutionSpace>
 class DerivReconstructionCoeffs
 {
 protected:
@@ -95,6 +96,9 @@ protected:
     /// @brief The grid of break points of the B-splines on patch 2.
     using GridBreakPt2 = ddc::knot_discrete_dimension_t<BSplinesPerp2>;
 
+    using exec_space = ExecSpace;
+    using mem_space = typename ExecSpace::memory_space;
+
 protected:
     /// @brief True if patch 1 has an additional interpolation point in its boundary cell (Greville closure).
     const bool m_is_cell_bound_1_with_extra_interpol_pt;
@@ -117,14 +121,14 @@ protected:
     double m_coeff_deriv_patch_2;
 
     /// @brief The memory allocated for the weights of the function values on patch 1.
-    host_t<DFieldMem<IdxRange1DPerp_1>> m_weights_patch_1_alloc;
+    DFieldMem<IdxRange1DPerp_1, mem_space> m_weights_patch_1_alloc;
     /// @brief The memory allocated for the weights of the function values on patch 2.
-    host_t<DFieldMem<IdxRange1DPerp_2>> m_weights_patch_2_alloc;
+    DFieldMem<IdxRange1DPerp_2, mem_space> m_weights_patch_2_alloc;
 
     /// @brief The weights @f$ \omega_k @f$ of the function values on patch 1 in the coefficient (c).
-    host_t<DField<IdxRange1DPerp_1>> m_weights_patch_1;
+    DField<IdxRange1DPerp_1, mem_space> m_weights_patch_1;
     /// @brief The weights @f$ \omega_k @f$ of the function values on patch 2 in the coefficient (c).
-    host_t<DField<IdxRange1DPerp_2>> m_weights_patch_2;
+    DField<IdxRange1DPerp_2, mem_space> m_weights_patch_2;
 
 public:
     /**
@@ -353,8 +357,8 @@ public:
      */
     template <class Layout1, class Layout2>
     inline double get_approx_deriv(
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
+            DConstField<IdxRange1DPerp_1, mem_space, Layout1> const& function_1,
+            DConstField<IdxRange1DPerp_2, mem_space, Layout2> const& function_2) const
     {
         return get_approx_with_change_of_sign(function_1, function_2, 1);
     }
@@ -368,8 +372,8 @@ public:
      */
     template <class Layout1, class Layout2>
     inline double get_approx_deriv(
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
+            DConstField<IdxRange1DPerp_2, mem_space, Layout2> const& function_2,
+            DConstField<IdxRange1DPerp_1, mem_space, Layout1> const& function_1) const
             requires(!std::is_same_v<IdxRange1DPerp_2, IdxRange1DPerp_1>)
     {
         return get_approx_with_change_of_sign(function_1, function_2, 1);
@@ -396,8 +400,8 @@ public:
      */
     template <class Layout1, class Layout2>
     inline double get_approx_cross_deriv(
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1,
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2,
+            DConstField<IdxRange1DPerp_1, mem_space, Layout1> const& derivs_1,
+            DConstField<IdxRange1DPerp_2, mem_space, Layout2> const& derivs_2,
             int const sign_deriv_2) const
     {
         return this->get_approx_with_change_of_sign(derivs_1, derivs_2, sign_deriv_2);
@@ -415,8 +419,8 @@ protected:
      */
     template <class Layout1, class Layout2>
     double get_approx_with_change_of_sign(
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
+            DConstField<IdxRange1DPerp_1, mem_space, Layout1> const& function_1,
+            DConstField<IdxRange1DPerp_2, mem_space, Layout2> const& function_2,
             int const sign_function_2) const
     {
         // The function needs to be continuous at the interface.
@@ -425,19 +429,28 @@ protected:
                              * function_2(get_extremity_idx(s_extremity_2, m_idx_range_perp_2)))
                < 1e-13);
 
-        double coeff_values = ddc::host_transform_reduce(
+        DField<IdxRange1DPerp_1, mem_space> weights_patch_1 = m_weights_patch_1;
+        const std::source_location location = std::source_location::current();
+        double coeff_values = ddc::parallel_transform_reduce(
+                location.function_name(),
+                exec_space(),
                 m_idx_range_perp_1,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](Idx1D_1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
+                KOKKOS_LAMBDA(Idx1D_1 const& idx) {
+                    return function_1(idx) * weights_patch_1(idx);
+                });
 
+        DField<IdxRange1DPerp_2, mem_space> weights_patch_2 = m_weights_patch_2;
         // To avoid counting twice the value at the interface.
-        coeff_values += ddc::host_transform_reduce(
+        coeff_values += ddc::parallel_transform_reduce(
+                location.function_name(),
+                exec_space(),
                 m_idx_range_perp_2,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](Idx1D_2 const& idx) {
-                    return sign_function_2 * function_2(idx) * m_weights_patch_2(idx);
+                KOKKOS_LAMBDA(Idx1D_2 const& idx) {
+                    return sign_function_2 * function_2(idx) * weights_patch_2(idx);
                 });
         return coeff_values;
     }
@@ -546,21 +559,21 @@ protected:
     {
         // Memory allocation ---------------------------------------------------------------------
         // Define weight fields for number of cells equal to n, n-1 and n-2 in the recursion.
-        host_t<DFieldMem<IdxRange1DPerp_1>> weights_1_alloc_minus_2(m_idx_range_perp_1);
-        host_t<DFieldMem<IdxRange1DPerp_1>> weights_1_alloc_minus_1(m_idx_range_perp_1);
-        host_t<DFieldMem<IdxRange1DPerp_1>> weights_1_alloc_minus_0(m_idx_range_perp_1);
+        DFieldMem<IdxRange1DPerp_1, mem_space> weights_1_alloc_minus_2(m_idx_range_perp_1);
+        DFieldMem<IdxRange1DPerp_1, mem_space> weights_1_alloc_minus_1(m_idx_range_perp_1);
+        DFieldMem<IdxRange1DPerp_1, mem_space> weights_1_alloc_minus_0(m_idx_range_perp_1);
 
-        host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_2(m_idx_range_perp_2);
-        host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_1(m_idx_range_perp_2);
-        host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_0(m_idx_range_perp_2);
+        DFieldMem<IdxRange1DPerp_2, mem_space> weights_2_alloc_minus_2(m_idx_range_perp_2);
+        DFieldMem<IdxRange1DPerp_2, mem_space> weights_2_alloc_minus_1(m_idx_range_perp_2);
+        DFieldMem<IdxRange1DPerp_2, mem_space> weights_2_alloc_minus_0(m_idx_range_perp_2);
 
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_2(weights_1_alloc_minus_2);
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_1(weights_1_alloc_minus_1);
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_0(weights_1_alloc_minus_0);
+        DField<IdxRange1DPerp_1, mem_space> weights_1_minus_2(weights_1_alloc_minus_2);
+        DField<IdxRange1DPerp_1, mem_space> weights_1_minus_1(weights_1_alloc_minus_1);
+        DField<IdxRange1DPerp_1, mem_space> weights_1_minus_0(weights_1_alloc_minus_0);
 
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_2(weights_2_alloc_minus_2);
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_1(weights_2_alloc_minus_1);
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_0(weights_2_alloc_minus_0);
+        DField<IdxRange1DPerp_2, mem_space> weights_2_minus_2(weights_2_alloc_minus_2);
+        DField<IdxRange1DPerp_2, mem_space> weights_2_minus_1(weights_2_alloc_minus_1);
+        DField<IdxRange1DPerp_2, mem_space> weights_2_minus_0(weights_2_alloc_minus_0);
 
         int const n_points_1 = m_idx_range_perp_1.size();
         int const n_points_2 = m_idx_range_perp_2.size();
@@ -582,9 +595,9 @@ protected:
         ddc::parallel_fill(weights_2_minus_0, 0.0);
 
         // Store the 3 last steps for the recursion in an array.
-        std::array<host_t<DField<IdxRange1DPerp_1>>, 3> weights_patch1
+        std::array<DField<IdxRange1DPerp_1, mem_space>, 3> weights_patch1
                 = {weights_1_minus_2, weights_1_minus_1, weights_1_minus_0};
-        std::array<host_t<DField<IdxRange1DPerp_2>>, 3> weights_patch2
+        std::array<DField<IdxRange1DPerp_2, mem_space>, 3> weights_patch2
                 = {weights_2_minus_2, weights_2_minus_1, weights_2_minus_0};
 
         std::array<double, 3> coeff_deriv_patch1;
@@ -624,10 +637,16 @@ protected:
         coeff_deriv_patch2[0] = alpha_i; // a_{n-2}
 
         // c_{n-2}
-        weights_patch1[0](idx_1_plus) = gammas_i[0];
-        weights_patch1[0](idx_1) = gammas_i[1];
-        weights_patch2[0](idx_2) = gammas_i[1];
-        weights_patch2[0](idx_2_plus) = gammas_i[2];
+        const std::source_location location = std::source_location::current();
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                KOKKOS_LAMBDA(const int) {
+                    weights_patch1[0](idx_1_plus) = gammas_i[0];
+                    weights_patch1[0](idx_1) = gammas_i[1];
+                    weights_patch2[0](idx_2) = gammas_i[1];
+                    weights_patch2[0](idx_2_plus) = gammas_i[2];
+                });
 
         // Set (a_{n-1},b_{n-1},c_{n-1}) ---
         idx_2_minus = interface_idx_2;
@@ -646,19 +665,32 @@ protected:
                 = coeff_deriv_patch1[0] / (1 - coeff_deriv_patch2[0] * beta_i); // b_{n-1}
 
         // c_{n-1} = (c_{n-2} + a_{n-2} * gamma_i) / (1 - a_{n-2} * beta_i);
-        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
-            weights_patch1[1](idx)
-                    = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch1[0](idx);
-        });
-        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
-            weights_patch2[1](idx)
-                    = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch2[0](idx);
-        });
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                m_idx_range_perp_1,
+                KOKKOS_LAMBDA(Idx1D_1 const& idx) {
+                    weights_patch1[1](idx)
+                            = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch1[0](idx);
+                });
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                m_idx_range_perp_2,
+                KOKKOS_LAMBDA(Idx1D_2 const& idx) {
+                    weights_patch2[1](idx)
+                            = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch2[0](idx);
+                });
         double factor = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * coeff_deriv_patch2[0];
-        weights_patch2[1](idx_2_plus) += factor * gammas_i[2];
-        weights_patch2[1](idx_2) += factor * gammas_i[1];
-        weights_patch2[1](idx_2_minus) += factor * gammas_i[0];
-        weights_patch1[1](idx_1) += factor * gammas_i[0];
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                KOKKOS_LAMBDA(const int) {
+                    weights_patch2[1](idx_2_plus) += factor * gammas_i[2];
+                    weights_patch2[1](idx_2) += factor * gammas_i[1];
+                    weights_patch2[1](idx_2_minus) += factor * gammas_i[0];
+                    weights_patch1[1](idx_1) += factor * gammas_i[0];
+                });
 
         // Set (a_{n},b_{n},c_{n}) ---
         coeff_deriv_patch1[2] = coeff_deriv_patch1[1];
@@ -715,19 +747,33 @@ protected:
                 = coeff_deriv_patch1[0] * beta_i / (1 - coeff_deriv_patch1[0] * alpha_i); // b_{n-1}
 
         // c_{n-1} = (c_{n-2} + b_{n-2} * gamma_i) / (1 - b_{n-2} * alpha_i);
-        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
-            weights_patch1[1](idx)
-                    = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch1[0](idx);
-        });
-        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
-            weights_patch2[1](idx)
-                    = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch2[0](idx);
-        });
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                m_idx_range_perp_1,
+                KOKKOS_LAMBDA(Idx1D_1 const& idx) {
+                    weights_patch1[1](idx)
+                            = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch1[0](idx);
+                });
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                m_idx_range_perp_2,
+                KOKKOS_LAMBDA(Idx1D_2 const& idx) {
+                    weights_patch2[1](idx)
+                            = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch2[0](idx);
+                });
         factor = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * coeff_deriv_patch1[0];
-        weights_patch1[1](idx_1_plus) += factor * gammas_i[0];
-        weights_patch1[1](idx_1) += factor * gammas_i[1];
-        weights_patch1[1](idx_1_minus) += factor * gammas_i[2];
-        weights_patch2[1](interface_idx_2) += factor * gammas_i[2];
+
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                KOKKOS_LAMBDA(const int) {
+                    weights_patch1[1](idx_1_plus) += factor * gammas_i[0];
+                    weights_patch1[1](idx_1) += factor * gammas_i[1];
+                    weights_patch1[1](idx_1_minus) += factor * gammas_i[2];
+                    weights_patch2[1](interface_idx_2) += factor * gammas_i[2];
+                });
 
         // Computing coefficients (c, a, b) on patch 1 -------------------------------------------
         // If m_is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
@@ -784,8 +830,8 @@ protected:
             Idx1D const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
-            std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
-            std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
+            std::array<DField<IdxRange1DPerp_1, mem_space>, 3>& weights_patch1,
+            std::array<DField<IdxRange1DPerp_2, mem_space>, 3>& weights_patch2)
     {
         using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
@@ -823,27 +869,46 @@ protected:
             // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
             // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
             double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
-            ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
-                weights_patch1[2](idx_perp)
-                        = 1. / denom
-                          * (weights_patch1[1](idx_perp)
-                             - coeff_closer_deriv * weights_patch1[0](idx_perp));
-            });
-            ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
-                weights_patch2[2](idx_perp)
-                        = 1. / denom
-                          * (weights_patch2[1](idx_perp)
-                             - coeff_closer_deriv * weights_patch2[0](idx_perp));
-            });
+            const std::source_location location = std::source_location::current();
+            ddc::parallel_for_each(
+                    location.function_name(),
+                    exec_space(),
+                    m_idx_range_perp_1,
+                    KOKKOS_LAMBDA(Idx1D_1 const& idx_perp) {
+                        weights_patch1[2](idx_perp)
+                                = 1. / denom
+                                  * (weights_patch1[1](idx_perp)
+                                     - coeff_closer_deriv * weights_patch1[0](idx_perp));
+                    });
+            ddc::parallel_for_each(
+                    location.function_name(),
+                    exec_space(),
+                    m_idx_range_perp_2,
+                    KOKKOS_LAMBDA(Idx1D_2 const& idx_perp) {
+                        weights_patch2[2](idx_perp)
+                                = 1. / denom
+                                  * (weights_patch2[1](idx_perp)
+                                     - coeff_closer_deriv * weights_patch2[0](idx_perp));
+                    });
             double const factor = 1. / denom * coeff_deriv_patch[1];
             if constexpr (is_on_patch1) {
-                weights_patch1[2](idx_plus) += factor * gammas_i[0];
-                weights_patch1[2](idx) += factor * gammas_i[1];
-                weights_patch1[2](idx_minus) += factor * gammas_i[2];
+                Kokkos::parallel_for(
+                        location.function_name(),
+                        Kokkos::RangePolicy<ExecSpace>(0, 1),
+                        KOKKOS_LAMBDA(const int) {
+                            weights_patch1[2](idx_plus) += factor * gammas_i[0];
+                            weights_patch1[2](idx) += factor * gammas_i[1];
+                            weights_patch1[2](idx_minus) += factor * gammas_i[2];
+                        });
             } else {
-                weights_patch2[2](idx_plus) += factor * gammas_i[2];
-                weights_patch2[2](idx) += factor * gammas_i[1];
-                weights_patch2[2](idx_minus) += factor * gammas_i[0];
+                Kokkos::parallel_for(
+                        location.function_name(),
+                        Kokkos::RangePolicy<ExecSpace>(0, 1),
+                        KOKKOS_LAMBDA(const int) {
+                            weights_patch2[2](idx_plus) += factor * gammas_i[2];
+                            weights_patch2[2](idx) += factor * gammas_i[1];
+                            weights_patch2[2](idx_minus) += factor * gammas_i[0];
+                        });
             }
 
             // Update coefficients.
@@ -882,8 +947,8 @@ protected:
             Idx1D const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
-            std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
-            std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
+            std::array<DField<IdxRange1DPerp_1, mem_space>, 3>& weights_patch1,
+            std::array<DField<IdxRange1DPerp_2, mem_space>, 3>& weights_patch2)
     {
         using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
@@ -969,27 +1034,48 @@ protected:
         // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
         // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
         double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
-        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
-            weights_patch1[2](idx_perp) = 1. / denom
-                                          * (weights_patch1[1](idx_perp)
-                                             - coeff_closer_deriv * weights_patch1[0](idx_perp));
-        });
-        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
-            weights_patch2[2](idx_perp) = 1. / denom
-                                          * (weights_patch2[1](idx_perp)
-                                             - coeff_closer_deriv * weights_patch2[0](idx_perp));
-        });
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                m_idx_range_perp_1,
+                [&](Idx1D_1 const& idx_perp) {
+                    weights_patch1[2](idx_perp)
+                            = 1. / denom
+                              * (weights_patch1[1](idx_perp)
+                                 - coeff_closer_deriv * weights_patch1[0](idx_perp));
+                });
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                m_idx_range_perp_2,
+                [&](Idx1D_2 const& idx_perp) {
+                    weights_patch2[2](idx_perp)
+                            = 1. / denom
+                              * (weights_patch2[1](idx_perp)
+                                 - coeff_closer_deriv * weights_patch2[0](idx_perp));
+                });
         double const factor = 1. / denom * coeff_deriv_patch[1];
         if constexpr (is_on_patch1) {
-            weights_patch1[2](idx_plus) += factor * gamma_plus;
-            weights_patch1[2](idx_star) += factor * gamma_star;
-            weights_patch1[2](idx) += factor * gamma_idx;
-            weights_patch1[2](idx_minus) += factor * gamma_minus;
+            Kokkos::parallel_for(
+                    location.function_name(),
+                    Kokkos::RangePolicy<ExecSpace>(0, 1),
+                    KOKKOS_LAMBDA(const int) {
+                        weights_patch1[2](idx_plus) += factor * gamma_plus;
+                        weights_patch1[2](idx_star) += factor * gamma_star;
+                        weights_patch1[2](idx) += factor * gamma_idx;
+                        weights_patch1[2](idx_minus) += factor * gamma_minus;
+                    });
         } else {
-            weights_patch2[2](idx_plus) += factor * gamma_plus;
-            weights_patch2[2](idx_star) += factor * gamma_star;
-            weights_patch2[2](idx) += factor * gamma_idx;
-            weights_patch2[2](idx_minus) += factor * gamma_minus;
+            Kokkos::parallel_for(
+                    location.function_name(),
+                    Kokkos::RangePolicy<ExecSpace>(0, 1),
+                    KOKKOS_LAMBDA(const int) {
+                        weights_patch2[2](idx_plus) += factor * gamma_plus;
+                        weights_patch2[2](idx_star) += factor * gamma_star;
+                        weights_patch2[2](idx) += factor * gamma_idx;
+                        weights_patch2[2](idx_minus) += factor * gamma_minus;
+                    });
         }
     }
 
@@ -1042,12 +1128,25 @@ protected:
         double const factor_b = 3 * b_11 / cell_length_left / denominator;
 
         // --- for k = 0
-        m_weights_patch_2(interface_idx_2) = -factor_b * un2 * (un1 - un1_minus);
+        DField<IdxRange1DPerp_2, mem_space> weights_patch_2 = m_weights_patch_2;
+        const std::source_location location = std::source_location::current();
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                KOKKOS_LAMBDA(const int) {
+                    weights_patch_2(interface_idx_2) = -factor_b * un2 * (un1 - un1_minus);
+                });
 
         // --- for k = 1, ..., NR
         set_local_uniform_weights(m_weights_patch_2, factor_a, un1, interface_idx_2);
 
-        m_weights_patch_1(interface_idx_1) = factor_a * un1 * (un2 - un2_minus);
+        DField<IdxRange1DPerp_1, mem_space> weights_patch_1 = m_weights_patch_1;
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                KOKKOS_LAMBDA(const int) {
+                    weights_patch_1(interface_idx_1) = factor_a * un1 * (un2 - un2_minus);
+                });
         set_local_uniform_weights(m_weights_patch_1, -factor_b, un2, interface_idx_1);
     };
 
@@ -1078,18 +1177,29 @@ protected:
         IdxStep<EdgePerpGrid> edge_pt(1);
         IdxRange<EdgePerpGrid> central_idx_range = idx_range.remove(edge_pt, edge_pt);
 
-        ddc::host_for_each(central_idx_range, [&](Idx<EdgePerpGrid> idx) {
-            const int k = abs(idx - idx_interface);
-            const int n_minus_k = n_cells - k;
-            double const vk_minus
-                    = Kokkos::pow(u_plus, n_minus_k - 1) - Kokkos::pow(u_minus, n_minus_k - 1);
-            double const vk_plus
-                    = Kokkos::pow(u_plus, n_minus_k + 1) - Kokkos::pow(u_minus, n_minus_k + 1);
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                central_idx_range,
+                KOKKOS_LAMBDA(Idx<EdgePerpGrid> idx) {
+                    const int k = abs(idx - idx_interface);
+                    const int n_minus_k = n_cells - k;
+                    double const vk_minus = Kokkos::pow(u_plus, n_minus_k - 1)
+                                            - Kokkos::pow(u_minus, n_minus_k - 1);
+                    double const vk_plus = Kokkos::pow(u_plus, n_minus_k + 1)
+                                           - Kokkos::pow(u_minus, n_minus_k + 1);
 
-            weights(idx) = neg_1_pow(k) * factor * un_other_patch * (vk_plus - vk_minus);
-        });
+                    weights(idx) = neg_1_pow(k) * factor * un_other_patch * (vk_plus - vk_minus);
+                });
 
-        weights(idx_outside) = neg_1_pow(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                KOKKOS_LAMBDA(const int) {
+                    weights(idx_outside)
+                            = neg_1_pow(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
+                });
     }
 
     /**
