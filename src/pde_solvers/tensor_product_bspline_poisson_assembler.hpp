@@ -377,9 +377,8 @@ public:
     {
         const int nbasis_1 = m_idxrange_tensor_basis.template extent<BSplines1>().value();
         const int nbasis_2 = m_idxrange_tensor_basis.template extent<BSplines2>().value();
-        const int n_stencil_2 = nbasis_2 * std::min(int(1 + 2 * BSplines2::degree()), nbasis_2);
-        const int n_stencil_1 = nbasis_1 * (1 + 2 * BSplines1::degree())
-                                - (1 + BSplines1::degree()) * BSplines1::degree();
+        const int n_stencil_1 = detail_poisson::n_nonzeros_in_rows<BSplines1>(nbasis_1, nbasis_1);
+        const int n_stencil_2 = detail_poisson::n_nonzeros_in_rows<BSplines2>(nbasis_2, nbasis_2);
         // These elements have a tensor product structure
         return n_stencil_1 * n_stencil_2;
     }
@@ -893,16 +892,20 @@ public:
         Field<int, IdxRangeBS2D> nnz(nnz_per_row.data() + 1, idxrange_tensor_basis);
 
         size_t constexpr degree_1 = BSplines1::degree();
-        size_t const nbasis_2_proxy = idxrange_tensor_basis.template extent<BSplines2>().value();
+        int const nbasis_1 = idxrange_tensor_basis.template extent<BSplines1>().value();
+        int const nbasis_2_proxy = idxrange_tensor_basis.template extent<BSplines2>().value();
         // The number of splines in the first dimension which overlap with a spline far from the boundaries
-        size_t constexpr stencil_overlap_1 = 2 * degree_1 + 1;
-        // The number of splines in the second dimension which overlap with a spline
-        size_t const stencil_overlap_2
-                = std::min(size_t(2 * BSplines2::degree() + 1), nbasis_2_proxy);
+        size_t const stencil_overlap_1 = BSplines1::is_periodic()
+                                                 ? std::min(int(2 * degree_1 + 1), nbasis_1)
+                                                 : 2 * degree_1 + 1;
+        // The number of non-zero elements in a 1D stiffness matrix in the second dimension
+        int const nnz_total_2
+                = detail_poisson::n_nonzeros_in_rows<BSplines2>(nbasis_2_proxy, nbasis_2_proxy);
 
         // The number of splines in the first dimension which overlap with a given spline to its
-        // left or to its right
-        IdxStepBS1 n_one_side_overlap(BSplines1::degree());
+        // left or to its right and which are affected by a boundary
+        IdxStepBS1 n_one_side_overlap(BSplines1::is_periodic() ? 0 : degree_1);
+        assert(nbasis_1 >= 2 * int(n_one_side_overlap.value()));
 
         int nnz_sum = 0;
 
@@ -923,9 +926,9 @@ public:
                     // number of bases in the first dimension which overlap with this element
                     int n1 = degree_1 + i1 + 1;
 
-                    // nnz to this line = nbasis_2 * stencil_overlap_2 \sum_{k=degree_1+1}^{n1-1} k
-                    int nnz_sum_to_i1 = (n1 * (n1 - 1) - degree_1 * (degree_1 + 1)) * nbasis_2_proxy
-                                        * stencil_overlap_2 / 2;
+                    // nnz to this line = nnz_total_2 \sum_{k=degree_1+1}^{n1-1} k
+                    int nnz_sum_to_i1
+                            = (n1 * (n1 - 1) - degree_1 * (degree_1 + 1)) / 2 * nnz_total_2;
 
                     // Loop over the second dimension
                     Kokkos::parallel_for(
@@ -933,13 +936,17 @@ public:
                             [&](int const& thread_index) {
                                 IdxStepBS2 i2(thread_index);
                                 nnz(i1, i2) += nnz_sum_to_i1
-                                               + (thread_index + 1) * n1 * stencil_overlap_2;
+                                               + n1
+                                                         * detail_poisson::n_nonzeros_in_rows<
+                                                                 BSplines2>(
+                                                                 thread_index + 1,
+                                                                 nbasis_2_proxy);
                             });
                 });
 
         {
             int n1 = inner_bsplines_1.size();
-            nnz_sum += n1 * (n1 + 2 * degree_1 + 1) * stencil_overlap_2 / 2 * nbasis_2_proxy;
+            nnz_sum += n1 * (n1 + 2 * degree_1 + 1) / 2 * nnz_total_2;
         }
 
         IdxRangeBS1 idxrange_bsplines_1_stencil
@@ -951,12 +958,16 @@ public:
                 "stencil",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(0, idxrange_stencil.size()),
                 KOKKOS_LAMBDA(const int k) {
-                    IdxBS2D k_2d = idxrange_stencil.front() + IdxStepBS1(k / nbasis_2_proxy)
-                                   + IdxStepBS2(k % nbasis_2_proxy);
-                    nnz(k_2d) += nnz_sum + (k + 1) * stencil_overlap_1 * stencil_overlap_2;
+                    int const k1 = k / nbasis_2_proxy;
+                    int const k2 = k % nbasis_2_proxy;
+                    IdxBS2D k_2d = idxrange_stencil.front() + IdxStepBS1(k1) + IdxStepBS2(k2);
+                    nnz(k_2d) += nnz_sum + k1 * stencil_overlap_1 * nnz_total_2
+                                 + stencil_overlap_1
+                                           * detail_poisson::n_nonzeros_in_rows<
+                                                   BSplines2>(k2 + 1, nbasis_2_proxy);
                 });
 
-        nnz_sum += idxrange_stencil.size() * stencil_overlap_1 * stencil_overlap_2;
+        nnz_sum += idxrange_bsplines_1_stencil.size() * stencil_overlap_1 * nnz_total_2;
 
         IdxRangeBS1 outer_bsplines_1 = idxrange_bsplines_1.take_last(n_one_side_overlap);
         IdxRangeBS2D outer_bsplines_2d(outer_bsplines_1, idxrange_bsplines_2);
@@ -971,9 +982,9 @@ public:
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     IdxStepBS1 i1(team.league_rank());
                     int n1 = 2 * degree_1 - i1;
-                    int nnz_sum_to_i1 = nnz_sum
-                                        + (degree_1 * (2 * degree_1 + 1) - n1 * (n1 + 1) / 2)
-                                                  * stencil_overlap_2 * nbasis_2_proxy;
+                    int nnz_sum_to_i1
+                            = nnz_sum
+                              + (degree_1 * (2 * degree_1 + 1) - n1 * (n1 + 1) / 2) * nnz_total_2;
                     // Loop over the second dimension
                     Kokkos::parallel_for(
                             Kokkos::TeamThreadRange(team, nbasis_2_proxy),
@@ -981,7 +992,10 @@ public:
                                 IdxStepBS2 i2(thread_index);
                                 IdxBS2D k = outer_bsplines_2d.front() + i1 + i2;
                                 nnz(k) += nnz_sum_to_i1
-                                          + (thread_index + 1) * n1 * stencil_overlap_2;
+                                          + n1
+                                                    * detail_poisson::n_nonzeros_in_rows<BSplines2>(
+                                                            thread_index + 1,
+                                                            nbasis_2_proxy);
                             });
                 });
     }

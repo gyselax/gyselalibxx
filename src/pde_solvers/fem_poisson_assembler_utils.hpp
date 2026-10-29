@@ -81,8 +81,9 @@ KOKKOS_INLINE_FUNCTION IdxType periodic_mod(IdxType idx)
 {
     static_assert(ddc::is_discrete_element_v<IdxType>);
     static_assert(ddc::in_tags_v<BSplines, ddc::to_type_seq_t<IdxType>>);
-    IdxRange<BSplines> idx_range_bsplines = ddc::discrete_space<BSplines>().full_domain().take_first(
-            IdxStep<BSplines>(ddc::discrete_space<BSplines>().nbasis()));
+    IdxRange<BSplines> idx_range_bsplines
+            = ddc::discrete_space<BSplines>().full_domain().take_first(
+                    IdxStep<BSplines>(ddc::discrete_space<BSplines>().nbasis()));
     while (ddc::select<BSplines>(idx) < idx_range_bsplines.front())
         idx += idx_range_bsplines.extents();
     while (ddc::select<BSplines>(idx) > idx_range_bsplines.back())
@@ -175,9 +176,8 @@ public:
      * @param[in] idx_quad The index of the quadrature point.
      * @return The value of the B-spline at the quadrature point.
      */
-    KOKKOS_FUNCTION double vals(
-            Idx<QDim1Mesh, QDim2Mesh> idx_quad,
-            Idx<BSplines1, BSplines2> idx) const
+    KOKKOS_FUNCTION double vals(Idx<QDim1Mesh, QDim2Mesh> idx_quad, Idx<BSplines1, BSplines2> idx)
+            const
     {
         Idx<QDim1Mesh> idx_quad_1(idx_quad);
         Idx<QDim2Mesh> idx_quad_2(idx_quad);
@@ -271,14 +271,12 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_quadrature_between_knots(
         Idx<QDim1Mesh, QDim2Mesh> idx_quad_front)
 {
     return IdxRange<QDim1Mesh, QDim2Mesh>(
-            get_quadrature_between_knots_1d<QDim1Mesh, BSplines1>(
-                    start_knot_1,
-                    end_knot_1,
-                    Idx<QDim1Mesh>(idx_quad_front)),
-            get_quadrature_between_knots_1d<QDim2Mesh, BSplines2>(
-                    start_knot_2,
-                    end_knot_2,
-                    Idx<QDim2Mesh>(idx_quad_front)));
+            get_quadrature_between_knots_1d<
+                    QDim1Mesh,
+                    BSplines1>(start_knot_1, end_knot_1, Idx<QDim1Mesh>(idx_quad_front)),
+            get_quadrature_between_knots_1d<
+                    QDim2Mesh,
+                    BSplines2>(start_knot_2, end_knot_2, Idx<QDim2Mesh>(idx_quad_front)));
 }
 
 /**
@@ -414,6 +412,49 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_support_quadrature(
             get_support_quadrature_1d<
                     QDim2Mesh,
                     BSplines2>(Idx<BSplines2>(idx), Idx<QDim2Mesh>(idx_quad_front)));
+}
+
+/**
+ * @brief Get the number of non-zero elements in the first i rows of a 1D stiffness matrix.
+ *
+ * Row j of the 1D stiffness matrix contains one non-zero element for each B-spline
+ * whose support overlaps the support of the j-th B-spline (including the j-th B-spline
+ * itself). In a periodic basis all rows contain the same number of non-zero elements.
+ * In a non-periodic basis this number decreases near the boundaries. The result is
+ * therefore the cumulative quantity required to build the nnz data structure of a CSR
+ * matrix. When i == nbasis the result is the total number of non-zero elements in the
+ * 1D stiffness matrix.
+ *
+ * @tparam BSplines The B-splines in the dimension of interest.
+ *
+ * @param[in] i
+ *      The number of rows (counted from the start of the basis) whose non-zero elements are counted.
+ * @param[in] nbasis
+ *      The number of B-splines in the basis.
+ * @return
+ *      The number of non-zero elements in rows 0 to i-1 of the 1D stiffness matrix.
+ */
+template <typename BSplines>
+KOKKOS_INLINE_FUNCTION int n_nonzeros_in_rows(int i, int nbasis)
+{
+    int constexpr degree = BSplines::degree();
+    assert(0 <= i && i <= nbasis);
+    if constexpr (BSplines::is_periodic()) {
+        return i * Kokkos::min(2 * degree + 1, nbasis);
+    } else {
+        assert(nbasis >= 2 * degree);
+        if (i <= degree) {
+            // \sum_{j=0}^{i-1} (degree + 1 + j)
+            return i * (degree + 1) + i * (i - 1) / 2;
+        }
+        // The number of B-splines which are not summed
+        int const n_after = nbasis - i;
+        if (n_after <= degree) {
+            int const total = nbasis * (2 * degree + 1) - degree * (degree + 1);
+            return total - (n_after * (degree + 1) + n_after * (n_after - 1) / 2);
+        }
+        return degree * (degree + 1) + degree * (degree - 1) / 2 + (i - degree) * (2 * degree + 1);
+    }
 }
 
 /**
