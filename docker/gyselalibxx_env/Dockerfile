@@ -2,14 +2,13 @@
 
 FROM ubuntu:noble
 
-COPY bash_run /bin/
+COPY --chmod=0755 bash_run /bin/bash_run
 ENV BASH_ENV=/etc/profile
+ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
 
 
-RUN chmod +x /bin/bash_run \
- && export DEBIAN_FRONTEND=noninteractive \
- && echo tzdata tzdata/Areas string Etc | debconf-set-selections \
+RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
  && echo tzdata tzdata/Zones/Etc string UTC | debconf-set-selections \
  && apt-get update -y \
  && apt-get upgrade -y \
