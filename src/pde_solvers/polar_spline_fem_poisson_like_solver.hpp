@@ -186,6 +186,7 @@ private:
             PolarBSplinesRTheta,
             QDimRMesh,
             QDimThetaMesh,
+            true,
             IdxRangeFull>;
 
     using PolarSplineEval = PolarSplineEvaluator<
@@ -262,8 +263,10 @@ private:
     IdxRangeBatch m_idx_range_batch;
 
     PolarSplineEval m_polar_spline_evaluator;
+public:
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
+private:
     mutable PolarSplineMemRTheta m_phi_spline_coef_alloc;
     mutable DFieldMem<IdxRangeBatchedBSPolar> m_x_init_alloc;
 
@@ -365,6 +368,8 @@ public:
         //initialise x_init
         ddc::parallel_fill(get_field(m_x_init_alloc), 0);
 
+        // Does this define m_gko_matrix?
+        // Yes it does
         m_assembler.setup_sparse_matrix(
                 m_gko_matrix,
                 max_iter,
@@ -457,6 +462,10 @@ public:
         // Fill b for the basis functions around the O-point
         // Multi-level parallelism is needed as idx_range_singular.size() ~= 3 but b is on GPU
         Kokkos::parallel_for(
+                // Compute the components of b corresponding to central splines
+                //
+                // Have one team of threats per index. Each team computes the quadrature over
+                // the whole singular index range.
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
                         n_batch * n_singular,
@@ -503,15 +512,49 @@ public:
                     IdxBatch const batch_idx(idx_full);
                     IdxBSPolar const idx(idx_full);
                     const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
+                //     const IdxBSR idx_r(idx_2d);
+                //     const IdxBSTheta idx_theta(idx_2d);
+
+                //     auto& bspl_r = ddc::discrete_space<BSplinesR>();
+                //     auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
+
+                //     // Find the cells on which the bspline is non-zero
+                //     const Idx<KnotsR> start_non_zero_r(
+                //             Kokkos::
+                //                     max(bspl_r.break_point_domain().front(),
+                //                         bspl_r.get_first_support_knot(idx_r)));
+                //     const Idx<KnotsR> end_non_zero_r(
+                //             Kokkos::
+                //                     min(bspl_r.break_point_domain().back(),
+                //                         bspl_r.get_last_support_knot(idx_r)));
+                //     const Idx<KnotsTheta> start_non_zero_theta(
+                //             bspl_theta.get_first_support_knot(idx_theta));
+                //     // get_last_support_knot can lie outside the domain
+                //     const Idx<KnotsTheta> end_non_zero_theta(
+                //             bspl_theta.get_last_support_knot(idx_theta));
+
+                //     const IdxRangeQuadratureRTheta quad_range
+                //             = detail_poisson::get_quadrature_between_knots<
+                //                     QDimRMesh,
+                //                     QDimThetaMesh,
+                //                     BSplinesR,
+                //                     BSplinesTheta>(
+                //                     start_non_zero_r,
+                //                     end_non_zero_r,
+                //                     start_non_zero_theta,
+                //                     end_non_zero_theta,
+                //                     full_quad_idx_range.front());
                     // Find the quadrature points on which the bspline is non-zero
                     const IdxRangeQuadratureRTheta quad_range = detail_poisson::
                             get_support_quadrature(idx_2d, full_quad_idx_range.front());
 
-                    // Calculate the weak integral
+                    // Calculate the integral
                     b(batch_idx, idx) = 0.0;
                     for (IdxQuadratureTheta idx_quad_theta :
                          ddc::select<QDimThetaMesh>(quad_range)) {
                         // Manage periodicity
+                        //
+                        // idx_quad_theta can be outside the full quadrature range
                         if (!full_quad_idx_range_theta.contains(idx_quad_theta)) {
                             idx_quad_theta -= full_quad_idx_range_theta.extents();
                         }
@@ -529,10 +572,13 @@ public:
 
         // Solve the matrix equation for every batch in a single call
         Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonSolve");
+        // m_gko_matrix->solve(x_init.allocation_kokkos_view(), b.allocation_kokkos_view());
         m_gko_matrix
                 ->solve(detail_poisson::as_batched_vector_view(x_init),
                         detail_poisson::as_batched_vector_view(b));
 
+        
+        // Define inner and boundary interpolating splines
         IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
         IdxRangeBSPolar polar_bspl_idx_range
                 = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().remove_last(
@@ -601,6 +647,28 @@ public:
         (*this)(phi, rhs_func);
     }
 
+//     /**
+//      * @brief Get the value of the specified polar bspline at the specified point.
+//      *
+//      * @param[in] coord
+//      *      The coordinate where the value of the polar bspline should be calculated.
+//      * @param[in] idx
+//      *      The polar bspline of interest.
+//      * @return The value of the polar bspline at the coordinate.
+//      */
+//     static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(CoordRTheta coord, IdxBSPolar idx)
+//     {
+//         double val;
+//         detail_poisson::
+//                 get_polar_bspline_vals_and_derivs<PolarBSplinesRTheta, false>(val, coord, idx);
+//         return val;
+//     }
+
+    auto int_volume(){
+        return get_field(m_int_volume_alloc);
+    }
+
+// public:
 private:
     /// True if RHSFunction can be called with a batch index and a coordinate, or only a
     /// coordinate if there are no batch dimensions.
@@ -619,6 +687,22 @@ private:
                 ddc::discrete_space<BSplinesR>().break_point_domain());
         GaussLegendre<QDimThetaMesh, s_n_gauss_legendre_theta> gl_coeffs_theta(
                 ddc::discrete_space<BSplinesTheta>().break_point_domain());
+
+        // MyDebugLogger logger{"calculate_int_volume", "my_log.log"};
+        // std::stringstream log_ss;
+        // auto break_point_domain_r = ddc::discrete_space<BSplinesR>().break_point_domain();
+        // ddc::host_for_each(break_point_domain_r, [&](Idx<KnotsR> idx){
+        //     log_ss << "ddc::coordinate(idx):" << ddc::coordinate(idx) << '\n';
+        // });
+        // logger.debug("Break point coordinates in R", log_ss.str());
+        // log_ss.str("");
+        // auto break_point_domain_theta = ddc::discrete_space<BSplinesTheta>().break_point_domain();
+        // ddc::host_for_each(break_point_domain_theta, [&](Idx<KnotsTheta> idx){
+        //     log_ss << "ddc::coordinate(idx):" << ddc::coordinate(idx) << '\n';
+        // });
+        // logger.debug("Break point coordinates in Theta", log_ss.str());
+        // log_ss.str("");
+
 
         return compute_coeffs_on_mapping(
                 Kokkos::DefaultExecutionSpace(),

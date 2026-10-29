@@ -156,9 +156,11 @@ public:
     {
         Idx<QDimRMesh> idx_quad_r(idx_quad);
         Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
+        // The offsets are the differences between idx and the index of the first non-vanishing spline at 
+        // the given quadrature point.
         IdxStep<BSplinesR> offset_r = Idx<BSplinesR>(idx) - first_basis_r(idx_quad_r);
-        IdxStep<BSplinesTheta> offset_theta
-                = Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta);
+        IdxStep<BSplinesTheta> offset_theta = theta_mod<BSplinesTheta>(
+                Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta));
         DConstField<IdxRange<BSplinesR, ddc::Deriv<R>>> vals_r_at_quad = vals_r[idx_quad_r];
         DConstField<IdxRange<BSplinesTheta, ddc::Deriv<Theta>>> vals_theta_at_quad
                 = vals_theta[idx_quad_theta];
@@ -186,8 +188,8 @@ public:
         Idx<QDimRMesh> idx_quad_r(idx_quad);
         Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
         IdxStep<BSplinesR> offset_r = Idx<BSplinesR>(idx) - first_basis_r(idx_quad_r);
-        IdxStep<BSplinesTheta> offset_theta
-                = Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta);
+        IdxStep<BSplinesTheta> offset_theta = theta_mod<BSplinesTheta>(
+                Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta));
         return vals_r[idx_quad_r](offset_r, IdxStep<ddc::Deriv<R>>(0))
                * vals_theta[idx_quad_theta](offset_theta, IdxStep<ddc::Deriv<Theta>>(0));
     }
@@ -414,6 +416,7 @@ template <
         typename PolarBSplinesRTheta,
         typename QDimRMesh,
         typename QDimThetaMesh,
+        bool enforces_homogeneous_bc = true,
         typename IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler
 {
@@ -433,6 +436,8 @@ private:
     using Theta_cov = typename Theta::Dual;
 
 private:
+
+    // TODO: Combine types
     /// The 1D B-splines in the radial direction
     using BSplinesR = typename PolarBSplinesRTheta::BSplinesR_tag;
     /// The 1D B-splines in the poloidal direction
@@ -574,12 +579,10 @@ public:
     explicit PolarSplineFEMPoissonLikeAssembler(
             Field<double, IdxRangeQuadratureRTheta> int_volume,
             IdxRangeFull idx_range_full)
-        : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - s_n_overlap_cells - 1)
+        : m_nbasis_r(get_nbasis_r())
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
-        , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
-        , m_idxrange_fem_tensor_basis(
-                  ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
-                          IdxStepBSPolar {m_nbasis_theta}))
+        , m_matrix_size(get_matrix_size())
+        , m_idxrange_fem_tensor_basis(get_idxrange_fem_tensor_basis())
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                   IdxStepBSR {s_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
@@ -894,13 +897,16 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
         // Get index range for basis elements (last element removed due to homogeneous Dirichlet)
+        // I think this comment is just plain wrong. This is removed due to periodicity
+        // not homogeneous Dirichlet
         IdxRangeBSTheta full_idx_range_theta
                 = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                         IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
 
         IdxRangeBSR central_radial_bspline_idx_range(
                 m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
-
+        
+        // Is this not just the same as m_idxrange_bsplines_r?
         IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
 
@@ -909,8 +915,10 @@ public:
         const int n_singular = idxrange_singular.size();
         const std::source_location location = std::source_location::current();
 
-        // Calculate the matrix elements following a stencil
+        // For rows corresponding to basis functions compute the col idxs for functions also
+        // following a stencil
         // Teams loop over rows
+        // But there is no parallel_for for the team?
         Kokkos::parallel_for(
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
@@ -923,20 +931,35 @@ public:
                             idxrange_fem_non_singular_front + IdxStepBSPolar {team.league_rank()});
 
                     // Calculate the radial and poloidal components of the test b-spline
+
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
                     const IdxBSR idx_test_r(idx_test);
                     const IdxBSTheta idx_test_theta(idx_test);
 
                     // Calculate the offsets to locate all trial b-splines which are non-zero
                     // somewhere in the support of the test b-spline.
+                    // Where do we make sure that we do not iterate over any splines that are 
+                    // boundary interpolating?
+
                     IdxStepBSR idx_step_trial_r_offset_min(
                             Kokkos::
                                     max(IdxStepBSR(-BSplinesR::degree()),
                                         idx_range_fem_r.front() - idx_test_r));
-                    IdxStepBSR idx_step_trial_r_offset_max(
-                            Kokkos::
+                    // I think this has to be adapted in order to work without homogeneous BC
+                    IdxStepBSR idx_step_trial_r_offset_max;
+                    if constexpr (enforces_homogeneous_bc)
+                        idx_step_trial_r_offset_max = Kokkos::
                                     min(IdxStepBSR(BSplinesR::degree() + 1),
-                                        idx_range_fem_r.back() - idx_test_r));
+                                        idx_range_fem_r.back() - idx_test_r);
+                    else
+                        idx_step_trial_r_offset_max = Kokkos::
+                                    min(IdxStepBSR(BSplinesR::degree() + 1),
+                                        idx_range_fem_r.back() + 1 - idx_test_r);
+
+                    // IdxStepBSR idx_step_trial_r_offset_max(
+                    //         Kokkos::
+                    //                 min(IdxStepBSR(BSplinesR::degree() + 1),
+                    //                     idx_range_fem_r.back() - idx_test_r));
                     IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
                     IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
 
@@ -955,6 +978,7 @@ public:
                         // guarantee that col_idx and values (from the CSR format) are
                         // filled in order.
                         // Calculate the start and end of the theta offset
+                        
                         IdxBSTheta first_idx_trial_theta = detail_poisson::
                                 mod_add(idx_test_theta,
                                         idx_step_trial_theta_offset_min,
@@ -963,14 +987,17 @@ public:
                                 mod_add(idx_test_theta,
                                         idx_step_trial_theta_offset_max,
                                         full_idx_range_theta);
-                        IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
+
                         // If the start is after the end then the periodicity wraps the b-splines
                         // first_periodic_idx_trial_theta is modified to fill the wrapped area (at the
                         // right hand side of the block) last.
+
+                        IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
                         if (first_idx_trial_theta > last_idx_trial_theta) {
                             first_periodic_idx_trial_theta = first_idx_trial_theta;
                             first_idx_trial_theta = full_idx_range_theta.front();
                         }
+
                         // Loop over the poloidal offset to a trial b-spline
                         for (IdxBSTheta idx_trial_theta(first_idx_trial_theta);
                              idx_trial_theta < last_idx_trial_theta;
@@ -1673,6 +1700,7 @@ public:
      * @brief Fills the nnz data structure by computing the number of non-zero per line.
      * This number is linked to the weak formulation and depends on @f$(r,\theta)@f$ splines.
      * After this function the array will contain:
+     * (That is incorrect. It is the cumulative sum)
      * nnz_per_row[0] = 0.
      * nnz_per_row[1] = 0.
      * nnz_per_row[2] = number of non-zero elements in line 0.
@@ -1688,14 +1716,21 @@ public:
         Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonInitNnz");
         size_t const mat_size = nnz_per_row.extent(0) - 1;
         IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
-        IdxRangeBSPolar polar_bspl_idx_range
+        IdxRangeBSPolar polar_bspl_idx_range;
+        if constexpr (enforces_homogeneous_bc)
+            polar_bspl_idx_range
                 = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().remove_last(
                         radial_boundary_splines);
+        else 
+            polar_bspl_idx_range
+                = ddc::discrete_space<PolarBSplinesRTheta>().full_domain();
 
         Kokkos::deep_copy(nnz_per_row, 0.);
 
         assert(mat_size == polar_bspl_idx_range.size());
         // nnz per line
+        // Are these the actual row pointers as you would expect?
+        // No they are not! They just remove the first one for some reason.
         Field<int, IdxRangeBSPolar>
                 nnz(Kokkos::subview(nnz_per_row, std::pair<int, int>(1, mat_size + 1)),
                     polar_bspl_idx_range);
@@ -1708,26 +1743,35 @@ public:
         // The number of radial splines which overlap with a given radial spline to its
         // left or to its right
         IdxStepBSR n_one_side_overlap(BSplinesR::degree());
-
+        // The name is accurate. Every singular basis function overlaps with #degree splines in
+        // r direction if we are C1. But the rest is not tested so who knows...
         int nnz_for_singular_rows = n_singular_basis + degree * nbasis_theta_proxy;
 
         // rows representing the bsplines which cover the singular domain
-        // These overlap with other singular domain splines and degree radial splines
+        // These overlap with other singular domain splines and #degree radial splines
+        // all lines corresponding to singular basis functions overlap with the same basis functions
+        // and have thus the same nnz in their row (like the actual nnz per row, not this array here)
+        // So for actual_nnz_per_row[k] = nnz_for_singular_rows for k=0,1,2,...nnz_for_singular_rows-1
+        // and then compute the nnz_per_row accordingly (actually these are the row_pointers)
         Kokkos::parallel_for(
                 "overlap singular radial",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular_basis + 1),
                 KOKKOS_LAMBDA(const int k) { nnz_per_row(k) = k * nnz_for_singular_rows; });
 
         int nnz_sum = nnz_for_singular_rows * n_singular_basis;
-
+        
         IdxRangeBSR idxrange_bsplines_r_overlapping_singular
                 = m_idxrange_bsplines_r.take_first(n_one_side_overlap);
         IdxRangeBSTheta idxrange_bsplines_theta = m_idxrange_bsplines_theta;
+        // Why do we only take three splines for the overlap?
+        // Because that is the number of splines in r that overlap with singular basis functions
         IdxRangeBSRTheta idxrange_singular_overlap(
                 idxrange_bsplines_r_overlapping_singular,
                 idxrange_bsplines_theta);
+
         // rows representing the bsplines which can be represented as a tensor product of
         // radial and poloidal bsplines but which still overlap with the singular domain
+
         Kokkos::parallel_for(
                 "inner overlap",
                 Kokkos::TeamPolicy<>(
@@ -1736,10 +1780,20 @@ public:
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     IdxStepBSR ir(team.league_rank());
-                    // number of radial bases which overlap with this element
+                    // number of radial basis functions which overlap with this radial spline
+                    // For every radial spline you first have the overlapping ones to its right
+                    // and itself which accounts to degree + 1 splines. Then 
+                    // you have an increasing number of splines to the left. 0 For the first splines,
+                    // 1 for the second one and so on. 
                     int nr = degree + ir + 1;
 
                     // nnz to this line = nnz_singular + n_singular * ir*ntheta + ntheta * n_stencil_theta \sum_{k=degree+1}^{nr-1} k
+                    // I do not understand this comment. What is happening here is that
+                    // this is the number of basis functions coming before the functions with the 
+                    // current r-index. 
+                    // Simpler formula:
+                    // 1/2( nr(nr-1) - p(p+1) ) = ir (p+1) + (ir-1)ir/2
+                    // = \sum_{i=0}^{ir-1}{p+1 + i}
                     int nnz_sum_to_r = nnz_sum + n_singular_basis * ir * nbasis_theta_proxy
                                        + (nr * (nr - 1) - degree * (degree + 1))
                                                  * nbasis_theta_proxy * stencil_overlap / 2;
@@ -1751,6 +1805,9 @@ public:
                                 IdxStepBSTheta itheta(thread_index);
                                 IdxBSRTheta k_2d = idxrange_singular_overlap.front() + ir + itheta;
                                 IdxBSPolar k(to_polar(k_2d));
+                                // stencil_overlap is the number of theta splines that are overlapping
+                                // For a given r-index they have all the same number of overlapping
+                                // functions
                                 nnz(k) = nnz_sum_to_r
                                          + (thread_index + 1)
                                                    * (n_singular_basis + nr * stencil_overlap);
@@ -1758,16 +1815,29 @@ public:
                 });
 
         {
+            // Update the total number of non-zero entries for all the splines taken care of so far
+            
+            // nr is here suddenly the number of splines in r overlapping with singular basis
+            // functions instead of the number of all splines in r that overlap as it was defined
+            // just a couple of lines above. 
             int nr = idxrange_bsplines_r_overlapping_singular.size();
+            // This is just equal to 
+            // \sum_{j=0}^{n_theta-1}\sum_{i=0}^{nr-1} n_sing + (p+1 + i)*stencil_theta
+            // = n_theta (nr n_sing + nr(p+1) stencil + stencil (nr-1)nr/2 )
+            // and then
+            // nr(p+1) + (nr-1)nr/2 = nr(2p + 1 + nr)
             nnz_sum += (n_singular_basis * nr + nr * (nr + 2 * degree + 1) * stencil_overlap / 2)
                        * nbasis_theta_proxy;
         }
 
+        // These are the splines in r that do not overlap with singular basis functions
+        // and near the boundary the ones whose support lies in the interior
         IdxRangeBSR idxrange_bsplines_r_stencil
                 = m_idxrange_bsplines_r.remove(n_one_side_overlap, n_one_side_overlap + 1);
         IdxRangeBSRTheta idxrange_stencil(idxrange_bsplines_r_stencil, idxrange_bsplines_theta);
         IdxBSPolar idx_stencil_front = to_polar(idxrange_stencil.front());
         // Stencil for tensor product bsplines which only overlap with other tensor product bsplines
+        // This is easy because they all overlap with the same number of splines
         Kokkos::parallel_for(
                 "Inner Stencil",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(0, idxrange_stencil.size()),
@@ -1778,13 +1848,25 @@ public:
 
         nnz_sum += idxrange_stencil.size() * stencil_overlap * stencil_overlap;
 
+        // Fill the row_ptrs array (which we confusingly call nnz here) for the splines
+        // whose do not overlap 7 splines in r-direction
+
         // Get the outer radial bsplines excluding the bspline used for homogeneous Hermite boundary conditions
-        IdxRangeBSR outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1)
+        // Take the last four splines and remove the boundary interpolating one
+        // IdxRangeBSR outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1)
+        //                                        .remove_last(IdxStepBSR(1));
+        IdxRangeBSR outer_bsplines_r;
+        if constexpr(enforces_homogeneous_bc)
+            outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1)
                                                .remove_last(IdxStepBSR(1));
+        else
+            outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1);
         IdxRangeBSRTheta outer_bsplines_2d(outer_bsplines_r, idxrange_bsplines_theta);
         IdxRangeBSPolar outer_bsplines(
                 to_polar(outer_bsplines_2d.front()),
                 IdxStepBSPolar(outer_bsplines_2d.size()));
+        // The index of the last spline considered should be the same as the last index of 
+        // the row pointers array where the first entry was removed for some reason
         assert(outer_bsplines.back() == get_idx_range(nnz).back());
         // Approaching the external boundary the overlapping possibilities between two radial splines decrease
         Kokkos::parallel_for(
@@ -1795,11 +1877,29 @@ public:
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     IdxStepBSR ir(team.league_rank());
-                    int nr = 2 * degree - ir;
+                    // Reduced number of splines in r-direction. For the first one we have 
+                    // two to the right and three to the left and itself, so 6.
+                    int nr;
+                    if constexpr (enforces_homogeneous_bc)
+                        nr = 2 * degree - ir;
+                    else
+                        nr = 2 * degree + 1 - ir;
+                    // int nr = 2 * degree - ir;
                     IdxBSR k_r(outer_bsplines_2d.front() + ir);
-                    int nnz_sum_to_r = nnz_sum
+                    // p (2p+1) - \frac{1}{2}(2p - k)(2p - k +1)
+                    // = 2kp - k(k-1)/2
+                    // = \sum_{i=0}^{k-1}(2p-i)
+                    // So this weird term in brackets is the sum over the previous
+                    // number of overlapping splines in r direction. No clue where that formula is coming
+                    // from
+                    int nnz_sum_to_r;
+                    if constexpr(enforces_homogeneous_bc)
+                        nnz_sum_to_r = nnz_sum
                                        + (degree * (2 * degree + 1) - nr * (nr + 1) / 2)
                                                  * stencil_overlap * nbasis_theta_proxy;
+                    else
+                        nnz_sum_to_r = nnz_sum + ((2*degree + 1)*ir - (ir * (ir-1))/2)
+                                        * stencil_overlap * nbasis_theta_proxy;
                     // Loop over poloidal dimensions
                     Kokkos::parallel_for(
                             Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
@@ -1827,4 +1927,24 @@ public:
     {
         return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
     }
+    static auto get_nbasis_r(){
+        if constexpr (enforces_homogeneous_bc)
+            return ddc::discrete_space<BSplinesR>().nbasis() - s_n_overlap_cells - 1;
+        else
+            return ddc::discrete_space<BSplinesR>().nbasis() - s_n_overlap_cells;
+    }
+    auto get_matrix_size(){
+        if constexpr (enforces_homogeneous_bc)
+            return ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta;
+        else
+            return ddc::discrete_space<PolarBSplinesRTheta>().nbasis();
+    }
+    auto get_idxrange_fem_tensor_basis(){
+        if constexpr (enforces_homogeneous_bc)
+            return ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
+                    IdxStepBSPolar {m_nbasis_theta});
+        else
+            return ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range();
+    }
+
 };

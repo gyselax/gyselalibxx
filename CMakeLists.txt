@@ -20,7 +20,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 ## We use C++20 all around!
 set(CMAKE_CXX_STANDARD 20 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
-
+# set(CMAKE_CXX_FLAGS "-O0 -fsanitize=address -fno-omit-frame-pointer -Wall -Wno-sign-compare -Wno-unused-but-set-variable -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wno-unused -Woverloaded-virtual -Wno-conversion -Wno-sign-conversion -Wno-sign-compare -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Wimplicit-fallthrough -Wmissing-field-initializers -Wredundant-decls -fdiagnostics-color=always")
+#  -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wno-conversion -Wno-sign-conversion -Wno-sign-compare -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Wimplicit-fallthrough -Wmissing-field-initializers -Wredundant-decls -fdiagnostics-color=always")
 ## List of options
 option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
 option(GYSELALIBXX_BUILD_TESTING "Build the tests." ON)
