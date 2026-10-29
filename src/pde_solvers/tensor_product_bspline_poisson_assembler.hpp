@@ -374,14 +374,14 @@ public:
      */
     int n_tensor_tensor_elements() const
     {
-        const int nbasis_r = m_idxrange_tensor_basis.template extent<BSplines1>().value();
-        const int nbasis_theta = m_idxrange_tensor_basis.template extent<BSplines2>().value();
-        const int n_stencil_theta
-                = nbasis_theta * std::min(int(1 + 2 * BSplines2::degree()), nbasis_theta);
-        const int n_stencil_r = nbasis_r * (1 + 2 * BSplines1::degree())
+        const int nbasis_1 = m_idxrange_tensor_basis.template extent<BSplines1>().value();
+        const int nbasis_2 = m_idxrange_tensor_basis.template extent<BSplines2>().value();
+        const int n_stencil_2
+                = nbasis_2 * std::min(int(1 + 2 * BSplines2::degree()), nbasis_2);
+        const int n_stencil_1 = nbasis_1 * (1 + 2 * BSplines1::degree())
                                 - (1 + BSplines1::degree()) * BSplines1::degree();
         // These elements have a tensor product structure
-        return n_stencil_r * n_stencil_theta;
+        return n_stencil_1 * n_stencil_2;
     }
 
     /**
@@ -437,8 +437,8 @@ public:
     {
         IdxRangeBS2D idx_range_tensor_basis = m_idxrange_tensor_basis;
 
-        IdxRangeBS1 idx_range_fem_r(idx_range_tensor_basis);
-        IdxRangeBS2 full_idx_range_theta(idx_range_tensor_basis);
+        IdxRangeBS1 idx_range_fem_1(idx_range_tensor_basis);
+        IdxRangeBS2 full_idx_range_2(idx_range_tensor_basis);
 
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                 tensor_nnz_per_row
@@ -458,61 +458,61 @@ public:
                     // The row of the tensor-tensor matrix
                     const int row_idx = team.league_rank();
 
-                    // Calculate the index of the test b-spline and its radial and poloidal components
+                    // Calculate the index of the test b-spline and its components in each dimension
                     const IdxBS2D idx_test(
                             ddcHelper::get_idx_from_linear_index(idx_range_tensor_basis, row_idx));
-                    const IdxBS1 idx_test_r(idx_test);
-                    const IdxBS2 idx_test_theta(idx_test);
+                    const IdxBS1 idx_test_1(idx_test);
+                    const IdxBS2 idx_test_2(idx_test);
 
                     // Calculate the offsets to locate all trial b-splines which are non-zero
                     // somewhere in the support of the test b-spline.
-                    IdxStepBS1 idx_step_trial_r_offset_min(
+                    IdxStepBS1 idx_step_trial_1_offset_min(
                             Kokkos::
                                     max(IdxStepBS1(-BSplines1::degree()),
-                                        idx_range_fem_r.front() - idx_test_r));
-                    IdxStepBS1 idx_step_trial_r_offset_max(
+                                        idx_range_fem_1.front() - idx_test_1));
+                    IdxStepBS1 idx_step_trial_1_offset_max(
                             Kokkos::
                                     min(IdxStepBS1(BSplines1::degree() + 1),
-                                        idx_range_fem_r.back() + 1 - idx_test_r));
-                    IdxStepBS2 idx_step_trial_theta_offset_min(-BSplines2::degree());
-                    IdxStepBS2 idx_step_trial_theta_offset_max(BSplines2::degree() + 1);
+                                        idx_range_fem_1.back() + 1 - idx_test_1));
+                    IdxStepBS2 idx_step_trial_2_offset_min(-BSplines2::degree());
+                    IdxStepBS2 idx_step_trial_2_offset_max(BSplines2::degree() + 1);
 
                     // Calculate the position of the first tensor-tensor element in the row.
                     // These elements are found at the end of the row.
                     int csr_idx = nnz_per_row_csr(row_idx + 1)
                                   - (tensor_nnz_per_row(row_idx + 1) - tensor_nnz_per_row(row_idx));
 
-                    // Loop over the radial offset to a trial b-spline
-                    for (IdxStepBS1 idx_step_trial_r(idx_step_trial_r_offset_min);
-                         idx_step_trial_r < idx_step_trial_r_offset_max;
-                         ++idx_step_trial_r) {
-                        const IdxBS1 idx_trial_r = idx_test_r + idx_step_trial_r;
+                    // Loop over the offset to a trial b-spline in the first dimension
+                    for (IdxStepBS1 idx_step_trial_1(idx_step_trial_1_offset_min);
+                         idx_step_trial_1 < idx_step_trial_1_offset_max;
+                         ++idx_step_trial_1) {
+                        const IdxBS1 idx_trial_1 = idx_test_1 + idx_step_trial_1;
 
-                        // As theta is periodic the theta component must be split in 2 to
-                        // guarantee that col_idx and values (from the CSR format) are
+                        // As the second dimension is periodic its component must be split in 2
+                        // to guarantee that col_idx and values (from the CSR format) are
                         // filled in order.
-                        // Calculate the start and end of the theta offset
-                        IdxBS2 first_idx_trial_theta = detail_poisson::
-                                mod_add(idx_test_theta,
-                                        idx_step_trial_theta_offset_min,
-                                        full_idx_range_theta);
-                        const IdxBS2 last_idx_trial_theta = detail_poisson::
-                                mod_add(idx_test_theta,
-                                        idx_step_trial_theta_offset_max,
-                                        full_idx_range_theta);
-                        IdxBS2 first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
+                        // Calculate the start and end of the offset in the second dimension
+                        IdxBS2 first_idx_trial_2 = detail_poisson::
+                                mod_add(idx_test_2,
+                                        idx_step_trial_2_offset_min,
+                                        full_idx_range_2);
+                        const IdxBS2 last_idx_trial_2 = detail_poisson::
+                                mod_add(idx_test_2,
+                                        idx_step_trial_2_offset_max,
+                                        full_idx_range_2);
+                        IdxBS2 first_periodic_idx_trial_2 = full_idx_range_2.back() + 1;
                         // If the start is after the end then the periodicity wraps the b-splines
-                        // first_periodic_idx_trial_theta is modified to fill the wrapped area (at the
+                        // first_periodic_idx_trial_2 is modified to fill the wrapped area (at the
                         // right hand side of the block) last.
-                        if (first_idx_trial_theta > last_idx_trial_theta) {
-                            first_periodic_idx_trial_theta = first_idx_trial_theta;
-                            first_idx_trial_theta = full_idx_range_theta.front();
+                        if (first_idx_trial_2 > last_idx_trial_2) {
+                            first_periodic_idx_trial_2 = first_idx_trial_2;
+                            first_idx_trial_2 = full_idx_range_2.front();
                         }
-                        // Loop over the poloidal offset to a trial b-spline
-                        for (IdxBS2 idx_trial_theta(first_idx_trial_theta);
-                             idx_trial_theta < last_idx_trial_theta;
-                             ++idx_trial_theta) {
-                            const IdxBS2D idx_trial(idx_trial_r, idx_trial_theta);
+                        // Loop over the offset to a trial b-spline in the second dimension
+                        for (IdxBS2 idx_trial_2(first_idx_trial_2);
+                             idx_trial_2 < last_idx_trial_2;
+                             ++idx_trial_2) {
+                            const IdxBS2D idx_trial(idx_trial_1, idx_trial_2);
                             int const col_idx = first_col_offset
                                                 + ddcHelper::get_linear_index_from_idx(
                                                         idx_range_tensor_basis,
@@ -520,12 +520,12 @@ public:
                             col_idx_csr(csr_idx) = col_idx;
                             csr_idx++;
                         }
-                        // Loop over the poloidal offset to a trial b-spline for any elements that
+                        // Loop over the offset to a trial b-spline in the second dimension for any elements that
                         // are to the right of zeros following the elements already set
-                        for (IdxBS2 idx_trial_theta(first_periodic_idx_trial_theta);
-                             idx_trial_theta < full_idx_range_theta.back() + 1;
-                             ++idx_trial_theta) {
-                            const IdxBS2D idx_trial(idx_trial_r, idx_trial_theta);
+                        for (IdxBS2 idx_trial_2(first_periodic_idx_trial_2);
+                             idx_trial_2 < full_idx_range_2.back() + 1;
+                             ++idx_trial_2) {
+                            const IdxBS2D idx_trial(idx_trial_1, idx_trial_2);
                             int const col_idx = first_col_offset
                                                 + ddcHelper::get_linear_index_from_idx(
                                                         idx_range_tensor_basis,
@@ -641,7 +641,7 @@ public:
                             int_volume_proxy,
                             bspline_stash);
 
-                    // Loop over the poloidal offset to a trial b-spline
+                    // Loop over the trial b-splines
                     for (int csr_idx = csr_idx_first_stencil_element;
                          csr_idx < nnz_per_row_csr[row_idx + 1];
                          ++csr_idx) {
@@ -745,55 +745,55 @@ public:
             IdxRangeQuadrature2D const& full_quad_idx_range,
             TensorBSplineStash const& bspline_stash)
     {
-        const IdxBS1 idx_test_r(idx_test);
-        const IdxBS1 idx_trial_r(idx_trial);
-        const IdxBS2 idx_test_theta(
-                detail_poisson::theta_mod<BSplines2>(IdxBS2(idx_test)));
-        const IdxBS2 idx_trial_theta(
-                detail_poisson::theta_mod<BSplines2>(IdxBS2(idx_trial)));
+        const IdxBS1 idx_test_1(idx_test);
+        const IdxBS1 idx_trial_1(idx_trial);
+        const IdxBS2 idx_test_2(
+                detail_poisson::periodic_mod<BSplines2>(IdxBS2(idx_test)));
+        const IdxBS2 idx_trial_2(
+                detail_poisson::periodic_mod<BSplines2>(IdxBS2(idx_trial)));
 
-        auto& bspl_r = ddc::discrete_space<BSplines1>();
-        auto& bspl_theta = ddc::discrete_space<BSplines2>();
+        auto& bspl_1 = ddc::discrete_space<BSplines1>();
+        auto& bspl_2 = ddc::discrete_space<BSplines2>();
 
-        const Idx<Knots1> start_non_zero_r(
+        const Idx<Knots1> start_non_zero_1(
                 Kokkos::
-                        max(bspl_r.break_point_domain().front(),
+                        max(bspl_1.break_point_domain().front(),
                             Kokkos::
-                                    max(bspl_r.get_first_support_knot(idx_test_r),
-                                        bspl_r.get_first_support_knot(idx_trial_r))));
-        const Idx<Knots1> end_non_zero_r(
+                                    max(bspl_1.get_first_support_knot(idx_test_1),
+                                        bspl_1.get_first_support_knot(idx_trial_1))));
+        const Idx<Knots1> end_non_zero_1(
                 Kokkos::
-                        min(bspl_r.break_point_domain().back(),
+                        min(bspl_1.break_point_domain().back(),
                             Kokkos::
-                                    min(bspl_r.get_last_support_knot(idx_test_r),
-                                        bspl_r.get_last_support_knot(idx_trial_r))));
+                                    min(bspl_1.get_last_support_knot(idx_test_1),
+                                        bspl_1.get_last_support_knot(idx_trial_1))));
 
-        IdxStep<Knots2> span_theta(BSplines2::degree() + 1);
+        IdxStep<Knots2> span_2(BSplines2::degree() + 1);
 
-        Idx<Knots2> first_support_knot_theta_test
-                = bspl_theta.get_first_support_knot(idx_test_theta);
-        Idx<Knots2> first_support_knot_theta_trial
-                = bspl_theta.get_first_support_knot(idx_trial_theta);
-        Idx<Knots2> last_support_knot_theta_test = first_support_knot_theta_test + span_theta;
-        Idx<Knots2> last_support_knot_theta_trial = first_support_knot_theta_trial + span_theta;
+        Idx<Knots2> first_support_knot_2_test
+                = bspl_2.get_first_support_knot(idx_test_2);
+        Idx<Knots2> first_support_knot_2_trial
+                = bspl_2.get_first_support_knot(idx_trial_2);
+        Idx<Knots2> last_support_knot_2_test = first_support_knot_2_test + span_2;
+        Idx<Knots2> last_support_knot_2_trial = first_support_knot_2_trial + span_2;
 
-        if (first_support_knot_theta_test > last_support_knot_theta_trial) {
-            first_support_knot_theta_trial += ddc::discrete_space<BSplines2>().nbasis();
-            last_support_knot_theta_trial += ddc::discrete_space<BSplines2>().nbasis();
-        } else if (last_support_knot_theta_test < first_support_knot_theta_trial) {
-            first_support_knot_theta_test += ddc::discrete_space<BSplines2>().nbasis();
-            last_support_knot_theta_test += ddc::discrete_space<BSplines2>().nbasis();
+        if (first_support_knot_2_test > last_support_knot_2_trial) {
+            first_support_knot_2_trial += ddc::discrete_space<BSplines2>().nbasis();
+            last_support_knot_2_trial += ddc::discrete_space<BSplines2>().nbasis();
+        } else if (last_support_knot_2_test < first_support_knot_2_trial) {
+            first_support_knot_2_test += ddc::discrete_space<BSplines2>().nbasis();
+            last_support_knot_2_test += ddc::discrete_space<BSplines2>().nbasis();
         }
-        const Idx<Knots2> start_non_zero_theta(
-                Kokkos::max(first_support_knot_theta_test, first_support_knot_theta_trial));
-        const Idx<Knots2> end_non_zero_theta(
-                Kokkos::min(last_support_knot_theta_test, last_support_knot_theta_trial));
+        const Idx<Knots2> start_non_zero_2(
+                Kokkos::max(first_support_knot_2_test, first_support_knot_2_trial));
+        const Idx<Knots2> end_non_zero_2(
+                Kokkos::min(last_support_knot_2_test, last_support_knot_2_trial));
         const IdxRangeQuadrature2D quad_range = detail_poisson::
                 get_quadrature_between_knots<QDim1Mesh, QDim2Mesh, BSplines1, BSplines2>(
-                        start_non_zero_r,
-                        end_non_zero_r,
-                        start_non_zero_theta,
-                        end_non_zero_theta,
+                        start_non_zero_1,
+                        end_non_zero_1,
+                        start_non_zero_2,
+                        end_non_zero_2,
                         full_quad_idx_range.front());
 
         IdxRangeQuadrature2D test_support = get_idx_range(test_mass);
@@ -804,12 +804,12 @@ public:
                         team,
                         quad_range.template extent<QDim1Mesh>(),
                         quad_range.template extent<QDim2Mesh>()),
-                [&](int r_thread_index, int theta_thread_index, double& sum) {
+                [&](int thread_index_1, int thread_index_2, double& sum) {
                     IdxQuadrature2D idx_quad
                             = quad_range.front()
                               + IdxStep<
                                       QDim1Mesh,
-                                      QDim2Mesh>(r_thread_index, theta_thread_index);
+                                      QDim2Mesh>(thread_index_1, thread_index_2);
                     // Manage periodicity
                     if (!full_quad_idx_range.contains(idx_quad)) {
                         idx_quad -= full_quad_idx_range.template extent<QDim2Mesh>();
@@ -819,7 +819,7 @@ public:
                     auto [basis_val_trial_space, basis_derivs_trial_space]
                             = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
 
-                    // The test support may extend past the end of the poloidal domain
+                    // The test support may extend past the end of the domain in the second dimension
                     IdxQuadrature2D idx_quad_test = idx_quad;
                     if (!test_support.contains(idx_quad_test)) {
                         idx_quad_test += full_quad_idx_range.template extent<QDim2Mesh>();
@@ -889,9 +889,9 @@ public:
                         team,
                         test_support.template extent<QDim1Mesh>(),
                         test_support.template extent<QDim2Mesh>()),
-                [&](int r_thread_index, int theta_thread_index) {
+                [&](int thread_index_1, int thread_index_2) {
                     IdxStep<QDim1Mesh, QDim2Mesh>
-                            quad_offset(r_thread_index, theta_thread_index);
+                            quad_offset(thread_index_1, thread_index_2);
                     IdxQuadrature2D idx_quad = test_support.front() + quad_offset;
                     IdxQuadrature2D idx_quad_in_domain = idx_quad;
                     // Manage periodicity
@@ -922,7 +922,7 @@ public:
      * products of tensor basis functions and tensor basis functions.
      *
      * The rows and columns of the matrix are the tensor basis functions, ordered as in
-     * the 2D (r,theta) index range of the tensor basis functions. After this function the
+     * the 2D index range of the tensor basis functions. After this function the
      * array will contain:
      * nnz_per_row[0] = unchanged (0 for a standalone matrix).
      * nnz_per_row[1] = number of non-zero elements in line 0 of the matrix.
@@ -943,95 +943,97 @@ public:
         // nnz per line
         Field<int, IdxRangeBS2D> nnz(nnz_per_row.data() + 1, idxrange_tensor_basis);
 
-        size_t constexpr degree = BSplines1::degree();
-        size_t const nbasis_theta_proxy
+        size_t constexpr degree_1 = BSplines1::degree();
+        size_t const nbasis_2_proxy
                 = idxrange_tensor_basis.template extent<BSplines2>().value();
-        // The number of radial splines which overlap with a radial spline far from the boundaries
-        size_t constexpr stencil_overlap_r = 2 * degree + 1;
-        // The number of poloidal splines which overlap with a poloidal spline
-        size_t const stencil_overlap_theta
-                = std::min(size_t(2 * BSplines2::degree() + 1), nbasis_theta_proxy);
+        // The number of splines in the first dimension which overlap with a spline far from the boundaries
+        size_t constexpr stencil_overlap_1 = 2 * degree_1 + 1;
+        // The number of splines in the second dimension which overlap with a spline
+        size_t const stencil_overlap_2
+                = std::min(size_t(2 * BSplines2::degree() + 1), nbasis_2_proxy);
 
-        // The number of radial splines which overlap with a given radial spline to its
+        // The number of splines in the first dimension which overlap with a given spline to its
         // left or to its right
         IdxStepBS1 n_one_side_overlap(BSplines1::degree());
 
         int nnz_sum = 0;
 
-        IdxRangeBS1 idxrange_bsplines_r(idxrange_tensor_basis);
-        IdxRangeBS2 idxrange_bsplines_theta(idxrange_tensor_basis);
-        IdxRangeBS1 inner_bsplines_r = idxrange_bsplines_r.take_first(n_one_side_overlap);
-        IdxRangeBS2D inner_bsplines_2d(inner_bsplines_r, idxrange_bsplines_theta);
-        // Approaching the internal boundary the overlapping possibilities between two radial splines decrease
+        IdxRangeBS1 idxrange_bsplines_1(idxrange_tensor_basis);
+        IdxRangeBS2 idxrange_bsplines_2(idxrange_tensor_basis);
+        IdxRangeBS1 inner_bsplines_1 = idxrange_bsplines_1.take_first(n_one_side_overlap);
+        IdxRangeBS2D inner_bsplines_2d(inner_bsplines_1, idxrange_bsplines_2);
+        // Approaching the lower boundary of the first dimension the overlapping possibilities
+        // between two splines decrease
         Kokkos::parallel_for(
                 "inner boundary",
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        inner_bsplines_r.size(),
+                        inner_bsplines_1.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    IdxStepBS1 ir(team.league_rank());
-                    // number of radial bases which overlap with this element
-                    int nr = degree + ir + 1;
+                    IdxStepBS1 i1(team.league_rank());
+                    // number of bases in the first dimension which overlap with this element
+                    int n1 = degree_1 + i1 + 1;
 
-                    // nnz to this line = ntheta * n_stencil_theta \sum_{k=degree+1}^{nr-1} k
-                    int nnz_sum_to_r = (nr * (nr - 1) - degree * (degree + 1)) * nbasis_theta_proxy
-                                       * stencil_overlap_theta / 2;
+                    // nnz to this line = nbasis_2 * stencil_overlap_2 \sum_{k=degree_1+1}^{n1-1} k
+                    int nnz_sum_to_i1 = (n1 * (n1 - 1) - degree_1 * (degree_1 + 1))
+                                        * nbasis_2_proxy * stencil_overlap_2 / 2;
 
-                    // Loop over poloidal dimensions
+                    // Loop over the second dimension
                     Kokkos::parallel_for(
-                            Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
+                            Kokkos::TeamThreadRange(team, nbasis_2_proxy),
                             [&](int const& thread_index) {
-                                IdxStepBS2 itheta(thread_index);
-                                nnz(ir, itheta)
-                                        += nnz_sum_to_r
-                                           + (thread_index + 1) * nr * stencil_overlap_theta;
+                                IdxStepBS2 i2(thread_index);
+                                nnz(i1, i2) += nnz_sum_to_i1
+                                               + (thread_index + 1) * n1 * stencil_overlap_2;
                             });
                 });
 
         {
-            int nr = inner_bsplines_r.size();
-            nnz_sum += nr * (nr + 2 * degree + 1) * stencil_overlap_theta / 2 * nbasis_theta_proxy;
+            int n1 = inner_bsplines_1.size();
+            nnz_sum += n1 * (n1 + 2 * degree_1 + 1) * stencil_overlap_2 / 2 * nbasis_2_proxy;
         }
 
-        IdxRangeBS1 idxrange_bsplines_r_stencil
-                = idxrange_bsplines_r.remove(n_one_side_overlap, n_one_side_overlap);
-        IdxRangeBS2D idxrange_stencil(idxrange_bsplines_r_stencil, idxrange_bsplines_theta);
-        // Stencil for tensor product bsplines which are not affected by the radial boundaries
+        IdxRangeBS1 idxrange_bsplines_1_stencil
+                = idxrange_bsplines_1.remove(n_one_side_overlap, n_one_side_overlap);
+        IdxRangeBS2D idxrange_stencil(idxrange_bsplines_1_stencil, idxrange_bsplines_2);
+        // Stencil for tensor product bsplines which are not affected by the boundaries of the
+        // first dimension
         Kokkos::parallel_for(
                 "stencil",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(0, idxrange_stencil.size()),
                 KOKKOS_LAMBDA(const int k) {
-                    IdxBS2D k_2d = idxrange_stencil.front() + IdxStepBS1(k / nbasis_theta_proxy)
-                                       + IdxStepBS2(k % nbasis_theta_proxy);
-                    nnz(k_2d) += nnz_sum + (k + 1) * stencil_overlap_r * stencil_overlap_theta;
+                    IdxBS2D k_2d = idxrange_stencil.front() + IdxStepBS1(k / nbasis_2_proxy)
+                                   + IdxStepBS2(k % nbasis_2_proxy);
+                    nnz(k_2d) += nnz_sum + (k + 1) * stencil_overlap_1 * stencil_overlap_2;
                 });
 
-        nnz_sum += idxrange_stencil.size() * stencil_overlap_r * stencil_overlap_theta;
+        nnz_sum += idxrange_stencil.size() * stencil_overlap_1 * stencil_overlap_2;
 
-        IdxRangeBS1 outer_bsplines_r = idxrange_bsplines_r.take_last(n_one_side_overlap);
-        IdxRangeBS2D outer_bsplines_2d(outer_bsplines_r, idxrange_bsplines_theta);
-        // Approaching the external boundary the overlapping possibilities between two radial splines decrease
+        IdxRangeBS1 outer_bsplines_1 = idxrange_bsplines_1.take_last(n_one_side_overlap);
+        IdxRangeBS2D outer_bsplines_2d(outer_bsplines_1, idxrange_bsplines_2);
+        // Approaching the upper boundary of the first dimension the overlapping possibilities
+        // between two splines decrease
         Kokkos::parallel_for(
                 "outer boundary",
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        outer_bsplines_r.size(),
+                        outer_bsplines_1.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    IdxStepBS1 ir(team.league_rank());
-                    int nr = 2 * degree - ir;
-                    int nnz_sum_to_r = nnz_sum
-                                       + (degree * (2 * degree + 1) - nr * (nr + 1) / 2)
-                                                 * stencil_overlap_theta * nbasis_theta_proxy;
-                    // Loop over poloidal dimensions
+                    IdxStepBS1 i1(team.league_rank());
+                    int n1 = 2 * degree_1 - i1;
+                    int nnz_sum_to_i1 = nnz_sum
+                                        + (degree_1 * (2 * degree_1 + 1) - n1 * (n1 + 1) / 2)
+                                                  * stencil_overlap_2 * nbasis_2_proxy;
+                    // Loop over the second dimension
                     Kokkos::parallel_for(
-                            Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
+                            Kokkos::TeamThreadRange(team, nbasis_2_proxy),
                             [&](int const& thread_index) {
-                                IdxStepBS2 itheta(thread_index);
-                                IdxBS2D k = outer_bsplines_2d.front() + ir + itheta;
-                                nnz(k) += nnz_sum_to_r
-                                          + (thread_index + 1) * nr * stencil_overlap_theta;
+                                IdxStepBS2 i2(thread_index);
+                                IdxBS2D k = outer_bsplines_2d.front() + i1 + i2;
+                                nnz(k) += nnz_sum_to_i1
+                                          + (thread_index + 1) * n1 * stencil_overlap_2;
                             });
                 });
     }

@@ -45,48 +45,49 @@ Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> as_ba
 
 
 /**
- * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction.
+ * @brief Calculates the modulo idx_step in relation to the number of basis functions of
+ * periodic B-splines.
  *
- * @tparam BSplinesTheta Periodic B-Splines in poloidal direction.
+ * @tparam BSplines Periodic B-Splines.
  *
- * @param[in] idx_theta @f$ \theta @f$ index.
+ * @param[in] idx_step A step between two B-spline indices.
  *
- * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
+ * @return The corresponding step modulo the number of basis functions.
  */
-template <typename BSplinesTheta>
-KOKKOS_FUNCTION IdxStep<BSplinesTheta> theta_mod(IdxStep<BSplinesTheta> idx_theta)
+template <typename BSplines>
+KOKKOS_FUNCTION IdxStep<BSplines> periodic_mod(IdxStep<BSplines> idx_step)
 {
-    int n_theta = ddc::discrete_space<BSplinesTheta>().nbasis();
-    while (idx_theta < 0)
-        idx_theta += n_theta;
-    while (idx_theta >= n_theta)
-        idx_theta -= n_theta;
-    return idx_theta;
+    int n_basis = ddc::discrete_space<BSplines>().nbasis();
+    while (idx_step < 0)
+        idx_step += n_basis;
+    while (idx_step >= n_basis)
+        idx_step -= n_basis;
+    return idx_step;
 }
 
 /**
- * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
+ * @brief Calculates the index which is inside the domain of periodic B-splines using the
+ * periodicity properties.
  *
- * @tparam BSplinesTheta Periodic B-Splines in poloidal direction.
+ * @tparam BSplines Periodic B-Splines.
  * @tparam IdxType The Type of the input index.
  *
- * @param[in] idx A multi-dimensional index including the polar bspline index.
+ * @param[in] idx A multi-dimensional index including the B-spline index.
  *
  * @return The corresponding index inside the domain.
  */
-template <typename BSplinesTheta, class IdxType>
-KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
+template <typename BSplines, class IdxType>
+KOKKOS_INLINE_FUNCTION IdxType periodic_mod(IdxType idx)
 {
     static_assert(ddc::is_discrete_element_v<IdxType>);
-    static_assert(ddc::in_tags_v<BSplinesTheta, ddc::to_type_seq_t<IdxType>>);
-    IdxRange<BSplinesTheta> idx_range_theta
-            = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
-                    IdxStep<BSplinesTheta>(ddc::discrete_space<BSplinesTheta>().nbasis()));
-    while (ddc::select<BSplinesTheta>(idx) < idx_range_theta.front())
-        idx += idx_range_theta.extents();
-    while (ddc::select<BSplinesTheta>(idx) > idx_range_theta.back())
-        idx -= idx_range_theta.extents();
-    assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
+    static_assert(ddc::in_tags_v<BSplines, ddc::to_type_seq_t<IdxType>>);
+    IdxRange<BSplines> idx_range_bsplines = ddc::discrete_space<BSplines>().full_domain().take_first(
+            IdxStep<BSplines>(ddc::discrete_space<BSplines>().nbasis()));
+    while (ddc::select<BSplines>(idx) < idx_range_bsplines.front())
+        idx += idx_range_bsplines.extents();
+    while (ddc::select<BSplines>(idx) > idx_range_bsplines.back())
+        idx -= idx_range_bsplines.extents();
+    assert(idx_range_bsplines.contains(ddc::select<BSplines>(idx)));
     return idx;
 }
 
@@ -111,34 +112,34 @@ KOKKOS_FUNCTION Idx<DDom> mod_add(Idx<DDom> idx, IdxStep<DDom> idx_step, IdxRang
  * The tensor product B-splines and the quadrature grid both have a tensor product structure.
  * The value of a tensor product B-spline at a quadrature point can therefore be computed
  * from the values of the 1D B-splines at the 1D quadrature points. The memory required
- * to store these values is O(N_r + N_theta).
+ * to store these values is O(N_1 + N_2).
  *
  * The B-spline index stored in the stash is the offset from the first non-zero B-spline at the
  * quadrature point.
  *
- * @tparam QDimRMesh Quadrature mesh in radial direction.
- * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
- * @tparam BSplinesR Splines in radial direction.
- * @tparam BSplinesTheta Splines in poloidal direction.
+ * @tparam QDim1Mesh Quadrature mesh in the first dimension.
+ * @tparam QDim2Mesh Quadrature mesh in the second dimension.
+ * @tparam BSplines1 Splines in the first dimension.
+ * @tparam BSplines2 Splines in the second dimension.
  */
-template <typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta>
+template <typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2>
 struct TensorBSplineStash
 {
 private:
-    using R = typename BSplinesR::continuous_dimension_type;
-    using Theta = typename BSplinesTheta::continuous_dimension_type;
-    using R_cov = typename R::Dual;
-    using Theta_cov = typename Theta::Dual;
+    using Dim1 = typename BSplines1::continuous_dimension_type;
+    using Dim2 = typename BSplines2::continuous_dimension_type;
+    using Dim1_cov = typename Dim1::Dual;
+    using Dim2_cov = typename Dim2::Dual;
 
 public:
-    /// The values (derivative order 0) and derivatives (derivative order 1) of the radial B-splines.
-    DConstField<IdxRange<QDimRMesh, BSplinesR, ddc::Deriv<R>>> vals_r;
-    /// The values (derivative order 0) and derivatives (derivative order 1) of the poloidal B-splines.
-    DConstField<IdxRange<QDimThetaMesh, BSplinesTheta, ddc::Deriv<Theta>>> vals_theta;
-    /// The first non-zero radial B-spline at each radial quadrature point.
-    ConstField<Idx<BSplinesR>, IdxRange<QDimRMesh>> first_basis_r;
-    /// The first non-zero poloidal B-spline at each poloidal quadrature point.
-    ConstField<Idx<BSplinesTheta>, IdxRange<QDimThetaMesh>> first_basis_theta;
+    /// The values (derivative order 0) and derivatives (derivative order 1) of the B-splines in the first dimension.
+    DConstField<IdxRange<QDim1Mesh, BSplines1, ddc::Deriv<Dim1>>> vals_1;
+    /// The values (derivative order 0) and derivatives (derivative order 1) of the B-splines in the second dimension.
+    DConstField<IdxRange<QDim2Mesh, BSplines2, ddc::Deriv<Dim2>>> vals_2;
+    /// The first non-zero B-spline at each quadrature point in the first dimension.
+    ConstField<Idx<BSplines1>, IdxRange<QDim1Mesh>> first_basis_1;
+    /// The first non-zero B-spline at each quadrature point in the second dimension.
+    ConstField<Idx<BSplines2>, IdxRange<QDim2Mesh>> first_basis_2;
 
     /**
      * @brief Get the value and the derivatives of a tensor product B-spline at a quadrature point.
@@ -147,26 +148,24 @@ public:
      * @param[in] idx The 2D index of the tensor product B-spline.
      * @return The value and derivatives of the B-spline at the quadrature point.
      */
-    KOKKOS_FUNCTION std::tuple<double, DVector<R_cov, Theta_cov>> vals_and_derivs(
-            Idx<QDimRMesh, QDimThetaMesh> idx_quad,
-            Idx<BSplinesR, BSplinesTheta> idx) const
+    KOKKOS_FUNCTION std::tuple<double, DVector<Dim1_cov, Dim2_cov>> vals_and_derivs(
+            Idx<QDim1Mesh, QDim2Mesh> idx_quad,
+            Idx<BSplines1, BSplines2> idx) const
     {
-        Idx<QDimRMesh> idx_quad_r(idx_quad);
-        Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
-        IdxStep<BSplinesR> offset_r = Idx<BSplinesR>(idx) - first_basis_r(idx_quad_r);
-        IdxStep<BSplinesTheta> offset_theta
-                = Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta);
-        DConstField<IdxRange<BSplinesR, ddc::Deriv<R>>> vals_r_at_quad = vals_r[idx_quad_r];
-        DConstField<IdxRange<BSplinesTheta, ddc::Deriv<Theta>>> vals_theta_at_quad
-                = vals_theta[idx_quad_theta];
-        const double val_r = vals_r_at_quad(offset_r, IdxStep<ddc::Deriv<R>>(0));
-        const double val_theta = vals_theta_at_quad(offset_theta, IdxStep<ddc::Deriv<Theta>>(0));
-        DVector<R_cov, Theta_cov> derivs;
-        ddcHelper::get<R_cov>(derivs)
-                = vals_r_at_quad(offset_r, IdxStep<ddc::Deriv<R>>(1)) * val_theta;
-        ddcHelper::get<Theta_cov>(derivs)
-                = val_r * vals_theta_at_quad(offset_theta, IdxStep<ddc::Deriv<Theta>>(1));
-        return {val_r * val_theta, derivs};
+        Idx<QDim1Mesh> idx_quad_1(idx_quad);
+        Idx<QDim2Mesh> idx_quad_2(idx_quad);
+        IdxStep<BSplines1> offset_1 = Idx<BSplines1>(idx) - first_basis_1(idx_quad_1);
+        IdxStep<BSplines2> offset_2 = Idx<BSplines2>(idx) - first_basis_2(idx_quad_2);
+        DConstField<IdxRange<BSplines1, ddc::Deriv<Dim1>>> vals_1_at_quad = vals_1[idx_quad_1];
+        DConstField<IdxRange<BSplines2, ddc::Deriv<Dim2>>> vals_2_at_quad = vals_2[idx_quad_2];
+        const double val_1 = vals_1_at_quad(offset_1, IdxStep<ddc::Deriv<Dim1>>(0));
+        const double val_2 = vals_2_at_quad(offset_2, IdxStep<ddc::Deriv<Dim2>>(0));
+        DVector<Dim1_cov, Dim2_cov> derivs;
+        ddcHelper::get<Dim1_cov>(derivs)
+                = vals_1_at_quad(offset_1, IdxStep<ddc::Deriv<Dim1>>(1)) * val_2;
+        ddcHelper::get<Dim2_cov>(derivs)
+                = val_1 * vals_2_at_quad(offset_2, IdxStep<ddc::Deriv<Dim2>>(1));
+        return {val_1 * val_2, derivs};
     }
 
     /**
@@ -177,16 +176,15 @@ public:
      * @return The value of the B-spline at the quadrature point.
      */
     KOKKOS_FUNCTION double vals(
-            Idx<QDimRMesh, QDimThetaMesh> idx_quad,
-            Idx<BSplinesR, BSplinesTheta> idx) const
+            Idx<QDim1Mesh, QDim2Mesh> idx_quad,
+            Idx<BSplines1, BSplines2> idx) const
     {
-        Idx<QDimRMesh> idx_quad_r(idx_quad);
-        Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
-        IdxStep<BSplinesR> offset_r = Idx<BSplinesR>(idx) - first_basis_r(idx_quad_r);
-        IdxStep<BSplinesTheta> offset_theta
-                = Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta);
-        return vals_r[idx_quad_r](offset_r, IdxStep<ddc::Deriv<R>>(0))
-               * vals_theta[idx_quad_theta](offset_theta, IdxStep<ddc::Deriv<Theta>>(0));
+        Idx<QDim1Mesh> idx_quad_1(idx_quad);
+        Idx<QDim2Mesh> idx_quad_2(idx_quad);
+        IdxStep<BSplines1> offset_1 = Idx<BSplines1>(idx) - first_basis_1(idx_quad_1);
+        IdxStep<BSplines2> offset_2 = Idx<BSplines2>(idx) - first_basis_2(idx_quad_2);
+        return vals_1[idx_quad_1](offset_1, IdxStep<ddc::Deriv<Dim1>>(0))
+               * vals_2[idx_quad_2](offset_2, IdxStep<ddc::Deriv<Dim2>>(0));
     }
 };
 
@@ -364,8 +362,8 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_support_quadrature(
  * @f$ w \beta B_i @f$ so that the weak integral element can be computed from the values and
  * derivatives of the trial function alone.
  *
- * @tparam QDimRMesh Quadrature mesh in radial direction.
- * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
+ * @tparam QDim1Mesh Quadrature mesh in the first dimension.
+ * @tparam QDim2Mesh Quadrature mesh in the second dimension.
  *
  * @param[in] basis_val_test
  *      The value of the test basis function at the quadrature point.
@@ -376,10 +374,10 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_support_quadrature(
  * @param[in] idx_batch
  *      The index of the batch for which the element is being calculated.
  * @param[in] coeff_alpha
- *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+ *      A callable with signature `double operator()(IdxBatch, Coord<Dim1, Dim2>)` returning
  *      @f$ \alpha @f$ at the given batch and coordinate.
  * @param[in] coeff_beta
- *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+ *      A callable with signature `double operator()(IdxBatch, Coord<Dim1, Dim2>)` returning
  *      @f$ \beta @f$ at the given batch and coordinate.
  * @param[in] metric_tensor
  *      The metric tensor associated with the mapping from the logical domain to the
@@ -393,43 +391,43 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_support_quadrature(
  *            multiplies the gradient of the trial function.
  */
 template <
-        class QDimRMesh,
-        class QDimThetaMesh,
+        class QDim1Mesh,
+        class QDim2Mesh,
         class IdxBatch,
         class CoeffAlpha,
         class CoeffBeta,
         concepts::MetricTensor MetricTensorType>
 KOKKOS_FUNCTION std::tuple<
         double,
-        DVector<typename QDimRMesh::continuous_dimension_type,
-                typename QDimThetaMesh::continuous_dimension_type>>
+        DVector<typename QDim1Mesh::continuous_dimension_type,
+                typename QDim2Mesh::continuous_dimension_type>>
 get_test_weights(
         double basis_val_test,
-        DVector<typename QDimRMesh::continuous_dimension_type::Dual,
-                typename QDimThetaMesh::continuous_dimension_type::Dual> basis_derivs_test,
-        Idx<QDimRMesh, QDimThetaMesh> idx_quad,
+        DVector<typename QDim1Mesh::continuous_dimension_type::Dual,
+                typename QDim2Mesh::continuous_dimension_type::Dual> basis_derivs_test,
+        Idx<QDim1Mesh, QDim2Mesh> idx_quad,
         IdxBatch idx_batch,
         CoeffAlpha const& coeff_alpha,
         CoeffBeta const& coeff_beta,
         MetricTensorType const& metric_tensor,
-        DField<IdxRange<QDimRMesh, QDimThetaMesh>> int_volume)
+        DField<IdxRange<QDim1Mesh, QDim2Mesh>> int_volume)
 {
-    using R = typename QDimRMesh::continuous_dimension_type;
-    using Theta = typename QDimThetaMesh::continuous_dimension_type;
+    using Dim1 = typename QDim1Mesh::continuous_dimension_type;
+    using Dim2 = typename QDim2Mesh::continuous_dimension_type;
 
     // Calculate coefficients at quadrature point
-    Coord<R, Theta> coord(ddc::coordinate(idx_quad));
+    Coord<Dim1, Dim2> coord(ddc::coordinate(idx_quad));
     const double alpha = coeff_alpha(idx_batch, coord);
     const double beta = coeff_beta(idx_batch, coord);
 
-    using Spatial2DVectorSpace = VectorIndexSet<R, Theta>;
+    using Spatial2DVectorSpace = VectorIndexSet<Dim1, Dim2>;
 
     Tensor inv_metric_tensor = metric_tensor.inverse(idx_quad);
     DTensor<Spatial2DVectorSpace, Spatial2DVectorSpace> inv_metric_tensor_2d;
     ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
     double test_mass_weight = int_volume(idx_quad) * beta * basis_val_test;
-    DVector<R, Theta> test_stiffness_weight
+    DVector<Dim1, Dim2> test_stiffness_weight
             = int_volume(idx_quad) * alpha
               * tensor_mul(index<'i'>(basis_derivs_test), index<'i', 'j'>(inv_metric_tensor_2d));
     return {test_mass_weight, test_stiffness_weight};
