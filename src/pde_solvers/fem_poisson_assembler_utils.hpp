@@ -194,81 +194,81 @@ public:
  * @brief Compute the quadrature range between a provided set of knots.
  *
  * Compute the range of quadrature points which are found between a set of knots
- * in both the radial and poloidal directions. The poloidal index of the front of the
- * returned range is always inside the domain. However, in order to return a contiguous
- * range, the result may include poloidal indices beyond the end of the domain. A modulo
- * operator should be applied before using the indices.
+ * in both dimensions. The index of the front of the returned range in the second
+ * dimension is always inside the domain. However, in order to return a contiguous
+ * range, the result may include indices beyond the end of the domain in the second
+ * dimension. A modulo operator should be applied before using the indices.
  *
- * @tparam QDimRMesh Quadrature mesh in radial direction.
- * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
- * @tparam BSplinesR Splines in radial direction.
- * @tparam BSplinesTheta Splines in poloidal direction.
+ * @tparam QDim1Mesh Quadrature mesh in the first dimension.
+ * @tparam QDim2Mesh Quadrature mesh in the second dimension.
+ * @tparam BSplines1 Splines in the first dimension.
+ * @tparam BSplines2 Splines in the second dimension.
  *
- * @param[in] start_knot_r
+ * @param[in] start_knot_1
  *      The index of the knot describing the lower bound of the domain of interest
- *      in the radial direction.
- * @param[in] end_knot_r
+ *      in the first dimension.
+ * @param[in] end_knot_1
  *      The index of the knot describing the upper bound of the domain of interest
- *      in the radial direction.
- * @param[in] start_knot_theta
+ *      in the first dimension.
+ * @param[in] start_knot_2
  *      The index of the knot describing the lower bound of the domain of interest
- *      in the poloidal direction.
- * @param[in] end_knot_theta
+ *      in the second dimension.
+ * @param[in] end_knot_2
  *      The index of the knot describing the upper bound of the domain of interest
- *      in the poloidal direction.
+ *      in the second dimension.
  * @param[in] idx_quad_front
  *      The first index of the index range of the quadrature points.
  * @return
  *      The range of quadrature points in the specified domain.
  */
-template <typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta>
-KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_quadrature_between_knots(
-        Idx<ddc::knot_discrete_dimension_t<BSplinesR>> start_knot_r,
-        Idx<ddc::knot_discrete_dimension_t<BSplinesR>> end_knot_r,
-        Idx<ddc::knot_discrete_dimension_t<BSplinesTheta>> start_knot_theta,
-        Idx<ddc::knot_discrete_dimension_t<BSplinesTheta>> end_knot_theta,
-        Idx<QDimRMesh, QDimThetaMesh> idx_quad_front)
+template <typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2>
+KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_quadrature_between_knots(
+        Idx<ddc::knot_discrete_dimension_t<BSplines1>> start_knot_1,
+        Idx<ddc::knot_discrete_dimension_t<BSplines1>> end_knot_1,
+        Idx<ddc::knot_discrete_dimension_t<BSplines2>> start_knot_2,
+        Idx<ddc::knot_discrete_dimension_t<BSplines2>> end_knot_2,
+        Idx<QDim1Mesh, QDim2Mesh> idx_quad_front)
 {
-    using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
-    using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
+    using Knots1 = ddc::knot_discrete_dimension_t<BSplines1>;
+    using Knots2 = ddc::knot_discrete_dimension_t<BSplines2>;
 
-    const IdxRange<KnotsR> k_range_r(start_knot_r, end_knot_r - start_knot_r);
-    const IdxRange<KnotsTheta> k_range_theta(start_knot_theta, end_knot_theta - start_knot_theta);
+    const IdxRange<Knots1> k_range_1(start_knot_1, end_knot_1 - start_knot_1);
+    const IdxRange<Knots2> k_range_2(start_knot_2, end_knot_2 - start_knot_2);
 
-    constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
-    IdxStep<KnotsR> k_r_offset
-            = k_range_r.front() - ddc::discrete_space<BSplinesR>().break_point_domain().front();
-    Idx<QDimRMesh> q_r_offset
-            = Idx<QDimRMesh>(idx_quad_front) + k_r_offset.value() * s_n_gauss_legendre_r;
-    IdxStep<QDimRMesh> q_r_len(k_range_r.extents().value() * s_n_gauss_legendre_r);
-    IdxRange<QDimRMesh> q_range_r(q_r_offset, q_r_len);
+    constexpr int s_n_gauss_legendre_1 = BSplines1::degree() + 1;
+    IdxStep<Knots1> k_1_offset
+            = k_range_1.front() - ddc::discrete_space<BSplines1>().break_point_domain().front();
+    Idx<QDim1Mesh> q_1_offset
+            = Idx<QDim1Mesh>(idx_quad_front) + k_1_offset.value() * s_n_gauss_legendre_1;
+    IdxStep<QDim1Mesh> q_1_len(k_range_1.extents().value() * s_n_gauss_legendre_1);
+    IdxRange<QDim1Mesh> q_range_1(q_1_offset, q_1_len);
 
-    constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
-    IdxStep<KnotsTheta> k_theta_offset
-            = k_range_theta.front()
-              - ddc::discrete_space<BSplinesTheta>().break_point_domain().front();
-    if (k_theta_offset < 0)
-        k_theta_offset += ddc::discrete_space<BSplinesTheta>().nbasis();
-    Idx<QDimThetaMesh> q_theta_offset = Idx<QDimThetaMesh>(idx_quad_front)
-                                        + k_theta_offset.value() * s_n_gauss_legendre_theta;
-    IdxStep<QDimThetaMesh> q_theta_len(k_range_theta.extents().value() * s_n_gauss_legendre_theta);
-    IdxRange<QDimThetaMesh> q_range_theta(q_theta_offset, q_theta_len);
-    assert(q_range_r.extents() > 0);
-    assert(q_range_theta.extents() > 0);
+    constexpr int s_n_gauss_legendre_2 = BSplines2::degree() + 1;
+    IdxStep<Knots2> k_2_offset
+            = k_range_2.front() - ddc::discrete_space<BSplines2>().break_point_domain().front();
+    if (k_2_offset < 0)
+        k_2_offset += ddc::discrete_space<BSplines2>().nbasis();
+    Idx<QDim2Mesh> q_2_offset
+            = Idx<QDim2Mesh>(idx_quad_front) + k_2_offset.value() * s_n_gauss_legendre_2;
+    IdxStep<QDim2Mesh> q_2_len(k_range_2.extents().value() * s_n_gauss_legendre_2);
+    IdxRange<QDim2Mesh> q_range_2(q_2_offset, q_2_len);
+    assert(q_range_1.extents() > 0);
+    assert(q_range_2.extents() > 0);
 
-    return IdxRange<QDimRMesh, QDimThetaMesh>(q_range_r, q_range_theta);
+    return IdxRange<QDim1Mesh, QDim2Mesh>(q_range_1, q_range_2);
 }
 
 /**
  * @brief Compute the range of quadrature points in the support of a tensor product B-spline.
  *
- * In order to return a contiguous range the result may include poloidal indices which are
- * outside the domain. A modulo operator should be applied before using the indices.
+ * In order to return a contiguous range the result may include indices in the second
+ * dimension which are outside the domain. A modulo operator should be applied before
+ * using the indices.
  *
- * @tparam QDimRMesh Quadrature mesh in radial direction.
- * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
- * @tparam BSplinesR Splines in radial direction.
- * @tparam BSplinesTheta Splines in poloidal direction.
+ * @tparam QDim1Mesh Quadrature mesh in the first dimension.
+ * @tparam QDim2Mesh Quadrature mesh in the second dimension.
+ * @tparam BSplines1 Splines in the first dimension.
+ * @tparam BSplines2 Splines in the second dimension.
  *
  * @param[in] idx
  *      The 2D index of the tensor product B-spline.
@@ -277,33 +277,33 @@ KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_quadrature_between_knots(
  * @return
  *      The range of quadrature points in the support of the B-spline.
  */
-template <typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta>
-KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_support_quadrature(
-        Idx<BSplinesR, BSplinesTheta> idx,
-        Idx<QDimRMesh, QDimThetaMesh> idx_quad_front)
+template <typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2>
+KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_support_quadrature(
+        Idx<BSplines1, BSplines2> idx,
+        Idx<QDim1Mesh, QDim2Mesh> idx_quad_front)
 {
-    using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
-    using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
+    using Knots1 = ddc::knot_discrete_dimension_t<BSplines1>;
+    using Knots2 = ddc::knot_discrete_dimension_t<BSplines2>;
 
-    const Idx<BSplinesR> idx_r(idx);
-    const Idx<BSplinesTheta> idx_theta(idx);
+    const Idx<BSplines1> idx_1(idx);
+    const Idx<BSplines2> idx_2(idx);
 
-    auto& bspl_r = ddc::discrete_space<BSplinesR>();
-    auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
+    auto& bspl_1 = ddc::discrete_space<BSplines1>();
+    auto& bspl_2 = ddc::discrete_space<BSplines2>();
 
     // Find the cells on which the bspline is non-zero
-    const Idx<KnotsR> start_non_zero_r(
-            Kokkos::max(bspl_r.break_point_domain().front(), bspl_r.get_first_support_knot(idx_r)));
-    const Idx<KnotsR> end_non_zero_r(
-            Kokkos::min(bspl_r.break_point_domain().back(), bspl_r.get_last_support_knot(idx_r)));
+    const Idx<Knots1> start_non_zero_1(
+            Kokkos::max(bspl_1.break_point_domain().front(), bspl_1.get_first_support_knot(idx_1)));
+    const Idx<Knots1> end_non_zero_1(
+            Kokkos::min(bspl_1.break_point_domain().back(), bspl_1.get_last_support_knot(idx_1)));
 
-    const Idx<KnotsTheta> start_non_zero_theta(bspl_theta.get_first_support_knot(idx_theta));
-    const Idx<KnotsTheta> end_non_zero_theta(bspl_theta.get_last_support_knot(idx_theta));
-    return get_quadrature_between_knots<QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta>(
-            start_non_zero_r,
-            end_non_zero_r,
-            start_non_zero_theta,
-            end_non_zero_theta,
+    const Idx<Knots2> start_non_zero_2(bspl_2.get_first_support_knot(idx_2));
+    const Idx<Knots2> end_non_zero_2(bspl_2.get_last_support_knot(idx_2));
+    return get_quadrature_between_knots<QDim1Mesh, QDim2Mesh, BSplines1, BSplines2>(
+            start_non_zero_1,
+            end_non_zero_1,
+            start_non_zero_2,
+            end_non_zero_2,
             idx_quad_front);
 }
 
