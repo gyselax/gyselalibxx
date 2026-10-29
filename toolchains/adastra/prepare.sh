@@ -44,6 +44,6 @@ for arch in genoa mi250 mi300; do
     spack env deactivate
 done
 
-find "${GYSELA_SPACK_PREFIX}" \( -type d -type f \) -user "${USER}" \
+find "${GYSELA_SPACK_PREFIX}" \( -type d -o -type f \) -user "${USER}" \
     -exec chgrp "${GYSELA_SPACK_GROUP}" {} + \
     -exec chmod g+rwX {} +
