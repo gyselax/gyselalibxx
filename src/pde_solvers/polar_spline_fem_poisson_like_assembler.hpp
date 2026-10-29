@@ -1794,7 +1794,6 @@ public:
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     IdxStepBSR ir(team.league_rank());
                     int nr = 2 * degree - ir;
-                    IdxBSR k_r(outer_bsplines_2d.front() + ir);
                     int nnz_sum_to_r = nnz_sum
                                        + (degree * (2 * degree + 1) - nr * (nr + 1) / 2)
                                                  * stencil_overlap * nbasis_theta_proxy;
