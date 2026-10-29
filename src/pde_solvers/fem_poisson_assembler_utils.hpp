@@ -191,6 +191,48 @@ public:
 };
 
 /**
+ * @brief Compute the 1D quadrature range between a provided pair of knots.
+ *
+ * Compute the range of quadrature points which are found between two knots. If the
+ * B-splines are periodic then the front of the returned range is always inside the
+ * domain. However, in order to return a contiguous range, the result may include indices
+ * beyond the end of the domain. A modulo operator should be applied before using the indices.
+ *
+ * @tparam QDimMesh Quadrature mesh.
+ * @tparam BSplines The 1D B-splines.
+ *
+ * @param[in] start_knot
+ *      The index of the knot describing the lower bound of the domain of interest.
+ * @param[in] end_knot
+ *      The index of the knot describing the upper bound of the domain of interest.
+ * @param[in] idx_quad_front
+ *      The first index of the index range of the quadrature points.
+ * @return
+ *      The range of quadrature points in the specified domain.
+ */
+template <typename QDimMesh, typename BSplines>
+KOKKOS_FUNCTION IdxRange<QDimMesh> get_quadrature_between_knots_1d(
+        Idx<ddc::knot_discrete_dimension_t<BSplines>> start_knot,
+        Idx<ddc::knot_discrete_dimension_t<BSplines>> end_knot,
+        Idx<QDimMesh> idx_quad_front)
+{
+    using Knots = ddc::knot_discrete_dimension_t<BSplines>;
+
+    constexpr int n_gauss_legendre = BSplines::degree() + 1;
+    IdxStep<Knots> k_offset
+            = start_knot - ddc::discrete_space<BSplines>().break_point_domain().front();
+    if constexpr (BSplines::is_periodic()) {
+        if (k_offset < 0)
+            k_offset += ddc::discrete_space<BSplines>().ncells();
+    }
+    assert(k_offset >= 0);
+    Idx<QDimMesh> q_offset = idx_quad_front + k_offset.value() * n_gauss_legendre;
+    IdxStep<QDimMesh> q_len((end_knot - start_knot).value() * n_gauss_legendre);
+    assert(q_len > 0);
+    return IdxRange<QDimMesh>(q_offset, q_len);
+}
+
+/**
  * @brief Compute the quadrature range between a provided set of knots.
  *
  * Compute the range of quadrature points which are found between a set of knots
@@ -198,6 +240,7 @@ public:
  * dimension is always inside the domain. However, in order to return a contiguous
  * range, the result may include indices beyond the end of the domain in the second
  * dimension. A modulo operator should be applied before using the indices.
+ * See get_quadrature_between_knots_1d for implementation details.
  *
  * @tparam QDim1Mesh Quadrature mesh in the first dimension.
  * @tparam QDim2Mesh Quadrature mesh in the second dimension.
@@ -229,41 +272,61 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_quadrature_between_knots(
         Idx<ddc::knot_discrete_dimension_t<BSplines2>> end_knot_2,
         Idx<QDim1Mesh, QDim2Mesh> idx_quad_front)
 {
-    using Knots1 = ddc::knot_discrete_dimension_t<BSplines1>;
-    using Knots2 = ddc::knot_discrete_dimension_t<BSplines2>;
+    return IdxRange<QDim1Mesh, QDim2Mesh>(
+            get_quadrature_between_knots_1d<QDim1Mesh, BSplines1>(
+                    start_knot_1,
+                    end_knot_1,
+                    Idx<QDim1Mesh>(idx_quad_front)),
+            get_quadrature_between_knots_1d<QDim2Mesh, BSplines2>(
+                    start_knot_2,
+                    end_knot_2,
+                    Idx<QDim2Mesh>(idx_quad_front)));
+}
 
-    const IdxRange<Knots1> k_range_1(start_knot_1, end_knot_1 - start_knot_1);
-    const IdxRange<Knots2> k_range_2(start_knot_2, end_knot_2 - start_knot_2);
+/**
+ * @brief Compute the range of quadrature points in the support of a 1D B-spline.
+ *
+ * If the B-splines are periodic then, in order to return a contiguous range, the result
+ * may include indices which are outside the domain. A modulo operator should be applied
+ * before using the indices.
+ *
+ * @tparam QDimMesh Quadrature mesh.
+ * @tparam BSplines The 1D B-splines.
+ *
+ * @param[in] idx
+ *      The index of the B-spline.
+ * @param[in] idx_quad_front
+ *      The first index of the index range of the quadrature points.
+ * @return
+ *      The range of quadrature points in the support of the B-spline.
+ */
+template <typename QDimMesh, typename BSplines>
+KOKKOS_FUNCTION IdxRange<QDimMesh> get_support_quadrature_1d(
+        Idx<BSplines> idx,
+        Idx<QDimMesh> idx_quad_front)
+{
+    using Knots = ddc::knot_discrete_dimension_t<BSplines>;
 
-    constexpr int s_n_gauss_legendre_1 = BSplines1::degree() + 1;
-    IdxStep<Knots1> k_1_offset
-            = k_range_1.front() - ddc::discrete_space<BSplines1>().break_point_domain().front();
-    Idx<QDim1Mesh> q_1_offset
-            = Idx<QDim1Mesh>(idx_quad_front) + k_1_offset.value() * s_n_gauss_legendre_1;
-    IdxStep<QDim1Mesh> q_1_len(k_range_1.extents().value() * s_n_gauss_legendre_1);
-    IdxRange<QDim1Mesh> q_range_1(q_1_offset, q_1_len);
+    auto& bspl = ddc::discrete_space<BSplines>();
 
-    constexpr int s_n_gauss_legendre_2 = BSplines2::degree() + 1;
-    IdxStep<Knots2> k_2_offset
-            = k_range_2.front() - ddc::discrete_space<BSplines2>().break_point_domain().front();
-    if (k_2_offset < 0)
-        k_2_offset += ddc::discrete_space<BSplines2>().nbasis();
-    Idx<QDim2Mesh> q_2_offset
-            = Idx<QDim2Mesh>(idx_quad_front) + k_2_offset.value() * s_n_gauss_legendre_2;
-    IdxStep<QDim2Mesh> q_2_len(k_range_2.extents().value() * s_n_gauss_legendre_2);
-    IdxRange<QDim2Mesh> q_range_2(q_2_offset, q_2_len);
-    assert(q_range_1.extents() > 0);
-    assert(q_range_2.extents() > 0);
-
-    return IdxRange<QDim1Mesh, QDim2Mesh>(q_range_1, q_range_2);
+    // Find the cells on which the bspline is non-zero
+    Idx<Knots> start_non_zero(bspl.get_first_support_knot(idx));
+    Idx<Knots> end_non_zero(bspl.get_last_support_knot(idx));
+    if constexpr (!BSplines::is_periodic()) {
+        start_non_zero = Kokkos::max(bspl.break_point_domain().front(), start_non_zero);
+        end_non_zero = Kokkos::min(bspl.break_point_domain().back(), end_non_zero);
+    }
+    return get_quadrature_between_knots_1d<
+            QDimMesh,
+            BSplines>(start_non_zero, end_non_zero, idx_quad_front);
 }
 
 /**
  * @brief Compute the range of quadrature points in the support of a tensor product B-spline.
  *
- * In order to return a contiguous range the result may include indices in the second
- * dimension which are outside the domain. A modulo operator should be applied before
- * using the indices.
+ * In order to return a contiguous range the result may include indices which are outside
+ * the domain in periodic dimensions. A modulo operator should be applied before using the
+ * indices.
  *
  * @tparam QDim1Mesh Quadrature mesh in the first dimension.
  * @tparam QDim2Mesh Quadrature mesh in the second dimension.
@@ -282,29 +345,13 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_support_quadrature(
         Idx<BSplines1, BSplines2> idx,
         Idx<QDim1Mesh, QDim2Mesh> idx_quad_front)
 {
-    using Knots1 = ddc::knot_discrete_dimension_t<BSplines1>;
-    using Knots2 = ddc::knot_discrete_dimension_t<BSplines2>;
-
-    const Idx<BSplines1> idx_1(idx);
-    const Idx<BSplines2> idx_2(idx);
-
-    auto& bspl_1 = ddc::discrete_space<BSplines1>();
-    auto& bspl_2 = ddc::discrete_space<BSplines2>();
-
-    // Find the cells on which the bspline is non-zero
-    const Idx<Knots1> start_non_zero_1(
-            Kokkos::max(bspl_1.break_point_domain().front(), bspl_1.get_first_support_knot(idx_1)));
-    const Idx<Knots1> end_non_zero_1(
-            Kokkos::min(bspl_1.break_point_domain().back(), bspl_1.get_last_support_knot(idx_1)));
-
-    const Idx<Knots2> start_non_zero_2(bspl_2.get_first_support_knot(idx_2));
-    const Idx<Knots2> end_non_zero_2(bspl_2.get_last_support_knot(idx_2));
-    return get_quadrature_between_knots<QDim1Mesh, QDim2Mesh, BSplines1, BSplines2>(
-            start_non_zero_1,
-            end_non_zero_1,
-            start_non_zero_2,
-            end_non_zero_2,
-            idx_quad_front);
+    return IdxRange<QDim1Mesh, QDim2Mesh>(
+            get_support_quadrature_1d<
+                    QDim1Mesh,
+                    BSplines1>(Idx<BSplines1>(idx), Idx<QDim1Mesh>(idx_quad_front)),
+            get_support_quadrature_1d<
+                    QDim2Mesh,
+                    BSplines2>(Idx<BSplines2>(idx), Idx<QDim2Mesh>(idx_quad_front)));
 }
 
 /**
