@@ -39,7 +39,7 @@ spack:
   - architectures:
     - arch=linux-rhel8-zen3
   specs:
-  - gcc
+  - cxx
   - matrix:
     - [$packages]
     - [$architectures]

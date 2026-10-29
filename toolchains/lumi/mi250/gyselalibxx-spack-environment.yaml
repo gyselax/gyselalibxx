@@ -39,7 +39,7 @@ spack:
   - architectures:
     - target=x86_64_v3
   specs:
-  - gcc # NOTE: not in the matrix to avoid unification issues when the packages target arch is not the arch the compiler was compiled for.
+  - cxx # NOTE: not in the matrix to avoid unification issues when the packages target arch is not the arch the compiler was compiled for.
   - matrix:
     - [$packages]
     - [$architectures]
