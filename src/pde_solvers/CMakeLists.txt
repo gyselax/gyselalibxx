@@ -16,6 +16,7 @@ target_sources("pde_solvers"
                 ipolar_poisson_like_solver.hpp
                 polar_spline_fem_poisson_like_assembler.hpp
                 polar_spline_fem_poisson_like_solver.hpp
+                tensor_product_bspline_poisson_assembler.hpp
 )
 
 target_link_libraries("pde_solvers"
