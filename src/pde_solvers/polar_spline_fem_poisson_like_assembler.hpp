@@ -706,24 +706,7 @@ public:
             std::optional<int> preconditioner_max_block_size = std::nullopt,
             std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt)
     {
-        // Number of elements in the matrix that correspond to the splines
-        // that cover the singular point
-        constexpr int n_elements_singular
-                = PolarBSplinesRTheta::n_singular_basis() * PolarBSplinesRTheta::n_singular_basis();
-        // Number of non-zero elements in the matrix corresponding to the inner product of
-        // polar bsplines which traverse the singular point and other polar bsplines
-        const int n_elements_overlap = 2
-                                       * (PolarBSplinesRTheta::n_singular_basis()
-                                          * BSplinesR::degree() * m_nbasis_theta);
-        const int n_stencil_theta
-                = m_nbasis_theta * std::min(int(1 + 2 * BSplinesTheta::degree()), m_nbasis_theta);
-        const int n_stencil_r = m_nbasis_r * (1 + 2 * BSplinesR::degree())
-                                - (1 + BSplinesR::degree()) * BSplinesR::degree();
-        // Number of non-zero elements in the matrix corresponding to the inner product of
-        // non-central splines. These have a tensor product structure
-        const int n_elements_stencil = n_stencil_r * n_stencil_theta;
-
-        const int n_matrix_elements = n_elements_singular + n_elements_overlap + n_elements_stencil;
+        const int n_matrix_elements = n_singular_elements() + n_tensor_tensor_elements();
 
         //CSR data storage
         gko_matrix = std::make_unique<
@@ -741,6 +724,46 @@ public:
         compute_singular_singular_col_idx(col_idx, nnz_per_row);
         compute_singular_tensor_col_idx(col_idx, nnz_per_row);
         compute_tensor_tensor_col_idx(col_idx, nnz_per_row);
+    }
+
+    /**
+     * @brief Get the number of non-zero elements in the matrix which involve a singular
+     * basis function.
+     *
+     * These are the elements corresponding to the inner products of singular basis functions
+     * and singular basis functions, and to the inner products of singular basis functions and
+     * tensor basis functions (and vice versa).
+     *
+     * @return The number of non-zero elements involving a singular basis function.
+     */
+    int n_singular_elements() const
+    {
+        // Number of elements in the matrix that correspond to the splines
+        // that cover the singular point
+        constexpr int n_elements_singular
+                = PolarBSplinesRTheta::n_singular_basis() * PolarBSplinesRTheta::n_singular_basis();
+        // Number of non-zero elements in the matrix corresponding to the inner product of
+        // polar bsplines which traverse the singular point and other polar bsplines
+        const int n_elements_overlap = 2
+                                       * (PolarBSplinesRTheta::n_singular_basis()
+                                          * BSplinesR::degree() * m_nbasis_theta);
+        return n_elements_singular + n_elements_overlap;
+    }
+
+    /**
+     * @brief Get the number of non-zero elements in the sub-matrix corresponding to the inner
+     * products of tensor basis functions and tensor basis functions.
+     *
+     * @return The number of non-zero elements in the tensor-tensor sub-matrix.
+     */
+    int n_tensor_tensor_elements() const
+    {
+        const int n_stencil_theta
+                = m_nbasis_theta * std::min(int(1 + 2 * BSplinesTheta::degree()), m_nbasis_theta);
+        const int n_stencil_r = m_nbasis_r * (1 + 2 * BSplinesR::degree())
+                                - (1 + BSplinesR::degree()) * BSplinesR::degree();
+        // These elements have a tensor product structure
+        return n_stencil_r * n_stencil_theta;
     }
 
     /**
