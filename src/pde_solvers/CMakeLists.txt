@@ -9,6 +9,7 @@ target_sources("pde_solvers"
         FILE_SET HEADERS
             FILES
                 fem_1d_poisson_solver.hpp
+                fem_poisson_assembler_utils.hpp
                 fft_poisson_solver.hpp
                 gmg_polar_poisson_like_solver.hpp
                 ipoisson_solver.hpp
