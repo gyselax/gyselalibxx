@@ -81,8 +81,8 @@ public:
     using IdxRangeQuadrature2D = IdxRange<QDim1Mesh, QDim2Mesh>;
 
     /// The values and derivatives of the 1D B-splines at the quadrature points.
-    using TensorBSplineStash = detail_poisson::
-            TensorBSplineStash<QDim1Mesh, QDim2Mesh, BSplines1, BSplines2>;
+    using TensorBSplineStash
+            = detail_poisson::TensorBSplineStash<QDim1Mesh, QDim2Mesh, BSplines1, BSplines2>;
 
 private:
     using Knots1 = ddc::knot_discrete_dimension_t<BSplines1>;
@@ -131,8 +131,7 @@ private:
 
     // Maximum number of quadrature points in the support of a tensor product B-spline
     static constexpr int s_n_quad_support_1 = s_n_gauss_legendre_1 * s_n_non_zero_bases_1;
-    static constexpr int s_n_quad_support_2
-            = s_n_gauss_legendre_2 * s_n_non_zero_bases_2;
+    static constexpr int s_n_quad_support_2 = s_n_gauss_legendre_2 * s_n_non_zero_bases_2;
 
     // A view on team scratch memory
     using ScratchView = Kokkos::View<
@@ -198,12 +197,14 @@ public:
                   m_idxrange_quadrature_1,
                   ddc::discrete_space<BSplines1>().full_domain().take_first(
                           IdxStepBS1(s_n_non_zero_bases_1)),
-                  IdxRange<ddc::Deriv<Dim1>>(Idx<ddc::Deriv<Dim1>>(0), IdxStep<ddc::Deriv<Dim1>>(2))))
+                  IdxRange<ddc::Deriv<
+                          Dim1>>(Idx<ddc::Deriv<Dim1>>(0), IdxStep<ddc::Deriv<Dim1>>(2))))
         , m_basis_vals_2(IdxRangeBasisStash2(
                   m_idxrange_quadrature_2,
                   ddc::discrete_space<BSplines2>().full_domain().take_first(
                           IdxStepBS2(s_n_non_zero_bases_2)),
-                  IdxRange<ddc::Deriv<Dim2>>(Idx<ddc::Deriv<Dim2>>(0), IdxStep<ddc::Deriv<Dim2>>(2))))
+                  IdxRange<ddc::Deriv<
+                          Dim2>>(Idx<ddc::Deriv<Dim2>>(0), IdxStep<ddc::Deriv<Dim2>>(2))))
         , m_first_basis_1(m_idxrange_quadrature_1)
         , m_first_basis_2(m_idxrange_quadrature_2)
         , m_tensor_nnz_per_row(
@@ -376,8 +377,7 @@ public:
     {
         const int nbasis_1 = m_idxrange_tensor_basis.template extent<BSplines1>().value();
         const int nbasis_2 = m_idxrange_tensor_basis.template extent<BSplines2>().value();
-        const int n_stencil_2
-                = nbasis_2 * std::min(int(1 + 2 * BSplines2::degree()), nbasis_2);
+        const int n_stencil_2 = nbasis_2 * std::min(int(1 + 2 * BSplines2::degree()), nbasis_2);
         const int n_stencil_1 = nbasis_1 * (1 + 2 * BSplines1::degree())
                                 - (1 + BSplines1::degree()) * BSplines1::degree();
         // These elements have a tensor product structure
@@ -493,13 +493,9 @@ public:
                         // filled in order.
                         // Calculate the start and end of the offset in the second dimension
                         IdxBS2 first_idx_trial_2 = detail_poisson::
-                                mod_add(idx_test_2,
-                                        idx_step_trial_2_offset_min,
-                                        full_idx_range_2);
+                                mod_add(idx_test_2, idx_step_trial_2_offset_min, full_idx_range_2);
                         const IdxBS2 last_idx_trial_2 = detail_poisson::
-                                mod_add(idx_test_2,
-                                        idx_step_trial_2_offset_max,
-                                        full_idx_range_2);
+                                mod_add(idx_test_2, idx_step_trial_2_offset_max, full_idx_range_2);
                         IdxBS2 first_periodic_idx_trial_2 = full_idx_range_2.back() + 1;
                         // If the start is after the end then the periodicity wraps the b-splines
                         // first_periodic_idx_trial_2 is modified to fill the wrapped area (at the
@@ -509,8 +505,7 @@ public:
                             first_idx_trial_2 = full_idx_range_2.front();
                         }
                         // Loop over the offset to a trial b-spline in the second dimension
-                        for (IdxBS2 idx_trial_2(first_idx_trial_2);
-                             idx_trial_2 < last_idx_trial_2;
+                        for (IdxBS2 idx_trial_2(first_idx_trial_2); idx_trial_2 < last_idx_trial_2;
                              ++idx_trial_2) {
                             const IdxBS2D idx_trial(idx_trial_1, idx_trial_2);
                             int const col_idx = first_col_offset
@@ -769,9 +764,7 @@ public:
                 [&](int thread_index_1, int thread_index_2, double& sum) {
                     IdxQuadrature2D idx_quad
                             = quad_range.front()
-                              + IdxStep<
-                                      QDim1Mesh,
-                                      QDim2Mesh>(thread_index_1, thread_index_2);
+                              + IdxStep<QDim1Mesh, QDim2Mesh>(thread_index_1, thread_index_2);
                     // Manage periodicity
                     idx_quad = detail_poisson::periodic_wrap<
                             BSplines1,
@@ -781,10 +774,9 @@ public:
                             = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
 
                     // The test support may extend past the end of the domain in periodic dimensions
-                    IdxQuadrature2D idx_quad_test
-                            = detail_poisson::periodic_wrap<
-                                    BSplines1,
-                                    BSplines2>(idx_quad, test_support, full_quad_idx_range);
+                    IdxQuadrature2D idx_quad_test = detail_poisson::periodic_wrap<
+                            BSplines1,
+                            BSplines2>(idx_quad, test_support, full_quad_idx_range);
 
                     // Assemble the weak integral element
                     sum += scalar_product(test_stiffness(idx_quad_test), basis_derivs_trial_space)
@@ -850,14 +842,12 @@ public:
                         test_support.template extent<QDim1Mesh>(),
                         test_support.template extent<QDim2Mesh>()),
                 [&](int thread_index_1, int thread_index_2) {
-                    IdxStep<QDim1Mesh, QDim2Mesh>
-                            quad_offset(thread_index_1, thread_index_2);
+                    IdxStep<QDim1Mesh, QDim2Mesh> quad_offset(thread_index_1, thread_index_2);
                     IdxQuadrature2D idx_quad = test_support.front() + quad_offset;
                     // Manage periodicity
-                    IdxQuadrature2D idx_quad_in_domain
-                            = detail_poisson::periodic_wrap<
-                                    BSplines1,
-                                    BSplines2>(idx_quad, full_quad_idx_range, full_quad_idx_range);
+                    IdxQuadrature2D idx_quad_in_domain = detail_poisson::periodic_wrap<
+                            BSplines1,
+                            BSplines2>(idx_quad, full_quad_idx_range, full_quad_idx_range);
                     auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
                             idx_test,
                             idx_quad_in_domain,
@@ -903,8 +893,7 @@ public:
         Field<int, IdxRangeBS2D> nnz(nnz_per_row.data() + 1, idxrange_tensor_basis);
 
         size_t constexpr degree_1 = BSplines1::degree();
-        size_t const nbasis_2_proxy
-                = idxrange_tensor_basis.template extent<BSplines2>().value();
+        size_t const nbasis_2_proxy = idxrange_tensor_basis.template extent<BSplines2>().value();
         // The number of splines in the first dimension which overlap with a spline far from the boundaries
         size_t constexpr stencil_overlap_1 = 2 * degree_1 + 1;
         // The number of splines in the second dimension which overlap with a spline
@@ -935,8 +924,8 @@ public:
                     int n1 = degree_1 + i1 + 1;
 
                     // nnz to this line = nbasis_2 * stencil_overlap_2 \sum_{k=degree_1+1}^{n1-1} k
-                    int nnz_sum_to_i1 = (n1 * (n1 - 1) - degree_1 * (degree_1 + 1))
-                                        * nbasis_2_proxy * stencil_overlap_2 / 2;
+                    int nnz_sum_to_i1 = (n1 * (n1 - 1) - degree_1 * (degree_1 + 1)) * nbasis_2_proxy
+                                        * stencil_overlap_2 / 2;
 
                     // Loop over the second dimension
                     Kokkos::parallel_for(
