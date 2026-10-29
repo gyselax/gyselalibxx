@@ -383,6 +383,88 @@ KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_support_quadrature(
             idx_quad_front);
 }
 
+/**
+ * @brief Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.
+ *
+ * The weak integral element is
+ * @f$ w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j) @f$
+ * where @f$ w @f$ is the integral volume, @f$ B_i @f$ is the test function and @f$ B_j @f$ is
+ * the trial function. This function computes @f$ w \alpha G^{-1} \nabla B_i @f$ and
+ * @f$ w \beta B_i @f$ so that the weak integral element can be computed from the values and
+ * derivatives of the trial function alone.
+ *
+ * @tparam QDimRMesh Quadrature mesh in radial direction.
+ * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
+ *
+ * @param[in] basis_val_test
+ *      The value of the test basis function at the quadrature point.
+ * @param[in] basis_derivs_test
+ *      The gradient of the test basis function at the quadrature point.
+ * @param[in] idx_quad
+ *      The index for the point in the quadrature scheme.
+ * @param[in] idx_batch
+ *      The index of the batch for which the element is being calculated.
+ * @param[in] coeff_alpha
+ *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+ *      @f$ \alpha @f$ at the given batch and coordinate.
+ * @param[in] coeff_beta
+ *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+ *      @f$ \beta @f$ at the given batch and coordinate.
+ * @param[in] metric_tensor
+ *      The metric tensor associated with the mapping from the logical domain to the
+ *      physical domain where the equation is defined.
+ * @param[in] int_volume
+ *      The integral volume associated with each point used in the quadrature scheme.
+ * @return A tuple containing
+ *          - test_mass_weight, the quantity @f$ w \beta B_i @f$ which
+ *            multiplies the value of the trial function,
+ *          - test_stiffness_weight, the quantity @f$ w \alpha G^{-1} \nabla B_i @f$ which
+ *            multiplies the gradient of the trial function.
+ */
+template <
+        class QDimRMesh,
+        class QDimThetaMesh,
+        class IdxBatch,
+        class CoeffAlpha,
+        class CoeffBeta,
+        concepts::MetricTensor MetricTensorType>
+KOKKOS_FUNCTION std::tuple<
+        double,
+        DVector<typename QDimRMesh::continuous_dimension_type,
+                typename QDimThetaMesh::continuous_dimension_type>>
+get_test_weights(
+        double basis_val_test,
+        DVector<typename QDimRMesh::continuous_dimension_type::Dual,
+                typename QDimThetaMesh::continuous_dimension_type::Dual> basis_derivs_test,
+        Idx<QDimRMesh, QDimThetaMesh> idx_quad,
+        IdxBatch idx_batch,
+        CoeffAlpha const& coeff_alpha,
+        CoeffBeta const& coeff_beta,
+        MetricTensorType const& metric_tensor,
+        DField<IdxRange<QDimRMesh, QDimThetaMesh>> int_volume)
+{
+    using R = typename QDimRMesh::continuous_dimension_type;
+    using Theta = typename QDimThetaMesh::continuous_dimension_type;
+
+    // Calculate coefficients at quadrature point
+    Coord<R, Theta> coord(ddc::coordinate(idx_quad));
+    const double alpha = coeff_alpha(idx_batch, coord);
+    const double beta = coeff_beta(idx_batch, coord);
+
+    using Spatial2DVectorSpace = VectorIndexSet<R, Theta>;
+
+    Tensor inv_metric_tensor = metric_tensor.inverse(idx_quad);
+    DTensor<Spatial2DVectorSpace, Spatial2DVectorSpace> inv_metric_tensor_2d;
+    ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
+
+    double test_mass_weight = int_volume(idx_quad) * beta * basis_val_test;
+    DVector<R, Theta> test_stiffness_weight = int_volume(idx_quad) * alpha
+                                              * tensor_mul(
+                                                      index<'i'>(basis_derivs_test),
+                                                      index<'i', 'j'>(inv_metric_tensor_2d));
+    return {test_mass_weight, test_stiffness_weight};
+}
+
 } // namespace detail_poisson
 
 
@@ -1097,7 +1179,6 @@ public:
                 m_idxrange_quadrature_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
-        TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
 
         IdxRangeBatch idx_range_batch = m_idx_range_batch;
         const int n_batch = idx_range_batch.size();
@@ -1139,8 +1220,7 @@ public:
                                         coeff_alpha,
                                         coeff_beta,
                                         metric_tensor,
-                                        int_volume_proxy,
-                                        bspline_stash);
+                                        int_volume_proxy);
 
                                 auto [basis_val_trial_space, basis_derivs_trial_space]
                                         = detail_poisson::get_polar_bspline_vals_and_derivs(
@@ -1295,8 +1375,7 @@ public:
                                         coeff_alpha,
                                         coeff_beta,
                                         metric_tensor,
-                                        int_volume_proxy,
-                                        bspline_stash);
+                                        int_volume_proxy);
 
                                 auto [basis_val_trial_space, basis_derivs_trial_space]
                                         = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
@@ -1449,17 +1528,62 @@ public:
     }
 
     /**
-     * @brief Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.
+     * @brief Computes the test_stiffness_weight and test_mass_weight for a given quadrature point
+     * for a polar test basis spline which covers the singular point.
      *
-     * The weak integral element is
-     * @f$ w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j) @f$
-     * where @f$ w @f$ is the integral volume, @f$ B_i @f$ is the test function and @f$ B_j @f$ is
-     * the trial function. This function computes @f$ w \alpha G^{-1} \nabla B_i @f$ and
-     * @f$ w \beta B_i @f$ so that the weak integral element can be computed from the values and
-     * derivatives of the trial function alone.
+     * See detail_poisson::get_test_weights for more details.
      *
      * @param[in] idx_test
-     *      The index of the test basis spline.
+     *      The index of the test polar basis spline.
+     * @param[in] idx_quad
+     *      The index for the point in the quadrature scheme.
+     * @param[in] idx_batch
+     *      The index of the batch for which the element is being calculated.
+     * @param[in] coeff_alpha
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \alpha @f$ at the given batch and coordinate.
+     * @param[in] coeff_beta
+     *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
+     *      @f$ \beta @f$ at the given batch and coordinate.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping from the logical domain to the
+     *      physical domain where the equation is defined.
+     * @param[in] int_volume
+     *      The integral volume associated with each point used in the quadrature scheme.
+     * @return A tuple containing test_mass_weight and test_stiffness_weight.
+     */
+    template <class CoeffAlpha, class CoeffBeta>
+    static KOKKOS_FUNCTION std::tuple<double, DVector<R, Theta>> get_test_weights(
+            IdxBSPolar idx_test,
+            IdxQuadratureRTheta idx_quad,
+            IdxBatch idx_batch,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
+            MetricTensorType const& metric_tensor,
+            DField<IdxRangeQuadratureRTheta> int_volume)
+    {
+        auto [basis_val_test_space, basis_derivs_test_space]
+                = detail_poisson::get_polar_bspline_vals_and_derivs(idx_quad, idx_test);
+        return detail_poisson::get_test_weights(
+                basis_val_test_space,
+                basis_derivs_test_space,
+                idx_quad,
+                idx_batch,
+                coeff_alpha,
+                coeff_beta,
+                metric_tensor,
+                int_volume);
+    }
+
+    /**
+     * @brief Computes the test_stiffness_weight and test_mass_weight for a given quadrature point
+     * for a tensor product test basis spline.
+     *
+     * See the overload for a polar basis spline and detail_poisson::get_test_weights for more
+     * details.
+     *
+     * @param[in] idx_test
+     *      The 2D index of the test tensor product B-spline.
      * @param[in] idx_quad
      *      The index for the point in the quadrature scheme.
      * @param[in] idx_batch
@@ -1477,15 +1601,11 @@ public:
      *      The integral volume associated with each point used in the quadrature scheme.
      * @param[in] bspline_stash
      *      The values and derivatives of the 1D B-splines at the quadrature points.
-     * @return A tuple containing
-     *          - test_mass_weight, the quantity @f$ w \beta B_i @f$ which
-     *            multiplies the value of the trial function,
-     *          - test_stiffness_weight, the quantity @f$ w \alpha G^{-1} \nabla B_i @f$ which
-     *            multiplies the gradient of the trial function.
+     * @return A tuple containing test_mass_weight and test_stiffness_weight.
      */
-    template <class CoeffAlpha, class CoeffBeta, class IdxTestType>
+    template <class CoeffAlpha, class CoeffBeta>
     static KOKKOS_FUNCTION std::tuple<double, DVector<R, Theta>> get_test_weights(
-            IdxTestType idx_test,
+            IdxBSRTheta idx_test,
             IdxQuadratureRTheta idx_quad,
             IdxBatch idx_batch,
             CoeffAlpha const& coeff_alpha,
@@ -1494,34 +1614,17 @@ public:
             DField<IdxRangeQuadratureRTheta> int_volume,
             TensorBSplineStash const& bspline_stash)
     {
-        // Define the value and gradient of the test basis function
-        auto [basis_val_test_space, basis_derivs_test_space] = [&]() {
-            if constexpr (std::is_same_v<IdxTestType, Idx<PolarBSplinesRTheta>>) {
-                return detail_poisson::get_polar_bspline_vals_and_derivs(idx_quad, idx_test);
-            } else {
-                static_assert(std::is_same_v<IdxTestType, Idx<BSplinesR, BSplinesTheta>>);
-                return bspline_stash.vals_and_derivs(idx_quad, idx_test);
-            }
-        }();
-
-
-        // Calculate coefficients at quadrature point
-        Coord<R, Theta> coord(ddc::coordinate(idx_quad));
-        const double alpha = coeff_alpha(idx_batch, coord);
-        const double beta = coeff_beta(idx_batch, coord);
-
-        using Spatial2DVectorSpace = VectorIndexSet<R, Theta>;
-
-        Tensor inv_metric_tensor = metric_tensor.inverse(idx_quad);
-        DTensor<Spatial2DVectorSpace, Spatial2DVectorSpace> inv_metric_tensor_2d;
-        ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
-
-        double test_mass_weight = int_volume(idx_quad) * beta * basis_val_test_space;
-        DVector<R, Theta> test_stiffness_weight = int_volume(idx_quad) * alpha
-                                                  * tensor_mul(
-                                                          index<'i'>(basis_derivs_test_space),
-                                                          index<'i', 'j'>(inv_metric_tensor_2d));
-        return {test_mass_weight, test_stiffness_weight};
+        auto [basis_val_test_space, basis_derivs_test_space]
+                = bspline_stash.vals_and_derivs(idx_quad, idx_test);
+        return detail_poisson::get_test_weights(
+                basis_val_test_space,
+                basis_derivs_test_space,
+                idx_quad,
+                idx_batch,
+                coeff_alpha,
+                coeff_beta,
+                metric_tensor,
+                int_volume);
     }
 
 
