@@ -571,6 +571,10 @@ private:
     FieldMem<IdxBSR, IdxRangeQuadratureR> m_first_basis_r;
     FieldMem<IdxBSTheta, IdxRangeQuadratureTheta> m_first_basis_theta;
 
+    // The nnz data structure of the sub-matrix corresponding to the inner products of tensor
+    // basis functions and tensor basis functions (see init_tensor_tensor_nnz_per_line)
+    Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> m_tensor_nnz_per_row;
+
 public:
     /**
      * @brief Instantiate the assembler operator.
@@ -619,6 +623,10 @@ public:
                           Theta>>(Idx<ddc::Deriv<Theta>>(0), IdxStep<ddc::Deriv<Theta>>(2))))
         , m_first_basis_r(m_idxrange_quadrature_r)
         , m_first_basis_theta(m_idxrange_quadrature_theta)
+        , m_tensor_nnz_per_row(
+                  "m_tensor_nnz_per_row "
+                  "(PolarSplineFEMPoissonLikeAssembler::PolarSplineFEMPoissonLikeAssembler)",
+                  m_idxrange_fem_tensor_basis.size() + 1)
     {
         stash_basis_eval(get_field(m_basis_vals_r), get_field(m_first_basis_r));
         stash_basis_eval(get_field(m_basis_vals_theta), get_field(m_first_basis_theta));
@@ -926,15 +934,15 @@ public:
                 = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                         IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
 
-        IdxRangeBSR central_radial_bspline_idx_range(
-                m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
-
         IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
 
         IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
-        const int n_singular = idxrange_singular.size();
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                tensor_nnz_per_row
+                = m_tensor_nnz_per_row;
+
         const std::source_location location = std::source_location::current();
 
         // Calculate the matrix elements following a stencil
@@ -946,9 +954,11 @@ public:
                         m_idxrange_fem_tensor_basis.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    // The row of the tensor-tensor sub-matrix
+                    const int tensor_row_idx = team.league_rank();
                     // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
-                            idxrange_fem_non_singular_front + IdxStepBSPolar {team.league_rank()});
+                            idxrange_fem_non_singular_front + IdxStepBSPolar {tensor_row_idx});
 
                     // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
@@ -968,10 +978,12 @@ public:
                     IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
                     IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
 
-                    // Calculate the row index and the first possible column index
+                    // Calculate the row index and the position of the first tensor-tensor
+                    // element in the row. These elements are found at the end of the row.
                     int const row_idx = idx_test_polar - idxrange_singular.front();
-                    int col_offset
-                            = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
+                    int csr_idx = nnz_per_row_csr(row_idx + 1)
+                                  - (tensor_nnz_per_row(tensor_row_idx + 1)
+                                     - tensor_nnz_per_row(tensor_row_idx));
 
                     // Loop over the radial offset to a trial b-spline
                     for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
@@ -1005,9 +1017,8 @@ public:
                              ++idx_trial_theta) {
                             const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
                             int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
-                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
-                            col_idx_csr(aij_idx) = col_idx;
-                            col_offset++;
+                            col_idx_csr(csr_idx) = col_idx;
+                            csr_idx++;
                         }
                         // Loop over the poloidal offset to a trial b-spline for any elements that
                         // are to the right of zeros following the elements already set
@@ -1016,11 +1027,11 @@ public:
                              ++idx_trial_theta) {
                             const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
                             int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
-                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
-                            col_idx_csr(aij_idx) = col_idx;
-                            col_offset++;
+                            col_idx_csr(csr_idx) = col_idx;
+                            csr_idx++;
                         }
                     }
+                    assert(csr_idx == nnz_per_row_csr(row_idx + 1));
                 });
     }
 
@@ -1321,9 +1332,6 @@ public:
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
-        IdxRangeBSR central_radial_bspline_idx_range(
-                m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
-
         IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
@@ -1333,8 +1341,10 @@ public:
 
         IdxRangeBatch idx_range_batch = m_idx_range_batch;
         const int n_batch = idx_range_batch.size();
-        const int n_singular = idxrange_singular.size();
         const int n_tensor_basis = m_idxrange_fem_tensor_basis.size();
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                tensor_nnz_per_row
+                = m_tensor_nnz_per_row;
         const std::source_location location = std::source_location::current();
 
         // Number of quadrature points in the support of a tensor product B-spline
@@ -1355,19 +1365,22 @@ public:
                     const int batch_linear_idx = team.league_rank() / n_tensor_basis;
                     const IdxBatch idx_batch = ddcHelper::
                             get_idx_from_linear_index(idx_range_batch, batch_linear_idx);
+                    // The row of the tensor-tensor sub-matrix
+                    const int tensor_row_idx = team.league_rank() % n_tensor_basis;
                     // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
-                            idxrange_fem_non_singular_front
-                            + IdxStepBSPolar {team.league_rank() % n_tensor_basis});
+                            idxrange_fem_non_singular_front + IdxStepBSPolar {tensor_row_idx});
 
                     // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
-                    const IdxBSR idx_test_r(idx_test);
 
-                    // Calculate the row index and the first possible column index
+                    // Calculate the row index and the position of the first tensor-tensor
+                    // element in the row. These elements are found at the end of the row.
                     int const row_idx = idx_test_polar - idxrange_singular.front();
                     int const csr_idx_first_stencil_element
-                            = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
+                            = nnz_per_row_csr[row_idx + 1]
+                              - (tensor_nnz_per_row[tensor_row_idx + 1]
+                                 - tensor_nnz_per_row[tensor_row_idx]);
 
                     // Calculate the test weights once for all trial b-splines
                     const IdxRangeQuadratureRTheta idx_range_quad = detail_poisson::
@@ -1392,7 +1405,7 @@ public:
                             bspline_stash);
 
                     // Loop over the poloidal offset to a trial b-spline
-                    for (int csr_idx = nnz_per_row_csr[row_idx] + csr_idx_first_stencil_element;
+                    for (int csr_idx = csr_idx_first_stencil_element;
                          csr_idx < nnz_per_row_csr[row_idx + 1];
                          ++csr_idx) {
                         int const col_idx = col_idx_csr[csr_idx];
@@ -1707,7 +1720,6 @@ public:
      */
     void init_nnz_per_line(Kokkos::View<int*, Kokkos::LayoutRight> nnz_per_row) const
     {
-        int const mat_size = static_cast<int>(nnz_per_row.extent(0)) - 1;
         int constexpr n_singular_basis = PolarBSplinesRTheta::n_singular_basis();
         Kokkos::deep_copy(nnz_per_row, 0.);
         init_singular_nnz_per_line(nnz_per_row);
@@ -1716,9 +1728,17 @@ public:
         IdxRangeBSR idxrange_bsplines_r = m_idxrange_bsplines_r.remove_last(IdxStepBSR(1));
         IdxRangeBSTheta idxrange_bsplines_theta = m_idxrange_bsplines_theta;
         IdxRangeBSRTheta idxrange_tensor_basis(idxrange_bsplines_r, idxrange_bsplines_theta);
-        init_tensor_tensor_nnz_per_line(
-                Kokkos::subview(nnz_per_row, std::pair<int, int>(n_singular_basis, mat_size + 1)),
-                idxrange_tensor_basis);
+        Kokkos::deep_copy(m_tensor_nnz_per_row, 0.);
+        init_tensor_tensor_nnz_per_line(m_tensor_nnz_per_row, idxrange_tensor_basis);
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> tensor_nnz_per_row
+                = m_tensor_nnz_per_row;
+        const std::source_location location = std::source_location::current();
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(0, tensor_nnz_per_row.size()),
+                KOKKOS_LAMBDA(const int idx) {
+                    nnz_per_row(idx + n_singular_basis) += tensor_nnz_per_row(idx);
+                });
     }
 
     /**
