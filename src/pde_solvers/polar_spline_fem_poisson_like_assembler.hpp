@@ -169,7 +169,7 @@ public:
                 = vals_r_at_quad(offset_r, IdxStep<ddc::Deriv<R>>(1)) * val_theta;
         ddcHelper::get<Theta_cov>(derivs)
                 = val_r * vals_theta_at_quad(offset_theta, IdxStep<ddc::Deriv<Theta>>(1));
-        return std::tuple(val_r * val_theta, derivs);
+        return {val_r * val_theta, derivs};
     }
 
     /**
@@ -257,11 +257,10 @@ get_polar_bspline_vals_and_derivs(IdxQuad idx_quad, Idx<PolarBSplinesRTheta> idx
             = idx - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>().front();
     const double val = singular_vals(offset.value(), 0, 0);
     if constexpr (calculate_derivs) {
-        return std::
-                tuple(val,
-                      DVector<typename R::Dual, typename Theta::Dual>(
-                              singular_vals(offset.value(), 1, 0),
-                              singular_vals(offset.value(), 0, 1)));
+        return {val,
+                DVector<typename R::Dual, typename Theta::Dual>(
+                        singular_vals(offset.value(), 1, 0),
+                        singular_vals(offset.value(), 0, 1))};
     } else {
         return val;
     }
@@ -404,6 +403,8 @@ KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_support_quadrature(
  *          system @f$(r,\theta)@f$ including B-splines which traverse the O point).
  * @tparam QDimRMesh The radial quadrature grid type.
  * @tparam QDimThetaMesh The poloidal quadrature grid type.
+ * @tparam MetricTensorType The type of the metric tensor associated with the mapping from the
+ *          logical domain to the physical domain where the equation is defined.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  *          One matrix is assembled for each index in the batch dimensions.
  */
@@ -414,6 +415,7 @@ template <
         typename PolarBSplinesRTheta,
         typename QDimRMesh,
         typename QDimThetaMesh,
+        concepts::MetricTensor MetricTensorType,
         bool enforces_homogeneous_bc = true,
         typename IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler
@@ -426,6 +428,9 @@ public:
 
     static_assert(R::IS_CONTRAVARIANT);
     static_assert(Theta::IS_CONTRAVARIANT);
+    static_assert(
+            std::is_same_v<typename MetricTensorType::CoordArg, Coord<R, Theta>>,
+            "The metric tensor must be evaluated on (r, theta) coordinates.");
 
 private:
     /// The radial dimension
@@ -561,6 +566,8 @@ private:
 
     QuadField m_int_volume;
 
+    MetricTensorType m_metric_tensor;
+
     // Values and derivatives of the non-zero 1D B-splines at the 1D quadrature points
     DFieldMem<IdxRangeBasisStashR> m_basis_vals_r;
     DFieldMem<IdxRangeBasisStashTheta> m_basis_vals_theta;
@@ -571,11 +578,14 @@ public:
     /**
      * @brief Instantiate the assembler operator.
      *
-     * @param int_volume The initialised field of Jacobian values of the mapping. 
+     * @param int_volume The initialised field of Jacobian values of the mapping.
+     * @param metric_tensor The metric tensor associated with the mapping from the logical
+     *          domain to the physical domain where the equation is defined.
      * @param idx_range_full The full index range of @f$ \phi @f$ including any batch dimensions.
      */
     explicit PolarSplineFEMPoissonLikeAssembler(
             Field<double, IdxRangeQuadratureRTheta> int_volume,
+            MetricTensorType const& metric_tensor,
             IdxRangeFull idx_range_full)
         : m_nbasis_r(get_nbasis_r())
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
@@ -596,6 +606,7 @@ public:
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_idx_range_batch(idx_range_full)
         , m_int_volume(int_volume)
+        , m_metric_tensor(metric_tensor)
         , m_basis_vals_r(IdxRangeBasisStashR(
                   m_idxrange_quadrature_r,
                   ddc::discrete_space<BSplinesR>().full_domain().take_first(
@@ -743,22 +754,17 @@ public:
      * @param[in] coeff_beta
      *      A callable object with signature `double operator()(IdxBatch, CoordRTheta)`
      *      returning the value of @f$ \beta @f$ at the given batch and coordinate.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
      *
      * @tparam CoeffAlpha A callable type for evaluating @f$ \alpha @f$ at a batch and coordinate.
      * @tparam CoeffBeta A callable type for evaluating @f$ \beta @f$ at a batch and coordinate.
-     * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
-    template <class CoeffAlpha, class CoeffBeta, class Mapping>
+    template <class CoeffAlpha, class CoeffBeta>
     void operator()(
             std::unique_ptr<
                     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>> const&
                     gko_matrix,
             CoeffAlpha const& coeff_alpha,
-            CoeffBeta const& coeff_beta,
-            Mapping const& mapping)
+            CoeffBeta const& coeff_beta)
     {
         //CSR data storage
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
@@ -766,21 +772,21 @@ public:
         compute_singular_singular_elements(
                 coeff_alpha,
                 coeff_beta,
-                mapping,
+                m_metric_tensor,
                 values,
                 col_idx,
                 nnz_per_row);
         compute_singular_tensor_elements(
                 coeff_alpha,
                 coeff_beta,
-                mapping,
+                m_metric_tensor,
                 values,
                 col_idx,
                 nnz_per_row);
         compute_tensor_tensor_elements(
                 coeff_alpha,
                 coeff_beta,
-                mapping,
+                m_metric_tensor,
                 values,
                 col_idx,
                 nnz_per_row);
@@ -807,7 +813,6 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
         const int n_singular = idxrange_singular.size();
 
-        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonFillFemMatrix");
         const std::source_location location = std::source_location::current();
         // Calculate the matrix elements corresponding to the B-splines which cover the singular point
         Kokkos::parallel_for(
@@ -1008,8 +1013,6 @@ public:
                         }
                     }
                 });
-
-        Kokkos::Profiling::popRegion();
     }
 
     /**
@@ -1022,9 +1025,9 @@ public:
      * @param[in] coeff_beta
      *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
      *      @f$ \beta @f$ at the given batch and coordinate.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping from the logical domain to the
+     *      physical domain where the equation is defined.
      * @param[out] values_csr
      *             A 2D Kokkos view which stores the values of non-zero elements for the whole batch.
      * @param[in] col_idx_csr
@@ -1032,11 +1035,11 @@ public:
      * @param[in] nnz_per_row_csr
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
-    template <class CoeffAlpha, class CoeffBeta, class Mapping>
+    template <class CoeffAlpha, class CoeffBeta>
     void compute_singular_singular_elements(
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
-            Mapping const& mapping,
+            MetricTensorType const& metric_tensor,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -1058,7 +1061,6 @@ public:
         const int n_batch = idx_range_batch.size();
         const int n_singular = idxrange_singular.size();
 
-        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonFillFemMatrix");
         const std::source_location location = std::source_location::current();
         // Calculate the matrix elements corresponding to the B-splines which cover the singular point
         Kokkos::parallel_for(
@@ -1094,7 +1096,7 @@ public:
                                         idx_batch,
                                         coeff_alpha,
                                         coeff_beta,
-                                        mapping,
+                                        metric_tensor,
                                         int_volume_proxy,
                                         bspline_stash);
 
@@ -1126,9 +1128,9 @@ public:
      * @param[in] coeff_beta
      *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
      *      @f$ \beta @f$ at the given batch and coordinate.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping from the logical domain to the
+     *      physical domain where the equation is defined.
      * @param[out] values_csr
      *             A 2D Kokkos view which stores the values of non-zero elements for the whole batch.
      * @param[in] col_idx_csr
@@ -1136,11 +1138,11 @@ public:
      * @param[in] nnz_per_row_csr
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
-    template <class CoeffAlpha, class CoeffBeta, class Mapping>
+    template <class CoeffAlpha, class CoeffBeta>
     void compute_singular_tensor_elements(
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
-            Mapping const& mapping,
+            MetricTensorType const& metric_tensor,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -1250,7 +1252,7 @@ public:
                                         idx_batch,
                                         coeff_alpha,
                                         coeff_beta,
-                                        mapping,
+                                        metric_tensor,
                                         int_volume_proxy,
                                         bspline_stash);
 
@@ -1285,9 +1287,9 @@ public:
      * @param[in] coeff_beta
      *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
      *      @f$ \beta @f$ at the given batch and coordinate.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping from the logical domain to the
+     *      physical domain where the equation is defined.
      * @param[out] values_csr
      *             A 2D Kokkos view which stores the values of non-zero elements for the whole batch.
      * @param[out] col_idx_csr
@@ -1295,11 +1297,11 @@ public:
      * @param[in] nnz_per_row_csr
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
-    template <class CoeffAlpha, class CoeffBeta, class Mapping>
+    template <class CoeffAlpha, class CoeffBeta>
     void compute_tensor_tensor_elements(
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
-            Mapping const& mapping,
+            MetricTensorType const& metric_tensor,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -1375,7 +1377,7 @@ public:
                             idx_batch,
                             coeff_alpha,
                             coeff_beta,
-                            mapping,
+                            metric_tensor,
                             full_quad_idx_range,
                             int_volume_proxy,
                             bspline_stash);
@@ -1399,8 +1401,6 @@ public:
                         values_csr(batch_linear_idx, csr_idx) = element;
                     }
                 });
-
-        Kokkos::Profiling::popRegion();
     }
 
     /**
@@ -1425,9 +1425,9 @@ public:
      * @param[in] coeff_beta
      *      A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning
      *      @f$ \beta @f$ at the given batch and coordinate.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping from the logical domain to the
+     *      physical domain where the equation is defined.
      * @param[in] int_volume
      *      The integral volume associated with each point used in the quadrature scheme.
      * @param[in] bspline_stash
@@ -1438,14 +1438,14 @@ public:
      *          - test_stiffness_weight, the quantity @f$ w \alpha G^{-1} \nabla B_i @f$ which
      *            multiplies the gradient of the trial function.
      */
-    template <class CoeffAlpha, class CoeffBeta, class Mapping, class IdxTestType>
+    template <class CoeffAlpha, class CoeffBeta, class IdxTestType>
     static KOKKOS_FUNCTION std::tuple<double, DVector<R, Theta>> get_test_weights(
             IdxTestType idx_test,
             IdxQuadratureRTheta idx_quad,
             IdxBatch idx_batch,
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
-            Mapping const& mapping,
+            MetricTensorType const& metric_tensor,
             DField<IdxRangeQuadratureRTheta> int_volume,
             TensorBSplineStash const& bspline_stash)
     {
@@ -1467,8 +1467,7 @@ public:
 
         using Spatial2DVectorSpace = VectorIndexSet<R, Theta>;
 
-        MetricTensorEvaluator<Mapping, Coord<R, Theta>> get_metric_tensor(mapping);
-        Tensor inv_metric_tensor = get_metric_tensor.inverse(coord);
+        Tensor inv_metric_tensor = metric_tensor.inverse(idx_quad);
         DTensor<Spatial2DVectorSpace, Spatial2DVectorSpace> inv_metric_tensor_2d;
         ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
@@ -1477,7 +1476,7 @@ public:
                                                   * tensor_mul(
                                                           index<'i'>(basis_derivs_test_space),
                                                           index<'i', 'j'>(inv_metric_tensor_2d));
-        return std::tuple(test_mass_weight, test_stiffness_weight);
+        return {test_mass_weight, test_stiffness_weight};
     }
 
 
@@ -1623,9 +1622,9 @@ public:
      *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \alpha @f$.
      * @param[in] coeff_beta
      *      A callable with signature `double operator()(CoordRTheta)` returning @f$ \beta @f$.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping from the logical domain to the
+     *      physical domain where the equation is defined.
      * @param[in] full_quad_idx_range
      *      The index range of all the quadrature points.
      * @param[in] int_volume
@@ -1633,7 +1632,7 @@ public:
      * @param[in] bspline_stash
      *      The values and derivatives of the 1D B-splines at the quadrature points.
      */
-    template <class CoeffAlpha, class CoeffBeta, class Mapping>
+    template <class CoeffAlpha, class CoeffBeta>
     static KOKKOS_FUNCTION void fill_test_weights(
             const Kokkos::TeamPolicy<>::member_type& team,
             QuadField test_mass,
@@ -1642,7 +1641,7 @@ public:
             IdxBatch idx_batch,
             CoeffAlpha const& coeff_alpha,
             CoeffBeta const& coeff_beta,
-            Mapping const& mapping,
+            MetricTensorType const& metric_tensor,
             IdxRangeQuadratureRTheta const& full_quad_idx_range,
             DField<IdxRangeQuadratureRTheta> int_volume,
             TensorBSplineStash const& bspline_stash)
@@ -1671,7 +1670,7 @@ public:
                             idx_batch,
                             coeff_alpha,
                             coeff_beta,
-                            mapping,
+                            metric_tensor,
                             int_volume,
                             bspline_stash);
                     test_mass(quad_offset) = test_mass_weight;
@@ -1699,7 +1698,6 @@ public:
      */
     void init_nnz_per_line(Kokkos::View<int*, Kokkos::LayoutRight> nnz_per_row) const
     {
-        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonInitNnz");
         size_t const mat_size = nnz_per_row.extent(0) - 1;
         IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
         IdxRangeBSPolar polar_bspl_idx_range;
@@ -1851,8 +1849,6 @@ public:
                                 }
                             });
                 });
-
-        Kokkos::Profiling::popRegion();
     }
 
     /**
