@@ -282,6 +282,70 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_quadrature_between_knots(
 }
 
 /**
+ * @brief Compute the range of knots between which two 1D B-splines are both non-zero.
+ *
+ * If the B-splines are periodic then, in order to return a contiguous range, the result
+ * may include knots beyond the end of the domain.
+ *
+ * @tparam BSplines The 1D B-splines.
+ *
+ * @param[in] idx_test
+ *      The index of the first B-spline (the test function).
+ * @param[in] idx_trial
+ *      The index of the second B-spline (the trial function).
+ * @return
+ *      The range of knots describing the cells where both B-splines are non-zero.
+ */
+template <typename BSplines>
+KOKKOS_INLINE_FUNCTION IdxRange<ddc::knot_discrete_dimension_t<BSplines>> get_overlapping_knots_1d(
+        Idx<BSplines> idx_test,
+        Idx<BSplines> idx_trial)
+{
+    using Knots = ddc::knot_discrete_dimension_t<BSplines>;
+
+    auto& bspl = ddc::discrete_space<BSplines>();
+
+    if constexpr (BSplines::is_periodic()) {
+        idx_test = periodic_mod<BSplines>(idx_test);
+        idx_trial = periodic_mod<BSplines>(idx_trial);
+
+        IdxStep<Knots> span(BSplines::degree() + 1);
+
+        Idx<Knots> first_support_knot_test = bspl.get_first_support_knot(idx_test);
+        Idx<Knots> first_support_knot_trial = bspl.get_first_support_knot(idx_trial);
+        Idx<Knots> last_support_knot_test = first_support_knot_test + span;
+        Idx<Knots> last_support_knot_trial = first_support_knot_trial + span;
+
+        // Shift one of the supports by a period if they only overlap across the boundary
+        if (first_support_knot_test > last_support_knot_trial) {
+            first_support_knot_trial += bspl.nbasis();
+            last_support_knot_trial += bspl.nbasis();
+        } else if (last_support_knot_test < first_support_knot_trial) {
+            first_support_knot_test += bspl.nbasis();
+            last_support_knot_test += bspl.nbasis();
+        }
+        const Idx<Knots> start_non_zero(
+                Kokkos::max(first_support_knot_test, first_support_knot_trial));
+        const Idx<Knots> end_non_zero(Kokkos::min(last_support_knot_test, last_support_knot_trial));
+        return IdxRange<Knots>(start_non_zero, end_non_zero - start_non_zero);
+    } else {
+        const Idx<Knots> start_non_zero(
+                Kokkos::
+                        max(bspl.break_point_domain().front(),
+                            Kokkos::
+                                    max(bspl.get_first_support_knot(idx_test),
+                                        bspl.get_first_support_knot(idx_trial))));
+        const Idx<Knots> end_non_zero(
+                Kokkos::
+                        min(bspl.break_point_domain().back(),
+                            Kokkos::
+                                    min(bspl.get_last_support_knot(idx_test),
+                                        bspl.get_last_support_knot(idx_trial))));
+        return IdxRange<Knots>(start_non_zero, end_non_zero - start_non_zero);
+    }
+}
+
+/**
  * @brief Compute the range of quadrature points in the support of a 1D B-spline.
  *
  * If the B-splines are periodic then, in order to return a contiguous range, the result
@@ -350,6 +414,55 @@ KOKKOS_FUNCTION IdxRange<QDim1Mesh, QDim2Mesh> get_support_quadrature(
             get_support_quadrature_1d<
                     QDim2Mesh,
                     BSplines2>(Idx<BSplines2>(idx), Idx<QDim2Mesh>(idx_quad_front)));
+}
+
+/**
+ * @brief Get the periodic image of a quadrature index which is found in a target range.
+ *
+ * The quadrature ranges returned by get_support_quadrature and get_quadrature_between_knots
+ * are contiguous so they may extend past the end of the domain in periodic dimensions. This
+ * function shifts an index by a period in each periodic dimension where it is outside the
+ * target range. It can be used to move an index from such a range into the domain
+ * (target_range = full_quad_idx_range) or from the domain into such a range.
+ *
+ * @tparam BSplines1 Splines in the first dimension.
+ * @tparam BSplines2 Splines in the second dimension.
+ * @tparam QDim1Mesh Quadrature mesh in the first dimension.
+ * @tparam QDim2Mesh Quadrature mesh in the second dimension.
+ *
+ * @param[in] idx_quad
+ *      The index of a quadrature point.
+ * @param[in] target_range
+ *      The range in which the returned index should be found.
+ * @param[in] full_quad_idx_range
+ *      The index range of all the quadrature points (one period).
+ * @return
+ *      The equivalent index inside target_range.
+ */
+template <typename BSplines1, typename BSplines2, typename QDim1Mesh, typename QDim2Mesh>
+KOKKOS_INLINE_FUNCTION Idx<QDim1Mesh, QDim2Mesh> periodic_wrap(
+        Idx<QDim1Mesh, QDim2Mesh> idx_quad,
+        IdxRange<QDim1Mesh, QDim2Mesh> const& target_range,
+        IdxRange<QDim1Mesh, QDim2Mesh> const& full_quad_idx_range)
+{
+    if constexpr (BSplines1::is_periodic()) {
+        IdxRange<QDim1Mesh> target_range_1(target_range);
+        if (Idx<QDim1Mesh>(idx_quad) < target_range_1.front()) {
+            idx_quad += full_quad_idx_range.template extent<QDim1Mesh>();
+        } else if (Idx<QDim1Mesh>(idx_quad) > target_range_1.back()) {
+            idx_quad -= full_quad_idx_range.template extent<QDim1Mesh>();
+        }
+    }
+    if constexpr (BSplines2::is_periodic()) {
+        IdxRange<QDim2Mesh> target_range_2(target_range);
+        if (Idx<QDim2Mesh>(idx_quad) < target_range_2.front()) {
+            idx_quad += full_quad_idx_range.template extent<QDim2Mesh>();
+        } else if (Idx<QDim2Mesh>(idx_quad) > target_range_2.back()) {
+            idx_quad -= full_quad_idx_range.template extent<QDim2Mesh>();
+        }
+    }
+    assert(target_range.contains(idx_quad));
+    return idx_quad;
 }
 
 /**

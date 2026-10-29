@@ -745,55 +745,17 @@ public:
             IdxRangeQuadrature2D const& full_quad_idx_range,
             TensorBSplineStash const& bspline_stash)
     {
-        const IdxBS1 idx_test_1(idx_test);
-        const IdxBS1 idx_trial_1(idx_trial);
-        const IdxBS2 idx_test_2(
-                detail_poisson::periodic_mod<BSplines2>(IdxBS2(idx_test)));
-        const IdxBS2 idx_trial_2(
-                detail_poisson::periodic_mod<BSplines2>(IdxBS2(idx_trial)));
-
-        auto& bspl_1 = ddc::discrete_space<BSplines1>();
-        auto& bspl_2 = ddc::discrete_space<BSplines2>();
-
-        const Idx<Knots1> start_non_zero_1(
-                Kokkos::
-                        max(bspl_1.break_point_domain().front(),
-                            Kokkos::
-                                    max(bspl_1.get_first_support_knot(idx_test_1),
-                                        bspl_1.get_first_support_knot(idx_trial_1))));
-        const Idx<Knots1> end_non_zero_1(
-                Kokkos::
-                        min(bspl_1.break_point_domain().back(),
-                            Kokkos::
-                                    min(bspl_1.get_last_support_knot(idx_test_1),
-                                        bspl_1.get_last_support_knot(idx_trial_1))));
-
-        IdxStep<Knots2> span_2(BSplines2::degree() + 1);
-
-        Idx<Knots2> first_support_knot_2_test
-                = bspl_2.get_first_support_knot(idx_test_2);
-        Idx<Knots2> first_support_knot_2_trial
-                = bspl_2.get_first_support_knot(idx_trial_2);
-        Idx<Knots2> last_support_knot_2_test = first_support_knot_2_test + span_2;
-        Idx<Knots2> last_support_knot_2_trial = first_support_knot_2_trial + span_2;
-
-        if (first_support_knot_2_test > last_support_knot_2_trial) {
-            first_support_knot_2_trial += ddc::discrete_space<BSplines2>().nbasis();
-            last_support_knot_2_trial += ddc::discrete_space<BSplines2>().nbasis();
-        } else if (last_support_knot_2_test < first_support_knot_2_trial) {
-            first_support_knot_2_test += ddc::discrete_space<BSplines2>().nbasis();
-            last_support_knot_2_test += ddc::discrete_space<BSplines2>().nbasis();
-        }
-        const Idx<Knots2> start_non_zero_2(
-                Kokkos::max(first_support_knot_2_test, first_support_knot_2_trial));
-        const Idx<Knots2> end_non_zero_2(
-                Kokkos::min(last_support_knot_2_test, last_support_knot_2_trial));
+        // Find the cells where both the test and trial functions are non-zero
+        const IdxRange<Knots1> overlap_knots_1 = detail_poisson::get_overlapping_knots_1d<
+                BSplines1>(IdxBS1(idx_test), IdxBS1(idx_trial));
+        const IdxRange<Knots2> overlap_knots_2 = detail_poisson::get_overlapping_knots_1d<
+                BSplines2>(IdxBS2(idx_test), IdxBS2(idx_trial));
         const IdxRangeQuadrature2D quad_range = detail_poisson::
                 get_quadrature_between_knots<QDim1Mesh, QDim2Mesh, BSplines1, BSplines2>(
-                        start_non_zero_1,
-                        end_non_zero_1,
-                        start_non_zero_2,
-                        end_non_zero_2,
+                        overlap_knots_1.front(),
+                        overlap_knots_1.front() + overlap_knots_1.extents(),
+                        overlap_knots_2.front(),
+                        overlap_knots_2.front() + overlap_knots_2.extents(),
                         full_quad_idx_range.front());
 
         IdxRangeQuadrature2D test_support = get_idx_range(test_mass);
@@ -811,20 +773,18 @@ public:
                                       QDim1Mesh,
                                       QDim2Mesh>(thread_index_1, thread_index_2);
                     // Manage periodicity
-                    if (!full_quad_idx_range.contains(idx_quad)) {
-                        idx_quad -= full_quad_idx_range.template extent<QDim2Mesh>();
-                    }
-                    assert(full_quad_idx_range.contains(idx_quad));
+                    idx_quad = detail_poisson::periodic_wrap<
+                            BSplines1,
+                            BSplines2>(idx_quad, full_quad_idx_range, full_quad_idx_range);
 
                     auto [basis_val_trial_space, basis_derivs_trial_space]
                             = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
 
-                    // The test support may extend past the end of the domain in the second dimension
-                    IdxQuadrature2D idx_quad_test = idx_quad;
-                    if (!test_support.contains(idx_quad_test)) {
-                        idx_quad_test += full_quad_idx_range.template extent<QDim2Mesh>();
-                    }
-                    assert(test_support.contains(idx_quad_test));
+                    // The test support may extend past the end of the domain in periodic dimensions
+                    IdxQuadrature2D idx_quad_test
+                            = detail_poisson::periodic_wrap<
+                                    BSplines1,
+                                    BSplines2>(idx_quad, test_support, full_quad_idx_range);
 
                     // Assemble the weak integral element
                     sum += scalar_product(test_stiffness(idx_quad_test), basis_derivs_trial_space)
@@ -893,12 +853,11 @@ public:
                     IdxStep<QDim1Mesh, QDim2Mesh>
                             quad_offset(thread_index_1, thread_index_2);
                     IdxQuadrature2D idx_quad = test_support.front() + quad_offset;
-                    IdxQuadrature2D idx_quad_in_domain = idx_quad;
                     // Manage periodicity
-                    if (!full_quad_idx_range.contains(idx_quad_in_domain)) {
-                        idx_quad_in_domain -= full_quad_idx_range.template extent<QDim2Mesh>();
-                    }
-                    assert(full_quad_idx_range.contains(idx_quad_in_domain));
+                    IdxQuadrature2D idx_quad_in_domain
+                            = detail_poisson::periodic_wrap<
+                                    BSplines1,
+                                    BSplines2>(idx_quad, full_quad_idx_range, full_quad_idx_range);
                     auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
                             idx_test,
                             idx_quad_in_domain,

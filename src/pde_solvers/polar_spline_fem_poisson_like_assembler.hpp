@@ -750,11 +750,12 @@ public:
                                                                + IdxStep<QDimRMesh, QDimThetaMesh>(
                                                                        r_thread_index,
                                                                        theta_thread_index);
-                                // Manage periodicity
-                                if (!full_quad_idx_range.contains(idx_quad)) {
-                                    idx_quad
-                                            -= full_quad_idx_range.template extent<QDimThetaMesh>();
-                                }
+                                idx_quad = detail_poisson::periodic_wrap<
+                                        BSplinesR,
+                                        BSplinesTheta>(
+                                        idx_quad,
+                                        full_quad_idx_range,
+                                        full_quad_idx_range);
 
                                 auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
                                         idx_test,
