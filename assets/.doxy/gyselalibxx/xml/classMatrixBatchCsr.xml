@@ -429,7 +429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="201" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="201" bodyend="263"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="201" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="201" bodyend="265"/>
       </memberdef>
       <memberdef kind="function" id="classMatrixBatchCsr_1a5d7f76fc2c25fb4867b50181779b4c3c" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
         <type>void</type>
@@ -459,7 +459,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="270" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="270" bodyend="276"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="272" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="272" bodyend="278"/>
       </memberdef>
       <memberdef kind="function" id="classMatrixBatchCsr_1a5d3b37df4fa1caf358a4f08a7ae08865" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -500,7 +500,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="285" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="285" bodyend="340"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="287" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="287" bodyend="342"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -516,7 +516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="343" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="343" bodyend="351"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="345" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="345" bodyend="353"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -566,7 +566,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="37" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="38" bodyend="352"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="37" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="38" bodyend="354"/>
     <listofallmembers>
       <member refid="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" prot="public" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>batch_size</name></member>
       <member refid="classMatrixBatchCsr_1aba6c49bb26f518434112041cf835060b" prot="private" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>batch_sparse_type</name></member>

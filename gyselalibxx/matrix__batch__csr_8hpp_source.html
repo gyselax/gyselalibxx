@@ -739,6 +739,8 @@ public:
                               .on(gko_exec);
 
             // Create the solvers
+            m_solver.clear();
+            m_solver.reserve(batch_size());
             for (size_t i = 0; i &lt; batch_size(); i++) {
                 m_solver.emplace_back(solver_factory-&gt;generate(
                         m_batch_matrix_csr-&gt;create_const_view_for_item(i)));
