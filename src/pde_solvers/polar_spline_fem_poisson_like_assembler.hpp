@@ -551,9 +551,14 @@ private:
     const int m_matrix_size;
 
     // Domains
-    IdxRangeBSPolar m_idxrange_fem_tensor_basis;
     IdxRangeBSR m_idxrange_bsplines_r;
     IdxRangeBSTheta m_idxrange_bsplines_theta;
+    // The tensor basis functions in the FEM basis. The order of the rows and columns of the
+    // tensor-tensor sub-matrix is the layout_right order of this index range.
+    IdxRangeBSRTheta m_idxrange_tensor_basis;
+
+    // The index of the first row/column of the tensor-tensor sub-matrix in the matrix
+    const int m_tensor_idx_offset;
 
     IdxRangeQuadratureR m_idxrange_quadrature_r;
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
@@ -591,13 +596,15 @@ public:
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - s_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
-        , m_idxrange_fem_tensor_basis(
-                  ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
-                          IdxStepBSPolar {m_nbasis_theta}))
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                   IdxStepBSR {s_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                   IdxStepBSTheta {m_nbasis_theta}))
+        // The radial bsplines exclude the bspline used for homogeneous Hermite boundary conditions
+        , m_idxrange_tensor_basis(
+                  m_idxrange_bsplines_r.remove_last(IdxStepBSR(1)),
+                  m_idxrange_bsplines_theta)
+        , m_tensor_idx_offset(PolarBSplinesRTheta::n_singular_basis())
         , m_idxrange_quadrature_r(
                   Idx<QDimRMesh>(0),
                   IdxStep<QDimRMesh>(
@@ -626,7 +633,7 @@ public:
         , m_tensor_nnz_per_row(
                   "m_tensor_nnz_per_row "
                   "(PolarSplineFEMPoissonLikeAssembler::PolarSplineFEMPoissonLikeAssembler)",
-                  m_idxrange_fem_tensor_basis.size() + 1)
+                  m_idxrange_tensor_basis.size() + 1)
     {
         stash_basis_eval(get_field(m_basis_vals_r), get_field(m_first_basis_r));
         stash_basis_eval(get_field(m_basis_vals_theta), get_field(m_first_basis_theta));
@@ -731,7 +738,14 @@ public:
         init_nnz_per_line(nnz_per_row);
         compute_singular_singular_col_idx(col_idx, nnz_per_row);
         compute_singular_tensor_col_idx(col_idx, nnz_per_row);
-        compute_tensor_tensor_col_idx(col_idx, nnz_per_row);
+        compute_tensor_tensor_col_idx(
+                col_idx,
+                Kokkos::
+                        subview(nnz_per_row,
+                                std::pair<int, int>(
+                                        m_tensor_idx_offset,
+                                        m_tensor_idx_offset + m_idxrange_tensor_basis.size() + 1)),
+                m_tensor_idx_offset);
     }
 
     /**
@@ -819,7 +833,12 @@ public:
                 m_metric_tensor,
                 values,
                 col_idx,
-                nnz_per_row);
+                Kokkos::
+                        subview(nnz_per_row,
+                                std::pair<int, int>(
+                                        m_tensor_idx_offset,
+                                        m_tensor_idx_offset + m_idxrange_tensor_basis.size() + 1)),
+                m_tensor_idx_offset);
 
         gko_matrix->setup_solver();
     }
@@ -915,29 +934,30 @@ public:
      * @brief Computes the column indices of the matrix elements corresponding to the
      * inner products of tensor basis functions and tensor basis functions.
      *
+     * The tensor-tensor elements are found at the end of each row of the tensor-tensor
+     * sub-matrix.
+     *
      * @param[out] col_idx_csr
-     *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix)
+     *             A 1D Kokkos view which stores the column indices for each non-zero component of
+     *             the full matrix (only for one matrix).
      * @param[in] nnz_per_row_csr
-     *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
+     *             A 1D Kokkos view of length n+1, where n is the number of tensor basis functions,
+     *             containing the elements of the nnz data structure of the full matrix which
+     *             correspond to the rows of the tensor-tensor sub-matrix.
+     * @param[in] first_col_offset
+     *             The index of the first column of the tensor-tensor sub-matrix in the full matrix.
      */
     void compute_tensor_tensor_col_idx(
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     col_idx_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
-                    nnz_per_row_csr)
+                    nnz_per_row_csr,
+            int first_col_offset)
     {
-        IdxRangeBSPolar idxrange_singular
-                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
+        IdxRangeBSRTheta idx_range_tensor_basis = m_idxrange_tensor_basis;
 
-        // Get index range for basis elements (last element removed due to homogeneous Dirichlet)
-        IdxRangeBSTheta full_idx_range_theta
-                = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
-                        IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
-
-        IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
-
-        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
+        IdxRangeBSR idx_range_fem_r(idx_range_tensor_basis);
+        IdxRangeBSTheta full_idx_range_theta(idx_range_tensor_basis);
 
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                 tensor_nnz_per_row
@@ -951,17 +971,15 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_tensor_basis.size(),
+                        idx_range_tensor_basis.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     // The row of the tensor-tensor sub-matrix
-                    const int tensor_row_idx = team.league_rank();
-                    // Calculate the index of the test b-spline
-                    IdxBSPolar const idx_test_polar(
-                            idxrange_fem_non_singular_front + IdxStepBSPolar {tensor_row_idx});
+                    const int row_idx = team.league_rank();
 
-                    // Calculate the radial and poloidal components of the test b-spline
-                    const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
+                    // Calculate the index of the test b-spline and its radial and poloidal components
+                    const IdxBSRTheta idx_test(
+                            ddcHelper::get_idx_from_linear_index(idx_range_tensor_basis, row_idx));
                     const IdxBSR idx_test_r(idx_test);
                     const IdxBSTheta idx_test_theta(idx_test);
 
@@ -974,16 +992,14 @@ public:
                     IdxStepBSR idx_step_trial_r_offset_max(
                             Kokkos::
                                     min(IdxStepBSR(BSplinesR::degree() + 1),
-                                        idx_range_fem_r.back() - idx_test_r));
+                                        idx_range_fem_r.back() + 1 - idx_test_r));
                     IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
                     IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
 
-                    // Calculate the row index and the position of the first tensor-tensor
-                    // element in the row. These elements are found at the end of the row.
-                    int const row_idx = idx_test_polar - idxrange_singular.front();
+                    // Calculate the position of the first tensor-tensor element in the row.
+                    // These elements are found at the end of the row.
                     int csr_idx = nnz_per_row_csr(row_idx + 1)
-                                  - (tensor_nnz_per_row(tensor_row_idx + 1)
-                                     - tensor_nnz_per_row(tensor_row_idx));
+                                  - (tensor_nnz_per_row(row_idx + 1) - tensor_nnz_per_row(row_idx));
 
                     // Loop over the radial offset to a trial b-spline
                     for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
@@ -1016,7 +1032,10 @@ public:
                              idx_trial_theta < last_idx_trial_theta;
                              ++idx_trial_theta) {
                             const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
-                            int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
+                            int const col_idx = first_col_offset
+                                                + ddcHelper::get_linear_index_from_idx(
+                                                        idx_range_tensor_basis,
+                                                        idx_trial);
                             col_idx_csr(csr_idx) = col_idx;
                             csr_idx++;
                         }
@@ -1026,7 +1045,10 @@ public:
                              idx_trial_theta < full_idx_range_theta.back() + 1;
                              ++idx_trial_theta) {
                             const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
-                            int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
+                            int const col_idx = first_col_offset
+                                                + ddcHelper::get_linear_index_from_idx(
+                                                        idx_range_tensor_basis,
+                                                        idx_trial);
                             col_idx_csr(csr_idx) = col_idx;
                             csr_idx++;
                         }
@@ -1311,11 +1333,17 @@ public:
      *      The metric tensor associated with the mapping from the logical domain to the
      *      physical domain where the equation is defined.
      * @param[out] values_csr
-     *             A 2D Kokkos view which stores the values of non-zero elements for the whole batch.
-     * @param[out] col_idx_csr
-     *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix)
+     *             A 2D Kokkos view which stores the values of non-zero elements of the full matrix
+     *             for the whole batch.
+     * @param[in] col_idx_csr
+     *             A 1D Kokkos view which stores the column indices for each non-zero component of
+     *             the full matrix (only for one matrix).
      * @param[in] nnz_per_row_csr
-     *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
+     *             A 1D Kokkos view of length n+1, where n is the number of tensor basis functions,
+     *             containing the elements of the nnz data structure of the full matrix which
+     *             correspond to the rows of the tensor-tensor sub-matrix.
+     * @param[in] first_col_offset
+     *             The index of the first column of the tensor-tensor sub-matrix in the full matrix.
      */
     template <class CoeffAlpha, class CoeffBeta>
     void compute_tensor_tensor_elements(
@@ -1327,12 +1355,10 @@ public:
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     col_idx_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
-                    nnz_per_row_csr)
+                    nnz_per_row_csr,
+            int first_col_offset)
     {
-        IdxRangeBSPolar idxrange_singular
-                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
-
-        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
+        IdxRangeBSRTheta idx_range_tensor_basis = m_idxrange_tensor_basis;
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
         TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
@@ -1341,7 +1367,7 @@ public:
 
         IdxRangeBatch idx_range_batch = m_idx_range_batch;
         const int n_batch = idx_range_batch.size();
-        const int n_tensor_basis = m_idxrange_fem_tensor_basis.size();
+        const int n_tensor_basis = idx_range_tensor_basis.size();
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                 tensor_nnz_per_row
                 = m_tensor_nnz_per_row;
@@ -1366,21 +1392,18 @@ public:
                     const IdxBatch idx_batch = ddcHelper::
                             get_idx_from_linear_index(idx_range_batch, batch_linear_idx);
                     // The row of the tensor-tensor sub-matrix
-                    const int tensor_row_idx = team.league_rank() % n_tensor_basis;
+                    const int row_idx = team.league_rank() % n_tensor_basis;
                     // Calculate the index of the test b-spline
-                    IdxBSPolar const idx_test_polar(
-                            idxrange_fem_non_singular_front + IdxStepBSPolar {tensor_row_idx});
-
-                    // Calculate the radial and poloidal components of the test b-spline
-                    const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
+                    const IdxBSRTheta idx_test(ddcHelper::get_idx_from_linear_index(
+                            idx_range_tensor_basis,
+                            row_idx));
 
                     // Calculate the row index and the position of the first tensor-tensor
                     // element in the row. These elements are found at the end of the row.
-                    int const row_idx = idx_test_polar - idxrange_singular.front();
                     int const csr_idx_first_stencil_element
                             = nnz_per_row_csr[row_idx + 1]
-                              - (tensor_nnz_per_row[tensor_row_idx + 1]
-                                 - tensor_nnz_per_row[tensor_row_idx]);
+                              - (tensor_nnz_per_row[row_idx + 1]
+                                 - tensor_nnz_per_row[row_idx]);
 
                     // Calculate the test weights once for all trial b-splines
                     const IdxRangeQuadratureRTheta idx_range_quad = detail_poisson::
@@ -1409,9 +1432,9 @@ public:
                          csr_idx < nnz_per_row_csr[row_idx + 1];
                          ++csr_idx) {
                         int const col_idx = col_idx_csr[csr_idx];
-                        IdxBSPolar const idx_trial_polar = idxrange_singular.front() + col_idx;
-                        const IdxBSRTheta idx_trial
-                                = PolarBSplinesRTheta::get_2d_index(idx_trial_polar);
+                        const IdxBSRTheta idx_trial(ddcHelper::get_idx_from_linear_index(
+                                idx_range_tensor_basis,
+                                col_idx - first_col_offset));
                         double element = get_matrix_stencil_element(
                                 team,
                                 idx_test,
@@ -1724,12 +1747,8 @@ public:
         Kokkos::deep_copy(nnz_per_row, 0.);
         init_singular_nnz_per_line(nnz_per_row);
 
-        // The radial bsplines excluding the bspline used for homogeneous Hermite boundary conditions
-        IdxRangeBSR idxrange_bsplines_r = m_idxrange_bsplines_r.remove_last(IdxStepBSR(1));
-        IdxRangeBSTheta idxrange_bsplines_theta = m_idxrange_bsplines_theta;
-        IdxRangeBSRTheta idxrange_tensor_basis(idxrange_bsplines_r, idxrange_bsplines_theta);
         Kokkos::deep_copy(m_tensor_nnz_per_row, 0.);
-        init_tensor_tensor_nnz_per_line(m_tensor_nnz_per_row, idxrange_tensor_basis);
+        init_tensor_tensor_nnz_per_line(m_tensor_nnz_per_row, m_idxrange_tensor_basis);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> tensor_nnz_per_row
                 = m_tensor_nnz_per_row;
         const std::source_location location = std::source_location::current();
