@@ -238,6 +238,39 @@ KOKKOS_INLINE_FUNCTION Idx<Dims...> get_idx_from_linear_index(
         return idx_range.front() + offset;
     }
 }
+
+/**
+ * @brief Get the position of a multi-dimensional index in an index range.
+ *
+ * The index range is traversed in layout_right order (the last dimension varies fastest).
+ * This is the linearisation used to store a contiguous layout_right Field defined on the
+ * index range. It is the inverse of get_idx_from_linear_index.
+ *
+ * @param idx_range The index range.
+ * @param idx The index whose position is calculated (idx_range.contains(idx) must be true).
+ *
+ * @return The position of the index in the index range.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION std::size_t get_linear_index_from_idx(
+        IdxRange<Dims...> const& idx_range,
+        Idx<Dims...> const& idx)
+{
+    if constexpr (sizeof...(Dims) == 0) {
+        return 0;
+    } else {
+        KOKKOS_ASSERT(idx_range.contains(idx));
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const extents
+                = ddc::detail::array(idx_range.extents());
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const offsets
+                = ddc::detail::array(idx - idx_range.front());
+        std::size_t linear_idx = 0;
+        for (std::size_t i = 0; i < sizeof...(Dims); ++i) {
+            linear_idx = linear_idx * extents[i] + offsets[i];
+        }
+        return linear_idx;
+    }
+}
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------

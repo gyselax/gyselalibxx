@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `IdxStep` indexing for `VectorField` objects.
 - Allow `PolarSplineFEMPoissonLikeSolver` to solve a batch of equations (batch dimensions in `IdxRangeFull`).
 - Add `ddcHelper::get_idx_from_linear_index` to get the multi-dimensional index at a given position in an index range.
+- Add `ddcHelper::get_linear_index_from_idx` to get the position of a multi-dimensional index in an index range.
 - Add a `concepts::MetricTensor` concept describing objects which provide the metric tensor and its inverse at a given coordinate or index.
 - `MetricTensorEvaluator` can be evaluated at an index whose coordinate type matches `CoordArg`.
 - The pointwise operators of `Gradient` and `LiePoissonBracket` can be evaluated at an index whose coordinate type matches the coordinate of the metric tensor.
