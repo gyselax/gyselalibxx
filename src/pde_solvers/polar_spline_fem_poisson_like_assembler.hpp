@@ -439,7 +439,6 @@ private:
     using Theta_cov = typename Theta::Dual;
 
 private:
-    // TODO: Combine types
     /// The 1D B-splines in the radial direction
     using BSplinesR = typename PolarBSplinesRTheta::BSplinesR_tag;
     /// The 1D B-splines in the poloidal direction
@@ -949,10 +948,6 @@ public:
                                 min(IdxStepBSR(BSplinesR::degree() + 1),
                                     idx_range_fem_r.back() + 1 - idx_test_r);
 
-                    // IdxStepBSR idx_step_trial_r_offset_max(
-                    //         Kokkos::
-                    //                 min(IdxStepBSR(BSplinesR::degree() + 1),
-                    //                     idx_range_fem_r.back() - idx_test_r));
                     IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
                     IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
 
@@ -1795,8 +1790,6 @@ public:
 
         // Get the outer radial bsplines excluding the bspline used for homogeneous Hermite boundary conditions
         // Take the last four splines and remove the boundary interpolating one
-        // IdxRangeBSR outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1)
-        //                                        .remove_last(IdxStepBSR(1));
         IdxRangeBSR outer_bsplines_r;
         if constexpr (enforces_homogeneous_bc)
             outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1)
@@ -1819,12 +1812,7 @@ public:
                     IdxStepBSR ir(team.league_rank());
                     // Reduced number of splines in r-direction. For the first one we have
                     // two to the right and three to the left and itself, so 6.
-                    int nr;
-                    if constexpr (enforces_homogeneous_bc)
-                        nr = 2 * degree - ir;
-                    else
-                        nr = 2 * degree + 1 - ir;
-                    // int nr = 2 * degree - ir;
+                    int nr = 2 * degree - ir + static_cast<int>(!enforces_homogeneous_bc);
                     IdxBSR k_r(outer_bsplines_2d.front() + ir);
                     int nnz_sum_to_r;
                     if constexpr (enforces_homogeneous_bc)
@@ -1860,6 +1848,7 @@ public:
     {
         return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
     }
+private:
     static auto get_nbasis_r()
     {
         if constexpr (enforces_homogeneous_bc)
