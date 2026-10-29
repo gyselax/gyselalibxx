@@ -57,23 +57,25 @@ RUN chmod +x /bin/bash_run \
  && mkdir /data \
  && chown -R ci:ci /ci /data /opt/venv
 
- RUN apt-get update --yes \
-  && apt-get install --yes --no-install-recommends \
-     file \
-     bzip2 \
-     ca-certificates \
-     g++ \
-     gcc \
-     gfortran \
-     git \
-     gzip \
-     lsb-release \
-     patch \
-     python3 \
-     tar \
-     unzip \
-     xz-utils \
-     zstd
+# Install what is necessary for Spack
+# See https://spack.readthedocs.io/en/latest/installing_prerequisites.html#linux
+RUN apt-get update --yes \
+ && apt-get install --yes --no-install-recommends \
+    file \
+    bzip2 \
+    ca-certificates \
+    g++ \
+    gcc \
+    gfortran \
+    git \
+    gzip \
+    lsb-release \
+    patch \
+    python3 \
+    tar \
+    unzip \
+    xz-utils \
+    zstd
 
 USER ci:ci
 WORKDIR /ci
