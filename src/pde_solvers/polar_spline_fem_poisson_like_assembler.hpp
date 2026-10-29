@@ -1776,8 +1776,12 @@ public:
         Field<int, IdxRangeBSRTheta> nnz(nnz_per_row.data() + 1, idxrange_tensor_basis);
 
         size_t constexpr degree = BSplinesR::degree();
-        size_t constexpr stencil_overlap = 2 * degree + 1;
         size_t const nbasis_theta_proxy = m_nbasis_theta;
+        // The number of radial splines which overlap with a radial spline far from the boundaries
+        size_t constexpr stencil_overlap_r = 2 * degree + 1;
+        // The number of poloidal splines which overlap with a poloidal spline
+        size_t const stencil_overlap_theta
+                = std::min(size_t(2 * BSplinesTheta::degree() + 1), nbasis_theta_proxy);
 
         // The number of radial splines which overlap with a given radial spline to its
         // left or to its right
@@ -1803,7 +1807,7 @@ public:
 
                     // nnz to this line = ntheta * n_stencil_theta \sum_{k=degree+1}^{nr-1} k
                     int nnz_sum_to_r = (nr * (nr - 1) - degree * (degree + 1)) * nbasis_theta_proxy
-                                       * stencil_overlap / 2;
+                                       * stencil_overlap_theta / 2;
 
                     // Loop over poloidal dimensions
                     Kokkos::parallel_for(
@@ -1811,13 +1815,14 @@ public:
                             [&](int const& thread_index) {
                                 IdxStepBSTheta itheta(thread_index);
                                 nnz(ir, itheta)
-                                        += nnz_sum_to_r + (thread_index + 1) * nr * stencil_overlap;
+                                        += nnz_sum_to_r
+                                           + (thread_index + 1) * nr * stencil_overlap_theta;
                             });
                 });
 
         {
             int nr = inner_bsplines_r.size();
-            nnz_sum += nr * (nr + 2 * degree + 1) * stencil_overlap / 2 * nbasis_theta_proxy;
+            nnz_sum += nr * (nr + 2 * degree + 1) * stencil_overlap_theta / 2 * nbasis_theta_proxy;
         }
 
         IdxRangeBSR idxrange_bsplines_r_stencil
@@ -1830,10 +1835,10 @@ public:
                 KOKKOS_LAMBDA(const int k) {
                     IdxBSRTheta k_2d = idxrange_stencil.front() + IdxStepBSR(k / nbasis_theta_proxy)
                                        + IdxStepBSTheta(k % nbasis_theta_proxy);
-                    nnz(k_2d) += nnz_sum + (k + 1) * stencil_overlap * stencil_overlap;
+                    nnz(k_2d) += nnz_sum + (k + 1) * stencil_overlap_r * stencil_overlap_theta;
                 });
 
-        nnz_sum += idxrange_stencil.size() * stencil_overlap * stencil_overlap;
+        nnz_sum += idxrange_stencil.size() * stencil_overlap_r * stencil_overlap_theta;
 
         IdxRangeBSR outer_bsplines_r = idxrange_bsplines_r.take_last(n_one_side_overlap);
         IdxRangeBSRTheta outer_bsplines_2d(outer_bsplines_r, idxrange_bsplines_theta);
@@ -1849,14 +1854,15 @@ public:
                     int nr = 2 * degree - ir;
                     int nnz_sum_to_r = nnz_sum
                                        + (degree * (2 * degree + 1) - nr * (nr + 1) / 2)
-                                                 * stencil_overlap * nbasis_theta_proxy;
+                                                 * stencil_overlap_theta * nbasis_theta_proxy;
                     // Loop over poloidal dimensions
                     Kokkos::parallel_for(
                             Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
                             [&](int const& thread_index) {
                                 IdxStepBSTheta itheta(thread_index);
                                 IdxBSRTheta k = outer_bsplines_2d.front() + ir + itheta;
-                                nnz(k) += nnz_sum_to_r + (thread_index + 1) * nr * stencil_overlap;
+                                nnz(k) += nnz_sum_to_r
+                                          + (thread_index + 1) * nr * stencil_overlap_theta;
                             });
                 });
     }
