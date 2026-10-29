@@ -439,7 +439,6 @@ private:
     using Theta_cov = typename Theta::Dual;
 
 private:
-
     // TODO: Combine types
     /// The 1D B-splines in the radial direction
     using BSplinesR = typename PolarBSplinesRTheta::BSplinesR_tag;
@@ -906,7 +905,7 @@ public:
 
         IdxRangeBSR central_radial_bspline_idx_range(
                 m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
-        
+
         IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
 
@@ -943,12 +942,12 @@ public:
                     IdxStepBSR idx_step_trial_r_offset_max;
                     if constexpr (enforces_homogeneous_bc)
                         idx_step_trial_r_offset_max = Kokkos::
-                                    min(IdxStepBSR(BSplinesR::degree() + 1),
-                                        idx_range_fem_r.back() - idx_test_r);
+                                min(IdxStepBSR(BSplinesR::degree() + 1),
+                                    idx_range_fem_r.back() - idx_test_r);
                     else
                         idx_step_trial_r_offset_max = Kokkos::
-                                    min(IdxStepBSR(BSplinesR::degree() + 1),
-                                        idx_range_fem_r.back() + 1 - idx_test_r);
+                                min(IdxStepBSR(BSplinesR::degree() + 1),
+                                    idx_range_fem_r.back() + 1 - idx_test_r);
 
                     // IdxStepBSR idx_step_trial_r_offset_max(
                     //         Kokkos::
@@ -1703,11 +1702,10 @@ public:
         IdxRangeBSPolar polar_bspl_idx_range;
         if constexpr (enforces_homogeneous_bc)
             polar_bspl_idx_range
-                = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().remove_last(
-                        radial_boundary_splines);
-        else 
-            polar_bspl_idx_range
-                = ddc::discrete_space<PolarBSplinesRTheta>().full_domain();
+                    = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().remove_last(
+                            radial_boundary_splines);
+        else
+            polar_bspl_idx_range = ddc::discrete_space<PolarBSplinesRTheta>().full_domain();
 
         Kokkos::deep_copy(nnz_per_row, 0.);
 
@@ -1736,7 +1734,7 @@ public:
                 KOKKOS_LAMBDA(const int k) { nnz_per_row(k) = k * nnz_for_singular_rows; });
 
         int nnz_sum = nnz_for_singular_rows * n_singular_basis;
-        
+
         IdxRangeBSR idxrange_bsplines_r_overlapping_singular
                 = m_idxrange_bsplines_r.take_first(n_one_side_overlap);
         IdxRangeBSTheta idxrange_bsplines_theta = m_idxrange_bsplines_theta;
@@ -1800,9 +1798,9 @@ public:
         // IdxRangeBSR outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1)
         //                                        .remove_last(IdxStepBSR(1));
         IdxRangeBSR outer_bsplines_r;
-        if constexpr(enforces_homogeneous_bc)
+        if constexpr (enforces_homogeneous_bc)
             outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1)
-                                               .remove_last(IdxStepBSR(1));
+                                       .remove_last(IdxStepBSR(1));
         else
             outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1);
         IdxRangeBSRTheta outer_bsplines_2d(outer_bsplines_r, idxrange_bsplines_theta);
@@ -1819,7 +1817,7 @@ public:
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     IdxStepBSR ir(team.league_rank());
-                    // Reduced number of splines in r-direction. For the first one we have 
+                    // Reduced number of splines in r-direction. For the first one we have
                     // two to the right and three to the left and itself, so 6.
                     int nr;
                     if constexpr (enforces_homogeneous_bc)
@@ -1829,13 +1827,14 @@ public:
                     // int nr = 2 * degree - ir;
                     IdxBSR k_r(outer_bsplines_2d.front() + ir);
                     int nnz_sum_to_r;
-                    if constexpr(enforces_homogeneous_bc)
+                    if constexpr (enforces_homogeneous_bc)
                         nnz_sum_to_r = nnz_sum
                                        + (degree * (2 * degree + 1) - nr * (nr + 1) / 2)
                                                  * stencil_overlap * nbasis_theta_proxy;
                     else
-                        nnz_sum_to_r = nnz_sum + ((2*degree + 1)*ir - (ir * (ir-1))/2)
-                                        * stencil_overlap * nbasis_theta_proxy;
+                        nnz_sum_to_r = nnz_sum
+                                       + ((2 * degree + 1) * ir - (ir * (ir - 1)) / 2)
+                                                 * stencil_overlap * nbasis_theta_proxy;
                     // Loop over poloidal dimensions
                     Kokkos::parallel_for(
                             Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
@@ -1861,24 +1860,27 @@ public:
     {
         return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
     }
-    static auto get_nbasis_r(){
+    static auto get_nbasis_r()
+    {
         if constexpr (enforces_homogeneous_bc)
             return ddc::discrete_space<BSplinesR>().nbasis() - s_n_overlap_cells - 1;
         else
             return ddc::discrete_space<BSplinesR>().nbasis() - s_n_overlap_cells;
     }
-    auto get_matrix_size(){
+    auto get_matrix_size()
+    {
         if constexpr (enforces_homogeneous_bc)
             return ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta;
         else
             return ddc::discrete_space<PolarBSplinesRTheta>().nbasis();
     }
-    auto get_idxrange_fem_tensor_basis(){
+    auto get_idxrange_fem_tensor_basis()
+    {
         if constexpr (enforces_homogeneous_bc)
-            return ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
-                    IdxStepBSPolar {m_nbasis_theta});
+            return ddc::discrete_space<PolarBSplinesRTheta>()
+                    .tensor_bspline_idx_range()
+                    .remove_last(IdxStepBSPolar {m_nbasis_theta});
         else
             return ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range();
     }
-
 };

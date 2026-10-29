@@ -267,9 +267,11 @@ private:
     IdxRangeBatch m_idx_range_batch;
 
     PolarSplineEval m_polar_spline_evaluator;
+
 public:
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
+
 private:
     mutable PolarSplineMemRTheta m_phi_spline_coef_alloc;
     mutable DFieldMem<IdxRangeBatchedBSPolar> m_x_init_alloc;
@@ -616,11 +618,12 @@ public:
     }
 
 
-    auto int_volume(){
+    auto int_volume()
+    {
         return get_field(m_int_volume_alloc);
     }
 
-// public:
+    // public:
 private:
     /// True if RHSFunction can be called with a batch index and a coordinate, or only a
     /// coordinate if there are no batch dimensions.
