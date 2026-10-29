@@ -24,7 +24,6 @@ RUN chmod +x /bin/bash_run \
     clang-18 \
     libomp-dev \
     clang-format-14 \
-    pkg-config \
     git \
     openssh-client \
     python3-pip \
