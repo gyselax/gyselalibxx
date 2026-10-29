@@ -39,7 +39,7 @@ spack:
   - architectures:
     - arch=linux-rhel9-sapphirerapids
   specs:
-  - gcc
+  - cxx
   - matrix:
     - [$packages]
     - [$architectures]
