@@ -399,9 +399,8 @@ public:
      *                  basis functions, containing the elements of the nnz data structure which
      *                  correspond to the rows of the tensor-tensor matrix.
      */
-    void init_nnz_per_line(
-            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> nnz_per_row)
-            const
+    void init_nnz_per_line(Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+                                   nnz_per_row) const
     {
         assert(nnz_per_row.size() == m_tensor_nnz_per_row.size());
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> tensor_nnz_per_row
@@ -612,16 +611,14 @@ public:
                     // The row of the tensor-tensor matrix
                     const int row_idx = team.league_rank() % n_tensor_basis;
                     // Calculate the index of the test b-spline
-                    const IdxBSRTheta idx_test(ddcHelper::get_idx_from_linear_index(
-                            idx_range_tensor_basis,
-                            row_idx));
+                    const IdxBSRTheta idx_test(
+                            ddcHelper::get_idx_from_linear_index(idx_range_tensor_basis, row_idx));
 
                     // Calculate the row index and the position of the first tensor-tensor
                     // element in the row. These elements are found at the end of the row.
                     int const csr_idx_first_stencil_element
                             = nnz_per_row_csr[row_idx + 1]
-                              - (tensor_nnz_per_row[row_idx + 1]
-                                 - tensor_nnz_per_row[row_idx]);
+                              - (tensor_nnz_per_row[row_idx + 1] - tensor_nnz_per_row[row_idx]);
 
                     // Calculate the test weights once for all trial b-splines
                     const IdxRangeQuadratureRTheta idx_range_quad = detail_poisson::

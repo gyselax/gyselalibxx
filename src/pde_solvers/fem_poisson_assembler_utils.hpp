@@ -379,10 +379,9 @@ get_test_weights(
     ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
     double test_mass_weight = int_volume(idx_quad) * beta * basis_val_test;
-    DVector<R, Theta> test_stiffness_weight = int_volume(idx_quad) * alpha
-                                              * tensor_mul(
-                                                      index<'i'>(basis_derivs_test),
-                                                      index<'i', 'j'>(inv_metric_tensor_2d));
+    DVector<R, Theta> test_stiffness_weight
+            = int_volume(idx_quad) * alpha
+              * tensor_mul(index<'i'>(basis_derivs_test), index<'i', 'j'>(inv_metric_tensor_2d));
     return {test_mass_weight, test_stiffness_weight};
 }
 

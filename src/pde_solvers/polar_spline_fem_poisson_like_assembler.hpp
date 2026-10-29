@@ -343,10 +343,8 @@ public:
         init_nnz_per_line(nnz_per_row);
         compute_singular_singular_col_idx(col_idx, nnz_per_row);
         compute_singular_tensor_col_idx(col_idx, nnz_per_row);
-        m_tensor_assembler.compute_col_idx(
-                col_idx,
-                get_tensor_nnz_per_row(nnz_per_row),
-                m_tensor_idx_offset);
+        m_tensor_assembler
+                .compute_col_idx(col_idx, get_tensor_nnz_per_row(nnz_per_row), m_tensor_idx_offset);
     }
 
     /**
@@ -388,9 +386,7 @@ public:
         int const n_tensor_basis = m_tensor_assembler.get_tensor_basis_idx_range().size();
         return Kokkos::subview(
                 nnz_per_row,
-                std::pair<int, int>(
-                        m_tensor_idx_offset,
-                        m_tensor_idx_offset + n_tensor_basis + 1));
+                std::pair<int, int>(m_tensor_idx_offset, m_tensor_idx_offset + n_tensor_basis + 1));
     }
 
     /**
