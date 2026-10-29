@@ -3,6 +3,8 @@
 
 #include <algorithm>
 #include <array>
+#include <memory>
+#include <optional>
 #include <source_location>
 #include <tuple>
 
@@ -13,6 +15,7 @@
 #include "ddc_helper.hpp"
 #include "fem_poisson_assembler_utils.hpp"
 #include "math_tools.hpp"
+#include "matrix_batch_csr.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "vector_field.hpp"
 #include "view.hpp"
@@ -246,6 +249,83 @@ public:
     QuadField get_int_volume() const
     {
         return m_int_volume;
+    }
+
+    /**
+     * @brief Compute the sparsity pattern for the stiffness matrix.
+     *
+     * The rows and columns of the matrix are the tensor product B-splines in the FEM basis
+     * ordered following the layout_right order of their index range.
+     *
+     * @param[out] gko_matrix The pointer to the assembled matrix.
+     * @param[in] max_iter
+     *      The maximum number of iterations possible for the batched CSR solver.
+     * @param[in] res_tol
+     *      The residual tolerance for the batched CSR solver. The solver stops when
+     *      ||r||/||b|| <= res_tol where r is the residual computed by the CG recurrence.
+     * @param[in] batch_solver_logger
+     *      Indicates whether log information such as the residual and the number of iterations
+     *      should be monitored.
+     * @param[in] preconditioner_max_block_size
+     *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
+     * @param[in] residual_norm
+     *      The norm used to evaluate the residual in the stopping criterion.
+     */
+    void setup_sparse_matrix(
+            std::unique_ptr<
+                    MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>&
+                    gko_matrix,
+            std::optional<int> max_iter = std::nullopt,
+            std::optional<double> res_tol = std::nullopt,
+            std::optional<bool> batch_solver_logger = std::nullopt,
+            std::optional<int> preconditioner_max_block_size = std::nullopt,
+            std::optional<GkoMatrixResidualNorm> residual_norm = std::nullopt) const
+    {
+        //CSR data storage
+        gko_matrix = std::make_unique<
+                MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>(
+                m_idx_range_batch.size(),
+                m_idxrange_tensor_basis.size(),
+                n_tensor_tensor_elements(),
+                max_iter,
+                res_tol,
+                batch_solver_logger,
+                preconditioner_max_block_size,
+                residual_norm);
+        auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
+        Kokkos::deep_copy(nnz_per_row, 0);
+        init_nnz_per_line(nnz_per_row);
+        compute_col_idx(col_idx, nnz_per_row, 0);
+    }
+
+    /**
+     * @brief Assemble the stiffness matrix.
+     *
+     * @param[out] gko_matrix The pointer to the matrix initialised by setup_sparse_matrix.
+     * @param[in] coeff_alpha
+     *      A callable object with signature `double operator()(IdxBatch, CoordRTheta)`
+     *      returning the value of @f$ \alpha @f$ at the given batch and coordinate.
+     * @param[in] coeff_beta
+     *      A callable object with signature `double operator()(IdxBatch, CoordRTheta)`
+     *      returning the value of @f$ \beta @f$ at the given batch and coordinate.
+     *
+     * @tparam CoeffAlpha A callable type for evaluating @f$ \alpha @f$ at a batch and coordinate.
+     * @tparam CoeffBeta A callable type for evaluating @f$ \beta @f$ at a batch and coordinate.
+     */
+    template <class CoeffAlpha, class CoeffBeta>
+    void operator()(
+            std::unique_ptr<
+                    MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>> const&
+                    gko_matrix,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta) const
+    {
+        //CSR data storage
+        auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
+
+        compute_elements(coeff_alpha, coeff_beta, values, col_idx, nnz_per_row, 0);
+
+        gko_matrix->setup_solver();
     }
 
     /**
