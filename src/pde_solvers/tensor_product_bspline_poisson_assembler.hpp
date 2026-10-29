@@ -938,8 +938,7 @@ public:
             const
     {
         IdxRangeBSRTheta idxrange_tensor_basis = m_idxrange_tensor_basis;
-        size_t const mat_size = nnz_per_row.extent(0) - 1;
-        assert(mat_size == idxrange_tensor_basis.size());
+        assert(nnz_per_row.extent(0) == idxrange_tensor_basis.size() + 1);
         // nnz per line
         Field<int, IdxRangeBSRTheta> nnz(nnz_per_row.data() + 1, idxrange_tensor_basis);
 
