@@ -67,4 +67,7 @@ spack:
     - 'py-numpy@2.4'
     - 'py-pyyaml@6.0'
     - 'py-xarray@2026.4'
-  view: true
+  view:
+    default:
+      root: .spack-env/view
+      exclude: ['gcc-runtime']
