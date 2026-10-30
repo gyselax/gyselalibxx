@@ -82,6 +82,7 @@
 |  void | [**deepcopy**](#function-deepcopy) (detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes1 &gt; dst, detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes2 &gt; src) <br>_Copy the data from one MultipatchField into another._  |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, DField&lt; IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, Field&lt; Coord&lt; typename Grid1D::continuous\_dimension\_type &gt;, IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
+|  Idx&lt; GridSubSet &gt; | [**find\_first\_point\_not\_in\_superset**](#function-find_first_point_not_in_superset) (IdxRange&lt; GridSubSet &gt; const & idx\_range\_subset, IdxRange&lt; GridSuperSet &gt; const & idx\_range\_superset, ddc::Real tol=std::numeric\_limits&lt; ddc::Real &gt;::epsilon()) <br> |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**IdentityTensor**](classIdentityTensor.md)&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const & tensor) <br>_A helper function to get the value of an element of the tensor._  |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md)&lt; ElementType, ValidIndexSet &gt; const & tensor) <br>_A helper function to get the value of an element of the tensor._  |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**LeviCivitaTensor**](classLeviCivitaTensor.md)&lt; ElementType, ValidIndexSet &gt; const & tensor) <br>_A helper function to get the value of an element of the tensor._  |
@@ -92,6 +93,7 @@
 |  KOKKOS\_INLINE\_FUNCTION CoordType | [**get\_coordinate**](#function-get_coordinate) (CoordOrIdxType const & coord\_or\_idx) <br>_Get the coordinate described by a coordinate or an index._  |
 |  KOKKOS\_INLINE\_FUNCTION Idx&lt; Dims... &gt; | [**get\_idx\_from\_linear\_index**](#function-get_idx_from_linear_index) (IdxRange&lt; Dims... &gt; const & idx\_range, std::size\_t linear\_idx) <br>_Get the multi-dimensional index found at a given position in an index range._  |
 |  double | [**maximum\_distance\_between\_adjacent\_points**](#function-maximum_distance_between_adjacent_points) (IdxRange&lt; GridDim &gt; const & idx\_range) <br>_Computes the maximum distance between two adjacent points within an IdxRange._  |
+|  bool | [**points\_are\_subset**](#function-points_are_subset) (IdxRange&lt; GridSubSet &gt; const & idx\_range\_subset, IdxRange&lt; GridSuperSet &gt; const & idx\_range\_superset, ddc::Real tol=std::numeric\_limits&lt; ddc::Real &gt;::epsilon()) <br> |
 |  KOKKOS\_INLINE\_FUNCTION void | [**restrict\_to\_bspline\_domain**](#function-restrict_to_bspline_domain) (Coord&lt; typename BSpline::continuous\_dimension\_type &gt; & coord) <br>_Calculate the Coordinate inside the domain._  |
 |  KOKKOS\_INLINE\_FUNCTION std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC, Coord&lt; typename IDim::continuous\_dimension\_type &gt; &gt; | [**restrict\_to\_idx\_range**](#function-restrict_to_idx_range) (Coord&lt; typename IDim::continuous\_dimension\_type &gt; coord, IdxRange&lt; IDim &gt; const & idx\_range) <br>_Calculate the Coordinate inside the domain._  |
 |  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**to\_coord**](#function-to_coord) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br>_A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic._  |
@@ -529,6 +531,24 @@ inline void ddcHelper::dump_coordinates (
 
 
 
+### function find\_first\_point\_not\_in\_superset 
+
+```C++
+template<typename GridSubSet, typename GridSuperSet>
+Idx< GridSubSet > ddcHelper::find_first_point_not_in_superset (
+    IdxRange< GridSubSet > const & idx_range_subset,
+    IdxRange< GridSuperSet > const & idx_range_superset,
+    ddc::Real tol=std::numeric_limits< ddc::Real >::epsilon()
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function get 
 
 _A helper function to get the value of an element of the tensor._ 
@@ -883,6 +903,24 @@ The maximum distance between two adjacent points.
 
 
         
+
+<hr>
+
+
+
+### function points\_are\_subset 
+
+```C++
+template<typename GridSubSet, typename GridSuperSet>
+bool ddcHelper::points_are_subset (
+    IdxRange< GridSubSet > const & idx_range_subset,
+    IdxRange< GridSuperSet > const & idx_range_superset,
+    ddc::Real tol=std::numeric_limits< ddc::Real >::epsilon()
+) 
+```
+
+
+
 
 <hr>
 

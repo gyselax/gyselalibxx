@@ -3742,6 +3742,8 @@
     <member refid="ddc__helper_8hpp_1afc83fef0fd54c18053bb973ee156fa49" kind="function"><name>dump_coordinates</name></member>
     <member refid="ddc__helper_8hpp_1a3b54b16fd66648bf6dd0376da991f596" kind="function"><name>dump_coordinates</name></member>
     <member refid="ddc__helper_8hpp_1a9e2ce2d2ae35d41cf6d260b465560976" kind="function"><name>maximum_distance_between_adjacent_points</name></member>
+    <member refid="ddc__helper_8hpp_1a63879fb5fa53f4be88e5c47d3ef0556d" kind="function"><name>find_first_point_not_in_superset</name></member>
+    <member refid="ddc__helper_8hpp_1ace2b89f6da535e9f82344c46b28b86c0" kind="function"><name>points_are_subset</name></member>
     <member refid="ddc__helper_8hpp_1a3358c1523f03d9b67cbfb45dc70eba59" kind="function"><name>get_idx_from_linear_index</name></member>
     <member refid="transpose_8hpp_1a427b2ef16466ccf26ea2f81563bbedb4" kind="function"><name>create_transpose_mirror_view_and_copy</name></member>
     <member refid="transpose_8hpp_1a46df5800c3318a0b386395442dce6ba8" kind="function"><name>create_transpose_mirror</name></member>

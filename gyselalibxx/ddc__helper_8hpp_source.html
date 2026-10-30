@@ -709,6 +709,47 @@ double maximum_distance_between_adjacent_points(IdxRange&lt;GridDim&gt; const&am
     return max_dist;
 }
 
+template &lt;typename GridSubSet, typename GridSuperSet&gt;
+Idx&lt;GridSubSet&gt; find_first_point_not_in_superset(
+        IdxRange&lt;GridSubSet&gt; const&amp; idx_range_subset,
+        IdxRange&lt;GridSuperSet&gt; const&amp; idx_range_superset,
+        ddc::Real tol = std::numeric_limits&lt;ddc::Real&gt;::epsilon())
+{
+    // Grids are ordered so a serial loop allows iterating over both sets simultaneously
+    Idx&lt;GridSuperSet&gt; idx_superset = idx_range_superset.front();
+    for (Idx&lt;GridSubSet&gt; idx_subset = idx_range_subset.front();
+         idx_subset &lt;= idx_range_subset.back();
+         idx_subset++, idx_superset++) {
+        // If points don't match check next point
+        while (std::abs(ddc::coordinate(idx_subset) - ddc::coordinate(idx_superset)) &gt; tol
+               &amp;&amp; idx_superset &lt;= idx_range_superset.back())
+            [[unlikely]]
+            {
+                idx_superset++;
+            }
+        // If point was not found in superset then points are not a subset
+        if (idx_superset &gt; idx_range_superset.back()) {
+            return idx_subset;
+        }
+    }
+    return idx_range_subset.back() + 1;
+}
+
+template &lt;typename GridSubSet, typename GridSuperSet&gt;
+bool points_are_subset(
+        IdxRange&lt;GridSubSet&gt; const&amp; idx_range_subset,
+        IdxRange&lt;GridSuperSet&gt; const&amp; idx_range_superset,
+        ddc::Real tol = std::numeric_limits&lt;ddc::Real&gt;::epsilon())
+{
+    if (idx_range_subset.size() &gt; idx_range_superset.size()) {
+        return false;
+    } else {
+        return find_first_point_not_in_superset(idx_range_subset, idx_range_superset, tol)
+               == (idx_range_subset.back() + 1);
+    }
+}
+
+
 template &lt;class... Dims&gt;
 KOKKOS_INLINE_FUNCTION Idx&lt;Dims...&gt; get_idx_from_linear_index(
         IdxRange&lt;Dims...&gt; const&amp; idx_range,

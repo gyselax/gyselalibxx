@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="366" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="366" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="407" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="407" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1a76a0dd4e0d1391135b582da843f4de49" prot="public" static="no">
         <templateparamlist>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="370" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="370" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="411" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="411" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1a898ecef402209732ea0cfc3fe57ae77c" prot="public" static="no">
         <templateparamlist>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="375" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="375" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="416" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="416" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="378" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="378" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="419" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="419" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="non__uniform__interpolation__points_8hpp_1a6ba00773b16df1063519790796f9c1dd" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1263,6 +1263,76 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="185" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="185" bodyend="205"/>
       </memberdef>
+      <memberdef kind="function" id="ddc__helper_8hpp_1a63879fb5fa53f4be88e5c47d3ef0556d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename GridSubSet</type>
+          </param>
+          <param>
+            <type>typename GridSuperSet</type>
+          </param>
+        </templateparamlist>
+        <type>Idx&lt; GridSubSet &gt;</type>
+        <definition>Idx&lt; GridSubSet &gt; ddcHelper::find_first_point_not_in_superset</definition>
+        <argsstring>(IdxRange&lt; GridSubSet &gt; const &amp;idx_range_subset, IdxRange&lt; GridSuperSet &gt; const &amp;idx_range_superset, ddc::Real tol=std::numeric_limits&lt; ddc::Real &gt;::epsilon())</argsstring>
+        <name>find_first_point_not_in_superset</name>
+        <qualifiedname>ddcHelper::find_first_point_not_in_superset</qualifiedname>
+        <param>
+          <type>IdxRange&lt; GridSubSet &gt; const &amp;</type>
+          <declname>idx_range_subset</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; GridSuperSet &gt; const &amp;</type>
+          <declname>idx_range_superset</declname>
+        </param>
+        <param>
+          <type>ddc::Real</type>
+          <declname>tol</declname>
+          <defval>std::numeric_limits&lt; ddc::Real &gt;::epsilon()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="208" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="208" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="ddc__helper_8hpp_1ace2b89f6da535e9f82344c46b28b86c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename GridSubSet</type>
+          </param>
+          <param>
+            <type>typename GridSuperSet</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool ddcHelper::points_are_subset</definition>
+        <argsstring>(IdxRange&lt; GridSubSet &gt; const &amp;idx_range_subset, IdxRange&lt; GridSuperSet &gt; const &amp;idx_range_superset, ddc::Real tol=std::numeric_limits&lt; ddc::Real &gt;::epsilon())</argsstring>
+        <name>points_are_subset</name>
+        <qualifiedname>ddcHelper::points_are_subset</qualifiedname>
+        <param>
+          <type>IdxRange&lt; GridSubSet &gt; const &amp;</type>
+          <declname>idx_range_subset</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; GridSuperSet &gt; const &amp;</type>
+          <declname>idx_range_superset</declname>
+        </param>
+        <param>
+          <type>ddc::Real</type>
+          <declname>tol</declname>
+          <defval>std::numeric_limits&lt; ddc::Real &gt;::epsilon()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="234" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="234" bodyend="245"/>
+      </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1a3358c1523f03d9b67cbfb45dc70eba59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
@@ -1312,7 +1382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="220" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="220" bodyend="240"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="261" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="261" bodyend="281"/>
       </memberdef>
       <memberdef kind="function" id="transpose_8hpp_1a427b2ef16466ccf26ea2f81563bbedb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

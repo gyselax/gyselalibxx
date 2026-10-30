@@ -39,6 +39,11 @@
 * **evaluation\_coord\_t** ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
 
 
+## f
+
+* **find\_first\_point\_not\_in\_superset** ([**ddcHelper**](namespaceddcHelper.md))
+
+
 ## g
 
 * **Greville\_Greville** ([**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
@@ -90,6 +95,7 @@
 ## p
 
 * **Periodic** ([**ExtrapolationRule**](namespaceExtrapolationRule.md), [**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
+* **points\_are\_subset** ([**ddcHelper**](namespaceddcHelper.md))
 * **PresentErrorExplanation** ([**gslx::error**](namespacegslx_1_1error.md))
 * **placeholder\_idx\_t** ([**metric\_tensor\_detail**](namespacemetric__tensor__detail.md))
 

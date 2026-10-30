@@ -30,6 +30,11 @@
 * **evaluate** ([**ndEval**](namespacendEval.md))
 
 
+## f
+
+* **find\_first\_point\_not\_in\_superset** ([**ddcHelper**](namespaceddcHelper.md))
+
+
 ## g
 
 * **get** ([**ddcHelper**](namespaceddcHelper.md))
@@ -54,6 +59,7 @@
 
 ## p
 
+* **points\_are\_subset** ([**ddcHelper**](namespaceddcHelper.md))
 * **PresentErrorExplanation** ([**gslx::error**](namespacegslx_1_1error.md))
 
 

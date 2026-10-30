@@ -690,6 +690,10 @@
 <td style="text-align: left;"><a href="#function-dump_coordinates"><strong>dump_coordinates</strong></a> (ExecSpace exec_space, Field&lt; Coord&lt; typename Grid1D::continuous_dimension_type &gt;, IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump_coord) <br><em>Dump the coordinates of a field into the field.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">Idx&lt; GridSubSet &gt;</td>
+<td style="text-align: left;"><a href="#function-find_first_point_not_in_superset"><strong>find_first_point_not_in_superset</strong></a> (IdxRange&lt; GridSubSet &gt; const &amp; idx_range_subset, IdxRange&lt; GridSuperSet &gt; const &amp; idx_range_superset, ddc::Real tol=std::numeric_limits&lt; ddc::Real &gt;::epsilon()) <br></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION constexpr double</td>
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classIdentityTensor.html"><strong>IdentityTensor</strong></a>&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const &amp; tensor) <br><em>A helper function to get the value of an element of the tensor.</em></td>
 </tr>
@@ -728,6 +732,10 @@
 <tr>
 <td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="#function-maximum_distance_between_adjacent_points"><strong>maximum_distance_between_adjacent_points</strong></a> (IdxRange&lt; GridDim &gt; const &amp; idx_range) <br><em>Computes the maximum distance between two adjacent points within an IdxRange.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a href="#function-points_are_subset"><strong>points_are_subset</strong></a> (IdxRange&lt; GridSubSet &gt; const &amp; idx_range_subset, IdxRange&lt; GridSuperSet &gt; const &amp; idx_range_superset, ddc::Real tol=std::numeric_limits&lt; ddc::Real &gt;::epsilon()) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION void</td>
@@ -947,6 +955,16 @@ inline void ddcHelper::dump_coordinates (
 </ul>
 <hr>
 
+<h3 id="function-find_first_point_not_in_superset">function find_first_point_not_in_superset</h3>
+<pre><code class="language-C++">template&lt;typename GridSubSet, typename GridSuperSet&gt;
+Idx&lt; GridSubSet &gt; ddcHelper::find_first_point_not_in_superset (
+    IdxRange&lt; GridSubSet &gt; const &amp; idx_range_subset,
+    IdxRange&lt; GridSuperSet &gt; const &amp; idx_range_superset,
+    ddc::Real tol=std::numeric_limits&lt; ddc::Real &gt;::epsilon()
+) 
+</code></pre>
+<hr>
+
 <h3 id="function-get">function get</h3>
 <p><em>A helper function to get the value of an element of the tensor.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class ValidIndexSetRow, class ValidIndexSetCol&gt;
@@ -1108,6 +1126,16 @@ double ddcHelper::maximum_distance_between_adjacent_points (
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The maximum distance between two adjacent points. </p>
+<hr>
+
+<h3 id="function-points_are_subset">function points_are_subset</h3>
+<pre><code class="language-C++">template&lt;typename GridSubSet, typename GridSuperSet&gt;
+bool ddcHelper::points_are_subset (
+    IdxRange&lt; GridSubSet &gt; const &amp; idx_range_subset,
+    IdxRange&lt; GridSuperSet &gt; const &amp; idx_range_superset,
+    ddc::Real tol=std::numeric_limits&lt; ddc::Real &gt;::epsilon()
+) 
+</code></pre>
 <hr>
 
 <h3 id="function-restrict_to_bspline_domain">function restrict_to_bspline_domain</h3>
