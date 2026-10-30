@@ -62,7 +62,8 @@ SingleModePerturbInitialisation SingleModePerturbInitialisation::init_from_input
     host_t<DFieldMemSp> init_perturb_amplitude(idx_range_kinsp);
 
     for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
+        IdxStepSp const step_sp = isp - idx_range_kinsp.front();
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", step_sp.value());
 
         init_perturb_amplitude(isp) = PCpp_double(conf_isp, ".perturb_amplitude");
         init_perturb_mode(isp) = static_cast<int>(PCpp_int(conf_isp, ".perturb_mode"));
@@ -78,7 +79,7 @@ SingleModePerturbInitialisation SingleModePerturbInitialisation::init_from_input
 void SingleModePerturbInitialisation::perturbation_initialisation(
         DFieldX const perturbation,
         int const perturb_mode,
-        double const perturb_amplitude) const
+        double const perturb_amplitude)
 {
     IdxRangeX const gridx = get_idx_range(perturbation);
     double const Lx = ddcHelper::total_interval_length(gridx);

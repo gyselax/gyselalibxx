@@ -38,15 +38,15 @@ public:
      * $f1(v) = (1-epsilon)/(sqrt(2*PI))*exp(-v**2/2)$
      * $f2(v) = epsilon/sqrt(2*PI*T0)[exp(-(v-v0)**2/2*T0)$
      * @param[out] fMaxwellian The initial distribution function. 
-     * @param[in] epsilon_bot A parameter that represents the density of the bump-on-tail Maxwellian. 
-     * @param[in] temperature_bot A parameter that represents the temperature of the bump-on-tail Maxwellian. 
-     * @param[in] mean_velocity_bot A parameter that represents the mean velocity of the bump-on-tail Maxwellian. 
+     * @param[in] epsilon A parameter that represents the density of the bump-on-tail Maxwellian. 
+     * @param[in] temperature A parameter that represents the temperature of the bump-on-tail Maxwellian. 
+     * @param[in] mean_velocity A parameter that represents the mean velocity of the bump-on-tail Maxwellian. 
      */
-    void compute_twomaxwellian(
+    static void compute_twomaxwellian(
             DFieldVx fMaxwellian,
-            double epsilon_bot,
-            double temperature_bot,
-            double mean_velocity_bot) const;
+            double epsilon,
+            double temperature,
+            double mean_velocity);
     /**
      * @brief Creates an instance of the BumpontailEquilibrium class.
      * @param[in] epsilon_bot A parameter that represents the density of the bump-on-tail Maxwellian for each species. 

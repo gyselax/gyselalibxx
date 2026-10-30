@@ -80,6 +80,22 @@ struct GeneralParameters
     double final_time;
     bool if_save_curves;
     bool if_save_feet;
+
+    GeneralParameters(
+            IdxRangeRTheta idx_range,
+            SplineInterpolatorRTheta const& spline_interpolator,
+            SplineInterpolatorRThetaConst const& spline_advection_interpolator,
+            double simulation_final_time,
+            bool save_curves,
+            bool save_feet)
+        : grid(idx_range)
+        , interpolator(spline_interpolator)
+        , advection_interpolator(spline_advection_interpolator)
+        , final_time(simulation_final_time)
+        , if_save_curves(save_curves)
+        , if_save_feet(save_feet)
+    {
+    }
 };
 
 template <
