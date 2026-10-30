@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The pointwise operators of `Gradient` and `LiePoissonBracket` can be evaluated at an index whose coordinate type matches the coordinate of the metric tensor.
 - Allow `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` to take a metric tensor instead of a mapping to change the variance of a vector field.
 - Add `symmetric_tensor_mul` to calculate a tensor multiplication whose result is symmetric.
+- Add new helper functions `find_point_missing_from_superset` and `points_are_subset`.
 
 ### Fixed
 
