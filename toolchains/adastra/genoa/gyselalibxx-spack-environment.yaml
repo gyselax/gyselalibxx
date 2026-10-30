@@ -81,3 +81,7 @@ spack:
     py-pandas:
       prefer:
         - '~performance'
+  view:
+    default:
+      root: .spack-env/view
+      exclude: ['gcc-runtime']
