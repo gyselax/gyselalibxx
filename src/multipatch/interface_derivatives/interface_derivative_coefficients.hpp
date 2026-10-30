@@ -489,7 +489,7 @@ private:
             idx_range_break_points = idx_range_break_points.take_last(idx_step);
         }
         Idx<GridBreakPt> missing_breakpoint = ddcHelper::
-                find_point_missing_from_superset(idx_range_break_points, idx_range_perp);
+                find_first_point_not_in_superset(idx_range_break_points, idx_range_perp);
         if (missing_breakpoint != (idx_range_break_points.back() + 1)) {
             throw std::runtime_error(
                     "[abort] The break points have to be interpolation points. The break point "

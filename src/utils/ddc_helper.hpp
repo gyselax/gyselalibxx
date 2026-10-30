@@ -205,7 +205,7 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
 }
 
 template <typename GridSubSet, typename GridSuperSet>
-Idx<GridSubSet> find_point_missing_from_superset(
+Idx<GridSubSet> find_first_point_not_in_superset(
         IdxRange<GridSubSet> const& idx_range_subset,
         IdxRange<GridSuperSet> const& idx_range_superset,
         ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
@@ -236,7 +236,7 @@ bool points_are_subset(
         IdxRange<GridSuperSet> const& idx_range_superset,
         ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
 {
-    return find_point_missing_from_superset(idx_range_subset, idx_range_superset, tol)
+    return find_first_point_not_in_superset(idx_range_subset, idx_range_superset, tol)
            == (idx_range_subset.back() + 1);
 }
 
