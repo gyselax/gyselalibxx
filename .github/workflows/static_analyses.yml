@@ -66,6 +66,7 @@ jobs:
           fetch-depth: 0
       - name: Run pylint
         run: |
+          . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-serial
           pylint $(find tests -iname *.py)
           pylint $(find docs -iname *.py)
           pylint $(find bin -iname *.py)
@@ -74,6 +75,7 @@ jobs:
           PYTHONPATH: ./post-process/PythonScripts
       - name: Run filtered pylint
         run: |
+          . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-serial
           # Find all files with no extension or a .py extension in post-process/PythonScripts/
           POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
           # Get pylint errors without failing
