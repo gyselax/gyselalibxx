@@ -130,7 +130,6 @@ template <
         typename QDimRMesh,
         typename QDimThetaMesh,
         concepts::MetricTensor MetricTensorType,
-        bool include_boundary_splines = true,
         typename IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler
 {
@@ -266,9 +265,10 @@ public:
     explicit PolarSplineFEMPoissonLikeAssembler(
             Field<double, IdxRangeQuadratureRTheta> int_volume,
             MetricTensorType const& metric_tensor,
-            IdxRangeFull idx_range_full)
+            IdxRangeFull idx_range_full,
+            bool include_boundary_splines = true)
         : m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
-        , m_matrix_size(get_matrix_size())
+        , m_matrix_size(get_matrix_size(include_boundary_splines))
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                   IdxStepBSR {s_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
@@ -919,7 +919,7 @@ public:
     }
 
 private:
-    static std::size_t get_matrix_size()
+    static std::size_t get_matrix_size(bool include_boundary_splines)
     {
         if constexpr (include_boundary_splines)
             return ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
