@@ -12,6 +12,7 @@
 #include "multipatch_type.hpp"
 #include "spline_builder_deriv_field_2d.hpp"
 #include "types.hpp"
+#include "i_interpolation_builder.hpp"
 
 /**
  * @brief A class to call all the builders of all the patches once.
@@ -390,7 +391,7 @@ public:
      * @return a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
      */
     template <class MultipatchIdxRangeBatched>
-    MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched> const batched_spline_idx_ranges(
+    MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched> const batched_basis_idx_ranges(
             MultipatchIdxRangeBatched idx_ranges) const
     {
         return MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched>(batched_basis_idx_range(
@@ -418,16 +419,4 @@ private:
                 builder_applier(builder);
         builder_applier(spline, function_and_deriv);
     };
-
-    template <class Builder, class IdxRangeBatchedInterpolation>
-    auto batched_basis_idx_range(
-            Builder const& builder,
-            IdxRangeBatchedInterpolation const& batched_interpolation_domain) const
-    {
-        if constexpr (requires { builder.batched_spline_domain(batched_interpolation_domain); }) {
-            return builder.batched_spline_domain(batched_interpolation_domain);
-        } else {
-            return builder.batched_basis_idx_range(batched_interpolation_domain);
-        }
-    }
 };
