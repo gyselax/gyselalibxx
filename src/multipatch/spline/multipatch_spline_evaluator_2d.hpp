@@ -422,7 +422,7 @@ public:
      * @tparam IdxDeriv Index type of the derivative order, it can be on the first dimension, the second
      *      or both.
      * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
-     * @param[out] patch_values DField of values of the function or derivative. 
+     * @param[out] patch_values Field of values of the function or derivative. 
      * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and 
      *          where we want to evaluate the function or derivative. 
      * @param[in] patches_splines MultipatchType of spline coefficients of the splines 
@@ -761,16 +761,6 @@ private:
     template <class... DerivDims>
     static Idx<DerivDims...> order_zero()
     {
-        constexpr std::size_t NDims = sizeof...(DerivDims);
-        if constexpr (NDims == 0) {
-            return Idx<DerivDims...>();
-        } else if constexpr (NDims == 1) {
-            return Idx<DerivDims...>(0);
-        } else if constexpr (NDims == 2) {
-            return Idx<DerivDims...>(0, 0);
-        } else {
-            Kokkos::abort( // cppcheck-suppress missingReturn
-                    "Derivative order must only be on the dimensions the patches.");
-        }
+        return Idx<DerivDims...>(Idx<DerivDims>(0)...);
     }
 };
