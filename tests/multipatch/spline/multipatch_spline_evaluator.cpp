@@ -75,11 +75,9 @@ protected:
     Patch2::IdxRange2 const idx_range_theta2;
 
     Patch1::IdxRange1 const idx_range_eval_r1;
-    Patch1::IdxRange2 const idx_range_eval_theta1;
     Patch1::IdxRange12 const idx_range_eval_rtheta1;
 
     Patch2::IdxRange1 const idx_range_eval_r2;
-    Patch2::IdxRange2 const idx_range_eval_theta2;
     Patch2::IdxRange12 const idx_range_eval_rtheta2;
 
     // Single extrapolation rules
@@ -111,11 +109,9 @@ public:
         , idx_range_r2(SplineInterpPointsR<2>::get_domain<GridR<2>>())
         , idx_range_theta2(SplineInterpPointsTheta<2>::get_domain<GridTheta<2>>())
         , idx_range_eval_r1(idx_range_r1.remove_last(Patch1::IdxStep1(1)))
-        , idx_range_eval_theta1(idx_range_theta1.remove_last(Patch1::IdxStep2(1)))
-        , idx_range_eval_rtheta1(idx_range_eval_r1, idx_range_eval_theta1)
+        , idx_range_eval_rtheta1(idx_range_eval_r1, idx_range_theta1.remove_last(Patch1::IdxStep2(1)))
         , idx_range_eval_r2(idx_range_r2.remove_last(Patch2::IdxStep1(1)))
-        , idx_range_eval_theta2(idx_range_theta2.remove_last(Patch2::IdxStep2(1)))
-        , idx_range_eval_rtheta2(idx_range_eval_r2, idx_range_eval_theta2)
+        , idx_range_eval_rtheta2(idx_range_eval_r2, idx_range_theta2.remove_last(Patch2::IdxStep2(1)))
         , bc_r_min_1(ddc::coordinate(idx_range_r1.front()))
         , bc_r_max_1(ddc::coordinate(idx_range_r1.back()))
         , bc_r_min_2(ddc::coordinate(idx_range_r2.front()))
