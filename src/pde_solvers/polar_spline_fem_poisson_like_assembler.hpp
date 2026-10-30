@@ -261,6 +261,8 @@ public:
      * @param metric_tensor The metric tensor associated with the mapping from the logical
      *          domain to the physical domain where the equation is defined.
      * @param idx_range_full The full index range of @f$ \phi @f$ including any batch dimensions.
+     * @param include_boundary_splines True if the outer radial bsplines should be included in
+     *          the matrix assembly, false otherwise.
      */
     explicit PolarSplineFEMPoissonLikeAssembler(
             Field<double, IdxRangeQuadratureRTheta> int_volume,
