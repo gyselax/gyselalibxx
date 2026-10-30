@@ -264,7 +264,7 @@
           <declname>index</declname>
         </param>
         <briefdescription>
-<para>The multiplicative factor corresponding to the Laplace operator <formula id="381">$ \Delta $</formula> expressed in Fourier space at a given mode. </para>
+<para>The multiplicative factor corresponding to the Laplace operator <formula id="387">$ \Delta $</formula> expressed in Fourier space at a given mode. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>

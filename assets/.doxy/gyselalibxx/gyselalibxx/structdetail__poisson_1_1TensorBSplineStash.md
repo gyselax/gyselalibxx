@@ -12,7 +12,7 @@
 
 _The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._ [More...](#detailed-description)
 
-* `#include <polar_spline_fem_poisson_like_assembler.hpp>`
+* `#include <fem_poisson_assembler_utils.hpp>`
 
 
 
@@ -249,5 +249,5 @@ The value and derivatives of the B-spline at the quadrature point.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp`
 

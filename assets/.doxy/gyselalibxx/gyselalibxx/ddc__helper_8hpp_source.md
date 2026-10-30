@@ -208,6 +208,27 @@ KOKKOS_INLINE_FUNCTION Idx<Dims...> get_idx_from_linear_index(
         return idx_range.front() + offset;
     }
 }
+
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION std::size_t get_linear_index_from_idx(
+        IdxRange<Dims...> const& idx_range,
+        Idx<Dims...> const& idx)
+{
+    if constexpr (sizeof...(Dims) == 0) {
+        return 0;
+    } else {
+        KOKKOS_ASSERT(idx_range.contains(idx));
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const extents
+                = ddc::detail::array(idx_range.extents());
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const offsets
+                = ddc::detail::array(idx - idx_range.front());
+        std::size_t linear_idx = 0;
+        for (std::size_t i = 0; i < sizeof...(Dims); ++i) {
+            linear_idx = linear_idx * extents[i] + offsets[i];
+        }
+        return linear_idx;
+    }
+}
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------

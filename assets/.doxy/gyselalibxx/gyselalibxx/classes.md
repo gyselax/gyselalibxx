@@ -511,6 +511,7 @@
 * [**TensorCommon**](classTensorCommon.md)
 * [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md)
 ([**tensor\_tools**](namespacetensor__tools.md))
+* [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md)
 * [**Theta**](structTheta.md)
 * [**Theta\_cov**](structTheta__cov.md)
 * [**ToroidalToCylindrical**](classToroidalToCylindrical.md)

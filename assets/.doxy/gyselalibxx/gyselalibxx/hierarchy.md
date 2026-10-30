@@ -173,6 +173,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**Tensor**](classTensor.md) _A class representing a_ [_**Tensor**_](classTensor.md) _._
     * **class** [**Tensor**](classTensor.md) _A class representing a_ [_**Tensor**_](classTensor.md) _._
     * **class** [**Tensor**](classTensor.md) _A class representing a_ [_**Tensor**_](classTensor.md) _._
+* **class** [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md) _An operator to assemble a Poisson-like stiffness matrix using tensor product B-splines._ 
 * **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._
 * **class** [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md) _A class which evaluates the triangular Bernstein polynomials._ 
 * **class** [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) 

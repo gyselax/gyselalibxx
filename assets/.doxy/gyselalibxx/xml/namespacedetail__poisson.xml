@@ -4,7 +4,7 @@
     <compoundname>detail_poisson</compoundname>
     <innerclass refid="structdetail__poisson_1_1TensorBSplineStash" prot="public">detail_poisson::TensorBSplineStash</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a4737e8df73e8bff474c2c36cd914903d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a4737e8df73e8bff474c2c36cd914903d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -41,9 +41,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="38" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="38" bodyend="50"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="32" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="32" bodyend="44"/>
       </memberdef>
-      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a65137404e884acc2dcaee94b2b25c073" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a65137404e884acc2dcaee94b2b25c073" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
@@ -86,44 +86,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="63" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="63" bodyend="71"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="57" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="57" bodyend="65"/>
       </memberdef>
-      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a247dc6ba30ff36eeea601bff9becfe7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename DDom</type>
-          </param>
-          <param>
-            <type>std::enable_if_t&lt; DDom::continuous_dimension_type::PERIODIC, bool &gt;</type>
-            <defval>true</defval>
-          </param>
-        </templateparamlist>
-        <type>KOKKOS_FUNCTION Idx&lt; DDom &gt;</type>
-        <definition>KOKKOS_FUNCTION Idx&lt; DDom &gt; detail_poisson::mod_add</definition>
-        <argsstring>(Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx_step, IdxRange&lt; DDom &gt; idx_range)</argsstring>
-        <name>mod_add</name>
-        <qualifiedname>detail_poisson::mod_add</qualifiedname>
-        <param>
-          <type>Idx&lt; DDom &gt;</type>
-          <declname>idx</declname>
-        </param>
-        <param>
-          <type>IdxStep&lt; DDom &gt;</type>
-          <declname>idx_step</declname>
-        </param>
-        <param>
-          <type>IdxRange&lt; DDom &gt;</type>
-          <declname>idx_range</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="74" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="74" bodyend="83"/>
-      </memberdef>
-      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
@@ -177,76 +142,45 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="96" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="96" bodyend="109"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="78" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="78" bodyend="91"/>
       </memberdef>
-      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1ac16a6aa98a88e1172c1f60b4ad7a168a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a247dc6ba30ff36eeea601bff9becfe7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>bool</type>
-            <declname>calculate_derivs</declname>
-            <defname>calculate_derivs</defname>
+            <type>typename DDom</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; DDom::continuous_dimension_type::PERIODIC, bool &gt;</type>
             <defval>true</defval>
           </param>
-          <param>
-            <type>class <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></type>
-          </param>
-          <param>
-            <type>class IdxQuad</type>
-          </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt;</type>
-        <definition>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; detail_poisson::get_polar_bspline_vals_and_derivs</definition>
-        <argsstring>(IdxQuad idx_quad, Idx&lt; PolarBSplinesRTheta &gt; idx)</argsstring>
-        <name>get_polar_bspline_vals_and_derivs</name>
-        <qualifiedname>detail_poisson::get_polar_bspline_vals_and_derivs</qualifiedname>
+        <type>KOKKOS_FUNCTION Idx&lt; DDom &gt;</type>
+        <definition>KOKKOS_FUNCTION Idx&lt; DDom &gt; detail_poisson::mod_add</definition>
+        <argsstring>(Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx_step, IdxRange&lt; DDom &gt; idx_range)</argsstring>
+        <name>mod_add</name>
+        <qualifiedname>detail_poisson::mod_add</qualifiedname>
         <param>
-          <type>IdxQuad</type>
-          <declname>idx_quad</declname>
-        </param>
-        <param>
-          <type>Idx&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
+          <type>Idx&lt; DDom &gt;</type>
           <declname>idx</declname>
         </param>
+        <param>
+          <type>IdxStep&lt; DDom &gt;</type>
+          <declname>idx_step</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; DDom &gt;</type>
+          <declname>idx_range</declname>
+        </param>
         <briefdescription>
-<para>Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point. </para>
+<para>Add an idx_step to an idx in such a way that the result remains in the idx_range. </para>
         </briefdescription>
         <detaileddescription>
-<para>The polar bsplines which cover the singular point are linear combinations of tensor product bsplines so they are evaluated using PolarBSplines::eval_basis_and_n_derivs. The polar bsplines which do not cover the singular point should be passed as a 2D index (see the overload below).</para>
-<para><parameterlist kind="templateparam"><parameteritem>
-<parameternamelist>
-<parametername>calculate_derivs</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>If true, the value and the derivatives are calculated. If false, only the value is calculated.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">idx_quad</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The quadrature point where the polar bspline should be evaluated. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">idx</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The index of a polar bspline which covers the singular point. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The value of the polar bspline if calculate_derivs is false. Otherwise a tuple containing the value and the derivatives of the polar bspline. </para>
-</simplesect>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="223" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="223" bodyend="267"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="97" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="97" bodyend="106"/>
       </memberdef>
-      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename QDimRMesh</type>
@@ -371,9 +305,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="301" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="301" bodyend="336"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="225" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="225" bodyend="260"/>
       </memberdef>
-      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1a00794e48e29df9ffdedf8449e806c1f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a00794e48e29df9ffdedf8449e806c1f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename QDimRMesh</type>
@@ -462,13 +396,239 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="357" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="357" bodyend="384"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="281" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="281" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a5c9c8d213b290bba154c4d303e2b47bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class QDimRMesh</type>
+          </param>
+          <param>
+            <type>class QDimThetaMesh</type>
+          </param>
+          <param>
+            <type>class IdxBatch</type>
+          </param>
+          <param>
+            <type>class CoeffAlpha</type>
+          </param>
+          <param>
+            <type>class CoeffBeta</type>
+          </param>
+          <param>
+            <type><ref refid="conceptconcepts_1_1MetricTensor" kindref="compound">concepts::MetricTensor</ref></type>
+            <declname>MetricTensorType</declname>
+            <defname>MetricTensorType</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type &gt; &gt; detail_poisson::get_test_weights</definition>
+        <argsstring>(double basis_val_test, DVector&lt; typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual &gt; basis_derivs_test, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, MetricTensorType const &amp;metric_tensor, DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt; int_volume)</argsstring>
+        <name>get_test_weights</name>
+        <qualifiedname>detail_poisson::get_test_weights</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>basis_val_test</declname>
+        </param>
+        <param>
+          <type>DVector&lt; typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual &gt;</type>
+          <declname>basis_derivs_test</declname>
+        </param>
+        <param>
+          <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+          <declname>idx_quad</declname>
+        </param>
+        <param>
+          <type>IdxBatch</type>
+          <declname>idx_batch</declname>
+        </param>
+        <param>
+          <type>CoeffAlpha const &amp;</type>
+          <declname>coeff_alpha</declname>
+        </param>
+        <param>
+          <type>CoeffBeta const &amp;</type>
+          <declname>coeff_beta</declname>
+        </param>
+        <param>
+          <type>MetricTensorType const &amp;</type>
+          <declname>metric_tensor</declname>
+        </param>
+        <param>
+          <type>DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt;</type>
+          <declname>int_volume</declname>
+        </param>
+        <briefdescription>
+<para>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The weak integral element is <formula id="381">$ w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j) $</formula> where <formula id="382">$ w $</formula> is the integral volume, <formula id="383">$ B_i $</formula> is the test function and <formula id="384">$ B_j $</formula> is the trial function. This function computes <formula id="385">$ w \alpha G^{-1} \nabla B_i $</formula> and <formula id="386">$ w \beta B_i $</formula> so that the weak integral element can be computed from the values and derivatives of the trial function alone.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QDimRMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QDimThetaMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in poloidal direction.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">basis_val_test</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of the test basis function at the quadrature point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">basis_derivs_test</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The gradient of the test basis function at the quadrature point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index for the point in the quadrature scheme. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_batch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the batch for which the element is being calculated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_alpha</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_beta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning <formula id="160">$ \beta $</formula> at the given batch and coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">metric_tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">int_volume</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The integral volume associated with each point used in the quadrature scheme. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A tuple containing<itemizedlist>
+<listitem><para>test_mass_weight, the quantity <formula id="386">$ w \beta B_i $</formula> which multiplies the value of the trial function,</para>
+</listitem><listitem><para>test_stiffness_weight, the quantity <formula id="385">$ w \alpha G^{-1} \nabla B_i $</formula> which multiplies the gradient of the trial function. </para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="359" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="359" bodyend="389"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1ac16a6aa98a88e1172c1f60b4ad7a168a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>calculate_derivs</declname>
+            <defname>calculate_derivs</defname>
+            <defval>true</defval>
+          </param>
+          <param>
+            <type>class <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></type>
+          </param>
+          <param>
+            <type>class IdxQuad</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt;</type>
+        <definition>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; detail_poisson::get_polar_bspline_vals_and_derivs</definition>
+        <argsstring>(IdxQuad idx_quad, Idx&lt; PolarBSplinesRTheta &gt; idx)</argsstring>
+        <name>get_polar_bspline_vals_and_derivs</name>
+        <qualifiedname>detail_poisson::get_polar_bspline_vals_and_derivs</qualifiedname>
+        <param>
+          <type>IdxQuad</type>
+          <declname>idx_quad</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The polar bsplines which cover the singular point are linear combinations of tensor product bsplines so they are evaluated using PolarBSplines::eval_basis_and_n_derivs. The polar bsplines which do not cover the singular point should be passed as a 2D index (see the overload below).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>calculate_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, the value and the derivatives are calculated. If false, only the value is calculated.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The quadrature point where the polar bspline should be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of a polar bspline which covers the singular point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of the polar bspline if calculate_derivs is false. Otherwise a tuple containing the value and the derivatives of the polar bspline. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="54" bodyend="98"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="23" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="17" column="1"/>
   </compounddef>
 </doxygen>

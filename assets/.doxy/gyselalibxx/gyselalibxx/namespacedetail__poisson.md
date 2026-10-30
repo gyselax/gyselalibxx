@@ -60,7 +60,8 @@
 |  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (IdxQuad idx\_quad, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; start\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; end\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; start\_knot\_theta, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; end\_knot\_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the quadrature range between a provided set of knots._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_support\_quadrature**](#function-get_support_quadrature) (Idx&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the range of quadrature points in the support of a tensor product B-spline._  |
-|  KOKKOS\_FUNCTION Idx&lt; DDom &gt; | [**mod\_add**](#function-mod_add) (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx\_step, IdxRange&lt; DDom &gt; idx\_range) <br> |
+|  KOKKOS\_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous\_dimension\_type, typename QDimThetaMesh::continuous\_dimension\_type &gt; &gt; | [**get\_test\_weights**](#function-get_test_weights) (double basis\_val\_test, DVector&lt; typename QDimRMesh::continuous\_dimension\_type::Dual, typename QDimThetaMesh::continuous\_dimension\_type::Dual &gt; basis\_derivs\_test, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad, IdxBatch idx\_batch, CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, MetricTensorType const & metric\_tensor, DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt; int\_volume) <br>_Computes the test\_stiffness\_weight and test\_mass\_weight for a given quadrature point._  |
+|  KOKKOS\_FUNCTION Idx&lt; DDom &gt; | [**mod\_add**](#function-mod_add) (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx\_step, IdxRange&lt; DDom &gt; idx\_range) <br>_Add an idx\_step to an idx in such a way that the result remains in the idx\_range._  |
 |  KOKKOS\_FUNCTION IdxStep&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; | [**theta\_mod**](#function-theta_mod) (IdxStep&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxType | [**theta\_mod**](#function-theta_mod) (IdxType idx) <br>_Calculates the index which is inside the poloidal domain using the periodicity properties._  |
 
@@ -287,8 +288,73 @@ The range of quadrature points in the support of the B-spline.
 
 
 
+### function get\_test\_weights 
+
+_Computes the test\_stiffness\_weight and test\_mass\_weight for a given quadrature point._ 
+```C++
+template<class QDimRMesh, class QDimThetaMesh, class IdxBatch, class CoeffAlpha, class CoeffBeta, concepts::MetricTensor MetricTensorType>
+KOKKOS_FUNCTION std::tuple< double, DVector< typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type > > detail_poisson::get_test_weights (
+    double basis_val_test,
+    DVector< typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual > basis_derivs_test,
+    Idx< QDimRMesh, QDimThetaMesh > idx_quad,
+    IdxBatch idx_batch,
+    CoeffAlpha const & coeff_alpha,
+    CoeffBeta const & coeff_beta,
+    MetricTensorType const & metric_tensor,
+    DField< IdxRange< QDimRMesh, QDimThetaMesh > > int_volume
+) 
+```
+
+
+
+The weak integral element is \(w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j)\) where \(w\) is the integral volume, \(B_i\) is the test function and \(B_j\) is the trial function. This function computes \(w \alpha G^{-1} \nabla B_i\) and \(w \beta B_i\) so that the weak integral element can be computed from the values and derivatives of the trial function alone.
+
+
+
+
+**Template parameters:**
+
+
+* `QDimRMesh` [**Quadrature**](classQuadrature.md) mesh in radial direction. 
+* `QDimThetaMesh` [**Quadrature**](classQuadrature.md) mesh in poloidal direction.
+
+
+
+**Parameters:**
+
+
+* `basis_val_test` The value of the test basis function at the quadrature point. 
+* `basis_derivs_test` The gradient of the test basis function at the quadrature point. 
+* `idx_quad` The index for the point in the quadrature scheme. 
+* `idx_batch` The index of the batch for which the element is being calculated. 
+* `coeff_alpha` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\alpha\) at the given batch and coordinate. 
+* `coeff_beta` A callable with signature `double operator()(IdxBatch, CoordRTheta)` returning \(\beta\) at the given batch and coordinate. 
+* `metric_tensor` The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. 
+* `int_volume` The integral volume associated with each point used in the quadrature scheme. 
+
+
+
+**Returns:**
+
+A tuple containing
+* test\_mass\_weight, the quantity \(w \beta B_i\) which multiplies the value of the trial function,
+* test\_stiffness\_weight, the quantity \(w \alpha G^{-1} \nabla B_i\) which multiplies the gradient of the trial function. 
+
+
+
+
+
+
+
+        
+
+<hr>
+
+
+
 ### function mod\_add 
 
+_Add an idx\_step to an idx in such a way that the result remains in the idx\_range._ 
 ```C++
 template<typename DDom, std::enable_if_t< DDom::continuous_dimension_type::PERIODIC, bool >>
 KOKKOS_FUNCTION Idx< DDom > detail_poisson::mod_add (
@@ -389,5 +455,5 @@ The corresponding index inside the domain.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp`
 

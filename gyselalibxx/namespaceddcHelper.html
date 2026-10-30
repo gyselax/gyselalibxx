@@ -730,6 +730,10 @@
 <td style="text-align: left;"><a href="#function-get_idx_from_linear_index"><strong>get_idx_from_linear_index</strong></a> (IdxRange&lt; Dims... &gt; const &amp; idx_range, std::size_t linear_idx) <br><em>Get the multi-dimensional index found at a given position in an index range.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION std::size_t</td>
+<td style="text-align: left;"><a href="#function-get_linear_index_from_idx"><strong>get_linear_index_from_idx</strong></a> (IdxRange&lt; Dims... &gt; const &amp; idx_range, Idx&lt; Dims... &gt; const &amp; idx) <br><em>Get the position of a multi-dimensional index in an index range.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="#function-maximum_distance_between_adjacent_points"><strong>maximum_distance_between_adjacent_points</strong></a> (IdxRange&lt; GridDim &gt; const &amp; idx_range) <br><em>Computes the maximum distance between two adjacent points within an IdxRange.</em></td>
 </tr>
@@ -1111,6 +1115,24 @@ KOKKOS_INLINE_FUNCTION Idx&lt; Dims... &gt; ddcHelper::get_idx_from_linear_index
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The index found at the position linear_idx. </p>
+<hr>
+
+<h3 id="function-get_linear_index_from_idx">function get_linear_index_from_idx</h3>
+<p><em>Get the position of a multi-dimensional index in an index range.</em> </p>
+<pre><code class="language-C++">template&lt;class... Dims&gt;
+KOKKOS_INLINE_FUNCTION std::size_t ddcHelper::get_linear_index_from_idx (
+    IdxRange&lt; Dims... &gt; const &amp; idx_range,
+    Idx&lt; Dims... &gt; const &amp; idx
+) 
+</code></pre>
+<p>The index range is traversed in layout_right order (the last dimension varies fastest). This is the linearisation used to store a contiguous layout_right Field defined on the index range. It is the inverse of get_idx_from_linear_index.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_range</code> The index range. </li>
+<li><code>idx</code> The index whose position is calculated (idx_range.contains(idx) must be true).</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The position of the index in the index range. </p>
 <hr>
 
 <h3 id="function-maximum_distance_between_adjacent_points">function maximum_distance_between_adjacent_points</h3>

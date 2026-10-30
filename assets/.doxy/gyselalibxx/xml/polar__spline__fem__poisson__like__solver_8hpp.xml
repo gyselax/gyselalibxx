@@ -30,7 +30,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="55">
+      <node id="47">
         <label>inverse_jacobian_matrix.hpp</label>
         <link refid="inverse__jacobian__matrix_8hpp_source"/>
         <childnode refid="23" relation="include">
@@ -42,7 +42,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="54">
+      <node id="46">
         <label>metric_tensor_evaluator.hpp</label>
         <link refid="metric__tensor__evaluator_8hpp_source"/>
         <childnode refid="24" relation="include">
@@ -55,7 +55,7 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="55" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
@@ -262,7 +262,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="56">
+      <node id="57">
         <label>polar_spline_evaluator.hpp</label>
         <link refid="polar__spline__evaluator_8hpp_source"/>
         <childnode refid="31" relation="include">
@@ -290,19 +290,19 @@
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="52">
         <label>inf_norm_residual_criterion.hpp</label>
         <link refid="inf__norm__residual__criterion_8hpp_source"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="56">
         <label>matrix_batch.hpp</label>
         <link refid="matrix__batch_8hpp_source"/>
         <childnode refid="22" relation="include">
@@ -310,34 +310,56 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="49">
         <label>matrix_batch_csr.hpp</label>
         <link refid="matrix__batch__csr_8hpp_source"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
       </node>
-      <node id="50">
+      <node id="53">
         <label>matrix_utils.hpp</label>
         <link refid="matrix__utils_8hpp_source"/>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
         <childnode refid="51" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
-        </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
         <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>fem_poisson_assembler_utils.hpp</label>
+        <link refid="fem__poisson__assembler__utils_8hpp_source"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
       <node id="42">
@@ -363,21 +385,25 @@
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
         <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
         </childnode>
         <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
-        </childnode>
-        <childnode refid="56" relation="include">
-        </childnode>
         <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -392,7 +418,43 @@
         <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="59">
+        <label>tensor_product_bspline_poisson_assembler.hpp</label>
+        <link refid="tensor__product__bspline__poisson__assembler_8hpp_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
         <label>gauss_legendre_integration.hpp</label>
         <link refid="gauss__legendre__integration_8hpp_source"/>
         <childnode refid="16" relation="include">
@@ -408,7 +470,7 @@
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="59">
+      <node id="62">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="26" relation="include">
@@ -424,7 +486,7 @@
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="57">
+      <node id="58">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="8" relation="include">
@@ -432,7 +494,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="58">
+      <node id="61">
         <label>volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="8" relation="include">
@@ -443,7 +505,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="59" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
       </node>
       <node id="36">
@@ -534,17 +596,20 @@
       <node id="4">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="47">
+      <node id="50">
         <label>ginkgo/extensions/kokkos.hpp</label>
       </node>
-      <node id="51">
+      <node id="54">
         <label>ginkgo/extensions/kokkos/spaces.hpp</label>
       </node>
-      <node id="52">
+      <node id="55">
         <label>ginkgo/extensions/kokkos/types.hpp</label>
       </node>
-      <node id="48">
+      <node id="51">
         <label>ginkgo/ginkgo.hpp</label>
+      </node>
+      <node id="60">
+        <label>memory</label>
       </node>
       <node id="11">
         <label>optional</label>
@@ -942,7 +1007,7 @@
 <codeline lineno="459"><highlight class="normal"></highlight></codeline>
 <codeline lineno="460"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeQuadratureRTheta<sp/>idx_range_quad_singular<sp/>=<sp/>m_idxrange_quadrature_singular;</highlight></codeline>
 <codeline lineno="461"><highlight class="normal"></highlight></codeline>
-<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classPolarSplineFEMPoissonLikeAssembler_1a6164b557734315adeb0fb72323cdab33" kindref="member">PoissonAssembler::TensorBSplineStash</ref><sp/>bspline_stash</highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classPolarSplineFEMPoissonLikeAssembler_1a4b4f517917b224c0263adc9d5ae6be03" kindref="member">PoissonAssembler::TensorBSplineStash</ref><sp/>bspline_stash</highlight></codeline>
 <codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_assembler.get_tensor_bspline_stash();</highlight></codeline>
 <codeline lineno="464"><highlight class="normal"></highlight></codeline>
 <codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Fill<sp/>b</highlight><highlight class="normal"></highlight></codeline>
@@ -1012,7 +1077,7 @@
 <codeline lineno="529"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxQuadratureRTheta<sp/>idx_quad(idx_quad_r,<sp/>idx_quad_theta);</highlight></codeline>
 <codeline lineno="530"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoordRTheta<sp/>coord(ddc::coordinate(idx_quad));</highlight></codeline>
 <codeline lineno="531"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b(batch_idx,<sp/>idx)<sp/>+=<sp/>eval_rhs(rhs,<sp/>batch_idx,<sp/>coord)</highlight></codeline>
-<codeline lineno="532"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>bspline_stash.<ref refid="structdetail__poisson_1_1TensorBSplineStash_1a22db8c1da1c6c1f71d5b527c14c385af" kindref="member">vals</ref>(idx_quad,<sp/>idx_2d)</highlight></codeline>
+<codeline lineno="532"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>bspline_stash.vals(idx_quad,<sp/>idx_2d)</highlight></codeline>
 <codeline lineno="533"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>int_volume(idx_quad);</highlight></codeline>
 <codeline lineno="534"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="535"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>

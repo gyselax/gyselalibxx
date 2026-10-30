@@ -85,8 +85,10 @@
         <link refid="matrix__batch__csr_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_ell.hpp</label>
         <link refid="matrix__batch__ell_8hpp_source"/>
       </node>
@@ -97,7 +99,7 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -118,6 +120,12 @@
         <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp</label>
+        <link refid="tensor__product__bspline__poisson__assembler_8hpp_source"/>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

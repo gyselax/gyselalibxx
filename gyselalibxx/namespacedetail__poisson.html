@@ -612,8 +612,12 @@
 <td style="text-align: left;"><a href="#function-get_support_quadrature"><strong>get_support_quadrature</strong></a> (Idx&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front) <br><em>Compute the range of quadrature points in the support of a tensor product B-spline.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-get_test_weights"><strong>get_test_weights</strong></a> (double basis_val_test, DVector&lt; typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual &gt; basis_derivs_test, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt; int_volume) <br><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION Idx&lt; DDom &gt;</td>
-<td style="text-align: left;"><a href="#function-mod_add"><strong>mod_add</strong></a> (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx_step, IdxRange&lt; DDom &gt; idx_range) <br></td>
+<td style="text-align: left;"><a href="#function-mod_add"><strong>mod_add</strong></a> (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx_step, IdxRange&lt; DDom &gt; idx_range) <br><em>Add an idx_step to an idx in such a way that the result remains in the idx_range.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION IdxStep&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
@@ -720,7 +724,45 @@ KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_s
 <p>The range of quadrature points in the support of the B-spline. </p>
 <hr>
 
+<h3 id="function-get_test_weights">function get_test_weights</h3>
+<p><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em> </p>
+<pre><code class="language-C++">template&lt;class QDimRMesh, class QDimThetaMesh, class IdxBatch, class CoeffAlpha, class CoeffBeta, concepts::MetricTensor MetricTensorType&gt;
+KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type &gt; &gt; detail_poisson::get_test_weights (
+    double basis_val_test,
+    DVector&lt; typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual &gt; basis_derivs_test,
+    Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad,
+    IdxBatch idx_batch,
+    CoeffAlpha const &amp; coeff_alpha,
+    CoeffBeta const &amp; coeff_beta,
+    MetricTensorType const &amp; metric_tensor,
+    DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt; int_volume
+) 
+</code></pre>
+<p>The weak integral element is <span class="arithmatex">\(w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j)\)</span> where <span class="arithmatex">\(w\)</span> is the integral volume, <span class="arithmatex">\(B_i\)</span> is the test function and <span class="arithmatex">\(B_j\)</span> is the trial function. This function computes <span class="arithmatex">\(w \alpha G^{-1} \nabla B_i\)</span> and <span class="arithmatex">\(w \beta B_i\)</span> so that the weak integral element can be computed from the values and derivatives of the trial function alone.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>QDimRMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in radial direction. </li>
+<li><code>QDimThetaMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in poloidal direction.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>basis_val_test</code> The value of the test basis function at the quadrature point. </li>
+<li><code>basis_derivs_test</code> The gradient of the test basis function at the quadrature point. </li>
+<li><code>idx_quad</code> The index for the point in the quadrature scheme. </li>
+<li><code>idx_batch</code> The index of the batch for which the element is being calculated. </li>
+<li><code>coeff_alpha</code> A callable with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_beta</code> A callable with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate. </li>
+<li><code>metric_tensor</code> The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. </li>
+<li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A tuple containing
+* test_mass_weight, the quantity <span class="arithmatex">\(w \beta B_i\)</span> which multiplies the value of the trial function,
+* test_stiffness_weight, the quantity <span class="arithmatex">\(w \alpha G^{-1} \nabla B_i\)</span> which multiplies the gradient of the trial function. </p>
+<hr>
+
 <h3 id="function-mod_add">function mod_add</h3>
+<p><em>Add an idx_step to an idx in such a way that the result remains in the idx_range.</em> </p>
 <pre><code class="language-C++">template&lt;typename DDom, std::enable_if_t&lt; DDom::continuous_dimension_type::PERIODIC, bool &gt;&gt;
 KOKKOS_FUNCTION Idx&lt; DDom &gt; detail_poisson::mod_add (
     Idx&lt; DDom &gt; idx,
@@ -770,7 +812,7 @@ KOKKOS_INLINE_FUNCTION IdxType detail_poisson::theta_mod (
 <hr>
 
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp</code></p></div>
               
             </div>
           </div><footer>

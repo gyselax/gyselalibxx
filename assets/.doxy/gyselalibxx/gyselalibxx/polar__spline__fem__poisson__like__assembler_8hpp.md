@@ -16,12 +16,14 @@
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
+* `#include "fem_poisson_assembler_utils.hpp"`
 * `#include "gauss_legendre_integration.hpp"`
 * `#include "math_tools.hpp"`
 * `#include "matrix_batch_csr.hpp"`
 * `#include "metric_tensor_evaluator.hpp"`
 * `#include "polar_spline_evaluator.hpp"`
 * `#include "quadrature_coeffs_nd.hpp"`
+* `#include "tensor_product_bspline_poisson_assembler.hpp"`
 * `#include "vector_field.hpp"`
 * `#include "view.hpp"`
 * `#include "volume_quadrature_nd.hpp"`
@@ -50,7 +52,6 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), typename QDimRMesh, typename QDimThetaMesh, MetricTensorType, typename IdxRangeFull&gt;<br>_An operator to assemble a Poisson-like stiffness matrix using polar B-splines._  |
-| struct | [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md) &lt;typename QDimRMesh, typename QDimThetaMesh, typename [**BSplinesR**](structBSplinesR.md), typename [**BSplinesTheta**](structBSplinesTheta.md)&gt;<br>_The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._  |
 
 
 

@@ -92,6 +92,7 @@
 |  auto | [**get**](#function-get) (VectorFieldType & field) noexcept<br> |
 |  KOKKOS\_INLINE\_FUNCTION CoordType | [**get\_coordinate**](#function-get_coordinate) (CoordOrIdxType const & coord\_or\_idx) <br>_Get the coordinate described by a coordinate or an index._  |
 |  KOKKOS\_INLINE\_FUNCTION Idx&lt; Dims... &gt; | [**get\_idx\_from\_linear\_index**](#function-get_idx_from_linear_index) (IdxRange&lt; Dims... &gt; const & idx\_range, std::size\_t linear\_idx) <br>_Get the multi-dimensional index found at a given position in an index range._  |
+|  KOKKOS\_INLINE\_FUNCTION std::size\_t | [**get\_linear\_index\_from\_idx**](#function-get_linear_index_from_idx) (IdxRange&lt; Dims... &gt; const & idx\_range, Idx&lt; Dims... &gt; const & idx) <br>_Get the position of a multi-dimensional index in an index range._  |
 |  double | [**maximum\_distance\_between\_adjacent\_points**](#function-maximum_distance_between_adjacent_points) (IdxRange&lt; GridDim &gt; const & idx\_range) <br>_Computes the maximum distance between two adjacent points within an IdxRange._  |
 |  bool | [**points\_are\_subset**](#function-points_are_subset) (IdxRange&lt; GridSubSet &gt; const & idx\_range\_subset, IdxRange&lt; GridSuperSet &gt; const & idx\_range\_superset, ddc::Real tol=std::numeric\_limits&lt; ddc::Real &gt;::epsilon()) <br> |
 |  KOKKOS\_INLINE\_FUNCTION void | [**restrict\_to\_bspline\_domain**](#function-restrict_to_bspline_domain) (Coord&lt; typename BSpline::continuous\_dimension\_type &gt; & coord) <br>_Calculate the Coordinate inside the domain._  |
@@ -862,6 +863,46 @@ The index range is traversed in layout\_right order (the last dimension varies f
 **Returns:**
 
 The index found at the position linear\_idx. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_linear\_index\_from\_idx 
+
+_Get the position of a multi-dimensional index in an index range._ 
+```C++
+template<class... Dims>
+KOKKOS_INLINE_FUNCTION std::size_t ddcHelper::get_linear_index_from_idx (
+    IdxRange< Dims... > const & idx_range,
+    Idx< Dims... > const & idx
+) 
+```
+
+
+
+The index range is traversed in layout\_right order (the last dimension varies fastest). This is the linearisation used to store a contiguous layout\_right Field defined on the index range. It is the inverse of get\_idx\_from\_linear\_index.
+
+
+
+
+**Parameters:**
+
+
+* `idx_range` The index range. 
+* `idx` The index whose position is calculated (idx\_range.contains(idx) must be true).
+
+
+
+**Returns:**
+
+The position of the index in the index range. 
 
 
 

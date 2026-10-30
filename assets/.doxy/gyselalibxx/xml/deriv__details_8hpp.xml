@@ -52,11 +52,11 @@
         <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="91">
+      <node id="93">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp</label>
         <link refid="bsl__advection__vx_8hpp_source"/>
       </node>
-      <node id="92">
+      <node id="94">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp</label>
         <link refid="bsl__advection__x_8hpp_source"/>
       </node>
@@ -135,7 +135,7 @@
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="88" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
@@ -157,8 +157,12 @@
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
       </node>
-      <node id="88">
+      <node id="90">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
         <link refid="toroidal__to__cylindrical_8hpp_source"/>
       </node>
@@ -249,9 +253,11 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
@@ -362,7 +368,7 @@
         <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="101">
+      <node id="103">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
         <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
       </node>
@@ -494,69 +500,69 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp</label>
         <link refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source"/>
       </node>
-      <node id="93">
+      <node id="95">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp</label>
         <link refid="gyroaverage__operator_8hpp_source"/>
       </node>
-      <node id="94">
+      <node id="96">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/extrapolation_rule_choice.hpp</label>
         <link refid="extrapolation__rule__choice_8hpp_source"/>
-        <childnode refid="95" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
-      <node id="90">
+      <node id="92">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp</label>
         <link refid="i__interpolation_8hpp_source"/>
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="91" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="94" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
         <childnode refid="81" relation="include">
         </childnode>
-        <childnode refid="93" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
-      <node id="89">
+      <node id="91">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp</label>
         <link refid="lagrange__basis__non__uniform_8hpp_source"/>
-        <childnode refid="90" relation="include">
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
         </childnode>
         <childnode refid="97" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+      </node>
+      <node id="99">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
+        <link refid="lagrange__evaluator_8hpp_source"/>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
       <node id="97">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
-        <link refid="lagrange__evaluator_8hpp_source"/>
-        <childnode refid="95" relation="include">
-        </childnode>
-        <childnode refid="98" relation="include">
-        </childnode>
-      </node>
-      <node id="95">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
         <link refid="lagrange__interpolation_8hpp_source"/>
       </node>
-      <node id="98">
+      <node id="100">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp</label>
         <link refid="nd__lagrange__evaluator_8hpp_source"/>
-        <childnode refid="95" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="101">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
         <childnode refid="83" relation="include">
@@ -568,7 +574,7 @@
         <childnode refid="44" relation="include">
         </childnode>
       </node>
-      <node id="96">
+      <node id="98">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</label>
         <link refid="spline__interpolation_8hpp_source"/>
         <childnode refid="45" relation="include">
@@ -651,11 +657,13 @@
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
         <childnode refid="89" relation="include">
-        </childnode>
-        <childnode refid="99" relation="include">
-        </childnode>
-        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -766,33 +774,41 @@
         <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="102">
+      <node id="104">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
         <link refid="fem__1d__poisson__solver_8hpp_source"/>
       </node>
-      <node id="103">
+      <node id="86">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp</label>
+        <link refid="fem__poisson__assembler__utils_8hpp_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="105">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp</label>
         <link refid="fft__poisson__solver_8hpp_source"/>
       </node>
-      <node id="100">
+      <node id="102">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp</label>
         <link refid="ipoisson__solver_8hpp_source"/>
-        <childnode refid="101" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="102" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
-        </childnode>
-      </node>
-      <node id="86">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</label>
-        <link refid="polar__spline__fem__poisson__like__assembler_8hpp_source"/>
-        <childnode refid="87" relation="include">
+        <childnode refid="105" relation="include">
         </childnode>
       </node>
       <node id="87">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</label>
+        <link refid="polar__spline__fem__poisson__like__assembler_8hpp_source"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</label>
         <link refid="polar__spline__fem__poisson__like__solver_8hpp_source"/>
         <childnode refid="43" relation="include">
@@ -804,6 +820,12 @@
         <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp</label>
+        <link refid="tensor__product__bspline__poisson__assembler_8hpp_source"/>
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="73">

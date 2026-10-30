@@ -9,6 +9,7 @@
     <includes refid="matrix__batch_8hpp" local="yes">matrix_batch.hpp</includes>
     <includes refid="matrix__utils_8hpp" local="yes">matrix_utils.hpp</includes>
     <includedby refid="polar__spline__fem__poisson__like__assembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</includedby>
+    <includedby refid="tensor__product__bspline__poisson__assembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp</includedby>
     <incdepgraph>
       <node id="5">
         <label>inf_norm_residual_criterion.hpp</label>
@@ -138,6 +139,8 @@
         <link refid="matrix__batch__csr_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
       <node id="2">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</label>
@@ -157,6 +160,12 @@
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp</label>
+        <link refid="tensor__product__bspline__poisson__assembler_8hpp_source"/>
+        <childnode refid="2" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

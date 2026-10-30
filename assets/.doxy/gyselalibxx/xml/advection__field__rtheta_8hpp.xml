@@ -459,19 +459,19 @@
         <childnode refid="32" relation="include">
         </childnode>
       </node>
-      <node id="64">
+      <node id="65">
         <label>inf_norm_residual_criterion.hpp</label>
         <link refid="inf__norm__residual__criterion_8hpp_source"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
       </node>
-      <node id="68">
+      <node id="69">
         <label>matrix_batch.hpp</label>
         <link refid="matrix__batch_8hpp_source"/>
         <childnode refid="27" relation="include">
@@ -479,34 +479,56 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="61">
+      <node id="62">
         <label>matrix_batch_csr.hpp</label>
         <link refid="matrix__batch__csr_8hpp_source"/>
-        <childnode refid="62" relation="include">
-        </childnode>
         <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="64" relation="include">
         </childnode>
-        <childnode refid="68" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="65" relation="include">
         </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
       </node>
-      <node id="65">
+      <node id="66">
         <label>matrix_utils.hpp</label>
         <link refid="matrix__utils_8hpp_source"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="66" relation="include">
-        </childnode>
         <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>fem_poisson_assembler_utils.hpp</label>
+        <link refid="fem__poisson__assembler__utils_8hpp_source"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="57">
@@ -532,21 +554,25 @@
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="61" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="69" relation="include">
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
       </node>
       <node id="55">
@@ -561,7 +587,43 @@
         <childnode refid="58" relation="include">
         </childnode>
       </node>
-      <node id="60">
+      <node id="71">
+        <label>tensor_product_bspline_poisson_assembler.hpp</label>
+        <link refid="tensor__product__bspline__poisson__assembler_8hpp_source"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
         <label>gauss_legendre_integration.hpp</label>
         <link refid="gauss__legendre__integration_8hpp_source"/>
         <childnode refid="11" relation="include">
@@ -577,7 +639,7 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="71">
+      <node id="74">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="12" relation="include">
@@ -593,7 +655,7 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="69">
+      <node id="70">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="2" relation="include">
@@ -601,7 +663,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="73">
         <label>volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="2" relation="include">
@@ -612,7 +674,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -703,16 +765,16 @@
       <node id="8">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="62">
+      <node id="63">
         <label>ginkgo/extensions/kokkos.hpp</label>
       </node>
-      <node id="66">
+      <node id="67">
         <label>ginkgo/extensions/kokkos/spaces.hpp</label>
       </node>
-      <node id="67">
+      <node id="68">
         <label>ginkgo/extensions/kokkos/types.hpp</label>
       </node>
-      <node id="63">
+      <node id="64">
         <label>ginkgo/ginkgo.hpp</label>
       </node>
       <node id="37">
@@ -720,6 +782,9 @@
       </node>
       <node id="38">
         <label>iqnsolver.hpp</label>
+      </node>
+      <node id="72">
+        <label>memory</label>
       </node>
       <node id="49">
         <label>optional</label>

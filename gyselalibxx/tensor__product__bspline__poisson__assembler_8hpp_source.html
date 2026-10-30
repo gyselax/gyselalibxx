@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>File tensor_product_bspline_poisson_assembler.hpp - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../docs/stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File tensor_product_bspline_poisson_assembler.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/tensor__product__bspline__poisson__assembler_8hpp_source.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../index.html" class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../toolchains/index.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/first_steps/landau_damping_tutorial.html">Your First Simulation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Core Concepts</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/core_concepts/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/core_concepts/mathematical_and_physical_conventions.html">Mathematical and Physical Conventions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/core_concepts/coding_covariant_and_contravariant_tensors.html">Covariant and Contravariant Tensors</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Library</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_foot_finders</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/advection/polar_foot_finders/index.html">Ppolar_foot_finders/README.mdolar foot finder implementation details</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/coord_transformations/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >gyroaverage</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/gyroaverage/index.html">Gyroaverage operator (for circular geometry)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utility functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/interface_derivatives/index.html">Interface derivatives test</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">How-to Guides</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/how_to/profiling.html">Measuring Performance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/how_to/Debugging_workflow.html">Debugging</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/how_to/Development_tips.html">Running Static Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/how_to/Using_git.html">Using Git</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Problems</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contributing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/CONTRIBUTING.html">How to Contribute</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/contributing/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/contributing/Adding_docs.html">Writing Documentation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File tensor_product_bspline_poisson_assembler.hpp</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/tensor__product__bspline__poisson__assembler_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="file-tensor_product_bspline_poisson_assemblerhpp">File tensor_product_bspline_poisson_assembler.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a> <strong>&gt;</strong> <a href="tensor__product__bspline__poisson__assembler_8hpp.html"><strong>tensor_product_bspline_poisson_assembler.hpp</strong></a></p>
+<p><a href="tensor__product__bspline__poisson__assembler_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+#pragma once
+
+#include &lt;algorithm&gt;
+#include &lt;array&gt;
+#include &lt;memory&gt;
+#include &lt;optional&gt;
+#include &lt;source_location&gt;
+#include &lt;tuple&gt;
+
+#include &lt;ddc/ddc.hpp&gt;
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "fem_poisson_assembler_utils.hpp"
+#include "math_tools.hpp"
+#include "matrix_batch_csr.hpp"
+#include "metric_tensor_evaluator.hpp"
+#include "vector_field.hpp"
+#include "view.hpp"
+
+
+template &lt;
+        typename GridR,
+        typename GridTheta,
+        typename BSplinesR,
+        typename BSplinesTheta,
+        typename QDimRMesh,
+        typename QDimThetaMesh,
+        concepts::MetricTensor MetricTensorType,
+        typename IdxRangeFull = IdxRange&lt;GridR, GridTheta&gt;&gt;
+class TensorProductBSplinePoissonAssembler
+{
+public:
+    using R = typename GridR::continuous_dimension_type;
+    using Theta = typename GridTheta::continuous_dimension_type;
+
+    static_assert(R::IS_CONTRAVARIANT);
+    static_assert(Theta::IS_CONTRAVARIANT);
+    static_assert(
+            std::is_same_v&lt;typename MetricTensorType::CoordArg, Coord&lt;R, Theta&gt;&gt;,
+            "The metric tensor must be evaluated on (r, theta) coordinates.");
+    static_assert(
+            !R::PERIODIC &amp;&amp; Theta::PERIODIC,
+            "TensorProductBSplinePoissonAssembler is currently only implemented for a ring "
+            "geometry");
+
+    using IdxRangeBSRTheta = IdxRange&lt;BSplinesR, BSplinesTheta&gt;;
+
+    using IdxRangeBatch = ddc::remove_dims_of_t&lt;IdxRangeFull, GridR, GridTheta&gt;;
+
+    using IdxRangeQuadratureRTheta = IdxRange&lt;QDimRMesh, QDimThetaMesh&gt;;
+
+    using TensorBSplineStash = detail_poisson::
+            TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;;
+
+private:
+    using KnotsR = ddc::knot_discrete_dimension_t&lt;BSplinesR&gt;;
+    using KnotsTheta = ddc::knot_discrete_dimension_t&lt;BSplinesTheta&gt;;
+
+    using IdxRangeBSR = IdxRange&lt;BSplinesR&gt;;
+    using IdxRangeBSTheta = IdxRange&lt;BSplinesTheta&gt;;
+
+    using IdxBSR = Idx&lt;BSplinesR&gt;;
+    using IdxBSTheta = Idx&lt;BSplinesTheta&gt;;
+    using IdxBSRTheta = Idx&lt;BSplinesR, BSplinesTheta&gt;;
+
+    using IdxStepBSR = IdxStep&lt;BSplinesR&gt;;
+    using IdxStepBSTheta = IdxStep&lt;BSplinesTheta&gt;;
+
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+
+    using IdxRangeQuadratureR = IdxRange&lt;QDimRMesh&gt;;
+    using IdxRangeQuadratureTheta = IdxRange&lt;QDimThetaMesh&gt;;
+    using IdxQuadratureRTheta = Idx&lt;QDimRMesh, QDimThetaMesh&gt;;
+
+    using IdxRangeBasisStashR = IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt;&gt;;
+    using IdxRangeBasisStashTheta = IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;;
+
+    using QuadField = DField&lt;IdxRangeQuadratureRTheta&gt;;
+
+    static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
+    static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
+
+    // Number of cells over which a radial B-splines has its support
+    // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
+    static constexpr int s_n_non_zero_bases_r = BSplinesR::degree() + 1;
+
+    // Number of cells over which a poloidal B-splines has its support
+    static constexpr int s_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
+
+    // Maximum number of quadrature points in the support of a tensor product B-spline
+    static constexpr int s_n_quad_support_r = s_n_gauss_legendre_r * s_n_non_zero_bases_r;
+    static constexpr int s_n_quad_support_theta
+            = s_n_gauss_legendre_theta * s_n_non_zero_bases_theta;
+
+    // A view on team scratch memory
+    using ScratchView = Kokkos::View&lt;
+            double*,
+            Kokkos::LayoutRight,
+            Kokkos::DefaultExecutionSpace::scratch_memory_space,
+            Kokkos::MemoryTraits&lt;Kokkos::Unmanaged&gt;&gt;;
+
+    // The tensor basis functions in the FEM basis. The order of the rows and columns of the
+    // tensor-tensor matrix is the layout_right order of this index range.
+    IdxRangeBSRTheta m_idxrange_tensor_basis;
+
+    IdxRangeQuadratureR m_idxrange_quadrature_r;
+    IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
+    IdxRangeQuadratureRTheta m_idxrange_quadrature;
+
+    IdxRangeBatch m_idx_range_batch;
+
+    QuadField m_int_volume;
+
+    MetricTensorType m_metric_tensor;
+
+    // Values and derivatives of the non-zero 1D B-splines at the 1D quadrature points
+    DFieldMem&lt;IdxRangeBasisStashR&gt; m_basis_vals_r;
+    DFieldMem&lt;IdxRangeBasisStashTheta&gt; m_basis_vals_theta;
+    FieldMem&lt;IdxBSR, IdxRangeQuadratureR&gt; m_first_basis_r;
+    FieldMem&lt;IdxBSTheta, IdxRangeQuadratureTheta&gt; m_first_basis_theta;
+
+    // The nnz data structure of the matrix (see init_tensor_tensor_nnz_per_line)
+    Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; m_tensor_nnz_per_row;
+
+public:
+    explicit TensorProductBSplinePoissonAssembler(
+            QuadField int_volume,
+            MetricTensorType const&amp; metric_tensor,
+            IdxRangeFull idx_range_full,
+            IdxRangeBSRTheta idx_range_tensor_basis)
+        : m_idxrange_tensor_basis(idx_range_tensor_basis)
+        , m_idxrange_quadrature_r(
+                  Idx&lt;QDimRMesh&gt;(0),
+                  IdxStep&lt;QDimRMesh&gt;(
+                          s_n_gauss_legendre_r * ddc::discrete_space&lt;BSplinesR&gt;().ncells()))
+        , m_idxrange_quadrature_theta(
+                  Idx&lt;QDimThetaMesh&gt;(0),
+                  IdxStep&lt;QDimThetaMesh&gt;(
+                          s_n_gauss_legendre_theta * ddc::discrete_space&lt;BSplinesTheta&gt;().ncells()))
+        , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
+        , m_idx_range_batch(idx_range_full)
+        , m_int_volume(int_volume)
+        , m_metric_tensor(metric_tensor)
+        , m_basis_vals_r(IdxRangeBasisStashR(
+                  m_idxrange_quadrature_r,
+                  ddc::discrete_space&lt;BSplinesR&gt;().full_domain().take_first(
+                          IdxStepBSR(s_n_non_zero_bases_r)),
+                  IdxRange&lt;ddc::Deriv&lt;R&gt;&gt;(Idx&lt;ddc::Deriv&lt;R&gt;&gt;(0), IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(2))))
+        , m_basis_vals_theta(IdxRangeBasisStashTheta(
+                  m_idxrange_quadrature_theta,
+                  ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain().take_first(
+                          IdxStepBSTheta(s_n_non_zero_bases_theta)),
+                  IdxRange&lt;ddc::Deriv&lt;
+                          Theta&gt;&gt;(Idx&lt;ddc::Deriv&lt;Theta&gt;&gt;(0), IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(2))))
+        , m_first_basis_r(m_idxrange_quadrature_r)
+        , m_first_basis_theta(m_idxrange_quadrature_theta)
+        , m_tensor_nnz_per_row(
+                  "m_tensor_nnz_per_row "
+                  "(TensorProductBSplinePoissonAssembler::TensorProductBSplinePoissonAssembler)",
+                  m_idxrange_tensor_basis.size() + 1)
+    {
+        stash_basis_eval(get_field(m_basis_vals_r), get_field(m_first_basis_r));
+        stash_basis_eval(get_field(m_basis_vals_theta), get_field(m_first_basis_theta));
+        init_tensor_tensor_nnz_per_line(m_tensor_nnz_per_row);
+    }
+
+    TensorBSplineStash get_tensor_bspline_stash() const
+    {
+        return TensorBSplineStash {
+                get_const_field(m_basis_vals_r),
+                get_const_field(m_basis_vals_theta),
+                get_const_field(m_first_basis_r),
+                get_const_field(m_first_basis_theta)};
+    }
+
+    IdxRangeBSRTheta get_tensor_basis_idx_range() const
+    {
+        return m_idxrange_tensor_basis;
+    }
+
+    QuadField get_int_volume() const
+    {
+        return m_int_volume;
+    }
+
+    void setup_sparse_matrix(
+            std::unique_ptr&lt;
+                    MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG&gt;&gt;&amp;
+                    gko_matrix,
+            std::optional&lt;int&gt; max_iter = std::nullopt,
+            std::optional&lt;double&gt; res_tol = std::nullopt,
+            std::optional&lt;bool&gt; batch_solver_logger = std::nullopt,
+            std::optional&lt;int&gt; preconditioner_max_block_size = std::nullopt,
+            std::optional&lt;GkoMatrixResidualNorm&gt; residual_norm = std::nullopt) const
+    {
+        //CSR data storage
+        gko_matrix = std::make_unique&lt;
+                MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG&gt;&gt;(
+                m_idx_range_batch.size(),
+                m_idxrange_tensor_basis.size(),
+                n_tensor_tensor_elements(),
+                max_iter,
+                res_tol,
+                batch_solver_logger,
+                preconditioner_max_block_size,
+                residual_norm);
+        auto [values, col_idx, nnz_per_row] = gko_matrix-&gt;get_batch_csr();
+        Kokkos::deep_copy(nnz_per_row, 0);
+        init_nnz_per_line(nnz_per_row);
+        compute_col_idx(col_idx, nnz_per_row, 0);
+    }
+
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
+    void operator()(
+            std::unique_ptr&lt;
+                    MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG&gt;&gt; const&amp;
+                    gko_matrix,
+            CoeffAlpha const&amp; coeff_alpha,
+            CoeffBeta const&amp; coeff_beta) const
+    {
+        //CSR data storage
+        auto [values, col_idx, nnz_per_row] = gko_matrix-&gt;get_batch_csr();
+
+        compute_elements(coeff_alpha, coeff_beta, values, col_idx, nnz_per_row, 0);
+
+        gko_matrix-&gt;setup_solver();
+    }
+
+    template &lt;class QDimMesh, class BSplines, class DerivDim&gt;
+    static void stash_basis_eval(
+            DField&lt;IdxRange&lt;QDimMesh, BSplines, DerivDim&gt;&gt; basis_vals,
+            Field&lt;Idx&lt;BSplines&gt;, IdxRange&lt;QDimMesh&gt;&gt; first_basis)
+    {
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                get_idx_range(first_basis),
+                KOKKOS_LAMBDA(Idx&lt;QDimMesh&gt; idx_quad) {
+                    constexpr std::size_t n_non_zero = BSplines::degree() + 1;
+                    std::array&lt;double, n_non_zero * 2&gt; data;
+                    DSpan2D derivs(data.data(), n_non_zero, 2);
+                    first_basis(idx_quad) = ddc::discrete_space&lt;BSplines&gt;().eval_basis_and_n_derivs(
+                            derivs,
+                            ddc::coordinate(idx_quad),
+                            1);
+                    DField&lt;IdxRange&lt;BSplines, DerivDim&gt;&gt; basis_vals_at_quad = basis_vals[idx_quad];
+                    for (std::size_t i(0); i &lt; n_non_zero; ++i) {
+                        for (std::size_t k(0); k &lt; 2; ++k) {
+                            basis_vals_at_quad(IdxStep&lt;BSplines&gt;(i), IdxStep&lt;DerivDim&gt;(k))
+                                    = derivs(i, k);
+                        }
+                    }
+                });
+    }
+
+    int n_tensor_tensor_elements() const
+    {
+        const int nbasis_r = m_idxrange_tensor_basis.template extent&lt;BSplinesR&gt;().value();
+        const int nbasis_theta = m_idxrange_tensor_basis.template extent&lt;BSplinesTheta&gt;().value();
+        const int n_stencil_theta
+                = nbasis_theta * std::min(int(1 + 2 * BSplinesTheta::degree()), nbasis_theta);
+        const int n_stencil_r = nbasis_r * (1 + 2 * BSplinesR::degree())
+                                - (1 + BSplinesR::degree()) * BSplinesR::degree();
+        // These elements have a tensor product structure
+        return n_stencil_r * n_stencil_theta;
+    }
+
+    void init_nnz_per_line(Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt;
+                                   nnz_per_row) const
+    {
+        assert(nnz_per_row.size() == m_tensor_nnz_per_row.size());
+        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; tensor_nnz_per_row
+                = m_tensor_nnz_per_row;
+        const std::source_location location = std::source_location::current();
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::RangePolicy&lt;Kokkos::DefaultExecutionSpace&gt;(0, tensor_nnz_per_row.size()),
+                KOKKOS_LAMBDA(const int idx) { nnz_per_row(idx) += tensor_nnz_per_row(idx); });
+    }
+
+    void compute_col_idx(
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
+                    col_idx_csr,
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
+                    nnz_per_row_csr,
+            int first_col_offset) const
+    {
+        IdxRangeBSRTheta idx_range_tensor_basis = m_idxrange_tensor_basis;
+
+        IdxRangeBSR idx_range_fem_r(idx_range_tensor_basis);
+        IdxRangeBSTheta full_idx_range_theta(idx_range_tensor_basis);
+
+        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
+                tensor_nnz_per_row
+                = m_tensor_nnz_per_row;
+
+        const std::source_location location = std::source_location::current();
+
+        // Calculate the matrix elements following a stencil
+        // Teams loop over rows
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::TeamPolicy&lt;&gt;(
+                        Kokkos::DefaultExecutionSpace(),
+                        idx_range_tensor_basis.size(),
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team) {
+                    // The row of the tensor-tensor matrix
+                    const int row_idx = team.league_rank();
+
+                    // Calculate the index of the test b-spline and its radial and poloidal components
+                    const IdxBSRTheta idx_test(
+                            ddcHelper::get_idx_from_linear_index(idx_range_tensor_basis, row_idx));
+                    const IdxBSR idx_test_r(idx_test);
+                    const IdxBSTheta idx_test_theta(idx_test);
+
+                    // Calculate the offsets to locate all trial b-splines which are non-zero
+                    // somewhere in the support of the test b-spline.
+                    IdxStepBSR idx_step_trial_r_offset_min(
+                            Kokkos::
+                                    max(IdxStepBSR(-BSplinesR::degree()),
+                                        idx_range_fem_r.front() - idx_test_r));
+                    IdxStepBSR idx_step_trial_r_offset_max(
+                            Kokkos::
+                                    min(IdxStepBSR(BSplinesR::degree() + 1),
+                                        idx_range_fem_r.back() + 1 - idx_test_r));
+                    IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
+                    IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
+
+                    // Calculate the position of the first tensor-tensor element in the row.
+                    // These elements are found at the end of the row.
+                    int csr_idx = nnz_per_row_csr(row_idx + 1)
+                                  - (tensor_nnz_per_row(row_idx + 1) - tensor_nnz_per_row(row_idx));
+
+                    // Loop over the radial offset to a trial b-spline
+                    for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
+                         idx_step_trial_r &lt; idx_step_trial_r_offset_max;
+                         ++idx_step_trial_r) {
+                        const IdxBSR idx_trial_r = idx_test_r + idx_step_trial_r;
+
+                        // As theta is periodic the theta component must be split in 2 to
+                        // guarantee that col_idx and values (from the CSR format) are
+                        // filled in order.
+                        // Calculate the start and end of the theta offset
+                        IdxBSTheta first_idx_trial_theta = detail_poisson::
+                                mod_add(idx_test_theta,
+                                        idx_step_trial_theta_offset_min,
+                                        full_idx_range_theta);
+                        const IdxBSTheta last_idx_trial_theta = detail_poisson::
+                                mod_add(idx_test_theta,
+                                        idx_step_trial_theta_offset_max,
+                                        full_idx_range_theta);
+                        IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
+                        // If the start is after the end then the periodicity wraps the b-splines
+                        // first_periodic_idx_trial_theta is modified to fill the wrapped area (at the
+                        // right hand side of the block) last.
+                        if (first_idx_trial_theta &gt; last_idx_trial_theta) {
+                            first_periodic_idx_trial_theta = first_idx_trial_theta;
+                            first_idx_trial_theta = full_idx_range_theta.front();
+                        }
+                        // Loop over the poloidal offset to a trial b-spline
+                        for (IdxBSTheta idx_trial_theta(first_idx_trial_theta);
+                             idx_trial_theta &lt; last_idx_trial_theta;
+                             ++idx_trial_theta) {
+                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
+                            int const col_idx = first_col_offset
+                                                + ddcHelper::get_linear_index_from_idx(
+                                                        idx_range_tensor_basis,
+                                                        idx_trial);
+                            col_idx_csr(csr_idx) = col_idx;
+                            csr_idx++;
+                        }
+                        // Loop over the poloidal offset to a trial b-spline for any elements that
+                        // are to the right of zeros following the elements already set
+                        for (IdxBSTheta idx_trial_theta(first_periodic_idx_trial_theta);
+                             idx_trial_theta &lt; full_idx_range_theta.back() + 1;
+                             ++idx_trial_theta) {
+                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
+                            int const col_idx = first_col_offset
+                                                + ddcHelper::get_linear_index_from_idx(
+                                                        idx_range_tensor_basis,
+                                                        idx_trial);
+                            col_idx_csr(csr_idx) = col_idx;
+                            csr_idx++;
+                        }
+                    }
+                    assert(csr_idx == nnz_per_row_csr(row_idx + 1));
+                });
+    }
+
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
+    void compute_elements(
+            CoeffAlpha const&amp; coeff_alpha,
+            CoeffBeta const&amp; coeff_beta,
+            Kokkos::View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
+                    values_csr,
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
+                    col_idx_csr,
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
+                    nnz_per_row_csr,
+            int first_col_offset) const
+    {
+        IdxRangeBSRTheta idx_range_tensor_basis = m_idxrange_tensor_basis;
+
+        MetricTensorType const metric_tensor = m_metric_tensor;
+        DField&lt;IdxRangeQuadratureRTheta&gt; int_volume_proxy = m_int_volume;
+        TensorBSplineStash bspline_stash = get_tensor_bspline_stash();
+
+        IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
+
+        IdxRangeBatch idx_range_batch = m_idx_range_batch;
+        const int n_batch = idx_range_batch.size();
+        const int n_tensor_basis = idx_range_tensor_basis.size();
+        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; const
+                tensor_nnz_per_row
+                = m_tensor_nnz_per_row;
+        const std::source_location location = std::source_location::current();
+
+        // Number of quadrature points in the support of a tensor product B-spline
+        constexpr int n_quad_support = s_n_quad_support_r * s_n_quad_support_theta;
+
+        // Each team needs scratch memory to store the test weights at the quadrature points
+        // in the support of the test function.
+        Kokkos::TeamPolicy&lt;&gt;
+                policy(Kokkos::DefaultExecutionSpace(), n_batch * n_tensor_basis, Kokkos::AUTO);
+        policy.set_scratch_size(0, Kokkos::PerTeam(ScratchView::shmem_size(3 * n_quad_support)));
+
+        // Calculate the matrix elements following a stencil
+        // Teams loop over rows
+        Kokkos::parallel_for(
+                location.function_name(),
+                policy,
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team) {
+                    const int batch_linear_idx = team.league_rank() / n_tensor_basis;
+                    const IdxBatch idx_batch = ddcHelper::
+                            get_idx_from_linear_index(idx_range_batch, batch_linear_idx);
+                    // The row of the tensor-tensor matrix
+                    const int row_idx = team.league_rank() % n_tensor_basis;
+                    // Calculate the index of the test b-spline
+                    const IdxBSRTheta idx_test(
+                            ddcHelper::get_idx_from_linear_index(idx_range_tensor_basis, row_idx));
+
+                    // Calculate the row index and the position of the first tensor-tensor
+                    // element in the row. These elements are found at the end of the row.
+                    int const csr_idx_first_stencil_element
+                            = nnz_per_row_csr[row_idx + 1]
+                              - (tensor_nnz_per_row[row_idx + 1] - tensor_nnz_per_row[row_idx]);
+
+                    // Calculate the test weights once for all trial b-splines
+                    const IdxRangeQuadratureRTheta idx_range_quad = detail_poisson::
+                            get_support_quadrature(idx_test, full_quad_idx_range.front());
+                    ScratchView test_weights(team.team_scratch(0), 3 * n_quad_support);
+                    QuadField test_mass(test_weights.data(), idx_range_quad);
+                    DVectorField&lt;IdxRangeQuadratureRTheta, VectorIndexSet&lt;R, Theta&gt;&gt; test_stiffness(
+                            idx_range_quad,
+                            test_weights.data() + n_quad_support,
+                            test_weights.data() + 2 * n_quad_support);
+                    fill_test_weights(
+                            team,
+                            test_mass,
+                            test_stiffness,
+                            idx_test,
+                            idx_batch,
+                            coeff_alpha,
+                            coeff_beta,
+                            metric_tensor,
+                            full_quad_idx_range,
+                            int_volume_proxy,
+                            bspline_stash);
+
+                    // Loop over the poloidal offset to a trial b-spline
+                    for (int csr_idx = csr_idx_first_stencil_element;
+                         csr_idx &lt; nnz_per_row_csr[row_idx + 1];
+                         ++csr_idx) {
+                        int const col_idx = col_idx_csr[csr_idx];
+                        const IdxBSRTheta idx_trial(ddcHelper::get_idx_from_linear_index(
+                                idx_range_tensor_basis,
+                                col_idx - first_col_offset));
+                        double element = get_matrix_stencil_element(
+                                team,
+                                idx_test,
+                                idx_trial,
+                                test_mass,
+                                test_stiffness,
+                                full_quad_idx_range,
+                                bspline_stash);
+                        values_csr(batch_linear_idx, csr_idx) = element;
+                    }
+                });
+    }
+
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
+    static KOKKOS_FUNCTION std::tuple&lt;double, DVector&lt;R, Theta&gt;&gt; get_test_weights(
+            IdxBSRTheta idx_test,
+            IdxQuadratureRTheta idx_quad,
+            IdxBatch idx_batch,
+            CoeffAlpha const&amp; coeff_alpha,
+            CoeffBeta const&amp; coeff_beta,
+            MetricTensorType const&amp; metric_tensor,
+            DField&lt;IdxRangeQuadratureRTheta&gt; int_volume,
+            TensorBSplineStash const&amp; bspline_stash)
+    {
+        auto [basis_val_test_space, basis_derivs_test_space]
+                = bspline_stash.vals_and_derivs(idx_quad, idx_test);
+        return detail_poisson::get_test_weights(
+                basis_val_test_space,
+                basis_derivs_test_space,
+                idx_quad,
+                idx_batch,
+                coeff_alpha,
+                coeff_beta,
+                metric_tensor,
+                int_volume);
+    }
+
+    static KOKKOS_FUNCTION double get_matrix_stencil_element(
+            const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team,
+            IdxBSRTheta idx_test,
+            IdxBSRTheta idx_trial,
+            QuadField test_mass,
+            DVectorField&lt;IdxRangeQuadratureRTheta, VectorIndexSet&lt;R, Theta&gt;&gt; test_stiffness,
+            IdxRangeQuadratureRTheta const&amp; full_quad_idx_range,
+            TensorBSplineStash const&amp; bspline_stash)
+    {
+        const IdxBSR idx_test_r(idx_test);
+        const IdxBSR idx_trial_r(idx_trial);
+        const IdxBSTheta idx_test_theta(
+                detail_poisson::theta_mod&lt;BSplinesTheta&gt;(IdxBSTheta(idx_test)));
+        const IdxBSTheta idx_trial_theta(
+                detail_poisson::theta_mod&lt;BSplinesTheta&gt;(IdxBSTheta(idx_trial)));
+
+        auto&amp; bspl_r = ddc::discrete_space&lt;BSplinesR&gt;();
+        auto&amp; bspl_theta = ddc::discrete_space&lt;BSplinesTheta&gt;();
+
+        const Idx&lt;KnotsR&gt; start_non_zero_r(
+                Kokkos::
+                        max(bspl_r.break_point_domain().front(),
+                            Kokkos::
+                                    max(bspl_r.get_first_support_knot(idx_test_r),
+                                        bspl_r.get_first_support_knot(idx_trial_r))));
+        const Idx&lt;KnotsR&gt; end_non_zero_r(
+                Kokkos::
+                        min(bspl_r.break_point_domain().back(),
+                            Kokkos::
+                                    min(bspl_r.get_last_support_knot(idx_test_r),
+                                        bspl_r.get_last_support_knot(idx_trial_r))));
+
+        IdxStep&lt;KnotsTheta&gt; span_theta(BSplinesTheta::degree() + 1);
+
+        Idx&lt;KnotsTheta&gt; first_support_knot_theta_test
+                = bspl_theta.get_first_support_knot(idx_test_theta);
+        Idx&lt;KnotsTheta&gt; first_support_knot_theta_trial
+                = bspl_theta.get_first_support_knot(idx_trial_theta);
+        Idx&lt;KnotsTheta&gt; last_support_knot_theta_test = first_support_knot_theta_test + span_theta;
+        Idx&lt;KnotsTheta&gt; last_support_knot_theta_trial = first_support_knot_theta_trial + span_theta;
+
+        if (first_support_knot_theta_test &gt; last_support_knot_theta_trial) {
+            first_support_knot_theta_trial += ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis();
+            last_support_knot_theta_trial += ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis();
+        } else if (last_support_knot_theta_test &lt; first_support_knot_theta_trial) {
+            first_support_knot_theta_test += ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis();
+            last_support_knot_theta_test += ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis();
+        }
+        const Idx&lt;KnotsTheta&gt; start_non_zero_theta(
+                Kokkos::max(first_support_knot_theta_test, first_support_knot_theta_trial));
+        const Idx&lt;KnotsTheta&gt; end_non_zero_theta(
+                Kokkos::min(last_support_knot_theta_test, last_support_knot_theta_trial));
+        const IdxRangeQuadratureRTheta quad_range = detail_poisson::
+                get_quadrature_between_knots&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;(
+                        start_non_zero_r,
+                        end_non_zero_r,
+                        start_non_zero_theta,
+                        end_non_zero_theta,
+                        full_quad_idx_range.front());
+
+        IdxRangeQuadratureRTheta test_support = get_idx_range(test_mass);
+
+        double result = 0;
+        Kokkos::parallel_reduce(
+                Kokkos::TeamThreadMDRange(
+                        team,
+                        quad_range.template extent&lt;QDimRMesh&gt;(),
+                        quad_range.template extent&lt;QDimThetaMesh&gt;()),
+                [&amp;](int r_thread_index, int theta_thread_index, double&amp; sum) {
+                    IdxQuadratureRTheta idx_quad
+                            = quad_range.front()
+                              + IdxStep&lt;
+                                      QDimRMesh,
+                                      QDimThetaMesh&gt;(r_thread_index, theta_thread_index);
+                    // Manage periodicity
+                    if (!full_quad_idx_range.contains(idx_quad)) {
+                        idx_quad -= full_quad_idx_range.template extent&lt;QDimThetaMesh&gt;();
+                    }
+                    assert(full_quad_idx_range.contains(idx_quad));
+
+                    auto [basis_val_trial_space, basis_derivs_trial_space]
+                            = bspline_stash.vals_and_derivs(idx_quad, idx_trial);
+
+                    // The test support may extend past the end of the poloidal domain
+                    IdxQuadratureRTheta idx_quad_test = idx_quad;
+                    if (!test_support.contains(idx_quad_test)) {
+                        idx_quad_test += full_quad_idx_range.template extent&lt;QDimThetaMesh&gt;();
+                    }
+                    assert(test_support.contains(idx_quad_test));
+
+                    // Assemble the weak integral element
+                    sum += scalar_product(test_stiffness(idx_quad_test), basis_derivs_trial_space)
+                           + test_mass(idx_quad_test) * basis_val_trial_space;
+                },
+                result);
+        return result;
+    }
+
+    template &lt;class CoeffAlpha, class CoeffBeta&gt;
+    static KOKKOS_FUNCTION void fill_test_weights(
+            const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team,
+            QuadField test_mass,
+            DVectorField&lt;IdxRangeQuadratureRTheta, VectorIndexSet&lt;R, Theta&gt;&gt; test_stiffness,
+            IdxBSRTheta idx_test,
+            IdxBatch idx_batch,
+            CoeffAlpha const&amp; coeff_alpha,
+            CoeffBeta const&amp; coeff_beta,
+            MetricTensorType const&amp; metric_tensor,
+            IdxRangeQuadratureRTheta const&amp; full_quad_idx_range,
+            DField&lt;IdxRangeQuadratureRTheta&gt; int_volume,
+            TensorBSplineStash const&amp; bspline_stash)
+    {
+        IdxRangeQuadratureRTheta test_support = get_idx_range(test_mass);
+        assert(test_support.template extent&lt;QDimRMesh&gt;().value() &lt;= s_n_quad_support_r);
+        assert(test_support.template extent&lt;QDimThetaMesh&gt;().value() &lt;= s_n_quad_support_theta);
+        Kokkos::parallel_for(
+                Kokkos::TeamThreadMDRange(
+                        team,
+                        test_support.template extent&lt;QDimRMesh&gt;(),
+                        test_support.template extent&lt;QDimThetaMesh&gt;()),
+                [&amp;](int r_thread_index, int theta_thread_index) {
+                    IdxStep&lt;QDimRMesh, QDimThetaMesh&gt;
+                            quad_offset(r_thread_index, theta_thread_index);
+                    IdxQuadratureRTheta idx_quad = test_support.front() + quad_offset;
+                    IdxQuadratureRTheta idx_quad_in_domain = idx_quad;
+                    // Manage periodicity
+                    if (!full_quad_idx_range.contains(idx_quad_in_domain)) {
+                        idx_quad_in_domain -= full_quad_idx_range.template extent&lt;QDimThetaMesh&gt;();
+                    }
+                    assert(full_quad_idx_range.contains(idx_quad_in_domain));
+                    auto [test_mass_weight, test_stiffness_weight] = get_test_weights(
+                            idx_test,
+                            idx_quad_in_domain,
+                            idx_batch,
+                            coeff_alpha,
+                            coeff_beta,
+                            metric_tensor,
+                            int_volume,
+                            bspline_stash);
+                    test_mass(quad_offset) = test_mass_weight;
+                    ddcHelper::assign_vector_field_element(
+                            test_stiffness,
+                            idx_quad,
+                            test_stiffness_weight);
+                });
+        team.team_barrier();
+    }
+
+    void init_tensor_tensor_nnz_per_line(
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; nnz_per_row)
+            const
+    {
+        IdxRangeBSRTheta idxrange_tensor_basis = m_idxrange_tensor_basis;
+        assert(nnz_per_row.extent(0) == idxrange_tensor_basis.size() + 1);
+        // nnz per line
+        Field&lt;int, IdxRangeBSRTheta&gt; nnz(nnz_per_row.data() + 1, idxrange_tensor_basis);
+
+        size_t constexpr degree = BSplinesR::degree();
+        size_t const nbasis_theta_proxy
+                = idxrange_tensor_basis.template extent&lt;BSplinesTheta&gt;().value();
+        // The number of radial splines which overlap with a radial spline far from the boundaries
+        size_t constexpr stencil_overlap_r = 2 * degree + 1;
+        // The number of poloidal splines which overlap with a poloidal spline
+        size_t const stencil_overlap_theta
+                = std::min(size_t(2 * BSplinesTheta::degree() + 1), nbasis_theta_proxy);
+
+        // The number of radial splines which overlap with a given radial spline to its
+        // left or to its right
+        IdxStepBSR n_one_side_overlap(BSplinesR::degree());
+
+        int nnz_sum = 0;
+
+        IdxRangeBSR idxrange_bsplines_r(idxrange_tensor_basis);
+        IdxRangeBSTheta idxrange_bsplines_theta(idxrange_tensor_basis);
+        IdxRangeBSR inner_bsplines_r = idxrange_bsplines_r.take_first(n_one_side_overlap);
+        IdxRangeBSRTheta inner_bsplines_2d(inner_bsplines_r, idxrange_bsplines_theta);
+        // Approaching the internal boundary the overlapping possibilities between two radial splines decrease
+        Kokkos::parallel_for(
+                "inner boundary",
+                Kokkos::TeamPolicy&lt;&gt;(
+                        Kokkos::DefaultExecutionSpace(),
+                        inner_bsplines_r.size(),
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team) {
+                    IdxStepBSR ir(team.league_rank());
+                    // number of radial bases which overlap with this element
+                    int nr = degree + ir + 1;
+
+                    // nnz to this line = ntheta * n_stencil_theta \sum_{k=degree+1}^{nr-1} k
+                    int nnz_sum_to_r = (nr * (nr - 1) - degree * (degree + 1)) * nbasis_theta_proxy
+                                       * stencil_overlap_theta / 2;
+
+                    // Loop over poloidal dimensions
+                    Kokkos::parallel_for(
+                            Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
+                            [&amp;](int const&amp; thread_index) {
+                                IdxStepBSTheta itheta(thread_index);
+                                nnz(ir, itheta)
+                                        += nnz_sum_to_r
+                                           + (thread_index + 1) * nr * stencil_overlap_theta;
+                            });
+                });
+
+        {
+            int nr = inner_bsplines_r.size();
+            nnz_sum += nr * (nr + 2 * degree + 1) * stencil_overlap_theta / 2 * nbasis_theta_proxy;
+        }
+
+        IdxRangeBSR idxrange_bsplines_r_stencil
+                = idxrange_bsplines_r.remove(n_one_side_overlap, n_one_side_overlap);
+        IdxRangeBSRTheta idxrange_stencil(idxrange_bsplines_r_stencil, idxrange_bsplines_theta);
+        // Stencil for tensor product bsplines which are not affected by the radial boundaries
+        Kokkos::parallel_for(
+                "stencil",
+                Kokkos::RangePolicy&lt;Kokkos::DefaultExecutionSpace&gt;(0, idxrange_stencil.size()),
+                KOKKOS_LAMBDA(const int k) {
+                    IdxBSRTheta k_2d = idxrange_stencil.front() + IdxStepBSR(k / nbasis_theta_proxy)
+                                       + IdxStepBSTheta(k % nbasis_theta_proxy);
+                    nnz(k_2d) += nnz_sum + (k + 1) * stencil_overlap_r * stencil_overlap_theta;
+                });
+
+        nnz_sum += idxrange_stencil.size() * stencil_overlap_r * stencil_overlap_theta;
+
+        IdxRangeBSR outer_bsplines_r = idxrange_bsplines_r.take_last(n_one_side_overlap);
+        IdxRangeBSRTheta outer_bsplines_2d(outer_bsplines_r, idxrange_bsplines_theta);
+        // Approaching the external boundary the overlapping possibilities between two radial splines decrease
+        Kokkos::parallel_for(
+                "outer boundary",
+                Kokkos::TeamPolicy&lt;&gt;(
+                        Kokkos::DefaultExecutionSpace(),
+                        outer_bsplines_r.size(),
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team) {
+                    IdxStepBSR ir(team.league_rank());
+                    int nr = 2 * degree - ir;
+                    int nnz_sum_to_r = nnz_sum
+                                       + (degree * (2 * degree + 1) - nr * (nr + 1) / 2)
+                                                 * stencil_overlap_theta * nbasis_theta_proxy;
+                    // Loop over poloidal dimensions
+                    Kokkos::parallel_for(
+                            Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
+                            [&amp;](int const&amp; thread_index) {
+                                IdxStepBSTheta itheta(thread_index);
+                                IdxBSRTheta k = outer_bsplines_2d.front() + ir + itheta;
+                                nnz(k) += nnz_sum_to_r
+                                          + (thread_index + 1) * nr * stencil_overlap_theta;
+                            });
+                });
+    }
+};
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
