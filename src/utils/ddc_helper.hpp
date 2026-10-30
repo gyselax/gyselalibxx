@@ -236,8 +236,12 @@ bool points_are_subset(
         IdxRange<GridSuperSet> const& idx_range_superset,
         ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
 {
-    return find_first_point_not_in_superset(idx_range_subset, idx_range_superset, tol)
-           == (idx_range_subset.back() + 1);
+    if (idx_range_subset.size() > idx_range_superset.size()) {
+        return false;
+    } else {
+        return find_first_point_not_in_superset(idx_range_subset, idx_range_superset, tol)
+               == (idx_range_subset.back() + 1);
+    }
 }
 
 
