@@ -441,7 +441,7 @@ public:
                 typename batched_evaluation_idx_range_type<StoringPatch>::discrete_element_type;
         batched_evaluation_idx_range_type<StoringPatch> idx_range = get_idx_range(patch_values);
 
-        const bool is_derivative = !(deriv_order == order_zero<DerivDims...>());
+        const bool is_derivative = (deriv_order != order_zero<DerivDims...>());
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -526,7 +526,7 @@ public:
             idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_to_slice_1, idx_range_to_slice_2);
         }
 
-        const bool is_derivative = !(deriv_order == order_zero<DerivDims...>());
+        const bool is_derivative = (deriv_order != order_zero<DerivDims...>());
 
         // Correction if deriv_order is zero.
         if (!is_derivative) {
