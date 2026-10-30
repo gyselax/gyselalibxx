@@ -52,7 +52,8 @@ class SplineBuilderDerivField2D
             ddc::SplineSolver::LAPACK>;
 
     using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace>;
-    using DerivFieldType = DerivField<double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
+    using DerivConstFieldType
+            = DerivConstField<double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
 
     using FunctFieldMem = DFieldMem<IdxRange<Grid1, Grid2>, MemorySpace>;
     using FunctField = DField<IdxRange<Grid1, Grid2>, MemorySpace>;
@@ -75,7 +76,7 @@ private:
 public:
     explicit SplineBuilderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
 
-    void operator()(SplineType spline, DerivFieldType function_and_derivs) const
+    void operator()(SplineType spline, DerivConstFieldType function_and_derivs) const
     {
         // Check that the DerivField contains the necessary derivatives for the builder.
         IdxRange<Deriv1> idx_range_d1_min(
@@ -188,7 +189,7 @@ public:
     };
 
 public:
-    static void fill_in_function(FunctField function, DerivFieldType function_and_derivs)
+    static void fill_in_function(FunctField function, DerivConstFieldType function_and_derivs)
     {
         // Fill the field with correct layout.
         const std::source_location location = std::source_location::current();
@@ -203,7 +204,7 @@ public:
 
     static void fill_in_deriv1(
             Deriv1Field deriv1,
-            DerivFieldType function_and_derivs,
+            DerivConstFieldType function_and_derivs,
             Idx<Grid1> idx_slice)
     {
         const std::source_location location = std::source_location::current();
@@ -218,7 +219,7 @@ public:
 
     static void fill_in_deriv2(
             Deriv2Field deriv2,
-            DerivFieldType function_and_derivs,
+            DerivConstFieldType function_and_derivs,
             Idx<Grid2> idx_slice)
     {
         const std::source_location location = std::source_location::current();
@@ -233,7 +234,7 @@ public:
 
     static void fill_in_cross_deriv(
             CrossDerivField cross_deriv,
-            DerivFieldType function_and_derivs,
+            DerivConstFieldType function_and_derivs,
             Idx<Grid1> idx_slice_1,
             Idx<Grid2> idx_slice_2)
     {

@@ -74,6 +74,7 @@
 | typedef typename Patch::IdxRange1 | [**IdxRange1OnPatch**](#typedef-idxrange1onpatch)  <br>_An index range over the grids on the first_ [_**Patch**_](structPatch.md) _'s 1D logical domain._ |
 | typedef IdxRangeSlice&lt; typename Patch::Grid1 &gt; | [**IdxRange1SliceOnPatch**](#typedef-idxrange1sliceonpatch)  <br>_An index range slice over the grids on the first_ [_**Patch**_](structPatch.md) _'s 1D logical domain._ |
 | typedef IdxRangeSlice&lt; typename Patch::Grid2 &gt; | [**IdxRange2SliceOnPatch**](#typedef-idxrange2sliceonpatch)  <br>_An index range slice over the grids on the second_ [_**Patch**_](structPatch.md) _'s 1D logical domain._ |
+| typedef typename Patch::IdxRangeBS12 | [**IdxRangeBSOnPatch**](#typedef-idxrangebsonpatch)  <br>_An index range over the B-splines on the_ [_**Patch**_](structPatch.md) _'s 2D logical domain._ |
 | typedef typename Patch::IdxRange12 | [**IdxRangeOnPatch**](#typedef-idxrangeonpatch)  <br>_An index range over the grids on the_ [_**Patch**_](structPatch.md) _'s 2D logical domain._ |
 | typedef DField&lt; typename Patch::IdxRangeBS1 &gt; | [**SplineCoeff1OnPatch\_1D**](#typedef-splinecoeff1onpatch_1d)  <br>_A field of spline coefficients for a non-batched spline defined on the first of the_ [_**Patch**_](structPatch.md) _'s logical dimensions._ |
 | typedef DField&lt; IdxRange&lt; typename Patch::BSplines1, typename Patch::Grid2 &gt; &gt; | [**SplineCoeff1OnPatch\_2D**](#typedef-splinecoeff1onpatch_2d)  <br>_A field of spline coefficients batched over the second of the_ [_**Patch**_](structPatch.md) _'s logical dimensions for a spline defined on the first of the_[_**Patch**_](structPatch.md) _'s logical dimensions._ |
@@ -637,6 +638,20 @@ using IdxRange1SliceOnPatch =  IdxRangeSlice<typename Patch::Grid1>;
 _An index range slice over the grids on the second_ [_**Patch**_](structPatch.md) _'s 1D logical domain._
 ```C++
 using IdxRange2SliceOnPatch =  IdxRangeSlice<typename Patch::Grid2>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef IdxRangeBSOnPatch 
+
+_An index range over the B-splines on the_ [_**Patch**_](structPatch.md) _'s 2D logical domain._
+```C++
+using IdxRangeBSOnPatch =  typename Patch::IdxRangeBS12;
 ```
 
 

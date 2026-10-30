@@ -8,6 +8,7 @@
 * **AdvectionFieldFinder** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
 * **alpha** ([**GMGPolarTools::PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md))
 * **adjust\_indexes** ([**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md))
+* **apply\_builder** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **apply\_evaluator** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **apply\_integrate** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **apply\_periodic\_bcs** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
@@ -35,6 +36,7 @@
 * **batched\_derivs\_xmax\_domain** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
 * **batched\_derivs\_xmin\_domain** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
 * **batch\_size** ([**MatrixBatch**](classMatrixBatch.md))
+* **batched\_basis\_idx\_ranges** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **break\_point\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **build\_elementwise** ([**PolarFootFinder**](classPolarFootFinder.md))
 
@@ -435,7 +437,7 @@
 
 ## r
 
-* **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder3D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md), [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
+* **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder3D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md), [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 * **recursion** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
 * **recursive\_dispatch\_patch\_function** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **replace\_periodic\_coord\_inside** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
@@ -474,6 +476,7 @@
 * **solve\_gamma\_section\_transpose** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **solve\_lambda\_section** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))
 * **solve\_lambda\_section\_transpose** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))
+* **spline\_idx\_ranges** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **set\_and\_check\_radii** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **singular\_idx\_range** ([**PolarBSplines**](classPolarBSplines.md))
 * **setup\_sparse\_matrix** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))

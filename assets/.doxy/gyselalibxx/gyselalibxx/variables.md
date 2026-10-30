@@ -416,6 +416,7 @@
 * **IdxRange1OnPatch** ([**types.hpp**](types_8hpp.md))
 * **IdxRange1SliceOnPatch** ([**types.hpp**](types_8hpp.md))
 * **IdxRange2SliceOnPatch** ([**types.hpp**](types_8hpp.md))
+* **IdxRangeBSOnPatch** ([**types.hpp**](types_8hpp.md))
 * **IdxRangeOnPatch** ([**types.hpp**](types_8hpp.md))
 * **is\_interface\_derivative\_coefficients\_collection\_v** ([**interface\_derivative\_coefficients\_collection.hpp**](interface__derivative__coefficients__collection_8hpp.md))
 * **IFieldMemSp** ([**species\_info.hpp**](species__info_8hpp.md))

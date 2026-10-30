@@ -15,7 +15,7 @@
     <detaileddescription>
 <para>A small structure allowing the multiple grids to be unpacked from a field and repacked into a SplineBuilder type. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" bodystart="105" bodyend="110"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" line="113" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" bodystart="114" bodyend="119"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -1075,6 +1075,8 @@
         </childnode>
         <childnode refid="102" relation="include">
         </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
         <childnode refid="89" relation="include">
         </childnode>
       </node>
@@ -1385,6 +1387,8 @@
       <node id="148">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp</label>
         <link refid="spline__builder__deriv__field__2d_8hpp_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innernamespace refid="namespaceddcHelper">ddcHelper</innernamespace>

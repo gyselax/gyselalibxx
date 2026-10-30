@@ -732,6 +732,10 @@
 <td style="text-align: left;"><a href="#typedef-idxrange2sliceonpatch"><strong>IdxRange2SliceOnPatch</strong></a>  <br><em>An index range slice over the grids on the second</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef typename Patch::IdxRangeBS12</td>
+<td style="text-align: left;"><a href="#typedef-idxrangebsonpatch"><strong>IdxRangeBSOnPatch</strong></a>  <br><em>An index range over the B-splines on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename Patch::IdxRange12</td>
 <td style="text-align: left;"><a href="#typedef-idxrangeonpatch"><strong>IdxRangeOnPatch</strong></a>  <br><em>An index range over the grids on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
@@ -991,6 +995,12 @@
 <h3 id="typedef-idxrange2sliceonpatch">typedef IdxRange2SliceOnPatch</h3>
 <p><em>An index range slice over the grids on the second</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></p>
 <pre><code class="language-C++">using IdxRange2SliceOnPatch =  IdxRangeSlice&lt;typename Patch::Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangebsonpatch">typedef IdxRangeBSOnPatch</h3>
+<p><em>An index range over the B-splines on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using IdxRangeBSOnPatch =  typename Patch::IdxRangeBS12;
 </code></pre>
 <hr>
 

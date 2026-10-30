@@ -583,7 +583,10 @@
 #include &lt;ddc/kernels/splines.hpp&gt;
 
 #include "ddc_aliases.hpp"
+#include "i_interpolation_builder.hpp"
 #include "multipatch_type.hpp"
+#include "spline_builder_deriv_field_2d.hpp"
+#include "types.hpp"
 
 template &lt;
         class ExecSpace,
@@ -640,6 +643,10 @@ class MultipatchSplineBuilder2D
                     typename Grid2OnPatch&lt;Patches&gt;::continuous_dimension_type&gt;)&amp;&amp;...),
             "The BSpline2OnPatch argument does not define B-splines on the dimension where the "
             "grids defined by Grid2OnPatch are defined.");
+    static_assert(
+            !(is_deriv_field_v&lt;ValuesOnPatch&lt;Patches&gt;&gt; &amp;&amp; ...),
+            "ValuesOnPatch represents the field, not the field with derivatives.");
+
     template &lt;class Patch, class FieldType&gt;
     struct Build_BuilderType
     {
@@ -705,9 +712,35 @@ class MultipatchSplineBuilder2D
                     typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
             MemorySpace&gt;;
 
+    template &lt;class Patch&gt;
+    using DerivConstFieldOnPatch = DerivConstField&lt;
+            double,
+            IdxRange&lt;
+                    ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                    typename Patch::Grid1,
+                    ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                    typename Patch::Grid2&gt;,
+            MemorySpace&gt;;
+
+    template &lt;class Patch, class BatchedIdxRange&gt;
+    using batched_spline_domain_type_on_patch
+            = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
+                    ddc::to_type_seq_t&lt;BatchedIdxRange&gt;,
+                    ddc::detail::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
+                    ddc::detail::TypeSeq&lt;typename Patch::BSplines1, typename Patch::BSplines2&gt;&gt;&gt;;
+
+    template &lt;class Patch, class BatchedIdxRange&gt;
+    using batched_derivs_domain_type_on_patch
+            = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
+                    ddc::to_type_seq_t&lt;BatchedIdxRange&gt;,
+                    ddc::detail::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
+                    ddc::detail::TypeSeq&lt;
+                            ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                            ddc::Deriv&lt;typename Patch::Dim2&gt;&gt;&gt;&gt;;
+
+
     using MultipatchSplineCoeffs = MultipatchField&lt;SplineOnPatch, Patches...&gt;;
 
-    // For PERIODIC or GREVILLE boundary conditions
     using MultipatchValues = MultipatchField&lt;ValuesOnPatch, Patches...&gt;;
 
     using MultipatchDerivs1 = MultipatchField&lt;Derivs1OnPatch, Patches...&gt;;
@@ -716,10 +749,52 @@ class MultipatchSplineBuilder2D
 
     using MultipatchDerivs12 = MultipatchField&lt;Derivs12OnPatch, Patches...&gt;;
 
+    using MultipatchDerivField = MultipatchField&lt;DerivConstFieldOnPatch, Patches...&gt;;
+
+    using MultipatchIdxRange = MultipatchType&lt;IdxRangeOnPatch, Patches...&gt;;
+
+    using MultipatchIdxRangeBS = MultipatchType&lt;IdxRangeBSOnPatch, Patches...&gt;;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using MultipatchIdxRangeBatchedBS = detail::MultipatchType&lt;
+            typename MultipatchIdxRangeBatched::PatchOrdering,
+            ddc::detail::TypeSeq&lt;batched_spline_domain_type_on_patch&lt;
+                    Patches,
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType&lt;
+            typename MultipatchIdxRangeBatched::PatchOrdering,
+            ddc::detail::TypeSeq&lt;batched_derivs_domain_type_on_patch&lt;
+                    Patches,
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
     using BuilderTuple = std::tuple&lt;BuilderOnPatch&lt;Patches&gt; const&amp;...&gt;;
 
 
     BuilderTuple const m_builders;
+
+public:
+    using exec_space = ExecSpace;
+
+    using memory_space = MemorySpace;
+
+    using data_type = double;
+
+    using interpolation_idx_range_type = MultipatchIdxRange;
+
+    using coeff_idx_range_type = MultipatchIdxRangeBS;
+
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using batched_basis_idx_range_type = MultipatchIdxRangeBatchedBS&lt;MultipatchIdxRangeBatched&gt;;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using batched_derivs_idx_range_type = MultipatchIdxRangeBatchedDeriv&lt;MultipatchIdxRangeBatched&gt;;
 
 private:
     template &lt;class Patch, class MultipatchDerivs&gt;
@@ -747,10 +822,10 @@ public:
             std::optional&lt;MultipatchDerivs1&gt; derivs_max1 = std::nullopt,
             std::optional&lt;MultipatchDerivs2&gt; derivs_min2 = std::nullopt,
             std::optional&lt;MultipatchDerivs2&gt; derivs_max2 = std::nullopt,
-            std::optional&lt;MultipatchDerivs12&gt; mixed_derivs_min1_min2 = std::nullopt,
-            std::optional&lt;MultipatchDerivs12&gt; mixed_derivs_max1_min2 = std::nullopt,
-            std::optional&lt;MultipatchDerivs12&gt; mixed_derivs_min1_max2 = std::nullopt,
-            std::optional&lt;MultipatchDerivs12&gt; mixed_derivs_max1_max2 = std::nullopt) const
+            std::optional&lt;MultipatchDerivs12&gt; cross_derivs_min1_min2 = std::nullopt,
+            std::optional&lt;MultipatchDerivs12&gt; cross_derivs_max1_min2 = std::nullopt,
+            std::optional&lt;MultipatchDerivs12&gt; cross_derivs_min1_max2 = std::nullopt,
+            std::optional&lt;MultipatchDerivs12&gt; cross_derivs_max1_max2 = std::nullopt) const
     {
         ((std::get&lt;BuilderOnPatch&lt;Patches&gt; const&amp;&gt;(m_builders)(
                  splines.template get&lt;Patches&gt;(),
@@ -759,11 +834,56 @@ public:
                  get_deriv_value&lt;Patches&gt;(derivs_max1),
                  get_deriv_value&lt;Patches&gt;(derivs_min2),
                  get_deriv_value&lt;Patches&gt;(derivs_max2),
-                 get_deriv_value&lt;Patches&gt;(mixed_derivs_min1_min2),
-                 get_deriv_value&lt;Patches&gt;(mixed_derivs_max1_min2),
-                 get_deriv_value&lt;Patches&gt;(mixed_derivs_min1_max2),
-                 get_deriv_value&lt;Patches&gt;(mixed_derivs_max1_max2))),
+                 get_deriv_value&lt;Patches&gt;(cross_derivs_min1_min2),
+                 get_deriv_value&lt;Patches&gt;(cross_derivs_max1_min2),
+                 get_deriv_value&lt;Patches&gt;(cross_derivs_min1_max2),
+                 get_deriv_value&lt;Patches&gt;(cross_derivs_max1_max2))),
          ...);
+    };
+
+    void operator()(MultipatchSplineCoeffs splines, MultipatchDerivField functions_and_derivs) const
+    {
+        (apply_builder&lt;Patches&gt;(
+                 std::get&lt;BuilderOnPatch&lt;Patches&gt; const&amp;&gt;(m_builders),
+                 splines.template get&lt;Patches&gt;(),
+                 functions_and_derivs.template get&lt;Patches&gt;()),
+         ...);
+    };
+
+    MultipatchIdxRangeBS const spline_idx_ranges() const
+    {
+        return MultipatchIdxRangeBS(
+                get_spline_idx_range(std::get&lt;BuilderOnPatch&lt;Patches&gt; const&amp;&gt;(m_builders))...);
+    };
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    MultipatchIdxRangeBatchedBS&lt;MultipatchIdxRangeBatched&gt; const batched_basis_idx_ranges(
+            MultipatchIdxRangeBatched idx_ranges) const
+    {
+        return MultipatchIdxRangeBatchedBS&lt;MultipatchIdxRangeBatched&gt;(batched_basis_idx_range(
+                std::get&lt;BuilderOnPatch&lt;Patches&gt; const&amp;&gt;(m_builders),
+                idx_ranges.template get&lt;Patches&gt;())...);
+    };
+
+private:
+    template &lt;class PatchP&gt;
+    static void apply_builder(
+            BuilderOnPatch&lt;PatchP&gt; const&amp; builder,
+            SplineOnPatch&lt;PatchP&gt; spline,
+            DerivConstFieldOnPatch&lt;PatchP&gt; function_and_deriv)
+    {
+        SplineBuilderDerivField2D&lt;
+                ExecSpace,
+                BSpline1OnPatch&lt;PatchP&gt;,
+                BSpline2OnPatch&lt;PatchP&gt;,
+                Grid1OnPatch&lt;PatchP&gt;,
+                Grid2OnPatch&lt;PatchP&gt;,
+                BuilderOnPatch&lt;PatchP&gt;::builder_type1::s_sbc_xmin,
+                BuilderOnPatch&lt;PatchP&gt;::builder_type1::s_sbc_xmax,
+                BuilderOnPatch&lt;PatchP&gt;::builder_type2::s_sbc_xmin,
+                BuilderOnPatch&lt;PatchP&gt;::builder_type2::s_sbc_xmax&gt;
+                builder_applier(builder);
+        builder_applier(spline, function_and_deriv);
     };
 };
 </code></pre></div>

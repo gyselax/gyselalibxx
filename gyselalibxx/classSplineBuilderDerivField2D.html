@@ -591,7 +591,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (SplineType spline, DerivFieldType function_and_derivs) const<br><em>Build the spline representation of the function given in a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>applying the referenced spline builder stored in the class.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (SplineType spline, DerivConstFieldType function_and_derivs) const<br><em>Build the spline representation of the function given in a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>applying the referenced spline builder stored in the class.</em></td>
 </tr>
 </tbody>
 </table>
@@ -606,19 +606,19 @@
 <tbody>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-fill_in_cross_deriv"><strong>fill_in_cross_deriv</strong></a> (CrossDerivField cross_deriv, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice_1, Idx&lt; Grid2 &gt; idx_slice_2) <br><em>Fill in the cross_deriv field with the cross derivatives stored in the function_and_derivs.</em></td>
+<td style="text-align: left;"><a href="#function-fill_in_cross_deriv"><strong>fill_in_cross_deriv</strong></a> (CrossDerivField cross_deriv, DerivConstFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice_1, Idx&lt; Grid2 &gt; idx_slice_2) <br><em>Fill in the cross_deriv field with the cross derivatives stored in the function_and_derivs.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-fill_in_deriv1"><strong>fill_in_deriv1</strong></a> (Deriv1Field deriv1, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice) <br><em>Fill in the deriv1 field with the derivatives along the first dimension stored in the function_and_derivs.</em></td>
+<td style="text-align: left;"><a href="#function-fill_in_deriv1"><strong>fill_in_deriv1</strong></a> (Deriv1Field deriv1, DerivConstFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice) <br><em>Fill in the deriv1 field with the derivatives along the first dimension stored in the function_and_derivs.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-fill_in_deriv2"><strong>fill_in_deriv2</strong></a> (Deriv2Field deriv2, DerivFieldType function_and_derivs, Idx&lt; Grid2 &gt; idx_slice) <br><em>Fill in the deriv2 field with the derivatives along the second dimension stored in the function_and_derivs.</em></td>
+<td style="text-align: left;"><a href="#function-fill_in_deriv2"><strong>fill_in_deriv2</strong></a> (Deriv2Field deriv2, DerivConstFieldType function_and_derivs, Idx&lt; Grid2 &gt; idx_slice) <br><em>Fill in the deriv2 field with the derivatives along the second dimension stored in the function_and_derivs.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-fill_in_function"><strong>fill_in_function</strong></a> (FunctField function, DerivFieldType function_and_derivs) <br><em>Fill in the function field with the values stored in the function_and_derivs.</em></td>
+<td style="text-align: left;"><a href="#function-fill_in_function"><strong>fill_in_function</strong></a> (FunctField function, DerivConstFieldType function_and_derivs) <br><em>Fill in the function field with the values stored in the function_and_derivs.</em></td>
 </tr>
 </tbody>
 </table>
@@ -642,7 +642,7 @@
 <p><em>Build the spline representation of the function given in a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>applying the referenced spline builder stored in the class.</em></p>
 <pre><code class="language-C++">inline void SplineBuilderDerivField2D::operator() (
     SplineType spline,
-    DerivFieldType function_and_derivs
+    DerivConstFieldType function_and_derivs
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -656,7 +656,7 @@
 <p><em>Fill in the cross_deriv field with the cross derivatives stored in the function_and_derivs.</em> </p>
 <pre><code class="language-C++">static inline void SplineBuilderDerivField2D::fill_in_cross_deriv (
     CrossDerivField cross_deriv,
-    DerivFieldType function_and_derivs,
+    DerivConstFieldType function_and_derivs,
     Idx&lt; Grid1 &gt; idx_slice_1,
     Idx&lt; Grid2 &gt; idx_slice_2
 ) 
@@ -674,7 +674,7 @@
 <p><em>Fill in the deriv1 field with the derivatives along the first dimension stored in the function_and_derivs.</em> </p>
 <pre><code class="language-C++">static inline void SplineBuilderDerivField2D::fill_in_deriv1 (
     Deriv1Field deriv1,
-    DerivFieldType function_and_derivs,
+    DerivConstFieldType function_and_derivs,
     Idx&lt; Grid1 &gt; idx_slice
 ) 
 </code></pre>
@@ -690,7 +690,7 @@
 <p><em>Fill in the deriv2 field with the derivatives along the second dimension stored in the function_and_derivs.</em> </p>
 <pre><code class="language-C++">static inline void SplineBuilderDerivField2D::fill_in_deriv2 (
     Deriv2Field deriv2,
-    DerivFieldType function_and_derivs,
+    DerivConstFieldType function_and_derivs,
     Idx&lt; Grid2 &gt; idx_slice
 ) 
 </code></pre>
@@ -706,7 +706,7 @@
 <p><em>Fill in the function field with the values stored in the function_and_derivs.</em> </p>
 <pre><code class="language-C++">static inline void SplineBuilderDerivField2D::fill_in_function (
     FunctField function,
-    DerivFieldType function_and_derivs
+    DerivConstFieldType function_and_derivs
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>

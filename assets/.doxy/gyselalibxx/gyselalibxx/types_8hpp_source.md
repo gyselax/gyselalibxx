@@ -103,6 +103,9 @@ using IdxRange1OnPatch = typename Patch::IdxRange1;
 template <class Patch>
 using Idx1OnPatch = typename Patch::Idx1;
 
+template <class Patch>
+using IdxRangeBSOnPatch = typename Patch::IdxRangeBS12;
+
 
 // IDXRANGESLICE ---------------------------------------------------------------------------------
 
