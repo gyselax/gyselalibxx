@@ -4,6 +4,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "krook_source_constant.hpp"
 #include "mask_tanh.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -68,7 +70,7 @@ KrookSourceConstant::KrookSourceConstant(
 
 DFieldSpXVx KrookSourceConstant::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
-    Kokkos::Profiling::pushRegion("(GSLX) KrookSource");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) KrookSource");
 
     DConstFieldVx ftarget = get_const_field(m_ftarget);
     DConstFieldX mask = get_const_field(m_mask);
@@ -87,6 +89,5 @@ DFieldSpXVx KrookSourceConstant::operator()(DFieldSpXVx const allfdistribu, doub
                                             -amplitude * mask(ddc::select<GridX>(ispxvx)) * dt);
             });
 
-    Kokkos::Profiling::popRegion();
     return allfdistribu;
 }
