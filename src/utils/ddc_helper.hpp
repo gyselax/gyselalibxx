@@ -236,7 +236,7 @@ bool points_are_subset(
         IdxRange<GridSuperSet> const& idx_range_superset,
         ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
 {
-    return find_point_missing_from_superset(idx_range_superset, idx_range_subset, tol)
+    return find_point_missing_from_superset(idx_range_subset, idx_range_superset, tol)
            == (idx_range_subset.back() + 1);
 }
 
