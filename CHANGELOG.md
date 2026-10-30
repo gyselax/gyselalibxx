@@ -54,6 +54,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
 - Speed up the matrix assembly and RHS computation of `PolarSplineFEMPoissonLikeSolver`.
 - The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the full index range on which $\phi$ is defined (including any batch dimensions).
+- Speedup the koliop collision operator.
+- Simplified the koliop bindings.
 - Allow `MPILayout` and `MPITransposeAllToAll` to be used with more MPI ranks than points in the distributed dimensions.
 - The constructor of `LiePoissonBracket` now takes the metric tensor as an argument (in addition to the mapping). The type of the metric tensor is an additional template parameter.
 - The template parameter of `Gradient` must now satisfy `concepts::MetricTensor`.
