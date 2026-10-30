@@ -16,7 +16,8 @@ extend-ignore-re = ["capitalize()",
                     "Gif-sur-Yvette",
                     "GYSELALIBXX_HOME",
                     "compute-sanitizer",
-                    "minimize_tol"
+                    "minimize_tol",
+                    "gko::initialize"
                     ]
 extend-ignore-identifiers-re = [
     "Comput. Phys. Commun.",
