@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis. It is currently limited to a non-periodic radial direction and a periodic poloidal direction (ring geometry).
 - Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
 - Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
+- `MultipatchSplineEvaluator2D` works with `DerivField`.
 
 ### Fixed
 
