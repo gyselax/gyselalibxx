@@ -177,7 +177,8 @@ TYPED_TEST(AdvectionFieldRThetaComputationFixture, TestAdvectionFieldFinder)
     BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
-    AdvectionFieldFinder advection_field_computer(to_physical_mapping);
+    MetricTensorEvaluator metric_tensor(to_physical_mapping);
+    AdvectionFieldFinder advection_field_computer(to_physical_mapping, metric_tensor);
 
 
     // --- Choice of the simulation -------------------------------------------------------------------
