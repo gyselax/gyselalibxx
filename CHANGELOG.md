@@ -17,11 +17,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `ddcHelper::get<Dim>(..)` to be used on a multipatch argument.
 - Allow `PolarSplineEvaluator::operator()` and `PolarSplineEvaluator::deriv` to evaluate a batch of polar splines on a grid.
 - Add new constructors to `DerivFieldMem` where the idx range slices for the derivatives default to the edge of the physical domain.
+- Add constructor `MultipatchField<TypeOnPatch, SubsetPatches...>` to get a subset of the objects stored in a `MultipatchField`.
+- Add `InterfaceDerivCoeffs::get_approx_cross_deriv()`.
+- Add an `InfNormResidual` Ginkgo stopping criterion based on the infinite norm of the residual.
+- Add `GkoMatrixResidualNorm` to choose the norm (2-norm or infinite norm) used in the stopping criterion of the `MatrixBatchCsr` CG and BiCGSTAB solvers. It can be passed to the constructors of `MatrixBatchCsr` and `PolarSplineFEMPoissonLikeSolver`.
+- Add `Span3D`, `Span4D`, `DSpan3D` and `DSpan4D` aliases.
+- Add `PolarBSplines::eval_basis_and_n_derivs` to evaluate the polar basis splines and their mixed derivatives at once.
+- Allow `IdxStep` indexing for `VectorField` objects.
+- Allow `PolarSplineFEMPoissonLikeSolver` to solve a batch of equations (batch dimensions in `IdxRangeFull`).
+- Add `ddcHelper::get_idx_from_linear_index` to get the multi-dimensional index at a given position in an index range.
+- Add a `concepts::MetricTensor` concept describing objects which provide the metric tensor and its inverse at a given coordinate or index.
+- `MetricTensorEvaluator` can be evaluated at an index whose coordinate type matches `CoordArg`.
+- The pointwise operators of `Gradient` and `LiePoissonBracket` can be evaluated at an index whose coordinate type matches the coordinate of the metric tensor.
+- Allow `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` to take a metric tensor instead of a mapping to change the variance of a vector field.
+- Add `symmetric_tensor_mul` to calculate a tensor multiplication whose result is symmetric.
+- Add new helper functions `find_point_missing_from_superset` and `points_are_subset`.
 
 ### Fixed
 
 - Fix compilation errors due to use of `std::make_tuple` in functions that are GPU compatible.
 - Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
+- Fix Jean-Zay environment with missing environment variables.
 
 ### Changed
 
@@ -34,6 +50,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replace `MultipatchSplineEvaluator::deriv_dim_1()`, `MultipatchSplineEvaluator::deriv_dim_2()`, `MultipatchSplineEvaluator::deriv_1_and_2()`, `MultipatchSplineEvaluator::deriv<InterestDim>()` by `MultipatchSplineEvaluator::deriv()` taking as input the derivative order (similar as `ddc::SplineEvaluator2D`).
 - `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` are now aliases for `detail::` classes templated on `ddc::detail::TypeSeq`s of the patches and of the stored types. Type templates which give the same type on each patch now lead to the same class.
 - The constructor of `MultipatchField` from another multipatch object is now explicit.
+- Rewrite of the `GyroAverageOperator` to enable importing external coefficients for geometries where no inverse mapping is available.
+- The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
+- Speed up the matrix assembly and RHS computation of `PolarSplineFEMPoissonLikeSolver`.
+- The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the full index range on which $\phi$ is defined (including any batch dimensions).
+- Allow `MPILayout` and `MPITransposeAllToAll` to be used with more MPI ranks than points in the distributed dimensions.
+- The constructor of `LiePoissonBracket` now takes the metric tensor as an argument (in addition to the mapping). The type of the metric tensor is an additional template parameter.
+- The template parameter of `Gradient` must now satisfy `concepts::MetricTensor`.
+- `to_vector_space` now takes a metric tensor instead of a mapping to change the variance (covariant <-> contravariant) of a vector.
+- `to_vector_space` no longer supports changing both the coordinate system and the variance in a single call.
+- The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.
+- The constructor of `PolarSplineFEMPoissonLikeAssembler` now takes the metric tensor as an argument and `PolarSplineFEMPoissonLikeAssembler::operator()` no longer takes the mapping. The type of the metric tensor is an additional template parameter.
+- The constructor of `AdvectionFieldFinder` now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.
+- Calls to Kokkos profiling's region push/pop were replaced by calls `ScopedRegion` whenever possible to capture RAII deallocations.
 
 ### Deprecated
 
@@ -44,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MultipatchField::idx_type`.
 - Remove `MatrixBatchCsr::norm`.
 - Remove `MatrixBatchEll::norm`.
+- Remove `detail::combine_t` (prefer `ddc::combine_t`).
 
 ### Dependency requirements
 

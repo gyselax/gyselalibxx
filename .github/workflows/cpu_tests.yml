@@ -93,7 +93,7 @@ jobs:
       - id: docker
         uses: ./.github/actions/docker_update
         with:
-          always_push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
+          add_tags: ${{ github.event_name == 'push' || github.event_name == 'release' }}
           # Build the release tag with a ternary expression
           # 'latest' if push else (release.tag_name if release else '')
           release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
@@ -112,6 +112,7 @@ jobs:
           - name: 'clang'
             c_compiler: 'clang'
             cxx_compiler: 'clang++'
+            glibc_tunables: 'glibc.malloc.tcache_count=64'
         exclude:
           - toolchain: 'ci_coverage_toolchain'
             compiler:
@@ -127,6 +128,7 @@ jobs:
     env:
       CC: ${{ matrix.compiler.c_compiler }}
       CXX: ${{ matrix.compiler.cxx_compiler }}
+      GLIBC_TUNABLES: ${{ matrix.compiler.glibc_tunables }}
     steps:
       - name: Checkout gyselalibxx
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}

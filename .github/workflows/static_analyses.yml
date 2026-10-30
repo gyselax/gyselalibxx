@@ -41,7 +41,7 @@ jobs:
           pwd
           ls -a
       - name: Markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v24
+        uses: DavidAnson/markdownlint-cli2-action@v25
         with:
           config: './.markdownlint.json'
           globs: '**/*.md,!.github/**/*.md,!.gitlab/**/*.md'
@@ -174,7 +174,7 @@ jobs:
     - name: Checkout Actions Repository
       uses: actions/checkout@v7
     - name: Spell Check Repo
-      uses: crate-ci/typos@v1.50.3
+      uses: crate-ci/typos@v1.51.1
       with:
         files: ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin
 
