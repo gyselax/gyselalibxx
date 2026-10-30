@@ -45,11 +45,9 @@ using SplineVparBuilder = ddc::SplineBuilder<
 using SplineVparEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        ddc::detail::TypeSeq<BSplinesVpar>,
-        ddc::detail::TypeSeq<GridVpar>,
-        ddc::detail::TypeSeq<
-                ddc::ConstantExtrapolationRule<Vpar>,
-                ddc::ConstantExtrapolationRule<Vpar>>>;
+        ddc::TypeSeq<BSplinesVpar>,
+        ddc::TypeSeq<GridVpar>,
+        ddc::TypeSeq<ddc::ConstantExtrapolationRule<Vpar>, ddc::ConstantExtrapolationRule<Vpar>>>;
 
 using SplineMuBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
@@ -62,7 +60,6 @@ using SplineMuBuilder = ddc::SplineBuilder<
 using SplineMuEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        ddc::detail::TypeSeq<BSplinesMu>,
-        ddc::detail::TypeSeq<GridMu>,
-        ddc::detail::
-                TypeSeq<ddc::ConstantExtrapolationRule<Mu>, ddc::ConstantExtrapolationRule<Mu>>>;
+        ddc::TypeSeq<BSplinesMu>,
+        ddc::TypeSeq<GridMu>,
+        ddc::TypeSeq<ddc::ConstantExtrapolationRule<Mu>, ddc::ConstantExtrapolationRule<Mu>>>;

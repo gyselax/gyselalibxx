@@ -87,7 +87,7 @@ using SplineInterpolatorRTheta = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         IdxRange<BSplinesR, BSplinesTheta>,
         IdxRange<GridR, GridTheta>,
-        ddc::detail::TypeSeq<ExtrapolationRule::NullValue, ExtrapolationRule::Constant>,
+        ddc::TypeSeq<ExtrapolationRule::NullValue, ExtrapolationRule::Constant>,
         ExtrapolationRule::Periodic,
         SplineBoundaryClosures<
                 SplineRClosure, // boundary at r=0

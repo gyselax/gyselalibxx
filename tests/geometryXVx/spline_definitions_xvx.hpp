@@ -51,9 +51,9 @@ using SplineXBuilder = ddc::SplineBuilder<
 using SplineXEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        ddc::detail::TypeSeq<BSplinesX>,
-        ddc::detail::TypeSeq<GridX>,
-        ddc::detail::TypeSeq<
+        ddc::TypeSeq<BSplinesX>,
+        ddc::TypeSeq<GridX>,
+        ddc::TypeSeq<
                 std::conditional_t<
                         X::PERIODIC,
                         ddc::PeriodicExtrapolationRule<X>,
@@ -73,10 +73,9 @@ using SplineVxBuilder = ddc::SplineBuilder<
 using SplineVxEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        ddc::detail::TypeSeq<BSplinesVx>,
-        ddc::detail::TypeSeq<GridVx>,
-        ddc::detail::
-                TypeSeq<ddc::ConstantExtrapolationRule<Vx>, ddc::ConstantExtrapolationRule<Vx>>>;
+        ddc::TypeSeq<BSplinesVx>,
+        ddc::TypeSeq<GridVx>,
+        ddc::TypeSeq<ddc::ConstantExtrapolationRule<Vx>, ddc::ConstantExtrapolationRule<Vx>>>;
 
 using XExtrapRule = std::conditional_t<
         X::PERIODIC,

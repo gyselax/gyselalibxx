@@ -47,8 +47,8 @@ using Patch9 = Patch<GridX<9>, GridY<9>, BSplinesX<9>, BSplinesY<9>>;
 
 
 /// @brief Sorted list of patches.
-using PatchOrdering = ddc::detail::
-        TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5, Patch6, Patch7, Patch8, Patch9>;
+using PatchOrdering
+        = ddc::TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5, Patch6, Patch7, Patch8, Patch9>;
 
 
 // EDGES -----------------------------------------------------------------------------------------

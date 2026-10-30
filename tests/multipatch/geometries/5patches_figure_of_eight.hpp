@@ -135,7 +135,7 @@ using Patch5 = Patch<GridX<5>, GridY<5>, BSplinesX<5>, BSplinesY<5>>;
 
 
 /// @brief Sorted list of patches.
-using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5>;
+using PatchOrdering = ddc::TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5>;
 
 
 // EDGES -----------------------------------------------------------------------------------------

@@ -102,7 +102,7 @@ KOKKOS_FUNCTION auto internal_index(TensorType const& tensor, std::index_sequenc
 {
     return IndexedTensor<
             const TensorType,
-            ddc::detail::TypeSeq<VectorIndexIdMap<
+            ddc::TypeSeq<VectorIndexIdMap<
                     ddc::type_seq_element_t<I, TypeSeqCharIds>::value,
                     typename TensorType::template vector_index_set_t<I>>...>>(tensor);
 }
@@ -296,9 +296,11 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType const&... tensor_to_mul)
         IndexedTensor<ResultTensorType, ResultIndexTypeSeq> indexed_result(result);
         if constexpr (is_symmetric) {
             static_assert(
-                    (ddc::type_seq_size_v<ddc::type_seq_element_t<0, ResultIndexTypeSeq>>)
-                            == (ddc::type_seq_size_v<
-                                    ddc::type_seq_element_t<1, ResultIndexTypeSeq>>),
+                    (ddc::type_seq_size_v<typename ddc::type_seq_element_t<0, ResultIndexTypeSeq>::
+                                                  possible_idx_values>)
+                            == (ddc::type_seq_size_v<typename ddc::type_seq_element_t<
+                                        1,
+                                        ResultIndexTypeSeq>::possible_idx_values>),
                     "Matrix must be square to be symmetrical");
             details::symmetric_internal_tensor_mul<AllIndexIdMaps>(
                     indexed_result,
@@ -339,7 +341,7 @@ KOKKOS_FUNCTION auto index(TensorType const& tensor)
             sizeof...(ids) == TensorType::rank(),
             "The number of indices provided must be equal to the rank of the tensor.");
     using namespace tensor_tools;
-    using TypeSeqCharIds = ddc::detail::TypeSeq<std::integral_constant<char, ids>...>;
+    using TypeSeqCharIds = ddc::TypeSeq<std::integral_constant<char, ids>...>;
     return details::internal_index<
             TypeSeqCharIds>(tensor, std::make_index_sequence<sizeof...(ids)>());
 }

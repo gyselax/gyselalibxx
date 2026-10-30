@@ -28,7 +28,7 @@
  * @tparam D The degree of the polynomial.
  */
 template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag, std::size_t D>
-class TriangularBernsteinPolynomialBasis
+class TriangularBernsteinPolynomialBasis : ddc::DiscreteDimension
 {
 public:
     /// A tag for DDC to recognise the discrete dimension type.
