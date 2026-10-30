@@ -421,7 +421,7 @@ private:
 
     template <class Builder, class IdxRangeBatchedInterpolation>
     auto batched_basis_idx_range(
-            Builder const& builder, 
+            Builder const& builder,
             IdxRangeBatchedInterpolation const& batched_interpolation_domain) const
     {
         if constexpr (requires { builder.batched_spline_domain(batched_interpolation_domain); }) {
