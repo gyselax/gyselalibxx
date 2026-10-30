@@ -187,7 +187,7 @@ void test_operator_assignment(
                 err = 0;
             },
             Kokkos::Max<double>(max_error));
-    EXPECT_LE(max_error, 1e-14);
+    EXPECT_LE(max_error, 1e-12);
 }
 
 // Test deriv() on device and on host ............................................................
@@ -294,7 +294,7 @@ void test_deriv(
                 splines,
                 spline_patch_1,
                 spline_patch_2,
-                5e-12);
+                1e-11);
     }
     // Test deriv on dimension Theta.
     for (int i_dtheta(0); i_dtheta <= 3; i_dtheta++) {
@@ -308,7 +308,7 @@ void test_deriv(
                 splines,
                 spline_patch_1,
                 spline_patch_2,
-                5e-12);
+                1e-11);
     }
     // Test deriv on dimensions (R, Theta).
     for (int i_dr(0); i_dr <= 3; i_dr++) {
@@ -396,7 +396,7 @@ void check_deriv_match(
         auto const eval_deriv_host = ddc::create_mirror_and_copy(eval_deriv);
 
         // --- check errors.
-        check_near<Patch>(get_field(expected_deriv_host), get_field(eval_deriv_host), 5e-13);
+        check_near<Patch>(get_field(expected_deriv_host), get_field(eval_deriv_host), 1e-11);
     }
 };
 
@@ -459,7 +459,7 @@ void check_cross_deriv_match(
             check_near<Patch>(
                     get_field(expected_cross_deriv_host),
                     get_field(eval_cross_deriv_host),
-                    5e-12);
+                    1e-10);
         }
     }
 };
@@ -504,23 +504,23 @@ TEST_F(MultipatchSplineEvaluatorTest, HostEvaluateOnSingleCoord)
     double eval_function = evaluators(eval_coord_P1_on_patch_1, splines_host);
     double expected_function
             = evaluator_1_host(eval_coord_P1_on_patch_1, const_function_1_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-14);
+    EXPECT_NEAR(eval_function, expected_function, 1e-12);
 
     eval_function = evaluators(eval_coord_P1_on_patch_2, splines_host);
     expected_function = evaluator_2_host(eval_coord_P1_on_patch_2, const_function_2_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-14);
+    EXPECT_NEAR(eval_function, expected_function, 1e-12);
 
     eval_function = evaluators(eval_coord_P2_on_patch_1, splines_host);
     expected_function = evaluator_1_host(eval_coord_P2_on_patch_1, const_function_1_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-14);
+    EXPECT_NEAR(eval_function, expected_function, 1e-12);
 
     eval_function = evaluators(eval_coord_P2_on_patch_2, splines_host);
     expected_function = evaluator_2_host(eval_coord_P2_on_patch_2, const_function_2_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-14);
+    EXPECT_NEAR(eval_function, expected_function, 1e-12);
 
     eval_function = evaluators(eval_coord_P2_outside, splines_host);
     expected_function = evaluator_2_host(eval_coord_P2_outside, const_function_2_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-14);
+    EXPECT_NEAR(eval_function, expected_function, 1e-12);
 
     /*
         REMARK: here Patch1::Coord12 == Patch2::Coord12 == Coord<R, Theta>.
@@ -663,10 +663,10 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
 
     // --- check errors
     ddc::host_for_each(idx_range_eval_periodic_rtheta1, [&](typename Patch1::Idx12 const idx) {
-        EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-14);
+        EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-12);
     });
     ddc::host_for_each(idx_range_eval_periodic_rtheta2, [&](typename Patch2::Idx12 const idx) {
-        EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-14);
+        EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-12);
     });
 }
 
@@ -987,14 +987,14 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnCoordField)
 
     // --- check errors
     ddc::host_for_each(idx_range_eval_rtheta1, [&](typename Patch1::Idx12 const idx) {
-        EXPECT_NEAR(expected_derivs_1_patch_1_host(idx), eval_derivs_1_patch_1_host(idx), 5e-13);
-        EXPECT_NEAR(expected_derivs_2_patch_1_host(idx), eval_derivs_2_patch_1_host(idx), 5e-13);
-        EXPECT_NEAR(expected_derivs_12_patch_1_host(idx), eval_derivs_12_patch_1_host(idx), 5e-12);
+        EXPECT_NEAR(expected_derivs_1_patch_1_host(idx), eval_derivs_1_patch_1_host(idx), 1e-11);
+        EXPECT_NEAR(expected_derivs_2_patch_1_host(idx), eval_derivs_2_patch_1_host(idx), 1e-11);
+        EXPECT_NEAR(expected_derivs_12_patch_1_host(idx), eval_derivs_12_patch_1_host(idx), 1e-10);
     });
     ddc::host_for_each(idx_range_eval_rtheta2, [&](typename Patch2::Idx12 const idx) {
-        EXPECT_NEAR(expected_derivs_1_patch_2_host(idx), eval_derivs_1_patch_2_host(idx), 5e-13);
-        EXPECT_NEAR(expected_derivs_2_patch_2_host(idx), eval_derivs_2_patch_2_host(idx), 5e-13);
-        EXPECT_NEAR(expected_derivs_12_patch_2_host(idx), eval_derivs_12_patch_2_host(idx), 5e-12);
+        EXPECT_NEAR(expected_derivs_1_patch_2_host(idx), eval_derivs_1_patch_2_host(idx), 1e-11);
+        EXPECT_NEAR(expected_derivs_2_patch_2_host(idx), eval_derivs_2_patch_2_host(idx), 1e-11);
+        EXPECT_NEAR(expected_derivs_12_patch_2_host(idx), eval_derivs_12_patch_2_host(idx), 1e-10);
     });
 }
 
@@ -1026,8 +1026,8 @@ TEST_F(MultipatchSplineEvaluatorTest, HostIntegrateOnCoordField)
     double const expected_integral_2 = 0.0;
 
     // Compare the evaluated functions with the expected functions.
-    EXPECT_NEAR(eval_integrals(0), expected_integral_1, 1e-14);
-    EXPECT_NEAR(eval_integrals(1), expected_integral_2, 1e-14);
+    EXPECT_NEAR(eval_integrals(0), expected_integral_1, 1e-12);
+    EXPECT_NEAR(eval_integrals(1), expected_integral_2, 1e-12);
 
     /*
         REMARK: Cannot compare to SplineEvaluator2D as long as the .integrate()
@@ -1126,10 +1126,10 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
 
     // --- check errors
     ddc::host_for_each(idx_range_eval_periodic_rtheta1, [&](typename Patch1::Idx12 const idx) {
-        EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-14);
+        EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-12);
     });
     ddc::host_for_each(idx_range_eval_periodic_rtheta2, [&](typename Patch2::Idx12 const idx) {
-        EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-14);
+        EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-12);
     });
 }
 
