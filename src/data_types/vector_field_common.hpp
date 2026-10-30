@@ -67,6 +67,14 @@ inline constexpr auto get(VectorFieldType& field) noexcept
 
 } // namespace ddcHelper
 
+/**
+ * @brief A base class containing the functionalities common to VectorField and VectorFieldMem.
+ *
+ * The vector field is stored as one scalar field per component.
+ *
+ * @tparam FieldType The type of the scalar field used to store each component.
+ * @tparam DDims The tags describing the dimensions which make up the elements of the vector.
+ */
 template <class FieldType, class... DDims>
 class VectorFieldCommon<FieldType, ddc::detail::TypeSeq<DDims...>>
 {
@@ -99,8 +107,10 @@ public:
     using chunk_view_type = typename FieldType::view_type;
 
 protected:
+    /// @brief The number of components of the vector.
     static constexpr std::size_t NDims = sizeof...(DDims);
 
+    /// @brief The scalar fields storing each component of the vector field.
     std::array<FieldType, NDims> m_values;
 
 protected:
@@ -132,13 +142,19 @@ protected:
     }
 
 public:
+    /**
+     * @brief Provide access to the index range on which this field is defined.
+     * @return The index range on which this field is defined.
+     */
     constexpr index_range_type idx_range() const noexcept
     {
         return m_values[0].domain();
     }
 
-    /** Provide access to the index range on which this field is defined
-     * @return the index range on which this field is defined
+    /**
+     * @brief Provide access to the sub-set of the index range on which this field is defined.
+     * @tparam QueryDDims The dimensions of interest.
+     * @return The index range on which this field is defined.
      */
     template <class... QueryDDims>
     constexpr IdxRange<QueryDDims...> idx_range() const noexcept
@@ -146,11 +162,19 @@ public:
         return ddc::select<QueryDDims...>(idx_range());
     }
 
+    /**
+     * @brief Get the number of dimensions of the index range on which the field is defined.
+     * @return The rank of the index range.
+     */
     static constexpr int rank() noexcept
     {
         return FieldType::rank();
     }
 
+    /**
+     * @brief Copy the values of another vector field into this vector field.
+     * @param[in] src The vector field whose values should be copied.
+     */
     template <class FieldSrc>
     void deepcopy(FieldSrc const& src)
     {
