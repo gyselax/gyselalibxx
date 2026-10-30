@@ -34,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `symmetric_tensor_mul` to calculate a tensor multiplication whose result is symmetric.
 - Add new helper functions `find_point_missing_from_superset` and `points_are_subset`.
 - Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis. It is currently limited to a non-periodic radial direction and a periodic poloidal direction (ring geometry).
+- Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
+- Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
 
 ### Fixed
 
