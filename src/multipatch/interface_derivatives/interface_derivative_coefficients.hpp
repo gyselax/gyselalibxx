@@ -73,19 +73,11 @@ class InterfaceDerivCoeffs
     using EdgePerpGrid1 = typename InterfaceType::Edge1::perpendicular_grid;
     using EdgePerpGrid2 = typename InterfaceType::Edge2::perpendicular_grid;
 
-    using EdgeParGrid1 = typename InterfaceType::Edge1::parallel_grid;
-    using EdgeParGrid2 = typename InterfaceType::Edge2::parallel_grid;
-
     using Patch1 = typename InterfaceType::Edge1::associated_patch;
     using Patch2 = typename InterfaceType::Edge2::associated_patch;
 
-    using IdxRange2D_1 = typename Patch1::IdxRange12;
-    using IdxRange2D_2 = typename Patch2::IdxRange12;
-
     using IdxRange1DPerp_1 = IdxRange<EdgePerpGrid1>;
     using IdxRange1DPerp_2 = IdxRange<EdgePerpGrid2>;
-    using IdxRange1DPar_1 = IdxRange<EdgeParGrid1>;
-    using IdxRange1DPar_2 = IdxRange<EdgeParGrid2>;
 
     using Idx1D_1 = Idx<EdgePerpGrid1>;
     using Idx1D_2 = Idx<EdgePerpGrid2>;
@@ -99,16 +91,8 @@ class InterfaceDerivCoeffs
             typename Patch2::BSplines1,
             typename Patch2::BSplines2>;
 
-    using GridBreakPt1 = std::conditional_t<
-            BSplinesPerp1::is_uniform(),
-            ddc::UniformBsplinesKnots<BSplinesPerp1>,
-            ddc::NonUniformBsplinesKnots<BSplinesPerp1>>;
-    using GridBreakPt2 = std::conditional_t<
-            BSplinesPerp2::is_uniform(),
-            ddc::UniformBsplinesKnots<BSplinesPerp2>,
-            ddc::NonUniformBsplinesKnots<BSplinesPerp2>>;
-    using IdxRangeBreakPt1 = IdxRange<GridBreakPt1>;
-    using IdxRangeBreakPt2 = IdxRange<GridBreakPt2>;
+    using GridBreakPt1 = ddc::knot_discrete_dimension_t<BSplinesPerp1>;
+    using GridBreakPt2 = ddc::knot_discrete_dimension_t<BSplinesPerp2>;
 
 public:
     /// @brief Interface between the two involved patches.
@@ -212,21 +196,14 @@ public:
         // The additional interpolation points have to be in the boundary cells.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
             check_additional_interpolation_points_location<
-                    BSplinesPerp1,
-                    GridBreakPt1>(m_idx_range_perp_1, m_extremity_1);
+                    BSplinesPerp1>(m_idx_range_perp_1, m_extremity_1);
         }
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
             check_additional_interpolation_points_location<
-                    BSplinesPerp2,
-                    GridBreakPt2>(m_idx_range_perp_2, m_extremity_2);
+                    BSplinesPerp2>(m_idx_range_perp_2, m_extremity_2);
         }
 
-        if constexpr ((ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)&&(
-                              ddc::is_uniform_point_sampling_v<EdgePerpGrid2>)) {
-            set_coefficients_uniform_per_patch_case();
-        } else {
-            set_coefficients_non_uniform_case();
-        }
+        set_coefficients();
     }
 
 
@@ -499,39 +476,37 @@ private:
         }
     }
 
-    template <typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid>
+    template <typename BSplinesPerp, typename EdgePerpGrid>
     void check_additional_interpolation_points_location(
             IdxRange<EdgePerpGrid> const& idx_range_perp,
             Extremity const extremity)
     {
-        IdxRange<GridBreakPt> idx_range_full_break_points
+        using GridBreakPt = ddc::knot_discrete_dimension_t<BSplinesPerp>;
+        IdxRange<GridBreakPt> idx_range_break_points
                 = ddc::discrete_space<BSplinesPerp>().break_point_domain();
 
-        double added_interpolation_pt;
-        double break_coord_min;
-        double break_coord_max;
+        using Dim = typename EdgePerpGrid::continuous_dimension_type;
+
+        Coord<Dim> additional_interpolation_pt;
+        Idx<GridBreakPt> idx_expected_cell_start;
         if (extremity == Extremity::FRONT) {
-            Idx<EdgePerpGrid> idx = idx_range_perp.back() - IdxStep<EdgePerpGrid>(1);
-            Idx<GridBreakPt> idx_break
-                    = idx_range_full_break_points.back() - IdxStep<GridBreakPt>(1);
-            added_interpolation_pt = double(ddc::coordinate(idx));
-            break_coord_min = double(ddc::coordinate(idx_break));
-            break_coord_max = double(ddc::coordinate(idx_range_full_break_points.back()));
+            additional_interpolation_pt
+                    = ddc::coordinate(idx_range_perp.back() - IdxStep<EdgePerpGrid>(1));
+            idx_expected_cell_start = idx_range_break_points.back() - IdxStep<GridBreakPt>(1);
         } else {
-            Idx<EdgePerpGrid> idx = idx_range_perp.front() + IdxStep<EdgePerpGrid>(1);
-            Idx<GridBreakPt> idx_break
-                    = idx_range_full_break_points.front() + IdxStep<GridBreakPt>(1);
-            added_interpolation_pt = double(ddc::coordinate(idx));
-            break_coord_min = double(ddc::coordinate(idx_range_full_break_points.front()));
-            break_coord_max = double(ddc::coordinate(idx_break));
+            additional_interpolation_pt
+                    = ddc::coordinate(idx_range_perp.front() + IdxStep<EdgePerpGrid>(1));
+            idx_expected_cell_start = idx_range_break_points.front();
         }
 
-        if (!((break_coord_min < added_interpolation_pt)
-              && (added_interpolation_pt < break_coord_max))) {
+        Coord<Dim> break_coord_min = ddc::coordinate(idx_expected_cell_start);
+        Coord<Dim> break_coord_max = ddc::coordinate(idx_expected_cell_start + 1);
+        if (!((break_coord_min < additional_interpolation_pt)
+              && (additional_interpolation_pt < break_coord_max))) {
             throw std::runtime_error(
                     "[abort] The additional interpolation points have to be placed in the "
                     "first or last cell of the patch. The point "
-                    + std::to_string(added_interpolation_pt) + " is not placed between "
+                    + std::to_string(additional_interpolation_pt) + " is not placed between "
                     + std::to_string(break_coord_min) + " and " + std::to_string(break_coord_max)
                     + ".");
         }
@@ -544,7 +519,9 @@ private:
      * @brief Compute the coefficients a, b and the weights omega applying the recursive
      * formula. 
      */
-    void set_coefficients_non_uniform_case()
+    void set_coefficients() requires(
+            (!ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)
+            || (!ddc::is_uniform_point_sampling_v<EdgePerpGrid2>))
     {
         // Memory allocation ---------------------------------------------------------------------
         // Define weight fields for number of cells equal to n, n-1 and n-2 in the recursion.
@@ -555,14 +532,6 @@ private:
         host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_2(m_idx_range_perp_2);
         host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_1(m_idx_range_perp_2);
         host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_0(m_idx_range_perp_2);
-
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_2(weights_1_alloc_minus_2);
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_1(weights_1_alloc_minus_1);
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_0(weights_1_alloc_minus_0);
-
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_2(weights_2_alloc_minus_2);
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_1(weights_2_alloc_minus_1);
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_0(weights_2_alloc_minus_0);
 
         int const n_points_1 = m_idx_range_perp_1.size();
         int const n_points_2 = m_idx_range_perp_2.size();
@@ -575,116 +544,75 @@ private:
             throw std::runtime_error("Please provide at least 2 cells in the Patch2.");
         }
 
-        // Initialise fields
-        ddc::parallel_fill(weights_1_minus_2, 0.0);
-        ddc::parallel_fill(weights_1_minus_1, 0.0);
-        ddc::parallel_fill(weights_1_minus_0, 0.0);
-        ddc::parallel_fill(weights_2_minus_2, 0.0);
-        ddc::parallel_fill(weights_2_minus_1, 0.0);
-        ddc::parallel_fill(weights_2_minus_0, 0.0);
-
         // Store the 3 last steps for the recursion in an array.
         std::array<host_t<DField<IdxRange1DPerp_1>>, 3> weights_patch1
-                = {weights_1_minus_2, weights_1_minus_1, weights_1_minus_0};
+                = {get_field(weights_1_alloc_minus_2),
+                   get_field(weights_1_alloc_minus_1),
+                   get_field(weights_1_alloc_minus_0)};
         std::array<host_t<DField<IdxRange1DPerp_2>>, 3> weights_patch2
-                = {weights_2_minus_2, weights_2_minus_1, weights_2_minus_0};
+                = {get_field(weights_2_alloc_minus_2),
+                   get_field(weights_2_alloc_minus_1),
+                   get_field(weights_2_alloc_minus_0)};
+
+        // Initialise fields
+        ddc::parallel_fill(weights_patch1[0], 0.0);
+        ddc::parallel_fill(weights_patch1[1], 0.0);
+        ddc::parallel_fill(weights_patch1[2], 0.0);
+        ddc::parallel_fill(weights_patch2[0], 0.0);
+        ddc::parallel_fill(weights_patch2[1], 0.0);
+        ddc::parallel_fill(weights_patch2[2], 0.0);
 
         std::array<double, 3> coeff_deriv_patch1;
         std::array<double, 3> coeff_deriv_patch2;
 
-        // For the local coefficients
-        double alpha_i;
-        double beta_i;
-        std::array<double, 3> gammas_i;
-
         // Define a step to increment the indices to move away from the interface.
-        IdxStep<EdgePerpGrid1> idx_step_1
-                = m_extremity_1 == FRONT ? IdxStep<EdgePerpGrid1>(1) : IdxStep<EdgePerpGrid1>(-1);
-        IdxStep<EdgePerpGrid2> idx_step_2
-                = m_extremity_2 == FRONT ? IdxStep<EdgePerpGrid2>(1) : IdxStep<EdgePerpGrid2>(-1);
+        IdxStep<EdgePerpGrid1> idx_step_1(m_extremity_1 == FRONT ? 1 : -1);
+        IdxStep<EdgePerpGrid2> idx_step_2(m_extremity_2 == FRONT ? 1 : -1);
 
         // Initialisation recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) -----------------------------
-        Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
-        Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
+        Idx1D_1 const interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
+        Idx1D_2 const interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
 
         // Set (a_{n-2},b_{n-2},c_{n-2}) ---
-        Idx1D_1 idx_1_minus;
-        Idx1D_1 idx_1 = interface_idx_1;
-        Idx1D_1 idx_1_plus = interface_idx_1 + idx_step_1;
+        auto [cell_length_left, cell_length_right] = get_cell_lengths(interface_idx_2);
 
-        Idx1D_2 idx_2_minus;
-        Idx1D_2 idx_2 = interface_idx_2;
-        Idx1D_2 idx_2_plus = interface_idx_2 + idx_step_2;
-
-        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx_2);
-
-        alpha_i = get_alpha(cell_length_left, cell_length_right);
-        beta_i = get_beta(cell_length_left, cell_length_right);
-        gammas_i = get_gammas(cell_length_left, cell_length_right);
-
-        coeff_deriv_patch1[0] = beta_i; // b_{n-2}
-        coeff_deriv_patch2[0] = alpha_i; // a_{n-2}
+        coeff_deriv_patch1[2] = get_beta(cell_length_left, cell_length_right); // b_{n-2}
+        coeff_deriv_patch2[2] = get_alpha(cell_length_left, cell_length_right); // a_{n-2}
 
         // c_{n-2}
-        weights_patch1[0](idx_1_plus) = gammas_i[0];
-        weights_patch1[0](idx_1) = gammas_i[1];
-        weights_patch2[0](idx_2) = gammas_i[1];
-        weights_patch2[0](idx_2_plus) = gammas_i[2];
+        std::array<double, 3> gammas_i = get_gammas(cell_length_left, cell_length_right);
+        weights_patch1[2](interface_idx_1 + idx_step_1) = gammas_i[0];
+        weights_patch1[2](interface_idx_1) = gammas_i[1];
+        weights_patch2[2](interface_idx_2) = gammas_i[1];
+        weights_patch2[2](interface_idx_2 + idx_step_2) = gammas_i[2];
 
         // Set (a_{n-1},b_{n-1},c_{n-1}) ---
-        idx_2_minus = interface_idx_2;
-        idx_2 = interface_idx_2 + idx_step_2;
-        idx_2_plus = interface_idx_2 + 2 * idx_step_2;
-
-        std::tie(cell_length_left, cell_length_right) = get_cell_lengths(idx_2);
-
-        alpha_i = get_alpha(cell_length_left, cell_length_right);
-        beta_i = get_beta(cell_length_left, cell_length_right);
-        gammas_i = get_gammas(cell_length_left, cell_length_right);
-
-        coeff_deriv_patch2[1]
-                = alpha_i * coeff_deriv_patch2[0] / (1 - coeff_deriv_patch2[0] * beta_i); // a_{n-1}
-        coeff_deriv_patch1[1]
-                = coeff_deriv_patch1[0] / (1 - coeff_deriv_patch2[0] * beta_i); // b_{n-1}
-
-        // c_{n-1} = (c_{n-2} + a_{n-2} * gamma_i) / (1 - a_{n-2} * beta_i);
-        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
-            weights_patch1[1](idx)
-                    = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch1[0](idx);
-        });
-        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
-            weights_patch2[1](idx)
-                    = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch2[0](idx);
-        });
-        double factor = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * coeff_deriv_patch2[0];
-        weights_patch2[1](idx_2_plus) += factor * gammas_i[2];
-        weights_patch2[1](idx_2) += factor * gammas_i[1];
-        weights_patch2[1](idx_2_minus) += factor * gammas_i[0];
-        weights_patch1[1](idx_1) += factor * gammas_i[0];
+        update_n_1<false>(
+                interface_idx_2 + idx_step_2,
+                interface_idx_1,
+                idx_step_2,
+                coeff_deriv_patch2,
+                coeff_deriv_patch1,
+                weights_patch2,
+                weights_patch1);
 
         // Set (a_{n},b_{n},c_{n}) ---
-        coeff_deriv_patch1[2] = coeff_deriv_patch1[1];
-        coeff_deriv_patch2[2] = coeff_deriv_patch2[1];
-        ddc::parallel_deepcopy(weights_patch1[2], get_const_field(weights_patch1[1]));
-        ddc::parallel_deepcopy(weights_patch2[2], get_const_field(weights_patch2[1]));
-
-
         // Computing coefficients (c, a, b) on patch 2 -------------------------------------------
         // If m_is_cell_bound_2_with_extra_interpol_pt is true, the last cell is treated differently.
         int const n2_cells
                 = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
 
-        recursion(
+        recursion<false>(
                 n2_cells,
                 interface_idx_2,
                 coeff_deriv_patch2,
                 coeff_deriv_patch1,
-                weights_patch1,
-                weights_patch2);
+                weights_patch2,
+                weights_patch1);
 
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
-            correction_boundary(
+            correction_boundary<false>(
                     n_points_2,
                     interface_idx_2,
                     coeff_deriv_patch2,
@@ -695,48 +623,21 @@ private:
 
         // Initialisation second recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) ----------------------
         // Set (a_{n-2},b_{n-2},c_{n-2}) ---
-        idx_1_minus = interface_idx_1;
-        idx_1 = interface_idx_1 + idx_step_1;
-        idx_1_plus = interface_idx_1 + 2 * idx_step_1;
-
-        std::tie(cell_length_left, cell_length_right) = get_cell_lengths(idx_1);
-
-        alpha_i = get_alpha(cell_length_left, cell_length_right);
-        beta_i = get_beta(cell_length_left, cell_length_right);
-        gammas_i = get_gammas(cell_length_left, cell_length_right);
-
-        coeff_deriv_patch1[0] = coeff_deriv_patch1[2]; // a_{n-2}
-        coeff_deriv_patch2[0] = coeff_deriv_patch2[2]; // b_{n-2}
-        ddc::parallel_deepcopy(weights_patch1[0], get_const_field(weights_patch1[2])); // c_{n-2}
-        ddc::parallel_deepcopy(weights_patch2[0], get_const_field(weights_patch2[2])); // c_{n-2}
-
-        // Set (a_{n-1},b_{n-1},c_{n-1}) ---
-        coeff_deriv_patch2[1]
-                = coeff_deriv_patch2[0] / (1 - coeff_deriv_patch1[0] * alpha_i); // a_{n-1}
-        coeff_deriv_patch1[1]
-                = coeff_deriv_patch1[0] * beta_i / (1 - coeff_deriv_patch1[0] * alpha_i); // b_{n-1}
-
-        // c_{n-1} = (c_{n-2} + b_{n-2} * gamma_i) / (1 - b_{n-2} * alpha_i);
-        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
-            weights_patch1[1](idx)
-                    = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch1[0](idx);
-        });
-        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
-            weights_patch2[1](idx)
-                    = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch2[0](idx);
-        });
-        factor = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * coeff_deriv_patch1[0];
-        weights_patch1[1](idx_1_plus) += factor * gammas_i[0];
-        weights_patch1[1](idx_1) += factor * gammas_i[1];
-        weights_patch1[1](idx_1_minus) += factor * gammas_i[2];
-        weights_patch2[1](interface_idx_2) += factor * gammas_i[2];
+        update_n_1<true>(
+                interface_idx_1 + idx_step_1,
+                interface_idx_2,
+                idx_step_1,
+                coeff_deriv_patch1,
+                coeff_deriv_patch2,
+                weights_patch1,
+                weights_patch2);
 
         // Computing coefficients (c, a, b) on patch 1 -------------------------------------------
         // If m_is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
         int const n1_cells
                 = m_is_cell_bound_1_with_extra_interpol_pt ? n_points_1 - 3 : n_points_1 - 1;
 
-        recursion(
+        recursion<true>(
                 n1_cells,
                 interface_idx_1,
                 coeff_deriv_patch1,
@@ -746,7 +647,7 @@ private:
 
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
-            correction_boundary(
+            correction_boundary<true>(
                     n_points_1,
                     interface_idx_1,
                     coeff_deriv_patch1,
@@ -764,6 +665,64 @@ private:
         m_weights_patch_2(interface_idx_2) *= 0.5;
     }
 
+    template <bool is_on_patch1, class Grid1D, class Grid1DOther>
+    void update_n_1(
+            Idx<Grid1D> idx_patch,
+            Idx<Grid1DOther> idx_other_patch,
+            IdxStep<Grid1D> idx_step_patch,
+            std::array<double, 3>& coeff_deriv_patch,
+            std::array<double, 3>& coeff_deriv_other_patch,
+            std::array<DField<IdxRange<Grid1D>, Kokkos::HostSpace>, 3>& weights_patch,
+            std::array<DField<IdxRange<Grid1DOther>, Kokkos::HostSpace>, 3>& weights_other_patch)
+    {
+        cycle_buffers(coeff_deriv_patch);
+        cycle_buffers(coeff_deriv_other_patch);
+        cycle_buffers(weights_patch);
+        cycle_buffers(weights_other_patch);
+
+        auto [cell_length_patch1, cell_length_patch2] = get_cell_lengths(idx_patch);
+        double cell_length_patch = is_on_patch1 ? cell_length_patch1 : cell_length_patch2;
+        double cell_length_other_patch = is_on_patch1 ? cell_length_patch2 : cell_length_patch1;
+
+        double alpha_i = get_alpha(cell_length_patch, cell_length_other_patch);
+        double beta_i = get_beta(cell_length_patch, cell_length_other_patch);
+        std::array<double, 3> gammas_i = get_gammas(cell_length_patch, cell_length_other_patch);
+
+        double denom = 1 - coeff_deriv_patch[1] * alpha_i;
+        // Set (a_{n-1},b_{n-1},c_{n-1}) ---
+        coeff_deriv_patch[2] = coeff_deriv_patch[1] * beta_i / denom; // b_{n-1}
+        coeff_deriv_other_patch[2] = coeff_deriv_other_patch[1] / denom; // a_{n-1}
+
+        // c_{n-1} = (c_{n-2} + b_{n-2} * gamma_i) / (1 - b_{n-2} * alpha_i);
+        ddc::host_for_each(get_idx_range(weights_patch[2]), [&](Idx<Grid1D> const& idx) {
+            weights_patch[2](idx) = 1. / denom * weights_patch[1](idx);
+        });
+        ddc::host_for_each(get_idx_range(weights_other_patch[2]), [&](Idx<Grid1DOther> const& idx) {
+            weights_other_patch[2](idx) = 1. / denom * weights_other_patch[1](idx);
+        });
+        double factor = 1. / denom * coeff_deriv_patch[1];
+        if (!is_on_patch1)
+            factor *= -1;
+        weights_patch[2](idx_patch + idx_step_patch) += factor * gammas_i[0];
+        weights_patch[2](idx_patch) += factor * gammas_i[1];
+        weights_patch[2](idx_patch - idx_step_patch) += factor * gammas_i[2];
+        weights_other_patch[2](idx_other_patch) += factor * gammas_i[2];
+    }
+
+    template <class Grid1D>
+    void update_weights(
+            std::array<DField<IdxRange<Grid1D>, Kokkos::HostSpace>, 3>& weights,
+            double denom,
+            double coeff)
+    {
+        // c_n = (c_{n-1} - coeff * c_{n-2}) / denom
+        // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
+        // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
+        ddc::host_for_each(get_idx_range(weights[2]), [&](Idx<Grid1D> const& idx_perp) {
+            weights[2](idx_perp)
+                    = 1. / denom * (weights[1](idx_perp) - coeff * weights[0](idx_perp));
+        });
+    }
 
     /**
      * @brief Recursion to compute the coefficients a, b and the weights omega. 
@@ -780,22 +739,31 @@ private:
      * @param[in,out] weights_patch1 Weights in front of the function values on patch 1. 
      * @param[in,out] weights_patch2 Weights in front of the function values on patch 2. 
      */
-    template <class Grid1D>
+    template <bool is_on_patch1, class Grid1D, class OGrid1D>
     void recursion(
             int const n_cells,
             Idx<Grid1D> const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
-            std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
-            std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
+            std::array<DField<IdxRange<Grid1D>, Kokkos::HostSpace>, 3>& weights_patch,
+            std::array<DField<IdxRange<OGrid1D>, Kokkos::HostSpace>, 3>& weights_other_patch)
     {
+        static_assert(std::is_same_v<
+                      Grid1D,
+                      std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>>);
         using Idx1D = Idx<Grid1D>;
-        constexpr bool is_on_patch1 = std::is_same_v<Idx1D, Idx1D_1>;
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
-        IdxStep<Grid1D> idx_step = extremity == FRONT ? IdxStep<Grid1D>(1) : IdxStep<Grid1D>(-1);
+        IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
+
 
         for (int n(2); n < n_cells; n++) {
+            // Update coefficients.
+            cycle_buffers(coeff_deriv_patch);
+            cycle_buffers(coeff_deriv_other_patch);
+            cycle_buffers(weights_patch);
+            cycle_buffers(weights_other_patch);
+
             Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
             Idx1D const idx = interface_idx + n * idx_step;
             Idx1D const idx_plus = interface_idx + (n + 1) * idx_step;
@@ -810,7 +778,6 @@ private:
             double const coeff_closest = is_on_patch1
                                                  ? get_alpha(cell_length_left, cell_length_right)
                                                  : get_beta(cell_length_left, cell_length_right);
-            std::array<double, 3> const gammas_i = get_gammas(cell_length_left, cell_length_right);
 
             double const denom = 1 - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
 
@@ -825,41 +792,37 @@ private:
             // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
             // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
             double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
-            ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
-                weights_patch1[2](idx_perp)
-                        = 1. / denom
-                          * (weights_patch1[1](idx_perp)
-                             - coeff_closer_deriv * weights_patch1[0](idx_perp));
-            });
-            ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
-                weights_patch2[2](idx_perp)
-                        = 1. / denom
-                          * (weights_patch2[1](idx_perp)
-                             - coeff_closer_deriv * weights_patch2[0](idx_perp));
-            });
-            double const factor = 1. / denom * coeff_deriv_patch[1];
-            if constexpr (is_on_patch1) {
-                weights_patch1[2](idx_plus) += factor * gammas_i[0];
-                weights_patch1[2](idx) += factor * gammas_i[1];
-                weights_patch1[2](idx_minus) += factor * gammas_i[2];
-            } else {
-                weights_patch2[2](idx_plus) += factor * gammas_i[2];
-                weights_patch2[2](idx) += factor * gammas_i[1];
-                weights_patch2[2](idx_minus) += factor * gammas_i[0];
-            }
-
-            // Update coefficients.
-            coeff_deriv_patch[0] = coeff_deriv_patch[1];
-            coeff_deriv_patch[1] = coeff_deriv_patch[2];
-            coeff_deriv_other_patch[0] = coeff_deriv_other_patch[1];
-            coeff_deriv_other_patch[1] = coeff_deriv_other_patch[2];
-
-            ddc::parallel_deepcopy(weights_patch1[0], get_const_field(weights_patch1[1]));
-            ddc::parallel_deepcopy(weights_patch2[0], get_const_field(weights_patch2[1]));
-
-            ddc::parallel_deepcopy(weights_patch1[1], get_const_field(weights_patch1[2]));
-            ddc::parallel_deepcopy(weights_patch2[1], get_const_field(weights_patch2[2]));
+            update_weights(weights_patch, denom, coeff_closer_deriv);
+            update_weights(weights_other_patch, denom, coeff_closer_deriv);
+            double factor = 1. / denom * coeff_deriv_patch[1];
+            if (!is_on_patch1)
+                factor *= -1;
+            std::array<double, 3> const gammas_i
+                    = is_on_patch1 ? get_gammas(cell_length_left, cell_length_right)
+                                   : get_gammas(cell_length_right, cell_length_left);
+            weights_patch[2](idx_plus) += factor * gammas_i[0];
+            weights_patch[2](idx) += factor * gammas_i[1];
+            weights_patch[2](idx_minus) += factor * gammas_i[2];
         }
+
+        // Update coefficients.
+        cycle_buffers(coeff_deriv_patch);
+        cycle_buffers(coeff_deriv_other_patch);
+    }
+
+    void cycle_buffers(std::array<double, 3>& buffer)
+    {
+        buffer[0] = buffer[1];
+        buffer[1] = buffer[2];
+    }
+
+    template <class IdxRangeType, class MemorySpace>
+    void cycle_buffers(std::array<DField<IdxRangeType, MemorySpace>, 3>& buffer)
+    {
+        DField<IdxRangeType, MemorySpace> tmp = buffer[0];
+        buffer[0] = buffer[1];
+        buffer[1] = buffer[2];
+        buffer[2] = tmp;
     }
 
     /**
@@ -878,20 +841,23 @@ private:
      * @param[in,out] weights_patch1 Weights in front of the function values on patch 1. 
      * @param[in,out] weights_patch2 Weights in front of the function values on patch 2. 
      */
-    template <class Grid1D>
+    template <bool is_on_patch1>
     void correction_boundary(
             int const n_points,
-            Idx<Grid1D> const interface_idx,
+            std::conditional_t<is_on_patch1, Idx1D_1, Idx1D_2> const interface_idx,
             std::array<double, 3>& coeff_deriv_patch,
             std::array<double, 3>& coeff_deriv_other_patch,
             std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
             std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
     {
+        cycle_buffers(weights_patch1);
+        cycle_buffers(weights_patch2);
+
+        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
         using Idx1D = Idx<Grid1D>;
-        constexpr bool is_on_patch1 = std::is_same_v<Idx1D, Idx1D_1>;
 
         Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
-        IdxStep<Grid1D> idx_step = extremity == FRONT ? IdxStep<Grid1D>(1) : IdxStep<Grid1D>(-1);
+        IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
 
         int const n = n_points - 3;
         Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
@@ -1002,7 +968,8 @@ private:
      * @brief Compute the coefficients a, b and the weights omega applying the explicit
      * formula for the uniform case. 
      */
-    void set_coefficients_uniform_per_patch_case()
+    void set_coefficients() requires((ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)&&(
+            ddc::is_uniform_point_sampling_v<EdgePerpGrid2>))
     {
         int const n_cells_1 = m_idx_range_perp_1.size() - 1;
         int const n_cells_2 = m_idx_range_perp_2.size() - 1;
@@ -1050,7 +1017,44 @@ private:
 
         m_weights_patch_1(interface_idx_1) = factor_a * un1 * (un2 - un2_minus);
         set_local_uniform_weights(m_weights_patch_1, -factor_b, un2, interface_idx_1);
-    };
+    }
+
+    /*
+     * @brief Apply the explicit formula for the uniform case to weights on one side of the interface
+     */
+    template <class EdgePerpGrid>
+    void set_local_uniform_weights(
+            host_t<DField<IdxRange<EdgePerpGrid>>> weights,
+            double factor,
+            double un_other_patch,
+            Idx<EdgePerpGrid> idx_interface)
+    {
+        double const u_plus = 2 + Kokkos::sqrt(3);
+        double const u_minus = 2 - Kokkos::sqrt(3);
+
+        IdxRange<EdgePerpGrid> idx_range = get_idx_range(weights);
+        Idx<EdgePerpGrid> idx_outside
+                = (idx_interface != idx_range.front()) ? idx_range.front() : idx_range.back();
+
+        int n_cells = idx_range.size() - 1;
+
+        IdxStep<EdgePerpGrid> edge_pt(1);
+        IdxRange<EdgePerpGrid> central_idx_range = idx_range.remove(edge_pt, edge_pt);
+
+        ddc::host_for_each(central_idx_range, [&](Idx<EdgePerpGrid> idx) {
+            const int k = abs(idx - idx_interface);
+            const int n_minus_k = n_cells - k;
+            double const vk_minus
+                    = Kokkos::pow(u_plus, n_minus_k - 1) - Kokkos::pow(u_minus, n_minus_k - 1);
+            double const vk_plus
+                    = Kokkos::pow(u_plus, n_minus_k + 1) - Kokkos::pow(u_minus, n_minus_k + 1);
+
+            weights(idx) = neg_1_to_the_power(k) * factor * un_other_patch * (vk_plus - vk_minus);
+        });
+
+        weights(idx_outside)
+                = neg_1_to_the_power(n_cells) * factor * un_other_patch * 2 * Kokkos::sqrt(3);
+    }
 
     /*
      * @brief Apply the explicit formula for the uniform case to weights on one side of the interface
@@ -1151,12 +1155,12 @@ private:
         // If given index is on the patch 1 or on the patch 2,
         else if (is_same_orientation_as_global) {
             // . | →   or  → | .
-            length_left = abs(ddc::coordinate(idx) - ddc::coordinate(idx_minus));
-            length_right = abs(ddc::coordinate(idx_plus) - ddc::coordinate(idx));
+            length_left = ddc::distance_at_left(idx);
+            length_right = ddc::distance_at_right(idx);
         } else {
             //  . | ←  or  ← | .
-            length_left = abs(ddc::coordinate(idx_plus) - ddc::coordinate(idx));
-            length_right = abs(ddc::coordinate(idx) - ddc::coordinate(idx_minus));
+            length_left = ddc::distance_at_right(idx);
+            length_right = ddc::distance_at_left(idx);
         }
 
         if ((length_left == 0) || (length_right == 0)) {
