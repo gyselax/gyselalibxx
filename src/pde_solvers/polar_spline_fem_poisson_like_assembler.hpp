@@ -919,10 +919,11 @@ public:
     }
 
 private:
-    auto get_matrix_size()
+    static std::size_t get_matrix_size()
     {
         if constexpr (include_boundary_splines)
-            return ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta;
+            return ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
+                   - ddc::discrete_space<BSplinesTheta>().nbasis();
         else
             return ddc::discrete_space<PolarBSplinesRTheta>().nbasis();
     }
