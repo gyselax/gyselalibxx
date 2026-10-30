@@ -130,7 +130,7 @@ template <
         typename QDimRMesh,
         typename QDimThetaMesh,
         concepts::MetricTensor MetricTensorType,
-        bool enforces_homogeneous_bc = true,
+        bool include_boundary_splines = true,
         typename IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler
 {
@@ -282,7 +282,7 @@ public:
                   metric_tensor,
                   idx_range_full,
                   IdxRangeBSRTheta(
-                          m_idxrange_bsplines_r.remove_last(IdxStepBSR(enforces_homogeneous_bc)),
+                          m_idxrange_bsplines_r.remove_last(IdxStepBSR(include_boundary_splines)),
                           m_idxrange_bsplines_theta))
     {
     }
@@ -921,7 +921,7 @@ public:
 private:
     auto get_matrix_size()
     {
-        if constexpr (enforces_homogeneous_bc)
+        if constexpr (include_boundary_splines)
             return ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta;
         else
             return ddc::discrete_space<PolarBSplinesRTheta>().nbasis();
