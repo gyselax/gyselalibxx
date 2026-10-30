@@ -478,14 +478,10 @@ public:
                     // the test b-spline. In a periodic dimension these may wrap around the
                     // boundary so they are split into 2 sorted ranges to guarantee that col_idx
                     // and values (from the CSR format) are filled in order.
-                    const std::array<IdxRangeBS1, 2> trial_ranges_1
-                            = detail_poisson::get_overlapping_bsplines_1d(
-                                    idx_test_1,
-                                    idx_range_basis_1);
-                    const std::array<IdxRangeBS2, 2> trial_ranges_2
-                            = detail_poisson::get_overlapping_bsplines_1d(
-                                    idx_test_2,
-                                    idx_range_basis_2);
+                    const std::array<IdxRangeBS1, 2> trial_ranges_1 = detail_poisson::
+                            get_overlapping_bsplines_1d(idx_test_1, idx_range_basis_1);
+                    const std::array<IdxRangeBS2, 2> trial_ranges_2 = detail_poisson::
+                            get_overlapping_bsplines_1d(idx_test_2, idx_range_basis_2);
 
                     // Calculate the position of the first tensor-tensor element in the row.
                     // These elements are found at the end of the row.

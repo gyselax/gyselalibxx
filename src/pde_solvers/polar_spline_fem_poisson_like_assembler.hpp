@@ -750,9 +750,7 @@ public:
                                                                + IdxStep<QDimRMesh, QDimThetaMesh>(
                                                                        r_thread_index,
                                                                        theta_thread_index);
-                                idx_quad = detail_poisson::periodic_wrap<
-                                        BSplinesR,
-                                        BSplinesTheta>(
+                                idx_quad = detail_poisson::periodic_wrap<BSplinesR, BSplinesTheta>(
                                         idx_quad,
                                         full_quad_idx_range,
                                         full_quad_idx_range);
