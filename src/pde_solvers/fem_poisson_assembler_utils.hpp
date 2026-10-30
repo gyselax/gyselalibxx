@@ -45,14 +45,14 @@ Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> as_ba
 
 
 /**
-    * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction.
-    *
-    * @tparam BSplinesTheta Periodic B-Splines in poloidal direction.
-    *
-    * @param[in] idx_theta @f$ \theta @f$ index.
-    *
-    * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
-    */
+ * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction.
+ *
+ * @tparam BSplinesTheta Periodic B-Splines in poloidal direction.
+ *
+ * @param[in] idx_theta @f$ \theta @f$ index.
+ *
+ * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
+ */
 template <typename BSplinesTheta>
 KOKKOS_FUNCTION IdxStep<BSplinesTheta> theta_mod(IdxStep<BSplinesTheta> idx_theta)
 {
@@ -77,15 +77,15 @@ KOKKOS_FUNCTION Idx<DDom> mod_add(Idx<DDom> idx, IdxStep<DDom> idx_step, IdxRang
 }
 
 /**
-    * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
-    *
-    * @tparam BSplinesTheta Periodic B-Splines in poloidal direction.
-    * @tparam IdxType The Type of the input index.
-    *
-    * @param[in] idx A multi-dimensional index including the polar bspline index.
-    *
-    * @return The corresponding index inside the domain.
-    */
+ * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
+ *
+ * @tparam BSplinesTheta Periodic B-Splines in poloidal direction.
+ * @tparam IdxType The Type of the input index.
+ *
+ * @param[in] idx A multi-dimensional index including the polar bspline index.
+ *
+ * @return The corresponding index inside the domain.
+ */
 template <typename BSplinesTheta, class IdxType>
 KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
 {
