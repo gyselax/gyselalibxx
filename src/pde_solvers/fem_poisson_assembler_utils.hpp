@@ -64,18 +64,6 @@ KOKKOS_FUNCTION IdxStep<BSplinesTheta> theta_mod(IdxStep<BSplinesTheta> idx_thet
     return idx_theta;
 }
 
-template <typename DDom, std::enable_if_t<DDom::continuous_dimension_type::PERIODIC, bool> = true>
-KOKKOS_FUNCTION Idx<DDom> mod_add(Idx<DDom> idx, IdxStep<DDom> idx_step, IdxRange<DDom> idx_range)
-{
-    if (idx - idx_range.front() < -idx_step) {
-        return idx + idx_range.extents() + idx_step;
-    } else if (idx_range.back() - idx < idx_step) {
-        return idx + idx_step - idx_range.extents();
-    } else {
-        return idx + idx_step;
-    }
-}
-
 /**
  * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
  *
@@ -100,6 +88,21 @@ KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
         idx -= idx_range_theta.extents();
     assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
     return idx;
+}
+
+/**
+ * @brief Add an idx_step to an idx in such a way that the result remains in the idx_range.
+ */
+template <typename DDom, std::enable_if_t<DDom::continuous_dimension_type::PERIODIC, bool> = true>
+KOKKOS_FUNCTION Idx<DDom> mod_add(Idx<DDom> idx, IdxStep<DDom> idx_step, IdxRange<DDom> idx_range)
+{
+    if (idx - idx_range.front() < -idx_step) {
+        return idx + idx_range.extents() + idx_step;
+    } else if (idx_range.back() - idx < idx_step) {
+        return idx + idx_step - idx_range.extents();
+    } else {
+        return idx + idx_step;
+    }
 }
 
 /**
