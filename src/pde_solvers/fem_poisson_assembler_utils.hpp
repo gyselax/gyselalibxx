@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <array>
 #include <tuple>
 
 #include <ddc/ddc.hpp>
@@ -340,6 +341,65 @@ KOKKOS_INLINE_FUNCTION IdxRange<ddc::knot_discrete_dimension_t<BSplines>> get_ov
                                     min(bspl.get_last_support_knot(idx_test),
                                         bspl.get_last_support_knot(idx_trial))));
         return IdxRange<Knots>(start_non_zero, end_non_zero - start_non_zero);
+    }
+}
+
+/**
+ * @brief Get the 1D B-splines in a basis whose supports overlap the support of a given B-spline.
+ *
+ * The result is returned as 2 contiguous index ranges. The indices in the first range are
+ * all smaller than the indices in the second range. This allows the B-splines to be
+ * iterated over in order, even when the overlap wraps around the boundary of a periodic
+ * basis. The second range is empty if the overlap does not wrap around the boundary.
+ *
+ * @tparam BSplines The 1D B-splines.
+ *
+ * @param[in] idx_test
+ *      The index of the B-spline (the test function).
+ * @param[in] idx_range_basis
+ *      The index range of the B-splines in the basis. In a periodic dimension this must
+ *      contain all the B-splines.
+ * @return
+ *      The 2 sorted index ranges containing all the B-splines in the basis which overlap
+ *      the given B-spline.
+ */
+template <typename BSplines>
+KOKKOS_FUNCTION std::array<IdxRange<BSplines>, 2> get_overlapping_bsplines_1d(
+        Idx<BSplines> idx_test,
+        IdxRange<BSplines> idx_range_basis)
+{
+    using IdxRangeBS = IdxRange<BSplines>;
+    using IdxStepBS = IdxStep<BSplines>;
+    assert(idx_range_basis.contains(idx_test));
+    int const degree = BSplines::degree();
+    int const nbasis = idx_range_basis.size();
+    // The number of B-splines in the basis before and after the test B-spline
+    int const n_before = (idx_test - idx_range_basis.front()).value();
+    int const n_after = (idx_range_basis.back() - idx_test).value();
+    IdxRangeBS const empty_range(idx_range_basis.front(), IdxStepBS(0));
+
+    if constexpr (BSplines::is_periodic()) {
+        assert(nbasis == int(ddc::discrete_space<BSplines>().nbasis()));
+        if (nbasis < 2 * degree + 1) {
+            // All B-splines overlap
+            return {idx_range_basis, empty_range};
+        } else if (n_before < degree) {
+            // The overlap wraps around the lower boundary
+            return {IdxRangeBS(idx_range_basis.front(), IdxStepBS(n_before + degree + 1)),
+                    idx_range_basis.take_last(IdxStepBS(degree - n_before))};
+        } else if (n_after < degree) {
+            // The overlap wraps around the upper boundary
+            return {idx_range_basis.take_first(IdxStepBS(degree - n_after)),
+                    IdxRangeBS(idx_test - IdxStepBS(degree), IdxStepBS(n_after + degree + 1))};
+        } else {
+            return {IdxRangeBS(idx_test - IdxStepBS(degree), IdxStepBS(2 * degree + 1)),
+                    empty_range};
+        }
+    } else {
+        int const n_lower = Kokkos::min(n_before, degree);
+        int const n_upper = Kokkos::min(n_after, degree);
+        return {IdxRangeBS(idx_test - IdxStepBS(n_lower), IdxStepBS(n_lower + n_upper + 1)),
+                empty_range};
     }
 }
 
