@@ -138,19 +138,16 @@ jobs:
       - name: "Filter tests"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/test_filter
-      - name: "Set CMAKE_PREFIX_PATH"
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-        run: |
-          echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/${{matrix.backend}}" >> $GITHUB_ENV
-        shell: bash
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
+          environment_command: '. /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}'
           toolchain: toolchains/common_toolchains/${{ matrix.toolchain }}.cmake
       - name: Check header file counts
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         run: |
+          . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}
           cmake --install build --prefix opt
           install_tree_count=$(find opt -name "*.hpp" | wc -l)
           src_tree_count=$(find src -name "*.hpp" | wc -l)
@@ -168,6 +165,8 @@ jobs:
       - name: Run tests
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
+        with:
+          environment_command: '. /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}'
       - name: Check Test Coverage
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'ci_coverage_toolchain'
         run: |

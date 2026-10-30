@@ -2,15 +2,13 @@
 
 FROM ubuntu:noble
 
-COPY bash_run /bin/
+COPY --chmod=0755 bash_run /bin/bash_run
 ENV BASH_ENV=/etc/profile
-ENV PATH=/opt/cmake-3.27/bin${PATH:+:${PATH}}
+ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
 
 
-RUN chmod +x /bin/bash_run \
- && export DEBIAN_FRONTEND=noninteractive \
- && echo tzdata tzdata/Areas string Etc | debconf-set-selections \
+RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
  && echo tzdata tzdata/Zones/Etc string UTC | debconf-set-selections \
  && apt-get update -y \
  && apt-get upgrade -y \
@@ -19,122 +17,19 @@ RUN chmod +x /bin/bash_run \
     apt-utils \
     ca-certificates \
     wget \
- && echo "deb [ arch=amd64 ] https://repo.pdi.dev/ubuntu noble main" > /etc/apt/sources.list.d/pdi.list \
- && wget -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://repo.pdi.dev/ubuntu/pdidev-archive-keyring.gpg \
- && chmod a+r /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
     clang-18 \
     libomp-dev \
     clang-format-14 \
-    doxygen \
-    pkg-config \
     git \
-    libfftw3-dev \
-    liblapacke-dev \
-    libopenmpi-dev \
     openssh-client \
-    pdidev-archive-keyring \
-    hdf5-tools \
-    pdiplugin-mpi-openmpi \
-    pdiplugin-decl-hdf5-openmpi \
-    pdiplugin-set-value \
     python3-pip \
     python3-venv \
-    libpdi-dev \
     cmake \
  && ln -sf /usr/bin/clang-18 /usr/bin/clang \
  && ln -sf /usr/bin/clang++-18 /usr/bin/clang++ \
- && git clone --branch v1.11.0 --depth 1 https://github.com/ginkgo-project/ginkgo.git \
- && cd ginkgo \
- && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
- && cmake --build build \
- && cmake --install build \
- && cd .. \
- && rm -rf ginkgo \
- && git clone --branch 5.1.1 --depth 1 https://github.com/kokkos/kokkos.git \
- && git clone --branch v1.1.0 --depth 1 https://github.com/kokkos/kokkos-fft.git \
- && git clone --branch 5.1.1 --depth 1 https://github.com/kokkos/kokkos-kernels.git \
- && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
- && git clone --branch v0.2.0 --depth 1 https://gitlab.com/cines/code.gysela/libkoliop \
- && git clone --branch v0.16.0 --depth 1 https://github.com/CExA-project/ddc.git \
- && git clone --branch v2.4.1 --depth 1 https://github.com/SciCompMod/GMGPolar.git \
- && export Kokkos_ROOT=/opt/serial/Kokkos \
- && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
- && export KokkosKernels_ROOT=/opt/serial/KokkosKernels \
- && export KokkosTools_ROOT=/opt/serial/KokkosTools \
- && export koliop_ROOT=/opt/serial/koliop \
- && export DDC_ROOT=/opt/serial/DDC \
- && export GMGPolar_ROOT=/opt/serial/GMGPolar \
- && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_SERIAL=ON -B build -S kokkos \
- && cmake --build build \
- && cmake --install build --prefix $Kokkos_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-fft \
- && cmake --build build \
- && cmake --install build --prefix $KokkosFFT_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-kernels \
- && cmake --build build \
- && cmake --install build --prefix $KokkosKernels_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
- && cmake --build build \
- && cmake --install build --prefix $KokkosTools_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S libkoliop \
- && cmake --build build \
- && cmake --install build --prefix $koliop_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
- && cmake --build build \
- && cmake --install build --prefix $DDC_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S GMGPolar \
- && cmake --build build \
- && cmake --install build --prefix $GMGPolar_ROOT \
- && rm -rf build \
- && export Kokkos_ROOT=/opt/openmp/Kokkos \
- && export KokkosFFT_ROOT=/opt/openmp/KokkosFFT \
- && export KokkosKernels_ROOT=/opt/openmp/KokkosKernels \
- && export KokkosTools_ROOT=/opt/openmp/KokkosTools \
- && export koliop_ROOT=/opt/openmp/koliop \
- && export DDC_ROOT=/opt/openmp/DDC \
- && export GMGPolar_ROOT=/opt/openmp/GMGPolar \
- && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_OPENMP=ON -B build -S kokkos \
- && cmake --build build \
- && cmake --install build --prefix $Kokkos_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-fft \
- && cmake --build build \
- && cmake --install build --prefix $KokkosFFT_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-kernels \
- && cmake --build build \
- && cmake --install build --prefix $KokkosKernels_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
- && cmake --build build \
- && cmake --install build --prefix $KokkosTools_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S libkoliop \
- && cmake --build build \
- && cmake --install build --prefix $koliop_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
- && cmake --build build \
- && cmake --install build --prefix $DDC_ROOT \
- && rm -rf build \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S GMGPolar \
- && cmake --build build \
- && cmake --install build --prefix $GMGPolar_ROOT \
- && rm -rf build \
- && rm -rf kokkos kokkos-fft kokkos-kernels kokkos-tools ddc gmgpolar \
- && git clone --branch v1.17.0 --depth 1 https://github.com/google/googletest.git \
- && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
- && cmake --build build \
- && cmake --install build --prefix /opt/googletest \
  && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build -DUSE_MATCHCOMPILER=ON -DCMAKE_BUILD_TYPE=Release \
@@ -145,32 +40,57 @@ RUN chmod +x /bin/bash_run \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
+    cmake \
     wget \
  && apt-get autoremove -y \
  && apt-get clean -y \
  && apt-get autoclean -y \
  && python3 -m venv /opt/venv \
  && /opt/venv/bin/python -m pip install -U --no-cache-dir \
-    PyYAML \
-    dask \
-    h5py \
-    imageio \
-    matplotlib \
-    numpy \
     pip \
-    scipy \
-    xarray \
     'pylint==3.3.9' \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
  && chown -R ci:ci /ci /data /opt/venv
 
+# Install what is necessary for Spack
+# See https://spack.readthedocs.io/en/latest/installing_prerequisites.html#linux
+RUN apt-get update --yes \
+ && apt-get install --yes --no-install-recommends \
+    file \
+    bzip2 \
+    ca-certificates \
+    g++ \
+    gcc \
+    gfortran \
+    git \
+    gzip \
+    lsb-release \
+    patch \
+    python3 \
+    tar \
+    unzip \
+    xz-utils \
+    zstd
+
 USER ci:ci
 WORKDIR /ci
 ENV HOME=/ci
 ENV PATH="/opt/venv/bin:$PATH"
-ENV CMAKE_PREFIX_PATH="/opt/googletest"
+
+COPY spack-env /data/spack-env
+RUN --mount=type=secret,id=github_user_id,env=GITHUB_USER \
+    --mount=type=secret,id=github_token_id,env=GITHUB_TOKEN \
+    git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git /ci/spack \
+    && . /ci/spack/share/spack/setup-env.sh \
+    && for backend in serial openmp; do \
+        spack env create "gyselalibxx-${backend}" "/data/spack-env/spack-${backend}.yaml" \
+        && spack --env "gyselalibxx-${backend}" config add config:install_tree:padded_length:128 \
+        && spack --env "gyselalibxx-${backend}" mirror set --autopush github-buildcache \
+        && spack --env "gyselalibxx-${backend}" repo update \
+        && spack --env "gyselalibxx-${backend}" install --fail-fast --include-build-deps; \
+    done
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]

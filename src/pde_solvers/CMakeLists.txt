@@ -9,12 +9,14 @@ target_sources("pde_solvers"
         FILE_SET HEADERS
             FILES
                 fem_1d_poisson_solver.hpp
+                fem_poisson_assembler_utils.hpp
                 fft_poisson_solver.hpp
                 gmg_polar_poisson_like_solver.hpp
                 ipoisson_solver.hpp
                 ipolar_poisson_like_solver.hpp
                 polar_spline_fem_poisson_like_assembler.hpp
                 polar_spline_fem_poisson_like_solver.hpp
+                tensor_product_bspline_poisson_assembler.hpp
 )
 
 target_link_libraries("pde_solvers"
