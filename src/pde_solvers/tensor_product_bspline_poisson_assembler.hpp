@@ -33,6 +33,10 @@
  * detail_poisson::TensorBSplineStash) so that the tensor product B-splines can be evaluated
  * at the quadrature points without being recalculated.
  *
+ * Each dimension may be periodic or non-periodic (as determined by the B-splines). In a
+ * periodic dimension the basis must contain at least 2*degree+1 B-splines so that a B-spline
+ * does not overlap with itself across the boundary.
+ *
  * @tparam Grid1 The grid type in the first dimension.
  * @tparam Grid2 The grid type in the second dimension.
  * @tparam BSplines1 The 1D B-splines in the first dimension.
@@ -66,10 +70,6 @@ public:
     static_assert(
             std::is_same_v<typename MetricTensorType::CoordArg, Coord<Dim1, Dim2>>,
             "The metric tensor must be evaluated on (Dim1, Dim2) coordinates.");
-    static_assert(
-            !Dim1::PERIODIC && Dim2::PERIODIC,
-            "TensorProductBSplinePoissonAssembler is currently only implemented for a ring "
-            "geometry");
 
     /// The index range of the tensor product B-splines
     using IdxRangeBS2D = IdxRange<BSplines1, BSplines2>;
@@ -173,7 +173,8 @@ public:
      * @param idx_range_full The full index range of @f$ \phi @f$ including any batch dimensions.
      * @param idx_range_tensor_basis The index range of the tensor product B-splines in the
      *          FEM basis. B-splines which are excluded from this index range (e.g. to impose
-     *          boundary conditions) are not included in the matrix.
+     *          boundary conditions) are not included in the matrix. In a periodic dimension
+     *          all B-splines must be included.
      */
     explicit TensorProductBSplinePoissonAssembler(
             QuadField int_volume,
@@ -212,6 +213,16 @@ public:
                   "(TensorProductBSplinePoissonAssembler::TensorProductBSplinePoissonAssembler)",
                   m_idxrange_tensor_basis.size() + 1)
     {
+        if constexpr (BSplines1::is_periodic()) {
+            assert(std::size_t(m_idxrange_tensor_basis.template extent<BSplines1>().value())
+                   == ddc::discrete_space<BSplines1>().nbasis());
+            assert(ddc::discrete_space<BSplines1>().nbasis() >= 2 * BSplines1::degree() + 1);
+        }
+        if constexpr (BSplines2::is_periodic()) {
+            assert(std::size_t(m_idxrange_tensor_basis.template extent<BSplines2>().value())
+                   == ddc::discrete_space<BSplines2>().nbasis());
+            assert(ddc::discrete_space<BSplines2>().nbasis() >= 2 * BSplines2::degree() + 1);
+        }
         stash_basis_eval(get_field(m_basis_vals_1), get_field(m_first_basis_1));
         stash_basis_eval(get_field(m_basis_vals_2), get_field(m_first_basis_2));
         init_tensor_tensor_nnz_per_line(m_tensor_nnz_per_row);
