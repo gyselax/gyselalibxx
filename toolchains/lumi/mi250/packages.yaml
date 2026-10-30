@@ -3,18 +3,26 @@ packages:
   cray-mpich:
     buildable: false
     externals:
-      - spec: cray-mpich@9.0.1+gtl+rocm amdgpu_target=gfx90a %gcc
+      - spec: cray-mpich@9.0.1+gtl+rocm amdgpu_target=gfx90a
         prefix: /opt/cray/pe/mpich/9.0.1/ofi/gnu/12.3
         extra_attributes:
           environment:
             prepend_path:
               LD_LIBRARY_PATH: /opt/cray/libfabric/1.22.0/lib64
-      - spec: cray-mpich@9.0.1+gtl+rocm amdgpu_target=gfx90a %llvm-amdgpu
+        dependencies:
+          - spec: gcc
+          - spec: hip
+          - spec: hsa-rocr-dev
+      - spec: cray-mpich@9.0.1+gtl+rocm amdgpu_target=gfx90a
         prefix: /opt/cray/pe/mpich/9.0.1/ofi/amd/6.0
         extra_attributes:
           environment:
             prepend_path:
               LD_LIBRARY_PATH: /opt/cray/libfabric/1.22.0/lib64
+        dependencies:
+          - spec: llvm-amdgpu
+          - spec: hip
+          - spec: hsa-rocr-dev
   gcc:
     externals:
       - spec: gcc@14.2 languages:='c,c++,fortran'
