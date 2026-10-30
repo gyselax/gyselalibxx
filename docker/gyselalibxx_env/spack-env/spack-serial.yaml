@@ -64,8 +64,10 @@ spack:
     - 'python@3.14'
 
     - 'py-h5py@3.16'
+    - 'py-imagio'
     - 'py-matplotlib@3.11 ^freetype@2.14.1'
     - 'py-numpy@2.4'
+    - 'py-scipy'
     - 'py-pyyaml@6.0'
     - 'py-xarray@2026.4'
   view: true
