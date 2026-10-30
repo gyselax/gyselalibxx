@@ -47,9 +47,6 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2026.10
-      paths:
-        - spack_repo/patches_lumi
-        - spack_repo/patches_common
       destination: $spack/var/spack/repos/patches-v2026.10
     builtin:
       branch: releases/v2026.10
