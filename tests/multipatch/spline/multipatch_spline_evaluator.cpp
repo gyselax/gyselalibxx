@@ -330,8 +330,8 @@ void test_deriv(
 
 template <class Patch>
 void check_near(
-        DConstFieldOnPatch<Patch> expected_host,
-        DConstFieldOnPatch<Patch> eval_host,
+        DConstFieldOnPatch_host<Patch> expected_host,
+        DConstFieldOnPatch_host<Patch> eval_host,
         double const TOL)
 {
     ddc::host_for_each(get_idx_range(expected_host), [&](typename Patch::Idx12 const idx) {
