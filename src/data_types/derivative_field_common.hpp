@@ -452,7 +452,7 @@ protected:
      * @param cross_derivative_idx_range The cross product of the index ranges on which the derivatives
      *              of the function are defined.
      */
-    KOKKOS_FUNCTION DerivFieldCommon(
+    DerivFieldCommon(
             std::string const& label,
             physical_idx_range_type physical_idx_range,
             discrete_deriv_idx_range_type deriv_idx_range,
