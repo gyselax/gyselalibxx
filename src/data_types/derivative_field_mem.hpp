@@ -54,9 +54,6 @@ class DerivFieldMem<ElementType, IdxRange<DDims...>, NDerivs, MemSpace>
               IdxRange<DDims...>>
 {
 private:
-    /// @brief Label of the object.
-    std::string m_label;
-
     /// @brief The class from which this object inherits.
     using base_type = DerivFieldCommon<
             FieldMem<ElementType, IdxRange<DDims...>, MemSpace>,
@@ -149,6 +146,9 @@ private:
     using allocator_type = ddc::KokkosAllocator<element_type, typename chunk_type::memory_space>;
 
     using internal_mdspan_type = typename base_type::internal_mdspan_type;
+
+    /// @brief Label of the object.
+    std::string m_label;
 
     /// @brief The number of chunks which must be created to describe this object.
     using base_type::n_fields;
@@ -352,11 +352,11 @@ public:
             std::string const& label,
             allocator_type allocator,
             physical_idx_range_type val_idx_range)
-        : m_label(label)
-        , base_type(
-                  val_idx_range,
-                  get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
-                  detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
+        : base_type(
+                val_idx_range,
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
+        , m_label(label)
     {
         initialise_chunks(label, allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
