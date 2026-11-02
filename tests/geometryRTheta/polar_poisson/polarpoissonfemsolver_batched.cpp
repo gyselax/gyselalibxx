@@ -54,7 +54,8 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridTheta,
         PolarBSplinesRTheta,
         SplineInterpolatorRTheta,
-        DiscreteMapping>;
+        DiscreteMapping,
+        MetricTensorEvaluator<DiscreteMapping>>;
 
 using BatchedPoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
@@ -62,6 +63,7 @@ using BatchedPoissonSolver = PolarSplineFEMPoissonLikeSolver<
         PolarBSplinesRTheta,
         SplineInterpolatorRTheta,
         DiscreteMapping,
+        MetricTensorEvaluator<DiscreteMapping>,
         IdxRangeBatched>;
 
 constexpr double res_tol = 1e-13;
@@ -169,8 +171,14 @@ void test_PolarPoissonFEMBatched__MatchesUnbatched()
             });
 
     // Solve the batched equations
-    BatchedPoissonSolver
-            batched_solver(discrete_mapping, interpolator, idx_range_batched, 1000, res_tol);
+    MetricTensorEvaluator metric_tensor(discrete_mapping);
+    BatchedPoissonSolver batched_solver(
+            discrete_mapping,
+            metric_tensor,
+            interpolator,
+            idx_range_batched,
+            1000,
+            res_tol);
     batched_solver.update_coefficients(get_const_field(alpha), get_const_field(beta));
 
     DFieldMemBatched phi_from_field_alloc(idx_range_batched);
@@ -182,7 +190,7 @@ void test_PolarPoissonFEMBatched__MatchesUnbatched()
     auto phi_from_func_host = ddc::create_mirror_view_and_copy(get_field(phi_from_func_alloc));
 
     // Compare with unbatched solves
-    PoissonSolver solver(discrete_mapping, interpolator, idx_range, 1000, res_tol);
+    PoissonSolver solver(discrete_mapping, metric_tensor, interpolator, idx_range, 1000, res_tol);
     DFieldMemRTheta phi_from_field_ref(idx_range);
     DFieldMemRTheta phi_from_func_ref(idx_range);
 

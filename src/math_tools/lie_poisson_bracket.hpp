@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include "coord_or_idx.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "gradient.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "static_tensors.hpp"
+#include "type_seq_tools.hpp"
 #include "vector_field.hpp"
 
 
@@ -24,27 +26,39 @@
  *                  the argument type of the 3D mapping but axi-symmetry may make it
  *                  useful to evaluate the mapping on a coordinate with a reduced
  *                  dimensionality.
+ * @tparam MetricTensorType A type which provides the metric tensor at a coordinate
+ *                  of type MappingCoord. By default it is calculated from the
+ *                  Jacobian of the mapping using a MetricTensorEvaluator.
  */
-template <concepts::Mapping Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
+template <
+        concepts::Mapping Mapping3D,
+        class MappingCoord = typename Mapping3D::CoordArg,
+        concepts::MetricTensor MetricTensorType = MetricTensorEvaluator<Mapping3D, MappingCoord>>
 class LiePoissonBracket
 {
+    static_assert(
+            std::is_same_v<typename MetricTensorType::CoordArg, MappingCoord>,
+            "The metric tensor must be evaluated on the same coordinate as the mapping.");
+
     using BasisSpatial = ddc::to_type_seq_t<typename Mapping3D::CoordArg>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
 
 private:
     Mapping3D m_mapping;
-    MetricTensorEvaluator<Mapping3D, MappingCoord> m_metric_tensor;
-    Gradient<MetricTensorEvaluator<Mapping3D, MappingCoord>> m_grad;
+    MetricTensorType m_metric_tensor;
+    Gradient<MetricTensorType> m_grad;
 
 public:
     /**
      * @brief Build a LiePoissonBracket operator.
      * @param mapping The mapping describing the system of coordinates on which the
      *              expression is calculated.
+     * @param metric_tensor An object which provides the metric tensor associated
+     *              with the mapping.
      */
-    explicit LiePoissonBracket(Mapping3D const& mapping)
+    LiePoissonBracket(Mapping3D const& mapping, MetricTensorType const& metric_tensor)
         : m_mapping(mapping)
-        , m_metric_tensor(mapping)
+        , m_metric_tensor(metric_tensor)
         , m_grad(m_metric_tensor)
     {
     }
@@ -58,24 +72,26 @@ public:
      * @param[in] partial_derivatives_g A tensor containing the partial derivatives
      * of the vector field G expressed at the given coordinate : @f$ DG_{ij} = \partial_j G_i @f$.
      * @param[in] B A contravariant vector containing the magnetic field at the given coordinate.
-     * @param[in] coord The coordinate where the calculation is carried out.
+     * @param[in] coord_or_idx The coordinate (or the index of the grid point) where the
+     * calculation is carried out.
      *
      * @return A vector describing the gyrokinetic Poisson bracket at a given coordinate.
      * The vector is indexed in the same way and has the same covariance as the elements of the vector G.
      */
     template <
             class TensorType,
+            concepts::CoordOrIdx<MappingCoord> CoordOrIdxType,
             class = std::enable_if_t<is_tensor_type_v<TensorType> && TensorType::rank() == 2>>
     KOKKOS_INLINE_FUNCTION DTensor<ddc::type_seq_element_t<0, typename TensorType::index_set>>
     operator()(
             DTensor<CovBasisSpatial> const& partial_derivatives_f,
             TensorType const& partial_derivatives_g,
             DTensor<BasisSpatial> const& B,
-            MappingCoord const& coord) const
+            CoordOrIdxType const& coord_or_idx) const
     {
-        double J = m_mapping.jacobian(coord);
+        double J = m_mapping.jacobian(ddcHelper::get_coordinate<MappingCoord>(coord_or_idx));
         LeviCivitaTensor<double, BasisSpatial> eps(J);
-        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord);
+        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord_or_idx);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
                 index<'i', 'j', 'k'>(eps),
@@ -94,19 +110,21 @@ public:
      * @param[in] partial_derivatives_g A vector containing the (covariant) gradient
      * of the scalar field g expressed at the given coordinate.
      * @param[in] B A contravariant vector containing the magnetic field at the given coordinate.
-     * @param[in] coord The coordinate where the calculation is carried out.
+     * @param[in] coord_or_idx The coordinate (or the index of the grid point) where the
+     * calculation is carried out.
      *
      * @return The gyrokinetic Poisson bracket at a given coordinate.
      */
+    template <concepts::CoordOrIdx<MappingCoord> CoordOrIdxType>
     KOKKOS_INLINE_FUNCTION double operator()(
             DTensor<CovBasisSpatial> const& partial_derivatives_f,
             DTensor<CovBasisSpatial> const& partial_derivatives_g,
             DTensor<BasisSpatial> const& B,
-            MappingCoord const& coord) const
+            CoordOrIdxType const& coord_or_idx) const
     {
-        double J = m_mapping.jacobian(coord);
+        double J = m_mapping.jacobian(ddcHelper::get_coordinate<MappingCoord>(coord_or_idx));
         LeviCivitaTensor<double, BasisSpatial> eps(J);
-        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord);
+        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord_or_idx);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
                 index<'i', 'j', 'k'>(eps),
@@ -138,8 +156,10 @@ public:
             DVectorConstField<IdxRange, BasisSpatial, MemorySpace> const B)
     {
         static_assert(is_accessible_v<ExecSpace, Mapping3D>);
+        static_assert(is_accessible_v<ExecSpace, MetricTensorType>);
         static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
         using IdxType = typename IdxRange::discrete_element_type;
+        using IdxMappingCoord = find_idx_t<MappingCoord, IdxRange>;
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
@@ -150,7 +170,12 @@ public:
                             partial_derivatives_f(idx),
                             partial_derivatives_g(idx),
                             B(idx),
-                            ddc::coordinate(idx));
+                            IdxMappingCoord(idx));
                 });
     }
 };
+
+/// Deduce the coordinate type from the metric tensor when one is provided.
+template <concepts::Mapping Mapping3D, concepts::MetricTensor MetricTensorType>
+LiePoissonBracket(Mapping3D const&, MetricTensorType const&)
+        -> LiePoissonBracket<Mapping3D, typename MetricTensorType::CoordArg, MetricTensorType>;

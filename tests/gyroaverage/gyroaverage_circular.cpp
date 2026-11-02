@@ -42,6 +42,9 @@ struct Theta
 
 struct Mu;
 
+/// A dummy dimension used to check batching
+struct Batch;
+
 // --- Spline definitions
 int constexpr BSDegreeR = 3;
 int constexpr BSDegreeTheta = 3;
@@ -70,6 +73,9 @@ struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_typ
 struct GridMu : NonUniformGridBase<Mu>
 {
 };
+struct GridBatch : UniformGridBase<Batch>
+{
+};
 
 template <class ExecutionSpace>
 using SplineRThetaInterpolatorType = SplineInterpolator<
@@ -94,6 +100,8 @@ using IdxMu = Idx<GridMu>;
 using IdxRTheta = Idx<GridR, GridTheta>;
 using IdxMuR = Idx<GridMu, GridR>;
 using IdxMuRTheta = Idx<GridMu, GridR, GridTheta>;
+using IdxBatch = Idx<GridBatch>;
+using IdxMuBatchRTheta = Idx<GridMu, GridBatch, GridR, GridTheta>;
 
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
@@ -101,13 +109,17 @@ using IdxRangeMu = IdxRange<GridMu>;
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 using IdxRangeMuR = IdxRange<GridMu, GridR>;
 using IdxRangeMuRTheta = IdxRange<GridMu, GridR, GridTheta>;
+using IdxRangeBatch = IdxRange<GridBatch>;
+using IdxRangeMuBatchRTheta = IdxRange<GridMu, GridBatch, GridR, GridTheta>;
 
 using DFieldMemMu = DFieldMem<IdxRangeMu>;
 using DFieldMemRTheta = DFieldMem<IdxRangeRTheta>;
 using DFieldMemMuRTheta = DFieldMem<IdxRangeMuRTheta>;
+using DFieldMemMuBatchRTheta = DFieldMem<IdxRangeMuBatchRTheta>;
 using DFieldMu = DField<IdxRangeMu>;
 using DFieldRTheta = DField<IdxRangeRTheta>;
 using DFieldMuRTheta = DField<IdxRangeMuRTheta>;
+using DFieldMuBatchRTheta = DField<IdxRangeMuBatchRTheta>;
 using DConstFieldRTheta = ConstField<double, IdxRangeRTheta>;
 
 void initialise(
@@ -252,6 +264,11 @@ protected:
                 m_ky);
     }
 
+    /**
+     * @brief Check the values stored in m_A_gavg_alloc against the analytical gyroaverage of A.
+     */
+    void check_against_analytical();
+
 protected:
     std::size_t const m_nb_gyro_points = 6; // Must be even for the error estimate below to apply
     double const m_B0 = 1.0;
@@ -275,6 +292,9 @@ using CartesianToPolar = CartesianToCircular<X_pC, Y_pC, R, Theta>;
 using SplineRThetaInterpolator = SplineRThetaInterpolatorType<Kokkos::DefaultExecutionSpace>;
 
 using GyroAverageOperatorType = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeMu>;
+
+using GyroAverageOperatorBatchedType
+        = GyroAverageOperator<SplineRThetaInterpolator, IdxRangeMu, IdxRangeBatch>;
 
 TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 {
@@ -303,6 +323,53 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     });
 
     Kokkos::fence();
+
+    check_against_analytical();
+}
+
+TEST_P(GyroAverageCircularParamTests, TestAnalyticalBatched)
+{
+    IdxRangeBatch const batch_idx_range(IdxBatch(0), IdxStep<GridBatch>(2));
+
+    DFieldRTheta A = get_field(m_A_alloc);
+    DFieldMuRTheta A_gavg = get_field(m_A_gavg_alloc);
+
+    IdxRangeMuRTheta const rthetamu_idx_range = get_idx_range(A_gavg);
+    IdxRangeRTheta const rtheta_idx_range(rthetamu_idx_range);
+    SplineRThetaInterpolator const spline_interpolator(rtheta_idx_range);
+
+    auto [gyrocoeffs_coords_alloc, gyrocoeffs_weights_alloc]
+            = GyroAverageOperatorBatchedType::build_circular_coefficients(
+                    CartesianToPolar(),
+                    get_field(m_larmor_factor_params_alloc),
+                    get_field(m_larmor_factor_space_alloc),
+                    m_nb_gyro_points);
+
+    GyroAverageOperatorBatchedType
+            gyroaverage(spline_interpolator, gyrocoeffs_coords_alloc, gyrocoeffs_weights_alloc);
+
+    // Copy A identically to every (mu, batch) slice
+    DFieldMemMuBatchRTheta A_gavg_batched_alloc(
+            IdxRangeMuBatchRTheta(batch_idx_range, rthetamu_idx_range));
+    DFieldMuBatchRTheta A_gavg_batched = get_field(A_gavg_batched_alloc);
+    ddc::parallel_copy(Kokkos::DefaultExecutionSpace(), A_gavg_batched, get_const_field(A));
+
+    // Apply the gyroaverage to all values of mu and batch at once
+    gyroaverage(A_gavg_batched);
+
+    // Each batch slice should match the analytical result
+    ddc::host_for_each(batch_idx_range, [&](IdxBatch const ibatch) {
+        ddc::parallel_deepcopy(A_gavg, A_gavg_batched[ibatch]);
+        Kokkos::fence();
+        check_against_analytical();
+    });
+}
+
+void GyroAverageCircularParamTests::check_against_analytical()
+{
+    DFieldMuRTheta A_gavg = get_field(m_A_gavg_alloc);
+    IdxRangeMuRTheta const rthetamu_idx_range = get_idx_range(A_gavg);
+    IdxRangeMu const mu_idx_range(rthetamu_idx_range);
 
     auto Rcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Rcoord_alloc));
     host_t<DFieldRTheta> Rcoord_host = get_field(Rcoord_alloc_host);

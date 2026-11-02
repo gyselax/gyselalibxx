@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <concepts>
 #include <type_traits>
 
 #include "coord_transformation_tools.hpp"
@@ -9,6 +10,83 @@
 #include "tensor.hpp"
 #include "vector_index_tools.hpp"
 #include "view.hpp"
+
+namespace metric_tensor_detail {
+/**
+ * @brief A placeholder grid used to check that a metric tensor can be evaluated at
+ * an index. It is never instantiated in a discrete space.
+ */
+template <class Dim>
+struct PlaceholderGrid
+{
+    /// The continuous dimension on which the grid is defined.
+    using continuous_dimension_type = Dim;
+};
+
+/// A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate.
+template <class CoordType>
+struct IdxPlaceholder;
+
+/// A struct to obtain a Idx containing PlaceholderGrids associated with a coordinate.
+template <class... Dims>
+struct IdxPlaceholder<Coord<Dims...>>
+{
+    /// The type of the placeholder
+    using type = Idx<PlaceholderGrid<Dims>...>;
+};
+
+template <class CoordType>
+using placeholder_idx_t = typename IdxPlaceholder<CoordType>::type;
+} // namespace metric_tensor_detail
+
+namespace concepts {
+/**
+ * @brief A concept describing a type which can provide the metric tensor and its
+ * inverse at a given coordinate or at a given index.
+ *
+ * The metric tensor must be expressed on the covariant basis (i.e. it acts on
+ * contravariant vectors) and its inverse must be expressed on the contravariant
+ * basis (i.e. it acts on covariant vectors).
+ *
+ * The operators must also accept any index IdxType such that
+ * std::is_same_v<ddc::coordinate_of_t<IdxType>, CoordArg>. This is checked using
+ * a placeholder index type.
+ */
+template <typename T>
+concept MetricTensor = requires
+{
+    typename T::CoordArg;
+    typename T::ContravariantVectorType;
+    typename T::CovariantVectorType;
+}
+&&is_tensor_type_v<typename T::ContravariantVectorType>&&
+        is_tensor_type_v<typename T::CovariantVectorType>&& requires(
+                T const& t,
+                typename T::CoordArg const& x,
+                metric_tensor_detail::placeholder_idx_t<typename T::CoordArg> const& idx)
+{
+    {
+        t(x)
+        } -> std::same_as<
+                DTensor<ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>,
+                        ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>>>;
+    {
+        t.inverse(x)
+        } -> std::same_as<DTensor<
+                ddc::type_seq_element_t<0, typename T::ContravariantVectorType::index_set>,
+                ddc::type_seq_element_t<0, typename T::ContravariantVectorType::index_set>>>;
+    {
+        t(idx)
+        } -> std::same_as<
+                DTensor<ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>,
+                        ddc::type_seq_element_t<0, typename T::CovariantVectorType::index_set>>>;
+    {
+        t.inverse(idx)
+        } -> std::same_as<DTensor<
+                ddc::type_seq_element_t<0, typename T::ContravariantVectorType::index_set>,
+                ddc::type_seq_element_t<0, typename T::ContravariantVectorType::index_set>>>;
+};
+} // namespace concepts
 
 /**
  * @brief An operator for calculating the metric tensor.
@@ -71,7 +149,7 @@ public:
     KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> operator()(CoordArg const& coord) const
     {
         Tensor J = m_mapping.jacobian_matrix(coord);
-        return tensor_mul(index<'j', 'i'>(J), index<'j', 'k'>(J));
+        return symmetric_tensor_mul(index<'j', 'i'>(J), index<'j', 'k'>(J));
     }
 
     /**
@@ -86,7 +164,39 @@ public:
     {
         InverseJacobianMatrix get_inverse_jacobian(m_mapping);
         Tensor inv_J = get_inverse_jacobian(coord);
-        return tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
+        return symmetric_tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
+    }
+
+    /**
+     * @brief Compute the metric tensor associated with the mapping at the coordinate of an index.
+     *
+     * @param[in] idx
+     * 				The index where we evaluate the metric tensor.
+     * @return metric_tensor
+     * 				A DTensor object containing the value of the metric tensor.
+     */
+    template <ddc::concepts::discrete_element IdxType>
+    requires(std::is_same_v<ddc::coordinate_of_t<IdxType>, CoordArg>)
+            KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov>
+    operator()(IdxType const& idx) const
+    {
+        return (*this)(ddc::coordinate(idx));
+    }
+
+    /**
+     * @brief Compute the inverse metric tensor associated with the mapping at the coordinate of an index.
+     *
+     * @param[in] idx
+     * 				The index where we evaluate the metric tensor.
+     * @return inverse_metric_tensor
+     * 				A DTensor object containing the value of the inverse of the metric tensor.
+     */
+    template <ddc::concepts::discrete_element IdxType>
+    requires(std::is_same_v<ddc::coordinate_of_t<IdxType>, CoordArg>)
+            KOKKOS_FUNCTION DTensor<Dims, Dims> inverse(IdxType const& idx)
+    const
+    {
+        return inverse(ddc::coordinate(idx));
     }
 };
 

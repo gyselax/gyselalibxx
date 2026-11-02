@@ -3,6 +3,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
 #include "fluid_moments.hpp"
@@ -262,7 +264,7 @@ void CollisionsIntra::compute_rhs_vector(
 
 DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) const
 {
-    Kokkos::Profiling::pushRegion("(GSLX) CollisionsIntra");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) CollisionsIntra");
 
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
     // density and temperature
@@ -395,6 +397,6 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
     matrix.solve(RR_view);
 
     ddc::parallel_deepcopy(allfdistribu, RR);
-    Kokkos::Profiling::popRegion();
+
     return allfdistribu;
 }

@@ -25,6 +25,13 @@ inline constexpr bool
         enable_tensor_index_element<TensorIndexElement<ValidatingTensorIndexSet, Dims...>> = true;
 } // namespace details
 
+/**
+ * @brief A class describing an index of a tensor.
+ * See the general TensorIndexElement template for more details.
+ * @tparam ValidatingVectorIndexSets The VectorIndexSets in which each tag
+ *          comprising this element (along each dimension) can be found.
+ * @tparam Dims The dimensions at which the tensor is accessed.
+ */
 template <class... ValidatingVectorIndexSets, class... Dims>
 class TensorIndexElement<ddc::detail::TypeSeq<ValidatingVectorIndexSets...>, Dims...>
 {
@@ -494,5 +501,25 @@ using extract_sub_tensor_element_t = typename details::ExtractSubTensorElement<
         TypeSeqVectorIndexIdMapGlobal,
         TypeSeqVectorIndexIdMapLocal,
         GlobalTensorIndexElement>::type;
+
+/**
+ * @brief Get the TensorIndexElement representing the element with the same contents in a symmetric matrix.
+ *
+ * I.e. return the TensorIndexElement describing A_{ik} when given the TensorIndexElement describing A_{ki}.
+ * @tparam TensorIndexElem A TensorIndexElement.
+ */
+template <class TensorIndexElem>
+using symmetric_tensor_element_t = TensorIndexElement<
+        typename TensorIndexElem::tensor_index_set,
+        ddc::type_seq_element_t<
+                ddc::type_seq_rank_v<
+                        ddc::type_seq_element_t<1, typename TensorIndexElem::IdxTypeSeq>,
+                        ddc::type_seq_element_t<1, typename TensorIndexElem::tensor_index_set>>,
+                ddc::type_seq_element_t<0, typename TensorIndexElem::tensor_index_set>>,
+        ddc::type_seq_element_t<
+                ddc::type_seq_rank_v<
+                        ddc::type_seq_element_t<0, typename TensorIndexElem::IdxTypeSeq>,
+                        ddc::type_seq_element_t<0, typename TensorIndexElem::tensor_index_set>>,
+                ddc::type_seq_element_t<1, typename TensorIndexElem::tensor_index_set>>>;
 
 } // namespace tensor_tools

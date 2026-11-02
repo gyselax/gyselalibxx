@@ -50,7 +50,8 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridTheta,
         PolarBSplinesRTheta,
         SplineInterpolatorRTheta,
-        typename DiscreteMappingBuilder::MappingType>;
+        typename DiscreteMappingBuilder::MappingType,
+        MetricTensorEvaluator<typename DiscreteMappingBuilder::MappingType>>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
 namespace fs = std::filesystem;
@@ -150,7 +151,8 @@ int main(int argc, char** argv)
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
-    PoissonSolver poisson_solver(discrete_mapping, interpolator, mesh_rtheta);
+    MetricTensorEvaluator metric_tensor(discrete_mapping);
+    PoissonSolver poisson_solver(discrete_mapping, metric_tensor, interpolator, mesh_rtheta);
     poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------

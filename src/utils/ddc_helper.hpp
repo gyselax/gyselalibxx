@@ -204,6 +204,47 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
     return max_dist;
 }
 
+template <typename GridSubSet, typename GridSuperSet>
+Idx<GridSubSet> find_first_point_not_in_superset(
+        IdxRange<GridSubSet> const& idx_range_subset,
+        IdxRange<GridSuperSet> const& idx_range_superset,
+        ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
+{
+    // Grids are ordered so a serial loop allows iterating over both sets simultaneously
+    Idx<GridSuperSet> idx_superset = idx_range_superset.front();
+    for (Idx<GridSubSet> idx_subset = idx_range_subset.front();
+         idx_subset <= idx_range_subset.back();
+         idx_subset++, idx_superset++) {
+        // If points don't match check next point
+        while (std::abs(ddc::coordinate(idx_subset) - ddc::coordinate(idx_superset)) > tol
+               && idx_superset <= idx_range_superset.back())
+            [[unlikely]]
+            {
+                idx_superset++;
+            }
+        // If point was not found in superset then points are not a subset
+        if (idx_superset > idx_range_superset.back()) {
+            return idx_subset;
+        }
+    }
+    return idx_range_subset.back() + 1;
+}
+
+template <typename GridSubSet, typename GridSuperSet>
+bool points_are_subset(
+        IdxRange<GridSubSet> const& idx_range_subset,
+        IdxRange<GridSuperSet> const& idx_range_superset,
+        ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
+{
+    if (idx_range_subset.size() > idx_range_superset.size()) {
+        return false;
+    } else {
+        return find_first_point_not_in_superset(idx_range_subset, idx_range_superset, tol)
+               == (idx_range_subset.back() + 1);
+    }
+}
+
+
 /**
  * @brief Get the multi-dimensional index found at a given position in an index range.
  *
@@ -236,6 +277,39 @@ KOKKOS_INLINE_FUNCTION Idx<Dims...> get_idx_from_linear_index(
             linear_idx /= extents[i - 1];
         }
         return idx_range.front() + offset;
+    }
+}
+
+/**
+ * @brief Get the position of a multi-dimensional index in an index range.
+ *
+ * The index range is traversed in layout_right order (the last dimension varies fastest).
+ * This is the linearisation used to store a contiguous layout_right Field defined on the
+ * index range. It is the inverse of get_idx_from_linear_index.
+ *
+ * @param idx_range The index range.
+ * @param idx The index whose position is calculated (idx_range.contains(idx) must be true).
+ *
+ * @return The position of the index in the index range.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION std::size_t get_linear_index_from_idx(
+        IdxRange<Dims...> const& idx_range,
+        Idx<Dims...> const& idx)
+{
+    if constexpr (sizeof...(Dims) == 0) {
+        return 0;
+    } else {
+        KOKKOS_ASSERT(idx_range.contains(idx));
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const extents
+                = ddc::detail::array(idx_range.extents());
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const offsets
+                = ddc::detail::array(idx - idx_range.front());
+        std::size_t linear_idx = 0;
+        for (std::size_t i = 0; i < sizeof...(Dims); ++i) {
+            linear_idx = linear_idx * extents[i] + offsets[i];
+        }
+        return linear_idx;
     }
 }
 } // namespace ddcHelper
