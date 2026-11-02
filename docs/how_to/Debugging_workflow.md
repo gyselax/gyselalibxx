@@ -41,6 +41,44 @@ valgrind ./gysela_exe config_file.yml
 
 One thing to bear in mind is that memory misuse does not always lead to an immediate crash. Instead it can simply corrupt the memory leading to a crash later in the execution. The valgrind errors should therefore be examined in order.
 
+## Helpful debugging functions
+
+DDC provides some functions which can be useful for printing information when debugging.
+
+### Printing the contents of a field
+
+A `Field` (not a `FieldMem`) can be printed directly with `std::cout`:
+
+```cpp
+std::cout << field << std::endl;
+```
+
+For large fields this output is abbreviated so only the values at the edges of each dimension are shown.
+If you want to print all the values you can use `ddc::print_full`:
+
+```cpp
+ddc::print_full(std::cout, field);
+```
+
+The values can only be printed if the field is accessible from the CPU.
+A field stored on GPU should therefore be copied to the CPU before printing it, e.g:
+
+```cpp
+auto field_host = ddc::create_mirror_view_and_copy(field);
+ddc::print_full(std::cout, get_field(field_host));
+```
+
+### Printing a type
+
+Templated code often makes it difficult to know exactly which type is being used.
+`print_demangled_type_name` can be used to print a readable version of a type name:
+
+```cpp
+ddc::detail::print_demangled_type_name(std::cout, typeid(X).name());
+```
+
+where `X` is the type (or `decltype(x)` for a variable `x`) that you want to examine.
+
 ## GPU Debug Build
 
 If the code runs as expected on CPU but crashes on GPU then you can already disregard the sections of the code which always run on CPU. This can help narrow down the problem.

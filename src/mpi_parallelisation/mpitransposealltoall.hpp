@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <numeric>
+#include <vector>
 
 #include <ddc/ddc.hpp>
+
+#include <Kokkos_Profiling_ScopedRegion.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -15,7 +18,14 @@
 /**
  * @brief A class describing an operator for converting from/to different MPI layouts using AlltoAll.
  *
- * This class implements a basic AlltoAll operator and currently only works with a basic MPIBlockLayout.
+ * This class implements a basic AlltoAll operator and currently only works with a basic MPILayout.
+ *
+ * If the optional argument allow_inactive_ranks=true is passed to the class constructor, it is
+ * possible to use more MPI processes than points in the distributed dimensions of one (or both) of
+ * the layouts. In that case, some processes are inactive (they hold no data) although they are
+ * still part of the transpose operator (it is collective) but they send/receive no data in that
+ * layout. When using this option, the caller is responsible for the proper handling of the empty
+ * fields on the inactive processes.
  *
  * @tparam Layout1 One of the MPI layouts.
  * @tparam Layout2 The other MPI layouts.
@@ -44,6 +54,7 @@ private:
             = ddc::detail::convert_type_seq_to_discrete_domain_t<layout_2_mpi_dims>;
 
 private:
+    using IMPITranspose<Layout1, Layout2>::m_comm;
     int m_comm_size;
     Layout1 m_layout_1;
     Layout2 m_layout_2;
@@ -51,6 +62,9 @@ private:
     idx_range_type2 m_local_idx_range_2;
     layout_1_mpi_idx_range_type m_layout_1_mpi_idx_range;
     layout_2_mpi_idx_range_type m_layout_2_mpi_idx_range;
+    // The distributed index range handled by an active process (rank 0 used as reference).
+    distributed_idx_range_type1 m_nonempty_distributed_idx_range_1;
+    distributed_idx_range_type2 m_nonempty_distributed_idx_range_2;
 
 public:
     /**
@@ -58,9 +72,13 @@ public:
      *
      * @param global_idx_range The global index range of the data across processes provided in either layout.
      * @param comm The MPI communicator.
+     * @param allow_inactive_ranks Flag allowing inactive MPI ranks (deactivated by default).
      */
     template <class IdxRange>
-    MPITransposeAllToAll(IdxRange global_idx_range, MPI_Comm comm)
+    MPITransposeAllToAll(
+            IdxRange global_idx_range,
+            MPI_Comm comm,
+            bool allow_inactive_ranks = false)
         : IMPITranspose<Layout1, Layout2>(comm)
     {
         static_assert(
@@ -73,26 +91,41 @@ public:
         int rank;
         MPI_Comm_size(comm, &m_comm_size);
         MPI_Comm_rank(comm, &rank);
-        distributed_idx_range_type1 distrib_idx_range(global_idx_range_layout_1);
-        if (m_comm_size > distrib_idx_range.size()) {
-            throw std::runtime_error("The number of MPI ranks is greater than the number that "
-                                     "would be used when maximumly distributing the data");
+        // Index range of held by this MPI rank (may be empty)
+        m_local_idx_range_1 = m_layout_1.distribute_idx_range(
+                global_idx_range_layout_1,
+                m_comm_size,
+                rank,
+                allow_inactive_ranks);
+        m_local_idx_range_2 = m_layout_2.distribute_idx_range(
+                global_idx_range_layout_2,
+                m_comm_size,
+                rank,
+                allow_inactive_ranks);
+
+        if (!allow_inactive_ranks
+            && (m_layout_1.n_active_ranks() < m_comm_size
+                || m_layout_2.n_active_ranks() < m_comm_size)) {
+            throw std::runtime_error("The number of MPI ranks is greater than the number of "
+                                     "points to distribute which is only allowed when the flag "
+                                     "allow_inactive_ranks=true is specified");
         }
-        // Ensure that the load balancing is good
-        if (distrib_idx_range.size() % m_comm_size != 0) {
-            throw std::runtime_error("The provided index range cannot be split equally over "
-                                     "the specified number of MPI ranks.");
-        }
-        m_local_idx_range_1
-                = m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, rank);
-        m_local_idx_range_2
-                = m_layout_2.distribute_idx_range(global_idx_range_layout_2, m_comm_size, rank);
+
+        // Reference, non-empty index ranges, based on rank 0
+        m_nonempty_distributed_idx_range_1 = distributed_idx_range_type1(
+                m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, 0));
+        m_nonempty_distributed_idx_range_2 = distributed_idx_range_type2(
+                m_layout_2.distribute_idx_range(global_idx_range_layout_2, m_comm_size, 0));
+        // Distributed index ranges
         m_layout_1_mpi_idx_range = get_distribution(
-                distributed_idx_range_type1(m_local_idx_range_1),
+                m_nonempty_distributed_idx_range_1,
                 distributed_idx_range_type1(global_idx_range_layout_1));
         m_layout_2_mpi_idx_range = get_distribution(
-                distributed_idx_range_type2(m_local_idx_range_2),
+                m_nonempty_distributed_idx_range_2,
                 distributed_idx_range_type2(global_idx_range_layout_2));
+
+        assert(m_layout_1_mpi_idx_range.size() == m_layout_1.n_active_ranks());
+        assert(m_layout_2_mpi_idx_range.size() == m_layout_2.n_active_ranks());
     }
 
     /**
@@ -112,6 +145,27 @@ public:
             return m_local_idx_range_1;
         } else if constexpr (std::is_same_v<Layout, Layout2>) {
             return m_local_idx_range_2;
+        }
+    }
+
+    /**
+     * @brief Getter for the MPI communicator.
+     */
+    MPI_Comm communicator() const
+    {
+        return m_comm;
+    }
+
+    /**
+     * @brief Getter for the number of active ranks in a layout.
+     */
+    template <class Layout>
+    int n_active_ranks() const
+    {
+        if constexpr (std::is_same_v<Layout, Layout1>) {
+            return m_layout_1.n_active_ranks();
+        } else {
+            return m_layout_2.n_active_ranks();
         }
     }
 
@@ -139,7 +193,8 @@ public:
             Field<ElementType, IdxRangeOut, MemSpace> recv_field,
             ConstField<ElementType, InIdxRange, MemSpace> send_field) const
     {
-        Kokkos::Profiling::pushRegion("(GSLX) MpiTranspose");
+        Kokkos::Profiling::ScopedRegion region("(GSLX) MpiTranspose");
+
         static_assert(!std::is_same_v<InIdxRange, IdxRangeOut>);
         static_assert(
                 (std::is_same_v<InIdxRange, typename Layout1::discrete_domain_type>)
@@ -152,7 +207,6 @@ public:
                 Layout1,
                 Layout2>;
         this->transpose_to<OutLayout>(execution_space, recv_field, send_field);
-        Kokkos::Profiling::popRegion();
     }
 
     /**
@@ -249,31 +303,42 @@ public:
          *****************************************************************/
         // Collect the artificial dimension describing the MPI rank where the scattered information
         // will be sent to or where the gathered information will be collected from
+        // Only the active ranks appear in these index ranges.
         gather_mpi_idx_range_type gather_mpi_idx_range;
         scatter_mpi_idx_range_type scatter_mpi_idx_range;
+        // Index ranges handled by an active rank (non-empty even if this rank is inactive).
+        gather_idx_range_type nonempty_gather_idx_range;
+        scatter_idx_range_type nonempty_scatter_idx_range;
+
         if constexpr (std::is_same_v<InLayout, Layout1>) {
             gather_mpi_idx_range = m_layout_1_mpi_idx_range;
             scatter_mpi_idx_range = m_layout_2_mpi_idx_range;
+            nonempty_gather_idx_range = m_nonempty_distributed_idx_range_1;
+            nonempty_scatter_idx_range = m_nonempty_distributed_idx_range_2;
         } else {
             gather_mpi_idx_range = m_layout_2_mpi_idx_range;
             scatter_mpi_idx_range = m_layout_1_mpi_idx_range;
+            nonempty_gather_idx_range = m_nonempty_distributed_idx_range_2;
+            nonempty_scatter_idx_range = m_nonempty_distributed_idx_range_1;
         }
 
-        // Collect the useful subindex ranges described in the fields
+        // Collect the useful subindex ranges described in the fields.
         batch_idx_range_type batch_idx_range(get_idx_range(send_field));
-        scatter_idx_range_type scatter_idx_range(get_idx_range(recv_field));
-        gather_idx_range_type gather_idx_range(get_idx_range(send_field));
+        scatter_idx_range_type local_scatter_idx_range(get_idx_range(recv_field));
+        gather_idx_range_type local_gather_idx_range(get_idx_range(send_field));
 
-        // Build the index ranges describing the function inputs but including the MPI rank information
+        // Build the index ranges describing the function inputs but including the MPI rank information.
+        // The data sent to each active rank in the output layout is described by the reference,
+        // non-empty scatter index range.
         input_mpi_idx_range_type input_mpi_idx_range(
                 scatter_mpi_idx_range,
-                scatter_idx_range,
-                gather_idx_range,
+                nonempty_scatter_idx_range,
+                local_gather_idx_range,
                 batch_idx_range);
         output_mpi_idx_range_type output_mpi_idx_range(
                 gather_mpi_idx_range,
-                scatter_idx_range,
-                gather_idx_range,
+                local_scatter_idx_range,
+                nonempty_gather_idx_range,
                 batch_idx_range);
         assert(input_mpi_idx_range.size() == send_field.size());
         assert(output_mpi_idx_range.size() == recv_field.size());
@@ -304,7 +369,9 @@ public:
         call_all_to_all(
                 execution_space,
                 get_field(alltoall_recv_buffer),
-                get_const_field(alltoall_send_buffer));
+                get_const_field(alltoall_send_buffer),
+                scatter_mpi_idx_range.size(),
+                gather_mpi_idx_range.size());
 
         // If alltoall_recv_buffer owns its data (not a view) then copy the results back to
         // recv_mpi_field which is a view on recv_field, the function output
@@ -317,7 +384,17 @@ public:
     }
 
 private:
-    /// Function handling the MPI call
+    /**
+     * @brief Function handling the MPI call.
+     *
+     * @param[in] execution_space The execution space (Host/Device) where the code will run.
+     * @param[out] recv_field The chunk which will describe the data in the new layout. This
+     *                      data is gathered from the MPI processes.
+     * @param[in] send_field The chunk describing the data in the current layout. This data
+     *                      will be scattered to other MPI processes.
+     * @param[in] n_send_ranks Number of active ranks sending data.
+     * @param[in] n_recv_ranks Number of active ranks receiving data.
+     */
     template <
             class ElementType,
             class MPIRecvIdxRange,
@@ -327,17 +404,49 @@ private:
     void call_all_to_all(
             ExecSpace const& execution_space,
             Field<ElementType, MPIRecvIdxRange, MemSpace> recv_field,
-            ConstField<ElementType, MPISendIdxRange, MemSpace> send_field) const
+            ConstField<ElementType, MPISendIdxRange, MemSpace> send_field,
+            int n_send_ranks,
+            int n_recv_ranks) const
     {
         Kokkos::fence("fencing before mpi_all_to_all");
-        MPI_Alltoall(
-                send_field.data_handle(),
-                send_field.size() / m_comm_size,
-                MPI_type_descriptor_t<ElementType>,
-                recv_field.data_handle(),
-                recv_field.size() / m_comm_size,
-                MPI_type_descriptor_t<ElementType>,
-                IMPITranspose<Layout1, Layout2>::m_comm);
+
+        if (n_send_ranks == m_comm_size && n_recv_ranks == m_comm_size) {
+            // All ranks involved are active so MPI_Alltoall can be used
+            MPI_Alltoall(
+                    send_field.data_handle(),
+                    send_field.size() / m_comm_size,
+                    MPI_type_descriptor_t<ElementType>,
+                    recv_field.data_handle(),
+                    recv_field.size() / m_comm_size,
+                    MPI_type_descriptor_t<ElementType>,
+                    m_comm);
+        } else {
+            // Some ranks are inactive, so MPI_Alltoallv must be used
+            int const send_block = send_field.size() / n_send_ranks;
+            int const recv_block = recv_field.size() / n_recv_ranks;
+            std::vector<int> send_counts(m_comm_size, 0);
+            std::vector<int> send_displs(m_comm_size, 0);
+            std::vector<int> recv_counts(m_comm_size, 0);
+            std::vector<int> recv_displs(m_comm_size, 0);
+            for (int i = 0; i < n_send_ranks; ++i) {
+                send_counts[i] = send_block;
+                send_displs[i] = i * send_block;
+            }
+            for (int i = 0; i < n_recv_ranks; ++i) {
+                recv_counts[i] = recv_block;
+                recv_displs[i] = i * recv_block;
+            }
+            MPI_Alltoallv(
+                    send_field.data_handle(),
+                    send_counts.data(),
+                    send_displs.data(),
+                    MPI_type_descriptor_t<ElementType>,
+                    recv_field.data_handle(),
+                    recv_counts.data(),
+                    recv_displs.data(),
+                    MPI_type_descriptor_t<ElementType>,
+                    m_comm);
+        }
     }
 
     template <class... DistributedDims>
