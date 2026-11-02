@@ -328,31 +328,31 @@ void test_deriv(
     }
 };
 
-template <class Patch>
+template <class PatchP>
 void check_near(
-        DConstFieldOnPatch_host<Patch> expected_host,
-        DConstFieldOnPatch_host<Patch> eval_host,
+        DConstFieldOnPatch_host<PatchP> expected_host,
+        DConstFieldOnPatch_host<PatchP> eval_host,
         double const TOL)
 {
-    ddc::host_for_each(get_idx_range(expected_host), [&](typename Patch::Idx12 const idx) {
+    ddc::host_for_each(get_idx_range(expected_host), [&](typename PatchP::Idx12 const idx) {
         EXPECT_NEAR(expected_host(idx), eval_host(idx), TOL);
     });
 };
 
-template <typename Patch, typename GridDeriv>
+template <typename PatchP, typename GridDeriv>
 void check_deriv_match(
         Idx<ddc::Deriv<typename GridDeriv::continuous_dimension_type>> deriv_order,
-        typename Patch::IdxRange12 const& idx_range_eval_rtheta,
-        DerivFieldOnPatch<Patch> eval_function_and_derivs,
+        typename PatchP::IdxRange12 const& idx_range_eval_rtheta,
+        DerivFieldOnPatch<PatchP> eval_function_and_derivs,
         SplineRThetaEvaluator<
-                ddc::type_seq_rank_v<Patch, ddc::detail::TypeSeq<Patch1, Patch2>> + 1,
+                ddc::type_seq_rank_v<PatchP, ddc::detail::TypeSeq<Patch1, Patch2>> + 1,
                 DeviceExecSpace> const& evaluator,
-        DConstField<typename Patch::IdxRangeBS12> spline)
+        DConstField<typename PatchP::IdxRangeBS12> spline)
 {
     using GridEdge = std::conditional_t<
-            std::is_same_v<GridDeriv, typename Patch::Grid1>,
-            typename Patch::Grid2,
-            typename Patch::Grid1>;
+            std::is_same_v<GridDeriv, typename PatchP::Grid1>,
+            typename PatchP::Grid2,
+            typename PatchP::Grid1>;
 
     IdxRange<GridDeriv> idx_range_eval_1d(idx_range_eval_rtheta);
     IdxRange<GridEdge> idx_range_eval_edge(idx_range_eval_rtheta);
@@ -360,17 +360,17 @@ void check_deriv_match(
     for (Idx<GridDeriv> idx_1d :
          std::vector<Idx<GridDeriv>> {idx_range_eval_1d.front(), idx_range_eval_1d.back()}) {
         IdxRange<GridDeriv> const idx_range_1d(idx_1d, IdxStep<GridDeriv>(1));
-        typename Patch::IdxRange12 idx_range_deriv(idx_range_1d, idx_range_eval_edge);
+        typename PatchP::IdxRange12 idx_range_deriv(idx_range_1d, idx_range_eval_edge);
 
         // Evaluation points on the edge.
-        CoordFieldMemOnPatch<Patch> eval_points_deriv_alloc(idx_range_deriv);
-        CoordFieldOnPatch<Patch> eval_points_deriv(eval_points_deriv_alloc);
+        CoordFieldMemOnPatch<PatchP> eval_points_deriv_alloc(idx_range_deriv);
+        CoordFieldOnPatch<PatchP> eval_points_deriv(eval_points_deriv_alloc);
 
-        set_eval_points_2D<typename Patch::Grid1, typename Patch::Grid2>(eval_points_deriv);
+        set_eval_points_2D<typename PatchP::Grid1, typename PatchP::Grid2>(eval_points_deriv);
 
         // Expected functions.
-        DFieldMemOnPatch<Patch> expected_deriv_alloc(idx_range_deriv);
-        DFieldOnPatch<Patch> expected_deriv(expected_deriv_alloc);
+        DFieldMemOnPatch<PatchP> expected_deriv_alloc(idx_range_deriv);
+        DFieldOnPatch<PatchP> expected_deriv(expected_deriv_alloc);
 
         if (deriv_order == Idx<ddc::Deriv<typename GridDeriv::continuous_dimension_type>>(0)) {
             evaluator(expected_deriv, get_const_field(eval_points_deriv), spline);
@@ -381,13 +381,13 @@ void check_deriv_match(
 
         // Compare the evaluated derivatives with the expected derivatives.
         // --- define DField for ddc::create_mirror_and_copy().
-        DFieldMemOnPatch<Patch> eval_deriv_alloc(idx_range_deriv);
-        DFieldOnPatch<Patch> eval_deriv(eval_deriv_alloc);
+        DFieldMemOnPatch<PatchP> eval_deriv_alloc(idx_range_deriv);
+        DFieldOnPatch<PatchP> eval_deriv(eval_deriv_alloc);
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(eval_deriv),
-                KOKKOS_LAMBDA(typename Patch::Idx12 const idx) {
+                KOKKOS_LAMBDA(typename PatchP::Idx12 const idx) {
                     eval_deriv(idx) = eval_function_and_derivs(deriv_order, idx);
                 });
 
@@ -396,41 +396,41 @@ void check_deriv_match(
         auto const eval_deriv_host = ddc::create_mirror_and_copy(eval_deriv);
 
         // --- check errors.
-        check_near<Patch>(get_field(expected_deriv_host), get_field(eval_deriv_host), 1e-11);
+        check_near<PatchP>(get_field(expected_deriv_host), get_field(eval_deriv_host), 1e-11);
     }
 };
 
-template <typename Patch>
+template <typename PatchP>
 void check_cross_deriv_match(
-        Idx<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>> deriv_order,
-        typename Patch::IdxRange12 const& idx_range_eval_rtheta,
-        DerivFieldOnPatch<Patch> eval_function_and_derivs,
+        Idx<ddc::Deriv<typename PatchP::Dim1>, ddc::Deriv<typename PatchP::Dim2>> deriv_order,
+        typename PatchP::IdxRange12 const& idx_range_eval_rtheta,
+        DerivFieldOnPatch<PatchP> eval_function_and_derivs,
         SplineRThetaEvaluator<
-                ddc::type_seq_rank_v<Patch, ddc::detail::TypeSeq<Patch1, Patch2>> + 1,
+                ddc::type_seq_rank_v<PatchP, ddc::detail::TypeSeq<Patch1, Patch2>> + 1,
                 DeviceExecSpace> const& evaluator,
-        DConstField<typename Patch::IdxRangeBS12> spline)
+        DConstField<typename PatchP::IdxRangeBS12> spline)
 {
-    typename Patch::IdxRange1 idx_range_eval_1(idx_range_eval_rtheta);
-    typename Patch::IdxRange2 idx_range_eval_2(idx_range_eval_rtheta);
+    typename PatchP::IdxRange1 idx_range_eval_1(idx_range_eval_rtheta);
+    typename PatchP::IdxRange2 idx_range_eval_2(idx_range_eval_rtheta);
 
-    for (typename Patch::Idx1 idx_1 :
-         std::vector<typename Patch::Idx1> {idx_range_eval_1.front(), idx_range_eval_1.back()}) {
-        for (typename Patch::Idx2 idx_2 : std::vector<
-                     typename Patch::Idx2> {idx_range_eval_2.front(), idx_range_eval_2.back()}) {
-            typename Patch::IdxRange1 const idx_range_1(idx_1, typename Patch::IdxStep1(1));
-            typename Patch::IdxRange2 const idx_range_2(idx_2, typename Patch::IdxStep2(1));
-            typename Patch::IdxRange12 idx_range_deriv(idx_range_1, idx_range_2);
+    for (typename PatchP::Idx1 idx_1 :
+         std::vector<typename PatchP::Idx1> {idx_range_eval_1.front(), idx_range_eval_1.back()}) {
+        for (typename PatchP::Idx2 idx_2 : std::vector<
+                     typename PatchP::Idx2> {idx_range_eval_2.front(), idx_range_eval_2.back()}) {
+            typename PatchP::IdxRange1 const idx_range_1(idx_1, typename PatchP::IdxStep1(1));
+            typename PatchP::IdxRange2 const idx_range_2(idx_2, typename PatchP::IdxStep2(1));
+            typename PatchP::IdxRange12 idx_range_deriv(idx_range_1, idx_range_2);
 
             // Evaluation points on the edge.
-            CoordFieldMemOnPatch<Patch> eval_points_cross_deriv_alloc(idx_range_deriv);
-            CoordFieldOnPatch<Patch> eval_points_cross_deriv(eval_points_cross_deriv_alloc);
+            CoordFieldMemOnPatch<PatchP> eval_points_cross_deriv_alloc(idx_range_deriv);
+            CoordFieldOnPatch<PatchP> eval_points_cross_deriv(eval_points_cross_deriv_alloc);
 
-            set_eval_points_2D<typename Patch::Grid1, typename Patch::Grid2>(
+            set_eval_points_2D<typename PatchP::Grid1, typename PatchP::Grid2>(
                     eval_points_cross_deriv);
 
             // Expected functions.
-            DFieldMemOnPatch<Patch> expected_cross_deriv_alloc(idx_range_deriv);
-            DFieldOnPatch<Patch> expected_cross_deriv(expected_cross_deriv_alloc);
+            DFieldMemOnPatch<PatchP> expected_cross_deriv_alloc(idx_range_deriv);
+            DFieldOnPatch<PatchP> expected_cross_deriv(expected_cross_deriv_alloc);
 
             evaluator
                     .deriv(deriv_order,
@@ -440,13 +440,13 @@ void check_cross_deriv_match(
 
             // Compare the evaluated derivatives with the expected derivatives.
             // --- define DField for ddc::create_mirror_and_copy().
-            DFieldMemOnPatch<Patch> eval_cross_deriv_alloc(idx_range_deriv);
-            DFieldOnPatch<Patch> eval_cross_deriv(eval_cross_deriv_alloc);
+            DFieldMemOnPatch<PatchP> eval_cross_deriv_alloc(idx_range_deriv);
+            DFieldOnPatch<PatchP> eval_cross_deriv(eval_cross_deriv_alloc);
 
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     get_idx_range(eval_cross_deriv),
-                    KOKKOS_LAMBDA(typename Patch::Idx12 const idx) {
+                    KOKKOS_LAMBDA(typename PatchP::Idx12 const idx) {
                         eval_cross_deriv(idx) = eval_function_and_derivs(deriv_order, idx);
                     });
 
@@ -456,7 +456,7 @@ void check_cross_deriv_match(
             auto const eval_cross_deriv_host = ddc::create_mirror_and_copy(eval_cross_deriv);
 
             // --- check errors.
-            check_near<Patch>(
+            check_near<PatchP>(
                     get_field(expected_cross_deriv_host),
                     get_field(eval_cross_deriv_host),
                     1e-10);
