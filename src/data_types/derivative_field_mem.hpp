@@ -54,6 +54,9 @@ class DerivFieldMem<ElementType, IdxRange<DDims...>, NDerivs, MemSpace>
               IdxRange<DDims...>>
 {
 private:
+    /// @brief Label of the object.
+    std::string m_label;
+
     /// @brief The class from which this object inherits.
     using base_type = DerivFieldCommon<
             FieldMem<ElementType, IdxRange<DDims...>, MemSpace>,
@@ -314,12 +317,12 @@ public:
             physical_idx_range_type val_idx_range,
             ddc::StridedDiscreteDomain<
                     DerivDoms>... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v<deriv_tags>)
-        : base_type(
-                label,
-                val_idx_range,
-                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
-                ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>(
-                        m_deriv_idx_range...))
+        : m_label(label)
+        , base_type(
+                  val_idx_range,
+                  get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                  ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>(
+                          m_deriv_idx_range...))
     {
         static_assert(
                 ddc::type_seq_same_v<ddc::detail::TypeSeq<DerivDoms...>, physical_deriv_grids>);
@@ -349,11 +352,11 @@ public:
             std::string const& label,
             allocator_type allocator,
             physical_idx_range_type val_idx_range)
-        : base_type(
-                label,
-                val_idx_range,
-                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
-                detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
+        : m_label(label)
+        , base_type(
+                  val_idx_range,
+                  get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                  detail::edge_idx_range(physical_deriv_idx_range_type(val_idx_range)))
     {
         initialise_chunks(label, allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
