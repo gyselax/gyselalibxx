@@ -25,6 +25,13 @@ inline constexpr bool
         enable_tensor_index_element<TensorIndexElement<ValidatingTensorIndexSet, Dims...>> = true;
 } // namespace details
 
+/**
+ * @brief A class describing an index of a tensor.
+ * See the general TensorIndexElement template for more details.
+ * @tparam ValidatingVectorIndexSets The VectorIndexSets in which each tag
+ *          comprising this element (along each dimension) can be found.
+ * @tparam Dims The dimensions at which the tensor is accessed.
+ */
 template <class... ValidatingVectorIndexSets, class... Dims>
 class TensorIndexElement<ddc::detail::TypeSeq<ValidatingVectorIndexSets...>, Dims...>
 {
