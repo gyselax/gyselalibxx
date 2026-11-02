@@ -261,16 +261,16 @@ public:
      * @param metric_tensor The metric tensor associated with the mapping from the logical
      *          domain to the physical domain where the equation is defined.
      * @param idx_range_full The full index range of @f$ \phi @f$ including any batch dimensions.
-     * @param include_boundary_splines True if the outer radial bsplines should be included in
-     *          the matrix assembly, false otherwise.
+     * @param exclude_boundary_splines True if the outer radial bsplines should be excluded from
+     *          the matrix assembly (to impose homogeneous boundary conditions), false otherwise.
      */
     explicit PolarSplineFEMPoissonLikeAssembler(
             Field<double, IdxRangeQuadratureRTheta> int_volume,
             MetricTensorType const& metric_tensor,
             IdxRangeFull idx_range_full,
-            bool include_boundary_splines = true)
+            bool exclude_boundary_splines = true)
         : m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
-        , m_matrix_size(get_matrix_size(include_boundary_splines))
+        , m_matrix_size(get_matrix_size(exclude_boundary_splines))
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                   IdxStepBSR {s_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
@@ -284,7 +284,7 @@ public:
                   metric_tensor,
                   idx_range_full,
                   IdxRangeBSRTheta(
-                          m_idxrange_bsplines_r.remove_last(IdxStepBSR(include_boundary_splines)),
+                          m_idxrange_bsplines_r.remove_last(IdxStepBSR(exclude_boundary_splines)),
                           m_idxrange_bsplines_theta))
     {
     }
@@ -921,9 +921,9 @@ public:
     }
 
 private:
-    static std::size_t get_matrix_size(bool include_boundary_splines)
+    static std::size_t get_matrix_size(bool exclude_boundary_splines)
     {
-        if constexpr (include_boundary_splines)
+        if (exclude_boundary_splines)
             return ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                    - ddc::discrete_space<BSplinesTheta>().nbasis();
         else
