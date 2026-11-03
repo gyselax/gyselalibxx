@@ -354,7 +354,8 @@ private:
         // Locally transform the index into an integer to avoid type issues.
         IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<PatchFirst>());
         int value_idx_to_slice = (idx_to_slice - idx_range_1d_first_patch.front()).value();
-        (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, value_idx_to_slice), ...);
+        (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, value_idx_to_slice),
+         ...);
     }
 
 
@@ -424,11 +425,12 @@ private:
             Idx<grid_par1<I>>& idx_to_slice_1,
             Idx<grid_par2<I>>& idx_to_slice_2)
     {
-        /// The order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
+        // The order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
         constexpr bool patch_order_matches_interfaces = std::is_same_v<
                 typename stored_interface<I>::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
-        using PatchIdxSlice
+        // The Patch with the idx_to_slice value corrresponding to the given value_idx_to_slice.
+        using PatchIndexSlice
                 = std::conditional_t<patch_order_matches_interfaces<I>, patch1<I>, patch2<I>>;
 
         IdxRange<grid_par1<I>> const idx_range_parall_1(m_idx_ranges.template get<patch1<I>>());
@@ -437,7 +439,7 @@ private:
         EdgeTransformation<stored_interface<I>>
                 index_converter(idx_range_parall_1, idx_range_parall_2);
 
-        if constexpr (std::is_same_v<patch1<I>, PatchIdxSlice>) {
+        if constexpr (std::is_same_v<patch1<I>, PatchIndexSlice>) {
             idx_to_slice_1 = Idx<grid_par1<I>>(value_idx_to_slice);
             idx_to_slice_2 = index_converter(idx_to_slice_1);
             value_idx_to_slice = (idx_to_slice_2 - idx_range_parall_2.front()).value();
@@ -484,11 +486,15 @@ private:
         IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
 
         // The slice indices has to be a point at a corner, i.e. index range boundaries.
-        assert((idx_to_slice_1 == idx_range_par_1.front()) || (idx_to_slice_1 == idx_range_par_1.back()));
-        assert((idx_to_slice_2 == idx_range_par_2.front()) || (idx_to_slice_2 == idx_range_par_2.back()));
+        assert((idx_to_slice_1 == idx_range_par_1.front())
+               || (idx_to_slice_1 == idx_range_par_1.back()));
+        assert((idx_to_slice_2 == idx_range_par_2.front())
+               || (idx_to_slice_2 == idx_range_par_2.back()));
 
-        Idx<deriv_par1<I>, grid_par1<I>> idx_to_slice_deriv_1(Idx<deriv_par1<I>>(1), idx_to_slice_1);
-        Idx<deriv_par2<I>, grid_par2<I>> idx_to_slice_deriv_2(Idx<deriv_par2<I>>(1), idx_to_slice_2);
+        Idx<deriv_par1<I>, grid_par1<I>>
+                idx_to_slice_deriv_1(Idx<deriv_par1<I>>(1), idx_to_slice_1);
+        Idx<deriv_par2<I>, grid_par2<I>>
+                idx_to_slice_deriv_2(Idx<deriv_par2<I>>(1), idx_to_slice_2);
 
         DField<IdxRange<grid_perp1<I>>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
                 = functions_and_derivs.template get<patch1<I>>()[idx_to_slice_deriv_1];
