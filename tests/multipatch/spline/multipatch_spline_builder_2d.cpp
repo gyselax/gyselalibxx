@@ -39,7 +39,7 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
         ddc::SplineSolver::LAPACK>;
 
 template <ddc::SplineBuilderClosure BC>
-using MultipatchSplineBuilderXY = MultipatchSplineBuilder2D<
+using MultipatchSplineBuilderXY = SplineBuilder2DCollection<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
