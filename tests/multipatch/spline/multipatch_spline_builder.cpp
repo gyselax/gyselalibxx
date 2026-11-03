@@ -55,7 +55,7 @@ using SplineX2Builder = ddc::SplineBuilder<
         ddc::SplineSolver::LAPACK>;
 
 
-using MultipatchSplineBuilderX_1d = MultipatchSplineBuilder<
+using MultipatchSplineBuilderX_1d = SplineBuilderCollection<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
@@ -70,7 +70,7 @@ using MultipatchSplineBuilderX_1d = MultipatchSplineBuilder<
         Patch2>;
 
 
-using MultipatchSplineBuilderX_2d = MultipatchSplineBuilder<
+using MultipatchSplineBuilderX_2d = SplineBuilderCollection<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
