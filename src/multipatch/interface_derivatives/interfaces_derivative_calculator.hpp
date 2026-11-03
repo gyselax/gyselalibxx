@@ -154,12 +154,6 @@ private:
     using stored_interface
             = find_associated_interface_t<typename interface<I>::Edge1, all_interface_collection>;
 
-    /// The order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
-    template <std::size_t I>
-    static constexpr bool is_good_patch_order = std::is_same_v<
-            typename stored_interface<I>::Edge1::perpendicular_grid,
-            ddc::type_seq_element_t<I, Grid1DSeq>>;
-
     template <std::size_t I>
     using patch1 = typename stored_interface<I>::Edge1::associated_patch;
     template <std::size_t I>
@@ -431,7 +425,12 @@ private:
             Idx<grid_par1<I>>& slice_idx_1,
             Idx<grid_par2<I>>& slice_idx_2)
     {
-        using PatchIdxSlice = std::conditional_t<is_good_patch_order<I>, patch1<I>, patch2<I>>;
+        /// The order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
+        constexpr bool patch_order_matches_interfaces = std::is_same_v<
+                typename stored_interface<I>::Edge1::perpendicular_grid,
+                ddc::type_seq_element_t<I, Grid1DSeq>>;
+        using PatchIdxSlice
+                = std::conditional_t<patch_order_matches_interfaces<I>, patch1<I>, patch2<I>>;
 
         IdxRange<grid_par1<I>> const idx_range_parall_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_par2<I>> const idx_range_parall_2(m_idx_ranges.template get<patch2<I>>());
