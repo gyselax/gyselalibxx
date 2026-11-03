@@ -158,6 +158,12 @@ public:
         Idx<QDim2Mesh> idx_quad_2(idx_quad);
         IdxStep<BSplines1> offset_1 = Idx<BSplines1>(idx) - first_basis_1(idx_quad_1);
         IdxStep<BSplines2> offset_2 = Idx<BSplines2>(idx) - first_basis_2(idx_quad_2);
+        if (BSplines1::is_periodic()) {
+            offset_1 = periodic_mod(offset_1);
+        }
+        if (BSplines2::is_periodic()) {
+            offset_2 = periodic_mod(offset_2);
+        }
         DConstField<IdxRange<BSplines1, ddc::Deriv<Dim1>>> vals_1_at_quad = vals_1[idx_quad_1];
         DConstField<IdxRange<BSplines2, ddc::Deriv<Dim2>>> vals_2_at_quad = vals_2[idx_quad_2];
         const double val_1 = vals_1_at_quad(offset_1, IdxStep<ddc::Deriv<Dim1>>(0));
@@ -184,6 +190,12 @@ public:
         Idx<QDim2Mesh> idx_quad_2(idx_quad);
         IdxStep<BSplines1> offset_1 = Idx<BSplines1>(idx) - first_basis_1(idx_quad_1);
         IdxStep<BSplines2> offset_2 = Idx<BSplines2>(idx) - first_basis_2(idx_quad_2);
+        if (BSplines1::is_periodic()) {
+            offset_1 = periodic_mod(offset_1);
+        }
+        if (BSplines2::is_periodic()) {
+            offset_2 = periodic_mod(offset_2);
+        }
         return vals_1[idx_quad_1](offset_1, IdxStep<ddc::Deriv<Dim1>>(0))
                * vals_2[idx_quad_2](offset_2, IdxStep<ddc::Deriv<Dim2>>(0));
     }
