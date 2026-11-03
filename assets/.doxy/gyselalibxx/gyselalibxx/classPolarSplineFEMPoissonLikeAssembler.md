@@ -61,7 +61,7 @@ _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PolarSplineFEMPoissonLikeAssembler**](#function-polarsplinefempoissonlikeassembler) (Field&lt; double, IdxRangeQuadratureRTheta &gt; int\_volume, MetricTensorType const & metric\_tensor, IdxRangeFull idx\_range\_full) <br>_Instantiate the assembler operator._  |
+|   | [**PolarSplineFEMPoissonLikeAssembler**](#function-polarsplinefempoissonlikeassembler) (Field&lt; double, IdxRangeQuadratureRTheta &gt; int\_volume, MetricTensorType const & metric\_tensor, IdxRangeFull idx\_range\_full, bool exclude\_boundary\_splines=true) <br>_Instantiate the assembler operator._  |
 |  void | [**compute\_singular\_singular\_col\_idx**](#function-compute_singular_singular_col_idx) (Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and singular basis functions._  |
 |  void | [**compute\_singular\_singular\_elements**](#function-compute_singular_singular_elements) (CoeffAlpha const & coeff\_alpha, CoeffBeta const & coeff\_beta, MetricTensorType const & metric\_tensor, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix elements corresponding to the inner products of singular basis functions and singular basis functions._  |
 |  void | [**compute\_singular\_tensor\_col\_idx**](#function-compute_singular_tensor_col_idx) (Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and tensor basis functions._  |
@@ -187,7 +187,8 @@ _Instantiate the assembler operator._
 inline explicit PolarSplineFEMPoissonLikeAssembler::PolarSplineFEMPoissonLikeAssembler (
     Field< double, IdxRangeQuadratureRTheta > int_volume,
     MetricTensorType const & metric_tensor,
-    IdxRangeFull idx_range_full
+    IdxRangeFull idx_range_full,
+    bool exclude_boundary_splines=true
 ) 
 ```
 
@@ -201,6 +202,7 @@ inline explicit PolarSplineFEMPoissonLikeAssembler::PolarSplineFEMPoissonLikeAss
 * `int_volume` The initialised field of Jacobian values of the mapping. 
 * `metric_tensor` The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. 
 * `idx_range_full` The full index range of \(\phi\) including any batch dimensions. 
+* `exclude_boundary_splines` True if the outer radial bsplines should be excluded from the matrix assembly (to impose homogeneous boundary conditions), false otherwise. 
 
 
 

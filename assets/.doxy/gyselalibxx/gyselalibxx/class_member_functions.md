@@ -272,6 +272,7 @@
 * **get\_polar\_index** ([**PolarBSplines**](classPolarBSplines.md))
 * **get\_singular\_subset** ([**PolarBSplines**](classPolarBSplines.md))
 * **get\_tensor\_product\_subset** ([**PolarBSplines**](classPolarBSplines.md))
+* **get\_matrix\_size** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **get\_tensor\_bspline\_stash** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
 * **get\_tensor\_nnz\_per\_row** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **get\_test\_weights** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))

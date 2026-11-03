@@ -667,8 +667,8 @@ public:
         Idx&lt;QDimRMesh&gt; idx_quad_r(idx_quad);
         Idx&lt;QDimThetaMesh&gt; idx_quad_theta(idx_quad);
         IdxStep&lt;BSplinesR&gt; offset_r = Idx&lt;BSplinesR&gt;(idx) - first_basis_r(idx_quad_r);
-        IdxStep&lt;BSplinesTheta&gt; offset_theta
-                = Idx&lt;BSplinesTheta&gt;(idx) - first_basis_theta(idx_quad_theta);
+        IdxStep&lt;BSplinesTheta&gt; offset_theta = theta_mod&lt;BSplinesTheta&gt;(
+                Idx&lt;BSplinesTheta&gt;(idx) - first_basis_theta(idx_quad_theta));
         DConstField&lt;IdxRange&lt;BSplinesR, ddc::Deriv&lt;R&gt;&gt;&gt; vals_r_at_quad = vals_r[idx_quad_r];
         DConstField&lt;IdxRange&lt;BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;&gt; vals_theta_at_quad
                 = vals_theta[idx_quad_theta];
@@ -689,8 +689,8 @@ public:
         Idx&lt;QDimRMesh&gt; idx_quad_r(idx_quad);
         Idx&lt;QDimThetaMesh&gt; idx_quad_theta(idx_quad);
         IdxStep&lt;BSplinesR&gt; offset_r = Idx&lt;BSplinesR&gt;(idx) - first_basis_r(idx_quad_r);
-        IdxStep&lt;BSplinesTheta&gt; offset_theta
-                = Idx&lt;BSplinesTheta&gt;(idx) - first_basis_theta(idx_quad_theta);
+        IdxStep&lt;BSplinesTheta&gt; offset_theta = theta_mod&lt;BSplinesTheta&gt;(
+                Idx&lt;BSplinesTheta&gt;(idx) - first_basis_theta(idx_quad_theta));
         return vals_r[idx_quad_r](offset_r, IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(0))
                * vals_theta[idx_quad_theta](offset_theta, IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(0));
     }

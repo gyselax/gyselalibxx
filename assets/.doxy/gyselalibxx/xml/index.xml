@@ -2963,7 +2963,7 @@
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1ae3aba327a4287e5950cb98a5c19f982d" kind="variable"><name>m_idx_range_batch</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1afd2827d7ddd9f6ce519a9505ebd1e280" kind="variable"><name>m_metric_tensor</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a05a107d566710c3ccb813fd8178fbaa5" kind="variable"><name>m_tensor_assembler</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aad653a9a7f0777bff6cd7ec65d5527c8" kind="function"><name>PolarSplineFEMPoissonLikeAssembler</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a9e6a0d93fb891fc570de11206dd04259" kind="function"><name>PolarSplineFEMPoissonLikeAssembler</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a2dc1f60bdfb1d07cb929225f30719a4a" kind="function"><name>get_tensor_bspline_stash</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6d7ed0629a90e05b6f43360593c14fe9" kind="function"><name>setup_sparse_matrix</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6a8cea79ac0fbac8b14d524971b6cbe2" kind="function"><name>n_singular_elements</name></member>
@@ -2977,6 +2977,7 @@
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a4f4b51c05ee17f8f97204459677322dc" kind="function"><name>init_singular_nnz_per_line</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a2c0f5c9d74d5e750db91f5a5c222b118" kind="function"><name>get_test_weights</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1ad5b4be6e36b86c7b3e4d2545a85e29f4" kind="function"><name>to_polar</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6fa35c06d94babd7a902ccacce644ea9" kind="function"><name>get_matrix_size</name></member>
   </compound>
   <compound refid="classPolarSplineFEMPoissonLikeSolver" kind="class"><name>PolarSplineFEMPoissonLikeSolver</name>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ac215522e55222ee71d79e866f85afe25" kind="typedef"><name>FullDims</name></member>

@@ -610,7 +610,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-polarsplinefempoissonlikeassembler"><strong>PolarSplineFEMPoissonLikeAssembler</strong></a> (Field&lt; double, IdxRangeQuadratureRTheta &gt; int_volume, MetricTensorType const &amp; metric_tensor, IdxRangeFull idx_range_full) <br><em>Instantiate the assembler operator.</em></td>
+<td style="text-align: left;"><a href="#function-polarsplinefempoissonlikeassembler"><strong>PolarSplineFEMPoissonLikeAssembler</strong></a> (Field&lt; double, IdxRangeQuadratureRTheta &gt; int_volume, MetricTensorType const &amp; metric_tensor, IdxRangeFull idx_range_full, bool exclude_boundary_splines=true) <br><em>Instantiate the assembler operator.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -715,7 +715,8 @@ in the 5D GYSELA Code". December 2022.) </p>
 <pre><code class="language-C++">inline explicit PolarSplineFEMPoissonLikeAssembler::PolarSplineFEMPoissonLikeAssembler (
     Field&lt; double, IdxRangeQuadratureRTheta &gt; int_volume,
     MetricTensorType const &amp; metric_tensor,
-    IdxRangeFull idx_range_full
+    IdxRangeFull idx_range_full,
+    bool exclude_boundary_splines=true
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -723,6 +724,7 @@ in the 5D GYSELA Code". December 2022.) </p>
 <li><code>int_volume</code> The initialised field of Jacobian values of the mapping. </li>
 <li><code>metric_tensor</code> The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>idx_range_full</code> The full index range of <span class="arithmatex">\(\phi\)</span> including any batch dimensions. </li>
+<li><code>exclude_boundary_splines</code> True if the outer radial bsplines should be excluded from the matrix assembly (to impose homogeneous boundary conditions), false otherwise. </li>
 </ul>
 <hr>
 
