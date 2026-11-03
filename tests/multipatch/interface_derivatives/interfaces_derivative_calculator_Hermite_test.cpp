@@ -14,8 +14,8 @@
 #include "interface_derivative_coefficients.hpp"
 #include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
+#include "interfaces_derivative_calculator.hpp"
 #include "interfaces_derivative_calculator_test_utils.hpp"
-#include "interfaces_exact_derivative_calculator.hpp"
 #include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field_mem.hpp"
@@ -25,7 +25,7 @@
 #include "view.hpp"
 
 /*
-    Test InterfacesExactDerivativeCalculator on the following geometry:
+    Test InterfacesDerivativeCalculator on the following geometry:
 
     #if defined(REVERSE_PATCH1)
         |  1  |  2  |  3  | 
@@ -87,10 +87,10 @@ struct GridYg : NonUniformGridBase<Yg>
 {
 };
 
-struct BSplinesXg : ddc::NonUniformBSplines<Xg, 3>
+struct BSplinesXg : ddc::NonUniformBSplines<Xg, 3, Xg::PERIODIC>
 {
 };
-struct BSplinesYg : ddc::NonUniformBSplines<Yg, 3>
+struct BSplinesYg : ddc::NonUniformBSplines<Yg, 3, Yg::PERIODIC>
 {
 };
 
@@ -154,10 +154,10 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         BSplinesYg,
         GridXg,
         GridYg,
-        ddc::ConstantExtrapolationRule<Xg, Yg>,
-        ddc::ConstantExtrapolationRule<Xg, Yg>,
-        ddc::ConstantExtrapolationRule<Yg, Xg>,
-        ddc::ConstantExtrapolationRule<Yg, Xg>>;
+        ddc::ConstantExtrapolationRule<Xg>,
+        ddc::ConstantExtrapolationRule<Xg>,
+        ddc::ConstantExtrapolationRule<Yg>,
+        ddc::ConstantExtrapolationRule<Yg>>;
 
 // INTERFACES ------------------------------------------------------------------------------------
 using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
@@ -168,8 +168,8 @@ using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
 using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
 using SouthInterface3 = Interface<OutsideEdge, SouthEdge<3>, true>;
 
-using AllGrids = ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>, GridY<1>, GridY<2>, GridY<3>>;
-using AllBSpls = ddc::detail::
+using AllGrids = ddc::TypeSeq<GridX<1>, GridX<2>, GridX<3>, GridY<1>, GridY<2>, GridY<3>>;
+using AllBSpls = ddc::
         TypeSeq<BSplinesX<1>, BSplinesX<2>, BSplinesX<3>, BSplinesY<1>, BSplinesY<2>, BSplinesY<3>>;
 
 // Coordinate transformation for local (X,Y) matching with global (X,Y).
@@ -401,7 +401,7 @@ struct ChangeBound3
 
 
 template <class PatchLayout_>
-struct InterfacesExactDerivativeCalculatorHermiteFixture : public ::testing::Test
+struct InterfacesDerivativeCalculatorHermiteFixture : public ::testing::Test
 {
     static constexpr int ncells_per_patch = 5;
 
@@ -435,7 +435,7 @@ struct InterfacesExactDerivativeCalculatorHermiteFixture : public ::testing::Tes
     typename PatchLayout::CoordTransform3 coord_transform_3;
 
 public:
-    InterfacesExactDerivativeCalculatorHermiteFixture()
+    InterfacesDerivativeCalculatorHermiteFixture()
         : idx_range_x1(SplineInterpPointsX<1>::template get_domain<GridX<1>>())
         , idx_range_x2(SplineInterpPointsX<2>::template get_domain<GridX<2>>())
         , idx_range_x3(SplineInterpPointsX<3>::template get_domain<GridX<3>>())
@@ -571,12 +571,12 @@ public:
 };
 
 using TestTypes = ::testing::Types<RevPatch1, RevPatch2, RevPatch3, ChangeBound1, ChangeBound3>;
-TYPED_TEST_SUITE(InterfacesExactDerivativeCalculatorHermiteFixture, TestTypes);
+TYPED_TEST_SUITE(InterfacesDerivativeCalculatorHermiteFixture, TestTypes);
 } // end namespace
 
 
 
-TYPED_TEST(InterfacesExactDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
+TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
 {
     using PatchLayout = typename TestFixture::PatchLayout;
     using Interface_1_2 = typename PatchLayout::Interface_1_2;
@@ -611,12 +611,10 @@ TYPED_TEST(InterfacesExactDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
                             typename PatchLayout::CoordTransform1::XTransform::CoordResult>>,
             AllGrids>;
 
-    InterfacesExactDerivativeCalculator<
+    InterfacesDerivativeCalculator<
             Connectivity,
             Grid1AlongXg,
-            ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
-            ddc::SplineBuilderClosure::HERMITE,
-            ddc::SplineBuilderClosure::HERMITE,
+            ddc::TypeSeq<Patch1, Patch2, Patch3>,
             InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
             matrix(idx_ranges, deriv_coeffs_collect);
 
@@ -703,10 +701,10 @@ TYPED_TEST(InterfacesExactDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             = get_const_field(function_g_coef);
 
     // ------ global spline evaluator
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(this->yg_min);
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(this->yg_max);
-    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmin_g(this->xg_min);
-    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(this->xg_max);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(this->yg_min);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(this->yg_max);
+    ddc::ConstantExtrapolationRule<Xg> bc_xmin_g(this->xg_min);
+    ddc::ConstantExtrapolationRule<Xg> bc_xmax_g(this->xg_max);
     SplineRThetagEvaluator evaluator_g(bc_xmin_g, bc_xmax_g, bc_ymin_g, bc_ymax_g);
 
     // ------ initialise the boundary first derivatives from the global spline
@@ -785,7 +783,7 @@ TYPED_TEST(InterfacesExactDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     matrix.solve_cross_deriv(functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
-    using EmptyPatchSeq = ddc::detail::TypeSeq<>;
+    using EmptyPatchSeq = ddc::TypeSeq<>;
 
     // Check each derivatives ---
     check_all_x_derivatives(

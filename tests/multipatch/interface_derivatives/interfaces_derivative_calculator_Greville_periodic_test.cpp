@@ -14,8 +14,9 @@
 #include "interface_derivative_coefficients.hpp"
 #include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
-#include "interfaces_derivative_calculator_test_utils.hpp"
+#include "interfaces_derivative_calculator.hpp"
 #include "interfaces_exact_derivative_calculator.hpp"
+#include "interfaces_derivative_calculator_test_utils.hpp"
 #include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field_mem.hpp"
@@ -26,7 +27,7 @@
 
 
 /*
-    Test InterfacesExactDerivativeCalculator on the following geometry:
+    Test InterfacesDerivativeCalculator on the following geometry:
 
         |  1  |  2  |  3  |  1 ...
         -------------------
@@ -72,10 +73,10 @@ struct GridYg : NonUniformGridBase<Yg>
 {
 };
 
-struct BSplinesXg : ddc::NonUniformBSplines<Xg, 3>
+struct BSplinesXg : ddc::NonUniformBSplines<Xg, 3, Xg::PERIODIC>
 {
 };
-struct BSplinesYg : ddc::NonUniformBSplines<Yg, 3>
+struct BSplinesYg : ddc::NonUniformBSplines<Yg, 3, Yg::PERIODIC>
 {
 };
 
@@ -130,8 +131,8 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         GridYg,
         ddc::PeriodicExtrapolationRule<Xg>,
         ddc::PeriodicExtrapolationRule<Xg>,
-        ddc::ConstantExtrapolationRule<Yg, Xg>,
-        ddc::ConstantExtrapolationRule<Yg, Xg>>;
+        ddc::ConstantExtrapolationRule<Yg>,
+        ddc::ConstantExtrapolationRule<Yg>>;
 
 template <std::size_t I>
 struct CoordTransformGroup
@@ -155,7 +156,7 @@ struct CoordTransformGroup
     }
 };
 
-struct InterfacesExactDerivativeCalculatorGrevillePeriodicTest : public ::testing::Test
+struct InterfacesDerivativeCalculatorGrevillePeriodicTest : public ::testing::Test
 {
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
     // We define only the patch of the first row or column as the patches are sharing data.
@@ -232,7 +233,7 @@ protected:
     const IdxRange<GridXg, GridYg> idx_range_xy_g;
 
 public:
-    InterfacesExactDerivativeCalculatorGrevillePeriodicTest()
+    InterfacesDerivativeCalculatorGrevillePeriodicTest()
         : idx_range_x1(SplineInterpPointsX<1>::template get_domain<GridX<1>>())
         , idx_range_x2(SplineInterpPointsX<2>::template get_domain<GridX<2>>())
         , idx_range_x3(SplineInterpPointsX<3>::template get_domain<GridX<3>>())
@@ -370,7 +371,7 @@ public:
 
 
 
-TEST_F(InterfacesExactDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
+TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
     std::tuple coord_transforms {
             CoordTransformGroup<1>(),
@@ -492,8 +493,26 @@ TEST_F(InterfacesExactDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodic
             ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
             ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineBuilderClosure::PERIODIC,
-            InterfaceDerivCoeffsCollection<Interface_7_8, Interface_8_9, Interface_9_7>>
-            matrix_789(idx_ranges_789, deriv_coeffs_collect_789);
+    // InterfacesDerivativeCalculator<
+    //         Connectivity,
+    //         GridX<1>,
+    //         ddc::TypeSeq<Patch1, Patch2, Patch3>,
+    //         InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
+    //         matrix_123(idx_ranges_123, deriv_coeffs_collect_123);
+
+    // InterfacesDerivativeCalculator<
+    //         Connectivity,
+    //         GridX<4>,
+    //         ddc::TypeSeq<Patch4, Patch5, Patch6>,
+    //         InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
+    //         matrix_456(idx_ranges_456, deriv_coeffs_collect_456);
+
+    // InterfacesDerivativeCalculator<
+    //         Connectivity,
+    //         GridX<7>,
+    //         ddc::TypeSeq<Patch7, Patch8, Patch9>,
+    //         InterfaceDerivCoeffsCollection<Interface_7_8, Interface_8_9, Interface_9_7>>
+    //         matrix_789(idx_ranges_789, deriv_coeffs_collect_789);
 
     // Test with an extra patch (Patch2) to check it will only take the needed patches.
     InterfacesExactDerivativeCalculator<
@@ -520,8 +539,27 @@ TEST_F(InterfacesExactDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodic
             ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
             ddc::SplineBuilderClosure::GREVILLE,
             ddc::SplineBuilderClosure::GREVILLE,
-            InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>
-            matrix_369(idx_ranges_369, deriv_coeffs_collect_369);
+
+    // InterfacesDerivativeCalculator<
+    //         Connectivity,
+    //         GridY<1>,
+    //         ddc::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
+    //         InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
+    //         matrix_147(idx_ranges_147, deriv_coeffs_collect_147);
+
+    // InterfacesDerivativeCalculator<
+    //         Connectivity,
+    //         GridY<2>,
+    //         ddc::TypeSeq<Patch2, Patch5, Patch8>,
+    //         InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
+    //         matrix_258(idx_ranges_258, deriv_coeffs_collect_258);
+
+    // InterfacesDerivativeCalculator<
+    //         Connectivity,
+    //         GridY<3>,
+    //         ddc::TypeSeq<Patch3, Patch6, Patch9>,
+    //         InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>
+    //         matrix_369(idx_ranges_369, deriv_coeffs_collect_369);
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<
@@ -585,14 +623,14 @@ TEST_F(InterfacesExactDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodic
     builder_g(function_g_coef, get_const_field(function_g));
 
     // Global spline evaluator ---
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(yg_min);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(yg_max);
     ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
     SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 
     // Check each derivatives ---
-    using PatchSeqLowerBound = ddc::detail::TypeSeq<Patch7, Patch8, Patch9>;
-    using PatchSeqUpperBound = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
+    using PatchSeqLowerBound = ddc::TypeSeq<Patch7, Patch8, Patch9>;
+    using PatchSeqUpperBound = ddc::TypeSeq<Patch1, Patch2, Patch3>;
 
     check_all_x_derivatives(
             functions_and_derivs,

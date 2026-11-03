@@ -263,7 +263,7 @@ public:
      * @brief Evaluate the 2D splines (described by their spline coefficients) at a given coordinate.
      *
      * The spline coefficients represent a 2D spline function defined on a B-splines (basis splines). 
-     * They can be obtained via various methods, such as using a SplineBuilder2D or MultipatchSplineBuilder2D. 
+     * They can be obtained via various methods, such as using a SplineBuilder2D or SplineBuilder2DCollection.
      * The coordinate is defined on one patch. But it can be physically located on another patch. 
      * 
      * @anchor MultipatchSplineEvaluatorOperator
@@ -483,12 +483,12 @@ public:
             CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
             MultipatchSplineCoeff const patches_splines) const
     {
-        if constexpr (ddc::in_tags_v<DerivDim1, ddc::detail::TypeSeq<DerivDims...>>) {
+        if constexpr (ddc::in_tags_v<DerivDim1, ddc::TypeSeq<DerivDims...>>) {
             assert((IdxRange<DerivDim1>(patch_values.derivative_idx_range())
                             .contains(Idx<DerivDim1>(deriv_order)))
                    || (Idx<DerivDim1>(deriv_order) == Idx<DerivDim1>(0)));
         }
-        if constexpr (ddc::in_tags_v<DerivDim2, ddc::detail::TypeSeq<DerivDims...>>) {
+        if constexpr (ddc::in_tags_v<DerivDim2, ddc::TypeSeq<DerivDims...>>) {
             assert((IdxRange<DerivDim2>(patch_values.derivative_idx_range())
                             .contains(Idx<DerivDim2>(deriv_order)))
                    || (Idx<DerivDim2>(deriv_order) == Idx<DerivDim2>(0)));

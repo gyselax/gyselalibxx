@@ -343,7 +343,7 @@ void check_deriv_match(
         typename PatchP::IdxRange12 const& idx_range_eval_rtheta,
         DerivFieldOnPatch<PatchP> eval_function_and_derivs,
         SplineRThetaEvaluator<
-                ddc::type_seq_rank_v<PatchP, ddc::detail::TypeSeq<Patch1, Patch2>> + 1,
+                ddc::type_seq_rank_v<PatchP, ddc::TypeSeq<Patch1, Patch2>> + 1,
                 DeviceExecSpace> const& evaluator,
         DConstField<typename PatchP::IdxRangeBS12> spline)
 {
@@ -404,7 +404,7 @@ void check_cross_deriv_match(
         typename PatchP::IdxRange12 const& idx_range_eval_rtheta,
         DerivFieldOnPatch<PatchP> eval_function_and_derivs,
         SplineRThetaEvaluator<
-                ddc::type_seq_rank_v<PatchP, ddc::detail::TypeSeq<Patch1, Patch2>> + 1,
+                ddc::type_seq_rank_v<PatchP, ddc::TypeSeq<Patch1, Patch2>> + 1,
                 DeviceExecSpace> const& evaluator,
         DConstField<typename PatchP::IdxRangeBS12> spline)
 {
