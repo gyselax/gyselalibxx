@@ -675,13 +675,13 @@ $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7
 
 ```cpp
 InterfacesExactDerivativeCalculator<Connectivity, GridX1, 
-        ddc::detail::TypeSeq<Patch1, Patch2, Patch3>, 
+        ddc::TypeSeq<Patch1, Patch2, Patch3>, 
         ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
         InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
         matrix_123(idx_ranges_123, derivative_calculators_123);
 
 InterfacesExactDerivativeCalculator<Connectivity, GridX4, 
-        ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
+        ddc::TypeSeq<Patch4, Patch5, Patch6>,
         ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
         InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
         matrix_456(idx_ranges_456, derivative_calculators_456);
@@ -693,13 +693,13 @@ $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3
 
 ```cpp
 InterfacesExactDerivativeCalculator<Connectivity, GridY1, 
-        ddc::detail::TypeSeq<Patch1, Patch4, Patch7>,
+        ddc::TypeSeq<Patch1, Patch4, Patch7>,
         ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
         InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
         matrix_147(idx_ranges_147, derivative_calculators_147);
 
 InterfacesExactDerivativeCalculator<Connectivity, GridY2, 
-        ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
+        ddc::TypeSeq<Patch2, Patch5, Patch8>,
         ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
         InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
         matrix_258(idx_ranges_258, derivative_calculators_258);
@@ -806,7 +806,7 @@ We can then instantiate `InterfacesExactDerivativeCalculator` with the tuple of 
 InterfacesExactDerivativeCalculator<
         Connectivity,                               // MultipatchConnectivity class
         Grid1D,                                     // the given direction.
-        ddc::detail::TypeSeq<Patch1, Patch2, ...>   // list of patches containing all the needed ones
+        ddc::TypeSeq<Patch1, Patch2, ...>   // list of patches containing all the needed ones
         BoundCondGlobalLower,                       // boundary condition for the equivalent global spline
         BoundCondGlobalUpper,                       // boundary condition for the equivalent global spline
         InterfaceDerivCoeffsCollection<Interface_1, Interface_2, ...>>
@@ -831,14 +831,14 @@ $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7
 
 ```cpp
 InterfacesExactDerivativeCalculator<Connectivity, GridX1, 
-        ddc::detail::TypeSeq<Patch1, Patch2, Patch3>, 
+        ddc::TypeSeq<Patch1, Patch2, Patch3>, 
         ddc::BoundCond::PERIODIC, 
         ddc::BoundCond::PERIODIC,
         InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
         matrix_123(idx_ranges_123, derivative_calculators_123);
 
 InterfacesExactDerivativeCalculator<Connectivity, GridX4, 
-        ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
+        ddc::TypeSeq<Patch4, Patch5, Patch6>,
         ddc::BoundCond::PERIODIC, 
         ddc::BoundCond::PERIODIC,
         InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
@@ -851,14 +851,14 @@ $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3
 
 ```cpp
 InterfacesExactDerivativeCalculator<Connectivity, GridY1, 
-        ddc::detail::TypeSeq<Patch1, Patch4, Patch7>,
+        ddc::TypeSeq<Patch1, Patch4, Patch7>,
         ddc::BoundCond::GREVILLE, 
         ddc::BoundCond::GREVILLE,
         InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
         matrix_147(idx_ranges_147, derivative_calculators_147);
 
 InterfacesExactDerivativeCalculator<Connectivity, GridY2, 
-        ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
+        ddc::TypeSeq<Patch2, Patch5, Patch8>,
         ddc::BoundCond::GREVILLE, 
         ddc::BoundCond::GREVILLE,
         InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>

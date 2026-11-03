@@ -15,8 +15,8 @@
 #include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "interfaces_derivative_calculator.hpp"
-#include "interfaces_exact_derivative_calculator.hpp"
 #include "interfaces_derivative_calculator_test_utils.hpp"
+#include "interfaces_exact_derivative_calculator.hpp"
 #include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field_mem.hpp"
@@ -493,6 +493,9 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
             ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineBuilderClosure::PERIODIC,
+            InterfaceDerivCoeffsCollection<Interface_7_8, Interface_8_9, Interface_9_7>>
+            matrix_789(idx_ranges_789, deriv_coeffs_collect_789);
+
     // InterfacesDerivativeCalculator<
     //         Connectivity,
     //         GridX<1>,
@@ -539,6 +542,8 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
             ddc::SplineBuilderClosure::GREVILLE,
             ddc::SplineBuilderClosure::GREVILLE,
+            InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>
+            matrix_369(idx_ranges_369, deriv_coeffs_collect_369);
 
     // InterfacesDerivativeCalculator<
     //         Connectivity,
