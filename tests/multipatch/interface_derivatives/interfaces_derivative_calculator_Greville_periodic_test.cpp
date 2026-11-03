@@ -130,8 +130,8 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         GridYg,
         ddc::PeriodicExtrapolationRule<Xg>,
         ddc::PeriodicExtrapolationRule<Xg>,
-        ddc::ConstantExtrapolationRule<Yg, Xg>,
-        ddc::ConstantExtrapolationRule<Yg, Xg>>;
+        ddc::ConstantExtrapolationRule<Yg>,
+        ddc::ConstantExtrapolationRule<Yg>>;
 
 template <std::size_t I>
 struct CoordTransformGroup
@@ -573,8 +573,8 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     builder_g(function_g_coef, get_const_field(function_g));
 
     // Global spline evaluator ---
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(yg_min);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(yg_max);
     ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
     SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 

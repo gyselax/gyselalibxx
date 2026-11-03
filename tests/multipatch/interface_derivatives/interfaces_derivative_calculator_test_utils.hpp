@@ -550,10 +550,10 @@ void check_spline_representation_agreement(
     Coord<DimX> const x_max(ddc::discrete_space<typename Patch::BSplines1>().rmax());
     Coord<DimY> const y_min(ddc::discrete_space<typename Patch::BSplines2>().rmin());
     Coord<DimY> const y_max(ddc::discrete_space<typename Patch::BSplines2>().rmax());
-    ddc::ConstantExtrapolationRule<DimX, DimY> bc_xmin(x_min);
-    ddc::ConstantExtrapolationRule<DimX, DimY> bc_xmax(x_max);
-    ddc::ConstantExtrapolationRule<DimY, DimX> bc_ymin(y_min);
-    ddc::ConstantExtrapolationRule<DimY, DimX> bc_ymax(y_max);
+    ddc::ConstantExtrapolationRule<DimX> bc_xmin(x_min);
+    ddc::ConstantExtrapolationRule<DimX> bc_xmax(x_max);
+    ddc::ConstantExtrapolationRule<DimY> bc_ymin(y_min);
+    ddc::ConstantExtrapolationRule<DimY> bc_ymax(y_max);
     ddc::SplineEvaluator2D<
             HostExecSpace,
             typename HostExecSpace::memory_space,
@@ -561,10 +561,10 @@ void check_spline_representation_agreement(
             typename Patch::BSplines2,
             typename Patch::Grid1,
             typename Patch::Grid2,
-            ddc::ConstantExtrapolationRule<DimX, DimY>,
-            ddc::ConstantExtrapolationRule<DimX, DimY>,
-            ddc::ConstantExtrapolationRule<DimY, DimX>,
-            ddc::ConstantExtrapolationRule<DimY, DimX>>
+            ddc::ConstantExtrapolationRule<DimX>,
+            ddc::ConstantExtrapolationRule<DimX>,
+            ddc::ConstantExtrapolationRule<DimY>,
+            ddc::ConstantExtrapolationRule<DimY>>
             evaluator(bc_xmin, bc_xmax, bc_ymin, bc_ymax);
 
     // Define evaluation points at the centre of the cells -----------------------------------
