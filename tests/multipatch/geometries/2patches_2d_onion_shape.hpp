@@ -148,7 +148,7 @@ using Patch1 = Patch<GridR<1>, GridTheta<1>, BSplinesR<1>, BSplinesTheta<1>>;
 using Patch2 = Patch<GridR<2>, GridTheta<2>, BSplinesR<2>, BSplinesTheta<2>>;
 
 /// @brief Sorted list of patches.
-using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
+using PatchOrdering = ddc::TypeSeq<Patch1, Patch2>;
 
 
 // EDGES -----------------------------------------------------------------------------------------

@@ -7,7 +7,7 @@
  * to index a vector (e.g. x to get E_x).
  */
 template <class... Dims>
-using VectorIndexSet = ddc::detail::TypeSeq<Dims...>;
+using VectorIndexSet = ddc::TypeSeq<Dims...>;
 
 /**
  * @namespace tensor_tools A namespace to group all the tools that are useful to

@@ -139,7 +139,7 @@ private:
     using IdxRangeBatchedBSPolar
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_cat_t<
                     ddc::to_type_seq_t<IdxRangeBatch>,
-                    ddc::detail::TypeSeq<PolarBSplinesRTheta>>>;
+                    ddc::TypeSeq<PolarBSplinesRTheta>>>;
     using IdxBatchedBSPolar = typename IdxRangeBatchedBSPolar::discrete_element_type;
 
     /**
