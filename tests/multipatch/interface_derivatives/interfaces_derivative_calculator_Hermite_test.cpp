@@ -169,7 +169,7 @@ using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
 using SouthInterface3 = Interface<OutsideEdge, SouthEdge<3>, true>;
 
 using AllGrids = ddc::TypeSeq<GridX<1>, GridX<2>, GridX<3>, GridY<1>, GridY<2>, GridY<3>>;
-using AllBSpls = ddc::detail::
+using AllBSpls = ddc::
         TypeSeq<BSplinesX<1>, BSplinesX<2>, BSplinesX<3>, BSplinesY<1>, BSplinesY<2>, BSplinesY<3>>;
 
 // Coordinate transformation for local (X,Y) matching with global (X,Y).
