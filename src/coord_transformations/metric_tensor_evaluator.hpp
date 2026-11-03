@@ -17,7 +17,7 @@ namespace metric_tensor_detail {
  * an index. It is never instantiated in a discrete space.
  */
 template <class Dim>
-struct PlaceholderGrid
+struct PlaceholderGrid : ddc::DiscreteDimension
 {
     /// The continuous dimension on which the grid is defined.
     using continuous_dimension_type = Dim;

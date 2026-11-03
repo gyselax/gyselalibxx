@@ -1,19 +1,17 @@
 # SPDX-License-Identifier: MIT
 
-add_library(paraconfpp)
+add_library(paraconfpp INTERFACE)
 
-target_compile_features("paraconfpp" PUBLIC cxx_std_20)
+target_compile_features("paraconfpp" INTERFACE cxx_std_20)
 
 target_sources("paraconfpp"
-    PRIVATE
-        paraconfpp.cpp
-    PUBLIC
+    INTERFACE
         FILE_SET HEADERS
             FILES
                 paraconfpp.hpp
 )
 
-target_link_libraries(paraconfpp PUBLIC
+target_link_libraries(paraconfpp INTERFACE
         paraconf::paraconf
 )
 add_library(gyselalibxx::paraconfpp ALIAS paraconfpp)

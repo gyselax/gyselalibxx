@@ -17,7 +17,7 @@ namespace detail {
  * interface. These fake dimensions are then assigned to an: IdxRange<Grid1D>(Idx<Grid1D> {0}, IdxStep<Grid1D> {1}); See
  * create_scalar_index_range();
  */
-struct InternalSpoofGrid
+struct InternalSpoofGrid : ddc::DiscreteDimension
 {
 };
 

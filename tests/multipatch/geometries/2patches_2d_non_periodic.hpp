@@ -126,7 +126,7 @@ using Patch2 = Patch<GridX<2>, GridY<2>, BSplinesX<2>, BSplinesY<2>>;
 
 #ifndef EXTEND_GEOMETRY
 /// @brief Sorted list of patches.
-using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
+using PatchOrdering = ddc::TypeSeq<Patch1, Patch2>;
 
 
 // EDGES -----------------------------------------------------------------------------------------

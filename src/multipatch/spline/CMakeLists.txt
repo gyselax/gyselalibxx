@@ -17,6 +17,7 @@ target_sources("multipatch_spline"
 
 target_link_libraries("multipatch_spline" INTERFACE
     DDC::core
+    gyselalibxx::interpolation
     gyselalibxx::multipatch_data_types
     gyselalibxx::multipatch_connectivity
     gyselalibxx::utils

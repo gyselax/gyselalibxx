@@ -26,18 +26,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `IdxStep` indexing for `VectorField` objects.
 - Allow `PolarSplineFEMPoissonLikeSolver` to solve a batch of equations (batch dimensions in `IdxRangeFull`).
 - Add `ddcHelper::get_idx_from_linear_index` to get the multi-dimensional index at a given position in an index range.
+- Add `ddcHelper::get_linear_index_from_idx` to get the position of a multi-dimensional index in an index range.
 - Add a `concepts::MetricTensor` concept describing objects which provide the metric tensor and its inverse at a given coordinate or index.
 - `MetricTensorEvaluator` can be evaluated at an index whose coordinate type matches `CoordArg`.
 - The pointwise operators of `Gradient` and `LiePoissonBracket` can be evaluated at an index whose coordinate type matches the coordinate of the metric tensor.
 - Allow `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` to take a metric tensor instead of a mapping to change the variance of a vector field.
 - Add `symmetric_tensor_mul` to calculate a tensor multiplication whose result is symmetric.
+- Add new helper functions `find_point_missing_from_superset` and `points_are_subset`.
+- Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis. It is currently limited to a non-periodic radial direction and a periodic poloidal direction (ring geometry).
+- Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
+- Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
+- `MultipatchSplineEvaluator2D` works with `DerivField`.
 
 ### Fixed
 
 - Fix compilation errors due to use of `std::make_tuple` in functions that are GPU compatible.
 - Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
 - Fix Jean-Zay environment with missing environment variables.
-- Fix paraconf warnings.
 
 ### Changed
 
@@ -65,7 +70,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The constructor of `PolarSplineFEMPoissonLikeAssembler` now takes the metric tensor as an argument and `PolarSplineFEMPoissonLikeAssembler::operator()` no longer takes the mapping. The type of the metric tensor is an additional template parameter.
 - The constructor of `AdvectionFieldFinder` now takes the metric tensor as an argument (after the mapping). The type of the metric tensor is an additional template parameter.
 - Calls to Kokkos profiling's region push/pop were replaced by calls `ScopedRegion` whenever possible to capture RAII deallocations.
-- C++ paraconf wrapper functions only accept pre-formatted strings.
+- `PolarSplineFEMPoissonLikeAssembler` uses `TensorProductBSplinePoissonAssembler` to assemble the elements of the matrix corresponding to the inner products of tensor product B-splines.
+- Use Spack to install packages in the docker image.
 
 ### Deprecated
 
@@ -81,7 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Dependency requirements
 
 - Remove Dask dependency in the tests.
-- Update DDC to [v0.16.0](https://github.com/CExA-project/ddc/releases/tag/v0.16.0).
+- Update DDC to [v0.17.0](https://github.com/CExA-project/ddc/releases/tag/v0.17.0).
 - Update GMGPolar dependency to [v2.4.0](https://github.com/SciCompMod/GMGPolar/releases/tag/v2.4.1).
 
 ## [v0.8.0] - 2026-09-09
