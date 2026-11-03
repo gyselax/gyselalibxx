@@ -342,7 +342,7 @@ private:
     template <typename eval_type, class GridPar1D, std::size_t... I>
     void update_derivatives(
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
-            Idx<GridPar1D> const& slice_idx,
+            Idx<GridPar1D> const& idx_to_slice,
             std::integer_sequence<std::size_t, I...>)
     {
         static_assert(
@@ -353,8 +353,8 @@ private:
 
         // Locally transform the index into an integer to avoid type issues.
         IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<PatchFirst>());
-        int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
-        (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, slice_idx_value), ...);
+        int value_idx_to_slice = (idx_to_slice - idx_range_1d_first_patch.front()).value();
+        (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, value_idx_to_slice), ...);
     }
 
 
@@ -362,20 +362,19 @@ private:
     template <std::size_t I, typename eval_type>
     void update_derivatives_at_interface(
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
-            int& slice_previous_idx_value)
+            int& value_previous_idx_to_slice)
     {
-        // Type for the slice_previous_idx_value index.
-        Idx<grid_par1<I>> idx_slice_1;
-        Idx<grid_par2<I>> idx_slice_2;
-        set_slice_indexes<I>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+        Idx<grid_par1<I>> idx_to_slice_1;
+        Idx<grid_par2<I>> idx_to_slice_2;
+        set_slice_indexes<I>(value_previous_idx_to_slice, idx_to_slice_1, idx_to_slice_2);
 
         double const reconstructed_deriv = get_reconstructed_deriv<
                 I,
-                eval_type>(idx_slice_1, idx_slice_2, functions_and_derivs);
+                eval_type>(idx_to_slice_1, idx_to_slice_2, functions_and_derivs);
 
         // Get the correct indices for the slices.
-        Idx<grid_perp1<I>> idx_deriv_1 = get_idx_interface<I, patch1<I>>();
-        Idx<grid_perp2<I>> idx_deriv_2 = get_idx_interface<I, patch2<I>>();
+        Idx<grid_perp1<I>> idx_perp_1 = get_idx_interface<I, patch1<I>>();
+        Idx<grid_perp2<I>> idx_perp_2 = get_idx_interface<I, patch2<I>>();
 
         std::array<const int, 2> signs = get_signs<I, eval_type>();
 
@@ -383,8 +382,8 @@ private:
         Idx<deriv_perp1<I>> i_dperp1(1);
         Idx<deriv_perp2<I>> i_dperp2(1);
         if constexpr (std::is_same_v<eval_type, eval_deriv>) {
-            idx_deriv_perp1<I> idx_deriv1(i_dperp1, idx_deriv_1, idx_slice_1);
-            idx_deriv_perp2<I> idx_deriv2(i_dperp2, idx_deriv_2, idx_slice_2);
+            idx_deriv_perp1<I> idx_deriv1(i_dperp1, idx_perp_1, idx_to_slice_1);
+            idx_deriv_perp2<I> idx_deriv2(i_dperp2, idx_perp_2, idx_to_slice_2);
 
             functions_and_derivs.template get<patch1<I>>()(idx_deriv1)
                     = reconstructed_deriv * signs[0];
@@ -392,9 +391,9 @@ private:
                     = reconstructed_deriv * signs[1];
         } else {
             idx_cross_deriv1<I>
-                    idx_deriv1(i_dperp1, Idx<deriv_par1<I>>(1), idx_deriv_1, idx_slice_1);
+                    idx_deriv1(i_dperp1, Idx<deriv_par1<I>>(1), idx_perp_1, idx_to_slice_1);
             idx_cross_deriv2<I>
-                    idx_deriv2(i_dperp2, Idx<deriv_par2<I>>(1), idx_deriv_2, idx_slice_2);
+                    idx_deriv2(i_dperp2, Idx<deriv_par2<I>>(1), idx_perp_2, idx_to_slice_2);
 
             functions_and_derivs.template get<patch1<I>>()(idx_deriv1)
                     = reconstructed_deriv * signs[0];
@@ -421,9 +420,9 @@ private:
      */
     template <std::size_t I>
     void set_slice_indexes(
-            int& slice_idx_value,
-            Idx<grid_par1<I>>& slice_idx_1,
-            Idx<grid_par2<I>>& slice_idx_2)
+            int& value_idx_to_slice,
+            Idx<grid_par1<I>>& idx_to_slice_1,
+            Idx<grid_par2<I>>& idx_to_slice_2)
     {
         /// The order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
         constexpr bool patch_order_matches_interfaces = std::is_same_v<
@@ -439,13 +438,13 @@ private:
                 index_converter(idx_range_parall_1, idx_range_parall_2);
 
         if constexpr (std::is_same_v<patch1<I>, PatchIdxSlice>) {
-            slice_idx_1 = Idx<grid_par1<I>>(slice_idx_value);
-            slice_idx_2 = index_converter(slice_idx_1);
-            slice_idx_value = (slice_idx_2 - idx_range_parall_2.front()).value();
+            idx_to_slice_1 = Idx<grid_par1<I>>(value_idx_to_slice);
+            idx_to_slice_2 = index_converter(idx_to_slice_1);
+            value_idx_to_slice = (idx_to_slice_2 - idx_range_parall_2.front()).value();
         } else {
-            slice_idx_2 = Idx<grid_par2<I>>(slice_idx_value);
-            slice_idx_1 = index_converter(slice_idx_2);
-            slice_idx_value = (slice_idx_1 - idx_range_parall_1.front()).value();
+            idx_to_slice_2 = Idx<grid_par2<I>>(value_idx_to_slice);
+            idx_to_slice_1 = index_converter(idx_to_slice_2);
+            value_idx_to_slice = (idx_to_slice_1 - idx_range_parall_1.front()).value();
         }
     }
 
@@ -454,8 +453,8 @@ private:
             typename eval_type,
             std::enable_if_t<std::is_same_v<eval_type, eval_deriv>, bool> = true>
     double const get_reconstructed_deriv(
-            Idx<grid_par1<I>> const& idx_slice_1,
-            Idx<grid_par2<I>> const& idx_slice_2,
+            Idx<grid_par1<I>> const& idx_to_slice_1,
+            Idx<grid_par2<I>> const& idx_to_slice_2,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
         // Use the function values to compute the first derivatives.
@@ -467,8 +466,8 @@ private:
         // Compute the coefficient c_I for the interface I.
         double const interface_deriv
                 = m_deriv_coeffs_collect.template get<stored_interface<I>>().get_approx_deriv(
-                        get_const_field(function_1[idx_slice_1]),
-                        get_const_field(function_2[idx_slice_2]));
+                        get_const_field(function_1[idx_to_slice_1]),
+                        get_const_field(function_2[idx_to_slice_2]));
         return interface_deriv;
     }
 
@@ -477,24 +476,24 @@ private:
             typename eval_type,
             std::enable_if_t<std::is_same_v<eval_type, eval_cross_deriv>, bool> = true>
     double const get_reconstructed_deriv(
-            Idx<grid_par1<I>> const& idx_slice_1,
-            Idx<grid_par2<I>> const& idx_slice_2,
+            Idx<grid_par1<I>> const& idx_to_slice_1,
+            Idx<grid_par2<I>> const& idx_to_slice_2,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
         IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
 
         // The slice indices has to be a point at a corner, i.e. index range boundaries.
-        assert((idx_slice_1 == idx_range_par_1.front()) || (idx_slice_1 == idx_range_par_1.back()));
-        assert((idx_slice_2 == idx_range_par_2.front()) || (idx_slice_2 == idx_range_par_2.back()));
+        assert((idx_to_slice_1 == idx_range_par_1.front()) || (idx_to_slice_1 == idx_range_par_1.back()));
+        assert((idx_to_slice_2 == idx_range_par_2.front()) || (idx_to_slice_2 == idx_range_par_2.back()));
 
-        Idx<deriv_par1<I>, grid_par1<I>> idx_slice_deriv_1(Idx<deriv_par1<I>>(1), idx_slice_1);
-        Idx<deriv_par2<I>, grid_par2<I>> idx_slice_deriv_2(Idx<deriv_par2<I>>(1), idx_slice_2);
+        Idx<deriv_par1<I>, grid_par1<I>> idx_to_slice_deriv_1(Idx<deriv_par1<I>>(1), idx_to_slice_1);
+        Idx<deriv_par2<I>, grid_par2<I>> idx_to_slice_deriv_2(Idx<deriv_par2<I>>(1), idx_to_slice_2);
 
         DField<IdxRange<grid_perp1<I>>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
-                = functions_and_derivs.template get<patch1<I>>()[idx_slice_deriv_1];
+                = functions_and_derivs.template get<patch1<I>>()[idx_to_slice_deriv_1];
         DField<IdxRange<grid_perp2<I>>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
-                = functions_and_derivs.template get<patch2<I>>()[idx_slice_deriv_2];
+                = functions_and_derivs.template get<patch2<I>>()[idx_to_slice_deriv_2];
 
         // Compute the coefficient c_I for the interface I.
         double const corner_derivative
