@@ -72,10 +72,10 @@ struct GridYg : NonUniformGridBase<Yg>
 {
 };
 
-struct BSplinesXg : ddc::NonUniformBSplines<Xg, 3>
+struct BSplinesXg : ddc::NonUniformBSplines<Xg, 3, Xg::PERIODIC>
 {
 };
-struct BSplinesYg : ddc::NonUniformBSplines<Yg, 3>
+struct BSplinesYg : ddc::NonUniformBSplines<Yg, 3, Yg::PERIODIC>
 {
 };
 
