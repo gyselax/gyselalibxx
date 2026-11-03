@@ -19,13 +19,17 @@ inline Coord<DimOut> constexpr convert_dim(Coord<DimIn> const& input_coord)
  * on another dimension. The scalar values do not change. 
  */
 template <class DimOut, class DimIn>
-std::vector<Coord<DimOut>> const convert_dim(std::vector<Coord<DimIn>> const& input_vec)
+auto const convert_dim(std::vector<Coord<DimIn>> const& input_vec)
 {
-    std::vector<Coord<DimOut>> output_vec;
-    for (double pt : input_vec) {
-        output_vec.push_back(Coord<DimOut>(pt));
+    if constexpr (std::is_same_v<DimOut, DimIn>) {
+        return input_vec;
+    } else {
+        std::vector<Coord<DimOut>> output_vec;
+        for (double pt : input_vec) {
+            output_vec.push_back(Coord<DimOut>(pt));
+        }
+        return output_vec;
     }
-    return output_vec;
 }
 
 
@@ -102,15 +106,4 @@ void append_reverse(
     for (int i(0); i < n_pt; ++i) {
         points_global.push_back(CoordTypeG {double(min + max - points_patch[n_pt - 1 - i])});
     }
-}
-
-/**
- * @brief Get an index range slice containing two indices: 
- *   * the first index of the given index range, 
- *   * another index at first index + number of elements in the given index range.
- */
-template <class Grid1D>
-IdxRangeSlice<Grid1D> get_bound_idx_range_slice(IdxRange<Grid1D> const idx_range)
-{
-    return IdxRangeSlice<Grid1D>(idx_range.front(), IdxStep<Grid1D>(2), idx_range.extents() - 1);
 }

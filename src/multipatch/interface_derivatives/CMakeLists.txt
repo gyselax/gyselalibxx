@@ -7,12 +7,14 @@ target_sources("multipatch_interface_derivatives"
     INTERFACE
         FILE_SET HEADERS
             FILES
+                interfaces_exact_derivative_calculator.hpp
                 interface_derivative_coefficients.hpp
                 interface_derivative_coefficients_collection.hpp
 )
 
 target_link_libraries("multipatch_interface_derivatives" INTERFACE
     DDC::core
+    Ginkgo::ginkgo
     gyselalibxx::multipatch_data_types
     gyselalibxx::multipatch_connectivity
     gyselalibxx::utils

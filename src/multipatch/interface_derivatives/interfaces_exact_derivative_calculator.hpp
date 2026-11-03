@@ -5,6 +5,8 @@
 #include <typeinfo>
 
 #include <ddc/ddc.hpp>
+#include <ginkgo/ginkgo.hpp>
+
 
 #include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
@@ -13,7 +15,7 @@
 #include "interface.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
-#include "single_interface_derivatives_calculator_collection.hpp"
+#include "interface_derivative_coefficients_collection.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
@@ -21,9 +23,9 @@ template <
         class Connectivity,
         class Grid1D,
         class PatchSeq,
-        ddc::BoundCond LowerBound,
-        ddc::BoundCond UpperBound,
-        class DerivativesCalculatorCollection>
+        ddc::SplineBuilderClosure LowerBound,
+        ddc::SplineBuilderClosure UpperBound,
+        class DerivCoeffCollection>
 class InterfacesExactDerivativeCalculator;
 
 /**
@@ -45,23 +47,23 @@ class InterfacesExactDerivativeCalculator;
   * @tparam Patches List of patches containing all the involved patches in the given direction. 
   * @tparam LowerBound Lower/left boundary condition of the first local spline along the given direction. 
   * @tparam UpperBound Upper/right boundary condition of the last local spline along the given direction. 
-  * @tparam DerivativesCalculatorCollection A SingleInterfaceDerivativesCalculatorCollection
+  * @tparam DerivCoeffCollection A InterfaceDerivCoeffsCollection
   * that stores the SingleInterfaceDerivativesCalculator needed to compute the interface derivatives. 
   */
 template <
         class Connectivity,
         class Grid1D,
         class... Patches,
-        ddc::BoundCond LowerBound,
-        ddc::BoundCond UpperBound,
-        class DerivativesCalculatorCollection>
+        ddc::SplineBuilderClosure LowerBound,
+        ddc::SplineBuilderClosure UpperBound,
+        class DerivCoeffCollection>
 class InterfacesExactDerivativeCalculator<
         Connectivity,
         Grid1D,
         ddc::detail::TypeSeq<Patches...>,
         LowerBound,
         UpperBound,
-        DerivativesCalculatorCollection>
+        DerivCoeffCollection>
 {
     /*
         All the interfaces given as input to the MultipatchConnectivity class.
@@ -99,10 +101,8 @@ class InterfacesExactDerivativeCalculator<
                     !std::is_same_v<typename InterfaceBoundFirst::Edge2, OutsideEdge>);
 
     static_assert(
-            ((LowerBound == ddc::BoundCond::PERIODIC) == (UpperBound == ddc::BoundCond::PERIODIC)),
+            ((LowerBound == ddc::SplineBuilderClosure::PERIODIC) == (UpperBound == ddc::SplineBuilderClosure::PERIODIC)),
             "If one boundary is periodic, the other boundary should be too.");
-
-    static constexpr bool is_periodic = (LowerBound == ddc::BoundCond::PERIODIC);
 
     /*
         Remove all the interfaces with an OutsideEdge.
@@ -180,7 +180,7 @@ private:
 
     // The order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
     template <std::size_t I>
-    constexpr bool patch_order_matches_interfaces = std::is_same_v<
+    static constexpr bool patch_order_matches_interfaces = std::is_same_v<
             typename stored_interface<I>::Edge1::perpendicular_grid,
             ddc::type_seq_element_t<I, Grid1DSeq>>;
 
@@ -250,7 +250,7 @@ private:
 
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
-    DerivativesCalculatorCollection const& m_derivatives_calculators;
+    DerivCoeffCollection const& m_derivatives_calculators;
 
     // Vector containing the signs of the derivatives along the parallel direction of the interfaces.
     std::array<int, ddc::type_seq_size_v<Grid1DSeq>> m_vector_par_signs;
@@ -265,14 +265,14 @@ public:
      * The matrix is initialised with the derivatives calculator collection given in input. 
      * 
      * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
-     * @param derivatives_calculators SingleInterfaceDerivativesCalculatorCollection containing all the 
+     * @param derivatives_calculators SingleInterfaceDerivCoeffCollection containing all the 
      *          interface derivative calculator for each interface in the given Grid1D direction. 
      * @param reduction_factor Reduction factor for a Gingko dense matrix with a conjugate gradient solver 
      *          and a Jacobi preconditioner. 
      */
     InterfacesExactDerivativeCalculator(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            DerivativesCalculatorCollection const& derivatives_calculators,
+            DerivCoeffCollection const& derivatives_calculators,
             double const& reduction_factor = 1e-6)
         : m_idx_ranges(idx_ranges)
         , m_derivatives_calculators(derivatives_calculators)
@@ -440,10 +440,10 @@ private:
     {
         double const coeff_deriv_patch1
                 = m_derivatives_calculators.template get<stored_interface<I>>()
-                          .get_coeff_deriv_patch_1();
+                          .get_coeff_deriv_patch1();
         double const coeff_deriv_patch2
                 = m_derivatives_calculators.template get<stored_interface<I>>()
-                          .get_coeff_deriv_patch_2();
+                          .get_coeff_deriv_patch2();
         const double coeff_left
                 = patch_order_matches_interfaces<I> ? coeff_deriv_patch1 : coeff_deriv_patch2;
         const double coeff_right
@@ -552,8 +552,8 @@ private:
                                              get_const_field(function_and_derivs_1[idx_slice_1]),
                                              get_const_field(function_and_derivs_2[idx_slice_2]));
         } else {
-            IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch_1<I>>());
-            IdxRange<grid_par1<I>> idx_range_par_2(m_idx_ranges.template get<patch_2<I>>());
+            IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
+            IdxRange<grid_par1<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
 
             // The slice indices has to be a point at a corner, i.e. index range boundaries.
             assert((idx_slice_1 == idx_range_par_1.front())
@@ -585,29 +585,29 @@ private:
                 ill-oriented. Because, 
                         d(f(-x)) = - df(-x).
             */
-            sign_sum *= m_vector_par_signs[ddc::type_seq_rank_v<GridPerp1, Grid1DSeq>];
+            sign_sum *= m_vector_par_signs[ddc::type_seq_rank_v<grid_perp1<I>, Grid1DSeq>];
         }
 
         m_vector->get_values()[I] = sign_sum * lin_comb_funct;
 
         // Add the boundary derivatives for global Hermite boundary conditions. ------------------
         constexpr bool is_lower_bound_deriv_dependent
-                = (LowerBound == ddc::BoundCond::HERMITE && I == 0);
+                = (LowerBound == ddc::SplineBuilderClosure::HERMITE && I == 0);
         constexpr bool is_upper_bound_deriv_dependent
-                = (UpperBound == ddc::BoundCond::HERMITE && I == n_inner_interfaces - 1);
+                = (UpperBound == ddc::SplineBuilderClosure::HERMITE && I == n_inner_interfaces - 1);
 
         if constexpr (is_lower_bound_deriv_dependent || is_upper_bound_deriv_dependent) {
             IdxRange<grid_perp1<I>> idx_range_perp_1(m_idx_ranges.template get<patch1<I>>());
             IdxRange<grid_perp2<I>> idx_range_perp_2(m_idx_ranges.template get<patch2<I>>());
 
-            Idx<grid_perp1<I>> idx_deriv_1 = get_idx_other_interface(idx_range_perp_1, extremity_1);
-            Idx<grid_perp2<I>> idx_deriv_2 = get_idx_other_interface(idx_range_perp_2, extremity_2);
+            Idx<grid_perp1<I>> idx_deriv_1 = get_idx_other_interface(idx_range_perp_1, extremity_1<I>);
+            Idx<grid_perp2<I>> idx_deriv_2 = get_idx_other_interface(idx_range_perp_2, extremity_2<I>);
 
             auto const [sign_1, sign_2] = get_sign_derivs<I, eval_type>();
 
-            Idx<deriv_perp1<I>, GridPerp1, grid_par1<I>>
+            Idx<deriv_perp1<I>, grid_perp1<I>, grid_par1<I>>
                     idx_bound_deriv_1(Idx<deriv_perp1<I>>(1), idx_deriv_1, idx_slice_1);
-            Idx<deriv_perp2<I>, GridPerp2, grid_par2<I>>
+            Idx<deriv_perp2<I>, grid_perp2<I>, grid_par2<I>>
                     idx_bound_deriv_2(Idx<deriv_perp2<I>>(1), idx_deriv_2, idx_slice_2);
 
             double bound_deriv_1;
@@ -618,9 +618,9 @@ private:
                 bound_deriv_2 = function_and_derivs_2(idx_bound_deriv_2) * sign_2;
             } else {
                 // Select the cross-derivatives at the other interfaces/bounds.
-                Idx<deriv_par1<I>, deriv_perp1<I>, grid_par1<I>, GridPerp1>
+                Idx<deriv_par1<I>, deriv_perp1<I>, grid_par1<I>, grid_perp1<I>>
                         idx_cross_deriv_1(Idx<deriv_par1<I>>(1), idx_bound_deriv_1);
-                Idx<deriv_par2<I>, deriv_perp2<I>, grid_par2<I>, GridPerp2>
+                Idx<deriv_par2<I>, deriv_perp2<I>, grid_par2<I>, grid_perp2<I>>
                         idx_cross_deriv_2(Idx<deriv_par2<I>>(1), idx_bound_deriv_2);
 
                 bound_deriv_1 = function_and_derivs_1(idx_cross_deriv_1) * sign_1;
@@ -629,10 +629,10 @@ private:
 
             const double coeff_deriv_1
                     = m_derivatives_calculators.template get<stored_interface<I>>()
-                              .get_coeff_deriv_patch_1();
+                              .get_coeff_deriv_patch1();
             const double coeff_deriv_2
                     = m_derivatives_calculators.template get<stored_interface<I>>()
-                              .get_coeff_deriv_patch_2();
+                              .get_coeff_deriv_patch2();
 
             if constexpr (is_lower_bound_deriv_dependent) {
                 m_vector->get_values()[I] += patch_order_matches_interfaces<I>
@@ -675,8 +675,8 @@ private:
         IdxRange<grid_perp1<I>> idx_range_perp_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_perp2<I>> idx_range_perp_2(m_idx_ranges.template get<patch2<I>>());
 
-        Idx<grid_perp1<I>> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1);
-        Idx<grid_perp2<I>> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2);
+        Idx<grid_perp1<I>> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1<I>);
+        Idx<grid_perp2<I>> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2<I>);
 
         // Type for the slice_previous_idx_value index.
         using PatchIndexSlice
@@ -684,7 +684,7 @@ private:
         Idx<grid_par1<I>> idx_slice_1;
         Idx<grid_par2<I>> idx_slice_2;
         set_slice_indexes<
-                EquivalentInterfaceI,
+                I,
                 PatchIndexSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
         // Get the fields of the left and right patch of the interface.
@@ -695,9 +695,9 @@ private:
 
         auto const [sign_1, sign_2] = get_sign_derivs<I, eval_type>();
 
-        Idx<deriv_perp1<I>, GridPerp1, grid_par1<I>>
+        Idx<deriv_perp1<I>, grid_perp1<I>, grid_par1<I>>
                 idx_interface_deriv_1(Idx<deriv_perp1<I>>(1), idx_deriv_1, idx_slice_1);
-        Idx<deriv_perp2<I>, GridPerp2, grid_par2<I>>
+        Idx<deriv_perp2<I>, grid_perp2<I>, grid_par2<I>>
                 idx_interface_deriv_2(Idx<deriv_perp2<I>>(1), idx_deriv_2, idx_slice_2);
 
         if constexpr (std::is_same_v<eval_type, eval_deriv>) {
@@ -716,9 +716,9 @@ private:
             assert((idx_slice_2 == idx_range_par_2.front())
                    || (idx_slice_2 == idx_range_par_2.back()));
 
-            Idx<deriv_par1<I>, deriv_perp1<I>, GridPerp1, grid_par1<I>>
+            Idx<deriv_par1<I>, deriv_perp1<I>, grid_perp1<I>, grid_par1<I>>
                     idx_cross_deriv_1(Idx<deriv_par1<I>>(1), idx_interface_deriv_1);
-            Idx<deriv_par2<I>, deriv_perp2<I>, GridPerp2, grid_par2<I>>
+            Idx<deriv_par2<I>, deriv_perp2<I>, grid_perp2<I>, grid_par2<I>>
                     idx_cross_deriv_2(Idx<deriv_par2<I>>(1), idx_interface_deriv_2);
 
             // Update the cross-derivative.
@@ -848,7 +848,7 @@ private:
         // If the perpendicular grids of the two patches agree.
         constexpr bool are_same_direction_perp = (extremity_1<I> != extremity_2<I>);
         // If the parallel grids of the two patches agree.
-        constexpr bool are_same_direction_par = EquivalentInterfaceI::orientations_agree;
+        constexpr bool are_same_direction_par = stored_interface<I>::orientations_agree;
 
         constexpr int sign_deriv_perp_2 = are_same_direction_perp - !are_same_direction_perp;
         constexpr int sign_deriv_par_2 = are_same_direction_par - !are_same_direction_par;
