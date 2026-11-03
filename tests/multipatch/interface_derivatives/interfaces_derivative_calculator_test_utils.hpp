@@ -66,7 +66,7 @@ void initialise_all_functions(
         std::tuple<CoordTransformType...> coord_transforms)
 {
     static_assert(sizeof...(Patches) == sizeof...(CoordTransformType));
-    using PatchSeq = ddc::detail::TypeSeq<Patches...>;
+    using PatchSeq = ddc::TypeSeq<Patches...>;
     (initialise_2D_function<Xg, Yg, typename Patches::Grid1, typename Patches::Grid2>(
              (functions_and_derivs.template get<Patches>()).get_values_field(),
              std::get<ddc::type_seq_rank_v<Patches, PatchSeq>>(coord_transforms)),
@@ -89,7 +89,7 @@ void initialise_derivatives(
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
     using DimDerivG = typename GridDeriv::continuous_dimension_type;
-    static_assert(ddc::in_tags_v<DimDerivG, ddc::detail::TypeSeq<Xg, Yg>>);
+    static_assert(ddc::in_tags_v<DimDerivG, ddc::TypeSeq<Xg, Yg>>);
 
     auto coord_transform_g_to_l_1d
             = get_1d_transform<std::is_same_v<DimDerivG, Xg>>(coord_transform);
@@ -240,7 +240,7 @@ void initialise_all_cross_derivatives(
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
         std::tuple<CoordTransformType...> coord_transforms)
 {
-    using PatchSeq = ddc::detail::TypeSeq<Patches...>;
+    using PatchSeq = ddc::TypeSeq<Patches...>;
     (initialise_cross_derivatives<Patches>(
              functions_and_derivs.template get<Patches>(),
              evaluator_g,
@@ -350,7 +350,7 @@ void check_all_x_derivatives(
         std::tuple<CoordTransformType...> coord_transforms,
         double TOL = 5e-14)
 {
-    using PatchSeq = ddc::detail::TypeSeq<Patches...>;
+    using PatchSeq = ddc::TypeSeq<Patches...>;
     (check_derivatives<typename Patches::Dim1, true, true, Patches>(
              functions_and_derivs.template get<Patches>(),
              evaluator_g,
@@ -379,7 +379,7 @@ void check_all_y_derivatives(
         std::tuple<CoordTransformType...> coord_transforms,
         double const TOL = 5e-14)
 {
-    using PatchSeq = ddc::detail::TypeSeq<Patches...>;
+    using PatchSeq = ddc::TypeSeq<Patches...>;
     (check_derivatives<
              typename Patches::Dim2,
              !ddc::in_tags_v<Patches, PatchSeqMin>,
@@ -458,7 +458,7 @@ void check_all_xy_derivatives(
         std::tuple<CoordTransformType...> coord_transforms,
         double const TOL = 5e-13)
 {
-    using PatchSeq = ddc::detail::TypeSeq<Patches...>;
+    using PatchSeq = ddc::TypeSeq<Patches...>;
     (check_xy_derivatives<Patches, PatchSeqMin, PatchSeqMax>(
              functions_and_derivs.template get<Patches>(),
              evaluator_g,
@@ -616,7 +616,7 @@ void check_all_spline_representation_agreement(
         std::tuple<CoordTransformType...> coord_transforms,
         double const TOL = 5e-14)
 {
-    using PatchSeq = ddc::detail::TypeSeq<Patches...>;
+    using PatchSeq = ddc::TypeSeq<Patches...>;
     (check_spline_representation_agreement<Patches, PatchSeqMin, PatchSeqMax>(
              functions_and_derivs.template get<Patches>(),
              evaluator_g,

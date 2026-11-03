@@ -49,7 +49,7 @@ template <class Connectivity, class Grid1D, class... Patches, class DerivCoeffCo
 class InterfacesDerivativeCalculator<
         Connectivity,
         Grid1D,
-        ddc::detail::TypeSeq<Patches...>,
+        ddc::TypeSeq<Patches...>,
         DerivCoeffCollection>
 {
     /*
@@ -92,8 +92,8 @@ class InterfacesDerivativeCalculator<
     */
     using outer_interface_collection = std::conditional_t<
             is_periodic,
-            ddc::detail::TypeSeq<>,
-            ddc::detail::TypeSeq<InterfaceBoundFirst, InterfaceBoundLast>>;
+            ddc::TypeSeq<>,
+            ddc::TypeSeq<InterfaceBoundFirst, InterfaceBoundLast>>;
 
     // All the interfaces in the Grid1D direction without the interfaces with OutsideEdge.
     using inner_interface_collection
@@ -129,8 +129,8 @@ class InterfacesDerivativeCalculator<
             ddc::type_seq_contains_v<
                     Grid1DSeq,
                     ddc::type_seq_merge_t<
-                            ddc::detail::TypeSeq<typename Patches::Grid1...>,
-                            ddc::detail::TypeSeq<typename Patches::Grid2...>>>,
+                            ddc::TypeSeq<typename Patches::Grid1...>,
+                            ddc::TypeSeq<typename Patches::Grid2...>>>,
             "A patch is missing in the given patch list. The list has to contain all the patches "
             "in the given Grid1D direction.");
 

@@ -168,7 +168,7 @@ using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
 using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
 using SouthInterface3 = Interface<OutsideEdge, SouthEdge<3>, true>;
 
-using AllGrids = ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>, GridY<1>, GridY<2>, GridY<3>>;
+using AllGrids = ddc::TypeSeq<GridX<1>, GridX<2>, GridX<3>, GridY<1>, GridY<2>, GridY<3>>;
 using AllBSpls = ddc::detail::
         TypeSeq<BSplinesX<1>, BSplinesX<2>, BSplinesX<3>, BSplinesY<1>, BSplinesY<2>, BSplinesY<3>>;
 
@@ -614,7 +614,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     InterfacesDerivativeCalculator<
             Connectivity,
             Grid1AlongXg,
-            ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
+            ddc::TypeSeq<Patch1, Patch2, Patch3>,
             InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
             matrix(idx_ranges, deriv_coeffs_collect);
 
@@ -783,7 +783,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     matrix.solve_cross_deriv(functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
-    using EmptyPatchSeq = ddc::detail::TypeSeq<>;
+    using EmptyPatchSeq = ddc::TypeSeq<>;
 
     // Check each derivatives ---
     check_all_x_derivatives(

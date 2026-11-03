@@ -471,21 +471,21 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     InterfacesDerivativeCalculator<
             Connectivity,
             GridX<1>,
-            ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
+            ddc::TypeSeq<Patch1, Patch2, Patch3>,
             InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
             matrix_123(idx_ranges_123, deriv_coeffs_collect_123);
 
     InterfacesDerivativeCalculator<
             Connectivity,
             GridX<4>,
-            ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
+            ddc::TypeSeq<Patch4, Patch5, Patch6>,
             InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
             matrix_456(idx_ranges_456, deriv_coeffs_collect_456);
 
     InterfacesDerivativeCalculator<
             Connectivity,
             GridX<7>,
-            ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
+            ddc::TypeSeq<Patch7, Patch8, Patch9>,
             InterfaceDerivCoeffsCollection<Interface_7_8, Interface_8_9, Interface_9_7>>
             matrix_789(idx_ranges_789, deriv_coeffs_collect_789);
 
@@ -493,21 +493,21 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     InterfacesDerivativeCalculator<
             Connectivity,
             GridY<1>,
-            ddc::detail::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
+            ddc::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
             InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
             matrix_147(idx_ranges_147, deriv_coeffs_collect_147);
 
     InterfacesDerivativeCalculator<
             Connectivity,
             GridY<2>,
-            ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
+            ddc::TypeSeq<Patch2, Patch5, Patch8>,
             InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
             matrix_258(idx_ranges_258, deriv_coeffs_collect_258);
 
     InterfacesDerivativeCalculator<
             Connectivity,
             GridY<3>,
-            ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
+            ddc::TypeSeq<Patch3, Patch6, Patch9>,
             InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>
             matrix_369(idx_ranges_369, deriv_coeffs_collect_369);
 
@@ -579,8 +579,8 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 
     // Check each derivatives ---
-    using PatchSeqLowerBound = ddc::detail::TypeSeq<Patch7, Patch8, Patch9>;
-    using PatchSeqUpperBound = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
+    using PatchSeqLowerBound = ddc::TypeSeq<Patch7, Patch8, Patch9>;
+    using PatchSeqUpperBound = ddc::TypeSeq<Patch1, Patch2, Patch3>;
 
     check_all_x_derivatives(
             functions_and_derivs,
