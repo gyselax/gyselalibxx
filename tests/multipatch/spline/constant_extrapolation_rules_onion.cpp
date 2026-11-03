@@ -28,10 +28,8 @@ void test_on_device(
     int constexpr outside_max = PatchLocator::outside_rmax_domain;
     int constexpr outside_min = PatchLocator::outside_rmin_domain;
 
-    ddc::ConstantExtrapolationRule<typename Patch1::Dim1, typename Patch1::Dim2>
-            local_extrapol_rule_min(r1_min);
-    ddc::ConstantExtrapolationRule<typename Patch2::Dim1, typename Patch2::Dim2>
-            local_extrapol_rule_max(r2_max);
+    ddc::ConstantExtrapolationRule<typename Patch1::Dim1> local_extrapol_rule_min(r1_min);
+    ddc::ConstantExtrapolationRule<typename Patch2::Dim1> local_extrapol_rule_max(r2_max);
 
     // Outside outer ring.
     typename Patch1::Coord12 outside_coord_max_1(2.5, 3 / 2. * M_PI);
@@ -92,10 +90,8 @@ TEST_F(MultipatchSplineOnionShapeTest, ConstantExtrapolationRuleOnionShapeHostTe
     int constexpr outside_max = PatchLocator<HostExecSpace>::outside_rmax_domain;
     int constexpr outside_min = PatchLocator<HostExecSpace>::outside_rmin_domain;
 
-    ddc::ConstantExtrapolationRule<typename Patch1::Dim1, typename Patch1::Dim2>
-            local_extrapol_rule_min(r1_min);
-    ddc::ConstantExtrapolationRule<typename Patch2::Dim1, typename Patch2::Dim2>
-            local_extrapol_rule_max(r2_max);
+    ddc::ConstantExtrapolationRule<typename Patch1::Dim1> local_extrapol_rule_min(r1_min);
+    ddc::ConstantExtrapolationRule<typename Patch2::Dim1> local_extrapol_rule_max(r2_max);
 
     double expected_value;
     double extrapol_value;

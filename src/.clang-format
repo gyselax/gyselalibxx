@@ -142,7 +142,7 @@ SpacesInCStyleCastParentheses:                  false
 SpacesInParentheses:                            false
 SpacesInSquareBrackets:                         false
 #   SpaceBeforeSquareBrackets:                      false # !!!requires clang 10
-Standard:                                       Cpp11 # c++17 !!!requires clang 10
+Standard:                                       c++20 # !!!requires clang 10
 StatementMacros:                                []
 TabWidth:                                       4
 #   UseCRLF:                                        false # !!!requires clang 10

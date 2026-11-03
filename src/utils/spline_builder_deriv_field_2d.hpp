@@ -14,7 +14,7 @@
  * 
  * DerivField stores the values and the derivatives of a function. 
  * The inputs of the SplineBuilder2D are on different layouts than the fields
- * we can get from the DerivField. SplineBuliderDerivField2D allows to 
+ * we can get from the DerivField. SplineBuilderDerivField2D allows to 
  * directly apply a stored SplineBuilder2D to a DerivField by copying 
  * data in fields with correct layout. 
  * 
@@ -26,11 +26,11 @@ template <
         class BSplines2,
         class Grid1,
         class Grid2,
-        ddc::BoundCond BoundCond1min,
-        ddc::BoundCond BoundCond1max,
-        ddc::BoundCond BoundCond2min,
-        ddc::BoundCond BoundCond2max>
-class SplineBuliderDerivField2D
+        ddc::SplineBuilderClosure SplineBuilderClosure1min,
+        ddc::SplineBuilderClosure SplineBuilderClosure1max,
+        ddc::SplineBuilderClosure SplineBuilderClosure2min,
+        ddc::SplineBuilderClosure SplineBuilderClosure2max>
+class SplineBuilderDerivField2D
 {
     using MemorySpace = typename ExecSpace::memory_space;
 
@@ -46,14 +46,15 @@ class SplineBuliderDerivField2D
             BSplines2,
             Grid1,
             Grid2,
-            BoundCond1min,
-            BoundCond1max,
-            BoundCond2min,
-            BoundCond2max,
+            SplineBuilderClosure1min,
+            SplineBuilderClosure1max,
+            SplineBuilderClosure2min,
+            SplineBuilderClosure2max,
             ddc::SplineSolver::LAPACK>;
 
     using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace>;
-    using DerivFieldType = DerivField<double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
+    using DerivConstFieldType
+            = DerivConstField<double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
 
     using FunctFieldMem = DFieldMem<IdxRange<Grid1, Grid2>, MemorySpace>;
     using FunctField = DField<IdxRange<Grid1, Grid2>, MemorySpace>;
@@ -81,7 +82,7 @@ public:
      * @param[in] builder A reference to SplineBuilder2D from DDC that we store
      * in the class. 
      */
-    explicit SplineBuliderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
+    explicit SplineBuilderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
 
     /**
      * @brief Build the spline representation of the function given in a 
@@ -90,21 +91,21 @@ public:
      * @param[out] spline Spline coefficients on a 2D grid. 
      * @param[in] function_and_derivs Data defining the function on a 2D grid. 
      */
-    void operator()(SplineType spline, DerivFieldType function_and_derivs) const
+    void operator()(SplineType spline, DerivConstFieldType function_and_derivs) const
     {
         // Check that the DerivField contains the necessary derivatives for the builder.
         IdxRange<Deriv1> idx_range_d1_min(
                 Idx<Deriv1>(1),
-                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbc_xmin));
+                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbv_xmin));
         IdxRange<Deriv1> idx_range_d1_max(
                 Idx<Deriv1>(1),
-                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbc_xmax));
+                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbv_xmax));
         IdxRange<Deriv2> idx_range_d2_min(
                 Idx<Deriv2>(1),
-                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbc_xmin));
+                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbv_xmin));
         IdxRange<Deriv2> idx_range_d2_max(
                 Idx<Deriv2>(1),
-                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbc_xmax));
+                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbv_xmax));
 
         IdxRange<Deriv1, Deriv2> idx_range_d1d2_min_min(idx_range_d1_min, idx_range_d2_min);
         IdxRange<Deriv1, Deriv2> idx_range_d1d2_max_min(idx_range_d1_max, idx_range_d2_min);
@@ -118,22 +119,38 @@ public:
         IdxRange<Grid2> idx_range_2(idx_range);
 
         // --- allocate memory for fields on the correct layout.
-        FunctFieldMem function_alloc(idx_range);
+        FunctFieldMem function_alloc("function (SplineBuilderDerivField2D::operator())", idx_range);
 
         IdxRange<Deriv1, Grid2> idx_range_d1_2_min(idx_range_d1_min, idx_range_2);
         IdxRange<Deriv1, Grid2> idx_range_d1_2_max(idx_range_d1_max, idx_range_2);
-        Deriv1FieldMem deriv1_min_alloc(idx_range_d1_2_min);
-        Deriv1FieldMem deriv1_max_alloc(idx_range_d1_2_max);
+        Deriv1FieldMem deriv1_min_alloc(
+                "deriv1_min (SplineBuilderDerivField2D::operator())",
+                idx_range_d1_2_min);
+        Deriv1FieldMem deriv1_max_alloc(
+                "deriv1_max (SplineBuilderDerivField2D::operator())",
+                idx_range_d1_2_max);
 
         IdxRange<Grid1, Deriv2> idx_range_1_d2_min(idx_range_1, idx_range_d2_min);
         IdxRange<Grid1, Deriv2> idx_range_1_d2_max(idx_range_1, idx_range_d2_max);
-        Deriv2FieldMem deriv2_min_alloc(idx_range_1_d2_min);
-        Deriv2FieldMem deriv2_max_alloc(idx_range_1_d2_max);
+        Deriv2FieldMem deriv2_min_alloc(
+                "deriv2_min (SplineBuilderDerivField2D::operator())",
+                idx_range_1_d2_min);
+        Deriv2FieldMem deriv2_max_alloc(
+                "deriv2_max (SplineBuilderDerivField2D::operator())",
+                idx_range_1_d2_max);
 
-        CrossDerivFieldMem cross_min_min_alloc(idx_range_d1d2_min_min);
-        CrossDerivFieldMem cross_max_min_alloc(idx_range_d1d2_max_min);
-        CrossDerivFieldMem cross_min_max_alloc(idx_range_d1d2_min_max);
-        CrossDerivFieldMem cross_max_max_alloc(idx_range_d1d2_max_max);
+        CrossDerivFieldMem cross_min_min_alloc(
+                "cross_min_min (SplineBuilderDerivField2D::operator())",
+                idx_range_d1d2_min_min);
+        CrossDerivFieldMem cross_max_min_alloc(
+                "cross_max_min (SplineBuilderDerivField2D::operator())",
+                idx_range_d1d2_max_min);
+        CrossDerivFieldMem cross_min_max_alloc(
+                "cross_min_max (SplineBuilderDerivField2D::operator())",
+                idx_range_d1d2_min_max);
+        CrossDerivFieldMem cross_max_max_alloc(
+                "cross_max_max (SplineBuilderDerivField2D::operator())",
+                idx_range_d1d2_max_max);
 
         // Get slice indices to select the right bound.
         Idx<Grid1> slice1_min = idx_range_1.front();
@@ -192,10 +209,12 @@ public:
      * @param[out] function Field with layout_right where we copy the function values.
      * @param[in] function_and_derivs DerivField from where the function values are copied.
      */
-    void fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
+    static void fill_in_function(FunctField function, DerivConstFieldType function_and_derivs)
     {
         // Fill the field with correct layout.
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(function_and_derivs),
                 KOKKOS_LAMBDA(Idx<Grid1, Grid2> const idx) {
@@ -210,12 +229,14 @@ public:
      * @param[in] function_and_derivs DerivField from where the derivatives are copied.
      * @param[in] idx_slice Index to determine which bound (mon/max) we select for the derivative field. 
      */
-    void fill_in_deriv1(
+    static void fill_in_deriv1(
             Deriv1Field deriv1,
-            DerivFieldType function_and_derivs,
-            Idx<Grid1> idx_slice) const
+            DerivConstFieldType function_and_derivs,
+            Idx<Grid1> idx_slice)
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(deriv1),
                 KOKKOS_LAMBDA(Idx<Deriv1, Grid2> const idx) {
@@ -230,12 +251,14 @@ public:
      * @param[in] function_and_derivs DerivField from where the derivatives are copied.
      * @param[in] idx_slice Index to determine which bound (mon/max) we select for the derivative field. 
      */
-    void fill_in_deriv2(
+    static void fill_in_deriv2(
             Deriv2Field deriv2,
-            DerivFieldType function_and_derivs,
-            Idx<Grid2> idx_slice) const
+            DerivConstFieldType function_and_derivs,
+            Idx<Grid2> idx_slice)
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(deriv2),
                 KOKKOS_LAMBDA(Idx<Grid1, Deriv2> const idx) {
@@ -253,13 +276,16 @@ public:
      * @param[in] idx_slice_2 Index to determine which bound (mon/max) we select for the derivative field
      * on the second dimension. 
      */
-    void fill_in_cross_deriv(
+    static void fill_in_cross_deriv(
             CrossDerivField cross_deriv,
-            DerivFieldType function_and_derivs,
+            DerivConstFieldType function_and_derivs,
             Idx<Grid1> idx_slice_1,
-            Idx<Grid2> idx_slice_2) const
+            Idx<Grid2> idx_slice_2)
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
+                ExecSpace(),
                 get_idx_range(cross_deriv),
                 KOKKOS_LAMBDA(Idx<Deriv1, Deriv2> idx_derivs) {
                     cross_deriv(idx_derivs)

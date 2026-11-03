@@ -18,14 +18,20 @@ on:
     types: [published]
   workflow_dispatch:
     inputs:
+      backend:
+        description: "Kokkos backend to use"
+        required: true
+        type: choice
+        options:
+          - serial
+          - openmp
       toolchain:
         description: "Tool chain to use for test"
         required: true
         type: choice
         options:
-          - serial_debug_toolchain
-          - serial_release_toolchain
-          - openmp_release_toolchain
+          - debug_toolchain
+          - release_toolchain
           - ci_coverage_toolchain
       merge_target:
         description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
@@ -49,26 +55,32 @@ jobs:
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
       toolchain_matrix: ${{ steps.set-matrix.outputs.toolchain_matrix }}
+      backend_matrix: ${{ steps.set-matrix.outputs.backend_matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: skip_check
         uses: ./.github/actions/duplicate_check
       - if: github.event_name != 'workflow_dispatch' && github.event_name != 'push'
         run: |
-          echo "matrix=['serial_debug_toolchain', 'serial_release_toolchain', 'openmp_release_toolchain', 'ci_coverage_toolchain']" >> $GITHUB_ENV
+          echo "backend_matrix=['serial', 'openmp']" >> $GITHUB_ENV
+          echo "toolchain_matrix=['debug_toolchain', 'release_toolchain', 'ci_coverage_toolchain']" >> $GITHUB_ENV
         shell: bash
       - if: github.event_name == 'push'
         run: |
-          echo "matrix=['ci_coverage_toolchain']" >> $GITHUB_ENV
+          echo "backend_matrix=['serial']" >> $GITHUB_ENV
+          echo "toolchain_matrix=['ci_coverage_toolchain']" >> $GITHUB_ENV
         shell: bash
       - if: github.event_name == 'workflow_dispatch'
         run: |
-          echo "matrix=['${{ inputs.toolchain }}']" >> $GITHUB_ENV
+          echo "backend_matrix=['${{ inputs.backend }}']" >> $GITHUB_ENV
+          echo "toolchain_matrix=['${{ inputs.toolchain }}']" >> $GITHUB_ENV
         shell: bash
       - id: set-matrix
         run: |
-          echo "${matrix}"
-          echo "toolchain_matrix=$matrix" >> $GITHUB_OUTPUT
+          echo "${backend_matrix}"
+          echo "${toolchain_matrix}"
+          echo "backend_matrix=$backend_matrix" >> $GITHUB_OUTPUT
+          echo "toolchain_matrix=$toolchain_matrix" >> $GITHUB_OUTPUT
         shell: bash
 
   docker_update:
@@ -77,11 +89,11 @@ jobs:
       image_tag: ${{ steps.docker.outputs.image_tag }}
     if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: docker
         uses: ./.github/actions/docker_update
         with:
-          always_push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
+          add_tags: ${{ github.event_name == 'push' || github.event_name == 'release' }}
           # Build the release tag with a ternary expression
           # 'latest' if push else (release.tag_name if release else '')
           release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
@@ -91,6 +103,7 @@ jobs:
     needs: [pre_job, docker_update]
     strategy:
       matrix:
+        backend: ${{fromJson(needs.pre_job.outputs.backend_matrix)}}
         toolchain: ${{fromJson(needs.pre_job.outputs.toolchain_matrix)}}
         compiler:
           - name: 'gnu'
@@ -99,48 +112,61 @@ jobs:
           - name: 'clang'
             c_compiler: 'clang'
             cxx_compiler: 'clang++'
+            glibc_tunables: 'glibc.malloc.tcache_count=64'
         exclude:
           - toolchain: 'ci_coverage_toolchain'
             compiler:
               name: 'clang'
-          - toolchain: 'openmp_release_toolchain' # Clang + OpenMP leads to compiler failure with Clang 14.0.0
-            compiler:
-              name: 'clang'
+          - backend: 'openmp'
+            toolchain: 'ci_coverage_toolchain'
+          - backend: 'openmp'
+            toolchain: 'debug_toolchain'
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
-    name: CPU Test (${{ matrix.toolchain }}, ${{ matrix.compiler.name }})
+    name: CPU Test (${{ matrix.backend }}, ${{ matrix.toolchain }}, ${{ matrix.compiler.name }})
     env:
       CC: ${{ matrix.compiler.c_compiler }}
       CXX: ${{ matrix.compiler.cxx_compiler }}
+      GLIBC_TUNABLES: ${{ matrix.compiler.glibc_tunables }}
     steps:
       - name: Checkout gyselalibxx
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: "Filter tests"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/test_filter
-      - name: "Set CMAKE_PREFIX_PATH"
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-        run: |
-          if [[ "${{ matrix.toolchain}}" == *"openmp"* ]]; then
-            echo "Using OpenMP Kokkos"
-            echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/openmp" >> $GITHUB_ENV
-          else
-            echo "Using serial Kokkos"
-            echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/serial" >> $GITHUB_ENV
-          fi
-        shell: bash
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
+          environment_command: '. /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}'
           toolchain: toolchains/common_toolchains/${{ matrix.toolchain }}.cmake
+      - name: Check header file counts
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        run: |
+          . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}
+          cmake --install build --prefix opt
+          install_tree_count=$(find opt -name "*.hpp" | wc -l)
+          src_tree_count=$(find src -name "*.hpp" | wc -l)
+
+          echo "opt: $install_tree_count"
+          echo "src: $src_tree_count"
+
+          if [ "$install_tree_count" -ne "$src_tree_count" ]; then
+            echo "::error::Header file counts differ between src folder and installed files: installed=$install_tree_count, src=$src_tree_count"
+            echo "::error::Please update the CMakeLists.txt to reflect any added/removed header files."
+            exit 1
+          fi
+
+          echo "Header file counts match."
       - name: Run tests
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
+        with:
+          environment_command: '. /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}'
       - name: Check Test Coverage
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'ci_coverage_toolchain'
         run: |
@@ -152,7 +178,7 @@ jobs:
           sed '/^BRF:/d' -i coverage.lcov
       - name: Archive code coverage results
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'ci_coverage_toolchain'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: code-coverage-report
           path: coverage.lcov
@@ -164,13 +190,13 @@ jobs:
     if: (github.event_name != 'workflow_dispatch' || inputs.toolchain == 'ci_coverage_toolchain') && needs.pre_job.outputs.should_skip == 'false'
     steps:
       - name: Checkout gyselalibxx
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Download a single artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: code-coverage-report
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           files: coverage.lcov
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -182,7 +208,7 @@ jobs:
     needs: [cpu_tests]
     if: always() && (github.event_name == 'pull_request' && github.event.pull_request.draft == false)
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/set_pr_status
         with:
           status: ${{ needs.cpu_tests.result }}

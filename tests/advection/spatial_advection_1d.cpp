@@ -9,8 +9,9 @@
 
 #include "bsl_advection_1d.hpp"
 #include "euler.hpp"
+#include "i_interpolation.hpp"
 #include "species_info.hpp"
-#include "spline_interpolator.hpp"
+#include "spline_interpolation.hpp"
 
 
 namespace {
@@ -34,15 +35,15 @@ using CoordX = Coord<X>;
 using CoordVx = Coord<Vx>;
 
 // Splines
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
+struct BSplinesVx : ddc::UniformBSplines<Vx, 3, Vx::PERIODIC>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineVxClosure = ddc::SplineBuilderClosure::HERMITE;
 
 
 // Discrete dimensions
@@ -55,9 +56,9 @@ struct GridVx : UniformGridBase<Vx>
 
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
 
 using IdxRangeX = IdxRange<GridX>;
@@ -100,21 +101,12 @@ using FieldXVx = Field<ElementType, IdxRangeXVx>;
 
 
 // Operators
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 
 class Spatial1DAdvectionTest : public ::testing::Test
@@ -222,24 +214,16 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
 {
     IdxRangeSpXVx meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
 
-    SplineXBuilder const builder_x(idx_range_x);
-
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, meshSpXVx);
+    SplineInterpolatorX spline_interpolation(idx_range_x);
 
     EulerBuilder euler;
     BslAdvection1D<
             GridX,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
-            SplineXBuilder,
-            SplineXEvaluator,
-            EulerBuilder> const
-            spline_advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler);
+            SplineInterpolatorX,
+            SplineInterpolatorX,
+            EulerBuilder> const spline_advection_x(spline_interpolation, euler);
 
     double const err = SpatialAdvection(spline_advection_x);
     EXPECT_LE(err, 1.e-6);

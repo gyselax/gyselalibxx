@@ -18,17 +18,16 @@ class PoissonLikeRHSFunction
 {
 public:
     /// The type of the 2D Spline Evaluator used by this class
-    using evaluator_type = ddc::SplineEvaluator2D<
+    using evaluator_type = ddc::SplineEvaluatorND<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            RadialExtrapolationRule,
-            RadialExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+            ddc::detail::TypeSeq<GridR, GridTheta>,
+            ddc::detail::TypeSeq<
+                    RadialExtrapolationRule,
+                    RadialExtrapolationRule,
+                    ddc::PeriodicExtrapolationRule<Theta>,
+                    ddc::PeriodicExtrapolationRule<Theta>>>;
 
 private:
     ConstSpline2D const m_coefs;

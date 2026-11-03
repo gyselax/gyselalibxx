@@ -39,7 +39,9 @@ void compute_nustar_profile(DFieldSpX nustar_profile, double nustar0)
 {
     double const Lx = ddcHelper::total_interval_length(get_idx_range<GridX>(nustar_profile));
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(nustar_profile),
             KOKKOS_LAMBDA(IdxSpX const ispx) {
@@ -58,7 +60,9 @@ void compute_collfreq(
         DConstFieldSpX density,
         DConstFieldSpX temperature)
 {
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(collfreq),
             KOKKOS_LAMBDA(IdxSpX const ispx) {
@@ -80,7 +84,9 @@ void compute_collfreq_ab(
     double const charge_ratio(charge(iion) / charge(ielec()));
     double const me_on_mi(mass(ielec()) / mass(iion));
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range<GridX>(collfreq_ab),
             KOKKOS_LAMBDA(IdxX const ix) {
@@ -125,7 +131,9 @@ void compute_momentum_energy_exchange(
     IdxSp const iion = find_ion(get_idx_range<Species>(density));
     double const mass_ratio(mass(ielec()) / mass(iion));
     double const me_on_memi(mass(ielec()) / (mass(ielec()) + mass(iion)));
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range<GridX>(collfreq_ab),
             KOKKOS_LAMBDA(IdxX const ix) {

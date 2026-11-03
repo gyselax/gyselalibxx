@@ -3,6 +3,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/fft.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
@@ -210,7 +212,9 @@ public:
 
         // Solve Poisson's equation -\Delta phi = -(\sum_j \partial_j^2) \phi = rho
         //   in Fourier space as -(\sum_j i*k_i * i*k_i) FFT(Phi) = FFT(rho))
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 k_mesh,
                 KOKKOS_LAMBDA(fourier_index_type const ik) {
@@ -236,7 +240,9 @@ public:
             const
     {
         Kokkos::complex<DataType> imaginary_unit(0.0, 1.0);
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(values),
                 KOKKOS_LAMBDA(fourier_index_type const ik) {
@@ -269,7 +275,7 @@ public:
      */
     virtual field_type operator()(field_type phi, field_type rho) const final
     {
-        Kokkos::Profiling::pushRegion("FFTPoissonSolver");
+        Kokkos::Profiling::ScopedRegion region("(GSLX) FFTPoissonSolver");
 
         laplacian_idx_range_type idx_range(get_idx_range(phi));
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
@@ -278,7 +284,9 @@ public:
         fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
                 GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
 
-        fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
+        fourier_field_mem_type intermediate_chunk_alloc(
+                "intermediate_chunk (FFTPoisonSolver::operator())",
+                k_mesh);
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
 
         ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
@@ -292,7 +300,6 @@ public:
                          ddc::kwArgs_fft {m_norm});
         });
 
-        Kokkos::Profiling::popRegion();
         return phi;
     }
 
@@ -310,7 +317,7 @@ public:
      */
     virtual field_type operator()(field_type phi, vector_field_type E, field_type rho) const final
     {
-        Kokkos::Profiling::pushRegion("FFTPoissonSolver");
+        Kokkos::Profiling::ScopedRegion region("(GSLX) FFTPoissonSolver");
 
         laplacian_idx_range_type idx_range(get_idx_range(phi));
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
@@ -319,8 +326,11 @@ public:
         fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
                 GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
 
-        fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
-        fourier_field_mem_type fourier_efield_alloc(k_mesh);
+        fourier_field_mem_type intermediate_chunk_alloc(
+                "intermediate_chunk (FFTPoisonSolver::operator())",
+                k_mesh);
+        fourier_field_mem_type
+                fourier_efield_alloc("fourier_efield (FFTPoisonSolver::operator())", k_mesh);
 
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
         fourier_field_type fourier_efield = get_field(fourier_efield_alloc);
@@ -336,7 +346,7 @@ public:
                          get_field(intermediate_chunk),
                          ddc::kwArgs_fft {m_norm});
         });
-        Kokkos::Profiling::popRegion();
+
         return phi;
     }
 };

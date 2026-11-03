@@ -40,10 +40,6 @@ template <class X, class Y, class R, class Theta>
 class CartesianToCircular
 {
 public:
-    /// @brief Indicate the first physical coordinate.
-    using cartesian_tag_x = X;
-    /// @brief Indicate the second physical coordinate.
-    using cartesian_tag_y = Y;
     /// @brief Indicate the first logical coordinate.
     using curvilinear_tag_r = R;
     /// @brief Indicate the second logical coordinate.
@@ -143,7 +139,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian(Coord<X, Y> const& coord)
+    KOKKOS_FUNCTION double jacobian(Coord<X, Y> const& coord) const
     {
         const double x = ddc::get<X>(coord) - ddc::get<X>(m_o_point);
         const double y = ddc::get<Y>(coord) - ddc::get<Y>(m_o_point);

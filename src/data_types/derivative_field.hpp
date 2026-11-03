@@ -116,7 +116,7 @@ public:
     using element_type = typename base_type::element_type;
 
     /// @brief The type of the memory space where the field is saved (CPU vs GPU).
-    using memory_space = typename base_type::element_type;
+    using memory_space = MemorySpace;
 
     /**
      * @brief The IdxRange on which the chunks in this object are defined.
@@ -370,7 +370,7 @@ public:
     KOKKOS_FUNCTION constexpr reference operator()(DElem... elems) const noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_index_type = detail::combine_t<DElem...>;
+        using full_index_type = ddc::combine_t<DElem...>;
         full_index_type elem(elems...);
         return base_type::get_internal_field(elem)();
     }
@@ -415,7 +415,7 @@ public:
      *
      * @returns A constant span of this field.
      */
-    KOKKOS_FUNCTION constexpr view_type span_cview() const
+    KOKKOS_FUNCTION constexpr view_type get_const_field() const
     {
         return view_type(*this);
     }
@@ -428,7 +428,7 @@ public:
      *
      * @returns A span of this field.
      */
-    KOKKOS_FUNCTION constexpr span_type span_view() const
+    KOKKOS_FUNCTION constexpr span_type get_field() const
     {
         return *this;
     }

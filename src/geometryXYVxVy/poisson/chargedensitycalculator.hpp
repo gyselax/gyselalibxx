@@ -20,7 +20,7 @@
 class ChargeDensityCalculator : public IChargeDensityCalculator
 {
 private:
-    Quadrature<IdxRangeVxVy, IdxRangeXYVxVy> m_quadrature;
+    Quadrature<IdxRangeVxVy, IdxRangeXYVxVy, Real> m_quadrature;
 
 public:
     /**

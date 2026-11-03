@@ -12,13 +12,12 @@ add_executable(unit_tests_coord_transformations
     refined_discrete_mapping.cpp
     vector_basis_change.cpp
 )
-target_compile_features(unit_tests_coord_transformations PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_coord_transformations
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::coord_transformations
-        gslx::speciesinfo
-        gslx::utils
+        gyselalibxx::coord_transformations
+        gyselalibxx::speciesinfo
+        gyselalibxx::utils
 )
-gtest_discover_tests(unit_tests_coord_transformations DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_coord_transformations DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

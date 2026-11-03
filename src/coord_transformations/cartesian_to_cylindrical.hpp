@@ -55,12 +55,6 @@ template <class X, class Y, class Z, class R, class Zeta>
 class CartesianToCylindrical
 {
 public:
-    /// @brief Indicate the first Cartesian coordinate.
-    using cartesian_tag_x = X;
-    /// @brief Indicate the second Cartesian coordinate.
-    using cartesian_tag_y = Y;
-    /// @brief Indicate the second Cartesian coordinate.
-    using cartesian_tag_z = Z;
     /// @brief Indicate the radial cylindrical coordinate.
     using cylindrical_tag_R = R;
     /// @brief Indicate the longitudinal cylindrical coordinate.
@@ -153,7 +147,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian(CoordArg const& coord)
+    KOKKOS_FUNCTION double jacobian(CoordArg const& coord) const
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);

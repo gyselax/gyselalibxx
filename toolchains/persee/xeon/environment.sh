@@ -7,14 +7,26 @@ then
     exit 1
 fi
 
+module purge
+
 if command -v spack >/dev/null 2>&1
 then
     spack env deactivate
 else
-    . /data/gyselarunner/spack-1.1.0/share/spack/setup-env.sh
+    . /data/gyselarunner/spack-1.2.2/share/spack/setup-env.sh
 fi
 
+spack --env gyselalibxx-env-omp repo update
+
 spack env activate gyselalibxx-env-omp
+
+module load gcc/13
+# Looks suspicious to set LD_PRELOAD, so we unset it
+unset LD_PRELOAD
+
 export OMP_PROC_BIND=spread
 export OMP_PLACES=threads
 export OMP_NUM_THREADS=16
+
+# Add Kokkos Tools to the `LD_LIBRARY_PATH`
+export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"

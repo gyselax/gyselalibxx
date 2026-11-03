@@ -34,10 +34,10 @@ struct GridY : NonUniformGridBase<Y>
 {
 };
 
-struct BSplinesX : ddc::NonUniformBSplines<X, 3>
+struct BSplinesX : ddc::NonUniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesY : ddc::NonUniformBSplines<Y, 3>
+struct BSplinesY : ddc::NonUniformBSplines<Y, 3, Y::PERIODIC>
 {
 };
 
@@ -210,16 +210,16 @@ void initialise_derivatives_hybrid_case(
 
 
 
-TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
+TEST(SplineBuilderDerivField2DTest, DDCSplineBuilderClosureHermiteTest)
 {
     using SplineInterpPointsX = ddcHelper::NonUniformInterpolationPoints<
             BSplinesX,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE>;
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE>;
     using SplineInterpPointsY = ddcHelper::NonUniformInterpolationPoints<
             BSplinesY,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE>;
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE>;
 
     // Initialise the mesh -----------------------------------------------------------------------
     const Coord<X> x_min(0.0);
@@ -312,23 +312,23 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
             BSplinesY,
             GridX,
             GridY,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    SplineBuliderDerivField2D<
+    SplineBuilderDerivField2D<
             ExecSpace,
             BSplinesX,
             BSplinesY,
             GridX,
             GridY,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE>
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE>
             apply_builder(builder);
 
     // Instantiate splines -----------------------------------------------------------------------
@@ -340,7 +340,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
     DField<IdxRange<BSplinesX, BSplinesY>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
-    apply_builder(spline_deriv_field, function_and_derivs);
+    apply_builder(spline_deriv_field, get_const_field(function_and_derivs));
     builder(spline_fields,
             get_const_field(function),
             std::optional(get_const_field(derivs_xmin)),
@@ -361,16 +361,16 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
 }
 
 
-TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
+TEST(SplineBuilderDerivField2DTest, DDCSplineBuilderClosureGrevilleTest)
 {
     using SplineInterpPointsX = ddc::GrevilleInterpolationPoints<
             BSplinesX,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE>;
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE>;
     using SplineInterpPointsY = ddc::GrevilleInterpolationPoints<
             BSplinesY,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE>;
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE>;
 
     // Initialise the mesh -----------------------------------------------------------------------
     const Coord<X> x_min(0.0);
@@ -423,23 +423,23 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
             BSplinesY,
             GridX,
             GridY,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    SplineBuliderDerivField2D<
+    SplineBuilderDerivField2D<
             ExecSpace,
             BSplinesX,
             BSplinesY,
             GridX,
             GridY,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE>
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE>
             apply_builder(builder);
 
     // Instantiate splines -----------------------------------------------------------------------
@@ -451,7 +451,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
     DField<IdxRange<BSplinesX, BSplinesY>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
-    apply_builder(spline_deriv_field, function_and_derivs);
+    apply_builder(spline_deriv_field, get_const_field(function_and_derivs));
     builder(spline_fields, get_const_field(function));
 
     auto spline_deriv_field_host = ddc::create_mirror_view_and_copy(spline_deriv_field);
@@ -464,16 +464,16 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
 
 
 
-TEST(SplineBuilderDerivField2DTest, HybridDDCBoundCondTest)
+TEST(SplineBuilderDerivField2DTest, HybridDDCSplineBuilderClosureTest)
 {
     using SplineInterpPointsX = ddcHelper::NonUniformInterpolationPoints<
             BSplinesX,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::GREVILLE>;
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::GREVILLE>;
     using SplineInterpPointsY = ddcHelper::NonUniformInterpolationPoints<
             BSplinesY,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::HERMITE>;
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::HERMITE>;
 
     // Initialise the mesh -----------------------------------------------------------------------
     const Coord<X> x_min(0.0);
@@ -564,23 +564,23 @@ TEST(SplineBuilderDerivField2DTest, HybridDDCBoundCondTest)
             BSplinesY,
             GridX,
             GridY,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    SplineBuliderDerivField2D<
+    SplineBuilderDerivField2D<
             ExecSpace,
             BSplinesX,
             BSplinesY,
             GridX,
             GridY,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::HERMITE>
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::HERMITE>
             apply_builder(builder);
 
     // Instantiate splines -----------------------------------------------------------------------
@@ -592,7 +592,7 @@ TEST(SplineBuilderDerivField2DTest, HybridDDCBoundCondTest)
     DField<IdxRange<BSplinesX, BSplinesY>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
-    apply_builder(spline_deriv_field, function_and_derivs);
+    apply_builder(spline_deriv_field, get_const_field(function_and_derivs));
 
     builder(spline_fields,
             get_const_field(function),

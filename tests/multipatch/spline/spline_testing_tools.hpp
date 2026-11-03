@@ -28,13 +28,13 @@ using DeviceExecSpace = Kokkos::DefaultExecutionSpace;
 template <int PatchIdx>
 using SplineInterpPointsR = ddc::GrevilleInterpolationPoints<
         BSplinesR<PatchIdx>,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE>;
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 template <int PatchIdx>
 using SplineInterpPointsTheta = ddc::GrevilleInterpolationPoints<
         BSplinesTheta<PatchIdx>,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 
 template <int PatchIdx, class ExecSpace>
@@ -45,25 +45,24 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         BSplinesTheta<PatchIdx>,
         GridR<PatchIdx>,
         GridTheta<PatchIdx>,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineSolver::LAPACK>;
 
 
 template <int PatchIdx, class ExecSpace>
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluator = ddc::SplineEvaluatorND<
         ExecSpace,
         typename ExecSpace::memory_space,
-        BSplinesR<PatchIdx>,
-        BSplinesTheta<PatchIdx>,
-        GridR<PatchIdx>,
-        GridTheta<PatchIdx>,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR<PatchIdx>, BSplinesTheta<PatchIdx>>,
+        ddc::detail::TypeSeq<GridR<PatchIdx>, GridTheta<PatchIdx>>,
+        ddc::detail::TypeSeq<
+                ddc::ConstantExtrapolationRule<R>,
+                ddc::ConstantExtrapolationRule<R>,
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
 
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;

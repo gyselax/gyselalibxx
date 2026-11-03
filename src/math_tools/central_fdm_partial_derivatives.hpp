@@ -5,6 +5,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "ipartial_derivative.hpp"
 
 
@@ -39,6 +40,23 @@ private:
     /// The index range of all dimensions except DerivativeDimension.
     using typename base_type::IdxRangeBatch;
 
+    using IdxFull = typename IdxRangeFull::discrete_element_type;
+    using IdxDeriv = typename IdxRangeDeriv::discrete_element_type;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+    using IdxStepDeriv = typename IdxRangeDeriv::discrete_vector_type;
+
+public:
+    /**
+     * @brief The number of points required to calculate the derivative locally.
+     *
+     * @return The number of points.
+     */
+    static constexpr int n_local_points()
+    {
+        return 3;
+    }
+
+private:
     /// The field to be differentiated
     DFieldMemType m_field;
 
@@ -63,11 +81,6 @@ public:
      */
     void operator()(DFieldType differentiated_field) const final
     {
-        using IdxFull = typename IdxRangeFull::discrete_element_type;
-        using IdxDeriv = typename IdxRangeDeriv::discrete_element_type;
-        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
-        using IdxStepDeriv = typename IdxRangeDeriv::discrete_vector_type;
-
         IdxRangeFull idxrange_full = get_idx_range(m_field);
         IdxRangeDeriv idxrange_deriv(idxrange_full);
         IdxRangeBatch idxrange_batch(idxrange_full);
@@ -76,41 +89,72 @@ public:
 
         IdxStepDeriv const step(1);
 
-        // front batched derivative
-        {
-            IdxDeriv const ix(idxrange_deriv.front());
-            double const h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-            double const h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
-            double const c3 = -h1 / (h2 * (h1 + h2));
-            double const c2 = 1. / h1 + 1. / h2;
-            double const c1 = -c3 - c2;
-            ddc::parallel_for_each(
-                    Kokkos::DefaultExecutionSpace(),
-                    idxrange_batch,
-                    KOKKOS_LAMBDA(IdxBatch ib) {
-                        IdxFull ibx(ib, ix);
-                        differentiated_field(ibx) = c1 * field_proxy(ibx)
-                                                    + c2 * field_proxy(ib, ix + step)
-                                                    + c3 * field_proxy(ib, ix + 2 * step);
-                    });
-        }
+        if constexpr (!DerivativeDimension::PERIODIC) {
+            // front batched derivative
+            {
+                IdxDeriv const ix(idxrange_deriv.front());
+                double const h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+                double const h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
+                double const c3 = -h1 / (h2 * (h1 + h2));
+                double const c2 = 1. / h1 + 1. / h2;
+                double const c1 = -c3 - c2;
+                const std::source_location location = std::source_location::current();
+                ddc::parallel_for_each(
+                        location.function_name(),
+                        Kokkos::DefaultExecutionSpace(),
+                        idxrange_batch,
+                        KOKKOS_LAMBDA(IdxBatch ib) {
+                            IdxFull ibx(ib, ix);
+                            differentiated_field(ibx) = c1 * field_proxy(ibx)
+                                                        + c2 * field_proxy(ib, ix + step)
+                                                        + c3 * field_proxy(ib, ix + 2 * step);
+                        });
+            }
 
-        // back batched derivative
-        {
-            IdxDeriv const ix = idxrange_deriv.back();
-            double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
-            double const h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
-            double const c3 = h1 / (h2 * (h1 + h2));
-            double const c2 = -(h1 + h2) / (h1 * h2);
-            double const c1 = -c3 - c2;
+            // back batched derivative
+            {
+                IdxDeriv const ix = idxrange_deriv.back();
+                double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+                double const h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
+                double const c3 = h1 / (h2 * (h1 + h2));
+                double const c2 = -(h1 + h2) / (h1 * h2);
+                double const c1 = -c3 - c2;
+                const std::source_location location = std::source_location::current();
+                ddc::parallel_for_each(
+                        location.function_name(),
+                        Kokkos::DefaultExecutionSpace(),
+                        idxrange_batch,
+                        KOKKOS_LAMBDA(IdxBatch ib) {
+                            IdxFull ibx(ib, ix);
+                            differentiated_field(ibx) = c1 * field_proxy(ibx)
+                                                        + c2 * field_proxy(ib, ix - step)
+                                                        + c3 * field_proxy(ib, ix - 2 * step);
+                        });
+            }
+        } else {
+            IdxDeriv const ix_front(idxrange_deriv.front());
+            IdxDeriv const ix_back(idxrange_deriv.back());
+            double domain_length = ddcHelper::total_interval_length(idxrange_deriv);
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
                     KOKKOS_LAMBDA(IdxBatch ib) {
-                        IdxFull ibx(ib, ix);
-                        differentiated_field(ibx) = c1 * field_proxy(ibx)
-                                                    + c2 * field_proxy(ib, ix - step)
-                                                    + c3 * field_proxy(ib, ix - 2 * step);
+                        differentiated_field(ib, ix_back) = fdm_centred(
+                                field_proxy(ib, ix_back - step),
+                                field_proxy(ib, ix_back),
+                                field_proxy(ib, ix_front),
+                                ddc::coordinate(ix_back - step),
+                                ddc::coordinate(ix_back),
+                                ddc::coordinate(ix_front) + domain_length);
+                        differentiated_field(ib, ix_front) = fdm_centred(
+                                field_proxy(ib, ix_back),
+                                field_proxy(ib, ix_front),
+                                field_proxy(ib, ix_front + step),
+                                ddc::coordinate(ix_back) - domain_length,
+                                ddc::coordinate(ix_front),
+                                ddc::coordinate(ix_front + step));
                     });
         }
 
@@ -118,22 +162,60 @@ public:
         {
             IdxRangeDeriv idxrange_deriv_central = idxrange_deriv.remove(step, step);
             IdxRangeFull idxrange_central(idxrange_deriv_central, idxrange_batch);
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_central,
                     KOKKOS_LAMBDA(IdxFull ibx) {
                         IdxBatch ib(ibx);
                         IdxDeriv ix(ibx);
-                        double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
-                        double const h2 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-                        double const c3 = h1 / (h2 * (h1 + h2));
-                        double const c2 = 1. / h1 - 1. / h2;
-                        double const c1 = -c3 - c2;
-                        differentiated_field(ibx) = c1 * field_proxy(ib, ix - step)
-                                                    + c2 * field_proxy(ibx)
-                                                    + c3 * field_proxy(ib, ix + step);
+                        differentiated_field(ibx) = fdm_centred(
+                                field_proxy(ib, ix - step),
+                                field_proxy(ib, ix),
+                                field_proxy(ib, ix + step),
+                                ddc::coordinate(ix - step),
+                                ddc::coordinate(ix),
+                                ddc::coordinate(ix + step));
                     });
         }
+    }
+
+    /**
+     * @brief Compute the partial derivative locally from the values at 3 known positions.
+     *
+     * @param[in] field_positions The positions where the field is provided, in ascending order.
+     * @param[in] field_values The values of the field at the provided positions.
+     * @return The derivative at the central point.
+     */
+    static KOKKOS_INLINE_FUNCTION double get_derivative(
+            std::array<Coord<DerivativeDimension>, 3> const& field_positions,
+            std::array<double, 3> const& field_values)
+    {
+        return fdm_centred(
+                field_values[0],
+                field_values[1],
+                field_values[2],
+                field_positions[0],
+                field_positions[1],
+                field_positions[2]);
+    }
+
+private:
+    static KOKKOS_INLINE_FUNCTION double fdm_centred(
+            double const field1,
+            double const field2,
+            double const field3,
+            double const x1,
+            double const x2,
+            double const x3)
+    {
+        double const h1 = x2 - x1;
+        double const h2 = x3 - x2;
+        double const c3 = h1 / (h2 * (h1 + h2));
+        double const c2 = 1. / h1 - 1. / h2;
+        double const c1 = -c3 - c2;
+        return c1 * field1 + c2 * field2 + c3 * field3;
     }
 };
 
@@ -156,6 +238,10 @@ class CentralFDMPartialDerivativeCreator
 private:
     /// The type of a constant reference to the field to be differentiated.
     using DConstFieldType = DConstField<IdxRangeFull>;
+
+public:
+    /// The type of the partial derivative calculator that will be produced.
+    using partial_derivative_type = CentralFDMPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
 public:
     /**

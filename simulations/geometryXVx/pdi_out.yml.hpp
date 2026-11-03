@@ -31,13 +31,13 @@ metadata:
     type: array
     subtype: double
     size: [ '$fdistribu_masses_extents[0]' ]
+
+data:
   fdistribu_eq_extents : { type: array, subtype: int64, size: 2 }
   fdistribu_eq:
     type: array
     subtype: double
     size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]' ]
-
-data:
   fdistribu_extents: { type: array, subtype: int64, size: 3 }
   fdistribu:
     type: array

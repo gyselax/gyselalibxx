@@ -43,7 +43,9 @@ void compute_Dcoll(
         DConstFieldSpX density,
         DConstFieldSpX temperature)
 {
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(Dcoll),
             KOKKOS_LAMBDA(Idx<Species, GridX, LocalGridVx> const ispxdimvx) {
@@ -87,7 +89,9 @@ void compute_dvDcoll(
         DConstFieldSpX density,
         DConstFieldSpX temperature)
 {
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(dvDcoll),
             KOKKOS_LAMBDA(Idx<Species, GridX, LocalGridVx> const ispxdimvx) {
@@ -162,18 +166,30 @@ void compute_Vcoll_Tcoll(
     DConstFieldVx const quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
 
     // computation of the integrands
-    DFieldMemSpXVx I0mean_integrand_alloc(get_idx_range(allfdistribu));
-    DFieldMemSpXVx I1mean_integrand_alloc(get_idx_range(allfdistribu));
-    DFieldMemSpXVx I2mean_integrand_alloc(get_idx_range(allfdistribu));
-    DFieldMemSpXVx I3mean_integrand_alloc(get_idx_range(allfdistribu));
-    DFieldMemSpXVx I4mean_integrand_alloc(get_idx_range(allfdistribu));
+    DFieldMemSpXVx I0mean_integrand_alloc(
+            "I0mean_integrand (compute_Vcol_Tcoll)",
+            get_idx_range(allfdistribu));
+    DFieldMemSpXVx I1mean_integrand_alloc(
+            "I1mean_integrand (compute_Vcol_Tcoll)",
+            get_idx_range(allfdistribu));
+    DFieldMemSpXVx I2mean_integrand_alloc(
+            "I2mean_integrand (compute_Vcol_Tcoll)",
+            get_idx_range(allfdistribu));
+    DFieldMemSpXVx I3mean_integrand_alloc(
+            "I3mean_integrand (compute_Vcol_Tcoll)",
+            get_idx_range(allfdistribu));
+    DFieldMemSpXVx I4mean_integrand_alloc(
+            "I4mean_integrand (compute_Vcol_Tcoll)",
+            get_idx_range(allfdistribu));
     DFieldSpXVx I0mean_integrand = get_field(I0mean_integrand_alloc);
     DFieldSpXVx I1mean_integrand = get_field(I1mean_integrand_alloc);
     DFieldSpXVx I2mean_integrand = get_field(I2mean_integrand_alloc);
     DFieldSpXVx I3mean_integrand = get_field(I3mean_integrand_alloc);
     DFieldSpXVx I4mean_integrand = get_field(I4mean_integrand_alloc);
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
@@ -192,11 +208,11 @@ void compute_Vcoll_Tcoll(
 
     // computation of the integrals over the Vx direction
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
-    DFieldMemSpX I0mean_alloc(grid_sp_x);
-    DFieldMemSpX I1mean_alloc(grid_sp_x);
-    DFieldMemSpX I2mean_alloc(grid_sp_x);
-    DFieldMemSpX I3mean_alloc(grid_sp_x);
-    DFieldMemSpX I4mean_alloc(grid_sp_x);
+    DFieldMemSpX I0mean_alloc("I0mean (compute_Vcoll_Tcoll)", grid_sp_x);
+    DFieldMemSpX I1mean_alloc("I1mean (compute_Vcoll_Tcoll)", grid_sp_x);
+    DFieldMemSpX I2mean_alloc("I2mean (compute_Vcoll_Tcoll)", grid_sp_x);
+    DFieldMemSpX I3mean_alloc("I3mean (compute_Vcoll_Tcoll)", grid_sp_x);
+    DFieldMemSpX I4mean_alloc("I4mean (compute_Vcoll_Tcoll)", grid_sp_x);
     DFieldSpX I0mean = get_field(I0mean_alloc);
     DFieldSpX I1mean = get_field(I1mean_alloc);
     DFieldSpX I2mean = get_field(I2mean_alloc);
@@ -211,6 +227,7 @@ void compute_Vcoll_Tcoll(
     IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(allfdistribu));
 
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IdxSpX const ispx) {
@@ -245,7 +262,9 @@ void compute_Nucoll(
         DConstFieldSpX Vcoll,
         DConstFieldSpX Tcoll)
 {
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(Dcoll),
             KOKKOS_LAMBDA(Idx<Species, GridX, LocalGridVx> const ispxdimvx) {

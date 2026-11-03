@@ -10,18 +10,18 @@ target_link_libraries(vlasovpoisson_xvx_fem_uniform_${GEOMETRY_VARIANT}
         DDC::core
         DDC::pdi
         paraconf::paraconf
-        PDI::pdi
-        gslx::initialisation_${GEOMETRY_VARIANT}
-        gslx::interpolation
-        gslx::paraconfpp
-        gslx::poisson_${GEOMETRY_VARIANT}
-        gslx::speciesinfo
-        gslx::time_integration_${GEOMETRY_VARIANT}
-        gslx::boltzmann_${GEOMETRY_VARIANT}
-        gslx::advection
-        gslx::io
-        gslx::pde_solvers
-        gslx::utils
+        PDI::PDI_C
+        gyselalibxx::initialisation_${GEOMETRY_VARIANT}
+        gyselalibxx::interpolation
+        gyselalibxx::paraconfpp
+        gyselalibxx::poisson_${GEOMETRY_VARIANT}
+        gyselalibxx::speciesinfo
+        gyselalibxx::time_integration_${GEOMETRY_VARIANT}
+        gyselalibxx::boltzmann_${GEOMETRY_VARIANT}
+        gyselalibxx::advection
+        gyselalibxx::io
+        gyselalibxx::pde_solvers
+        gyselalibxx::utils
 
 )
 
@@ -35,18 +35,18 @@ target_link_libraries(vlasovpoisson_xvx_fft
         DDC::core
         DDC::pdi
         paraconf::paraconf
-        PDI::pdi
-        gslx::initialisation_xperiod_vx
-        gslx::interpolation
-        gslx::paraconfpp
-        gslx::poisson_xperiod_vx
-        gslx::speciesinfo
-        gslx::time_integration_xperiod_vx
-        gslx::boltzmann_xperiod_vx
-        gslx::advection
-        gslx::io
-        gslx::pde_solvers
-        gslx::utils
+        PDI::PDI_C
+        gyselalibxx::initialisation_xperiod_vx
+        gyselalibxx::interpolation
+        gyselalibxx::paraconfpp
+        gyselalibxx::poisson_xperiod_vx
+        gyselalibxx::speciesinfo
+        gyselalibxx::time_integration_xperiod_vx
+        gyselalibxx::boltzmann_xperiod_vx
+        gyselalibxx::advection
+        gyselalibxx::io
+        gyselalibxx::pde_solvers
+        gyselalibxx::utils
 
 )
 

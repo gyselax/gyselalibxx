@@ -2,8 +2,10 @@
 
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <cmath>
+#include <utility>
 
 #include <ddc/ddc.hpp>
 
@@ -82,7 +84,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
  * @return The equivalent coordinate inside the domain.
  */
 template <class IDim>
-constexpr std::enable_if_t<
+KOKKOS_INLINE_FUNCTION std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC,
         Coord<typename IDim::continuous_dimension_type>>
 restrict_to_idx_range(
@@ -92,22 +94,13 @@ restrict_to_idx_range(
     using Coord1D = Coord<typename IDim::continuous_dimension_type>;
     double const x_min = ddc::rmin(idx_range);
     double const length = total_interval_length(idx_range);
-    double const x_max = x_min + length;
 
-    assert(length > 0);
+    KOKKOS_ASSERT(length > 0);
     coord -= x_min;
-    if (fabs(coord) > 10 * length) {
-        double periodic_factor = 2 * M_PI / length;
-        double coord_2pi = double(coord) * periodic_factor;
-        coord_2pi = std::copysign(std::acos(std::cos(coord_2pi)), std::sin(coord_2pi));
-        coord = coord_2pi < 0 ? Coord1D((coord_2pi + 2 * M_PI) / periodic_factor)
-                              : Coord1D((coord_2pi) / periodic_factor);
-    }
+    coord = Coord1D(Kokkos::fmod((double)coord, length));
     coord += x_min;
-    while (coord < x_min)
+    if (coord < x_min)
         coord += length;
-    while (coord >= x_max)
-        coord -= length;
     return coord;
 }
 
@@ -150,7 +143,9 @@ inline void dump_coordinates(
         ExecSpace exec_space,
         DField<IdxRange<Grid1D>, Layout, MemorySpace> dump_coord)
 {
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             exec_space,
             dump_coord.domain(),
             KOKKOS_LAMBDA(Idx<Grid1D> i) { dump_coord(i) = ddc::coordinate(i); });
@@ -170,7 +165,9 @@ inline void dump_coordinates(
               Layout,
               MemorySpace> dump_coord)
 {
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             exec_space,
             dump_coord.domain(),
             KOKKOS_LAMBDA(Idx<Grid1D> i) { dump_coord(i) = ddc::coordinate(i); });
@@ -193,7 +190,9 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
     IdxStep const step(1);
     IdxRange<GridDim> idx_range_chopped = idx_range.remove_first(step);
 
+    const std::source_location location = std::source_location::current();
     double const max_dist = ddc::parallel_transform_reduce(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             idx_range_chopped,
             0.,
@@ -203,6 +202,115 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
             });
 
     return max_dist;
+}
+
+template <typename GridSubSet, typename GridSuperSet>
+Idx<GridSubSet> find_first_point_not_in_superset(
+        IdxRange<GridSubSet> const& idx_range_subset,
+        IdxRange<GridSuperSet> const& idx_range_superset,
+        ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
+{
+    // Grids are ordered so a serial loop allows iterating over both sets simultaneously
+    Idx<GridSuperSet> idx_superset = idx_range_superset.front();
+    for (Idx<GridSubSet> idx_subset = idx_range_subset.front();
+         idx_subset <= idx_range_subset.back();
+         idx_subset++, idx_superset++) {
+        // If points don't match check next point
+        while (std::abs(ddc::coordinate(idx_subset) - ddc::coordinate(idx_superset)) > tol
+               && idx_superset <= idx_range_superset.back())
+            [[unlikely]]
+            {
+                idx_superset++;
+            }
+        // If point was not found in superset then points are not a subset
+        if (idx_superset > idx_range_superset.back()) {
+            return idx_subset;
+        }
+    }
+    return idx_range_subset.back() + 1;
+}
+
+template <typename GridSubSet, typename GridSuperSet>
+bool points_are_subset(
+        IdxRange<GridSubSet> const& idx_range_subset,
+        IdxRange<GridSuperSet> const& idx_range_superset,
+        ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
+{
+    if (idx_range_subset.size() > idx_range_superset.size()) {
+        return false;
+    } else {
+        return find_first_point_not_in_superset(idx_range_subset, idx_range_superset, tol)
+               == (idx_range_subset.back() + 1);
+    }
+}
+
+
+/**
+ * @brief Get the multi-dimensional index found at a given position in an index range.
+ *
+ * The index range is traversed in layout_right order (the last dimension varies fastest).
+ * This is the inverse of the linearisation used to store a contiguous layout_right Field
+ * defined on the index range.
+ *
+ * @param idx_range The index range.
+ * @param linear_idx The position of the index in the index range (0 <= linear_idx < idx_range.size()).
+ *
+ * @return The index found at the position linear_idx.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION Idx<Dims...> get_idx_from_linear_index(
+        IdxRange<Dims...> const& idx_range,
+        std::size_t linear_idx)
+{
+    if constexpr (sizeof...(Dims) == 0) {
+        KOKKOS_ASSERT(linear_idx == 0);
+        return Idx<>();
+    } else {
+        KOKKOS_ASSERT(linear_idx < idx_range.size());
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const extents
+                = ddc::detail::array(idx_range.extents());
+        IdxStep<Dims...> offset;
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)>& offsets
+                = ddc::detail::array(offset);
+        for (std::size_t i = sizeof...(Dims); i > 0; --i) {
+            offsets[i - 1] = linear_idx % extents[i - 1];
+            linear_idx /= extents[i - 1];
+        }
+        return idx_range.front() + offset;
+    }
+}
+
+/**
+ * @brief Get the position of a multi-dimensional index in an index range.
+ *
+ * The index range is traversed in layout_right order (the last dimension varies fastest).
+ * This is the linearisation used to store a contiguous layout_right Field defined on the
+ * index range. It is the inverse of get_idx_from_linear_index.
+ *
+ * @param idx_range The index range.
+ * @param idx The index whose position is calculated (idx_range.contains(idx) must be true).
+ *
+ * @return The position of the index in the index range.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION std::size_t get_linear_index_from_idx(
+        IdxRange<Dims...> const& idx_range,
+        Idx<Dims...> const& idx)
+{
+    if constexpr (sizeof...(Dims) == 0) {
+        return 0;
+    } else {
+        KOKKOS_ASSERT(idx_range.contains(idx));
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const extents
+                = ddc::detail::array(idx_range.extents());
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const offsets
+                = ddc::detail::array(idx - idx_range.front());
+        std::size_t linear_idx = 0;
+        for (std::size_t i = 0; i < sizeof...(Dims); ++i) {
+            linear_idx = linear_idx * extents[i] + offsets[i];
+        }
+        return linear_idx;
+    }
 }
 } // namespace ddcHelper
 
@@ -339,4 +447,7 @@ using type_seq_intersection_t =
 /// Get a coordinate from a TypeSeq
 template <class ValidIndexSet>
 using to_coord_t = typename detail::ToCoord<ValidIndexSet>::type;
+
+template <class T>
+bool constexpr is_coordinate_v = ddc::detail::is_tagged_vector_v<T>;
 } // namespace ddcHelper

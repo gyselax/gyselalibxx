@@ -1,14 +1,19 @@
 # SPDX-License-Identifier: MIT
 
 add_library("geometry_vparmu" INTERFACE)
-target_include_directories("geometry_vparmu"
+
+target_compile_features("geometry_vparmu" INTERFACE cxx_std_20)
+target_sources("geometry_vparmu"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                geometry_vpar_mu.hpp
 )
 target_link_libraries("geometry_vparmu" INTERFACE
     DDC::core
-    gslx::speciesinfo
-    gslx::utils
+    gyselalibxx::speciesinfo
+    gyselalibxx::utils
 )
-add_library("gslx::geometry_vparmu" ALIAS "geometry_vparmu")
+add_library("gyselalibxx::geometry_vparmu" ALIAS "geometry_vparmu")
 
+install(TARGETS geometry_vparmu EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/geometry)

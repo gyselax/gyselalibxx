@@ -24,14 +24,17 @@
 template <
         class IdxRangeQuadrature,
         class IdxRangeTotal = IdxRangeQuadrature,
+        class DataType = double,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 class Quadrature
 {
+    static_assert(std::is_floating_point_v<DataType>);
+
 private:
     /// The type of an element of an index of the quadrature coefficients.
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
 
-    using QuadConstField = DConstField<IdxRangeQuadrature, MemorySpace>;
+    using QuadConstField = ConstField<DataType, IdxRangeQuadrature, MemorySpace>;
 
     QuadConstField m_coefficients;
 
@@ -57,7 +60,7 @@ public:
      * @returns The integral of the function over the domain.
      */
     template <class ExecutionSpace, class IntegratorFunction>
-    double operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
+    DataType operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
     {
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
@@ -69,6 +72,13 @@ public:
 
         QuadConstField const coeff_proxy = m_coefficients;
 
+        if constexpr (ddc::is_chunk_v<IntegratorFunction>) {
+            // Sanity check ensure that the front and back are in the domain
+            // If this fails data may be distributed across MPI ranks
+            assert(get_idx_range(integrated_function).contains(get_idx_range(coeff_proxy).front()));
+            assert(get_idx_range(integrated_function).contains(get_idx_range(coeff_proxy).back()));
+        }
+
         // This fence helps avoid a CPU seg fault. See #290 for more details
         exec_space.fence();
         // This condition is necessary to execute in serial, even in a device activated build.
@@ -77,16 +87,18 @@ public:
             return ddc::host_transform_reduce(
                     get_idx_range(coeff_proxy),
                     0.0,
-                    ddc::reducer::sum<double>(),
+                    ddc::reducer::sum<DataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
         } else {
+            const std::source_location location = std::source_location::current();
             return ddc::parallel_transform_reduce(
+                    location.function_name(),
                     exec_space,
                     get_idx_range(coeff_proxy),
                     0.0,
-                    ddc::reducer::sum<double>(),
+                    ddc::reducer::sum<DataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
@@ -108,10 +120,10 @@ public:
      *        Please note that a Field fulfils the described criteria.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      */
-    template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction>
+    template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
     void operator()(
             ExecutionSpace exec_space,
-            Field<double, BatchIdxRange, MemorySpace> const result,
+            Field<DataType, BatchIdxRange, MemorySpace, Layout> const result,
             IntegratorFunction integrated_function) const
     {
         static_assert(
@@ -128,6 +140,15 @@ public:
                 ddc::type_seq_same_v<ddc::to_type_seq_t<BatchIdxRange>, ExpectedBatchDims>,
                 "The batch idx_range deduced from the type of result does not match the class "
                 "template parameters.");
+
+        if constexpr (ddc::is_chunk_v<IntegratorFunction>) {
+            // Sanity check ensure that the front and back are in the domain
+            // If this fails data may be distributed across MPI ranks
+            assert(IdxRangeQuadrature(get_idx_range(integrated_function))
+                           .contains(get_idx_range(m_coefficients).front()));
+            assert(IdxRangeQuadrature(get_idx_range(integrated_function))
+                           .contains(get_idx_range(m_coefficients).back()));
+        }
 
         // Get useful index types
         using IdxTotal = typename IdxRangeTotal::discrete_element_type;
@@ -151,10 +172,10 @@ public:
                     IdxBatch ib = to_discrete_element(idx, batch_idx_range);
 
                     // Sum over quadrature dimensions
-                    double teamSum = 0;
+                    DataType teamSum = 0;
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
-                            [&](int const& thread_index, double& sum) {
+                            [&](int const& thread_index, DataType& sum) {
                                 IdxQuadrature iq
                                         = to_discrete_element(thread_index, quad_idx_range);
                                 IdxTotal it(ib, iq);
@@ -193,9 +214,16 @@ private:
 };
 
 namespace detail {
-template <class NewMemorySpace, class IdxRangeQuadrature, class IdxRangeTotal, class MemorySpace>
-struct OnMemorySpace<NewMemorySpace, Quadrature<IdxRangeQuadrature, IdxRangeTotal, MemorySpace>>
+template <
+        class NewMemorySpace,
+        class IdxRangeQuadrature,
+        class IdxRangeTotal,
+        class DataType,
+        class MemorySpace>
+struct OnMemorySpace<
+        NewMemorySpace,
+        Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace>>
 {
-    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, NewMemorySpace>;
+    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, NewMemorySpace>;
 };
 } // namespace detail

@@ -20,7 +20,7 @@ DFieldSpVx MaxwellianEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
     IdxRangeSp const gridsp = get_idx_range<Species>(allfequilibrium);
 
     // Initialisation of the maxwellian
-    DFieldMemVx maxwellian_alloc(gridvx);
+    DFieldMemVx maxwellian_alloc("maxwellian (MaxwellianEquilibrium::operator())", gridvx);
     DFieldVx maxwellian = get_field(maxwellian_alloc);
     ddc::host_for_each(gridsp, [&](IdxSp const isp) {
         compute_maxwellian(
@@ -29,7 +29,9 @@ DFieldSpVx MaxwellianEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
                 m_temperature_eq(isp),
                 m_mean_velocity_eq(isp));
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 gridvx,
                 KOKKOS_LAMBDA(IdxVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
@@ -47,7 +49,9 @@ void MaxwellianEquilibrium::compute_maxwellian(
 {
     double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature);
     IdxRangeVx const gridvx = get_idx_range(fMaxwellian);
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             gridvx,
             KOKKOS_LAMBDA(IdxVx const ivx) {

@@ -2,6 +2,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
@@ -11,7 +13,7 @@ ChargeDensityCalculator::ChargeDensityCalculator(DConstFieldVxVy coeffs) : m_qua
 
 void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const
 {
-    Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) ChargeDensityCalculator");
 
     IdxRangeSp const kin_species_idx_range = get_idx_range<Species>(allfdistribu);
     host_t<DConstFieldSp> const charges_host = ddc::host_discrete_space<Species>().charges();
@@ -25,7 +27,7 @@ void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfd
             Kokkos::DefaultExecutionSpace(),
             rho,
             KOKKOS_LAMBDA(IdxXYVxVy idx) {
-                double sum = 0.0;
+                Real sum = 0.0;
                 for (IdxSp isp : kin_species_idx_range) {
                     sum += kinetic_charges(isp) * allfdistribu(isp, idx);
                 }
@@ -35,12 +37,12 @@ void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfd
     IdxSp const last_kin_species = kin_species_idx_range.back();
     IdxSp const last_species = get_idx_range(charges_host).back();
     if (last_kin_species != last_species) {
-        double chargedens_adiabspecies = double(charge(last_species));
+        Real chargedens_adiabspecies = Real(charge(last_species));
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(rho),
                 KOKKOS_LAMBDA(IdxXY ixy) { rho(ixy) += chargedens_adiabspecies; });
     }
-
-    Kokkos::Profiling::popRegion();
 }

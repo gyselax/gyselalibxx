@@ -22,6 +22,8 @@ template <class IdxRangeFull, class DerivativeDimension>
 class CentralFDMPartialDerivativeWithBValue
     : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
+    static_assert(!DerivativeDimension::PERIODIC);
+
 private:
     using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
@@ -97,7 +99,9 @@ public:
             double const c3 = -h1 / (h2 * (h1 + h2));
             double const c2 = 1. / h1 + 1. / h2;
             double bvalue_left(m_b_value_left);
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
                     KOKKOS_LAMBDA(IdxBatch ib) {
@@ -117,7 +121,9 @@ public:
             double const c3 = h1 / (h2 * (h1 + h2));
             double const c2 = -(h1 + h2) / (h1 * h2);
             double bvalue_right(m_b_value_right);
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
                     KOKKOS_LAMBDA(IdxBatch ib) {
@@ -133,7 +139,9 @@ public:
         {
             IdxRangeDeriv idxrange_deriv_central = idxrange_deriv.remove(step, step);
             IdxRangeFull idxrange_central(idxrange_deriv_central, idxrange_batch);
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_central,
                     KOKKOS_LAMBDA(IdxFull ibx) {

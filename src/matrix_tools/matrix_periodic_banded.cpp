@@ -27,7 +27,7 @@ double Matrix_Periodic_Banded::get_element(int const i, int j) const
     assert(i >= 0);
     assert(i < n);
     assert(j >= 0);
-    assert(i < n);
+    assert(j < n);
     if (i >= nb && j < nb) {
         int d = j - i;
         if (d > n / 2)
@@ -51,7 +51,7 @@ void Matrix_Periodic_Banded::set_element(int const i, int j, double const a_ij)
     assert(i >= 0);
     assert(i < n);
     assert(j >= 0);
-    assert(i < n);
+    assert(j < n);
     if (i >= nb && j < nb) {
         int d = j - i;
         if (d > n / 2)

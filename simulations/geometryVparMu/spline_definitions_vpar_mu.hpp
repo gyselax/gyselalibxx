@@ -15,53 +15,54 @@ bool constexpr BsplineOnUniformCellsMu = true;
 struct BSplinesVpar
     : std::conditional_t<
               BsplineOnUniformCellsVpar,
-              ddc::UniformBSplines<Vpar, BSDegreeVpar>,
-              ddc::NonUniformBSplines<Vpar, BSDegreeVpar>>
+              ddc::UniformBSplines<Vpar, BSDegreeVpar, Vpar::PERIODIC>,
+              ddc::NonUniformBSplines<Vpar, BSDegreeVpar, Vpar::PERIODIC>>
 {
 };
 struct BSplinesMu
     : std::conditional_t<
               BsplineOnUniformCellsMu,
-              ddc::UniformBSplines<Mu, BSDegreeMu>,
-              ddc::NonUniformBSplines<Mu, BSDegreeMu>>
+              ddc::UniformBSplines<Mu, BSDegreeMu, Mu::PERIODIC>,
+              ddc::NonUniformBSplines<Mu, BSDegreeMu, Mu::PERIODIC>>
 {
 };
-ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineVparClosure = ddc::SplineBuilderClosure::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineMuClosure = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsVpar
-        = ddc::GrevilleInterpolationPoints<BSplinesVpar, SplineVparBoundary, SplineVparBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVpar, SplineVparClosure, SplineVparClosure>;
 using SplineInterpPointsMu
-        = ddc::GrevilleInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesMu, SplineMuClosure, SplineMuClosure>;
 
 using SplineVparBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVpar,
         GridVpar,
-        SplineVparBoundary,
-        SplineVparBoundary,
+        SplineVparClosure,
+        SplineVparClosure,
         ddc::SplineSolver::LAPACK>;
-using SplineVparEvaluator = ddc::SplineEvaluator<
+using SplineVparEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVpar,
-        GridVpar,
-        ddc::ConstantExtrapolationRule<Vpar>,
-        ddc::ConstantExtrapolationRule<Vpar>>;
+        ddc::detail::TypeSeq<BSplinesVpar>,
+        ddc::detail::TypeSeq<GridVpar>,
+        ddc::detail::TypeSeq<
+                ddc::ConstantExtrapolationRule<Vpar>,
+                ddc::ConstantExtrapolationRule<Vpar>>>;
 
 using SplineMuBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesMu,
         GridMu,
-        SplineMuBoundary,
-        SplineMuBoundary,
+        SplineMuClosure,
+        SplineMuClosure,
         ddc::SplineSolver::LAPACK>;
-using SplineMuEvaluator = ddc::SplineEvaluator<
+using SplineMuEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesMu,
-        GridMu,
-        ddc::ConstantExtrapolationRule<Mu>,
-        ddc::ConstantExtrapolationRule<Mu>>;
+        ddc::detail::TypeSeq<BSplinesMu>,
+        ddc::detail::TypeSeq<GridMu>,
+        ddc::detail::
+                TypeSeq<ddc::ConstantExtrapolationRule<Mu>, ddc::ConstantExtrapolationRule<Mu>>>;

@@ -12,7 +12,7 @@
  * An abstract class which implements a function that 
  * applies the transport along a velocity direction of the phase space.
  */
-template <class Geometry, class GridV>
+template <class Geometry, class GridV, class DataType = double>
 class IAdvectionVelocity
 {
 public:
@@ -27,8 +27,8 @@ public:
      *
      * @return A reference to an array containing the value of distribution the function at the updated time t+dt.
      */
-    virtual DField<typename Geometry::IdxRangeFdistribu> operator()(
-            DField<typename Geometry::IdxRangeFdistribu> allfdistribu,
-            DConstField<typename Geometry::IdxRangeSpatial> electric_field,
-            double dt) const = 0;
+    virtual Field<DataType, typename Geometry::IdxRangeFdistribu> operator()(
+            Field<DataType, typename Geometry::IdxRangeFdistribu> allfdistribu,
+            ConstField<DataType, typename Geometry::IdxRangeSpatial> electric_field,
+            DataType dt) const = 0;
 };

@@ -9,7 +9,7 @@
 #include "metric_tensor_evaluator.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polar_spline_evaluator.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -82,10 +82,10 @@
  *
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
- *
- * @see PolarSplineFEMPoissonLikeSolver
+ * @tparam MetricTensorType
+ *      A class describing the metric tensor associated with the mapping.
  */
-template <class Mapping>
+template <class Mapping, concepts::MetricTensor MetricTensorType>
 class AdvectionFieldFinder
 {
 public:
@@ -96,6 +96,8 @@ public:
 
 private:
     Mapping const& m_mapping;
+
+    MetricTensorType const m_metric_tensor;
 
     PolarSplineEvaluator<
             Kokkos::DefaultHostExecutionSpace,
@@ -115,12 +117,18 @@ public:
      *
      * @param[in] mapping
      *      The mapping @f$ \mathcal{F} @f$ from the logical domain to the physical domain.
+     * @param[in] metric_tensor
+     *      The metric tensor associated with the mapping @f$ \mathcal{F} @f$.
      * @param[in] epsilon
      *      The parameter @f$ \varepsilon @f$ for the linearisation of the
      *      electric field.
      */
-    explicit AdvectionFieldFinder(Mapping const& mapping, double const epsilon = 1e-12)
+    AdvectionFieldFinder(
+            Mapping const& mapping,
+            MetricTensorType const& metric_tensor,
+            double const epsilon = 1e-12)
         : m_mapping(mapping)
+        , m_metric_tensor(metric_tensor)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_spline_evaluator {ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule(), ddc::PeriodicExtrapolationRule<Theta>(), ddc::PeriodicExtrapolationRule<Theta>()}
         , m_epsilon(epsilon) {};
@@ -231,12 +239,14 @@ private:
         // > computation of the phi derivatives
         host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> deriv_phi(grid);
 
-        evaluator.deriv_dim_1(
-                ddcHelper::get<R_cov>(deriv_phi),
-                get_const_field(electrostatic_potential_coef));
-        evaluator.deriv_dim_2(
-                ddcHelper::get<Theta_cov>(deriv_phi),
-                get_const_field(electrostatic_potential_coef));
+        evaluator
+                .deriv(Idx<ddc::Deriv<R>>(1),
+                       ddcHelper::get<R_cov>(deriv_phi),
+                       get_const_field(electrostatic_potential_coef));
+        evaluator
+                .deriv(Idx<ddc::Deriv<Theta>>(1),
+                       ddcHelper::get<Theta_cov>(deriv_phi),
+                       get_const_field(electrostatic_potential_coef));
 
         InverseJacobianMatrix inv_jacobian_matrix(m_mapping);
 
@@ -279,12 +289,16 @@ private:
                 double const dr_y_2 = m_mapping.template jacobian_component<Y, R_cov>(
                         coord_2_0); // dr_y (0, th2)
 
-                double deriv_r_phi_1 = evaluator.deriv_dim_1(
-                        coord_1_0,
-                        get_const_field(electrostatic_potential_coef));
-                double deriv_r_phi_2 = evaluator.deriv_dim_1(
-                        coord_2_0,
-                        get_const_field(electrostatic_potential_coef));
+                double deriv_r_phi_1
+                        = evaluator
+                                  .deriv(Idx<ddc::Deriv<R>>(1),
+                                         coord_1_0,
+                                         get_const_field(electrostatic_potential_coef));
+                double deriv_r_phi_2
+                        = evaluator
+                                  .deriv(Idx<ddc::Deriv<R>>(1),
+                                         coord_2_0,
+                                         get_const_field(electrostatic_potential_coef));
 
                 double const determinant = dr_x_1 * dr_y_2 - dr_x_2 * dr_y_1;
 
@@ -301,12 +315,14 @@ private:
                 Tensor inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon);
 
                 DVector<R_cov, Theta_cov> deriv_phi_epsilon(
-                        evaluator.deriv_dim_1(
-                                coord_rtheta_epsilon,
-                                get_const_field(electrostatic_potential_coef)),
-                        evaluator.deriv_dim_2(
-                                coord_rtheta_epsilon,
-                                get_const_field(electrostatic_potential_coef)));
+                        evaluator
+                                .deriv(Idx<ddc::Deriv<R>>(1),
+                                       coord_rtheta_epsilon,
+                                       get_const_field(electrostatic_potential_coef)),
+                        evaluator
+                                .deriv(Idx<ddc::Deriv<Theta>>(1),
+                                       coord_rtheta_epsilon,
+                                       get_const_field(electrostatic_potential_coef)));
 
                 // Gradient of phi in the physical domain (Cartesian domain)
                 // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
@@ -472,14 +488,12 @@ private:
                        get_const_field(coords),
                        get_const_field(electrostatic_potential_coef));
 
-        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(m_mapping);
-
         // > computation of the advection field
         ddc::host_for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_G
-                    = metric_tensor.inverse(coord_rtheta);
+                    = m_metric_tensor.inverse(irtheta);
             DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J
                     = m_mapping.jacobian_matrix(coord_rtheta);
             double const jacobian = m_mapping.jacobian(coord_rtheta);

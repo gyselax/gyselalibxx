@@ -17,7 +17,7 @@ The tests are made for different parameters which are:
 - Circular mapping in the physical domain (CircularToCartesian);
 - Czarny mapping in the physical domain (CzarnyToCartesian);
 - Czarny mapping in the pseudo-Cartesian domain (CzarnyToCartesian);
-- Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain (DiscreteToCartesian).
+- Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain (DiscretePoloidalCSSplineMapping).
   
 ### - The time integration method used to solve the characteristic equation
 

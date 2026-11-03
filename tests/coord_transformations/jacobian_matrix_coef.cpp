@@ -10,11 +10,13 @@
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
+#include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
+#include "orthogonal_coord_transforms.hpp"
 
 
 
@@ -197,21 +199,10 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
     IdxRangeTheta interpolation_idx_range_theta(InterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    SplineRThetaBuilder_host builder(grid);
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator_host evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
-            mapping_builder(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    analytical_mapping,
-                    builder,
-                    evaluator);
-    DiscreteToCartesian mapping = mapping_builder();
+    SplineInterpolatorRTheta_host interpolator(grid);
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRTheta_host>
+            mapping_builder(Kokkos::DefaultHostExecutionSpace(), analytical_mapping, interpolator);
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
 
     static_assert(has_jacobian_v<decltype(mapping)>);
     InverseJacobianMatrix inv_jacobian(mapping);
@@ -286,6 +277,42 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
                     1e-13);
         }
     });
+}
+
+// Discrete Czarny mapping -----------------------------------------
+TEST(JacobianMatrixAndJacobianCoefficients, OrthogonalCoordTransforms)
+{
+    double x_scaling(-0.5);
+    double y_scaling(3.5);
+    const LinearCoordTransform<X, X2> x_transform(Coord<X>(0.5), Coord<X2>(22.0), x_scaling);
+    const LinearCoordTransform<Y, Y2> y_transform(Coord<Y>(-7), Coord<Y2>(0.0), y_scaling);
+    OrthogonalCoordTransforms<
+            Coord<X, Y>,
+            Coord<Y2, X2>,
+            Coord<X, Y>,
+            LinearCoordTransform<X, X2>,
+            LinearCoordTransform<Y, Y2>>
+            transform(x_transform, y_transform);
+
+    Coord<X, Y> test_coord(0.0, 0.0);
+    Coord<Y2, X2> transformed_coord = transform(test_coord);
+    EXPECT_DOUBLE_EQ(Coord<Y2>(transformed_coord), y_transform(Coord<Y>(test_coord)));
+    EXPECT_DOUBLE_EQ(Coord<Y2>(transformed_coord), transform(Coord<Y>(test_coord)));
+    EXPECT_DOUBLE_EQ(Coord<X2>(transformed_coord), x_transform(Coord<X>(test_coord)));
+    EXPECT_DOUBLE_EQ(Coord<X2>(transformed_coord), transform(Coord<X>(test_coord)));
+
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<X2, X>(test_coord)), x_scaling);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<Y2, Y>(test_coord)), y_scaling);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<X2, Y>(test_coord)), 0.0);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<Y2, X>(test_coord)), 0.0);
+
+    DTensor<VectorIndexSet<Y2, X2>, VectorIndexSet<X, Y>> Jacobian_matrix
+            = transform.jacobian_matrix(test_coord);
+    EXPECT_DOUBLE_EQ((ddcHelper::get<X2, X>(Jacobian_matrix)), x_scaling);
+    EXPECT_DOUBLE_EQ((ddcHelper::get<Y2, Y>(Jacobian_matrix)), y_scaling);
+    EXPECT_DOUBLE_EQ((ddcHelper::get<X2, Y>(Jacobian_matrix)), 0.0);
+    EXPECT_DOUBLE_EQ((ddcHelper::get<Y2, X>(Jacobian_matrix)), 0.0);
+    EXPECT_DOUBLE_EQ(transform.jacobian(test_coord), -x_scaling * y_scaling);
 }
 
 

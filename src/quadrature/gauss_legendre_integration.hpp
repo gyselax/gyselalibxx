@@ -47,10 +47,11 @@ extern template struct GaussLegendreCoefficients<10>;
  * @tparam GLGrid The grid describing the Gauss-Legendre points.
  * @tparam NPoints The number of points in the Gauss-Legendre scheme
  */
-template <class GLGrid, std::size_t NPoints>
+template <class GLGrid, std::size_t NPoints, class DataType = double>
 class GaussLegendre
 {
     static_assert(ddc::is_non_uniform_point_sampling_v<GLGrid>);
+    static_assert(std::is_floating_point_v<DataType>);
 
     using Dim = typename GLGrid::continuous_dimension_type;
 
@@ -120,6 +121,22 @@ public:
     }
 
     /**
+     * @brief A constructor of the GaussLegendre class.
+     * @param[in] mesh_edge_idx_range An index range indicating the coordinates of the edges
+     *          of the cells on which the Gauss-Legendre quadrature is calculated.
+     */
+    template <class Grid1D>
+    explicit GaussLegendre(IdxRange<Grid1D> mesh_edge_idx_range)
+        : m_nbcells(mesh_edge_idx_range.size() - 1)
+        , m_valid_idx_range(
+                  Idx<GLGrid>(0),
+                  IdxStep<GLGrid>((mesh_edge_idx_range.size() - 1) * NPoints))
+        , m_cell_lengths(m_nbcells)
+    {
+        ddc::init_discrete_space<GLGrid>(get_sampling(mesh_edge_idx_range));
+    }
+
+    /**
      * @brief Get the index range of the points of the Gauss-Legendre quadrature.
      * @return The index range where functions should be evaluated.
      */
@@ -133,10 +150,11 @@ public:
      * @return The Gauss-Legendre quadrature.
      */
     template <class ExecSpace>
-    DFieldMem<IdxRange<GLGrid>, typename ExecSpace::memory_space> gauss_legendre_coefficients()
-            const
+    FieldMem<DataType, IdxRange<GLGrid>, typename ExecSpace::memory_space>
+    gauss_legendre_coefficients() const
     {
-        DFieldMem<IdxRange<GLGrid>, typename ExecSpace::memory_space> coefficients_alloc(
+        FieldMem<DataType, IdxRange<GLGrid>, typename ExecSpace::memory_space> coefficients_alloc(
+                "coefficients (GaussLegendre::gauss_legendre_coefficients)",
                 m_valid_idx_range);
         auto coefficients_host = ddc::create_mirror_view(get_field(coefficients_alloc));
         ddc::host_for_each(m_valid_idx_range, [&](Idx<GLGrid> ix) {
@@ -201,6 +219,25 @@ private:
         }
         return grid;
     }
+
+    template <class Grid1D>
+    std::vector<Coord<Dim>> get_sampling(IdxRange<Grid1D> mesh_edges_idx_range)
+    {
+        std::vector<Coord<Dim>> grid(m_nbcells * NPoints);
+
+        int k(0);
+        for (Idx<Grid1D> mesh_idx(mesh_edges_idx_range.front());
+             mesh_idx < mesh_edges_idx_range.back();
+             mesh_idx++) {
+            get_sampling_on_cell(
+                    grid,
+                    ddc::coordinate(mesh_idx),
+                    ddc::coordinate(mesh_idx + 1),
+                    mesh_idx - mesh_edges_idx_range.front(),
+                    k);
+        }
+        return grid;
+    }
 };
 
 /**
@@ -213,18 +250,24 @@ private:
  *
  * @return The coefficients which define the spline quadrature method in ND.
  */
-template <class ExecSpace, class... GaussLegendreQuad>
-DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D...>, typename ExecSpace::memory_space>
+template <class ExecSpace, class DataType = double, class... GaussLegendreQuad>
+FieldMem<
+        DataType,
+        IdxRange<typename GaussLegendreQuad::Grid1D...>,
+        typename ExecSpace::memory_space>
 gauss_legendre_quadrature_coefficients(GaussLegendreQuad const&... gl)
 {
     // Get coefficients for each dimension
-    std::tuple<host_t<DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D>>>...>
+    std::tuple<host_t<FieldMem<DataType, IdxRange<typename GaussLegendreQuad::Grid1D>>>...>
     current_dim_coeffs(gl.template gauss_legendre_coefficients<Kokkos::HostSpace>()...);
 
     IdxRange<typename GaussLegendreQuad::Grid1D...> idx_range(gl.get_idx_range()...);
 
     // Allocate ND coefficients
-    DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D...>, typename ExecSpace::memory_space>
+    FieldMem<
+            DataType,
+            IdxRange<typename GaussLegendreQuad::Grid1D...>,
+            typename ExecSpace::memory_space>
             coefficients(idx_range);
     auto coefficients_host = ddc::create_mirror(get_field(coefficients));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
@@ -232,7 +275,8 @@ gauss_legendre_quadrature_coefficients(GaussLegendreQuad const&... gl)
     ddc::host_for_each(idx_range, [&](Idx<typename GaussLegendreQuad::Grid1D...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients_host(idim)
-                = (std::get<host_t<DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D>>>>(
+                = (std::get<host_t<
+                           FieldMem<DataType, IdxRange<typename GaussLegendreQuad::Grid1D>>>>(
                            current_dim_coeffs)(
                            ddc::select<typename GaussLegendreQuad::Grid1D>(idim))
                    * ... * 1);

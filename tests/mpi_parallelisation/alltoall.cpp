@@ -104,16 +104,50 @@ KOKKOS_FUNCTION std::size_t get_unique_id(
     }
 }
 
-void test_AllToAll2D_GPU()
+void test_AllToAll2D_CPU(size_t test_y_size)
 {
     IdxStepX x_size(10);
-    IdxStepY y_size(12);
+    IdxStepY y_size(test_y_size);
 
     IdxXY idx_range_start(0, 0);
     IdxStepXY idx_range_size(x_size, y_size);
     IdxRangeXY full_idx_range(idx_range_start, idx_range_size);
 
-    MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_idx_range, MPI_COMM_WORLD);
+    // Rk: allow_inactive_ranks=true is used
+    MPITransposeAllToAll<XDistribLayout, YDistribLayout>
+            transpose(full_idx_range, MPI_COMM_WORLD, true);
+
+    IFieldMemXY recv_buffer(transpose.get_local_idx_range<XDistribLayout>());
+    IFieldMemYX send_buffer(transpose.get_local_idx_range<YDistribLayout>());
+
+    ddc::host_for_each(get_idx_range(send_buffer), [&](IdxYX ixy) {
+        send_buffer(ixy) = get_unique_id(IdxXY(ixy), full_idx_range);
+    });
+
+    transpose(
+            Kokkos::DefaultHostExecutionSpace(),
+            get_field(recv_buffer),
+            get_const_field(send_buffer));
+
+    bool success = true;
+    ddc::host_for_each(get_idx_range(recv_buffer), [&](IdxXY ixy) {
+        success = success and (recv_buffer(ixy) == get_unique_id(ixy, full_idx_range));
+    });
+    EXPECT_TRUE(success);
+}
+
+void test_AllToAll2D_GPU(size_t test_y_size)
+{
+    IdxStepX x_size(10);
+    IdxStepY y_size(test_y_size);
+
+    IdxXY idx_range_start(0, 0);
+    IdxStepXY idx_range_size(x_size, y_size);
+    IdxRangeXY full_idx_range(idx_range_start, idx_range_size);
+
+    // Rk: allow_inactive_ranks=true is used
+    MPITransposeAllToAll<XDistribLayout, YDistribLayout>
+            transpose(full_idx_range, MPI_COMM_WORLD, true);
 
     host_t<IFieldMemXY> recv_buffer_host(transpose.get_local_idx_range<XDistribLayout>());
     device_t<IFieldMemXY> recv_buffer(transpose.get_local_idx_range<XDistribLayout>());
@@ -145,37 +179,22 @@ void test_AllToAll2D_GPU()
 
 TEST(MPIParallelisation, AllToAll2D_CPU)
 {
-    IdxStepX x_size(10);
-    IdxStepY y_size(12);
+    test_AllToAll2D_CPU(12);
+}
 
-    IdxXY idx_range_start(0, 0);
-    IdxStepXY idx_range_size(x_size, y_size);
-    IdxRangeXY full_idx_range(idx_range_start, idx_range_size);
-
-    MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_idx_range, MPI_COMM_WORLD);
-
-    IFieldMemXY recv_buffer(transpose.get_local_idx_range<XDistribLayout>());
-    IFieldMemYX send_buffer(transpose.get_local_idx_range<YDistribLayout>());
-
-    ddc::host_for_each(get_idx_range(send_buffer), [&](IdxYX ixy) {
-        send_buffer(ixy) = get_unique_id(IdxXY(ixy), full_idx_range);
-    });
-
-    transpose(
-            Kokkos::DefaultHostExecutionSpace(),
-            get_field(recv_buffer),
-            get_const_field(send_buffer));
-
-    bool success = true;
-    ddc::host_for_each(get_idx_range(recv_buffer), [&](IdxXY ixy) {
-        success = success and (recv_buffer(ixy) == get_unique_id(ixy, full_idx_range));
-    });
-    EXPECT_TRUE(success);
+TEST(MPIParallelisation, AllToAll2D_CPU_MoreMPIs)
+{
+    test_AllToAll2D_CPU(1);
 }
 
 TEST(MPIParallelisation, AllToAll2D_GPU)
 {
-    test_AllToAll2D_GPU();
+    test_AllToAll2D_GPU(12);
+}
+
+TEST(MPIParallelisation, AllToAll2D_GPU_MoreMPIs)
+{
+    test_AllToAll2D_GPU(1);
 }
 
 TEST(MPIParallelisation, AllToAll3D_CPU)

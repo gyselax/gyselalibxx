@@ -268,6 +268,35 @@ TEST(VectorField1DTest, Access)
     }
 }
 
+TEST(VectorField1DTest, StepAccessConst)
+{
+    Coord2D constexpr factor(1.391, 2.444);
+    DVectorFieldMemX field(idx_range_x);
+    DVectorFieldMemX const& field_cref = field;
+    for (IdxStepX ix(0); ix < idx_range_x.size(); ++ix) {
+        Coord2D val = double(ix.value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
+        // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field_cref(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field_cref(ix)));
+    }
+}
+
+TEST(VectorField1DTest, StepAccess)
+{
+    Coord2D constexpr factor(1.391, 2.444);
+    DVectorFieldMemX field(idx_range_x);
+    for (IdxStepX ix(0); ix < idx_range_x.size(); ++ix) {
+        Coord2D val = double(ix.value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
+        // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field(ix)));
+    }
+}
+
 TEST(VectorField1DTest, GetConstField)
 {
     Coord2D constexpr factor(1.391, 2.444);
@@ -534,8 +563,12 @@ TEST(VectorField2DTest, IdxRangeSliceXTooearly)
 
     DVectorFieldMemXY field(idx_range_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
-    // the error message is checked with clang & gcc only
-    EXPECT_DEATH(field[subidx_range_x], R"rgx([Aa]ssert.*contains\(.*)rgx");
+    if constexpr (std::is_same_v< // The assertion is only checked if on CPU
+                          Kokkos::DefaultExecutionSpace::memory_space,
+                          Kokkos::DefaultHostExecutionSpace::memory_space>) {
+        // the error message is checked with clang & gcc only
+        EXPECT_DEATH(field[subidx_range_x], R"rgx([Aa]ssert.*contains\(.*)rgx");
+    }
 #endif
 }
 
@@ -546,8 +579,12 @@ TEST(VectorField2DTest, IdxRangeSliceXToolate)
 
     DVectorFieldMemXY field(idx_range_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
-    // the error message is checked with clang & gcc only
-    EXPECT_DEATH(field[subidx_range_x], R"rgx([Aa]ssert.*contains\(.*)rgx");
+    if constexpr (std::is_same_v< // The assertion is only checked if on CPU
+                          Kokkos::DefaultExecutionSpace::memory_space,
+                          Kokkos::DefaultHostExecutionSpace::memory_space>) {
+        // the error message is checked with clang & gcc only
+        EXPECT_DEATH(field[subidx_range_x], R"rgx([Aa]ssert.*contains\(.*)rgx");
+    }
 #endif
 }
 

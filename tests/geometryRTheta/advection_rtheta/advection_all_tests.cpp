@@ -20,8 +20,8 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
@@ -29,13 +29,12 @@
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "polar_foot_finder.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_interpolator_2d.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -49,185 +48,151 @@ using CzarnyToCartMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CartToCircularMapping = CartesianToCircular<X, Y, R, Theta>;
 using CartToCzarnyMapping = CartesianToCzarny<X, Y, R, Theta>;
 using CircularToPseudoCartMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
-using DiscreteMappingBuilderHost = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorConstBound_host>;
+using DiscreteMappingBuilderHost
+        = DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst_host>;
 using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+        = DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineInterpolatorRThetaConst>;
 
 
 } // end namespace
+
+enum TimeStepperChoice { TS_EULER, TS_CRANK_NICOLSON, TS_RK3, TS_RK4 };
+
+template <TimeStepperChoice TSChoice>
+auto get_time_stepper_builder()
+{
+    if constexpr (TSChoice == TS_EULER) {
+        return EulerBuilder();
+    } else if constexpr (TSChoice == TS_CRANK_NICOLSON) {
+        return CrankNicolsonBuilder(20, 1e-12);
+    } else if constexpr (TSChoice == TS_RK3) {
+        return RK3Builder();
+    } else if constexpr (TSChoice == TS_RK4) {
+        return RK4Builder();
+    }
+}
+
+struct GeneralParameters
+{
+    IdxRangeRTheta grid;
+    SplineInterpolatorRTheta const& interpolator;
+    SplineInterpolatorRThetaConst const& advection_interpolator;
+    double final_time;
+    bool if_save_curves;
+    bool if_save_feet;
+};
+
+template <
+        TimeStepperChoice TSChoice,
+        class LogicalToPhysicalMappingHost,
+        class LogicalToPhysicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class AnalyticalPhysicalToLogicalMapping,
+        class AnalyticalLogicalToPhysicalMapping>
+void run_simulations_with_foot_finder_method(
+        double const dt,
+        GeneralParameters params,
+        LogicalToPhysicalMappingHost const& to_physical_mapping_host,
+        LogicalToPhysicalMapping const& to_physical_mapping,
+        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
+        AnalyticalPhysicalToLogicalMapping const& to_logical_mapping,
+        AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
+        std::string const& simulation_name,
+        std::string const& output_stem)
+{
+    constexpr FootFindingSpace FFSpace
+            = std::is_same_v<
+                      typename LogicalToPseudoPhysicalMapping::CoordResult,
+                      Coord<X_pC, Y_pC>>
+                      ? FootFindingSpace::PSEUDO_PHYSICAL
+                      : FootFindingSpace::PHYSICAL;
+    PolarFootFinder foot_finder = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
+            get_time_stepper_builder<TSChoice>(),
+            to_physical_mapping,
+            params.grid,
+            params.advection_interpolator);
+
+    BslAdvectionPolar advection_operator(params.interpolator, foot_finder, to_physical_mapping);
+
+    run_simulations(
+            to_physical_mapping_host,
+            to_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            params.grid,
+            foot_finder,
+            advection_operator,
+            params.final_time,
+            dt,
+            params.if_save_curves,
+            params.if_save_feet,
+            output_stem,
+            simulation_name);
+}
+
 template <
         class LogicalToPhysicalMappingHost,
         class LogicalToPhysicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class AnalyticalPhysicalToLogicalMapping,
         class AnalyticalLogicalToPhysicalMapping>
-struct SimulationParameters
-{
-public:
-    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
-
-public:
-    LogicalToPhysicalMappingHost const& to_physical_mapping_host;
-    LogicalToPhysicalMapping const& to_physical_mapping;
-    AnalyticalPhysicalToLogicalMapping const to_logical_mapping;
-    LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping;
-    AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping;
-    std::string mapping_name;
-    std::string domain_name;
-    SimulationParameters(
-            LogicalToPhysicalMappingHost const& map_host,
-            LogicalToPhysicalMapping const& map,
-            LogicalToPseudoPhysicalMapping const& pseudo_cart_map,
-            AnalyticalPhysicalToLogicalMapping const& rev_map,
-            AnalyticalLogicalToPhysicalMapping const& a_map,
-            std::string const& map_name,
-            std::string const& dom_name)
-        : to_physical_mapping_host(map_host)
-        , to_physical_mapping(map)
-        , to_logical_mapping(rev_map)
-        , analytical_to_pseudo_physical_mapping(pseudo_cart_map)
-        , analytical_to_physical_mapping(a_map)
-        , mapping_name(map_name)
-        , domain_name(dom_name)
-    {
-    }
-};
-
-template <class TimeStepper>
-struct NumericalMethodParameters
-{
-    TimeStepper time_stepper;
-    double time_step;
-    std::string method_name;
-    NumericalMethodParameters(TimeStepper&& time_stepper, double step, std::string const& name)
-        : time_stepper(std::move(time_stepper))
-        , time_step(step)
-        , method_name(name)
-    {
-    }
-};
-
-
-struct NumericalParams
-{
-    IdxRangeRTheta const grid;
-    double const dt;
-
-    NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {}
-    NumericalParams(NumericalParams&& params) = default;
-    NumericalParams(NumericalParams& params) = default;
-};
-
-
-template <class X_adv, class Y_adv>
-struct Numerics
-{
-private:
-    NumericalParams params;
-
-public:
-    using NumericalTuple = std::tuple<
-            NumericalMethodParameters<EulerBuilder>,
-            NumericalMethodParameters<CrankNicolsonBuilder>,
-            NumericalMethodParameters<RK3Builder>,
-            NumericalMethodParameters<RK4Builder>>;
-
-    static constexpr int size_tuple = std::tuple_size<NumericalTuple> {};
-
-    NumericalTuple numerics;
-
-    explicit Numerics(NumericalParams m_params)
-        : params(m_params)
-        , numerics(std::make_tuple(
-                  NumericalMethodParameters(EulerBuilder(), params.dt * 0.1, "EULER"),
-                  NumericalMethodParameters(
-                          CrankNicolsonBuilder(20, 1e-12),
-                          params.dt,
-                          "CRANK NICOLSON"),
-                  NumericalMethodParameters(RK3Builder(), params.dt, "RK3"),
-                  NumericalMethodParameters(RK4Builder(), params.dt, "RK4")))
-    {
-    }
-};
-
-
-
-struct GeneralParameters
-{
-    IdxRangeRTheta grid;
-    PreallocatableSplineInterpolator2D<
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorNullBound,
-            IdxRangeRTheta> const& interpolator;
-    SplineRThetaBuilder const& advection_builder;
-    SplineRThetaEvaluatorConstBound& advection_evaluator;
-    double final_time;
-    bool if_save_curves;
-    bool if_save_feet;
-};
-
-template <int i_map = 0, int i_feet = 0, class SimulationTuple>
 void run_simulations_with_methods(
-        SimulationTuple const& simulations,
-        NumericalParams& num_params,
-        GeneralParameters params)
+        double const dt,
+        GeneralParameters params,
+        LogicalToPhysicalMappingHost const& to_physical_mapping_host,
+        LogicalToPhysicalMapping const& to_physical_mapping,
+        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
+        AnalyticalPhysicalToLogicalMapping const& to_logical_mapping,
+        AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
+        std::string const& mapping_name,
+        std::string const& domain_name)
 {
-    auto& sim = std::get<i_map>(simulations);
+    std::string simulation_name = mapping_name + " MAPPING - " + domain_name + " DOMAIN -";
+    std::string output_stem = to_lower(mapping_name) + "_" + to_lower(domain_name) + "-";
 
-    using X_adv = typename std::remove_const_t<std::remove_reference_t<decltype(sim)>>::X_adv;
-    using Y_adv = typename std::remove_const_t<std::remove_reference_t<decltype(sim)>>::Y_adv;
+    run_simulations_with_foot_finder_method<TS_EULER>(
+            dt * 0.1,
+            params,
+            to_physical_mapping_host,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            simulation_name + "EULER - ",
+            output_stem + "euler-");
 
-    Numerics<X_adv, Y_adv> methods(num_params);
-    auto& num = std::get<i_feet>(methods.numerics);
+    run_simulations_with_foot_finder_method<TS_CRANK_NICOLSON>(
+            dt,
+            params,
+            to_physical_mapping_host,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            simulation_name + "CRANK NICOLSON - ",
+            output_stem + "crank nicolson-");
 
-    std::ostringstream name_stream;
-    name_stream << sim.mapping_name << " MAPPING - " << sim.domain_name << " DOMAIN - "
-                << num.method_name << " - ";
-    std::string simulation_name = name_stream.str();
+    run_simulations_with_foot_finder_method<TS_RK3>(
+            dt,
+            params,
+            to_physical_mapping_host,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            simulation_name + "RK3 - ",
+            output_stem + "rk3-");
 
-    std::ostringstream output_stream;
-    output_stream << to_lower(sim.mapping_name) << "_" << to_lower(sim.domain_name) << "-"
-                  << to_lower(num.method_name) << "-";
-    std::string output_stem = output_stream.str();
-
-    SplinePolarFootFinder const foot_finder(
-            params.grid,
-            num.time_stepper,
-            sim.to_physical_mapping,
-            sim.analytical_to_pseudo_physical_mapping,
-            params.advection_builder,
-            params.advection_evaluator);
-
-    BslAdvectionPolar advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
-
-    run_simulations(
-            sim.to_physical_mapping_host,
-            sim.to_physical_mapping,
-            sim.to_logical_mapping,
-            sim.analytical_to_pseudo_physical_mapping,
-            sim.analytical_to_physical_mapping,
-            params.grid,
-            foot_finder,
-            advection_operator,
-            params.final_time,
-            num.time_step,
-            params.if_save_curves,
-            params.if_save_feet,
-            output_stem,
-            simulation_name);
-
-    if constexpr (i_feet < methods.size_tuple - 1) {
-        // Loop over numerical methods
-        run_simulations_with_methods<i_map, i_feet + 1>(simulations, num_params, params);
-    } else if constexpr (i_map < std::tuple_size<SimulationTuple> {} - 1) {
-        // Loop over simulation parameters
-        run_simulations_with_methods<i_map + 1, 0>(simulations, num_params, params);
-    }
+    run_simulations_with_foot_finder_method<TS_RK4>(
+            dt,
+            params,
+            to_physical_mapping_host,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            simulation_name + "RK4 - ",
+            output_stem + "rk4-");
 }
 
 int main(int argc, char** argv)
@@ -291,39 +256,10 @@ int main(int argc, char** argv)
 
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
-    // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder_host const builder_host(grid);
-    SplineRThetaBuilder const builder(grid);
-
-    // --- Evaluator for the test function:
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
-
-    // --- Evaluator for the test advection field:
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
-
-
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
-
+    // --- Interpolator for the test function:
+    SplineInterpolatorRTheta spline_interpolator(grid);
+    SplineInterpolatorRThetaConst spline_interpolator_const(grid);
+    SplineInterpolatorRThetaConst_host spline_interpolator_const_host(grid);
 
     // SET THE DIFFERENT PARAMETERS OF THE TESTS ------------------------------------------------
     // Offset the centre of the circle to ensure that this is correctly handled
@@ -337,52 +273,14 @@ int main(int argc, char** argv)
     DiscreteMappingBuilderHost const discrete_czarny_map_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
             from_czarny_map,
-            builder_host,
-            spline_evaluator_extrapol_host);
-    DiscreteToCartesian const from_discrete_czarny_map_host = discrete_czarny_map_builder_host();
+            spline_interpolator_const_host);
+    DiscretePoloidalCSSplineMapping const from_discrete_czarny_map_host
+            = discrete_czarny_map_builder_host();
     DiscreteMappingBuilder const discrete_czarny_map_builder(
             Kokkos::DefaultExecutionSpace(),
             from_czarny_map,
-            builder,
-            spline_evaluator_extrapol);
-    DiscreteToCartesian const from_discrete_czarny_map = discrete_czarny_map_builder();
-
-    std::tuple simulations = std::make_tuple(
-            SimulationParameters(
-                    from_circ_map,
-                    from_circ_map,
-                    from_circ_map,
-                    to_circ_map,
-                    from_circ_map,
-                    "CIRCULAR",
-                    "PHYSICAL"),
-            SimulationParameters(
-                    from_czarny_map,
-                    from_czarny_map,
-                    from_czarny_map,
-                    to_czarny_map,
-                    from_czarny_map,
-                    "CZARNY",
-                    "PHYSICAL"),
-            SimulationParameters(
-                    from_czarny_map,
-                    from_czarny_map,
-                    to_pseudo_circ_map,
-                    to_czarny_map,
-                    from_czarny_map,
-                    "CZARNY",
-                    "PSEUDO CARTESIAN"),
-            SimulationParameters(
-                    from_discrete_czarny_map_host,
-                    from_discrete_czarny_map,
-                    to_pseudo_circ_map,
-                    to_czarny_map,
-                    from_czarny_map,
-                    "DISCRETE",
-                    "PSEUDO CARTESIAN"));
-
-
-    NumericalParams num_params = {grid, dt};
+            spline_interpolator_const);
+    DiscretePoloidalCSSplineMapping const from_discrete_czarny_map = discrete_czarny_map_builder();
 
 
     // TO CLOCK THE SIMULATION --------------------------------------------------------------
@@ -396,13 +294,52 @@ int main(int argc, char** argv)
 
     GeneralParameters params
             = {grid,
-               interpolator,
-               builder,
-               spline_evaluator_extrapol,
+               spline_interpolator,
+               spline_interpolator_const,
                final_time,
                if_save_curves,
                if_save_feet};
-    run_simulations_with_methods(simulations, num_params, params);
+
+    run_simulations_with_methods(
+            dt,
+            params,
+            from_circ_map,
+            from_circ_map,
+            from_circ_map,
+            to_circ_map,
+            from_circ_map,
+            "CIRCULAR",
+            "PHYSICAL");
+    run_simulations_with_methods(
+            dt,
+            params,
+            from_czarny_map,
+            from_czarny_map,
+            from_czarny_map,
+            to_czarny_map,
+            from_czarny_map,
+            "CZARNY",
+            "PHYSICAL");
+    run_simulations_with_methods(
+            dt,
+            params,
+            from_czarny_map,
+            from_czarny_map,
+            to_pseudo_circ_map,
+            to_czarny_map,
+            from_czarny_map,
+            "CZARNY",
+            "PSEUDO CARTESIAN");
+    run_simulations_with_methods(
+            dt,
+            params,
+            from_discrete_czarny_map_host,
+            from_discrete_czarny_map,
+            to_pseudo_circ_map,
+            to_czarny_map,
+            from_czarny_map,
+            "DISCRETE",
+            "PSEUDO CARTESIAN");
 
     end_full_simulation = std::chrono::system_clock::now();
     display_time(start_full_simulation, end_full_simulation, "   Full simulation time:    ");

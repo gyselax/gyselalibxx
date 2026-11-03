@@ -9,10 +9,10 @@ add_executable(unit_tests_common
 target_link_libraries(unit_tests_common
     PUBLIC
         GTest::gmock
-        gslx::speciesinfo
+        gyselalibxx::speciesinfo
 )
 
-gtest_discover_tests(unit_tests_common DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 10)
+gtest_discover_tests(unit_tests_common DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 
 add_subdirectory(advection)
 add_subdirectory(coord_transformations)

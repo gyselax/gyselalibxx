@@ -8,7 +8,6 @@
 
 #include "ddc_aliases.hpp"
 #include "deriv_details.hpp"
-#include "idx_range_slice.hpp"
 #include "type_seq_tools.hpp"
 
 template <class T>
@@ -155,7 +154,8 @@ protected:
     discrete_deriv_idx_range_type m_deriv_idx_range;
 
     /// @brief The physical index ranges on which the derivatives are defined.
-    to_subidx_range_collection<physical_deriv_grids> m_cross_derivative_idx_range;
+    ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
+            m_cross_derivative_idx_range;
 
 protected:
     /**
@@ -317,12 +317,12 @@ protected:
      * If information about a derivative is missing then it is assumed that the 0-th order derivative
      * is requested.
      *
-     * @param idx_range The index range used to slice the mdspan.
+     * @param idx_range_to_slice The index range used to slice the mdspan.
      *
      * @returns Field The subset of the internal mdspan.
      */
     template <class... ODims>
-    KOKKOS_FUNCTION auto get_internal_field(IdxRange<ODims...> idx_range) const
+    KOKKOS_FUNCTION auto get_internal_field(IdxRange<ODims...> idx_range_to_slice) const
     {
         // Get the types related to the provided information
         using provided_tags = ddc::detail::TypeSeq<ODims...>;
@@ -336,11 +336,11 @@ protected:
         // Find the index range of the derivatives (either provided or an index range containing only the 0-th derivative)
         remaining_deriv_idx_range_type no_deriv_idx_range = detail::get_idx_range_from_element(
                 detail::no_derivative_element<remaining_deriv_tags>());
-        discrete_deriv_idx_range_type deriv_idx_range(idx_range, no_deriv_idx_range);
+        discrete_deriv_idx_range_type deriv_idx_range(idx_range_to_slice, no_deriv_idx_range);
 
         // Find the physical index range of the field
         physical_idx_range_type local_physical_idx_range(
-                detail::select_default(idx_range, m_physical_idx_range));
+                detail::select_default(idx_range_to_slice, m_physical_idx_range));
 
         // Find the discrete index range of the field
         index_range_type full_idx_range(local_physical_idx_range, deriv_idx_range);
@@ -382,6 +382,9 @@ protected:
     template <class... ODims>
     KOKKOS_FUNCTION auto get_internal_field(Idx<ODims...> elem) const
     {
+        using AllValidDims = ddc::detail::TypeSeq<DDims...>;
+        static_assert(((ddc::in_tags_v<ODims, AllValidDims>)&&...));
+
         // Get the types related to the provided information
         using provided_tags = ddc::detail::TypeSeq<ODims...>;
         using provided_deriv_tags = detail::deriv_sub_set_t<provided_tags>;
@@ -448,7 +451,8 @@ protected:
     KOKKOS_FUNCTION DerivFieldCommon(
             physical_idx_range_type physical_idx_range,
             discrete_deriv_idx_range_type deriv_idx_range,
-            to_subidx_range_collection<physical_deriv_grids> cross_derivative_idx_range)
+            ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
+                    cross_derivative_idx_range)
         : m_physical_idx_range(physical_idx_range)
         , m_deriv_idx_range(deriv_idx_range)
         , m_cross_derivative_idx_range(cross_derivative_idx_range)
@@ -456,6 +460,17 @@ protected:
     }
 
 public:
+    /** Constructs a new DerivFieldCommon by copy, yields a new view to the same data.
+     * @param other the DerivFieldCommon to copy.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(DerivFieldCommon const& other) = default;
+
+    /** Constructs a new DerivFieldCommon by move.
+     * @param other the DerivFieldCommon to move.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(
+            DerivFieldCommon&& other) noexcept = default;
+
     KOKKOS_DEFAULTED_FUNCTION ~DerivFieldCommon() = default;
 
     /**
@@ -531,7 +546,7 @@ public:
     auto get_values_const_field() const
     {
         IdxRange<> no_specified_dims;
-        return get_internal_field(no_specified_dims).span_cview();
+        return get_const_field(get_internal_field(no_specified_dims));
     }
 
     /**
