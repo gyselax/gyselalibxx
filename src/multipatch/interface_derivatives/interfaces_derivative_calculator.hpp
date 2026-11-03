@@ -431,7 +431,7 @@ private:
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
         // The Patch with the idx_to_slice value corresponding to the given value_idx_to_slice.
         using PatchIndexSlice
-                = std::conditional_t<patch_order_matches_interfaces<I>, patch1<I>, patch2<I>>;
+                = std::conditional_t<patch_order_matches_interfaces, patch1<I>, patch2<I>>;
 
         IdxRange<grid_par1<I>> const idx_range_parall_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_par2<I>> const idx_range_parall_2(m_idx_ranges.template get<patch2<I>>());
