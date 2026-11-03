@@ -76,7 +76,7 @@ inline constexpr auto get(VectorFieldType& field) noexcept
  * @tparam DDims The tags describing the dimensions which make up the elements of the vector.
  */
 template <class FieldType, class... DDims>
-class VectorFieldCommon<FieldType, ddc::detail::TypeSeq<DDims...>>
+class VectorFieldCommon<FieldType, ddc::TypeSeq<DDims...>>
 {
     static_assert(ddc::is_chunk_v<FieldType>);
     using data_type = typename FieldType::element_type;
@@ -99,7 +99,7 @@ public:
     using element_ref_type = Vector<data_type&, DDims...>;
 
     /// @brief The tags describing the dimensions which make up the elements of the vector.
-    using NDTypeTag = ddc::detail::TypeSeq<DDims...>;
+    using NDTypeTag = ddc::TypeSeq<DDims...>;
 
     /// @brief The type of a modifiable span of one of these field. This is a DDC keyword used to make this class interchangeable with Field.
     using chunk_span_type = typename FieldType::span_type;

@@ -51,7 +51,7 @@ constexpr bool is_extrapolation_rule_auto_constructible_v
 /// @brief Resolve Rule (either a self-describing tag or a concrete extrapolation rule
 /// class) to the concrete extrapolation rule class to use for a given Basis/DataType.
 template <class Rule, class DataType, class Basis, class IdxRangeCoeff>
-using extrapolation_rule_t = ddc::detail::TypeSeq<
+using extrapolation_rule_t = ddc::TypeSeq<
         typename details::ExtrapolationRuleResolver<
                 ddc::type_seq_element_t<0, Rule>,
                 DataType,

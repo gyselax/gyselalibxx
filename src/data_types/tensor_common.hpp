@@ -41,7 +41,7 @@ class TensorCommon
 
 public:
     /// The TensorIndexSet describing the possible indices.
-    using index_set = ddc::detail::TypeSeq<ValidIndexSet...>;
+    using index_set = ddc::TypeSeq<ValidIndexSet...>;
 
 protected:
     /// The number of elements in the mdspan
@@ -264,9 +264,9 @@ KOKKOS_INLINE_FUNCTION void assign_elements_from_subset(
         TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input,
         std::index_sequence<InternalIdx...>)
 {
-    using InputTensorIndexSet = ddc::detail::TypeSeq<InputValidIndexSet...>;
+    using InputTensorIndexSet = ddc::TypeSeq<InputValidIndexSet...>;
     ((tensor_to_fill.template get<tensor_tools::to_tensor_index_element_t<
-              ddc::detail::TypeSeq<OutputValidIndexSet...>,
+              ddc::TypeSeq<OutputValidIndexSet...>,
               typename tensor_tools::get_nth_tensor_index_element_t<
                       InternalIdx,
                       InputTensorIndexSet>::IdxTypeSeq>>()
@@ -286,9 +286,9 @@ KOKKOS_INLINE_FUNCTION void assign_elements_to_subset(
         TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input,
         std::index_sequence<InternalIdx...>)
 {
-    using OutputTensorIndexSet = ddc::detail::TypeSeq<OutputValidIndexSet...>;
+    using OutputTensorIndexSet = ddc::TypeSeq<OutputValidIndexSet...>;
     ((tensor_to_fill.template get<tensor_tools::to_tensor_index_element_t<
-              ddc::detail::TypeSeq<OutputValidIndexSet...>,
+              ddc::TypeSeq<OutputValidIndexSet...>,
               typename tensor_tools::get_nth_tensor_index_element_t<
                       InternalIdx,
                       OutputTensorIndexSet>::IdxTypeSeq>>()
@@ -310,9 +310,8 @@ template <class... QueryIndexTag, class storage_type, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION typename storage_type::element_type& get(
         TensorCommon<storage_type, ValidIndexSet...>& tensor)
 {
-    return tensor.template get<tensor_tools::TensorIndexElement<
-            ddc::detail::TypeSeq<ValidIndexSet...>,
-            QueryIndexTag...>>();
+    return tensor.template get<
+            tensor_tools::TensorIndexElement<ddc::TypeSeq<ValidIndexSet...>, QueryIndexTag...>>();
 }
 
 /**
@@ -325,9 +324,8 @@ template <class... QueryIndexTag, class storage_type, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION typename storage_type::element_type const& get(
         TensorCommon<storage_type, ValidIndexSet...> const& tensor)
 {
-    return tensor.template get<tensor_tools::TensorIndexElement<
-            ddc::detail::TypeSeq<ValidIndexSet...>,
-            QueryIndexTag...>>();
+    return tensor.template get<
+            tensor_tools::TensorIndexElement<ddc::TypeSeq<ValidIndexSet...>, QueryIndexTag...>>();
 }
 
 /**
@@ -339,7 +337,7 @@ KOKKOS_INLINE_FUNCTION typename storage_type::element_type const& get(
  */
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     return Coord<Dims...>(get<Dims>(tensor)...);
 }
@@ -393,7 +391,7 @@ KOKKOS_INLINE_FUNCTION void assign_elements(
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
         Coord<Dims...> const& coord,
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     static_assert(std::is_same_v<typename storage_type::element_type, double>);
     return Coord<Dims...>((ddc::get<Dims>(coord) + ddcHelper::get<Dims>(tensor))...);
@@ -410,7 +408,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
         Coord<Dims...> const& coord,
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     static_assert(std::is_same_v<typename storage_type::element_type, double>);
     return Coord<Dims...>((ddc::get<Dims>(coord) - ddcHelper::get<Dims>(tensor))...);
@@ -427,7 +425,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
         Coord<Dims...>& coord,
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     static_assert(std::is_same_v<typename storage_type::element_type, double>);
     ((ddc::get<Dims>(coord) += ddcHelper::get<Dims>(tensor)), ...);
@@ -445,7 +443,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
         Coord<Dims...>& coord,
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     static_assert(std::is_same_v<typename storage_type::element_type, double>);
     ((ddc::get<Dims>(coord) -= ddcHelper::get<Dims>(tensor)), ...);

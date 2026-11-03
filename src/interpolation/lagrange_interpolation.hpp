@@ -28,7 +28,7 @@ namespace detail {
  * @tparam ExecSpace     The Kokkos execution space used for computations.
  * @tparam Basis         The Lagrange basis type (uniform or non-uniform).
  * @tparam InterpGrid    The discrete grid on which function values are provided.
- * @tparam ExtrapRules   A ddc::detail::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> pairing the
+ * @tparam ExtrapRules   A ddc::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> pairing the
  *                       extrapolation rules applied below/above the boundary. Where
  *                       MinExtrapolationRule and MaxExtrapolationRule are extrapolation rule classes.
  * @tparam DataType      The floating-point type of the function values (default: double).
@@ -191,10 +191,10 @@ public:
  *                       IdxRange<Basis1, ..., BasisN>, one per interpolation dimension.
  * @tparam IdxRangeInterpGrid The ND index range for the interpolation mesh, of the form
  *                       IdxRange<Grid1, ..., GridN>, in the same order as IdxRangeBasis.
- * @tparam ExtrapRulesSeq A ddc::detail::TypeSeq<ExtrapRules1, ..., ExtrapRulesN> pairing,
+ * @tparam ExtrapRulesSeq A ddc::TypeSeq<ExtrapRules1, ..., ExtrapRulesN> pairing,
  *                       for each dimension, the extrapolation rules applied below/above
  *                       the boundary (each ExtrapRulesI is itself a
- *                       ddc::detail::TypeSeq<MinExtrapolationRuleI, MaxExtrapolationRuleI>).
+ *                       ddc::TypeSeq<MinExtrapolationRuleI, MaxExtrapolationRuleI>).
  * @tparam DataType      The floating-point type of the function values (default: double).
  */
 template <
@@ -211,7 +211,7 @@ class NDLagrangeInterpolator<
         ExecSpace,
         IdxRange<Basis...>,
         IdxRange<Grid1D...>,
-        ddc::detail::TypeSeq<ExtrapRules...>,
+        ddc::TypeSeq<ExtrapRules...>,
         DataType>
 {
     static_assert(sizeof...(Basis) == sizeof...(Grid1D));
@@ -252,7 +252,7 @@ public:
 private:
     template <class B>
     using CoeffGrid = ddc::type_seq_element_t<
-            ddc::type_seq_rank_v<B, ddc::detail::TypeSeq<Basis...>>,
+            ddc::type_seq_rank_v<B, ddc::TypeSeq<Basis...>>,
             ddc::to_type_seq_t<typename BuilderType::coeff_idx_range_type>>;
 
     static_assert(
@@ -383,9 +383,9 @@ public:
  * @brief A helper alias to define an instance of detail::NDLagrangeInterpolator.
  *
  * The helper allows ExtrapRulesSeq to be more general. It is a
- * ddc::detail::TypeSeq<ExtrapRules1, ..., ExtrapRulesN> pairing, for each dimension, the
+ * ddc::TypeSeq<ExtrapRules1, ..., ExtrapRulesN> pairing, for each dimension, the
  * extrapolation rules applied below/above the boundary. Each ExtrapRulesI is itself a
- * ddc::detail::TypeSeq<MinExtrapolationRuleI, MaxExtrapolationRuleI> where each rule may
+ * ddc::TypeSeq<MinExtrapolationRuleI, MaxExtrapolationRuleI> where each rule may
  * be one of the tags in the ExtrapolationRule namespace (e.g. ExtrapolationRule::Periodic)
  * or a custom, already-concrete extrapolation rule class.
  */
@@ -443,7 +443,7 @@ struct LagrangeInterpolatorResolver<
             ExecSpace,
             IdxRange<BasisHead, Basis...>,
             IdxRange<Grid1DHead, Grid1D...>,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<
                     extrapolation_rule_t<
                             ExtrapRulesHead,
                             DataType,
@@ -472,7 +472,7 @@ struct LagrangeInterpolatorResolver<
  * @brief A helper alias to define an instance of detail::LagrangeInterpolator.
  *
  * The helper allows ExtrapRules to be more general. It is a
- * ddc::detail::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> pairing the
+ * ddc::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> pairing the
  * extrapolation rules applied below/above the boundary. Each may
  * be one of the tags in the ExtrapolationRule namespace (e.g.
  * ExtrapolationRule::Periodic) or a custom, already-concrete
