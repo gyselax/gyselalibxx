@@ -7,6 +7,7 @@ add_executable(unit_tests_pde_solvers
     fftpoissonsolver.cpp
     femperiodicpoissonsolver.cpp
     femnonperiodicpoissonsolver.cpp
+    tensor_product_bspline_poisson_assembler.cpp
     ../main.cpp
 )
 target_link_libraries(unit_tests_pde_solvers
