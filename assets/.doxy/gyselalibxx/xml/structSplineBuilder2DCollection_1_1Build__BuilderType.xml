@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
-  <compounddef id="structMultipatchSplineBuilder2D_1_1Build__BuilderType" kind="struct" language="C++" prot="private">
-    <compoundname>MultipatchSplineBuilder2D::Build_BuilderType</compoundname>
+  <compounddef id="structSplineBuilder2DCollection_1_1Build__BuilderType" kind="struct" language="C++" prot="private">
+    <compoundname>SplineBuilder2DCollection::Build_BuilderType</compoundname>
     <templateparamlist>
       <param>
         <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>

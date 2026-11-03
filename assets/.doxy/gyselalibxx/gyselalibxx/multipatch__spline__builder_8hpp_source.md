@@ -36,7 +36,7 @@ template <
         template <typename P>
         typename ValuesOnPatch,
         class... Patches>
-class MultipatchSplineBuilder
+class SplineBuilderCollection
 {
     static_assert(
             (((ddc::is_uniform_bsplines_v<BSplineOnPatch<Patches>>)
@@ -112,11 +112,11 @@ private:
     }
 
 public:
-    explicit MultipatchSplineBuilder(BuilderOnPatch<Patches> const&... builders)
+    explicit SplineBuilderCollection(BuilderOnPatch<Patches> const&... builders)
         : m_builders(std::tie(builders...)) {};
 
 
-    ~MultipatchSplineBuilder() = default;
+    ~SplineBuilderCollection() = default;
 
     void operator()(
             MultipatchSplineCoeffs splines,

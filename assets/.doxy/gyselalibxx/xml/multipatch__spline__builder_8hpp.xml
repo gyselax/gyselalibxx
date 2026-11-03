@@ -266,8 +266,8 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classMultipatchSplineBuilder" prot="public">MultipatchSplineBuilder</innerclass>
-    <innerclass refid="structMultipatchSplineBuilder_1_1Build__BuilderType" prot="private">MultipatchSplineBuilder::Build_BuilderType</innerclass>
+    <innerclass refid="classSplineBuilderCollection" prot="public">SplineBuilderCollection</innerclass>
+    <innerclass refid="structSplineBuilderCollection_1_1Build__BuilderType" prot="private">SplineBuilderCollection::Build_BuilderType</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -301,7 +301,7 @@
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ValuesOnPatch,</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
-<codeline lineno="55" refid="classMultipatchSplineBuilder" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMultipatchSplineBuilder_1a81b6f9bb750fb4d781552395e730858f" kindref="member">MultipatchSplineBuilder</ref></highlight></codeline>
+<codeline lineno="55" refid="classSplineBuilderCollection" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplineBuilderCollection_1aed8b9d5690a1b0d6184f249093b360e8" kindref="member">SplineBuilderCollection</ref></highlight></codeline>
 <codeline lineno="56"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(((ddc::is_uniform_bsplines_v&lt;BSplineOnPatch&lt;Patches&gt;&gt;)</highlight></codeline>
@@ -377,13 +377,13 @@
 <codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"></highlight></codeline>
 <codeline lineno="140"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="150" refid="classMultipatchSplineBuilder_1a81b6f9bb750fb4d781552395e730858f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classMultipatchSplineBuilder_1a81b6f9bb750fb4d781552395e730858f" kindref="member">MultipatchSplineBuilder</ref>(BuilderOnPatch&lt;Patches&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>builders)</highlight></codeline>
+<codeline lineno="150" refid="classSplineBuilderCollection_1aed8b9d5690a1b0d6184f249093b360e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderCollection_1aed8b9d5690a1b0d6184f249093b360e8" kindref="member">SplineBuilderCollection</ref>(BuilderOnPatch&lt;Patches&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>builders)</highlight></codeline>
 <codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_builders(std::tie(builders...))<sp/>{};</highlight></codeline>
 <codeline lineno="152"><highlight class="normal"></highlight></codeline>
 <codeline lineno="153"><highlight class="normal"></highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMultipatchSplineBuilder" kindref="compound">~MultipatchSplineBuilder</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineBuilderCollection" kindref="compound">~SplineBuilderCollection</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"></highlight></codeline>
-<codeline lineno="164" refid="classMultipatchSplineBuilder_1ab28e56d1540fb221583a1fd7a47711d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classMultipatchSplineBuilder_1ab28e56d1540fb221583a1fd7a47711d8" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="164" refid="classSplineBuilderCollection_1a883403d5d0125783e14f6bdfbe216ce5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSplineBuilderCollection_1a883403d5d0125783e14f6bdfbe216ce5" kindref="member">operator()</ref>(</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MultipatchSplineCoeffs<sp/>splines,</highlight></codeline>
 <codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MultipatchValues<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>values,</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;MultipatchDerivs&gt;<sp/>derivs_xmin<sp/>=<sp/>std::nullopt,</highlight></codeline>

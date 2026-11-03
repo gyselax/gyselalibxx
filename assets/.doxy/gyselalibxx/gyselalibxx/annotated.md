@@ -173,11 +173,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting on an MPI distributed mesh._     
 * **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_ \(\mu\) _._    
 * **class** [**MultipatchConnectivity**](classMultipatchConnectivity.md) _A helper class which provides functionalities to recognise how different patches are connected._     
-* **class** [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md) _A class to call all the builders of all the patches once._     
-* **class** [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md) _A class to call all the builders of all the patches once._     
-* **struct** [**Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md) 
-* **struct** [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md)     
-* **struct** [**Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md)     
 * **class** [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) _A class to evaluate all the splines of all the patches at once._     
 * **class** [**NDIdentityInterpolationBuilder**](classNDIdentityInterpolationBuilder.md) _An ND builder that copies function values directly as interpolation coefficients._ 
 * **class** [**NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md) _The implementation of_ [_**NDIdentityInterpolationBuilder**_](classNDIdentityInterpolationBuilder.md) _. This is separate to allow a variadic Basis._    
@@ -242,6 +237,11 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **namespace** [**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md) _Predefined_ [_**SplineBoundaryClosures**_](structSplineBoundaryClosures.md) _for the common case where the same closure applies at both boundaries._    
 * **struct** [**SplineBoundaryClosures**](structSplineBoundaryClosures.md) _Groups the lower (min) and upper (max) ddc::SplineBuilderClosure of a spline builder into a single non-type template argument._     
 * **class** [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) _A class that stores spline builder coefficients and recomputes them when required._     
+* **class** [**SplineBuilder2DCollection**](classSplineBuilder2DCollection.md) _A class to call all the builders of all the patches once._     
+* **struct** [**Build\_BuilderType**](structSplineBuilder2DCollection_1_1Build__BuilderType.md) 
+* **struct** [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc.md)     
+* **class** [**SplineBuilderCollection**](classSplineBuilderCollection.md) _A class to call all the builders of all the patches once._     
+* **struct** [**Build\_BuilderType**](structSplineBuilderCollection_1_1Build__BuilderType.md)     
 * **class** [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md) _[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md) _._    
 * **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._    
 * **class** [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md) _A class that solves a Boltzmann equation using Strang's splitting._     

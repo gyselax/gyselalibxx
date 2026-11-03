@@ -29,11 +29,11 @@
 * [**BSplinesTheta**](structBSplinesTheta.md)
 * [**BSplinesThetaRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined.md)
 ([**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md))
-* [**Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md)
-* [**Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md)
 * [**Build\_BuilderType**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType.md)
+* [**Build\_BuilderType**](structSplineBuilder2DCollection_1_1Build__BuilderType.md)
+* [**Build\_BuilderType**](structSplineBuilderCollection_1_1Build__BuilderType.md)
 * [**Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a.md)
-* [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md)
+* [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc.md)
 * [**BumpontailEquilibrium**](classBumpontailEquilibrium.md)
 
 
@@ -388,8 +388,6 @@
 * [**MPITransposeAllToAll**](classMPITransposeAllToAll.md)
 * [**Mu**](structMu.md)
 * [**MultipatchConnectivity**](classMultipatchConnectivity.md)
-* [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md)
-* [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md)
 * [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md)
 
 
@@ -488,6 +486,8 @@
 * [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md)
 * [**SplineBoundaryClosures**](structSplineBoundaryClosures.md)
 * [**SplineBuilder2DCache**](classSplineBuilder2DCache.md)
+* [**SplineBuilder2DCollection**](classSplineBuilder2DCollection.md)
+* [**SplineBuilderCollection**](classSplineBuilderCollection.md)
 * [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md)
 * [**SplinePolarFootFinder**](classSplinePolarFootFinder.md)
 * [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md)

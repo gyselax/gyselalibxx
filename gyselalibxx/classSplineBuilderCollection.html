@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Class MultipatchSplineBuilder - GyselalibX</title>
+    <title>Class SplineBuilderCollection - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Class MultipatchSplineBuilder";
-        var mkdocs_page_input_path = "gyselalibxx/classMultipatchSplineBuilder.md";
+        var mkdocs_page_name = "Class SplineBuilderCollection";
+        var mkdocs_page_input_path = "gyselalibxx/classSplineBuilderCollection.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -559,9 +559,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Class MultipatchSplineBuilder</li>
+      <li class="breadcrumb-item active">Class SplineBuilderCollection</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classMultipatchSplineBuilder.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classSplineBuilderCollection.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -569,9 +569,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="class-multipatchsplinebuilder">Class MultipatchSplineBuilder</h1>
+                <div><h1 id="class-splinebuildercollection">Class SplineBuilderCollection</h1>
 <p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSplineOnPatch, template&lt; typename P &gt; typename GridOnPatch, ddc::SplineBuilderClosure SBCLower, ddc::SplineBuilderClosure SBCUpper, ddc::SplineBuilderClosure BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classMultipatchSplineBuilder.html"><strong>MultipatchSplineBuilder</strong></a></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSplineBuilderCollection.html"><strong>SplineBuilderCollection</strong></a></p>
 <p><em>A class to call all the builders of all the patches once.</em> <a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;multipatch_spline_builder.hpp&gt;</code></li>
@@ -587,7 +587,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-multipatchsplinebuilder"><strong>MultipatchSplineBuilder</strong></a> (BuilderOnPatch&lt; Patches &gt; const &amp;... builders) <br><em>Instantiate the</em> <a href="classMultipatchSplineBuilder.html"><em><strong>MultipatchSplineBuilder</strong></em></a> <em>from a std::tuple of all the builder on each patch.</em></td>
+<td style="text-align: left;"><a href="#function-splinebuildercollection"><strong>SplineBuilderCollection</strong></a> (BuilderOnPatch&lt; Patches &gt; const &amp;... builders) <br><em>Instantiate the</em> <a href="classSplineBuilderCollection.html"><em><strong>SplineBuilderCollection</strong></em></a> <em>from a std::tuple of all the builder on each patch.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -595,7 +595,7 @@
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-multipatchsplinebuilder"><strong>~MultipatchSplineBuilder</strong></a> () = default<br></td>
+<td style="text-align: left;"><a href="#function-splinebuildercollection"><strong>~SplineBuilderCollection</strong></a> () = default<br></td>
 </tr>
 </tbody>
 </table>
@@ -616,9 +616,9 @@
 <li><code>ValuesOnPatch</code> A type alias which provides the field type which will be used to pass the values of the function at the interpolation points. The index range of this field type should contain any batch dimensions. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-multipatchsplinebuilder">function MultipatchSplineBuilder</h3>
-<p><em>Instantiate the</em> <a href="classMultipatchSplineBuilder.html"><em><strong>MultipatchSplineBuilder</strong></em></a> <em>from a std::tuple of all the builder on each patch.</em></p>
-<pre><code class="language-C++">inline explicit MultipatchSplineBuilder::MultipatchSplineBuilder (
+<h3 id="function-splinebuildercollection">function SplineBuilderCollection</h3>
+<p><em>Instantiate the</em> <a href="classSplineBuilderCollection.html"><em><strong>SplineBuilderCollection</strong></em></a> <em>from a std::tuple of all the builder on each patch.</em></p>
+<pre><code class="language-C++">inline explicit SplineBuilderCollection::SplineBuilderCollection (
     BuilderOnPatch&lt; Patches &gt; const &amp;... builders
 ) 
 </code></pre>
@@ -632,7 +632,7 @@
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Build the spline representation of each given function.</em> </p>
-<pre><code class="language-C++">inline void MultipatchSplineBuilder::operator() (
+<pre><code class="language-C++">inline void SplineBuilderCollection::operator() (
     MultipatchSplineCoeffs splines,
     MultipatchValues const &amp; values,
     std::optional&lt; MultipatchDerivs &gt; derivs_xmin=std::nullopt,
@@ -648,8 +648,8 @@
 </ul>
 <hr>
 
-<h3 id="function-multipatchsplinebuilder_1">function ~MultipatchSplineBuilder</h3>
-<pre><code class="language-C++">MultipatchSplineBuilder::~MultipatchSplineBuilder () = default
+<h3 id="function-splinebuildercollection_1">function ~SplineBuilderCollection</h3>
+<pre><code class="language-C++">SplineBuilderCollection::~SplineBuilderCollection () = default
 </code></pre>
 <hr>
 

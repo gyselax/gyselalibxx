@@ -252,7 +252,6 @@
 * **m\_advec\_x** ([**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md), [**SplitVlasovSolver**](classSplitVlasovSolver.md))
 * **m\_advec\_y** ([**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md), [**SplitVlasovSolver**](classSplitVlasovSolver.md))
 * **m\_transpose** ([**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md))
-* **m\_builders** ([**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md), [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **m\_patch\_locator** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **m\_head\_evaluator** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
 * **m\_tail\_evaluator** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
@@ -309,6 +308,7 @@
 * **m\_compute\_coeffs\_dim1** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **m\_compute\_coeffs\_dim2** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **m\_spline\_coeffs** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
+* **m\_builders** ([**SplineBuilder2DCollection**](classSplineBuilder2DCollection.md), [**SplineBuilderCollection**](classSplineBuilderCollection.md))
 * **m\_rhs** ([**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md))
 * **m\_data** ([**TensorCommon**](classTensorCommon.md))
 * **m\_basis\_vals\_r** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
@@ -330,7 +330,7 @@
 ## n
 
 * **n\_overlap\_cells** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
-* **n\_patches** ([**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md), [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
+* **n\_patches** ([**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**SplineBuilderCollection**](classSplineBuilderCollection.md))
 * **n\_fields** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **n\_distributed\_dimensions** ([**IMPILayout**](classIMPILayout.md))
 * **n** ([**Matrix**](classMatrix.md))
@@ -352,7 +352,7 @@
 
 * **pos** ([**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md))
 * **PERIODIC** ([**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
-* **patch\_id** ([**MultipatchSplineBuilder::Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md))
+* **patch\_id** ([**SplineBuilderCollection::Build\_BuilderType**](structSplineBuilderCollection_1_1Build__BuilderType.md))
 
 
 ## q

@@ -1,12 +1,12 @@
 
 
-# Struct MultipatchSplineBuilder::Build\_BuilderType
+# Struct SplineBuilderCollection::Build\_BuilderType
 
 **template &lt;class [**Patch**](structPatch.md)&gt;**
 
 
 
-[**ClassList**](annotated.md) **>** [**Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md)
+[**ClassList**](annotated.md) **>** [**Build\_BuilderType**](structSplineBuilderCollection_1_1Build__BuilderType.md)
 
 
 
@@ -104,7 +104,7 @@ A small structure allowing the multiple grids to be unpacked from a field and re
 ### typedef lower\_matching\_edge 
 
 ```C++
-using MultipatchSplineBuilder< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch >::lower_matching_edge =  equivalent_edge_t<
+using SplineBuilderCollection< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch >::lower_matching_edge =  equivalent_edge_t<
                 Edge<Patch, GridOnPatch<Patch>, FRONT>,
                 typename Connectivity::interface_collection>;
 ```
@@ -119,7 +119,7 @@ using MultipatchSplineBuilder< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPat
 ### typedef type 
 
 ```C++
-using MultipatchSplineBuilder< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch >::type =  ddc::SplineBuilder<
+using SplineBuilderCollection< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch >::type =  ddc::SplineBuilder<
                 ExecSpace,
                 MemorySpace,
                 BSplineOnPatch<Patch>,
@@ -139,7 +139,7 @@ using MultipatchSplineBuilder< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPat
 ### typedef upper\_matching\_edge 
 
 ```C++
-using MultipatchSplineBuilder< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch >::upper_matching_edge =  equivalent_edge_t<
+using SplineBuilderCollection< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch >::upper_matching_edge =  equivalent_edge_t<
                 Edge<Patch, GridOnPatch<Patch>, BACK>,
                 typename Connectivity::interface_collection>;
 ```
@@ -156,7 +156,7 @@ using MultipatchSplineBuilder< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPat
 ### variable patch\_id 
 
 ```C++
-std::size_t MultipatchSplineBuilder< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch >::patch_id;
+std::size_t SplineBuilderCollection< ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch >::patch_id;
 ```
 
 

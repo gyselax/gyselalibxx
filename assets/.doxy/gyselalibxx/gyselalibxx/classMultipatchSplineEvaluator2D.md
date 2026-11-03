@@ -971,7 +971,7 @@ inline KOKKOS_FUNCTION double MultipatchSplineEvaluator2D::operator() (
 
 
 
-The spline coefficients represent a 2D spline function defined on a B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder2D or [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md). The coordinate is defined on one patch. But it can be physically located on another patch.
+The spline coefficients represent a 2D spline function defined on a B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder2D or [**SplineBuilder2DCollection**](classSplineBuilder2DCollection.md). The coordinate is defined on one patch. But it can be physically located on another patch.
 
 
  

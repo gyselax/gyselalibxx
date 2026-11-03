@@ -912,7 +912,7 @@
 <para>Evaluate the 2D splines (described by their spline coefficients) at a given coordinate. </para>
         </briefdescription>
         <detaileddescription>
-<para>The spline coefficients represent a 2D spline function defined on a B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder2D or <ref refid="classMultipatchSplineBuilder2D" kindref="compound">MultipatchSplineBuilder2D</ref>. The coordinate is defined on one patch. But it can be physically located on another patch.</para>
+<para>The spline coefficients represent a 2D spline function defined on a B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder2D or <ref refid="classSplineBuilder2DCollection" kindref="compound">SplineBuilder2DCollection</ref>. The coordinate is defined on one patch. But it can be physically located on another patch.</para>
 <para><anchor id="classMultipatchSplineEvaluator2D_1MultipatchSplineEvaluatorOperator"/> <parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>StoringPatch</parametername>

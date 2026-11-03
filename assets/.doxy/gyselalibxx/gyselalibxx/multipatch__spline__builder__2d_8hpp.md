@@ -39,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md) &lt;class ExecSpace, class MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, class Connectivity, Solver, ValuesOnPatch, Patches&gt;<br>_A class to call all the builders of all the patches once._  |
+| class | [**SplineBuilder2DCollection**](classSplineBuilder2DCollection.md) &lt;class ExecSpace, class MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, class Connectivity, Solver, ValuesOnPatch, Patches&gt;<br>_A class to call all the builders of all the patches once._  |
 
 
 

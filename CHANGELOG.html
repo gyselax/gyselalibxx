@@ -782,6 +782,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Calls to Kokkos profiling's region push/pop were replaced by calls <code>ScopedRegion</code> whenever possible to capture RAII deallocations.</li>
 <li><code>PolarSplineFEMPoissonLikeAssembler</code> uses <code>TensorProductBSplinePoissonAssembler</code> to assemble the elements of the matrix corresponding to the inner products of tensor product B-splines.</li>
 <li>Use Spack to install packages in the docker image.</li>
+<li>Rename <code>MultipatchSplineBuilder</code> to <code>SplineBuilderCollection</code>.</li>
+<li>Rename <code>MultipatchSplineBuilder2D</code> to <code>SplineBuilder2DCollection</code>.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

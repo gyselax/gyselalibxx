@@ -1,12 +1,12 @@
 
 
-# Struct MultipatchSplineBuilder2D::Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;
+# Struct SplineBuilder2DCollection::Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;
 
 **template &lt;class [**Patch**](structPatch.md), class... Grid1D&gt;**
 
 
 
-[**ClassList**](annotated.md) **>** [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md)
+[**ClassList**](annotated.md) **>** [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc.md)
 
 
 
@@ -94,7 +94,7 @@
 ### typedef lower\_matching\_edge1 
 
 ```C++
-using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::lower_matching_edge1 =  equivalent_edge_t<
+using SplineBuilder2DCollection< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::lower_matching_edge1 =  equivalent_edge_t<
                 Edge<Patch, Grid1OnPatch<Patch>, FRONT>,
                 typename Connectivity::interface_collection>;
 ```
@@ -109,7 +109,7 @@ using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSplin
 ### typedef lower\_matching\_edge2 
 
 ```C++
-using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::lower_matching_edge2 =  equivalent_edge_t<
+using SplineBuilder2DCollection< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::lower_matching_edge2 =  equivalent_edge_t<
                 Edge<Patch, Grid2OnPatch<Patch>, FRONT>,
                 typename Connectivity::interface_collection>;
 ```
@@ -124,7 +124,7 @@ using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSplin
 ### typedef type 
 
 ```C++
-using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::type =  ddc::SplineBuilder2D<
+using SplineBuilder2DCollection< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::type =  ddc::SplineBuilder2D<
                 ExecSpace,
                 MemorySpace,
                 BSpline1OnPatch<Patch>,
@@ -148,7 +148,7 @@ using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSplin
 ### typedef upper\_matching\_edge1 
 
 ```C++
-using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::upper_matching_edge1 =  equivalent_edge_t<
+using SplineBuilder2DCollection< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::upper_matching_edge1 =  equivalent_edge_t<
                 Edge<Patch, Grid1OnPatch<Patch>, BACK>,
                 typename Connectivity::interface_collection>;
 ```
@@ -163,7 +163,7 @@ using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSplin
 ### typedef upper\_matching\_edge2 
 
 ```C++
-using MultipatchSplineBuilder2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::upper_matching_edge2 =  equivalent_edge_t<
+using SplineBuilder2DCollection< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches >::Build_BuilderType< Patch, DConstField< IdxRange< Grid1D... >, MemorySpace > >::upper_matching_edge2 =  equivalent_edge_t<
                 Edge<Patch, Grid2OnPatch<Patch>, BACK>,
                 typename Connectivity::interface_collection>;
 ```

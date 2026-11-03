@@ -1,12 +1,12 @@
 
 
-# Struct MultipatchSplineBuilder2D::Build\_BuilderType
+# Struct SplineBuilder2DCollection::Build\_BuilderType
 
 **template &lt;class [**Patch**](structPatch.md), class FieldType&gt;**
 
 
 
-[**ClassList**](annotated.md) **>** [**Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md)
+[**ClassList**](annotated.md) **>** [**Build\_BuilderType**](structSplineBuilder2DCollection_1_1Build__BuilderType.md)
 
 
 

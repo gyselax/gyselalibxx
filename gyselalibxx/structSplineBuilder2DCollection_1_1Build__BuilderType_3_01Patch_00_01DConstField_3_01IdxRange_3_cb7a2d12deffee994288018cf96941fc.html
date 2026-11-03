@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Class MultipatchSplineBuilder2D - GyselalibX</title>
+    <title>Struct SplineBuilder2DCollection::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt; - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Class MultipatchSplineBuilder2D";
-        var mkdocs_page_input_path = "gyselalibxx/classMultipatchSplineBuilder2D.md";
+        var mkdocs_page_name = "Struct SplineBuilder2DCollection::Build_BuilderType\u0026lt; Patch, DConstField\u0026lt; IdxRange\u0026lt; Grid1D... \u0026gt;, MemorySpace \u0026gt; \u0026gt;";
+        var mkdocs_page_input_path = "gyselalibxx/structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -559,9 +559,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Class MultipatchSplineBuilder2D</li>
+      <li class="breadcrumb-item active">Struct SplineBuilder2DCollection::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classMultipatchSplineBuilder2D.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -569,13 +569,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="class-multipatchsplinebuilder2d">Class MultipatchSplineBuilder2D</h1>
-<p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::SplineBuilderClosure SBCLower1, ddc::SplineBuilderClosure SBCUpper1, ddc::SplineBuilderClosure SBCLower2, ddc::SplineBuilderClosure SBCUpper2, ddc::SplineBuilderClosure BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a></p>
-<p><em>A class to call all the builders of all the patches once.</em> <a href="#detailed-description">More...</a></p>
-<ul>
-<li><code>#include &lt;multipatch_spline_builder_2d.hpp&gt;</code></li>
-</ul>
+                <div><h1 id="struct-splinebuilder2dcollectionbuild_buildertype-patch-dconstfield-idxrange-grid1d-memoryspace">Struct SplineBuilder2DCollection::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</h1>
+<p><strong>template &lt;class <a href="structPatch.html"><strong>Patch</strong></a>, class... Grid1D&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc.html"><strong>Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</strong></a></p>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -586,239 +582,69 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef MultipatchIdxRangeBatchedBS&lt; MultipatchIdxRangeBatched &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>  <br><em>Multi-patch batched domain with InterpolationDDim replaced by BSplines.</em></td>
+<td style="text-align: right;">typedef equivalent_edge_t&lt; <a href="structEdge.html"><strong>Edge</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a>, Grid1OnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, FRONT &gt;, typename Connectivity::interface_collection &gt;</td>
+<td style="text-align: left;"><a href="#typedef-lower_matching_edge1"><strong>lower_matching_edge1</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef MultipatchIdxRangeBatchedDeriv&lt; MultipatchIdxRangeBatched &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>Multi-patch batched domain with InterpolationDDim replaced by deriv_type.</em></td>
+<td style="text-align: right;">typedef equivalent_edge_t&lt; <a href="structEdge.html"><strong>Edge</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a>, Grid2OnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, FRONT &gt;, typename Connectivity::interface_collection &gt;</td>
+<td style="text-align: left;"><a href="#typedef-lower_matching_edge2"><strong>lower_matching_edge2</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef MultipatchIdxRangeBS</td>
-<td style="text-align: left;"><a href="#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a>  <br><em>The index range for the interpolation coefficients.</em></td>
+<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, BSpline2OnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, Grid1OnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, Grid2OnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, std::is_same_v&lt; lower_matching_edge1, <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> &gt; ? SBCLower1 :BcTransition, std::is_same_v&lt; upper_matching_edge1, <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> &gt; ? SBCUpper1 :BcTransition, std::is_same_v&lt; lower_matching_edge2, <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> &gt; ? SBCLower2 :BcTransition, std::is_same_v&lt; upper_matching_edge2, <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> &gt; ? SBCUpper2 :BcTransition, Solver &gt;</td>
+<td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef double</td>
-<td style="text-align: left;"><a href="#typedef-data_type"><strong>data_type</strong></a>  <br><em>The data type that the data is saved on.</em></td>
+<td style="text-align: right;">typedef equivalent_edge_t&lt; <a href="structEdge.html"><strong>Edge</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a>, Grid1OnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, BACK &gt;, typename Connectivity::interface_collection &gt;</td>
+<td style="text-align: left;"><a href="#typedef-upper_matching_edge1"><strong>upper_matching_edge1</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ExecSpace</td>
-<td style="text-align: left;"><a href="#typedef-exec_space"><strong>exec_space</strong></a>  <br><em>Execution space.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef MultipatchIdxRange</td>
-<td style="text-align: left;"><a href="#typedef-interpolation_idx_range_type"><strong>interpolation_idx_range_type</strong></a>  <br><em>The ND index range for the interpolation mesh.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef MemorySpace</td>
-<td style="text-align: left;"><a href="#typedef-memory_space"><strong>memory_space</strong></a>  <br><em>Memory space.</em></td>
+<td style="text-align: right;">typedef equivalent_edge_t&lt; <a href="structEdge.html"><strong>Edge</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a>, Grid2OnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, BACK &gt;, typename Connectivity::interface_collection &gt;</td>
+<td style="text-align: left;"><a href="#typedef-upper_matching_edge2"><strong>upper_matching_edge2</strong></a>  <br></td>
 </tr>
 </tbody>
 </table>
-<h2 id="public-functions">Public Functions</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-multipatchsplinebuilder2d"><strong>MultipatchSplineBuilder2D</strong></a> (BuilderOnPatch&lt; Patches &gt; const &amp;... builders) <br><em>Instantiate the</em> <a href="classMultipatchSplineBuilder.html"><em><strong>MultipatchSplineBuilder</strong></em></a> <em>from a std::tuple of all the builder on each patch.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">MultipatchIdxRangeBatchedBS&lt; MultipatchIdxRangeBatched &gt; const</td>
-<td style="text-align: left;"><a href="#function-batched_basis_idx_ranges"><strong>batched_basis_idx_ranges</strong></a> (MultipatchIdxRangeBatched idx_ranges) const<br><em>Get a MultipatchType collecting the index ranges typed on the whole B-splines dimensions. These index ranges are adapted to allocate splines on the multi-patch domain.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (MultipatchSplineCoeffs splines, MultipatchValues const &amp; values, std::optional&lt; MultipatchDerivs1 &gt; derivs_min1=std::nullopt, std::optional&lt; MultipatchDerivs1 &gt; derivs_max1=std::nullopt, std::optional&lt; MultipatchDerivs2 &gt; derivs_min2=std::nullopt, std::optional&lt; MultipatchDerivs2 &gt; derivs_max2=std::nullopt, std::optional&lt; MultipatchDerivs12 &gt; cross_derivs_min1_min2=std::nullopt, std::optional&lt; MultipatchDerivs12 &gt; cross_derivs_max1_min2=std::nullopt, std::optional&lt; MultipatchDerivs12 &gt; cross_derivs_min1_max2=std::nullopt, std::optional&lt; MultipatchDerivs12 &gt; cross_derivs_max1_max2=std::nullopt) const<br><em>Build the spline representation of each given function.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (MultipatchSplineCoeffs splines, MultipatchDerivField functions_and_derivs) const<br><em>Build the spline representation of each given function.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">MultipatchIdxRangeBS const</td>
-<td style="text-align: left;"><a href="#function-spline_idx_ranges"><strong>spline_idx_ranges</strong></a> () const<br><em>Get a MultipatchType collecting the index ranges typed on the B-splines dimensions of the patches. These index ranges are adapted to allocate splines on the multi-patch domain.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-multipatchsplinebuilder2d"><strong>~MultipatchSplineBuilder2D</strong></a> () = default<br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-static-functions">Public Static Functions</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">std::size_t</td>
-<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="detailed-description">Detailed Description</h2>
-<p>We need to instantiate all the builders for all the patches in the main code. We process the same way for the Field containing the spline coefficients and the values of the function on each patch. The Fields are stored in MultipatchField objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
-<p>This function is useful to avoid calling all the builders individually, especially in a multipatch geometry with several patches.</p>
-<p><strong>Warning:</strong></p>
-<p><a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a> is implemented for tensor-product multi-patch decompositions.</p>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>ExecSpace</code> The space (CPU/GPU) where the calculations are carried out. </li>
-<li><code>MemorySpace</code> The space (CPU/GPU) where the coefficients and values are stored. </li>
-<li><code>BSpline1OnPatch</code> A type alias which provides the first BSpline type along which the splines are built. </li>
-<li><code>BSpline2OnPatch</code> A type alias which provides the second BSpline type along which the splines are built. </li>
-<li><code>Grid1OnPatch</code> A type alias which provides the first Grid type along which the interpolation points of the splines are found. </li>
-<li><code>Grid2OnPatch</code> A type alias which provides the second Grid type along which the interpolation points of the splines are found. </li>
-<li><code>SBCLower1</code> The lower spline closure on the first dimension. </li>
-<li><code>SBCUpper1</code> The upper spline closure on the first dimension. </li>
-<li><code>SBCLower2</code> The lower spline closure on the second dimension. </li>
-<li><code>SBCUpper2</code> The upper spline closure on the second dimension. </li>
-<li><code>BcTransition</code> The boundary condition used at the interface between 2 patches. </li>
-<li><code>Connectivity</code> A <a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a> object describing the interfaces between patches. </li>
-<li><code>Solver</code> The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details. </li>
-<li><code>ValuesOnPatch</code> A type alias which provides the field type which will be used to pass the values of the function at the interpolation points. The index range of this field type should contain any batch dimensions. </li>
-</ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-batched_basis_idx_range_type">typedef batched_basis_idx_range_type</h3>
-<p><em>Multi-patch batched domain with InterpolationDDim replaced by BSplines.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::batched_basis_idx_range_type =  MultipatchIdxRangeBatchedBS&lt;MultipatchIdxRangeBatched&gt;;
+<h3 id="typedef-lower_matching_edge1">typedef lower_matching_edge1</h3>
+<pre><code class="language-C++">using SplineBuilder2DCollection&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::lower_matching_edge1 =  equivalent_edge_t&lt;
+                Edge&lt;Patch, Grid1OnPatch&lt;Patch&gt;, FRONT&gt;,
+                typename Connectivity::interface_collection&gt;;
 </code></pre>
 <hr>
 
-<h3 id="typedef-batched_derivs_idx_range_type">typedef batched_derivs_idx_range_type</h3>
-<p><em>Multi-patch batched domain with InterpolationDDim replaced by deriv_type.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::batched_derivs_idx_range_type =  MultipatchIdxRangeBatchedDeriv&lt;MultipatchIdxRangeBatched&gt;;
+<h3 id="typedef-lower_matching_edge2">typedef lower_matching_edge2</h3>
+<pre><code class="language-C++">using SplineBuilder2DCollection&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::lower_matching_edge2 =  equivalent_edge_t&lt;
+                Edge&lt;Patch, Grid2OnPatch&lt;Patch&gt;, FRONT&gt;,
+                typename Connectivity::interface_collection&gt;;
 </code></pre>
 <hr>
 
-<h3 id="typedef-coeff_idx_range_type">typedef coeff_idx_range_type</h3>
-<p><em>The index range for the interpolation coefficients.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::coeff_idx_range_type =  MultipatchIdxRangeBS;
+<h3 id="typedef-type">typedef type</h3>
+<pre><code class="language-C++">using SplineBuilder2DCollection&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::type =  ddc::SplineBuilder2D&lt;
+                ExecSpace,
+                MemorySpace,
+                BSpline1OnPatch&lt;Patch&gt;,
+                BSpline2OnPatch&lt;Patch&gt;,
+                Grid1OnPatch&lt;Patch&gt;,
+                Grid2OnPatch&lt;Patch&gt;,
+                std::is_same_v&lt;lower_matching_edge1, OutsideEdge&gt; ? SBCLower1 : BcTransition,
+                std::is_same_v&lt;upper_matching_edge1, OutsideEdge&gt; ? SBCUpper1 : BcTransition,
+                std::is_same_v&lt;lower_matching_edge2, OutsideEdge&gt; ? SBCLower2 : BcTransition,
+                std::is_same_v&lt;upper_matching_edge2, OutsideEdge&gt; ? SBCUpper2 : BcTransition,
+                Solver&gt;;
 </code></pre>
 <hr>
 
-<h3 id="typedef-data_type">typedef data_type</h3>
-<p><em>The data type that the data is saved on.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::data_type =  double;
+<h3 id="typedef-upper_matching_edge1">typedef upper_matching_edge1</h3>
+<pre><code class="language-C++">using SplineBuilder2DCollection&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::upper_matching_edge1 =  equivalent_edge_t&lt;
+                Edge&lt;Patch, Grid1OnPatch&lt;Patch&gt;, BACK&gt;,
+                typename Connectivity::interface_collection&gt;;
 </code></pre>
 <hr>
 
-<h3 id="typedef-exec_space">typedef exec_space</h3>
-<p><em>Execution space.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::exec_space =  ExecSpace;
-</code></pre>
-<hr>
-
-<h3 id="typedef-interpolation_idx_range_type">typedef interpolation_idx_range_type</h3>
-<p><em>The ND index range for the interpolation mesh.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::interpolation_idx_range_type =  MultipatchIdxRange;
-</code></pre>
-<hr>
-
-<h3 id="typedef-memory_space">typedef memory_space</h3>
-<p><em>Memory space.</em> </p>
-<pre><code class="language-C++">using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::memory_space =  MemorySpace;
-</code></pre>
-<hr>
-<h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-multipatchsplinebuilder2d">function MultipatchSplineBuilder2D</h3>
-<p><em>Instantiate the</em> <a href="classMultipatchSplineBuilder.html"><em><strong>MultipatchSplineBuilder</strong></em></a> <em>from a std::tuple of all the builder on each patch.</em></p>
-<pre><code class="language-C++">inline explicit MultipatchSplineBuilder2D::MultipatchSplineBuilder2D (
-    BuilderOnPatch&lt; Patches &gt; const &amp;... builders
-) 
-</code></pre>
-<p><strong>Warning:</strong></p>
-<p>The builders have to be sorted in the same order as the patches in the tuple.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>builders</code> Spline builders for each patch. </li>
-</ul>
-<hr>
-
-<h3 id="function-batched_basis_idx_ranges">function batched_basis_idx_ranges</h3>
-<p><em>Get a MultipatchType collecting the index ranges typed on the whole B-splines dimensions. These index ranges are adapted to allocate splines on the multi-patch domain.</em> </p>
-<pre><code class="language-C++">template&lt;class MultipatchIdxRangeBatched&gt;
-inline MultipatchIdxRangeBatchedBS&lt; MultipatchIdxRangeBatched &gt; const MultipatchSplineBuilder2D::batched_basis_idx_ranges (
-    MultipatchIdxRangeBatched idx_ranges
-) const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_ranges</code> MultipatchType collecting the index ranges on the grids of the patches. </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>a MultipatchType collecting the index ranges typed on the whole B-splines dimensions. </p>
-<hr>
-
-<h3 id="function-operator">function operator()</h3>
-<p><em>Build the spline representation of each given function.</em> </p>
-<pre><code class="language-C++">inline void MultipatchSplineBuilder2D::operator() (
-    MultipatchSplineCoeffs splines,
-    MultipatchValues const &amp; values,
-    std::optional&lt; MultipatchDerivs1 &gt; derivs_min1=std::nullopt,
-    std::optional&lt; MultipatchDerivs1 &gt; derivs_max1=std::nullopt,
-    std::optional&lt; MultipatchDerivs2 &gt; derivs_min2=std::nullopt,
-    std::optional&lt; MultipatchDerivs2 &gt; derivs_max2=std::nullopt,
-    std::optional&lt; MultipatchDerivs12 &gt; cross_derivs_min1_min2=std::nullopt,
-    std::optional&lt; MultipatchDerivs12 &gt; cross_derivs_max1_min2=std::nullopt,
-    std::optional&lt; MultipatchDerivs12 &gt; cross_derivs_min1_max2=std::nullopt,
-    std::optional&lt; MultipatchDerivs12 &gt; cross_derivs_max1_max2=std::nullopt
-) const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>splines</code> MultipatchField of all the Fields pointing to the spline representations. </li>
-<li><code>values</code> MultipatchField of all the Fields pointing to the function values. </li>
-<li><code>derivs_min1</code> MultipatchField of all the ConstFields describing the function derivatives in the first dimension at the lower bound of the second dimension. </li>
-<li><code>derivs_max1</code> MultipatchField of all the ConstFields describing the function derivatives in the first dimension at the upper bound of the second dimension. </li>
-<li><code>derivs_min2</code> MultipatchField of all the ConstFields describing the function derivatives in the second dimension at the lower bound of the first dimension. </li>
-<li><code>derivs_max2</code> MultipatchField of all the ConstFields describing the function derivatives in the second dimension at the upper bound of the first dimension. </li>
-<li><code>cross_derivs_min1_min2</code> The values of the the cross-derivatives at the lower boundary in the first dimension and the lower boundary in the second dimension. </li>
-<li><code>cross_derivs_max1_min2</code> The values of the the cross-derivatives at the upper boundary in the first dimension and the lower boundary in the second dimension. </li>
-<li><code>cross_derivs_min1_max2</code> The values of the the cross-derivatives at the lower boundary in the first dimension and the upper boundary in the second dimension. </li>
-<li><code>cross_derivs_max1_max2</code> The values of the the cross-derivatives at the upper boundary in the first dimension and the upper boundary in the second dimension. </li>
-</ul>
-<hr>
-
-<h3 id="function-operator_1">function operator()</h3>
-<p><em>Build the spline representation of each given function.</em> </p>
-<pre><code class="language-C++">inline void MultipatchSplineBuilder2D::operator() (
-    MultipatchSplineCoeffs splines,
-    MultipatchDerivField functions_and_derivs
-) const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>splines</code> MultipatchField of all the Fields pointing to the spline representations. </li>
-<li><code>functions_and_derivs</code> MultipatchField of all the DerivFields pointing to the function values and their derivatives. </li>
-</ul>
-<hr>
-
-<h3 id="function-spline_idx_ranges">function spline_idx_ranges</h3>
-<p><em>Get a MultipatchType collecting the index ranges typed on the B-splines dimensions of the patches. These index ranges are adapted to allocate splines on the multi-patch domain.</em> </p>
-<pre><code class="language-C++">inline MultipatchIdxRangeBS const MultipatchSplineBuilder2D::spline_idx_ranges () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>a MultipatchType collecting the index ranges typed on the B-splines dimensions of the patches. </p>
-<hr>
-
-<h3 id="function-multipatchsplinebuilder2d_1">function ~MultipatchSplineBuilder2D</h3>
-<pre><code class="language-C++">MultipatchSplineBuilder2D::~MultipatchSplineBuilder2D () = default
-</code></pre>
-<hr>
-<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
-<h3 id="function-rank">function rank</h3>
-<p><em>The number of interpolation dimensions.</em> </p>
-<pre><code class="language-C++">static inline std::size_t MultipatchSplineBuilder2D::rank () 
+<h3 id="typedef-upper_matching_edge2">typedef upper_matching_edge2</h3>
+<pre><code class="language-C++">using SplineBuilder2DCollection&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::upper_matching_edge2 =  equivalent_edge_t&lt;
+                Edge&lt;Patch, Grid2OnPatch&lt;Patch&gt;, BACK&gt;,
+                typename Connectivity::interface_collection&gt;;
 </code></pre>
 <hr>
 

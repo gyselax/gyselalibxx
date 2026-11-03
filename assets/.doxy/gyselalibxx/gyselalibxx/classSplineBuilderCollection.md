@@ -1,12 +1,12 @@
 
 
-# Class MultipatchSplineBuilder
+# Class SplineBuilderCollection
 
 **template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSplineOnPatch, template&lt; typename P &gt; typename GridOnPatch, ddc::SplineBuilderClosure SBCLower, ddc::SplineBuilderClosure SBCUpper, ddc::SplineBuilderClosure BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;**
 
 
 
-[**ClassList**](annotated.md) **>** [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md)
+[**ClassList**](annotated.md) **>** [**SplineBuilderCollection**](classSplineBuilderCollection.md)
 
 
 
@@ -54,9 +54,9 @@ _A class to call all the builders of all the patches once._ [More...](#detailed-
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MultipatchSplineBuilder**](#function-multipatchsplinebuilder) (BuilderOnPatch&lt; Patches &gt; const &... builders) <br>_Instantiate the_ [_**MultipatchSplineBuilder**_](classMultipatchSplineBuilder.md) _from a std::tuple of all the builder on each patch._ |
+|   | [**SplineBuilderCollection**](#function-splinebuildercollection) (BuilderOnPatch&lt; Patches &gt; const &... builders) <br>_Instantiate the_ [_**SplineBuilderCollection**_](classSplineBuilderCollection.md) _from a std::tuple of all the builder on each patch._ |
 |  void | [**operator()**](#function-operator) (MultipatchSplineCoeffs splines, MultipatchValues const & values, std::optional&lt; MultipatchDerivs &gt; derivs\_xmin=std::nullopt, std::optional&lt; MultipatchDerivs &gt; derivs\_xmax=std::nullopt) const<br>_Build the spline representation of each given function._  |
-|   | [**~MultipatchSplineBuilder**](#function-multipatchsplinebuilder) () = default<br> |
+|   | [**~SplineBuilderCollection**](#function-splinebuildercollection) () = default<br> |
 
 
 
@@ -119,11 +119,11 @@ This function is useful to avoid calling all the builders individually, especial
 
 
 
-### function MultipatchSplineBuilder 
+### function SplineBuilderCollection 
 
-_Instantiate the_ [_**MultipatchSplineBuilder**_](classMultipatchSplineBuilder.md) _from a std::tuple of all the builder on each patch._
+_Instantiate the_ [_**SplineBuilderCollection**_](classSplineBuilderCollection.md) _from a std::tuple of all the builder on each patch._
 ```C++
-inline explicit MultipatchSplineBuilder::MultipatchSplineBuilder (
+inline explicit SplineBuilderCollection::SplineBuilderCollection (
     BuilderOnPatch< Patches > const &... builders
 ) 
 ```
@@ -157,7 +157,7 @@ The builders have to be sorted in the same order as the patches in the tuple.
 
 _Build the spline representation of each given function._ 
 ```C++
-inline void MultipatchSplineBuilder::operator() (
+inline void SplineBuilderCollection::operator() (
     MultipatchSplineCoeffs splines,
     MultipatchValues const & values,
     std::optional< MultipatchDerivs > derivs_xmin=std::nullopt,
@@ -186,10 +186,10 @@ inline void MultipatchSplineBuilder::operator() (
 
 
 
-### function ~MultipatchSplineBuilder 
+### function ~SplineBuilderCollection 
 
 ```C++
-MultipatchSplineBuilder::~MultipatchSplineBuilder () = default
+SplineBuilderCollection::~SplineBuilderCollection () = default
 ```
 
 
