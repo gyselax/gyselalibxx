@@ -5,17 +5,17 @@
 #include <typeinfo>
 
 #include <ddc/ddc.hpp>
-#include <ginkgo/ginkgo.hpp>
 
+#include <ginkgo/ginkgo.hpp>
 
 #include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
+#include "interface_derivative_coefficients_collection.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
@@ -101,7 +101,8 @@ class InterfacesExactDerivativeCalculator<
                     !std::is_same_v<typename InterfaceBoundFirst::Edge2, OutsideEdge>);
 
     static_assert(
-            ((LowerBound == ddc::SplineBuilderClosure::PERIODIC) == (UpperBound == ddc::SplineBuilderClosure::PERIODIC)),
+            ((LowerBound == ddc::SplineBuilderClosure::PERIODIC)
+             == (UpperBound == ddc::SplineBuilderClosure::PERIODIC)),
             "If one boundary is periodic, the other boundary should be too.");
 
     /*
@@ -534,9 +535,7 @@ private:
                 = std::conditional_t<patch_order_matches_interfaces<I>, patch1<I>, patch2<I>>;
         Idx<grid_par1<I>> idx_slice_1;
         Idx<grid_par2<I>> idx_slice_2;
-        set_slice_indexes<
-                I,
-                PatchIndexSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+        set_slice_indexes<I, PatchIndexSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
         DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
                 = functions_and_derivs.template get<patch1<I>>();
@@ -600,8 +599,10 @@ private:
             IdxRange<grid_perp1<I>> idx_range_perp_1(m_idx_ranges.template get<patch1<I>>());
             IdxRange<grid_perp2<I>> idx_range_perp_2(m_idx_ranges.template get<patch2<I>>());
 
-            Idx<grid_perp1<I>> idx_deriv_1 = get_idx_other_interface(idx_range_perp_1, extremity_1<I>);
-            Idx<grid_perp2<I>> idx_deriv_2 = get_idx_other_interface(idx_range_perp_2, extremity_2<I>);
+            Idx<grid_perp1<I>> idx_deriv_1
+                    = get_idx_other_interface(idx_range_perp_1, extremity_1<I>);
+            Idx<grid_perp2<I>> idx_deriv_2
+                    = get_idx_other_interface(idx_range_perp_2, extremity_2<I>);
 
             auto const [sign_1, sign_2] = get_sign_derivs<I, eval_type>();
 
@@ -683,9 +684,7 @@ private:
                 = std::conditional_t<patch_order_matches_interfaces<I>, patch1<I>, patch2<I>>;
         Idx<grid_par1<I>> idx_slice_1;
         Idx<grid_par2<I>> idx_slice_2;
-        set_slice_indexes<
-                I,
-                PatchIndexSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+        set_slice_indexes<I, PatchIndexSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
         // Get the fields of the left and right patch of the interface.
         DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
