@@ -22,7 +22,7 @@ public:
     /// The index range of the distributed section of the data
     using distributed_sub_idx_range = IdxRange<DistributedDim...>;
     /// A type sequence describing the dimensions which are distributed across MPI processes.
-    using distributed_type_seq = ddc::detail::TypeSeq<DistributedDim...>;
+    using distributed_type_seq = ddc::TypeSeq<DistributedDim...>;
 
 private:
     using type_seq = typename ddc::to_type_seq_t<discrete_domain_type>;

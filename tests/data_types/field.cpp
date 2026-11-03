@@ -35,7 +35,7 @@ using IdxRange0D = IdxRange<>;
 
 using DVectorFieldMem0D = host_t<VectorFieldMem<double, IdxRange0D, Direction>>;
 
-struct GridX
+struct GridX : ddc::DiscreteDimension
 {
 };
 using IdxX = Idx<GridX>;
@@ -49,7 +49,7 @@ using DVectorConstFieldSliceX
         = VectorField<double const, IdxRangeX, Direction, Kokkos::HostSpace, Kokkos::layout_stride>;
 
 
-struct GridY
+struct GridY : ddc::DiscreteDimension
 {
 };
 using IdxY = Idx<GridY>;
@@ -61,7 +61,7 @@ using DVectorFieldY = host_t<VectorField<double, IdxRangeY, Direction>>;
 using DVectorConstFieldY = host_t<VectorField<double const, IdxRangeY, Direction>>;
 
 
-struct GridZ
+struct GridZ : ddc::DiscreteDimension
 {
 };
 using IdxZ = Idx<GridZ>;

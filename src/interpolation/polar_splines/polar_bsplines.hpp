@@ -42,7 +42,7 @@ DField<IdxRange<DDim>, MemorySpace> integrals(
  *                    will be discontinuous at the singular point.
  */
 template <class BSplinesR, class BSplinesTheta, int C>
-class PolarBSplines
+class PolarBSplines : ddc::DiscreteDimension
 {
     static_assert(C >= -1, "Parameter `C` cannot be less than -1");
     static_assert(C < 2, "Values larger than 1 are not implemented for parameter `C`");
@@ -736,9 +736,9 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
 {
     using deriv_r = ddc::Deriv<R>;
     using deriv_theta = ddc::Deriv<Theta>;
-    using deriv_dims = ddc::detail::TypeSeq<DerivDims...>;
+    using deriv_dims = ddc::TypeSeq<DerivDims...>;
 
-    static_assert((ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<deriv_r, deriv_theta>> && ...));
+    static_assert((ddc::in_tags_v<DerivDims, ddc::TypeSeq<deriv_r, deriv_theta>> && ...));
 
     assert(singular_values.extent(0) == n_singular_basis());
     assert(values.extent(0) == BSplinesR::degree() + 1);

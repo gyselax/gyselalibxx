@@ -107,17 +107,17 @@ template <
 struct InterpolationEvaluatorTraits<ddc::SplineEvaluatorND<
         ExecSpace,
         MemorySpace,
-        ddc::detail::TypeSeq<BSplines...>,
-        ddc::detail::TypeSeq<EvaluationDDim...>,
-        ddc::detail::TypeSeq<ExtrapolationRule...>>>
+        ddc::TypeSeq<BSplines...>,
+        ddc::TypeSeq<EvaluationDDim...>,
+        ddc::TypeSeq<ExtrapolationRule...>>>
 {
 private:
     using Evaluator = ddc::SplineEvaluatorND<
             ExecSpace,
             MemorySpace,
-            ddc::detail::TypeSeq<BSplines...>,
-            ddc::detail::TypeSeq<EvaluationDDim...>,
-            ddc::detail::TypeSeq<ExtrapolationRule...>>;
+            ddc::TypeSeq<BSplines...>,
+            ddc::TypeSeq<EvaluationDDim...>,
+            ddc::TypeSeq<ExtrapolationRule...>>;
 
     template <std::size_t... Is>
     static auto make_evaluation_idx_range_type(std::index_sequence<Is...>) ->
