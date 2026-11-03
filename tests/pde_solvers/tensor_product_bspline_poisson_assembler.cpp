@@ -33,7 +33,6 @@ constexpr std::size_t s_ncells_2 = 40;
 
 struct X
 {
-    static bool constexpr PERIODIC = false;
     static bool constexpr IS_COVARIANT = true;
     static bool constexpr IS_CONTRAVARIANT = true;
     using Dual = X;
@@ -41,7 +40,6 @@ struct X
 
 struct Y
 {
-    static bool constexpr PERIODIC = false;
     static bool constexpr IS_COVARIANT = true;
     static bool constexpr IS_CONTRAVARIANT = true;
     using Dual = Y;
