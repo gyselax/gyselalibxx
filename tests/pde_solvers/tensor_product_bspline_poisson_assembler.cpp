@@ -151,6 +151,20 @@ struct SinSin
     }
 };
 
+/// Initialise the discrete spaces of the B-splines on uniform break points.
+template <bool Periodic1, bool Periodic2>
+void init_bsplines()
+{
+    ddc::init_discrete_space<BSplines1<Periodic1>>(build_uniform_break_points(
+            Coord<Dim1<Periodic1>>(0.0),
+            Coord<Dim1<Periodic1>>(2 * M_PI),
+            IdxStep<Grid1<Periodic1>>(s_ncells_1)));
+    ddc::init_discrete_space<BSplines2<Periodic2>>(build_uniform_break_points(
+            Coord<Dim2<Periodic2>>(0.0),
+            Coord<Dim2<Periodic2>>(2 * M_PI),
+            IdxStep<Grid2<Periodic2>>(s_ncells_2)));
+}
+
 /// Get the index range of all the distinct B-splines of a basis.
 template <class BSplines>
 IdxRange<BSplines> get_full_basis()
@@ -217,12 +231,15 @@ double squared_norm_from_matrix(
  *
  * @f$ \int f^2 dx dy = \pi^2 @f$ and @f$ \int |\nabla f|^2 dx dy = 5 \pi^2 @f$.
  *
+ * The B-splines must be initialised before calling this function (see init_bsplines).
+ *
  * @param[in] function The function to be interpolated. It must be expressible on the basis.
- * @param[in] get_basis_1 Returns the index range of the FEM basis in the first dimension.
- * @param[in] get_basis_2 Returns the index range of the FEM basis in the second dimension.
+ * @param[in] idx_range_basis The index range of the tensor product B-splines in the FEM basis.
  */
-template <bool Periodic1, bool Periodic2, class Function, class GetBasis1, class GetBasis2>
-void check_h1_norm(Function function, GetBasis1 get_basis_1, GetBasis2 get_basis_2)
+template <bool Periodic1, bool Periodic2, class Function>
+void check_h1_norm(
+        Function function,
+        IdxRange<BSplines1<Periodic1>, BSplines2<Periodic2>> idx_range_basis)
 {
     using D1 = Dim1<Periodic1>;
     using D2 = Dim2<Periodic2>;
@@ -250,14 +267,6 @@ void check_h1_norm(Function function, GetBasis1 get_basis_1, GetBasis2 get_basis
             s_closure<Periodic2>,
             ddc::SplineSolver::LAPACK>;
 
-    ddc::init_discrete_space<BS1>(build_uniform_break_points(
-            Coord<D1>(0.0),
-            Coord<D1>(2 * M_PI),
-            IdxStep<G1>(s_ncells_1)));
-    ddc::init_discrete_space<BS2>(build_uniform_break_points(
-            Coord<D2>(0.0),
-            Coord<D2>(2 * M_PI),
-            IdxStep<G2>(s_ncells_2)));
     ddc::init_discrete_space<G1>(InterpPoints1<Periodic1>::template get_sampling<G1>());
     ddc::init_discrete_space<G2>(InterpPoints2<Periodic2>::template get_sampling<G2>());
 
@@ -282,7 +291,6 @@ void check_h1_norm(Function function, GetBasis1 get_basis_1, GetBasis2 get_basis
     builder(get_field(all_coeffs), get_const_field(vals_alloc));
 
     // Restrict the coefficients to the FEM basis while avoiding strided layouts
-    IdxRangeBS2D idx_range_basis(get_basis_1(), get_basis_2());
     DFieldMem<IdxRangeBS2D> coeffs(idx_range_basis);
     ddc::parallel_deepcopy(get_field(coeffs), get_const_field(all_coeffs)[idx_range_basis]);
 
@@ -313,19 +321,23 @@ void check_h1_norm(Function function, GetBasis1 get_basis_1, GetBasis2 get_basis
 template <bool Periodic1, bool Periodic2>
 void check_h1_norm_full_basis()
 {
+    init_bsplines<Periodic1, Periodic2>();
     check_h1_norm<Periodic1, Periodic2>(
             CosCos {},
-            get_full_basis<BSplines1<Periodic1>>,
-            get_full_basis<BSplines2<Periodic2>>);
+            IdxRange<BSplines1<Periodic1>, BSplines2<Periodic2>>(
+                    get_full_basis<BSplines1<Periodic1>>(),
+                    get_full_basis<BSplines2<Periodic2>>()));
 }
 
 template <bool Periodic1, bool Periodic2>
 void check_h1_norm_without_boundary_basis()
 {
+    init_bsplines<Periodic1, Periodic2>();
     check_h1_norm<Periodic1, Periodic2>(
             SinSin {},
-            get_basis_without_boundary<BSplines1<Periodic1>>,
-            get_basis_without_boundary<BSplines2<Periodic2>>);
+            IdxRange<BSplines1<Periodic1>, BSplines2<Periodic2>>(
+                    get_basis_without_boundary<BSplines1<Periodic1>>(),
+                    get_basis_without_boundary<BSplines2<Periodic2>>()));
 }
 
 TEST(TensorProductBSplinePoissonAssembler, FullBasisNonPeriodicNonPeriodic)
