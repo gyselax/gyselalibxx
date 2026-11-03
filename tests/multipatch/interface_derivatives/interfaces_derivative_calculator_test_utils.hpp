@@ -577,9 +577,11 @@ void check_spline_representation_agreement(
         typename Patch::Idx1 idx_1(idx);
         typename Patch::Idx2 idx_2(idx);
         Coord<DimX> dx = (idx_1 != typename Patch::IdxRange1(idx_range_xy).back())
-                         * distance_at_right(idx_1);
+                                 ? distance_at_right(idx_1)
+                                 : Coord<DimX>(0);
         Coord<DimY> dy = (idx_2 != typename Patch::IdxRange2(idx_range_xy).back())
-                         * distance_at_right(idx_2);
+                                 ? distance_at_right(idx_2)
+                                 : Coord<DimY>(0);
         eval_points(idx) = mesh_point + Coord<DimX, DimY>(dx, dy);
     });
 
