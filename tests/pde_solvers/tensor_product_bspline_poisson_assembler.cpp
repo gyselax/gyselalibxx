@@ -200,23 +200,26 @@ double squared_norm_from_matrix(
     std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
     int const n_basis = coeffs.size();
 
-    auto gko_matrix = gko::batch::matrix::Csr<double, int>::
-            create(gko_exec,
-                   gko::batch_dim<2>(1, gko::dim<2>(n_basis, n_basis)),
-                   gko::array<double>::view(gko_exec, values.span(), values.data()),
-                   gko::array<int>::view(gko_exec, col_idx.span(), col_idx.data()),
-                   gko::array<int>::view(gko_exec, nnz_per_row.span(), nnz_per_row.data()));
+    std::unique_ptr<gko::batch::matrix::Csr<double, int>> gko_matrix
+            = gko::batch::matrix::Csr<double, int>::
+                    create(gko_exec,
+                           gko::batch_dim<2>(1, gko::dim<2>(n_basis, n_basis)),
+                           gko::array<double>::view(gko_exec, values.span(), values.data()),
+                           gko::array<int>::view(gko_exec, col_idx.span(), col_idx.data()),
+                           gko::array<int>::view(gko_exec, nnz_per_row.span(), nnz_per_row.data()));
 
     Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace>
             coeffs_view(coeffs.data_handle(), 1, n_basis);
     Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace>
             matrix_times_coeffs_view("matrix_times_coeffs", 1, n_basis);
-    auto gko_coeffs = to_gko_multivector(gko_exec, coeffs_view);
-    auto gko_matrix_times_coeffs = to_gko_multivector(gko_exec, matrix_times_coeffs_view);
+    std::shared_ptr<gko::batch::MultiVector<double>> gko_coeffs
+            = to_gko_multivector(gko_exec, coeffs_view);
+    std::shared_ptr<gko::batch::MultiVector<double>> gko_matrix_times_coeffs
+            = to_gko_multivector(gko_exec, matrix_times_coeffs_view);
 
     gko_matrix->apply(gko_coeffs, gko_matrix_times_coeffs);
 
-    auto result = gko::batch::MultiVector<
+    std::unique_ptr<gko::batch::MultiVector<double>> result = gko::batch::MultiVector<
             double>::create(gko_exec->get_master(), gko::batch_dim<2>(1, gko::dim<2>(1, 1)));
     gko_coeffs->compute_dot(gko_matrix_times_coeffs, result);
     return result->get_const_values()[0];
