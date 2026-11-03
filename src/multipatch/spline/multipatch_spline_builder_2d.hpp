@@ -28,7 +28,7 @@
  * This function is useful to avoid calling all the builders individually, especially in
  * a multipatch geometry with several patches.
  * 
- * @warning MultipatchSplineBuilder2D is implemented for tensor-product multi-patch decompositions. 
+ * @warning SplineBuilder2DCollection is implemented for tensor-product multi-patch decompositions.
  *
  * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
  * @tparam MemorySpace The space (CPU/GPU) where the coefficients and values are stored.
@@ -67,7 +67,7 @@ template <
         template <typename P>
         typename ValuesOnPatch,
         class... Patches>
-class MultipatchSplineBuilder2D
+class SplineBuilder2DCollection
 {
     static_assert(
             (((ddc::is_uniform_bsplines_v<BSpline1OnPatch<Patches>>)
@@ -289,7 +289,7 @@ private:
 
 public:
     /**
-     * @brief Instantiate the MultipatchSplineBuilder from a std::tuple 
+     * @brief Instantiate the SplineBuilderCollection from a std::tuple
      * of all the builder on each patch. 
      * 
      * @warning The builders have to be sorted in the same order as the patches
@@ -297,11 +297,11 @@ public:
      * 
      * @param builders Spline builders for each patch.
      */
-    explicit MultipatchSplineBuilder2D(BuilderOnPatch<Patches> const&... builders)
+    explicit SplineBuilder2DCollection(BuilderOnPatch<Patches> const&... builders)
         : m_builders(std::tie(builders...)) {};
 
 
-    ~MultipatchSplineBuilder2D() = default;
+    ~SplineBuilder2DCollection() = default;
 
     /**
      * @brief Build the spline representation of each given function.
