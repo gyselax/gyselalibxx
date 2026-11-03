@@ -429,7 +429,7 @@ private:
         constexpr bool patch_order_matches_interfaces = std::is_same_v<
                 typename stored_interface<I>::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
-        // The Patch with the idx_to_slice value corrresponding to the given value_idx_to_slice.
+        // The Patch with the idx_to_slice value corresponding to the given value_idx_to_slice.
         using PatchIndexSlice
                 = std::conditional_t<patch_order_matches_interfaces<I>, patch1<I>, patch2<I>>;
 
