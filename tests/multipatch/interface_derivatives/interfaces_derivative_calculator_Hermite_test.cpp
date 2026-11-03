@@ -14,7 +14,11 @@
 #include "interface_derivative_coefficients.hpp"
 #include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
+#if defined(APPROXIMATION)
 #include "interfaces_derivative_calculator.hpp"
+#else
+#include "interfaces_exact_derivative_calculator.hpp"
+#endif
 #include "interfaces_derivative_calculator_test_utils.hpp"
 #include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
@@ -25,7 +29,7 @@
 #include "view.hpp"
 
 /*
-    Test InterfacesDerivativeCalculator on the following geometry:
+    Test InterfacesDerivativeCalculator or InterfacesExactDerivativeCalculator on the following geometry:
 
     #if defined(REVERSE_PATCH1)
         |  1  |  2  |  3  | 
@@ -611,12 +615,24 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
                             typename PatchLayout::CoordTransform1::XTransform::CoordResult>>,
             AllGrids>;
 
+#if defined(APPROXIMATION)
     InterfacesDerivativeCalculator<
             Connectivity,
             Grid1AlongXg,
             ddc::TypeSeq<Patch1, Patch2, Patch3>,
             InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
             matrix(idx_ranges, deriv_coeffs_collect);
+#else
+    InterfacesExactDerivativeCalculator<
+            Connectivity,
+            Grid1AlongXg,
+            ddc::TypeSeq<Patch1, Patch2, Patch3>,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
+            matrix(idx_ranges, deriv_coeffs_collect);
+#endif
+
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
@@ -785,25 +801,36 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::TypeSeq<>;
 
+
+#if defined(APPROXIMATION)
+    const double TOL_deriv = 5e-2;
+    const double TOL_cross_deriv = 5e-2;
+    const double TOL_spline = 1e-6;
+#else
+    const double TOL_deriv = 1e-11;
+    const double TOL_cross_deriv = 1e-10;
+    const double TOL_spline = 1e-12;
+#endif
+
     // Check each derivatives ---
     check_all_x_derivatives(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
             coord_transforms,
-            5e-2);
+            TOL_deriv);
     check_all_y_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
             coord_transforms,
-            5e-2);
+            TOL_deriv);
     check_all_xy_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
             coord_transforms,
-            5e-2);
+            TOL_cross_deriv);
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<EmptyPatchSeq, EmptyPatchSeq>(
@@ -811,5 +838,5 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             evaluator_g,
             const_function_g_coef,
             coord_transforms,
-            1e-6);
+            TOL_spline);
 }

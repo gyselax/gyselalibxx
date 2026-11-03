@@ -441,10 +441,10 @@ private:
     {
         double const coeff_deriv_patch1
                 = m_derivatives_calculators.template get<stored_interface<I>>()
-                          .get_coeff_deriv_patch1();
+                          .get_coeff_deriv_patch_1();
         double const coeff_deriv_patch2
                 = m_derivatives_calculators.template get<stored_interface<I>>()
-                          .get_coeff_deriv_patch2();
+                          .get_coeff_deriv_patch_2();
         const double coeff_left
                 = patch_order_matches_interfaces<I> ? coeff_deriv_patch1 : coeff_deriv_patch2;
         const double coeff_right
@@ -530,12 +530,9 @@ private:
             int& slice_previous_idx_value,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
-        // Type for the slice_previous_idx_value index.
-        using PatchIndexSlice
-                = std::conditional_t<patch_order_matches_interfaces<I>, patch1<I>, patch2<I>>;
         Idx<grid_par1<I>> idx_slice_1;
         Idx<grid_par2<I>> idx_slice_2;
-        set_slice_indexes<I, PatchIndexSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+        set_slice_indexes<I>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
         DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
                 = functions_and_derivs.template get<patch1<I>>();
@@ -547,12 +544,12 @@ private:
         if constexpr (std::is_same_v<eval_type, eval_deriv>) {
             // The first derivatives are computed from the function values.
             lin_comb_funct = m_derivatives_calculators.template get<stored_interface<I>>()
-                                     .get_function_coefficients(
+                                     .get_approx_deriv(
                                              get_const_field(function_and_derivs_1[idx_slice_1]),
                                              get_const_field(function_and_derivs_2[idx_slice_2]));
         } else {
             IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
-            IdxRange<grid_par1<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
+            IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
 
             // The slice indices has to be a point at a corner, i.e. index range boundaries.
             assert((idx_slice_1 == idx_range_par_1.front())
@@ -566,7 +563,7 @@ private:
             // The cross-derivatives are computed from the first derivatives.
             lin_comb_funct
                     = m_derivatives_calculators.template get<stored_interface<I>>()
-                              .get_derivatives_coefficients(
+                              .get_approx_cross_deriv(
                                       get_const_field(function_and_derivs_1[idx_slice_deriv_1]),
                                       get_const_field(function_and_derivs_2[idx_slice_deriv_2]));
         }
@@ -579,7 +576,7 @@ private:
         if constexpr (std::is_same_v<eval_type, eval_cross_deriv>) {
             /*
                 > For the cross-derivative computation:
-                In get_derivatives_coefficients(), the sign of the derivatives on Patch2 is changed
+                In get_approx_cross_deriv(), the sign of the derivatives on Patch2 is changed
                 if the edge orientation desagree. We need to correct the sign, if Patch1 was 
                 ill-oriented. Because, 
                         d(f(-x)) = - df(-x).
@@ -630,10 +627,10 @@ private:
 
             const double coeff_deriv_1
                     = m_derivatives_calculators.template get<stored_interface<I>>()
-                              .get_coeff_deriv_patch1();
+                              .get_coeff_deriv_patch_1();
             const double coeff_deriv_2
                     = m_derivatives_calculators.template get<stored_interface<I>>()
-                              .get_coeff_deriv_patch2();
+                              .get_coeff_deriv_patch_2();
 
             if constexpr (is_lower_bound_deriv_dependent) {
                 m_vector->get_values()[I] += patch_order_matches_interfaces<I>
@@ -679,12 +676,9 @@ private:
         Idx<grid_perp1<I>> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1<I>);
         Idx<grid_perp2<I>> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2<I>);
 
-        // Type for the slice_previous_idx_value index.
-        using PatchIndexSlice
-                = std::conditional_t<patch_order_matches_interfaces<I>, patch1<I>, patch2<I>>;
         Idx<grid_par1<I>> idx_slice_1;
         Idx<grid_par2<I>> idx_slice_2;
-        set_slice_indexes<I, PatchIndexSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+        set_slice_indexes<I>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
         // Get the fields of the left and right patch of the interface.
         DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
