@@ -34,7 +34,7 @@ _Type of right-hand side (rhs) function of the Poisson equation._ [More...](#det
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::SplineEvaluatorND&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, ddc::detail::TypeSeq&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt;, ddc::detail::TypeSeq&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md) &gt;, ddc::detail::TypeSeq&lt; RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt; &gt; &gt; | [**evaluator\_type**](#typedef-evaluator_type)  <br>_The type of the 2D Spline Evaluator used by this class._  |
+| typedef ddc::SplineEvaluatorND&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, ddc::TypeSeq&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt;, ddc::TypeSeq&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md) &gt;, ddc::TypeSeq&lt; RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt; &gt; &gt; | [**evaluator\_type**](#typedef-evaluator_type)  <br>_The type of the 2D Spline Evaluator used by this class._  |
 
 
 
@@ -115,9 +115,9 @@ _The type of the 2D Spline Evaluator used by this class._
 using PoissonLikeRHSFunction< RadialExtrapolationRule >::evaluator_type =  ddc::SplineEvaluatorND<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
-            ddc::detail::TypeSeq<GridR, GridTheta>,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<BSplinesR, BSplinesTheta>,
+            ddc::TypeSeq<GridR, GridTheta>,
+            ddc::TypeSeq<
                     RadialExtrapolationRule,
                     RadialExtrapolationRule,
                     ddc::PeriodicExtrapolationRule<Theta>,

@@ -33,7 +33,9 @@ struct NonUniformLagrangeKnots : NonUniformGridBase<typename T::continuous_dimen
 };
 
 template <class Dim, std::size_t D, class DataType = double>
-class NonUniformLagrangeBasis : detail::NonUniformLagrangeBasisBase
+class NonUniformLagrangeBasis
+    : detail::NonUniformLagrangeBasisBase
+    , ddc::DiscreteDimension
 {
     static_assert(D > 0, "Parameter `D` must be positive");
     static_assert(std::is_floating_point_v<DataType>);

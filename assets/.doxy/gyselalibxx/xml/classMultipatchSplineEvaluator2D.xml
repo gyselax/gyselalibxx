@@ -655,9 +655,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="169" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="169" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aa191e7090a05e52eba9356e16fb83fa6" prot="private" static="no">
-        <type>ddc::detail::TypeSeq&lt; Patches... &gt;</type>
-        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::PatchOrdering =  ddc::detail::TypeSeq&lt;Patches...&gt;</definition>
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1af8c9d13a331d0fcc569187dfd0cc822f" prot="private" static="no">
+        <type>ddc::TypeSeq&lt; Patches... &gt;</type>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::PatchOrdering =  ddc::TypeSeq&lt;Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>PatchOrdering</name>
         <qualifiedname>MultipatchSplineEvaluator2D::PatchOrdering</qualifiedname>
@@ -1726,7 +1726,7 @@
       <member refid="classMultipatchSplineEvaluator2D_1a6d3f057e123cd847109fae5a4e190149" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>operator()</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1aaecde8a4cb5fccb1f10dadf7a09b4300" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>operator()</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a0cefc4f9fa8129e406460a42ab96f554" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>order_zero</name></member>
-      <member refid="classMultipatchSplineEvaluator2D_1aa191e7090a05e52eba9356e16fb83fa6" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>PatchOrdering</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1af8c9d13a331d0fcc569187dfd0cc822f" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>PatchOrdering</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1acbf2b63d3ee103a3ce66becfb0dd1fae" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>physical_grids</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1ab7944d51e021686cdc7a39efba80cab0" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>rank</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a3bcd50970e9d3c90d2d3c06f507dae6e" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>recursive_dispatch_patch_function</name></member>

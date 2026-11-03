@@ -1139,7 +1139,7 @@
     <innerclass refid="structtensor__tools_1_1VectorIndexIdMap" prot="public">tensor_tools::VectorIndexIdMap</innerclass>
     <innernamespace refid="namespacetensor__tools">tensor_tools</innernamespace>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="vector__index__tools_8hpp_1a9968d5f033614a0e6c8412f3e2c42398" prot="public" static="no">
+      <memberdef kind="typedef" id="vector__index__tools_8hpp_1a3484c1f35a68b7824f90e42a2271f20c" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -1147,8 +1147,8 @@
             <defname>Dims</defname>
           </param>
         </templateparamlist>
-        <type>ddc::detail::TypeSeq&lt; Dims... &gt;</type>
-        <definition>using VectorIndexSet =  ddc::detail::TypeSeq&lt;Dims...&gt;</definition>
+        <type>ddc::TypeSeq&lt; Dims... &gt;</type>
+        <definition>using VectorIndexSet =  ddc::TypeSeq&lt;Dims...&gt;</definition>
         <argsstring></argsstring>
         <name>VectorIndexSet</name>
         <briefdescription>
@@ -1335,7 +1335,7 @@
 <codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorIndexSet<sp/>=<sp/>ddc::detail::TypeSeq&lt;Dims...&gt;;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorIndexSet<sp/>=<sp/>ddc::TypeSeq&lt;Dims...&gt;;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacetensor__tools" kindref="compound">tensor_tools</ref><sp/>{</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>

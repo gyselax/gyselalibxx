@@ -825,36 +825,33 @@ template &lt;template &lt;class Tag&gt; class Templ, class TypeSeq&gt;
 struct ApplyTemplateToTypeSeq;
 
 template &lt;template &lt;class Tag&gt; class Templ, class... Tags&gt;
-struct ApplyTemplateToTypeSeq&lt;Templ, ddc::detail::TypeSeq&lt;Tags...&gt;&gt;
+struct ApplyTemplateToTypeSeq&lt;Templ, ddc::TypeSeq&lt;Tags...&gt;&gt;
 {
-    using type = ddc::detail::TypeSeq&lt;Templ&lt;Tags&gt;...&gt;;
+    using type = ddc::TypeSeq&lt;Templ&lt;Tags&gt;...&gt;;
 };
 
 template &lt;class TagSeqA, class TagSeqB, class TagSeqR&gt;
 struct TypeSeqIntersection;
 
 template &lt;class TypeSeqA, class TypeSeqR&gt;
-struct TypeSeqIntersection&lt;TypeSeqA, ddc::detail::TypeSeq&lt;&gt;, TypeSeqR&gt;
+struct TypeSeqIntersection&lt;TypeSeqA, ddc::TypeSeq&lt;&gt;, TypeSeqR&gt;
 {
     using type = TypeSeqR;
 };
 
 template &lt;class TypeSeqA, class HeadTagsB, class... TailTagsB, class... TagsR&gt;
-struct TypeSeqIntersection&lt;
-        TypeSeqA,
-        ddc::detail::TypeSeq&lt;HeadTagsB, TailTagsB...&gt;,
-        ddc::detail::TypeSeq&lt;TagsR...&gt;&gt;
+struct TypeSeqIntersection&lt;TypeSeqA, ddc::TypeSeq&lt;HeadTagsB, TailTagsB...&gt;, ddc::TypeSeq&lt;TagsR...&gt;&gt;
 {
     using type = std::conditional_t&lt;
             ddc::in_tags_v&lt;HeadTagsB, TypeSeqA&gt;,
             typename TypeSeqIntersection&lt;
                     TypeSeqA,
-                    ddc::detail::TypeSeq&lt;TailTagsB...&gt;,
-                    ddc::detail::TypeSeq&lt;TagsR..., HeadTagsB&gt;&gt;::type,
+                    ddc::TypeSeq&lt;TailTagsB...&gt;,
+                    ddc::TypeSeq&lt;TagsR..., HeadTagsB&gt;&gt;::type,
             typename TypeSeqIntersection&lt;
                     TypeSeqA,
-                    ddc::detail::TypeSeq&lt;TailTagsB...&gt;,
-                    ddc::detail::TypeSeq&lt;TagsR...&gt;&gt;::type&gt;;
+                    ddc::TypeSeq&lt;TailTagsB...&gt;,
+                    ddc::TypeSeq&lt;TagsR...&gt;&gt;::type&gt;;
 };
 
 
@@ -862,7 +859,7 @@ template &lt;class ValidIndexSet&gt;
 struct ToCoord;
 
 template &lt;class... Dims&gt;
-struct ToCoord&lt;ddc::detail::TypeSeq&lt;Dims...&gt;&gt;
+struct ToCoord&lt;ddc::TypeSeq&lt;Dims...&gt;&gt;
 {
     using type = Coord&lt;Dims...&gt;;
 };
@@ -887,7 +884,7 @@ using apply_template_to_type_seq_t = typename detail::ApplyTemplateToTypeSeq&lt;
 
 template &lt;class TypeSeq1, class TypeSeq2&gt;
 using type_seq_intersection_t =
-        typename detail::TypeSeqIntersection&lt;TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt;&gt;::type;
+        typename detail::TypeSeqIntersection&lt;TypeSeq1, TypeSeq2, ddc::TypeSeq&lt;&gt;&gt;::type;
 
 template &lt;class ValidIndexSet&gt;
 using to_coord_t = typename detail::ToCoord&lt;ValidIndexSet&gt;::type;

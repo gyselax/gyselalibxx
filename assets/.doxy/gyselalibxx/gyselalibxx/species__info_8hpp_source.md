@@ -18,7 +18,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 
-class SpeciesInformation
+class SpeciesInformation : ddc::DiscreteDimension
 {
 public:
     using discrete_dimension_type = SpeciesInformation;

@@ -672,7 +672,7 @@ private:
     using MultipatchSplineCoeff = MultipatchField&lt;SplineCoeffOnPatch, Patches...&gt;;
 
     // Patches
-    using PatchOrdering = ddc::detail::TypeSeq&lt;Patches...&gt;;
+    using PatchOrdering = ddc::TypeSeq&lt;Patches...&gt;;
 
 
     // As we work with the same continuous dimensions --------------------------------------------
@@ -779,7 +779,7 @@ public:
             MultipatchSplineCoeff const&amp; patches_splines) const
     {
         static_assert(
-                (ddc::in_tags_v&lt;DerivDims, ddc::detail::TypeSeq&lt;DerivDim1, DerivDim2&gt;&gt; &amp;&amp; ...),
+                (ddc::in_tags_v&lt;DerivDims, ddc::TypeSeq&lt;DerivDim1, DerivDim2&gt;&gt; &amp;&amp; ...),
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
                 "(same dimensions for all the patches).");
         int const patch_idx = get_patch_idx(coord_eval);
@@ -802,7 +802,7 @@ public:
             MultipatchSplineCoeff const&amp; patches_splines) const
     {
         static_assert(
-                (ddc::in_tags_v&lt;DerivDims, ddc::detail::TypeSeq&lt;DerivDim1, DerivDim2&gt;&gt; &amp;&amp; ...),
+                (ddc::in_tags_v&lt;DerivDims, ddc::TypeSeq&lt;DerivDim1, DerivDim2&gt;&gt; &amp;&amp; ...),
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
                 "(same dimensions for all the patches).");
         if constexpr ((is_deriv_field_v&lt;ValuesOnPatch&lt;Patches&gt;&gt; &amp;&amp; ...)) {
@@ -1070,7 +1070,7 @@ private:
             DConstField&lt;spline_idx_range_type&lt;Patch&gt;, memory_space, Layout&gt; const&amp; spline_coef)
             const
     {
-        using deriv_dims_seq = ddc::detail::TypeSeq&lt;DerivDims...&gt;;
+        using deriv_dims_seq = ddc::TypeSeq&lt;DerivDims...&gt;;
 
         using bsplines_1 = bsplines_type1&lt;Patch&gt;;
         using bsplines_2 = bsplines_type2&lt;Patch&gt;;

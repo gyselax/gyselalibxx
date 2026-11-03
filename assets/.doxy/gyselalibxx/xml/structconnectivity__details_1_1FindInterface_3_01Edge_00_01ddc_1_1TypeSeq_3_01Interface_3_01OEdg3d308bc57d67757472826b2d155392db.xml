@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</compoundname>
+    <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structEdge" kindref="compound">Edge</ref></type>
+      </param>
+      <param>
+        <type>class OEdge</type>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>Orientations</declname>
+        <defname>Orientations</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>RemainingInterfaceTypes</declname>
+        <defname>RemainingInterfaceTypes</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db_1a5c4dc8f4b19d15b8ec153f5187d1e2cd" prot="public" static="no">
+        <type><ref refid="structInterface" kindref="compound">Interface</ref>&lt; OEdge, <ref refid="structEdge" kindref="compound">Edge</ref>, Orientations &gt;</type>
+        <definition>using connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;::type =  Interface&lt;OEdge, Edge, Orientations&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The type found by the class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="219" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="219" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Specialisation of <ref refid="structconnectivity__details_1_1FindInterface" kindref="compound">FindInterface</ref> for the case where Edge1 from the second interface matches <ref refid="structEdge" kindref="compound">Edge</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="214" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="217" bodyend="220"/>
+    <listofallmembers>
+      <member refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db_1a5c4dc8f4b19d15b8ec153f5187d1e2cd" prot="public" virt="non-virtual"><scope>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

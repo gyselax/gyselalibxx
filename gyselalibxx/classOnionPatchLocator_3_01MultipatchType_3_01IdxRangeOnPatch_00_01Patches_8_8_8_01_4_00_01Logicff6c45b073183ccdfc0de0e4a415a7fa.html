@@ -590,8 +590,8 @@
 <td style="text-align: left;"><a href="#typedef-multipatchidxranges"><strong>MultipatchIdxRanges</strong></a>  <br><em>MultipatchType storing the index range.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; Patches... &gt;</td>
-<td style="text-align: left;"><a href="#typedef-patchordering"><strong>PatchOrdering</strong></a>  <br><em>Sequence ddc::detail::TypeSeq of patch tags.</em></td>
+<td style="text-align: right;">typedef ddc::TypeSeq&lt; Patches... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-patchordering"><strong>PatchOrdering</strong></a>  <br><em>Sequence ddc::TypeSeq of patch tags.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef ExecSpace</td>
@@ -673,8 +673,8 @@
 <hr>
 
 <h3 id="typedef-patchordering">typedef PatchOrdering</h3>
-<p><em>Sequence ddc::detail::TypeSeq of patch tags.</em> </p>
-<pre><code class="language-C++">using OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;::PatchOrdering =  ddc::detail::TypeSeq&lt;Patches...&gt;;
+<p><em>Sequence ddc::TypeSeq of patch tags.</em> </p>
+<pre><code class="language-C++">using OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;::PatchOrdering =  ddc::TypeSeq&lt;Patches...&gt;;
 </code></pre>
 <hr>
 

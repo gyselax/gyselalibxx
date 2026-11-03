@@ -35,14 +35,14 @@ _An abstract class which holds a chunk of memory describing a field and its deri
 | Type | Name |
 | ---: | :--- |
 | typedef FieldType | [**chunk\_type**](#typedef-chunk_type)  <br>_The type of the field stored in the array._  |
-| typedef detail::deriv\_sub\_set\_t&lt; ddc::detail::TypeSeq&lt; DDims... &gt; &gt; | [**deriv\_tags**](#typedef-deriv_tags)  <br>_A type sequence containing all derivatives present in this object._  |
+| typedef detail::deriv\_sub\_set\_t&lt; ddc::TypeSeq&lt; DDims... &gt; &gt; | [**deriv\_tags**](#typedef-deriv_tags)  <br>_A type sequence containing all derivatives present in this object._  |
 | typedef IdxRange&lt; DDims... &gt; | [**discrete\_domain\_type**](#typedef-discrete_domain_type)  <br>_The IdxRange on which the fields in this object are defined._  |
 | typedef Idx&lt; DDims... &gt; | [**discrete\_element\_type**](#typedef-discrete_element_type)  <br>_The Idx which can be used to index this object._  |
 | typedef typename chunk\_type::element\_type | [**element\_type**](#typedef-element_type)  <br>_The type of the elements in the fields._  |
 | typedef [**discrete\_domain\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-discrete_domain_type) | [**index\_range\_type**](#typedef-index_range_type)  <br>_The IdxRange on which the fields in this object are defined._  |
 | typedef [**discrete\_element\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-discrete_element_type) | [**index\_type**](#typedef-index_type)  <br>_The Idx which can be used to index this object._  |
-| typedef find\_all\_grids\_t&lt; detail::strip\_deriv\_t&lt; [**deriv\_tags**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-deriv_tags) &gt;, ddc::detail::TypeSeq&lt; DDims... &gt; &gt; | [**physical\_deriv\_grids**](#typedef-physical_deriv_grids)  <br>_A type sequence containing all physical dimensions for which derivatives are present in this object._  |
-| typedef ddc::type\_seq\_remove\_t&lt; ddc::detail::TypeSeq&lt; DDims... &gt;, [**deriv\_tags**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-deriv_tags) &gt; | [**physical\_grids**](#typedef-physical_grids)  <br>_A type sequence containing all the physical grids on which the fields are defined._  |
+| typedef find\_all\_grids\_t&lt; detail::strip\_deriv\_t&lt; [**deriv\_tags**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-deriv_tags) &gt;, ddc::TypeSeq&lt; DDims... &gt; &gt; | [**physical\_deriv\_grids**](#typedef-physical_deriv_grids)  <br>_A type sequence containing all physical dimensions for which derivatives are present in this object._  |
+| typedef ddc::type\_seq\_remove\_t&lt; ddc::TypeSeq&lt; DDims... &gt;, [**deriv\_tags**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-deriv_tags) &gt; | [**physical\_grids**](#typedef-physical_grids)  <br>_A type sequence containing all the physical grids on which the fields are defined._  |
 
 
 
@@ -184,7 +184,7 @@ This is a DDC keyword used to make this class interchangeable with Field. In DDC
 
 _A type sequence containing all derivatives present in this object._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::deriv_tags =  detail::deriv_sub_set_t<ddc::detail::TypeSeq<DDims...>>;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::deriv_tags =  detail::deriv_sub_set_t<ddc::TypeSeq<DDims...>>;
 ```
 
 
@@ -276,7 +276,7 @@ using DerivFieldCommon< FieldType, IdxRange< DDims... > >::index_type =  discret
 
 _A type sequence containing all physical dimensions for which derivatives are present in this object._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_deriv_grids =  find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...>>;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_deriv_grids =  find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::TypeSeq<DDims...>>;
 ```
 
 
@@ -290,7 +290,7 @@ using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_deriv_grids 
 
 _A type sequence containing all the physical grids on which the fields are defined._ 
 ```C++
-using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_grids =  ddc::type_seq_remove_t<ddc::detail::TypeSeq<DDims...>, deriv_tags>;
+using DerivFieldCommon< FieldType, IdxRange< DDims... > >::physical_grids =  ddc::type_seq_remove_t<ddc::TypeSeq<DDims...>, deriv_tags>;
 ```
 
 

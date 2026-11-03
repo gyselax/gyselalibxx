@@ -785,12 +785,12 @@ struct assemble_helper&lt;
 template &lt;class ExecSpace, class TypeSeqInternalTypes, class... Patches&gt;
 struct assemble_helper&lt;
         ExecSpace,
-        detail::MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;&gt;
+        detail::MultipatchFieldMem&lt;ddc::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;&gt;
 {
-    using DerivFieldMemType = typename detail::
-            MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;;
+    using DerivFieldMemType =
+            typename detail::MultipatchFieldMem&lt;ddc::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;;
     using DerivFieldType = typename detail::
-            MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;::span_type;
+            MultipatchFieldMem&lt;ddc::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes&gt;::span_type;
 
     template &lt;class FuncType, class... KType&gt;
     static void assemble_k_total(

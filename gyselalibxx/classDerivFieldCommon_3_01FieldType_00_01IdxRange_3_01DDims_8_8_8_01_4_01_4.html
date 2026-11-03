@@ -590,7 +590,7 @@
 <td style="text-align: left;"><a href="#typedef-chunk_type"><strong>chunk_type</strong></a>  <br><em>The type of the field stored in the array.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef detail::deriv_sub_set_t&lt; ddc::detail::TypeSeq&lt; DDims... &gt; &gt;</td>
+<td style="text-align: right;">typedef detail::deriv_sub_set_t&lt; ddc::TypeSeq&lt; DDims... &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-deriv_tags"><strong>deriv_tags</strong></a>  <br><em>A type sequence containing all derivatives present in this object.</em></td>
 </tr>
 <tr>
@@ -614,11 +614,11 @@
 <td style="text-align: left;"><a href="#typedef-index_type"><strong>index_type</strong></a>  <br><em>The Idx which can be used to index this object.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef find_all_grids_t&lt; detail::strip_deriv_t&lt; <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-deriv_tags"><strong>deriv_tags</strong></a> &gt;, ddc::detail::TypeSeq&lt; DDims... &gt; &gt;</td>
+<td style="text-align: right;">typedef find_all_grids_t&lt; detail::strip_deriv_t&lt; <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-deriv_tags"><strong>deriv_tags</strong></a> &gt;, ddc::TypeSeq&lt; DDims... &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-physical_deriv_grids"><strong>physical_deriv_grids</strong></a>  <br><em>A type sequence containing all physical dimensions for which derivatives are present in this object.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::type_seq_remove_t&lt; ddc::detail::TypeSeq&lt; DDims... &gt;, <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-deriv_tags"><strong>deriv_tags</strong></a> &gt;</td>
+<td style="text-align: right;">typedef ddc::type_seq_remove_t&lt; ddc::TypeSeq&lt; DDims... &gt;, <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-deriv_tags"><strong>deriv_tags</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-physical_grids"><strong>physical_grids</strong></a>  <br><em>A type sequence containing all the physical grids on which the fields are defined.</em></td>
 </tr>
 </tbody>
@@ -818,7 +818,7 @@
 
 <h3 id="typedef-deriv_tags">typedef deriv_tags</h3>
 <p><em>A type sequence containing all derivatives present in this object.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::deriv_tags =  detail::deriv_sub_set_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;&gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::deriv_tags =  detail::deriv_sub_set_t&lt;ddc::TypeSeq&lt;DDims...&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -856,13 +856,13 @@
 
 <h3 id="typedef-physical_deriv_grids">typedef physical_deriv_grids</h3>
 <p><em>A type sequence containing all physical dimensions for which derivatives are present in this object.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_deriv_grids =  find_all_grids_t&lt;detail::strip_deriv_t&lt;deriv_tags&gt;, ddc::detail::TypeSeq&lt;DDims...&gt;&gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_deriv_grids =  find_all_grids_t&lt;detail::strip_deriv_t&lt;deriv_tags&gt;, ddc::TypeSeq&lt;DDims...&gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-physical_grids">typedef physical_grids</h3>
 <p><em>A type sequence containing all the physical grids on which the fields are defined.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_grids =  ddc::type_seq_remove_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;, deriv_tags&gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_grids =  ddc::type_seq_remove_t&lt;ddc::TypeSeq&lt;DDims...&gt;, deriv_tags&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

@@ -32,8 +32,8 @@ class IPoissonSolver<IdxRange<ODims...>, IdxRangeFull, DataType, MemorySpace, La
     static_assert(std::is_floating_point_v<DataType>);
 
 protected:
-    using real_laplacian_tags = ddc::detail::TypeSeq<typename ODims::continuous_dimension_type...>;
-    using laplacian_tags = ddc::detail::TypeSeq<ODims...>;
+    using real_laplacian_tags = ddc::TypeSeq<typename ODims::continuous_dimension_type...>;
+    using laplacian_tags = ddc::TypeSeq<ODims...>;
     using space_tags = ddc::to_type_seq_t<IdxRangeFull>;
     using batch_tags = ddc::type_seq_remove_t<space_tags, laplacian_tags>;
 

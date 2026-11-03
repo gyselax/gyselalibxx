@@ -3,6 +3,7 @@
   <compounddef id="classGyroAverageOperator" kind="class" language="C++" prot="public">
     <compoundname>GyroAverageOperator</compoundname>
     <includes refid="gyroaverage__operator_8hpp" local="no">gyroaverage_operator.hpp</includes>
+    <innerclass refid="structGyroAverageOperator_1_1CoeffList" prot="public">GyroAverageOperator::CoeffList</innerclass>
     <templateparamlist>
       <param>
         <type><ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref></type>
@@ -260,7 +261,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGyroAverageOperator_1ab396f1d1823850dffe054cd73138410f" prot="private" static="no">
-        <type>IdxRange&lt; CoeffList &gt;</type>
+        <type>IdxRange&lt; <ref refid="structGyroAverageOperator_1_1CoeffList" kindref="compound">CoeffList</ref> &gt;</type>
         <definition>using GyroAverageOperator&lt; InterpolatorType, IdxRangeParams, IdxRangeBatch &gt;::IdxRangeList =  IdxRange&lt;CoeffList&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeList</name>
@@ -272,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="67" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGyroAverageOperator_1a6ca0b6c064828b697a8608f5ca2a63f5" prot="private" static="no">
         <type>typename IdxRangeList::discrete_element_type</type>
@@ -286,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="68" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGyroAverageOperator_1a7e8b4ae73c2ed2b0bb3afc11442abaf1" prot="private" static="no">
         <type>ddc::combine_t&lt; IdxRangeGyroSpace, IdxRangeList &gt;</type>
@@ -300,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="69" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="71" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -317,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="73" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGyroAverageOperator_1a97c178adbedf3f42531a89fc2ec24ae3" prot="public" static="no">
         <type>DFieldMem&lt; IdxRangeGyroCoeffs &gt;</type>
@@ -332,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="75" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGyroAverageOperator_1a8ccaef06442c1d4be2445aee7bf2f1a9" prot="public" static="no">
         <type>Field&lt; CoordsInterpSpace, IdxRangeGyroCoeffs &gt;</type>
@@ -347,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="78" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGyroAverageOperator_1a2cd1798bbcdc13e858508575fc431884" prot="public" static="no">
         <type>DField&lt; IdxRangeGyroCoeffs &gt;</type>
@@ -362,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="80" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="82" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -379,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="86" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="86" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="88" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGyroAverageOperator_1aad8560d3ec4a060f82149df28b0705d4" prot="private" static="no" mutable="no">
         <type>InterpSpaceEvaluatorType const  &amp;</type>
@@ -394,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="91" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="91" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="93" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGyroAverageOperator_1a458fc7d25a2c2b0f060c5a516f563a6c" prot="private" static="no" mutable="no">
         <type><ref refid="classGyroAverageOperator_1a8ccaef06442c1d4be2445aee7bf2f1a9" kindref="member">GyroCoeffsCoords</ref> const</type>
@@ -409,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="96" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="96" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="98" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGyroAverageOperator_1ae65af373443e20f40904a8e30c8ef423" prot="private" static="no" mutable="no">
         <type><ref refid="classGyroAverageOperator_1a2cd1798bbcdc13e858508575fc431884" kindref="member">GyroCoeffsWeights</ref> const</type>
@@ -423,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="97" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="97" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="99" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGyroAverageOperator_1a96f01262c67e46a659b2ff5cdf99cb15" prot="private" static="no" mutable="no">
         <type>size_t const</type>
@@ -432,13 +433,13 @@
         <name>m_nb_gyro_points</name>
         <qualifiedname>GyroAverageOperator::m_nb_gyro_points</qualifiedname>
         <briefdescription>
-<para>Number of points (size of the coefficients in the <computeroutput>CoeffList</computeroutput> dimension). </para>
+<para>Number of points (size of the coefficients in the <computeroutput><ref refid="structGyroAverageOperator_1_1CoeffList" kindref="compound">CoeffList</ref></computeroutput> dimension). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="102" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="102" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="104" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="104" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -496,7 +497,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="114" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="114" bodyend="131"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="116" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="116" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="classGyroAverageOperator_1aabfd28f6da8037b8f81ff0a43f244b51" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -572,7 +573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="147" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="147" bodyend="197"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="149" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="149" bodyend="199"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -627,7 +628,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="206" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="206" bodyend="216"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="208" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="208" bodyend="218"/>
       </memberdef>
       <memberdef kind="function" id="classGyroAverageOperator_1ac92ea68076d6e4c52115654173bfd05d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -657,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="225" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="225" bodyend="232"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="227" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="227" bodyend="234"/>
       </memberdef>
       <memberdef kind="function" id="classGyroAverageOperator_1af781df4e55cf415c14336d8d650d3a89" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -698,7 +699,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="241" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="241" bodyend="284"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="243" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="243" bodyend="286"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -739,7 +740,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="37" bodyend="287"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="37" bodyend="289"/>
     <listofallmembers>
       <member refid="classGyroAverageOperator_1aabfd28f6da8037b8f81ff0a43f244b51" prot="public" virt="non-virtual"><scope>GyroAverageOperator</scope><name>build_circular_coefficients</name></member>
       <member refid="classGyroAverageOperator_1a610df07b5e5eecaa393b4716f77df11e" prot="public" virt="non-virtual"><scope>GyroAverageOperator</scope><name>build_empty_coefficients</name></member>

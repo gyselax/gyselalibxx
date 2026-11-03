@@ -3,27 +3,27 @@
   <compounddef id="namespaceconnectivity__details" kind="namespace" language="C++">
     <compoundname>connectivity_details</compoundname>
     <innerclass refid="structconnectivity__details_1_1PatchConnection" prot="public">connectivity_details::PatchConnection</innerclass>
-    <innerclass refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt;&gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01InterfaceType_01_4_01_4" prot="public">connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01Interd9a0a5e7aafe0b71fe7c76720b7c5da6" prot="public">connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt; InterfaceType1, RemainingInterfaceTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::PatchConnection&lt; Patch, ddc::TypeSeq&lt;&gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_01InterfaceType_01_4_01_4" prot="public">connectivity_details::PatchConnection&lt; Patch, ddc::TypeSeq&lt; InterfaceType &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_01InterfaceType1_06c0add68931ef7e3252d237eeb2c9f3" prot="public">connectivity_details::PatchConnection&lt; Patch, ddc::TypeSeq&lt; InterfaceType1, RemainingInterfaceTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1StripOutsideEdges" prot="public">connectivity_details::StripOutsideEdges</innerclass>
-    <innerclass refid="structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType_01_4_01_4" prot="public">connectivity_details::StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_036e9ce7e4506982efa52c09ca049ae90" prot="public">connectivity_details::StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType1, RemainingEdgeTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1TypeSeq_3_01EdgeType_01_4_01_4" prot="public">connectivity_details::StripOutsideEdges&lt; ddc::TypeSeq&lt; EdgeType &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1TypeSeq_3_01EdgeType1_00_01RemainingEdgeTypes_8_8_8_01_4_01_4" prot="public">connectivity_details::StripOutsideEdges&lt; ddc::TypeSeq&lt; EdgeType1, RemainingEdgeTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1ToTuple" prot="public">connectivity_details::ToTuple</innerclass>
-    <innerclass refid="structconnectivity__details_1_1ToTuple_3_01ddc_1_1detail_1_1TypeSeq_3_01I_8_8_8_01_4_01_4" prot="public">connectivity_details::ToTuple&lt; ddc::detail::TypeSeq&lt; I... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1ToTuple_3_01ddc_1_1TypeSeq_3_01I_8_8_8_01_4_01_4" prot="public">connectivity_details::ToTuple&lt; ddc::TypeSeq&lt; I... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1ExtractPatches" prot="public">connectivity_details::ExtractPatches</innerclass>
-    <innerclass refid="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt;&gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4" prot="public">connectivity_details::ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::ExtractPatches&lt; ddc::TypeSeq&lt;&gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4" prot="public">connectivity_details::ExtractPatches&lt; ddc::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindPatch" prot="public">connectivity_details::FindPatch</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::FindPatch&lt; Grid1D, ddc::detail::TypeSeq&lt;&gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1detail_1_1TypeSeq_3_01Patchd8fc8921dec760f8fe4c90c2a6947228" prot="public">connectivity_details::FindPatch&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; Patch&lt; QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1detail_1_1TypeSeq_3_01Patch5f5acd76cfd59a22ebf513823679a320" prot="public">connectivity_details::FindPatch&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1detail_1_1TypeSeq_3_01Patch1_00_33770856242f7c5cee1ce419b2efaf64" prot="public">connectivity_details::FindPatch&lt; Grid1D, ddc::detail::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt;&gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Querycbbead3cd1875a221db0168a1c63b042" prot="public">connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01OGriddb5ce0145837c75e1ed261db118369eb" prot="public">connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patch1_00_01RemainingPatchTypes_8_8_8_01_4_01_4" prot="public">connectivity_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindInterface" prot="public">connectivity_details::FindInterface</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::detail::TypeSeq&lt;&gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1detail_1_1TypeSeq_3_01Interfac6d31b188ee73012ad6c98be99219379f" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::detail::TypeSeq&lt; Interface1, RemainingInterfaceTypes... &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1detail_1_1TypeSeq_3_01Interfacd1aa547d7cc4bf022e85928246ab2d07" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::detail::TypeSeq&lt; Interface&lt; Edge, OEdge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1detail_1_1TypeSeq_3_01Interfacee698732bdf35f06db097afe1714904c" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::detail::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;&gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface1_00_01Re9a613ed41c91d250bbda6f232579e462" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface1, RemainingInterfaceTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01Edgec6b87a48d5038cef222acdcb526280f3" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; Edge, OEdge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge" prot="public">connectivity_details::EnforceFirstInterfaceEdge</innerclass>
     <innerclass refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01FirstEdge_00_01Edge2_788676fcb3310ca4c1ec984ff0b4531b" prot="public">connectivity_details::EnforceFirstInterfaceEdge&lt; Interface&lt; FirstEdge, Edge2, Orientations &gt;, FirstEdge &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01Edge2_00_01FirstEdge_221a02b03250a49af1745b2263467420" prot="public">connectivity_details::EnforceFirstInterfaceEdge&lt; Interface&lt; Edge2, FirstEdge, Orientations &gt;, FirstEdge &gt;</innerclass>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="292" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="292" bodyend="292"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="290" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="290" bodyend="290"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="250" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="250" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="248" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="248" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

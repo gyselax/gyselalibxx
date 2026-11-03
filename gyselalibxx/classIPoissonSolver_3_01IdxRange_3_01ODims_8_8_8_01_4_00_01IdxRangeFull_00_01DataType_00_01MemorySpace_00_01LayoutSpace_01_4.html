@@ -652,11 +652,11 @@
 <td style="text-align: left;"><a href="#typedef-batch_tags"><strong>batch_tags</strong></a>  <br><em>The tags describing the batched dimensions.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; ODims... &gt;</td>
+<td style="text-align: right;">typedef ddc::TypeSeq&lt; ODims... &gt;</td>
 <td style="text-align: left;"><a href="#typedef-laplacian_tags"><strong>laplacian_tags</strong></a>  <br><em>The tags describing the discrete dimensions in the equation.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; typename ODims::continuous_dimension_type... &gt;</td>
+<td style="text-align: right;">typedef ddc::TypeSeq&lt; typename ODims::continuous_dimension_type... &gt;</td>
 <td style="text-align: left;"><a href="#typedef-real_laplacian_tags"><strong>real_laplacian_tags</strong></a>  <br><em>The tags describing the real dimensions in the equation.</em></td>
 </tr>
 <tr>
@@ -785,13 +785,13 @@
 
 <h3 id="typedef-laplacian_tags">typedef laplacian_tags</h3>
 <p><em>The tags describing the discrete dimensions in the equation.</em> </p>
-<pre><code class="language-C++">using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::laplacian_tags =  ddc::detail::TypeSeq&lt;ODims...&gt;;
+<pre><code class="language-C++">using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::laplacian_tags =  ddc::TypeSeq&lt;ODims...&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-real_laplacian_tags">typedef real_laplacian_tags</h3>
 <p><em>The tags describing the real dimensions in the equation.</em> </p>
-<pre><code class="language-C++">using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::real_laplacian_tags =  ddc::detail::TypeSeq&lt;typename ODims::continuous_dimension_type...&gt;;
+<pre><code class="language-C++">using IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;::real_laplacian_tags =  ddc::TypeSeq&lt;typename ODims::continuous_dimension_type...&gt;;
 </code></pre>
 <hr>
 

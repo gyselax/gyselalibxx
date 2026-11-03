@@ -46,9 +46,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impilayout.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impilayout.hpp" bodystart="23" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classIMPILayout_1a5734be7b4782cfd49498bd2ad6610353" prot="public" static="no">
-        <type>ddc::detail::TypeSeq&lt; DistributedDim... &gt;</type>
-        <definition>using IMPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_type_seq =  ddc::detail::TypeSeq&lt;DistributedDim...&gt;</definition>
+      <memberdef kind="typedef" id="classIMPILayout_1acf615fb47f713e88e7188b57102a2eb5" prot="public" static="no">
+        <type>ddc::TypeSeq&lt; DistributedDim... &gt;</type>
+        <definition>using IMPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_type_seq =  ddc::TypeSeq&lt;DistributedDim...&gt;</definition>
         <argsstring></argsstring>
         <name>distributed_type_seq</name>
         <qualifiedname>IMPILayout::distributed_type_seq</qualifiedname>
@@ -186,7 +186,7 @@
       <member refid="classIMPILayout_1aa958ea8d8ed3431a7d14e0333e379566" prot="public" virt="non-virtual"><scope>IMPILayout</scope><name>discrete_domain_type</name></member>
       <member refid="classIMPILayout_1aab14961802d15d51c8a1a45c7896e64d" prot="public" virt="non-virtual"><scope>IMPILayout</scope><name>distributed_idx_ranges_are_first</name></member>
       <member refid="classIMPILayout_1affaed5e5e8eba26de6e64662c6ebc7d7" prot="public" virt="non-virtual"><scope>IMPILayout</scope><name>distributed_sub_idx_range</name></member>
-      <member refid="classIMPILayout_1a5734be7b4782cfd49498bd2ad6610353" prot="public" virt="non-virtual"><scope>IMPILayout</scope><name>distributed_type_seq</name></member>
+      <member refid="classIMPILayout_1acf615fb47f713e88e7188b57102a2eb5" prot="public" virt="non-virtual"><scope>IMPILayout</scope><name>distributed_type_seq</name></member>
       <member refid="classIMPILayout_1ab55757fa0972d849a94feeca30a9f465" prot="public" virt="non-virtual"><scope>IMPILayout</scope><name>n_distributed_dimensions</name></member>
       <member refid="classIMPILayout_1af1385d2324075f764d960a846d45d487" prot="private" virt="non-virtual"><scope>IMPILayout</scope><name>type_seq</name></member>
     </listofallmembers>

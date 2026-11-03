@@ -608,12 +608,12 @@ class DerivFieldCommon&lt;FieldType, IdxRange&lt;DDims...&gt;&gt;
 public:
     using chunk_type = FieldType;
 
-    using deriv_tags = detail::deriv_sub_set_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;&gt;;
+    using deriv_tags = detail::deriv_sub_set_t&lt;ddc::TypeSeq&lt;DDims...&gt;&gt;;
 
     using physical_deriv_grids
-            = find_all_grids_t&lt;detail::strip_deriv_t&lt;deriv_tags&gt;, ddc::detail::TypeSeq&lt;DDims...&gt;&gt;;
+            = find_all_grids_t&lt;detail::strip_deriv_t&lt;deriv_tags&gt;, ddc::TypeSeq&lt;DDims...&gt;&gt;;
 
-    using physical_grids = ddc::type_seq_remove_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;, deriv_tags&gt;;
+    using physical_grids = ddc::type_seq_remove_t&lt;ddc::TypeSeq&lt;DDims...&gt;, deriv_tags&gt;;
 
     using element_type = typename chunk_type::element_type;
 
@@ -691,7 +691,7 @@ protected:
     KOKKOS_FUNCTION constexpr auto get_slicer_for(Idx&lt;ODDims...&gt; const&amp; slice_idx, int array_idx)
             const
     {
-        if constexpr (!ddc::in_tags_v&lt;QueryDDim, ddc::detail::TypeSeq&lt;ODDims...&gt;&gt;) {
+        if constexpr (!ddc::in_tags_v&lt;QueryDDim, ddc::TypeSeq&lt;ODDims...&gt;&gt;) {
             return Kokkos::full_extent;
         } else {
             if constexpr (ddc::in_tags_v&lt;QueryDDim, physical_deriv_grids&gt;) {
@@ -730,7 +730,7 @@ protected:
             IdxRange&lt;ODDims...&gt; const&amp; slice_idx_range,
             int array_idx) const
     {
-        if constexpr (!ddc::in_tags_v&lt;QueryDDim, ddc::detail::TypeSeq&lt;ODDims...&gt;&gt;) {
+        if constexpr (!ddc::in_tags_v&lt;QueryDDim, ddc::TypeSeq&lt;ODDims...&gt;&gt;) {
             return Kokkos::full_extent;
         } else {
             if constexpr (ddc::in_tags_v&lt;QueryDDim, physical_deriv_grids&gt;) {
@@ -782,7 +782,7 @@ protected:
     KOKKOS_FUNCTION auto get_internal_field(IdxRange&lt;ODims...&gt; idx_range_to_slice) const
     {
         // Get the types related to the provided information
-        using provided_tags = ddc::detail::TypeSeq&lt;ODims...&gt;;
+        using provided_tags = ddc::TypeSeq&lt;ODims...&gt;;
         using provided_deriv_tags = detail::deriv_sub_set_t&lt;provided_tags&gt;;
 
         // Get the types related to the implicit information
@@ -828,11 +828,11 @@ protected:
     template &lt;class... ODims&gt;
     KOKKOS_FUNCTION auto get_internal_field(Idx&lt;ODims...&gt; elem) const
     {
-        using AllValidDims = ddc::detail::TypeSeq&lt;DDims...&gt;;
+        using AllValidDims = ddc::TypeSeq&lt;DDims...&gt;;
         static_assert(((ddc::in_tags_v&lt;ODims, AllValidDims&gt;)&amp;&amp;...));
 
         // Get the types related to the provided information
-        using provided_tags = ddc::detail::TypeSeq&lt;ODims...&gt;;
+        using provided_tags = ddc::TypeSeq&lt;ODims...&gt;;
         using provided_deriv_tags = detail::deriv_sub_set_t&lt;provided_tags&gt;;
         using provided_physical_tags = ddc::type_seq_remove_t&lt;provided_tags, provided_deriv_tags&gt;;
         using provided_deriv_idx_range_type
@@ -852,7 +852,7 @@ protected:
         using sliced_idx_range_type =
                 typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;sliced_tags&gt;;
         using sliced_index_type = typename sliced_idx_range_type::discrete_element_type;
-        using final_tags = ddc::type_seq_remove_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;, sliced_tags&gt;;
+        using final_tags = ddc::type_seq_remove_t&lt;ddc::TypeSeq&lt;DDims...&gt;, sliced_tags&gt;;
         using final_idx_range_type =
                 typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;final_tags&gt;;
 
@@ -909,7 +909,7 @@ public:
     auto get_mdspan(IdxRange&lt;ODims...&gt; provided_deriv_idx_range)
     {
         static_assert(((ddc::in_tags_v&lt;ODims, deriv_tags&gt;)&amp;&amp;...));
-        using provided_deriv_tags = ddc::detail::TypeSeq&lt;ODims...&gt;;
+        using provided_deriv_tags = ddc::TypeSeq&lt;ODims...&gt;;
         using remaining_deriv_tags = ddc::type_seq_remove_t&lt;deriv_tags, provided_deriv_tags&gt;;
         using remaining_deriv_idx_range_type =
                 typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;remaining_deriv_tags&gt;;

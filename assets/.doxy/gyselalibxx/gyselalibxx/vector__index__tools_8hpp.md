@@ -49,7 +49,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::detail::TypeSeq&lt; Dims... &gt; | [**VectorIndexSet**](#typedef-vectorindexset)  <br>_A type alias to describe a set of dimensions that can be used to index a vector (e.g. x to get E\_x)._  |
+| typedef ddc::TypeSeq&lt; Dims... &gt; | [**VectorIndexSet**](#typedef-vectorindexset)  <br>_A type alias to describe a set of dimensions that can be used to index a vector (e.g. x to get E\_x)._  |
 | typedef typename [**tensor\_tools::GetContravariantDims**](structtensor__tools_1_1GetContravariantDims.md)&lt; AnyVectorIndexSet &gt;::type | [**get\_contravariant\_dims\_t**](#typedef-get_contravariant_dims_t)  <br> |
 | typedef typename [**tensor\_tools::GetCovariantDims**](structtensor__tools_1_1GetCovariantDims.md)&lt; AnyVectorIndexSet &gt;::type | [**get\_covariant\_dims\_t**](#typedef-get_covariant_dims_t)  <br> |
 | typedef typename [**tensor\_tools::vector\_index\_set\_dual**](structtensor__tools_1_1vector__index__set__dual.md)&lt; VectorIndexSet &gt;::type | [**vector\_index\_set\_dual\_t**](#typedef-vector_index_set_dual_t)  <br>_A type alias to find a VectorIndexSet describing the covariant indices from a VectorIndexSet describing contravariant indices or to find a VectorIndexSet describing the contravariant indices from a VectorIndexSet describing covariant indices._  |
@@ -119,7 +119,7 @@
 
 _A type alias to describe a set of dimensions that can be used to index a vector (e.g. x to get E\_x)._ 
 ```C++
-using VectorIndexSet =  ddc::detail::TypeSeq<Dims...>;
+using VectorIndexSet =  ddc::TypeSeq<Dims...>;
 ```
 
 

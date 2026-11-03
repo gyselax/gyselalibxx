@@ -405,9 +405,9 @@
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FEMSplineEvaluator<sp/>=<sp/>ddc::SplineEvaluatorND&lt;</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;FEMBSplines&gt;,</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;GridPDEDim&gt;,</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;FEMEvalExtrapolationRule,<sp/>FEMEvalExtrapolationRule&gt;&gt;;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;FEMBSplines&gt;,</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;GridPDEDim&gt;,</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;FEMEvalExtrapolationRule,<sp/>FEMEvalExtrapolationRule&gt;&gt;;</highlight></codeline>
 <codeline lineno="141"><highlight class="normal"></highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxFEMBSplines<sp/>=<sp/>Idx&lt;FEMBSplines&gt;;</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"></highlight></codeline>
@@ -441,8 +441,8 @@
 <codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RHSSplineCoeffMem<sp/>=<sp/>DFieldMem&lt;IdxRangeBatchedBSplines,<sp/>memory_space&gt;;</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RHSSplineCoeff<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RHSSplineCoeffMem::span_type;</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RHSQuadTags<sp/>=<sp/>ddc::</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>type_seq_merge_t&lt;typename<sp/>base_type::batch_tags,<sp/>ddc::detail::TypeSeq&lt;GridPDEDimQ&gt;&gt;;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RHSQuadTags</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::type_seq_merge_t&lt;typename<sp/>base_type::batch_tags,<sp/>ddc::TypeSeq&lt;GridPDEDimQ&gt;&gt;;</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeRHSQuadrature<sp/>=<sp/>ddc::detail::convert_type_seq_to_discrete_domain_t&lt;RHSQuadTags&gt;;</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"></highlight></codeline>
@@ -469,7 +469,7 @@
 <codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;Matrix&gt;<sp/>m_fem_matrix;</highlight></codeline>
 <codeline lineno="200"><highlight class="normal"></highlight></codeline>
 <codeline lineno="201"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="210" refid="classFEM1DPoissonSolver_1a191901c3f4aa1ea57d0c88af13f18ef3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classFEM1DPoissonSolver_1a191901c3f4aa1ea57d0c88af13f18ef3" kindref="member">FEM1DPoissonSolver</ref>(SplineInterpolatorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>spline_interpolator)</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classFEM1DPoissonSolver_1a191901c3f4aa1ea57d0c88af13f18ef3" kindref="member">FEM1DPoissonSolver</ref>(SplineInterpolatorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>spline_interpolator)</highlight></codeline>
 <codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_spline_builder(spline_interpolator.get_builder())</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_spline_evaluator(spline_interpolator.get_evaluator())</highlight></codeline>
 <codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_spline_fem_evaluator(jit_build_nubsplinesx(spline_interpolator.get_evaluator()))</highlight></codeline>
@@ -477,7 +477,7 @@
 <codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>build_matrix();</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="217"><highlight class="normal"></highlight></codeline>
-<codeline lineno="224" refid="classFEM1DPoissonSolver_1a46b0dfc97427d5afb058dadbc21c325f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[deprecated]]<sp/><ref refid="classFEM1DPoissonSolver_1a46b0dfc97427d5afb058dadbc21c325f" kindref="member">FEM1DPoissonSolver</ref>(</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/>[[deprecated]]<sp/><ref refid="classFEM1DPoissonSolver_1a191901c3f4aa1ea57d0c88af13f18ef3" kindref="member">FEM1DPoissonSolver</ref>(</highlight></codeline>
 <codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>spline_builder,</highlight></codeline>
 <codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>spline_evaluator)</highlight></codeline>
 <codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_spline_builder(spline_builder)</highlight></codeline>
@@ -487,7 +487,7 @@
 <codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>build_matrix();</highlight></codeline>
 <codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="233"><highlight class="normal"></highlight></codeline>
-<codeline lineno="243" refid="classFEM1DPoissonSolver_1a24228ce288ddcf30a053309d14755829" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>field_type<sp/><ref refid="classFEM1DPoissonSolver_1a24228ce288ddcf30a053309d14755829" kindref="member">operator()</ref>(field_type<sp/>phi,<sp/>field_type<sp/>rho)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/>field_type<sp/><ref refid="classFEM1DPoissonSolver_1a24228ce288ddcf30a053309d14755829" kindref="member">operator()</ref>(field_type<sp/>phi,<sp/>field_type<sp/>rho)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
 <codeline lineno="244"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>batch_idx_range_type<sp/>idx_range_batch(get_idx_range(phi));</highlight></codeline>
 <codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatchedFEMBSplines<sp/>phi_coefs_idx_range(</highlight></codeline>
@@ -503,7 +503,7 @@
 <codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>phi;</highlight></codeline>
 <codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="258"><highlight class="normal"></highlight></codeline>
-<codeline lineno="271" refid="classFEM1DPoissonSolver_1aa4181c1a3adda2261c737d545e3fe8f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>field_type<sp/><ref refid="classFEM1DPoissonSolver_1aa4181c1a3adda2261c737d545e3fe8f2" kindref="member">operator()</ref>(field_type<sp/>phi,<sp/>vector_field_type<sp/>E,<sp/>field_type<sp/>rho)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/>field_type<sp/><ref refid="classFEM1DPoissonSolver_1a24228ce288ddcf30a053309d14755829" kindref="member">operator()</ref>(field_type<sp/>phi,<sp/>vector_field_type<sp/>E,<sp/>field_type<sp/>rho)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
 <codeline lineno="272"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>batch_idx_range_type<sp/>idx_range_batch(get_idx_range(phi));</highlight></codeline>
 <codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatchedFEMBSplines<sp/>phi_coefs_idx_range(</highlight></codeline>
@@ -641,7 +641,7 @@
 <codeline lineno="406"><highlight class="normal"></highlight></codeline>
 <codeline lineno="407"><highlight class="normal"></highlight></codeline>
 <codeline lineno="408"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="415" refid="classFEM1DPoissonSolver_1a636075be3a39b643fc97a9c61760791d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classFEM1DPoissonSolver_1a636075be3a39b643fc97a9c61760791d" kindref="member">solve_matrix_system</ref>(BatchedFEMBSplinesCoeff<sp/>phi_spline_coef,<sp/>field_type<sp/>rho)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classFEM1DPoissonSolver_1a636075be3a39b643fc97a9c61760791d" kindref="member">solve_matrix_system</ref>(BatchedFEMBSplinesCoeff<sp/>phi_spline_coef,<sp/>field_type<sp/>rho)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="416"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>the<sp/>spline<sp/>representation<sp/>of<sp/>the<sp/>RHS.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="418"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatchedBSplines<sp/>rho_spline_coef_idx_range(</highlight></codeline>

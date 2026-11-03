@@ -440,7 +440,7 @@
       </node>
     </invincdepgraph>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="extrapolation__rule__choice_8hpp_1a381907daf9f978507e5797c81e0d4c16" prot="public" static="no">
+      <memberdef kind="typedef" id="extrapolation__rule__choice_8hpp_1a4e0e6f4b64ecb7aeb83659d919af7254" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class Rule</type>
@@ -455,8 +455,8 @@
             <type>class IdxRangeCoeff</type>
           </param>
         </templateparamlist>
-        <type>ddc::detail::TypeSeq&lt; typename details::ExtrapolationRuleResolver&lt; ddc::type_seq_element_t&lt; 0, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type, typename details::ExtrapolationRuleResolver&lt; ddc::type_seq_element_t&lt; 1, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type &gt;</type>
-        <definition>using extrapolation_rule_t =  ddc::detail::TypeSeq&lt;
+        <type>ddc::TypeSeq&lt; typename details::ExtrapolationRuleResolver&lt; ddc::type_seq_element_t&lt; 0, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type, typename details::ExtrapolationRuleResolver&lt; ddc::type_seq_element_t&lt; 1, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type &gt;</type>
+        <definition>using extrapolation_rule_t =  ddc::TypeSeq&lt;
         typename details::ExtrapolationRuleResolver&lt;
                 ddc::type_seq_element_t&lt;0, Rule&gt;,
                 DataType,
@@ -599,7 +599,7 @@
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classConstantIdentityInterpolationExtrapolationRule" kindref="compound">ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid, DataType&gt;</ref>&gt;);</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Rule,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DataType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Basis,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeCoeff&gt;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">extrapolation_rule_t<sp/>=<sp/>ddc::detail::TypeSeq&lt;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">extrapolation_rule_t<sp/>=<sp/>ddc::TypeSeq&lt;</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>details::ExtrapolationRuleResolver&lt;</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_element_t&lt;0,<sp/>Rule&gt;,</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType,</highlight></codeline>

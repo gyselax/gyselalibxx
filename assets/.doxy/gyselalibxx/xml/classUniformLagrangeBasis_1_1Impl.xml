@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="98" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="98" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="100" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="100" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="94" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="94" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="96" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="96" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="101" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="101" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="103" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classUniformLagrangeBasis_1_1Impl_1a3ae22c3f0fb1952c25a78705342145a7" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="103" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="103" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="105" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classUniformLagrangeBasis_1_1Impl_1a2a43d3cb5344faea08fc3d99beb17bf6" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="104" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="104" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="106" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classUniformLagrangeBasis_1_1Impl_1ad7ac4d97c409c07cf0251a3f15e36a1f" prot="private" static="no" mutable="no">
         <type>Idx&lt; DDim &gt;</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="106" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="106" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="108" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="108" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="109" column="9"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="111" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1afdf1fc77208e24004c1fa09cde19d101" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="117" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="117" bodyend="152"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="119" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="119" bodyend="154"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a13a3867798502cab994edb10ab9dd896" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="159" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="159" bodyend="165"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="161" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="161" bodyend="167"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1af70e236878aa1b7478656dc0a26617ff" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" kindref="member">coord_type</ref></type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="171" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="171" bodyend="174"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="173" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="173" bodyend="176"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a51060f9366b8e5a6d1eb5821e06932d4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" kindref="member">coord_type</ref></type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="180" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="180" bodyend="183"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="182" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="182" bodyend="185"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a8fa6a1354109591d08a79a2928acc0e8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION DataType</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="189" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="189" bodyend="192"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="191" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="191" bodyend="194"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1ab68b76df208aad2026fb10590e655272" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxRange&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="198" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="198" bodyend="201"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="200" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="200" bodyend="203"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a399e6614ad017d771b6d9ffbd8d4da8a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxRange&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="207" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="207" bodyend="210"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="209" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="209" bodyend="212"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a4fbf13e1e13127ef98f6477df2e809c8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="223" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="223" bodyend="246"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="225" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="225" bodyend="248"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a4d5bbe6bba43296fe238b74a96a88b02" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="266" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="266" bodyend="358"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="268" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="268" bodyend="360"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -451,7 +451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="369" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="369" bodyend="389"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="371" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="371" bodyend="391"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -518,7 +518,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="400" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="400" bodyend="415"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="402" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="402" bodyend="417"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -544,7 +544,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="92" bodyend="416"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="94" bodyend="418"/>
     <listofallmembers>
       <member refid="classUniformLagrangeBasis_1_1Impl_1ab68b76df208aad2026fb10590e655272" prot="public" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>break_point_domain</name></member>
       <member refid="classUniformLagrangeBasis_1_1Impl_1ae46e943a9a3bbcdd22489d4ca6e67b10" prot="private" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>calculate_values_between_nodes</name></member>

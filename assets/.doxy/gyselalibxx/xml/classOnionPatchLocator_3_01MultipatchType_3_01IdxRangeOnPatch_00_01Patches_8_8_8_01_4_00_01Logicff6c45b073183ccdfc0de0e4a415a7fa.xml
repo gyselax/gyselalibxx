@@ -81,14 +81,14 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a418113e489ff4bddf37de574e6af3aaf" prot="public" static="no">
-        <type>ddc::detail::TypeSeq&lt; Patches... &gt;</type>
-        <definition>using OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;::PatchOrdering =  ddc::detail::TypeSeq&lt;Patches...&gt;</definition>
+      <memberdef kind="typedef" id="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1af683f0bc028fc9f502a9b59d05ff039a" prot="public" static="no">
+        <type>ddc::TypeSeq&lt; Patches... &gt;</type>
+        <definition>using OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;::PatchOrdering =  ddc::TypeSeq&lt;Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>PatchOrdering</name>
         <qualifiedname>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;::PatchOrdering</qualifiedname>
         <briefdescription>
-<para>Sequence ddc::detail::TypeSeq of patch tags. </para>
+<para>Sequence ddc::TypeSeq of patch tags. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -196,7 +196,7 @@
         <argsstring></argsstring>
         <name>n_patches</name>
         <qualifiedname>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;::n_patches</qualifiedname>
-        <initializer>= ddc::type_seq_size_v&lt;<ref refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a418113e489ff4bddf37de574e6af3aaf" kindref="member">PatchOrdering</ref>&gt;</initializer>
+        <initializer>= ddc::type_seq_size_v&lt;<ref refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1af683f0bc028fc9f502a9b59d05ff039a" kindref="member">PatchOrdering</ref>&gt;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -501,7 +501,7 @@
       <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1ac0764c1f0e18086125e145f313d584e0" prot="public" virt="non-virtual"><scope>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</scope><name>operator()</name></member>
       <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a4da8d05144dcf14ff74c626a376202a1" prot="public" virt="non-virtual"><scope>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</scope><name>outside_rmax_domain</name></member>
       <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1ae1950d68780de328065e246f1f5582b3" prot="public" virt="non-virtual"><scope>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</scope><name>outside_rmin_domain</name></member>
-      <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a418113e489ff4bddf37de574e6af3aaf" prot="public" virt="non-virtual"><scope>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</scope><name>PatchOrdering</name></member>
+      <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1af683f0bc028fc9f502a9b59d05ff039a" prot="public" virt="non-virtual"><scope>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</scope><name>PatchOrdering</name></member>
       <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a379126794a0a7e6aabb0597ae470fd56" prot="private" virt="non-virtual"><scope>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</scope><name>R</name></member>
       <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a66ec2021188919e8bb341d6327b986da" prot="private" virt="non-virtual"><scope>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</scope><name>set_and_check_radii</name></member>
       <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a8d1bfbf71865caedf9f274b3c6e7d291" prot="private" virt="non-virtual"><scope>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</scope><name>Theta</name></member>

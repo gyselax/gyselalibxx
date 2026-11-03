@@ -601,7 +601,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef detail:: MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</td>
+<td style="text-align: right;">typedef detail::MultipatchField&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-multipatchfield"><strong>MultipatchField</strong></a>  <br><em>A class to store field objects on patches.</em></td>
 </tr>
 </tbody>
@@ -628,8 +628,7 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-multipatchfield">typedef MultipatchField</h3>
 <p><em>A class to store field objects on patches.</em> </p>
-<pre><code class="language-C++">using MultipatchField =  detail::
-        MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
+<pre><code class="language-C++">using MultipatchField =  detail::MultipatchField&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
 </code></pre>
 <p>See detail::MultipatchField for more details. This alias creates the type T&lt;Patch&gt; for each of the patches. Two type templates which return the same type for each patch therefore lead to the same MultipatchField.</p>
 <p><strong>Template parameters:</strong></p>

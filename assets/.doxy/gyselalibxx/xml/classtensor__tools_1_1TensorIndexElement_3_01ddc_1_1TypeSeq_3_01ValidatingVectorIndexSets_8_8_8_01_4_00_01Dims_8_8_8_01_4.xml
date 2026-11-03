@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4" kind="class" language="C++" prot="public">
+    <compoundname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</compoundname>
+    <includes refid="tensor__index__tools_8hpp" local="no">tensor_index_tools.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>ValidatingVectorIndexSets</declname>
+        <defname>ValidatingVectorIndexSets</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Dims</declname>
+        <defname>Dims</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a305a24f15c4c87eadaef6c5de0174150" prot="private" static="no">
+        <type>ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;</type>
+        <definition>using tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::ValidatingTensorIndexSet =  ddc::TypeSeq&lt;ValidatingVectorIndexSets...&gt;</definition>
+        <argsstring></argsstring>
+        <name>ValidatingTensorIndexSet</name>
+        <qualifiedname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::ValidatingTensorIndexSet</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a4a11de8f5c11da4d4684006b33f61da7" prot="public" static="no">
+        <type>ddc::TypeSeq&lt; Dims... &gt;</type>
+        <definition>using tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::IdxTypeSeq =  ddc::TypeSeq&lt;Dims...&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxTypeSeq</name>
+        <qualifiedname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::IdxTypeSeq</qualifiedname>
+        <briefdescription>
+<para>The type sequence containing all the indices applied to the tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1ac6985473ed78b200dc49bff2332657a3" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>IDim</declname>
+            <defname>IDim</defname>
+          </param>
+        </templateparamlist>
+        <type>ddc::type_seq_element_t&lt; IDim, <ref refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a4a11de8f5c11da4d4684006b33f61da7" kindref="member">IdxTypeSeq</ref> &gt;</type>
+        <definition>using tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::index_on_dim_t =  ddc::type_seq_element_t&lt;IDim, IdxTypeSeq&gt;</definition>
+        <argsstring></argsstring>
+        <name>index_on_dim_t</name>
+        <qualifiedname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::index_on_dim_t</qualifiedname>
+        <briefdescription>
+<para>Get the types that describes the index in dimension IDim. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IDim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of interest. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1aa7e9f860189aaa1536fbf61c78b5f374" prot="public" static="no">
+        <type>ValidatingTensorIndexSet</type>
+        <definition>using tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::tensor_index_set =  ValidatingTensorIndexSet</definition>
+        <argsstring></argsstring>
+        <name>tensor_index_set</name>
+        <qualifiedname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::tensor_index_set</qualifiedname>
+        <briefdescription>
+<para>Get the TensorIndexSet that this element indexes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="107" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1ab268fb4c69c0252ce98529c94809f922" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr std::size_t</type>
+        <definition>static KOKKOS_FUNCTION constexpr std::size_t tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::rank</qualifiedname>
+        <briefdescription>
+<para>The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The rank of the tensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="53" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a0b1478a58acd2f3040abc9a7531c6e87" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr std::size_t</type>
+        <definition>static KOKKOS_FUNCTION constexpr std::size_t tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::index</definition>
+        <argsstring>()</argsstring>
+        <name>index</name>
+        <qualifiedname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::index</qualifiedname>
+        <briefdescription>
+<para>Get an integer which describes the position of this element in a 1D array which stores a tensor described by the TensorIndexSet. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The index of this element in a 1D array. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="92" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="92" bodyend="95"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a1507e19007fd759ddeb677ba11c7bc4e" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t...</type>
+            <declname>Is</declname>
+            <defname>Is</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION constexpr bool</type>
+        <definition>static KOKKOS_FUNCTION constexpr bool tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::valid_indices</definition>
+        <argsstring>(std::index_sequence&lt; Is... &gt;)</argsstring>
+        <name>valid_indices</name>
+        <qualifiedname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::valid_indices</qualifiedname>
+        <param>
+          <type>std::index_sequence&lt; Is... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="64" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="64" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1af95dc64d7d105db5d2fa9aa5162574b7" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t...</type>
+            <declname>Is</declname>
+            <defname>Is</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION constexpr std::size_t</type>
+        <definition>static KOKKOS_FUNCTION constexpr std::size_t tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::internal_index</definition>
+        <argsstring>(std::index_sequence&lt; Is... &gt;)</argsstring>
+        <name>internal_index</name>
+        <qualifiedname>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;::internal_index</qualifiedname>
+        <param>
+          <type>std::index_sequence&lt; Is... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="76" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="76" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class describing an index of a tensor. See the general <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> template for more details. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ValidatingVectorIndexSets</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The VectorIndexSets in which each tag comprising this element (along each dimension) can be found. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions at which the tensor is accessed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="37" bodyend="108"/>
+    <listofallmembers>
+      <member refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a4a11de8f5c11da4d4684006b33f61da7" prot="public" virt="non-virtual"><scope>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</scope><name>IdxTypeSeq</name></member>
+      <member refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a0b1478a58acd2f3040abc9a7531c6e87" prot="public" virt="non-virtual"><scope>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</scope><name>index</name></member>
+      <member refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1ac6985473ed78b200dc49bff2332657a3" prot="public" virt="non-virtual"><scope>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</scope><name>index_on_dim_t</name></member>
+      <member refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1af95dc64d7d105db5d2fa9aa5162574b7" prot="private" virt="non-virtual"><scope>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</scope><name>internal_index</name></member>
+      <member refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1ab268fb4c69c0252ce98529c94809f922" prot="public" virt="non-virtual"><scope>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</scope><name>rank</name></member>
+      <member refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1aa7e9f860189aaa1536fbf61c78b5f374" prot="public" virt="non-virtual"><scope>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</scope><name>tensor_index_set</name></member>
+      <member refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a1507e19007fd759ddeb677ba11c7bc4e" prot="private" virt="non-virtual"><scope>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</scope><name>valid_indices</name></member>
+      <member refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4_1a305a24f15c4c87eadaef6c5de0174150" prot="private" virt="non-virtual"><scope>tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</scope><name>ValidatingTensorIndexSet</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

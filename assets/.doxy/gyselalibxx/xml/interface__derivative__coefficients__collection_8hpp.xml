@@ -409,9 +409,9 @@
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Interfaces&gt;</highlight></codeline>
 <codeline lineno="33" refid="classInterfaceDerivCoeffsCollection" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInterfaceDerivCoeffsCollection_1a712d41c51e79f3a7d160fac8e3d5ad73" kindref="member">InterfaceDerivCoeffsCollection</ref></highlight></codeline>
 <codeline lineno="34"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivCalculatorTypeSeq<sp/>=<sp/>ddc::detail::TypeSeq&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;...&gt;;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivCalculatorTypeSeq<sp/>=<sp/>ddc::TypeSeq&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;...&gt;;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">InterfaceTypeSeq<sp/>=<sp/>ddc::detail::TypeSeq&lt;Interfaces...&gt;;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">InterfaceTypeSeq<sp/>=<sp/>ddc::TypeSeq&lt;Interfaces...&gt;;</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>std::tuple&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...&gt;<sp/>m_deriv_coeffs_collection;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>

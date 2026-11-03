@@ -20,9 +20,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="protected-type">
-      <memberdef kind="typedef" id="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a8942b2511b4cff7d8ce55a36559daf98" prot="protected" static="no">
-        <type>ddc::detail::TypeSeq&lt; typename ODims::continuous_dimension_type... &gt;</type>
-        <definition>using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::real_laplacian_tags =  ddc::detail::TypeSeq&lt;typename ODims::continuous_dimension_type...&gt;</definition>
+      <memberdef kind="typedef" id="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aca77f0825283ef3204190499e653f78c" prot="protected" static="no">
+        <type>ddc::TypeSeq&lt; typename ODims::continuous_dimension_type... &gt;</type>
+        <definition>using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::real_laplacian_tags =  ddc::TypeSeq&lt;typename ODims::continuous_dimension_type...&gt;</definition>
         <argsstring></argsstring>
         <name>real_laplacian_tags</name>
         <qualifiedname>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::real_laplacian_tags</qualifiedname>
@@ -35,9 +35,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp" bodystart="32" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a4839bdefa9e89acd23ef372044109bf5" prot="protected" static="no">
-        <type>ddc::detail::TypeSeq&lt; ODims... &gt;</type>
-        <definition>using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::laplacian_tags =  ddc::detail::TypeSeq&lt;ODims...&gt;</definition>
+      <memberdef kind="typedef" id="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a7acb9851b787249f1ce630dea74a42e7" prot="protected" static="no">
+        <type>ddc::TypeSeq&lt; ODims... &gt;</type>
+        <definition>using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::laplacian_tags =  ddc::TypeSeq&lt;ODims...&gt;</definition>
         <argsstring></argsstring>
         <name>laplacian_tags</name>
         <qualifiedname>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::laplacian_tags</qualifiedname>
@@ -66,7 +66,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1abe98248b2b33d8bfd8bc8d69adb60f0e" prot="protected" static="no">
-        <type>ddc::type_seq_remove_t&lt; <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aa9593981823a273865b3bcf888b54ab9" kindref="member">space_tags</ref>, <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a4839bdefa9e89acd23ef372044109bf5" kindref="member">laplacian_tags</ref> &gt;</type>
+        <type>ddc::type_seq_remove_t&lt; <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aa9593981823a273865b3bcf888b54ab9" kindref="member">space_tags</ref>, <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a7acb9851b787249f1ce630dea74a42e7" kindref="member">laplacian_tags</ref> &gt;</type>
         <definition>using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::batch_tags =  ddc::type_seq_remove_t&lt;space_tags, laplacian_tags&gt;</definition>
         <argsstring></argsstring>
         <name>batch_tags</name>
@@ -113,7 +113,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a5e03cc3a5b48ecca5715d2bc2220ee5d" prot="public" static="no">
-        <type>std::conditional_t&lt; ddc::type_seq_size_v&lt; <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a4839bdefa9e89acd23ef372044109bf5" kindref="member">laplacian_tags</ref> &gt;==1, <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1ac6dfb56b77fecc6c7441de6cc8080b9d" kindref="member">field_type</ref>, <ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; double, IdxRangeFull, <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a8942b2511b4cff7d8ce55a36559daf98" kindref="member">real_laplacian_tags</ref>, MemorySpace, LayoutSpace &gt; &gt;</type>
+        <type>std::conditional_t&lt; ddc::type_seq_size_v&lt; <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a7acb9851b787249f1ce630dea74a42e7" kindref="member">laplacian_tags</ref> &gt;==1, <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1ac6dfb56b77fecc6c7441de6cc8080b9d" kindref="member">field_type</ref>, <ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; double, IdxRangeFull, <ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aca77f0825283ef3204190499e653f78c" kindref="member">real_laplacian_tags</ref>, MemorySpace, LayoutSpace &gt; &gt;</type>
         <definition>using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::vector_field_type =  std::conditional_t&lt;
             ddc::type_seq_size_v&lt;laplacian_tags&gt; == 1,
             field_type,
@@ -214,7 +214,7 @@
         <argsstring></argsstring>
         <name>using_vector_field</name>
         <qualifiedname>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::using_vector_field</qualifiedname>
-        <initializer>= ddc::type_seq_size_v&lt;<ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a4839bdefa9e89acd23ef372044109bf5" kindref="member">laplacian_tags</ref>&gt; == 1</initializer>
+        <initializer>= ddc::type_seq_size_v&lt;<ref refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a7acb9851b787249f1ce630dea74a42e7" kindref="member">laplacian_tags</ref>&gt; == 1</initializer>
         <briefdescription>
 <para>Indicates whether the gradient is represented by a <ref refid="classVectorField" kindref="compound">VectorField</ref> or a Field. </para>
         </briefdescription>
@@ -372,11 +372,11 @@
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a61f7675595f50a3e28ae86eee23c9a33" prot="public" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>const_field_type</name></member>
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1ac6dfb56b77fecc6c7441de6cc8080b9d" prot="public" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>field_type</name></member>
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a32ec4fc6af42b3156da3ff7caf2af66c" prot="public" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>laplacian_idx_range_type</name></member>
-      <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a4839bdefa9e89acd23ef372044109bf5" prot="protected" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>laplacian_tags</name></member>
+      <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a7acb9851b787249f1ce630dea74a42e7" prot="protected" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>laplacian_tags</name></member>
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a0561e9f08ee6565204f8bf9c3321c5ae" prot="public" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>layout_space</name></member>
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1abce728162f5f0529064e71152331ea40" prot="public" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>memory_space</name></member>
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a77c8e33e5b88f7d9a24dac5aaf542dd9" prot="public" virt="pure-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>operator()</name></member>
-      <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a8942b2511b4cff7d8ce55a36559daf98" prot="protected" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>real_laplacian_tags</name></member>
+      <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aca77f0825283ef3204190499e653f78c" prot="protected" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>real_laplacian_tags</name></member>
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aa9593981823a273865b3bcf888b54ab9" prot="protected" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>space_tags</name></member>
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a6dc77457cdff4374475291e639692676" prot="public" virt="pure-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>update_coefficients</name></member>
       <member refid="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a2aac83d20e11ec6c159e5d9e552b2bc1" prot="protected" virt="non-virtual"><scope>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</scope><name>using_vector_field</name></member>

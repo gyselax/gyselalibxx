@@ -216,7 +216,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" line="184" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" bodystart="184" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classMultipatchSplineBuilder2D_1a83800476f9a2dfb7a341d5c175b12276" prot="private" static="no">
+      <memberdef kind="typedef" id="classMultipatchSplineBuilder2D_1aae8a984361f9b15a596d04a80c519e2e" prot="private" static="no">
         <templateparamlist>
           <param>
             <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
@@ -225,11 +225,11 @@
             <type>class BatchedIdxRange</type>
           </param>
         </templateparamlist>
-        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; BatchedIdxRange &gt;, ddc::detail::TypeSeq&lt; typename Patch::Grid1, typename Patch::Grid2 &gt;, ddc::detail::TypeSeq&lt; typename Patch::BSplines1, typename Patch::BSplines2 &gt; &gt; &gt;</type>
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; BatchedIdxRange &gt;, ddc::TypeSeq&lt; typename Patch::Grid1, typename Patch::Grid2 &gt;, ddc::TypeSeq&lt; typename Patch::BSplines1, typename Patch::BSplines2 &gt; &gt; &gt;</type>
         <definition>using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::batched_spline_domain_type_on_patch =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
                     ddc::to_type_seq_t&lt;BatchedIdxRange&gt;,
-                    ddc::detail::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
-                    ddc::detail::TypeSeq&lt;typename Patch::BSplines1, typename Patch::BSplines2&gt;&gt;&gt;</definition>
+                    ddc::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
+                    ddc::TypeSeq&lt;typename Patch::BSplines1, typename Patch::BSplines2&gt;&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>batched_spline_domain_type_on_patch</name>
         <qualifiedname>MultipatchSplineBuilder2D::batched_spline_domain_type_on_patch</qualifiedname>
@@ -241,7 +241,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" line="194" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" bodystart="194" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classMultipatchSplineBuilder2D_1ab2a587f1d1299655bb81ca5bda9f14be" prot="private" static="no">
+      <memberdef kind="typedef" id="classMultipatchSplineBuilder2D_1a8298c2a5767f037c24ff4ec97dc92f78" prot="private" static="no">
         <templateparamlist>
           <param>
             <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
@@ -250,11 +250,11 @@
             <type>class BatchedIdxRange</type>
           </param>
         </templateparamlist>
-        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; BatchedIdxRange &gt;, ddc::detail::TypeSeq&lt; typename Patch::Grid1, typename Patch::Grid2 &gt;, ddc::detail::TypeSeq&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt; &gt;</type>
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; BatchedIdxRange &gt;, ddc::TypeSeq&lt; typename Patch::Grid1, typename Patch::Grid2 &gt;, ddc::TypeSeq&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt; &gt;</type>
         <definition>using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::batched_derivs_domain_type_on_patch =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
                     ddc::to_type_seq_t&lt;BatchedIdxRange&gt;,
-                    ddc::detail::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
-                    ddc::detail::TypeSeq&lt;
+                    ddc::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
+                    ddc::TypeSeq&lt;
                             ddc::Deriv&lt;typename Patch::Dim1&gt;,
                             ddc::Deriv&lt;typename Patch::Dim2&gt;&gt;&gt;&gt;</definition>
         <argsstring></argsstring>
@@ -382,16 +382,16 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" line="224" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" bodystart="224" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classMultipatchSplineBuilder2D_1abecec78e3c6e9a9960fa4f32fad5908d" prot="private" static="no">
+      <memberdef kind="typedef" id="classMultipatchSplineBuilder2D_1a2ce2f5c3f743b76e3ee273d9179dc088" prot="private" static="no">
         <templateparamlist>
           <param>
             <type>class MultipatchIdxRangeBatched</type>
           </param>
         </templateparamlist>
-        <type>detail::MultipatchType&lt; typename MultipatchIdxRangeBatched::PatchOrdering, ddc::detail::TypeSeq&lt; batched_spline_domain_type_on_patch&lt; Patches, typename MultipatchIdxRangeBatched::template TypeOnPatch&lt; Patches &gt; &gt;... &gt; &gt;</type>
+        <type>detail::MultipatchType&lt; typename MultipatchIdxRangeBatched::PatchOrdering, ddc::TypeSeq&lt; batched_spline_domain_type_on_patch&lt; Patches, typename MultipatchIdxRangeBatched::template TypeOnPatch&lt; Patches &gt; &gt;... &gt; &gt;</type>
         <definition>using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::MultipatchIdxRangeBatchedBS =  detail::MultipatchType&lt;
             typename MultipatchIdxRangeBatched::PatchOrdering,
-            ddc::detail::TypeSeq&lt;batched_spline_domain_type_on_patch&lt;
+            ddc::TypeSeq&lt;batched_spline_domain_type_on_patch&lt;
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;</definition>
         <argsstring></argsstring>
@@ -405,16 +405,16 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" line="227" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp" bodystart="227" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classMultipatchSplineBuilder2D_1a35d2baeadb66955ba935c2bb4787a20e" prot="private" static="no">
+      <memberdef kind="typedef" id="classMultipatchSplineBuilder2D_1a0edb0b2a664ea40460698b80f913fc60" prot="private" static="no">
         <templateparamlist>
           <param>
             <type>class MultipatchIdxRangeBatched</type>
           </param>
         </templateparamlist>
-        <type>detail::MultipatchType&lt; typename MultipatchIdxRangeBatched::PatchOrdering, ddc::detail::TypeSeq&lt; batched_derivs_domain_type_on_patch&lt; Patches, typename MultipatchIdxRangeBatched::template TypeOnPatch&lt; Patches &gt; &gt;... &gt; &gt;</type>
+        <type>detail::MultipatchType&lt; typename MultipatchIdxRangeBatched::PatchOrdering, ddc::TypeSeq&lt; batched_derivs_domain_type_on_patch&lt; Patches, typename MultipatchIdxRangeBatched::template TypeOnPatch&lt; Patches &gt; &gt;... &gt; &gt;</type>
         <definition>using MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::MultipatchIdxRangeBatchedDeriv =  detail::MultipatchType&lt;
             typename MultipatchIdxRangeBatched::PatchOrdering,
-            ddc::detail::TypeSeq&lt;batched_derivs_domain_type_on_patch&lt;
+            ddc::TypeSeq&lt;batched_derivs_domain_type_on_patch&lt;
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;</definition>
         <argsstring></argsstring>
@@ -1070,9 +1070,9 @@
       <member refid="classMultipatchSplineBuilder2D_1aef068c3939d8fb77cffddc59262a9ea6" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>apply_builder</name></member>
       <member refid="classMultipatchSplineBuilder2D_1a4bddf1ae74dff6b434840ad642a30421" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>batched_basis_idx_range_type</name></member>
       <member refid="classMultipatchSplineBuilder2D_1ac144533d1716e1620ee82400f82cf095" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>batched_basis_idx_ranges</name></member>
-      <member refid="classMultipatchSplineBuilder2D_1ab2a587f1d1299655bb81ca5bda9f14be" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>batched_derivs_domain_type_on_patch</name></member>
+      <member refid="classMultipatchSplineBuilder2D_1a8298c2a5767f037c24ff4ec97dc92f78" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>batched_derivs_domain_type_on_patch</name></member>
       <member refid="classMultipatchSplineBuilder2D_1af6bca37b2f1c1e51dcdacb886ddd9b0d" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>batched_derivs_idx_range_type</name></member>
-      <member refid="classMultipatchSplineBuilder2D_1a83800476f9a2dfb7a341d5c175b12276" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>batched_spline_domain_type_on_patch</name></member>
+      <member refid="classMultipatchSplineBuilder2D_1aae8a984361f9b15a596d04a80c519e2e" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>batched_spline_domain_type_on_patch</name></member>
       <member refid="classMultipatchSplineBuilder2D_1aeecb420cba541add5772a8bbe9f14186" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>BuilderOnPatch</name></member>
       <member refid="classMultipatchSplineBuilder2D_1afddcdc3dcc0a0090101f96f4a2abd05d" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>BuilderTuple</name></member>
       <member refid="classMultipatchSplineBuilder2D_1a7f6d789c81eb7ed607ba0940763549dc" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>coeff_idx_range_type</name></member>
@@ -1091,8 +1091,8 @@
       <member refid="classMultipatchSplineBuilder2D_1aa9dbc2cb8407455f76d87b757f361f6c" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchDerivs12</name></member>
       <member refid="classMultipatchSplineBuilder2D_1a8b5ef9a8b90f4029d3e160554726a485" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchDerivs2</name></member>
       <member refid="classMultipatchSplineBuilder2D_1a2e0833e908653f43a964d8502f5bbd4c" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchIdxRange</name></member>
-      <member refid="classMultipatchSplineBuilder2D_1abecec78e3c6e9a9960fa4f32fad5908d" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchIdxRangeBatchedBS</name></member>
-      <member refid="classMultipatchSplineBuilder2D_1a35d2baeadb66955ba935c2bb4787a20e" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchIdxRangeBatchedDeriv</name></member>
+      <member refid="classMultipatchSplineBuilder2D_1a2ce2f5c3f743b76e3ee273d9179dc088" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchIdxRangeBatchedBS</name></member>
+      <member refid="classMultipatchSplineBuilder2D_1a0edb0b2a664ea40460698b80f913fc60" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchIdxRangeBatchedDeriv</name></member>
       <member refid="classMultipatchSplineBuilder2D_1a4e43a83c5b56784bdf422522a3a94f92" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchIdxRangeBS</name></member>
       <member refid="classMultipatchSplineBuilder2D_1a8e1c693d015b942fb6929c1b0d86400a" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchSplineBuilder2D</name></member>
       <member refid="classMultipatchSplineBuilder2D_1a045070846e52c79554a01f099103b377" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder2D</scope><name>MultipatchSplineCoeffs</name></member>

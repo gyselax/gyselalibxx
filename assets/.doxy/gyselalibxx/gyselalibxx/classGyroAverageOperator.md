@@ -28,6 +28,11 @@ _Operator to compute the gyroaverage of a field as a weighted sum of the its val
 
 
 
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| struct | [**CoeffList**](structGyroAverageOperator_1_1CoeffList.md) <br>_Dimension indexing the sample points (must be public to comply with nvcc rules)._  |
 
 
 ## Public Types

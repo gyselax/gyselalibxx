@@ -590,9 +590,9 @@ public:
     using evaluator_type = ddc::SplineEvaluatorND&lt;
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;,
-            ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;,
-            ddc::detail::TypeSeq&lt;
+            ddc::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;,
+            ddc::TypeSeq&lt;GridR, GridTheta&gt;,
+            ddc::TypeSeq&lt;
                     RadialExtrapolationRule,
                     RadialExtrapolationRule,
                     ddc::PeriodicExtrapolationRule&lt;Theta&gt;,

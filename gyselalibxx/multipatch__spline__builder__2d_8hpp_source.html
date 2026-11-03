@@ -726,15 +726,15 @@ class MultipatchSplineBuilder2D
     using batched_spline_domain_type_on_patch
             = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
                     ddc::to_type_seq_t&lt;BatchedIdxRange&gt;,
-                    ddc::detail::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
-                    ddc::detail::TypeSeq&lt;typename Patch::BSplines1, typename Patch::BSplines2&gt;&gt;&gt;;
+                    ddc::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
+                    ddc::TypeSeq&lt;typename Patch::BSplines1, typename Patch::BSplines2&gt;&gt;&gt;;
 
     template &lt;class Patch, class BatchedIdxRange&gt;
     using batched_derivs_domain_type_on_patch
             = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
                     ddc::to_type_seq_t&lt;BatchedIdxRange&gt;,
-                    ddc::detail::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
-                    ddc::detail::TypeSeq&lt;
+                    ddc::TypeSeq&lt;typename Patch::Grid1, typename Patch::Grid2&gt;,
+                    ddc::TypeSeq&lt;
                             ddc::Deriv&lt;typename Patch::Dim1&gt;,
                             ddc::Deriv&lt;typename Patch::Dim2&gt;&gt;&gt;&gt;;
 
@@ -758,14 +758,14 @@ class MultipatchSplineBuilder2D
     template &lt;class MultipatchIdxRangeBatched&gt;
     using MultipatchIdxRangeBatchedBS = detail::MultipatchType&lt;
             typename MultipatchIdxRangeBatched::PatchOrdering,
-            ddc::detail::TypeSeq&lt;batched_spline_domain_type_on_patch&lt;
+            ddc::TypeSeq&lt;batched_spline_domain_type_on_patch&lt;
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
 
     template &lt;class MultipatchIdxRangeBatched&gt;
     using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType&lt;
             typename MultipatchIdxRangeBatched::PatchOrdering,
-            ddc::detail::TypeSeq&lt;batched_derivs_domain_type_on_patch&lt;
+            ddc::TypeSeq&lt;batched_derivs_domain_type_on_patch&lt;
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
 

@@ -13,7 +13,7 @@
 #include <ddc/ddc.hpp>
 
 template <class... Dims>
-using VectorIndexSet = ddc::detail::TypeSeq<Dims...>;
+using VectorIndexSet = ddc::TypeSeq<Dims...>;
 
 namespace tensor_tools {
 

@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classMoments" kind="class" language="C++" prot="public">
     <compoundname>Moments</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">ddc::DiscreteDimension</basecompoundref>
     <derivedcompoundref refid="structGridMom" prot="public" virt="non-virtual">GridMom</derivedcompoundref>
     <includes refid="moments_8hpp" local="no">moments.hpp</includes>
     <innerclass refid="classMoments_1_1Impl" prot="public">Moments::Impl</innerclass>
@@ -19,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/moments.hpp" line="10" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/moments.hpp" bodystart="10" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/moments.hpp" line="12" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/moments.hpp" bodystart="12" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -28,7 +29,7 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="2">
+      <node id="3">
         <label>GridMom</label>
         <link refid="structGridMom"/>
         <childnode refid="1" relation="public-inheritance">
@@ -37,9 +38,25 @@
       <node id="1">
         <label>Moments</label>
         <link refid="classMoments"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::DiscreteDimension</label>
       </node>
     </inheritancegraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/moments.hpp" line="6" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/moments.hpp" bodystart="7" bodyend="38"/>
+    <collaborationgraph>
+      <node id="1">
+        <label>Moments</label>
+        <link refid="classMoments"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::DiscreteDimension</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/moments.hpp" line="8" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/moments.hpp" bodystart="9" bodyend="40"/>
     <listofallmembers>
       <member refid="classMoments_1af6d51149f8e6fb5c7d440599741d6f1f" prot="public" virt="non-virtual"><scope>Moments</scope><name>discrete_dimension_type</name></member>
     </listofallmembers>

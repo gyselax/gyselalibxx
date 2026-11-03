@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f" kind="struct" language="C++" prot="public">
+    <compoundname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</compoundname>
+    <includes refid="i__interpolation__evaluator_8hpp" local="no">i_interpolation_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>BSplines</declname>
+        <defname>BSplines</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>EvaluationDDim</declname>
+        <defname>EvaluationDDim</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>ExtrapolationRule</declname>
+        <defname>ExtrapolationRule</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1ad23da17e43ff1527ec3a8529b990b92b" prot="private" static="no">
+        <type>ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::Evaluator =  ddc::SplineEvaluatorND&lt;
+            ExecSpace,
+            MemorySpace,
+            ddc::TypeSeq&lt;BSplines...&gt;,
+            ddc::TypeSeq&lt;EvaluationDDim...&gt;,
+            ddc::TypeSeq&lt;ExtrapolationRule...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>Evaluator</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::Evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="115" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1ad9d376138accb642b612aea47643561e" prot="public" static="no">
+        <type>double</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::data_type =  double</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type that the data is saved on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="132" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" prot="public" static="no">
+        <type>decltype(make_evaluation_idx_range_type( std::make_index_sequence&lt; sizeof...(BSplines)&gt;()))</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::evaluation_idx_range_type =  decltype(make_evaluation_idx_range_type(
+            std::make_index_sequence&lt;sizeof...(BSplines)&gt;()))</definition>
+        <argsstring></argsstring>
+        <name>evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The ND index range for the evaluation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="135" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1adf062cd9fd06edb7fffc23cb6f2ebb54" prot="public" static="no">
+        <type>Coord&lt; typename EvaluationDDim::continuous_dimension_type... &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::coord_type =  Coord&lt;typename EvaluationDDim::continuous_dimension_type...&gt;</definition>
+        <argsstring></argsstring>
+        <name>coord_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::coord_type</qualifiedname>
+        <briefdescription>
+<para>The ND coordinate type corresponding to the evaluation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="139" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" prot="public" static="no">
+        <type>decltype(make_coeff_idx_range_type(std::make_index_sequence&lt; sizeof...(BSplines)&gt;()))</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::coeff_idx_range_type =  decltype(make_coeff_idx_range_type(std::make_index_sequence&lt;sizeof...(BSplines)&gt;()))</definition>
+        <argsstring></argsstring>
+        <name>coeff_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the ND index range on which the interpolation coefficients are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="142" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a3cceec31c9df551f034634ac26179ff3" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationIdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>typename Evaluator::template batched_evaluation_domain_type&lt; BatchedInterpolationIdxRange &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::batched_evaluation_idx_range_type = 
+            typename Evaluator::template batched_evaluation_domain_type&lt;
+                    BatchedInterpolationIdxRange&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::batched_evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Batched index range for the evaluation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="152" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationIdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>typename Evaluator::template batched_spline_domain_type&lt; BatchedInterpolationIdxRange &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::batched_coeff_idx_range_type = 
+            typename Evaluator::template batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_coeff_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::batched_coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Batched domain with the evaluation grid replaced by BSplines. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="158" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aafa819a9d87a2513f219e54dc1a81559" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t...</type>
+            <declname>Is</declname>
+            <defname>Is</defname>
+          </param>
+        </templateparamlist>
+        <type>typename Evaluator::template evaluation_domain_type&lt; Is... &gt;</type>
+        <definition>static typename Evaluator::template evaluation_domain_type&lt; Is... &gt; InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::make_evaluation_idx_range_type</definition>
+        <argsstring>(std::index_sequence&lt; Is... &gt;)</argsstring>
+        <name>make_evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::make_evaluation_idx_range_type</qualifiedname>
+        <param>
+          <type>std::index_sequence&lt; Is... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="123" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a1850b89570334f7ec7ecf011fd9df9e6" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t...</type>
+            <declname>Is</declname>
+            <defname>Is</defname>
+          </param>
+        </templateparamlist>
+        <type>typename Evaluator::template spline_domain_type&lt; Is... &gt;</type>
+        <definition>static typename Evaluator::template spline_domain_type&lt; Is... &gt; InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::make_coeff_idx_range_type</definition>
+        <argsstring>(std::index_sequence&lt; Is... &gt;)</argsstring>
+        <name>make_coeff_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::make_coeff_idx_range_type</qualifiedname>
+        <param>
+          <type>std::index_sequence&lt; Is... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="127" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a08247b5636ed21e622ab1809c3bda114" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>static constexpr std::size_t InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::rank</qualifiedname>
+        <briefdescription>
+<para>The number of interpolation dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="145" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="145" bodyend="148"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Specialisation of <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref> for ddc::SplineEvaluatorND. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>ddc::SplineEvaluatorND uses different alias names from the InterpolationEvaluator convention. This specialisation provides the mapping so that ddc::SplineEvaluatorND can be used directly as an InterpolationEvaluator.</para>
+<para>Mapping: evaluation_domain_type&lt;0, ...&gt; -&gt; <ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" kindref="member">evaluation_idx_range_type</ref> spline_domain_type&lt;0, ...&gt; -&gt; <ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" kindref="member">coeff_idx_range_type</ref> batched_spline_domain_type&lt;D&gt; -&gt; <ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" kindref="member">batched_coeff_idx_range_type&lt;D&gt;</ref> </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="107" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="113" bodyend="161"/>
+    <listofallmembers>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>batched_coeff_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a3cceec31c9df551f034634ac26179ff3" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>batched_evaluation_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>coeff_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1adf062cd9fd06edb7fffc23cb6f2ebb54" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>coord_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1ad9d376138accb642b612aea47643561e" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>evaluation_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1ad23da17e43ff1527ec3a8529b990b92b" prot="private" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>Evaluator</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a1850b89570334f7ec7ecf011fd9df9e6" prot="private" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>make_coeff_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aafa819a9d87a2513f219e54dc1a81559" prot="private" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>make_evaluation_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a08247b5636ed21e622ab1809c3bda114" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>rank</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

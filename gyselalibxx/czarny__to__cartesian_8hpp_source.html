@@ -741,9 +741,9 @@ public:
             static_assert(
                     ddc::in_tags_v&lt;
                             IndexTag1,
-                            ddc::detail::TypeSeq&lt;
+                            ddc::TypeSeq&lt;
                                     X,
-                                    Y&gt;&gt; &amp;&amp; ddc::in_tags_v&lt;IndexTag1, ddc::detail::TypeSeq&lt;R_cov, Theta_cov&gt;&gt;,
+                                    Y&gt;&gt; &amp;&amp; ddc::in_tags_v&lt;IndexTag1, ddc::TypeSeq&lt;R_cov, Theta_cov&gt;&gt;,
                     "Unexpected tags provided");
         }
     }

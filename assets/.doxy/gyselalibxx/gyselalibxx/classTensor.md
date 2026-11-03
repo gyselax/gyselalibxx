@@ -40,7 +40,7 @@ See [TensorCommon](classTensorCommon.md)
 | Type | Name |
 | ---: | :--- |
 | typedef typename DataStorageType::element\_type | [**element\_type**](classTensorCommon.md#typedef-element_type)  <br>_The type of the elements of the tensor._  |
-| typedef ddc::detail::TypeSeq&lt; ValidIndexSet... &gt; | [**index\_set**](classTensorCommon.md#typedef-index_set)  <br>_The TensorIndexSet describing the possible indices._  |
+| typedef ddc::TypeSeq&lt; ValidIndexSet... &gt; | [**index\_set**](classTensorCommon.md#typedef-index_set)  <br>_The TensorIndexSet describing the possible indices._  |
 | typedef ddc::type\_seq\_element\_t&lt; dim, [**index\_set**](classTensorCommon.md#typedef-index_set) &gt; | [**vector\_index\_set\_t**](classTensorCommon.md#typedef-vector_index_set_t)  <br>_A helper type alias to get all possible indices along a specified dimension._  |
 
 

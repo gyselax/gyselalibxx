@@ -107,7 +107,7 @@ using LagrangeInterpolator =  typename detail::LagrangeInterpolatorResolver<
 
 
 
-The helper allows ExtrapRules to be more general. It is a ddc::detail::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the [**ExtrapolationRule**](namespaceExtrapolationRule.md) namespace (e.g. [**ExtrapolationRule::Periodic**](namespaceExtrapolationRule.md#typedef-periodic)) or a custom, already-concrete extrapolation rule class. 
+The helper allows ExtrapRules to be more general. It is a ddc::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the [**ExtrapolationRule**](namespaceExtrapolationRule.md) namespace (e.g. [**ExtrapolationRule::Periodic**](namespaceExtrapolationRule.md#typedef-periodic)) or a custom, already-concrete extrapolation rule class. 
 
 
         

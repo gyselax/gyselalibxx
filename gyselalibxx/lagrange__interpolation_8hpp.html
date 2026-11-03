@@ -607,7 +607,7 @@
         IdxRangeInterpGrid,
         ExtrapRules...&gt;::type;
 </code></pre>
-<p>The helper allows ExtrapRules to be more general. It is a ddc::detail::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> namespace (e.g. <a href="namespaceExtrapolationRule.html#typedef-periodic"><strong>ExtrapolationRule::Periodic</strong></a>) or a custom, already-concrete extrapolation rule class. </p>
+<p>The helper allows ExtrapRules to be more general. It is a ddc::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> namespace (e.g. <a href="namespaceExtrapolationRule.html#typedef-periodic"><strong>ExtrapolationRule::Periodic</strong></a>) or a custom, already-concrete extrapolation rule class. </p>
 <hr>
 
 <hr>

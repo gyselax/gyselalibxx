@@ -38,6 +38,7 @@
 | Type | Name |
 | ---: | :--- |
 | struct | [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md) &lt;class Evaluator&gt;<br>_A traits struct for accessing type aliases of an interpolation evaluator._  |
+| struct | [**InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;**](structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f.md) &lt;class ExecSpace, class MemorySpace, BSplines, EvaluationDDim, ExtrapolationRule&gt;<br>_Specialisation of_ [_**InterpolationEvaluatorTraits**_](structInterpolationEvaluatorTraits.md) _for ddc::SplineEvaluatorND._ |
 
 
 

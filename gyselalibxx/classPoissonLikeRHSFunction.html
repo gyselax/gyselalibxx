@@ -586,7 +586,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluatorND&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, ddc::detail::TypeSeq&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;, ddc::detail::TypeSeq&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt;, ddc::detail::TypeSeq&lt; RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineEvaluatorND&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, ddc::TypeSeq&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;, ddc::TypeSeq&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt;, ddc::TypeSeq&lt; RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-evaluator_type"><strong>evaluator_type</strong></a>  <br><em>The type of the 2D Spline Evaluator used by this class.</em></td>
 </tr>
 </tbody>
@@ -621,9 +621,9 @@
 <pre><code class="language-C++">using PoissonLikeRHSFunction&lt; RadialExtrapolationRule &gt;::evaluator_type =  ddc::SplineEvaluatorND&lt;
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;,
-            ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;,
-            ddc::detail::TypeSeq&lt;
+            ddc::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;,
+            ddc::TypeSeq&lt;GridR, GridTheta&gt;,
+            ddc::TypeSeq&lt;
                     RadialExtrapolationRule,
                     RadialExtrapolationRule,
                     ddc::PeriodicExtrapolationRule&lt;Theta&gt;,

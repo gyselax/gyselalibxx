@@ -71,6 +71,8 @@
       <node id="16">
         <label>moments.hpp</label>
         <link refid="moments_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
       </node>
       <node id="18">
         <label>species_info.hpp</label>

@@ -592,10 +592,8 @@ template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
 class MultipatchField;
 
 template &lt;class... Patches, class... InternalTypes&gt;
-class MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;
-    : public MultipatchType&lt;
-              ddc::detail::TypeSeq&lt;Patches...&gt;,
-              ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;
+class MultipatchField&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;InternalTypes...&gt;&gt;
+    : public MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;InternalTypes...&gt;&gt;
 {
     static_assert(
             (has_data_access_methods_v&lt;InternalTypes&gt; &amp;&amp; ...),
@@ -603,9 +601,7 @@ class MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::Ty
             "manipulated like fields.");
 
 public:
-    using base_type = MultipatchType&lt;
-            ddc::detail::TypeSeq&lt;Patches...&gt;,
-            ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;;
+    using base_type = MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;InternalTypes...&gt;&gt;;
 
     using typename base_type::PatchOrdering;
 
@@ -618,15 +614,13 @@ public:
             "type.");
 
 public:
-    using span_type = MultipatchField&lt;
-            PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::span_type...&gt;&gt;;
-    using view_type = MultipatchField&lt;
-            PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::view_type...&gt;&gt;;
+    using span_type
+            = MultipatchField&lt;PatchOrdering, ddc::TypeSeq&lt;typename InternalTypes::span_type...&gt;&gt;;
+    using view_type
+            = MultipatchField&lt;PatchOrdering, ddc::TypeSeq&lt;typename InternalTypes::view_type...&gt;&gt;;
     using discrete_domain_type = MultipatchType&lt;
             PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::discrete_domain_type...&gt;&gt;;
+            ddc::TypeSeq&lt;typename InternalTypes::discrete_domain_type...&gt;&gt;;
     using memory_space = typename base_type::example_element::memory_space;
     using element_type = typename base_type::example_element::element_type;
 
@@ -695,7 +689,7 @@ public:
         static_assert((ddc::in_tags_v&lt;QueryTag, typename InternalTypes::NDTypeTag&gt; &amp;&amp; ...));
         using FieldType = MultipatchField&lt;
                 PatchOrdering,
-                ddc::detail::TypeSeq&lt;typename InternalTypes::chunk_span_type...&gt;&gt;;
+                ddc::TypeSeq&lt;typename InternalTypes::chunk_span_type...&gt;&gt;;
         return FieldType(ddcHelper::get&lt;QueryTag&gt;(std::get&lt;InternalTypes&gt;(base_type::m_tuple))...);
     }
 };
@@ -715,23 +709,22 @@ inline constexpr bool enable_multipatch_field&lt;
         detail::MultipatchField&lt;TypeSeqPatches, TypeSeqInternalTypes&gt;&gt; = true;
 
 template &lt;template &lt;typename P&gt; typename T, class... Patches&gt;
-using MultipatchField = detail::
-        MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
+using MultipatchField
+        = detail::MultipatchField&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
 
 template &lt;class... VectorFieldType, class PatchTypeSeq&gt;
 inline constexpr bool enable_vector_field&lt;detail::MultipatchField&lt;
         PatchTypeSeq,
-        ddc::detail::TypeSeq&lt;VectorFieldType...&gt;&gt;&gt; = (is_vector_field_v&lt;VectorFieldType&gt; &amp;&amp; ...);
+        ddc::TypeSeq&lt;VectorFieldType...&gt;&gt;&gt; = (is_vector_field_v&lt;VectorFieldType&gt; &amp;&amp; ...);
 
 namespace ddcHelper {
 
 template &lt;class... Patches, class TypeSeqInternalTypes1, class TypeSeqInternalTypes2&gt;
 void deepcopy(
-        detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes1&gt; dst,
-        detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes2&gt; src)
+        detail::MultipatchField&lt;ddc::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes1&gt; dst,
+        detail::MultipatchField&lt;ddc::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes2&gt; src)
 {
-    using DstType
-            = detail::MultipatchField&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes1&gt;;
+    using DstType = detail::MultipatchField&lt;ddc::TypeSeq&lt;Patches...&gt;, TypeSeqInternalTypes1&gt;;
     if constexpr (ddc::is_chunk_v&lt;typename DstType::example_element&gt;) {
         (ddc::parallel_deepcopy(dst.template get&lt;Patches&gt;(), src.template get&lt;Patches&gt;()), ...);
     } else {

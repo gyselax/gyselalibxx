@@ -19,7 +19,7 @@
 #include "view.hpp"
 
 template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag, std::size_t D>
-class TriangularBernsteinPolynomialBasis
+class TriangularBernsteinPolynomialBasis : ddc::DiscreteDimension
 {
 public:
     using discrete_dimension_type = TriangularBernsteinPolynomialBasis;

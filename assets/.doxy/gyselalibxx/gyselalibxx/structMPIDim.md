@@ -16,6 +16,7 @@ _An internal tag used to dsecribe an artificial dimension describing the MPI ran
 
 
 
+Inherits the following classes: ddc::DiscreteDimension
 
 
 

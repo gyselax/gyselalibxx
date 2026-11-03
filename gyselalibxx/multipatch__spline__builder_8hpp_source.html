@@ -613,7 +613,7 @@ class MultipatchSplineBuilder
              &amp;&amp; ...),
             "The GridOnPatch argument does not create 1D Grid objects.");
 
-    using PatchOrdering = ddc::detail::TypeSeq&lt;Patches...&gt;;
+    using PatchOrdering = ddc::TypeSeq&lt;Patches...&gt;;
     static constexpr std::size_t n_patches = ddc::type_seq_size_v&lt;PatchOrdering&gt;;
 
     template &lt;class Patch&gt;

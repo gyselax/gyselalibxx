@@ -24,54 +24,53 @@ template <class Patch, class InterfaceTypeSeq>
 struct PatchConnection;
 
 template <class Patch>
-struct PatchConnection<Patch, ddc::detail::TypeSeq<>>
+struct PatchConnection<Patch, ddc::TypeSeq<>>
 {
-    using type = ddc::detail::TypeSeq<>;
+    using type = ddc::TypeSeq<>;
 };
 
 template <class Patch, class InterfaceType>
-struct PatchConnection<Patch, ddc::detail::TypeSeq<InterfaceType>>
+struct PatchConnection<Patch, ddc::TypeSeq<InterfaceType>>
 {
     using type = std::conditional_t<
             InterfaceType::template connected_to_patch<Patch>(),
-            ddc::detail::TypeSeq<InterfaceType>,
-            ddc::detail::TypeSeq<>>;
+            ddc::TypeSeq<InterfaceType>,
+            ddc::TypeSeq<>>;
 };
 
 template <class Patch, class InterfaceType1, class... RemainingInterfaceTypes>
-struct PatchConnection<Patch, ddc::detail::TypeSeq<InterfaceType1, RemainingInterfaceTypes...>>
+struct PatchConnection<Patch, ddc::TypeSeq<InterfaceType1, RemainingInterfaceTypes...>>
 {
     using type = ddc::type_seq_merge_t<
-            typename PatchConnection<Patch, ddc::detail::TypeSeq<InterfaceType1>>::type,
-            typename PatchConnection<Patch, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::
-                    type>;
+            typename PatchConnection<Patch, ddc::TypeSeq<InterfaceType1>>::type,
+            typename PatchConnection<Patch, ddc::TypeSeq<RemainingInterfaceTypes...>>::type>;
 };
 
 template <class TypeSeq>
 struct StripOutsideEdges;
 
 template <class EdgeType>
-struct StripOutsideEdges<ddc::detail::TypeSeq<EdgeType>>
+struct StripOutsideEdges<ddc::TypeSeq<EdgeType>>
 {
     using type = std::conditional_t<
             std::is_same_v<EdgeType, OutsideEdge>,
-            ddc::detail::TypeSeq<>,
-            ddc::detail::TypeSeq<EdgeType>>;
+            ddc::TypeSeq<>,
+            ddc::TypeSeq<EdgeType>>;
 };
 
 template <class EdgeType1, class... RemainingEdgeTypes>
-struct StripOutsideEdges<ddc::detail::TypeSeq<EdgeType1, RemainingEdgeTypes...>>
+struct StripOutsideEdges<ddc::TypeSeq<EdgeType1, RemainingEdgeTypes...>>
 {
     using type = ddc::type_seq_merge_t<
-            typename StripOutsideEdges<ddc::detail::TypeSeq<EdgeType1>>::type,
-            typename StripOutsideEdges<ddc::detail::TypeSeq<RemainingEdgeTypes...>>::type>;
+            typename StripOutsideEdges<ddc::TypeSeq<EdgeType1>>::type,
+            typename StripOutsideEdges<ddc::TypeSeq<RemainingEdgeTypes...>>::type>;
 };
 
 template <class TypeSeq>
 struct ToTuple;
 
 template <class... I>
-struct ToTuple<ddc::detail::TypeSeq<I...>>
+struct ToTuple<ddc::TypeSeq<I...>>
 {
     using type = std::tuple<I...>;
 };
@@ -80,24 +79,24 @@ template <class TypeSeq>
 struct ExtractPatches;
 
 template <>
-struct ExtractPatches<ddc::detail::TypeSeq<>>
+struct ExtractPatches<ddc::TypeSeq<>>
 {
-    using type = ddc::detail::TypeSeq<>;
+    using type = ddc::TypeSeq<>;
 };
 
 template <class EdgeType1, class... EdgeTypes>
-struct ExtractPatches<ddc::detail::TypeSeq<EdgeType1, EdgeTypes...>>
+struct ExtractPatches<ddc::TypeSeq<EdgeType1, EdgeTypes...>>
 {
     using type = ddc::type_seq_merge_t<
-            ddc::detail::TypeSeq<typename EdgeType1::associated_patch>,
-            typename ExtractPatches<ddc::detail::TypeSeq<EdgeTypes...>>::type>;
+            ddc::TypeSeq<typename EdgeType1::associated_patch>,
+            typename ExtractPatches<ddc::TypeSeq<EdgeTypes...>>::type>;
 };
 
 template <class Grid1D, class PatchTypeSeq>
 struct FindPatch;
 
 template <class Grid1D>
-struct FindPatch<Grid1D, ddc::detail::TypeSeq<>>
+struct FindPatch<Grid1D, ddc::TypeSeq<>>
 {
     // This class should not be reached in the recursion. Raise a readable error (based on the
     // template arguments) if it is instantiated.
@@ -107,7 +106,7 @@ struct FindPatch<Grid1D, ddc::detail::TypeSeq<>>
 template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
-        ddc::detail::TypeSeq<Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
+        ddc::TypeSeq<Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
     using type = Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>;
 };
@@ -115,25 +114,25 @@ struct FindPatch<
 template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
-        ddc::detail::TypeSeq<Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
+        ddc::TypeSeq<Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
     using type = Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>;
 };
 
 template <class Grid1D, class Patch1, class... RemainingPatchTypes>
-struct FindPatch<Grid1D, ddc::detail::TypeSeq<Patch1, RemainingPatchTypes...>>
+struct FindPatch<Grid1D, ddc::TypeSeq<Patch1, RemainingPatchTypes...>>
 {
     // Should instantiate specialisations above instead of this specialisation
     static_assert(!std::is_same_v<typename Patch1::Grid1, Grid1D>);
     static_assert(!std::is_same_v<typename Patch1::Grid2, Grid1D>);
-    using type = typename FindPatch<Grid1D, ddc::detail::TypeSeq<RemainingPatchTypes...>>::type;
+    using type = typename FindPatch<Grid1D, ddc::TypeSeq<RemainingPatchTypes...>>::type;
 };
 
 template <class Edge, class InterfaceTypeSeq>
 struct FindInterface;
 
 template <class Edge>
-struct FindInterface<Edge, ddc::detail::TypeSeq<>>
+struct FindInterface<Edge, ddc::TypeSeq<>>
 {
     // This class should not be reached in the recursion. Raise a readable error (based on the
     // template arguments) if it is instantiated.
@@ -141,19 +140,18 @@ struct FindInterface<Edge, ddc::detail::TypeSeq<>>
 };
 
 template <class Edge, class Interface1, class... RemainingInterfaceTypes>
-struct FindInterface<Edge, ddc::detail::TypeSeq<Interface1, RemainingInterfaceTypes...>>
+struct FindInterface<Edge, ddc::TypeSeq<Interface1, RemainingInterfaceTypes...>>
 {
     // Should instantiate specialisations below instead of this specialisation
     static_assert(!std::is_same_v<Edge, typename Interface1::Edge1>);
     static_assert(!std::is_same_v<Edge, typename Interface1::Edge2>);
-    using type =
-            typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::type;
+    using type = typename FindInterface<Edge, ddc::TypeSeq<RemainingInterfaceTypes...>>::type;
 };
 
 template <class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes>
 struct FindInterface<
         Edge,
-        ddc::detail::TypeSeq<Interface<Edge, OEdge, Orientations>, RemainingInterfaceTypes...>>
+        ddc::TypeSeq<Interface<Edge, OEdge, Orientations>, RemainingInterfaceTypes...>>
 {
     using type = Interface<Edge, OEdge, Orientations>;
 };
@@ -161,7 +159,7 @@ struct FindInterface<
 template <class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes>
 struct FindInterface<
         Edge,
-        ddc::detail::TypeSeq<Interface<OEdge, Edge, Orientations>, RemainingInterfaceTypes...>>
+        ddc::TypeSeq<Interface<OEdge, Edge, Orientations>, RemainingInterfaceTypes...>>
 {
     using type = Interface<OEdge, Edge, Orientations>;
 };
@@ -215,20 +213,20 @@ struct AddToTypeSeq;
 template <class ToInsert, class TypeSeq>
 struct AddToTypeSeq<ToInsert, TypeSeq, FrontInsert>
 {
-    using type = ddc::type_seq_merge_t<TypeSeq, ddc::detail::TypeSeq<ToInsert>>;
+    using type = ddc::type_seq_merge_t<TypeSeq, ddc::TypeSeq<ToInsert>>;
 };
 
 template <class ToInsert, class TypeSeq>
 struct AddToTypeSeq<ToInsert, TypeSeq, BackInsert>
 {
-    using type = ddc::type_seq_merge_t<ddc::detail::TypeSeq<ToInsert>, TypeSeq>;
+    using type = ddc::type_seq_merge_t<ddc::TypeSeq<ToInsert>, TypeSeq>;
 };
 
 template <
         class StartEdge,
         class InterfaceTypeSeq,
         InsertPosition insert_pos,
-        class FoundInterfaces = ddc::detail::TypeSeq<>,
+        class FoundInterfaces = ddc::TypeSeq<>,
         class MatchingEdge = equivalent_edge_t<StartEdge, InterfaceTypeSeq>,
         bool interface_already_found // Periodic case
         = ddc::in_tags_v<
@@ -303,7 +301,7 @@ template <
         class StartEdge,
         class InterfaceTypeSeq,
         InsertPosition insert_pos,
-        class FoundGrids = ddc::detail::TypeSeq<>,
+        class FoundGrids = ddc::TypeSeq<>,
         class MatchingEdge = equivalent_edge_t<StartEdge, InterfaceTypeSeq>,
         bool grid_already_found // Periodic case
         = ddc::in_tags_v<typename StartEdge::perpendicular_grid, FoundGrids>>
@@ -399,9 +397,9 @@ template <class QueryGrid1D, class... IdxRangeGrids>
 struct SelectRelevantIdxRangeType<QueryGrid1D, IdxRange<IdxRangeGrids...>>
 {
     using type = std::conditional_t<
-            ddc::in_tags_v<QueryGrid1D, ddc::detail::TypeSeq<IdxRangeGrids...>>,
-            ddc::detail::TypeSeq<IdxRange<IdxRangeGrids...>>,
-            ddc::detail::TypeSeq<>>;
+            ddc::in_tags_v<QueryGrid1D, ddc::TypeSeq<IdxRangeGrids...>>,
+            ddc::TypeSeq<IdxRange<IdxRangeGrids...>>,
+            ddc::TypeSeq<>>;
 };
 
 template <class QueryGrid1D, class IdxRangeTuple>
@@ -410,7 +408,7 @@ struct FindRelevantIdxRangeType;
 template <class QueryGrid1D>
 struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<>>
 {
-    using type = ddc::detail::TypeSeq<>;
+    using type = ddc::TypeSeq<>;
 };
 
 template <class QueryGrid1D, class IdxRangeHead, class... IdxRangeTypes>
@@ -428,7 +426,7 @@ using to_tuple_t = typename connectivity_details::ToTuple<TypeSeq>::type;
 
 template <class... EdgeType>
 using strip_outside_edges_t =
-        typename connectivity_details::StripOutsideEdges<ddc::detail::TypeSeq<EdgeType...>>::type;
+        typename connectivity_details::StripOutsideEdges<ddc::TypeSeq<EdgeType...>>::type;
 
 template <class EdgeTypeSeq>
 using extract_patches_t = typename connectivity_details::ExtractPatches<EdgeTypeSeq>::type;

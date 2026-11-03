@@ -48,7 +48,7 @@ See [IMPILayout](classIMPILayout.md)
 | ---: | :--- |
 | typedef IdxRangeData | [**discrete\_domain\_type**](classIMPILayout.md#typedef-discrete_domain_type)  <br>_The index range of the data._  |
 | typedef IdxRange&lt; DistributedDim... &gt; | [**distributed\_sub\_idx\_range**](classIMPILayout.md#typedef-distributed_sub_idx_range)  <br>_The index range of the distributed section of the data._  |
-| typedef ddc::detail::TypeSeq&lt; DistributedDim... &gt; | [**distributed\_type\_seq**](classIMPILayout.md#typedef-distributed_type_seq)  <br>_A type sequence describing the dimensions which are distributed across MPI processes._  |
+| typedef ddc::TypeSeq&lt; DistributedDim... &gt; | [**distributed\_type\_seq**](classIMPILayout.md#typedef-distributed_type_seq)  <br>_A type sequence describing the dimensions which are distributed across MPI processes._  |
 
 
 

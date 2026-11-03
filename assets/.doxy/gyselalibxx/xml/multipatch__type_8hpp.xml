@@ -413,7 +413,7 @@
       </node>
     </invincdepgraph>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="multipatch__type_8hpp_1a3682d06d02231f3e1898a5d9f5a2d4fa" prot="public" static="no">
+      <memberdef kind="typedef" id="multipatch__type_8hpp_1a86f8dbb45229f899f331afd570644b42" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>template&lt; typename P &gt; typename</type>
@@ -426,9 +426,8 @@
             <defname>Patches</defname>
           </param>
         </templateparamlist>
-        <type>detail:: MultipatchType&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</type>
-        <definition>using MultipatchType =  detail::
-        MultipatchType&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;</definition>
+        <type>detail::MultipatchType&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</type>
+        <definition>using MultipatchType =  detail::MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>MultipatchType</name>
         <briefdescription>
@@ -525,17 +524,17 @@
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MultipatchType;</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>InternalTypes&gt;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MultipatchType&lt;ddc::detail::TypeSeq&lt;Patches...&gt;,<sp/>ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;,<sp/>ddc::TypeSeq&lt;InternalTypes...&gt;&gt;</highlight></codeline>
 <codeline lineno="43"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Patches)<sp/>==<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(InternalTypes),</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;There<sp/>must<sp/>be<sp/>one<sp/>internal<sp/>type<sp/>per<sp/>patch&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PatchOrdering<sp/>=<sp/>ddc::detail::TypeSeq&lt;Patches...&gt;;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PatchOrdering<sp/>=<sp/>ddc::TypeSeq&lt;Patches...&gt;;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">InternalTypeOrdering<sp/>=<sp/>ddc::detail::TypeSeq&lt;InternalTypes...&gt;;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">InternalTypeOrdering<sp/>=<sp/>ddc::TypeSeq&lt;InternalTypes...&gt;;</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
@@ -564,7 +563,7 @@
 <codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
 <codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InternalTypeOrdering,</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;</highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(other.template<sp/>get&lt;Patches&gt;())...&gt;&gt;,</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;</highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(other.template<sp/>get&lt;Patches&gt;())...&gt;&gt;,</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;MultipatchTypes<sp/>are<sp/>not<sp/>equivalent&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight></codeline>
@@ -595,8 +594,8 @@
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>enable_multipatch_type&lt;detail::MultipatchType&lt;TypeSeqPatches,<sp/>TypeSeqInternalTypes&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"></highlight></codeline>
 <codeline lineno="169"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MultipatchType<sp/>=<sp/>detail::</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MultipatchType&lt;ddc::detail::TypeSeq&lt;Patches...&gt;,<sp/>ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MultipatchType</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>detail::MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;,<sp/>ddc::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp"/>
   </compounddef>

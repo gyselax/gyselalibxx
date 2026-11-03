@@ -56,9 +56,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classMultipatchSplineBuilder_1a65e4f20add6aaf012822f0b7641e0f57" prot="private" static="no">
-        <type>ddc::detail::TypeSeq&lt; Patches... &gt;</type>
-        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::PatchOrdering =  ddc::detail::TypeSeq&lt;Patches...&gt;</definition>
+      <memberdef kind="typedef" id="classMultipatchSplineBuilder_1af52706f45b15c25999e7649435a5109f" prot="private" static="no">
+        <type>ddc::TypeSeq&lt; Patches... &gt;</type>
+        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::PatchOrdering =  ddc::TypeSeq&lt;Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>PatchOrdering</name>
         <qualifiedname>MultipatchSplineBuilder::PatchOrdering</qualifiedname>
@@ -470,7 +470,7 @@
       <member refid="classMultipatchSplineBuilder_1ad568d53faac2b7ddd46d6207758af1cc" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder</scope><name>MultipatchValues</name></member>
       <member refid="classMultipatchSplineBuilder_1a12f79b7669a656a7b79abcc48ca56bf3" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder</scope><name>n_patches</name></member>
       <member refid="classMultipatchSplineBuilder_1ab28e56d1540fb221583a1fd7a47711d8" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder</scope><name>operator()</name></member>
-      <member refid="classMultipatchSplineBuilder_1a65e4f20add6aaf012822f0b7641e0f57" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder</scope><name>PatchOrdering</name></member>
+      <member refid="classMultipatchSplineBuilder_1af52706f45b15c25999e7649435a5109f" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder</scope><name>PatchOrdering</name></member>
       <member refid="classMultipatchSplineBuilder_1a3700a1423111e61f44551e97d6ab7374" prot="private" virt="non-virtual"><scope>MultipatchSplineBuilder</scope><name>SplineOnPatch</name></member>
       <member refid="classMultipatchSplineBuilder_1a185a05d006eaf78e3f3193ddeb8cfe7e" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder</scope><name>~MultipatchSplineBuilder</name></member>
     </listofallmembers>

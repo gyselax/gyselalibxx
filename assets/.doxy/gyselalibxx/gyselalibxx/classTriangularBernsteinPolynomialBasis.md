@@ -16,6 +16,7 @@ _A class which evaluates the triangular Bernstein polynomials._ [More...](#detai
 
 
 
+Inherits the following classes: ddc::DiscreteDimension
 
 
 

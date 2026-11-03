@@ -16,7 +16,7 @@
       </param>
       <param>
         <type>class FoundInterfaces</type>
-        <defval>ddc::detail::TypeSeq&lt;&gt;</defval>
+        <defval>ddc::TypeSeq&lt;&gt;</defval>
       </param>
       <param>
         <type>class MatchingEdge</type>
@@ -68,7 +68,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="341" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="341" bodyend="-1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="339" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="339" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

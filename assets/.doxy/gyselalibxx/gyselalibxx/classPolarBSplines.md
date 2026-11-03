@@ -16,6 +16,7 @@
 
 
 
+Inherits the following classes: ddc::DiscreteDimension
 
 
 

@@ -616,9 +616,9 @@ using SplineInterpPointsTheta
 using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluatorND&lt;
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
-        ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;,
-        ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;,
-        ddc::detail::TypeSeq&lt;
+        ddc::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;,
+        ddc::TypeSeq&lt;GridR, GridTheta&gt;,
+        ddc::TypeSeq&lt;
                 ddc::NullExtrapolationRule, // boundary at r=0
                 ddc::NullExtrapolationRule, // boundary at rmax
                 ddc::PeriodicExtrapolationRule&lt;Theta&gt;,

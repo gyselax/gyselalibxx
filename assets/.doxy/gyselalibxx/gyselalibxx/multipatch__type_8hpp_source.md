@@ -28,17 +28,17 @@ template <class TypeSeqPatches, class TypeSeqInternalTypes>
 class MultipatchType;
 
 template <class... Patches, class... InternalTypes>
-class MultipatchType<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<InternalTypes...>>
+class MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<InternalTypes...>>
 {
     static_assert(
             sizeof...(Patches) == sizeof...(InternalTypes),
             "There must be one internal type per patch");
 
 public:
-    using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
+    using PatchOrdering = ddc::TypeSeq<Patches...>;
 
 private:
-    using InternalTypeOrdering = ddc::detail::TypeSeq<InternalTypes...>;
+    using InternalTypeOrdering = ddc::TypeSeq<InternalTypes...>;
 
 public:
     template <class Patch>
@@ -67,7 +67,7 @@ public:
         static_assert(
                 std::is_same_v<
                         InternalTypeOrdering,
-                        ddc::detail::TypeSeq<decltype(other.template get<Patches>())...>>,
+                        ddc::TypeSeq<decltype(other.template get<Patches>())...>>,
                 "MultipatchTypes are not equivalent");
     }
 
@@ -98,8 +98,8 @@ inline constexpr bool
         enable_multipatch_type<detail::MultipatchType<TypeSeqPatches, TypeSeqInternalTypes>> = true;
 
 template <template <typename P> typename T, class... Patches>
-using MultipatchType = detail::
-        MultipatchType<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
+using MultipatchType
+        = detail::MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
 ```
 
 

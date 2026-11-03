@@ -34,7 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef detail:: MultipatchType&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchType**](#typedef-multipatchtype)  <br>_A class to store several objects that are of a type which is templated by the patch._  |
+| typedef detail::MultipatchType&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchType**](#typedef-multipatchtype)  <br>_A class to store several objects that are of a type which is templated by the patch._  |
 
 
 
@@ -98,8 +98,7 @@
 
 _A class to store several objects that are of a type which is templated by the patch._ 
 ```C++
-using MultipatchType =  detail::
-        MultipatchType<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
+using MultipatchType =  detail::MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
 ```
 
 

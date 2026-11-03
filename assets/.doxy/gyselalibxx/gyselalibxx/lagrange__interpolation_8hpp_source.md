@@ -141,7 +141,7 @@ class NDLagrangeInterpolator<
         ExecSpace,
         IdxRange<Basis...>,
         IdxRange<Grid1D...>,
-        ddc::detail::TypeSeq<ExtrapRules...>,
+        ddc::TypeSeq<ExtrapRules...>,
         DataType>
 {
     static_assert(sizeof...(Basis) == sizeof...(Grid1D));
@@ -179,7 +179,7 @@ public:
 private:
     template <class B>
     using CoeffGrid = ddc::type_seq_element_t<
-            ddc::type_seq_rank_v<B, ddc::detail::TypeSeq<Basis...>>,
+            ddc::type_seq_rank_v<B, ddc::TypeSeq<Basis...>>,
             ddc::to_type_seq_t<typename BuilderType::coeff_idx_range_type>>;
 
     static_assert(
@@ -325,7 +325,7 @@ struct LagrangeInterpolatorResolver<
             ExecSpace,
             IdxRange<BasisHead, Basis...>,
             IdxRange<Grid1DHead, Grid1D...>,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<
                     extrapolation_rule_t<
                             ExtrapRulesHead,
                             DataType,

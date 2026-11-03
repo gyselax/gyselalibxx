@@ -536,12 +536,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="495" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="495" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplinePolarFootFinder_1a7d2bc598699de565f24f7a4418c56468" prot="private" static="no">
-        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; <ref refid="classSplinePolarFootFinder_1a3d9f7f9bc6e364a6dd5b06e3191ee327" kindref="member">IdxRangeOperator</ref> &gt;, ddc::detail::TypeSeq&lt; <ref refid="classSplinePolarFootFinder_1ae1c6d3404e1f8ca1671b5e2a644d9992" kindref="member">GridR</ref><ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="classSplinePolarFootFinder_1ad37632e35b853a7bc46606f149c52105" kindref="member">GridTheta</ref><ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;, ddc::detail::TypeSeq&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt; &gt; &gt;</type>
+      <memberdef kind="typedef" id="classSplinePolarFootFinder_1aeabb414101a25055b819508f1f6ef834" prot="private" static="no">
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; <ref refid="classSplinePolarFootFinder_1a3d9f7f9bc6e364a6dd5b06e3191ee327" kindref="member">IdxRangeOperator</ref> &gt;, ddc::TypeSeq&lt; <ref refid="classSplinePolarFootFinder_1ae1c6d3404e1f8ca1671b5e2a644d9992" kindref="member">GridR</ref><ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="classSplinePolarFootFinder_1ad37632e35b853a7bc46606f149c52105" kindref="member">GridTheta</ref><ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;, ddc::TypeSeq&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt; &gt; &gt;</type>
         <definition>using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::IdxRangeSplineBatched =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
                     ddc::to_type_seq_t&lt;IdxRangeOperator&gt;,
-                    ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;,
-                    ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;&gt;&gt;</definition>
+                    ddc::TypeSeq&lt;GridR, GridTheta&gt;,
+                    ddc::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeSplineBatched</name>
         <qualifiedname>SplinePolarFootFinder::IdxRangeSplineBatched</qualifiedname>
@@ -993,7 +993,7 @@
       <member refid="classSplinePolarFootFinder_1a3d9f7f9bc6e364a6dd5b06e3191ee327" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>IdxRangeOperator</name></member>
       <member refid="classSplinePolarFootFinder_1abfb99e756e53309eab48e31c07d79f8a" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>IdxRangeR</name></member>
       <member refid="classSplinePolarFootFinder_1a2ec51a7c30387d6ac531352768a9f2ba" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>IdxRangeRTheta</name></member>
-      <member refid="classSplinePolarFootFinder_1a7d2bc598699de565f24f7a4418c56468" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>IdxRangeSplineBatched</name></member>
+      <member refid="classSplinePolarFootFinder_1aeabb414101a25055b819508f1f6ef834" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>IdxRangeSplineBatched</name></member>
       <member refid="classSplinePolarFootFinder_1ae68b5e8f83571ca243efd7d0d0195d7e" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>IdxRangeTheta</name></member>
       <member refid="classSplinePolarFootFinder_1a2373f04a62dab3f7fada0b6c6d8ed082" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>IdxRTheta</name></member>
       <member refid="classSplinePolarFootFinder_1af90b24a4664d3d635e2ea859a8356ac5" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>IdxTheta</name></member>

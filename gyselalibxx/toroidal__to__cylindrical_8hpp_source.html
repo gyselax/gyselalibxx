@@ -649,8 +649,8 @@ public:
     template &lt;class IndexTag1, class IndexTag2&gt;
     KOKKOS_INLINE_FUNCTION double jacobian_component(CoordArg const&amp; coord) const
     {
-        static_assert(ddc::in_tags_v&lt;IndexTag1, ddc::detail::TypeSeq&lt;R, Z, Zeta&gt;&gt;);
-        static_assert(ddc::in_tags_v&lt;IndexTag2, ddc::detail::TypeSeq&lt;Rho_cov, Theta_cov, Phi_cov&gt;&gt;);
+        static_assert(ddc::in_tags_v&lt;IndexTag1, ddc::TypeSeq&lt;R, Z, Zeta&gt;&gt;);
+        static_assert(ddc::in_tags_v&lt;IndexTag2, ddc::TypeSeq&lt;Rho_cov, Theta_cov, Phi_cov&gt;&gt;);
 
         if constexpr (std::is_same_v&lt;IndexTag1, Zeta&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, Phi_cov&gt;) {
             return -1;
@@ -685,8 +685,8 @@ public:
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const&amp; coord) const
     {
         static_assert(has_inv_jacobian_v&lt;Curvilinear2DToCartesian&gt;);
-        static_assert(ddc::in_tags_v&lt;IndexTag1, ddc::detail::TypeSeq&lt;Rho, Theta, Phi&gt;&gt;);
-        static_assert(ddc::in_tags_v&lt;IndexTag2, ddc::detail::TypeSeq&lt;R_cov, Z_cov, Zeta_cov&gt;&gt;);
+        static_assert(ddc::in_tags_v&lt;IndexTag1, ddc::TypeSeq&lt;Rho, Theta, Phi&gt;&gt;);
+        static_assert(ddc::in_tags_v&lt;IndexTag2, ddc::TypeSeq&lt;R_cov, Z_cov, Zeta_cov&gt;&gt;);
 
         if constexpr (std::is_same_v&lt;IndexTag1, Phi&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, Zeta_cov&gt;) {
             return -1;

@@ -574,12 +574,15 @@
 <p><a href="mpitools_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
+
 #include &lt;mpi.h&gt;
+
+#include &lt;ddc/ddc.hpp&gt;
 
 #include "ddc_aliases.hpp"
 
 template &lt;class DistributedDim&gt;
-struct MPIDim
+struct MPIDim : ddc::DiscreteDimension
 {
     using distributed_dim = DistributedDim;
 };
@@ -631,7 +634,7 @@ template &lt;class QueryTypeSeq, class ContainerTypeSeq&gt;
 struct DimensionsAreAdjacent;
 
 template &lt;class... Query, class ContainerTypeSeq&gt;
-struct DimensionsAreAdjacent&lt;ddc::detail::TypeSeq&lt;Query...&gt;, ContainerTypeSeq&gt;
+struct DimensionsAreAdjacent&lt;ddc::TypeSeq&lt;Query...&gt;, ContainerTypeSeq&gt;
 {
     static constexpr bool check_adjacent()
     {
@@ -650,7 +653,7 @@ struct DimensionsAreAdjacent&lt;ddc::detail::TypeSeq&lt;Query...&gt;, ContainerT
 template &lt;class TagToInsert, std::size_t POS, class TypeSeq&gt;
 struct InsertIntoTypeSeq
 {
-    using first_type_seq_elem_seq = ddc::detail::TypeSeq&lt;ddc::type_seq_element_t&lt;0, TypeSeq&gt;&gt;;
+    using first_type_seq_elem_seq = ddc::TypeSeq&lt;ddc::type_seq_element_t&lt;0, TypeSeq&gt;&gt;;
     using type = ddc::type_seq_merge_t&lt;
             first_type_seq_elem_seq,
             typename InsertIntoTypeSeq&lt;
@@ -660,9 +663,9 @@ struct InsertIntoTypeSeq
 };
 
 template &lt;class TagToInsert, class... Tags&gt;
-struct InsertIntoTypeSeq&lt;TagToInsert, 0, ddc::detail::TypeSeq&lt;Tags...&gt;&gt;
+struct InsertIntoTypeSeq&lt;TagToInsert, 0, ddc::TypeSeq&lt;Tags...&gt;&gt;
 {
-    using type = ddc::detail::TypeSeq&lt;TagToInsert, Tags...&gt;;
+    using type = ddc::TypeSeq&lt;TagToInsert, Tags...&gt;;
 };
 
 } // namespace detail
@@ -686,12 +689,10 @@ template &lt;class MPISeq, class TypeSeq&gt;
 struct InsertMPITags;
 
 template &lt;class HeadDistribDim, class... TailDistribDims, class TypeSeq&gt;
-struct InsertMPITags&lt;
-        ddc::detail::TypeSeq&lt;MPIDim&lt;HeadDistribDim&gt;, MPIDim&lt;TailDistribDims&gt;...&gt;,
-        TypeSeq&gt;
+struct InsertMPITags&lt;ddc::TypeSeq&lt;MPIDim&lt;HeadDistribDim&gt;, MPIDim&lt;TailDistribDims&gt;...&gt;, TypeSeq&gt;
 {
     using type = typename InsertMPITags&lt;
-            ddc::detail::TypeSeq&lt;MPIDim&lt;TailDistribDims&gt;...&gt;,
+            ddc::TypeSeq&lt;MPIDim&lt;TailDistribDims&gt;...&gt;,
             insert_into_type_seq_t&lt;
                     MPIDim&lt;HeadDistribDim&gt;,
                     ddc::type_seq_rank_v&lt;HeadDistribDim, TypeSeq&gt;,
@@ -699,7 +700,7 @@ struct InsertMPITags&lt;
 };
 
 template &lt;class TypeSeq&gt;
-struct InsertMPITags&lt;ddc::detail::TypeSeq&lt;&gt;, TypeSeq&gt;
+struct InsertMPITags&lt;ddc::TypeSeq&lt;&gt;, TypeSeq&gt;
 {
     using type = TypeSeq;
 };

@@ -321,6 +321,7 @@
 * **m\_mapping\_2d** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **m\_coord\_changer** ([**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
 * **m\_weights** ([**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
+* **m\_values** ([**VectorFieldCommon&lt; FieldType, ddc::TypeSeq&lt; DDims... &gt; &gt;**](classVectorFieldCommon_3_01FieldType_00_01ddc_1_1TypeSeq_3_01DDims_8_8_8_01_4_01_4.md))
 * **m\_grid** ([**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
 * **m\_physical\_to\_logical** ([**polar\_foot\_finder\_details::ElementwisePhysicalAdvPhysicalFootFinder**](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder.md))
 * **m\_tensor** ([**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md))
@@ -335,6 +336,7 @@
 * **n** ([**Matrix**](classMatrix.md))
 * **nb** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **n\_dims** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
+* **NDims** ([**VectorFieldCommon&lt; FieldType, ddc::TypeSeq&lt; DDims... &gt; &gt;**](classVectorFieldCommon_3_01FieldType_00_01ddc_1_1TypeSeq_3_01DDims_8_8_8_01_4_01_4.md))
 * **N\_BE\_MAX** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
 * **N\_BE\_MIN** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
 

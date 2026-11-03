@@ -620,8 +620,7 @@ public:
             = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
                     ddc::to_type_seq_t&lt;BatchedInterpolationIdxRange&gt;,
                     ddc::to_type_seq_t&lt;IdxRangeInterpolation&gt;,
-                    ddc::detail::TypeSeq&lt;
-                            typename Basis::template Impl&lt;Basis, MemorySpace&gt;::knot_grid...&gt;&gt;&gt;;
+                    ddc::TypeSeq&lt;typename Basis::template Impl&lt;Basis, MemorySpace&gt;::knot_grid...&gt;&gt;&gt;;
 
     template &lt;class BatchedInterpolationIdxRange&gt;
     using batched_derivs_idx_range_type = BatchedInterpolationIdxRange;
@@ -681,7 +680,7 @@ private:
     {
         using Dim = typename ChosenGridDim::continuous_dimension_type;
         if constexpr (Dim::PERIODIC) {
-            using ChosenBasis = find_grid_t&lt;Dim, ddc::detail::TypeSeq&lt;Basis...&gt;&gt;;
+            using ChosenBasis = find_grid_t&lt;Dim, ddc::TypeSeq&lt;Basis...&gt;&gt;;
             using BasisKnots =
                     typename ChosenBasis::template Impl&lt;ChosenBasis, MemorySpace&gt;::knot_grid;
             static_assert(ddc::in_tags_v&lt;BasisKnots, ddc::to_type_seq_t&lt;IdxRangeFull&gt;&gt;);

@@ -40,7 +40,7 @@
 | ---: | :--- |
 | typedef typename detail::ApplyTemplateToTypeSeq&lt; Templ, TypeSeq &gt;::type | [**apply\_template\_to\_type\_seq\_t**](#typedef-apply_template_to_type_seq_t)  <br>_A helper to get a type sequence by applying a template to a sequence of type tags._  |
 | typedef typename detail::ToCoord&lt; ValidIndexSet &gt;::type | [**to\_coord\_t**](#typedef-to_coord_t)  <br>_Get a coordinate from a TypeSeq._  |
-| typedef typename detail::TypeSeqIntersection&lt; TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt; &gt;::type | [**type\_seq\_intersection\_t**](#typedef-type_seq_intersection_t)  <br>_A helper to find all types which are found in both TypeSeq1 and TypeSeq2._  |
+| typedef typename detail::TypeSeqIntersection&lt; TypeSeq1, TypeSeq2, ddc::TypeSeq&lt;&gt; &gt;::type | [**type\_seq\_intersection\_t**](#typedef-type_seq_intersection_t)  <br>_A helper to find all types which are found in both TypeSeq1 and TypeSeq2._  |
 
 
 
@@ -79,7 +79,7 @@
 |  auto | [**deepcopy**](#function-deepcopy) (FieldDst && dst, FieldSrc && src) <br>_Copy the contents of one_ [_**DerivField**_](classDerivField.md) _into another._ |
 |  auto | [**deepcopy**](#function-deepcopy) (ExecSpace const & execution\_space, FieldDst && dst, FieldSrc && src) <br>_Copy the contents of one_ [_**DerivField**_](classDerivField.md) _into another._ |
 |  auto | [**deepcopy**](#function-deepcopy) (FieldDst && dst, FieldSrc && src) <br> |
-|  void | [**deepcopy**](#function-deepcopy) (detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes1 &gt; dst, detail::MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes2 &gt; src) <br>_Copy the data from one MultipatchField into another._  |
+|  void | [**deepcopy**](#function-deepcopy) (detail::MultipatchField&lt; ddc::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes1 &gt; dst, detail::MultipatchField&lt; ddc::TypeSeq&lt; Patches... &gt;, TypeSeqInternalTypes2 &gt; src) <br>_Copy the data from one MultipatchField into another._  |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, DField&lt; IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, Field&lt; Coord&lt; typename Grid1D::continuous\_dimension\_type &gt;, IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
 |  Idx&lt; GridSubSet &gt; | [**find\_first\_point\_not\_in\_superset**](#function-find_first_point_not_in_superset) (IdxRange&lt; GridSubSet &gt; const & idx\_range\_subset, IdxRange&lt; GridSuperSet &gt; const & idx\_range\_superset, ddc::Real tol=std::numeric\_limits&lt; ddc::Real &gt;::epsilon()) <br> |
@@ -97,7 +97,7 @@
 |  bool | [**points\_are\_subset**](#function-points_are_subset) (IdxRange&lt; GridSubSet &gt; const & idx\_range\_subset, IdxRange&lt; GridSuperSet &gt; const & idx\_range\_superset, ddc::Real tol=std::numeric\_limits&lt; ddc::Real &gt;::epsilon()) <br> |
 |  KOKKOS\_INLINE\_FUNCTION void | [**restrict\_to\_bspline\_domain**](#function-restrict_to_bspline_domain) (Coord&lt; typename BSpline::continuous\_dimension\_type &gt; & coord) <br>_Calculate the Coordinate inside the domain._  |
 |  KOKKOS\_INLINE\_FUNCTION std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC, Coord&lt; typename IDim::continuous\_dimension\_type &gt; &gt; | [**restrict\_to\_idx\_range**](#function-restrict_to_idx_range) (Coord&lt; typename IDim::continuous\_dimension\_type &gt; coord, IdxRange&lt; IDim &gt; const & idx\_range) <br>_Calculate the Coordinate inside the domain._  |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**to\_coord**](#function-to_coord) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br>_A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic._  |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**to\_coord**](#function-to_coord) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br>_A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic._  |
 |  std::enable\_if\_t&lt;!IDim::continuous\_dimension\_type::PERIODIC, double &gt; | [**total\_interval\_length**](#function-total_interval_length) (IdxRange&lt; IDim &gt; const & idx\_range) <br> |
 |  std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC &&ddc::is\_uniform\_point\_sampling\_v&lt; IDim &gt;, double &gt; | [**total\_interval\_length**](#function-total_interval_length) (IdxRange&lt; IDim &gt; const & idx\_range) <br> |
 |  std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC &&ddc::is\_non\_uniform\_point\_sampling\_v&lt; IDim &gt;, double &gt; | [**total\_interval\_length**](#function-total_interval_length) (IdxRange&lt; IDim &gt; const & idx\_range) <br> |
@@ -167,7 +167,7 @@ using ddcHelper::to_coord_t =  typename detail::ToCoord<ValidIndexSet>::type;
 _A helper to find all types which are found in both TypeSeq1 and TypeSeq2._ 
 ```C++
 using ddcHelper::type_seq_intersection_t = 
-        typename detail::TypeSeqIntersection<TypeSeq1, TypeSeq2, ddc::detail::TypeSeq<>>::type;
+        typename detail::TypeSeqIntersection<TypeSeq1, TypeSeq2, ddc::TypeSeq<>>::type;
 ```
 
 
@@ -448,8 +448,8 @@ _Copy the data from one MultipatchField into another._
 ```C++
 template<class... Patches, class TypeSeqInternalTypes1, class TypeSeqInternalTypes2>
 void ddcHelper::deepcopy (
-    detail::MultipatchField< ddc::detail::TypeSeq< Patches... >, TypeSeqInternalTypes1 > dst,
-    detail::MultipatchField< ddc::detail::TypeSeq< Patches... >, TypeSeqInternalTypes2 > src
+    detail::MultipatchField< ddc::TypeSeq< Patches... >, TypeSeqInternalTypes1 > dst,
+    detail::MultipatchField< ddc::TypeSeq< Patches... >, TypeSeqInternalTypes2 > src
 ) 
 ```
 
@@ -1051,7 +1051,7 @@ _A helper function to convert a vector to a coordinate. This is useful in order 
 ```C++
 template<class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord< Dims... > ddcHelper::to_coord (
-    TensorCommon < storage_type, ddc::detail::TypeSeq< Dims... > > const & tensor
+    TensorCommon < storage_type, ddc::TypeSeq< Dims... > > const & tensor
 ) 
 ```
 

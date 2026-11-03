@@ -34,7 +34,7 @@ _Specialisation of_ [_**SelectRelevantIdxRangeType**_](structconnectivity__detai
 
 | Type | Name |
 | ---: | :--- |
-| typedef std::conditional\_t&lt; ddc::in\_tags\_v&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; IdxRangeGrids... &gt; &gt;, ddc::detail::TypeSeq&lt; IdxRange&lt; IdxRangeGrids... &gt; &gt;, ddc::detail::TypeSeq&lt;&gt; &gt; | [**type**](#typedef-type)  <br>_The type found by the class._  |
+| typedef std::conditional\_t&lt; ddc::in\_tags\_v&lt; QueryGrid1D, ddc::TypeSeq&lt; IdxRangeGrids... &gt; &gt;, ddc::TypeSeq&lt; IdxRange&lt; IdxRangeGrids... &gt; &gt;, ddc::TypeSeq&lt;&gt; &gt; | [**type**](#typedef-type)  <br>_The type found by the class._  |
 
 
 
@@ -93,9 +93,9 @@ _Specialisation of_ [_**SelectRelevantIdxRangeType**_](structconnectivity__detai
 _The type found by the class._ 
 ```C++
 using connectivity_details::SelectRelevantIdxRangeType< QueryGrid1D, IdxRange< IdxRangeGrids... > >::type =  std::conditional_t<
-            ddc::in_tags_v<QueryGrid1D, ddc::detail::TypeSeq<IdxRangeGrids...>>,
-            ddc::detail::TypeSeq<IdxRange<IdxRangeGrids...>>,
-            ddc::detail::TypeSeq<>>;
+            ddc::in_tags_v<QueryGrid1D, ddc::TypeSeq<IdxRangeGrids...>>,
+            ddc::TypeSeq<IdxRange<IdxRangeGrids...>>,
+            ddc::TypeSeq<>>;
 ```
 
 

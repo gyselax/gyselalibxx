@@ -62,7 +62,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMPILayout_1a802925fc2fae468337b971b46f769500" prot="public" static="no">
-        <type>typename <ref refid="classIMPILayout_1a5734be7b4782cfd49498bd2ad6610353" kindref="member">base_type::distributed_type_seq</ref></type>
+        <type>typename <ref refid="classIMPILayout_1acf615fb47f713e88e7188b57102a2eb5" kindref="member">base_type::distributed_type_seq</ref></type>
         <definition>using MPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_type_seq =  typename base_type::distributed_type_seq</definition>
         <argsstring></argsstring>
         <name>distributed_type_seq</name>

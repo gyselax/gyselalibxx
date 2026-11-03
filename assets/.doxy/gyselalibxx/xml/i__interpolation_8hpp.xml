@@ -657,7 +657,7 @@
 <codeline lineno="106" refid="structExtrapolationRule_1_1OneSidedPeriodic_1ab4c5ffc7a9dba42c70adf9c3143a4b08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1OneSidedPeriodic_1ab4c5ffc7a9dba42c70adf9c3143a4b08" kindref="member">type</ref><sp/>=<sp/>ddc::PeriodicExtrapolationRule&lt;typename<sp/>Basis::continuous_dimension_type&gt;;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110" refid="namespaceExtrapolationRule_1a74ee3ad52ef4fa4ed41e57dd16fa3393" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a74ee3ad52ef4fa4ed41e57dd16fa3393" kindref="member">Periodic</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;OneSidedPeriodic,<sp/>OneSidedPeriodic&gt;;</highlight></codeline>
+<codeline lineno="110" refid="namespaceExtrapolationRule_1a033b8c4a8992183c16081cc289584be7" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a033b8c4a8992183c16081cc289584be7" kindref="member">Periodic</ref><sp/>=<sp/>ddc::TypeSeq&lt;OneSidedPeriodic,<sp/>OneSidedPeriodic&gt;;</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
 <codeline lineno="113" refid="structExtrapolationRule_1_1NullValue" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1NullValue" kindref="compound">NullValue</ref></highlight></codeline>
 <codeline lineno="114"><highlight class="normal">{</highlight></codeline>
@@ -665,7 +665,7 @@
 <codeline lineno="117" refid="structExtrapolationRule_1_1NullValue_1adbbcc6be7279aaf07e4d0d4ccd2bcafb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1NullValue_1adbbcc6be7279aaf07e4d0d4ccd2bcafb" kindref="member">type</ref><sp/>=<sp/>ddc::NullExtrapolationRule;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="121" refid="namespaceExtrapolationRule_1a59b7fa474989f3dd46794ae21590d438" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a59b7fa474989f3dd46794ae21590d438" kindref="member">Null_Null</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;NullValue,<sp/>NullValue&gt;;</highlight></codeline>
+<codeline lineno="121" refid="namespaceExtrapolationRule_1aefe005001843b6524c1acaecfd8ca582" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1aefe005001843b6524c1acaecfd8ca582" kindref="member">Null_Null</ref><sp/>=<sp/>ddc::TypeSeq&lt;NullValue,<sp/>NullValue&gt;;</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>
 <codeline lineno="128" refid="structExtrapolationRule_1_1Constant" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structExtrapolationRule_1_1Constant" kindref="compound">Constant</ref></highlight></codeline>
 <codeline lineno="129"><highlight class="normal">{</highlight></codeline>
@@ -680,7 +680,7 @@
 <codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType&gt;&gt;;</highlight></codeline>
 <codeline lineno="140"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="141"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143" refid="namespaceExtrapolationRule_1aa3665802a09eb11760a0e5664756a3c0" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1aa3665802a09eb11760a0e5664756a3c0" kindref="member">Constant_Constant</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;Constant,<sp/>Constant&gt;;</highlight></codeline>
+<codeline lineno="143" refid="namespaceExtrapolationRule_1a4f3451f83f0723704ab61f32624e6e57" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespaceExtrapolationRule_1a4f3451f83f0723704ab61f32624e6e57" kindref="member">Constant_Constant</ref><sp/>=<sp/>ddc::TypeSeq&lt;Constant,<sp/>Constant&gt;;</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
 <codeline lineno="145"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ExtrapolationRule</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>

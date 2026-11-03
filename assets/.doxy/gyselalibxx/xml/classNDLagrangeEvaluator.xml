@@ -14,12 +14,12 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1af585008a0bcb1cff714dd391ed4125e3" prot="private" static="no">
-        <type>std::conditional_t&lt;(sizeof...(Evaluators1D) &gt; 1), <ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref>&lt; Evaluators1D... &gt;, ddc::type_seq_element_t&lt; 0, ddc::detail::TypeSeq&lt; Evaluators1D... &gt; &gt; &gt;</type>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1a0d4466566f63c0877d047ddacb3e256e" prot="private" static="no">
+        <type>std::conditional_t&lt;(sizeof...(Evaluators1D) &gt; 1), <ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref>&lt; Evaluators1D... &gt;, ddc::type_seq_element_t&lt; 0, ddc::TypeSeq&lt; Evaluators1D... &gt; &gt; &gt;</type>
         <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::nd_minus_1_evaluator_type =  std::conditional_t&lt;
             (sizeof...(Evaluators1D) &gt; 1),
             NDLagrangeEvaluator&lt;Evaluators1D...&gt;,
-            ddc::type_seq_element_t&lt;0, ddc::detail::TypeSeq&lt;Evaluators1D...&gt;&gt;&gt;</definition>
+            ddc::type_seq_element_t&lt;0, ddc::TypeSeq&lt;Evaluators1D...&gt;&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>nd_minus_1_evaluator_type</name>
         <qualifiedname>NDLagrangeEvaluator::nd_minus_1_evaluator_type</qualifiedname>
@@ -1039,7 +1039,7 @@
       <member refid="classNDLagrangeEvaluator_1af267ffa27bb9aeabf2418c7f2c6162da" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>m_head_evaluator</name></member>
       <member refid="classNDLagrangeEvaluator_1ab9ad2a8a9fb8a286ce2b5cbdea7f3a35" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>m_tail_evaluator</name></member>
       <member refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>memory_space</name></member>
-      <member refid="classNDLagrangeEvaluator_1af585008a0bcb1cff714dd391ed4125e3" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>nd_minus_1_evaluator_type</name></member>
+      <member refid="classNDLagrangeEvaluator_1a0d4466566f63c0877d047ddacb3e256e" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>nd_minus_1_evaluator_type</name></member>
       <member refid="classNDLagrangeEvaluator_1afb145c537b203fd22b1f55e9eb80a29c" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>NDLagrangeEvaluator</name></member>
       <member refid="classNDLagrangeEvaluator_1a44d4d2b584d8f0dc8ef23e326fc8df29" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>NDLagrangeEvaluator</name></member>
       <member refid="classNDLagrangeEvaluator_1a13a799cb538756bdb1a04e10d0ea4eaa" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>NDLagrangeEvaluator</name></member>

@@ -35,7 +35,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef ElementType | [**element\_type**](#typedef-element_type)  <br>_The type of the elements of the tensor._  |
-| typedef ddc::detail::TypeSeq&lt; ValidIndexSetRow, ValidIndexSetCol &gt; | [**index\_set**](#typedef-index_set)  <br>_The TensorIndexSet describing the possible indices._  |
+| typedef ddc::TypeSeq&lt; ValidIndexSetRow, ValidIndexSetCol &gt; | [**index\_set**](#typedef-index_set)  <br>_The TensorIndexSet describing the possible indices._  |
 | typedef ddc::type\_seq\_element\_t&lt; dim, [**index\_set**](classIdentityTensor.md#typedef-index_set) &gt; | [**vector\_index\_set\_t**](#typedef-vector_index_set_t)  <br>_A helper type alias to get all possible indices along a specified dimension._  |
 
 
@@ -136,7 +136,7 @@ using IdentityTensor< ElementType, ValidIndexSetRow, ValidIndexSetCol >::element
 
 _The TensorIndexSet describing the possible indices._ 
 ```C++
-using IdentityTensor< ElementType, ValidIndexSetRow, ValidIndexSetCol >::index_set =  ddc::detail::TypeSeq<ValidIndexSetRow, ValidIndexSetCol>;
+using IdentityTensor< ElementType, ValidIndexSetRow, ValidIndexSetCol >::index_set =  ddc::TypeSeq<ValidIndexSetRow, ValidIndexSetCol>;
 ```
 
 

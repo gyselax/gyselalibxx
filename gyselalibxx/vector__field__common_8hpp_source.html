@@ -642,7 +642,7 @@ inline constexpr auto get(VectorFieldType&amp; field) noexcept
 } // namespace ddcHelper
 
 template &lt;class FieldType, class... DDims&gt;
-class VectorFieldCommon&lt;FieldType, ddc::detail::TypeSeq&lt;DDims...&gt;&gt;
+class VectorFieldCommon&lt;FieldType, ddc::TypeSeq&lt;DDims...&gt;&gt;
 {
     static_assert(ddc::is_chunk_v&lt;FieldType&gt;);
     using data_type = typename FieldType::element_type;
@@ -655,7 +655,7 @@ public:
 
     using element_ref_type = Vector&lt;data_type&amp;, DDims...&gt;;
 
-    using NDTypeTag = ddc::detail::TypeSeq&lt;DDims...&gt;;
+    using NDTypeTag = ddc::TypeSeq&lt;DDims...&gt;;
 
     using chunk_span_type = typename FieldType::span_type;
     using chunk_view_type = typename FieldType::view_type;

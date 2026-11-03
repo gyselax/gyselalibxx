@@ -34,7 +34,7 @@ _Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::detail::TypeSeq&lt;&gt; | [**type**](#typedef-type)  <br>_The type found by the class._  |
+| typedef ddc::TypeSeq&lt;&gt; | [**type**](#typedef-type)  <br>_The type found by the class._  |
 
 
 
@@ -92,7 +92,7 @@ _Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::FindRelevantIdxRangeType< QueryGrid1D, std::tuple<> >::type =  ddc::detail::TypeSeq<>;
+using connectivity_details::FindRelevantIdxRangeType< QueryGrid1D, std::tuple<> >::type =  ddc::TypeSeq<>;
 ```
 
 

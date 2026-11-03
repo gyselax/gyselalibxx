@@ -221,12 +221,12 @@ struct assemble_helper<
 template <class ExecSpace, class TypeSeqInternalTypes, class... Patches>
 struct assemble_helper<
         ExecSpace,
-        detail::MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, TypeSeqInternalTypes>>
+        detail::MultipatchFieldMem<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>>
 {
-    using DerivFieldMemType = typename detail::
-            MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, TypeSeqInternalTypes>;
+    using DerivFieldMemType =
+            typename detail::MultipatchFieldMem<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>;
     using DerivFieldType = typename detail::
-            MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, TypeSeqInternalTypes>::span_type;
+            MultipatchFieldMem<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>::span_type;
 
     template <class FuncType, class... KType>
     static void assemble_k_total(

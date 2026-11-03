@@ -98,18 +98,17 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ad33d48436747778c8f49dc805b04228c" prot="public" static="no">
+      <memberdef kind="typedef" id="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a87054e943130631f859e09a149fcf19a" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class BatchedInterpolationIdxRange</type>
           </param>
         </templateparamlist>
-        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to_type_seq_t&lt; IdxRangeInterpolation &gt;, ddc::detail::TypeSeq&lt; typename Basis::template Impl&lt; Basis, MemorySpace &gt;::knot_grid... &gt; &gt; &gt;</type>
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to_type_seq_t&lt; IdxRangeInterpolation &gt;, ddc::TypeSeq&lt; typename Basis::template Impl&lt; Basis, MemorySpace &gt;::knot_grid... &gt; &gt; &gt;</type>
         <definition>using NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;::batched_basis_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
                     ddc::to_type_seq_t&lt;BatchedInterpolationIdxRange&gt;,
                     ddc::to_type_seq_t&lt;IdxRangeInterpolation&gt;,
-                    ddc::detail::TypeSeq&lt;
-                            typename Basis::template Impl&lt;Basis, MemorySpace&gt;::knot_grid...&gt;&gt;&gt;</definition>
+                    ddc::TypeSeq&lt;typename Basis::template Impl&lt;Basis, MemorySpace&gt;::knot_grid...&gt;&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>batched_basis_idx_range_type</name>
         <qualifiedname>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;::batched_basis_idx_range_type</qualifiedname>
@@ -141,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="79" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="78" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -157,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="82" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="81" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1abc5d574c8817633086c3acb1eaad7b16" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -177,7 +176,7 @@
         <name>operator()</name>
         <qualifiedname>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;::operator()</qualifiedname>
         <param>
-          <type>Field&lt; DataType, <ref refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ad33d48436747778c8f49dc805b04228c" kindref="member">batched_basis_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ab38d42154f807eb9a4d594dd1280b56c" kindref="member">memory_space</ref>, LayoutCoeffs &gt;</type>
+          <type>Field&lt; DataType, <ref refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a87054e943130631f859e09a149fcf19a" kindref="member">batched_basis_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ab38d42154f807eb9a4d594dd1280b56c" kindref="member">memory_space</ref>, LayoutCoeffs &gt;</type>
           <declname>coeffs</declname>
         </param>
         <param>
@@ -212,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="100" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="100" bodyend="122"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="99" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="99" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ae90013b973630a93da389fdb8ab05378" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -220,7 +219,7 @@
             <type>class BatchedInterpolationIdxRange</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ad33d48436747778c8f49dc805b04228c" kindref="member">batched_basis_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
+        <type><ref refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a87054e943130631f859e09a149fcf19a" kindref="member">batched_basis_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
         <definition>batched_basis_idx_range_type&lt; BatchedInterpolationIdxRange &gt; NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;::batched_basis_idx_range</definition>
         <argsstring>(BatchedInterpolationIdxRange const &amp;batched_interpolation_domain) const noexcept</argsstring>
         <name>batched_basis_idx_range</name>
@@ -248,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="131" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="131" bodyend="137"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="130" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="130" bodyend="136"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -286,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="141" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="141" bodyend="150"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="140" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="140" bodyend="149"/>
       </memberdef>
       <memberdef kind="function" id="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a1e20a0afd16e37e9a2604e7f88c4a38f" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -319,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="153" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="153" bodyend="182"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="152" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="152" bodyend="181"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -327,10 +326,10 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="44" bodyend="185"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="44" bodyend="184"/>
     <listofallmembers>
       <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ae90013b973630a93da389fdb8ab05378" prot="public" virt="non-virtual"><scope>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;</scope><name>batched_basis_idx_range</name></member>
-      <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ad33d48436747778c8f49dc805b04228c" prot="public" virt="non-virtual"><scope>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;</scope><name>batched_basis_idx_range_type</name></member>
+      <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a87054e943130631f859e09a149fcf19a" prot="public" virt="non-virtual"><scope>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;</scope><name>batched_basis_idx_range_type</name></member>
       <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a93b9b959219af16d32166a8bae3ae0db" prot="public" virt="non-virtual"><scope>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;</scope><name>batched_derivs_idx_range_type</name></member>
       <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a19ea029994cb0aae2f74e9c987c77c95" prot="public" virt="non-virtual"><scope>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;</scope><name>coeff_idx_range_type</name></member>
       <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a6a54d2c595169c1d8c1aaa693006f837" prot="private" virt="non-virtual"><scope>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;</scope><name>copy_periodic_data</name></member>

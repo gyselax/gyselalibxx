@@ -23,7 +23,7 @@
 
 namespace metric_tensor_detail {
 template <class Dim>
-struct PlaceholderGrid
+struct PlaceholderGrid : ddc::DiscreteDimension
 {
     using continuous_dimension_type = Dim;
 };

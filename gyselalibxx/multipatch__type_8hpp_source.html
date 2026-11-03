@@ -592,17 +592,17 @@ template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
 class MultipatchType;
 
 template &lt;class... Patches, class... InternalTypes&gt;
-class MultipatchType&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;
+class MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;InternalTypes...&gt;&gt;
 {
     static_assert(
             sizeof...(Patches) == sizeof...(InternalTypes),
             "There must be one internal type per patch");
 
 public:
-    using PatchOrdering = ddc::detail::TypeSeq&lt;Patches...&gt;;
+    using PatchOrdering = ddc::TypeSeq&lt;Patches...&gt;;
 
 private:
-    using InternalTypeOrdering = ddc::detail::TypeSeq&lt;InternalTypes...&gt;;
+    using InternalTypeOrdering = ddc::TypeSeq&lt;InternalTypes...&gt;;
 
 public:
     template &lt;class Patch&gt;
@@ -631,7 +631,7 @@ public:
         static_assert(
                 std::is_same_v&lt;
                         InternalTypeOrdering,
-                        ddc::detail::TypeSeq&lt;decltype(other.template get&lt;Patches&gt;())...&gt;&gt;,
+                        ddc::TypeSeq&lt;decltype(other.template get&lt;Patches&gt;())...&gt;&gt;,
                 "MultipatchTypes are not equivalent");
     }
 
@@ -662,8 +662,8 @@ inline constexpr bool
         enable_multipatch_type&lt;detail::MultipatchType&lt;TypeSeqPatches, TypeSeqInternalTypes&gt;&gt; = true;
 
 template &lt;template &lt;typename P&gt; typename T, class... Patches&gt;
-using MultipatchType = detail::
-        MultipatchType&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
+using MultipatchType
+        = detail::MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
 </code></pre></div>
               
             </div>

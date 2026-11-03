@@ -40,7 +40,7 @@ _A helper class which provides functionalities to recognise how different patche
 | typedef to\_tuple\_t&lt; [**get\_type\_seq\_connections\_t**](classMultipatchConnectivity.md#typedef-get_type_seq_connections_t)&lt; QueryPatch &gt; &gt; | [**get\_connections\_t**](#typedef-get_connections_t)  <br>_A tool to find a tuple of all interfaces of a patch._  |
 | typedef interfaces\_of\_patch\_t&lt; QueryPatch, [**interface\_collection**](classMultipatchConnectivity.md#typedef-interface_collection) &gt; | [**get\_type\_seq\_connections\_t**](#typedef-get_type_seq_connections_t)  <br>_A tool to find a type sequence of all interfaces of a patch._  |
 | typedef strip\_outside\_edges\_t&lt; typename Interfaces::Edge1..., typename Interfaces::Edge2... &gt; | [**inner\_edges**](#typedef-inner_edges)  <br>_A type sequence of all the edges handled by this class except the OuterEdge types._  |
-| typedef ddc::detail::TypeSeq&lt; Interfaces... &gt; | [**interface\_collection**](#typedef-interface_collection)  <br>_A type sequence of all the interfaces handled by this class._  |
+| typedef ddc::TypeSeq&lt; Interfaces... &gt; | [**interface\_collection**](#typedef-interface_collection)  <br>_A type sequence of all the interfaces handled by this class._  |
 
 
 
@@ -252,7 +252,7 @@ using MultipatchConnectivity< Interfaces >::inner_edges =  strip_outside_edges_t
 
 _A type sequence of all the interfaces handled by this class._ 
 ```C++
-using MultipatchConnectivity< Interfaces >::interface_collection =  ddc::detail::TypeSeq<Interfaces...>;
+using MultipatchConnectivity< Interfaces >::interface_collection =  ddc::TypeSeq<Interfaces...>;
 ```
 
 

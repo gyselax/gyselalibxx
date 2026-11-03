@@ -592,13 +592,13 @@ inline constexpr bool
 } // namespace details
 
 template &lt;class... ValidatingVectorIndexSets, class... Dims&gt;
-class TensorIndexElement&lt;ddc::detail::TypeSeq&lt;ValidatingVectorIndexSets...&gt;, Dims...&gt;
+class TensorIndexElement&lt;ddc::TypeSeq&lt;ValidatingVectorIndexSets...&gt;, Dims...&gt;
 {
-    using ValidatingTensorIndexSet = ddc::detail::TypeSeq&lt;ValidatingVectorIndexSets...&gt;;
+    using ValidatingTensorIndexSet = ddc::TypeSeq&lt;ValidatingVectorIndexSets...&gt;;
     static_assert((is_vector_index_set_v&lt;ValidatingVectorIndexSets&gt; &amp;&amp; ...));
 
 public:
-    using IdxTypeSeq = ddc::detail::TypeSeq&lt;Dims...&gt;;
+    using IdxTypeSeq = ddc::TypeSeq&lt;Dims...&gt;;
 
 public:
     KOKKOS_FUNCTION static constexpr std::size_t rank()
@@ -652,7 +652,7 @@ template &lt;class ValidatingTensorIndexSet, class TypeSeqTensorIndexTag&gt;
 struct ToTensorIndexElement;
 
 template &lt;class ValidatingTensorIndexSet, class... ValidIndexSet&gt;
-struct ToTensorIndexElement&lt;ValidatingTensorIndexSet, ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;&gt;
+struct ToTensorIndexElement&lt;ValidatingTensorIndexSet, ddc::TypeSeq&lt;ValidIndexSet...&gt;&gt;
 {
     using type = TensorIndexElement&lt;ValidatingTensorIndexSet, ValidIndexSet...&gt;;
 };
@@ -661,25 +661,25 @@ template &lt;class TypeSeqVectorIndexIdMap&gt;
 struct GetIndexIds;
 
 template &lt;class... ValidIndexMap&gt;
-struct GetIndexIds&lt;ddc::detail::TypeSeq&lt;ValidIndexMap...&gt;&gt;
+struct GetIndexIds&lt;ddc::TypeSeq&lt;ValidIndexMap...&gt;&gt;
 {
-    using type = ddc::detail::TypeSeq&lt;std::integral_constant&lt;char, ValidIndexMap::id&gt;...&gt;;
+    using type = ddc::TypeSeq&lt;std::integral_constant&lt;char, ValidIndexMap::id&gt;...&gt;;
 };
 
 template &lt;class TypeSeqVectorIndexIdMap&gt;
 struct ExtractTypeSeqIndexSet;
 
 template &lt;class... VectorIndexIdMap&gt;
-struct ExtractTypeSeqIndexSet&lt;ddc::detail::TypeSeq&lt;VectorIndexIdMap...&gt;&gt;
+struct ExtractTypeSeqIndexSet&lt;ddc::TypeSeq&lt;VectorIndexIdMap...&gt;&gt;
 {
-    using type = ddc::detail::TypeSeq&lt;typename VectorIndexIdMap::possible_idx_values...&gt;;
+    using type = ddc::TypeSeq&lt;typename VectorIndexIdMap::possible_idx_values...&gt;;
 };
 
 template &lt;class TypeSeqVectorIndexMap&gt;
 struct CalculateSize;
 
 template &lt;class... VectorIndexIdMap&gt;
-struct CalculateSize&lt;ddc::detail::TypeSeq&lt;VectorIndexIdMap...&gt;&gt;
+struct CalculateSize&lt;ddc::TypeSeq&lt;VectorIndexIdMap...&gt;&gt;
 {
     static constexpr std::size_t value
             = (ddc::type_seq_size_v&lt;typename VectorIndexIdMap::possible_idx_values&gt; * ...);
@@ -689,17 +689,16 @@ template &lt;char search_char, class CharTypeSeq&gt;
 struct CountChar;
 
 template &lt;char search_char&gt;
-struct CountChar&lt;search_char, ddc::detail::TypeSeq&lt;&gt;&gt;
+struct CountChar&lt;search_char, ddc::TypeSeq&lt;&gt;&gt;
 {
     static constexpr std::size_t value = 0;
 };
 
 template &lt;char search_char, class head_char_lit, class... char_lit&gt;
-struct CountChar&lt;search_char, ddc::detail::TypeSeq&lt;head_char_lit, char_lit...&gt;&gt;
+struct CountChar&lt;search_char, ddc::TypeSeq&lt;head_char_lit, char_lit...&gt;&gt;
 {
-    static constexpr std::size_t value
-            = (head_char_lit::value == search_char)
-              + CountChar&lt;search_char, ddc::detail::TypeSeq&lt;char_lit...&gt;&gt;::value;
+    static constexpr std::size_t value = (head_char_lit::value == search_char)
+                                         + CountChar&lt;search_char, ddc::TypeSeq&lt;char_lit...&gt;&gt;::value;
 };
 
 } // namespace details
@@ -725,27 +724,25 @@ using get_type_seq_vector_index_set_t =
 
 namespace details {
 
-template &lt;class StartTypeSeq, class ResultTypeSeq = ddc::detail::TypeSeq&lt;&gt;&gt;
+template &lt;class StartTypeSeq, class ResultTypeSeq = ddc::TypeSeq&lt;&gt;&gt;
 struct GetUniqueIndices;
 
 template &lt;class HeadElem, class... TailElems, class... ResultElems&gt;
-struct GetUniqueIndices&lt;
-        ddc::detail::TypeSeq&lt;HeadElem, TailElems...&gt;,
-        ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;
+struct GetUniqueIndices&lt;ddc::TypeSeq&lt;HeadElem, TailElems...&gt;, ddc::TypeSeq&lt;ResultElems...&gt;&gt;
 {
     using InsertionType = VectorIndexIdMap&lt;
             HeadElem::id,
             get_contravariant_dims_t&lt;typename HeadElem::possible_idx_values&gt;&gt;;
     using type = typename GetUniqueIndices&lt;
-            ddc::detail::TypeSeq&lt;TailElems...&gt;,
+            ddc::TypeSeq&lt;TailElems...&gt;,
             std::conditional_t&lt;
-                    ddc::in_tags_v&lt;InsertionType, ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;,
-                    ddc::detail::TypeSeq&lt;ResultElems...&gt;,
-                    ddc::detail::TypeSeq&lt;ResultElems..., InsertionType&gt;&gt;&gt;::type;
+                    ddc::in_tags_v&lt;InsertionType, ddc::TypeSeq&lt;ResultElems...&gt;&gt;,
+                    ddc::TypeSeq&lt;ResultElems...&gt;,
+                    ddc::TypeSeq&lt;ResultElems..., InsertionType&gt;&gt;&gt;::type;
 };
 
 template &lt;class ResultTypeSeq&gt;
-struct GetUniqueIndices&lt;ddc::detail::TypeSeq&lt;&gt;, ResultTypeSeq&gt;
+struct GetUniqueIndices&lt;ddc::TypeSeq&lt;&gt;, ResultTypeSeq&gt;
 {
     using type = ResultTypeSeq;
 };
@@ -754,15 +751,11 @@ template &lt;
         class TypeSeqVectorIndexIdMap,
         std::size_t Elem,
         class IdsFound,
-        class ResultTuple = ddc::detail::TypeSeq&lt;&gt;&gt;
+        class ResultTuple = ddc::TypeSeq&lt;&gt;&gt;
 struct GetNonRepeatedIndices;
 
 template &lt;class TypeSeqVectorIndexIdMap, std::size_t Elem, class IdsFound, class... OutIndices&gt;
-struct GetNonRepeatedIndices&lt;
-        TypeSeqVectorIndexIdMap,
-        Elem,
-        IdsFound,
-        ddc::detail::TypeSeq&lt;OutIndices...&gt;&gt;
+struct GetNonRepeatedIndices&lt;TypeSeqVectorIndexIdMap, Elem, IdsFound, ddc::TypeSeq&lt;OutIndices...&gt;&gt;
 {
     using CurrentIndex = ddc::type_seq_element_t&lt;Elem, TypeSeqVectorIndexIdMap&gt;;
     static constexpr char current_char = CurrentIndex::id;
@@ -774,26 +767,22 @@ struct GetNonRepeatedIndices&lt;
             IdsFound,
             std::conditional_t&lt;
                     char_occurrences_v&lt;current_char, IdsFound&gt; == 1,
-                    ddc::detail::TypeSeq&lt;CurrentIndex, OutIndices...&gt;,
-                    ddc::detail::TypeSeq&lt;OutIndices...&gt;&gt;&gt;::type;
+                    ddc::TypeSeq&lt;CurrentIndex, OutIndices...&gt;,
+                    ddc::TypeSeq&lt;OutIndices...&gt;&gt;&gt;::type;
 };
 
 template &lt;class TypeSeqVectorIndexIdMap, class IdsFound, class... OutIndices&gt;
-struct GetNonRepeatedIndices&lt;
-        TypeSeqVectorIndexIdMap,
-        0,
-        IdsFound,
-        ddc::detail::TypeSeq&lt;OutIndices...&gt;&gt;
+struct GetNonRepeatedIndices&lt;TypeSeqVectorIndexIdMap, 0, IdsFound, ddc::TypeSeq&lt;OutIndices...&gt;&gt;
 {
     using CurrentIndex = ddc::type_seq_element_t&lt;0, TypeSeqVectorIndexIdMap&gt;;
     static constexpr char current_char = CurrentIndex::id;
     using type = std::conditional_t&lt;
             char_occurrences_v&lt;current_char, IdsFound&gt; == 1,
-            ddc::detail::TypeSeq&lt;CurrentIndex, OutIndices...&gt;,
-            ddc::detail::TypeSeq&lt;OutIndices...&gt;&gt;;
+            ddc::TypeSeq&lt;CurrentIndex, OutIndices...&gt;,
+            ddc::TypeSeq&lt;OutIndices...&gt;&gt;;
 };
 
-template &lt;char ID, class TypeSeqVectorIndexIdMap, class ResultTypeSeq = ddc::detail::TypeSeq&lt;&gt;&gt;
+template &lt;char ID, class TypeSeqVectorIndexIdMap, class ResultTypeSeq = ddc::TypeSeq&lt;&gt;&gt;
 struct GetRelevantVectorIndexSets;
 
 template &lt;
@@ -803,22 +792,22 @@ template &lt;
         class... OutVectorIndexSets&gt;
 struct GetRelevantVectorIndexSets&lt;
         ID,
-        ddc::detail::TypeSeq&lt;HeadVectorIndexIdMap, TailVectorIndexIdMap...&gt;,
-        ddc::detail::TypeSeq&lt;OutVectorIndexSets...&gt;&gt;
+        ddc::TypeSeq&lt;HeadVectorIndexIdMap, TailVectorIndexIdMap...&gt;,
+        ddc::TypeSeq&lt;OutVectorIndexSets...&gt;&gt;
 {
     using type = typename GetRelevantVectorIndexSets&lt;
             ID,
-            ddc::detail::TypeSeq&lt;TailVectorIndexIdMap...&gt;,
+            ddc::TypeSeq&lt;TailVectorIndexIdMap...&gt;,
             std::conditional_t&lt;
                     HeadVectorIndexIdMap::id == ID,
-                    ddc::detail::TypeSeq&lt;
+                    ddc::TypeSeq&lt;
                             typename HeadVectorIndexIdMap::possible_idx_values,
                             OutVectorIndexSets...&gt;,
-                    ddc::detail::TypeSeq&lt;OutVectorIndexSets...&gt;&gt;&gt;::type;
+                    ddc::TypeSeq&lt;OutVectorIndexSets...&gt;&gt;&gt;::type;
 };
 
 template &lt;char ID, class ResultTypeSeq&gt;
-struct GetRelevantVectorIndexSets&lt;ID, ddc::detail::TypeSeq&lt;&gt;, ResultTypeSeq&gt;
+struct GetRelevantVectorIndexSets&lt;ID, ddc::TypeSeq&lt;&gt;, ResultTypeSeq&gt;
 {
     using type = ResultTypeSeq;
 };
@@ -856,7 +845,7 @@ struct GetNthTensorIndexElement
                     Elem / ddc::type_seq_size_v&lt;VectorIndexSetAlongDim&gt;,
                     IdxDimHint - 1,
                     TypeSeqVectorIndexSet&gt;::tensor_index_type_seq,
-            ddc::detail::TypeSeq&lt;ddc::type_seq_element_t&lt;
+            ddc::TypeSeq&lt;ddc::type_seq_element_t&lt;
                     Elem % ddc::type_seq_size_v&lt;VectorIndexSetAlongDim&gt;,
                     VectorIndexSetAlongDim&gt;&gt;&gt;;
     using type = to_tensor_index_element_t&lt;TypeSeqVectorIndexSet, tensor_index_type_seq&gt;;
@@ -865,14 +854,14 @@ struct GetNthTensorIndexElement
 template &lt;std::size_t Elem, class TypeSeqVectorIndexSet&gt;
 struct GetNthTensorIndexElement&lt;Elem, 0, TypeSeqVectorIndexSet&gt;
 {
-    using tensor_index_type_seq = ddc::detail::TypeSeq&lt;&gt;;
+    using tensor_index_type_seq = ddc::TypeSeq&lt;&gt;;
 };
 
 template &lt;
         class TypeSeqVectorIndexIdMap,
         class StartElement,
         std::size_t Dim,
-        class ResultTypeSeq = ddc::detail::TypeSeq&lt;&gt;&gt;
+        class ResultTypeSeq = ddc::TypeSeq&lt;&gt;&gt;
 struct GetNthTensorIndexElementFromMap;
 
 template &lt;class TypeSeqVectorIndexIdMap, class StartElement, std::size_t Dim, class... ResultElems&gt;
@@ -880,7 +869,7 @@ struct GetNthTensorIndexElementFromMap&lt;
         TypeSeqVectorIndexIdMap,
         StartElement,
         Dim,
-        ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;
+        ddc::TypeSeq&lt;ResultElems...&gt;&gt;
 {
     using ValidIndex = ddc::type_seq_element_t&lt;Dim - 1, TypeSeqVectorIndexIdMap&gt;;
     using ContraValidIndex = VectorIndexIdMap&lt;
@@ -897,7 +886,7 @@ struct GetNthTensorIndexElementFromMap&lt;
             TypeSeqVectorIndexIdMap,
             StartElement,
             Dim - 1,
-            ddc::detail::TypeSeq&lt;Elem, ResultElems...&gt;&gt;::type;
+            ddc::TypeSeq&lt;Elem, ResultElems...&gt;&gt;::type;
 };
 
 template &lt;class TypeSeqVectorIndexIdMap, class StartElement, class... ResultElems&gt;
@@ -905,9 +894,9 @@ struct GetNthTensorIndexElementFromMap&lt;
         TypeSeqVectorIndexIdMap,
         StartElement,
         0,
-        ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;
+        ddc::TypeSeq&lt;ResultElems...&gt;&gt;
 {
-    using type = ddc::detail::TypeSeq&lt;ResultElems...&gt;;
+    using type = ddc::TypeSeq&lt;ResultElems...&gt;;
 };
 
 template &lt;
@@ -919,11 +908,11 @@ struct ExtractSubTensorElement;
 template &lt;class TypeSeqVectorIndexIdMapGlobal, class... ValidIndex, class GlobalTensorIndexElement&gt;
 struct ExtractSubTensorElement&lt;
         TypeSeqVectorIndexIdMapGlobal,
-        ddc::detail::TypeSeq&lt;ValidIndex...&gt;,
+        ddc::TypeSeq&lt;ValidIndex...&gt;,
         GlobalTensorIndexElement&gt;
 {
     using type = TensorIndexElement&lt;
-            ddc::detail::TypeSeq&lt;typename ValidIndex::possible_idx_values...&gt;,
+            ddc::TypeSeq&lt;typename ValidIndex::possible_idx_values...&gt;,
             typename GlobalTensorIndexElement::template index_on_dim_t&lt;
                     ddc::type_seq_rank_v&lt;ValidIndex, TypeSeqVectorIndexIdMapGlobal&gt;&gt;...&gt;;
 };

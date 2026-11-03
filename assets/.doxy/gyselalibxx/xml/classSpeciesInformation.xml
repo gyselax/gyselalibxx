@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classSpeciesInformation" kind="class" language="C++" prot="public">
     <compoundname>SpeciesInformation</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">ddc::DiscreteDimension</basecompoundref>
     <derivedcompoundref refid="structSpecies" prot="public" virt="non-virtual">Species</derivedcompoundref>
     <includes refid="species__info_8hpp" local="no">species_info.hpp</includes>
     <innerclass refid="classSpeciesInformation_1_1Impl" prot="public">SpeciesInformation::Impl</innerclass>
@@ -28,7 +29,7 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="2">
+      <node id="3">
         <label>Species</label>
         <link refid="structSpecies"/>
         <childnode refid="1" relation="public-inheritance">
@@ -37,8 +38,24 @@
       <node id="1">
         <label>SpeciesInformation</label>
         <link refid="classSpeciesInformation"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::DiscreteDimension</label>
       </node>
     </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SpeciesInformation</label>
+        <link refid="classSpeciesInformation"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::DiscreteDimension</label>
+      </node>
+    </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="13" bodyend="133"/>
     <listofallmembers>
       <member refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" prot="public" virt="non-virtual"><scope>SpeciesInformation</scope><name>discrete_dimension_type</name></member>

@@ -586,7 +586,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef std::conditional_t&lt; ddc::in_tags_v&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; IdxRangeGrids... &gt; &gt;, ddc::detail::TypeSeq&lt; IdxRange&lt; IdxRangeGrids... &gt; &gt;, ddc::detail::TypeSeq&lt;&gt; &gt;</td>
+<td style="text-align: right;">typedef std::conditional_t&lt; ddc::in_tags_v&lt; QueryGrid1D, ddc::TypeSeq&lt; IdxRangeGrids... &gt; &gt;, ddc::TypeSeq&lt; IdxRange&lt; IdxRangeGrids... &gt; &gt;, ddc::TypeSeq&lt;&gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The type found by the class.</em></td>
 </tr>
 </tbody>
@@ -595,9 +595,9 @@
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The type found by the class.</em> </p>
 <pre><code class="language-C++">using connectivity_details::SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;::type =  std::conditional_t&lt;
-            ddc::in_tags_v&lt;QueryGrid1D, ddc::detail::TypeSeq&lt;IdxRangeGrids...&gt;&gt;,
-            ddc::detail::TypeSeq&lt;IdxRange&lt;IdxRangeGrids...&gt;&gt;,
-            ddc::detail::TypeSeq&lt;&gt;&gt;;
+            ddc::in_tags_v&lt;QueryGrid1D, ddc::TypeSeq&lt;IdxRangeGrids...&gt;&gt;,
+            ddc::TypeSeq&lt;IdxRange&lt;IdxRangeGrids...&gt;&gt;,
+            ddc::TypeSeq&lt;&gt;&gt;;
 </code></pre>
 <hr>
 

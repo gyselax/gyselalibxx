@@ -601,7 +601,7 @@ public:
         return ddc::type_seq_size_v&lt;ValidIndexSetRow&gt; * ddc::type_seq_size_v&lt;ValidIndexSetCol&gt;;
     }
 
-    using index_set = ddc::detail::TypeSeq&lt;ValidIndexSetRow, ValidIndexSetCol&gt;;
+    using index_set = ddc::TypeSeq&lt;ValidIndexSetRow, ValidIndexSetCol&gt;;
 
     KOKKOS_DEFAULTED_FUNCTION IdentityTensor() = default;
 

@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structMPIDim" kind="struct" language="C++" prot="public">
     <compoundname>MPIDim</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ddc::DiscreteDimension</basecompoundref>
     <includes refid="mpitools_8hpp" local="no">mpitools.hpp</includes>
     <templateparamlist>
       <param>
@@ -22,7 +23,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitools.hpp" line="16" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitools.hpp" bodystart="16" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitools.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitools.hpp" bodystart="19" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -30,7 +31,29 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitools.hpp" line="13" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitools.hpp" bodystart="14" bodyend="17"/>
+    <inheritancegraph>
+      <node id="1">
+        <label>MPIDim&lt; DistributedDim &gt;</label>
+        <link refid="structMPIDim"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::DiscreteDimension</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>MPIDim&lt; DistributedDim &gt;</label>
+        <link refid="structMPIDim"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::DiscreteDimension</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitools.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitools.hpp" bodystart="17" bodyend="20"/>
     <listofallmembers>
       <member refid="structMPIDim_1a62179945b549053ebb430dc843a87dae" prot="public" virt="non-virtual"><scope>MPIDim</scope><name>distributed_dim</name></member>
     </listofallmembers>

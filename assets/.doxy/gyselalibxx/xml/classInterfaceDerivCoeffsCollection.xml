@@ -11,9 +11,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classInterfaceDerivCoeffsCollection_1a65c5516332f15d4d13f0d8ed25d5a720" prot="private" static="no">
-        <type>ddc::detail::TypeSeq&lt; <ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>&lt; Interfaces &gt;... &gt;</type>
-        <definition>using InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::DerivCalculatorTypeSeq =  ddc::detail::TypeSeq&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;...&gt;</definition>
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffsCollection_1aa1f3eda65c7606eaf010cfb480360e5a" prot="private" static="no">
+        <type>ddc::TypeSeq&lt; <ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>&lt; Interfaces &gt;... &gt;</type>
+        <definition>using InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::DerivCalculatorTypeSeq =  ddc::TypeSeq&lt;InterfaceDerivCoeffs&lt;Interfaces&gt;...&gt;</definition>
         <argsstring></argsstring>
         <name>DerivCalculatorTypeSeq</name>
         <qualifiedname>InterfaceDerivCoeffsCollection::DerivCalculatorTypeSeq</qualifiedname>
@@ -25,9 +25,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="35" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classInterfaceDerivCoeffsCollection_1a582df5767159e0a94e94bce484e359b3" prot="private" static="no">
-        <type>ddc::detail::TypeSeq&lt; Interfaces... &gt;</type>
-        <definition>using InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::InterfaceTypeSeq =  ddc::detail::TypeSeq&lt;Interfaces...&gt;</definition>
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffsCollection_1a214da85a9f49d792b701e585dae71d60" prot="private" static="no">
+        <type>ddc::TypeSeq&lt; Interfaces... &gt;</type>
+        <definition>using InterfaceDerivCoeffsCollection&lt; Interfaces &gt;::InterfaceTypeSeq =  ddc::TypeSeq&lt;Interfaces...&gt;</definition>
         <argsstring></argsstring>
         <name>InterfaceTypeSeq</name>
         <qualifiedname>InterfaceDerivCoeffsCollection::InterfaceTypeSeq</qualifiedname>
@@ -141,10 +141,10 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp" bodystart="34" bodyend="74"/>
     <listofallmembers>
-      <member refid="classInterfaceDerivCoeffsCollection_1a65c5516332f15d4d13f0d8ed25d5a720" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>DerivCalculatorTypeSeq</name></member>
+      <member refid="classInterfaceDerivCoeffsCollection_1aa1f3eda65c7606eaf010cfb480360e5a" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>DerivCalculatorTypeSeq</name></member>
       <member refid="classInterfaceDerivCoeffsCollection_1aea94f2f2abf2745e9c458f593cb3cc5c" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>get</name></member>
       <member refid="classInterfaceDerivCoeffsCollection_1a712d41c51e79f3a7d160fac8e3d5ad73" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>InterfaceDerivCoeffsCollection</name></member>
-      <member refid="classInterfaceDerivCoeffsCollection_1a582df5767159e0a94e94bce484e359b3" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>InterfaceTypeSeq</name></member>
+      <member refid="classInterfaceDerivCoeffsCollection_1a214da85a9f49d792b701e585dae71d60" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>InterfaceTypeSeq</name></member>
       <member refid="classInterfaceDerivCoeffsCollection_1afa66ce0ffe30d8b33e922a11ec920614" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffsCollection</scope><name>m_deriv_coeffs_collection</name></member>
     </listofallmembers>
   </compounddef>

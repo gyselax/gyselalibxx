@@ -666,7 +666,7 @@ private:
     using IdxRangeBatchedBSPolar
             = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_cat_t&lt;
                     ddc::to_type_seq_t&lt;IdxRangeBatch&gt;,
-                    ddc::detail::TypeSeq&lt;PolarBSplinesRTheta&gt;&gt;&gt;;
+                    ddc::TypeSeq&lt;PolarBSplinesRTheta&gt;&gt;&gt;;
     using IdxBatchedBSPolar = typename IdxRangeBatchedBSPolar::discrete_element_type;
 
     using IdxRangeQuadratureR = IdxRange&lt;QDimRMesh&gt;;

@@ -17,6 +17,11 @@
       <node id="2">
         <label>Moments</label>
         <link refid="classMoments"/>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc::DiscreteDimension</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -29,6 +34,11 @@
       <node id="2">
         <label>Moments</label>
         <link refid="classMoments"/>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc::DiscreteDimension</label>
       </node>
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="69" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="70" bodyend="71"/>

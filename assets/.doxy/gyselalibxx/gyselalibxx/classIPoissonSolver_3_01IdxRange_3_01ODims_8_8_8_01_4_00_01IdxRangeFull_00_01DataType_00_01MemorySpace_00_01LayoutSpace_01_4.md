@@ -77,8 +77,8 @@
 | Type | Name |
 | ---: | :--- |
 | typedef ddc::type\_seq\_remove\_t&lt; [**space\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-space_tags), [**laplacian\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-laplacian_tags) &gt; | [**batch\_tags**](#typedef-batch_tags)  <br>_The tags describing the batched dimensions._  |
-| typedef ddc::detail::TypeSeq&lt; ODims... &gt; | [**laplacian\_tags**](#typedef-laplacian_tags)  <br>_The tags describing the discrete dimensions in the equation._  |
-| typedef ddc::detail::TypeSeq&lt; typename ODims::continuous\_dimension\_type... &gt; | [**real\_laplacian\_tags**](#typedef-real_laplacian_tags)  <br>_The tags describing the real dimensions in the equation._  |
+| typedef ddc::TypeSeq&lt; ODims... &gt; | [**laplacian\_tags**](#typedef-laplacian_tags)  <br>_The tags describing the discrete dimensions in the equation._  |
+| typedef ddc::TypeSeq&lt; typename ODims::continuous\_dimension\_type... &gt; | [**real\_laplacian\_tags**](#typedef-real_laplacian_tags)  <br>_The tags describing the real dimensions in the equation._  |
 | typedef ddc::to\_type\_seq\_t&lt; IdxRangeFull &gt; | [**space\_tags**](#typedef-space_tags)  <br>_The tags describing the dimensions of the index range on which the operator acts._  |
 
 
@@ -348,7 +348,7 @@ using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace,
 
 _The tags describing the discrete dimensions in the equation._ 
 ```C++
-using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::laplacian_tags =  ddc::detail::TypeSeq<ODims...>;
+using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::laplacian_tags =  ddc::TypeSeq<ODims...>;
 ```
 
 
@@ -362,7 +362,7 @@ using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace,
 
 _The tags describing the real dimensions in the equation._ 
 ```C++
-using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::real_laplacian_tags =  ddc::detail::TypeSeq<typename ODims::continuous_dimension_type...>;
+using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, DataType, MemorySpace, LayoutSpace >::real_laplacian_tags =  ddc::TypeSeq<typename ODims::continuous_dimension_type...>;
 ```
 
 

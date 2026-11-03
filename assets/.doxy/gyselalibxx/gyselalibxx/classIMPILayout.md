@@ -37,7 +37,7 @@ Inherited by the following classes: [MPILayout](classMPILayout.md),  [MPILayout]
 | ---: | :--- |
 | typedef IdxRangeData | [**discrete\_domain\_type**](#typedef-discrete_domain_type)  <br>_The index range of the data._  |
 | typedef IdxRange&lt; DistributedDim... &gt; | [**distributed\_sub\_idx\_range**](#typedef-distributed_sub_idx_range)  <br>_The index range of the distributed section of the data._  |
-| typedef ddc::detail::TypeSeq&lt; DistributedDim... &gt; | [**distributed\_type\_seq**](#typedef-distributed_type_seq)  <br>_A type sequence describing the dimensions which are distributed across MPI processes._  |
+| typedef ddc::TypeSeq&lt; DistributedDim... &gt; | [**distributed\_type\_seq**](#typedef-distributed_type_seq)  <br>_A type sequence describing the dimensions which are distributed across MPI processes._  |
 
 
 
@@ -144,7 +144,7 @@ using IMPILayout< IdxRangeData, DistributedDim >::distributed_sub_idx_range =  I
 
 _A type sequence describing the dimensions which are distributed across MPI processes._ 
 ```C++
-using IMPILayout< IdxRangeData, DistributedDim >::distributed_type_seq =  ddc::detail::TypeSeq<DistributedDim...>;
+using IMPILayout< IdxRangeData, DistributedDim >::distributed_type_seq =  ddc::TypeSeq<DistributedDim...>;
 ```
 
 

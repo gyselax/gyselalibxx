@@ -17,9 +17,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classTensorCommon_1a3a831b0fd1b2831b2a084ec757adf7f1" prot="public" static="no">
-        <type>ddc::detail::TypeSeq&lt; ValidIndexSet... &gt;</type>
-        <definition>using TensorCommon&lt; DataStorageType, ValidIndexSet &gt;::index_set =  ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;</definition>
+      <memberdef kind="typedef" id="classTensorCommon_1a6348cc154e670ea1437d2618a2333c90" prot="public" static="no">
+        <type>ddc::TypeSeq&lt; ValidIndexSet... &gt;</type>
+        <definition>using TensorCommon&lt; DataStorageType, ValidIndexSet &gt;::index_set =  ddc::TypeSeq&lt;ValidIndexSet...&gt;</definition>
         <argsstring></argsstring>
         <name>index_set</name>
         <qualifiedname>TensorCommon::index_set</qualifiedname>
@@ -55,7 +55,7 @@
             <defname>dim</defname>
           </param>
         </templateparamlist>
-        <type>ddc::type_seq_element_t&lt; dim, <ref refid="classTensorCommon_1a3a831b0fd1b2831b2a084ec757adf7f1" kindref="member">index_set</ref> &gt;</type>
+        <type>ddc::type_seq_element_t&lt; dim, <ref refid="classTensorCommon_1a6348cc154e670ea1437d2618a2333c90" kindref="member">index_set</ref> &gt;</type>
         <definition>using TensorCommon&lt; DataStorageType, ValidIndexSet &gt;::vector_index_set_t =  ddc::type_seq_element_t&lt;dim, index_set&gt;</definition>
         <argsstring></argsstring>
         <name>vector_index_set_t</name>
@@ -612,7 +612,7 @@
       <member refid="classTensorCommon_1a71fe0ef37137a48f7d12adda3c520389" prot="public" virt="non-virtual"><scope>TensorCommon</scope><name>element_type</name></member>
       <member refid="classTensorCommon_1a8b68d6c91d0c9cfefc36cc2e306e39c7" prot="public" virt="non-virtual"><scope>TensorCommon</scope><name>get</name></member>
       <member refid="classTensorCommon_1a99533cab0e32eb13237a1a840c728346" prot="public" virt="non-virtual"><scope>TensorCommon</scope><name>get</name></member>
-      <member refid="classTensorCommon_1a3a831b0fd1b2831b2a084ec757adf7f1" prot="public" virt="non-virtual"><scope>TensorCommon</scope><name>index_set</name></member>
+      <member refid="classTensorCommon_1a6348cc154e670ea1437d2618a2333c90" prot="public" virt="non-virtual"><scope>TensorCommon</scope><name>index_set</name></member>
       <member refid="classTensorCommon_1a65d56a8afbc8d4a6b3653f260fa8b485" prot="protected" virt="non-virtual"><scope>TensorCommon</scope><name>m_data</name></member>
       <member refid="classTensorCommon_1a94caffe0ab423d056c9b6193a4613f1e" prot="public" virt="non-virtual"><scope>TensorCommon</scope><name>operator!=</name></member>
       <member refid="classTensorCommon_1ad5e7461817e43e4367d3e677dde92349" prot="public" virt="non-virtual"><scope>TensorCommon</scope><name>operator*=</name></member>

@@ -4,6 +4,7 @@
     <compoundname>tensor_tools</compoundname>
     <innerclass refid="classtensor__tools_1_1IndexedTensor" prot="public">tensor_tools::IndexedTensor</innerclass>
     <innerclass refid="classtensor__tools_1_1TensorIndexElement" prot="public">tensor_tools::TensorIndexElement</innerclass>
+    <innerclass refid="classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4" prot="public">tensor_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;</innerclass>
     <innerclass refid="structtensor__tools_1_1GetContravariantDims" prot="public">tensor_tools::GetContravariantDims</innerclass>
     <innerclass refid="structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" prot="public">tensor_tools::GetContravariantDims&lt; VectorIndexSet&lt; Dims... &gt; &gt;</innerclass>
     <innerclass refid="structtensor__tools_1_1GetCovariantDims" prot="public">tensor_tools::GetCovariantDims</innerclass>
@@ -58,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="192" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="192" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="191" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="191" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1a4a3a47b4e26f30cc65390f4dd9cee64f" prot="public" static="no">
         <templateparamlist>
@@ -89,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="201" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="201" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="200" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="200" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1a7b753b8ed209bb2cd079a59027b301b6" prot="public" static="no">
         <templateparamlist>
@@ -119,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="316" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="316" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="305" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="305" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1a92eb17e0a874c6c3e8c8f87fe4eae289" prot="public" static="no">
         <templateparamlist>
@@ -149,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="325" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="325" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="314" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="314" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1a1d6b94f9922d5fbd5317b59325ccd49a" prot="public" static="no">
         <templateparamlist>
@@ -182,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="334" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="334" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="323" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="323" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1afc0e77e39b39f37f82d0956d0f9caf90" prot="public" static="no">
         <templateparamlist>
@@ -226,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="346" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="346" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="335" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="335" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1affd5507aa7486fb6952f498e8ed1172c" prot="public" static="no">
         <templateparamlist>
@@ -272,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="449" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="449" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="438" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="438" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1a658ffd69f4d8ba754ce225b277e2997b" prot="public" static="no">
         <templateparamlist>
@@ -330,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="472" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="472" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="461" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="461" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1a0e332cb92fc3ebc244cae4d7d3781d1a" prot="public" static="no">
         <templateparamlist>
@@ -385,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="500" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="500" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="489" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="489" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacetensor__tools_1a8d2e658372c92c97a7ce80d0409af329" prot="public" static="no">
         <templateparamlist>
@@ -426,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="512" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="512" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="501" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="501" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -515,7 +516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="174" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="175" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="173" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="174" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacetensor__tools_1a86b09bb6765b9454c8da9ae3f88b459a" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -559,7 +560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="183" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="183" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="182" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="182" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -615,7 +616,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="264" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="264" bodyend="320"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="264" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="264" bodyend="322"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

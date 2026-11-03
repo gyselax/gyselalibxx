@@ -611,7 +611,9 @@ class GyroAverageOperator
     using DFieldBatchedInterpCoeffs = DField&lt;IdxRangeBatchedInterpCoeffs&gt;;
 
 public:
-    struct CoeffList;
+    struct CoeffList : ddc::DiscreteDimension
+    {
+    };
 
 private:
     using IdxRangeList = IdxRange&lt;CoeffList&gt;;

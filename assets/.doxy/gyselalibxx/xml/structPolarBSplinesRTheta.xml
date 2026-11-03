@@ -11,24 +11,34 @@
       <node id="2">
         <label>PolarBSplines&lt; BSplinesR, BSplinesTheta, 1 &gt;</label>
         <link refid="classPolarBSplines"/>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
       </node>
       <node id="1">
         <label>PolarBSplinesRTheta</label>
         <link refid="structPolarBSplinesRTheta"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="3">
+        <label>ddc::DiscreteDimension</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
         <label>PolarBSplines&lt; BSplinesR, BSplinesTheta, 1 &gt;</label>
         <link refid="classPolarBSplines"/>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
       </node>
       <node id="1">
         <label>PolarBSplinesRTheta</label>
         <link refid="structPolarBSplinesRTheta"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="3">
+        <label>ddc::DiscreteDimension</label>
       </node>
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp" bodystart="30" bodyend="31"/>

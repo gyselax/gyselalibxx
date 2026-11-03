@@ -21,7 +21,7 @@
 
 namespace detail {
 
-struct InternalSpoofGrid
+struct InternalSpoofGrid : ddc::DiscreteDimension
 {
 };
 

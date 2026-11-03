@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structGyroAverageOperator_1_1CoeffList" kind="struct" language="C++" prot="public">
+    <compoundname>GyroAverageOperator::CoeffList</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ddc::DiscreteDimension</basecompoundref>
+    <includes refid="gyroaverage__operator_8hpp" local="no">gyroaverage_operator.hpp</includes>
+    <briefdescription>
+<para>Dimension indexing the sample points (must be public to comply with nvcc rules). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>GyroAverageOperator&lt; InterpolatorType, IdxRangeParams, IdxRangeBatch &gt;::CoeffList</label>
+        <link refid="structGyroAverageOperator_1_1CoeffList"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::DiscreteDimension</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>GyroAverageOperator&lt; InterpolatorType, IdxRangeParams, IdxRangeBatch &gt;::CoeffList</label>
+        <link refid="structGyroAverageOperator_1_1CoeffList"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::DiscreteDimension</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="64" bodyend="65"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -638,7 +638,7 @@ KOKKOS_FUNCTION auto internal_index(TensorType const&amp; tensor, std::index_seq
 {
     return IndexedTensor&lt;
             const TensorType,
-            ddc::detail::TypeSeq&lt;VectorIndexIdMap&lt;
+            ddc::TypeSeq&lt;VectorIndexIdMap&lt;
                     ddc::type_seq_element_t&lt;I, TypeSeqCharIds&gt;::value,
                     typename TensorType::template vector_index_set_t&lt;I&gt;&gt;...&gt;&gt;(tensor);
 }
@@ -819,9 +819,11 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType const&amp;... tensor_to_mul)
         IndexedTensor&lt;ResultTensorType, ResultIndexTypeSeq&gt; indexed_result(result);
         if constexpr (is_symmetric) {
             static_assert(
-                    (ddc::type_seq_size_v&lt;ddc::type_seq_element_t&lt;0, ResultIndexTypeSeq&gt;&gt;)
-                            == (ddc::type_seq_size_v&lt;
-                                    ddc::type_seq_element_t&lt;1, ResultIndexTypeSeq&gt;&gt;),
+                    (ddc::type_seq_size_v&lt;typename ddc::type_seq_element_t&lt;0, ResultIndexTypeSeq&gt;::
+                                                  possible_idx_values&gt;)
+                            == (ddc::type_seq_size_v&lt;typename ddc::type_seq_element_t&lt;
+                                        1,
+                                        ResultIndexTypeSeq&gt;::possible_idx_values&gt;),
                     "Matrix must be square to be symmetrical");
             details::symmetric_internal_tensor_mul&lt;AllIndexIdMaps&gt;(
                     indexed_result,
@@ -851,7 +853,7 @@ KOKKOS_FUNCTION auto index(TensorType const&amp; tensor)
             sizeof...(ids) == TensorType::rank(),
             "The number of indices provided must be equal to the rank of the tensor.");
     using namespace tensor_tools;
-    using TypeSeqCharIds = ddc::detail::TypeSeq&lt;std::integral_constant&lt;char, ids&gt;...&gt;;
+    using TypeSeqCharIds = ddc::TypeSeq&lt;std::integral_constant&lt;char, ids&gt;...&gt;;
     return details::internal_index&lt;
             TypeSeqCharIds&gt;(tensor, std::make_index_sequence&lt;sizeof...(ids)&gt;());
 }

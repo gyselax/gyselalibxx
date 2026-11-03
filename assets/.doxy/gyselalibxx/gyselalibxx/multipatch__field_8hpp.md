@@ -38,7 +38,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef detail:: MultipatchField&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchField**](#typedef-multipatchfield)  <br>_A class to store field objects on patches._  |
+| typedef detail::MultipatchField&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchField**](#typedef-multipatchfield)  <br>_A class to store field objects on patches._  |
 
 
 
@@ -102,8 +102,7 @@
 
 _A class to store field objects on patches._ 
 ```C++
-using MultipatchField =  detail::
-        MultipatchField<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
+using MultipatchField =  detail::MultipatchField<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
 ```
 
 

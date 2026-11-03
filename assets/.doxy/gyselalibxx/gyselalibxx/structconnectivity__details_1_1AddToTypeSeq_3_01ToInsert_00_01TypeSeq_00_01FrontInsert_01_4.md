@@ -34,7 +34,7 @@ _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTyp
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::type\_seq\_merge\_t&lt; TypeSeq, ddc::detail::TypeSeq&lt; ToInsert &gt; &gt; | [**type**](#typedef-type)  <br>_The type found by the class._  |
+| typedef ddc::type\_seq\_merge\_t&lt; TypeSeq, ddc::TypeSeq&lt; ToInsert &gt; &gt; | [**type**](#typedef-type)  <br>_The type found by the class._  |
 
 
 
@@ -92,7 +92,7 @@ _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTyp
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::AddToTypeSeq< ToInsert, TypeSeq, FrontInsert >::type =  ddc::type_seq_merge_t<TypeSeq, ddc::detail::TypeSeq<ToInsert>>;
+using connectivity_details::AddToTypeSeq< ToInsert, TypeSeq, FrontInsert >::type =  ddc::type_seq_merge_t<TypeSeq, ddc::TypeSeq<ToInsert>>;
 ```
 
 

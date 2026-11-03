@@ -34,7 +34,7 @@ _The implementation of_ [_**NDIdentityInterpolationBuilder**_](classNDIdentityIn
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::detail::convert\_type\_seq\_to\_discrete\_domain\_t&lt; ddc::type\_seq\_replace\_t&lt; ddc::to\_type\_seq\_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to\_type\_seq\_t&lt; IdxRangeInterpolation &gt;, ddc::detail::TypeSeq&lt; typename Basis::template Impl&lt; Basis, MemorySpace &gt;::knot\_grid... &gt; &gt; &gt; | [**batched\_basis\_idx\_range\_type**](#typedef-batched_basis_idx_range_type)  <br>_Batched domain with each interpolation grid replaced by its basis domain._  |
+| typedef ddc::detail::convert\_type\_seq\_to\_discrete\_domain\_t&lt; ddc::type\_seq\_replace\_t&lt; ddc::to\_type\_seq\_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to\_type\_seq\_t&lt; IdxRangeInterpolation &gt;, ddc::TypeSeq&lt; typename Basis::template Impl&lt; Basis, MemorySpace &gt;::knot\_grid... &gt; &gt; &gt; | [**batched\_basis\_idx\_range\_type**](#typedef-batched_basis_idx_range_type)  <br>_Batched domain with each interpolation grid replaced by its basis domain._  |
 | typedef BatchedInterpolationIdxRange | [**batched\_derivs\_idx\_range\_type**](#typedef-batched_derivs_idx_range_type)  <br>_The type of the index range on which derivatives should be provided (here unused)._  |
 | typedef IdxRange&lt; typename Basis::template Impl&lt; Basis, MemorySpace &gt;::knot\_grid... &gt; | [**coeff\_idx\_range\_type**](#typedef-coeff_idx_range_type)  <br>_The type of the index range for the bases over which coefficients of an ND Lagrange interpolation are defined._  |
 | typedef DataType | [**data\_type**](#typedef-data_type)  <br>_The data type that the data is saved on._  |
@@ -108,8 +108,7 @@ _Batched domain with each interpolation grid replaced by its basis domain._
 using NDIdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange< Basis... > >::batched_basis_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
                     ddc::to_type_seq_t<IdxRangeInterpolation>,
-                    ddc::detail::TypeSeq<
-                            typename Basis::template Impl<Basis, MemorySpace>::knot_grid...>>>;
+                    ddc::TypeSeq<typename Basis::template Impl<Basis, MemorySpace>::knot_grid...>>>;
 ```
 
 

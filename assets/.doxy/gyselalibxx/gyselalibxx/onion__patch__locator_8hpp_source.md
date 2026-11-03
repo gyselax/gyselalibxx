@@ -54,7 +54,7 @@ class OnionPatchLocator<
 public:
     using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patches...>;
 
-    using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
+    using PatchOrdering = ddc::TypeSeq<Patches...>;
 
     using exec_space = ExecSpace;
 

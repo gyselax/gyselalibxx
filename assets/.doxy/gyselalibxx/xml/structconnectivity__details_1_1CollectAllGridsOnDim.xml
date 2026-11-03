@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="500" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="500" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="498" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="498" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structconnectivity__details_1_1CollectAllGridsOnDim_1abc21fd7e16eed594203f9b2b26f7e96e" prot="private" static="no">
         <type>type_seq_range_t&lt; BackwardTypeSeq, 0, ddc::type_seq_size_v&lt; BackwardTypeSeq &gt; - 1 &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="506" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="506" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="504" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="504" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structconnectivity__details_1_1CollectAllGridsOnDim_1a7d16d829206069fa4b846529f92577c3" prot="private" static="no">
         <type>typename <ref refid="structconnectivity__details_1_1CollectGridsAlongDim" kindref="compound">CollectGridsAlongDim</ref>&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; StartPatch, Grid1D, BACK &gt;, InterfaceTypeSeq, FrontInsert, NonOverlappingBackwardTypeSeq &gt;<ref refid="structconnectivity__details_1_1CollectAllGridsOnDim_1ae3f3416977775825c28efeda6567b498" kindref="member">::type</ref></type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="508" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="508" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="506" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="506" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="516" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="516" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="514" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="514" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -115,7 +115,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="490" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="491" bodyend="518"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="488" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="489" bodyend="516"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1CollectAllGridsOnDim_1a6c95f8fe779a6b607bc77ec2b3c9a1ab" prot="private" virt="non-virtual"><scope>connectivity_details::CollectAllGridsOnDim</scope><name>BackwardTypeSeq</name></member>
       <member refid="structconnectivity__details_1_1CollectAllGridsOnDim_1a7d16d829206069fa4b846529f92577c3" prot="private" virt="non-virtual"><scope>connectivity_details::CollectAllGridsOnDim</scope><name>ForwardTypeSeq</name></member>

@@ -113,7 +113,7 @@
 
 * **do\_configuration\_data\_initialisation** ([**CollisionConfiguration**](classCollisionConfiguration.md))
 * **DerivField** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
-* **deepcopy** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
+* **deepcopy** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**VectorFieldCommon&lt; FieldType, ddc::TypeSeq&lt; DDims... &gt; &gt;**](classVectorFieldCommon_3_01FieldType_00_01ddc_1_1TypeSeq_3_01DDims_8_8_8_01_4_01_4.md))
 * **DerivFieldCommon** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **derivative\_idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **DerivFieldMem** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
@@ -291,7 +291,7 @@
 * **inv\_jacobian\_matrix** ([**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md), [**LinearCoordTransform**](classLinearCoordTransform.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **inv\_jacobian** ([**CombinedMapping**](classCombinedMapping.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md))
 * **initialise\_fields** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
-* **idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
+* **idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md), [**VectorFieldCommon&lt; FieldType, ddc::TypeSeq&lt; DDims... &gt; &gt;**](classVectorFieldCommon_3_01FieldType_00_01ddc_1_1TypeSeq_3_01DDims_8_8_8_01_4_01_4.md))
 * **idx\_range\_for\_deriv** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **initialise\_chunks** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **initialisation** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
@@ -319,6 +319,8 @@
 * **is\_unified** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **init\_tensor\_tensor\_nnz\_per\_line** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
 * **IndexedTensor** ([**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md))
+* **index** ([**tensor\_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;**](classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4.md))
+* **internal\_index** ([**tensor\_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;**](classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4.md))
 
 
 ## j
@@ -353,6 +355,8 @@
 * **mean\_velocity\_bot** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **make\_internal\_mdspan** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **MappingToDomainGeometry** ([**GMGPolarTools::MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md))
+* **make\_coeff\_idx\_range\_type** ([**InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;**](structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f.md))
+* **make\_evaluation\_idx\_range\_type** ([**InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;**](structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f.md))
 * **MPITransposeAllToAll** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **MatchingIdxSlice** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **Matrix** ([**Matrix**](classMatrix.md))
@@ -440,7 +444,7 @@
 
 ## r
 
-* **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder3D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md), [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
+* **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder3D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md), [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md), [**InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;**](structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md), [**VectorFieldCommon&lt; FieldType, ddc::TypeSeq&lt; DDims... &gt; &gt;**](classVectorFieldCommon_3_01FieldType_00_01ddc_1_1TypeSeq_3_01DDims_8_8_8_01_4_01_4.md), [**tensor\_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;**](classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4.md))
 * **recursion** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
 * **recursive\_dispatch\_patch\_function** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **replace\_periodic\_coord\_inside** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
@@ -527,11 +531,13 @@
 ## v
 
 * **VectorField** ([**VectorField**](classVectorField.md))
+* **VectorFieldCommon** ([**VectorFieldCommon&lt; FieldType, ddc::TypeSeq&lt; DDims... &gt; &gt;**](classVectorFieldCommon_3_01FieldType_00_01ddc_1_1TypeSeq_3_01DDims_8_8_8_01_4_01_4.md))
 * **VectorFieldMem** ([**VectorFieldMem**](classVectorFieldMem.md))
 * **VortexMergerDensitySolution** ([**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md))
 * **VortexMergerEquilibria** ([**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
 * **vals** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
 * **vals\_and\_derivs** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+* **valid\_indices** ([**tensor\_tools::TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;**](classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4.md))
 
 
 ## ~

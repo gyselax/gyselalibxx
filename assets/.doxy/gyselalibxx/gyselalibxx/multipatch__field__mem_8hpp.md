@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef detail:: MultipatchFieldMem&lt; ddc::detail::TypeSeq&lt; Patches... &gt;, ddc::detail::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchFieldMem**](#typedef-multipatchfieldmem)  <br>_A class to store field memory block objects on patches._  |
+| typedef detail::MultipatchFieldMem&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchFieldMem**](#typedef-multipatchfieldmem)  <br>_A class to store field memory block objects on patches._  |
 
 
 
@@ -97,8 +97,7 @@
 
 _A class to store field memory block objects on patches._ 
 ```C++
-using MultipatchFieldMem =  detail::
-        MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
+using MultipatchFieldMem =  detail::MultipatchFieldMem<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
 ```
 
 

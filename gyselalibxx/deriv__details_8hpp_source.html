@@ -600,24 +600,23 @@ template &lt;class Tag&gt;
 struct DerivSubSet;
 
 template &lt;&gt;
-struct DerivSubSet&lt;ddc::detail::TypeSeq&lt;&gt;&gt;
+struct DerivSubSet&lt;ddc::TypeSeq&lt;&gt;&gt;
 {
-    using type = ddc::detail::TypeSeq&lt;&gt;;
+    using type = ddc::TypeSeq&lt;&gt;;
 };
 
 template &lt;class Tag&gt;
-struct DerivSubSet&lt;ddc::detail::TypeSeq&lt;Tag&gt;&gt;
+struct DerivSubSet&lt;ddc::TypeSeq&lt;Tag&gt;&gt;
 {
-    using type = std::
-            conditional_t&lt;is_deriv_dim_v&lt;Tag&gt;, ddc::detail::TypeSeq&lt;Tag&gt;, ddc::detail::TypeSeq&lt;&gt;&gt;;
+    using type = std::conditional_t&lt;is_deriv_dim_v&lt;Tag&gt;, ddc::TypeSeq&lt;Tag&gt;, ddc::TypeSeq&lt;&gt;&gt;;
 };
 
 template &lt;class HeadTag, class... Tags&gt;
-struct DerivSubSet&lt;ddc::detail::TypeSeq&lt;HeadTag, Tags...&gt;&gt;
+struct DerivSubSet&lt;ddc::TypeSeq&lt;HeadTag, Tags...&gt;&gt;
 {
     using type = ddc::type_seq_merge_t&lt;
-            typename DerivSubSet&lt;ddc::detail::TypeSeq&lt;HeadTag&gt;&gt;::type,
-            typename DerivSubSet&lt;ddc::detail::TypeSeq&lt;Tags...&gt;&gt;::type&gt;;
+            typename DerivSubSet&lt;ddc::TypeSeq&lt;HeadTag&gt;&gt;::type,
+            typename DerivSubSet&lt;ddc::TypeSeq&lt;Tags...&gt;&gt;::type&gt;;
 };
 
 template &lt;class Seq&gt;
@@ -635,9 +634,9 @@ struct StripDeriv&lt;ddc::Deriv&lt;Tags&gt;&gt;
 };
 
 template &lt;class... Tags&gt;
-struct StripDeriv&lt;ddc::detail::TypeSeq&lt;ddc::Deriv&lt;Tags&gt;...&gt;&gt;
+struct StripDeriv&lt;ddc::TypeSeq&lt;ddc::Deriv&lt;Tags&gt;...&gt;&gt;
 {
-    using type = ddc::detail::TypeSeq&lt;Tags...&gt;;
+    using type = ddc::TypeSeq&lt;Tags...&gt;;
 };
 
 template &lt;class Seq&gt;
@@ -656,7 +655,7 @@ KOKKOS_FUNCTION Container&lt;HeadQueryTag, QueryTags...&gt; select_default(
         Container&lt;HeadQueryTag, QueryTags...&gt; const&amp; default_values)
 {
     if constexpr (sizeof...(QueryTags) == 0) {
-        if constexpr (ddc::in_tags_v&lt;HeadQueryTag, ddc::detail::TypeSeq&lt;Tags...&gt;&gt;) {
+        if constexpr (ddc::in_tags_v&lt;HeadQueryTag, ddc::TypeSeq&lt;Tags...&gt;&gt;) {
             return ddc::select&lt;HeadQueryTag&gt;(known_values);
         } else {
             return ddc::select&lt;HeadQueryTag&gt;(default_values);
@@ -674,7 +673,7 @@ template &lt;class DerivSeq&gt;
 struct DefaultDerivElem;
 
 template &lt;class... Tags&gt;
-struct DefaultDerivElem&lt;ddc::detail::TypeSeq&lt;Tags...&gt;&gt;
+struct DefaultDerivElem&lt;ddc::TypeSeq&lt;Tags...&gt;&gt;
 {
     static_assert((is_deriv_dim_v&lt;Tags&gt; &amp;&amp; ...));
     KOKKOS_FUNCTION constexpr static Idx&lt;Tags...&gt; get_element()

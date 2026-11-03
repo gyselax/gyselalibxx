@@ -614,7 +614,7 @@ constexpr bool is_extrapolation_rule_auto_constructible_v
                   ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid, DataType&gt;&gt;);
 
 template &lt;class Rule, class DataType, class Basis, class IdxRangeCoeff&gt;
-using extrapolation_rule_t = ddc::detail::TypeSeq&lt;
+using extrapolation_rule_t = ddc::TypeSeq&lt;
         typename details::ExtrapolationRuleResolver&lt;
                 ddc::type_seq_element_t&lt;0, Rule&gt;,
                 DataType,

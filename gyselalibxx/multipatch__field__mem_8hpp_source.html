@@ -591,10 +591,8 @@ template &lt;class TypeSeqPatches, class TypeSeqInternalTypes&gt;
 class MultipatchFieldMem;
 
 template &lt;class... Patches, class... InternalTypes&gt;
-class MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;
-    : public MultipatchType&lt;
-              ddc::detail::TypeSeq&lt;Patches...&gt;,
-              ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;
+class MultipatchFieldMem&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;InternalTypes...&gt;&gt;
+    : public MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;InternalTypes...&gt;&gt;
 {
     static_assert(
             (has_data_access_methods_v&lt;InternalTypes&gt; &amp;&amp; ...),
@@ -606,9 +604,7 @@ class MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail:
             "memory.");
 
 public:
-    using base_type = MultipatchType&lt;
-            ddc::detail::TypeSeq&lt;Patches...&gt;,
-            ddc::detail::TypeSeq&lt;InternalTypes...&gt;&gt;;
+    using base_type = MultipatchType&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;InternalTypes...&gt;&gt;;
 
     using typename base_type::PatchOrdering;
 
@@ -616,15 +612,13 @@ public:
     using TypeOnPatch = typename base_type::template TypeOnPatch&lt;Patch&gt;;
 
 public:
-    using span_type = MultipatchField&lt;
-            PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::span_type...&gt;&gt;;
-    using view_type = MultipatchField&lt;
-            PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::view_type...&gt;&gt;;
+    using span_type
+            = MultipatchField&lt;PatchOrdering, ddc::TypeSeq&lt;typename InternalTypes::span_type...&gt;&gt;;
+    using view_type
+            = MultipatchField&lt;PatchOrdering, ddc::TypeSeq&lt;typename InternalTypes::view_type...&gt;&gt;;
     using discrete_domain_type = MultipatchType&lt;
             PatchOrdering,
-            ddc::detail::TypeSeq&lt;typename InternalTypes::discrete_domain_type...&gt;&gt;;
+            ddc::TypeSeq&lt;typename InternalTypes::discrete_domain_type...&gt;&gt;;
     using memory_space = typename base_type::example_element::memory_space;
     using element_type = typename base_type::example_element::element_type;
 
@@ -698,8 +692,8 @@ inline constexpr bool enable_data_access_methods&lt;
         detail::MultipatchFieldMem&lt;TypeSeqPatches, TypeSeqInternalTypes&gt;&gt; = true;
 
 template &lt;template &lt;typename P&gt; typename T, class... Patches&gt;
-using MultipatchFieldMem = detail::
-        MultipatchFieldMem&lt;ddc::detail::TypeSeq&lt;Patches...&gt;, ddc::detail::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
+using MultipatchFieldMem
+        = detail::MultipatchFieldMem&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
 </code></pre></div>
               
             </div>

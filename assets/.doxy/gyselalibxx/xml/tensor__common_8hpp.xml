@@ -1136,7 +1136,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="tensor__common_8hpp_1a241ccf94176120442552197f184ba007" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1aa5cdcd96f74bbd816746d7cd4a87f3d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class storage_type</type>
@@ -1149,14 +1149,14 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; operator+</definition>
-        <argsstring>(Coord&lt; Dims... &gt; const &amp;coord, TensorCommon&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
+        <argsstring>(Coord&lt; Dims... &gt; const &amp;coord, TensorCommon&lt; storage_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
         <name>operator+</name>
         <param>
           <type>Coord&lt; Dims... &gt; const &amp;</type>
           <declname>coord</declname>
         </param>
         <param>
-          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
           <declname>tensor</declname>
         </param>
         <briefdescription>
@@ -1185,9 +1185,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="394" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="394" bodyend="400"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="392" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="392" bodyend="398"/>
       </memberdef>
-      <memberdef kind="function" id="tensor__common_8hpp_1ab20ddce7890d758eb2f676e3148d7903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1a30f8d4d64c2318ca45bfe8174dae0e31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class storage_type</type>
@@ -1200,14 +1200,14 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; operator-</definition>
-        <argsstring>(Coord&lt; Dims... &gt; const &amp;coord, TensorCommon&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
+        <argsstring>(Coord&lt; Dims... &gt; const &amp;coord, TensorCommon&lt; storage_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
         <name>operator-</name>
         <param>
           <type>Coord&lt; Dims... &gt; const &amp;</type>
           <declname>coord</declname>
         </param>
         <param>
-          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
           <declname>tensor</declname>
         </param>
         <briefdescription>
@@ -1236,9 +1236,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="411" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="411" bodyend="417"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="409" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="409" bodyend="415"/>
       </memberdef>
-      <memberdef kind="function" id="tensor__common_8hpp_1a8dad1027cbe8844eed5d961c7c7a31cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1acc5ba3037fb59e79ee721bd816fee375" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class storage_type</type>
@@ -1251,14 +1251,14 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp;</type>
         <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp; operator+=</definition>
-        <argsstring>(Coord&lt; Dims... &gt; &amp;coord, TensorCommon&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
+        <argsstring>(Coord&lt; Dims... &gt; &amp;coord, TensorCommon&lt; storage_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
         <name>operator+=</name>
         <param>
           <type>Coord&lt; Dims... &gt; &amp;</type>
           <declname>coord</declname>
         </param>
         <param>
-          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
           <declname>tensor</declname>
         </param>
         <briefdescription>
@@ -1287,9 +1287,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="428" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="428" bodyend="435"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="426" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="426" bodyend="433"/>
       </memberdef>
-      <memberdef kind="function" id="tensor__common_8hpp_1a9dffd3c662313b211f099beb1b5c7326" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1a1c718a8614cd3a9d3b7ef0da756674f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class storage_type</type>
@@ -1302,14 +1302,14 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp;</type>
         <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp; operator-=</definition>
-        <argsstring>(Coord&lt; Dims... &gt; &amp;coord, TensorCommon&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
+        <argsstring>(Coord&lt; Dims... &gt; &amp;coord, TensorCommon&lt; storage_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
         <name>operator-=</name>
         <param>
           <type>Coord&lt; Dims... &gt; &amp;</type>
           <declname>coord</declname>
         </param>
         <param>
-          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
           <declname>tensor</declname>
         </param>
         <briefdescription>
@@ -1338,7 +1338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="446" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="446" bodyend="453"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="444" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="444" bodyend="451"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1a21a60b8d604003f554c790a734471b24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1392,7 +1392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="465" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="465" bodyend="470"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="463" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="463" bodyend="468"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1aaae65328bd77430ec82331d74f33caaa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1446,7 +1446,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="483" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="483" bodyend="488"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="481" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="481" bodyend="486"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1a1789570df938da121c33669df52f4244" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1500,7 +1500,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="501" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="501" bodyend="506"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="499" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="499" bodyend="504"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1a6548a0ef8edf8bae228195e9531b37a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1551,7 +1551,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="515" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="515" bodyend="520"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="513" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="513" bodyend="518"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1ada4db5346b9c20698885d1a189706ad0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1602,7 +1602,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="529" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="529" bodyend="534"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="527" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="527" bodyend="532"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1a8595263316e38b76855bd4e03cb6956c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1641,7 +1641,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="542" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="542" bodyend="547"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="540" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="540" bodyend="545"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1681,7 +1681,7 @@
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>...));</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="44" refid="classTensorCommon_1a3a831b0fd1b2831b2a084ec757adf7f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensorCommon_1a3a831b0fd1b2831b2a084ec757adf7f1" kindref="member">index_set</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;;</highlight></codeline>
+<codeline lineno="44" refid="classTensorCommon_1a6348cc154e670ea1437d2618a2333c90" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensorCommon_1a6348cc154e670ea1437d2618a2333c90" kindref="member">index_set</ref><sp/>=<sp/>ddc::TypeSeq&lt;ValidIndexSet...&gt;;</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="48" refid="classTensorCommon_1a576aa8abdcff0bd9a24f793a41807fc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classTensorCommon_1a576aa8abdcff0bd9a24f793a41807fc1" kindref="member">s_n_elements</ref><sp/>=<sp/>(ddc::type_seq_size_v&lt;ValidIndexSet&gt;<sp/>*<sp/>...);</highlight></codeline>
@@ -1810,9 +1810,9 @@
 <codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor_input,</highlight></codeline>
 <codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::index_sequence&lt;InternalIdx...&gt;)</highlight></codeline>
 <codeline lineno="266"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">InputTensorIndexSet<sp/>=<sp/>ddc::detail::TypeSeq&lt;InputValidIndexSet...&gt;;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">InputTensorIndexSet<sp/>=<sp/>ddc::TypeSeq&lt;InputValidIndexSet...&gt;;</highlight></codeline>
 <codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>((tensor_to_fill.template<sp/>get&lt;<ref refid="namespacetensor__tools_1ad280200ca6b9483f9fd88447bd74a384" kindref="member">tensor_tools::to_tensor_index_element_t</ref>&lt;</highlight></codeline>
-<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OutputValidIndexSet...&gt;,</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;OutputValidIndexSet...&gt;,</highlight></codeline>
 <codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="namespacetensor__tools_1affd5507aa7486fb6952f498e8ed1172c" kindref="member">tensor_tools::get_nth_tensor_index_element_t</ref>&lt;</highlight></codeline>
 <codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InternalIdx,</highlight></codeline>
 <codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InputTensorIndexSet&gt;::IdxTypeSeq&gt;&gt;()</highlight></codeline>
@@ -1832,9 +1832,9 @@
 <codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;InputStorageType,<sp/>InputValidIndexSet...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor_input,</highlight></codeline>
 <codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::index_sequence&lt;InternalIdx...&gt;)</highlight></codeline>
 <codeline lineno="288"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutputTensorIndexSet<sp/>=<sp/>ddc::detail::TypeSeq&lt;OutputValidIndexSet...&gt;;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutputTensorIndexSet<sp/>=<sp/>ddc::TypeSeq&lt;OutputValidIndexSet...&gt;;</highlight></codeline>
 <codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/>((tensor_to_fill.template<sp/>get&lt;<ref refid="namespacetensor__tools_1ad280200ca6b9483f9fd88447bd74a384" kindref="member">tensor_tools::to_tensor_index_element_t</ref>&lt;</highlight></codeline>
-<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OutputValidIndexSet...&gt;,</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;OutputValidIndexSet...&gt;,</highlight></codeline>
 <codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="namespacetensor__tools_1affd5507aa7486fb6952f498e8ed1172c" kindref="member">tensor_tools::get_nth_tensor_index_element_t</ref>&lt;</highlight></codeline>
 <codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InternalIdx,</highlight></codeline>
 <codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>OutputTensorIndexSet&gt;::IdxTypeSeq&gt;&gt;()</highlight></codeline>
@@ -1850,149 +1850,147 @@
 <codeline lineno="310"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>storage_type::element_type&amp;<sp/>get(</highlight></codeline>
 <codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;storage_type,<sp/>ValidIndexSet...&gt;&amp;<sp/>tensor)</highlight></codeline>
 <codeline lineno="312"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor.template<sp/>get&lt;tensor_tools::TensorIndexElement&lt;</highlight></codeline>
-<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;,</highlight></codeline>
-<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>QueryIndexTag...&gt;&gt;();</highlight></codeline>
-<codeline lineno="316"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="317"><highlight class="normal"></highlight></codeline>
-<codeline lineno="324"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>QueryIndexTag,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
-<codeline lineno="325"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>storage_type::element_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>get(</highlight></codeline>
-<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;storage_type,<sp/>ValidIndexSet...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="327"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor.template<sp/>get&lt;tensor_tools::TensorIndexElement&lt;</highlight></codeline>
-<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;,</highlight></codeline>
-<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>QueryIndexTag...&gt;&gt;();</highlight></codeline>
-<codeline lineno="331"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="332"><highlight class="normal"></highlight></codeline>
-<codeline lineno="340"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
-<codeline lineno="341"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>to_coord(</highlight></codeline>
-<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;storage_type,<sp/>ddc::detail::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="343"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;(get&lt;Dims&gt;(tensor)...);</highlight></codeline>
-<codeline lineno="345"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="346"><highlight class="normal"></highlight></codeline>
-<codeline lineno="357"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">InputStorageType,</highlight></codeline>
-<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OutputStorageType,</highlight></codeline>
-<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>OutputValidIndexSet,</highlight></codeline>
-<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>InputValidIndexSet&gt;</highlight></codeline>
-<codeline lineno="362"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>assign_elements(</highlight></codeline>
-<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;OutputStorageType,<sp/>OutputValidIndexSet...&gt;&amp;<sp/>tensor_to_fill,</highlight></codeline>
-<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;InputStorageType,<sp/>InputValidIndexSet...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor_input)</highlight></codeline>
-<codeline lineno="365"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/>n_input_elements</highlight></codeline>
-<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classTensorCommon_1a6b4297c4947e2dd7413dfb9cbb27878b" kindref="member">TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt;::size</ref>();</highlight></codeline>
-<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/>n_output_elements</highlight></codeline>
-<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classTensorCommon_1a6b4297c4947e2dd7413dfb9cbb27878b" kindref="member">TensorCommon&lt;OutputStorageType, OutputValidIndexSet...&gt;::size</ref>();</highlight></codeline>
-<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(n_input_elements<sp/>&lt;<sp/>n_output_elements)<sp/>{</highlight></codeline>
-<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>detail::assign_elements_from_subset(</highlight></codeline>
-<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_fill,</highlight></codeline>
-<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_input,</highlight></codeline>
-<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;n_input_elements&gt;());</highlight></codeline>
-<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>detail::assign_elements_to_subset(</highlight></codeline>
-<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_fill,</highlight></codeline>
-<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_input,</highlight></codeline>
-<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;n_output_elements&gt;());</highlight></codeline>
-<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="381"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor.template<sp/>get&lt;</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_tools::TensorIndexElement&lt;ddc::TypeSeq&lt;ValidIndexSet...&gt;,<sp/>QueryIndexTag...&gt;&gt;();</highlight></codeline>
+<codeline lineno="315"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>QueryIndexTag,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="324"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>storage_type::element_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>get(</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;storage_type,<sp/>ValidIndexSet...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="326"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor.template<sp/>get&lt;</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_tools::TensorIndexElement&lt;ddc::TypeSeq&lt;ValidIndexSet...&gt;,<sp/>QueryIndexTag...&gt;&gt;();</highlight></codeline>
+<codeline lineno="329"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="339"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>to_coord(</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;storage_type,<sp/>ddc::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="341"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;(get&lt;Dims&gt;(tensor)...);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="355"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">InputStorageType,</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OutputStorageType,</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>OutputValidIndexSet,</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>InputValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="360"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>assign_elements(</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;OutputStorageType,<sp/>OutputValidIndexSet...&gt;&amp;<sp/>tensor_to_fill,</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorCommon&lt;InputStorageType,<sp/>InputValidIndexSet...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor_input)</highlight></codeline>
+<codeline lineno="363"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/>n_input_elements</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classTensorCommon_1a6b4297c4947e2dd7413dfb9cbb27878b" kindref="member">TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt;::size</ref>();</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/>n_output_elements</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classTensorCommon_1a6b4297c4947e2dd7413dfb9cbb27878b" kindref="member">TensorCommon&lt;OutputStorageType, OutputValidIndexSet...&gt;::size</ref>();</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(n_input_elements<sp/>&lt;<sp/>n_output_elements)<sp/>{</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>detail::assign_elements_from_subset(</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_fill,</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_input,</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;n_input_elements&gt;());</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>detail::assign_elements_to_subset(</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_to_fill,</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_input,</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;n_output_elements&gt;());</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="379"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"></highlight></codeline>
+<codeline lineno="381"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="382"><highlight class="normal"></highlight></codeline>
-<codeline lineno="383"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="384"><highlight class="normal"></highlight></codeline>
-<codeline lineno="393"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
-<codeline lineno="394"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>operator+(</highlight></codeline>
-<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord,</highlight></codeline>
-<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;storage_type,<sp/>ddc::detail::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="397"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>storage_type::element_type,<sp/>double&gt;);</highlight></codeline>
-<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord)<sp/>+<sp/>ddcHelper::get&lt;Dims&gt;(tensor))...);</highlight></codeline>
-<codeline lineno="400"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="401"><highlight class="normal"></highlight></codeline>
-<codeline lineno="410"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
-<codeline lineno="411"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>operator-(</highlight></codeline>
-<codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord,</highlight></codeline>
-<codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;storage_type,<sp/>ddc::detail::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="414"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>storage_type::element_type,<sp/>double&gt;);</highlight></codeline>
-<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord)<sp/>-<sp/>ddcHelper::get&lt;Dims&gt;(tensor))...);</highlight></codeline>
-<codeline lineno="417"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="418"><highlight class="normal"></highlight></codeline>
-<codeline lineno="427"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
-<codeline lineno="428"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;&amp;<sp/>operator+=(</highlight></codeline>
-<codeline lineno="429"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;&amp;<sp/>coord,</highlight></codeline>
-<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;storage_type,<sp/>ddc::detail::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="431"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>storage_type::element_type,<sp/>double&gt;);</highlight></codeline>
-<codeline lineno="433"><highlight class="normal"><sp/><sp/><sp/><sp/>((ddc::get&lt;Dims&gt;(coord)<sp/>+=<sp/>ddcHelper::get&lt;Dims&gt;(tensor)),<sp/>...);</highlight></codeline>
-<codeline lineno="434"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>coord;</highlight></codeline>
-<codeline lineno="435"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="436"><highlight class="normal"></highlight></codeline>
-<codeline lineno="445"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
-<codeline lineno="446"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;&amp;<sp/>operator-=(</highlight></codeline>
-<codeline lineno="447"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;&amp;<sp/>coord,</highlight></codeline>
-<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;storage_type,<sp/>ddc::detail::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="449"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>storage_type::element_type,<sp/>double&gt;);</highlight></codeline>
-<codeline lineno="451"><highlight class="normal"><sp/><sp/><sp/><sp/>((ddc::get&lt;Dims&gt;(coord)<sp/>-=<sp/>ddcHelper::get&lt;Dims&gt;(tensor)),<sp/>...);</highlight></codeline>
-<codeline lineno="452"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>coord;</highlight></codeline>
-<codeline lineno="453"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="454"><highlight class="normal"></highlight></codeline>
-<codeline lineno="461"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType,</highlight></codeline>
-<codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Oelement_type,</highlight></codeline>
-<codeline lineno="464"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="465"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator*(Oelement_type<sp/>val,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="466"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
-<codeline lineno="468"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>*=<sp/>val;</highlight></codeline>
-<codeline lineno="469"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="470"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="471"><highlight class="normal"></highlight></codeline>
-<codeline lineno="479"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="480"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType,</highlight></codeline>
-<codeline lineno="481"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Oelement_type,</highlight></codeline>
-<codeline lineno="482"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="483"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator*(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>Oelement_type<sp/>val)</highlight></codeline>
-<codeline lineno="484"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
-<codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>*=<sp/>val;</highlight></codeline>
-<codeline lineno="487"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="488"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="489"><highlight class="normal"></highlight></codeline>
-<codeline lineno="497"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="498"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType,</highlight></codeline>
-<codeline lineno="499"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Oelement_type,</highlight></codeline>
-<codeline lineno="500"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="501"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator/(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>Oelement_type<sp/>val)</highlight></codeline>
-<codeline lineno="502"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="503"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
-<codeline lineno="504"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>/=<sp/>val;</highlight></codeline>
-<codeline lineno="505"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="506"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="507"><highlight class="normal"></highlight></codeline>
-<codeline lineno="514"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
-<codeline lineno="515"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator+(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
-<codeline lineno="516"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
-<codeline lineno="518"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>+=<sp/>val;</highlight></codeline>
-<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="520"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="521"><highlight class="normal"></highlight></codeline>
-<codeline lineno="528"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
-<codeline lineno="529"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator-(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
-<codeline lineno="530"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="531"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
-<codeline lineno="532"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>val;</highlight></codeline>
-<codeline lineno="533"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="534"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="535"><highlight class="normal"></highlight></codeline>
-<codeline lineno="541"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
-<codeline lineno="542"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator-(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="543"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="544"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(0);</highlight></codeline>
-<codeline lineno="545"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>tensor;</highlight></codeline>
-<codeline lineno="546"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="547"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="392"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>operator+(</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;storage_type,<sp/>ddc::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="395"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>storage_type::element_type,<sp/>double&gt;);</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord)<sp/>+<sp/>ddcHelper::get&lt;Dims&gt;(tensor))...);</highlight></codeline>
+<codeline lineno="398"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"></highlight></codeline>
+<codeline lineno="408"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="409"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>operator-(</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;storage_type,<sp/>ddc::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="412"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>storage_type::element_type,<sp/>double&gt;);</highlight></codeline>
+<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord)<sp/>-<sp/>ddcHelper::get&lt;Dims&gt;(tensor))...);</highlight></codeline>
+<codeline lineno="415"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"></highlight></codeline>
+<codeline lineno="425"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="426"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;&amp;<sp/>operator+=(</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;storage_type,<sp/>ddc::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="429"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>storage_type::element_type,<sp/>double&gt;);</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"><sp/><sp/><sp/><sp/>((ddc::get&lt;Dims&gt;(coord)<sp/>+=<sp/>ddcHelper::get&lt;Dims&gt;(tensor)),<sp/>...);</highlight></codeline>
+<codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>coord;</highlight></codeline>
+<codeline lineno="433"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="434"><highlight class="normal"></highlight></codeline>
+<codeline lineno="443"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">storage_type,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="444"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;&amp;<sp/>operator-=(</highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="446"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt;storage_type,<sp/>ddc::TypeSeq&lt;Dims...&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="447"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>storage_type::element_type,<sp/>double&gt;);</highlight></codeline>
+<codeline lineno="449"><highlight class="normal"><sp/><sp/><sp/><sp/>((ddc::get&lt;Dims&gt;(coord)<sp/>-=<sp/>ddcHelper::get&lt;Dims&gt;(tensor)),<sp/>...);</highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>coord;</highlight></codeline>
+<codeline lineno="451"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"></highlight></codeline>
+<codeline lineno="459"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="460"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType,</highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Oelement_type,</highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="463"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator*(Oelement_type<sp/>val,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="464"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
+<codeline lineno="466"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>*=<sp/>val;</highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="468"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="469"><highlight class="normal"></highlight></codeline>
+<codeline lineno="477"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="478"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType,</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Oelement_type,</highlight></codeline>
+<codeline lineno="480"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="481"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator*(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>Oelement_type<sp/>val)</highlight></codeline>
+<codeline lineno="482"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
+<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>*=<sp/>val;</highlight></codeline>
+<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="486"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="487"><highlight class="normal"></highlight></codeline>
+<codeline lineno="495"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="496"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType,</highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Oelement_type,</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="499"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator/(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>Oelement_type<sp/>val)</highlight></codeline>
+<codeline lineno="500"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
+<codeline lineno="502"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>/=<sp/>val;</highlight></codeline>
+<codeline lineno="503"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="504"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="505"><highlight class="normal"></highlight></codeline>
+<codeline lineno="512"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="513"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator+(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
+<codeline lineno="514"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="515"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>+=<sp/>val;</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="518"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"></highlight></codeline>
+<codeline lineno="526"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="527"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator-(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
+<codeline lineno="528"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="529"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
+<codeline lineno="530"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>val;</highlight></codeline>
+<codeline lineno="531"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="532"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="533"><highlight class="normal"></highlight></codeline>
+<codeline lineno="539"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="540"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator-(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="541"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="542"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(0);</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>tensor;</highlight></codeline>
+<codeline lineno="544"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="545"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp"/>
   </compounddef>

@@ -705,7 +705,7 @@ template &lt;class ElementType, class TypeSeqValidIndexSet&gt;
 struct ToTensor;
 
 template &lt;class ElementType, class... ValidIndexSet&gt;
-struct ToTensor&lt;ElementType, ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;&gt;
+struct ToTensor&lt;ElementType, ddc::TypeSeq&lt;ValidIndexSet...&gt;&gt;
 {
     using type = Tensor&lt;ElementType, ValidIndexSet...&gt;;
 };

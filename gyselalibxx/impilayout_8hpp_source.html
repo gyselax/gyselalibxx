@@ -586,7 +586,7 @@ class IMPILayout
 public:
     using discrete_domain_type = IdxRangeData;
     using distributed_sub_idx_range = IdxRange&lt;DistributedDim...&gt;;
-    using distributed_type_seq = ddc::detail::TypeSeq&lt;DistributedDim...&gt;;
+    using distributed_type_seq = ddc::TypeSeq&lt;DistributedDim...&gt;;
 
 private:
     using type_seq = typename ddc::to_type_seq_t&lt;discrete_domain_type&gt;;

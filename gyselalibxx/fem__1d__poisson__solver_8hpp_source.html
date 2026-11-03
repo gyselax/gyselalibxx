@@ -677,9 +677,9 @@ private:
     using FEMSplineEvaluator = ddc::SplineEvaluatorND&lt;
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            ddc::detail::TypeSeq&lt;FEMBSplines&gt;,
-            ddc::detail::TypeSeq&lt;GridPDEDim&gt;,
-            ddc::detail::TypeSeq&lt;FEMEvalExtrapolationRule, FEMEvalExtrapolationRule&gt;&gt;;
+            ddc::TypeSeq&lt;FEMBSplines&gt;,
+            ddc::TypeSeq&lt;GridPDEDim&gt;,
+            ddc::TypeSeq&lt;FEMEvalExtrapolationRule, FEMEvalExtrapolationRule&gt;&gt;;
 
     using IdxFEMBSplines = Idx&lt;FEMBSplines&gt;;
 
@@ -713,8 +713,8 @@ private:
     using RHSSplineCoeffMem = DFieldMem&lt;IdxRangeBatchedBSplines, memory_space&gt;;
     using RHSSplineCoeff = typename RHSSplineCoeffMem::span_type;
 
-    using RHSQuadTags = ddc::
-            type_seq_merge_t&lt;typename base_type::batch_tags, ddc::detail::TypeSeq&lt;GridPDEDimQ&gt;&gt;;
+    using RHSQuadTags
+            = ddc::type_seq_merge_t&lt;typename base_type::batch_tags, ddc::TypeSeq&lt;GridPDEDimQ&gt;&gt;;
 
     using IdxRangeRHSQuadrature = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;RHSQuadTags&gt;;
 

@@ -16,6 +16,7 @@ _A placeholder grid used to check that a metric tensor can be evaluated at an in
 
 
 
+Inherits the following classes: ddc::DiscreteDimension
 
 
 

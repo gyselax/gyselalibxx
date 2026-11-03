@@ -12,7 +12,9 @@
 
 #pragma once
 
-class Moments
+#include <ddc/ddc.hpp>
+
+class Moments : ddc::DiscreteDimension
 {
 public:
     using discrete_dimension_type = Moments;

@@ -22,6 +22,11 @@
       <node id="2">
         <label>TriangularBernsteinPolynomialBasis&lt; ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; DiscreteMapping::CoordResult &gt; &gt;, ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; DiscreteMapping::CoordResult &gt; &gt;, Corner1Tag, Corner2Tag, Corner3Tag, C &gt;</label>
         <link refid="classTriangularBernsteinPolynomialBasis"/>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc::DiscreteDimension</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -34,6 +39,11 @@
       <node id="2">
         <label>TriangularBernsteinPolynomialBasis&lt; ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; DiscreteMapping::CoordResult &gt; &gt;, ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; DiscreteMapping::CoordResult &gt; &gt;, Corner1Tag, Corner2Tag, Corner3Tag, C &gt;</label>
         <link refid="classTriangularBernsteinPolynomialBasis"/>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc::DiscreteDimension</label>
       </node>
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="273" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="285" bodyend="286"/>

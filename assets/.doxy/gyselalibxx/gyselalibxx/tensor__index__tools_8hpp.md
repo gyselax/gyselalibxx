@@ -32,6 +32,11 @@
 | namespace | [**tensor\_tools**](namespacetensor__tools.md) <br> |
 
 
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| class | [**TensorIndexElement&lt; ddc::TypeSeq&lt; ValidatingVectorIndexSets... &gt;, Dims... &gt;**](classtensor__tools_1_1TensorIndexElement_3_01ddc_1_1TypeSeq_3_01ValidatingVectorIndexSets_8_8_8_01_4_00_01Dims_8_8_8_01_4.md) &lt;ValidatingVectorIndexSets, Dims&gt;<br>_A class describing an index of a tensor. See the general_ [_**TensorIndexElement**_](classtensor__tools_1_1TensorIndexElement.md) _template for more details._ |
 
 
 

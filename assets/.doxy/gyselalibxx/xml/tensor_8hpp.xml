@@ -1360,7 +1360,7 @@
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ValidIndexSet...&gt;;</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classTensorCommon_1a3a831b0fd1b2831b2a084ec757adf7f1" kindref="member">base_type::index_set</ref>;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classTensorCommon_1a6348cc154e670ea1437d2618a2333c90" kindref="member">base_type::index_set</ref>;</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensorCommon_1affb30d1a9046620f49820775fdfa9245" kindref="member">base_type::rank</ref>;</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
@@ -1432,7 +1432,7 @@
 <codeline lineno="186"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToTensor;</highlight></codeline>
 <codeline lineno="187"><highlight class="normal"></highlight></codeline>
 <codeline lineno="188"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToTensor&lt;ElementType,<sp/>ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;&gt;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToTensor&lt;ElementType,<sp/>ddc::TypeSeq&lt;ValidIndexSet...&gt;&gt;</highlight></codeline>
 <codeline lineno="190"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>ValidIndexSet...&gt;;</highlight></codeline>
 <codeline lineno="192"><highlight class="normal">};</highlight></codeline>

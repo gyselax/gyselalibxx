@@ -74,13 +74,13 @@
 | ---: | :--- |
 |  KOKKOS\_FUNCTION TensorType | [**operator\***](#function-operator) (Oelement\_type val, TensorType const & tensor) <br>_An operator to multiply all the elements of the current tensor by a value._  |
 |  KOKKOS\_FUNCTION TensorType | [**operator\***](#function-operator_1) (TensorType const & tensor, Oelement\_type val) <br>_An operator to multiply all the element of the current tensor by a value._  |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**operator+**](#function-operator_2) (Coord&lt; Dims... &gt; const & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**operator+**](#function-operator_2) (Coord&lt; Dims... &gt; const & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
 |  KOKKOS\_FUNCTION TensorType | [**operator+**](#function-operator_3) (TensorType const & tensor, TensorType const & val) <br>_An operator to add two tensors elementwise._  |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; & | [**operator+=**](#function-operator_4) (Coord&lt; Dims... &gt; & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**operator-**](#function-operator-) (Coord&lt; Dims... &gt; const & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; & | [**operator+=**](#function-operator_4) (Coord&lt; Dims... &gt; & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**operator-**](#function-operator-) (Coord&lt; Dims... &gt; const & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
 |  KOKKOS\_FUNCTION TensorType | [**operator-**](#function-operator-_1) (TensorType const & tensor, TensorType const & val) <br>_An operator to subtract one tensor from another elementwise._  |
 |  KOKKOS\_FUNCTION TensorType | [**operator-**](#function-operator-_2) (TensorType const & tensor) <br>_An operator to get the negation of a tensor elementwise._  |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; & | [**operator-=**](#function-operator-_3) (Coord&lt; Dims... &gt; & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; & | [**operator-=**](#function-operator-_3) (Coord&lt; Dims... &gt; & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
 |  KOKKOS\_FUNCTION TensorType | [**operator/**](#function-operator_5) (TensorType const & tensor, Oelement\_type val) <br>_An operator to divide all the element of the current tensor by a value._  |
 
 
@@ -210,7 +210,7 @@ A new tensor containing the result of the multiplication.
 template<class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord< Dims... > operator+ (
     Coord< Dims... > const & coord,
-    TensorCommon < storage_type, ddc::detail::TypeSeq< Dims... > > const & tensor
+    TensorCommon < storage_type, ddc::TypeSeq< Dims... > > const & tensor
 ) 
 ```
 
@@ -283,7 +283,7 @@ A new tensor containing the result of the addition.
 template<class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord< Dims... > & operator+= (
     Coord< Dims... > & coord,
-    TensorCommon < storage_type, ddc::detail::TypeSeq< Dims... > > const & tensor
+    TensorCommon < storage_type, ddc::TypeSeq< Dims... > > const & tensor
 ) 
 ```
 
@@ -319,7 +319,7 @@ The new coordinate.
 template<class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord< Dims... > operator- (
     Coord< Dims... > const & coord,
-    TensorCommon < storage_type, ddc::detail::TypeSeq< Dims... > > const & tensor
+    TensorCommon < storage_type, ddc::TypeSeq< Dims... > > const & tensor
 ) 
 ```
 
@@ -427,7 +427,7 @@ A new tensor containing the result of the negation.
 template<class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord< Dims... > & operator-= (
     Coord< Dims... > & coord,
-    TensorCommon < storage_type, ddc::detail::TypeSeq< Dims... > > const & tensor
+    TensorCommon < storage_type, ddc::TypeSeq< Dims... > > const & tensor
 ) 
 ```
 

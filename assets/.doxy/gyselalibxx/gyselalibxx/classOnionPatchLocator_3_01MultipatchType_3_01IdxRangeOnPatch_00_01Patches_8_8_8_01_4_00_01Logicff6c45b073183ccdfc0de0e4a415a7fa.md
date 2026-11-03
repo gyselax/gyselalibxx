@@ -35,7 +35,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; | [**MultipatchIdxRanges**](#typedef-multipatchidxranges)  <br>_MultipatchType storing the index range._  |
-| typedef ddc::detail::TypeSeq&lt; Patches... &gt; | [**PatchOrdering**](#typedef-patchordering)  <br>_Sequence ddc::detail::TypeSeq of patch tags._  |
+| typedef ddc::TypeSeq&lt; Patches... &gt; | [**PatchOrdering**](#typedef-patchordering)  <br>_Sequence ddc::TypeSeq of patch tags._  |
 | typedef ExecSpace | [**exec\_space**](#typedef-exec_space)  <br>_The space (CPU/GPU) where the calculations are carried out._  |
 | typedef LogicalToPhysicalMapping | [**get\_mapping\_on\_logical\_dim\_t**](#typedef-get_mapping_on_logical_dim_t)  <br>_Get the type of the mapping from given logical continuous dimensions._  |
 | typedef LogicalToPhysicalMapping | [**get\_mapping\_on\_patch\_t**](#typedef-get_mapping_on_patch_t)  <br>_Get the type of the mapping on the given_ [_**Patch**_](structPatch.md) _._ |
@@ -142,9 +142,9 @@ using OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalT
 
 ### typedef PatchOrdering 
 
-_Sequence ddc::detail::TypeSeq of patch tags._ 
+_Sequence ddc::TypeSeq of patch tags._ 
 ```C++
-using OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::PatchOrdering =  ddc::detail::TypeSeq<Patches...>;
+using OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >::PatchOrdering =  ddc::TypeSeq<Patches...>;
 ```
 
 

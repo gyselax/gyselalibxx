@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::detail::TypeSeq&lt; typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 0, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type, typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 1, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type &gt; | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br>_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._  |
+| typedef ddc::TypeSeq&lt; typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 0, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type, typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 1, Rule &gt;, DataType, Basis, IdxRangeCoeff &gt;::type &gt; | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br>_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._  |
 
 
 
@@ -101,7 +101,7 @@
 
 _Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._ 
 ```C++
-using extrapolation_rule_t =  ddc::detail::TypeSeq<
+using extrapolation_rule_t =  ddc::TypeSeq<
         typename details::ExtrapolationRuleResolver<
                 ddc::type_seq_element_t<0, Rule>,
                 DataType,

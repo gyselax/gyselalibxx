@@ -94,9 +94,9 @@ public:
     using EvaluatorType = ddc::SplineEvaluatorND<
             ExecSpace,
             typename ExecSpace::memory_space,
-            ddc::detail::TypeSeq<Basis>,
-            ddc::detail::TypeSeq<InterpGrid>,
-            ddc::detail::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule>>;
+            ddc::TypeSeq<Basis>,
+            ddc::TypeSeq<InterpGrid>,
+            ddc::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule>>;
 
     static constexpr std::size_t rank()
     {
@@ -227,8 +227,8 @@ class SplineInterpolator2D<
         Basis2,
         InterpGrid1,
         InterpGrid2,
-        ddc::detail::TypeSeq<ExtrapRules1, ExtrapRules2>,
-        ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2>,
+        ddc::TypeSeq<ExtrapRules1, ExtrapRules2>,
+        ddc::TypeSeq<BoundaryClosures1, BoundaryClosures2>,
         Solver>
 {
 private:
@@ -294,9 +294,9 @@ public:
     using EvaluatorType = ddc::SplineEvaluatorND<
             ExecSpace,
             typename ExecSpace::memory_space,
-            ddc::detail::TypeSeq<Basis1, Basis2>,
-            ddc::detail::TypeSeq<InterpGrid1, InterpGrid2>,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<Basis1, Basis2>,
+            ddc::TypeSeq<InterpGrid1, InterpGrid2>,
+            ddc::TypeSeq<
                     MinExtrapolationRule1,
                     MaxExtrapolationRule1,
                     MinExtrapolationRule2,
@@ -422,8 +422,8 @@ class SplineInterpolator3D<
         InterpGrid1,
         InterpGrid2,
         InterpGrid3,
-        ddc::detail::TypeSeq<ExtrapRules1, ExtrapRules2, ExtrapRules3>,
-        ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2, BoundaryClosures3>,
+        ddc::TypeSeq<ExtrapRules1, ExtrapRules2, ExtrapRules3>,
+        ddc::TypeSeq<BoundaryClosures1, BoundaryClosures2, BoundaryClosures3>,
         Solver>
 {
 private:
@@ -513,9 +513,9 @@ public:
     using EvaluatorType = ddc::SplineEvaluatorND<
             ExecSpace,
             typename ExecSpace::memory_space,
-            ddc::detail::TypeSeq<Basis1, Basis2, Basis3>,
-            ddc::detail::TypeSeq<InterpGrid1, InterpGrid2, InterpGrid3>,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<Basis1, Basis2, Basis3>,
+            ddc::TypeSeq<InterpGrid1, InterpGrid2, InterpGrid3>,
+            ddc::TypeSeq<
                     MinExtrapolationRule1,
                     MaxExtrapolationRule1,
                     MinExtrapolationRule2,
@@ -667,7 +667,7 @@ struct SplineInterpolatorResolver<
             Basis2,
             InterpGrid1,
             InterpGrid2,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<
                     extrapolation_rule_t<
                             ExtrapRules1,
                             double,
@@ -678,7 +678,7 @@ struct SplineInterpolatorResolver<
                             double,
                             Basis2,
                             IdxRange<InterpGrid1, InterpGrid2>>>,
-            ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2>,
+            ddc::TypeSeq<BoundaryClosures1, BoundaryClosures2>,
             Solver>;
 };
 
@@ -717,7 +717,7 @@ struct SplineInterpolatorResolver<
             InterpGrid1,
             InterpGrid2,
             InterpGrid3,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<
                     extrapolation_rule_t<
                             ExtrapRules1,
                             double,
@@ -733,7 +733,7 @@ struct SplineInterpolatorResolver<
                             double,
                             Basis3,
                             IdxRange<InterpGrid1, InterpGrid2, InterpGrid3>>>,
-            ddc::detail::TypeSeq<BoundaryClosures1, BoundaryClosures2, BoundaryClosures3>,
+            ddc::TypeSeq<BoundaryClosures1, BoundaryClosures2, BoundaryClosures3>,
             Solver>;
 };
 

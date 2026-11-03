@@ -14,6 +14,7 @@
 
 
 
+Inherits the following classes: ddc::DiscreteDimension
 
 
 Inherited by the following classes: [Species](structSpecies.md)

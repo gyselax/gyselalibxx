@@ -585,7 +585,7 @@ template &lt;class... Interfaces&gt;
 class MultipatchConnectivity
 {
 public:
-    using interface_collection = ddc::detail::TypeSeq&lt;Interfaces...&gt;;
+    using interface_collection = ddc::TypeSeq&lt;Interfaces...&gt;;
 
     using inner_edges
             = strip_outside_edges_t&lt;typename Interfaces::Edge1..., typename Interfaces::Edge2...&gt;;

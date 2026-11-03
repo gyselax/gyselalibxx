@@ -16,7 +16,7 @@ _Class describing Lagrange polynomials on a uniform grid._ [More...](#detailed-d
 
 
 
-Inherits the following classes: detail::UniformLagrangeBasisBase
+Inherits the following classes: detail::UniformLagrangeBasisBase,  ddc::DiscreteDimension
 
 
 

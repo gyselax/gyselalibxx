@@ -11,6 +11,7 @@
 
 
 * `#include <mpi.h>`
+* `#include <ddc/ddc.hpp>`
 * `#include "ddc_aliases.hpp"`
 
 

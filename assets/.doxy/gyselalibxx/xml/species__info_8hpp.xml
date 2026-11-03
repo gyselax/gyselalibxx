@@ -761,7 +761,7 @@
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12" refid="classSpeciesInformation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref></highlight></codeline>
+<codeline lineno="12" refid="classSpeciesInformation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref><sp/>:<sp/>ddc::DiscreteDimension</highlight></codeline>
 <codeline lineno="13"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="16" refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" kindref="member">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>;</highlight></codeline>

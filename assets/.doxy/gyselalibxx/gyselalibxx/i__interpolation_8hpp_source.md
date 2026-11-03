@@ -65,7 +65,7 @@ struct OneSidedPeriodic
     using type = ddc::PeriodicExtrapolationRule<typename Basis::continuous_dimension_type>;
 };
 
-using Periodic = ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
+using Periodic = ddc::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
 
 struct NullValue
 {
@@ -73,7 +73,7 @@ struct NullValue
     using type = ddc::NullExtrapolationRule;
 };
 
-using Null_Null = ddc::detail::TypeSeq<NullValue, NullValue>;
+using Null_Null = ddc::TypeSeq<NullValue, NullValue>;
 
 struct Constant
 {
@@ -88,7 +88,7 @@ struct Constant
                     DataType>>;
 };
 
-using Constant_Constant = ddc::detail::TypeSeq<Constant, Constant>;
+using Constant_Constant = ddc::TypeSeq<Constant, Constant>;
 
 } // namespace ExtrapolationRule
 ```

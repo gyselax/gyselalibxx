@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="447" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="447" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="445" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="445" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b_1ae8e32c71accc098847936d2fcf9eaa55" prot="public" static="no">
         <type>typename <ref refid="structconnectivity__details_1_1CollectGridsAlongDim" kindref="compound">CollectGridsAlongDim</ref>&lt; typename <ref refid="structconnectivity__details_1_1SwapExtremity" kindref="compound">SwapExtremity</ref>&lt; MatchingEdge &gt;::type, InterfaceTypeSeq, insert_pos, <ref refid="structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b_1a77b4c259f8bb4958c7abdeb018b16ab4" kindref="member">NewGridList</ref> &gt;::type</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="451" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="451" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="449" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="449" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -65,7 +65,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="438" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="445" bodyend="456"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="436" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="443" bodyend="454"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b_1a77b4c259f8bb4958c7abdeb018b16ab4" prot="public" virt="non-virtual"><scope>connectivity_details::CollectGridsAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, MatchingEdge, false &gt;</scope><name>NewGridList</name></member>
       <member refid="structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b_1ae8e32c71accc098847936d2fcf9eaa55" prot="public" virt="non-virtual"><scope>connectivity_details::CollectGridsAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, MatchingEdge, false &gt;</scope><name>type</name></member>
