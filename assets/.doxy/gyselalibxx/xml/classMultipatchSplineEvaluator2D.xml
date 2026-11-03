@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="74" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a017bd9abfdec7c21a53cb3c45ed7eae6" prot="public" static="no">
         <templateparamlist>
@@ -106,37 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="79" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a26a762fd50c51c476042b00bb0705d5a" prot="public" static="no">
-        <type>ExecSpace</type>
-        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::exec_space =  ExecSpace</definition>
-        <argsstring></argsstring>
-        <name>exec_space</name>
-        <qualifiedname>MultipatchSplineEvaluator2D::exec_space</qualifiedname>
-        <briefdescription>
-<para>The type of the Kokkos execution space used by this class. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="83" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aa8c2c0c6660a967d9c00725bd9d142cd" prot="public" static="no">
-        <type>MemorySpace</type>
-        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::memory_space =  MemorySpace</definition>
-        <argsstring></argsstring>
-        <name>memory_space</name>
-        <qualifiedname>MultipatchSplineEvaluator2D::memory_space</qualifiedname>
-        <briefdescription>
-<para>The type of the Kokkos memory space used by this class. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="86" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a292ea65ac876b0f331c12925773791fe" prot="public" static="no">
         <templateparamlist>
@@ -166,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="92" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a5f152bddb4de59d7c25fde30e538c8df" prot="public" static="no">
         <templateparamlist>
@@ -196,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="97" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1ad08ecc980aef2d532d97dc29ab78e026" prot="public" static="no">
         <templateparamlist>
@@ -226,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="102" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aa53d94a26dca1d27ed126e7e2417f5b6" prot="public" static="no">
         <templateparamlist>
@@ -256,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="107" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="107" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1acf2f7d67fc154637b394f36d03b6f994" prot="public" static="no">
         <templateparamlist>
@@ -286,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="113" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="113" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a677838125bda3d0078ddb251ab6bf4be" prot="public" static="no">
         <templateparamlist>
@@ -316,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="118" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="111" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a8faa1f7890a7974fc35521d787b509d8" prot="public" static="no">
         <templateparamlist>
@@ -348,16 +318,107 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="123" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="123" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="116" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a9119f42a71e32d73ec5dbf1d7c835962" prot="public" static="no">
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aff863e29ca03fe39087b858d2644469c" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
           </param>
         </templateparamlist>
         <type>typename ValuesOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::discrete_domain_type</type>
-        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::batched_evaluation_idx_range_type =  typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type</definition>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::idx_range_type =  typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>idx_range_type</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the whole discrete domain (dimensions for grids and derivatives). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="123" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aef297acbc20f187e451aa0c4f29e8afb" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>detail::deriv_sub_set_t&lt; ddc::to_type_seq_t&lt; <ref refid="classMultipatchSplineEvaluator2D_1aff863e29ca03fe39087b858d2644469c" kindref="member">idx_range_type</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt; &gt;</type>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::deriv_tags =  detail::deriv_sub_set_t&lt;ddc::to_type_seq_t&lt;idx_range_type&lt;Patch&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_tags</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::deriv_tags</qualifiedname>
+        <briefdescription>
+<para>TypeSeq of the derivative dimensions (contained in <ref refid="classDerivField" kindref="compound">DerivField</ref>). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="128" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1acbf2b63d3ee103a3ce66becfb0dd1fae" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ddc::type_seq_remove_t&lt; ddc::to_type_seq_t&lt; <ref refid="classMultipatchSplineEvaluator2D_1aff863e29ca03fe39087b858d2644469c" kindref="member">idx_range_type</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;, <ref refid="classMultipatchSplineEvaluator2D_1aef297acbc20f187e451aa0c4f29e8afb" kindref="member">deriv_tags</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;</type>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::physical_grids =  ddc::type_seq_remove_t&lt;ddc::to_type_seq_t&lt;idx_range_type&lt;Patch&gt;&gt;, deriv_tags&lt;Patch&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>physical_grids</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::physical_grids</qualifiedname>
+        <briefdescription>
+<para>TypeSeq of the grid dimensions (without derivative dimensions). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="133" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a28a4de9bf8c2c06ef7d3c209204a8671" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt; <ref refid="classMultipatchSplineEvaluator2D_1acbf2b63d3ee103a3ce66becfb0dd1fae" kindref="member">physical_grids</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;</type>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::batched_evaluation_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;physical_grids&lt;Patch&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>batched_evaluation_idx_range_type</name>
         <qualifiedname>MultipatchSplineEvaluator2D::batched_evaluation_idx_range_type</qualifiedname>
@@ -378,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="131" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="131" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="138" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="138" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a51e26da369bbebf3dd616251116eff9d" prot="public" static="no">
         <templateparamlist>
@@ -408,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="137" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="137" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="144" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a88eadb6c054230e2b6b2ce81b03631fe" prot="public" static="no">
         <templateparamlist>
@@ -438,7 +499,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="142" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="142" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="149" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="149" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1ae66dbf2386b7d97c236d83d5babbae78" prot="public" static="no">
         <templateparamlist>
@@ -468,7 +529,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="147" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="147" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="154" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aad2106e82884ea55e8fa063b0d425e0b" prot="public" static="no">
         <templateparamlist>
@@ -488,7 +549,67 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="156" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="156" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="163" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a26a762fd50c51c476042b00bb0705d5a" prot="public" static="no">
+        <type>ExecSpace</type>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::exec_space =  ExecSpace</definition>
+        <argsstring></argsstring>
+        <name>exec_space</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::exec_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos execution space used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="197" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aa8c2c0c6660a967d9c00725bd9d142cd" prot="public" static="no">
+        <type>MemorySpace</type>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::memory_space =  MemorySpace</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::memory_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos memory space used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="200" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a8fe8adcb83a8100e544b6ebbf558ddc8" prot="public" static="no">
+        <type>double</type>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::data_type =  double</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type that the data is saved on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="203" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a9c03247af13b4b70d2da156be1edcc38" prot="public" static="no">
+        <type>Coord&lt; CDim1, CDim2 &gt;</type>
+        <definition>using MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::coord_type =  Coord&lt;CDim1, CDim2&gt;</definition>
+        <argsstring></argsstring>
+        <name>coord_type</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::coord_type</qualifiedname>
+        <briefdescription>
+<para>The ND coordinate type corresponding to the evaluation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="206" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="206" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -504,7 +625,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="160" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="160" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="167" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="167" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a629a9720acf4c00fd4c5155e91fa7d5e" prot="private" static="no">
         <type>MultipatchField&lt; CoordConstFieldOnPatch, Patches... &gt;</type>
@@ -518,7 +639,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="161" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="161" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="168" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="168" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1ac4050ed8eb94c466aeb1121030d5a831" prot="private" static="no">
         <type>MultipatchField&lt; <ref refid="classMultipatchSplineEvaluator2D_1aad2106e82884ea55e8fa063b0d425e0b" kindref="member">SplineCoeffOnPatch</ref>, Patches... &gt;</type>
@@ -532,7 +653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="162" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="162" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="169" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="169" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aa191e7090a05e52eba9356e16fb83fa6" prot="private" static="no">
         <type>ddc::detail::TypeSeq&lt; Patches... &gt;</type>
@@ -546,7 +667,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="165" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="165" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="172" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="172" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a01f81df9f1b249364030995ff3933b27" prot="private" static="no">
         <type><ref refid="classMultipatchSplineEvaluator2D_1aca629c0ba3055e9c2ea60c1e6fc63718" kindref="member">continuous_dimension_type1</ref>&lt; ddc::type_seq_element_t&lt; 0, PatchOrdering &gt; &gt;</type>
@@ -560,7 +681,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="170" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="170" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="177" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="177" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1a475b7f882d164f91805d51efba5f6776" prot="private" static="no">
         <type><ref refid="classMultipatchSplineEvaluator2D_1a017bd9abfdec7c21a53cb3c45ed7eae6" kindref="member">continuous_dimension_type2</ref>&lt; ddc::type_seq_element_t&lt; 0, PatchOrdering &gt; &gt;</type>
@@ -574,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="172" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="172" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="179" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="179" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1af58ace64510ef93c06c506d4dda55010" prot="private" static="no">
         <type>ddc::Deriv&lt; CDim1 &gt;</type>
@@ -588,7 +709,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="175" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="175" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="182" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="182" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1aac646ca92d8e5a5d437363efd3d6d50a" prot="private" static="no">
         <type>ddc::Deriv&lt; CDim2 &gt;</type>
@@ -602,7 +723,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="177" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="177" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="184" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="184" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classMultipatchSplineEvaluator2D_1af9d14ed172fe26b0fc1699eedcb22172" prot="private" static="no">
         <templateparamlist>
@@ -621,7 +742,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="182" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="182" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="189" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="189" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -639,7 +760,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="186" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="186" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="193" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="193" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -655,14 +776,14 @@
         <name>same_evaluation_idx_range_types</name>
         <qualifiedname>MultipatchSplineEvaluator2D::same_evaluation_idx_range_types</qualifiedname>
         <initializer>= std::
-            is_same_v&lt;<ref refid="classMultipatchSplineEvaluator2D_1a8faa1f7890a7974fc35521d787b509d8" kindref="member">evaluation_idx_range_type</ref>&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;, <ref refid="classMultipatchSplineEvaluator2D_1a9119f42a71e32d73ec5dbf1d7c835962" kindref="member">batched_evaluation_idx_range_type</ref>&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;&gt;</initializer>
+            is_same_v&lt;<ref refid="classMultipatchSplineEvaluator2D_1a8faa1f7890a7974fc35521d787b509d8" kindref="member">evaluation_idx_range_type</ref>&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;, <ref refid="classMultipatchSplineEvaluator2D_1a28a4de9bf8c2c06ef7d3c209204a8671" kindref="member">batched_evaluation_idx_range_type</ref>&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;&gt;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="191" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="191" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="217" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="217" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -678,7 +799,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="210" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="210" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="236" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="236" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classMultipatchSplineEvaluator2D_1a09201e5cedab224b51b283ffdd67c6b4" prot="private" static="no" mutable="no">
         <type><ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref> const</type>
@@ -692,7 +813,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="211" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="211" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="237" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="237" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1ab7944d51e021686cdc7a39efba80cab0" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>static constexpr std::size_t MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::rank</qualifiedname>
+        <briefdescription>
+<para>The number of interpolation dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="209" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="209" bodyend="212"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -708,7 +846,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="215" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="241" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a16584f9a052914273a461b38af76ec03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -749,7 +887,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="224" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="224" bodyend="230"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="250" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="250" bodyend="256"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a6d3f057e123cd847109fae5a4e190149" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -807,7 +945,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="250" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="250" bodyend="256"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="276" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="276" bodyend="282"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1aaecde8a4cb5fccb1f10dadf7a09b4300" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -837,7 +975,7 @@
 <parametername direction="out">patches_values</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A MultipatchType of DField to store the values of the splines at the given coordinates. </para>
+<para>A MultipatchType of DField or <ref refid="classDerivField" kindref="compound">DerivField</ref> to store the values of the splines at the given coordinates. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -861,7 +999,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="268" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="268" bodyend="279"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="294" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="294" bodyend="305"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a75d3dd3d7f672b555662d2d2e95b0e69" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -935,7 +1073,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="300" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="300" bodyend="319"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="326" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="326" bodyend="345"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1af00990ffe5c487cb0ba452bea8534153" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -987,7 +1125,7 @@
 <parametername direction="in">deriv_order</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Order (k,l) of the derivatives (e.g. d_x^k d_y^l f). </para>
+<para>Order (k,l) of the derivatives (e.g. d_x^k d_y^l f(x,y)). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -995,7 +1133,7 @@
 <parametername direction="out">patches_deriv</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A MultipatchType of DField to store the derivatives of the splines at the given coordinates. </para>
+<para>A MultipatchType of DField or <ref refid="classDerivField" kindref="compound">DerivField</ref> to store the derivatives of the splines at the given coordinates. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1003,7 +1141,7 @@
 <parametername direction="in">patches_coords</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A MultipatchType of Field of Coordinate storing the coordinates of the meshes. </para>
+<para>A MultipatchType of Field of Coordinate storing the coordinates of the meshes. If patches_deriv is a <ref refid="classDerivField" kindref="compound">DerivField</ref>, the given coordinates can be the coordinates for all function values. The operator will select the correct coordinates. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1019,7 +1157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="338" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="338" bodyend="354"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="366" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="366" bodyend="391"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a6cea2a836a1df080f509a16ce5802688" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1061,24 +1199,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="364" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="364" bodyend="372"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="401" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="401" bodyend="409"/>
       </memberdef>
-      <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a2943c0eeb2071422f89fd05dd8007e16" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1abaeca6fe429a87b51cdd559e59023b43" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class StoringPatch</type>
           </param>
           <param>
-            <type>class IdxDeriv</type>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::apply_evaluator</definition>
-        <argsstring>(IdxDeriv const &amp;deriv_order, ValuesOnPatch&lt; StoringPatch &gt; const &amp;patch_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const &amp;patch_coords, MultipatchSplineCoeff const patches_splines) const</argsstring>
-        <name>apply_evaluator</name>
-        <qualifiedname>MultipatchSplineEvaluator2D::apply_evaluator</qualifiedname>
+        <definition>void MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::apply_evaluator_field</definition>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, ValuesOnPatch&lt; StoringPatch &gt; const &amp;patch_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const &amp;patch_coords, MultipatchSplineCoeff const patches_splines) const</argsstring>
+        <name>apply_evaluator_field</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::apply_evaluator_field</qualifiedname>
         <param>
-          <type>IdxDeriv const &amp;</type>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
           <declname>deriv_order</declname>
         </param>
         <param>
@@ -1094,7 +1234,7 @@
           <declname>patches_splines</declname>
         </param>
         <briefdescription>
-<para>Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Needed public for functions on GPU. </para>
+<para>Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Specialisation for patch_values on DField. Needed public for functions on GPU. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
@@ -1151,7 +1291,99 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="393" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="393" bodyend="423"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="430" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="430" bodyend="461"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1afd7f0d07328729dce891f55d0dd82a5b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class StoringPatch</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::apply_evaluator_deriv_field</definition>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, ValuesOnPatch&lt; StoringPatch &gt; const &amp;patch_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const &amp;patch_coords, MultipatchSplineCoeff const patches_splines) const</argsstring>
+        <name>apply_evaluator_deriv_field</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::apply_evaluator_deriv_field</qualifiedname>
+        <param>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>ValuesOnPatch&lt; StoringPatch &gt; const &amp;</type>
+          <declname>patch_values</declname>
+        </param>
+        <param>
+          <type>CoordConstFieldOnPatch&lt; StoringPatch &gt; const &amp;</type>
+          <declname>patch_coords</declname>
+        </param>
+        <param>
+          <type>MultipatchSplineCoeff const</type>
+          <declname>patches_splines</declname>
+        </param>
+        <briefdescription>
+<para>Compute the derivatives of a given patch at the coordinates defined on the given patch. Specialisation for patch_values on <ref refid="classDerivField" kindref="compound">DerivField</ref>. Needed public for functions on GPU. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StoringPatch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type where the given coordinates are stored. They are not especially physically located on this patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Derivative dimension types, it can be on the first dimension, the second or both. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Order (k,l) of the derivatives (e.g. d_x^k d_y^l f). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">patch_values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classDerivField" kindref="compound">DerivField</ref> of values and derivatives of the function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patch_coords</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ConstField of coordinates defined on the StoringPatch and where we want to evaluate the function or derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_splines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchType of spline coefficients of the splines on every patches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="478" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="478" bodyend="551"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a053be081cbf738651cad0794dce5e579" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1206,7 +1438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="431" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="431" bodyend="466"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="560" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="560" bodyend="595"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -1250,7 +1482,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="475" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="475" bodyend="516"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="604" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="604" bodyend="645"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1aea82ea7e1fdc1cea7b38d5726c45e621" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION int</type>
@@ -1269,7 +1501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="523" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="523" bodyend="528"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="652" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="652" bodyend="657"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a6a66ac0eab058439ee54e16581353932" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1293,7 +1525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="532" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="532" bodyend="544"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="661" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="661" bodyend="673"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a19cb998e1d766fa8836f4556a2893034" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1333,7 +1565,30 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="552" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="552" bodyend="627"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="681" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="681" bodyend="756"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classMultipatchSplineEvaluator2D_1a0cefc4f9fa8129e406460a42ab96f554" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>Idx&lt; DerivDims... &gt;</type>
+        <definition>static Idx&lt; DerivDims... &gt; MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;::order_zero</definition>
+        <argsstring>()</argsstring>
+        <name>order_zero</name>
+        <qualifiedname>MultipatchSplineEvaluator2D::order_zero</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="760" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="760" bodyend="763"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1408,7 +1663,7 @@
 <parametername>ValuesOnPatch</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A Field type storing the evaluated values of the splines. Template on the <ref refid="structPatch" kindref="compound">Patch</ref>. </para>
+<para>A Field or <ref refid="classDerivField" kindref="compound">DerivField</ref> type storing the evaluated values of the splines. Template on the <ref refid="structPatch" kindref="compound">Patch</ref>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1430,20 +1685,24 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="68" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="69" bodyend="629"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" line="69" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp" bodystart="70" bodyend="766"/>
     <listofallmembers>
-      <member refid="classMultipatchSplineEvaluator2D_1a2943c0eeb2071422f89fd05dd8007e16" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>apply_evaluator</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1afd7f0d07328729dce891f55d0dd82a5b" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>apply_evaluator_deriv_field</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1abaeca6fe429a87b51cdd559e59023b43" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>apply_evaluator_field</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a053be081cbf738651cad0794dce5e579" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>apply_integrate</name></member>
-      <member refid="classMultipatchSplineEvaluator2D_1a9119f42a71e32d73ec5dbf1d7c835962" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>batched_evaluation_idx_range_type</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1a28a4de9bf8c2c06ef7d3c209204a8671" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>batched_evaluation_idx_range_type</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1ad08ecc980aef2d532d97dc29ab78e026" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>bsplines_type1</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1aa53d94a26dca1d27ed126e7e2417f5b6" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>bsplines_type2</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a01f81df9f1b249364030995ff3933b27" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>CDim1</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a475b7f882d164f91805d51efba5f6776" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>CDim2</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1aca629c0ba3055e9c2ea60c1e6fc63718" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>continuous_dimension_type1</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a017bd9abfdec7c21a53cb3c45ed7eae6" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>continuous_dimension_type2</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1a9c03247af13b4b70d2da156be1edcc38" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>coord_type</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1af9d14ed172fe26b0fc1699eedcb22172" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>CoordConstFieldOnPatch</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1a8fe8adcb83a8100e544b6ebbf558ddc8" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>data_type</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a75d3dd3d7f672b555662d2d2e95b0e69" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>deriv</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1af00990ffe5c487cb0ba452bea8534153" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>deriv</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1aef297acbc20f187e451aa0c4f29e8afb" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>deriv_tags</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1af58ace64510ef93c06c506d4dda55010" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>DerivDim1</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1aac646ca92d8e5a5d437363efd3d6d50a" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>DerivDim2</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a19cb998e1d766fa8836f4556a2893034" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>eval_no_bc</name></member>
@@ -1454,6 +1713,7 @@
       <member refid="classMultipatchSplineEvaluator2D_1a677838125bda3d0078ddb251ab6bf4be" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>evaluation_idx_range_type2</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a26a762fd50c51c476042b00bb0705d5a" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>exec_space</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1aea82ea7e1fdc1cea7b38d5726c45e621" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>get_patch_idx</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1aff863e29ca03fe39087b858d2644469c" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>idx_range_type</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a6cea2a836a1df080f509a16ce5802688" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>integrate</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a09201e5cedab224b51b283ffdd67c6b4" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>m_extrapolation_rule</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a204570b08d5477a3b14cd372d38bafb5" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>m_patch_locator</name></member>
@@ -1465,7 +1725,10 @@
       <member refid="classMultipatchSplineEvaluator2D_1af1908eecf950a49dcee5c0606cf4659e" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>n_patches</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a6d3f057e123cd847109fae5a4e190149" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>operator()</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1aaecde8a4cb5fccb1f10dadf7a09b4300" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>operator()</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1a0cefc4f9fa8129e406460a42ab96f554" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>order_zero</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1aa191e7090a05e52eba9356e16fb83fa6" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>PatchOrdering</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1acbf2b63d3ee103a3ce66becfb0dd1fae" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>physical_grids</name></member>
+      <member refid="classMultipatchSplineEvaluator2D_1ab7944d51e021686cdc7a39efba80cab0" prot="public" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>rank</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a3bcd50970e9d3c90d2d3c06f507dae6e" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>recursive_dispatch_patch_function</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a6a66ac0eab058439ee54e16581353932" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>replace_periodic_coord_inside</name></member>
       <member refid="classMultipatchSplineEvaluator2D_1a77936c150c2f85fd87075cbc5ab031ed" prot="private" virt="non-virtual"><scope>MultipatchSplineEvaluator2D</scope><name>same_evaluation_idx_range_types</name></member>

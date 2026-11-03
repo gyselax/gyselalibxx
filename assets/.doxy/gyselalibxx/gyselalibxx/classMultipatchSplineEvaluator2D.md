@@ -35,18 +35,23 @@ _A class to evaluate all the splines of all the patches at once._ [More...](#det
 | Type | Name |
 | ---: | :--- |
 | typedef DConstField&lt; [**spline\_idx\_range\_type**](classMultipatchSplineEvaluator2D.md#typedef-spline_idx_range_type)&lt; [**Patch**](structPatch.md) &gt;, MemorySpace &gt; | [**SplineCoeffOnPatch**](#typedef-splinecoeffonpatch)  <br>_Type for MultipatchType: A field of 2D spline coefficients for a non-batched spline defined on both of the_ [_**Patch**_](structPatch.md) _'s logical dimensions. Needed public for functions on GPU._ |
-| typedef typename ValuesOnPatch&lt; [**Patch**](structPatch.md) &gt;::discrete\_domain\_type | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_The type of the whole domain representing evaluation points._  |
+| typedef typename ddc::detail::convert\_type\_seq\_to\_discrete\_domain\_t&lt; [**physical\_grids**](classMultipatchSplineEvaluator2D.md#typedef-physical_grids)&lt; [**Patch**](structPatch.md) &gt; &gt; | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_The type of the whole domain representing evaluation points._  |
 | typedef BSpline1OnPatch&lt; [**Patch**](structPatch.md) &gt; | [**bsplines\_type1**](#typedef-bsplines_type1)  <br>_The discrete dimension representing the B-splines along first dimension._  |
 | typedef BSpline2OnPatch&lt; [**Patch**](structPatch.md) &gt; | [**bsplines\_type2**](#typedef-bsplines_type2)  <br>_The discrete dimension representing the B-splines along second dimension._  |
 | typedef typename BSpline1OnPatch&lt; [**Patch**](structPatch.md) &gt;::continuous\_dimension\_type | [**continuous\_dimension\_type1**](#typedef-continuous_dimension_type1)  <br>_The type of the first evaluation continuous dimension used by this class._  |
 | typedef typename BSpline2OnPatch&lt; [**Patch**](structPatch.md) &gt;::continuous\_dimension\_type | [**continuous\_dimension\_type2**](#typedef-continuous_dimension_type2)  <br>_The type of the second evaluation continuous dimension used by this class._  |
+| typedef Coord&lt; CDim1, CDim2 &gt; | [**coord\_type**](#typedef-coord_type)  <br>_The ND coordinate type corresponding to the evaluation mesh._  |
+| typedef double | [**data\_type**](#typedef-data_type)  <br>_The data type that the data is saved on._  |
+| typedef detail::deriv\_sub\_set\_t&lt; ddc::to\_type\_seq\_t&lt; [**idx\_range\_type**](classMultipatchSplineEvaluator2D.md#typedef-idx_range_type)&lt; [**Patch**](structPatch.md) &gt; &gt; &gt; | [**deriv\_tags**](#typedef-deriv_tags)  <br>_TypeSeq of the derivative dimensions (contained in_ [_**DerivField**_](classDerivField.md) _)._ |
 | typedef Grid1OnPatch&lt; [**Patch**](structPatch.md) &gt; | [**evaluation\_discrete\_dimension\_type1**](#typedef-evaluation_discrete_dimension_type1)  <br>_The type of the first discrete dimension of interest used by this class._  |
 | typedef Grid2OnPatch&lt; [**Patch**](structPatch.md) &gt; | [**evaluation\_discrete\_dimension\_type2**](#typedef-evaluation_discrete_dimension_type2)  <br>_The type of the second discrete dimension of interest used by this class._  |
 | typedef IdxRange&lt; [**evaluation\_discrete\_dimension\_type1**](classMultipatchSplineEvaluator2D.md#typedef-evaluation_discrete_dimension_type1)&lt; [**Patch**](structPatch.md) &gt;, [**evaluation\_discrete\_dimension\_type2**](classMultipatchSplineEvaluator2D.md#typedef-evaluation_discrete_dimension_type2)&lt; [**Patch**](structPatch.md) &gt; &gt; | [**evaluation\_idx\_range\_type**](#typedef-evaluation_idx_range_type)  <br>_The type of the domain for the 2D evaluation mesh used by this class._  |
 | typedef IdxRange&lt; [**evaluation\_discrete\_dimension\_type1**](classMultipatchSplineEvaluator2D.md#typedef-evaluation_discrete_dimension_type1)&lt; [**Patch**](structPatch.md) &gt; &gt; | [**evaluation\_idx\_range\_type1**](#typedef-evaluation_idx_range_type1)  <br>_The type of the domain for the 1D evaluation mesh along first dimension used by this class._  |
 | typedef IdxRange&lt; [**evaluation\_discrete\_dimension\_type2**](classMultipatchSplineEvaluator2D.md#typedef-evaluation_discrete_dimension_type2)&lt; [**Patch**](structPatch.md) &gt; &gt; | [**evaluation\_idx\_range\_type2**](#typedef-evaluation_idx_range_type2)  <br>_The type of the domain for the 1D evaluation mesh along second dimension used by this class._  |
 | typedef ExecSpace | [**exec\_space**](#typedef-exec_space)  <br>_The type of the Kokkos execution space used by this class._  |
+| typedef typename ValuesOnPatch&lt; [**Patch**](structPatch.md) &gt;::discrete\_domain\_type | [**idx\_range\_type**](#typedef-idx_range_type)  <br>_The type of the whole discrete domain (dimensions for grids and derivatives)._  |
 | typedef MemorySpace | [**memory\_space**](#typedef-memory_space)  <br>_The type of the Kokkos memory space used by this class._  |
+| typedef ddc::type\_seq\_remove\_t&lt; ddc::to\_type\_seq\_t&lt; [**idx\_range\_type**](classMultipatchSplineEvaluator2D.md#typedef-idx_range_type)&lt; [**Patch**](structPatch.md) &gt; &gt;, [**deriv\_tags**](classMultipatchSplineEvaluator2D.md#typedef-deriv_tags)&lt; [**Patch**](structPatch.md) &gt; &gt; | [**physical\_grids**](#typedef-physical_grids)  <br>_TypeSeq of the grid dimensions (without derivative dimensions)._  |
 | typedef IdxRange&lt; [**bsplines\_type1**](classMultipatchSplineEvaluator2D.md#typedef-bsplines_type1)&lt; [**Patch**](structPatch.md) &gt;, [**bsplines\_type2**](classMultipatchSplineEvaluator2D.md#typedef-bsplines_type2)&lt; [**Patch**](structPatch.md) &gt; &gt; | [**spline\_idx\_range\_type**](#typedef-spline_idx_range_type)  <br>_The type of the 2D spline domain corresponding to the dimensions of interest._  |
 | typedef IdxRange&lt; [**bsplines\_type1**](classMultipatchSplineEvaluator2D.md#typedef-bsplines_type1)&lt; [**Patch**](structPatch.md) &gt; &gt; | [**spline\_idx\_range\_type1**](#typedef-spline_idx_range_type1)  <br>_The type of the 1D spline domain corresponding to the first dimension of interest._  |
 | typedef IdxRange&lt; [**bsplines\_type2**](classMultipatchSplineEvaluator2D.md#typedef-bsplines_type2)&lt; [**Patch**](structPatch.md) &gt; &gt; | [**spline\_idx\_range\_type2**](#typedef-spline_idx_range_type2)  <br>_The type of the 1D spline domain corresponding to the second dimension of interest._  |
@@ -80,7 +85,8 @@ _A class to evaluate all the splines of all the patches at once._ [More...](#det
 | Type | Name |
 | ---: | :--- |
 |   | [**MultipatchSplineEvaluator2D**](#function-multipatchsplineevaluator2d) (PatchLocator const & patch\_locator, [**ExtrapolationRule**](namespaceExtrapolationRule.md) const & extrapolation\_rule) <br>_Instantiate a_ [_**MultipatchSplineEvaluator2D**_](classMultipatchSplineEvaluator2D.md) _._ |
-|  void | [**apply\_evaluator**](#function-apply_evaluator) (IdxDeriv const & deriv\_order, ValuesOnPatch&lt; StoringPatch &gt; const & patch\_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const & patch\_coords, MultipatchSplineCoeff const patches\_splines) const<br>_Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Needed public for functions on GPU._  |
+|  void | [**apply\_evaluator\_deriv\_field**](#function-apply_evaluator_deriv_field) (Idx&lt; DerivDims... &gt; const & deriv\_order, ValuesOnPatch&lt; StoringPatch &gt; const & patch\_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const & patch\_coords, MultipatchSplineCoeff const patches\_splines) const<br>_Compute the derivatives of a given patch at the coordinates defined on the given patch. Specialisation for patch\_values on_ [_**DerivField**_](classDerivField.md) _. Needed public for functions on GPU._ |
+|  void | [**apply\_evaluator\_field**](#function-apply_evaluator_field) (Idx&lt; DerivDims... &gt; const & deriv\_order, ValuesOnPatch&lt; StoringPatch &gt; const & patch\_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const & patch\_coords, MultipatchSplineCoeff const patches\_splines) const<br>_Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Specialisation for patch\_values on DField. Needed public for functions on GPU._  |
 |  void | [**apply\_integrate**](#function-apply_integrate) (double & integral, [**SplineCoeffOnPatch**](classMultipatchSplineEvaluator2D.md#typedef-splinecoeffonpatch)&lt; [**Patch**](structPatch.md) &gt; const & spline\_coef) const<br>_Integrate the spline defined on the given patch._  |
 |  KOKKOS\_FUNCTION double | [**deriv**](#function-deriv-12) (Idx&lt; DerivDims... &gt; const & deriv\_order, Coord&lt; CDim1, CDim2 &gt; const & coord\_eval, MultipatchSplineCoeff const & patches\_splines) const<br>_Differentiate 2D splines (described by their spline coefficients) at a given coordinate along a specified dimension of interest._  |
 |  void | [**deriv**](#function-deriv-22) (Idx&lt; DerivDims... &gt; const & deriv\_order, MultipatchValues const & patches\_deriv, MultipatchCoordField const & patches\_coords, MultipatchSplineCoeff const & patches\_splines) const<br>_Differentiate 2D splines (described by their spline coefficients) on a meshes along first dimension of interest._  |
@@ -90,6 +96,11 @@ _A class to evaluate all the splines of all the patches at once._ [More...](#det
 |   | [**~MultipatchSplineEvaluator2D**](#function-multipatchsplineevaluator2d) () = default<br> |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions._  |
 
 
 
@@ -154,7 +165,7 @@ This operator only works for patches defined on the same continuous dimensions!
 * `Grid1OnPatch` A type alias which provides the first Grid type along which the interpolation points of the splines are found template on the [**Patch**](structPatch.md). 
 * `Grid2OnPatch` A type alias which provides the second Grid type along which the interpolation points of the splines are found template on the [**Patch**](structPatch.md). 
 * [**ExtrapolationRule**](namespaceExtrapolationRule.md) The extrapolation rule type for outside of the global domain. 
-* `ValuesOnPatch` A Field type storing the evaluated values of the splines. Template on the [**Patch**](structPatch.md). 
+* `ValuesOnPatch` A Field or [**DerivField**](classDerivField.md) type storing the evaluated values of the splines. Template on the [**Patch**](structPatch.md). 
 * `PatchLocator` A operator that finds the patch where a given coordinate is physically located. 
 * `Patches` A variadic template of all the patches. 
 
@@ -185,7 +196,8 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 _The type of the whole domain representing evaluation points._ 
 ```C++
-using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::batched_evaluation_idx_range_type =  typename ValuesOnPatch<Patch>::discrete_domain_type;
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::batched_evaluation_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_grids<Patch>>;
 ```
 
 
@@ -286,6 +298,59 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 _The type of the second evaluation continuous dimension used by this class._ 
 ```C++
 using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::continuous_dimension_type2 =  typename BSpline2OnPatch<Patch>::continuous_dimension_type;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* [**Patch**](structPatch.md) [**Patch**](structPatch.md) type. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### typedef coord\_type 
+
+_The ND coordinate type corresponding to the evaluation mesh._ 
+```C++
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::coord_type =  Coord<CDim1, CDim2>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef data\_type 
+
+_The data type that the data is saved on._ 
+```C++
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::data_type =  double;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef deriv\_tags 
+
+_TypeSeq of the derivative dimensions (contained in_ [_**DerivField**_](classDerivField.md) _)._
+```C++
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::deriv_tags =  detail::deriv_sub_set_t<ddc::to_type_seq_t<idx_range_type<Patch>>>;
 ```
 
 
@@ -447,6 +512,31 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 
 
+### typedef idx\_range\_type 
+
+_The type of the whole discrete domain (dimensions for grids and derivatives)._ 
+```C++
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::idx_range_type =  typename ValuesOnPatch<Patch>::discrete_domain_type;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* [**Patch**](structPatch.md) [**Patch**](structPatch.md) type. 
+
+
+
+
+        
+
+<hr>
+
+
+
 ### typedef memory\_space 
 
 _The type of the Kokkos memory space used by this class._ 
@@ -456,6 +546,31 @@ using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpl
 
 
 
+
+<hr>
+
+
+
+### typedef physical\_grids 
+
+_TypeSeq of the grid dimensions (without derivative dimensions)._ 
+```C++
+using MultipatchSplineEvaluator2D< ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches >::physical_grids =  ddc::type_seq_remove_t<ddc::to_type_seq_t<idx_range_type<Patch>>, deriv_tags<Patch>>;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* [**Patch**](structPatch.md) [**Patch**](structPatch.md) type. 
+
+
+
+
+        
 
 <hr>
 
@@ -583,13 +698,55 @@ inline MultipatchSplineEvaluator2D::MultipatchSplineEvaluator2D (
 
 
 
-### function apply\_evaluator 
+### function apply\_evaluator\_deriv\_field 
 
-_Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Needed public for functions on GPU._ 
+_Compute the derivatives of a given patch at the coordinates defined on the given patch. Specialisation for patch\_values on_ [_**DerivField**_](classDerivField.md) _. Needed public for functions on GPU._
 ```C++
-template<class StoringPatch, class IdxDeriv>
-inline void MultipatchSplineEvaluator2D::apply_evaluator (
-    IdxDeriv const & deriv_order,
+template<class StoringPatch, class... DerivDims>
+inline void MultipatchSplineEvaluator2D::apply_evaluator_deriv_field (
+    Idx< DerivDims... > const & deriv_order,
+    ValuesOnPatch< StoringPatch > const & patch_values,
+    CoordConstFieldOnPatch< StoringPatch > const & patch_coords,
+    MultipatchSplineCoeff const patches_splines
+) const
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `StoringPatch` [**Patch**](structPatch.md) type where the given coordinates are stored. They are not especially physically located on this patch. 
+* `DerivDims` Derivative dimension types, it can be on the first dimension, the second or both. 
+
+
+
+**Parameters:**
+
+
+* `deriv_order` Order (k,l) of the derivatives (e.g. d\_x^k d\_y^l f). 
+* `patch_values` [**DerivField**](classDerivField.md) of values and derivatives of the function. 
+* `patch_coords` ConstField of coordinates defined on the StoringPatch and where we want to evaluate the function or derivative. 
+* `patches_splines` MultipatchType of spline coefficients of the splines on every patches. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function apply\_evaluator\_field 
+
+_Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Specialisation for patch\_values on DField. Needed public for functions on GPU._ 
+```C++
+template<class StoringPatch, class... DerivDims>
+inline void MultipatchSplineEvaluator2D::apply_evaluator_field (
+    Idx< DerivDims... > const & deriv_order,
     ValuesOnPatch< StoringPatch > const & patch_values,
     CoordConstFieldOnPatch< StoringPatch > const & patch_coords,
     MultipatchSplineCoeff const patches_splines
@@ -755,9 +912,9 @@ The derivatives cannot be computed outside of the domain.
 **Parameters:**
 
 
-* `deriv_order` Order (k,l) of the derivatives (e.g. d\_x^k d\_y^l f). 
-* `patches_deriv` A MultipatchType of DField to store the derivatives of the splines at the given coordinates. 
-* `patches_coords` A MultipatchType of Field of Coordinate storing the coordinates of the meshes. 
+* `deriv_order` Order (k,l) of the derivatives (e.g. d\_x^k d\_y^l f(x,y)). 
+* `patches_deriv` A MultipatchType of DField or [**DerivField**](classDerivField.md) to store the derivatives of the splines at the given coordinates. 
+* `patches_coords` A MultipatchType of Field of Coordinate storing the coordinates of the meshes. If patches\_deriv is a [**DerivField**](classDerivField.md), the given coordinates can be the coordinates for all function values. The operator will select the correct coordinates. 
 * `patches_splines` A MultipatchType of DField storing the 2D spline coefficients. 
 
 
@@ -869,7 +1026,7 @@ See MultipatchSplineEvaluatorOperator.
 **Parameters:**
 
 
-* `patches_values` A MultipatchType of DField to store the values of the splines at the given coordinates. 
+* `patches_values` A MultipatchType of DField or [**DerivField**](classDerivField.md) to store the values of the splines at the given coordinates. 
 * `patches_coords` A MultipatchType of Field of Coordinate storing the coordinates of the meshes. 
 * `patches_splines` A MultipatchType of DField storing the 2D spline coefficients. 
 
@@ -886,6 +1043,22 @@ See MultipatchSplineEvaluatorOperator.
 
 ```C++
 MultipatchSplineEvaluator2D::~MultipatchSplineEvaluator2D () = default
+```
+
+
+
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function rank 
+
+_The number of interpolation dimensions._ 
+```C++
+static inline std::size_t MultipatchSplineEvaluator2D::rank () 
 ```
 
 

@@ -18,6 +18,7 @@
 
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "deriv_details.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 #include "utils_patch_locators.hpp"
@@ -49,12 +50,6 @@ public:
     template <class Patch>
     using continuous_dimension_type2 = typename BSpline2OnPatch<Patch>::continuous_dimension_type;
 
-
-    using exec_space = ExecSpace;
-
-    using memory_space = MemorySpace;
-
-
     template <class Patch>
     using evaluation_discrete_dimension_type1 = Grid1OnPatch<Patch>;
 
@@ -79,10 +74,19 @@ public:
             evaluation_discrete_dimension_type1<Patch>,
             evaluation_discrete_dimension_type2<Patch>>;
 
+    template <class Patch>
+    using idx_range_type = typename ValuesOnPatch<Patch>::discrete_domain_type;
 
     template <class Patch>
-    using batched_evaluation_idx_range_type = typename ValuesOnPatch<Patch>::discrete_domain_type;
+    using deriv_tags = detail::deriv_sub_set_t<ddc::to_type_seq_t<idx_range_type<Patch>>>;
 
+    template <class Patch>
+    using physical_grids
+            = ddc::type_seq_remove_t<ddc::to_type_seq_t<idx_range_type<Patch>>, deriv_tags<Patch>>;
+
+    template <class Patch>
+    using batched_evaluation_idx_range_type =
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_grids<Patch>>;
 
     template <class Patch>
     using spline_idx_range_type1 = IdxRange<bsplines_type1<Patch>>;
@@ -126,6 +130,20 @@ private:
 
 public:
     static constexpr std::size_t n_patches = ddc::type_seq_size_v<PatchOrdering>;
+
+public:
+    using exec_space = ExecSpace;
+
+    using memory_space = MemorySpace;
+
+    using data_type = double;
+
+    using coord_type = Coord<CDim1, CDim2>;
+
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
 
 private:
     // Asserts -----------------------------------------------------------------------------------
@@ -180,7 +198,7 @@ public:
             MultipatchCoordField const& patches_coords,
             MultipatchSplineCoeff const& patches_splines) const
     {
-        (apply_evaluator<Patches>(
+        (apply_evaluator_field<Patches>(
                  Idx<>(),
                  patches_values.template get<Patches>(),
                  patches_coords.template get<Patches>(),
@@ -223,12 +241,21 @@ public:
                 (ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<DerivDim1, DerivDim2>> && ...),
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
                 "(same dimensions for all the patches).");
-        (apply_evaluator<Patches>(
-                 deriv_order,
-                 patches_deriv.template get<Patches>(),
-                 patches_coords.template get<Patches>(),
-                 patches_splines),
-         ...);
+        if constexpr ((is_deriv_field_v<ValuesOnPatch<Patches>> && ...)) {
+            (apply_evaluator_deriv_field<Patches>(
+                     deriv_order,
+                     patches_deriv.template get<Patches>(),
+                     patches_coords.template get<Patches>(),
+                     patches_splines),
+             ...);
+        } else {
+            (apply_evaluator_field<Patches>(
+                     deriv_order,
+                     patches_deriv.template get<Patches>(),
+                     patches_coords.template get<Patches>(),
+                     patches_splines),
+             ...);
+        }
     }
 
     // Integrate operator ------------------------------------------------------------------------
@@ -246,9 +273,9 @@ public:
 public:
     // Apply functions to manage the values on each patch. ---------------------------------------
 
-    template <class StoringPatch, class IdxDeriv>
-    void apply_evaluator(
-            IdxDeriv const& deriv_order,
+    template <class StoringPatch, class... DerivDims>
+    void apply_evaluator_field(
+            Idx<DerivDims...> const& deriv_order,
             ValuesOnPatch<StoringPatch> const& patch_values,
             CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
             MultipatchSplineCoeff const patches_splines) const
@@ -259,25 +286,103 @@ public:
                 typename batched_evaluation_idx_range_type<StoringPatch>::discrete_element_type;
         batched_evaluation_idx_range_type<StoringPatch> idx_range = get_idx_range(patch_values);
 
+        const bool is_derivative = (deriv_order != order_zero<DerivDims...>());
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 exec_space(),
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {
-                    Coord<CDim1, CDim2> const coord = patch_coords(idx);
-                    int const patch_idx = get_patch_idx(coord);
-                    if (patch_idx < 0 && !(std::is_same_v<IdxDeriv, Idx<>>)) {
+                    int const patch_idx = get_patch_idx(patch_coords(idx));
+                    if (patch_idx < 0 && is_derivative) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
                                       "No extrapolation rule for derivatives. \n");
                     }
                     patch_values(idx) = recursive_dispatch_patch_function(
                             deriv_order,
-                            coord,
+                            patch_coords(idx),
                             patches_splines,
                             patch_idx);
                 });
     }
+
+    template <class StoringPatch, class... DerivDims>
+    void apply_evaluator_deriv_field(
+            Idx<DerivDims...> const& deriv_order,
+            ValuesOnPatch<StoringPatch> const& patch_values,
+            CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
+            MultipatchSplineCoeff const patches_splines) const
+    {
+        if constexpr (ddc::in_tags_v<DerivDim1, ddc::detail::TypeSeq<DerivDims...>>) {
+            assert((IdxRange<DerivDim1>(patch_values.derivative_idx_range())
+                            .contains(Idx<DerivDim1>(deriv_order)))
+                   || (Idx<DerivDim1>(deriv_order) == Idx<DerivDim1>(0)));
+        }
+        if constexpr (ddc::in_tags_v<DerivDim2, ddc::detail::TypeSeq<DerivDims...>>) {
+            assert((IdxRange<DerivDim2>(patch_values.derivative_idx_range())
+                            .contains(Idx<DerivDim2>(deriv_order)))
+                   || (Idx<DerivDim2>(deriv_order) == Idx<DerivDim2>(0)));
+        }
+
+        using PGrid1 = typename StoringPatch::Grid1;
+        using PGrid2 = typename StoringPatch::Grid2;
+
+        IdxRangeSlice<PGrid1> idx_range_deriv_1
+                = patch_values.template idx_range_for_deriv<PGrid1>();
+        IdxRangeSlice<PGrid2> idx_range_deriv_2
+                = patch_values.template idx_range_for_deriv<PGrid2>();
+
+        IdxRange<PGrid1> idx_range_1(patch_values.idx_range());
+        IdxRange<PGrid2> idx_range_2(patch_values.idx_range());
+
+        // To match with the correct type.
+        IdxRangeSlice<PGrid1> idx_range_to_slice_1(
+                idx_range_1.front(),
+                IdxStep<PGrid1>(idx_range_1.size()),
+                IdxStep<PGrid1>(1));
+        IdxRangeSlice<PGrid2> idx_range_to_slice_2(
+                idx_range_2.front(),
+                IdxStep<PGrid2>(idx_range_2.size()),
+                IdxStep<PGrid2>(1));
+
+        IdxRangeSlice<PGrid1, PGrid2> idx_range;
+        if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim1>>) {
+            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_deriv_1, idx_range_to_slice_2);
+        } else if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim2>>) {
+            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_to_slice_1, idx_range_deriv_2);
+        } else if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim1, DerivDim2>>) {
+            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_deriv_1, idx_range_deriv_2);
+        } else {
+            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_to_slice_1, idx_range_to_slice_2);
+        }
+
+        const bool is_derivative = (deriv_order != order_zero<DerivDims...>());
+
+        // Correction if deriv_order is zero.
+        if (!is_derivative) {
+            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_to_slice_1, idx_range_to_slice_2);
+        }
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                idx_range,
+                KOKKOS_CLASS_LAMBDA(Idx<PGrid1, PGrid2> const& idx) {
+                    int const patch_idx = get_patch_idx(patch_coords(idx));
+                    if (patch_idx < 0 && is_derivative) {
+                        Kokkos::abort("The evaluation coordinate has to be on a patch."
+                                      "No extrapolation rule for derivatives. \n");
+                    }
+                    patch_values(deriv_order, idx) = recursive_dispatch_patch_function(
+                            deriv_order,
+                            patch_coords(idx),
+                            patches_splines,
+                            patch_idx);
+                });
+    }
+
 
     template <class Patch>
     void apply_integrate(double& integral, SplineCoeffOnPatch<Patch> const& spline_coef) const
@@ -470,6 +575,13 @@ private:
             }
         }
         return y;
+    }
+
+
+    template <class... DerivDims>
+    static Idx<DerivDims...> order_zero()
+    {
+        return Idx<DerivDims...>(Idx<DerivDims>(0)...);
     }
 };
 ```

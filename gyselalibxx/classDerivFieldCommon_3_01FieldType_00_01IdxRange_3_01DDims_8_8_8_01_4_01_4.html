@@ -743,10 +743,6 @@
 <td style="text-align: left;"><a href="#variable-m_deriv_idx_range"><strong>m_deriv_idx_range</strong></a>  <br><em>The index range of available derivatives.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">std::string</td>
-<td style="text-align: left;"><a href="#variable-m_label"><strong>m_label</strong></a>  <br><em>Label of the object.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;"><a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a></td>
 <td style="text-align: left;"><a href="#variable-m_physical_idx_range"><strong>m_physical_idx_range</strong></a>  <br><em>The physical index range on which the values are defined.</em></td>
 </tr>
@@ -778,7 +774,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-derivfieldcommon-13"><strong>DerivFieldCommon</strong></a> (std::string const &amp; label, <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a> physical_idx_range, <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-discrete_deriv_idx_range_type"><strong>discrete_deriv_idx_range_type</strong></a> deriv_idx_range, ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt; <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-physical_deriv_grids"><strong>physical_deriv_grids</strong></a> &gt; cross_derivative_idx_range) <br><em>Protected constructor to be used by subclasses to initialise index ranges.</em></td>
+<td style="text-align: left;"><a href="#function-derivfieldcommon-13"><strong>DerivFieldCommon</strong></a> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a> physical_idx_range, <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-discrete_deriv_idx_range_type"><strong>discrete_deriv_idx_range_type</strong></a> deriv_idx_range, ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt; <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-physical_deriv_grids"><strong>physical_deriv_grids</strong></a> &gt; cross_derivative_idx_range) <br><em>Protected constructor to be used by subclasses to initialise index ranges.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION int</td>
@@ -1042,12 +1038,6 @@ inline IdxRangeSlice&lt; Grid1D &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt
 </code></pre>
 <hr>
 
-<h3 id="variable-m_label">variable m_label</h3>
-<p><em>Label of the object.</em> </p>
-<pre><code class="language-C++">std::string DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::m_label;
-</code></pre>
-<hr>
-
 <h3 id="variable-m_physical_idx_range">variable m_physical_idx_range</h3>
 <p><em>The physical index range on which the values are defined.</em> </p>
 <pre><code class="language-C++">physical_idx_range_type DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::m_physical_idx_range;
@@ -1063,7 +1053,6 @@ inline IdxRangeSlice&lt; Grid1D &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt
 <h3 id="function-derivfieldcommon-13">function DerivFieldCommon [1/3]</h3>
 <p><em>Protected constructor to be used by subclasses to initialise index ranges.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::DerivFieldCommon (
-    std::string const &amp; label,
     physical_idx_range_type physical_idx_range,
     discrete_deriv_idx_range_type deriv_idx_range,
     ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt; physical_deriv_grids &gt; cross_derivative_idx_range
@@ -1071,7 +1060,6 @@ inline IdxRangeSlice&lt; Grid1D &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>label</code> Label of the object. </li>
 <li><code>physical_idx_range</code> The index range on which the values of the function are defined. </li>
 <li><code>deriv_idx_range</code> The index range of the provided derivatives. </li>
 <li><code>cross_derivative_idx_range</code> The cross product of the index ranges on which the derivatives of the function are defined. </li>
