@@ -284,7 +284,7 @@ public:
         set_matrix(std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
 
         // Define a solver.
-        auto solver_factory
+        std::unique_ptr solver_factory
                 = SolverCG::build()
                           .with_criteria(
                                   gko::stop::Iteration::build()

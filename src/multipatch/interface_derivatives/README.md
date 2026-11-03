@@ -21,8 +21,8 @@ the boundary cells.
 - [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `InterfaceDerivCoeffs` operator.
   - [How to use the `InterfaceDerivCoeffs` operator?](#how-to-use-the-interfacederivcoeffs-operator): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
-- [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfaceExactDerivativeMatrix` operator.
-  - [How to use the `InterfaceExactDerivativeMatrix` operator?](#how-to-use-the-interfaceexactderivativematrix-operator): It documents how to use the operator in the code.
+- [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfacesExactDerivativeCalculator` operator.
+  - [How to use the `InterfacesExactDerivativeCalculator` operator?](#how-to-use-the-interfaceexactderivativematrix-operator): It documents how to use the operator in the code.
 
 ## Relation between derivatives on the boundaries of two connected patches
 
@@ -578,10 +578,10 @@ We simply refer it as
 \end{bmatrix}.
 ```
 
-### How to use the InterfaceExactDerivativeMatrix operator?
+### How to use the InterfacesExactDerivativeCalculator operator?
 
 First, for each interface in the geometry, we instantiate a `SingleInterfaceDerivatorCalculator`
-(see [How to use the SingleInterfaceDerivatorCalculator operator?](#how-to-use-the-singleinterfacederivativescalculator-operator)).
+(see [How to use the SingleInterfaceDerivatorCalculator operator?](#how-to-use-the-interfacederivcoeffs-operator)).
 We store a constant reference of all the derivative calculator in a `SingleInterfaceDerivatorCalculatorCollection`.
 
 ```cpp
@@ -592,10 +592,10 @@ SingleInterfaceDerivatorCalculator<Interface_2> derivative_calculator_2(...);
 SingleInterfaceDerivatorCalculatorCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
 ```
 
-We can then instantiate `InterfaceExactDerivativeMatrix` with the tuple of derivative calculator.
+We can then instantiate `InterfacesExactDerivativeCalculator` with the tuple of derivative calculator.
 
 ```cpp
-InterfaceExactDerivativeMatrix<
+InterfacesExactDerivativeCalculator<
         Connectivity,                               // MultipatchConnectivity class
         Grid1D,                                     // the given direction.
         ddc::detail::TypeSeq<Patch1, Patch2, ...>   // list of patches containing all the needed ones
@@ -607,7 +607,7 @@ InterfaceExactDerivativeMatrix<
 
 with `idx_ranges` a `MultipatchType<IdxRangeonPatch, Patch1, Patch2, ...>` object.
 
-During the instantiation, `InterfaceExactDerivativeMatrix` will allocate memory for the matrix $`(\mathbb{I} - M)`$,
+During the instantiation, `InterfacesExactDerivativeCalculator` will allocate memory for the matrix $`(\mathbb{I} - M)`$,
 for the right hand side vector *C* and for the solution vector *S*.
 It also computes the matrix and stores it.
 
@@ -639,17 +639,17 @@ This geometry is composed of 9 patches forming periodic strips in the *x* direct
 We use additional interpolation points as closure condition for the equivalent global splines in
 the *y* direction (i.e. `ddc::BoundCond::GREVILLE`).
 
-So, we start by defining the `InterfaceExactDerivativeMatrix` matrices for each periodic directions
+So, we start by defining the `InterfacesExactDerivativeCalculator` matrices for each periodic directions
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7`).
 
 ```cpp
-InterfaceExactDerivativeMatrix<Connectivity, GridX1, 
+InterfacesExactDerivativeCalculator<Connectivity, GridX1, 
         ddc::detail::TypeSeq<Patch1, Patch2, Patch3>, 
         ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
         SingleInterfaceDerivatorCalculatorCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
         matrix_123(idx_ranges_123, derivative_calculators_123);
 
-InterfaceExactDerivativeMatrix<Connectivity, GridX4, 
+InterfacesExactDerivativeCalculator<Connectivity, GridX4, 
         ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
         ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
         SingleInterfaceDerivatorCalculatorCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
@@ -657,17 +657,17 @@ InterfaceExactDerivativeMatrix<Connectivity, GridX4,
 // ...
 ```
 
-We also define `InterfaceExactDerivativeMatrix` matrices for each non-periodic directions
+We also define `InterfacesExactDerivativeCalculator` matrices for each non-periodic directions
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3`).
 
 ```cpp
-InterfaceExactDerivativeMatrix<Connectivity, GridY1, 
+InterfacesExactDerivativeCalculator<Connectivity, GridY1, 
         ddc::detail::TypeSeq<Patch1, Patch4, Patch7>,
         ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
         SingleInterfaceDerivatorCalculatorCollection<Interface_1_4, Interface_4_7>>
         matrix_147(idx_ranges_147, derivative_calculators_147);
 
-InterfaceExactDerivativeMatrix<Connectivity, GridY2, 
+InterfacesExactDerivativeCalculator<Connectivity, GridY2, 
         ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
         ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
         SingleInterfaceDerivatorCalculatorCollection<Interface_2_5, Interface_5_8>>

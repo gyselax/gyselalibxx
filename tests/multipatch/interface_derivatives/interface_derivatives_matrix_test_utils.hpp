@@ -747,7 +747,7 @@ void check_spline_representation_agreement(
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    SplineBuliderDerivField2D<
+    SplineBuilderDerivField2D<
             HostExecSpace,
             typename Patch::BSplines1,
             typename Patch::BSplines2,
