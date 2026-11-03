@@ -878,12 +878,12 @@ public:
             CoordConstFieldOnPatch&lt;StoringPatch&gt; const&amp; patch_coords,
             MultipatchSplineCoeff const patches_splines) const
     {
-        if constexpr (ddc::in_tags_v&lt;DerivDim1, ddc::detail::TypeSeq&lt;DerivDims...&gt;&gt;) {
+        if constexpr (ddc::in_tags_v&lt;DerivDim1, ddc::TypeSeq&lt;DerivDims...&gt;&gt;) {
             assert((IdxRange&lt;DerivDim1&gt;(patch_values.derivative_idx_range())
                             .contains(Idx&lt;DerivDim1&gt;(deriv_order)))
                    || (Idx&lt;DerivDim1&gt;(deriv_order) == Idx&lt;DerivDim1&gt;(0)));
         }
-        if constexpr (ddc::in_tags_v&lt;DerivDim2, ddc::detail::TypeSeq&lt;DerivDims...&gt;&gt;) {
+        if constexpr (ddc::in_tags_v&lt;DerivDim2, ddc::TypeSeq&lt;DerivDims...&gt;&gt;) {
             assert((IdxRange&lt;DerivDim2&gt;(patch_values.derivative_idx_range())
                             .contains(Idx&lt;DerivDim2&gt;(deriv_order)))
                    || (Idx&lt;DerivDim2&gt;(deriv_order) == Idx&lt;DerivDim2&gt;(0)));

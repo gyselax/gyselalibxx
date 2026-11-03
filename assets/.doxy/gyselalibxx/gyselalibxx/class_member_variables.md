@@ -35,6 +35,8 @@
 ## e
 
 * **extremity** ([**Edge**](structEdge.md))
+* **extremity\_1** ([**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
+* **extremity\_2** ([**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
 
 
 ## f
@@ -46,6 +48,7 @@
 ## i
 
 * **internal\_fields** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
+* **is\_periodic** ([**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
 * **ipiv** ([**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Dense**](classMatrix__Dense.md))
 * **is\_valid\_rhs\_function\_v** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **IS\_CONTRAVARIANT** ([**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
@@ -196,6 +199,8 @@
 * **m\_weights\_patch\_2** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
 * **m\_weights\_patch\_2\_alloc** ([**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md))
 * **m\_deriv\_coeffs\_collection** ([**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md))
+* **m\_deriv\_coeffs\_collect** ([**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
+* **m\_idx\_ranges** ([**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
 * **m\_mode\_k** ([**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md))
 * **m\_amplitude** ([**KineticSource**](classKineticSource.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md), [**KrookSourceConstant**](classKrookSourceConstant.md))
 * **m\_density** ([**KineticSource**](classKineticSource.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md), [**KrookSourceConstant**](classKrookSourceConstant.md))
@@ -333,6 +338,8 @@
 * **n\_patches** ([**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**SplineBuilderCollection**](classSplineBuilderCollection.md))
 * **n\_fields** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **n\_distributed\_dimensions** ([**IMPILayout**](classIMPILayout.md))
+* **n\_inner\_interfaces** ([**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
+* **number\_of\_interfaces** ([**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
 * **n** ([**Matrix**](classMatrix.md))
 * **nb** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **n\_dims** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))

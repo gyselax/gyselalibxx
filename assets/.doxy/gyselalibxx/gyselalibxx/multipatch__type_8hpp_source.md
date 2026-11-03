@@ -37,7 +37,7 @@ class MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<InternalTypes...>>
 public:
     using PatchOrdering = ddc::TypeSeq<Patches...>;
 
-private:
+protected:
     using InternalTypeOrdering = ddc::TypeSeq<InternalTypes...>;
 
 public:

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classInterfacesDerivativeCalculator" kind="class" language="C++" prot="public">
+    <compoundname>InterfacesDerivativeCalculator</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class Connectivity</type>
+      </param>
+      <param>
+        <type>class Grid1D</type>
+      </param>
+      <param>
+        <type>class PatchSeq</type>
+      </param>
+      <param>
+        <type>class DerivCoeffCollection</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp" bodystart="21" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

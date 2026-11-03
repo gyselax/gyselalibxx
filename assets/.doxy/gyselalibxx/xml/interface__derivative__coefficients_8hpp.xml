@@ -302,6 +302,12 @@
       <node id="2">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</label>
         <link refid="interface__derivative__coefficients__collection_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</label>
+        <link refid="interfaces__derivative__calculator_8hpp_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classInterfaceDerivCoeffs" prot="public">InterfaceDerivCoeffs</innerclass>

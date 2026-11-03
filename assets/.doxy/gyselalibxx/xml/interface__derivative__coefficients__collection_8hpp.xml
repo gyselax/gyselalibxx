@@ -4,6 +4,7 @@
     <compoundname>interface_derivative_coefficients_collection.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
     <includes refid="interface__derivative__coefficients_8hpp" local="yes">interface_derivative_coefficients.hpp</includes>
+    <includedby refid="interfaces__derivative__calculator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</includedby>
     <incdepgraph>
       <node id="20">
         <label>deriv_details.hpp</label>
@@ -295,6 +296,18 @@
         <label>utility</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</label>
+        <link refid="interface__derivative__coefficients__collection_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</label>
+        <link refid="interfaces__derivative__calculator_8hpp_source"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="classInterfaceDerivCoeffsCollection" prot="public">InterfaceDerivCoeffsCollection</innerclass>
     <sectiondef kind="var">
       <memberdef kind="variable" id="interface__derivative__coefficients__collection_8hpp_1aca05881a0fb9166944e496ae7d2b2a29" prot="public" static="no" constexpr="yes" mutable="no">

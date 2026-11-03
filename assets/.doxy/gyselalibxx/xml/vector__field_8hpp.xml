@@ -382,7 +382,7 @@
         </childnode>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
         <childnode refid="62" relation="include">
         </childnode>
@@ -497,7 +497,7 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="98">
+      <node id="99">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
         <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
       </node>
@@ -820,6 +820,8 @@
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="86" relation="include">
         </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
         <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="51" relation="include">
@@ -844,15 +846,17 @@
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
-        </childnode>
         <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
       </node>
       <node id="78">
@@ -862,32 +866,40 @@
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
-        <childnode refid="93" relation="include">
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
       </node>
-      <node id="95">
+      <node id="96">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</label>
         <link refid="interface__derivative__coefficients_8hpp_source"/>
-        <childnode refid="96" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
-      <node id="96">
+      <node id="97">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</label>
         <link refid="interface__derivative__coefficients__collection_8hpp_source"/>
+        <childnode refid="92" relation="include">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</label>
+        <link refid="interfaces__derivative__calculator_8hpp_source"/>
       </node>
       <node id="81">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
         <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
-      <node id="92">
+      <node id="93">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp</label>
         <link refid="multipatch__spline__builder_8hpp_source"/>
       </node>
-      <node id="93">
+      <node id="94">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
         <link refid="multipatch__spline__builder__2d_8hpp_source"/>
       </node>
@@ -895,7 +907,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
         <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
       </node>
-      <node id="94">
+      <node id="95">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>
         <link refid="null__extrapolation__rules_8hpp_source"/>
       </node>
@@ -905,7 +917,7 @@
         <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="100">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
         <link refid="fem__1d__poisson__solver_8hpp_source"/>
       </node>
@@ -917,20 +929,20 @@
         <childnode refid="64" relation="include">
         </childnode>
       </node>
-      <node id="100">
+      <node id="101">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp</label>
         <link refid="fft__poisson__solver_8hpp_source"/>
       </node>
-      <node id="97">
+      <node id="98">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp</label>
         <link refid="ipoisson__solver_8hpp_source"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
-        </childnode>
         <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
       <node id="62">

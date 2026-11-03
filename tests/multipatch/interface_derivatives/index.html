@@ -586,7 +586,32 @@
 <p><img alt="Illustration test 3" src="../../../docs/images/interface_derivatives/fig_test_3.png" title=""></p>
 <p><img alt="Illustration test 4" src="../../../docs/images/interface_derivatives/fig_test_4.png" title=""></p>
 <p><img alt="Illustration test 5" src="../../../docs/images/interface_derivatives/fig_test_5.png" title=""></p>
-<p>with <span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(\xi\)</span> periodic.</p></div>
+<p>with <span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(\xi\)</span> periodic.</p>
+<h2 id="interface-derivative-matrix-with-approximation-formula">Interface derivative matrix with approximation formula</h2>
+<p>Test <code>InterfacesDerivativeCalculator</code> with the following test cases</p>
+<ul>
+<li>In <code>interfaces_derivative_matrix_Greville_periodic_test</code>: we test with additional interpolation points as closure condition for the <span class="arithmatex">\(y\)</span>-axis(<code>ddc::SplineBuilderClosure::GREVILLE</code>) at the North and the South of the global domain, and periodic boundary conditions for the <span class="arithmatex">\(x\)</span>-axis (<code>ddc::SplineBuilderClosure::PERIODIC</code>) at the West and the East of the global domain. All the patches follow the same orientation as the global domain.</li>
+</ul>
+<p><img alt="Illustration test Greville and periodic boundary conditions" src="../../../docs/images/interface_derivatives/fig5_example_9_patches.png" title=""></p>
+<ul>
+<li>
+<p>In <code>interfaces_derivative_matrix_Hermite_test</code>: we test with Hermite boundary conditions for the following layouts to test the signs of the derivatives.</p>
+</li>
+<li>
+<p>In Fig. 7, we test that the correct values and signs are selected, especially for the left boundary.</p>
+</li>
+<li>In Fig. 8, we test that the correct values and signs are selected, especially after several inversions.</li>
+<li>In Fig. 9, we test that the correct values and signs are selected, especially for the right boundary.</li>
+<li>In Fig. 10, we test with an agreement of the direction of the derivatives along <span class="arithmatex">\(x_1\)</span> but not on <span class="arithmatex">\(y_1\)</span>
+    for the left boundary.</li>
+<li>In Fig. 11, we test with an agreement of the direction of the derivatives along <span class="arithmatex">\(y_3\)</span> but not on <span class="arithmatex">\(x_3\)</span>
+    for the right boundary.</li>
+</ul>
+<p><img alt="Illustration test with reversed Patch1" src="../../../docs/images/interface_derivatives/fig7_test_REVERSE_PATCH1.png" title=""></p>
+<p><img alt="Illustration test with reversed Patch2" src="../../../docs/images/interface_derivatives/fig8_test_REVERSE_PATCH2.png" title=""></p>
+<p><img alt="Illustration test with reversed Patch3" src="../../../docs/images/interface_derivatives/fig9_test_REVERSE_PATCH3.png" title=""></p>
+<p><img alt="Illustration test with changed bound Patch1" src="../../../docs/images/interface_derivatives/fig10_test_CHANGE_BOUND1.png" title=""></p>
+<p><img alt="Illustration test with changed bound Patch3" src="../../../docs/images/interface_derivatives/fig11_test_CHANGE_BOUND3.png" title=""></p></div>
               
             </div>
           </div><footer>

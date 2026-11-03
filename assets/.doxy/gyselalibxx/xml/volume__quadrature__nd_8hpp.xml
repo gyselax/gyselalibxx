@@ -291,7 +291,7 @@
 <para>For polar integration, we can add the Jacobian determinant to the quadrature coefficients.</para>
 <para><itemizedlist>
 <listitem><para>2D example: (but it is implemented for ND)</para>
-<para><formula id="409">$ \int_{\Omega_{\text{cart}}} f(x,y) dxdy
+<para><formula id="413">$ \int_{\Omega_{\text{cart}}} f(x,y) dxdy
  = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta
  \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}$</formula></para>
 </listitem></itemizedlist>
@@ -318,11 +318,11 @@
 <parametername direction="in">coefficients_alloc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The quadrature coefficients <formula id="410">$\{q_{ij}\}_{ij} $</formula>.</para>
+<para>The quadrature coefficients <formula id="414">$\{q_{ij}\}_{ij} $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A rvalue FieldMem to the modified coefficients <formula id="411">$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} $</formula>. </para>
+<simplesect kind="return"><para>A rvalue FieldMem to the modified coefficients <formula id="415">$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>

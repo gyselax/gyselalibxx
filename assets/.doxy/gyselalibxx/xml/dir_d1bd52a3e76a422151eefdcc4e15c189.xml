@@ -4,6 +4,7 @@
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives</compoundname>
     <innerfile refid="interface__derivative__coefficients_8hpp">interface_derivative_coefficients.hpp</innerfile>
     <innerfile refid="interface__derivative__coefficients__collection_8hpp">interface_derivative_coefficients_collection.hpp</innerfile>
+    <innerfile refid="interfaces__derivative__calculator_8hpp">interfaces_derivative_calculator.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

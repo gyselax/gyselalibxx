@@ -462,7 +462,7 @@
 <para>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point. </para>
         </briefdescription>
         <detaileddescription>
-<para>The weak integral element is <formula id="381">$ w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j) $</formula> where <formula id="382">$ w $</formula> is the integral volume, <formula id="383">$ B_i $</formula> is the test function and <formula id="384">$ B_j $</formula> is the trial function. This function computes <formula id="385">$ w \alpha G^{-1} \nabla B_i $</formula> and <formula id="386">$ w \beta B_i $</formula> so that the weak integral element can be computed from the values and derivatives of the trial function alone.</para>
+<para>The weak integral element is <formula id="385">$ w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j) $</formula> where <formula id="386">$ w $</formula> is the integral volume, <formula id="387">$ B_i $</formula> is the test function and <formula id="388">$ B_j $</formula> is the trial function. This function computes <formula id="389">$ w \alpha G^{-1} \nabla B_i $</formula> and <formula id="390">$ w \beta B_i $</formula> so that the weak integral element can be computed from the values and derivatives of the trial function alone.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>QDimRMesh</parametername>
@@ -546,8 +546,8 @@
 </parameteritem>
 </parameterlist>
 <simplesect kind="return"><para>A tuple containing<itemizedlist>
-<listitem><para>test_mass_weight, the quantity <formula id="386">$ w \beta B_i $</formula> which multiplies the value of the trial function,</para>
-</listitem><listitem><para>test_stiffness_weight, the quantity <formula id="385">$ w \alpha G^{-1} \nabla B_i $</formula> which multiplies the gradient of the trial function. </para>
+<listitem><para>test_mass_weight, the quantity <formula id="390">$ w \beta B_i $</formula> which multiplies the value of the trial function,</para>
+</listitem><listitem><para>test_stiffness_weight, the quantity <formula id="389">$ w \alpha G^{-1} \nabla B_i $</formula> which multiplies the gradient of the trial function. </para>
 </listitem></itemizedlist>
 </para>
 </simplesect>
