@@ -46,7 +46,7 @@ spack:
       branch: releases/v2026.06
   specs:
     - 'cmake@3.31'
-    - 'ddc@0.16 +fft +pdi +splines'
+    - 'ddc@0.17 +fft +pdi +splines'
     - 'doxygen@1.17'
     - 'ginkgo@1.11'
     - 'gmgpolar@2.4'

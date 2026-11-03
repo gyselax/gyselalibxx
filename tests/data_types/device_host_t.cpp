@@ -14,17 +14,17 @@
 
 
 namespace {
-class Tag1
+class Tag1 : ddc::DiscreteDimension
 {
 };
-class Tag2
+class Tag2 : ddc::DiscreteDimension
 {
 };
 
 using Direction = VectorIndexSet<Tag1, Tag2>;
 
 
-struct GridX
+struct GridX : ddc::DiscreteDimension
 {
 };
 using IdxX = Idx<GridX>;

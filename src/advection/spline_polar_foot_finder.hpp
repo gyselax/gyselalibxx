@@ -499,8 +499,8 @@ private:
     using IdxRangeSplineBatched
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<IdxRangeOperator>,
-                    ddc::detail::TypeSeq<GridR, GridTheta>,
-                    ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
+                    ddc::TypeSeq<GridR, GridTheta>,
+                    ddc::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
     using TimeStepper = typename TimeStepperBuilder::
             template time_stepper_t<CoordRTheta, DTensor<PseudoCartesianBasis>>;
