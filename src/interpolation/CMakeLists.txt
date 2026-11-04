@@ -35,4 +35,5 @@ add_library("gyselalibxx::interpolation" ALIAS "interpolation")
 
 install(TARGETS interpolation EXPORT gyselalibxxTargets FILE_SET HEADERS)
 
+add_subdirectory(interface_derivatives)
 add_subdirectory(polar_splines)
