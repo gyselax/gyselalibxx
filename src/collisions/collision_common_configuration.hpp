@@ -80,13 +80,13 @@ public:
             DConstField<IdxRange<GridVpar>> coeff_intdvpar)
         : m_hat_As_allocation {extract_md_index_range<Species>(index_range_fdistribution)}
         , m_hat_Zs_allocation {extract_md_index_range<Species>(index_range_fdistribution)}
-        , m_B_norm_allocation {extract_md_index_range<GridTor3Type, GridTor2Type, GridTor1Type>(
+        , m_B_norm_allocation {extract_md_index_range<GridTor3Type, GridTor1Type, GridTor2Type>(
                   index_range_fdistribution)}
         , m_Bstar_s_allocation {extract_md_index_range<
                   Species,
                   GridTor3Type,
-                  GridTor2Type,
                   GridTor1Type,
+                  GridTor2Type,
                   GridVpar>(index_range_fdistribution)}
         , m_mug_allocation {extract_md_index_range<GridMu>(index_range_fdistribution)}
         , m_vparg_allocation {extract_md_index_range<GridVpar>(index_range_fdistribution)}
