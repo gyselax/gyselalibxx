@@ -39,7 +39,7 @@ public:
      * @param coeff_intdmu quadrature coefficients.
      * @param coeff_intdvpar quadrature coefficients.
      * @param[in] B_norm The norm of the magnetic field defined over the polar slice.
-     * @param[in] Bstar_s Bstar defined on the coordinates (species,r,theta,vpar).
+     * @param[in] Bstar_s Bstar defined on the coordinates (species, spatial coordinates of B, parallel velocity).
      */
     CollisionConfigurationSpV2D(
             PC_tree_t const& yaml_input_file,

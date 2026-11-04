@@ -9,14 +9,14 @@ if [ ${#} -ne 1 ]; then
     exit 1
 fi
 
-SCRIPT_DIRECTORY="$(dirname -- "$(realpath -P -- "${BASH_SOURCE[0]:-${0}}")")"
+SCRIPT_DIRECTORY="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]:-${0}}")")"
 TMP_DIRECTORY="$(mktemp -p "${SCRIPT_DIRECTORY}" -d run-XXXXXXXXXX)"
 function finish {
     rm -rf -- "${TMP_DIRECTORY}"
 }
 trap finish EXIT QUIT ABRT KILL SEGV TERM STOP
 
-COLL_EXEC="$(realpath -P -- "${1}")"
+COLL_EXEC="$(realpath -- "${1}")"
 
 cd -- "${TMP_DIRECTORY}"
 
