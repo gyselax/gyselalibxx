@@ -846,11 +846,13 @@ TYPED_TEST(PartialDerivativeFixture, ConstantPartialDerivativeExternalDim)
     ConstantPartialDerivative<IdxRangeX, typename TestFixture::Y> const_deriv(1.0);
 
     IdxRangeX idx_range_test(Idx<GridX> {0}, IdxStep<GridX> {1});
-    host_t<DFieldMem<IdxRangeX>> field_alloc(idx_range_test);
+    DFieldMem<IdxRangeX> field_alloc(idx_range_test);
 
     const_deriv(get_field(field_alloc));
 
+    auto field_host = ddc::create_mirror_view_and_copy(get_field(field_alloc));
+
     // Partial Derivative in X direction
-    EXPECT_EQ(field_alloc(Idx<GridX> {0}), 1.0);
+    EXPECT_EQ(field_host(Idx<GridX> {0}), 1.0);
 }
 } // namespace
