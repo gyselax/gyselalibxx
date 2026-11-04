@@ -269,16 +269,14 @@ public:
     DFieldMem<IdxRange<Species>> m_hat_Zs_allocation;
 
     /**
-     * @brief B norm in (phi,theta,r), ordered to favour the stellarator/tokamak geometry distribution.
+     * @brief B norm norm of the magnetic field.
      */
-    DFieldMem<IdxRange<GridTor3Type, GridTor2Type, GridTor1Type>> m_B_norm_allocation;
+    DFieldMem<IdxRange<GridTor3Type, GridTor1Type, GridTor2Type>> m_B_norm_allocation;
 
     /**
-     * @brief Bstar_s(species,phi,theta,r,vpar). We should avoid copying it, it can get quite large. This should match
-     * what koliop expects but can also be cheaply changed in koliop for whatever fits better the geometry of the
-     * simulation.
+     * @brief Bstar_s TODO: This array can get large, could avoid copying it as an optimization.
      */
-    DFieldMem<IdxRange<Species, GridTor3Type, GridTor2Type, GridTor1Type, GridVpar>>
+    DFieldMem<IdxRange<Species, GridTor3Type, GridTor1Type, GridTor2Type, GridVpar>>
             m_Bstar_s_allocation;
 
     /**

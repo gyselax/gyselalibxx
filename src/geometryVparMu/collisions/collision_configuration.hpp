@@ -38,8 +38,8 @@ public:
      * @param index_range_fdistribution index range of the whole distribution function.
      * @param coeff_intdmu quadrature coefficients.
      * @param coeff_intdvpar quadrature coefficients.
-     * @param[in] B_norm The norm of the magnetic field defined over the polar slice.
-     * @param[in] Bstar_s Bstar defined on the coordinates (species, spatial coordinates of B, parallel velocity).
+     * @param[in] B_norm The norm of the magnetic field.
+     * @param[in] Bstar_s Bstar defined on the coordinates.
      */
     CollisionConfigurationSpV2D(
             PC_tree_t const& yaml_input_file,
@@ -54,16 +54,10 @@ public:
                 coeff_intdmu,
                 coeff_intdvpar}
     {
-        /* B_norm is a scalar when there is no Theta nor R dimensions.
-         */
         ddc::parallel_fill(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(m_operator_quantities.m_B_norm_allocation),
                 B_norm);
-        /* Koliop's Bstar_s is needed in a format layout different from the rest of the code. It is needed in layout
-         * right [sp, theta, r, vpar] where as the input is in [sp, vpar]. We simply iterate over [sp, theta, r, vpar]
-         * and copy the input [sp, vpar] for every theta, r.
-         */
         CollisionConfigurationDataType::transpose_replicate_deep_copy(
                 get_field(m_operator_quantities.m_Bstar_s_allocation),
                 Bstar_s);

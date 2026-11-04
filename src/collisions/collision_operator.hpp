@@ -39,8 +39,8 @@ public:
     explicit CollisionOperator(CollisionConfiguration const& collision_configuration)
         : m_collision_configuration {collision_configuration}
         , m_operator {
-                  m_collision_configuration.configuration().m_theta_extent,
                   m_collision_configuration.configuration().m_r_extent,
+                  m_collision_configuration.configuration().m_theta_extent,
                   m_collision_configuration.configuration().m_phi_extent,
                   m_collision_configuration.configuration().m_collisions_interspecies,
                   CollisionConfigurationDataType::as_layout_left(
@@ -77,7 +77,7 @@ public:
      * @brief Apply the collision operator to the distribution functions of all species on all species.
      *
      * @param[inout] all_f_distribution All the distribution function, depending on the CollisionConfiguration, the
-     * existence of the theta, r, phi dimension may vary. At most, we have (species, phi, r, theta, vpar, mu) in layout
+     * existence of the special dimension may vary. At most, we have (species, tor3, tor1, tor2, vpar, mu) in layout
      * right.
      * @param[in] deltat_coll Collision time step.
      */
