@@ -29,14 +29,14 @@ struct InternalSpoofGridTor3 : InternalSpoofGrid
 };
 
 /**
- * @brief Fake radial dimension to be used if there is no radial dimension in the simulation.
+ * @brief Fake poloidal dimension to be used if there is no poloidal dimension in the simulation.
  */
 struct InternalSpoofGridTor2 : InternalSpoofGrid
 {
 };
 
 /**
- * @brief Fake poloidal dimension to be used if there is no poloidal dimension in the simulation.
+ * @brief Fake radial dimension to be used if there is no radial dimension in the simulation.
  */
 struct InternalSpoofGridTor1 : InternalSpoofGrid
 {
@@ -48,12 +48,11 @@ struct InternalSpoofGridTor1 : InternalSpoofGrid
  */
 template <
         class IdxRangeDistributionFunction,
-        class Species,
-        class GridTor3,
-        class GridTor2,
-        class GridTor1,
-        class GridVpar,
-        class GridMu>
+        class GridTor3Type,
+        class GridTor2Type,
+        class GridTor1Type,
+        class GridVparType,
+        class GridMuType>
 class CollisionConfigurationData
 {
 public:
@@ -81,26 +80,26 @@ public:
             DConstField<IdxRange<GridVpar>> coeff_intdvpar)
         : m_hat_As_allocation {extract_md_index_range<Species>(index_range_fdistribution)}
         , m_hat_Zs_allocation {extract_md_index_range<Species>(index_range_fdistribution)}
-        , m_B_norm_allocation {extract_md_index_range<GridTor3, GridTor1, GridTor2>(
+        , m_B_norm_allocation {extract_md_index_range<GridTor3Type, GridTor2Type, GridTor1Type>(
                   index_range_fdistribution)}
         , m_Bstar_s_allocation {extract_md_index_range<
                   Species,
-                  GridTor3,
-                  GridTor1,
-                  GridTor2,
+                  GridTor3Type,
+                  GridTor2Type,
+                  GridTor1Type,
                   GridVpar>(index_range_fdistribution)}
         , m_mug_allocation {extract_md_index_range<GridMu>(index_range_fdistribution)}
         , m_vparg_allocation {extract_md_index_range<GridVpar>(index_range_fdistribution)}
         , m_coeff_intdmu {coeff_intdmu}
         , m_coeff_intdvpar {coeff_intdvpar}
-        , m_coeff_AD_allocation {extract_md_index_range<GridTor2>(index_range_fdistribution)}
+        , m_coeff_AD_allocation {extract_md_index_range<GridTor1Type>(index_range_fdistribution)}
         , m_nu_ref {::PCpp_double(yaml_input_file, ".Collisions.nu_ref")}
         , m_collisions_interspecies {::PCpp_bool(yaml_input_file, ".Collisions.interspecies")}
         , m_mu_extent {extract_md_index_range<GridMu>(index_range_fdistribution).size()}
         , m_vpar_extent {extract_md_index_range<GridVpar>(index_range_fdistribution).size()}
-        , m_theta_extent {extract_md_index_range<GridTor1>(index_range_fdistribution).size()}
-        , m_r_extent {extract_md_index_range<GridTor2>(index_range_fdistribution).size()}
-        , m_phi_extent {extract_md_index_range<GridTor3>(index_range_fdistribution).size()}
+        , m_theta_extent {extract_md_index_range<GridTor2Type>(index_range_fdistribution).size()}
+        , m_r_extent {extract_md_index_range<GridTor1Type>(index_range_fdistribution).size()}
+        , m_phi_extent {extract_md_index_range<GridTor3Type>(index_range_fdistribution).size()}
         , m_species_extent {extract_md_index_range<Species>(index_range_fdistribution).size()}
     {
         /* Define default array values. The user of CollisionConfigurationData is free to modify these.
@@ -186,8 +185,8 @@ public:
         }
     }
 
-    /// @brief Cast from layout right with potentially no all dimension (missing r, theta or phi) into a full blown 6D
-    /// array with the proper extents.
+    /// @brief Cast from layout right with potentially not all dimensions (missing r, theta or phi) into a full blown 6D
+    /// array with the proper extents (mu, vpar, theta, r, phi) <-> (mu, vpar, tor2, tor1, tor3).
     /// @tparam View
     /// @param a_view A distribution function view.
     /// @return A views in 6D, layout left and proper extents.
@@ -272,13 +271,13 @@ public:
     /**
      * @brief B norm in (phi,theta,r), ordered to favour the stellarator/tokamak geometry distribution.
      */
-    DFieldMem<IdxRange<GridTor3, GridTor1, GridTor2>> m_B_norm_allocation;
+    DFieldMem<IdxRange<GridTor3Type, GridTor2Type, GridTor1Type>> m_B_norm_allocation;
 
     /**
      * @brief Bstar_s(species,phi,theta,r,vpar). We should avoid copying it, it can get quite large. This should match what
      * koliop expects but can also be cheaply changed in koliop for whatever fits better the geometry of the simulation.
      */
-    DFieldMem<IdxRange<Species, GridTor3, GridTor1, GridTor2, GridVpar>> m_Bstar_s_allocation;
+    DFieldMem<IdxRange<Species, GridTor3Type, GridTor2Type, GridTor1Type, GridVpar>> m_Bstar_s_allocation;
 
     /**
      * @brief Grid in mu direction.
@@ -305,7 +304,7 @@ public:
      * nu_ref*sqrt(2) because masking on the r profile can be useful, notably because collision can behave badly on the
      * colder edges.
      */
-    DFieldMem<IdxRange<GridTor2>> m_coeff_AD_allocation;
+    DFieldMem<IdxRange<GridTor1Type>> m_coeff_AD_allocation;
 
     /**
      * @brief Collisionality, not used as is, instead, used to build a radial profile (coeff_AD).

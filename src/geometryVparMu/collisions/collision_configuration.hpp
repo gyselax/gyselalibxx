@@ -23,7 +23,6 @@ public:
      */
     using CollisionConfigurationDataType = detail::CollisionConfigurationData<
             IdxRangeDistributionFunctionType,
-            Species,
             detail::InternalSpoofGridTor3,
             detail::InternalSpoofGridTor2,
             detail::InternalSpoofGridTor1,
