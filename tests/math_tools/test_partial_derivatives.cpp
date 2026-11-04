@@ -37,7 +37,7 @@ struct PartialDerivativeFixture<std::tuple<std::integral_constant<bool, periodic
 };
 
 template <class Dim>
-struct Grid : NonUniformGridBase<Dim>
+struct NUGrid : NonUniformGridBase<Dim>
 {
 };
 
@@ -129,8 +129,8 @@ template <class X, class Y, std::size_t ncells_x, std::size_t ncells_y>
 class PartialDerivativeTest
 {
 public:
-    using GridX = Grid<X>;
-    using GridY = Grid<Y>;
+    using GridX = NUGrid<X>;
+    using GridY = NUGrid<Y>;
 
     using IdxRangeX = IdxRange<GridX>;
     using IdxRangeY = IdxRange<GridY>;
@@ -836,7 +836,7 @@ TYPED_TEST(PartialDerivativeFixture, ConstantPartialDerivative)
 
 TYPED_TEST(PartialDerivativeFixture, ConstantPartialDerivativeExternalDim)
 {
-    using GridX = Grid<typename TestFixture::X>;
+    using GridX = NUGrid<typename TestFixture::X>;
     using IdxRangeX = IdxRange<GridX>;
     ConstantPartialDerivative<IdxRangeX, typename TestFixture::Y> const_deriv(1.0);
 
