@@ -583,10 +583,8 @@ protected:
         std::array<double, 3> gammas_i;
 
         // Define a step to increment the indices to move away from the interface.
-        IdxStep<GridEdgePerp1> idx_step_1
-                = s_extremity_1 == FRONT ? IdxStep<GridEdgePerp1>(1) : IdxStep<GridEdgePerp1>(-1);
-        IdxStep<GridEdgePerp2> idx_step_2
-                = s_extremity_2 == FRONT ? IdxStep<GridEdgePerp2>(1) : IdxStep<GridEdgePerp2>(-1);
+        IdxStep<GridEdgePerp1> idx_step_1(s_extremity_1 == FRONT ? 1 : -1);
+        IdxStep<GridEdgePerp2> idx_step_2(s_extremity_2 == FRONT ? 1 : -1);
 
         // Initialisation recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) -----------------------------
         IdxEdgePerp1 interface_idx_1 = get_extremity_idx(s_extremity_1, m_idx_range_perp_1);
