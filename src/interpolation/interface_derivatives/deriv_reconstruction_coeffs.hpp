@@ -641,12 +641,6 @@ protected:
         weights_patch2[1](idx_2_minus) += factor * gammas_i[0];
         weights_patch1[1](idx_1) += factor * gammas_i[0];
 
-        // Set (a_{n},b_{n},c_{n}) ---
-        coeff_deriv_patch1[2] = coeff_deriv_patch1[1];
-        coeff_deriv_patch2[2] = coeff_deriv_patch2[1];
-        ddc::parallel_deepcopy(weights_patch1[2], get_const_field(weights_patch1[1]));
-        ddc::parallel_deepcopy(weights_patch2[2], get_const_field(weights_patch2[1]));
-
 
         // Computing coefficients (c, a, b) on patch 2 -------------------------------------------
         // If m_is_cell_bound_2_with_extra_interpol_pt is true, the last cell is treated differently.
