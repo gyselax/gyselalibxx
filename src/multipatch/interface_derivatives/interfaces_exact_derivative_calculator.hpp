@@ -675,9 +675,9 @@ private:
         IdxRange<grid_perp1<I>> idx_range_perp_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_perp2<I>> idx_range_perp_2(m_idx_ranges.template get<patch2<I>>());
 
-        // Get the indices at the bound of the interface.  
-        Idx<grid_perp1<I>> idx_perp_1 = get_idx_interface<true,I, patch1<I>>();
-        Idx<grid_perp2<I>> idx_perp_2 = get_idx_interface<true,I, patch2<I>>();
+        // Get the indices at the bound of the interface.
+        Idx<grid_perp1<I>> idx_perp_1 = get_idx_interface<true, I, patch1<I>>();
+        Idx<grid_perp2<I>> idx_perp_2 = get_idx_interface<true, I, patch2<I>>();
 
         Idx<grid_par1<I>> idx_to_slice_1;
         Idx<grid_par2<I>> idx_to_slice_2;

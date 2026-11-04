@@ -443,14 +443,38 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     InterfaceDerivCoeffs<Interface_9_7> const deriv_coeffs_9_7(idx_range_xy9, idx_range_xy7);
 
     // InterfaceDerivCoeffs for interfaces along x.
-    InterfaceDerivCoeffs<Interface_1_4> const deriv_coeffs_1_4(idx_range_xy1, idx_range_xy4, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE);
-    InterfaceDerivCoeffs<Interface_4_7> const deriv_coeffs_4_7(idx_range_xy4, idx_range_xy7, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE);
+    InterfaceDerivCoeffs<Interface_1_4> const deriv_coeffs_1_4(
+            idx_range_xy1,
+            idx_range_xy4,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::HERMITE);
+    InterfaceDerivCoeffs<Interface_4_7> const deriv_coeffs_4_7(
+            idx_range_xy4,
+            idx_range_xy7,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::GREVILLE);
 
-    InterfaceDerivCoeffs<Interface_2_5> const deriv_coeffs_2_5(idx_range_xy2, idx_range_xy5, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE);
-    InterfaceDerivCoeffs<Interface_5_8> const deriv_coeffs_5_8(idx_range_xy5, idx_range_xy8, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE);
+    InterfaceDerivCoeffs<Interface_2_5> const deriv_coeffs_2_5(
+            idx_range_xy2,
+            idx_range_xy5,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::HERMITE);
+    InterfaceDerivCoeffs<Interface_5_8> const deriv_coeffs_5_8(
+            idx_range_xy5,
+            idx_range_xy8,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::GREVILLE);
 
-    InterfaceDerivCoeffs<Interface_3_6> const deriv_coeffs_3_6(idx_range_xy3, idx_range_xy6, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE);
-    InterfaceDerivCoeffs<Interface_6_9> const deriv_coeffs_6_9(idx_range_xy6, idx_range_xy9, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE);
+    InterfaceDerivCoeffs<Interface_3_6> const deriv_coeffs_3_6(
+            idx_range_xy3,
+            idx_range_xy6,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::HERMITE);
+    InterfaceDerivCoeffs<Interface_6_9> const deriv_coeffs_6_9(
+            idx_range_xy6,
+            idx_range_xy9,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::GREVILLE);
 #endif
 
 
