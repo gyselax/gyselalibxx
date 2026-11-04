@@ -129,8 +129,13 @@ template <class X, class Y, std::size_t ncells_x, std::size_t ncells_y>
 class PartialDerivativeTest
 {
 public:
-    using GridX = NUGrid<X>;
-    using GridY = NUGrid<Y>;
+    struct GridX : NonUniformGridBase<X>
+    {
+    };
+
+    struct GridY : NonUniformGridBase<Y>
+    {
+    };
 
     using IdxRangeX = IdxRange<GridX>;
     using IdxRangeY = IdxRange<GridY>;
