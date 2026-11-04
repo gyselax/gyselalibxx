@@ -19,21 +19,14 @@ template <class IdxRangeFull, class DerivativeDimension>
 class IPartialDerivative
 {
 public:
+    /// The dimension on which the partial derivative is calculated.
+    using DerivDim = DerivativeDimension;
+
     /// The type of a reference to the field to be differentiated.
     using DFieldType = DField<IdxRangeFull>;
 
     /// The type of a constant reference to the field to be differentiated.
     using DConstFieldType = DConstField<IdxRangeFull>;
-
-    /// The type of the grid on the dimension on which the partial derivative is calculated.
-    using GridDerivativeDimension
-            = find_grid_t<DerivativeDimension, ddc::to_type_seq_t<IdxRangeFull>>;
-
-    /// The index range of the dimension on which the partial derivative is calculated.
-    using IdxRangeDeriv = IdxRange<GridDerivativeDimension>;
-
-    /// The index range of all dimensions except DerivativeDimension.
-    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridDerivativeDimension>;
 
     virtual ~IPartialDerivative() = default;
 
@@ -43,6 +36,21 @@ public:
      * @param[out] differentiated_field On output, contains values of the differentiated field.
      */
     virtual void operator()(DFieldType differentiated_field) const = 0;
+};
+
+template <class IdxRangeFull, class DerivativeDimension>
+class INonAnalyticalPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
+{
+public:
+    /// The type of the grid on the dimension on which the partial derivative is calculated.
+    using GridDerivativeDimension
+            = find_grid_t<DerivativeDimension, ddc::to_type_seq_t<IdxRangeFull>>;
+
+    /// The index range of the dimension on which the partial derivative is calculated.
+    using IdxRangeDeriv = IdxRange<GridDerivativeDimension>;
+
+    /// The index range of all dimensions except DerivativeDimension.
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridDerivativeDimension>;
 };
 
 /**
@@ -77,9 +85,7 @@ concept LocalPartialDerivative = requires()
         } -> std::same_as<int>;
 }
 &&requires(
-        std::array<
-                Coord<typename T::GridDerivativeDimension::continuous_dimension_type>,
-                T::n_local_points()> const& pos,
+        std::array<Coord<typename T::DerivDim>, T::n_local_points()> const& pos,
         std::array<double, T::n_local_points()> const& vals)
 {
     {
