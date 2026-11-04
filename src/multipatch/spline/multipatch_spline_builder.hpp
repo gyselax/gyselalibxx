@@ -52,7 +52,7 @@ template <
         template <typename P>
         typename ValuesOnPatch,
         class... Patches>
-class MultipatchSplineBuilder
+class SplineBuilderCollection
 {
     static_assert(
             (((ddc::is_uniform_bsplines_v<BSplineOnPatch<Patches>>)
@@ -65,7 +65,7 @@ class MultipatchSplineBuilder
              && ...),
             "The GridOnPatch argument does not create 1D Grid objects.");
 
-    using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
+    using PatchOrdering = ddc::TypeSeq<Patches...>;
     static constexpr std::size_t n_patches = ddc::type_seq_size_v<PatchOrdering>;
 
     /**
@@ -139,7 +139,7 @@ private:
 
 public:
     /**
-     * @brief Instantiate the MultipatchSplineBuilder from a std::tuple 
+     * @brief Instantiate the SplineBuilderCollection from a std::tuple
      * of all the builder on each patch. 
      * 
      * @warning The builders have to be sorted in the same order as the patches
@@ -147,11 +147,11 @@ public:
      * 
      * @param builders Spline builders for each patch.
      */
-    explicit MultipatchSplineBuilder(BuilderOnPatch<Patches> const&... builders)
+    explicit SplineBuilderCollection(BuilderOnPatch<Patches> const&... builders)
         : m_builders(std::tie(builders...)) {};
 
 
-    ~MultipatchSplineBuilder() = default;
+    ~SplineBuilderCollection() = default;
 
     /**
      * @brief Build the spline representation of each given function.

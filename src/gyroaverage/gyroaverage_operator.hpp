@@ -62,7 +62,9 @@ class GyroAverageOperator
 
 public:
     /// @brief Dimension indexing the sample points (must be public to comply with nvcc rules).
-    struct CoeffList;
+    struct CoeffList : ddc::DiscreteDimension
+    {
+    };
 
 private:
     /// Types for the arrays storing the coefficients

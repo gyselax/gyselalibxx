@@ -107,7 +107,7 @@ struct OneSidedPeriodic
 };
 
 /// @brief Convenience pairing of ExtrapolationRule::OneSidedPeriodic for both boundaries.
-using Periodic = ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
+using Periodic = ddc::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
 
 /// @brief Tag selecting null extrapolation: the function evaluates to zero outside the domain.
 struct NullValue
@@ -118,7 +118,7 @@ struct NullValue
 };
 
 /// @brief Convenience pairing of ExtrapolationRule::NullValue for both boundaries.
-using Null_Null = ddc::detail::TypeSeq<NullValue, NullValue>;
+using Null_Null = ddc::TypeSeq<NullValue, NullValue>;
 
 /**
  * @brief Tag selecting constant extrapolation.
@@ -140,6 +140,6 @@ struct Constant
 };
 
 /// @brief Convenience pairing of ExtrapolationRule::Constant for both boundaries.
-using Constant_Constant = ddc::detail::TypeSeq<Constant, Constant>;
+using Constant_Constant = ddc::TypeSeq<Constant, Constant>;
 
 } // namespace ExtrapolationRule

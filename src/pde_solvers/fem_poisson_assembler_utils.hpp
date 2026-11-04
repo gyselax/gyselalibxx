@@ -33,7 +33,7 @@ Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> as_ba
         DField<IdxRange<Dims...>> field)
 {
     static_assert(sizeof...(Dims) > 0);
-    using LastDim = ddc::type_seq_element_t<sizeof...(Dims) - 1, ddc::detail::TypeSeq<Dims...>>;
+    using LastDim = ddc::type_seq_element_t<sizeof...(Dims) - 1, ddc::TypeSeq<Dims...>>;
     IdxRange<Dims...> idx_range = get_idx_range(field);
     std::size_t const matrix_size = idx_range.template extent<LastDim>();
     assert(field.size() == idx_range.size());
@@ -154,8 +154,8 @@ public:
         Idx<QDimRMesh> idx_quad_r(idx_quad);
         Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
         IdxStep<BSplinesR> offset_r = Idx<BSplinesR>(idx) - first_basis_r(idx_quad_r);
-        IdxStep<BSplinesTheta> offset_theta
-                = Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta);
+        IdxStep<BSplinesTheta> offset_theta = theta_mod<BSplinesTheta>(
+                Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta));
         DConstField<IdxRange<BSplinesR, ddc::Deriv<R>>> vals_r_at_quad = vals_r[idx_quad_r];
         DConstField<IdxRange<BSplinesTheta, ddc::Deriv<Theta>>> vals_theta_at_quad
                 = vals_theta[idx_quad_theta];
@@ -183,8 +183,8 @@ public:
         Idx<QDimRMesh> idx_quad_r(idx_quad);
         Idx<QDimThetaMesh> idx_quad_theta(idx_quad);
         IdxStep<BSplinesR> offset_r = Idx<BSplinesR>(idx) - first_basis_r(idx_quad_r);
-        IdxStep<BSplinesTheta> offset_theta
-                = Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta);
+        IdxStep<BSplinesTheta> offset_theta = theta_mod<BSplinesTheta>(
+                Idx<BSplinesTheta>(idx) - first_basis_theta(idx_quad_theta));
         return vals_r[idx_quad_r](offset_r, IdxStep<ddc::Deriv<R>>(0))
                * vals_theta[idx_quad_theta](offset_theta, IdxStep<ddc::Deriv<Theta>>(0));
     }

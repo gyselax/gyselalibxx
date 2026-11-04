@@ -261,7 +261,6 @@ public:
     explicit constexpr DerivField(
             DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator>& field)
         : base_type(
-                field.m_label,
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
                 field.m_cross_derivative_idx_range)
@@ -285,7 +284,6 @@ public:
     explicit constexpr DerivField(
             DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator> const& field)
         : base_type(
-                field.m_label,
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
                 field.m_cross_derivative_idx_range)
@@ -304,7 +302,6 @@ public:
             DerivField<OElementType, index_range_type, MemorySpace, LayoutStridedPolicy> const&
                     field)
         : base_type(
-                field.m_label,
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
                 field.m_cross_derivative_idx_range)

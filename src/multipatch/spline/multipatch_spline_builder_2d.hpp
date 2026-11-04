@@ -28,7 +28,7 @@
  * This function is useful to avoid calling all the builders individually, especially in
  * a multipatch geometry with several patches.
  * 
- * @warning MultipatchSplineBuilder2D is implemented for tensor-product multi-patch decompositions. 
+ * @warning SplineBuilder2DCollection is implemented for tensor-product multi-patch decompositions.
  *
  * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
  * @tparam MemorySpace The space (CPU/GPU) where the coefficients and values are stored.
@@ -67,7 +67,7 @@ template <
         template <typename P>
         typename ValuesOnPatch,
         class... Patches>
-class MultipatchSplineBuilder2D
+class SplineBuilder2DCollection
 {
     static_assert(
             (((ddc::is_uniform_bsplines_v<BSpline1OnPatch<Patches>>)
@@ -194,15 +194,15 @@ class MultipatchSplineBuilder2D
     using batched_spline_domain_type_on_patch
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedIdxRange>,
-                    ddc::detail::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
-                    ddc::detail::TypeSeq<typename Patch::BSplines1, typename Patch::BSplines2>>>;
+                    ddc::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
+                    ddc::TypeSeq<typename Patch::BSplines1, typename Patch::BSplines2>>>;
 
     template <class Patch, class BatchedIdxRange>
     using batched_derivs_domain_type_on_patch
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedIdxRange>,
-                    ddc::detail::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
-                    ddc::detail::TypeSeq<
+                    ddc::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
+                    ddc::TypeSeq<
                             ddc::Deriv<typename Patch::Dim1>,
                             ddc::Deriv<typename Patch::Dim2>>>>;
 
@@ -228,14 +228,14 @@ class MultipatchSplineBuilder2D
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedBS = detail::MultipatchType<
             typename MultipatchIdxRangeBatched::PatchOrdering,
-            ddc::detail::TypeSeq<batched_spline_domain_type_on_patch<
+            ddc::TypeSeq<batched_spline_domain_type_on_patch<
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
 
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType<
             typename MultipatchIdxRangeBatched::PatchOrdering,
-            ddc::detail::TypeSeq<batched_derivs_domain_type_on_patch<
+            ddc::TypeSeq<batched_derivs_domain_type_on_patch<
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
 
@@ -289,7 +289,7 @@ private:
 
 public:
     /**
-     * @brief Instantiate the MultipatchSplineBuilder from a std::tuple 
+     * @brief Instantiate the SplineBuilderCollection from a std::tuple
      * of all the builder on each patch. 
      * 
      * @warning The builders have to be sorted in the same order as the patches
@@ -297,11 +297,11 @@ public:
      * 
      * @param builders Spline builders for each patch.
      */
-    explicit MultipatchSplineBuilder2D(BuilderOnPatch<Patches> const&... builders)
+    explicit SplineBuilder2DCollection(BuilderOnPatch<Patches> const&... builders)
         : m_builders(std::tie(builders...)) {};
 
 
-    ~MultipatchSplineBuilder2D() = default;
+    ~SplineBuilder2DCollection() = default;
 
     /**
      * @brief Build the spline representation of each given function.

@@ -36,10 +36,8 @@ class MultipatchFieldMem;
  *          them by their patch is ill-defined.
  */
 template <class... Patches, class... InternalTypes>
-class MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<InternalTypes...>>
-    : public MultipatchType<
-              ddc::detail::TypeSeq<Patches...>,
-              ddc::detail::TypeSeq<InternalTypes...>>
+class MultipatchFieldMem<ddc::TypeSeq<Patches...>, ddc::TypeSeq<InternalTypes...>>
+    : public MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<InternalTypes...>>
 {
     static_assert(
             (has_data_access_methods_v<InternalTypes> && ...),
@@ -52,9 +50,7 @@ class MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<
 
 public:
     /// @brief The MultipatchType from which this class inherits
-    using base_type = MultipatchType<
-            ddc::detail::TypeSeq<Patches...>,
-            ddc::detail::TypeSeq<InternalTypes...>>;
+    using base_type = MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<InternalTypes...>>;
 
     /// @brief A tag storing the order of Patches in this MultipatchFieldMem
     using typename base_type::PatchOrdering;
@@ -65,17 +61,15 @@ public:
 
 public:
     /// The type of a modifiable reference to this multipatch field
-    using span_type = MultipatchField<
-            PatchOrdering,
-            ddc::detail::TypeSeq<typename InternalTypes::span_type...>>;
+    using span_type
+            = MultipatchField<PatchOrdering, ddc::TypeSeq<typename InternalTypes::span_type...>>;
     /// The type of a constant reference to this multipatch field
-    using view_type = MultipatchField<
-            PatchOrdering,
-            ddc::detail::TypeSeq<typename InternalTypes::view_type...>>;
+    using view_type
+            = MultipatchField<PatchOrdering, ddc::TypeSeq<typename InternalTypes::view_type...>>;
     /// The type of the index ranges that can be used to access this field.
     using discrete_domain_type = MultipatchType<
             PatchOrdering,
-            ddc::detail::TypeSeq<typename InternalTypes::discrete_domain_type...>>;
+            ddc::TypeSeq<typename InternalTypes::discrete_domain_type...>>;
     /// The memory space (CPU/GPU) where the data is saved.
     using memory_space = typename base_type::example_element::memory_space;
     /// The type of the elements inside the field.
@@ -206,5 +200,5 @@ inline constexpr bool enable_data_access_methods<
  *                 that the given objects are defined on.
  */
 template <template <typename P> typename T, class... Patches>
-using MultipatchFieldMem = detail::
-        MultipatchFieldMem<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<T<Patches>...>>;
+using MultipatchFieldMem
+        = detail::MultipatchFieldMem<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;

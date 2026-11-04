@@ -36,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis. It is currently limited to a non-periodic radial direction and a periodic poloidal direction (ring geometry).
 - Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
 - Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
+- `MultipatchSplineEvaluator2D` works with `DerivField`.
+- Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
 
 ### Fixed
 
@@ -69,6 +71,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Calls to Kokkos profiling's region push/pop were replaced by calls `ScopedRegion` whenever possible to capture RAII deallocations.
 - `PolarSplineFEMPoissonLikeAssembler` uses `TensorProductBSplinePoissonAssembler` to assemble the elements of the matrix corresponding to the inner products of tensor product B-splines.
 - Use Spack to install packages in the docker image.
+- Rename `MultipatchSplineBuilder` to `SplineBuilderCollection`.
+- Rename `MultipatchSplineBuilder2D` to `SplineBuilder2DCollection`.
 
 ### Deprecated
 
@@ -84,7 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Dependency requirements
 
 - Remove Dask dependency in the tests.
-- Update DDC to [v0.16.0](https://github.com/CExA-project/ddc/releases/tag/v0.16.0).
+- Update DDC to [v0.17.0](https://github.com/CExA-project/ddc/releases/tag/v0.17.0).
 - Update GMGPolar dependency to [v2.4.0](https://github.com/SciCompMod/GMGPolar/releases/tag/v2.4.1).
 
 ## [v0.8.0] - 2026-09-09
