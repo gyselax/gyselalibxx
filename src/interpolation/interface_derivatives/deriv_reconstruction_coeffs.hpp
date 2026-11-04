@@ -828,17 +828,14 @@ protected:
             }
 
             // Update coefficients.
-            coeff_deriv_patch[0] = coeff_deriv_patch[1];
-            coeff_deriv_patch[1] = coeff_deriv_patch[2];
-            coeff_deriv_other_patch[0] = coeff_deriv_other_patch[1];
-            coeff_deriv_other_patch[1] = coeff_deriv_other_patch[2];
-
-            ddc::parallel_deepcopy(weights_patch1[0], get_const_field(weights_patch1[1]));
-            ddc::parallel_deepcopy(weights_patch2[0], get_const_field(weights_patch2[1]));
-
-            ddc::parallel_deepcopy(weights_patch1[1], get_const_field(weights_patch1[2]));
-            ddc::parallel_deepcopy(weights_patch2[1], get_const_field(weights_patch2[2]));
+            cycle_buffers(coeff_deriv_patch);
+            cycle_buffers(coeff_deriv_other_patch);
+            cycle_buffers(weights_patch1);
+            cycle_buffers(weights_patch2);
         }
+
+        ddc::parallel_deepcopy(weights_patch1[2], get_const_field(weights_patch1[1]));
+        ddc::parallel_deepcopy(weights_patch2[2], get_const_field(weights_patch2[1]));
     }
 
     /**
@@ -1190,5 +1187,27 @@ protected:
             IdxRange<Grid1D> const& idx_range) const
     {
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
+    }
+
+    void cycle_buffers(std::array<double, 3>& buffer)
+    {
+        // n-1 becomes n-2
+        buffer[0] = buffer[1];
+        // n becomes n-1
+        buffer[1] = buffer[2];
+        // new n is ready to be defined (but still contains value of old n)
+    }
+
+    template <class IdxRangeType, class MemorySpace>
+    void cycle_buffers(std::array<DField<IdxRangeType, MemorySpace>, 3>& buffer)
+    {
+        // Save n-2 allocation but values are no longer needed
+        DField<IdxRangeType, MemorySpace> tmp = buffer[0];
+        // n-1 becomes n-2
+        buffer[0] = buffer[1];
+        // n becomes n-1
+        buffer[1] = buffer[2];
+        // new n is ready to be defined (but still contains value of old n-2)
+        buffer[2] = tmp;
     }
 };
