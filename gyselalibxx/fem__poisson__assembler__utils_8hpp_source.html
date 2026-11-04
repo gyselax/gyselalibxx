@@ -575,6 +575,7 @@
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
 
+#include &lt;array&gt;
 #include &lt;tuple&gt;
 
 #include &lt;ddc/ddc.hpp&gt;
@@ -606,30 +607,30 @@ Kokkos::View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt;
 }
 
 
-template &lt;typename BSplinesTheta&gt;
-KOKKOS_FUNCTION IdxStep&lt;BSplinesTheta&gt; theta_mod(IdxStep&lt;BSplinesTheta&gt; idx_theta)
+template &lt;typename BSplines&gt;
+KOKKOS_FUNCTION IdxStep&lt;BSplines&gt; periodic_mod(IdxStep&lt;BSplines&gt; idx_step)
 {
-    int n_theta = ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis();
-    while (idx_theta &lt; 0)
-        idx_theta += n_theta;
-    while (idx_theta &gt;= n_theta)
-        idx_theta -= n_theta;
-    return idx_theta;
+    int n_basis = ddc::discrete_space&lt;BSplines&gt;().nbasis();
+    while (idx_step &lt; 0)
+        idx_step += n_basis;
+    while (idx_step &gt;= n_basis)
+        idx_step -= n_basis;
+    return idx_step;
 }
 
-template &lt;typename BSplinesTheta, class IdxType&gt;
-KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
+template &lt;typename BSplines, class IdxType&gt;
+KOKKOS_INLINE_FUNCTION IdxType periodic_mod(IdxType idx)
 {
     static_assert(ddc::is_discrete_element_v&lt;IdxType&gt;);
-    static_assert(ddc::in_tags_v&lt;BSplinesTheta, ddc::to_type_seq_t&lt;IdxType&gt;&gt;);
-    IdxRange&lt;BSplinesTheta&gt; idx_range_theta
-            = ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain().take_first(
-                    IdxStep&lt;BSplinesTheta&gt;(ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis()));
-    while (ddc::select&lt;BSplinesTheta&gt;(idx) &lt; idx_range_theta.front())
-        idx += idx_range_theta.extents();
-    while (ddc::select&lt;BSplinesTheta&gt;(idx) &gt; idx_range_theta.back())
-        idx -= idx_range_theta.extents();
-    assert(idx_range_theta.contains(ddc::select&lt;BSplinesTheta&gt;(idx)));
+    static_assert(ddc::in_tags_v&lt;BSplines, ddc::to_type_seq_t&lt;IdxType&gt;&gt;);
+    IdxRange&lt;BSplines&gt; idx_range_bsplines
+            = ddc::discrete_space&lt;BSplines&gt;().full_domain().take_first(
+                    IdxStep&lt;BSplines&gt;(ddc::discrete_space&lt;BSplines&gt;().nbasis()));
+    while (ddc::select&lt;BSplines&gt;(idx) &lt; idx_range_bsplines.front())
+        idx += idx_range_bsplines.extents();
+    while (ddc::select&lt;BSplines&gt;(idx) &gt; idx_range_bsplines.back())
+        idx -= idx_range_bsplines.extents();
+    assert(idx_range_bsplines.contains(ddc::select&lt;BSplines&gt;(idx)));
     return idx;
 }
 
@@ -645,163 +646,315 @@ KOKKOS_FUNCTION Idx&lt;DDom&gt; mod_add(Idx&lt;DDom&gt; idx, IdxStep&lt;DDom&gt;
     }
 }
 
-template &lt;typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta&gt;
+template &lt;typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2&gt;
 struct TensorBSplineStash
 {
 private:
-    using R = typename BSplinesR::continuous_dimension_type;
-    using Theta = typename BSplinesTheta::continuous_dimension_type;
-    using R_cov = typename R::Dual;
-    using Theta_cov = typename Theta::Dual;
+    using Dim1 = typename BSplines1::continuous_dimension_type;
+    using Dim2 = typename BSplines2::continuous_dimension_type;
+    using Dim1_cov = typename Dim1::Dual;
+    using Dim2_cov = typename Dim2::Dual;
 
 public:
-    DConstField&lt;IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt;&gt;&gt; vals_r;
-    DConstField&lt;IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;&gt; vals_theta;
-    ConstField&lt;Idx&lt;BSplinesR&gt;, IdxRange&lt;QDimRMesh&gt;&gt; first_basis_r;
-    ConstField&lt;Idx&lt;BSplinesTheta&gt;, IdxRange&lt;QDimThetaMesh&gt;&gt; first_basis_theta;
+    DConstField&lt;IdxRange&lt;QDim1Mesh, BSplines1, ddc::Deriv&lt;Dim1&gt;&gt;&gt; vals_1;
+    DConstField&lt;IdxRange&lt;QDim2Mesh, BSplines2, ddc::Deriv&lt;Dim2&gt;&gt;&gt; vals_2;
+    ConstField&lt;Idx&lt;BSplines1&gt;, IdxRange&lt;QDim1Mesh&gt;&gt; first_basis_1;
+    ConstField&lt;Idx&lt;BSplines2&gt;, IdxRange&lt;QDim2Mesh&gt;&gt; first_basis_2;
 
-    KOKKOS_FUNCTION std::tuple&lt;double, DVector&lt;R_cov, Theta_cov&gt;&gt; vals_and_derivs(
-            Idx&lt;QDimRMesh, QDimThetaMesh&gt; idx_quad,
-            Idx&lt;BSplinesR, BSplinesTheta&gt; idx) const
+    KOKKOS_FUNCTION std::tuple&lt;double, DVector&lt;Dim1_cov, Dim2_cov&gt;&gt; vals_and_derivs(
+            Idx&lt;QDim1Mesh, QDim2Mesh&gt; idx_quad,
+            Idx&lt;BSplines1, BSplines2&gt; idx) const
     {
-        Idx&lt;QDimRMesh&gt; idx_quad_r(idx_quad);
-        Idx&lt;QDimThetaMesh&gt; idx_quad_theta(idx_quad);
-        IdxStep&lt;BSplinesR&gt; offset_r = Idx&lt;BSplinesR&gt;(idx) - first_basis_r(idx_quad_r);
-        IdxStep&lt;BSplinesTheta&gt; offset_theta = theta_mod&lt;BSplinesTheta&gt;(
-                Idx&lt;BSplinesTheta&gt;(idx) - first_basis_theta(idx_quad_theta));
-        DConstField&lt;IdxRange&lt;BSplinesR, ddc::Deriv&lt;R&gt;&gt;&gt; vals_r_at_quad = vals_r[idx_quad_r];
-        DConstField&lt;IdxRange&lt;BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;&gt; vals_theta_at_quad
-                = vals_theta[idx_quad_theta];
-        const double val_r = vals_r_at_quad(offset_r, IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(0));
-        const double val_theta = vals_theta_at_quad(offset_theta, IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(0));
-        DVector&lt;R_cov, Theta_cov&gt; derivs;
-        ddcHelper::get&lt;R_cov&gt;(derivs)
-                = vals_r_at_quad(offset_r, IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(1)) * val_theta;
-        ddcHelper::get&lt;Theta_cov&gt;(derivs)
-                = val_r * vals_theta_at_quad(offset_theta, IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(1));
-        return {val_r * val_theta, derivs};
+        Idx&lt;QDim1Mesh&gt; idx_quad_1(idx_quad);
+        Idx&lt;QDim2Mesh&gt; idx_quad_2(idx_quad);
+        IdxStep&lt;BSplines1&gt; offset_1 = Idx&lt;BSplines1&gt;(idx) - first_basis_1(idx_quad_1);
+        IdxStep&lt;BSplines2&gt; offset_2 = Idx&lt;BSplines2&gt;(idx) - first_basis_2(idx_quad_2);
+        if (BSplines1::is_periodic()) {
+            offset_1 = periodic_mod(offset_1);
+        }
+        if (BSplines2::is_periodic()) {
+            offset_2 = periodic_mod(offset_2);
+        }
+        DConstField&lt;IdxRange&lt;BSplines1, ddc::Deriv&lt;Dim1&gt;&gt;&gt; vals_1_at_quad = vals_1[idx_quad_1];
+        DConstField&lt;IdxRange&lt;BSplines2, ddc::Deriv&lt;Dim2&gt;&gt;&gt; vals_2_at_quad = vals_2[idx_quad_2];
+        const double val_1 = vals_1_at_quad(offset_1, IdxStep&lt;ddc::Deriv&lt;Dim1&gt;&gt;(0));
+        const double val_2 = vals_2_at_quad(offset_2, IdxStep&lt;ddc::Deriv&lt;Dim2&gt;&gt;(0));
+        DVector&lt;Dim1_cov, Dim2_cov&gt; derivs;
+        ddcHelper::get&lt;Dim1_cov&gt;(derivs)
+                = vals_1_at_quad(offset_1, IdxStep&lt;ddc::Deriv&lt;Dim1&gt;&gt;(1)) * val_2;
+        ddcHelper::get&lt;Dim2_cov&gt;(derivs)
+                = val_1 * vals_2_at_quad(offset_2, IdxStep&lt;ddc::Deriv&lt;Dim2&gt;&gt;(1));
+        return {val_1 * val_2, derivs};
     }
 
-    KOKKOS_FUNCTION double vals(
-            Idx&lt;QDimRMesh, QDimThetaMesh&gt; idx_quad,
-            Idx&lt;BSplinesR, BSplinesTheta&gt; idx) const
+    KOKKOS_FUNCTION double vals(Idx&lt;QDim1Mesh, QDim2Mesh&gt; idx_quad, Idx&lt;BSplines1, BSplines2&gt; idx)
+            const
     {
-        Idx&lt;QDimRMesh&gt; idx_quad_r(idx_quad);
-        Idx&lt;QDimThetaMesh&gt; idx_quad_theta(idx_quad);
-        IdxStep&lt;BSplinesR&gt; offset_r = Idx&lt;BSplinesR&gt;(idx) - first_basis_r(idx_quad_r);
-        IdxStep&lt;BSplinesTheta&gt; offset_theta = theta_mod&lt;BSplinesTheta&gt;(
-                Idx&lt;BSplinesTheta&gt;(idx) - first_basis_theta(idx_quad_theta));
-        return vals_r[idx_quad_r](offset_r, IdxStep&lt;ddc::Deriv&lt;R&gt;&gt;(0))
-               * vals_theta[idx_quad_theta](offset_theta, IdxStep&lt;ddc::Deriv&lt;Theta&gt;&gt;(0));
+        Idx&lt;QDim1Mesh&gt; idx_quad_1(idx_quad);
+        Idx&lt;QDim2Mesh&gt; idx_quad_2(idx_quad);
+        IdxStep&lt;BSplines1&gt; offset_1 = Idx&lt;BSplines1&gt;(idx) - first_basis_1(idx_quad_1);
+        IdxStep&lt;BSplines2&gt; offset_2 = Idx&lt;BSplines2&gt;(idx) - first_basis_2(idx_quad_2);
+        if (BSplines1::is_periodic()) {
+            offset_1 = periodic_mod(offset_1);
+        }
+        if (BSplines2::is_periodic()) {
+            offset_2 = periodic_mod(offset_2);
+        }
+        return vals_1[idx_quad_1](offset_1, IdxStep&lt;ddc::Deriv&lt;Dim1&gt;&gt;(0))
+               * vals_2[idx_quad_2](offset_2, IdxStep&lt;ddc::Deriv&lt;Dim2&gt;&gt;(0));
     }
 };
 
-template &lt;typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta&gt;
-KOKKOS_FUNCTION IdxRange&lt;QDimRMesh, QDimThetaMesh&gt; get_quadrature_between_knots(
-        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplinesR&gt;&gt; start_knot_r,
-        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplinesR&gt;&gt; end_knot_r,
-        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplinesTheta&gt;&gt; start_knot_theta,
-        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplinesTheta&gt;&gt; end_knot_theta,
-        Idx&lt;QDimRMesh, QDimThetaMesh&gt; idx_quad_front)
+template &lt;typename QDimMesh, typename BSplines&gt;
+KOKKOS_FUNCTION IdxRange&lt;QDimMesh&gt; get_quadrature_between_knots_1d(
+        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplines&gt;&gt; start_knot,
+        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplines&gt;&gt; end_knot,
+        Idx&lt;QDimMesh&gt; idx_quad_front)
 {
-    using KnotsR = ddc::knot_discrete_dimension_t&lt;BSplinesR&gt;;
-    using KnotsTheta = ddc::knot_discrete_dimension_t&lt;BSplinesTheta&gt;;
+    using Knots = ddc::knot_discrete_dimension_t&lt;BSplines&gt;;
 
-    const IdxRange&lt;KnotsR&gt; k_range_r(start_knot_r, end_knot_r - start_knot_r);
-    const IdxRange&lt;KnotsTheta&gt; k_range_theta(start_knot_theta, end_knot_theta - start_knot_theta);
-
-    constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
-    IdxStep&lt;KnotsR&gt; k_r_offset
-            = k_range_r.front() - ddc::discrete_space&lt;BSplinesR&gt;().break_point_domain().front();
-    Idx&lt;QDimRMesh&gt; q_r_offset
-            = Idx&lt;QDimRMesh&gt;(idx_quad_front) + k_r_offset.value() * s_n_gauss_legendre_r;
-    IdxStep&lt;QDimRMesh&gt; q_r_len(k_range_r.extents().value() * s_n_gauss_legendre_r);
-    IdxRange&lt;QDimRMesh&gt; q_range_r(q_r_offset, q_r_len);
-
-    constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
-    IdxStep&lt;KnotsTheta&gt; k_theta_offset
-            = k_range_theta.front()
-              - ddc::discrete_space&lt;BSplinesTheta&gt;().break_point_domain().front();
-    if (k_theta_offset &lt; 0)
-        k_theta_offset += ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis();
-    Idx&lt;QDimThetaMesh&gt; q_theta_offset = Idx&lt;QDimThetaMesh&gt;(idx_quad_front)
-                                        + k_theta_offset.value() * s_n_gauss_legendre_theta;
-    IdxStep&lt;QDimThetaMesh&gt; q_theta_len(k_range_theta.extents().value() * s_n_gauss_legendre_theta);
-    IdxRange&lt;QDimThetaMesh&gt; q_range_theta(q_theta_offset, q_theta_len);
-    assert(q_range_r.extents() &gt; 0);
-    assert(q_range_theta.extents() &gt; 0);
-
-    return IdxRange&lt;QDimRMesh, QDimThetaMesh&gt;(q_range_r, q_range_theta);
+    constexpr int n_gauss_legendre = BSplines::degree() + 1;
+    IdxStep&lt;Knots&gt; k_offset
+            = start_knot - ddc::discrete_space&lt;BSplines&gt;().break_point_domain().front();
+    if constexpr (BSplines::is_periodic()) {
+        if (k_offset &lt; 0)
+            k_offset += ddc::discrete_space&lt;BSplines&gt;().ncells();
+    }
+    assert(k_offset &gt;= 0);
+    Idx&lt;QDimMesh&gt; q_offset = idx_quad_front + k_offset.value() * n_gauss_legendre;
+    IdxStep&lt;QDimMesh&gt; q_len((end_knot - start_knot).value() * n_gauss_legendre);
+    assert(q_len &gt; 0);
+    return IdxRange&lt;QDimMesh&gt;(q_offset, q_len);
 }
 
-template &lt;typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta&gt;
-KOKKOS_FUNCTION IdxRange&lt;QDimRMesh, QDimThetaMesh&gt; get_support_quadrature(
-        Idx&lt;BSplinesR, BSplinesTheta&gt; idx,
-        Idx&lt;QDimRMesh, QDimThetaMesh&gt; idx_quad_front)
+template &lt;typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2&gt;
+KOKKOS_FUNCTION IdxRange&lt;QDim1Mesh, QDim2Mesh&gt; get_quadrature_between_knots(
+        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplines1&gt;&gt; start_knot_1,
+        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplines1&gt;&gt; end_knot_1,
+        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplines2&gt;&gt; start_knot_2,
+        Idx&lt;ddc::knot_discrete_dimension_t&lt;BSplines2&gt;&gt; end_knot_2,
+        Idx&lt;QDim1Mesh, QDim2Mesh&gt; idx_quad_front)
 {
-    using KnotsR = ddc::knot_discrete_dimension_t&lt;BSplinesR&gt;;
-    using KnotsTheta = ddc::knot_discrete_dimension_t&lt;BSplinesTheta&gt;;
+    return IdxRange&lt;QDim1Mesh, QDim2Mesh&gt;(
+            get_quadrature_between_knots_1d&lt;
+                    QDim1Mesh,
+                    BSplines1&gt;(start_knot_1, end_knot_1, Idx&lt;QDim1Mesh&gt;(idx_quad_front)),
+            get_quadrature_between_knots_1d&lt;
+                    QDim2Mesh,
+                    BSplines2&gt;(start_knot_2, end_knot_2, Idx&lt;QDim2Mesh&gt;(idx_quad_front)));
+}
 
-    const Idx&lt;BSplinesR&gt; idx_r(idx);
-    const Idx&lt;BSplinesTheta&gt; idx_theta(idx);
+template &lt;typename BSplines&gt;
+KOKKOS_INLINE_FUNCTION IdxRange&lt;ddc::knot_discrete_dimension_t&lt;BSplines&gt;&gt; get_overlapping_knots_1d(
+        Idx&lt;BSplines&gt; idx_test,
+        Idx&lt;BSplines&gt; idx_trial)
+{
+    using Knots = ddc::knot_discrete_dimension_t&lt;BSplines&gt;;
 
-    auto&amp; bspl_r = ddc::discrete_space&lt;BSplinesR&gt;();
-    auto&amp; bspl_theta = ddc::discrete_space&lt;BSplinesTheta&gt;();
+    auto&amp; bspl = ddc::discrete_space&lt;BSplines&gt;();
+
+    if constexpr (BSplines::is_periodic()) {
+        idx_test = periodic_mod&lt;BSplines&gt;(idx_test);
+        idx_trial = periodic_mod&lt;BSplines&gt;(idx_trial);
+
+        IdxStep&lt;Knots&gt; span(BSplines::degree() + 1);
+
+        Idx&lt;Knots&gt; first_support_knot_test = bspl.get_first_support_knot(idx_test);
+        Idx&lt;Knots&gt; first_support_knot_trial = bspl.get_first_support_knot(idx_trial);
+        Idx&lt;Knots&gt; last_support_knot_test = first_support_knot_test + span;
+        Idx&lt;Knots&gt; last_support_knot_trial = first_support_knot_trial + span;
+
+        // Shift one of the supports by a period if they only overlap across the boundary
+        if (first_support_knot_test &gt; last_support_knot_trial) {
+            first_support_knot_trial += bspl.nbasis();
+            last_support_knot_trial += bspl.nbasis();
+        } else if (last_support_knot_test &lt; first_support_knot_trial) {
+            first_support_knot_test += bspl.nbasis();
+            last_support_knot_test += bspl.nbasis();
+        }
+        const Idx&lt;Knots&gt; start_non_zero(
+                Kokkos::max(first_support_knot_test, first_support_knot_trial));
+        const Idx&lt;Knots&gt; end_non_zero(Kokkos::min(last_support_knot_test, last_support_knot_trial));
+        return IdxRange&lt;Knots&gt;(start_non_zero, end_non_zero - start_non_zero);
+    } else {
+        const Idx&lt;Knots&gt; start_non_zero(
+                Kokkos::
+                        max(bspl.break_point_domain().front(),
+                            Kokkos::
+                                    max(bspl.get_first_support_knot(idx_test),
+                                        bspl.get_first_support_knot(idx_trial))));
+        const Idx&lt;Knots&gt; end_non_zero(
+                Kokkos::
+                        min(bspl.break_point_domain().back(),
+                            Kokkos::
+                                    min(bspl.get_last_support_knot(idx_test),
+                                        bspl.get_last_support_knot(idx_trial))));
+        return IdxRange&lt;Knots&gt;(start_non_zero, end_non_zero - start_non_zero);
+    }
+}
+
+template &lt;typename BSplines&gt;
+KOKKOS_FUNCTION std::array&lt;IdxRange&lt;BSplines&gt;, 2&gt; get_overlapping_bsplines_1d(
+        Idx&lt;BSplines&gt; idx_test,
+        IdxRange&lt;BSplines&gt; idx_range_basis)
+{
+    using IdxRangeBS = IdxRange&lt;BSplines&gt;;
+    using IdxStepBS = IdxStep&lt;BSplines&gt;;
+    assert(idx_range_basis.contains(idx_test));
+    int const degree = BSplines::degree();
+    int const nbasis = idx_range_basis.size();
+    // The number of B-splines in the basis before and after the test B-spline
+    int const n_before = (idx_test - idx_range_basis.front()).value();
+    int const n_after = (idx_range_basis.back() - idx_test).value();
+    IdxRangeBS const empty_range(idx_range_basis.front(), IdxStepBS(0));
+
+    if constexpr (BSplines::is_periodic()) {
+        assert(nbasis == int(ddc::discrete_space&lt;BSplines&gt;().nbasis()));
+        if (nbasis &lt; 2 * degree + 1) {
+            // All B-splines overlap
+            return {idx_range_basis, empty_range};
+        } else if (n_before &lt; degree) {
+            // The overlap wraps around the lower boundary
+            return {IdxRangeBS(idx_range_basis.front(), IdxStepBS(n_before + degree + 1)),
+                    idx_range_basis.take_last(IdxStepBS(degree - n_before))};
+        } else if (n_after &lt; degree) {
+            // The overlap wraps around the upper boundary
+            return {idx_range_basis.take_first(IdxStepBS(degree - n_after)),
+                    IdxRangeBS(idx_test - IdxStepBS(degree), IdxStepBS(n_after + degree + 1))};
+        } else {
+            return {IdxRangeBS(idx_test - IdxStepBS(degree), IdxStepBS(2 * degree + 1)),
+                    empty_range};
+        }
+    } else {
+        int const n_lower = Kokkos::min(n_before, degree);
+        int const n_upper = Kokkos::min(n_after, degree);
+        return {IdxRangeBS(idx_test - IdxStepBS(n_lower), IdxStepBS(n_lower + n_upper + 1)),
+                empty_range};
+    }
+}
+
+template &lt;typename QDimMesh, typename BSplines&gt;
+KOKKOS_FUNCTION IdxRange&lt;QDimMesh&gt; get_support_quadrature_1d(
+        Idx&lt;BSplines&gt; idx,
+        Idx&lt;QDimMesh&gt; idx_quad_front)
+{
+    using Knots = ddc::knot_discrete_dimension_t&lt;BSplines&gt;;
+
+    auto&amp; bspl = ddc::discrete_space&lt;BSplines&gt;();
 
     // Find the cells on which the bspline is non-zero
-    const Idx&lt;KnotsR&gt; start_non_zero_r(
-            Kokkos::max(bspl_r.break_point_domain().front(), bspl_r.get_first_support_knot(idx_r)));
-    const Idx&lt;KnotsR&gt; end_non_zero_r(
-            Kokkos::min(bspl_r.break_point_domain().back(), bspl_r.get_last_support_knot(idx_r)));
+    Idx&lt;Knots&gt; start_non_zero(bspl.get_first_support_knot(idx));
+    Idx&lt;Knots&gt; end_non_zero(bspl.get_last_support_knot(idx));
+    if constexpr (!BSplines::is_periodic()) {
+        start_non_zero = Kokkos::max(bspl.break_point_domain().front(), start_non_zero);
+        end_non_zero = Kokkos::min(bspl.break_point_domain().back(), end_non_zero);
+    }
+    return get_quadrature_between_knots_1d&lt;
+            QDimMesh,
+            BSplines&gt;(start_non_zero, end_non_zero, idx_quad_front);
+}
 
-    const Idx&lt;KnotsTheta&gt; start_non_zero_theta(bspl_theta.get_first_support_knot(idx_theta));
-    const Idx&lt;KnotsTheta&gt; end_non_zero_theta(bspl_theta.get_last_support_knot(idx_theta));
-    return get_quadrature_between_knots&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;(
-            start_non_zero_r,
-            end_non_zero_r,
-            start_non_zero_theta,
-            end_non_zero_theta,
-            idx_quad_front);
+template &lt;typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2&gt;
+KOKKOS_FUNCTION IdxRange&lt;QDim1Mesh, QDim2Mesh&gt; get_support_quadrature(
+        Idx&lt;BSplines1, BSplines2&gt; idx,
+        Idx&lt;QDim1Mesh, QDim2Mesh&gt; idx_quad_front)
+{
+    return IdxRange&lt;QDim1Mesh, QDim2Mesh&gt;(
+            get_support_quadrature_1d&lt;
+                    QDim1Mesh,
+                    BSplines1&gt;(Idx&lt;BSplines1&gt;(idx), Idx&lt;QDim1Mesh&gt;(idx_quad_front)),
+            get_support_quadrature_1d&lt;
+                    QDim2Mesh,
+                    BSplines2&gt;(Idx&lt;BSplines2&gt;(idx), Idx&lt;QDim2Mesh&gt;(idx_quad_front)));
+}
+
+template &lt;typename BSplines&gt;
+KOKKOS_INLINE_FUNCTION int n_nonzeros_in_rows(int i, int nbasis)
+{
+    int constexpr degree = BSplines::degree();
+    assert(0 &lt;= i &amp;&amp; i &lt;= nbasis);
+    if constexpr (BSplines::is_periodic()) {
+        return i * Kokkos::min(2 * degree + 1, nbasis);
+    } else {
+        assert(nbasis &gt;= 2 * degree);
+        if (i &lt;= degree) {
+            // \sum_{j=0}^{i-1} (degree + 1 + j)
+            return i * (degree + 1) + i * (i - 1) / 2;
+        }
+        // The number of B-splines which are not summed
+        int const n_after = nbasis - i;
+        if (n_after &lt;= degree) {
+            int const total = nbasis * (2 * degree + 1) - degree * (degree + 1);
+            return total - (n_after * (degree + 1) + n_after * (n_after - 1) / 2);
+        }
+        return degree * (degree + 1) + degree * (degree - 1) / 2 + (i - degree) * (2 * degree + 1);
+    }
+}
+
+template &lt;typename BSplines1, typename BSplines2, typename QDim1Mesh, typename QDim2Mesh&gt;
+KOKKOS_INLINE_FUNCTION Idx&lt;QDim1Mesh, QDim2Mesh&gt; periodic_wrap(
+        Idx&lt;QDim1Mesh, QDim2Mesh&gt; idx_quad,
+        IdxRange&lt;QDim1Mesh, QDim2Mesh&gt; const&amp; target_range,
+        IdxRange&lt;QDim1Mesh, QDim2Mesh&gt; const&amp; full_quad_idx_range)
+{
+    if constexpr (BSplines1::is_periodic()) {
+        IdxRange&lt;QDim1Mesh&gt; target_range_1(target_range);
+        if (Idx&lt;QDim1Mesh&gt;(idx_quad) &lt; target_range_1.front()) {
+            idx_quad += full_quad_idx_range.template extent&lt;QDim1Mesh&gt;();
+        } else if (Idx&lt;QDim1Mesh&gt;(idx_quad) &gt; target_range_1.back()) {
+            idx_quad -= full_quad_idx_range.template extent&lt;QDim1Mesh&gt;();
+        }
+    }
+    if constexpr (BSplines2::is_periodic()) {
+        IdxRange&lt;QDim2Mesh&gt; target_range_2(target_range);
+        if (Idx&lt;QDim2Mesh&gt;(idx_quad) &lt; target_range_2.front()) {
+            idx_quad += full_quad_idx_range.template extent&lt;QDim2Mesh&gt;();
+        } else if (Idx&lt;QDim2Mesh&gt;(idx_quad) &gt; target_range_2.back()) {
+            idx_quad -= full_quad_idx_range.template extent&lt;QDim2Mesh&gt;();
+        }
+    }
+    assert(target_range.contains(idx_quad));
+    return idx_quad;
 }
 
 template &lt;
-        class QDimRMesh,
-        class QDimThetaMesh,
+        class QDim1Mesh,
+        class QDim2Mesh,
         class IdxBatch,
         class CoeffAlpha,
         class CoeffBeta,
         concepts::MetricTensor MetricTensorType&gt;
 KOKKOS_FUNCTION std::tuple&lt;
         double,
-        DVector&lt;typename QDimRMesh::continuous_dimension_type,
-                typename QDimThetaMesh::continuous_dimension_type&gt;&gt;
+        DVector&lt;typename QDim1Mesh::continuous_dimension_type,
+                typename QDim2Mesh::continuous_dimension_type&gt;&gt;
 get_test_weights(
         double basis_val_test,
-        DVector&lt;typename QDimRMesh::continuous_dimension_type::Dual,
-                typename QDimThetaMesh::continuous_dimension_type::Dual&gt; basis_derivs_test,
-        Idx&lt;QDimRMesh, QDimThetaMesh&gt; idx_quad,
+        DVector&lt;typename QDim1Mesh::continuous_dimension_type::Dual,
+                typename QDim2Mesh::continuous_dimension_type::Dual&gt; basis_derivs_test,
+        Idx&lt;QDim1Mesh, QDim2Mesh&gt; idx_quad,
         IdxBatch idx_batch,
         CoeffAlpha const&amp; coeff_alpha,
         CoeffBeta const&amp; coeff_beta,
         MetricTensorType const&amp; metric_tensor,
-        DField&lt;IdxRange&lt;QDimRMesh, QDimThetaMesh&gt;&gt; int_volume)
+        DField&lt;IdxRange&lt;QDim1Mesh, QDim2Mesh&gt;&gt; int_volume)
 {
-    using R = typename QDimRMesh::continuous_dimension_type;
-    using Theta = typename QDimThetaMesh::continuous_dimension_type;
+    using Dim1 = typename QDim1Mesh::continuous_dimension_type;
+    using Dim2 = typename QDim2Mesh::continuous_dimension_type;
 
     // Calculate coefficients at quadrature point
-    Coord&lt;R, Theta&gt; coord(ddc::coordinate(idx_quad));
+    Coord&lt;Dim1, Dim2&gt; coord(ddc::coordinate(idx_quad));
     const double alpha = coeff_alpha(idx_batch, coord);
     const double beta = coeff_beta(idx_batch, coord);
 
-    using Spatial2DVectorSpace = VectorIndexSet&lt;R, Theta&gt;;
+    using Spatial2DVectorSpace = VectorIndexSet&lt;Dim1, Dim2&gt;;
 
     Tensor inv_metric_tensor = metric_tensor.inverse(idx_quad);
     DTensor&lt;Spatial2DVectorSpace, Spatial2DVectorSpace&gt; inv_metric_tensor_2d;
     ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
     double test_mass_weight = int_volume(idx_quad) * beta * basis_val_test;
-    DVector&lt;R, Theta&gt; test_stiffness_weight
+    DVector&lt;Dim1, Dim2&gt; test_stiffness_weight
             = int_volume(idx_quad) * alpha
               * tensor_mul(index&lt;'i'&gt;(basis_derivs_test), index&lt;'i', 'j'&gt;(inv_metric_tensor_2d));
     return {test_mass_weight, test_stiffness_weight};

@@ -41,8 +41,8 @@
 
 ## f
 
-* **first\_basis\_r** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
-* **first\_basis\_theta** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+* **first\_basis\_1** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+* **first\_basis\_2** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
 
 
 ## i
@@ -285,9 +285,9 @@
 * **m\_gko\_matrix** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_fem\_non\_singular** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_quadrature** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
-* **m\_idxrange\_quadrature\_r** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **m\_idxrange\_quadrature\_r** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_quadrature\_singular** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **m\_idxrange\_quadrature\_theta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **m\_idxrange\_quadrature\_theta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_int\_volume\_alloc** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_n\_non\_zero\_bases\_r** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_n\_non\_zero\_bases\_theta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
@@ -316,10 +316,12 @@
 * **m\_builders** ([**SplineBuilder2DCollection**](classSplineBuilder2DCollection.md), [**SplineBuilderCollection**](classSplineBuilderCollection.md))
 * **m\_rhs** ([**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md))
 * **m\_data** ([**TensorCommon**](classTensorCommon.md))
-* **m\_basis\_vals\_r** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
-* **m\_basis\_vals\_theta** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
-* **m\_first\_basis\_r** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
-* **m\_first\_basis\_theta** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **m\_basis\_vals\_1** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **m\_basis\_vals\_2** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **m\_first\_basis\_1** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **m\_first\_basis\_2** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **m\_idxrange\_quadrature\_1** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **m\_idxrange\_quadrature\_2** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
 * **m\_idxrange\_tensor\_basis** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
 * **m\_int\_volume** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
 * **m\_tensor\_nnz\_per\_row** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
@@ -379,14 +381,16 @@
 * **s\_nbe\_xmin** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
 * **swap\_array** ([**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md))
 * **same\_evaluation\_idx\_range\_types** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
-* **s\_n\_gauss\_legendre\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **s\_n\_gauss\_legendre\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **s\_n\_overlap\_cells** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
-* **s\_n\_gauss\_legendre\_theta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **s\_n\_gauss\_legendre\_theta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **s\_n\_elements** ([**TensorCommon**](classTensorCommon.md))
-* **s\_n\_non\_zero\_bases\_r** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
-* **s\_n\_non\_zero\_bases\_theta** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
-* **s\_n\_quad\_support\_r** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
-* **s\_n\_quad\_support\_theta** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **s\_n\_gauss\_legendre\_1** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **s\_n\_gauss\_legendre\_2** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **s\_n\_non\_zero\_bases\_1** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **s\_n\_non\_zero\_bases\_2** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **s\_n\_quad\_support\_1** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
+* **s\_n\_quad\_support\_2** ([**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md))
 
 
 ## t
@@ -402,8 +406,8 @@
 
 ## v
 
-* **vals\_r** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
-* **vals\_theta** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+* **vals\_1** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
+* **vals\_2** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
 * **value** ([**tensor\_tools::is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md), [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md))
 
 

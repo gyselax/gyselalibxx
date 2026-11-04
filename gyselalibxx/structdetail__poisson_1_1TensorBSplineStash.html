@@ -570,7 +570,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="struct-detail_poissontensorbsplinestash">Struct detail_poisson::TensorBSplineStash</h1>
-<p><strong>template &lt;typename QDimRMesh, typename QDimThetaMesh, typename <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, typename <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>&gt;</strong></p>
+<p><strong>template &lt;typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespacedetail__poisson.html"><strong>detail_poisson</strong></a> <strong>&gt;</strong> <a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>TensorBSplineStash</strong></a></p>
 <p><em>The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -586,20 +586,20 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">ConstField&lt; Idx&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> &gt;, IdxRange&lt; QDimRMesh &gt; &gt;</td>
-<td style="text-align: left;"><a href="#variable-first_basis_r"><strong>first_basis_r</strong></a>  <br><em>The first non-zero radial B-spline at each radial quadrature point.</em></td>
+<td style="text-align: right;">ConstField&lt; Idx&lt; BSplines1 &gt;, IdxRange&lt; QDim1Mesh &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-first_basis_1"><strong>first_basis_1</strong></a>  <br><em>The first non-zero B-spline at each quadrature point in the first dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">ConstField&lt; Idx&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;, IdxRange&lt; QDimThetaMesh &gt; &gt;</td>
-<td style="text-align: left;"><a href="#variable-first_basis_theta"><strong>first_basis_theta</strong></a>  <br><em>The first non-zero poloidal B-spline at each poloidal quadrature point.</em></td>
+<td style="text-align: right;">ConstField&lt; Idx&lt; BSplines2 &gt;, IdxRange&lt; QDim2Mesh &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-first_basis_2"><strong>first_basis_2</strong></a>  <br><em>The first non-zero B-spline at each quadrature point in the second dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">DConstField&lt; IdxRange&lt; QDimRMesh, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, ddc::Deriv&lt; <a href="structR.html"><strong>R</strong></a> &gt; &gt; &gt;</td>
-<td style="text-align: left;"><a href="#variable-vals_r"><strong>vals_r</strong></a>  <br><em>The values (derivative order 0) and derivatives (derivative order 1) of the radial B-splines.</em></td>
+<td style="text-align: right;">DConstField&lt; IdxRange&lt; QDim1Mesh, BSplines1, ddc::Deriv&lt; Dim1 &gt; &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-vals_1"><strong>vals_1</strong></a>  <br><em>The values (derivative order 0) and derivatives (derivative order 1) of the B-splines in the first dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">DConstField&lt; IdxRange&lt; QDimThetaMesh, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, ddc::Deriv&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; &gt;</td>
-<td style="text-align: left;"><a href="#variable-vals_theta"><strong>vals_theta</strong></a>  <br><em>The values (derivative order 0) and derivatives (derivative order 1) of the poloidal B-splines.</em></td>
+<td style="text-align: right;">DConstField&lt; IdxRange&lt; QDim2Mesh, BSplines2, ddc::Deriv&lt; Dim2 &gt; &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-vals_2"><strong>vals_2</strong></a>  <br><em>The values (derivative order 0) and derivatives (derivative order 1) of the B-splines in the second dimension.</em></td>
 </tr>
 </tbody>
 </table>
@@ -614,54 +614,54 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-vals"><strong>vals</strong></a> (Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, Idx&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx) const<br><em>Get the value of a tensor product B-spline at a quadrature point.</em></td>
+<td style="text-align: left;"><a href="#function-vals"><strong>vals</strong></a> (Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad, Idx&lt; BSplines1, BSplines2 &gt; idx) const<br><em>Get the value of a tensor product B-spline at a quadrature point.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <a href="structR__cov.html"><strong>R_cov</strong></a>, <a href="structTheta__cov.html"><strong>Theta_cov</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#function-vals_and_derivs"><strong>vals_and_derivs</strong></a> (Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, Idx&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx) const<br><em>Get the value and the derivatives of a tensor product B-spline at a quadrature point.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; Dim1_cov, Dim2_cov &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-vals_and_derivs"><strong>vals_and_derivs</strong></a> (Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad, Idx&lt; BSplines1, BSplines2 &gt; idx) const<br><em>Get the value and the derivatives of a tensor product B-spline at a quadrature point.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The tensor product B-splines and the quadrature grid both have a tensor product structure. The value of a tensor product B-spline at a quadrature point can therefore be computed from the values of the 1D B-splines at the 1D quadrature points. The memory required to store these values is O(N_r + N_theta).</p>
+<p>The tensor product B-splines and the quadrature grid both have a tensor product structure. The value of a tensor product B-spline at a quadrature point can therefore be computed from the values of the 1D B-splines at the 1D quadrature points. The memory required to store these values is O(N_1 + N_2).</p>
 <p>The B-spline index stored in the stash is the offset from the first non-zero B-spline at the quadrature point.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>QDimRMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in radial direction. </li>
-<li><code>QDimThetaMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in poloidal direction. </li>
-<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> Splines in radial direction. </li>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> Splines in poloidal direction. </li>
+<li><code>QDim1Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the first dimension. </li>
+<li><code>QDim2Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the second dimension. </li>
+<li><code>BSplines1</code> Splines in the first dimension. </li>
+<li><code>BSplines2</code> Splines in the second dimension. </li>
 </ul>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
-<h3 id="variable-first_basis_r">variable first_basis_r</h3>
-<p><em>The first non-zero radial B-spline at each radial quadrature point.</em> </p>
-<pre><code class="language-C++">ConstField&lt;Idx&lt;BSplinesR&gt;, IdxRange&lt;QDimRMesh&gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::first_basis_r;
+<h3 id="variable-first_basis_1">variable first_basis_1</h3>
+<p><em>The first non-zero B-spline at each quadrature point in the first dimension.</em> </p>
+<pre><code class="language-C++">ConstField&lt;Idx&lt;BSplines1&gt;, IdxRange&lt;QDim1Mesh&gt; &gt; detail_poisson::TensorBSplineStash&lt; QDim1Mesh, QDim2Mesh, BSplines1, BSplines2 &gt;::first_basis_1;
 </code></pre>
 <hr>
 
-<h3 id="variable-first_basis_theta">variable first_basis_theta</h3>
-<p><em>The first non-zero poloidal B-spline at each poloidal quadrature point.</em> </p>
-<pre><code class="language-C++">ConstField&lt;Idx&lt;BSplinesTheta&gt;, IdxRange&lt;QDimThetaMesh&gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::first_basis_theta;
+<h3 id="variable-first_basis_2">variable first_basis_2</h3>
+<p><em>The first non-zero B-spline at each quadrature point in the second dimension.</em> </p>
+<pre><code class="language-C++">ConstField&lt;Idx&lt;BSplines2&gt;, IdxRange&lt;QDim2Mesh&gt; &gt; detail_poisson::TensorBSplineStash&lt; QDim1Mesh, QDim2Mesh, BSplines1, BSplines2 &gt;::first_basis_2;
 </code></pre>
 <hr>
 
-<h3 id="variable-vals_r">variable vals_r</h3>
-<p><em>The values (derivative order 0) and derivatives (derivative order 1) of the radial B-splines.</em> </p>
-<pre><code class="language-C++">DConstField&lt;IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt; &gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::vals_r;
+<h3 id="variable-vals_1">variable vals_1</h3>
+<p><em>The values (derivative order 0) and derivatives (derivative order 1) of the B-splines in the first dimension.</em> </p>
+<pre><code class="language-C++">DConstField&lt;IdxRange&lt;QDim1Mesh, BSplines1, ddc::Deriv&lt;Dim1&gt; &gt; &gt; detail_poisson::TensorBSplineStash&lt; QDim1Mesh, QDim2Mesh, BSplines1, BSplines2 &gt;::vals_1;
 </code></pre>
 <hr>
 
-<h3 id="variable-vals_theta">variable vals_theta</h3>
-<p><em>The values (derivative order 0) and derivatives (derivative order 1) of the poloidal B-splines.</em> </p>
-<pre><code class="language-C++">DConstField&lt;IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt; &gt; &gt; detail_poisson::TensorBSplineStash&lt; QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta &gt;::vals_theta;
+<h3 id="variable-vals_2">variable vals_2</h3>
+<p><em>The values (derivative order 0) and derivatives (derivative order 1) of the B-splines in the second dimension.</em> </p>
+<pre><code class="language-C++">DConstField&lt;IdxRange&lt;QDim2Mesh, BSplines2, ddc::Deriv&lt;Dim2&gt; &gt; &gt; detail_poisson::TensorBSplineStash&lt; QDim1Mesh, QDim2Mesh, BSplines1, BSplines2 &gt;::vals_2;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-vals">function vals</h3>
 <p><em>Get the value of a tensor product B-spline at a quadrature point.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION double detail_poisson::TensorBSplineStash::vals (
-    Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad,
-    Idx&lt; BSplinesR , BSplinesTheta &gt; idx
+    Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad,
+    Idx&lt; BSplines1, BSplines2 &gt; idx
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -675,9 +675,9 @@
 
 <h3 id="function-vals_and_derivs">function vals_and_derivs</h3>
 <p><em>Get the value and the derivatives of a tensor product B-spline at a quadrature point.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R_cov , Theta_cov &gt; &gt; detail_poisson::TensorBSplineStash::vals_and_derivs (
-    Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad,
-    Idx&lt; BSplinesR , BSplinesTheta &gt; idx
+<pre><code class="language-C++">inline KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; Dim1_cov, Dim2_cov &gt; &gt; detail_poisson::TensorBSplineStash::vals_and_derivs (
+    Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad,
+    Idx&lt; BSplines1, BSplines2 &gt; idx
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>

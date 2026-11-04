@@ -41,81 +41,81 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="32" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="32" bodyend="44"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="33" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="33" bodyend="45"/>
       </memberdef>
-      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a65137404e884acc2dcaee94b2b25c073" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a5277e9bb82a11287f402d297ab3bbea3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+            <type>typename BSplines</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION IdxStep&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>KOKKOS_FUNCTION IdxStep&lt; BSplinesTheta &gt; detail_poisson::theta_mod</definition>
-        <argsstring>(IdxStep&lt; BSplinesTheta &gt; idx_theta)</argsstring>
-        <name>theta_mod</name>
-        <qualifiedname>detail_poisson::theta_mod</qualifiedname>
+        <type>KOKKOS_FUNCTION IdxStep&lt; BSplines &gt;</type>
+        <definition>KOKKOS_FUNCTION IdxStep&lt; BSplines &gt; detail_poisson::periodic_mod</definition>
+        <argsstring>(IdxStep&lt; BSplines &gt; idx_step)</argsstring>
+        <name>periodic_mod</name>
+        <qualifiedname>detail_poisson::periodic_mod</qualifiedname>
         <param>
-          <type>IdxStep&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-          <declname>idx_theta</declname>
+          <type>IdxStep&lt; BSplines &gt;</type>
+          <declname>idx_step</declname>
         </param>
         <briefdescription>
-<para>Calculates the modulo idx_theta in relation to cells number along <formula id="17">$ \theta $</formula> direction. </para>
+<para>Calculates the modulo idx_step in relation to the number of basis functions of periodic B-splines. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+<parametername>BSplines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Periodic B-Splines in poloidal direction.</para>
+<para>Periodic B-Splines.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
 <parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="in">idx_theta</parametername>
+<parametername direction="in">idx_step</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><formula id="17">$ \theta $</formula> index.</para>
+<para>A step between two B-spline indices.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The corresponding indice modulo <formula id="17">$ \theta $</formula> direction cells number </para>
+<simplesect kind="return"><para>The corresponding step modulo the number of basis functions. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="57" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="57" bodyend="65"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="59" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="59" bodyend="67"/>
       </memberdef>
-      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a36d93a932fc52e0ea9a87014417bda15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+            <type>typename BSplines</type>
           </param>
           <param>
             <type>class IdxType</type>
           </param>
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION IdxType</type>
-        <definition>KOKKOS_INLINE_FUNCTION IdxType detail_poisson::theta_mod</definition>
+        <definition>KOKKOS_INLINE_FUNCTION IdxType detail_poisson::periodic_mod</definition>
         <argsstring>(IdxType idx)</argsstring>
-        <name>theta_mod</name>
-        <qualifiedname>detail_poisson::theta_mod</qualifiedname>
+        <name>periodic_mod</name>
+        <qualifiedname>detail_poisson::periodic_mod</qualifiedname>
         <param>
           <type>IdxType</type>
           <declname>idx</declname>
         </param>
         <briefdescription>
-<para>Calculates the index which is inside the poloidal domain using the periodicity properties. </para>
+<para>Calculates the index which is inside the domain of periodic B-splines using the periodicity properties. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+<parametername>BSplines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Periodic B-Splines in poloidal direction. </para>
+<para>Periodic B-Splines. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -132,7 +132,7 @@
 <parametername direction="in">idx</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A multi-dimensional index including the polar bspline index.</para>
+<para>A multi-dimensional index including the B-spline index.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="78" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="78" bodyend="91"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="81" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="81" bodyend="94"/>
       </memberdef>
       <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a247dc6ba30ff36eeea601bff9becfe7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -178,116 +178,70 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="97" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="97" bodyend="106"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="100" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="100" bodyend="109"/>
       </memberdef>
-      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1ad5b8e08da0d400e6687edae1aa567802" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>typename QDimRMesh</type>
+            <type>typename QDimMesh</type>
           </param>
           <param>
-            <type>typename QDimThetaMesh</type>
-          </param>
-          <param>
-            <type>typename <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></type>
-          </param>
-          <param>
-            <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+            <type>typename BSplines</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</type>
-        <definition>KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_quadrature_between_knots</definition>
-        <argsstring>(Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesR &gt; &gt; start_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesR &gt; &gt; end_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesTheta &gt; &gt; start_knot_theta, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesTheta &gt; &gt; end_knot_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front)</argsstring>
-        <name>get_quadrature_between_knots</name>
-        <qualifiedname>detail_poisson::get_quadrature_between_knots</qualifiedname>
+        <type>KOKKOS_FUNCTION IdxRange&lt; QDimMesh &gt;</type>
+        <definition>KOKKOS_FUNCTION IdxRange&lt; QDimMesh &gt; detail_poisson::get_quadrature_between_knots_1d</definition>
+        <argsstring>(Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt; start_knot, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt; end_knot, Idx&lt; QDimMesh &gt; idx_quad_front)</argsstring>
+        <name>get_quadrature_between_knots_1d</name>
+        <qualifiedname>detail_poisson::get_quadrature_between_knots_1d</qualifiedname>
         <param>
-          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt; &gt;</type>
-          <declname>start_knot_r</declname>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt;</type>
+          <declname>start_knot</declname>
         </param>
         <param>
-          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt; &gt;</type>
-          <declname>end_knot_r</declname>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt;</type>
+          <declname>end_knot</declname>
         </param>
         <param>
-          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt; &gt;</type>
-          <declname>start_knot_theta</declname>
-        </param>
-        <param>
-          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt; &gt;</type>
-          <declname>end_knot_theta</declname>
-        </param>
-        <param>
-          <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+          <type>Idx&lt; QDimMesh &gt;</type>
           <declname>idx_quad_front</declname>
         </param>
         <briefdescription>
-<para>Compute the quadrature range between a provided set of knots. </para>
+<para>Compute the 1D quadrature range between a provided pair of knots. </para>
         </briefdescription>
         <detaileddescription>
-<para>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. The poloidal index of the front of the returned range is always inside the domain. However, in order to return a contiguous range, the result may include poloidal indices beyond the end of the domain. A modulo operator should be applied before using the indices.</para>
+<para>Compute the range of quadrature points which are found between two knots. If the B-splines are periodic then the front of the returned range is always inside the domain. However, in order to return a contiguous range, the result may include indices beyond the end of the domain. A modulo operator should be applied before using the indices.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>QDimRMesh</parametername>
+<parametername>QDimMesh</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in radial direction. </para>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>QDimThetaMesh</parametername>
+<parametername>BSplines</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in poloidal direction. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Splines in radial direction. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Splines in poloidal direction.</para>
+<para>The 1D B-splines.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
 <parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="in">start_knot_r</parametername>
+<parametername direction="in">start_knot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The index of the knot describing the lower bound of the domain of interest in the radial direction. </para>
+<para>The index of the knot describing the lower bound of the domain of interest. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">end_knot_r</parametername>
+<parametername direction="in">end_knot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The index of the knot describing the upper bound of the domain of interest in the radial direction. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">start_knot_theta</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The index of the knot describing the lower bound of the domain of interest in the poloidal direction. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">end_knot_theta</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The index of the knot describing the upper bound of the domain of interest in the poloidal direction. </para>
+<para>The index of the knot describing the upper bound of the domain of interest. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -305,71 +259,383 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="225" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="225" bodyend="260"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="225" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="225" bodyend="244"/>
       </memberdef>
-      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a00794e48e29df9ffdedf8449e806c1f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1acdd5f817d16cea1f95549c6d76c0d0f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>typename QDimRMesh</type>
+            <type>typename QDim1Mesh</type>
           </param>
           <param>
-            <type>typename QDimThetaMesh</type>
+            <type>typename QDim2Mesh</type>
           </param>
           <param>
-            <type>typename <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></type>
+            <type>typename BSplines1</type>
           </param>
           <param>
-            <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+            <type>typename BSplines2</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</type>
-        <definition>KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_support_quadrature</definition>
-        <argsstring>(Idx&lt; BSplinesR, BSplinesTheta &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front)</argsstring>
-        <name>get_support_quadrature</name>
-        <qualifiedname>detail_poisson::get_support_quadrature</qualifiedname>
+        <type>KOKKOS_FUNCTION IdxRange&lt; QDim1Mesh, QDim2Mesh &gt;</type>
+        <definition>KOKKOS_FUNCTION IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; detail_poisson::get_quadrature_between_knots</definition>
+        <argsstring>(Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines1 &gt; &gt; start_knot_1, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines1 &gt; &gt; end_knot_1, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines2 &gt; &gt; start_knot_2, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines2 &gt; &gt; end_knot_2, Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad_front)</argsstring>
+        <name>get_quadrature_between_knots</name>
+        <qualifiedname>detail_poisson::get_quadrature_between_knots</qualifiedname>
         <param>
-          <type>Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines1 &gt; &gt;</type>
+          <declname>start_knot_1</declname>
+        </param>
+        <param>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines1 &gt; &gt;</type>
+          <declname>end_knot_1</declname>
+        </param>
+        <param>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines2 &gt; &gt;</type>
+          <declname>start_knot_2</declname>
+        </param>
+        <param>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines2 &gt; &gt;</type>
+          <declname>end_knot_2</declname>
+        </param>
+        <param>
+          <type>Idx&lt; QDim1Mesh, QDim2Mesh &gt;</type>
+          <declname>idx_quad_front</declname>
+        </param>
+        <briefdescription>
+<para>Compute the quadrature range between a provided set of knots. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute the range of quadrature points which are found between a set of knots in both dimensions. The index of the front of the returned range in the second dimension is always inside the domain. However, in order to return a contiguous range, the result may include indices beyond the end of the domain in the second dimension. A modulo operator should be applied before using the indices. See get_quadrature_between_knots_1d for implementation details.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QDim1Mesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QDim2Mesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in the second dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BSplines1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BSplines2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in the second dimension.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">start_knot_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the knot describing the lower bound of the domain of interest in the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">end_knot_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the knot describing the upper bound of the domain of interest in the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">start_knot_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the knot describing the lower bound of the domain of interest in the second dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">end_knot_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the knot describing the upper bound of the domain of interest in the second dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad_front</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first index of the index range of the quadrature points. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The range of quadrature points in the specified domain. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="279" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="279" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a77320fc3ef1c957dd2e7c4f6b57f676d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BSplines</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION IdxRange&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION IdxRange&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt; detail_poisson::get_overlapping_knots_1d</definition>
+        <argsstring>(Idx&lt; BSplines &gt; idx_test, Idx&lt; BSplines &gt; idx_trial)</argsstring>
+        <name>get_overlapping_knots_1d</name>
+        <qualifiedname>detail_poisson::get_overlapping_knots_1d</qualifiedname>
+        <param>
+          <type>Idx&lt; BSplines &gt;</type>
+          <declname>idx_test</declname>
+        </param>
+        <param>
+          <type>Idx&lt; BSplines &gt;</type>
+          <declname>idx_trial</declname>
+        </param>
+        <briefdescription>
+<para>Compute the range of knots between which two 1D B-splines are both non-zero. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the B-splines are periodic then, in order to return a contiguous range, the result may include knots beyond the end of the domain.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>BSplines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D B-splines.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_test</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the first B-spline (the test function). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_trial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the second B-spline (the trial function). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The range of knots describing the cells where both B-splines are non-zero. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="311" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="311" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a7c712b5bd5c9174e8258ed4cd683707f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BSplines</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION std::array&lt; IdxRange&lt; BSplines &gt;, 2 &gt;</type>
+        <definition>KOKKOS_FUNCTION std::array&lt; IdxRange&lt; BSplines &gt;, 2 &gt; detail_poisson::get_overlapping_bsplines_1d</definition>
+        <argsstring>(Idx&lt; BSplines &gt; idx_test, IdxRange&lt; BSplines &gt; idx_range_basis)</argsstring>
+        <name>get_overlapping_bsplines_1d</name>
+        <qualifiedname>detail_poisson::get_overlapping_bsplines_1d</qualifiedname>
+        <param>
+          <type>Idx&lt; BSplines &gt;</type>
+          <declname>idx_test</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; BSplines &gt;</type>
+          <declname>idx_range_basis</declname>
+        </param>
+        <briefdescription>
+<para>Get the 1D B-splines in a basis whose supports overlap the support of a given B-spline. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The result is returned as 2 contiguous index ranges. The indices in the first range are all smaller than the indices in the second range. This allows the B-splines to be iterated over in order, even when the overlap wraps around the boundary of a periodic basis. The second range is empty if the overlap does not wrap around the boundary.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>BSplines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D B-splines.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_test</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the B-spline (the test function). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_basis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of the B-splines in the basis. In a periodic dimension this must contain all the B-splines. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The 2 sorted index ranges containing all the B-splines in the basis which overlap the given B-spline. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="379" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="379" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a09d03bd734c0ae8387e03ca2b58d8838" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename QDimMesh</type>
+          </param>
+          <param>
+            <type>typename BSplines</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION IdxRange&lt; QDimMesh &gt;</type>
+        <definition>KOKKOS_FUNCTION IdxRange&lt; QDimMesh &gt; detail_poisson::get_support_quadrature_1d</definition>
+        <argsstring>(Idx&lt; BSplines &gt; idx, Idx&lt; QDimMesh &gt; idx_quad_front)</argsstring>
+        <name>get_support_quadrature_1d</name>
+        <qualifiedname>detail_poisson::get_support_quadrature_1d</qualifiedname>
+        <param>
+          <type>Idx&lt; BSplines &gt;</type>
           <declname>idx</declname>
         </param>
         <param>
-          <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+          <type>Idx&lt; QDimMesh &gt;</type>
+          <declname>idx_quad_front</declname>
+        </param>
+        <briefdescription>
+<para>Compute the range of quadrature points in the support of a 1D B-spline. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the B-splines are periodic then, in order to return a contiguous range, the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QDimMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BSplines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D B-splines.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the B-spline. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad_front</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first index of the index range of the quadrature points. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The range of quadrature points in the support of the B-spline. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="436" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="436" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a1aa10d63fed51c5d0fe73397ae8cddd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename QDim1Mesh</type>
+          </param>
+          <param>
+            <type>typename QDim2Mesh</type>
+          </param>
+          <param>
+            <type>typename BSplines1</type>
+          </param>
+          <param>
+            <type>typename BSplines2</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION IdxRange&lt; QDim1Mesh, QDim2Mesh &gt;</type>
+        <definition>KOKKOS_FUNCTION IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; detail_poisson::get_support_quadrature</definition>
+        <argsstring>(Idx&lt; BSplines1, BSplines2 &gt; idx, Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad_front)</argsstring>
+        <name>get_support_quadrature</name>
+        <qualifiedname>detail_poisson::get_support_quadrature</qualifiedname>
+        <param>
+          <type>Idx&lt; BSplines1, BSplines2 &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>Idx&lt; QDim1Mesh, QDim2Mesh &gt;</type>
           <declname>idx_quad_front</declname>
         </param>
         <briefdescription>
 <para>Compute the range of quadrature points in the support of a tensor product B-spline. </para>
         </briefdescription>
         <detaileddescription>
-<para>In order to return a contiguous range the result may include poloidal indices which are outside the domain. A modulo operator should be applied before using the indices.</para>
+<para>In order to return a contiguous range the result may include indices which are outside the domain in periodic dimensions. A modulo operator should be applied before using the indices.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>QDimRMesh</parametername>
+<parametername>QDim1Mesh</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in radial direction. </para>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in the first dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>QDimThetaMesh</parametername>
+<parametername>QDim2Mesh</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in poloidal direction. </para>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in the second dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>
+<parametername>BSplines1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Splines in radial direction. </para>
+<para>Splines in the first dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+<parametername>BSplines2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Splines in poloidal direction.</para>
+<para>Splines in the second dimension.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -396,15 +662,176 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="281" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="281" bodyend="308"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="476" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="476" bodyend="487"/>
       </memberdef>
-      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a5c9c8d213b290bba154c4d303e2b47bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a42ac5307483e73b1f5f626a5dc9be328" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class QDimRMesh</type>
+            <type>typename BSplines</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION int</type>
+        <definition>KOKKOS_INLINE_FUNCTION int detail_poisson::n_nonzeros_in_rows</definition>
+        <argsstring>(int i, int nbasis)</argsstring>
+        <name>n_nonzeros_in_rows</name>
+        <qualifiedname>detail_poisson::n_nonzeros_in_rows</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbasis</declname>
+        </param>
+        <briefdescription>
+<para>Get the number of non-zero elements in the first i rows of a 1D stiffness matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Row j of the 1D stiffness matrix contains one non-zero element for each B-spline whose support overlaps the support of the j-th B-spline (including the j-th B-spline itself). In a periodic basis all rows contain the same number of non-zero elements. In a non-periodic basis this number decreases near the boundaries. The result is therefore the cumulative quantity required to build the nnz data structure of a CSR matrix. When i == nbasis the result is the total number of non-zero elements in the 1D stiffness matrix.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>BSplines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The B-splines in the dimension of interest.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of rows (counted from the start of the basis) whose non-zero elements are counted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nbasis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of B-splines in the basis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of non-zero elements in rows 0 to i-1 of the 1D stiffness matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="510" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="510" bodyend="530"/>
+      </memberdef>
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1a5190dd90adc2a8adf3e1882da7284ca4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BSplines1</type>
           </param>
           <param>
-            <type>class QDimThetaMesh</type>
+            <type>typename BSplines2</type>
+          </param>
+          <param>
+            <type>typename QDim1Mesh</type>
+          </param>
+          <param>
+            <type>typename QDim2Mesh</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION Idx&lt; QDim1Mesh, QDim2Mesh &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Idx&lt; QDim1Mesh, QDim2Mesh &gt; detail_poisson::periodic_wrap</definition>
+        <argsstring>(Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad, IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; const &amp;target_range, IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; const &amp;full_quad_idx_range)</argsstring>
+        <name>periodic_wrap</name>
+        <qualifiedname>detail_poisson::periodic_wrap</qualifiedname>
+        <param>
+          <type>Idx&lt; QDim1Mesh, QDim2Mesh &gt;</type>
+          <declname>idx_quad</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; const &amp;</type>
+          <declname>target_range</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; const &amp;</type>
+          <declname>full_quad_idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Get the periodic image of a quadrature index which is found in a target range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The quadrature ranges returned by get_support_quadrature and get_quadrature_between_knots are contiguous so they may extend past the end of the domain in periodic dimensions. This function shifts an index by a period in each periodic dimension where it is outside the target range. It can be used to move an index from such a range into the domain (target_range = full_quad_idx_range) or from the domain into such a range.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>BSplines1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BSplines2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in the second dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QDim1Mesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QDim2Mesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in the second dimension.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of a quadrature point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">target_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The range in which the returned index should be found. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">full_quad_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of all the quadrature points (one period). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The equivalent index inside target_range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="556" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="556" bodyend="579"/>
+      </memberdef>
+      <memberdef kind="function" id="fem__poisson__assembler__utils_8hpp_1ad7fe26a632c663843263e7312c44a5d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class QDim1Mesh</type>
+          </param>
+          <param>
+            <type>class QDim2Mesh</type>
           </param>
           <param>
             <type>class IdxBatch</type>
@@ -421,9 +848,9 @@
             <defname>MetricTensorType</defname>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type &gt; &gt;</type>
-        <definition>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type &gt; &gt; detail_poisson::get_test_weights</definition>
-        <argsstring>(double basis_val_test, DVector&lt; typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual &gt; basis_derivs_test, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, MetricTensorType const &amp;metric_tensor, DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt; int_volume)</argsstring>
+        <type>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDim1Mesh::continuous_dimension_type, typename QDim2Mesh::continuous_dimension_type &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDim1Mesh::continuous_dimension_type, typename QDim2Mesh::continuous_dimension_type &gt; &gt; detail_poisson::get_test_weights</definition>
+        <argsstring>(double basis_val_test, DVector&lt; typename QDim1Mesh::continuous_dimension_type::Dual, typename QDim2Mesh::continuous_dimension_type::Dual &gt; basis_derivs_test, Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, MetricTensorType const &amp;metric_tensor, DField&lt; IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; &gt; int_volume)</argsstring>
         <name>get_test_weights</name>
         <qualifiedname>detail_poisson::get_test_weights</qualifiedname>
         <param>
@@ -431,11 +858,11 @@
           <declname>basis_val_test</declname>
         </param>
         <param>
-          <type>DVector&lt; typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual &gt;</type>
+          <type>DVector&lt; typename QDim1Mesh::continuous_dimension_type::Dual, typename QDim2Mesh::continuous_dimension_type::Dual &gt;</type>
           <declname>basis_derivs_test</declname>
         </param>
         <param>
-          <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+          <type>Idx&lt; QDim1Mesh, QDim2Mesh &gt;</type>
           <declname>idx_quad</declname>
         </param>
         <param>
@@ -455,7 +882,7 @@
           <declname>metric_tensor</declname>
         </param>
         <param>
-          <type>DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt;</type>
+          <type>DField&lt; IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; &gt;</type>
           <declname>int_volume</declname>
         </param>
         <briefdescription>
@@ -465,18 +892,18 @@
 <para>The weak integral element is <formula id="385">$ w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j) $</formula> where <formula id="386">$ w $</formula> is the integral volume, <formula id="387">$ B_i $</formula> is the test function and <formula id="388">$ B_j $</formula> is the trial function. This function computes <formula id="389">$ w \alpha G^{-1} \nabla B_i $</formula> and <formula id="390">$ w \beta B_i $</formula> so that the weak integral element can be computed from the values and derivatives of the trial function alone.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>QDimRMesh</parametername>
+<parametername>QDim1Mesh</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in radial direction. </para>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in the first dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>QDimThetaMesh</parametername>
+<parametername>QDim2Mesh</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in poloidal direction.</para>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in the second dimension.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -517,7 +944,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, Coord&lt;Dim1, Dim2&gt;)</computeroutput> returning <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -525,7 +952,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning <formula id="160">$ \beta $</formula> at the given batch and coordinate. </para>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, Coord&lt;Dim1, Dim2&gt;)</computeroutput> returning <formula id="160">$ \beta $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -555,7 +982,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="359" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="359" bodyend="389"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="630" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" bodystart="630" bodyend="660"/>
       </memberdef>
       <memberdef kind="function" id="polar__spline__fem__poisson__like__assembler_8hpp_1ac16a6aa98a88e1172c1f60b4ad7a168a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -629,6 +1056,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="17" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp" line="18" column="1"/>
   </compounddef>
 </doxygen>

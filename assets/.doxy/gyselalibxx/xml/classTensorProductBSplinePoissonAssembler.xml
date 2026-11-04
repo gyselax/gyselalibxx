@@ -5,22 +5,22 @@
     <includes refid="tensor__product__bspline__poisson__assembler_8hpp" local="no">tensor_product_bspline_poisson_assembler.hpp</includes>
     <templateparamlist>
       <param>
-        <type>typename <ref refid="structGridR" kindref="compound">GridR</ref></type>
+        <type>typename Grid1</type>
       </param>
       <param>
-        <type>typename <ref refid="structGridTheta" kindref="compound">GridTheta</ref></type>
+        <type>typename Grid2</type>
       </param>
       <param>
-        <type>typename <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></type>
+        <type>typename BSplines1</type>
       </param>
       <param>
-        <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+        <type>typename BSplines2</type>
       </param>
       <param>
-        <type>typename QDimRMesh</type>
+        <type>typename QDim1Mesh</type>
       </param>
       <param>
-        <type>typename QDimThetaMesh</type>
+        <type>typename QDim2Mesh</type>
       </param>
       <param>
         <type><ref refid="conceptconcepts_1_1MetricTensor" kindref="compound">concepts::MetricTensor</ref></type>
@@ -29,46 +29,46 @@
       </param>
       <param>
         <type>typename IdxRangeFull</type>
-        <defval>IdxRange&lt;<ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>&gt;</defval>
+        <defval>IdxRange&lt;Grid1, Grid2&gt;</defval>
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a3bd0fcad84e95b6437ef61bc76c8787b" prot="public" static="no">
-        <type>typename GridR::continuous_dimension_type</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::R =  typename GridR::continuous_dimension_type</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" prot="public" static="no">
+        <type>typename Grid1::continuous_dimension_type</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::Dim1 =  typename Grid1::continuous_dimension_type</definition>
         <argsstring></argsstring>
-        <name>R</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::R</qualifiedname>
+        <name>Dim1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::Dim1</qualifiedname>
         <briefdescription>
-<para>The radial dimension. </para>
+<para>The first dimension. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a0cabdb11574251e1fc1fa67bc47f4c11" prot="public" static="no">
-        <type>typename GridTheta::continuous_dimension_type</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::Theta =  typename GridTheta::continuous_dimension_type</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" prot="public" static="no">
+        <type>typename Grid2::continuous_dimension_type</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::Dim2 =  typename Grid2::continuous_dimension_type</definition>
         <argsstring></argsstring>
-        <name>Theta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::Theta</qualifiedname>
+        <name>Dim2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::Dim2</qualifiedname>
         <briefdescription>
-<para>The poloidal dimension. </para>
+<para>The second dimension. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="66" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a0cf93332df3f8d7a84f9da5ef5cc9410" prot="public" static="no">
-        <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBSRTheta =  IdxRange&lt;BSplinesR, BSplinesTheta&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a2097570b0514cb48c5ce2ea26d36ff9b" prot="public" static="no">
+        <type>IdxRange&lt; BSplines1, BSplines2 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBS2D =  IdxRange&lt;BSplines1, BSplines2&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxRangeBSRTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBSRTheta</qualifiedname>
+        <name>IdxRangeBS2D</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBS2D</qualifiedname>
         <briefdescription>
 <para>The index range of the tensor product B-splines. </para>
         </briefdescription>
@@ -78,9 +78,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="75" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1af97a1820fc1fcbfd28207a89e565af9d" prot="public" static="no">
-        <type>ddc::remove_dims_of_t&lt; IdxRangeFull, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, GridR, GridTheta&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1abb0bfee92e07ca67f43bd4b2e4720281" prot="public" static="no">
+        <type>ddc::remove_dims_of_t&lt; IdxRangeFull, Grid1, Grid2 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, Grid1, Grid2&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatch</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBatch</qualifiedname>
@@ -93,12 +93,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="78" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" prot="public" static="no">
-        <type>IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeQuadratureRTheta =  IdxRange&lt;QDimRMesh, QDimThetaMesh&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" prot="public" static="no">
+        <type>IdxRange&lt; QDim1Mesh, QDim2Mesh &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeQuadrature2D =  IdxRange&lt;QDim1Mesh, QDim2Mesh&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxRangeQuadratureRTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeQuadratureRTheta</qualifiedname>
+        <name>IdxRangeQuadrature2D</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeQuadrature2D</qualifiedname>
         <briefdescription>
 <para>The index range of the quadrature points. </para>
         </briefdescription>
@@ -108,10 +108,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" prot="public" static="no">
-        <type>detail_poisson:: <ref refid="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" kindref="member">TensorBSplineStash</ref>&lt; QDimRMesh, QDimThetaMesh, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson::
-            TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a8e448274cd37ce4b2776985c033ca9d1" prot="public" static="no">
+        <type><ref refid="structdetail__poisson_1_1TensorBSplineStash" kindref="compound">detail_poisson::TensorBSplineStash</ref>&lt; QDim1Mesh, QDim2Mesh, BSplines1, BSplines2 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson::TensorBSplineStash&lt;QDim1Mesh, QDim2Mesh, BSplines1, BSplines2&gt;</definition>
         <argsstring></argsstring>
         <name>TensorBSplineStash</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::TensorBSplineStash</qualifiedname>
@@ -126,12 +125,26 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1ac04605659ab6a7fb8581ddc390d20068" prot="private" static="no">
-        <type>ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::KnotsR =  ddc::knot_discrete_dimension_t&lt;BSplinesR&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a267b69fe057902880b98bea5d924284d" prot="private" static="no">
+        <type>ddc::knot_discrete_dimension_t&lt; BSplines1 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::Knots1 =  ddc::knot_discrete_dimension_t&lt;BSplines1&gt;</definition>
         <argsstring></argsstring>
-        <name>KnotsR</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::KnotsR</qualifiedname>
+        <name>Knots1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::Knots1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="87" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1ab1dfec136d036649f702e7852e45411c" prot="private" static="no">
+        <type>ddc::knot_discrete_dimension_t&lt; BSplines2 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::Knots2 =  ddc::knot_discrete_dimension_t&lt;BSplines2&gt;</definition>
+        <argsstring></argsstring>
+        <name>Knots2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::Knots2</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -140,26 +153,26 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a45a5789482a6a8603d173d7eb157f733" prot="private" static="no">
-        <type>ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::KnotsTheta =  ddc::knot_discrete_dimension_t&lt;BSplinesTheta&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1aa8c84d3a7eda11510a74436c3e971c80" prot="private" static="no">
+        <type>IdxRange&lt; BSplines1 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBS1 =  IdxRange&lt;BSplines1&gt;</definition>
         <argsstring></argsstring>
-        <name>KnotsTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::KnotsTheta</qualifiedname>
+        <name>IdxRangeBS1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBS1</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="89" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="90" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1acb79caa748e4dca4df1344d362e691d9" prot="private" static="no">
-        <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBSR =  IdxRange&lt;BSplinesR&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a496dfe31b60a7cbd3822c9ef5684da63" prot="private" static="no">
+        <type>IdxRange&lt; BSplines2 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBS2 =  IdxRange&lt;BSplines2&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxRangeBSR</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBSR</qualifiedname>
+        <name>IdxRangeBS2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBS2</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -168,26 +181,26 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="91" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a03f834bbd8f8c987618436252e5d1982" prot="private" static="no">
-        <type>IdxRange&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBSTheta =  IdxRange&lt;BSplinesTheta&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a2bd888f28906410a1efea82486dcb54e" prot="private" static="no">
+        <type>Idx&lt; BSplines1 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxBS1 =  Idx&lt;BSplines1&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxRangeBSTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBSTheta</qualifiedname>
+        <name>IdxBS1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxBS1</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="92" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="93" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1af489f77dde2ef314d81cfcfa67cdaa94" prot="private" static="no">
-        <type>Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxBSR =  Idx&lt;BSplinesR&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1abb69a26d8a7878121533cb5812cbb720" prot="private" static="no">
+        <type>Idx&lt; BSplines2 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxBS2 =  Idx&lt;BSplines2&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxBSR</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxBSR</qualifiedname>
+        <name>IdxBS2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxBS2</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -196,12 +209,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="94" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a182359813625b523471ff4b7fc42d5bd" prot="private" static="no">
-        <type>Idx&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxBSTheta =  Idx&lt;BSplinesTheta&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1af76448ad2ca0e807e08046639f2a6672" prot="private" static="no">
+        <type>Idx&lt; BSplines1, BSplines2 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxBS2D =  Idx&lt;BSplines1, BSplines2&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxBSTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxBSTheta</qualifiedname>
+        <name>IdxBS2D</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxBS2D</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -210,26 +223,26 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1aa175c7961705a0edfb1448638d343e6d" prot="private" static="no">
-        <type>Idx&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxBSRTheta =  Idx&lt;BSplinesR, BSplinesTheta&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1aacd8f4d36fdec875bdfbe9030f964f8f" prot="private" static="no">
+        <type>IdxStep&lt; BSplines1 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxStepBS1 =  IdxStep&lt;BSplines1&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxBSRTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxBSRTheta</qualifiedname>
+        <name>IdxStepBS1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxStepBS1</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="96" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="96" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="97" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a06ffc96aaf938f9967c3c7b1951d6376" prot="private" static="no">
-        <type>IdxStep&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxStepBSR =  IdxStep&lt;BSplinesR&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a3264817effb02e104ee626bc005c34c6" prot="private" static="no">
+        <type>IdxStep&lt; BSplines2 &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxStepBS2 =  IdxStep&lt;BSplines2&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxStepBSR</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxStepBSR</qualifiedname>
+        <name>IdxStepBS2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxStepBS2</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -238,23 +251,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="98" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a10f8c80adbb7ce887abc7375d1aa8fc4" prot="private" static="no">
-        <type>IdxStep&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxStepBSTheta =  IdxStep&lt;BSplinesTheta&gt;</definition>
-        <argsstring></argsstring>
-        <name>IdxStepBSTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxStepBSTheta</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="99" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="99" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1aaced3cfdab5000eff91d6d2a1b2ca4c6" prot="private" static="no">
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1ac49a94e5e83dec7eba83e161923d2864" prot="private" static="no">
         <type>typename IdxRangeBatch::discrete_element_type</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxBatch =  typename IdxRangeBatch::discrete_element_type</definition>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxBatch =  typename IdxRangeBatch::discrete_element_type</definition>
         <argsstring></argsstring>
         <name>IdxBatch</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::IdxBatch</qualifiedname>
@@ -264,14 +263,28 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="101" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="101" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="100" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1aa20319e89858572d64ef5e7e6b777f2b" prot="private" static="no">
-        <type>IdxRange&lt; QDimRMesh &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeQuadratureR =  IdxRange&lt;QDimRMesh&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a1aaf788c1cac87cd6312bdd59ce6af07" prot="private" static="no">
+        <type>IdxRange&lt; QDim1Mesh &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeQuadrature1 =  IdxRange&lt;QDim1Mesh&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxRangeQuadratureR</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeQuadratureR</qualifiedname>
+        <name>IdxRangeQuadrature1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeQuadrature1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1af198f418de1f6fa8c8346c8279d3441a" prot="private" static="no">
+        <type>IdxRange&lt; QDim2Mesh &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeQuadrature2 =  IdxRange&lt;QDim2Mesh&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeQuadrature2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeQuadrature2</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -280,12 +293,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="103" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a60aee5e53af697d88be8806d9b342d98" prot="private" static="no">
-        <type>IdxRange&lt; QDimThetaMesh &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeQuadratureTheta =  IdxRange&lt;QDimThetaMesh&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a319e1b991f56cab95e9a61736fe62850" prot="private" static="no">
+        <type>Idx&lt; QDim1Mesh, QDim2Mesh &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxQuadrature2D =  Idx&lt;QDim1Mesh, QDim2Mesh&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxRangeQuadratureTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeQuadratureTheta</qualifiedname>
+        <name>IdxQuadrature2D</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxQuadrature2D</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -294,53 +307,39 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="104" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1af619963cf26deaf78c2c0b345f5f7851" prot="private" static="no">
-        <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxQuadratureRTheta =  Idx&lt;QDimRMesh, QDimThetaMesh&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a7805a2b4b65850881892d43776287cbf" prot="private" static="no">
+        <type>IdxRange&lt; QDim1Mesh, BSplines1, ddc::Deriv&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref> &gt; &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBasisStash1 =  IdxRange&lt;QDim1Mesh, BSplines1, ddc::Deriv&lt;Dim1&gt;&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxQuadratureRTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxQuadratureRTheta</qualifiedname>
+        <name>IdxRangeBasisStash1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBasisStash1</qualifiedname>
         <briefdescription>
+<para>The index range of the stash of the non-zero B-splines at the quadrature points in the first dimension. The B-spline index is the offset from the first non-zero B-spline at the quadrature point. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="105" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="105" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="111" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="111" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1aba2d73efeb2b88e9e5317f94abad1f70" prot="private" static="no">
-        <type>IdxRange&lt; QDimRMesh, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, ddc::Deriv&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a3bd0fcad84e95b6437ef61bc76c8787b" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref> &gt; &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBasisStashR =  IdxRange&lt;QDimRMesh, BSplinesR, ddc::Deriv&lt;R&gt;&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1af6876643d10f87db11e68866a2b741c3" prot="private" static="no">
+        <type>IdxRange&lt; QDim2Mesh, BSplines2, ddc::Deriv&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref> &gt; &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBasisStash2 =  IdxRange&lt;QDim2Mesh, BSplines2, ddc::Deriv&lt;Dim2&gt;&gt;</definition>
         <argsstring></argsstring>
-        <name>IdxRangeBasisStashR</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBasisStashR</qualifiedname>
+        <name>IdxRangeBasisStash2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBasisStash2</qualifiedname>
         <briefdescription>
-<para>The index range of the stash of the non-zero radial B-splines at the radial quadrature points. The B-spline index is the offset from the first non-zero B-spline at the quadrature point. </para>
+<para>The index range of the stash of the non-zero B-splines at the quadrature points in the second dimension. The B-spline index is the offset from the first non-zero B-spline at the quadrature point. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="112" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="112" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="117" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="117" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a496ef2777f61c04aacc20efc4f02ac45" prot="private" static="no">
-        <type>IdxRange&lt; QDimThetaMesh, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, ddc::Deriv&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a0cabdb11574251e1fc1fa67bc47f4c11" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBasisStashTheta =  IdxRange&lt;QDimThetaMesh, BSplinesTheta, ddc::Deriv&lt;Theta&gt;&gt;</definition>
-        <argsstring></argsstring>
-        <name>IdxRangeBasisStashTheta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::IdxRangeBasisStashTheta</qualifiedname>
-        <briefdescription>
-<para>The index range of the stash of the non-zero poloidal B-splines at the poloidal quadrature points. The B-spline index is the offset from the first non-zero B-spline at the quadrature point. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="118" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1afca4ebda3c8b070c0821d9c69f12c893" prot="private" static="no">
-        <type>DField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" kindref="member">IdxRangeQuadratureRTheta</ref> &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::QuadField =  DField&lt;IdxRangeQuadratureRTheta&gt;</definition>
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a33baf5679d89bc2a96efe075fc746101" prot="private" static="no">
+        <type>DField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" kindref="member">IdxRangeQuadrature2D</ref> &gt;</type>
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::QuadField =  DField&lt;IdxRangeQuadrature2D&gt;</definition>
         <argsstring></argsstring>
         <name>QuadField</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::QuadField</qualifiedname>
@@ -350,11 +349,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="120" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="120" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="119" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="119" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a43d8609ba3cc68eeecd595cb955208a4" prot="private" static="no">
+      <memberdef kind="typedef" id="classTensorProductBSplinePoissonAssembler_1a52877a27e179fedbb22532cf1d8facaf" prot="private" static="no">
         <type>Kokkos::View&lt; double *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace::scratch_memory_space, Kokkos::MemoryTraits&lt; Kokkos::Unmanaged &gt; &gt;</type>
-        <definition>using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::ScratchView =  Kokkos::View&lt;
+        <definition>using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::ScratchView =  Kokkos::View&lt;
             double*,
             Kokkos::LayoutRight,
             Kokkos::DefaultExecutionSpace::scratch_memory_space,
@@ -368,17 +367,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="138" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="138" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="136" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="136" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a06c6becb32a25fe2718806faa8695023" prot="private" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1aec6608cd487ce68b4e81d0ab2c6bc49e" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>int</type>
-        <definition>int TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_gauss_legendre_r</definition>
+        <definition>int TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::s_n_gauss_legendre_1</definition>
         <argsstring></argsstring>
-        <name>s_n_gauss_legendre_r</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_gauss_legendre_r</qualifiedname>
-        <initializer>= BSplinesR::degree() + 1</initializer>
+        <name>s_n_gauss_legendre_1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_gauss_legendre_1</qualifiedname>
+        <initializer>= BSplines1::degree() + 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="121" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1aa1fef9782b3196706d916ea1e0c2a51e" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>int</type>
+        <definition>int TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::s_n_gauss_legendre_2</definition>
+        <argsstring></argsstring>
+        <name>s_n_gauss_legendre_2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_gauss_legendre_2</qualifiedname>
+        <initializer>= BSplines2::degree() + 1</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -387,58 +401,58 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="122" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="122" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a3942dc4c7a2479544e5688dfcce88ea5" prot="private" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a50c9d257cc7ba54266f73d245d9c4d28" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>int</type>
-        <definition>int TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_gauss_legendre_theta</definition>
+        <definition>int TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::s_n_non_zero_bases_1</definition>
         <argsstring></argsstring>
-        <name>s_n_gauss_legendre_theta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_gauss_legendre_theta</qualifiedname>
-        <initializer>= BSplinesTheta::degree() + 1</initializer>
+        <name>s_n_non_zero_bases_1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_non_zero_bases_1</qualifiedname>
+        <initializer>= BSplines1::degree() + 1</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="123" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="123" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="126" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="126" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a03764134899b41107a2abab4e2d14f89" prot="private" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1ab7325ecec445ee88b65ebf55d71b7a46" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>int</type>
-        <definition>int TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_non_zero_bases_r</definition>
+        <definition>int TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::s_n_non_zero_bases_2</definition>
         <argsstring></argsstring>
-        <name>s_n_non_zero_bases_r</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_non_zero_bases_r</qualifiedname>
-        <initializer>= BSplinesR::degree() + 1</initializer>
+        <name>s_n_non_zero_bases_2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_non_zero_bases_2</qualifiedname>
+        <initializer>= BSplines2::degree() + 1</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="127" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="127" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="129" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="129" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1aba1e98d006c010058078c6f20e85d79e" prot="private" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1acba4160999fe01efa35a578f9d610f9f" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>int</type>
-        <definition>int TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_non_zero_bases_theta</definition>
+        <definition>int TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::s_n_quad_support_1</definition>
         <argsstring></argsstring>
-        <name>s_n_non_zero_bases_theta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_non_zero_bases_theta</qualifiedname>
-        <initializer>= BSplinesTheta::degree() + 1</initializer>
+        <name>s_n_quad_support_1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_quad_support_1</qualifiedname>
+        <initializer>= s_n_gauss_legendre_1 * s_n_non_zero_bases_1</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="130" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="130" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="132" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="132" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a104420d0b1df5713626eb2a4e848c93a" prot="private" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1aad98dbf2a31f589ca82c2caa551a19c8" prot="private" static="yes" constexpr="yes" mutable="no">
         <type>int</type>
-        <definition>int TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_quad_support_r</definition>
+        <definition>int TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::s_n_quad_support_2</definition>
         <argsstring></argsstring>
-        <name>s_n_quad_support_r</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_quad_support_r</qualifiedname>
-        <initializer>= s_n_gauss_legendre_r * s_n_non_zero_bases_r</initializer>
+        <name>s_n_quad_support_2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_quad_support_2</qualifiedname>
+        <initializer>= s_n_gauss_legendre_2 * s_n_non_zero_bases_2</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -447,26 +461,11 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="133" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="133" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1ab7a6ae7abb57f4a8992aeb0818c13827" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>int</type>
-        <definition>int TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::s_n_quad_support_theta</definition>
-        <argsstring></argsstring>
-        <name>s_n_quad_support_theta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::s_n_quad_support_theta</qualifiedname>
-        <initializer>= s_n_gauss_legendre_theta * s_n_non_zero_bases_theta</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="134" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="135" bodyend="-1"/>
-      </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a12bca2cd859175107148d1011bb1cfb0" prot="private" static="no" mutable="no">
-        <type><ref refid="classTensorProductBSplinePoissonAssembler_1a0cf93332df3f8d7a84f9da5ef5cc9410" kindref="member">IdxRangeBSRTheta</ref></type>
-        <definition>IdxRangeBSRTheta TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_idxrange_tensor_basis</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1ad21be0d177419d595ad9791cbbcbd133" prot="private" static="no" mutable="no">
+        <type><ref refid="classTensorProductBSplinePoissonAssembler_1a2097570b0514cb48c5ce2ea26d36ff9b" kindref="member">IdxRangeBS2D</ref></type>
+        <definition>IdxRangeBS2D TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_idxrange_tensor_basis</definition>
         <argsstring></argsstring>
         <name>m_idxrange_tensor_basis</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::m_idxrange_tensor_basis</qualifiedname>
@@ -476,39 +475,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="146" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="146" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="144" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="144" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a34129f1d24e587faa1d19694c5377f87" prot="private" static="no" mutable="no">
-        <type>IdxRangeQuadratureR</type>
-        <definition>IdxRangeQuadratureR TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_idxrange_quadrature_r</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a85f4b1c9ed0254d4b9c1d2add144c05b" prot="private" static="no" mutable="no">
+        <type>IdxRangeQuadrature1</type>
+        <definition>IdxRangeQuadrature1 TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_idxrange_quadrature_1</definition>
         <argsstring></argsstring>
-        <name>m_idxrange_quadrature_r</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::m_idxrange_quadrature_r</qualifiedname>
+        <name>m_idxrange_quadrature_1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::m_idxrange_quadrature_1</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="148" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="148" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="146" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="146" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a4ff7b64319a77c3d8d0d0e9067031643" prot="private" static="no" mutable="no">
-        <type>IdxRangeQuadratureTheta</type>
-        <definition>IdxRangeQuadratureTheta TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_idxrange_quadrature_theta</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1adaea7ccd9a866792a94892a600921be3" prot="private" static="no" mutable="no">
+        <type>IdxRangeQuadrature2</type>
+        <definition>IdxRangeQuadrature2 TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_idxrange_quadrature_2</definition>
         <argsstring></argsstring>
-        <name>m_idxrange_quadrature_theta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::m_idxrange_quadrature_theta</qualifiedname>
+        <name>m_idxrange_quadrature_2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::m_idxrange_quadrature_2</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="149" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="149" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="147" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="147" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a4bbaaabf2508215acea17f91c068794e" prot="private" static="no" mutable="no">
-        <type><ref refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" kindref="member">IdxRangeQuadratureRTheta</ref></type>
-        <definition>IdxRangeQuadratureRTheta TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_idxrange_quadrature</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a68072b1480b861d682c2e44a1a289590" prot="private" static="no" mutable="no">
+        <type><ref refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" kindref="member">IdxRangeQuadrature2D</ref></type>
+        <definition>IdxRangeQuadrature2D TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_idxrange_quadrature</definition>
         <argsstring></argsstring>
         <name>m_idxrange_quadrature</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::m_idxrange_quadrature</qualifiedname>
@@ -518,11 +517,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="150" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="150" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="148" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="148" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1afb253aeede4375cad113d70a256c3bb8" prot="private" static="no" mutable="no">
-        <type><ref refid="classTensorProductBSplinePoissonAssembler_1af97a1820fc1fcbfd28207a89e565af9d" kindref="member">IdxRangeBatch</ref></type>
-        <definition>IdxRangeBatch TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_idx_range_batch</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a94386065d4da930c80ba7f97982ff2a7" prot="private" static="no" mutable="no">
+        <type><ref refid="classTensorProductBSplinePoissonAssembler_1abb0bfee92e07ca67f43bd4b2e4720281" kindref="member">IdxRangeBatch</ref></type>
+        <definition>IdxRangeBatch TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_idx_range_batch</definition>
         <argsstring></argsstring>
         <name>m_idx_range_batch</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::m_idx_range_batch</qualifiedname>
@@ -532,11 +531,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="152" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="152" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="150" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="150" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1aac8787f6909d3c1e13415a7e7212a8d4" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a2f3aadb57476936d66069a2987845b2e" prot="private" static="no" mutable="no">
         <type>QuadField</type>
-        <definition>QuadField TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_int_volume</definition>
+        <definition>QuadField TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_int_volume</definition>
         <argsstring></argsstring>
         <name>m_int_volume</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::m_int_volume</qualifiedname>
@@ -546,11 +545,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="154" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="154" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="152" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="152" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1adbce5657dd2449b6d9b60def91718f36" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1ac4101f76be2cc25514475603a6efc687" prot="private" static="no" mutable="no">
         <type>MetricTensorType</type>
-        <definition>MetricTensorType TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_metric_tensor</definition>
+        <definition>MetricTensorType TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_metric_tensor</definition>
         <argsstring></argsstring>
         <name>m_metric_tensor</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::m_metric_tensor</qualifiedname>
@@ -560,67 +559,67 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="156" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="156" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="154" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="154" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1ad5ee1926aad6bf9cc3bef58d7f69bb29" prot="private" static="no" mutable="no">
-        <type>DFieldMem&lt; IdxRangeBasisStashR &gt;</type>
-        <definition>DFieldMem&lt;IdxRangeBasisStashR&gt; TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_basis_vals_r</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a050d12de564a07c70a7191598743c71a" prot="private" static="no" mutable="no">
+        <type>DFieldMem&lt; IdxRangeBasisStash1 &gt;</type>
+        <definition>DFieldMem&lt;IdxRangeBasisStash1&gt; TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_basis_vals_1</definition>
         <argsstring></argsstring>
-        <name>m_basis_vals_r</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::m_basis_vals_r</qualifiedname>
+        <name>m_basis_vals_1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::m_basis_vals_1</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="159" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="159" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="157" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="157" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a9984a2d57a77273b8fb93c888cfc83da" prot="private" static="no" mutable="no">
-        <type>DFieldMem&lt; IdxRangeBasisStashTheta &gt;</type>
-        <definition>DFieldMem&lt;IdxRangeBasisStashTheta&gt; TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_basis_vals_theta</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a98993a8a86c7fa75ce261f18c37a2f18" prot="private" static="no" mutable="no">
+        <type>DFieldMem&lt; IdxRangeBasisStash2 &gt;</type>
+        <definition>DFieldMem&lt;IdxRangeBasisStash2&gt; TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_basis_vals_2</definition>
         <argsstring></argsstring>
-        <name>m_basis_vals_theta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::m_basis_vals_theta</qualifiedname>
+        <name>m_basis_vals_2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::m_basis_vals_2</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="160" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="160" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="158" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="158" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a58983c410c4d0318bf2389a231e40574" prot="private" static="no" mutable="no">
-        <type>FieldMem&lt; IdxBSR, IdxRangeQuadratureR &gt;</type>
-        <definition>FieldMem&lt;IdxBSR, IdxRangeQuadratureR&gt; TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_first_basis_r</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a8e84367945b5893576f60b8b129024df" prot="private" static="no" mutable="no">
+        <type>FieldMem&lt; IdxBS1, IdxRangeQuadrature1 &gt;</type>
+        <definition>FieldMem&lt;IdxBS1, IdxRangeQuadrature1&gt; TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_first_basis_1</definition>
         <argsstring></argsstring>
-        <name>m_first_basis_r</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::m_first_basis_r</qualifiedname>
+        <name>m_first_basis_1</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::m_first_basis_1</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="161" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="161" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="159" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="159" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1ab71347b17d6cc9d2c13af1760f4ac10c" prot="private" static="no" mutable="no">
-        <type>FieldMem&lt; IdxBSTheta, IdxRangeQuadratureTheta &gt;</type>
-        <definition>FieldMem&lt;IdxBSTheta, IdxRangeQuadratureTheta&gt; TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_first_basis_theta</definition>
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a70310e295fb515266f3e7f0064aeff17" prot="private" static="no" mutable="no">
+        <type>FieldMem&lt; IdxBS2, IdxRangeQuadrature2 &gt;</type>
+        <definition>FieldMem&lt;IdxBS2, IdxRangeQuadrature2&gt; TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_first_basis_2</definition>
         <argsstring></argsstring>
-        <name>m_first_basis_theta</name>
-        <qualifiedname>TensorProductBSplinePoissonAssembler::m_first_basis_theta</qualifiedname>
+        <name>m_first_basis_2</name>
+        <qualifiedname>TensorProductBSplinePoissonAssembler::m_first_basis_2</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="162" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="162" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="160" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="160" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1a78b1399a91cf7cd52d15974e33cba504" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classTensorProductBSplinePoissonAssembler_1ae35bbfac56c1bdaf33d14ffe87a2b3b1" prot="private" static="no" mutable="no">
         <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt;</type>
-        <definition>Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::m_tensor_nnz_per_row</definition>
+        <definition>Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace&gt; TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::m_tensor_nnz_per_row</definition>
         <argsstring></argsstring>
         <name>m_tensor_nnz_per_row</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::m_tensor_nnz_per_row</qualifiedname>
@@ -630,14 +629,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="165" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="165" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="163" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="163" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a31602fb3137b14a2bda3fc6a413602e5" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a4c29b0b05fbaf652818df3c1b7fe55cf" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::TensorProductBSplinePoissonAssembler</definition>
-        <argsstring>(QuadField int_volume, MetricTensorType const &amp;metric_tensor, IdxRangeFull idx_range_full, IdxRangeBSRTheta idx_range_tensor_basis)</argsstring>
+        <definition>TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::TensorProductBSplinePoissonAssembler</definition>
+        <argsstring>(QuadField int_volume, MetricTensorType const &amp;metric_tensor, IdxRangeFull idx_range_full, IdxRangeBS2D idx_range_tensor_basis)</argsstring>
         <name>TensorProductBSplinePoissonAssembler</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::TensorProductBSplinePoissonAssembler</qualifiedname>
         <param>
@@ -653,7 +652,7 @@
           <declname>idx_range_full</declname>
         </param>
         <param>
-          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a0cf93332df3f8d7a84f9da5ef5cc9410" kindref="member">IdxRangeBSRTheta</ref></type>
+          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a2097570b0514cb48c5ce2ea26d36ff9b" kindref="member">IdxRangeBS2D</ref></type>
           <declname>idx_range_tensor_basis</declname>
         </param>
         <briefdescription>
@@ -689,7 +688,7 @@
 <parametername>idx_range_tensor_basis</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The index range of the tensor product B-splines in the FEM basis. B-splines which are excluded from this index range (e.g. to impose boundary conditions) are not included in the matrix. </para>
+<para>The index range of the tensor product B-splines in the FEM basis. B-splines which are excluded from this index range (e.g. to impose boundary conditions) are not included in the matrix. In a periodic dimension all B-splines must be included. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -697,16 +696,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="179" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="179" bodyend="218"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="178" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="178" bodyend="228"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a2e623ffc3d7322f349222aa3c16eb8fb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" kindref="member">TensorBSplineStash</ref></type>
-        <definition>TensorBSplineStash TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::get_tensor_bspline_stash</definition>
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a7f94adb08254653ade97cd6834db935a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classTensorProductBSplinePoissonAssembler_1a8e448274cd37ce4b2776985c033ca9d1" kindref="member">TensorBSplineStash</ref></type>
+        <definition>TensorBSplineStash TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::get_tensor_bspline_stash</definition>
         <argsstring>() const</argsstring>
         <name>get_tensor_bspline_stash</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::get_tensor_bspline_stash</qualifiedname>
         <briefdescription>
-<para>Get the <ref refid="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" kindref="member">TensorBSplineStash</ref> of the values and derivatives of the 1D B-splines at the quadrature points. </para>
+<para>Get the <ref refid="classTensorProductBSplinePoissonAssembler_1a8e448274cd37ce4b2776985c033ca9d1" kindref="member">TensorBSplineStash</ref> of the values and derivatives of the 1D B-splines at the quadrature points. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="return"><para>The stashed values of the 1D B-splines. </para>
@@ -715,11 +714,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="225" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="225" bodyend="232"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="235" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="235" bodyend="242"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1abd7a0b6902c374196106a3fd53e9acda" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classTensorProductBSplinePoissonAssembler_1a0cf93332df3f8d7a84f9da5ef5cc9410" kindref="member">IdxRangeBSRTheta</ref></type>
-        <definition>IdxRangeBSRTheta TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::get_tensor_basis_idx_range</definition>
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1acf423af64369a86410cb290599a5c2a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classTensorProductBSplinePoissonAssembler_1a2097570b0514cb48c5ce2ea26d36ff9b" kindref="member">IdxRangeBS2D</ref></type>
+        <definition>IdxRangeBS2D TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::get_tensor_basis_idx_range</definition>
         <argsstring>() const</argsstring>
         <name>get_tensor_basis_idx_range</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::get_tensor_basis_idx_range</qualifiedname>
@@ -733,11 +732,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="239" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="239" bodyend="242"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="249" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="249" bodyend="252"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1aa65c04096bfeaefaadb6af4f9a66613e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a8077b79475b5b4df7f34f955b90763b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>QuadField</type>
-        <definition>QuadField TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::get_int_volume</definition>
+        <definition>QuadField TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::get_int_volume</definition>
         <argsstring>() const</argsstring>
         <name>get_int_volume</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::get_int_volume</qualifiedname>
@@ -751,11 +750,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="249" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="249" bodyend="252"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="259" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="259" bodyend="262"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a0dbc2ed80c2a44630485ae0c858b20bd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a9ff343ca6f93862b2930aa93b765d58c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::setup_sparse_matrix</definition>
+        <definition>void TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::setup_sparse_matrix</definition>
         <argsstring>(std::unique_ptr&lt; MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; &amp;gko_matrix, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt, std::optional&lt; GkoMatrixResidualNorm &gt; residual_norm=std::nullopt) const</argsstring>
         <name>setup_sparse_matrix</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::setup_sparse_matrix</qualifiedname>
@@ -846,9 +845,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="274" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="274" bodyend="299"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="284" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="284" bodyend="309"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a6f74364f1a2720084d7485a9a60f7f6d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a0dcb09f434a22f80ec0c434715cacb7c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class CoeffAlpha</type>
@@ -858,7 +857,7 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::operator()</definition>
+        <definition>void TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::operator()</definition>
         <argsstring>(std::unique_ptr&lt; MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; const &amp;gko_matrix, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta) const</argsstring>
         <name>operator()</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::operator()</qualifiedname>
@@ -891,7 +890,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable object with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning the value of <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
+<para>A callable object with signature <computeroutput>double operator()(IdxBatch, Coord&lt;<ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref>&gt;)</computeroutput> returning the value of <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -899,7 +898,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable object with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning the value of <formula id="160">$ \beta $</formula> at the given batch and coordinate.</para>
+<para>A callable object with signature <computeroutput>double operator()(IdxBatch, Coord&lt;<ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref>&gt;)</computeroutput> returning the value of <formula id="160">$ \beta $</formula> at the given batch and coordinate.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -924,11 +923,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="316" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="316" bodyend="329"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="326" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="326" bodyend="339"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a95eedf717b553c950ac40c64d4fa0bbb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1ab1385b5b9459f0d99d0caef27a7f222b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
-        <definition>int TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::n_tensor_tensor_elements</definition>
+        <definition>int TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::n_tensor_tensor_elements</definition>
         <argsstring>() const</argsstring>
         <name>n_tensor_tensor_elements</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::n_tensor_tensor_elements</qualifiedname>
@@ -942,11 +941,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="376" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="376" bodyend="386"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="386" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="386" bodyend="394"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1ab02c13b1bfcc67eaa3a5dcd793d4cdae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1aa999989b37871b202a7ad48becb5e2ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::init_nnz_per_line</definition>
+        <definition>void TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::init_nnz_per_line</definition>
         <argsstring>(Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; nnz_per_row) const</argsstring>
         <name>init_nnz_per_line</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::init_nnz_per_line</qualifiedname>
@@ -972,11 +971,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="402" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="402" bodyend="413"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="410" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="410" bodyend="421"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a8e6afdf0a76a48e4adad92437652689b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1abd2595317fc1317349d9408b9ffaed77" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::compute_col_idx</definition>
+        <definition>void TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::compute_col_idx</definition>
         <argsstring>(Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr, int first_col_offset) const</argsstring>
         <name>compute_col_idx</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::compute_col_idx</qualifiedname>
@@ -1026,9 +1025,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="432" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="432" bodyend="540"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="440" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="440" bodyend="509"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a6b80ab33c23703a701c637b8a82a4d51" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a56615ec3418e91693bb9993d288e0d7b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class CoeffAlpha</type>
@@ -1038,7 +1037,7 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::compute_elements</definition>
+        <definition>void TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::compute_elements</definition>
         <argsstring>(CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr, int first_col_offset) const</argsstring>
         <name>compute_elements</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::compute_elements</qualifiedname>
@@ -1075,7 +1074,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, Coord&lt;<ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref>&gt;)</computeroutput> returning <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1083,7 +1082,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning <formula id="160">$ \beta $</formula> at the given batch and coordinate. </para>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, Coord&lt;<ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref>&gt;)</computeroutput> returning <formula id="160">$ \beta $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1123,11 +1122,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="566" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="566" bodyend="664"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="535" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="535" bodyend="633"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a7c3ce446dbe6905e443ed9d469119674" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1ae93085097ee977322f65cbc98117e405" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::init_tensor_tensor_nnz_per_line</definition>
+        <definition>void TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::init_tensor_tensor_nnz_per_line</definition>
         <argsstring>(Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; nnz_per_row) const</argsstring>
         <name>init_tensor_tensor_nnz_per_line</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::init_tensor_tensor_nnz_per_line</qualifiedname>
@@ -1139,7 +1138,7 @@
 <para>Fills the nnz data structure of the matrix corresponding to the inner products of tensor basis functions and tensor basis functions. </para>
         </briefdescription>
         <detaileddescription>
-<para>The rows and columns of the matrix are the tensor basis functions, ordered as in the 2D (r,theta) index range of the tensor basis functions. After this function the array will contain: nnz_per_row[0] = unchanged (0 for a standalone matrix). nnz_per_row[1] = number of non-zero elements in line 0 of the matrix. ... nnz_per_row[n] = number of non-zero elements in lines 0-(n-1) of the matrix. The values are added to the values already saved in nnz_per_row.</para>
+<para>The rows and columns of the matrix are the tensor basis functions, ordered as in the 2D index range of the tensor basis functions. After this function the array will contain: nnz_per_row[0] = unchanged (0 for a standalone matrix). nnz_per_row[1] = number of non-zero elements in line 0 of the matrix. ... nnz_per_row[n] = number of non-zero elements in lines 0-(n-1) of the matrix. The values are added to the values already saved in nnz_per_row.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">nnz_per_row</parametername>
@@ -1153,11 +1152,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="936" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="936" bodyend="1036"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="861" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="861" bodyend="977"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1afe91ede38bf4989c320f3c5b93f3141b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a1e1bc2b2a7b4ed94d7ec0b14bdf00116" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class QDimMesh</type>
@@ -1170,7 +1169,7 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>static void TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::stash_basis_eval</definition>
+        <definition>static void TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::stash_basis_eval</definition>
         <argsstring>(DField&lt; IdxRange&lt; QDimMesh, BSplines, DerivDim &gt; &gt; basis_vals, Field&lt; Idx&lt; BSplines &gt;, IdxRange&lt; QDimMesh &gt; &gt; first_basis)</argsstring>
         <name>stash_basis_eval</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::stash_basis_eval</qualifiedname>
@@ -1232,9 +1231,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="344" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="344" bodyend="368"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="354" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="354" bodyend="378"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a14a31d79ea4f94330720e85919d52bfe" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a1f75971624ef4c3c7e450db6c84ceaaa" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class CoeffAlpha</type>
@@ -1243,17 +1242,17 @@
             <type>class CoeffBeta</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a3bd0fcad84e95b6437ef61bc76c8787b" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a0cabdb11574251e1fc1fa67bc47f4c11" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
-        <definition>static KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R, Theta &gt; &gt; TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::get_test_weights</definition>
-        <argsstring>(IdxBSRTheta idx_test, IdxQuadratureRTheta idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, MetricTensorType const &amp;metric_tensor, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume, TensorBSplineStash const &amp;bspline_stash)</argsstring>
+        <type>KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref> &gt; &gt;</type>
+        <definition>static KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; Dim1, Dim2 &gt; &gt; TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::get_test_weights</definition>
+        <argsstring>(IdxBS2D idx_test, IdxQuadrature2D idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, MetricTensorType const &amp;metric_tensor, DField&lt; IdxRangeQuadrature2D &gt; int_volume, TensorBSplineStash const &amp;bspline_stash)</argsstring>
         <name>get_test_weights</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::get_test_weights</qualifiedname>
         <param>
-          <type>IdxBSRTheta</type>
+          <type>IdxBS2D</type>
           <declname>idx_test</declname>
         </param>
         <param>
-          <type>IdxQuadratureRTheta</type>
+          <type>IdxQuadrature2D</type>
           <declname>idx_quad</declname>
         </param>
         <param>
@@ -1273,11 +1272,11 @@
           <declname>metric_tensor</declname>
         </param>
         <param>
-          <type>DField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" kindref="member">IdxRangeQuadratureRTheta</ref> &gt;</type>
+          <type>DField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" kindref="member">IdxRangeQuadrature2D</ref> &gt;</type>
           <declname>int_volume</declname>
         </param>
         <param>
-          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" kindref="member">TensorBSplineStash</ref> const &amp;</type>
+          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a8e448274cd37ce4b2776985c033ca9d1" kindref="member">TensorBSplineStash</ref> const &amp;</type>
           <declname>bspline_stash</declname>
         </param>
         <briefdescription>
@@ -1314,7 +1313,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, Coord&lt;<ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref>&gt;)</computeroutput> returning <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1322,7 +1321,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(IdxBatch, CoordRTheta)</computeroutput> returning <formula id="160">$ \beta $</formula> at the given batch and coordinate. </para>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, Coord&lt;<ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref>&gt;)</computeroutput> returning <formula id="160">$ \beta $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1356,12 +1355,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="694" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="694" bodyend="715"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="663" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="663" bodyend="684"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1aaa910eec749cc96b64db0d240be9108c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a777ce43a37cf7a139338b772bfce0031" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
-        <definition>static KOKKOS_FUNCTION double TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::get_matrix_stencil_element</definition>
-        <argsstring>(const Kokkos::TeamPolicy&lt;&gt;::member_type &amp;team, IdxBSRTheta idx_test, IdxBSRTheta idx_trial, QuadField test_mass, DVectorField&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; R, Theta &gt; &gt; test_stiffness, IdxRangeQuadratureRTheta const &amp;full_quad_idx_range, TensorBSplineStash const &amp;bspline_stash)</argsstring>
+        <definition>static KOKKOS_FUNCTION double TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::get_matrix_stencil_element</definition>
+        <argsstring>(const Kokkos::TeamPolicy&lt;&gt;::member_type &amp;team, IdxBS2D idx_test, IdxBS2D idx_trial, QuadField test_mass, DVectorField&lt; IdxRangeQuadrature2D, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; test_stiffness, IdxRangeQuadrature2D const &amp;full_quad_idx_range, TensorBSplineStash const &amp;bspline_stash)</argsstring>
         <name>get_matrix_stencil_element</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::get_matrix_stencil_element</qualifiedname>
         <param>
@@ -1369,11 +1368,11 @@
           <declname>team</declname>
         </param>
         <param>
-          <type>IdxBSRTheta</type>
+          <type>IdxBS2D</type>
           <declname>idx_test</declname>
         </param>
         <param>
-          <type>IdxBSRTheta</type>
+          <type>IdxBS2D</type>
           <declname>idx_trial</declname>
         </param>
         <param>
@@ -1381,15 +1380,15 @@
           <declname>test_mass</declname>
         </param>
         <param>
-          <type>DVectorField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" kindref="member">IdxRangeQuadratureRTheta</ref>, VectorIndexSet&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a3bd0fcad84e95b6437ef61bc76c8787b" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a0cabdb11574251e1fc1fa67bc47f4c11" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+          <type>DVectorField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" kindref="member">IdxRangeQuadrature2D</ref>, VectorIndexSet&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref> &gt; &gt;</type>
           <declname>test_stiffness</declname>
         </param>
         <param>
-          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" kindref="member">IdxRangeQuadratureRTheta</ref> const &amp;</type>
+          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" kindref="member">IdxRangeQuadrature2D</ref> const &amp;</type>
           <declname>full_quad_idx_range</declname>
         </param>
         <param>
-          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" kindref="member">TensorBSplineStash</ref> const &amp;</type>
+          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a8e448274cd37ce4b2776985c033ca9d1" kindref="member">TensorBSplineStash</ref> const &amp;</type>
           <declname>bspline_stash</declname>
         </param>
         <briefdescription>
@@ -1459,9 +1458,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="740" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="740" bodyend="836"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="709" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="709" bodyend="762"/>
       </memberdef>
-      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a1964dc18654c7585f88669e1944ac150" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensorProductBSplinePoissonAssembler_1a8ae37e58ac96b8286b02244c77d042f1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class CoeffAlpha</type>
@@ -1471,8 +1470,8 @@
           </param>
         </templateparamlist>
         <type>KOKKOS_FUNCTION void</type>
-        <definition>static KOKKOS_FUNCTION void TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::fill_test_weights</definition>
-        <argsstring>(const Kokkos::TeamPolicy&lt;&gt;::member_type &amp;team, QuadField test_mass, DVectorField&lt; IdxRangeQuadratureRTheta, VectorIndexSet&lt; R, Theta &gt; &gt; test_stiffness, IdxBSRTheta idx_test, IdxBatch idx_batch, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, MetricTensorType const &amp;metric_tensor, IdxRangeQuadratureRTheta const &amp;full_quad_idx_range, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume, TensorBSplineStash const &amp;bspline_stash)</argsstring>
+        <definition>static KOKKOS_FUNCTION void TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::fill_test_weights</definition>
+        <argsstring>(const Kokkos::TeamPolicy&lt;&gt;::member_type &amp;team, QuadField test_mass, DVectorField&lt; IdxRangeQuadrature2D, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; test_stiffness, IdxBS2D idx_test, IdxBatch idx_batch, CoeffAlpha const &amp;coeff_alpha, CoeffBeta const &amp;coeff_beta, MetricTensorType const &amp;metric_tensor, IdxRangeQuadrature2D const &amp;full_quad_idx_range, DField&lt; IdxRangeQuadrature2D &gt; int_volume, TensorBSplineStash const &amp;bspline_stash)</argsstring>
         <name>fill_test_weights</name>
         <qualifiedname>TensorProductBSplinePoissonAssembler::fill_test_weights</qualifiedname>
         <param>
@@ -1484,11 +1483,11 @@
           <declname>test_mass</declname>
         </param>
         <param>
-          <type>DVectorField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" kindref="member">IdxRangeQuadratureRTheta</ref>, VectorIndexSet&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a3bd0fcad84e95b6437ef61bc76c8787b" kindref="member">R</ref><ref refid="structR" kindref="compound">R</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a0cabdb11574251e1fc1fa67bc47f4c11" kindref="member">Theta</ref><ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+          <type>DVectorField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" kindref="member">IdxRangeQuadrature2D</ref>, VectorIndexSet&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref> &gt; &gt;</type>
           <declname>test_stiffness</declname>
         </param>
         <param>
-          <type>IdxBSRTheta</type>
+          <type>IdxBS2D</type>
           <declname>idx_test</declname>
         </param>
         <param>
@@ -1508,15 +1507,15 @@
           <declname>metric_tensor</declname>
         </param>
         <param>
-          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" kindref="member">IdxRangeQuadratureRTheta</ref> const &amp;</type>
+          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" kindref="member">IdxRangeQuadrature2D</ref> const &amp;</type>
           <declname>full_quad_idx_range</declname>
         </param>
         <param>
-          <type>DField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" kindref="member">IdxRangeQuadratureRTheta</ref> &gt;</type>
+          <type>DField&lt; <ref refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" kindref="member">IdxRangeQuadrature2D</ref> &gt;</type>
           <declname>int_volume</declname>
         </param>
         <param>
-          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" kindref="member">TensorBSplineStash</ref> const &amp;</type>
+          <type><ref refid="classTensorProductBSplinePoissonAssembler_1a8e448274cd37ce4b2776985c033ca9d1" kindref="member">TensorBSplineStash</ref> const &amp;</type>
           <declname>bspline_stash</declname>
         </param>
         <briefdescription>
@@ -1568,7 +1567,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="159">$ \alpha $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, Coord&lt;<ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref>&gt;)</computeroutput> returning <formula id="159">$ \alpha $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1576,7 +1575,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="160">$ \beta $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(IdxBatch, Coord&lt;<ref refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" kindref="member">Dim1</ref>, <ref refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" kindref="member">Dim2</ref>&gt;)</computeroutput> returning <formula id="160">$ \beta $</formula> at the given batch and coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1616,7 +1615,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="870" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="870" bodyend="917"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="798" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="798" bodyend="842"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1625,52 +1624,53 @@
     <detaileddescription>
 <para>The stiffness matrix has entries <formula id="398">$ \int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx $</formula> where <formula id="387">$ B_i $</formula> and <formula id="388">$ B_j $</formula> are tensor product B-splines.</para>
 <para>The B-splines and the quadrature points both have a tensor product structure. The values and derivatives of the 1D B-splines at the 1D quadrature points are therefore stored (see <ref refid="structdetail__poisson_1_1TensorBSplineStash" kindref="compound">detail_poisson::TensorBSplineStash</ref>) so that the tensor product B-splines can be evaluated at the quadrature points without being recalculated.</para>
+<para>Each dimension may be periodic or non-periodic (as determined by the B-splines). In a periodic dimension the basis must contain at least 2*degree+1 B-splines so that a B-spline does not overlap with itself across the boundary.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structGridR" kindref="compound">GridR</ref></parametername>
+<parametername>Grid1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The radial grid type. </para>
+<para>The grid type in the first dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername><ref refid="structGridTheta" kindref="compound">GridTheta</ref></parametername>
+<parametername>Grid2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The poloidal grid type. </para>
+<para>The grid type in the second dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>
+<parametername>BSplines1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The 1D B-splines in the radial direction. </para>
+<para>The 1D B-splines in the first dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+<parametername>BSplines2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The 1D B-splines in the poloidal direction. </para>
+<para>The 1D B-splines in the second dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>QDimRMesh</parametername>
+<parametername>QDim1Mesh</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The radial quadrature grid type. </para>
+<para>The quadrature grid type in the first dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>QDimThetaMesh</parametername>
+<parametername>QDim2Mesh</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The poloidal quadrature grid type. </para>
+<para>The quadrature grid type in the second dimension. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1692,64 +1692,64 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="56" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="57" bodyend="1037"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" line="60" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/tensor_product_bspline_poisson_assembler.hpp" bodystart="61" bodyend="979"/>
     <listofallmembers>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a8e6afdf0a76a48e4adad92437652689b" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>compute_col_idx</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a6b80ab33c23703a701c637b8a82a4d51" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>compute_elements</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a1964dc18654c7585f88669e1944ac150" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>fill_test_weights</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1aa65c04096bfeaefaadb6af4f9a66613e" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_int_volume</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1aaa910eec749cc96b64db0d240be9108c" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_matrix_stencil_element</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1abd7a0b6902c374196106a3fd53e9acda" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_tensor_basis_idx_range</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a2e623ffc3d7322f349222aa3c16eb8fb" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_tensor_bspline_stash</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a14a31d79ea4f94330720e85919d52bfe" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_test_weights</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1aaced3cfdab5000eff91d6d2a1b2ca4c6" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxBatch</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1af489f77dde2ef314d81cfcfa67cdaa94" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxBSR</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1aa175c7961705a0edfb1448638d343e6d" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxBSRTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a182359813625b523471ff4b7fc42d5bd" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxBSTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1af619963cf26deaf78c2c0b345f5f7851" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxQuadratureRTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1aba2d73efeb2b88e9e5317f94abad1f70" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBasisStashR</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a496ef2777f61c04aacc20efc4f02ac45" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBasisStashTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1af97a1820fc1fcbfd28207a89e565af9d" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBatch</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1acb79caa748e4dca4df1344d362e691d9" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBSR</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a0cf93332df3f8d7a84f9da5ef5cc9410" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBSRTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a03f834bbd8f8c987618436252e5d1982" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBSTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1aa20319e89858572d64ef5e7e6b777f2b" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeQuadratureR</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a5a9bb5fcce4c59ec06b30b989bb594f1" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeQuadratureRTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a60aee5e53af697d88be8806d9b342d98" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeQuadratureTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a06ffc96aaf938f9967c3c7b1951d6376" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxStepBSR</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a10f8c80adbb7ce887abc7375d1aa8fc4" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxStepBSTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1ab02c13b1bfcc67eaa3a5dcd793d4cdae" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>init_nnz_per_line</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a7c3ce446dbe6905e443ed9d469119674" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>init_tensor_tensor_nnz_per_line</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1ac04605659ab6a7fb8581ddc390d20068" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>KnotsR</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a45a5789482a6a8603d173d7eb157f733" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>KnotsTheta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1ad5ee1926aad6bf9cc3bef58d7f69bb29" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_basis_vals_r</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a9984a2d57a77273b8fb93c888cfc83da" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_basis_vals_theta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a58983c410c4d0318bf2389a231e40574" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_first_basis_r</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1ab71347b17d6cc9d2c13af1760f4ac10c" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_first_basis_theta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1afb253aeede4375cad113d70a256c3bb8" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idx_range_batch</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a4bbaaabf2508215acea17f91c068794e" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idxrange_quadrature</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a34129f1d24e587faa1d19694c5377f87" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idxrange_quadrature_r</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a4ff7b64319a77c3d8d0d0e9067031643" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idxrange_quadrature_theta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a12bca2cd859175107148d1011bb1cfb0" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idxrange_tensor_basis</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1aac8787f6909d3c1e13415a7e7212a8d4" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_int_volume</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1adbce5657dd2449b6d9b60def91718f36" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_metric_tensor</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a78b1399a91cf7cd52d15974e33cba504" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_tensor_nnz_per_row</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a95eedf717b553c950ac40c64d4fa0bbb" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>n_tensor_tensor_elements</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a6f74364f1a2720084d7485a9a60f7f6d" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>operator()</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1afca4ebda3c8b070c0821d9c69f12c893" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>QuadField</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a3bd0fcad84e95b6437ef61bc76c8787b" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>R</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a06c6becb32a25fe2718806faa8695023" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_gauss_legendre_r</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a3942dc4c7a2479544e5688dfcce88ea5" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_gauss_legendre_theta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a03764134899b41107a2abab4e2d14f89" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_non_zero_bases_r</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1aba1e98d006c010058078c6f20e85d79e" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_non_zero_bases_theta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a104420d0b1df5713626eb2a4e848c93a" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_quad_support_r</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1ab7a6ae7abb57f4a8992aeb0818c13827" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_quad_support_theta</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a43d8609ba3cc68eeecd595cb955208a4" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>ScratchView</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a0dbc2ed80c2a44630485ae0c858b20bd" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>setup_sparse_matrix</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1afe91ede38bf4989c320f3c5b93f3141b" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>stash_basis_eval</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>TensorBSplineStash</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a31602fb3137b14a2bda3fc6a413602e5" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>TensorProductBSplinePoissonAssembler</name></member>
-      <member refid="classTensorProductBSplinePoissonAssembler_1a0cabdb11574251e1fc1fa67bc47f4c11" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>Theta</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1abd2595317fc1317349d9408b9ffaed77" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>compute_col_idx</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a56615ec3418e91693bb9993d288e0d7b" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>compute_elements</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a38c05ee4e4dffab2a1ed484dbb71a187" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>Dim1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a9d08d98abcd7dca72a98e460b4cdd868" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>Dim2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a8ae37e58ac96b8286b02244c77d042f1" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>fill_test_weights</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a8077b79475b5b4df7f34f955b90763b4" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_int_volume</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a777ce43a37cf7a139338b772bfce0031" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_matrix_stencil_element</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1acf423af64369a86410cb290599a5c2a0" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_tensor_basis_idx_range</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a7f94adb08254653ade97cd6834db935a" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_tensor_bspline_stash</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a1f75971624ef4c3c7e450db6c84ceaaa" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>get_test_weights</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1ac49a94e5e83dec7eba83e161923d2864" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxBatch</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a2bd888f28906410a1efea82486dcb54e" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxBS1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1abb69a26d8a7878121533cb5812cbb720" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxBS2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1af76448ad2ca0e807e08046639f2a6672" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxBS2D</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a319e1b991f56cab95e9a61736fe62850" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxQuadrature2D</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a7805a2b4b65850881892d43776287cbf" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBasisStash1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1af6876643d10f87db11e68866a2b741c3" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBasisStash2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1abb0bfee92e07ca67f43bd4b2e4720281" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBatch</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1aa8c84d3a7eda11510a74436c3e971c80" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBS1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a496dfe31b60a7cbd3822c9ef5684da63" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBS2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a2097570b0514cb48c5ce2ea26d36ff9b" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeBS2D</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a1aaf788c1cac87cd6312bdd59ce6af07" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeQuadrature1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1af198f418de1f6fa8c8346c8279d3441a" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeQuadrature2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a48602a91469d341566855555df4c2bda" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxRangeQuadrature2D</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1aacd8f4d36fdec875bdfbe9030f964f8f" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxStepBS1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a3264817effb02e104ee626bc005c34c6" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>IdxStepBS2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1aa999989b37871b202a7ad48becb5e2ff" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>init_nnz_per_line</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1ae93085097ee977322f65cbc98117e405" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>init_tensor_tensor_nnz_per_line</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a267b69fe057902880b98bea5d924284d" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>Knots1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1ab1dfec136d036649f702e7852e45411c" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>Knots2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a050d12de564a07c70a7191598743c71a" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_basis_vals_1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a98993a8a86c7fa75ce261f18c37a2f18" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_basis_vals_2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a8e84367945b5893576f60b8b129024df" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_first_basis_1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a70310e295fb515266f3e7f0064aeff17" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_first_basis_2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a94386065d4da930c80ba7f97982ff2a7" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idx_range_batch</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a68072b1480b861d682c2e44a1a289590" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idxrange_quadrature</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a85f4b1c9ed0254d4b9c1d2add144c05b" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idxrange_quadrature_1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1adaea7ccd9a866792a94892a600921be3" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idxrange_quadrature_2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1ad21be0d177419d595ad9791cbbcbd133" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_idxrange_tensor_basis</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a2f3aadb57476936d66069a2987845b2e" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_int_volume</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1ac4101f76be2cc25514475603a6efc687" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_metric_tensor</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1ae35bbfac56c1bdaf33d14ffe87a2b3b1" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>m_tensor_nnz_per_row</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1ab1385b5b9459f0d99d0caef27a7f222b" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>n_tensor_tensor_elements</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a0dcb09f434a22f80ec0c434715cacb7c" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>operator()</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a33baf5679d89bc2a96efe075fc746101" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>QuadField</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1aec6608cd487ce68b4e81d0ab2c6bc49e" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_gauss_legendre_1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1aa1fef9782b3196706d916ea1e0c2a51e" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_gauss_legendre_2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a50c9d257cc7ba54266f73d245d9c4d28" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_non_zero_bases_1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1ab7325ecec445ee88b65ebf55d71b7a46" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_non_zero_bases_2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1acba4160999fe01efa35a578f9d610f9f" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_quad_support_1</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1aad98dbf2a31f589ca82c2caa551a19c8" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>s_n_quad_support_2</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a52877a27e179fedbb22532cf1d8facaf" prot="private" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>ScratchView</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a9ff343ca6f93862b2930aa93b765d58c" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>setup_sparse_matrix</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a1e1bc2b2a7b4ed94d7ec0b14bdf00116" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>stash_basis_eval</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a8e448274cd37ce4b2776985c033ca9d1" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>TensorBSplineStash</name></member>
+      <member refid="classTensorProductBSplinePoissonAssembler_1a4c29b0b05fbaf652818df3c1b7fe55cf" prot="public" virt="non-virtual"><scope>TensorProductBSplinePoissonAssembler</scope><name>TensorProductBSplinePoissonAssembler</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

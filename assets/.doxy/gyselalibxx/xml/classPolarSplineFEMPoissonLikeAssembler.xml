@@ -61,7 +61,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="140" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classPolarSplineFEMPoissonLikeAssembler_1a4b4f517917b224c0263adc9d5ae6be03" prot="public" static="no">
-        <type>typename <ref refid="classTensorProductBSplinePoissonAssembler_1a125ff9d02852c9846920ccf07940de15" kindref="member">TensorAssembler::TensorBSplineStash</ref></type>
+        <type>typename <ref refid="classTensorProductBSplinePoissonAssembler_1a8e448274cd37ce4b2776985c033ca9d1" kindref="member">TensorAssembler::TensorBSplineStash</ref></type>
         <definition>using PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  typename TensorAssembler::TensorBSplineStash</definition>
         <argsstring></argsstring>
         <name>TensorBSplineStash</name>
@@ -1242,7 +1242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="655" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="655" bodyend="790"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="655" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="655" bodyend="789"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1afb7f88b5fc203165abdc0e86d21bfea4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1271,7 +1271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="854" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="854" bodyend="859"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="853" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="853" bodyend="858"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a4f4b51c05ee17f8f97204459677322dc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1287,7 +1287,7 @@
 <para>Fills the nnz data structure for the rows of the singular basis functions and adds the contribution of the singular columns to the rows of the tensor basis functions. </para>
         </briefdescription>
         <detaileddescription>
-<para>The rows of the tensor basis functions near the singular point contain one non-zero element for each singular basis function. As these elements are found at the start of the row, all subsequent rows are shifted by the same amount. This function adds these contributions to the values already saved in nnz_per_row so it can be called before or after <ref refid="classTensorProductBSplinePoissonAssembler_1ab02c13b1bfcc67eaa3a5dcd793d4cdae" kindref="member">TensorProductBSplinePoissonAssembler::init_nnz_per_line</ref>.</para>
+<para>The rows of the tensor basis functions near the singular point contain one non-zero element for each singular basis function. As these elements are found at the start of the row, all subsequent rows are shifted by the same amount. This function adds these contributions to the values already saved in nnz_per_row so it can be called before or after <ref refid="classTensorProductBSplinePoissonAssembler_1aa999989b37871b202a7ad48becb5e2ff" kindref="member">TensorProductBSplinePoissonAssembler::init_nnz_per_line</ref>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">nnz_per_row</parametername>
@@ -1301,7 +1301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="874" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="874" bodyend="910"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="873" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="873" bodyend="909"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -1415,7 +1415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="818" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="818" bodyend="838"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="817" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="817" bodyend="837"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1ad5b4be6e36b86c7b3e4d2545a85e29f4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxBSPolar</type>
@@ -1446,7 +1446,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="918" column="46" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="918" bodyend="921"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="917" column="46" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="917" bodyend="920"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -1466,7 +1466,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="924" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="924" bodyend="931"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="923" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="923" bodyend="930"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1534,7 +1534,7 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="134" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="135" bodyend="932"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" line="134" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp" bodystart="135" bodyend="931"/>
     <listofallmembers>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6e8fc01a5d137e83a16154acd3a09291" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>BSplinesR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a5ac7f3eeae5de07f2a3388bd523598ff" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>BSplinesTheta</name></member>

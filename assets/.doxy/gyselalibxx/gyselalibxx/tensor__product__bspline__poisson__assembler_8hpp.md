@@ -45,7 +45,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md) &lt;typename [**GridR**](structGridR.md), typename [**GridTheta**](structGridTheta.md), typename [**BSplinesR**](structBSplinesR.md), typename [**BSplinesTheta**](structBSplinesTheta.md), typename QDimRMesh, typename QDimThetaMesh, MetricTensorType, typename IdxRangeFull&gt;<br>_An operator to assemble a Poisson-like stiffness matrix using tensor product B-splines._  |
+| class | [**TensorProductBSplinePoissonAssembler**](classTensorProductBSplinePoissonAssembler.md) &lt;typename Grid1, typename Grid2, typename BSplines1, typename BSplines2, typename QDim1Mesh, typename QDim2Mesh, MetricTensorType, typename IdxRangeFull&gt;<br>_An operator to assemble a Poisson-like stiffness matrix using tensor product B-splines._  |
 
 
 

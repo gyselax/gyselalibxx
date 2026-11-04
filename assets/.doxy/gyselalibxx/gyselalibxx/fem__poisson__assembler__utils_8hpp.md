@@ -10,6 +10,7 @@
 
 
 
+* `#include <array>`
 * `#include <tuple>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_alias_inline_functions.hpp"`
@@ -43,7 +44,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md) &lt;typename QDimRMesh, typename QDimThetaMesh, typename [**BSplinesR**](structBSplinesR.md), typename [**BSplinesTheta**](structBSplinesTheta.md)&gt;<br>_The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._  |
+| struct | [**TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md) &lt;typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2&gt;<br>_The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points._  |
 
 
 

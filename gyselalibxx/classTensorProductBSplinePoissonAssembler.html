@@ -570,7 +570,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-tensorproductbsplinepoissonassembler">Class TensorProductBSplinePoissonAssembler</h1>
-<p><strong>template &lt;typename <a href="structGridR.html"><strong>GridR</strong></a>, typename <a href="structGridTheta.html"><strong>GridTheta</strong></a>, typename <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, typename <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, typename QDimRMesh, typename QDimThetaMesh, concepts::MetricTensor MetricTensorType, typename IdxRangeFull&gt;</strong></p>
+<p><strong>template &lt;typename Grid1, typename Grid2, typename BSplines1, typename BSplines2, typename QDim1Mesh, typename QDim2Mesh, concepts::MetricTensor MetricTensorType, typename IdxRangeFull&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classTensorProductBSplinePoissonAssembler.html"><strong>TensorProductBSplinePoissonAssembler</strong></a></p>
 <p><em>An operator to assemble a Poisson-like stiffness matrix using tensor product B-splines.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -586,28 +586,28 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangebsrtheta"><strong>IdxRangeBSRTheta</strong></a>  <br><em>The index range of the tensor product B-splines.</em></td>
+<td style="text-align: right;">typedef typename Grid1::continuous_dimension_type</td>
+<td style="text-align: left;"><a href="#typedef-dim1"><strong>Dim1</strong></a>  <br><em>The first dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::remove_dims_of_t&lt; IdxRangeFull, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt;</td>
+<td style="text-align: right;">typedef typename Grid2::continuous_dimension_type</td>
+<td style="text-align: left;"><a href="#typedef-dim2"><strong>Dim2</strong></a>  <br><em>The second dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; BSplines1, BSplines2 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangebs2d"><strong>IdxRangeBS2D</strong></a>  <br><em>The index range of the tensor product B-splines.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::remove_dims_of_t&lt; IdxRangeFull, Grid1, Grid2 &gt;</td>
 <td style="text-align: left;"><a href="#typedef-idxrangebatch"><strong>IdxRangeBatch</strong></a>  <br><em>The index range of the batch dimensions.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangequadraturertheta"><strong>IdxRangeQuadratureRTheta</strong></a>  <br><em>The index range of the quadrature points.</em></td>
+<td style="text-align: right;">typedef IdxRange&lt; QDim1Mesh, QDim2Mesh &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangequadrature2d"><strong>IdxRangeQuadrature2D</strong></a>  <br><em>The index range of the quadrature points.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename GridR::continuous_dimension_type</td>
-<td style="text-align: left;"><a href="#typedef-r"><strong>R</strong></a>  <br><em>The radial dimension.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef detail_poisson:: <a href="classTensorProductBSplinePoissonAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a>&lt; QDimRMesh, QDimThetaMesh, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
+<td style="text-align: right;">typedef <a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>detail_poisson::TensorBSplineStash</strong></a>&lt; QDim1Mesh, QDim2Mesh, BSplines1, BSplines2 &gt;</td>
 <td style="text-align: left;"><a href="#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a>  <br><em>The values and derivatives of the 1D B-splines at the quadrature points.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename GridTheta::continuous_dimension_type</td>
-<td style="text-align: left;"><a href="#typedef-theta"><strong>Theta</strong></a>  <br><em>The poloidal dimension.</em></td>
 </tr>
 </tbody>
 </table>
@@ -622,7 +622,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-tensorproductbsplinepoissonassembler"><strong>TensorProductBSplinePoissonAssembler</strong></a> (QuadField int_volume, MetricTensorType const &amp; metric_tensor, IdxRangeFull idx_range_full, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangebsrtheta"><strong>IdxRangeBSRTheta</strong></a> idx_range_tensor_basis) <br><em>Instantiate the assembler operator.</em></td>
+<td style="text-align: left;"><a href="#function-tensorproductbsplinepoissonassembler"><strong>TensorProductBSplinePoissonAssembler</strong></a> (QuadField int_volume, MetricTensorType const &amp; metric_tensor, IdxRangeFull idx_range_full, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangebs2d"><strong>IdxRangeBS2D</strong></a> idx_range_tensor_basis) <br><em>Instantiate the assembler operator.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -637,7 +637,7 @@
 <td style="text-align: left;"><a href="#function-get_int_volume"><strong>get_int_volume</strong></a> () const<br><em>Get the integral volume associated with each quadrature point.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangebsrtheta"><strong>IdxRangeBSRTheta</strong></a></td>
+<td style="text-align: right;"><a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangebs2d"><strong>IdxRangeBS2D</strong></a></td>
 <td style="text-align: left;"><a href="#function-get_tensor_basis_idx_range"><strong>get_tensor_basis_idx_range</strong></a> () const<br><em>Get the index range of the tensor product B-splines in the FEM basis.</em></td>
 </tr>
 <tr>
@@ -677,15 +677,15 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION void</td>
-<td style="text-align: left;"><a href="#function-fill_test_weights"><strong>fill_test_weights</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, QuadField test_mass, DVectorField&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadraturertheta"><strong>IdxRangeQuadratureRTheta</strong></a>, VectorIndexSet&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-r"><strong>R</strong></a><a href="structR.html"><strong>R</strong></a>, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-theta"><strong>Theta</strong></a><a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; test_stiffness, IdxBSRTheta idx_test, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadraturertheta"><strong>IdxRangeQuadratureRTheta</strong></a> const &amp; full_quad_idx_range, DField&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadraturertheta"><strong>IdxRangeQuadratureRTheta</strong></a> &gt; int_volume, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_mass_weight and test_stiffness_weight at every quadrature point in the support of a test function and saves them in team scratch memory.</em></td>
+<td style="text-align: left;"><a href="#function-fill_test_weights"><strong>fill_test_weights</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, QuadField test_mass, DVectorField&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadrature2d"><strong>IdxRangeQuadrature2D</strong></a>, VectorIndexSet&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-dim1"><strong>Dim1</strong></a>, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-dim2"><strong>Dim2</strong></a> &gt; &gt; test_stiffness, IdxBS2D idx_test, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadrature2d"><strong>IdxRangeQuadrature2D</strong></a> const &amp; full_quad_idx_range, DField&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadrature2d"><strong>IdxRangeQuadrature2D</strong></a> &gt; int_volume, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_mass_weight and test_stiffness_weight at every quadrature point in the support of a test function and saves them in team scratch memory.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-get_matrix_stencil_element"><strong>get_matrix_stencil_element</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, IdxBSRTheta idx_test, IdxBSRTheta idx_trial, QuadField test_mass, DVectorField&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadraturertheta"><strong>IdxRangeQuadratureRTheta</strong></a>, VectorIndexSet&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-r"><strong>R</strong></a><a href="structR.html"><strong>R</strong></a>, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-theta"><strong>Theta</strong></a><a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; test_stiffness, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadraturertheta"><strong>IdxRangeQuadratureRTheta</strong></a> const &amp; full_quad_idx_range, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em></td>
+<td style="text-align: left;"><a href="#function-get_matrix_stencil_element"><strong>get_matrix_stencil_element</strong></a> (const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team, IdxBS2D idx_test, IdxBS2D idx_trial, QuadField test_mass, DVectorField&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadrature2d"><strong>IdxRangeQuadrature2D</strong></a>, VectorIndexSet&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-dim1"><strong>Dim1</strong></a>, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-dim2"><strong>Dim2</strong></a> &gt; &gt; test_stiffness, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadrature2d"><strong>IdxRangeQuadrature2D</strong></a> const &amp; full_quad_idx_range, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-r"><strong>R</strong></a><a href="structR.html"><strong>R</strong></a>, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-theta"><strong>Theta</strong></a><a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#function-get_test_weights"><strong>get_test_weights</strong></a> (IdxBSRTheta idx_test, IdxQuadratureRTheta idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, DField&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadraturertheta"><strong>IdxRangeQuadratureRTheta</strong></a> &gt; int_volume, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point for a tensor product test basis spline.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-dim1"><strong>Dim1</strong></a>, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-dim2"><strong>Dim2</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-get_test_weights"><strong>get_test_weights</strong></a> (IdxBS2D idx_test, IdxQuadrature2D idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, DField&lt; <a href="classTensorProductBSplinePoissonAssembler.html#typedef-idxrangequadrature2d"><strong>IdxRangeQuadrature2D</strong></a> &gt; int_volume, <a href="classTensorProductBSplinePoissonAssembler.html#typedef-tensorbsplinestash"><strong>TensorBSplineStash</strong></a> const &amp; bspline_stash) <br><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point for a tensor product test basis spline.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -696,52 +696,52 @@
 <h2 id="detailed-description">Detailed Description</h2>
 <p>The stiffness matrix has entries <span class="arithmatex">\(\int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx\)</span> where <span class="arithmatex">\(B_i\)</span> and <span class="arithmatex">\(B_j\)</span> are tensor product B-splines.</p>
 <p>The B-splines and the quadrature points both have a tensor product structure. The values and derivatives of the 1D B-splines at the 1D quadrature points are therefore stored (see <a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>detail_poisson::TensorBSplineStash</strong></a>) so that the tensor product B-splines can be evaluated at the quadrature points without being recalculated.</p>
+<p>Each dimension may be periodic or non-periodic (as determined by the B-splines). In a periodic dimension the basis must contain at least 2*degree+1 B-splines so that a B-spline does not overlap with itself across the boundary.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><a href="structGridR.html"><strong>GridR</strong></a> The radial grid type. </li>
-<li><a href="structGridTheta.html"><strong>GridTheta</strong></a> The poloidal grid type. </li>
-<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> The 1D B-splines in the radial direction. </li>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> The 1D B-splines in the poloidal direction. </li>
-<li><code>QDimRMesh</code> The radial quadrature grid type. </li>
-<li><code>QDimThetaMesh</code> The poloidal quadrature grid type. </li>
+<li><code>Grid1</code> The grid type in the first dimension. </li>
+<li><code>Grid2</code> The grid type in the second dimension. </li>
+<li><code>BSplines1</code> The 1D B-splines in the first dimension. </li>
+<li><code>BSplines2</code> The 1D B-splines in the second dimension. </li>
+<li><code>QDim1Mesh</code> The quadrature grid type in the first dimension. </li>
+<li><code>QDim2Mesh</code> The quadrature grid type in the second dimension. </li>
 <li><code>MetricTensorType</code> The type of the metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>IdxRangeFull</code> The full index range of <span class="arithmatex">\(\phi\)</span> including any batch dimensions. One matrix is assembled for each index in the batch dimensions. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-idxrangebsrtheta">typedef IdxRangeBSRTheta</h3>
+<h3 id="typedef-dim1">typedef Dim1</h3>
+<p><em>The first dimension.</em> </p>
+<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::Dim1 =  typename Grid1::continuous_dimension_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dim2">typedef Dim2</h3>
+<p><em>The second dimension.</em> </p>
+<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::Dim2 =  typename Grid2::continuous_dimension_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangebs2d">typedef IdxRangeBS2D</h3>
 <p><em>The index range of the tensor product B-splines.</em> </p>
-<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBSRTheta =  IdxRange&lt;BSplinesR, BSplinesTheta&gt;;
+<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBS2D =  IdxRange&lt;BSplines1, BSplines2&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-idxrangebatch">typedef IdxRangeBatch</h3>
 <p><em>The index range of the batch dimensions.</em> </p>
-<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, GridR, GridTheta&gt;;
+<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, Grid1, Grid2&gt;;
 </code></pre>
 <hr>
 
-<h3 id="typedef-idxrangequadraturertheta">typedef IdxRangeQuadratureRTheta</h3>
+<h3 id="typedef-idxrangequadrature2d">typedef IdxRangeQuadrature2D</h3>
 <p><em>The index range of the quadrature points.</em> </p>
-<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeQuadratureRTheta =  IdxRange&lt;QDimRMesh, QDimThetaMesh&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-r">typedef R</h3>
-<p><em>The radial dimension.</em> </p>
-<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::R =  typename GridR::continuous_dimension_type;
+<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::IdxRangeQuadrature2D =  IdxRange&lt;QDim1Mesh, QDim2Mesh&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-tensorbsplinestash">typedef TensorBSplineStash</h3>
 <p><em>The values and derivatives of the 1D B-splines at the quadrature points.</em> </p>
-<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson::
-            TensorBSplineStash&lt;QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-theta">typedef Theta</h3>
-<p><em>The poloidal dimension.</em> </p>
-<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; GridR, GridTheta, BSplinesR, BSplinesTheta, QDimRMesh, QDimThetaMesh, MetricTensorType, IdxRangeFull &gt;::Theta =  typename GridTheta::continuous_dimension_type;
+<pre><code class="language-C++">using TensorProductBSplinePoissonAssembler&lt; Grid1, Grid2, BSplines1, BSplines2, QDim1Mesh, QDim2Mesh, MetricTensorType, IdxRangeFull &gt;::TensorBSplineStash =  detail_poisson::TensorBSplineStash&lt;QDim1Mesh, QDim2Mesh, BSplines1, BSplines2&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -751,7 +751,7 @@
     QuadField int_volume,
     MetricTensorType const &amp; metric_tensor,
     IdxRangeFull idx_range_full,
-    IdxRangeBSRTheta idx_range_tensor_basis
+    IdxRangeBS2D idx_range_tensor_basis
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -759,7 +759,7 @@
 <li><code>int_volume</code> The initialised field of Jacobian values of the mapping. </li>
 <li><code>metric_tensor</code> The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>idx_range_full</code> The full index range of <span class="arithmatex">\(\phi\)</span> including any batch dimensions. </li>
-<li><code>idx_range_tensor_basis</code> The index range of the tensor product B-splines in the FEM basis. B-splines which are excluded from this index range (e.g. to impose boundary conditions) are not included in the matrix. </li>
+<li><code>idx_range_tensor_basis</code> The index range of the tensor product B-splines in the FEM basis. B-splines which are excluded from this index range (e.g. to impose boundary conditions) are not included in the matrix. In a periodic dimension all B-splines must be included. </li>
 </ul>
 <hr>
 
@@ -794,8 +794,8 @@ inline void TensorProductBSplinePoissonAssembler::compute_elements (
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>coeff_alpha</code> A callable with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
-<li><code>coeff_beta</code> A callable with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_alpha</code> A callable with signature <code>double operator()(IdxBatch, Coord&lt; Dim1 , Dim2 &gt;)</code> returning <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_beta</code> A callable with signature <code>double operator()(IdxBatch, Coord&lt; Dim1 , Dim2 &gt;)</code> returning <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate. </li>
 <li><code>values_csr</code> A 2D Kokkos view which stores the values of non-zero elements of the full matrix for the whole batch. </li>
 <li><code>col_idx_csr</code> A 1D Kokkos view which stores the column indices for each non-zero component of the full matrix (only for one matrix). </li>
 <li><code>nnz_per_row_csr</code> A 1D Kokkos view of length n+1, where n is the number of tensor basis functions, containing the elements of the nnz data structure of the full matrix which correspond to the rows of the tensor-tensor matrix. </li>
@@ -813,7 +813,7 @@ inline void TensorProductBSplinePoissonAssembler::compute_elements (
 
 <h3 id="function-get_tensor_basis_idx_range">function get_tensor_basis_idx_range</h3>
 <p><em>Get the index range of the tensor product B-splines in the FEM basis.</em> </p>
-<pre><code class="language-C++">inline IdxRangeBSRTheta TensorProductBSplinePoissonAssembler::get_tensor_basis_idx_range () const
+<pre><code class="language-C++">inline IdxRangeBS2D TensorProductBSplinePoissonAssembler::get_tensor_basis_idx_range () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The index range of the tensor product B-splines. </p>
@@ -846,7 +846,7 @@ inline void TensorProductBSplinePoissonAssembler::compute_elements (
     Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; nnz_per_row
 ) const
 </code></pre>
-<p>The rows and columns of the matrix are the tensor basis functions, ordered as in the 2D (r,theta) index range of the tensor basis functions. After this function the array will contain: nnz_per_row[0] = unchanged (0 for a standalone matrix). nnz_per_row[1] = number of non-zero elements in line 0 of the matrix. ... nnz_per_row[n] = number of non-zero elements in lines 0-(n-1) of the matrix. The values are added to the values already saved in nnz_per_row.</p>
+<p>The rows and columns of the matrix are the tensor basis functions, ordered as in the 2D index range of the tensor basis functions. After this function the array will contain: nnz_per_row[0] = unchanged (0 for a standalone matrix). nnz_per_row[1] = number of non-zero elements in line 0 of the matrix. ... nnz_per_row[n] = number of non-zero elements in lines 0-(n-1) of the matrix. The values are added to the values already saved in nnz_per_row.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>nnz_per_row</code> A 1D Kokkos view of length n+1, where n is the number of tensor basis functions, which stores the sum of the non-zeros in the matrix on all lines up to the one in. </li>
@@ -873,8 +873,8 @@ inline void TensorProductBSplinePoissonAssembler::operator() (
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>gko_matrix</code> The pointer to the matrix initialised by setup_sparse_matrix. </li>
-<li><code>coeff_alpha</code> A callable object with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning the value of <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
-<li><code>coeff_beta</code> A callable object with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning the value of <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate.</li>
+<li><code>coeff_alpha</code> A callable object with signature <code>double operator()(IdxBatch, Coord&lt; Dim1 , Dim2 &gt;)</code> returning the value of <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_beta</code> A callable object with signature <code>double operator()(IdxBatch, Coord&lt; Dim1 , Dim2 &gt;)</code> returning the value of <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate.</li>
 </ul>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -912,14 +912,14 @@ inline void TensorProductBSplinePoissonAssembler::operator() (
 static inline KOKKOS_FUNCTION void TensorProductBSplinePoissonAssembler::fill_test_weights (
     const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team,
     QuadField test_mass,
-    DVectorField&lt; IdxRangeQuadratureRTheta , VectorIndexSet&lt; R R , Theta Theta &gt; &gt; test_stiffness,
-    IdxBSRTheta idx_test,
+    DVectorField&lt; IdxRangeQuadrature2D , VectorIndexSet&lt; Dim1 , Dim2 &gt; &gt; test_stiffness,
+    IdxBS2D idx_test,
     IdxBatch idx_batch,
     CoeffAlpha const &amp; coeff_alpha,
     CoeffBeta const &amp; coeff_beta,
     MetricTensorType const &amp; metric_tensor,
-    IdxRangeQuadratureRTheta const &amp; full_quad_idx_range,
-    DField&lt; IdxRangeQuadratureRTheta &gt; int_volume,
+    IdxRangeQuadrature2D const &amp; full_quad_idx_range,
+    DField&lt; IdxRangeQuadrature2D &gt; int_volume,
     TensorBSplineStash const &amp; bspline_stash
 ) 
 </code></pre>
@@ -930,8 +930,8 @@ static inline KOKKOS_FUNCTION void TensorProductBSplinePoissonAssembler::fill_te
 <li><code>test_stiffness</code> The field where test_stiffness_weight is saved. It is defined on the same index range as test_mass. </li>
 <li><code>idx_test</code> The 2D index of the test B-spline. </li>
 <li><code>idx_batch</code> The index of the batch for which the element is being calculated. </li>
-<li><code>coeff_alpha</code> A callable with signature <code>double operator()(CoordRTheta)</code> returning <span class="arithmatex">\(\alpha\)</span>. </li>
-<li><code>coeff_beta</code> A callable with signature <code>double operator()(CoordRTheta)</code> returning <span class="arithmatex">\(\beta\)</span>. </li>
+<li><code>coeff_alpha</code> A callable with signature <code>double operator()(IdxBatch, Coord&lt; Dim1 , Dim2 &gt;)</code> returning <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_beta</code> A callable with signature <code>double operator()(IdxBatch, Coord&lt; Dim1 , Dim2 &gt;)</code> returning <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate. </li>
 <li><code>metric_tensor</code> The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>full_quad_idx_range</code> The index range of all the quadrature points. </li>
 <li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
@@ -943,11 +943,11 @@ static inline KOKKOS_FUNCTION void TensorProductBSplinePoissonAssembler::fill_te
 <p><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em> </p>
 <pre><code class="language-C++">static inline KOKKOS_FUNCTION double TensorProductBSplinePoissonAssembler::get_matrix_stencil_element (
     const Kokkos::TeamPolicy&lt;&gt;::member_type &amp; team,
-    IdxBSRTheta idx_test,
-    IdxBSRTheta idx_trial,
+    IdxBS2D idx_test,
+    IdxBS2D idx_trial,
     QuadField test_mass,
-    DVectorField&lt; IdxRangeQuadratureRTheta , VectorIndexSet&lt; R R , Theta Theta &gt; &gt; test_stiffness,
-    IdxRangeQuadratureRTheta const &amp; full_quad_idx_range,
+    DVectorField&lt; IdxRangeQuadrature2D , VectorIndexSet&lt; Dim1 , Dim2 &gt; &gt; test_stiffness,
+    IdxRangeQuadrature2D const &amp; full_quad_idx_range,
     TensorBSplineStash const &amp; bspline_stash
 ) 
 </code></pre>
@@ -968,14 +968,14 @@ static inline KOKKOS_FUNCTION void TensorProductBSplinePoissonAssembler::fill_te
 <h3 id="function-get_test_weights">function get_test_weights</h3>
 <p><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point for a tensor product test basis spline.</em> </p>
 <pre><code class="language-C++">template&lt;class CoeffAlpha, class CoeffBeta&gt;
-static inline KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R R , Theta Theta &gt; &gt; TensorProductBSplinePoissonAssembler::get_test_weights (
-    IdxBSRTheta idx_test,
-    IdxQuadratureRTheta idx_quad,
+static inline KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; Dim1 , Dim2 &gt; &gt; TensorProductBSplinePoissonAssembler::get_test_weights (
+    IdxBS2D idx_test,
+    IdxQuadrature2D idx_quad,
     IdxBatch idx_batch,
     CoeffAlpha const &amp; coeff_alpha,
     CoeffBeta const &amp; coeff_beta,
     MetricTensorType const &amp; metric_tensor,
-    DField&lt; IdxRangeQuadratureRTheta &gt; int_volume,
+    DField&lt; IdxRangeQuadrature2D &gt; int_volume,
     TensorBSplineStash const &amp; bspline_stash
 ) 
 </code></pre>
@@ -985,8 +985,8 @@ static inline KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; R R , Theta The
 <li><code>idx_test</code> The 2D index of the test tensor product B-spline. </li>
 <li><code>idx_quad</code> The index for the point in the quadrature scheme. </li>
 <li><code>idx_batch</code> The index of the batch for which the element is being calculated. </li>
-<li><code>coeff_alpha</code> A callable with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
-<li><code>coeff_beta</code> A callable with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_alpha</code> A callable with signature <code>double operator()(IdxBatch, Coord&lt; Dim1 , Dim2 &gt;)</code> returning <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_beta</code> A callable with signature <code>double operator()(IdxBatch, Coord&lt; Dim1 , Dim2 &gt;)</code> returning <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate. </li>
 <li><code>metric_tensor</code> The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
 <li><code>bspline_stash</code> The values and derivatives of the 1D B-splines at the quadrature points. </li>

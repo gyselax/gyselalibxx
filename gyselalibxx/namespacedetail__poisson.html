@@ -582,7 +582,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>TensorBSplineStash</strong></a> &lt;typename QDimRMesh, typename QDimThetaMesh, typename <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, typename <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>&gt;<br><em>The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points.</em></td>
+<td style="text-align: left;"><a href="structdetail__poisson_1_1TensorBSplineStash.html"><strong>TensorBSplineStash</strong></a> &lt;typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2&gt;<br><em>The values and first derivatives of the non-zero 1D B-splines at the 1D quadrature points.</em></td>
 </tr>
 </tbody>
 </table>
@@ -600,32 +600,56 @@
 <td style="text-align: left;"><a href="#function-as_batched_vector_view"><strong>as_batched_vector_view</strong></a> (DField&lt; IdxRange&lt; Dims... &gt; &gt; field) <br><em>Get a 2D Kokkos view of a 1D field with N batch dimensions.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_FUNCTION std::array&lt; IdxRange&lt; BSplines &gt;, 2 &gt;</td>
+<td style="text-align: left;"><a href="#function-get_overlapping_bsplines_1d"><strong>get_overlapping_bsplines_1d</strong></a> (Idx&lt; BSplines &gt; idx_test, IdxRange&lt; BSplines &gt; idx_range_basis) <br><em>Get the 1D B-splines in a basis whose supports overlap the support of a given B-spline.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION IdxRange&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-get_overlapping_knots_1d"><strong>get_overlapping_knots_1d</strong></a> (Idx&lt; BSplines &gt; idx_test, Idx&lt; BSplines &gt; idx_trial) <br><em>Compute the range of knots between which two 1D B-splines are both non-zero.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt; &gt;, double &gt;</td>
 <td style="text-align: left;"><a href="#function-get_polar_bspline_vals_and_derivs"><strong>get_polar_bspline_vals_and_derivs</strong></a> (IdxQuad idx_quad, Idx&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt; idx) <br><em>Get the value and derivatives of a polar bspline which covers the singular point at the specified quadrature point.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</td>
-<td style="text-align: left;"><a href="#function-get_quadrature_between_knots"><strong>get_quadrature_between_knots</strong></a> (Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> &gt; &gt; start_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> &gt; &gt; end_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; &gt; start_knot_theta, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; &gt; end_knot_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front) <br><em>Compute the quadrature range between a provided set of knots.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxRange&lt; QDim1Mesh, QDim2Mesh &gt;</td>
+<td style="text-align: left;"><a href="#function-get_quadrature_between_knots"><strong>get_quadrature_between_knots</strong></a> (Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines1 &gt; &gt; start_knot_1, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines1 &gt; &gt; end_knot_1, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines2 &gt; &gt; start_knot_2, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines2 &gt; &gt; end_knot_2, Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad_front) <br><em>Compute the quadrature range between a provided set of knots.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</td>
-<td style="text-align: left;"><a href="#function-get_support_quadrature"><strong>get_support_quadrature</strong></a> (Idx&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front) <br><em>Compute the range of quadrature points in the support of a tensor product B-spline.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxRange&lt; QDimMesh &gt;</td>
+<td style="text-align: left;"><a href="#function-get_quadrature_between_knots_1d"><strong>get_quadrature_between_knots_1d</strong></a> (Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt; start_knot, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt; end_knot, Idx&lt; QDimMesh &gt; idx_quad_front) <br><em>Compute the 1D quadrature range between a provided pair of knots.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type &gt; &gt;</td>
-<td style="text-align: left;"><a href="#function-get_test_weights"><strong>get_test_weights</strong></a> (double basis_val_test, DVector&lt; typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual &gt; basis_derivs_test, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt; int_volume) <br><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxRange&lt; QDim1Mesh, QDim2Mesh &gt;</td>
+<td style="text-align: left;"><a href="#function-get_support_quadrature"><strong>get_support_quadrature</strong></a> (Idx&lt; BSplines1, BSplines2 &gt; idx, Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad_front) <br><em>Compute the range of quadrature points in the support of a tensor product B-spline.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxRange&lt; QDimMesh &gt;</td>
+<td style="text-align: left;"><a href="#function-get_support_quadrature_1d"><strong>get_support_quadrature_1d</strong></a> (Idx&lt; BSplines &gt; idx, Idx&lt; QDimMesh &gt; idx_quad_front) <br><em>Compute the range of quadrature points in the support of a 1D B-spline.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDim1Mesh::continuous_dimension_type, typename QDim2Mesh::continuous_dimension_type &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-get_test_weights"><strong>get_test_weights</strong></a> (double basis_val_test, DVector&lt; typename QDim1Mesh::continuous_dimension_type::Dual, typename QDim2Mesh::continuous_dimension_type::Dual &gt; basis_derivs_test, Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad, IdxBatch idx_batch, CoeffAlpha const &amp; coeff_alpha, CoeffBeta const &amp; coeff_beta, MetricTensorType const &amp; metric_tensor, DField&lt; IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; &gt; int_volume) <br><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION Idx&lt; DDom &gt;</td>
 <td style="text-align: left;"><a href="#function-mod_add"><strong>mod_add</strong></a> (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx_step, IdxRange&lt; DDom &gt; idx_range) <br><em>Add an idx_step to an idx in such a way that the result remains in the idx_range.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION IdxStep&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#function-theta_mod"><strong>theta_mod</strong></a> (IdxStep&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx_theta) <br><em>Calculates the modulo idx_theta in relation to cells number along</em> <span class="arithmatex">\(\theta\)</span> <em>direction.</em></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION int</td>
+<td style="text-align: left;"><a href="#function-n_nonzeros_in_rows"><strong>n_nonzeros_in_rows</strong></a> (int i, int nbasis) <br><em>Get the number of non-zero elements in the first i rows of a 1D stiffness matrix.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxStep&lt; BSplines &gt;</td>
+<td style="text-align: left;"><a href="#function-periodic_mod"><strong>periodic_mod</strong></a> (IdxStep&lt; BSplines &gt; idx_step) <br><em>Calculates the modulo idx_step in relation to the number of basis functions of periodic B-splines.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION IdxType</td>
-<td style="text-align: left;"><a href="#function-theta_mod"><strong>theta_mod</strong></a> (IdxType idx) <br><em>Calculates the index which is inside the poloidal domain using the periodicity properties.</em></td>
+<td style="text-align: left;"><a href="#function-periodic_mod"><strong>periodic_mod</strong></a> (IdxType idx) <br><em>Calculates the index which is inside the domain of periodic B-splines using the periodicity properties.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION Idx&lt; QDim1Mesh, QDim2Mesh &gt;</td>
+<td style="text-align: left;"><a href="#function-periodic_wrap"><strong>periodic_wrap</strong></a> (Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad, IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; const &amp; target_range, IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; const &amp; full_quad_idx_range) <br><em>Get the periodic image of a quadrature index which is found in a target range.</em></td>
 </tr>
 </tbody>
 </table>
@@ -644,6 +668,50 @@ Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &
 </ul>
 <p><strong>Returns:</strong></p>
 <p>A 2D Kokkos view of shape (number of batches, matrix size). </p>
+<hr>
+
+<h3 id="function-get_overlapping_bsplines_1d">function get_overlapping_bsplines_1d</h3>
+<p><em>Get the 1D B-splines in a basis whose supports overlap the support of a given B-spline.</em> </p>
+<pre><code class="language-C++">template&lt;typename BSplines&gt;
+KOKKOS_FUNCTION std::array&lt; IdxRange&lt; BSplines &gt;, 2 &gt; detail_poisson::get_overlapping_bsplines_1d (
+    Idx&lt; BSplines &gt; idx_test,
+    IdxRange&lt; BSplines &gt; idx_range_basis
+) 
+</code></pre>
+<p>The result is returned as 2 contiguous index ranges. The indices in the first range are all smaller than the indices in the second range. This allows the B-splines to be iterated over in order, even when the overlap wraps around the boundary of a periodic basis. The second range is empty if the overlap does not wrap around the boundary.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>BSplines</code> The 1D B-splines.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_test</code> The index of the B-spline (the test function). </li>
+<li><code>idx_range_basis</code> The index range of the B-splines in the basis. In a periodic dimension this must contain all the B-splines. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The 2 sorted index ranges containing all the B-splines in the basis which overlap the given B-spline. </p>
+<hr>
+
+<h3 id="function-get_overlapping_knots_1d">function get_overlapping_knots_1d</h3>
+<p><em>Compute the range of knots between which two 1D B-splines are both non-zero.</em> </p>
+<pre><code class="language-C++">template&lt;typename BSplines&gt;
+KOKKOS_INLINE_FUNCTION IdxRange&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt; detail_poisson::get_overlapping_knots_1d (
+    Idx&lt; BSplines &gt; idx_test,
+    Idx&lt; BSplines &gt; idx_trial
+) 
+</code></pre>
+<p>If the B-splines are periodic then, in order to return a contiguous range, the result may include knots beyond the end of the domain.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>BSplines</code> The 1D B-splines.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_test</code> The index of the first B-spline (the test function). </li>
+<li><code>idx_trial</code> The index of the second B-spline (the trial function). </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The range of knots describing the cells where both B-splines are non-zero. </p>
 <hr>
 
 <h3 id="function-get_polar_bspline_vals_and_derivs">function get_polar_bspline_vals_and_derivs</h3>
@@ -670,29 +738,54 @@ KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, std::tuple&lt; double, 
 
 <h3 id="function-get_quadrature_between_knots">function get_quadrature_between_knots</h3>
 <p><em>Compute the quadrature range between a provided set of knots.</em> </p>
-<pre><code class="language-C++">template&lt;typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta&gt;
-KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_quadrature_between_knots (
-    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesR &gt; &gt; start_knot_r,
-    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesR &gt; &gt; end_knot_r,
-    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesTheta &gt; &gt; start_knot_theta,
-    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesTheta &gt; &gt; end_knot_theta,
-    Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front
+<pre><code class="language-C++">template&lt;typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2&gt;
+KOKKOS_FUNCTION IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; detail_poisson::get_quadrature_between_knots (
+    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines1 &gt; &gt; start_knot_1,
+    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines1 &gt; &gt; end_knot_1,
+    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines2 &gt; &gt; start_knot_2,
+    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines2 &gt; &gt; end_knot_2,
+    Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad_front
 ) 
 </code></pre>
-<p>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. The poloidal index of the front of the returned range is always inside the domain. However, in order to return a contiguous range, the result may include poloidal indices beyond the end of the domain. A modulo operator should be applied before using the indices.</p>
+<p>Compute the range of quadrature points which are found between a set of knots in both dimensions. The index of the front of the returned range in the second dimension is always inside the domain. However, in order to return a contiguous range, the result may include indices beyond the end of the domain in the second dimension. A modulo operator should be applied before using the indices. See get_quadrature_between_knots_1d for implementation details.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>QDimRMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in radial direction. </li>
-<li><code>QDimThetaMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in poloidal direction. </li>
-<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> Splines in radial direction. </li>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> Splines in poloidal direction.</li>
+<li><code>QDim1Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the first dimension. </li>
+<li><code>QDim2Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the second dimension. </li>
+<li><code>BSplines1</code> Splines in the first dimension. </li>
+<li><code>BSplines2</code> Splines in the second dimension.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>start_knot_r</code> The index of the knot describing the lower bound of the domain of interest in the radial direction. </li>
-<li><code>end_knot_r</code> The index of the knot describing the upper bound of the domain of interest in the radial direction. </li>
-<li><code>start_knot_theta</code> The index of the knot describing the lower bound of the domain of interest in the poloidal direction. </li>
-<li><code>end_knot_theta</code> The index of the knot describing the upper bound of the domain of interest in the poloidal direction. </li>
+<li><code>start_knot_1</code> The index of the knot describing the lower bound of the domain of interest in the first dimension. </li>
+<li><code>end_knot_1</code> The index of the knot describing the upper bound of the domain of interest in the first dimension. </li>
+<li><code>start_knot_2</code> The index of the knot describing the lower bound of the domain of interest in the second dimension. </li>
+<li><code>end_knot_2</code> The index of the knot describing the upper bound of the domain of interest in the second dimension. </li>
+<li><code>idx_quad_front</code> The first index of the index range of the quadrature points. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The range of quadrature points in the specified domain. </p>
+<hr>
+
+<h3 id="function-get_quadrature_between_knots_1d">function get_quadrature_between_knots_1d</h3>
+<p><em>Compute the 1D quadrature range between a provided pair of knots.</em> </p>
+<pre><code class="language-C++">template&lt;typename QDimMesh, typename BSplines&gt;
+KOKKOS_FUNCTION IdxRange&lt; QDimMesh &gt; detail_poisson::get_quadrature_between_knots_1d (
+    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt; start_knot,
+    Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplines &gt; &gt; end_knot,
+    Idx&lt; QDimMesh &gt; idx_quad_front
+) 
+</code></pre>
+<p>Compute the range of quadrature points which are found between two knots. If the B-splines are periodic then the front of the returned range is always inside the domain. However, in order to return a contiguous range, the result may include indices beyond the end of the domain. A modulo operator should be applied before using the indices.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>QDimMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh. </li>
+<li><code>BSplines</code> The 1D B-splines.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>start_knot</code> The index of the knot describing the lower bound of the domain of interest. </li>
+<li><code>end_knot</code> The index of the knot describing the upper bound of the domain of interest. </li>
 <li><code>idx_quad_front</code> The first index of the index range of the quadrature points. </li>
 </ul>
 <p><strong>Returns:</strong></p>
@@ -701,19 +794,19 @@ KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_q
 
 <h3 id="function-get_support_quadrature">function get_support_quadrature</h3>
 <p><em>Compute the range of quadrature points in the support of a tensor product B-spline.</em> </p>
-<pre><code class="language-C++">template&lt;typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta&gt;
-KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_support_quadrature (
-    Idx&lt; BSplinesR , BSplinesTheta &gt; idx,
-    Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front
+<pre><code class="language-C++">template&lt;typename QDim1Mesh, typename QDim2Mesh, typename BSplines1, typename BSplines2&gt;
+KOKKOS_FUNCTION IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; detail_poisson::get_support_quadrature (
+    Idx&lt; BSplines1, BSplines2 &gt; idx,
+    Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad_front
 ) 
 </code></pre>
-<p>In order to return a contiguous range the result may include poloidal indices which are outside the domain. A modulo operator should be applied before using the indices.</p>
+<p>In order to return a contiguous range the result may include indices which are outside the domain in periodic dimensions. A modulo operator should be applied before using the indices.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>QDimRMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in radial direction. </li>
-<li><code>QDimThetaMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in poloidal direction. </li>
-<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> Splines in radial direction. </li>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> Splines in poloidal direction.</li>
+<li><code>QDim1Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the first dimension. </li>
+<li><code>QDim2Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the second dimension. </li>
+<li><code>BSplines1</code> Splines in the first dimension. </li>
+<li><code>BSplines2</code> Splines in the second dimension.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -724,25 +817,48 @@ KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_s
 <p>The range of quadrature points in the support of the B-spline. </p>
 <hr>
 
+<h3 id="function-get_support_quadrature_1d">function get_support_quadrature_1d</h3>
+<p><em>Compute the range of quadrature points in the support of a 1D B-spline.</em> </p>
+<pre><code class="language-C++">template&lt;typename QDimMesh, typename BSplines&gt;
+KOKKOS_FUNCTION IdxRange&lt; QDimMesh &gt; detail_poisson::get_support_quadrature_1d (
+    Idx&lt; BSplines &gt; idx,
+    Idx&lt; QDimMesh &gt; idx_quad_front
+) 
+</code></pre>
+<p>If the B-splines are periodic then, in order to return a contiguous range, the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>QDimMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh. </li>
+<li><code>BSplines</code> The 1D B-splines.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx</code> The index of the B-spline. </li>
+<li><code>idx_quad_front</code> The first index of the index range of the quadrature points. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The range of quadrature points in the support of the B-spline. </p>
+<hr>
+
 <h3 id="function-get_test_weights">function get_test_weights</h3>
 <p><em>Computes the test_stiffness_weight and test_mass_weight for a given quadrature point.</em> </p>
-<pre><code class="language-C++">template&lt;class QDimRMesh, class QDimThetaMesh, class IdxBatch, class CoeffAlpha, class CoeffBeta, concepts::MetricTensor MetricTensorType&gt;
-KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuous_dimension_type, typename QDimThetaMesh::continuous_dimension_type &gt; &gt; detail_poisson::get_test_weights (
+<pre><code class="language-C++">template&lt;class QDim1Mesh, class QDim2Mesh, class IdxBatch, class CoeffAlpha, class CoeffBeta, concepts::MetricTensor MetricTensorType&gt;
+KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDim1Mesh::continuous_dimension_type, typename QDim2Mesh::continuous_dimension_type &gt; &gt; detail_poisson::get_test_weights (
     double basis_val_test,
-    DVector&lt; typename QDimRMesh::continuous_dimension_type::Dual, typename QDimThetaMesh::continuous_dimension_type::Dual &gt; basis_derivs_test,
-    Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad,
+    DVector&lt; typename QDim1Mesh::continuous_dimension_type::Dual, typename QDim2Mesh::continuous_dimension_type::Dual &gt; basis_derivs_test,
+    Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad,
     IdxBatch idx_batch,
     CoeffAlpha const &amp; coeff_alpha,
     CoeffBeta const &amp; coeff_beta,
     MetricTensorType const &amp; metric_tensor,
-    DField&lt; IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; &gt; int_volume
+    DField&lt; IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; &gt; int_volume
 ) 
 </code></pre>
 <p>The weak integral element is <span class="arithmatex">\(w (\alpha \nabla B_i \cdot G^{-1} \nabla B_j + \beta B_i B_j)\)</span> where <span class="arithmatex">\(w\)</span> is the integral volume, <span class="arithmatex">\(B_i\)</span> is the test function and <span class="arithmatex">\(B_j\)</span> is the trial function. This function computes <span class="arithmatex">\(w \alpha G^{-1} \nabla B_i\)</span> and <span class="arithmatex">\(w \beta B_i\)</span> so that the weak integral element can be computed from the values and derivatives of the trial function alone.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>QDimRMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in radial direction. </li>
-<li><code>QDimThetaMesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in poloidal direction.</li>
+<li><code>QDim1Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the first dimension. </li>
+<li><code>QDim2Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the second dimension.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -750,8 +866,8 @@ KOKKOS_FUNCTION std::tuple&lt; double, DVector&lt; typename QDimRMesh::continuou
 <li><code>basis_derivs_test</code> The gradient of the test basis function at the quadrature point. </li>
 <li><code>idx_quad</code> The index for the point in the quadrature scheme. </li>
 <li><code>idx_batch</code> The index of the batch for which the element is being calculated. </li>
-<li><code>coeff_alpha</code> A callable with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
-<li><code>coeff_beta</code> A callable with signature <code>double operator()(IdxBatch, CoordRTheta)</code> returning <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_alpha</code> A callable with signature <code>double operator()(IdxBatch, Coord&lt;Dim1, Dim2&gt;)</code> returning <span class="arithmatex">\(\alpha\)</span> at the given batch and coordinate. </li>
+<li><code>coeff_beta</code> A callable with signature <code>double operator()(IdxBatch, Coord&lt;Dim1, Dim2&gt;)</code> returning <span class="arithmatex">\(\beta\)</span> at the given batch and coordinate. </li>
 <li><code>metric_tensor</code> The metric tensor associated with the mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
 </ul>
@@ -772,43 +888,92 @@ KOKKOS_FUNCTION Idx&lt; DDom &gt; detail_poisson::mod_add (
 </code></pre>
 <hr>
 
-<h3 id="function-theta_mod">function theta_mod</h3>
-<p><em>Calculates the modulo idx_theta in relation to cells number along</em> <span class="arithmatex">\(\theta\)</span> <em>direction.</em></p>
-<pre><code class="language-C++">template&lt;typename BSplinesTheta&gt;
-KOKKOS_FUNCTION IdxStep&lt; BSplinesTheta &gt; detail_poisson::theta_mod (
-    IdxStep&lt; BSplinesTheta &gt; idx_theta
+<h3 id="function-n_nonzeros_in_rows">function n_nonzeros_in_rows</h3>
+<p><em>Get the number of non-zero elements in the first i rows of a 1D stiffness matrix.</em> </p>
+<pre><code class="language-C++">template&lt;typename BSplines&gt;
+KOKKOS_INLINE_FUNCTION int detail_poisson::n_nonzeros_in_rows (
+    int i,
+    int nbasis
+) 
+</code></pre>
+<p>Row j of the 1D stiffness matrix contains one non-zero element for each B-spline whose support overlaps the support of the j-th B-spline (including the j-th B-spline itself). In a periodic basis all rows contain the same number of non-zero elements. In a non-periodic basis this number decreases near the boundaries. The result is therefore the cumulative quantity required to build the nnz data structure of a CSR matrix. When i == nbasis the result is the total number of non-zero elements in the 1D stiffness matrix.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>BSplines</code> The B-splines in the dimension of interest.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>i</code> The number of rows (counted from the start of the basis) whose non-zero elements are counted. </li>
+<li><code>nbasis</code> The number of B-splines in the basis. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The number of non-zero elements in rows 0 to i-1 of the 1D stiffness matrix. </p>
+<hr>
+
+<h3 id="function-periodic_mod">function periodic_mod</h3>
+<p><em>Calculates the modulo idx_step in relation to the number of basis functions of periodic B-splines.</em> </p>
+<pre><code class="language-C++">template&lt;typename BSplines&gt;
+KOKKOS_FUNCTION IdxStep&lt; BSplines &gt; detail_poisson::periodic_mod (
+    IdxStep&lt; BSplines &gt; idx_step
 ) 
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> Periodic B-Splines in poloidal direction.</li>
+<li><code>BSplines</code> Periodic B-Splines.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>idx_theta</code> <span class="arithmatex">\(\theta\)</span> index.</li>
+<li><code>idx_step</code> A step between two B-spline indices.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The corresponding indice modulo <span class="arithmatex">\(\theta\)</span> direction cells number </p>
+<p>The corresponding step modulo the number of basis functions. </p>
 <hr>
 
-<h3 id="function-theta_mod_1">function theta_mod</h3>
-<p><em>Calculates the index which is inside the poloidal domain using the periodicity properties.</em> </p>
-<pre><code class="language-C++">template&lt;typename BSplinesTheta, class IdxType&gt;
-KOKKOS_INLINE_FUNCTION IdxType detail_poisson::theta_mod (
+<h3 id="function-periodic_mod_1">function periodic_mod</h3>
+<p><em>Calculates the index which is inside the domain of periodic B-splines using the periodicity properties.</em> </p>
+<pre><code class="language-C++">template&lt;typename BSplines, class IdxType&gt;
+KOKKOS_INLINE_FUNCTION IdxType detail_poisson::periodic_mod (
     IdxType idx
 ) 
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> Periodic B-Splines in poloidal direction. </li>
+<li><code>BSplines</code> Periodic B-Splines. </li>
 <li><code>IdxType</code> The Type of the input index.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>idx</code> A multi-dimensional index including the polar bspline index.</li>
+<li><code>idx</code> A multi-dimensional index including the B-spline index.</li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The corresponding index inside the domain. </p>
+<hr>
+
+<h3 id="function-periodic_wrap">function periodic_wrap</h3>
+<p><em>Get the periodic image of a quadrature index which is found in a target range.</em> </p>
+<pre><code class="language-C++">template&lt;typename BSplines1, typename BSplines2, typename QDim1Mesh, typename QDim2Mesh&gt;
+KOKKOS_INLINE_FUNCTION Idx&lt; QDim1Mesh, QDim2Mesh &gt; detail_poisson::periodic_wrap (
+    Idx&lt; QDim1Mesh, QDim2Mesh &gt; idx_quad,
+    IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; const &amp; target_range,
+    IdxRange&lt; QDim1Mesh, QDim2Mesh &gt; const &amp; full_quad_idx_range
+) 
+</code></pre>
+<p>The quadrature ranges returned by get_support_quadrature and get_quadrature_between_knots are contiguous so they may extend past the end of the domain in periodic dimensions. This function shifts an index by a period in each periodic dimension where it is outside the target range. It can be used to move an index from such a range into the domain (target_range = full_quad_idx_range) or from the domain into such a range.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>BSplines1</code> Splines in the first dimension. </li>
+<li><code>BSplines2</code> Splines in the second dimension. </li>
+<li><code>QDim1Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the first dimension. </li>
+<li><code>QDim2Mesh</code> <a href="classQuadrature.html"><strong>Quadrature</strong></a> mesh in the second dimension.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_quad</code> The index of a quadrature point. </li>
+<li><code>target_range</code> The range in which the returned index should be found. </li>
+<li><code>full_quad_idx_range</code> The index range of all the quadrature points (one period). </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The equivalent index inside target_range. </p>
 <hr>
 
 <hr>

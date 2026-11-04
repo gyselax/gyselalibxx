@@ -51,9 +51,13 @@
 * **get\_coordinate** ([**ddcHelper**](namespaceddcHelper.md))
 * **get\_idx\_from\_linear\_index** ([**ddcHelper**](namespaceddcHelper.md))
 * **get\_linear\_index\_from\_idx** ([**ddcHelper**](namespaceddcHelper.md))
+* **get\_overlapping\_bsplines\_1d** ([**detail\_poisson**](namespacedetail__poisson.md))
+* **get\_overlapping\_knots\_1d** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_polar\_bspline\_vals\_and\_derivs** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_quadrature\_between\_knots** ([**detail\_poisson**](namespacedetail__poisson.md))
+* **get\_quadrature\_between\_knots\_1d** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_support\_quadrature** ([**detail\_poisson**](namespacedetail__poisson.md))
+* **get\_support\_quadrature\_1d** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_test\_weights** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_nth\_tensor\_index\_element\_from\_map\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 * **get\_nth\_tensor\_index\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
@@ -91,6 +95,7 @@
 ## n
 
 * **Null\_Null** ([**ExtrapolationRule**](namespaceExtrapolationRule.md))
+* **n\_nonzeros\_in\_rows** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **non\_repeated\_indices\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 
 
@@ -98,6 +103,8 @@
 
 * **Periodic** ([**ExtrapolationRule**](namespaceExtrapolationRule.md), [**SplineBoundaryClosure**](namespaceSplineBoundaryClosure.md))
 * **points\_are\_subset** ([**ddcHelper**](namespaceddcHelper.md))
+* **periodic\_mod** ([**detail\_poisson**](namespacedetail__poisson.md))
+* **periodic\_wrap** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **PresentErrorExplanation** ([**gslx::error**](namespacegslx_1_1error.md))
 * **placeholder\_idx\_t** ([**metric\_tensor\_detail**](namespacemetric__tensor__detail.md))
 
@@ -120,7 +127,6 @@
 * **to\_coord\_t** ([**ddcHelper**](namespaceddcHelper.md))
 * **total\_interval\_length** ([**ddcHelper**](namespaceddcHelper.md))
 * **type\_seq\_intersection\_t** ([**ddcHelper**](namespaceddcHelper.md))
-* **theta\_mod** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **tensor\_mul** ([**tensor\_tools**](namespacetensor__tools.md))
 * **to\_tensor\_index\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 
