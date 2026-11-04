@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include "coord_transformation_tools.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "tensor.hpp"
+#include "vector_index_tools.hpp"
 
 /**
  * @brief A class describing an identity transformation.
