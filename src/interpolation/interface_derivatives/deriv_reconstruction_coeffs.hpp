@@ -678,10 +678,14 @@ protected:
         beta_i = get_beta(cell_length_left, cell_length_right);
         gammas_i = get_gammas(cell_length_left, cell_length_right);
 
-        coeff_deriv_patch1[0] = coeff_deriv_patch1[2]; // a_{n-2}
-        coeff_deriv_patch2[0] = coeff_deriv_patch2[2]; // b_{n-2}
-        ddc::parallel_deepcopy(weights_patch1[0], get_const_field(weights_patch1[2])); // c_{n-2}
-        ddc::parallel_deepcopy(weights_patch2[0], get_const_field(weights_patch2[2])); // c_{n-2}
+        cycle_buffers(coeff_deriv_patch1);
+        cycle_buffers(coeff_deriv_patch2);
+        cycle_buffers(weights_patch1);
+        cycle_buffers(weights_patch2);
+        cycle_buffers(coeff_deriv_patch1);
+        cycle_buffers(coeff_deriv_patch2);
+        cycle_buffers(weights_patch1);
+        cycle_buffers(weights_patch2);
 
         // Set (a_{n-1},b_{n-1},c_{n-1}) ---
         coeff_deriv_patch2[1]
