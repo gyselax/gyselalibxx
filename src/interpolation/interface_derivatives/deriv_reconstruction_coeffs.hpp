@@ -647,11 +647,6 @@ protected:
         int const n2_cells
                 = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
 
-        cycle_buffers(coeff_deriv_patch1);
-        cycle_buffers(coeff_deriv_patch2);
-        cycle_buffers(weights_patch1);
-        cycle_buffers(weights_patch2);
-
         recursion<false>(
                 n2_cells,
                 interface_idx_2,
@@ -708,11 +703,6 @@ protected:
         weights_patch1[2](idx_1) += factor * gammas_i[1];
         weights_patch1[2](idx_1_minus) += factor * gammas_i[2];
         weights_patch2[2](interface_idx_2) += factor * gammas_i[2];
-
-        cycle_buffers(coeff_deriv_patch1);
-        cycle_buffers(coeff_deriv_patch2);
-        cycle_buffers(weights_patch1);
-        cycle_buffers(weights_patch2);
 
         // Computing coefficients (c, a, b) on patch 1 -------------------------------------------
         // If m_is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
@@ -777,6 +767,12 @@ protected:
 
         Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
         IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
+
+        // Update coefficients.
+        cycle_buffers(coeff_deriv_patch);
+        cycle_buffers(coeff_deriv_other_patch);
+        cycle_buffers(weights_patch1);
+        cycle_buffers(weights_patch2);
 
         for (int n(2); n < n_cells; n++) {
             Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
