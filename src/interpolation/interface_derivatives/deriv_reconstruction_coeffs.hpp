@@ -541,14 +541,6 @@ protected:
         host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_1(m_idx_range_perp_2);
         host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_0(m_idx_range_perp_2);
 
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_2(weights_1_alloc_minus_2);
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_1(weights_1_alloc_minus_1);
-        host_t<DField<IdxRange1DPerp_1>> weights_1_minus_0(weights_1_alloc_minus_0);
-
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_2(weights_2_alloc_minus_2);
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_1(weights_2_alloc_minus_1);
-        host_t<DField<IdxRange1DPerp_2>> weights_2_minus_0(weights_2_alloc_minus_0);
-
         int const n_points_1 = m_idx_range_perp_1.size();
         int const n_points_2 = m_idx_range_perp_2.size();
 
@@ -560,19 +552,23 @@ protected:
             throw std::runtime_error("Please provide at least 2 cells in the Patch2.");
         }
 
-        // Initialise fields
-        ddc::parallel_fill(weights_1_minus_2, 0.0);
-        ddc::parallel_fill(weights_1_minus_1, 0.0);
-        ddc::parallel_fill(weights_1_minus_0, 0.0);
-        ddc::parallel_fill(weights_2_minus_2, 0.0);
-        ddc::parallel_fill(weights_2_minus_1, 0.0);
-        ddc::parallel_fill(weights_2_minus_0, 0.0);
-
         // Store the 3 last steps for the recursion in an array.
         std::array<host_t<DField<IdxRange1DPerp_1>>, 3> weights_patch1
-                = {weights_1_minus_2, weights_1_minus_1, weights_1_minus_0};
+                = {get_field(weights_1_alloc_minus_2),
+                   get_field(weights_1_alloc_minus_1),
+                   get_field(weights_1_alloc_minus_0)};
         std::array<host_t<DField<IdxRange1DPerp_2>>, 3> weights_patch2
-                = {weights_2_minus_2, weights_2_minus_1, weights_2_minus_0};
+                = {get_field(weights_2_alloc_minus_2),
+                   get_field(weights_2_alloc_minus_1),
+                   get_field(weights_2_alloc_minus_0)};
+
+        // Initialise fields
+        ddc::parallel_fill(weights_patch1[0], 0.0);
+        ddc::parallel_fill(weights_patch1[1], 0.0);
+        ddc::parallel_fill(weights_patch1[2], 0.0);
+        ddc::parallel_fill(weights_patch2[0], 0.0);
+        ddc::parallel_fill(weights_patch2[1], 0.0);
+        ddc::parallel_fill(weights_patch2[2], 0.0);
 
         std::array<double, 3> coeff_deriv_patch1;
         std::array<double, 3> coeff_deriv_patch2;
