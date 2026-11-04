@@ -583,7 +583,6 @@ We simply refer to it as
 \end{bmatrix}.
 ```
 
-
 #### Approximation
 
 In Vidal et al. (2026)[^2], we see that if the number of chosen cells in `InterfaceDerivCoeffs` is large, then the system can be approximated by
@@ -610,7 +609,6 @@ C_{trunc} =
 ```
 
 where the values of the vector $`C_{trunc}`$ correspond to coefficients in $`\{c^k\}_k`$ computed in `InterfaceDerivCoeffs` for $`N_{reduc}`$ cells next to the interface chosen on its two patches.
-
 
 ### How to use the InterfacesDerivativeCalculator operator?
 
@@ -641,7 +639,6 @@ InterfacesDerivativeCalculator<
 
 with `idx_ranges` a `MultipatchType<IdxRangeonPatch, Patch1, Patch2, ...>` object.
 
-
 If we want to solve the system for a given function, we then use the operator `.solve_deriv()`.
 
 ```cpp
@@ -669,46 +666,6 @@ Let's take the following case,
 This geometry is composed of 9 patches forming periodic strips in the *x* direction.
 We use additional interpolation points as closure condition for the equivalent global splines in
 the *y* direction (i.e. `ddc::BoundCond::GREVILLE`).
-
-<!-- So, we start by defining the `InterfacesExactDerivativeCalculator` matrices for each periodic directions
-$`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7`).
-
-```cpp
-InterfacesExactDerivativeCalculator<Connectivity, GridX1, 
-        ddc::TypeSeq<Patch1, Patch2, Patch3>, 
-        ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
-        InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
-        matrix_123(idx_ranges_123, derivative_calculators_123);
-
-InterfacesExactDerivativeCalculator<Connectivity, GridX4, 
-        ddc::TypeSeq<Patch4, Patch5, Patch6>,
-        ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
-        InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
-        matrix_456(idx_ranges_456, derivative_calculators_456);
-// ...
-```
-
-We also define `InterfacesExactDerivativeCalculator` matrices for each non-periodic directions
-$`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3`).
-
-```cpp
-InterfacesExactDerivativeCalculator<Connectivity, GridY1, 
-        ddc::TypeSeq<Patch1, Patch4, Patch7>,
-        ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
-        InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
-        matrix_147(idx_ranges_147, derivative_calculators_147);
-
-InterfacesExactDerivativeCalculator<Connectivity, GridY2, 
-        ddc::TypeSeq<Patch2, Patch5, Patch8>,
-        ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
-        InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
-        matrix_258(idx_ranges_258, derivative_calculators_258);
-// ...
-```
-
-> **Note:** the list of patches need to have all the patches on the given direction.
-> In case of doubt, the full list of patches can be given. In this case, all the given collections
-> have to be defined on the same patch set. -->
 
 So, we start by defining the `InterfacesDerivativeCalculator` matrices for each periodic directions
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7`).
@@ -782,7 +739,6 @@ all the data to build local spline representations is available.
 The cross-derivatives are computed from the first derivatives.
 So, `.solve_deriv()` has to be called before `.solve_cross_deriv()`.
 It is recommended to apply `.solve_deriv()` on *every* group of patches before calling `.solve_cross_deriv()`.
-
 
 ### How to use the InterfacesExactDerivativeCalculator operator?
 
