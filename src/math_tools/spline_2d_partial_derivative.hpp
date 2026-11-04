@@ -21,7 +21,8 @@ template <
         class SplineEvaluator2D,
         class DerivativeDimension,
         class IdxRangeBatched>
-class Spline2DPartialDerivative : public INonAnalyticalPartialDerivative<IdxRangeBatched, DerivativeDimension>
+class Spline2DPartialDerivative
+    : public INonAnalyticalPartialDerivative<IdxRangeBatched, DerivativeDimension>
 {
     static_assert(
             (std::is_same_v<

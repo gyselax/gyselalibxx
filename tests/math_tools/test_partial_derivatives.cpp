@@ -36,10 +36,10 @@ struct PartialDerivativeFixture<std::tuple<std::integral_constant<bool, periodic
     };
 };
 
-template<class Dim>
-    struct Grid : NonUniformGridBase<Dim>
-    {
-    };
+template <class Dim>
+struct Grid : NonUniformGridBase<Dim>
+{
+};
 
 std::size_t static constexpr spline_degree = 3;
 
@@ -840,12 +840,12 @@ TYPED_TEST(PartialDerivativeFixture, ConstantPartialDerivativeExternalDim)
     using IdxRangeX = IdxRange<GridX>;
     ConstantPartialDerivative<IdxRangeX, typename TestFixture::Y> const_deriv(1.0);
 
-    IdxRangeX idx_range_test(Idx<GridX>{0}, IdxStep<GridX>{1});
+    IdxRangeX idx_range_test(Idx<GridX> {0}, IdxStep<GridX> {1});
     host_t<DFieldMem<IdxRangeX>> field_alloc(idx_range_test);
 
     const_deriv(get_field(field_alloc));
 
     // Partial Derivative in X direction
-    EXPECT_EQ(field_alloc(Idx<GridX>{0}), 1.0);
+    EXPECT_EQ(field_alloc(Idx<GridX> {0}), 1.0);
 }
 } // namespace
