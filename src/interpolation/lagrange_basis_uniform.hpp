@@ -39,7 +39,9 @@ struct UniformLagrangeKnots : UniformGridBase<typename T::continuous_dimension_t
  *                  Double by default.
  */
 template <class Dim, std::size_t D, class DataType = double>
-class UniformLagrangeBasis : detail::UniformLagrangeBasisBase
+class UniformLagrangeBasis
+    : detail::UniformLagrangeBasisBase
+    , ddc::DiscreteDimension
 {
     static_assert(D > 0, "Parameter `D` must be positive");
     static_assert(std::is_floating_point_v<DataType>);

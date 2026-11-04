@@ -2,7 +2,7 @@ spack:
   definitions:
   - packages:
     - cmake@3.31
-    - 'ddc@0.16 +fft +pdi +splines'
+    - 'ddc@0.17 +fft +pdi +splines'
     - ginkgo@1.11 ~openmp +cuda cuda_arch=90
     - gmgpolar@2.4
     - googletest@1.17 +gmock
@@ -85,6 +85,14 @@ spack:
       - spec: openmpi@4.1.6+cuda~cxx~cxx_exceptions~java+lustre~memchecker+pmi~static~wrapper-rpath
           fabrics=ucx schedulers=slurm
         prefix: /lustre/fshomisc/sup/spack_soft/openmpi/4.1.6/gcc-11.4.1-hbuwwfts4cctbzqir427u56mkk6zu3qr
+        extra_attributes:
+            environment:
+              set:
+                OMPI_MCA_btl_vader_single_copy_mechanism: none
+                OMPI_MCA_coll: ^hcoll
+                OMPI_MCA_pml: ucx
+                PMIX_MCA_psec: native
+                SLURM_MPI_TYPE: pmix_v3
     py-dask:
       prefer: ['~dataframe']
     py-pandas:

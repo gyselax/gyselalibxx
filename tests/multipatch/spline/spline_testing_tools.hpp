@@ -56,9 +56,9 @@ template <int PatchIdx, class ExecSpace>
 using SplineRThetaEvaluator = ddc::SplineEvaluatorND<
         ExecSpace,
         typename ExecSpace::memory_space,
-        ddc::detail::TypeSeq<BSplinesR<PatchIdx>, BSplinesTheta<PatchIdx>>,
-        ddc::detail::TypeSeq<GridR<PatchIdx>, GridTheta<PatchIdx>>,
-        ddc::detail::TypeSeq<
+        ddc::TypeSeq<BSplinesR<PatchIdx>, BSplinesTheta<PatchIdx>>,
+        ddc::TypeSeq<GridR<PatchIdx>, GridTheta<PatchIdx>>,
+        ddc::TypeSeq<
                 ddc::ConstantExtrapolationRule<R>,
                 ddc::ConstantExtrapolationRule<R>,
                 ddc::PeriodicExtrapolationRule<Theta>,

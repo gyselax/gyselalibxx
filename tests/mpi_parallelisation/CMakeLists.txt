@@ -44,5 +44,7 @@ endfunction()
 
 make_mpi_test(MPIParallelisation.AllToAll2D_CPU)
 make_mpi_test(MPIParallelisation.AllToAll2D_GPU)
+make_mpi_test(MPIParallelisation.AllToAll2D_CPU_MoreMPIs)
+make_mpi_test(MPIParallelisation.AllToAll2D_GPU_MoreMPIs)
 make_mpi_test(MPIParallelisation.AllToAll3D_CPU)
 make_mpi_test(MPIParallelisation.AllToAll4D_CPU)

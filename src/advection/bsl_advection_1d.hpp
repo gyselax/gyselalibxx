@@ -5,6 +5,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines/deriv.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
@@ -270,12 +272,13 @@ public:
                     function_derivatives_max
             = std::nullopt) const
     {
+        Kokkos::Profiling::ScopedRegion region("(GSLX) BslAdvection1D");
+
         using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
         using IdxBatchFunction = typename IdxRangeBatchFunction::discrete_element_type;
 
         using IdxRangeBatchAdvecField = ddc::remove_dims_of_t<IdxRangeAdvection, GridInterest>;
         using IdxBatchAdvecField = typename IdxRangeBatchAdvecField::discrete_element_type;
-        Kokkos::Profiling::pushRegion("(GSLX) BslAdvection1D");
 
         // Get index ranges and operators ........................................................
         IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
@@ -357,7 +360,6 @@ public:
                 });
 
 
-        Kokkos::Profiling::popRegion();
         return allfdistribu;
     }
 };
