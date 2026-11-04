@@ -388,30 +388,22 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             CoordTransformGroup<9>()};
 
 // Instantiate the derivatives calculators ---------------------------------------------------
+ // InterfaceDerivCoeffs for interfaces along y (periodic).
+    InterfaceDerivCoeffs<Interface_1_2> const deriv_coeffs_1_2(idx_range_xy1, idx_range_xy2);
+    InterfaceDerivCoeffs<Interface_2_3> const deriv_coeffs_2_3(idx_range_xy2, idx_range_xy3);
+    InterfaceDerivCoeffs<Interface_3_1> const deriv_coeffs_3_1(idx_range_xy3, idx_range_xy1);
+
+    InterfaceDerivCoeffs<Interface_4_5> const deriv_coeffs_4_5(idx_range_xy4, idx_range_xy5);
+    InterfaceDerivCoeffs<Interface_5_6> const deriv_coeffs_5_6(idx_range_xy5, idx_range_xy6);
+    InterfaceDerivCoeffs<Interface_6_4> const deriv_coeffs_6_4(idx_range_xy6, idx_range_xy4);
+
+    InterfaceDerivCoeffs<Interface_7_8> const deriv_coeffs_7_8(idx_range_xy7, idx_range_xy8);
+    InterfaceDerivCoeffs<Interface_8_9> const deriv_coeffs_8_9(idx_range_xy8, idx_range_xy9);
+    InterfaceDerivCoeffs<Interface_9_7> const deriv_coeffs_9_7(idx_range_xy9, idx_range_xy7);
+
+    // InterfaceDerivCoeffs for interfaces along x.
 #if defined(APPROXIMATION)
     constexpr std::size_t nb_chosen_cells = 9;
-
-    // InterfaceDerivCoeffs for interfaces along y (periodic).
-    InterfaceDerivCoeffs<Interface_1_2> const
-            deriv_coeffs_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_2_3> const
-            deriv_coeffs_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_3_1> const
-            deriv_coeffs_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
-
-    InterfaceDerivCoeffs<Interface_4_5> const
-            deriv_coeffs_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_5_6> const
-            deriv_coeffs_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_6_4> const
-            deriv_coeffs_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
-
-    InterfaceDerivCoeffs<Interface_7_8> const
-            deriv_coeffs_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_8_9> const
-            deriv_coeffs_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_9_7> const
-            deriv_coeffs_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
 
     // InterfaceDerivCoeffs for interfaces along x.
     InterfaceDerivCoeffs<Interface_1_4> const
@@ -429,20 +421,6 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     InterfaceDerivCoeffs<Interface_6_9> const
             deriv_coeffs_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
 #else
-    // InterfaceDerivCoeffs for interfaces along y (periodic).
-    InterfaceDerivCoeffs<Interface_1_2> const deriv_coeffs_1_2(idx_range_xy1, idx_range_xy2);
-    InterfaceDerivCoeffs<Interface_2_3> const deriv_coeffs_2_3(idx_range_xy2, idx_range_xy3);
-    InterfaceDerivCoeffs<Interface_3_1> const deriv_coeffs_3_1(idx_range_xy3, idx_range_xy1);
-
-    InterfaceDerivCoeffs<Interface_4_5> const deriv_coeffs_4_5(idx_range_xy4, idx_range_xy5);
-    InterfaceDerivCoeffs<Interface_5_6> const deriv_coeffs_5_6(idx_range_xy5, idx_range_xy6);
-    InterfaceDerivCoeffs<Interface_6_4> const deriv_coeffs_6_4(idx_range_xy6, idx_range_xy4);
-
-    InterfaceDerivCoeffs<Interface_7_8> const deriv_coeffs_7_8(idx_range_xy7, idx_range_xy8);
-    InterfaceDerivCoeffs<Interface_8_9> const deriv_coeffs_8_9(idx_range_xy8, idx_range_xy9);
-    InterfaceDerivCoeffs<Interface_9_7> const deriv_coeffs_9_7(idx_range_xy9, idx_range_xy7);
-
-    // InterfaceDerivCoeffs for interfaces along x.
     InterfaceDerivCoeffs<Interface_1_4> const deriv_coeffs_1_4(
             idx_range_xy1,
             idx_range_xy4,
@@ -476,8 +454,6 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineBuilderClosure::GREVILLE);
 #endif
-
-
 
     // Collect the derivative calculators --------------------------------------------------------
     InterfaceDerivCoeffsCollection
@@ -621,7 +597,6 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             ddc::SplineBuilderClosure::GREVILLE,
             InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>
             matrix_369(idx_ranges_369, deriv_coeffs_collect_369);
-
 #endif
 
     // Instantiate DerivField ====================================================================

@@ -617,22 +617,18 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
 
 #if defined(APPROXIMATION)
     InterfacesDerivativeCalculator<
-            Connectivity,
-            Grid1AlongXg,
-            ddc::TypeSeq<Patch1, Patch2, Patch3>,
-            InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
-            matrix(idx_ranges, deriv_coeffs_collect);
 #else
     InterfacesExactDerivativeCalculator<
+#endif
             Connectivity,
             Grid1AlongXg,
             ddc::TypeSeq<Patch1, Patch2, Patch3>,
+#if defined(EXACT_FORMULA)
             ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineBuilderClosure::HERMITE,
+#endif
             InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
             matrix(idx_ranges, deriv_coeffs_collect);
-#endif
-
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
