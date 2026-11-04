@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `MultipatchSplineBuilder` to `SplineBuilderCollection`.
 - Rename `MultipatchSplineBuilder2D` to `SplineBuilder2DCollection`.
 - Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
+- Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
 
 ### Deprecated
 

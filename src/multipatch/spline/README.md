@@ -106,7 +106,7 @@ To evaluate at a given coordinate outside the domain, extrapolation rules have b
 ## Contents
 
 - `constant_extrapolation_rules_onion.hpp`: Define `ConstantExtrapolationRuleOnion`, constant extrapolation rule for onion geometries.
-- `multipatch_spline_builder_2d.hpp`: Define the `SplineBuilder2DCollection` operator to apply 2D spline builders on every patch.
-- `multipatch_spline_builder.hpp`: Define the `SplineBuilderCollection` operator to apply 1D spline builders on every patch.
+- `spline_builder_2d_collection.hpp`: Define the `SplineBuilder2DCollection` operator to apply 2D spline builders on every patch.
+- `spline_builder_collection.hpp`: Define the `SplineBuilderCollection` operator to apply 1D spline builders on every patch.
 - `multipatch_spline_evaluator_2d.hpp`: Define the `MultipatchSplineEvaluator2D` operator to apply 2D spline evaluators on every patch.
 - `null_extrapolation_rules.hpp`: Define `NullExtrapolationRule`, a null extrapolation rule for every geometry.  
