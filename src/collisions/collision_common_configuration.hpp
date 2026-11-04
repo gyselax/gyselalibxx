@@ -133,11 +133,11 @@ public:
 
     /**
      * @brief We have some fields whose dimension vary depending on the simulation. Bstar_s in a typical 5D simulation
-     * has dimension [Sp, theta, R, Vpar]. Now some simulation do not have all these dimension, say only [Sp, Vpar, Mu].
-     * We have to satisfy both situations. TransposeDeepCopy takes two fields, expecting the source field to be copied
-     * into the destination field. It may be that the source has less dimension but never more. If the source has less
-     * dimensions, the data is replicated. For instance from [Vpar, Sp] into [Sp, R, Vpar], the [Vpar, Sp] plane with be
-     * replicated along Rand the transpose done appropriately.
+     * has dimension [Sp, theta, (Phi,) R, Vpar]. Some simulation do not have all these dimension, say only [Sp, Vpar,
+     * Mu]. We have to satisfy both situations. TransposeDeepCopy takes two fields, expecting the source field to be
+     * copied into the destination field. It may be that the source has less dimension but never more. If the source has
+     * less dimensions, the data is replicated. For instance from [Vpar, Sp] into [Sp, R, Vpar], the [Vpar, Sp] plane
+     * with be replicated along R and the transpose done appropriately.
      *
      * @param[out] destination a field.
      * @param[in] source a field.
