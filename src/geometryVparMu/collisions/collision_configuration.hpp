@@ -5,12 +5,13 @@
 #include <paraconf.h>
 
 #include "collision_common_configuration.hpp"
+#include "geometry_vpar_mu.hpp"
 #include "paraconfpp.hpp"
 
 /**
  * @brief Class to collect information to initialise the collision operator for a SpVparMu geometry.
  */
-class CollisionConfiguration
+class CollisionConfigurationSpV2D
 {
 public:
     /**
@@ -31,7 +32,7 @@ public:
 
 public:
     /**
-     * @brief The constructor for the CollisionConfiguration class.
+     * @brief The constructor for the CollisionConfigurationSpV2D class.
      *
      * @param yaml_input_file yaml namelist file object.
      * @param index_range_fdistribution index range of the whole distribution function.
@@ -40,7 +41,7 @@ public:
      * @param[in] B_norm The norm of the magnetic field defined over the polar slice.
      * @param[in] Bstar_s Bstar defined on the coordinates (species,r,theta,vpar).
      */
-    CollisionConfiguration(
+    CollisionConfigurationSpV2D(
             PC_tree_t const& yaml_input_file,
             IdxRange<Species, GridVpar, GridMu> index_range_fdistribution,
             DConstField<IdxRange<GridMu>> coeff_intdmu,
