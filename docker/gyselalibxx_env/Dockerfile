@@ -7,6 +7,7 @@ ENV BASH_ENV=/etc/profile
 ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
 
+ARG LLVM_VERSION=23
 
 RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
  && echo tzdata tzdata/Zones/Etc string UTC | debconf-set-selections \
@@ -17,18 +18,22 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
     apt-utils \
     ca-certificates \
     wget \
+ && mkdir -p /etc/apt/keyrings \
+ && wget -qO /etc/apt/keyrings/apt.llvm.org.asc https://apt.llvm.org/llvm-snapshot.gpg.key \
+ && echo "deb [signed-by=/etc/apt/keyrings/apt.llvm.org.asc] https://apt.llvm.org/resolute/ llvm-toolchain-resolute-${LLVM_VERSION} main" \
+    > /etc/apt/sources.list.d/llvm.list \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
-    clang-23 \
-    libomp-dev \
+    clang-${LLVM_VERSION} \
+    libomp-${LLVM_VERSION}-dev \
     git \
     openssh-client \
     python3-pip \
     python3-venv \
     cmake \
- && ln -sf /usr/bin/clang-23 /usr/bin/clang \
- && ln -sf /usr/bin/clang++-23 /usr/bin/clang++ \
+ && ln -sf /usr/bin/clang-${LLVM_VERSION} /usr/bin/clang \
+ && ln -sf /usr/bin/clang++-${LLVM_VERSION} /usr/bin/clang++ \
  && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build -DUSE_MATCHCOMPILER=ON -DCMAKE_BUILD_TYPE=Release \
