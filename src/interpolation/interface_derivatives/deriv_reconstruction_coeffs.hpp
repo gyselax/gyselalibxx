@@ -71,19 +71,19 @@ class DerivReconstructionCoeffs
 {
 protected:
     /// @brief The grid of interpolation points perpendicular to the interface on patch 1.
-    using EdgePerpGrid1 = EdgePerpGrid1Type;
+    using GridEdgePerp1 = EdgePerpGrid1Type;
     /// @brief The grid of interpolation points perpendicular to the interface on patch 2.
-    using EdgePerpGrid2 = EdgePerpGrid2Type;
+    using GridEdgePerp2 = EdgePerpGrid2Type;
 
     /// @brief The index range over the interpolation points perpendicular to the interface on patch 1.
-    using IdxRange1DPerp_1 = IdxRange<EdgePerpGrid1>;
+    using IdxRange1DPerp_1 = IdxRange<GridEdgePerp1>;
     /// @brief The index range over the interpolation points perpendicular to the interface on patch 2.
-    using IdxRange1DPerp_2 = IdxRange<EdgePerpGrid2>;
+    using IdxRange1DPerp_2 = IdxRange<GridEdgePerp2>;
 
-    /// @brief An index of EdgePerpGrid1.
-    using Idx1D_1 = Idx<EdgePerpGrid1>;
-    /// @brief An index of EdgePerpGrid2.
-    using Idx1D_2 = Idx<EdgePerpGrid2>;
+    /// @brief An index of GridEdgePerp1.
+    using IdxEdgePerp1 = Idx<GridEdgePerp1>;
+    /// @brief An index of GridEdgePerp2.
+    using IdxEdgePerp2 = Idx<GridEdgePerp2>;
 
     /// @brief The B-splines in the direction perpendicular to the interface on patch 1.
     using BSplinesPerp1 = BSplinesPerp1Type;
@@ -214,8 +214,8 @@ public:
                     GridBreakPt2>(m_idx_range_perp_2, s_extremity_2);
         }
 
-        if constexpr ((ddc::is_uniform_point_sampling_v<EdgePerpGrid1>)&&(
-                              ddc::is_uniform_point_sampling_v<EdgePerpGrid2>)) {
+        if constexpr ((ddc::is_uniform_point_sampling_v<GridEdgePerp1>)&&(
+                              ddc::is_uniform_point_sampling_v<GridEdgePerp2>)) {
             set_coefficients_uniform_per_patch_case();
         } else {
             set_coefficients_non_uniform_case();
@@ -268,14 +268,14 @@ public:
             std::size_t const number_chosen_cells)
         : DerivReconstructionCoeffs(
                 (s_extremity_1 == Extremity::FRONT)
-                        ? idx_range_1d_1.take_first(IdxStep<EdgePerpGrid1>(
+                        ? idx_range_1d_1.take_first(IdxStep<GridEdgePerp1>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size())))
-                        : idx_range_1d_1.take_last(IdxStep<EdgePerpGrid1>(
+                        : idx_range_1d_1.take_last(IdxStep<GridEdgePerp1>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size()))),
                 (s_extremity_2 == Extremity::FRONT)
-                        ? idx_range_1d_2.take_first(IdxStep<EdgePerpGrid2>(
+                        ? idx_range_1d_2.take_first(IdxStep<GridEdgePerp2>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size())))
-                        : idx_range_1d_2.take_last(IdxStep<EdgePerpGrid2>(
+                        : idx_range_1d_2.take_last(IdxStep<GridEdgePerp2>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size()))),
                 ddc::SplineBuilderClosure::HERMITE,
                 ddc::SplineBuilderClosure::HERMITE)
@@ -429,14 +429,14 @@ protected:
                 m_idx_range_perp_1,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](Idx1D_1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
+                [&](IdxEdgePerp1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
 
         // To avoid counting twice the value at the interface.
         coeff_values += ddc::host_transform_reduce(
                 m_idx_range_perp_2,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](Idx1D_2 const& idx) {
+                [&](IdxEdgePerp2 const& idx) {
                     return sign_function_2 * function_2(idx) * m_weights_patch_2(idx);
                 });
         return coeff_values;
@@ -583,23 +583,23 @@ protected:
         std::array<double, 3> gammas_i;
 
         // Define a step to increment the indices to move away from the interface.
-        IdxStep<EdgePerpGrid1> idx_step_1
-                = s_extremity_1 == FRONT ? IdxStep<EdgePerpGrid1>(1) : IdxStep<EdgePerpGrid1>(-1);
-        IdxStep<EdgePerpGrid2> idx_step_2
-                = s_extremity_2 == FRONT ? IdxStep<EdgePerpGrid2>(1) : IdxStep<EdgePerpGrid2>(-1);
+        IdxStep<GridEdgePerp1> idx_step_1
+                = s_extremity_1 == FRONT ? IdxStep<GridEdgePerp1>(1) : IdxStep<GridEdgePerp1>(-1);
+        IdxStep<GridEdgePerp2> idx_step_2
+                = s_extremity_2 == FRONT ? IdxStep<GridEdgePerp2>(1) : IdxStep<GridEdgePerp2>(-1);
 
         // Initialisation recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) -----------------------------
-        Idx1D_1 interface_idx_1 = get_extremity_idx(s_extremity_1, m_idx_range_perp_1);
-        Idx1D_2 interface_idx_2 = get_extremity_idx(s_extremity_2, m_idx_range_perp_2);
+        IdxEdgePerp1 interface_idx_1 = get_extremity_idx(s_extremity_1, m_idx_range_perp_1);
+        IdxEdgePerp2 interface_idx_2 = get_extremity_idx(s_extremity_2, m_idx_range_perp_2);
 
         // Set (a_{n-2},b_{n-2},c_{n-2}) ---
-        Idx1D_1 idx_1_minus;
-        Idx1D_1 idx_1 = interface_idx_1;
-        Idx1D_1 idx_1_plus = interface_idx_1 + idx_step_1;
+        IdxEdgePerp1 idx_1_minus;
+        IdxEdgePerp1 idx_1 = interface_idx_1;
+        IdxEdgePerp1 idx_1_plus = interface_idx_1 + idx_step_1;
 
-        Idx1D_2 idx_2_minus;
-        Idx1D_2 idx_2 = interface_idx_2;
-        Idx1D_2 idx_2_plus = interface_idx_2 + idx_step_2;
+        IdxEdgePerp2 idx_2_minus;
+        IdxEdgePerp2 idx_2 = interface_idx_2;
+        IdxEdgePerp2 idx_2_plus = interface_idx_2 + idx_step_2;
 
         auto [cell_length_left, cell_length_right] = get_cell_lengths<false>(idx_2);
 
@@ -633,11 +633,11 @@ protected:
                 = coeff_deriv_patch1[0] / (1 - coeff_deriv_patch2[0] * beta_i); // b_{n-1}
 
         // c_{n-1} = (c_{n-2} + a_{n-2} * gamma_i) / (1 - a_{n-2} * beta_i);
-        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
+        ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx) {
             weights_patch1[1](idx)
                     = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch1[0](idx);
         });
-        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
+        ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx) {
             weights_patch2[1](idx)
                     = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch2[0](idx);
         });
@@ -702,11 +702,11 @@ protected:
                 = coeff_deriv_patch1[0] * beta_i / (1 - coeff_deriv_patch1[0] * alpha_i); // b_{n-1}
 
         // c_{n-1} = (c_{n-2} + b_{n-2} * gamma_i) / (1 - b_{n-2} * alpha_i);
-        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
+        ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx) {
             weights_patch1[1](idx)
                     = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch1[0](idx);
         });
-        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
+        ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx) {
             weights_patch2[1](idx)
                     = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch2[0](idx);
         });
@@ -774,7 +774,7 @@ protected:
             std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
             std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
     {
-        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
+        using Grid1D = std::conditional_t<is_on_patch1, GridEdgePerp1, GridEdgePerp2>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
         Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
@@ -810,13 +810,13 @@ protected:
             // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
             // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
             double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
-            ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
+            ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx_perp) {
                 weights_patch1[2](idx_perp)
                         = 1. / denom
                           * (weights_patch1[1](idx_perp)
                              - coeff_closer_deriv * weights_patch1[0](idx_perp));
             });
-            ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
+            ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx_perp) {
                 weights_patch2[2](idx_perp)
                         = 1. / denom
                           * (weights_patch2[1](idx_perp)
@@ -872,7 +872,7 @@ protected:
             std::array<host_t<DField<IdxRange1DPerp_1>>, 3>& weights_patch1,
             std::array<host_t<DField<IdxRange1DPerp_2>>, 3>& weights_patch2)
     {
-        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
+        using Grid1D = std::conditional_t<is_on_patch1, GridEdgePerp1, GridEdgePerp2>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
         Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
@@ -956,12 +956,12 @@ protected:
         // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
         // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
         double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
-        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
+        ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx_perp) {
             weights_patch1[2](idx_perp) = 1. / denom
                                           * (weights_patch1[1](idx_perp)
                                              - coeff_closer_deriv * weights_patch1[0](idx_perp));
         });
-        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
+        ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx_perp) {
             weights_patch2[2](idx_perp) = 1. / denom
                                           * (weights_patch2[1](idx_perp)
                                              - coeff_closer_deriv * weights_patch2[0](idx_perp));
@@ -993,11 +993,11 @@ protected:
         int const n_cells_1 = m_idx_range_perp_1.size() - 1;
         int const n_cells_2 = m_idx_range_perp_2.size() - 1;
 
-        Idx1D_1 interface_idx_1 = get_extremity_idx(s_extremity_1, m_idx_range_perp_1);
-        Idx1D_2 interface_idx_2 = get_extremity_idx(s_extremity_2, m_idx_range_perp_2);
+        IdxEdgePerp1 interface_idx_1 = get_extremity_idx(s_extremity_1, m_idx_range_perp_1);
+        IdxEdgePerp2 interface_idx_2 = get_extremity_idx(s_extremity_2, m_idx_range_perp_2);
 
-        double cell_length_left = ddc::discrete_space<EdgePerpGrid1>().step();
-        double cell_length_right = ddc::discrete_space<EdgePerpGrid2>().step();
+        double cell_length_left = ddc::discrete_space<GridEdgePerp1>().step();
+        double cell_length_right = ddc::discrete_space<GridEdgePerp2>().step();
 
         double const a_11 = get_alpha(cell_length_left, cell_length_right);
         double const b_11 = get_beta(cell_length_left, cell_length_right);
@@ -1086,8 +1086,8 @@ protected:
     std::tuple<double, double> get_cell_lengths(Idx1D const& idx) const
     {
         // Tag for the grid on this and the other patch.
-        using Grid1D = std::conditional_t<is_on_patch1, EdgePerpGrid1, EdgePerpGrid2>;
-        using OGrid1D = std::conditional_t<is_on_patch1, EdgePerpGrid2, EdgePerpGrid1>;
+        using Grid1D = std::conditional_t<is_on_patch1, GridEdgePerp1, GridEdgePerp2>;
+        using OGrid1D = std::conditional_t<is_on_patch1, GridEdgePerp2, GridEdgePerp1>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
 
         Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
@@ -1126,7 +1126,7 @@ protected:
             Idx<OGrid1D> const other_idx = get_extremity_idx(other_extremity, other_idx_range_1d);
             Idx<OGrid1D> const other_idx_incremented = other_idx + other_idx_step;
 
-            if constexpr (std::is_same_v<Grid1D, EdgePerpGrid2>) {
+            if constexpr (std::is_same_v<Grid1D, GridEdgePerp2>) {
                 length_left
                         = abs(ddc::coordinate(other_idx_incremented) - ddc::coordinate(other_idx));
                 length_right = abs(ddc::coordinate(idx_incremented) - ddc::coordinate(idx));
