@@ -387,8 +387,8 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             CoordTransformGroup<8>(),
             CoordTransformGroup<9>()};
 
-// Instantiate the derivatives calculators ---------------------------------------------------
- // InterfaceDerivCoeffs for interfaces along y (periodic).
+    // Instantiate the derivatives calculators ---------------------------------------------------
+    // InterfaceDerivCoeffs for interfaces along y (periodic).
     InterfaceDerivCoeffs<Interface_1_2> const deriv_coeffs_1_2(idx_range_xy1, idx_range_xy2);
     InterfaceDerivCoeffs<Interface_2_3> const deriv_coeffs_2_3(idx_range_xy2, idx_range_xy3);
     InterfaceDerivCoeffs<Interface_3_1> const deriv_coeffs_3_1(idx_range_xy3, idx_range_xy1);
