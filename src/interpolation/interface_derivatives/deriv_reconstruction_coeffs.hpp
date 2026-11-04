@@ -797,7 +797,9 @@ protected:
                                                  : get_beta(cell_length_left, cell_length_right);
             std::array<double, 3> const gammas_i = get_gammas(cell_length_left, cell_length_right);
 
-            double const denom = 1 - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
+            double const denom
+                    = 1
+                      - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
 
             // Set (a_{n},b_{n},c_{n}) ---
             coeff_deriv_patch[n] = coeff_furthest * coeff_deriv_patch[n_minus_1] / denom;
@@ -809,7 +811,8 @@ protected:
 
             // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
             // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
-            double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
+            double coeff_closer_deriv
+                    = coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
             ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx_perp) {
                 weights_patch1[n](idx_perp)
                         = 1. / denom
@@ -938,27 +941,32 @@ protected:
         // No more boundary derivative, the local coefficient is set to zero.
         coeff_furthest = 0;
 
-        double denom = 1 - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
+        double denom
+                = 1 - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
 
         // Set (a_{n},b_{n},c_{n}) ---
         coeff_deriv_patch[n] = coeff_furthest * coeff_deriv_patch[n_minus_1] / denom;
-        coeff_deriv_other_patch[n] = (coeff_deriv_other_patch[n_minus_1]
-                                      - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2]
-                                                * coeff_deriv_other_patch[n_minus_2])
-                                     / denom;
+        coeff_deriv_other_patch[n]
+                = (coeff_deriv_other_patch[n_minus_1]
+                   - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2]
+                             * coeff_deriv_other_patch[n_minus_2])
+                  / denom;
 
         // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
         // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
-        double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
+        double coeff_closer_deriv
+                = coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
         ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx_perp) {
-            weights_patch1[n](idx_perp) = 1. / denom
-                                          * (weights_patch1[n_minus_1](idx_perp)
-                                             - coeff_closer_deriv * weights_patch1[n_minus_2](idx_perp));
+            weights_patch1[n](idx_perp)
+                    = 1. / denom
+                      * (weights_patch1[n_minus_1](idx_perp)
+                         - coeff_closer_deriv * weights_patch1[n_minus_2](idx_perp));
         });
         ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx_perp) {
-            weights_patch2[n](idx_perp) = 1. / denom
-                                          * (weights_patch2[n_minus_1](idx_perp)
-                                             - coeff_closer_deriv * weights_patch2[n_minus_2](idx_perp));
+            weights_patch2[n](idx_perp)
+                    = 1. / denom
+                      * (weights_patch2[n_minus_1](idx_perp)
+                         - coeff_closer_deriv * weights_patch2[n_minus_2](idx_perp));
         });
         double const factor = 1. / denom * coeff_deriv_patch[n_minus_1];
         if constexpr (is_on_patch1) {
