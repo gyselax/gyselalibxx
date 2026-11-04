@@ -660,6 +660,7 @@ protected:
                 weights_patch1,
                 weights_patch2);
 
+
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
             correction_boundary<false>(
@@ -670,6 +671,11 @@ protected:
                     weights_patch1,
                     weights_patch2);
         }
+
+        cycle_buffers(coeff_deriv_patch1);
+        cycle_buffers(coeff_deriv_patch2);
+        cycle_buffers(weights_patch1);
+        cycle_buffers(weights_patch2);
 
         // Initialisation second recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) ----------------------
         // Set (a_{n-2},b_{n-2},c_{n-2}) ---
@@ -682,11 +688,6 @@ protected:
         alpha_i = get_alpha(cell_length_left, cell_length_right);
         beta_i = get_beta(cell_length_left, cell_length_right);
         gammas_i = get_gammas(cell_length_left, cell_length_right);
-
-        cycle_buffers(coeff_deriv_patch1);
-        cycle_buffers(coeff_deriv_patch2);
-        cycle_buffers(weights_patch1);
-        cycle_buffers(weights_patch2);
 
         // Set (a_{n},b_{n},c_{n}) ---
         coeff_deriv_patch2[n] = coeff_deriv_patch2[n_minus_1]
@@ -773,13 +774,13 @@ protected:
         Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
         IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
 
-        // Update coefficients.
-        cycle_buffers(coeff_deriv_patch);
-        cycle_buffers(coeff_deriv_other_patch);
-        cycle_buffers(weights_patch1);
-        cycle_buffers(weights_patch2);
-
         for (int current_n(2); current_n < n_cells; current_n++) {
+            // Update coefficients.
+            cycle_buffers(coeff_deriv_patch);
+            cycle_buffers(coeff_deriv_other_patch);
+            cycle_buffers(weights_patch1);
+            cycle_buffers(weights_patch2);
+
             Idx1D const idx_minus = interface_idx + (current_n - 1) * idx_step;
             Idx1D const idx = interface_idx + current_n * idx_step;
             Idx1D const idx_plus = interface_idx + (current_n + 1) * idx_step;
@@ -831,16 +832,7 @@ protected:
                 weights_patch2[n](idx) += factor * gammas_i[1];
                 weights_patch2[n](idx_minus) += factor * gammas_i[0];
             }
-
-            // Update coefficients.
-            cycle_buffers(coeff_deriv_patch);
-            cycle_buffers(coeff_deriv_other_patch);
-            cycle_buffers(weights_patch1);
-            cycle_buffers(weights_patch2);
         }
-
-        ddc::parallel_deepcopy(weights_patch1[n], get_const_field(weights_patch1[n_minus_1]));
-        ddc::parallel_deepcopy(weights_patch2[n], get_const_field(weights_patch2[n_minus_1]));
     }
 
     /**
@@ -870,6 +862,12 @@ protected:
     {
         using Grid1D = std::conditional_t<is_on_patch1, GridEdgePerp1, GridEdgePerp2>;
         static_assert(std::is_same_v<Idx1D, Idx<Grid1D>>);
+
+        // Update coefficients.
+        cycle_buffers(coeff_deriv_patch);
+        cycle_buffers(coeff_deriv_other_patch);
+        cycle_buffers(weights_patch1);
+        cycle_buffers(weights_patch2);
 
         Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
         IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
