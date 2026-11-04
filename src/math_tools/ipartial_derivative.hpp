@@ -38,6 +38,17 @@ public:
     virtual void operator()(DFieldType differentiated_field) const = 0;
 };
 
+/**
+ * @brief An abstract class for a non-analytical partial derivative operator.
+ * This class inherits from IPartialDerivative but adds IdxRange information which
+ * is useful when iterating over the dimension along which the derivative is defined.
+ * This information may not be relevant for an analytical IPartialDerivative as
+ * in this case no IdxRange iteration is required.
+ *
+ * @tparam IdxRangeFull The index range of the field on which the operator acts 
+ * (with all dimensions, batched and dimension of interest).
+ * @tparam DerivativeDimension The dimension on which the partial derivative is calculated.
+ */
 template <class IdxRangeFull, class DerivativeDimension>
 class INonAnalyticalPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
