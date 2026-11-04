@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File multipatch_spline_builder.hpp - GyselalibX</title>
+    <title>File spline_builder_2d_collection.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File multipatch_spline_builder.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/multipatch__spline__builder_8hpp_source.md";
+        var mkdocs_page_name = "File spline_builder_2d_collection.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/spline__builder__2d__collection_8hpp.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -559,9 +559,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File multipatch_spline_builder.hpp</li>
+      <li class="breadcrumb-item active">File spline_builder_2d_collection.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/multipatch__spline__builder_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/spline__builder__2d__collection_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -569,134 +569,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-multipatch_spline_builderhpp">File multipatch_spline_builder.hpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_7740c6927b2da0a836b00bedb040a06d.html"><strong>multipatch</strong></a> <strong>&gt;</strong> <a href="dir_729d943c83b6b5573a69e28a4db4673a.html"><strong>spline</strong></a> <strong>&gt;</strong> <a href="multipatch__spline__builder_8hpp.html"><strong>multipatch_spline_builder.hpp</strong></a></p>
-<p><a href="multipatch__spline__builder_8hpp.html">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">// SPDX-License-Identifier: MIT
-
-#pragma once
-#include &lt;cassert&gt;
-#include &lt;tuple&gt;
-#include &lt;utility&gt;
-
-#include &lt;ddc/ddc.hpp&gt;
-#include &lt;ddc/kernels/splines.hpp&gt;
-
-#include "ddc_aliases.hpp"
-#include "multipatch_type.hpp"
-
-template &lt;
-        class ExecSpace,
-        class MemorySpace,
-        template &lt;typename P&gt;
-        typename BSplineOnPatch,
-        template &lt;typename P&gt;
-        typename GridOnPatch,
-        ddc::SplineBuilderClosure SBCLower,
-        ddc::SplineBuilderClosure SBCUpper,
-        ddc::SplineBuilderClosure BcTransition,
-        class Connectivity,
-        ddc::SplineSolver Solver,
-        template &lt;typename P&gt;
-        typename ValuesOnPatch,
-        class... Patches&gt;
-class SplineBuilderCollection
-{
-    static_assert(
-            (((ddc::is_uniform_bsplines_v&lt;BSplineOnPatch&lt;Patches&gt;&gt;)
-              || (ddc::is_non_uniform_bsplines_v&lt;BSplineOnPatch&lt;Patches&gt;&gt;))
-             &amp;&amp; ...),
-            "The BSplineOnPatch argument does not create 1D BSpline objects.");
-    static_assert(
-            (((ddc::is_uniform_point_sampling_v&lt;GridOnPatch&lt;Patches&gt;&gt;)
-              || (ddc::is_non_uniform_point_sampling_v&lt;GridOnPatch&lt;Patches&gt;&gt;))
-             &amp;&amp; ...),
-            "The GridOnPatch argument does not create 1D Grid objects.");
-
-    using PatchOrdering = ddc::TypeSeq&lt;Patches...&gt;;
-    static constexpr std::size_t n_patches = ddc::type_seq_size_v&lt;PatchOrdering&gt;;
-
-    template &lt;class Patch&gt;
-    struct Build_BuilderType
-    {
-        using lower_matching_edge = equivalent_edge_t&lt;
-                Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, FRONT&gt;,
-                typename Connectivity::interface_collection&gt;;
-        using upper_matching_edge = equivalent_edge_t&lt;
-                Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, BACK&gt;,
-                typename Connectivity::interface_collection&gt;;
-        static constexpr std::size_t patch_id = ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;;
-        using type = ddc::SplineBuilder&lt;
-                ExecSpace,
-                MemorySpace,
-                BSplineOnPatch&lt;Patch&gt;,
-                GridOnPatch&lt;Patch&gt;,
-                std::is_same_v&lt;lower_matching_edge, OutsideEdge&gt; ? SBCLower : BcTransition,
-                std::is_same_v&lt;upper_matching_edge, OutsideEdge&gt; ? SBCUpper : BcTransition,
-                Solver&gt;;
-    };
-
-    template &lt;class Patch&gt;
-    using BuilderOnPatch = typename Build_BuilderType&lt;Patch&gt;::type;
-
-    template &lt;class Patch&gt;
-    using SplineOnPatch = DField&lt;
-            typename BuilderOnPatch&lt;Patch&gt;::template batched_spline_domain_type&lt;
-                    typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
-            MemorySpace&gt;;
-
-    template &lt;class Patch&gt;
-    using DerivsOnPatch = DConstField&lt;
-            typename BuilderOnPatch&lt;Patch&gt;::template batched_derivs_domain_type&lt;
-                    typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
-            MemorySpace&gt;;
-
-    using MultipatchSplineCoeffs = MultipatchField&lt;SplineOnPatch, Patches...&gt;;
-
-    // For PERIODIC or GREVILLE boundary conditions
-    using MultipatchValues = MultipatchField&lt;ValuesOnPatch, Patches...&gt;;
-
-    using MultipatchDerivs = MultipatchField&lt;DerivsOnPatch, Patches...&gt;;
-
-    using BuilderTuple = std::tuple&lt;BuilderOnPatch&lt;Patches&gt; const&amp;...&gt;;
-
-
-    BuilderTuple const m_builders;
-
-private:
-    template &lt;class Patch&gt;
-    std::optional&lt;DerivsOnPatch&lt;Patch&gt;&gt; get_deriv_value(
-            std::optional&lt;MultipatchDerivs&gt; derivs) const
-    {
-        if (derivs.has_value()) {
-            return derivs-&gt;template get&lt;Patch&gt;();
-        } else {
-            return std::nullopt;
-        }
-    }
-
-public:
-    explicit SplineBuilderCollection(BuilderOnPatch&lt;Patches&gt; const&amp;... builders)
-        : m_builders(std::tie(builders...)) {};
-
-
-    ~SplineBuilderCollection() = default;
-
-    void operator()(
-            MultipatchSplineCoeffs splines,
-            MultipatchValues const&amp; values,
-            std::optional&lt;MultipatchDerivs&gt; derivs_xmin = std::nullopt,
-            std::optional&lt;MultipatchDerivs&gt; derivs_xmax = std::nullopt) const
-    {
-        ((std::get&lt;BuilderOnPatch&lt;Patches&gt; const&amp;&gt;(m_builders)(
-                 splines.template get&lt;Patches&gt;(),
-                 get_const_field(values.template get&lt;Patches&gt;()),
-                 get_deriv_value&lt;Patches&gt;(derivs_xmin),
-                 get_deriv_value&lt;Patches&gt;(derivs_xmax))),
-         ...);
-    };
-};
-</code></pre></div>
+                <div><h1 id="file-spline_builder_2d_collectionhpp">File spline_builder_2d_collection.hpp</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_7740c6927b2da0a836b00bedb040a06d.html"><strong>multipatch</strong></a> <strong>&gt;</strong> <a href="dir_729d943c83b6b5573a69e28a4db4673a.html"><strong>spline</strong></a> <strong>&gt;</strong> <a href="spline__builder__2d__collection_8hpp.html"><strong>spline_builder_2d_collection.hpp</strong></a></p>
+<p><a href="spline__builder__2d__collection_8hpp_source.html">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;cassert&gt;</code></li>
+<li><code>#include &lt;tuple&gt;</code></li>
+<li><code>#include &lt;utility&gt;</code></li>
+<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
+<li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
+<li><code>#include "ddc_aliases.hpp"</code></li>
+<li><code>#include "i_interpolation_builder.hpp"</code></li>
+<li><code>#include "multipatch_type.hpp"</code></li>
+<li><code>#include "spline_builder_deriv_field_2d.hpp"</code></li>
+<li><code>#include "types.hpp"</code></li>
+</ul>
+<h2 id="classes">Classes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classSplineBuilder2DCollection.html"><strong>SplineBuilder2DCollection</strong></a> &lt;class ExecSpace, class MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, class Connectivity, Solver, ValuesOnPatch, Patches&gt;<br><em>A class to call all the builders of all the patches once.</em></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</code></p></div>
               
             </div>
           </div><footer>

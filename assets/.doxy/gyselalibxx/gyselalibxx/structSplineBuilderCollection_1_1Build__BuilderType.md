@@ -165,5 +165,5 @@ std::size_t SplineBuilderCollection< ExecSpace, MemorySpace, BSplineOnPatch, Gri
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_collection.hpp`
 

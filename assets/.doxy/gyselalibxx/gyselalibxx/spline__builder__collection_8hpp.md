@@ -1,12 +1,12 @@
 
 
-# File multipatch\_spline\_builder.hpp
+# File spline\_builder\_collection.hpp
 
 
 
-[**FileList**](files.md) **>** [**multipatch**](dir_7740c6927b2da0a836b00bedb040a06d.md) **>** [**spline**](dir_729d943c83b6b5573a69e28a4db4673a.md) **>** [**multipatch\_spline\_builder.hpp**](multipatch__spline__builder_8hpp.md)
+[**FileList**](files.md) **>** [**multipatch**](dir_7740c6927b2da0a836b00bedb040a06d.md) **>** [**spline**](dir_729d943c83b6b5573a69e28a4db4673a.md) **>** [**spline\_builder\_collection.hpp**](spline__builder__collection_8hpp.md)
 
-[Go to the source code of this file](multipatch__spline__builder_8hpp_source.md)
+[Go to the source code of this file](spline__builder__collection_8hpp_source.md)
 
 
 
@@ -89,5 +89,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_collection.hpp`
 

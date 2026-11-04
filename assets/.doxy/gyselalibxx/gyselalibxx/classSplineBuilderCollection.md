@@ -12,7 +12,7 @@
 
 _A class to call all the builders of all the patches once._ [More...](#detailed-description)
 
-* `#include <multipatch_spline_builder.hpp>`
+* `#include <spline_builder_collection.hpp>`
 
 
 
@@ -198,5 +198,5 @@ SplineBuilderCollection::~SplineBuilderCollection () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_collection.hpp`
 

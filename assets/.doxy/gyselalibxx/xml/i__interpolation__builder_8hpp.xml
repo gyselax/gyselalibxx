@@ -10,7 +10,7 @@
     <includedby refid="i__interpolation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp</includedby>
     <includedby refid="identity__interpolation__builder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp</includedby>
     <includedby refid="nd__identity__interpolation__builder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp</includedby>
-    <includedby refid="multipatch__spline__builder__2d_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</includedby>
+    <includedby refid="spline__builder__2d__collection_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</includedby>
     <includedby refid="fem__1d__poisson__solver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</includedby>
     <includedby refid="gmg__polar__poisson__like__solver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp</includedby>
     <incdepgraph>
@@ -230,8 +230,8 @@
         </childnode>
       </node>
       <node id="25">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
-        <link refid="multipatch__spline__builder__2d_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</label>
+        <link refid="spline__builder__2d__collection_8hpp_source"/>
       </node>
       <node id="26">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>

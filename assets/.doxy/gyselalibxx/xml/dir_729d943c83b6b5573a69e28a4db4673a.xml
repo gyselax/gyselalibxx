@@ -3,10 +3,10 @@
   <compounddef id="dir_729d943c83b6b5573a69e28a4db4673a" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline</compoundname>
     <innerfile refid="constant__extrapolation__rules__onion_8hpp">constant_extrapolation_rules_onion.hpp</innerfile>
-    <innerfile refid="multipatch__spline__builder_8hpp">multipatch_spline_builder.hpp</innerfile>
-    <innerfile refid="multipatch__spline__builder__2d_8hpp">multipatch_spline_builder_2d.hpp</innerfile>
     <innerfile refid="multipatch__spline__evaluator__2d_8hpp">multipatch_spline_evaluator_2d.hpp</innerfile>
     <innerfile refid="null__extrapolation__rules_8hpp">null_extrapolation_rules.hpp</innerfile>
+    <innerfile refid="spline__builder__2d__collection_8hpp">spline_builder_2d_collection.hpp</innerfile>
+    <innerfile refid="spline__builder__collection_8hpp">spline_builder_collection.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

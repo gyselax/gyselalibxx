@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
-  <compounddef id="multipatch__spline__builder__2d_8hpp" kind="file" language="C++">
-    <compoundname>multipatch_spline_builder_2d.hpp</compoundname>
+  <compounddef id="spline__builder__2d__collection_8hpp" kind="file" language="C++">
+    <compoundname>spline_builder_2d_collection.hpp</compoundname>
     <includes local="no">cassert</includes>
     <includes local="no">tuple</includes>
     <includes local="no">utility</includes>
@@ -192,8 +192,8 @@
         </childnode>
       </node>
       <node id="1">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
-        <link refid="multipatch__spline__builder__2d_8hpp"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</label>
+        <link refid="spline__builder__2d__collection_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
@@ -629,6 +629,6 @@
 <codeline lineno="421"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="422"><highlight class="normal">};</highlight></codeline>
     </programlisting>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp"/>
   </compounddef>
 </doxygen>
