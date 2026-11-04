@@ -49,7 +49,7 @@ public:
     /// @brief A tag storing the order of Patches in this MultipatchType
     using PatchOrdering = ddc::TypeSeq<Patches...>;
 
-private:
+protected:
     /// @brief A tag storing the order of the internal types in this MultipatchType
     using InternalTypeOrdering = ddc::TypeSeq<InternalTypes...>;
 

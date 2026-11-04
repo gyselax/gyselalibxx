@@ -9,10 +9,10 @@ target_sources("multipatch_spline"
         FILE_SET HEADERS
             FILES
                 constant_extrapolation_rules_onion.hpp
-                multipatch_spline_builder.hpp
-                multipatch_spline_builder_2d.hpp
                 multipatch_spline_evaluator_2d.hpp
                 null_extrapolation_rules.hpp
+                spline_builder_collection.hpp
+                spline_builder_2d_collection.hpp
 )
 
 target_link_libraries("multipatch_spline" INTERFACE

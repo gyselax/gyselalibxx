@@ -33,16 +33,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` to take a metric tensor instead of a mapping to change the variance of a vector field.
 - Add `symmetric_tensor_mul` to calculate a tensor multiplication whose result is symmetric.
 - Add new helper functions `find_point_missing_from_superset` and `points_are_subset`.
-- Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis. It is currently limited to a non-periodic radial direction and a periodic poloidal direction (ring geometry).
+- Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis.
 - Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
 - Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
 - `MultipatchSplineEvaluator2D` works with `DerivField`.
+- Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
 
 ### Fixed
 
 - Fix compilation errors due to use of `std::make_tuple` in functions that are GPU compatible.
 - Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
 - Fix Jean-Zay environment with missing environment variables.
+- Fix missing error when using `find_grid_t`.
 
 ### Changed
 
@@ -74,6 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use Spack to install packages in the docker image.
 - Rename `MultipatchSplineBuilder` to `SplineBuilderCollection`.
 - Rename `MultipatchSplineBuilder2D` to `SplineBuilder2DCollection`.
+- Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
+- Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
 
 ### Deprecated
 
