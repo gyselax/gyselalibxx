@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_264890e5c091f8c8d7fe1f842870c25e" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation</compoundname>
+    <innerdir refid="dir_6882ed007936f5418934203181625867">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives</innerdir>
     <innerdir refid="dir_a6779ae02b71d57f488d261458bab1ce">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines</innerdir>
     <innerfile refid="constant__identity__interpolation__extrapolation__rule_8hpp">constant_identity_interpolation_extrapolation_rule.hpp</innerfile>
     <innerfile refid="extrapolation__rule__choice_8hpp">extrapolation_rule_choice.hpp</innerfile>

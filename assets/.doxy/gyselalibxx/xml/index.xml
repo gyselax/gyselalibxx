@@ -816,6 +816,52 @@
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6ccfb3b014129b59cc7f6ab351e6740d" kind="function"><name>get_deriv_range</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aeaf31a49114948727061c31416922675" kind="function"><name>get_deriv_range</name></member>
   </compound>
+  <compound refid="classDerivReconstructionCoeffs" kind="class"><name>DerivReconstructionCoeffs</name>
+    <member refid="classDerivReconstructionCoeffs_1a4c34fc4e6be079835c1ee6e264daebbc" kind="typedef"><name>GridEdgePerp1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1ad8cd99be915ca1cb5e79cc560a79b166" kind="typedef"><name>GridEdgePerp2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kind="typedef"><name>IdxRange1DPerp_1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kind="typedef"><name>IdxRange1DPerp_2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a0e7b4af709d2a2784246528565187aed" kind="typedef"><name>IdxEdgePerp1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a27de88232a335fb74b152f1a803d6dc1" kind="typedef"><name>IdxEdgePerp2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a2ab62a16b7cbf78885ada95d93813b20" kind="typedef"><name>BSplinesPerp1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a44743fee783a25ef9e18ba7000ad7663" kind="typedef"><name>BSplinesPerp2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a8fe749a0c0fed2ad7999833af7bc8125" kind="typedef"><name>GridBreakPt1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1ae04ff28af0d37dd6884f1214234bf42c" kind="typedef"><name>GridBreakPt2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a0473b569f896664a0247200e389e91d6" kind="variable"><name>m_is_cell_bound_1_with_extra_interpol_pt</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a34bd3cf46355bbfdd44b1b0c10e7cb54" kind="variable"><name>m_is_cell_bound_2_with_extra_interpol_pt</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a6cd5d4d40ab3941fb9bd0255e2210e09" kind="variable"><name>m_idx_range_perp_1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1acbe097804372a470e384fe577918b135" kind="variable"><name>m_idx_range_perp_2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a6ce944391a5962b25d36627570da8767" kind="variable"><name>m_coeff_deriv_patch_1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1ab59f97d0d2152e84a2fdbcbeeb9984fb" kind="variable"><name>m_coeff_deriv_patch_2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1adae1f3c68e143dc193f2e2556baed582" kind="variable"><name>m_weights_patch_1_alloc</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a06d16e790b0e0992aceb1397da96918a" kind="variable"><name>m_weights_patch_2_alloc</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a9d7673eb28e038836898114061254348" kind="variable"><name>m_weights_patch_1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a0b1224d8d5954a2563bd0a7b65e2cdbf" kind="variable"><name>m_weights_patch_2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1aa139b29b77ec43767a4355a630339c44" kind="variable"><name>s_extremity_1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a88a28c61c5ad8f1810e6a249f82cbba6" kind="variable"><name>s_extremity_2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a70c422f5f745126ea3f2b43beb0eb788" kind="function"><name>DerivReconstructionCoeffs</name></member>
+    <member refid="classDerivReconstructionCoeffs_1ab9c25a800909d8ba88c0af003ac42266" kind="function"><name>DerivReconstructionCoeffs</name></member>
+    <member refid="classDerivReconstructionCoeffs_1abd3ffab7ab39dc56208e565250d6cf13" kind="function"><name>DerivReconstructionCoeffs</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a9bebca5f3882aa228cd2ed304ed34cb9" kind="function"><name>DerivReconstructionCoeffs</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a347028801163ac2cc78449abc21028b0" kind="function"><name>get_coeff_deriv_patch_1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1aac4181a5765b26e8348f75ac8bb3eb26" kind="function"><name>get_coeff_deriv_patch_2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1ad73c73e016410038fb7a4263809f9840" kind="function"><name>get_approx_deriv</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a52a488987af9fef8c426e44e49fa384f" kind="function"><name>get_approx_deriv</name></member>
+    <member refid="classDerivReconstructionCoeffs_1ad4614ad3d65630291c9b41a350bae252" kind="function"><name>get_approx_cross_deriv</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a94daca67972f743ac86dba2a1e26236d" kind="function"><name>get_approx_with_change_of_sign</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a782c687d6b10882fc148426831495892" kind="function"><name>check_break_points_are_interpolation_points</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a625c02984662993d85942c2c332a5dc8" kind="function"><name>check_additional_interpolation_points_location</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a6b5e96e29caff274deb59bfef6fe76f6" kind="function"><name>set_coefficients_non_uniform_case</name></member>
+    <member refid="classDerivReconstructionCoeffs_1af377b9adef54e9e3cdb8aace5a61f68d" kind="function"><name>recursion</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a808a5732d09b2ee406d8072b3dd1607f" kind="function"><name>correction_boundary</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a5756c1025be09d770b451f1f832ebc9c" kind="function"><name>set_coefficients_uniform_per_patch_case</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a933c65a003ee79e647db580d162c391d" kind="function"><name>get_cell_lengths</name></member>
+    <member refid="classDerivReconstructionCoeffs_1ab3df11f9ab08e639af636933a70bb3e2" kind="function"><name>get_gammas</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a73bad45001ff309d39ba7ac4e616dedf" kind="function"><name>get_extremity_idx</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a55dd497107eb65b6ba3dd84ea3afa492" kind="function"><name>set_local_uniform_weights</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a860007cca0676980cd84f31a2cd97cc9" kind="function"><name>get_alpha</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a8c2288a3d24baf8ec729068968589c09" kind="function"><name>get_beta</name></member>
+  </compound>
   <compound refid="classDiocotronDensitySolution" kind="class"><name>DiocotronDensitySolution</name>
     <member refid="classDiocotronDensitySolution_1a3b7f61f099cebe7de300b01f3b0f23d1" kind="variable"><name>m_W1</name></member>
     <member refid="classDiocotronDensitySolution_1a53050984c5b53e17686465828e092dda" kind="variable"><name>m_R1</name></member>
@@ -1779,64 +1825,15 @@
     <member refid="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" kind="function"><name>connected_to_patch</name></member>
   </compound>
   <compound refid="classInterfaceDerivCoeffs" kind="class"><name>InterfaceDerivCoeffs</name>
-    <member refid="classInterfaceDerivCoeffs_1acf6d991afe47fa1d9945b4bad0a2135e" kind="typedef"><name>EdgePerpGrid1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a6c6c60a3673ffa61a15a49dee043a1e1" kind="typedef"><name>EdgePerpGrid2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a4b3a139a3cc7c82ab3c874086b3b0274" kind="typedef"><name>EdgeParGrid1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1ad8e7f6382b7a61c3450cd8b308670513" kind="typedef"><name>EdgeParGrid2</name></member>
+    <member refid="classInterfaceDerivCoeffs_1a64bc6126bb73dbdb7a124e9e27d96063" kind="typedef"><name>base_type</name></member>
     <member refid="classInterfaceDerivCoeffs_1a09ab28344ad5f0e7751add630d9f799a" kind="typedef"><name>Patch1</name></member>
     <member refid="classInterfaceDerivCoeffs_1a43330f146f3f2d3b1fa059092510eccc" kind="typedef"><name>Patch2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1afd85aceb11c0759b02407873034f4906" kind="typedef"><name>IdxRange2D_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1abed2ea6e6da0c2894862a93e6a97f9ed" kind="typedef"><name>IdxRange2D_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a132b1200e64a185c8a0e889adc397c0f" kind="typedef"><name>IdxRange1DPerp_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a6ebaf972a7d5f7ffbec2fed55fa6e69d" kind="typedef"><name>IdxRange1DPerp_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a31a1a95ae545c3b4189cacba4b6bc694" kind="typedef"><name>IdxRange1DPar_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a88ead6441e4ae36787686fb80b501ba0" kind="typedef"><name>IdxRange1DPar_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aa344ee94d339276d78b4f18bd589c0e2" kind="typedef"><name>Idx1D_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a018ea3f6b9b523936a1cb7eb5f3d7027" kind="typedef"><name>Idx1D_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a6a1d3bb07d1b901b6d556c40f193d53a" kind="typedef"><name>BSplinesPerp1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a62ed91b8fa626447bf9b908a74645b44" kind="typedef"><name>BSplinesPerp2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aa46b478b75b26a3c745d2875b9d17d0c" kind="typedef"><name>GridBreakPt1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aea38f74d4a7d7ffcd058f80bec1ef175" kind="typedef"><name>GridBreakPt2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a49e77ca76434363246a5ea917d16bfb0" kind="typedef"><name>IdxRangeBreakPt1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a2d1e75376b33e8d32e9745c9c10a09c7" kind="typedef"><name>IdxRangeBreakPt2</name></member>
+    <member refid="classInterfaceDerivCoeffs_1a4c984d45663527ddccc2f60acf473283" kind="typedef"><name>IdxRange1DPerp_1</name></member>
+    <member refid="classInterfaceDerivCoeffs_1ab8d75a46d6be335a3f64679086e699f9" kind="typedef"><name>IdxRange1DPerp_2</name></member>
     <member refid="classInterfaceDerivCoeffs_1a61d1ec3aee1fcc9b526b832ba9536f1b" kind="typedef"><name>associated_interface</name></member>
-    <member refid="classInterfaceDerivCoeffs_1affbe3fdb172a341c536b7db2531ca46f" kind="variable"><name>m_is_cell_bound_1_with_extra_interpol_pt</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a467f2a217c34ba6cb3fbb35f21f5f41f" kind="variable"><name>m_is_cell_bound_2_with_extra_interpol_pt</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aa2972807cb35169983bd244b2c08e307" kind="variable"><name>m_idx_range_perp_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a1c1d9e55199c724b0d1ce9cf11cc647e" kind="variable"><name>m_idx_range_perp_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1af9cd665f80d01503af02f3fbf3bc1613" kind="variable"><name>m_coeff_deriv_patch_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a79021fbce814ba6d3b1357ffc9caafc7" kind="variable"><name>m_coeff_deriv_patch_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1adfbfcd6fbdcf281afb7a37437bd10ea6" kind="variable"><name>m_weights_patch_1_alloc</name></member>
-    <member refid="classInterfaceDerivCoeffs_1ae2bef47b696b0ef0402807aa6de1e915" kind="variable"><name>m_weights_patch_2_alloc</name></member>
-    <member refid="classInterfaceDerivCoeffs_1af64c78bc88919fd84754255f57093d12" kind="variable"><name>m_weights_patch_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a8a1b9e9fa396c1926556557ff2cc1957" kind="variable"><name>m_weights_patch_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a81af500686bff28fad420a580134abdf" kind="variable"><name>m_extremity_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aa7bef2bd7b21dd32c90d73156e388f3b" kind="variable"><name>m_extremity_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1ae5aa159f4327e1038ee64430e516fccf" kind="function"><name>InterfaceDerivCoeffs</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a12a0d3d0218ea02cbcbde7d40df9269b" kind="function"><name>InterfaceDerivCoeffs</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a73f0a0941032737259f2f6dbec1a89d5" kind="function"><name>InterfaceDerivCoeffs</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a66db18b3259ccc9e5cfce54468d34fa9" kind="function"><name>InterfaceDerivCoeffs</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a18543abca3b542c17387511f49fc7345" kind="function"><name>get_coeff_deriv_patch_1</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a5acef90f978869e480726e2ff3dfa0d6" kind="function"><name>get_coeff_deriv_patch_2</name></member>
-    <member refid="classInterfaceDerivCoeffs_1ace57e840b4d6a7e4b2724ccbbc636c58" kind="function"><name>get_coeff_deriv_on_patch</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aecf7880f02d6a52e923a8e90d0d0bc3f" kind="function"><name>get_approx_deriv</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aca0e10fed842d4b82dc9f5b3152fff93" kind="function"><name>get_approx_deriv</name></member>
+    <member refid="classInterfaceDerivCoeffs_1a02d631de1d089369b37a8aebf2b1b344" kind="function"><name>get_coeff_deriv_on_patch</name></member>
     <member refid="classInterfaceDerivCoeffs_1a17072fb17cfd3827842f56654213f682" kind="function"><name>get_approx_cross_deriv</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a268a2eb82c06d9a7dfe091af4c7faf7d" kind="function"><name>get_approx_cross_deriv</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a4aca65b2c47e84ef92fcc34e7813d55a" kind="function"><name>get_approx_with_change_of_sign</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aa9efa87be3a68509a07947d5be50fa96" kind="function"><name>check_break_points_are_interpolation_points</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a6031b7019c0e2f70a917bd0e2356f3ad" kind="function"><name>check_additional_interpolation_points_location</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a8ea934772b749e34e46de0840ce68653" kind="function"><name>set_coefficients_non_uniform_case</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a121d67e775bf06a49fae54659b67ceea" kind="function"><name>recursion</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a5911adc78297a3d2c2db0c719d49662a" kind="function"><name>correction_boundary</name></member>
-    <member refid="classInterfaceDerivCoeffs_1ac74750306f8c6cd1c076039969ae712b" kind="function"><name>set_coefficients_uniform_per_patch_case</name></member>
-    <member refid="classInterfaceDerivCoeffs_1aa91e3f6edaa49e28297573f42304c52f" kind="function"><name>get_cell_lengths</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a862f05575170ac9c8f314d5effa6ca7d" kind="function"><name>get_gammas</name></member>
-    <member refid="classInterfaceDerivCoeffs_1ab9653aabab2507a12ed73dd0109bf52a" kind="function"><name>get_extremity_idx</name></member>
-    <member refid="classInterfaceDerivCoeffs_1afde8e64000fd26156c82731df8e00971" kind="function"><name>set_local_uniform_weights</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a8660c8d287b9c0aff8187e90f664fa59" kind="function"><name>get_alpha</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a69672c0dc822be693252fd852393dc65" kind="function"><name>get_beta</name></member>
-    <member refid="classInterfaceDerivCoeffs_1a1b29b4e765fd498df3074ceb307118d8" kind="function"><name>neg_1_to_the_power</name></member>
+    <member refid="classInterfaceDerivCoeffs_1a5cc3be98942f108123cf4ca1cd26c55f" kind="function"><name>get_approx_cross_deriv</name></member>
   </compound>
   <compound refid="classInterfaceDerivCoeffsCollection" kind="class"><name>InterfaceDerivCoeffsCollection</name>
     <member refid="classInterfaceDerivCoeffsCollection_1aa1f3eda65c7606eaf010cfb480360e5a" kind="typedef"><name>DerivCalculatorTypeSeq</name></member>
@@ -4716,6 +4713,8 @@
   </compound>
   <compound refid="identity__interpolation__builder_8hpp" kind="file"><name>identity_interpolation_builder.hpp</name>
   </compound>
+  <compound refid="deriv__reconstruction__coeffs_8hpp" kind="file"><name>deriv_reconstruction_coeffs.hpp</name>
+  </compound>
   <compound refid="lagrange__basis__non__uniform_8hpp" kind="file"><name>lagrange_basis_non_uniform.hpp</name>
     <member refid="lagrange__basis__non__uniform_8hpp_1a4d11bb0bc322c2e7c420b36db5b51f66" kind="variable"><name>is_non_uniform_lagrange_basis_v</name></member>
   </compound>
@@ -5272,6 +5271,8 @@
   <compound refid="dir_bbd6cbd2460631a86c53df5e1524a2e1" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation</name>
   </compound>
   <compound refid="dir_51031f497920158ed20948cdaeaff0bc" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation</name>
+  </compound>
+  <compound refid="dir_6882ed007936f5418934203181625867" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives</name>
   </compound>
   <compound refid="dir_d1bd52a3e76a422151eefdcc4e15c189" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives</name>
   </compound>

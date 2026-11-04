@@ -1,0 +1,1553 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classDerivReconstructionCoeffs" kind="class" language="C++" prot="public">
+    <compoundname>DerivReconstructionCoeffs</compoundname>
+    <includes refid="deriv__reconstruction__coeffs_8hpp" local="no">deriv_reconstruction_coeffs.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class EdgePerpGrid1Type</type>
+      </param>
+      <param>
+        <type>class EdgePerpGrid2Type</type>
+      </param>
+      <param>
+        <type>class BSplinesPerp1Type</type>
+      </param>
+      <param>
+        <type>class BSplinesPerp2Type</type>
+      </param>
+      <param>
+        <type>Extremity</type>
+        <declname>extremity_1</declname>
+        <defname>extremity_1</defname>
+      </param>
+      <param>
+        <type>Extremity</type>
+        <declname>extremity_2</declname>
+        <defname>extremity_2</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="protected-type">
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1a4c34fc4e6be079835c1ee6e264daebbc" prot="protected" static="no">
+        <type>EdgePerpGrid1Type</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::GridEdgePerp1 =  EdgePerpGrid1Type</definition>
+        <argsstring></argsstring>
+        <name>GridEdgePerp1</name>
+        <qualifiedname>DerivReconstructionCoeffs::GridEdgePerp1</qualifiedname>
+        <briefdescription>
+<para>The grid of interpolation points perpendicular to the interface on patch 1. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1ad8cd99be915ca1cb5e79cc560a79b166" prot="protected" static="no">
+        <type>EdgePerpGrid2Type</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::GridEdgePerp2 =  EdgePerpGrid2Type</definition>
+        <argsstring></argsstring>
+        <name>GridEdgePerp2</name>
+        <qualifiedname>DerivReconstructionCoeffs::GridEdgePerp2</qualifiedname>
+        <briefdescription>
+<para>The grid of interpolation points perpendicular to the interface on patch 2. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" prot="protected" static="no">
+        <type>IdxRange&lt; <ref refid="classDerivReconstructionCoeffs_1a4c34fc4e6be079835c1ee6e264daebbc" kindref="member">GridEdgePerp1</ref> &gt;</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::IdxRange1DPerp_1 =  IdxRange&lt;GridEdgePerp1&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRange1DPerp_1</name>
+        <qualifiedname>DerivReconstructionCoeffs::IdxRange1DPerp_1</qualifiedname>
+        <briefdescription>
+<para>The index range over the interpolation points perpendicular to the interface on patch 1. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" prot="protected" static="no">
+        <type>IdxRange&lt; <ref refid="classDerivReconstructionCoeffs_1ad8cd99be915ca1cb5e79cc560a79b166" kindref="member">GridEdgePerp2</ref> &gt;</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::IdxRange1DPerp_2 =  IdxRange&lt;GridEdgePerp2&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRange1DPerp_2</name>
+        <qualifiedname>DerivReconstructionCoeffs::IdxRange1DPerp_2</qualifiedname>
+        <briefdescription>
+<para>The index range over the interpolation points perpendicular to the interface on patch 2. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1a0e7b4af709d2a2784246528565187aed" prot="protected" static="no">
+        <type>Idx&lt; <ref refid="classDerivReconstructionCoeffs_1a4c34fc4e6be079835c1ee6e264daebbc" kindref="member">GridEdgePerp1</ref> &gt;</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::IdxEdgePerp1 =  Idx&lt;GridEdgePerp1&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxEdgePerp1</name>
+        <qualifiedname>DerivReconstructionCoeffs::IdxEdgePerp1</qualifiedname>
+        <briefdescription>
+<para>An index of <ref refid="classDerivReconstructionCoeffs_1a4c34fc4e6be079835c1ee6e264daebbc" kindref="member">GridEdgePerp1</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="84" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1a27de88232a335fb74b152f1a803d6dc1" prot="protected" static="no">
+        <type>Idx&lt; <ref refid="classDerivReconstructionCoeffs_1ad8cd99be915ca1cb5e79cc560a79b166" kindref="member">GridEdgePerp2</ref> &gt;</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::IdxEdgePerp2 =  Idx&lt;GridEdgePerp2&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxEdgePerp2</name>
+        <qualifiedname>DerivReconstructionCoeffs::IdxEdgePerp2</qualifiedname>
+        <briefdescription>
+<para>An index of <ref refid="classDerivReconstructionCoeffs_1ad8cd99be915ca1cb5e79cc560a79b166" kindref="member">GridEdgePerp2</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1a2ab62a16b7cbf78885ada95d93813b20" prot="protected" static="no">
+        <type>BSplinesPerp1Type</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::BSplinesPerp1 =  BSplinesPerp1Type</definition>
+        <argsstring></argsstring>
+        <name>BSplinesPerp1</name>
+        <qualifiedname>DerivReconstructionCoeffs::BSplinesPerp1</qualifiedname>
+        <briefdescription>
+<para>The B-splines in the direction perpendicular to the interface on patch 1. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1a44743fee783a25ef9e18ba7000ad7663" prot="protected" static="no">
+        <type>BSplinesPerp2Type</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::BSplinesPerp2 =  BSplinesPerp2Type</definition>
+        <argsstring></argsstring>
+        <name>BSplinesPerp2</name>
+        <qualifiedname>DerivReconstructionCoeffs::BSplinesPerp2</qualifiedname>
+        <briefdescription>
+<para>The B-splines in the direction perpendicular to the interface on patch 2. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1a8fe749a0c0fed2ad7999833af7bc8125" prot="protected" static="no">
+        <type>ddc::knot_discrete_dimension_t&lt; <ref refid="classDerivReconstructionCoeffs_1a2ab62a16b7cbf78885ada95d93813b20" kindref="member">BSplinesPerp1</ref> &gt;</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::GridBreakPt1 =  ddc::knot_discrete_dimension_t&lt;BSplinesPerp1&gt;</definition>
+        <argsstring></argsstring>
+        <name>GridBreakPt1</name>
+        <qualifiedname>DerivReconstructionCoeffs::GridBreakPt1</qualifiedname>
+        <briefdescription>
+<para>The grid of break points of the B-splines on patch 1. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivReconstructionCoeffs_1ae04ff28af0d37dd6884f1214234bf42c" prot="protected" static="no">
+        <type>ddc::knot_discrete_dimension_t&lt; <ref refid="classDerivReconstructionCoeffs_1a44743fee783a25ef9e18ba7000ad7663" kindref="member">BSplinesPerp2</ref> &gt;</type>
+        <definition>using DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::GridBreakPt2 =  ddc::knot_discrete_dimension_t&lt;BSplinesPerp2&gt;</definition>
+        <argsstring></argsstring>
+        <name>GridBreakPt2</name>
+        <qualifiedname>DerivReconstructionCoeffs::GridBreakPt2</qualifiedname>
+        <briefdescription>
+<para>The grid of break points of the B-splines on patch 2. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="96" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a0473b569f896664a0247200e389e91d6" prot="protected" static="no" mutable="no">
+        <type>const bool</type>
+        <definition>const bool DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_is_cell_bound_1_with_extra_interpol_pt</definition>
+        <argsstring></argsstring>
+        <name>m_is_cell_bound_1_with_extra_interpol_pt</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_is_cell_bound_1_with_extra_interpol_pt</qualifiedname>
+        <briefdescription>
+<para>True if patch 1 has an additional interpolation point in its boundary cell (Greville closure). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="100" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a34bd3cf46355bbfdd44b1b0c10e7cb54" prot="protected" static="no" mutable="no">
+        <type>const bool</type>
+        <definition>const bool DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_is_cell_bound_2_with_extra_interpol_pt</definition>
+        <argsstring></argsstring>
+        <name>m_is_cell_bound_2_with_extra_interpol_pt</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_is_cell_bound_2_with_extra_interpol_pt</qualifiedname>
+        <briefdescription>
+<para>True if patch 2 has an additional interpolation point in its boundary cell (Greville closure). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="102" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a6cd5d4d40ab3941fb9bd0255e2210e09" prot="protected" static="no" mutable="no">
+        <type><ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> const</type>
+        <definition>IdxRange1DPerp_1 const DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_idx_range_perp_1</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_perp_1</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_idx_range_perp_1</qualifiedname>
+        <briefdescription>
+<para>The index range of the interpolation points used on patch 1. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="105" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1acbe097804372a470e384fe577918b135" prot="protected" static="no" mutable="no">
+        <type><ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> const</type>
+        <definition>IdxRange1DPerp_2 const DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_idx_range_perp_2</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_perp_2</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_idx_range_perp_2</qualifiedname>
+        <briefdescription>
+<para>The index range of the interpolation points used on patch 2. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="107" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a6ce944391a5962b25d36627570da8767" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_coeff_deriv_patch_1</definition>
+        <argsstring></argsstring>
+        <name>m_coeff_deriv_patch_1</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_coeff_deriv_patch_1</qualifiedname>
+        <briefdescription>
+<para>The coefficient (a) in front of the derivative on patch 1. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="115" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1ab59f97d0d2152e84a2fdbcbeeb9984fb" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_coeff_deriv_patch_2</definition>
+        <argsstring></argsstring>
+        <name>m_coeff_deriv_patch_2</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_coeff_deriv_patch_2</qualifiedname>
+        <briefdescription>
+<para>The coefficient (b) in front of the derivative on patch 2. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="117" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1adae1f3c68e143dc193f2e2556baed582" prot="protected" static="no" mutable="no">
+        <type>host_t&lt; DFieldMem&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> &gt; &gt;</type>
+        <definition>host_t&lt;DFieldMem&lt;IdxRange1DPerp_1&gt; &gt; DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_weights_patch_1_alloc</definition>
+        <argsstring></argsstring>
+        <name>m_weights_patch_1_alloc</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_weights_patch_1_alloc</qualifiedname>
+        <briefdescription>
+<para>The memory allocated for the weights of the function values on patch 1. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="120" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a06d16e790b0e0992aceb1397da96918a" prot="protected" static="no" mutable="no">
+        <type>host_t&lt; DFieldMem&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> &gt; &gt;</type>
+        <definition>host_t&lt;DFieldMem&lt;IdxRange1DPerp_2&gt; &gt; DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_weights_patch_2_alloc</definition>
+        <argsstring></argsstring>
+        <name>m_weights_patch_2_alloc</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_weights_patch_2_alloc</qualifiedname>
+        <briefdescription>
+<para>The memory allocated for the weights of the function values on patch 2. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="122" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a9d7673eb28e038836898114061254348" prot="protected" static="no" mutable="no">
+        <type>host_t&lt; DField&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> &gt; &gt;</type>
+        <definition>host_t&lt;DField&lt;IdxRange1DPerp_1&gt; &gt; DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_weights_patch_1</definition>
+        <argsstring></argsstring>
+        <name>m_weights_patch_1</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_weights_patch_1</qualifiedname>
+        <briefdescription>
+<para>The weights <formula id="322">$ \omega_k $</formula> of the function values on patch 1 in the coefficient (c). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="125" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a0b1224d8d5954a2563bd0a7b65e2cdbf" prot="protected" static="no" mutable="no">
+        <type>host_t&lt; DField&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> &gt; &gt;</type>
+        <definition>host_t&lt;DField&lt;IdxRange1DPerp_2&gt; &gt; DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::m_weights_patch_2</definition>
+        <argsstring></argsstring>
+        <name>m_weights_patch_2</name>
+        <qualifiedname>DerivReconstructionCoeffs::m_weights_patch_2</qualifiedname>
+        <briefdescription>
+<para>The weights <formula id="322">$ \omega_k $</formula> of the function values on patch 2 in the coefficient (c). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="127" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1aa139b29b77ec43767a4355a630339c44" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>Extremity constexpr</type>
+        <definition>Extremity constexpr DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::s_extremity_1</definition>
+        <argsstring></argsstring>
+        <name>s_extremity_1</name>
+        <qualifiedname>DerivReconstructionCoeffs::s_extremity_1</qualifiedname>
+        <initializer>= extremity_1</initializer>
+        <briefdescription>
+<para>The extremity of patch 1 where the interface is located. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="110" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a88a28c61c5ad8f1810e6a249f82cbba6" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>Extremity constexpr</type>
+        <definition>Extremity constexpr DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::s_extremity_2</definition>
+        <argsstring></argsstring>
+        <name>s_extremity_2</name>
+        <qualifiedname>DerivReconstructionCoeffs::s_extremity_2</qualifiedname>
+        <initializer>= extremity_2</initializer>
+        <briefdescription>
+<para>The extremity of patch 2 where the interface is located. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="112" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a70c422f5f745126ea3f2b43beb0eb788" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::DerivReconstructionCoeffs</definition>
+        <argsstring>(IdxRange1DPerp_1 const &amp;idx_range_1d_1, IdxRange1DPerp_2 const &amp;idx_range_1d_2, ddc::SplineBuilderClosure const &amp;Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp;Closure2=ddc::SplineBuilderClosure::HERMITE)</argsstring>
+        <name>DerivReconstructionCoeffs</name>
+        <qualifiedname>DerivReconstructionCoeffs::DerivReconstructionCoeffs</qualifiedname>
+        <param>
+          <type><ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> const &amp;</type>
+          <declname>idx_range_1d_1</declname>
+        </param>
+        <param>
+          <type><ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> const &amp;</type>
+          <declname>idx_range_1d_2</declname>
+        </param>
+        <param>
+          <type>ddc::SplineBuilderClosure const &amp;</type>
+          <declname>Closure1</declname>
+          <defval>ddc::SplineBuilderClosure::HERMITE</defval>
+        </param>
+        <param>
+          <type>ddc::SplineBuilderClosure const &amp;</type>
+          <declname>Closure2</declname>
+          <defval>ddc::SplineBuilderClosure::HERMITE</defval>
+        </param>
+        <briefdescription>
+<para>Instantiate <ref refid="classDerivReconstructionCoeffs" kindref="compound">DerivReconstructionCoeffs</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><anchor id="classDerivReconstructionCoeffs_1InterfaceDerivCoeffsInstantiator"/> It computes the coefficients a and b, and the weights <formula id="327">$\omega_k$</formula> and stores the values in the class. If you want to compute the derivatives with an exact formula, please provide the index ranges on the full domain of the patches. If you want to use an approximation (e.g. use only 5 cells), please provide the index ranges on a reduced number of cells (e.g. 5 cells).</para>
+<para>If the interpolation points are uniform, it computes the coefficients with an explicit formula. Otherwise, it uses the recursive formula (see README.md).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_1d_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D index range perpendicular to the <ref refid="structInterface" kindref="compound">Interface</ref>, on the patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_1d_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D index range perpendicular to the <ref refid="structInterface" kindref="compound">Interface</ref>, on the patch 2. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Closure1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Closure2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="159" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="159" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1ab9c25a800909d8ba88c0af003ac42266" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxRangeA</type>
+          </param>
+          <param>
+            <type>class IdxRangeB</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::DerivReconstructionCoeffs</definition>
+        <argsstring>(IdxRangeA const &amp;idx_range_a, IdxRangeB const &amp;idx_range_b, ddc::SplineBuilderClosure const &amp;Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp;Closure2=ddc::SplineBuilderClosure::HERMITE)</argsstring>
+        <name>DerivReconstructionCoeffs</name>
+        <qualifiedname>DerivReconstructionCoeffs::DerivReconstructionCoeffs</qualifiedname>
+        <param>
+          <type>IdxRangeA const &amp;</type>
+          <declname>idx_range_a</declname>
+        </param>
+        <param>
+          <type>IdxRangeB const &amp;</type>
+          <declname>idx_range_b</declname>
+        </param>
+        <param>
+          <type>ddc::SplineBuilderClosure const &amp;</type>
+          <declname>Closure1</declname>
+          <defval>ddc::SplineBuilderClosure::HERMITE</defval>
+        </param>
+        <param>
+          <type>ddc::SplineBuilderClosure const &amp;</type>
+          <declname>Closure2</declname>
+          <defval>ddc::SplineBuilderClosure::HERMITE</defval>
+        </param>
+        <briefdescription>
+<para>Instantiate <ref refid="classDerivReconstructionCoeffs" kindref="compound">DerivReconstructionCoeffs</ref>. See <ref refid="classDerivReconstructionCoeffs_1InterfaceDerivCoeffsInstantiator" kindref="member">InterfaceDerivCoeffsInstantiator</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range on one patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range on the other patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Closure1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Closure2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="237" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="237" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1abd3ffab7ab39dc56208e565250d6cf13" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::DerivReconstructionCoeffs</definition>
+        <argsstring>(IdxRange1DPerp_1 const &amp;idx_range_1d_1, IdxRange1DPerp_2 const &amp;idx_range_1d_2, std::size_t const number_chosen_cells)</argsstring>
+        <name>DerivReconstructionCoeffs</name>
+        <qualifiedname>DerivReconstructionCoeffs::DerivReconstructionCoeffs</qualifiedname>
+        <param>
+          <type><ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> const &amp;</type>
+          <declname>idx_range_1d_1</declname>
+        </param>
+        <param>
+          <type><ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> const &amp;</type>
+          <declname>idx_range_1d_2</declname>
+        </param>
+        <param>
+          <type>std::size_t const</type>
+          <declname>number_chosen_cells</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate <ref refid="classDerivReconstructionCoeffs" kindref="compound">DerivReconstructionCoeffs</ref>. See <ref refid="classDerivReconstructionCoeffs_1InterfaceDerivCoeffsInstantiator" kindref="member">InterfaceDerivCoeffsInstantiator</ref>. This constructor calculates an approximation of the formula. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_1d_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D index range perpendicular to the <ref refid="structInterface" kindref="compound">Interface</ref>, on the patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_1d_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D index range perpendicular to the <ref refid="structInterface" kindref="compound">Interface</ref>, on the patch 2. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>number_chosen_cells</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of cells we choose for the computation of the interface derivatives. Same number for Patch1 and Patch2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>If the mesh has additional interpolation points, please be sure to not take these points. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="265" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="265" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a9bebca5f3882aa228cd2ed304ed34cb9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxRangeA</type>
+          </param>
+          <param>
+            <type>class IdxRangeB</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::DerivReconstructionCoeffs</definition>
+        <argsstring>(IdxRangeA const &amp;idx_range_a, IdxRangeB const &amp;idx_range_b, std::size_t const number_chosen_cells)</argsstring>
+        <name>DerivReconstructionCoeffs</name>
+        <qualifiedname>DerivReconstructionCoeffs::DerivReconstructionCoeffs</qualifiedname>
+        <param>
+          <type>IdxRangeA const &amp;</type>
+          <declname>idx_range_a</declname>
+        </param>
+        <param>
+          <type>IdxRangeB const &amp;</type>
+          <declname>idx_range_b</declname>
+        </param>
+        <param>
+          <type>std::size_t const</type>
+          <declname>number_chosen_cells</declname>
+        </param>
+    <requiresclause>(!std:: is_same_v&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref>, <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref>&gt;)    </requiresclause>
+        <briefdescription>
+<para>Instantiate <ref refid="classDerivReconstructionCoeffs" kindref="compound">DerivReconstructionCoeffs</ref>. See <ref refid="classDerivReconstructionCoeffs_1InterfaceDerivCoeffsInstantiator" kindref="member">InterfaceDerivCoeffsInstantiator</ref>. This constructor calculates an approximation of the formula. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range on one patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range on the other patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>number_chosen_cells</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of cells we choose for the computation of the interface derivatives. Same number for Patch1 and Patch2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>If the mesh has additional interpolation points, please be sure to not take these points. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="297" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="297" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a347028801163ac2cc78449abc21028b0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_coeff_deriv_patch_1</definition>
+        <argsstring>() const</argsstring>
+        <name>get_coeff_deriv_patch_1</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_coeff_deriv_patch_1</qualifiedname>
+        <briefdescription>
+<para>Get the coefficient (a) in front of the derivative on the patch 1 of the given <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The value of the coefficient a. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="317" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="317" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1aac4181a5765b26e8348f75ac8bb3eb26" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_coeff_deriv_patch_2</definition>
+        <argsstring>() const</argsstring>
+        <name>get_coeff_deriv_patch_2</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_coeff_deriv_patch_2</qualifiedname>
+        <briefdescription>
+<para>Get the coefficient (b) in front of the derivative on the patch 2 of the given <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The value of the coefficient b. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="326" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="326" bodyend="329"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1ad73c73e016410038fb7a4263809f9840" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_approx_deriv</definition>
+        <argsstring>(DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp;function_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp;function_2) const</argsstring>
+        <name>get_approx_deriv</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_approx_deriv</qualifiedname>
+        <param>
+          <type>DConstField&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref>, Kokkos::HostSpace, Layout1 &gt; const &amp;</type>
+          <declname>function_1</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref>, Kokkos::HostSpace, Layout2 &gt; const &amp;</type>
+          <declname>function_2</declname>
+        </param>
+        <briefdescription>
+<para>Get the linear combination of the function values (c). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><anchor id="classDerivReconstructionCoeffs_1get_approx_deriv"/>This linear combination corresponds to an approximation of the interface derivative.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>function_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>function_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the linear combination of the function values (c).</para>
+</simplesect>
+Remark: for the approximation case, the cells were selected by the given index ranges in the instantiation. Here, function_1 and function_2 can be given on the whole domain and the operator will select the correct values. But, it could be more optimised to directly give a slice on the selected cells. E.g. get_approx_deriv(function_1[idx_interface_1][selected_cells_idx_range_1], 
+                 function_2[idx_interface_2][selected_cells_idx_range_2]); and get_approx_deriv(function_1[idx_interface_1], 
+                 function_2[idx_interface_2]); will return the same value. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="355" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="355" bodyend="360"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a52a488987af9fef8c426e44e49fa384f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_approx_deriv</definition>
+        <argsstring>(DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp;function_2, DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp;function_1) const</argsstring>
+        <name>get_approx_deriv</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_approx_deriv</qualifiedname>
+        <param>
+          <type>DConstField&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref>, Kokkos::HostSpace, Layout2 &gt; const &amp;</type>
+          <declname>function_2</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref>, Kokkos::HostSpace, Layout1 &gt; const &amp;</type>
+          <declname>function_1</declname>
+        </param>
+    <requiresclause>(!std::is_same_v&lt;<ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref>, <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref>&gt;)    </requiresclause>
+        <briefdescription>
+<para>Get the linear combination of the function values (c). See <ref refid="classDerivReconstructionCoeffs_1get_approx_deriv" kindref="member">get_approx_deriv</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>function_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>function_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the linear combination of the function values (c). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="370" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="370" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1ad4614ad3d65630291c9b41a350bae252" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_approx_cross_deriv</definition>
+        <argsstring>(DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp;derivs_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp;derivs_2, int const sign_deriv_2) const</argsstring>
+        <name>get_approx_cross_deriv</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_approx_cross_deriv</qualifiedname>
+        <param>
+          <type>DConstField&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref>, Kokkos::HostSpace, Layout1 &gt; const &amp;</type>
+          <declname>derivs_1</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref>, Kokkos::HostSpace, Layout2 &gt; const &amp;</type>
+          <declname>derivs_2</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>sign_deriv_2</declname>
+        </param>
+        <briefdescription>
+<para>Get the linear combination of the derivatives values (c). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This linear combination corresponds to an approximation of the interface cross-derivative.</para>
+<para>It is more appropriate than get_approx_deriv to compute the cross-derivatives. The computation is the same. However, in addition, the sign of the derivatives on the patch 2 is changed in the case where the orientations of the two patches do not match. E.g. dx(f(-x)) = - dxf(-x)</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>derivs_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Derivatives at the interpolation points on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>derivs_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Derivatives at the interpolation points on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sign_deriv_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sign (+1 or -1) applied to the derivatives on patch 2 to account for the relative orientation of the two patches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the linear combination of the function values (c). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="398" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="398" bodyend="404"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a94daca67972f743ac86dba2a1e26236d" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_approx_with_change_of_sign</definition>
+        <argsstring>(DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp;function_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp;function_2, int const sign_function_2) const</argsstring>
+        <name>get_approx_with_change_of_sign</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_approx_with_change_of_sign</qualifiedname>
+        <param>
+          <type>DConstField&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref>, Kokkos::HostSpace, Layout1 &gt; const &amp;</type>
+          <declname>function_1</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref>, Kokkos::HostSpace, Layout2 &gt; const &amp;</type>
+          <declname>function_2</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>sign_function_2</declname>
+        </param>
+        <briefdescription>
+<para>Get the linear combination of the function values (c), changing the sign of the values on patch 2 if required. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>function_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>function_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sign_function_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sign (+1 or -1) applied to the function values on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the linear combination of the function values (c). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="417" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="417" bodyend="443"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a782c687d6b10882fc148426831495892" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BSplinesPerp</type>
+          </param>
+          <param>
+            <type>typename GridBreakPt</type>
+          </param>
+          <param>
+            <type>typename EdgePerpGrid</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::check_break_points_are_interpolation_points</definition>
+        <argsstring>(bool const is_cell_bound_with_extra_interpol_pt, IdxRange&lt; EdgePerpGrid &gt; const &amp;idx_range_perp, Extremity const extremity) const</argsstring>
+        <name>check_break_points_are_interpolation_points</name>
+        <qualifiedname>DerivReconstructionCoeffs::check_break_points_are_interpolation_points</qualifiedname>
+        <param>
+          <type>bool const</type>
+          <declname>is_cell_bound_with_extra_interpol_pt</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; EdgePerpGrid &gt; const &amp;</type>
+          <declname>idx_range_perp</declname>
+        </param>
+        <param>
+          <type>Extremity const</type>
+          <declname>extremity</declname>
+        </param>
+        <briefdescription>
+<para>Check that the break points of the B-splines are interpolation points. An exception is raised if this is not the case. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>is_cell_bound_with_extra_interpol_pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True if the patch has an additional interpolation point in its boundary cell. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_perp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of the interpolation points used on the patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>extremity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The extremity of the patch on which the interface is located. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="455" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="455" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a625c02984662993d85942c2c332a5dc8" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BSplinesPerp</type>
+          </param>
+          <param>
+            <type>typename GridBreakPt</type>
+          </param>
+          <param>
+            <type>typename EdgePerpGrid</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::check_additional_interpolation_points_location</definition>
+        <argsstring>(IdxRange&lt; EdgePerpGrid &gt; const &amp;idx_range_perp, Extremity const extremity)</argsstring>
+        <name>check_additional_interpolation_points_location</name>
+        <qualifiedname>DerivReconstructionCoeffs::check_additional_interpolation_points_location</qualifiedname>
+        <param>
+          <type>IdxRange&lt; EdgePerpGrid &gt; const &amp;</type>
+          <declname>idx_range_perp</declname>
+        </param>
+        <param>
+          <type>Extremity const</type>
+          <declname>extremity</declname>
+        </param>
+        <briefdescription>
+<para>Check that the additional interpolation point is located in the boundary cell of the patch opposite the interface. An exception is raised if this is not the case. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_perp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of the interpolation points used on the patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>extremity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The extremity of the patch on which the interface is located. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="488" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="488" bodyend="523"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a6b5e96e29caff274deb59bfef6fe76f6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::set_coefficients_non_uniform_case</definition>
+        <argsstring>()</argsstring>
+        <name>set_coefficients_non_uniform_case</name>
+        <qualifiedname>DerivReconstructionCoeffs::set_coefficients_non_uniform_case</qualifiedname>
+        <briefdescription>
+<para>Compute the coefficients a, b and the weights omega applying the recursive formula. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="532" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="532" bodyend="750"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1af377b9adef54e9e3cdb8aace5a61f68d" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>is_on_patch1</declname>
+            <defname>is_on_patch1</defname>
+          </param>
+          <param>
+            <type>class Idx1D</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::recursion</definition>
+        <argsstring>(int const n_cells, Idx1D const interface_idx, std::array&lt; double, 3 &gt; &amp;coeff_deriv_patch, std::array&lt; double, 3 &gt; &amp;coeff_deriv_other_patch, std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_1 &gt; &gt;, 3 &gt; &amp;weights_patch1, std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_2 &gt; &gt;, 3 &gt; &amp;weights_patch2)</argsstring>
+        <name>recursion</name>
+        <qualifiedname>DerivReconstructionCoeffs::recursion</qualifiedname>
+        <param>
+          <type>int const</type>
+          <declname>n_cells</declname>
+        </param>
+        <param>
+          <type>Idx1D const</type>
+          <declname>interface_idx</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>coeff_deriv_patch</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>coeff_deriv_other_patch</declname>
+        </param>
+        <param>
+          <type>std::array&lt; host_t&lt; DField&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> &gt; &gt;, 3 &gt; &amp;</type>
+          <declname>weights_patch1</declname>
+        </param>
+        <param>
+          <type>std::array&lt; host_t&lt; DField&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> &gt; &gt;, 3 &gt; &amp;</type>
+          <declname>weights_patch2</declname>
+        </param>
+        <briefdescription>
+<para>Recursion to compute the coefficients a, b and the weights omega. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">n_cells</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of the cells of the patch where the recursion is made. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">interface_idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index at the interface.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+The following parameters are array with three elements corresponding to the values at the step n-1, n and n+1 in the recursion. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">coeff_deriv_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coefficient in front of the derivative of the patch. E.g. Patch1: coeff_deriv_patch = b | Patch2: coeff_deriv_patch = a </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">coeff_deriv_other_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coefficient in front of the derivative of the other patch. E.g. Patch1: coeff_deriv_other_patch = a | Patch2: coeff_deriv_other_patch = b </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">weights_patch1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weights in front of the function values on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">weights_patch2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weights in front of the function values on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="769" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="769" bodyend="848"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a808a5732d09b2ee406d8072b3dd1607f" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>is_on_patch1</declname>
+            <defname>is_on_patch1</defname>
+          </param>
+          <param>
+            <type>class Idx1D</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::correction_boundary</definition>
+        <argsstring>(int const n_points, Idx1D const interface_idx, std::array&lt; double, 3 &gt; &amp;coeff_deriv_patch, std::array&lt; double, 3 &gt; &amp;coeff_deriv_other_patch, std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_1 &gt; &gt;, 3 &gt; &amp;weights_patch1, std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_2 &gt; &gt;, 3 &gt; &amp;weights_patch2)</argsstring>
+        <name>correction_boundary</name>
+        <qualifiedname>DerivReconstructionCoeffs::correction_boundary</qualifiedname>
+        <param>
+          <type>int const</type>
+          <declname>n_points</declname>
+        </param>
+        <param>
+          <type>Idx1D const</type>
+          <declname>interface_idx</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>coeff_deriv_patch</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>coeff_deriv_other_patch</declname>
+        </param>
+        <param>
+          <type>std::array&lt; host_t&lt; DField&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> &gt; &gt;, 3 &gt; &amp;</type>
+          <declname>weights_patch1</declname>
+        </param>
+        <param>
+          <type>std::array&lt; host_t&lt; DField&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> &gt; &gt;, 3 &gt; &amp;</type>
+          <declname>weights_patch2</declname>
+        </param>
+        <briefdescription>
+<para>Correction of the local coefficients on the boundary for additional interpolation points in the middle of a cell. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">n_points</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of interpolation points on the patch where the correction is made. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">interface_idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index at the interface.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+The following parameters are array with three elements corresponding to the values at the step n-1, n and n+1 in the recursion. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">coeff_deriv_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coefficient in front of the derivative of the patch. E.g. Patch1: coeff_deriv_patch = b | Patch2: coeff_deriv_patch = a </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">coeff_deriv_other_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coefficient in front of the derivative of the other patch. E.g. Patch1: coeff_deriv_other_patch = a | Patch2: coeff_deriv_other_patch = b </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">weights_patch1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weights in front of the function values on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">weights_patch2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weights in front of the function values on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="867" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="867" bodyend="981"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a5756c1025be09d770b451f1f832ebc9c" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::set_coefficients_uniform_per_patch_case</definition>
+        <argsstring>()</argsstring>
+        <name>set_coefficients_uniform_per_patch_case</name>
+        <qualifiedname>DerivReconstructionCoeffs::set_coefficients_uniform_per_patch_case</qualifiedname>
+        <briefdescription>
+<para>Compute the coefficients a, b and the weights omega applying the explicit formula for the uniform case. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="991" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="991" bodyend="1039"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a933c65a003ee79e647db580d162c391d" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>is_on_patch1</declname>
+            <defname>is_on_patch1</defname>
+          </param>
+          <param>
+            <type>class Idx1D</type>
+          </param>
+        </templateparamlist>
+        <type>std::tuple&lt; double, double &gt;</type>
+        <definition>std::tuple&lt; double, double &gt; DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_cell_lengths</definition>
+        <argsstring>(Idx1D const &amp;idx) const</argsstring>
+        <name>get_cell_lengths</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_cell_lengths</qualifiedname>
+        <param>
+          <type>Idx1D const &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the lengths of the cell on the right side and the left side of the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1086" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1086" bodyend="1155"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1ab3df11f9ab08e639af636933a70bb3e2" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; double, 3 &gt;</type>
+        <definition>std::array&lt; double, 3 &gt; DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_gammas</definition>
+        <argsstring>(double const cell_length_left, double const cell_length_right) const</argsstring>
+        <name>get_gammas</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_gammas</qualifiedname>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_left</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_right</declname>
+        </param>
+        <briefdescription>
+<para>Compute the coefficients gammas_i. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1159" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1159" bodyend="1171"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a73bad45001ff309d39ba7ac4e616dedf" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION Idx&lt; Grid1D &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Idx&lt; Grid1D &gt; DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_extremity_idx</definition>
+        <argsstring>(Extremity const extremity, IdxRange&lt; Grid1D &gt; const &amp;idx_range) const</argsstring>
+        <name>get_extremity_idx</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_extremity_idx</qualifiedname>
+        <param>
+          <type>Extremity const</type>
+          <declname>extremity</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; Grid1D &gt; const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Get the index at the given extremity of an index range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>extremity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The extremity (FRONT or BACK). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The first index if extremity is FRONT, the last index otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1194" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1194" bodyend="1199"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-func">
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a55dd497107eb65b6ba3dd84ea3afa492" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class EdgePerpGrid</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::set_local_uniform_weights</definition>
+        <argsstring>(host_t&lt; DField&lt; IdxRange&lt; EdgePerpGrid &gt; &gt; &gt; weights, double factor, double un_other_patch, Idx&lt; EdgePerpGrid &gt; idx_interface)</argsstring>
+        <name>set_local_uniform_weights</name>
+        <qualifiedname>DerivReconstructionCoeffs::set_local_uniform_weights</qualifiedname>
+        <param>
+          <type>host_t&lt; DField&lt; IdxRange&lt; EdgePerpGrid &gt; &gt; &gt;</type>
+          <declname>weights</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>factor</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>un_other_patch</declname>
+        </param>
+        <param>
+          <type>Idx&lt; EdgePerpGrid &gt;</type>
+          <declname>idx_interface</declname>
+        </param>
+        <briefdescription>
+<para>Apply the explicit formula for the uniform case to weights on one side of the interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>weights</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The weights on the patch which should be filled (except at the interface). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The multiplicative factor associated with this patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>un_other_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value <formula id="328">$ u_N $</formula> calculated for the other patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_interface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the interface point on this patch. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1050" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1050" bodyend="1080"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a860007cca0676980cd84f31a2cd97cc9" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_alpha</definition>
+        <argsstring>(double const cell_length_left, double const cell_length_right)</argsstring>
+        <name>get_alpha</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_alpha</qualifiedname>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_left</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_right</declname>
+        </param>
+        <briefdescription>
+<para>Compute the coefficient alpha_i. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1174" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1174" bodyend="1177"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a8c2288a3d24baf8ec729068968589c09" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::get_beta</definition>
+        <argsstring>(double const cell_length_left, double const cell_length_right)</argsstring>
+        <name>get_beta</name>
+        <qualifiedname>DerivReconstructionCoeffs::get_beta</qualifiedname>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_left</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_right</declname>
+        </param>
+        <briefdescription>
+<para>Compute the coefficient beta_i. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1180" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1180" bodyend="1183"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Compute the coefficients a, b and c of the interface derivative reconstruction method. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>For a given <ref refid="structInterface" kindref="compound">Interface</ref>, this operator computes the coefficients a, b and c of the following relation between the interface derivative and the derivatives at the other boundaries of the two patches: <formula id="320">$ s&apos;(X_I) = c + a s&apos;(X_{I+1}) + b s&apos;(X_{I+1})$</formula>,</para>
+<para>with<itemizedlist>
+<listitem><para>s&apos;(X_I) the derivative at the <ref refid="structInterface" kindref="compound">Interface</ref> of the two local splines on the patches.</para>
+</listitem><listitem><para>s&apos;(X_{I+1}) the derivative at the next (or right) <ref refid="structInterface" kindref="compound">Interface</ref> of the local splines on patch 1.</para>
+</listitem><listitem><para>s&apos;(X_{I-1}) the derivative at the previous (or left) <ref refid="structInterface" kindref="compound">Interface</ref> of the local splines on patch 2.</para>
+</listitem><listitem><para>a,b scalars depending on the meshes of the two patches.</para>
+</listitem><listitem><para>c a linear combination of the function values on the two patches. The weights in the linear combination depend on the meshes of the two patches. It can be written as a sum: <formula id="321">$ c = \sum_{k = -N2}^{N1} \omega_k f_k$</formula>, with <formula id="322">$ \omega_k $</formula> the weights, <formula id="323">$ f_k $</formula> the function values,</para>
+</listitem></itemizedlist>
+</para>
+<para>By default, <formula id="324">$ N1 $</formula> the number of cells in patch 1, and <formula id="325">$ N2 $</formula> the number of cells in patch 2.</para>
+<para>But a constructor is also provided to choose $N_{trunc}=N1=N2$ in order to calculate an approximation of the derivative: <formula id="326">$ s&apos;(X_I) \simeq c_{trunc} = \sum_{k = -N_{trunc}}^{N_{trunc}} \omega_k f_k $</formula>.</para>
+<para>Scheme of the two patches: X_{I-1} X_I X_{I+1} <hruler/>
+ | | | | 1 | 2 | |_______|_______|<itemizedlist>
+<listitem><para>← → +</para>
+</listitem><listitem><para>→ ← - Orientation of an equivalent global mesh : →</para>
+</listitem></itemizedlist>
+</para>
+<para>All the formulae and more details are given in the README.md.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>InterfaceType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interface between two patches where we want to compute the derivatives. <linebreak/>
+</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>The applied method only works for interpolation points located on the break points. In the case where &quot;ddc::SplineBuilderClosure::GREVILLE&quot; is specified, additional interpolation points are also placed in the first or last cell of the patch. Please be sure to initialise the discrete space of your Grid on the break points (especially in the non-uniform case). </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="70" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="71" bodyend="1200"/>
+    <listofallmembers>
+      <member refid="classDerivReconstructionCoeffs_1a2ab62a16b7cbf78885ada95d93813b20" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>BSplinesPerp1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a44743fee783a25ef9e18ba7000ad7663" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>BSplinesPerp2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a625c02984662993d85942c2c332a5dc8" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>check_additional_interpolation_points_location</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a782c687d6b10882fc148426831495892" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>check_break_points_are_interpolation_points</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a808a5732d09b2ee406d8072b3dd1607f" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>correction_boundary</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a70c422f5f745126ea3f2b43beb0eb788" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>DerivReconstructionCoeffs</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ab9c25a800909d8ba88c0af003ac42266" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>DerivReconstructionCoeffs</name></member>
+      <member refid="classDerivReconstructionCoeffs_1abd3ffab7ab39dc56208e565250d6cf13" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>DerivReconstructionCoeffs</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a9bebca5f3882aa228cd2ed304ed34cb9" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>DerivReconstructionCoeffs</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a860007cca0676980cd84f31a2cd97cc9" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_alpha</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ad4614ad3d65630291c9b41a350bae252" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_approx_cross_deriv</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ad73c73e016410038fb7a4263809f9840" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_approx_deriv</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a52a488987af9fef8c426e44e49fa384f" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_approx_deriv</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a94daca67972f743ac86dba2a1e26236d" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_approx_with_change_of_sign</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a8c2288a3d24baf8ec729068968589c09" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_beta</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a933c65a003ee79e647db580d162c391d" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_cell_lengths</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a347028801163ac2cc78449abc21028b0" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_coeff_deriv_patch_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1aac4181a5765b26e8348f75ac8bb3eb26" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_coeff_deriv_patch_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a73bad45001ff309d39ba7ac4e616dedf" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_extremity_idx</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ab3df11f9ab08e639af636933a70bb3e2" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>get_gammas</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a8fe749a0c0fed2ad7999833af7bc8125" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>GridBreakPt1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ae04ff28af0d37dd6884f1214234bf42c" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>GridBreakPt2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a4c34fc4e6be079835c1ee6e264daebbc" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>GridEdgePerp1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ad8cd99be915ca1cb5e79cc560a79b166" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>GridEdgePerp2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a0e7b4af709d2a2784246528565187aed" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>IdxEdgePerp1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a27de88232a335fb74b152f1a803d6dc1" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>IdxEdgePerp2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>IdxRange1DPerp_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>IdxRange1DPerp_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a6ce944391a5962b25d36627570da8767" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_coeff_deriv_patch_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ab59f97d0d2152e84a2fdbcbeeb9984fb" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_coeff_deriv_patch_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a6cd5d4d40ab3941fb9bd0255e2210e09" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_idx_range_perp_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1acbe097804372a470e384fe577918b135" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_idx_range_perp_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a0473b569f896664a0247200e389e91d6" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_is_cell_bound_1_with_extra_interpol_pt</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a34bd3cf46355bbfdd44b1b0c10e7cb54" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_is_cell_bound_2_with_extra_interpol_pt</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a9d7673eb28e038836898114061254348" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_weights_patch_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1adae1f3c68e143dc193f2e2556baed582" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_weights_patch_1_alloc</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a0b1224d8d5954a2563bd0a7b65e2cdbf" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_weights_patch_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a06d16e790b0e0992aceb1397da96918a" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_weights_patch_2_alloc</name></member>
+      <member refid="classDerivReconstructionCoeffs_1af377b9adef54e9e3cdb8aace5a61f68d" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>recursion</name></member>
+      <member refid="classDerivReconstructionCoeffs_1aa139b29b77ec43767a4355a630339c44" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>s_extremity_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a88a28c61c5ad8f1810e6a249f82cbba6" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>s_extremity_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a6b5e96e29caff274deb59bfef6fe76f6" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>set_coefficients_non_uniform_case</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a5756c1025be09d770b451f1f832ebc9c" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>set_coefficients_uniform_per_patch_case</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a55dd497107eb65b6ba3dd84ea3afa492" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>set_local_uniform_weights</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

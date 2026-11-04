@@ -276,6 +276,12 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
@@ -684,6 +690,16 @@
 <li><strong>m_deriv_idx_range</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
 <li><strong>m_physical_idx_range</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
 <li><strong>m_label</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
+<li><strong>m_coeff_deriv_patch_1</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_coeff_deriv_patch_2</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_idx_range_perp_1</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_idx_range_perp_2</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_is_cell_bound_1_with_extra_interpol_pt</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_is_cell_bound_2_with_extra_interpol_pt</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_weights_patch_1</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_weights_patch_1_alloc</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_weights_patch_2</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>m_weights_patch_2_alloc</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
 <li><strong>m_Q</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
 <li><strong>m_R1</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
 <li><strong>m_R2</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
@@ -744,18 +760,6 @@
 <li><strong>m_nb_gyro_points</strong> (<a href="classGyroAverageOperator.html"><strong>GyroAverageOperator</strong></a>)</li>
 <li><strong>m_comm</strong> (<a href="classIMPITranspose.html"><strong>IMPITranspose</strong></a>, <a href="classMpiChargeDensityCalculator.html"><strong>MpiChargeDensityCalculator</strong></a>)</li>
 <li><strong>m_threshold</strong> (<a href="classInfNormResidual.html"><strong>InfNormResidual</strong></a>)</li>
-<li><strong>m_coeff_deriv_patch_1</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_coeff_deriv_patch_2</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_extremity_1</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_extremity_2</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_idx_range_perp_1</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_idx_range_perp_2</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_is_cell_bound_1_with_extra_interpol_pt</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_is_cell_bound_2_with_extra_interpol_pt</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_weights_patch_1</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_weights_patch_1_alloc</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_weights_patch_2</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
-<li><strong>m_weights_patch_2_alloc</strong> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>)</li>
 <li><strong>m_deriv_coeffs_collection</strong> (<a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a>)</li>
 <li><strong>m_deriv_coeffs_collect</strong> (<a href="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.html"><strong>InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</strong></a>)</li>
 <li><strong>m_idx_ranges</strong> (<a href="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.html"><strong>InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</strong></a>)</li>
@@ -925,6 +929,8 @@
 </ul>
 <h2 id="s">s</h2>
 <ul>
+<li><strong>s_extremity_1</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
+<li><strong>s_extremity_2</strong> (<a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a>)</li>
 <li><strong>s_degree</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>s_npts_gauss</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>s_density</strong> (<a href="classFluidMoments.html"><strong>FluidMoments</strong></a>)</li>

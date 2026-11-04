@@ -1159,11 +1159,11 @@
     <detaileddescription>
 <para>This operator is implemented for conforming equivalent global meshes.</para>
 <para>When we call the operator .<ref refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1ab6d39c866c4309c778a438a2d61a5102" kindref="member">solve_deriv()</ref> or .<ref refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a933488af95340d7b120a435ebd3a3a58" kindref="member">solve_cross_deriv()</ref>, the operator loops over the interface to compute the vector C_trunc to determine all the interface derivatives and update the <ref refid="classDerivField" kindref="compound">DerivField</ref> given in input.</para>
-<para>The vector C_trunc is given by the coefficients (see README), <formula id="379">$ \{\sum_{k = - N_{reduc}}^{N_{reduc}} \omega_{k, N_{reduc}, N_{reduc}}^{i_I} f_{i_I+k} \}_I $</formula></para>
+<para>The vector C_trunc is given by the coefficients (see README), <formula id="380">$ \{\sum_{k = - N_{reduc}}^{N_{reduc}} \omega_{k, N_{reduc}, N_{reduc}}^{i_I} f_{i_I+k} \}_I $</formula></para>
 <para>with<itemizedlist>
-<listitem><para><formula id="380">$ N_{reduc} $</formula> the number of chosen cells for the approximation,</para>
-</listitem><listitem><para><formula id="381">$ i_I $</formula> the index of the grid at the Ith interface,</para>
-</listitem><listitem><para><formula id="382">$ f_{i_I+k} $</formula> the function values if we compute the first derivatives, or the first derivatives if we compute the cross-derivatives.</para>
+<listitem><para><formula id="381">$ N_{reduc} $</formula> the number of chosen cells for the approximation,</para>
+</listitem><listitem><para><formula id="382">$ i_I $</formula> the index of the grid at the Ith interface,</para>
+</listitem><listitem><para><formula id="383">$ f_{i_I+k} $</formula> the function values if we compute the first derivatives, or the first derivatives if we compute the cross-derivatives.</para>
 </listitem></itemizedlist>
 </para>
 <para><parameterlist kind="templateparam"><parameteritem>

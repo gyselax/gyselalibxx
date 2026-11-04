@@ -60,6 +60,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**DerivFieldCommon**](classDerivFieldCommon.md) 
 * **class** [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md) _An abstract class which holds a chunk of memory describing a field and its derivatives. This is the superclass for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _and_[_**DerivField**_](classDerivField.md) _._
 * **class** [**DerivFieldMem**](classDerivFieldMem.md) 
+* **class** [**DerivReconstructionCoeffs**](classDerivReconstructionCoeffs.md) _Compute the coefficients a, b and c of the interface derivative reconstruction method._ 
 * **class** [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) _The diocotron exact solution of the density_ \(\rho\) _._
 * **class** [**DiscreteMapping**](classDiscreteMapping.md) _A mapping whose values are only known at the mesh points of a grid, evaluated elsewhere using an interpolating function._ 
 * **class** [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._ 
@@ -114,7 +115,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**IdentityCoordinateChange**](classIdentityCoordinateChange.md) _A class describing an identity transformation._ 
 * **class** [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md) _A builder class for copying data._ 
 * **class** [**IdentityTensor**](classIdentityTensor.md) 
-* **class** [**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md) _Compute the coefficients a, b and c of the interface derivative reconstruction method._ 
 * **class** [**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md) _A class to store a collection of interface derivative calculators templated on the interfaces._ 
 * **class** [**InterfacesDerivativeCalculator**](classInterfacesDerivativeCalculator.md) 
 * **class** [**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md) _Class to compute the interface derivatives along a given direction on all the interfaces with an approximation formula._ 

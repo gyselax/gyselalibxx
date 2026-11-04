@@ -276,6 +276,12 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
@@ -626,6 +632,7 @@
 <li><strong>class</strong> <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a> <em>An abstract class which holds a chunk of memory describing a field and its derivatives. This is the superclass for</em> <a href="classDerivFieldMem.html"><em><strong>DerivFieldMem</strong></em></a> <em>and</em><a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>.</em>    </li>
 <li><strong>class</strong> <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a> </li>
 <li><strong>class</strong> <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a> <em>A class which holds a chunk of memory describing a field and its derivatives.</em>     </li>
+<li><strong>class</strong> <a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a> <em>Compute the coefficients a, b and c of the interface derivative reconstruction method.</em>     </li>
 <li><strong>class</strong> <a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a> <em>The diocotron exact solution of the density</em> <span class="arithmatex">\(\rho\)</span> <em>.</em>    </li>
 <li><strong>class</strong> <a href="classDiscreteMapping.html"><strong>DiscreteMapping</strong></a> <em>A mapping whose values are only known at the mesh points of a grid, evaluated elsewhere using an interpolating function.</em>     </li>
 <li><strong>class</strong> <a href="classDiscretePoloidalCSSplineMapping.html"><strong>DiscretePoloidalCSSplineMapping</strong></a> <em>A class for describing discrete 2D mappings from the logical domain to the physical domain.</em>     </li>
@@ -714,7 +721,7 @@
 <li><strong>class</strong> <a href="classIdentityTensor.html"><strong>IdentityTensor</strong></a>     </li>
 <li><strong>class</strong> <a href="classInfNormResidual.html"><strong>InfNormResidual</strong></a> <em>A Ginkgo stopping criterion based on the infinite norm of the residual.</em>     </li>
 <li><strong>struct</strong> <a href="structInterface.html"><strong>Interface</strong></a> <em>Represent a simple interface where two edges intersect.</em>     </li>
-<li><strong>class</strong> <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a> <em>Compute the coefficients a, b and c of the interface derivative reconstruction method.</em>     </li>
+<li><strong>class</strong> <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a> <em>Compute the coefficients a, b and c of the interface derivative reconstruction method for a given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>between two patches.</em>    </li>
 <li><strong>class</strong> <a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a> <em>A class to store a collection of interface derivative calculators templated on the interfaces.</em>     </li>
 <li><strong>class</strong> <a href="classInterfacesDerivativeCalculator.html"><strong>InterfacesDerivativeCalculator</strong></a> </li>
 <li><strong>class</strong> <a href="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.html"><strong>InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</strong></a> <em>Class to compute the interface derivatives along a given direction on all the interfaces with an approximation formula.</em>     </li>

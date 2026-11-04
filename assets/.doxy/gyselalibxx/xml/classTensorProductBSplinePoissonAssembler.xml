@@ -1622,7 +1622,7 @@
 <para>An operator to assemble a Poisson-like stiffness matrix using tensor product B-splines. </para>
     </briefdescription>
     <detaileddescription>
-<para>The stiffness matrix has entries <formula id="398">$ \int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx $</formula> where <formula id="387">$ B_i $</formula> and <formula id="388">$ B_j $</formula> are tensor product B-splines.</para>
+<para>The stiffness matrix has entries <formula id="399">$ \int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx $</formula> where <formula id="388">$ B_i $</formula> and <formula id="389">$ B_j $</formula> are tensor product B-splines.</para>
 <para>The B-splines and the quadrature points both have a tensor product structure. The values and derivatives of the 1D B-splines at the 1D quadrature points are therefore stored (see <ref refid="structdetail__poisson_1_1TensorBSplineStash" kindref="compound">detail_poisson::TensorBSplineStash</ref>) so that the tensor product B-splines can be evaluated at the quadrature points without being recalculated.</para>
 <para>Each dimension may be periodic or non-periodic (as determined by the B-splines). In a periodic dimension the basis must contain at least 2*degree+1 B-splines so that a B-spline does not overlap with itself across the boundary.</para>
 <para><parameterlist kind="templateparam"><parameteritem>

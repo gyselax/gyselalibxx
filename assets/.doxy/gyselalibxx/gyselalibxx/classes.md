@@ -108,6 +108,7 @@
 * [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md)
 * [**DerivFieldMem**](classDerivFieldMem.md)
 * [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md)
+* [**DerivReconstructionCoeffs**](classDerivReconstructionCoeffs.md)
 * [**DiocotronDensitySolution**](classDiocotronDensitySolution.md)
 * [**DiscreteMapping**](classDiscreteMapping.md)
 * [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md)

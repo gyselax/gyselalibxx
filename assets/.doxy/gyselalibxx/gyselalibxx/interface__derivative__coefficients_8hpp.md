@@ -10,11 +10,9 @@
 
 
 
-* `#include <ddc/ddc.hpp>`
-* `#include "ddc_aliases.hpp"`
+* `#include "deriv_reconstruction_coeffs.hpp"`
 * `#include "edge.hpp"`
 * `#include "edge_transformation.hpp"`
-* `#include "geometry_descriptors.hpp"`
 * `#include "types.hpp"`
 
 
@@ -35,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md) &lt;class InterfaceType&gt;<br>_Compute the coefficients a, b and c of the interface derivative reconstruction method._  |
+| class | [**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md) &lt;class InterfaceType&gt;<br>_Compute the coefficients a, b and c of the interface derivative reconstruction method for a given_ [_**Interface**_](structInterface.md) _between two patches._ |
 
 
 

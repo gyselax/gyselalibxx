@@ -276,6 +276,12 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
@@ -572,10 +578,11 @@
                 <div><h1 id="class-interfacederivcoeffs">Class InterfaceDerivCoeffs</h1>
 <p><strong>template &lt;class InterfaceType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a></p>
-<p><em>Compute the coefficients a, b and c of the interface derivative reconstruction method.</em> <a href="#detailed-description">More...</a></p>
+<p><em>Compute the coefficients a, b and c of the interface derivative reconstruction method for a given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>between two patches.</em><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;interface_derivative_coefficients.hpp&gt;</code></li>
 </ul>
+<p>Inherits the following classes: <a href="classDerivReconstructionCoeffs.html">DerivReconstructionCoeffs</a></p>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -601,22 +608,6 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-interfacederivcoeffs-14"><strong>InterfaceDerivCoeffs</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE) <br><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-interfacederivcoeffs-24"><strong>InterfaceDerivCoeffs</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE) <br><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-interfacederivcoeffs-34"><strong>InterfaceDerivCoeffs</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>. This constructor calculates an approximation of the formula.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-interfacederivcoeffs-44"><strong>InterfaceDerivCoeffs</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>. This constructor calculates an approximation of the formula.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="#function-get_approx_cross_deriv-12"><strong>get_approx_cross_deriv</strong></a> (DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; derivs_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; derivs_2) const<br><em>Get the linear combination of the derivatives values (c).</em></td>
 </tr>
@@ -626,47 +617,264 @@
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-get_approx_deriv-12"><strong>get_approx_deriv</strong></a> (DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2) const<br><em>Get the linear combination of the function values (c).</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-get_approx_deriv-22"><strong>get_approx_deriv</strong></a> (DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2, DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1) const<br><em>Get the linear combination of the function values (c). See</em> get_approx_deriv <em>.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="#function-get_coeff_deriv_on_patch"><strong>get_coeff_deriv_on_patch</strong></a> () const<br><em>Get the coefficient (a) or (b) in front of the derivative on the given patch of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></td>
 </tr>
+</tbody>
+</table>
+<h2 id="public-functions-inherited-from-derivreconstructioncoeffs">Public Functions inherited from DerivReconstructionCoeffs</h2>
+<p>See <a href="classDerivReconstructionCoeffs.html">DerivReconstructionCoeffs</a></p>
+<table>
+<thead>
 <tr>
-<td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-get_coeff_deriv_patch_1"><strong>get_coeff_deriv_patch_1</strong></a> () const<br><em>Get the coefficient (a) in front of the derivative on the patch 1 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></td>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-derivreconstructioncoeffs-14"><strong>DerivReconstructionCoeffs</strong></a> (<a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a> const &amp; idx_range_1d_1, <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a> const &amp; idx_range_1d_2, ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE) <br><em>Instantiate</em> <a href="classDerivReconstructionCoeffs.html"><em><strong>DerivReconstructionCoeffs</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-derivreconstructioncoeffs-24"><strong>DerivReconstructionCoeffs</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE) <br><em>Instantiate</em> <a href="classDerivReconstructionCoeffs.html"><em><strong>DerivReconstructionCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-derivreconstructioncoeffs-34"><strong>DerivReconstructionCoeffs</strong></a> (<a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a> const &amp; idx_range_1d_1, <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a> const &amp; idx_range_1d_2, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classDerivReconstructionCoeffs.html"><em><strong>DerivReconstructionCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>. This constructor calculates an approximation of the formula.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-derivreconstructioncoeffs-44"><strong>DerivReconstructionCoeffs</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classDerivReconstructionCoeffs.html"><em><strong>DerivReconstructionCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>. This constructor calculates an approximation of the formula.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-get_coeff_deriv_patch_2"><strong>get_coeff_deriv_patch_2</strong></a> () const<br><em>Get the coefficient (b) in front of the derivative on the patch 2 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_approx_cross_deriv"><strong>get_approx_cross_deriv</strong></a> (DConstField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a>, Kokkos::HostSpace, Layout1 &gt; const &amp; derivs_1, DConstField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a>, Kokkos::HostSpace, Layout2 &gt; const &amp; derivs_2, int const sign_deriv_2) const<br><em>Get the linear combination of the derivatives values (c).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_approx_deriv-12"><strong>get_approx_deriv</strong></a> (DConstField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a>, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1, DConstField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a>, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2) const<br><em>Get the linear combination of the function values (c).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_approx_deriv-22"><strong>get_approx_deriv</strong></a> (DConstField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a>, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2, DConstField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a>, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1) const<br><em>Get the linear combination of the function values (c). See</em> get_approx_deriv <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_coeff_deriv_patch_1"><strong>get_coeff_deriv_patch_1</strong></a> () const<br><em>Get the coefficient (a) in front of the derivative on the patch 1 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_coeff_deriv_patch_2"><strong>get_coeff_deriv_patch_2</strong></a> () const<br><em>Get the coefficient (b) in front of the derivative on the patch 2 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-types-inherited-from-derivreconstructioncoeffs">Protected Types inherited from DerivReconstructionCoeffs</h2>
+<p>See <a href="classDerivReconstructionCoeffs.html">DerivReconstructionCoeffs</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef BSplinesPerp1Type</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-bsplinesperp1"><strong>BSplinesPerp1</strong></a>  <br><em>The B-splines in the direction perpendicular to the interface on patch 1.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef BSplinesPerp2Type</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-bsplinesperp2"><strong>BSplinesPerp2</strong></a>  <br><em>The B-splines in the direction perpendicular to the interface on patch 2.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::knot_discrete_dimension_t&lt; <a href="classDerivReconstructionCoeffs.html#typedef-bsplinesperp1"><strong>BSplinesPerp1</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-gridbreakpt1"><strong>GridBreakPt1</strong></a>  <br><em>The grid of break points of the B-splines on patch 1.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::knot_discrete_dimension_t&lt; <a href="classDerivReconstructionCoeffs.html#typedef-bsplinesperp2"><strong>BSplinesPerp2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-gridbreakpt2"><strong>GridBreakPt2</strong></a>  <br><em>The grid of break points of the B-splines on patch 2.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef EdgePerpGrid1Type</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-gridedgeperp1"><strong>GridEdgePerp1</strong></a>  <br><em>The grid of interpolation points perpendicular to the interface on patch 1.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef EdgePerpGrid2Type</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-gridedgeperp2"><strong>GridEdgePerp2</strong></a>  <br><em>The grid of interpolation points perpendicular to the interface on patch 2.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivReconstructionCoeffs.html#typedef-gridedgeperp1"><strong>GridEdgePerp1</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-idxedgeperp1"><strong>IdxEdgePerp1</strong></a>  <br><em>An index of</em> <a href="classDerivReconstructionCoeffs.html#typedef-gridedgeperp1"><em><strong>GridEdgePerp1</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivReconstructionCoeffs.html#typedef-gridedgeperp2"><strong>GridEdgePerp2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-idxedgeperp2"><strong>IdxEdgePerp2</strong></a>  <br><em>An index of</em> <a href="classDerivReconstructionCoeffs.html#typedef-gridedgeperp2"><em><strong>GridEdgePerp2</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="classDerivReconstructionCoeffs.html#typedef-gridedgeperp1"><strong>GridEdgePerp1</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a>  <br><em>The index range over the interpolation points perpendicular to the interface on patch 1.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="classDerivReconstructionCoeffs.html#typedef-gridedgeperp2"><strong>GridEdgePerp2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a>  <br><em>The index range over the interpolation points perpendicular to the interface on patch 2.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-attributes-inherited-from-derivreconstructioncoeffs">Protected Attributes inherited from DerivReconstructionCoeffs</h2>
+<p>See <a href="classDerivReconstructionCoeffs.html">DerivReconstructionCoeffs</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_coeff_deriv_patch_1"><strong>m_coeff_deriv_patch_1</strong></a>  <br><em>The coefficient (a) in front of the derivative on patch 1.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_coeff_deriv_patch_2"><strong>m_coeff_deriv_patch_2</strong></a>  <br><em>The coefficient (b) in front of the derivative on patch 2.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a> const</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_idx_range_perp_1"><strong>m_idx_range_perp_1</strong></a>  <br><em>The index range of the interpolation points used on patch 1.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a> const</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_idx_range_perp_2"><strong>m_idx_range_perp_2</strong></a>  <br><em>The index range of the interpolation points used on patch 2.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">const bool</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_is_cell_bound_1_with_extra_interpol_pt"><strong>m_is_cell_bound_1_with_extra_interpol_pt</strong></a>  <br><em>True if patch 1 has an additional interpolation point in its boundary cell (Greville closure).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">const bool</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_is_cell_bound_2_with_extra_interpol_pt"><strong>m_is_cell_bound_2_with_extra_interpol_pt</strong></a>  <br><em>True if patch 2 has an additional interpolation point in its boundary cell (Greville closure).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">host_t&lt; DField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_weights_patch_1"><strong>m_weights_patch_1</strong></a>  <br><em>The weights</em> <span class="arithmatex">\(\omega_k\)</span> <em>of the function values on patch 1 in the coefficient (c).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">host_t&lt; DFieldMem&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_weights_patch_1_alloc"><strong>m_weights_patch_1_alloc</strong></a>  <br><em>The memory allocated for the weights of the function values on patch 1.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">host_t&lt; DField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_weights_patch_2"><strong>m_weights_patch_2</strong></a>  <br><em>The weights</em> <span class="arithmatex">\(\omega_k\)</span> <em>of the function values on patch 2 in the coefficient (c).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">host_t&lt; DFieldMem&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-m_weights_patch_2_alloc"><strong>m_weights_patch_2_alloc</strong></a>  <br><em>The memory allocated for the weights of the function values on patch 2.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-static-attributes-inherited-from-derivreconstructioncoeffs">Protected Static Attributes inherited from DerivReconstructionCoeffs</h2>
+<p>See <a href="classDerivReconstructionCoeffs.html">DerivReconstructionCoeffs</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Extremity constexpr</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-s_extremity_1"><strong>s_extremity_1</strong></a>   = <code>extremity\_1</code><br><em>The extremity of patch 1 where the interface is located.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">Extremity constexpr</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-s_extremity_2"><strong>s_extremity_2</strong></a>   = <code>extremity\_2</code><br><em>The extremity of patch 2 where the interface is located.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-functions-inherited-from-derivreconstructioncoeffs">Protected Functions inherited from DerivReconstructionCoeffs</h2>
+<p>See <a href="classDerivReconstructionCoeffs.html">DerivReconstructionCoeffs</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-check_additional_interpolation_points_location"><strong>check_additional_interpolation_points_location</strong></a> (IdxRange&lt; EdgePerpGrid &gt; const &amp; idx_range_perp, Extremity const extremity) <br><em>Check that the additional interpolation point is located in the boundary cell of the patch opposite the interface. An exception is raised if this is not the case.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-check_break_points_are_interpolation_points"><strong>check_break_points_are_interpolation_points</strong></a> (bool const is_cell_bound_with_extra_interpol_pt, IdxRange&lt; EdgePerpGrid &gt; const &amp; idx_range_perp, Extremity const extremity) const<br><em>Check that the break points of the B-splines are interpolation points. An exception is raised if this is not the case.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-correction_boundary"><strong>correction_boundary</strong></a> (int const n_points, Idx1D const interface_idx, std::array&lt; double, 3 &gt; &amp; coeff_deriv_patch, std::array&lt; double, 3 &gt; &amp; coeff_deriv_other_patch, std::array&lt; host_t&lt; DField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a> &gt; &gt;, 3 &gt; &amp; weights_patch1, std::array&lt; host_t&lt; DField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a> &gt; &gt;, 3 &gt; &amp; weights_patch2) <br><em>Correction of the local coefficients on the boundary for additional interpolation points in the middle of a cell.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_approx_with_change_of_sign"><strong>get_approx_with_change_of_sign</strong></a> (DConstField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a>, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1, DConstField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a>, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2, int const sign_function_2) const<br><em>Get the linear combination of the function values (c), changing the sign of the values on patch 2 if required.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::tuple&lt; double, double &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_cell_lengths"><strong>get_cell_lengths</strong></a> (Idx1D const &amp; idx) const<br><em>Get the lengths of the cell on the right side and the left side of the given index.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION Idx&lt; Grid1D &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_extremity_idx"><strong>get_extremity_idx</strong></a> (Extremity const extremity, IdxRange&lt; Grid1D &gt; const &amp; idx_range) const<br><em>Get the index at the given extremity of an index range.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::array&lt; double, 3 &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_gammas"><strong>get_gammas</strong></a> (double const cell_length_left, double const cell_length_right) const<br><em>Compute the coefficients gammas_i.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-recursion"><strong>recursion</strong></a> (int const n_cells, Idx1D const interface_idx, std::array&lt; double, 3 &gt; &amp; coeff_deriv_patch, std::array&lt; double, 3 &gt; &amp; coeff_deriv_other_patch, std::array&lt; host_t&lt; DField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_1"><strong>IdxRange1DPerp_1</strong></a> &gt; &gt;, 3 &gt; &amp; weights_patch1, std::array&lt; host_t&lt; DField&lt; <a href="classDerivReconstructionCoeffs.html#typedef-idxrange1dperp_2"><strong>IdxRange1DPerp_2</strong></a> &gt; &gt;, 3 &gt; &amp; weights_patch2) <br><em>Recursion to compute the coefficients a, b and the weights omega.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-set_coefficients_non_uniform_case"><strong>set_coefficients_non_uniform_case</strong></a> () <br><em>Compute the coefficients a, b and the weights omega applying the recursive formula.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-set_coefficients_uniform_per_patch_case"><strong>set_coefficients_uniform_per_patch_case</strong></a> () <br><em>Compute the coefficients a, b and the weights omega applying the explicit formula for the uniform case.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-static-functions-inherited-from-derivreconstructioncoeffs">Protected Static Functions inherited from DerivReconstructionCoeffs</h2>
+<p>See <a href="classDerivReconstructionCoeffs.html">DerivReconstructionCoeffs</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_alpha"><strong>get_alpha</strong></a> (double const cell_length_left, double const cell_length_right) <br><em>Compute the coefficient alpha_i.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_beta"><strong>get_beta</strong></a> (double const cell_length_left, double const cell_length_right) <br><em>Compute the coefficient beta_i.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-set_local_uniform_weights"><strong>set_local_uniform_weights</strong></a> (host_t&lt; DField&lt; IdxRange&lt; EdgePerpGrid &gt; &gt; &gt; weights, double factor, double un_other_patch, Idx&lt; EdgePerpGrid &gt; idx_interface) <br><em>Apply the explicit formula for the uniform case to weights on one side of the interface.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>For a given <a href="structInterface.html"><strong>Interface</strong></a>, this operator computes the coefficients a, b and c of the following relation between the interface derivative and the derivatives at the other boundaries of the two patches: <span class="arithmatex">\(s'(X_I) = c + a s'(X_{I+1}) + b s'(X_{I+1})\)</span>,</p>
-<p>with
-* s'(X_I) the derivative at the <a href="structInterface.html"><strong>Interface</strong></a> of the two local splines on the patches.
-* s'(X_{I+1}) the derivative at the next (or right) <a href="structInterface.html"><strong>Interface</strong></a> of the local splines on patch 1.
-* s'(X_{I-1}) the derivative at the previous (or left) <a href="structInterface.html"><strong>Interface</strong></a> of the local splines on patch 2.
-* a,b scalars depending on the meshes of the two patches.
-* c a linear combination of the function values on the two patches. The weights in the linear combination depend on the meshes of the two patches. It can be written as a sum: <span class="arithmatex">\(c = \sum_{k = -N2}^{N1} \omega_k f_k\)</span>, with <span class="arithmatex">\(\omega_k\)</span> the weights, <span class="arithmatex">\(f_k\)</span> the function values,</p>
-<p>By default, <span class="arithmatex">\(N1\)</span> the number of cells in patch 1, and <span class="arithmatex">\(N2\)</span> the number of cells in patch 2.</p>
-<p>But a constructor is also provided to choose <span class="arithmatex">\(N\_{trunc}=N1=N2\)</span> in order to calculate an approximation of the derivative: <span class="arithmatex">\(s'(X_I) \simeq c_{trunc} = \sum_{k = -N_{trunc}}^{N_{trunc}} \omega_k f_k\)</span>.</p>
-<p>Scheme of the two patches: X_{I-1} X_I X_{I+1} 
- | | | | 1 | 2 | |_______|_______|
-* ← → +
-* → ← - Orientation of an equivalent global mesh : →</p>
-<p>All the formulae and more details are given in the README.md.</p>
+<p>This class specialises <a href="classDerivReconstructionCoeffs.html"><strong>DerivReconstructionCoeffs</strong></a> using the information stored in the <a href="structInterface.html"><strong>Interface</strong></a> (perpendicular grids, B-splines and extremities of the two Edges). It also provides patch-based accessors and handles the change of sign of the cross-derivatives when the orientations of the two patches do not agree.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>InterfaceType</code> The interface between two patches where we want to compute the derivatives. </li>
 </ul>
-<p><strong>Warning:</strong></p>
-<p>The applied method only works for interpolation points located on the break points. In the case where "ddc::SplineBuilderClosure::GREVILLE" is specified, additional interpolation points are also placed in the first or last cell of the patch. Please be sure to initialise the discrete space of your Grid on the break points (especially in the non-uniform case). </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-associated_interface">typedef associated_interface</h3>
 <p><a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>between the two involved patches.</em></p>
@@ -674,82 +882,6 @@
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-interfacederivcoeffs-14">function InterfaceDerivCoeffs [1/4]</h3>
-<p><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
-    IdxRange1DPerp_1 const &amp; idx_range_1d_1,
-    IdxRange1DPerp_2 const &amp; idx_range_1d_2,
-    ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE,
-    ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE
-) 
-</code></pre>
-<p>It computes the coefficients a and b, and the weights <span class="arithmatex">\(\omega_k\)</span> and stores the values in the class. If you want to compute the derivatives with an exact formula, please provide the index ranges on the full domain of the patches. If you want to use an approximation (e.g. use only 5 cells), please provide the index ranges on a reduced number of cells (e.g. 5 cells).</p>
-<p>If the interpolation points are uniform, it computes the coefficients with an explicit formula. Otherwise, it uses the recursive formula (see README.md).</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range_1d_1</code> 1D index range perpendicular to the <a href="structInterface.html"><strong>Interface</strong></a>, on the patch 1. </li>
-<li><code>idx_range_1d_2</code> 1D index range perpendicular to the <a href="structInterface.html"><strong>Interface</strong></a>, on the patch 2. </li>
-<li><code>Closure1</code> The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. </li>
-<li><code>Closure2</code> The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. </li>
-</ul>
-<hr>
-
-<h3 id="function-interfacederivcoeffs-24">function InterfaceDerivCoeffs [2/4]</h3>
-<p><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>.</em></p>
-<pre><code class="language-C++">template&lt;class IdxRangeA, class IdxRangeB&gt;
-inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
-    IdxRangeA const &amp; idx_range_a,
-    IdxRangeB const &amp; idx_range_b,
-    ddc::SplineBuilderClosure const &amp; Closure1=ddc::SplineBuilderClosure::HERMITE,
-    ddc::SplineBuilderClosure const &amp; Closure2=ddc::SplineBuilderClosure::HERMITE
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range_a</code> Index range on one patch. </li>
-<li><code>idx_range_b</code> Index range on the other patch. </li>
-<li><code>Closure1</code> The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. </li>
-<li><code>Closure2</code> The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. </li>
-</ul>
-<hr>
-
-<h3 id="function-interfacederivcoeffs-34">function InterfaceDerivCoeffs [3/4]</h3>
-<p><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>. This constructor calculates an approximation of the formula.</em></p>
-<pre><code class="language-C++">inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
-    IdxRange1DPerp_1 const &amp; idx_range_1d_1,
-    IdxRange1DPerp_2 const &amp; idx_range_1d_2,
-    std::size_t const number_chosen_cells
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range_1d_1</code> 1D index range perpendicular to the <a href="structInterface.html"><strong>Interface</strong></a>, on the patch 1. </li>
-<li><code>idx_range_1d_2</code> 1D index range perpendicular to the <a href="structInterface.html"><strong>Interface</strong></a>, on the patch 2. </li>
-<li><code>number_chosen_cells</code> The number of cells we choose for the computation of the interface derivatives. Same number for Patch1 and Patch2. </li>
-</ul>
-<p><strong>Warning:</strong></p>
-<p>If the mesh has additional interpolation points, please be sure to not take these points. </p>
-<hr>
-
-<h3 id="function-interfacederivcoeffs-44">function InterfaceDerivCoeffs [4/4]</h3>
-<p><em>Instantiate</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> _. See_InterfaceDerivCoeffsInstantiator <em>. This constructor calculates an approximation of the formula.</em></p>
-<pre><code class="language-C++">template&lt;class IdxRangeA, class IdxRangeB&gt;
-inline InterfaceDerivCoeffs::InterfaceDerivCoeffs (
-    IdxRangeA const &amp; idx_range_a,
-    IdxRangeB const &amp; idx_range_b,
-    std::size_t const number_chosen_cells
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range_a</code> Index range on one patch. </li>
-<li><code>idx_range_b</code> Index range on the other patch. </li>
-<li><code>number_chosen_cells</code> The number of cells we choose for the computation of the interface derivatives. Same number for Patch1 and Patch2. </li>
-</ul>
-<p><strong>Warning:</strong></p>
-<p>If the mesh has additional interpolation points, please be sure to not take these points. </p>
-<hr>
-
 <h3 id="function-get_approx_cross_deriv-12">function get_approx_cross_deriv [1/2]</h3>
 <p><em>Get the linear combination of the derivatives values (c).</em> </p>
 <pre><code class="language-C++">template&lt;class Layout1, class Layout2&gt;
@@ -786,44 +918,6 @@ inline double InterfaceDerivCoeffs::get_approx_cross_deriv (
 <p>the linear combination of the function values (c). </p>
 <hr>
 
-<h3 id="function-get_approx_deriv-12">function get_approx_deriv [1/2]</h3>
-<p><em>Get the linear combination of the function values (c).</em> </p>
-<pre><code class="language-C++">template&lt;class Layout1, class Layout2&gt;
-inline double InterfaceDerivCoeffs::get_approx_deriv (
-    DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1,
-    DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2
-) const
-</code></pre>
-<p>This linear combination corresponds to an approximation of the interface derivative.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>function_1</code> Function values at the interpolation points on patch 1. </li>
-<li><code>function_2</code> Function values at the interpolation points on patch 2. </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>the linear combination of the function values (c).</p>
-<p>Remark: for the approximation case, the cells were selected by the given index ranges in the instantiation. Here, function_1 and function_2 can be given on the whole domain and the operator will select the correct values. But, it could be more optimised to directly give a slice on the selected cells. E.g. get_approx_deriv(function_1[idx_interface_1][selected_cells_idx_range_1], 
-                 function_2[idx_interface_2][selected_cells_idx_range_2]); and get_approx_deriv(function_1[idx_interface_1], 
-                 function_2[idx_interface_2]); will return the same value. </p>
-<hr>
-
-<h3 id="function-get_approx_deriv-22">function get_approx_deriv [2/2]</h3>
-<p><em>Get the linear combination of the function values (c). See</em> get_approx_deriv <em>.</em></p>
-<pre><code class="language-C++">template&lt;class Layout1, class Layout2&gt;
-inline double InterfaceDerivCoeffs::get_approx_deriv (
-    DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp; function_2,
-    DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp; function_1
-) const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>function_1</code> Function values at the interpolation points on patch 1. </li>
-<li><code>function_2</code> Function values at the interpolation points on patch 2. </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>the linear combination of the function values (c). </p>
-<hr>
-
 <h3 id="function-get_coeff_deriv_on_patch">function get_coeff_deriv_on_patch</h3>
 <p><em>Get the coefficient (a) or (b) in front of the derivative on the given patch of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">template&lt;class Patch&gt;
@@ -831,22 +925,6 @@ inline double InterfaceDerivCoeffs::get_coeff_deriv_on_patch () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The value of the coefficient (a) or (b). </p>
-<hr>
-
-<h3 id="function-get_coeff_deriv_patch_1">function get_coeff_deriv_patch_1</h3>
-<p><em>Get the coefficient (a) in front of the derivative on the patch 1 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">inline double InterfaceDerivCoeffs::get_coeff_deriv_patch_1 () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>The value of the coefficient a. </p>
-<hr>
-
-<h3 id="function-get_coeff_deriv_patch_2">function get_coeff_deriv_patch_2</h3>
-<p><em>Get the coefficient (b) in front of the derivative on the patch 2 of the given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">inline double InterfaceDerivCoeffs::get_coeff_deriv_patch_2 () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>The value of the coefficient b. </p>
 <hr>
 
 <hr>

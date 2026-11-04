@@ -187,6 +187,8 @@ Here is a list of all files with brief descriptions:
     * **dir** [**gyroaverage**](dir_0488de83d5a156211532c59817863a53.md)     
         * **file** [**gyroaverage\_operator.hpp**](gyroaverage__operator_8hpp.md)     
     * **dir** [**interpolation**](dir_264890e5c091f8c8d7fe1f842870c25e.md)     
+        * **dir** [**interface\_derivatives**](dir_6882ed007936f5418934203181625867.md)     
+            * **file** [**deriv\_reconstruction\_coeffs.hpp**](deriv__reconstruction__coeffs_8hpp.md)     
         * **dir** [**polar\_splines**](dir_a6779ae02b71d57f488d261458bab1ce.md)     
             * **file** [**bernstein.hpp**](bernstein_8hpp.md)     
             * **file** [**polar\_bsplines.hpp**](polar__bsplines_8hpp.md)     

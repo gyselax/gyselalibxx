@@ -280,6 +280,12 @@
     </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="polar_splines/index.html">Polar Splines</a>
@@ -597,13 +603,15 @@
 <p>In order for the interpolation to function correctly the values <span class="arithmatex">\(f_j=f(x_j)\)</span> provided must be located at the points <span class="arithmatex">\(x_j\)</span> identified as the spline interpolation points.</p>
 <p>The spline interpolation method is based entirely on the SplineBuilder and SplineEvaluator classes which are found in DDC.</p>
 <h3 id="polar-spline-interpolation">Polar Spline Interpolation</h3>
-<p>There is no method to construct a polar spline from the values of a function. It should be possible to construct such a <code>PolarSplineBuilder</code>, but it is not clear where the interpolation points should be placed near the O-point in order to obtain a well-conditioned problem. The B-splines, splines and the spline evaluator for the polar splines can be found in the sub-folder <a href="polar_splines/index.html">polar_splines</a>.</p></div>
+<p>There is no method to construct a polar spline from the values of a function. It should be possible to construct such a <code>PolarSplineBuilder</code>, but it is not clear where the interpolation points should be placed near the O-point in order to obtain a well-conditioned problem. The B-splines, splines and the spline evaluator for the polar splines can be found in the sub-folder <a href="polar_splines/index.html">polar_splines</a>.</p>
+<h3 id="interface-derivative-reconstruction">Interface derivative reconstruction</h3>
+<p>For some methods it is useful to reconstruct the derivative at a domain boundary. For example this can be useful for splines distributed over multiple MPI threads, or for splines on multi-patch domains. The sub-folder <a href="interface_derivatives/index.html">interface_derivatives</a> contains all methods useful for reconstructing derivatives.</p></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../gyroaverage/index.html" class="btn btn-neutral float-left" title="Gyroaverage operator (for circular geometry)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="polar_splines/index.html" class="btn btn-neutral float-right" title="Polar Splines">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="interface_derivatives/index.html" class="btn btn-neutral float-right" title="Interface derivatives">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -633,7 +641,7 @@
       <span><a href="../gyroaverage/index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="polar_splines/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="interface_derivatives/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
