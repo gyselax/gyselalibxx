@@ -36,6 +36,11 @@ struct PartialDerivativeFixture<std::tuple<std::integral_constant<bool, periodic
     };
 };
 
+template<class Dim>
+    struct Grid : NonUniformGridBase<Dim>
+    {
+    };
+
 std::size_t static constexpr spline_degree = 3;
 
 using partial_derivative_types = testing::Types<
@@ -124,13 +129,8 @@ template <class X, class Y, std::size_t ncells_x, std::size_t ncells_y>
 class PartialDerivativeTest
 {
 public:
-    struct GridX : NonUniformGridBase<X>
-    {
-    };
-
-    struct GridY : NonUniformGridBase<Y>
-    {
-    };
+    using GridX = Grid<X>;
+    using GridY = Grid<Y>;
 
     using IdxRangeX = IdxRange<GridX>;
     using IdxRangeY = IdxRange<GridY>;
@@ -832,5 +832,20 @@ TYPED_TEST(PartialDerivativeFixture, ConstantPartialDerivative)
 
     // Partial Derivative in X direction
     EXPECT_DOUBLE_EQ(test.template compute_error<X>(), val);
+}
+
+TYPED_TEST(PartialDerivativeFixture, ConstantPartialDerivativeExternalDim)
+{
+    using GridX = Grid<typename TestFixture::X>;
+    using IdxRangeX = IdxRange<GridX>;
+    ConstantPartialDerivative<IdxRangeX, typename TestFixture::Y> const_deriv(1.0);
+
+    IdxRangeX idx_range_test(Idx<GridX>{0}, IdxStep<GridX>{1});
+    host_t<DFieldMem<IdxRangeX>> field_alloc(idx_range_test);
+
+    const_deriv(get_field(field_alloc));
+
+    // Partial Derivative in X direction
+    EXPECT_EQ(field_alloc(Idx<GridX>{0}), 1.0);
 }
 } // namespace
