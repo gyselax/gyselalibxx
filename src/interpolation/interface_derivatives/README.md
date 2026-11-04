@@ -4,7 +4,7 @@ This folder contains functions to estimate derivatives at the boundary between 2
 
 The following methods are implemented so far:
 
-- DerivReconstructionCoeffs [^2] : For more details and examples see the multipatch docs regarding [interface derivatives](../../multipatch/interface_derivatives).
+- DerivReconstructionCoeffs [^2] : For more details and examples see the multipatch docs regarding [interface derivatives](../../multipatch/interface_derivatives/README.md).
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
