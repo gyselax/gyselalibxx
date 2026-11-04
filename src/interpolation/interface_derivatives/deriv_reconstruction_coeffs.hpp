@@ -537,13 +537,11 @@ protected:
     {
         // Memory allocation ---------------------------------------------------------------------
         // Define weight fields for number of cells equal to n, n-1 and n-2 in the recursion.
-        host_t<DFieldMem<IdxRange1DPerp_1>> weights_1_alloc_minus_2(m_idx_range_perp_1);
-        host_t<DFieldMem<IdxRange1DPerp_1>> weights_1_alloc_minus_1(m_idx_range_perp_1);
-        host_t<DFieldMem<IdxRange1DPerp_1>> weights_1_alloc_minus_0(m_idx_range_perp_1);
+        host_t<DFieldMem<IdxRange1DPerp_1>> weights_1_buffer_1_alloc(m_idx_range_perp_1);
+        host_t<DFieldMem<IdxRange1DPerp_1>> weights_1_buffer_2_alloc(m_idx_range_perp_1);
 
-        host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_2(m_idx_range_perp_2);
-        host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_1(m_idx_range_perp_2);
-        host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_alloc_minus_0(m_idx_range_perp_2);
+        host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_buffer_1_alloc(m_idx_range_perp_2);
+        host_t<DFieldMem<IdxRange1DPerp_2>> weights_2_buffer_2_alloc(m_idx_range_perp_2);
 
         int const n_points_1 = m_idx_range_perp_1.size();
         int const n_points_2 = m_idx_range_perp_2.size();
@@ -556,15 +554,29 @@ protected:
             throw std::runtime_error("Please provide at least 2 cells in the Patch2.");
         }
 
+        // If m_is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
+        int const n1_cells
+                = m_is_cell_bound_1_with_extra_interpol_pt ? n_points_1 - 3 : n_points_1 - 1;
+        // If m_is_cell_bound_2_with_extra_interpol_pt is true, the last cell is treated differently.
+        int const n2_cells
+                = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
+
+        int n_permutations = (n1_cells - 2) + (n2_cells - 2)
+                             + m_is_cell_bound_2_with_extra_interpol_pt
+                             + m_is_cell_bound_1_with_extra_interpol_pt + 1;
+        int output_position = (n_permutations + 2) % 3;
+
         // Store the 3 last steps for the recursion in an array.
-        std::array<host_t<DField<IdxRange1DPerp_1>>, 3> weights_patch1
-                = {get_field(weights_1_alloc_minus_2),
-                   get_field(weights_1_alloc_minus_1),
-                   get_field(weights_1_alloc_minus_0)};
-        std::array<host_t<DField<IdxRange1DPerp_2>>, 3> weights_patch2
-                = {get_field(weights_2_alloc_minus_2),
-                   get_field(weights_2_alloc_minus_1),
-                   get_field(weights_2_alloc_minus_0)};
+        std::array<host_t<DField<IdxRange1DPerp_1>>, 3> weights_patch1 = build_array(
+                output_position,
+                m_weights_patch_1,
+                get_field(weights_1_buffer_1_alloc),
+                get_field(weights_1_buffer_2_alloc));
+        std::array<host_t<DField<IdxRange1DPerp_2>>, 3> weights_patch2 = build_array(
+                output_position,
+                m_weights_patch_2,
+                get_field(weights_2_buffer_1_alloc),
+                get_field(weights_2_buffer_2_alloc));
 
         // Initialise fields
         ddc::parallel_fill(weights_patch1[n], 0.0);
@@ -648,10 +660,6 @@ protected:
 
 
         // Computing coefficients (c, a, b) on patch 2 -------------------------------------------
-        // If m_is_cell_bound_2_with_extra_interpol_pt is true, the last cell is treated differently.
-        int const n2_cells
-                = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
-
         recursion<false>(
                 n2_cells,
                 interface_idx_2,
@@ -711,10 +719,6 @@ protected:
         weights_patch2[n](interface_idx_2) += factor * gammas_i[2];
 
         // Computing coefficients (c, a, b) on patch 1 -------------------------------------------
-        // If m_is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
-        int const n1_cells
-                = m_is_cell_bound_1_with_extra_interpol_pt ? n_points_1 - 3 : n_points_1 - 1;
-
         recursion<true>(
                 n1_cells,
                 interface_idx_1,
@@ -737,8 +741,6 @@ protected:
         // Store the final values.
         m_coeff_deriv_patch_1 = coeff_deriv_patch1[n];
         m_coeff_deriv_patch_2 = coeff_deriv_patch2[n];
-        ddc::parallel_deepcopy(m_weights_patch_1, get_const_field(weights_patch1[n]));
-        ddc::parallel_deepcopy(m_weights_patch_2, get_const_field(weights_patch2[n]));
         m_weights_patch_1(interface_idx_1) *= 0.5;
         m_weights_patch_2(interface_idx_2) *= 0.5;
     }
@@ -1220,5 +1222,21 @@ protected:
         buffer[n_minus_1] = buffer[n];
         // new n is ready to be defined (but still contains value of old n-2)
         buffer[n] = tmp;
+    }
+
+    template <class IdxRangeType>
+    std::array<DField<IdxRangeType, Kokkos::HostSpace>, 3> build_array(
+            int output_position,
+            DField<IdxRangeType, Kokkos::HostSpace> persistent_memory,
+            DField<IdxRangeType, Kokkos::HostSpace> buffer_1,
+            DField<IdxRangeType, Kokkos::HostSpace> buffer_2)
+    {
+        if (output_position == 0) {
+            return {persistent_memory, buffer_1, buffer_2};
+        } else if (output_position == 1) {
+            return {buffer_1, persistent_memory, buffer_2};
+        } else {
+            return {buffer_1, buffer_2, persistent_memory};
+        }
     }
 };
