@@ -73,7 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use Spack to install packages in the docker image.
 - Rename `MultipatchSplineBuilder` to `SplineBuilderCollection`.
 - Rename `MultipatchSplineBuilder2D` to `SplineBuilder2DCollection`.
-- Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`. 
+- Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
 
 ### Deprecated
 
