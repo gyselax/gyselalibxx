@@ -15,7 +15,7 @@ class CollisionConfigurationSpV2D
 {
 public:
     /**
-     * @brief Distribution function index range.
+     * @brief Distribution function index range, define the distribution function layout (layout right).
      */
     using IdxRangeDistributionFunctionType = IdxRange<Species, GridVpar, GridMu>;
 
@@ -43,7 +43,7 @@ public:
      */
     CollisionConfigurationSpV2D(
             PC_tree_t const& yaml_input_file,
-            IdxRange<Species, GridVpar, GridMu> index_range_fdistribution,
+            IdxRangeDistributionFunctionType index_range_fdistribution,
             DConstField<IdxRange<GridMu>> coeff_intdmu,
             DConstField<IdxRange<GridVpar>> coeff_intdvpar,
             double B_norm,
