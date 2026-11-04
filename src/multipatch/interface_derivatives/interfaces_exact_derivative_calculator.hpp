@@ -673,12 +673,6 @@ private:
         Idx<grid_par2<I>> idx_to_slice_2;
         set_slice_indexes<I>(slice_previous_idx_value, idx_to_slice_1, idx_to_slice_2);
 
-        // Get the fields of the left and right patch of the interface.
-        DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
-                = functions_and_derivs.template get<patch1<I>>();
-        DerivFieldOnPatch_host<patch2<I>> function_and_derivs_2
-                = functions_and_derivs.template get<patch2<I>>();
-
         auto const [sign_1, sign_2] = get_sign_derivs<I, eval_type>();
 
         // Get the indices at the bound of the interface.
@@ -689,12 +683,11 @@ private:
                 idx_interface_deriv_1(Idx<deriv_perp1<I>>(1), idx_perp_1, idx_to_slice_1);
         idx_deriv_perp2<I>
                 idx_interface_deriv_2(Idx<deriv_perp2<I>>(1), idx_perp_2, idx_to_slice_2);
-
         if constexpr (std::is_same_v<eval_type, eval_deriv>) {
             // Update the first derivatives.
-            function_and_derivs_1(idx_interface_deriv_1)
+            functions_and_derivs.template get<patch1<I>>()(idx_interface_deriv_1)
                     = m_interface_derivatives->get_values()[I] * sign_1;
-            function_and_derivs_2(idx_interface_deriv_2)
+            functions_and_derivs.template get<patch2<I>>()(idx_interface_deriv_2)
                     = m_interface_derivatives->get_values()[I] * sign_2;
         } else {
             IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
@@ -710,9 +703,9 @@ private:
             idx_cross_deriv2<I> idx_cross_deriv_2(Idx<deriv_par2<I>>(1), idx_interface_deriv_2);
 
             // Update the cross-derivative.
-            function_and_derivs_1(idx_cross_deriv_1)
+            functions_and_derivs.template get<patch1<I>>()(idx_cross_deriv_1)
                     = m_interface_derivatives->get_values()[I] * sign_1;
-            function_and_derivs_2(idx_cross_deriv_2)
+            functions_and_derivs.template get<patch2<I>>()(idx_cross_deriv_2)
                     = m_interface_derivatives->get_values()[I] * sign_2;
         }
     }
