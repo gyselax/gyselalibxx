@@ -274,7 +274,7 @@ public:
     DFieldMem<IdxRange<GridTor3Type, GridTor1Type, GridTor2Type>> m_B_norm_allocation;
 
     /**
-     * @brief Bstar_s TODO: This array can get large, could avoid copying it as an optimization.
+     * @brief Bstar_s TODO: This array can get large, could avoid copying it as an optimisation.
      */
     DFieldMem<IdxRange<Species, GridTor3Type, GridTor1Type, GridTor2Type, GridVpar>>
             m_Bstar_s_allocation;
