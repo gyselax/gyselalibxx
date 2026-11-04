@@ -111,6 +111,10 @@ protected:
     /// @brief The extremity of patch 2 where the interface is located.
     static Extremity constexpr s_extremity_2 = extremity_2;
 
+    static constexpr std::size_t n = 2;
+    static constexpr std::size_t n_minus_1 = 1;
+    static constexpr std::size_t n_minus_2 = 0;
+
     /// @brief The coefficient (a) in front of the derivative on patch 1.
     double m_coeff_deriv_patch_1;
     /// @brief The coefficient (b) in front of the derivative on patch 2.
@@ -563,12 +567,12 @@ protected:
                    get_field(weights_2_alloc_minus_0)};
 
         // Initialise fields
-        ddc::parallel_fill(weights_patch1[0], 0.0);
-        ddc::parallel_fill(weights_patch1[1], 0.0);
-        ddc::parallel_fill(weights_patch1[2], 0.0);
-        ddc::parallel_fill(weights_patch2[0], 0.0);
-        ddc::parallel_fill(weights_patch2[1], 0.0);
-        ddc::parallel_fill(weights_patch2[2], 0.0);
+        ddc::parallel_fill(weights_patch1[n], 0.0);
+        ddc::parallel_fill(weights_patch1[n_minus_1], 0.0);
+        ddc::parallel_fill(weights_patch1[n_minus_2], 0.0);
+        ddc::parallel_fill(weights_patch2[n], 0.0);
+        ddc::parallel_fill(weights_patch2[n_minus_1], 0.0);
+        ddc::parallel_fill(weights_patch2[n_minus_2], 0.0);
 
         std::array<double, 3> coeff_deriv_patch1;
         std::array<double, 3> coeff_deriv_patch2;
@@ -601,16 +605,16 @@ protected:
         beta_i = get_beta(cell_length_left, cell_length_right);
         gammas_i = get_gammas(cell_length_left, cell_length_right);
 
-        coeff_deriv_patch1[1] = beta_i; // b_{n-2}
-        coeff_deriv_patch2[1] = alpha_i; // a_{n-2}
+        coeff_deriv_patch1[n_minus_1] = beta_i; // b_{n-1}
+        coeff_deriv_patch2[n_minus_1] = alpha_i; // a_{n-1}
 
-        // c_{n-2}
-        weights_patch1[1](idx_1_plus) = gammas_i[0];
-        weights_patch1[1](idx_1) = gammas_i[1];
-        weights_patch2[1](idx_2) = gammas_i[1];
-        weights_patch2[1](idx_2_plus) = gammas_i[2];
+        // c_{n-1}
+        weights_patch1[n_minus_1](idx_1_plus) = gammas_i[0];
+        weights_patch1[n_minus_1](idx_1) = gammas_i[1];
+        weights_patch2[n_minus_1](idx_2) = gammas_i[1];
+        weights_patch2[n_minus_1](idx_2_plus) = gammas_i[2];
 
-        // Set (a_{n-1},b_{n-1},c_{n-1}) ---
+        // Set (a_{n},b_{n},c_{n}) ---
         idx_2_minus = interface_idx_2;
         idx_2 = interface_idx_2 + idx_step_2;
         idx_2_plus = interface_idx_2 + 2 * idx_step_2;
@@ -621,25 +625,26 @@ protected:
         beta_i = get_beta(cell_length_left, cell_length_right);
         gammas_i = get_gammas(cell_length_left, cell_length_right);
 
-        coeff_deriv_patch2[2]
-                = alpha_i * coeff_deriv_patch2[1] / (1 - coeff_deriv_patch2[1] * beta_i); // a_{n-1}
-        coeff_deriv_patch1[2]
-                = coeff_deriv_patch1[1] / (1 - coeff_deriv_patch2[1] * beta_i); // b_{n-1}
+        coeff_deriv_patch2[n] = alpha_i * coeff_deriv_patch2[n_minus_1]
+                                / (1 - coeff_deriv_patch2[n_minus_1] * beta_i); // a_{n}
+        coeff_deriv_patch1[n] = coeff_deriv_patch1[n_minus_1]
+                                / (1 - coeff_deriv_patch2[n_minus_1] * beta_i); // b_{n}
 
-        // c_{n-1} = (c_{n-2} + a_{n-2} * gamma_i) / (1 - a_{n-2} * beta_i);
+        // c_{n} = (c_{n-1} + a_{n-1} * gamma_i) / (1 - a_{n-1} * beta_i);
         ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx) {
-            weights_patch1[2](idx)
-                    = 1. / (1 - coeff_deriv_patch2[1] * beta_i) * weights_patch1[1](idx);
+            weights_patch1[n](idx) = 1. / (1 - coeff_deriv_patch2[n_minus_1] * beta_i)
+                                     * weights_patch1[n_minus_1](idx);
         });
         ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx) {
-            weights_patch2[2](idx)
-                    = 1. / (1 - coeff_deriv_patch2[1] * beta_i) * weights_patch2[1](idx);
+            weights_patch2[n](idx) = 1. / (1 - coeff_deriv_patch2[n_minus_1] * beta_i)
+                                     * weights_patch2[n_minus_1](idx);
         });
-        double factor = 1. / (1 - coeff_deriv_patch2[1] * beta_i) * coeff_deriv_patch2[1];
-        weights_patch2[2](idx_2_plus) += factor * gammas_i[2];
-        weights_patch2[2](idx_2) += factor * gammas_i[1];
-        weights_patch2[2](idx_2_minus) += factor * gammas_i[0];
-        weights_patch1[2](idx_1) += factor * gammas_i[0];
+        double factor
+                = 1. / (1 - coeff_deriv_patch2[n_minus_1] * beta_i) * coeff_deriv_patch2[n_minus_1];
+        weights_patch2[n](idx_2_plus) += factor * gammas_i[2];
+        weights_patch2[n](idx_2) += factor * gammas_i[1];
+        weights_patch2[n](idx_2_minus) += factor * gammas_i[0];
+        weights_patch1[n](idx_1) += factor * gammas_i[0];
 
 
         // Computing coefficients (c, a, b) on patch 2 -------------------------------------------
@@ -683,26 +688,26 @@ protected:
         cycle_buffers(weights_patch1);
         cycle_buffers(weights_patch2);
 
-        // Set (a_{n-1},b_{n-1},c_{n-1}) ---
-        coeff_deriv_patch2[2]
-                = coeff_deriv_patch2[1] / (1 - coeff_deriv_patch1[1] * alpha_i); // a_{n-1}
-        coeff_deriv_patch1[2]
-                = coeff_deriv_patch1[1] * beta_i / (1 - coeff_deriv_patch1[1] * alpha_i); // b_{n-1}
+        // Set (a_{n},b_{n},c_{n}) ---
+        coeff_deriv_patch2[n] = coeff_deriv_patch2[n_minus_1]
+                                / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i); // a_{n-1}
+        coeff_deriv_patch1[n] = coeff_deriv_patch1[n_minus_1] * beta_i
+                                / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i); // b_{n-1}
 
-        // c_{n-1} = (c_{n-2} + b_{n-2} * gamma_i) / (1 - b_{n-2} * alpha_i);
+        // c_{n} = (c_{n-1} + b_{n-1} * gamma_i) / (1 - b_{n-1} * alpha_i);
         ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx) {
-            weights_patch1[2](idx)
-                    = 1. / (1 - coeff_deriv_patch1[1] * alpha_i) * weights_patch1[1](idx);
+            weights_patch1[n](idx) = 1. / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i)
+                                     * weights_patch1[n_minus_1](idx);
         });
         ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx) {
-            weights_patch2[2](idx)
-                    = 1. / (1 - coeff_deriv_patch1[1] * alpha_i) * weights_patch2[1](idx);
+            weights_patch2[n](idx) = 1. / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i)
+                                     * weights_patch2[n_minus_1](idx);
         });
-        factor = 1. / (1 - coeff_deriv_patch1[1] * alpha_i) * coeff_deriv_patch1[1];
-        weights_patch1[2](idx_1_plus) += factor * gammas_i[0];
-        weights_patch1[2](idx_1) += factor * gammas_i[1];
-        weights_patch1[2](idx_1_minus) += factor * gammas_i[2];
-        weights_patch2[2](interface_idx_2) += factor * gammas_i[2];
+        factor = 1. / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i) * coeff_deriv_patch1[n_minus_1];
+        weights_patch1[n](idx_1_plus) += factor * gammas_i[0];
+        weights_patch1[n](idx_1) += factor * gammas_i[1];
+        weights_patch1[n](idx_1_minus) += factor * gammas_i[2];
+        weights_patch2[n](interface_idx_2) += factor * gammas_i[2];
 
         // Computing coefficients (c, a, b) on patch 1 -------------------------------------------
         // If m_is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
@@ -729,10 +734,10 @@ protected:
         }
 
         // Store the final values.
-        m_coeff_deriv_patch_1 = coeff_deriv_patch1[2];
-        m_coeff_deriv_patch_2 = coeff_deriv_patch2[2];
-        ddc::parallel_deepcopy(m_weights_patch_1, get_const_field(weights_patch1[2]));
-        ddc::parallel_deepcopy(m_weights_patch_2, get_const_field(weights_patch2[2]));
+        m_coeff_deriv_patch_1 = coeff_deriv_patch1[n];
+        m_coeff_deriv_patch_2 = coeff_deriv_patch2[n];
+        ddc::parallel_deepcopy(m_weights_patch_1, get_const_field(weights_patch1[n]));
+        ddc::parallel_deepcopy(m_weights_patch_2, get_const_field(weights_patch2[n]));
         m_weights_patch_1(interface_idx_1) *= 0.5;
         m_weights_patch_2(interface_idx_2) *= 0.5;
     }
@@ -774,10 +779,10 @@ protected:
         cycle_buffers(weights_patch1);
         cycle_buffers(weights_patch2);
 
-        for (int n(2); n < n_cells; n++) {
-            Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
-            Idx1D const idx = interface_idx + n * idx_step;
-            Idx1D const idx_plus = interface_idx + (n + 1) * idx_step;
+        for (int current_n(2); current_n < n_cells; current_n++) {
+            Idx1D const idx_minus = interface_idx + (current_n - 1) * idx_step;
+            Idx1D const idx = interface_idx + current_n * idx_step;
+            Idx1D const idx_plus = interface_idx + (current_n + 1) * idx_step;
 
             auto [cell_length_left, cell_length_right] = get_cell_lengths<is_on_patch1>(idx);
 
@@ -791,40 +796,40 @@ protected:
                                                  : get_beta(cell_length_left, cell_length_right);
             std::array<double, 3> const gammas_i = get_gammas(cell_length_left, cell_length_right);
 
-            double const denom = 1 - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
+            double const denom = 1 - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
 
             // Set (a_{n},b_{n},c_{n}) ---
-            coeff_deriv_patch[2] = coeff_furthest * coeff_deriv_patch[1] / denom;
-            coeff_deriv_other_patch[2]
-                    = (coeff_deriv_other_patch[1]
-                       - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0]
-                                 * coeff_deriv_other_patch[0])
+            coeff_deriv_patch[n] = coeff_furthest * coeff_deriv_patch[n_minus_1] / denom;
+            coeff_deriv_other_patch[n]
+                    = (coeff_deriv_other_patch[n_minus_1]
+                       - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2]
+                                 * coeff_deriv_other_patch[n_minus_2])
                       / denom;
 
             // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
             // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
-            double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
+            double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
             ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx_perp) {
-                weights_patch1[2](idx_perp)
+                weights_patch1[n](idx_perp)
                         = 1. / denom
-                          * (weights_patch1[1](idx_perp)
-                             - coeff_closer_deriv * weights_patch1[0](idx_perp));
+                          * (weights_patch1[n_minus_1](idx_perp)
+                             - coeff_closer_deriv * weights_patch1[n_minus_2](idx_perp));
             });
             ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx_perp) {
-                weights_patch2[2](idx_perp)
+                weights_patch2[n](idx_perp)
                         = 1. / denom
-                          * (weights_patch2[1](idx_perp)
-                             - coeff_closer_deriv * weights_patch2[0](idx_perp));
+                          * (weights_patch2[n_minus_1](idx_perp)
+                             - coeff_closer_deriv * weights_patch2[n_minus_2](idx_perp));
             });
-            double const factor = 1. / denom * coeff_deriv_patch[1];
+            double const factor = 1. / denom * coeff_deriv_patch[n_minus_1];
             if constexpr (is_on_patch1) {
-                weights_patch1[2](idx_plus) += factor * gammas_i[0];
-                weights_patch1[2](idx) += factor * gammas_i[1];
-                weights_patch1[2](idx_minus) += factor * gammas_i[2];
+                weights_patch1[n](idx_plus) += factor * gammas_i[0];
+                weights_patch1[n](idx) += factor * gammas_i[1];
+                weights_patch1[n](idx_minus) += factor * gammas_i[2];
             } else {
-                weights_patch2[2](idx_plus) += factor * gammas_i[2];
-                weights_patch2[2](idx) += factor * gammas_i[1];
-                weights_patch2[2](idx_minus) += factor * gammas_i[0];
+                weights_patch2[n](idx_plus) += factor * gammas_i[2];
+                weights_patch2[n](idx) += factor * gammas_i[1];
+                weights_patch2[n](idx_minus) += factor * gammas_i[0];
             }
 
             // Update coefficients.
@@ -834,8 +839,8 @@ protected:
             cycle_buffers(weights_patch2);
         }
 
-        ddc::parallel_deepcopy(weights_patch1[2], get_const_field(weights_patch1[1]));
-        ddc::parallel_deepcopy(weights_patch2[2], get_const_field(weights_patch2[1]));
+        ddc::parallel_deepcopy(weights_patch1[n], get_const_field(weights_patch1[n_minus_1]));
+        ddc::parallel_deepcopy(weights_patch2[n], get_const_field(weights_patch2[n_minus_1]));
     }
 
     /**
@@ -869,12 +874,12 @@ protected:
         Extremity constexpr extremity = is_on_patch1 ? s_extremity_1 : s_extremity_2;
         IdxStep<Grid1D> idx_step(extremity == FRONT ? 1 : -1);
 
-        int const n = n_points - 3;
-        Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
-        Idx1D const idx = interface_idx + n * idx_step;
-        Idx1D const idx_plus = interface_idx + (n + 2) * idx_step;
+        int const current_n = n_points - 3;
+        Idx1D const idx_minus = interface_idx + (current_n - 1) * idx_step;
+        Idx1D const idx = interface_idx + current_n * idx_step;
+        Idx1D const idx_plus = interface_idx + (current_n + 2) * idx_step;
         // Additional interpolation point.
-        Idx1D const idx_star = interface_idx + (n + 1) * idx_step;
+        Idx1D const idx_star = interface_idx + (current_n + 1) * idx_step;
 
         auto [cell_length_left, cell_length_right] = get_cell_lengths<is_on_patch1>(idx);
         auto [cell_length_left_star, cell_length_right_star]
@@ -935,39 +940,39 @@ protected:
         // No more boundary derivative, the local coefficient is set to zero.
         coeff_furthest = 0;
 
-        double denom = 1 - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
+        double denom = 1 - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
 
         // Set (a_{n},b_{n},c_{n}) ---
-        coeff_deriv_patch[2] = coeff_furthest * coeff_deriv_patch[1] / denom;
-        coeff_deriv_other_patch[2] = (coeff_deriv_other_patch[1]
-                                      - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0]
-                                                * coeff_deriv_other_patch[0])
+        coeff_deriv_patch[n] = coeff_furthest * coeff_deriv_patch[n_minus_1] / denom;
+        coeff_deriv_other_patch[n] = (coeff_deriv_other_patch[n_minus_1]
+                                      - coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2]
+                                                * coeff_deriv_other_patch[n_minus_2])
                                      / denom;
 
         // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
         // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
-        double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
+        double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[n_minus_1] / coeff_deriv_patch[n_minus_2];
         ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx_perp) {
-            weights_patch1[2](idx_perp) = 1. / denom
-                                          * (weights_patch1[1](idx_perp)
-                                             - coeff_closer_deriv * weights_patch1[0](idx_perp));
+            weights_patch1[n](idx_perp) = 1. / denom
+                                          * (weights_patch1[n_minus_1](idx_perp)
+                                             - coeff_closer_deriv * weights_patch1[n_minus_2](idx_perp));
         });
         ddc::host_for_each(m_idx_range_perp_2, [&](IdxEdgePerp2 const& idx_perp) {
-            weights_patch2[2](idx_perp) = 1. / denom
-                                          * (weights_patch2[1](idx_perp)
-                                             - coeff_closer_deriv * weights_patch2[0](idx_perp));
+            weights_patch2[n](idx_perp) = 1. / denom
+                                          * (weights_patch2[n_minus_1](idx_perp)
+                                             - coeff_closer_deriv * weights_patch2[n_minus_2](idx_perp));
         });
-        double const factor = 1. / denom * coeff_deriv_patch[1];
+        double const factor = 1. / denom * coeff_deriv_patch[n_minus_1];
         if constexpr (is_on_patch1) {
-            weights_patch1[2](idx_plus) += factor * gamma_plus;
-            weights_patch1[2](idx_star) += factor * gamma_star;
-            weights_patch1[2](idx) += factor * gamma_idx;
-            weights_patch1[2](idx_minus) += factor * gamma_minus;
+            weights_patch1[n](idx_plus) += factor * gamma_plus;
+            weights_patch1[n](idx_star) += factor * gamma_star;
+            weights_patch1[n](idx) += factor * gamma_idx;
+            weights_patch1[n](idx_minus) += factor * gamma_minus;
         } else {
-            weights_patch2[2](idx_plus) += factor * gamma_plus;
-            weights_patch2[2](idx_star) += factor * gamma_star;
-            weights_patch2[2](idx) += factor * gamma_idx;
-            weights_patch2[2](idx_minus) += factor * gamma_minus;
+            weights_patch2[n](idx_plus) += factor * gamma_plus;
+            weights_patch2[n](idx_star) += factor * gamma_star;
+            weights_patch2[n](idx) += factor * gamma_idx;
+            weights_patch2[n](idx_minus) += factor * gamma_minus;
         }
     }
 
@@ -1192,9 +1197,9 @@ protected:
     void cycle_buffers(std::array<double, 3>& buffer)
     {
         // n-1 becomes n-2
-        buffer[0] = buffer[1];
+        buffer[n_minus_2] = buffer[n_minus_1];
         // n becomes n-1
-        buffer[1] = buffer[2];
+        buffer[n_minus_1] = buffer[n];
         // new n is ready to be defined (but still contains value of old n)
     }
 
@@ -1204,10 +1209,10 @@ protected:
         // Save n-2 allocation but values are no longer needed
         DField<IdxRangeType, MemorySpace> tmp = buffer[0];
         // n-1 becomes n-2
-        buffer[0] = buffer[1];
+        buffer[n_minus_2] = buffer[n_minus_1];
         // n becomes n-1
-        buffer[1] = buffer[2];
+        buffer[n_minus_1] = buffer[n];
         // new n is ready to be defined (but still contains value of old n-2)
-        buffer[2] = tmp;
+        buffer[n] = tmp;
     }
 };
