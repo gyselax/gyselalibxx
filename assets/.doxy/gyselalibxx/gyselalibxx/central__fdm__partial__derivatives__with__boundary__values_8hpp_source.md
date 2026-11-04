@@ -20,12 +20,12 @@
 
 template <class IdxRangeFull, class DerivativeDimension>
 class CentralFDMPartialDerivativeWithBValue
-    : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
+    : public INonAnalyticalPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
     static_assert(!DerivativeDimension::PERIODIC);
 
 private:
-    using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
+    using base_type = INonAnalyticalPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
     using DFieldMemType = DFieldMem<IdxRangeFull>;
 

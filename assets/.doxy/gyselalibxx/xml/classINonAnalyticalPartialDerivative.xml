@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classINonAnalyticalPartialDerivative" kind="class" language="C++" prot="public">
+    <compoundname>INonAnalyticalPartialDerivative</compoundname>
+    <basecompoundref refid="classIPartialDerivative" prot="public" virt="non-virtual">IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</basecompoundref>
+    <derivedcompoundref refid="classCentralFDMPartialDerivative" prot="public" virt="non-virtual">CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classCentralFDMPartialDerivativeWithBValue" prot="public" virt="non-virtual">CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;</derivedcompoundref>
+    <includes refid="ipartial__derivative_8hpp" local="no">ipartial_derivative.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class IdxRangeFull</type>
+      </param>
+      <param>
+        <type>class DerivativeDimension</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" prot="public" static="no">
+        <type>find_grid_t&lt; DerivativeDimension, ddc::to_type_seq_t&lt; IdxRangeFull &gt; &gt;</type>
+        <definition>using INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::GridDerivativeDimension =  find_grid_t&lt;DerivativeDimension, ddc::to_type_seq_t&lt;IdxRangeFull&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>GridDerivativeDimension</name>
+        <qualifiedname>INonAnalyticalPartialDerivative::GridDerivativeDimension</qualifiedname>
+        <briefdescription>
+<para>The type of the grid on the dimension on which the partial derivative is calculated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classINonAnalyticalPartialDerivative_1aea4a98526b6aa8b9b33da58c3f2efd52" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" kindref="member">GridDerivativeDimension</ref> &gt;</type>
+        <definition>using INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::IdxRangeDeriv =  IdxRange&lt;GridDerivativeDimension&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeDeriv</name>
+        <qualifiedname>INonAnalyticalPartialDerivative::IdxRangeDeriv</qualifiedname>
+        <briefdescription>
+<para>The index range of the dimension on which the partial derivative is calculated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classINonAnalyticalPartialDerivative_1ac26d05481f1bf043e9edb6426fdc3c15" prot="public" static="no">
+        <type>ddc::remove_dims_of_t&lt; IdxRangeFull, <ref refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" kindref="member">GridDerivativeDimension</ref> &gt;</type>
+        <definition>using INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, GridDerivativeDimension&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeBatch</name>
+        <qualifiedname>INonAnalyticalPartialDerivative::IdxRangeBatch</qualifiedname>
+        <briefdescription>
+<para>The index range of all dimensions except DerivativeDimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An abstract class for a non-analytical partial derivative operator. This class inherits from <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref> but adds IdxRange information which is useful when iterating over the dimension along which the derivative is defined. This information may not be relevant for an analytical <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref> as in this case no IdxRange iteration is required. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IdxRangeFull</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of the field on which the operator acts (with all dimensions, batched and dimension of interest). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivativeDimension</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension on which the partial derivative is calculated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classCentralFDMPartialDerivative"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classCentralFDMPartialDerivativeWithBValue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classINonAnalyticalPartialDerivative"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classIPartialDerivative"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classINonAnalyticalPartialDerivative"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classIPartialDerivative"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="53" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="54" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" prot="public" virt="non-virtual"><scope>INonAnalyticalPartialDerivative</scope><name>DConstFieldType</name></member>
+      <member refid="classIPartialDerivative_1aa1ff2bad1e1e51960de66ba1f9814d18" prot="public" virt="non-virtual"><scope>INonAnalyticalPartialDerivative</scope><name>DerivDim</name></member>
+      <member refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" prot="public" virt="non-virtual"><scope>INonAnalyticalPartialDerivative</scope><name>DFieldType</name></member>
+      <member refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" prot="public" virt="non-virtual"><scope>INonAnalyticalPartialDerivative</scope><name>GridDerivativeDimension</name></member>
+      <member refid="classINonAnalyticalPartialDerivative_1ac26d05481f1bf043e9edb6426fdc3c15" prot="public" virt="non-virtual"><scope>INonAnalyticalPartialDerivative</scope><name>IdxRangeBatch</name></member>
+      <member refid="classINonAnalyticalPartialDerivative_1aea4a98526b6aa8b9b33da58c3f2efd52" prot="public" virt="non-virtual"><scope>INonAnalyticalPartialDerivative</scope><name>IdxRangeDeriv</name></member>
+      <member refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" prot="public" virt="pure-virtual"><scope>INonAnalyticalPartialDerivative</scope><name>operator()</name></member>
+      <member refid="classIPartialDerivative_1a596b5a8933c387935c35461a3c5f1fcb" prot="public" virt="virtual"><scope>INonAnalyticalPartialDerivative</scope><name>~IPartialDerivative</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

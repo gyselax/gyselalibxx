@@ -23,7 +23,8 @@ template <
         class SplineEvaluator2D,
         class DerivativeDimension,
         class IdxRangeBatched>
-class Spline2DPartialDerivative : public IPartialDerivative<IdxRangeBatched, DerivativeDimension>
+class Spline2DPartialDerivative
+    : public INonAnalyticalPartialDerivative<IdxRangeBatched, DerivativeDimension>
 {
     static_assert(
             (std::is_same_v<
@@ -34,7 +35,7 @@ class Spline2DPartialDerivative : public IPartialDerivative<IdxRangeBatched, Der
                     DerivativeDimension>));
 
 private:
-    using base_type = IPartialDerivative<IdxRangeBatched, DerivativeDimension>;
+    using base_type = INonAnalyticalPartialDerivative<IdxRangeBatched, DerivativeDimension>;
 
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;

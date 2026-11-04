@@ -584,10 +584,11 @@
 
 
 template &lt;class IdxRangeFull, class DerivativeDimension&gt;
-class CentralFDMPartialDerivative : public IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;
+class CentralFDMPartialDerivative
+    : public INonAnalyticalPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;
 {
 private:
-    using base_type = IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;;
+    using base_type = INonAnalyticalPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;;
 
     using DFieldMemType = DFieldMem&lt;IdxRangeFull&gt;;
 

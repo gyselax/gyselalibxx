@@ -16,7 +16,7 @@ _A class which implements a partial derivative operator using a 1d spline interp
 
 
 
-Inherits the following classes: [IPartialDerivative](classIPartialDerivative.md)
+Inherits the following classes: [INonAnalyticalPartialDerivative](classINonAnalyticalPartialDerivative.md)
 
 
 
@@ -31,6 +31,17 @@ Inherits the following classes: [IPartialDerivative](classIPartialDerivative.md)
 
 
 
+
+
+## Public Types inherited from INonAnalyticalPartialDerivative
+
+See [INonAnalyticalPartialDerivative](classINonAnalyticalPartialDerivative.md)
+
+| Type | Name |
+| ---: | :--- |
+| typedef find\_grid\_t&lt; DerivativeDimension, ddc::to\_type\_seq\_t&lt; IdxRangeFull &gt; &gt; | [**GridDerivativeDimension**](classINonAnalyticalPartialDerivative.md#typedef-gridderivativedimension)  <br>_The type of the grid on the dimension on which the partial derivative is calculated._  |
+| typedef ddc::remove\_dims\_of\_t&lt; IdxRangeFull, [**GridDerivativeDimension**](classINonAnalyticalPartialDerivative.md#typedef-gridderivativedimension) &gt; | [**IdxRangeBatch**](classINonAnalyticalPartialDerivative.md#typedef-idxrangebatch)  <br>_The index range of all dimensions except DerivativeDimension._  |
+| typedef IdxRange&lt; [**GridDerivativeDimension**](classINonAnalyticalPartialDerivative.md#typedef-gridderivativedimension) &gt; | [**IdxRangeDeriv**](classINonAnalyticalPartialDerivative.md#typedef-idxrangederiv)  <br>_The index range of the dimension on which the partial derivative is calculated._  |
 
 
 ## Public Types inherited from IPartialDerivative
@@ -41,9 +52,25 @@ See [IPartialDerivative](classIPartialDerivative.md)
 | ---: | :--- |
 | typedef DConstField&lt; IdxRangeFull &gt; | [**DConstFieldType**](classIPartialDerivative.md#typedef-dconstfieldtype)  <br>_The type of a constant reference to the field to be differentiated._  |
 | typedef DField&lt; IdxRangeFull &gt; | [**DFieldType**](classIPartialDerivative.md#typedef-dfieldtype)  <br>_The type of a reference to the field to be differentiated._  |
-| typedef find\_grid\_t&lt; DerivativeDimension, ddc::to\_type\_seq\_t&lt; IdxRangeFull &gt; &gt; | [**GridDerivativeDimension**](classIPartialDerivative.md#typedef-gridderivativedimension)  <br>_The type of the grid on the dimension on which the partial derivative is calculated._  |
-| typedef ddc::remove\_dims\_of\_t&lt; IdxRangeFull, [**GridDerivativeDimension**](classIPartialDerivative.md#typedef-gridderivativedimension) &gt; | [**IdxRangeBatch**](classIPartialDerivative.md#typedef-idxrangebatch)  <br>_The index range of all dimensions except DerivativeDimension._  |
-| typedef IdxRange&lt; [**GridDerivativeDimension**](classIPartialDerivative.md#typedef-gridderivativedimension) &gt; | [**IdxRangeDeriv**](classIPartialDerivative.md#typedef-idxrangederiv)  <br>_The index range of the dimension on which the partial derivative is calculated._  |
+| typedef DerivativeDimension | [**DerivDim**](classIPartialDerivative.md#typedef-derivdim)  <br>_The dimension on which the partial derivative is calculated._  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -90,6 +117,8 @@ See [IPartialDerivative](classIPartialDerivative.md)
 | virtual void | [**operator()**](#function-operator) ([**DFieldType**](classIPartialDerivative.md#typedef-dfieldtype) differentiated\_field) const<br>_Compute the partial derivative of a field in the direction where the field is represented using 1d splines._  |
 
 
+
+
 ## Public Functions inherited from IPartialDerivative
 
 See [IPartialDerivative](classIPartialDerivative.md)
@@ -98,6 +127,32 @@ See [IPartialDerivative](classIPartialDerivative.md)
 | ---: | :--- |
 | virtual void | [**operator()**](classIPartialDerivative.md#function-operator) ([**DFieldType**](classIPartialDerivative.md#typedef-dfieldtype) differentiated\_field) const = 0<br>_Compute the partial derivative of a field in a given direction._  |
 | virtual  | [**~IPartialDerivative**](classIPartialDerivative.md#function-ipartialderivative) () = default<br> |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

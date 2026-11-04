@@ -333,16 +333,14 @@
     <member refid="classCartesianToCzarny_1a00367ac2ea336f4e7f4dd25f1dc34ee9" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classCentralFDMPartialDerivative" kind="class"><name>CentralFDMPartialDerivative</name>
-    <member refid="classCentralFDMPartialDerivative_1a7bdf59407f13c8b5910573a98bf3cac8" kind="typedef"><name>base_type</name></member>
+    <member refid="classCentralFDMPartialDerivative_1a92f815ca9f8e3b44aab21558a613d901" kind="typedef"><name>base_type</name></member>
     <member refid="classCentralFDMPartialDerivative_1a323d706a205681218b9c28d16e65b4d5" kind="typedef"><name>DFieldMemType</name></member>
     <member refid="classCentralFDMPartialDerivative_1a885eb53b48bf5d1d6c89d3cfd07028aa" kind="typedef"><name>IdxFull</name></member>
     <member refid="classCentralFDMPartialDerivative_1ae3e1c39b938374ea25419e820aa46a73" kind="typedef"><name>IdxDeriv</name></member>
     <member refid="classCentralFDMPartialDerivative_1ab10f56286fc79bf60563f0d1b9d9576f" kind="typedef"><name>IdxBatch</name></member>
     <member refid="classCentralFDMPartialDerivative_1af5255c9e4eb9ad6b8598899d4ecee989" kind="typedef"><name>IdxStepDeriv</name></member>
-    <member refid="classCentralFDMPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>
-    <member refid="classCentralFDMPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kind="typedef"><name>DConstFieldType</name></member>
-    <member refid="classCentralFDMPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" kind="typedef"><name>IdxRangeDeriv</name></member>
-    <member refid="classCentralFDMPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classCentralFDMPartialDerivative_1aea4a98526b6aa8b9b33da58c3f2efd52" kind="typedef"><name>IdxRangeDeriv</name></member>
+    <member refid="classCentralFDMPartialDerivative_1ac26d05481f1bf043e9edb6426fdc3c15" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classCentralFDMPartialDerivative_1a64a1c06f33429b26b0314b5093032a90" kind="variable"><name>m_field</name></member>
     <member refid="classCentralFDMPartialDerivative_1ae8f8ac87a6f138392ad8cba23e68a302" kind="function"><name>n_local_points</name></member>
     <member refid="classCentralFDMPartialDerivative_1a592f746cf68ea37b0a2f8049bbda7846" kind="function"><name>get_derivative</name></member>
@@ -357,12 +355,10 @@
     <member refid="classCentralFDMPartialDerivativeCreator_1ad19b8c061f9439104762c2c46edbbd6d" kind="function"><name>create_instance</name></member>
   </compound>
   <compound refid="classCentralFDMPartialDerivativeWithBValue" kind="class"><name>CentralFDMPartialDerivativeWithBValue</name>
-    <member refid="classCentralFDMPartialDerivativeWithBValue_1a7a50a30ad07bb6fc4e0b6779efaa92b4" kind="typedef"><name>base_type</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a32fa0fe81107075c5e6053492ce3860d" kind="typedef"><name>base_type</name></member>
     <member refid="classCentralFDMPartialDerivativeWithBValue_1a523c53585bf83c1972e4d935f9a8b9e5" kind="typedef"><name>DFieldMemType</name></member>
-    <member refid="classCentralFDMPartialDerivativeWithBValue_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>
-    <member refid="classCentralFDMPartialDerivativeWithBValue_1a85c8b026718b72ff0c996c4503b95136" kind="typedef"><name>DConstFieldType</name></member>
-    <member refid="classCentralFDMPartialDerivativeWithBValue_1ae5e7d597e015b5024376bb27091c096d" kind="typedef"><name>IdxRangeDeriv</name></member>
-    <member refid="classCentralFDMPartialDerivativeWithBValue_1a883ec2b528cf2188db6e593ae849fe0e" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1aea4a98526b6aa8b9b33da58c3f2efd52" kind="typedef"><name>IdxRangeDeriv</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1ac26d05481f1bf043e9edb6426fdc3c15" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classCentralFDMPartialDerivativeWithBValue_1ab9d589da0cfdc7fefb9c2c8c17e320cf" kind="variable"><name>m_field</name></member>
     <member refid="classCentralFDMPartialDerivativeWithBValue_1ae806f08c0f2c0555b1d863ceb98354f3" kind="variable"><name>m_b_value_left</name></member>
     <member refid="classCentralFDMPartialDerivativeWithBValue_1a8a991398c5d27ca55eabb5f7251c403f" kind="variable"><name>m_b_value_right</name></member>
@@ -1770,6 +1766,11 @@
     <member refid="classInfNormResidual_1a1546a19f4f53667c52843e89471c2966" kind="function"><name>InfNormResidual</name></member>
     <member refid="classInfNormResidual_1a54e6c1d29ecb14474c0cca25945efb83" kind="function"><name>InfNormResidual</name></member>
   </compound>
+  <compound refid="classINonAnalyticalPartialDerivative" kind="class"><name>INonAnalyticalPartialDerivative</name>
+    <member refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" kind="typedef"><name>GridDerivativeDimension</name></member>
+    <member refid="classINonAnalyticalPartialDerivative_1aea4a98526b6aa8b9b33da58c3f2efd52" kind="typedef"><name>IdxRangeDeriv</name></member>
+    <member refid="classINonAnalyticalPartialDerivative_1ac26d05481f1bf043e9edb6426fdc3c15" kind="typedef"><name>IdxRangeBatch</name></member>
+  </compound>
   <compound refid="structInterface" kind="struct"><name>Interface</name>
     <member refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kind="typedef"><name>Edge1</name></member>
     <member refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kind="typedef"><name>Edge2</name></member>
@@ -2004,11 +2005,9 @@
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a9e01f463b7bcc0cb3d04006ea1455ed1" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIPartialDerivative" kind="class"><name>IPartialDerivative</name>
+    <member refid="classIPartialDerivative_1aa1ff2bad1e1e51960de66ba1f9814d18" kind="typedef"><name>DerivDim</name></member>
     <member refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>
     <member refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kind="typedef"><name>DConstFieldType</name></member>
-    <member refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" kind="typedef"><name>GridDerivativeDimension</name></member>
-    <member refid="classIPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" kind="typedef"><name>IdxRangeDeriv</name></member>
-    <member refid="classIPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classIPartialDerivative_1a596b5a8933c387935c35461a3c5f1fcb" kind="function"><name>~IPartialDerivative</name></member>
     <member refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" kind="function"><name>operator()</name></member>
   </compound>
@@ -3263,7 +3262,7 @@
   </compound>
   <compound refid="classSpline1DPartialDerivative" kind="class"><name>Spline1DPartialDerivative</name>
     <member refid="classSpline1DPartialDerivative_1aec57ca28aec111a814d9d453cc2178a3" kind="typedef"><name>DerivativeDimension</name></member>
-    <member refid="classSpline1DPartialDerivative_1afd0de2d26355cdc1e0abcf20f629e5de" kind="typedef"><name>base_type</name></member>
+    <member refid="classSpline1DPartialDerivative_1a931cc8f87ef23e5adae26c0f1911801f" kind="typedef"><name>base_type</name></member>
     <member refid="classSpline1DPartialDerivative_1ab44b19215aa929a5a5fc81f535ca2316" kind="typedef"><name>IdxRangeBS</name></member>
     <member refid="classSpline1DPartialDerivative_1aa2bcb388d7d88bed3fe5a1d7dd36c47e" kind="typedef"><name>DFieldBSMem</name></member>
     <member refid="classSpline1DPartialDerivative_1ab71f56f8d6c9b0cc07d937acc9bfd293" kind="typedef"><name>DFieldBS</name></member>
@@ -3281,7 +3280,7 @@
     <member refid="classSpline1DPartialDerivativeCreator_1ad65387bde713d87c77e89eb39be94ca6" kind="function"><name>create_instance</name></member>
   </compound>
   <compound refid="classSpline2DPartialDerivative" kind="class"><name>Spline2DPartialDerivative</name>
-    <member refid="classSpline2DPartialDerivative_1a215d1e817dba2b14e16c15ddd53c3bc7" kind="typedef"><name>base_type</name></member>
+    <member refid="classSpline2DPartialDerivative_1a573f6520ca2b884f53ac96161cb0ee84" kind="typedef"><name>base_type</name></member>
     <member refid="classSpline2DPartialDerivative_1a2040e0968d53f1264d49cd574846d8cc" kind="typedef"><name>IdxRangeBS</name></member>
     <member refid="classSpline2DPartialDerivative_1ad9312c8881c576b1456e780bcd09d389" kind="typedef"><name>DFieldBSMem</name></member>
     <member refid="classSpline2DPartialDerivative_1abc52c9393410ebdec54ed4cf82e7b14e" kind="typedef"><name>DFieldBS</name></member>

@@ -20,10 +20,11 @@
 
 
 template <class IdxRangeFull, class DerivativeDimension>
-class CentralFDMPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
+class CentralFDMPartialDerivative
+    : public INonAnalyticalPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
 private:
-    using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
+    using base_type = INonAnalyticalPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
     using DFieldMemType = DFieldMem<IdxRangeFull>;
 

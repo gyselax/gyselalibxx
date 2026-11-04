@@ -38,6 +38,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| class | [**INonAnalyticalPartialDerivative**](classINonAnalyticalPartialDerivative.md) &lt;class IdxRangeFull, class DerivativeDimension&gt;<br>_An abstract class for a non-analytical partial derivative operator. This class inherits from_ [_**IPartialDerivative**_](classIPartialDerivative.md) _but adds IdxRange information which is useful when iterating over the dimension along which the derivative is defined. This information may not be relevant for an analytical_[_**IPartialDerivative**_](classIPartialDerivative.md) _as in this case no IdxRange iteration is required._ |
 | class | [**IPartialDerivative**](classIPartialDerivative.md) &lt;class IdxRangeFull, class DerivativeDimension&gt;<br>_An abstract class for a partial derivative operator._  |
 | class | [**IPartialDerivativeCreator**](classIPartialDerivativeCreator.md) &lt;class IdxRangeFull, class DerivativeDimension&gt;<br>_An abstract class which provides a create\_instance function to instantiate an object of the_ [_**IPartialDerivative**_](classIPartialDerivative.md) _class where required._ |
 

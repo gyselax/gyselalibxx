@@ -622,19 +622,29 @@ struct TypeSeqRange&lt;TypeSeqIn, Start, End, End, TypeSeqOut&gt;
 template &lt;class Dim, class TypeSeqGrid&gt;
 struct FindGrid;
 
+template &lt;class HeadGrid, class... Grids&gt;
+struct FindGrid&lt;HeadGrid, ddc::TypeSeq&lt;HeadGrid, Grids...&gt;&gt;
+{
+    using type = HeadGrid;
+};
+
+template &lt;class HeadGrid, class... Grids&gt;
+struct FindGrid&lt;typename HeadGrid::continuous_dimension_type, ddc::TypeSeq&lt;HeadGrid, Grids...&gt;&gt;
+{
+    using type = HeadGrid;
+};
+
 template &lt;class Dim, class HeadGrid, class... Grids&gt;
 struct FindGrid&lt;Dim, ddc::TypeSeq&lt;HeadGrid, Grids...&gt;&gt;
 {
-    using type = std::conditional_t&lt;
-            std::is_same_v&lt;typename GetCDim&lt;HeadGrid&gt;::type, Dim&gt;,
-            HeadGrid,
-            typename FindGrid&lt;Dim, ddc::TypeSeq&lt;Grids...&gt;&gt;::type&gt;;
+    static_assert(!std::is_same_v&lt;typename GetCDim&lt;HeadGrid&gt;::type, Dim&gt;);
+    using type = typename FindGrid&lt;Dim, ddc::TypeSeq&lt;Grids...&gt;&gt;::type;
 };
 
 template &lt;class Dim&gt;
 struct FindGrid&lt;Dim, ddc::TypeSeq&lt;&gt;&gt;
 {
-    static_assert(std::is_same_v&lt;Dim, Dim&gt;, "Grid not found");
+    static_assert(!std::is_same_v&lt;Dim, Dim&gt;, "Grid not found");
     using type = void;
 };
 

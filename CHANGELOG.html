@@ -756,6 +756,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Fix compilation errors due to use of <code>std::make_tuple</code> in functions that are GPU compatible.</li>
 <li>Fix errors in <code>InterfaceDerivCoeffs</code> for uniform patches with a different <span class="arithmatex">\(\Delta x\)</span>.</li>
 <li>Fix Jean-Zay environment with missing environment variables.</li>
+<li>Fix missing error when using <code>find_grid_t</code>.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>
@@ -785,6 +786,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Use Spack to install packages in the docker image.</li>
 <li>Rename <code>MultipatchSplineBuilder</code> to <code>SplineBuilderCollection</code>.</li>
 <li>Rename <code>MultipatchSplineBuilder2D</code> to <code>SplineBuilder2DCollection</code>.</li>
+<li>Move non-analytical type aliases from <code>IPartialDerivative</code> to new class <code>INonAnalyticalPartialDerivative</code>.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

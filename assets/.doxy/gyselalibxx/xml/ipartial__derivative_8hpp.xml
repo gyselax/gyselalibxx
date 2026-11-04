@@ -110,6 +110,7 @@
       </node>
     </invincdepgraph>
     <innerclass refid="classIPartialDerivative" prot="public">IPartialDerivative</innerclass>
+    <innerclass refid="classINonAnalyticalPartialDerivative" prot="public">INonAnalyticalPartialDerivative</innerclass>
     <innerclass refid="classIPartialDerivativeCreator" prot="public">IPartialDerivativeCreator</innerclass>
     <innerconcept refid="conceptconcepts_1_1LocalPartialDerivative">concepts::LocalPartialDerivative</innerconcept>
     <innerconcept refid="conceptconcepts_1_1LocalPartialDerivativeCreator">concepts::LocalPartialDerivativeCreator</innerconcept>
@@ -133,58 +134,63 @@
 <codeline lineno="19" refid="classIPartialDerivative" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref></highlight></codeline>
 <codeline lineno="20"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="23" refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">DFieldType</ref><sp/>=<sp/>DField&lt;IdxRangeFull&gt;;</highlight></codeline>
+<codeline lineno="23" refid="classIPartialDerivative_1aa1ff2bad1e1e51960de66ba1f9814d18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1aa1ff2bad1e1e51960de66ba1f9814d18" kindref="member">DerivDim</ref><sp/>=<sp/>DerivativeDimension;</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26" refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kindref="member">DConstFieldType</ref><sp/>=<sp/>DConstField&lt;IdxRangeFull&gt;;</highlight></codeline>
+<codeline lineno="26" refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">DFieldType</ref><sp/>=<sp/>DField&lt;IdxRangeFull&gt;;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" kindref="member">GridDerivativeDimension</ref></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>find_grid_t&lt;DerivativeDimension,<sp/>ddc::to_type_seq_t&lt;IdxRangeFull&gt;&gt;;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" kindref="member">IdxRangeDeriv</ref><sp/>=<sp/>IdxRange&lt;GridDerivativeDimension&gt;;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" kindref="member">IdxRangeBatch</ref><sp/>=<sp/>ddc::remove_dims_of_t&lt;IdxRangeFull,<sp/>GridDerivativeDimension&gt;;</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative" kindref="compound">~IPartialDerivative</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" kindref="member">operator()</ref>(<ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">DFieldType</ref><sp/>differentiated_field)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeFull,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DerivativeDimension&gt;</highlight></codeline>
-<codeline lineno="54" refid="classIPartialDerivativeCreator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivativeCreator" kindref="compound">IPartialDerivativeCreator</ref></highlight></codeline>
-<codeline lineno="55"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="66" refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>std::unique_ptr&lt;IPartialDerivative&lt;IdxRangeFull,<sp/>DerivativeDimension&gt;&gt;<sp/><ref refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" kindref="member">create_instance</ref>(</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstField&lt;IdxRangeFull&gt;<sp/>field)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="68"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">concepts<sp/>{</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="73" refid="conceptconcepts_1_1LocalPartialDerivative" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="conceptconcepts_1_1LocalPartialDerivative" kindref="compound">LocalPartialDerivative</ref><sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">()</highlight></codeline>
+<codeline lineno="29" refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kindref="member">DConstFieldType</ref><sp/>=<sp/>DConstField&lt;IdxRangeFull&gt;;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative" kindref="compound">~IPartialDerivative</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" kindref="member">operator()</ref>(<ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">DFieldType</ref><sp/>differentiated_field)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeFull,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DerivativeDimension&gt;</highlight></codeline>
+<codeline lineno="53" refid="classINonAnalyticalPartialDerivative" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classINonAnalyticalPartialDerivative" kindref="compound">INonAnalyticalPartialDerivative</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt;IdxRangeFull,<sp/>DerivativeDimension&gt;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="57" refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" kindref="member">GridDerivativeDimension</ref></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>find_grid_t&lt;DerivativeDimension,<sp/>ddc::to_type_seq_t&lt;IdxRangeFull&gt;&gt;;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classINonAnalyticalPartialDerivative_1aea4a98526b6aa8b9b33da58c3f2efd52" kindref="member">IdxRangeDeriv</ref><sp/>=<sp/>IdxRange&lt;GridDerivativeDimension&gt;;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classINonAnalyticalPartialDerivative_1ac26d05481f1bf043e9edb6426fdc3c15" kindref="member">IdxRangeBatch</ref><sp/>=<sp/>ddc::remove_dims_of_t&lt;IdxRangeFull,<sp/>GridDerivativeDimension&gt;;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeFull,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DerivativeDimension&gt;</highlight></codeline>
+<codeline lineno="73" refid="classIPartialDerivativeCreator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classIPartialDerivativeCreator" kindref="compound">IPartialDerivativeCreator</ref></highlight></codeline>
 <codeline lineno="74"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T::n_local_points()</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;int&gt;;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="79"><highlight class="normal">&amp;&amp;</highlight><highlight class="keyword">requires</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::array&lt;</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;typename<sp/>T::GridDerivativeDimension::continuous_dimension_type&gt;,</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T::n_local_points()&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>pos,</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::array&lt;double,<sp/>T::n_local_points()&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>vals)</highlight></codeline>
-<codeline lineno="84"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T::get_derivative(pos,<sp/>vals)</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;double&gt;;</highlight></codeline>
-<codeline lineno="88"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="91" refid="conceptconcepts_1_1LocalPartialDerivativeCreator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="conceptconcepts_1_1LocalPartialDerivativeCreator" kindref="compound">LocalPartialDerivativeCreator</ref><sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T::partial_derivative_type;</highlight></codeline>
-<codeline lineno="94"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="95"><highlight class="normal">&amp;&amp;<ref refid="conceptconcepts_1_1LocalPartialDerivative" kindref="compound">LocalPartialDerivative&lt;typename T::partial_derivative_type&gt;</ref>;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>concepts</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="85" refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>std::unique_ptr&lt;IPartialDerivative&lt;IdxRangeFull,<sp/>DerivativeDimension&gt;&gt;<sp/><ref refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" kindref="member">create_instance</ref>(</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstField&lt;IdxRangeFull&gt;<sp/>field)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">concepts<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="92" refid="conceptconcepts_1_1LocalPartialDerivative" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="conceptconcepts_1_1LocalPartialDerivative" kindref="compound">LocalPartialDerivative</ref><sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">()</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T::n_local_points()</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;int&gt;;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">&amp;&amp;</highlight><highlight class="keyword">requires</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::array&lt;Coord&lt;typename<sp/>T::DerivDim&gt;,<sp/>T::n_local_points()&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>pos,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::array&lt;double,<sp/>T::n_local_points()&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>vals)</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T::get_derivative(pos,<sp/>vals)</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;double&gt;;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="108" refid="conceptconcepts_1_1LocalPartialDerivativeCreator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="conceptconcepts_1_1LocalPartialDerivativeCreator" kindref="compound">LocalPartialDerivativeCreator</ref><sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T::partial_derivative_type;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">&amp;&amp;<ref refid="conceptconcepts_1_1LocalPartialDerivative" kindref="compound">LocalPartialDerivative&lt;typename T::partial_derivative_type&gt;</ref>;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>concepts</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp"/>
   </compounddef>

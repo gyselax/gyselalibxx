@@ -576,7 +576,31 @@
 <ul>
 <li><code>#include &lt;spline_1d_partial_derivative.hpp&gt;</code></li>
 </ul>
-<p>Inherits the following classes: <a href="classIPartialDerivative.html">IPartialDerivative</a></p>
+<p>Inherits the following classes: <a href="classINonAnalyticalPartialDerivative.html">INonAnalyticalPartialDerivative</a></p>
+<h2 id="public-types-inherited-from-inonanalyticalpartialderivative">Public Types inherited from INonAnalyticalPartialDerivative</h2>
+<p>See <a href="classINonAnalyticalPartialDerivative.html">INonAnalyticalPartialDerivative</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef find_grid_t&lt; DerivativeDimension, ddc::to_type_seq_t&lt; IdxRangeFull &gt; &gt;</td>
+<td style="text-align: left;"><a href="classINonAnalyticalPartialDerivative.html#typedef-gridderivativedimension"><strong>GridDerivativeDimension</strong></a>  <br><em>The type of the grid on the dimension on which the partial derivative is calculated.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::remove_dims_of_t&lt; IdxRangeFull, <a href="classINonAnalyticalPartialDerivative.html#typedef-gridderivativedimension"><strong>GridDerivativeDimension</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classINonAnalyticalPartialDerivative.html#typedef-idxrangebatch"><strong>IdxRangeBatch</strong></a>  <br><em>The index range of all dimensions except DerivativeDimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="classINonAnalyticalPartialDerivative.html#typedef-gridderivativedimension"><strong>GridDerivativeDimension</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classINonAnalyticalPartialDerivative.html#typedef-idxrangederiv"><strong>IdxRangeDeriv</strong></a>  <br><em>The index range of the dimension on which the partial derivative is calculated.</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-types-inherited-from-ipartialderivative">Public Types inherited from IPartialDerivative</h2>
 <p>See <a href="classIPartialDerivative.html">IPartialDerivative</a></p>
 <table>
@@ -596,16 +620,8 @@
 <td style="text-align: left;"><a href="classIPartialDerivative.html#typedef-dfieldtype"><strong>DFieldType</strong></a>  <br><em>The type of a reference to the field to be differentiated.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef find_grid_t&lt; DerivativeDimension, ddc::to_type_seq_t&lt; IdxRangeFull &gt; &gt;</td>
-<td style="text-align: left;"><a href="classIPartialDerivative.html#typedef-gridderivativedimension"><strong>GridDerivativeDimension</strong></a>  <br><em>The type of the grid on the dimension on which the partial derivative is calculated.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::remove_dims_of_t&lt; IdxRangeFull, <a href="classIPartialDerivative.html#typedef-gridderivativedimension"><strong>GridDerivativeDimension</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="classIPartialDerivative.html#typedef-idxrangebatch"><strong>IdxRangeBatch</strong></a>  <br><em>The index range of all dimensions except DerivativeDimension.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="classIPartialDerivative.html#typedef-gridderivativedimension"><strong>GridDerivativeDimension</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="classIPartialDerivative.html#typedef-idxrangederiv"><strong>IdxRangeDeriv</strong></a>  <br><em>The index range of the dimension on which the partial derivative is calculated.</em></td>
+<td style="text-align: right;">typedef DerivativeDimension</td>
+<td style="text-align: left;"><a href="classIPartialDerivative.html#typedef-derivdim"><strong>DerivDim</strong></a>  <br><em>The dimension on which the partial derivative is calculated.</em></td>
 </tr>
 </tbody>
 </table>

@@ -806,12 +806,12 @@ public:
             physical_idx_range_type val_idx_range,
             ddc::StridedDiscreteDomain&lt;
                     DerivDoms&gt;... m_deriv_idx_range) requires(sizeof...(DerivDoms) == ddc::type_seq_size_v&lt;deriv_tags&gt;)
-        : m_label(label)
-        , base_type(
-                  val_idx_range,
-                  get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
-                  ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt;physical_deriv_grids&gt;(
-                          m_deriv_idx_range...))
+        : base_type(
+                val_idx_range,
+                get_deriv_range(physical_deriv_idx_range_type(val_idx_range)),
+                ddc::detail::convert_type_seq_to_strided_discrete_domain_t&lt;physical_deriv_grids&gt;(
+                        m_deriv_idx_range...))
+        , m_label(label)
     {
         static_assert(ddc::type_seq_same_v&lt;ddc::TypeSeq&lt;DerivDoms...&gt;, physical_deriv_grids&gt;);
         initialise_chunks(label, allocator, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});

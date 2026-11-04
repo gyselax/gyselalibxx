@@ -586,20 +586,27 @@ template &lt;class IdxRangeFull, class DerivativeDimension&gt;
 class IPartialDerivative
 {
 public:
+    using DerivDim = DerivativeDimension;
+
     using DFieldType = DField&lt;IdxRangeFull&gt;;
 
     using DConstFieldType = DConstField&lt;IdxRangeFull&gt;;
 
+    virtual ~IPartialDerivative() = default;
+
+    virtual void operator()(DFieldType differentiated_field) const = 0;
+};
+
+template &lt;class IdxRangeFull, class DerivativeDimension&gt;
+class INonAnalyticalPartialDerivative : public IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;
+{
+public:
     using GridDerivativeDimension
             = find_grid_t&lt;DerivativeDimension, ddc::to_type_seq_t&lt;IdxRangeFull&gt;&gt;;
 
     using IdxRangeDeriv = IdxRange&lt;GridDerivativeDimension&gt;;
 
     using IdxRangeBatch = ddc::remove_dims_of_t&lt;IdxRangeFull, GridDerivativeDimension&gt;;
-
-    virtual ~IPartialDerivative() = default;
-
-    virtual void operator()(DFieldType differentiated_field) const = 0;
 };
 
 template &lt;class IdxRangeFull, class DerivativeDimension&gt;
@@ -620,9 +627,7 @@ concept LocalPartialDerivative = requires()
         } -&gt; std::same_as&lt;int&gt;;
 }
 &amp;&amp;requires(
-        std::array&lt;
-                Coord&lt;typename T::GridDerivativeDimension::continuous_dimension_type&gt;,
-                T::n_local_points()&gt; const&amp; pos,
+        std::array&lt;Coord&lt;typename T::DerivDim&gt;, T::n_local_points()&gt; const&amp; pos,
         std::array&lt;double, T::n_local_points()&gt; const&amp; vals)
 {
     {

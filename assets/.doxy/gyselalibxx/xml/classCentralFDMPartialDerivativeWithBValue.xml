@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classCentralFDMPartialDerivativeWithBValue" kind="class" language="C++" prot="public">
     <compoundname>CentralFDMPartialDerivativeWithBValue</compoundname>
-    <basecompoundref refid="classIPartialDerivative" prot="public" virt="non-virtual">IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</basecompoundref>
+    <basecompoundref refid="classINonAnalyticalPartialDerivative" prot="public" virt="non-virtual">INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</basecompoundref>
     <includes refid="central__fdm__partial__derivatives__with__boundary__values_8hpp" local="no">central_fdm_partial_derivatives_with_boundary_values.hpp</includes>
     <templateparamlist>
       <param>
@@ -13,9 +13,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a7a50a30ad07bb6fc4e0b6779efaa92b4" prot="private" static="no">
-        <type><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt; IdxRangeFull, DerivativeDimension &gt;</type>
-        <definition>using CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::base_type =  IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;</definition>
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a32fa0fe81107075c5e6053492ce3860d" prot="private" static="no">
+        <type><ref refid="classINonAnalyticalPartialDerivative" kindref="compound">INonAnalyticalPartialDerivative</ref>&lt; IdxRangeFull, DerivativeDimension &gt;</type>
+        <definition>using CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::base_type =  INonAnalyticalPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;</definition>
         <argsstring></argsstring>
         <name>base_type</name>
         <qualifiedname>CentralFDMPartialDerivativeWithBValue::base_type</qualifiedname>
@@ -42,39 +42,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="31" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a47c973564187001a3097fe9b0eb901d5" prot="private" static="no">
-        <type>DField&lt; IdxRangeFull &gt;</type>
-        <definition>using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::DFieldType =  DField&lt;IdxRangeFull&gt;</definition>
-        <argsstring></argsstring>
-        <name>DFieldType</name>
-        <qualifiedname>CentralFDMPartialDerivativeWithBValue::DFieldType</qualifiedname>
-        <briefdescription>
-<para>The type of a reference to the field to be differentiated. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="34" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="23" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a85c8b026718b72ff0c996c4503b95136" prot="private" static="no">
-        <type>DConstField&lt; IdxRangeFull &gt;</type>
-        <definition>using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::DConstFieldType =  DConstField&lt;IdxRangeFull&gt;</definition>
-        <argsstring></argsstring>
-        <name>DConstFieldType</name>
-        <qualifiedname>CentralFDMPartialDerivativeWithBValue::DConstFieldType</qualifiedname>
-        <briefdescription>
-<para>The type of a constant reference to the field to be differentiated. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="37" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="26" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1ae5e7d597e015b5024376bb27091c096d" prot="private" static="no">
-        <type>IdxRange&lt; <ref refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" kindref="member">GridDerivativeDimension</ref> &gt;</type>
-        <definition>using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::IdxRangeDeriv =  IdxRange&lt;GridDerivativeDimension&gt;</definition>
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1aea4a98526b6aa8b9b33da58c3f2efd52" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" kindref="member">GridDerivativeDimension</ref> &gt;</type>
+        <definition>using INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::IdxRangeDeriv =  IdxRange&lt;GridDerivativeDimension&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeDeriv</name>
         <qualifiedname>CentralFDMPartialDerivativeWithBValue::IdxRangeDeriv</qualifiedname>
@@ -85,11 +55,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="40" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="32" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="40" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a883ec2b528cf2188db6e593ae849fe0e" prot="private" static="no">
-        <type>ddc::remove_dims_of_t&lt; IdxRangeFull, <ref refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" kindref="member">GridDerivativeDimension</ref> &gt;</type>
-        <definition>using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, GridDerivativeDimension&gt;</definition>
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1ac26d05481f1bf043e9edb6426fdc3c15" prot="private" static="no">
+        <type>ddc::remove_dims_of_t&lt; IdxRangeFull, <ref refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" kindref="member">GridDerivativeDimension</ref> &gt;</type>
+        <definition>using INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, GridDerivativeDimension&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatch</name>
         <qualifiedname>CentralFDMPartialDerivativeWithBValue::IdxRangeBatch</qualifiedname>
@@ -100,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -156,7 +126,7 @@
         <name>CentralFDMPartialDerivativeWithBValue</name>
         <qualifiedname>CentralFDMPartialDerivativeWithBValue::CentralFDMPartialDerivativeWithBValue</qualifiedname>
         <param>
-          <type>DConstFieldType const</type>
+          <type><ref refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kindref="member">DConstFieldType</ref> const</type>
           <declname>field_ref</declname>
         </param>
         <param>
@@ -210,7 +180,7 @@
         <qualifiedname>CentralFDMPartialDerivativeWithBValue::operator()</qualifiedname>
         <reimplements refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353">operator()</reimplements>
         <param>
-          <type>DFieldType</type>
+          <type><ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">DFieldType</ref></type>
           <declname>differentiated_field</declname>
         </param>
         <briefdescription>
@@ -264,6 +234,12 @@
         </childnode>
       </node>
       <node id="2">
+        <label>INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classINonAnalyticalPartialDerivative"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
         <label>IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
         <link refid="classIPartialDerivative"/>
       </node>
@@ -276,20 +252,27 @@
         </childnode>
       </node>
       <node id="2">
+        <label>INonAnalyticalPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classINonAnalyticalPartialDerivative"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
         <label>IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
         <link refid="classIPartialDerivative"/>
       </node>
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="24" bodyend="161"/>
     <listofallmembers>
-      <member refid="classCentralFDMPartialDerivativeWithBValue_1a7a50a30ad07bb6fc4e0b6779efaa92b4" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>base_type</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a32fa0fe81107075c5e6053492ce3860d" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>base_type</name></member>
       <member refid="classCentralFDMPartialDerivativeWithBValue_1a863a67e5251dd75b98ee699bec3e9881" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>CentralFDMPartialDerivativeWithBValue</name></member>
-      <member refid="classCentralFDMPartialDerivativeWithBValue_1a85c8b026718b72ff0c996c4503b95136" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DConstFieldType</name></member>
+      <member refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DConstFieldType</name></member>
+      <member refid="classIPartialDerivative_1aa1ff2bad1e1e51960de66ba1f9814d18" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DerivDim</name></member>
       <member refid="classCentralFDMPartialDerivativeWithBValue_1a523c53585bf83c1972e4d935f9a8b9e5" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DFieldMemType</name></member>
-      <member refid="classCentralFDMPartialDerivativeWithBValue_1a47c973564187001a3097fe9b0eb901d5" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DFieldType</name></member>
-      <member refid="classIPartialDerivative_1a821d784a9f763be4f877c5ece5e4d92d" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>GridDerivativeDimension</name></member>
-      <member refid="classCentralFDMPartialDerivativeWithBValue_1a883ec2b528cf2188db6e593ae849fe0e" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>IdxRangeBatch</name></member>
-      <member refid="classCentralFDMPartialDerivativeWithBValue_1ae5e7d597e015b5024376bb27091c096d" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>IdxRangeDeriv</name></member>
+      <member refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DFieldType</name></member>
+      <member refid="classINonAnalyticalPartialDerivative_1ab50a70985f218b47a4eec970f3ec97e8" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>GridDerivativeDimension</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1ac26d05481f1bf043e9edb6426fdc3c15" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>IdxRangeBatch</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1aea4a98526b6aa8b9b33da58c3f2efd52" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>IdxRangeDeriv</name></member>
       <member refid="classCentralFDMPartialDerivativeWithBValue_1ae806f08c0f2c0555b1d863ceb98354f3" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>m_b_value_left</name></member>
       <member refid="classCentralFDMPartialDerivativeWithBValue_1a8a991398c5d27ca55eabb5f7251c403f" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>m_b_value_right</name></member>
       <member refid="classCentralFDMPartialDerivativeWithBValue_1ab9d589da0cfdc7fefb9c2c8c17e320cf" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>m_field</name></member>

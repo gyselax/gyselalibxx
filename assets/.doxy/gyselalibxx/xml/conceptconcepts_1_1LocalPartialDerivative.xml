@@ -15,9 +15,7 @@ concept <ref refid="conceptconcepts_1_1LocalPartialDerivative" kindref="compound
         } -&gt; std::same_as&lt;int&gt;;
 }
 &amp;&amp;requires(
-        std::array&lt;
-                Coord&lt;typename T::GridDerivativeDimension::continuous_dimension_type&gt;,
-                T::n_local_points()&gt; const&amp; pos,
+        std::array&lt;Coord&lt;typename T::DerivDim&gt;, T::n_local_points()&gt; const&amp; pos,
         std::array&lt;double, T::n_local_points()&gt; const&amp; vals)
 {
     {
@@ -28,6 +26,6 @@ concept <ref refid="conceptconcepts_1_1LocalPartialDerivative" kindref="compound
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="73" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="92" column="1"/>
   </compounddef>
 </doxygen>

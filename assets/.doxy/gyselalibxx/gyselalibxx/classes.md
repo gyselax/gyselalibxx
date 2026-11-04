@@ -289,6 +289,7 @@
 * [**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md)
 ([**tensor\_tools**](namespacetensor__tools.md))
 * [**InfNormResidual**](classInfNormResidual.md)
+* [**INonAnalyticalPartialDerivative**](classINonAnalyticalPartialDerivative.md)
 * [**Interface**](structInterface.md)
 * [**InterfaceDerivCoeffs**](classInterfaceDerivCoeffs.md)
 * [**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md)

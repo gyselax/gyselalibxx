@@ -18,7 +18,7 @@ _An abstract class for a partial derivative operator._ [More...](#detailed-descr
 
 
 
-Inherited by the following classes: [CentralFDMPartialDerivative](classCentralFDMPartialDerivative.md),  [CentralFDMPartialDerivativeWithBValue](classCentralFDMPartialDerivativeWithBValue.md),  [ConstantPartialDerivative](classConstantPartialDerivative.md)
+Inherited by the following classes: [INonAnalyticalPartialDerivative](classINonAnalyticalPartialDerivative.md),  [ConstantPartialDerivative](classConstantPartialDerivative.md),  [INonAnalyticalPartialDerivative](classINonAnalyticalPartialDerivative.md)
 
 
 
@@ -37,9 +37,7 @@ Inherited by the following classes: [CentralFDMPartialDerivative](classCentralFD
 | ---: | :--- |
 | typedef DConstField&lt; IdxRangeFull &gt; | [**DConstFieldType**](#typedef-dconstfieldtype)  <br>_The type of a constant reference to the field to be differentiated._  |
 | typedef DField&lt; IdxRangeFull &gt; | [**DFieldType**](#typedef-dfieldtype)  <br>_The type of a reference to the field to be differentiated._  |
-| typedef find\_grid\_t&lt; DerivativeDimension, ddc::to\_type\_seq\_t&lt; IdxRangeFull &gt; &gt; | [**GridDerivativeDimension**](#typedef-gridderivativedimension)  <br>_The type of the grid on the dimension on which the partial derivative is calculated._  |
-| typedef ddc::remove\_dims\_of\_t&lt; IdxRangeFull, [**GridDerivativeDimension**](classIPartialDerivative.md#typedef-gridderivativedimension) &gt; | [**IdxRangeBatch**](#typedef-idxrangebatch)  <br>_The index range of all dimensions except DerivativeDimension._  |
-| typedef IdxRange&lt; [**GridDerivativeDimension**](classIPartialDerivative.md#typedef-gridderivativedimension) &gt; | [**IdxRangeDeriv**](#typedef-idxrangederiv)  <br>_The index range of the dimension on which the partial derivative is calculated._  |
+| typedef DerivativeDimension | [**DerivDim**](#typedef-derivdim)  <br>_The dimension on which the partial derivative is calculated._  |
 
 
 
@@ -142,39 +140,11 @@ using IPartialDerivative< IdxRangeFull, DerivativeDimension >::DFieldType =  DFi
 
 
 
-### typedef GridDerivativeDimension 
+### typedef DerivDim 
 
-_The type of the grid on the dimension on which the partial derivative is calculated._ 
+_The dimension on which the partial derivative is calculated._ 
 ```C++
-using IPartialDerivative< IdxRangeFull, DerivativeDimension >::GridDerivativeDimension =  find_grid_t<DerivativeDimension, ddc::to_type_seq_t<IdxRangeFull>>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef IdxRangeBatch 
-
-_The index range of all dimensions except DerivativeDimension._ 
-```C++
-using IPartialDerivative< IdxRangeFull, DerivativeDimension >::IdxRangeBatch =  ddc::remove_dims_of_t<IdxRangeFull, GridDerivativeDimension>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef IdxRangeDeriv 
-
-_The index range of the dimension on which the partial derivative is calculated._ 
-```C++
-using IPartialDerivative< IdxRangeFull, DerivativeDimension >::IdxRangeDeriv =  IdxRange<GridDerivativeDimension>;
+using IPartialDerivative< IdxRangeFull, DerivativeDimension >::DerivDim =  DerivativeDimension;
 ```
 
 
