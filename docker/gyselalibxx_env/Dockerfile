@@ -22,7 +22,6 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
     build-essential \
     clang-23 \
     libomp-dev \
-    clang-format-14 \
     git \
     openssh-client \
     python3-pip \
