@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-FROM ubuntu:resolute
+FROM ubuntu:noble
 
 COPY --chmod=0755 bash_run /bin/bash_run
 ENV BASH_ENV=/etc/profile
@@ -20,7 +20,7 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
     wget \
  && mkdir -p /etc/apt/keyrings \
  && wget -qO /etc/apt/keyrings/apt.llvm.org.asc https://apt.llvm.org/llvm-snapshot.gpg.key \
- && echo "deb [signed-by=/etc/apt/keyrings/apt.llvm.org.asc] https://apt.llvm.org/resolute/ llvm-toolchain-resolute-${LLVM_VERSION} main" \
+ && echo "deb [signed-by=/etc/apt/keyrings/apt.llvm.org.asc] https://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
     > /etc/apt/sources.list.d/llvm.list \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
