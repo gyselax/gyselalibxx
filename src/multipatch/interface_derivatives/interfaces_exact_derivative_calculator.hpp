@@ -165,10 +165,6 @@ class InterfacesExactDerivativeCalculator<
 
     using Matrix = gko::matrix::Dense<double>;
 
-public:
-    /// @brief First patch of the collection of patches in the direction of the given Grid1D.
-    using first_patch = PatchFirst;
-
 private:
     // Interface with the correct patch order.
     template <std::size_t I>
@@ -234,6 +230,10 @@ private:
     template <std::size_t I>
     using idx_deriv_perp2
             = Idx<deriv_perp2<I>, typename patch2<I>::Grid1, typename patch2<I>::Grid2>;
+
+public:
+    /// @brief First patch of the collection of patches in the direction of the given Grid1D.
+    using first_patch = PatchFirst;
 
 private:
     // Matrix (I-M) of the documentation.
@@ -487,7 +487,7 @@ private:
     template <std::size_t I>
     void set_sign_vector_line()
     {
-        // If the perpendicular grids are agree on one dimension (first or second).
+        // If the perpendicular grids agree on one dimension (first or second).
         constexpr bool is_same_dimension
                 = ((std::is_same_v<grid_perp1<I>, typename patch1<I>::Grid1>)
                    == (std::is_same_v<grid_perp2<I>, typename patch2<I>::Grid1>));
@@ -498,10 +498,10 @@ private:
         // If we need to change the sign compared to the previous interface.
         constexpr bool change_sign = (are_same_direction_perp == is_same_dimension);
 
-        const int previous_sign = m_vector_par_signs[I];
-        constexpr int changing_sign = change_sign - !change_sign;
+        const int sign_previous = m_vector_par_signs[I];
+        constexpr int sign_changed = change_sign - !change_sign;
 
-        m_vector_par_signs[I + 1] = previous_sign * changing_sign;
+        m_vector_par_signs[I + 1] = sign_previous * sign_changed;
     }
 
     /// @brief Set the vector C.
@@ -530,9 +530,9 @@ private:
             int& slice_previous_idx_value,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
-        Idx<grid_par1<I>> idx_slice_1;
-        Idx<grid_par2<I>> idx_slice_2;
-        set_slice_indexes<I>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+        Idx<grid_par1<I>> idx_to_slice_1;
+        Idx<grid_par2<I>> idx_to_slice_2;
+        set_slice_indexes<I>(slice_previous_idx_value, idx_to_slice_1, idx_to_slice_2);
 
         DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
                 = functions_and_derivs.template get<patch1<I>>();
@@ -543,29 +543,32 @@ private:
         double lin_comb_funct;
         if constexpr (std::is_same_v<eval_type, eval_deriv>) {
             // The first derivatives are computed from the function values.
-            lin_comb_funct = m_derivatives_calculators.template get<stored_interface<I>>()
-                                     .get_approx_deriv(
-                                             get_const_field(function_and_derivs_1[idx_slice_1]),
-                                             get_const_field(function_and_derivs_2[idx_slice_2]));
+            lin_comb_funct
+                    = m_derivatives_calculators.template get<stored_interface<I>>()
+                              .get_approx_deriv(
+                                      get_const_field(function_and_derivs_1[idx_to_slice_1]),
+                                      get_const_field(function_and_derivs_2[idx_to_slice_2]));
         } else {
             IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
             IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
 
             // The slice indices has to be a point at a corner, i.e. index range boundaries.
-            assert((idx_slice_1 == idx_range_par_1.front())
-                   || (idx_slice_1 == idx_range_par_1.back()));
-            assert((idx_slice_2 == idx_range_par_2.front())
-                   || (idx_slice_2 == idx_range_par_2.back()));
+            assert((idx_to_slice_1 == idx_range_par_1.front())
+                   || (idx_to_slice_1 == idx_range_par_1.back()));
+            assert((idx_to_slice_2 == idx_range_par_2.front())
+                   || (idx_to_slice_2 == idx_range_par_2.back()));
 
-            Idx<deriv_par1<I>, grid_par1<I>> idx_slice_deriv_1(Idx<deriv_par1<I>>(1), idx_slice_1);
-            Idx<deriv_par2<I>, grid_par2<I>> idx_slice_deriv_2(Idx<deriv_par2<I>>(1), idx_slice_2);
+            Idx<deriv_par1<I>, grid_par1<I>>
+                    idx_to_slice_deriv_1(Idx<deriv_par1<I>>(1), idx_to_slice_1);
+            Idx<deriv_par2<I>, grid_par2<I>>
+                    idx_to_slice_deriv_2(Idx<deriv_par2<I>>(1), idx_to_slice_2);
 
             // The cross-derivatives are computed from the first derivatives.
             lin_comb_funct
                     = m_derivatives_calculators.template get<stored_interface<I>>()
                               .get_approx_cross_deriv(
-                                      get_const_field(function_and_derivs_1[idx_slice_deriv_1]),
-                                      get_const_field(function_and_derivs_2[idx_slice_deriv_2]));
+                                      get_const_field(function_and_derivs_1[idx_to_slice_deriv_1]),
+                                      get_const_field(function_and_derivs_2[idx_to_slice_deriv_2]));
         }
 
         /*
@@ -596,33 +599,32 @@ private:
             IdxRange<grid_perp1<I>> idx_range_perp_1(m_idx_ranges.template get<patch1<I>>());
             IdxRange<grid_perp2<I>> idx_range_perp_2(m_idx_ranges.template get<patch2<I>>());
 
-            Idx<grid_perp1<I>> idx_deriv_1
-                    = get_idx_other_interface(idx_range_perp_1, extremity_1<I>);
-            Idx<grid_perp2<I>> idx_deriv_2
-                    = get_idx_other_interface(idx_range_perp_2, extremity_2<I>);
+            // Get the indices at the other bound of the interface.
+            Idx<grid_perp1<I>> idx_perp_1 = get_idx_interface<false, I, patch1<I>>();
+            Idx<grid_perp2<I>> idx_perp_2 = get_idx_interface<false, I, patch2<I>>();
 
             auto const [sign_1, sign_2] = get_sign_derivs<I, eval_type>();
 
             Idx<deriv_perp1<I>, grid_perp1<I>, grid_par1<I>>
-                    idx_bound_deriv_1(Idx<deriv_perp1<I>>(1), idx_deriv_1, idx_slice_1);
+                    idx_deriv_bound_1(Idx<deriv_perp1<I>>(1), idx_perp_1, idx_to_slice_1);
             Idx<deriv_perp2<I>, grid_perp2<I>, grid_par2<I>>
-                    idx_bound_deriv_2(Idx<deriv_perp2<I>>(1), idx_deriv_2, idx_slice_2);
+                    idx_deriv_bound_2(Idx<deriv_perp2<I>>(1), idx_perp_2, idx_to_slice_2);
 
-            double bound_deriv_1;
-            double bound_deriv_2;
+            double deriv_bound_1;
+            double deriv_bound_2;
             if constexpr (std::is_same_v<eval_type, eval_deriv>) {
                 // Select the first derivatives at the other interfaces/bounds.
-                bound_deriv_1 = function_and_derivs_1(idx_bound_deriv_1) * sign_1;
-                bound_deriv_2 = function_and_derivs_2(idx_bound_deriv_2) * sign_2;
+                deriv_bound_1 = function_and_derivs_1(idx_deriv_bound_1) * sign_1;
+                deriv_bound_2 = function_and_derivs_2(idx_deriv_bound_2) * sign_2;
             } else {
                 // Select the cross-derivatives at the other interfaces/bounds.
                 Idx<deriv_par1<I>, deriv_perp1<I>, grid_par1<I>, grid_perp1<I>>
-                        idx_cross_deriv_1(Idx<deriv_par1<I>>(1), idx_bound_deriv_1);
+                        idx_cross_deriv_1(Idx<deriv_par1<I>>(1), idx_deriv_bound_1);
                 Idx<deriv_par2<I>, deriv_perp2<I>, grid_par2<I>, grid_perp2<I>>
-                        idx_cross_deriv_2(Idx<deriv_par2<I>>(1), idx_bound_deriv_2);
+                        idx_cross_deriv_2(Idx<deriv_par2<I>>(1), idx_deriv_bound_2);
 
-                bound_deriv_1 = function_and_derivs_1(idx_cross_deriv_1) * sign_1;
-                bound_deriv_2 = function_and_derivs_2(idx_cross_deriv_2) * sign_2;
+                deriv_bound_1 = function_and_derivs_1(idx_cross_deriv_1) * sign_1;
+                deriv_bound_2 = function_and_derivs_2(idx_cross_deriv_2) * sign_2;
             }
 
             const double coeff_deriv_1
@@ -634,12 +636,12 @@ private:
 
             if constexpr (is_lower_bound_deriv_dependent) {
                 m_vector->get_values()[I] += patch_order_matches_interfaces<I>
-                                                     ? coeff_deriv_1 * bound_deriv_1
-                                                     : coeff_deriv_2 * bound_deriv_2;
+                                                     ? coeff_deriv_1 * deriv_bound_1
+                                                     : coeff_deriv_2 * deriv_bound_2;
             } else {
                 m_vector->get_values()[I] += patch_order_matches_interfaces<I>
-                                                     ? coeff_deriv_2 * bound_deriv_2
-                                                     : coeff_deriv_1 * bound_deriv_1;
+                                                     ? coeff_deriv_2 * deriv_bound_2
+                                                     : coeff_deriv_1 * deriv_bound_1;
             }
         }
     }
@@ -673,12 +675,13 @@ private:
         IdxRange<grid_perp1<I>> idx_range_perp_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_perp2<I>> idx_range_perp_2(m_idx_ranges.template get<patch2<I>>());
 
-        Idx<grid_perp1<I>> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1<I>);
-        Idx<grid_perp2<I>> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2<I>);
+        // Get the indices at the bound of the interface.  
+        Idx<grid_perp1<I>> idx_perp_1 = get_idx_interface<true,I, patch1<I>>();
+        Idx<grid_perp2<I>> idx_perp_2 = get_idx_interface<true,I, patch2<I>>();
 
-        Idx<grid_par1<I>> idx_slice_1;
-        Idx<grid_par2<I>> idx_slice_2;
-        set_slice_indexes<I>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+        Idx<grid_par1<I>> idx_to_slice_1;
+        Idx<grid_par2<I>> idx_to_slice_2;
+        set_slice_indexes<I>(slice_previous_idx_value, idx_to_slice_1, idx_to_slice_2);
 
         // Get the fields of the left and right patch of the interface.
         DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
@@ -689,9 +692,9 @@ private:
         auto const [sign_1, sign_2] = get_sign_derivs<I, eval_type>();
 
         Idx<deriv_perp1<I>, grid_perp1<I>, grid_par1<I>>
-                idx_interface_deriv_1(Idx<deriv_perp1<I>>(1), idx_deriv_1, idx_slice_1);
+                idx_interface_deriv_1(Idx<deriv_perp1<I>>(1), idx_perp_1, idx_to_slice_1);
         Idx<deriv_perp2<I>, grid_perp2<I>, grid_par2<I>>
-                idx_interface_deriv_2(Idx<deriv_perp2<I>>(1), idx_deriv_2, idx_slice_2);
+                idx_interface_deriv_2(Idx<deriv_perp2<I>>(1), idx_perp_2, idx_to_slice_2);
 
         if constexpr (std::is_same_v<eval_type, eval_deriv>) {
             // Update the first derivatives.
@@ -704,10 +707,10 @@ private:
             IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
 
             // The slice indices has to be a point at a corner, i.e. index range boundaries.
-            assert((idx_slice_1 == idx_range_par_1.front())
-                   || (idx_slice_1 == idx_range_par_1.back()));
-            assert((idx_slice_2 == idx_range_par_2.front())
-                   || (idx_slice_2 == idx_range_par_2.back()));
+            assert((idx_to_slice_1 == idx_range_par_1.front())
+                   || (idx_to_slice_1 == idx_range_par_1.back()));
+            assert((idx_to_slice_2 == idx_range_par_2.front())
+                   || (idx_to_slice_2 == idx_range_par_2.back()));
 
             Idx<deriv_par1<I>, deriv_perp1<I>, grid_perp1<I>, grid_par1<I>>
                     idx_cross_deriv_1(Idx<deriv_par1<I>>(1), idx_interface_deriv_1);
@@ -770,24 +773,25 @@ private:
     }
 
     /**
-     * @brief Get the index of the given index range slice corresponding to the 
-     * extremity at the interface of the 1D grid. 
+     * @brief Get the index of the given index range slice corresponding to one of the 
+     * extremities of the 1D grid. 
+     * If is_on_interface is true, the extremity corresponds to the interface. 
+     * If is_on_interface is false, the extremity corresponds to the other bound of the interface
+     * (next or previous). 
      */
-    template <class Grid1Or2>
-    Idx<Grid1Or2> get_idx_interface(IdxRange<Grid1Or2> const idx_range, Extremity extremity) const
+    template <
+            bool is_on_interface,
+            std::size_t I,
+            class Patch,
+            bool is_patch1 = std::is_same_v<Patch, patch1<I>>>
+    std::conditional_t<is_patch1, Idx<grid_perp1<I>>, Idx<grid_perp2<I>>> get_idx_interface()
     {
-        return (extremity == Extremity::FRONT) ? idx_range.front() : idx_range.back();
-    }
-
-    /**
-     * @brief Get the index of the given index range slice corresponding to the 
-     * extremity at the other interface (next or previous) of the 1D grid.
-     */
-    template <class Grid1Or2>
-    Idx<Grid1Or2> get_idx_other_interface(IdxRange<Grid1Or2> const idx_range, Extremity extremity)
-            const
-    {
-        return (extremity == Extremity::BACK) ? idx_range.front() : idx_range.back();
+        using IdxRangePerp
+                = std::conditional_t<is_patch1, IdxRange<grid_perp1<I>>, IdxRange<grid_perp2<I>>>;
+        IdxRangePerp idx_range_slice(m_idx_ranges.template get<Patch>());
+        Extremity extremity = is_patch1 ? extremity_1<I> : extremity_2<I>;
+        Extremity extremity_test = is_on_interface ? Extremity::FRONT : Extremity::BACK;
+        return (extremity == extremity_test) ? idx_range_slice.front() : idx_range_slice.back();
     }
 
     /**
