@@ -10,7 +10,7 @@
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
-#include "multipatch_spline_builder_2d.hpp"
+#include "spline_builder_2d_collection.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -39,7 +39,7 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
         ddc::SplineSolver::LAPACK>;
 
 template <ddc::SplineBuilderClosure BC>
-using MultipatchSplineBuilderXY = SplineBuilder2DCollection<
+using SplineBuilderCollectionXY = SplineBuilder2DCollection<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
@@ -57,10 +57,10 @@ using MultipatchSplineBuilderXY = SplineBuilder2DCollection<
         Patch1,
         Patch2>;
 
-class MultipatchSplineBuilder2DTest : public ::testing::Test
+class SplineBuilderCollection2DTest : public ::testing::Test
 {
 public:
-    MultipatchSplineBuilder2DTest() {}
+    SplineBuilderCollection2DTest() {}
 
     static void SetUpTestSuite()
     {
@@ -201,7 +201,7 @@ public:
 /*
     The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
-TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
+TEST_F(SplineBuilderCollection2DTest, TwoPatches2D)
 {
     ddc::init_discrete_space<GridX<1>>(
             SplineInterpPointsX<1, ddc::SplineBuilderClosure::GREVILLE>::get_sampling<GridX<1>>());
@@ -231,7 +231,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
     SplineXYBuilder<2, ddc::SplineBuilderClosure::GREVILLE> builder2(idx_range_xy2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderXY<ddc::SplineBuilderClosure::GREVILLE> builder(builder1, builder2);
+    SplineBuilderCollectionXY<ddc::SplineBuilderClosure::GREVILLE> builder(builder1, builder2);
 
 
     // Function tests
@@ -287,7 +287,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
     check_if_equal_to_expected(function_coef, function_1_coef_expected, function_2_coef_expected);
 }
 
-TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
+TEST_F(SplineBuilderCollection2DTest, TwoPatches2DHermite)
 {
     ddc::init_discrete_space<GridX<1>>(
             SplineInterpPointsX<1, ddc::SplineBuilderClosure::HERMITE>::get_sampling<GridX<1>>());
@@ -317,7 +317,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
     SplineXYBuilder<2, ddc::SplineBuilderClosure::HERMITE> builder2(idx_range_xy2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderXY<ddc::SplineBuilderClosure::HERMITE> builder(builder1, builder2);
+    SplineBuilderCollectionXY<ddc::SplineBuilderClosure::HERMITE> builder(builder1, builder2);
 
 
     // Function tests
@@ -534,7 +534,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
 }
 
 
-TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
+TEST_F(SplineBuilderCollection2DTest, TwoPatches2DHermiteWithDerivField)
 {
     ddc::init_discrete_space<GridX<1>>(
             SplineInterpPointsX<1, ddc::SplineBuilderClosure::HERMITE>::get_sampling<GridX<1>>());
@@ -564,7 +564,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermiteWithDerivField)
     SplineXYBuilder<2, ddc::SplineBuilderClosure::HERMITE> builder2(idx_range_xy2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderXY<ddc::SplineBuilderClosure::HERMITE> builder(builder1, builder2);
+    SplineBuilderCollectionXY<ddc::SplineBuilderClosure::HERMITE> builder(builder1, builder2);
 
 
     // Function tests
