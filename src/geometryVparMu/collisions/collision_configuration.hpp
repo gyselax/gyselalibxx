@@ -67,8 +67,8 @@ public:
             throw std::logic_error(
                     "nu_ref should be fixed at 1, use dt only to change collisionality.");
         }
-        // nu_ref corresponds to the collision frequency normalized to the electron cyclotron frequency (as always in
-        // Gysela), for a normalized density/temperature of 1. We use nu_ref to construct AD, nu_ref is physically more
+        // nu_ref corresponds to the collision frequency normalised to the electron cyclotron frequency (as always in
+        // Gysela), for a normalised density/temperature of 1. We use nu_ref to construct AD, nu_ref is physically more
         // intuitive than AD, in addition, nu_ref is a scalar where AD can be dependent on the geometry like the radial
         // profile we build below. Having AD on a radial profile can allow masking which has its uses for preventing
         // badly behaving collisions on the colder plasma edges. sqrt(2) is a subtlety between the intra-species and
