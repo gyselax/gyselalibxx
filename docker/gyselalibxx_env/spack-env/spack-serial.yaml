@@ -4,7 +4,7 @@ spack:
     unify: true
   mirrors:
     github-buildcache:
-      url: oci://ghcr.io/gyselax/gyselalibxx-ci-ubuntu-noble
+      url: oci://ghcr.io/gyselax/gyselalibxx-ci-ubuntu-resolute
       binary: true
       signed: false
       access_pair:
@@ -21,11 +21,11 @@ spack:
       require:
         - 'target=x86_64'
     c:
-      require: 'gcc@13'
+      require: 'gcc@15'
     cxx:
-      require: 'gcc@13'
+      require: 'gcc@15'
     fortran:
-      require: 'gcc@13'
+      require: 'gcc@15'
     lapack:
       require:
         - 'openblas@0.3'
