@@ -9,7 +9,7 @@ spack:
     - kokkos@5.1 ~openmp +cuda +cuda_constexpr cuda_arch=90
     - kokkos-kernels@5.1 ~shared
     - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
-    - 'koliop@1.1'
+    - 'koliop@1.1.1'
     - lapack
     - mpi
     - ninja@1.13

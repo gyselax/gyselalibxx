@@ -95,7 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove Dask dependency in the tests.
 - Update DDC to [v0.17.0](https://github.com/CExA-project/ddc/releases/tag/v0.17.0).
 - Update GMGPolar dependency to [v2.4.0](https://github.com/SciCompMod/GMGPolar/releases/tag/v2.4.1).
-- Update Koliop dependency to v1.1.0.
+- Upgrade to koliop@1.1.1.
 
 ## [v0.8.0] - 2026-09-09
 

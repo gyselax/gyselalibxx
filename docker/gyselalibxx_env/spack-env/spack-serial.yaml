@@ -53,7 +53,7 @@ spack:
     - 'googletest@1.17 +gmock'
     - 'kokkos@5.1 +serial'
     - 'kokkos-kernels@5.1'
-    - 'koliop@1.1'
+    - 'koliop@1.1.1'
     - 'lapack'
     - 'mpi'
     - 'paraconf@1.0'
