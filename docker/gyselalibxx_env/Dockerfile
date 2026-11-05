@@ -17,11 +17,14 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
     apt-transport-https \
     apt-utils \
     ca-certificates \
+    gnupg \
     wget \
  && mkdir -p /etc/apt/keyrings \
  && wget -qO /etc/apt/keyrings/apt.llvm.org.asc https://apt.llvm.org/llvm-snapshot.gpg.key \
  && echo "deb [signed-by=/etc/apt/keyrings/apt.llvm.org.asc] https://apt.llvm.org/resolute/ llvm-toolchain-resolute-${LLVM_VERSION} main" \
     > /etc/apt/sources.list.d/llvm.list \
+ && wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null \
+ && echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" > /etc/apt/sources.list.d/oneAPI.list \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
@@ -32,6 +35,7 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
     python3-pip \
     python3-venv \
     cmake \
+    intel-oneapi-compiler-dpcpp-cpp \
  && ln -sf /usr/bin/clang-${LLVM_VERSION} /usr/bin/clang \
  && ln -sf /usr/bin/clang++-${LLVM_VERSION} /usr/bin/clang++ \
  && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
@@ -82,7 +86,8 @@ RUN apt-get update --yes \
 USER ci:ci
 WORKDIR /ci
 ENV HOME=/ci
-ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/opt/venv/bin:/opt/intel/oneapi/compiler/latest/bin:$PATH"
+ENV LD_LIBRARY_PATH="/opt/intel/oneapi/compiler/latest/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 
 COPY spack-env /data/spack-env
 RUN --mount=type=secret,id=github_user_id,env=GITHUB_USER \
