@@ -1204,6 +1204,14 @@ protected:
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
     }
 
+    /**
+     * @brief Cycle the roles of the doubles in the array of values.
+     *
+     * Cycle the doubles in the array to change the indices ready for
+     * the next iteration.
+     *
+     * @param buffer The array of values for the indices n-2, n-1 and n.
+     */
     static void cycle_buffers(std::array<double, 3>& buffer)
     {
         // n-1 becomes n-2
@@ -1213,6 +1221,14 @@ protected:
         // new n is ready to be defined (but still contains value of old n)
     }
 
+    /**
+     * @brief Cycle the memory pointers in the array.
+     *
+     * Cycle the memory pointers in the array to change the indices ready for
+     * the next iteration.
+     *
+     * @param buffer The array of fields for the indices n-2, n-1 and n.
+     */
     template <class IdxRangeType, class MemorySpace>
     static void cycle_buffers(std::array<DField<IdxRangeType, MemorySpace>, 3>& buffer)
     {
@@ -1228,6 +1244,11 @@ protected:
 
     /**
      * @brief Build an array with the persistent_memory at the requested input_position.
+     *
+     * @param input_position The position of the persistent_memory in the output array.
+     * @param persistent_memory The memory that is saved in the class.
+     * @param buffer_1 A temporary empty buffer to be saved in the array.
+     * @param buffer_2 A temporary empty buffer to be saved in the array.
      */
     template <class IdxRangeType>
     static std::array<DField<IdxRangeType, Kokkos::HostSpace>, 3> build_array(
