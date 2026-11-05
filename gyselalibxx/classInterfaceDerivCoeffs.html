@@ -784,6 +784,18 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-n"><strong>n</strong></a>   = <code>2</code><br><em>The position of the n-th index in the arrays used for the recursive calculation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-n_minus_1"><strong>n_minus_1</strong></a>   = <code>1</code><br><em>The position of the (n-1)-th index in the arrays used for the recursive calculation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-n_minus_2"><strong>n_minus_2</strong></a>   = <code>0</code><br><em>The position of the (n-2)-th index in the arrays used for the recursive calculation.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">Extremity constexpr</td>
 <td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#variable-s_extremity_1"><strong>s_extremity_1</strong></a>   = <code>extremity\_1</code><br><em>The extremity of patch 1 where the interface is located.</em></td>
 </tr>
@@ -855,6 +867,18 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align: right;">std::array&lt; DField&lt; IdxRangeType, Kokkos::HostSpace &gt;, 3 &gt;</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-build_array"><strong>build_array</strong></a> (int input_position, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; persistent_memory, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer_1, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer_2) <br><em>Build an array with the persistent_memory at the requested input_position.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-cycle_buffers-12"><strong>cycle_buffers</strong></a> (std::array&lt; double, 3 &gt; &amp; buffer) <br><em>Cycle the roles of the doubles in the array of values.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-cycle_buffers-22"><strong>cycle_buffers</strong></a> (std::array&lt; DField&lt; IdxRangeType, MemorySpace &gt;, 3 &gt; &amp; buffer) <br><em>Cycle the memory pointers in the array.</em></td>
+</tr>
 <tr>
 <td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="classDerivReconstructionCoeffs.html#function-get_alpha"><strong>get_alpha</strong></a> (double const cell_length_left, double const cell_length_right) <br><em>Compute the coefficient alpha_i.</em></td>

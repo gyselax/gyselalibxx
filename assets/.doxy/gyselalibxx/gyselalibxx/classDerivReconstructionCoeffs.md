@@ -105,6 +105,9 @@ _Compute the coefficients a, b and c of the interface derivative reconstruction 
 
 | Type | Name |
 | ---: | :--- |
+|  std::size\_t | [**n**](#variable-n)   = `2`<br>_The position of the n-th index in the arrays used for the recursive calculation._  |
+|  std::size\_t | [**n\_minus\_1**](#variable-n_minus_1)   = `1`<br>_The position of the (n-1)-th index in the arrays used for the recursive calculation._  |
+|  std::size\_t | [**n\_minus\_2**](#variable-n_minus_2)   = `0`<br>_The position of the (n-2)-th index in the arrays used for the recursive calculation._  |
 |  Extremity constexpr | [**s\_extremity\_1**](#variable-s_extremity_1)   = `extremity\_1`<br>_The extremity of patch 1 where the interface is located._  |
 |  Extremity constexpr | [**s\_extremity\_2**](#variable-s_extremity_2)   = `extremity\_2`<br>_The extremity of patch 2 where the interface is located._  |
 
@@ -141,6 +144,9 @@ _Compute the coefficients a, b and c of the interface derivative reconstruction 
 
 | Type | Name |
 | ---: | :--- |
+|  std::array&lt; DField&lt; IdxRangeType, Kokkos::HostSpace &gt;, 3 &gt; | [**build\_array**](#function-build_array) (int input\_position, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; persistent\_memory, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer\_1, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer\_2) <br>_Build an array with the persistent\_memory at the requested input\_position._  |
+|  void | [**cycle\_buffers**](#function-cycle_buffers-12) (std::array&lt; double, 3 &gt; & buffer) <br>_Cycle the roles of the doubles in the array of values._  |
+|  void | [**cycle\_buffers**](#function-cycle_buffers-22) (std::array&lt; DField&lt; IdxRangeType, MemorySpace &gt;, 3 &gt; & buffer) <br>_Cycle the memory pointers in the array._  |
 |  double | [**get\_alpha**](#function-get_alpha) (double const cell\_length\_left, double const cell\_length\_right) <br>_Compute the coefficient alpha\_i._  |
 |  double | [**get\_beta**](#function-get_beta) (double const cell\_length\_left, double const cell\_length\_right) <br>_Compute the coefficient beta\_i._  |
 |  void | [**set\_local\_uniform\_weights**](#function-set_local_uniform_weights) (host\_t&lt; DField&lt; IdxRange&lt; EdgePerpGrid &gt; &gt; &gt; weights, double factor, double un\_other\_patch, Idx&lt; EdgePerpGrid &gt; idx\_interface) <br>_Apply the explicit formula for the uniform case to weights on one side of the interface._  |
@@ -813,6 +819,48 @@ host_t<DFieldMem<IdxRange1DPerp_2> > DerivReconstructionCoeffs< EdgePerpGrid1Typ
 
 
 
+### variable n 
+
+_The position of the n-th index in the arrays used for the recursive calculation._ 
+```C++
+std::size_t DerivReconstructionCoeffs< EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 >::n;
+```
+
+
+
+
+<hr>
+
+
+
+### variable n\_minus\_1 
+
+_The position of the (n-1)-th index in the arrays used for the recursive calculation._ 
+```C++
+std::size_t DerivReconstructionCoeffs< EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 >::n_minus_1;
+```
+
+
+
+
+<hr>
+
+
+
+### variable n\_minus\_2 
+
+_The position of the (n-2)-th index in the arrays used for the recursive calculation._ 
+```C++
+std::size_t DerivReconstructionCoeffs< EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 >::n_minus_2;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable s\_extremity\_1 
 
 _The extremity of patch 1 where the interface is located._ 
@@ -1130,6 +1178,101 @@ inline void DerivReconstructionCoeffs::set_coefficients_uniform_per_patch_case (
 <hr>
 ## Protected Static Functions Documentation
 
+
+
+
+### function build\_array 
+
+_Build an array with the persistent\_memory at the requested input\_position._ 
+```C++
+template<class IdxRangeType>
+static inline std::array< DField< IdxRangeType, Kokkos::HostSpace >, 3 > DerivReconstructionCoeffs::build_array (
+    int input_position,
+    DField< IdxRangeType, Kokkos::HostSpace > persistent_memory,
+    DField< IdxRangeType, Kokkos::HostSpace > buffer_1,
+    DField< IdxRangeType, Kokkos::HostSpace > buffer_2
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `input_position` The position of the persistent\_memory in the output array. 
+* `persistent_memory` The memory that is saved in the class. 
+* `buffer_1` A temporary empty buffer to be saved in the array. 
+* `buffer_2` A temporary empty buffer to be saved in the array. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function cycle\_buffers [1/2]
+
+_Cycle the roles of the doubles in the array of values._ 
+```C++
+static inline void DerivReconstructionCoeffs::cycle_buffers (
+    std::array< double, 3 > & buffer
+) 
+```
+
+
+
+Cycle the doubles in the array to change the indices ready for the next iteration.
+
+
+
+
+**Parameters:**
+
+
+* `buffer` The array of values for the indices n-2, n-1 and n. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function cycle\_buffers [2/2]
+
+_Cycle the memory pointers in the array._ 
+```C++
+template<class IdxRangeType, class MemorySpace>
+static inline void DerivReconstructionCoeffs::cycle_buffers (
+    std::array< DField< IdxRangeType, MemorySpace >, 3 > & buffer
+) 
+```
+
+
+
+Cycle the memory pointers in the array to change the indices ready for the next iteration.
+
+
+
+
+**Parameters:**
+
+
+* `buffer` The array of fields for the indices n-2, n-1 and n. 
+
+
+
+
+        
+
+<hr>
 
 
 

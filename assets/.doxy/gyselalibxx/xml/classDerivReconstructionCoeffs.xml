@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="115" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="115" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="122" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDerivReconstructionCoeffs_1ab59f97d0d2152e84a2fdbcbeeb9984fb" prot="protected" static="no" mutable="no">
         <type>double</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="117" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="117" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="124" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDerivReconstructionCoeffs_1adae1f3c68e143dc193f2e2556baed582" prot="protected" static="no" mutable="no">
         <type>host_t&lt; DFieldMem&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> &gt; &gt;</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="120" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="120" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="127" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a06d16e790b0e0992aceb1397da96918a" prot="protected" static="no" mutable="no">
         <type>host_t&lt; DFieldMem&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> &gt; &gt;</type>
@@ -298,7 +298,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="122" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="122" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="129" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="129" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a9d7673eb28e038836898114061254348" prot="protected" static="no" mutable="no">
         <type>host_t&lt; DField&lt; <ref refid="classDerivReconstructionCoeffs_1aae97b7b33fa0127149a24450cba412a6" kindref="member">IdxRange1DPerp_1</ref> &gt; &gt;</type>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="125" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="125" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="132" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="132" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a0b1224d8d5954a2563bd0a7b65e2cdbf" prot="protected" static="no" mutable="no">
         <type>host_t&lt; DField&lt; <ref refid="classDerivReconstructionCoeffs_1a14b2301eb09918bfadcc27fdee796593" kindref="member">IdxRange1DPerp_2</ref> &gt; &gt;</type>
@@ -328,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="127" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="127" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="134" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="134" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-static-attrib">
@@ -363,6 +363,54 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="112" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a210b158f448973e199c9a992af4201bf" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::n</definition>
+        <argsstring></argsstring>
+        <name>n</name>
+        <qualifiedname>DerivReconstructionCoeffs::n</qualifiedname>
+        <initializer>= 2</initializer>
+        <briefdescription>
+<para>The position of the n-th index in the arrays used for the recursive calculation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="115" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1a89f6c2bc565135b33198230fc4da1b35" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::n_minus_1</definition>
+        <argsstring></argsstring>
+        <name>n_minus_1</name>
+        <qualifiedname>DerivReconstructionCoeffs::n_minus_1</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>The position of the (n-1)-th index in the arrays used for the recursive calculation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="117" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivReconstructionCoeffs_1ad069aa6a3a46c5ca5979cc1d80d75c1f" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::n_minus_2</definition>
+        <argsstring></argsstring>
+        <name>n_minus_2</name>
+        <qualifiedname>DerivReconstructionCoeffs::n_minus_2</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The position of the (n-2)-th index in the arrays used for the recursive calculation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="119" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="119" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -433,7 +481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="159" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="159" bodyend="223"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="166" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="166" bodyend="230"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1ab9c25a800909d8ba88c0af003ac42266" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -508,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="237" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="237" bodyend="250"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="244" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="244" bodyend="257"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1abd3ffab7ab39dc56208e565250d6cf13" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -563,7 +611,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="265" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="265" bodyend="283"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="272" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="272" bodyend="290"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a9bebca5f3882aa228cd2ed304ed34cb9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -627,7 +675,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="297" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="297" bodyend="311"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="304" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="304" bodyend="318"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a347028801163ac2cc78449abc21028b0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -645,7 +693,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="317" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="317" bodyend="320"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="324" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="324" bodyend="327"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1aac4181a5765b26e8348f75ac8bb3eb26" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -663,7 +711,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="326" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="326" bodyend="329"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="333" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="333" bodyend="336"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1ad73c73e016410038fb7a4263809f9840" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -717,7 +765,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="355" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="355" bodyend="360"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="362" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="362" bodyend="367"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a52a488987af9fef8c426e44e49fa384f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -769,7 +817,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="370" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="370" bodyend="376"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="377" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="377" bodyend="383"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1ad4614ad3d65630291c9b41a350bae252" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -834,7 +882,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="398" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="398" bodyend="404"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="405" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="405" bodyend="411"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -899,7 +947,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="417" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="417" bodyend="443"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="424" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="424" bodyend="450"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a782c687d6b10882fc148426831495892" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -963,7 +1011,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="455" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="455" bodyend="478"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="462" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="462" bodyend="485"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a625c02984662993d85942c2c332a5dc8" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1015,7 +1063,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="488" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="488" bodyend="523"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="495" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="495" bodyend="530"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a6b5e96e29caff274deb59bfef6fe76f6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1030,7 +1078,7 @@ Remark: for the approximation case, the cells were selected by the given index r
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="532" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="532" bodyend="750"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="539" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="539" bodyend="751"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1af377b9adef54e9e3cdb8aace5a61f68d" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1130,7 +1178,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="769" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="769" bodyend="848"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="770" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="770" bodyend="846"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a808a5732d09b2ee406d8072b3dd1607f" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1230,7 +1278,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="867" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="867" bodyend="981"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="865" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="865" bodyend="990"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a5756c1025be09d770b451f1f832ebc9c" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1245,7 +1293,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="991" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="991" bodyend="1039"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1000" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1000" bodyend="1048"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a933c65a003ee79e647db580d162c391d" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1274,7 +1322,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1086" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1086" bodyend="1155"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1095" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1095" bodyend="1164"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1ab3df11f9ab08e639af636933a70bb3e2" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::array&lt; double, 3 &gt;</type>
@@ -1297,7 +1345,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1159" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1159" bodyend="1171"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1168" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1168" bodyend="1180"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a73bad45001ff309d39ba7ac4e616dedf" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1345,7 +1393,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1194" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1194" bodyend="1199"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1203" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1203" bodyend="1208"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-static-func">
@@ -1417,7 +1465,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1050" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1050" bodyend="1080"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1059" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1059" bodyend="1089"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a860007cca0676980cd84f31a2cd97cc9" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -1440,7 +1488,7 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1174" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1174" bodyend="1177"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1183" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1183" bodyend="1186"/>
       </memberdef>
       <memberdef kind="function" id="classDerivReconstructionCoeffs_1a8c2288a3d24baf8ec729068968589c09" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -1463,7 +1511,145 @@ The following parameters are array with three elements corresponding to the valu
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1180" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1180" bodyend="1183"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1189" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1189" bodyend="1192"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a117bacc2a473b087401cf2e702ef18c7" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::cycle_buffers</definition>
+        <argsstring>(std::array&lt; double, 3 &gt; &amp;buffer)</argsstring>
+        <name>cycle_buffers</name>
+        <qualifiedname>DerivReconstructionCoeffs::cycle_buffers</qualifiedname>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Cycle the roles of the doubles in the array of values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Cycle the doubles in the array to change the indices ready for the next iteration.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of values for the indices n-2, n-1 and n. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1218" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1218" bodyend="1225"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a3d207e8b856fd0cdf353da6cadc625d2" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxRangeType</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::cycle_buffers</definition>
+        <argsstring>(std::array&lt; DField&lt; IdxRangeType, MemorySpace &gt;, 3 &gt; &amp;buffer)</argsstring>
+        <name>cycle_buffers</name>
+        <qualifiedname>DerivReconstructionCoeffs::cycle_buffers</qualifiedname>
+        <param>
+          <type>std::array&lt; DField&lt; IdxRangeType, MemorySpace &gt;, 3 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Cycle the memory pointers in the array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Cycle the memory pointers in the array to change the indices ready for the next iteration.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of fields for the indices n-2, n-1 and n. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1236" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1236" bodyend="1246"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivReconstructionCoeffs_1a457e8c29025079182a1ada6c8b00b53c" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxRangeType</type>
+          </param>
+        </templateparamlist>
+        <type>std::array&lt; DField&lt; IdxRangeType, Kokkos::HostSpace &gt;, 3 &gt;</type>
+        <definition>static std::array&lt; DField&lt; IdxRangeType, Kokkos::HostSpace &gt;, 3 &gt; DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::build_array</definition>
+        <argsstring>(int input_position, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; persistent_memory, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer_1, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer_2)</argsstring>
+        <name>build_array</name>
+        <qualifiedname>DerivReconstructionCoeffs::build_array</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>input_position</declname>
+        </param>
+        <param>
+          <type>DField&lt; IdxRangeType, Kokkos::HostSpace &gt;</type>
+          <declname>persistent_memory</declname>
+        </param>
+        <param>
+          <type>DField&lt; IdxRangeType, Kokkos::HostSpace &gt;</type>
+          <declname>buffer_1</declname>
+        </param>
+        <param>
+          <type>DField&lt; IdxRangeType, Kokkos::HostSpace &gt;</type>
+          <declname>buffer_2</declname>
+        </param>
+        <briefdescription>
+<para>Build an array with the persistent_memory at the requested input_position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input_position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position of the persistent_memory in the output array. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>persistent_memory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The memory that is saved in the class. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A temporary empty buffer to be saved in the array. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A temporary empty buffer to be saved in the array. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="1257" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="1257" bodyend="1270"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1502,13 +1688,16 @@ The following parameters are array with three elements corresponding to the valu
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="70" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="71" bodyend="1200"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" line="70" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/interface_derivatives/deriv_reconstruction_coeffs.hpp" bodystart="71" bodyend="1271"/>
     <listofallmembers>
       <member refid="classDerivReconstructionCoeffs_1a2ab62a16b7cbf78885ada95d93813b20" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>BSplinesPerp1</name></member>
       <member refid="classDerivReconstructionCoeffs_1a44743fee783a25ef9e18ba7000ad7663" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>BSplinesPerp2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a457e8c29025079182a1ada6c8b00b53c" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>build_array</name></member>
       <member refid="classDerivReconstructionCoeffs_1a625c02984662993d85942c2c332a5dc8" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>check_additional_interpolation_points_location</name></member>
       <member refid="classDerivReconstructionCoeffs_1a782c687d6b10882fc148426831495892" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>check_break_points_are_interpolation_points</name></member>
       <member refid="classDerivReconstructionCoeffs_1a808a5732d09b2ee406d8072b3dd1607f" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>correction_boundary</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a117bacc2a473b087401cf2e702ef18c7" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>cycle_buffers</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a3d207e8b856fd0cdf353da6cadc625d2" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>cycle_buffers</name></member>
       <member refid="classDerivReconstructionCoeffs_1a70c422f5f745126ea3f2b43beb0eb788" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>DerivReconstructionCoeffs</name></member>
       <member refid="classDerivReconstructionCoeffs_1ab9c25a800909d8ba88c0af003ac42266" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>DerivReconstructionCoeffs</name></member>
       <member refid="classDerivReconstructionCoeffs_1abd3ffab7ab39dc56208e565250d6cf13" prot="public" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>DerivReconstructionCoeffs</name></member>
@@ -1542,6 +1731,9 @@ The following parameters are array with three elements corresponding to the valu
       <member refid="classDerivReconstructionCoeffs_1adae1f3c68e143dc193f2e2556baed582" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_weights_patch_1_alloc</name></member>
       <member refid="classDerivReconstructionCoeffs_1a0b1224d8d5954a2563bd0a7b65e2cdbf" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_weights_patch_2</name></member>
       <member refid="classDerivReconstructionCoeffs_1a06d16e790b0e0992aceb1397da96918a" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>m_weights_patch_2_alloc</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a210b158f448973e199c9a992af4201bf" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>n</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a89f6c2bc565135b33198230fc4da1b35" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>n_minus_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ad069aa6a3a46c5ca5979cc1d80d75c1f" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>n_minus_2</name></member>
       <member refid="classDerivReconstructionCoeffs_1af377b9adef54e9e3cdb8aace5a61f68d" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>recursion</name></member>
       <member refid="classDerivReconstructionCoeffs_1aa139b29b77ec43767a4355a630339c44" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>s_extremity_1</name></member>
       <member refid="classDerivReconstructionCoeffs_1a88a28c61c5ad8f1810e6a249f82cbba6" prot="protected" virt="non-virtual"><scope>DerivReconstructionCoeffs</scope><name>s_extremity_2</name></member>

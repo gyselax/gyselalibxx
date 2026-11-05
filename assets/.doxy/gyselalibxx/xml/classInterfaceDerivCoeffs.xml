@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classInterfaceDerivCoeffs" kind="class" language="C++" prot="public">
     <compoundname>InterfaceDerivCoeffs</compoundname>
-    <basecompoundref refid="classDerivReconstructionCoeffs" prot="public" virt="non-virtual">DerivReconstructionCoeffs&lt; InterfaceType::Edge1::perpendicular_grid, InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::detail::TypeSeq&lt; InterfaceType::Edge1::associated_patch::BSplines1, InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::detail::TypeSeq&lt; InterfaceType::Edge2::associated_patch::BSplines1, InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;</basecompoundref>
+    <basecompoundref refid="classDerivReconstructionCoeffs" prot="public" virt="non-virtual">DerivReconstructionCoeffs&lt; InterfaceType::Edge1::perpendicular_grid, InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; InterfaceType::Edge1::associated_patch::BSplines1, InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; InterfaceType::Edge2::associated_patch::BSplines1, InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;</basecompoundref>
     <includes refid="interface__derivative__coefficients_8hpp" local="no">interface_derivative_coefficients.hpp</includes>
     <templateparamlist>
       <param>
@@ -10,19 +10,19 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1a64bc6126bb73dbdb7a124e9e27d96063" prot="private" static="no">
-        <type><ref refid="classDerivReconstructionCoeffs" kindref="compound">DerivReconstructionCoeffs</ref>&lt; typename InterfaceType::Edge1::perpendicular_grid, typename InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; typename InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::detail::TypeSeq&lt; typename InterfaceType::Edge1::associated_patch::BSplines1, typename InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; typename InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::detail::TypeSeq&lt; typename InterfaceType::Edge2::associated_patch::BSplines1, typename InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;</type>
+      <memberdef kind="typedef" id="classInterfaceDerivCoeffs_1a2c119bf439186353470225f27af127f1" prot="private" static="no">
+        <type><ref refid="classDerivReconstructionCoeffs" kindref="compound">DerivReconstructionCoeffs</ref>&lt; typename InterfaceType::Edge1::perpendicular_grid, typename InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; typename InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; typename InterfaceType::Edge1::associated_patch::BSplines1, typename InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; typename InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; typename InterfaceType::Edge2::associated_patch::BSplines1, typename InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;</type>
         <definition>using InterfaceDerivCoeffs&lt; InterfaceType &gt;::base_type =  DerivReconstructionCoeffs&lt;
             typename InterfaceType::Edge1::perpendicular_grid,
             typename InterfaceType::Edge2::perpendicular_grid,
             find_grid_t&lt;
                     typename InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type,
-                    ddc::detail::TypeSeq&lt;
+                    ddc::TypeSeq&lt;
                             typename InterfaceType::Edge1::associated_patch::BSplines1,
                             typename InterfaceType::Edge1::associated_patch::BSplines2&gt;&gt;,
             find_grid_t&lt;
                     typename InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type,
-                    ddc::detail::TypeSeq&lt;
+                    ddc::TypeSeq&lt;
                             typename InterfaceType::Edge2::associated_patch::BSplines1,
                             typename InterfaceType::Edge2::associated_patch::BSplines2&gt;&gt;,
             InterfaceType::Edge1::extremity,
@@ -261,7 +261,8 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>DerivReconstructionCoeffs&lt; InterfaceType::Edge1::perpendicular_grid, InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::detail::TypeSeq&lt; InterfaceType::Edge1::associated_patch::BSplines1, InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::detail::TypeSeq&lt; InterfaceType::Edge2::associated_patch::BSplines1, InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;</label>
+        <label>DerivReconstructionCoeffs&lt; InterfaceType::Edge1::perpendicular_grid, InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; InterfaceType::Edge1::associated_patch::BSplines1, InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; InterfaceType::Edge2::associated_patch::BSplines1, InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;</label>
+        <link refid="classDerivReconstructionCoeffs"/>
       </node>
       <node id="1">
         <label>InterfaceDerivCoeffs&lt; InterfaceType &gt;</label>
@@ -272,7 +273,8 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>DerivReconstructionCoeffs&lt; InterfaceType::Edge1::perpendicular_grid, InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::detail::TypeSeq&lt; InterfaceType::Edge1::associated_patch::BSplines1, InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::detail::TypeSeq&lt; InterfaceType::Edge2::associated_patch::BSplines1, InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;</label>
+        <label>DerivReconstructionCoeffs&lt; InterfaceType::Edge1::perpendicular_grid, InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; InterfaceType::Edge1::associated_patch::BSplines1, InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; InterfaceType::Edge2::associated_patch::BSplines1, InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;</label>
+        <link refid="classDerivReconstructionCoeffs"/>
       </node>
       <node id="1">
         <label>InterfaceDerivCoeffs&lt; InterfaceType &gt;</label>
@@ -284,14 +286,57 @@
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp" bodystart="39" bodyend="134"/>
     <listofallmembers>
       <member refid="classInterfaceDerivCoeffs_1a61d1ec3aee1fcc9b526b832ba9536f1b" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>associated_interface</name></member>
-      <member refid="classInterfaceDerivCoeffs_1a64bc6126bb73dbdb7a124e9e27d96063" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>base_type</name></member>
+      <member refid="classInterfaceDerivCoeffs_1a2c119bf439186353470225f27af127f1" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>base_type</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a2ab62a16b7cbf78885ada95d93813b20" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>BSplinesPerp1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a44743fee783a25ef9e18ba7000ad7663" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>BSplinesPerp2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a457e8c29025079182a1ada6c8b00b53c" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>build_array</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a625c02984662993d85942c2c332a5dc8" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>check_additional_interpolation_points_location</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a782c687d6b10882fc148426831495892" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>check_break_points_are_interpolation_points</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a808a5732d09b2ee406d8072b3dd1607f" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>correction_boundary</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a117bacc2a473b087401cf2e702ef18c7" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>cycle_buffers</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a70c422f5f745126ea3f2b43beb0eb788" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>DerivReconstructionCoeffs</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a860007cca0676980cd84f31a2cd97cc9" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_alpha</name></member>
       <member refid="classInterfaceDerivCoeffs_1a17072fb17cfd3827842f56654213f682" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_approx_cross_deriv</name></member>
       <member refid="classInterfaceDerivCoeffs_1a5cc3be98942f108123cf4ca1cd26c55f" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_approx_cross_deriv</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ad4614ad3d65630291c9b41a350bae252" prot="public" virt="non-virtual" ambiguityscope="DerivReconstructionCoeffs&lt; InterfaceType::Edge1::perpendicular_grid, InterfaceType::Edge2::perpendicular_grid, find_grid_t&lt; InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; InterfaceType::Edge1::associated_patch::BSplines1, InterfaceType::Edge1::associated_patch::BSplines2 &gt; &gt;, find_grid_t&lt; InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type, ddc::TypeSeq&lt; InterfaceType::Edge2::associated_patch::BSplines1, InterfaceType::Edge2::associated_patch::BSplines2 &gt; &gt;, InterfaceType::Edge1::extremity, InterfaceType::Edge2::extremity &gt;::"><scope>InterfaceDerivCoeffs</scope><name>get_approx_cross_deriv</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ad73c73e016410038fb7a4263809f9840" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_approx_deriv</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a94daca67972f743ac86dba2a1e26236d" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_approx_with_change_of_sign</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a8c2288a3d24baf8ec729068968589c09" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_beta</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a933c65a003ee79e647db580d162c391d" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_cell_lengths</name></member>
       <member refid="classInterfaceDerivCoeffs_1a02d631de1d089369b37a8aebf2b1b344" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_coeff_deriv_on_patch</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a347028801163ac2cc78449abc21028b0" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_coeff_deriv_patch_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1aac4181a5765b26e8348f75ac8bb3eb26" prot="public" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_coeff_deriv_patch_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a73bad45001ff309d39ba7ac4e616dedf" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_extremity_idx</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ab3df11f9ab08e639af636933a70bb3e2" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>get_gammas</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a8fe749a0c0fed2ad7999833af7bc8125" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>GridBreakPt1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ae04ff28af0d37dd6884f1214234bf42c" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>GridBreakPt2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a4c34fc4e6be079835c1ee6e264daebbc" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>GridEdgePerp1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ad8cd99be915ca1cb5e79cc560a79b166" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>GridEdgePerp2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a0e7b4af709d2a2784246528565187aed" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>IdxEdgePerp1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a27de88232a335fb74b152f1a803d6dc1" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>IdxEdgePerp2</name></member>
       <member refid="classInterfaceDerivCoeffs_1a4c984d45663527ddccc2f60acf473283" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>IdxRange1DPerp_1</name></member>
       <member refid="classInterfaceDerivCoeffs_1ab8d75a46d6be335a3f64679086e699f9" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>IdxRange1DPerp_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a6ce944391a5962b25d36627570da8767" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_coeff_deriv_patch_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ab59f97d0d2152e84a2fdbcbeeb9984fb" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_coeff_deriv_patch_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a6cd5d4d40ab3941fb9bd0255e2210e09" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_idx_range_perp_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1acbe097804372a470e384fe577918b135" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_idx_range_perp_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a0473b569f896664a0247200e389e91d6" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_is_cell_bound_1_with_extra_interpol_pt</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a34bd3cf46355bbfdd44b1b0c10e7cb54" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_is_cell_bound_2_with_extra_interpol_pt</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a9d7673eb28e038836898114061254348" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_weights_patch_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1adae1f3c68e143dc193f2e2556baed582" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_weights_patch_1_alloc</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a0b1224d8d5954a2563bd0a7b65e2cdbf" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_weights_patch_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a06d16e790b0e0992aceb1397da96918a" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>m_weights_patch_2_alloc</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a210b158f448973e199c9a992af4201bf" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>n</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a89f6c2bc565135b33198230fc4da1b35" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>n_minus_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1ad069aa6a3a46c5ca5979cc1d80d75c1f" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>n_minus_2</name></member>
       <member refid="classInterfaceDerivCoeffs_1a09ab28344ad5f0e7751add630d9f799a" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>Patch1</name></member>
       <member refid="classInterfaceDerivCoeffs_1a43330f146f3f2d3b1fa059092510eccc" prot="private" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>Patch2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1af377b9adef54e9e3cdb8aace5a61f68d" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>recursion</name></member>
+      <member refid="classDerivReconstructionCoeffs_1aa139b29b77ec43767a4355a630339c44" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>s_extremity_1</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a88a28c61c5ad8f1810e6a249f82cbba6" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>s_extremity_2</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a6b5e96e29caff274deb59bfef6fe76f6" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>set_coefficients_non_uniform_case</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a5756c1025be09d770b451f1f832ebc9c" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>set_coefficients_uniform_per_patch_case</name></member>
+      <member refid="classDerivReconstructionCoeffs_1a55dd497107eb65b6ba3dd84ea3afa492" prot="protected" virt="non-virtual"><scope>InterfaceDerivCoeffs</scope><name>set_local_uniform_weights</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

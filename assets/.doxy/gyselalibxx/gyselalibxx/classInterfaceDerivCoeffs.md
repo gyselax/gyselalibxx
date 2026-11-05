@@ -158,6 +158,9 @@ See [DerivReconstructionCoeffs](classDerivReconstructionCoeffs.md)
 
 | Type | Name |
 | ---: | :--- |
+|  std::size\_t | [**n**](classDerivReconstructionCoeffs.md#variable-n)   = `2`<br>_The position of the n-th index in the arrays used for the recursive calculation._  |
+|  std::size\_t | [**n\_minus\_1**](classDerivReconstructionCoeffs.md#variable-n_minus_1)   = `1`<br>_The position of the (n-1)-th index in the arrays used for the recursive calculation._  |
+|  std::size\_t | [**n\_minus\_2**](classDerivReconstructionCoeffs.md#variable-n_minus_2)   = `0`<br>_The position of the (n-2)-th index in the arrays used for the recursive calculation._  |
 |  Extremity constexpr | [**s\_extremity\_1**](classDerivReconstructionCoeffs.md#variable-s_extremity_1)   = `extremity\_1`<br>_The extremity of patch 1 where the interface is located._  |
 |  Extremity constexpr | [**s\_extremity\_2**](classDerivReconstructionCoeffs.md#variable-s_extremity_2)   = `extremity\_2`<br>_The extremity of patch 2 where the interface is located._  |
 
@@ -214,6 +217,9 @@ See [DerivReconstructionCoeffs](classDerivReconstructionCoeffs.md)
 
 | Type | Name |
 | ---: | :--- |
+|  std::array&lt; DField&lt; IdxRangeType, Kokkos::HostSpace &gt;, 3 &gt; | [**build\_array**](classDerivReconstructionCoeffs.md#function-build_array) (int input\_position, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; persistent\_memory, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer\_1, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer\_2) <br>_Build an array with the persistent\_memory at the requested input\_position._  |
+|  void | [**cycle\_buffers**](classDerivReconstructionCoeffs.md#function-cycle_buffers-12) (std::array&lt; double, 3 &gt; & buffer) <br>_Cycle the roles of the doubles in the array of values._  |
+|  void | [**cycle\_buffers**](classDerivReconstructionCoeffs.md#function-cycle_buffers-22) (std::array&lt; DField&lt; IdxRangeType, MemorySpace &gt;, 3 &gt; & buffer) <br>_Cycle the memory pointers in the array._  |
 |  double | [**get\_alpha**](classDerivReconstructionCoeffs.md#function-get_alpha) (double const cell\_length\_left, double const cell\_length\_right) <br>_Compute the coefficient alpha\_i._  |
 |  double | [**get\_beta**](classDerivReconstructionCoeffs.md#function-get_beta) (double const cell\_length\_left, double const cell\_length\_right) <br>_Compute the coefficient beta\_i._  |
 |  void | [**set\_local\_uniform\_weights**](classDerivReconstructionCoeffs.md#function-set_local_uniform_weights) (host\_t&lt; DField&lt; IdxRange&lt; EdgePerpGrid &gt; &gt; &gt; weights, double factor, double un\_other\_patch, Idx&lt; EdgePerpGrid &gt; idx\_interface) <br>_Apply the explicit formula for the uniform case to weights on one side of the interface._  |

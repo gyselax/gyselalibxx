@@ -839,6 +839,9 @@
     <member refid="classDerivReconstructionCoeffs_1a0b1224d8d5954a2563bd0a7b65e2cdbf" kind="variable"><name>m_weights_patch_2</name></member>
     <member refid="classDerivReconstructionCoeffs_1aa139b29b77ec43767a4355a630339c44" kind="variable"><name>s_extremity_1</name></member>
     <member refid="classDerivReconstructionCoeffs_1a88a28c61c5ad8f1810e6a249f82cbba6" kind="variable"><name>s_extremity_2</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a210b158f448973e199c9a992af4201bf" kind="variable"><name>n</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a89f6c2bc565135b33198230fc4da1b35" kind="variable"><name>n_minus_1</name></member>
+    <member refid="classDerivReconstructionCoeffs_1ad069aa6a3a46c5ca5979cc1d80d75c1f" kind="variable"><name>n_minus_2</name></member>
     <member refid="classDerivReconstructionCoeffs_1a70c422f5f745126ea3f2b43beb0eb788" kind="function"><name>DerivReconstructionCoeffs</name></member>
     <member refid="classDerivReconstructionCoeffs_1ab9c25a800909d8ba88c0af003ac42266" kind="function"><name>DerivReconstructionCoeffs</name></member>
     <member refid="classDerivReconstructionCoeffs_1abd3ffab7ab39dc56208e565250d6cf13" kind="function"><name>DerivReconstructionCoeffs</name></member>
@@ -861,6 +864,9 @@
     <member refid="classDerivReconstructionCoeffs_1a55dd497107eb65b6ba3dd84ea3afa492" kind="function"><name>set_local_uniform_weights</name></member>
     <member refid="classDerivReconstructionCoeffs_1a860007cca0676980cd84f31a2cd97cc9" kind="function"><name>get_alpha</name></member>
     <member refid="classDerivReconstructionCoeffs_1a8c2288a3d24baf8ec729068968589c09" kind="function"><name>get_beta</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a117bacc2a473b087401cf2e702ef18c7" kind="function"><name>cycle_buffers</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a3d207e8b856fd0cdf353da6cadc625d2" kind="function"><name>cycle_buffers</name></member>
+    <member refid="classDerivReconstructionCoeffs_1a457e8c29025079182a1ada6c8b00b53c" kind="function"><name>build_array</name></member>
   </compound>
   <compound refid="classDiocotronDensitySolution" kind="class"><name>DiocotronDensitySolution</name>
     <member refid="classDiocotronDensitySolution_1a3b7f61f099cebe7de300b01f3b0f23d1" kind="variable"><name>m_W1</name></member>
@@ -1825,7 +1831,7 @@
     <member refid="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" kind="function"><name>connected_to_patch</name></member>
   </compound>
   <compound refid="classInterfaceDerivCoeffs" kind="class"><name>InterfaceDerivCoeffs</name>
-    <member refid="classInterfaceDerivCoeffs_1a64bc6126bb73dbdb7a124e9e27d96063" kind="typedef"><name>base_type</name></member>
+    <member refid="classInterfaceDerivCoeffs_1a2c119bf439186353470225f27af127f1" kind="typedef"><name>base_type</name></member>
     <member refid="classInterfaceDerivCoeffs_1a09ab28344ad5f0e7751add630d9f799a" kind="typedef"><name>Patch1</name></member>
     <member refid="classInterfaceDerivCoeffs_1a43330f146f3f2d3b1fa059092510eccc" kind="typedef"><name>Patch2</name></member>
     <member refid="classInterfaceDerivCoeffs_1a4c984d45663527ddccc2f60acf473283" kind="typedef"><name>IdxRange1DPerp_1</name></member>

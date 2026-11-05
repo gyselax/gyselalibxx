@@ -741,6 +741,18 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="#variable-n"><strong>n</strong></a>   = <code>2</code><br><em>The position of the n-th index in the arrays used for the recursive calculation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="#variable-n_minus_1"><strong>n_minus_1</strong></a>   = <code>1</code><br><em>The position of the (n-1)-th index in the arrays used for the recursive calculation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="#variable-n_minus_2"><strong>n_minus_2</strong></a>   = <code>0</code><br><em>The position of the (n-2)-th index in the arrays used for the recursive calculation.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">Extremity constexpr</td>
 <td style="text-align: left;"><a href="#variable-s_extremity_1"><strong>s_extremity_1</strong></a>   = <code>extremity\_1</code><br><em>The extremity of patch 1 where the interface is located.</em></td>
 </tr>
@@ -810,6 +822,18 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align: right;">std::array&lt; DField&lt; IdxRangeType, Kokkos::HostSpace &gt;, 3 &gt;</td>
+<td style="text-align: left;"><a href="#function-build_array"><strong>build_array</strong></a> (int input_position, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; persistent_memory, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer_1, DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer_2) <br><em>Build an array with the persistent_memory at the requested input_position.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-cycle_buffers-12"><strong>cycle_buffers</strong></a> (std::array&lt; double, 3 &gt; &amp; buffer) <br><em>Cycle the roles of the doubles in the array of values.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-cycle_buffers-22"><strong>cycle_buffers</strong></a> (std::array&lt; DField&lt; IdxRangeType, MemorySpace &gt;, 3 &gt; &amp; buffer) <br><em>Cycle the memory pointers in the array.</em></td>
+</tr>
 <tr>
 <td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="#function-get_alpha"><strong>get_alpha</strong></a> (double const cell_length_left, double const cell_length_right) <br><em>Compute the coefficient alpha_i.</em></td>
@@ -1117,6 +1141,24 @@ inline double DerivReconstructionCoeffs::get_approx_deriv (
 </code></pre>
 <hr>
 <h2 id="protected-static-attributes-documentation">Protected Static Attributes Documentation</h2>
+<h3 id="variable-n">variable n</h3>
+<p><em>The position of the n-th index in the arrays used for the recursive calculation.</em> </p>
+<pre><code class="language-C++">std::size_t DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::n;
+</code></pre>
+<hr>
+
+<h3 id="variable-n_minus_1">variable n_minus_1</h3>
+<p><em>The position of the (n-1)-th index in the arrays used for the recursive calculation.</em> </p>
+<pre><code class="language-C++">std::size_t DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::n_minus_1;
+</code></pre>
+<hr>
+
+<h3 id="variable-n_minus_2">variable n_minus_2</h3>
+<p><em>The position of the (n-2)-th index in the arrays used for the recursive calculation.</em> </p>
+<pre><code class="language-C++">std::size_t DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::n_minus_2;
+</code></pre>
+<hr>
+
 <h3 id="variable-s_extremity_1">variable s_extremity_1</h3>
 <p><em>The extremity of patch 1 where the interface is located.</em> </p>
 <pre><code class="language-C++">Extremity constexpr DerivReconstructionCoeffs&lt; EdgePerpGrid1Type, EdgePerpGrid2Type, BSplinesPerp1Type, BSplinesPerp2Type, extremity_1, extremity_2 &gt;::s_extremity_1;
@@ -1281,6 +1323,52 @@ inline void DerivReconstructionCoeffs::recursion (
 </code></pre>
 <hr>
 <h2 id="protected-static-functions-documentation">Protected Static Functions Documentation</h2>
+<h3 id="function-build_array">function build_array</h3>
+<p><em>Build an array with the persistent_memory at the requested input_position.</em> </p>
+<pre><code class="language-C++">template&lt;class IdxRangeType&gt;
+static inline std::array&lt; DField&lt; IdxRangeType, Kokkos::HostSpace &gt;, 3 &gt; DerivReconstructionCoeffs::build_array (
+    int input_position,
+    DField&lt; IdxRangeType, Kokkos::HostSpace &gt; persistent_memory,
+    DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer_1,
+    DField&lt; IdxRangeType, Kokkos::HostSpace &gt; buffer_2
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>input_position</code> The position of the persistent_memory in the output array. </li>
+<li><code>persistent_memory</code> The memory that is saved in the class. </li>
+<li><code>buffer_1</code> A temporary empty buffer to be saved in the array. </li>
+<li><code>buffer_2</code> A temporary empty buffer to be saved in the array. </li>
+</ul>
+<hr>
+
+<h3 id="function-cycle_buffers-12">function cycle_buffers [1/2]</h3>
+<p><em>Cycle the roles of the doubles in the array of values.</em> </p>
+<pre><code class="language-C++">static inline void DerivReconstructionCoeffs::cycle_buffers (
+    std::array&lt; double, 3 &gt; &amp; buffer
+) 
+</code></pre>
+<p>Cycle the doubles in the array to change the indices ready for the next iteration.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>buffer</code> The array of values for the indices n-2, n-1 and n. </li>
+</ul>
+<hr>
+
+<h3 id="function-cycle_buffers-22">function cycle_buffers [2/2]</h3>
+<p><em>Cycle the memory pointers in the array.</em> </p>
+<pre><code class="language-C++">template&lt;class IdxRangeType, class MemorySpace&gt;
+static inline void DerivReconstructionCoeffs::cycle_buffers (
+    std::array&lt; DField&lt; IdxRangeType, MemorySpace &gt;, 3 &gt; &amp; buffer
+) 
+</code></pre>
+<p>Cycle the memory pointers in the array to change the indices ready for the next iteration.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>buffer</code> The array of fields for the indices n-2, n-1 and n. </li>
+</ul>
+<hr>
+
 <h3 id="function-get_alpha">function get_alpha</h3>
 <p><em>Compute the coefficient alpha_i.</em> </p>
 <pre><code class="language-C++">static inline double DerivReconstructionCoeffs::get_alpha (
