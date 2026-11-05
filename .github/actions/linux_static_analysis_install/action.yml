@@ -15,11 +15,11 @@ runs:
         path: |
           /usr/local/share/Cppcheck/
           /usr/local/bin/cppcheck
-        key: cppcheck-2-20-0
+        key: cppcheck-2-22-0
     - name: Install cppcheck
       if: steps.cache-cppcheck-restore.outputs.cache-hit != 'true'
       run: |
-        git clone -b 2.20.0 https://github.com/danmar/cppcheck.git
+        git clone -b 2.22.0 https://github.com/cppcheck-opensource/cppcheck.git
         cd cppcheck
         cmake -S . -B build
         cmake --build build

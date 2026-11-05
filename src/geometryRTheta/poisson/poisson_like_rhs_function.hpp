@@ -21,9 +21,9 @@ public:
     using evaluator_type = ddc::SplineEvaluatorND<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
-            ddc::detail::TypeSeq<GridR, GridTheta>,
-            ddc::detail::TypeSeq<
+            ddc::TypeSeq<BSplinesR, BSplinesTheta>,
+            ddc::TypeSeq<GridR, GridTheta>,
+            ddc::TypeSeq<
                     RadialExtrapolationRule,
                     RadialExtrapolationRule,
                     ddc::PeriodicExtrapolationRule<Theta>,

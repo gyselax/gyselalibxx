@@ -28,17 +28,16 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
         add_test(NAME TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION}
             COMMAND "$<TARGET_FILE:Python3::Interpreter>" "${CMAKE_CURRENT_SOURCE_DIR}/test_poisson.py"
                 "$<TARGET_FILE:${test_name}>")
-        set_property(TEST TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION} PROPERTY TIMEOUT 300)
-        set_property(TEST TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION} PROPERTY COST 100)
     endif()
   endforeach()
 endforeach()
 
-add_executable(gmg_polar_poisson_like_solver_test
+add_executable(polar_poisson_like_solver_test
     gmgpolarpoissonsolver.cpp
+    polarpoissonfemsolver_batched.cpp
     ../../main.cpp
 )
-target_link_libraries(gmg_polar_poisson_like_solver_test
+target_link_libraries(polar_poisson_like_solver_test
     PUBLIC
         GTest::gtest
 	    GTest::gmock
@@ -48,6 +47,11 @@ target_link_libraries(gmg_polar_poisson_like_solver_test
         gyselalibxx::pde_solvers
 )
 
-gtest_discover_tests(gmg_polar_poisson_like_solver_test
-    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
-    DISCOVERY_MODE PRE_TEST)
+if (NOT "${CMAKE_CXX_FLAGS}" MATCHES "--coverage")
+    # Test is much too slow with coverage activated
+    gtest_discover_tests(polar_poisson_like_solver_test
+        DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
+        DISCOVERY_MODE PRE_TEST
+        PROPERTIES TIMEOUT 60
+        PROPERTIES COST 20)
+endif()

@@ -8,7 +8,6 @@
 
 #include "ddc_aliases.hpp"
 #include "deriv_details.hpp"
-#include "idx_range_slice.hpp"
 #include "type_seq_tools.hpp"
 
 template <class T>
@@ -52,14 +51,14 @@ public:
     using chunk_type = FieldType;
 
     /// @brief A type sequence containing all derivatives present in this object.
-    using deriv_tags = detail::deriv_sub_set_t<ddc::detail::TypeSeq<DDims...>>;
+    using deriv_tags = detail::deriv_sub_set_t<ddc::TypeSeq<DDims...>>;
 
     /// @brief A type sequence containing all physical dimensions for which derivatives are present in this object.
     using physical_deriv_grids
-            = find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...>>;
+            = find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::TypeSeq<DDims...>>;
 
     /// @brief A type sequence containing all the physical grids on which the fields are defined.
-    using physical_grids = ddc::type_seq_remove_t<ddc::detail::TypeSeq<DDims...>, deriv_tags>;
+    using physical_grids = ddc::type_seq_remove_t<ddc::TypeSeq<DDims...>, deriv_tags>;
 
     /// @brief The type of the elements in the fields.
     using element_type = typename chunk_type::element_type;
@@ -155,7 +154,8 @@ protected:
     discrete_deriv_idx_range_type m_deriv_idx_range;
 
     /// @brief The physical index ranges on which the derivatives are defined.
-    to_subidx_range_collection<physical_deriv_grids> m_cross_derivative_idx_range;
+    ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
+            m_cross_derivative_idx_range;
 
 protected:
     /**
@@ -213,7 +213,7 @@ protected:
     KOKKOS_FUNCTION constexpr auto get_slicer_for(Idx<ODDims...> const& slice_idx, int array_idx)
             const
     {
-        if constexpr (!ddc::in_tags_v<QueryDDim, ddc::detail::TypeSeq<ODDims...>>) {
+        if constexpr (!ddc::in_tags_v<QueryDDim, ddc::TypeSeq<ODDims...>>) {
             return Kokkos::full_extent;
         } else {
             if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
@@ -262,7 +262,7 @@ protected:
             IdxRange<ODDims...> const& slice_idx_range,
             int array_idx) const
     {
-        if constexpr (!ddc::in_tags_v<QueryDDim, ddc::detail::TypeSeq<ODDims...>>) {
+        if constexpr (!ddc::in_tags_v<QueryDDim, ddc::TypeSeq<ODDims...>>) {
             return Kokkos::full_extent;
         } else {
             if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
@@ -317,15 +317,15 @@ protected:
      * If information about a derivative is missing then it is assumed that the 0-th order derivative
      * is requested.
      *
-     * @param idx_range The index range used to slice the mdspan.
+     * @param idx_range_to_slice The index range used to slice the mdspan.
      *
      * @returns Field The subset of the internal mdspan.
      */
     template <class... ODims>
-    KOKKOS_FUNCTION auto get_internal_field(IdxRange<ODims...> idx_range) const
+    KOKKOS_FUNCTION auto get_internal_field(IdxRange<ODims...> idx_range_to_slice) const
     {
         // Get the types related to the provided information
-        using provided_tags = ddc::detail::TypeSeq<ODims...>;
+        using provided_tags = ddc::TypeSeq<ODims...>;
         using provided_deriv_tags = detail::deriv_sub_set_t<provided_tags>;
 
         // Get the types related to the implicit information
@@ -336,11 +336,11 @@ protected:
         // Find the index range of the derivatives (either provided or an index range containing only the 0-th derivative)
         remaining_deriv_idx_range_type no_deriv_idx_range = detail::get_idx_range_from_element(
                 detail::no_derivative_element<remaining_deriv_tags>());
-        discrete_deriv_idx_range_type deriv_idx_range(idx_range, no_deriv_idx_range);
+        discrete_deriv_idx_range_type deriv_idx_range(idx_range_to_slice, no_deriv_idx_range);
 
         // Find the physical index range of the field
         physical_idx_range_type local_physical_idx_range(
-                detail::select_default(idx_range, m_physical_idx_range));
+                detail::select_default(idx_range_to_slice, m_physical_idx_range));
 
         // Find the discrete index range of the field
         index_range_type full_idx_range(local_physical_idx_range, deriv_idx_range);
@@ -382,8 +382,11 @@ protected:
     template <class... ODims>
     KOKKOS_FUNCTION auto get_internal_field(Idx<ODims...> elem) const
     {
+        using AllValidDims = ddc::TypeSeq<DDims...>;
+        static_assert(((ddc::in_tags_v<ODims, AllValidDims>)&&...));
+
         // Get the types related to the provided information
-        using provided_tags = ddc::detail::TypeSeq<ODims...>;
+        using provided_tags = ddc::TypeSeq<ODims...>;
         using provided_deriv_tags = detail::deriv_sub_set_t<provided_tags>;
         using provided_physical_tags = ddc::type_seq_remove_t<provided_tags, provided_deriv_tags>;
         using provided_deriv_idx_range_type
@@ -403,7 +406,7 @@ protected:
         using sliced_idx_range_type =
                 typename ddc::detail::convert_type_seq_to_discrete_domain_t<sliced_tags>;
         using sliced_index_type = typename sliced_idx_range_type::discrete_element_type;
-        using final_tags = ddc::type_seq_remove_t<ddc::detail::TypeSeq<DDims...>, sliced_tags>;
+        using final_tags = ddc::type_seq_remove_t<ddc::TypeSeq<DDims...>, sliced_tags>;
         using final_idx_range_type =
                 typename ddc::detail::convert_type_seq_to_discrete_domain_t<final_tags>;
 
@@ -448,7 +451,8 @@ protected:
     KOKKOS_FUNCTION DerivFieldCommon(
             physical_idx_range_type physical_idx_range,
             discrete_deriv_idx_range_type deriv_idx_range,
-            to_subidx_range_collection<physical_deriv_grids> cross_derivative_idx_range)
+            ddc::detail::convert_type_seq_to_strided_discrete_domain_t<physical_deriv_grids>
+                    cross_derivative_idx_range)
         : m_physical_idx_range(physical_idx_range)
         , m_deriv_idx_range(deriv_idx_range)
         , m_cross_derivative_idx_range(cross_derivative_idx_range)
@@ -456,6 +460,17 @@ protected:
     }
 
 public:
+    /** Constructs a new DerivFieldCommon by copy, yields a new view to the same data.
+     * @param other the DerivFieldCommon to copy.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(DerivFieldCommon const& other) = default;
+
+    /** Constructs a new DerivFieldCommon by move.
+     * @param other the DerivFieldCommon to move.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivFieldCommon(
+            DerivFieldCommon&& other) noexcept = default;
+
     KOKKOS_DEFAULTED_FUNCTION ~DerivFieldCommon() = default;
 
     /**
@@ -473,7 +488,7 @@ public:
     auto get_mdspan(IdxRange<ODims...> provided_deriv_idx_range)
     {
         static_assert(((ddc::in_tags_v<ODims, deriv_tags>)&&...));
-        using provided_deriv_tags = ddc::detail::TypeSeq<ODims...>;
+        using provided_deriv_tags = ddc::TypeSeq<ODims...>;
         using remaining_deriv_tags = ddc::type_seq_remove_t<deriv_tags, provided_deriv_tags>;
         using remaining_deriv_idx_range_type =
                 typename ddc::detail::convert_type_seq_to_discrete_domain_t<remaining_deriv_tags>;

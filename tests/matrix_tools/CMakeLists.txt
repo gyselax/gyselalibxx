@@ -4,6 +4,7 @@ add_executable(matrix_tests
   matrix_batch_ell.cpp
   matrix_batch_csr.cpp
   matrix_batch_tridiag.cpp
+  matrix_utils.cpp
 )
 target_link_libraries(matrix_tests
     PUBLIC

@@ -6,7 +6,6 @@
 
 #include "2patches_2d_non_periodic_uniform.hpp"
 #include "edge.hpp"
-#include "idx_range_slice.hpp"
 #include "interface.hpp"
 #include "matching_idx_slice.hpp"
 #include "patch.hpp"

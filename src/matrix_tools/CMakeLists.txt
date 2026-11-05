@@ -15,6 +15,7 @@ target_sources("matrix_tools"
     INTERFACE
         FILE_SET HEADERS
             FILES
+                inf_norm_residual_criterion.hpp
                 matrix.hpp
                 matrix_banded.hpp
                 matrix_batch.hpp

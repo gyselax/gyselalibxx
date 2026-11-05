@@ -186,7 +186,7 @@ template <class ElementType, class TypeSeqValidIndexSet>
 struct ToTensor;
 
 template <class ElementType, class... ValidIndexSet>
-struct ToTensor<ElementType, ddc::detail::TypeSeq<ValidIndexSet...>>
+struct ToTensor<ElementType, ddc::TypeSeq<ValidIndexSet...>>
 {
     using type = Tensor<ElementType, ValidIndexSet...>;
 };

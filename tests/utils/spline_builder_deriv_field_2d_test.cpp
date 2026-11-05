@@ -340,7 +340,7 @@ TEST(SplineBuilderDerivField2DTest, DDCSplineBuilderClosureHermiteTest)
     DField<IdxRange<BSplinesX, BSplinesY>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
-    apply_builder(spline_deriv_field, function_and_derivs);
+    apply_builder(spline_deriv_field, get_const_field(function_and_derivs));
     builder(spline_fields,
             get_const_field(function),
             std::optional(get_const_field(derivs_xmin)),
@@ -451,7 +451,7 @@ TEST(SplineBuilderDerivField2DTest, DDCSplineBuilderClosureGrevilleTest)
     DField<IdxRange<BSplinesX, BSplinesY>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
-    apply_builder(spline_deriv_field, function_and_derivs);
+    apply_builder(spline_deriv_field, get_const_field(function_and_derivs));
     builder(spline_fields, get_const_field(function));
 
     auto spline_deriv_field_host = ddc::create_mirror_view_and_copy(spline_deriv_field);
@@ -592,7 +592,7 @@ TEST(SplineBuilderDerivField2DTest, HybridDDCSplineBuilderClosureTest)
     DField<IdxRange<BSplinesX, BSplinesY>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
-    apply_builder(spline_deriv_field, function_and_derivs);
+    apply_builder(spline_deriv_field, get_const_field(function_and_derivs));
 
     builder(spline_fields,
             get_const_field(function),

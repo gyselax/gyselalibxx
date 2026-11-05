@@ -2,6 +2,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
 #include "mpichargedensitycalculator.hpp"
@@ -18,7 +20,7 @@ MpiChargeDensityCalculator::MpiChargeDensityCalculator(
 
 void MpiChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const
 {
-    Kokkos::Profiling::pushRegion("(GSLX) MpiChargeDensityCalculator");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) MpiChargeDensityCalculator");
 
     DFieldMemXY rho_local_alloc(
             "rho_local (MpiChargeDensityCalculator::operator())",
@@ -36,6 +38,4 @@ void MpiChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY al
             MPI_type_descriptor_t<Real>,
             MPI_SUM,
             m_comm);
-
-    Kokkos::Profiling::popRegion();
 }

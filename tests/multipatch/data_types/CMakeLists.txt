@@ -3,6 +3,7 @@ set(test_name_gtest "multipatch_field_test")
 add_executable("${test_name_gtest}"
         multipatch_field_2p.cpp
         multipatch_field_9p.cpp
+        multipatch_field_onion.cpp
         ../../main.cpp
 )
 target_link_libraries("${test_name_gtest}"

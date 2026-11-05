@@ -77,3 +77,16 @@ struct Patch<grid1, grid2, bsplines_dim1, bsplines_dim2>
     /// @brief Index range of a grids over the first and second spline dimension.
     using IdxRangeBS12 = IdxRange<BSplines1, BSplines2>;
 };
+
+template <class PatchType>
+struct is_patch : std::false_type
+{
+};
+
+template <class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2>
+struct is_patch<Patch<Grid1, Grid2, BsplinesDim1, BsplinesDim2>> : std::true_type
+{
+};
+
+template <class PatchType>
+bool constexpr is_patch_v = is_patch<PatchType>::value;

@@ -1,8 +1,8 @@
 name: Docker update
 
 inputs:
-  always_push:
-    description: 'Indicates if the docker should be pushed and tagged with the SHA regardless of whether it was rebuilt or not'
+  add_tags:
+    description: 'Indicates if the docker image should be tagged with the commit SHA (and the release tag if provided) even if it was not rebuilt'
     type: bool
     required: true
   release_tag:
@@ -21,23 +21,23 @@ runs:
     - uses: ./.github/actions/changed_files
     - id: rebuild-check
       run: |
-        # Check if docker/gyselalibxx_env/Dockerfile has been modified
-        changed_docker_file=$(cat changed_files.txt | grep "docker/gyselalibxx_env/Dockerfile" || true)
+        # Check if docker/gyselalibxx_env has been modified
+        changed_docker_directory=$(cat changed_files.txt | grep "docker/gyselalibxx_env" || true)
         echo "Changed files are"
         cat changed_files.txt
-        # Use the modification status of docker/gyselalibxx_env/Dockerfile to decide if the docker should be rebuilt
-        if [ -n "${changed_docker_file}" ]
+        # Use the modification status of docker/gyselalibxx_env to decide if the docker should be rebuilt
+        if [ -n "${changed_docker_directory}" ]
         then
-          echo "Dockerfile has changed"
+          echo "Docker directory has changed"
           echo "rebuild=true" >> $GITHUB_OUTPUT
         else
-          echo "Dockerfile has not changed"
+          echo "Docker directory has not changed"
           echo "rebuild=false" >> $GITHUB_OUTPUT
         fi
       shell: bash
     - name: Build final tags
       id: get-tags
-      if: (inputs.always_push == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
+      if: (inputs.add_tags == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
       run: |
         import os
         sha_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ github.event.pull_request.head.sha || github.SHA }}"
@@ -47,33 +47,47 @@ runs:
         # Save the CSV to the outputs for use in the build-push-action
         print("full_tags=", full_tags, file=open(os.environ["GITHUB_OUTPUT"], 'a'), sep='')
       shell: python
-    - name: Set up QEMU
-      if: (inputs.always_push == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
-      uses: docker/setup-qemu-action@v4
     - name: Set up Docker Buildx
-      if: (inputs.always_push == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
+      if: steps.rebuild-check.outputs.rebuild == 'true'
       uses: docker/setup-buildx-action@v4
     - name: Login to GitHub Container Registry
-      if: (inputs.always_push == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
+      if: (inputs.add_tags == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
       uses: docker/login-action@v4
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ github.token }}
     - name: Build and push to tag
-      if: (inputs.always_push == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
+      if: steps.rebuild-check.outputs.rebuild == 'true'
       uses: docker/build-push-action@v7
       with:
         context: ./docker/gyselalibxx_env
         cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
         pull: true
         push: true
-        call: ${{ (steps.rebuild-check.outputs.rebuild == 'true') && 'build' || 'check' }}
+        secrets: |
+          github_user_id=${{github.actor}}
+          github_token_id=${{github.token}}
         tags: ${{ steps.get-tags.outputs.full_tags }}
+    - name: Add tags to the existing image
+      if: (inputs.add_tags == 'true') && (steps.rebuild-check.outputs.rebuild == 'false')
+      env:
+        FULL_TAGS: ${{ steps.get-tags.outputs.full_tags }}
+      run: |
+        # The Dockerfile is unchanged so the latest image is reused. The new tags are added
+        # directly in the registry without pulling or rebuilding the image.
+        tag_args=()
+        IFS=',' read -ra tags <<< "${FULL_TAGS}"
+        for tag in "${tags[@]}"
+        do
+          tag_args+=(--tag "${tag}")
+        done
+        docker buildx imagetools create "${tag_args[@]}" ghcr.io/gyselax/gyselalibxx_env:latest
+      shell: bash
     - name: Pick image tag for subsequent jobs
       id: image_tag
       run: |
-        if [ "${{ (inputs.always_push == 'true') || (steps.rebuild-check.outputs.rebuild == 'true') }}" == "true" ]
+        if [ "${{ (inputs.add_tags == 'true') || (steps.rebuild-check.outputs.rebuild == 'true') }}" == "true" ]
         then
           echo "image_tag=ghcr.io/gyselax/gyselalibxx_env:${{ github.event.pull_request.head.sha || github.SHA }}" >> $GITHUB_OUTPUT
         else

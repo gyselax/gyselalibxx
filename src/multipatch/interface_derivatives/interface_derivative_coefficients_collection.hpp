@@ -32,9 +32,9 @@ inline constexpr bool is_interface_derivative_coefficients_collection_v
 template <class... Interfaces>
 class InterfaceDerivCoeffsCollection
 {
-    using DerivCalculatorTypeSeq = ddc::detail::TypeSeq<InterfaceDerivCoeffs<Interfaces>...>;
+    using DerivCalculatorTypeSeq = ddc::TypeSeq<InterfaceDerivCoeffs<Interfaces>...>;
 
-    using InterfaceTypeSeq = ddc::detail::TypeSeq<Interfaces...>;
+    using InterfaceTypeSeq = ddc::TypeSeq<Interfaces...>;
 
     std::tuple<InterfaceDerivCoeffs<Interfaces> const&...> m_deriv_coeffs_collection;
 

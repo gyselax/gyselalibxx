@@ -39,24 +39,23 @@ template <class Tag>
 struct DerivSubSet;
 
 template <>
-struct DerivSubSet<ddc::detail::TypeSeq<>>
+struct DerivSubSet<ddc::TypeSeq<>>
 {
-    using type = ddc::detail::TypeSeq<>;
+    using type = ddc::TypeSeq<>;
 };
 
 template <class Tag>
-struct DerivSubSet<ddc::detail::TypeSeq<Tag>>
+struct DerivSubSet<ddc::TypeSeq<Tag>>
 {
-    using type = std::
-            conditional_t<is_deriv_dim_v<Tag>, ddc::detail::TypeSeq<Tag>, ddc::detail::TypeSeq<>>;
+    using type = std::conditional_t<is_deriv_dim_v<Tag>, ddc::TypeSeq<Tag>, ddc::TypeSeq<>>;
 };
 
 template <class HeadTag, class... Tags>
-struct DerivSubSet<ddc::detail::TypeSeq<HeadTag, Tags...>>
+struct DerivSubSet<ddc::TypeSeq<HeadTag, Tags...>>
 {
     using type = ddc::type_seq_merge_t<
-            typename DerivSubSet<ddc::detail::TypeSeq<HeadTag>>::type,
-            typename DerivSubSet<ddc::detail::TypeSeq<Tags...>>::type>;
+            typename DerivSubSet<ddc::TypeSeq<HeadTag>>::type,
+            typename DerivSubSet<ddc::TypeSeq<Tags...>>::type>;
 };
 
 /// A helper function to extract the derivative dimensions from a type sequence.
@@ -78,9 +77,9 @@ struct StripDeriv<ddc::Deriv<Tags>>
 };
 
 template <class... Tags>
-struct StripDeriv<ddc::detail::TypeSeq<ddc::Deriv<Tags>...>>
+struct StripDeriv<ddc::TypeSeq<ddc::Deriv<Tags>...>>
 {
-    using type = ddc::detail::TypeSeq<Tags...>;
+    using type = ddc::TypeSeq<Tags...>;
 };
 
 /// A helper function to get the physical dimension associated with the provided derivative.
@@ -120,7 +119,7 @@ KOKKOS_FUNCTION Container<HeadQueryTag, QueryTags...> select_default(
         Container<HeadQueryTag, QueryTags...> const& default_values)
 {
     if constexpr (sizeof...(QueryTags) == 0) {
-        if constexpr (ddc::in_tags_v<HeadQueryTag, ddc::detail::TypeSeq<Tags...>>) {
+        if constexpr (ddc::in_tags_v<HeadQueryTag, ddc::TypeSeq<Tags...>>) {
             return ddc::select<HeadQueryTag>(known_values);
         } else {
             return ddc::select<HeadQueryTag>(default_values);
@@ -142,7 +141,7 @@ template <class DerivSeq>
 struct DefaultDerivElem;
 
 template <class... Tags>
-struct DefaultDerivElem<ddc::detail::TypeSeq<Tags...>>
+struct DefaultDerivElem<ddc::TypeSeq<Tags...>>
 {
     static_assert((is_deriv_dim_v<Tags> && ...));
     KOKKOS_FUNCTION constexpr static Idx<Tags...> get_element()
@@ -181,43 +180,13 @@ KOKKOS_FUNCTION IdxRange<Tag...> get_idx_range_from_element(Idx<Tag...> idx)
     return IdxRange<Tag...>(IdxRange<Tag> {ddc::select<Tag>(idx), IdxStep<Tag> {1}}...);
 }
 
-//-----------------------------------------------------------------------------
-
-/**
- * @brief A helper structure to determine the type when combining tags across containers.
- *
- * E.g. Combine<Idx<Tag1>, Idx<Tag2>>::type == Idx<Tag1, Tag2>
- *
- * @tparam Containers The containers that should be combined. They should differ only in the tags.
- */
-template <class... Containers>
-struct Combine;
-
-template <class Container>
-struct Combine<Container>
+template <class... Dims>
+IdxRangeSlice<Dims...> edge_idx_range(IdxRange<Dims...> v)
 {
-    using type = Container;
-};
-
-template <
-        template <typename...>
-        class Container,
-        class... Tags,
-        class... OTags,
-        class... TailContainers>
-struct Combine<Container<Tags...>, Container<OTags...>, TailContainers...>
-{
-    using type = typename Combine<Container<Tags..., OTags...>, TailContainers...>::type;
-};
-
-/**
- * @brief A helper structure to determine the type when combining tags across containers.
- *
- * E.g. combine_t<Idx<Tag1>, Idx<Tag2>> == Idx<Tag1, Tag2>
- *
- * @tparam Containers The containers that should be combined. They should differ only in the tags.
- */
-template <class... Containers>
-using combine_t = typename detail::Combine<Containers...>::type;
+    return IdxRangeSlice<Dims...>(IdxRangeSlice<Dims> {
+            ddc::select<Dims>(v.front()),
+            IdxStep<Dims> {2},
+            ddc::select<Dims>(v.extents()) - 1}...);
+}
 
 } // namespace detail

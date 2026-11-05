@@ -1,6 +1,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "kinetic_source.hpp"
 #include "mask_tanh.hpp"
 #include "species_info.hpp"
@@ -49,7 +51,7 @@ KineticSource::KineticSource(
 
 DFieldSpXVx KineticSource::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
-    Kokkos::Profiling::pushRegion("(GSLX) KineticSource");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) KineticSource");
     DConstFieldVx velocity_shape = get_field(m_velocity_shape);
 
     DConstFieldX spatial_extent = get_field(m_spatial_extent);
@@ -68,6 +70,5 @@ DFieldSpXVx KineticSource::operator()(DFieldSpXVx const allfdistribu, double con
                 allfdistribu(ispxvx) += df;
             });
 
-    Kokkos::Profiling::popRegion();
     return allfdistribu;
 }

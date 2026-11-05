@@ -2,8 +2,10 @@
 
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <cmath>
+#include <utility>
 
 #include <ddc/ddc.hpp>
 
@@ -93,7 +95,7 @@ restrict_to_idx_range(
     double const x_min = ddc::rmin(idx_range);
     double const length = total_interval_length(idx_range);
 
-    assert(length > 0);
+    KOKKOS_ASSERT(length > 0);
     coord -= x_min;
     coord = Coord1D(Kokkos::fmod((double)coord, length));
     coord += x_min;
@@ -201,6 +203,115 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
 
     return max_dist;
 }
+
+template <typename GridSubSet, typename GridSuperSet>
+Idx<GridSubSet> find_first_point_not_in_superset(
+        IdxRange<GridSubSet> const& idx_range_subset,
+        IdxRange<GridSuperSet> const& idx_range_superset,
+        ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
+{
+    // Grids are ordered so a serial loop allows iterating over both sets simultaneously
+    Idx<GridSuperSet> idx_superset = idx_range_superset.front();
+    for (Idx<GridSubSet> idx_subset = idx_range_subset.front();
+         idx_subset <= idx_range_subset.back();
+         idx_subset++, idx_superset++) {
+        // If points don't match check next point
+        while (std::abs(ddc::coordinate(idx_subset) - ddc::coordinate(idx_superset)) > tol
+               && idx_superset <= idx_range_superset.back())
+            [[unlikely]]
+            {
+                idx_superset++;
+            }
+        // If point was not found in superset then points are not a subset
+        if (idx_superset > idx_range_superset.back()) {
+            return idx_subset;
+        }
+    }
+    return idx_range_subset.back() + 1;
+}
+
+template <typename GridSubSet, typename GridSuperSet>
+bool points_are_subset(
+        IdxRange<GridSubSet> const& idx_range_subset,
+        IdxRange<GridSuperSet> const& idx_range_superset,
+        ddc::Real tol = std::numeric_limits<ddc::Real>::epsilon())
+{
+    if (idx_range_subset.size() > idx_range_superset.size()) {
+        return false;
+    } else {
+        return find_first_point_not_in_superset(idx_range_subset, idx_range_superset, tol)
+               == (idx_range_subset.back() + 1);
+    }
+}
+
+
+/**
+ * @brief Get the multi-dimensional index found at a given position in an index range.
+ *
+ * The index range is traversed in layout_right order (the last dimension varies fastest).
+ * This is the inverse of the linearisation used to store a contiguous layout_right Field
+ * defined on the index range.
+ *
+ * @param idx_range The index range.
+ * @param linear_idx The position of the index in the index range (0 <= linear_idx < idx_range.size()).
+ *
+ * @return The index found at the position linear_idx.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION Idx<Dims...> get_idx_from_linear_index(
+        IdxRange<Dims...> const& idx_range,
+        std::size_t linear_idx)
+{
+    if constexpr (sizeof...(Dims) == 0) {
+        KOKKOS_ASSERT(linear_idx == 0);
+        return Idx<>();
+    } else {
+        KOKKOS_ASSERT(linear_idx < idx_range.size());
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const extents
+                = ddc::detail::array(idx_range.extents());
+        IdxStep<Dims...> offset;
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)>& offsets
+                = ddc::detail::array(offset);
+        for (std::size_t i = sizeof...(Dims); i > 0; --i) {
+            offsets[i - 1] = linear_idx % extents[i - 1];
+            linear_idx /= extents[i - 1];
+        }
+        return idx_range.front() + offset;
+    }
+}
+
+/**
+ * @brief Get the position of a multi-dimensional index in an index range.
+ *
+ * The index range is traversed in layout_right order (the last dimension varies fastest).
+ * This is the linearisation used to store a contiguous layout_right Field defined on the
+ * index range. It is the inverse of get_idx_from_linear_index.
+ *
+ * @param idx_range The index range.
+ * @param idx The index whose position is calculated (idx_range.contains(idx) must be true).
+ *
+ * @return The position of the index in the index range.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION std::size_t get_linear_index_from_idx(
+        IdxRange<Dims...> const& idx_range,
+        Idx<Dims...> const& idx)
+{
+    if constexpr (sizeof...(Dims) == 0) {
+        return 0;
+    } else {
+        KOKKOS_ASSERT(idx_range.contains(idx));
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const extents
+                = ddc::detail::array(idx_range.extents());
+        std::array<ddc::DiscreteVectorElement, sizeof...(Dims)> const offsets
+                = ddc::detail::array(idx - idx_range.front());
+        std::size_t linear_idx = 0;
+        for (std::size_t i = 0; i < sizeof...(Dims); ++i) {
+            linear_idx = linear_idx * extents[i] + offsets[i];
+        }
+        return linear_idx;
+    }
+}
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------
@@ -251,9 +362,9 @@ template <template <class Tag> class Templ, class TypeSeq>
 struct ApplyTemplateToTypeSeq;
 
 template <template <class Tag> class Templ, class... Tags>
-struct ApplyTemplateToTypeSeq<Templ, ddc::detail::TypeSeq<Tags...>>
+struct ApplyTemplateToTypeSeq<Templ, ddc::TypeSeq<Tags...>>
 {
-    using type = ddc::detail::TypeSeq<Templ<Tags>...>;
+    using type = ddc::TypeSeq<Templ<Tags>...>;
 };
 
 /// R contains all elements that are in A and B.
@@ -264,27 +375,24 @@ template <class TagSeqA, class TagSeqB, class TagSeqR>
 struct TypeSeqIntersection;
 
 template <class TypeSeqA, class TypeSeqR>
-struct TypeSeqIntersection<TypeSeqA, ddc::detail::TypeSeq<>, TypeSeqR>
+struct TypeSeqIntersection<TypeSeqA, ddc::TypeSeq<>, TypeSeqR>
 {
     using type = TypeSeqR;
 };
 
 template <class TypeSeqA, class HeadTagsB, class... TailTagsB, class... TagsR>
-struct TypeSeqIntersection<
-        TypeSeqA,
-        ddc::detail::TypeSeq<HeadTagsB, TailTagsB...>,
-        ddc::detail::TypeSeq<TagsR...>>
+struct TypeSeqIntersection<TypeSeqA, ddc::TypeSeq<HeadTagsB, TailTagsB...>, ddc::TypeSeq<TagsR...>>
 {
     using type = std::conditional_t<
             ddc::in_tags_v<HeadTagsB, TypeSeqA>,
             typename TypeSeqIntersection<
                     TypeSeqA,
-                    ddc::detail::TypeSeq<TailTagsB...>,
-                    ddc::detail::TypeSeq<TagsR..., HeadTagsB>>::type,
+                    ddc::TypeSeq<TailTagsB...>,
+                    ddc::TypeSeq<TagsR..., HeadTagsB>>::type,
             typename TypeSeqIntersection<
                     TypeSeqA,
-                    ddc::detail::TypeSeq<TailTagsB...>,
-                    ddc::detail::TypeSeq<TagsR...>>::type>;
+                    ddc::TypeSeq<TailTagsB...>,
+                    ddc::TypeSeq<TagsR...>>::type>;
 };
 
 
@@ -292,7 +400,7 @@ template <class ValidIndexSet>
 struct ToCoord;
 
 template <class... Dims>
-struct ToCoord<ddc::detail::TypeSeq<Dims...>>
+struct ToCoord<ddc::TypeSeq<Dims...>>
 {
     using type = Coord<Dims...>;
 };
@@ -331,7 +439,7 @@ using apply_template_to_type_seq_t = typename detail::ApplyTemplateToTypeSeq<Tem
 /// A helper to find all types which are found in both TypeSeq1 and TypeSeq2
 template <class TypeSeq1, class TypeSeq2>
 using type_seq_intersection_t =
-        typename detail::TypeSeqIntersection<TypeSeq1, TypeSeq2, ddc::detail::TypeSeq<>>::type;
+        typename detail::TypeSeqIntersection<TypeSeq1, TypeSeq2, ddc::TypeSeq<>>::type;
 
 /// Get a coordinate from a TypeSeq
 template <class ValidIndexSet>

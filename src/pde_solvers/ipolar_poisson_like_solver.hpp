@@ -29,9 +29,9 @@ class IPolarPoissonLikeSolver<IdxRange<ODims...>, IdxRangeFull, MemorySpace, Lay
 {
 protected:
     /// @brief The tags describing the real dimensions in the equation.
-    using real_laplacian_tags = ddc::detail::TypeSeq<typename ODims::continuous_dimension_type...>;
+    using real_laplacian_tags = ddc::TypeSeq<typename ODims::continuous_dimension_type...>;
     /// @brief The tags describing the discrete dimensions in the equation.
-    using laplacian_tags = ddc::detail::TypeSeq<ODims...>;
+    using laplacian_tags = ddc::TypeSeq<ODims...>;
     /// @brief The tags describing the dimensions of the index range on which the operator acts.
     using space_tags = ddc::to_type_seq_t<IdxRangeFull>;
     /// @brief The tags describing the batched dimensions.

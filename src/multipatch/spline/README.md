@@ -3,13 +3,13 @@
 This directory defines structures and methods to deal with different splines on every patches.
 The multipatch patch operators implemented are
 
-- [Multipatch spline builder](#multipatch-spline-builder) - Definition of `MultipatchSplineBuilder` and `MultipatchSplineBuilder2D`.
+- [Multipatch spline builder](#multipatch-spline-builder) - Definition of `SplineBuilderCollection` and `SplineBuilder2DCollection`.
 - [Multipatch spline evaluator](#multipatch-spline-evaluator) - Definition of `MultipatchSplineEvaluator2D`.
 - [Multipatch extrapolation rules](#multipatch-extrapolation-rules) - Definition of extrapolation rules depending on the geometries for `MultipatchSplineEvaluator2D`.
 
 ## Multipatch spline builder
 
-The `MultipatchSplineBuilder` and `MultipatchSplineBuilder2D` allow all the given spline builders to be called in one single line.
+The `SplineBuilderCollection` and `SplineBuilder2DCollection` allow all the given spline builders to be called in one single line.
 
 The template parameters of this class reproduce the `SplineBuilder` and `SplineBuilder2D` classes from DDC.
 The spline coefficients and values of the functions are stored in `MultipatchType` objects.
@@ -17,7 +17,7 @@ The spline builders are stored inside the class in a `std::tuple`.
 
 For Hermite boundary conditions, derivatives have to be provided. They are also stored in `MultipatchType` objects.
 
-### Example of use of MultipatchSplineBuilder
+### Example of use of SplineBuilderCollection
 
 We define all the builders for each patch,
 
@@ -28,10 +28,10 @@ SplineBuilderType3 builder_3(idx_range_3);
 ...
 ```
 
-We can instantiate a `MultipatchSplineBuilder` from these builders,
+We can instantiate a `SplineBuilderCollection` from these builders,
 
 ```cpp
-MultipatchSplineBuilder builder (builder_1, builder_2, builder_3); 
+SplineBuilderCollection builder (builder_1, builder_2, builder_3);
 ```
 
 We allocate memory for the spline representations on each patch,
@@ -66,7 +66,7 @@ builder(patches_splines, patches_values);
 
 The `MultipatchSplineEvaluator2D` allows all the spline evaluators to be called in one single line.
 
-Contrary to the `MultipatchSplineBuilder` class, the spline evaluators are not given as input but we directly
+Contrary to the `SplineBuilderCollection` class, the spline evaluators are not given as input but we directly
 compute the evaluation inside the class. The template parameters and aliases are similar to the ones in the `SplineEvaluator2D`
 class in DDC.
 
@@ -106,7 +106,7 @@ To evaluate at a given coordinate outside the domain, extrapolation rules have b
 ## Contents
 
 - `constant_extrapolation_rules_onion.hpp`: Define `ConstantExtrapolationRuleOnion`, constant extrapolation rule for onion geometries.
-- `multipatch_spline_builder_2d.hpp`: Define the `MultipatchSplineBuilder2D` operator to apply 2D spline builders on every patch.
-- `multipatch_spline_builder.hpp`: Define the `MultipatchSplineBuilder` operator to apply 1D spline builders on every patch.
+- `spline_builder_2d_collection.hpp`: Define the `SplineBuilder2DCollection` operator to apply 2D spline builders on every patch.
+- `spline_builder_collection.hpp`: Define the `SplineBuilderCollection` operator to apply 1D spline builders on every patch.
 - `multipatch_spline_evaluator_2d.hpp`: Define the `MultipatchSplineEvaluator2D` operator to apply 2D spline evaluators on every patch.
 - `null_extrapolation_rules.hpp`: Define `NullExtrapolationRule`, a null extrapolation rule for every geometry.  
