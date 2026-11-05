@@ -1213,13 +1213,13 @@ protected:
     template <class IdxRangeType, class MemorySpace>
     static void cycle_buffers(std::array<DField<IdxRangeType, MemorySpace>, 3>& buffer)
     {
-        // Save n-2 allocation but values are no longer needed
+        // Save pointer to n-2 memory block, whose values are no longer needed
         DField<IdxRangeType, MemorySpace> tmp = buffer[0];
         // n-1 becomes n-2
         buffer[n_minus_2] = buffer[n_minus_1];
         // n becomes n-1
         buffer[n_minus_1] = buffer[n];
-        // new n is ready to be defined (but still contains value of old n-2)
+        // new n is ready to be defined (but still contains values of old n-2)
         buffer[n] = tmp;
     }
 
