@@ -176,6 +176,10 @@ public:
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
     {
+        if constexpr ((std::is_same_v<IdxRange1DPerp_1, IdxRange1DPerp_2>)&&(
+                              GridEdgePerp1::continuous_dimension_type::PERIODIC)) {
+            assert(idx_range_1d_1.back() == idx_range_1d_2.front());
+        }
         assert(Closure1 != ddc::SplineBuilderClosure::PERIODIC);
         assert(Closure2 != ddc::SplineBuilderClosure::PERIODIC);
 
