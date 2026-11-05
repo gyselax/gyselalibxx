@@ -391,7 +391,7 @@ public:
                 m_idx_range_perp_1,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](Idx1D_1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
+                [&](IdxEdgePerp1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
     }
 
     /**
@@ -410,7 +410,7 @@ public:
                 m_idx_range_perp_2,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
+                [&](IdxEdgePerp2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
     }
 
     /**
@@ -463,20 +463,10 @@ protected:
                              * function_2(get_extremity_idx(s_extremity_2, m_idx_range_perp_2)))
                < 1e-13);
 
-        double coeff_values = ddc::host_transform_reduce(
-                m_idx_range_perp_1,
-                0.0,
-                ddc::reducer::sum<double>(),
-                [&](IdxEdgePerp1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
+        double coeff_values = get_approx_deriv_patch1_component(function_1);
 
         // To avoid counting twice the value at the interface.
-        coeff_values += ddc::host_transform_reduce(
-                m_idx_range_perp_2,
-                0.0,
-                ddc::reducer::sum<double>(),
-                [&](IdxEdgePerp2 const& idx) {
-                    return sign_function_2 * function_2(idx) * m_weights_patch_2(idx);
-                });
+        coeff_values += sign_function_2 * get_approx_deriv_patch2_component(function_2);
         return coeff_values;
     }
 
