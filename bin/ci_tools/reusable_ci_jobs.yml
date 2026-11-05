@@ -46,9 +46,10 @@ setup_env_mr:
   timeout: 2 hours
   variables:
     GIT_SUBMODULE_STRATEGY: normal
+  before_script:
+    - . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${BACKEND}
   script: |
     set -x
-    export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/${BACKEND}
     rm -rf build || true
     mkdir build
     cd build
