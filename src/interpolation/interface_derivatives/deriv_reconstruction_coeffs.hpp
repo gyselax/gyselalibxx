@@ -561,19 +561,22 @@ protected:
         int const n2_cells
                 = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
 
+        // The number of times the buffers are cycled
         int n_permutations = (n1_cells - 2) + (n2_cells - 2)
                              + m_is_cell_bound_2_with_extra_interpol_pt
                              + m_is_cell_bound_1_with_extra_interpol_pt + 1;
-        int output_position = (n_permutations + 2) % 3;
+        // The position of m_weights_patch_1/m_weights_patch_2 so it is found at index n=2
+        // at the end of the calculations
+        int input_position = (n_permutations + 2) % 3;
 
         // Store the 3 last steps for the recursion in an array.
         std::array<host_t<DField<IdxRange1DPerp_1>>, 3> weights_patch1 = build_array(
-                output_position,
+                input_position,
                 m_weights_patch_1,
                 get_field(weights_1_buffer_1_alloc),
                 get_field(weights_1_buffer_2_alloc));
         std::array<host_t<DField<IdxRange1DPerp_2>>, 3> weights_patch2 = build_array(
-                output_position,
+                input_position,
                 m_weights_patch_2,
                 get_field(weights_2_buffer_1_alloc),
                 get_field(weights_2_buffer_2_alloc));
@@ -1223,16 +1226,19 @@ protected:
         buffer[n] = tmp;
     }
 
+    /**
+     * @brief Build an array with the persistent_memory at the requested input_position.
+     */
     template <class IdxRangeType>
     static std::array<DField<IdxRangeType, Kokkos::HostSpace>, 3> build_array(
-            int output_position,
+            int input_position,
             DField<IdxRangeType, Kokkos::HostSpace> persistent_memory,
             DField<IdxRangeType, Kokkos::HostSpace> buffer_1,
             DField<IdxRangeType, Kokkos::HostSpace> buffer_2)
     {
-        if (output_position == 0) {
+        if (input_position == 0) {
             return {persistent_memory, buffer_1, buffer_2};
-        } else if (output_position == 1) {
+        } else if (input_position == 1) {
             return {buffer_1, persistent_memory, buffer_2};
         } else {
             return {buffer_1, buffer_2, persistent_memory};
