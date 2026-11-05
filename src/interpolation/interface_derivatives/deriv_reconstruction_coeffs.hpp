@@ -668,7 +668,6 @@ protected:
                 weights_patch1,
                 weights_patch2);
 
-
         // Correction if we use an additional interpolation point as closure in the last cell.
         if (m_is_cell_bound_2_with_extra_interpol_pt) {
             correction_boundary<false>(
@@ -1202,7 +1201,7 @@ protected:
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
     }
 
-    void cycle_buffers(std::array<double, 3>& buffer)
+    static void cycle_buffers(std::array<double, 3>& buffer)
     {
         // n-1 becomes n-2
         buffer[n_minus_2] = buffer[n_minus_1];
@@ -1212,7 +1211,7 @@ protected:
     }
 
     template <class IdxRangeType, class MemorySpace>
-    void cycle_buffers(std::array<DField<IdxRangeType, MemorySpace>, 3>& buffer)
+    static void cycle_buffers(std::array<DField<IdxRangeType, MemorySpace>, 3>& buffer)
     {
         // Save n-2 allocation but values are no longer needed
         DField<IdxRangeType, MemorySpace> tmp = buffer[0];
@@ -1225,7 +1224,7 @@ protected:
     }
 
     template <class IdxRangeType>
-    std::array<DField<IdxRangeType, Kokkos::HostSpace>, 3> build_array(
+    static std::array<DField<IdxRangeType, Kokkos::HostSpace>, 3> build_array(
             int output_position,
             DField<IdxRangeType, Kokkos::HostSpace> persistent_memory,
             DField<IdxRangeType, Kokkos::HostSpace> buffer_1,
