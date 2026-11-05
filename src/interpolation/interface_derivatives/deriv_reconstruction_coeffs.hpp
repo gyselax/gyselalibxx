@@ -568,8 +568,8 @@ protected:
         int n_permutations = (n1_cells - 2) + (n2_cells - 2)
                              + m_is_cell_bound_2_with_extra_interpol_pt
                              + m_is_cell_bound_1_with_extra_interpol_pt + 1;
-        // The position of m_weights_patch_1/m_weights_patch_2 so it is found at index n=2
-        // at the end of the calculations
+        // The position of m_weights_patch_1/m_weights_patch_2 in the array weights_patch1/weights_patch2
+        // so it is found at index n=2 at the end of the calculations
         int input_position = (n_permutations + 2) % 3;
 
         // Store the 3 last steps for the recursion in an array.
