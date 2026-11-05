@@ -698,9 +698,9 @@ protected:
 
         // Set (a_{n},b_{n},c_{n}) ---
         coeff_deriv_patch2[n] = coeff_deriv_patch2[n_minus_1]
-                                / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i); // a_{n-1}
+                                / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i); // a_{n}
         coeff_deriv_patch1[n] = coeff_deriv_patch1[n_minus_1] * beta_i
-                                / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i); // b_{n-1}
+                                / (1 - coeff_deriv_patch1[n_minus_1] * alpha_i); // b_{n}
 
         // c_{n} = (c_{n-1} + b_{n-1} * gamma_i) / (1 - b_{n-1} * alpha_i);
         ddc::host_for_each(m_idx_range_perp_1, [&](IdxEdgePerp1 const& idx) {
