@@ -111,8 +111,11 @@ protected:
     /// @brief The extremity of patch 2 where the interface is located.
     static Extremity constexpr s_extremity_2 = extremity_2;
 
+    /// @brief The position of the n-th index in the arrays used for the recursive calculation.
     static constexpr std::size_t n = 2;
+    /// @brief The position of the (n-1)-th index in the arrays used for the recursive calculation.
     static constexpr std::size_t n_minus_1 = 1;
+    /// @brief The position of the (n-2)-th index in the arrays used for the recursive calculation.
     static constexpr std::size_t n_minus_2 = 0;
 
     /// @brief The coefficient (a) in front of the derivative on patch 1.
