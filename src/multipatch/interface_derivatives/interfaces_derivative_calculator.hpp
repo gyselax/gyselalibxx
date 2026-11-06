@@ -153,7 +153,7 @@ public:
      * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives.
      */
     template <class IdxDeriv, class IdxPar>
-    void solve(
+    void operator()(
             IdxDeriv const& deriv_order,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             IdxPar const& idx_par)
@@ -191,7 +191,7 @@ public:
      * @warning The global mesh is supposed to be conforming. 
      */
     template <class IdxDeriv>
-    void solve(
+    void operator()(
             IdxDeriv const& deriv_order,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {

@@ -773,7 +773,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
 
     // --- the first derivatives (on inner interfaces) from the function values.
     using IdxDerivPerp = Idx<ddc::Deriv<typename Grid1AlongXg::continuous_dimension_type>>;
-    deriv_calculator.solve(IdxDerivPerp(1), functions_and_derivs);
+    deriv_calculator(IdxDerivPerp(1), functions_and_derivs);
 
     // --- the cross-derivatives from the first derivatives.
     /*
@@ -785,7 +785,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     using IdxCrossDeriv
             = Idx<ddc::Deriv<typename PatchDirection::Dim1>,
                   ddc::Deriv<typename PatchDirection::Dim2>>;
-    deriv_calculator.solve(IdxCrossDeriv(1, 1), functions_and_derivs);
+    deriv_calculator(IdxCrossDeriv(1, 1), functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::TypeSeq<>;

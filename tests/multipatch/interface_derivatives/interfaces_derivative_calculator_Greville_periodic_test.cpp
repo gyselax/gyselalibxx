@@ -547,18 +547,18 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     initialise_2D_function(function_g);
 
     // --- the first derivatives computed from the function values.
-    deriv_calculator_123.solve(Idx<ddc::Deriv<X<1>>>(1), functions_and_derivs);
-    deriv_calculator_456.solve(Idx<ddc::Deriv<X<4>>>(1), functions_and_derivs);
-    deriv_calculator_789.solve(Idx<ddc::Deriv<X<7>>>(1), functions_and_derivs);
+    deriv_calculator_123(Idx<ddc::Deriv<X<1>>>(1), functions_and_derivs);
+    deriv_calculator_456(Idx<ddc::Deriv<X<4>>>(1), functions_and_derivs);
+    deriv_calculator_789(Idx<ddc::Deriv<X<7>>>(1), functions_and_derivs);
 
-    deriv_calculator_147.solve(Idx<ddc::Deriv<Y<1>>>(1), functions_and_derivs);
-    deriv_calculator_258.solve(Idx<ddc::Deriv<Y<2>>>(1), functions_and_derivs);
-    deriv_calculator_369.solve(Idx<ddc::Deriv<Y<3>>>(1), functions_and_derivs);
+    deriv_calculator_147(Idx<ddc::Deriv<Y<1>>>(1), functions_and_derivs);
+    deriv_calculator_258(Idx<ddc::Deriv<Y<2>>>(1), functions_and_derivs);
+    deriv_calculator_369(Idx<ddc::Deriv<Y<3>>>(1), functions_and_derivs);
 
     // --- the cross-derivatives computed from the first derivatives.
-    deriv_calculator_147.solve(Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>(1, 1), functions_and_derivs);
-    deriv_calculator_258.solve(Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>>(1, 1), functions_and_derivs);
-    deriv_calculator_369.solve(Idx<ddc::Deriv<X<3>>, ddc::Deriv<Y<3>>>(1, 1), functions_and_derivs);
+    deriv_calculator_147(Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>(1, 1), functions_and_derivs);
+    deriv_calculator_258(Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>>(1, 1), functions_and_derivs);
+    deriv_calculator_369(Idx<ddc::Deriv<X<3>>, ddc::Deriv<Y<3>>>(1, 1), functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.
