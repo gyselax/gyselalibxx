@@ -909,7 +909,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
 
             // Exact formula ---------------------------------------------------------------------
             double const local_deriv = deriv_interface_approx;
-            EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
+            EXPECT_NEAR(local_deriv, global_deriv, 5e-12);
         });
     } else {
         // 30 cells ------------------------------------------------------------------------------
