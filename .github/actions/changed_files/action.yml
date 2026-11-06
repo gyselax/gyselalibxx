@@ -3,9 +3,7 @@ name: "Check which files have been changed"
 runs:
   using: "composite"
   steps:
-    - if: github.event_name != 'push'
-      run: |
-        echo ${{ github.event_name }}
+    - run: |
         git fetch --no-recurse-submodules origin ${CHANGES_REF}
         if [[ -n "$(git branch -r --list origin/${CHANGES_REF})" ]]
         then
@@ -21,12 +19,6 @@ runs:
     - if: github.event_name == 'push'
       run: |
         git config --global --add safe.directory $(pwd)
-        PARENT=$(git cat-file -p "${{ github.sha }}" | awk '/^parent / {print $2}')
-        echo $PARENT
-        git fetch --no-tags origin "$PARENT"
-        #git fetch --unshallow origin
-        #git rev-list --parents -n 1 "${{ github.sha }}"
         git show ${{ github.sha }} --name-only --pretty=
         git show ${{ github.sha }} --name-only --pretty= > changed_files.txt
-        cat changed_files.txt
       shell: bash
