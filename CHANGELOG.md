@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
 - `MultipatchSplineEvaluator2D` works with `DerivField`.
 - Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
-- Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`. 
+- Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
 
 ### Fixed
 

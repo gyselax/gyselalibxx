@@ -18,7 +18,7 @@
 #include "view.hpp"
 
 template <
-        class Derived,
+        class DerivedClass,
         class Connectivity,
         class Grid1D,
         class PatchSeq,
@@ -26,23 +26,9 @@ template <
 class DerivativeCalculatorCommon;
 
 /**
-  * @brief Class to compute the interface derivatives along a given direction 
-  * on all the interfaces with an approximation formula.
-  * 
-  * This operator is implemented for conforming equivalent global meshes. 
-  * 
-  * When we call the operator .solve_deriv() or .solve_cross_deriv(), the operator loops
-  * over the interface to compute the vector C_trunc to determine all the interface derivatives 
-  * and update the DerivField given in input. 
-  * 
-  * The vector C_trunc is given by the coefficients (see README),
-  * @f$ \{\sum_{k = - N_{reduc}}^{N_{reduc}} \omega_{k, N_{reduc}, N_{reduc}}^{i_I} f_{i_I+k} \}_I @f$
-  * 
-  * with 
-  *     * @f$ N_{reduc} @f$ the number of chosen cells for the approximation, 
-  *     * @f$ i_I @f$ the index of the grid at the Ith interface, 
-  *     * @f$ f_{i_I+k} @f$ the function values if we compute the first derivatives, or the first 
-  * derivatives if we compute the cross-derivatives. 
+  * @brief Abstract class to hold the interface derivative coefficient collection
+  * and the index ranges.
+  * This is the superclass for interface derivative calculators defined in this folder.
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
@@ -51,13 +37,13 @@ class DerivativeCalculatorCommon;
   * that stores the InterfaceDerivCoeffs needed to compute the interface derivatives. 
   */
 template <
-        class Derived,
+        class DerivedClass,
         class Connectivity,
         class Grid1D,
         class... Patches,
         class DerivCoeffCollection>
 class DerivativeCalculatorCommon<
-        Derived,
+        DerivedClass,
         Connectivity,
         Grid1D,
         ddc::TypeSeq<Patches...>,
@@ -70,7 +56,7 @@ class DerivativeCalculatorCommon<
     using all_interface_collection = typename Connectivity::interface_collection;
 
 protected:
-    // All the sorted interfaces with the correct orientation.
+    /// @brief Tag for all the sorted interfaces with the correct patch order.
     using interface_sorted_collection =
             typename Connectivity::template get_all_interfaces_along_direction_t<Grid1D>;
 
@@ -98,6 +84,7 @@ private:
             "too.");
 
 protected:
+    /// @brief Boolean to indicate the periodicty of the global domain.
     static constexpr bool is_periodic
             = (!std::is_same_v<typename InterfaceBoundFirst::Edge1, OutsideEdge>)&&(
                     !std::is_same_v<typename InterfaceBoundFirst::Edge2, OutsideEdge>);
@@ -113,11 +100,11 @@ private:
             ddc::TypeSeq<InterfaceBoundFirst, InterfaceBoundLast>>;
 
 protected:
-    // All the interfaces in the Grid1D direction without the interfaces with OutsideEdge.
+    /// @brief Tag for all the interfaces in the Grid1D direction without the interfaces with OutsideEdge.
     using inner_interface_collection
             = ddc::type_seq_remove_t<interface_sorted_collection, outer_interface_collection>;
 
-    // Number of inner interfaces. It fixes the number of elements in the matrix and vectors.
+    /// @brief Number of inner interfaces (fixing the number of elements in the matrix and vectors).
     static constexpr std::size_t n_inner_interfaces
             = ddc::type_seq_size_v<inner_interface_collection>;
 
@@ -131,7 +118,7 @@ private:
             typename InterfaceInnerFirst::Edge2::associated_patch>;
 
 protected:
-    // Sequence of 1D grids in the direction of Grid1D over the patches.
+    /// @brief Sequence of 1D grids in the direction of the given Grid1D over the patches.
     using Grid1DSeq = collect_grids_on_dim_t<
             find_patch_t<Grid1D, all_patches>,
             Grid1D,
@@ -154,68 +141,82 @@ protected:
             "A patch is missing in the given patch list. The list has to contain all the patches "
             "in the given Grid1D direction.");
 
-    // Tag to identify we are computing the first derivatives.
+    /// @brief Tag to identify we are computing the first derivatives.
     struct eval_deriv
     {
     };
 
-    // Tag to identify we are computing the cross-derivatives.
+    /// @brief Tag to identify we are computing the cross-derivatives.
     struct eval_cross_deriv
     {
     };
 
 protected:
-    // Interface with the correct patch order.
+    /// @brief Tag the interface with the correct patch order.
     template <std::size_t I>
     using interface = ddc::type_seq_element_t<I, inner_interface_collection>;
 
-    /// Equivalent interface defined in the main file, i.e. given to MultipatchConnectivity.
+    /// @brief Tag the equivalent interface defined in the main file, i.e. given to MultipatchConnectivity.
     template <std::size_t I>
     using stored_interface
             = find_associated_interface_t<typename interface<I>::Edge1, all_interface_collection>;
 
-    // The order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
+    /// @brief Boolean if the order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
     template <std::size_t I>
     static constexpr bool patch_order_matches_interfaces = std::is_same_v<
             typename stored_interface<I>::Edge1::perpendicular_grid,
             ddc::type_seq_element_t<I, Grid1DSeq>>;
 
+    /// @brief Tag the first patch of the stored interface.
     template <std::size_t I>
     using patch1 = typename stored_interface<I>::Edge1::associated_patch;
+    /// @brief Tag the second patch of the stored interface.
     template <std::size_t I>
     using patch2 = typename stored_interface<I>::Edge2::associated_patch;
 
+    /// @brief Tag the connection extremity of the first patch of the interface.
     template <std::size_t I>
     static constexpr Extremity extremity_1 = stored_interface<I>::Edge1::extremity;
+    /// @brief Tag the connection extremity of the second patch of the interface.
     template <std::size_t I>
     static constexpr Extremity extremity_2 = stored_interface<I>::Edge2::extremity;
 
+    /// @brief Tag the perpendicular grid of the first patch to the interface.
     template <std::size_t I>
     using grid_perp1 = typename stored_interface<I>::Edge1::perpendicular_grid;
+    /// @brief Tag the perpendicular grid of the second patch to the interface.
     template <std::size_t I>
     using grid_perp2 = typename stored_interface<I>::Edge2::perpendicular_grid;
 
+    /// @brief Tag the parallel grid of the first patch to the interface.
     template <std::size_t I>
     using grid_par1 = typename stored_interface<I>::Edge1::parallel_grid;
+    /// @brief Tag the parallel grid of the second patch to the interface.
     template <std::size_t I>
     using grid_par2 = typename stored_interface<I>::Edge2::parallel_grid;
 
+    /// @brief Tag the derivative dimension along perpendicular grid of the first patch.
     template <std::size_t I>
     using deriv_perp1 = typename ddc::Deriv<typename grid_perp1<I>::continuous_dimension_type>;
+    /// @brief Tag the derivative dimension along perpendicular grid of the second patch.
     template <std::size_t I>
     using deriv_perp2 = typename ddc::Deriv<typename grid_perp2<I>::continuous_dimension_type>;
 
+    /// @brief Tag the derivative dimension along parallel grid of the first patch.
     template <std::size_t I>
     using deriv_par1 = typename ddc::Deriv<typename grid_par1<I>::continuous_dimension_type>;
+    /// @brief Tag the derivative dimension along parallel grid of the second patch.
     template <std::size_t I>
     using deriv_par2 = typename ddc::Deriv<typename grid_par2<I>::continuous_dimension_type>;
 
+    /// @brief Tag the index type for cross-derivative on the first patch.
     template <std::size_t I>
     using idx_cross_deriv1
             = Idx<ddc::Deriv<typename patch1<I>::Dim1>,
                   typename patch1<I>::Grid1,
                   ddc::Deriv<typename patch1<I>::Dim2>,
                   typename patch1<I>::Grid2>;
+    /// @brief Tag the index type for cross-derivatives on the second patch.
     template <std::size_t I>
     using idx_cross_deriv2
             = Idx<ddc::Deriv<typename patch2<I>::Dim1>,
@@ -223,9 +224,11 @@ protected:
                   ddc::Deriv<typename patch2<I>::Dim2>,
                   typename patch2<I>::Grid2>;
 
+    /// @brief Tag the index type for derivatives along the perpendicular grid on the first patch.
     template <std::size_t I>
     using idx_deriv_perp1
             = Idx<deriv_perp1<I>, typename patch1<I>::Grid1, typename patch1<I>::Grid2>;
+    /// @brief Tag the index type for derivatives along the perpendicular grid on the second patch.
     template <std::size_t I>
     using idx_deriv_perp2
             = Idx<deriv_perp2<I>, typename patch2<I>::Grid1, typename patch2<I>::Grid2>;
@@ -235,8 +238,10 @@ public:
     using patch_first = PatchFirst;
 
 protected:
+    /// @brief MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
+    /// @brief InterfaceDerivCoeffsCollection to collect all the needed InterfaceDerivCoeffs.
     DerivCoeffCollection const& m_deriv_coeffs_collect;
 
 public:
@@ -347,12 +352,24 @@ public:
     }
 
 private:
-    Derived& derived()
+    DerivedClass& derived()
     {
-        return static_cast<Derived&>(*this);
+        return static_cast<DerivedClass&>(*this);
     }
 
 protected:
+    /**
+     * @brief Compute the approximated derivative (or coefficient "c") at the interface along the mesh line
+     * indexed at the given indices. 
+     * 
+     * @tparam I Index of the interface. 
+     * @param[in] idx_to_slice_1 Index on the parallel grid of the first patch to select the mesh line along 
+     *              which the derivative is computed. 
+     * @param[in] idx_to_slice_2 Index on the parallel grid of the second patch to select the mesh line along 
+     *              which the derivative is computed. 
+     * @param[in] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
+     * @return The approximated derivative at the interface. 
+     */
     template <
             std::size_t I,
             typename eval_type,
@@ -376,6 +393,20 @@ protected:
         return interface_deriv;
     }
 
+    /**
+     * @brief Compute the approximated cross-derivative (or coefficient "c") at the interface along the mesh line
+     * indexed at the given indices. 
+     * Work only for indices in the corners of the patches (where the cross-derivatives are supposed to be 
+     * computed).
+     * 
+     * @tparam I Index of the interface. 
+     * @param[in] idx_to_slice_1 Index on the parallel grid of the first patch to select the mesh line along 
+     *              which the derivative is computed.
+     * @param[in] idx_to_slice_2 Index on the parallel grid of the second patch to select the mesh line along 
+     *              which the derivative is computed. 
+     * @param[in] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
+     * @return The approximated cross-derivative at the interface. 
+     */
     template <
             std::size_t I,
             typename eval_type,
@@ -427,6 +458,13 @@ protected:
      *  |            idx_1 > idx_2        idx_1 > idx_2         |
      *  |              ^   |   v            ^   |   v           |
      *  |idx_val   idx_val | idx_val    idx_val | idx_val       |
+     * 
+     * @param[in,out] value_idx_to_slice Integer containing the value of the index on the parallel grid 
+     *              of the last interface.
+     * @param[out] idx_to_slice_1 Index on the parallel grid of the first patch to select the mesh line along 
+     *              which the derivative will be computed.
+     * @param[out] idx_to_slice_2 Index on the parallel grid of the second patch to select the mesh line along 
+     *              which the derivative will be computed. 
      */
     template <std::size_t I>
     void set_slice_indexes(
