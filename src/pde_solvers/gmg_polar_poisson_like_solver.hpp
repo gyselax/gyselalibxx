@@ -115,13 +115,13 @@ public:
 
     /**
      * @brief Rebuild the internal representations of α and β from grid values.
-     * @param[in] alpha Values of α at the grid interpolation points.
-     * @param[in] beta  Values of β at the grid interpolation points.
+     * @param[in] alpha_values Values of α at the grid interpolation points.
+     * @param[in] beta_values  Values of β at the grid interpolation points.
      */
-    void update_coefficients(KokkosConstView2D alpha, KokkosConstView2D beta)
+    void update_coefficients(KokkosConstView2D alpha_values, KokkosConstView2D beta_values)
     {
-        Kokkos::deep_copy(m_alpha, alpha);
-        Kokkos::deep_copy(m_beta, beta);
+        Kokkos::deep_copy(m_alpha, alpha_values);
+        Kokkos::deep_copy(m_beta, beta_values);
     }
 
     /// The coefficient alpha in the Poisson-like equation

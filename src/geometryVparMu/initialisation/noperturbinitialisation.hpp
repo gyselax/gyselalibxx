@@ -19,7 +19,7 @@ public:
      * @brief Creates an instance of the NoPerturbInitialisation class.
      * @param[in] fequilibrium A Maxwellian. 
      */
-    NoPerturbInitialisation(DConstFieldSpVparMu fequilibrium);
+    explicit NoPerturbInitialisation(DConstFieldSpVparMu fequilibrium);
 
     ~NoPerturbInitialisation() override = default;
 

@@ -201,9 +201,9 @@ public:
      * @param[in] rho The right-hand side of the Poisson equation in Fourier space.
      */
     template <class Layout>
-    void solve_poisson_equation(
+    static void solve_poisson_equation(
             fourier_field_type intermediate_chunk,
-            Field<DataType, laplacian_idx_range_type, memory_space, Layout> rho) const
+            Field<DataType, laplacian_idx_range_type, memory_space, Layout> rho)
     {
         // Compute FFT(rho)
         ddc::fft(ExecSpace(), intermediate_chunk, rho, ddc::kwArgs_fft {m_norm});

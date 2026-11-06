@@ -187,13 +187,18 @@ void compute_Vcoll_Tcoll(
     DFieldSpXVx I3mean_integrand = get_field(I3mean_integrand_alloc);
     DFieldSpXVx I4mean_integrand = get_field(I4mean_integrand_alloc);
 
+    IdxVx const ivx_first = get_idx_range<GridVx>(allfdistribu).front();
+    // The ghosted grid contains one ghost point before the first GridVx point
+    Idx<LocalGridVx> const idimvx_first = get_idx_range<LocalGridVx>(Dcoll).front() + 1;
+
     const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
             location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
-                Idx<LocalGridVx> const idimvx(ddc::select<GridVx>(ispxvx).uid() + 1);
+                Idx<LocalGridVx> const idimvx(
+                        idimvx_first + (ddc::select<GridVx>(ispxvx) - ivx_first).value());
                 Idx<Species, GridX, LocalGridVx>
                         ispxdimvx(ddc::select<Species>(ispxvx), ddc::select<GridX>(ispxvx), idimvx);
                 CoordVx const coordv = ddc::coordinate(ddc::select<GridVx>(ispxvx));
