@@ -18,7 +18,6 @@
 #include "view.hpp"
 
 template <
-        class DerivedClass,
         class Connectivity,
         class Grid1D,
         class PatchSeq,
@@ -37,13 +36,11 @@ class DerivativeCalculatorCommon;
   * that stores the InterfaceDerivCoeffs needed to compute the interface derivatives. 
   */
 template <
-        class DerivedClass,
         class Connectivity,
         class Grid1D,
         class... Patches,
         class DerivCoeffCollection>
 class DerivativeCalculatorCommon<
-        DerivedClass,
         Connectivity,
         Grid1D,
         ddc::TypeSeq<Patches...>,
@@ -140,16 +137,6 @@ protected:
                             ddc::TypeSeq<typename Patches::Grid2...>>>,
             "A patch is missing in the given patch list. The list has to contain all the patches "
             "in the given Grid1D direction.");
-
-    // /// @brief Tag to identify we are computing the first derivatives.
-    // struct eval_deriv
-    // {
-    // };
-
-    // /// @brief Tag to identify we are computing the cross-derivatives.
-    // struct eval_cross_deriv
-    // {
-    // };
 
 protected:
     /// @brief Tag the interface with the correct patch order.

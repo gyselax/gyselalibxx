@@ -53,31 +53,16 @@ class InterfacesDerivativeCalculator<
         ddc::TypeSeq<Patches...>,
         DerivCoeffCollection>
     : public DerivativeCalculatorCommon<
-              InterfacesDerivativeCalculator<
-                      Connectivity,
-                      Grid1D,
-                      ddc::TypeSeq<Patches...>,
-                      DerivCoeffCollection>,
               Connectivity,
               Grid1D,
               ddc::TypeSeq<Patches...>,
               DerivCoeffCollection>
 {
     using base_type = DerivativeCalculatorCommon<
-            InterfacesDerivativeCalculator<
-                    Connectivity,
-                    Grid1D,
-                    ddc::TypeSeq<Patches...>,
-                    DerivCoeffCollection>,
             Connectivity,
             Grid1D,
             ddc::TypeSeq<Patches...>,
             DerivCoeffCollection>;
-
-    friend base_type;
-
-    // using typename base_type::eval_cross_deriv;
-    // using typename base_type::eval_deriv;
 
 private:
     template <std::size_t I>
@@ -217,11 +202,11 @@ public:
             ddc::host_for_each(
                     idx_range_par_first,
                     [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                        solve(deriv_order, functions_and_derivs, idx_par);
+                        this->operator()(deriv_order, functions_and_derivs, idx_par);
                     });
         } else {
-            solve(deriv_order, functions_and_derivs, idx_range_par_first.front());
-            solve(deriv_order, functions_and_derivs, idx_range_par_first.back());
+            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.front());
+            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.back());
         }
     }
 
