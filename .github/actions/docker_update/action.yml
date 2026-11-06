@@ -22,6 +22,7 @@ runs:
     - id: rebuild-check
       run: |
         # Check if docker/gyselalibxx_env has been modified
+        cat changed_files.txt
         changed_docker_directory=$(cat changed_files.txt | grep "docker/gyselalibxx_env" || true)
         echo "Changed files are"
         cat changed_files.txt

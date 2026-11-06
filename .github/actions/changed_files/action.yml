@@ -20,6 +20,8 @@ runs:
       shell: bash
     - if: github.event_name == 'push'
       run: |
+        ls
         git config --global --add safe.directory $(pwd)
         git show ${{ github.sha }} --name-only --pretty= > changed_files.txt
+        cat changed_files.txt
       shell: bash
