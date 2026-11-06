@@ -219,7 +219,9 @@ private:
     {
         // If the parallel grids of the two patches agree.
         constexpr bool are_same_direction_par
-                = std::is_same_v<eval_type, eval_deriv> ? true : base_type::template interface<I>::orientations_agree;
+                = std::is_same_v<eval_type, eval_deriv>
+                          ? true
+                          : base_type::template interface<I>::orientations_agree;
 
         constexpr bool change_sign_1 = (base_type::template extremity_1<I> == Extremity::FRONT);
         constexpr bool change_sign_2 = ((base_type::template extremity_2<I> == Extremity::BACK)

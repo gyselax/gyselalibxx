@@ -484,7 +484,7 @@ private:
                    || (idx_to_slice_1 == idx_range_par_1.back()));
             assert((idx_to_slice_2 == idx_range_par_2.front())
                    || (idx_to_slice_2 == idx_range_par_2.back()));
-                   
+
             typename base_type::template idx_cross_deriv1<I>
                     idx_cross_deriv_1(Idx<deriv_par1<I>>(1), idx_interface_deriv_1);
             typename base_type::template idx_cross_deriv2<I>
