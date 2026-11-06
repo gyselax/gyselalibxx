@@ -48,19 +48,29 @@ struct TypeSeqRange<TypeSeqIn, Start, End, End, TypeSeqOut>
 template <class Dim, class TypeSeqGrid>
 struct FindGrid;
 
+template <class HeadGrid, class... Grids>
+struct FindGrid<HeadGrid, ddc::TypeSeq<HeadGrid, Grids...>>
+{
+    using type = HeadGrid;
+};
+
+template <class HeadGrid, class... Grids>
+struct FindGrid<typename HeadGrid::continuous_dimension_type, ddc::TypeSeq<HeadGrid, Grids...>>
+{
+    using type = HeadGrid;
+};
+
 template <class Dim, class HeadGrid, class... Grids>
 struct FindGrid<Dim, ddc::TypeSeq<HeadGrid, Grids...>>
 {
-    using type = std::conditional_t<
-            std::is_same_v<typename GetCDim<HeadGrid>::type, Dim>,
-            HeadGrid,
-            typename FindGrid<Dim, ddc::TypeSeq<Grids...>>::type>;
+    static_assert(!std::is_same_v<typename GetCDim<HeadGrid>::type, Dim>);
+    using type = typename FindGrid<Dim, ddc::TypeSeq<Grids...>>::type;
 };
 
 template <class Dim>
 struct FindGrid<Dim, ddc::TypeSeq<>>
 {
-    static_assert(std::is_same_v<Dim, Dim>, "Grid not found");
+    static_assert(!std::is_same_v<Dim, Dim>, "Grid not found");
     using type = void;
 };
 

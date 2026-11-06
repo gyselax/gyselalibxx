@@ -16,7 +16,7 @@
  */
 template <class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched>
 class Spline1DPartialDerivative
-    : public IPartialDerivative<
+    : public INonAnalyticalPartialDerivative<
               IdxRangeBatched,
               typename Spline1DBuilder::continuous_dimension_type>
 {
@@ -29,7 +29,7 @@ class Spline1DPartialDerivative
 
 private:
     using DerivativeDimension = typename Spline1DBuilder::continuous_dimension_type;
-    using base_type = IPartialDerivative<IdxRangeBatched, DerivativeDimension>;
+    using base_type = INonAnalyticalPartialDerivative<IdxRangeBatched, DerivativeDimension>;
 
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;

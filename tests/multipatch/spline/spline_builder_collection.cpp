@@ -9,7 +9,7 @@
 #include "ddc_helper.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
-#include "multipatch_spline_builder.hpp"
+#include "spline_builder_collection.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -55,7 +55,7 @@ using SplineX2Builder = ddc::SplineBuilder<
         ddc::SplineSolver::LAPACK>;
 
 
-using MultipatchSplineBuilderX_1d = SplineBuilderCollection<
+using SplineBuilderCollectionX_1d = SplineBuilderCollection<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
@@ -70,7 +70,7 @@ using MultipatchSplineBuilderX_1d = SplineBuilderCollection<
         Patch2>;
 
 
-using MultipatchSplineBuilderX_2d = SplineBuilderCollection<
+using SplineBuilderCollectionX_2d = SplineBuilderCollection<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
@@ -85,7 +85,7 @@ using MultipatchSplineBuilderX_2d = SplineBuilderCollection<
         Patch2>;
 
 
-class MultipatchSplineBuilderTest : public ::testing::Test
+class SplineBuilderCollectionTest : public ::testing::Test
 {
 private:
     static constexpr IdxStep<GridX<1>> x1_size = IdxStep<GridX<1>>(10);
@@ -102,7 +102,7 @@ protected:
     IdxRange<GridY<2>> const idx_range_y2;
 
 public:
-    MultipatchSplineBuilderTest()
+    SplineBuilderCollectionTest()
         : idx_range_x1(SplineInterpPointsX1::get_domain<GridX<1>>())
         , idx_range_y1(SplineInterpPointsY1::get_domain<GridY<1>>())
         , idx_range_x2(SplineInterpPointsX2::get_domain<GridX<2>>())
@@ -228,14 +228,14 @@ public:
 /*
     The global domain is split into two 1D patches on X1 and X2.
  */
-TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
+TEST_F(SplineBuilderCollectionTest, TwoPatches1D)
 {
     // List of spline builders
     SplineX1Builder builder_x1(idx_range_x1);
     SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderX_1d builder(builder_x1, builder_x2);
+    SplineBuilderCollectionX_1d builder(builder_x1, builder_x2);
 
 
     // Function tests
@@ -295,7 +295,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 /*
     The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
-TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
+TEST_F(SplineBuilderCollectionTest, TwoPatches2D)
 {
     // List of index ranges
     IdxRange<GridX<1>, GridY<1>> idx_range_xy1(idx_range_x1, idx_range_y1);
@@ -307,7 +307,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
     SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderX_2d builder(builder_x1, builder_x2);
+    SplineBuilderCollectionX_2d builder(builder_x1, builder_x2);
 
 
     // Function tests
