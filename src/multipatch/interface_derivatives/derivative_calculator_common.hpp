@@ -17,11 +17,7 @@
 #include "types.hpp"
 #include "view.hpp"
 
-template <
-        class Connectivity,
-        class Grid1D,
-        class PatchSeq,
-        class DerivCoeffCollection>
+template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
 class DerivativeCalculatorCommon;
 
 /**
@@ -35,11 +31,7 @@ class DerivativeCalculatorCommon;
   * @tparam DerivCoeffCollection A InterfaceDerivCoeffsCollection
   * that stores the InterfaceDerivCoeffs needed to compute the interface derivatives. 
   */
-template <
-        class Connectivity,
-        class Grid1D,
-        class... Patches,
-        class DerivCoeffCollection>
+template <class Connectivity, class Grid1D, class... Patches, class DerivCoeffCollection>
 class DerivativeCalculatorCommon<
         Connectivity,
         Grid1D,
