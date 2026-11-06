@@ -25,7 +25,6 @@ struct to_tuple<std::pair<T, U>>
 {
     using type = std::tuple<T, U>;
 };
-} // namespace detail
 
 /// Transform a sequence S to a tuple:
 /// - a std::integer_sequence<T, Ints...> to a std::tuple<std::integral_constant<T, Ints>...>
@@ -34,7 +33,6 @@ struct to_tuple<std::pair<T, U>>
 template <class S>
 using to_tuple_t = typename detail::to_tuple<S>::type;
 
-namespace detail {
 template <class TupleOfTuples, class Tuple>
 struct for_each_tuple_cat;
 
@@ -86,7 +84,7 @@ struct cartesian_product_impl<std::tuple<>, OutTupleOfTuples>
 /// Do not rely on the ordering result.
 template <class... InTuplesLike>
 using cartesian_product_t = typename detail::cartesian_product_impl<
-        std::tuple<to_tuple_t<InTuplesLike>...>,
+        std::tuple<detail::to_tuple_t<InTuplesLike>...>,
         std::tuple<std::tuple<>>>::type;
 
 static_assert(std::is_same_v<
