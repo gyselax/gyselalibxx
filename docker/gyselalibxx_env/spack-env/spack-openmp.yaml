@@ -41,9 +41,9 @@ spack:
   repos:
     patches:
       git: https://github.com/gyselax/spack.git
-      branch: releases/v2026.06
+      branch: releases/v2026.10
     builtin:
-      branch: releases/v2026.06
+      branch: releases/v2026.10
   specs:
     - 'cmake@3.31'
     - 'ddc@0.17 +fft +pdi +splines'
@@ -65,7 +65,7 @@ spack:
 
     - 'py-h5py@3.16'
     - 'py-imageio@2.37'
-    - 'py-matplotlib@3.11 ^freetype@2.14.1'
+    - 'py-matplotlib@3.11'
     - 'py-numpy@2.4'
     - 'py-scipy@1.17'
     - 'py-pyyaml@6.0'
