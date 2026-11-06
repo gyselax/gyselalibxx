@@ -242,7 +242,11 @@ class SplineBuilder2DCollection
     /// The type of the internal storage of the SplineBuilders.
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
 
+public:
+    using multipatch_spline_type = MultipatchSplineCoeffs;
+    using multipatch_deriv_field_type = MultipatchDerivField;
 
+private:
     BuilderTuple const m_builders;
 
 public:
