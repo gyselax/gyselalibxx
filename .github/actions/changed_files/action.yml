@@ -3,7 +3,9 @@ name: "Check which files have been changed"
 runs:
   using: "composite"
   steps:
-    - run: |
+    - if: github.event_name != 'push'
+      run: |
+        echo ${{ github.event_name }}
         git fetch --no-recurse-submodules origin ${CHANGES_REF}
         if [[ -n "$(git branch -r --list origin/${CHANGES_REF})" ]]
         then
