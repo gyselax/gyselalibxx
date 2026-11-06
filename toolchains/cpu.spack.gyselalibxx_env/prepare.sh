@@ -52,6 +52,7 @@ if [[ "$OSTYPE" == "linux" ]]; then
 fi
 
 spack env create gyselalibxx-spack-environment ${SCRIPT_DIR}/gyselalibxx-spack-environment.yaml
+spack --env gyselalibxx-spack-environment repo update
 spack --env gyselalibxx-spack-environment config --scope env:gyselalibxx-spack-environment add packages:all:target:[$(spack arch --family --target)]
 spack --env gyselalibxx-spack-environment mirror add \
   --oci-password-variable GITHUB_TOKEN \
