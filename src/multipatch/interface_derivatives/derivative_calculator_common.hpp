@@ -141,15 +141,15 @@ protected:
             "A patch is missing in the given patch list. The list has to contain all the patches "
             "in the given Grid1D direction.");
 
-    /// @brief Tag to identify we are computing the first derivatives.
-    struct eval_deriv
-    {
-    };
+    // /// @brief Tag to identify we are computing the first derivatives.
+    // struct eval_deriv
+    // {
+    // };
 
-    /// @brief Tag to identify we are computing the cross-derivatives.
-    struct eval_cross_deriv
-    {
-    };
+    // /// @brief Tag to identify we are computing the cross-derivatives.
+    // struct eval_cross_deriv
+    // {
+    // };
 
 protected:
     /// @brief Tag the interface with the correct patch order.
@@ -237,6 +237,25 @@ public:
     /// @brief First patch of the collection of patches in the direction of the given Grid1D.
     using patch_first = PatchFirst;
 
+    /// @brief Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.
+    using grid_direction = Grid1D;
+
+    /// @brief Patch of the given direction grid.
+    using patch_direction = find_patch_t<Grid1D, all_patches>;
+
+    /// @brief Derivative dimension of the direction patch perpendicular to the mesh line.
+    using deriv_perp_dim = ddc::Deriv<typename Grid1D::continuous_dimension_type>;
+    /// @brief Derivative dimension of the direction patch parallel to the mesh line.
+    using deriv_par_dim = ddc::Deriv<std::conditional_t<
+            std::is_same_v<typename patch_direction::Grid1, grid_direction>,
+            typename patch_direction::Dim2,
+            typename patch_direction::Dim1>>;
+
+    /// @brief Index on the derivative dimension perpendicular to the mesh line.
+    using idx_deriv_perp = Idx<deriv_perp_dim>;
+    /// @brief Index on the two derivative dimensions of patch_direction.
+    using idx_cross_deriv = Idx<deriv_perp_dim, deriv_par_dim>;
+
 protected:
     /// @brief MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
@@ -260,103 +279,6 @@ public:
     {
     }
 
-    /**
-     * @brief Compute the vector C_trunc to determine all the interface derivatives in the Grid1D
-     * direction at a given index.
-     * 
-     * It uses the function values to compute the first-derivatives perpendicular to the interfaces. 
-     *
-     * @tparam IdxPar Type for the given index. It can be on the first or the second grid of the first patch.
-     * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
-     * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives.
-     */
-    template <class IdxPar>
-    void solve_deriv(
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
-            IdxPar const& idx_par)
-    {
-        derived().template solve<eval_deriv>(functions_and_derivs, idx_par);
-    }
-
-    /**
-    * @brief Compute the vector C_trunc to determine all the interface derivatives in the Grid1D
-     * direction at all the indices of the first patch.
-     * 
-     * It uses the function values to compute the first-derivatives perpendicular to the interfaces. 
-     * 
-     * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives 
-     *              we want to compute.
-     * @warning The global mesh is supposed to be conforming. 
-     */
-    void solve_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
-    {
-        constexpr bool is_first_idx_range_perp_on_dim1
-                = ddc::in_tags_v<typename PatchFirst::Grid1, Grid1DSeq>;
-        using IdxRangeParFirstType = std::conditional_t<
-                is_first_idx_range_perp_on_dim1,
-                typename PatchFirst::IdxRange2,
-                typename PatchFirst::IdxRange1>;
-
-        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<PatchFirst>());
-
-        ddc::host_for_each(
-                idx_range_par_first,
-                [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                    derived().template solve<eval_deriv>(functions_and_derivs, idx_par);
-                });
-    }
-
-    /**
-     * @brief Compute the vector C_trunc to determine all the interface cross-derivatives in the Grid1D
-     * direction at a given index.
-     * 
-     * It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces. 
-     *
-     * @tparam IdxPar Type for the given index. It can be on the first or the second grid of the first patch.
-     * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
-     * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface cross-derivatives.
-     */
-    template <class IdxPar>
-    void solve_cross_deriv(
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
-            IdxPar const& idx_par)
-    {
-        derived().template solve<eval_cross_deriv>(functions_and_derivs, idx_par);
-    }
-
-    /**
-     * @brief Compute the vector C_trunc to determine all the corner cross-derivatives in the Grid1D
-     * direction at all the last and the first indices of the first patch.
-     * 
-     * It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces. 
-     *
-     * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
-     * @warning The global mesh is supposed to be conforming. 
-     */
-    void solve_cross_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
-    {
-        constexpr bool is_first_idx_range_perp_on_dim1
-                = ddc::in_tags_v<typename PatchFirst::Grid1, Grid1DSeq>;
-        using IdxRangeParFirstType = std::conditional_t<
-                is_first_idx_range_perp_on_dim1,
-                typename PatchFirst::IdxRange2,
-                typename PatchFirst::IdxRange1>;
-
-        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<PatchFirst>());
-
-        derived()
-                .template solve<
-                        eval_cross_deriv>(functions_and_derivs, idx_range_par_first.front());
-        derived()
-                .template solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.back());
-    }
-
-private:
-    DerivedClass& derived()
-    {
-        return static_cast<DerivedClass&>(*this);
-    }
-
 protected:
     /**
      * @brief Compute the approximated derivative (or coefficient "c") at the interface along the mesh line
@@ -370,10 +292,7 @@ protected:
      * @param[in] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
      * @return The approximated derivative at the interface. 
      */
-    template <
-            std::size_t I,
-            typename eval_type,
-            std::enable_if_t<std::is_same_v<eval_type, eval_deriv>, bool> = true>
+    template <std::size_t I, bool is_first_deriv, std::enable_if_t<is_first_deriv, bool> = true>
     double const get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
@@ -407,10 +326,7 @@ protected:
      * @param[in] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
      * @return The approximated cross-derivative at the interface. 
      */
-    template <
-            std::size_t I,
-            typename eval_type,
-            std::enable_if_t<std::is_same_v<eval_type, eval_cross_deriv>, bool> = true>
+    template <std::size_t I, bool is_first_deriv, std::enable_if_t<!is_first_deriv, bool> = true>
     double const get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,

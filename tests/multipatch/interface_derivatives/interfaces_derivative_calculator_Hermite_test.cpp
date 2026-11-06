@@ -772,7 +772,8 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             coord_transforms);
 
     // --- the first derivatives (on inner interfaces) from the function values.
-    matrix.solve_deriv(functions_and_derivs);
+    using IdxDerivPerp = Idx<ddc::Deriv<typename Grid1AlongXg::continuous_dimension_type>>;
+    matrix.solve(IdxDerivPerp(1), functions_and_derivs);
 
     // --- the cross-derivatives from the first derivatives.
     /*
@@ -780,7 +781,11 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
         they are given by the boundary conditions. However, we want to 
         check that the matrix computes correctly the values. 
     */
-    matrix.solve_cross_deriv(functions_and_derivs);
+    using PatchDirection = find_patch_t<Grid1AlongXg, PatchOrdering>;
+    using IdxCrossDeriv
+            = Idx<ddc::Deriv<typename PatchDirection::Dim1>,
+                  ddc::Deriv<typename PatchDirection::Dim2>>;
+    matrix.solve(IdxCrossDeriv(1, 1), functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::TypeSeq<>;
