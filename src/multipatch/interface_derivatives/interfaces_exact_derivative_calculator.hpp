@@ -198,7 +198,7 @@ public:
                                   PreconditionerJ::build().with_max_block_size(8u).on(exec))
                           .on(exec);
         // Create solver
-        m_solver = std::move(solver_factory->generate(m_matrix));
+        m_solver = solver_factory->generate(m_matrix);
 
         // Create vectors for rhs and solution
         m_vector = Matrix::create(exec, gko::dim<2>(base_type::n_inner_interfaces, 1));
