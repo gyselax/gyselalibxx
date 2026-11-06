@@ -72,7 +72,7 @@ class InterfacesExactDerivativeCalculator<
     using all_interface_collection = typename Connectivity::interface_collection;
     // All the sorted interfaces with the correct orientation.
     using interface_sorted_collection =
-            typename Connectivity::get_all_interfaces_along_direction_t<Grid1D>;
+            typename Connectivity::template get_all_interfaces_along_direction_t<Grid1D>;
 
     // All the patches of the geometry.
     using all_patches = typename Connectivity::all_patches;
