@@ -24,8 +24,8 @@ protected:
 
 protected:
     double const m_R0 = 6.2;
-    double m_rho;
-    double m_theta;
+    double m_rho = 0.0;
+    double m_theta = 0.0;
 };
 
 // Try to confirm that \curl (\grad psi) == 0

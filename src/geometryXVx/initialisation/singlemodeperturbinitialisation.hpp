@@ -33,10 +33,10 @@ public:
      * @param[in] perturb_mode The mode of the perturbation. 
      * @param[in] perturb_amplitude The amplitude of the perturbation. 
      */
-    void perturbation_initialisation(
+    static void perturbation_initialisation(
             DFieldX perturbation,
             int const perturb_mode,
-            double const perturb_amplitude) const;
+            double const perturb_amplitude);
 
     /**
      * @brief Creates an instance of the SingleModePerturbInitialisation class.

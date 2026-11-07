@@ -48,7 +48,8 @@ BumpontailEquilibrium bumpontail_equilibrium::init_from_input(
     host_t<DFieldMemSp> mean_velocity_bot(idx_range_kinsp);
 
     for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
+        IdxStepSp const step_sp = isp - idx_range_kinsp.front();
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", step_sp.value());
 
         epsilon_bot(isp) = PCpp_double(conf_isp, ".epsilon_bot");
         temperature_bot(isp) = PCpp_double(conf_isp, ".temperature_bot");
@@ -64,12 +65,12 @@ BumpontailEquilibrium bumpontail_equilibrium::init_from_input(
 
 void BumpontailEquilibrium::compute_twomaxwellian(
         DFieldVx const fMaxwellian,
-        double const epsilon_bot,
-        double const temperature_bot,
-        double const mean_velocity_bot) const
+        double const epsilon,
+        double const temperature,
+        double const mean_velocity)
 {
     double const inv_sqrt_2pi = 1. / sqrt(2. * M_PI);
-    double const norm_f2 = inv_sqrt_2pi / sqrt(temperature_bot);
+    double const norm_f2 = inv_sqrt_2pi / sqrt(temperature);
     IdxRangeVx const gridvx = get_idx_range(fMaxwellian);
     const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
@@ -79,12 +80,12 @@ void BumpontailEquilibrium::compute_twomaxwellian(
             KOKKOS_LAMBDA(IdxVx const ivx) {
                 CoordVx const vx = ddc::coordinate(ivx);
                 // bulk plasma particles
-                double const f1_v = (1. - epsilon_bot) * inv_sqrt_2pi * Kokkos::exp(-0.5 * vx * vx);
+                double const f1_v = (1. - epsilon) * inv_sqrt_2pi * Kokkos::exp(-0.5 * vx * vx);
                 // beam
-                double const f2_v = epsilon_bot * norm_f2
+                double const f2_v = epsilon * norm_f2
                                     * (Kokkos::exp(
-                                            -(vx - mean_velocity_bot) * (vx - mean_velocity_bot)
-                                            / (2. * temperature_bot)));
+                                            -(vx - mean_velocity) * (vx - mean_velocity)
+                                            / (2. * temperature)));
                 // fM(v) = f1(v) + f2(v)
                 fMaxwellian(ivx) = f1_v + f2_v;
             });

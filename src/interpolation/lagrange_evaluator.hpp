@@ -571,7 +571,7 @@ private:
             ddc::discrete_space<lagrange_basis_type>()
                     .eval_basis(vals, coord_interest, first_lagrange_knot);
         } else {
-            unsigned long const order = deriv_order.uid();
+            unsigned long const order = (deriv_order - Idx<DerivDims...>(0)).value();
             KOKKOS_ASSERT(order <= lagrange_basis_type::degree());
 
             std::array<DataType, n_basis * n_basis> derivs_ptr;
