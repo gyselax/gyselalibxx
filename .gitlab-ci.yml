@@ -98,8 +98,9 @@ python_best_practices:
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: normal
-  before_script:
-    export PYTHONPATH="$(pwd)/post-process/PythonScripts"
+  before_script: |
+    . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-serial
+    export PYTHONPATH="$(pwd)/post-process/PythonScripts:${PYTHONPATH}"
   script: |
     pylint $(find tests -iname *.py)
     pylint $(find docs -iname *.py)
@@ -116,10 +117,11 @@ documentation:
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   before_script: |
+    . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-serial
     git config --global --add safe.directory $CI_PROJECT_DIR
     git fetch origin ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} --recurse-submodules=no
     pip install -r docs/requirements.txt --prefix docs/pip_install
-    export PYTHONPATH=$(pwd)/docs/pip_install/lib/python3.12/site-packages/
+    export PYTHONPATH="${PYTHONPATH}:$(pwd)/docs/pip_install/lib/python3.14/site-packages/"
   script: |
     rm -rf docs/mkdoc docs/site || true
     python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc docs/pip_install
@@ -157,6 +159,8 @@ markdown_equations:
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: normal
+  before_script: |
+    . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-serial
   script: |
     MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
     echo $MARKDOWN_FILES
@@ -173,6 +177,8 @@ cppcheck_static_analysis:
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: normal
+  before_script: |
+    . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-serial
   script: |
     set +e
     python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
@@ -187,6 +193,8 @@ cmake_static_analysis:
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: normal
+  before_script: |
+    . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-serial
   script: |
     python3 bin/ci_tools/cmake_checker.py
 
@@ -200,7 +208,7 @@ spelling:
     apt-get install -y wget
     mkdir typos
     cd typos
-    wget -qO- https://github.com/crate-ci/typos/releases/download/v1.51.1/typos-v1.51.1-x86_64-unknown-linux-musl.tar.gz | gunzip | tar xvf -
+    wget -qO- https://github.com/crate-ci/typos/releases/download/v1.52.0/typos-v1.52.0-x86_64-unknown-linux-musl.tar.gz | gunzip | tar xvf -
     cd ..
   script: |
     ./typos/typos ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin

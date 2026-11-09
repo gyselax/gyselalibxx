@@ -90,6 +90,8 @@ jobs:
     if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2 # Ensure parent commit is available for changed_files
       - id: docker
         uses: ./.github/actions/docker_update
         with:
@@ -112,7 +114,6 @@ jobs:
           - name: 'clang'
             c_compiler: 'clang'
             cxx_compiler: 'clang++'
-            glibc_tunables: 'glibc.malloc.tcache_count=64'
         exclude:
           - toolchain: 'ci_coverage_toolchain'
             compiler:
