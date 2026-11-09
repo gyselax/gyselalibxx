@@ -129,7 +129,6 @@ jobs:
     env:
       CC: ${{ matrix.compiler.c_compiler }}
       CXX: ${{ matrix.compiler.cxx_compiler }}
-      GLIBC_TUNABLES: ${{ matrix.compiler.glibc_tunables }}
     steps:
       - name: Checkout gyselalibxx
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
