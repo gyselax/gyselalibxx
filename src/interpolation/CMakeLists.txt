@@ -27,6 +27,7 @@ target_sources("interpolation"
 target_link_libraries("interpolation"
     INTERFACE
         DDC::core
+        gyselalibxx::interpolation_interface_derivatives
         gyselalibxx::math_tools
         gyselalibxx::utils
 )

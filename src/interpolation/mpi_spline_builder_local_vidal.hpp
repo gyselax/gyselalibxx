@@ -13,8 +13,78 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "deriv_reconstruction_coeffs.hpp"
+#include "geometry_descriptors.hpp"
 #include "i_interpolation_builder.hpp"
 #include "mpitools.hpp"
+
+template <
+        class GlobalBSplines,
+        class LocalBSplinesLower,
+        class LocalBSplines,
+        class LocalBSplinesUpper>
+void construct_local_bsplines_and_neighbours(MPI_Comm comm)
+{
+    using Knots = ddc::knot_discrete_dimension_t<GlobalBSplines>;
+
+    int rank, comm_size;
+    MPI_Comm_rank(comm, &rank);
+    MPI_Comm_size(comm, &comm_size);
+
+    IdxRange<Knots> idx_range_bp = ddc::discrete_space<GlobalBSplines>().break_point_domain();
+
+    std::size_t const global_ncells = ddc::discrete_space<GlobalBSplines>().ncells();
+
+    if (global_ncells % comm_size != 0) {
+        std::ostringstream error_msg;
+        error_msg << "The provided BSpline cannot be split equally over the specified number "
+                     "of MPI ranks ("
+                  << global_ncells << " is not divisible by " << comm_size << ")";
+        throw std::runtime_error(error_msg.str());
+    }
+
+    IdxStep<Knots> const local_ncells(global_ncells / comm_size);
+
+    bool constexpr is_periodic = GlobalBSplines::is_periodic();
+
+    if constexpr (ddc::is_uniform_bsplines_v<GlobalBSplines>) {
+        if (is_periodic or rank != 0) {
+            int offset = rank == 0 ? comm_size - 1 : rank - 1;
+            Idx<Knots> idx_bp_front = idx_range_bp.front() + offset * local_ncells;
+            ddc::init_discrete_space<LocalBSplinesLower>(
+                    ddc::coordinate(idx_bp_front),
+                    ddc::coordinate(idx_bp_front + local_ncells),
+                    local_ncells);
+        }
+        ddc::init_discrete_space<LocalBSplines>(
+                ddc::coordinate(idx_range_bp.front() + rank * local_ncells),
+                ddc::coordinate(idx_range_bp.front() + (rank + 1) * local_ncells),
+                local_ncells);
+        if (is_periodic or rank != comm_size - 1) {
+            Idx<Knots> idx_bp_front
+                    = idx_range_bp.front()
+                      + static_cast<int>(rank != comm_size - 1) * (rank + 1) * local_ncells;
+            ddc::init_discrete_space<LocalBSplinesUpper>(
+                    ddc::coordinate(idx_bp_front),
+                    ddc::coordinate(idx_bp_front + local_ncells),
+                    local_ncells);
+        }
+    } else {
+        if (is_periodic or rank != 0) {
+            int offset = is_periodic ? comm_size - 1 : rank - 1;
+            Idx<Knots> idx_bp_front = idx_range_bp.front() + offset * local_ncells;
+            ddc::init_discrete_space<LocalBSplinesLower>(idx_bp_front, idx_bp_front + local_ncells);
+        }
+        ddc::init_discrete_space<LocalBSplines>(
+                idx_range_bp.begin() + rank * local_ncells,
+                idx_range_bp.begin() + (rank + 1) * local_ncells);
+        if (is_periodic or rank != comm_size - 1) {
+            Idx<Knots> idx_bp_front = idx_range_bp.front()
+                                      + static_cast<int>(!is_periodic) * (rank + 1) * local_ncells;
+            ddc::init_discrete_space<LocalBSplinesUpper>(idx_bp_front, idx_bp_front + local_ncells);
+        }
+    }
+}
 
 /**
  * @brief A builder which computes, on the local subdomain owned by one MPI rank,
@@ -51,6 +121,9 @@
 template <
         class ExecSpace,
         class MemorySpace,
+        class LocalBSplinesLower,
+        class LocalBSplines,
+        class LocalBSplinesUpper,
         class BSplines,
         class InterpolationGrid1D,
         ddc::SplineBuilderClosure BCLower,
@@ -112,7 +185,7 @@ public:
     /// @brief The batched index range type with interpolation_grid_type replaced by the B-spline basis.
     template <class IdxRangeBatchedInterpolation>
     using batched_basis_idx_range_type = ddc::
-            replace_dim_of_t<IdxRangeBatchedInterpolation, interpolation_grid_type, BSplines>;
+            replace_dim_of_t<IdxRangeBatchedInterpolation, interpolation_grid_type, LocalBSplines>;
 
     /// @brief The batched index range type with interpolation_grid_type replaced by deriv_type.
     template <class IdxRangeBatchedInterpolation>
@@ -126,7 +199,7 @@ private:
     using internal_builder_type = ddc::SplineBuilder<
             ExecSpace,
             MemorySpace,
-            BSplines,
+            LocalBSplines,
             interpolation_grid_type,
             ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineBuilderClosure::HERMITE,
@@ -137,14 +210,22 @@ private:
     using IdxStepInterpGrid = IdxStep<interpolation_grid_type>;
 
 private:
-    DerivReconstructionCoeffs<
+    std::optional<DerivReconstructionCoeffs<
             InterpolationGrid1D,
             InterpolationGrid1D,
-            BSplines,
-            BSplines,
+            LocalBSplinesLower,
+            LocalBSplines,
             Extremity::BACK,
-            Extremity::FRONT>
-            m_reconstruction_coeffs;
+            Extremity::FRONT>>
+            m_reconstruction_coeffs_lower;
+    std::optional<DerivReconstructionCoeffs<
+            InterpolationGrid1D,
+            InterpolationGrid1D,
+            LocalBSplines,
+            LocalBSplinesUpper,
+            Extremity::BACK,
+            Extremity::FRONT>>
+            m_reconstruction_coeffs_upper;
 
     // MPI tags identifying the two logical exchange channels (a rank's lower-boundary
     // local sum, and a rank's upper-boundary local sum).
@@ -157,6 +238,7 @@ private:
     // Ranks of the adjacent cells
     int m_rank_below;
     int m_rank_above;
+    int m_rank;
 
     // spline builder information
     interpolation_idx_range_type m_local_idx_range;
@@ -177,14 +259,10 @@ public:
      */
     MPISplineBuilderLocalVidal(
             interpolation_idx_range_type const& local_idx_range,
+            interpolation_idx_range_type const& global_idx_range,
             MPI_Comm comm,
             int n_neighbours)
-        : m_reconstruction_coeffs(
-                local_idx_range.take_last(IdxStepInterpGrid {n_neighbours}),
-                interpolation_idx_range_type {
-                        local_idx_range.back() + 1,
-                        IdxStepInterpGrid {n_neighbours}})
-        , m_comm(comm)
+        : m_comm(comm)
         , m_local_idx_range(local_idx_range)
         , m_spline_builder(local_idx_range)
         , m_dx(ddc::discrete_space<interpolation_grid_type>().step())
@@ -193,24 +271,48 @@ public:
         MPI_Comm_rank(m_comm, &rank);
         MPI_Comm_size(m_comm, &comm_size);
 
-        assert(local_idx_range.size() >= s_n_neighbours + 1);
+        m_rank = rank;
+
+        assert(local_idx_range.size() >= n_neighbours + 1);
 
         bool constexpr is_periodic = (BCLower == ddc::SplineBuilderClosure::PERIODIC);
 
         // Save the ranks of the adjacent cells
-
         if (rank > 0) {
             m_rank_below = rank - 1;
-        } else {
+            m_reconstruction_coeffs_lower.emplace(
+                    interpolation_idx_range_type {
+                            local_idx_range.front() - n_neighbours + 1,
+                            IdxStepInterpGrid {n_neighbours}},
+                    local_idx_range.take_first(IdxStepInterpGrid {n_neighbours}));
+        } else if (is_periodic) {
             // Handle boundary conditions
-            m_rank_below = is_periodic ? (comm_size - 1) : -1;
+            m_rank_below = comm_size - 1;
+            interpolation_idx_range_type local_idx_range_lower(
+                    global_idx_range.back() - n_neighbours + 1,
+                    IdxStepInterpGrid {n_neighbours});
+            m_reconstruction_coeffs_lower.emplace(
+                    local_idx_range_lower,
+                    local_idx_range.take_first(IdxStepInterpGrid {n_neighbours}));
+        } else {
+            m_rank_below = -1;
         }
 
         if (rank < comm_size - 1) {
             m_rank_above = rank + 1;
-        } else {
+            m_reconstruction_coeffs_upper.emplace(
+                    local_idx_range.take_last(IdxStepInterpGrid {n_neighbours}),
+                    interpolation_idx_range_type {
+                            local_idx_range.back(),
+                            IdxStepInterpGrid {n_neighbours}});
+        } else if (is_periodic) {
             // Handle boundary conditions
-            m_rank_above = is_periodic ? 0 : -1;
+            m_rank_above = 0;
+            m_reconstruction_coeffs_upper.emplace(
+                    local_idx_range.take_last(IdxStepInterpGrid {n_neighbours}),
+                    global_idx_range.take_first(IdxStepInterpGrid {n_neighbours}));
+        } else {
+            m_rank_above = -1;
         }
     }
 
@@ -304,7 +406,6 @@ public:
 
         // Collect calculation from neighbouring ranks and complete the linear combination to obtain the
         // approximations of the derivatives.
-        double const dx = m_dx;
         if (m_rank_below >= 0) {
             MPI_Recv(
                     neighbour_derivs_xmin.data_handle(),
@@ -315,14 +416,15 @@ public:
                     m_comm,
                     MPI_STATUS_IGNORE);
             MPI_Wait(&lower_request, MPI_STATUS_IGNORE);
-            ddc::parallel_for_each(
-                    exec_space(),
+            ddc::host_for_each(
+                    //exec_space(),
                     idx_range_batch,
                     KOKKOS_LAMBDA(IdxBatch const idx_b) {
                         double const total = local_derivs_xmin(first_deriv, idx_b)
                                              + neighbour_derivs_xmin(first_deriv, idx_b);
-                        local_derivs_xmin(first_deriv, idx_b) = total / dx;
+                        local_derivs_xmin(first_deriv, idx_b) = total;
                     });
+            Kokkos::fence();
         }
         if (m_rank_above >= 0) {
             MPI_Recv(
@@ -334,14 +436,15 @@ public:
                     m_comm,
                     MPI_STATUS_IGNORE);
             MPI_Wait(&upper_request, MPI_STATUS_IGNORE);
-            ddc::parallel_for_each(
-                    exec_space(),
+            ddc::host_for_each(
+                    //exec_space(),
                     idx_range_batch,
                     KOKKOS_LAMBDA(IdxBatch const idx_b) {
                         double const total = local_derivs_xmax(first_deriv, idx_b)
                                              + neighbour_derivs_xmax(first_deriv, idx_b);
-                        local_derivs_xmax(first_deriv, idx_b) = total / dx;
+                        local_derivs_xmax(first_deriv, idx_b) = total;
                     });
+            Kokkos::fence();
         }
 
         // Use the approximations to calculate the spline interpolation
@@ -428,22 +531,40 @@ public:
                 assert(global_derivs.has_value());
                 ddc::parallel_deepcopy(local_derivs, global_derivs.value());
             }
+            Kokkos::fence();
             return;
         }
 
-        int direction(boundary_idx == m_local_idx_range.front() ? 1 : -1);
-
-        const std::source_location location = std::source_location::current();
-        std::array<double, s_n_neighbours> const weights = s_weights;
-        ddc::parallel_for_each(
-                location.function_name(),
-                exec_space(),
-                get_idx_range(local_derivs),
-                KOKKOS_LAMBDA(IdxDerivBatch const idx_db) {
-                    IdxBatch idx_b(idx_db);
-                    // TODO: parallel vs host
-                    local_derivs(idx_db) = m_reconstruction_coeffs.get_approx_deriv_patch1_component(local_vals[idx_b]);
-                });
+        if (send_tag == s_tag_lower) {
+            assert(m_reconstruction_coeffs_lower.has_value());
+            //const std::source_location location = std::source_location::current();
+            ddc::host_for_each(
+                    //location.function_name(),
+                    //exec_space(),
+                    get_idx_range(local_derivs),
+                    KOKKOS_LAMBDA(IdxDerivBatch const idx_db) {
+                        IdxBatch idx_b(idx_db);
+                        // TODO: parallel vs host
+                        local_derivs(idx_db)
+                                = m_reconstruction_coeffs_lower->get_approx_deriv_patch2_component(
+                                        local_vals[idx_b]);
+                    });
+            Kokkos::fence();
+        } else {
+            assert(m_reconstruction_coeffs_upper.has_value());
+            ddc::host_for_each(
+                    //location.function_name(),
+                    //exec_space(),
+                    get_idx_range(local_derivs),
+                    KOKKOS_LAMBDA(IdxDerivBatch const idx_db) {
+                        IdxBatch idx_b(idx_db);
+                        // TODO: parallel vs host
+                        local_derivs(idx_db)
+                                = m_reconstruction_coeffs_upper->get_approx_deriv_patch1_component(
+                                        local_vals[idx_b]);
+                    });
+            Kokkos::fence();
+        }
 
         int const count = static_cast<int>(local_derivs.size());
 
