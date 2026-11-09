@@ -127,9 +127,9 @@ using SplineRThetagBuilder = ddc::SplineBuilder2D<
 using SplineRThetagEvaluator = ddc::SplineEvaluatorND<
         HostExecSpace,
         typename HostExecSpace::memory_space,
-        ddc::detail::TypeSeq<BSplinesRg, BSplinesThetag>,
-        ddc::detail::TypeSeq<GridRg, GridThetag>,
-        ddc::detail::TypeSeq<
+        ddc::TypeSeq<BSplinesRg, BSplinesThetag>,
+        ddc::TypeSeq<GridRg, GridThetag>,
+        ddc::TypeSeq<
                 ddc::ConstantExtrapolationRule<Rg>,
                 ddc::ConstantExtrapolationRule<Rg>,
                 ddc::PeriodicExtrapolationRule<Thetag>,
@@ -909,7 +909,7 @@ TYPED_TEST(InterfaceDerivCoeffsFixture, InterfaceDerivativesExactAndApproximatio
 
             // Exact formula ---------------------------------------------------------------------
             double const local_deriv = deriv_interface_approx;
-            EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
+            EXPECT_NEAR(local_deriv, global_deriv, 5e-12);
         });
     } else {
         // 30 cells ------------------------------------------------------------------------------

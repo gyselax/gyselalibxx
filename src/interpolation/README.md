@@ -32,3 +32,7 @@ The spline interpolation method is based entirely on the SplineBuilder and Splin
 ### Polar Spline Interpolation
 
 There is no method to construct a polar spline from the values of a function. It should be possible to construct such a `PolarSplineBuilder`, but it is not clear where the interpolation points should be placed near the O-point in order to obtain a well-conditioned problem. The B-splines, splines and the spline evaluator for the polar splines can be found in the sub-folder [polar\_splines](./polar_splines/README.md).
+
+### Interface derivative reconstruction
+
+For some methods it is useful to reconstruct the derivative at a domain boundary. For example this can be useful for splines distributed over multiple MPI threads, or for splines on multi-patch domains. The sub-folder [interface\_derivatives](./interface_derivatives/README.md) contains all methods useful for reconstructing derivatives.

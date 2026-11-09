@@ -13,7 +13,7 @@ template <class... Grid1D>
 class GridBuilder
 {
 private:
-    using type_seq = ddc::detail::TypeSeq<Grid1D...>;
+    using type_seq = ddc::TypeSeq<Grid1D...>;
 
     IdxRange<Grid1D...> m_idx_range;
 

@@ -9,7 +9,7 @@
 #include "ddc_helper.hpp"
 
 /// @brief Species discrete dimension to access constant attributes related to species.
-class SpeciesInformation
+class SpeciesInformation : ddc::DiscreteDimension
 {
 public:
     /// alias of the discrete dimension

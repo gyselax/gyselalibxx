@@ -121,7 +121,7 @@ using LagrangeInterpolatorVx = LagrangeInterpolator<
         double,
         IdxRange<LagBasisVx>,
         IdxRange<GridVx>,
-        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>>;
+        ddc::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>>;
 
 
 // Operators
@@ -129,7 +129,7 @@ using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         IdxRange<BSplinesVx>,
         IdxRange<GridVx>,
-        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
+        ddc::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
         SplineBoundaryClosures<SplineVxClosure, SplineVxClosure>>;
 
 

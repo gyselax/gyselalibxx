@@ -36,6 +36,11 @@ struct PartialDerivativeFixture<std::tuple<std::integral_constant<bool, periodic
     };
 };
 
+template <class Dim>
+struct NUGrid : NonUniformGridBase<Dim>
+{
+};
+
 std::size_t static constexpr spline_degree = 3;
 
 using partial_derivative_types = testing::Types<
@@ -260,9 +265,9 @@ public:
     using SplineInterpPointsY
             = ddc::GrevilleInterpolationPoints<BSplinesY, SplineClosure, SplineClosure>;
 
-    using BSplinesDDim = find_grid_t<DDim, ddc::detail::TypeSeq<BSplinesX, BSplinesY>>;
+    using BSplinesDDim = find_grid_t<DDim, ddc::TypeSeq<BSplinesX, BSplinesY>>;
 
-    using GridDDim = find_grid_t<DDim, ddc::detail::TypeSeq<GridX, GridY>>;
+    using GridDDim = find_grid_t<DDim, ddc::TypeSeq<GridX, GridY>>;
 
     using SplineInterpPointsDDim
             = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsX, SplineInterpPointsY>;
@@ -832,5 +837,22 @@ TYPED_TEST(PartialDerivativeFixture, ConstantPartialDerivative)
 
     // Partial Derivative in X direction
     EXPECT_DOUBLE_EQ(test.template compute_error<X>(), val);
+}
+
+TYPED_TEST(PartialDerivativeFixture, ConstantPartialDerivativeExternalDim)
+{
+    using GridX = NUGrid<typename TestFixture::X>;
+    using IdxRangeX = IdxRange<GridX>;
+    ConstantPartialDerivative<IdxRangeX, typename TestFixture::Y> const_deriv(1.0);
+
+    IdxRangeX idx_range_test(Idx<GridX> {0}, IdxStep<GridX> {1});
+    DFieldMem<IdxRangeX> field_alloc(idx_range_test);
+
+    const_deriv(get_field(field_alloc));
+
+    auto field_host = ddc::create_mirror_view_and_copy(get_field(field_alloc));
+
+    // Partial Derivative in X direction
+    EXPECT_EQ(field_host(Idx<GridX> {0}), 1.0);
 }
 } // namespace
