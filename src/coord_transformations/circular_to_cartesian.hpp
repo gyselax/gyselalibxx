@@ -43,10 +43,6 @@ template <class R, class Theta, class X, class Y>
 class CircularToCartesian
 {
 public:
-    /// @brief Indicate the first physical coordinate.
-    using cartesian_tag_x = X;
-    /// @brief Indicate the second physical coordinate.
-    using cartesian_tag_y = Y;
     /// @brief Indicate the first logical coordinate.
     using curvilinear_tag_r = R;
     /// @brief Indicate the second logical coordinate.
@@ -318,7 +314,7 @@ struct MappingAccessibility<ExecSpace, CircularToCartesian<R, Theta, X, Y>> : st
 };
 
 template <class X, class Y, class R, class Theta>
-struct IsCurvilinear2DMapping<CircularToCartesian<R, Theta, X, Y>> : std::true_type
+struct HasOPoint<CircularToCartesian<R, Theta, X, Y>> : std::true_type
 {
 };
 

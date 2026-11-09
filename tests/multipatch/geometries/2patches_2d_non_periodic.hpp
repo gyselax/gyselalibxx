@@ -98,8 +98,8 @@ template <int PatchIdx>
 struct BSplinesX
     : std::conditional_t<
               is_uniform,
-              ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>,
-              ddc::NonUniformBSplines<X<PatchIdx>, BSplineDegree>>
+              ddc::UniformBSplines<X<PatchIdx>, BSplineDegree, X<PatchIdx>::PERIODIC>,
+              ddc::NonUniformBSplines<X<PatchIdx>, BSplineDegree, X<PatchIdx>::PERIODIC>>
 {
 };
 
@@ -111,8 +111,8 @@ template <int PatchIdx>
 struct BSplinesY
     : std::conditional_t<
               is_uniform,
-              ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree>,
-              ddc::NonUniformBSplines<Y<PatchIdx>, BSplineDegree>>
+              ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree, Y<PatchIdx>::PERIODIC>,
+              ddc::NonUniformBSplines<Y<PatchIdx>, BSplineDegree, Y<PatchIdx>::PERIODIC>>
 {
 };
 
@@ -126,7 +126,7 @@ using Patch2 = Patch<GridX<2>, GridY<2>, BSplinesX<2>, BSplinesY<2>>;
 
 #ifndef EXTEND_GEOMETRY
 /// @brief Sorted list of patches.
-using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
+using PatchOrdering = ddc::TypeSeq<Patch1, Patch2>;
 
 
 // EDGES -----------------------------------------------------------------------------------------

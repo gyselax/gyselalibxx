@@ -18,22 +18,19 @@
  * @tparam Mapping3D A type representing a mapping in 3 dimensions.
  * @tparam MappingCoord The type of the coordinate that will be used to evaluate the
  *                  mapping. This coordinate is used to calculate the determinant of
- *                  the Jacobian and the metric tensor. It is almost always equal to
+ *                  the Jacobian. It is almost always equal to
  *                  the argument type of the 3D mapping but axi-symmetry may make it
  *                  useful to evaluate the mapping on a coordinate with a reduced
  *                  dimensionality.
  */
-template <class Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
+template <concepts::Mapping Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
 class Curl
 {
-    static_assert(is_mapping_v<Mapping3D>);
-
     using BasisSpatial = ddc::to_type_seq_t<typename Mapping3D::CoordArg>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
 
 private:
     Mapping3D m_mapping;
-    MetricTensorEvaluator<Mapping3D, MappingCoord> m_metric_tensor;
 
 public:
     /**
@@ -41,7 +38,7 @@ public:
      * @param mapping The mapping describing the system of coordinates on which the
      *              expression is calculated.
      */
-    explicit Curl(Mapping3D const& mapping) : m_mapping(mapping), m_metric_tensor(mapping) {}
+    explicit Curl(Mapping3D const& mapping) : m_mapping(mapping) {}
 
     /**
      * @brief Compute a curl at a given coordinate, from

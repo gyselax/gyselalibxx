@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 
 /**
  * @brief An abstract class for solving a Vlasov equation.
@@ -26,5 +26,5 @@ public:
     virtual DFieldSpVxVyXY operator()(
             DFieldSpVxVyXY allfdistribu,
             DVectorConstFieldXY efield,
-            double dt) const = 0;
+            Real dt) const = 0;
 };

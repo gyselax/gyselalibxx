@@ -7,6 +7,7 @@ add_executable(unit_tests_pde_solvers
     fftpoissonsolver.cpp
     femperiodicpoissonsolver.cpp
     femnonperiodicpoissonsolver.cpp
+    tensor_product_bspline_poisson_assembler.cpp
     ../main.cpp
 )
 target_link_libraries(unit_tests_pde_solvers
@@ -14,10 +15,12 @@ target_link_libraries(unit_tests_pde_solvers
         DDC::core
         GTest::gtest
         GTest::gmock
-        gslx::pde_solvers
-        gslx::quadrature
-        gslx::speciesinfo
-        gslx::utils
+        gyselalibxx::pde_solvers
+        gyselalibxx::quadrature
+        gyselalibxx::speciesinfo
+        gyselalibxx::utils
 )
 
-gtest_discover_tests(unit_tests_pde_solvers DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_pde_solvers DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST
+    PROPERTIES TIMEOUT 20
+    PROPERTIES COST 10)

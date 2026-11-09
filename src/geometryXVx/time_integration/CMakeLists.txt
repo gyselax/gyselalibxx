@@ -6,21 +6,29 @@ add_library("time_integration_${GEOMETRY_VARIANT}" STATIC
     predcorr.cpp
 )
 
-target_include_directories("time_integration_${GEOMETRY_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("time_integration_${GEOMETRY_VARIANT}" PUBLIC cxx_std_20)
+
+target_sources("time_integration_${GEOMETRY_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                itimesolver.hpp
+                predcorr.hpp
 )
 
 target_link_libraries("time_integration_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
         DDC::pdi
-        gslx::poisson_${GEOMETRY_VARIANT}
-        gslx::speciesinfo
-        gslx::boltzmann_${GEOMETRY_VARIANT}
-        gslx::utils
+        gyselalibxx::poisson_${GEOMETRY_VARIANT}
+        gyselalibxx::speciesinfo
+        gyselalibxx::boltzmann_${GEOMETRY_VARIANT}
+        gyselalibxx::utils
 
 )
 
-add_library("gslx::time_integration_${GEOMETRY_VARIANT}" ALIAS "time_integration_${GEOMETRY_VARIANT}")
+add_library("gyselalibxx::time_integration_${GEOMETRY_VARIANT}" ALIAS "time_integration_${GEOMETRY_VARIANT}")
+
+install(TARGETS time_integration_${GEOMETRY_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/time_integration)
 
 endforeach()

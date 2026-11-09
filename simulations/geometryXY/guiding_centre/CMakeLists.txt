@@ -6,19 +6,19 @@ target_link_libraries(guiding_centre_XY
         DDC::core
         DDC::pdi
         paraconf::paraconf
-        PDI::pdi
+        PDI::PDI_C
 
-        gslx::advection
-        gslx::initialisation_Kelvin_Helmholtz
-        gslx::interpolation
-        gslx::io
-        gslx::geometry_XY
-        gslx::paraconfpp
-        gslx::pde_solvers
-        gslx::predcorr_rk2_xy
-        gslx::simulation_utils
-        gslx::timestepper
-        gslx::utils
+        gyselalibxx::advection
+        gyselalibxx::initialisation_Kelvin_Helmholtz
+        gyselalibxx::interpolation
+        gyselalibxx::io
+        gyselalibxx::geometry_XY
+        gyselalibxx::paraconfpp
+        gyselalibxx::pde_solvers
+        gyselalibxx::predcorr_rk2_xy
+        gyselalibxx::simulation_utils
+        gyselalibxx::timestepper
+        gyselalibxx::utils
     
 )
 

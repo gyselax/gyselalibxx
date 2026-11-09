@@ -7,7 +7,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
+#include "geometry_xvx.hpp"
 #include "qnsolver.hpp"
 
 QNSolver::QNSolver(PoissonSolver const& solve_poisson, IChargeDensityCalculator const& compute_rho)
@@ -21,7 +23,8 @@ void QNSolver::operator()(
         DFieldX const electric_field,
         DConstFieldSpXVx const allfdistribu) const
 {
-    Kokkos::Profiling::pushRegion("QNSolver");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) QNSolver");
+
     assert(get_idx_range(electrostatic_potential) == get_idx_range<GridX>(allfdistribu));
     IdxRangeX const idx_range_x = get_idx_range(electrostatic_potential);
     // Compute the RHS of the Quasi-Neutrality equation.
@@ -30,6 +33,4 @@ void QNSolver::operator()(
     m_compute_rho(get_field(rho), allfdistribu);
 
     m_solve_poisson(electrostatic_potential, electric_field, get_field(rho));
-
-    Kokkos::Profiling::popRegion();
 }

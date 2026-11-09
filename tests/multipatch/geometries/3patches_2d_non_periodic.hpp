@@ -17,7 +17,7 @@ namespace GEOM_NAMESPACE_NAME {
 using Patch3 = Patch<GridX<3>, GridY<3>, BSplinesX<3>, BSplinesY<3>>;
 
 /// @brief Sorted list of patches.
-using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
+using PatchOrdering = ddc::TypeSeq<Patch1, Patch2, Patch3>;
 
 
 // EDGES -----------------------------------------------------------------------------------------

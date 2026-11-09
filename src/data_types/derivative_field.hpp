@@ -15,7 +15,7 @@ class DerivFieldMem;
 template <
         class ElementType,
         class SupportType,
-        class MemorySpace = Kokkos::HostSpace,
+        class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
 class DerivField;
 
@@ -116,7 +116,7 @@ public:
     using element_type = typename base_type::element_type;
 
     /// @brief The type of the memory space where the field is saved (CPU vs GPU).
-    using memory_space = typename base_type::element_type;
+    using memory_space = MemorySpace;
 
     /**
      * @brief The IdxRange on which the chunks in this object are defined.
@@ -370,9 +370,41 @@ public:
     KOKKOS_FUNCTION constexpr reference operator()(DElem... elems) const noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_index_type = detail::combine_t<DElem...>;
+        using full_index_type = ddc::combine_t<DElem...>;
         full_index_type elem(elems...);
         return base_type::get_internal_field(elem)();
+    }
+
+    /**
+     * @brief Get a Field describing a subset of the data.
+     *
+     * @param slice_spec A discrete element describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns Field A subset of the data.
+     */
+    template <class... QueryDDims>
+    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec) const
+    {
+        return base_type::get_internal_field(slice_spec);
+    }
+
+    /**
+     * @brief Get a ConstField describing a subset of the data.
+     * This function allows a slice to be obtained however it is designed to return a ConstField. It is
+     * therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).
+     *
+     * @param oidx_range A discrete index range describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns ConstField A subset of the data.
+     */
+    template <class... QueryDDims>
+    KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
+    {
+        return base_type::get_internal_field(oidx_range);
     }
 
     /**
@@ -383,7 +415,7 @@ public:
      *
      * @returns A constant span of this field.
      */
-    KOKKOS_FUNCTION constexpr view_type span_cview() const
+    KOKKOS_FUNCTION constexpr view_type get_const_field() const
     {
         return view_type(*this);
     }
@@ -396,7 +428,7 @@ public:
      *
      * @returns A span of this field.
      */
-    KOKKOS_FUNCTION constexpr span_type span_view() const
+    KOKKOS_FUNCTION constexpr span_type get_field() const
     {
         return *this;
     }
@@ -405,7 +437,7 @@ public:
 template <
         class ElementType,
         class SupportType,
-        class MemorySpace = Kokkos::HostSpace,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
 using DerivConstField
         = DerivField<ElementType const, SupportType, MemorySpace, LayoutStridedPolicy>;

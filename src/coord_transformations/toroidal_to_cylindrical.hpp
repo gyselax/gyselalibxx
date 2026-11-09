@@ -22,30 +22,24 @@ class ToroidalToCylindrical
     static_assert(Zeta::IS_CONTRAVARIANT);
     static_assert(Phi::IS_CONTRAVARIANT);
 
-public:
-    /// @brief Indicate the first physical coordinate.
-    using cylindrical_tag_R = typename Curvilinear2DToCartesian::cartesian_tag_x;
-    /// @brief Indicate the second physical coordinate.
-    using cylindrical_tag_Z = typename Curvilinear2DToCartesian::cartesian_tag_y;
-    /// @brief Indicate the third physical coordinate.
-    using cylindrical_tag_Zeta = Zeta;
-
-    /// @brief Indicate the first logical coordinate.
-    using toroidal_tag_rho = typename Curvilinear2DToCartesian::curvilinear_tag_r;
-    /// @brief Indicate the second logical coordinate.
-    using toroidal_tag_theta = typename Curvilinear2DToCartesian::curvilinear_tag_theta;
-    /// @brief Indicate the third logical coordinate.
-    using toroidal_tag_phi = Phi;
-
 private:
-    using R = cylindrical_tag_R;
+    using RZBasis = ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordResult>;
+    using RhoThetaBasis = ddc::to_type_seq_t<typename Curvilinear2DToCartesian::CoordArg>;
+    using RZBasis_cov = get_covariant_dims_t<RZBasis>;
+    using RhoThetaBasis_cov = get_covariant_dims_t<RhoThetaBasis>;
+
+    // Extract the R and Z dimensions. As they describe a Cartesian slice and are private
+    // attributes, the order is not important.
+    using R = ddc::type_seq_element_t<0, RZBasis>;
     using R_cov = typename R::Dual;
-    using Z = cylindrical_tag_Z;
+    using Z = ddc::type_seq_element_t<1, RZBasis>;
     using Z_cov = typename Z::Dual;
     using Zeta_cov = typename Zeta::Dual;
-    using Rho = toroidal_tag_rho;
+    using Rho = typename CoordWithOPoint<
+            typename Curvilinear2DToCartesian::CoordArg>::curvilinear_tag_r;
     using Rho_cov = typename Rho::Dual;
-    using Theta = toroidal_tag_theta;
+    using Theta = typename CoordWithOPoint<
+            typename Curvilinear2DToCartesian::CoordArg>::curvilinear_tag_theta;
     using Theta_cov = typename Theta::Dual;
     using Phi_cov = typename Phi::Dual;
 
@@ -116,8 +110,7 @@ public:
     jacobian_matrix(CoordArg const& coord) const
     {
         DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Phi_cov>> J_3d;
-        DTensor<VectorIndexSet<R, Z>, VectorIndexSet<Rho_cov, Theta_cov>> J_2d
-                = m_mapping_2d.jacobian_matrix(CoordArg2D(coord));
+        DTensor<RZBasis, RhoThetaBasis_cov> J_2d = m_mapping_2d.jacobian_matrix(CoordArg2D(coord));
         ddcHelper::get<R, Rho_cov>(J_3d) = ddcHelper::get<R, Rho_cov>(J_2d);
         ddcHelper::get<R, Theta_cov>(J_3d) = ddcHelper::get<R, Theta_cov>(J_2d);
         ddcHelper::get<R, Phi_cov>(J_3d) = 0;
@@ -144,8 +137,8 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double jacobian_component(CoordArg const& coord) const
     {
-        static_assert(ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<R, Z, Zeta>>);
-        static_assert(ddc::in_tags_v<IndexTag2, ddc::detail::TypeSeq<Rho_cov, Theta_cov, Phi_cov>>);
+        static_assert(ddc::in_tags_v<IndexTag1, ddc::TypeSeq<R, Z, Zeta>>);
+        static_assert(ddc::in_tags_v<IndexTag2, ddc::TypeSeq<Rho_cov, Theta_cov, Phi_cov>>);
 
         if constexpr (std::is_same_v<IndexTag1, Zeta> && std::is_same_v<IndexTag2, Phi_cov>) {
             return -1;
@@ -174,8 +167,7 @@ public:
     {
         InverseJacobianMatrix inv_jacobian_matrix_2d(m_mapping_2d);
         DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> inv_J_3d;
-        DTensor<VectorIndexSet<Rho, Theta>, VectorIndexSet<R_cov, Z_cov>> inv_J_2d
-                = inv_jacobian_matrix_2d(CoordArg2D(coord));
+        DTensor<RhoThetaBasis, RZBasis_cov> inv_J_2d = inv_jacobian_matrix_2d(CoordArg2D(coord));
         ddcHelper::get<Rho, R_cov>(inv_J_3d) = ddcHelper::get<Rho, R_cov>(inv_J_2d);
         ddcHelper::get<Rho, Z_cov>(inv_J_3d) = ddcHelper::get<Rho, Z_cov>(inv_J_2d);
         ddcHelper::get<Rho, Zeta_cov>(inv_J_3d) = 0;
@@ -203,8 +195,8 @@ public:
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
         static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian>);
-        static_assert(ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<Rho, Theta, Phi>>);
-        static_assert(ddc::in_tags_v<IndexTag2, ddc::detail::TypeSeq<R_cov, Z_cov, Zeta_cov>>);
+        static_assert(ddc::in_tags_v<IndexTag1, ddc::TypeSeq<Rho, Theta, Phi>>);
+        static_assert(ddc::in_tags_v<IndexTag2, ddc::TypeSeq<R_cov, Z_cov, Zeta_cov>>);
 
         if constexpr (std::is_same_v<IndexTag1, Phi> && std::is_same_v<IndexTag2, Zeta_cov>) {
             return -1;

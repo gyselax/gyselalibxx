@@ -41,7 +41,7 @@ class TensorCommon
 
 public:
     /// The TensorIndexSet describing the possible indices.
-    using index_set = ddc::detail::TypeSeq<ValidIndexSet...>;
+    using index_set = ddc::TypeSeq<ValidIndexSet...>;
 
 protected:
     /// The number of elements in the mdspan
@@ -99,10 +99,10 @@ protected:
     KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon const& o_tensor) = default;
 
     /**
-     * @brief Move-construct a tensor object by copying an existing tensor of exactly the
+     * @brief Move-construct a tensor object by moving an existing tensor of exactly the
      * same type. This method can be called implicitly.
      *
-     * @param o_tensor The tensor to be copied.
+     * @param o_tensor The tensor to be moved.
      */
     KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon&& o_tensor) = default;
 
@@ -148,7 +148,7 @@ public:
 
     /**
      * @brief A move assign operator.
-     * @param other The tensor to be copied.
+     * @param other The tensor to be moved.
      * @return A reference to the current tensor.
      */
     KOKKOS_FUNCTION TensorCommon& operator=(TensorCommon&& other)
@@ -177,7 +177,7 @@ public:
     /**
      * @brief An operator to divide all the element of the current tensor by
      * a value.
-     * @param val The value by which the elements should be multiplied.
+     * @param val The value by which the elements should be divided.
      * @return A reference to the current modified tensor.
      */
     template <class Oelement_type>
@@ -252,6 +252,52 @@ public:
 //                         Operators
 //////////////////////////////////////////////////////////////////////////
 
+namespace detail {
+template <
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet,
+        std::size_t... InternalIdx>
+KOKKOS_INLINE_FUNCTION void assign_elements_from_subset(
+        TensorCommon<OutputStorageType, OutputValidIndexSet...>& tensor_to_fill,
+        TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input,
+        std::index_sequence<InternalIdx...>)
+{
+    using InputTensorIndexSet = ddc::TypeSeq<InputValidIndexSet...>;
+    ((tensor_to_fill.template get<tensor_tools::to_tensor_index_element_t<
+              ddc::TypeSeq<OutputValidIndexSet...>,
+              typename tensor_tools::get_nth_tensor_index_element_t<
+                      InternalIdx,
+                      InputTensorIndexSet>::IdxTypeSeq>>()
+      = tensor_input.template get<
+              tensor_tools::get_nth_tensor_index_element_t<InternalIdx, InputTensorIndexSet>>()),
+     ...);
+}
+
+template <
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet,
+        std::size_t... InternalIdx>
+KOKKOS_INLINE_FUNCTION void assign_elements_to_subset(
+        TensorCommon<OutputStorageType, OutputValidIndexSet...>& tensor_to_fill,
+        TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input,
+        std::index_sequence<InternalIdx...>)
+{
+    using OutputTensorIndexSet = ddc::TypeSeq<OutputValidIndexSet...>;
+    ((tensor_to_fill.template get<tensor_tools::to_tensor_index_element_t<
+              ddc::TypeSeq<OutputValidIndexSet...>,
+              typename tensor_tools::get_nth_tensor_index_element_t<
+                      InternalIdx,
+                      OutputTensorIndexSet>::IdxTypeSeq>>()
+      = tensor_input.template get<
+              tensor_tools::get_nth_tensor_index_element_t<InternalIdx, OutputTensorIndexSet>>()),
+     ...);
+}
+} // namespace detail
+
 namespace ddcHelper {
 
 /**
@@ -264,9 +310,8 @@ template <class... QueryIndexTag, class storage_type, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION typename storage_type::element_type& get(
         TensorCommon<storage_type, ValidIndexSet...>& tensor)
 {
-    return tensor.template get<tensor_tools::TensorIndexElement<
-            ddc::detail::TypeSeq<ValidIndexSet...>,
-            QueryIndexTag...>>();
+    return tensor.template get<
+            tensor_tools::TensorIndexElement<ddc::TypeSeq<ValidIndexSet...>, QueryIndexTag...>>();
 }
 
 /**
@@ -279,9 +324,8 @@ template <class... QueryIndexTag, class storage_type, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION typename storage_type::element_type const& get(
         TensorCommon<storage_type, ValidIndexSet...> const& tensor)
 {
-    return tensor.template get<tensor_tools::TensorIndexElement<
-            ddc::detail::TypeSeq<ValidIndexSet...>,
-            QueryIndexTag...>>();
+    return tensor.template get<
+            tensor_tools::TensorIndexElement<ddc::TypeSeq<ValidIndexSet...>, QueryIndexTag...>>();
 }
 
 /**
@@ -293,10 +337,47 @@ KOKKOS_INLINE_FUNCTION typename storage_type::element_type const& get(
  */
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     return Coord<Dims...>(get<Dims>(tensor)...);
 }
+
+/**
+ * @brief Assign the elements of a tensor to another tensor.
+ *
+ * Assign the elements of the tensor tensor_input to the corresponding positions
+ * in the tensor tensor_to_fill. tensor_to_fill may be larger than tensor_input
+ * but cannot be smaller.
+ *
+ * @param[inout] tensor_to_fill The tensor whose elements will be modified.
+ * @param[in] tensor_input The tensor whose elements will be copied.
+ */
+template <
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet>
+KOKKOS_INLINE_FUNCTION void assign_elements(
+        TensorCommon<OutputStorageType, OutputValidIndexSet...>& tensor_to_fill,
+        TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input)
+{
+    constexpr std::size_t n_input_elements
+            = TensorCommon<InputStorageType, InputValidIndexSet...>::size();
+    constexpr std::size_t n_output_elements
+            = TensorCommon<OutputStorageType, OutputValidIndexSet...>::size();
+    if constexpr (n_input_elements < n_output_elements) {
+        detail::assign_elements_from_subset(
+                tensor_to_fill,
+                tensor_input,
+                std::make_index_sequence<n_input_elements>());
+    } else {
+        detail::assign_elements_to_subset(
+                tensor_to_fill,
+                tensor_input,
+                std::make_index_sequence<n_output_elements>());
+    }
+}
+
 } // namespace ddcHelper
 
 /**
@@ -310,14 +391,14 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
         Coord<Dims...> const& coord,
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     static_assert(std::is_same_v<typename storage_type::element_type, double>);
     return Coord<Dims...>((ddc::get<Dims>(coord) + ddcHelper::get<Dims>(tensor))...);
 }
 
 /**
- * An operator to add the elements of a tensor to a coordinate.
+ * An operator to subtract the elements of a tensor to a coordinate.
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
  * @param[in] coord The coordinate from which the tensor is subtracted.
@@ -327,7 +408,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
         Coord<Dims...> const& coord,
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     static_assert(std::is_same_v<typename storage_type::element_type, double>);
     return Coord<Dims...>((ddc::get<Dims>(coord) - ddcHelper::get<Dims>(tensor))...);
@@ -344,7 +425,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
         Coord<Dims...>& coord,
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     static_assert(std::is_same_v<typename storage_type::element_type, double>);
     ((ddc::get<Dims>(coord) += ddcHelper::get<Dims>(tensor)), ...);
@@ -352,7 +433,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
 }
 
 /**
- * An operator to add the elements of a tensor to a coordinate.
+ * An operator to subtract the elements of a tensor to a coordinate.
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
  * @param[inout] coord The coordinate from which the tensor is subtracted.
@@ -362,7 +443,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
 template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
         Coord<Dims...>& coord,
-        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::TypeSeq<Dims...>> const& tensor)
 {
     static_assert(std::is_same_v<typename storage_type::element_type, double>);
     ((ddc::get<Dims>(coord) -= ddcHelper::get<Dims>(tensor)), ...);
@@ -370,7 +451,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
 }
 
 /**
- * @brief An operator to multiply all a tensor by a value.
+ * @brief An operator to multiply all the elements of the current tensor by a value.
  * @param val The value by which the elements should be multiplied.
  * @param tensor The tensor being multiplied.
  * @return A new tensor containing the result of the multiplication.
@@ -408,8 +489,8 @@ KOKKOS_FUNCTION TensorType operator*(TensorType const& tensor, Oelement_type val
  * @brief An operator to divide all the element of the current tensor by
  * a value.
  * @param tensor The tensor being divided.
- * @param val The value by which the elements should be multiplied.
- * @return A new tensor containing the result of the multiplication.
+ * @param val The value by which the elements should be divided
+ * @return A new tensor containing the result of the division.
  */
 template <
         class TensorType,
@@ -428,11 +509,8 @@ KOKKOS_FUNCTION TensorType operator/(TensorType const& tensor, Oelement_type val
  * @param val The second tensor in the addition.
  * @return A new tensor containing the result of the addition.
  */
-template <
-        class TensorType,
-        class Oelement_type,
-        std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor, Oelement_type val)
+template <class TensorType, std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
+KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor, TensorType const& val)
 {
     TensorType result(tensor);
     result += val;

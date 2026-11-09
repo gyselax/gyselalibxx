@@ -17,10 +17,11 @@
 
 
 namespace {
-template <class ExecSpace, class Grid1D>
-using CoefficientFieldMem1D = DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
-template <class ExecSpace, class Grid1D>
-using CoefficientField1D = DField<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
+template <class ExecSpace, class Grid1D, std::floating_point DataType>
+using CoefficientFieldMem1D
+        = FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>;
+template <class ExecSpace, class Grid1D, std::floating_point DataType>
+using CoefficientField1D = Field<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>;
 
 } // namespace
 
@@ -50,14 +51,16 @@ neumann_spline_quadrature_coefficients_1d(
         IdxRange<Grid1D> const& idx_range,
         SplineBuilder const& builder)
 {
-    constexpr int nbc_xmin = SplineBuilder::s_nbc_xmin;
-    constexpr int nbc_xmax = SplineBuilder::s_nbc_xmax;
+    constexpr int nbc_xmin = SplineBuilder::s_nbe_xmin;
+    constexpr int nbc_xmax = SplineBuilder::s_nbe_xmax;
     static_assert(
-            SplineBuilder::s_bc_xmin == ddc::BoundCond::HERMITE,
+            SplineBuilder::s_sbc_xmin == ddc::SplineBuilderClosure::HERMITE
+                    || SplineBuilder::s_sbc_xmin == ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
-            SplineBuilder::s_bc_xmax == ddc::BoundCond::HERMITE,
+            SplineBuilder::s_sbc_xmax == ddc::SplineBuilderClosure::HERMITE
+                    || SplineBuilder::s_sbc_xmax == ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
@@ -111,23 +114,25 @@ neumann_spline_quadrature_coefficients(
                     typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientFieldMem1D<Kokkos::DefaultHostExecutionSpace, DDims>...>
+    std::tuple<CoefficientFieldMem1D<Kokkos::DefaultHostExecutionSpace, DDims, double>...>
     current_dim_coeffs_alloc(
             neumann_spline_quadrature_coefficients_1d<
                     Kokkos::DefaultHostExecutionSpace>(ddc::select<DDims>(idx_range), builders)...);
-    std::tuple<CoefficientField1D<Kokkos::DefaultHostExecutionSpace, DDims>...> current_dim_coeffs(
-            get_field(std::get<CoefficientFieldMem1D<Kokkos::DefaultHostExecutionSpace, DDims>>(
+    std::tuple<CoefficientField1D<Kokkos::DefaultHostExecutionSpace, DDims, double>...>
+    current_dim_coeffs(get_field(
+            std::get<CoefficientFieldMem1D<Kokkos::DefaultHostExecutionSpace, DDims, double>>(
                     current_dim_coeffs_alloc))...);
     // Allocate ND coefficients
-    DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
+    DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space>
+            coefficients_alloc("coefficients (neumann_spline_quadrature_coefficients)", idx_range);
     auto coefficients_alloc_host = ddc::create_mirror(get_field(coefficients_alloc));
     host_t<DField<IdxRange<DDims...>>> coefficients(get_field(coefficients_alloc_host));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
     // (see https://github.com/kokkos/kokkos/pull/7059)
-    ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
+    ddc::host_for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
-                = (std::get<CoefficientField1D<Kokkos::DefaultHostExecutionSpace, DDims>>(
+                = (std::get<CoefficientField1D<Kokkos::DefaultHostExecutionSpace, DDims, double>>(
                            current_dim_coeffs)(ddc::select<DDims>(idim))
                    * ... * 1);
     });

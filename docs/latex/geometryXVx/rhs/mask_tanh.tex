@@ -34,7 +34,7 @@ The hyperbolic mask denoted $\mathcal{M}(x)$ is a function that transitions smoo
      \mathcal{M}(x) = \dfrac{1}{2}\left\{ \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{\ell}}{d}\right)} - \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{r}}{d}\right)}  \right\} .
 \end{equation}
 %
-The $d$ parameter controls the steepness of the mask transition. The second possibility is to have a mask that is equal to zero inside the $\left[ x_\mathrm{\ell}, \, x_\mathrm{r} \right] $ domain, and zero outside. In this case it is expressed as
+The $d$ parameter controls the steepness of the mask transition. The second possibility is to have a mask that is equal to zero inside the $\left[ x_\mathrm{\ell}, \, x_\mathrm{r} \right] $ domain, and one outside. In this case it is expressed as
 %
 \begin{equation}\label{eq:mask_inverted}
      \mathcal{M}(x) = 1 - \dfrac{1}{2}\left\{ \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{\ell}}{d}\right)} - \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{r}}{d}\right)}  \right\} .

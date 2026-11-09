@@ -19,21 +19,14 @@ template <class IdxRangeFull, class DerivativeDimension>
 class IPartialDerivative
 {
 public:
+    /// The dimension on which the partial derivative is calculated.
+    using DerivDim = DerivativeDimension;
+
     /// The type of a reference to the field to be differentiated.
     using DFieldType = DField<IdxRangeFull>;
 
     /// The type of a constant reference to the field to be differentiated.
     using DConstFieldType = DConstField<IdxRangeFull>;
-
-    /// The type of the grid on the dimension on which the partial derivative is calculated.
-    using GridDerivativeDimension
-            = find_grid_t<DerivativeDimension, ddc::to_type_seq_t<IdxRangeFull>>;
-
-    /// The index range of the dimension on which the partial derivative is calculated.
-    using IdxRangeDeriv = IdxRange<GridDerivativeDimension>;
-
-    /// The index range of all dimensions except DerivativeDimension.
-    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridDerivativeDimension>;
 
     virtual ~IPartialDerivative() = default;
 
@@ -43,6 +36,32 @@ public:
      * @param[out] differentiated_field On output, contains values of the differentiated field.
      */
     virtual void operator()(DFieldType differentiated_field) const = 0;
+};
+
+/**
+ * @brief An abstract class for a non-analytical partial derivative operator.
+ * This class inherits from IPartialDerivative but adds IdxRange information which
+ * is useful when iterating over the dimension along which the derivative is defined.
+ * This information may not be relevant for an analytical IPartialDerivative as
+ * in this case no IdxRange iteration is required.
+ *
+ * @tparam IdxRangeFull The index range of the field on which the operator acts 
+ * (with all dimensions, batched and dimension of interest).
+ * @tparam DerivativeDimension The dimension on which the partial derivative is calculated.
+ */
+template <class IdxRangeFull, class DerivativeDimension>
+class INonAnalyticalPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
+{
+public:
+    /// The type of the grid on the dimension on which the partial derivative is calculated.
+    using GridDerivativeDimension
+            = find_grid_t<DerivativeDimension, ddc::to_type_seq_t<IdxRangeFull>>;
+
+    /// The index range of the dimension on which the partial derivative is calculated.
+    using IdxRangeDeriv = IdxRange<GridDerivativeDimension>;
+
+    /// The index range of all dimensions except DerivativeDimension.
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridDerivativeDimension>;
 };
 
 /**
@@ -66,3 +85,30 @@ public:
     virtual std::unique_ptr<IPartialDerivative<IdxRangeFull, DerivativeDimension>> create_instance(
             DConstField<IdxRangeFull> field) const = 0;
 };
+
+namespace concepts {
+
+template <typename T>
+concept LocalPartialDerivative = requires()
+{
+    {
+        T::n_local_points()
+        } -> std::same_as<int>;
+}
+&&requires(
+        std::array<Coord<typename T::DerivDim>, T::n_local_points()> const& pos,
+        std::array<double, T::n_local_points()> const& vals)
+{
+    {
+        T::get_derivative(pos, vals)
+        } -> std::same_as<double>;
+};
+
+template <typename T>
+concept LocalPartialDerivativeCreator = requires
+{
+    typename T::partial_derivative_type;
+}
+&&LocalPartialDerivative<typename T::partial_derivative_type>;
+
+} // namespace concepts

@@ -84,27 +84,27 @@ TYPED_TEST(RungeKuttaFixture, RungeKuttaOrder)
     DFieldMemX result(idx_range);
 
     double exp_val = exp(5.0 * dt * Nt);
-    ddc::for_each(idx_range, [&](IdxX ix) {
+    ddc::host_for_each(idx_range, [&](IdxX ix) {
         double const C = (double(ix - IdxX(0)) - 0.6);
         result(ix) = C * exp_val + 0.6;
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(idx_range, [&](IdxX ix) { vals(ix) = double(ix - IdxX(0)); });
+        ddc::host_for_each(idx_range, [&](IdxX ix) { vals(ix) = double(ix - IdxX(0)); });
 
         for (int i(0); i < Nt; ++i) {
             runge_kutta
                     .update(get_field(vals),
                             dt,
                             [&](host_t<DField<IdxRangeX>> dy, host_t<DConstField<IdxRangeX>> y) {
-                                ddc::for_each(idx_range, [&](IdxX ix) {
+                                ddc::host_for_each(idx_range, [&](IdxX ix) {
                                     dy(ix) = 5.0 * y(ix) - 3.0;
                                 });
                             });
         }
 
         double linf_err = 0.0;
-        ddc::for_each(idx_range, [&](IdxX ix) {
+        ddc::host_for_each(idx_range, [&](IdxX ix) {
             double const err = std::abs(result(ix) - vals(ix));
             linf_err = err > linf_err ? err : linf_err;
         });

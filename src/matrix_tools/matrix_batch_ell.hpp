@@ -59,7 +59,7 @@ public:
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_size, mat_size)
-        , m_max_iter(max_iter.value_or(500))
+        , m_max_iter(max_iter.value_or(mat_size))
         , m_tol(res_tol.value_or(1e-15))
         , m_with_logger(logger.value_or(false))
     {
@@ -218,43 +218,5 @@ public:
         check_conv(batch_size(), m_tol, gko_exec, logger);
 
         Kokkos::deep_copy(b, x_view);
-    }
-
-    /**
-    * @brief A function returns the norm of a matrix located at batch_idx.
-    * @param[in] batch_idx integer, index of the matrix in the batch. 
-    * @return  value of the matrix infinite-norm.
-    */
-    double norm(int batch_idx) const
-    {
-        int const tmp_mat_size = size();
-        int const tmp_batch_size = batch_size();
-        int const non_zeros = m_batch_matrix_ell->get_num_stored_elements_per_row();
-        double* vals_proxy = m_batch_matrix_ell->get_values();
-        Kokkos::LayoutStride values_layout(
-                tmp_batch_size,
-                non_zeros * tmp_mat_size,
-                tmp_mat_size,
-                1,
-                non_zeros,
-                tmp_mat_size);
-        Kokkos::View<double***, Kokkos::LayoutStride, typename ExecSpace::memory_space>
-                vals_view(vals_proxy, values_layout);
-
-        double result = 0;
-        Kokkos::parallel_reduce(
-                "L-infinitty norm",
-                Kokkos::RangePolicy<ExecSpace>(0, tmp_mat_size),
-                KOKKOS_LAMBDA(int i, double& res) {
-                    double row_sum = 0.;
-                    for (int k = 0; k < non_zeros; k++) {
-                        row_sum += Kokkos::abs(vals_view(batch_idx, i, k));
-                    }
-                    if (row_sum > res) {
-                        res = row_sum;
-                    }
-                },
-                Kokkos::Max<double>(result));
-        return result;
     }
 };

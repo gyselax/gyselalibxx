@@ -21,18 +21,19 @@ template <
         class SplineEvaluator2D,
         class DerivativeDimension,
         class IdxRangeBatched>
-class Spline2DPartialDerivative : public IPartialDerivative<IdxRangeBatched, DerivativeDimension>
+class Spline2DPartialDerivative
+    : public INonAnalyticalPartialDerivative<IdxRangeBatched, DerivativeDimension>
 {
     static_assert(
             (std::is_same_v<
-                    typename SplineEvaluator2D::continuous_dimension_type1,
+                    typename SplineEvaluator2D::template continuous_dimension_type<0>,
                     DerivativeDimension>)
             || (std::is_same_v<
-                    typename SplineEvaluator2D::continuous_dimension_type2,
+                    typename SplineEvaluator2D::template continuous_dimension_type<1>,
                     DerivativeDimension>));
 
 private:
-    using base_type = IPartialDerivative<IdxRangeBatched, DerivativeDimension>;
+    using base_type = INonAnalyticalPartialDerivative<IdxRangeBatched, DerivativeDimension>;
 
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;
@@ -70,13 +71,10 @@ public:
     */
     void operator()(DFieldType differentiated_field) const final
     {
-        if constexpr (std::is_same_v<
-                              DerivativeDimension,
-                              typename SplineEvaluator2D::continuous_dimension_type1>) {
-            m_evaluator.deriv_dim_1(differentiated_field, m_builder_cache());
-        } else {
-            m_evaluator.deriv_dim_2(differentiated_field, m_builder_cache());
-        }
+        m_evaluator
+                .deriv(Idx<ddc::Deriv<DerivativeDimension>>(1),
+                       differentiated_field,
+                       m_builder_cache());
     }
 };
 

@@ -6,7 +6,17 @@ The current coordinate transformations implemented are:
 
 ## Analytically invertible coordinate transformations
 
-### Circular coordinate transformation
+### 1D coordinate transformations
+
+#### Linear coordinate transformation
+
+```math
+y(x) = \alpha x + \beta
+```
+
+### 2D coordinate transformations
+
+#### Circular coordinate transformation
 
 - Mapping (CircularToCartesian):
 
@@ -40,7 +50,7 @@ with $\det(J) = r$.
 \right.
 ```
 
-### Czarny coordinate transformation
+#### Czarny coordinate transformation
 
 - Mapping (CzarnyToCartesian): Taking $\varepsilon \in ]0,1[$ and $e$ as parameters.
 
@@ -105,30 +115,9 @@ with $\det(J) = \frac{-r}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\
 \right.
 ```
 
-### Barycentric coordinate transformation
+### 3D coordinate transformations
 
-- Mapping (BarycentricToCartesian):
-
-```math
- (c_1, c_2, c_3) \rightarrow (x, y).
-```
-
-## Discrete coordinate transformation defined on B-splines
-
-- Mapping (DiscreteToCartesian)
-
-```math
-\left\{
-\begin{aligned}
- & x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta) , \\
- & y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
-\end{aligned}
-\right.
-```
-
-## 3D coordinate transformations
-
-### Cylindrical to Cartesian transformation
+#### Cylindrical to Cartesian transformation
 
 - Mapping (CylindricalToCartesian):
 
@@ -165,7 +154,7 @@ with $\det(J) = -R$.
 \right.
 ```
 
-### Toroidal to Cylindrical transformation
+#### Toroidal to Cylindrical transformation
 
 The toroidal to cylindrical transformation combines a 2D transformation in the polar plane of the torus with an orthogonal transformation in the remaining dimension.
 
@@ -187,6 +176,27 @@ J (R, Z, \zeta) =
 \end{bmatrix}.
 ```
 
+## Barycentric coordinate transformation
+
+- Mapping (BarycentricToCartesian):
+
+```math
+ (c_1, c_2, c_3) \rightarrow (x, y).
+```
+
+## Discrete coordinate transformation defined on B-splines
+
+- Mapping (DiscretePoloidalCSSplineMapping)
+
+```math
+\left\{
+\begin{aligned}
+ & x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta) , \\
+ & y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
+\end{aligned}
+\right.
+```
+
 ## Combined coordinate transformation which combines two of the coordinate transformations above
 
 The tools are:
@@ -196,3 +206,34 @@ The tools are:
 - MetricTensorEvaluator : this tool calculates the metric tensor associated with a coordinate transformation.
 - VectorMapper : this tool helps when converting vectors stored in a `VectorField` from one coordinate system to another.
 - other static analysis tools found in `coord_transformation_tools.hpp`
+
+## Orthogonal coordinate transformation
+
+A coordinate transformation that is comprised of coordinate transformation components which are orthogonal to one another.
+
+## Changing the vector space of a vector
+
+The function `to_vector_space` (in `vector_mapper.hpp`) expresses a vector $v$ on a different vector space.
+There are two kinds of change:
+
+- A change of variance (contravariant ↔ covariant) in the same coordinate system.
+  This takes a metric tensor $G$ (e.g. a `MetricTensorEvaluator`).
+- A change of coordinate system with the same variance.
+  This takes a mapping $\mathcal{F} : q \mapsto p$, where $q$ are the argument coordinates and $p$ are the result coordinates.
+  $J$ denotes its Jacobian matrix.
+
+| Case | Takes | Computation |
+| --- | --- | --- |
+| Same vector space | Mapping or metric tensor | $v$ is returned unchanged |
+| Contravariant → covariant, same coordinate system | Metric tensor | $G v$ |
+| Covariant → contravariant, same coordinate system | Metric tensor | $G^{-1} v$ |
+| Argument basis → result basis, contravariant | Mapping | $J v$ |
+| Argument basis → result basis, covariant | Mapping | $J^{-T} v$ |
+| Result basis → argument basis, contravariant | Mapping | $J^{-1} v$ |
+| Result basis → argument basis, covariant | Mapping | $J^T v$ |
+
+A Cartesian basis is both covariant and contravariant, so a change to or from the Cartesian space is always a change of coordinate system.
+To change both the coordinate system and the variance, call `to_vector_space` twice: once with the mapping and once with the metric tensor.
+
+The functions `copy_to_vector_space` and `create_mirror_view_and_copy_on_vector_space` apply the same operations to every element of a vector field.
+They also take either a mapping or a metric tensor.

@@ -6,7 +6,7 @@
 
 namespace {
 
-struct GridX
+struct GridX : ddc::DiscreteDimension
 {
 };
 
@@ -75,6 +75,7 @@ TEST(PDI, VectorFieldReadWrite)
     }
 
     PDI_finalize();
+    PC_tree_destroy(&conf_pdi);
 }
 
 } // namespace

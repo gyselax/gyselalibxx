@@ -8,7 +8,7 @@ fi
 
 # set paths for spack to not use home ~/.spack folder
 CURRENT_DIR=$(pwd)
-export SPACK_PATH=${CURRENT_DIR}/spack-0.23.1/
+export SPACK_PATH=${CURRENT_DIR}/spack-1.2.2/
 export SPACK_USER_CONFIG_PATH="${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="${SPACK_PATH}/user_cache"
@@ -26,40 +26,19 @@ if [ -d "${SPACK_PATH}" ]; then
     fi
 else
     # Download spack
-    wget https://github.com/spack/spack/releases/download/v0.23.1/spack-0.23.1.tar.gz
-    tar -xf spack-0.23.1.tar.gz
-    rm spack-0.23.1.tar.gz
+    wget https://github.com/spack/spack/releases/download/v1.2.2/spack-1.2.2.tar.gz
+    tar -xf spack-1.2.2.tar.gz
+    rm spack-1.2.2.tar.gz
 fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-# Bug fix for spack < 0.24 and gcc>=14
-wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c247ca58418e/var/spack/repos/builtin/packages/py-netcdf4/package.py -O spack-0.23.1/var/spack/repos/builtin/packages/py-netcdf4/package.py
-
 # Activate spack
 . ${SPACK_PATH}/share/spack/setup-env.sh
 
-# Reduce the naming scheme of packages to avoid shebang issues.
-# Increase the time out that is by default too short for some packages (like PDI)
-spack config --scope site add 'config:connect_timeout:60'
-
-# Restrict `blas` and `lapack` providers to avoid `amdlibflame` and `amdblis`, for some reason they might get selected and fail to compile.
-spack config --scope site add 'packages:all:providers:blas:[openblas]'
-spack config --scope site add 'packages:all:providers:lapack:[openblas]'
-
-# Add patched recipes
-git clone --branch releases/v0.23 https://github.com/gyselax/spack spack-0.23.1/var/spack/repos/gyselalibxx
-spack repo add --scope site spack-0.23.1/var/spack/repos/gyselalibxx
-
-# Add PDI repository
-git clone https://github.com/pdidev/spack.git spack-0.23.1/var/spack/repos/pdi
-spack repo add --scope site spack-0.23.1/var/spack/repos/pdi
-
 spack compiler find
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  COMPILER='apple-clang@14:'
-else
+if [[ "$OSTYPE" == "linux" ]]; then
   AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
 
   if [ -z "${AVAILABLE_COMPILERS}" ]
@@ -68,15 +47,20 @@ else
       spack install gcc@11
       spack load gcc@11
       spack compiler find
+      spack unload gcc@11
   fi
-
-  COMPILER='gcc@11:'
 fi
 
-spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml
-spack --env gyselalibxx-env add --list-name compilers ${COMPILER}
-spack --env gyselalibxx-env install --jobs 2
-spack env activate -p gyselalibxx-env
+spack env create gyselalibxx-spack-environment ${SCRIPT_DIR}/gyselalibxx-spack-environment.yaml
+spack --env gyselalibxx-spack-environment config --scope env:gyselalibxx-spack-environment add packages:all:target:[$(spack arch --family --target)]
+spack --env gyselalibxx-spack-environment mirror add \
+  --oci-password-variable GITHUB_TOKEN \
+  --oci-username-variable GITHUB_TOKEN \
+  --unsigned \
+  --type binary \
+  local-buildcache oci://ghcr.io/gyselax/gyselalibxx-spack-$(spack arch --operating-system)-buildcache
+spack --env gyselalibxx-spack-environment install
+spack env activate -p gyselalibxx-spack-environment
 PYTHON_EXECUTABLE=$(which python3)
 spack env deactivate
 
@@ -88,11 +72,12 @@ then
     exit 1
 fi
 
-export SPACK_PATH=${CURRENT_DIR}/spack-0.23.1/
+export SPACK_PATH=${CURRENT_DIR}/spack-1.2.2/
 export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"
 . \${SPACK_PATH}/share/spack/setup-env.sh
-spack env activate -p gyselalibxx-env
+spack --env gyselalibxx-spack-environment repo update
+spack env activate -p gyselalibxx-spack-environment
 export PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
 EOL

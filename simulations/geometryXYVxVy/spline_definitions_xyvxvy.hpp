@@ -1,0 +1,67 @@
+// SPDX-License-Identifier: MIT
+
+#pragma once
+#include <ddc/kernels/splines.hpp>
+
+#include "../geometryXVx/spline_definitions_xvx.hpp"
+
+#include "geometry_xyvxvy.hpp"
+
+
+int constexpr BSDegreeY = 3;
+
+int constexpr BSDegreeVy = 3;
+
+bool constexpr BsplineOnUniformCellsY = true;
+
+bool constexpr BsplineOnUniformCellsVy = true;
+
+struct BSplinesY
+    : std::conditional_t<
+              BsplineOnUniformCellsY,
+              ddc::UniformBSplines<Y, BSDegreeY, Y::PERIODIC>,
+              ddc::NonUniformBSplines<Y, BSDegreeY, Y::PERIODIC>>
+{
+};
+
+struct BSplinesVy
+    : std::conditional_t<
+              BsplineOnUniformCellsVy,
+              ddc::UniformBSplines<Vy, BSDegreeVy, Vy::PERIODIC>,
+              ddc::NonUniformBSplines<Vy, BSDegreeVy, Vy::PERIODIC>>
+{
+};
+
+ddc::SplineBuilderClosure constexpr SplineYClosure = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineVyClosure
+        = ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE;
+
+// IDim initialisers
+using SplineInterpPointsY
+        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYClosure, SplineYClosure>;
+using SplineInterpPointsVy
+        = ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyClosure, SplineVyClosure>;
+
+// SplineBuilder and SplineEvaluator definition
+using SplineInterpolatorY = SplineInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        IdxRange<BSplinesY>,
+        IdxRange<GridY>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineYClosure, SplineYClosure>>;
+
+using SplineInterpolatorVy = SplineInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        IdxRange<BSplinesVy>,
+        IdxRange<GridVy>,
+        ExtrapolationRule::Constant_Constant,
+        SplineBoundaryClosures<SplineVyClosure, SplineVyClosure>>;
+
+using IdxRangeBSY = IdxRange<BSplinesY>;
+using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;
+using IdxRangeBSVy = IdxRange<BSplinesVy>;
+using IdxRangeBSVxVy = IdxRange<BSplinesVx, BSplinesVy>;
+
+template <class ElementType>
+using BSConstFieldXY = Field<ElementType const, IdxRangeBSXY>;
+using DBSConstFieldXY = BSConstFieldXY<double>;

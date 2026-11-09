@@ -36,7 +36,7 @@ auto get_example_coords(IdxStep<GridR> r_ncells, IdxStep<GridTheta> theta_ncells
     IdxRangeRTheta grid(idx_range_r, idx_range_theta);
 
     host_t<FieldMem<Coord<R, Theta>, IdxRangeRTheta>> coords(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         IdxR ir(irtheta);
         IdxTheta itheta(irtheta);
         Coord<R> r(r_min + dr * (ir - r_zero));
@@ -91,7 +91,7 @@ auto get_example_coords(
     IdxRangeRThetaPhi grid(idx_range_r, idx_range_theta, idx_range_phi);
 
     host_t<FieldMem<Coord<R, Theta, Phi>, IdxRangeRThetaPhi>> coords(grid);
-    ddc::for_each(grid, [&](IdxRThetaPhi const irthetaphi) {
+    ddc::host_for_each(grid, [&](IdxRThetaPhi const irthetaphi) {
         IdxR ir(irthetaphi);
         IdxTheta itheta(irthetaphi);
         IdxPhi iphi(irthetaphi);

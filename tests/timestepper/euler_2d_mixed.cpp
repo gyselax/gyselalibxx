@@ -96,7 +96,7 @@ TEST(Euler2DFixtureMixedTypes, Euler2DOrderMixedTypes)
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    ddc::for_each(idx_range, [&](IdxXY ixy) {
+    ddc::host_for_each(idx_range, [&](IdxXY ixy) {
         double const dist_x = (ddc::coordinate(ddc::select<GridX>(ixy)) - xc);
         double const dist_y = (ddc::coordinate(ddc::select<GridY>(ixy)) - yc);
 
@@ -105,7 +105,7 @@ TEST(Euler2DFixtureMixedTypes, Euler2DOrderMixedTypes)
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(idx_range, [&](IdxXY ixy) { vals(ixy) = coordinate(ixy); });
+        ddc::host_for_each(idx_range, [&](IdxXY ixy) { vals(ixy) = coordinate(ixy); });
 
         for (int i(0); i < Nt; ++i) {
             euler.update(
@@ -116,7 +116,7 @@ TEST(Euler2DFixtureMixedTypes, Euler2DOrderMixedTypes)
                      xc,
                      &idx_range,
                      omega](AdvectionField dy, host_t<ConstField<CoordXY, IdxRangeXY>> y) {
-                        ddc::for_each(idx_range, [&](IdxXY ixy) {
+                        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
                             ddcHelper::get<X>(dy)(ixy) = omega * (yc - ddc::get<Y>(y(ixy)));
                             ddcHelper::get<Y>(dy)(ixy) = omega * (ddc::get<X>(y(ixy)) - xc);
                         });
@@ -125,12 +125,12 @@ TEST(Euler2DFixtureMixedTypes, Euler2DOrderMixedTypes)
                             host_t<Field<CoordXY, IdxRangeXY>> y,
                             ConstAdvectionField dy,
                             double dt) {
-                        ddc::for_each(idx_range, [&](IdxXY ixy) { y(ixy) += dt * dy(ixy); });
+                        ddc::host_for_each(idx_range, [&](IdxXY ixy) { y(ixy) += dt * dy(ixy); });
                     });
         }
 
         double linf_err = 0.0;
-        ddc::for_each(idx_range, [&](IdxXY ixy) {
+        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
             double const err_x = ddc::get<X>(result(ixy) - vals(ixy));
             double const err_y = ddc::get<Y>(result(ixy) - vals(ixy));
             double const err = std::sqrt(err_x * err_x + err_y * err_y);

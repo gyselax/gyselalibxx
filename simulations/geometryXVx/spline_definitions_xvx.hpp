@@ -1,0 +1,79 @@
+// SPDX-License-Identifier: MIT
+#pragma once
+#include <ddc/kernels/splines.hpp>
+
+#include "geometry_xvx.hpp"
+#include "spline_interpolation.hpp"
+
+int constexpr BSDegreeX = 3;
+int constexpr BSDegreeVx = 3;
+
+#ifdef INPUT_MESH
+bool constexpr BsplineOnUniformCellsX = false;
+bool constexpr BsplineOnUniformCellsVx = false;
+#else
+bool constexpr BsplineOnUniformCellsX = true;
+bool constexpr BsplineOnUniformCellsVx = true;
+#endif
+
+struct BSplinesX
+    : std::conditional_t<
+              BsplineOnUniformCellsX,
+              ddc::UniformBSplines<X, BSDegreeX, X::PERIODIC>,
+              ddc::NonUniformBSplines<X, BSDegreeX, X::PERIODIC>>
+{
+};
+struct BSplinesVx
+    : std::conditional_t<
+              BsplineOnUniformCellsVx,
+              ddc::UniformBSplines<Vx, BSDegreeVx, Vx::PERIODIC>,
+              ddc::NonUniformBSplines<Vx, BSDegreeVx, Vx::PERIODIC>>
+{
+};
+
+auto constexpr SplineXClosure
+        = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
+auto constexpr SplineVxClosure = ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE;
+
+using SplineInterpPointsX
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
+using SplineInterpPointsVx
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
+
+using XExtrapRule = std::conditional_t<
+        X::PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Constant_Constant>;
+
+using SplineInterpolatorX = SplineInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        IdxRange<BSplinesX>,
+        IdxRangeX,
+        XExtrapRule,
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
+
+using SplineInterpolatorVx = SplineInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        IdxRange<BSplinesVx>,
+        IdxRangeVx,
+        ExtrapolationRule::Constant_Constant,
+        SplineBoundaryClosures<SplineVxClosure, SplineVxClosure>>;
+
+using IdxRangeBSX = IdxRange<BSplinesX>;
+
+using IdxRangeBSVx = IdxRange<BSplinesVx>;
+
+template <class ElementType>
+using BSFieldMemX = FieldMem<ElementType, IdxRangeBSX>;
+
+using DBSFieldMemX = BSFieldMemX<double>;
+
+template <class ElementType>
+using BSFieldX = Field<ElementType, IdxRangeBSX>;
+
+using DBSFieldX = BSFieldX<double>;
+
+template <class ElementType>
+using BSConstFieldX = ConstField<ElementType, IdxRangeBSX>;
+
+using DBSConstFieldX = BSConstFieldX<double>;

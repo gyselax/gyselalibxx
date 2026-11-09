@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 Adjustments to MkDocs can be done in the `mkdocs.yml`.
 
-To run the documentation locally follow the instructions in [Add Documentation](./development/Adding_docs.md).
+To run the documentation locally follow the instructions in [Add Documentation](./contributing/Adding_docs.md).
 
 ## MkDocs Navigation and Configuration
 

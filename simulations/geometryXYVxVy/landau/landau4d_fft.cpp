@@ -13,50 +13,71 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#ifdef SPLINE
+#include "../spline_definitions_xyvxvy.hpp"
+#elif defined(LAGRANGE)
+#include "../lagrange_definitions_xyvxvy.hpp"
+#endif
+
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "fft_poisson_solver.hpp"
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "mpi_scope_guard.hpp"
 #include "mpichargedensitycalculator.hpp"
 #include "mpisplitvlasovsolver.hpp"
 #include "mpitransposealltoall.hpp"
-#include "neumann_spline_quadrature.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
 #include "qnsolver.hpp"
+#include "simpson_quadrature.hpp"
 #include "singlemodeperturbinitialisation.hpp"
 #include "species_info.hpp"
 #include "species_init.hpp"
-#include "spline_interpolator.hpp"
 
 using std::cerr;
 using std::endl;
 using std::chrono::steady_clock;
 namespace fs = std::filesystem;
 
+#ifdef SPLINE
+using InterpolatorX = SplineInterpolatorX;
+using InterpolatorY = SplineInterpolatorY;
+using InterpolatorVx = SplineInterpolatorVx;
+using InterpolatorVy = SplineInterpolatorVy;
+static_assert(std::is_same_v<Real, double>, "Splines don't support floats");
+#elif defined(LAGRANGE)
+using InterpolatorX = LagrangeInterpolatorX;
+using InterpolatorY = LagrangeInterpolatorY;
+using InterpolatorVx = LagrangeInterpolatorVx;
+using InterpolatorVy = LagrangeInterpolatorVy;
+#endif
+
 int main(int argc, char** argv)
 {
     PC_tree_t conf_gyselalibxx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
-    PC_errhandler(PC_NULL_HANDLER);
-    MPI_Init(&argc, &argv);
-    PDI_init(conf_pdi);
 
+    MpiScopeGuard mpi_scope(argc, argv);
     Kokkos::ScopeGuard kokkos_scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
+
+    PC_errhandler(PC_NULL_HANDLER);
+    PDI_init(conf_pdi);
 
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     // Reading config
     // --> Mesh info
+#ifdef SPLINE
     IdxRangeX const idxrange_x = init_spline_dependent_idx_range<
             GridX,
             BSplinesX,
@@ -73,6 +94,16 @@ int main(int argc, char** argv)
             GridVy,
             BSplinesVy,
             SplineInterpPointsVy>(conf_gyselalibxx, "vy");
+#elif defined(LAGRANGE)
+    IdxRangeX const idxrange_x
+            = init_lagrange_dependent_idx_range<GridX, LagrangeX>(conf_gyselalibxx, "x");
+    IdxRangeY const idxrange_y
+            = init_lagrange_dependent_idx_range<GridY, LagrangeY>(conf_gyselalibxx, "y");
+    IdxRangeVx const idxrange_vx
+            = init_lagrange_dependent_idx_range<GridVx, LagrangeVx>(conf_gyselalibxx, "vx");
+    IdxRangeVy const idxrange_vy
+            = init_lagrange_dependent_idx_range<GridVy, LagrangeVy>(conf_gyselalibxx, "vy");
+#endif
     IdxRangeXY const idxrange_xy(idxrange_x, idxrange_y);
     IdxRangeVxVy idxrange_vxvy(idxrange_vx, idxrange_vy);
     IdxRangeXYVxVy const idxrange_xyvxvy(idxrange_x, idxrange_y, idxrange_vx, idxrange_vy);
@@ -90,78 +121,65 @@ int main(int argc, char** argv)
 
     IdxRangeVxVyXY idxrange_vxvyxy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
     IdxRangeXYVxVy idxrange_xyvxvy_x2Dsplit(idxrange_spxyvxvy_x2Dsplit);
-    SplineXBuilder const builder_x(idxrange_x);
-    SplineYBuilder const builder_y(idxrange_y);
-    SplineVxBuilder const builder_vx(idxrange_vx);
-    SplineVyBuilder const builder_vy(idxrange_vy);
+
+    InterpolatorX const interpolator_x(idxrange_x);
+    InterpolatorY const interpolator_y(idxrange_y);
+    InterpolatorVx const interpolator_vx(idxrange_vx);
+    InterpolatorVy const interpolator_vy(idxrange_vy);
 
     IdxRangeSpVxVy idxrange_spvxvy_local(idxrange_spxyvxvy_x2Dsplit);
     // Initialisation of the distribution function
-    DFieldMemSpVxVy allfequilibrium(idxrange_spvxvy_local);
+    FieldMemSpVxVy<Real> allfequilibrium(idxrange_spvxvy_local);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
     init_fequilibrium(get_field(allfequilibrium));
-    DFieldMemSpXYVxVy allfdistribu_x2D_split(idxrange_spxyvxvy_x2Dsplit);
-    DFieldMemSpVxVyXY allfdistribu_v2D_split(idxrange_spvxvyxy_v2Dsplit);
+    FieldMemSpXYVxVy<Real> allfdistribu_x2D_split(idxrange_spxyvxvy_x2Dsplit);
+    FieldMemSpVxVyXY<Real> allfdistribu_v2D_split(idxrange_spvxvyxy_v2Dsplit);
     SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
             init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_gyselalibxx);
     init(get_field(allfdistribu_x2D_split));
 
     // --> Algorithm info
-    double const deltat = PCpp_double(conf_gyselalibxx, ".Algorithm.deltat");
+    Real const deltat = PCpp_double(conf_gyselalibxx, ".Algorithm.deltat");
     int const nbiter = static_cast<int>(PCpp_int(conf_gyselalibxx, ".Algorithm.nbiter"));
 
     // --> Output info
-    double const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
+    Real const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
-    // Create spline evaluator
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, idxrange_vxvyxy_v2Dsplit);
-
-    ddc::PeriodicExtrapolationRule<Y> bv_y_min;
-    ddc::PeriodicExtrapolationRule<Y> bv_y_max;
-    SplineYEvaluator const spline_y_evaluator(bv_y_min, bv_y_max);
-
-    PreallocatableSplineInterpolator const
-            spline_y_interpolator(builder_y, spline_y_evaluator, idxrange_vxvyxy_v2Dsplit);
-
-    ddc::ConstantExtrapolationRule<Vx> bv_vx_min(ddc::coordinate(idxrange_vx.front()));
-    ddc::ConstantExtrapolationRule<Vx> bv_vx_max(ddc::coordinate(idxrange_vx.back()));
-    SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
-
-    PreallocatableSplineInterpolator const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator, idxrange_xyvxvy_x2Dsplit);
-
-    ddc::ConstantExtrapolationRule<Vy> bv_vy_min(ddc::coordinate(idxrange_vy.front()));
-    ddc::ConstantExtrapolationRule<Vy> bv_vy_max(ddc::coordinate(idxrange_vy.back()));
-    SplineVyEvaluator const spline_vy_evaluator(bv_vy_min, bv_vy_max);
-
-    PreallocatableSplineInterpolator const
-            spline_vy_interpolator(builder_vy, spline_vy_evaluator, idxrange_xyvxvy_x2Dsplit);
-
     // Create advection operator
-    BslAdvectionSpatial<GeometryVxVyXY, GridX> const advection_x(spline_x_interpolator);
-    BslAdvectionSpatial<GeometryVxVyXY, GridY> const advection_y(spline_y_interpolator);
-    BslAdvectionVelocity<GeometryXYVxVy, GridVx> const advection_vx(spline_vx_interpolator);
-    BslAdvectionVelocity<GeometryXYVxVy, GridVy> const advection_vy(spline_vy_interpolator);
+    BslAdvectionSpatial<GeometryVxVyXY, InterpolatorX, Real> const advection_x(interpolator_x);
+    BslAdvectionSpatial<GeometryVxVyXY, InterpolatorY, Real> const advection_y(interpolator_y);
+    BslAdvectionVelocity<GeometryXYVxVy, InterpolatorVx, Real> const advection_vx(interpolator_vx);
+    BslAdvectionVelocity<GeometryXYVxVy, InterpolatorVy, Real> const advection_vy(interpolator_vy);
 
     MpiSplitVlasovSolver const
             vlasov(advection_x, advection_y, advection_vx, advection_vy, transpose);
 
-    DFieldMemVxVy const quadrature_coeffs(
-            neumann_spline_quadrature_coefficients<
-                    Kokkos::DefaultExecutionSpace>(idxrange_vxvy, builder_vx, builder_vy));
-    DFieldMemVxVy local_quadrature_coeffs(idxrange_vxvy_v2Dsplit);
+    FieldMemVxVy<Real> const quadrature_coeffs(
+            quadrature_coeffs_nd<Kokkos::DefaultExecutionSpace, Real, GridVx, GridVy>(
+                    idxrange_vxvy,
+                    std::
+                            bind(simpson_trapezoid_quadrature_coefficients_1d<
+                                         Kokkos::DefaultExecutionSpace,
+                                         GridVx,
+                                         Real>,
+                                 std::placeholders::_1,
+                                 Extremity::FRONT),
+                    std::
+                            bind(simpson_trapezoid_quadrature_coefficients_1d<
+                                         Kokkos::DefaultExecutionSpace,
+                                         GridVy,
+                                         Real>,
+                                 std::placeholders::_1,
+                                 Extremity::FRONT)));
+    FieldMemVxVy<Real> local_quadrature_coeffs(idxrange_vxvy_v2Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs),
             quadrature_coeffs[idxrange_vxvy_v2Dsplit]);
 
-    FFTPoissonSolver<IdxRangeXY> fft_poisson_solver(idxrange_xy);
+    FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace, Real>
+            fft_poisson_solver(idxrange_xy);
     ChargeDensityCalculator const rhs_local(get_const_field(local_quadrature_coeffs));
     MpiChargeDensityCalculator const rhs(MPI_COMM_WORLD, rhs_local);
     QNSolver const poisson(fft_poisson_solver, rhs);
@@ -170,10 +188,12 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, poisson);
 
     // Starting the code
+#ifdef SPLINE
     ddc::expose_to_pdi("Nx_spline_cells", ddc::discrete_space<BSplinesX>().ncells());
     ddc::expose_to_pdi("Ny_spline_cells", ddc::discrete_space<BSplinesY>().ncells());
     ddc::expose_to_pdi("Nvx_spline_cells", ddc::discrete_space<BSplinesVx>().ncells());
     ddc::expose_to_pdi("Nvy_spline_cells", ddc::discrete_space<BSplinesVy>().ncells());
+#endif
     expose_mesh_to_pdi("MeshX", idxrange_x);
     expose_mesh_to_pdi("MeshY", idxrange_y);
     expose_mesh_to_pdi("MeshVx", idxrange_vx);
@@ -206,15 +226,12 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const end = steady_clock::now();
 
-    double const simulation_time = std::chrono::duration<double>(end - start).count();
+    Real const simulation_time = std::chrono::duration<Real>(end - start).count();
     std::cout << "Simulation time: " << simulation_time << "s\n";
-
-    PC_tree_destroy(&conf_pdi);
 
     PDI_finalize();
 
-    MPI_Finalize();
-
+    PC_tree_destroy(&conf_pdi);
     PC_tree_destroy(&conf_gyselalibxx);
 
     return EXIT_SUCCESS;

@@ -3,6 +3,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/fft.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
@@ -16,6 +18,7 @@ template <
         class IdxRangeLaplacian,
         class IdxRangeFull = IdxRangeLaplacian,
         class ExecSpace = Kokkos::DefaultExecutionSpace,
+        class DataType = double,
         class LayoutSpace = Kokkos::layout_right>
 class FFTPoissonSolver;
 
@@ -31,13 +34,20 @@ class FFTPoissonSolver;
  * @tparam IdxRangeFull The index range on which the operator() acts. This is equal to the
  *                      IdxRangeLaplacian plus any batched dimensions.
  * @tparam ExecSpace The space (CPU/GPU) where the calculations will take place.
+ * @tparam DataType The type of the data. This controls the precision of the calculations.
  * @tparam LayoutSpace The layout space of the Fields passed to operator().
  */
-template <class... GridPDEDim1D, class IdxRangeFull, class ExecSpace, class LayoutSpace>
-class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, ExecSpace, LayoutSpace>
+template <
+        class... GridPDEDim1D,
+        class IdxRangeFull,
+        class ExecSpace,
+        class DataType,
+        class LayoutSpace>
+class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, ExecSpace, DataType, LayoutSpace>
     : public IPoissonSolver<
               IdxRange<GridPDEDim1D...>,
               IdxRangeFull,
+              DataType,
               typename ExecSpace::memory_space,
               LayoutSpace>
 {
@@ -45,6 +55,7 @@ private:
     using base_type = IPoissonSolver<
             IdxRange<GridPDEDim1D...>,
             IdxRangeFull,
+            DataType,
             typename ExecSpace::memory_space,
             LayoutSpace>;
 
@@ -84,7 +95,7 @@ public:
 
     /// @brief The type of a Field storing the Fourier transform of a function.
     using fourier_field_mem_type
-            = FieldMem<Kokkos::complex<double>, fourier_idx_range_type, memory_space>;
+            = FieldMem<Kokkos::complex<DataType>, fourier_idx_range_type, memory_space>;
     /// @brief The type of a Field storing the Fourier transform of a function.
     using fourier_field_type = typename fourier_field_mem_type::span_type;
 
@@ -100,10 +111,10 @@ private:
      * @param index The index of the Fourier mode.
      */
     template <class... FDim>
-    KOKKOS_FUNCTION static double get_laplace_operator(Idx<FDim...> index)
+    KOKKOS_FUNCTION static DataType get_laplace_operator(Idx<FDim...> index)
     {
-        return (((double)ddc::coordinate(ddc::select<FDim>(index))
-                 * (double)ddc::coordinate(ddc::select<FDim>(index)))
+        return (((DataType)ddc::coordinate(ddc::select<FDim>(index))
+                 * (DataType)ddc::coordinate(ddc::select<FDim>(index)))
                 + ...);
     }
 
@@ -119,7 +130,7 @@ private:
      */
     template <class Dim>
     void differentiate_and_invert_fourier_values(
-            DField<laplacian_idx_range_type, memory_space, LayoutSpace> derivative,
+            Field<DataType, laplacian_idx_range_type, memory_space, LayoutSpace> derivative,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -140,7 +151,7 @@ private:
      * @param[in] values The Field containing the values of the function in Fourier space.
      */
     void get_gradient(
-            DField<laplacian_idx_range_type, memory_space, LayoutSpace> gradient,
+            Field<DataType, laplacian_idx_range_type, memory_space, LayoutSpace> gradient,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -161,7 +172,7 @@ private:
     template <class... Dims>
     void get_gradient(
             VectorField<
-                    double,
+                    DataType,
                     laplacian_idx_range_type,
                     VectorIndexSet<Dims...>,
                     memory_space,
@@ -192,7 +203,7 @@ public:
     template <class Layout>
     void solve_poisson_equation(
             fourier_field_type intermediate_chunk,
-            DField<laplacian_idx_range_type, memory_space, Layout> rho) const
+            Field<DataType, laplacian_idx_range_type, memory_space, Layout> rho) const
     {
         // Compute FFT(rho)
         ddc::fft(ExecSpace(), intermediate_chunk, rho, ddc::kwArgs_fft {m_norm});
@@ -201,7 +212,9 @@ public:
 
         // Solve Poisson's equation -\Delta phi = -(\sum_j \partial_j^2) \phi = rho
         //   in Fourier space as -(\sum_j i*k_i * i*k_i) FFT(Phi) = FFT(rho))
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 k_mesh,
                 KOKKOS_LAMBDA(fourier_index_type const ik) {
@@ -226,13 +239,15 @@ public:
     void negative_differentiate_equation(fourier_field_type derivative, fourier_field_type values)
             const
     {
-        Kokkos::complex<double> imaginary_unit(0.0, 1.0);
+        Kokkos::complex<DataType> imaginary_unit(0.0, 1.0);
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(values),
                 KOKKOS_LAMBDA(fourier_index_type const ik) {
                     Idx<Dim> const ikx = ddc::select<Dim>(ik);
-                    derivative(ik) = -imaginary_unit * ddc::coordinate(ikx) * values(ik);
+                    derivative(ik) = -imaginary_unit * (DataType)ddc::coordinate(ikx) * values(ik);
                 });
     }
 
@@ -260,7 +275,7 @@ public:
      */
     virtual field_type operator()(field_type phi, field_type rho) const final
     {
-        Kokkos::Profiling::pushRegion("FFTPoissonSolver");
+        Kokkos::Profiling::ScopedRegion region("(GSLX) FFTPoissonSolver");
 
         laplacian_idx_range_type idx_range(get_idx_range(phi));
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
@@ -269,10 +284,12 @@ public:
         fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
                 GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
 
-        fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
+        fourier_field_mem_type intermediate_chunk_alloc(
+                "intermediate_chunk (FFTPoisonSolver::operator())",
+                k_mesh);
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
             solve_poisson_equation(intermediate_chunk, rho[ib]);
 
             // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
@@ -283,7 +300,6 @@ public:
                          ddc::kwArgs_fft {m_norm});
         });
 
-        Kokkos::Profiling::popRegion();
         return phi;
     }
 
@@ -301,7 +317,7 @@ public:
      */
     virtual field_type operator()(field_type phi, vector_field_type E, field_type rho) const final
     {
-        Kokkos::Profiling::pushRegion("FFTPoissonSolver");
+        Kokkos::Profiling::ScopedRegion region("(GSLX) FFTPoissonSolver");
 
         laplacian_idx_range_type idx_range(get_idx_range(phi));
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
@@ -310,13 +326,16 @@ public:
         fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
                 GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
 
-        fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
-        fourier_field_mem_type fourier_efield_alloc(k_mesh);
+        fourier_field_mem_type intermediate_chunk_alloc(
+                "intermediate_chunk (FFTPoisonSolver::operator())",
+                k_mesh);
+        fourier_field_mem_type
+                fourier_efield_alloc("fourier_efield (FFTPoisonSolver::operator())", k_mesh);
 
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
         fourier_field_type fourier_efield = get_field(fourier_efield_alloc);
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
             solve_poisson_equation(intermediate_chunk, rho[ib]);
             get_gradient(E[ib], fourier_efield, intermediate_chunk);
 
@@ -327,7 +346,7 @@ public:
                          get_field(intermediate_chunk),
                          ddc::kwArgs_fft {m_norm});
         });
-        Kokkos::Profiling::popRegion();
+
         return phi;
     }
 };

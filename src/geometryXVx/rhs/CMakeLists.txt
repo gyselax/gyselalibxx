@@ -11,24 +11,38 @@ add_library("rhs_${GEOMETRY_VARIANT}" STATIC
     mask_tanh.cpp
 )
 
-target_include_directories("rhs_${GEOMETRY_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_compile_features("rhs_${GEOMETRY_VARIANT}" PUBLIC cxx_std_20)
+
+target_sources("rhs_${GEOMETRY_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                collisions_inter.hpp
+                collisions_intra.hpp
+                collisions_utils.hpp
+                irighthandside.hpp
+                kinetic_source.hpp
+                krook_source_adaptive.hpp
+                krook_source_constant.hpp
+                mask_tanh.hpp
 )
 
 target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
         DDC::pdi
-        gslx::geometry_${GEOMETRY_VARIANT}
-        gslx::quadrature
-        gslx::speciesinfo
-        gslx::initialisation_${GEOMETRY_VARIANT}
-        gslx::matrix_tools
-        gslx::timestepper
-        gslx::utils_${GEOMETRY_VARIANT}
-        gslx::utils
+        gyselalibxx::geometry_${GEOMETRY_VARIANT}
+        gyselalibxx::quadrature
+        gyselalibxx::speciesinfo
+        gyselalibxx::initialisation_${GEOMETRY_VARIANT}
+        gyselalibxx::matrix_tools
+        gyselalibxx::timestepper
+        gyselalibxx::utils_${GEOMETRY_VARIANT}
+        gyselalibxx::utils
 )
 
-add_library("gslx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
+add_library("gyselalibxx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
+
+install(TARGETS rhs_${GEOMETRY_VARIANT} EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/rhs)
 
 endforeach()

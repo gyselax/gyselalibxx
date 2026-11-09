@@ -10,6 +10,7 @@
 #include "neumann_spline_quadrature.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_interpolation.hpp"
 
 namespace {
 
@@ -21,12 +22,14 @@ struct X
 
 using CoordX = Coord<X>;
 
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
 
-using SplineInterpPointsX = ddc::
-        GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
+using SplineInterpPointsX = ddc::GrevilleInterpolationPoints<
+        BSplinesX,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
@@ -36,22 +39,12 @@ using IdxX = Idx<GridX>;
 using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::SplineSolver::LAPACK>;
-
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Null_Null,
+        SplineBoundaryClosure::Greville_Greville>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 
@@ -67,14 +60,9 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     IdxRange<GridX> gridx(SplineInterpPointsX::get_domain<GridX>());
 
-    SplineXBuilder const builder_x(gridx);
+    SplineXInterpolator const interpolator_x(gridx);
 
-    ddc::NullExtrapolationRule x_extrapolation_rule_min;
-    ddc::NullExtrapolationRule x_extrapolation_rule_max;
-
-    SplineXEvaluator const spline_x_evaluator(x_extrapolation_rule_min, x_extrapolation_rule_max);
-
-    FEM1DPoissonSolver poisson(builder_x, spline_x_evaluator);
+    FEM1DPoissonSolver poisson(interpolator_x);
 
     host_t<DFieldMemX> electrostatic_potential_host(gridx);
     host_t<DFieldMemX> electric_field_host(gridx);

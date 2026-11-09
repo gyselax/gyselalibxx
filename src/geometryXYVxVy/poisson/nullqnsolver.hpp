@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 #include "iqnsolver.hpp"
 
 /**

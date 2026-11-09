@@ -7,9 +7,10 @@
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "math_tools.hpp"
+#include "spline_definitions_r_theta.hpp"
 
 /**
  * @brief Base class for the exact solutions of the Poisson equation.
@@ -26,11 +27,13 @@ public:
      * coordinates into the physical (Cartesian) coordinates.
      */
     using coordinate_converter_type = CurvilinearToCartesian;
-    static_assert(is_curvilinear_2d_mapping_v<CurvilinearToCartesian>);
+    static_assert(is_coord_transform_with_o_point_v<CurvilinearToCartesian>);
 
 private:
-    using X = typename CurvilinearToCartesian::cartesian_tag_x;
-    using Y = typename CurvilinearToCartesian::cartesian_tag_y;
+    using X = ddc::
+            type_seq_element_t<0, ddc::to_type_seq_t<typename CurvilinearToCartesian::CoordResult>>;
+    using Y = ddc::
+            type_seq_element_t<1, ddc::to_type_seq_t<typename CurvilinearToCartesian::CoordResult>>;
     using R = typename CurvilinearToCartesian::curvilinear_tag_r;
     using Theta = typename CurvilinearToCartesian::curvilinear_tag_theta;
 

@@ -11,7 +11,7 @@
  * An abstract class which implements a function that 
  * applies the transport along a physical space direction of the phase space.
  */
-template <class Geometry, class GridX>
+template <class Geometry, class GridX, class DataType = double>
 class IAdvectionSpatial
 {
 public:
@@ -24,7 +24,7 @@ public:
      *
      * @return A reference to an array containing the value of distribution the function at the updated time T+dt.
      */
-    virtual DField<typename Geometry::IdxRangeFdistribu> operator()(
-            DField<typename Geometry::IdxRangeFdistribu> allfdistribu,
-            double dt) const = 0;
+    virtual Field<DataType, typename Geometry::IdxRangeFdistribu> operator()(
+            Field<DataType, typename Geometry::IdxRangeFdistribu> allfdistribu,
+            DataType dt) const = 0;
 };

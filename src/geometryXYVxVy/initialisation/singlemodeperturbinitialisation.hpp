@@ -4,7 +4,7 @@
 
 #include <paraconf.h>
 
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 #include "iinitialisation.hpp"
 #include "paraconfpp.hpp"
 #include "species_info.hpp"
@@ -30,7 +30,7 @@ public:
     void perturbation_initialisation(
             DFieldXY perturbation,
             int const perturb_mode,
-            double const perturb_amplitude) const;
+            Real const perturb_amplitude) const;
 
     /**
      * @brief Creates an instance of the SingleModePerturbInitialisation class.

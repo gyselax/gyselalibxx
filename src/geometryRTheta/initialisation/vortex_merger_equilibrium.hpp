@@ -6,10 +6,11 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "l_norm_tools.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
+#include "spline_definitions_r_theta.hpp"
 
 
 /**
@@ -19,19 +20,13 @@
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  */
-template <class Mapping>
+template <class Mapping, class PolarPoissonLikeSolver>
 class VortexMergerEquilibria
 {
 private:
     Mapping const& m_mapping;
     IdxRangeRTheta const& m_grid;
-    SplineRThetaBuilder const& m_builder;
-    SplineRThetaEvaluatorNullBound const& m_evaluator;
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
 public:
     /**
@@ -42,30 +37,18 @@ public:
      *      to the physical domain.
      * @param[in] grid
      *      The index range where the equilibrium is defined.
-     * @param[in] builder
-     *      A spline builder to get the spline representation
-     *      of the RHS of the PDE.
-     * @param[in] evaluator
-     *      The evaluator of B-splines for the RHS of the
-     *      PDE.
      * @param[in] poisson_solver
      *      The PDE solver which computes the electrical potential.
      */
     VortexMergerEquilibria(
             Mapping const& mapping,
             IdxRangeRTheta const& grid,
-            SplineRThetaBuilder const& builder,
-            SplineRThetaEvaluatorNullBound const& evaluator,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
+            PolarPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
-        , m_builder(builder)
-        , m_evaluator(evaluator)
-        , m_poisson_solver(poisson_solver) {};
+        , m_poisson_solver(poisson_solver)
+    {
+    }
 
     /**
      * @brief Get an equilibrium.
@@ -110,12 +93,9 @@ public:
             double const tau,
             int count_max = 25) const
     {
-        DFieldMemRTheta phi_star_alloc(m_grid);
+        DFieldMemRTheta
+                phi_star_alloc("phi_star (VortexMergerEquilibria::find_equilibrium)", m_grid);
         host_t<DFieldMemRTheta> ci_alloc_host(m_grid);
-
-        IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
-        Spline2DMem rho_coef_alloc(idx_range_bsplinesRTheta);
-
         auto rho_eq_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), rho_eq_host);
         DFieldRTheta rho_eq(rho_eq_alloc);
 
@@ -125,35 +105,33 @@ public:
         do {
             count += 1;
             // STEP 1: compute rho^i
-            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
                 rho_eq_host(irtheta) = sigma_host(irtheta) * function(phi_eq_host(irtheta));
             });
 
 
             // STEP 2: compute phi_star^i with PDE solver
             ddc::parallel_deepcopy(rho_eq, get_const_field(rho_eq_host));
-            m_builder(get_field(rho_coef_alloc), get_const_field(rho_eq));
-            PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef_alloc), m_evaluator);
-            m_poisson_solver(poisson_rhs, get_field(phi_star_alloc));
+            m_poisson_solver(get_field(phi_star_alloc), get_const_field(rho_eq));
             auto phi_star_host = ddc::create_mirror_view_and_copy(get_field(phi_star_alloc));
 
             // STEP 3: compute c^i
             // If phi_max is given:
             double norm_Linf_phi_star(0.);
-            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
                 double const abs_phi_star = fabs(phi_star_host(irtheta));
                 norm_Linf_phi_star
                         = norm_Linf_phi_star > abs_phi_star ? norm_Linf_phi_star : abs_phi_star;
             });
 
-            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
                 ci_alloc_host(irtheta) = phi_max / norm_Linf_phi_star;
             });
 
 
             // STEP 4: update sigma and phi
             difference_sigma = 0.;
-            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
                 double const abs_diff_sigma
                         = fabs(sigma_host(irtheta) - ci_alloc_host(irtheta) * sigma_host(irtheta));
                 difference_sigma
@@ -167,7 +145,7 @@ public:
 
 
         // STEP 1: compute rho^i
-        ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
             rho_eq_host(irtheta) = sigma_host(irtheta) * function(phi_eq_host(irtheta));
         });
 
@@ -175,7 +153,7 @@ public:
         IdxRangeR r_idx_range = get_idx_range<GridR>(rho_eq_host);
         IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(rho_eq_host);
         if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
-            ddc::for_each(theta_idx_range, [&](const IdxTheta itheta) {
+            ddc::host_for_each(theta_idx_range, [&](const IdxTheta itheta) {
                 rho_eq_host(r_idx_range.front(), itheta)
                         = rho_eq_host(r_idx_range.front(), theta_idx_range.front());
             });
@@ -209,7 +187,7 @@ public:
         host_t<DFieldMemRTheta> sigma_0_alloc_host(grid);
         host_t<DFieldMemRTheta> phi_eq_alloc_host(grid);
         const double sig = 0.3;
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
             const CoordXY coord_xy(m_mapping(coord_rtheta));
             const double x = ddc::get<X>(coord_xy);

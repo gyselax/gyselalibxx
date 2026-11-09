@@ -2,14 +2,20 @@
 
 add_library("geometry_collisions_vparmu" INTERFACE)
 
-target_include_directories("geometry_collisions_vparmu"
+target_compile_features("geometry_collisions_vparmu" INTERFACE cxx_std_20)
+
+target_sources("geometry_collisions_vparmu"
     INTERFACE
-        "${CMAKE_CURRENT_SOURCE_DIR}"
+        FILE_SET HEADERS
+            FILES
+                collision_configuration.hpp
 )
 
 target_link_libraries("geometry_collisions_vparmu"
     INTERFACE
-        gslx::collisions
+        gyselalibxx::collisions
 )
 
-add_library("gslx::geometry_collisions_vparmu" ALIAS "geometry_collisions_vparmu")
+add_library("gyselalibxx::geometry_collisions_vparmu" ALIAS "geometry_collisions_vparmu")
+
+install(TARGETS geometry_collisions_vparmu EXPORT gyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/collisions)

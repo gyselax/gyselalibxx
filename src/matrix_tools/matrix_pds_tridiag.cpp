@@ -3,17 +3,13 @@
 
 #include <string.h>
 
-#include "matrix_pds_tridiag.hpp"
+#if __has_include(<mkl_lapacke.h>)
+#include <mkl_lapacke.h>
+#else
+#include <lapacke.h>
+#endif
 
-extern "C" int dpttrf_(int const* n, double* d, double* e, int* info);
-extern "C" int dpttrs_(
-        int const* n,
-        int const* nrhs,
-        double* d,
-        double* e,
-        double* b,
-        int const* ldb,
-        int* info);
+#include "matrix_pds_tridiag.hpp"
 
 Matrix_PDS_Tridiag::Matrix_PDS_Tridiag(int const n)
     : Matrix(n)
@@ -56,14 +52,10 @@ void Matrix_PDS_Tridiag::set_element(int i, int j, double const a_ij)
 
 int Matrix_PDS_Tridiag::factorise_method()
 {
-    int info;
-    dpttrf_(&n, d.get(), l.get(), &info);
-    return info;
+    return LAPACKE_dpttrf(n, d.get(), l.get());
 }
 
 int Matrix_PDS_Tridiag::solve_inplace_method(double* b, char, int const n_equations) const
 {
-    int info;
-    dpttrs_(&n, &n_equations, d.get(), l.get(), b, &n, &info);
-    return info;
+    return LAPACKE_dpttrs(LAPACK_COL_MAJOR, n, n_equations, d.get(), l.get(), b, n);
 }

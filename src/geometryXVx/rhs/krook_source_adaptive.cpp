@@ -5,6 +5,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "krook_source_adaptive.hpp"
 #include "mask_tanh.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -92,7 +94,9 @@ void KrookSourceAdaptive::get_amplitudes(DFieldSpX amplitudes, DConstFieldSpXVx 
 
     auto const& amplitude = m_amplitude;
     auto const& density = m_density;
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range<GridX>(allfdistribu),
             KOKKOS_LAMBDA(IdxX const ix) {
@@ -116,14 +120,16 @@ void KrookSourceAdaptive::get_derivative(
 {
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
 
-    DFieldMemSpX amplitudes_alloc(grid_sp_x);
+    DFieldMemSpX amplitudes_alloc("amplitudes (KrookSourceAdaptive::get_derivative)", grid_sp_x);
     auto amplitudes = get_field(amplitudes_alloc);
     get_amplitudes(amplitudes, allfdistribu);
 
     auto ftarget(get_field(m_ftarget));
     auto mask(get_field(m_mask));
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
@@ -137,12 +143,13 @@ void KrookSourceAdaptive::get_derivative(
 
 DFieldSpXVx KrookSourceAdaptive::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
-    Kokkos::Profiling::pushRegion("KrookSource");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) KrookSource");
+
     RK2<DFieldMemSpXVx> timestepper(get_idx_range(allfdistribu));
 
     timestepper.update(allfdistribu, dt, [&](DFieldSpXVx df, DConstFieldSpXVx f) {
         get_derivative(df, f, get_const_field(allfdistribu));
     });
-    Kokkos::Profiling::popRegion();
+
     return allfdistribu;
 }

@@ -1,6 +1,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Profiling_ScopedRegion.hpp>
+
 #include "kinetic_source.hpp"
 #include "mask_tanh.hpp"
 #include "species_info.hpp"
@@ -27,7 +29,7 @@ KineticSource::KineticSource(
     // compute the source velocity profile (maxwellian profile if density = energy = 1.)
     double const coeff(1.0 / std::sqrt(2 * M_PI * m_temperature));
     host_t<DFieldMemVx> velocity_shape_host(gridvx);
-    ddc::for_each(gridvx, [&](IdxVx const ivx) {
+    ddc::host_for_each(gridvx, [&](IdxVx const ivx) {
         CoordVx const coordvx = ddc::coordinate(ivx);
         double const coordvx_sq = coordvx * coordvx;
         double const density_source = coeff * (1.5 - coordvx_sq / (2 * temperature))
@@ -49,14 +51,16 @@ KineticSource::KineticSource(
 
 DFieldSpXVx KineticSource::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
-    Kokkos::Profiling::pushRegion("KineticSource");
+    Kokkos::Profiling::ScopedRegion region("(GSLX) KineticSource");
     DConstFieldVx velocity_shape = get_field(m_velocity_shape);
 
     DConstFieldX spatial_extent = get_field(m_spatial_extent);
 
     double const amplitude = m_amplitude;
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
@@ -66,6 +70,5 @@ DFieldSpXVx KineticSource::operator()(DFieldSpXVx const allfdistribu, double con
                 allfdistribu(ispxvx) += df;
             });
 
-    Kokkos::Profiling::popRegion();
     return allfdistribu;
 }

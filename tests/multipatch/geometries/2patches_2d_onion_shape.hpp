@@ -121,8 +121,8 @@ template <int PatchIdx>
 struct BSplinesR
     : std::conditional_t<
               is_uniform,
-              ddc::UniformBSplines<R, BSplineDegree>,
-              ddc::NonUniformBSplines<R, BSplineDegree>>
+              ddc::UniformBSplines<R, BSplineDegree, R::PERIODIC>,
+              ddc::NonUniformBSplines<R, BSplineDegree, R::PERIODIC>>
 {
 };
 
@@ -134,8 +134,8 @@ template <int PatchIdx>
 struct BSplinesTheta
     : std::conditional_t<
               is_uniform,
-              ddc::UniformBSplines<Theta, BSplineDegree>,
-              ddc::NonUniformBSplines<Theta, BSplineDegree>>
+              ddc::UniformBSplines<Theta, BSplineDegree, Theta::PERIODIC>,
+              ddc::NonUniformBSplines<Theta, BSplineDegree, Theta::PERIODIC>>
 {
 };
 
@@ -148,7 +148,7 @@ using Patch1 = Patch<GridR<1>, GridTheta<1>, BSplinesR<1>, BSplinesTheta<1>>;
 using Patch2 = Patch<GridR<2>, GridTheta<2>, BSplinesR<2>, BSplinesTheta<2>>;
 
 /// @brief Sorted list of patches.
-using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
+using PatchOrdering = ddc::TypeSeq<Patch1, Patch2>;
 
 
 // EDGES -----------------------------------------------------------------------------------------

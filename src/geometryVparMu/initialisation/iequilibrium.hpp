@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_vpar_mu.hpp"
 
 /**
  * @brief An abstract class for initialising a distribution function in (species,vpar,mu).

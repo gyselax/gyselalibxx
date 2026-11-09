@@ -7,14 +7,17 @@ then
     exit 1
 fi
 
-SPACK_USER_VERSION="spack-user-4.0.0"
-
-export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
-export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
-
 module purge
 
-module load "${SPACK_USER_VERSION}"
+SPACK_USER_VERSION="spack-user-5.0.0"
+
+export SPACK_USER_PREFIX="${ALL_CCFRWORK}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
+
+# Avoid too many temporary files in the Spack installation tree
+export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
+
+module load develop "${SPACK_USER_VERSION}"
 which spack
 spack debug report
 # Spack must work in a clean, purged environment so it can load modules without
@@ -29,43 +32,47 @@ spack debug report
 #     eval "$(spack env deactivate --sh)"
 # }
 
+# Problematic on Adastra, git repositories are shared between users.
+# spack --env gyselalibxx-spack-environment repo update
+
 eval -- "$(
     spack \
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
+        ddc \
+        gcc \
         ginkgo \
+        gmgpolar \
         googletest \
         kokkos \
-        kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
+        koliop \
+        lapack \
+        mpi \
         ninja \
         paraconf \
         pdi \
         pdiplugin-decl-hdf5 \
         pdiplugin-decl-netcdf \
         pdiplugin-mpi \
+        pdiplugin-pycall \
         pdiplugin-set-value \
         pdiplugin-trace \
         python \
         py-dask \
+        py-gvec \
         py-h5py \
         py-imageio \
         py-matplotlib \
         py-netcdf4 \
         py-numpy \
+        py-pyyaml \
         py-scipy \
         py-sympy \
-        py-xarray \
-        py-pyyaml
+        py-xarray
 )"
-
-module load cpe/24.07
-module load craype-x86-genoa
-module load PrgEnv-gnu
-
-module list
 
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"

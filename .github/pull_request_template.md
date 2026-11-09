@@ -11,7 +11,7 @@ Please complete the checklist to ensure that all tasks are completed before mark
 - [ ] Have you linked any issues that should be closed when this PR is merged (using closing keywords) ?
 - [ ] Have you checked that the AUTHORS file is up to date ?
 - [ ] Have you checked that the copyright information in the LICENCE file is up to date (including dates) ?
-- [ ] Do you follow the conventions specified in our [coding standards](https://gyselax.github.io/gyselalibxx/docs/standards/CODING_STANDARD.html) ?
+- [ ] Do you follow the conventions specified in our [coding standards](https://gyselax.github.io/gyselalibxx/docs/contributing/CODING_STANDARD.html) ?
 
 ### New Feature Submissions
 

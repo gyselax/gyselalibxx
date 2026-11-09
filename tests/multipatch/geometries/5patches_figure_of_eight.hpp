@@ -103,7 +103,7 @@ struct GridY : UniformGridBase<Y<PatchIdx>>
  * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
-struct BSplinesX : ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>
+struct BSplinesX : ddc::UniformBSplines<X<PatchIdx>, BSplineDegree, X<PatchIdx>::PERIODIC>
 {
 };
 
@@ -112,7 +112,7 @@ struct BSplinesX : ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>
  * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
-struct BSplinesY : ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree>
+struct BSplinesY : ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree, Y<PatchIdx>::PERIODIC>
 {
 };
 
@@ -135,7 +135,7 @@ using Patch5 = Patch<GridX<5>, GridY<5>, BSplinesX<5>, BSplinesY<5>>;
 
 
 /// @brief Sorted list of patches.
-using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5>;
+using PatchOrdering = ddc::TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5>;
 
 
 // EDGES -----------------------------------------------------------------------------------------

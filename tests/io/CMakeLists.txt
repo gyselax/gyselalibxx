@@ -12,10 +12,10 @@ target_link_libraries(unit_tests_io
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-        PDI::pdi
-        gslx::data_types
-        gslx::io
-        gslx::utils
+        PDI::PDI_C
+        gyselalibxx::data_types
+        gyselalibxx::io
+        gyselalibxx::utils
 )
 
-gtest_discover_tests(unit_tests_io DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_io DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

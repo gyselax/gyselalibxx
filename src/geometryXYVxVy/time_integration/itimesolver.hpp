@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 
 /**
  * @brief An abstract class for solving a Vlasov-Poisson system of equations.
@@ -21,6 +21,6 @@ public:
      * @param[in] steps The number of iterations to be performed by the predictor-corrector.
      * @return The distribution function after solving the system.
      */
-    virtual DFieldSpVxVyXY operator()(DFieldSpVxVyXY allfdistribu, double dt, int steps = 1)
+    virtual DFieldSpVxVyXY operator()(DFieldSpVxVyXY allfdistribu, Real dt, int steps = 1)
             const = 0;
 };

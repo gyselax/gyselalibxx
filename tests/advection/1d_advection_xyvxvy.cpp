@@ -10,7 +10,7 @@
 #include "ddc_helper.hpp"
 #include "itimestepper.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator.hpp"
+#include "spline_interpolation.hpp"
 #include "vector_field_common.hpp"
 
 
@@ -49,15 +49,15 @@ using CoordVx = Coord<Vx>;
 using CoordVy = Coord<Vy>;
 
 // Splines
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3, X::PERIODIC>
 {
 };
-struct BSplinesY : ddc::UniformBSplines<Y, 3>
+struct BSplinesY : ddc::UniformBSplines<Y, 3, Y::PERIODIC>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineYClosure = ddc::SplineBuilderClosure::PERIODIC;
 
 // Discrete dimensions
 struct GridX : UniformGridBase<X>
@@ -75,9 +75,9 @@ struct GridVy : UniformGridBase<Vy>
 
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsY
-        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYClosure, SplineYClosure>;
 
 
 using IdxXY = Idx<GridX, GridY>;
@@ -121,37 +121,19 @@ using DFieldXYVxVy = FieldXYVxVy<double>;
 
 
 // Operators
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        IdxRange<BSplinesX>,
+        IdxRange<GridX>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
-using SplineYBuilder = ddc::SplineBuilder<
+using SplineInterpolatorY = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        SplineYBoundary,
-        SplineYBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineYEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        ddc::PeriodicExtrapolationRule<Y>,
-        ddc::PeriodicExtrapolationRule<Y>>;
+        IdxRange<BSplinesY>,
+        IdxRange<GridY>,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosures<SplineYClosure, SplineYClosure>>;
 
 
 
@@ -226,7 +208,7 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 xyvxvy_grid,
                 KOKKOS_LAMBDA(IdxXYVxVy const idx) {
-                    CoordXY coord_xy = CoordXY(ddc::coordinate(idx));
+                    CoordXY coord_xy = ddc::coordinate(IdxXY(idx));
                     double const x = CoordX(coord_xy);
                     double const y = CoordY(coord_xy);
 
@@ -265,8 +247,8 @@ public:
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
         host_t<DFieldMemXYVxVy> exact_function(xyvxvy_grid);
-        ddc::for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
-            CoordXY coord_xy = CoordXY(ddc::coordinate(idx));
+        ddc::host_for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
+            CoordXY coord_xy = ddc::coordinate(IdxXY(idx));
             double const x0 = CoordX(coord_xy);
             double const y0 = CoordY(coord_xy);
 
@@ -305,7 +287,7 @@ public:
         */
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
-        ddc::for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
+        ddc::host_for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
             double const relative_error = std::abs(function_host(idx) - exact_function(idx));
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;
@@ -321,24 +303,8 @@ public:
 TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder_x(interpolation_idx_range_x);
-    SplineYBuilder const builder_y(interpolation_idx_range_y);
-
-
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
-
-    ddc::PeriodicExtrapolationRule<Y> bv_y_min;
-    ddc::PeriodicExtrapolationRule<Y> bv_y_max;
-    SplineYEvaluator const spline_evaluator_y(bv_y_min, bv_y_max);
-
-
-    PreallocatableSplineInterpolator const
-            function_spline_x_interpolator(builder_x, spline_evaluator_x, xyvxvy_grid);
-    PreallocatableSplineInterpolator const
-            function_spline_y_interpolator(builder_y, spline_evaluator_y, xyvxvy_grid);
-
+    SplineInterpolatorX spline_interpolation_x(interpolation_idx_range_x);
+    SplineInterpolatorY spline_interpolation_y(interpolation_idx_range_y);
 
     RK2Builder time_stepper;
 
@@ -346,26 +312,16 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
             GridX,
             IdxRangeXY,
             IdxRangeXYVxVy,
-            SplineXBuilder,
-            SplineXEvaluator,
-            RK2Builder> const
-            advection_x(
-                    function_spline_x_interpolator,
-                    builder_x,
-                    spline_evaluator_x,
-                    time_stepper);
+            SplineInterpolatorX,
+            SplineInterpolatorX,
+            RK2Builder> const advection_x(spline_interpolation_x, time_stepper);
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXYVxVy,
-            SplineYBuilder,
-            SplineYEvaluator,
-            RK2Builder> const
-            advection_y(
-                    function_spline_y_interpolator,
-                    builder_y,
-                    spline_evaluator_y,
-                    time_stepper);
+            SplineInterpolatorY,
+            SplineInterpolatorY,
+            RK2Builder> const advection_y(spline_interpolation_y, time_stepper);
 
 
     double const max_relative_error = AdvectionXY(advection_x, advection_y);

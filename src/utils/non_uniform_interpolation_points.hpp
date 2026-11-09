@@ -12,7 +12,7 @@
 
 namespace ddcHelper {
 
-template <class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax>
+template <class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax>
 class NonUniformInterpolationPoints;
 
 template <class T>
@@ -20,7 +20,7 @@ struct is_non_uniform_interpolation_points : std::false_type
 {
 };
 
-template <class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax>
+template <class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax>
 struct is_non_uniform_interpolation_points<NonUniformInterpolationPoints<BSplines, BcXmin, BcXmax>>
     : std::true_type
 {
@@ -39,7 +39,7 @@ inline constexpr bool is_non_uniform_interpolation_points_v
  * boundary conditions, the second and second to last interpolation points 
  * should be the Greville points. 
  */
-template <class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax>
+template <class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax>
 class NonUniformInterpolationPoints
 {
     using Dim = typename BSplines::continuous_dimension_type;
@@ -92,7 +92,7 @@ public:
             double domain_len = ddc::discrete_space<BSplines>().rmax()
                                 - ddc::discrete_space<BSplines>().rmin();
             // Insert final periodic point to ensure all cell sizes are known
-            interp_points.push_back(interp_points.back() + domain_len);
+            interp_points.push_back(interp_points.front() + domain_len);
         }
         int n_points_in_cell = 0;
         IdxBreakPoints current_cell_end_idx
@@ -121,7 +121,7 @@ public:
                                 - ddc::discrete_space<BSplines>().rmin();
             SamplingImpl result(interp_points.front(), domain_len / (interp_points.size() - 1));
             IdxRange<Sampling> idx_range(get_domain<Sampling>());
-            bool same_points = ddc::transform_reduce(
+            bool same_points = ddc::host_transform_reduce(
                     idx_range,
                     true,
                     ddc::reducer::land<bool>(),

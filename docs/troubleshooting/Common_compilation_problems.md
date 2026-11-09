@@ -155,6 +155,6 @@ The attributes that may be mentioned are:
 - `Dual`
 - `PERIODIC`
 
-The first 3 attributes are related to covariant and contravariant tensors. For more details see [Coding Covariant & Contravariant Tensors](../standards/coding_covariant_and_contravariant_tensors.md). The documentation about [Mathematical and physical conventions](../standards/mathematical_and_physical_conventions.md) may also be useful if you are not familiar with the concept of covariant and contravariant tensors.
+The first 3 attributes are related to covariant and contravariant tensors. For more details see [Coding Covariant & Contravariant Tensors](../core_concepts/coding_covariant_and_contravariant_tensors.md). The documentation about [Mathematical and physical conventions](../core_concepts/mathematical_and_physical_conventions.md) may also be useful if you are not familiar with the concept of covariant and contravariant tensors.
 
 The `PERIODIC` attribute is required by DDC. It is a `static constexpr boolean` indicating if the dimension is periodic or not.

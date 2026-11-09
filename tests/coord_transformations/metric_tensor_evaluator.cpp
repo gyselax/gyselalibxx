@@ -36,7 +36,7 @@ TEST_P(InverseMetricTensor, InverseMatrixCircMap)
 
     MetricTensorEvaluator<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 metric_tensor(coords(irtheta)),
                 metric_tensor.inverse(coords(irtheta)),
@@ -56,7 +56,7 @@ TEST_P(InverseMetricTensor, InverseMatrixCzarMap)
 
     MetricTensorEvaluator<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 metric_tensor(coords(irtheta)),
                 metric_tensor.inverse(coords(irtheta)),
@@ -76,7 +76,7 @@ TEST_P(InverseMetricTensor3D, InverseMatrixCylindricalMap)
 
     MetricTensorEvaluator<Mapping, Coord<R, Z, Zeta>> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
-    ddc::for_each(grid, [&](IdxRZZeta const idx) {
+    ddc::host_for_each(grid, [&](IdxRZZeta const idx) {
         check_inverse_tensor(metric_tensor(coords(idx)), metric_tensor.inverse(coords(idx)), 1e-10);
     });
 }
@@ -102,7 +102,7 @@ TEST_P(InverseMetricTensor3D, InverseMatrixToroidalMap)
 
     MetricTensorEvaluator<Mapping, Coord<Rho, Theta, Phi>> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
-    ddc::for_each(grid, [&](IdxRhoThetaPhi const idx) {
+    ddc::host_for_each(grid, [&](IdxRhoThetaPhi const idx) {
         check_inverse_tensor(metric_tensor(coords(idx)), metric_tensor.inverse(coords(idx)), 1e-10);
     });
 }

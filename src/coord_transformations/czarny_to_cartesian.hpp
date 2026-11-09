@@ -54,10 +54,6 @@ template <class R, class Theta, class X, class Y>
 class CzarnyToCartesian
 {
 public:
-    /// @brief Indicate the first physical coordinate.
-    using cartesian_tag_x = X;
-    /// @brief Indicate the second physical coordinate.
-    using cartesian_tag_y = Y;
     /// @brief Indicate the first logical coordinate.
     using curvilinear_tag_r = R;
     /// @brief Indicate the second logical coordinate.
@@ -308,6 +304,14 @@ public:
             return r
                    * (-m_e * m_epsilon * r * sin_theta * sin_theta * xi / (tmp2 * tmp2 * tmp1)
                       + m_e * cos_theta * xi / tmp2);
+        } else {
+            static_assert(
+                    ddc::in_tags_v<
+                            IndexTag1,
+                            ddc::TypeSeq<
+                                    X,
+                                    Y>> && ddc::in_tags_v<IndexTag1, ddc::TypeSeq<R_cov, Theta_cov>>,
+                    "Unexpected tags provided");
         }
     }
 
@@ -427,7 +431,7 @@ struct MappingAccessibility<ExecSpace, CzarnyToCartesian<R, Theta, X, Y>> : std:
 };
 
 template <class X, class Y, class R, class Theta>
-struct IsCurvilinear2DMapping<CzarnyToCartesian<X, Y, R, Theta>> : std::true_type
+struct HasOPoint<CzarnyToCartesian<X, Y, R, Theta>> : std::true_type
 {
 };
 

@@ -1,7 +1,6 @@
 /*
  * Testing the "src/interpolation/spline_interpolator_rtheta.hpp" file.
  */
-
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -9,10 +8,10 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "spline_interpolator_2d.hpp"
+#include "spline_definitions_r_theta.hpp"
 
 
 /*
@@ -137,8 +136,12 @@ void Interpolation_on_random_coord(
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    SplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-    interpolator(get_field(function_evaluated), get_const_field(random_coords));
+    DFieldMem<IdxRangeBSRTheta> coefs_alloc(builder.batched_spline_domain(grid));
+    builder(get_field(coefs_alloc), get_const_field(function_evaluated));
+    spline_evaluator(
+            get_field(function_evaluated),
+            get_const_field(random_coords),
+            get_const_field(coefs_alloc));
 
     // Compare the obtained values with the exact function. ----------------------------------
     double max_err = ddc::parallel_transform_reduce(
@@ -245,7 +248,7 @@ namespace fs = std::filesystem;
  * and not on the mesh points for several test functions.
  *
  * Test the "src/interpolation/spline_interpolator_rtheta.hpp" file.
- * The degree of bsplines is defined in the geometry.hpp file. Normally, the degree is set
+ * The degree of bsplines is defined in the geometry_r_theta.hpp file. Normally, the degree is set
  * at 3 for the bsplines in the r dimension and the theta dimension. The interpolation on
  * mesh points must be exact. The interpolation of r-polynomial functions of degree d <= 3
  * must be exact. Otherwise, the interpolation must have a convergence order of 4.

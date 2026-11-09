@@ -20,7 +20,7 @@ namespace detail {
  *      IdxRange<Grid1D>(Idx<Grid1D> {0}, IdxStep<Grid1D> {1});
  *  See create_scalar_index_range();
  */
-struct InternalSpoofGrid
+struct InternalSpoofGrid : ddc::DiscreteDimension
 {
 };
 
@@ -234,7 +234,9 @@ public:
             DField<IdxRange0> destination,
             DConstField<IdxRange1> source)
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(destination),
                 KOKKOS_LAMBDA(typename IdxRange0::discrete_element_type destination_index) {

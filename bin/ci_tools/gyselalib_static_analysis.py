@@ -45,6 +45,11 @@ mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_vi
                     'create_transpose_mirror', 'create_transpose_mirror_view_and_copy', 'create_mirror_view_and_copy_on_vector_space'}
 
 parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_reduce']
+# Execution policies for nested (thread) parallelism. Lambdas passed with these policies run
+# inside a team and must not use KOKKOS_LAMBDA.
+nested_parallel_policies = {'TeamThreadRange', 'TeamThreadMDRange',
+                            'TeamVectorRange', 'TeamVectorMDRange',
+                            'ThreadVectorRange', 'ThreadVectorMDRange'}
 
 HOME_DIR = Path(__file__).parent.parent.parent.absolute()
 global_folders = [HOME_DIR / f for f in ('src', 'simulations', 'tests')]
@@ -272,6 +277,10 @@ def search_for_unnecessary_auto(file):
                 start = end + 1
                 end = next(i for i,v in enumerate(config.data[start:], start) if v['str'] == ';')
 
+            if config.data[start+2]['str'] == '[':
+                # Allow lambdas to be saved to auto
+                continue
+
             if any(v['str'] == 'gko' for v in config.data[start:end]) and any(v['str'] == 'create' for v in config.data[start:end]):
                 continue
 
@@ -280,7 +289,7 @@ def search_for_unnecessary_auto(file):
             if not any(v['str'] in chain(mirror_functions, auto_functions) for v in config.data[start:end]):
                 report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({var_name})")
 
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
 
         # Find auto in arguments of lambda functions
@@ -348,7 +357,7 @@ def search_for_bad_memory(file):
             if func_idx is None:
                 continue
             func_use_id = line[func_idx]['id']
-            if config.root.find(f"./scopes//function[@tokenDef='{func_use_id}']"):
+            if config.root.find(f"./scopes//function[@tokenDef='{func_use_id}']") is not None:
                 # Function definition
                 continue
             first_var_idx = next((i for i,v in enumerate(line) if 'variable' in v), None)
@@ -405,7 +414,7 @@ def search_for_bad_aliases(file):
                        "can be multi-D. Please use Grid1D")
                 report_error(STYLE, file, linenr, msg)
             # Beginning with verbs is ok as are some specific prefixes
-            valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx', 'TypeSeq', 'MatchingIdxSlice')
+            valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx', 'TypeSeq', 'MatchingIdxSlice', 'To', '__')
             if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
                 prefix = 'Multipatch' if 'Multipatch' in a_name else ''
                 name = a_name.replace('Multipatch','')
@@ -440,7 +449,7 @@ def search_for_uid(file):
     Test for use of uid(). The DDC internal unique identifier should never be used directly.
     """
     for config in file.configs:
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
         uid_usage = [d.attrib for d in config.data_xml.findall(".token[@str='uid']") if Path(d.attrib['file']) == file.file]
         uid_indices = [config.data.index(d) for d in uid_usage]
@@ -511,8 +520,11 @@ def update_aliases(all_files):
             if include_file == 'species_info.hpp':
                 file.aliases.update(spec_file.aliases)
             elif include_file == 'geometry.hpp':
-                relevant_geom = next(p for p in file.file.parts if p.startswith('geometry'))
-                geom_file = next(f for f in geom_files if relevant_geom in f.file.parts)
+                relevant_geom = next((p for p in file.file.parts if p.startswith('geometry')), file.file.parent)
+                if isinstance(relevant_geom, Path):
+                    geom_file = next(f for f in geom_files if f.file.is_relative_to(relevant_geom))
+                else:
+                    geom_file = next(f for f in geom_files if relevant_geom in f.file.parts)
                 file.aliases.update(geom_file.aliases)
             elif include_file in multipatch_geom_file_names:
                 file.aliases.update(multipatch_geom_file_names[include_file].aliases)
@@ -527,7 +539,7 @@ def check_kokkos_lambda_use(file):
     - Check that class variables are not used in lambda functions passed to ddc::parallel_X functions.
     """
     for config in file.configs:
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
 
         for p in parallel_functions:
@@ -550,7 +562,7 @@ def check_kokkos_lambda_use(file):
                     else:
                         i+=1
 
-                is_thread_parallelism = any('TeamThreadRange' == a['str'] for a in config.data[idx+1:arg_splitters[-1]])
+                is_thread_parallelism = any(a['str'] in nested_parallel_policies for a in config.data[idx+1:arg_splitters[-1]])
                 if config.data[arg_splitters[-1]+1]['str'] == '[' and not is_thread_parallelism:
                     last_arg = ' '.join(a['str'] for a in config.data[arg_splitters[-1]+1:end_idx])
                     correct_last_arg = 'KOKKOS_LAMBDA '+last_arg[last_arg.find(']')+1:]
@@ -558,7 +570,7 @@ def check_kokkos_lambda_use(file):
                 elif config.data[arg_splitters[-1]+1]['str'].startswith('KOKKOS') and is_thread_parallelism:
                     last_arg = ' '.join(a['str'] for a in config.data[arg_splitters[-1]+1:end_idx])
                     correct_last_arg = '[&]'+last_arg[last_arg.find(']')+1:]
-                    report_error(FATAL, file, elem.attrib['linenr'], f'The lambda function passed as thread parallelism to the function ddc::{p} must be a KOKKOS_LAMBDA\n{last_arg}\nShould be:\n{correct_last_arg}')
+                    report_error(FATAL, file, elem.attrib['linenr'], f'The lambda function passed as thread parallelism to the function ddc::{p} must not be a KOKKOS_LAMBDA\n{last_arg}\nShould be:\n{correct_last_arg}')
 
                 lambda_body_start = next(i for i,a in enumerate(config.data[arg_splitters[-1]+1:], arg_splitters[-1]+1) if a['str'] == '{')
                 lambda_body_end_id = config.data[lambda_body_start]['link']
@@ -784,7 +796,7 @@ def check_exec_space_usage(file):
                               'integer_sequence', 'pair', 'declval', 'tuple_cat', 'integral_constant', 'size_t', 'move',
                               'make_integer_sequence', 'make_index_sequence', 'index_sequence',
                               'experimental::full_extent', 'experimental::submdspan', 'conjunction_v', 'disjunction_v',
-                              'conjunction', 'disjunction')
+                              'conjunction', 'disjunction', 'is_invocable_v', 'is_invocable_r_v')
             if 'std' in code_keys:
                 idx = code_keys.index('std')
                 func = None
@@ -822,8 +834,9 @@ if __name__ == '__main__':
     multipatch_geom = list(relevant_files.pop('multipatch'))
 
     cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style',
-                        '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
-                        '--error-exitcode=1', '--suppress=knownConditionTrueFalse', '--suppress=ctuOneDefinitionRuleViolation']
+                        '--std=c++20', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
+                        '--error-exitcode=1', '--suppress=knownConditionTrueFalse', '--suppress=ctuOneDefinitionRuleViolation',
+                        '--inline-suppr']
     for f in multipatch_geom:
         if no_file_filter or f in (*filter_files, spec_info):
             print("------------- Checking ", f, " -------------")

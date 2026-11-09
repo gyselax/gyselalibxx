@@ -8,9 +8,10 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "fluid_moments.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
+#include "spline_definitions_xvx.hpp"
 #include "trapezoid_quadrature.hpp"
 
 /**
@@ -42,9 +43,6 @@ TEST(Physics, FluidMoments)
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
     IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
 
-    SplineXBuilder const builder_x(gridx);
-    SplineVxBuilder const builder_vx(gridvx);
-
     IdxRangeSpXVx const mesh(IdxRangeSp(my_iion, IdxStepSp(1)), gridx, gridvx);
 
     host_t<DFieldMemSp> charges(idx_range_sp);
@@ -64,7 +62,7 @@ TEST(Physics, FluidMoments)
     host_t<DFieldMemSpX> density_init(get_idx_range<Species, GridX>(allfdistribu_host));
     host_t<DFieldMemSpX> mean_velocity_init(get_idx_range<Species, GridX>(allfdistribu_host));
     host_t<DFieldMemSpX> temperature_init(get_idx_range<Species, GridX>(allfdistribu_host));
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
         double const density = 1.;
         double const density_ampl = 0.1;
         double const mean_velocity = 0.;
@@ -120,7 +118,7 @@ TEST(Physics, FluidMoments)
     auto temperature_computed_host
             = ddc::create_mirror_view_and_copy(get_field(temperature_computed));
     auto density_computed_host = ddc::create_mirror_view_and_copy(get_field(density_computed));
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
         EXPECT_LE(std::fabs(density_computed_host(ispx) - density_init(ispx)), 1e-12);
         EXPECT_LE(std::fabs(mean_velocity_computed_host(ispx) - mean_velocity_init(ispx)), 1e-12);
         EXPECT_LE(std::fabs(temperature_computed_host(ispx) - temperature_init(ispx)), 1e-12);

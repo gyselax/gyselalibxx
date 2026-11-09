@@ -5,7 +5,7 @@
 # "CIRCULAR_MAPPING" "CZARNY_MAPPING_PHYSICAL" "CZARNY_MAPPING_PSEUDO_CARTESIAN" "DISCRETE_MAPPING"     #
 # "REFINED_DISCRETE_MAPPING"                                                                            #
 #                                                                                                       #
-# All possiibilities for TIME_METHOD:                                                                   #
+# All possibilities for TIME_METHOD:                                                                    #
 # "EULER_METHOD" "CRANK_NICOLSON_METHOD" "RK3_METHOD" "RK4_METHOD"                                      #
 #                                                                                                       #
 # All possibilities for SIMULATION:                                                                     #
@@ -32,23 +32,23 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
 
                 paraconf::paraconf
 
-                PDI::pdi
+                PDI::PDI_C
 
-                gslx::advection
-                gslx::geometry_RTheta
-                gslx::interpolation
-                gslx::io
-                gslx::paraconfpp
-                gslx::quadrature
-                gslx::timestepper
-                gslx::utils
+                gyselalibxx::advection
+                gyselalibxx::geometry_RTheta
+                gyselalibxx::interpolation
+                gyselalibxx::io
+                gyselalibxx::paraconfpp
+                gyselalibxx::quadrature
+                gyselalibxx::timestepper
+                gyselalibxx::utils
         )
         target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${TIME_METHOD} -D${SIMULATION} -D${MESH})
         # CONVERGENCE ORDER TEST: ----------------------------------------
         add_test(NAME TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}
                COMMAND "$<TARGET_FILE:Python3::Interpreter>" "${CMAKE_CURRENT_SOURCE_DIR}/display_all_errors_for_gtest.py"
                     "$<TARGET_FILE:advection_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}>")
-        set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY TIMEOUT 100)
+        set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY TIMEOUT 250)
         set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY COST 50)
     endforeach()
 endforeach()
@@ -56,7 +56,7 @@ endforeach()
 
 
 ##################################################################
-# Create one executable for all the possibilities listed before.  #
+# Create one executable for all the possibilities listed before. #
 #                                                                #
 ##################################################################
 
@@ -70,18 +70,17 @@ target_link_libraries(advection_ALL
 
 		paraconf::paraconf
 
-		PDI::pdi
+		PDI::PDI_C
 
-		gslx::advection
-		gslx::geometry_RTheta
-		gslx::interpolation
-		gslx::io
-		gslx::paraconfpp
-		gslx::quadrature
-		gslx::timestepper
-		gslx::utils
+		gyselalibxx::advection
+		gyselalibxx::geometry_RTheta
+		gyselalibxx::interpolation
+		gyselalibxx::io
+		gyselalibxx::paraconfpp
+		gyselalibxx::quadrature
+		gyselalibxx::timestepper
+		gyselalibxx::utils
 )
-
 
 target_compile_definitions(advection_ALL PUBLIC)
 

@@ -16,21 +16,20 @@
  */
 template <class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched>
 class Spline1DPartialDerivative
-    : public IPartialDerivative<
+    : public INonAnalyticalPartialDerivative<
               IdxRangeBatched,
               typename Spline1DBuilder::continuous_dimension_type>
 {
     static_assert(std::is_same_v<
                   typename Spline1DBuilder::interpolation_discrete_dimension_type,
-                  typename Spline1DEvaluator::evaluation_discrete_dimension_type>);
+                  typename Spline1DEvaluator::template evaluation_discrete_dimension_type<0>>);
     static_assert(ddc::in_tags_v<
                   typename Spline1DBuilder::interpolation_discrete_dimension_type,
                   ddc::to_type_seq_t<IdxRangeBatched>>);
 
 private:
-    using base_type = IPartialDerivative<
-            IdxRangeBatched,
-            typename Spline1DBuilder::continuous_dimension_type>;
+    using DerivativeDimension = typename Spline1DBuilder::continuous_dimension_type;
+    using base_type = INonAnalyticalPartialDerivative<IdxRangeBatched, DerivativeDimension>;
 
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;
@@ -71,7 +70,10 @@ public:
      */
     void operator()(DFieldType differentiated_field) const final
     {
-        m_evaluator.deriv(differentiated_field, get_const_field(m_spline_coefs));
+        m_evaluator
+                .deriv(Idx<ddc::Deriv<DerivativeDimension>>(1),
+                       differentiated_field,
+                       get_const_field(m_spline_coefs));
     }
 };
 
