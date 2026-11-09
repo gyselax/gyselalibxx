@@ -28,7 +28,7 @@
 
 
 /*
-    Test InterfacesDerivativeCalculator on the following geometry:
+    Test MultipatchSplineBuilder2D on the following geometry:
 
         |  1  |  2  |  3  |  1 ...
         -------------------
@@ -38,15 +38,6 @@
 
         with the global X dimension periodic and the global Y spline
         with additional points as closure condition (ddc::SplineBuilderClosure::GREVILLE).
-
-    > test ddc::SplineBuilderClosure::PERIODIC boundary conditions. 
-    > test ddc::SplineBuilderClosure::GREVILLE boundary conditions. 
-    > test application on the X and Y directions. 
-    > test application to compute first derivatives and cross-derivatives. 
-    > test on a non-uniform patches. 
-    > test with approximation formulation in InterfacesDerivCoeffs. 
-    > test agreement between computed and global spline derivatives. 
-    > test agreement between local and global splines.
 */
 
 namespace {
@@ -155,6 +146,18 @@ using SplineBuilderPatch = ddc::SplineBuilder2D<
         BC2max,
         ddc::SplineSolver::LAPACK>;
 
+template <int PatchIdx>
+using SplineEvaluatorPatch = ddc::SplineEvaluatorND<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        ddc::TypeSeq<BSplinesX<PatchIdx>, BSplinesY<PatchIdx>>,
+        ddc::TypeSeq<GridX<PatchIdx>, GridY<PatchIdx>>,
+        ddc::TypeSeq<
+                ddc::NullExtrapolationRule,
+                ddc::NullExtrapolationRule,
+                ddc::NullExtrapolationRule,
+                ddc::NullExtrapolationRule>>;
+
 template <std::size_t I>
 struct CoordTransformGroup
 {
@@ -175,6 +178,60 @@ struct CoordTransformGroup
         , coord_transform(x_transform, y_transform)
     {
     }
+};
+
+template <class Patch, class CoordTransformType>
+void check_spline(
+        std::vector<double> random_values_x,
+        std::vector<double> random_values_y,
+        SplineCoeffOnPatch_2D<Patch> const& spline_l,
+        host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> const& spline_g,
+        SplineEvaluatorPatch<ddc::type_seq_rank_v<Patch, PatchOrdering> + 1> const& evaluator_l,
+        SplineRThetagEvaluator const& evaluator_g,
+        CoordTransformType const& coord_transform,
+        double const TOL = 1e-14)
+{
+    inverse_mapping_t<typename CoordTransformType::XYTransform> coord_transform_l_to_g_2d
+            = coord_transform.coord_transform.get_inverse_mapping();
+
+    // Evaluate and compare the local and global spline representations ----------------------
+    double xmin = ddc::discrete_space<typename Patch::BSplines1>().rmin();
+    double ymin = ddc::discrete_space<typename Patch::BSplines2>().rmin();
+    double length_x = ddc::discrete_space<typename Patch::BSplines1>().length();
+    double length_y = ddc::discrete_space<typename Patch::BSplines2>().length();
+
+    for (double const val_x : random_values_x) {
+        for (double const val_y : random_values_y) {
+            typename Patch::Coord12 eval_point_l(xmin + val_x * length_x, ymin + val_y * length_y);
+            Coord<Xg, Yg> eval_point_g(coord_transform_l_to_g_2d(eval_point_l));
+            double local_spline = evaluator_l(eval_point_l, get_const_field(spline_l));
+            double global_spline = evaluator_g(eval_point_g, get_const_field(spline_g));
+            EXPECT_NEAR(local_spline, global_spline, TOL);
+        }
+    }
+};
+
+template <class... Patches, class CoordTransformTuple, class SplineEvaluatorPatchTuple>
+void check_all_splines(
+        std::vector<double> random_values_x,
+        std::vector<double> random_values_y,
+        MultipatchField<SplineCoeffOnPatch_2D, Patches...> const& splines_l,
+        host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> const& spline_g,
+        SplineEvaluatorPatchTuple const& evaluators_l,
+        SplineRThetagEvaluator const& evaluator_g,
+        CoordTransformTuple const& coord_transforms,
+        double const TOL = 1e-14)
+{
+    (check_spline<Patches>(
+             random_values_x,
+             random_values_y,
+             splines_l.template get<Patches>(),
+             spline_g,
+             std::get<ddc::type_seq_rank_v<Patches, PatchOrdering>>(evaluators_l),
+             evaluator_g,
+             std::get<ddc::type_seq_rank_v<Patches, PatchOrdering>>(coord_transforms),
+             TOL),
+     ...);
 };
 
 struct MultipatchSplineBuilder2DTest : public ::testing::Test
@@ -541,8 +598,8 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
                 deriv_calculator_258,
                 deriv_calculator_369,
                 deriv_calculator_123,
-                deriv_calculator_456,
-                deriv_calculator_789);
+                deriv_calculator_258,
+                deriv_calculator_369);
 
     // Collect the derivative indices to indicate the order of derivation.
     const std::tuple indices_derivation(
@@ -604,8 +661,30 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
     SplineBuilderPatch<8, SBC_H, SBC_H, SBC_G, SBC_H> builder8(idx_range_xy8);
     SplineBuilderPatch<9, SBC_H, SBC_H, SBC_G, SBC_H> builder9(idx_range_xy9);
 
+    ddc::NullExtrapolationRule null_bc;
+    SplineEvaluatorPatch<1> evaluator1(null_bc, null_bc, null_bc, null_bc);
+    SplineEvaluatorPatch<2> evaluator2(null_bc, null_bc, null_bc, null_bc);
+    SplineEvaluatorPatch<3> evaluator3(null_bc, null_bc, null_bc, null_bc);
+    SplineEvaluatorPatch<4> evaluator4(null_bc, null_bc, null_bc, null_bc);
+    SplineEvaluatorPatch<5> evaluator5(null_bc, null_bc, null_bc, null_bc);
+    SplineEvaluatorPatch<6> evaluator6(null_bc, null_bc, null_bc, null_bc);
+    SplineEvaluatorPatch<7> evaluator7(null_bc, null_bc, null_bc, null_bc);
+    SplineEvaluatorPatch<8> evaluator8(null_bc, null_bc, null_bc, null_bc);
+    SplineEvaluatorPatch<9> evaluator9(null_bc, null_bc, null_bc, null_bc);
 
-    SplineBuilder2DCollection<
+    auto evaluators = std::
+            tie(evaluator1,
+                evaluator2,
+                evaluator3,
+                evaluator4,
+                evaluator5,
+                evaluator6,
+                evaluator7,
+                evaluator8,
+                evaluator9);
+
+
+    const SplineBuilder2DCollection<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplines1OnPatch,
@@ -648,8 +727,8 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
             BSplines2OnPatch,
             Grid1OnPatch,
             Grid2OnPatch,
-            ddc::SplineBuilderClosure::PERIODIC,
-            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
             ddc::SplineBuilderClosure::GREVILLE,
             ddc::SplineBuilderClosure::GREVILLE,
             ddc::SplineBuilderClosure::HERMITE,
@@ -707,20 +786,14 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
                                     Interface_3_1>>,
                     InterfacesDerivativeCalculator<
                             Connectivity,
-                            GridX<4>,
-                            ddc::TypeSeq<Patch4, Patch5, Patch6>,
-                            InterfaceDerivCoeffsCollection<
-                                    Interface_4_5,
-                                    Interface_5_6,
-                                    Interface_6_4>>,
+                            GridY<2>,
+                            ddc::TypeSeq<Patch2, Patch5, Patch8>,
+                            InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>,
                     InterfacesDerivativeCalculator<
                             Connectivity,
-                            GridX<7>,
-                            ddc::TypeSeq<Patch7, Patch8, Patch9>,
-                            InterfaceDerivCoeffsCollection<
-                                    Interface_7_8,
-                                    Interface_8_9,
-                                    Interface_9_7>>>,
+                            GridY<3>,
+                            ddc::TypeSeq<Patch3, Patch6, Patch9>,
+                            InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>>,
             ddc::TypeSeq<
                     Idx<ddc::Deriv<X<1>>>,
                     Idx<ddc::Deriv<X<4>>>,
@@ -763,52 +836,33 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
     builders(splines, functions_and_derivs);
 
 
-    // // Test the values of the derivatives ========================================================
-    // // --- Define an equivalent global spline.
-    // // Build global spline representation ---
-    // SplineRThetagBuilder builder_g(idx_range_xy_g);
+    // Test the values of the derivatives ========================================================
+    // --- Define an equivalent global spline.
+    // Build global spline representation ---
+    SplineRThetagBuilder builder_g(idx_range_xy_g);
 
-    // host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
-    //         builder_g.batched_spline_domain(idx_range_xy_g));
-    // host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
-    //         = get_field(function_g_coef_alloc);
+    host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> spline_g_alloc(
+            builder_g.batched_spline_domain(idx_range_xy_g));
+    host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> spline_g = get_field(spline_g_alloc);
 
-    // builder_g(function_g_coef, get_const_field(function_g));
+    builder_g(spline_g, get_const_field(function_g));
 
-    // // Global spline evaluator ---
-    // ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(yg_min);
-    // ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(yg_max);
-    // ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
-    // SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
+    // Global spline evaluator ---
+    ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(yg_min);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(yg_max);
+    ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
+    SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 
-    // // Check each derivatives ---
-    // using PatchSeqLowerBound = ddc::TypeSeq<Patch7, Patch8, Patch9>;
-    // using PatchSeqUpperBound = ddc::TypeSeq<Patch1, Patch2, Patch3>;
 
-    // check_all_x_derivatives(
-    //         functions_and_derivs,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         coord_transforms,
-    //         1e-4);
-    // check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
-    //         functions_and_derivs,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         coord_transforms,
-    //         1e-4);
-    // check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
-    //         functions_and_derivs,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         coord_transforms,
-    //         1e-4);
-
-    // // Check the whole spline representations ---
-    // check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
-    //         functions_and_derivs,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         coord_transforms,
-    //         1e-7);
+    std::vector<double> random_values_x = {0, 1. / 3, 0.5, M_PI / 4, 1};
+    std::vector<double> random_values_y = {0, 1. / 3, 0.5, M_PI / 4, 1};
+    check_all_splines(
+            random_values_x,
+            random_values_y,
+            splines,
+            spline_g,
+            evaluators,
+            evaluator_g,
+            coord_transforms,
+            1e-6);
 }

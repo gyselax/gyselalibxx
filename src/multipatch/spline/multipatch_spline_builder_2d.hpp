@@ -150,7 +150,7 @@ class MultipatchSplineBuilder2D<
 private:
     SplineBuilderCollection const& m_builders;
 
-    DerivativeCalculatorsTuple& m_deriv_calculator_collec;
+    DerivativeCalculatorsTuple m_deriv_calculator_collect;
     IndicesTuple const& m_indices;
 
 
@@ -158,10 +158,10 @@ private:
 public:
     MultipatchSplineBuilder2D(
             SplineBuilderCollection const& builders,
-            DerivativeCalculatorsTuple& deriv_calculator_collec,
+            DerivativeCalculatorsTuple& deriv_calculator_collect,
             IndicesTuple const& indices)
         : m_builders(builders)
-        , m_deriv_calculator_collec(deriv_calculator_collec)
+        , m_deriv_calculator_collect(deriv_calculator_collect)
         , m_indices(indices) {};
 
 
@@ -186,6 +186,6 @@ private:
     template <std::size_t IOp>
     void set_interface_derivatives(MultipatchDerivField fonctions_and_derivs)
     {
-        std::get<IOp>(m_deriv_calculator_collec)(std::get<IOp>(m_indices), fonctions_and_derivs);
+        std::get<IOp>(m_deriv_calculator_collect)(std::get<IOp>(m_indices), fonctions_and_derivs);
     };
 };
