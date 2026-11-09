@@ -71,7 +71,7 @@ void construct_local_bsplines_and_neighbours(MPI_Comm comm)
         }
     } else {
         if (is_periodic or rank != 0) {
-            int offset = is_periodic ? comm_size - 1 : rank - 1;
+            int offset = rank == 0 ? comm_size - 1 : rank - 1;
             Idx<Knots> idx_bp_front = idx_range_bp.front() + offset * local_ncells;
             ddc::init_discrete_space<LocalBSplinesLower>(idx_bp_front, idx_bp_front + local_ncells);
         }
