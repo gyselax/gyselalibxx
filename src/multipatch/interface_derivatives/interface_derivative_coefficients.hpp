@@ -26,12 +26,12 @@ class InterfaceDerivCoeffs
               typename InterfaceType::Edge2::perpendicular_grid,
               find_grid_t<
                       typename InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type,
-                      ddc::detail::TypeSeq<
+                      ddc::TypeSeq<
                               typename InterfaceType::Edge1::associated_patch::BSplines1,
                               typename InterfaceType::Edge1::associated_patch::BSplines2>>,
               find_grid_t<
                       typename InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type,
-                      ddc::detail::TypeSeq<
+                      ddc::TypeSeq<
                               typename InterfaceType::Edge2::associated_patch::BSplines1,
                               typename InterfaceType::Edge2::associated_patch::BSplines2>>,
               InterfaceType::Edge1::extremity,
@@ -42,12 +42,12 @@ class InterfaceDerivCoeffs
             typename InterfaceType::Edge2::perpendicular_grid,
             find_grid_t<
                     typename InterfaceType::Edge1::perpendicular_grid::continuous_dimension_type,
-                    ddc::detail::TypeSeq<
+                    ddc::TypeSeq<
                             typename InterfaceType::Edge1::associated_patch::BSplines1,
                             typename InterfaceType::Edge1::associated_patch::BSplines2>>,
             find_grid_t<
                     typename InterfaceType::Edge2::perpendicular_grid::continuous_dimension_type,
-                    ddc::detail::TypeSeq<
+                    ddc::TypeSeq<
                             typename InterfaceType::Edge2::associated_patch::BSplines1,
                             typename InterfaceType::Edge2::associated_patch::BSplines2>>,
             InterfaceType::Edge1::extremity,
