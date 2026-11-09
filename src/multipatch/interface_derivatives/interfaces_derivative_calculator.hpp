@@ -18,8 +18,17 @@
 #include "types.hpp"
 #include "view.hpp"
 
+
+
 template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
 class InterfacesDerivativeCalculator;
+
+template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
+inline constexpr bool enable_deriv_calculator<InterfacesDerivativeCalculator<
+        Connectivity,
+        Grid1D,
+        PatchSeq,
+        DerivCoeffCollection>> = true;
 
 /**
   * @brief Class to compute the interface derivatives along a given direction 

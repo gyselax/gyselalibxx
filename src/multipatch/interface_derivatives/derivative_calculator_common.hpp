@@ -17,6 +17,14 @@
 #include "types.hpp"
 #include "view.hpp"
 
+
+template <class T>
+inline constexpr bool enable_deriv_calculator = false;
+
+template <class T>
+inline constexpr bool is_deriv_calculator_v
+        = enable_deriv_calculator<std::remove_const_t<std::remove_reference_t<T>>>;
+
 template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
 class DerivativeCalculatorCommon;
 

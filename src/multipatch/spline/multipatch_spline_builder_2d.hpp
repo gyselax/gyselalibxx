@@ -33,9 +33,8 @@ template <
         ddc::SplineSolver Solver,
         template <typename P>
         typename ValuesOnPatch,
-        class PatchesSeq,
-        class DerivativeCalculatorsSeq,
-        class IndicesSeq>
+        class DerivativeCalculatorCollect,
+        class PatchesSeq>
 class MultipatchSplineBuilder2D;
 
 
@@ -59,9 +58,8 @@ template <
         ddc::SplineSolver Solver,
         template <typename P>
         typename ValuesOnPatch,
-        class... Patches,
-        class... DerivativeCalculators,
-        class... Indices>
+        class DerivativeCalculatorCollect,
+        class... Patches>
 class MultipatchSplineBuilder2D<
         ExecSpace,
         MemorySpace,
@@ -77,9 +75,8 @@ class MultipatchSplineBuilder2D<
         Connectivity,
         Solver,
         ValuesOnPatch,
-        ddc::TypeSeq<Patches...>,
-        ddc::TypeSeq<DerivativeCalculators...>,
-        ddc::TypeSeq<Indices...>>
+        DerivativeCalculatorCollect,
+        ddc::TypeSeq<Patches...>>
 {
     using SplineBuilderCollection = SplineBuilder2DCollection<
             ExecSpace,
@@ -127,21 +124,12 @@ class MultipatchSplineBuilder2D<
     using MultipatchDerivField = MultipatchField<DerivFieldOnPatch, Patches...>;
 
 
-    using DerivativeCalculatorsTuple = std::tuple<DerivativeCalculators&...>;
-    using IndicesTuple = std::tuple<Indices...>;
+    // template <std::size_t IOp>
+    // using DerivativeCalculator
+    //         = ddc::type_seq_element_t<IOp, ddc::TypeSeq<DerivativeCalculators...>>;
 
-    static_assert(
-            sizeof...(DerivativeCalculators) == sizeof...(Indices),
-            "Please provide as much indices as the number of derivative calculators.");
-
-    static constexpr std::size_t nb_calculators = sizeof...(DerivativeCalculators);
-
-    template <std::size_t IOp>
-    using DerivativeCalculator
-            = ddc::type_seq_element_t<IOp, ddc::TypeSeq<DerivativeCalculators...>>;
-
-    template <std::size_t IOp>
-    using Indice = ddc::type_seq_element_t<IOp, ddc::TypeSeq<Indices...>>;
+    // template <std::size_t IOp>
+    // using Indice = ddc::type_seq_element_t<IOp, ddc::TypeSeq<Indices...>>;
 
 
     // TODO: Check that given DerivativeCalculators are InterfacesDerivativeCalculator or InterfacesExactDerivativeCalculator
@@ -150,25 +138,22 @@ class MultipatchSplineBuilder2D<
 private:
     SplineBuilderCollection const& m_builders;
 
-    DerivativeCalculatorsTuple m_deriv_calculator_collect;
-    IndicesTuple const& m_indices;
+    DerivativeCalculatorCollect& m_deriv_calculator_collect;
 
 
 
 public:
     MultipatchSplineBuilder2D(
             SplineBuilderCollection const& builders,
-            DerivativeCalculatorsTuple& deriv_calculator_collect,
-            IndicesTuple const& indices)
+            DerivativeCalculatorCollect& deriv_calculator_collect)
         : m_builders(builders)
-        , m_deriv_calculator_collect(deriv_calculator_collect)
-        , m_indices(indices) {};
+        , m_deriv_calculator_collect(deriv_calculator_collect) {};
 
 
     void operator()(MultipatchSplineCoeffs splines, MultipatchDerivField functions_and_derivs)
     {
         set_all_interface_derivatives(
-                std::make_integer_sequence<std::size_t, nb_calculators> {},
+                std::make_integer_sequence<std::size_t, DerivativeCalculatorCollect::size> {},
                 functions_and_derivs);
 
         m_builders(splines, get_const_field(functions_and_derivs));
@@ -186,6 +171,7 @@ private:
     template <std::size_t IOp>
     void set_interface_derivatives(MultipatchDerivField functions_and_derivs)
     {
-        std::get<IOp>(m_deriv_calculator_collect)(std::get<IOp>(m_indices), functions_and_derivs);
+        m_deriv_calculator_collect.template apply<IOp>(functions_and_derivs);
+        // std::get<IOp>(m_deriv_calculator_collect)(std::get<IOp>(m_indices), functions_and_derivs);
     };
 };

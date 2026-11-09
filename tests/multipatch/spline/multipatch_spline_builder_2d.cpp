@@ -11,6 +11,7 @@
 #include "9patches_2d_periodic_strips_non_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
+#include "derivative_calculator_collection.hpp"
 #include "derivative_field.hpp"
 #include "derivative_field_mem.hpp"
 #include "interface.hpp"
@@ -590,28 +591,27 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
 
     // Collect the derivative calculators.
     // TODO: how to avoid copying several times the same operator? -> DerivativeCalculatorCollection?
-    auto deriv_calculators = std::
-            tie(deriv_calculator_123,
-                deriv_calculator_456,
-                deriv_calculator_789,
-                deriv_calculator_147,
-                deriv_calculator_258,
-                deriv_calculator_369,
-                deriv_calculator_123,
-                deriv_calculator_258,
-                deriv_calculator_369);
-
-    // Collect the derivative indices to indicate the order of derivation.
-    const std::tuple indices_derivation(
-            Idx<ddc::Deriv<X<1>>>(1),
-            Idx<ddc::Deriv<X<4>>>(1),
-            Idx<ddc::Deriv<X<7>>>(1),
-            Idx<ddc::Deriv<Y<1>>>(1),
-            Idx<ddc::Deriv<Y<2>>>(1),
-            Idx<ddc::Deriv<Y<3>>>(1),
-            Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>(1, 1),
-            Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>>(1, 1),
-            Idx<ddc::Deriv<X<3>>, ddc::Deriv<Y<3>>>(1, 1));
+    DerivativeCalculatorCollection deriv_calculator_collect(
+            std::
+                    tie(deriv_calculator_123,
+                        deriv_calculator_456,
+                        deriv_calculator_789,
+                        deriv_calculator_147,
+                        deriv_calculator_258,
+                        deriv_calculator_369,
+                        deriv_calculator_123,
+                        deriv_calculator_258,
+                        deriv_calculator_369),
+            std::
+                    tuple(Idx<ddc::Deriv<X<1>>>(1),
+                          Idx<ddc::Deriv<X<4>>>(1),
+                          Idx<ddc::Deriv<X<7>>>(1),
+                          Idx<ddc::Deriv<Y<1>>>(1),
+                          Idx<ddc::Deriv<Y<2>>>(1),
+                          Idx<ddc::Deriv<Y<3>>>(1),
+                          Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>(1, 1),
+                          Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>>(1, 1),
+                          Idx<ddc::Deriv<X<3>>, ddc::Deriv<Y<3>>>(1, 1)));
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<
@@ -735,76 +735,9 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
             Connectivity,
             ddc::SplineSolver::LAPACK,
             DConstFieldOnPatch,
-            PatchOrdering,
-            ddc::TypeSeq<
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridX<1>,
-                            ddc::TypeSeq<Patch1, Patch2, Patch3>,
-                            InterfaceDerivCoeffsCollection<
-                                    Interface_1_2,
-                                    Interface_2_3,
-                                    Interface_3_1>>,
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridX<4>,
-                            ddc::TypeSeq<Patch4, Patch5, Patch6>,
-                            InterfaceDerivCoeffsCollection<
-                                    Interface_4_5,
-                                    Interface_5_6,
-                                    Interface_6_4>>,
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridX<7>,
-                            ddc::TypeSeq<Patch7, Patch8, Patch9>,
-                            InterfaceDerivCoeffsCollection<
-                                    Interface_7_8,
-                                    Interface_8_9,
-                                    Interface_9_7>>,
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridY<1>,
-                            ddc::TypeSeq<Patch1, Patch4, Patch7>,
-                            InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>,
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridY<2>,
-                            ddc::TypeSeq<Patch2, Patch5, Patch8>,
-                            InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>,
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridY<3>,
-                            ddc::TypeSeq<Patch3, Patch6, Patch9>,
-                            InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>,
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridX<1>,
-                            ddc::TypeSeq<Patch1, Patch2, Patch3>,
-                            InterfaceDerivCoeffsCollection<
-                                    Interface_1_2,
-                                    Interface_2_3,
-                                    Interface_3_1>>,
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridY<2>,
-                            ddc::TypeSeq<Patch2, Patch5, Patch8>,
-                            InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>,
-                    InterfacesDerivativeCalculator<
-                            Connectivity,
-                            GridY<3>,
-                            ddc::TypeSeq<Patch3, Patch6, Patch9>,
-                            InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>>,
-            ddc::TypeSeq<
-                    Idx<ddc::Deriv<X<1>>>,
-                    Idx<ddc::Deriv<X<4>>>,
-                    Idx<ddc::Deriv<X<7>>>,
-                    Idx<ddc::Deriv<Y<1>>>,
-                    Idx<ddc::Deriv<Y<2>>>,
-                    Idx<ddc::Deriv<Y<3>>>,
-                    Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>,
-                    Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>>,
-                    Idx<ddc::Deriv<X<3>>, ddc::Deriv<Y<3>>>>>
-            builders(builders_collect, deriv_calculators, indices_derivation);
+            decltype(deriv_calculator_collect),
+            PatchOrdering>
+            builders(builders_collect, deriv_calculator_collect);
 
 
     MultipatchFieldMem<
