@@ -637,9 +637,9 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
             idx_ranges(this->idx_range_xy1, this->idx_range_xy2, this->idx_range_xy3);
 
-    // Instantiate the matrix calculators --------------------------------------------------------
+    // Instantiate the derivative calculators ----------------------------------------------------
     typename TestFixture::InterfacesDerivativeCalculatorType
-            matrix(idx_ranges, deriv_coeffs_collect);
+            deriv_calculator(idx_ranges, deriv_coeffs_collect);
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
@@ -795,15 +795,17 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             coord_transforms);
 
     // --- the first derivatives (on inner interfaces) from the function values.
-    matrix.solve_deriv(functions_and_derivs);
+    using IdxDerivPerp = typename TestFixture::InterfacesDerivativeCalculatorType::idx_deriv_perp;
+    deriv_calculator(IdxDerivPerp(1), functions_and_derivs);
 
     // --- the cross-derivatives from the first derivatives.
     /*
         Here, it is not needed to compute the cross-derivatives because
         they are given by the boundary conditions. However, we want to 
-        check that the matrix computes correctly the values. 
+        check that deriv_calculator computes correctly the values. 
     */
-    matrix.solve_cross_deriv(functions_and_derivs);
+    using IdxCrossDeriv = typename TestFixture::InterfacesDerivativeCalculatorType::idx_cross_deriv;
+    deriv_calculator(IdxCrossDeriv(1, 1), functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::TypeSeq<>;

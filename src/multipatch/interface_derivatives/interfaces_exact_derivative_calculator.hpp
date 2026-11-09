@@ -66,35 +66,16 @@ class InterfacesExactDerivativeCalculator<
         UpperBound,
         DerivCoeffCollection>
     : public DerivativeCalculatorCommon<
-              InterfacesExactDerivativeCalculator<
-                      Connectivity,
-                      Grid1D,
-                      ddc::TypeSeq<Patches...>,
-                      LowerBound,
-                      UpperBound,
-                      DerivCoeffCollection>,
               Connectivity,
               Grid1D,
               ddc::TypeSeq<Patches...>,
               DerivCoeffCollection>
 {
     using base_type = DerivativeCalculatorCommon<
-            InterfacesExactDerivativeCalculator<
-                    Connectivity,
-                    Grid1D,
-                    ddc::TypeSeq<Patches...>,
-                    LowerBound,
-                    UpperBound,
-                    DerivCoeffCollection>,
             Connectivity,
             Grid1D,
             ddc::TypeSeq<Patches...>,
             DerivCoeffCollection>;
-
-    friend base_type;
-
-    using typename base_type::eval_cross_deriv;
-    using typename base_type::eval_deriv;
 
     using Matrix = gko::matrix::Dense<double>;
 
@@ -140,6 +121,22 @@ private:
 public:
     /// @brief First patch of the collection of patches in the direction of the given Grid1D.
     using patch_first = typename base_type::patch_first;
+
+    /// @brief Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.
+    using grid_direction = Grid1D;
+
+    /// @brief Patch of the given direction grid.
+    using patch_direction = typename base_type::patch_direction;
+
+    /// @brief Derivative dimension of the direction patch perpendicular to the mesh line.
+    using deriv_perp_dim = typename base_type::deriv_perp_dim;
+    /// @brief Derivative dimension of the direction patch parallel to the mesh line.
+    using deriv_par_dim = typename base_type::deriv_par_dim;
+
+    /// @brief Index on the derivative dimension perpendicular to the mesh line.
+    using idx_deriv_perp = typename base_type::idx_deriv_perp;
+    /// @brief Index on the two derivative dimensions of patch_direction.
+    using idx_cross_deriv = typename base_type::idx_cross_deriv;
 
 private:
     // Matrix (I-M) of the documentation.
@@ -210,9 +207,25 @@ public:
                         ddc::type_seq_size_v<typename base_type::Grid1DSeq> - 1> {});
     }
 
-private:
-    template <typename eval_type, class IdxPar>
-    void solve(
+    /**
+     * @brief Solve the matrix system MS = C to determine all the interface derivatives or cross-derivatives
+     * in the Grid1D direction at a given index.
+     * 
+     * For the derivatives, it uses the function values to compute the first-derivatives perpendicular to the interfaces. 
+     * For the cross-derivatives, it uses the first-derivatives to compute the cross-derivatives 
+     * in a perpendicular direction to the interfaces. 
+     *
+     * @tparam IdxDeriv Type for the given derivative order, either on the perpendicular direction for the 
+     *      first derivatives or both for the cross-derivatives. 
+     * @tparam IdxPar Type for the given index. It can be on the first or the second grid of the first patch.
+     * @param[in] deriv_order Indicate if we compute the first derivatives or the cross-derivatives. 
+     *      Its value is not taken into account. 
+     * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
+     * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives.
+     */
+    template <typename IdxDeriv, class IdxPar>
+    void operator()(
+            IdxDeriv const& deriv_order,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             IdxPar const& idx_par)
     {
@@ -224,7 +237,8 @@ private:
                 "InterfacesExactDerivativeCalculator<...>::patch_first.");
 
         // Update m_vector.
-        set_vector<eval_type>(
+        set_vector(
+                deriv_order,
                 idx_par,
                 functions_and_derivs,
                 std::make_integer_sequence<std::size_t, base_type::n_inner_interfaces> {});
@@ -233,12 +247,66 @@ private:
         m_solver->apply(m_vector, m_interface_derivatives);
 
         // Update derivatives.
-        update_derivatives<eval_type>(
+        update_derivatives(
+                deriv_order,
                 functions_and_derivs,
                 idx_par,
                 std::make_integer_sequence<std::size_t, base_type::n_inner_interfaces> {});
     }
 
+    /**
+     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D
+     * direction at all the indices of the first patch, or all the corner cross-derivatives in the Grid1D
+     * direction at all the last and the first indices of the first patch.
+     * 
+     * For the derivatives, it uses the function values to compute the first-derivatives perpendicular to the interfaces. 
+     * For the cross-derivatives, it uses the first-derivatives to compute the cross-derivatives 
+     * in a perpendicular direction to the interfaces. 
+     * 
+     * @tparam IdxDeriv Type for the given derivative order, either on the perpendicular direction for the 
+     *      first derivatives or both for the cross-derivatives. 
+     * @param[in] deriv_order Indicate if we compute the first derivatives or the cross-derivatives. 
+     *      Its value is not taken into account. 
+     * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives 
+     *      we want to compute.
+     * @warning The global mesh is supposed to be conforming. 
+     */
+    template <class IdxDeriv>
+    void operator()(
+            IdxDeriv const& deriv_order,
+            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+    {
+        static_assert(
+                (std::is_same_v<IdxDeriv, idx_deriv_perp>)
+                        || (std::is_same_v<IdxDeriv, Idx<deriv_perp_dim, deriv_par_dim>>)
+                        || (std::is_same_v<IdxDeriv, Idx<deriv_par_dim, deriv_perp_dim>>),
+                "The derivative order has to be on "
+                "InterfacesDerivativeCalculator<...>::deriv_perp_dim "
+                "or on InterfacesDerivativeCalculator<...>::deriv_perp_dim "
+                "and InterfacesDerivativeCalculator<...>::deriv_par_dim.");
+
+        constexpr bool is_first_idx_range_perp_on_dim1
+                = ddc::in_tags_v<typename patch_first::Grid1, typename base_type::Grid1DSeq>;
+        using IdxRangeParFirstType = std::conditional_t<
+                is_first_idx_range_perp_on_dim1,
+                typename patch_first::IdxRange2,
+                typename patch_first::IdxRange1>;
+
+        IdxRangeParFirstType idx_range_par_first(this->m_idx_ranges.template get<patch_first>());
+
+        if constexpr (std::is_same_v<IdxDeriv, idx_deriv_perp>) {
+            ddc::host_for_each(
+                    idx_range_par_first,
+                    [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
+                        this->operator()(deriv_order, functions_and_derivs, idx_par);
+                    });
+        } else {
+            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.front());
+            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.back());
+        }
+    }
+
+private:
     /// @brief Set the matrix (I - M).
     template <std::size_t... I>
     void set_matrix(std::integer_sequence<std::size_t, I...>)
@@ -314,8 +382,9 @@ private:
     }
 
     /// @brief Set the vector C.
-    template <typename eval_type, class GridPar1D, std::size_t... I>
+    template <typename IdxDerivs, class GridPar1D, std::size_t... I>
     void set_vector(
+            IdxDerivs const& deriv_order,
             Idx<GridPar1D> const& slice_idx,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             std::integer_sequence<std::size_t, I...>)
@@ -331,15 +400,18 @@ private:
         IdxRange<GridPar1D> idx_range_1d_first_patch(
                 this->m_idx_ranges.template get<patch_first>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
-        (set_line_vector<I, eval_type>(slice_idx_value, functions_and_derivs), ...);
+        (set_line_vector<I>(deriv_order, slice_idx_value, functions_and_derivs), ...);
     }
 
     /// @brief Fill in the Ith line of the vector C corresponding.
-    template <std::size_t I, typename eval_type>
+    template <std::size_t I, typename IdxDerivs>
     void set_line_vector(
+            IdxDerivs const& deriv_order,
             int& slice_previous_idx_value,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
+        constexpr bool is_first_deriv = std::is_same_v<IdxDerivs, idx_deriv_perp>;
+
         Idx<grid_par1<I>> idx_to_slice_1;
         Idx<grid_par2<I>> idx_to_slice_2;
         base_type::template set_slice_indexes<
@@ -348,14 +420,14 @@ private:
         // Compute the coefficient c_I (= approximated derivative) for the interface I.
         double lin_comb_funct = base_type::template get_approximated_deriv<
                 I,
-                eval_type>(idx_to_slice_1, idx_to_slice_2, functions_and_derivs);
+                is_first_deriv>(idx_to_slice_1, idx_to_slice_2, functions_and_derivs);
 
         /*
             If the orientation of the interface is not correct, we change the sign of the sum.
             Because c_{I 1|2} = - c_{I 2|1}.
         */
         int sign_sum = patch_order_matches_interfaces<I> - !patch_order_matches_interfaces<I>;
-        if constexpr (std::is_same_v<eval_type, eval_cross_deriv>) {
+        if constexpr (!is_first_deriv) {
             /*
                 > For the cross-derivative computation:
                 In get_approx_cross_deriv(), the sign of the derivatives on Patch2 is changed
@@ -386,7 +458,7 @@ private:
             Idx<grid_perp1<I>> idx_perp_1 = this->template get_idx_interface<false, I, patch1<I>>();
             Idx<grid_perp2<I>> idx_perp_2 = this->template get_idx_interface<false, I, patch2<I>>();
 
-            auto const [sign_1, sign_2] = get_sign_derivs<I, eval_type>();
+            auto const [sign_1, sign_2] = get_sign_derivs<I, is_first_deriv>();
 
             typename base_type::template idx_deriv_perp1<I>
                     idx_deriv_bound_1(Idx<deriv_perp1<I>>(1), idx_perp_1, idx_to_slice_1);
@@ -395,7 +467,7 @@ private:
 
             double deriv_bound_1;
             double deriv_bound_2;
-            if constexpr (std::is_same_v<eval_type, eval_deriv>) {
+            if constexpr (is_first_deriv) {
                 // Select the first derivatives at the other interfaces/bounds.
                 deriv_bound_1 = function_and_derivs_1(idx_deriv_bound_1) * sign_1;
                 deriv_bound_2 = function_and_derivs_2(idx_deriv_bound_2) * sign_2;
@@ -430,8 +502,9 @@ private:
     }
 
     /// @brief Once the interface derivatives computed, fill in the correct derivative fields.
-    template <typename eval_type, class GridPar1D, std::size_t... I>
+    template <typename IdxDerivs, class GridPar1D, std::size_t... I>
     void update_derivatives(
+            IdxDerivs const& deriv_order,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             Idx<GridPar1D> const& slice_idx,
             std::integer_sequence<std::size_t, I...>)
@@ -446,21 +519,25 @@ private:
         IdxRange<GridPar1D> idx_range_1d_first_patch(
                 this->m_idx_ranges.template get<patch_first>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
-        (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, slice_idx_value), ...);
+        (update_derivatives_at_interface<I>(deriv_order, functions_and_derivs, slice_idx_value),
+         ...);
     }
 
     /// @brief Associate the Ith derivative values to the correct first derivative or cross-derivatives.
-    template <std::size_t I, typename eval_type>
+    template <std::size_t I, typename IdxDerivs>
     void update_derivatives_at_interface(
+            IdxDerivs const& deriv_order,
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             int& slice_previous_idx_value)
     {
+        constexpr bool is_first_deriv = std::is_same_v<IdxDerivs, idx_deriv_perp>;
+
         Idx<grid_par1<I>> idx_to_slice_1;
         Idx<grid_par2<I>> idx_to_slice_2;
         base_type::template set_slice_indexes<
                 I>(slice_previous_idx_value, idx_to_slice_1, idx_to_slice_2);
 
-        auto const [sign_1, sign_2] = get_sign_derivs<I, eval_type>();
+        auto const [sign_1, sign_2] = get_sign_derivs<I, is_first_deriv>();
 
         // Get the indices at the bound of the interface.
         Idx<grid_perp1<I>> idx_perp_1 = this->template get_idx_interface<true, I, patch1<I>>();
@@ -470,7 +547,7 @@ private:
                 idx_interface_deriv_1(Idx<deriv_perp1<I>>(1), idx_perp_1, idx_to_slice_1);
         typename base_type::template idx_deriv_perp2<I>
                 idx_interface_deriv_2(Idx<deriv_perp2<I>>(1), idx_perp_2, idx_to_slice_2);
-        if constexpr (std::is_same_v<eval_type, eval_deriv>) {
+        if constexpr (is_first_deriv) {
             // Update the first derivatives.
             functions_and_derivs.template get<patch1<I>>()(idx_interface_deriv_1)
                     = m_interface_derivatives->get_values()[I] * sign_1;
@@ -505,8 +582,8 @@ private:
      */
     template <
             std::size_t I,
-            typename eval_type,
-            std::enable_if_t<std::is_same_v<eval_type, eval_deriv>, bool> = true>
+            bool is_first_deriv,
+            std::enable_if_t<is_first_deriv, bool> = true>
     std::pair<int, int> const get_sign_derivs() const
     {
         // If the directions of the two perpendicular grids desagree, the sign is changed.
@@ -533,8 +610,8 @@ private:
      */
     template <
             std::size_t I,
-            typename eval_type,
-            std::enable_if_t<std::is_same_v<eval_type, eval_cross_deriv>, bool> = true>
+            bool is_first_deriv,
+            std::enable_if_t<!is_first_deriv, bool> = true>
     std::pair<int, int> const get_sign_derivs() const
     {
         // If Patch1 follows the orientation of the sorted 1D grid sequence.
