@@ -33,9 +33,9 @@ template <
         ddc::SplineSolver Solver,
         template <typename P>
         typename ValuesOnPatch,
+        class PatchesSeq,
         class DerivativeCalculatorsSeq,
-        class IndicesSeq,
-        class PatchesSeq>
+        class IndicesSeq>
 class MultipatchSplineBuilder2D;
 
 
@@ -59,9 +59,9 @@ template <
         ddc::SplineSolver Solver,
         template <typename P>
         typename ValuesOnPatch,
+        class... Patches,
         class... DerivativeCalculators,
-        class... Indices,
-        class... Patches>
+        class... Indices>
 class MultipatchSplineBuilder2D<
         ExecSpace,
         MemorySpace,
@@ -77,9 +77,9 @@ class MultipatchSplineBuilder2D<
         Connectivity,
         Solver,
         ValuesOnPatch,
+        ddc::TypeSeq<Patches...>,
         ddc::TypeSeq<DerivativeCalculators...>,
-        ddc::TypeSeq<Indices...>,
-        ddc::TypeSeq<Patches...>>
+        ddc::TypeSeq<Indices...>>
 {
     using SplineBuilderCollection = SplineBuilder2DCollection<
             ExecSpace,
@@ -106,22 +106,29 @@ class MultipatchSplineBuilder2D<
 
     using MultipatchSplineCoeffs = typename SplineBuilderCollection::multipatch_spline_type;
 
-    using MultipatchDerivConstField = typename SplineBuilderCollection::multipatch_deriv_field_type;
+    // using MultipatchDerivConstField = typename SplineBuilderCollection::multipatch_deriv_field_type;
 
-    template <class P>
-    using DerivConstFieldOnPatch = typename MultipatchDerivConstField::template TypeOnPatch<P>;
+    // template <class P>
+    // using DerivConstFieldOnPatch = typename MultipatchDerivConstField::template TypeOnPatch<P>;
 
     template <class P>
     using DerivFieldOnPatch = DerivField<
-            std::remove_const<typename DerivConstFieldOnPatch<P>::element_type>,
-            typename DerivConstFieldOnPatch<P>::idx_range_type,
-            typename DerivConstFieldOnPatch<P>::memory_space>;
+            // std::remove_const<typename DerivConstFieldOnPatch<P>::element_type>,
+            // typename DerivConstFieldOnPatch<P>::idx_range_type,
+            // typename DerivConstFieldOnPatch<P>::memory_space>;
+            double,
+            IdxRange<
+                    ddc::Deriv<typename P::Dim1>,
+                    typename P::Grid1,
+                    ddc::Deriv<typename P::Dim2>,
+                    typename P::Grid2>,
+            MemorySpace>;
 
     using MultipatchDerivField = MultipatchField<DerivFieldOnPatch, Patches...>;
 
 
     using DerivativeCalculatorsTuple = std::tuple<DerivativeCalculators&...>;
-    using IndicesTuple = std::tuple<Indices const&...>;
+    using IndicesTuple = std::tuple<Indices...>;
 
     static_assert(
             sizeof...(DerivativeCalculators) == sizeof...(Indices),
@@ -129,16 +136,16 @@ class MultipatchSplineBuilder2D<
 
     static constexpr std::size_t nb_calculators = sizeof...(DerivativeCalculators);
 
-    template <class IOp>
+    template <std::size_t IOp>
     using DerivativeCalculator
             = ddc::type_seq_element_t<IOp, ddc::TypeSeq<DerivativeCalculators...>>;
 
-    template <class IOp>
+    template <std::size_t IOp>
     using Indice = ddc::type_seq_element_t<IOp, ddc::TypeSeq<Indices...>>;
 
 
     // TODO: Check that given DerivativeCalculators are InterfacesDerivativeCalculator or InterfacesExactDerivativeCalculator
-    // TODO: Check that given Indices are index on the patches/matching with the correct DerivativeCalculators. 
+    // TODO: Check that given Indices are index on the patches/matching with the correct DerivativeCalculators.
 
 private:
     SplineBuilderCollection const& m_builders;
@@ -160,22 +167,25 @@ public:
 
     void operator()(MultipatchSplineCoeffs splines, MultipatchDerivField fonctions_and_derivs)
     {
-        set_all_interface_derivatives(std::make_integer_sequence<std::size_t, nb_calculators> {});
+        set_all_interface_derivatives(
+                std::make_integer_sequence<std::size_t, nb_calculators> {},
+                fonctions_and_derivs);
 
         m_builders(splines, get_const_field(fonctions_and_derivs));
     };
 
 private:
     template <std::size_t... IOp>
-    void set_all_interface_derivatives(std::integer_sequence<std::size_t, I...>)
+    void set_all_interface_derivatives(
+            std::integer_sequence<std::size_t, IOp...>,
+            MultipatchDerivField fonctions_and_derivs)
     {
-        (set_interface_derivatives<IOp>, ...);
+        (set_interface_derivatives<IOp>(fonctions_and_derivs), ...);
     };
 
     template <std::size_t IOp>
-    void set_interface_derivatives()
+    void set_interface_derivatives(MultipatchDerivField fonctions_and_derivs)
     {
-        std::get<DerivativeCalculator<IOp>&>(
-                m_deriv_calculator_collec)(std::get<Indice<IOp>>(m_indices), fonctions_and_derivs);
+        std::get<IOp>(m_deriv_calculator_collec)(std::get<IOp>(m_indices), fonctions_and_derivs);
     };
 };

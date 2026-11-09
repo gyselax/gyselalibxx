@@ -4,6 +4,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
+
 /** 
  * @brief Convert a coordinate on a dimension to another coordinate
  * on another dimension. The scalar value does not change. 
