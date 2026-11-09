@@ -533,16 +533,16 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
 
     // Collect the derivative calculators.
     // TODO: how to avoid copying several times the same operator? -> DerivativeCalculatorCollection?
-    auto deriv_calculators = std::tie(
-            deriv_calculator_123,
-            deriv_calculator_456,
-            deriv_calculator_789,
-            deriv_calculator_147,
-            deriv_calculator_258,
-            deriv_calculator_369,
-            deriv_calculator_123,
-            deriv_calculator_456,
-            deriv_calculator_789);
+    auto deriv_calculators = std::
+            tie(deriv_calculator_123,
+                deriv_calculator_456,
+                deriv_calculator_789,
+                deriv_calculator_147,
+                deriv_calculator_258,
+                deriv_calculator_369,
+                deriv_calculator_123,
+                deriv_calculator_456,
+                deriv_calculator_789);
 
     // Collect the derivative indices to indicate the order of derivation.
     const std::tuple indices_derivation(
