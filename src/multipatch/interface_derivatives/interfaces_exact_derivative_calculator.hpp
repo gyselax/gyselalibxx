@@ -580,10 +580,7 @@ private:
      * Due to different orientations of the patch axes, the signs can be different from an 
      * equivalent global spline. 
      */
-    template <
-            std::size_t I,
-            bool is_first_deriv,
-            std::enable_if_t<is_first_deriv, bool> = true>
+    template <std::size_t I, bool is_first_deriv, std::enable_if_t<is_first_deriv, bool> = true>
     std::pair<int, int> const get_sign_derivs() const
     {
         // If the directions of the two perpendicular grids desagree, the sign is changed.
@@ -608,10 +605,7 @@ private:
      * Due to different orientations of the patch axes, the signs can be different from an 
      * equivalent global spline. 
      */
-    template <
-            std::size_t I,
-            bool is_first_deriv,
-            std::enable_if_t<!is_first_deriv, bool> = true>
+    template <std::size_t I, bool is_first_deriv, std::enable_if_t<!is_first_deriv, bool> = true>
     std::pair<int, int> const get_sign_derivs() const
     {
         // If Patch1 follows the orientation of the sorted 1D grid sequence.
