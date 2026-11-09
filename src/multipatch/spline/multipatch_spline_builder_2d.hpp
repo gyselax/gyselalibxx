@@ -165,27 +165,27 @@ public:
         , m_indices(indices) {};
 
 
-    void operator()(MultipatchSplineCoeffs splines, MultipatchDerivField fonctions_and_derivs)
+    void operator()(MultipatchSplineCoeffs splines, MultipatchDerivField functions_and_derivs)
     {
         set_all_interface_derivatives(
                 std::make_integer_sequence<std::size_t, nb_calculators> {},
-                fonctions_and_derivs);
+                functions_and_derivs);
 
-        m_builders(splines, get_const_field(fonctions_and_derivs));
+        m_builders(splines, get_const_field(functions_and_derivs));
     };
 
 private:
     template <std::size_t... IOp>
     void set_all_interface_derivatives(
             std::integer_sequence<std::size_t, IOp...>,
-            MultipatchDerivField fonctions_and_derivs)
+            MultipatchDerivField functions_and_derivs)
     {
-        (set_interface_derivatives<IOp>(fonctions_and_derivs), ...);
+        (set_interface_derivatives<IOp>(functions_and_derivs), ...);
     };
 
     template <std::size_t IOp>
-    void set_interface_derivatives(MultipatchDerivField fonctions_and_derivs)
+    void set_interface_derivatives(MultipatchDerivField functions_and_derivs)
     {
-        std::get<IOp>(m_deriv_calculator_collect)(std::get<IOp>(m_indices), fonctions_and_derivs);
+        std::get<IOp>(m_deriv_calculator_collect)(std::get<IOp>(m_indices), functions_and_derivs);
     };
 };
