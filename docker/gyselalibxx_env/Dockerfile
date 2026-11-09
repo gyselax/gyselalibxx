@@ -31,13 +31,6 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
     python3-venv \
  && ln -sf /usr/bin/clang-${LLVM_VERSION} /usr/bin/clang \
  && ln -sf /usr/bin/clang++-${LLVM_VERSION} /usr/bin/clang++ \
- && git clone -b clang_${LLVM_VERSION} https://github.com/include-what-you-use/include-what-you-use.git \
- && cd include-what-you-use \
- && cmake -S . -DCMAKE_PREFIX_PATH=/usr/lib/llvm-${LLVM_VERSION}/ -DCMAKE_BUILD_TYPE=Release -B build \
- && cmake --build build \
- && cmake --install build \
- && cd .. \
- && rm -rf include-what-you-use \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
@@ -73,7 +66,14 @@ RUN apt-get update --yes \
     tar \
     unzip \
     xz-utils \
-    zstd
+    zstd \
+ && git clone -b clang_${LLVM_VERSION} https://github.com/include-what-you-use/include-what-you-use.git \
+ && cd include-what-you-use \
+ && cmake -S . -DCMAKE_PREFIX_PATH=/usr/lib/llvm-${LLVM_VERSION}/ -DCMAKE_BUILD_TYPE=Release -B build \
+ && cmake --build build \
+ && cmake --install build \
+ && cd .. \
+ && rm -rf include-what-you-use
 
 USER ci:ci
 WORKDIR /ci
