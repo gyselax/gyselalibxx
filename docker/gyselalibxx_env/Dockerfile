@@ -24,27 +24,16 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
     > /etc/apt/sources.list.d/llvm.list \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
-    build-essential \
     clang-${LLVM_VERSION} \
     libomp-${LLVM_VERSION}-dev \
-    git \
     openssh-client \
     python3-pip \
     python3-venv \
-    cmake \
  && ln -sf /usr/bin/clang-${LLVM_VERSION} /usr/bin/clang \
  && ln -sf /usr/bin/clang++-${LLVM_VERSION} /usr/bin/clang++ \
- && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
- && cd cppcheck \
- && cmake -S . -B build -DUSE_MATCHCOMPILER=ON -DCMAKE_BUILD_TYPE=Release \
- && cmake --build build \
- && cmake --install build \
- && cd .. \
- && rm -rf cppcheck \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
-    cmake \
     wget \
  && apt-get autoremove -y \
  && apt-get clean -y \
