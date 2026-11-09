@@ -67,6 +67,7 @@ RUN apt-get update --yes \
     unzip \
     xz-utils \
     zstd \
+ && LLVM_VERSION=$(clang --version | grep -oP 'clang version \K[0-9]+') \
  && git clone -b clang_${LLVM_VERSION} https://github.com/include-what-you-use/include-what-you-use.git \
  && cd include-what-you-use \
  && cmake -S . -DCMAKE_PREFIX_PATH=/usr/lib/llvm-${LLVM_VERSION}/ -DCMAKE_BUILD_TYPE=Release -B build \
