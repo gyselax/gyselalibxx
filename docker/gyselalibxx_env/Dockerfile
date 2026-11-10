@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: MIT
 
-FROM ubuntu:noble
+FROM ubuntu:resolute
 
 COPY --chmod=0755 bash_run /bin/bash_run
 ENV BASH_ENV=/etc/profile
 ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
 
+ARG LLVM_VERSION=23
 
 RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
  && echo tzdata tzdata/Zones/Etc string UTC | debconf-set-selections \
@@ -17,30 +18,22 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
     apt-utils \
     ca-certificates \
     wget \
+ && mkdir -p /etc/apt/keyrings \
+ && wget -qO /etc/apt/keyrings/apt.llvm.org.asc https://apt.llvm.org/llvm-snapshot.gpg.key \
+ && echo "deb [signed-by=/etc/apt/keyrings/apt.llvm.org.asc] https://apt.llvm.org/resolute/ llvm-toolchain-resolute-${LLVM_VERSION} main" \
+    > /etc/apt/sources.list.d/llvm.list \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
-    build-essential \
-    clang-18 \
-    libomp-dev \
-    clang-format-14 \
-    git \
+    clang-${LLVM_VERSION} \
+    libomp-${LLVM_VERSION}-dev \
     openssh-client \
     python3-pip \
     python3-venv \
-    cmake \
- && ln -sf /usr/bin/clang-18 /usr/bin/clang \
- && ln -sf /usr/bin/clang++-18 /usr/bin/clang++ \
- && git clone --branch 2.22.0 --depth 1 https://github.com/cppcheck-opensource/cppcheck.git \
- && cd cppcheck \
- && cmake -S . -B build -DUSE_MATCHCOMPILER=ON -DCMAKE_BUILD_TYPE=Release \
- && cmake --build build \
- && cmake --install build \
- && cd .. \
- && rm -rf cppcheck \
+ && ln -sf /usr/bin/clang-${LLVM_VERSION} /usr/bin/clang \
+ && ln -sf /usr/bin/clang++-${LLVM_VERSION} /usr/bin/clang++ \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
-    cmake \
     wget \
  && apt-get autoremove -y \
  && apt-get clean -y \
@@ -49,6 +42,7 @@ RUN echo tzdata tzdata/Areas string Etc | debconf-set-selections \
  && /opt/venv/bin/python -m pip install -U --no-cache-dir \
     pip \
     'pylint==3.3.9' \
+    'clang-format==14.0.6' \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
