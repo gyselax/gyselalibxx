@@ -1178,7 +1178,7 @@
         </childnode>
         <childnode refid="168" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="124" relation="include">
         </childnode>
@@ -1362,7 +1362,7 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
         <childnode refid="77" relation="include">
         </childnode>
@@ -1526,6 +1526,8 @@
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
         <childnode refid="76" relation="include">
         </childnode>
       </node>
@@ -1552,9 +1554,9 @@
         </childnode>
         <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
-        </childnode>
         <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
@@ -1572,7 +1574,7 @@
         </childnode>
         <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
       <node id="87">
@@ -1599,11 +1601,11 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
         <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
       </node>
-      <node id="84">
+      <node id="85">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>
         <link refid="null__extrapolation__rules_8hpp_source"/>
       </node>
-      <node id="85">
+      <node id="83">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</label>
         <link refid="spline__builder__2d__collection_8hpp_source"/>
       </node>
@@ -1611,7 +1613,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_collection.hpp</label>
         <link refid="spline__builder__collection_8hpp_source"/>
       </node>
-      <node id="83">
+      <node id="84">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
         <link refid="multipatch__math__tools_8hpp_source"/>
         <childnode refid="77" relation="include">
@@ -2146,9 +2148,9 @@
         </childnode>
         <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
-        </childnode>
         <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
@@ -2314,7 +2316,7 @@
       <node id="89">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp</label>
         <link refid="spline__builder__deriv__field__2d_8hpp_source"/>
-        <childnode refid="85" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
       <node id="200">

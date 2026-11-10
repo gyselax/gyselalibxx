@@ -93,6 +93,8 @@
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
@@ -111,6 +113,10 @@
         <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
       <node id="20">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</label>
+        <link refid="spline__builder__2d__collection_8hpp_source"/>
+      </node>
+      <node id="21">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
         <link refid="multipatch__math__tools_8hpp_source"/>
         <childnode refid="11" relation="include">

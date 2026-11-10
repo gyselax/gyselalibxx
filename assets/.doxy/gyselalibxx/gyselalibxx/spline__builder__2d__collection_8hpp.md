@@ -17,6 +17,7 @@
 * `#include <ddc/kernels/splines.hpp>`
 * `#include "ddc_aliases.hpp"`
 * `#include "i_interpolation_builder.hpp"`
+* `#include "multipatch_field.hpp"`
 * `#include "multipatch_type.hpp"`
 * `#include "spline_builder_deriv_field_2d.hpp"`
 * `#include "types.hpp"`

@@ -7,6 +7,7 @@
     <includedby refid="multipatch__field__mem_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp</includedby>
     <includedby refid="interfaces__derivative__calculator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</includedby>
     <includedby refid="constant__extrapolation__rules__onion_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</includedby>
+    <includedby refid="spline__builder__2d__collection_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</includedby>
     <includedby refid="multipatch__math__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</includedby>
     <includedby refid="itimestepper_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp</includedby>
     <incdepgraph>
@@ -299,6 +300,8 @@
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
@@ -317,6 +320,10 @@
         <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
       <node id="17">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</label>
+        <link refid="spline__builder__2d__collection_8hpp_source"/>
+      </node>
+      <node id="18">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
         <link refid="multipatch__math__tools_8hpp_source"/>
         <childnode refid="7" relation="include">
