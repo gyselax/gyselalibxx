@@ -8,12 +8,15 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
+#include "edge.hpp"
 #include "i_interpolation_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "spline_builder_deriv_field_2d.hpp"
 #include "types.hpp"
+
 
 /**
  * @brief A class to call all the builders of all the patches once.
@@ -159,27 +162,6 @@ class SplineBuilder2DCollection
                     typename ValuesOnPatch<Patch>::discrete_domain_type>,
             MemorySpace>;
 
-    /// A type alias to get the batched derivatives along the first dimension on a specific patch.
-    template <class Patch>
-    using Derivs1OnPatch = DConstField<
-            typename BuilderOnPatch<Patch>::template batched_derivs_domain_type1<
-                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
-            MemorySpace>;
-
-    /// A type alias to get the batched derivatives along the first dimension on a specific patch.
-    template <class Patch>
-    using Derivs2OnPatch = DConstField<
-            typename BuilderOnPatch<Patch>::template batched_derivs_domain_type2<
-                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
-            MemorySpace>;
-
-    /// A type alias to get the batched cross-derivatives on a specific patch.
-    template <class Patch>
-    using Derivs12OnPatch = DConstField<
-            typename BuilderOnPatch<Patch>::template batched_derivs_domain_type<
-                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
-            MemorySpace>;
-
     /// A type alias to get the DerivField type on a specific patch.
     template <class Patch>
     using DerivConstFieldOnPatch = DerivConstField<
@@ -213,12 +195,6 @@ class SplineBuilder2DCollection
 
     /// The type of the values at the batched interpolation points.
     using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
-
-    using MultipatchDerivs1 = MultipatchField<Derivs1OnPatch, Patches...>;
-
-    using MultipatchDerivs2 = MultipatchField<Derivs2OnPatch, Patches...>;
-
-    using MultipatchDerivs12 = MultipatchField<Derivs12OnPatch, Patches...>;
 
     using MultipatchDerivField = MultipatchField<DerivConstFieldOnPatch, Patches...>;
 
@@ -276,18 +252,6 @@ public:
     template <class MultipatchIdxRangeBatched>
     using batched_derivs_idx_range_type = MultipatchIdxRangeBatchedDeriv<MultipatchIdxRangeBatched>;
 
-private:
-    template <class Patch, class MultipatchDerivs>
-    std::optional<typename MultipatchDerivs::template TypeOnPatch<Patch>> get_deriv_value(
-            std::optional<MultipatchDerivs> derivs) const
-    {
-        if (derivs.has_value()) {
-            return derivs->template get<Patch>();
-        } else {
-            return std::nullopt;
-        }
-    }
-
 public:
     /**
      * @brief Instantiate the SplineBuilderCollection from a std::tuple
@@ -309,50 +273,12 @@ public:
      * 
      * @param[out] splines MultipatchField of all the Fields pointing to the spline representations. 
      * @param[in] values MultipatchField of all the Fields pointing to the function values. 
-     * @param[in] derivs_min1 MultipatchField of all the ConstFields describing the function derivatives
-     *                      in the first dimension at the lower bound of the second dimension.
-     * @param[in] derivs_max1 MultipatchField of all the ConstFields describing the function derivatives
-     *                      in the first dimension at the upper bound of the second dimension.
-     * @param[in] derivs_min2 MultipatchField of all the ConstFields describing the function derivatives
-     *                      in the second dimension at the lower bound of the first dimension.
-     * @param[in] derivs_max2 MultipatchField of all the ConstFields describing the function derivatives
-     *                      in the second dimension at the upper bound of the first dimension.
-     * @param[in] cross_derivs_min1_min2
-     *      The values of the the cross-derivatives at the lower boundary in the first dimension
-     *      and the lower boundary in the second dimension.
-     * @param[in] cross_derivs_max1_min2
-     *      The values of the the cross-derivatives at the upper boundary in the first dimension
-     *      and the lower boundary in the second dimension.
-     * @param[in] cross_derivs_min1_max2
-     *      The values of the the cross-derivatives at the lower boundary in the first dimension
-     *      and the upper boundary in the second dimension.
-     * @param[in] cross_derivs_max1_max2
-     *      The values of the the cross-derivatives at the upper boundary in the first dimension
-     *      and the upper boundary in the second dimension.
      */
-    void operator()(
-            MultipatchSplineCoeffs splines,
-            MultipatchValues const& values,
-            std::optional<MultipatchDerivs1> derivs_min1 = std::nullopt,
-            std::optional<MultipatchDerivs1> derivs_max1 = std::nullopt,
-            std::optional<MultipatchDerivs2> derivs_min2 = std::nullopt,
-            std::optional<MultipatchDerivs2> derivs_max2 = std::nullopt,
-            std::optional<MultipatchDerivs12> cross_derivs_min1_min2 = std::nullopt,
-            std::optional<MultipatchDerivs12> cross_derivs_max1_min2 = std::nullopt,
-            std::optional<MultipatchDerivs12> cross_derivs_min1_max2 = std::nullopt,
-            std::optional<MultipatchDerivs12> cross_derivs_max1_max2 = std::nullopt) const
+    void operator()(MultipatchSplineCoeffs splines, MultipatchValues const& values) const
     {
         ((std::get<BuilderOnPatch<Patches> const&>(m_builders)(
                  splines.template get<Patches>(),
-                 get_const_field(values.template get<Patches>()),
-                 get_deriv_value<Patches>(derivs_min1),
-                 get_deriv_value<Patches>(derivs_max1),
-                 get_deriv_value<Patches>(derivs_min2),
-                 get_deriv_value<Patches>(derivs_max2),
-                 get_deriv_value<Patches>(cross_derivs_min1_min2),
-                 get_deriv_value<Patches>(cross_derivs_max1_min2),
-                 get_deriv_value<Patches>(cross_derivs_min1_max2),
-                 get_deriv_value<Patches>(cross_derivs_max1_max2))),
+                 get_const_field(values.template get<Patches>()))),
          ...);
     };
 
