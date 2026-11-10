@@ -11,6 +11,7 @@
 
 
 * `#include <ddc/ddc.hpp>`
+* `#include <KOLIOP/collisions.h>`
 * `#include "assert.hpp"`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
@@ -31,6 +32,11 @@
 
 
 
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| class | [**CollisionOperator**](classCollisionOperator.md) &lt;class CollisionConfiguration&gt;<br>_A class which computes the collision operator in (Sp,vpar,mu)._  |
 
 
 

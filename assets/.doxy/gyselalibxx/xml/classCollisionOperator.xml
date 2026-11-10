@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classCollisionOperator" kind="class" language="C++" prot="public">
+    <compoundname>CollisionOperator</compoundname>
+    <includes refid="collision__operator_8hpp" local="no">collision_operator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class CollisionConfiguration</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCollisionOperator_1a4c6312842f7adb49b1e60f00de2e0edd" prot="public" static="no">
+        <type>typename CollisionConfiguration::IdxRangeDistributionFunctionType</type>
+        <definition>using CollisionOperator&lt; CollisionConfiguration &gt;::IdxRangeDistributionFunctionType = 
+            typename CollisionConfiguration::IdxRangeDistributionFunctionType</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeDistributionFunctionType</name>
+        <qualifiedname>CollisionOperator::IdxRangeDistributionFunctionType</qualifiedname>
+        <briefdescription>
+<para><ref refid="classCollisionOperator_1a4c6312842f7adb49b1e60f00de2e0edd" kindref="member">IdxRangeDistributionFunctionType</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionOperator_1a4c869f1f145362a80942b4cf68c3bc25" prot="public" static="no">
+        <type>typename CollisionConfiguration::CollisionConfigurationDataType</type>
+        <definition>using CollisionOperator&lt; CollisionConfiguration &gt;::CollisionConfigurationDataType = 
+            typename CollisionConfiguration::CollisionConfigurationDataType</definition>
+        <argsstring></argsstring>
+        <name>CollisionConfigurationDataType</name>
+        <qualifiedname>CollisionOperator::CollisionConfigurationDataType</qualifiedname>
+        <briefdescription>
+<para><ref refid="classCollisionOperator_1a4c869f1f145362a80942b4cf68c3bc25" kindref="member">CollisionConfigurationDataType</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classCollisionOperator_1aca7d5270ca997807d28f0a2e8739a256" prot="protected" static="no" mutable="no">
+        <type>CollisionConfiguration const  &amp;</type>
+        <definition>CollisionConfiguration const&amp; CollisionOperator&lt; CollisionConfiguration &gt;::m_collision_configuration</definition>
+        <argsstring></argsstring>
+        <name>m_collision_configuration</name>
+        <qualifiedname>CollisionOperator::m_collision_configuration</qualifiedname>
+        <briefdescription>
+<para>The collision configuration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" line="96" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionOperator_1a41cfa98784127d460f7ad4e406e07d4d" prot="protected" static="no" mutable="no">
+        <type>koliop::collisions::Operator</type>
+        <definition>koliop::collisions::Operator CollisionOperator&lt; CollisionConfiguration &gt;::m_operator</definition>
+        <argsstring></argsstring>
+        <name>m_operator</name>
+        <qualifiedname>CollisionOperator::m_operator</qualifiedname>
+        <briefdescription>
+<para>Opaque C type representing the operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" line="101" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCollisionOperator_1a09a154fc78498045bcc66c58deeb2683" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CollisionOperator&lt; CollisionConfiguration &gt;::CollisionOperator</definition>
+        <argsstring>(CollisionConfiguration const &amp;collision_configuration)</argsstring>
+        <name>CollisionOperator</name>
+        <qualifiedname>CollisionOperator::CollisionOperator</qualifiedname>
+        <param>
+          <type>CollisionConfiguration const &amp;</type>
+          <declname>collision_configuration</declname>
+        </param>
+        <briefdescription>
+<para>Construct a new Collision Operator object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">collision_configuration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This parametrise the operator. It contains the data required for its initialisation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" line="39" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" bodystart="39" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionOperator_1aa89fff8526ffc5981d744e41878d954b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void CollisionOperator&lt; CollisionConfiguration &gt;::operator()</definition>
+        <argsstring>(DField&lt; IdxRangeDistributionFunctionType &gt; all_f_distribution, double deltat_coll)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>CollisionOperator::operator()</qualifiedname>
+        <param>
+          <type>DField&lt; <ref refid="classCollisionOperator_1a4c6312842f7adb49b1e60f00de2e0edd" kindref="member">IdxRangeDistributionFunctionType</ref> &gt;</type>
+          <declname>all_f_distribution</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>deltat_coll</declname>
+        </param>
+        <briefdescription>
+<para>Apply the collision operator to the distribution functions of all species on all species. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">all_f_distribution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>All the distribution function, depending on the CollisionConfiguration, the existence of the special dimension may vary. At most, we have (species, tor3, tor1, tor2, vpar, mu) in layout right. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deltat_coll</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collision time step. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" line="84" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" bodystart="84" bodyend="90"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which computes the collision operator in (Sp,vpar,mu). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp" bodystart="19" bodyend="102"/>
+    <listofallmembers>
+      <member refid="classCollisionOperator_1a4c869f1f145362a80942b4cf68c3bc25" prot="public" virt="non-virtual"><scope>CollisionOperator</scope><name>CollisionConfigurationDataType</name></member>
+      <member refid="classCollisionOperator_1a09a154fc78498045bcc66c58deeb2683" prot="public" virt="non-virtual"><scope>CollisionOperator</scope><name>CollisionOperator</name></member>
+      <member refid="classCollisionOperator_1a4c6312842f7adb49b1e60f00de2e0edd" prot="public" virt="non-virtual"><scope>CollisionOperator</scope><name>IdxRangeDistributionFunctionType</name></member>
+      <member refid="classCollisionOperator_1aca7d5270ca997807d28f0a2e8739a256" prot="protected" virt="non-virtual"><scope>CollisionOperator</scope><name>m_collision_configuration</name></member>
+      <member refid="classCollisionOperator_1a41cfa98784127d460f7ad4e406e07d4d" prot="protected" virt="non-virtual"><scope>CollisionOperator</scope><name>m_operator</name></member>
+      <member refid="classCollisionOperator_1aa89fff8526ffc5981d744e41878d954b" prot="public" virt="non-virtual"><scope>CollisionOperator</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

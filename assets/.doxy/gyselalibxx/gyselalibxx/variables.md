@@ -311,8 +311,6 @@
 
 ## i
 
-* **is\_limiter\_mask\_enabled** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
-* **is\_sol\_enabled** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
 * **inverse\_mapping\_t** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_accessible\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_coord\_transform\_with\_o\_point\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
@@ -435,8 +433,6 @@
 
 ## l
 
-* **local\_idx\_range\_r\_offset** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
-* **local\_idx\_range\_theta\_offset** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
 * **LagrangeInterpolator** ([**lagrange\_interpolation.hpp**](lagrange__interpolation_8hpp.md))
 
 

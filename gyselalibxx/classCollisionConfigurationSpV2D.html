@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File collision_operator.cpp - GyselalibX</title>
+    <title>Class CollisionConfigurationSpV2D - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File collision_operator.cpp";
-        var mkdocs_page_input_path = "gyselalibxx/collision__operator_8cpp.md";
+        var mkdocs_page_name = "Class CollisionConfigurationSpV2D";
+        var mkdocs_page_input_path = "gyselalibxx/classCollisionConfigurationSpV2D.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -565,9 +565,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File collision_operator.cpp</li>
+      <li class="breadcrumb-item active">Class CollisionConfigurationSpV2D</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/collision__operator_8cpp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classCollisionConfigurationSpV2D.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,15 +575,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-collision_operatorcpp">File collision_operator.cpp</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_64163437c27c8707f17f92558da22106.html"><strong>collisions</strong></a> <strong>&gt;</strong> <a href="collision__operator_8cpp.html"><strong>collision_operator.cpp</strong></a></p>
-<p><a href="collision__operator_8cpp_source.html">Go to the source code of this file</a></p>
+                <div><h1 id="class-collisionconfigurationspv2d">Class CollisionConfigurationSpV2D</h1>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classCollisionConfigurationSpV2D.html"><strong>CollisionConfigurationSpV2D</strong></a></p>
+<p><em>Class to collect information to initialise the collision operator for a SpVparMu geometry.</em> </p>
 <ul>
-<li><code>#include &lt;KOLIOP/koliop.h&gt;</code></li>
-<li><code>#include "assert.hpp"</code></li>
-<li><code>#include "collision_operator.hpp"</code></li>
+<li><code>#include &lt;collision_configuration.hpp&gt;</code></li>
 </ul>
-<h2 id="public-static-attributes">Public Static Attributes</h2>
+<h2 id="public-types">Public Types</h2>
 <table>
 <thead>
 <tr>
@@ -593,46 +591,106 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">std::int8_t</td>
-<td style="text-align: left;"><a href="#variable-is_limiter_mask_enabled"><strong>is_limiter_mask_enabled</strong></a>   = <code>true</code><br></td>
+<td style="text-align: right;">typedef detail::CollisionConfigurationData&lt; <a href="classCollisionConfigurationSpV2D.html#typedef-idxrangedistributionfunctiontype"><strong>IdxRangeDistributionFunctionType</strong></a>, detail::InternalSpoofGridTor3, detail::InternalSpoofGridTor2, detail::InternalSpoofGridTor1, <a href="structGridVpar.html"><strong>GridVpar</strong></a>, <a href="structGridMu.html"><strong>GridMu</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-collisionconfigurationdatatype"><strong>CollisionConfigurationDataType</strong></a>  <br><em>Container for the operator input data.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">std::int8_t</td>
-<td style="text-align: left;"><a href="#variable-is_sol_enabled"><strong>is_sol_enabled</strong></a>   = <code>false</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">std::size_t</td>
-<td style="text-align: left;"><a href="#variable-local_idx_range_r_offset"><strong>local_idx_range_r_offset</strong></a>   = <code>0</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">std::size_t</td>
-<td style="text-align: left;"><a href="#variable-local_idx_range_theta_offset"><strong>local_idx_range_theta_offset</strong></a>   = <code>0</code><br></td>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridVpar.html"><strong>GridVpar</strong></a>, <a href="structGridMu.html"><strong>GridMu</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangedistributionfunctiontype"><strong>IdxRangeDistributionFunctionType</strong></a>  <br><em>Distribution function index range, define the distribution function layout (layout right).</em></td>
 </tr>
 </tbody>
 </table>
-<h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
-<h3 id="variable-is_limiter_mask_enabled">variable is_limiter_mask_enabled</h3>
-<pre><code class="language-C++">std::int8_t is_limiter_mask_enabled;
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-collisionconfigurationspv2d"><strong>CollisionConfigurationSpV2D</strong></a> (PC_tree_t const &amp; yaml_input_file, <a href="classCollisionConfigurationSpV2D.html#typedef-idxrangedistributionfunctiontype"><strong>IdxRangeDistributionFunctionType</strong></a> index_range_fdistribution, DConstField&lt; IdxRange&lt; <a href="structGridMu.html"><strong>GridMu</strong></a> &gt; &gt; coeff_intdmu, DConstField&lt; IdxRange&lt; <a href="structGridVpar.html"><strong>GridVpar</strong></a> &gt; &gt; coeff_intdvpar, double B_norm, DConstField&lt; IdxRange&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridVpar.html"><strong>GridVpar</strong></a> &gt; &gt; Bstar_s) <br><em>The constructor for the</em> <a href="classCollisionConfigurationSpV2D.html"><em><strong>CollisionConfigurationSpV2D</strong></em></a> <em>class.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">const <a href="classCollisionConfigurationSpV2D.html#typedef-collisionconfigurationdatatype"><strong>CollisionConfigurationDataType</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-configuration"><strong>configuration</strong></a> () const<br><em>Can be used to obtain the quantities the operator needs for its initialisation, modification is not authorised.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-attributes">Protected Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><a href="classCollisionConfigurationSpV2D.html#typedef-collisionconfigurationdatatype"><strong>CollisionConfigurationDataType</strong></a></td>
+<td style="text-align: left;"><a href="#variable-m_operator_quantities"><strong>m_operator_quantities</strong></a>  <br><em>Container for the arrays the quantities the operator needs.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-collisionconfigurationdatatype">typedef CollisionConfigurationDataType</h3>
+<p><em>Container for the operator input data.</em> </p>
+<pre><code class="language-C++">using CollisionConfigurationSpV2D::CollisionConfigurationDataType =  detail::CollisionConfigurationData&lt;
+            IdxRangeDistributionFunctionType,
+            detail::InternalSpoofGridTor3,
+            detail::InternalSpoofGridTor2,
+            detail::InternalSpoofGridTor1,
+            GridVpar,
+            GridMu&gt;;
 </code></pre>
 <hr>
 
-<h3 id="variable-is_sol_enabled">variable is_sol_enabled</h3>
-<pre><code class="language-C++">std::int8_t is_sol_enabled;
+<h3 id="typedef-idxrangedistributionfunctiontype">typedef IdxRangeDistributionFunctionType</h3>
+<p><em>Distribution function index range, define the distribution function layout (layout right).</em> </p>
+<pre><code class="language-C++">using CollisionConfigurationSpV2D::IdxRangeDistributionFunctionType =  IdxRange&lt;Species, GridVpar, GridMu&gt;;
+</code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-collisionconfigurationspv2d">function CollisionConfigurationSpV2D</h3>
+<p><em>The constructor for the</em> <a href="classCollisionConfigurationSpV2D.html"><em><strong>CollisionConfigurationSpV2D</strong></em></a> <em>class.</em></p>
+<pre><code class="language-C++">inline CollisionConfigurationSpV2D::CollisionConfigurationSpV2D (
+    PC_tree_t const &amp; yaml_input_file,
+    IdxRangeDistributionFunctionType index_range_fdistribution,
+    DConstField&lt; IdxRange&lt; GridMu &gt; &gt; coeff_intdmu,
+    DConstField&lt; IdxRange&lt; GridVpar &gt; &gt; coeff_intdvpar,
+    double B_norm,
+    DConstField&lt; IdxRange&lt; Species , GridVpar &gt; &gt; Bstar_s
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>yaml_input_file</code> yaml namelist file object. </li>
+<li><code>index_range_fdistribution</code> index range of the whole distribution function. </li>
+<li><code>coeff_intdmu</code> quadrature coefficients. </li>
+<li><code>coeff_intdvpar</code> quadrature coefficients. </li>
+<li><code>B_norm</code> The norm of the magnetic field. </li>
+<li><code>Bstar_s</code> Bstar defined on the coordinates. </li>
+</ul>
+<hr>
+
+<h3 id="function-configuration">function configuration</h3>
+<p><em>Can be used to obtain the quantities the operator needs for its initialisation, modification is not authorised.</em> </p>
+<pre><code class="language-C++">inline const CollisionConfigurationDataType &amp; CollisionConfigurationSpV2D::configuration () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>const <a href="classCollisionConfigurationSpV2D.html#typedef-collisionconfigurationdatatype"><strong>CollisionConfigurationDataType</strong></a>&amp; </p>
+<hr>
+<h2 id="protected-attributes-documentation">Protected Attributes Documentation</h2>
+<h3 id="variable-m_operator_quantities">variable m_operator_quantities</h3>
+<p><em>Container for the arrays the quantities the operator needs.</em> </p>
+<pre><code class="language-C++">CollisionConfigurationDataType CollisionConfigurationSpV2D::m_operator_quantities;
 </code></pre>
 <hr>
 
-<h3 id="variable-local_idx_range_r_offset">variable local_idx_range_r_offset</h3>
-<pre><code class="language-C++">std::size_t local_idx_range_r_offset;
-</code></pre>
 <hr>
-
-<h3 id="variable-local_idx_range_theta_offset">variable local_idx_range_theta_offset</h3>
-<pre><code class="language-C++">std::size_t local_idx_range_theta_offset;
-</code></pre>
-<hr>
-
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.cpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp</code></p></div>
               
             </div>
           </div><footer>

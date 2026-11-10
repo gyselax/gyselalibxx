@@ -41,7 +41,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**ChargeDensityCalculator**](classChargeDensityCalculator.md) _A class which computes charges density with Kokkos._ 
     * **class** [**MpiChargeDensityCalculator**](classMpiChargeDensityCalculator.md) _A class which computes charges density with Kokkos._ 
 * **class** [**CircularToCartesian**](classCircularToCartesian.md) _A class for describing the circular 2D mapping._ 
-* **class** [**CollisionConfiguration**](classCollisionConfiguration.md) _Class to collect information to initialise the collision operator for a SpVparMu geometry._ 
+* **class** [**CollisionConfigurationSpV2D**](classCollisionConfigurationSpV2D.md) _Class to collect information to initialise the collision operator for a SpVparMu geometry._ 
+* **class** [**CollisionOperator**](classCollisionOperator.md) _A class which computes the collision operator in (Sp,vpar,mu)._ 
 * **class** [**IRightHandSide**](classIRightHandSide.md) _An abstract class representing a source in Boltzmann equation._     
     * **class** [**CollisionsInter**](classCollisionsInter.md) _Class describing the inter-species collision operator._ 
     * **class** [**CollisionsIntra**](classCollisionsIntra.md) _Class describing the intra-species collision operator._ 

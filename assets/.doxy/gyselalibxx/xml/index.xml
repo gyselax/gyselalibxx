@@ -449,23 +449,20 @@
   <compound refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_ebd86d7b2345baf351562d16964c47d9" kind="struct"><name>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, OutsideEdge, false &gt;</name>
     <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_ebd86d7b2345baf351562d16964c47d9_1a1931eea1fd38ba1df11375297932dd76" kind="typedef"><name>type</name></member>
   </compound>
-  <compound refid="classCollisionConfiguration" kind="class"><name>CollisionConfiguration</name>
-    <member refid="classCollisionConfiguration_1a77e5d69224da2c41da3bb3ed08f316e2" kind="typedef"><name>GridMuType</name></member>
-    <member refid="classCollisionConfiguration_1abad505b2c709e1f9a0b2eca642819576" kind="typedef"><name>GridVparType</name></member>
-    <member refid="classCollisionConfiguration_1aec3210b40ef49f0c8d361e6eeeaeac16" kind="typedef"><name>GridThetaType</name></member>
-    <member refid="classCollisionConfiguration_1af70141c99127445cd13f1538bcd5b1b6" kind="typedef"><name>GridRType</name></member>
-    <member refid="classCollisionConfiguration_1ad23e1c19b3c9ad3ec57abf9faeded4a2" kind="typedef"><name>GridPhiType</name></member>
-    <member refid="classCollisionConfiguration_1a8519967631bca4d1974d92445159e363" kind="typedef"><name>GridSpType</name></member>
-    <member refid="classCollisionConfiguration_1a4e186e5b73d038f9506f12ca595a0c13" kind="typedef"><name>IdxRangeMuType</name></member>
-    <member refid="classCollisionConfiguration_1ae670abd3ec52030c53d712175336c244" kind="typedef"><name>IdxRangeVparType</name></member>
-    <member refid="classCollisionConfiguration_1acacaddd6c74b2c52ee14e6b5d4983467" kind="typedef"><name>IdxRangeSpVparType</name></member>
-    <member refid="classCollisionConfiguration_1af04c3dc20040cbe7a074981e9d153b85" kind="typedef"><name>IdxRangeDistributionFunctionType</name></member>
-    <member refid="classCollisionConfiguration_1a573072f26a780ba683a6845118d67b74" kind="typedef"><name>CollisionConfigurationDataType</name></member>
-    <member refid="classCollisionConfiguration_1abbb71a5c50b25e240239cac2439bfe47" kind="variable"><name>m_operator_quantities</name></member>
-    <member refid="classCollisionConfiguration_1a0706676008a4369fad2a2817ae531c31" kind="variable"><name>m_nustar0</name></member>
-    <member refid="classCollisionConfiguration_1a0215481eecb81a3068c3335cf0929104" kind="function"><name>CollisionConfiguration</name></member>
-    <member refid="classCollisionConfiguration_1a806514341ca2509be90b2db2d6d4fbe3" kind="function"><name>configuration</name></member>
-    <member refid="classCollisionConfiguration_1a43d76d19ef1e45a5fa778c7c59f76471" kind="function"><name>do_configuration_data_initialisation</name></member>
+  <compound refid="classCollisionConfigurationSpV2D" kind="class"><name>CollisionConfigurationSpV2D</name>
+    <member refid="classCollisionConfigurationSpV2D_1a4752dfca238c3ef4921565f85a8d826a" kind="typedef"><name>IdxRangeDistributionFunctionType</name></member>
+    <member refid="classCollisionConfigurationSpV2D_1a0cce21e3ea93e839f016145799cff735" kind="typedef"><name>CollisionConfigurationDataType</name></member>
+    <member refid="classCollisionConfigurationSpV2D_1a1dea44cc35f1548ee220805a2195930c" kind="variable"><name>m_operator_quantities</name></member>
+    <member refid="classCollisionConfigurationSpV2D_1a1a74ffefcaa7c49af2eaa4ab58dcb987" kind="function"><name>CollisionConfigurationSpV2D</name></member>
+    <member refid="classCollisionConfigurationSpV2D_1aa98be8be5e5559da39b8681ce586fac6" kind="function"><name>configuration</name></member>
+  </compound>
+  <compound refid="classCollisionOperator" kind="class"><name>CollisionOperator</name>
+    <member refid="classCollisionOperator_1a4c6312842f7adb49b1e60f00de2e0edd" kind="typedef"><name>IdxRangeDistributionFunctionType</name></member>
+    <member refid="classCollisionOperator_1a4c869f1f145362a80942b4cf68c3bc25" kind="typedef"><name>CollisionConfigurationDataType</name></member>
+    <member refid="classCollisionOperator_1aca7d5270ca997807d28f0a2e8739a256" kind="variable"><name>m_collision_configuration</name></member>
+    <member refid="classCollisionOperator_1a41cfa98784127d460f7ad4e406e07d4d" kind="variable"><name>m_operator</name></member>
+    <member refid="classCollisionOperator_1a09a154fc78498045bcc66c58deeb2683" kind="function"><name>CollisionOperator</name></member>
+    <member refid="classCollisionOperator_1aa89fff8526ffc5981d744e41878d954b" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classCollisionsInter" kind="class"><name>CollisionsInter</name>
     <member refid="classCollisionsInter_1ac347895e69a0812c22f5004a6016acd2" kind="variable"><name>m_nustar0</name></member>
@@ -4049,12 +4046,6 @@
   <compound refid="spline__polar__foot__finder_8hpp" kind="file"><name>spline_polar_foot_finder.hpp</name>
   </compound>
   <compound refid="collision__common__configuration_8hpp" kind="file"><name>collision_common_configuration.hpp</name>
-  </compound>
-  <compound refid="collision__operator_8cpp" kind="file"><name>collision_operator.cpp</name>
-    <member refid="collision__operator_8cpp_1a022d351f177d08555cf5ad887858a73b" kind="variable"><name>local_idx_range_r_offset</name></member>
-    <member refid="collision__operator_8cpp_1a20a61f0c70506b40be4883401c369b90" kind="variable"><name>local_idx_range_theta_offset</name></member>
-    <member refid="collision__operator_8cpp_1a3e5826074a0691d0a47a2aa9074524dc" kind="variable"><name>is_sol_enabled</name></member>
-    <member refid="collision__operator_8cpp_1a878048a648864a786105b0b734c3532d" kind="variable"><name>is_limiter_mask_enabled</name></member>
   </compound>
   <compound refid="collision__operator_8hpp" kind="file"><name>collision_operator.hpp</name>
   </compound>

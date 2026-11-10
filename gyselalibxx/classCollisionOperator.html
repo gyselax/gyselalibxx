@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File collision_operator.cpp - GyselalibX</title>
+    <title>Class CollisionOperator - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File collision_operator.cpp";
-        var mkdocs_page_input_path = "gyselalibxx/collision__operator_8cpp_source.md";
+        var mkdocs_page_name = "Class CollisionOperator";
+        var mkdocs_page_input_path = "gyselalibxx/classCollisionOperator.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -565,9 +565,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File collision_operator.cpp</li>
+      <li class="breadcrumb-item active">Class CollisionOperator</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/collision__operator_8cpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classCollisionOperator.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,93 +575,125 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-collision_operatorcpp">File collision_operator.cpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_64163437c27c8707f17f92558da22106.html"><strong>collisions</strong></a> <strong>&gt;</strong> <a href="collision__operator_8cpp.html"><strong>collision_operator.cpp</strong></a></p>
-<p><a href="collision__operator_8cpp.html">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">#include &lt;KOLIOP/koliop.h&gt;
+                <div><h1 id="class-collisionoperator">Class CollisionOperator</h1>
+<p><strong>template &lt;class CollisionConfiguration&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classCollisionOperator.html"><strong>CollisionOperator</strong></a></p>
+<p><em>A class which computes the collision operator in (Sp,vpar,mu).</em> </p>
+<ul>
+<li><code>#include &lt;collision_operator.hpp&gt;</code></li>
+</ul>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename CollisionConfiguration::CollisionConfigurationDataType</td>
+<td style="text-align: left;"><a href="#typedef-collisionconfigurationdatatype"><strong>CollisionConfigurationDataType</strong></a>  <br><a href="classCollisionOperator.html#typedef-collisionconfigurationdatatype"><em><strong>CollisionConfigurationDataType</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename CollisionConfiguration::IdxRangeDistributionFunctionType</td>
+<td style="text-align: left;"><a href="#typedef-idxrangedistributionfunctiontype"><strong>IdxRangeDistributionFunctionType</strong></a>  <br><a href="classCollisionOperator.html#typedef-idxrangedistributionfunctiontype"><em><strong>IdxRangeDistributionFunctionType</strong></em></a> <em>.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-collisionoperator"><strong>CollisionOperator</strong></a> (CollisionConfiguration const &amp; collision_configuration) <br><em>Construct a new Collision Operator object.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DField&lt; <a href="classCollisionOperator.html#typedef-idxrangedistributionfunctiontype"><strong>IdxRangeDistributionFunctionType</strong></a> &gt; all_f_distribution, double deltat_coll) <br><em>Apply the collision operator to the distribution functions of all species on all species.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-attributes">Protected Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">CollisionConfiguration const  &amp;</td>
+<td style="text-align: left;"><a href="#variable-m_collision_configuration"><strong>m_collision_configuration</strong></a>  <br><em>The collision configuration.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">koliop::collisions::Operator</td>
+<td style="text-align: left;"><a href="#variable-m_operator"><strong>m_operator</strong></a>  <br><em>Opaque C type representing the operator.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-collisionconfigurationdatatype">typedef CollisionConfigurationDataType</h3>
+<p><a href="classCollisionOperator.html#typedef-collisionconfigurationdatatype"><em><strong>CollisionConfigurationDataType</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using CollisionOperator&lt; CollisionConfiguration &gt;::CollisionConfigurationDataType = 
+            typename CollisionConfiguration::CollisionConfigurationDataType;
+</code></pre>
+<hr>
 
-#include "assert.hpp"
-#include "collision_operator.hpp"
+<h3 id="typedef-idxrangedistributionfunctiontype">typedef IdxRangeDistributionFunctionType</h3>
+<p><a href="classCollisionOperator.html#typedef-idxrangedistributionfunctiontype"><em><strong>IdxRangeDistributionFunctionType</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using CollisionOperator&lt; CollisionConfiguration &gt;::IdxRangeDistributionFunctionType = 
+            typename CollisionConfiguration::IdxRangeDistributionFunctionType;
+</code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-collisionoperator">function CollisionOperator</h3>
+<p><em>Construct a new Collision Operator object.</em> </p>
+<pre><code class="language-C++">inline explicit CollisionOperator::CollisionOperator (
+    CollisionConfiguration const &amp; collision_configuration
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>collision_configuration</code> This parametrise the operator. It contains the data required for its initialisation. </li>
+</ul>
+<hr>
 
-// NOTE: Offset of in the r dimension. Used in the Fortran code.
-static inline constexpr std::size_t local_idx_range_r_offset = 0;
-// NOTE: Offset of in the theta dimension. Used in the Fortran code.
-static inline constexpr std::size_t local_idx_range_theta_offset = 0;
+<h3 id="function-operator">function operator()</h3>
+<p><em>Apply the collision operator to the distribution functions of all species on all species.</em> </p>
+<pre><code class="language-C++">inline void CollisionOperator::operator() (
+    DField&lt; IdxRangeDistributionFunctionType &gt; all_f_distribution,
+    double deltat_coll
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>all_f_distribution</code> All the distribution function, depending on the CollisionConfiguration, the existence of the special dimension may vary. At most, we have (species, tor3, tor1, tor2, vpar, mu) in layout right. </li>
+<li><code>deltat_coll</code> Collision time step. </li>
+</ul>
+<hr>
+<h2 id="protected-attributes-documentation">Protected Attributes Documentation</h2>
+<h3 id="variable-m_collision_configuration">variable m_collision_configuration</h3>
+<p><em>The collision configuration.</em> </p>
+<pre><code class="language-C++">CollisionConfiguration const&amp; CollisionOperator&lt; CollisionConfiguration &gt;::m_collision_configuration;
+</code></pre>
+<hr>
 
-// NOTE: For now, these are constant. When more physics get implemented, pass
-// them to the Collisions operator's constructor.
-// NOTE: Enable masking.
-static inline constexpr std::int8_t is_sol_enabled = false;
-static inline constexpr std::int8_t is_limiter_mask_enabled = true;
+<h3 id="variable-m_operator">variable m_operator</h3>
+<p><em>Opaque C type representing the operator.</em> </p>
+<pre><code class="language-C++">koliop::collisions::Operator CollisionOperator&lt; CollisionConfiguration &gt;::m_operator;
+</code></pre>
+<hr>
 
-namespace detail {
-
-::koliop_Operator do_operator_initialisation(
-        std::size_t mu_extent,
-        std::size_t vpar_extent,
-        std::size_t tor1_extent,
-        std::size_t tor2_extent,
-        std::size_t tor3_extent,
-        std::size_t species_extent,
-        std::int8_t collision_interspecies,
-        std::int64_t ir_sol_separatrix,
-        double const* hat_As,
-        double const* hat_Zs,
-        double const* mug,
-        double const* vparg,
-        double const* coeff_intdmu,
-        double const* coeff_intdvpar,
-        double const* coeff_AD_r,
-        double const* mask_buffer_r,
-        double const* mask_limiter,
-        double const* B_norm,
-        double const* Bstar_s)
-{
-    ::koliop_Operator operator_handle;
-
-    if (::koliop_Create(
-                &amp;operator_handle,
-                mu_extent,
-                vpar_extent,
-                tor1_extent,
-                tor2_extent,
-                tor3_extent,
-                species_extent,
-                tor1_extent, // NOTE: No MPI index range decomposition.
-                tor2_extent, // NOTE: No MPI index range decomposition.
-                local_idx_range_r_offset,
-                local_idx_range_theta_offset,
-                collision_interspecies,
-                is_sol_enabled,
-                is_limiter_mask_enabled,
-                ir_sol_separatrix,
-                hat_As,
-                hat_Zs,
-                mug,
-                vparg,
-                coeff_intdmu,
-                coeff_intdvpar,
-                coeff_AD_r,
-                mask_buffer_r,
-                mask_limiter,
-                B_norm,
-                Bstar_s)
-        != KOLIOP_STATUS_SUCCESS) {
-        GSLX_ASSERT(false);
-    }
-
-    return operator_handle;
-}
-
-void do_operator_deinitialisation(::koliop_Operator operator_handle)
-{
-    if (::koliop_Release(operator_handle) != KOLIOP_STATUS_SUCCESS) {
-        GSLX_ASSERT(false);
-    }
-}
-
-} // namespace detail
-</code></pre></div>
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp</code></p></div>
               
             </div>
           </div><footer>

@@ -453,6 +453,8 @@
       <node id="110">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp</label>
         <link refid="geometry__vpar__mu_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
         <childnode refid="111" relation="include">
         </childnode>
         <childnode refid="113" relation="include">

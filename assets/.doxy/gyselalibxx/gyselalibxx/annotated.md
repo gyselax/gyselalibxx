@@ -27,7 +27,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**CentralFDMPartialDerivativeWithBValueCreator**](classCentralFDMPartialDerivativeWithBValueCreator.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**CentralFDMPartialDerivativeWithBValue**_](classCentralFDMPartialDerivativeWithBValue.md) _class._    
 * **class** [**ChargeDensityCalculator**](classChargeDensityCalculator.md) _A class which computes charges density with Kokkos._     
 * **class** [**CircularToCartesian**](classCircularToCartesian.md) _A class for describing the circular 2D mapping._     
-* **class** [**CollisionConfiguration**](classCollisionConfiguration.md) _Class to collect information to initialise the collision operator for a SpVparMu geometry._     
+* **class** [**CollisionConfigurationSpV2D**](classCollisionConfigurationSpV2D.md) _Class to collect information to initialise the collision operator for a SpVparMu geometry._     
+* **class** [**CollisionOperator**](classCollisionOperator.md) _A class which computes the collision operator in (Sp,vpar,mu)._     
 * **class** [**CollisionsInter**](classCollisionsInter.md) _Class describing the inter-species collision operator._     
 * **class** [**CollisionsIntra**](classCollisionsIntra.md) _Class describing the intra-species collision operator._     
     * **struct** [**GhostedVx**](structCollisionsIntra_1_1GhostedVx.md) 

@@ -779,6 +779,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>The default residual tolerance of <code>MatrixBatchCsr</code> is now <code>1e-8</code> (instead of <code>1e-15</code>).</li>
 <li>Speed up the matrix assembly and RHS computation of <code>PolarSplineFEMPoissonLikeSolver</code>.</li>
 <li>The constructor of <code>PolarSplineFEMPoissonLikeSolver</code> now takes the full index range on which <span class="arithmatex">\(\phi\)</span> is defined (including any batch dimensions).</li>
+<li>Speedup the koliop collision operator.</li>
+<li>Simplified the koliop bindings.</li>
 <li>Allow <code>MPILayout</code> and <code>MPITransposeAllToAll</code> to be used with more MPI ranks than points in the distributed dimensions.</li>
 <li>The constructor of <code>LiePoissonBracket</code> now takes the metric tensor as an argument (in addition to the mapping). The type of the metric tensor is an additional template parameter.</li>
 <li>The template parameter of <code>Gradient</code> must now satisfy <code>concepts::MetricTensor</code>.</li>
@@ -811,6 +813,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Remove Dask dependency in the tests.</li>
 <li>Update DDC to <a href="https://github.com/CExA-project/ddc/releases/tag/v0.17.0">v0.17.0</a>.</li>
 <li>Update GMGPolar dependency to <a href="https://github.com/SciCompMod/GMGPolar/releases/tag/v2.4.1">v2.4.0</a>.</li>
+<li>Upgrade to koliop@1.1.1.</li>
 </ul>
 <h2 id="v080-2026-09-09">[v0.8.0] - 2026-09-09</h2>
 <h3 id="added_1">Added</h3>

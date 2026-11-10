@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classCollisionConfigurationSpV2D" kind="class" language="C++" prot="public">
+    <compoundname>CollisionConfigurationSpV2D</compoundname>
+    <includes refid="collision__configuration_8hpp" local="no">collision_configuration.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCollisionConfigurationSpV2D_1a4752dfca238c3ef4921565f85a8d826a" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVpar" kindref="compound">GridVpar</ref>, <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using CollisionConfigurationSpV2D::IdxRangeDistributionFunctionType =  IdxRange&lt;Species, GridVpar, GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeDistributionFunctionType</name>
+        <qualifiedname>CollisionConfigurationSpV2D::IdxRangeDistributionFunctionType</qualifiedname>
+        <briefdescription>
+<para>Distribution function index range, define the distribution function layout (layout right). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="20" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfigurationSpV2D_1a0cce21e3ea93e839f016145799cff735" prot="public" static="no">
+        <type>detail::CollisionConfigurationData&lt; <ref refid="classCollisionConfigurationSpV2D_1a4752dfca238c3ef4921565f85a8d826a" kindref="member">IdxRangeDistributionFunctionType</ref>, detail::InternalSpoofGridTor3, detail::InternalSpoofGridTor2, detail::InternalSpoofGridTor1, <ref refid="structGridVpar" kindref="compound">GridVpar</ref>, <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using CollisionConfigurationSpV2D::CollisionConfigurationDataType =  detail::CollisionConfigurationData&lt;
+            IdxRangeDistributionFunctionType,
+            detail::InternalSpoofGridTor3,
+            detail::InternalSpoofGridTor2,
+            detail::InternalSpoofGridTor1,
+            GridVpar,
+            GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>CollisionConfigurationDataType</name>
+        <qualifiedname>CollisionConfigurationSpV2D::CollisionConfigurationDataType</qualifiedname>
+        <briefdescription>
+<para>Container for the operator input data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classCollisionConfigurationSpV2D_1a1dea44cc35f1548ee220805a2195930c" prot="protected" static="no" mutable="no">
+        <type><ref refid="classCollisionConfigurationSpV2D_1a0cce21e3ea93e839f016145799cff735" kindref="member">CollisionConfigurationDataType</ref></type>
+        <definition>CollisionConfigurationDataType CollisionConfigurationSpV2D::m_operator_quantities</definition>
+        <argsstring></argsstring>
+        <name>m_operator_quantities</name>
+        <qualifiedname>CollisionConfigurationSpV2D::m_operator_quantities</qualifiedname>
+        <briefdescription>
+<para>Container for the arrays the quantities the operator needs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="98" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCollisionConfigurationSpV2D_1a1a74ffefcaa7c49af2eaa4ab58dcb987" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CollisionConfigurationSpV2D::CollisionConfigurationSpV2D</definition>
+        <argsstring>(PC_tree_t const &amp;yaml_input_file, IdxRangeDistributionFunctionType index_range_fdistribution, DConstField&lt; IdxRange&lt; GridMu &gt; &gt; coeff_intdmu, DConstField&lt; IdxRange&lt; GridVpar &gt; &gt; coeff_intdvpar, double B_norm, DConstField&lt; IdxRange&lt; Species, GridVpar &gt; &gt; Bstar_s)</argsstring>
+        <name>CollisionConfigurationSpV2D</name>
+        <qualifiedname>CollisionConfigurationSpV2D::CollisionConfigurationSpV2D</qualifiedname>
+        <param>
+          <type>PC_tree_t const &amp;</type>
+          <declname>yaml_input_file</declname>
+        </param>
+        <param>
+          <type><ref refid="classCollisionConfigurationSpV2D_1a4752dfca238c3ef4921565f85a8d826a" kindref="member">IdxRangeDistributionFunctionType</ref></type>
+          <declname>index_range_fdistribution</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRange&lt; <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt; &gt;</type>
+          <declname>coeff_intdmu</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRange&lt; <ref refid="structGridVpar" kindref="compound">GridVpar</ref> &gt; &gt;</type>
+          <declname>coeff_intdvpar</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>B_norm</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVpar" kindref="compound">GridVpar</ref> &gt; &gt;</type>
+          <declname>Bstar_s</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for the <ref refid="classCollisionConfigurationSpV2D" kindref="compound">CollisionConfigurationSpV2D</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yaml_input_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yaml namelist file object. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index_range_fdistribution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index range of the whole distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coeff_intdmu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>quadrature coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coeff_intdvpar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>quadrature coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">B_norm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The norm of the magnetic field. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">Bstar_s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bstar defined on the coordinates. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="44" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionConfigurationSpV2D_1aa98be8be5e5559da39b8681ce586fac6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classCollisionConfigurationSpV2D_1a0cce21e3ea93e839f016145799cff735" kindref="member">CollisionConfigurationDataType</ref> &amp;</type>
+        <definition>const CollisionConfigurationDataType &amp; CollisionConfigurationSpV2D::configuration</definition>
+        <argsstring>() const</argsstring>
+        <name>configuration</name>
+        <qualifiedname>CollisionConfigurationSpV2D::configuration</qualifiedname>
+        <briefdescription>
+<para>Can be used to obtain the quantities the operator needs for its initialisation, modification is not authorised. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>const <ref refid="classCollisionConfigurationSpV2D_1a0cce21e3ea93e839f016145799cff735" kindref="member">CollisionConfigurationDataType</ref>&amp; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="89" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="89" bodyend="92"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Class to collect information to initialise the collision operator for a SpVparMu geometry. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>CollisionConfigurationSpV2D</label>
+        <link refid="classCollisionConfigurationSpV2D"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_operator_quantities</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::CollisionConfigurationData&lt; IdxRangeDistributionFunctionType, detail::InternalSpoofGridTor3, detail::InternalSpoofGridTor2, detail::InternalSpoofGridTor1, GridVpar, GridMu &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="14" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="15" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classCollisionConfigurationSpV2D_1a0cce21e3ea93e839f016145799cff735" prot="public" virt="non-virtual"><scope>CollisionConfigurationSpV2D</scope><name>CollisionConfigurationDataType</name></member>
+      <member refid="classCollisionConfigurationSpV2D_1a1a74ffefcaa7c49af2eaa4ab58dcb987" prot="public" virt="non-virtual"><scope>CollisionConfigurationSpV2D</scope><name>CollisionConfigurationSpV2D</name></member>
+      <member refid="classCollisionConfigurationSpV2D_1aa98be8be5e5559da39b8681ce586fac6" prot="public" virt="non-virtual"><scope>CollisionConfigurationSpV2D</scope><name>configuration</name></member>
+      <member refid="classCollisionConfigurationSpV2D_1a4752dfca238c3ef4921565f85a8d826a" prot="public" virt="non-virtual"><scope>CollisionConfigurationSpV2D</scope><name>IdxRangeDistributionFunctionType</name></member>
+      <member refid="classCollisionConfigurationSpV2D_1a1dea44cc35f1548ee220805a2195930c" prot="protected" virt="non-virtual"><scope>CollisionConfigurationSpV2D</scope><name>m_operator_quantities</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

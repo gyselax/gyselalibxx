@@ -595,124 +595,84 @@ struct InternalSpoofGrid : ddc::DiscreteDimension
 {
 };
 
-struct InternalSpoofGridR : InternalSpoofGrid
+struct InternalSpoofGridTor3 : InternalSpoofGrid
 {
 };
 
-struct InternalSpoofGridTheta : InternalSpoofGrid
+struct InternalSpoofGridTor2 : InternalSpoofGrid
 {
 };
 
-struct InternalSpoofGridPhi : InternalSpoofGrid
+struct InternalSpoofGridTor1 : InternalSpoofGrid
 {
 };
 
 template &lt;
         class IdxRangeDistributionFunction,
-        class GridSp,
-        class GridPhi,
-        class GridR,
-        class GridTheta,
-        class GridVpar,
-        class GridMu&gt;
+        class GridTor3Type,
+        class GridTor2Type,
+        class GridTor1Type,
+        class GridVparType,
+        class GridMuType&gt;
 class CollisionConfigurationData
 {
 public:
-    using IdxRangeDistributionFunctionType = IdxRangeDistributionFunction;
-
-    using GridMuType = GridMu;
-    using GridVparType = GridVpar;
-    using GridRType = GridR;
-    using GridThetaType = GridTheta;
-    using GridPhiType = GridPhi;
-    using GridSpType = GridSp;
-
-    using IdxRangeSpThetaRVparType = IdxRange&lt;GridSpType, GridThetaType, GridRType, GridVparType&gt;;
-    using IdxRangeThetaRType = IdxRange&lt;GridThetaType, GridRType&gt;;
-
-    using IdxRangeMuType = IdxRange&lt;GridMuType&gt;;
-    using IdxRangeVparType = IdxRange&lt;GridVparType&gt;;
-    using IdxRangeRType = IdxRange&lt;GridRType&gt;;
-    using IdxRangeSpType = IdxRange&lt;GridSpType&gt;;
-
     static_assert(
-            ddc::is_uniform_point_sampling_v&lt;GridVparType&gt;,
+            ddc::is_uniform_point_sampling_v&lt;GridVpar&gt;,
             "The grid must be uniform in the vpar direction.");
     static_assert(
-            ddc::is_uniform_point_sampling_v&lt;GridVparType&gt;,
+            ddc::is_uniform_point_sampling_v&lt;GridVpar&gt;,
             "The grid must be uniform in the mu direction.");
 
 public:
     CollisionConfigurationData(
             PC_tree_t const&amp; yaml_input_file,
-            IdxRangeDistributionFunctionType index_range_fdistribution,
-            DConstField&lt;IdxRangeMuType&gt; coeff_intdmu,
-            DConstField&lt;IdxRangeVparType&gt; coeff_intdvpar)
-        : m_hat_As_allocation {extract_md_index_range&lt;GridSpType&gt;(index_range_fdistribution)}
-        , m_hat_Zs_allocation {extract_md_index_range&lt;GridSpType&gt;(index_range_fdistribution)}
-        , m_mask_buffer_r_allocation {extract_md_index_range&lt;GridRType&gt;(index_range_fdistribution)}
-        , m_mask_LIM_allocation {extract_md_index_range&lt;GridThetaType, GridRType&gt;(
-                  index_range_fdistribution)}
-        , m_B_norm_allocation {extract_md_index_range&lt;GridThetaType, GridRType&gt;(
+            IdxRangeDistributionFunction index_range_fdistribution,
+            DConstField&lt;IdxRange&lt;GridMu&gt;&gt; coeff_intdmu,
+            DConstField&lt;IdxRange&lt;GridVpar&gt;&gt; coeff_intdvpar)
+        : m_hat_As_allocation {extract_md_index_range&lt;Species&gt;(index_range_fdistribution)}
+        , m_hat_Zs_allocation {extract_md_index_range&lt;Species&gt;(index_range_fdistribution)}
+        , m_B_norm_allocation {extract_md_index_range&lt;GridTor3Type, GridTor1Type, GridTor2Type&gt;(
                   index_range_fdistribution)}
         , m_Bstar_s_allocation {extract_md_index_range&lt;
-                  GridSpType,
-                  GridThetaType,
-                  GridRType,
-                  GridVparType&gt;(index_range_fdistribution)}
-        , m_mug_allocation {extract_md_index_range&lt;GridMuType&gt;(index_range_fdistribution)}
-        , m_vparg_allocation {extract_md_index_range&lt;GridVparType&gt;(index_range_fdistribution)}
-        , m_coeff_AD_allocation {extract_md_index_range&lt;GridRType&gt;(index_range_fdistribution)}
+                  Species,
+                  GridTor3Type,
+                  GridTor1Type,
+                  GridTor2Type,
+                  GridVpar&gt;(index_range_fdistribution)}
+        , m_mug_allocation {extract_md_index_range&lt;GridMu&gt;(index_range_fdistribution)}
+        , m_vparg_allocation {extract_md_index_range&lt;GridVpar&gt;(index_range_fdistribution)}
         , m_coeff_intdmu {coeff_intdmu}
         , m_coeff_intdvpar {coeff_intdvpar}
+        , m_coeff_AD_allocation {extract_md_index_range&lt;GridTor1Type&gt;(index_range_fdistribution)}
+        , m_nu_ref {::PCpp_double(yaml_input_file, ".Collisions.nu_ref")}
         , m_collisions_interspecies {::PCpp_bool(yaml_input_file, ".Collisions.interspecies")}
-        , m_mu_extent {extract_md_index_range&lt;GridMuType&gt;(index_range_fdistribution).size()}
-        , m_vpar_extent {extract_md_index_range&lt;GridVparType&gt;(index_range_fdistribution).size()}
-        , m_r_extent {extract_md_index_range&lt;GridRType&gt;(index_range_fdistribution).size()}
-        , m_theta_extent {extract_md_index_range&lt;GridThetaType&gt;(index_range_fdistribution).size()}
-        , m_phi_extent {extract_md_index_range&lt;GridPhiType&gt;(index_range_fdistribution).size()}
-        , m_sp_extent {extract_md_index_range&lt;GridSpType&gt;(index_range_fdistribution).size()}
+        , m_mu_extent {extract_md_index_range&lt;GridMu&gt;(index_range_fdistribution).size()}
+        , m_vpar_extent {extract_md_index_range&lt;GridVpar&gt;(index_range_fdistribution).size()}
+        , m_theta_extent {extract_md_index_range&lt;GridTor2Type&gt;(index_range_fdistribution).size()}
+        , m_r_extent {extract_md_index_range&lt;GridTor1Type&gt;(index_range_fdistribution).size()}
+        , m_phi_extent {extract_md_index_range&lt;GridTor3Type&gt;(index_range_fdistribution).size()}
+        , m_species_extent {extract_md_index_range&lt;Species&gt;(index_range_fdistribution).size()}
     {
-        if (!((m_r_extent &gt; 0) &amp;&amp; ((m_r_extent &amp; (m_r_extent - 1)) == 0) &amp;&amp; (m_theta_extent &gt; 0)
-              &amp;&amp; ((m_theta_extent &amp; (m_theta_extent - 1)) == 0) &amp;&amp; (m_phi_extent &gt; 0)
-              &amp;&amp; ((m_phi_extent &amp; (m_phi_extent - 1)) == 0))) {
-            throw std::runtime_error("For performance reason, the number of points in "
-                                     "each dimension must be a power of 2.");
-        }
-
-        /* Define default array values. The user of CollisionConfigurationData
-         * is free to modify these.
+        /* Define default array values. The user of CollisionConfigurationData is free to modify these.
          */
-
         {
-            IdxRangeSpType const index_range_sp
-                    = extract_md_index_range&lt;GridSpType&gt;(index_range_fdistribution);
+            IdxRange&lt;Species&gt; const index_range_sp
+                    = extract_md_index_range&lt;Species&gt;(index_range_fdistribution);
 
             /* Initialise the mass species.
              */
             host_t&lt;DConstFieldSp&gt; hat_As_host
-                    = ddc::host_discrete_space&lt;GridSpType&gt;().masses()[index_range_sp];
+                    = ddc::host_discrete_space&lt;Species&gt;().masses()[index_range_sp];
             ddc::parallel_deepcopy(get_field(m_hat_As_allocation), hat_As_host);
 
             /* Initialise the species charge.
              */
             host_t&lt;DConstFieldSp&gt; hat_Zs_host
-                    = ddc::host_discrete_space&lt;GridSpType&gt;().charges()[index_range_sp];
+                    = ddc::host_discrete_space&lt;Species&gt;().charges()[index_range_sp];
             ddc::parallel_deepcopy(get_field(m_hat_Zs_allocation), hat_Zs_host);
         }
-
         {
-            /* Disabling Initialisation of the masks that have no sense here to
-             * 0.
-             * Masked if &gt;= 0.99
-             */
-            ddc::parallel_fill(get_field(m_mask_buffer_r_allocation), 0.0);
-            ddc::parallel_fill(get_field(m_mask_LIM_allocation), 0.0);
-        }
-
-        {
-            /* Initialise grid coordinates.
-             */
             ddcHelper::
                     dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(m_mug_allocation));
             ddcHelper::dump_coordinates(
@@ -738,6 +698,43 @@ public:
                             destination_index);
                     destination(destination_index) = source(source_index);
                 });
+    }
+
+    template &lt;class View&gt;
+    static auto as_layout_left(const View&amp; a_view)
+    {
+        if constexpr (std::is_same_v&lt;typename View::array_layout, Kokkos::LayoutRight&gt;) {
+            return [&amp;]&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;)
+            {
+                return Kokkos::View&lt;
+                        typename View::data_type,
+                        Kokkos::LayoutLeft,
+                        typename View::device_type,
+                        Kokkos::MemoryTraits&lt;Kokkos::Unmanaged&gt;&gt; {
+                        a_view.data(),
+                        a_view.extent(View::rank - 1 - I)...};
+            }
+            (std::make_index_sequence&lt;View::rank&gt; {});
+        } else {
+            return a_view;
+        }
+    }
+
+    template &lt;class View&gt;
+    auto cast_fdistrib(const View&amp; a_view) const
+    {
+        return Kokkos::View&lt;
+                typename View::value_type******,
+                Kokkos::LayoutLeft,
+                typename View::device_type,
+                Kokkos::MemoryTraits&lt;Kokkos::Unmanaged&gt;&gt;(
+                a_view.data(),
+                m_mu_extent,
+                m_vpar_extent,
+                m_theta_extent,
+                m_r_extent,
+                m_phi_extent,
+                m_species_extent);
     }
 
 protected:
@@ -766,31 +763,27 @@ protected:
         return IdxRange&lt;Grid1D...&gt;(extract_1d_index_range&lt;Grid1D&gt;(index_range)...);
     }
 
-    /* Not protected nor private because there is no internal state to
-     * protect/condition to satisfy.
-     */
 public:
-    DFieldMem&lt;IdxRangeSpType&gt; m_hat_As_allocation;
+    DFieldMem&lt;IdxRange&lt;Species&gt;&gt; m_hat_As_allocation;
 
-    DFieldMem&lt;IdxRangeSpType&gt; m_hat_Zs_allocation;
+    DFieldMem&lt;IdxRange&lt;Species&gt;&gt; m_hat_Zs_allocation;
 
-    DFieldMem&lt;IdxRangeRType&gt; m_mask_buffer_r_allocation;
+    DFieldMem&lt;IdxRange&lt;GridTor3Type, GridTor1Type, GridTor2Type&gt;&gt; m_B_norm_allocation;
 
-    DFieldMem&lt;IdxRangeThetaRType&gt; m_mask_LIM_allocation;
+    DFieldMem&lt;IdxRange&lt;Species, GridTor3Type, GridTor1Type, GridTor2Type, GridVpar&gt;&gt;
+            m_Bstar_s_allocation;
 
-    DFieldMem&lt;IdxRangeThetaRType&gt; m_B_norm_allocation;
+    DFieldMem&lt;IdxRange&lt;GridMu&gt;&gt; m_mug_allocation;
 
-    DFieldMem&lt;IdxRangeSpThetaRVparType&gt; m_Bstar_s_allocation;
+    DFieldMem&lt;IdxRange&lt;GridVpar&gt;&gt; m_vparg_allocation;
 
-    DFieldMem&lt;IdxRangeMuType&gt; m_mug_allocation;
+    DConstField&lt;IdxRange&lt;GridMu&gt;&gt; m_coeff_intdmu;
 
-    DFieldMem&lt;IdxRangeVparType&gt; m_vparg_allocation;
+    DConstField&lt;IdxRange&lt;GridVpar&gt;&gt; m_coeff_intdvpar;
 
-    DFieldMem&lt;IdxRangeRType&gt; m_coeff_AD_allocation;
+    DFieldMem&lt;IdxRange&lt;GridTor1Type&gt;&gt; m_coeff_AD_allocation;
 
-    DConstField&lt;IdxRangeMuType&gt; m_coeff_intdmu;
-
-    DConstField&lt;IdxRangeVparType&gt; m_coeff_intdvpar;
+    double m_nu_ref;
 
     bool m_collisions_interspecies;
 
@@ -798,13 +791,13 @@ public:
 
     std::size_t m_vpar_extent;
 
-    std::size_t m_r_extent;
-
     std::size_t m_theta_extent;
+
+    std::size_t m_r_extent;
 
     std::size_t m_phi_extent;
 
-    std::size_t m_sp_extent;
+    std::size_t m_species_extent;
 };
 } // namespace detail
 </code></pre></div>

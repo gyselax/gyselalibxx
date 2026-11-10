@@ -12,6 +12,7 @@
 
 * `#include <paraconf.h>`
 * `#include "collision_common_configuration.hpp"`
+* `#include "geometry_vpar_mu.hpp"`
 * `#include "paraconfpp.hpp"`
 
 
@@ -32,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**CollisionConfiguration**](classCollisionConfiguration.md) &lt;class GridSp, class [**GridVpar**](structGridVpar.md), class [**GridMu**](structGridMu.md)&gt;<br>_Class to collect information to initialise the collision operator for a SpVparMu geometry._  |
+| class | [**CollisionConfigurationSpV2D**](classCollisionConfigurationSpV2D.md) <br>_Class to collect information to initialise the collision operator for a SpVparMu geometry._  |
 
 
 
