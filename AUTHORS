@@ -38,7 +38,8 @@ Baptiste Legouix
 - GPU porting
 
 Etienne Malaboeuf
-- Coupling to Koliop
+- Koliop collision operator development
+- Koliop coupling to Gyselalibxx
 
 Yann Munschy
 - Developments in the (x, vx) geometry

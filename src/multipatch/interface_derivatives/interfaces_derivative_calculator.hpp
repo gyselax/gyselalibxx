@@ -114,6 +114,8 @@ public:
     /// @brief Index on the two derivative dimensions of patch_direction.
     using idx_cross_deriv = typename base_type::idx_cross_deriv;
 
+private:
+    using base_type::m_idx_ranges;
 
 public:
     /**
@@ -205,17 +207,17 @@ public:
                 typename patch_first::IdxRange2,
                 typename patch_first::IdxRange1>;
 
-        IdxRangeParFirstType idx_range_par_first(this->m_idx_ranges.template get<patch_first>());
+        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<patch_first>());
 
         if constexpr (std::is_same_v<IdxDeriv, idx_deriv_perp>) {
             ddc::host_for_each(
                     idx_range_par_first,
                     [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                        this->operator()(deriv_order, functions_and_derivs, idx_par);
+                        (*this)(deriv_order, functions_and_derivs, idx_par);
                     });
         } else {
-            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.front());
-            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.back());
+            (*this)(deriv_order, functions_and_derivs, idx_range_par_first.front());
+            (*this)(deriv_order, functions_and_derivs, idx_range_par_first.back());
         }
     }
 
@@ -228,15 +230,16 @@ private:
             Idx<GridPar1D> const& idx_to_slice,
             std::integer_sequence<std::size_t, I...>)
     {
-        static_assert(
-                (std::is_same_v<GridPar1D, typename patch_first::Grid1>)
-                || (std::is_same_v<GridPar1D, typename patch_first::Grid2>)
-                || (std::is_same_v<GridPar1D, ddc::Deriv<typename patch_first::Dim1>>)
-                || (std::is_same_v<GridPar1D, ddc::Deriv<typename patch_first::Dim2>>));
+        static_assert(ddc::in_tags_v<
+                      GridPar1D,
+                      ddc::TypeSeq<
+                              typename patch_first::Grid1,
+                              typename patch_first::Grid2,
+                              ddc::Deriv<typename patch_first::Dim1>,
+                              ddc::Deriv<typename patch_first::Dim2>>>);
 
         // Locally transform the index into an integer to avoid type issues.
-        IdxRange<GridPar1D> idx_range_1d_first_patch(
-                this->m_idx_ranges.template get<patch_first>());
+        IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<patch_first>());
         int value_idx_to_slice = (idx_to_slice - idx_range_1d_first_patch.front()).value();
         (update_derivatives_at_interface<I>(deriv_order, functions_and_derivs, value_idx_to_slice),
          ...);

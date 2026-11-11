@@ -14,6 +14,7 @@ target_sources("geometry_collisions_vparmu"
 target_link_libraries("geometry_collisions_vparmu"
     INTERFACE
         gyselalibxx::collisions
+        gyselalibxx::geometry_vparmu
 )
 
 add_library("gyselalibxx::geometry_collisions_vparmu" ALIAS "geometry_collisions_vparmu")

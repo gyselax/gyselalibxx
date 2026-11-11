@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
 - `MultipatchSplineEvaluator2D` works with `DerivField`.
 - Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
+- Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
 
 ### Fixed
 
@@ -61,6 +62,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
 - Speed up the matrix assembly and RHS computation of `PolarSplineFEMPoissonLikeSolver`.
 - The constructor of `PolarSplineFEMPoissonLikeSolver` now takes the full index range on which $\phi$ is defined (including any batch dimensions).
+- Speedup the koliop collision operator.
+- Simplified the koliop bindings.
 - Allow `MPILayout` and `MPITransposeAllToAll` to be used with more MPI ranks than points in the distributed dimensions.
 - The constructor of `LiePoissonBracket` now takes the metric tensor as an argument (in addition to the mapping). The type of the metric tensor is an additional template parameter.
 - The template parameter of `Gradient` must now satisfy `concepts::MetricTensor`.
@@ -77,6 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
 - Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
+- Don't assume that elements of a `MultipatchType` have different types.
 
 ### Deprecated
 
@@ -94,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove Dask dependency in the tests.
 - Update DDC to [v0.17.0](https://github.com/CExA-project/ddc/releases/tag/v0.17.0).
 - Update GMGPolar dependency to [v2.4.0](https://github.com/SciCompMod/GMGPolar/releases/tag/v2.4.1).
+- Upgrade to koliop@1.1.1.
 
 ## [v0.8.0] - 2026-09-09
 
