@@ -6,9 +6,23 @@
 #include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "simpson_quadrature.hpp"
+#include "tensor.hpp"
 #include "trapezoid_quadrature.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 namespace {
+
+struct A
+{
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+};
+struct B
+{
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+};
 
 enum Method { TRAPEZ, SIMPSON };
 
@@ -249,6 +263,79 @@ TEST(SimpsonUniformNonPeriodicQuadrature1D, Convergence)
         EXPECT_LE(error[i], error[i - 1]);
         double order = log(error[i - 1] / error[i]) / log(2.0);
         EXPECT_NEAR(order, 4, 1e-2);
+    }
+}
+
+template <std::size_t N>
+double compute_vec_error(int n_cells, Method quad_method)
+{
+    using DimY = typename ComputeErrorTraits<N>::Y;
+    using GridY = typename ComputeErrorTraits<N>::GridY;
+    using IdxRangeY = IdxRange<GridY>;
+    using DFieldMemY = DFieldMem<IdxRangeY>;
+
+    Coord<DimY> const y_min(0.0);
+    Coord<DimY> const y_max(M_PI);
+    IdxStep<GridY> npoints(n_cells + 1);
+    IdxStep<GridY> ncells(n_cells);
+
+    std::vector<Coord<DimY>> point_sampling = build_uniform_break_points(y_min, y_max, ncells);
+    ddc::init_discrete_space<GridY>(point_sampling);
+
+    Idx<GridY> lbound(0);
+    IdxRange<GridY> gridy(lbound, npoints);
+
+    DFieldMemY quadrature_coeffs_alloc;
+    switch (quad_method) {
+    case Method::TRAPEZ: {
+        quadrature_coeffs_alloc
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, double>(gridy);
+        break;
+    }
+    case Method::SIMPSON: {
+        quadrature_coeffs_alloc
+                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace, double>(gridy);
+        break;
+    }
+    }
+
+    Quadrature<IdxRangeY, IdxRangeY, DVector<A, B>> const integrate(
+            get_const_field(quadrature_coeffs_alloc));
+    DVectorFieldMem<IdxRangeY, VectorIndexSet<A, B>> values_alloc(gridy);
+    DVectorField<IdxRangeY, VectorIndexSet<A, B>> values = get_field(values_alloc);
+
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            gridy,
+            KOKKOS_LAMBDA(Idx<GridY> const idx) {
+                ddcHelper::get<A>(values)(idx) = sin(ddc::coordinate(idx));
+                ddcHelper::get<B>(values)(idx) = 2 * sin(ddc::coordinate(idx));
+            });
+
+    DVector<A, B> integral = integrate(Kokkos::DefaultExecutionSpace(), values);
+    return std::
+            max(std::abs(2 - ddcHelper::get<A>(integral)),
+                std::abs(4 - ddcHelper::get<B>(integral)));
+}
+
+template <std::size_t... Is>
+std::array<double, sizeof...(Is)> compute_vec_errors_trpz(std::index_sequence<Is...>, int ncells)
+{
+    return std::array<double, sizeof...(Is)> {
+            compute_vec_error<Is>(ncells *= 2, Method::TRAPEZ)...};
+}
+
+TEST(TrapezoidUniformNonPeriodicQuadrature1D, VecConvergence)
+{
+    constexpr int NTESTS(10);
+
+    std::array<double, NTESTS> error
+            = compute_vec_errors_trpz(std::make_index_sequence<NTESTS>(), 10);
+
+    for (int i(1); i < NTESTS; ++i) {
+        EXPECT_LE(error[i], error[i - 1]);
+        double order = log(error[i - 1] / error[i]) / log(2.0);
+        EXPECT_NEAR(order, 2, 1e-2);
     }
 }
 
