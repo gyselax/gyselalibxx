@@ -159,7 +159,7 @@ public:
     template <class PatchType>
     KOKKOS_FUNCTION auto get() const requires(is_patch_v<PatchType>)
     {
-        return std::get<TypeOnPatch<PatchType>>(base_type::m_tuple);
+        return std::get<ddc::type_seq_rank_v<PatchType, PatchOrdering>>(base_type::m_tuple);
     }
 
     /**
@@ -169,8 +169,7 @@ public:
      */
     KOKKOS_FUNCTION discrete_domain_type idx_range() const
     {
-        return discrete_domain_type(
-                get_idx_range(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
+        return discrete_domain_type(get_idx_range(get<Patches>())...);
     }
 
     /**
@@ -180,7 +179,7 @@ public:
      */
     KOKKOS_FUNCTION span_type get_field()
     {
-        return span_type(::get_field(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
+        return span_type(::get_field(get<Patches>())...);
     }
 
     /**
@@ -190,7 +189,7 @@ public:
      */
     KOKKOS_FUNCTION view_type get_const_field() const
     {
-        return view_type(::get_const_field(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
+        return view_type(::get_const_field(get<Patches>())...);
     }
 
     /**
