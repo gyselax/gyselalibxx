@@ -13,6 +13,37 @@
 #include "tensor_common.hpp"
 #include "vector_field.hpp"
 
+namespace detail {
+
+/**
+ * @brief A trait helping deduce the data type and result type used in Quadrature
+ */
+template <class ElementDataType, class IdxRangeQuadrature, class MemorySpace, class = void>
+struct QuadratureDataTypes
+{
+    static_assert(std::is_floating_point_v<ElementDataType>);
+    using data_type = ElementDataType;
+    using result_type = Field<data_type, IdxRangeQuadrature, MemorySpace>;
+};
+
+template <class ElementDataType, class IdxRangeQuadrature, class MemorySpace>
+struct QuadratureDataTypes<
+        ElementDataType,
+        IdxRangeQuadrature,
+        MemorySpace,
+        std::enable_if_t<is_tensor_type_v<ElementDataType>>>
+{
+    static_assert(ElementDataType::rank() == 1);
+    using data_type = typename ElementDataType::element_type;
+    using result_type = VectorField<
+            data_type,
+            IdxRangeQuadrature,
+            ddc::type_seq_element_t<0, typename ElementDataType::index_set>,
+            MemorySpace>;
+};
+
+} // namespace detail
+
 /**
  * @brief A class providing an operator for integrating functions defined on known grid points.
  *
@@ -31,13 +62,9 @@ template <
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 class Quadrature
 {
-    static_assert(
-            (std::is_floating_point_v<ElementDataType>)
-            || (is_tensor_type_v<ElementDataType> && ElementDataType::rank() == 1));
-    using DataType = std::conditional_t<
-            is_tensor_type_v<ElementDataType>,
-            typename ElementDataType::element_type,
-            ElementDataType>;
+    using QuadDataTypes
+            = detail::QuadratureDataTypes<ElementDataType, IdxRangeQuadrature, MemorySpace>;
+    using DataType = typename QuadDataTypes::data_type;
 
     static_assert(std::is_floating_point_v<DataType>);
 
@@ -47,14 +74,7 @@ private:
 
     using QuadConstField = ConstField<DataType, IdxRangeQuadrature, MemorySpace>;
 
-    using ResultField = std::conditional_t<
-            is_tensor_type_v<ElementDataType>,
-            VectorField<
-                    DataType,
-                    IdxRangeQuadrature,
-                    ddc::type_seq_element_t<0, typename ElementDataType::index_set>,
-                    MemorySpace>,
-            Field<DataType, IdxRangeQuadrature, MemorySpace>>;
+    using ResultField = typename QuadDataTypes::result_type;
 
     QuadConstField m_coefficients;
 
@@ -107,7 +127,7 @@ public:
         if constexpr (std::is_same_v<ExecutionSpace, Kokkos::DefaultHostExecutionSpace>) {
             return ddc::host_transform_reduce(
                     get_idx_range(coeff_proxy),
-                    0.0,
+                    ElementDataType(0.0),
                     ddc::reducer::sum<ElementDataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
@@ -118,7 +138,7 @@ public:
                     location.function_name(),
                     exec_space,
                     get_idx_range(coeff_proxy),
-                    0.0,
+                    ElementDataType(0.0),
                     ddc::reducer::sum<ElementDataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
