@@ -40,6 +40,7 @@ using Connectivity = MultipatchConnectivity<
         EastInterface2,
         Interface_1_2>;
 
+// INTERPOLATION POINTS CHECK --------------------------------------------------------------------
 template <int PatchIdx>
 using SplineInterpPointsR = ddc::GrevilleInterpolationPoints<
         BSplinesR<PatchIdx>,
@@ -51,7 +52,7 @@ using SplineInterpPointsTheta = ddc::KnotsAsInterpolationPoints<
         ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineBuilderClosure::PERIODIC>;
 
-// Operators
+// SPLINE OPERATORS ------------------------------------------------------------------------------
 template <int PatchIdx>
 using SplineBuilderOnPatch = ddc::SplineBuilder2D<
         Kokkos::DefaultExecutionSpace,
