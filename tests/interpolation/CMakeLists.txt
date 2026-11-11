@@ -112,3 +112,31 @@ target_link_libraries(spline_interpolation_tests
 
 gtest_discover_tests(spline_interpolation_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 
+add_executable(mpi_spline_interpolation_tests
+    mpi_spline_builder_alltoall.cpp
+    ../mpi_parallelisation/main.cpp
+)
+target_link_libraries(mpi_spline_interpolation_tests
+    PUBLIC
+        DDC::core
+        GTest::gtest
+        GTest::gmock
+        gyselalibxx::interpolation
+        gyselalibxx::mpi_parallelisation
+        gyselalibxx::utils
+)
+
+function(make_mpi_test test_name)
+    add_test(NAME ${test_name}
+        COMMAND
+        "${MPIEXEC_EXECUTABLE}"
+        "-n"
+        "2"
+        "$<TARGET_FILE:unit_tests_parallelisation>"
+        "--gtest_filter=${test_name}"
+    )
+endfunction()
+make_mpi_test(MPIBuilderAlltoall.Concept)
+make_mpi_test(MPIBuilderAlltoall.Build2D)
+make_mpi_test(MPIBuilderAlltoall.Build3D)
+make_mpi_test(MPIBuilderAlltoall.ReuseForDifferentBatches)
