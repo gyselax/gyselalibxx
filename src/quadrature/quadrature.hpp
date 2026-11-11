@@ -157,7 +157,7 @@ public:
             requires(std::is_floating_point_v<
                      ElementDataType>) //TOD: Remove requires when #322 is fixed
     {
-        using BatchIdxRange = ResultField::discrete_domain_type;
+        using IdxRangeBatch = ResultField::discrete_domain_type;
         static_assert(std::is_same_v<typename ResultField::element_type, ElementDataType>);
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
@@ -170,7 +170,7 @@ public:
                 ddc::to_type_seq_t<IdxRangeTotal>,
                 ddc::to_type_seq_t<IdxRangeQuadrature>>;
         static_assert(
-                ddc::type_seq_same_v<ddc::to_type_seq_t<BatchIdxRange>, ExpectedBatchDims>,
+                ddc::type_seq_same_v<ddc::to_type_seq_t<IdxRangeBatch>, ExpectedBatchDims>,
                 "The batch idx_range deduced from the type of result does not match the class "
                 "template parameters.");
 
@@ -185,7 +185,7 @@ public:
 
         // Get useful index types
         using IdxTotal = typename IdxRangeTotal::discrete_element_type;
-        using IdxBatch = typename BatchIdxRange::discrete_element_type;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
         static_assert(
                 std::is_invocable_v<IntegratorFunction, IdxTotal>,
@@ -194,7 +194,7 @@ public:
 
         // Get index ranges
         IdxRangeQuadrature quad_idx_range(get_idx_range(m_coefficients));
-        BatchIdxRange batch_idx_range(get_idx_range(result));
+        IdxRangeBatch batch_idx_range(get_idx_range(result));
 
         QuadConstField const coeff_proxy = m_coefficients;
         // Loop over batch dimensions
