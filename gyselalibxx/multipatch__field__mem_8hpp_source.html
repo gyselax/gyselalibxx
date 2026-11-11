@@ -653,29 +653,30 @@ public:
     template &lt;class Patch&gt;
     typename TypeOnPatch&lt;Patch&gt;::view_type get() const
     {
-        return ::get_const_field(std::get&lt;TypeOnPatch&lt;Patch&gt;&gt;(base_type::m_tuple));
+        return ::get_const_field(
+                std::get&lt;ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;&gt;(base_type::m_tuple));
     }
 
     template &lt;class Patch&gt;
     typename TypeOnPatch&lt;Patch&gt;::span_type get()
     {
-        return ::get_field(std::get&lt;TypeOnPatch&lt;Patch&gt;&gt;(base_type::m_tuple));
+        return ::get_field(
+                std::get&lt;ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;&gt;(base_type::m_tuple));
     }
 
     discrete_domain_type idx_range() const
     {
-        return discrete_domain_type(
-                get_idx_range(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
+        return discrete_domain_type(get_idx_range(get&lt;Patches&gt;())...);
     }
 
     span_type get_field()
     {
-        return span_type(::get_field(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
+        return span_type(::get_field(get&lt;Patches&gt;())...);
     }
 
     view_type get_const_field() const
     {
-        return view_type(::get_const_field(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
+        return view_type(::get_const_field(get&lt;Patches&gt;())...);
     }
 };
 

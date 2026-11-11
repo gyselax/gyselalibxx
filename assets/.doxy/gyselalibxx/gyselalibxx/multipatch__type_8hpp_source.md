@@ -77,7 +77,7 @@ public:
     KOKKOS_FUNCTION TypeOnPatch<Patch> get() const
             requires(!has_data_access_methods_v<TypeOnPatch<Patch>>)
     {
-        return std::get<TypeOnPatch<Patch>>(m_tuple);
+        return std::get<ddc::type_seq_rank_v<Patch, PatchOrdering>>(m_tuple);
     }
 
     static constexpr std::size_t size()

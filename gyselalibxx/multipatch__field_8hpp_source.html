@@ -669,23 +669,22 @@ public:
     template &lt;class PatchType&gt;
     KOKKOS_FUNCTION auto get() const requires(is_patch_v&lt;PatchType&gt;)
     {
-        return std::get&lt;TypeOnPatch&lt;PatchType&gt;&gt;(base_type::m_tuple);
+        return std::get&lt;ddc::type_seq_rank_v&lt;PatchType, PatchOrdering&gt;&gt;(base_type::m_tuple);
     }
 
     KOKKOS_FUNCTION discrete_domain_type idx_range() const
     {
-        return discrete_domain_type(
-                get_idx_range(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
+        return discrete_domain_type(get_idx_range(get&lt;Patches&gt;())...);
     }
 
     KOKKOS_FUNCTION span_type get_field()
     {
-        return span_type(::get_field(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
+        return span_type(::get_field(get&lt;Patches&gt;())...);
     }
 
     KOKKOS_FUNCTION view_type get_const_field() const
     {
-        return view_type(::get_const_field(std::get&lt;TypeOnPatch&lt;Patches&gt;&gt;(base_type::m_tuple))...);
+        return view_type(::get_const_field(get&lt;Patches&gt;())...);
     }
 
     template &lt;class QueryTag&gt;
