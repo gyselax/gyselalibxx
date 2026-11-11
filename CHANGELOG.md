@@ -46,7 +46,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
 - Fix Jean-Zay environment with missing environment variables.
 - Fix missing error when using `find_grid_t`.
-- Fix `SplineBuilder2DCollection::operator()` to make it work with `MultipatchDeriv12Field` when the continuous dimensions are the same on the patches.
 
 ### Changed
 
