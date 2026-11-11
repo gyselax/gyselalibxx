@@ -210,3 +210,26 @@ protected:
         return IdxRange<HeadTag, Tags...>(local_idx_range_along_dim, remaining_idx_range);
     }
 };
+
+namespace detail {
+
+/**
+ * @brief Build an MPILayout type from a TypeSeq of distributed dimensions.
+ * @tparam IdxRangeData The index range on which the data is defined.
+ * @tparam DistributedTypeSeq A TypeSeq of the dimensions distributed across MPI processes.
+ */
+template <class IdxRangeData, class IdxRangeDistributed>
+struct MPILayoutFromTypeSeq;
+
+/// @brief Specialisation of MPILayoutFromTypeSeq.
+template <class IdxRangeData, class... DistributedDims>
+struct MPILayoutFromTypeSeq<IdxRangeData, IdxRange<DistributedDims...>>
+{
+    /// The MPILayout type.
+    using type = MPILayout<IdxRangeData, DistributedDims...>;
+};
+
+} // namespace detail
+
+template <class IdxRangeData, class IdxRangeDistributed>
+using mpi_layout_t = typename detail::MPILayoutFromTypeSeq<IdxRangeData, IdxRangeDistributed>::type;
