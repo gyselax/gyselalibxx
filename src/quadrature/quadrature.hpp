@@ -16,30 +16,20 @@
 namespace detail {
 
 /**
- * @brief A trait helping deduce the data type and result type used in Quadrature
+ * @brief A trait helping deduce the data type used in Quadrature
  */
-template <class ElementDataType, class IdxRangeQuadrature, class MemorySpace, class = void>
-struct QuadratureDataTypes
+template <class ElementDataType, class = void>
+struct QuadratureDataType
 {
     static_assert(std::is_floating_point_v<ElementDataType>);
     using data_type = ElementDataType;
-    using result_type = Field<data_type, IdxRangeQuadrature, MemorySpace>;
 };
 
-template <class ElementDataType, class IdxRangeQuadrature, class MemorySpace>
-struct QuadratureDataTypes<
-        ElementDataType,
-        IdxRangeQuadrature,
-        MemorySpace,
-        std::enable_if_t<is_tensor_type_v<ElementDataType>>>
+template <class ElementDataType>
+struct QuadratureDataType<ElementDataType, std::enable_if_t<is_tensor_type_v<ElementDataType>>>
 {
     static_assert(ElementDataType::rank() == 1);
     using data_type = typename ElementDataType::element_type;
-    using result_type = VectorField<
-            data_type,
-            IdxRangeQuadrature,
-            ddc::type_seq_element_t<0, typename ElementDataType::index_set>,
-            MemorySpace>;
 };
 
 } // namespace detail
@@ -62,9 +52,7 @@ template <
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 class Quadrature
 {
-    using QuadDataTypes
-            = detail::QuadratureDataTypes<ElementDataType, IdxRangeQuadrature, MemorySpace>;
-    using DataType = typename QuadDataTypes::data_type;
+    using DataType = typename detail::QuadratureDataType<ElementDataType>::data_type;
 
     static_assert(std::is_floating_point_v<DataType>);
 
@@ -73,8 +61,6 @@ private:
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
 
     using QuadConstField = ConstField<DataType, IdxRangeQuadrature, MemorySpace>;
-
-    using ResultField = typename QuadDataTypes::result_type;
 
     QuadConstField m_coefficients;
 
@@ -161,13 +147,16 @@ public:
      *        Please note that a Field fulfils the described criteria.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      */
-    template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
+    template <class ExecutionSpace, class ResultField, class IntegratorFunction>
     void operator()(
             ExecutionSpace exec_space,
-            Field<DataType, BatchIdxRange, MemorySpace, Layout> const result,
+            ResultField const result,
             IntegratorFunction integrated_function) const
-            requires(std::is_floating_point_v<ElementDataType>)
+            requires(
+                    std::is_floating_point_v<ElementDataType>) //TOD: Remove requires when #322 is fixed
     {
+        using BatchIdxRange = ResultField::discrete_domain_type;
+        static_assert(std::is_same_v<typename ResultField::element_type, ElementDataType>);
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
                 "Execution space is not compatible with memory space where coefficients are found");
@@ -214,10 +203,10 @@ public:
                     IdxBatch ib = to_discrete_element(idx, batch_idx_range);
 
                     // Sum over quadrature dimensions
-                    DataType teamSum = 0;
+                    ElementDataType teamSum(0);
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
-                            [&](int const& thread_index, DataType& sum) {
+                            [&](int const& thread_index, ElementDataType& sum) {
                                 IdxQuadrature iq
                                         = to_discrete_element(thread_index, quad_idx_range);
                                 IdxTotal it(ib, iq);
