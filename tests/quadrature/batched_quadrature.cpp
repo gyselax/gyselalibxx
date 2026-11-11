@@ -19,6 +19,17 @@ struct Batch2
 {
 };
 
+struct A
+{
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+};
+struct B
+{
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+};
+
 struct X
 {
     static bool constexpr PERIODIC = false;
@@ -121,6 +132,54 @@ void batched_operator_1d()
         EXPECT_DOUBLE_EQ(results_host(ib), ubound - lbound);
     });
 }
+
+// TODO: Uncomment when #322 is fixed
+/*
+void batched_operator_vec_1d()
+{
+    CoordBatch1 b_min(0.0);
+    CoordBatch1 b_max(3.0);
+    IdxStepBatch1 b_ncells(4);
+    CoordX x_min(4.0);
+    CoordX x_max(8.0);
+    IdxStepX x_ncells(16);
+
+    IdxRangeBatch1 gridb = ddc::init_discrete_space<GridBatch1>(
+            GridBatch1::init<GridBatch1>(b_min, b_max, b_ncells));
+    IdxRangeX gridx = ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_ncells));
+
+    DFieldMemX quad_coeffs(trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx));
+
+    Quadrature<IdxRangeX, IdxRangeB1X, DVector<A, B>> quad_batched_operator(
+            get_const_field(quad_coeffs));
+
+    DVectorFieldMem<IdxRangeBatch1, VectorIndexSet<A, B>> results(gridb);
+    quad_batched_operator(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(results),
+            KOKKOS_LAMBDA(IdxB1X ibx) {
+                double b = ddc::coordinate(ddc::select<GridBatch1>(ibx));
+                double x = ddc::coordinate(ddc::select<GridX>(ibx));
+                return DVector<A, B>(b * x + 2, 3 * b * x + 4);
+            });
+
+    auto results_host
+            = ddcHelper::create_mirror_view_and_copy(Kokkos::HostSpace(), get_field(results));
+
+    ddc::host_for_each(gridb, [&](IdxBatch1 ib) {
+        double b = ddc::coordinate(ddc::select<GridBatch1>(ib));
+        double x = x_max;
+        double ubound = 0.5 * b * x * x + 2 * x;
+        x = x_min;
+        double lbound = 0.5 * b * x * x + 2 * x;
+        EXPECT_DOUBLE_EQ(ddcHelper::get<A>(results_host)(ib), ubound - lbound);
+        ubound = 1.5 * b * x * x + 4 * x;
+        x = x_min;
+        lbound = 1.5 * b * x * x + 4 * x;
+        EXPECT_DOUBLE_EQ(ddcHelper::get<B>(results_host)(ib), ubound - lbound);
+    });
+}
+*/
 
 void batched_operator_2d()
 {
@@ -343,6 +402,14 @@ TEST(TrapezoidUniformNonPeriodicQuadrature, ExactForLinearBatch1D)
 {
     batched_operator_1d();
 }
+
+// TODO: Uncomment when #322 is fixed
+/*
+TEST(TrapezoidUniformNonPeriodicQuadrature, ExactForLinearBatch1DVec)
+{
+    batched_operator_vec_1d();
+}
+*/
 
 TEST(TrapezoidUniformNonPeriodicQuadrature, ExactForLinearBatch1D2D)
 {
