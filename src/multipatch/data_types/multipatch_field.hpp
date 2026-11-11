@@ -159,7 +159,7 @@ public:
     template <class PatchType>
     KOKKOS_FUNCTION auto get() const requires(is_patch_v<PatchType>)
     {
-        return std::get<TypeOnPatch<PatchType>>(base_type::m_tuple);
+        return std::get<ddc::type_seq_rank_v<Patch, PatchOrdering>>(base_type::m_tuple);
     }
 
     /**
