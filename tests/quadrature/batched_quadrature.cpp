@@ -19,6 +19,8 @@ struct Batch2
 {
 };
 
+// TODO: Uncomment when #322 is fixed
+/*
 struct A
 {
     static bool constexpr IS_COVARIANT = true;
@@ -29,6 +31,7 @@ struct B
     static bool constexpr IS_COVARIANT = true;
     static bool constexpr IS_CONTRAVARIANT = true;
 };
+*/
 
 struct X
 {
