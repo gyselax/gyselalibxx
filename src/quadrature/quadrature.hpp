@@ -80,7 +80,8 @@ public:
      * @param[in] integrated_function
      *        A function taking an index of a position in the index range over which the quadrature is
      *        calculated and returning the value of the function to be integrated at that point.
-     *        It should be noted that a Field fulfils these criteria and can be passed as the function to be integrated.
+     *        It should be noted that a Field or VectorField may fulfil these criteria and can be
+     *        therefore be passed as the function to be integrated.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      *
      * @returns The integral of the function over the domain.
@@ -144,7 +145,8 @@ public:
      *        A function taking an index of a position in the index range over which the quadrature is
      *        calculated (including the batch index range) and returning the value of the function to
      *        be integrated at that point.
-     *        Please note that a Field fulfils the described criteria.
+     *        It should be noted that a Field or VectorField may fulfil these criteria and can be
+     *        therefore be passed as the function to be integrated.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      */
     template <class ExecutionSpace, class ResultField, class IntegratorFunction>
