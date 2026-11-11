@@ -175,7 +175,7 @@ public:
     InterfacesExactDerivativeCalculator(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
             DerivCoeffCollection const& deriv_coeffs_collect,
-            double const& reduction_factor = 1e-6)
+            double reduction_factor = 1e-6)
         : base_type(idx_ranges, deriv_coeffs_collect)
     {
         const auto exec = gko::ReferenceExecutor::create();
