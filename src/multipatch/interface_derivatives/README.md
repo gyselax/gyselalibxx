@@ -634,20 +634,21 @@ InterfacesDerivativeCalculator<
         Grid1D,                                     // the given direction.
         ddc::TypeSeq<Patch1, Patch2, ...>   // list of patches containing all the needed ones
         InterfaceDerivCoeffsCollection<Interface_1, Interface_2, ...>>
-        matrix(idx_ranges, deriv_coeffs_collect);
+        deriv_calculator(idx_ranges, deriv_coeffs_collect);
 ```
 
 with `idx_ranges` a `MultipatchType<IdxRangeonPatch, Patch1, Patch2, ...>` object.
 
-If we want to solve the system for a given function, we then use the operator `.solve_deriv()`.
+If we want to solve the system for a given function, we then use the operator `operator()`.
 
 ```cpp
-matrix.solve_deriv(
+deriv_calculator(
+    Idx<ddc::Deriv<typename Grid1D::continuous_dimension_type>>(1),
     functions_and_derivs,         // A MultipatchField collection of DerivField.
     );
 ```
 
-During the call to `.solve_deriv()`, it computes the right hand side approximated vector $`C_{trunc}`$.
+During the call to `operator()`, it computes the right hand side approximated vector $`C_{trunc}`$.
 It solves the matrix system to get the solution vector *S*.
 It fills in the derivatives in the `functions_and_derivs` collection with the computed derivatives at the right place.
 
@@ -674,12 +675,12 @@ $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7
 InterfacesDerivativeCalculator<Connectivity, GridX1, 
         ddc::TypeSeq<Patch1, Patch2, Patch3>,
         InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
-        matrix_123(idx_ranges_123, deriv_coeffs_collect_123);
+        deriv_calculator_123(idx_ranges_123, deriv_coeffs_collect_123);
 
 InterfacesDerivativeCalculator<Connectivity, GridX4, 
         ddc::TypeSeq<Patch4, Patch5, Patch6>,
         InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
-        matrix_456(idx_ranges_456, deriv_coeffs_collect_456);
+        deriv_calculator_456(idx_ranges_456, deriv_coeffs_collect_456);
 // ...
 ```
 
@@ -690,12 +691,12 @@ $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3
 InterfacesDerivativeCalculator<Connectivity, GridY1, 
         ddc::TypeSeq<Patch1, Patch4, Patch7>,
         InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
-        matrix_147(idx_ranges_147, deriv_coeffs_collect_147);
+        deriv_calculator_147(idx_ranges_147, deriv_coeffs_collect_147);
 
 InterfacesDerivativeCalculator<Connectivity, GridY2, 
         ddc::TypeSeq<Patch2, Patch5, Patch8>,
         InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
-        matrix_258(idx_ranges_258, deriv_coeffs_collect_258);
+        deriv_calculator_258(idx_ranges_258, deriv_coeffs_collect_258);
 // ...
 ```
 
@@ -707,8 +708,8 @@ With these matrices, we can compute all the interface *x*-derivatives using the 
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$,
 
 ```cpp
-matrix_147.solve_deriv(functions_and_derivs_147);
-matrix_258.solve_deriv(functions_and_derivs_258);
+deriv_calculator_147(Idx<ddc::Deriv<X<1>>>(1), functions_and_derivs_147);
+deriv_calculator_258(Idx<ddc::Deriv<X<2>>>(1), functions_and_derivs_258);
 // ...
 ```
 
@@ -716,8 +717,8 @@ we can compute all the interface *y*-derivatives using the directions
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$,
 
 ```cpp
-matrix_123.solve_deriv(functions_and_derivs_123);
-matrix_456.solve_deriv(functions_and_derivs_456);
+deriv_calculator_123(Idx<ddc::Deriv<Y<1>>>(1), functions_and_derivs_123);
+deriv_calculator_456(Idx<ddc::Deriv<Y<4>>>(1), functions_and_derivs_456);
 // ...
 ```
 
@@ -725,10 +726,10 @@ From the computed first derivatives, we can compute the cross-derivatives along 
 E.g.
 
 ```cpp
-matrix_123.solve_cross_deriv(functions_and_derivs_123); // along x direction using y-derivatives 
+deriv_calculator_123(Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>(1,1), functions_and_derivs_123); // along x direction using y-derivatives 
 // ...
 // or
-matrix_147.solve_cross_deriv(functions_and_derivs_147); // along y direction using x-derivatives
+deriv_calculator_147(Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>(1,1), functions_and_derivs_147); // along y direction using x-derivatives
 // ...
 ```
 
@@ -737,8 +738,8 @@ all the data to build local spline representations is available.
 
 :warning: **Warning:**
 The cross-derivatives are computed from the first derivatives.
-So, `.solve_deriv()` has to be called before `.solve_cross_deriv()`.
-It is recommended to apply `.solve_deriv()` on *every* group of patches before calling `.solve_cross_deriv()`.
+So, `operator()` has to be called on the first derivatives before being called on the cross-derivatives.
+It is recommended to compute the first derivatives on *every* group of patches before computing the cross-derivatives.
 
 ### How to use the InterfacesExactDerivativeCalculator operator?
 

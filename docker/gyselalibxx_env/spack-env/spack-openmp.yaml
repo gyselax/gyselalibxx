@@ -47,13 +47,12 @@ spack:
   specs:
     - 'cmake@3.31'
     - 'ddc@0.17 +fft +pdi +splines'
-    - 'doxygen@1.17'
     - 'ginkgo@1.11'
     - 'gmgpolar@2.4'
     - 'googletest@1.17 +gmock'
     - 'kokkos@5.1 +serial'
     - 'kokkos-kernels@5.1'
-    - 'koliop@0.2'
+    - 'koliop@1.1.1'
     - 'lapack'
     - 'mpi'
     - 'paraconf@1.0'
@@ -70,6 +69,9 @@ spack:
     - 'py-scipy@1.17'
     - 'py-pyyaml@6.0'
     - 'py-xarray@2026.4'
+
+    - 'cppcheck@2.22'
+    - 'doxygen@1.17'
   view:
     default:
       root: .spack-env/view

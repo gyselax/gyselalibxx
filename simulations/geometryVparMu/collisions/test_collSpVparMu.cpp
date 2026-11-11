@@ -96,7 +96,7 @@ int main(int argc, char** argv)
     SplineMuBuilder const builder_mu(idxrange_mu);
     DFieldMemMu const coeff_intdmu(simpson_trapezoid_quadrature_coefficients_1d<
                                    Kokkos::DefaultExecutionSpace>(idxrange_mu, Extremity::BACK));
-    CollisionConfiguration const collision_configuration(
+    CollisionConfigurationSpV2D const collision_configuration(
             conf_collision,
             idxrange_spvparmu,
             get_const_field(coeff_intdmu),
@@ -109,8 +109,8 @@ int main(int argc, char** argv)
     // ---> Reading of algorithm info from input YAML file
     double const deltat = PCpp_double(conf_collision, ".Algorithm.deltat");
     if (deltat > 1.e-2) {
-        throw std::runtime_error(
-                "Deltat must be inferior to 1.e-2 for numerical stability of the scheme.");
+        std::cerr << "Deltat must be inferior to 1.e-2 for numerical stability of the scheme.\n";
+        return EXIT_FAILURE;
     }
     int const nbiter = static_cast<int>(PCpp_int(conf_collision, ".Algorithm.nbiter"));
 
