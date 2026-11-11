@@ -308,8 +308,9 @@ double compute_vec_error(int n_cells, Method quad_method)
             Kokkos::DefaultExecutionSpace(),
             gridy,
             KOKKOS_LAMBDA(Idx<GridY> const idx) {
-                ddcHelper::get<A>(values)(idx) = sin(ddc::coordinate(idx));
-                ddcHelper::get<B>(values)(idx) = 2 * sin(ddc::coordinate(idx));
+                Coord<DimY> coord = ddc::coordinate(idx);
+                ddcHelper::get<A>(values)(idx) = sin(coord);
+                ddcHelper::get<B>(values)(idx) = 2 * sin(coord);
             });
 
     DVector<A, B> integral = integrate(Kokkos::DefaultExecutionSpace(), values);
