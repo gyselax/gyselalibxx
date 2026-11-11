@@ -139,6 +139,8 @@ public:
     using idx_cross_deriv = typename base_type::idx_cross_deriv;
 
 private:
+    using base_type::m_idx_ranges;
+
     // Matrix (I-M) of the documentation.
     std::shared_ptr<Matrix> m_matrix;
     // Vector C of the documentation.
@@ -292,17 +294,17 @@ public:
                 typename patch_first::IdxRange2,
                 typename patch_first::IdxRange1>;
 
-        IdxRangeParFirstType idx_range_par_first(this->m_idx_ranges.template get<patch_first>());
+        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<patch_first>());
 
         if constexpr (std::is_same_v<IdxDeriv, idx_deriv_perp>) {
             ddc::host_for_each(
                     idx_range_par_first,
                     [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                        this->operator()(deriv_order, functions_and_derivs, idx_par);
+                        (*this)(deriv_order, functions_and_derivs, idx_par);
                     });
         } else {
-            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.front());
-            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.back());
+            (*this)(deriv_order, functions_and_derivs, idx_range_par_first.front());
+            (*this)(deriv_order, functions_and_derivs, idx_range_par_first.back());
         }
     }
 
@@ -390,15 +392,16 @@ private:
             std::integer_sequence<std::size_t, I...>)
     {
         // Check we start the loop with the first patch.
-        static_assert(
-                (std::is_same_v<GridPar1D, typename patch_first::Grid1>)
-                || (std::is_same_v<GridPar1D, typename patch_first::Grid2>)
-                || (std::is_same_v<GridPar1D, ddc::Deriv<typename patch_first::Dim1>>)
-                || (std::is_same_v<GridPar1D, ddc::Deriv<typename patch_first::Dim2>>));
+        static_assert(ddc::in_tags_v<
+                      GridPar1D,
+                      ddc::TypeSeq<
+                              typename patch_first::Grid1,
+                              typename patch_first::Grid2,
+                              ddc::Deriv<typename patch_first::Dim1>,
+                              ddc::Deriv<typename patch_first::Dim2>>>);
 
         // Locally transform the index into an integer to avoid type issues.
-        IdxRange<GridPar1D> idx_range_1d_first_patch(
-                this->m_idx_ranges.template get<patch_first>());
+        IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<patch_first>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
         (set_line_vector<I>(deriv_order, slice_idx_value, functions_and_derivs), ...);
     }
@@ -516,8 +519,7 @@ private:
                 || (std::is_same_v<GridPar1D, ddc::Deriv<typename patch_first::Dim2>>));
 
         // Locally transform the index into an integer to avoid type issues.
-        IdxRange<GridPar1D> idx_range_1d_first_patch(
-                this->m_idx_ranges.template get<patch_first>());
+        IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<patch_first>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
         (update_derivatives_at_interface<I>(deriv_order, functions_and_derivs, slice_idx_value),
          ...);
@@ -555,8 +557,8 @@ private:
                     = m_interface_derivatives->get_values()[I] * sign_2;
         } else {
             // The slice indices has to be a point at a corner, i.e. index range boundaries.
-            IdxRange<grid_par1<I>> idx_range_par_1(this->m_idx_ranges.template get<patch1<I>>());
-            IdxRange<grid_par2<I>> idx_range_par_2(this->m_idx_ranges.template get<patch2<I>>());
+            IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
+            IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
             assert((idx_to_slice_1 == idx_range_par_1.front())
                    || (idx_to_slice_1 == idx_range_par_1.back()));
             assert((idx_to_slice_2 == idx_range_par_2.front())
