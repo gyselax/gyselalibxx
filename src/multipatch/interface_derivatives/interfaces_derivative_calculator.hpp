@@ -219,11 +219,13 @@ private:
             Idx<GridPar1D> const& idx_to_slice,
             std::integer_sequence<std::size_t, I...>)
     {
-        static_assert(
-                (std::is_same_v<GridPar1D, typename patch_first::Grid1>)
-                || (std::is_same_v<GridPar1D, typename patch_first::Grid2>)
-                || (std::is_same_v<GridPar1D, ddc::Deriv<typename patch_first::Dim1>>)
-                || (std::is_same_v<GridPar1D, ddc::Deriv<typename patch_first::Dim2>>));
+        static_assert(ddc::in_tags_v<
+                      GridPar1D,
+                      ddc::TypeSeq<
+                              typename patch_first::Grid1,
+                              typename patch_first::Grid2,
+                              ddc::Deriv<typename patch_first::Dim1>,
+                              ddc::Deriv<typename patch_first::Dim2>>>);
 
         // Locally transform the index into an integer to avoid type issues.
         IdxRange<GridPar1D> idx_range_1d_first_patch(
