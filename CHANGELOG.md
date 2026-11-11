@@ -80,6 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
 - Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
+- Don't assume that elements of a `MultipatchType` have different types.
 
 ### Deprecated
 
