@@ -603,7 +603,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
 
     using Connectivity = typename PatchLayout::Connectivity;
 
-    // Instantiate the matrix calculators --------------------------------------------------------
+    // Instantiate the derivative calculator -----------------------------------------------------
     using Grid1AlongXg = find_grid_t<
             ddc::type_seq_element_t<
                     0,
@@ -616,7 +616,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             Grid1AlongXg,
             ddc::TypeSeq<Patch1, Patch2, Patch3>,
             InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
-            matrix(idx_ranges, deriv_coeffs_collect);
+            deriv_calculator(idx_ranges, deriv_coeffs_collect);
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
@@ -772,15 +772,20 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             coord_transforms);
 
     // --- the first derivatives (on inner interfaces) from the function values.
-    matrix.solve_deriv(functions_and_derivs);
+    using IdxDerivPerp = Idx<ddc::Deriv<typename Grid1AlongXg::continuous_dimension_type>>;
+    deriv_calculator(IdxDerivPerp(1), functions_and_derivs);
 
     // --- the cross-derivatives from the first derivatives.
     /*
         Here, it is not needed to compute the cross-derivatives because
         they are given by the boundary conditions. However, we want to 
-        check that the matrix computes correctly the values. 
+        check that deriv_calculator computes correctly the values. 
     */
-    matrix.solve_cross_deriv(functions_and_derivs);
+    using PatchDirection = find_patch_t<Grid1AlongXg, PatchOrdering>;
+    using IdxCrossDeriv
+            = Idx<ddc::Deriv<typename PatchDirection::Dim1>,
+                  ddc::Deriv<typename PatchDirection::Dim2>>;
+    deriv_calculator(IdxCrossDeriv(1, 1), functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::TypeSeq<>;
