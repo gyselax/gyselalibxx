@@ -105,6 +105,8 @@ public:
     /// @brief Index on the two derivative dimensions of patch_direction.
     using idx_cross_deriv = typename base_type::idx_cross_deriv;
 
+private:
+    using base_type::m_idx_ranges;
 
 public:
     /**
@@ -196,7 +198,7 @@ public:
                 typename patch_first::IdxRange2,
                 typename patch_first::IdxRange1>;
 
-        IdxRangeParFirstType idx_range_par_first(this->m_idx_ranges.template get<patch_first>());
+        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<patch_first>());
 
         if constexpr (std::is_same_v<IdxDeriv, idx_deriv_perp>) {
             ddc::host_for_each(
@@ -228,8 +230,7 @@ private:
                               ddc::Deriv<typename patch_first::Dim2>>>);
 
         // Locally transform the index into an integer to avoid type issues.
-        IdxRange<GridPar1D> idx_range_1d_first_patch(
-                this->m_idx_ranges.template get<patch_first>());
+        IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<patch_first>());
         int value_idx_to_slice = (idx_to_slice - idx_range_1d_first_patch.front()).value();
         (update_derivatives_at_interface<I>(deriv_order, functions_and_derivs, value_idx_to_slice),
          ...);
