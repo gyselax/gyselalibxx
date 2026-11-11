@@ -10,6 +10,8 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "tensor_common.hpp"
+#include "vector_field.hpp"
 
 /**
  * @brief A class providing an operator for integrating functions defined on known grid points.
@@ -19,15 +21,24 @@
  *                      IdxRangeQuadrature combined with any batch dimensions. If there are no
  *                      batch dimensions then this argument does not need to be provided as by
  *                      default it is equal to the IdxRangeQuadrature.
+ * @tparam ElementDataType The data type of an element of the function being integrated.
  * @tparam MemorySpace The memory space (cpu/gpu) where the quadrature coefficients are saved.
  */
 template <
         class IdxRangeQuadrature,
         class IdxRangeTotal = IdxRangeQuadrature,
-        class DataType = double,
+        class ElementDataType = double,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 class Quadrature
 {
+    static_assert(
+            (std::is_floating_point_v<ElementDataType>)
+            || (is_tensor_type_v<ElementDataType> && ElementDataType::rank() == 1));
+    using DataType = std::conditional_t<
+            is_tensor_type_v<ElementDataType>,
+            typename ElementDataType::element_type,
+            ElementDataType>;
+
     static_assert(std::is_floating_point_v<DataType>);
 
 private:
@@ -35,6 +46,15 @@ private:
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
 
     using QuadConstField = ConstField<DataType, IdxRangeQuadrature, MemorySpace>;
+
+    using ResultField = std::conditional_t<
+            is_tensor_type_v<ElementDataType>,
+            VectorField<
+                    DataType,
+                    IdxRangeQuadrature,
+                    ddc::type_seq_element_t<0, typename ElementDataType::index_set>,
+                    MemorySpace>,
+            Field<DataType, IdxRangeQuadrature, MemorySpace>>;
 
     QuadConstField m_coefficients;
 
@@ -60,7 +80,8 @@ public:
      * @returns The integral of the function over the domain.
      */
     template <class ExecutionSpace, class IntegratorFunction>
-    DataType operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
+    ElementDataType operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function)
+            const
     {
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
@@ -87,7 +108,7 @@ public:
             return ddc::host_transform_reduce(
                     get_idx_range(coeff_proxy),
                     0.0,
-                    ddc::reducer::sum<DataType>(),
+                    ddc::reducer::sum<ElementDataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
@@ -98,7 +119,7 @@ public:
                     exec_space,
                     get_idx_range(coeff_proxy),
                     0.0,
-                    ddc::reducer::sum<DataType>(),
+                    ddc::reducer::sum<ElementDataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
@@ -125,6 +146,7 @@ public:
             ExecutionSpace exec_space,
             Field<DataType, BatchIdxRange, MemorySpace, Layout> const result,
             IntegratorFunction integrated_function) const
+            requires(std::is_floating_point_v<ElementDataType>)
     {
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
@@ -213,17 +235,22 @@ private:
     }
 };
 
+// Auto-deduce template parameters
+template <class DataType, class IdxRangeQuadrature, class MemorySpace>
+Quadrature(ConstField<DataType, IdxRangeQuadrature, MemorySpace>)
+        -> Quadrature<IdxRangeQuadrature, IdxRangeQuadrature, DataType, MemorySpace>;
+
 namespace detail {
 template <
         class NewMemorySpace,
         class IdxRangeQuadrature,
         class IdxRangeTotal,
-        class DataType,
+        class ElementDataType,
         class MemorySpace>
 struct OnMemorySpace<
         NewMemorySpace,
-        Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace>>
+        Quadrature<IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace>>
 {
-    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, NewMemorySpace>;
+    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, ElementDataType, NewMemorySpace>;
 };
 } // namespace detail
