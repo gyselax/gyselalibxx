@@ -8,8 +8,6 @@
 #include "simpson_quadrature.hpp"
 #include "tensor.hpp"
 #include "trapezoid_quadrature.hpp"
-#include "vector_field.hpp"
-#include "vector_field_mem.hpp"
 
 namespace {
 
@@ -301,19 +299,13 @@ double compute_vec_error(int n_cells, Method quad_method)
 
     Quadrature<IdxRangeY, IdxRangeY, DVector<A, B>> const integrate(
             get_const_field(quadrature_coeffs_alloc));
-    DVectorFieldMem<IdxRangeY, VectorIndexSet<A, B>> values_alloc(gridy);
-    DVectorField<IdxRangeY, VectorIndexSet<A, B>> values = get_field(values_alloc);
 
-    ddc::parallel_for_each(
+    DVector<A, B> integral = integrate(
             Kokkos::DefaultExecutionSpace(),
-            gridy,
             KOKKOS_LAMBDA(Idx<GridY> const idx) {
                 Coord<DimY> coord = ddc::coordinate(idx);
-                ddcHelper::get<A>(values)(idx) = sin(coord);
-                ddcHelper::get<B>(values)(idx) = 2 * sin(coord);
+                return DVector<A, B>(sin(coord), 2 * sin(coord));
             });
-
-    DVector<A, B> integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     return std::
             max(std::abs(2 - ddcHelper::get<A>(integral)),
                 std::abs(4 - ddcHelper::get<B>(integral)));
