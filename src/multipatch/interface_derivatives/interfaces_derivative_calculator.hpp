@@ -202,11 +202,11 @@ public:
             ddc::host_for_each(
                     idx_range_par_first,
                     [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                        this->operator()(deriv_order, functions_and_derivs, idx_par);
+                        (*this)(deriv_order, functions_and_derivs, idx_par);
                     });
         } else {
-            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.front());
-            this->operator()(deriv_order, functions_and_derivs, idx_range_par_first.back());
+            (*this)(deriv_order, functions_and_derivs, idx_range_par_first.front());
+            (*this)(deriv_order, functions_and_derivs, idx_range_par_first.back());
         }
     }
 
