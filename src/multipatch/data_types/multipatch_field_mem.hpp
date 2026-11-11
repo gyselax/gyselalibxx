@@ -147,8 +147,7 @@ public:
      */
     discrete_domain_type idx_range() const
     {
-        return discrete_domain_type(get_idx_range(
-                std::get<ddc::type_seq_rank_v<Patch, PatchOrdering>>(base_type::m_tuple))...);
+        return discrete_domain_type(get_idx_range(get<Patches>())...);
     }
 
     /**
@@ -158,8 +157,7 @@ public:
      */
     span_type get_field()
     {
-        return span_type(::get_field(
-                std::get<ddc::type_seq_rank_v<Patch, PatchOrdering>>(base_type::m_tuple))...);
+        return span_type(::get_field(get<Patches>())...);
     }
 
     /**
@@ -169,8 +167,7 @@ public:
      */
     view_type get_const_field() const
     {
-        return view_type(::get_const_field(
-                std::get<ddc::type_seq_rank_v<Patch, PatchOrdering>>(base_type::m_tuple))...);
+        return view_type(::get_const_field(get<Patches>())...);
     }
 };
 
