@@ -279,8 +279,6 @@ public:
     using batched_derivs_idx_range_type = MultipatchIdxRangeBatchedDeriv<MultipatchIdxRangeBatched>;
 
 private:
-    using patch_seq = ddc::TypeSeq<Patches...>;
-
     template <class Patch, class MultipatchDerivs>
     std::optional<typename MultipatchDerivs::template TypeOnPatch<Patch>> get_deriv_value(
             std::optional<MultipatchDerivs> derivs) const
