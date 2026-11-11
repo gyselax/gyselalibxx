@@ -81,7 +81,7 @@ class InterfacesExactDerivativeCalculator<
 
 private:
     template <std::size_t I>
-    using stored_interface = typename base_type::stored_interface<I>;
+    using stored_interface = typename base_type::template stored_interface<I>;
 
     // The order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
     template <std::size_t I>
