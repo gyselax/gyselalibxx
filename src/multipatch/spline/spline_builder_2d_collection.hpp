@@ -286,7 +286,7 @@ private:
             std::optional<MultipatchDerivs> derivs) const
     {
         if (derivs.has_value()) {
-            return std::get<ddc::type_seq_rank_v<Patch, patch_seq>>(derivs->get_tuple());
+            return derivs->template get<Patch>();
         } else {
             return std::nullopt;
         }
