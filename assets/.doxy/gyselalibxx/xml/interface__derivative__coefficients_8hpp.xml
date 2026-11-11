@@ -385,6 +385,12 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp</label>
+        <link refid="derivative__calculator__common_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</label>
         <link refid="interface__derivative__coefficients_8hpp"/>
@@ -396,8 +402,10 @@
         <link refid="interface__derivative__coefficients__collection_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
       </node>
-      <node id="3">
+      <node id="4">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</label>
         <link refid="interfaces__derivative__calculator_8hpp_source"/>
       </node>

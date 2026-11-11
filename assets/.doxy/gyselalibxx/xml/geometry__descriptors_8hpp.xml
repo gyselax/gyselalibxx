@@ -159,57 +159,71 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="30">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
         <link refid="connectivity_8hpp_source"/>
       </node>
-      <node id="28">
+      <node id="29">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp</label>
         <link refid="connectivity__details_8hpp_source"/>
-        <childnode refid="29" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp</label>
         <link refid="edge_8hpp_source"/>
-        <childnode refid="28" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp</label>
-        <link refid="edge__transformation_8hpp_source"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-      </node>
-      <node id="32">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp</label>
-        <link refid="interface_8hpp_source"/>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
       <node id="31">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp</label>
+        <link refid="edge__transformation_8hpp_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp</label>
+        <link refid="interface_8hpp_source"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp</label>
         <link refid="matching__idx__slice_8hpp_source"/>
+      </node>
+      <node id="26">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp</label>
+        <link refid="derivative__calculator__common_8hpp_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
       </node>
       <node id="24">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</label>
@@ -222,8 +236,10 @@
         <link refid="interface__derivative__coefficients__collection_8hpp_source"/>
         <childnode refid="26" relation="include">
         </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</label>
         <link refid="interfaces__derivative__calculator_8hpp_source"/>
       </node>
@@ -241,7 +257,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/simpson_quadrature.hpp</label>
         <link refid="simpson__quadrature_8hpp_source"/>
       </node>
@@ -252,9 +268,9 @@
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

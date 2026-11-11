@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Class DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt; - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../docs/stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Class DerivativeCalculatorCommon\u0026lt; Connectivity, Grid1D, ddc::TypeSeq\u0026lt; Patches... \u0026gt;, DerivCoeffCollection \u0026gt;";
+        var mkdocs_page_input_path = "gyselalibxx/classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../index.html" class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../toolchains/index.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/first_steps/landau_damping_tutorial.html">Your First Simulation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Core Concepts</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/core_concepts/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/core_concepts/mathematical_and_physical_conventions.html">Mathematical and Physical Conventions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/core_concepts/coding_covariant_and_contravariant_tensors.html">Covariant and Contravariant Tensors</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Library</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_foot_finders</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/advection/polar_foot_finders/index.html">Ppolar_foot_finders/README.mdolar foot finder implementation details</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/coord_transformations/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >gyroaverage</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/gyroaverage/index.html">Gyroaverage operator (for circular geometry)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utility functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/interface_derivatives/index.html">Interface derivatives test</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">How-to Guides</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/how_to/profiling.html">Measuring Performance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/how_to/Debugging_workflow.html">Debugging</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/how_to/Development_tips.html">Running Static Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/how_to/Using_git.html">Using Git</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Problems</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contributing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/CONTRIBUTING.html">How to Contribute</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/contributing/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/contributing/Adding_docs.html">Writing Documentation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Class DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="class-derivativecalculatorcommon-connectivity-grid1d-ddctypeseq-patches-derivcoeffcollection">Class DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</h1>
+<p><strong>template &lt;class Connectivity, class Grid1D, class... Patches, class DerivCoeffCollection&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html"><strong>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</strong></a></p>
+<p><em>Abstract class to hold the interface derivative coefficient collection and the index ranges. This is the superclass for interface derivative calculators defined in this folder.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;derivative_calculator_common.hpp&gt;</code></li>
+</ul>
+<p>Inherited by the following classes: <a href="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.html">InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</a></p>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef ddc::Deriv&lt; std::conditional_t&lt; std::is_same_v&lt; typename patch_direction::Grid1, <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_direction"><strong>grid_direction</strong></a> &gt;, typename patch_direction::Dim2, typename patch_direction::Dim1 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-deriv_par_dim"><strong>deriv_par_dim</strong></a>  <br><em>Derivative dimension of the direction patch parallel to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::Deriv&lt; typename Grid1D::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-deriv_perp_dim"><strong>deriv_perp_dim</strong></a>  <br><em>Derivative dimension of the direction patch perpendicular to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Grid1D</td>
+<td style="text-align: left;"><a href="#typedef-grid_direction"><strong>grid_direction</strong></a>  <br><em>Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp_dim"><strong>deriv_perp_dim</strong></a>, <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_par_dim"><strong>deriv_par_dim</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx_cross_deriv"><strong>idx_cross_deriv</strong></a>  <br><em>Index on the two derivative dimensions of</em> <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch_direction"><em><strong>patch_direction</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp_dim"><strong>deriv_perp_dim</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx_deriv_perp"><strong>idx_deriv_perp</strong></a>  <br><em>Index on the derivative dimension perpendicular to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef find_patch_t&lt; Grid1D, all_patches &gt;</td>
+<td style="text-align: left;"><a href="#typedef-patch_direction"><strong>patch_direction</strong></a>  <br><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>of the given direction grid.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef PatchFirst</td>
+<td style="text-align: left;"><a href="#typedef-patch_first"><strong>patch_first</strong></a>  <br><em>First patch of the collection of patches in the direction of the given Grid1D.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-derivativecalculatorcommon"><strong>DerivativeCalculatorCommon</strong></a> (MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; const &amp; idx_ranges, DerivCoeffCollection const &amp; deriv_coeffs_collect) <br><em>Instantiate</em> <a href="classDerivativeCalculatorCommon.html"><em><strong>DerivativeCalculatorCommon</strong></em></a> <em>.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-types">Protected Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef collect_grids_on_dim_t&lt; find_patch_t&lt; Grid1D, all_patches &gt;, Grid1D, <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-interface_sorted_collection"><strong>interface_sorted_collection</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-grid1dseq"><strong>Grid1DSeq</strong></a>  <br><em>Sequence of 1D grids in the direction of the given Grid1D over the patches.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>&lt; I &gt;::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-deriv_par1"><strong>deriv_par1</strong></a>  <br><em>Tag the derivative dimension along parallel grid of the first patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>&lt; I &gt;::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-deriv_par2"><strong>deriv_par2</strong></a>  <br><em>Tag the derivative dimension along parallel grid of the second patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp1"><strong>grid_perp1</strong></a>&lt; I &gt;::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-deriv_perp1"><strong>deriv_perp1</strong></a>  <br><em>Tag the derivative dimension along perpendicular grid of the first patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp2"><strong>grid_perp2</strong></a>&lt; I &gt;::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-deriv_perp2"><strong>deriv_perp2</strong></a>  <br><em>Tag the derivative dimension along perpendicular grid of the second patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge1::parallel_grid</td>
+<td style="text-align: left;"><a href="#typedef-grid_par1"><strong>grid_par1</strong></a>  <br><em>Tag the parallel grid of the first patch to the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge2::parallel_grid</td>
+<td style="text-align: left;"><a href="#typedef-grid_par2"><strong>grid_par2</strong></a>  <br><em>Tag the parallel grid of the second patch to the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge1::perpendicular_grid</td>
+<td style="text-align: left;"><a href="#typedef-grid_perp1"><strong>grid_perp1</strong></a>  <br><em>Tag the perpendicular grid of the first patch to the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge2::perpendicular_grid</td>
+<td style="text-align: left;"><a href="#typedef-grid_perp2"><strong>grid_perp2</strong></a>  <br><em>Tag the perpendicular grid of the second patch to the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Dim1 &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Grid1, ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Dim2 &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx_cross_deriv1"><strong>idx_cross_deriv1</strong></a>  <br><em>Tag the index type for cross-derivative on the first patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Dim1 &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Grid1, ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Dim2 &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx_cross_deriv2"><strong>idx_cross_deriv2</strong></a>  <br><em>Tag the index type for cross-derivatives on the second patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp1"><strong>deriv_perp1</strong></a>&lt; I &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Grid1, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx_deriv_perp1"><strong>idx_deriv_perp1</strong></a>  <br><em>Tag the index type for derivatives along the perpendicular grid on the first patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp2"><strong>deriv_perp2</strong></a>&lt; I &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Grid1, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx_deriv_perp2"><strong>idx_deriv_perp2</strong></a>  <br><em>Tag the index type for derivatives along the perpendicular grid on the second patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_remove_t&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-interface_sorted_collection"><strong>interface_sorted_collection</strong></a>, outer_interface_collection &gt;</td>
+<td style="text-align: left;"><a href="#typedef-inner_interface_collection"><strong>inner_interface_collection</strong></a>  <br><em>Tag for all the interfaces in the Grid1D direction without the interfaces with</em> <a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; I, <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-inner_interface_collection"><strong>inner_interface_collection</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-interface"><strong>interface</strong></a>  <br><em>Tag the interface with the correct patch order.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Connectivity::template get_all_interfaces_along_direction_t&lt; Grid1D &gt;</td>
+<td style="text-align: left;"><a href="#typedef-interface_sorted_collection"><strong>interface_sorted_collection</strong></a>  <br><em>Tag for all the sorted interfaces with the correct patch order.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge1::associated_patch</td>
+<td style="text-align: left;"><a href="#typedef-patch1"><strong>patch1</strong></a>  <br><em>Tag the first patch of the stored interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge2::associated_patch</td>
+<td style="text-align: left;"><a href="#typedef-patch2"><strong>patch2</strong></a>  <br><em>Tag the second patch of the stored interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef find_associated_interface_t&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-interface"><strong>interface</strong></a>&lt; I &gt;::Edge1, all_interface_collection &gt;</td>
+<td style="text-align: left;"><a href="#typedef-stored_interface"><strong>stored_interface</strong></a>  <br><em>Tag the equivalent interface defined in the main file, i.e. given to</em> <a href="classMultipatchConnectivity.html"><em><strong>MultipatchConnectivity</strong></em></a> <em>.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-attributes">Protected Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">DerivCoeffCollection const  &amp;</td>
+<td style="text-align: left;"><a href="#variable-m_deriv_coeffs_collect"><strong>m_deriv_coeffs_collect</strong></a>  <br><a href="classInterfaceDerivCoeffsCollection.html"><em><strong>InterfaceDerivCoeffsCollection</strong></em></a> <em>to collect all the needed</em><a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; const  &amp;</td>
+<td style="text-align: left;"><a href="#variable-m_idx_ranges"><strong>m_idx_ranges</strong></a>  <br><em>MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-static-attributes">Protected Static Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Extremity</td>
+<td style="text-align: left;"><a href="#variable-extremity_1"><strong>extremity_1</strong></a>   = <code>[**stored\_interface**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-stored_interface)&amp;lt;I&amp;gt;::Edge1::extremity</code><br><em>Tag the connection extremity of the first patch of the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">Extremity</td>
+<td style="text-align: left;"><a href="#variable-extremity_2"><strong>extremity_2</strong></a>   = <code>[**stored\_interface**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-stored_interface)&amp;lt;I&amp;gt;::Edge2::extremity</code><br><em>Tag the connection extremity of the second patch of the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a href="#variable-is_periodic"><strong>is_periodic</strong></a>   = <code>/* multi line expression */</code><br><em>Boolean to indicate the periodicty of the global domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="#variable-n_inner_interfaces"><strong>n_inner_interfaces</strong></a>   = <code>ddc::type\_seq\_size\_v&amp;lt;[**inner\_interface\_collection**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-inner_interface_collection)&amp;gt;</code><br><em>Number of inner interfaces (fixing the number of elements in the matrix and vectors).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a href="#variable-patch_order_matches_interfaces"><strong>patch_order_matches_interfaces</strong></a>   = <code>/* multi line expression */</code><br><em>Boolean if the order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-functions">Protected Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">double const</td>
+<td style="text-align: left;"><a href="#function-get_approximated_deriv-12"><strong>get_approximated_deriv</strong></a> (Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>&lt; I &gt; &gt; const &amp; idx_to_slice_1, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>&lt; I &gt; &gt; const &amp; idx_to_slice_2, MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs) <br><em>Compute the approximated derivative (or coefficient "c") at the interface along the mesh line indexed at the given indices.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double const</td>
+<td style="text-align: left;"><a href="#function-get_approximated_deriv-12"><strong>get_approximated_deriv</strong></a> (Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>&lt; I &gt; &gt; const &amp; idx_to_slice_1, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>&lt; I &gt; &gt; const &amp; idx_to_slice_2, MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs) <br><em>Compute the approximated cross-derivative (or coefficient "c") at the interface along the mesh line indexed at the given indices. Work only for indices in the corners of the patches (where the cross-derivatives are supposed to be computed).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::conditional_t&lt; is_patch1, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp1"><strong>grid_perp1</strong></a>&lt; I &gt; &gt;, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp2"><strong>grid_perp2</strong></a>&lt; I &gt; &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-get_idx_interface"><strong>get_idx_interface</strong></a> () <br><em>Get the index of the given index range slice corresponding to one of the extremities of the 1D grid. If is_on_interface is true, the extremity corresponds to the interface. If is_on_interface is false, the extremity corresponds to the other bound of the interface (next or previous).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-set_slice_indexes"><strong>set_slice_indexes</strong></a> (int &amp; value_idx_to_slice, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>&lt; I &gt; &gt; &amp; idx_to_slice_1, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>&lt; I &gt; &gt; &amp; idx_to_slice_2) <br><em>Get the indices on Patch1 and Patch2 of the given interface. The index on Patch1 corresponds to the value given in input (if the interface is well oriented, otherwise it is Patch2). The index on Patch2 is the equivalent index of the one on Patch1. It also updates the value given in input with the value of the index on Patch2 for the next interface (if the next interface is well oriented, otherwise it is Patch1).</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Connectivity</code> A <a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a> class describing all the patch connections. </li>
+<li><code>Grid1D</code> A given direction. </li>
+<li><code>Patches</code> List of patches containing all the involved patches in the given direction. </li>
+<li><code>DerivCoeffCollection</code> A <a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a> that stores the <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a> needed to compute the interface derivatives. </li>
+</ul>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-deriv_par_dim">typedef deriv_par_dim</h3>
+<p><em>Derivative dimension of the direction patch parallel to the mesh line.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par_dim =  ddc::Deriv&lt;std::conditional_t&lt;
+            std::is_same_v&lt;typename patch_direction::Grid1, grid_direction&gt;,
+            typename patch_direction::Dim2,
+            typename patch_direction::Dim1&gt;&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-deriv_perp_dim">typedef deriv_perp_dim</h3>
+<p><em>Derivative dimension of the direction patch perpendicular to the mesh line.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp_dim =  ddc::Deriv&lt;typename Grid1D::continuous_dimension_type&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid_direction">typedef grid_direction</h3>
+<p><em>Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_direction =  Grid1D;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_cross_deriv">typedef idx_cross_deriv</h3>
+<p><em>Index on the two derivative dimensions of</em> <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch_direction"><em><strong>patch_direction</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv =  Idx&lt;deriv_perp_dim, deriv_par_dim&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_deriv_perp">typedef idx_deriv_perp</h3>
+<p><em>Index on the derivative dimension perpendicular to the mesh line.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp =  Idx&lt;deriv_perp_dim&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-patch_direction">typedef patch_direction</h3>
+<p><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>of the given direction grid.</em></p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_direction =  find_patch_t&lt;Grid1D, all_patches&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-patch_first">typedef patch_first</h3>
+<p><em>First patch of the collection of patches in the direction of the given Grid1D.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_first =  PatchFirst;
+</code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-derivativecalculatorcommon">function DerivativeCalculatorCommon</h3>
+<p><em>Instantiate</em> <a href="classDerivativeCalculatorCommon.html"><em><strong>DerivativeCalculatorCommon</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">inline DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::DerivativeCalculatorCommon (
+    MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; const &amp; idx_ranges,
+    DerivCoeffCollection const &amp; deriv_coeffs_collect
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_ranges</code> MultipatchType collection of index ranges defined on the given list of patches. </li>
+<li><code>deriv_coeffs_collect</code> <a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a> containing all the interface derivative calculator for each interface in the given Grid1D direction. </li>
+</ul>
+<hr>
+<h2 id="protected-types-documentation">Protected Types Documentation</h2>
+<h3 id="typedef-grid1dseq">typedef Grid1DSeq</h3>
+<p><em>Sequence of 1D grids in the direction of the given Grid1D over the patches.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::Grid1DSeq =  collect_grids_on_dim_t&lt;
+            find_patch_t&lt;Grid1D, all_patches&gt;,
+            Grid1D,
+            interface_sorted_collection&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-deriv_par1">typedef deriv_par1</h3>
+<p><em>Tag the derivative dimension along parallel grid of the first patch.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par1 =  typename ddc::Deriv&lt;typename grid_par1&lt;I&gt;::continuous_dimension_type&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-deriv_par2">typedef deriv_par2</h3>
+<p><em>Tag the derivative dimension along parallel grid of the second patch.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par2 =  typename ddc::Deriv&lt;typename grid_par2&lt;I&gt;::continuous_dimension_type&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-deriv_perp1">typedef deriv_perp1</h3>
+<p><em>Tag the derivative dimension along perpendicular grid of the first patch.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp1 =  typename ddc::Deriv&lt;typename grid_perp1&lt;I&gt;::continuous_dimension_type&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-deriv_perp2">typedef deriv_perp2</h3>
+<p><em>Tag the derivative dimension along perpendicular grid of the second patch.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp2 =  typename ddc::Deriv&lt;typename grid_perp2&lt;I&gt;::continuous_dimension_type&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid_par1">typedef grid_par1</h3>
+<p><em>Tag the parallel grid of the first patch to the interface.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_par1 =  typename stored_interface&lt;I&gt;::Edge1::parallel_grid;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid_par2">typedef grid_par2</h3>
+<p><em>Tag the parallel grid of the second patch to the interface.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_par2 =  typename stored_interface&lt;I&gt;::Edge2::parallel_grid;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid_perp1">typedef grid_perp1</h3>
+<p><em>Tag the perpendicular grid of the first patch to the interface.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_perp1 =  typename stored_interface&lt;I&gt;::Edge1::perpendicular_grid;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid_perp2">typedef grid_perp2</h3>
+<p><em>Tag the perpendicular grid of the second patch to the interface.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_perp2 =  typename stored_interface&lt;I&gt;::Edge2::perpendicular_grid;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_cross_deriv1">typedef idx_cross_deriv1</h3>
+<p><em>Tag the index type for cross-derivative on the first patch.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv1 =  Idx&lt;ddc::Deriv&lt;typename patch1&lt;I&gt;::Dim1&gt;,
+                  typename patch1&lt;I&gt;::Grid1,
+                  ddc::Deriv&lt;typename patch1&lt;I&gt;::Dim2&gt;,
+                  typename patch1&lt;I&gt;::Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_cross_deriv2">typedef idx_cross_deriv2</h3>
+<p><em>Tag the index type for cross-derivatives on the second patch.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv2 =  Idx&lt;ddc::Deriv&lt;typename patch2&lt;I&gt;::Dim1&gt;,
+                  typename patch2&lt;I&gt;::Grid1,
+                  ddc::Deriv&lt;typename patch2&lt;I&gt;::Dim2&gt;,
+                  typename patch2&lt;I&gt;::Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_deriv_perp1">typedef idx_deriv_perp1</h3>
+<p><em>Tag the index type for derivatives along the perpendicular grid on the first patch.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp1 =  Idx&lt;deriv_perp1&lt;I&gt;, typename patch1&lt;I&gt;::Grid1, typename patch1&lt;I&gt;::Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_deriv_perp2">typedef idx_deriv_perp2</h3>
+<p><em>Tag the index type for derivatives along the perpendicular grid on the second patch.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp2 =  Idx&lt;deriv_perp2&lt;I&gt;, typename patch2&lt;I&gt;::Grid1, typename patch2&lt;I&gt;::Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-inner_interface_collection">typedef inner_interface_collection</h3>
+<p><em>Tag for all the interfaces in the Grid1D direction without the interfaces with</em> <a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::inner_interface_collection =  ddc::type_seq_remove_t&lt;interface_sorted_collection, outer_interface_collection&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-interface">typedef interface</h3>
+<p><em>Tag the interface with the correct patch order.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::interface =  ddc::type_seq_element_t&lt;I, inner_interface_collection&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-interface_sorted_collection">typedef interface_sorted_collection</h3>
+<p><em>Tag for all the sorted interfaces with the correct patch order.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::interface_sorted_collection = 
+            typename Connectivity::template get_all_interfaces_along_direction_t&lt;Grid1D&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-patch1">typedef patch1</h3>
+<p><em>Tag the first patch of the stored interface.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch1 =  typename stored_interface&lt;I&gt;::Edge1::associated_patch;
+</code></pre>
+<hr>
+
+<h3 id="typedef-patch2">typedef patch2</h3>
+<p><em>Tag the second patch of the stored interface.</em> </p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch2 =  typename stored_interface&lt;I&gt;::Edge2::associated_patch;
+</code></pre>
+<hr>
+
+<h3 id="typedef-stored_interface">typedef stored_interface</h3>
+<p><em>Tag the equivalent interface defined in the main file, i.e. given to</em> <a href="classMultipatchConnectivity.html"><em><strong>MultipatchConnectivity</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::stored_interface =  find_associated_interface_t&lt;typename interface&lt;I&gt;::Edge1, all_interface_collection&gt;;
+</code></pre>
+<hr>
+<h2 id="protected-attributes-documentation">Protected Attributes Documentation</h2>
+<h3 id="variable-m_deriv_coeffs_collect">variable m_deriv_coeffs_collect</h3>
+<p><a href="classInterfaceDerivCoeffsCollection.html"><em><strong>InterfaceDerivCoeffsCollection</strong></em></a> <em>to collect all the needed</em><a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">DerivCoeffCollection const&amp; DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::m_deriv_coeffs_collect;
+</code></pre>
+<hr>
+
+<h3 id="variable-m_idx_ranges">variable m_idx_ranges</h3>
+<p><em>MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.</em> </p>
+<pre><code class="language-C++">MultipatchType&lt;IdxRangeOnPatch, Patches...&gt; const&amp; DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::m_idx_ranges;
+</code></pre>
+<hr>
+<h2 id="protected-static-attributes-documentation">Protected Static Attributes Documentation</h2>
+<h3 id="variable-extremity_1">variable extremity_1</h3>
+<p><em>Tag the connection extremity of the first patch of the interface.</em> </p>
+<pre><code class="language-C++">Extremity DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::extremity_1;
+</code></pre>
+<hr>
+
+<h3 id="variable-extremity_2">variable extremity_2</h3>
+<p><em>Tag the connection extremity of the second patch of the interface.</em> </p>
+<pre><code class="language-C++">Extremity DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::extremity_2;
+</code></pre>
+<hr>
+
+<h3 id="variable-is_periodic">variable is_periodic</h3>
+<p><em>Boolean to indicate the periodicty of the global domain.</em> </p>
+<pre><code class="language-C++">bool DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::is_periodic;
+</code></pre>
+<hr>
+
+<h3 id="variable-n_inner_interfaces">variable n_inner_interfaces</h3>
+<p><em>Number of inner interfaces (fixing the number of elements in the matrix and vectors).</em> </p>
+<pre><code class="language-C++">std::size_t DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::n_inner_interfaces;
+</code></pre>
+<hr>
+
+<h3 id="variable-patch_order_matches_interfaces">variable patch_order_matches_interfaces</h3>
+<p><em>Boolean if the order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.</em> </p>
+<pre><code class="language-C++">bool DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_order_matches_interfaces;
+</code></pre>
+<hr>
+<h2 id="protected-functions-documentation">Protected Functions Documentation</h2>
+<h3 id="function-get_approximated_deriv-12">function get_approximated_deriv [1/2]</h3>
+<p><em>Compute the approximated derivative (or coefficient "c") at the interface along the mesh line indexed at the given indices.</em> </p>
+<pre><code class="language-C++">template&lt;std::size_t I, bool is_first_deriv, std::enable_if_t&lt; is_first_deriv, bool &gt;&gt;
+inline double const DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_approximated_deriv (
+    Idx&lt; grid_par1 &lt; I &gt; &gt; const &amp; idx_to_slice_1,
+    Idx&lt; grid_par2 &lt; I &gt; &gt; const &amp; idx_to_slice_2,
+    MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs
+) 
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>I</code> Index of the interface. </li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_to_slice_1</code> Index on the parallel grid of the first patch to select the mesh line along which the derivative is computed. </li>
+<li><code>idx_to_slice_2</code> Index on the parallel grid of the second patch to select the mesh line along which the derivative is computed. </li>
+<li><code>functions_and_derivs</code> Collection fields with its first derivatives and cross-derivatives. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The approximated derivative at the interface. </p>
+<hr>
+
+<h3 id="function-get_approximated_deriv-12_1">function get_approximated_deriv [1/2]</h3>
+<p><em>Compute the approximated cross-derivative (or coefficient "c") at the interface along the mesh line indexed at the given indices. Work only for indices in the corners of the patches (where the cross-derivatives are supposed to be computed).</em> </p>
+<pre><code class="language-C++">template&lt;std::size_t I, bool is_first_deriv, std::enable_if_t&lt;!is_first_deriv, bool &gt;&gt;
+inline double const DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_approximated_deriv (
+    Idx&lt; grid_par1 &lt; I &gt; &gt; const &amp; idx_to_slice_1,
+    Idx&lt; grid_par2 &lt; I &gt; &gt; const &amp; idx_to_slice_2,
+    MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs
+) 
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>I</code> Index of the interface. </li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_to_slice_1</code> Index on the parallel grid of the first patch to select the mesh line along which the derivative is computed. </li>
+<li><code>idx_to_slice_2</code> Index on the parallel grid of the second patch to select the mesh line along which the derivative is computed. </li>
+<li><code>functions_and_derivs</code> Collection fields with its first derivatives and cross-derivatives. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The approximated cross-derivative at the interface. </p>
+<hr>
+
+<h3 id="function-get_idx_interface">function get_idx_interface</h3>
+<p><em>Get the index of the given index range slice corresponding to one of the extremities of the 1D grid. If is_on_interface is true, the extremity corresponds to the interface. If is_on_interface is false, the extremity corresponds to the other bound of the interface (next or previous).</em> </p>
+<pre><code class="language-C++">template&lt;bool is_on_interface, std::size_t I, class Patch, bool is_patch1&gt;
+inline std::conditional_t&lt; is_patch1, Idx&lt; grid_perp1 &lt; I &gt; &gt;, Idx&lt; grid_perp2 &lt; I &gt; &gt; &gt; DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_idx_interface () 
+</code></pre>
+<hr>
+
+<h3 id="function-set_slice_indexes">function set_slice_indexes</h3>
+<p><em>Get the indices on Patch1 and Patch2 of the given interface. The index on Patch1 corresponds to the value given in input (if the interface is well oriented, otherwise it is Patch2). The index on Patch2 is the equivalent index of the one on Patch1. It also updates the value given in input with the value of the index on Patch2 for the next interface (if the next interface is well oriented, otherwise it is Patch1).</em> </p>
+<pre><code class="language-C++">template&lt;std::size_t I&gt;
+inline void DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::set_slice_indexes (
+    int &amp; value_idx_to_slice,
+    Idx&lt; grid_par1 &lt; I &gt; &gt; &amp; idx_to_slice_1,
+    Idx&lt; grid_par2 &lt; I &gt; &gt; &amp; idx_to_slice_2
+) 
+</code></pre>
+<p>Example for well oriented interfaces:</p>
+<p>| Patch1 | Patch2 Patch1 | Patch2 | 
+ | idx_1 &gt; idx_2 idx_1 &gt; idx_2 | | ^ | v ^ | v | |idx_val idx_val | idx_val idx_val | idx_val |</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>value_idx_to_slice</code> Integer containing the value of the index on the parallel grid of the last interface. </li>
+<li><code>idx_to_slice_1</code> Index on the parallel grid of the first patch to select the mesh line along which the derivative will be computed. </li>
+<li><code>idx_to_slice_2</code> Index on the parallel grid of the second patch to select the mesh line along which the derivative will be computed. </li>
+</ul>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp</code></p></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

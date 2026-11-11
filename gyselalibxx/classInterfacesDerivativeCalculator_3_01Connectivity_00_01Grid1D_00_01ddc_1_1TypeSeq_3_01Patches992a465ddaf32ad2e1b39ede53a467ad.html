@@ -582,6 +582,7 @@
 <ul>
 <li><code>#include &lt;interfaces_derivative_calculator.hpp&gt;</code></li>
 </ul>
+<p>Inherits the following classes: <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html">DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</a></p>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -592,8 +593,72 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_par_dim"><strong>base_type::deriv_par_dim</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-deriv_par_dim"><strong>deriv_par_dim</strong></a>  <br><em>Derivative dimension of the direction patch parallel to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp_dim"><strong>base_type::deriv_perp_dim</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-deriv_perp_dim"><strong>deriv_perp_dim</strong></a>  <br><em>Derivative dimension of the direction patch perpendicular to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Grid1D</td>
+<td style="text-align: left;"><a href="#typedef-grid_direction"><strong>grid_direction</strong></a>  <br><em>Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-idx_cross_deriv"><strong>base_type::idx_cross_deriv</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-idx_cross_deriv"><strong>idx_cross_deriv</strong></a>  <br><em>Index on the two derivative dimensions of</em> <a href="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.html#typedef-patch_direction"><em><strong>patch_direction</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-idx_deriv_perp"><strong>base_type::idx_deriv_perp</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-idx_deriv_perp"><strong>idx_deriv_perp</strong></a>  <br><em>Index on the derivative dimension perpendicular to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch_direction"><strong>base_type::patch_direction</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-patch_direction"><strong>patch_direction</strong></a>  <br><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>of the given direction grid.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch_first"><strong>base_type::patch_first</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-patch_first"><strong>patch_first</strong></a>  <br><em>First patch of the collection of patches in the direction of the given Grid1D.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-inherited-from-derivativecalculatorcommon-connectivity-grid1d-ddctypeseq-patches-derivcoeffcollection">Public Types inherited from DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</h2>
+<p>See <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html">DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef ddc::Deriv&lt; std::conditional_t&lt; std::is_same_v&lt; typename patch_direction::Grid1, <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_direction"><strong>grid_direction</strong></a> &gt;, typename patch_direction::Dim2, typename patch_direction::Dim1 &gt; &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_par_dim"><strong>deriv_par_dim</strong></a>  <br><em>Derivative dimension of the direction patch parallel to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::Deriv&lt; typename Grid1D::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp_dim"><strong>deriv_perp_dim</strong></a>  <br><em>Derivative dimension of the direction patch perpendicular to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Grid1D</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_direction"><strong>grid_direction</strong></a>  <br><em>Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp_dim"><strong>deriv_perp_dim</strong></a>, <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_par_dim"><strong>deriv_par_dim</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-idx_cross_deriv"><strong>idx_cross_deriv</strong></a>  <br><em>Index on the two derivative dimensions of</em> <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch_direction"><em><strong>patch_direction</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp_dim"><strong>deriv_perp_dim</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-idx_deriv_perp"><strong>idx_deriv_perp</strong></a>  <br><em>Index on the derivative dimension perpendicular to the mesh line.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef find_patch_t&lt; Grid1D, all_patches &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch_direction"><strong>patch_direction</strong></a>  <br><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>of the given direction grid.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef PatchFirst</td>
-<td style="text-align: left;"><a href="#typedef-first_patch"><strong>first_patch</strong></a>  <br><em>First patch of the collection of patches in the direction of the given Grid1D.</em></td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch_first"><strong>patch_first</strong></a>  <br><em>First patch of the collection of patches in the direction of the given Grid1D.</em></td>
 </tr>
 </tbody>
 </table>
@@ -612,25 +677,201 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-solve_cross_deriv-12"><strong>solve_cross_deriv</strong></a> (MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs, IdxPar const &amp; idx_par) <br><em>Compute the vector C_trunc to determine all the interface cross-derivatives in the Grid1D direction at a given index.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (IdxDeriv const &amp; deriv_order, MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs, IdxPar const &amp; idx_par) <br><em>Compute the vector C_trunc to determine all the interface derivatives or cross-derivatives in the Grid1D direction at a given index.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-solve_cross_deriv-22"><strong>solve_cross_deriv</strong></a> (MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs) <br><em>Compute the vector C_trunc to determine all the corner cross-derivatives in the Grid1D direction at all the last and the first indices of the first patch.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (IdxDeriv const &amp; deriv_order, MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs) <br><em>Compute the vector C_trunc to determine all the interface derivatives in the Grid1D direction at all the indices of the first patch, or all the corner cross-derivatives in the Grid1D direction at all the last and the first indices of the first patch.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions-inherited-from-derivativecalculatorcommon-connectivity-grid1d-ddctypeseq-patches-derivcoeffcollection">Public Functions inherited from DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</h2>
+<p>See <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html">DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#function-derivativecalculatorcommon"><strong>DerivativeCalculatorCommon</strong></a> (MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; const &amp; idx_ranges, DerivCoeffCollection const &amp; deriv_coeffs_collect) <br><em>Instantiate</em> <a href="classDerivativeCalculatorCommon.html"><em><strong>DerivativeCalculatorCommon</strong></em></a> <em>.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-types-inherited-from-derivativecalculatorcommon-connectivity-grid1d-ddctypeseq-patches-derivcoeffcollection">Protected Types inherited from DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</h2>
+<p>See <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html">DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef collect_grids_on_dim_t&lt; find_patch_t&lt; Grid1D, all_patches &gt;, Grid1D, <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-interface_sorted_collection"><strong>interface_sorted_collection</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid1dseq"><strong>Grid1DSeq</strong></a>  <br><em>Sequence of 1D grids in the direction of the given Grid1D over the patches.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>&lt; I &gt;::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_par1"><strong>deriv_par1</strong></a>  <br><em>Tag the derivative dimension along parallel grid of the first patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>&lt; I &gt;::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_par2"><strong>deriv_par2</strong></a>  <br><em>Tag the derivative dimension along parallel grid of the second patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp1"><strong>grid_perp1</strong></a>&lt; I &gt;::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp1"><strong>deriv_perp1</strong></a>  <br><em>Tag the derivative dimension along perpendicular grid of the first patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp2"><strong>grid_perp2</strong></a>&lt; I &gt;::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp2"><strong>deriv_perp2</strong></a>  <br><em>Tag the derivative dimension along perpendicular grid of the second patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge1::parallel_grid</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>  <br><em>Tag the parallel grid of the first patch to the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge2::parallel_grid</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>  <br><em>Tag the parallel grid of the second patch to the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge1::perpendicular_grid</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp1"><strong>grid_perp1</strong></a>  <br><em>Tag the perpendicular grid of the first patch to the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge2::perpendicular_grid</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp2"><strong>grid_perp2</strong></a>  <br><em>Tag the perpendicular grid of the second patch to the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Dim1 &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Grid1, ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Dim2 &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-idx_cross_deriv1"><strong>idx_cross_deriv1</strong></a>  <br><em>Tag the index type for cross-derivative on the first patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Dim1 &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Grid1, ddc::Deriv&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Dim2 &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-idx_cross_deriv2"><strong>idx_cross_deriv2</strong></a>  <br><em>Tag the index type for cross-derivatives on the second patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp1"><strong>deriv_perp1</strong></a>&lt; I &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Grid1, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>&lt; I &gt;::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-idx_deriv_perp1"><strong>idx_deriv_perp1</strong></a>  <br><em>Tag the index type for derivatives along the perpendicular grid on the first patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-deriv_perp2"><strong>deriv_perp2</strong></a>&lt; I &gt;, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Grid1, typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>&lt; I &gt;::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-idx_deriv_perp2"><strong>idx_deriv_perp2</strong></a>  <br><em>Tag the index type for derivatives along the perpendicular grid on the second patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_remove_t&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-interface_sorted_collection"><strong>interface_sorted_collection</strong></a>, outer_interface_collection &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-inner_interface_collection"><strong>inner_interface_collection</strong></a>  <br><em>Tag for all the interfaces in the Grid1D direction without the interfaces with</em> <a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; I, <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-inner_interface_collection"><strong>inner_interface_collection</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-interface"><strong>interface</strong></a>  <br><em>Tag the interface with the correct patch order.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Connectivity::template get_all_interfaces_along_direction_t&lt; Grid1D &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-interface_sorted_collection"><strong>interface_sorted_collection</strong></a>  <br><em>Tag for all the sorted interfaces with the correct patch order.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge1::associated_patch</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch1"><strong>patch1</strong></a>  <br><em>Tag the first patch of the stored interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt;::Edge2::associated_patch</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-patch2"><strong>patch2</strong></a>  <br><em>Tag the second patch of the stored interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef find_associated_interface_t&lt; typename <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-interface"><strong>interface</strong></a>&lt; I &gt;::Edge1, all_interface_collection &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-stored_interface"><strong>stored_interface</strong></a>  <br><em>Tag the equivalent interface defined in the main file, i.e. given to</em> <a href="classMultipatchConnectivity.html"><em><strong>MultipatchConnectivity</strong></em></a> <em>.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-attributes-inherited-from-derivativecalculatorcommon-connectivity-grid1d-ddctypeseq-patches-derivcoeffcollection">Protected Attributes inherited from DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</h2>
+<p>See <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html">DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">DerivCoeffCollection const  &amp;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#variable-m_deriv_coeffs_collect"><strong>m_deriv_coeffs_collect</strong></a>  <br><a href="classInterfaceDerivCoeffsCollection.html"><em><strong>InterfaceDerivCoeffsCollection</strong></em></a> <em>to collect all the needed</em><a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; const  &amp;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#variable-m_idx_ranges"><strong>m_idx_ranges</strong></a>  <br><em>MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-static-attributes-inherited-from-derivativecalculatorcommon-connectivity-grid1d-ddctypeseq-patches-derivcoeffcollection">Protected Static Attributes inherited from DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</h2>
+<p>See <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html">DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Extremity</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#variable-extremity_1"><strong>extremity_1</strong></a>   = <code>[**stored\_interface**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-stored_interface)&amp;lt;I&amp;gt;::Edge1::extremity</code><br><em>Tag the connection extremity of the first patch of the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">Extremity</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#variable-extremity_2"><strong>extremity_2</strong></a>   = <code>[**stored\_interface**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-stored_interface)&amp;lt;I&amp;gt;::Edge2::extremity</code><br><em>Tag the connection extremity of the second patch of the interface.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#variable-is_periodic"><strong>is_periodic</strong></a>   = <code>/* multi line expression */</code><br><em>Boolean to indicate the periodicty of the global domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#variable-n_inner_interfaces"><strong>n_inner_interfaces</strong></a>   = <code>ddc::type\_seq\_size\_v&amp;lt;[**inner\_interface\_collection**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-inner_interface_collection)&amp;gt;</code><br><em>Number of inner interfaces (fixing the number of elements in the matrix and vectors).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#variable-patch_order_matches_interfaces"><strong>patch_order_matches_interfaces</strong></a>   = <code>/* multi line expression */</code><br><em>Boolean if the order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-functions-inherited-from-derivativecalculatorcommon-connectivity-grid1d-ddctypeseq-patches-derivcoeffcollection">Protected Functions inherited from DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</h2>
+<p>See <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html">DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">double const</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#function-get_approximated_deriv-12"><strong>get_approximated_deriv</strong></a> (Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>&lt; I &gt; &gt; const &amp; idx_to_slice_1, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>&lt; I &gt; &gt; const &amp; idx_to_slice_2, MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs) <br><em>Compute the approximated derivative (or coefficient "c") at the interface along the mesh line indexed at the given indices.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">double const</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#function-get_approximated_deriv-12"><strong>get_approximated_deriv</strong></a> (Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>&lt; I &gt; &gt; const &amp; idx_to_slice_1, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>&lt; I &gt; &gt; const &amp; idx_to_slice_2, MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs) <br><em>Compute the approximated cross-derivative (or coefficient "c") at the interface along the mesh line indexed at the given indices. Work only for indices in the corners of the patches (where the cross-derivatives are supposed to be computed).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::conditional_t&lt; is_patch1, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp1"><strong>grid_perp1</strong></a>&lt; I &gt; &gt;, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_perp2"><strong>grid_perp2</strong></a>&lt; I &gt; &gt; &gt;</td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#function-get_idx_interface"><strong>get_idx_interface</strong></a> () <br><em>Get the index of the given index range slice corresponding to one of the extremities of the 1D grid. If is_on_interface is true, the extremity corresponds to the interface. If is_on_interface is false, the extremity corresponds to the other bound of the interface (next or previous).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-solve_deriv-12"><strong>solve_deriv</strong></a> (MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs, IdxPar const &amp; idx_par) <br><em>Compute the vector C_trunc to determine all the interface derivatives in the Grid1D direction at a given index.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-solve_deriv-22"><strong>solve_deriv</strong></a> (MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs) <br><em>Compute the vector C_trunc to determine all the interface derivatives in the Grid1D direction at all the indices of the first patch.</em></td>
+<td style="text-align: left;"><a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#function-set_slice_indexes"><strong>set_slice_indexes</strong></a> (int &amp; value_idx_to_slice, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par1"><strong>grid_par1</strong></a>&lt; I &gt; &gt; &amp; idx_to_slice_1, Idx&lt; <a href="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.html#typedef-grid_par2"><strong>grid_par2</strong></a>&lt; I &gt; &gt; &amp; idx_to_slice_2) <br><em>Get the indices on Patch1 and Patch2 of the given interface. The index on Patch1 corresponds to the value given in input (if the interface is well oriented, otherwise it is Patch2). The index on Patch2 is the equivalent index of the one on Patch1. It also updates the value given in input with the value of the index on Patch2 for the next interface (if the next interface is well oriented, otherwise it is Patch1).</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>This operator is implemented for conforming equivalent global meshes.</p>
-<p>When we call the operator .<a href="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.html#function-solve_deriv-12"><strong>solve_deriv()</strong></a> or .<a href="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.html#function-solve_cross_deriv-12"><strong>solve_cross_deriv()</strong></a>, the operator loops over the interface to compute the vector C_trunc to determine all the interface derivatives and update the <a href="classDerivField.html"><strong>DerivField</strong></a> given in input.</p>
+<p>When we call the operator .solve_deriv() or .solve_cross_deriv(), the operator loops over the interface to compute the vector C_trunc to determine all the interface derivatives and update the <a href="classDerivField.html"><strong>DerivField</strong></a> given in input.</p>
 <p>The vector C_trunc is given by the coefficients (see README), 
 [{\sum_{k = - N_{reduc}}^{N_{reduc}} \omega_{k, N_{reduc}, N_{reduc}}^{i_I} f_{i_I+k} }_I]</p>
 <p>with
@@ -645,9 +886,45 @@
 <li><code>DerivCoeffCollection</code> A <a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a> that stores the <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a> needed to compute the interface derivatives. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-first_patch">typedef first_patch</h3>
+<h3 id="typedef-deriv_par_dim">typedef deriv_par_dim</h3>
+<p><em>Derivative dimension of the direction patch parallel to the mesh line.</em> </p>
+<pre><code class="language-C++">using InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par_dim =  typename base_type::deriv_par_dim;
+</code></pre>
+<hr>
+
+<h3 id="typedef-deriv_perp_dim">typedef deriv_perp_dim</h3>
+<p><em>Derivative dimension of the direction patch perpendicular to the mesh line.</em> </p>
+<pre><code class="language-C++">using InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp_dim =  typename base_type::deriv_perp_dim;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid_direction">typedef grid_direction</h3>
+<p><em>Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.</em> </p>
+<pre><code class="language-C++">using InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_direction =  Grid1D;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_cross_deriv">typedef idx_cross_deriv</h3>
+<p><em>Index on the two derivative dimensions of</em> <a href="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.html#typedef-patch_direction"><em><strong>patch_direction</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">using InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv =  typename base_type::idx_cross_deriv;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_deriv_perp">typedef idx_deriv_perp</h3>
+<p><em>Index on the derivative dimension perpendicular to the mesh line.</em> </p>
+<pre><code class="language-C++">using InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp =  typename base_type::idx_deriv_perp;
+</code></pre>
+<hr>
+
+<h3 id="typedef-patch_direction">typedef patch_direction</h3>
+<p><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>of the given direction grid.</em></p>
+<pre><code class="language-C++">using InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_direction =  typename base_type::patch_direction;
+</code></pre>
+<hr>
+
+<h3 id="typedef-patch_first">typedef patch_first</h3>
 <p><em>First patch of the collection of patches in the direction of the given Grid1D.</em> </p>
-<pre><code class="language-C++">using InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::first_patch =  PatchFirst;
+<pre><code class="language-C++">using InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_first =  typename base_type::patch_first;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -665,70 +942,45 @@
 </ul>
 <hr>
 
-<h3 id="function-solve_cross_deriv-12">function solve_cross_deriv [1/2]</h3>
-<p><em>Compute the vector C_trunc to determine all the interface cross-derivatives in the Grid1D direction at a given index.</em> </p>
-<pre><code class="language-C++">template&lt;class IdxPar&gt;
-inline void InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::solve_cross_deriv (
+<h3 id="function-operator">function operator()</h3>
+<p><em>Compute the vector C_trunc to determine all the interface derivatives or cross-derivatives in the Grid1D direction at a given index.</em> </p>
+<pre><code class="language-C++">template&lt;class IdxDeriv, class IdxPar&gt;
+inline void InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::operator() (
+    IdxDeriv const &amp; deriv_order,
     MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs,
     IdxPar const &amp; idx_par
 ) 
 </code></pre>
-<p>It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces.</p>
+<p>For the derivatives, it uses the function values to compute the first-derivatives perpendicular to the interfaces. For the cross-derivatives, it uses the first-derivatives to compute the cross-derivatives in a perpendicular direction to the interfaces.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
+<li><code>IdxDeriv</code> Type for the given derivative order, either on the perpendicular direction for the first derivatives or both for the cross-derivatives. </li>
 <li><code>IdxPar</code> Type for the given index. It can be on the first or the second grid of the first patch. </li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>functions_and_derivs</code> Collection fields with its first derivatives and cross-derivatives. </li>
-<li><code>idx_par</code> Index of the line in the Grid1D direction where we compute all the interface cross-derivatives. </li>
-</ul>
-<hr>
-
-<h3 id="function-solve_cross_deriv-22">function solve_cross_deriv [2/2]</h3>
-<p><em>Compute the vector C_trunc to determine all the corner cross-derivatives in the Grid1D direction at all the last and the first indices of the first patch.</em> </p>
-<pre><code class="language-C++">inline void InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::solve_cross_deriv (
-    MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs
-) 
-</code></pre>
-<p>It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>functions_and_derivs</code> Collection fields with its first derivatives and cross-derivatives. </li>
-</ul>
-<p><strong>Warning:</strong></p>
-<p>The global mesh is supposed to be conforming. </p>
-<hr>
-
-<h3 id="function-solve_deriv-12">function solve_deriv [1/2]</h3>
-<p><em>Compute the vector C_trunc to determine all the interface derivatives in the Grid1D direction at a given index.</em> </p>
-<pre><code class="language-C++">template&lt;class IdxPar&gt;
-inline void InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::solve_deriv (
-    MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs,
-    IdxPar const &amp; idx_par
-) 
-</code></pre>
-<p>It uses the function values to compute the first-derivatives perpendicular to the interfaces.</p>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>IdxPar</code> Type for the given index. It can be on the first or the second grid of the first patch. </li>
-</ul>
-<p><strong>Parameters:</strong></p>
-<ul>
+<li><code>deriv_order</code> Indicate if we compute the first derivatives or the cross-derivatives. Its value is not taken into account. </li>
 <li><code>functions_and_derivs</code> Collection fields with its first derivatives and cross-derivatives. </li>
 <li><code>idx_par</code> Index of the line in the Grid1D direction where we compute all the interface derivatives. </li>
 </ul>
 <hr>
 
-<h3 id="function-solve_deriv-22">function solve_deriv [2/2]</h3>
-<p><em>Compute the vector C_trunc to determine all the interface derivatives in the Grid1D direction at all the indices of the first patch.</em> </p>
-<pre><code class="language-C++">inline void InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::solve_deriv (
+<h3 id="function-operator_1">function operator()</h3>
+<p><em>Compute the vector C_trunc to determine all the interface derivatives in the Grid1D direction at all the indices of the first patch, or all the corner cross-derivatives in the Grid1D direction at all the last and the first indices of the first patch.</em> </p>
+<pre><code class="language-C++">template&lt;class IdxDeriv&gt;
+inline void InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::operator() (
+    IdxDeriv const &amp; deriv_order,
     MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs
 ) 
 </code></pre>
-<p>It uses the function values to compute the first-derivatives perpendicular to the interfaces.</p>
+<p>For the derivatives, it uses the function values to compute the first-derivatives perpendicular to the interfaces. For the cross-derivatives, it uses the first-derivatives to compute the cross-derivatives in a perpendicular direction to the interfaces.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>IdxDeriv</code> Type for the given derivative order, either on the perpendicular direction for the first derivatives or both for the cross-derivatives. </li>
+</ul>
 <p><strong>Parameters:</strong></p>
 <ul>
+<li><code>deriv_order</code> Indicate if we compute the first derivatives or the cross-derivatives. Its value is not taken into account. </li>
 <li><code>functions_and_derivs</code> Collection fields with its first derivatives and cross-derivatives we want to compute. </li>
 </ul>
 <p><strong>Warning:</strong></p>

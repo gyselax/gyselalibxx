@@ -271,6 +271,7 @@ Here is a list of all files with brief descriptions:
             * **file** [**multipatch\_type.hpp**](multipatch__type_8hpp.md)     
             * **file** [**types.hpp**](types_8hpp.md)     
         * **dir** [**interface\_derivatives**](dir_d1bd52a3e76a422151eefdcc4e15c189.md)     
+            * **file** [**derivative\_calculator\_common.hpp**](derivative__calculator__common_8hpp.md)     
             * **file** [**interface\_derivative\_coefficients.hpp**](interface__derivative__coefficients_8hpp.md)     
             * **file** [**interface\_derivative\_coefficients\_collection.hpp**](interface__derivative__coefficients__collection_8hpp.md)     
             * **file** [**interfaces\_derivative\_calculator.hpp**](interfaces__derivative__calculator_8hpp.md)     

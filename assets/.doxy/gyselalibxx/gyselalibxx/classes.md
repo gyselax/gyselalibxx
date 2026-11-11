@@ -103,6 +103,8 @@
 
 ## d
 
+* [**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md)
+* [**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md)
 * [**DerivField**](classDerivField.md)
 * [**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md)
 * [**DerivFieldCommon**](classDerivFieldCommon.md)
@@ -158,8 +160,6 @@
 ([**connectivity\_details**](namespaceconnectivity__details.md))
 * [**Euler**](classEuler.md)
 * [**Euler&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md)
-* [**eval\_cross\_deriv**](structInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patche3f4bed7b8805792287865fb3788047bf.md)
-* [**eval\_deriv**](structInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patche5847a39362ee97608ec4e6dce13647d2.md)
 * [**EvaluationCoord**](structvector__mapper__detail_1_1EvaluationCoord.md)
 ([**vector\_mapper\_detail**](namespacevector__mapper__detail.md))
 * [**EvaluationCoord&lt; Mapping &gt;**](structvector__mapper__detail_1_1EvaluationCoord_3_01Mapping_01_4.md)

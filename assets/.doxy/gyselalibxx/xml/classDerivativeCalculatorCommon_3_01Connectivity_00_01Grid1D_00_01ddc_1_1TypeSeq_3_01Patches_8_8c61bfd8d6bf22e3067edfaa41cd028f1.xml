@@ -1,0 +1,1220 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1" kind="class" language="C++" prot="public">
+    <compoundname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</compoundname>
+    <derivedcompoundref refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad" prot="public" virt="non-virtual">InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</derivedcompoundref>
+    <includes refid="derivative__calculator__common_8hpp" local="no">derivative_calculator_common.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Connectivity</type>
+      </param>
+      <param>
+        <type>class Grid1D</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Patches</declname>
+        <defname>Patches</defname>
+      </param>
+      <param>
+        <type>class DerivCoeffCollection</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a1292451a59b7378b43280e7972b8e223" prot="private" static="no">
+        <type>typename Connectivity::interface_collection</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::all_interface_collection =  typename Connectivity::interface_collection</definition>
+        <argsstring></argsstring>
+        <name>all_interface_collection</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::all_interface_collection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a640a5e7b2699acfe4d97cc001a3d988e" prot="private" static="no">
+        <type>typename Connectivity::all_patches</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::all_patches =  typename Connectivity::all_patches</definition>
+        <argsstring></argsstring>
+        <name>all_patches</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::all_patches</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a9b09d33bc607f65225532e09ab05a2b7" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adb9f92f4a0c5532b0fcb568177adde7e" kindref="member">interface_sorted_collection</ref> &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::InterfaceBoundFirst =  ddc::type_seq_element_t&lt;0, interface_sorted_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>InterfaceBoundFirst</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::InterfaceBoundFirst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a4361c0e951f4da628b77310f3878e9b7" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; number_of_interfaces - 1, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adb9f92f4a0c5532b0fcb568177adde7e" kindref="member">interface_sorted_collection</ref> &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::InterfaceBoundLast =  ddc::type_seq_element_t&lt;number_of_interfaces - 1, interface_sorted_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>InterfaceBoundLast</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::InterfaceBoundLast</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a42a14e338885a87dcc3cad557817273d" prot="private" static="no">
+        <type>std::conditional_t&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a373abc41fc1df30502e542e0d0574fbf" kindref="member">is_periodic</ref>, ddc::TypeSeq&lt;&gt;, ddc::TypeSeq&lt; InterfaceBoundFirst, InterfaceBoundLast &gt; &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::outer_interface_collection =  std::conditional_t&lt;
+            is_periodic,
+            ddc::TypeSeq&lt;&gt;,
+            ddc::TypeSeq&lt;InterfaceBoundFirst, InterfaceBoundLast&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>outer_interface_collection</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::outer_interface_collection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a23018f0bb43988810252e09675b2f0c8" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a360415c36bdbc242d837c38199e84aa1" kindref="member">inner_interface_collection</ref> &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::InterfaceInnerFirst =  ddc::type_seq_element_t&lt;0, inner_interface_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>InterfaceInnerFirst</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::InterfaceInnerFirst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="99" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a274f5c0a32e4ab53f44d10d56f259af8" prot="private" static="no">
+        <type>std::conditional_t&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a373abc41fc1df30502e542e0d0574fbf" kindref="member">is_periodic</ref>, find_patch_t&lt; Grid1D, all_patches &gt;, typename InterfaceInnerFirst::Edge2::associated_patch &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::PatchFirst =  std::conditional_t&lt;
+            is_periodic,
+            find_patch_t&lt;Grid1D, all_patches&gt;,
+            typename InterfaceInnerFirst::Edge2::associated_patch&gt;</definition>
+        <argsstring></argsstring>
+        <name>PatchFirst</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::PatchFirst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-type">
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adb9f92f4a0c5532b0fcb568177adde7e" prot="protected" static="no">
+        <type>typename Connectivity::template get_all_interfaces_along_direction_t&lt; Grid1D &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::interface_sorted_collection = 
+            typename Connectivity::template get_all_interfaces_along_direction_t&lt;Grid1D&gt;</definition>
+        <argsstring></argsstring>
+        <name>interface_sorted_collection</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::interface_sorted_collection</qualifiedname>
+        <briefdescription>
+<para>Tag for all the sorted interfaces with the correct patch order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a360415c36bdbc242d837c38199e84aa1" prot="protected" static="no">
+        <type>ddc::type_seq_remove_t&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adb9f92f4a0c5532b0fcb568177adde7e" kindref="member">interface_sorted_collection</ref>, outer_interface_collection &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::inner_interface_collection =  ddc::type_seq_remove_t&lt;interface_sorted_collection, outer_interface_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>inner_interface_collection</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::inner_interface_collection</qualifiedname>
+        <briefdescription>
+<para>Tag for all the interfaces in the Grid1D direction without the interfaces with <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aa384620cca1a515a49b3ff8f2244789f" prot="protected" static="no">
+        <type>collect_grids_on_dim_t&lt; find_patch_t&lt; Grid1D, all_patches &gt;, Grid1D, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adb9f92f4a0c5532b0fcb568177adde7e" kindref="member">interface_sorted_collection</ref> &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::Grid1DSeq =  collect_grids_on_dim_t&lt;
+            find_patch_t&lt;Grid1D, all_patches&gt;,
+            Grid1D,
+            interface_sorted_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>Grid1DSeq</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::Grid1DSeq</qualifiedname>
+        <briefdescription>
+<para>Sequence of 1D grids in the direction of the given Grid1D over the patches. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a70da0830e47013895c84614f756d3f51" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>ddc::type_seq_element_t&lt; I, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a360415c36bdbc242d837c38199e84aa1" kindref="member">inner_interface_collection</ref> &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::interface =  ddc::type_seq_element_t&lt;I, inner_interface_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>interface</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::interface</qualifiedname>
+        <briefdescription>
+<para>Tag the interface with the correct patch order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="134" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>find_associated_interface_t&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a70da0830e47013895c84614f756d3f51" kindref="member">interface</ref>&lt; I &gt;::Edge1, all_interface_collection &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::stored_interface =  find_associated_interface_t&lt;typename interface&lt;I&gt;::Edge1, all_interface_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>stored_interface</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::stored_interface</qualifiedname>
+        <briefdescription>
+<para>Tag the equivalent interface defined in the main file, i.e. given to <ref refid="classMultipatchConnectivity" kindref="compound">MultipatchConnectivity</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="138" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt; I &gt;::Edge1::associated_patch</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch1 =  typename stored_interface&lt;I&gt;::Edge1::associated_patch</definition>
+        <argsstring></argsstring>
+        <name>patch1</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch1</qualifiedname>
+        <briefdescription>
+<para>Tag the first patch of the stored interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="148" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a6ac7740f258d5b94363ce4ecbd630462" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt; I &gt;::Edge2::associated_patch</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch2 =  typename stored_interface&lt;I&gt;::Edge2::associated_patch</definition>
+        <argsstring></argsstring>
+        <name>patch2</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch2</qualifiedname>
+        <briefdescription>
+<para>Tag the second patch of the stored interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="151" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aafef840d7f91831321dc4f8d468a914d" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt; I &gt;::Edge1::perpendicular_grid</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_perp1 =  typename stored_interface&lt;I&gt;::Edge1::perpendicular_grid</definition>
+        <argsstring></argsstring>
+        <name>grid_perp1</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_perp1</qualifiedname>
+        <briefdescription>
+<para>Tag the perpendicular grid of the first patch to the interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="162" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adf24554d656142076c6ae9425301561a" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt; I &gt;::Edge2::perpendicular_grid</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_perp2 =  typename stored_interface&lt;I&gt;::Edge2::perpendicular_grid</definition>
+        <argsstring></argsstring>
+        <name>grid_perp2</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_perp2</qualifiedname>
+        <briefdescription>
+<para>Tag the perpendicular grid of the second patch to the interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="165" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adffe783cf04688c4701cf8a8ce1a9098" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt; I &gt;::Edge1::parallel_grid</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_par1 =  typename stored_interface&lt;I&gt;::Edge1::parallel_grid</definition>
+        <argsstring></argsstring>
+        <name>grid_par1</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_par1</qualifiedname>
+        <briefdescription>
+<para>Tag the parallel grid of the first patch to the interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="169" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a1a00bd73106ed90d38e8d76e64ffe271" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt; I &gt;::Edge2::parallel_grid</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_par2 =  typename stored_interface&lt;I&gt;::Edge2::parallel_grid</definition>
+        <argsstring></argsstring>
+        <name>grid_par2</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_par2</qualifiedname>
+        <briefdescription>
+<para>Tag the parallel grid of the second patch to the interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="172" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a0676dd15750595cdb37267eb3afd7f18" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename ddc::Deriv&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aafef840d7f91831321dc4f8d468a914d" kindref="member">grid_perp1</ref>&lt; I &gt;::continuous_dimension_type &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp1 =  typename ddc::Deriv&lt;typename grid_perp1&lt;I&gt;::continuous_dimension_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_perp1</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp1</qualifiedname>
+        <briefdescription>
+<para>Tag the derivative dimension along perpendicular grid of the first patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="176" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1afe9a05f66ca7e15f4719b222df528935" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename ddc::Deriv&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adf24554d656142076c6ae9425301561a" kindref="member">grid_perp2</ref>&lt; I &gt;::continuous_dimension_type &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp2 =  typename ddc::Deriv&lt;typename grid_perp2&lt;I&gt;::continuous_dimension_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_perp2</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp2</qualifiedname>
+        <briefdescription>
+<para>Tag the derivative dimension along perpendicular grid of the second patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="179" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ac71f5e7edbf9561bb7157a5e310554f2" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename ddc::Deriv&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adffe783cf04688c4701cf8a8ce1a9098" kindref="member">grid_par1</ref>&lt; I &gt;::continuous_dimension_type &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par1 =  typename ddc::Deriv&lt;typename grid_par1&lt;I&gt;::continuous_dimension_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_par1</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par1</qualifiedname>
+        <briefdescription>
+<para>Tag the derivative dimension along parallel grid of the first patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="183" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a67629949653503a50bd48551edc5af0f" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>typename ddc::Deriv&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a1a00bd73106ed90d38e8d76e64ffe271" kindref="member">grid_par2</ref>&lt; I &gt;::continuous_dimension_type &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par2 =  typename ddc::Deriv&lt;typename grid_par2&lt;I&gt;::continuous_dimension_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_par2</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par2</qualifiedname>
+        <briefdescription>
+<para>Tag the derivative dimension along parallel grid of the second patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="186" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ae0e872c93a114b1d9b759e03601b24b5" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>Idx&lt; ddc::Deriv&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" kindref="member">patch1</ref>&lt; I &gt;::Dim1 &gt;, typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" kindref="member">patch1</ref>&lt; I &gt;::Grid1, ddc::Deriv&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" kindref="member">patch1</ref>&lt; I &gt;::Dim2 &gt;, typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" kindref="member">patch1</ref>&lt; I &gt;::Grid2 &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv1 =  Idx&lt;ddc::Deriv&lt;typename patch1&lt;I&gt;::Dim1&gt;,
+                  typename patch1&lt;I&gt;::Grid1,
+                  ddc::Deriv&lt;typename patch1&lt;I&gt;::Dim2&gt;,
+                  typename patch1&lt;I&gt;::Grid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>idx_cross_deriv1</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv1</qualifiedname>
+        <briefdescription>
+<para>Tag the index type for cross-derivative on the first patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="190" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a064519c5277e0d64e37049cd581bb84b" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>Idx&lt; ddc::Deriv&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a6ac7740f258d5b94363ce4ecbd630462" kindref="member">patch2</ref>&lt; I &gt;::Dim1 &gt;, typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a6ac7740f258d5b94363ce4ecbd630462" kindref="member">patch2</ref>&lt; I &gt;::Grid1, ddc::Deriv&lt; typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a6ac7740f258d5b94363ce4ecbd630462" kindref="member">patch2</ref>&lt; I &gt;::Dim2 &gt;, typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a6ac7740f258d5b94363ce4ecbd630462" kindref="member">patch2</ref>&lt; I &gt;::Grid2 &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv2 =  Idx&lt;ddc::Deriv&lt;typename patch2&lt;I&gt;::Dim1&gt;,
+                  typename patch2&lt;I&gt;::Grid1,
+                  ddc::Deriv&lt;typename patch2&lt;I&gt;::Dim2&gt;,
+                  typename patch2&lt;I&gt;::Grid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>idx_cross_deriv2</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv2</qualifiedname>
+        <briefdescription>
+<para>Tag the index type for cross-derivatives on the second patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="196" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aaabb4bca28a10b5fd1dbeac30d44ca54" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a0676dd15750595cdb37267eb3afd7f18" kindref="member">deriv_perp1</ref>&lt; I &gt;, typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" kindref="member">patch1</ref>&lt; I &gt;::Grid1, typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" kindref="member">patch1</ref>&lt; I &gt;::Grid2 &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp1 =  Idx&lt;deriv_perp1&lt;I&gt;, typename patch1&lt;I&gt;::Grid1, typename patch1&lt;I&gt;::Grid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>idx_deriv_perp1</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp1</qualifiedname>
+        <briefdescription>
+<para>Tag the index type for derivatives along the perpendicular grid on the first patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="203" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a74d2453f2f05cbe5ba7eef2701df2045" prot="protected" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1afe9a05f66ca7e15f4719b222df528935" kindref="member">deriv_perp2</ref>&lt; I &gt;, typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a6ac7740f258d5b94363ce4ecbd630462" kindref="member">patch2</ref>&lt; I &gt;::Grid1, typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a6ac7740f258d5b94363ce4ecbd630462" kindref="member">patch2</ref>&lt; I &gt;::Grid2 &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp2 =  Idx&lt;deriv_perp2&lt;I&gt;, typename patch2&lt;I&gt;::Grid1, typename patch2&lt;I&gt;::Grid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>idx_deriv_perp2</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp2</qualifiedname>
+        <briefdescription>
+<para>Tag the index type for derivatives along the perpendicular grid on the second patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="206" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="206" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a795e682b8ca9b18d6b32107b584091fa" prot="public" static="no">
+        <type>PatchFirst</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_first =  PatchFirst</definition>
+        <argsstring></argsstring>
+        <name>patch_first</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_first</qualifiedname>
+        <briefdescription>
+<para>First patch of the collection of patches in the direction of the given Grid1D. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="210" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="210" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a818fb0117b8f61477351bb90e1777f4f" prot="public" static="no">
+        <type>Grid1D</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_direction =  Grid1D</definition>
+        <argsstring></argsstring>
+        <name>grid_direction</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::grid_direction</qualifiedname>
+        <briefdescription>
+<para>Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="213" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a9e7f858fb88b2c6cb82ebdcdf4861f8a" prot="public" static="no">
+        <type>find_patch_t&lt; Grid1D, all_patches &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_direction =  find_patch_t&lt;Grid1D, all_patches&gt;</definition>
+        <argsstring></argsstring>
+        <name>patch_direction</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_direction</qualifiedname>
+        <briefdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> of the given direction grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="216" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a870af63118467ac23878728628f8e12c" prot="public" static="no">
+        <type>ddc::Deriv&lt; typename Grid1D::continuous_dimension_type &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp_dim =  ddc::Deriv&lt;typename Grid1D::continuous_dimension_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_perp_dim</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_perp_dim</qualifiedname>
+        <briefdescription>
+<para>Derivative dimension of the direction patch perpendicular to the mesh line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="219" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad1dccfb00abfa266bf346bae14c87127" prot="public" static="no">
+        <type>ddc::Deriv&lt; std::conditional_t&lt; std::is_same_v&lt; typename patch_direction::Grid1, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a818fb0117b8f61477351bb90e1777f4f" kindref="member">grid_direction</ref> &gt;, typename patch_direction::Dim2, typename patch_direction::Dim1 &gt; &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par_dim =  ddc::Deriv&lt;std::conditional_t&lt;
+            std::is_same_v&lt;typename patch_direction::Grid1, grid_direction&gt;,
+            typename patch_direction::Dim2,
+            typename patch_direction::Dim1&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_par_dim</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::deriv_par_dim</qualifiedname>
+        <briefdescription>
+<para>Derivative dimension of the direction patch parallel to the mesh line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="221" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a8e0e3f86bb784cec5c4d19a13d59fb80" prot="public" static="no">
+        <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a870af63118467ac23878728628f8e12c" kindref="member">deriv_perp_dim</ref> &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp =  Idx&lt;deriv_perp_dim&gt;</definition>
+        <argsstring></argsstring>
+        <name>idx_deriv_perp</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_deriv_perp</qualifiedname>
+        <briefdescription>
+<para>Index on the derivative dimension perpendicular to the mesh line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="227" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ae6beeca0f33b11493484287831890667" prot="public" static="no">
+        <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a870af63118467ac23878728628f8e12c" kindref="member">deriv_perp_dim</ref>, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad1dccfb00abfa266bf346bae14c87127" kindref="member">deriv_par_dim</ref> &gt;</type>
+        <definition>using DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv =  Idx&lt;deriv_perp_dim, deriv_par_dim&gt;</definition>
+        <argsstring></argsstring>
+        <name>idx_cross_deriv</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::idx_cross_deriv</qualifiedname>
+        <briefdescription>
+<para>Index on the two derivative dimensions of <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a9e7f858fb88b2c6cb82ebdcdf4861f8a" kindref="member">patch_direction</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="229" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="229" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a2f5f95177dd4cdccbbaa9fd7ff5e7284" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::number_of_interfaces</definition>
+        <argsstring></argsstring>
+        <name>number_of_interfaces</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::number_of_interfaces</qualifiedname>
+        <initializer>= ddc::type_seq_size_v&lt;<ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adb9f92f4a0c5532b0fcb568177adde7e" kindref="member">interface_sorted_collection</ref>&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="60" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a373abc41fc1df30502e542e0d0574fbf" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::is_periodic</definition>
+        <argsstring></argsstring>
+        <name>is_periodic</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::is_periodic</qualifiedname>
+        <initializer>= (!std::is_same_v&lt;typename InterfaceBoundFirst::Edge1, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref>&gt;)&amp;&amp;(
+                    !std::is_same_v&lt;typename InterfaceBoundFirst::Edge2, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref>&gt;)</initializer>
+        <briefdescription>
+<para>Boolean to indicate the periodicty of the global domain. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="76" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a4eb8fc7841cf6720f461e7daf18d6957" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::n_inner_interfaces</definition>
+        <argsstring></argsstring>
+        <name>n_inner_interfaces</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::n_inner_interfaces</qualifiedname>
+        <initializer>= ddc::type_seq_size_v&lt;<ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a360415c36bdbc242d837c38199e84aa1" kindref="member">inner_interface_collection</ref>&gt;</initializer>
+        <briefdescription>
+<para>Number of inner interfaces (fixing the number of elements in the matrix and vectors). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="95" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ab102cdbd7324b35e0a69bb88ba34c704" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_order_matches_interfaces</definition>
+        <argsstring></argsstring>
+        <name>patch_order_matches_interfaces</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::patch_order_matches_interfaces</qualifiedname>
+        <initializer>= std::is_same_v&lt;
+            typename <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt;I&gt;::Edge1::perpendicular_grid,
+            ddc::type_seq_element_t&lt;I, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aa384620cca1a515a49b3ff8f2244789f" kindref="member">Grid1DSeq</ref>&gt;&gt;</initializer>
+        <briefdescription>
+<para>Boolean if the order of Patch1|Patch2 of the interface matches with the sorted 1D grid sequence. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="142" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a71e0c0a1f5bfa9b21d5fe5830677a55a" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>Extremity</type>
+        <definition>Extremity DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::extremity_1</definition>
+        <argsstring></argsstring>
+        <name>extremity_1</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::extremity_1</qualifiedname>
+        <initializer>= <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt;I&gt;::Edge1::extremity</initializer>
+        <briefdescription>
+<para>Tag the connection extremity of the first patch of the interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="155" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a4841fddf1a8eb2115be7662312f0de3c" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>Extremity</type>
+        <definition>Extremity DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::extremity_2</definition>
+        <argsstring></argsstring>
+        <name>extremity_2</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::extremity_2</qualifiedname>
+        <initializer>= <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" kindref="member">stored_interface</ref>&lt;I&gt;::Edge2::extremity</initializer>
+        <briefdescription>
+<para>Tag the connection extremity of the second patch of the interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="158" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a0550ffe25e7768e2d33694cfb88eb8b1" prot="protected" static="no" mutable="no">
+        <type>MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; const  &amp;</type>
+        <definition>MultipatchType&lt;IdxRangeOnPatch, Patches...&gt; const&amp; DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::m_idx_ranges</definition>
+        <argsstring></argsstring>
+        <name>m_idx_ranges</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::m_idx_ranges</qualifiedname>
+        <briefdescription>
+<para>MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="233" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ade70e84f6d030c909bae8e002c966fa9" prot="protected" static="no" mutable="no">
+        <type>DerivCoeffCollection const  &amp;</type>
+        <definition>DerivCoeffCollection const&amp; DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::m_deriv_coeffs_collect</definition>
+        <argsstring></argsstring>
+        <name>m_deriv_coeffs_collect</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::m_deriv_coeffs_collect</qualifiedname>
+        <briefdescription>
+<para><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref> to collect all the needed <ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="236" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="236" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a3c1ac38529c28a9fd063a304e82f5fe8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::DerivativeCalculatorCommon</definition>
+        <argsstring>(MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; const &amp;idx_ranges, DerivCoeffCollection const &amp;deriv_coeffs_collect)</argsstring>
+        <name>DerivativeCalculatorCommon</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::DerivativeCalculatorCommon</qualifiedname>
+        <param>
+          <type>MultipatchType&lt; IdxRangeOnPatch, Patches... &gt; const &amp;</type>
+          <declname>idx_ranges</declname>
+        </param>
+        <param>
+          <type>DerivCoeffCollection const &amp;</type>
+          <declname>deriv_coeffs_collect</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate <ref refid="classDerivativeCalculatorCommon" kindref="compound">DerivativeCalculatorCommon</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_ranges</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchType collection of index ranges defined on the given list of patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deriv_coeffs_collect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref> containing all the interface derivative calculator for each interface in the given Grid1D direction. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="246" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="246" bodyend="252"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a3717029384e4c1ec41a06ceda1fd5f45" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>is_first_deriv</declname>
+            <defname>is_first_deriv</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; is_first_deriv, bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>double const</type>
+        <definition>double const DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_approximated_deriv</definition>
+        <argsstring>(Idx&lt; grid_par1&lt; I &gt; &gt; const &amp;idx_to_slice_1, Idx&lt; grid_par2&lt; I &gt; &gt; const &amp;idx_to_slice_2, MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs)</argsstring>
+        <name>get_approximated_deriv</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_approximated_deriv</qualifiedname>
+        <param>
+          <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adffe783cf04688c4701cf8a8ce1a9098" kindref="member">grid_par1</ref>&lt; I &gt; &gt; const &amp;</type>
+          <declname>idx_to_slice_1</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a1a00bd73106ed90d38e8d76e64ffe271" kindref="member">grid_par2</ref>&lt; I &gt; &gt; const &amp;</type>
+          <declname>idx_to_slice_2</declname>
+        </param>
+        <param>
+          <type>MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt;</type>
+          <declname>functions_and_derivs</declname>
+        </param>
+        <briefdescription>
+<para>Compute the approximated derivative (or coefficient &quot;c&quot;) at the interface along the mesh line indexed at the given indices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>I</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the interface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_to_slice_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index on the parallel grid of the first patch to select the mesh line along which the derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_to_slice_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index on the parallel grid of the second patch to select the mesh line along which the derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">functions_and_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collection fields with its first derivatives and cross-derivatives. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The approximated derivative at the interface. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="268" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="268" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a3717029384e4c1ec41a06ceda1fd5f45" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>is_first_deriv</declname>
+            <defname>is_first_deriv</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;!is_first_deriv, bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>double const</type>
+        <definition>double const DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_approximated_deriv</definition>
+        <argsstring>(Idx&lt; grid_par1&lt; I &gt; &gt; const &amp;idx_to_slice_1, Idx&lt; grid_par2&lt; I &gt; &gt; const &amp;idx_to_slice_2, MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt; functions_and_derivs)</argsstring>
+        <name>get_approximated_deriv</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_approximated_deriv</qualifiedname>
+        <param>
+          <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adffe783cf04688c4701cf8a8ce1a9098" kindref="member">grid_par1</ref>&lt; I &gt; &gt; const &amp;</type>
+          <declname>idx_to_slice_1</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a1a00bd73106ed90d38e8d76e64ffe271" kindref="member">grid_par2</ref>&lt; I &gt; &gt; const &amp;</type>
+          <declname>idx_to_slice_2</declname>
+        </param>
+        <param>
+          <type>MultipatchField&lt; DerivFieldOnPatch_host, Patches... &gt;</type>
+          <declname>functions_and_derivs</declname>
+        </param>
+        <briefdescription>
+<para>Compute the approximated cross-derivative (or coefficient &quot;c&quot;) at the interface along the mesh line indexed at the given indices. Work only for indices in the corners of the patches (where the cross-derivatives are supposed to be computed). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>I</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the interface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_to_slice_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index on the parallel grid of the first patch to select the mesh line along which the derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_to_slice_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index on the parallel grid of the second patch to select the mesh line along which the derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">functions_and_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collection fields with its first derivatives and cross-derivatives. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The approximated cross-derivative at the interface. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="302" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="302" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1afbe9020da66505979975d71c10b8fabd" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::set_slice_indexes</definition>
+        <argsstring>(int &amp;value_idx_to_slice, Idx&lt; grid_par1&lt; I &gt; &gt; &amp;idx_to_slice_1, Idx&lt; grid_par2&lt; I &gt; &gt; &amp;idx_to_slice_2)</argsstring>
+        <name>set_slice_indexes</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::set_slice_indexes</qualifiedname>
+        <param>
+          <type>int &amp;</type>
+          <declname>value_idx_to_slice</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adffe783cf04688c4701cf8a8ce1a9098" kindref="member">grid_par1</ref>&lt; I &gt; &gt; &amp;</type>
+          <declname>idx_to_slice_1</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a1a00bd73106ed90d38e8d76e64ffe271" kindref="member">grid_par2</ref>&lt; I &gt; &gt; &amp;</type>
+          <declname>idx_to_slice_2</declname>
+        </param>
+        <briefdescription>
+<para>Get the indices on Patch1 and Patch2 of the given interface. The index on Patch1 corresponds to the value given in input (if the interface is well oriented, otherwise it is Patch2). The index on Patch2 is the equivalent index of the one on Patch1. It also updates the value given in input with the value of the index on Patch2 for the next interface (if the next interface is well oriented, otherwise it is Patch1). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Example for well oriented interfaces:</para>
+<para>| Patch1 | Patch2 Patch1 | Patch2 | <linebreak/>
+ | idx_1 &gt; idx_2 idx_1 &gt; idx_2 | | ^ | v ^ | v | |idx_val idx_val | idx_val idx_val | idx_val |</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">value_idx_to_slice</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer containing the value of the index on the parallel grid of the last interface. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_to_slice_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index on the parallel grid of the first patch to select the mesh line along which the derivative will be computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_to_slice_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index on the parallel grid of the second patch to select the mesh line along which the derivative will be computed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="358" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="358" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1af8023bdc3fe078155f5f28ad3540f647" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>is_on_interface</declname>
+            <defname>is_on_interface</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>is_patch1</declname>
+            <defname>is_patch1</defname>
+            <defval>std::is_same_v&lt;<ref refid="structPatch" kindref="compound">Patch</ref>, <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" kindref="member">patch1</ref>&lt;I&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>std::conditional_t&lt; is_patch1, Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aafef840d7f91831321dc4f8d468a914d" kindref="member">grid_perp1</ref>&lt; I &gt; &gt;, Idx&lt; <ref refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adf24554d656142076c6ae9425301561a" kindref="member">grid_perp2</ref>&lt; I &gt; &gt; &gt;</type>
+        <definition>std::conditional_t&lt; is_patch1, Idx&lt; grid_perp1&lt; I &gt; &gt;, Idx&lt; grid_perp2&lt; I &gt; &gt; &gt; DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_idx_interface</definition>
+        <argsstring>()</argsstring>
+        <name>get_idx_interface</name>
+        <qualifiedname>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;::get_idx_interface</qualifiedname>
+        <briefdescription>
+<para>Get the index of the given index range slice corresponding to one of the extremities of the 1D grid. If is_on_interface is true, the extremity corresponds to the interface. If is_on_interface is false, the extremity corresponds to the other bound of the interface (next or previous). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="396" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="396" bodyend="404"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract class to hold the interface derivative coefficient collection and the index ranges. This is the superclass for interface derivative calculators defined in this folder. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Connectivity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="classMultipatchConnectivity" kindref="compound">MultipatchConnectivity</ref> class describing all the patch connections. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Grid1D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A given direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Patches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>List of patches containing all the involved patches in the given direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivCoeffCollection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="classInterfaceDerivCoeffsCollection" kindref="compound">InterfaceDerivCoeffsCollection</ref> that stores the <ref refid="classInterfaceDerivCoeffs" kindref="compound">InterfaceDerivCoeffs</ref> needed to compute the interface derivatives. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</label>
+        <link refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1"/>
+      </node>
+      <node id="2">
+        <label>InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</label>
+        <link refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</label>
+        <link refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_idx_ranges</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::MultipatchType&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;&lt; IdxRangeOnPatch, Patches... &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="35" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="40" bodyend="412"/>
+    <listofallmembers>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a1292451a59b7378b43280e7972b8e223" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>all_interface_collection</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a640a5e7b2699acfe4d97cc001a3d988e" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>all_patches</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ac71f5e7edbf9561bb7157a5e310554f2" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>deriv_par1</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a67629949653503a50bd48551edc5af0f" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>deriv_par2</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad1dccfb00abfa266bf346bae14c87127" prot="public" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>deriv_par_dim</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a0676dd15750595cdb37267eb3afd7f18" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>deriv_perp1</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1afe9a05f66ca7e15f4719b222df528935" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>deriv_perp2</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a870af63118467ac23878728628f8e12c" prot="public" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>deriv_perp_dim</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a3c1ac38529c28a9fd063a304e82f5fe8" prot="public" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>DerivativeCalculatorCommon</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a71e0c0a1f5bfa9b21d5fe5830677a55a" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>extremity_1</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a4841fddf1a8eb2115be7662312f0de3c" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>extremity_2</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a3717029384e4c1ec41a06ceda1fd5f45" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>get_approximated_deriv</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a3717029384e4c1ec41a06ceda1fd5f45" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>get_approximated_deriv</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1af8023bdc3fe078155f5f28ad3540f647" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>get_idx_interface</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aa384620cca1a515a49b3ff8f2244789f" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>Grid1DSeq</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a818fb0117b8f61477351bb90e1777f4f" prot="public" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>grid_direction</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adffe783cf04688c4701cf8a8ce1a9098" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>grid_par1</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a1a00bd73106ed90d38e8d76e64ffe271" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>grid_par2</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aafef840d7f91831321dc4f8d468a914d" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>grid_perp1</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adf24554d656142076c6ae9425301561a" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>grid_perp2</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ae6beeca0f33b11493484287831890667" prot="public" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>idx_cross_deriv</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ae0e872c93a114b1d9b759e03601b24b5" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>idx_cross_deriv1</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a064519c5277e0d64e37049cd581bb84b" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>idx_cross_deriv2</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a8e0e3f86bb784cec5c4d19a13d59fb80" prot="public" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>idx_deriv_perp</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1aaabb4bca28a10b5fd1dbeac30d44ca54" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>idx_deriv_perp1</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a74d2453f2f05cbe5ba7eef2701df2045" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>idx_deriv_perp2</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a360415c36bdbc242d837c38199e84aa1" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>inner_interface_collection</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a70da0830e47013895c84614f756d3f51" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>interface</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1adb9f92f4a0c5532b0fcb568177adde7e" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>interface_sorted_collection</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a9b09d33bc607f65225532e09ab05a2b7" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>InterfaceBoundFirst</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a4361c0e951f4da628b77310f3878e9b7" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>InterfaceBoundLast</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a23018f0bb43988810252e09675b2f0c8" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>InterfaceInnerFirst</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a373abc41fc1df30502e542e0d0574fbf" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>is_periodic</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ade70e84f6d030c909bae8e002c966fa9" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>m_deriv_coeffs_collect</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a0550ffe25e7768e2d33694cfb88eb8b1" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>m_idx_ranges</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a4eb8fc7841cf6720f461e7daf18d6957" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>n_inner_interfaces</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a2f5f95177dd4cdccbbaa9fd7ff5e7284" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>number_of_interfaces</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a42a14e338885a87dcc3cad557817273d" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>outer_interface_collection</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ad90af8beb6036535b5af965ebb814829" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>patch1</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a6ac7740f258d5b94363ce4ecbd630462" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>patch2</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a9e7f858fb88b2c6cb82ebdcdf4861f8a" prot="public" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>patch_direction</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a795e682b8ca9b18d6b32107b584091fa" prot="public" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>patch_first</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1ab102cdbd7324b35e0a69bb88ba34c704" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>patch_order_matches_interfaces</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a274f5c0a32e4ab53f44d10d56f259af8" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>PatchFirst</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1afbe9020da66505979975d71c10b8fabd" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>set_slice_indexes</name></member>
+      <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a40b8bc73dab9e66e836e827030734642" prot="protected" virt="non-virtual"><scope>DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;</scope><name>stored_interface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

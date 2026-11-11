@@ -14,6 +14,7 @@
 * `#include <ddc/ddc.hpp>`
 * `#include "connectivity_details.hpp"`
 * `#include "ddc_aliases.hpp"`
+* `#include "derivative_calculator_common.hpp"`
 * `#include "edge.hpp"`
 * `#include "edge_transformation.hpp"`
 * `#include "interface.hpp"`

@@ -1102,15 +1102,16 @@ InterfaceDerivCoeffsCollection deriv_coeffs_collect (deriv_coeffs_1, deriv_coeff
         Grid1D,                                     // the given direction.
         ddc::TypeSeq&lt;Patch1, Patch2, ...&gt;   // list of patches containing all the needed ones
         InterfaceDerivCoeffsCollection&lt;Interface_1, Interface_2, ...&gt;&gt;
-        matrix(idx_ranges, deriv_coeffs_collect);
+        deriv_calculator(idx_ranges, deriv_coeffs_collect);
 </code></pre>
 <p>with <code>idx_ranges</code> a <code>MultipatchType&lt;IdxRangeonPatch, Patch1, Patch2, ...&gt;</code> object.</p>
-<p>If we want to solve the system for a given function, we then use the operator <code>.solve_deriv()</code>.</p>
-<pre><code class="language-cpp">matrix.solve_deriv(
+<p>If we want to solve the system for a given function, we then use the operator <code>operator()</code>.</p>
+<pre><code class="language-cpp">deriv_calculator(
+    Idx&lt;ddc::Deriv&lt;typename Grid1D::continuous_dimension_type&gt;&gt;(1),
     functions_and_derivs,         // A MultipatchField collection of DerivField.
     );
 </code></pre>
-<p>During the call to <code>.solve_deriv()</code>, it computes the right hand side approximated vector <span class="arithmatex">\(C_{trunc}\)</span>.
+<p>During the call to <code>operator()</code>, it computes the right hand side approximated vector <span class="arithmatex">\(C_{trunc}\)</span>.
 It solves the matrix system to get the solution vector <em>S</em>.
 It fills in the derivatives in the <code>functions_and_derivs</code> collection with the computed derivatives at the right place.</p>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> The derivatives in <code>functions_and_derivs</code> are overwritten during the last step.</p>
@@ -1128,12 +1129,12 @@ the <em>y</em> direction (i.e. <code>ddc::BoundCond::GREVILLE</code>).</p>
 <pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;Connectivity, GridX1, 
         ddc::TypeSeq&lt;Patch1, Patch2, Patch3&gt;,
         InterfaceDerivCoeffsCollection&lt;Interface_1_2, Interface_2_3, Interface_3_1&gt;&gt;
-        matrix_123(idx_ranges_123, deriv_coeffs_collect_123);
+        deriv_calculator_123(idx_ranges_123, deriv_coeffs_collect_123);
 
 InterfacesDerivativeCalculator&lt;Connectivity, GridX4, 
         ddc::TypeSeq&lt;Patch4, Patch5, Patch6&gt;,
         InterfaceDerivCoeffsCollection&lt;Interface_4_5, Interface_5_6, Interface_6_4&gt;&gt;
-        matrix_456(idx_ranges_456, deriv_coeffs_collect_456);
+        deriv_calculator_456(idx_ranges_456, deriv_coeffs_collect_456);
 // ...
 </code></pre>
 <p>We also define <code>InterfacesDerivativeCalculator</code> matrices for each non-periodic directions
@@ -1141,12 +1142,12 @@ InterfacesDerivativeCalculator&lt;Connectivity, GridX4,
 <pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;Connectivity, GridY1, 
         ddc::TypeSeq&lt;Patch1, Patch4, Patch7&gt;,
         InterfaceDerivCoeffsCollection&lt;Interface_1_4, Interface_4_7&gt;&gt;
-        matrix_147(idx_ranges_147, deriv_coeffs_collect_147);
+        deriv_calculator_147(idx_ranges_147, deriv_coeffs_collect_147);
 
 InterfacesDerivativeCalculator&lt;Connectivity, GridY2, 
         ddc::TypeSeq&lt;Patch2, Patch5, Patch8&gt;,
         InterfaceDerivCoeffsCollection&lt;Interface_2_5, Interface_5_8&gt;&gt;
-        matrix_258(idx_ranges_258, deriv_coeffs_collect_258);
+        deriv_calculator_258(idx_ranges_258, deriv_coeffs_collect_258);
 // ...
 </code></pre>
 <blockquote>
@@ -1156,30 +1157,30 @@ In this case, all the given collections have to be defined on the same patch set
 </blockquote>
 <p>With these matrices, we can compute all the interface <em>x</em>-derivatives using the directions
 <span class="arithmatex">\(\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}\)</span>,</p>
-<pre><code class="language-cpp">matrix_147.solve_deriv(functions_and_derivs_147);
-matrix_258.solve_deriv(functions_and_derivs_258);
+<pre><code class="language-cpp">deriv_calculator_147(Idx&lt;ddc::Deriv&lt;X&lt;1&gt;&gt;&gt;(1), functions_and_derivs_147);
+deriv_calculator_258(Idx&lt;ddc::Deriv&lt;X&lt;2&gt;&gt;&gt;(1), functions_and_derivs_258);
 // ...
 </code></pre>
 <p>we can compute all the interface <em>y</em>-derivatives using the directions
 <span class="arithmatex">\(\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}\)</span>,</p>
-<pre><code class="language-cpp">matrix_123.solve_deriv(functions_and_derivs_123);
-matrix_456.solve_deriv(functions_and_derivs_456);
+<pre><code class="language-cpp">deriv_calculator_123(Idx&lt;ddc::Deriv&lt;Y&lt;1&gt;&gt;&gt;(1), functions_and_derivs_123);
+deriv_calculator_456(Idx&lt;ddc::Deriv&lt;Y&lt;4&gt;&gt;&gt;(1), functions_and_derivs_456);
 // ...
 </code></pre>
 <p>From the computed first derivatives, we can compute the cross-derivatives along one of the other direction.
 E.g.</p>
-<pre><code class="language-cpp">matrix_123.solve_cross_deriv(functions_and_derivs_123); // along x direction using y-derivatives 
+<pre><code class="language-cpp">deriv_calculator_123(Idx&lt;ddc::Deriv&lt;X&lt;1&gt;&gt;, ddc::Deriv&lt;Y&lt;1&gt;&gt;&gt;(1,1), functions_and_derivs_123); // along x direction using y-derivatives 
 // ...
 // or
-matrix_147.solve_cross_deriv(functions_and_derivs_147); // along y direction using x-derivatives
+deriv_calculator_147(Idx&lt;ddc::Deriv&lt;X&lt;1&gt;&gt;, ddc::Deriv&lt;Y&lt;1&gt;&gt;&gt;(1,1), functions_and_derivs_147); // along y direction using x-derivatives
 // ...
 </code></pre>
 <p>Once all the derivatives have been computed on for each patch using all the interfaces,
 all the data to build local spline representations is available.</p>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> <strong>Warning:</strong>
 The cross-derivatives are computed from the first derivatives.
-So, <code>.solve_deriv()</code> has to be called before <code>.solve_cross_deriv()</code>.
-It is recommended to apply <code>.solve_deriv()</code> on <em>every</em> group of patches before calling <code>.solve_cross_deriv()</code>.</p>
+So, <code>operator()</code> has to be called on the first derivatives before being called on the cross-derivatives.
+It is recommended to compute the first derivatives on <em>every</em> group of patches before computing the cross-derivatives.</p>
 <h2 id="references">References</h2>
 <div class="footnote">
 <hr>

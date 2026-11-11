@@ -4,6 +4,7 @@
     <compoundname>interface_derivative_coefficients_collection.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
     <includes refid="interface__derivative__coefficients_8hpp" local="yes">interface_derivative_coefficients.hpp</includes>
+    <includedby refid="derivative__calculator__common_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp</includedby>
     <includedby refid="interfaces__derivative__calculator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</includedby>
     <incdepgraph>
       <node id="13">
@@ -391,13 +392,21 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp</label>
+        <link refid="derivative__calculator__common_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</label>
         <link refid="interface__derivative__coefficients__collection_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_derivative_calculator.hpp</label>
         <link refid="interfaces__derivative__calculator_8hpp_source"/>
       </node>
