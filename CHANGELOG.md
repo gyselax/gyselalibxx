@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
 - Fix Jean-Zay environment with missing environment variables.
 - Fix missing error when using `find_grid_t`.
+- Fix `SplineBuilder2DCollection::operator()` to make it work with `MultipatchDeriv12Field` when the continuous dimensions are the same on the patches.
 
 ### Changed
 
@@ -80,7 +81,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
 - Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
-- Remove `SplineBuilder2DCollection::operator()` working with `std::optional<MultipatchDeriv[1/2/12]>` instead of `MultipatchDerivField`.
 
 ### Deprecated
 
