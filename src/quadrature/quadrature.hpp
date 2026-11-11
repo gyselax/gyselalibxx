@@ -154,8 +154,8 @@ public:
             ExecutionSpace exec_space,
             ResultField const result,
             IntegratorFunction integrated_function) const
-            requires(
-                    std::is_floating_point_v<ElementDataType>) //TOD: Remove requires when #322 is fixed
+            requires(std::is_floating_point_v<
+                     ElementDataType>) //TOD: Remove requires when #322 is fixed
     {
         using BatchIdxRange = ResultField::discrete_domain_type;
         static_assert(std::is_same_v<typename ResultField::element_type, ElementDataType>);
