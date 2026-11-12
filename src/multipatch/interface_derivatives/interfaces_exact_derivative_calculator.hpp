@@ -37,7 +37,7 @@ class InterfacesExactDerivativeCalculator;
   * It uses the exact formula. 
   * 
   * During the instantiation of the class, the matrix (I-M) is computed are stored in the class. 
-  * When we call the operator .solve_deriv() or .solve_cross_deriv(): 
+  * When we call operator(): 
   *     - InterfacesExactDerivativeCalculator computes the vector C from the given values. 
   *     - It inverses the matrix system: (I-M)S = C. 
   *     - The interface derivatives are stored in the vector S. 
@@ -140,6 +140,7 @@ public:
 
 private:
     using base_type::m_idx_ranges;
+    using base_type::m_deriv_coeffs_collect;
 
     // Matrix (I-M) of the documentation.
     std::shared_ptr<Matrix> m_matrix;
@@ -319,10 +320,10 @@ private:
     void set_line_matrix()
     {
         double const coeff_deriv_patch1
-                = this->m_deriv_coeffs_collect.template get<stored_interface<I>>()
+                = m_deriv_coeffs_collect.template get<stored_interface<I>>()
                           .get_coeff_deriv_patch_1();
         double const coeff_deriv_patch2
-                = this->m_deriv_coeffs_collect.template get<stored_interface<I>>()
+                = m_deriv_coeffs_collect.template get<stored_interface<I>>()
                           .get_coeff_deriv_patch_2();
         const double coeff_left
                 = patch_order_matches_interfaces<I> ? coeff_deriv_patch1 : coeff_deriv_patch2;
@@ -484,10 +485,10 @@ private:
             }
 
             const double coeff_deriv_1
-                    = this->m_deriv_coeffs_collect.template get<stored_interface<I>>()
+                    = m_deriv_coeffs_collect.template get<stored_interface<I>>()
                               .get_coeff_deriv_patch_1();
             const double coeff_deriv_2
-                    = this->m_deriv_coeffs_collect.template get<stored_interface<I>>()
+                    = m_deriv_coeffs_collect.template get<stored_interface<I>>()
                               .get_coeff_deriv_patch_2();
 
             if constexpr (is_lower_bound_deriv_dependent) {

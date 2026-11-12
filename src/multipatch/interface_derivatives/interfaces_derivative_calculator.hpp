@@ -27,7 +27,7 @@ class InterfacesDerivativeCalculator;
   * 
   * This operator is implemented for conforming equivalent global meshes. 
   * 
-  * When we call the operator .solve_deriv() or .solve_cross_deriv(), the operator loops
+  * When we call operator(), the operator loops
   * over the interface to compute the vector C_trunc to determine all the interface derivatives 
   * and update the DerivField given in input. 
   * 
