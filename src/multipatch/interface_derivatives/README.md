@@ -654,7 +654,7 @@ It fills in the derivatives in the `functions_and_derivs` collection with the co
 
 :warning: The derivatives in `functions_and_derivs` are overwritten during the last step.
 
-#### A 2D case operator
+#### Tutorial on a 2D case operator
 
 This operator is implemented for 2D patches.
 For 2D local splines with Hermite boundary conditions, we need the first derivatives along the first dimension,
@@ -668,7 +668,7 @@ This geometry is composed of 9 patches forming periodic strips in the *x* direct
 We use additional interpolation points as closure condition for the equivalent global splines in
 the *y* direction (i.e. `ddc::BoundCond::GREVILLE`).
 
-So, we start by defining the `InterfacesDerivativeCalculator` matrices for each periodic directions
+So, we start by defining the `InterfacesDerivativeCalculator` matrices for each periodic direction
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7`).
 
 ```cpp
@@ -684,7 +684,7 @@ InterfacesDerivativeCalculator<Connectivity, GridX4,
 // ...
 ```
 
-We also define `InterfacesDerivativeCalculator` matrices for each non-periodic directions
+We also define `InterfacesDerivativeCalculator` matrices for each non-periodic direction
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3`).
 
 ```cpp
@@ -757,7 +757,7 @@ InterfaceDerivCoeffs<Interface_2> derivative_calculator_2(...);
 InterfaceDerivCoeffsCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
 ```
 
-We can then instantiate `InterfacesExactDerivativeCalculator` with the tuple of derivative calculator.
+We can then instantiate `InterfacesExactDerivativeCalculator` with the tuple of derivative calculators.
 
 ```cpp
 InterfacesExactDerivativeCalculator<
@@ -776,14 +776,14 @@ During the instantiation, `InterfacesExactDerivativeCalculator` will allocate me
 for the right hand side vector *C* and for the solution vector *S*.
 It also computes the matrix and stores it.
 
-During the call to `.solve_deriv()`, it computes the right hand side vector $`C`$,
+During the call to `operator()`, it computes the right hand side vector *C*,
 solves the matrix system to get the solution vector *S*,
 and fills in the derivatives in the `functions_and_derivs` collection with the computed derivatives at the right place.
 
-#### A 2D case operator
+#### Tutorial on a 2D case operator
 
 Using the same geometry as in the 2D case of the previous section,
-we define the `InterfacesExactDerivativeCalculator` matrices for each periodic directions
+we define the `InterfacesExactDerivativeCalculator` matrices for each periodic direction
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7`).
 
 ```cpp
@@ -803,7 +803,7 @@ InterfacesExactDerivativeCalculator<Connectivity, GridX4,
 // ...
 ```
 
-We also define `InterfacesExactDerivativeCalculator` matrices for each non-periodic directions
+We also define `InterfacesExactDerivativeCalculator` matrices for each non-periodic direction
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3`).
 
 ```cpp
