@@ -87,23 +87,23 @@ private:
 
 public:
     /// @brief First patch of the collection of patches in the direction of the given Grid1D.
-    using patch_first = typename base_type::patch_first;
+    using typename base_type::patch_first;
 
     /// @brief Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.
     using grid_direction = Grid1D;
 
     /// @brief Patch of the given direction grid.
-    using patch_direction = typename base_type::patch_direction;
+    using typename base_type::patch_direction;
 
     /// @brief Derivative dimension of the direction patch perpendicular to the mesh line.
-    using deriv_perp_dim = typename base_type::deriv_perp_dim;
+    using typename base_type::deriv_perp_dim;
     /// @brief Derivative dimension of the direction patch parallel to the mesh line.
-    using deriv_par_dim = typename base_type::deriv_par_dim;
+    using typename base_type::deriv_par_dim;
 
     /// @brief Index on the derivative dimension perpendicular to the mesh line.
-    using idx_deriv_perp = typename base_type::idx_deriv_perp;
+    using typename base_type::idx_deriv_perp;
     /// @brief Index on the two derivative dimensions of patch_direction.
-    using idx_cross_deriv = typename base_type::idx_cross_deriv;
+    using typename base_type::idx_cross_deriv;
 
 private:
     using base_type::m_idx_ranges;
