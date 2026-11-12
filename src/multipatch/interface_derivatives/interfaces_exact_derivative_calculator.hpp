@@ -158,8 +158,6 @@ private:
     std::array<int, ddc::type_seq_size_v<typename base_type::Grid1DSeq>> m_vector_par_signs;
 
 public:
-    ~InterfacesExactDerivativeCalculator() {}
-
     /**
      * @brief Instantiate InterfacesExactDerivativeCalculator. 
      * 
