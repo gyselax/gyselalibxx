@@ -409,4 +409,15 @@ protected:
         Extremity extremity_test = is_on_interface ? Extremity::FRONT : Extremity::BACK;
         return (extremity == extremity_test) ? idx_range_slice.front() : idx_range_slice.back();
     }
+
+    /**
+     * @brief Transform a boolean into a integer.
+     * If true, the sign is positive.
+     * If false, the sign is negative. 
+     */
+    template <bool agree>
+    static constexpr int to_sign()
+    {
+        return agree - !agree;
+    }
 };

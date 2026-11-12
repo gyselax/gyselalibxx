@@ -589,7 +589,7 @@ private:
     {
         // If the directions of the two perpendicular grids desagree, the sign is changed.
         constexpr bool are_same_direction_perp = (extremity_1<I> != extremity_2<I>);
-        constexpr int sign_deriv_perp_2 = are_same_direction_perp - !are_same_direction_perp;
+        constexpr int sign_deriv_perp_2 = base_type::template to_sign<are_same_direction_perp>();
 
         // If Patch1 follows the orientation of the sorted 1D grid sequence.
         constexpr bool is_per_1_well_oriented
@@ -597,7 +597,7 @@ private:
                   || (!patch_order_matches_interfaces<I> && (extremity_1<I> == Extremity::FRONT));
 
         // Change the sign of the derivatives if Patch1 is ill-oriented.
-        constexpr int sign_1 = is_per_1_well_oriented - !is_per_1_well_oriented;
+        constexpr int sign_1 = base_type::template to_sign<is_per_1_well_oriented>();
         // Change in addition the sign of the derivative on Patch2, if the grid directions desagree.
         constexpr int sign_2 = sign_1 * sign_deriv_perp_2;
 
@@ -626,8 +626,8 @@ private:
         // If the parallel grids of the two patches agree.
         constexpr bool are_same_direction_par = stored_interface<I>::orientations_agree;
 
-        constexpr int sign_deriv_perp_2 = are_same_direction_perp - !are_same_direction_perp;
-        constexpr int sign_deriv_par_2 = are_same_direction_par - !are_same_direction_par;
+        constexpr int sign_deriv_perp_2 = base_type::template to_sign<are_same_direction_perp>();
+        constexpr int sign_deriv_par_2 = base_type::template to_sign<are_same_direction_par>();
 
         /*
             For Patch1: 
