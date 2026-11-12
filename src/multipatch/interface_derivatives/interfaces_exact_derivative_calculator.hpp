@@ -162,13 +162,13 @@ public:
     /**
      * @brief Instantiate InterfacesExactDerivativeCalculator. 
      * 
-     * It creates a dense Gingko matrix, a vector for the rhs and a vector for the solution. 
+     * It creates a dense Ginkgo matrix, a vector for the rhs and a vector for the solution. 
      * The matrix is initialised with the derivatives calculator collection given in input. 
      * 
      * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
      * @param deriv_coeffs_collect SingleInterfaceDerivCoeffCollection containing all the 
      *          interface derivative calculator for each interface in the given Grid1D direction. 
-     * @param reduction_factor Reduction factor for a Gingko dense matrix with a conjugate gradient solver 
+     * @param reduction_factor Reduction factor for a Ginkgo dense matrix with a conjugate gradient solver 
      *          and a Jacobi preconditioner. 
      */
     InterfacesExactDerivativeCalculator(
