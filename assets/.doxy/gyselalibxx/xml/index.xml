@@ -3127,13 +3127,14 @@
     <member refid="classQNSolver_1aa32f5284dd9ce1e47665705cb7783268" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classQuadrature" kind="class"><name>Quadrature</name>
-    <member refid="classQuadrature_1a504fc9d2ec3a9dad536243892652d911" kind="typedef"><name>IdxQuadrature</name></member>
-    <member refid="classQuadrature_1ab7c4f91954ec84e84440705f58a7207b" kind="typedef"><name>QuadConstField</name></member>
-    <member refid="classQuadrature_1a3e263d91c3140bd253fd98a2987452a0" kind="variable"><name>m_coefficients</name></member>
-    <member refid="classQuadrature_1ad493a4ea4ba6638cac95c8ba3f2a8d4c" kind="function"><name>Quadrature</name></member>
-    <member refid="classQuadrature_1ada860631e6050ea034ad82eb3cf669cb" kind="function"><name>operator()</name></member>
-    <member refid="classQuadrature_1aef02301cb8d25655275d45d24c8b662d" kind="function"><name>operator()</name></member>
-    <member refid="classQuadrature_1adf6456df5a8b93d15b5a84d0d0dc1530" kind="function"><name>to_discrete_element</name></member>
+    <member refid="classQuadrature_1a50fd65331c1075f861f7d2c508896ee6" kind="typedef"><name>DataType</name></member>
+    <member refid="classQuadrature_1a178091a3ed9953e170b667ec1924abf1" kind="typedef"><name>IdxQuadrature</name></member>
+    <member refid="classQuadrature_1acdc6b760446cd7dadce2654b1f0c84c9" kind="typedef"><name>QuadConstField</name></member>
+    <member refid="classQuadrature_1aac0c6b55aa4bb500c8a47150be748c2b" kind="variable"><name>m_coefficients</name></member>
+    <member refid="classQuadrature_1a5f4d1f46d9cf60375848b5a276608b0d" kind="function"><name>Quadrature</name></member>
+    <member refid="classQuadrature_1a664becaf9fa806724565d0ea116d68f3" kind="function"><name>operator()</name></member>
+    <member refid="classQuadrature_1a235f2529cea72a400992dd3a907b9560" kind="function"><name>operator()</name></member>
+    <member refid="classQuadrature_1a740510149e5bea8f8e4b4e0a9dd9620e" kind="function"><name>to_discrete_element</name></member>
   </compound>
   <compound refid="structR" kind="struct"><name>R</name>
     <member refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kind="typedef"><name>Dual</name></member>
@@ -5072,6 +5073,7 @@
     <member refid="neumann__spline__quadrature_8hpp_1a722b8e6f2d653832879fad900a9baf25" kind="function"><name>neumann_spline_quadrature_coefficients</name></member>
   </compound>
   <compound refid="quadrature_8hpp" kind="file"><name>quadrature.hpp</name>
+    <member refid="quadrature_8hpp_1a93ce9b06f40adb50cf916dc0e9bac4b1" kind="function"><name>Quadrature</name></member>
   </compound>
   <compound refid="quadrature__coeffs__nd_8hpp" kind="file"><name>quadrature_coeffs_nd.hpp</name>
     <member refid="quadrature__coeffs__nd_8hpp_1af8ba056471fb1ea4ad7a8c15db08f24d" kind="function"><name>quadrature_coeffs_nd</name></member>

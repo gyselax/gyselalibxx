@@ -163,7 +163,7 @@
 * **deriv\_perp1** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md))
 * **deriv\_perp2** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md))
 * **deriv\_perp\_dim** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md), [**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
-* **DataType** ([**DiscreteMapping**](classDiscreteMapping.md))
+* **DataType** ([**DiscreteMapping**](classDiscreteMapping.md), [**Quadrature**](classQuadrature.md))
 * **DQConstField** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **DQFieldMem** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **DensityCoeffs** ([**GMGPolarPoissonLikeSolver**](classGMGPolarPoissonLikeSolver.md))

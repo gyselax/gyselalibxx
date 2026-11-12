@@ -132,6 +132,7 @@
 
 ## q
 
+* **Quadrature** ([**quadrature.hpp**](quadrature_8hpp.md))
 * **quadrature\_coeffs\_nd** ([**quadrature\_coeffs\_nd.hpp**](quadrature__coeffs__nd_8hpp.md))
 
 

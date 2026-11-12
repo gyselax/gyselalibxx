@@ -2,7 +2,7 @@
 
 # Class Quadrature
 
-**template &lt;class IdxRangeQuadrature, class IdxRangeTotal, class DataType, class MemorySpace&gt;**
+**template &lt;class IdxRangeQuadrature, class IdxRangeTotal, class ElementDataType, class MemorySpace&gt;**
 
 
 
@@ -55,8 +55,8 @@ _A class providing an operator for integrating functions defined on known grid p
 | Type | Name |
 | ---: | :--- |
 |   | [**Quadrature**](#function-quadrature) (QuadConstField coeffs) <br>_Create a_ [_**Quadrature**_](classQuadrature.md) _object._ |
-|  DataType | [**operator()**](#function-operator) (ExecutionSpace exec\_space, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on known grid points._  |
-|  void | [**operator()**](#function-operator_1) (ExecutionSpace exec\_space, Field&lt; DataType, BatchIdxRange, MemorySpace, Layout &gt; const result, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._  |
+|  ElementDataType | [**operator()**](#function-operator) (ExecutionSpace exec\_space, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on known grid points._  |
+|  void | [**operator()**](#function-operator_1) (ExecutionSpace exec\_space, ResultField const result, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._  |
 
 
 
@@ -95,6 +95,7 @@ _A class providing an operator for integrating functions defined on known grid p
 
 * `IdxRangeQuadrature` The index range over which the function is integrated. 
 * `IdxRangeTotal` The index range of the chunk which can be passed to the operator(). This is the IdxRangeQuadrature combined with any batch dimensions. If there are no batch dimensions then this argument does not need to be provided as by default it is equal to the IdxRangeQuadrature. 
+* `ElementDataType` The data type of an element of the function being integrated. 
 * `MemorySpace` The memory space (cpu/gpu) where the quadrature coefficients are saved. 
 
 
@@ -138,7 +139,7 @@ inline explicit Quadrature::Quadrature (
 _An operator for calculating the integral of a function defined on known grid points._ 
 ```C++
 template<class ExecutionSpace, class IntegratorFunction>
-inline DataType Quadrature::operator() (
+inline ElementDataType Quadrature::operator() (
     ExecutionSpace exec_space,
     IntegratorFunction integrated_function
 ) const
@@ -152,7 +153,7 @@ inline DataType Quadrature::operator() (
 
 
 * `exec_space` The space on which the function is executed (CPU/GPU). 
-* `integrated_function` A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a Field fulfils these criteria and can be passed as the function to be integrated. If the exec\_space is a GPU the function that is passed must be accessible from GPU.
+* `integrated_function` A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a Field or [**VectorField**](classVectorField.md) may fulfil these criteria and can be therefore be passed as the function to be integrated. If the exec\_space is a GPU the function that is passed must be accessible from GPU.
 
 
 
@@ -174,10 +175,10 @@ The integral of the function over the domain.
 
 _An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._ 
 ```C++
-template<class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
+template<class ExecutionSpace, class ResultField, class IntegratorFunction>
 inline void Quadrature::operator() (
     ExecutionSpace exec_space,
-    Field< DataType, BatchIdxRange, MemorySpace, Layout > const result,
+    ResultField const result,
     IntegratorFunction integrated_function
 ) const
 ```
@@ -191,7 +192,7 @@ inline void Quadrature::operator() (
 
 * `exec_space` The space on which the function is executed (CPU/GPU). 
 * `result` The result of the quadrature calculation. 
-* `integrated_function` A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. Please note that a Field fulfils the described criteria. If the exec\_space is a GPU the function that is passed must be accessible from GPU. 
+* `integrated_function` A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. It should be noted that a Field or [**VectorField**](classVectorField.md) may fulfil these criteria and can be therefore be passed as the function to be integrated. If the exec\_space is a GPU the function that is passed must be accessible from GPU. 
 
 
 

@@ -12,7 +12,7 @@
         <defval>IdxRangeQuadrature</defval>
       </param>
       <param>
-        <type>class DataType</type>
+        <type>class ElementDataType</type>
         <defval>double</defval>
       </param>
       <param>
@@ -21,9 +21,23 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classQuadrature_1a504fc9d2ec3a9dad536243892652d911" prot="private" static="no">
+      <memberdef kind="typedef" id="classQuadrature_1a50fd65331c1075f861f7d2c508896ee6" prot="private" static="no">
+        <type>typename detail::QuadratureDataType&lt; ElementDataType &gt;::data_type</type>
+        <definition>using Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace &gt;::DataType =  typename detail::QuadratureDataType&lt;ElementDataType&gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>DataType</name>
+        <qualifiedname>Quadrature::DataType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classQuadrature_1a178091a3ed9953e170b667ec1924abf1" prot="private" static="no">
         <type>typename IdxRangeQuadrature::discrete_element_type</type>
-        <definition>using Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace &gt;::IdxQuadrature =  typename IdxRangeQuadrature::discrete_element_type</definition>
+        <definition>using Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace &gt;::IdxQuadrature =  typename IdxRangeQuadrature::discrete_element_type</definition>
         <argsstring></argsstring>
         <name>IdxQuadrature</name>
         <qualifiedname>Quadrature::IdxQuadrature</qualifiedname>
@@ -34,11 +48,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classQuadrature_1ab7c4f91954ec84e84440705f58a7207b" prot="private" static="no">
+      <memberdef kind="typedef" id="classQuadrature_1acdc6b760446cd7dadce2654b1f0c84c9" prot="private" static="no">
         <type>ConstField&lt; DataType, IdxRangeQuadrature, MemorySpace &gt;</type>
-        <definition>using Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace &gt;::QuadConstField =  ConstField&lt;DataType, IdxRangeQuadrature, MemorySpace&gt;</definition>
+        <definition>using Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace &gt;::QuadConstField =  ConstField&lt;DataType, IdxRangeQuadrature, MemorySpace&gt;</definition>
         <argsstring></argsstring>
         <name>QuadConstField</name>
         <qualifiedname>Quadrature::QuadConstField</qualifiedname>
@@ -48,13 +62,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classQuadrature_1a3e263d91c3140bd253fd98a2987452a0" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classQuadrature_1aac0c6b55aa4bb500c8a47150be748c2b" prot="private" static="no" mutable="no">
         <type>QuadConstField</type>
-        <definition>QuadConstField Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace &gt;::m_coefficients</definition>
+        <definition>QuadConstField Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace &gt;::m_coefficients</definition>
         <argsstring></argsstring>
         <name>m_coefficients</name>
         <qualifiedname>Quadrature::m_coefficients</qualifiedname>
@@ -64,13 +78,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="39" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="39" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="65" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classQuadrature_1ad493a4ea4ba6638cac95c8ba3f2a8d4c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classQuadrature_1a5f4d1f46d9cf60375848b5a276608b0d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace &gt;::Quadrature</definition>
+        <definition>Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace &gt;::Quadrature</definition>
         <argsstring>(QuadConstField coeffs)</argsstring>
         <name>Quadrature</name>
         <qualifiedname>Quadrature::Quadrature</qualifiedname>
@@ -95,9 +109,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="47" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="47" bodyend="47"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="73" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="73" bodyend="73"/>
       </memberdef>
-      <memberdef kind="function" id="classQuadrature_1ada860631e6050ea034ad82eb3cf669cb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classQuadrature_1a664becaf9fa806724565d0ea116d68f3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ExecutionSpace</type>
@@ -106,8 +120,8 @@
             <type>class IntegratorFunction</type>
           </param>
         </templateparamlist>
-        <type>DataType</type>
-        <definition>DataType Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace &gt;::operator()</definition>
+        <type>ElementDataType</type>
+        <definition>ElementDataType Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace &gt;::operator()</definition>
         <argsstring>(ExecutionSpace exec_space, IntegratorFunction integrated_function) const</argsstring>
         <name>operator()</name>
         <qualifiedname>Quadrature::operator()</qualifiedname>
@@ -136,7 +150,7 @@
 <parametername direction="in">integrated_function</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a Field fulfils these criteria and can be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</para>
+<para>A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a Field or <ref refid="classVectorField" kindref="compound">VectorField</ref> may fulfil these criteria and can be therefore be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -146,26 +160,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="63" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="63" bodyend="106"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="90" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="90" bodyend="134"/>
       </memberdef>
-      <memberdef kind="function" id="classQuadrature_1aef02301cb8d25655275d45d24c8b662d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classQuadrature_1a235f2529cea72a400992dd3a907b9560" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ExecutionSpace</type>
           </param>
           <param>
-            <type>class BatchIdxRange</type>
+            <type>class ResultField</type>
           </param>
           <param>
             <type>class IntegratorFunction</type>
           </param>
-          <param>
-            <type>class Layout</type>
-          </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace &gt;::operator()</definition>
-        <argsstring>(ExecutionSpace exec_space, Field&lt; DataType, BatchIdxRange, MemorySpace, Layout &gt; const result, IntegratorFunction integrated_function) const</argsstring>
+        <definition>void Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace &gt;::operator()</definition>
+        <argsstring>(ExecutionSpace exec_space, ResultField const result, IntegratorFunction integrated_function) const</argsstring>
         <name>operator()</name>
         <qualifiedname>Quadrature::operator()</qualifiedname>
         <param>
@@ -173,13 +184,14 @@
           <declname>exec_space</declname>
         </param>
         <param>
-          <type>Field&lt; DataType, BatchIdxRange, MemorySpace, Layout &gt; const</type>
+          <type>ResultField const</type>
           <declname>result</declname>
         </param>
         <param>
           <type>IntegratorFunction</type>
           <declname>integrated_function</declname>
         </param>
+    <requiresclause>(std::is_floating_point_v&lt; ElementDataType&gt;)    </requiresclause>
         <briefdescription>
 <para>An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions. </para>
         </briefdescription>
@@ -205,7 +217,7 @@
 <parametername direction="in">integrated_function</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. Please note that a Field fulfils the described criteria. If the exec_space is a GPU the function that is passed must be accessible from GPU. </para>
+<para>A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. It should be noted that a Field or <ref refid="classVectorField" kindref="compound">VectorField</ref> may fulfil these criteria and can be therefore be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -213,11 +225,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="124" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="124" bodyend="187"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="153" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="153" bodyend="220"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
-      <memberdef kind="function" id="classQuadrature_1adf6456df5a8b93d15b5a84d0d0dc1530" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classQuadrature_1a740510149e5bea8f8e4b4e0a9dd9620e" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class HeadDim</type>
@@ -229,7 +241,7 @@
           </param>
         </templateparamlist>
         <type>KOKKOS_FUNCTION Idx&lt; HeadDim, Grid1D... &gt;</type>
-        <definition>static KOKKOS_FUNCTION Idx&lt; HeadDim, Grid1D... &gt; Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace &gt;::to_discrete_element</definition>
+        <definition>static KOKKOS_FUNCTION Idx&lt; HeadDim, Grid1D... &gt; Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace &gt;::to_discrete_element</definition>
         <argsstring>(int idx, IdxRange&lt; HeadDim, Grid1D... &gt; idx_range)</argsstring>
         <name>to_discrete_element</name>
         <qualifiedname>Quadrature::to_discrete_element</qualifiedname>
@@ -268,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="201" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="201" bodyend="213"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="234" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="234" bodyend="246"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -293,6 +305,14 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>ElementDataType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type of an element of the function being integrated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>MemorySpace</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -302,15 +322,16 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="30" bodyend="214"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="53" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="54" bodyend="247"/>
     <listofallmembers>
-      <member refid="classQuadrature_1a504fc9d2ec3a9dad536243892652d911" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>IdxQuadrature</name></member>
-      <member refid="classQuadrature_1a3e263d91c3140bd253fd98a2987452a0" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>m_coefficients</name></member>
-      <member refid="classQuadrature_1ada860631e6050ea034ad82eb3cf669cb" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>operator()</name></member>
-      <member refid="classQuadrature_1aef02301cb8d25655275d45d24c8b662d" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>operator()</name></member>
-      <member refid="classQuadrature_1ab7c4f91954ec84e84440705f58a7207b" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>QuadConstField</name></member>
-      <member refid="classQuadrature_1ad493a4ea4ba6638cac95c8ba3f2a8d4c" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>Quadrature</name></member>
-      <member refid="classQuadrature_1adf6456df5a8b93d15b5a84d0d0dc1530" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>to_discrete_element</name></member>
+      <member refid="classQuadrature_1a50fd65331c1075f861f7d2c508896ee6" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>DataType</name></member>
+      <member refid="classQuadrature_1a178091a3ed9953e170b667ec1924abf1" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>IdxQuadrature</name></member>
+      <member refid="classQuadrature_1aac0c6b55aa4bb500c8a47150be748c2b" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>m_coefficients</name></member>
+      <member refid="classQuadrature_1a664becaf9fa806724565d0ea116d68f3" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>operator()</name></member>
+      <member refid="classQuadrature_1a235f2529cea72a400992dd3a907b9560" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>operator()</name></member>
+      <member refid="classQuadrature_1acdc6b760446cd7dadce2654b1f0c84c9" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>QuadConstField</name></member>
+      <member refid="classQuadrature_1a5f4d1f46d9cf60375848b5a276608b0d" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>Quadrature</name></member>
+      <member refid="classQuadrature_1a740510149e5bea8f8e4b4e0a9dd9620e" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>to_discrete_element</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

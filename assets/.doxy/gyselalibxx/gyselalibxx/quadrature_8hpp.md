@@ -16,6 +16,8 @@
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
+* `#include "tensor_common.hpp"`
+* `#include "vector_field.hpp"`
 
 
 
@@ -35,7 +37,34 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Quadrature**](classQuadrature.md) &lt;class IdxRangeQuadrature, class IdxRangeTotal, class DataType, class MemorySpace&gt;<br>_A class providing an operator for integrating functions defined on known grid points._  |
+| class | [**Quadrature**](classQuadrature.md) &lt;class IdxRangeQuadrature, class IdxRangeTotal, class ElementDataType, class MemorySpace&gt;<br>_A class providing an operator for integrating functions defined on known grid points._  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|   | [**Quadrature**](#function-quadrature) (ConstField&lt; DataType, IdxRangeQuadrature, MemorySpace &gt;) <br> |
 
 
 
@@ -64,28 +93,24 @@
 
 
 
+## Public Functions Documentation
 
 
 
 
+### function Quadrature 
+
+```C++
+template<class DataType, class IdxRangeQuadrature, class MemorySpace>
+Quadrature (
+    ConstField< DataType, IdxRangeQuadrature, MemorySpace >
+) 
+```
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp`

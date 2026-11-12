@@ -277,7 +277,7 @@
 * **deriv\_perp\_dim** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md), [**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md))
 * **DiocotronDensitySolution** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
 * **dispersion\_relation** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
-* **DataType** ([**DiscreteMapping**](classDiscreteMapping.md))
+* **DataType** ([**DiscreteMapping**](classDiscreteMapping.md), [**Quadrature**](classQuadrature.md))
 * **DiscreteMapping** ([**DiscreteMapping**](classDiscreteMapping.md))
 * **DiscretePoloidalCSSplineMapping** ([**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
 * **DiscretePoloidalCSSplineMappingBuilder** ([**DiscretePoloidalCSSplineMappingBuilder**](classDiscretePoloidalCSSplineMappingBuilder.md))

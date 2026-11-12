@@ -576,7 +576,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-quadrature">Class Quadrature</h1>
-<p><strong>template &lt;class IdxRangeQuadrature, class IdxRangeTotal, class DataType, class MemorySpace&gt;</strong></p>
+<p><strong>template &lt;class IdxRangeQuadrature, class IdxRangeTotal, class ElementDataType, class MemorySpace&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classQuadrature.html"><strong>Quadrature</strong></a></p>
 <p><em>A class providing an operator for integrating functions defined on known grid points.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -596,12 +596,12 @@
 <td style="text-align: left;"><a href="#function-quadrature"><strong>Quadrature</strong></a> (QuadConstField coeffs) <br><em>Create a</em> <a href="classQuadrature.html"><em><strong>Quadrature</strong></em></a> <em>object.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">DataType</td>
+<td style="text-align: right;">ElementDataType</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (ExecutionSpace exec_space, IntegratorFunction integrated_function) const<br><em>An operator for calculating the integral of a function defined on known grid points.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (ExecutionSpace exec_space, Field&lt; DataType, BatchIdxRange, MemorySpace, Layout &gt; const result, IntegratorFunction integrated_function) const<br><em>An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (ExecutionSpace exec_space, ResultField const result, IntegratorFunction integrated_function) const<br><em>An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions.</em></td>
 </tr>
 </tbody>
 </table>
@@ -610,6 +610,7 @@
 <ul>
 <li><code>IdxRangeQuadrature</code> The index range over which the function is integrated. </li>
 <li><code>IdxRangeTotal</code> The index range of the chunk which can be passed to the operator(). This is the IdxRangeQuadrature combined with any batch dimensions. If there are no batch dimensions then this argument does not need to be provided as by default it is equal to the IdxRangeQuadrature. </li>
+<li><code>ElementDataType</code> The data type of an element of the function being integrated. </li>
 <li><code>MemorySpace</code> The memory space (cpu/gpu) where the quadrature coefficients are saved. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -628,7 +629,7 @@
 <h3 id="function-operator">function operator()</h3>
 <p><em>An operator for calculating the integral of a function defined on known grid points.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecutionSpace, class IntegratorFunction&gt;
-inline DataType Quadrature::operator() (
+inline ElementDataType Quadrature::operator() (
     ExecutionSpace exec_space,
     IntegratorFunction integrated_function
 ) const
@@ -636,7 +637,7 @@ inline DataType Quadrature::operator() (
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
-<li><code>integrated_function</code> A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a Field fulfils these criteria and can be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</li>
+<li><code>integrated_function</code> A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a Field or <a href="classVectorField.html"><strong>VectorField</strong></a> may fulfil these criteria and can be therefore be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The integral of the function over the domain. </p>
@@ -644,10 +645,10 @@ inline DataType Quadrature::operator() (
 
 <h3 id="function-operator_1">function operator()</h3>
 <p><em>An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions.</em> </p>
-<pre><code class="language-C++">template&lt;class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout&gt;
+<pre><code class="language-C++">template&lt;class ExecutionSpace, class ResultField, class IntegratorFunction&gt;
 inline void Quadrature::operator() (
     ExecutionSpace exec_space,
-    Field&lt; DataType, BatchIdxRange, MemorySpace, Layout &gt; const result,
+    ResultField const result,
     IntegratorFunction integrated_function
 ) const
 </code></pre>
@@ -655,7 +656,7 @@ inline void Quadrature::operator() (
 <ul>
 <li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
 <li><code>result</code> The result of the quadrature calculation. </li>
-<li><code>integrated_function</code> A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. Please note that a Field fulfils the described criteria. If the exec_space is a GPU the function that is passed must be accessible from GPU. </li>
+<li><code>integrated_function</code> A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. It should be noted that a Field or <a href="classVectorField.html"><strong>VectorField</strong></a> may fulfil these criteria and can be therefore be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU. </li>
 </ul>
 <hr>
 

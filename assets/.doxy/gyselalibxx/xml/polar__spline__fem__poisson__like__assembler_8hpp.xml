@@ -400,6 +400,10 @@
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
       </node>
       <node id="46">
         <label>quadrature_coeffs_nd.hpp</label>

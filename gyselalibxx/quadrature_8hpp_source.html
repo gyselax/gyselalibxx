@@ -590,14 +590,36 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "tensor_common.hpp"
+#include "vector_field.hpp"
+
+namespace detail {
+
+template &lt;class ElementDataType, class = void&gt;
+struct QuadratureDataType
+{
+    static_assert(std::is_floating_point_v&lt;ElementDataType&gt;);
+    using data_type = ElementDataType;
+};
+
+template &lt;class ElementDataType&gt;
+struct QuadratureDataType&lt;ElementDataType, std::enable_if_t&lt;is_tensor_type_v&lt;ElementDataType&gt;&gt;&gt;
+{
+    static_assert(ElementDataType::rank() == 1);
+    using data_type = typename ElementDataType::element_type;
+};
+
+} // namespace detail
 
 template &lt;
         class IdxRangeQuadrature,
         class IdxRangeTotal = IdxRangeQuadrature,
-        class DataType = double,
+        class ElementDataType = double,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space&gt;
 class Quadrature
 {
+    using DataType = typename detail::QuadratureDataType&lt;ElementDataType&gt;::data_type;
+
     static_assert(std::is_floating_point_v&lt;DataType&gt;);
 
 private:
@@ -611,7 +633,8 @@ public:
     explicit Quadrature(QuadConstField coeffs) : m_coefficients(coeffs) {}
 
     template &lt;class ExecutionSpace, class IntegratorFunction&gt;
-    DataType operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
+    ElementDataType operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function)
+            const
     {
         static_assert(
                 Kokkos::SpaceAccessibility&lt;ExecutionSpace, MemorySpace&gt;::accessible,
@@ -637,8 +660,8 @@ public:
         if constexpr (std::is_same_v&lt;ExecutionSpace, Kokkos::DefaultHostExecutionSpace&gt;) {
             return ddc::host_transform_reduce(
                     get_idx_range(coeff_proxy),
-                    0.0,
-                    ddc::reducer::sum&lt;DataType&gt;(),
+                    ElementDataType(0.0),
+                    ddc::reducer::sum&lt;ElementDataType&gt;(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
@@ -648,20 +671,24 @@ public:
                     location.function_name(),
                     exec_space,
                     get_idx_range(coeff_proxy),
-                    0.0,
-                    ddc::reducer::sum&lt;DataType&gt;(),
+                    ElementDataType(0.0),
+                    ddc::reducer::sum&lt;ElementDataType&gt;(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
         }
     }
 
-    template &lt;class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout&gt;
+    template &lt;class ExecutionSpace, class ResultField, class IntegratorFunction&gt;
     void operator()(
             ExecutionSpace exec_space,
-            Field&lt;DataType, BatchIdxRange, MemorySpace, Layout&gt; const result,
+            ResultField const result,
             IntegratorFunction integrated_function) const
+            requires(std::is_floating_point_v&lt;
+                     ElementDataType&gt;) //TOD: Remove requires when #322 is fixed
     {
+        using IdxRangeBatch = ResultField::discrete_domain_type;
+        static_assert(std::is_same_v&lt;typename ResultField::element_type, ElementDataType&gt;);
         static_assert(
                 Kokkos::SpaceAccessibility&lt;ExecutionSpace, MemorySpace&gt;::accessible,
                 "Execution space is not compatible with memory space where coefficients are found");
@@ -673,7 +700,7 @@ public:
                 ddc::to_type_seq_t&lt;IdxRangeTotal&gt;,
                 ddc::to_type_seq_t&lt;IdxRangeQuadrature&gt;&gt;;
         static_assert(
-                ddc::type_seq_same_v&lt;ddc::to_type_seq_t&lt;BatchIdxRange&gt;, ExpectedBatchDims&gt;,
+                ddc::type_seq_same_v&lt;ddc::to_type_seq_t&lt;IdxRangeBatch&gt;, ExpectedBatchDims&gt;,
                 "The batch idx_range deduced from the type of result does not match the class "
                 "template parameters.");
 
@@ -688,7 +715,7 @@ public:
 
         // Get useful index types
         using IdxTotal = typename IdxRangeTotal::discrete_element_type;
-        using IdxBatch = typename BatchIdxRange::discrete_element_type;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
         static_assert(
                 std::is_invocable_v&lt;IntegratorFunction, IdxTotal&gt;,
@@ -697,7 +724,7 @@ public:
 
         // Get index ranges
         IdxRangeQuadrature quad_idx_range(get_idx_range(m_coefficients));
-        BatchIdxRange batch_idx_range(get_idx_range(result));
+        IdxRangeBatch batch_idx_range(get_idx_range(result));
 
         QuadConstField const coeff_proxy = m_coefficients;
         // Loop over batch dimensions
@@ -708,10 +735,10 @@ public:
                     IdxBatch ib = to_discrete_element(idx, batch_idx_range);
 
                     // Sum over quadrature dimensions
-                    DataType teamSum = 0;
+                    ElementDataType teamSum(0);
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
-                            [&amp;](int const&amp; thread_index, DataType&amp; sum) {
+                            [&amp;](int const&amp; thread_index, ElementDataType&amp; sum) {
                                 IdxQuadrature iq
                                         = to_discrete_element(thread_index, quad_idx_range);
                                 IdxTotal it(ib, iq);
@@ -739,18 +766,23 @@ private:
     }
 };
 
+// Auto-deduce template parameters
+template &lt;class DataType, class IdxRangeQuadrature, class MemorySpace&gt;
+Quadrature(ConstField&lt;DataType, IdxRangeQuadrature, MemorySpace&gt;)
+        -&gt; Quadrature&lt;IdxRangeQuadrature, IdxRangeQuadrature, DataType, MemorySpace&gt;;
+
 namespace detail {
 template &lt;
         class NewMemorySpace,
         class IdxRangeQuadrature,
         class IdxRangeTotal,
-        class DataType,
+        class ElementDataType,
         class MemorySpace&gt;
 struct OnMemorySpace&lt;
         NewMemorySpace,
-        Quadrature&lt;IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace&gt;&gt;
+        Quadrature&lt;IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace&gt;&gt;
 {
-    using type = Quadrature&lt;IdxRangeQuadrature, IdxRangeTotal, DataType, NewMemorySpace&gt;;
+    using type = Quadrature&lt;IdxRangeQuadrature, IdxRangeTotal, ElementDataType, NewMemorySpace&gt;;
 };
 } // namespace detail
 </code></pre></div>

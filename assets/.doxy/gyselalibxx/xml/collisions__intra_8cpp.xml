@@ -11,6 +11,104 @@
     <includes refid="fluid__moments_8hpp" local="yes">fluid_moments.hpp</includes>
     <includes refid="matrix__batch__tridiag_8hpp" local="yes">matrix_batch_tridiag.hpp</includes>
     <incdepgraph>
+      <node id="35">
+        <label>deriv_details.hpp</label>
+        <link refid="deriv__details_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>tensor_common.hpp</label>
+        <link refid="tensor__common_8hpp_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>vector_field.hpp</label>
+        <link refid="vector__field_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>vector_field_common.hpp</label>
+        <link refid="vector__field__common_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>vector_field_mem.hpp</label>
+        <link refid="vector__field__mem_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
       <node id="12">
         <label>geometry_xvx.hpp</label>
         <link refid="geometry__xvx_8hpp_source"/>
@@ -42,11 +140,11 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -68,10 +166,10 @@
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="41">
         <label>collisions_utils.hpp</label>
         <link refid="collisions__utils_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -84,7 +182,7 @@
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
       </node>
       <node id="21">
@@ -93,7 +191,7 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="42">
         <label>fluid_moments.hpp</label>
         <link refid="fluid__moments_8hpp_source"/>
         <childnode refid="12" relation="include">
@@ -119,7 +217,7 @@
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="44">
         <label>matrix_batch.hpp</label>
         <link refid="matrix__batch_8hpp_source"/>
         <childnode refid="28" relation="include">
@@ -127,12 +225,12 @@
         <childnode refid="26" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="43">
         <label>matrix_batch_tridiag.hpp</label>
         <link refid="matrix__batch__tridiag_8hpp_source"/>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
       </node>
       <node id="29">
@@ -150,8 +248,12 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
       </node>
-      <node id="31">
+      <node id="40">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="3" relation="include">
@@ -159,14 +261,14 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="39">
         <label>trapezoid_quadrature.hpp</label>
         <link refid="trapezoid__quadrature_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
       </node>
       <node id="18">
@@ -238,6 +340,10 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
+      </node>
+      <node id="32">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
       </node>
       <node id="26">
         <label>view.hpp</label>
