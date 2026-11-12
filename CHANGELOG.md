@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MultipatchSplineEvaluator2D` works with `DerivField`.
 - Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
 - Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
+- Allow `Quadrature` to use a vector as the data type to integrate over multiple elements of a `VectorField` simultaneously.
 - Add `InterfacesExactDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the exact formula.
 
 ### Fixed
