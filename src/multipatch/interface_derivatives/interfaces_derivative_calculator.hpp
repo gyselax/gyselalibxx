@@ -305,8 +305,8 @@ private:
                                        || ((base_type::template extremity_2<I> == Extremity::FRONT)
                                            && !are_same_direction_par);
 
-        constexpr int sign_1 = base_type::template to_sign<!change_sign_1>();
-        constexpr int sign_2 = base_type::template to_sign<!change_sign_2>();
+        constexpr int sign_1 = base_type::to_sign(!change_sign_1);
+        constexpr int sign_2 = base_type::to_sign(!change_sign_2);
         return std::array<const int, 2> {sign_1, sign_2};
     }
 };

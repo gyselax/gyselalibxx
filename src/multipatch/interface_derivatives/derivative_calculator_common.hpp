@@ -415,8 +415,7 @@ protected:
      * If true, the sign is positive.
      * If false, the sign is negative. 
      */
-    template <bool agree>
-    static constexpr int to_sign()
+    static constexpr int to_sign(bool agree)
     {
         return agree - !agree;
     }
