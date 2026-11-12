@@ -433,7 +433,7 @@ private:
             /*
                 > For the cross-derivative computation:
                 In get_approx_cross_deriv(), the sign of the derivatives on Patch2 is changed
-                if the edge orientation desagree. We need to correct the sign, if Patch1 was 
+                if the edge orientation disagree. We need to correct the sign, if Patch1 was 
                 ill-oriented. Because, 
                         d(f(-x)) = - df(-x).
             */
@@ -586,7 +586,7 @@ private:
     template <std::size_t I, bool is_first_deriv, std::enable_if_t<is_first_deriv, bool> = true>
     std::pair<int, int> get_sign_derivs() const
     {
-        // If the directions of the two perpendicular grids desagree, the sign is changed.
+        // If the directions of the two perpendicular grids disagree, the sign is changed.
         constexpr bool are_same_direction_perp = (extremity_1<I> != extremity_2<I>);
         constexpr int sign_deriv_perp_2 = base_type::template to_sign<are_same_direction_perp>();
 
@@ -597,7 +597,7 @@ private:
 
         // Change the sign of the derivatives if Patch1 is ill-oriented.
         constexpr int sign_1 = base_type::template to_sign<is_per_1_well_oriented>();
-        // Change in addition the sign of the derivative on Patch2, if the grid directions desagree.
+        // Change in addition the sign of the derivative on Patch2, if the grid directions disagree.
         constexpr int sign_2 = sign_1 * sign_deriv_perp_2;
 
         return std::pair(sign_1, sign_2);
