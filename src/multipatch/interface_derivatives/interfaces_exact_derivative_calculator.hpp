@@ -638,9 +638,9 @@ private:
             For Patch2:
             Give the same sign as for the cross-derivative of Patch1. 
             Change the sign of the cross-derivative if the orientation of the perpendicular grid 
-            of Patch2 desagrees with Patch1.
+            of Patch2 disagrees with Patch1.
             Change the sign of the cross-derivative if the orientation of the parallel grid 
-            of Patch2 desagrees with Patch1.
+            of Patch2 disagrees with Patch1.
         */
         const int sign_2 = sign_1 * sign_deriv_perp_2 * sign_deriv_par_2;
 
