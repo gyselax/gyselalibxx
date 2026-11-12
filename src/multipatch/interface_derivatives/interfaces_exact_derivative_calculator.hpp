@@ -283,9 +283,9 @@ public:
                         || (std::is_same_v<IdxDeriv, Idx<deriv_perp_dim, deriv_par_dim>>)
                         || (std::is_same_v<IdxDeriv, Idx<deriv_par_dim, deriv_perp_dim>>),
                 "The derivative order has to be on "
-                "InterfacesDerivativeCalculator<...>::deriv_perp_dim "
-                "or on InterfacesDerivativeCalculator<...>::deriv_perp_dim "
-                "and InterfacesDerivativeCalculator<...>::deriv_par_dim.");
+                "InterfacesExactDerivativeCalculator<...>::deriv_perp_dim "
+                "or on InterfacesExactDerivativeCalculator<...>::deriv_perp_dim "
+                "and InterfacesExactDerivativeCalculator<...>::deriv_par_dim.");
 
         constexpr bool is_first_idx_range_perp_on_dim1
                 = ddc::in_tags_v<typename patch_first::Grid1, typename base_type::Grid1DSeq>;
