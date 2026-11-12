@@ -585,7 +585,7 @@ private:
      * equivalent global spline. 
      */
     template <std::size_t I, bool is_first_deriv, std::enable_if_t<is_first_deriv, bool> = true>
-    std::pair<int, int> const get_sign_derivs() const
+    std::pair<int, int> get_sign_derivs() const
     {
         // If the directions of the two perpendicular grids desagree, the sign is changed.
         constexpr bool are_same_direction_perp = (extremity_1<I> != extremity_2<I>);
@@ -610,7 +610,7 @@ private:
      * equivalent global spline. 
      */
     template <std::size_t I, bool is_first_deriv, std::enable_if_t<!is_first_deriv, bool> = true>
-    std::pair<int, int> const get_sign_derivs() const
+    std::pair<int, int> get_sign_derivs() const
     {
         // If Patch1 follows the orientation of the sorted 1D grid sequence.
         constexpr bool is_per_1_well_oriented
