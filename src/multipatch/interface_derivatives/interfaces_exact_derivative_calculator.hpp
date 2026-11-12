@@ -209,7 +209,7 @@ public:
     }
 
     /**
-     * @brief Solve the matrix system MS = C to determine all the interface derivatives or cross-derivatives
+     * @brief Solve the matrix system (I-M)S = C to determine all the interface derivatives or cross-derivatives
      * in the Grid1D direction at a given index.
      * 
      * For the derivatives, it uses the function values to compute the first-derivatives perpendicular to the interfaces. 
