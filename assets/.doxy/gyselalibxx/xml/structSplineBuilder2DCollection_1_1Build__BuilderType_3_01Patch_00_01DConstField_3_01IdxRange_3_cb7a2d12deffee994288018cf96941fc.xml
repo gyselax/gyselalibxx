@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="125" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="125" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="127" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1ac1b5767f0e9b69a1836dba8a7e7140f6" prot="public" static="no">
         <type>equivalent_edge_t&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, Grid1OnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, BACK &gt;, typename Connectivity::interface_collection &gt;</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="128" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="128" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="130" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="130" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1ad7e609d90ef6c4cc09b6373a1c297634" prot="public" static="no">
         <type>equivalent_edge_t&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, Grid2OnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, FRONT &gt;, typename Connectivity::interface_collection &gt;</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="131" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="131" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="133" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="133" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1a0ab61b2306cf53a43796072344eb445b" prot="public" static="no">
         <type>equivalent_edge_t&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, Grid2OnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, BACK &gt;, typename Connectivity::interface_collection &gt;</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="134" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="134" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="136" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="136" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1a6249fd6ff06357e4fa8d5c1d473fd94c" prot="public" static="no">
         <type>ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, BSpline2OnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, Grid1OnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, Grid2OnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, std::is_same_v&lt; lower_matching_edge1, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? SBCLower1 :BcTransition, std::is_same_v&lt; upper_matching_edge1, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? SBCUpper1 :BcTransition, std::is_same_v&lt; lower_matching_edge2, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? SBCLower2 :BcTransition, std::is_same_v&lt; upper_matching_edge2, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? SBCUpper2 :BcTransition, Solver &gt;</type>
@@ -100,14 +100,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="137" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="137" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="139" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="139" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="123" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="124" bodyend="149"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" line="125" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp" bodystart="126" bodyend="151"/>
     <listofallmembers>
       <member refid="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1a29ab1e354e31d46e26191d2d1231aec3" prot="public" virt="non-virtual"><scope>SplineBuilder2DCollection::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</scope><name>lower_matching_edge1</name></member>
       <member refid="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1ad7e609d90ef6c4cc09b6373a1c297634" prot="public" virt="non-virtual"><scope>SplineBuilder2DCollection::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</scope><name>lower_matching_edge2</name></member>

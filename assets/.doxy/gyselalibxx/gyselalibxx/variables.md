@@ -164,6 +164,7 @@
 * **DConstFieldOnPatch** ([**types.hpp**](types_8hpp.md))
 * **DConstFieldOnPatch\_host** ([**types.hpp**](types_8hpp.md))
 * **DField1OnPatch** ([**types.hpp**](types_8hpp.md))
+* **DField2OnPatch** ([**types.hpp**](types_8hpp.md))
 * **DFieldMem1OnPatch** ([**types.hpp**](types_8hpp.md))
 * **DFieldMem2OnPatch** ([**types.hpp**](types_8hpp.md))
 * **DFieldMemOnPatch** ([**types.hpp**](types_8hpp.md))

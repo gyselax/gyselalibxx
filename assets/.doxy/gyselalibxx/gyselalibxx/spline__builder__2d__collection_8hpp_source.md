@@ -18,7 +18,9 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
+#include "edge.hpp"
 #include "i_interpolation_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"

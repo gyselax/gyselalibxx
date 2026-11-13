@@ -4972,6 +4972,7 @@
     <member refid="types_8hpp_1af707f2c421334e9740b1dfce6d7aa16b" kind="typedef"><name>DFieldMem2OnPatch</name></member>
     <member refid="types_8hpp_1abd7056a75bab9a48308c5e52c8bb2fe6" kind="typedef"><name>DFieldOnPatch</name></member>
     <member refid="types_8hpp_1a2a3cb765f38d252cd663d549514480ec" kind="typedef"><name>DField1OnPatch</name></member>
+    <member refid="types_8hpp_1a1d658270635e74ca3c67b6fba79f77a4" kind="typedef"><name>DField2OnPatch</name></member>
     <member refid="types_8hpp_1ad115e73802088e60cf563d01ef65f7ca" kind="typedef"><name>DConstFieldOnPatch</name></member>
     <member refid="types_8hpp_1a6f391ab73694daad1f5c41d3674bab62" kind="typedef"><name>DConstField1OnPatch</name></member>
     <member refid="types_8hpp_1af2c01e1d1510bf18977af4567ecf1d7a" kind="typedef"><name>DFieldOnPatch_host</name></member>

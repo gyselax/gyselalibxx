@@ -1457,6 +1457,8 @@
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
       </node>
       <node id="188">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp</label>
@@ -1474,6 +1476,8 @@
         <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
       <node id="189">

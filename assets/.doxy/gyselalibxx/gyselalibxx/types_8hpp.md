@@ -56,6 +56,7 @@
 | typedef DConstField&lt; typename Patch::IdxRange12 &gt; | [**DConstFieldOnPatch**](#typedef-dconstfieldonpatch)  <br>_A constant Field of doubles defined on the_ [_**Patch**_](structPatch.md) _'s 2D logical domain._ |
 | typedef host\_t&lt; DConstFieldOnPatch&lt; [**Patch**](structPatch.md) &gt; &gt; | [**DConstFieldOnPatch\_host**](#typedef-dconstfieldonpatch_host)  <br>_A constant Field of doubles on host on the_ [_**Patch**_](structPatch.md) _'s 2D logical domain._ |
 | typedef DField&lt; typename Patch::IdxRange1 &gt; | [**DField1OnPatch**](#typedef-dfield1onpatch)  <br>_A Field of doubles defined on the_ [_**Patch**_](structPatch.md) _'s first logical domain._ |
+| typedef DField&lt; typename Patch::IdxRange2 &gt; | [**DField2OnPatch**](#typedef-dfield2onpatch)  <br>_A Field of doubles defined on the_ [_**Patch**_](structPatch.md) _'s second logical domain._ |
 | typedef DFieldMem&lt; typename Patch::IdxRange1 &gt; | [**DFieldMem1OnPatch**](#typedef-dfieldmem1onpatch)  <br>_A FieldMem of doubles defined on the_ [_**Patch**_](structPatch.md) _'s first logical domain._ |
 | typedef DFieldMem&lt; typename Patch::IdxRange2 &gt; | [**DFieldMem2OnPatch**](#typedef-dfieldmem2onpatch)  <br>_A FieldMem of doubles defined on the_ [_**Patch**_](structPatch.md) _'s second logical domain._ |
 | typedef DFieldMem&lt; typename Patch::IdxRange12 &gt; | [**DFieldMemOnPatch**](#typedef-dfieldmemonpatch)  <br>_A FieldMem of doubles defined on the_ [_**Patch**_](structPatch.md) _'s 2D logical domain._ |
@@ -364,6 +365,20 @@ using DConstFieldOnPatch_host =  host_t<DConstFieldOnPatch<Patch>>;
 _A Field of doubles defined on the_ [_**Patch**_](structPatch.md) _'s first logical domain._
 ```C++
 using DField1OnPatch =  DField<typename Patch::IdxRange1>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DField2OnPatch 
+
+_A Field of doubles defined on the_ [_**Patch**_](structPatch.md) _'s second logical domain._
+```C++
+using DField2OnPatch =  DField<typename Patch::IdxRange2>;
 ```
 
 

@@ -54,6 +54,9 @@ using DFieldOnPatch = DField<typename Patch::IdxRange12>;
 template <class Patch>
 using DField1OnPatch = DField<typename Patch::IdxRange1>;
 
+template <class Patch>
+using DField2OnPatch = DField<typename Patch::IdxRange2>;
+
 
 template <class Patch>
 using DConstFieldOnPatch = DConstField<typename Patch::IdxRange12>;
