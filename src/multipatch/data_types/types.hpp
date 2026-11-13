@@ -51,6 +51,10 @@ using DFieldOnPatch = DField<typename Patch::IdxRange12>;
 template <class Patch>
 using DField1OnPatch = DField<typename Patch::IdxRange1>;
 
+/// @brief A Field of doubles defined on the Patch's second logical domain.
+template <class Patch>
+using DField2OnPatch = DField<typename Patch::IdxRange2>;
+
 
 /// @brief A constant Field of doubles defined on the Patch's 2D logical domain.
 template <class Patch>
